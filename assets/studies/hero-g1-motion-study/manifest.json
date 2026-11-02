@@ -1,0 +1,66 @@
+{
+  "id": "hero_g1_motion_study",
+  "story_id": "char_player",
+  "status": "USER REJECTED / failed visual quality / procedural production route stopped",
+  "final_art_accepted": false,
+  "gameplay_integrated": false,
+  "created_utc": "2026-11-02",
+  "triangles": 419856,
+  "mesh_objects": 851,
+  "deform_bones": 21,
+  "materials": 17,
+  "texture_resolution": 1024,
+  "textures": "original generated UV basecolor + height per principal material; packed in blend; not concept projection",
+  "animation": {
+    "name": "hero_study__idle_breath__2s",
+    "duration_seconds": 2,
+    "fps": 24,
+    "source_frames_inclusive": [
+      1,
+      49
+    ],
+    "unique_export_samples": 8,
+    "sample_duration_ms": 250,
+    "type": "quiet breathing idle only; no walk or attack"
+  },
+  "camera": {
+    "type": "orthographic",
+    "elevation_degrees": 32,
+    "azimuths_degrees": [
+      45,
+      135,
+      225,
+      315
+    ],
+    "ortho_scale": 2.35,
+    "frame_size": [
+      512,
+      512
+    ],
+    "root_anchor": [
+      256,
+      432
+    ]
+  },
+  "anatomical_right_hand": "-X in Blender; sword remains right-handed across views",
+  "oil_flask_side": "anatomical left +X",
+  "armored_shoulder": "anatomical left +X",
+  "source": "../../../source-art/studies/hero-g1-motion-study/hero_g1_motion_study.blend",
+  "model": "models/hero_g1_motion_study.glb",
+  "source_license": "No public license selected. No external meshes, textures, fonts, animation data or downloaded content.",
+  "reference_inputs": [
+    "../../concepts/character-direction-v1.png",
+    "../../concepts/player-four-view-v2.png"
+  ],
+  "g1_gate": "NOT PASSED; style review and walk8/sword10 still required; idle is additional pipeline test not substitute",
+  "known_limits": [
+    "Procedural modeled face/hair not final hand sculpt",
+    "No tailored deformation topology/advanced facial rig",
+    "Idle only; no gait/contact/attack-window validation",
+    "GLB supports basecolor; node height/bump surface is Blender-authoritative",
+    "No runtime integration or device performance test"
+  ],
+  "user_rejected": true,
+  "production_hold": true,
+  "hold_reason": "User explicitly rejected appearance on 2026-11-02; current procedural character method cannot meet approved visual reference. Do not continue production until route is corrected."
+}

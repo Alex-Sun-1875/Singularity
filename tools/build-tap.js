@@ -1,0 +1,1 @@
+const fs=require('node:fs'),path=require('node:path'),bundle=require('./bundle');const dir=path.join(__dirname,'../tap');fs.mkdirSync(dir,{recursive:true});fs.writeFileSync(path.join(dir,'game.js'),bundle('tap-adapter'));console.log('Generated tap/game.js (experimental; NOT verified platform package)');

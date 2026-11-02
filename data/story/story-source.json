@@ -1,0 +1,1627 @@
+{
+  "title": "剑与火 剧情章节与首章制作方案",
+  "version": "v1",
+  "date": "2026年11月2日",
+  "document_purpose": "作为独立开发的首版设计基线，固定完整故事与四章结构，明确首章应该先做什么，以及角色、道具和材料如何复用。正文中的游玩时长与性能预算均为起始目标，素材数量和文件检查结果按当前快照单列。",
+  "decision": "先做一章可以存档、可以从头走到结尾的2.5D动作试玩。故事用找车、开桥、搬粮和开城门来推进；剑与火是同一角色的两种打法，不做多职业和长篇分支剧情。",
+  "delivery_boundary": "剧情与四章数据及已选美术标准已定义；高细节主角四向图仅为设计参考，正式生产素材仍待完成。现有6角色和9道具GLB、24张角色静态方向图、9张道具预览及Blender源场景只作内部占位，不是用户认可的最终角色美术。以下四章、正式外观、绑定动作、碰撞与引擎接入尚未完成。",
+  "navigation": [
+    {
+      "page": 1,
+      "topic": "开发边界与体验目标"
+    },
+    {
+      "page": 2,
+      "topic": "完整主线与叙事规则"
+    },
+    {
+      "page": 3,
+      "topic": "第一章 断路"
+    },
+    {
+      "page": 4,
+      "topic": "第二章 旧矿道"
+    },
+    {
+      "page": 5,
+      "topic": "第三章 河岸粮仓"
+    },
+    {
+      "page": 6,
+      "topic": "第四章 灰石城门"
+    },
+    {
+      "page": 7,
+      "topic": "人物与美术识别"
+    },
+    {
+      "page": 8,
+      "topic": "剑火成长与游戏材料"
+    },
+    {
+      "page": 9,
+      "topic": "角色外观标准"
+    },
+    {
+      "page": 10,
+      "topic": "首批素材与技术预算"
+    },
+    {
+      "page": 11,
+      "topic": "首章任务与验收"
+    }
+  ],
+  "principles": [
+    "爽感来自短前摇、清晰命中停顿、可读击退、掉落马上看见，以及利用地形把一群敌人拆开；不依靠全屏数字或大量按钮。",
+    "每章是可保存进度的连续区域，目标约20至40分钟。首章目标20至30分钟，分营地、山路、木门三个衔接区；退出后从已解锁检查点继续，不按短局重开。",
+    "全篇只围绕把粮运到人手里这件事。剧情不谈神明、天命或世界末日；角色对白可跳过，跳过后目标仍清楚。",
+    "俯视斜角2.5D呈现。美术严格沿用已选三人概念图的细致写实手绘方向：成人比例、自然布褶、皮革层次与钢铁质感。角色与装备组合保持原创，不照搬已有游戏人物；最终外观不能明显低模。"
+  ],
+  "scope_now": [
+    "第一章三个连续区、三条局部路线、一个复用式头目",
+    "单角色挥剑、推击、投油点火与一次改装选择",
+    "三个检查点、稳定ID存档、固定箱子与少量奖励",
+    "首章3个战斗角色先达到已选概念图的细致2.5D质感；现有静态灰盒用于尺寸、装备拆分与接入试验。"
+  ],
+  "scope_later": [
+    "第二至第四章、盾兵与弩手、罗铎战",
+    "骨骼绑定与正式动画、八方向扩展、更多音效和地形细节；不能以内部灰盒代替已选美术方向",
+    "有限装备差异和最多三个战斗改装槽"
+  ],
+  "scope_excluded": [
+    "联机攻城、开放世界、随机无限词条、宠物养成、职业转职树",
+    "分支长篇对话、过场电影、昼夜与天气模拟、复杂制造树",
+    "可燃建筑全破坏、真实流体、实时物理桥梁、不断刷新的防守波次"
+  ],
+  "plot": {
+    "opening": "石桥营地等不到运粮车。行路人原本只是受雇护送，接下阿禾的委托，沿山路找车。第一次胜利是把人和粮带回来，不是卷入宏大的预言。",
+    "development": "木门处的缴获清单指向旧矿道。老周认出旧轨道，行路人重新放下矿桥，发现粮油正依罗铎的命令被集中到河岸粮仓。此后目标明确为夺回补给线。",
+    "turn": "河岸粮仓让“火”不只是伤害：玩家可以烧路障，但要保住粮食，并用水槽清出安全货道。阿禾开始组织搬运，营地不再只是领任务的菜单。",
+    "ending": "罗铎关城门，声称只有把粮留在自己手里才能保城。玩家打败他，亲手转动绞盘，粮车入城，也给沿路聚落留粮。罗铎缴械，守备停止抵抗；普通人的来往恢复，故事收束。",
+    "environmental_evidence": [
+      "首章：断车轴、被划掉目的地的货签、木门上的收缴清单。",
+      "第二章：旧矿工记号、重新转动的绞盘、盖着罗铎印记的账页。",
+      "第三章：满仓与缺粮营地形成对照；粮袋可保全，杂物可燃。",
+      "第四章：城外满载粮车与紧闭城门；战后开门与分粮是可见结果。"
+    ],
+    "rules": [
+      "目标由动作完成，不由读完文本完成；每次交互只给一条明确动词目标。",
+      "开场和收尾对白各不超过两句；字幕可跳过，无强制镜头锁定。",
+      "三条路线是同一目标的不同战术，不产生互斥剧情或多个结局。",
+      "关键粮食和任务交互不可烧毁；失误带来局部战斗压力，不让主线软锁。"
+    ]
+  },
+  "chapters": [
+    {
+      "id": "ch01",
+      "number": 1,
+      "title": "断路",
+      "status": "demo_planned",
+      "target_minutes_estimate": [
+        20,
+        30
+      ],
+      "summary": "石桥营地的口粮只够支撑眼前几天。行路人沿山路找回被扣的粮车，拆掉第一道木门，看到缴获粮油正在运往灰石城。目标从一辆车变成一条路。",
+      "areas": [
+        {
+          "id": "area_ch01_camp",
+          "name": "石桥营地",
+          "purpose": "安全起点、移动与挥剑、短任务交互"
+        },
+        {
+          "id": "area_ch01_road",
+          "name": "山路转弯",
+          "purpose": "找车、学推击与火、三路汇合"
+        },
+        {
+          "id": "area_ch01_gate",
+          "name": "木门路障",
+          "purpose": "头目与开门、首章结算"
+        }
+      ],
+      "objectives": [
+        {
+          "id": "obj_ch01_01",
+          "text": "在石桥营地领取送粮委托",
+          "prerequisite_objective_ids": [],
+          "kind": "main",
+          "persistent": true
+        },
+        {
+          "id": "obj_ch01_02",
+          "text": "赶开粮车旁围路兵并放下车轴支撑",
+          "prerequisite_objective_ids": [
+            "obj_ch01_01"
+          ],
+          "kind": "main",
+          "persistent": true
+        },
+        {
+          "id": "obj_ch01_03",
+          "text": "打通通往木门的山路并打开近路",
+          "prerequisite_objective_ids": [
+            "obj_ch01_02"
+          ],
+          "kind": "main",
+          "persistent": true
+        },
+        {
+          "id": "obj_ch01_04",
+          "text": "击败路障头目并抬起木门横杆",
+          "prerequisite_objective_ids": [
+            "obj_ch01_03"
+          ],
+          "kind": "main",
+          "persistent": true
+        },
+        {
+          "id": "obj_ch01_05",
+          "text": "将车交给阿禾并查看缴获清单",
+          "prerequisite_objective_ids": [
+            "obj_ch01_04"
+          ],
+          "kind": "main",
+          "persistent": true
+        }
+      ],
+      "routes": [
+        {
+          "id": "route_ch01_front",
+          "name": "正面山路",
+          "start_area_id": "area_ch01_road",
+          "end_area_id": "area_ch01_gate",
+          "method": "连续两组近战，沿路箱子提供掩体；全部可用挥剑与推击解决。",
+          "risk": "敌人最密，但地面宽。",
+          "optional_reward": "少量废铁",
+          "rejoins_main_path": true,
+          "required_consumable": null
+        },
+        {
+          "id": "route_ch01_slope",
+          "name": "侧坡高处",
+          "start_area_id": "area_ch01_road",
+          "end_area_id": "area_ch01_gate",
+          "method": "绕坡走上岩台，从背侧推开守兵；落差用坡道连通，不做跳跃系统。",
+          "risk": "窄道移动需要留意边缘；玩家受安全边界保护。",
+          "optional_reward": "包扎布",
+          "rejoins_main_path": true,
+          "required_consumable": null
+        },
+        {
+          "id": "route_ch01_shed",
+          "name": "废棚后路",
+          "start_area_id": "area_ch01_road",
+          "end_area_id": "area_ch01_gate",
+          "method": "搬开可推箱子，点燃可选油迹逼退守兵；也可破开脆木栏走近战路线。",
+          "risk": "火区暂时封住小路，要等火熄灭或走侧边。",
+          "optional_reward": "一份火油",
+          "rejoins_main_path": true,
+          "required_consumable": null
+        }
+      ],
+      "enemy_character_ids": [
+        "enemy_raider",
+        "boss_roadblock"
+      ],
+      "boss": {
+        "character_id": "boss_roadblock",
+        "arena": "木门前开阔空地，左右各一个硬掩体，外侧不设必死落点。",
+        "telegraphs": [
+          "横扫前举锤并显示扇形约 0.8 秒",
+          "冲撞前脚下直线提示约 1 秒"
+        ],
+        "actions": [
+          "横扫后约 1 秒硬直可近身输出",
+          "冲撞撞上固定石墩会短暂失衡",
+          "半血后横扫追加一次短击，预警保持可读"
+        ],
+        "terrain_solution": "可把油桶推到冲撞路线上；火造成额外压制而非强制破盾。无油仍可闪避后攻击。",
+        "adds": "开场不加小兵；首次调优通过后才考虑半血召入最多 2 名围路兵。",
+        "reward_id": "reward_ch01_gate_sword",
+        "visual_note": "方盾和单手锤形成较宽轮廓；首版不强制增加一套破盾机制，沿用冲撞失衡与攻击后摇。"
+      },
+      "terrain_interactions": [
+        {
+          "id": "interact_ch01_crate",
+          "rule": "箱子只能推到网格安全位，不可堵死必经路；重置点将其送回。"
+        },
+        {
+          "id": "interact_ch01_oil",
+          "rule": "油迹可点燃并在约 4 秒后熄灭；首版不让火无限传播。"
+        },
+        {
+          "id": "interact_ch01_gate",
+          "rule": "头目击败后横杆常驻可交互，钥匙不作为可丢弃背包物。"
+        }
+      ],
+      "rewards": [
+        {
+          "id": "reward_ch01_flask",
+          "name": "油壶",
+          "objective_id": "obj_ch01_02",
+          "effect": "永久解锁投油点火基础动作；不消耗或移除近战能力。",
+          "unique": true
+        },
+        {
+          "id": "reward_ch01_modifier",
+          "name": "首个战斗改装",
+          "objective_id": "obj_ch01_03",
+          "effect": "在剑路重击与火路省油中选择一个，检查点免费切换。",
+          "unique": true
+        },
+        {
+          "id": "reward_ch01_gate_sword",
+          "name": "磨好的钢剑",
+          "objective_id": "obj_ch01_04",
+          "effect": "固定小幅近战提升；不替换人物模型。",
+          "unique": true
+        },
+        {
+          "id": "reward_ch01_route",
+          "name": "矿道线索",
+          "objective_id": "obj_ch01_05",
+          "effect": "解锁第二章入口；试玩版显示后续规划，不跳入未制作场景。",
+          "unique": true
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "cp_ch01_camp",
+          "name": "石桥营地",
+          "area_id": "area_ch01_camp",
+          "persistent_unlock": true
+        },
+        {
+          "id": "cp_ch01_cart",
+          "name": "粮车旁",
+          "area_id": "area_ch01_road",
+          "persistent_unlock": true
+        },
+        {
+          "id": "cp_ch01_gate",
+          "name": "木门前",
+          "area_id": "area_ch01_gate",
+          "persistent_unlock": true
+        }
+      ],
+      "unlock_after": null,
+      "intro_dialogue": [
+        {
+          "character_id": "char_ahe",
+          "text": "车就在前面的山路上。人和粮，都带回来。",
+          "skippable": true
+        },
+        {
+          "character_id": "char_player",
+          "text": "我先去看路。",
+          "skippable": true
+        }
+      ],
+      "outro_dialogue": [
+        {
+          "character_id": "char_zhou",
+          "text": "清单上写着旧矿道。车还能走，换条路试试。",
+          "skippable": true
+        },
+        {
+          "character_id": "char_ahe",
+          "text": "先把这车粮卸下。下一趟，我跟上。",
+          "skippable": true
+        }
+      ],
+      "completion": {
+        "required_objective_ids": [
+          "obj_ch01_05"
+        ],
+        "next_chapter_id": "ch02",
+        "world_change": "营地多出粮袋，山路木门保持开启，粮车移到安全点。"
+      },
+      "required_asset_ids": [
+        "model_player",
+        "model_raider",
+        "model_roadblock_boss",
+        "prop_cart_supply",
+        "prop_gate_wood",
+        "prop_barricade_wood",
+        "prop_crate_supply",
+        "prop_barrel_oil",
+        "prop_rock_large",
+        "prop_checkpoint_banner",
+        "fx_fire_patch"
+      ]
+    },
+    {
+      "id": "ch02",
+      "number": 2,
+      "title": "旧矿道",
+      "status": "future_planned",
+      "target_minutes_estimate": [
+        20,
+        35
+      ],
+      "summary": "老周认出缴获清单上的旧运矿标记。行路人进入停用矿道，恢复桥边绞盘，找回转运粮油；账页显示这些物资并非外敌抢走，而是按罗铎的命令被截留。",
+      "areas": [
+        {
+          "id": "area_ch02_entrance",
+          "name": "矿口工棚",
+          "purpose": "安全补给与矿道入口"
+        },
+        {
+          "id": "area_ch02_mine",
+          "name": "分岔矿道",
+          "purpose": "三路探索与绞盘"
+        },
+        {
+          "id": "area_ch02_bridge",
+          "name": "旧矿桥",
+          "purpose": "守桥战与运货出口"
+        }
+      ],
+      "objectives": [
+        {
+          "id": "obj_ch02_01",
+          "text": "从矿口找到旧运货线路",
+          "prerequisite_objective_ids": [],
+          "kind": "main",
+          "persistent": true
+        },
+        {
+          "id": "obj_ch02_02",
+          "text": "解除绞盘旁路障并接上手柄",
+          "prerequisite_objective_ids": [
+            "obj_ch02_01"
+          ],
+          "kind": "main",
+          "persistent": true
+        },
+        {
+          "id": "obj_ch02_03",
+          "text": "击退守桥小队并放下矿桥",
+          "prerequisite_objective_ids": [
+            "obj_ch02_02"
+          ],
+          "kind": "main",
+          "persistent": true
+        },
+        {
+          "id": "obj_ch02_04",
+          "text": "带出补给箱和缴获账页",
+          "prerequisite_objective_ids": [
+            "obj_ch02_03"
+          ],
+          "kind": "main",
+          "persistent": true
+        }
+      ],
+      "routes": [
+        {
+          "id": "route_ch02_track",
+          "name": "主轨道",
+          "start_area_id": "area_ch02_mine",
+          "end_area_id": "area_ch02_bridge",
+          "method": "沿轨道推进，用矿车挡弩箭；推击打断盾兵。",
+          "risk": "有正面盾兵，但掩体最多。",
+          "optional_reward": "废铁",
+          "rejoins_main_path": true,
+          "required_consumable": null
+        },
+        {
+          "id": "route_ch02_ledge",
+          "name": "上层检修道",
+          "start_area_id": "area_ch02_mine",
+          "end_area_id": "area_ch02_bridge",
+          "method": "经坡道到高台，绕到弩手后侧再放下短梯。",
+          "risk": "路径更窄，单人巡逻更多。",
+          "optional_reward": "包扎布",
+          "rejoins_main_path": true,
+          "required_consumable": null
+        },
+        {
+          "id": "route_ch02_storage",
+          "name": "侧仓通道",
+          "start_area_id": "area_ch02_mine",
+          "end_area_id": "area_ch02_bridge",
+          "method": "打开侧仓插销，用火驱散入口守兵或近战清理，推箱穿过。",
+          "risk": "仓里油桶密集；可不点火。",
+          "optional_reward": "火油与固定装备箱",
+          "rejoins_main_path": true,
+          "required_consumable": null
+        }
+      ],
+      "enemy_character_ids": [
+        "enemy_raider",
+        "enemy_shield",
+        "enemy_archer"
+      ],
+      "boss": {
+        "character_id": "enemy_shield",
+        "arena": "矿桥入口，侧边平台和固定矮墙提供空间。",
+        "telegraphs": [
+          "盾兵架盾后向前推进",
+          "弩手瞄准线约 1 秒后开火"
+        ],
+        "actions": [
+          "一名强化盾兵与两名弩手组成守桥小队，不新建头目模型",
+          "可绕侧面先打弩手，再近身破开阵线"
+        ],
+        "terrain_solution": "矿车遮挡弩箭；绞盘在敌人清除后可无限尝试。",
+        "adds": "不刷新增援，已击败小队成员保持完成。",
+        "reward_id": "reward_ch02_kit"
+      },
+      "terrain_interactions": [
+        {
+          "id": "interact_ch02_cart",
+          "rule": "矿车只沿固定轨道推移；不可把敌人或关键手柄卡进场景。"
+        },
+        {
+          "id": "interact_ch02_bridge",
+          "rule": "矿桥只在交互时下降，不做实时破坏或坍塌模拟。"
+        },
+        {
+          "id": "interact_ch02_fire",
+          "rule": "火在预设区域内有效；不扩散到关键木桥。"
+        }
+      ],
+      "rewards": [
+        {
+          "id": "reward_ch02_kit",
+          "name": "加固护具",
+          "objective_id": "obj_ch02_03",
+          "effect": "小幅生存提升，并开放第二个改装选择组。",
+          "unique": true
+        },
+        {
+          "id": "reward_ch02_ledger",
+          "name": "缴获账页",
+          "objective_id": "obj_ch02_04",
+          "effect": "指出河岸粮仓与罗铎签令；解锁第三章。",
+          "unique": true
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "cp_ch02_entry",
+          "name": "矿口工棚",
+          "area_id": "area_ch02_entrance",
+          "persistent_unlock": true
+        },
+        {
+          "id": "cp_ch02_winch",
+          "name": "绞盘平台",
+          "area_id": "area_ch02_mine",
+          "persistent_unlock": true
+        },
+        {
+          "id": "cp_ch02_bridge",
+          "name": "矿桥入口",
+          "area_id": "area_ch02_bridge",
+          "persistent_unlock": true
+        }
+      ],
+      "unlock_after": "ch01",
+      "intro_dialogue": [
+        {
+          "character_id": "char_zhou",
+          "text": "沿着旧轨道走。桥没坏，绞盘被他们锁住了。",
+          "skippable": true
+        },
+        {
+          "character_id": "char_player",
+          "text": "我把桥放下来。",
+          "skippable": true
+        }
+      ],
+      "outro_dialogue": [
+        {
+          "character_id": "char_ahe",
+          "text": "账上每一批粮，都盖着罗铎的印。",
+          "skippable": true
+        },
+        {
+          "character_id": "char_zhou",
+          "text": "下一车要从河岸走。那边有他们的总仓。",
+          "skippable": true
+        }
+      ],
+      "completion": {
+        "required_objective_ids": [
+          "obj_ch02_04"
+        ],
+        "next_chapter_id": "ch03",
+        "world_change": "矿桥保持放下，营地到河岸出现稳定运货路线。"
+      },
+      "required_asset_ids": [
+        "model_player",
+        "model_raider",
+        "model_shield_variant",
+        "model_archer_variant",
+        "prop_bridge_plank",
+        "prop_crate_supply",
+        "prop_barrel_oil",
+        "prop_rock_large",
+        "prop_checkpoint_banner",
+        "fx_fire_patch"
+      ]
+    },
+    {
+      "id": "ch03",
+      "number": 3,
+      "title": "河岸粮仓",
+      "status": "future_planned",
+      "target_minutes_estimate": [
+        20,
+        35
+      ],
+      "summary": "粮仓的货正准备全部转进城内。行路人夺回装卸口，放下吊臂，护住关键粮袋；不是烧光敌人的仓库，而是把货完整送回需要它的人手中。罗铎下令关闭城门，迫使众人向城门推进。",
+      "areas": [
+        {
+          "id": "area_ch03_bank",
+          "name": "河岸坡道",
+          "purpose": "进入仓区与观察火险"
+        },
+        {
+          "id": "area_ch03_storage",
+          "name": "仓院货场",
+          "purpose": "三路绕行、灭火与装卸"
+        },
+        {
+          "id": "area_ch03_dock",
+          "name": "装卸码头",
+          "purpose": "货台防守战和补给交接"
+        }
+      ],
+      "objectives": [
+        {
+          "id": "obj_ch03_01",
+          "text": "找到被扣粮袋并清理仓院入口",
+          "prerequisite_objective_ids": [],
+          "kind": "main",
+          "persistent": true
+        },
+        {
+          "id": "obj_ch03_02",
+          "text": "开启水槽并放下装卸吊臂",
+          "prerequisite_objective_ids": [
+            "obj_ch03_01"
+          ],
+          "kind": "main",
+          "persistent": true
+        },
+        {
+          "id": "obj_ch03_03",
+          "text": "清除码头守兵并拉下封锁链",
+          "prerequisite_objective_ids": [
+            "obj_ch03_02"
+          ],
+          "kind": "main",
+          "persistent": true
+        },
+        {
+          "id": "obj_ch03_04",
+          "text": "标记三处关键粮堆交给营地搬运队",
+          "prerequisite_objective_ids": [
+            "obj_ch03_03"
+          ],
+          "kind": "main",
+          "persistent": true
+        }
+      ],
+      "routes": [
+        {
+          "id": "route_ch03_yard",
+          "name": "仓院正门",
+          "start_area_id": "area_ch03_storage",
+          "end_area_id": "area_ch03_dock",
+          "method": "在宽场上借箱垛掩护推进，先清近战再打弩手。",
+          "risk": "敌人多，掩体也多。",
+          "optional_reward": "废铁",
+          "rejoins_main_path": true,
+          "required_consumable": null
+        },
+        {
+          "id": "route_ch03_river",
+          "name": "河边栈道",
+          "start_area_id": "area_ch03_storage",
+          "end_area_id": "area_ch03_dock",
+          "method": "沿靠水的一侧绕行，通过可推木板搭出短通路。",
+          "risk": "空间窄但水边能截断火区。",
+          "optional_reward": "包扎布",
+          "rejoins_main_path": true,
+          "required_consumable": null
+        },
+        {
+          "id": "route_ch03_loading",
+          "name": "装卸后门",
+          "start_area_id": "area_ch03_storage",
+          "end_area_id": "area_ch03_dock",
+          "method": "先开后门插销，再把可燃杂物推离货道；可点火吸引守兵也可直接从后门近战突入。",
+          "risk": "误点油桶会堵路数秒，不会摧毁任务粮食。",
+          "optional_reward": "火油与固定护具箱",
+          "rejoins_main_path": true,
+          "required_consumable": null
+        }
+      ],
+      "enemy_character_ids": [
+        "enemy_raider",
+        "enemy_shield",
+        "enemy_archer"
+      ],
+      "boss": {
+        "character_id": "enemy_raider",
+        "arena": "码头货台，三块掩体围住开链绞盘；水槽旁是无火安全区。",
+        "telegraphs": [
+          "搬油兵举起油壶后出现落点提示",
+          "弩手在高处缓慢瞄准"
+        ],
+        "actions": [
+          "一名复用围路兵的搬油头领配两名近战与一名弩手",
+          "头领投出的油只落在预设区域；打断投掷会使其停手"
+        ],
+        "terrain_solution": "开放水槽移除指定火区；可先打头领减少危险，或绕掩体拆掉远程。",
+        "adds": "总数固定，不按时间无限刷怪。",
+        "reward_id": "reward_ch03_cargo"
+      },
+      "terrain_interactions": [
+        {
+          "id": "interact_ch03_water",
+          "rule": "水槽交互立即清除指定燃烧片区；表现用短水幕而非流体模拟。"
+        },
+        {
+          "id": "interact_ch03_grain",
+          "rule": "关键粮堆不可燃，普通杂物可燃；两者用图标和颜色区分。"
+        },
+        {
+          "id": "interact_ch03_crane",
+          "rule": "吊臂仅切换上升与下降两个状态；无需物理摆动。"
+        }
+      ],
+      "rewards": [
+        {
+          "id": "reward_ch03_cargo",
+          "name": "稳定补给",
+          "objective_id": "obj_ch03_04",
+          "effect": "解锁第三个改装选择组；战前补给点充足。",
+          "unique": true
+        },
+        {
+          "id": "reward_ch03_gate_order",
+          "name": "关城命令",
+          "objective_id": "obj_ch03_04",
+          "effect": "解锁第四章；目标明确为开城门而非夺取统治权。",
+          "unique": true
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "cp_ch03_bank",
+          "name": "河岸营火",
+          "area_id": "area_ch03_bank",
+          "persistent_unlock": true
+        },
+        {
+          "id": "cp_ch03_storage",
+          "name": "仓院水槽",
+          "area_id": "area_ch03_storage",
+          "persistent_unlock": true
+        },
+        {
+          "id": "cp_ch03_dock",
+          "name": "码头入口",
+          "area_id": "area_ch03_dock",
+          "persistent_unlock": true
+        }
+      ],
+      "unlock_after": "ch02",
+      "intro_dialogue": [
+        {
+          "character_id": "char_ahe",
+          "text": "粮袋留着。要烧，就烧挡路的木栏。",
+          "skippable": true
+        },
+        {
+          "character_id": "char_player",
+          "text": "先开水槽，再搬粮。",
+          "skippable": true
+        }
+      ],
+      "outro_dialogue": [
+        {
+          "character_id": "char_ahe",
+          "text": "这批够沿路的人吃上一阵。",
+          "skippable": true
+        },
+        {
+          "character_id": "char_player",
+          "text": "城门还关着。我们送到门口去。",
+          "skippable": true
+        }
+      ],
+      "completion": {
+        "required_objective_ids": [
+          "obj_ch03_04"
+        ],
+        "next_chapter_id": "ch04",
+        "world_change": "码头与仓院清空封锁，满载粮车驶向灰石城。"
+      },
+      "required_asset_ids": [
+        "model_player",
+        "model_raider",
+        "model_shield_variant",
+        "model_archer_variant",
+        "prop_crate_supply",
+        "prop_barrel_oil",
+        "prop_bridge_plank",
+        "prop_checkpoint_banner",
+        "prop_grain_sacks",
+        "prop_crane",
+        "fx_fire_patch",
+        "fx_water_flush"
+      ]
+    },
+    {
+      "id": "ch04",
+      "number": 4,
+      "title": "灰石城门",
+      "status": "future_planned",
+      "target_minutes_estimate": [
+        25,
+        40
+      ],
+      "summary": "粮车抵达城门外，罗铎仍以城中安全为由拒绝放行。行路人先拆除外侧封锁，进入绞盘平台，再打败亲自守门的罗铎。守备看见粮食和沿路来的人后停止抵抗，城门重新打开。",
+      "areas": [
+        {
+          "id": "area_ch04_road",
+          "name": "城外车道",
+          "purpose": "补给和最后准备"
+        },
+        {
+          "id": "area_ch04_wall",
+          "name": "城墙外沿",
+          "purpose": "三路进城门平台"
+        },
+        {
+          "id": "area_ch04_gate",
+          "name": "城门绞盘台",
+          "purpose": "罗铎战与开门结局"
+        }
+      ],
+      "objectives": [
+        {
+          "id": "obj_ch04_01",
+          "text": "清理城外路障并给粮车留出车道",
+          "prerequisite_objective_ids": [],
+          "kind": "main",
+          "persistent": true
+        },
+        {
+          "id": "obj_ch04_02",
+          "text": "切断两处外侧弩台的封锁",
+          "prerequisite_objective_ids": [
+            "obj_ch04_01"
+          ],
+          "kind": "main",
+          "persistent": true
+        },
+        {
+          "id": "obj_ch04_03",
+          "text": "到达城门绞盘台并击败罗铎",
+          "prerequisite_objective_ids": [
+            "obj_ch04_02"
+          ],
+          "kind": "main",
+          "persistent": true
+        },
+        {
+          "id": "obj_ch04_04",
+          "text": "转动绞盘打开城门",
+          "prerequisite_objective_ids": [
+            "obj_ch04_03"
+          ],
+          "kind": "main",
+          "persistent": true
+        },
+        {
+          "id": "obj_ch04_05",
+          "text": "与阿禾在入城粮车旁交接",
+          "prerequisite_objective_ids": [
+            "obj_ch04_04"
+          ],
+          "kind": "main",
+          "persistent": true
+        }
+      ],
+      "routes": [
+        {
+          "id": "route_ch04_front",
+          "name": "城门大道",
+          "start_area_id": "area_ch04_wall",
+          "end_area_id": "area_ch04_gate",
+          "method": "沿固定路障推进，利用盾兵站位反推并拆开阵型。",
+          "risk": "正面战斗最密集，路宽易闪避。",
+          "optional_reward": "最后一箱补给",
+          "rejoins_main_path": true,
+          "required_consumable": null
+        },
+        {
+          "id": "route_ch04_service",
+          "name": "墙侧维修坡道",
+          "start_area_id": "area_ch04_wall",
+          "end_area_id": "area_ch04_gate",
+          "method": "沿坡道登上侧台，先拔除弩手；打开侧门形成重试近路。",
+          "risk": "行进距离长，弩线可由石垛阻挡。",
+          "optional_reward": "固定饰物箱",
+          "rejoins_main_path": true,
+          "required_consumable": null
+        },
+        {
+          "id": "route_ch04_cargo",
+          "name": "货运侧门",
+          "start_area_id": "area_ch04_wall",
+          "end_area_id": "area_ch04_gate",
+          "method": "经已打通的旧货道进入，推动货车作掩体，破开内侧插销。",
+          "risk": "转角近战多；无需提前保留火油或特定装备。",
+          "optional_reward": "少量废铁与火油",
+          "rejoins_main_path": true,
+          "required_consumable": null
+        }
+      ],
+      "enemy_character_ids": [
+        "enemy_raider",
+        "enemy_shield",
+        "enemy_archer",
+        "char_luoduo"
+      ],
+      "boss": {
+        "character_id": "char_luoduo",
+        "arena": "宽阔绞盘台，左右石垛挡远程；绞盘和关键支架不可破坏。",
+        "telegraphs": [
+          "方盾冲锋直线约 1 秒预警",
+          "两段重斩每段均有明显抬手",
+          "号令前指向弩台并出现可读标记"
+        ],
+        "actions": [
+          "第一阶段盾冲后重斩，侧绕或火迫使其转身",
+          "半血后号令两个固定弩位各射一轮，射完可继续近战",
+          "冲锋撞上石垛造成短暂硬直；不设瞬移或全屏秒杀"
+        ],
+        "terrain_solution": "石垛截断箭线，油迹改变行走区域；任何构筑都能以躲避和近战完成。",
+        "adds": "终章至多 2 名弩手，无无限增援；若首轮调优太难改为场景弩箭。",
+        "reward_id": "reward_ch04_clear"
+      },
+      "terrain_interactions": [
+        {
+          "id": "interact_ch04_cover",
+          "rule": "石垛既是掩体也是冲锋碰撞物，碰撞轮廓比装饰边缘略大。"
+        },
+        {
+          "id": "interact_ch04_winch",
+          "rule": "罗铎败后自动解除绞盘锁定；玩家亲手开门而非纯过场。"
+        },
+        {
+          "id": "interact_ch04_return",
+          "rule": "结局后可继续当前章节拾取遗漏内容，已获唯一奖励不再生成。"
+        }
+      ],
+      "rewards": [
+        {
+          "id": "reward_ch04_clear",
+          "name": "道路重开",
+          "objective_id": "obj_ch04_05",
+          "effect": "本篇完成；展示总救回物资与已开路线，不设影响结局的评分惩罚。",
+          "unique": true
+        }
+      ],
+      "checkpoints": [
+        {
+          "id": "cp_ch04_road",
+          "name": "城外粮车",
+          "area_id": "area_ch04_road",
+          "persistent_unlock": true
+        },
+        {
+          "id": "cp_ch04_side",
+          "name": "城墙侧门",
+          "area_id": "area_ch04_wall",
+          "persistent_unlock": true
+        },
+        {
+          "id": "cp_ch04_arena",
+          "name": "绞盘台前",
+          "area_id": "area_ch04_gate",
+          "persistent_unlock": true
+        }
+      ],
+      "unlock_after": "ch03",
+      "intro_dialogue": [
+        {
+          "character_id": "char_luoduo",
+          "text": "城里还没稳下来。粮车留下，人退回去。",
+          "skippable": true
+        },
+        {
+          "character_id": "char_player",
+          "text": "路上的人也要吃饭。开门。",
+          "skippable": true
+        }
+      ],
+      "outro_dialogue": [
+        {
+          "character_id": "char_ahe",
+          "text": "第一车往南街，第二车回营地。",
+          "skippable": true
+        },
+        {
+          "character_id": "char_zhou",
+          "text": "门修好了。往后，别再让它把路堵住。",
+          "skippable": true
+        }
+      ],
+      "completion": {
+        "required_objective_ids": [
+          "obj_ch04_05"
+        ],
+        "next_chapter_id": null,
+        "world_change": "罗铎缴械投降；粮车进城，营地和沿途聚落恢复供应；镜头停在来往的普通人和车。"
+      },
+      "required_asset_ids": [
+        "model_player",
+        "model_raider",
+        "model_shield_variant",
+        "model_archer_variant",
+        "model_luoduo",
+        "prop_cart_supply",
+        "prop_crate_supply",
+        "prop_gate_stone",
+        "prop_winch",
+        "prop_checkpoint_banner",
+        "fx_fire_patch"
+      ]
+    }
+  ],
+  "characters": [
+    {
+      "id": "char_player",
+      "name": "行路人",
+      "role": "玩家",
+      "faction": "caravan",
+      "chapters": [
+        "ch01",
+        "ch02",
+        "ch03",
+        "ch04"
+      ],
+      "silhouette": "中等身形，短肩披布，单手钢剑，腰侧油壶；短衣摆避免遮住腿部动作。",
+      "palette": [
+        "palette_teal",
+        "palette_iron",
+        "palette_leather"
+      ],
+      "motivation": "原本接护送差事，运粮车被截后决定把车和人一起带回。",
+      "arc": "收取报酬的护送者 → 连接营地与城内补给的行动者；不设天命或身世反转。",
+      "voice": "台词少，直接问路和办事；不设置默认姓名、性别台词或宏大自述。",
+      "model_asset_id": "model_player",
+      "model_scope": "现有静态分件GLB与四方向透明图仅作内部灰盒参考，非最终角色美术。目标为细致写实手绘2.5D与成人比例；正式模型、绑定、动作、碰撞和引擎接入仍需分别制作验收。",
+      "combat": "挥剑、闪避或短冲、推击、投油点火；剑与火共用此角色，不制作两套职业身体。",
+      "model_status": "delivered_blockout",
+      "source_scene_path": "../../source-art/blockout/sword_and_fire_assets.blend",
+      "final_art_accepted": false,
+      "additional_study_asset_ids": [
+        "ref_player_four_view_v2",
+        "study_player_refined_mesh"
+      ]
+    },
+    {
+      "id": "char_ahe",
+      "name": "阿禾",
+      "role": "营地管事",
+      "faction": "camp",
+      "chapters": [
+        "ch01",
+        "ch02",
+        "ch03",
+        "ch04"
+      ],
+      "silhouette": "女性，土黄长外衣，发髻，账册与小挎包；无武器，装备重实用不性感化。",
+      "palette": [
+        "palette_cloth",
+        "palette_leather"
+      ],
+      "motivation": "先把人喂饱，再核对每一袋粮；不赞同为复仇毁掉仓库。",
+      "arc": "守住营地物资 → 协调补给线 → 在城门接车。",
+      "voice": "简短、务实，不长篇解释世界观。",
+      "model_asset_id": "model_ahe",
+      "model_scope": "现有静态分件GLB与四方向透明图仅作内部灰盒参考，非最终角色美术。目标为细致写实手绘2.5D与成人比例；正式模型、绑定、动作、碰撞和引擎接入仍需分别制作验收。",
+      "model_status": "delivered_blockout",
+      "source_scene_path": "../../source-art/blockout/sword_and_fire_assets.blend",
+      "final_art_accepted": false
+    },
+    {
+      "id": "char_zhou",
+      "name": "老周",
+      "role": "铁匠与旧矿工",
+      "faction": "camp",
+      "chapters": [
+        "ch01",
+        "ch02",
+        "ch04"
+      ],
+      "silhouette": "宽肩，深色皮围裙，卷袖，腰挂小锤；少量银白胡茬，脸不靠复杂细节辨认。",
+      "palette": [
+        "palette_leather",
+        "palette_charcoal",
+        "palette_iron"
+      ],
+      "motivation": "修好能用的工具，把熟悉的矿道重新连上路。",
+      "arc": "修车修剑 → 指出旧矿道 → 修复城门绞盘。",
+      "voice": "只说眼前能怎么做，用一句话给出可玩的提示。",
+      "model_asset_id": "model_zhou",
+      "model_scope": "现有静态分件GLB与四方向透明图仅作内部灰盒参考，非最终角色美术。目标为细致写实手绘2.5D与成人比例；正式模型、绑定、动作、碰撞和引擎接入仍需分别制作验收。",
+      "model_status": "delivered_blockout",
+      "source_scene_path": "../../source-art/blockout/sword_and_fire_assets.blend",
+      "final_art_accepted": false
+    },
+    {
+      "id": "char_luoduo",
+      "name": "罗铎",
+      "role": "封路守备官与最终头目",
+      "faction": "blockade",
+      "chapters": [
+        "ch02",
+        "ch03",
+        "ch04"
+      ],
+      "silhouette": "暗钢胸甲，蓝灰短披风，低矮钢盔脊，方盾与钢剑；脸部可见，不戴夸张角盔。",
+      "palette": [
+        "palette_charcoal",
+        "palette_iron",
+        "palette_bluegray"
+      ],
+      "motivation": "以保城为由截留粮油，按自身指令分配物资；将道路失控视为权威失效。",
+      "arc": "盖章命令与缴获账单先出现 → 城门当面阻拦 → 失去补给和部下支持后投降。",
+      "voice": "镇定、命令式，不自称恶人；论点被玩家搬走粮袋和打开城门的行动反驳。",
+      "model_asset_id": "model_luoduo",
+      "model_scope": "现有静态分件GLB与四方向透明图仅作内部灰盒参考，非最终角色美术。目标为细致写实手绘2.5D与成人比例；正式模型、绑定、动作、碰撞和引擎接入仍需分别制作验收。",
+      "combat": "方盾冲锋、两段重斩、号令弩兵；优先复用近战骨架，新增动作后再做终章。",
+      "model_status": "delivered_blockout",
+      "source_scene_path": "../../source-art/blockout/sword_and_fire_assets.blend",
+      "final_art_accepted": false
+    },
+    {
+      "id": "enemy_raider",
+      "name": "围路兵",
+      "role": "基础近战敌人",
+      "faction": "blockade",
+      "chapters": [
+        "ch01",
+        "ch02",
+        "ch03",
+        "ch04"
+      ],
+      "silhouette": "锈红布甲，铁帽，铁箍短棍和小圆木盾；与玩家青绿披布明显区分。小盾只用于造型，基础兵不使用完整架盾防御。",
+      "palette": [
+        "palette_rust",
+        "palette_leather",
+        "palette_iron"
+      ],
+      "motivation": "受命收取路费、看守缴获物；逃跑或倒地退出，不做死亡特写。",
+      "model_asset_id": "model_raider",
+      "model_scope": "现有静态分件GLB与四方向透明图仅作内部灰盒参考，非最终角色美术。目标为细致写实手绘2.5D与成人比例；正式模型、绑定、动作、碰撞和引擎接入仍需分别制作验收。",
+      "combat": "抬手预警后短距离挥击；可被推离窄道、被火逼走。",
+      "model_status": "delivered_blockout",
+      "source_scene_path": "../../source-art/blockout/sword_and_fire_assets.blend",
+      "final_art_accepted": false,
+      "additional_study_asset_ids": [
+        "ref_raider_detail_v2"
+      ]
+    },
+    {
+      "id": "enemy_shield",
+      "name": "盾兵",
+      "role": "围路兵变体",
+      "faction": "blockade",
+      "chapters": [
+        "ch02",
+        "ch03",
+        "ch04"
+      ],
+      "silhouette": "复用围路兵身体，改用宽方木盾并抬高肩线；显著的架盾姿态区分基础兵。",
+      "palette": [
+        "palette_rust",
+        "palette_wood",
+        "palette_iron"
+      ],
+      "motivation": "守住窄口和搬运路线。",
+      "model_asset_id": "model_shield_variant",
+      "model_scope": "计划复用围路兵，不增加新身体或独立职业。",
+      "combat": "正面减伤但不能抵挡背击与脚边火；推击可打断抬盾。",
+      "model_status": "planned"
+    },
+    {
+      "id": "enemy_archer",
+      "name": "弩手",
+      "role": "围路兵远程变体",
+      "faction": "blockade",
+      "chapters": [
+        "ch02",
+        "ch03",
+        "ch04"
+      ],
+      "silhouette": "复用围路兵身体，短弩横向轮廓，肩部布片更短。",
+      "palette": [
+        "palette_rust",
+        "palette_wood",
+        "palette_iron"
+      ],
+      "motivation": "控制高台和桥面。",
+      "model_asset_id": "model_archer_variant",
+      "model_scope": "后续计划复用围路兵；首章不要求。",
+      "combat": "瞄准线提前可见，单发射击后长装填；掩体完全阻挡弹体。",
+      "model_status": "planned"
+    },
+    {
+      "id": "boss_roadblock",
+      "name": "路障头目",
+      "role": "首章木门小头目",
+      "faction": "blockade",
+      "chapters": [
+        "ch01"
+      ],
+      "silhouette": "围路兵体型加宽约15%，非对称肩甲，大方盾与单手短柄铁锤，腰挂门钥匙；不做巨型怪物。",
+      "palette": [
+        "palette_rust",
+        "palette_iron",
+        "palette_charcoal"
+      ],
+      "motivation": "截住运粮车并把粮油交往城门；只关心眼前差事。",
+      "model_asset_id": "model_roadblock_boss",
+      "model_scope": "现有静态分件GLB与四方向透明图仅作内部灰盒参考，非最终角色美术。目标为细致写实手绘2.5D与成人比例；正式模型、绑定、动作、碰撞和引擎接入仍需分别制作验收。",
+      "combat": "扇形横扫、直线冲撞；半血后增加一次短横扫，不加独立变身阶段。",
+      "model_status": "delivered_blockout",
+      "source_scene_path": "../../source-art/blockout/sword_and_fire_assets.blend",
+      "final_art_accepted": false,
+      "additional_study_asset_ids": [
+        "ref_captain_detail_v2"
+      ]
+    }
+  ],
+  "palettes": [
+    {
+      "id": "palette_stone",
+      "name": "暖灰石",
+      "hex": "#8B8273",
+      "roughness_estimate": 1.0,
+      "metallic_estimate": 0,
+      "use": "墙、岩台、台阶；避免与角色同色"
+    },
+    {
+      "id": "palette_charcoal",
+      "name": "炭灰",
+      "hex": "#2D2D30",
+      "roughness_estimate": 0.85,
+      "metallic_estimate": 0,
+      "use": "阴影、护具内衬"
+    },
+    {
+      "id": "palette_teal",
+      "name": "青绿布",
+      "hex": "#2C6763",
+      "roughness_estimate": 0.95,
+      "metallic_estimate": 0,
+      "use": "玩家识别色，面积约 20%"
+    },
+    {
+      "id": "palette_rust",
+      "name": "锈红布",
+      "hex": "#87513B",
+      "roughness_estimate": 0.95,
+      "metallic_estimate": 0,
+      "use": "封路势力布片，不作为血迹"
+    },
+    {
+      "id": "palette_fire",
+      "name": "火橙",
+      "hex": "#EF8839",
+      "roughness_estimate": 0.5,
+      "metallic_estimate": 0,
+      "use": "火焰和危险提示，发光分层"
+    },
+    {
+      "id": "palette_leather",
+      "name": "旧棕皮",
+      "hex": "#6B4E36",
+      "roughness_estimate": 0.78,
+      "metallic_estimate": 0,
+      "use": "皮甲、包带、围裙"
+    },
+    {
+      "id": "palette_iron",
+      "name": "磨旧铁",
+      "hex": "#6C7275",
+      "roughness_estimate": 0.58,
+      "metallic_estimate": 0.6,
+      "use": "剑、锤与边缘磨损"
+    },
+    {
+      "id": "palette_cloth",
+      "name": "米褐布",
+      "hex": "#B29B75",
+      "roughness_estimate": 0.98,
+      "metallic_estimate": 0,
+      "use": "营地衣物、粮袋"
+    },
+    {
+      "id": "palette_wood",
+      "name": "深棕木",
+      "hex": "#70513C",
+      "roughness_estimate": 0.88,
+      "metallic_estimate": 0,
+      "use": "箱、车、门与棚架"
+    },
+    {
+      "id": "palette_bluegray",
+      "name": "指挥官蓝灰",
+      "hex": "#56677A",
+      "roughness_estimate": 0.95,
+      "metallic_estimate": 0,
+      "use": "罗铎披风，区别于普通兵的锈红布"
+    }
+  ],
+  "builds": {
+    "shared_base": "所有玩家共用行路人。开场能挥剑和推击，救回粮车后获得油壶；任何路线和头目都不要求某种构筑或耗材。",
+    "sword": {
+      "name": "剑路",
+      "style": "贴身拆阵与打断",
+      "demo_modifier_id": "build_sword_heavy",
+      "demo_modifier": "重击：每次完整连击的末击增强推退，给出明显停顿和音效；不新增按键。",
+      "later_modifiers": [
+        "破盾：推击对架盾敌人延长硬直",
+        "回转：重击小幅扩大侧向范围，不做全屏剑气"
+      ]
+    },
+    "fire": {
+      "name": "火路",
+      "style": "压制走位与地形连动",
+      "demo_modifier_id": "build_fire_efficient",
+      "demo_modifier": "省油：每次基础投油覆盖略宽，使用间隔保持不变；效果受并发火区上限约束。",
+      "later_modifiers": [
+        "余火：预设火区持续稍长，但同时存在数仍受限",
+        "引燃：在指定可燃道具间触发一次有限传播，不无限蔓延"
+      ]
+    },
+    "progression": [
+      {
+        "milestone": "开场",
+        "unlock": "挥剑与推击",
+        "choice": "无构筑锁定"
+      },
+      {
+        "milestone": "首章救车",
+        "unlock": "油壶与火基础动作",
+        "choice": "所有玩家都获得"
+      },
+      {
+        "milestone": "首章开近路",
+        "unlock": "第一个改装槽",
+        "choice": "重击或省油二选一，检查点免费换"
+      },
+      {
+        "milestone": "第二章放矿桥",
+        "unlock": "第二个改装选择组",
+        "choice": "未来实施；同类效果不无限叠加"
+      },
+      {
+        "milestone": "第三章运粮",
+        "unlock": "第三个改装选择组",
+        "choice": "全篇最多三个生效改装"
+      },
+      {
+        "milestone": "第四章通关",
+        "unlock": "结局与已走路线回看",
+        "choice": "不再追加强制刷取的成长门槛"
+      }
+    ],
+    "equipment": "首章只做固定基础剑和头目奖励剑，外观共用。装备颜色最多普通、精良、稀有三档；未来最多武器、护具、饰物三个部位，不堆随机词条。强化和包扎是补充，不做制作配方树。",
+    "materials": [
+      {
+        "id": "mat_iron_scrap",
+        "name": "废铁",
+        "purpose": "在营地做少量固定强化；首章演示可直接随主线给一次，不开放制作树。",
+        "cap_demo_estimate": 20,
+        "mandatory_for_progress": false,
+        "source": "一次性箱子、可选路线与任务奖励"
+      },
+      {
+        "id": "mat_oil",
+        "name": "火油",
+        "purpose": "补充投油动作；检查点提供基础补给，无油仍可近战通关。",
+        "cap_demo_estimate": 5,
+        "mandatory_for_progress": false,
+        "source": "补给箱、固定油桶与检查点"
+      },
+      {
+        "id": "mat_cloth",
+        "name": "包扎布",
+        "purpose": "在脱战或检查点快速恢复；不叠加复杂药剂系统。",
+        "cap_demo_estimate": 3,
+        "mandatory_for_progress": false,
+        "source": "营地补给、路边货袋"
+      }
+    ],
+    "balance": "起始估计：普通兵在几次有效命中内退出；头目约1至2分钟，不靠高血量拖时间。所有具体伤害与持续时间须试玩后调整，优先保留明确的前摇、后摇与退路。"
+  },
+  "asset_plan": {
+    "summary": "最终角色采用已选三人概念图的细致写实手绘2.5D方向，不做明显棱角的低模成品。优先完成行路人、围路兵、路障头目；成人比例、自然布褶、皮革与钢铁细节需要同时成立。高质量2.5D精灵和可编辑三维源模型是不同交付物，分别验收。",
+    "completion_snapshot": "现有6角色和9道具GLB、24张角色方向图、9张道具预览可用作内部占位参考；15个GLB已回导核对，33张PNG无裁切。它们是约五头身、纯色材质的简化低模基础，未达到已选概念图的最终质感。无骨架、蒙皮、正式动作、UV贴图、碰撞或LOD；未接入JS原型，也未在Cocos中验证。",
+    "rows": [
+      {
+        "item": "正式战斗角色",
+        "unique": "3 优先制作",
+        "priority": "P0",
+        "reuse": "行路人、围路兵、路障头目；按已选概念图的成人比例与细致材质制作"
+      },
+      {
+        "item": "现有角色占位",
+        "unique": "6 内部参考",
+        "priority": "非最终美术",
+        "reuse": "静态GLB与Blender源文件可编辑；NPC和罗铎由共用模块衍生"
+      },
+      {
+        "item": "现有静态方向图",
+        "unique": "24 内部参考",
+        "priority": "非最终美术",
+        "reuse": "6角色乘4方向，256像素透明图；不是正式外观或动作帧"
+      },
+      {
+        "item": "现有道具占位",
+        "unique": "9 内部参考",
+        "priority": "P0至P1",
+        "reuse": "油桶、木箱、栅栏、石墙、营火、战利品箱、钢剑、木盾、木桥段"
+      },
+      {
+        "item": "首章必要场景件",
+        "unique": "4 待制作",
+        "priority": "P0",
+        "reuse": "粮车、木门、大岩石、检查点旗；可选掉落袋另列P1"
+      },
+      {
+        "item": "地形和反馈",
+        "unique": "6地形 12图标 10音效",
+        "priority": "P0 规划",
+        "reuse": "场景不抢人物细节；声音原创或许可明确"
+      },
+      {
+        "item": "盾兵与弩手",
+        "unique": "2变体 规划",
+        "priority": "P2",
+        "reuse": "复用围路兵身体和已有装备；完整架盾与远程动作后做"
+      }
+    ],
+    "technical": {
+      "note": "性能指标仅为待实机验证的起始目标。最终角色先达到已选概念图的质感；源模型面数不是预渲染2.5D精灵的运行成本，不用低面数限制最终造型。",
+      "visible_triangles_target_max": 60000,
+      "draw_calls_target_max": 60,
+      "shared_texture_atlas_px": [
+        1024,
+        1024
+      ],
+      "texture_policy": "高质量源素材可使用分层材质与细节；运行端按角色大小烘焙到共享精灵图集。图集尺寸与压缩方式经真机对比后决定，不给每个小道具携带独立4K贴图。",
+      "sprite_direction_count_initial": 4,
+      "sprite_direction_count_later": 8,
+      "sprite_frame_size_px_estimate": [
+        256,
+        512
+      ],
+      "sprite_animations_later": [
+        "idle",
+        "walk",
+        "attack",
+        "hit",
+        "down",
+        "cast"
+      ],
+      "runtime_target_fps": 30,
+      "active_enemies_target": 8,
+      "active_enemies_peak": 12,
+      "fire_patch_concurrent_target_max": 4,
+      "initial_asset_compressed_mb_target_max": 10,
+      "chapter_asset_compressed_mb_target_max": 20,
+      "memory_mb_soft_target_max": 200,
+      "estimated_only": true,
+      "observed_baseline": {
+        "character_triangles_actual": [
+          1720,
+          2536
+        ],
+        "prop_triangles_actual": [
+          132,
+          748
+        ],
+        "material_count_per_character_actual": [
+          10,
+          11
+        ],
+        "note": "只描述内部占位文件：纯色PBR、较多独立网格，无绑定动画。此数量不代表最终美术验收或整体性能通过。"
+      },
+      "blockout_geometry_budget": {
+        "player": [
+          1500,
+          3000
+        ],
+        "regular_enemy": [
+          1500,
+          3000
+        ],
+        "boss": [
+          1800,
+          3500
+        ],
+        "npc": [
+          1500,
+          3000
+        ]
+      },
+      "source_geometry_target": "最终源模型面数待中等精度试制后决定；先保证成人比例、轮廓和材质层次，不采用明显棱角的低模外观。",
+      "prop_triangles_blockout": [
+        50,
+        800
+      ],
+      "sprite_frame_size_note": "运行精灵先测试256或512像素；最终取决于相机缩放、清晰度与包体，不等于现有占位图256像素即获认可。"
+    },
+    "pipeline": "先以已选概念图校准成人比例、装备轮廓和材质细节，再制作可编辑源模型或高质量2.5D精灵。运行端优先验证预渲染精灵与现有JS画面的适配；源模型与二维图分别保留，不把立绘当作已完成模型。",
+    "palette_note": "暖石与炭灰形成场景底色，玩家青绿、普通兵锈红、罗铎蓝灰、火为橙色。配色统一不等于降低细节：皮革、布料、钢铁应有可信的高光、粗糙度和自然变化，缩小后仍清楚。",
+    "quality_boundary": "现有五头身、纯色材质的简化低模只用于内部占位。最终角色要有成人头身比例、自然肩肘膝形体、可辨识布褶与皮革钢片层次；不能仅凭平滑法线或增加面数就宣称达到参考图。无正式动作、绑定或集成的文件必须继续标明。",
+    "provenance": "几何与材料为本项目原创程序化制作，未下载第三方模型或纹理；未选择公开许可。概念图是独立的美术方向图，不是游戏截图或模型渲染。",
+    "concept_paths": [
+      "../../assets/concepts/character-direction-v1.png",
+      "../../assets/concepts/chapter01-environment-v1.png"
+    ],
+    "actual_preview_paths": [
+      "../../assets/blockout/previews/character_lineup.png",
+      "../../assets/blockout/previews/npc_lineup.png"
+    ],
+    "art_direction": {
+      "approved_reference_path": "../../assets/concepts/character-direction-v1.png",
+      "quality_target": "细节丰富的写实手绘2.5D，成人比例，可信皮革层次、自然布褶和钢铁高光；严格参考已选角色概念图的质感与轮廓，不以明显棱角和方块式低模作为最终外观。",
+      "presentation_route": "优先使用高质量预渲染或绘制的2.5D角色精灵；可编辑中等精度源模型单独制作与验收，不把二维立绘称作三维模型。",
+      "final_art_acceptance": "成人头身比例、自然肩肘膝轮廓、细节完整但缩小可读；材质有层次而不是纯色方块；不得只用平滑法线掩盖不匹配的几何。",
+      "final_accepted_character_count": 0,
+      "additional_design_reference_asset_id": "ref_player_four_view_v2"
+    },
+    "additional_reference_note": "另有高细节主角四向设计参考图，已检查1024乘1536像素RGBA与透明边缘。它只是静态设计转向图，不是三维模型、绑定动作或可直接播放的精灵图集；跨方向一致性和2.5D视角仍需制作校准。",
+    "additional_reference_path": "../../assets/concepts/player-four-view-v2.png",
+    "supplemental_studies_note": "补充围路兵与路障头目的高细节正背面设计研究图，不将近似视角视为已校准四方向精灵表。另有25246三角面的主角结构试制，仍未达到已选参考图风格，只作内部研究，不能按正式角色交付验收。"
+  },
+  "implementation": [
+    {
+      "id": "task01",
+      "task": "冻结首章数据与白盒路线",
+      "done": "三个区可连续抵达，三条侧路都汇回木门；禁用第二至第四章入口。",
+      "depends": []
+    },
+    {
+      "id": "task02",
+      "task": "完成挥剑推击与火反馈",
+      "done": "攻击预警可见，推箱不堵路，火在有限区域熄灭；无油也能通关。",
+      "depends": [
+        "task01"
+      ]
+    },
+    {
+      "id": "task03",
+      "task": "实现五个主线目标与检查点",
+      "done": "按稳定ID结算；粮车救回、木门打开与营地粮袋变更可见。",
+      "depends": [
+        "task01"
+      ]
+    },
+    {
+      "id": "task04",
+      "task": "实现路障头目与固定掉落",
+      "done": "至少两种可读动作，存在后摇；死亡重试不重复发剑。",
+      "depends": [
+        "task02",
+        "task03"
+      ]
+    },
+    {
+      "id": "task05",
+      "task": "制作并接入首批正式角色外观",
+      "done": "先让首章3角色达到已选概念图质感，再检查朝向、脚底与遮挡；补做粮车、木门等；动作与源模型独立验收。",
+      "depends": [
+        "task02"
+      ]
+    },
+    {
+      "id": "task06",
+      "task": "完成原子存档与恢复测试",
+      "done": "刷新或退出后目标、箱子、奖励、检查点保持一致，无丢失无刷取。",
+      "depends": [
+        "task03",
+        "task04"
+      ]
+    },
+    {
+      "id": "task07",
+      "task": "触屏与性能实测",
+      "done": "在目标手机或平台环境测可读性、输入误触与帧耗时；不以桌面结果替代。",
+      "depends": [
+        "task05",
+        "task06"
+      ]
+    },
+    {
+      "id": "task08",
+      "task": "首章试玩后再扩第二章",
+      "done": "问题清单中的阻断与软锁清零，爽感和时长基本成立，再复用资源做矿道。",
+      "depends": [
+        "task07"
+      ]
+    }
+  ],
+  "acceptance": [
+    {
+      "id": "gate01",
+      "name": "可完整通关",
+      "test": "从新档到交车结算；三个局部路线分别验证；全程不需要读完对白。"
+    },
+    {
+      "id": "gate02",
+      "name": "不会软锁",
+      "test": "推箱靠墙、油耗尽、重复开门、跳过对白、主线粮食靠近火均不锁死；必要交互可重试。"
+    },
+    {
+      "id": "gate03",
+      "name": "不会重复奖励",
+      "test": "每个检查点退出继续；拾取后立即刷新；头目掉落前后退出；唯一物品最多领取一次。"
+    },
+    {
+      "id": "gate04",
+      "name": "战斗清楚且有退路",
+      "test": "剑路与火路均能无特殊消耗通关；头目预警可区分，硬直可利用，没有不可读的同屏围攻。"
+    },
+    {
+      "id": "gate05",
+      "name": "素材真实可用",
+      "test": "现有6角色9道具仅为内部占位，文件检查通过不等于美术通过。正式外观、动画、碰撞、引擎接入逐项验收；首章缺少场景件须补齐。"
+    },
+    {
+      "id": "gate06",
+      "name": "移动端达到初始预算",
+      "test": "以目标设备测试30FPS目标、内存与包体；记录设备和数据。当前60次绘制、6万可见三角面等仅为起始估计。"
+    },
+    {
+      "id": "gate07",
+      "name": "版本范围诚实",
+      "test": "试玩只有首章；未来章节标为规划。上架前单独核对平台SDK、存储、包体和素材授权要求。"
+    },
+    {
+      "id": "gate08",
+      "name": "符合已选美术方向",
+      "test": "成人比例、自然布褶、皮革与钢铁层次接近已选概念图；不接受明显方块式低模作最终外观。最终二维精灵、源模型和动作质量分别检查。"
+    }
+  ],
+  "id_contract": "chapters.json固定章节、区域、目标、检查点和奖励ID；characters.json固定角色及模型映射；asset-manifest.json固定素材槽位、状态和文件路径。文案可改，已进入存档的ID不能随意改名。",
+  "save_summary": {
+    "version": 1,
+    "trigger": [
+      "进入已解锁检查点",
+      "完成主线目标",
+      "领取唯一奖励",
+      "拾取资源或打开箱子后"
+    ],
+    "fields": [
+      "chapterId",
+      "checkpointId",
+      "completedObjectiveIds",
+      "defeatedEnemyIds",
+      "openedContainerIds",
+      "acquiredUniqueRewardIds",
+      "openedShortcutIds",
+      "inventory",
+      "selectedBuildModifierId"
+    ],
+    "death": "回最近检查点，恢复生命；已完成目标、已击败敌人和已领物品保留；未击败头目恢复满血，仍存活普通敌人回到出生位置。",
+    "atomicity": "先验证交互实体 ID 未结算，再一次性写入奖励与已结算标记；存档迁移按 save version 执行。"
+  },
+  "next_action": "先完成首章可通关与可恢复白盒，同时按已选概念图打磨首批正式角色外观；内部低模只作测试占位。第二至第四章保留设计与数据，不在首章验收前同时开工。"
+}
