@@ -1,0 +1,81 @@
+{
+  "date": "2026-11-12",
+  "status": "implemented_and_reviewed_in_native_Cocos_output; user_acceptance_pending",
+  "reference": "../equipment-profession-points-v1/",
+  "comparison": "design-runtime-comparison.jpg",
+  "mobileOverview": "mobile-runtime-overview.jpg",
+  "corners": "rounded-corners.jpg",
+  "changes": {
+    "frame": "Shared DoubleGoldFrame foreground border, interior alpha cleaned deterministically, clip follows inner radius; screen-based border width is stable across density and tall browser windows.",
+    "size": "Desktop max1040 logical px (previous1120); phone remains floating with outside gutters.",
+    "header": "40 logical px visible on all profiles; targets48px and gaps8px.",
+    "alignment": "Wide layout uses original column and vertical anchors for profession, attribute rows, skill rows, equipment portrait/filter/grid/detail. Compact phone/narrow layout preserves usable targets.",
+    "equipment": "4x3 cells fully visible in both scopes; wide layout two filter strips, compact layout one strip with category chooser.",
+    "numbers": "Attribute deltas separated; benefit values cannot wrap."
+  },
+  "validation": {
+    "typescript": "npm run check passed",
+    "build": "Cocos Creator3.8.8 web-mobile completed",
+    "mobileScreens": 15,
+    "tallDesktopScreens": 15,
+    "regressionStates": 33,
+    "additionalProfileStates": 28,
+    "defaultPages": 7,
+    "runtimeErrors": 0,
+    "networkFailures": 0,
+    "smallTargets": 0,
+    "overlappingControls": 0,
+    "gapsBelow8px": 0,
+    "copiedFilesVerified": 3545,
+    "functional": [
+      "scope/category filters",
+      "profession confirmation",
+      "attribute/skill drafts and apply",
+      "discard guards",
+      "respec",
+      "active-slot swap",
+      "save/reload",
+      "enhancement and recipe transactions with exact costs"
+    ]
+  },
+  "sourceHashes": [
+    {
+      "file": "shared/ui/RpgPanel.ts",
+      "equal": true,
+      "sha256": "3bbe0ccd8130c49e37c328c6a10086215f09458450579b07059e44fc7893bc1c"
+    },
+    {
+      "file": "shared/ui/DoubleGoldFrame.ts",
+      "equal": true,
+      "sha256": "40b4b7f207e9fd721318b37fb735610c425fe2398d37e23b8c052831c4c7f88b"
+    },
+    {
+      "file": "shared/ui/UiSkin.ts",
+      "equal": true,
+      "sha256": "3c55e800989b441bac8e9d08580e104be956584e4eb9e6fad6fa39f93674a490"
+    },
+    {
+      "file": "features/progression/runtime/PreparationPanels.ts",
+      "equal": true,
+      "sha256": "9e2c3aeb897f0858d2049ad80179f46277804249d601ad7f624f7a68247657dc"
+    },
+    {
+      "file": "features/equipment/runtime/EquipmentPanels.ts",
+      "equal": true,
+      "sha256": "36a53987b043ba486c562f9988402a2d434f6dc54056c3125af5c210c85b4b30"
+    }
+  ],
+  "fixtures": "Independent browser contexts using real progression/gear APIs; isolated currencies/recipe for transaction previews. User save not replaced.",
+  "art": "No generation or new dependencies; approved material retained, Pillow alpha cleanup only.",
+  "preview": {
+    "url": "http://127.0.0.1:7469/",
+    "default": "src/cocos/build/concept-2d",
+    "candidate": "src/cocos/build/concept-2d-rpg-alignment-v4",
+    "backup": "src/cocos/temp/default-before-rpg-alignment-v4-20261112",
+    "published": false
+  },
+  "limitations": [
+    "TapTap real AppID/device/safe-area acceptance remains separate.",
+    "Current skill definitions differ from old concept; kept the current gameplay data."
+  ]
+}

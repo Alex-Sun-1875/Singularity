@@ -1,0 +1,33 @@
+{
+  "source": "src/cocos/tools/make-ribbon-masks.py",
+  "generationProvider": "Deterministic project code using existing Pillow; no model or download",
+  "licenseNote": "Original procedural project assets, with no third-party source imagery",
+  "assets": [
+    {
+      "file": "ribbon-white-v1.png",
+      "sha256": "508e92238640e05034d4f6ac7d906a3288e82dbe047b7e8f55ff4d993a7523ef",
+      "size": [
+        4,
+        4
+      ]
+    },
+    {
+      "file": "ribbon-soft-v1.png",
+      "sha256": "7b0168fbcd81657dce03b52a6cb20e171406c66a18d885470f32e60df55cad0f",
+      "size": [
+        4,
+        256
+      ]
+    }
+  ],
+  "formula": "RGB=255 everywhere. white alpha=255; soft alpha=round(255*(exp(-0.5*(x/0.34)^2)-exp(-0.5/0.34^2))/(1-exp(-0.5/0.34^2))), x=2*y/255-1",
+  "integration": "Cocos builtin-particle-trail: white masks for straight-alpha blue body/cold white core; separate soft mask for additive halo. UV.y is the ribbon cross section.",
+  "runtimeReview": {
+    "build": "index.90a41.js at http://127.0.0.1:7469/?view=2d",
+    "platform": "Real Cocos renderer in headless Chrome with SwiftShader",
+    "evidence": ["src/cocos/test-results/ribbon-material-v2-graph/actual-renderer-review.json", "src/cocos/test-results/ribbon-material-v2-long/actual-renderer-review.json"],
+    "result": "THU02 used 88 Lines; THU01 20m/6-target cast used 66 Lines, at most 100 points and 594 indices within native capacity100. Explicit 4x4 white or 4x256 soft textures; zero texture/priority mismatches after pool reactivation; zero console/WebGL/page exceptions",
+    "comparison": "Same final geometry and time, toggling old grey/hard-edge material parameters only"
+  },
+  "artReview": "Cold white core, soft blue halo and fine fractured silhouette observed in actual renderer. The 90a41 geometry materially improves over 6e061 polygonal wire. Full game art acceptance remains separate from material and renderer safety checks."
+}

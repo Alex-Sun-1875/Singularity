@@ -1,0 +1,99 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-10",
+  "status": "local-audit-complete",
+  "platformValidated": false,
+  "uploaded": false,
+  "appIdProvided": false,
+  "cocosVersion": "3.8.8",
+  "converterVersion": "1.2.2",
+  "version": "0.3.0",
+  "resourcePacks": 59,
+  "resourceProfile": "release/taptap.json",
+  "resourceProfileSha256": "7d34c65ed76d926ec5ca297c67bbb18e6ca36153283c3dc518b7cf692a98bc42",
+  "measurements": {
+    "baselineMinigameRawMiB": 699.32,
+    "releaseRawMiB": 280.75,
+    "rawReductionPercent": 59.9,
+    "fullUploadZipMiB": 259.84,
+    "fullUploadZipSha256": "38baba846af8b4ad45473132800a58bb2852d374435b4d1fff079c443a476114",
+    "localInitialPayloadRawMiB": 4.62,
+    "localInitialPayloadZipMiB": 1.09,
+    "localInitialPayloadSha256": "be19c1764c58a3e8a3960a86badc6fbbd3fc929e8a95f40391bf3850bda80d01",
+    "openingDependencyRawMiB": 163.3,
+    "openingDependencyDeflatedContentMiB": 144.11,
+    "note": "First-package numbers are offline measurements excluding declared subpackages, not platform measurements. Opening dependencies are required before gameplay and remain the main optimization target."
+  },
+  "validation": {
+    "existingRuleTests": {
+      "passed": 95,
+      "failed": 0
+    },
+    "typeCheck": "passed",
+    "cocosMinigameBuild": "completed",
+    "officialConversion": "completed",
+    "zipCrc": "passed",
+    "browserRelease": [
+      {
+        "surface": "desktop",
+        "level": 1,
+        "paintedWorld": true,
+        "nativeHero": true,
+        "movementMetres": 3.2139873365552587,
+        "saveReload": "passed",
+        "errors": [],
+        "failedRequests": []
+      },
+      {
+        "surface": "mobile-landscape",
+        "level": 1,
+        "paintedWorld": true,
+        "nativeHero": true,
+        "movementMetres": 2.7110103118303943,
+        "saveReload": "passed",
+        "errors": [],
+        "failedRequests": []
+      }
+    ],
+    "controlledResourceCoverage": [
+      "S01",
+      "S03",
+      "U1-01",
+      "H01",
+      "H04"
+    ],
+    "resourceCoverageMethod": "Controlled area transitions for resource coverage; not a natural gameplay playthrough",
+    "tapTapDevicePerformance": "pending"
+  },
+  "artifacts": {
+    "fullUploadZip": "build/taptap-audit-final-package/game.zip",
+    "localInitialPayloadZip": "artifacts/taptap-audit-final/initial-payload.local-audit.zip",
+    "detailedSizeReport": "artifacts/taptap-audit-final/report.json",
+    "browserVerification": "test-results/taptap-browser-release.json",
+    "areaResourceVerification": "test-results/taptap-resource-route-check.json"
+  },
+  "requiredUserInput": {
+    "forPlatformBinding": [
+      "真实 TapTap 小游戏 AppID 和后台项目/详情页链接",
+      "已认证开发者主体类型：个人或企业；如已有上传版本，提供当前最高版本号"
+    ],
+    "forPublicRelease": [
+      "最终游戏名称与厂商/工作室名称",
+      "联系及客服邮箱、隐私政策公开链接和实际数据收集说明",
+      "开放内容范围与是否包含内购",
+      "著作权人和权属材料、备案内容说明、负责人及联系方式；证件和授权材料由负责人直接在后台提交"
+    ],
+    "canPrepareFromRepository": [
+      "图标与横版/方形宣传图",
+      "至少三张实机截图和实机录屏",
+      "版本说明与现有第三方素材/字体授权登记"
+    ]
+  },
+  "limitations": [
+    "No upload or TapTap real-device validation.",
+    "Platform acceptance of the full upload ZIP size is unverified.",
+    "Initial payload excludes on-demand packs required before gameplay.",
+    "Official converter ZIP includes all subpackage directories.",
+    "Platform login, lifecycle, storage, full ZIP size acceptance, startup duration, memory, thermals and frame rate still require the real TapTap app and devices."
+  ]
+}

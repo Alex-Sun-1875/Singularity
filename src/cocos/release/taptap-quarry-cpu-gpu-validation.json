@@ -1,0 +1,413 @@
+{
+  "verifiedOn": "2026-11-12",
+  "version": "0.3.21",
+  "status": "desktop-hardware-comparison",
+  "phoneVerified": false,
+  "thermalVerified": false,
+  "phoneConnection": "Android SDK adb devices returned no connected devices.",
+  "runtimeChangesMade": false,
+  "environment": {
+    "cpu": "Intel Core i9-12900KF (16 cores / 24 logical processors)",
+    "gpu": "NVIDIA GeForce RTX 3080",
+    "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3080 (0x00002216) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+    "browser": "Chrome headless, hardware D3D11/WebGL2 (not SwiftShader)",
+    "viewport": [
+      844,
+      390
+    ],
+    "requestedDpr": 3,
+    "cocosCanvas": [
+      1688,
+      780
+    ],
+    "frameRateSetting": 60,
+    "area": "S13 断镐石场",
+    "fixture": "Seed19 Lv40, all existing enemies retained, selected clear corridor more than 74m from enemies; repeated forward/back movement through normal input/update. No combat during accepted samples."
+  },
+  "method": {
+    "discovery": "Three crossed-order rounds for idle/walk/run/fast, eight seconds each; two additional ten-second fresh-chart comparisons.",
+    "confirmation": "48 seconds of warmup across every mode, then two reverse-order rounds of idle/walk/run/fast, eight seconds each.",
+    "cpu": "Chrome DevTools Performance.enable timeDomain=threadTicks; delta ThreadTime divided by rendered frames. Not total-system or phone CPU utilization.",
+    "gpuTimer": "Asynchronous EXT_disjoint_timer_query_webgl2 every third frame; query conflicts and disjoint results rejected. Elapsed query timing was variable, including while idle, so not treated as a direct GPU utilization percentage.",
+    "gpuBusy": "Independent Windows WDDM per-process GPU 3D-engine raw counters for the dedicated Chrome GPU PID. Raw CounterType=542180608 (PERF_100NSEC_TIMER), formula 100*delta(UtilizationPercentage)/delta(Timestamp_Sys100NS). One 3D engine was present.",
+    "intervals": "GPU busy intervals include WMI collection overhead while the same movement mode continues; CPU frame intervals are the eight-second browser samples.",
+    "instrumentation": "Temporary method timing wrappers and frame/query listeners only in the isolated diagnostic page; no packaged runtime instrumentation added. Small differences should not be overinterpreted."
+  },
+  "summary": [
+    {
+      "mode": "idle",
+      "metresPerSecond": 0,
+      "sampleCount": 2,
+      "cpuMainThreadMsPerFrameMean": 2.489433471933472,
+      "cpuMainThreadMsPerFrameRange": [
+        2.293573804573804,
+        2.6852931392931394
+      ],
+      "gpu3DEngineBusyPercentMean": 6.200273791327399,
+      "gpu3DEngineBusyPercentRange": [
+        5.935132653797599,
+        6.465414928857199
+      ],
+      "drawCallsPerFrameMean": 176,
+      "observedFpsMean": 60.024461424089374,
+      "frameRateSetting": 60
+    },
+    {
+      "mode": "walk",
+      "metresPerSecond": 1.6,
+      "sampleCount": 2,
+      "cpuMainThreadMsPerFrameMean": 2.8487744401745454,
+      "cpuMainThreadMsPerFrameRange": [
+        2.7471137339055787,
+        2.950435146443512
+      ],
+      "gpu3DEngineBusyPercentMean": 6.338173576970815,
+      "gpu3DEngineBusyPercentRange": [
+        6.296984615220589,
+        6.379362538721041
+      ],
+      "drawCallsPerFrameMean": 172.95008260455762,
+      "observedFpsMean": 58.089217109672276,
+      "frameRateSetting": 60
+    },
+    {
+      "mode": "run",
+      "metresPerSecond": 4,
+      "sampleCount": 2,
+      "cpuMainThreadMsPerFrameMean": 2.7746955847794643,
+      "cpuMainThreadMsPerFrameRange": [
+        2.4612458333333325,
+        3.0881453362255966
+      ],
+      "gpu3DEngineBusyPercentMean": 6.347815030049732,
+      "gpu3DEngineBusyPercentRange": [
+        6.077548540544838,
+        6.618081519554626
+      ],
+      "drawCallsPerFrameMean": 174.12961632321043,
+      "observedFpsMean": 58.73890043386443,
+      "frameRateSetting": 60
+    },
+    {
+      "mode": "fast",
+      "metresPerSecond": 5.2,
+      "sampleCount": 2,
+      "cpuMainThreadMsPerFrameMean": 3.00987551975052,
+      "cpuMainThreadMsPerFrameRange": [
+        2.615501039501039,
+        3.404250000000001
+      ],
+      "gpu3DEngineBusyPercentMean": 5.229744303642034,
+      "gpu3DEngineBusyPercentRange": [
+        4.370528269524282,
+        6.088960337759787
+      ],
+      "drawCallsPerFrameMean": 174.42428590798156,
+      "observedFpsMean": 58.75573607789294,
+      "frameRateSetting": 60
+    }
+  ],
+  "comparisons": {
+    "fastVsCurrentRunCpuPercent": 8.475882408907509,
+    "fastVsIdleCpuPercent": 20.90604363139843,
+    "interpretation": "In this desktop sample, increasing speed from 4.0 to 5.2m/s did not produce a stable large CPU increase or a sustained GPU busy increase. CPU mean rose about 8.5%; run/fast CPU ranges overlap. The GPU busy results do not show a monotonic increase with speed. This does not establish phone behavior or a thermal fix."
+  },
+  "initialTransient": {
+    "idleCpuMs": 2.12971875,
+    "firstWalkCpuMs": 4.62135831381733,
+    "note": "Initial moving samples had elevated CPU cost which fell on repetition. They are preserved, but not conflated with the fully warmed confirmation averages; caching/JIT and other transient effects were not independently isolated."
+  },
+  "freshChartSamples": [
+    {
+      "label": "fresh-run",
+      "mode": "run",
+      "fresh": true,
+      "wallSeconds": 10.00569999999553,
+      "gameSeconds": 9.999899999997979,
+      "frames": 600,
+      "fps": 59.96581948292154,
+      "metres": 39.99888511048425,
+      "metresPerGameSecond": 3.999928510334337,
+      "cpu": {
+        "mainThreadMsPerFrame": 2.382676666666672,
+        "mainThreadBusyPercent": 14.283102369529335,
+        "taskMsPerFrame": 2.349143333333329,
+        "scriptMsPerFrame": 2.1783933333333336,
+        "rendererProcessMsPerFrame": 3.0761316666666736,
+        "processCpuSeconds": {
+          "network.mojom.NetworkService": 0.0006890000000000507,
+          "renderer": 1.8444410000000053,
+          "audio.mojom.AudioService": 0.0004959999999999964,
+          "storage.mojom.StorageService": 0.0029830000000000134,
+          "GPU": 1.8379179999999984,
+          "browser": 0.044768999999999615
+        }
+      },
+      "gpuMs": {
+        "count": 200,
+        "mean": 7.078331840000001,
+        "p50": 3.1488,
+        "p95": 16.003072,
+        "max": 17.248256
+      },
+      "frameWorkMs": {
+        "count": 600,
+        "mean": 2.198666666659216,
+        "p50": 2.100000001490116,
+        "p95": 3,
+        "max": 5.100000001490116
+      },
+      "renderSubmitMs": {
+        "count": 600,
+        "mean": 1.1941666664804023,
+        "p50": 1.1999999955296516,
+        "p95": 1.5,
+        "max": 3.2999999970197678
+      },
+      "drawCallsPerFrame": 174.025,
+      "trianglesPerFrame": 197866.90333333332,
+      "explorationScans": 30,
+      "explorationScansPerSecond": 2.998290974146077,
+      "calls": {
+        "camera": {
+          "count": 600,
+          "ms": 11.700000010430813,
+          "maxMs": 0.20000000298023224
+        },
+        "paintedWorld": {
+          "count": 600,
+          "ms": 74.29999993741512,
+          "maxMs": 0.3999999985098839
+        },
+        "footprintCollision": {
+          "count": 600,
+          "ms": 5.100000023841858,
+          "maxMs": 0.10000000149011612
+        },
+        "physicsSync": {
+          "count": 600,
+          "ms": 1.7000000178813934,
+          "maxMs": 0.10000000149011612
+        },
+        "sessionAdvance": {
+          "count": 600,
+          "ms": 90.00000009685755,
+          "maxMs": 0.30000000447034836
+        },
+        "nativeHero": {
+          "count": 600,
+          "ms": 24.699999928474426,
+          "maxMs": 0.20000000298023224
+        },
+        "actors": {
+          "count": 600,
+          "ms": 61.30000001192093,
+          "maxMs": 0.30000000447034836
+        },
+        "effects": {
+          "count": 600,
+          "ms": 7.500000022351742,
+          "maxMs": 0.10000000149011612
+        },
+        "exploration": {
+          "count": 600,
+          "ms": 3.2999999821186066,
+          "maxMs": 0.20000000298023224
+        },
+        "minimap": {
+          "count": 600,
+          "ms": 62.59999996423721,
+          "maxMs": 2.6999999955296516
+        },
+        "hud": {
+          "count": 600,
+          "ms": 95.59999994188547,
+          "maxMs": 2.7999999970197678
+        },
+        "physicsRaycast": {
+          "count": 600,
+          "ms": 17.600000016391277,
+          "maxMs": 0.20000000298023224
+        },
+        "gameUpdate": {
+          "count": 600,
+          "ms": 503.09999994933605,
+          "maxMs": 3.600000001490116
+        },
+        "fogRedraw": {
+          "count": 11,
+          "ms": 19.80000000447035,
+          "maxMs": 2.2000000029802322
+        }
+      },
+      "disjoint": 0,
+      "queryConflicts": 0,
+      "heap": 100915168,
+      "gfx": {
+        "bufferSize": 18508142,
+        "textureSize": 299677584
+      },
+      "playerAction": null,
+      "playerHp": 315,
+      "frameRateSetting": 60,
+      "animation": "run"
+    },
+    {
+      "label": "fresh-fast",
+      "mode": "fast",
+      "fresh": true,
+      "wallSeconds": 10.009199999995529,
+      "gameSeconds": 9.999900000004828,
+      "frames": 600,
+      "fps": 59.94485073734844,
+      "metres": 51.999812586808844,
+      "metresPerGameSecond": 5.200033259010964,
+      "cpu": {
+        "mainThreadMsPerFrame": 2.36595,
+        "mainThreadBusyPercent": 14.178416510282466,
+        "taskMsPerFrame": 2.333034999999999,
+        "scriptMsPerFrame": 2.1748633333333287,
+        "rendererProcessMsPerFrame": 3.109323333333324,
+        "processCpuSeconds": {
+          "network.mojom.NetworkService": 0.0004009999999999847,
+          "renderer": 1.8674309999999983,
+          "audio.mojom.AudioService": 0.00015899999999999248,
+          "storage.mojom.StorageService": 0.0034650000000000097,
+          "GPU": 1.8554570000000012,
+          "browser": 0.047131000000000256
+        }
+      },
+      "gpuMs": {
+        "count": 200,
+        "mean": 6.799155199999999,
+        "p50": 2.203648,
+        "p95": 16.063488,
+        "max": 20.359168
+      },
+      "frameWorkMs": {
+        "count": 600,
+        "mean": 2.2191666666418315,
+        "p50": 2.100000001490116,
+        "p95": 3,
+        "max": 5.399999998509884
+      },
+      "renderSubmitMs": {
+        "count": 600,
+        "mean": 1.2335000000273189,
+        "p50": 1.2000000029802322,
+        "p95": 1.6000000014901161,
+        "max": 2.3000000044703484
+      },
+      "drawCallsPerFrame": 174.21833333333333,
+      "trianglesPerFrame": 197920.58,
+      "explorationScans": 40,
+      "explorationScansPerSecond": 3.996323382489896,
+      "calls": {
+        "camera": {
+          "count": 600,
+          "ms": 12.30000003427267,
+          "maxMs": 0.19999999552965164
+        },
+        "paintedWorld": {
+          "count": 600,
+          "ms": 73.49999991804361,
+          "maxMs": 0.3999999985098839
+        },
+        "footprintCollision": {
+          "count": 600,
+          "ms": 5.100000008940697,
+          "maxMs": 0.10000000149011612
+        },
+        "physicsSync": {
+          "count": 600,
+          "ms": 1.600000023841858,
+          "maxMs": 0.10000000149011612
+        },
+        "sessionAdvance": {
+          "count": 600,
+          "ms": 87.69999995827675,
+          "maxMs": 0.3999999985098839
+        },
+        "nativeHero": {
+          "count": 600,
+          "ms": 22.69999996572733,
+          "maxMs": 0.20000000298023224
+        },
+        "actors": {
+          "count": 600,
+          "ms": 60.90000004321337,
+          "maxMs": 0.30000000447034836
+        },
+        "effects": {
+          "count": 600,
+          "ms": 10.000000014901161,
+          "maxMs": 0.20000000298023224
+        },
+        "exploration": {
+          "count": 600,
+          "ms": 3.400000013411045,
+          "maxMs": 0.20000000298023224
+        },
+        "minimap": {
+          "count": 600,
+          "ms": 64.8999999538064,
+          "maxMs": 3
+        },
+        "hud": {
+          "count": 600,
+          "ms": 96.89999998360872,
+          "maxMs": 3.100000001490116
+        },
+        "physicsRaycast": {
+          "count": 600,
+          "ms": 21.30000003427267,
+          "maxMs": 0.29999999701976776
+        },
+        "gameUpdate": {
+          "count": 600,
+          "ms": 498.40000001341105,
+          "maxMs": 4
+        },
+        "fogRedraw": {
+          "count": 11,
+          "ms": 21.80000000447035,
+          "maxMs": 2.7000000029802322
+        }
+      },
+      "disjoint": 0,
+      "queryConflicts": 0,
+      "heap": 99858308,
+      "gfx": {
+        "bufferSize": 18508142,
+        "textureSize": 299677584
+      },
+      "playerAction": null,
+      "playerHp": 315,
+      "frameRateSetting": 60,
+      "animation": "run"
+    }
+  ],
+  "sampleStats": {
+    "stages": 22,
+    "renderedFrames": 10586,
+    "gpuQuerySamples": 3528,
+    "runtimeErrors": [],
+    "disjointEvents": 0,
+    "queryConflicts": 0
+  },
+  "limits": [
+    "Desktop RTX3080 results are not Android/iPhone CPU/GPU percentages, temperatures, power draw or thermal-throttling measurements.",
+    "The isolated clear corridor excludes combat, dense nearby enemy groups and worst-case map entry.",
+    "Fresh-chart cases reset exploration cells, not the complete navigation/shader caches.",
+    "Two eight-second confirmation samples per mode do not establish statistical significance for small differences.",
+    "GPU clocks and shared-device scheduling can vary; lower GPU percentages in the fast samples must not be interpreted as a thermal benefit from faster movement."
+  ],
+  "recommendedNextDeviceMeasurement": "Profile the actual reported phone on the same S13 route at idle/current run/previous fast speed, with consistent brightness/charging/FPS and at least 10-15 minutes of play. Include cold entry and nearby monsters separately.",
+  "evidenceDirectory": "test-results/quarry-cpu-gpu-v1",
+  "references": [
+    "https://chromedevtools.github.io/devtools-protocol/tot/Performance/",
+    "https://registry.khronos.org/webgl/extensions/EXT_disjoint_timer_query_webgl2/",
+    "https://learn.microsoft.com/en-us/windows/win32/wmisdk/timer-algorithm-counter-types",
+    "https://devblogs.microsoft.com/directx/gpus-in-the-task-manager/"
+  ]
+}

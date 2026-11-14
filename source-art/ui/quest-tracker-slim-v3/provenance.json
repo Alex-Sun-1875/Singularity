@@ -1,0 +1,48 @@
+{
+  "generation": {
+    "tool": "OpenAI image_gen (cloud)",
+    "drafts": [
+      "design-draft-01.png",
+      "design-draft-02.png"
+    ],
+    "sourceReference": "codex-clipboard-df525d46-7ef8-4d10-8b7a-9cc38786159e.png",
+    "promptRecord": "prompt-notes.md",
+    "result": "generated successfully"
+  },
+  "composition": {
+    "tool": "Pillow, deterministic layout and pixel composition",
+    "output": "design-review-v3.png",
+    "sharedComponent": "src/cocos/assets/scripts/shared/ui/DoubleGoldFrame.ts",
+    "sharedAssets": [
+      "double-gold-frame-v6.png",
+      "double-gold-inset-v6.png",
+      "rpg-serif-v2.ttf"
+    ],
+    "skinScale": 0.75,
+    "sliceInsetsNativePixels": [
+      48,
+      48,
+      48,
+      48
+    ],
+    "heroAndQuestFrameWidthInBoardPixels": 333,
+    "questFrameHeightInBoardPixels": 78,
+    "intendedLogicalHeight": 42,
+    "intendedTouchSize": 48,
+    "arrowRemoved": true
+  },
+  "artReview": {
+    "status": "visual layout reviewed; user review pending",
+    "checks": [
+      "quest frame aligns with hero frame at x=112, width=333",
+      "main task strip and footer variants have no leading arrow",
+      "exact shared frame/inset textures and RPG font reused",
+      "single-line target, distance and action fit without overlap",
+      "expanded progress has bottom padding"
+    ],
+    "userApproved": false,
+    "implementedInGame": false,
+    "platformValidated": false
+  },
+  "outputSha256": "ef01b3bf52050e40a8304368ecea4ab7134cf7bc8333a48ae918e8e65b5af44a"
+}

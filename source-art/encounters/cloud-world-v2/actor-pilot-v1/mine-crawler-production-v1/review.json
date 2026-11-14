@@ -1,0 +1,82 @@
+{
+  "date": "2026-11-08",
+  "staticArtReview": "passed-for-pilot",
+  "reviewer": "Codex visual inspection of original grey review, enlarged attack support contacts and16-frame common-anchor contact sheet",
+  "identity": [
+    "Four weight-bearing legs plus two shorter digging pincers",
+    "Ore hopper, exposed side gears, amber lamp and bronze/steel material identity maintained",
+    "Actual drawn direction order down,left,up,right; no mirrored directions"
+  ],
+  "processingAcceptance": [
+    "16 complete subject components retained, including figures crossing nominal cell boundaries",
+    "All original alpha>3 RGBA pixels preserved exactly once; only alpha<=3 cleaned",
+    "No per-frame fit, resize, repaint or body-scale multipliers",
+    "Ground anchors distinguish front pincer tips from broad supporting feet",
+    "Single consistent0.0065m/pixel scale"
+  ],
+  "animationScope": [
+    "Idle one drawing per direction",
+    "Walk two actual contact drawings with speed-adjusted cadence",
+    "Attack one committed pincer drawing with original idle reused for windup/recovery",
+    "No invented hit/death pose or diagonal drawing"
+  ],
+  "limitations": [
+    "The source shows actual stance/crouch height changes; they are retained rather than normalizing frame bounding boxes",
+    "Two-contact gait still requires in-game speed/turn/collision review; static output is not a no-slide gameplay acceptance",
+    "No new native3D model, skeleton or animation"
+  ],
+  "runtimePlayReview": "passed representative real-game walk0/walk1/attack, HP loss and scene unload/reload at7473",
+  "userAcceptance": "not claimed",
+  "downWalkingPivotRevision": {
+    "reason": "Root review identified rigid chassis hopping when a forward support toe was forced to a common lowest-pixel baseline",
+    "basis": "Keep the idle rigid hopper reference height; use chassis/support-plane projection for down walking",
+    "changedPhysicalFrameIndices": [
+      1,
+      2
+    ],
+    "worldCoreDriftPixels": [
+      0.0,
+      0.0
+    ],
+    "metadataOnly": true,
+    "atlasBytesUnchanged": true,
+    "allOtherDirectionsAndAttackOriginsUnchanged": true,
+    "perFrameScaleUnchanged": true
+  },
+  "runtimeEvidence": {
+    "concept": "mine-crawler",
+    "file": "src/cocos/test-results/enemy-combat-v1/mine-crawler-runtime.json",
+    "sha256": "c48a7766d32bf8fbc8e68b09847c773dd0d38c6069a86a87803a873bc1471993",
+    "area": "H04",
+    "seen": [
+      "walk-0",
+      "walk-1",
+      "attack"
+    ],
+    "afterUnload": {
+      "refCount": 0,
+      "isValid": false,
+      "heroValid": true,
+      "ownership": {
+        "disposed": false,
+        "enemyTextureCount": 0,
+        "estimatedEnemyRgbaBytes": 0,
+        "textures": [],
+        "heroAndNpcRefsOwned": false
+      }
+    },
+    "reload": {
+      "concept": "mine-crawler",
+      "refCount": 1,
+      "width": 1024,
+      "height": 1024,
+      "valid": true,
+      "failure": ""
+    },
+    "consoleErrors": 0,
+    "requestFailures": 0,
+    "rootVisualReview": "PASS after real game sample at7473",
+    "native3D": "legacy unchanged"
+  },
+  "runtimeInstalled": true
+}

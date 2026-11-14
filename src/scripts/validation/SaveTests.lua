@@ -1,0 +1,25 @@
+local Chapter = require("Game.Chapter")
+local Tests = {}
+function Tests.Run()
+    local Save = require("Game.Save")
+    local prefix = "chapter_test_" .. tostring(os.time()) .. "_" .. tostring(math.floor(os.clock()*100000))
+    local store = Save.New(prefix)
+    assert(not store:Load(), "fresh slot must be empty")
+    local g = Chapter.New(20)
+    g:Choose("ask_letter")
+    assert(store:Write(g))
+    g.player.gold = 87
+    assert(store:Write(g))
+    local restored = assert(Save.New(prefix):Load())
+    assert(restored.player.gold==87 and restored.flags.saw_copy, "latest valid generation must win")
+    local file = File(prefix..".b.json", FILE_WRITE)
+    assert(file:IsOpen()); file:WriteString("broken save"); file:Close()
+    local recovery = Save.New(prefix)
+    local fallback, warning = recovery:Load()
+    assert(fallback and fallback.player.gold==60 and warning, "must recover older intact slot")
+    assert(not recovery:Write(fallback), "corrupt evidence must not be silently overwritten")
+    assert(recovery:StartFresh(Chapter.New(21)), "explicit new journey must preserve corrupt data then save")
+    assert(Save.New(prefix):Load())
+    print("[SaveTest] PASS real File double-slot roundtrip, corruption recovery and preservation")
+end
+return Tests

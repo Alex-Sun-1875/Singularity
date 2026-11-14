@@ -1,0 +1,69 @@
+{
+  "schemaVersion": 1,
+  "verifiedOn": "2026-11-10",
+  "version": "0.3.6",
+  "engine": "Cocos Creator 3.8.8",
+  "converterVersion": "1.2.2",
+  "officialGuides": [
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/launch/wasm-subpackage/",
+    "https://developer.taptap.cn/minigameapidoc/dev/engine/Cocos-Laya-Egret/",
+    "https://developer.taptap.cn/minigameapidoc/quick-start/guide/creation-improvement/",
+    "https://docs.cocos.com/creator/3.8/manual/zh/scripting/wasm-support.html"
+  ],
+  "localBuild": {
+    "command": "npm run pack:taptap -- -OutputName taptap-wasm",
+    "buildMode": "test",
+    "passed": true,
+    "package": "artifacts/taptap-wasm/SwordAndFire_0.3.6_TapTap_test_20261110T020258Z/SwordAndFire_0.3.6_TapTap_test_20261110T020258Z.zip",
+    "sha256": "6ad778747ac365d999141a22ae8ccf796a74fe8d2262c7bef551982d176f8871",
+    "uploadZipBytes": 272991680,
+    "initialPayloadRawBytes": 4919180,
+    "initialPayloadLocalZipBytes": 1169990,
+    "contentPacks": 59,
+    "declaredSubpackagesIncludingEngineAndWrappers": 71,
+    "wasmModules": [
+      {
+        "path": "cocos-js/assets/bullet.release.wasm.wasm",
+        "bytes": 469455,
+        "sha256": "effe0a64dfd4fc1128ac1c51f4418a5a04509a7595df05ea52f5077b7057d56d",
+        "subpackage": "__ccWasmAssetSubpkg__"
+      }
+    ],
+    "wasmBytesInMainPackage": 0,
+    "checks": [
+      "npm run check:tap",
+      "Configuration and Python syntax checks",
+      "Cocos build, official conversion, ZIP CRC, full delivery SHA-256 and package budget checks",
+      "WASM binary header, package membership and exported engine loader references",
+      "Missing WASM chunk package rejected using altered in-memory declarations",
+      "WASM outside declared asset package rejected using altered in-memory declarations"
+    ],
+    "releasePreflightPassed": false,
+    "remainingLocalBlockers": ["Deploy login service and configure serviceUrl."],
+    "note": "Local payload accounting is not TapTap network delivery or real-device startup measurement. No change to the existing game version was made."
+  },
+  "consoleObservation": {
+    "url": "https://developer.taptap.cn/530285/app/1046344/tap-mini-app-package",
+    "packageId": "458336",
+    "displayedVersion": "0.0.1",
+    "displayedWasmStatus": "不支持分包丨当前小游戏包体无法进行分包。",
+    "enableFunctionSplitDisabled": true,
+    "settingsChanged": false,
+    "note": "Observed existing development package only. This does not prove that all Cocos packages are unsupported, or establish the status of a later upload."
+  },
+  "platformFunctionSplit": {
+    "completed": false,
+    "platformVerified": false,
+    "compatibleExportAvailableInInstalledConverter": false,
+    "blocker": "The documented workflow requires the SDK-generated game_wasm_split.zip. The installed Cocos converter exports game.zip and does not generate the required function-split artifact. Its useSubpackage argument does not implement splitting and handleWasmSplit only adapts an existing wasm-split.js.",
+    "nextSteps": [
+      "Obtain TapTap's compatible Cocos function-split export tooling/configuration; do not rename game.zip to claim support.",
+      "Upload the genuine compatible export and wait for platform preprocessing.",
+      "Collect functions on at least two iOS and two Android devices, covering startup and all playable scenes.",
+      "Generate and submit the split after collection stabilizes, then validate on additional devices according to the guide."
+    ],
+    "uploadPerformed": false,
+    "deviceCollectionPerformed": false,
+    "supportTicketSent": false
+  }
+}

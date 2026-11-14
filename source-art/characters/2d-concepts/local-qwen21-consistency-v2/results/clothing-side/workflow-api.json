@@ -1,0 +1,213 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "cpu"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "qwen21-consistency-v2/clothing-side/guide.png"
+    }
+  },
+  "6": {
+    "class_type": "JoinImageWithAlpha",
+    "inputs": {
+      "image": [
+        "4",
+        0
+      ],
+      "alpha": [
+        "4",
+        1
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "clip": [
+        "2",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ],
+      "prompt": "编辑图1的右向侧面跑步角色。图2只提供同一角色的已认可站姿服装配色，不能把图1改成站姿。准确对齐图2的低饱和暗酒红背心、略带蓝紫倾向的暗炭灰袖子，以及略暖的深灰长裤。三种衣料分别匹配对应参考，不把整个人物统一压暗；暗酒红仍保留可读的柔和褶皱，不变成接近黑色。保留图1原有材质、亮暗层次、褶皱、每一条细金刺绣、缝线与衣边。完全保留原头型、银发、脸、头部大小与位置、原跑步相位、身体前倾、四肢与两只手及指缝、剑和剑鞘、腰带包袋、袖口、靴子、身体尺度与脚部锚点。不要增加装备或改变服装形状，不改变曝光，不增加饱和度。保持512×768画布，原脚部位置不变。输出同一个完整角色、透明背景RGBA PNG，无地面、无投影、无额外角色。",
+      "negative_prompt": "",
+      "resolution": 0,
+      "images.image_1": [
+        "6",
+        0
+      ],
+      "images.image_2": [
+        "7",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "device": "cpu",
+      "dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "model": [
+        "9",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ],
+      "cfg": 1
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 20261107
+    }
+  },
+  "12": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "13": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "14": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "10",
+        0
+      ],
+      "sampler": [
+        "12",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "20",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "14",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "16": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "15",
+        0
+      ],
+      "filename_prefix": "qwen21-consistency-v2/clothing-side"
+    }
+  },
+  "17": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "6",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "18": {
+    "class_type": "LoadImageMask",
+    "inputs": {
+      "image": "qwen21-consistency-v2/clothing-side/mask.png",
+      "channel": "red"
+    }
+  },
+  "20": {
+    "class_type": "SetLatentNoiseMask",
+    "inputs": {
+      "samples": [
+        "17",
+        0
+      ],
+      "mask": [
+        "18",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "qwen21-consistency-v2/clothing-side/reference.png"
+    }
+  },
+  "7": {
+    "class_type": "JoinImageWithAlpha",
+    "inputs": {
+      "image": [
+        "5",
+        0
+      ],
+      "alpha": [
+        "5",
+        1
+      ]
+    }
+  }
+}

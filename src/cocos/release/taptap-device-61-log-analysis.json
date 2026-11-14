@@ -1,0 +1,57 @@
+{
+  "analyzedOn": "2026-11-10",
+  "status": "host-environment-failure-before-game-entry",
+  "archive": "8BhLhOExw9xfFxiA7fU3U0gvNN4l3ZgI.device_61_logs.zip",
+  "device": {"brand": "Redmi", "model": "23113RKC6C", "os": "Android", "osVersion": 16},
+  "tapClientVersion": "2.96.15-rel#100299",
+  "tapClientVersionCode": 296151002,
+  "requestedPackage": {
+    "miniAppId": "tapmcddcmbhf5lxqng",
+    "consoleVersionId": 458336,
+    "semanticVersion": null,
+    "note": "The archive does not establish which project semantic version or optimization build was tested."
+  },
+  "conclusion": "The harness did not obtain the expected minigame activity. The archive shows repeated networking/DNS failures, a TapTap native test-helper crash before the game launch request, and TapTap account-login UI after launch. No project-side correction is justified by this evidence.",
+  "facts": {
+    "networkWarningCount": 5,
+    "hostFatalExceptionCount": 1,
+    "fatalProcess": "com.taptap",
+    "fatalDeviceLogTime": "11-10 02:05:06.935",
+    "fatalCause": "java.net.UnknownHostException: Unable to resolve host tap-android-dev.tapsvc.com: No address associated with hostname",
+    "nativeFrames": ["com.taptap.other.export.bis.impl.InitHelper.simpleGet", "com.taptap.other.basic.impl.ui.test.TestMainPageActivity$j.invokeSuspend"],
+    "gameLaunchDeviceLogTime": "11-10 02:05:29.994",
+    "launchFollowedByLoginActivity": true,
+    "harnessFinalError": "minigame_activity_not_exists",
+    "finalScreenshot": "TapTap phone-number account login/register sheet over TapTap home; no game screen",
+    "expectedMinigameActivityLogMatches": 0,
+    "cocosInitializationLogMatches": 0,
+    "outOfMemoryMatches": 0,
+    "tapAnrMatches": 0
+  },
+  "evidence": {
+    "extractedDirectory": "src/cocos/temp/taptap-device-61-20261110",
+    "nativeFatalException": {"file": "logcat.txt", "line": 41682},
+    "nativeExceptionCause": {"file": "logcat.txt", "line": 41707},
+    "nativeTestHelperFrame": {"file": "logcat.txt", "line": 41752},
+    "miniappLaunchRequest": {"file": "logcat.txt", "line": 57513},
+    "tapAccountLoginActivity": {"file": "logcat.txt", "line": 57538},
+    "harness": "log.log",
+    "finalScreenshot": "test_over.jpg"
+  },
+  "limits": [
+    "This Redmi log is separate from the Honor X60i performance tab in the original screenshot.",
+    "No OOM or project exception found in this captured interval does not prove the game is free of those failures in other runs.",
+    "The archive cannot explain the 1.64GB process-memory peak or the minute-3 FPS drop.",
+    "Multiple DNS failures suggest test-device/network connectivity trouble, but do not identify a specific DNS configuration or prove a TapTap service outage.",
+    "Harness timestamps and device logcat timestamps differ by roughly 8 hours; source timezone configuration is unavailable, so preserve each clock as recorded."
+  ],
+  "actions": [
+    "Rerun this device after confirming the cloud-test network and TapTap account login.",
+    "If the native crash or login block recurs, submit the original archive and prepared summary to TapTap support. No external message has been sent.",
+    "Collect an actual in-game run/performance log from Honor X60i or another completed-performance device for memory/FPS diagnosis."
+  ],
+  "officialReferences": [
+    "https://developer.android.com/reference/java/net/UnknownHostException",
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/performance-test/"
+  ]
+}

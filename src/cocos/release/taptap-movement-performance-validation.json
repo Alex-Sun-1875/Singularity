@@ -1,0 +1,723 @@
+{
+  "verifiedOn": "2026-11-11",
+  "version": "0.3.12",
+  "status": "local-validation",
+  "uploaded": false,
+  "platformVerified": false,
+  "frameRatePolicy": {
+    "userConstraint": "Do not introduce a mobile FPS limit. Preserve the existing frame-rate configuration.",
+    "applicationOverridePresent": false,
+    "baselineObservedFrameRate": 60,
+    "optimizedObservedFrameRate": 60
+  },
+  "changes": [
+    "Load only the equipped native weapon initially; await preparation before equipment commits, retaining the original equipment on failure and allowing retry.",
+    "Cache unchanged weapon visibility and bow morph state; keep all existing animation clocks and gameplay timing.",
+    "Load only the selected hairstyle portrait. Resize four hair runtime atlases and their identical embedded GLB images from 2048 to 1024 with high-resolution originals preserved.",
+    "Give ten static procedural mesh creation sites native Cocos-calculated bounds so off-camera ground/roads/cutouts can participate in frustum culling.",
+    "Batch opaque fog runs and frontier shades without changing discovered cells.",
+    "Avoid zero-displacement controller work and per-frame full enemy-array deep copies. Snapshot/travel still detach persistence data.",
+    "Use one mobile shadow cascade; retain the existing shadow-map resolution, materials and model geometry."
+  ],
+  "method": {
+    "engine": "Cocos Creator 3.8.8",
+    "editorPreview": "Actual Creator Browser Preview, independent from exported release builds. Edit-scene counters are not treated as gameplay measurements.",
+    "comparison": "Cocos Creator 3.8.8 release export; Android-like browser 844x390 DPR3, real update loop and input keys; desktop software GPU cannot estimate phone FPS or thermals.",
+    "limitations": [
+      "Desktop browser Cocos allocations, not TapTap process memory, phone CPU/GPU timing, temperature or battery measurements.",
+      "Main-update timers include diagnostic wrappers and are not whole-frame time or device CPU utilization.",
+      "The sampled contexts share OS/browser shader caches; absolute loading or FPS claims are not inferred.",
+      "The two-minute soak used the same performance implementation before the last shared UI synchronization; final synchronized exports separately passed desktop/mobile gameplay and persistence checks."
+    ]
+  },
+  "memory": {
+    "textureAllocation": {
+      "beforeBytes": 356133780,
+      "afterBytes": 276826832,
+      "savedBytes": 79306948,
+      "beforeMiB": 339.64,
+      "afterMiB": 264.0
+    },
+    "graphicsBuffers": {
+      "beforeBytes": 165450714,
+      "afterBytes": 148422462,
+      "savedBytes": 17028252,
+      "beforeMiB": 157.79,
+      "afterMiB": 141.55
+    },
+    "jsHeapAfterExplicitDiagnosticGc": {
+      "beforeBytes": 113125333,
+      "afterBytes": 86199741,
+      "savedBytes": 26925592,
+      "beforeMiB": 107.88,
+      "afterMiB": 82.21
+    }
+  },
+  "stages": [
+    {
+      "stage": "inn-idle",
+      "baselineFrames": 299,
+      "optimizedFrames": 298,
+      "baselineFrameMedianMs": 16.699999999254942,
+      "optimizedFrameMedianMs": 16.700000000186265,
+      "baselineMainUpdateAverageMs": 0.6893,
+      "optimizedMainUpdateAverageMs": 0.552,
+      "baselineFogMaxMs": 0,
+      "optimizedFogMaxMs": 0,
+      "baselineDrawCalls": 213,
+      "optimizedDrawCalls": 192,
+      "baselineTriangles": 266749,
+      "optimizedTriangles": 249805
+    },
+    {
+      "stage": "inn-walk",
+      "baselineFrames": 601,
+      "optimizedFrames": 601,
+      "baselineFrameMedianMs": 16.699999999254942,
+      "optimizedFrameMedianMs": 16.699999999254942,
+      "baselineMainUpdateAverageMs": 0.6463,
+      "optimizedMainUpdateAverageMs": 0.6676,
+      "baselineFogMaxMs": 1.1000000005587935,
+      "optimizedFogMaxMs": 1.2999999998137355,
+      "baselineDrawCalls": 213,
+      "optimizedDrawCalls": 192,
+      "baselineTriangles": 266855,
+      "optimizedTriangles": 249907
+    },
+    {
+      "stage": "town-idle",
+      "baselineFrames": 301,
+      "optimizedFrames": 301,
+      "baselineFrameMedianMs": 16.700000000186265,
+      "optimizedFrameMedianMs": 16.699999999254942,
+      "baselineMainUpdateAverageMs": 0.7093,
+      "optimizedMainUpdateAverageMs": 0.5106,
+      "baselineFogMaxMs": 0,
+      "optimizedFogMaxMs": 0,
+      "baselineDrawCalls": 250,
+      "optimizedDrawCalls": 220,
+      "baselineTriangles": 341851,
+      "optimizedTriangles": 318663
+    },
+    {
+      "stage": "town-walk",
+      "baselineFrames": 1187,
+      "optimizedFrames": 1187,
+      "baselineFrameMedianMs": 16.699999999254942,
+      "optimizedFrameMedianMs": 16.699999999254942,
+      "baselineMainUpdateAverageMs": 1.1057,
+      "optimizedMainUpdateAverageMs": 0.8466,
+      "baselineFogMaxMs": 9.299999999813735,
+      "optimizedFogMaxMs": 3.099999999627471,
+      "baselineDrawCalls": 247,
+      "optimizedDrawCalls": 216,
+      "baselineTriangles": 341849,
+      "optimizedTriangles": 318389
+    }
+  ],
+  "continuousMovement": {
+    "frameRate": 60,
+    "movedMetres": 191.9840714824517,
+    "samples": [
+      {
+        "seconds": 0.021799999999813736,
+        "heap": 95439327,
+        "device": {
+          "bufferSize": 143418990,
+          "textureSize": 329044164
+        },
+        "enemyCount": 9,
+        "enemyAlive": 9,
+        "playerHp": 315
+      },
+      {
+        "seconds": 10.000299999999815,
+        "heap": 159267572,
+        "device": {
+          "bufferSize": 143449198,
+          "textureSize": 329044164
+        },
+        "enemyCount": 9,
+        "enemyAlive": 9,
+        "playerHp": 315
+      },
+      {
+        "seconds": 20.001199999999255,
+        "heap": 200033593,
+        "device": {
+          "bufferSize": 143449198,
+          "textureSize": 329044164
+        },
+        "enemyCount": 9,
+        "enemyAlive": 9,
+        "playerHp": 315
+      },
+      {
+        "seconds": 30.001199999999255,
+        "heap": 127120224,
+        "device": {
+          "bufferSize": 143449198,
+          "textureSize": 329044164
+        },
+        "enemyCount": 9,
+        "enemyAlive": 9,
+        "playerHp": 315
+      },
+      {
+        "seconds": 40.00169999999925,
+        "heap": 125480595,
+        "device": {
+          "bufferSize": 143449198,
+          "textureSize": 329044164
+        },
+        "enemyCount": 9,
+        "enemyAlive": 9,
+        "playerHp": 315
+      },
+      {
+        "seconds": 50.002599999999624,
+        "heap": 136326186,
+        "device": {
+          "bufferSize": 143449198,
+          "textureSize": 329044164
+        },
+        "enemyCount": 9,
+        "enemyAlive": 9,
+        "playerHp": 315
+      },
+      {
+        "seconds": 60.003199999999254,
+        "heap": 128120313,
+        "device": {
+          "bufferSize": 143449198,
+          "textureSize": 329044164
+        },
+        "enemyCount": 9,
+        "enemyAlive": 9,
+        "playerHp": 315
+      },
+      {
+        "seconds": 70.00339999999944,
+        "heap": 98846628,
+        "device": {
+          "bufferSize": 143449198,
+          "textureSize": 329044164
+        },
+        "enemyCount": 9,
+        "enemyAlive": 9,
+        "playerHp": 315
+      },
+      {
+        "seconds": 80.004,
+        "heap": 113889700,
+        "device": {
+          "bufferSize": 143449198,
+          "textureSize": 329044164
+        },
+        "enemyCount": 9,
+        "enemyAlive": 9,
+        "playerHp": 315
+      },
+      {
+        "seconds": 90.00579999999981,
+        "heap": 138440918,
+        "device": {
+          "bufferSize": 143449198,
+          "textureSize": 329044164
+        },
+        "enemyCount": 9,
+        "enemyAlive": 9,
+        "playerHp": 315
+      },
+      {
+        "seconds": 100.00569999999925,
+        "heap": 124281526,
+        "device": {
+          "bufferSize": 143449198,
+          "textureSize": 329044164
+        },
+        "enemyCount": 9,
+        "enemyAlive": 9,
+        "playerHp": 315
+      },
+      {
+        "seconds": 110.00589999999944,
+        "heap": 109975875,
+        "device": {
+          "bufferSize": 143449198,
+          "textureSize": 329044164
+        },
+        "enemyCount": 9,
+        "enemyAlive": 9,
+        "playerHp": 315
+      },
+      {
+        "seconds": 120.007,
+        "heap": 132172516,
+        "device": {
+          "bufferSize": 143449198,
+          "textureSize": 329044164
+        },
+        "enemyCount": 9,
+        "enemyAlive": 9,
+        "playerHp": 315
+      }
+    ],
+    "failure": "",
+    "postGc": {
+      "heap": 83585552,
+      "device": {
+        "bufferSize": 143449198,
+        "textureSize": 329044164
+      }
+    },
+    "textureStableAfterWarmup": true,
+    "buffersStableAfterWarmup": true
+  },
+  "validation": {
+    "existingRuleTestsPassed": 116,
+    "typescriptChecks": [
+      "npm --prefix src/cocos run check",
+      "npm --prefix src/cocos run check:core"
+    ],
+    "creatorPreview": {
+      "result": {
+        "scope": "Cocos Creator Browser Preview with runtime device counters",
+        "area": "S01-T1",
+        "frameRate": 60,
+        "playerBefore": {
+          "x": 0,
+          "z": -7
+        },
+        "playerAfter": {
+          "x": 5.9909281730651855,
+          "z": -11.992431640625
+        },
+        "device": {
+          "bufferSize": 133954418,
+          "textureSize": 270991660
+        },
+        "failure": ""
+      },
+      "errors": []
+    },
+    "releaseGameplay": {
+      "reports": [
+        {
+          "name": "desktop",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "startupBytes": 58897158,
+          "startupPacks": {
+            "bundles": [
+              "actor-captain",
+              "actor-raphael",
+              "internal",
+              "main",
+              "resources"
+            ],
+            "readyMs": 6500.9000000003725,
+            "note": "Web manifest observation; whole TapTap subpackages may download before assets are loaded."
+          },
+          "inputMovement": 3.215357160442127,
+          "saved": {
+            "x": -1.487378716468811,
+            "z": -9.850653648376465
+          },
+          "restored": {
+            "x": -1.487378716468811,
+            "z": -9.850653648376465
+          },
+          "errors": [],
+          "failed": []
+        },
+        {
+          "name": "mobile-landscape",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "startupBytes": 58897158,
+          "startupPacks": {
+            "bundles": [
+              "actor-captain",
+              "actor-raphael",
+              "internal",
+              "main",
+              "resources"
+            ],
+            "readyMs": 5901.9000000003725,
+            "note": "Web manifest observation; whole TapTap subpackages may download before assets are loaded."
+          },
+          "inputMovement": 2.319275362583942,
+          "saved": {
+            "x": -1.4847608804702759,
+            "z": -8.781719207763672
+          },
+          "restored": {
+            "x": -1.4847608804702759,
+            "z": -8.781719207763672
+          },
+          "errors": [],
+          "failed": []
+        }
+      ]
+    },
+    "physicalCollision": {
+      "from": {
+        "x": 0,
+        "z": -7
+      },
+      "footprint": {
+        "x": 3.9999999999999973,
+        "z": -7
+      },
+      "actual": {
+        "x": 1.2300000190734863,
+        "z": -7
+      },
+      "capsule": {
+        "x": 1.2300000190734863,
+        "z": -7
+      },
+      "physicsEngine": "CapsuleCharacterController",
+      "wallMask": 8,
+      "wallGroup": 2,
+      "controllerMask": 6,
+      "controllerGroup": 8,
+      "errors": []
+    },
+    "equipmentPreparationRetry": {
+      "before": "W07",
+      "afterFailure": {
+        "weapon": "W07",
+        "toast": "装备资源载入失败，请重试"
+      },
+      "afterRetry": "W11",
+      "bounds": {
+        "visibleRendererCandidates": 382,
+        "noBounds": 0
+      },
+      "errors": [],
+      "failureInjection": "GameResources.load callback error; not a physical network failure"
+    },
+    "equipmentVariants": [
+      {
+        "equipped": "W07",
+        "visibleVariants": [
+          "WeaponVariant:design-w07"
+        ]
+      },
+      {
+        "equipped": "W11",
+        "visibleVariants": [
+          "WeaponVariant:design-w11"
+        ]
+      },
+      {
+        "equipped": "W01",
+        "visibleVariants": [
+          "WeaponVariant:design-w01"
+        ]
+      }
+    ],
+    "baselineMissingProceduralBounds": {
+      "total": 382,
+      "noBounds": 26,
+      "examples": [
+        {
+          "name": "Ground",
+          "bounds": false,
+          "meshMin": false
+        },
+        {
+          "name": "Road",
+          "bounds": false,
+          "meshMin": false
+        },
+        {
+          "name": "Road",
+          "bounds": false,
+          "meshMin": false
+        },
+        {
+          "name": "Road",
+          "bounds": false,
+          "meshMin": false
+        },
+        {
+          "name": "Road",
+          "bounds": false,
+          "meshMin": false
+        },
+        {
+          "name": "Road",
+          "bounds": false,
+          "meshMin": false
+        },
+        {
+          "name": "Road",
+          "bounds": false,
+          "meshMin": false
+        },
+        {
+          "name": "Road",
+          "bounds": false,
+          "meshMin": false
+        },
+        {
+          "name": "Road",
+          "bounds": false,
+          "meshMin": false
+        },
+        {
+          "name": "Road",
+          "bounds": false,
+          "meshMin": false
+        },
+        {
+          "name": "Road",
+          "bounds": false,
+          "meshMin": false
+        },
+        {
+          "name": "Road",
+          "bounds": false,
+          "meshMin": false
+        }
+      ],
+      "drawCalls": 105
+    },
+    "errorsBefore": [],
+    "errorsAfter": [],
+    "ruleLog": "temp/movement-final-rules.log",
+    "finalExistingRuleTestsPassed": 116,
+    "workingTreeConfigurationPreparedWithoutVersionIncrement": true
+  },
+  "artwork": {
+    "review": "source-art/performance/mobile-hair-textures-v1/review.json",
+    "comparison": "test-results/movement-hair-review.jpg",
+    "preservedNonImageBufferViews": 2655,
+    "sourceGeometrySkeletonUvAnimationChanged": false,
+    "verifiedNativeTextureReuseCount": 32
+  },
+  "sourceIntegrity": {
+    "workingProject": "F:\\workspace\\Singularity\\src\\cocos",
+    "creatorBuildProject": "C:\\Users\\Alexa\\AppData\\Local\\Temp\\Singularity-movement-perf\\src\\cocos",
+    "reasonForIsolatedBuild": "Creator could not write F-drive engine.json; reuse an isolated C-drive mirror without changing the original project settings.",
+    "frozenScriptCount": 154,
+    "frozenSha256": {
+      "assets/scripts/app/BuildInfo.ts": "84e36a12bdfdfe9bbd6504c63dd6ce781555b8bd5c559bbed3cdf19d5e26656e",
+      "assets/scripts/app/ChapterGame.ts": "454e45e95b1c5a7a7beda2d0317d29e7379d01fd5c9891551a7975c906e33a25",
+      "assets/scripts/app/Hud.ts": "610959bdce123f29b4abcaa1cb140935a21233eb562692d677e8b52f4aa85569",
+      "assets/scripts/app/Menus.ts": "f4d233c81f84a0bfb15cca5b96a1eed2c7705ea02500832a1501a3c63c44acd3",
+      "assets/scripts/core/Contracts.ts": "8e6c4b9878a16f5c6669a075677f5e23f83503bfeaa7d4ca1057eb49945ae86d",
+      "assets/scripts/core/GameSession.ts": "73d58a8826209f8a01d9c28044f2ef7d7e8e2a0cefb47948e9d3f24edbf669df",
+      "assets/scripts/platform/PlatformServices.ts": "c4156bf4a1645d4e4b0ff763e500de8022c9a0d7b67005581339c3795ecbe0a9",
+      "assets/scripts/platform/TapAuthConfig.ts": "986dc64d71debf9546e6cef86ab8c5b7211514cfaae913374cd6c6ee984e6753",
+      "assets/scripts/platform/TapLogin.ts": "31b5df33159d4542d0e625daa611cb89d39cc59fc8c3fa0c92e3337ac306c5a4",
+      "assets/scripts/platform/TapUpdates.ts": "b4c337e02a2474f8d2e293da5799cd67b74a5e55f933054b58ba6cb81c3fd2b0",
+      "assets/scripts/shared/assets/AssetBundles.ts": "79b14ddc1a1726b406a128cc1849bc0a76f27d2d9432804d69718cbfa749af9d",
+      "assets/scripts/shared/assets/GameResources.ts": "d4d4b9ba19d826883725292fc4428adfa12f8f34c26d19d68d71a66b773255a6",
+      "assets/scripts/shared/assets/NativeTextureReuse.ts": "3d60e7467d4002252ddd135cad983e63c44c2156ac91beef21b8d6a9ee52ff26",
+      "assets/scripts/shared/assets/ResourcePacks.ts": "453b4893af6aefc9132f9314264c216016c3ab29a04ca955765d30247cbcb7ab",
+      "assets/scripts/shared/assets/VfxAssets.ts": "33af334e7ffc98131890feccd0c553d7607c49a42f2bc970606c6136c47b1713",
+      "assets/scripts/shared/i18n/Localization.ts": "3b78e207e0925d0168fb3c8e407b61ce24ee65803f7f9120abf97a3ebff75c36",
+      "assets/scripts/shared/input/TouchOwnership.ts": "0b243eada09c252a1e261289a5eb8e7ae9cb0d40a7ce17d59bbf34d933efb29f",
+      "assets/scripts/shared/ui/AtlasUi.ts": "459dbd2ffee684436be0bbd1baec6877b1cca6917dfdb4331513fbedc7367f9c",
+      "assets/scripts/shared/ui/DoubleGoldFrame.ts": "7dfc570d9eb00e7c2ea3f248a94ad33dd6cb69ae33a93056bb42fe98cd4a0f8d",
+      "assets/scripts/shared/ui/FeedbackPalette.ts": "8049fdf2ff63d8494368493db0e9d498dae467bb9d62727094277f79cde8bec2",
+      "assets/scripts/shared/ui/FeedbackView.ts": "621a079441bfe63e7f73f141a3180f5cff7d5f8eaa936f5d9b3740b793249fda",
+      "assets/scripts/shared/ui/GoldMenuActions.ts": "265a5265832bda543b4a77cff8ddc7598444c93230af63942f1d430d2b1c9be1",
+      "assets/scripts/shared/ui/GoldMenuButton.ts": "e7a619c17795ebea09631a6cbd697b4b052617e6ea8895736e8baa9c73d5dcbe",
+      "assets/scripts/shared/ui/MenuPanel.ts": "9cc56d79f59e8dc0f32496478594c9255bcb7c25e7dd1ac6fec84550fddb2a54",
+      "assets/scripts/shared/ui/RpgFont.ts": "b435cb5572f676189f8a7d8d3345ca614950264b9327fa5efc834f9841f30684",
+      "assets/scripts/shared/ui/RpgPanel.ts": "473c96bea2a2f384a1a33f495b6eced7e656059c65f06db4d6ea4b3201c14d07",
+      "assets/scripts/shared/ui/UiChrome.ts": "c721b3d00c6a2a1c6ebf58848c315eb576295e831257d994d61d50c298b700dc",
+      "assets/scripts/shared/ui/UiSkin.ts": "ae97eb083204df5292568c0e8d1cc91b7c0332de2372a770244ba81a970a3b0b",
+      "assets/scripts/shared/ui/UiTheme.ts": "72a12eefdbcd52baee0c3042bd5926fbd9b43a55e09e0220ac82adbc8014a4d5",
+      "assets/scripts/features/world/data/CampaignGeography.ts": "8b7dfb85e7f1e0f1b537c572f87fdf6709e41b3672c8e5152f4f477bee4015cc",
+      "assets/scripts/features/world/data/CampaignTerrain.ts": "6a128679e30ff90a45bf68c3ed2557446f54af475f71d7b699cd9e7e06d5d4e5",
+      "assets/scripts/features/world/data/CampaignWorld.ts": "ba27e9caebaa93b9595708457c7ed8d5a108dc56f434f119d8018f6620ab23bb",
+      "assets/scripts/features/world/data/MapArt.ts": "7eb5cd46cc3b23926c1daf3d2ae9f92846bc324ac7a330fdac040ded8bdfe270",
+      "assets/scripts/features/world/data/MonsterEcology.ts": "37d22339a5012c3fd5c9ae3a8036d12d8f52e91ed9ab12f1c5caf2afa09a3ecb",
+      "assets/scripts/features/world/data/SceneDressing.ts": "c5845ffa41ac055116aaa1adc517b78ee7b6746ef687c8d020eafee5eb446951",
+      "assets/scripts/features/world/data/WorldData.ts": "128ab00dc58a626e29fa160fa8244b84f2dbda4e0c7c9729c87ef81294c7cfd8",
+      "assets/scripts/features/world/runtime/EnvironmentAssets.ts": "2160ea7da221c7e4a5fad2955927988e23586f8508bc0b558dfe37c849fcad55",
+      "assets/scripts/features/world/runtime/EnvironmentPresentation.ts": "335b8acb309b95b70292b868d546e3cd4b3d1f4806738bd6994b4f2e3896bd35",
+      "assets/scripts/features/world/runtime/FlatWorldLayers.ts": "a9503ce020611f14c805ae4822ffde2f5ac173b7379b08cfcd95531cad42d1ff",
+      "assets/scripts/features/world/runtime/FlatWorldPresentation.ts": "6981068ee294b19b42582d944ca627e66321f48643d5cac14999be7d91fdf631",
+      "assets/scripts/features/world/runtime/PaintedTerrainDetails.ts": "3301eccacee5fa6877dde8b4e69439f61731413661bfe6e90d6623fef3bb5b7a",
+      "assets/scripts/features/world/runtime/SceneBuilder.ts": "8f292b70c8b1e67eb54dcbf33f04e0889cae4d95996f902415228c5c15076cc8",
+      "assets/scripts/features/world/runtime/SceneInteraction.ts": "6e4789fd40f78079635294945a2c1a4eaaca78845ef6fccd02ba0a72c2e5a5fa",
+      "assets/scripts/features/world/runtime/SurfaceMaterials.ts": "6606ef38e8a03af161d336c3bdb41234591a800d7e5451377db6c5c46fbbee87",
+      "assets/scripts/features/world/runtime/Terrain.ts": "82710d4b6e0fb4ff7eee80481b442fe6e7a5ab6470bb6c2aa57e5f54370f3f7d",
+      "assets/scripts/features/progression/common/CombatLoadouts.ts": "9a4f3bc58eeb9ad2938665c4bfc77400ff975a104bab0a66de5fc2172c25d97d",
+      "assets/scripts/features/progression/common/Progression.ts": "2b4bfd1f4421d676532176655256325e9ca6a0a723634b42f524c8109604c143",
+      "assets/scripts/features/progression/common/SkillChecks.ts": "30ecca2872447be2b4f91710818e662718101cc28e2491f459071bf4c164e90b",
+      "assets/scripts/features/progression/common/SkillUpgrades.ts": "959080205690856c9f6b188e5cb3ed5bf1d1543e29d8ae591b179b044086bfd3",
+      "assets/scripts/features/progression/data/SkillChecks.ts": "81d45e944efe2952b2ee096c9ca9ba96a4cbc66c629e5cf6b7715bf6013a2173",
+      "assets/scripts/features/progression/runtime/CombatPanel.ts": "02de0490fe118f0b36a5ebc047c412b305d47d38506c70aac15cf4f2059fff0e",
+      "assets/scripts/features/progression/runtime/SkillBook.ts": "48d26135595a2175f2dee9db09bff0fb143e45989e32b4095845b0295ec4d4b8",
+      "assets/scripts/features/portals/data/PortalRiftArt.ts": "1e2a43cfd8b007da673ebe336ee4b165690d59fa20758bf42a6099d6635f81f5",
+      "assets/scripts/features/portals/runtime/PortalHud.ts": "fa84f9429735a9b79500fefde74f0cfc4a42c96bc67abc4cd4eaf760572f0e4f",
+      "assets/scripts/features/portals/runtime/PortalPlacement.ts": "e8ece9b02d293eb0aec376b51c5af6a0c871da09ebddd591afbb76e530292135",
+      "assets/scripts/features/portals/runtime/PortalPresentation.ts": "640579a508fcdfa0ea1fd6e17567571b4e9bd08b1e61e0d89b010a14273af550",
+      "assets/scripts/features/portals/runtime/PortalStoneMesh.ts": "5ead66c6506b7261d599a987004d4ea7839876f4d5a240817f6ec2ca0c8f509e",
+      "assets/scripts/features/persistence/common/CheckPersistence.ts": "99529b0671be7437d2cda5c914b11c04977f039f5dc016466cb477e225472b3c",
+      "assets/scripts/features/persistence/common/CombatPersistence.ts": "760f4b3a79e0f1f3e4cc9ed1b384bb9a80d4f5f2591322af84fbc44c9176ba2d",
+      "assets/scripts/features/persistence/common/DevelopmentSaveReset.ts": "8c94e92f50c55fc3d9f565c020284c54161a8af3b6613cda7b9ee26629a7ed0b",
+      "assets/scripts/features/persistence/common/SaveStore.ts": "d64b40f12394cb70d05e0aea7b155fa064439a08be0b74c1b841bf647c6b4dfc",
+      "assets/scripts/features/navigation/runtime/CheckpointCompass.ts": "99bef730647db90ba5af649b0f2f180ad8908d51e0ff39e5f8c420c41d31b00b",
+      "assets/scripts/features/navigation/runtime/LocalCartography.ts": "032e1255f97940d1e7cc059d2e8e3961725d572a47ed7703382106690183b836",
+      "assets/scripts/features/navigation/runtime/LocalMapCapture.ts": "bfb61d25d578ec8e0700751740348622184d2b965ec119af07e97dfaf0dc706e",
+      "assets/scripts/features/navigation/runtime/MapPanel.ts": "92ec3cdbb0cea833c994d45a99d384ccdc9753f2ed318ca5db3c5faf8ea718d8",
+      "assets/scripts/features/navigation/runtime/MiniMap.ts": "bd80116d6074fb51a2a896a462b29d456e5bd69f2d55658594cb3e8a4fe21def",
+      "assets/scripts/features/navigation/runtime/Navigation.ts": "b212e3d36d1c6a36a252baa1305529ea61838d60348f26f6a8e06f9bbbfdbf77",
+      "assets/scripts/features/navigation/runtime/RangedCamera.ts": "85838f494350b85e03aaac5601f7413bdf142c30791f34546575ec40724ee76a",
+      "assets/scripts/features/loading/runtime/LoadingScreen.ts": "c67df4d2d7ec51d710abdce1051d25473743978fdbf8734400b9a27afc2696db",
+      "assets/scripts/features/journey/common/ChapterJourney.ts": "c094614921558d0f37f6f6e481f7e81db130c4bedab08d4dc30b320ae4d19946",
+      "assets/scripts/features/journey/common/JourneyGuide.ts": "98015747ec1e08b57261f44a65452d5020ea9075261ff3a434a20ae881df7fa1",
+      "assets/scripts/features/journey/data/ChapterJourney.ts": "5fd458094f7f7657b39bf8f36706da881593e7f10808fd9e9ddc3221c7311884",
+      "assets/scripts/features/journey/runtime/JourneyPanel.ts": "f53ba0f7f4e9390fd25a7787e1bc0097b4cfcd24c45319a9e338c9389ad486f3",
+      "assets/scripts/features/journey/runtime/JourneyStartScreen.ts": "0d6691a618608c837a3b047d56b5112876acbd4b9d31a19ac487169bdbf69638",
+      "assets/scripts/features/equipment/common/EquipmentChange.ts": "04194eed1b05d3f3622da4ce2c291445b6d9ef15d557fc4b6ef42d81fe1a0173",
+      "assets/scripts/features/equipment/common/EquipmentDice.ts": "54837064c8c3a670d70e516f0162cb2688d5af5a5812f550b4636ffcf082c15e",
+      "assets/scripts/features/equipment/common/GrowingEquipmentLoot.ts": "5a05d1f50811b04d8983af7113ba1eca41496960335947188cfe5e0050621cc3",
+      "assets/scripts/features/equipment/data/ChapterWeapons.ts": "5e0d63a5e49be0bb567e2299e155899c6aacfd9c9e4939e6e11e1cd41fed724c",
+      "assets/scripts/features/equipment/data/Equipment.ts": "bb096ece7dc7eecfe6fc9f647a00ab0f3c923509dc55c246d656fc03353c2f40",
+      "assets/scripts/features/equipment/data/EquipmentCatalog.ts": "3003bb7e8abffca01645a2085affcc8a7942ab40b72c753309c4223906fa48b8",
+      "assets/scripts/features/equipment/data/GrowingEquipment.ts": "e271e8067e2d88e48d81670c1c3c07bf201423dee112f9be38ca17254a5798f9",
+      "assets/scripts/features/equipment/locales/en.ts": "13ed3eb7f7873c72c2e6e2b6df40d2c5bdc26bc4f76a6ca030a057ff681da334",
+      "assets/scripts/features/equipment/locales/index.ts": "0ff61baa3635edde3513273b9e5ed281dc7fed4477717ff68a63ba52e03bf770",
+      "assets/scripts/features/equipment/locales/zh-CN.ts": "e811505892ccbe87d730a71b48f41c5600eac8f5a9ddae4ee09e53dad5aa9e21",
+      "assets/scripts/features/equipment/runtime/CharacterPanel.ts": "d641b1c7ec1a70eaa130737aa1c0abe751115249ee3ba0c4ebfecd93d7372566",
+      "assets/scripts/features/equipment/runtime/EquipmentArt.ts": "18f165b11ac0a50a08763a1fbc19894dfef0c957b5f5178ba60b9ed48b6064d2",
+      "assets/scripts/features/equipment/runtime/EquipmentGallery.ts": "e2e1a6f883c1a4c5016274b32520c5c6b4b102cbe28a4c03517be05b902bd859",
+      "assets/scripts/features/equipment/runtime/EquipmentIconFrame.ts": "ad54a629b78d281af1c84f26ea936bb33a4982a59c44a58b2ec93dd74d4d379b",
+      "assets/scripts/features/equipment/runtime/EquipmentPanels.ts": "4755a186f7e2cea5f286e6b030188816d394512cb4c60f8fe3233da87a503279",
+      "assets/scripts/features/equipment/runtime/EquipmentPickupNotice.ts": "e59ae1c774014c6e94d30a71d52a4e4eb8cf1ee90691ca8ea02ba02efdced9dd",
+      "assets/scripts/features/equipment/runtime/EquipmentPresentation.ts": "77cca697bfbd8fbe8356b86015fa24624c0e120c67013e6306afc67321e634b3",
+      "assets/scripts/features/equipment/runtime/GroundLootPresentation.ts": "91099e86331294d68541eaf94272458022396d164cf4eceb93efeace02e78562",
+      "assets/scripts/features/dice/runtime/DicePanel.ts": "49e32abe4e731a3e31d8ef7a2ffb5d301dbc0f7639efdb9456ce319cc33608cd",
+      "assets/scripts/features/debug/runtime/SkillEffectDebug.ts": "661ef27ddb103fb49511cb1b3f067dc19c9ac662240e4df1843664c55c925f1b",
+      "assets/scripts/features/crafting/common/EquipmentForging.ts": "ea8fc80411d8056c4536f9a7da3313cdd83d260ec691477f9179c47f8a77ac83",
+      "assets/scripts/features/crafting/data/EquipmentForging.ts": "9bd4d9117cbe581dba9898cba3d85aabdc40e840fe5f5f3e6109ce31ba5c506b",
+      "assets/scripts/features/crafting/runtime/ForgeWorkshop.ts": "c942e953ddef0be8e61ca0050717d40b6397a7dbf36fbaf524690b9b86976050",
+      "assets/scripts/features/crafting/runtime/ForgingPanel.ts": "bc049a619f79928fa08a4dd244080a4f9298ee9b87f7ad96fcc2f6d6cab7018c",
+      "assets/scripts/features/combat/common/CombatActionTiming.ts": "dfc4e86db813162654346ddfa9668d8555a65b52558fb1650f440752f411061e",
+      "assets/scripts/features/combat/common/EnemyCombat.ts": "a5c844d42c6aa1df7474c916d5fbfabcbd11960fc02753b87592e0c188f24026",
+      "assets/scripts/features/combat/common/EnemyHitResponse.ts": "6cd3c7cefd340be1b34906889f055c6af0deaee4c4ca89b152bf8d9109ea2ed1",
+      "assets/scripts/features/combat/common/GrowingEquipmentCombat.ts": "8945da4b637028825cbaed5e59c6b0c6b1644f852e3f79bc750e700211a0dd61",
+      "assets/scripts/features/combat/common/MeleeCombo.ts": "401b9461a84a0d5215a3d2b898e99b42662688216f61fda5c6f4fd08facb7daf",
+      "assets/scripts/features/combat/common/PureCombat.ts": "8e9b786b055906f0a1c9d51e37307f7e1422e66bee570e0fbb14c88186971fc1",
+      "assets/scripts/features/combat/data/CombatImpact.ts": "162106f546f0f80406ee7559dc64246da26d35be8f4b5806d99ea071b97794a9",
+      "assets/scripts/features/combat/data/EnemyCombat.ts": "da6640e5f1aec4938ac920deb0fb72826a46b2052f42ef558084f56311e67698",
+      "assets/scripts/features/combat/data/PureSkills.ts": "16697035a1154904b85561f57279963c5f77b72c0804bde1d3daa0385fd2399c",
+      "assets/scripts/features/combat/data/SkillVfxGeometry.ts": "2ea932de03256a29ed80094424cb15c943fb31733181879e077149514d32f625",
+      "assets/scripts/features/combat/runtime/BossHud.ts": "b8ff7f1efc6b083330902516360279774ddda817de5cbff2dd1e0105c040f8a3",
+      "assets/scripts/features/combat/runtime/CombatImpactFeedback.ts": "e58ebd1f5f758651db75e495c2c0ad6d947f3c77f20e609c16e5923fb7ff4f3a",
+      "assets/scripts/features/combat/runtime/CombatSkillIcons.ts": "b89a6a0d337eafacf45a0b818a90e44f0c11d836cedf902bf60ef7da01bd8647",
+      "assets/scripts/features/combat/runtime/Effects.ts": "0ecce1e8f72886cfb91a4d02b0c613bed5f8e3b408e54372d91120d49ccfac21",
+      "assets/scripts/features/combat/runtime/EnemyCombatFeedback.ts": "56b44a25b28a3070dc5925467e0a340a762cc85058f8dea61646d28bfb7bebd0",
+      "assets/scripts/features/combat/runtime/MeleeSkillEffects.ts": "f0e1e202ae73358a1470a5cbe2175a023657dabd4271b6006883c2efcb8e091b",
+      "assets/scripts/features/combat/runtime/NativeEnemyVfx.ts": "72f02d9e203f242b735974a131c3609f26ba735f3f60bf2c4fd7465fb3bd3240",
+      "assets/scripts/features/combat/runtime/NativeSkillVfx.ts": "a4a5a523e05c52c33b9ef1994521778d036027e4eafee3b70626da0c23dadfe8",
+      "assets/scripts/features/combat/runtime/SkillEnergyStrokes.ts": "841ddbaff3547ceb1908c0fed026a70e9358d41292a2ff25ac2200a70a2f3059",
+      "assets/scripts/features/combat/runtime/SkillFireSprites.ts": "1d239e392617b54d30e31740e90b536b4c3532b1343c140f8b1794ca4f3dc4c7",
+      "assets/scripts/features/combat/runtime/ThunderArcField.ts": "8e38534eee1cbed69603d0975d776903cd0e337d27075d1a469e2bc4feb1ee37",
+      "assets/scripts/features/combat/runtime/ThunderContactLights.ts": "469b07362f1be49981abfc6d94e0a2dca173edcfebab9ad9e165caaa0d807bdb",
+      "assets/scripts/features/combat/runtime/ThunderGroundAura.ts": "c79eadf7fd9e9f9ecabdfbf048020a2e8486c653e61e0017f5e016cf9c2c5d9a",
+      "assets/scripts/features/cinematics/common/CampaignDirector.ts": "1b5e3eaa7443f651f60ca59611c9f277cce32e7f149f4ea27f4ba1d5b424ac90",
+      "assets/scripts/features/cinematics/common/CinematicLayout.ts": "b870f39509b9667db7dc7fbde69303c11b12f207673f2453b508198cee00374b",
+      "assets/scripts/features/cinematics/common/CinematicTypes.ts": "6352f4b834da92473736ac8992394674542db3cb6c5c387841a2b7f79ebad0de",
+      "assets/scripts/features/cinematics/data/CampaignScenes.ts": "fa473ba6b774bb1b0fcb8bca30b2f8cb42639cee9a9493e5da26b3fe969c66ad",
+      "assets/scripts/features/cinematics/data/chapter-1.ts": "a7d0344bc77ff59462cb2ed98ea0dd132f8dfee44e9065d1cac8d693faaa0443",
+      "assets/scripts/features/cinematics/data/chapter-2.ts": "884af9faa68f3ef63db69ce2fc321b8c787edd81af310a9f5bf233aa4655410e",
+      "assets/scripts/features/cinematics/locales/en.ts": "5c31e32b43e6d361c8c21cfab6ab13cf1e0ee926619b0ccdbe4d4bc6e1e2130c",
+      "assets/scripts/features/cinematics/locales/index.ts": "b1ee1525be8b949cf236db7b2bdd90643738fd94b464bc902d298042c02bb6f1",
+      "assets/scripts/features/cinematics/locales/zh-CN.ts": "c190440f270e6834deeb8bcba80c28dca5158b9155ae81eaa9d90ed84f1172a7",
+      "assets/scripts/features/cinematics/runtime/CampaignPresentation.ts": "737d2a864709f20817512013fccbae22f55adb0ae4c16a78a9006d88647bb877",
+      "assets/scripts/features/cinematics/runtime/CinematicCamera.ts": "b868759f0354037615f44e1191b62c05cb1eebcee4805697297dfdb6f82a79ae",
+      "assets/scripts/features/cinematics/runtime/CinematicCues.ts": "87767d7e4231a6b30b45da587d963c4f71cb90e5715014e85b5d38e71568416b",
+      "assets/scripts/features/cinematics/runtime/CinematicSubtitles.ts": "dab8298b166b73a8fc08eb02450a7a5679ce5469fdc8394aee36f944c25e57ea",
+      "assets/scripts/features/campaign/common/CampaignLoot.ts": "f2fc9a6b361495e336827166f8ddfbe3911403fe4f8610cc68a11f5a052bd78a",
+      "assets/scripts/features/campaign/data/Campaign.ts": "d00b4846ef64121ff77be72b273b6f5b6d31543b1ea8df8a37caf1772358ced7",
+      "assets/scripts/features/campaign/data/CampaignBattles.ts": "cb6cdc96c500a27b1fb78d643194d49e74d5f68d335505175bff5d072694ea1f",
+      "assets/scripts/features/campaign/data/CampaignEvents.ts": "182f8f42a34d04e6f702f92fca64c95f361f583c01fa44c697314a651dcf7563",
+      "assets/scripts/features/campaign/data/CampaignLoot.ts": "8e88ea9d54e25fcf3737216b668bd4779cb07d88f026a47a331acc5a3545ac7b",
+      "assets/scripts/features/automation/common/Automation.ts": "f7bc583cb52a86bab6d15d54c9d6a8d3db10c03286b2389c7066efb252695a1b",
+      "assets/scripts/features/automation/runtime/AutomationHud.ts": "a54ae99f572229648e47f09503bd1110c7c50ee5cb9a0dff1b926ee9f62dfbff",
+      "assets/scripts/features/audio/runtime/BackgroundMusic.ts": "042008f009cab068e3852092d5f835e17828797208fe9fd22bccbc3b3cc56f5f",
+      "assets/scripts/features/actors/runtime/Actors.ts": "557a1675910d6a4e6c6a092f3e64caf25f330bab8b838a01f04918e5ed087557",
+      "assets/scripts/features/actors/runtime/CharacterPreview.ts": "725634507c7816f1277395433fa1a247b45d00dc025b3b001e54dbe4c5aa0f29",
+      "assets/scripts/features/actors/runtime/FlatActors.ts": "e6f863ece4e05f64dd9b3e53c907a9530e73ef152136df6e004d8afe8a7ed601",
+      "assets/scripts/features/actors/runtime/FlatCharacterPreview.ts": "6442eba2614767dee4e44946eada7b1abb221955cec99b3465dcaba583ad507e",
+      "assets/scripts/features/actors/runtime/Hairstyles.ts": "f250900715f059a17f71132823981929a7f2734e5ecbb90d7814b155833db3c1",
+      "assets/scripts/features/actors/runtime/MeleeBladeSurfaces.ts": "278bb337095d2d32c2d94ebad653e65012bd7e3cd553dc95ab185b331e9ec8c1",
+      "assets/scripts/features/actors/runtime/MeshTangents.ts": "3d4792fc502db7e8b675569681cd09213b3dc0f70db8623f5606a03a34b0a0f1",
+      "assets/scripts/features/actors/runtime/NativeActorMaterials.ts": "3e485b582ec1a34580547dd21690152e7423e155a27d51827b2aae8ccd6c5530",
+      "assets/scripts/features/actors/runtime/Player3DActors.ts": "a3fe060bdf939382832b43a3fac7d8fad7b1d591c1ee8019afd1c4607989f288",
+      "assets/scripts/features/actors/runtime/PlayerActionPresentation.ts": "dbbf24079cff3c06632c551dcb9df2b98659051f678707ee707d12619323f1ff",
+      "assets/scripts/features/actors/runtime/PlayerHandAnchors.ts": "86091380ca8c52fb228cef430f83bd003be3026d9253cb40ffb3c7302c94060d",
+      "assets/scripts/features/actors/runtime/WeaponMaterials.ts": "3cb3d61dba56b3dc946e8c8ee1ec61e0bee51d77ecc6d89ffa338bd2943a6968"
+    },
+    "currentWorkspaceDifferencesAfterFreeze": [
+      "assets/scripts/app/BuildInfo.ts",
+      "assets/scripts/app/Hud.ts",
+      "assets/scripts/app/Menus.ts",
+      "assets/scripts/shared/ui/MenuPanel.ts",
+      "assets/scripts/shared/ui/RpgPanel.ts",
+      "assets/scripts/shared/ui/UiChrome.ts",
+      "assets/scripts/features/equipment/runtime/EquipmentPanels.ts",
+      "assets/scripts/features/crafting/runtime/ForgeWorkshop.ts"
+    ],
+    "criticalPerformanceSourcesMatch": true,
+    "workingTreeVersionAtFinalCheck": "0.3.13",
+    "note": "The performance package is the tested 0.3.12 frozen snapshot. Parallel UI/version work continued in the shared working tree; it is not advertised as a package of all later UI changes."
+  },
+  "package": {
+    "version": "0.3.12",
+    "path": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-movement-optimized\\SwordAndFire_0.3.12_TapTap_guest-test_20261111T012159Z\\SwordAndFire_0.3.12_TapTap_guest-test_20261111T012159Z.zip",
+    "zipBytes": 211677662,
+    "sha256": "724e17c363e1697bca32bc65b3ee940436d6e5ca9c28b72fde1abc93695ba8f8",
+    "buildMode": "guest-test",
+    "thirdPartyNoticesIncluded": true,
+    "zipCrcPassed": true,
+    "singleSettingsManifest": true,
+    "report": "artifacts/taptap-movement-optimized/report.json",
+    "initialPayload": {
+      "files": 27,
+      "rawBytes": 5241778,
+      "zipBytes": 1271495,
+      "zipMiB": 1.21,
+      "budgetMiB": 20.0,
+      "withinLocalBudget": true,
+      "sha256": "013263821cd0780ddcc719dc99b7e8b80e2875fb91f83a9a46947c0a285044b3",
+      "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+    },
+    "openingDependencies": {
+      "observedIn": "Web release preview using the same resource profile",
+      "bundles": [
+        "__ccWasmAssetSubpkg__",
+        "__ccWasmChunkSubpkg__",
+        "actor-captain",
+        "actor-raphael",
+        "resources"
+      ],
+      "rawBytesIncludingInitialPayload": 33821602,
+      "deflatedContentBytesIncludingInitialZip": 23510001,
+      "webColdStartTransferBytes": [
+        58897158,
+        58897158
+      ],
+      "note": "Whole declared packs plus both generated WASM packs; not a measurement of TapTap network traffic or loading time."
+    }
+  },
+  "pending": [
+    "No Android device is attached via ADB; actual TapTap cold/warm start, lifecycle/resource retry and 10-minute temperature, process-memory and FPS validation remain pending.",
+    "Account-mode login service remains pending; this package is an explicit local-save guest test."
+  ]
+}

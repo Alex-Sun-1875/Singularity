@@ -1,0 +1,1698 @@
+{
+  "status": "candidate-not-installed",
+  "pipeline": "tools/model-pipeline/cocos_native_props.py",
+  "blender": "4.5.15 LTS",
+  "license": "CC0-1.0",
+  "scope": "Official game-ready meshes; adapters only. Source origin, topology, UVs, normals and Bow Draw target retained.",
+  "fbxAxes": {
+    "forward": "+Z",
+    "up": "+Y",
+    "bakeSpaceTransform": true
+  },
+  "recommendedEquipmentResources": {
+    "W01": "sword",
+    "W02": "sword",
+    "L01": "greatsword",
+    "W07": "bow",
+    "W08": "bow",
+    "L02": "bow",
+    "W11": "staff"
+  },
+  "equipmentNote": "W01/W02 share official sword mesh; W07/W08/L02 share official drawn bow mesh. Distinct rarity is game metadata. No invented official variants/palettes.",
+  "recommendedProfileWeapons": {
+    "mira": "dagger",
+    "lorn": "shield",
+    "raider-shield": "shield",
+    "captain": "greatsword",
+    "nightqi": "bow",
+    "evelyn": null,
+    "kael": null
+  },
+  "profileLimitations": "Captain uses the official greatsword until a licensed matching hammer is available. Evelyn/Kael carry no weapon; their lantern/maps are not approximated by swords.",
+  "cocosMorphSource": {
+    "meshRenderer": "C:\\ProgramData\\cocos\\editors\\Creator\\3.8.8\\resources\\resources\\3d\\engine\\cocos\\3d\\framework\\mesh-renderer.ts",
+    "interface": "C:\\ProgramData\\cocos\\editors\\Creator\\3.8.8\\resources\\resources\\3d\\engine\\cocos\\3d\\assets\\morph.ts",
+    "method": "setWeight(weight: number, subMeshIndex: number, shapeIndex: number): void",
+    "methodLines": [
+      716,
+      730
+    ],
+    "defaultEnableMorph": true,
+    "note": "Setting renderer.mesh resets weights. Enable morph then setWeight after assignment. Works on native MeshRenderer; SkinnedMeshRenderer inherits it."
+  },
+  "props": {
+    "sword": {
+      "asset": "sword_1handed",
+      "creator": "Kay Lousberg / KayKit",
+      "license": "CC0-1.0",
+      "officialPackage": "KayKit Adventurers Free 2.0",
+      "officialURL": "https://kaylousberg.itch.io/kaykit-adventurers",
+      "sourceFiles": [
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/sword_1handed.gltf",
+          "sha256": "2a6074d46c3e337f84f0295d0ea862b116fec7d816db8d027d75a464311228b6",
+          "archived": "src/.tmp/native-production/source/props/original/sword_1handed.gltf"
+        },
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/sword_1handed.bin",
+          "sha256": "c8acdc21adf19257e66b78e86d37855474a0a9fda796c39b39d6d08a5ca34bd5",
+          "archived": "src/.tmp/native-production/source/props/original/sword_1handed.bin"
+        },
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/knight_texture.png",
+          "sha256": "028db4d1cd8b3471e6ba21686515abd4e36ae582f8b314b71ad2ab1fb5453b12",
+          "archived": "src/.tmp/native-production/source/props/original/knight_texture.png"
+        }
+      ],
+      "fbx": "src/.tmp/native-production/props/sword.fbx",
+      "suggestedResource": "actors/props/sword/sword",
+      "meshObject": "KayKit_sword",
+      "authorGripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "exportGripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "authorLongAxis": "+Y",
+      "cocosLongAxis": "+Y",
+      "units": "metres",
+      "lengthMeters": 1.05,
+      "unitScale": 0.5914621521271897,
+      "authorToExport": [
+        [
+          0.5914621353149414,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5914621353149414,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.5914621353149414,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "exportToAuthor": [
+        [
+          1.690725326538086,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          1.690725326538086,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.0,
+          1.690725326538086,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+        ]
+      ],
+      "authorToExportRotation": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "socketPropRotation": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+        ]
+      ],
+      "socketPropRotationNote": "For an animated helper in the author handslot frame apply rotation inverse only. FBX already contains the intended metre size; do not cancel unitScale.",
+      "attachmentHand": "hand_r",
+      "topology": {
+        "sourceTriangles": 300,
+        "sourceVertices": 358,
+        "sourceUVLoops": 900,
+        "geometryOperation": "uniform scale + rigid rotation only; no remesh, simplification, modifiers or UV edits"
+      },
+      "textures": [
+        {
+          "path": "src/.tmp/native-production/props/textures/knight_texture.png",
+          "sha256": "3abb351c9d1357e082bcd156dec2549bfbdad164d19b8e2bd4a750745aacb0e2",
+          "dimensions": [
+            256,
+            256
+          ],
+          "sourceDimensions": [
+            1024,
+            1024
+          ],
+          "source": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/knight_texture.png",
+          "sourceSHA256": "028db4d1cd8b3471e6ba21686515abd4e36ae582f8b314b71ad2ab1fb5453b12"
+        }
+      ],
+      "boundsCocosMeters": {
+        "min": [
+          -0.14888206124305725,
+          -0.21633656322956085,
+          -0.038632385432720184
+        ],
+        "max": [
+          0.14888635277748108,
+          0.8336634039878845,
+          0.038632359355688095
+        ],
+        "dimensions": [
+          0.29776841402053833,
+          1.0499999672174454,
+          0.07726474478840828
+        ]
+      },
+      "morph": null,
+      "exportSHA256": "4a39bf7eacd7f3700d6b04ffe92d56c0d644e195914c31f17f7d7cfbf4b10184",
+      "fbxRoundtrip": {
+        "passed": true,
+        "trianglesBefore": 300,
+        "trianglesAfter": 300,
+        "uvCornerCount": 900,
+        "maxPositionErrorMeters": 8.697966080717379e-08,
+        "maxMorphPositionErrorMeters": 0.0,
+        "maxUVError": 0.0,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "greatsword": {
+      "asset": "sword_2handed",
+      "creator": "Kay Lousberg / KayKit",
+      "license": "CC0-1.0",
+      "officialPackage": "KayKit Adventurers Free 2.0",
+      "officialURL": "https://kaylousberg.itch.io/kaykit-adventurers",
+      "sourceFiles": [
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/sword_2handed.gltf",
+          "sha256": "42ffb9b49e928763fe21fd928675402ebccd3750ccd89bcec8d186e12c6fdccd",
+          "archived": "src/.tmp/native-production/source/props/original/sword_2handed.gltf"
+        },
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/sword_2handed.bin",
+          "sha256": "4e8100535e482ed9e2cdd5b32b1e3dc301dcff92f472bb9f6047d1021f4433b1",
+          "archived": "src/.tmp/native-production/source/props/original/sword_2handed.bin"
+        },
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/knight_texture.png",
+          "sha256": "028db4d1cd8b3471e6ba21686515abd4e36ae582f8b314b71ad2ab1fb5453b12",
+          "archived": "src/.tmp/native-production/source/props/original/knight_texture.png"
+        }
+      ],
+      "fbx": "src/.tmp/native-production/props/greatsword.fbx",
+      "suggestedResource": "actors/props/greatsword/greatsword",
+      "meshObject": "KayKit_greatsword",
+      "authorGripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "exportGripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "authorLongAxis": "+Y",
+      "cocosLongAxis": "+Y",
+      "units": "metres",
+      "lengthMeters": 1.3,
+      "unitScale": 0.5494968481766339,
+      "authorToExport": [
+        [
+          0.5494968295097351,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.5494968295097351,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.5494968295097351,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "exportToAuthor": [
+        [
+          1.819846749305725,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          1.819846749305725,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.0,
+          1.819846749305725,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+        ]
+      ],
+      "authorToExportRotation": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "socketPropRotation": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+        ]
+      ],
+      "socketPropRotationNote": "For an animated helper in the author handslot frame apply rotation inverse only. FBX already contains the intended metre size; do not cancel unitScale.",
+      "attachmentHand": "hand_r",
+      "topology": {
+        "sourceTriangles": 412,
+        "sourceVertices": 545,
+        "sourceUVLoops": 1236,
+        "geometryOperation": "uniform scale + rigid rotation only; no remesh, simplification, modifiers or UV edits"
+      },
+      "textures": [
+        {
+          "path": "src/.tmp/native-production/props/textures/knight_texture.png",
+          "sha256": "3abb351c9d1357e082bcd156dec2549bfbdad164d19b8e2bd4a750745aacb0e2",
+          "dimensions": [
+            256,
+            256
+          ],
+          "sourceDimensions": [
+            1024,
+            1024
+          ],
+          "source": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/knight_texture.png",
+          "sourceSHA256": "028db4d1cd8b3471e6ba21686515abd4e36ae582f8b314b71ad2ab1fb5453b12"
+        }
+      ],
+      "boundsCocosMeters": {
+        "min": [
+          -0.2305198460817337,
+          -0.22054679691791534,
+          -0.0681430771946907
+        ],
+        "max": [
+          0.2305237203836441,
+          1.0794531106948853,
+          0.06814299523830414
+        ],
+        "dimensions": [
+          0.4610435664653778,
+          1.2999999076128006,
+          0.13628607243299484
+        ]
+      },
+      "morph": null,
+      "exportSHA256": "d23d90b0c113c732e87fc1993e86ce8afaf9170b75d32ac9f011d2d5532ea42f",
+      "fbxRoundtrip": {
+        "passed": true,
+        "trianglesBefore": 412,
+        "trianglesAfter": 412,
+        "uvCornerCount": 1236,
+        "maxPositionErrorMeters": 8.148614227820872e-08,
+        "maxMorphPositionErrorMeters": 0.0,
+        "maxUVError": 0.0,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "staff": {
+      "asset": "staff",
+      "creator": "Kay Lousberg / KayKit",
+      "license": "CC0-1.0",
+      "officialPackage": "KayKit Adventurers Free 2.0",
+      "officialURL": "https://kaylousberg.itch.io/kaykit-adventurers",
+      "sourceFiles": [
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/staff.gltf",
+          "sha256": "25646537632555f2a4e5ae90320bce251bbc5af541e8897960ad4514122110b9",
+          "archived": "src/.tmp/native-production/source/props/original/staff.gltf"
+        },
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/staff.bin",
+          "sha256": "578911e8317bfceb428f801ea2701c8ab4e06cce70beeeaaf965ee9a7186ca62",
+          "archived": "src/.tmp/native-production/source/props/original/staff.bin"
+        },
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/mage_texture.png",
+          "sha256": "9ef9672e93b231fc4e0e19238edfae3be22513aaf634df1898f45842ce6e4b5f",
+          "archived": "src/.tmp/native-production/source/props/original/mage_texture.png"
+        }
+      ],
+      "fbx": "src/.tmp/native-production/props/staff.fbx",
+      "suggestedResource": "actors/props/staff/staff",
+      "meshObject": "KayKit_staff",
+      "authorGripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "exportGripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "authorLongAxis": "+Y",
+      "cocosLongAxis": "+Y",
+      "units": "metres",
+      "lengthMeters": 1.75,
+      "unitScale": 0.8121781488405129,
+      "authorToExport": [
+        [
+          0.8121781349182129,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.8121781349182129,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.8121781349182129,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "exportToAuthor": [
+        [
+          1.2312569618225098,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          1.2312569618225098,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.0,
+          1.2312569618225098,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+        ]
+      ],
+      "authorToExportRotation": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "socketPropRotation": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+        ]
+      ],
+      "socketPropRotationNote": "For an animated helper in the author handslot frame apply rotation inverse only. FBX already contains the intended metre size; do not cancel unitScale.",
+      "attachmentHand": "hand_r",
+      "topology": {
+        "sourceTriangles": 440,
+        "sourceVertices": 498,
+        "sourceUVLoops": 1320,
+        "geometryOperation": "uniform scale + rigid rotation only; no remesh, simplification, modifiers or UV edits"
+      },
+      "textures": [
+        {
+          "path": "src/.tmp/native-production/props/textures/mage_texture.png",
+          "sha256": "a722f4d8223ecea8917b8b6b556ee83b0d98567f82d63202048c679596ffe77c",
+          "dimensions": [
+            256,
+            256
+          ],
+          "sourceDimensions": [
+            1024,
+            1024
+          ],
+          "source": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/mage_texture.png",
+          "sourceSHA256": "9ef9672e93b231fc4e0e19238edfae3be22513aaf634df1898f45842ce6e4b5f"
+        }
+      ],
+      "boundsCocosMeters": {
+        "min": [
+          -0.19928207993507385,
+          -0.7313222289085388,
+          -0.11871819198131561
+        ],
+        "max": [
+          0.2687026262283325,
+          1.0186777114868164,
+          0.11871808767318726
+        ],
+        "dimensions": [
+          0.46798470616340637,
+          1.7499999403953552,
+          0.23743627965450287
+        ]
+      },
+      "morph": null,
+      "exportSHA256": "6a6c51eeb3050301af90644cbbecbc95d2519eba19e7ff10385492372e8c9c44",
+      "fbxRoundtrip": {
+        "passed": true,
+        "trianglesBefore": 440,
+        "trianglesAfter": 440,
+        "uvCornerCount": 1320,
+        "maxPositionErrorMeters": 1.418650867890392e-07,
+        "maxMorphPositionErrorMeters": 0.0,
+        "maxUVError": 0.0,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "wand": {
+      "asset": "wand",
+      "creator": "Kay Lousberg / KayKit",
+      "license": "CC0-1.0",
+      "officialPackage": "KayKit Adventurers Free 2.0",
+      "officialURL": "https://kaylousberg.itch.io/kaykit-adventurers",
+      "sourceFiles": [
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/wand.gltf",
+          "sha256": "6392f619655a0869a5255dc9702e50027c72c19de6b17b3eecec1492bfd2a800",
+          "archived": "src/.tmp/native-production/source/props/original/wand.gltf"
+        },
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/wand.bin",
+          "sha256": "abdecfe3fa864286eb91a9befd5c455770a5443dc01fa22052c634702d0e698a",
+          "archived": "src/.tmp/native-production/source/props/original/wand.bin"
+        },
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/mage_texture.png",
+          "sha256": "9ef9672e93b231fc4e0e19238edfae3be22513aaf634df1898f45842ce6e4b5f",
+          "archived": "src/.tmp/native-production/source/props/original/mage_texture.png"
+        }
+      ],
+      "fbx": "src/.tmp/native-production/props/wand.fbx",
+      "suggestedResource": "actors/props/wand/wand",
+      "meshObject": "KayKit_wand",
+      "authorGripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "exportGripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "authorLongAxis": "+Y",
+      "cocosLongAxis": "+Y",
+      "units": "metres",
+      "lengthMeters": 0.6,
+      "unitScale": 0.621027853815965,
+      "authorToExport": [
+        [
+          0.6210278272628784,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.6210278272628784,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.6210278272628784,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "exportToAuthor": [
+        [
+          1.6102337837219238,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          1.6102337837219238,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.0,
+          1.6102337837219238,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+        ]
+      ],
+      "authorToExportRotation": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "socketPropRotation": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+        ]
+      ],
+      "socketPropRotationNote": "For an animated helper in the author handslot frame apply rotation inverse only. FBX already contains the intended metre size; do not cancel unitScale.",
+      "attachmentHand": "hand_r",
+      "topology": {
+        "sourceTriangles": 150,
+        "sourceVertices": 158,
+        "sourceUVLoops": 450,
+        "geometryOperation": "uniform scale + rigid rotation only; no remesh, simplification, modifiers or UV edits"
+      },
+      "textures": [
+        {
+          "path": "src/.tmp/native-production/props/textures/mage_texture.png",
+          "sha256": "a722f4d8223ecea8917b8b6b556ee83b0d98567f82d63202048c679596ffe77c",
+          "dimensions": [
+            256,
+            256
+          ],
+          "sourceDimensions": [
+            1024,
+            1024
+          ],
+          "source": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/mage_texture.png",
+          "sourceSHA256": "9ef9672e93b231fc4e0e19238edfae3be22513aaf634df1898f45842ce6e4b5f"
+        }
+      ],
+      "boundsCocosMeters": {
+        "min": [
+          -0.049885500222444534,
+          -0.1650029867887497,
+          -0.04986697807908058
+        ],
+        "max": [
+          0.04984847456216812,
+          0.43499699234962463,
+          0.04986700415611267
+        ],
+        "dimensions": [
+          0.09973397478461266,
+          0.5999999791383743,
+          0.09973398223519325
+        ]
+      },
+      "morph": null,
+      "exportSHA256": "20711ca3cbede1d79e2b74276ee4963cc8c6e38cdb7507c431dd08b098128f10",
+      "fbxRoundtrip": {
+        "passed": true,
+        "trianglesBefore": 150,
+        "trianglesAfter": 150,
+        "uvCornerCount": 450,
+        "maxPositionErrorMeters": 4.607223402786076e-08,
+        "maxMorphPositionErrorMeters": 0.0,
+        "maxUVError": 0.0,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "bow": {
+      "asset": "bow_withString",
+      "creator": "Kay Lousberg / KayKit",
+      "license": "CC0-1.0",
+      "officialPackage": "KayKit Adventurers Free 2.0",
+      "officialURL": "https://kaylousberg.itch.io/kaykit-adventurers",
+      "sourceFiles": [
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/bow_withString.gltf",
+          "sha256": "c55e025638cfbdac33e117a83abac8d01b8d7056a0f7514c72daf937512de932",
+          "archived": "src/.tmp/native-production/source/props/original/bow_withString.gltf"
+        },
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/bow_withString.bin",
+          "sha256": "2ae583e6089eddf48f78ddffe1decd4b05f9d9ce47360a113d44856946d78d5a",
+          "archived": "src/.tmp/native-production/source/props/original/bow_withString.bin"
+        },
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/ranger_texture.png",
+          "sha256": "639cd0ba5106fbdf65370b52b9290091d3bd92fe267693abc8dc474471bb800f",
+          "archived": "src/.tmp/native-production/source/props/original/ranger_texture.png"
+        }
+      ],
+      "fbx": "src/.tmp/native-production/props/bow.fbx",
+      "suggestedResource": "actors/props/bow/bow",
+      "meshObject": "KayKit_bow",
+      "authorGripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "exportGripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "authorLongAxis": "+Z",
+      "cocosLongAxis": "+Y",
+      "units": "metres",
+      "lengthMeters": 1.4,
+      "unitScale": 0.7057503378200125,
+      "authorToExport": [
+        [
+          0.7057503461837769,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -3.084932842511989e-08,
+          0.7057503461837769,
+          0.0
+        ],
+        [
+          0.0,
+          -0.7057503461837769,
+          -3.084932842511989e-08,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "exportToAuthor": [
+        [
+          1.4169316291809082,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          -6.193604917825724e-08,
+          -1.4169316291809082,
+          0.0
+        ],
+        [
+          0.0,
+          1.4169316291809082,
+          -6.193604917825724e-08,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+        ]
+      ],
+      "authorToExportRotation": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -4.371138828673793e-08,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          -1.0,
+          -4.371138828673793e-08,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "socketPropRotation": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          -4.371138828673793e-08,
+          -1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          -4.371138828673793e-08,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+        ]
+      ],
+      "socketPropRotationNote": "For an animated helper in the author handslot frame apply rotation inverse only. FBX already contains the intended metre size; do not cancel unitScale.",
+      "attachmentHand": "hand_l",
+      "topology": {
+        "sourceTriangles": 684,
+        "sourceVertices": 802,
+        "sourceUVLoops": 2052,
+        "geometryOperation": "uniform scale + rigid rotation only; no remesh, simplification, modifiers or UV edits"
+      },
+      "textures": [
+        {
+          "path": "src/.tmp/native-production/props/textures/ranger_texture.png",
+          "sha256": "cd10c134d221e5a3fe0bc4afda71b28dc7e282981c320381a4fb47730379c5aa",
+          "dimensions": [
+            256,
+            256
+          ],
+          "sourceDimensions": [
+            1024,
+            1024
+          ],
+          "source": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/ranger_texture.png",
+          "sourceSHA256": "639cd0ba5106fbdf65370b52b9290091d3bd92fe267693abc8dc474471bb800f"
+        }
+      ],
+      "boundsCocosMeters": {
+        "min": [
+          -0.2584429979324341,
+          -0.699999988079071,
+          -0.05490698665380478
+        ],
+        "max": [
+          0.09047438949346542,
+          0.699999988079071,
+          0.054906997829675674
+        ],
+        "dimensions": [
+          0.3489173874258995,
+          1.399999976158142,
+          0.10981398448348045
+        ]
+      },
+      "morph": {
+        "shapeName": "Draw",
+        "shapeIndex": 0,
+        "subMeshIndex": 0,
+        "defaultWeight": 0,
+        "range": [
+          0,
+          1
+        ],
+        "source": "official author target",
+        "boundsAtWeight1CocosMeters": {
+          "min": [
+            -0.5919694900512695,
+            -0.6117638349533081,
+            -0.05490698665380478
+          ],
+          "max": [
+            0.07773056626319885,
+            0.6117638349533081,
+            0.054906997829675674
+          ],
+          "dimensions": [
+            0.6697000563144684,
+            1.2235276699066162,
+            0.10981398448348045
+          ]
+        },
+        "maxVertexDisplacementMeters": 0.35937124310608176,
+        "cocosAPI": "renderer.setWeight(draw01, subMeshIndex, shapeIndex)",
+        "cocosTargetLookup": "renderer.mesh.struct.morph.targetNames.indexOf(\"Draw\")"
+      },
+      "woodGripValidation": {
+        "method": "Author origin retained. Intersect official stringless bow.gltf wooden edges at original glTF z=0; origin lies inside wooden cross-section in both transverse axes.",
+        "source": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/bow.gltf",
+        "sourceSHA256": "de978d50afcc66ba30edb42e8d040bf932ae7308942b1b4e1400d252ccb8e1fb",
+        "woodEdgeIntersections": 24,
+        "crossSectionBoundsBlenderSourceUnits": {
+          "min": [
+            -0.03191032260656357,
+            -1.862645149230957e-09,
+            -0.045973971486091614
+          ],
+          "max": [
+            0.0337304025888443,
+            3.725290298461914e-09,
+            0.04597405716776848
+          ],
+          "dimensions": [
+            0.06564072519540787,
+            5.587935447692871e-09,
+            0.09194802865386009
+          ]
+        },
+        "crossSectionCenterDistanceFromAuthorOriginMeters": 0.0006422610380828229,
+        "pivotTranslation": [
+          0,
+          0,
+          0
+        ]
+      },
+      "exportSHA256": "ff2e3e032f83b3ff3e6cbe6352bf9ec2633ca18997d035a643f87abdab83b0d6",
+      "fbxRoundtrip": {
+        "passed": true,
+        "trianglesBefore": 684,
+        "trianglesAfter": 684,
+        "uvCornerCount": 2052,
+        "maxPositionErrorMeters": 9.577804860327888e-08,
+        "maxMorphPositionErrorMeters": 1.0635442832861624e-07,
+        "maxUVError": 0.0,
+        "shapeNamesAfterFBXImport": [
+          "Draw"
+        ]
+      }
+    },
+    "arrow": {
+      "asset": "arrow_bow",
+      "creator": "Kay Lousberg / KayKit",
+      "license": "CC0-1.0",
+      "officialPackage": "KayKit Adventurers Free 2.0",
+      "officialURL": "https://kaylousberg.itch.io/kaykit-adventurers",
+      "sourceFiles": [
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/arrow_bow.gltf",
+          "sha256": "db8d6c4bcf7f6119703565220770241a4d98047f22dcd011e66557cb7df795c1",
+          "archived": "src/.tmp/native-production/source/props/original/arrow_bow.gltf"
+        },
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/arrow_bow.bin",
+          "sha256": "9ec104be838c841eb79baf314c54ba6f7cc97505b75978607e0228f1769a1d0b",
+          "archived": "src/.tmp/native-production/source/props/original/arrow_bow.bin"
+        },
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/ranger_texture.png",
+          "sha256": "639cd0ba5106fbdf65370b52b9290091d3bd92fe267693abc8dc474471bb800f",
+          "archived": "src/.tmp/native-production/source/props/original/ranger_texture.png"
+        }
+      ],
+      "fbx": "src/.tmp/native-production/props/arrow.fbx",
+      "suggestedResource": "actors/props/arrow/arrow",
+      "meshObject": "KayKit_arrow",
+      "authorGripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "exportGripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "authorLongAxis": "+Z",
+      "cocosLongAxis": "+Y",
+      "units": "metres",
+      "lengthMeters": 0.7,
+      "unitScale": 0.5549104350868187,
+      "authorToExport": [
+        [
+          0.55491042137146,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -2.4255905728409743e-08,
+          0.55491042137146,
+          0.0
+        ],
+        [
+          0.0,
+          -0.55491042137146,
+          -2.4255905728409743e-08,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "exportToAuthor": [
+        [
+          1.8020926713943481,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          -7.87719756090155e-08,
+          -1.8020926713943481,
+          0.0
+        ],
+        [
+          0.0,
+          1.8020926713943481,
+          -7.87719756090155e-08,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+        ]
+      ],
+      "authorToExportRotation": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -4.371138828673793e-08,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          -1.0,
+          -4.371138828673793e-08,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "socketPropRotation": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          -4.371138828673793e-08,
+          -1.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          -4.371138828673793e-08,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+        ]
+      ],
+      "socketPropRotationNote": "For an animated helper in the author handslot frame apply rotation inverse only. FBX already contains the intended metre size; do not cancel unitScale.",
+      "attachmentHand": "hand_r",
+      "topology": {
+        "sourceTriangles": 52,
+        "sourceVertices": 73,
+        "sourceUVLoops": 156,
+        "geometryOperation": "uniform scale + rigid rotation only; no remesh, simplification, modifiers or UV edits"
+      },
+      "textures": [
+        {
+          "path": "src/.tmp/native-production/props/textures/ranger_texture.png",
+          "sha256": "cd10c134d221e5a3fe0bc4afda71b28dc7e282981c320381a4fb47730379c5aa",
+          "dimensions": [
+            256,
+            256
+          ],
+          "sourceDimensions": [
+            1024,
+            1024
+          ],
+          "source": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/ranger_texture.png",
+          "sourceSHA256": "639cd0ba5106fbdf65370b52b9290091d3bd92fe267693abc8dc474471bb800f"
+        }
+      ],
+      "boundsCocosMeters": {
+        "min": [
+          -0.04536430165171623,
+          -0.35595667362213135,
+          -0.02619309537112713
+        ],
+        "max": [
+          0.04535744711756706,
+          0.3440433144569397,
+          0.05237960070371628
+        ],
+        "dimensions": [
+          0.0907217487692833,
+          0.699999988079071,
+          0.0785726960748434
+        ]
+      },
+      "morph": null,
+      "exportSHA256": "322e06763b6e15be382a0c8c383a4a3b5f0da9eb8a7331b4c1453031308b6faa",
+      "fbxRoundtrip": {
+        "passed": true,
+        "trianglesBefore": 52,
+        "trianglesAfter": 52,
+        "uvCornerCount": 156,
+        "maxPositionErrorMeters": 2.986047320518992e-08,
+        "maxMorphPositionErrorMeters": 0.0,
+        "maxUVError": 0.0,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "dagger": {
+      "asset": "dagger",
+      "creator": "Kay Lousberg / KayKit",
+      "license": "CC0-1.0",
+      "officialPackage": "KayKit Adventurers Free 2.0",
+      "officialURL": "https://kaylousberg.itch.io/kaykit-adventurers",
+      "sourceFiles": [
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/dagger.gltf",
+          "sha256": "db324dd13443d48b736fe4dba5e24090f4b476dd8d9ee53cf7c6718f00c47e1a",
+          "archived": "src/.tmp/native-production/source/props/original/dagger.gltf"
+        },
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/dagger.bin",
+          "sha256": "da7857e41d902cdd39e894563a544719901a9af55053f2b96b21019ed6717677",
+          "archived": "src/.tmp/native-production/source/props/original/dagger.bin"
+        },
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/rogue_texture.png",
+          "sha256": "2e2fc741e20e7e2c85b176c8143b49b769bca0d2ed1a1cfc1807a758a0e4d3e1",
+          "archived": "src/.tmp/native-production/source/props/original/rogue_texture.png"
+        }
+      ],
+      "fbx": "src/.tmp/native-production/props/dagger.fbx",
+      "suggestedResource": "actors/props/dagger/dagger",
+      "meshObject": "KayKit_dagger",
+      "authorGripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "exportGripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "authorLongAxis": "+Y",
+      "cocosLongAxis": "+Y",
+      "units": "metres",
+      "lengthMeters": 0.48,
+      "unitScale": 0.39806083083110727,
+      "authorToExport": [
+        [
+          0.3980608284473419,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.3980608284473419,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.3980608284473419,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "exportToAuthor": [
+        [
+          2.512178897857666,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          2.512178897857666,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.0,
+          2.512178897857666,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+        ]
+      ],
+      "authorToExportRotation": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "socketPropRotation": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+        ]
+      ],
+      "socketPropRotationNote": "For an animated helper in the author handslot frame apply rotation inverse only. FBX already contains the intended metre size; do not cancel unitScale.",
+      "attachmentHand": "hand_r",
+      "topology": {
+        "sourceTriangles": 172,
+        "sourceVertices": 207,
+        "sourceUVLoops": 516,
+        "geometryOperation": "uniform scale + rigid rotation only; no remesh, simplification, modifiers or UV edits"
+      },
+      "textures": [
+        {
+          "path": "src/.tmp/native-production/props/textures/rogue_texture.png",
+          "sha256": "30655aa45cbcfafa192240443277c3529b2ae20f4249443fc93adab99a6f9c56",
+          "dimensions": [
+            256,
+            256
+          ],
+          "sourceDimensions": [
+            1024,
+            1024
+          ],
+          "source": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/rogue_texture.png",
+          "sourceSHA256": "2e2fc741e20e7e2c85b176c8143b49b769bca0d2ed1a1cfc1807a758a0e4d3e1"
+        }
+      ],
+      "boundsCocosMeters": {
+        "min": [
+          -0.047833312302827835,
+          -0.08952172845602036,
+          -0.03020111657679081
+        ],
+        "max": [
+          0.05538284406065941,
+          0.390478253364563,
+          0.03020111843943596
+        ],
+        "dimensions": [
+          0.10321615636348724,
+          0.47999998182058334,
+          0.06040223501622677
+        ]
+      },
+      "morph": null,
+      "exportSHA256": "50e9a7293222e8057a46164245799269d642376d18ab83c6a307fc04d20fd199",
+      "fbxRoundtrip": {
+        "passed": true,
+        "trianglesBefore": 172,
+        "trianglesAfter": 172,
+        "uvCornerCount": 516,
+        "maxPositionErrorMeters": 4.077600834762052e-08,
+        "maxMorphPositionErrorMeters": 0.0,
+        "maxUVError": 0.0,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "shield": {
+      "asset": "shield_round",
+      "creator": "Kay Lousberg / KayKit",
+      "license": "CC0-1.0",
+      "officialPackage": "KayKit Adventurers Free 2.0",
+      "officialURL": "https://kaylousberg.itch.io/kaykit-adventurers",
+      "sourceFiles": [
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/shield_round.gltf",
+          "sha256": "dd052a109d5a003fa7ebe4641c31e89a5189ad8d606ee8fc969d05e2d99dab38",
+          "archived": "src/.tmp/native-production/source/props/original/shield_round.gltf"
+        },
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/shield_round.bin",
+          "sha256": "42da365328fc8804f44cd3db6becc8bc98729f11862b63e51b42820559d6e1e0",
+          "archived": "src/.tmp/native-production/source/props/original/shield_round.bin"
+        },
+        {
+          "path": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/knight_texture.png",
+          "sha256": "028db4d1cd8b3471e6ba21686515abd4e36ae582f8b314b71ad2ab1fb5453b12",
+          "archived": "src/.tmp/native-production/source/props/original/knight_texture.png"
+        }
+      ],
+      "fbx": "src/.tmp/native-production/props/shield.fbx",
+      "suggestedResource": "actors/props/shield/shield",
+      "meshObject": "KayKit_shield",
+      "authorGripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "exportGripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "authorLongAxis": "+Y",
+      "cocosLongAxis": "+Y",
+      "units": "metres",
+      "lengthMeters": 0.7,
+      "unitScale": 0.7931048531842287,
+      "authorToExport": [
+        [
+          0.7931048274040222,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.7931048274040222,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.7931048274040222,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "exportToAuthor": [
+        [
+          1.2608673572540283,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          1.2608673572540283,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.0,
+          1.2608673572540283,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+        ]
+      ],
+      "authorToExportRotation": [
+        [
+          1.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          1.0,
+          0.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          1.0,
+          0.0
+        ],
+        [
+          0.0,
+          0.0,
+          0.0,
+          1.0
+        ]
+      ],
+      "socketPropRotation": [
+        [
+          1.0,
+          -0.0,
+          0.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          1.0,
+          -0.0,
+          0.0
+        ],
+        [
+          0.0,
+          -0.0,
+          1.0,
+          -0.0
+        ],
+        [
+          -0.0,
+          0.0,
+          -0.0,
+          1.0
+        ]
+      ],
+      "socketPropRotationNote": "For an animated helper in the author handslot frame apply rotation inverse only. FBX already contains the intended metre size; do not cancel unitScale.",
+      "attachmentHand": "hand_l",
+      "topology": {
+        "sourceTriangles": 284,
+        "sourceVertices": 322,
+        "sourceUVLoops": 852,
+        "geometryOperation": "uniform scale + rigid rotation only; no remesh, simplification, modifiers or UV edits"
+      },
+      "textures": [
+        {
+          "path": "src/.tmp/native-production/props/textures/knight_texture.png",
+          "sha256": "3abb351c9d1357e082bcd156dec2549bfbdad164d19b8e2bd4a750745aacb0e2",
+          "dimensions": [
+            256,
+            256
+          ],
+          "sourceDimensions": [
+            1024,
+            1024
+          ],
+          "source": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/knight_texture.png",
+          "sourceSHA256": "028db4d1cd8b3471e6ba21686515abd4e36ae582f8b314b71ad2ab1fb5453b12"
+        }
+      ],
+      "boundsCocosMeters": {
+        "min": [
+          -0.3500021994113922,
+          -0.35001158714294434,
+          -0.11481621116399765
+        ],
+        "max": [
+          0.34999769926071167,
+          0.3499884009361267,
+          0.14845140278339386
+        ],
+        "dimensions": [
+          0.6999998986721039,
+          0.699999988079071,
+          0.2632676139473915
+        ]
+      },
+      "morph": null,
+      "exportSHA256": "1c443b2ae393681e157e2aa0ec1615baafe17a54d45b7729321ef525006523de",
+      "fbxRoundtrip": {
+        "passed": true,
+        "trianglesBefore": 284,
+        "trianglesAfter": 284,
+        "uvCornerCount": 852,
+        "maxPositionErrorMeters": 4.7706993910878737e-08,
+        "maxMorphPositionErrorMeters": 0.0,
+        "maxUVError": 0.0,
+        "shapeNamesAfterFBXImport": []
+      }
+    }
+  }
+}

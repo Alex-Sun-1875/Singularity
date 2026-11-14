@@ -1,0 +1,17 @@
+Use case: precise-object-edit. Edit image 1, the 1024x1536 four-direction silver-haired male walking sprite sheet. Image 2 is the approved identity and long-legged anatomical reference. Keep the tall upright non-crouching gait and broad stride just achieved. Fix a specific animation mistake: the first sheet repeats the same near-side limbs in columns 1/3 and columns 2/4. The second half of the cycle must show the OPPOSITE near-side arm and leg, visibly different silhouettes and overlap.
+
+Output exactly ONE complete 4 columns x 4 rows native 1024x1536 RGBA sheet with actual transparent background. Exactly16 full bodies. Rows: front, true right profile, back, true left profile. No text, numbers, grid or other objects.
+
+Use the camera-facing/NEAR arm and leg to define each row's cycle unambiguously:
+COLUMN 1 CONTACT A: NEAR leg extended FORWARD with its heel meeting ground; FAR leg trails back on toe. NEAR arm swings BACK, FAR arm swings FORWARD.
+COLUMN 2 PASSING A: NEAR leg is straight and vertically under the high pelvis as the planted support; FAR leg bends and passes forward behind it. NEAR arm still slightly BACK; FAR arm slightly FORWARD.
+COLUMN 3 CONTACT B: NEAR leg extends BACKWARD on the trailing toe; FAR leg reaches FORWARD for heel contact. NEAR arm now swings visibly FORWARD across the belly; FAR arm swings BACK. This MUST look different from column1: reverse the overlap and swing of both visible limbs. Do NOT repeat column1's near leg forward and near arm back.
+COLUMN 4 PASSING B: FAR leg is straight and vertical as planted support; NEAR leg is visibly bent and raised swinging forward in FRONT of the planted leg. NEAR arm slightly FORWARD and FAR arm BACK. This MUST look different from column2, with lifted NEAR knee and visible near boot forward, not behind.
+
+For front/back rows use actual anatomical left/right legs for the same two alternating contacts and two alternating passing positions, with corresponding opposite arm swings. Each row is a single continuous walking cycle, not two poses repeated. At least one foot remains planted. No airborne run, no squat, no sneaking or low hips. Near/far definitions are per view, so preserve anatomical phase continuity between front/right/back/left.
+
+PROPORTION refinement from image2: lift the anatomical crotch/pelvis slightly, retain the slimmer shorter torso and LENGTHEN THIGHS AND SHINS so the crotch to support sole is about46% of full upright crown-to-sole height. Keep normal full-sized feet but lower the boot shafts: the whole boot height (sole to boot top) is about14% of total body height as in image2, NOT the oversized17-20% boots of image1. Fitted trouser legs, no baggy low crotch. Do not merely stretch the image or shrink the head. Same long-legged7.5-head adult in every sprite.
+
+PRESERVE original short silver curls, face, burgundy tunic with gold embroidery, navy sleeves, cream cuffs/collar, charcoal trousers, brown boots, and diagonally sheathed longsword on back. Both hands empty, relaxed. Four by four independent cells256x384, pelvis centered x128; full standing-equivalent height360-365; crown near y10-14 and planted sole near y374. Complete curls, hands, boots inside each cell with transparent margins and gutters. No cropping.
+
+Remove any gray haze or low-opacity colored background wash: truly transparent blank pixels outside each crisp isolated body, no floor shadows, gradients, matte, checkerboard or fill. Preserve soft antialiasing only at actual silhouette edges. Return only the corrected atlas.

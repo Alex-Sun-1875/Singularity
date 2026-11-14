@@ -1,0 +1,4427 @@
+{
+  "version": "native-props+2d-design-v1",
+  "status": "installed-local-review",
+  "runtimeProfile": "native-kit-v1",
+  "equipmentResources": {
+    "W01": "design-w01",
+    "W02": "design-w02",
+    "W03": "design-w03",
+    "W04": "design-w04",
+    "W05": "design-w05",
+    "W06": "design-w06",
+    "W07": "design-w07",
+    "W08": "design-w08",
+    "W09": "design-w09",
+    "W10": "design-w10",
+    "W11": "design-w11",
+    "W12": "design-w12",
+    "W13": "design-w13",
+    "W14": "design-w14",
+    "DR2-03": "design-dr2-03",
+    "DR3-03": "design-dr3-03",
+    "DR4-03": "design-dr4-03",
+    "DU1-04": "design-du1-04",
+    "DU2-04": "design-du2-04",
+    "DE02": "design-de02",
+    "DE05": "design-de05",
+    "DE06": "design-de06",
+    "L01": "design-l01",
+    "L02": "design-l02"
+  },
+  "props": {
+    "sword": {
+      "id": "sword",
+      "resource": "actors/props-native/sword/sword/sword",
+      "source": "source-art/characters/redesign-v6/props/sword.blend",
+      "sourceSHA256": "c8660726d869d2ddb9e1f27feeb7f797906c9c5247f140bec281cf5c71929264",
+      "fbx": "src/.tmp/character-redesign-v6/props/sword/sword.fbx",
+      "exportSHA256": "81ebe747ce4f5143eab238a9fd09b2639ccfccce411d923b78636c70cf34e5fd",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 2608,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 2249,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 2608,
+      "materials": [
+        {
+          "runtimeName": "V5_sword_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/sword_albedo.png",
+            "normal": "../props-native/textures/sword_normal.png",
+            "orm": "../props-native/textures/sword_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/sword_albedo.png",
+          "sha256": "a2e9748949644200506ab17adeba7993529b0086f237bd60edf01b75c86a8dfa",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/sword_normal.png",
+          "sha256": "13c876326c64b7c7c5527f62af9068743f068d236ac2ff66a4c06113ee0807cc",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/sword_orm.png",
+          "sha256": "54e78c62f15f7fa08955631dc3dddd001db2c7c6fcc862ffd5294104a66e5c1a",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_sword_00": {
+          "vertices": 744,
+          "triangles": 1456
+        },
+        "V5_sword_01": {
+          "vertices": 582,
+          "triangles": 1152
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 8.688304120596513e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 2608,
+        "trianglesAfter": 2608,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "bow": {
+      "id": "bow",
+      "resource": "actors/props-native/bow/bow/bow",
+      "source": "source-art/characters/redesign-v6/props/bow.blend",
+      "sourceSHA256": "aacce06da9ee121478db6c78e898770ab1ec1a9ef946201a3e24c334510071f5",
+      "fbx": "src/.tmp/character-redesign-v6/props/bow/bow.fbx",
+      "exportSHA256": "efb7a31c109e9b66b8dde704b9af9f3013537002164af1f271214a0aa1183172",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Original Bow Basis/Draw positions retained; UV-only edits and separate rigid grip accessories"
+        }
+      ],
+      "uv": {
+        "triangles": 772,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 996,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 772,
+      "materials": [
+        {
+          "runtimeName": "V5_bow_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/bow_albedo.png",
+            "normal": "../props-native/textures/bow_normal.png",
+            "orm": "../props-native/textures/bow_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/bow_albedo.png",
+          "sha256": "d9bef64487fe67ba82a44c8ba952f03444e4a16fffaf7e0ab6b4fb39f18d3a66",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/bow_normal.png",
+          "sha256": "1100c95b094f071819c0c57bf11fa61e413b65b92c4ecfe7f52bcb6764b242e0",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/bow_orm.png",
+          "sha256": "2163af8ac4660f734caf6725b6781490c9dbd584a7738e1abc5ad169234c9311",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_bow_00": {
+          "vertices": 802,
+          "triangles": 684
+        },
+        "V5_bow_01": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_bow_02": {
+          "vertices": 24,
+          "triangles": 44
+        }
+      },
+      "morph": {
+        "shapeName": "Draw",
+        "baseVerticesPreserved": true,
+        "drawPositionsPreserved": true,
+        "originPreserved": true
+      },
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 9.577804860327888e-08,
+        "maxMorphPositionErrorMeters": 1.0635442832861624e-07,
+        "maxUVError": 0,
+        "trianglesBefore": 772,
+        "trianglesAfter": 772,
+        "shapeNamesAfterFBXImport": [
+          "Draw"
+        ]
+      }
+    },
+    "hammer": {
+      "id": "hammer",
+      "resource": "actors/props-native/hammer/hammer/hammer",
+      "source": "source-art/characters/redesign-v6/props/hammer.blend",
+      "sourceSHA256": "26874c9d9129fda3cd887bd139740c77815ed8503cf9729920cb43d66086296f",
+      "fbx": "src/.tmp/character-redesign-v6/props/hammer/hammer.fbx",
+      "exportSHA256": "b002155cac3458016c5e2b2d70019a57b5edb68fa2618fd1a4a680e298df6c3f",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tools/makehuman-community/clothes/culturalibre_war_hammer/warhammer.obj",
+          "sha256": "4bb50626d07015312f5e696373a64ca49f7831e9ce9cc2c50646305ba273cbe6",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 5740,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 4331,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 5740,
+      "materials": [
+        {
+          "runtimeName": "V5_hammer_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/hammer_albedo.png",
+            "normal": "../props-native/textures/hammer_normal.png",
+            "orm": "../props-native/textures/hammer_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/hammer_albedo.png",
+          "sha256": "b94f7983f7ee522bd57ca9844aa11ec89a43b6c200a9c286a74c3849601cbcdf",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/hammer_normal.png",
+          "sha256": "4889f37fe4bb1116f972bc06460d2b68fe7714155f1f82db22b1ad623f6c41b1",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/hammer_orm.png",
+          "sha256": "3d326528968f36a09924cb7abd911056be1f500c31e95eebb0595b12fc76f94f",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_hammer_00": {
+          "vertices": 2400,
+          "triangles": 4780
+        },
+        "V5_hammer_01": {
+          "vertices": 486,
+          "triangles": 960
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 9.996002603429588e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 5740,
+        "trianglesAfter": 5740,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "oath-sword": {
+      "id": "oath-sword",
+      "resource": "actors/props-native/oath-sword/oath-sword/oath-sword",
+      "source": "source-art/characters/redesign-v6/props/oath-sword.blend",
+      "sourceSHA256": "ee60f4226cdcc1159e1d3d7433b1346b84007dc708b26648eed9c30aa897fbc2",
+      "fbx": "src/.tmp/character-redesign-v6/props/oath-sword/oath-sword.fbx",
+      "exportSHA256": "91a482abd52517913da7c867f648850d46ffa23a8cb56bb1e234edb759a8bb10",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 3148,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 2729,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 3148,
+      "materials": [
+        {
+          "runtimeName": "V5_oath_sword_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/oath-sword_albedo.png",
+            "normal": "../props-native/textures/oath-sword_normal.png",
+            "orm": "../props-native/textures/oath-sword_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/oath-sword_albedo.png",
+          "sha256": "4e367ab2c66c7a9d7b34a24ca72e4953759473bfcb90bfb77c2639c426cb7350",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/oath-sword_normal.png",
+          "sha256": "327939228c3cd5d301bc706aefdf066afd433b552ba3f3a6000d1190ccd22b53",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/oath-sword_orm.png",
+          "sha256": "4cd02faf290e9fd002d63c26890b385a2cd93f67d39b6b88bf55a7df0b6c00f4",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_oath_sword_00": {
+          "vertices": 744,
+          "triangles": 1456
+        },
+        "V5_oath_sword_01": {
+          "vertices": 582,
+          "triangles": 1152
+        },
+        "V5_oath_sword_02": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_oath_sword_03": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_oath_sword_04": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_oath_sword_05": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_oath_sword_06": {
+          "vertices": 56,
+          "triangles": 108
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 8.688304120596513e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 3148,
+        "trianglesAfter": 3148,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "greatsword": {
+      "id": "greatsword",
+      "resource": "actors/props-native/greatsword/greatsword/greatsword",
+      "source": "source-art/characters/redesign-v6/props/greatsword.blend",
+      "sourceSHA256": "ac62cb9eefcc56aa3c217918b50fd0607d8e0a99e20d1b20cb1bf0f6acf94855",
+      "fbx": "src/.tmp/character-redesign-v6/props/greatsword/greatsword.fbx",
+      "exportSHA256": "47c718b4be1edbe21b947a8bda247d348728a2dbc999fbcf188d1f36a6ebb468",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 2816,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 2934,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 2816,
+      "materials": [
+        {
+          "runtimeName": "V5_greatsword_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/greatsword_albedo.png",
+            "normal": "../props-native/textures/greatsword_normal.png",
+            "orm": "../props-native/textures/greatsword_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/greatsword_albedo.png",
+          "sha256": "489014f04879fad0c13d4c02262eb5c92bf610c7b92ce7c24d645fd74a87f309",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/greatsword_normal.png",
+          "sha256": "8ee09c6dab6029d18f18b039f4eca38d205bc723ea04edb75355799178d1dddd",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/greatsword_orm.png",
+          "sha256": "31cfb87590939e903c24ca4dae38923e1849fec75a4845075f43b0099a3b014a",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_greatsword_00": {
+          "vertices": 841,
+          "triangles": 908
+        },
+        "V5_greatsword_01": {
+          "vertices": 582,
+          "triangles": 1152
+        },
+        "V5_greatsword_02": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_greatsword_03": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_greatsword_04": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_greatsword_05": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_greatsword_06": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_greatsword_07": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_greatsword_08": {
+          "vertices": 56,
+          "triangles": 108
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 8.148614227820872e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 2816,
+        "trianglesAfter": 2816,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "wind-bow": {
+      "id": "wind-bow",
+      "resource": "actors/props-native/wind-bow/wind-bow/wind-bow",
+      "source": "source-art/characters/redesign-v6/props/wind-bow.blend",
+      "sourceSHA256": "e71442788832c7c8b497047043f41c3897e6b699cff09abcbc608f9d532d5888",
+      "fbx": "src/.tmp/character-redesign-v6/props/wind-bow/wind-bow.fbx",
+      "exportSHA256": "d10b403eb77e291f25b675a1acab84efcc75c7f96d5400f4a178384d6ad5b8e0",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Original Bow Basis/Draw positions retained; UV-only edits and separate rigid grip accessories"
+        }
+      ],
+      "uv": {
+        "triangles": 880,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 1116,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 880,
+      "materials": [
+        {
+          "runtimeName": "V5_wind_bow_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/wind-bow_albedo.png",
+            "normal": "../props-native/textures/wind-bow_normal.png",
+            "orm": "../props-native/textures/wind-bow_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/wind-bow_albedo.png",
+          "sha256": "f17185f062f80524808b2fdf4f8c0379e7b94592039edb89a8113a161c16325a",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/wind-bow_normal.png",
+          "sha256": "162b5f82e008de0433ee32dc3e931f164768c705264007c72e4975469fded2ab",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/wind-bow_orm.png",
+          "sha256": "37906ba76926e62c205cb81ec66ea416553e8e7cc7ec669c35b8840494c7683c",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_wind_bow_00": {
+          "vertices": 802,
+          "triangles": 684
+        },
+        "V5_wind_bow_01": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_wind_bow_02": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_wind_bow_03": {
+          "vertices": 32,
+          "triangles": 60
+        },
+        "V5_wind_bow_04": {
+          "vertices": 18,
+          "triangles": 24
+        },
+        "V5_wind_bow_05": {
+          "vertices": 18,
+          "triangles": 24
+        }
+      },
+      "morph": {
+        "shapeName": "Draw",
+        "baseVerticesPreserved": true,
+        "drawPositionsPreserved": true,
+        "originPreserved": true
+      },
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 9.577804860327888e-08,
+        "maxMorphPositionErrorMeters": 1.0635442832861624e-07,
+        "maxUVError": 0,
+        "trianglesBefore": 880,
+        "trianglesAfter": 880,
+        "shapeNamesAfterFBXImport": [
+          "Draw"
+        ]
+      }
+    },
+    "astra-bow": {
+      "id": "astra-bow",
+      "resource": "actors/props-native/astra-bow/astra-bow/astra-bow",
+      "source": "source-art/characters/redesign-v6/props/astra-bow.blend",
+      "sourceSHA256": "9ddd934cb5f617103f2da4812e9bd5f417a748363879475355a9dca21bacb99a",
+      "fbx": "src/.tmp/character-redesign-v6/props/astra-bow/astra-bow.fbx",
+      "exportSHA256": "2a0b386a848b69d3d84426a38b480c45eb25432787fcc7fb4601c5eac524e5a2",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Original Bow Basis/Draw positions retained; UV-only edits and separate rigid grip accessories"
+        }
+      ],
+      "uv": {
+        "triangles": 1264,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 1452,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 1264,
+      "materials": [
+        {
+          "runtimeName": "V5_astra_bow_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/astra-bow_albedo.png",
+            "normal": "../props-native/textures/astra-bow_normal.png",
+            "orm": "../props-native/textures/astra-bow_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/astra-bow_albedo.png",
+          "sha256": "0753c41d180d580f2777a3c86515453da397b3281f786067a28d251ee723110f",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/astra-bow_normal.png",
+          "sha256": "3394dbab2467044120d362bc4eb4bd717b9972364afa75c77d6cc7dc0ef33105",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/astra-bow_orm.png",
+          "sha256": "835bc3f192e0e29601b0594d2550c2275b8e17b4227faa4537c0c088e43bb2c6",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_astra_bow_00": {
+          "vertices": 802,
+          "triangles": 684
+        },
+        "V5_astra_bow_01": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_astra_bow_02": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_astra_bow_03": {
+          "vertices": 32,
+          "triangles": 60
+        },
+        "V5_astra_bow_04": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_astra_bow_05": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_astra_bow_06": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_astra_bow_07": {
+          "vertices": 56,
+          "triangles": 108
+        }
+      },
+      "morph": {
+        "shapeName": "Draw",
+        "baseVerticesPreserved": true,
+        "drawPositionsPreserved": true,
+        "originPreserved": true
+      },
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 9.577804860327888e-08,
+        "maxMorphPositionErrorMeters": 1.0635442832861624e-07,
+        "maxUVError": 0,
+        "trianglesBefore": 1264,
+        "trianglesAfter": 1264,
+        "shapeNamesAfterFBXImport": [
+          "Draw"
+        ]
+      }
+    },
+    "arrow": {
+      "id": "arrow",
+      "resource": "actors/props-native/arrow/arrow/arrow",
+      "source": "source-art/characters/redesign-v6/props/arrow.blend",
+      "sourceSHA256": "2413e98a167ece8281155c89f505fc9fc27c404d2ffa86d1ff3807ea52d4ab44",
+      "fbx": "src/.tmp/character-redesign-v6/props/arrow/arrow.fbx",
+      "exportSHA256": "df5a5c30fb830894015a1bb72479f278c391572119d81ee8f079be32784b273a",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 52,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 92,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 52,
+      "materials": [
+        {
+          "runtimeName": "V5_arrow_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/arrow_albedo.png",
+            "normal": "../props-native/textures/arrow_normal.png",
+            "orm": "../props-native/textures/arrow_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/cocos/assets/resources/actors/props-native/textures/arrow_albedo.png",
+          "sha256": "4b6ed7ff687e1c8ebbf200cfbf86e07fbd9893039375443771f8b46e7003242d",
+          "role": "albedo",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/arrow_normal.png",
+          "sha256": "c4b65d126b14925deef9bf5e6ed2f564053efd57150cdaba5e3a5505762ff630",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/cocos/assets/resources/actors/props-native/textures/arrow_orm.png",
+          "sha256": "39230b61b6b24adebf81d9fc8299efac76acae0761dd05b063fe58012a87f39e",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_arrow_00": {
+          "vertices": 73,
+          "triangles": 52
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 2.986047320518992e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 52,
+        "trianglesAfter": 52,
+        "shapeNamesAfterFBXImport": []
+      },
+      "materialFinishRevision": "arrow-steel-v1",
+      "materialFinishSource": "source-art/weapons/3d-arrow-steel-v1/production.json"
+    },
+    "staff": {
+      "id": "staff",
+      "resource": "actors/props-native/staff/staff/staff",
+      "source": "source-art/characters/redesign-v6/props/staff.blend",
+      "sourceSHA256": "823f85e1fccfbe95527c376d0f7049cb8633fff873ff9d4066fa960adb9758d7",
+      "fbx": "src/.tmp/character-redesign-v6/props/staff/staff.fbx",
+      "exportSHA256": "486772d07554d4b4c9631d01f0a64589b0cb25ec18d481711398109ce1bd9716",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 572,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 773,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 572,
+      "materials": [
+        {
+          "runtimeName": "V5_staff_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/staff_albedo.png",
+            "normal": "../props-native/textures/staff_normal.png",
+            "orm": "../props-native/textures/staff_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/staff_albedo.png",
+          "sha256": "05537e18703e046b4175f78d8aaf132eb26fa1bf975ae7682b992c7f9a791d21",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/staff_normal.png",
+          "sha256": "88daab312a5c0dac3312acc042a3d9869bc96b7173aad92987c692230b88943d",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/staff_orm.png",
+          "sha256": "1dff112e200d0d0dee4255c5877935a639be03a114ddd03c792f24f94dc77483",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_staff_00": {
+          "vertices": 498,
+          "triangles": 440
+        },
+        "V5_staff_01": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_staff_02": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_staff_03": {
+          "vertices": 24,
+          "triangles": 44
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 1.418650867890392e-07,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 572,
+        "trianglesAfter": 572,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "dagger": {
+      "id": "dagger",
+      "resource": "actors/props-native/dagger/dagger/dagger",
+      "source": "source-art/characters/redesign-v6/props/dagger.blend",
+      "sourceSHA256": "2fa98a49361fd252a561252679d9ace582b754c839d9b042243cc24c09fe23fa",
+      "fbx": "src/.tmp/character-redesign-v6/props/dagger/dagger.fbx",
+      "exportSHA256": "4cfad047e847aa26520a612493585e589356bcbb02942a72d8ef691251a0230f",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 1483,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 1467,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 1483,
+      "materials": [
+        {
+          "runtimeName": "V5_dagger_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/dagger_albedo.png",
+            "normal": "../props-native/textures/dagger_normal.png",
+            "orm": "../props-native/textures/dagger_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/dagger_albedo.png",
+          "sha256": "c8f5ce6411b68e0cfb2ec5d1512c16e79f723ef0f6ca5b2a651bded9b7c9f104",
+          "role": "albedo",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/dagger_normal.png",
+          "sha256": "ca2a79511dd08aa00decf3063b0d66e56840491b251afb1d9b41ef1984af8aa9",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/dagger_orm.png",
+          "sha256": "e13b666fbfc1386666b4fe2a802d44ab809256e6f722438ec1c2a3d72faf633e",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_dagger_00": {
+          "vertices": 303,
+          "triangles": 331
+        },
+        "V5_dagger_01": {
+          "vertices": 582,
+          "triangles": 1152
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 4.077600834762052e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 1483,
+        "trianglesAfter": 1483,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "shield": {
+      "id": "shield",
+      "resource": "actors/props-native/shield/shield/shield",
+      "source": "source-art/characters/redesign-v6/props/shield.blend",
+      "sourceSHA256": "b9951de5db389217e10ad326f4a43c1d1a45d778da02bd6dc9a6e27ffaca708d",
+      "fbx": "src/.tmp/character-redesign-v6/props/shield/shield.fbx",
+      "exportSHA256": "3e5a728d1501204f997cfceea1cccde9bd9958020c0abe5d2fb29fef96446fb0",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 284,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 371,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 284,
+      "materials": [
+        {
+          "runtimeName": "V5_shield_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/shield_albedo.png",
+            "normal": "../props-native/textures/shield_normal.png",
+            "orm": "../props-native/textures/shield_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/shield_albedo.png",
+          "sha256": "18d970cfd6212654ea39c336a3150394d9246506888a6ce69eb101100edaf1e0",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/shield_normal.png",
+          "sha256": "5f25fb236d715a831ff959cb07d02cd9aad8b8c1bd308178aebbfdfe2e05ef74",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/shield_orm.png",
+          "sha256": "e12111f820c4141ffb3df0ac279116547de57573f0deed35143724fea4760726",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_shield_00": {
+          "vertices": 322,
+          "triangles": 284
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 4.7706993910878737e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 284,
+        "trianglesAfter": 284,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "lorn-shield": {
+      "id": "lorn-shield",
+      "resource": "actors/props-native/lorn-shield/lorn-shield/lorn-shield",
+      "source": "source-art/characters/redesign-v6/props/lorn-shield.blend",
+      "sourceSHA256": "ee806cc2cbee73d5db1eb931d9e86bd497ad027ee2f7100a3e6b6bde4ee5d95a",
+      "fbx": "src/.tmp/character-redesign-v6/props/lorn-shield/lorn-shield.fbx",
+      "exportSHA256": "2178a09c85bbb8ac45b240480e00f314453bdefba61f8caafcfc2b31eab903e1",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/shield_square.gltf",
+          "sha256": "7d70e034e5af0cde3a6e8b2cc53da46af01f6981c79917ad0c6501a7f5c87d16",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 654,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 728,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 654,
+      "materials": [
+        {
+          "runtimeName": "V5_lorn_shield_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/lorn-shield_albedo.png",
+            "normal": "../props-native/textures/lorn-shield_normal.png",
+            "orm": "../props-native/textures/lorn-shield_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/lorn-shield_albedo.png",
+          "sha256": "fa6f5d85915031b621d92275d2810da911033edfa8867bac0eb9de298c7eb256",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/lorn-shield_normal.png",
+          "sha256": "d53cce8ec159cc01d1090bec357a0dee161111e3fca60adc89fe838ce267909f",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/lorn-shield_orm.png",
+          "sha256": "6c1e50116e723d6c4376afca9dc0828a25a557ff00d2877147d1fba8df67e847",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_lorn_shield_00": {
+          "vertices": 286,
+          "triangles": 262
+        },
+        "V5_lorn_shield_01": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_lorn_shield_02": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_lorn_shield_03": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_lorn_shield_04": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_lorn_shield_05": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_lorn_shield_06": {
+          "vertices": 24,
+          "triangles": 44
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 7.337970941989624e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 654,
+        "trianglesAfter": 654,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "captain-shield": {
+      "id": "captain-shield",
+      "resource": "actors/props-native/captain-shield/captain-shield/captain-shield",
+      "source": "source-art/characters/redesign-v6/props/captain-shield.blend",
+      "sourceSHA256": "600a508bf0c4ac1ce3277e987d663790b74ff04fec84b498f935a4709a23cbd9",
+      "fbx": "src/.tmp/character-redesign-v6/props/captain-shield/captain-shield.fbx",
+      "exportSHA256": "e46eb4d7d880b7752cd58dc30354ee42a1ef5138302189cdb006f989c452023d",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/shield_square.gltf",
+          "sha256": "7d70e034e5af0cde3a6e8b2cc53da46af01f6981c79917ad0c6501a7f5c87d16",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 478,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 512,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 478,
+      "materials": [
+        {
+          "runtimeName": "V5_captain_shield_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/captain-shield_albedo.png",
+            "normal": "../props-native/textures/captain-shield_normal.png",
+            "orm": "../props-native/textures/captain-shield_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/captain-shield_albedo.png",
+          "sha256": "2e47c044be1f908ddf65f90a01fb5347ad211640cc3dbb79830740077563786c",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/captain-shield_normal.png",
+          "sha256": "dd4a18e1bf932c718bb21a57d14fcb6280083f107d79841eee90ea701585aeae",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/captain-shield_orm.png",
+          "sha256": "f5a253a1049d1f1ea4417ae5c8fb67823cb8cd53e23fb9e8a3e6860dde726df1",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_captain_shield_00": {
+          "vertices": 286,
+          "triangles": 262
+        },
+        "V5_captain_shield_01": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_captain_shield_02": {
+          "vertices": 56,
+          "triangles": 108
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 6.999184876121944e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 478,
+        "trianglesAfter": 478,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "map-kit": {
+      "id": "map-kit",
+      "resource": "actors/props-native/map-kit/map-kit/map-kit",
+      "source": "source-art/characters/redesign-v6/props/map-kit.blend",
+      "sourceSHA256": "9fd08c41a32ca885ad222fef493078a5605a1c311a789922ef55e82c9aaa1787",
+      "fbx": "src/.tmp/character-redesign-v6/props/map-kit/map-kit.fbx",
+      "exportSHA256": "3985a5f75d4d8cb8fa59842a1ea9c1f152d95b859516dd71673b9bf88f34977f",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "method": "Blender Cylinder and beveled Curve adapters; no matching map tube in downloaded libraries"
+        }
+      ],
+      "uv": {
+        "triangles": 1508,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 1518,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 1508,
+      "materials": [
+        {
+          "runtimeName": "V5_map_kit_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/map-kit_albedo.png",
+            "normal": "../props-native/textures/map-kit_normal.png",
+            "orm": "../props-native/textures/map-kit_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/map-kit_albedo.png",
+          "sha256": "b04ef4ab0d9a9e11102e7f758912e1a7332dc7ed7b38bf6f2266b8ccbd47f030",
+          "role": "albedo",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/map-kit_normal.png",
+          "sha256": "bcbc2d8bd3691ff0c3584151a27fdae4f8480e09ea87c0e9291ebd2d38101548",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/map-kit_orm.png",
+          "sha256": "eeacc0fb6dc61ce5b483ce031245ac1cb17a71ed9a8f2b3a3434a36ce77fe1cf",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_map_kit_00": {
+          "vertices": 32,
+          "triangles": 60
+        },
+        "V5_map_kit_01": {
+          "vertices": 32,
+          "triangles": 60
+        },
+        "V5_map_kit_02": {
+          "vertices": 32,
+          "triangles": 60
+        },
+        "V5_map_kit_03": {
+          "vertices": 32,
+          "triangles": 60
+        },
+        "V5_map_kit_04": {
+          "vertices": 606,
+          "triangles": 1200
+        },
+        "V5_map_kit_05": {
+          "vertices": 18,
+          "triangles": 24
+        },
+        "V5_map_kit_06": {
+          "vertices": 24,
+          "triangles": 44
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 3.0384398996829987e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 1508,
+        "trianglesAfter": 1508,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "design-w01": {
+      "id": "design-w01",
+      "resource": "actors/props-native/design-w01/design-w01/design-w01",
+      "source": "source-art/weapons/3d-design-v1/sources/W01.blend",
+      "sourceSHA256": "497e91a2f45335ebbf0d6b7613b373da0a32f1bfa44c648d4faba9f69119c2f5",
+      "exportSHA256": "8fda630f13e07f192eab4b6287b058f262270b5be4f485b8aed5f5ffca9ed83e",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W01_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w01-albedo.png",
+            "normal": "../props-native/textures/design-w01-normal.png",
+            "orm": "../props-native/textures/design-w01-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 6578,
+      "design2D": "src/cocos/assets/resources/equipment/v3/sword-progression.png",
+      "design2DSHA256": "150b8c63a2debc16cd5d7536e52676a084a09e262de1575158ebb1700a1a783d",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null,
+      "stowedResource": "design-stowed-w01"
+    },
+    "design-stowed-w01": {
+      "id": "design-stowed-w01",
+      "resource": "actors/props-native/design-stowed-w01/design-stowed-w01/design-stowed-w01",
+      "source": "source-art/weapons/3d-design-v1/sources/W01.blend",
+      "sourceSHA256": "497e91a2f45335ebbf0d6b7613b373da0a32f1bfa44c648d4faba9f69119c2f5",
+      "exportSHA256": "0bd6ea42667e57cd0d6e9eb7887c366a9c06f40d86014752aac7c9990d7ae549",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W01_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w01-albedo.png",
+            "normal": "../props-native/textures/design-w01-normal.png",
+            "orm": "../props-native/textures/design-w01-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 5624,
+      "design2D": "src/cocos/assets/resources/equipment/v3/sword-progression.png",
+      "design2DSHA256": "150b8c63a2debc16cd5d7536e52676a084a09e262de1575158ebb1700a1a783d",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-w02": {
+      "id": "design-w02",
+      "resource": "actors/props-native/design-w02/design-w02/design-w02",
+      "source": "source-art/weapons/3d-design-v1/sources/W02.blend",
+      "sourceSHA256": "c28d81457a703a6162544d9482eb1c9d2d142688a9dae60c659597c949c30584",
+      "exportSHA256": "b848538e8ad873f0c9069f9147cb1999f8ee36444644ea4ccdbe38ea213c7894",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W02_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w02-albedo.png",
+            "normal": "../props-native/textures/design-w02-normal.png",
+            "orm": "../props-native/textures/design-w02-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 9418,
+      "design2D": "src/cocos/assets/resources/equipment/v3/sword-progression.png",
+      "design2DSHA256": "150b8c63a2debc16cd5d7536e52676a084a09e262de1575158ebb1700a1a783d",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null,
+      "stowedResource": "design-stowed-w02"
+    },
+    "design-stowed-w02": {
+      "id": "design-stowed-w02",
+      "resource": "actors/props-native/design-stowed-w02/design-stowed-w02/design-stowed-w02",
+      "source": "source-art/weapons/3d-design-v1/sources/W02.blend",
+      "sourceSHA256": "c28d81457a703a6162544d9482eb1c9d2d142688a9dae60c659597c949c30584",
+      "exportSHA256": "31ebae68f11384c79f2fd7ee626b254924d0eecc5f11adbaeeec53464e2221b2",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W02_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w02-albedo.png",
+            "normal": "../props-native/textures/design-w02-normal.png",
+            "orm": "../props-native/textures/design-w02-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 7982,
+      "design2D": "src/cocos/assets/resources/equipment/v3/sword-progression.png",
+      "design2DSHA256": "150b8c63a2debc16cd5d7536e52676a084a09e262de1575158ebb1700a1a783d",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-w03": {
+      "id": "design-w03",
+      "resource": "actors/props-native/design-w03/design-w03/design-w03",
+      "source": "source-art/weapons/3d-design-v1/sources/W03.blend",
+      "sourceSHA256": "41b308fc36d6986a19712a9e14eec73465c2c3297aeefcf611f59e705d4f475d",
+      "exportSHA256": "b3b98b4b7f8a56c9677a266efa55b5dcb5791b46c3997776cb4bc6743817d1a8",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W03_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w03-albedo.png",
+            "normal": "../props-native/textures/design-w03-normal.png",
+            "orm": "../props-native/textures/design-w03-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_bronze",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-bronze-albedo.png",
+            "normal": "../props-native/textures/design-edge-bronze-normal.png",
+            "orm": "../props-native/textures/design-edge-bronze-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 9974,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/w03.png",
+      "design2DSHA256": "290a79a095edb8c3fb4f07b6229344d916e1b968a5a288a76faec04f1c385c0e",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-w04": {
+      "id": "design-w04",
+      "resource": "actors/props-native/design-w04/design-w04/design-w04",
+      "source": "source-art/weapons/3d-design-v1/sources/W04.blend",
+      "sourceSHA256": "7abc9622d376d7200a5ee9a9201e4ddaff08ac0fdc8ec16306d8c38db2b47e3e",
+      "exportSHA256": "d5cd6482418f288d128c8a07e99c2d3af693e688a42e9a8c0e0a5e0fedea8345",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W04_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w04-albedo.png",
+            "normal": "../props-native/textures/design-w04-normal.png",
+            "orm": "../props-native/textures/design-w04-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 11590,
+      "design2D": "src/cocos/assets/resources/equipment/v3/sword-progression.png",
+      "design2DSHA256": "150b8c63a2debc16cd5d7536e52676a084a09e262de1575158ebb1700a1a783d",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null,
+      "stowedResource": "design-stowed-w04"
+    },
+    "design-stowed-w04": {
+      "id": "design-stowed-w04",
+      "resource": "actors/props-native/design-stowed-w04/design-stowed-w04/design-stowed-w04",
+      "source": "source-art/weapons/3d-design-v1/sources/W04.blend",
+      "sourceSHA256": "7abc9622d376d7200a5ee9a9201e4ddaff08ac0fdc8ec16306d8c38db2b47e3e",
+      "exportSHA256": "d3659f0c6d405cded3dd7e36f95d4c659f12c1087fb7c9350121188edf983c91",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W04_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w04-albedo.png",
+            "normal": "../props-native/textures/design-w04-normal.png",
+            "orm": "../props-native/textures/design-w04-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 10508,
+      "design2D": "src/cocos/assets/resources/equipment/v3/sword-progression.png",
+      "design2DSHA256": "150b8c63a2debc16cd5d7536e52676a084a09e262de1575158ebb1700a1a783d",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-w05": {
+      "id": "design-w05",
+      "resource": "actors/props-native/design-w05/design-w05/design-w05",
+      "source": "source-art/weapons/3d-design-v1/sources/W05.blend",
+      "sourceSHA256": "1b43f2a184702aac8d1fe119c88ec7aec6b5e7c32adf248659c78148333cdb52",
+      "exportSHA256": "23cef1cf9f8b7a27a037dc9a663060cb925786c9ebfa5a4fcdc07c77896ed7bd",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W05_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w05-albedo.png",
+            "normal": "../props-native/textures/design-w05-normal.png",
+            "orm": "../props-native/textures/design-w05-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 10502,
+      "design2D": "src/cocos/assets/resources/equipment/v3/sword-progression.png",
+      "design2DSHA256": "150b8c63a2debc16cd5d7536e52676a084a09e262de1575158ebb1700a1a783d",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null,
+      "stowedResource": "design-stowed-w05"
+    },
+    "design-stowed-w05": {
+      "id": "design-stowed-w05",
+      "resource": "actors/props-native/design-stowed-w05/design-stowed-w05/design-stowed-w05",
+      "source": "source-art/weapons/3d-design-v1/sources/W05.blend",
+      "sourceSHA256": "1b43f2a184702aac8d1fe119c88ec7aec6b5e7c32adf248659c78148333cdb52",
+      "exportSHA256": "50ebf1c547b70672149226f83f033fa8f6aa10d733281159b39689046793b772",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W05_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w05-albedo.png",
+            "normal": "../props-native/textures/design-w05-normal.png",
+            "orm": "../props-native/textures/design-w05-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 8474,
+      "design2D": "src/cocos/assets/resources/equipment/v3/sword-progression.png",
+      "design2DSHA256": "150b8c63a2debc16cd5d7536e52676a084a09e262de1575158ebb1700a1a783d",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-w06": {
+      "id": "design-w06",
+      "resource": "actors/props-native/design-w06/design-w06/design-w06",
+      "source": "source-art/weapons/3d-design-v1/sources/W06.blend",
+      "sourceSHA256": "45481338c1d99e0c8ad9fecaddb8ea870fad0192c98818b4d3d72daf21628688",
+      "exportSHA256": "66575cd619c333a813392610473191ca578513757eda73e9d13f4f171b024124",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W06_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w06-albedo.png",
+            "normal": "../props-native/textures/design-w06-normal.png",
+            "orm": "../props-native/textures/design-w06-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 7052,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/w06.png",
+      "design2DSHA256": "e21efcd97ad25b906e82153be129d9e44e37f3983cd7bfeaccbdea0cc045ed34",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null,
+      "stowedResource": "design-stowed-w06"
+    },
+    "design-stowed-w06": {
+      "id": "design-stowed-w06",
+      "resource": "actors/props-native/design-stowed-w06/design-stowed-w06/design-stowed-w06",
+      "source": "source-art/weapons/3d-design-v1/sources/W06.blend",
+      "sourceSHA256": "45481338c1d99e0c8ad9fecaddb8ea870fad0192c98818b4d3d72daf21628688",
+      "exportSHA256": "635e17183d698ce9767973e6fd732f20ac637279aa336f8cbbfb730f45ab2446",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W06_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w06-albedo.png",
+            "normal": "../props-native/textures/design-w06-normal.png",
+            "orm": "../props-native/textures/design-w06-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 5630,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/w06.png",
+      "design2DSHA256": "e21efcd97ad25b906e82153be129d9e44e37f3983cd7bfeaccbdea0cc045ed34",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-w07": {
+      "id": "design-w07",
+      "resource": "actors/props-native/design-w07/design-w07/design-w07",
+      "source": "source-art/weapons/3d-design-v1/sources/W07.blend",
+      "sourceSHA256": "4c704537cd895506a5500d3938332d18bfc41e04dfda42e5d6bfb86249efb359",
+      "exportSHA256": "25243527e5f6273ee7ad9b968e25e358b8d4313ea211cf90adf69af025d3d0cc",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W07_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w07-albedo.png",
+            "normal": "../props-native/textures/design-w07-normal.png",
+            "orm": "../props-native/textures/design-w07-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_wood",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-wood-albedo.png",
+            "normal": "../props-native/textures/design-edge-wood-normal.png",
+            "orm": "../props-native/textures/design-edge-wood-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_string",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-string-albedo.png",
+            "normal": "../props-native/textures/design-edge-string-normal.png",
+            "orm": "../props-native/textures/design-edge-string-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 12920,
+      "design2D": "src/cocos/assets/resources/equipment/v3/bow-progression.png",
+      "design2DSHA256": "31c3c3ce4e9e0936fc00fe7af46268a99ea75171426eff16ae3fa79c2ccea105",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": {
+        "shapeName": "Draw",
+        "string": "Original native topology/Draw nock; original serving pinned, tips adapted to new body with native BVH; physical length adapted",
+        "body": "Blender native Surface Deform transfer"
+      }
+    },
+    "design-w08": {
+      "id": "design-w08",
+      "resource": "actors/props-native/design-w08/design-w08/design-w08",
+      "source": "source-art/weapons/3d-design-v1/sources/W08.blend",
+      "sourceSHA256": "7c0ff4e041032ac702e7221d6f415d7c6625f40d7c9a1630b4d09cd1e04b837c",
+      "exportSHA256": "bf04ba0f03e3840ffeb5e4c62fb4f6198afc46c41683f18f7bf1c6b121b8be7e",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W08_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w08-albedo.png",
+            "normal": "../props-native/textures/design-w08-normal.png",
+            "orm": "../props-native/textures/design-w08-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_wood",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-wood-albedo.png",
+            "normal": "../props-native/textures/design-edge-wood-normal.png",
+            "orm": "../props-native/textures/design-edge-wood-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_string",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-string-albedo.png",
+            "normal": "../props-native/textures/design-edge-string-normal.png",
+            "orm": "../props-native/textures/design-edge-string-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 16302,
+      "design2D": "src/cocos/assets/resources/equipment/v3/bow-progression.png",
+      "design2DSHA256": "31c3c3ce4e9e0936fc00fe7af46268a99ea75171426eff16ae3fa79c2ccea105",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": {
+        "shapeName": "Draw",
+        "string": "Original native topology/Draw nock; original serving pinned, tips adapted to new body with native BVH; physical length adapted",
+        "body": "Blender native Surface Deform transfer"
+      }
+    },
+    "design-w09": {
+      "id": "design-w09",
+      "resource": "actors/props-native/design-w09/design-w09/design-w09",
+      "source": "source-art/weapons/3d-design-v1/sources/W09.blend",
+      "sourceSHA256": "9138effe1daff2b40d0122f8f34796c3e679d91b5416bc33f478b435ab665786",
+      "exportSHA256": "df7022423f3878f1eb4a28f46d000ea0f4f7b5fac28d32b0bc56458654cf76ac",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W09_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w09-albedo.png",
+            "normal": "../props-native/textures/design-w09-normal.png",
+            "orm": "../props-native/textures/design-w09-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_wood",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-wood-albedo.png",
+            "normal": "../props-native/textures/design-edge-wood-normal.png",
+            "orm": "../props-native/textures/design-edge-wood-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_string",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-string-albedo.png",
+            "normal": "../props-native/textures/design-edge-string-normal.png",
+            "orm": "../props-native/textures/design-edge-string-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 10960,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/w09.png",
+      "design2DSHA256": "255e59f2002b3dcb920d909e31d101d0728e549c88cd70d50be68081661557b6",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": {
+        "shapeName": "Draw",
+        "string": "Original native topology/Draw nock; original serving pinned, tips adapted to new body with native BVH; physical length adapted",
+        "body": "Blender native Surface Deform transfer"
+      }
+    },
+    "design-w10": {
+      "id": "design-w10",
+      "resource": "actors/props-native/design-w10/design-w10/design-w10",
+      "source": "source-art/weapons/3d-design-v1/sources/W10.blend",
+      "sourceSHA256": "bf87dba81495bd1a335fa09ee8f79489c74f8e2518468a073d85d35e8b50c431",
+      "exportSHA256": "c921c4593e9240bfcf0f059522c746ef6564595ef0bdc023c9eb7e9de23e42f7",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W10_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w10-albedo.png",
+            "normal": "../props-native/textures/design-w10-normal.png",
+            "orm": "../props-native/textures/design-w10-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_wood",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-wood-albedo.png",
+            "normal": "../props-native/textures/design-edge-wood-normal.png",
+            "orm": "../props-native/textures/design-edge-wood-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_string",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-string-albedo.png",
+            "normal": "../props-native/textures/design-edge-string-normal.png",
+            "orm": "../props-native/textures/design-edge-string-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 8470,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/w10.png",
+      "design2DSHA256": "5b8955f981db75cb036e0439d1e3149ed4db49d7881a24494f553b53595fdb2a",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": {
+        "shapeName": "Draw",
+        "string": "Original native topology/Draw nock; original serving pinned, tips adapted to new body with native BVH; physical length adapted",
+        "body": "Blender native Surface Deform transfer"
+      }
+    },
+    "design-w11": {
+      "id": "design-w11",
+      "resource": "actors/props-native/design-w11/design-w11/design-w11",
+      "source": "source-art/weapons/3d-design-v1/sources/W11.blend",
+      "sourceSHA256": "123c5b1c838f242828ebe1cc5182cdf9ecde3fa7e75f34aa9690ea6e4ec742bd",
+      "exportSHA256": "d4ce524ab32bac2f33c3caca16b003b42ac32f155b4a6c156be1e81c1986f3ea",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W11_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w11-albedo.png",
+            "normal": "../props-native/textures/design-w11-normal.png",
+            "orm": "../props-native/textures/design-w11-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_wood",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-wood-albedo.png",
+            "normal": "../props-native/textures/design-edge-wood-normal.png",
+            "orm": "../props-native/textures/design-edge-wood-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_greywood",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-greywood-albedo.png",
+            "normal": "../props-native/textures/design-edge-greywood-normal.png",
+            "orm": "../props-native/textures/design-edge-greywood-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 4478,
+      "design2D": "src/cocos/assets/resources/equipment/v3/staff-progression.png",
+      "design2DSHA256": "ac1f58b13c6429a92cf2247045a2fcc511028386f1b481b27f38600745836665",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-w12": {
+      "id": "design-w12",
+      "resource": "actors/props-native/design-w12/design-w12/design-w12",
+      "source": "source-art/weapons/3d-design-v1/sources/W12.blend",
+      "sourceSHA256": "b69e0b28b2e84877931d6835444f201c9de3b0c88cccf6d19a7213eee96c04b3",
+      "exportSHA256": "9ace4025b57844464148e6c7d4039033d9f80a770b333fef77f711da4c39e2e5",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W12_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w12-albedo.png",
+            "normal": "../props-native/textures/design-w12-normal.png",
+            "orm": "../props-native/textures/design-w12-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_wood",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-wood-albedo.png",
+            "normal": "../props-native/textures/design-edge-wood-normal.png",
+            "orm": "../props-native/textures/design-edge-wood-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_bronze",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-bronze-albedo.png",
+            "normal": "../props-native/textures/design-edge-bronze-normal.png",
+            "orm": "../props-native/textures/design-edge-bronze-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 16662,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/w12.png",
+      "design2DSHA256": "b44fcb6ad13d3db79c5f057ede137374cda5ae0e7857be66d1ce5b5d17f5c61d",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-w13": {
+      "id": "design-w13",
+      "resource": "actors/props-native/design-w13/design-w13/design-w13",
+      "source": "source-art/weapons/3d-design-v1/sources/W13.blend",
+      "sourceSHA256": "799603a5a0df7a3deeb699ec975bea7e8c1aad8675362f1cea558906132e2200",
+      "exportSHA256": "441a1e97c4499ae4f4a8d6e31e7c736ca9f76de015dcb65014df381ab6db93fe",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W13_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w13-albedo.png",
+            "normal": "../props-native/textures/design-w13-normal.png",
+            "orm": "../props-native/textures/design-w13-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_wood",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-wood-albedo.png",
+            "normal": "../props-native/textures/design-edge-wood-normal.png",
+            "orm": "../props-native/textures/design-edge-wood-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_bronze",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-bronze-albedo.png",
+            "normal": "../props-native/textures/design-edge-bronze-normal.png",
+            "orm": "../props-native/textures/design-edge-bronze-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 10454,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/w13.png",
+      "design2DSHA256": "aa3cac2b600b68468c3f79bac4684d253642f4689619b5ca53725f7215351e64",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-w14": {
+      "id": "design-w14",
+      "resource": "actors/props-native/design-w14/design-w14/design-w14",
+      "source": "source-art/weapons/3d-design-v1/sources/W14.blend",
+      "sourceSHA256": "0d0a7219bb285e2231ac05cd978ff7d9b818118f5056e3b0dc60930d6ee69e85",
+      "exportSHA256": "fc95337fdc74edcb67de25d19e229cb350fc7f05efed637727614adaa021b114",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_W14_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-w14-albedo.png",
+            "normal": "../props-native/textures/design-w14-normal.png",
+            "orm": "../props-native/textures/design-w14-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_bronze",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-bronze-albedo.png",
+            "normal": "../props-native/textures/design-edge-bronze-normal.png",
+            "orm": "../props-native/textures/design-edge-bronze-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_wood",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-wood-albedo.png",
+            "normal": "../props-native/textures/design-edge-wood-normal.png",
+            "orm": "../props-native/textures/design-edge-wood-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 10226,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/w14.png",
+      "design2DSHA256": "16e587a721c9a2d8fac73811412528991ebecde224a9a5aa8a6d1e3457766302",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-dr2-03": {
+      "id": "design-dr2-03",
+      "resource": "actors/props-native/design-dr2-03/design-dr2-03/design-dr2-03",
+      "source": "source-art/weapons/3d-design-v1/sources/DR2-03.blend",
+      "sourceSHA256": "282d542a58b3e361e8ed65d948d4698f6483466c0f93245d024a440c9ae0f9ae",
+      "exportSHA256": "3a027c687ba166923730b9478eac42370a0e7e2f739e84018c7e5ce3470c8fb6",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_DR2_03_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-dr2-03-albedo.png",
+            "normal": "../props-native/textures/design-dr2-03-normal.png",
+            "orm": "../props-native/textures/design-dr2-03-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_bronze",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-bronze-albedo.png",
+            "normal": "../props-native/textures/design-edge-bronze-normal.png",
+            "orm": "../props-native/textures/design-edge-bronze-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_wood",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-wood-albedo.png",
+            "normal": "../props-native/textures/design-edge-wood-normal.png",
+            "orm": "../props-native/textures/design-edge-wood-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 13308,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/dr2-03.png",
+      "design2DSHA256": "2c8d2d4c0841ec66d57ec5f2b27541d4deb2c7cec11eabd23ee88761ed925f3d",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-dr3-03": {
+      "id": "design-dr3-03",
+      "resource": "actors/props-native/design-dr3-03/design-dr3-03/design-dr3-03",
+      "source": "source-art/weapons/3d-design-v1/sources/DR3-03.blend",
+      "sourceSHA256": "2331db6b7659243890b869f70b525d3fc676fb1e3d915ab890562826bfa7ec2b",
+      "exportSHA256": "cd216d8bf6d0ff98892750da6269eef75570c1939b25407bf3a794f12d0e267f",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_DR3_03_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-dr3-03-albedo.png",
+            "normal": "../props-native/textures/design-dr3-03-normal.png",
+            "orm": "../props-native/textures/design-dr3-03-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 10476,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/dr3-03.png",
+      "design2DSHA256": "65588b2dd204190e6c186b40987965e47d7f9c8e32254b5172a58c793a82a7e1",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null,
+      "stowedResource": "design-stowed-dr3-03"
+    },
+    "design-stowed-dr3-03": {
+      "id": "design-stowed-dr3-03",
+      "resource": "actors/props-native/design-stowed-dr3-03/design-stowed-dr3-03/design-stowed-dr3-03",
+      "source": "source-art/weapons/3d-design-v1/sources/DR3-03.blend",
+      "sourceSHA256": "2331db6b7659243890b869f70b525d3fc676fb1e3d915ab890562826bfa7ec2b",
+      "exportSHA256": "91273cb71cb425f98fb45eace92dd709e526e92d1078cbd6505c296cc0bd8b74",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_DR3_03_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-dr3-03-albedo.png",
+            "normal": "../props-native/textures/design-dr3-03-normal.png",
+            "orm": "../props-native/textures/design-dr3-03-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 5062,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/dr3-03.png",
+      "design2DSHA256": "65588b2dd204190e6c186b40987965e47d7f9c8e32254b5172a58c793a82a7e1",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-dr4-03": {
+      "id": "design-dr4-03",
+      "resource": "actors/props-native/design-dr4-03/design-dr4-03/design-dr4-03",
+      "source": "source-art/weapons/3d-design-v1/sources/DR4-03.blend",
+      "sourceSHA256": "b6952acf9d5cb0b4330f4f51f88e0bb06b2ff3322bf2e7a034821dcb07f80d16",
+      "exportSHA256": "95810cb8fe8ec4f5f1c06b4519b90ed3e0ff6422996c9899f3167a3a8422af45",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_DR4_03_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-dr4-03-albedo.png",
+            "normal": "../props-native/textures/design-dr4-03-normal.png",
+            "orm": "../props-native/textures/design-dr4-03-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 11928,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/dr4-03.png",
+      "design2DSHA256": "1e0b36580b00742c24bd7c6e2351e8eed474f7a2da9e80209ed551edf37efa31",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null,
+      "stowedResource": "design-stowed-dr4-03"
+    },
+    "design-stowed-dr4-03": {
+      "id": "design-stowed-dr4-03",
+      "resource": "actors/props-native/design-stowed-dr4-03/design-stowed-dr4-03/design-stowed-dr4-03",
+      "source": "source-art/weapons/3d-design-v1/sources/DR4-03.blend",
+      "sourceSHA256": "b6952acf9d5cb0b4330f4f51f88e0bb06b2ff3322bf2e7a034821dcb07f80d16",
+      "exportSHA256": "c198e1fbcfa1e6cd7154c64058a4b812f581dca42543e4209d9914891a080ee2",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_DR4_03_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-dr4-03-albedo.png",
+            "normal": "../props-native/textures/design-dr4-03-normal.png",
+            "orm": "../props-native/textures/design-dr4-03-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 7712,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/dr4-03.png",
+      "design2DSHA256": "1e0b36580b00742c24bd7c6e2351e8eed474f7a2da9e80209ed551edf37efa31",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-du1-04": {
+      "id": "design-du1-04",
+      "resource": "actors/props-native/design-du1-04/design-du1-04/design-du1-04",
+      "source": "source-art/weapons/3d-design-v1/sources/DU1-04.blend",
+      "sourceSHA256": "cdfbba4afe16d5124082c62ef13d7e2bb48837d6746b75c81aecf6a526d16760",
+      "exportSHA256": "22c3c7838231aa0eb9ea8477166f84867769c33d780bf17cb794a41da06484ba",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_DU1_04_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-du1-04-albedo.png",
+            "normal": "../props-native/textures/design-du1-04-normal.png",
+            "orm": "../props-native/textures/design-du1-04-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_wood",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-wood-albedo.png",
+            "normal": "../props-native/textures/design-edge-wood-normal.png",
+            "orm": "../props-native/textures/design-edge-wood-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_bronze",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-bronze-albedo.png",
+            "normal": "../props-native/textures/design-edge-bronze-normal.png",
+            "orm": "../props-native/textures/design-edge-bronze-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 4262,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/du1-04.png",
+      "design2DSHA256": "7e27956206170d42856c03c09b9e9b04626c5ae44a7057041aad332268328b55",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-du2-04": {
+      "id": "design-du2-04",
+      "resource": "actors/props-native/design-du2-04/design-du2-04/design-du2-04",
+      "source": "source-art/weapons/3d-design-v1/sources/DU2-04.blend",
+      "sourceSHA256": "886309d07bb33c041ca7c7945589acfe812d5d75f4b55da7e6b353507e3c4d7d",
+      "exportSHA256": "d93c2a380049495acd1823c92e865fceba3ed5ccb4f584b2f2b52ca18ce831f1",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_DU2_04_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-du2-04-albedo.png",
+            "normal": "../props-native/textures/design-du2-04-normal.png",
+            "orm": "../props-native/textures/design-du2-04-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_wood",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-wood-albedo.png",
+            "normal": "../props-native/textures/design-edge-wood-normal.png",
+            "orm": "../props-native/textures/design-edge-wood-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_string",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-string-albedo.png",
+            "normal": "../props-native/textures/design-edge-string-normal.png",
+            "orm": "../props-native/textures/design-edge-string-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 9558,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/du2-04.png",
+      "design2DSHA256": "367042adf038b3c86bdd4779e823e262a9b2cacf46e8c09ed79f318dd77a324e",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": {
+        "shapeName": "Draw",
+        "string": "Original native topology/Draw nock; original serving pinned, tips adapted to new body with native BVH; physical length adapted",
+        "body": "Blender native Surface Deform transfer"
+      }
+    },
+    "design-de02": {
+      "id": "design-de02",
+      "resource": "actors/props-native/design-de02/design-de02/design-de02",
+      "source": "source-art/weapons/3d-design-v1/sources/DE02.blend",
+      "sourceSHA256": "855d2b72ab99ad2b9345939f75272b54970be9bc803f0765d456b4e5f201c1b4",
+      "exportSHA256": "3b9fb8e68408038106654eddf241b4041316d9b45b4796b117216bebaa326b62",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_DE02_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-de02-albedo.png",
+            "normal": "../props-native/textures/design-de02-normal.png",
+            "orm": "../props-native/textures/design-de02-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_wood",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-wood-albedo.png",
+            "normal": "../props-native/textures/design-edge-wood-normal.png",
+            "orm": "../props-native/textures/design-edge-wood-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_string",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-string-albedo.png",
+            "normal": "../props-native/textures/design-edge-string-normal.png",
+            "orm": "../props-native/textures/design-edge-string-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 12768,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/de02.png",
+      "design2DSHA256": "1b69d57b0e1d4f8c1b9328aeef5c95061ed4b49048d5048bfdeda5968007e088",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": {
+        "shapeName": "Draw",
+        "string": "Original native topology/Draw nock; original serving pinned, tips adapted to new body with native BVH; physical length adapted",
+        "body": "Blender native Surface Deform transfer"
+      }
+    },
+    "design-de05": {
+      "id": "design-de05",
+      "resource": "actors/props-native/design-de05/design-de05/design-de05",
+      "source": "source-art/weapons/3d-design-v1/sources/DE05.blend",
+      "sourceSHA256": "a236ed6401d726e84148eaaeb8650f32ef751f25c6d8ed9a443b69fa701b3cc5",
+      "exportSHA256": "0e4e9918d58172b1d67609d8a2a039549b5ce2533f1b92e2a6d23d6809eca3fd",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_DE05_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-de05-albedo.png",
+            "normal": "../props-native/textures/design-de05-normal.png",
+            "orm": "../props-native/textures/design-de05-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_bronze",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-bronze-albedo.png",
+            "normal": "../props-native/textures/design-edge-bronze-normal.png",
+            "orm": "../props-native/textures/design-edge-bronze-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 6698,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/de05.png",
+      "design2DSHA256": "0d2c161bcdc47002722b53448a00ee1f90145d718bf1fbe981afd7920da52285",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-de06": {
+      "id": "design-de06",
+      "resource": "actors/props-native/design-de06/design-de06/design-de06",
+      "source": "source-art/weapons/3d-design-v1/sources/DE06.blend",
+      "sourceSHA256": "78b7509a38b3d9df7adabd54f8b175c39c292dab73c3ebdd073452ef4d3237f8",
+      "exportSHA256": "42bc9264e0353f53e622a6caa7b8f444982bc382805f351671152a071fe8d518",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_DE06_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-de06-albedo.png",
+            "normal": "../props-native/textures/design-de06-normal.png",
+            "orm": "../props-native/textures/design-de06-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 14984,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/de06.png",
+      "design2DSHA256": "b88a4f3046acbd565bc40b743ed9acd812c13fc94612489bf65dbced1f3dbf63",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null,
+      "stowedResource": "design-stowed-de06"
+    },
+    "design-stowed-de06": {
+      "id": "design-stowed-de06",
+      "resource": "actors/props-native/design-stowed-de06/design-stowed-de06/design-stowed-de06",
+      "source": "source-art/weapons/3d-design-v1/sources/DE06.blend",
+      "sourceSHA256": "78b7509a38b3d9df7adabd54f8b175c39c292dab73c3ebdd073452ef4d3237f8",
+      "exportSHA256": "d381982c7aacc36a30ee7054672abccaab72fd2ffb76b4bfde2d5ff8d207bded",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_DE06_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-de06-albedo.png",
+            "normal": "../props-native/textures/design-de06-normal.png",
+            "orm": "../props-native/textures/design-de06-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_bronze",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-bronze-albedo.png",
+            "normal": "../props-native/textures/design-edge-bronze-normal.png",
+            "orm": "../props-native/textures/design-edge-bronze-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 9182,
+      "design2D": "src/cocos/assets/resources/equipment/campaign-v1/icons/de06.png",
+      "design2DSHA256": "b88a4f3046acbd565bc40b743ed9acd812c13fc94612489bf65dbced1f3dbf63",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-l01": {
+      "id": "design-l01",
+      "resource": "actors/props-native/design-l01/design-l01/design-l01",
+      "source": "source-art/weapons/3d-design-v1/sources/L01.blend",
+      "sourceSHA256": "2ca916fede2317552993c7baab97ba31929e533f7020dfae4a3061c6717aa922",
+      "exportSHA256": "dcbd78701ca8e6d50ee679e726d636e0a30604d2ada997912c63264dfb3587b0",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_L01_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-l01-albedo.png",
+            "normal": "../props-native/textures/design-l01-normal.png",
+            "orm": "../props-native/textures/design-l01-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 22718,
+      "design2D": "src/cocos/assets/resources/equipment/v3/sword-progression.png",
+      "design2DSHA256": "150b8c63a2debc16cd5d7536e52676a084a09e262de1575158ebb1700a1a783d",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null,
+      "stowedResource": "design-stowed-l01"
+    },
+    "design-stowed-l01": {
+      "id": "design-stowed-l01",
+      "resource": "actors/props-native/design-stowed-l01/design-stowed-l01/design-stowed-l01",
+      "source": "source-art/weapons/3d-design-v1/sources/L01.blend",
+      "sourceSHA256": "2ca916fede2317552993c7baab97ba31929e533f7020dfae4a3061c6717aa922",
+      "exportSHA256": "752c9ba6260e84d1ce02b16d0b8a883b3f7f10dfc124fc8c392d3e9162b23cea",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_L01_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-l01-albedo.png",
+            "normal": "../props-native/textures/design-l01-normal.png",
+            "orm": "../props-native/textures/design-l01-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 12272,
+      "design2D": "src/cocos/assets/resources/equipment/v3/sword-progression.png",
+      "design2DSHA256": "150b8c63a2debc16cd5d7536e52676a084a09e262de1575158ebb1700a1a783d",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    },
+    "design-l02": {
+      "id": "design-l02",
+      "resource": "actors/props-native/design-l02/design-l02/design-l02",
+      "source": "source-art/weapons/3d-design-v1/sources/L02.blend",
+      "sourceSHA256": "7da610f9200df2ce6aae616976a4f7d08e3d91bfb834a373f4618adad12b1aae",
+      "exportSHA256": "71d39848219a20dc946233b6f623f7d5a4185b3338625abd2de0e6ddb917adc1",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "Design_L02_PBR",
+          "maps": {
+            "albedo": "../props-native/textures/design-l02-albedo.png",
+            "normal": "../props-native/textures/design-l02-normal.png",
+            "orm": "../props-native/textures/design-l02-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_wood",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-wood-albedo.png",
+            "normal": "../props-native/textures/design-edge-wood-normal.png",
+            "orm": "../props-native/textures/design-edge-wood-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_steel",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-steel-albedo.png",
+            "normal": "../props-native/textures/design-edge-steel-normal.png",
+            "orm": "../props-native/textures/design-edge-steel-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_string",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-string-albedo.png",
+            "normal": "../props-native/textures/design-edge-string-normal.png",
+            "orm": "../props-native/textures/design-edge-string-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 35532,
+      "design2D": "src/cocos/assets/resources/equipment/v3/bow-progression.png",
+      "design2DSHA256": "31c3c3ce4e9e0936fc00fe7af46268a99ea75171426eff16ae3fa79c2ccea105",
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": {
+        "shapeName": "Draw",
+        "string": "Original native topology/Draw nock; original serving pinned, tips adapted to new body with native BVH; physical length adapted",
+        "body": "Blender native Surface Deform transfer"
+      }
+    },
+    "design-quiver": {
+      "id": "design-quiver",
+      "resource": "actors/props-native/design-quiver/design-quiver/design-quiver",
+      "source": "source-art/weapons/3d-design-v1/sources/quiver.blend",
+      "sourceSHA256": "d37a34fc97c824064f8ad9c3c058736ef07818cd1458e3e7867944e5c1a5dd06",
+      "exportSHA256": "f8ca79972726370dfbfea300e5bb93dccb1baa7a05d4c8a491350fa327c8a385",
+      "license": "Project-authored 3D geometry using existing project-owned 2D artwork; original CC0 Bow Draw/string retained for bows",
+      "materials": [
+        {
+          "runtimeName": "DesignEdge_leather",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-leather-albedo.png",
+            "normal": "../props-native/textures/design-edge-leather-normal.png",
+            "orm": "../props-native/textures/design-edge-leather-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_bronze",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-bronze-albedo.png",
+            "normal": "../props-native/textures/design-edge-bronze-normal.png",
+            "orm": "../props-native/textures/design-edge-bronze-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_wood",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-wood-albedo.png",
+            "normal": "../props-native/textures/design-edge-wood-normal.png",
+            "orm": "../props-native/textures/design-edge-wood-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        },
+        {
+          "runtimeName": "DesignEdge_string",
+          "maps": {
+            "albedo": "../props-native/textures/design-edge-string-albedo.png",
+            "normal": "../props-native/textures/design-edge-string-normal.png",
+            "orm": "../props-native/textures/design-edge-string-orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 0.5
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "triangles": 3396,
+      "design2D": null,
+      "design2DSHA256": null,
+      "review": "source-art/weapons/3d-design-v1/README.md",
+      "morph": null
+    }
+  },
+  "materialProvenance": [
+    {
+      "source": "source-art/materials/chapter-one-v3/pbr-library/wood_planks_grey",
+      "license": "CC0-1.0",
+      "provider": "Poly Haven",
+      "asset": "wood_planks_grey"
+    },
+    {
+      "source": "assets/materials/chapter-one-v3/ui/ui-smoked-leather-albedo-v1.png",
+      "license": "Project-owned artwork",
+      "method": "Reused leather albedo; Blender bump relief baked to tangent normal"
+    },
+    {
+      "source": "Native Blender Wave Texture",
+      "method": "Directional brushed-metal roughness and microscopic relief; no claimed scanned steel"
+    }
+  ],
+  "profileResources": {
+    "mira": [
+      "dagger",
+      "dagger"
+    ],
+    "lorn": [
+      "sword",
+      "lorn-shield"
+    ],
+    "captain": [
+      "hammer",
+      "captain-shield"
+    ],
+    "nightqi": [
+      "wind-bow",
+      "arrow"
+    ],
+    "kael": [
+      "map-kit"
+    ],
+    "evelyn": {
+      "environmentModel": "lantern",
+      "sourceAsset": "wooden_lantern_01",
+      "sourceManifest": "src/cocos/asset-pipeline/environment/sources.json",
+      "license": "CC0-1.0",
+      "height": 0.48,
+      "palmToModelSole": [
+        0,
+        -0.445,
+        0
+      ],
+      "additionalPointLights": 0
+    },
+    "raider": [
+      "sword"
+    ],
+    "raider-shield": [
+      "sword",
+      "shield"
+    ],
+    "raider-archer": [
+      "bow",
+      "arrow"
+    ]
+  },
+  "cocosBinding": {
+    "bowEuler": [
+      90,
+      0,
+      180
+    ],
+    "arrowEuler": [
+      0,
+      0,
+      0
+    ],
+    "arrowPosition": [
+      0,
+      0.35595446825027466,
+      0
+    ],
+    "policy": "Keep original dynamic attach_bow_l/attach_arrow_r and animated Draw sampling"
+  },
+  "bake": {
+    "tool": "Blender 4.5.15 LTS native Smart UV Project, Pack Islands and Cycles bake",
+    "albedo": "Base Color emitted into sRGB image, including metallic surfaces",
+    "normal": "Tangent-space normal from source image relief and native directional metal finishing",
+    "orm": "R=1 unoccluded, G=actual roughness, B=actual metallic; linear image",
+    "uv0": "Independent packed RuntimeUV; no collapsed source-atlas corners",
+    "budget": "Main albedo512, tiny albedo256, all normal/ORM256"
+  },
+  "sourceLicenses": [
+    {
+      "creator": "Kay Lousberg / KayKit",
+      "package": "Adventurers Free 2.0",
+      "license": "CC0-1.0",
+      "officialURL": "https://kaylousberg.itch.io/kaykit-adventurers",
+      "file": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/License.txt",
+      "sha256": "d4adc31660d1db22eb60eba648e01db41577548f6fa1a3576cb4a6283dae0a58"
+    },
+    {
+      "creator": "culturalibre",
+      "asset": "culturalibre_war_hammer",
+      "license": "CC0 as declared by asset metadata and .mhclo",
+      "source": "http://www.makehumancommunity.org/node/2051",
+      "assetMetadata": "src/.tools/makehuman-community/packs/equipment01.json",
+      "assetLicenseFile": "src/.tools/makehuman-community/clothes/culturalibre_war_hammer/culturalibre_war_hammer.mhclo",
+      "objHeaderNote": "OBJ carries generic MakeClothes Unknown/AGPL3 exporter header; archive metadata and asset-specific .mhclo both explicitly identify culturalibre and CC0. Both are retained for provenance."
+    }
+  ],
+  "weaponDesignReview": "source-art/weapons/3d-design-v1/README.md"
+}

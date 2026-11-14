@@ -1,0 +1,693 @@
+{
+  "date": "2026-11-11",
+  "sourceVersion": "0.3.14",
+  "status": "source and local preview validated",
+  "packageProduced": false,
+  "uploaded": false,
+  "platformVerified": false,
+  "iphone14Verified": false,
+  "frameRatePolicy": "Existing frame-rate settings retained; no new cap or reduction.",
+  "implementation": [
+    "Retain the one ready native player rig/materials/weapons across painted-world travel. Recreate area-local cast, controllers, collision and environment. Rebind player ownership, position, pose and equipment state; release on chapter disposal.",
+    "Overlap independent map, portal, character, material, weapon and melee-clip loading through existing Cocos APIs.",
+    "Warm only the current hero/equipment assets already required at startup. Skip verified imported texture aliases in TapTap releases to preserve existing native texture reuse.",
+    "Read resident resources using typed Bundle.get and preserve asynchronous callbacks. Fall back to normal load for missing/invalid assets; no extra persistent resource cache.",
+    "Omit normal sampling/tangent generation only for painted unlit terrain, retaining its position/index/UV/color data and original continuous collision mesh.",
+    "Replace the fixed 120ms ready-screen delay with the first completed render frame.",
+    "Prevent per-frame player updates before assembly finishes, and invalidate equipment-display state during transfer so weapons/scabbards are correctly visible."
+  ],
+  "scope": "No map-size, collision, gameplay, picture-quality, FPS, platform/login, save or package-version changes. No all-map preloading/streaming cache introduced. The persistent player retains equipment variants already prepared during play, as the existing per-area actor did until travel.",
+  "method": {
+    "engine": "Cocos Creator 3.8.8",
+    "runtime": "Windows desktop Chrome, Creator preview 7456; painted world/native hero mode; 844x390 CSS viewport, DPR 3, touch emulation.",
+    "startup": "New isolated browser context for each startup, two contexts in one Chrome process per run. Timing is navigation through ready-state plus snapshot collection; server/OS/engine/shader caches were not forcibly purged. These are local startup samples, not cold-install or network-download guarantees.",
+    "mapTransition": "Session enter plus full rebuild, ending after one rendered frame in final code. Seven sequential transitions, including first visits and revisits. Same seed and route.",
+    "baseline": "temp/loading-v1/baseline.json for maps; verified-baseline.json for startup (same cold-stage instrumentation as final). Earlier and intermediate runs retained in evidence for variability.",
+    "limitations": "No iPhone/TapTap measurements. Small local sample; timings vary with caches, JIT, graphics driver and CPU load. Do not promise these percentages on phones."
+  },
+  "startupComparisons": [
+    {
+      "beforeMs": 4464.64,
+      "afterMs": 4299.53,
+      "reductionPercent": 3.7,
+      "resourceRequestsBefore": 250,
+      "resourceRequestsAfter": 250,
+      "underlyingResourcesLoadCallsBefore": 70,
+      "underlyingResourcesLoadCallsAfter": 70,
+      "memoryBefore": {
+        "bufferSize": 93479970,
+        "textureSize": 273799592
+      },
+      "memoryAfter": {
+        "bufferSize": 93477778,
+        "textureSize": 272812648
+      }
+    },
+    {
+      "beforeMs": 3079.44,
+      "afterMs": 2808.94,
+      "reductionPercent": 8.78,
+      "resourceRequestsBefore": 250,
+      "resourceRequestsAfter": 250,
+      "underlyingResourcesLoadCallsBefore": 70,
+      "underlyingResourcesLoadCallsAfter": 70,
+      "memoryBefore": {
+        "bufferSize": 93479970,
+        "textureSize": 273799592
+      },
+      "memoryAfter": {
+        "bufferSize": 93477922,
+        "textureSize": 272812648
+      }
+    }
+  ],
+  "mapComparisons": [
+    {
+      "area": "S01",
+      "beforeMs": 2323.3,
+      "afterMs": 680.8,
+      "reductionPercent": 70.7,
+      "playerUuid": "Node.1550",
+      "memoryBefore": {
+        "bufferSize": 96495394,
+        "textureSize": 305466948
+      },
+      "memoryAfter": {
+        "bufferSize": 95703430,
+        "textureSize": 305466948
+      }
+    },
+    {
+      "area": "S03",
+      "beforeMs": 804.2,
+      "afterMs": 223,
+      "reductionPercent": 72.27,
+      "playerUuid": "Node.1550",
+      "memoryBefore": {
+        "bufferSize": 95504714,
+        "textureSize": 311759740
+      },
+      "memoryAfter": {
+        "bufferSize": 94900790,
+        "textureSize": 311759740
+      }
+    },
+    {
+      "area": "S01",
+      "beforeMs": 1076.5,
+      "afterMs": 431.8,
+      "reductionPercent": 59.89,
+      "playerUuid": "Node.1550",
+      "memoryBefore": {
+        "bufferSize": 96556050,
+        "textureSize": 305466948
+      },
+      "memoryAfter": {
+        "bufferSize": 95759990,
+        "textureSize": 305466948
+      }
+    },
+    {
+      "area": "S03",
+      "beforeMs": 822.8,
+      "afterMs": 148,
+      "reductionPercent": 82.01,
+      "playerUuid": "Node.1550",
+      "memoryBefore": {
+        "bufferSize": 95533130,
+        "textureSize": 311759740
+      },
+      "memoryAfter": {
+        "bufferSize": 94929206,
+        "textureSize": 311759740
+      }
+    },
+    {
+      "area": "S11",
+      "beforeMs": 981.1,
+      "afterMs": 330.5,
+      "reductionPercent": 66.31,
+      "playerUuid": "Node.1550",
+      "memoryBefore": {
+        "bufferSize": 96099630,
+        "textureSize": 354400448
+      },
+      "memoryAfter": {
+        "bufferSize": 95494354,
+        "textureSize": 354400448
+      }
+    },
+    {
+      "area": "U1-02",
+      "beforeMs": 790.8,
+      "afterMs": 177.9,
+      "reductionPercent": 77.5,
+      "playerUuid": "Node.1550",
+      "memoryBefore": {
+        "bufferSize": 95798622,
+        "textureSize": 308265880
+      },
+      "memoryAfter": {
+        "bufferSize": 95241154,
+        "textureSize": 308265880
+      }
+    },
+    {
+      "area": "S01-T1",
+      "beforeMs": 639.5,
+      "afterMs": 89.7,
+      "reductionPercent": 85.97,
+      "playerUuid": "Node.1550",
+      "memoryBefore": {
+        "bufferSize": 93713562,
+        "textureSize": 273314312
+      },
+      "memoryAfter": {
+        "bufferSize": 93692906,
+        "textureSize": 273314312
+      }
+    }
+  ],
+  "playerIdentityStableAcrossAllMeasuredTransitions": true,
+  "discardedMeasurements": "paired-baseline.json retained an optimized compiled source (optimized=true) and is excluded from comparisons. verified-baseline.json has an explicit old-source assertion; both startups report optimized=false.",
+  "resourceAndMemory": {
+    "startupRequestCounts": "250 observed resource requests and 70 underlying resources.load calls in each paired before/after sample.",
+    "startupTextureFootprint": "Final samples ~272812648 gfx texture bytes, no startup texture-footprint increase in these observations. Counters are gfx accounting, not total process memory.",
+    "sceneLifetime": "Previous world meshes/materials destroyed; one transferred player, no retained area worlds; native generated materials and texture ownership cleared on chapter disposal.",
+    "remaining": "Previous map-cache audit still had small instancing-buffer growth (~28416 bytes per round trip). This change does not claim to fix that remaining engine retention."
+  },
+  "validation": {
+    "types": "npm --prefix src/cocos run check: passed after final production changes.",
+    "coreTypes": "npm --prefix src/cocos run check:core: passed; final changes affect engine runtime only.",
+    "rules": "116/116 existing tests passed; later edits affect presentation/loading only. No new permanent test suite/dependency.",
+    "transferEquipmentFailureAndDisposal": {
+      "result": {
+        "hero": "Node.898",
+        "style": "dante",
+        "rows": [
+          {
+            "area": "S01",
+            "weapon": "W01",
+            "playerReused": true,
+            "worldRebound": true,
+            "correctParent": true,
+            "visible": true,
+            "renderedWeapon": "W01",
+            "hairstyle": "dante",
+            "footError": 0,
+            "positionError": 0,
+            "oldRootDestroyed": true,
+            "oldMeshesAlive": 0,
+            "oldMaterialsAlive": 0,
+            "visibleEquipmentMeshes": 5,
+            "nativePlayers": 16,
+            "failure": ""
+          },
+          {
+            "area": "S03",
+            "weapon": "W07",
+            "playerReused": true,
+            "worldRebound": true,
+            "correctParent": true,
+            "visible": true,
+            "renderedWeapon": "W07",
+            "hairstyle": "dante",
+            "footError": 0,
+            "positionError": 0,
+            "oldRootDestroyed": true,
+            "oldMeshesAlive": 0,
+            "oldMaterialsAlive": 0,
+            "visibleEquipmentMeshes": 2,
+            "nativePlayers": 16,
+            "failure": ""
+          },
+          {
+            "area": "S11",
+            "weapon": "W11",
+            "playerReused": true,
+            "worldRebound": true,
+            "correctParent": true,
+            "visible": true,
+            "renderedWeapon": "W11",
+            "hairstyle": "dante",
+            "footError": 0,
+            "positionError": 0,
+            "oldRootDestroyed": true,
+            "oldMeshesAlive": 0,
+            "oldMaterialsAlive": 0,
+            "visibleEquipmentMeshes": 1,
+            "nativePlayers": 16,
+            "failure": ""
+          },
+          {
+            "area": "U1-02",
+            "weapon": "W01",
+            "playerReused": true,
+            "worldRebound": true,
+            "correctParent": true,
+            "visible": true,
+            "renderedWeapon": "W01",
+            "hairstyle": "dante",
+            "footError": 0,
+            "positionError": 0,
+            "oldRootDestroyed": true,
+            "oldMeshesAlive": 0,
+            "oldMaterialsAlive": 0,
+            "visibleEquipmentMeshes": 5,
+            "nativePlayers": 16,
+            "failure": ""
+          },
+          {
+            "area": "S01-T1",
+            "weapon": "W07",
+            "playerReused": true,
+            "worldRebound": true,
+            "correctParent": true,
+            "visible": true,
+            "renderedWeapon": "W07",
+            "hairstyle": "dante",
+            "footError": 0,
+            "positionError": 0,
+            "oldRootDestroyed": true,
+            "oldMeshesAlive": 0,
+            "oldMaterialsAlive": 0,
+            "visibleEquipmentMeshes": 2,
+            "nativePlayers": 16,
+            "failure": ""
+          },
+          {
+            "area": "S03",
+            "weapon": "W01",
+            "playerReused": true,
+            "worldRebound": true,
+            "correctParent": true,
+            "visible": true,
+            "renderedWeapon": "W01",
+            "hairstyle": "dante",
+            "footError": 0,
+            "positionError": 0,
+            "oldRootDestroyed": true,
+            "oldMeshesAlive": 0,
+            "oldMaterialsAlive": 0,
+            "visibleEquipmentMeshes": 5,
+            "nativePlayers": 16,
+            "failure": ""
+          }
+        ],
+        "cacheIdentity": true,
+        "callbackWasAsync": true,
+        "mapFailureVisible": true,
+        "mapRetryRecovered": true,
+        "actorFailureVisible": true,
+        "actorRetryRecovered": true,
+        "freshSession": {
+          "ready": true,
+          "playerReused": true,
+          "weapon": "W01",
+          "hp": 120
+        },
+        "disposal": {
+          "modelDestroyed": true,
+          "generatedMaterialsDestroyed": true,
+          "nativeTextureOwnersCleared": true,
+          "worldsRemaining": 0
+        }
+      },
+      "errors": []
+    },
+    "terrain": {
+      "reports": [
+        {
+          "id": "S01",
+          "start": {
+            "x": 2.4,
+            "z": 0
+          },
+          "end": {
+            "x": 25.6,
+            "z": 0
+          },
+          "actual": {
+            "x": 25.45337677001953,
+            "z": 0
+          },
+          "heightRange": [
+            0,
+            0
+          ],
+          "maxFootError": 0.007091317176818879,
+          "oldMeshesAlive": 0,
+          "oldMaterialsAlive": 0,
+          "roadFacing": 0.3942782323015308
+        },
+        {
+          "id": "S02",
+          "start": {
+            "x": -56.6,
+            "z": -28
+          },
+          "end": {
+            "x": -19.4,
+            "z": -28
+          },
+          "actual": {
+            "x": -19.506765365600586,
+            "z": -28
+          },
+          "heightRange": [
+            0,
+            0
+          ],
+          "maxFootError": 0.00999995708465573,
+          "oldMeshesAlive": 0,
+          "oldMaterialsAlive": 0,
+          "roadFacing": 0.3976265718188188
+        },
+        {
+          "id": "S11",
+          "start": {
+            "x": -20.6,
+            "z": -18
+          },
+          "end": {
+            "x": 0.6,
+            "z": -18
+          },
+          "actual": {
+            "x": 0.5651797652244568,
+            "z": -18.01838493347168
+          },
+          "heightRange": [
+            0,
+            0
+          ],
+          "maxFootError": 0.00999995708465573,
+          "oldMeshesAlive": 0,
+          "oldMaterialsAlive": 0,
+          "roadFacing": 0.3964474392957982
+        },
+        {
+          "id": "U1-02",
+          "start": {
+            "x": -25,
+            "z": -12
+          },
+          "end": {
+            "x": 5,
+            "z": -12
+          },
+          "actual": {
+            "x": 4.943966388702393,
+            "z": -11.947784423828125
+          },
+          "heightRange": [
+            0.0004982250079426697,
+            4.999947735733565
+          ],
+          "maxFootError": 0.02099285981834509,
+          "oldMeshesAlive": 0,
+          "oldMaterialsAlive": 0,
+          "roadFacing": 0.39455673144505
+        }
+      ],
+      "errors": []
+    },
+    "touch": {
+      "simultaneousMoveAttack": true,
+      "cancelAtVisibleEdge": true,
+      "oilCancel": true,
+      "bowCancelWithoutArrow": true,
+      "dashAfterCancel": true,
+      "errors": []
+    },
+    "geometry": [
+      {
+        "area": "S01",
+        "colliderIdentical": true,
+        "positionsIndicesUvsIdentical": true,
+        "missingVertices": 0,
+        "duplicates": 0
+      },
+      {
+        "area": "S03",
+        "colliderIdentical": true,
+        "positionsIndicesUvsIdentical": true,
+        "missingVertices": 0,
+        "duplicates": 0
+      },
+      {
+        "area": "S11",
+        "colliderIdentical": true,
+        "positionsIndicesUvsIdentical": true,
+        "missingVertices": 0,
+        "duplicates": 0
+      },
+      {
+        "area": "U1-02",
+        "colliderIdentical": true,
+        "positionsIndicesUvsIdentical": true,
+        "missingVertices": 0,
+        "duplicates": 0
+      },
+      {
+        "area": "H08",
+        "colliderIdentical": true,
+        "positionsIndicesUvsIdentical": true,
+        "missingVertices": 0,
+        "duplicates": 0
+      }
+    ],
+    "visual": [
+      {
+        "area": "S01",
+        "pose": "spawn",
+        "identical": true,
+        "differentPixels": 0,
+        "maxChannelError": 0,
+        "meanAbsoluteError": 0.0
+      },
+      {
+        "area": "S01",
+        "pose": "boundary",
+        "identical": true,
+        "differentPixels": 0,
+        "maxChannelError": 0,
+        "meanAbsoluteError": 0.0
+      },
+      {
+        "area": "S01",
+        "pose": "wide",
+        "identical": true,
+        "differentPixels": 0,
+        "maxChannelError": 0,
+        "meanAbsoluteError": 0.0
+      },
+      {
+        "area": "S03",
+        "pose": "spawn",
+        "identical": true,
+        "differentPixels": 0,
+        "maxChannelError": 0,
+        "meanAbsoluteError": 0.0
+      },
+      {
+        "area": "S03",
+        "pose": "boundary",
+        "identical": true,
+        "differentPixels": 0,
+        "maxChannelError": 0,
+        "meanAbsoluteError": 0.0
+      },
+      {
+        "area": "S03",
+        "pose": "wide",
+        "identical": true,
+        "differentPixels": 0,
+        "maxChannelError": 0,
+        "meanAbsoluteError": 0.0
+      },
+      {
+        "area": "S11",
+        "pose": "spawn",
+        "identical": true,
+        "differentPixels": 0,
+        "maxChannelError": 0,
+        "meanAbsoluteError": 0.0
+      },
+      {
+        "area": "S11",
+        "pose": "boundary",
+        "identical": true,
+        "differentPixels": 0,
+        "maxChannelError": 0,
+        "meanAbsoluteError": 0.0
+      },
+      {
+        "area": "S11",
+        "pose": "wide",
+        "identical": true,
+        "differentPixels": 0,
+        "maxChannelError": 0,
+        "meanAbsoluteError": 0.0
+      },
+      {
+        "area": "U1-02",
+        "pose": "spawn",
+        "identical": false,
+        "differentPixels": 6,
+        "maxChannelError": 1,
+        "meanAbsoluteError": 6.751191585314808e-07
+      },
+      {
+        "area": "U1-02",
+        "pose": "boundary",
+        "identical": true,
+        "differentPixels": 0,
+        "maxChannelError": 0,
+        "meanAbsoluteError": 0.0
+      },
+      {
+        "area": "U1-02",
+        "pose": "wide",
+        "identical": true,
+        "differentPixels": 0,
+        "maxChannelError": 0,
+        "meanAbsoluteError": 0.0
+      },
+      {
+        "area": "H08",
+        "pose": "spawn",
+        "identical": true,
+        "differentPixels": 0,
+        "maxChannelError": 0,
+        "meanAbsoluteError": 0.0
+      },
+      {
+        "area": "H08",
+        "pose": "boundary",
+        "identical": true,
+        "differentPixels": 0,
+        "maxChannelError": 0,
+        "meanAbsoluteError": 0.0
+      },
+      {
+        "area": "H08",
+        "pose": "wide",
+        "identical": false,
+        "differentPixels": 5,
+        "maxChannelError": 1,
+        "meanAbsoluteError": 5.62599298776234e-07
+      }
+    ],
+    "visualSummary": "15 terrain-only image pairs: 13 pixel-identical; the other two differ in 6/5 pixels by one channel unit. The comparison hides actors; selected weapon meshes are separately asserted visible after transfers.",
+    "equipmentFinding": "Earlier frozen baseline captures could omit a weapon/scabbard because the loading-time update cached its display state before attachment completed. Ready gating and transfer invalidation resolve this; correctly visible equipment can add draws/triangles to those frozen captures, so unchanged total draw counts are not claimed.",
+    "movingCombat": {
+      "distanceMetres": 59.94996305138849,
+      "deadEnemies": 6,
+      "enemyCount": 9,
+      "playerHp": 305,
+      "frameRateSetting": 60,
+      "averageDrawCalls": 208.0915104740904,
+      "averageTriangles": 194623.10804851158,
+      "errors": []
+    },
+    "failureInjection": "Map failure displayed and retry reused the valid hero; actor-build failure displayed and retry discarded the incomplete owner, built a fresh valid hero and destroyed the old model.",
+    "pending": [
+      "TapTap AppID/runtime and iPhone 14 startup/travel measurements",
+      "Actual mobile first-install/decompression/network/foreground resume validation",
+      "The previously recorded all-native 3D debug entrance resource/material failure is outside this painted release-mode validation"
+    ],
+    "previewRestored": {
+      "result": {
+        "current": true,
+        "ready": true,
+        "playerReused": true,
+        "area": "S01",
+        "failure": ""
+      },
+      "errors": []
+    }
+  },
+  "officialReferences": [
+    {
+      "url": "https://docs.cocos.com/creator/3.8/api/en/class/AssetManager.Bundle",
+      "use": "Typed Bundle.get reads already loaded cache entries; load fallback remains native."
+    },
+    {
+      "url": "https://docs.cocos.com/creator/3.8/manual/en/asset/preload-load.html",
+      "use": "Native loading/preloading pipeline; no platform-private cache implementation."
+    },
+    {
+      "url": "https://docs.cocos.com/creator/3.8/manual/en/asset/release-manager.html",
+      "use": "Retain/release existing asset ownership without forcing shared texture release."
+    },
+    {
+      "url": "https://developer.taptap.cn/minigameapidoc/dev/engine/Cocos-Laya-Egret/",
+      "use": "Keep the existing adapted Cocos/TapTap path; no browser-only runtime dependency added."
+    }
+  ],
+  "changedSources": [
+    {
+      "path": "src/cocos/assets/scripts/app/ChapterGame.ts",
+      "sha256Before": "16372e0860e4ea7e496b466cc74a410f57d47e9d4069d95df798d73ebdad3b02",
+      "sha256After": "4bffddd9f6192458dde2bc4cc69c401adee739f8e016e65cd6ba394e868f9fc0"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/assets/GameResources.ts",
+      "sha256Before": "d4d4b9ba19d826883725292fc4428adfa12f8f34c26d19d68d71a66b773255a6",
+      "sha256After": "453afae8c7b1ba7f7cef19ac24cee6441250ac45fa31e58b26b9260ed58d6684"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/world/runtime/FlatWorldLayers.ts",
+      "sha256Before": "07e2a44079ee43273318678acc97db38393f068f227cedf483de5fb46475b786",
+      "sha256After": "9b3911f924f1461af11ee87953e58a613a2ca5976c1d027a2e4edcae8bcaaead"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/world/runtime/FlatWorldPresentation.ts",
+      "sha256Before": "6981068ee294b19b42582d944ca627e66321f48643d5cac14999be7d91fdf631",
+      "sha256After": "36a4701e2a6731f3904b4c9c26a41bd8b9cb0127b2cdb6d74376890b869f8148"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/world/runtime/SceneBuilder.ts",
+      "sha256Before": "3e26f7f2e66fa228257379d65059c322fdef7ed4dcacc1f45a0b7b7be4ba6492",
+      "sha256After": "d5baaf4579e1ee3b7962b0e43c7fa106c1a1298924ac17169ed7290db4a5923e"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/actors/runtime/Actors.ts",
+      "sha256Before": "a0e2b698c89e57dee7cc5dff09fb9e5d9e7a98802ab502dc693528867a4c31a8",
+      "sha256After": "eee1fdda6f56b674fe155e615aa24b753b7e5e286a3086f77f32d7f33e302bd2"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/actors/runtime/NativeActorMaterials.ts",
+      "sha256Before": "3e485b582ec1a34580547dd21690152e7423e155a27d51827b2aae8ccd6c5530",
+      "sha256After": "7e22f773c12635b8e7db230e54e2e99807d4b546492c0857cbb0b5598b253de1"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/actors/runtime/Player3DActors.ts",
+      "sha256Before": "a3fe060bdf939382832b43a3fac7d8fad7b1d591c1ee8019afd1c4607989f288",
+      "sha256After": "ff27790fc364b65e4e47f1d119314709f19bd893a7a01a42d654d9a046133382"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/actors/runtime/WeaponMaterials.ts",
+      "sha256Before": "3cb3d61dba56b3dc946e8c8ee1ec61e0bee51d77ecc6d89ffa338bd2943a6968",
+      "sha256After": "ea804ce9db84d40fda2a621ee253a561ec1c4b54645d8dac5f8d245ce9887087"
+    }
+  ],
+  "evidenceDirectory": "temp/loading-v1",
+  "evidenceFiles": [
+    "source-before.json",
+    "baseline.json",
+    "verified-baseline.json",
+    "verified-final.json",
+    "validation.json",
+    "terrain.json",
+    "flat2d-browser-touch.json",
+    "visual-comparison.json",
+    "rules.log",
+    "preview-restored.json"
+  ],
+  "additionalEvidence": [
+    "temp/map-chunks-v1/loading.json",
+    "temp/map-chunks-v1/loading-combat.json"
+  ]
+}

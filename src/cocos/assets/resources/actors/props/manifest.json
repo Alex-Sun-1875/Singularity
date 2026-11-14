@@ -1,0 +1,71 @@
+{
+  "resources": {
+    "sword": "actors/props/sword/sword",
+    "bow": "actors/props/bow/bow",
+    "staff": "actors/props/staff/staff"
+  },
+  "gripOrigin": [
+    0,
+    0,
+    0
+  ],
+  "cocosLongAxis": "+Y",
+  "attachmentBones": {
+    "sword": "hand_r",
+    "staff": "hand_r",
+    "bow": "hand_l"
+  },
+  "rotationNote": "Rotate weapon node to match the hand bone basis; grip origin is at palm, not at mesh bounds center.",
+  "libraryFidelity": {
+    "sword": {
+      "asset": "joepal_crude_sword",
+      "lengthMeters": 1.0,
+      "gripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "longAxis": "Cocos +Y",
+      "license": "CC0-1.0",
+      "creator": "Joel Palmius"
+    },
+    "bow": {
+      "asset": "culturalibre_wooden_bow",
+      "lengthMeters": 1.4,
+      "gripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "longAxis": "Cocos +Y",
+      "license": "CC0-1.0",
+      "creator": "Quaternius; MakeHuman adaptation by culturalibre",
+      "woodGripAdapter": {
+        "method": "Largest connected wooden component; edge intersections at the author middle grip plane, cross-section bounds center. Artist UVs and geometry retained.",
+        "woodVertices": 356,
+        "componentVertexCounts": [
+          356,
+          18
+        ],
+        "crossSectionEdgeIntersections": 6,
+        "pivotDeltaMeters": [
+          0.2060583531856537,
+          -0.15793992578983307,
+          0.0
+        ]
+      }
+    },
+    "staff": {
+      "asset": "culturalibre_magic_sceptre",
+      "lengthMeters": 1.75,
+      "gripOrigin": [
+        0,
+        0,
+        0
+      ],
+      "longAxis": "Cocos +Y",
+      "license": "CC0-1.0",
+      "creator": "Quaternius; MakeHuman adaptation by culturalibre"
+    }
+  }
+}

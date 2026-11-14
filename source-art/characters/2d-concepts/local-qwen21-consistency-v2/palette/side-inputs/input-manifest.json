@@ -1,0 +1,79 @@
+{
+  "status": "prepared only; no model run, no upload, no production resource writes",
+  "image_1_edit_target": {
+    "native_original": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\geometry-inputs\\explore-run-right-p4-native.png",
+      "sha256": "daca4ca1229d94f5e86f44e9d674805f5fb5e763b85c5e2aeaa6c88128fe2b81",
+      "size": [
+        231,
+        366
+      ],
+      "mode": "RGBA"
+    },
+    "rgba_canvas": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\palette\\side-inputs\\run-right-p4-rgba.png",
+      "sha256": "3eb627c59fb0eea8e1b37640c20fcb547052c4a23e9f59fab1c00d3b7de80f50",
+      "size": [
+        512,
+        768
+      ],
+      "mode": "RGBA"
+    },
+    "native_to_canvas_affine": [
+      1.7337047353760446,
+      0,
+      58.357660167130916,
+      0,
+      1.7337047353760446,
+      85.26573816155985
+    ],
+    "canvas_foot_anchor_xy": [
+      256,
+      712
+    ],
+    "alpha_matches_historical_canvas": true,
+    "flattened_rgb_matches_historical_canvas": true
+  },
+  "image_2_standing_reference": {
+    "native_original": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\geometry-inputs\\explore-idle-right-p0-native.png",
+      "sha256": "3cfccdb766889fcd4342b5545febcfe783ad5d325a591e976e67f94ce91cedd6",
+      "size": [
+        98,
+        491
+      ],
+      "mode": "RGBA"
+    },
+    "rgba_canvas": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\palette\\side-inputs\\standing-right-p0-rgba.png",
+      "sha256": "163f11bbdb4f9d16b7ff4c1e61c938a8d69c66276fcaa235018c5c02f8afd7c1",
+      "size": [
+        512,
+        768
+      ],
+      "mode": "RGBA"
+    },
+    "native_to_canvas_affine": [
+      1.2767179487179487,
+      0,
+      187.05723076923078,
+      0,
+      1.2767179487179487,
+      87.68492307692304
+    ],
+    "canvas_foot_anchor_xy": [
+      256,
+      712
+    ],
+    "alpha_matches_historical_canvas": true,
+    "flattened_rgb_matches_historical_canvas": true
+  },
+  "prompt": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\palette\\side-inputs\\prompt-zh.txt",
+  "restore_mask_white_means_preserve": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\palette\\side-inputs\\protect-everything-except-cloth-mask.png",
+  "notes": [
+    "RGBA reconstructed only from native original with historical uniform affine; no retired-model or body-guide pixels used.",
+    "After any model run, restore outside cloth union from run-right-p4-rgba.png and lock its alpha before apply_palette.",
+    "Protected cloth seams are intentionally unchanged. Proxy mask and final seam continuity still need visual review.",
+    "This script performs no inference, network, upload, package installation or new runtime setup."
+  ]
+}

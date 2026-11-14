@@ -1,0 +1,36 @@
+{
+  "method": "Pillow/NumPy deterministic stroke-alpha extraction and restrained violet halo; original preserved",
+  "raw": {
+    "file": "source-art/maps/waypoints-v1/raw/ancient-sigil.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "dd30eeac1377576a7a642f5d180b691937a5da3abacdbacf62c4685777b4f96b",
+    "bytes": 2548729
+  },
+  "runtime": {
+    "file": "src/cocos/assets/resources/flat2d/waypoints-v1/ancient-sigil.png",
+    "dimensions": [
+      1024,
+      1024
+    ],
+    "mode": "RGBA",
+    "sha256": "027682aac36572996075261b34c8118f0a3131ba697723baae1e039b16031aad",
+    "bytes": 589528
+  },
+  "alphaExtraction": "smoothstep((green - 165) / 65) multiplied by original alpha",
+  "halo": {
+    "rgb": [
+      124,
+      96,
+      220
+    ],
+    "gaussianRadiusPixels": 5,
+    "alphaMultiplier": 0.68
+  },
+  "sampler": "clamp-to-edge, linear, no mip",
+  "artAcceptance": "processed-texture-and-runtime-first-pass-accepted",
+  "runtimeReview": "source-art/maps/waypoints-v1/runtime-review.json"
+}

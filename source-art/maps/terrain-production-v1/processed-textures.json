@@ -1,0 +1,684 @@
+{
+  "date": "2026-11-08",
+  "script": "tools/model-pipeline/prepare_map_terrain.py",
+  "tools": {
+    "Pillow": "12.2.0",
+    "numpy": "2.4.4"
+  },
+  "rawPolicy": "Read-only source pixels and byte hashes preserved; no generation, local inference or downloads.",
+  "metadataContract": "tools/materials/export_pbr_runtime_v3.py texture_meta; same namespace UUID5 scheme.",
+  "processing": "Resize RGB to 512 square; opposing mirrored-edge mix confined to outer 6 pixels when needed.",
+  "textures": [
+    {
+      "key": "flagstone",
+      "generated": {
+        "file": "source-art/maps/terrain-production-v1/raw/flagstone.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "47f480f0c8a06df740a00b4e9060807cd2f32539ede0f7011eb7d5243f8da230",
+        "records": [
+          "source-art/maps/terrain-production-v1/generated-primary.json",
+          "source-art/maps/terrain-production-v1/generated-secondary.json"
+        ]
+      },
+      "processed": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/flagstone.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "0fe36e442536c083fd8f9f2718a4aee4cc916e55d8b292b45443ee3491be1305",
+        "bytes": 427159,
+        "colorSpace": "sRGB RGB8",
+        "resize": "Pillow LANCZOS 512x512",
+        "edgeRepair": {
+          "applied": true,
+          "bandPixelsPerSide": 6,
+          "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+          "skipThresholdMeanAbsoluteRgb": 1.5,
+          "before": {
+            "horizontal": {
+              "meanAbsoluteRgb": 9.54362,
+              "p95AbsoluteRgb": 25.25,
+              "maximumAbsoluteRgb": 42
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 6.708333,
+              "p95AbsoluteRgb": 19.0,
+              "maximumAbsoluteRgb": 30
+            }
+          },
+          "after": {
+            "horizontal": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            }
+          },
+          "changedPixelFraction": 0.035744,
+          "maximumChangeOutsideBand": 0,
+          "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+        },
+        "sampler": {
+          "wrap": "repeat",
+          "mipfilter": "linear",
+          "anisotropy": 4
+        }
+      },
+      "artReview": {
+        "status": "processed-candidate-runtime-review-required",
+        "generationSucceeded": true,
+        "runtimeValidated": false,
+        "physicalPhonePerformanceValidated": false
+      }
+    },
+    {
+      "key": "forest",
+      "generated": {
+        "file": "source-art/maps/terrain-production-v1/raw/forest.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "05be568d6d4d4e372012f54b57f94ff077389af30d5b60cae9999140d7717840",
+        "records": [
+          "source-art/maps/terrain-production-v1/generated-primary.json",
+          "source-art/maps/terrain-production-v1/generated-secondary.json"
+        ]
+      },
+      "processed": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/forest.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "599aebcedc4c47682c9deee4da55a258be235c23978a6d1c5fc4308ca2c73d37",
+        "bytes": 479608,
+        "colorSpace": "sRGB RGB8",
+        "resize": "Pillow LANCZOS 512x512",
+        "edgeRepair": {
+          "applied": true,
+          "bandPixelsPerSide": 6,
+          "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+          "skipThresholdMeanAbsoluteRgb": 1.5,
+          "before": {
+            "horizontal": {
+              "meanAbsoluteRgb": 7.650391,
+              "p95AbsoluteRgb": 20.0,
+              "maximumAbsoluteRgb": 56
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 7.520182,
+              "p95AbsoluteRgb": 19.0,
+              "maximumAbsoluteRgb": 46
+            }
+          },
+          "after": {
+            "horizontal": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            }
+          },
+          "changedPixelFraction": 0.036629,
+          "maximumChangeOutsideBand": 0,
+          "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+        },
+        "sampler": {
+          "wrap": "repeat",
+          "mipfilter": "linear",
+          "anisotropy": 4
+        }
+      },
+      "artReview": {
+        "status": "processed-candidate-runtime-review-required",
+        "generationSucceeded": true,
+        "runtimeValidated": false,
+        "physicalPhonePerformanceValidated": false
+      }
+    },
+    {
+      "key": "cobble",
+      "generated": {
+        "file": "source-art/maps/terrain-production-v1/raw/cobble.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "6983c9b7158bc87b68784d11772b390c14d3c1fd7a2d91d12a22c6c5283b525a",
+        "records": [
+          "source-art/maps/terrain-production-v1/generated-primary.json",
+          "source-art/maps/terrain-production-v1/generated-secondary.json"
+        ]
+      },
+      "processed": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/cobble.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "1abd261dfcadc09f9f5b9ee0c5c708a9ac0c4ed0425c77d75ac279e7d0d28b45",
+        "bytes": 443565,
+        "colorSpace": "sRGB RGB8",
+        "resize": "Pillow LANCZOS 512x512",
+        "edgeRepair": {
+          "applied": true,
+          "bandPixelsPerSide": 6,
+          "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+          "skipThresholdMeanAbsoluteRgb": 1.5,
+          "before": {
+            "horizontal": {
+              "meanAbsoluteRgb": 8.163411,
+              "p95AbsoluteRgb": 23.0,
+              "maximumAbsoluteRgb": 37
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 7.458984,
+              "p95AbsoluteRgb": 19.0,
+              "maximumAbsoluteRgb": 37
+            }
+          },
+          "after": {
+            "horizontal": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            }
+          },
+          "changedPixelFraction": 0.035961,
+          "maximumChangeOutsideBand": 0,
+          "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+        },
+        "sampler": {
+          "wrap": "repeat",
+          "mipfilter": "linear",
+          "anisotropy": 4
+        }
+      },
+      "artReview": {
+        "status": "processed-candidate-runtime-review-required",
+        "generationSucceeded": true,
+        "runtimeValidated": false,
+        "physicalPhonePerformanceValidated": false
+      }
+    },
+    {
+      "key": "earth",
+      "generated": {
+        "file": "source-art/maps/terrain-production-v1/raw/earth.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "a46221b7e8d7266411c0d7dcf76af4418c2a755bc17ec02f9157f9bc001770b5",
+        "records": [
+          "source-art/maps/terrain-production-v1/generated-primary.json",
+          "source-art/maps/terrain-production-v1/generated-secondary.json"
+        ]
+      },
+      "processed": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/earth.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "70dba591e3b328befd548341b6cefa41da06f77326a97770f88159c052c7d62a",
+        "bytes": 426342,
+        "colorSpace": "sRGB RGB8",
+        "resize": "Pillow LANCZOS 512x512",
+        "edgeRepair": {
+          "applied": true,
+          "bandPixelsPerSide": 6,
+          "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+          "skipThresholdMeanAbsoluteRgb": 1.5,
+          "before": {
+            "horizontal": {
+              "meanAbsoluteRgb": 6.567708,
+              "p95AbsoluteRgb": 17.0,
+              "maximumAbsoluteRgb": 36
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 5.777995,
+              "p95AbsoluteRgb": 16.0,
+              "maximumAbsoluteRgb": 30
+            }
+          },
+          "after": {
+            "horizontal": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            }
+          },
+          "changedPixelFraction": 0.034374,
+          "maximumChangeOutsideBand": 0,
+          "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+        },
+        "sampler": {
+          "wrap": "repeat",
+          "mipfilter": "linear",
+          "anisotropy": 4
+        }
+      },
+      "artReview": {
+        "status": "processed-candidate-runtime-review-required",
+        "generationSucceeded": true,
+        "runtimeValidated": false,
+        "physicalPhonePerformanceValidated": false
+      }
+    },
+    {
+      "key": "meadow",
+      "generated": {
+        "file": "source-art/maps/terrain-production-v1/raw/meadow.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "c8da837c4e7b89fe6a6dfa78f40b849e3500f6474bc97eb0896ffa9d7971b926",
+        "records": [
+          "source-art/maps/terrain-production-v1/generated-primary.json",
+          "source-art/maps/terrain-production-v1/generated-secondary.json"
+        ]
+      },
+      "processed": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/meadow.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "9e9538c2870e66a2d631616ada6ad221944cfac4f249315a1eb9b2597edf9889",
+        "bytes": 408853,
+        "colorSpace": "sRGB RGB8",
+        "resize": "Pillow LANCZOS 512x512",
+        "edgeRepair": {
+          "applied": true,
+          "bandPixelsPerSide": 6,
+          "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+          "skipThresholdMeanAbsoluteRgb": 1.5,
+          "before": {
+            "horizontal": {
+              "meanAbsoluteRgb": 5.475911,
+              "p95AbsoluteRgb": 14.0,
+              "maximumAbsoluteRgb": 34
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 4.625,
+              "p95AbsoluteRgb": 12.0,
+              "maximumAbsoluteRgb": 33
+            }
+          },
+          "after": {
+            "horizontal": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            }
+          },
+          "changedPixelFraction": 0.035763,
+          "maximumChangeOutsideBand": 0,
+          "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+        },
+        "sampler": {
+          "wrap": "repeat",
+          "mipfilter": "linear",
+          "anisotropy": 4
+        }
+      },
+      "artReview": {
+        "status": "processed-candidate-runtime-review-required",
+        "generationSucceeded": true,
+        "runtimeValidated": false,
+        "physicalPhonePerformanceValidated": false
+      }
+    },
+    {
+      "key": "wet-earth",
+      "generated": {
+        "file": "source-art/maps/terrain-production-v1/raw/wet-earth.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "c4503766a50a0a2dae1586f221bfcf003d3547ef53167be770d66b6a6eb8b66c",
+        "records": [
+          "source-art/maps/terrain-production-v1/generated-primary.json",
+          "source-art/maps/terrain-production-v1/generated-secondary.json"
+        ]
+      },
+      "processed": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/wet-earth.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "84a1e3c292c28e1905588d842372ce1436bf2163d706e145d2ae53f6ec2c682d",
+        "bytes": 487787,
+        "colorSpace": "sRGB RGB8",
+        "resize": "Pillow LANCZOS 512x512",
+        "edgeRepair": {
+          "applied": true,
+          "bandPixelsPerSide": 6,
+          "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+          "skipThresholdMeanAbsoluteRgb": 1.5,
+          "before": {
+            "horizontal": {
+              "meanAbsoluteRgb": 7.434245,
+              "p95AbsoluteRgb": 19.0,
+              "maximumAbsoluteRgb": 66
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 7.779297,
+              "p95AbsoluteRgb": 21.0,
+              "maximumAbsoluteRgb": 60
+            }
+          },
+          "after": {
+            "horizontal": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            }
+          },
+          "changedPixelFraction": 0.0369,
+          "maximumChangeOutsideBand": 0,
+          "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+        },
+        "sampler": {
+          "wrap": "repeat",
+          "mipfilter": "linear",
+          "anisotropy": 4
+        }
+      },
+      "artReview": {
+        "status": "processed-candidate-runtime-review-required",
+        "generationSucceeded": true,
+        "runtimeValidated": false,
+        "physicalPhonePerformanceValidated": false
+      }
+    },
+    {
+      "key": "bedrock",
+      "generated": {
+        "file": "source-art/maps/terrain-production-v1/raw/bedrock.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "af984e38955fcd0880fbd66201397f4133ceeba08311d7a81737848ea9c87972",
+        "records": [
+          "source-art/maps/terrain-production-v1/generated-primary.json",
+          "source-art/maps/terrain-production-v1/generated-secondary.json"
+        ]
+      },
+      "processed": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/bedrock.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "9eadef8dd4075b24fda3d5e41f406dce4eacba452bb125fe5d5adfc6fda02cc5",
+        "bytes": 444969,
+        "colorSpace": "sRGB RGB8",
+        "resize": "Pillow LANCZOS 512x512",
+        "edgeRepair": {
+          "applied": true,
+          "bandPixelsPerSide": 6,
+          "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+          "skipThresholdMeanAbsoluteRgb": 1.5,
+          "before": {
+            "horizontal": {
+              "meanAbsoluteRgb": 7.419271,
+              "p95AbsoluteRgb": 19.25,
+              "maximumAbsoluteRgb": 34
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 7.263672,
+              "p95AbsoluteRgb": 20.0,
+              "maximumAbsoluteRgb": 37
+            }
+          },
+          "after": {
+            "horizontal": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            }
+          },
+          "changedPixelFraction": 0.036049,
+          "maximumChangeOutsideBand": 0,
+          "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+        },
+        "sampler": {
+          "wrap": "repeat",
+          "mipfilter": "linear",
+          "anisotropy": 4
+        }
+      },
+      "artReview": {
+        "status": "processed-candidate-runtime-review-required",
+        "generationSucceeded": true,
+        "runtimeValidated": false,
+        "physicalPhonePerformanceValidated": false
+      }
+    },
+    {
+      "key": "wood",
+      "generated": {
+        "file": "source-art/maps/terrain-production-v1/raw/wood.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "3dad449e82d38d05ea21989ca9ba36392dc5d06ddfc4b51465d38fc7d21625c3",
+        "records": [
+          "source-art/maps/terrain-production-v1/generated-primary.json",
+          "source-art/maps/terrain-production-v1/generated-secondary.json"
+        ]
+      },
+      "processed": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/wood.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "779aa3ec3c2d23f0166ad3082d6747cbb2082fe3b38b4536c5c4bb9cd2c1b096",
+        "bytes": 334355,
+        "colorSpace": "sRGB RGB8",
+        "resize": "Pillow LANCZOS 512x512",
+        "edgeRepair": {
+          "applied": true,
+          "bandPixelsPerSide": 6,
+          "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+          "skipThresholdMeanAbsoluteRgb": 1.5,
+          "before": {
+            "horizontal": {
+              "meanAbsoluteRgb": 9.332682,
+              "p95AbsoluteRgb": 23.0,
+              "maximumAbsoluteRgb": 40
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 3.891927,
+              "p95AbsoluteRgb": 11.0,
+              "maximumAbsoluteRgb": 26
+            }
+          },
+          "after": {
+            "horizontal": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            }
+          },
+          "changedPixelFraction": 0.032291,
+          "maximumChangeOutsideBand": 0,
+          "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+        },
+        "sampler": {
+          "wrap": "repeat",
+          "mipfilter": "linear",
+          "anisotropy": 4
+        }
+      },
+      "artReview": {
+        "status": "processed-candidate-runtime-review-required",
+        "generationSucceeded": true,
+        "runtimeValidated": false,
+        "physicalPhonePerformanceValidated": false
+      }
+    },
+    {
+      "key": "water",
+      "generated": {
+        "file": "source-art/maps/terrain-production-v1/raw/water.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "44a15889e1637ac33176b28d6db0bf6beb7da2b06b6a71c0e1adbbc0dffdc94d",
+        "records": [
+          "source-art/maps/terrain-production-v1/generated-primary.json",
+          "source-art/maps/terrain-production-v1/generated-secondary.json"
+        ]
+      },
+      "processed": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/water.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "9c86be06023257aed1b6928f3a6ae2f71f8ba5b71c8e683a7ff2d9986f2147aa",
+        "bytes": 299314,
+        "colorSpace": "sRGB RGB8",
+        "resize": "Pillow LANCZOS 512x512",
+        "edgeRepair": {
+          "applied": true,
+          "bandPixelsPerSide": 6,
+          "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+          "skipThresholdMeanAbsoluteRgb": 1.5,
+          "before": {
+            "horizontal": {
+              "meanAbsoluteRgb": 3.190104,
+              "p95AbsoluteRgb": 9.0,
+              "maximumAbsoluteRgb": 15
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 2.951172,
+              "p95AbsoluteRgb": 8.0,
+              "maximumAbsoluteRgb": 17
+            }
+          },
+          "after": {
+            "horizontal": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            },
+            "vertical": {
+              "meanAbsoluteRgb": 0.0,
+              "p95AbsoluteRgb": 0.0,
+              "maximumAbsoluteRgb": 0
+            }
+          },
+          "changedPixelFraction": 0.032131,
+          "maximumChangeOutsideBand": 0,
+          "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+        },
+        "sampler": {
+          "wrap": "repeat",
+          "mipfilter": "linear",
+          "anisotropy": 4
+        }
+      },
+      "artReview": {
+        "status": "processed-candidate-runtime-review-required",
+        "generationSucceeded": true,
+        "runtimeValidated": false,
+        "physicalPhonePerformanceValidated": false
+      }
+    }
+  ],
+  "previews": [
+    {
+      "file": "source-art/maps/terrain-production-v1/terrain-materials-preview.jpg",
+      "dimensions": [
+        824,
+        992
+      ],
+      "mode": "RGB",
+      "sha256": "5801982f83e317fb2f71a1243a6560da0dea25be45735f315dc5d62bb7f4ec07",
+      "bytes": 256985
+    },
+    {
+      "file": "source-art/maps/terrain-production-v1/terrain-tiling-review.jpg",
+      "dimensions": [
+        818,
+        1822
+      ],
+      "mode": "RGB",
+      "sha256": "a2345d37639f18037b1f58c1e0d176fe940a4bc3a05d448b5cb37597e175edc5",
+      "bytes": 531895
+    }
+  ],
+  "runtimeValidated": false
+}

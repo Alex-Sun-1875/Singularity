@@ -1,0 +1,33 @@
+{
+  "generation": "Three cloud image_gen hair-only sheets; prompts and raw outputs retained per style",
+  "review": "Assistant inspected actual Cocos comparison, side profiles and same-camera before/after; generation completion recorded separately",
+  "styles": [
+    "curly",
+    "dante",
+    "nero",
+    "vergil"
+  ],
+  "feedbackApplied": "Narrow temples, ear-side volume and rear corners across all four styles; original face/body unchanged",
+  "runtimeViews": 68,
+  "selection": "runtime/selection/report.json",
+  "canonical": "runtime/canonical-smoke.json",
+  "checks": [
+    "TypeScript compiler",
+    "Face/body geometry, UV and weights preserved",
+    "Face/clothing material records preserved",
+    "14 motion curves and bind skeleton preserved",
+    "One selected hair visible",
+    "Hood hides hair; removal restores selected style",
+    "Selection persists without query parameter",
+    "Mobile landscape touch selection and >=44px tap target",
+    "Canonical default 2D entry and 3D player entry load without page errors"
+  ],
+  "evidence": [
+    "runtime/hairstyles-comparison.jpg",
+    "runtime/hairstyles-width-comparison.jpg",
+    "runtime/side-review.jpg",
+    "runtime/hairstyles-eight-views.gif"
+  ],
+  "glbSHA256": "1a028dc040f94b80cb709984f025a8f4c87b167c3fd1dc68400e9805b5abfb65",
+  "status": "Installed locally and ready for user review"
+}

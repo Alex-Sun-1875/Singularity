@@ -1,0 +1,177 @@
+{
+  "date": "2026-11-12",
+  "status": "native_browser_review_complete; user_acceptance_pending",
+  "userDecision": "Keep current skills; precisely restore the approved appearance. Match brighter reference colors.",
+  "comparison": "design-runtime-comparison.jpg",
+  "markedRegions": "marked-regions-comparison.jpg",
+  "tone": "tone-before-after.jpg",
+  "colors": {
+    "attributeMaterial": {
+      "referenceMedianRGB": [
+        27,
+        19,
+        12
+      ],
+      "beforeMedianRGB": [
+        15,
+        11,
+        8
+      ],
+      "afterMedianRGB": [
+        27,
+        19,
+        12
+      ]
+    },
+    "detailMaterial": {
+      "referenceMedianRGB": [
+        24,
+        17,
+        11
+      ],
+      "beforeMedianRGB": [
+        22,
+        16,
+        11
+      ],
+      "afterMedianRGB": [
+        22,
+        16,
+        11
+      ]
+    },
+    "warmWhiteText": {
+      "referenceUpperQuartileRGB": [
+        254.4,
+        249.2,
+        210.1
+      ],
+      "beforeUpperQuartileRGB": [
+        242.7,
+        233.5,
+        207.7
+      ],
+      "afterUpperQuartileRGB": [
+        250.4,
+        240.6,
+        201.5
+      ]
+    }
+  },
+  "changes": [
+    "Exact reference identity plaque, sidebar tabs, original gold equipment sockets and selected frames",
+    "Two large hand sockets with captions below; shared ring socket opens left/right choice without changing equipment",
+    "Distinct steel sword, blue bow and lightning staff art; all-scope equipped weapon first; reference badge tone and order",
+    "Scope selection material restored; current8items form2rows, all12items3rows without a forced empty row",
+    "Attribute labels, steps, sidebar and skill rows aligned to reference; native text remains live",
+    "Two painted replacement skill icons from built-in image_gen; current mechanics and progression preserved",
+    "Reference empty material strips replace near-black fills; gold unmatting removes double darkening; shared semantic warm-white and gold text roles"
+  ],
+  "validation": {
+    "typeScript": "passed",
+    "CocosCreator": "3.8.8 web-mobile completed",
+    "mobileScreens": 15,
+    "desktopScreens": 15,
+    "functionalStates": 33,
+    "additionalProfileStates": 28,
+    "defaultPages": 7,
+    "runtimeErrors": 0,
+    "missingSprites": 0,
+    "overlappingControls": 0,
+    "phoneTargets": "48 logical px with8px gaps",
+    "wideMouseTargets": "reference header/filter/sidebar hitboxes cover their visible controls; at least24 CSS px, separate from mobile sizing",
+    "wideClosePairs": [
+      {
+        "page": "02-equipment-all",
+        "pairs": [
+          [
+            "inventory:scope:current",
+            "inventory-category:all",
+            3.696682464454966
+          ],
+          [
+            "inventory:scope:current",
+            "inventory-category:weapon",
+            3.696682464454966
+          ],
+          [
+            "inventory:scope:all",
+            "inventory-category:armor",
+            3.696682464454966
+          ],
+          [
+            "inventory:scope:all",
+            "inventory-category:jewelry",
+            3.696682464454966
+          ]
+        ]
+      },
+      {
+        "page": "04-attribute-points",
+        "pairs": [
+          [
+            "AllocationTab:attributes",
+            "AllocationTab:skills",
+            7.393364928909932
+          ]
+        ]
+      }
+    ],
+    "filesCopiedAndVerified": 3613,
+    "functionalPassTiming": "functional plan/transaction regression reused from this implementation before final material and readonly caption pass; final screenshots and default smoke use final build"
+  },
+  "sourceHashes": [
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/RpgPanel.ts",
+      "sha256": "ba9de9d9399a9a93f3606fe0366df82377ce8126f6811e66486c48199685bdd0"
+    },
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/DoubleGoldFrame.ts",
+      "sha256": "40b4b7f207e9fd721318b37fb735610c425fe2398d37e23b8c052831c4c7f88b"
+    },
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/UiSkin.ts",
+      "sha256": "7d38f1f6ef7d94b300fe3de31437ccefb0df4cee847ecf11cf42a2878bd72e34"
+    },
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/PreparationSkin.ts",
+      "sha256": "7e928016d43d5aeb413a8b67b0ffd6bd3ad93ea92da370ea40368394396a22c0"
+    },
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/FeedbackPalette.ts",
+      "sha256": "38f69d0a121f0a4538a28373cf55c80d540b670cf962843b526836f3e06e5d56"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/equipment/runtime/EquipmentPanels.ts",
+      "sha256": "71ccc527cd29c24cb6405e2eadf6e1bd9e274625b7ead0314106b887a8b0e2b4"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/progression/runtime/PreparationPanels.ts",
+      "sha256": "f27b131aa396240fa4098b3c16c805716940da4c6b97537e0f94b54446416067"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/progression/locales/index.ts",
+      "sha256": "8559dcdce63fbca39c670678d8484fe2b3f7f5ee8f55ffa79d54d5fd80474e70"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/combat/runtime/CombatSkillIcons.ts",
+      "sha256": "74dccde0d9ae2649179ee8d0479a86a3b3b4fcd10bab6f5dff118b58688c51fd"
+    },
+    {
+      "file": "src/cocos/assets/scripts/app/ChapterGame.ts",
+      "sha256": "e9195b95efe64bda2c8acefdb4672efed3ccc0d9803cfae90ac32fae16cbe73a"
+    }
+  ],
+  "art": "Original design parts extracted with Pillow; two new icons generated with built-in OpenAI image_gen. Generation and art-review statuses recorded separately in painted-icons.json; prompts in painted-icon-prompts.json.",
+  "preview": {
+    "url": "http://127.0.0.1:7469/",
+    "default": "src/cocos/build/concept-2d",
+    "candidate": "src/cocos/build/concept-2d-rpg-alignment-v5",
+    "backup": "src/cocos/temp/default-before-rpg-alignment-v5-20261112",
+    "published": false
+  },
+  "fixtures": "Independent browser contexts, user save untouched. Canonical progression/gear fixtures; isolated resources for transaction tests.",
+  "remaining": [
+    "TapTap physical-device and platform acceptance."
+  ]
+}

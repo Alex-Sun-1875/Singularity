@@ -1,0 +1,398 @@
+{
+  "verifiedOn": "2026-11-11",
+  "version": "0.3.9",
+  "status": "local-validation",
+  "platformVerified": false,
+  "uploaded": false,
+  "changes": [
+    "Painted maps load environment dimensions only, retaining prop scale/anchors, collision and navigation. Hidden environment meshes and PBR textures stay outside this release.",
+    "Skip procedural scabbard materials/meshes when weapon prefabs already include scabbards. Load independent startup libraries and weapon variants concurrently.",
+    "Filter cast sheets from action manifests and shared native PNGs from hero material references; preserve source files and UUIDs. Remove legacy weapon and surface bundles from this profile.",
+    "Restore the missing player-melee-combo release bundle. The original current-source release failed to boot without it; the comparable Web baseline includes this prerequisite fix."
+  ],
+  "uploadPackage": {
+    "previousGuestPackage": {
+      "version": "0.3.8",
+      "zipBytes": 292936658,
+      "sha256": "94513f5447fb09a6a1a443b2ffb1e6346949845ee9db4a9bd77ad95325df3c3b"
+    },
+    "optimizedGuestPackage": {
+      "version": "0.3.9",
+      "zipBytes": 238860125,
+      "sha256": "5167f041c0c07897c790544c1bddec2fabbb4103f017f32383998c85c68aef20",
+      "path": "artifacts/taptap-size-optimized/SwordAndFire_0.3.9_TapTap_guest-test_20261110T234743Z/SwordAndFire_0.3.9_TapTap_guest-test_20261110T234743Z.zip"
+    },
+    "savedBytes": 54076533,
+    "savedPercent": 18.46,
+    "initialPayload": {
+      "files": 27,
+      "rawBytes": 5108933,
+      "zipBytes": 1239848,
+      "zipMiB": 1.18,
+      "budgetMiB": 20.0,
+      "withinLocalBudget": true,
+      "sha256": "f2fd7237062c9f0fe975fc7a94f334e86cea6726f70c885cca25f57e2895f8a1",
+      "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+    },
+    "note": "Historical 0.3.8 guest package versus freshly generated 0.3.9 guest package. Both are complete official converter ZIPs. The new package also includes the missing combo-animation dependency."
+  },
+  "startup": {
+    "method": "Three alternating fresh browser contexts per profile, same desktop release viewport and local HTTP server; no TapTap device/network claim.",
+    "samples": [
+      {
+        "profile": "before",
+        "round": 0,
+        "readyMs": 9125.699999999953,
+        "failure": "",
+        "resourceCount": 821,
+        "encodedBodyBytes": 126070400,
+        "device": {
+          "bufferSize": 116283478,
+          "textureSize": 466969900
+        },
+        "heap": 137755426,
+        "errors": []
+      },
+      {
+        "profile": "after",
+        "round": 0,
+        "readyMs": 3532.899999999907,
+        "failure": "",
+        "resourceCount": 667,
+        "encodedBodyBytes": 92298173,
+        "device": {
+          "bufferSize": 112665426,
+          "textureSize": 349529476
+        },
+        "heap": 125648187,
+        "errors": []
+      },
+      {
+        "profile": "before",
+        "round": 1,
+        "readyMs": 4423.600000000093,
+        "failure": "",
+        "resourceCount": 821,
+        "encodedBodyBytes": 126070400,
+        "device": {
+          "bufferSize": 115750998,
+          "textureSize": 466969900
+        },
+        "heap": 153950900,
+        "errors": []
+      },
+      {
+        "profile": "after",
+        "round": 1,
+        "readyMs": 3291.6999999999534,
+        "failure": "",
+        "resourceCount": 667,
+        "encodedBodyBytes": 92298173,
+        "device": {
+          "bufferSize": 112665426,
+          "textureSize": 349529476
+        },
+        "heap": 133561774,
+        "errors": []
+      },
+      {
+        "profile": "before",
+        "round": 2,
+        "readyMs": 4499.199999999953,
+        "failure": "",
+        "resourceCount": 821,
+        "encodedBodyBytes": 126070400,
+        "device": {
+          "bufferSize": 115750998,
+          "textureSize": 466969900
+        },
+        "heap": 155523553,
+        "errors": []
+      },
+      {
+        "profile": "after",
+        "round": 2,
+        "readyMs": 3258.899999999907,
+        "failure": "",
+        "resourceCount": 667,
+        "encodedBodyBytes": 92298173,
+        "device": {
+          "bufferSize": 112664886,
+          "textureSize": 349529476
+        },
+        "heap": 129453367,
+        "errors": []
+      }
+    ],
+    "medianBeforeMs": 4499.2,
+    "medianAfterMs": 3291.7,
+    "medianImprovementPercent": 26.84,
+    "beforeResourceCount": 821,
+    "afterResourceCount": 667,
+    "beforeEncodedResourceBytes": 126070400,
+    "afterEncodedResourceBytes": 92298173,
+    "openingDependencyEstimate": {
+      "observedIn": "Web release preview using the same resource profile",
+      "bundles": [
+        "__ccWasmAssetSubpkg__",
+        "__ccWasmChunkSubpkg__",
+        "actor-raphael",
+        "cast-mira",
+        "combat-vfx",
+        "environment",
+        "hero-appearance",
+        "hero-melee-combo",
+        "native-weapons",
+        "painted-interiors",
+        "panel-art",
+        "resources",
+        "skill-icons",
+        "waystones"
+      ],
+      "rawBytesIncludingInitialPayload": 119380322,
+      "deflatedContentBytesIncludingInitialZip": 100224961,
+      "webColdStartTransferBytes": [
+        92498273,
+        92498273
+      ],
+      "note": "Whole declared packs plus both generated WASM packs; not a measurement of TapTap network traffic or loading time."
+    },
+    "note": "Web preview version 0.3.8 for both runtime comparisons. Fresh browser contexts have cold HTTP caches, but share browser/OS/shader caches. These timings and asset response bytes are not TapTap startup timing/download measurements."
+  },
+  "memory": {
+    "method": "Same Windows headless Chrome release viewport 1280x720; 60 drawn frames at each controlled area transition. Device texture and buffer allocation only, excluding JS heap, decoded image copies, driver and total process memory.",
+    "rows": [
+      {
+        "area": "S01-T1",
+        "beforeTextureBytes": 467968848,
+        "afterTextureBytes": 350528424,
+        "savedTextureBytes": 117440424,
+        "beforeBufferBytes": 156396026,
+        "afterBufferBytes": 152777974,
+        "beforeColliders": 22,
+        "afterColliders": 22,
+        "beforeActors": 2,
+        "afterActors": 2,
+        "failure": ""
+      },
+      {
+        "area": "S01",
+        "beforeTextureBytes": 499222432,
+        "afterTextureBytes": 381782008,
+        "savedTextureBytes": 117440424,
+        "beforeBufferBytes": 165571954,
+        "afterBufferBytes": 154035902,
+        "beforeColliders": 32,
+        "afterColliders": 32,
+        "beforeActors": 1,
+        "afterActors": 1,
+        "failure": ""
+      },
+      {
+        "area": "S03",
+        "beforeTextureBytes": 505485788,
+        "afterTextureBytes": 388045364,
+        "savedTextureBytes": 117440424,
+        "beforeBufferBytes": 165813304,
+        "afterBufferBytes": 153239046,
+        "beforeColliders": 25,
+        "afterColliders": 25,
+        "beforeActors": 10,
+        "afterActors": 10,
+        "failure": ""
+      },
+      {
+        "area": "H01",
+        "beforeTextureBytes": 493831364,
+        "afterTextureBytes": 376390940,
+        "savedTextureBytes": 117440424,
+        "beforeBufferBytes": 171417364,
+        "afterBufferBytes": 158409698,
+        "beforeColliders": 21,
+        "afterColliders": 21,
+        "beforeActors": 1,
+        "afterActors": 1,
+        "failure": ""
+      },
+      {
+        "area": "S01-T1",
+        "beforeTextureBytes": 467968848,
+        "afterTextureBytes": 350528424,
+        "savedTextureBytes": 117440424,
+        "beforeBufferBytes": 170092196,
+        "afterBufferBytes": 156806770,
+        "beforeColliders": 22,
+        "afterColliders": 22,
+        "beforeActors": 2,
+        "afterActors": 2,
+        "failure": ""
+      },
+      {
+        "area": "S03",
+        "beforeTextureBytes": 505485788,
+        "afterTextureBytes": 388045364,
+        "savedTextureBytes": 117440424,
+        "beforeBufferBytes": 170050324,
+        "afterBufferBytes": 155968738,
+        "beforeColliders": 25,
+        "afterColliders": 25,
+        "beforeActors": 10,
+        "afterActors": 10,
+        "failure": ""
+      },
+      {
+        "area": "S01-T1",
+        "beforeTextureBytes": 467968848,
+        "afterTextureBytes": 350528424,
+        "savedTextureBytes": 117440424,
+        "beforeBufferBytes": 172037924,
+        "afterBufferBytes": 157282034,
+        "beforeColliders": 22,
+        "afterColliders": 22,
+        "beforeActors": 2,
+        "afterActors": 2,
+        "failure": ""
+      }
+    ],
+    "returnToOpeningTextureStable": true,
+    "limitations": "Controlled jumps raise a fixture level directly and can trigger expected invalid-save warnings. Persistence was verified separately with normal desktop/mobile gameplay in browser-release.json. No TapTap FPS or process memory conclusion."
+  },
+  "validation": {
+    "existingTestsPassed": 111,
+    "typescript": [
+      "npm --prefix src/cocos run check",
+      "npm --prefix src/cocos run check:core"
+    ],
+    "browser": {
+      "reports": [
+        {
+          "name": "desktop",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "startupBytes": 92498273,
+          "startupPacks": {
+            "bundles": [
+              "actor-raphael",
+              "cast-mira",
+              "combat-vfx",
+              "environment",
+              "hero-appearance",
+              "hero-melee-combo",
+              "internal",
+              "main",
+              "native-weapons",
+              "painted-interiors",
+              "panel-art",
+              "resources",
+              "skill-icons",
+              "waystones"
+            ],
+            "readyMs": 7343.800000000047,
+            "note": "Web manifest observation; whole TapTap subpackages may download before assets are loaded."
+          },
+          "inputMovement": 3.1998168612970956,
+          "saved": {
+            "x": -1.516007900238037,
+            "z": -9.81789779663086
+          },
+          "restored": {
+            "x": -1.516007900238037,
+            "z": -9.81789779663086
+          },
+          "errors": [],
+          "failed": []
+        },
+        {
+          "name": "mobile-landscape",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "startupBytes": 92498273,
+          "startupPacks": {
+            "bundles": [
+              "actor-raphael",
+              "cast-mira",
+              "combat-vfx",
+              "environment",
+              "hero-appearance",
+              "hero-melee-combo",
+              "internal",
+              "main",
+              "native-weapons",
+              "painted-interiors",
+              "panel-art",
+              "resources",
+              "skill-icons",
+              "waystones"
+            ],
+            "readyMs": 6259.5,
+            "note": "Web manifest observation; whole TapTap subpackages may download before assets are loaded."
+          },
+          "inputMovement": 2.3192752862681716,
+          "saved": {
+            "x": -1.4847607612609863,
+            "z": -8.781719207763672
+          },
+          "restored": {
+            "x": -1.4847607612609863,
+            "z": -8.781719207763672
+          },
+          "errors": [],
+          "failed": []
+        }
+      ]
+    },
+    "sceneErrorsBefore": [],
+    "sceneErrorsAfter": [],
+    "visualReview": "Before/after screenshots of inn, town and highland show matching composition, prop positions, painted materials and hero appearance; only expected animation timing differs.",
+    "visualEvidence": "test-results/resource-optimization-comparison.jpg",
+    "packageChecks": [
+      "Cocos build completion",
+      "Official TapTap converter",
+      "ZIP CRC",
+      "SHA-256",
+      "Identity/version/entry/subpackage dependency audit",
+      "WASM transport package audit"
+    ],
+    "castImageLoads": {
+      "rows": [
+        {
+          "id": "mira",
+          "images": [
+            "atlas-appearance-v5-soft-v2"
+          ]
+        },
+        {
+          "id": "nightqi",
+          "images": [
+            "atlas-appearance-v5-soft-v2"
+          ]
+        },
+        {
+          "id": "evelyn",
+          "images": [
+            "atlas-appearance-v5-soft-v2"
+          ]
+        }
+      ],
+      "errors": []
+    }
+  },
+  "pending": [
+    "Real TapTap App cold/hot start, background/foreground recovery and resource retry.",
+    "Target Android device touch, all areas and ten-minute memory/FPS run.",
+    "Deploy and verify login service for account-mode release. Guest build remains local-save-only."
+  ],
+  "runtimeSourceSha256": {
+    "assets/scripts/runtime/EnvironmentAssets.ts": "de512fa8dad13bf9659509c090c65e707a0412e7e4745b45141d57d73ac6a8d2",
+    "assets/scripts/runtime/SceneBuilder.ts": "ee9ca7ae3cf2ba494d78d7282b41aecee57da6538056e5e3bf928bbbfec66b86",
+    "assets/scripts/runtime/ChapterGame.ts": "7b6d0b2f37c1d26dfbb5b16d1cffd6b98e82ae9bed88f55fba1c25949578a4aa",
+    "assets/scripts/runtime/Actors.ts": "f6564203c348458836196f8995b4dad551da96a52722dd97559cb3d8db5562cf",
+    "assets/scripts/runtime/ResourcePacks.ts": "58bc8022705c174ecc29fe4550658e6dd01c2dc54f380a9de471b979bb71a4e0",
+    "assets/scripts/runtime/NativeTextureReuse.ts": "4f39c58b75e509094ed2f640c0def1aef098e80d5963052a02662fdc7ffeea65",
+    "release/taptap.json": "a7c453bba0b79f5c4d250f49e5e3b3a4d64455f8c6a2b77c9ff02a4f1f002665"
+  }
+}

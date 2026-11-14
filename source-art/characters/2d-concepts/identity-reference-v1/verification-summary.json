@@ -1,0 +1,59 @@
+{
+  "date": "2026-11-07",
+  "result": "Installed and built original-design face/hair alignment across all68 atlases and HUD. Playable preview opened in the inn; original HUD portrait visually confirmed.",
+  "counts": {
+    "nativeAtlases": 68,
+    "nativeHUD": 1,
+    "actions": 88,
+    "nativeCells": 1016,
+    "reusedOriginalAtlases": 26,
+    "identityEditedAtlases": 42
+  },
+  "manifestSHA256": "e1e1d5bdde78dff15892acecbd1c460551855a776cc60f7441a125eb1e772541",
+  "fullInstallationReport": "full-install-report.json",
+  "errors": [],
+  "installationIssues": [],
+  "uncoveredAlpha16Pixels": 0,
+  "multiplyCoveredAlpha16Pixels": 0,
+  "minimumBodyMaskIoU": 0.859094,
+  "timingAndWorldUPP": "All88 actions preserve frozen baseline timing/scale/direction fields; W01run8frames/14fps and corrected long-leg bodies retained. Each phase anchor transferred by its own measured body XY.",
+  "HUD": "Native original-design RGB1752x897 PNG copied byte-for-byte; SpriteFrame rect1250,0,502,502. No generated replacement portrait.",
+  "TypeScriptExitCode": 0,
+  "existingTests": {
+    "passed": 95,
+    "failed": 0
+  },
+  "CocosBuildExitCode": 0,
+  "servedBuildAudit": "served-build-audit.json",
+  "actualMotion": {
+    "report": "actual-game-motion.json",
+    "video": "actual-game-motion.webm",
+    "still": "actual-game-run.png",
+    "errors": [],
+    "scenarios": [
+      "sword",
+      "bow",
+      "bow-skill",
+      "staff",
+      "spell",
+      "dodge",
+      "push",
+      "run"
+    ]
+  },
+  "visualReviews": [
+    "review-root-carry.json",
+    "review-art-native.json",
+    "review-carry-art.json"
+  ],
+  "visualLimits": "All source atlases reviewed. Real-Cocos motion capture sampled sword/bow/staff/spell/dodge/run and idle transitions; not every direction of every weapon walk was individually played. Small generated curl/highlight details can vary. Head-height prompt numbers are targets, not exact anatomy measurements.",
+  "nativePackingExceptions": [
+    "face-v1/hero-v6/hero-v4-bow-hit-death-readable.png",
+    "face-v1/hero-v6/W02-attack-readable.png",
+    "face-v1/carry-v1/explore-L02-walk.png"
+  ],
+  "rasterEditing": "Built-in image_gen only; delivered PNGs equal raw outputs. Python/SciPy/Pillow measured without saving/repainting/resampling source PNGs. Packing variants are documented whole-figure layout edits, not claimed unchanged body pixels.",
+  "libraries": "library-reuse-review.md; no stock-library pixels/code/dependencies imported.",
+  "previewURL": "http://127.0.0.1:7469/?view=2d&identity=reference-v1",
+  "backupDirectory": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\identity-reference-v1\\identity-install-rm06cvm2"
+}

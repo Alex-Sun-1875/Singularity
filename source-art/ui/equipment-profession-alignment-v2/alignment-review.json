@@ -1,0 +1,526 @@
+{
+  "status": "corrected_and_reviewed_in_actual_Cocos_output; user_acceptance_pending",
+  "date": "2026-11-11",
+  "approvedDesign": "source-art/ui/equipment-profession-points-v1",
+  "before": "01-before-comparison.jpg",
+  "after": "03-after-comparison.jpg",
+  "pages": [
+    {
+      "page": "装备 · 当前职业",
+      "changes": "恢复人物纸娃娃、两级筛选、绘制装备图、大图详情与标签。",
+      "comparison": "01-equipment-current-compare.jpg",
+      "runtime": "src/cocos/test-results/equipment-profession-alignment-v2/01-equipment-current.png"
+    },
+    {
+      "page": "装备 · 全部装备",
+      "changes": "恢复三行装备、其他职业标签、斜置法杖与职业切换提示。",
+      "comparison": "02-equipment-all-compare.jpg",
+      "runtime": "src/cocos/test-results/equipment-profession-alignment-v2/02-equipment-all.png"
+    },
+    {
+      "page": "职业 · 预览",
+      "changes": "恢复 2×2 职业绘画卡、人物栏、金色选中边与右侧职业详情。",
+      "comparison": "03-profession-preview-compare.jpg",
+      "runtime": "src/cocos/test-results/equipment-profession-alignment-v2/03-profession-preview.png"
+    },
+    {
+      "page": "加点 · 属性",
+      "changes": "恢复四行底板、属性图标、数值分隔、方形加减与收益分区。",
+      "comparison": "04-attribute-points-compare.jpg",
+      "runtime": "src/cocos/test-results/equipment-profession-alignment-v2/04-attribute-points.png"
+    },
+    {
+      "page": "加点 · 技能",
+      "changes": "恢复窄人物栏、侧栏、五行技能、升级消耗牌与效果对比。",
+      "comparison": "05-skill-points-compare.jpg",
+      "runtime": "src/cocos/test-results/equipment-profession-alignment-v2/05-skill-points.png"
+    }
+  ],
+  "sourceArt": {
+    "generation": "No new generative images; deterministic extraction of 52 components from the approved mockups.",
+    "sourceBoxes": "skin-exports.json",
+    "changingText": "All changing text, buttons, preview values, selection and scrolling remain native Cocos.",
+    "frame": "Original corners retained in a compact 96×96 nine-patch instead of a full-screen texture."
+  },
+  "intentionalDifferences": [
+    "Management pages follow the mockups inside the actual safe area. Independent buttons retain >=48 logical CSS pixels and >=8 pixels gap, increasing filter/list spacing compared with the compact drawing.",
+    "Keep all nine existing equipment slots, including both rings; the drawing only illustrated eight. Real item names, quality, learned skills and derived stats are not replaced with example labels.",
+    "Long lists/descriptions scroll, and narrow safe-area skill sidebars shorten the current-profession label rather than wrapping over adjacent content."
+  ],
+  "validation": {
+    "typeScript": "npm run check passed",
+    "existingRules": "60 passed; no new test dependencies or cases",
+    "cocosBuild": "Creator 3.8.8 web-mobile completed; exit 36",
+    "fivePageStates": 5,
+    "regressionStates": 18,
+    "touchTargets": ">=48 CSS px",
+    "independentGaps": ">=8 CSS px",
+    "overlappingControls": 0,
+    "runtimeErrors": 0,
+    "networkFailures": 0,
+    "saveReload": "profession, weapon, attributes and skill points restored",
+    "defaultPreview": "all four panels loaded the corrected frame; no errors; bare URL still defaults to 2D scene / 3D player",
+    "buildFilesMatched": 3509
+  },
+  "screens": "src/cocos/test-results/equipment-profession-alignment-v2",
+  "preview": {
+    "url": "http://127.0.0.1:7469/?view=2d&player=3d&progression=natural",
+    "defaultOutput": "src/cocos/build/concept-2d",
+    "previousOutputBackup": "src/cocos/temp/default-before-profession-align-v2-20261111",
+    "userSaveCleared": false,
+    "publicRelease": false
+  },
+  "limits": [
+    "Web runtime verified. Real TapTap AppID and physical-device acceptance are not claimed."
+  ],
+  "sourceHashes": [
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/RpgPanel.ts",
+      "sha256": "0902fa61cf09ac9c5e7b478df419c28edfbd199085c6544f4332f201c728d924"
+    },
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/UiSkin.ts",
+      "sha256": "33357724a62836027db17306b62d9f558b37641336ad5891d6d25b0c1d2fd8d6"
+    },
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/PreparationSkin.ts",
+      "sha256": "b8e982bb2f1b9d0ab5e89e8b32cd30256b6986a0dee12f66b22a4dd273c9163a"
+    },
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/FeedbackPalette.ts",
+      "sha256": "c63162a30ccdd1e314db800b3bbc55c6148ab72fbc4e5b128e90555ec50c790b"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/equipment/runtime/EquipmentPanels.ts",
+      "sha256": "8d94e17420844c8edf86047b60af01d3e9e5f700e12f32bed8d36a727c7fabdc"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/progression/runtime/PreparationPanels.ts",
+      "sha256": "f14b18c82f501068e98fa2b292b85122da4f81c58e2d120b17fdcccca2665825"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/progression/locales/index.ts",
+      "sha256": "7c79ebecae946fd3a829e975a86e4fd995ab8881842d520c7a1a3fbebdb4db5e"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-active-v2.png",
+      "sha256": "520cccf3feac3a222433a070ae4d97df4a8473a8b0dd8ec11c966fff8d6d4598"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-attribute-dexterity-v2.png",
+      "sha256": "7ec8ed8be003bfa12e6cb14a6ebec8a791b9078088706f3e876ad672fd08ea6e"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-attribute-intellect-v2.png",
+      "sha256": "b53e51d400420e8823cec662f3145174b01152094aee92bdf341f7331e915db3"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-attribute-row-v2.png",
+      "sha256": "211b9cbb436bf2b7132abf96c0d0a9380536fd686e66b8057b8ad7a1e1fdc790"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-attribute-strength-v2.png",
+      "sha256": "9c2b6b5fa985b5394c6cd7c541eb5459238ce23f2fac3485cf8cd13bf4d37c40"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-attribute-vitality-v2.png",
+      "sha256": "c048d5ab70a4540209bfe21d67cd9341b5c62920f2dcc49eff24425429ed3402"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-badge-gold-v2.png",
+      "sha256": "9cb3ac0c14cf2193e36b3e892516e9912ccb5414691df920011d0e1e813cb193"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-badge-teal-v2.png",
+      "sha256": "3435a58b9ffc231f9afb98ca84b7916986fa48cf52c8a9ec49db23c7a3661f1c"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-button-dark-v2.png",
+      "sha256": "0b5584633611777d1afb81eb1aecacd40332339a5f77bff94ee5f84dce9db66a"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-button-gold-v2.png",
+      "sha256": "e28bc4bac3d23cef1296cecc9e40d1483ab6bcc85555c1e720673f82a273f87e"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-card-selected-v2.png",
+      "sha256": "6918f7bfc205697c7d574d2fe67f44730473c04df62ce46b82c49f1c8b4589b6"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-card-v2.png",
+      "sha256": "5e3db8991b18dc9430efc9236ead47fe3d4979f5fc0334f0d4242d329862a4a2"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-categories-v2.png",
+      "sha256": "84ef8b1f8e82e641d2438fcb9a0381d2cd56a556437ba2aee46124b00cd81952"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-chip-v2.png",
+      "sha256": "d90e7cf6d325f2ef682baf08bf3b04ad620748575edd24b31d54e7d5b64e83f0"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-crest-sword-v2.png",
+      "sha256": "377bf7f09be331d21907c1b2fa0af61ffc8411d8d090d2aebb1d6c0bbe941248"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-frame-v2.png",
+      "sha256": "bb335b0b9293b4065ba783540e46bb6b6aa50e71de53156d7b8f54818b1b0d49"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-header-v2.png",
+      "sha256": "9bd15e1b98ef87c0ee3abcc5780173468c1c11892774d9bf0fd2854f63a782e6"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-hero-narrow-v2.png",
+      "sha256": "5639caf4caaa62951aded39229d9a2e753d958c79789e93630c93672b00441df"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-hero-v2.png",
+      "sha256": "6da721b777b931334f3cd93c15091c9ce038ed132bd8ca8e5c1812bf9d042f12"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-info-v2.png",
+      "sha256": "ce5c17ff37f03c7b549c850c5b8413e607c6499a0f4616d39c535a98236c0e88"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-inspect-staff-v2.png",
+      "sha256": "1806283c05c76a1f9c44cfa8fc8036a8bbeee4952e037a61320209fa21f4471b"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-inspect-sword-v2.png",
+      "sha256": "d19c7843540918523e7796452295f7c78c5ff60afee6580f564e6a92058b7207"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-bow-v2.png",
+      "sha256": "903c5ef3581848f9e765718c8e83484f0d3fa4b3ed7438996d88fa1901bc363e"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-chest-v2.png",
+      "sha256": "ddd1d5bcb54353e1c277fa5876ad2c75205de2e0699d0ad3d84cc91870079f1f"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-feet-v2.png",
+      "sha256": "944ce70099d759b8b88f2de5f78f81291aa6f8cde9c876e78fc2d792ee9cce06"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-hands-v2.png",
+      "sha256": "17c61a2d915fe2ec2ff99aafc1841287da19c54da74cea4f86d2db2484e7310b"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-head-v2.png",
+      "sha256": "a3eaec5c96085ab674f02c61a65cea0c21ba099c7aba8034b5136d2513d0f294"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-necklace-v2.png",
+      "sha256": "7adaa076e8f2e427ec2141bd708dc5ce7916282d7997a1d35d01d4734a99bdca"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-ring-v2.png",
+      "sha256": "079c1668c90e07ede41024981212dcf3ec91937edeed6a19f471dbf6bee5dae5"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-staff-v2.png",
+      "sha256": "9819b8eefd713ba9398d4c3d35b0882e45d07a8abc76341995c39de034dcacfe"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-sword-v2.png",
+      "sha256": "3e050b1fe83aefe02a8fb8ff117c1cc4fa7475ea7cd57355aef13bfe219f16b3"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-logo-v2.png",
+      "sha256": "ac3db09b57359ac07c5da1ea0ae60bbcd54be08c81958d8331ed19e76961c7d8"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-plaque-v2.png",
+      "sha256": "c81c3798989ddaf0cc7de6554c41242e3638190cb9b115e85e09e96ea08083bd"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-point-counter-v2.png",
+      "sha256": "4c465fa7466e7e74858faceaac95beeeabc45ecb62e412aa97b0ad8ce6d73b2b"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-rule-v2.png",
+      "sha256": "20877ee8332e55fb2ca7d62d066858fb82739b3387b1b81e7505e1692604991b"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-scope-v2.png",
+      "sha256": "b114c375ad0132b5d81203f3e4ed39b49d80c2c2b8c19bbf647aaaf01e56e830"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-shell-rule-v2.png",
+      "sha256": "bd050b2b80fcea7287ecbbcc475c52a52a58dff32552eef4c87d457955710d96"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-skill-cost-v2.png",
+      "sha256": "0d25133aebce2c19b1bb46f5709f5d36d74f3b86e484b329a9f8f0f7fe4e7137"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-skill-row-v2.png",
+      "sha256": "e4f485b6818f23a6cf09f9a51a5c8bf3d5464e64002e52b18dfb4fe120d27003"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-skill-selected-v2.png",
+      "sha256": "1fc8c7a461b7a0ef892bc19cdcee81f6da8ac95c56be5d3295fca6c5ba038431"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-smoke-v2.png",
+      "sha256": "755751e813f58629e15ae67abfd9c5d2f9363cfda3196be3fcf47c68237c4460"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-level-v2.png",
+      "sha256": "0606fb98db3a67340657fdd19f1d0a93128f84148e5da86becc458883b37db2a"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-life-v2.png",
+      "sha256": "3717f5f6c07808d7d9eab9555030f5a2b76c67aabf8da69cd7429e4e59f2ed84"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-plan-v2.png",
+      "sha256": "416ec329530fdb106ee40f3ff977ee9f7166feebde068b6f213bea8f8f4a03a0"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-power-v2.png",
+      "sha256": "3ac2991c910978a61dc2121ddde57c2dd6694e12ffe1a9926d81c8da755f7097"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-radius-v2.png",
+      "sha256": "5f0cc367a7a3bf14cd7280d07b98c11d0945c1080bee601e754ecdfe42dc838d"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-source-v2.png",
+      "sha256": "64e7efdc3a918ae9d21775cacf47aa526ef22adf5918755246c163f1cefd2fad"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-target-v2.png",
+      "sha256": "7b96de3ed4c9c71689a92e9c4163ba797e8c4df70fd6e8ea9c7b506029092b7d"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-upgrade-v2.png",
+      "sha256": "c16bf7ff823f92af72415138f23cc50b659fc90cb178a93d7d96356316f27412"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-weapon-v2.png",
+      "sha256": "43fd462e898ff5d3415d850ecc252874f4ce21f3aba97c7b355bd45ede160999"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-step-v2.png",
+      "sha256": "871bcfb2d5aa44e1ca4b675730af3f04dfa5e843da9cbad5a9bcd4c95724cadf"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-surface-v2.png",
+      "sha256": "c374263a489d3e28480a75381e93a2c1cb2b004a9cc5fca30d9c527f996e283e"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-active-v2.png.meta",
+      "sha256": "ddf2642edda0b94e337ee20bfdfbc1d29d0296053fb7ad4266fa8ca61b2d7dc6"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-attribute-dexterity-v2.png.meta",
+      "sha256": "9f4310a1bffff08af7f83fc293305c4f3f7fa193abf98369eadd348c82f882cb"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-attribute-intellect-v2.png.meta",
+      "sha256": "80a943e13e456d3fb6cad46cd25e5add89eb9aa2a98d6eb2ba70d50e79442395"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-attribute-row-v2.png.meta",
+      "sha256": "c624bc818df56df0e227a3d30cd5fb22ed652862473259efb0ec80eeaeb8ed96"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-attribute-strength-v2.png.meta",
+      "sha256": "8c9ae71f35c8fea4aa3185466044e4a1f0930fd9a7e15fcffc9c6902ca642fff"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-attribute-vitality-v2.png.meta",
+      "sha256": "8722a0985d88df0e4efb23d4d0d460b60886a8989cfd63942673d1cdbca3f591"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-badge-gold-v2.png.meta",
+      "sha256": "a109e576815c50d5d16acb948a90215dba265bf83fe9d46dfe5e99f944820b83"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-badge-teal-v2.png.meta",
+      "sha256": "edd05845e49dae9a2cd153a1abb0b806fce05e91331b708b1e2b2b2ea20c50d6"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-button-dark-v2.png.meta",
+      "sha256": "ca050d9ab9e52b6d9f6f10b9b4ce10a1c103cbee5c9743c9bddef2c15503a38c"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-button-gold-v2.png.meta",
+      "sha256": "19729e0c60fe4974f0147c583b9a2738d22dca2e9793791b72ac646bea701c80"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-card-selected-v2.png.meta",
+      "sha256": "bd29fee5fba96c59bd26c988c632226e1f2db4eda9fb7fa5022fb67041afe6bb"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-card-v2.png.meta",
+      "sha256": "2cd72818dec22b7a08072f0addc27e92013cbef9a9550c51b5d695017d46cb87"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-categories-v2.png.meta",
+      "sha256": "8dd305308c3c9460f834834bd332b839f79870fc486f2b1af7b5807a8065bb0b"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-chip-v2.png.meta",
+      "sha256": "9235e06f0f7e37f1c81b0c89ef1ce68eb7a7df93eff1335ce6370b5c8a607663"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-crest-sword-v2.png.meta",
+      "sha256": "4fa7e81e2ed9e312f957ad1efe9d18af6fa4a89a975e9036fcc7d04957234a7d"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-frame-v2.png.meta",
+      "sha256": "6a3c68d672e6bd8af1c24fc0be1f2e2e868d813c9d410bed775558eab36d9921"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-header-v2.png.meta",
+      "sha256": "fbf0ca11f793da828ca6b0a8fd797dc5ff88dd13fea1bb860c9e4eebe9d84a3a"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-hero-narrow-v2.png.meta",
+      "sha256": "a44f7c20697c52461f6b2c823940b331bd4a3dbdcbb3d8f2016bf0fb6608be8a"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-hero-v2.png.meta",
+      "sha256": "d500ed99fe3977997ad5af8e181368a5a5f53b2c57cc4e66f7c31d15c3433035"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-info-v2.png.meta",
+      "sha256": "e3a6918f084bc8bd2755d8ca70091a106854f173d4f83ed17a68bfa12f533332"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-inspect-staff-v2.png.meta",
+      "sha256": "94465f196ffe6535168744422f55da19c17bd0d77046edce1ba866299cec24a0"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-inspect-sword-v2.png.meta",
+      "sha256": "595194efe141b897b010339a257827255d6319fdea6b756c50a86cc26c126dab"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-bow-v2.png.meta",
+      "sha256": "0bea8f186fd2eb5c81f71b215e04e0624b533528846764f98c951d6fd9e2eb34"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-chest-v2.png.meta",
+      "sha256": "353e5ca4ebc6ca244f275b102a6b3d9a7618165ccd83632dd714c9f8dcfe74fa"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-feet-v2.png.meta",
+      "sha256": "c1b61e339dd15cee75e0bc787f81f5adb04cad86f98368a8d71152e7bc48dcc4"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-hands-v2.png.meta",
+      "sha256": "2d5f0e795caf30d58e06597416f53973c040d65d2fcfb6ade90029cc3c3af709"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-head-v2.png.meta",
+      "sha256": "7ed5426e43397ebd388f2de92ab7ecdc0d42abb2d2b6819694076f6e82abd032"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-necklace-v2.png.meta",
+      "sha256": "ba00c45c6ea96b7f5be709622fd50a472e730318df8cfa9acf75a906511314b0"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-ring-v2.png.meta",
+      "sha256": "897576e4b6f625d2309406f5479e933a7d73ed8ff68cbb589b31d21df8d739f0"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-staff-v2.png.meta",
+      "sha256": "9b4ef34dce4f3faf54f84e2bf1d0b56825c3190b87cc60164233d820d18ab31e"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-item-sword-v2.png.meta",
+      "sha256": "b28c76eb03cbe23607fab0fc8aaa9b0b2e0570472b812938b999006c358485e7"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-logo-v2.png.meta",
+      "sha256": "19c8b4d0a3d5046e663d0a695c0c244fa68da0a6d5327c3e22e7501b57a5f2c2"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-plaque-v2.png.meta",
+      "sha256": "e113a84b4851f62e41aa113d61f1477b18c6806b918c393c27c3b4c8d6f7b3a2"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-point-counter-v2.png.meta",
+      "sha256": "7646b11759bb01ab994a53ba448660b16d0873ffc43e48bd66d85d11373bac7e"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-rule-v2.png.meta",
+      "sha256": "9abda0477770ef14a3aa76ed5ae8d5763ed1e00bfa94c2797ee516354760aca3"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-scope-v2.png.meta",
+      "sha256": "0e2e06b83be2eb4329f642db7bfb2a34239e3adb00df0fd7f11d2bba0cb9c7b0"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-shell-rule-v2.png.meta",
+      "sha256": "f93d7cfc8e3ca6f2b6eead2a0f2b00ef4953c8856c2562fdd963ff6d80added2"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-skill-cost-v2.png.meta",
+      "sha256": "d21cb73d90e0f9b27f11d437cf7b48d814f9a8d7783e02e8f604409be9fbe3f3"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-skill-row-v2.png.meta",
+      "sha256": "8ab28330712b4256afd02c8dd7bddb86bef4c2ee80d8413e6e05a97ccaab81fe"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-skill-selected-v2.png.meta",
+      "sha256": "8fb7191912d5cc13d3c259949d4ef63de2b1e5e725fe760cc2c5f55f93ea7b65"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-smoke-v2.png.meta",
+      "sha256": "60b531661b397a7d726359db423a94114be8f523c5c26dbecdd0a9b2be5e0806"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-level-v2.png.meta",
+      "sha256": "0c1724955f0605803b17522ba8e01c05276e9296aaa91b4e65bcaf1e9a539f69"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-life-v2.png.meta",
+      "sha256": "48e3296669c8ad5f0b5764f56e69f2711017dbd7d6e1970e2dc12405da2790d6"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-plan-v2.png.meta",
+      "sha256": "97c171e191773a0b346dbbbebac3f5fd2179a1b1413feee0f1207dc0e06cd117"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-power-v2.png.meta",
+      "sha256": "d621f189be7a9b4ee4a6dd57d795ba97100bb5023acc0e10ebe342e666dc25bc"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-radius-v2.png.meta",
+      "sha256": "b252c08be54544c8d7ee8f30b8bfa5429dc4b18cf4964a2523a392ef93535562"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-source-v2.png.meta",
+      "sha256": "f184f65a7a39ac1bba5e64dd4a0745ff49223560fd5657d98ee2f08a591f16dd"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-target-v2.png.meta",
+      "sha256": "7c669ba9caa41932d6512adc3178c93dc825330317b5b6c353ecb53cfd4a4127"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-upgrade-v2.png.meta",
+      "sha256": "e729e5cbbd36373844303204192d890b94464fb3142047a2601cbe19140daf8c"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-stat-weapon-v2.png.meta",
+      "sha256": "ac926925d2fe8e4f023424887044e0ae12bfe7b2a42b423c3a63747c24cea6a2"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-step-v2.png.meta",
+      "sha256": "3f65eb5671783c055edf3afd2954cf6ba1ae79ba8bca2c2535f718584ff7f50b"
+    },
+    {
+      "file": "src/cocos/assets/resources/ui/quiet-bronze/prep-surface-v2.png.meta",
+      "sha256": "ee988bdfd1f42e52574e0bc474438c25d79bd101b1287baba4cd5945491cd661"
+    },
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/PreparationSkin.ts.meta",
+      "sha256": "720853596912a5e50669d0cfb82f199716d29ebb165180f866eaf0c0a22f63d0"
+    }
+  ]
+}

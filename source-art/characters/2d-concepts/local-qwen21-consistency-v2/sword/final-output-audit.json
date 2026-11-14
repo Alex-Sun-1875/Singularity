@@ -1,0 +1,449 @@
+{
+  "status": "read-only numeric original-protection audit; no visual inspection or model call",
+  "files": {
+    "standing-back": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\final\\standing-back.png",
+      "file_sha256": "dc83785641628a4f2f294b321caa17ae2ec38729dfd07a95cbc5f7aa3aaa8825",
+      "checks": {
+        "complete_cap_matches_protected_guide": {
+          "pass": true,
+          "checked_pixels": 484,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "7d7e42d1e395202d31f7a3e3819afa300df4a3dcefd2b517de8b0ac48cb1c40b",
+          "expected_region_rgba_sha256": "7d7e42d1e395202d31f7a3e3819afa300df4a3dcefd2b517de8b0ac48cb1c40b"
+        },
+        "unoccluded_cap_core_matches_translated_original_rgba": {
+          "pass": true,
+          "checked_pixels": 122,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "ba69a56e72104151fca92bff91044e9fd7773e2ce955cbd5b0d059b08d6dde8d",
+          "expected_region_rgba_sha256": "ba69a56e72104151fca92bff91044e9fd7773e2ce955cbd5b0d059b08d6dde8d"
+        },
+        "handle_guard_and_mount_match_original_rgba": {
+          "pass": true,
+          "checked_pixels": 128000,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "70a82d6d2d4fed1e7163ba4c9a9d02abb10b0901da137e3eb02b6f4326157c7d",
+          "expected_region_rgba_sha256": "70a82d6d2d4fed1e7163ba4c9a9d02abb10b0901da137e3eb02b6f4326157c7d"
+        },
+        "hand_finger_interiors_match_original_rgba": {
+          "pass": true,
+          "checked_pixels": 2349,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "ed5e9659f23792f040c35fe7cb2587dc8feb3af89e9484b26fd1887772ce562a",
+          "expected_region_rgba_sha256": "ed5e9659f23792f040c35fe7cb2587dc8feb3af89e9484b26fd1887772ce562a"
+        },
+        "transparent_finger_gaps_match_guide": {
+          "pass": true,
+          "checked_pixels": 34,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "34de041935b73047c85f593518c75361d1e736e742e8c433ed6b0263c4c1cdc2",
+          "expected_region_rgba_sha256": "34de041935b73047c85f593518c75361d1e736e742e8c433ed6b0263c4c1cdc2"
+        },
+        "alpha_matches_guide_except_authorized_neck_repair": {
+          "pass": true,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "expected_neck_alpha_change_pixels": 0,
+          "protected_alpha_sha256": "78ca32d60b992a84b4aad36194259968c6cc2739d376d55920569eac8c3d8168",
+          "expected_protected_alpha_sha256": "78ca32d60b992a84b4aad36194259968c6cc2739d376d55920569eac8c3d8168"
+        },
+        "transparent_canvas_and_soft_edges_preserved": {
+          "pass": true,
+          "checked_pixels": 322871,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "f6ccc8a9f22e98623905454f9797da7c93ac71181517043fdec0f43d3e2f51f9",
+          "expected_region_rgba_sha256": "f6ccc8a9f22e98623905454f9797da7c93ac71181517043fdec0f43d3e2f51f9"
+        },
+        "no_new_opaque_background_outside_neck": {
+          "pass": true,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null
+        },
+        "protected_hand_finger_antialias_matches_occlusion_guide": {
+          "pass": true,
+          "checked_pixels": 672,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "3e7cf353d99d347c39975171b01eff590ebda41e9b78ab45fdba7940ff845bd8",
+          "expected_region_rgba_sha256": "3e7cf353d99d347c39975171b01eff590ebda41e9b78ab45fdba7940ff845bd8"
+        }
+      },
+      "all_pass": true,
+      "diagnostics_non_hand_pixels_in_broad_boxes": {
+        "legacy_hand_box_includes_almost_transparent_rgb_residue": {
+          "pass": false,
+          "checked_pixels": 2007,
+          "mismatch_pixels": 12,
+          "mismatch_bbox_xyxy": [
+            184,
+            405,
+            187,
+            411
+          ],
+          "protected_region_rgba_sha256": "15707a8c5062de2065e1e90936e1b783d9e04c7a2c99c91131744dd19334234c",
+          "expected_region_rgba_sha256": "3f392b06dae113b5a8c8b06f75dee07393cc9a35561c71a33482680d642dabbd",
+          "interpretation": "12 changed pixels have original alpha3..7 and are behind the fingers in the permitted new-sword seam mask. Actual protected hand edge starts at source alpha16."
+        }
+      },
+      "protected_hashes_unchanged_since_initial_audit": {
+        "complete_cap_matches_protected_guide": true,
+        "unoccluded_cap_core_matches_translated_original_rgba": true,
+        "handle_guard_and_mount_match_original_rgba": true,
+        "hand_finger_interiors_match_original_rgba": true,
+        "transparent_finger_gaps_match_guide": true,
+        "alpha_matches_guide_except_authorized_neck_repair": true,
+        "transparent_canvas_and_soft_edges_preserved": true
+      },
+      "final_file_sha256_unchanged_since_initial_audit": true,
+      "all_required_protection_checks_pass": true,
+      "all_protected_region_hashes_unchanged": true
+    },
+    "run-back": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\final\\run-back.png",
+      "file_sha256": "2d8991800f49e1ba8df09e4afac0f5f6dec3fe348fedc6f6e6a01254ee34f53f",
+      "checks": {
+        "complete_cap_matches_protected_guide": {
+          "pass": true,
+          "checked_pixels": 343,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "4230c0cc3256c7d4568926aa3637b21d78388b74fe30a3df76325d41137695a4",
+          "expected_region_rgba_sha256": "4230c0cc3256c7d4568926aa3637b21d78388b74fe30a3df76325d41137695a4"
+        },
+        "unoccluded_cap_core_matches_translated_original_rgba": {
+          "pass": true,
+          "checked_pixels": 285,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "24d45101b1a06638754c9835987aefa92a7865604b4343ea1d64b248c1db6903",
+          "expected_region_rgba_sha256": "24d45101b1a06638754c9835987aefa92a7865604b4343ea1d64b248c1db6903"
+        },
+        "handle_guard_and_mount_match_original_rgba": {
+          "pass": true,
+          "checked_pixels": 4724,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "982e75be1e7209861f9459e19a566918e5cae9960c9275a251444afa16f5068b",
+          "expected_region_rgba_sha256": "982e75be1e7209861f9459e19a566918e5cae9960c9275a251444afa16f5068b"
+        },
+        "hand_finger_interiors_match_original_rgba": {
+          "pass": true,
+          "checked_pixels": 1296,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "27f9056d3013581e280481ce3ed5763b419092d0064acbace6bf84976573b581",
+          "expected_region_rgba_sha256": "27f9056d3013581e280481ce3ed5763b419092d0064acbace6bf84976573b581"
+        },
+        "hand_finger_antialias_matches_occlusion_guide": {
+          "pass": true,
+          "checked_pixels": 1094,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "18bd42511b951abfd083854965ded906ef767e039c4b3cd5f4fbedadd8e3fd8e",
+          "expected_region_rgba_sha256": "18bd42511b951abfd083854965ded906ef767e039c4b3cd5f4fbedadd8e3fd8e"
+        },
+        "transparent_finger_gaps_match_guide": {
+          "pass": true,
+          "checked_pixels": 721,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "6450b8bb30d9db3e344fe578ad5aa16deb47396446ad216112fdf5eaa2069b28",
+          "expected_region_rgba_sha256": "6450b8bb30d9db3e344fe578ad5aa16deb47396446ad216112fdf5eaa2069b28"
+        },
+        "warm_skin_in_arms_source_pixels_preserved": {
+          "pass": true,
+          "checked_pixels": 6298,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "008a2575089ad21f6a392da0700229a1b87ebc544fe30481cf28b52734bb7be2",
+          "expected_region_rgba_sha256": "008a2575089ad21f6a392da0700229a1b87ebc544fe30481cf28b52734bb7be2"
+        },
+        "boots_source_pixels_preserved": {
+          "pass": true,
+          "checked_pixels": 15200,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "1a476ac42072504cb9a709d561ccdc47d260f671b7dd85cbacb143e1e81463af",
+          "expected_region_rgba_sha256": "1a476ac42072504cb9a709d561ccdc47d260f671b7dd85cbacb143e1e81463af"
+        },
+        "alpha_matches_guide_except_authorized_neck_repair": {
+          "pass": true,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "expected_neck_alpha_change_pixels": 1280,
+          "protected_alpha_sha256": "8b5a175d971a2970fd8e5efd3f7a85e5cb7c1c44d9477a8c43938e7c3c4b9f0b",
+          "expected_protected_alpha_sha256": "8b5a175d971a2970fd8e5efd3f7a85e5cb7c1c44d9477a8c43938e7c3c4b9f0b"
+        },
+        "transparent_canvas_and_soft_edges_preserved": {
+          "pass": true,
+          "checked_pixels": 323225,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "86f1d2009e9d37dadb59b0595eedbe3dbc47f0dc33c8742971f63cd29f0f0cf3",
+          "expected_region_rgba_sha256": "86f1d2009e9d37dadb59b0595eedbe3dbc47f0dc33c8742971f63cd29f0f0cf3"
+        },
+        "no_new_opaque_background_outside_neck": {
+          "pass": true,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null
+        },
+        "actual_hand_wrists_original_roi_matches_guide": {
+          "pass": true,
+          "checked_pixels": 3111,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "6a144aa90a344b597f04fe06aedad9b5118dce8d0aea49b40c2f0af2d95d543b",
+          "expected_region_rgba_sha256": "6a144aa90a344b597f04fe06aedad9b5118dce8d0aea49b40c2f0af2d95d543b"
+        },
+        "pure_arm_skin_matches_original_rgba": {
+          "pass": true,
+          "checked_pixels": 6298,
+          "mismatch_pixels": 0,
+          "mismatch_bbox_xyxy": null,
+          "protected_region_rgba_sha256": "008a2575089ad21f6a392da0700229a1b87ebc544fe30481cf28b52734bb7be2",
+          "expected_region_rgba_sha256": "008a2575089ad21f6a392da0700229a1b87ebc544fe30481cf28b52734bb7be2"
+        }
+      },
+      "all_pass": true,
+      "diagnostics_non_hand_pixels_in_broad_boxes": {
+        "expanded_hands_wrists_box_includes_moved_garment_seam": {
+          "pass": false,
+          "checked_pixels": 10261,
+          "mismatch_pixels": 6,
+          "mismatch_bbox_xyxy": [
+            189,
+            390,
+            190,
+            396
+          ],
+          "protected_region_rgba_sha256": "5f727b637c639d7b5eb63882b80592114f58967e359e160003bceb1f5d9da5f3",
+          "expected_region_rgba_sha256": "4776561306e6fd39b6c5e2add72d5a94b68d676a6fc2070abc1a8eb93608d1ea",
+          "interpretation": "Six changed pixels x189,y390..395 are outside the accepted source-hand box [133,350,184,411), in the body seam mask. The actual hand and warm-skin masks are unchanged."
+        }
+      },
+      "protected_hashes_unchanged_since_initial_audit": {
+        "complete_cap_matches_protected_guide": true,
+        "unoccluded_cap_core_matches_translated_original_rgba": true,
+        "handle_guard_and_mount_match_original_rgba": true,
+        "hand_finger_interiors_match_original_rgba": true,
+        "hand_finger_antialias_matches_occlusion_guide": true,
+        "transparent_finger_gaps_match_guide": true,
+        "warm_skin_in_arms_source_pixels_preserved": true,
+        "boots_source_pixels_preserved": true,
+        "alpha_matches_guide_except_authorized_neck_repair": true,
+        "transparent_canvas_and_soft_edges_preserved": true
+      },
+      "final_file_sha256_unchanged_since_initial_audit": true,
+      "all_required_protection_checks_pass": true,
+      "all_protected_region_hashes_unchanged": true
+    }
+  },
+  "writes_only": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\sword\\final-output-audit.json",
+  "production_modified": false,
+  "final_images_modified": false,
+  "cloud_visual_check_used": false,
+  "audit_phase": "final, after root neck seam repair; final files stable and no further writes expected",
+  "all_required_protection_checks_pass": true,
+  "previous_strict_broad_box_audit": {
+    "status": "read-only numeric original-protection audit; no visual inspection or model call",
+    "files": {
+      "standing-back": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\final\\standing-back.png",
+        "file_sha256": "dc83785641628a4f2f294b321caa17ae2ec38729dfd07a95cbc5f7aa3aaa8825",
+        "checks": {
+          "complete_cap_matches_protected_guide": {
+            "pass": true,
+            "checked_pixels": 484,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "protected_region_rgba_sha256": "7d7e42d1e395202d31f7a3e3819afa300df4a3dcefd2b517de8b0ac48cb1c40b",
+            "expected_region_rgba_sha256": "7d7e42d1e395202d31f7a3e3819afa300df4a3dcefd2b517de8b0ac48cb1c40b"
+          },
+          "unoccluded_cap_core_matches_translated_original_rgba": {
+            "pass": true,
+            "checked_pixels": 122,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "protected_region_rgba_sha256": "ba69a56e72104151fca92bff91044e9fd7773e2ce955cbd5b0d059b08d6dde8d",
+            "expected_region_rgba_sha256": "ba69a56e72104151fca92bff91044e9fd7773e2ce955cbd5b0d059b08d6dde8d"
+          },
+          "handle_guard_and_mount_match_original_rgba": {
+            "pass": true,
+            "checked_pixels": 128000,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "protected_region_rgba_sha256": "70a82d6d2d4fed1e7163ba4c9a9d02abb10b0901da137e3eb02b6f4326157c7d",
+            "expected_region_rgba_sha256": "70a82d6d2d4fed1e7163ba4c9a9d02abb10b0901da137e3eb02b6f4326157c7d"
+          },
+          "hand_finger_interiors_match_original_rgba": {
+            "pass": true,
+            "checked_pixels": 2349,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "protected_region_rgba_sha256": "ed5e9659f23792f040c35fe7cb2587dc8feb3af89e9484b26fd1887772ce562a",
+            "expected_region_rgba_sha256": "ed5e9659f23792f040c35fe7cb2587dc8feb3af89e9484b26fd1887772ce562a"
+          },
+          "hand_finger_antialias_matches_occlusion_guide": {
+            "pass": false,
+            "checked_pixels": 2007,
+            "mismatch_pixels": 12,
+            "mismatch_bbox_xyxy": [
+              184,
+              405,
+              187,
+              411
+            ],
+            "protected_region_rgba_sha256": "15707a8c5062de2065e1e90936e1b783d9e04c7a2c99c91131744dd19334234c",
+            "expected_region_rgba_sha256": "3f392b06dae113b5a8c8b06f75dee07393cc9a35561c71a33482680d642dabbd"
+          },
+          "transparent_finger_gaps_match_guide": {
+            "pass": true,
+            "checked_pixels": 34,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "protected_region_rgba_sha256": "34de041935b73047c85f593518c75361d1e736e742e8c433ed6b0263c4c1cdc2",
+            "expected_region_rgba_sha256": "34de041935b73047c85f593518c75361d1e736e742e8c433ed6b0263c4c1cdc2"
+          },
+          "alpha_matches_guide_except_authorized_neck_repair": {
+            "pass": true,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "expected_neck_alpha_change_pixels": 0,
+            "protected_alpha_sha256": "78ca32d60b992a84b4aad36194259968c6cc2739d376d55920569eac8c3d8168",
+            "expected_protected_alpha_sha256": "78ca32d60b992a84b4aad36194259968c6cc2739d376d55920569eac8c3d8168"
+          },
+          "transparent_canvas_and_soft_edges_preserved": {
+            "pass": true,
+            "checked_pixels": 322871,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "protected_region_rgba_sha256": "f6ccc8a9f22e98623905454f9797da7c93ac71181517043fdec0f43d3e2f51f9",
+            "expected_region_rgba_sha256": "f6ccc8a9f22e98623905454f9797da7c93ac71181517043fdec0f43d3e2f51f9"
+          },
+          "no_new_opaque_background_outside_neck": {
+            "pass": true,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null
+          }
+        },
+        "all_pass": false
+      },
+      "run-back": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\final\\run-back.png",
+        "file_sha256": "2d8991800f49e1ba8df09e4afac0f5f6dec3fe348fedc6f6e6a01254ee34f53f",
+        "checks": {
+          "complete_cap_matches_protected_guide": {
+            "pass": true,
+            "checked_pixels": 343,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "protected_region_rgba_sha256": "4230c0cc3256c7d4568926aa3637b21d78388b74fe30a3df76325d41137695a4",
+            "expected_region_rgba_sha256": "4230c0cc3256c7d4568926aa3637b21d78388b74fe30a3df76325d41137695a4"
+          },
+          "unoccluded_cap_core_matches_translated_original_rgba": {
+            "pass": true,
+            "checked_pixels": 285,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "protected_region_rgba_sha256": "24d45101b1a06638754c9835987aefa92a7865604b4343ea1d64b248c1db6903",
+            "expected_region_rgba_sha256": "24d45101b1a06638754c9835987aefa92a7865604b4343ea1d64b248c1db6903"
+          },
+          "handle_guard_and_mount_match_original_rgba": {
+            "pass": true,
+            "checked_pixels": 4724,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "protected_region_rgba_sha256": "982e75be1e7209861f9459e19a566918e5cae9960c9275a251444afa16f5068b",
+            "expected_region_rgba_sha256": "982e75be1e7209861f9459e19a566918e5cae9960c9275a251444afa16f5068b"
+          },
+          "hand_finger_interiors_match_original_rgba": {
+            "pass": true,
+            "checked_pixels": 1296,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "protected_region_rgba_sha256": "27f9056d3013581e280481ce3ed5763b419092d0064acbace6bf84976573b581",
+            "expected_region_rgba_sha256": "27f9056d3013581e280481ce3ed5763b419092d0064acbace6bf84976573b581"
+          },
+          "hand_finger_antialias_matches_occlusion_guide": {
+            "pass": true,
+            "checked_pixels": 1094,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "protected_region_rgba_sha256": "18bd42511b951abfd083854965ded906ef767e039c4b3cd5f4fbedadd8e3fd8e",
+            "expected_region_rgba_sha256": "18bd42511b951abfd083854965ded906ef767e039c4b3cd5f4fbedadd8e3fd8e"
+          },
+          "transparent_finger_gaps_match_guide": {
+            "pass": true,
+            "checked_pixels": 721,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "protected_region_rgba_sha256": "6450b8bb30d9db3e344fe578ad5aa16deb47396446ad216112fdf5eaa2069b28",
+            "expected_region_rgba_sha256": "6450b8bb30d9db3e344fe578ad5aa16deb47396446ad216112fdf5eaa2069b28"
+          },
+          "hands_wrists_source_pixels_preserved": {
+            "pass": false,
+            "checked_pixels": 10261,
+            "mismatch_pixels": 6,
+            "mismatch_bbox_xyxy": [
+              189,
+              390,
+              190,
+              396
+            ],
+            "protected_region_rgba_sha256": "5f727b637c639d7b5eb63882b80592114f58967e359e160003bceb1f5d9da5f3",
+            "expected_region_rgba_sha256": "4776561306e6fd39b6c5e2add72d5a94b68d676a6fc2070abc1a8eb93608d1ea"
+          },
+          "warm_skin_in_arms_source_pixels_preserved": {
+            "pass": true,
+            "checked_pixels": 6298,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "protected_region_rgba_sha256": "008a2575089ad21f6a392da0700229a1b87ebc544fe30481cf28b52734bb7be2",
+            "expected_region_rgba_sha256": "008a2575089ad21f6a392da0700229a1b87ebc544fe30481cf28b52734bb7be2"
+          },
+          "boots_source_pixels_preserved": {
+            "pass": true,
+            "checked_pixels": 15200,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "protected_region_rgba_sha256": "1a476ac42072504cb9a709d561ccdc47d260f671b7dd85cbacb143e1e81463af",
+            "expected_region_rgba_sha256": "1a476ac42072504cb9a709d561ccdc47d260f671b7dd85cbacb143e1e81463af"
+          },
+          "alpha_matches_guide_except_authorized_neck_repair": {
+            "pass": true,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "expected_neck_alpha_change_pixels": 1280,
+            "protected_alpha_sha256": "8b5a175d971a2970fd8e5efd3f7a85e5cb7c1c44d9477a8c43938e7c3c4b9f0b",
+            "expected_protected_alpha_sha256": "8b5a175d971a2970fd8e5efd3f7a85e5cb7c1c44d9477a8c43938e7c3c4b9f0b"
+          },
+          "transparent_canvas_and_soft_edges_preserved": {
+            "pass": true,
+            "checked_pixels": 323225,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null,
+            "protected_region_rgba_sha256": "86f1d2009e9d37dadb59b0595eedbe3dbc47f0dc33c8742971f63cd29f0f0cf3",
+            "expected_region_rgba_sha256": "86f1d2009e9d37dadb59b0595eedbe3dbc47f0dc33c8742971f63cd29f0f0cf3"
+          },
+          "no_new_opaque_background_outside_neck": {
+            "pass": true,
+            "mismatch_pixels": 0,
+            "mismatch_bbox_xyxy": null
+          }
+        },
+        "all_pass": false
+      }
+    },
+    "writes_only": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\sword\\final-output-audit.json",
+    "production_modified": false,
+    "final_images_modified": false,
+    "cloud_visual_check_used": false
+  }
+}

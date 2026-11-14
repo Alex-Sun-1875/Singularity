@@ -1,0 +1,82 @@
+{
+  "validatedAt": "2026-11-11T16:15:28.005086+00:00",
+  "version": "0.3.19",
+  "buildMode": "guest-test",
+  "package": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-fire-melee-v1\\SwordAndFire_0.3.19_TapTap_guest-test_20261111T161419Z\\SwordAndFire_0.3.19_TapTap_guest-test_20261111T161419Z.zip",
+  "packageSha256": "172f3e3e0dd5e7dba5b47d1acea0fe19d6e8719b347f603ce33b3ca4c3ee4727",
+  "uploadZipBytes": 218389611,
+  "initialPayload": {
+    "files": 27,
+    "rawBytes": 5396437,
+    "zipBytes": 1322386,
+    "zipMiB": 1.26,
+    "budgetMiB": 20.0,
+    "withinLocalBudget": true,
+    "sha256": "3f1a0b26d7191fae8c9cb92df094a1618f8527698a154e6493d7fbb77e46a5ac",
+    "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+  },
+  "subpackages": 76,
+  "checks": {
+    "cocosBuild": "passed; current invocation Finished marker",
+    "officialConversion": "passed; 87 scripts converted, 1 engine skipped, 0 failed",
+    "typescript": "passed",
+    "releaseConfigConsistency": "passed",
+    "zipCrc": "all entries passed",
+    "rootEntriesVersionAppIdOrientationGuestFlag": "passed",
+    "allActiveFireTextures": "source SHA-256 matches ZIP",
+    "latestRuntimeMarkers": "1.85m basic reach, short-tail stages, native animation state recreation",
+    "sourceStableDuringBuild": "only generated BuildInfo.ts version changed"
+  },
+  "runtimeBundle": {
+    "path": "assets/main/index.abf10.js",
+    "sha256": "3a08814d2bc31cc8235793bcefcd23ca351307462ff8e98b9ad8654af895214e"
+  },
+  "activeFireTextures": [
+    {
+      "source": "src/cocos/assets/resources/vfx/production/fire-pyro-v7.png",
+      "inZip": "subpackages/combat-vfx/native/ca/ca2d1f9f-1ed4-4649-a70b-bc8be2c4c756.d9ab5.png",
+      "sha256": "fdbb55116459cb8b8c0cf3ce55cf8e00ace8984c67ccccca06ff5fab5587e269"
+    },
+    {
+      "source": "src/cocos/assets/resources/vfx/production/fire-core-v7.png",
+      "inZip": "subpackages/combat-vfx/native/2f/2f192bfb-76f4-48ce-bb45-90b721de2e68.c2634.png",
+      "sha256": "22096d40a9f64c49bf0f2374c40776d017c85450ab9b7933d3d568efa23b258c"
+    },
+    {
+      "source": "src/cocos/assets/resources/vfx/production/fire-low-rolls-v7.png",
+      "inZip": "subpackages/combat-vfx/native/0b/0bb3fd96-2509-4d5e-bcf4-8a03252571c6.9324a.png",
+      "sha256": "5799eb949394589211ac0d91c8340a3397466a3b7b932cce5d9da5e321f2ae55"
+    },
+    {
+      "source": "src/cocos/assets/resources/vfx/production/fire-bolt-v9.png",
+      "inZip": "subpackages/combat-vfx/native/9e/9ee88469-12db-4458-bc2e-b0ead27cd60f.4a085.png",
+      "sha256": "ea66652cab1558303c95d8adaad87c089aa9a92501c0ace87c20259d77799cf4"
+    },
+    {
+      "source": "src/cocos/assets/resources/vfx/production/fire-comet-v10.png",
+      "inZip": "subpackages/combat-vfx/native/fd/fdc4b501-9838-4a39-b211-be59cfe646b0.d271e.png",
+      "sha256": "10d5ca0e6b84967eee33b0dc840ff530a260be0d3826031c167392925d523821"
+    }
+  ],
+  "includedChanges": [
+    "Dense fire with no black smoke; comet meteor and smaller basic projectile.",
+    "Shorter basic tail with clearance from the casting hand.",
+    "Player skill range/trajectory helper boxes removed across sword, bow, fire and thunder.",
+    "Melee attack follow-through and native bone blending.",
+    "Basic sword reach 1.45m -> 1.85m; WAR_01/WAR_05 fan reach +25%, original fan width restored."
+  ],
+  "priorGameplayValidation": "src/cocos/test-results/melee-reach-v14/validation.json; 116 existing checks passed and phone/desktop Web gameplay reviewed for same gameplay source",
+  "buildToolRepair": "taptap-config.cjs falls back to an r+ overwrite and exact truncation only for Windows UNKNOWN errors on existing files. Config synchronization and full build passed.",
+  "failedVersionAllocations": [
+    "0.3.17",
+    "0.3.18"
+  ],
+  "pending": [
+    "Login service deployment and HTTPS domain/privacy setup for formal login.",
+    "Real TapTap package parsing, minimum base-library confirmation and target-device acceptance.",
+    "Actual platform initial delivery and playable-before download size.",
+    "Platform WASM function splitting not verified."
+  ],
+  "uploaded": false,
+  "platformVerified": false
+}

@@ -1,0 +1,127 @@
+{
+  "status": "26 native reuse candidates selected; 4 low-IoU whole-image sources rejected by root",
+  "selectedImageCount": 26,
+  "selectedImages": [
+    "face-v1/hero-v6/L01-attack-readable.png",
+    "face-v1/hero-v6/L01-run-a-readable.png",
+    "face-v1/hero-v6/L01-run-b-readable.png",
+    "face-v1/hero-v6/L01-walk-readable.png",
+    "face-v1/hero-v6/L02-attack-readable.png",
+    "face-v1/hero-v6/L02-run-a-readable.png",
+    "face-v1/hero-v6/L02-run-b-readable.png",
+    "face-v1/hero-v6/W02-run-b-readable.png",
+    "face-v1/hero-v6/W02-walk-readable.png",
+    "face-v1/hero-v6/W07-attack-readable.png",
+    "face-v1/hero-v6/W07-run-a-readable.png",
+    "face-v1/hero-v6/W07-run-b-readable.png",
+    "face-v1/hero-v6/W07-walk-readable.png",
+    "face-v1/hero-v6/W08-attack-readable.png",
+    "face-v1/hero-v6/W08-run-a-readable.png",
+    "face-v1/hero-v6/W11-attack-readable.png",
+    "face-v1/hero-v6/W11-run-a-readable.png",
+    "face-v1/hero-v6/W11-run-b-readable.png",
+    "face-v1/hero-v6/W11-walk-readable.png",
+    "face-v1/hero-v6/hero-v4-bow-dodge-readable.png",
+    "face-v1/hero-v6/hero-v4-dodge-readable.png",
+    "face-v1/hero-v6/hero-v4-hit-death-readable.png",
+    "face-v1/hero-v6/hero-v4-idle-readable.png",
+    "face-v1/hero-v6/hero-v4-spell-interact-readable.png",
+    "face-v1/hero-v6/hero-v4-w01-attack-readable.png",
+    "face-v1/hero-v6/hero-v4-w01-walk-readable.png"
+  ],
+  "needsGeneration": [
+    {
+      "image": "face-v1/hero-v6/W02-attack-readable.png",
+      "reason": "Old complete rectangles contain 977 duplicate alpha16 pixels; no blind semantic approval."
+    },
+    {
+      "image": "face-v1/hero-v6/W02-run-a-readable.png",
+      "reason": "Original native background fails transparency."
+    },
+    {
+      "image": "face-v1/hero-v6/hero-v4-bow-spell-interact-readable.png",
+      "reason": "Original native background fails transparency."
+    },
+    {
+      "image": "face-v1/hero-v6/hero-v4-run-readable-a.png",
+      "reason": "Preserve installed new W01 running body/pose/UPP/metadata; current run needs identity-only editing."
+    },
+    {
+      "image": "face-v1/hero-v6/hero-v4-run-readable-b.png",
+      "reason": "Preserve installed new W01 running body/pose/UPP/metadata; current run needs identity-only editing."
+    }
+  ],
+  "nativeSemanticFallbacks": [
+    {
+      "image": "face-v1/hero-v6/L02-walk-readable-v2.png",
+      "automaticIssue": "Complete rectangular crop contains neighbour alpha at frame 10; regenerate",
+      "semanticFallbackAcceptedForMeasurement": true
+    },
+    {
+      "image": "face-v1/hero-v6/W08-attack-readable.png",
+      "automaticIssue": "Complete rectangular crop contains neighbour alpha at frame 1; regenerate",
+      "semanticFallbackAcceptedForMeasurement": true
+    }
+  ],
+  "lowIoUOrBoundary": [],
+  "runPhaseYSpanReviews": [
+    {
+      "action": "run_staff",
+      "direction": "up",
+      "phaseYTranslations": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -2,
+        -2,
+        -2,
+        -4
+      ],
+      "spanPixels": 3,
+      "requiresReview": true
+    },
+    {
+      "action": "run_W11",
+      "direction": "up",
+      "phaseYTranslations": [
+        -1,
+        -1,
+        -1,
+        -1,
+        -2,
+        -2,
+        -2,
+        -4
+      ],
+      "spanPixels": 3,
+      "requiresReview": true
+    }
+  ],
+  "allRegistrationFlagsRemainUnaccepted": true,
+  "runtimeModified": false,
+  "baselineManifestSHA256": "5f438265f874fc45785f0a596c1ba328f889bfc369c28f3480ab6af2e2f9240c",
+  "rejectedReuseAwaitingHeadEdit": [
+    {
+      "image": "face-v1/hero-v6/L02-walk-readable-v2.png",
+      "reason": "Root rejected whole-image reuse after body IoU review; replacement must use current runtime as edit target. No reuse registration overrides may transfer to replacement.",
+      "supersededSourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\identity-reference-v1\\assets\\face-v1\\hero-v6\\L02-walk-readable-v2.png"
+    },
+    {
+      "image": "face-v1/hero-v6/W08-run-b-readable.png",
+      "reason": "Root rejected whole-image reuse after body IoU review; replacement must use current runtime as edit target. No reuse registration overrides may transfer to replacement.",
+      "supersededSourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\identity-reference-v1\\assets\\face-v1\\hero-v6\\W08-run-b-readable.png"
+    },
+    {
+      "image": "face-v1/hero-v6/W08-walk-readable-v2.png",
+      "reason": "Root rejected whole-image reuse after body IoU review; replacement must use current runtime as edit target. No reuse registration overrides may transfer to replacement.",
+      "supersededSourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\identity-reference-v1\\assets\\face-v1\\hero-v6\\W08-walk-readable-v2.png"
+    },
+    {
+      "image": "face-v1/hero-v6/hero-v4-bow-hit-death-readable.png",
+      "reason": "Root rejected whole-image reuse after body IoU review; replacement must use current runtime as edit target. No reuse registration overrides may transfer to replacement.",
+      "supersededSourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\identity-reference-v1\\assets\\face-v1\\hero-v6\\hero-v4-bow-hit-death-readable.png"
+    }
+  ],
+  "runPhaseYSpanResolution": "New adapter transfers per-phase measured origins; median-Y fallback is not used."
+}

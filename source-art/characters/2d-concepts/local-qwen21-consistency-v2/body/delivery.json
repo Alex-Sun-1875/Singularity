@@ -1,0 +1,36 @@
+{
+  "status": "Body geometry and independent protected-part guides ready; no model inference and no production replacement by this preparation task.",
+  "front": {
+    "original": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\front\\original-rgba.png",
+    "guide": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\front\\guide-rgba.png",
+    "mask": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\front\\edit-mask.png",
+    "reference": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\front\\reference-standing-rgba.png",
+    "prompt": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\front\\prompt.txt"
+  },
+  "back": {
+    "original": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\back\\original-rgba.png",
+    "guide": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\back\\guide-rgba.png",
+    "mask": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\back\\edit-mask.png",
+    "reference": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\back\\reference-standing-rgba.png",
+    "prompt": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\back\\prompt.txt"
+  },
+  "composite_module": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\body_composite.py",
+  "call": "composite_local_raw(direction, raw_path, output_path=None)",
+  "verified": {
+    "identity_composite_changed_pixels": {
+      "front": 0,
+      "back": 0
+    },
+    "raw_unchanged": true,
+    "protected_arms_hands_boots_weapon_rgba_exact": true,
+    "noise_mask_intersection_with_protection": 0
+  },
+  "interpretation": "Waist-to-fixed-ankle projected leg proportion +8.70% front / +8.46% back; waist raised22px. No character bbox fitting, no global world-height increase, no full horizontal strip resampling. Retain run lean and phase; head uses standing pixels at1:1 integer translated placement.",
+  "visual_inspection": "One necessary880x790 coordinate board of the four originals viewed via Codex cloud vision. Local deterministic processing only in preparation; all model calls delegated to root. No additional image upload/review performed.",
+  "limitations": [
+    "Qwen raw and final composited result still require artistic inspection.",
+    "A separate back-run sword extension layer can replace original sword protection after body cleanup.",
+    "Original bright trouser palette remains in guide as original pixels; final costume/pants palette adaptation is a separate task."
+  ],
+  "back_run_head_landing_note": "Rear standing approved head is copied at original1:1 scale with integer offset(-11,+21), retaining the rear run drawing head landing about21 canvas pixels lower than standing due to the current run pose/lean. The body edit raises waist22px and changes projected leg/torso proportion only; it does not additionally raise the rear-run crown, increase runtime UPP or fit the complete alpha bbox."
+}

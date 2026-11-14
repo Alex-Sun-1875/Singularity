@@ -1,0 +1,156 @@
+{
+  "version": "unified-gold-v13",
+  "date": "2026-11-08",
+  "userDirection": "Restore middle supplies and align rectangular/circular gold color and scroll decoration; add more motifs while keeping moderate brightness and thin clean-gold rims.",
+  "ownership": "Project-original SVG family derived from existing SupplyBelt panel and v12 circular designs. No external download or additional generation.",
+  "palette": {
+    "metal": "#B99456",
+    "light": "#D2B985",
+    "ornament": "#C29B5A",
+    "glint": "#D9CCA2",
+    "low": "#AB853B",
+    "mid": "#BE995A",
+    "shadow": "#1D170C"
+  },
+  "gradient": "Identical normalized diagonal gradient and stops across panel, map, navigation and skill frames.",
+  "ornamentSource": "src/cocos/assets/scripts/runtime/UiChrome.ts",
+  "ornamentPolicy": "Metal PNGs contain no baked scrolls. Native shared frame()/circleOrnament() supply exactly one engraving layer: rectangular corner curls plus centered border vines, eight map motifs, four small-control rim curls.",
+  "exporter": "@resvg/resvg-js@2.6.2 (MPL-2.0), existing project dependency",
+  "assets": [
+    {
+      "id": "unified-gold-panel-v13",
+      "source": "source-art/ui/clean-gold-v11/unified-gold-panel-v13.svg",
+      "sourceSHA256": "05e28017af1c51bc719789b6009d05cc0f631711ee328cdebc3acddb6e8c8700",
+      "derivedFrom": "source-art/materials/chapter-one-v3/ui-kit/panel-frame.svg",
+      "asset": "src/cocos/assets/resources/ui/quiet-bronze/unified-gold-panel-v13.png",
+      "pngSHA256": "148c1e01e53ecb4293a0f8e9119c999d3467e30e1ce9dbdc4654cfa023eb205b",
+      "size": [
+        256,
+        128
+      ],
+      "bytes": 9042,
+      "nineSlice": [
+        24,
+        24,
+        24,
+        24
+      ]
+    },
+    {
+      "id": "unified-gold-ring-v13",
+      "source": "source-art/ui/clean-gold-v11/unified-gold-ring-v13.svg",
+      "sourceSHA256": "c9de6aae2f8457aecc0e0183e0932e295a2bb9b6a262e8bfb60f913e4838967b",
+      "derivedFrom": "clean-gold-ring-v12.svg",
+      "asset": "src/cocos/assets/resources/ui/quiet-bronze/unified-gold-ring-v13.png",
+      "pngSHA256": "9b60ebd8f3d3e9e3d3fd8cc8fbf588b2e27b223edd941ac7c01222d9e49b030c",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 65700,
+      "nineSlice": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "unified-gold-medallion-v13",
+      "source": "source-art/ui/clean-gold-v11/unified-gold-medallion-v13.svg",
+      "sourceSHA256": "3216cb7e8ff2609d899072290b79088558d66fdfcbd2b98311d0d2fefddbe17c",
+      "derivedFrom": "clean-gold-medallion-v12.svg",
+      "asset": "src/cocos/assets/resources/ui/quiet-bronze/unified-gold-medallion-v13.png",
+      "pngSHA256": "0441606744baec913f1c2289cbe04e6e1514c07120f50fc61709f7edf3ee87f1",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 66046,
+      "nineSlice": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "unified-gold-skill-v13",
+      "source": "source-art/ui/clean-gold-v11/unified-gold-skill-v13.svg",
+      "sourceSHA256": "a59e4569a86d194246848afac090bf7b5a9d2c2902d387f72e3bc8e016821554",
+      "derivedFrom": "clean-gold-skill-v12.svg",
+      "asset": "src/cocos/assets/resources/ui/quiet-bronze/unified-gold-skill-v13.png",
+      "pngSHA256": "c773ddf7a667671006a2ae0820b668482bcda8e06e4b57f5402f192ca9a39907",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 71064,
+      "nineSlice": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "id": "unified-gold-rail-v13",
+      "source": "source-art/ui/clean-gold-v11/unified-gold-rail-v13.svg",
+      "sourceSHA256": "aa504d21bc9970200305376777dc44218f555602721f0a10b5319d751442c5f1",
+      "derivedFrom": "clean-gold-rail-v12.svg",
+      "asset": "src/cocos/assets/resources/ui/quiet-bronze/unified-gold-rail-v13.png",
+      "pngSHA256": "71bcc2f926939d72b16fc00ba1ecaf1bc53bbe6aa85ccfa6d0233b85d1da189a",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 18388,
+      "nineSlice": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "artReview": {
+    "source": "Shared palette, geometry and native scroll motifs verified in source and integrated runtime crops.",
+    "runtime": "Actual desktopDPR2 and mobile844x390 screenshots inspected; common subdued gold and shared curl/leaf strokes across status panels, map, skills and restored supply belt. Map backdrop now rendered as child of stencil to avoid world showing through.",
+    "userAcceptance": "Not recorded.",
+    "evidence": [
+      "src/cocos/test-results/hud-supplies-v13-hidpi.png",
+      "src/cocos/test-results/hud-supplies-v13-mobile.png",
+      "src/cocos/test-results/hud-supplies-v13-outdoor.png",
+      "src/cocos/test-results/hud-supplies-v13-frame-comparison.png"
+    ]
+  },
+  "supplies": {
+    "slots": [
+      "生命药",
+      "检查点补给",
+      "火油"
+    ],
+    "userSelection": "User explicitly chose checkpoint restock as third-item option on2026-11-08. Visual order: health/restock/oil.",
+    "health": "Restores40; stock3;5-second cooldown; key5.",
+    "oil": "Aimed throw; finite stock3; keyK; drag/end andcancel semantics verified.",
+    "restock": "Existing safe-near-checkpoint rest restores HP, potion/oil stock; does not reset combat skill or ultimate locks."
+  },
+  "validation": {
+    "typeScript": "npm run check passed",
+    "coreTests": "Existing95/95 passed; no new tests/dependencies.",
+    "runtimeReport": "src/cocos/test-results/hud-supplies-v13-interactions.json",
+    "potionUseAndCooldown": true,
+    "fullHealthNoWaste": true,
+    "checkpointRestock": true,
+    "oilCancelAndActualThrow": true,
+    "realOSCancelPreserved": true,
+    "thirdFingerGuard": true,
+    "nameVisibilitySettingPreserved": true,
+    "narrowLandscapeBounds": [
+      "667x375",
+      "915x412"
+    ],
+    "desktopErrors": 0,
+    "mobileErrors": 0
+  }
+}

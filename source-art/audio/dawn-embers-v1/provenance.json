@@ -1,0 +1,91 @@
+{
+  "title": "破晓余烬",
+  "date": "2026-11-10",
+  "game": "剑与火：破晓之战",
+  "intent": "暖金写实奇幻探索；旅店的人情温度、铁誓遗迹的回声与破晓远征的希望。用于常规探索，非独立Boss战曲。",
+  "authorship": "原创乐谱与确定性合成音色；不引用现有游戏旋律，不使用第三方录音或声库。",
+  "arrangement": {
+    "bpm": 80,
+    "meter": "4/4",
+    "mode": "D Dorian",
+    "bars": 32,
+    "authoredSeconds": 96,
+    "sections": [
+      {
+        "from": 0,
+        "to": 24,
+        "title": "灯下启程"
+      },
+      {
+        "from": 24,
+        "to": 48,
+        "title": "越过河谷"
+      },
+      {
+        "from": 48,
+        "to": 72,
+        "title": "铁誓回声"
+      },
+      {
+        "from": 72,
+        "to": 96,
+        "title": "未熄之火"
+      }
+    ],
+    "timbres": [
+      "拨弦",
+      "竖琴",
+      "木笛",
+      "弦乐群",
+      "大提琴",
+      "低鼓",
+      "铜铃"
+    ]
+  },
+  "production": {
+    "type": "authored-score/local-synthesis",
+    "renderer": "src/cocos/tools/make-background-music.py",
+    "dependencies": "已安装的 NumPy、SciPy 与 Lenovo 随附 FFmpeg；仅制作时使用，无新增运行依赖。",
+    "cloudMusic": "现有音乐工具因当前工程无 Maker 绑定而在本地拒绝，未发起远程生成；fal 未确认连接，因此未调用。",
+    "externalDownloads": "物理 WLAN 192.168.1.14 绑定、禁用显式代理的下载尝试未成功；没有代理回退，没有使用下载音源。",
+    "encoding": "FFmpeg mp3_mf编码后，以FFmpeg解析并无损重封装修正Xing帧数/时长标记。"
+  },
+  "runtime": {
+    "asset": "src/cocos/assets/resources/audio/music/dawn-embers.mp3",
+    "bundle": "background-music",
+    "lazy": "首次启程后异步加载，载入失败不阻断玩法，暂停菜单可重试。",
+    "volume": {
+      "exploration": 0.28,
+      "dialogueAndMenus": 0.13
+    },
+    "preferenceKey": "sword-and-fire.music.v1",
+    "lifecycle": "复用 PlatformServices.lifecycle 与 Cocos AudioSource；隐藏暂停、返回恢复；过图保持同一播放源。"
+  },
+  "loop": "作曲与无损母带精确96秒，音符释放和混响尾巴回卷至开头；运行MP3由Windows Media Foundation编码，解码含约40ms额外样本。AudioSource循环已接入，平台循环间隙与听感需真机试听确认。",
+  "review": {
+    "technical": {
+      "durationSeconds": 96.04024943310658,
+      "sampleRate": 44100,
+      "channels": 2,
+      "runtimeBytes": 1533820,
+      "encoder": "mp3_mf",
+      "peakDbfs": -8.356912121706142,
+      "integratedLufs": -20.05,
+      "truePeakDbtp": -8.34,
+      "loopBoundaryStep": 0.000762939453125,
+      "maxAdjacentSampleStep": 0.054443359375,
+      "clippingSamples": 0,
+      "sha256": "0bf1c712e845a0b4375b53c657a18e1958888c1b9a2c128a883fd9dd3df380f3",
+      "production": "Original authored score, deterministic NumPy/SciPy timbres, FFmpeg mastering; no AI music model or third-party recordings.",
+      "listeningAcceptance": "pending user audition",
+      "taptapDeviceAcceptance": "pending"
+    },
+    "musicalAcceptance": "待用户试听确认旋律、音色与情绪；数值检查不代替听觉验收。",
+    "taptapAppIdDevice": "待TapTap小游戏与目标安卓设备音频验收。",
+    "web": "TypeScript检查、Cocos发布资源图Web构建、桌面与915×412触屏下的延迟载入淡入、实际循环跨界、静音持久化、Cocos前后台事件夹具与失败重试均通过。报告见integration-report.json。"
+  },
+  "references": [
+    "https://developer.taptap.cn/minigameapidoc/dev/engine/Cocos-Laya-Egret/",
+    "https://docs.cocos.com/creator/3.8/manual/zh/audio-system/audiosource.html"
+  ]
+}

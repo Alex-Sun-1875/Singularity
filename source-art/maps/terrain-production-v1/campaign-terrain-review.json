@@ -1,0 +1,7121 @@
+{
+  "date": "2026-11-08",
+  "status": "source-terrain-and-navigation-review-passed",
+  "scope": "65 expanded terrain specifications plus all 97 live AREAS navigation queries; no gameplay state or layout changes",
+  "sourceFiles": [
+    "src/cocos/assets/scripts/runtime/Terrain.ts",
+    "src/cocos/assets/scripts/data/CampaignTerrain.ts"
+  ],
+  "summary": {
+    "totalAreas": 97,
+    "expandedAreas": 65,
+    "originalAreasUnchanged": 32,
+    "expandedWithRamps": 52,
+    "expandedWithWater": 16,
+    "expandedWithBridges": 15,
+    "expandedWithDryLandforms": 7,
+    "flatDryExpandedAreas": 13,
+    "maxSlopeDegrees": 33.97143140468591,
+    "targetsChecked": 1203,
+    "returnEntriesChecked": 320,
+    "deckSamples": 18402
+  },
+  "api": {
+    "gorges": "id,x,z,width,depth,y,drop,bankWidth,kind,walkable; y=center bed height; actual surface follows terrain.height",
+    "blockedDryCutBarrierKind": "gorge",
+    "newBridgeRule": "exact flat deck height throughout footprint, smooth 8m transition; original 32 excluded from this new flattening"
+  },
+  "legacy32Proof": {
+    "sampling": "2m grid over each original area plus original bridge centreline at .5m; original ramps/waters/bridges/brokenBridges/barriers included in each SHA256",
+    "before": {
+      "S01": "e7f9d4d914a07aab09fb4be67f5534f9cac10ae21e68560455734924aaad3689",
+      "S02": "4bc6551c32c0ee9427eec4d25c92854ac1ce5cc7741b94f38b3660046ea2e78e",
+      "S03": "18a58ef49484d3bc423d2c1d0f48dc2385cf848c904e2785bbd8bb6ebdd7302d",
+      "S04": "cf1bbda2d8b5553749dad417e16b028542112d6b6c03b2bd1ed9607bc19c6cfb",
+      "S05": "faaeb88eee6a68aa87878685c4c0f040d7e3dc34d2f2c0418a08a72e73cc535f",
+      "S06": "8405713f13eb5761b748c43493d942357d0dff802ca4e41f2f8cee0f981e9b23",
+      "S07": "5e8d94149452b1648e28e1150be4c9924deb0238192278071bcbe3555ee41f50",
+      "S08": "d5cc1c07b056e1b56eb66a4c84ed63c89038755eabd9bbfbe3fc58b9928b7127",
+      "S09": "aed8e402fffe996954f397803747b8e2152ff013c519ff1f7ac39edfa5853fc1",
+      "S10": "8c3e4062526208fbac470732283a0908a63c1255cbc6b8579c2b6fbd2c0b412b",
+      "S11": "4a18edc7848f871f6db2ff32d3eee542836dcec5f7fcf2fa27e908fd7b4c70c2",
+      "S12": "ec1223e01a7df4c7baf008ae5b0cc4ea63a04ec5624026e0a36d95f53f2bcfce",
+      "S13": "3dc8203010ea2bd94723fee6a8e6b5a1a729304341b86ff473e32760d89a73be",
+      "S14": "e0ea0699112871d32c4cdf541003dd868734b7520e7919cadeab30b599546451",
+      "S15": "5a8fabfd6e3b2d3ea5c14075d48333b3fc7a1447eefb32064a99a1b2dd3c0e65",
+      "S16": "47dc28de1345d28ff5442d2740565c0dcb2fd0a722f0328dc20c693aaff8a927",
+      "S17": "eb7073d9ac99d236302607a450d9438d800004eb7921bd019b631e6daebe12af",
+      "S18": "d0254edd4287403467df3d1e9ffccba89b37ee5dde61ef6a86d2c4412ec1166e",
+      "S19": "b05d38720050283475d5f478ac26ce7df4687420a8890d0a4bd96127c2d258b7",
+      "S20": "a3db41c33289eae677478e870ff315669245416c57786a0e5bcbc1f84c3bc3e2",
+      "S01-T1": "596d4e36539c390964787bd44a35b13a53a6d65be8a98f7c3ced2a86ad2178f3",
+      "S01-T2": "e6c93f2588611b29456ef0d86558290fbed7bf16c33cda6a39064ff8ee8d1282",
+      "S01-T3": "739672810fda3323cd2af25038d5d5697a75ba156fef906c1754c77197d68b66",
+      "S01-T4": "49d6686b21f2fb8acd934217d3f543db0dc283f2896b9fa4151b4ef05bb97be9",
+      "S01-T5": "0c3aac7e71b9e86dc931bc5b55a39a69124ac30dfb7c5618fde3b0a84d7adb7e",
+      "S01-T6": "2b1cffe5fdbe8a9f63966e62d5829acbeeaf685a7ad833a0a32f15ae7d757a72",
+      "U1-01": "2bdd30fe4acd742948b374b89e74c2d5e4ccb5c6aad1fb1c38e3b1cdf4cdf3f8",
+      "U1-02": "6c443de8d35a6d17a498b2df3ae6fd42da647ddc0cbdfcb2121fa7f69fd5d6cb",
+      "U1-03": "f653bcc257c2bd340959a1ce82256128637fd90dc95952bfb8de0a86405e70f8",
+      "U1-04": "115e3ea99fc4140a948be89a125a12f70955f79e5b188208c14d22f0697eaff3",
+      "U1-05": "a5d7b562807b5db49b43302cd4c4a3f13103d25100ad612f0192c0e8b1c20da4",
+      "U2-01": "b942209084a4c5af7a6d5adc7d07d411fc1e894962cc2601beb896d2cdb69d5f"
+    },
+    "after": {
+      "S01": "e7f9d4d914a07aab09fb4be67f5534f9cac10ae21e68560455734924aaad3689",
+      "S02": "4bc6551c32c0ee9427eec4d25c92854ac1ce5cc7741b94f38b3660046ea2e78e",
+      "S03": "18a58ef49484d3bc423d2c1d0f48dc2385cf848c904e2785bbd8bb6ebdd7302d",
+      "S04": "cf1bbda2d8b5553749dad417e16b028542112d6b6c03b2bd1ed9607bc19c6cfb",
+      "S05": "faaeb88eee6a68aa87878685c4c0f040d7e3dc34d2f2c0418a08a72e73cc535f",
+      "S06": "8405713f13eb5761b748c43493d942357d0dff802ca4e41f2f8cee0f981e9b23",
+      "S07": "5e8d94149452b1648e28e1150be4c9924deb0238192278071bcbe3555ee41f50",
+      "S08": "d5cc1c07b056e1b56eb66a4c84ed63c89038755eabd9bbfbe3fc58b9928b7127",
+      "S09": "aed8e402fffe996954f397803747b8e2152ff013c519ff1f7ac39edfa5853fc1",
+      "S10": "8c3e4062526208fbac470732283a0908a63c1255cbc6b8579c2b6fbd2c0b412b",
+      "S11": "4a18edc7848f871f6db2ff32d3eee542836dcec5f7fcf2fa27e908fd7b4c70c2",
+      "S12": "ec1223e01a7df4c7baf008ae5b0cc4ea63a04ec5624026e0a36d95f53f2bcfce",
+      "S13": "3dc8203010ea2bd94723fee6a8e6b5a1a729304341b86ff473e32760d89a73be",
+      "S14": "e0ea0699112871d32c4cdf541003dd868734b7520e7919cadeab30b599546451",
+      "S15": "5a8fabfd6e3b2d3ea5c14075d48333b3fc7a1447eefb32064a99a1b2dd3c0e65",
+      "S16": "47dc28de1345d28ff5442d2740565c0dcb2fd0a722f0328dc20c693aaff8a927",
+      "S17": "eb7073d9ac99d236302607a450d9438d800004eb7921bd019b631e6daebe12af",
+      "S18": "d0254edd4287403467df3d1e9ffccba89b37ee5dde61ef6a86d2c4412ec1166e",
+      "S19": "b05d38720050283475d5f478ac26ce7df4687420a8890d0a4bd96127c2d258b7",
+      "S20": "a3db41c33289eae677478e870ff315669245416c57786a0e5bcbc1f84c3bc3e2",
+      "S01-T1": "596d4e36539c390964787bd44a35b13a53a6d65be8a98f7c3ced2a86ad2178f3",
+      "S01-T2": "e6c93f2588611b29456ef0d86558290fbed7bf16c33cda6a39064ff8ee8d1282",
+      "S01-T3": "739672810fda3323cd2af25038d5d5697a75ba156fef906c1754c77197d68b66",
+      "S01-T4": "49d6686b21f2fb8acd934217d3f543db0dc283f2896b9fa4151b4ef05bb97be9",
+      "S01-T5": "0c3aac7e71b9e86dc931bc5b55a39a69124ac30dfb7c5618fde3b0a84d7adb7e",
+      "S01-T6": "2b1cffe5fdbe8a9f63966e62d5829acbeeaf685a7ad833a0a32f15ae7d757a72",
+      "U1-01": "2bdd30fe4acd742948b374b89e74c2d5e4ccb5c6aad1fb1c38e3b1cdf4cdf3f8",
+      "U1-02": "6c443de8d35a6d17a498b2df3ae6fd42da647ddc0cbdfcb2121fa7f69fd5d6cb",
+      "U1-03": "f653bcc257c2bd340959a1ce82256128637fd90dc95952bfb8de0a86405e70f8",
+      "U1-04": "115e3ea99fc4140a948be89a125a12f70955f79e5b188208c14d22f0697eaff3",
+      "U1-05": "a5d7b562807b5db49b43302cd4c4a3f13103d25100ad612f0192c0e8b1c20da4",
+      "U2-01": "b942209084a4c5af7a6d5adc7d07d411fc1e894962cc2601beb896d2cdb69d5f"
+    },
+    "exactMatch": true
+  },
+  "existingChecks": {
+    "typecheck": "npm run check passed before final source validation",
+    "terrainAndNavigation": "existing 8 tests passed across current 97 areas; no new test cases/dependencies"
+  },
+  "all97": [
+    {
+      "id": "S01",
+      "name": "石桥镇",
+      "expanded": false,
+      "ramps": 0,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 24,
+      "returnEntryCount": 10,
+      "legalPathPoints": 65,
+      "legalPathSegments": 41,
+      "floodFillDryCells": 18970,
+      "slopeSamples": 9984,
+      "maxSlopeDegrees": 16.698337278854673,
+      "maxSlopeAt": {
+        "x": 8,
+        "z": -13
+      },
+      "decks": [
+        {
+          "id": "s01-complete-stone-bridge",
+          "samples": 945,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "s01-stonebridge-river",
+          "visibleSamples": 550,
+          "nonDeckSamples": 600,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.9166666666666666,
+          "minimumBedHeight": -1.2,
+          "waterHeight": -0.65
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S02",
+      "name": "南渡码头",
+      "expanded": false,
+      "ramps": 0,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 20,
+      "legalPathSegments": 10,
+      "floodFillDryCells": 13284,
+      "slopeSamples": 6512,
+      "maxSlopeDegrees": 16.259405644454574,
+      "maxSlopeAt": {
+        "x": -49,
+        "z": -16.5
+      },
+      "decks": [
+        {
+          "id": "s02-working-wooden-landing",
+          "samples": 949,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "s02-south-harbor",
+          "visibleSamples": 100,
+          "nonDeckSamples": 400,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.25,
+          "minimumBedHeight": -0.9483237000000001,
+          "waterHeight": -0.65
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S03",
+      "name": "空誓墓园",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 13,
+      "returnEntryCount": 3,
+      "legalPathPoints": 26,
+      "legalPathSegments": 13,
+      "floodFillDryCells": 14474,
+      "slopeSamples": 7040,
+      "maxSlopeDegrees": 1.8325131953424985,
+      "maxSlopeAt": {
+        "x": -65.5,
+        "z": -13
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S04",
+      "name": "血刃隘口",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 18,
+      "returnEntryCount": 4,
+      "legalPathPoints": 39,
+      "legalPathSegments": 21,
+      "floodFillDryCells": 16381,
+      "slopeSamples": 7872,
+      "maxSlopeDegrees": 6.608206204708057,
+      "maxSlopeAt": {
+        "x": 9.5,
+        "z": -61.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S05",
+      "name": "白桦猎场",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 24,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 16688,
+      "slopeSamples": 7872,
+      "maxSlopeDegrees": 3.1472215248099027,
+      "maxSlopeAt": {
+        "x": 15.5,
+        "z": -61.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S06",
+      "name": "芦苇避居营",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 27,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 11988,
+      "slopeSamples": 6048,
+      "maxSlopeDegrees": 17.303783757690308,
+      "maxSlopeAt": {
+        "x": 38,
+        "z": 14
+      },
+      "decks": [],
+      "waterExposure": [
+        {
+          "id": "s06-reed-pool",
+          "visibleSamples": 625,
+          "nonDeckSamples": 625,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 1,
+          "minimumBedHeight": -0.7638446554074074,
+          "waterHeight": 0.04525925925925922
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S07",
+      "name": "断轮磨坊",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 24,
+      "returnEntryCount": 7,
+      "legalPathPoints": 49,
+      "legalPathSegments": 25,
+      "floodFillDryCells": 19991,
+      "slopeSamples": 9984,
+      "maxSlopeDegrees": 16.27909510806977,
+      "maxSlopeAt": {
+        "x": -65.5,
+        "z": 17
+      },
+      "decks": [],
+      "waterExposure": [
+        {
+          "id": "s07-waterwheel-race",
+          "visibleSamples": 625,
+          "nonDeckSamples": 625,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 1,
+          "minimumBedHeight": -0.10022619159883384,
+          "waterHeight": 0.5499999999999999
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S08",
+      "name": "陷井谷",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 17,
+      "returnEntryCount": 4,
+      "legalPathPoints": 36,
+      "legalPathSegments": 19,
+      "floodFillDryCells": 18577,
+      "slopeSamples": 8820,
+      "maxSlopeDegrees": 5.994089422914012,
+      "maxSlopeAt": {
+        "x": 12,
+        "z": -67.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S09",
+      "name": "灰披军营",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 16,
+      "returnEntryCount": 3,
+      "legalPathPoints": 32,
+      "legalPathSegments": 16,
+      "floodFillDryCells": 20319,
+      "slopeSamples": 9984,
+      "maxSlopeDegrees": 3.218708866912479,
+      "maxSlopeAt": {
+        "x": -77.5,
+        "z": 12.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S10",
+      "name": "裂隘关",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 2,
+      "legalPathPoints": 22,
+      "legalPathSegments": 11,
+      "floodFillDryCells": 17963,
+      "slopeSamples": 8640,
+      "maxSlopeDegrees": 4.286476905032484,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 37.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S11",
+      "name": "松岬哨塔",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 4,
+      "legalPathPoints": 31,
+      "legalPathSegments": 16,
+      "floodFillDryCells": 14899,
+      "slopeSamples": 7216,
+      "maxSlopeDegrees": 16.698309741682028,
+      "maxSlopeAt": {
+        "x": -4,
+        "z": -31.5
+      },
+      "decks": [
+        {
+          "id": "s11-repaired-gully-crossing",
+          "samples": 533,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "s11-broken-bridge-gully",
+          "visibleSamples": 225,
+          "nonDeckSamples": 400,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.5625,
+          "minimumBedHeight": -1.2,
+          "waterHeight": -0.65
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S12",
+      "name": "铁誓残院",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 3,
+      "legalPathPoints": 30,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 17195,
+      "slopeSamples": 8448,
+      "maxSlopeDegrees": 4.49804260536398,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S13",
+      "name": "断镐石场",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 22,
+      "returnEntryCount": 6,
+      "legalPathPoints": 44,
+      "legalPathSegments": 22,
+      "floodFillDryCells": 18269,
+      "slopeSamples": 8820,
+      "maxSlopeDegrees": 5.010396463661159,
+      "maxSlopeAt": {
+        "x": 3,
+        "z": -67.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S14",
+      "name": "湿林庄园",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 16,
+      "returnEntryCount": 4,
+      "legalPathPoints": 32,
+      "legalPathSegments": 16,
+      "floodFillDryCells": 19436,
+      "slopeSamples": 9672,
+      "maxSlopeDegrees": 16.25926596977432,
+      "maxSlopeAt": {
+        "x": -62.5,
+        "z": -48.5
+      },
+      "decks": [],
+      "waterExposure": [
+        {
+          "id": "s14-wet-wood-pool",
+          "visibleSamples": 625,
+          "nonDeckSamples": 625,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 1,
+          "minimumBedHeight": -1.2,
+          "waterHeight": -0.65
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S15",
+      "name": "古渠泵院",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 18,
+      "returnEntryCount": 5,
+      "legalPathPoints": 38,
+      "legalPathSegments": 20,
+      "floodFillDryCells": 15955,
+      "slopeSamples": 7872,
+      "maxSlopeDegrees": 16.69830974168167,
+      "maxSlopeAt": {
+        "x": -58,
+        "z": -43.5
+      },
+      "decks": [],
+      "waterExposure": [
+        {
+          "id": "s15-old-pump-canal",
+          "visibleSamples": 625,
+          "nonDeckSamples": 625,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 1,
+          "minimumBedHeight": -1.2,
+          "waterHeight": -0.65
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S16",
+      "name": "断岳驿口",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 4,
+      "legalPathPoints": 24,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 16904,
+      "slopeSamples": 8160,
+      "maxSlopeDegrees": 3.2451312323306456,
+      "maxSlopeAt": {
+        "x": 0.5,
+        "z": -63.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S17",
+      "name": "峭壁洞窟",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 14,
+      "returnEntryCount": 4,
+      "legalPathPoints": 28,
+      "legalPathSegments": 14,
+      "floodFillDryCells": 13660,
+      "slopeSamples": 6800,
+      "maxSlopeDegrees": 5.3862479390459805,
+      "maxSlopeAt": {
+        "x": -63.5,
+        "z": 5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S18",
+      "name": "残旗军需站",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 1,
+      "legalPathPoints": 22,
+      "legalPathSegments": 11,
+      "floodFillDryCells": 12929,
+      "slopeSamples": 6290,
+      "maxSlopeDegrees": 1.4764685073401767,
+      "maxSlopeAt": {
+        "x": -63.5,
+        "z": 1.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S19",
+      "name": "猎径伏杀地",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 16,
+      "returnEntryCount": 3,
+      "legalPathPoints": 32,
+      "legalPathSegments": 16,
+      "floodFillDryCells": 17124,
+      "slopeSamples": 8160,
+      "maxSlopeDegrees": 3.730613803092932,
+      "maxSlopeAt": {
+        "x": -1,
+        "z": -63.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S20",
+      "name": "铁脊观察台",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 2,
+      "legalPathPoints": 24,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 13880,
+      "slopeSamples": 6800,
+      "maxSlopeDegrees": 5.1161785139455755,
+      "maxSlopeAt": {
+        "x": -2,
+        "z": -59.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S01-T1",
+      "name": "第三杯旅店",
+      "expanded": false,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 3,
+      "legalPathPoints": 26,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 891,
+      "slopeSamples": 504,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S01-T2",
+      "name": "远征行会厅",
+      "expanded": false,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 4,
+      "legalPathPoints": 28,
+      "legalPathSegments": 17,
+      "floodFillDryCells": 740,
+      "slopeSamples": 440,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S01-T3",
+      "name": "洛恩铁匠铺",
+      "expanded": false,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 22,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 946,
+      "slopeSamples": 546,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S01-T4",
+      "name": "南渡转运仓",
+      "expanded": false,
+      "ramps": 0,
+      "waters": 1,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 23,
+      "legalPathSegments": 13,
+      "floodFillDryCells": 1172,
+      "slopeSamples": 696,
+      "maxSlopeDegrees": 16.69839657861537,
+      "maxSlopeAt": {
+        "x": -11,
+        "z": -4
+      },
+      "decks": [],
+      "waterExposure": [
+        {
+          "id": "t4-warehouse-waterfront",
+          "visibleSamples": 625,
+          "nonDeckSamples": 625,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 1,
+          "minimumBedHeight": -1.2,
+          "waterHeight": -0.65
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S01-T5",
+      "name": "镇拘留所",
+      "expanded": false,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 9,
+      "returnEntryCount": 3,
+      "legalPathPoints": 18,
+      "legalPathSegments": 9,
+      "floodFillDryCells": 711,
+      "slopeSamples": 420,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "S01-T6",
+      "name": "归途广场亭",
+      "expanded": false,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 4,
+      "legalPathPoints": 24,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 1584,
+      "slopeSamples": 832,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U1-01",
+      "name": "暗仓货栈",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 4,
+      "legalPathPoints": 30,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 14042,
+      "slopeSamples": 6930,
+      "maxSlopeDegrees": 2.227045339755926,
+      "maxSlopeAt": {
+        "x": -67.5,
+        "z": 7
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U1-02",
+      "name": "鸣岩洞厅",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 13,
+      "returnEntryCount": 3,
+      "legalPathPoints": 26,
+      "legalPathSegments": 13,
+      "floodFillDryCells": 13140,
+      "slopeSamples": 6545,
+      "maxSlopeDegrees": 14.021231240408088,
+      "maxSlopeAt": {
+        "x": -9.5,
+        "z": -57.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U1-03",
+      "name": "断链矿廊",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 17,
+      "returnEntryCount": 4,
+      "legalPathPoints": 36,
+      "legalPathSegments": 19,
+      "floodFillDryCells": 14996,
+      "slopeSamples": 7392,
+      "maxSlopeDegrees": 3.433629063330146,
+      "maxSlopeAt": {
+        "x": -2.5,
+        "z": -57.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U1-04",
+      "name": "余火居所",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 14,
+      "returnEntryCount": 3,
+      "legalPathPoints": 28,
+      "legalPathSegments": 14,
+      "floodFillDryCells": 16326,
+      "slopeSamples": 8160,
+      "maxSlopeDegrees": 1.5747986472362447,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": -0.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U1-05",
+      "name": "铁锁监区",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 3,
+      "legalPathPoints": 30,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 16603,
+      "slopeSamples": 8330,
+      "maxSlopeDegrees": 1.9632562469983472,
+      "maxSlopeAt": {
+        "x": 4.5,
+        "z": -63.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U2-01",
+      "name": "封潮前厅",
+      "expanded": false,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 2,
+      "legalPathPoints": 20,
+      "legalPathSegments": 10,
+      "floodFillDryCells": 11182,
+      "slopeSamples": 5760,
+      "maxSlopeDegrees": 17.790043967242745,
+      "maxSlopeAt": {
+        "x": -35.5,
+        "z": -11.5
+      },
+      "decks": [],
+      "waterExposure": [
+        {
+          "id": "u201-retreated-water",
+          "visibleSamples": 625,
+          "nonDeckSamples": 625,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 1,
+          "minimumBedHeight": -1.2,
+          "waterHeight": -0.6220510894064614
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H01",
+      "name": "断岳山驿",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 20,
+      "legalPathSegments": 10,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.0617057518366573,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H02",
+      "name": "岩炉镇",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 5,
+      "legalPathPoints": 32,
+      "legalPathSegments": 17,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.8900272053761098,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H03",
+      "name": "熔镜工匠院",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 4,
+      "legalPathPoints": 34,
+      "legalPathSegments": 19,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.7183147020965273,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H04",
+      "name": "双裂采坑",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 2,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 4,
+      "legalPathPoints": 32,
+      "legalPathSegments": 17,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 16.774332814210254,
+      "maxSlopeAt": {
+        "x": 34.25,
+        "z": -6.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H05",
+      "name": "封炉矿井",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 14,
+      "returnEntryCount": 4,
+      "legalPathPoints": 28,
+      "legalPathSegments": 14,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.5765069538488636,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H06",
+      "name": "伤工棚街",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 9,
+      "returnEntryCount": 2,
+      "legalPathPoints": 18,
+      "legalPathSegments": 9,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.7183147020965273,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H07",
+      "name": "天堑石梁",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 1,
+      "gorges": 1,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 17,
+      "returnEntryCount": 5,
+      "legalPathPoints": 40,
+      "legalPathSegments": 23,
+      "floodFillDryCells": 15992,
+      "slopeSamples": 37029,
+      "maxSlopeDegrees": 33.97143140468591,
+      "maxSlopeAt": {
+        "x": 2,
+        "z": -9
+      },
+      "decks": [
+        {
+          "id": "h07-natural-stonebeam",
+          "samples": 975,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H08",
+      "name": "断岳前堡",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 4,
+      "legalPathPoints": 33,
+      "legalPathSegments": 18,
+      "floodFillDryCells": 17072,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.4049486916045653,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H09",
+      "name": "破阵军械岸",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 9,
+      "returnEntryCount": 2,
+      "legalPathPoints": 20,
+      "legalPathSegments": 11,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.8900272053761098,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H10",
+      "name": "巨岩矿门",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 7,
+      "returnEntryCount": 1,
+      "legalPathPoints": 14,
+      "legalPathSegments": 7,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.9194817696831734,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H11",
+      "name": "铁契公署",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 13,
+      "returnEntryCount": 4,
+      "legalPathPoints": 28,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.7183147020965273,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H12",
+      "name": "北岗军寨",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 26,
+      "legalPathSegments": 14,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.2333472698083443,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H13",
+      "name": "风蚀誓廊",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 9,
+      "returnEntryCount": 2,
+      "legalPathPoints": 20,
+      "legalPathSegments": 11,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.9722348047482265,
+      "maxSlopeAt": {
+        "x": -0.25,
+        "z": -63.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H14",
+      "name": "鹰背岩林",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 9,
+      "returnEntryCount": 2,
+      "legalPathPoints": 18,
+      "legalPathSegments": 9,
+      "floodFillDryCells": 17072,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 3.1370378113384945,
+      "maxSlopeAt": {
+        "x": -0.25,
+        "z": -63.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H15",
+      "name": "天索吊崖",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 1,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 16,
+      "returnEntryCount": 5,
+      "legalPathPoints": 36,
+      "legalPathSegments": 20,
+      "floodFillDryCells": 16397,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 27.46283021108103,
+      "maxSlopeAt": {
+        "x": 62,
+        "z": -6.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H16",
+      "name": "山南古道",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 24,
+      "legalPathSegments": 14,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.4049486916047242,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "H17",
+      "name": "余烬废窑",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 1,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 9,
+      "returnEntryCount": 2,
+      "legalPathPoints": 18,
+      "legalPathSegments": 9,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 13.085309609113656,
+      "maxSlopeAt": {
+        "x": 33.5,
+        "z": -6.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B01",
+      "name": "旱谷出口",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 1,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 20,
+      "legalPathSegments": 10,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 18.214628224478105,
+      "maxSlopeAt": {
+        "x": 26,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B02",
+      "name": "北岸风道",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 26,
+      "legalPathSegments": 14,
+      "floodFillDryCells": 16265,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 17.78479761810783,
+      "maxSlopeAt": {
+        "x": 42.5,
+        "z": -5
+      },
+      "decks": [],
+      "waterExposure": [
+        {
+          "id": "b02-river-margin",
+          "visibleSamples": 625,
+          "nonDeckSamples": 625,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 1,
+          "minimumBedHeight": -1.1558247084032,
+          "waterHeight": -0.4152928
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B03",
+      "name": "归帆镇",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 16,
+      "returnEntryCount": 5,
+      "legalPathPoints": 36,
+      "legalPathSegments": 20,
+      "floodFillDryCells": 16442,
+      "slopeSamples": 37734,
+      "maxSlopeDegrees": 17.816535932854862,
+      "maxSlopeAt": {
+        "x": 31,
+        "z": -34
+      },
+      "decks": [
+        {
+          "id": "b03-working-landing",
+          "samples": 1215,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b03-ferry-harbor",
+          "visibleSamples": 225,
+          "nonDeckSamples": 450,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.5,
+          "minimumBedHeight": -1.1555994345984,
+          "waterHeight": -0.4625
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B04",
+      "name": "余烬灯坊",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 20,
+      "legalPathSegments": 10,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B05",
+      "name": "河湾旅店",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 4,
+      "legalPathPoints": 24,
+      "legalPathSegments": 13,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B06",
+      "name": "风帆市集",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 13,
+      "returnEntryCount": 4,
+      "legalPathPoints": 28,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 16544,
+      "slopeSamples": 36512,
+      "maxSlopeDegrees": 17.647621353725388,
+      "maxSlopeAt": {
+        "x": 44,
+        "z": -33
+      },
+      "decks": [
+        {
+          "id": "b06-cargo-landing",
+          "samples": 1035,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b06-market-waterfront",
+          "visibleSamples": 250,
+          "nonDeckSamples": 500,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.5,
+          "minimumBedHeight": -1.162753792,
+          "waterHeight": -0.482352
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B07",
+      "name": "沉钟山岗",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 3,
+      "legalPathPoints": 26,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.5765069538488636,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B08",
+      "name": "沉钟旧堂",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 4,
+      "legalPathPoints": 32,
+      "legalPathSegments": 17,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.2030042208921006,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B09",
+      "name": "黑签仓院",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 24,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 16650,
+      "slopeSamples": 35854,
+      "maxSlopeDegrees": 17.90472032210892,
+      "maxSlopeAt": {
+        "x": 51,
+        "z": -26
+      },
+      "decks": [
+        {
+          "id": "b09-inspection-crossing",
+          "samples": 735,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b09-warehouse-side-canal",
+          "visibleSamples": 375,
+          "nonDeckSamples": 550,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.6818181818181818,
+          "minimumBedHeight": -1.1610130333439999,
+          "waterHeight": -0.395174
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B10",
+      "name": "怒潮码头",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 1,
+      "legalPathPoints": 23,
+      "legalPathSegments": 13,
+      "floodFillDryCells": 16472,
+      "slopeSamples": 42063,
+      "maxSlopeDegrees": 18.35517805689104,
+      "maxSlopeAt": {
+        "x": 28,
+        "z": -26.5
+      },
+      "decks": [
+        {
+          "id": "b10-cargo-inspection-deck",
+          "samples": 3129,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b10-storm-harbor",
+          "visibleSamples": 300,
+          "nonDeckSamples": 425,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.7058823529411765,
+          "minimumBedHeight": -1.1746740781056,
+          "waterHeight": -0.47581760000000006
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B11",
+      "name": "天钩吊臂台",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 28,
+      "legalPathSegments": 16,
+      "floodFillDryCells": 16502,
+      "slopeSamples": 37076,
+      "maxSlopeDegrees": 18.094095355532275,
+      "maxSlopeAt": {
+        "x": 40,
+        "z": -29.5
+      },
+      "decks": [
+        {
+          "id": "b11-crane-working-deck",
+          "samples": 1173,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b11-crane-basin",
+          "visibleSamples": 275,
+          "nonDeckSamples": 500,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.55,
+          "minimumBedHeight": -1.1387729952768,
+          "waterHeight": -0.39080000000000004
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B12",
+      "name": "分潮水渠",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 5,
+      "legalPathPoints": 36,
+      "legalPathSegments": 21,
+      "floodFillDryCells": 16628,
+      "slopeSamples": 36465,
+      "maxSlopeDegrees": 17.963506249423762,
+      "maxSlopeAt": {
+        "x": 35,
+        "z": -31
+      },
+      "decks": [
+        {
+          "id": "b12-dry-channel-crossing",
+          "samples": 795,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b12-diversion-channel",
+          "visibleSamples": 375,
+          "nonDeckSamples": 550,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.6818181818181818,
+          "minimumBedHeight": -1.1946126630912,
+          "waterHeight": -0.4488224
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B13",
+      "name": "芦苇迷湾",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 2,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 13,
+      "returnEntryCount": 3,
+      "legalPathPoints": 34,
+      "legalPathSegments": 21,
+      "floodFillDryCells": 15940,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 17.350867143271273,
+      "maxSlopeAt": {
+        "x": 31.25,
+        "z": -8.75
+      },
+      "decks": [],
+      "waterExposure": [
+        {
+          "id": "b13-east-reed-pool",
+          "visibleSamples": 625,
+          "nonDeckSamples": 625,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 1,
+          "minimumBedHeight": -1.156899910016,
+          "waterHeight": -0.49375
+        },
+        {
+          "id": "b13-west-reed-pool",
+          "visibleSamples": 625,
+          "nonDeckSamples": 625,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 1,
+          "minimumBedHeight": -0.9253233827839998,
+          "waterHeight": -0.209872
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B14",
+      "name": "沉船墓场",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 14,
+      "returnEntryCount": 4,
+      "legalPathPoints": 34,
+      "legalPathSegments": 20,
+      "floodFillDryCells": 16280,
+      "slopeSamples": 38533,
+      "maxSlopeDegrees": 17.953713835143773,
+      "maxSlopeAt": {
+        "x": 35,
+        "z": -40
+      },
+      "decks": [
+        {
+          "id": "b14-wreck-side-landing",
+          "samples": 1455,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b14-wreck-waterfront",
+          "visibleSamples": 228,
+          "nonDeckSamples": 450,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.5066666666666667,
+          "minimumBedHeight": -1.1621354643455999,
+          "waterHeight": -0.4488224
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B15",
+      "name": "南岸农庄",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 28,
+      "legalPathSegments": 16,
+      "floodFillDryCells": 16838,
+      "slopeSamples": 35755,
+      "maxSlopeDegrees": 18.011029712442895,
+      "maxSlopeAt": {
+        "x": 49,
+        "z": -28.5
+      },
+      "decks": [
+        {
+          "id": "b15-farm-stone-crossing",
+          "samples": 533,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b15-old-irrigation-canal",
+          "visibleSamples": 350,
+          "nonDeckSamples": 550,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.6363636363636364,
+          "minimumBedHeight": -1.1610329088,
+          "waterHeight": -0.39080000000000004
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B16",
+      "name": "东岸古渡",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 3,
+      "legalPathPoints": 26,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 16802,
+      "slopeSamples": 36635,
+      "maxSlopeDegrees": 18.000353368895592,
+      "maxSlopeAt": {
+        "x": 1,
+        "z": -31.5
+      },
+      "decks": [
+        {
+          "id": "b16-natural-land-bridge",
+          "samples": 901,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b16-old-ford-river",
+          "visibleSamples": 300,
+          "nonDeckSamples": 500,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.6,
+          "minimumBedHeight": -1.1950380417024,
+          "waterHeight": -0.5013152000000001
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B17",
+      "name": "旧誓墓园",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 4,
+      "legalPathPoints": 26,
+      "legalPathSegments": 14,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.2030042208921006,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "B18",
+      "name": "双契宅院",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 20,
+      "legalPathSegments": 10,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F01",
+      "name": "黑冠外集",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 8,
+      "returnEntryCount": 3,
+      "legalPathPoints": 16,
+      "legalPathSegments": 8,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F02",
+      "name": "流火长街",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 3,
+      "legalPathPoints": 24,
+      "legalPathSegments": 13,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0.6874990217239406,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F03",
+      "name": "黑冠西门",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 3,
+      "legalPathPoints": 22,
+      "legalPathSegments": 11,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.5465713173227964,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F04",
+      "name": "铁锁工坊",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 22,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F05",
+      "name": "黑旗旧营",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 24,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.0311866751935073,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F06",
+      "name": "黑印文书院",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 13,
+      "returnEntryCount": 4,
+      "legalPathPoints": 28,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F07",
+      "name": "东仓暗街",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 13,
+      "returnEntryCount": 3,
+      "legalPathPoints": 30,
+      "legalPathSegments": 17,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0.8593505792552705,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F08",
+      "name": "铁旗广场",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 17,
+      "returnEntryCount": 5,
+      "legalPathPoints": 36,
+      "legalPathSegments": 19,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.2030042208921006,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F09",
+      "name": "西境弩台",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 2,
+      "legalPathPoints": 20,
+      "legalPathSegments": 10,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.748018997801496,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F10",
+      "name": "东境弩台",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 2,
+      "legalPathPoints": 22,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.748018997801496,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F11",
+      "name": "凌城连廊",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 5,
+      "legalPathPoints": 32,
+      "legalPathSegments": 17,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 3.2622473088605317,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F12",
+      "name": "决战休整庭",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 8,
+      "returnEntryCount": 2,
+      "legalPathPoints": 16,
+      "legalPathSegments": 8,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.2030042208921006,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F13",
+      "name": "黑冠决战庭",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 22,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 17072,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.7183147020965273,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F14",
+      "name": "黑冠军械库",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 6,
+      "returnEntryCount": 1,
+      "legalPathPoints": 14,
+      "legalPathSegments": 8,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F15",
+      "name": "黑冠档案楼",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 5,
+      "returnEntryCount": 1,
+      "legalPathPoints": 10,
+      "legalPathSegments": 5,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F16",
+      "name": "干涸护城壕",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 1,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 22,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 20.248460267776696,
+      "maxSlopeAt": {
+        "x": -13.75,
+        "z": 5.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "F17",
+      "name": "铁棘检修坡",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 14,
+      "returnEntryCount": 4,
+      "legalPathPoints": 30,
+      "legalPathSegments": 16,
+      "floodFillDryCells": 17072,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.9194817696831734,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U1-06",
+      "name": "三誓军械廊",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 14,
+      "returnEntryCount": 4,
+      "legalPathPoints": 28,
+      "legalPathSegments": 14,
+      "floodFillDryCells": 17072,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.7183147020965273,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U1-07",
+      "name": "震炉工坊",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 20,
+      "legalPathSegments": 10,
+      "floodFillDryCells": 17072,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U1-08",
+      "name": "天火深炉",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 3,
+      "legalPathPoints": 22,
+      "legalPathSegments": 11,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U1-09",
+      "name": "悬链绞盘井",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 1,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 13,
+      "returnEntryCount": 4,
+      "legalPathPoints": 28,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 16463,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 28.50720294574854,
+      "maxSlopeAt": {
+        "x": 43.25,
+        "z": -4.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U1-10",
+      "name": "见日长廊",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 9,
+      "returnEntryCount": 2,
+      "legalPathPoints": 20,
+      "legalPathSegments": 11,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.0617057518366573,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U2-02",
+      "name": "沉潮长厅",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 2,
+      "legalPathPoints": 26,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 16628,
+      "slopeSamples": 36465,
+      "maxSlopeDegrees": 17.963506249423762,
+      "maxSlopeAt": {
+        "x": 35,
+        "z": -31
+      },
+      "decks": [
+        {
+          "id": "u202-dry-stone-crossing",
+          "samples": 795,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "u202-receded-stone-canal",
+          "visibleSamples": 375,
+          "nonDeckSamples": 525,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.7142857142857143,
+          "minimumBedHeight": -1.1915715251712,
+          "waterHeight": -0.4347992
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U2-03",
+      "name": "镇闸广场",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 3,
+      "legalPathPoints": 24,
+      "legalPathSegments": 13,
+      "floodFillDryCells": 16562,
+      "slopeSamples": 37027,
+      "maxSlopeDegrees": 18.000353368895592,
+      "maxSlopeAt": {
+        "x": 37,
+        "z": -31.5
+      },
+      "decks": [
+        {
+          "id": "u203-control-crossing",
+          "samples": 1037,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "u203-pressure-channel",
+          "visibleSamples": 325,
+          "nonDeckSamples": 500,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.65,
+          "minimumBedHeight": -1.1841082368,
+          "waterHeight": -0.4488224
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U2-04",
+      "name": "守库人旧居",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 9,
+      "returnEntryCount": 3,
+      "legalPathPoints": 18,
+      "legalPathSegments": 9,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U2-05",
+      "name": "沉钟下殿",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 28,
+      "legalPathSegments": 16,
+      "floodFillDryCells": 16748,
+      "slopeSamples": 35800,
+      "maxSlopeDegrees": 17.969106930744456,
+      "maxSlopeAt": {
+        "x": 50,
+        "z": -29.5
+      },
+      "decks": [
+        {
+          "id": "u205-side-room-crossing",
+          "samples": 585,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "u205-outer-stone-channel",
+          "visibleSamples": 375,
+          "nonDeckSamples": 550,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.6818181818181818,
+          "minimumBedHeight": -1.1735255210495998,
+          "waterHeight": -0.40577360000000007
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U2-06",
+      "name": "覆文档案廊",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 13,
+      "returnEntryCount": 3,
+      "legalPathPoints": 28,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U2-07",
+      "name": "禁域祭仪库",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 28,
+      "legalPathSegments": 16,
+      "floodFillDryCells": 16616,
+      "slopeSamples": 36888,
+      "maxSlopeDegrees": 17.867210927006532,
+      "maxSlopeAt": {
+        "x": 40,
+        "z": -33
+      },
+      "decks": [
+        {
+          "id": "u207-side-gallery-crossing",
+          "samples": 975,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "u207-old-ritual-basin",
+          "visibleSamples": 225,
+          "nonDeckSamples": 450,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.5,
+          "minimumBedHeight": -1.1479640285183998,
+          "waterHeight": -0.4488224
+        }
+      ],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U2-08",
+      "name": "无名囚室",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 7,
+      "returnEntryCount": 2,
+      "legalPathPoints": 14,
+      "legalPathSegments": 7,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true
+    },
+    {
+      "id": "U2-09",
+      "name": "堡外检修道",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 2,
+      "legalPathPoints": 24,
+      "legalPathSegments": 14,
+      "floodFillDryCells": 16766,
+      "slopeSamples": 36070,
+      "maxSlopeDegrees": 17.880409640141657,
+      "maxSlopeAt": {
+        "x": 48,
+        "z": -31.5
+      },
+      "decks": [
+        {
+          "id": "u209-service-stone-crossing",
+          "samples": 637,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "u209-outwork-service-canal",
+          "visibleSamples": 350,
+          "nonDeckSamples": 550,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.6363636363636364,
+          "minimumBedHeight": -1.1792365248,
+          "waterHeight": -0.4347992
+        }
+      ],
+      "allTargetsReachable": true
+    }
+  ],
+  "new65": [
+    {
+      "id": "H01",
+      "name": "断岳山驿",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 20,
+      "legalPathSegments": 10,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.0617057518366573,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "入山驿路为宽缓上坡，门前和返程口保持干燥。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h01-mountain-road",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 2.4,
+            "startHeight": 0,
+            "endHeight": 2.4,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "H02",
+      "name": "岩炉镇",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 5,
+      "legalPathPoints": 32,
+      "legalPathSegments": 17,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.8900272053761098,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "矿镇沿缓坡分层；街巷与研究台不增加水坑。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h02-mining-town-terrace",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 2.2,
+            "startHeight": 0,
+            "endHeight": 2.2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "H03",
+      "name": "熔镜工匠院",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 4,
+      "legalPathPoints": 34,
+      "legalPathSegments": 19,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.7183147020965273,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "工匠院使用缓坡工作平台，镜架前保留完整地面。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h03-workshop-court",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 2,
+            "startHeight": 0,
+            "endHeight": 2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "H04",
+      "name": "双裂采坑",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 2,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 4,
+      "legalPathPoints": 32,
+      "legalPathSegments": 17,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 16.774332814210254,
+      "maxSlopeAt": {
+        "x": 34.25,
+        "z": -6.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "双采面为有缓坡可走的干采坑，主通道和工作点均可绕行。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h04-quarry-levels",
+            "start": {
+              "x": -52,
+              "z": -48
+            },
+            "end": {
+              "x": 52,
+              "z": -48
+            },
+            "rise": 3.6,
+            "startHeight": 0,
+            "endHeight": 3.6,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [
+          {
+            "id": "h04-east-extraction",
+            "x": 44,
+            "z": -24,
+            "width": 20,
+            "depth": 26,
+            "drop": 1.8,
+            "kind": "quarry",
+            "walkable": true,
+            "bankWidth": 9,
+            "y": 1.7393718707328174
+          },
+          {
+            "id": "h04-west-extraction",
+            "x": -54,
+            "z": 2,
+            "width": 14,
+            "depth": 20,
+            "drop": 1.4,
+            "kind": "quarry",
+            "walkable": true,
+            "bankWidth": 9,
+            "y": -1.4
+          }
+        ],
+        "barriers": []
+      }
+    },
+    {
+      "id": "H05",
+      "name": "封炉矿井",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 14,
+      "returnEntryCount": 4,
+      "legalPathPoints": 28,
+      "legalPathSegments": 14,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.5765069538488636,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "井架在高台，广坡提供地面与井口间的可走高差。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h05-mine-approach",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 3,
+            "startHeight": 0,
+            "endHeight": 3,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "H06",
+      "name": "伤工棚街",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 9,
+      "returnEntryCount": 2,
+      "legalPathPoints": 18,
+      "legalPathSegments": 9,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.7183147020965273,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "棚街顺山缓升，居住院面保持干净。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h06-shelter-street",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 2,
+            "startHeight": 0,
+            "endHeight": 2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "H07",
+      "name": "天堑石梁",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 1,
+      "gorges": 1,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 17,
+      "returnEntryCount": 5,
+      "legalPathPoints": 40,
+      "legalPathSegments": 23,
+      "floodFillDryCells": 15992,
+      "slopeSamples": 37029,
+      "maxSlopeDegrees": 33.97143140468591,
+      "maxSlopeAt": {
+        "x": 2,
+        "z": -9
+      },
+      "decks": [
+        {
+          "id": "h07-natural-stonebeam",
+          "samples": 975,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "跨南北干峡谷的静态天然石梁，与H08剧情升降桥分开；桥头和各来路均可折返。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h07-stonebeam-ascent",
+            "start": {
+              "x": -18,
+              "z": -50
+            },
+            "end": {
+              "x": -18,
+              "z": 50
+            },
+            "rise": 3.2,
+            "startHeight": 0,
+            "endHeight": 3.2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [
+          {
+            "id": "h07-natural-stonebeam",
+            "x": 6,
+            "z": 0,
+            "width": 32,
+            "depth": 7,
+            "axis": "x",
+            "deckHeight": 1.6,
+            "material": "stone",
+            "supports": [
+              {
+                "x": -4.24,
+                "z": -2.24
+              },
+              {
+                "x": -4.24,
+                "z": 2.24
+              },
+              {
+                "x": 16.240000000000002,
+                "z": -2.24
+              },
+              {
+                "x": 16.240000000000002,
+                "z": 2.24
+              }
+            ]
+          }
+        ],
+        "gorges": [
+          {
+            "id": "h07-dry-gorge",
+            "x": 6,
+            "z": 0,
+            "width": 8,
+            "depth": 128,
+            "drop": 2.3,
+            "kind": "gorge",
+            "walkable": false,
+            "bankWidth": 9,
+            "y": -0.6999999999999997
+          }
+        ],
+        "barriers": [
+          {
+            "x": 6,
+            "z": -33.75,
+            "width": 8,
+            "depth": 60.5,
+            "height": 2.5,
+            "kind": "gorge"
+          },
+          {
+            "x": 6,
+            "z": 33.75,
+            "width": 8,
+            "depth": 60.5,
+            "height": 2.5,
+            "kind": "gorge"
+          }
+        ]
+      }
+    },
+    {
+      "id": "H08",
+      "name": "断岳前堡",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 4,
+      "legalPathPoints": 33,
+      "legalPathSegments": 18,
+      "floodFillDryCells": 17072,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.4049486916045653,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "仅塑造前堡高台，不添加绕过H08到H09机关条件的永久桥。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h08-front-fort-terrace",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 2.8,
+            "startHeight": 0,
+            "endHeight": 2.8,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "H09",
+      "name": "破阵军械岸",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 9,
+      "returnEntryCount": 2,
+      "legalPathPoints": 20,
+      "legalPathSegments": 11,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.8900272053761098,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "桥后武备岸是可原路返回的干燥高台，不新增跨区连接。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h09-armory-bank",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 2.2,
+            "startHeight": 0,
+            "endHeight": 2.2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "H10",
+      "name": "巨岩矿门",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 7,
+      "returnEntryCount": 1,
+      "legalPathPoints": 14,
+      "legalPathSegments": 7,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.9194817696831734,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "矿门与采掘设施沿宽岩坡展开。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h10-ancient-mine-gate",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 3.4,
+            "startHeight": 0,
+            "endHeight": 3.4,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "H11",
+      "name": "铁契公署",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 13,
+      "returnEntryCount": 4,
+      "legalPathPoints": 28,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.7183147020965273,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "公署院落缓升，文书与交涉点保持完整干地。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h11-deed-court",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 2,
+            "startHeight": 0,
+            "endHeight": 2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "H12",
+      "name": "北岗军寨",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 26,
+      "legalPathSegments": 14,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.2333472698083443,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "军寨高台有连续实体坡面。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h12-north-camp-terrace",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 2.6,
+            "startHeight": 0,
+            "endHeight": 2.6,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "H13",
+      "name": "风蚀誓廊",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 9,
+      "returnEntryCount": 2,
+      "legalPathPoints": 20,
+      "legalPathSegments": 11,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.9722348047482265,
+      "maxSlopeAt": {
+        "x": -0.25,
+        "z": -63.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "誓廊沿风蚀岩脊抬升，干涸石槽不添加蓝水。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h13-windworn-ridge",
+            "start": {
+              "x": -52,
+              "z": 0
+            },
+            "end": {
+              "x": 52,
+              "z": 0
+            },
+            "rise": 3.6,
+            "startHeight": 0,
+            "endHeight": 3.6,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "H14",
+      "name": "鹰背岩林",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 9,
+      "returnEntryCount": 2,
+      "legalPathPoints": 18,
+      "legalPathSegments": 9,
+      "floodFillDryCells": 17072,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 3.1370378113384945,
+      "maxSlopeAt": {
+        "x": -0.25,
+        "z": -63.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "岩林有真实高低地面与宽缓接近坡。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h14-eagleback-rock-ridge",
+            "start": {
+              "x": -52,
+              "z": 0
+            },
+            "end": {
+              "x": 52,
+              "z": 0
+            },
+            "rise": 3.8,
+            "startHeight": 0,
+            "endHeight": 3.8,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "H15",
+      "name": "天索吊崖",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 1,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 16,
+      "returnEntryCount": 5,
+      "legalPathPoints": 36,
+      "legalPathSegments": 20,
+      "floodFillDryCells": 16397,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 27.46283021108103,
+      "maxSlopeAt": {
+        "x": 62,
+        "z": -6.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "固定吊料台侧面是干崖切口；靠内侧的现有通路不被截断。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h15-loading-cliff-approach",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 3.6,
+            "startHeight": 0,
+            "endHeight": 3.6,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [
+          {
+            "id": "h15-dry-loading-cut",
+            "x": 52,
+            "z": -27,
+            "width": 20,
+            "depth": 32,
+            "drop": 2.8,
+            "kind": "gorge",
+            "walkable": false,
+            "bankWidth": 9,
+            "y": -2.3162823999999995
+          }
+        ],
+        "barriers": [
+          {
+            "id": "h15-dry-loading-cut",
+            "x": 52,
+            "z": -27,
+            "width": 20,
+            "depth": 32,
+            "drop": 2.8,
+            "kind": "gorge",
+            "walkable": false,
+            "bankWidth": 9,
+            "y": -2.3162823999999995,
+            "height": 2.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "H16",
+      "name": "山南古道",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 24,
+      "legalPathSegments": 14,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.4049486916047242,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "从来路沿宽缓坡下降到古道出口，保留折返。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h16-southbound-descent",
+            "start": {
+              "x": 0,
+              "z": 50
+            },
+            "end": {
+              "x": 0,
+              "z": -50
+            },
+            "rise": 2.8,
+            "startHeight": 0,
+            "endHeight": 2.8,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "H17",
+      "name": "余烬废窑",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 1,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 9,
+      "returnEntryCount": 2,
+      "legalPathPoints": 18,
+      "legalPathSegments": 9,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 13.085309609113656,
+      "maxSlopeAt": {
+        "x": 33.5,
+        "z": -6.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "窑沟是可走的浅干沟，不增加火油开路或跳跃门槛。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "h17-kiln-road",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 2.2,
+            "startHeight": 0,
+            "endHeight": 2.2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [
+          {
+            "id": "h17-dry-kiln-gully",
+            "x": 44,
+            "z": -24,
+            "width": 22,
+            "depth": 26,
+            "drop": 1.2,
+            "kind": "quarry",
+            "walkable": true,
+            "bankWidth": 9,
+            "y": -0.8311743999999999
+          }
+        ],
+        "barriers": []
+      }
+    },
+    {
+      "id": "B01",
+      "name": "旱谷出口",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 1,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 20,
+      "legalPathSegments": 10,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 18.214628224478105,
+      "maxSlopeAt": {
+        "x": 26,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "见日出口接干旱谷地；这里不因属于河湾地区而加水。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "b01-daylight-valley",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 2,
+            "startHeight": 0,
+            "endHeight": 2,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [
+          {
+            "id": "b01-dry-valley-floor",
+            "x": 35,
+            "z": -20,
+            "width": 18,
+            "depth": 32,
+            "drop": 1.8,
+            "kind": "dry-moat",
+            "walkable": true,
+            "bankWidth": 9,
+            "y": -1.368
+          }
+        ],
+        "barriers": []
+      }
+    },
+    {
+      "id": "B02",
+      "name": "北岸风道",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 26,
+      "legalPathSegments": 14,
+      "floodFillDryCells": 16265,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 17.78479761810783,
+      "maxSlopeAt": {
+        "x": 42.5,
+        "z": -5
+      },
+      "decks": [],
+      "waterExposure": [
+        {
+          "id": "b02-river-margin",
+          "visibleSamples": 625,
+          "nonDeckSamples": 625,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 1,
+          "minimumBedHeight": -1.1558247084032,
+          "waterHeight": -0.4152928
+        }
+      ],
+      "allTargetsReachable": true,
+      "designNote": "北岸河水位于未占用东南岸面，旧路和来回出口保持干地。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "b02-north-bank-road",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.4,
+            "startHeight": 0,
+            "endHeight": 1.4,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [
+          {
+            "id": "b02-river-margin",
+            "x": 54,
+            "z": -24,
+            "width": 24,
+            "depth": 32,
+            "kind": "river",
+            "y": -0.4152928
+          }
+        ],
+        "bridges": [],
+        "gorges": [],
+        "barriers": [
+          {
+            "id": "b02-river-margin",
+            "x": 54,
+            "z": -24,
+            "width": 24,
+            "depth": 32,
+            "kind": "water",
+            "y": -0.4152928,
+            "height": 2.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "B03",
+      "name": "归帆镇",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 16,
+      "returnEntryCount": 5,
+      "legalPathPoints": 36,
+      "legalPathSegments": 20,
+      "floodFillDryCells": 16442,
+      "slopeSamples": 37734,
+      "maxSlopeDegrees": 17.816535932854862,
+      "maxSlopeAt": {
+        "x": 31,
+        "z": -34
+      },
+      "decks": [
+        {
+          "id": "b03-working-landing",
+          "samples": 1215,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b03-ferry-harbor",
+          "visibleSamples": 225,
+          "nonDeckSamples": 450,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.5,
+          "minimumBedHeight": -1.1555994345984,
+          "waterHeight": -0.4625
+        }
+      ],
+      "allTargetsReachable": true,
+      "designNote": "归帆镇有实际港水与木栈桥，鉴定屋和公共街面在干岸。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "b03-ferry-town-bank",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.2,
+            "startHeight": 0,
+            "endHeight": 1.2,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [
+          {
+            "id": "b03-ferry-harbor",
+            "x": 44,
+            "z": -25,
+            "width": 26,
+            "depth": 28,
+            "kind": "harbor",
+            "y": -0.4625
+          }
+        ],
+        "bridges": [
+          {
+            "id": "b03-working-landing",
+            "x": 44,
+            "z": -25,
+            "width": 40,
+            "depth": 7,
+            "axis": "x",
+            "deckHeight": 0.1875,
+            "material": "wood",
+            "supports": [
+              {
+                "x": 31.2,
+                "z": -27.240000000000002
+              },
+              {
+                "x": 31.2,
+                "z": -22.759999999999998
+              },
+              {
+                "x": 56.8,
+                "z": -27.240000000000002
+              },
+              {
+                "x": 56.8,
+                "z": -22.759999999999998
+              }
+            ]
+          }
+        ],
+        "gorges": [],
+        "barriers": [
+          {
+            "x": 44,
+            "z": -33.75,
+            "width": 26,
+            "depth": 10.5,
+            "height": 2.5,
+            "kind": "water"
+          },
+          {
+            "x": 44,
+            "z": -16.25,
+            "width": 26,
+            "depth": 10.5,
+            "height": 2.5,
+            "kind": "water"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B04",
+      "name": "余烬灯坊",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 20,
+      "legalPathSegments": 10,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "灯坊工作院保持干燥，反光壶与镜组不放进泛用水池。",
+      "terrain": {
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "B05",
+      "name": "河湾旅店",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 4,
+      "legalPathPoints": 24,
+      "legalPathSegments": 13,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "旅店公共厅和后院保留完整干地，河湾由相邻岸区表达。",
+      "terrain": {
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "B06",
+      "name": "风帆市集",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 13,
+      "returnEntryCount": 4,
+      "legalPathPoints": 28,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 16544,
+      "slopeSamples": 36512,
+      "maxSlopeDegrees": 17.647621353725388,
+      "maxSlopeAt": {
+        "x": 44,
+        "z": -33
+      },
+      "decks": [
+        {
+          "id": "b06-cargo-landing",
+          "samples": 1035,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b06-market-waterfront",
+          "visibleSamples": 250,
+          "nonDeckSamples": 500,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.5,
+          "minimumBedHeight": -1.162753792,
+          "waterHeight": -0.482352
+        }
+      ],
+      "allTargetsReachable": true,
+      "designNote": "装卸市集的水面和货栈在东南岸边，交涉街面保持干燥。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "b06-market-bank",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1,
+            "startHeight": 0,
+            "endHeight": 1,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [
+          {
+            "id": "b06-market-waterfront",
+            "x": 54,
+            "z": -24,
+            "width": 20,
+            "depth": 30,
+            "kind": "harbor",
+            "y": -0.482352
+          }
+        ],
+        "bridges": [
+          {
+            "id": "b06-cargo-landing",
+            "x": 54,
+            "z": -24,
+            "width": 34,
+            "depth": 7,
+            "axis": "x",
+            "deckHeight": 0.16764800000000002,
+            "material": "wood",
+            "supports": [
+              {
+                "x": 43.12,
+                "z": -26.240000000000002
+              },
+              {
+                "x": 43.12,
+                "z": -21.759999999999998
+              },
+              {
+                "x": 64.88,
+                "z": -26.240000000000002
+              },
+              {
+                "x": 64.88,
+                "z": -21.759999999999998
+              }
+            ]
+          }
+        ],
+        "gorges": [],
+        "barriers": [
+          {
+            "x": 54,
+            "z": -33.25,
+            "width": 20,
+            "depth": 11.5,
+            "height": 2.5,
+            "kind": "water"
+          },
+          {
+            "x": 54,
+            "z": -14.75,
+            "width": 20,
+            "depth": 11.5,
+            "height": 2.5,
+            "kind": "water"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B07",
+      "name": "沉钟山岗",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 3,
+      "legalPathPoints": 26,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.5765069538488636,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "山岗有实际连续上堂坡，内外环路线保持连通。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "b07-bell-hill",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 3,
+            "startHeight": 0,
+            "endHeight": 3,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "B08",
+      "name": "沉钟旧堂",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 4,
+      "legalPathPoints": 32,
+      "legalPathSegments": 17,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.2030042208921006,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "旧堂与E06干阶保持干燥，不把礼拜入口泛成水面。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "b08-old-church-approach",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.4,
+            "startHeight": 0,
+            "endHeight": 1.4,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "B09",
+      "name": "黑签仓院",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 24,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 16650,
+      "slopeSamples": 35854,
+      "maxSlopeDegrees": 17.90472032210892,
+      "maxSlopeAt": {
+        "x": 51,
+        "z": -26
+      },
+      "decks": [
+        {
+          "id": "b09-inspection-crossing",
+          "samples": 735,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b09-warehouse-side-canal",
+          "visibleSamples": 375,
+          "nonDeckSamples": 550,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.6818181818181818,
+          "minimumBedHeight": -1.1610130333439999,
+          "waterHeight": -0.395174
+        }
+      ],
+      "allTargetsReachable": true,
+      "designNote": "仓院侧渠与验货栈道相接，完好记录留在干岸。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "b09-warehouse-bank",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1,
+            "startHeight": 0,
+            "endHeight": 1,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [
+          {
+            "id": "b09-warehouse-side-canal",
+            "x": 56,
+            "z": -17,
+            "width": 10,
+            "depth": 44,
+            "kind": "canal",
+            "y": -0.395174
+          }
+        ],
+        "bridges": [
+          {
+            "id": "b09-inspection-crossing",
+            "x": 56,
+            "z": -17,
+            "width": 24,
+            "depth": 7,
+            "axis": "x",
+            "deckHeight": 0.254826,
+            "material": "wood",
+            "supports": [
+              {
+                "x": 48.32,
+                "z": -19.240000000000002
+              },
+              {
+                "x": 48.32,
+                "z": -14.76
+              },
+              {
+                "x": 63.68,
+                "z": -19.240000000000002
+              },
+              {
+                "x": 63.68,
+                "z": -14.76
+              }
+            ]
+          }
+        ],
+        "gorges": [],
+        "barriers": [
+          {
+            "x": 56,
+            "z": -29.75,
+            "width": 10,
+            "depth": 18.5,
+            "height": 2.5,
+            "kind": "water"
+          },
+          {
+            "x": 56,
+            "z": -4.25,
+            "width": 10,
+            "depth": 18.5,
+            "height": 2.5,
+            "kind": "water"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B10",
+      "name": "怒潮码头",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 1,
+      "legalPathPoints": 23,
+      "legalPathSegments": 13,
+      "floodFillDryCells": 16472,
+      "slopeSamples": 42063,
+      "maxSlopeDegrees": 18.35517805689104,
+      "maxSlopeAt": {
+        "x": 28,
+        "z": -26.5
+      },
+      "decks": [
+        {
+          "id": "b10-cargo-inspection-deck",
+          "samples": 3129,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b10-storm-harbor",
+          "visibleSamples": 300,
+          "nonDeckSamples": 425,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.7058823529411765,
+          "minimumBedHeight": -1.1746740781056,
+          "waterHeight": -0.47581760000000006
+        }
+      ],
+      "allTargetsReachable": true,
+      "designNote": "怒潮码头有港水和连接点验位置的同一长栈台，北侧战场及唯一B11出口不被水封。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "b10-harbor-apron",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.2,
+            "startHeight": 0,
+            "endHeight": 1.2,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [
+          {
+            "id": "b10-storm-harbor",
+            "x": 40,
+            "z": -26,
+            "width": 24,
+            "depth": 32,
+            "kind": "harbor",
+            "y": -0.47581760000000006
+          }
+        ],
+        "bridges": [
+          {
+            "id": "b10-cargo-inspection-deck",
+            "x": 19,
+            "z": -16,
+            "width": 74,
+            "depth": 10,
+            "axis": "x",
+            "deckHeight": 0.3218304,
+            "material": "wood",
+            "supports": [
+              {
+                "x": -4.68,
+                "z": -19.2
+              },
+              {
+                "x": -4.68,
+                "z": -12.8
+              },
+              {
+                "x": 42.68,
+                "z": -19.2
+              },
+              {
+                "x": 42.68,
+                "z": -12.8
+              }
+            ]
+          }
+        ],
+        "gorges": [],
+        "barriers": [
+          {
+            "x": 40,
+            "z": -31.5,
+            "width": 24,
+            "depth": 21,
+            "height": 2.5,
+            "kind": "water"
+          },
+          {
+            "x": 40,
+            "z": -10.5,
+            "width": 24,
+            "depth": 1,
+            "height": 2.5,
+            "kind": "water"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B11",
+      "name": "天钩吊臂台",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 28,
+      "legalPathSegments": 16,
+      "floodFillDryCells": 16502,
+      "slopeSamples": 37076,
+      "maxSlopeDegrees": 18.094095355532275,
+      "maxSlopeAt": {
+        "x": 40,
+        "z": -29.5
+      },
+      "decks": [
+        {
+          "id": "b11-crane-working-deck",
+          "samples": 1173,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b11-crane-basin",
+          "visibleSamples": 275,
+          "nonDeckSamples": 500,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.55,
+          "minimumBedHeight": -1.1387729952768,
+          "waterHeight": -0.39080000000000004
+        }
+      ],
+      "allTargetsReachable": true,
+      "designNote": "吊臂旁为真实港池和固定工作台，跨图吊臂条件仍由原事件控制。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "b11-crane-bank",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.2,
+            "startHeight": 0,
+            "endHeight": 1.2,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [
+          {
+            "id": "b11-crane-basin",
+            "x": 50,
+            "z": -20,
+            "width": 20,
+            "depth": 34,
+            "kind": "harbor",
+            "y": -0.39080000000000004
+          }
+        ],
+        "bridges": [
+          {
+            "id": "b11-crane-working-deck",
+            "x": 50,
+            "z": -20,
+            "width": 34,
+            "depth": 8,
+            "axis": "x",
+            "deckHeight": 0.2592,
+            "material": "wood",
+            "supports": [
+              {
+                "x": 39.12,
+                "z": -22.56
+              },
+              {
+                "x": 39.12,
+                "z": -17.44
+              },
+              {
+                "x": 60.88,
+                "z": -22.56
+              },
+              {
+                "x": 60.88,
+                "z": -17.44
+              }
+            ]
+          }
+        ],
+        "gorges": [],
+        "barriers": [
+          {
+            "x": 50,
+            "z": -30.5,
+            "width": 20,
+            "depth": 13,
+            "height": 2.5,
+            "kind": "water"
+          },
+          {
+            "x": 50,
+            "z": -9.5,
+            "width": 20,
+            "depth": 13,
+            "height": 2.5,
+            "kind": "water"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B12",
+      "name": "分潮水渠",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 5,
+      "legalPathPoints": 36,
+      "legalPathSegments": 21,
+      "floodFillDryCells": 16628,
+      "slopeSamples": 36465,
+      "maxSlopeDegrees": 17.963506249423762,
+      "maxSlopeAt": {
+        "x": 35,
+        "z": -31
+      },
+      "decks": [
+        {
+          "id": "b12-dry-channel-crossing",
+          "samples": 795,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b12-diversion-channel",
+          "visibleSamples": 375,
+          "nonDeckSamples": 550,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.6818181818181818,
+          "minimumBedHeight": -1.1946126630912,
+          "waterHeight": -0.4488224
+        }
+      ],
+      "allTargetsReachable": true,
+      "designNote": "分潮渠沿东侧工作带流过，中央干路与石跨渠面保证来回通行。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "b12-dry-canal-bank",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.2,
+            "startHeight": 0,
+            "endHeight": 1.2,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [
+          {
+            "id": "b12-diversion-channel",
+            "x": 40,
+            "z": -24,
+            "width": 10,
+            "depth": 46,
+            "kind": "canal",
+            "y": -0.4488224
+          }
+        ],
+        "bridges": [
+          {
+            "id": "b12-dry-channel-crossing",
+            "x": 40,
+            "z": -22,
+            "width": 26,
+            "depth": 7,
+            "axis": "x",
+            "deckHeight": 0.22955520000000001,
+            "material": "stone",
+            "supports": [
+              {
+                "x": 31.68,
+                "z": -24.240000000000002
+              },
+              {
+                "x": 31.68,
+                "z": -19.759999999999998
+              },
+              {
+                "x": 48.32,
+                "z": -24.240000000000002
+              },
+              {
+                "x": 48.32,
+                "z": -19.759999999999998
+              }
+            ]
+          }
+        ],
+        "gorges": [],
+        "barriers": [
+          {
+            "x": 40,
+            "z": -36.25,
+            "width": 10,
+            "depth": 21.5,
+            "height": 2.5,
+            "kind": "water"
+          },
+          {
+            "x": 40,
+            "z": -9.75,
+            "width": 10,
+            "depth": 17.5,
+            "height": 2.5,
+            "kind": "water"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B13",
+      "name": "芦苇迷湾",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 2,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 13,
+      "returnEntryCount": 3,
+      "legalPathPoints": 34,
+      "legalPathSegments": 21,
+      "floodFillDryCells": 15940,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 17.350867143271273,
+      "maxSlopeAt": {
+        "x": 31.25,
+        "z": -8.75
+      },
+      "decks": [],
+      "waterExposure": [
+        {
+          "id": "b13-east-reed-pool",
+          "visibleSamples": 625,
+          "nonDeckSamples": 625,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 1,
+          "minimumBedHeight": -1.156899910016,
+          "waterHeight": -0.49375
+        },
+        {
+          "id": "b13-west-reed-pool",
+          "visibleSamples": 625,
+          "nonDeckSamples": 625,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 1,
+          "minimumBedHeight": -0.9253233827839998,
+          "waterHeight": -0.209872
+        }
+      ],
+      "allTargetsReachable": true,
+      "designNote": "两个浅池之间保留宽干岸；拖钩棚、出生点和所有出口均不涉水。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "b13-reed-dry-bank",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1,
+            "startHeight": 0,
+            "endHeight": 1,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [
+          {
+            "id": "b13-east-reed-pool",
+            "x": 43,
+            "z": -25,
+            "width": 24,
+            "depth": 26,
+            "kind": "pool",
+            "y": -0.49375
+          },
+          {
+            "id": "b13-west-reed-pool",
+            "x": -50,
+            "z": -4,
+            "width": 18,
+            "depth": 24,
+            "kind": "pool",
+            "y": -0.209872
+          }
+        ],
+        "bridges": [],
+        "gorges": [],
+        "barriers": [
+          {
+            "id": "b13-east-reed-pool",
+            "x": 43,
+            "z": -25,
+            "width": 24,
+            "depth": 26,
+            "kind": "water",
+            "y": -0.49375,
+            "height": 2.5
+          },
+          {
+            "id": "b13-west-reed-pool",
+            "x": -50,
+            "z": -4,
+            "width": 18,
+            "depth": 24,
+            "kind": "water",
+            "y": -0.209872,
+            "height": 2.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "B14",
+      "name": "沉船墓场",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 14,
+      "returnEntryCount": 4,
+      "legalPathPoints": 34,
+      "legalPathSegments": 20,
+      "floodFillDryCells": 16280,
+      "slopeSamples": 38533,
+      "maxSlopeDegrees": 17.953713835143773,
+      "maxSlopeAt": {
+        "x": 35,
+        "z": -40
+      },
+      "decks": [
+        {
+          "id": "b14-wreck-side-landing",
+          "samples": 1455,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b14-wreck-waterfront",
+          "visibleSamples": 228,
+          "nonDeckSamples": 450,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.5066666666666667,
+          "minimumBedHeight": -1.1621354643455999,
+          "waterHeight": -0.4488224
+        }
+      ],
+      "allTargetsReachable": true,
+      "designNote": "沉船岸水位于空余东南岸面，南北木栈道有两端干岸，不要求游泳。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "b14-wreck-bank",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.2,
+            "startHeight": 0,
+            "endHeight": 1.2,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [
+          {
+            "id": "b14-wreck-waterfront",
+            "x": 44,
+            "z": -24,
+            "width": 28,
+            "depth": 32,
+            "kind": "harbor",
+            "y": -0.4488224
+          }
+        ],
+        "bridges": [
+          {
+            "id": "b14-wreck-side-landing",
+            "x": 44,
+            "z": -24,
+            "width": 7,
+            "depth": 48,
+            "axis": "z",
+            "deckHeight": 0.2011776,
+            "material": "wood",
+            "supports": [
+              {
+                "x": 41.76,
+                "z": -39.36
+              },
+              {
+                "x": 41.76,
+                "z": -8.64
+              },
+              {
+                "x": 46.24,
+                "z": -39.36
+              },
+              {
+                "x": 46.24,
+                "z": -8.64
+              }
+            ]
+          }
+        ],
+        "gorges": [],
+        "barriers": [
+          {
+            "x": 35.25,
+            "z": -24,
+            "width": 10.5,
+            "depth": 32,
+            "height": 2.5,
+            "kind": "water"
+          },
+          {
+            "x": 52.75,
+            "z": -24,
+            "width": 10.5,
+            "depth": 32,
+            "height": 2.5,
+            "kind": "water"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B15",
+      "name": "南岸农庄",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 28,
+      "legalPathSegments": 16,
+      "floodFillDryCells": 16838,
+      "slopeSamples": 35755,
+      "maxSlopeDegrees": 18.011029712442895,
+      "maxSlopeAt": {
+        "x": 49,
+        "z": -28.5
+      },
+      "decks": [
+        {
+          "id": "b15-farm-stone-crossing",
+          "samples": 533,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b15-old-irrigation-canal",
+          "visibleSamples": 350,
+          "nonDeckSamples": 550,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.6363636363636364,
+          "minimumBedHeight": -1.1610329088,
+          "waterHeight": -0.39080000000000004
+        }
+      ],
+      "allTargetsReachable": true,
+      "designNote": "农庄只补旧灌渠与石跨面，田埂和观察点留在陆上。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "b15-farm-dyke",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.2,
+            "startHeight": 0,
+            "endHeight": 1.2,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [
+          {
+            "id": "b15-old-irrigation-canal",
+            "x": 52,
+            "z": -20,
+            "width": 6,
+            "depth": 40,
+            "kind": "canal",
+            "y": -0.39080000000000004
+          }
+        ],
+        "bridges": [
+          {
+            "id": "b15-farm-stone-crossing",
+            "x": 52,
+            "z": -20,
+            "width": 20,
+            "depth": 6,
+            "axis": "x",
+            "deckHeight": 0.2592,
+            "material": "stone",
+            "supports": [
+              {
+                "x": 45.6,
+                "z": -21.92
+              },
+              {
+                "x": 45.6,
+                "z": -18.08
+              },
+              {
+                "x": 58.4,
+                "z": -21.92
+              },
+              {
+                "x": 58.4,
+                "z": -18.08
+              }
+            ]
+          }
+        ],
+        "gorges": [],
+        "barriers": [
+          {
+            "x": 52,
+            "z": -31.5,
+            "width": 6,
+            "depth": 17,
+            "height": 2.5,
+            "kind": "water"
+          },
+          {
+            "x": 52,
+            "z": -8.5,
+            "width": 6,
+            "depth": 17,
+            "height": 2.5,
+            "kind": "water"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B16",
+      "name": "东岸古渡",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 3,
+      "legalPathPoints": 26,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 16802,
+      "slopeSamples": 36635,
+      "maxSlopeDegrees": 18.000353368895592,
+      "maxSlopeAt": {
+        "x": 1,
+        "z": -31.5
+      },
+      "decks": [
+        {
+          "id": "b16-natural-land-bridge",
+          "samples": 901,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "b16-old-ford-river",
+          "visibleSamples": 300,
+          "nonDeckSamples": 500,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.6,
+          "minimumBedHeight": -1.1950380417024,
+          "waterHeight": -0.5013152000000001
+        }
+      ],
+      "allTargetsReachable": true,
+      "designNote": "古渡以真实陆桥跨过岸水，中央与两岸仍有可折返步道。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "b16-old-ford-bank",
+            "start": {
+              "x": -18,
+              "z": -50
+            },
+            "end": {
+              "x": -18,
+              "z": 50
+            },
+            "rise": 1.2,
+            "startHeight": 0,
+            "endHeight": 1.2,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [
+          {
+            "id": "b16-old-ford-river",
+            "x": 5,
+            "z": -28,
+            "width": 8,
+            "depth": 38,
+            "kind": "river",
+            "y": -0.5013152000000001
+          }
+        ],
+        "bridges": [
+          {
+            "id": "b16-natural-land-bridge",
+            "x": 5,
+            "z": -22,
+            "width": 26,
+            "depth": 8,
+            "axis": "x",
+            "deckHeight": 0.22955520000000001,
+            "material": "stone",
+            "supports": [
+              {
+                "x": -3.3200000000000003,
+                "z": -24.56
+              },
+              {
+                "x": -3.3200000000000003,
+                "z": -19.44
+              },
+              {
+                "x": 13.32,
+                "z": -24.56
+              },
+              {
+                "x": 13.32,
+                "z": -19.44
+              }
+            ]
+          }
+        ],
+        "gorges": [],
+        "barriers": [
+          {
+            "x": 5,
+            "z": -36.5,
+            "width": 8,
+            "depth": 21,
+            "height": 2.5,
+            "kind": "water"
+          },
+          {
+            "x": 5,
+            "z": -13.5,
+            "width": 8,
+            "depth": 9,
+            "height": 2.5,
+            "kind": "water"
+          }
+        ]
+      }
+    },
+    {
+      "id": "B17",
+      "name": "旧誓墓园",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 4,
+      "legalPathPoints": 26,
+      "legalPathSegments": 14,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.2030042208921006,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "墓园与年代石室采用干燥旧石地，保留侧行路线。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "b17-cemetery-rise",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.4,
+            "startHeight": 0,
+            "endHeight": 1.4,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "B18",
+      "name": "双契宅院",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 20,
+      "legalPathSegments": 10,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "宅院会客与账房维持干地，不添加无关机关水池。",
+      "terrain": {
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F01",
+      "name": "黑冠外集",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 8,
+      "returnEntryCount": 3,
+      "legalPathPoints": 16,
+      "legalPathSegments": 8,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "外集与住屋保持完整干街面。",
+      "terrain": {
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F02",
+      "name": "流火长街",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 3,
+      "legalPathPoints": 24,
+      "legalPathSegments": 13,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0.6874990217239406,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "居住长街有轻微街坡，家属交谈点保持可达。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "f02-workshop-street",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 0.8,
+            "startHeight": 0,
+            "endHeight": 0.8,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F03",
+      "name": "黑冠西门",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 3,
+      "legalPathPoints": 22,
+      "legalPathSegments": 11,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.5465713173227964,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "西门以连续关前坡接到门楼。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "f03-west-gate-approach",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.8,
+            "startHeight": 0,
+            "endHeight": 1.8,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F04",
+      "name": "铁锁工坊",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 22,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "扣押工坊的救援工位保持平整，不添加新的环境危险。",
+      "terrain": {
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F05",
+      "name": "黑旗旧营",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 24,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.0311866751935073,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "旧营办公面和营后路沿缓台相接。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "f05-old-camp-terrace",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.2,
+            "startHeight": 0,
+            "endHeight": 1.2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F06",
+      "name": "黑印文书院",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 13,
+      "returnEntryCount": 4,
+      "legalPathPoints": 28,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "文书院与原刻证据地面保持干燥平整。",
+      "terrain": {
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F07",
+      "name": "东仓暗街",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 13,
+      "returnEntryCount": 3,
+      "legalPathPoints": 30,
+      "legalPathSegments": 17,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0.8593505792552705,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "接应街巷使用连续石坡，不放水封住出口。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "f07-warehouse-street",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1,
+            "startHeight": 0,
+            "endHeight": 1,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F08",
+      "name": "铁旗广场",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 17,
+      "returnEntryCount": 5,
+      "legalPathPoints": 36,
+      "legalPathSegments": 19,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.2030042208921006,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "广场保持宽阔缓坡和多方向干燥接近面。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "f08-banner-plaza",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.4,
+            "startHeight": 0,
+            "endHeight": 1.4,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F09",
+      "name": "西境弩台",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 2,
+      "legalPathPoints": 20,
+      "legalPathSegments": 10,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.748018997801496,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "西弩台有真正可步行的城墙上坡。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "f09-west-wall-ascent",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 3.2,
+            "startHeight": 0,
+            "endHeight": 3.2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F10",
+      "name": "东境弩台",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 2,
+      "legalPathPoints": 22,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.748018997801496,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "东弩台独立抬升，来路和回路均连续。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "f10-east-wall-ascent",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 3.2,
+            "startHeight": 0,
+            "endHeight": 3.2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F11",
+      "name": "凌城连廊",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 15,
+      "returnEntryCount": 5,
+      "legalPathPoints": 32,
+      "legalPathSegments": 17,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 3.2622473088605317,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "墙路连廊有真实高度，侧龛与休整庭仍可步行连接。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "f11-wall-gallery-ascent",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 3.8,
+            "startHeight": 0,
+            "endHeight": 3.8,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F12",
+      "name": "决战休整庭",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 8,
+      "returnEntryCount": 2,
+      "legalPathPoints": 16,
+      "legalPathSegments": 8,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.2030042208921006,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "门外整备庭为可折返的干燥缓台，不提前打开决战条件。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "f12-rest-court-approach",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.4,
+            "startHeight": 0,
+            "endHeight": 1.4,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F13",
+      "name": "黑冠决战庭",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 22,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 17072,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.7183147020965273,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "决战庭保持宽缓完整石地，已有掩体和退出条件不变。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "f13-inner-court",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 2,
+            "startHeight": 0,
+            "endHeight": 2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F14",
+      "name": "黑冠军械库",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 6,
+      "returnEntryCount": 1,
+      "legalPathPoints": 14,
+      "legalPathSegments": 8,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "同平台军械领奖与侧格保持干燥平整。",
+      "terrain": {
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F15",
+      "name": "黑冠档案楼",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 5,
+      "returnEntryCount": 1,
+      "legalPathPoints": 10,
+      "legalPathSegments": 5,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "档案楼阅卷与回访地面保持平整。",
+      "terrain": {
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F16",
+      "name": "干涸护城壕",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 1,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 22,
+      "legalPathSegments": 12,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 20.248460267776696,
+      "maxSlopeAt": {
+        "x": -13.75,
+        "z": 5.5
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "干涸护城壕为可沿缓坡进出的真实干沟，不加蓝水或通内堡捷径。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "f16-moat-exit-ramp",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 2.4,
+            "startHeight": 0,
+            "endHeight": 2.4,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [
+          {
+            "id": "f16-drained-moat",
+            "x": 8,
+            "z": -10,
+            "width": 44,
+            "depth": 22,
+            "drop": 2,
+            "kind": "dry-moat",
+            "walkable": true,
+            "bankWidth": 9,
+            "y": -1.1551999999999998
+          }
+        ],
+        "barriers": []
+      }
+    },
+    {
+      "id": "F17",
+      "name": "铁棘检修坡",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 14,
+      "returnEntryCount": 4,
+      "legalPathPoints": 30,
+      "legalPathSegments": 16,
+      "floodFillDryCells": 17072,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.9194817696831734,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "检修坡提供实在高差和可折返的正侧两面。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "f17-maintenance-slope",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 3.4,
+            "startHeight": 0,
+            "endHeight": 3.4,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "U1-06",
+      "name": "三誓军械廊",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 14,
+      "returnEntryCount": 4,
+      "legalPathPoints": 28,
+      "legalPathSegments": 14,
+      "floodFillDryCells": 17072,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 1.7183147020965273,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "军械廊以宽缓台分层，机关旁路不增战斗门槛。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "u106-armory-gallery-levels",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 2,
+            "startHeight": 0,
+            "endHeight": 2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "U1-07",
+      "name": "震炉工坊",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 3,
+      "legalPathPoints": 20,
+      "legalPathSegments": 10,
+      "floodFillDryCells": 17072,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "冷白工坊保留平整工作地面，不改为熔岩或水牢。",
+      "terrain": {
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "U1-08",
+      "name": "天火深炉",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 3,
+      "legalPathPoints": 22,
+      "legalPathSegments": 11,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "天火核心与迁行口保留干燥生命空间，不加熔岩池。",
+      "terrain": {
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "U1-09",
+      "name": "悬链绞盘井",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 1,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 13,
+      "returnEntryCount": 4,
+      "legalPathPoints": 28,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 16463,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 28.50720294574854,
+      "maxSlopeAt": {
+        "x": 43.25,
+        "z": -4.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "绞盘井侧面为干井切口，E05及现有北侧通道保留可达。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "u109-winch-approach",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 3,
+            "startHeight": 0,
+            "endHeight": 3,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [
+          {
+            "id": "u109-dry-winch-shaft",
+            "x": 52,
+            "z": -25,
+            "width": 18,
+            "depth": 32,
+            "drop": 3,
+            "kind": "gorge",
+            "walkable": false,
+            "bankWidth": 9,
+            "y": -2.53125
+          }
+        ],
+        "barriers": [
+          {
+            "id": "u109-dry-winch-shaft",
+            "x": 52,
+            "z": -25,
+            "width": 18,
+            "depth": 32,
+            "drop": 3,
+            "kind": "gorge",
+            "walkable": false,
+            "bankWidth": 9,
+            "y": -2.53125,
+            "height": 2.5
+          }
+        ]
+      }
+    },
+    {
+      "id": "U1-10",
+      "name": "见日长廊",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 9,
+      "returnEntryCount": 2,
+      "legalPathPoints": 20,
+      "legalPathSegments": 11,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 2.0617057518366573,
+      "maxSlopeAt": {
+        "x": -71.5,
+        "z": 0.25
+      },
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "见日长廊以连续上坡接干燥出口，E07仍从内侧开启。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "u110-daylight-approach",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 2.4,
+            "startHeight": 0,
+            "endHeight": 2.4,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "U2-02",
+      "name": "沉潮长厅",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 2,
+      "legalPathPoints": 26,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 16628,
+      "slopeSamples": 36465,
+      "maxSlopeDegrees": 17.963506249423762,
+      "maxSlopeAt": {
+        "x": 35,
+        "z": -31
+      },
+      "decks": [
+        {
+          "id": "u202-dry-stone-crossing",
+          "samples": 795,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "u202-receded-stone-canal",
+          "visibleSamples": 375,
+          "nonDeckSamples": 525,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.7142857142857143,
+          "minimumBedHeight": -1.1915715251712,
+          "waterHeight": -0.4347992
+        }
+      ],
+      "allTargetsReachable": true,
+      "designNote": "退水侧渠与宽干路并行，镜眼接近面不要求涉水。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "u202-dry-channel-levels",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.2,
+            "startHeight": 0,
+            "endHeight": 1.2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [
+          {
+            "id": "u202-receded-stone-canal",
+            "x": 40,
+            "z": -23,
+            "width": 10,
+            "depth": 46,
+            "kind": "canal",
+            "y": -0.4347992
+          }
+        ],
+        "bridges": [
+          {
+            "id": "u202-dry-stone-crossing",
+            "x": 40,
+            "z": -22,
+            "width": 26,
+            "depth": 7,
+            "axis": "x",
+            "deckHeight": 0.22955520000000001,
+            "material": "stone",
+            "supports": [
+              {
+                "x": 31.68,
+                "z": -24.240000000000002
+              },
+              {
+                "x": 31.68,
+                "z": -19.759999999999998
+              },
+              {
+                "x": 48.32,
+                "z": -24.240000000000002
+              },
+              {
+                "x": 48.32,
+                "z": -19.759999999999998
+              }
+            ]
+          }
+        ],
+        "gorges": [],
+        "barriers": [
+          {
+            "x": 40,
+            "z": -35.75,
+            "width": 10,
+            "depth": 20.5,
+            "height": 2.5,
+            "kind": "water"
+          },
+          {
+            "x": 40,
+            "z": -9.25,
+            "width": 10,
+            "depth": 18.5,
+            "height": 2.5,
+            "kind": "water"
+          }
+        ]
+      }
+    },
+    {
+      "id": "U2-03",
+      "name": "镇闸广场",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 11,
+      "returnEntryCount": 3,
+      "legalPathPoints": 24,
+      "legalPathSegments": 13,
+      "floodFillDryCells": 16562,
+      "slopeSamples": 37027,
+      "maxSlopeDegrees": 18.000353368895592,
+      "maxSlopeAt": {
+        "x": 37,
+        "z": -31.5
+      },
+      "decks": [
+        {
+          "id": "u203-control-crossing",
+          "samples": 1037,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "u203-pressure-channel",
+          "visibleSamples": 325,
+          "nonDeckSamples": 500,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.65,
+          "minimumBedHeight": -1.1841082368,
+          "waterHeight": -0.4488224
+        }
+      ],
+      "allTargetsReachable": true,
+      "designNote": "闸室广场以侧渠表现水压，内侧泄压位和原出口保持干燥。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "u203-sluice-court",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.2,
+            "startHeight": 0,
+            "endHeight": 1.2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [
+          {
+            "id": "u203-pressure-channel",
+            "x": 44,
+            "z": -24,
+            "width": 14,
+            "depth": 40,
+            "kind": "canal",
+            "y": -0.4488224
+          }
+        ],
+        "bridges": [
+          {
+            "id": "u203-control-crossing",
+            "x": 44,
+            "z": -22,
+            "width": 30,
+            "depth": 8,
+            "axis": "x",
+            "deckHeight": 0.22955520000000001,
+            "material": "stone",
+            "supports": [
+              {
+                "x": 34.4,
+                "z": -24.56
+              },
+              {
+                "x": 34.4,
+                "z": -19.44
+              },
+              {
+                "x": 53.6,
+                "z": -24.56
+              },
+              {
+                "x": 53.6,
+                "z": -19.44
+              }
+            ]
+          }
+        ],
+        "gorges": [],
+        "barriers": [
+          {
+            "x": 44,
+            "z": -35,
+            "width": 14,
+            "depth": 18,
+            "height": 2.5,
+            "kind": "water"
+          },
+          {
+            "x": 44,
+            "z": -11,
+            "width": 14,
+            "depth": 14,
+            "height": 2.5,
+            "kind": "water"
+          }
+        ]
+      }
+    },
+    {
+      "id": "U2-04",
+      "name": "守库人旧居",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 9,
+      "returnEntryCount": 3,
+      "legalPathPoints": 18,
+      "legalPathSegments": 9,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "守库人旧居保留居住干地，退出协议不放进新水池。",
+      "terrain": {
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "U2-05",
+      "name": "沉钟下殿",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 28,
+      "legalPathSegments": 16,
+      "floodFillDryCells": 16748,
+      "slopeSamples": 35800,
+      "maxSlopeDegrees": 17.969106930744456,
+      "maxSlopeAt": {
+        "x": 50,
+        "z": -29.5
+      },
+      "decks": [
+        {
+          "id": "u205-side-room-crossing",
+          "samples": 585,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "u205-outer-stone-channel",
+          "visibleSamples": 375,
+          "nonDeckSamples": 550,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.6818181818181818,
+          "minimumBedHeight": -1.1735255210495998,
+          "waterHeight": -0.40577360000000007
+        }
+      ],
+      "allTargetsReachable": true,
+      "designNote": "下殿外侧旧渠有石跨面，E06与侧室入口始终在干阶。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "u205-church-dry-steps",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.2,
+            "startHeight": 0,
+            "endHeight": 1.2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [
+          {
+            "id": "u205-outer-stone-channel",
+            "x": 54,
+            "z": -21,
+            "width": 8,
+            "depth": 42,
+            "kind": "canal",
+            "y": -0.40577360000000007
+          }
+        ],
+        "bridges": [
+          {
+            "id": "u205-side-room-crossing",
+            "x": 54,
+            "z": -21,
+            "width": 22,
+            "depth": 6,
+            "axis": "x",
+            "deckHeight": 0.24422639999999995,
+            "material": "stone",
+            "supports": [
+              {
+                "x": 46.96,
+                "z": -22.92
+              },
+              {
+                "x": 46.96,
+                "z": -19.08
+              },
+              {
+                "x": 61.04,
+                "z": -22.92
+              },
+              {
+                "x": 61.04,
+                "z": -19.08
+              }
+            ]
+          }
+        ],
+        "gorges": [],
+        "barriers": [
+          {
+            "x": 54,
+            "z": -33,
+            "width": 8,
+            "depth": 18,
+            "height": 2.5,
+            "kind": "water"
+          },
+          {
+            "x": 54,
+            "z": -9,
+            "width": 8,
+            "depth": 18,
+            "height": 2.5,
+            "kind": "water"
+          }
+        ]
+      }
+    },
+    {
+      "id": "U2-06",
+      "name": "覆文档案廊",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 13,
+      "returnEntryCount": 3,
+      "legalPathPoints": 28,
+      "legalPathSegments": 15,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "原刻档案与侧光拓本室保持干燥可达。",
+      "terrain": {
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "U2-07",
+      "name": "禁域祭仪库",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 12,
+      "returnEntryCount": 3,
+      "legalPathPoints": 28,
+      "legalPathSegments": 16,
+      "floodFillDryCells": 16616,
+      "slopeSamples": 36888,
+      "maxSlopeDegrees": 17.867210927006532,
+      "maxSlopeAt": {
+        "x": 40,
+        "z": -33
+      },
+      "decks": [
+        {
+          "id": "u207-side-gallery-crossing",
+          "samples": 975,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "u207-old-ritual-basin",
+          "visibleSamples": 225,
+          "nonDeckSamples": 450,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.5,
+          "minimumBedHeight": -1.1479640285183998,
+          "waterHeight": -0.4488224
+        }
+      ],
+      "allTargetsReachable": true,
+      "designNote": "祭仪库侧渠有干燥石跨面，迁行图与双侧廊不被水截断。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "u207-library-court",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.2,
+            "startHeight": 0,
+            "endHeight": 1.2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [
+          {
+            "id": "u207-old-ritual-basin",
+            "x": 49,
+            "z": -24,
+            "width": 18,
+            "depth": 28,
+            "kind": "canal",
+            "y": -0.4488224
+          }
+        ],
+        "bridges": [
+          {
+            "id": "u207-side-gallery-crossing",
+            "x": 49,
+            "z": -24,
+            "width": 32,
+            "depth": 7,
+            "axis": "x",
+            "deckHeight": 0.2011776,
+            "material": "stone",
+            "supports": [
+              {
+                "x": 38.76,
+                "z": -26.240000000000002
+              },
+              {
+                "x": 38.76,
+                "z": -21.759999999999998
+              },
+              {
+                "x": 59.24,
+                "z": -26.240000000000002
+              },
+              {
+                "x": 59.24,
+                "z": -21.759999999999998
+              }
+            ]
+          }
+        ],
+        "gorges": [],
+        "barriers": [
+          {
+            "x": 49,
+            "z": -32.75,
+            "width": 18,
+            "depth": 10.5,
+            "height": 2.5,
+            "kind": "water"
+          },
+          {
+            "x": 49,
+            "z": -15.25,
+            "width": 18,
+            "depth": 10.5,
+            "height": 2.5,
+            "kind": "water"
+          }
+        ]
+      }
+    },
+    {
+      "id": "U2-08",
+      "name": "无名囚室",
+      "expanded": true,
+      "ramps": 0,
+      "waters": 0,
+      "bridges": 0,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 7,
+      "returnEntryCount": 2,
+      "legalPathPoints": 14,
+      "legalPathSegments": 7,
+      "floodFillDryCells": 17090,
+      "slopeSamples": 32470,
+      "maxSlopeDegrees": 0,
+      "maxSlopeAt": null,
+      "decks": [],
+      "waterExposure": [],
+      "allTargetsReachable": true,
+      "designNote": "旧囚室保留干地与封门证据，不额外添加突袭水牢。",
+      "terrain": {
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "gorges": [],
+        "barriers": []
+      }
+    },
+    {
+      "id": "U2-09",
+      "name": "堡外检修道",
+      "expanded": true,
+      "ramps": 1,
+      "waters": 1,
+      "bridges": 1,
+      "gorges": 0,
+      "capsuleRadius": 0.32,
+      "strictDryClearance": 0.6,
+      "targetCount": 10,
+      "returnEntryCount": 2,
+      "legalPathPoints": 24,
+      "legalPathSegments": 14,
+      "floodFillDryCells": 16766,
+      "slopeSamples": 36070,
+      "maxSlopeDegrees": 17.880409640141657,
+      "maxSlopeAt": {
+        "x": 48,
+        "z": -31.5
+      },
+      "decks": [
+        {
+          "id": "u209-service-stone-crossing",
+          "samples": 637,
+          "maximumWalkSurfaceError": 0
+        }
+      ],
+      "waterExposure": [
+        {
+          "id": "u209-outwork-service-canal",
+          "visibleSamples": 350,
+          "nonDeckSamples": 550,
+          "totalSamples": 625,
+          "visibleFractionOutsideDeck": 0.6363636363636364,
+          "minimumBedHeight": -1.1792365248,
+          "waterHeight": -0.4347992
+        }
+      ],
+      "allTargetsReachable": true,
+      "designNote": "堡外检修渠位于侧面，E08只接干壕，原图条件保持。",
+      "terrain": {
+        "ramps": [
+          {
+            "id": "u209-maintenance-bank",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 50
+            },
+            "rise": 1.2,
+            "startHeight": 0,
+            "endHeight": 1.2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [
+          {
+            "id": "u209-outwork-service-canal",
+            "x": 52,
+            "z": -23,
+            "width": 8,
+            "depth": 40,
+            "kind": "canal",
+            "y": -0.4347992
+          }
+        ],
+        "bridges": [
+          {
+            "id": "u209-service-stone-crossing",
+            "x": 52,
+            "z": -23,
+            "width": 24,
+            "depth": 6,
+            "axis": "x",
+            "deckHeight": 0.21520080000000003,
+            "material": "stone",
+            "supports": [
+              {
+                "x": 44.32,
+                "z": -24.92
+              },
+              {
+                "x": 44.32,
+                "z": -21.08
+              },
+              {
+                "x": 59.68,
+                "z": -24.92
+              },
+              {
+                "x": 59.68,
+                "z": -21.08
+              }
+            ]
+          }
+        ],
+        "gorges": [],
+        "barriers": [
+          {
+            "x": 52,
+            "z": -34.5,
+            "width": 8,
+            "depth": 17,
+            "height": 2.5,
+            "kind": "water"
+          },
+          {
+            "x": 52,
+            "z": -11.5,
+            "width": 8,
+            "depth": 17,
+            "height": 2.5,
+            "kind": "water"
+          }
+        ]
+      }
+    }
+  ],
+  "limits": [
+    "Read-only live data + existing Navigation class verification. Cocos controller movement, visual layering and runtime rendering remain parent review gates.",
+    "Terrain coordinates do not alter WorldData objects, enemies, ports, unlock conditions or existing first-chapter values."
+  ]
+}

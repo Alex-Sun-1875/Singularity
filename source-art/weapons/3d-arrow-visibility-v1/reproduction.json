@@ -1,0 +1,15 @@
+{
+  "url": "http://127.0.0.1:7469/?view=2d&player=3d&revision=locomotion-v2",
+  "steps": [
+    "Equip W07 in isolated browser profile",
+    "Hold basic attack for .75 seconds",
+    "Release basic attack and advance to emission"
+  ],
+  "error": "TypeError: Cannot read properties of undefined (reading 'basicArrow')",
+  "stack": [
+    "GameSession.actionStep",
+    "GameSession.step",
+    "GameSession.advance"
+  ],
+  "finding": "Current GameSession.ts references COMBAT_RULES.playerProjectileSpeeds, absent in the stale C-mirror PureSkills.ts. PureCombat.ts was also stale. The arrow nocked on the bow is visible, but emission throws before the flying projectile can be created."
+}

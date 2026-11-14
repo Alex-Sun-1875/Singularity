@@ -1,0 +1,314 @@
+{
+  "revision": "monster-variety-v2-six-authored-poses",
+  "sourceDesign": "source-art/encounters/monster-variety-v2/rock-scorpion/raw.png",
+  "loaded3DModel": false,
+  "image": "atlas.png",
+  "columns": 6,
+  "frameWidth": 192,
+  "frameHeight": 192,
+  "directions": [
+    "down",
+    "left",
+    "up",
+    "right"
+  ],
+  "origin": [
+    98.5,
+    181
+  ],
+  "perFrameOrigins": [
+    [
+      98.5,
+      181
+    ],
+    [
+      98.5,
+      181
+    ],
+    [
+      98.5,
+      181
+    ],
+    [
+      98.5,
+      181
+    ],
+    [
+      98.5,
+      181
+    ],
+    [
+      98.5,
+      181
+    ],
+    [
+      96.5,
+      160
+    ],
+    [
+      96.5,
+      160
+    ],
+    [
+      96.5,
+      160
+    ],
+    [
+      96.5,
+      160
+    ],
+    [
+      96.5,
+      160
+    ],
+    [
+      96.5,
+      160
+    ],
+    [
+      98.5,
+      164
+    ],
+    [
+      98.5,
+      164
+    ],
+    [
+      98.5,
+      164
+    ],
+    [
+      98.5,
+      164
+    ],
+    [
+      98.5,
+      164
+    ],
+    [
+      98.5,
+      164
+    ],
+    [
+      94.5,
+      162
+    ],
+    [
+      94.5,
+      162
+    ],
+    [
+      94.5,
+      162
+    ],
+    [
+      94.5,
+      162
+    ],
+    [
+      94.5,
+      162
+    ],
+    [
+      94.5,
+      162
+    ]
+  ],
+  "alphaBounds": [
+    [
+      21,
+      21,
+      176,
+      180
+    ],
+    [
+      24,
+      23,
+      175,
+      181
+    ],
+    [
+      19,
+      23,
+      176,
+      182
+    ],
+    [
+      14,
+      16,
+      175,
+      183
+    ],
+    [
+      8,
+      49,
+      178,
+      181
+    ],
+    [
+      21,
+      23,
+      175,
+      181
+    ],
+    [
+      16,
+      32,
+      177,
+      159
+    ],
+    [
+      18,
+      33,
+      179,
+      160
+    ],
+    [
+      17,
+      35,
+      173,
+      160
+    ],
+    [
+      15,
+      22,
+      171,
+      159
+    ],
+    [
+      14,
+      54,
+      175,
+      158
+    ],
+    [
+      17,
+      34,
+      175,
+      159
+    ],
+    [
+      20,
+      20,
+      177,
+      165
+    ],
+    [
+      25,
+      26,
+      176,
+      163
+    ],
+    [
+      16,
+      26,
+      174,
+      164
+    ],
+    [
+      20,
+      12,
+      177,
+      165
+    ],
+    [
+      18,
+      29,
+      181,
+      166
+    ],
+    [
+      20,
+      26,
+      178,
+      166
+    ],
+    [
+      16,
+      31,
+      173,
+      162
+    ],
+    [
+      13,
+      33,
+      173,
+      164
+    ],
+    [
+      15,
+      33,
+      173,
+      158
+    ],
+    [
+      15,
+      21,
+      174,
+      162
+    ],
+    [
+      9,
+      51,
+      175,
+      162
+    ],
+    [
+      15,
+      34,
+      172,
+      162
+    ]
+  ],
+  "alphaThreshold": 0.025,
+  "camera": {
+    "worldUnitsPerPixel": 0.009433962264150943
+  },
+  "actions": {
+    "idle": {
+      "image": "atlas.png",
+      "frames": 1,
+      "frameIndices": [
+        0
+      ],
+      "fps": 1,
+      "loop": true
+    },
+    "walk": {
+      "image": "atlas.png",
+      "frames": 2,
+      "frameIndices": [
+        1,
+        2
+      ],
+      "fps": 6,
+      "loop": true,
+      "nominalSpeedMetresPerSecond": 1.75
+    },
+    "attack_sword": {
+      "image": "atlas.png",
+      "frames": 4,
+      "frameIndices": [
+        0,
+        3,
+        4,
+        5
+      ],
+      "phaseStarts": [
+        0,
+        0.24,
+        0.55,
+        0.8
+      ],
+      "fps": 6,
+      "loop": false
+    }
+  },
+  "limitations": [
+    "Four actually drawn directions, no invented diagonal or mirrored views.",
+    "Six authored poses, not a skeletal animation or generated in-between sequence.",
+    "One fixed support-plane pivot per direction across all six source cells; no per-frame fitting or scaling.",
+    "No independent corpse drawing. A real defeat may briefly fade the current pose.",
+    "Windup, active and recovery use the real EnemyCombat phase, not a separate timer."
+  ]
+}

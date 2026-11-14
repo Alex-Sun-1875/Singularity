@@ -1,0 +1,68 @@
+{
+  "version": "unified-gold-skill-v14",
+  "date": "2026-11-08",
+  "userDirection": "Thicken the small circular skill frames and refine their construction and decoration while retaining the current gold brightness.",
+  "ownership": "Project-original deterministic SVG refinement of unified-gold-skill-v13. No generation or external downloads.",
+  "palette": {
+    "metal": "#B99456",
+    "light": "#D2B985",
+    "ornament": "#C29B5A",
+    "glint": "#D9CCA2",
+    "low": "#AB853B",
+    "mid": "#BE995A",
+    "shadow": "#1D170C"
+  },
+  "geometry": {
+    "outerRadius": 250.5,
+    "previousMetalBand": 16.5,
+    "metalBand": 27,
+    "totalVisibleBezel": 33.425,
+    "diameterUnchanged": true,
+    "approximateBezelAt58": 3.786,
+    "approximateBezelAt64": 4.178,
+    "approximateBezelAt86": 5.615
+  },
+  "construction": "Outer raised lip, two narrow chased channels, recessed inner seam and return lip. The wider metal face leaves space for four native twin-leaf scroll groups. Floral scrolls remain native UiChrome paths, not baked into this bitmap.",
+  "exporter": "@resvg/resvg-js@2.6.2 (MPL-2.0), existing project dependency",
+  "assets": [
+    {
+      "id": "unified-gold-skill-v14",
+      "source": "source-art/ui/clean-gold-v11/unified-gold-skill-v14.svg",
+      "sourceSHA256": "ac0a72bab78d5ff7c9f618f98f41192ffcbe73adee7462ff5d500210c59ba7fb",
+      "derivedFrom": "source-art/ui/clean-gold-v11/unified-gold-skill-v13.svg",
+      "asset": "src/cocos/assets/resources/ui/quiet-bronze/unified-gold-skill-v14.png",
+      "pngSHA256": "48294406ea86f4673038e8c0d2182a9b6b798dbcf2405f9b5ed3c8cb595ca2eb",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 106392
+    }
+  ],
+  "artReview": {
+    "isolated": "Inspected direct-vector 120 px / 64 px comparison after expanding total bezel to33.425 source px; the thicker construction is distinct from v13 and preserves the gold palette and silhouette.",
+    "runtime": "Inspected actual desktop DPR2, mobile844x390 and narrow667x375 captures. Thick layered bezel and four axis-aligned paired-leaf engravings remain clear of icons, hotkeys and rank badges; neutral-gold palette retained. Small-size texture aliasing resolved with mipmapped non-atlased skill frame.",
+    "userAcceptance": "Not recorded.",
+    "evidence": [
+      "src/cocos/test-results/hud-skill-v14-comparison.png",
+      "src/cocos/test-results/hud-skill-v14-outdoor.png",
+      "src/cocos/test-results/hud-skill-v14-mobile.png",
+      "src/cocos/test-results/hud-skill-v14-narrow.png"
+    ]
+  },
+  "sampling": {
+    "filter": "Trilinear mipmaps, 10 levels; separate non-packable SpriteFrame for skill-v14 only.",
+    "reason": "Keep fine metal channels smooth at native 52/58/86 logical-pixel controls and mobile CSS sizes.",
+    "engineReference": "https://docs.cocos.com/creator/3.8/manual/zh/asset/texture.html",
+    "source": "UiSkin.ts plus Cocos-generated PNG meta with mipfilter linear and genMipmaps true."
+  },
+  "validation": {
+    "typescript": "npm run check passed",
+    "build": "Cocos Creator3.8.8 web-mobile build hud-skill-v14-final completed using an isolated project snapshot with matching UI source/assets.",
+    "runtime": "src/cocos/test-results/hud-skill-v14-review.json",
+    "skillTextures": "All7 controls loaded mipmapped unpacked v14 texture.",
+    "names": "Default hidden and pause toggle verified.",
+    "mask": "Disabled mask constrained inside 0.84 diameter opening; cooldown center preserved.",
+    "errors": 0
+  }
+}

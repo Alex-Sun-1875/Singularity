@@ -1,0 +1,56 @@
+{
+  "recorded": "2026-11-13T02:14:29.808031+00:00",
+  "version": "0.3.34",
+  "buildMode": "guest-test",
+  "uploaded": false,
+  "platformVerified": false,
+  "change": "Supply belt starts hidden; minimap bottle still toggles the entire four-slot belt.",
+  "investigation": {
+    "previousVersion": "0.3.33",
+    "previousDefaultExpanded": true,
+    "previousTogglePresent": true,
+    "previousDesktopAndTouchToggleReproduced": true,
+    "reportedPlatformFailureReproduced": false,
+    "packagedHudDiffOnlyDefaultState": true
+  },
+  "validation": {
+    "typescript": "npm run check and npm run check:core passed",
+    "webBuild": "concept-2d, Cocos 3.8.8",
+    "desktop": "1280x720 -> 1440x900",
+    "mobile": "844x390 DPR3 -> 932x430 DPR3",
+    "initialHidden": true,
+    "pointerClickAndTouchToggle": true,
+    "hiddenBeltAndChildrenInactive": true,
+    "hiddenAreaDoesNotInterceptInput": true,
+    "resizePreservesHiddenAndExpanded": true,
+    "toggleLeavesStockMenusAimAndAutomationUnchanged": true,
+    "pageErrors": [],
+    "officialConversion": true,
+    "packageDefaultHiddenMarker": true,
+    "packageToggleMarkers": true,
+    "packagedHudMatchesPreviousExceptDefault": true
+  },
+  "evidence": {
+    "baseline": "../test-results/supply-belt-baseline/report.json",
+    "fixed": "../test-results/supply-belt-hidden/report.json",
+    "sourcesChangedSince033": [
+      "src/cocos/assets/scripts/app/BuildInfo.ts",
+      "src/cocos/assets/scripts/app/Hud.ts"
+    ],
+    "scriptsChecked": 201,
+    "bundle": "assets/main/index.9fc14.js"
+  },
+  "package": {
+    "path": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-supplies-hidden\\SwordAndFire_0.3.34_TapTap_guest-test_20261113T021323Z\\SwordAndFire_0.3.34_TapTap_guest-test_20261113T021323Z.zip",
+    "bytes": 224521010,
+    "sha256": "c62634444c169c28954022599600f85ef21e825f5059e8805024d8cd3ce4174c",
+    "subpackages": 76,
+    "loginMode": "guest",
+    "localSaveOnly": true
+  },
+  "pending": [
+    "Real TapTap touch and background/resume acceptance; browser validation does not establish physical-device compatibility.",
+    "Production login service remains pending; guest-test package only."
+  ],
+  "officialReference": "https://docs.cocos.com/creator/3.8/manual/zh/scripting/basic-node-api"
+}

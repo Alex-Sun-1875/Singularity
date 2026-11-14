@@ -1,0 +1,142 @@
+{
+  "status": "core-mechanisms-integrated-and-probed; Cocos visual acceptance separate",
+  "profiles": 36,
+  "legacyProfiles": [
+    "R1-1",
+    "R1-2",
+    "R1-3",
+    "BOSS_R1"
+  ],
+  "profileMovesVerified": 51,
+  "sourceHashes": {
+    "assets/scripts/core/EnemyCombat.ts": "b996dd7e710b30557c09e4ff97cec9d949b33003feb1e100776bd41daf735583",
+    "assets/scripts/core/GameSession.ts": "ae39cd4231f59d66ab0f8e8e8d567ff376400ad60f140585cbb3f4d32ae9f32e",
+    "assets/scripts/core/PureCombat.ts": "a86485586dcf42ebc4ec67348ec0d7c8e4e1bfaaaa6ef2aa4dd61ab6787f9562",
+    "assets/scripts/core/CombatPersistence.ts": "7d033fc5b9be02550b5a4596e5aae69a4599d1053a9d008bb06bbeb2e0b4f98c",
+    "assets/scripts/data/EnemyCombat.ts": "7ad70ad1bd7e9ab39a86c74ae019103f4048f1d31ee3815dc2786dd347c210b0"
+  },
+  "reports": [
+    {
+      "file": "src/cocos/temp/enemy-runtime-probes.json",
+      "sha256": "fb5c7d229703ec06bee5a05466b6f400c70da90e86fb7af9050c2f0ce7999d3a"
+    },
+    {
+      "file": "src/cocos/temp/enemy-f13-real-nav-probe.json",
+      "sha256": "11d900815241376f351d63d99e228efa5fa31062758709ab6e0bd8a7d47811b2"
+    },
+    {
+      "file": "src/cocos/temp/enemy-anchor-real-wall-probe.json",
+      "sha256": "4dd07a61a56cc31cce7919dbe9435d706ddf5652421582a5a6951d06cded9cb1"
+    },
+    {
+      "file": "src/cocos/temp/enemy-final-boundaries.json",
+      "sha256": "c2e06dfeb357e99ed44e0c613f3f7299b727f62396c4747e5317d4e1a4a75087"
+    }
+  ],
+  "runtimeDataRegenerated": false,
+  "artAcceptance": "No new claim: representative Cocos image/gait/turn/transition review belongs to root sample build",
+  "stationaryElite06": {
+    "file": "src/cocos/temp/elite06-stationary-real-nav-probe.json",
+    "sha256": "5cbab4dda471defb6d1bdd4667e7a6d2c8ccb752f89cf7be0563196df244b343",
+    "area": "U1-06",
+    "axis": {
+      "from": {
+        "x": 0,
+        "z": 15
+      },
+      "to": {
+        "x": 70,
+        "z": -20
+      },
+      "toArea": "U1-05",
+      "angle": 2.0344439357957027,
+      "adaptation": "Current physical exit axis, not an asserted door model; third sword ground cut30m is bounded adapter geometry."
+    },
+    "sourceHashes": {
+      "assets/scripts/core/EnemyCombat.ts": "b996dd7e710b30557c09e4ff97cec9d949b33003feb1e100776bd41daf735583",
+      "assets/scripts/core/GameSession.ts": "ae39cd4231f59d66ab0f8e8e8d567ff376400ad60f140585cbb3f4d32ae9f32e",
+      "assets/scripts/data/EnemyCombat.ts": "7ad70ad1bd7e9ab39a86c74ae019103f4048f1d31ee3815dc2786dd347c210b0"
+    },
+    "cases": 6
+  },
+  "representativeCocosArtAndTextureEvidence": [
+    {
+      "concept": "mine-crawler",
+      "file": "src/cocos/test-results/enemy-combat-v1/mine-crawler-runtime.json",
+      "sha256": "c48a7766d32bf8fbc8e68b09847c773dd0d38c6069a86a87803a873bc1471993",
+      "area": "H04",
+      "seen": [
+        "walk-0",
+        "walk-1",
+        "attack"
+      ],
+      "afterUnload": {
+        "refCount": 0,
+        "isValid": false,
+        "heroValid": true,
+        "ownership": {
+          "disposed": false,
+          "enemyTextureCount": 0,
+          "estimatedEnemyRgbaBytes": 0,
+          "textures": [],
+          "heroAndNpcRefsOwned": false
+        }
+      },
+      "reload": {
+        "concept": "mine-crawler",
+        "refCount": 1,
+        "width": 1024,
+        "height": 1024,
+        "valid": true,
+        "failure": ""
+      },
+      "consoleErrors": 0,
+      "requestFailures": 0,
+      "rootVisualReview": "PASS after real game sample at7473",
+      "native3D": "legacy unchanged"
+    },
+    {
+      "concept": "mine-worker",
+      "file": "src/cocos/test-results/enemy-combat-v1/mine-worker-runtime.json",
+      "sha256": "c8149a9761d38bc26c74e7be36a3cf107b43c698f6a0e9ed48ac8b2b11c43af4",
+      "area": "H03",
+      "seen": [
+        "walk-0",
+        "walk-1",
+        "attack"
+      ],
+      "afterUnload": {
+        "refCount": 0,
+        "isValid": false,
+        "heroValid": true,
+        "ownership": {
+          "disposed": false,
+          "enemyTextureCount": 0,
+          "estimatedEnemyRgbaBytes": 0,
+          "textures": [],
+          "heroAndNpcRefsOwned": false
+        }
+      },
+      "reload": {
+        "concept": "mine-worker",
+        "refCount": 1,
+        "width": 1024,
+        "height": 1024,
+        "valid": true,
+        "failure": ""
+      },
+      "consoleErrors": 0,
+      "requestFailures": 0,
+      "rootVisualReview": "PASS after real game sample at7473",
+      "native3D": "legacy unchanged"
+    }
+  ],
+  "sourceHashesCurrentWorkingTree": {
+    "assets/scripts/core/EnemyCombat.ts": "b996dd7e710b30557c09e4ff97cec9d949b33003feb1e100776bd41daf735583",
+    "assets/scripts/core/GameSession.ts": "ae39cd4231f59d66ab0f8e8e8d567ff376400ad60f140585cbb3f4d32ae9f32e",
+    "assets/scripts/core/PureCombat.ts": "a86485586dcf42ebc4ec67348ec0d7c8e4e1bfaaaa6ef2aa4dd61ab6787f9562",
+    "assets/scripts/core/CombatPersistence.ts": "7d033fc5b9be02550b5a4596e5aae69a4599d1053a9d008bb06bbeb2e0b4f98c",
+    "assets/scripts/data/EnemyCombat.ts": "7ad70ad1bd7e9ab39a86c74ae019103f4048f1d31ee3815dc2786dd347c210b0"
+  },
+  "evidenceRefresh": "Report links and source hashes refreshed from existing official probe records; no new runtime code/probe execution implied"
+}

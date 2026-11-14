@@ -1,0 +1,834 @@
+{
+  "date": "2026-11-04",
+  "tool": "Blender 4.5.15 LTS",
+  "script": "tools/materials/export_pbr_runtime_v3.py",
+  "credit": "Powered by Poly Haven; Fabric082A and Grass007 from ambientCG",
+  "licenseSources": [
+    "https://polyhaven.com/license",
+    "https://docs.ambientcg.com/license/"
+  ],
+  "processing": {
+    "sourcePolicy": "Read-only official source files verified against source manifest SHA256.",
+    "resize": "Blender native compositor Scale ABSOLUTE 512x512; float compositing.",
+    "albedo": "sRGB input -> scene-linear scale -> Standard sRGB PNG output, no look/exposure/dye.",
+    "data": "Non-Color input (including original PNG16) -> float scale -> Raw PNG8 output.",
+    "normal": "Matched OpenGL +Y data; no green flip, generated normals or cross-asset mixing.",
+    "pbr": "Blender native Separate/Combine RGBA: R=AO, G=roughness, B=0, implicit A=1.",
+    "quantization": "Explicit PNG8 runtime export after float resampling; originals retain original bit depth.",
+    "cocos": "builtin-standard USE_PBR_MAP; roughness=1, occlusion=1, metallic=0; mipfilter linear."
+  },
+  "materials": [
+    {
+      "surface": "wood",
+      "id": "grey-planks",
+      "sourceAsset": "wood_planks_grey",
+      "sourcePage": "https://polyhaven.com/a/wood_planks_grey",
+      "license": "CC0-1.0",
+      "sourceManifest": "assets/materials/chapter-one-v3/pbr-library/manifest.json",
+      "sources": [
+        {
+          "role": "albedo",
+          "file": "grey-planks/albedo.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/wood_planks_grey/wood_planks_grey_diff_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/wood_planks_grey/wood_planks_grey_diff_1k.png",
+          "officialMd5": "d60af478ac79df738c418977367b7e05",
+          "sha256": "3e6aeb842edd813759fdc96a6ffe6b695c888280f42501de589442311749ac5d",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 5566063,
+          "colorSpace": "sRGB",
+          "pngBitDepth": 16,
+          "storedImageMode": "RGB",
+          "verifiedFile": "assets/materials/chapter-one-v3/pbr-library/grey-planks/albedo.png",
+          "verifiedSha256": "3e6aeb842edd813759fdc96a6ffe6b695c888280f42501de589442311749ac5d"
+        },
+        {
+          "role": "normal",
+          "file": "grey-planks/normal.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/wood_planks_grey/wood_planks_grey_nor_gl_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/wood_planks_grey/wood_planks_grey_nor_gl_1k.png",
+          "officialMd5": "0133a783487fff34b45edd8196878465",
+          "sha256": "a9f2ad602eca2d59e84f203b1087e819e62ae517532bb25f7eb02a13c826e08b",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 5350344,
+          "colorSpace": "linear",
+          "pngBitDepth": 16,
+          "storedImageMode": "RGB",
+          "verifiedFile": "assets/materials/chapter-one-v3/pbr-library/grey-planks/normal.png",
+          "verifiedSha256": "a9f2ad602eca2d59e84f203b1087e819e62ae517532bb25f7eb02a13c826e08b"
+        },
+        {
+          "role": "roughness",
+          "file": "grey-planks/roughness.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/wood_planks_grey/wood_planks_grey_rough_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/wood_planks_grey/wood_planks_grey_rough_1k.png",
+          "officialMd5": "d519c5f0d242e2fd3534536572118597",
+          "sha256": "f6d4d20bd344335b9f114d2f6873dffe8b62e774d268dd6fe43750caa045643e",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 1832684,
+          "colorSpace": "linear",
+          "pngBitDepth": 16,
+          "storedImageMode": "I;16",
+          "verifiedFile": "assets/materials/chapter-one-v3/pbr-library/grey-planks/roughness.png",
+          "verifiedSha256": "f6d4d20bd344335b9f114d2f6873dffe8b62e774d268dd6fe43750caa045643e"
+        },
+        {
+          "role": "ao",
+          "file": "grey-planks/ao.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/wood_planks_grey/wood_planks_grey_ao_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/wood_planks_grey/wood_planks_grey_ao_1k.png",
+          "officialMd5": "e5fd885bc3eda550b457c5028abf82d0",
+          "sha256": "fa5198238930aacb7a081fde36372fab1c3895f806046165da1566c4fbdb27cf",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 1264854,
+          "colorSpace": "linear",
+          "pngBitDepth": 16,
+          "storedImageMode": "RGB",
+          "verifiedFile": "assets/materials/chapter-one-v3/pbr-library/grey-planks/ao.png",
+          "verifiedSha256": "fa5198238930aacb7a081fde36372fab1c3895f806046165da1566c4fbdb27cf"
+        }
+      ],
+      "tileMetres": [
+        1.5,
+        1.5
+      ],
+      "designTileMetres": null,
+      "physicalScaleStatus": "official API dimensions in millimetres; converted to metres",
+      "creationMethod": "see source metadata",
+      "normalConvention": "OpenGL +Y",
+      "exports": [
+        {
+          "role": "color",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/wood-color.png",
+          "sha256": "ed836f9e6b38a1ff4b4bae22d229e48792f0e77196b02295421bcfb915b8e8d7",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 388130,
+          "colorSpace": "sRGB"
+        },
+        {
+          "role": "normal",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/wood-normal.png",
+          "sha256": "0f4317cb46b3a5358652064ee0ffc7eb1a8eb2cd0f61bb5ee837469def8bc6a7",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 418091,
+          "colorSpace": "linear data"
+        },
+        {
+          "role": "pbr",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/wood-pbr.png",
+          "sha256": "c0d5270024bc86a1ab2dafd240267e2edd771a683448da3081aea16411147c2c",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 251392,
+          "colorSpace": "linear data"
+        }
+      ]
+    },
+    {
+      "surface": "cobble",
+      "id": "grey-paving",
+      "sourceAsset": "cobblestone_floor_08",
+      "sourcePage": "https://polyhaven.com/a/cobblestone_floor_08",
+      "license": "CC0-1.0",
+      "sourceManifest": "assets/materials/chapter-one-v3/pbr-library/manifest.json",
+      "sources": [
+        {
+          "role": "albedo",
+          "file": "grey-paving/albedo.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/cobblestone_floor_08/cobblestone_floor_08_diff_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/cobblestone_floor_08/cobblestone_floor_08_diff_1k.png",
+          "officialMd5": "9f42289364d5c92b26f15e8dc97a3fe2",
+          "sha256": "b59d5660021f7adfc303b2924f5351aa80c5c36fc73fe378a204f7f739602b0a",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 1951481,
+          "colorSpace": "sRGB",
+          "pngBitDepth": 8,
+          "storedImageMode": "RGB",
+          "verifiedFile": "assets/materials/chapter-one-v3/pbr-library/grey-paving/albedo.png",
+          "verifiedSha256": "b59d5660021f7adfc303b2924f5351aa80c5c36fc73fe378a204f7f739602b0a"
+        },
+        {
+          "role": "normal",
+          "file": "grey-paving/normal.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/cobblestone_floor_08/cobblestone_floor_08_nor_gl_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/cobblestone_floor_08/cobblestone_floor_08_nor_gl_1k.png",
+          "officialMd5": "65b0b7b23a97753aea97143c31727d39",
+          "sha256": "0a6d3f1205c76ce64b01d04f22b570d239fd82b24df3be29791451f741ee4abb",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 2126688,
+          "colorSpace": "linear",
+          "pngBitDepth": 8,
+          "storedImageMode": "RGB",
+          "verifiedFile": "assets/materials/chapter-one-v3/pbr-library/grey-paving/normal.png",
+          "verifiedSha256": "0a6d3f1205c76ce64b01d04f22b570d239fd82b24df3be29791451f741ee4abb"
+        },
+        {
+          "role": "roughness",
+          "file": "grey-paving/roughness.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/cobblestone_floor_08/cobblestone_floor_08_rough_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/cobblestone_floor_08/cobblestone_floor_08_rough_1k.png",
+          "officialMd5": "3645113707917a4e956d881654fd93ae",
+          "sha256": "c44f6bc7b7280c36fe51c7c892d8413b09b61ae929df2169642e6c227429c93e",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 627072,
+          "colorSpace": "linear",
+          "pngBitDepth": 8,
+          "storedImageMode": "L",
+          "verifiedFile": "assets/materials/chapter-one-v3/pbr-library/grey-paving/roughness.png",
+          "verifiedSha256": "c44f6bc7b7280c36fe51c7c892d8413b09b61ae929df2169642e6c227429c93e"
+        },
+        {
+          "role": "ao",
+          "file": "grey-paving/ao.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/cobblestone_floor_08/cobblestone_floor_08_ao_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/cobblestone_floor_08/cobblestone_floor_08_ao_1k.png",
+          "officialMd5": "ec0ff83ab8090911fe31400701e3e89b",
+          "sha256": "585a62fe2c5fd54c6257c8ff5f8046571e70b3155ab1d05fd14e66f2fa6bd074",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 458404,
+          "colorSpace": "linear",
+          "pngBitDepth": 8,
+          "storedImageMode": "L",
+          "verifiedFile": "assets/materials/chapter-one-v3/pbr-library/grey-paving/ao.png",
+          "verifiedSha256": "585a62fe2c5fd54c6257c8ff5f8046571e70b3155ab1d05fd14e66f2fa6bd074"
+        }
+      ],
+      "tileMetres": [
+        2.0,
+        2.0
+      ],
+      "designTileMetres": null,
+      "physicalScaleStatus": "official API dimensions in millimetres; converted to metres",
+      "creationMethod": "see source metadata",
+      "normalConvention": "OpenGL +Y",
+      "exports": [
+        {
+          "role": "color",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/cobble-color.png",
+          "sha256": "7b2dc0a80737713f292ce2d1ace9df32fcd2d4e309f93837b171676394018cd2",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 485905,
+          "colorSpace": "sRGB"
+        },
+        {
+          "role": "normal",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/cobble-normal.png",
+          "sha256": "396e2bd76164d3bf85b03e1169e5587e667cc770dad84e75fff93dbf5176be0e",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 561553,
+          "colorSpace": "linear data"
+        },
+        {
+          "role": "pbr",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/cobble-pbr.png",
+          "sha256": "4d89744b28e85500c5b8c3b517d43f10447653c7799d5b39397864798483a8d9",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 379629,
+          "colorSpace": "linear data"
+        }
+      ]
+    },
+    {
+      "surface": "rock",
+      "id": "natural-rock",
+      "sourceAsset": "rock_boulder_dry",
+      "sourcePage": "https://polyhaven.com/a/rock_boulder_dry",
+      "license": "CC0-1.0",
+      "sourceManifest": "assets/materials/chapter-one-v3/pbr-library/manifest.json",
+      "sources": [
+        {
+          "role": "albedo",
+          "file": "natural-rock/albedo.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/rock_boulder_dry/rock_boulder_dry_diff_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/rock_boulder_dry/rock_boulder_dry_diff_1k.png",
+          "officialMd5": "3903508680ae823cd0d3c843fccfdf5a",
+          "sha256": "0bfb547e1785e4639a3735b2412099dac8d3077e39777299e4e273da6efd8ed5",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 5690647,
+          "colorSpace": "sRGB",
+          "pngBitDepth": 16,
+          "storedImageMode": "RGB",
+          "verifiedFile": "assets/materials/chapter-one-v3/pbr-library/natural-rock/albedo.png",
+          "verifiedSha256": "0bfb547e1785e4639a3735b2412099dac8d3077e39777299e4e273da6efd8ed5"
+        },
+        {
+          "role": "normal",
+          "file": "natural-rock/normal.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/rock_boulder_dry/rock_boulder_dry_nor_gl_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/rock_boulder_dry/rock_boulder_dry_nor_gl_1k.png",
+          "officialMd5": "90a2f0d635e2216aa6ce4ac927459c7f",
+          "sha256": "7ae21a2702d613d9d3eedcfb8b42d212b69302c07e2c4fd94ecaa91d52e9345b",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 5462248,
+          "colorSpace": "linear",
+          "pngBitDepth": 16,
+          "storedImageMode": "RGB",
+          "verifiedFile": "assets/materials/chapter-one-v3/pbr-library/natural-rock/normal.png",
+          "verifiedSha256": "7ae21a2702d613d9d3eedcfb8b42d212b69302c07e2c4fd94ecaa91d52e9345b"
+        },
+        {
+          "role": "roughness",
+          "file": "natural-rock/roughness.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/rock_boulder_dry/rock_boulder_dry_rough_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/rock_boulder_dry/rock_boulder_dry_rough_1k.png",
+          "officialMd5": "4b293c21fd24f194a7f512b1f05c363c",
+          "sha256": "ef66a872c0197e766f024cfaee95a48589c3435fa83581840dffdc2523a9a19c",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 2520145,
+          "colorSpace": "linear",
+          "pngBitDepth": 16,
+          "storedImageMode": "RGB",
+          "verifiedFile": "assets/materials/chapter-one-v3/pbr-library/natural-rock/roughness.png",
+          "verifiedSha256": "ef66a872c0197e766f024cfaee95a48589c3435fa83581840dffdc2523a9a19c"
+        },
+        {
+          "role": "ao",
+          "file": "natural-rock/ao.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/rock_boulder_dry/rock_boulder_dry_ao_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/rock_boulder_dry/rock_boulder_dry_ao_1k.png",
+          "officialMd5": "b5dc46ece4362a3b6721e5293e3aeda6",
+          "sha256": "256cf33b664f8504845a5de69cf229da2bf49bd68ba270ff5ec9ecda32c0ee1f",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 1795337,
+          "colorSpace": "linear",
+          "pngBitDepth": 16,
+          "storedImageMode": "I;16",
+          "verifiedFile": "assets/materials/chapter-one-v3/pbr-library/natural-rock/ao.png",
+          "verifiedSha256": "256cf33b664f8504845a5de69cf229da2bf49bd68ba270ff5ec9ecda32c0ee1f"
+        }
+      ],
+      "tileMetres": [
+        1.8,
+        1.8
+      ],
+      "designTileMetres": null,
+      "physicalScaleStatus": "official API dimensions in millimetres; converted to metres",
+      "creationMethod": "see source metadata",
+      "normalConvention": "OpenGL +Y",
+      "exports": [
+        {
+          "role": "color",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/rock-color.png",
+          "sha256": "3871a645caa7e0653aefc66cc0c28538cb45883a97f279e1bc2fa78183d0b3b7",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 474797,
+          "colorSpace": "sRGB"
+        },
+        {
+          "role": "normal",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/rock-normal.png",
+          "sha256": "d577003a414f3e3ae51695f9f5d47bfaa99af9180225a97885cc7bde01a22fee",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 450937,
+          "colorSpace": "linear data"
+        },
+        {
+          "role": "pbr",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/rock-pbr.png",
+          "sha256": "b62eeebc385ac2c71a07bed7b6ee79f598c2971f42d768de45ad4c8210176207",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 367603,
+          "colorSpace": "linear data"
+        }
+      ]
+    },
+    {
+      "surface": "fabric",
+      "id": "neutral-woven",
+      "sourceAsset": "Fabric082A",
+      "sourcePage": "https://ambientcg.com/a/Fabric082A",
+      "license": "CC0-1.0",
+      "sourceManifest": "assets/materials/chapter-one-v3/pbr-library/manifest.json",
+      "sources": [
+        {
+          "role": "albedo",
+          "file": "neutral-woven/albedo.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/Fabric082A/Fabric082A_1K-PNG_Color.png",
+          "sourceUrl": "https://ambientcg.com/get?file=Fabric082A_1K-PNG.zip#Fabric082A_1K-PNG_Color.png",
+          "officialMd5": null,
+          "officialMd5Note": "No per-file MD5 published by ambientCG API. Original ZIP verified using official x-bz-content-sha1; entry integrity checked against its ZIP CRC32.",
+          "officialArchiveHash": {
+            "algorithm": "SHA1",
+            "value": "2b38a8922d984646510163c2bd1005525308e051",
+            "source": "x-bz-content-sha1 HTTP response header"
+          },
+          "officialZipCrc32": "252d0235",
+          "sha256": "05dd11ee9c29b07dc91df6d8e82e00c91355070eb44e7673c1e8ad266c23e335",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 683041,
+          "colorSpace": "sRGB",
+          "pngBitDepth": 8,
+          "storedImageMode": "P",
+          "verifiedFile": "assets/materials/chapter-one-v3/pbr-library/neutral-woven/albedo.png",
+          "verifiedSha256": "05dd11ee9c29b07dc91df6d8e82e00c91355070eb44e7673c1e8ad266c23e335"
+        },
+        {
+          "role": "normal",
+          "file": "neutral-woven/normal.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/Fabric082A/Fabric082A_1K-PNG_NormalGL.png",
+          "sourceUrl": "https://ambientcg.com/get?file=Fabric082A_1K-PNG.zip#Fabric082A_1K-PNG_NormalGL.png",
+          "officialMd5": null,
+          "officialMd5Note": "No per-file MD5 published by ambientCG API. Original ZIP verified using official x-bz-content-sha1; entry integrity checked against its ZIP CRC32.",
+          "officialArchiveHash": {
+            "algorithm": "SHA1",
+            "value": "2b38a8922d984646510163c2bd1005525308e051",
+            "source": "x-bz-content-sha1 HTTP response header"
+          },
+          "officialZipCrc32": "9769db14",
+          "sha256": "729345c636de108066a89aa8475d1768f9f4a65634e343c52324b0366a3adf3e",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 4883935,
+          "colorSpace": "linear",
+          "pngBitDepth": 16,
+          "storedImageMode": "RGB",
+          "verifiedFile": "assets/materials/chapter-one-v3/pbr-library/neutral-woven/normal.png",
+          "verifiedSha256": "729345c636de108066a89aa8475d1768f9f4a65634e343c52324b0366a3adf3e"
+        },
+        {
+          "role": "roughness",
+          "file": "neutral-woven/roughness.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/Fabric082A/Fabric082A_1K-PNG_Roughness.png",
+          "sourceUrl": "https://ambientcg.com/get?file=Fabric082A_1K-PNG.zip#Fabric082A_1K-PNG_Roughness.png",
+          "officialMd5": null,
+          "officialMd5Note": "No per-file MD5 published by ambientCG API. Original ZIP verified using official x-bz-content-sha1; entry integrity checked against its ZIP CRC32.",
+          "officialArchiveHash": {
+            "algorithm": "SHA1",
+            "value": "2b38a8922d984646510163c2bd1005525308e051",
+            "source": "x-bz-content-sha1 HTTP response header"
+          },
+          "officialZipCrc32": "b9c89aac",
+          "sha256": "cb7f56ad0558e70c7841b286e8bc4c2954a8f938eaee8836a65089c0bf95b1ea",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 503123,
+          "colorSpace": "linear",
+          "pngBitDepth": 8,
+          "storedImageMode": "L",
+          "verifiedFile": "assets/materials/chapter-one-v3/pbr-library/neutral-woven/roughness.png",
+          "verifiedSha256": "cb7f56ad0558e70c7841b286e8bc4c2954a8f938eaee8836a65089c0bf95b1ea"
+        },
+        {
+          "role": "ao",
+          "file": "neutral-woven/ao.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/Fabric082A/Fabric082A_1K-PNG_AmbientOcclusion.png",
+          "sourceUrl": "https://ambientcg.com/get?file=Fabric082A_1K-PNG.zip#Fabric082A_1K-PNG_AmbientOcclusion.png",
+          "officialMd5": null,
+          "officialMd5Note": "No per-file MD5 published by ambientCG API. Original ZIP verified using official x-bz-content-sha1; entry integrity checked against its ZIP CRC32.",
+          "officialArchiveHash": {
+            "algorithm": "SHA1",
+            "value": "2b38a8922d984646510163c2bd1005525308e051",
+            "source": "x-bz-content-sha1 HTTP response header"
+          },
+          "officialZipCrc32": "b6a16c0f",
+          "sha256": "7e796580f7435a19af96c531951a8f9cb0500e9becad3907023d9f62fe023bbe",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 588826,
+          "colorSpace": "linear",
+          "pngBitDepth": 8,
+          "storedImageMode": "L",
+          "verifiedFile": "assets/materials/chapter-one-v3/pbr-library/neutral-woven/ao.png",
+          "verifiedSha256": "7e796580f7435a19af96c531951a8f9cb0500e9becad3907023d9f62fe023bbe"
+        }
+      ],
+      "tileMetres": null,
+      "designTileMetres": [
+        0.25,
+        0.25
+      ],
+      "physicalScaleStatus": "unknown; official API dimensions are zero and no measured scale is supplied",
+      "creationMethod": "surface-fully-procedural",
+      "normalConvention": "OpenGL +Y",
+      "exports": [
+        {
+          "role": "color",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/fabric-color.png",
+          "sha256": "aeb1f9f04ebc5b31e909b844cc3ffb8799da92437b4f71fe02096f375349191e",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 253617,
+          "colorSpace": "sRGB"
+        },
+        {
+          "role": "normal",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/fabric-normal.png",
+          "sha256": "e75e5811eda52e01133d43971b56ff13d632453bdc9f06663a405aa7b8662db1",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 233366,
+          "colorSpace": "linear data"
+        },
+        {
+          "role": "pbr",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/fabric-pbr.png",
+          "sha256": "19f3a95ee64ab66f380e5fa8144bba022474fb03ea80a4f1a96c52a2f307737f",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 305968,
+          "colorSpace": "linear data"
+        }
+      ]
+    },
+    {
+      "surface": "earth",
+      "id": "forest-earth",
+      "sourceAsset": "forest_ground_06",
+      "sourcePage": "https://polyhaven.com/a/forest_ground_06",
+      "license": "CC0-1.0",
+      "sourceManifest": "assets/materials/chapter-one-v3/terrain-library/manifest.json",
+      "sources": [
+        {
+          "role": "albedo",
+          "file": "forest-earth/albedo.jpg",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/forest_ground_06/forest_ground_06_diff_1k.jpg",
+          "officialMd5": "a91ecaf924f680905dd8be50b32bf3cb",
+          "sha256": "2bcfe6e3de263e50c236b1e7db09b674a4385e79f8906c94dce4c9d10afa7e18",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 851532,
+          "colorSpace": "sRGB",
+          "verifiedFile": "assets/materials/chapter-one-v3/terrain-library/forest-earth/albedo.jpg",
+          "verifiedSha256": "2bcfe6e3de263e50c236b1e7db09b674a4385e79f8906c94dce4c9d10afa7e18"
+        },
+        {
+          "role": "normal",
+          "file": "forest-earth/normal.jpg",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/forest_ground_06/forest_ground_06_nor_gl_1k.jpg",
+          "officialMd5": "67ce2b9c31cee76eda36947c0cf9b5b5",
+          "sha256": "73d28252b149b46c9274b3da84d2ffb6b7749ad9e2cf1c73906811dd90643822",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 1392106,
+          "colorSpace": "linear",
+          "verifiedFile": "assets/materials/chapter-one-v3/terrain-library/forest-earth/normal.jpg",
+          "verifiedSha256": "73d28252b149b46c9274b3da84d2ffb6b7749ad9e2cf1c73906811dd90643822"
+        },
+        {
+          "role": "roughness",
+          "file": "forest-earth/roughness.jpg",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/forest_ground_06/forest_ground_06_rough_1k.jpg",
+          "officialMd5": "8122a312bc6ecb99d5ddaab8a54bc458",
+          "sha256": "7eae1a43d6aaf62d5cfa421588348da44deffcbe7bdfe61ed758aef7a57a036e",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 745145,
+          "colorSpace": "linear",
+          "verifiedFile": "assets/materials/chapter-one-v3/terrain-library/forest-earth/roughness.jpg",
+          "verifiedSha256": "7eae1a43d6aaf62d5cfa421588348da44deffcbe7bdfe61ed758aef7a57a036e"
+        },
+        {
+          "role": "ao",
+          "file": "forest-earth/ao.jpg",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/forest_ground_06/forest_ground_06_ao_1k.jpg",
+          "officialMd5": "b9d40b4f51d8c28711d9ac0181b4685b",
+          "sha256": "8c0b015c87950ec3f5020319172fccd95195831c1ebe603a98685bbd9711780a",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 1049375,
+          "colorSpace": "linear",
+          "verifiedFile": "assets/materials/chapter-one-v3/terrain-library/forest-earth/ao.jpg",
+          "verifiedSha256": "8c0b015c87950ec3f5020319172fccd95195831c1ebe603a98685bbd9711780a"
+        }
+      ],
+      "tileMetres": [
+        2.11,
+        2.11
+      ],
+      "designTileMetres": null,
+      "physicalScaleStatus": "see source manifest",
+      "creationMethod": "see source metadata",
+      "normalConvention": "OpenGL +Y",
+      "exports": [
+        {
+          "role": "color",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/earth-color.png",
+          "sha256": "18dd11b12e2b861f2554e66cb051e4300dbd11a3b28e8fdf72310cce0bb653bc",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 467026,
+          "colorSpace": "sRGB"
+        },
+        {
+          "role": "normal",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/earth-normal.png",
+          "sha256": "1b138d1d1b0a7a1e7ecb7d4de2546102ce6eb7fcd46b4f3078608cc4bcd5480c",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 604381,
+          "colorSpace": "linear data"
+        },
+        {
+          "role": "pbr",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/earth-pbr.png",
+          "sha256": "02a39eaf471c3987d6923a9d9dcbc3146ea69340ef7380eedec90b3bbfa24721",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 486315,
+          "colorSpace": "linear data"
+        }
+      ]
+    },
+    {
+      "surface": "grass",
+      "id": "green-grass",
+      "sourceAsset": "Grass007",
+      "sourcePage": "https://ambientcg.com/a/Grass007",
+      "license": "CC0-1.0",
+      "sourceManifest": "assets/materials/chapter-one-v3/terrain-library/manifest.json",
+      "sources": [
+        {
+          "role": "albedo",
+          "file": "green-grass/albedo.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/terrain-library/green-grass/Grass007_1K-PNG_Color.png",
+          "sourceUrl": "https://ambientcg.com/get?file=Grass007_1K-PNG.zip#Grass007_1K-PNG_Color.png",
+          "officialMd5": null,
+          "officialMd5Note": "Official API does not publish per-file MD5. ZIP SHA1 is verified against the official download-server header; per-entry ZIP CRC32 verified.",
+          "officialArchiveHash": {
+            "algorithm": "SHA1",
+            "value": "cbfdd2ed1f8cb983c0b3756e696b76f44cda6767",
+            "source": "x-bz-content-sha1 HTTP response header"
+          },
+          "officialZipCrc32": "c7abad11",
+          "sha256": "992d6b402175402aebb0d507515a77531b71f3f96214b6cb9c7a5ece3ecdf6b7",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 1933647,
+          "colorSpace": "sRGB",
+          "pngBitDepth": 8,
+          "storedImageMode": "RGB",
+          "verifiedFile": "assets/materials/chapter-one-v3/terrain-library/green-grass/albedo.png",
+          "verifiedSha256": "992d6b402175402aebb0d507515a77531b71f3f96214b6cb9c7a5ece3ecdf6b7"
+        },
+        {
+          "role": "normal",
+          "file": "green-grass/normal.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/terrain-library/green-grass/Grass007_1K-PNG_NormalGL.png",
+          "sourceUrl": "https://ambientcg.com/get?file=Grass007_1K-PNG.zip#Grass007_1K-PNG_NormalGL.png",
+          "officialMd5": null,
+          "officialMd5Note": "Official API does not publish per-file MD5. ZIP SHA1 is verified against the official download-server header; per-entry ZIP CRC32 verified.",
+          "officialArchiveHash": {
+            "algorithm": "SHA1",
+            "value": "cbfdd2ed1f8cb983c0b3756e696b76f44cda6767",
+            "source": "x-bz-content-sha1 HTTP response header"
+          },
+          "officialZipCrc32": "8b620ae4",
+          "sha256": "34b66f23ee7ed75e7248f74bcd84b80bd8c9dc2d1c19127ec7494acca1774bdf",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 5864983,
+          "colorSpace": "linear",
+          "pngBitDepth": 16,
+          "storedImageMode": "RGB",
+          "verifiedFile": "assets/materials/chapter-one-v3/terrain-library/green-grass/normal.png",
+          "verifiedSha256": "34b66f23ee7ed75e7248f74bcd84b80bd8c9dc2d1c19127ec7494acca1774bdf"
+        },
+        {
+          "role": "roughness",
+          "file": "green-grass/roughness.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/terrain-library/green-grass/Grass007_1K-PNG_Roughness.png",
+          "sourceUrl": "https://ambientcg.com/get?file=Grass007_1K-PNG.zip#Grass007_1K-PNG_Roughness.png",
+          "officialMd5": null,
+          "officialMd5Note": "Official API does not publish per-file MD5. ZIP SHA1 is verified against the official download-server header; per-entry ZIP CRC32 verified.",
+          "officialArchiveHash": {
+            "algorithm": "SHA1",
+            "value": "cbfdd2ed1f8cb983c0b3756e696b76f44cda6767",
+            "source": "x-bz-content-sha1 HTTP response header"
+          },
+          "officialZipCrc32": "cb4cbe3d",
+          "sha256": "feacd7e71d8e45a4f580d640bd8efbfb2bccf1a667461b704aada8047dd65f46",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 620894,
+          "colorSpace": "linear",
+          "pngBitDepth": 8,
+          "storedImageMode": "L",
+          "verifiedFile": "assets/materials/chapter-one-v3/terrain-library/green-grass/roughness.png",
+          "verifiedSha256": "feacd7e71d8e45a4f580d640bd8efbfb2bccf1a667461b704aada8047dd65f46"
+        },
+        {
+          "role": "ao",
+          "file": "green-grass/ao.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/terrain-library/green-grass/Grass007_1K-PNG_AmbientOcclusion.png",
+          "sourceUrl": "https://ambientcg.com/get?file=Grass007_1K-PNG.zip#Grass007_1K-PNG_AmbientOcclusion.png",
+          "officialMd5": null,
+          "officialMd5Note": "Official API does not publish per-file MD5. ZIP SHA1 is verified against the official download-server header; per-entry ZIP CRC32 verified.",
+          "officialArchiveHash": {
+            "algorithm": "SHA1",
+            "value": "cbfdd2ed1f8cb983c0b3756e696b76f44cda6767",
+            "source": "x-bz-content-sha1 HTTP response header"
+          },
+          "officialZipCrc32": "8684b0ba",
+          "sha256": "1ce73b4d40a9239ccd80d599a47dd3c8d42ec0dbfa569bf74a7e4d7f3d9f5829",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 923727,
+          "colorSpace": "linear",
+          "pngBitDepth": 8,
+          "storedImageMode": "L",
+          "verifiedFile": "assets/materials/chapter-one-v3/terrain-library/green-grass/ao.png",
+          "verifiedSha256": "1ce73b4d40a9239ccd80d599a47dd3c8d42ec0dbfa569bf74a7e4d7f3d9f5829"
+        }
+      ],
+      "tileMetres": null,
+      "designTileMetres": [
+        2,
+        2
+      ],
+      "physicalScaleStatus": "unknown; official API dimensions are all zero",
+      "creationMethod": "surface-procedural-bitmap-elements",
+      "normalConvention": "OpenGL +Y",
+      "exports": [
+        {
+          "role": "color",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/grass-color.png",
+          "sha256": "b221e4423bbfc661fae4b74d6d4727699f8831ee2a80bf5be3a668d6ed7f1c56",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 547017,
+          "colorSpace": "sRGB"
+        },
+        {
+          "role": "normal",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/grass-normal.png",
+          "sha256": "1c71c6bae9095e4271a5477cfdd39bc40158b4cf033c878d73ff32823aeb9c67",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 586821,
+          "colorSpace": "linear data"
+        },
+        {
+          "role": "pbr",
+          "file": "src/cocos/assets/resources/surfaces/pbr-v3/grass-pbr.png",
+          "sha256": "362768cc6af67f6c840c383ab6835d5b1dcdf23db665a6108c163e82b5f1f8de",
+          "size": [
+            512,
+            512
+          ],
+          "pngBitDepth": 8,
+          "bytes": 498036,
+          "colorSpace": "linear data"
+        }
+      ]
+    }
+  ]
+}

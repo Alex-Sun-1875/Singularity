@@ -1,0 +1,2886 @@
+{
+  "schemaVersion": 1,
+  "contentVersion": "campaign-v6-design",
+  "date": "2026-11-08",
+  "status": "design-only; not runtime content",
+  "regions": [
+    {
+      "id": "R1",
+      "old": "石桥边地",
+      "name": "铁誓边境",
+      "act": 1,
+      "plate": "r1-stonebridge.png",
+      "theme": "钢灰、锈红、林绿；人类雇佣军与猎径陷阱",
+      "pool": "P_R1"
+    },
+    {
+      "id": "R2",
+      "old": "沉桥高地",
+      "name": "断岳高地",
+      "act": 2,
+      "plate": "r2-highlands.png",
+      "theme": "石蓝、松绿、冷银；矿兵与废弃采掘机",
+      "pool": "P_R2"
+    },
+    {
+      "id": "R3",
+      "old": "沉钟河湾",
+      "name": "风暴河湾",
+      "act": 3,
+      "plate": "r3-bellriver.png",
+      "theme": "海青、煤黑、琥珀；码头佣兵与古代钟卫",
+      "pool": "P_R3"
+    },
+    {
+      "id": "R4",
+      "old": "灰石城域",
+      "name": "黑冠城域",
+      "act": 4,
+      "plate": "r4-greyrock.png",
+      "theme": "夜蓝、蓝钢、象牙白；盾阵、重弩与警戒镜",
+      "pool": "P_R4"
+    },
+    {
+      "id": "U1",
+      "old": "旧誓下城",
+      "name": "誓火深城",
+      "act": 2,
+      "plate": "u1-oathcity.png",
+      "theme": "旧青铜、灰石、冷白炉光；机械遗卫与囚工看守",
+      "pool": "P_U1"
+    },
+    {
+      "id": "U2",
+      "old": "沉钟地宫与旧水道",
+      "name": "沉钟禁域",
+      "act": 3,
+      "plate": "u2-catacombs.png",
+      "theme": "铜绿、灰白石、深蓝、紫晶；闸卫与档案机械",
+      "pool": "P_U2"
+    }
+  ],
+  "levels": [
+    {
+      "id": "S01",
+      "region": "R1",
+      "name": "石桥镇",
+      "kind": "安全枢纽",
+      "encounter": "无",
+      "objective": "接寻宝合约，核对阵亡碑与近日油票",
+      "reward": "M1预支；商店；回镇人物场景",
+      "route": "镇内6内景互通，不把检查点变远程商店"
+    },
+    {
+      "id": "S02",
+      "region": "R1",
+      "name": "南渡码头",
+      "kind": "调查",
+      "encounter": "无",
+      "objective": "两份转运底簿比对，查出军车改道",
+      "reward": "Q3线索；金币20",
+      "route": "沿坡街回镇，码头不强制搬货"
+    },
+    {
+      "id": "S03",
+      "region": "R1",
+      "name": "空誓墓园",
+      "kind": "调查",
+      "encounter": "无",
+      "objective": "空墓日期与新锤痕比对",
+      "reward": "首次调查铁2+金币20",
+      "route": "田埂与旧墓门均可退，不惊扰居民开战"
+    },
+    {
+      "id": "S04",
+      "region": "R1",
+      "name": "血刃隘口",
+      "kind": "主线战斗",
+      "encounter": "R1-1×2+R1-3×1",
+      "objective": "分批救信使、归位车轴、亲读原信",
+      "reward": "M1夺匣包",
+      "route": "高坡绕后、正面分批；任务车不毁，战前后均有退路"
+    },
+    {
+      "id": "S05",
+      "region": "R1",
+      "name": "白桦猎场",
+      "kind": "安全/跟踪",
+      "encounter": "无",
+      "objective": "夜祈示范脚印，选择猎径",
+      "reward": "固定A06；夜祈商店；Q2起点",
+      "route": "猎商营地安全，未知猎径先观察"
+    },
+    {
+      "id": "S06",
+      "region": "R1",
+      "name": "芦苇避居营",
+      "kind": "安全/人物",
+      "encounter": "无",
+      "objective": "伤者指出押运去向，决定是否公开住处",
+      "reward": "Q2旁证；铁2+金币20",
+      "route": "只登记同意公开的道路，不向营地引怪"
+    },
+    {
+      "id": "S07",
+      "region": "R1",
+      "name": "断轮磨坊",
+      "kind": "据点",
+      "encounter": "R1-1×1+R1-2×1+R1-3×1",
+      "objective": "核对回短信号，开地窖E01",
+      "reward": "固定T02×3+C14；P_R1机会",
+      "route": "正门、侧巷或付款副本交涉；E01可原路退"
+    },
+    {
+      "id": "S08",
+      "region": "R1",
+      "name": "陷井谷",
+      "kind": "野外战",
+      "encounter": "R1-4×1+R1-1×2（含原隘口监守）",
+      "objective": "砍可见索桩、沿高道找誓痕隐龛",
+      "reward": "固定W08；原隐匣18%/监守25%传奇另算；P_R1机会",
+      "route": "高道可绕，谷底不设强制跳落"
+    },
+    {
+      "id": "S09",
+      "region": "R1",
+      "name": "灰披军营",
+      "kind": "据点",
+      "encounter": "R1-2×1+R1-3×1+R1-1×2",
+      "objective": "取扣押名单与兵饷副本",
+      "reward": "固定A01；Q1/Q3旁证；据点包",
+      "route": "交涉、帐后侧入、战斗三选；离场不重生"
+    },
+    {
+      "id": "S10",
+      "region": "R1",
+      "name": "裂隘关",
+      "kind": "主线首领",
+      "encounter": "BOSS_R1",
+      "objective": "击败队长后亲手抬杆",
+      "reward": "M2包；W02+T03×3独立待领",
+      "route": "场外检查点、12×10m战场、两石墩；死亡释放软边界"
+    },
+    {
+      "id": "S11",
+      "region": "R1",
+      "name": "松岬哨塔",
+      "kind": "观察战",
+      "encounter": "R1-3×1+R1-1×1",
+      "objective": "沿实体阶坡到塔顶看军营",
+      "reward": "固定A02；P_R1机会",
+      "route": "塔脚硬掩体、弩手可步行接近"
+    },
+    {
+      "id": "S12",
+      "region": "R1",
+      "name": "铁誓残院",
+      "kind": "遗迹/支线",
+      "encounter": "R1-2×1+R1-4×1",
+      "objective": "观察空基座，找搬运簿",
+      "reward": "Q1起点；金币30+铁3",
+      "route": "沿檐廊避正面，原铭牌可被独立记录"
+    },
+    {
+      "id": "S13",
+      "region": "R1",
+      "name": "断镐石场",
+      "kind": "可选首领/救援",
+      "encounter": "ELITE_01",
+      "objective": "解除监工控制，放下固定梯E02",
+      "reward": "V_E01（内含P_R1池奖）；Q5锤痕",
+      "route": "先疏散工人；交涉交出征用令也能解职领同包；梯由上方放"
+    },
+    {
+      "id": "S14",
+      "region": "R1",
+      "name": "湿林庄园",
+      "kind": "交涉据点",
+      "encounter": "R1-2×1+R1-3×1",
+      "objective": "核对两份契据，公开付款链",
+      "reward": "Q3/Q6证据；据点包",
+      "route": "会客正门、院墙侧门；成功交涉奖励不减"
+    },
+    {
+      "id": "S15",
+      "region": "R1",
+      "name": "古渠泵院",
+      "kind": "机关",
+      "encounter": "R1-4×1+R1-1×1",
+      "objective": "读泵痕，打开通U2-01的干阶E04",
+      "reward": "金币25+铁3；P_R1机会",
+      "route": "沿堤道可赴R3，深闸未开就回地表"
+    },
+    {
+      "id": "S16",
+      "region": "R1",
+      "name": "断岳驿口",
+      "kind": "过境",
+      "encounter": "无",
+      "objective": "实走R2入口并记录旅行",
+      "reward": "地图发现，无跨章自动奖励",
+      "route": "可以折返，后章未制作时明确边界"
+    },
+    {
+      "id": "S17",
+      "region": "R1",
+      "name": "峭壁洞窟",
+      "kind": "观察/近路",
+      "encounter": "无",
+      "objective": "从地表看封门，从U1内侧解E03",
+      "reward": "Q5路线；首次开门铁2",
+      "route": "未开门可原路回，不跳崖"
+    },
+    {
+      "id": "S18",
+      "region": "R1",
+      "name": "残旗军需站",
+      "kind": "探索",
+      "encounter": "R1-1×2",
+      "objective": "比对接应绳与取消信货号",
+      "reward": "固定A09；Q3起点；P_R1机会",
+      "route": "旧仓侧窗接近；副本不被火毁"
+    },
+    {
+      "id": "S19",
+      "region": "R1",
+      "name": "猎径伏杀地",
+      "kind": "野外/支线",
+      "encounter": "R1-4×1+R1-3×1+R1-1×1",
+      "objective": "先找受伤猎人或先解除伏兵，观察古兽",
+      "reward": "Q2进展；P_R1机会",
+      "route": "侧坡先救人；古兽可驱离，不强制击杀"
+    },
+    {
+      "id": "S20",
+      "region": "R1",
+      "name": "铁脊观察台",
+      "kind": "观察战",
+      "encounter": "R1-3×1+R1-2×1",
+      "objective": "读取军营侧背和旧路标",
+      "reward": "固定A14；P_R1机会",
+      "route": "有上下山实体路，敌人可沿路接近"
+    },
+    {
+      "id": "S01-T1",
+      "region": "R1",
+      "name": "第三杯旅店",
+      "kind": "安全内景",
+      "encounter": "无",
+      "objective": "弥菈展示样片，选动机与合同",
+      "reward": "M1接约分支；完整报酬预览",
+      "route": "拒约仍可独立调查"
+    },
+    {
+      "id": "S01-T2",
+      "region": "R1",
+      "name": "远征行会厅",
+      "kind": "安全内景",
+      "encounter": "无",
+      "objective": "对质副本，登记原件持有人",
+      "reward": "Q3核对；商人账户不复制",
+      "route": "回广场，两份合同不领两次奖"
+    },
+    {
+      "id": "S01-T3",
+      "region": "R1",
+      "name": "洛恩铁匠铺",
+      "kind": "安全内景",
+      "encounter": "无",
+      "objective": "识别锤痕、买靴、查看制造",
+      "reward": "固定J08教学；洛恩独立库存",
+      "route": "教学可跳，未学仍能用基础武器"
+    },
+    {
+      "id": "S01-T4",
+      "region": "R1",
+      "name": "南渡转运仓",
+      "kind": "安全内景",
+      "encounter": "无",
+      "objective": "按日期查信使来路",
+      "reward": "Q3旁证；首次金币15",
+      "route": "普通门回镇，不复制S02底簿原件"
+    },
+    {
+      "id": "S01-T5",
+      "region": "R1",
+      "name": "镇拘留所",
+      "kind": "人物内景",
+      "encounter": "无",
+      "objective": "查看被押者去向与缴械队长处理",
+      "reward": "M2选择回响；无处决掉装",
+      "route": "已投降者不再可攻击"
+    },
+    {
+      "id": "S01-T6",
+      "region": "R1",
+      "name": "归途广场亭",
+      "kind": "安全内景",
+      "encounter": "无",
+      "objective": "见获救工匠自行返回",
+      "reward": "Q5回返场景；按Q5唯一收据领奖",
+      "route": "休整不刷新人物奖励"
+    },
+    {
+      "id": "H01",
+      "region": "R2",
+      "name": "断岳山驿",
+      "kind": "安全过境",
+      "encounter": "无",
+      "objective": "看到运往矿镇的军车和伤者",
+      "reward": "地图发现；整备",
+      "route": "来路可回R1，不进章领大包"
+    },
+    {
+      "id": "H02",
+      "region": "R2",
+      "name": "岩炉镇",
+      "kind": "安全/调查",
+      "encounter": "无",
+      "objective": "查两种目击，见瑟维恩",
+      "reward": "研究商店J06；M3线索",
+      "route": "街巷安全，看守不追入住所"
+    },
+    {
+      "id": "H03",
+      "region": "R2",
+      "name": "熔镜工匠院",
+      "kind": "主线危机",
+      "encounter": "U1-1×1+R2-1×1",
+      "objective": "先疏散、压住镜架，再做散热回退试验",
+      "reward": "M3包",
+      "route": "固定卡销替代同伴；危机无隐形倒计时"
+    },
+    {
+      "id": "H04",
+      "region": "R2",
+      "name": "双裂采坑",
+      "kind": "地形战",
+      "encounter": "R2-1×2+R2-3×1",
+      "objective": "利用矿车拆开三敌接近线",
+      "reward": "P_R2机会；铁4",
+      "route": "上下采面有步行坡，退回坑外"
+    },
+    {
+      "id": "H05",
+      "region": "R2",
+      "name": "封炉矿井",
+      "kind": "机关",
+      "encounter": "R2-3×2",
+      "objective": "停机后操作上方井架开E05",
+      "reward": "铁3+金币30；P_R2机会",
+      "route": "不耗图纸材料，井未开保留来路"
+    },
+    {
+      "id": "H06",
+      "region": "R2",
+      "name": "伤工棚街",
+      "kind": "安全/人物",
+      "encounter": "无",
+      "objective": "确认被征工匠姓名并选证词去向",
+      "reward": "Q5旁证；金币25",
+      "route": "交谈不召敌，不增加人口管理"
+    },
+    {
+      "id": "H07",
+      "region": "R2",
+      "name": "天堑石梁",
+      "kind": "路线战",
+      "encounter": "R2-2×1+R2-1×1+R2-4×1",
+      "objective": "先断号、用车挡弩，进入桥前",
+      "reward": "旧石柜固定T04×3+C16；P_R2机会；战前补给",
+      "route": "高低接近面均通桥前，保留1.2m退缝"
+    },
+    {
+      "id": "H08",
+      "region": "R2",
+      "name": "断岳前堡",
+      "kind": "主线首领",
+      "encounter": "BOSS_R2+R2-2×2",
+      "objective": "清固定桥头组，绞盘与旁架手柄二选一放桥",
+      "reward": "M4触发；奖励在H09",
+      "route": "桥前安全点；不要求远处另找手柄"
+    },
+    {
+      "id": "H09",
+      "region": "R2",
+      "name": "破阵军械岸",
+      "kind": "主线领奖",
+      "encounter": "无",
+      "objective": "桥放下后开同岸武备台",
+      "reward": "M4包：W03+A05+工艺自选",
+      "route": "H08未结不入，领取后可安全回桥前"
+    },
+    {
+      "id": "H10",
+      "region": "R2",
+      "name": "巨岩矿门",
+      "kind": "遗迹",
+      "encounter": "U1-1×1+R2-3×1",
+      "objective": "辨别采掘机与古卫，读迁行记录",
+      "reward": "P_R2机会；C04线索",
+      "route": "遗迹门外有完整退路；不能绕桥进H09"
+    },
+    {
+      "id": "H11",
+      "region": "R2",
+      "name": "铁契公署",
+      "kind": "交涉据点",
+      "encounter": "R2-1×1+R2-2×1",
+      "objective": "取征用令，交涉解扣或战斗",
+      "reward": "据点包；Q1/Q3证据",
+      "route": "办事厅侧路保留，文书不要求先杀人"
+    },
+    {
+      "id": "H12",
+      "region": "R2",
+      "name": "北岗军寨",
+      "kind": "据点",
+      "encounter": "R2-4×1+R2-1×2",
+      "objective": "斩断号令协同，取押运时刻表",
+      "reward": "据点包；P_R2机会",
+      "route": "营后哨路或交涉，最多3人一组"
+    },
+    {
+      "id": "H13",
+      "region": "R2",
+      "name": "风蚀誓廊",
+      "kind": "遗迹/探索",
+      "encounter": "U1-1×1",
+      "objective": "以三段旧锤痕校准钟晶",
+      "reward": "J02独立石槽；C06线索",
+      "route": "沿有护边的廊路，非跳跃谜题"
+    },
+    {
+      "id": "H14",
+      "region": "R2",
+      "name": "鹰背岩林",
+      "kind": "可选首领",
+      "encounter": "ELITE_02",
+      "objective": "从岩柱判断射线，击败督猎或缴销猎契",
+      "reward": "V_E02",
+      "route": "首领沿山路走位；和平撤猎同奖"
+    },
+    {
+      "id": "H15",
+      "region": "R2",
+      "name": "天索吊崖",
+      "kind": "地形战",
+      "encounter": "R2-1×1+R2-2×1",
+      "objective": "沿固定平台调整吊料遮线",
+      "reward": "P_R2机会；铁4+金币25",
+      "route": "机械旁可退，无悬空QTE"
+    },
+    {
+      "id": "H16",
+      "region": "R2",
+      "name": "山南古道",
+      "kind": "安全过境",
+      "encounter": "无",
+      "objective": "实走下降山路到R3北岸",
+      "reward": "地图发现",
+      "route": "不自动点验码头藏品"
+    },
+    {
+      "id": "H17",
+      "region": "R2",
+      "name": "余烬废窑",
+      "kind": "野外/支线",
+      "encounter": "R2-3×1+R2-1×1",
+      "objective": "核对转运货痕与猎域刻板",
+      "reward": "P_R2机会；Q2旁证",
+      "route": "窑沟有双路，不用火油开路"
+    },
+    {
+      "id": "B01",
+      "region": "R3",
+      "name": "旱谷出口",
+      "kind": "过境",
+      "encounter": "无",
+      "objective": "从U1-10内开E07回地表",
+      "reward": "地图回环",
+      "route": "只到R3边缘，不自动开宝匣"
+    },
+    {
+      "id": "B02",
+      "region": "R3",
+      "name": "北岸风道",
+      "kind": "野外",
+      "encounter": "R3-1×2",
+      "objective": "沿旧路识别两队人的脚印",
+      "reward": "P_R3机会；金币25",
+      "route": "绕矮墙或分批交战，可回R2"
+    },
+    {
+      "id": "B03",
+      "region": "R3",
+      "name": "归帆镇",
+      "kind": "安全枢纽",
+      "encounter": "无",
+      "objective": "鉴定旧绳货号，决定谁保留原信",
+      "reward": "艾莉丝商店A07；Q3进展",
+      "route": "镇内安全，摊铺并非远程菜单"
+    },
+    {
+      "id": "B04",
+      "region": "R3",
+      "name": "余烬灯坊",
+      "kind": "调查/机关",
+      "encounter": "无",
+      "objective": "用反光壶校准影船镜组",
+      "reward": "Q6起点；固定J01",
+      "route": "壶只重播，不能凭声音替人同意"
+    },
+    {
+      "id": "B05",
+      "region": "R3",
+      "name": "河湾旅店",
+      "kind": "安全/对质",
+      "encounter": "无",
+      "objective": "夜祈指出路线被转卖",
+      "reward": "Q2后续；金币25",
+      "route": "选择争论不扣商货不强制开战"
+    },
+    {
+      "id": "B06",
+      "region": "R3",
+      "name": "风帆市集",
+      "kind": "交涉据点",
+      "encounter": "R3-4×1+R3-1×1",
+      "objective": "对照装载清单，止住不实交割",
+      "reward": "据点包；Q6证据",
+      "route": "街面可绕，拒买货不锁线索"
+    },
+    {
+      "id": "B07",
+      "region": "R3",
+      "name": "沉钟山岗",
+      "kind": "路线战",
+      "encounter": "R3-3×1+R3-1×1",
+      "objective": "看环带缺口，绕上旧堂",
+      "reward": "P_R3机会；战前补给",
+      "route": "内圈与外圈都有干路"
+    },
+    {
+      "id": "B08",
+      "region": "R3",
+      "name": "沉钟旧堂",
+      "kind": "主线会面/入口",
+      "encounter": "R3-3×1",
+      "objective": "听完阿德里安条件，核对记录，进E06",
+      "reward": "M5第一段；固定W12+A03",
+      "route": "退谈不自动开战，守卫可复位关闭"
+    },
+    {
+      "id": "B09",
+      "region": "R3",
+      "name": "黑签仓院",
+      "kind": "据点",
+      "encounter": "R3-4×1+R3-2×1",
+      "objective": "查伪造封签，留完好藏品",
+      "reward": "据点包；Q6终点材料",
+      "route": "水槽与侧檐可避火，记录不烧毁"
+    },
+    {
+      "id": "B10",
+      "region": "R3",
+      "name": "怒潮码头",
+      "kind": "主线首领",
+      "encounter": "BOSS_R3+R3-1×2+R1-3×1",
+      "objective": "胜利后落链，同台点验三组藏品",
+      "reward": "M6包；W10+J05；护符/铜芯选择另记",
+      "route": "场外补给，B12局部水槽保干路；不跨岸偷领"
+    },
+    {
+      "id": "B11",
+      "region": "R3",
+      "name": "天钩吊臂台",
+      "kind": "机关战",
+      "encounter": "R3-4×1+R3-1×1",
+      "objective": "按原开臂条件移开接近障碍",
+      "reward": "P_R3机会；铁3",
+      "route": "机关失败可回退，不强制点油"
+    },
+    {
+      "id": "B12",
+      "region": "R3",
+      "name": "分潮水渠",
+      "kind": "机关/整备",
+      "encounter": "R3-2×1",
+      "objective": "调阀确认局部清火水槽",
+      "reward": "铁3+油1待领；P_R3机会",
+      "route": "只清局部地面，不能把全图冲走"
+    },
+    {
+      "id": "B13",
+      "region": "R3",
+      "name": "芦苇迷湾",
+      "kind": "野外",
+      "encounter": "R3-4×1+R3-1×2",
+      "objective": "从干石坡识别拖钩方向",
+      "reward": "P_R3机会；金币30",
+      "route": "干岸双路，无氧气条"
+    },
+    {
+      "id": "B14",
+      "region": "R3",
+      "name": "沉船墓场",
+      "kind": "可选首领/支线",
+      "encounter": "ELITE_03",
+      "objective": "核对真实船体潮痕，解除打捞者封锁",
+      "reward": "V_E03；Q3证据另记",
+      "route": "船腹与甲板侧梯互通；交出合法返还凭据同奖"
+    },
+    {
+      "id": "B15",
+      "region": "R3",
+      "name": "南岸农庄",
+      "kind": "安全/观察",
+      "encounter": "无",
+      "objective": "从旧渠观察古兽迁徙、接R1堤道",
+      "reward": "Q2终点；金币30",
+      "route": "不强制农务，不出卖兽群换更好装备"
+    },
+    {
+      "id": "B16",
+      "region": "R3",
+      "name": "东岸古渡",
+      "kind": "过境",
+      "encounter": "R3-1×1+R3-4×1",
+      "objective": "拆散截路小队，步行赴R4",
+      "reward": "P_R3机会",
+      "route": "古渡陆桥免费；回程不刷敌"
+    },
+    {
+      "id": "B17",
+      "region": "R3",
+      "name": "旧誓墓园",
+      "kind": "遗迹/调查",
+      "encounter": "R3-3×1",
+      "objective": "比对两批封炉年代与地宫石刻",
+      "reward": "Q1旁证；固定A15线索",
+      "route": "可先关钟摆避战，安息者不产材料"
+    },
+    {
+      "id": "B18",
+      "region": "R3",
+      "name": "双契宅院",
+      "kind": "交涉据点",
+      "encounter": "R3-1×1+R3-4×1",
+      "objective": "用不同付款凭据当面对质",
+      "reward": "Q3结算点；据点包",
+      "route": "正门约谈或侧入账房，记录同一真相不重复领"
+    },
+    {
+      "id": "F01",
+      "region": "R4",
+      "name": "黑冠外集",
+      "kind": "安全枢纽",
+      "encounter": "无",
+      "objective": "看见被征工匠车，核对城防令",
+      "reward": "整备；M7准备线索",
+      "route": "不跨地图自动发终章包"
+    },
+    {
+      "id": "F02",
+      "region": "R4",
+      "name": "流火长街",
+      "kind": "安全/人物",
+      "encounter": "无",
+      "objective": "向工匠家属确认实际出口",
+      "reward": "金币30；M7接应线索",
+      "route": "不把居民设为掉装对象"
+    },
+    {
+      "id": "F03",
+      "region": "R4",
+      "name": "黑冠西门",
+      "kind": "交涉关口",
+      "encounter": "R4-1×1+R4-2×1",
+      "objective": "通行证、侧入或解除门卫",
+      "reward": "据点包；P_R4机会",
+      "route": "战败返回外集，通行只开外城"
+    },
+    {
+      "id": "F04",
+      "region": "R4",
+      "name": "铁锁工坊",
+      "kind": "主线救援",
+      "encounter": "R4-3×1+R4-1×1",
+      "objective": "解危险工位、取备用镜组",
+      "reward": "M7准备A；据点包",
+      "route": "谈判、检修侧入、战斗同奖；凯尔不被重复抓回"
+    },
+    {
+      "id": "F05",
+      "region": "R4",
+      "name": "黑旗旧营",
+      "kind": "据点",
+      "encounter": "R4-4×1+R4-2×1",
+      "objective": "出示洛恩证词或沿营后进办公间",
+      "reward": "据点包；Q1回响",
+      "route": "局部放行不等于全城停战"
+    },
+    {
+      "id": "F06",
+      "region": "R4",
+      "name": "黑印文书院",
+      "kind": "主线调查",
+      "encounter": "R4-3×1+R4-1×1",
+      "objective": "比对抄本与征掘令，展示原刻证据",
+      "reward": "M7准备B；Q4见证",
+      "route": "无公开副本仍能取正本，院落侧道可退"
+    },
+    {
+      "id": "F07",
+      "region": "R4",
+      "name": "东仓暗街",
+      "kind": "主线接应",
+      "encounter": "R4-2×1+R4-1×1",
+      "objective": "实走出口、确认接应可执行",
+      "reward": "M7准备A替代；Q2/Q3回响",
+      "route": "接应暴露仍有旧路；不付费买主线出口"
+    },
+    {
+      "id": "F08",
+      "region": "R4",
+      "name": "铁旗广场",
+      "kind": "路线战",
+      "encounter": "R4-4×1+R4-1×1+R4-3×1",
+      "objective": "先拆镜线再绕盾阵",
+      "reward": "P_R4机会；铁4",
+      "route": "三方向掩体，最多两种同时警示"
+    },
+    {
+      "id": "F09",
+      "region": "R4",
+      "name": "西境弩台",
+      "kind": "必经据点",
+      "encounter": "R4-1×1+R4-2×1",
+      "objective": "清守卫，亲手拆西台销",
+      "reward": "据点包；M7西台状态",
+      "route": "可先东后西，拆掉永不复活"
+    },
+    {
+      "id": "F10",
+      "region": "R4",
+      "name": "东境弩台",
+      "kind": "必经据点",
+      "encounter": "R4-1×1+R4-2×1",
+      "objective": "清守卫，亲手拆东台销",
+      "reward": "据点包；M7东台状态",
+      "route": "与西台独立，回路仍通F12"
+    },
+    {
+      "id": "F11",
+      "region": "R4",
+      "name": "凌城连廊",
+      "kind": "可选探索",
+      "encounter": "R4-2×1",
+      "objective": "沿实体墙路发现开星环侧龛",
+      "reward": "固定W14；P_R4机会",
+      "route": "不领侧龛也能去F12"
+    },
+    {
+      "id": "F12",
+      "region": "R4",
+      "name": "决战休整庭",
+      "kind": "安全整备",
+      "encounter": "无",
+      "objective": "补给、检查两台与最低安全准备",
+      "reward": "主线缺项提示，不领奖",
+      "route": "未拆两台仍可到此整备，只限制进F13"
+    },
+    {
+      "id": "F13",
+      "region": "R4",
+      "name": "黑冠决战庭",
+      "kind": "终章首领",
+      "encounter": "BOSS_R4",
+      "objective": "击败阿德里安，令内弩口停火",
+      "reward": "M7战果；开库动作另记",
+      "route": "至少14×12m石垛战场；不关全城出口"
+    },
+    {
+      "id": "F14",
+      "region": "R4",
+      "name": "黑冠军械库",
+      "kind": "主线领奖",
+      "encounter": "无",
+      "objective": "同平台转绞盘，开主箱；侧格另搜",
+      "reward": "M7包：W06+J07保底补领；T08另记",
+      "route": "距战场2–3m安全领奖，不再清第二地牢"
+    },
+    {
+      "id": "F15",
+      "region": "R4",
+      "name": "黑冠档案楼",
+      "kind": "可选剧情",
+      "encounter": "R4-3×1",
+      "objective": "核对当前征掘令的签名与限制",
+      "reward": "Q4后果；金币60+铁5",
+      "route": "战后可回访，非开主箱跑腿前置"
+    },
+    {
+      "id": "F16",
+      "region": "R4",
+      "name": "干涸护城壕",
+      "kind": "过境",
+      "encounter": "无",
+      "objective": "从U2侧开E08，实走外城坡",
+      "reward": "地图回环",
+      "route": "只到堡外，不进首领场和宝库"
+    },
+    {
+      "id": "F17",
+      "region": "R4",
+      "name": "铁棘检修坡",
+      "kind": "可选首领",
+      "encounter": "ELITE_04",
+      "objective": "解除典狱长扣押，开检修箱",
+      "reward": "V_E04；固定J07仅唯一收据",
+      "route": "检修侧路与正坡均可；该场替换旧铁棘监守，不叠加"
+    },
+    {
+      "id": "U1-01",
+      "region": "U1",
+      "name": "暗仓货栈",
+      "kind": "交涉据点",
+      "encounter": "U1-3×1+R1-2×1",
+      "objective": "查活人转运账，交涉或侧入",
+      "reward": "据点包；Q2/Q3证据",
+      "route": "E01原路能退，谈判失败不焊门"
+    },
+    {
+      "id": "U1-02",
+      "region": "U1",
+      "name": "鸣岩洞厅",
+      "kind": "路线/支线",
+      "encounter": "U1-2×2",
+      "objective": "实测高差，开E03内侧石门",
+      "reward": "Q5进展；P_U1机会",
+      "route": "保留两层步行坡，不从地表强开"
+    },
+    {
+      "id": "U1-03",
+      "region": "U1",
+      "name": "断链矿廊",
+      "kind": "野外",
+      "encounter": "U1-4×1+U1-2×2",
+      "objective": "避配重落点，核对两段路图",
+      "reward": "P_U1机会；铁4",
+      "route": "E02须地表放梯；未放可退E01"
+    },
+    {
+      "id": "U1-04",
+      "region": "U1",
+      "name": "余火居所",
+      "kind": "安全/人物",
+      "encounter": "无",
+      "objective": "阵亡者正在吃晚饭，听伊芙琳质问",
+      "reward": "M2救援段；Q5试走",
+      "route": "居民不变敌，不把晚饭变开箱"
+    },
+    {
+      "id": "U1-05",
+      "region": "U1",
+      "name": "铁锁监区",
+      "kind": "主线救援",
+      "encounter": "U1-3×2",
+      "objective": "救工匠并确认实际离场",
+      "reward": "M2救援包一次；据点包",
+      "route": "值房交涉、侧廊、战斗均可；已救不再被抓"
+    },
+    {
+      "id": "U1-06",
+      "region": "U1",
+      "name": "三誓军械廊",
+      "kind": "可选首领/主线机关",
+      "encounter": "ELITE_06",
+      "objective": "观察第三剑向门内，停机旁路或迎战",
+      "reward": "V_E06；Q1证词",
+      "route": "主线只需机关读法，停机也领同首领包，不强制打第5主线Boss"
+    },
+    {
+      "id": "U1-07",
+      "region": "U1",
+      "name": "震炉工坊",
+      "kind": "可选首领/研究",
+      "encounter": "ELITE_05",
+      "objective": "读冷白炉槽，泄压停机或战斗",
+      "reward": "V_E05；Q4讲堂另记",
+      "route": "试验可回退；先救现场工人再启战"
+    },
+    {
+      "id": "U1-08",
+      "region": "U1",
+      "name": "天火深炉",
+      "kind": "主线核心/终局",
+      "encounter": "无",
+      "objective": "两轮可中止接触、检查迁行口、最终选择",
+      "reward": "M4接触包；M8终局包，两个时点独立",
+      "route": "核心是非人生命，拒绝战利品化；不同选择均有短操作"
+    },
+    {
+      "id": "U1-09",
+      "region": "U1",
+      "name": "悬链绞盘井",
+      "kind": "交通战",
+      "encounter": "U1-4×1",
+      "objective": "操作实体平台，核对E05井架状态",
+      "reward": "P_U1机会；铁4",
+      "route": "E05从地表开，井下保回工坊路"
+    },
+    {
+      "id": "U1-10",
+      "region": "U1",
+      "name": "见日长廊",
+      "kind": "安全/近路",
+      "encounter": "无",
+      "objective": "从内开E07，让撤离者走到旱谷",
+      "reward": "Q5出口旁证；金币30",
+      "route": "开门不跨幕领奖，不刷新人或怪"
+    },
+    {
+      "id": "U2-01",
+      "region": "U2",
+      "name": "封潮前厅",
+      "kind": "前期边界",
+      "encounter": "无",
+      "objective": "从R1看见深闸，辨认回退柄",
+      "reward": "铁2+金币20一次",
+      "route": "深闸由U2-03内开；前期不出P_U2与后期装备"
+    },
+    {
+      "id": "U2-02",
+      "region": "U2",
+      "name": "沉潮长厅",
+      "kind": "机关战",
+      "encounter": "U2-1×2+U2-3×1",
+      "objective": "利用干渠折线破镜眼瞄准",
+      "reward": "P_U2机会；铁4",
+      "route": "无游泳需求，外侧干阶能退"
+    },
+    {
+      "id": "U2-03",
+      "region": "U2",
+      "name": "镇闸广场",
+      "kind": "可选首领/主线试验",
+      "encounter": "ELITE_07",
+      "objective": "分区泄压、停机或击败镇守，内开深闸",
+      "reward": "V_E07；M5泄压状态",
+      "route": "主线试验始终可用；停机解法不耗稀有资源"
+    },
+    {
+      "id": "U2-04",
+      "region": "U2",
+      "name": "守库人旧居",
+      "kind": "安全/调查",
+      "encounter": "无",
+      "objective": "核对守库记录和退出协议",
+      "reward": "固定J04配方C10；金币40",
+      "route": "可交谈者有自身去向，不新增商户"
+    },
+    {
+      "id": "U2-05",
+      "region": "U2",
+      "name": "沉钟下殿",
+      "kind": "入口战",
+      "encounter": "U2-2×1+U2-4×1",
+      "objective": "从E06进场，按钟纹找档案方向",
+      "reward": "固定T06×3+C17；P_U2机会",
+      "route": "侧室可绕，E06原路能退"
+    },
+    {
+      "id": "U2-06",
+      "region": "U2",
+      "name": "覆文档案廊",
+      "kind": "主线/支线",
+      "encounter": "U2-3×1+R4-3×1（仅侧室被占时）",
+      "objective": "两角度读原刻，比较瑟维恩现代拓本",
+      "reward": "M5包；固定A11；Q4演示",
+      "route": "占领只影响侧室，不封原刻和主线道路"
+    },
+    {
+      "id": "U2-07",
+      "region": "U2",
+      "name": "禁域祭仪库",
+      "kind": "可选首领/主线记录",
+      "encounter": "ELITE_08",
+      "objective": "解镜阵取迁行/静眠图，停机或战斗",
+      "reward": "V_E08；固定A15唯一收据",
+      "route": "双侧廊连回档案；主线图不绑定战斗胜利"
+    },
+    {
+      "id": "U2-08",
+      "region": "U2",
+      "name": "无名囚室",
+      "kind": "调查/人物",
+      "encounter": "无",
+      "objective": "对照旧封门与当前征用的不同责任",
+      "reward": "Q1证据；金币40+铁3",
+      "route": "不重复学徒救援，不放突袭刷兵"
+    },
+    {
+      "id": "U2-09",
+      "region": "U2",
+      "name": "堡外检修道",
+      "kind": "交通战",
+      "encounter": "U2-1×1+U2-2×1",
+      "objective": "从内侧开E08，走到干壕",
+      "reward": "P_U2机会；铁4",
+      "route": "只能去F16外城，不绕两外弩台和终Boss"
+    }
+  ],
+  "enemies": [
+    {
+      "id": "R1-1",
+      "name": "灰披刀兵",
+      "region": "R1",
+      "hp": 72,
+      "damage": 12,
+      "windup": 0.65,
+      "lock": 0.2,
+      "recovery": 0.65,
+      "counter": "举棍亮扇；侧移或推断起手，圆盾不提供重盾减伤",
+      "role": "近战",
+      "art": {
+        "file": "r1-stonebridge.png",
+        "position": "middle row, left-to-right 1",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "R1-2",
+      "name": "铁板盾卫",
+      "region": "R1",
+      "hp": 105,
+      "damage": 16,
+      "windup": 0.75,
+      "lock": 0.25,
+      "recovery": 0.85,
+      "counter": "抬方盾亮直道；绕背、推断抬盾",
+      "role": "盾阵",
+      "art": {
+        "file": "r1-stonebridge.png",
+        "position": "middle row, left-to-right 2",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "R1-3",
+      "name": "猎径弩手",
+      "region": "R1",
+      "hp": 60,
+      "damage": 14,
+      "windup": 1.1,
+      "lock": 0.3,
+      "recovery": 1.8,
+      "counter": "虚线转实线；侧走、掩体、趁装填接近",
+      "role": "远程",
+      "art": {
+        "file": "r1-stonebridge.png",
+        "position": "middle row, left-to-right 3",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "R1-4",
+      "name": "绊索猎兵",
+      "region": "R1",
+      "hp": 66,
+      "damage": 10,
+      "windup": 1.2,
+      "lock": 0.35,
+      "recovery": 1.1,
+      "counter": "蹲身展开可见绊索；跨旁路或攻击索桩，索命中仅减速20%持续1s",
+      "role": "控场",
+      "art": {
+        "file": "r1-stonebridge.png",
+        "position": "middle row, left-to-right 4",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "R2-1",
+      "name": "裂岩镐卫",
+      "region": "R2",
+      "hp": 118,
+      "damage": 18,
+      "windup": 0.9,
+      "lock": 0.3,
+      "recovery": 1.0,
+      "counter": "镐头过肩、狭长红槽；横移后从侧面攻击",
+      "role": "重击",
+      "art": {
+        "file": "r2-highlands.png",
+        "position": "middle row, left-to-right 1",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "R2-2",
+      "name": "岩脊弩哨",
+      "region": "R2",
+      "hp": 88,
+      "damage": 16,
+      "windup": 1.2,
+      "lock": 0.35,
+      "recovery": 1.9,
+      "counter": "高处弩光与弦响；石垛遮线，必须有步行可达的上坡",
+      "role": "远程",
+      "art": {
+        "file": "r2-highlands.png",
+        "position": "middle row, left-to-right 2",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "R2-3",
+      "name": "废矿爬机",
+      "region": "R2",
+      "hp": 96,
+      "damage": 14,
+      "windup": 1.0,
+      "lock": 0.3,
+      "recovery": 1.2,
+      "counter": "四足压低、钳口亮弧；离开弧面，后腿转向慢",
+      "role": "机械近战",
+      "art": {
+        "file": "r2-highlands.png",
+        "position": "middle row, left-to-right 3",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "R2-4",
+      "name": "断岳号兵",
+      "region": "R2",
+      "hp": 90,
+      "damage": 12,
+      "windup": 1.5,
+      "lock": 0.4,
+      "recovery": 1.3,
+      "counter": "举号出现圈纹；推断号声，否则现有同组敌未来一次起手缩短0.10s且不低于0.65s，不增援",
+      "role": "支援",
+      "art": {
+        "file": "r2-highlands.png",
+        "position": "middle row, left-to-right 4",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "R3-1",
+      "name": "码头快刀",
+      "region": "R3",
+      "hp": 100,
+      "damage": 14,
+      "windup": 0.7,
+      "lock": 0.25,
+      "recovery": 0.8,
+      "counter": "屈膝亮短扇；退一步，出手后侧击",
+      "role": "近战",
+      "art": {
+        "file": "r3-bellriver.png",
+        "position": "middle row, left-to-right 1",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "R3-2",
+      "name": "黑油投手",
+      "region": "R3",
+      "hp": 90,
+      "damage": 12,
+      "windup": 1.2,
+      "lock": 0.35,
+      "recovery": 1.0,
+      "counter": "举陶罐、斜线圆；推断或离开落区，火区4/s持续3s",
+      "role": "区域压制",
+      "art": {
+        "file": "r3-bellriver.png",
+        "position": "middle row, left-to-right 2",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "R3-3",
+      "name": "青铜钟卫",
+      "region": "R3",
+      "hp": 140,
+      "damage": 18,
+      "windup": 1.15,
+      "lock": 0.35,
+      "recovery": 1.3,
+      "counter": "钟腹倾斜、地面环带；走进内圈或退外圈，警示无声模式也可读",
+      "role": "机械重击",
+      "art": {
+        "file": "r3-bellriver.png",
+        "position": "middle row, left-to-right 3",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "R3-4",
+      "name": "拖钩打手",
+      "region": "R3",
+      "hp": 116,
+      "damage": 16,
+      "windup": 1.0,
+      "lock": 0.3,
+      "recovery": 1.15,
+      "counter": "钩杆后收、窄直道；横移，命中推移0.6m且不拖入水中",
+      "role": "位移",
+      "art": {
+        "file": "r3-bellriver.png",
+        "position": "middle row, left-to-right 4",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "R4-1",
+      "name": "黑冠盾兵",
+      "region": "R4",
+      "hp": 150,
+      "damage": 18,
+      "windup": 0.85,
+      "lock": 0.3,
+      "recovery": 1.0,
+      "counter": "半圆钢盾抵地；绕侧、推断起盾",
+      "role": "盾阵",
+      "art": {
+        "file": "r4-greyrock.png",
+        "position": "middle row, left-to-right 1",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "R4-2",
+      "name": "堡垒重弩手",
+      "region": "R4",
+      "hp": 104,
+      "damage": 20,
+      "windup": 1.4,
+      "lock": 0.4,
+      "recovery": 2.1,
+      "counter": "重弩架定、长实线；石垛遮挡，禁止穿墙",
+      "role": "远程",
+      "art": {
+        "file": "r4-greyrock.png",
+        "position": "middle row, left-to-right 2",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "R4-3",
+      "name": "折镜工兵",
+      "region": "R4",
+      "hp": 112,
+      "damage": 14,
+      "windup": 1.5,
+      "lock": 0.4,
+      "recovery": 1.3,
+      "counter": "实体镜框转亮并画窄光带；离开光带、攻击镜架可打断，不能反射全部玩家法术",
+      "role": "控场",
+      "art": {
+        "file": "r4-greyrock.png",
+        "position": "middle row, left-to-right 3",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "R4-4",
+      "name": "铁旗军士",
+      "region": "R4",
+      "hp": 164,
+      "damage": 20,
+      "windup": 1.0,
+      "lock": 0.3,
+      "recovery": 1.2,
+      "counter": "旗杆下压、两段各有扇形；退圈等第二击结束，号令仅移动现有同伴",
+      "role": "精锐近战",
+      "art": {
+        "file": "r4-greyrock.png",
+        "position": "middle row, left-to-right 4",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "U1-1",
+      "name": "铸炉卫兵",
+      "region": "U1",
+      "hp": 120,
+      "damage": 17,
+      "windup": 1.0,
+      "lock": 0.3,
+      "recovery": 1.1,
+      "counter": "锤臂拉后亮矩形；侧移、打膝关节",
+      "role": "机械近战",
+      "art": {
+        "file": "u1-oathcity.png",
+        "position": "middle row, left-to-right 1",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "U1-2",
+      "name": "鸣震甲虫",
+      "region": "U1",
+      "hp": 54,
+      "damage": 9,
+      "windup": 0.85,
+      "lock": 0.25,
+      "recovery": 0.9,
+      "counter": "六足停步触角发亮；离开小圈，按一组两只计且不会分裂生新怪",
+      "role": "机械群体",
+      "art": {
+        "file": "u1-oathcity.png",
+        "position": "middle row, left-to-right 2",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "U1-3",
+      "name": "提灯狱卒",
+      "region": "U1",
+      "hp": 100,
+      "damage": 15,
+      "windup": 1.0,
+      "lock": 0.3,
+      "recovery": 1.0,
+      "counter": "灯举高、钩杆直线；绕柱，推断前摇；投降后不再判敌",
+      "role": "人类看守",
+      "art": {
+        "file": "u1-oathcity.png",
+        "position": "middle row, left-to-right 3",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "U1-4",
+      "name": "负重搬机",
+      "region": "U1",
+      "hp": 160,
+      "damage": 20,
+      "windup": 1.4,
+      "lock": 0.4,
+      "recovery": 1.5,
+      "counter": "配重架升起、方形落点；走出方框，搬机不投掷任务物",
+      "role": "机械重击",
+      "art": {
+        "file": "u1-oathcity.png",
+        "position": "middle row, left-to-right 4",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "U2-1",
+      "name": "渠底爬卫",
+      "region": "U2",
+      "hp": 104,
+      "damage": 13,
+      "windup": 0.9,
+      "lock": 0.3,
+      "recovery": 1.0,
+      "counter": "钩足张开亮四角；侧移，在干道战斗不用游泳",
+      "role": "机械近战",
+      "art": {
+        "file": "u2-catacombs.png",
+        "position": "middle row, left-to-right 1",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "U2-2",
+      "name": "铭板守卫",
+      "region": "U2",
+      "hp": 146,
+      "damage": 18,
+      "windup": 1.1,
+      "lock": 0.35,
+      "recovery": 1.2,
+      "counter": "石板护身、棍击短扇；诱挥后绕背",
+      "role": "盾阵",
+      "art": {
+        "file": "u2-catacombs.png",
+        "position": "middle row, left-to-right 2",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "U2-3",
+      "name": "巡游镜眼",
+      "region": "U2",
+      "hp": 68,
+      "damage": 12,
+      "windup": 1.3,
+      "lock": 0.35,
+      "recovery": 1.3,
+      "counter": "单镜头光点沿地走；打实体镜头或侧移，漂浮高度仍在所有基础武器命中范围",
+      "role": "机械远程",
+      "art": {
+        "file": "u2-catacombs.png",
+        "position": "middle row, left-to-right 3",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "U2-4",
+      "name": "撞钟傀儡",
+      "region": "U2",
+      "hp": 156,
+      "damage": 19,
+      "windup": 1.35,
+      "lock": 0.4,
+      "recovery": 1.4,
+      "counter": "木槌抬起、缺口环带；去缺口或推断起手，钟声不召幽魂",
+      "role": "机械控场",
+      "art": {
+        "file": "u2-catacombs.png",
+        "position": "middle row, left-to-right 4",
+        "spriteReady": false
+      }
+    }
+  ],
+  "bosses": [
+    {
+      "id": "BOSS_R1",
+      "region": "R1",
+      "arena": "S10",
+      "name": "裂隘统领·灰披队长",
+      "hp": 360,
+      "rewardEvent": "M2",
+      "fixedLoot": "W02+T03×3",
+      "moves": "锤横扫：0.80s前摇/末0.25s锁向，150°×2.1m，22伤，后摇1.00s；盾冲：1.00/0.35s，3.8m直道24伤，撞墩失衡1.50s；半血横扫追加：另给0.60s短扇，14伤，后摇1.20s",
+      "mandatory": true,
+      "runtimeStatus": "B01 mechanics exist; other encounters design-only",
+      "art": {
+        "file": "r1-stonebridge.png",
+        "position": "top left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "BOSS_R2",
+      "region": "R2",
+      "arena": "H08",
+      "name": "断岳铁卫·守桥铠卫",
+      "hp": 150,
+      "rewardEvent": "M4",
+      "fixedLoot": "W03+A05",
+      "moves": "抬盾直推：0.75/0.25s，1.2m、16伤，后摇0.85s；两名岩脊弩哨各1.20s瞄准错开攻击槽；架盾受推0.50m、失衡0.25s，绕背无盾减伤，不加第二生命条",
+      "mandatory": true,
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "r2-highlands.png",
+        "position": "top left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "BOSS_R3",
+      "region": "R3",
+      "arena": "B10",
+      "name": "黑油屠夫·灰烬掠夺者",
+      "hp": 132,
+      "rewardEvent": "M6",
+      "fixedLoot": "W10+J05",
+      "moves": "举壶投油：1.20/0.35s，直接12伤、火区4/s×3s，回收1.00s/CD3.50s；只布最多2个敌方危险位且留干路；两快刀一弩手固定随从，首领受推1.35m，不加狂暴与新援兵",
+      "mandatory": true,
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "r3-bellriver.png",
+        "position": "top left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "BOSS_R4",
+      "region": "R4",
+      "arena": "F13",
+      "name": "黑冠统帅·阿德里安",
+      "hp": 540,
+      "rewardEvent": "M7",
+      "fixedLoot": "W06",
+      "moves": "重斩两段：0.85/0.25s→22伤，另0.65s提示→18伤，后摇1.35s；盾冲：1.05/0.35s，4.8m、26伤，撞墩失衡1.40s；半血号令1.40s后两内弩口依次锁线1.00s各16伤，仅一轮，外弩台不复活",
+      "mandatory": true,
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "r4-greyrock.png",
+        "position": "top left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "ELITE_01",
+      "region": "R1",
+      "arena": "S13",
+      "name": "断镐监工",
+      "hp": 240,
+      "rewardEvent": "V_E01",
+      "fixedLoot": "DE01",
+      "moves": "裂地镐：0.95/0.30s窄直道18伤，后摇1.10s；横拉绳：1.20/0.35s地面绳带12伤与20%减速1s，后摇1.20s，可砍索；半血收灯：1.10s举灯后横扫16伤，亮扇照常可见、无熄屏",
+      "mandatory": false,
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "r1-stonebridge.png",
+        "position": "top right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "ELITE_02",
+      "region": "R2",
+      "arena": "H14",
+      "name": "裂风督猎",
+      "hp": 280,
+      "rewardEvent": "V_E02",
+      "fixedLoot": "DE02",
+      "moves": "双风箭：首箭1.25/0.35s、第二箭另0.70s提示，各14伤，后摇1.60s；钉地箭：1.30/0.40s圆落点16伤，留下可破坏索桩4s；半血换岩位：沿可见山路走位2s，无瞬移无无敌",
+      "mandatory": false,
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "r2-highlands.png",
+        "position": "top right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "ELITE_03",
+      "region": "R3",
+      "arena": "B14",
+      "name": "沉船打捞王",
+      "hp": 320,
+      "rewardEvent": "V_E03",
+      "fixedLoot": "DE03",
+      "moves": "拖钩：1.10/0.35s直道18伤推0.6m，后摇1.20s；缆绳横扫：1.20/0.35s扇形20伤，后摇1.40s；半血吊锚：1.50/0.50s固定圆落点22伤，锚落后站立恢复1.80s，无必死落水",
+      "mandatory": false,
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "r3-bellriver.png",
+        "position": "top right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "ELITE_04",
+      "region": "R4",
+      "arena": "F17",
+      "name": "铁棘典狱长",
+      "hp": 300,
+      "rewardEvent": "V_E04",
+      "fixedLoot": "DE04",
+      "moves": "钉甲盾推：1.00/0.35s直道20伤，后摇1.20s；锤击两段：1.10s起手18伤，另0.75s提示14伤，后摇1.50s；钥链锁道：1.40s可打断，画一条可绕锁链，12伤，不封唯一退路",
+      "mandatory": false,
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "r4-greyrock.png",
+        "position": "top right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "ELITE_05",
+      "region": "U1",
+      "arena": "U1-07",
+      "name": "震炉巨像",
+      "hp": 400,
+      "rewardEvent": "V_E05",
+      "fixedLoot": "DE05",
+      "moves": "双锤落地：1.40/0.40s两个固定方框各22伤，同招只结一次，后摇1.60s；冷光泄压：1.60/0.50s带缺口环带18伤，后摇1.50s；半血过载：1.80s明确屈膝后重复一次锤击，暴露膝齿1.80s，无锁血",
+      "mandatory": false,
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "u1-oathcity.png",
+        "position": "top left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "ELITE_06",
+      "region": "U1",
+      "arena": "U1-06",
+      "name": "三刃守誓阵",
+      "hp": 330,
+      "rewardEvent": "V_E06",
+      "fixedLoot": "DE06",
+      "moves": "第一剑：0.90/0.30s扇形16伤；第二剑：另0.85s矩形16伤；第三剑：另1.10s窄直道20伤朝门内，三击后1.80s全阵恢复；半血顺序仍1→2→3，仅第三剑多一道有缺口扇形，各段不重叠堵满地面",
+      "mandatory": false,
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "u1-oathcity.png",
+        "position": "top right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "ELITE_07",
+      "region": "U2",
+      "arena": "U2-03",
+      "name": "深闸镇守",
+      "hp": 380,
+      "rewardEvent": "V_E07",
+      "fixedLoot": "DE07",
+      "moves": "闸轮盾撞：1.20/0.40s直道22伤，后摇1.40s；配重砸击：1.50/0.45s方框24伤，后摇1.60s；半血泄流：1.80s提示两道交替光槽各16伤，干石侧道始终安全，无淹水倒计时",
+      "mandatory": false,
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "u2-catacombs.png",
+        "position": "top left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "ELITE_08",
+      "region": "U2",
+      "arena": "U2-07",
+      "name": "覆文守秘者",
+      "hp": 360,
+      "rewardEvent": "V_E08",
+      "fixedLoot": "DE08",
+      "moves": "双镜扫线：1.40/0.40s先左后右各14伤，每束独立0.80s提示，后摇1.50s；铭板落印：1.50/0.50s两小圆18伤，后摇1.40s；半血开镜：1.80s中枢聚光后20伤直线，完成后暴露镜芯2.00s，远近均可命中",
+      "mandatory": false,
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "u2-catacombs.png",
+        "position": "top right",
+        "spriteReady": false
+      }
+    }
+  ],
+  "newEquipment": [
+    {
+      "id": "DR1-01",
+      "region": "R1",
+      "name": "铁誓护盔",
+      "slot": "头",
+      "grade": "精良",
+      "weight": 30,
+      "effect": "最大生命+6",
+      "visual": "灰铁眉梁、暗红衬布",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-r1.png",
+        "position": "top left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DR1-02",
+      "region": "R1",
+      "name": "佣兵护胸",
+      "slot": "身",
+      "grade": "精良",
+      "weight": 30,
+      "effect": "受到物理伤害-4%",
+      "visual": "皮革叠钢胸片、可见铆钉",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-r1.png",
+        "position": "top right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DR1-03",
+      "region": "R1",
+      "name": "裂隘护手",
+      "slot": "手",
+      "grade": "稀有",
+      "weight": 20,
+      "effect": "推击命中普通敌后，下次直接近战+8%，持续3s，CD6s",
+      "visual": "护指凿纹、粗钢关节",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-r1.png",
+        "position": "bottom left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DR1-04",
+      "region": "R1",
+      "name": "猎隙指环",
+      "slot": "戒",
+      "grade": "稀有",
+      "weight": 20,
+      "effect": "命中超过5m目标恢复专注2，CD4s",
+      "visual": "灰银环、绿色窄晶",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-r1.png",
+        "position": "bottom right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DR2-01",
+      "region": "R2",
+      "name": "矿脊护胫",
+      "slot": "靴",
+      "grade": "精良",
+      "weight": 30,
+      "effect": "受普通敌推移距离-10%",
+      "visual": "钢趾、岩屑磨痕",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-r2.png",
+        "position": "top left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DR2-02",
+      "region": "R2",
+      "name": "断岳兜帽",
+      "slot": "头",
+      "grade": "精良",
+      "weight": 30,
+      "effect": "最大生命+8",
+      "visual": "灰蓝羊毛、铜护眉",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-r2.png",
+        "position": "top right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DR2-03",
+      "region": "R2",
+      "name": "碎岩短杖",
+      "slot": "单手杖",
+      "grade": "稀有",
+      "weight": 20,
+      "effect": "R直接命中盾挡普通敌额外削韧4，CD6s；Boss额外削韧2",
+      "visual": "石英杖首、青铜束圈",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-r2.png",
+        "position": "bottom left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DR2-04",
+      "region": "R2",
+      "name": "山风吊坠",
+      "slot": "项链",
+      "grade": "稀有",
+      "weight": 20,
+      "effect": "闪避后下一次蓄力箭耗时-8%，3s内一次，CD8s",
+      "visual": "开口铜翼、淡绿晶",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-r2.png",
+        "position": "bottom right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DR3-01",
+      "region": "R3",
+      "name": "潮痕皮靴",
+      "slot": "靴",
+      "grade": "精良",
+      "weight": 30,
+      "effect": "火抗+6%",
+      "visual": "油浸皮面、青布绑带",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-r3.png",
+        "position": "top left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DR3-02",
+      "region": "R3",
+      "name": "水手护腕",
+      "slot": "手",
+      "grade": "精良",
+      "weight": 30,
+      "effect": "最大生命+8",
+      "visual": "绳结扣、黄铜腕片",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-r3.png",
+        "position": "top right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DR3-03",
+      "region": "R3",
+      "name": "破浪弯刀",
+      "slot": "单手剑",
+      "grade": "稀有",
+      "weight": 20,
+      "effect": "直接近战命中正在燃烧的目标恢复专注3，CD3s；不引爆火区",
+      "visual": "单刃弧刀、铜护手",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-r3.png",
+        "position": "bottom left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DR3-04",
+      "region": "R3",
+      "name": "雷潮指环",
+      "slot": "戒",
+      "grade": "史诗",
+      "weight": 20,
+      "effect": "造成直接雷伤后，下次主攻击+6%，持续4s，CD8s",
+      "visual": "分叉银架、琥珀与蓝晶",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-r3.png",
+        "position": "bottom right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DR4-01",
+      "region": "R4",
+      "name": "黑冠卫盔",
+      "slot": "头",
+      "grade": "稀有",
+      "weight": 30,
+      "effect": "最大生命+10",
+      "visual": "蓝钢半盔、象牙色护眉",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-r4.png",
+        "position": "top left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DR4-02",
+      "region": "R4",
+      "name": "城垒护甲",
+      "slot": "身",
+      "grade": "稀有",
+      "weight": 30,
+      "effect": "受到物理伤害-5%",
+      "visual": "分层半板、夜蓝厚布",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-r4.png",
+        "position": "top right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DR4-03",
+      "region": "R4",
+      "name": "破城长剑",
+      "slot": "单手剑",
+      "grade": "史诗",
+      "weight": 20,
+      "effect": "主攻击命中盾挡敌后，下次推击削韧+4，3s内一次，CD6s；Boss+2",
+      "visual": "长窄钢刃、开架银护手",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-r4.png",
+        "position": "bottom left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DR4-04",
+      "region": "R4",
+      "name": "禁卫指环",
+      "slot": "戒",
+      "grade": "史诗",
+      "weight": 20,
+      "effect": "生命首次低于35%获得护盾8持续4s，CD20s，不叠加同名效果",
+      "visual": "双环黑银、蓝方晶",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-r4.png",
+        "position": "bottom right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DU1-01",
+      "region": "U1",
+      "name": "炉工护额",
+      "slot": "头",
+      "grade": "精良",
+      "weight": 30,
+      "effect": "火抗+6%",
+      "visual": "隔热皮额带、灰铜眉片",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-u1.png",
+        "position": "top left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DU1-02",
+      "region": "U1",
+      "name": "深城工装",
+      "slot": "身",
+      "grade": "精良",
+      "weight": 30,
+      "effect": "最大生命+8",
+      "visual": "皮围甲、暗白布层",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-u1.png",
+        "position": "top right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DU1-03",
+      "region": "U1",
+      "name": "震纹护手",
+      "slot": "手",
+      "grade": "稀有",
+      "weight": 20,
+      "effect": "直接攻击机械敌额外削韧2，CD3s；Boss+1",
+      "visual": "测量刻痕、冷白窄嵌线",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-u1.png",
+        "position": "bottom left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DU1-04",
+      "region": "U1",
+      "name": "冷焰短杖",
+      "slot": "单手杖",
+      "grade": "稀有",
+      "weight": 20,
+      "effect": "每第三次直接杖弹命中追加奥术4，CD3s，不再触发计数",
+      "visual": "封闭铜笼、白石核心",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-u1.png",
+        "position": "bottom right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DU2-01",
+      "region": "U2",
+      "name": "铭廊软靴",
+      "slot": "靴",
+      "grade": "稀有",
+      "weight": 30,
+      "effect": "冰抗+6%",
+      "visual": "深蓝布、单道银缝",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-u2-v2.png",
+        "position": "top left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DU2-02",
+      "region": "U2",
+      "name": "覆文护腕",
+      "slot": "手",
+      "grade": "稀有",
+      "weight": 30,
+      "effect": "最大专注+10；换装不补当前专注",
+      "visual": "铭板分片、哑银铰链",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-u2-v2.png",
+        "position": "top right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DU2-03",
+      "region": "U2",
+      "name": "听潮护符",
+      "slot": "项链",
+      "grade": "史诗",
+      "weight": 20,
+      "effect": "直接主攻击命中冰缓敌恢复专注3，CD4s",
+      "visual": "钟形银框、冷蓝晶",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-u2-v2.png",
+        "position": "bottom left",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DU2-04",
+      "region": "U2",
+      "name": "禁域短弓",
+      "slot": "双手弓",
+      "grade": "史诗",
+      "weight": 20,
+      "effect": "蓄力箭命中已标记敌额外奥术4，CD4s；额外伤害不复制标记",
+      "visual": "窄木肢、三环镜扣",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "drops-u2-v2.png",
+        "position": "bottom right",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DE01",
+      "region": "R1",
+      "name": "断镐印戒",
+      "slot": "戒",
+      "grade": "稀有",
+      "weight": 0,
+      "effect": "推断普通敌起手后，下次直接主攻击+10%，3s内一次，CD8s；Boss仅明示可打断窗触发",
+      "visual": "镐形铁印、琥珀",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "elite-loot.png",
+        "position": "top row, left-to-right 1",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DE02",
+      "region": "R2",
+      "name": "裂风长弓",
+      "slot": "双手弓",
+      "grade": "史诗",
+      "weight": 0,
+      "effect": "蓄力箭命中后2s移动+8%，CD5s；R仍用标准穿甲箭",
+      "visual": "不对称风叉、双浅绿晶",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "elite-loot.png",
+        "position": "top row, left-to-right 2",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DE03",
+      "region": "R3",
+      "name": "深潜者护手",
+      "slot": "手",
+      "grade": "史诗",
+      "weight": 0,
+      "effect": "脱战3s后专注自然恢复+1/s；总恢复≤8/s",
+      "visual": "青皮、船缆黄铜扣",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "elite-loot.png",
+        "position": "top row, left-to-right 3",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DE04",
+      "region": "R4",
+      "name": "铁棘战靴",
+      "slot": "靴",
+      "grade": "史诗",
+      "weight": 0,
+      "effect": "受到普通敌推移-15%；闪避后下次近战削韧+3，3s内一次，CD8s",
+      "visual": "低矮铁棘后跟、关节踝甲",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "elite-loot.png",
+        "position": "top row, left-to-right 4",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DE05",
+      "region": "U1",
+      "name": "震炉战锤",
+      "slot": "单手锤",
+      "grade": "史诗",
+      "weight": 0,
+      "effect": "R命中机械敌额外削韧6，CD6s；Boss+3，削韧失衡遵守共享保护",
+      "visual": "双错位锤面、冷白共振槽",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "elite-loot.png",
+        "position": "bottom row, left-to-right 1",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DE06",
+      "region": "U1",
+      "name": "三誓长剑",
+      "slot": "单手剑",
+      "grade": "史诗",
+      "weight": 0,
+      "effect": "每第三次直接近战命中得护盾4持续3s，CD8s；不叠加自有护盾",
+      "visual": "三叉银护手、三颗象牙晶",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "elite-loot.png",
+        "position": "bottom row, left-to-right 2",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DE07",
+      "region": "U2",
+      "name": "深闸轮盾",
+      "slot": "副手盾",
+      "grade": "史诗",
+      "weight": 0,
+      "effect": "沿用持续格挡耗专注10/s；成功挡住一次远程物理后回专注3，CD4s，不能正收益永续格挡",
+      "visual": "偏心闸轮、旋齿银缘",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "elite-loot.png",
+        "position": "bottom row, left-to-right 3",
+        "spriteReady": false
+      }
+    },
+    {
+      "id": "DE08",
+      "region": "U2",
+      "name": "覆文镜匣",
+      "slot": "副手法器",
+      "grade": "史诗",
+      "weight": 0,
+      "effect": "符咒直接命中后下次杖弹+8%，4s内一次，CD6s；不返符不复制符",
+      "visual": "双镜翼、闭合紫晶光笼",
+      "runtimeStatus": "design-only",
+      "art": {
+        "file": "elite-loot.png",
+        "position": "bottom row, left-to-right 4",
+        "spriteReady": false
+      }
+    }
+  ],
+  "legacyEquipment": [
+    {
+      "id": "W01",
+      "name": "佣兵长剑",
+      "legacyName": "佣兵长剑",
+      "tierAndSlot": "单手剑 L1 普通",
+      "effect": "可靠斩击；无附加特性",
+      "set": "无",
+      "source": "初始",
+      "legacySource": "初始，永不丢失",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "W02",
+      "name": "未熄之誓",
+      "legacyName": "未熄之誓",
+      "tierAndSlot": "单手剑 L3 稀有",
+      "effect": "每第3次直接命中追加4火伤；内置CD2s，不自动燃烧",
+      "set": "誓卫",
+      "source": "M2 / S10抬杆",
+      "legacySource": "首章抬杆，`reward_ch01_gate_sword`",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "W03",
+      "name": "桥上的最后一人",
+      "legacyName": "桥上的最后一人",
+      "tierAndSlot": "单手锤 L3 稀有",
+      "effect": "对正在盾挡的普通敌直接伤害+20%；Boss只额外削韧4/3s",
+      "set": "无",
+      "source": "M4 / H09放桥后武备台",
+      "legacySource": "二章放桥，`design_reward_ch02_bridge_weapon`",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "W04",
+      "name": "铁山之牙",
+      "legacyName": "铁山之牙",
+      "tierAndSlot": "单手斧 L3 稀有",
+      "effect": "回旋斩命中2个不同敌后得专注5，单次动作最多一次",
+      "set": "寻宝客",
+      "source": "C01 / M3学图",
+      "legacySource": "二章配方C01",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "W05",
+      "name": "陨星",
+      "legacyName": "陨星",
+      "tierAndSlot": "双手重剑 L5 史诗",
+      "effect": "R蓄力结束后有0.3s坚定，不免伤；命中附雷6/8s",
+      "set": "无",
+      "source": "C02 / M7准备段学图",
+      "legacySource": "四章配方C02",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "W06",
+      "name": "无冕者的誓言",
+      "legacyName": "无冕者的誓言",
+      "tierAndSlot": "单手剑 L5 传奇",
+      "effect": "R命中一个已被符咒标记目标，清标并得8护盾/10s；无标记仍正常斩",
+      "set": "无",
+      "source": "M7 / F14主箱",
+      "legacySource": "四章主箱`reward_ch04_clear`；侧壁藏格补誓火铭文外观",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "W07",
+      "name": "白蜡木短弓",
+      "legacyName": "白蜡木短弓",
+      "tierAndSlot": "双手弓 L1 普通",
+      "effect": "R穿甲箭：对首个盾挡普通敌忽略其50%格挡，不无视Boss机制",
+      "set": "无",
+      "source": "初始",
+      "legacySource": "初始，永不丢失",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "W08",
+      "name": "银鹿的足迹",
+      "legacyName": "银鹿的足迹",
+      "tierAndSlot": "双手弓 L2 稀有",
+      "effect": "蓄力箭命中后2s移动+8%，CD4s；R贯穿最多2敌，后者50%伤害",
+      "set": "逐风",
+      "source": "S08固定隐匣",
+      "legacySource": "首章隐匣`design_reward_ch01_oath_sword`",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "W09",
+      "name": "冬猎",
+      "legacyName": "冬猎",
+      "tierAndSlot": "双手弓 L3 稀有",
+      "effect": "R改为冰箭，基础伤害转冰、施1层冰缓，CD8s",
+      "set": "无",
+      "source": "C03 / M3学图",
+      "legacySource": "二章配方C03",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "W10",
+      "name": "暴雨将至",
+      "legacyName": "暴雨将至",
+      "tierAndSlot": "双手弓 L4 史诗",
+      "effect": "R雷箭命中后向最近1敌跳跃50%伤害；链伤不再触发任何链",
+      "set": "无",
+      "source": "M6 / B10宝匣",
+      "legacySource": "三章点验`design_reward_ch03_cinder_weapon`",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "W11",
+      "name": "灰木短杖",
+      "legacyName": "灰木短杖",
+      "tierAndSlot": "单手短杖 L1 普通",
+      "effect": "奥术直弹；R聚束按基础规则",
+      "set": "无",
+      "source": "初始",
+      "legacySource": "初始，永不丢失",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "W12",
+      "name": "灰烬祷文",
+      "legacyName": "灰烬祷文",
+      "tierAndSlot": "双手长杖 L4 史诗",
+      "effect": "火弹；R火阵施燃烧4/s共3s，同源刷新不叠层",
+      "set": "灰烬",
+      "source": "B08旧堂侧龛",
+      "legacySource": "三章沉钟器物侧龛",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "W13",
+      "name": "沉钟挽歌",
+      "legacyName": "沉钟挽歌",
+      "tierAndSlot": "双手长杖 L3 稀有",
+      "effect": "冰弹每3次直接命中施1层冰缓；R冰阵施1层，统一CD2s",
+      "set": "沉钟",
+      "source": "C04 / M3学图",
+      "legacySource": "二章配方C04",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "W14",
+      "name": "天穹的裂隙",
+      "legacyName": "天穹的裂隙",
+      "tierAndSlot": "双手长杖 L5 传奇",
+      "effect": "雷弹；R给主目标雷印6s，下一次主攻击引爆雷10/8s，不能自触发",
+      "set": "无",
+      "source": "F11可选侧龛",
+      "legacySource": "四章可选藏宝龛，非终章强制条件",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "W15",
+      "name": "洛恩的旧盾",
+      "legacyName": "洛恩的旧盾",
+      "tierAndSlot": "副手盾 L3 稀有",
+      "effect": "持续按R为格挡，替代主手R；正面物理减伤额外15%，耗专注10/s，0专注结束；完美格挡窗0.2s只削韧普通敌",
+      "set": "无",
+      "source": "洛恩二幕专售64币",
+      "legacySource": "洛恩二章专售64金币；旧军械架来源保留迁移审计",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "W16",
+      "name": "黄铜星环",
+      "legacyName": "黄铜星环",
+      "tierAndSlot": "副手法器 L3 精良",
+      "effect": "最大专注+20；每秒恢复仍5，不在装备时回满",
+      "set": "缄印",
+      "source": "C05 / M3学图",
+      "legacySource": "二章配方C05",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "A01",
+      "name": "铁誓护额",
+      "legacyName": "白枝护额",
+      "tierAndSlot": "头 L2 精良",
+      "effect": "最大生命+4",
+      "set": "誓卫",
+      "source": "S09军营武备箱",
+      "legacySource": "首章灰披外营武备箱",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "A02",
+      "name": "游隼兜帽",
+      "legacyName": "游隼兜帽",
+      "tierAndSlot": "头 L2 稀有",
+      "effect": "对超过5m目标直接主攻击+6%",
+      "set": "逐风",
+      "source": "S11哨塔眺望袋",
+      "legacySource": "首章断桥眺望袋",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "A03",
+      "name": "烛灰冠冕",
+      "legacyName": "烛灰冠冕",
+      "tierAndSlot": "头 L4 稀有",
+      "effect": "火抗+10%",
+      "set": "灰烬",
+      "source": "B08灯座暗格",
+      "legacySource": "三章沉钟灯座暗格",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "A04",
+      "name": "冬祷面具",
+      "legacyName": "冬祷面具",
+      "tierAndSlot": "头 L3 稀有",
+      "effect": "冰缓对自身持续时间-20%，不免疫",
+      "set": "沉钟",
+      "source": "C06 / M3学图",
+      "legacySource": "二章配方C06",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "A05",
+      "name": "幸存者的锁甲",
+      "legacyName": "幸存者的锁甲",
+      "tierAndSlot": "身 L3 稀有",
+      "effect": "最大生命+15；不另保留旧护具永久+15",
+      "set": "誓卫",
+      "source": "M4 / H09武备台",
+      "legacySource": "首章演示预置可试；真实二章`reward_ch02_kit`",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "A06",
+      "name": "游猎者皮甲",
+      "legacyName": "游猎者皮甲",
+      "tierAndSlot": "身 L2 精良",
+      "effect": "闪避后首次承受物理伤害-10%，持续2s/CD8s",
+      "set": "逐风",
+      "source": "S05树根宝囊",
+      "legacySource": "首章支路树根宝囊",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "A07",
+      "name": "灰烬司祭的礼袍",
+      "legacyName": "灰烬司祭的礼袍",
+      "tierAndSlot": "身 L4 稀有",
+      "effect": "受到火伤后得5护盾/CD8s，不减免该次伤害",
+      "set": "灰烬",
+      "source": "艾莉丝三幕专售80币",
+      "legacySource": "艾莉丝三章专售80金币",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "A08",
+      "name": "沉钟祭衣",
+      "legacyName": "沉钟祭衣",
+      "tierAndSlot": "身 L3 稀有",
+      "effect": "对冰缓敌造成直接伤害后得专注3/CD3s",
+      "set": "沉钟",
+      "source": "C07 / M3学图",
+      "legacySource": "二章配方C07",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "A09",
+      "name": "老兵的回敬",
+      "legacyName": "老兵的回敬",
+      "tierAndSlot": "手 L2 稀有",
+      "effect": "闪避险过攻击后下一次近战削韧+4/CD6s",
+      "set": "誓卫",
+      "source": "S18旧兵袋",
+      "legacySource": "首章篝火后的旧兵袋",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "A10",
+      "name": "银弦手套",
+      "legacyName": "银弦手套",
+      "tierAndSlot": "手 L2 稀有",
+      "effect": "弓蓄力时间-10%，仍保留总周期；其他主手攻击前摇不变",
+      "set": "逐风",
+      "source": "夜祈首幕专售40币",
+      "legacySource": "夜祈首章专售40金币",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "A11",
+      "name": "秘仪手套",
+      "legacyName": "秘仪手套",
+      "tierAndSlot": "手 L4 稀有",
+      "effect": "符咒直接命中后下一次主攻击+6%/4s，不累计，CD4s",
+      "set": "缄印",
+      "source": "U2-06 / M5同一收据",
+      "legacySource": "三章誓约卷筒匣",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "A12",
+      "name": "破晓护腕",
+      "legacyName": "远征护腕",
+      "tierAndSlot": "手 L3 精良",
+      "effect": "打开新宝箱后显示附近4m线索轮廓3s；不自动领取或透过禁入门",
+      "set": "寻宝客",
+      "source": "C08 / M3学图",
+      "legacySource": "二章配方C08",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "A13",
+      "name": "阵线之锚",
+      "legacyName": "阵线之锚",
+      "tierAndSlot": "靴 L2 精良",
+      "effect": "被普通敌推移距离-15%，不是硬控免疫",
+      "set": "誓卫",
+      "source": "洛恩首幕专售32币",
+      "legacySource": "洛恩首章专售32金币",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "A14",
+      "name": "林海行者短靴",
+      "legacyName": "林海行者短靴",
+      "tierAndSlot": "靴 L2 稀有",
+      "effect": "连续移动1.5s后移动+5%，停下1s失效",
+      "set": "逐风",
+      "source": "S20路标背囊",
+      "legacySource": "首章路标背囊",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "A15",
+      "name": "无声仪式",
+      "legacyName": "无声仪式",
+      "tierAndSlot": "靴 L4 稀有",
+      "effect": "施放符咒后2s可按正常速度移动，不取消其前摇",
+      "set": "缄印",
+      "source": "U2-07碑文暗格",
+      "legacySource": "三章碑文暗格",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "A16",
+      "name": "破晓战靴",
+      "legacyName": "远征者之履",
+      "tierAndSlot": "靴 L4 精良",
+      "effect": "闪避距离+8%，无敌帧和冷却不变",
+      "set": "寻宝客",
+      "source": "C09 / M5学图",
+      "legacySource": "三章配方C09",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "J01",
+      "name": "余烬之心",
+      "legacyName": "余烬之心",
+      "tierAndSlot": "戒 L4 稀有",
+      "effect": "自己施加的燃烧持续+1s，总持续最多4s",
+      "set": "灰烬",
+      "source": "B04炭纹小匣",
+      "legacySource": "三章炭纹小匣",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "J02",
+      "name": "冬湖之眼",
+      "legacyName": "冬湖之眼",
+      "tierAndSlot": "戒 L3 稀有",
+      "effect": "对冰缓目标直接伤害+6%",
+      "set": "沉钟",
+      "source": "H13干涸石槽，保留旧唯一收据",
+      "legacySource": "二章桥下干涸石槽",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "J03",
+      "name": "探险家的印戒",
+      "legacyName": "探险家的印戒",
+      "tierAndSlot": "戒 L2 精良",
+      "effect": "主攻击命中被标记目标得专注2/CD3s",
+      "set": "寻宝客",
+      "source": "弥菈首幕专售28币",
+      "legacySource": "弥菈首章专售28金币",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "J04",
+      "name": "静思银环",
+      "legacyName": "静思银环",
+      "tierAndSlot": "戒 L4 稀有",
+      "effect": "专注自然恢复+1/s；总恢复上限8/s",
+      "set": "缄印",
+      "source": "C10 / M5保底，U2-04可提前学图",
+      "legacySource": "三章配方C10",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "J05",
+      "name": "落日余辉",
+      "legacyName": "落日余辉",
+      "tierAndSlot": "项链 L4 史诗",
+      "effect": "对自己造成燃烧的敌，首次雷伤触发熄火爆6奥术并移除燃烧/CD8s",
+      "set": "灰烬",
+      "source": "M6 / B10宝匣附囊",
+      "legacySource": "三章沉钟宝匣附囊",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "J06",
+      "name": "沉钟之泪",
+      "legacyName": "沉钟之泪",
+      "tierAndSlot": "项链 L3 稀有",
+      "effect": "冰抗+10%，雷抗-5%",
+      "set": "沉钟",
+      "source": "瑟维恩二幕专售56币",
+      "legacySource": "瑟维恩二章专售56金币",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "J07",
+      "name": "双生契约",
+      "legacyName": "双生契约",
+      "tierAndSlot": "项链 L5 史诗",
+      "effect": "两个不同符咒在6s内命中同敌，给自身护盾6/CD10s",
+      "set": "缄印",
+      "source": "F17或F14补领，共同唯一收据",
+      "legacySource": "四章维修侧箱",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "J08",
+      "name": "归乡信物",
+      "legacyName": "归乡信物",
+      "tierAndSlot": "项链 L2 精良",
+      "effect": "最大生命+6；脱战显示最近已发现检查点方向",
+      "set": "寻宝客",
+      "source": "S01-T3教学，M2补漏同一收据",
+      "legacySource": "首章洛恩的可跳过寻宝教学",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    }
+  ],
+  "retainedLegendaries": [
+    {
+      "id": "L01",
+      "name": "风暴王的遗嘱",
+      "tierAndSlot": "单手剑 / 传奇",
+      "effect": "直接近战22%留下7s雷痕；R引爆近处雷痕并连锁最多两敌",
+      "source": "S08旧隐匣18% / 原隘口监守25%传奇池；结果写档"
+    },
+    {
+      "id": "L02",
+      "name": "阿斯特拉的回信",
+      "tierAndSlot": "双手弓 / 传奇",
+      "effect": "箭矢折返，每航段同一目标至多命中一次；走位改变回程",
+      "source": "S08旧隐匣18% / 原隘口监守25%传奇池；结果写档"
+    }
+  ],
+  "consumables": [
+    {
+      "id": "T01",
+      "name": "奥术札记",
+      "legacyName": "奥术札记",
+      "tierAndSlot": "L1 普通",
+      "effect": "7m直线12奥术，CD6s；无条件基础符",
+      "set": "无",
+      "source": "初始6+C13；M1另3",
+      "legacySource": "初始6张；C13每批3张",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "T02",
+      "name": "黑契封印",
+      "legacyName": "黑契封印",
+      "tierAndSlot": "L2 稀有",
+      "effect": "7m10奥术并标记8s；目标承受符咒直接伤害+10%，CD8s",
+      "set": "无",
+      "source": "S07固定3+C14",
+      "legacySource": "首章双钉线索箱3张；C14每批3张",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "T03",
+      "name": "回响祷文",
+      "legacyName": "回响祷文",
+      "tierAndSlot": "L2 稀有",
+      "effect": "7m12奥术；自己的标记目标追加8奥术并恢复4生命，CD8s；不可过量转护盾",
+      "set": "无",
+      "source": "M2 / S10固定3+C15",
+      "legacySource": "首章抬杆宝匣副格3张；C15每批3张",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "T04",
+      "name": "守护圣印",
+      "legacyName": "守护圣印",
+      "tierAndSlot": "L3 稀有",
+      "effect": "护盾15/4s，CD14s；同源刷新不相加",
+      "set": "无",
+      "source": "M3包3+C16；H07旧石柜另3",
+      "legacySource": "二章守桥旁石柜3张；C16每批3张",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "T05",
+      "name": "寒冬敕令",
+      "legacyName": "寒冬敕令",
+      "tierAndSlot": "L3 稀有",
+      "effect": "1.5m区域6冰＋1层冰缓；普通敌定身0.6s，Boss只削韧4，CD10s",
+      "set": "无",
+      "source": "M4包3+C11",
+      "legacySource": "二章C11，每批3张",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "T06",
+      "name": "风暴判词",
+      "legacyName": "风暴判词",
+      "tierAndSlot": "L4 稀有",
+      "effect": "主目标14雷，另1目标链7雷，CD9s；链不再递归触发",
+      "set": "无",
+      "source": "U2-05旧箱3；M5/M6各另3；C17",
+      "legacySource": "三章断钟支匣3张；C17每批3张",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "T07",
+      "name": "焚夜祷书",
+      "legacyName": "焚夜祷书",
+      "tierAndSlot": "L5 史诗",
+      "effect": "区域10火并燃烧4/s共3s，CD10s；每次仍消耗1张",
+      "set": "无",
+      "source": "M7包3+C12",
+      "legacySource": "四章C12，每批3张",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    },
+    {
+      "id": "T08",
+      "name": "终誓遗卷",
+      "legacyName": "终誓遗卷",
+      "tierAndSlot": "L5 传奇",
+      "effect": "单体20奥术；自己的标记目标清标、专注+5，CD12s；不能跳Boss阶段",
+      "set": "无",
+      "source": "F14侧格唯一1，无配方",
+      "legacySource": "四章誓火侧格唯一1张，无制造/复演真实奖励/重复补给",
+      "sourceDocument": "docs/interactions/equipment-and-crafting.md"
+    }
+  ],
+  "mainRewards": [
+    {
+      "id": "M1",
+      "name": "死人来信",
+      "trigger": "S01-T1接约预支；S04夺匣并确认原信",
+      "gold": 160,
+      "iron": 8,
+      "seals": "T01×3",
+      "gear": "无固定武器；DR1四件自选一",
+      "detail": "接约先得30币，夺匣后130；拒约不领30，夺匣后160，同一阶段总额160。自选一由军需盒领取，和普通怪掉落不同收据。"
+    },
+    {
+      "id": "M2",
+      "name": "血路破关",
+      "trigger": "U1-05工匠实际离场；S10击败并抬杆，两段独立",
+      "gold": 220,
+      "iron": 12,
+      "seals": "T03×3",
+      "gear": "W02；J08教学漏领补齐",
+      "detail": "救援段80币/铁4；抬杆段140币/铁8+主装备。未先救人可先领抬杆段，救援回访再领，不以幕号推断。"
+    },
+    {
+      "id": "M3",
+      "name": "救命者的铁锁",
+      "trigger": "H03镜架稳定、完成小幅松环与实际回退",
+      "gold": 180,
+      "iron": 10,
+      "seals": "T04×3",
+      "gear": "C01/C03/C04/C05/C06/C07/C08工艺图谱",
+      "detail": "发符纹8用于原配方；不从阿德里安的过场救人直接判玩家完成试验。"
+    },
+    {
+      "id": "M4",
+      "name": "断岳夺火",
+      "trigger": "H08放桥后H09武备台；U1-08第一轮接触分别领取",
+      "gold": 260,
+      "iron": 16,
+      "seals": "T05×3",
+      "gear": "W03+A05；DR2四件自选一",
+      "detail": "桥包180币/铁12+W03/A05/自选；接触包80币/铁4。另符纹4、C11；首次接触不要求服从核心，不伤害它也有完整包。"
+    },
+    {
+      "id": "M5",
+      "name": "沉钟惊雷",
+      "trigger": "U2-03实际泄压回退；U2-06两角度原刻核验",
+      "gold": 240,
+      "iron": 14,
+      "seals": "T06×3",
+      "gear": "A11；DR3或DU2八件自选一",
+      "detail": "泄压100币/铁6，档案140币/铁8+装备。另符纹4、C09/C10/C17；公开/隐瞒不影响基础奖励。"
+    },
+    {
+      "id": "M6",
+      "name": "怒潮夺宝",
+      "trigger": "B10胜利后落链、三组点验、开宝匣",
+      "gold": 320,
+      "iron": 18,
+      "seals": "T06×3",
+      "gear": "W10+J05；完整护符/余烬铜芯二选一独立确认",
+      "detail": "另符纹4。互斥古物不计作两件永久装备；核心装备不依赖道德选择，非人生命不拆成材料。"
+    },
+    {
+      "id": "M7",
+      "name": "黑冠陨落",
+      "trigger": "散热/泄压/实际出口已核验；F09/F10拆台；F13胜利后F14开主箱",
+      "gold": 440,
+      "iron": 24,
+      "seals": "T07×3",
+      "gear": "W06；J07若检修箱漏领则同一收据补齐",
+      "detail": "准备段160币/铁8、锻造芯2/符纹4、C02/C12；开库段280币/铁16、符纹4。T08只在侧格唯一1张，不放主箱；安全条件与双台分别检查。"
+    },
+    {
+      "id": "M8",
+      "name": "天火归途",
+      "trigger": "U1-08实际执行所选终局操作并撤出危险区",
+      "gold": 240,
+      "iron": 8,
+      "seals": "无新符，避免终局刷唯一卷",
+      "gear": "六地区域池任选一件尚未拥有物；破晓远征外观记录",
+      "detail": "四种结局同等价值，不绑定最高数值装备。回返不刷新敌群；原固定物和自选物分别写收据。"
+    }
+  ],
+  "sideRewards": [
+    {
+      "id": "Q1",
+      "name": "铁誓无名碑",
+      "places": "S12→U1-06→F05",
+      "trigger": "完成原名/存疑记录并交付证词；不要求支持某个立场",
+      "gold": 140,
+      "iron": 6,
+      "choice": "DR1-01 / DR2-02 / DU1-03 三选一",
+      "benefit": "洛恩签完整经历时，F05旧卫可听证；不删除全部城防。"
+    },
+    {
+      "id": "Q2",
+      "name": "猎域断链",
+      "places": "S05/S19→B15→F07",
+      "trigger": "确认猎人和古兽去向，完成路线处置",
+      "gold": 160,
+      "iron": 6,
+      "choice": "DR1-04 / DR2-04 / DR3-01 三选一",
+      "benefit": "删去栖居坐标后核验通路会导致研究侧室被军方抢先占领；仍能推进。"
+    },
+    {
+      "id": "Q3",
+      "name": "断航归来",
+      "places": "S18→B03/B14→B18",
+      "trigger": "比对取消信、潮痕和双方付款凭据，提交所选证据版本",
+      "gold": 180,
+      "iron": 8,
+      "choice": "DR3-02 / DR3-03 / DR4-01 三选一",
+      "benefit": "完整证据可争取艾莉丝在F07一次接应；她不会变成永久跟班。"
+    },
+    {
+      "id": "Q4",
+      "name": "撕开假星图",
+      "places": "U1-07→U2-06→F06",
+      "trigger": "完成可复查演示或明确封存现有证据",
+      "gold": 180,
+      "iron": 8,
+      "choice": "DU1-04 / DU2-02 / DU2-03 三选一",
+      "benefit": "共同署名改善测绘合作；维持单独署名保成果但人物分路。"
+    },
+    {
+      "id": "Q5",
+      "name": "向光而行",
+      "places": "U1-02/03→E03→S01-T6",
+      "trigger": "完成两处高差测绘，交给未参与者试走并完成回返",
+      "gold": 140,
+      "iron": 6,
+      "choice": "DR1-02 / DU1-02 / DU2-01 三选一",
+      "benefit": "撤离者能按公开安全图自行走出；不自动从地表开E03。"
+    },
+    {
+      "id": "Q6",
+      "name": "影船旧债",
+      "places": "B04/B14→B09",
+      "trigger": "壶面校光、进入真实船体，核对退款原件与装载副页",
+      "gold": 160,
+      "iron": 6,
+      "choice": "DR3-04 / DU2-04 / DR4-04 三选一",
+      "benefit": "艾莉丝明确归还与收藏的边界；可保留经营或离店学舞，回报等值。"
+    }
+  ],
+  "rules": {
+    "ordinary": "每个真实普通敌首次击败固定铁1与金币3/4/5/6（按R1/R2/R3/R4；U1为4、U2为5）；另20%装备触发，触发后按所在池权重取1件。鸣震甲虫两只合计按1次资源及装备事件。",
+    "pity": "同一地区连续5次合格事件未出装备，第6次强制出1件；出装后清零。未发现且不能进入的区域不提前计数。已败、复演、召物、投降者不计。所有结果写档，读档不重掷。",
+    "pool": "六池各4件，权重30/30/20/20，总100；精良/稀有/史诗由物品自身决定。普通池不混入固定剧情物、商人独家物、传奇L01/L02、T08或精英奖；旧传奇检定独立，不重置/推进新区域保底。",
+    "duplicates": "永久物每ID同时最多1件。自然抽到已拥有或仍待领的物品时，首次确定为铁2+金币8/12/16/20（U1=12、U2=16），不重抽、不额外推进保底。剧情自选只列未拥有未待领，池已空则同额兑换。自然抽到重复也视作一次出装事件并清零保底。",
+    "outpost": "每个标据点包的独立遭遇事件完成后金币40/55/70/90（U1=55，U2=70）+铁3+当地池1件。交涉/潜入/停机用同一清算收据：未被击败的该组敌人的首次资源与预定掉落在被封存的军需箱结算，并记该实例奖励已处理，之后击败不能再领。",
+    "elite": "八个V_E01—08事件完成：固定DE同编号1件+当地池1件+金币80/100/120/160（U1=110、U2=130）+铁5；击杀、缴械解职、停机三类实际完成同一事务，不要求杀人拿最高回报。主线图/机关知识在战斗前可取得。",
+    "peaceful": "可选精英与据点成功交涉/停机采用同一事件键，不新增额外奖励箱。主线四场原必败战仍需完成，普通路边敌绕过不自动发奖。",
+    "capacity": "永久装备仍按现有9槽；弓和双手长杖不能持副手。符T01—07每种12/合计48（含T08），T08上限1；铁99/金币9999/符纹40/芯8沿用完整设计容量。固定包拆成物品和材料数量余量，能收多少扣多少；自选确认前校验容量，溢出留原安全锚点，不吞装备。",
+    "budget": "主线金币2060、铁110、符纹28、锻造芯2；六支线金币960、铁40；非主线调查/据点/小怪另算，不能冒充保底。10件旧合成永久物首造需铁56/符纹15/芯1，主线净余54/13/1。7种旧制符首批另耗铁26，仍余28铁；新掉落物不设额外制造成本。旧商人6件共300币，能负担不代表库存刷新。",
+    "replay": "主世界已败不刷新；显式隔离复演沿用每完整场铁2，不掉装备、不给金币、不重置地区保底，不复制主线首领和已败随从。丰富掉落来自完整世界探索，不用读档或复活凑数量。",
+    "migration": "使用新contentVersion=campaign-v6-design；发布接入前必须设计存档迁移。可信旧奖保留原物，新增金币只补新旧应得差额；无法证实完成条件的旧档不猜奖。新事件用独立receipt并引用旧唯一装备receipt，不直接覆盖SaveSnapshotV1。此目录数据不被运行时导入。",
+    "combatCaps": "单体同一附加效果按effectId仅最强一份；移动加成总≤15%，物理减伤总≤35%，专注自然恢复≤8/s。新增直接伤害增幅合计≤20%，同一附伤不递归触发；Boss削韧100→失衡0.6s/8s，失衡后共享2s保护，地形失衡不相加。基础生命120，换装不回当前血/专注。"
+  },
+  "validation": {
+    "geographicNodes": 91,
+    "townInteriors": 6,
+    "totalNodes": 97,
+    "bosses": 12,
+    "commonArchetypes": 24,
+    "newGear": 32,
+    "permanentEquipment": 74,
+    "consumableTypes": 8,
+    "totalItemTypes": 82,
+    "regions": 6,
+    "mainGold": 2060,
+    "mainIron": 110,
+    "sideGold": 960,
+    "sideIron": 40
+  }
+}

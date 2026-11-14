@@ -1,0 +1,102 @@
+{
+  "status": "complete: standing-head canon installed, built, HTTP verified and actual game opened",
+  "date": "2026-11-07",
+  "scope": "W01 current longsword: exploration and held idle/walk/run; other weapons, dodge and original HUD remain outside this change.",
+  "latestUserDirection": "Use standing head; moving head was too large. Standing kept unchanged after stage1 body alignment.",
+  "manifestSHA256": "4065d59acbccb8c85642cf31cab840a8fce3577a87806ce2c558096098b41df8",
+  "headAuthority": {
+    "explore": [
+      "locomotion-v1/W01-explore-idle.png",
+      "df887b28a9bef335aa326d86bf2117a07f1faeef192ac1b55145123b549481cd"
+    ],
+    "held": [
+      "locomotion-v1/W01-held-idle.png",
+      "56fff3bc81b1c2016ded85cd4f315997d7872897cba7bcc87c2d059991a4891c"
+    ]
+  },
+  "changedActionsFromInitialBaseline": [
+    "idle",
+    "walk",
+    "run",
+    "idle_W01",
+    "walk_W01",
+    "run_W01",
+    "explore_idle_W01",
+    "explore_walk_W01",
+    "explore_run_W01"
+  ],
+  "protectedActionsFromInitialBaseline": 79,
+  "stage2ProtectedActions": 82,
+  "sourceRuntimeBuildHTTPAtlasCount": 69,
+  "HUDOriginalSHA256": "4e9e8c3451c64a48554aaac4bcdc95745a92826206fdb72f4e8c1a151c2a45b6",
+  "minimumBodyMaskIoU": 0.924215,
+  "bodyEvidence": "Preserved scale/timing/phase/contact/flight and close measured body/pose silhouettes. Native generator may repaint RGB detail; no unchanged-body-pixel assertion.",
+  "stage2StandingAndRootUnchanged": true,
+  "TypeScriptExitCode": 0,
+  "existingRulesExecutedDuringWork": {
+    "passed": 95,
+    "failed": 0
+  },
+  "finalCocosBuildExitCode": 0,
+  "existingMotionCapture": "PASS sword/bow/staff/spell/dodge/run; no runtime errors/material mismatch",
+  "captures": [
+    {
+      "label": "final",
+      "samples": 344,
+      "errors": [],
+      "materialMismatches": 0,
+      "reports": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\final\\capture.json"
+    },
+    {
+      "label": "final-all",
+      "samples": 432,
+      "errors": [],
+      "materialMismatches": 0,
+      "reports": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\final-all\\capture.json"
+    }
+  ],
+  "independentRuntimeReview": "head-scale-v2/runtime-visual-review.json",
+  "actualReviewedScreenshots": 24,
+  "approxRightViewHeadScreenPixels": {
+    "idle": [
+      37,
+      36
+    ],
+    "walk": [
+      38,
+      36
+    ],
+    "run": [
+      38,
+      37
+    ],
+    "heldRun": [
+      39,
+      38
+    ],
+    "measurementUncertainty": "about1–2px; finite phase/pose differences remain, held run about5–8% larger than neutral in sampled right view"
+  },
+  "previewURL": "http://127.0.0.1:7469/desktop-preview.048c2.html?view=2d&locomotion=standing-head-v2",
+  "previewObserved": "Normal playable inn visible in landscape iframe at natural portrait desktop pane; no rotation blocking screen; browser viewport override reset, output tab marked deliverable.",
+  "fullVideo": "final-all/idle-walk-run.webm",
+  "presentationClip": {
+    "path": "standing-walk-run.webm",
+    "source": "final-all/idle-walk-run.webm",
+    "seconds": [
+      9.3,
+      13.0
+    ],
+    "viewportCrop": [
+      430,
+      110,
+      420,
+      420
+    ],
+    "pixelChange": "Only video viewing-region crop/reencode; no character texture editing."
+  },
+  "rasterTool": "Built-in image_gen only. Final PNGs copied byte-for-byte from native raw outputs, prompts/provenance adjacent.",
+  "limits": "Only W01 states are aligned. Independent source/full native geometry and24 rendered screenshots reviewed; capture data samples allwalk4/run8 phases in the two runs combined, not every video frame visually inspected. Two-second held-state grace can naturally switch captured run to exploration.",
+  "installReport": "head-scale-v2/install-report.json",
+  "buildAudit": "head-scale-v2/served-build-audit.json",
+  "backupDirectory": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\locomotion-install-t_ahx5_y"
+}

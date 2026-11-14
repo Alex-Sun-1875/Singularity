@@ -1,0 +1,6 @@
+先试 front-run/prompt.txt：图1=run-front，图2=standing-front，仅衣色/裤色。
+默认使用对应*-rgba.png；ComfyUI的LoadImage之后用JoinImageWithAlpha保留原alpha，原生透明编辑输入。
+通过后才另开一张原始run-front，试 front-run/prompt-proportions.txt；不用上一张模型输出串联。
+第二组背剑只用standing-back原件 + back-sword/prompt.txt，不需第二张角色参考。
+备用背跑：图1=run-back，图2=standing-back，使用back-sword/prompt-run-back-optional.txt。
+图像绑定与SHA256以input-manifest.json为准。先单帧，局部保护合成并验收后再考虑批量。

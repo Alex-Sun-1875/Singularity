@@ -1,0 +1,273 @@
+{
+  "verifiedOn": "2026-11-12",
+  "version": "0.3.20",
+  "status": "local-validation",
+  "platformVerified": false,
+  "phoneThermalVerified": false,
+  "uploaded": false,
+  "submittedForReview": false,
+  "publiclyReleased": false,
+  "inputLogDirectory": "C:/Users/Alexa/Downloads/AFEq3V5WuIss2cVqEwiNxlCdUDQVbJmC.device_91_logs",
+  "reportedBaseline": {
+    "device": "HONOR X60i / LYN-AN00",
+    "system": "Android 14",
+    "sdkVersion": "3.4.7",
+    "averageMemoryMB": 948.21,
+    "peakMemoryWithin10MinutesMB": 1153.79,
+    "fpsAverage": 53.790478,
+    "stutterPercent": 2.4,
+    "gameVersion": "not recorded in the supplied JS log",
+    "temperatureMeasuredReliably": false
+  },
+  "frameRatePolicy": {
+    "before": 60,
+    "after": 60,
+    "newApplicationFrameRateOverride": false
+  },
+  "changes": [
+    "Use Cocos 3.8.8 built-in legacy forward pipeline to avoid the measured CRP global descriptor binding allocation hotspot. No installed engine modification.",
+    "Use inherited CompactMask with existing CompactGraphics at all eight mask-owning scripts. Retain native stencil/hit-test/resize.",
+    "Disable empty disabled-overlay stencil containers while their overlays are hidden."
+  ],
+  "localComparison": {
+    "method": "Windows desktop Chromium, Android mobile UA, 844x390 CSS viewport, requested DPR3, Cocos Creator 3.8.8 release exports. CDP sampled allocations include objects collected by minor/major GC. Explicit diagnostic GC only at measurement boundaries, never added to game code. Not phone CPU/GPU timing, temperature, process memory or measured phone FPS.",
+    "comparison": {
+      "mobile-before": {
+        "sampledAllocationsIn12Seconds": 440403692,
+        "heapAfterDiagnosticGc": 71615370,
+        "heapAfterSample": 76242958,
+        "gfxBytes": {
+          "bufferSize": 66238018,
+          "textureSize": 241924704
+        },
+        "drawCalls": 214,
+        "triangles": 266713,
+        "frameRateSetting": 60,
+        "graphicsComponents": 74,
+        "graphicsGpuBytes": 50687756,
+        "graphicsCpuBytes": 5031936,
+        "errors": []
+      },
+      "mobile-after": {
+        "sampledAllocationsIn12Seconds": 82208800,
+        "heapAfterDiagnosticGc": 67756936,
+        "heapAfterSample": 70052652,
+        "gfxBytes": {
+          "bufferSize": 16701414,
+          "textureSize": 246119008
+        },
+        "drawCalls": 190,
+        "triangles": 265935,
+        "frameRateSetting": 60,
+        "graphicsComponents": 74,
+        "graphicsGpuBytes": 1221632,
+        "graphicsCpuBytes": 5031936,
+        "errors": []
+      },
+      "tap-after": {
+        "sampledAllocationsIn12Seconds": 81504876,
+        "heapAfterDiagnosticGc": 67133517,
+        "heapAfterSample": 69346253,
+        "gfxBytes": {
+          "bufferSize": 16709738,
+          "textureSize": 209065512
+        },
+        "drawCalls": 187,
+        "triangles": 266040,
+        "frameRateSetting": 60,
+        "graphicsComponents": 74,
+        "graphicsGpuBytes": 1230336,
+        "graphicsCpuBytes": 5031936,
+        "errors": []
+      }
+    },
+    "separation": "mobile-before and mobile-after use identical ordinary Web resource paths; tap-after separately validates the existing TapTap resource routing/texture reuse and is not used to attribute texture savings to this change."
+  },
+  "deltas": {
+    "sampledAllocationReductionPercent": 81.33,
+    "gfxBufferSavedBytes": 49536604,
+    "textureIncreaseBytes": 4194304,
+    "netGfxBufferAndTextureSavedBytes": 45342300,
+    "drawCallsBefore": 214,
+    "drawCallsAfter": 190
+  },
+  "validation": {
+    "types": "passed",
+    "coreTypes": "passed",
+    "existingTestsPassed": 116,
+    "newCommittedTests": 0,
+    "tapConfig": "passed",
+    "ordinaryWebBuild": "passed",
+    "tapResourceWebPreview": "passed",
+    "cocosMiniGameBuild": "passed",
+    "officialConversion": "passed",
+    "zipIntegrity": "passed",
+    "sha256Rechecked": true,
+    "repeatAreaTransitions": [
+      "S01-T1",
+      "S01",
+      "S03",
+      "S13",
+      "S01-T1",
+      "S13",
+      "S01-T1"
+    ],
+    "touchMovementAndAttackTogether": true,
+    "hairstyles": [
+      {
+        "id": "curly",
+        "ok": true,
+        "active": 1
+      },
+      {
+        "id": "dante",
+        "ok": true,
+        "active": 1
+      },
+      {
+        "id": "nero",
+        "ok": true,
+        "active": 1
+      },
+      {
+        "id": "vergil",
+        "ok": true,
+        "active": 1
+      }
+    ],
+    "backgroundPauseResume": "passed",
+    "persistenceReload": true,
+    "webgl1Api": 6,
+    "webgl1ExpectedCapabilityMessages": [
+      "Error 16405, please go to https://github.com/cocos/cocos-engine/blob/3.8.8/EngineErrorMap.md#16405 to see details.",
+      "Error 16405, please go to https://github.com/cocos/cocos-engine/blob/3.8.8/EngineErrorMap.md#16405 to see details."
+    ],
+    "webgl1RuntimeErrors": [],
+    "soakSeconds": 120,
+    "soakFixture": "Lv40 through existing experience interface, one initial placement near an existing S13 enemy, then ordinary idle hunting. No runtime rules altered.",
+    "soakEvents": {
+      "skill_cast": 27,
+      "skill_release": 27,
+      "skill_status": 9,
+      "enemy_attack_begin": 15,
+      "skill_segment": 30,
+      "poise": 49,
+      "hit": 56,
+      "enemy_recoil": 55,
+      "skill_hit": 51,
+      "enemy_attack_lock": 4,
+      "enemy_status": 2,
+      "enemy_attack_release": 3,
+      "enemy_zone": 1,
+      "enemy_attack_end": 4,
+      "hurt": 1,
+      "enemy_attack_hit": 1,
+      "notice": 3,
+      "action": 5,
+      "reward": 2,
+      "loot_roll": 49,
+      "loot_drop": 26,
+      "experience": 1,
+      "defeat": 49,
+      "block": 1,
+      "item": 4,
+      "enemy_respawn": 32
+    },
+    "soakRuntimeErrors": [],
+    "additionalFamilies": {
+      "FIR": {
+        "seconds": 12,
+        "events": {
+          "skill_cast": 12,
+          "skill_release": 11,
+          "skill_status": 4,
+          "enemy_attack_begin": 5,
+          "skill_zone": 3,
+          "skill_segment": 17,
+          "poise": 13,
+          "hit": 27,
+          "enemy_recoil": 23,
+          "skill_hit": 20,
+          "enemy_attack_lock": 4,
+          "enemy_attack_release": 4,
+          "enemy_zone": 1,
+          "hurt": 1,
+          "enemy_status": 2,
+          "enemy_attack_hit": 1,
+          "enemy_attack_end": 4,
+          "action": 5,
+          "projectile": 5,
+          "reward": 2,
+          "loot_roll": 7,
+          "loot_drop": 4,
+          "experience": 1,
+          "defeat": 7
+        },
+        "errors": [],
+        "savedAndRestored": true
+      },
+      "THU": {
+        "seconds": 12,
+        "events": {
+          "skill_cast": 9,
+          "enemy_attack_begin": 3,
+          "skill_release": 9,
+          "skill_segment": 24,
+          "poise": 10,
+          "hit": 16,
+          "enemy_recoil": 15,
+          "skill_hit": 12,
+          "enemy_status": 1,
+          "enemy_attack_lock": 3,
+          "reward": 2,
+          "loot_roll": 9,
+          "loot_drop": 6,
+          "experience": 1,
+          "defeat": 9,
+          "action": 4,
+          "projectile": 4,
+          "enemy_attack_release": 2,
+          "enemy_attack_end": 2,
+          "item": 1
+        },
+        "errors": [],
+        "savedAndRestored": true
+      }
+    },
+    "defaultLocalPreview": "7469 updated and boot verified; S01-T1, failure empty, original frame-rate setting 60, page errors 0"
+  },
+  "package": {
+    "filename": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-memory-v2\\SwordAndFire_0.3.20_TapTap_guest-test_20261111T170336Z\\SwordAndFire_0.3.20_TapTap_guest-test_20261111T170336Z.zip",
+    "sha256": "e1454681ba491524725ef41e3360cae822c43cdea5bc554e91eabc56dfe45357",
+    "uploadZipBytes": 218712120,
+    "localInitialPayloadZipBytes": 1284291,
+    "buildMode": "guest-test",
+    "miniAppId": "tapmcddcmbhf5lxqng",
+    "actualPlatformFirstPackageMeasured": false,
+    "playableBeforeResourceBytesMeasured": false,
+    "remainingIntegration": "Formal login service deployment; guest test uses local saves only."
+  },
+  "limitations": [
+    "Browser allocation counters are not Android/iOS process memory or temperature.",
+    "No claim that the supplied 1153.79 MB platform peak is resolved until the new package is rerun on the same device.",
+    "Cocos legacy pipeline remains supported by 3.8.8 but is planned for removal in a future major engine version.",
+    "Small native buffer-cache growth and first-use VFX/loot warmup remain observable.",
+    "GPU-compressed texture/hairstyle splitting opportunities were identified, not shipped without art and device verification."
+  ],
+  "evidenceDirectory": "test-results/device91-memory-v2",
+  "rawProfilesDirectory": "temp/device91-memory-v2",
+  "analysis": "docs/performance/taptap-memory-device91-2026-11-12.md",
+  "references": [
+    "https://docs.cocos.com/creator/3.8/manual/en/render-pipeline/overview.html",
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/performance-standards/",
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/performance-test/"
+  ],
+  "sourceInventory": {
+    "path": "test-results/device91-memory-v2/source-final.json",
+    "scope": "Post-package-build working-source hashes; not represented as an immutable source-to-bundle manifest.",
+    "workspaceChangedAfterInventory": [
+      "src\\cocos\\assets\\scripts\\shared\\ui\\RpgPanel.ts"
+    ],
+    "note": "Other concurrent UI work is preserved. Only the CompactMask import changes in shared panel files belong to this optimization."
+  }
+}

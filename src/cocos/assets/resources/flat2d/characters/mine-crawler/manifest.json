@@ -1,0 +1,268 @@
+{
+  "revision": "mine-crawler-pilot-v1-ground-anchors-runtime1024",
+  "sourceDesign": "source-art/encounters/cloud-world-v2/actor-pilot-v1/r2-3-sheet-v1.png",
+  "loaded3DModel": false,
+  "image": "atlas.png",
+  "columns": 4,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "directions": [
+    "down",
+    "left",
+    "up",
+    "right"
+  ],
+  "origin": [
+    128.602667,
+    191.333333
+  ],
+  "perFrameOrigins": [
+    [
+      128.602667,
+      191.333333
+    ],
+    [
+      129.040667,
+      189.602667
+    ],
+    [
+      135.142667,
+      189.769333
+    ],
+    [
+      129.905333,
+      189.333333
+    ],
+    [
+      153.241333,
+      206.666667
+    ],
+    [
+      153.924667,
+      207.333333
+    ],
+    [
+      152.283333,
+      206.0
+    ],
+    [
+      158.609333,
+      200.0
+    ],
+    [
+      128.787333,
+      206.0
+    ],
+    [
+      122.847333,
+      207.333333
+    ],
+    [
+      132.363333,
+      208.0
+    ],
+    [
+      129.86,
+      200.666667
+    ],
+    [
+      105.704,
+      207.333333
+    ],
+    [
+      107.554667,
+      200.666667
+    ],
+    [
+      110.124667,
+      205.333333
+    ],
+    [
+      107.533333,
+      198.666667
+    ]
+  ],
+  "alphaBounds": [
+    [
+      52.0,
+      46.0,
+      204.0,
+      210.0
+    ],
+    [
+      56.0,
+      44.0,
+      200.0,
+      212.0
+    ],
+    [
+      58.666667,
+      45.333333,
+      197.333333,
+      210.0
+    ],
+    [
+      48.666667,
+      60.666667,
+      206.666667,
+      194.666667
+    ],
+    [
+      34.0,
+      46.666667,
+      221.333333,
+      208.666667
+    ],
+    [
+      25.333333,
+      46.0,
+      230.666667,
+      209.333333
+    ],
+    [
+      28.0,
+      48.0,
+      228.0,
+      207.333333
+    ],
+    [
+      24.666667,
+      54.666667,
+      231.333333,
+      201.333333
+    ],
+    [
+      57.333333,
+      47.333333,
+      198.0,
+      208.0
+    ],
+    [
+      56.0,
+      45.333333,
+      200.0,
+      210.0
+    ],
+    [
+      56.666667,
+      46.0,
+      198.666667,
+      210.0
+    ],
+    [
+      52.0,
+      53.333333,
+      204.0,
+      202.666667
+    ],
+    [
+      36.0,
+      46.0,
+      219.333333,
+      209.333333
+    ],
+    [
+      29.333333,
+      52.0,
+      226.0,
+      204.0
+    ],
+    [
+      29.333333,
+      48.666667,
+      226.666667,
+      206.666667
+    ],
+    [
+      22.666667,
+      56.0,
+      232.666667,
+      200.0
+    ]
+  ],
+  "alphaThreshold": 0.025,
+  "frameScaleFactors": {
+    "atlas": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "camera": {
+    "worldUnitsPerPixel": 0.00975
+  },
+  "actions": {
+    "idle": {
+      "image": "atlas.png",
+      "frames": 1,
+      "frameIndices": [
+        0
+      ],
+      "fps": 1,
+      "loop": true
+    },
+    "walk": {
+      "image": "atlas.png",
+      "frames": 2,
+      "frameIndices": [
+        1,
+        2
+      ],
+      "fps": 5,
+      "loop": true,
+      "nominalSpeedMetresPerSecond": 1.35
+    },
+    "attack_sword": {
+      "image": "atlas.png",
+      "frames": 3,
+      "frameIndices": [
+        0,
+        3,
+        0
+      ],
+      "phaseStarts": [
+        0,
+        0.28,
+        0.6
+      ],
+      "fps": 5,
+      "loop": false
+    }
+  },
+  "limitations": [
+    "Four actually drawn directions only; no mirrored or invented diagonal views.",
+    "Two walking contact drawings; no generated in-between frames. Cadence follows measured runtime speed.",
+    "Attack has one committed pincer drawing sampled between actual idle poses; it is not a new full windup/recovery drawing sequence.",
+    "No hit/death drawing: hit uses the documented idle fallback; death hides this actor without inventing a corpse.",
+    "Static anchor review does not replace actual collision, turn and gait play review.",
+    "Native 3D mode retains its separately documented legacy actor; this pack contains no mesh, skeleton or 3D animation."
+  ],
+  "runtimeAtlasResample": {
+    "scale": 0.6666666666666666,
+    "sourceAtlasSize": [
+      1536,
+      1536
+    ],
+    "runtimeAtlasSize": [
+      1024,
+      1024
+    ],
+    "filter": "Pillow LANCZOS, one whole-atlas resize",
+    "sourceAtlasSha256": "b4caa5ee1be31469d4bcb3eee915efd70de11f5834d3c634703c50e90590e9ea",
+    "sourceManifestSha256": "406ad775417aaa669d729365dda5dafc0d815b59476bd67913480ab4c72fe421",
+    "perFrameRescale": false
+  }
+}

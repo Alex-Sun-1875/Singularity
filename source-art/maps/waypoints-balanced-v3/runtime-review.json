@@ -1,0 +1,67 @@
+{
+  "date": "2026-11-08",
+  "completedAt": "2026-11-08T11:46:43.982779+08:00",
+  "status": "balanced-rune-appearance-and-runtime-review-passed",
+  "build": "portal-sigil-balanced-v1",
+  "buildRecord": "source-art/maps/waypoints-balanced-v3/portal-sigil-balanced-v1-build.json",
+  "preview": "http://127.0.0.1:7470/?view=2d&v=balanced3",
+  "selection": {
+    "current": "Original double ring, branching star and sparse glyph clusters with thicker strokes",
+    "rejectedDenseCandidate": "source-art/maps/waypoints-bold-v2/generation.json",
+    "reason": "User explicitly found the dense multi-ring design too complicated"
+  },
+  "texture": {
+    "file": "src/cocos/assets/resources/flat2d/waypoints-v1/ancient-sigil-balanced-v3.png",
+    "dimensions": [
+      1024,
+      1024
+    ],
+    "mode": "RGBA",
+    "sha256": "21e2f74e46917e46135114297985d060862ab94dc292b7d0364e28ef98450c2f",
+    "bytes": 595738
+  },
+  "appearance": {
+    "reviewedCases": 8,
+    "viewports": [
+      "desktop1280x720",
+      "mobile915x412 DPR2"
+    ],
+    "baseline": "portal-sigil-v3",
+    "findings": [
+      "Same original double-ring and branching motif; no added crowded rune bands.",
+      "Thicker pale-violet strokes are easier to distinguish on daylight grass/stone and dark inn floors.",
+      "Transparent negative space remains open, without an opaque purple disc or fog over the face.",
+      "Locked portals retain a darker state."
+    ],
+    "comparison": "source-art/maps/waypoints-balanced-v3/runtime-before-after.jpg",
+    "comparisonSources": "source-art/maps/waypoints-balanced-v3/runtime-before-after.sources.json"
+  },
+  "coverage": {
+    "areas": 97,
+    "actualPortals": 320,
+    "runtimeErrors": 0,
+    "failedRequests": 0,
+    "capturedPreviousResourcesAlive": 0,
+    "rapidDoubleFAndDoubleTap": "One original rebuild each, no sword attack"
+  },
+  "processing": {
+    "newGenerationCallsForSelectedBalancedAsset": 0,
+    "method": "Deterministic Pillow/NumPy dilation and violet stroke layers from original cloud-painted asset",
+    "script": "tools/model-pipeline/prepare_waypoint_sigil_balanced.py",
+    "newDependencies": false,
+    "localModelInference": false
+  },
+  "evidence": [
+    {
+      "file": "src/cocos/test-results/portal-sigil-balanced-v1-appearance.json",
+      "sha256": "ed690875d43363977611acad261b3e83c615bc33e92f36a2cea1e092b2dfc81d"
+    },
+    {
+      "file": "src/cocos/test-results/portal-sigil-balanced-v1-all97.json",
+      "sha256": "228d0e937ae2e35331d3ce6419f41992a01e488cf7d3718fb44530071a7cc43f"
+    }
+  ],
+  "limits": [
+    "Representative still-art and production renderer coverage; not a complete story playthrough or physical-phone performance test."
+  ]
+}

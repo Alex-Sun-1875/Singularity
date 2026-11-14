@@ -1,0 +1,760 @@
+{
+  "title": "导航 A* 堆优化与 WebAssembly 对照",
+  "date": "2026-11-14",
+  "scope": "Cocos Creator 3.8.8 / TypeScript，Android 14 专用模拟器 Chrome 113；非 TapTap App 内真机 CPU、功耗或温度验收。",
+  "decision": {
+    "typescriptOptimizationRetained": true,
+    "wasmEnabledInGame": false,
+    "performanceBaselineApproved": false,
+    "conclusion": "保留稳定同分排序的索引二叉堆和数字网格键，局部路径计算明显减少。当前 WASM 搜索原型未证明完整游戏收益，部分冷图查询较 TypeScript 更慢，继续作为工具侧对照原型。",
+    "note": "WASM 原型仅迁移 A* 网格搜索。首次未知边仍回调原有 JS 碰撞/视线，Math.hypot 也复用宿主以保持 f64 分数与路线；不能据此断言完整导航 WASM 实现没有价值。"
+  },
+  "implementation": {
+    "file": "src/cocos/assets/scripts/features/navigation/runtime/Navigation.ts",
+    "changes": [
+      "以 TinyQueue 的 ISC 二叉堆 sift 实现为基础，适配索引与 decrease-key，替代开放列表逐次线性扫描和 splice。",
+      "同分按原始入队顺序比较；保留邻居顺序、Math.hypot、双精度、20,000 次展开上限、碰撞/视线与缓存语义。",
+      "搜索内部使用整数网格键，保留外部路线缓存坐标键。",
+      "将网格搜索与端点连接/缓存/简化分离，以同一原生 Cocos 路径外壳比较 TypeScript 和 WASM。"
+    ],
+    "reuse": {
+      "source": "https://github.com/mourner/tinyqueue",
+      "license": "ISC",
+      "notice": "src/cocos/build-templates/web-desktop/THIRD_PARTY_NOTICES.txt",
+      "dependencyInstalled": false
+    },
+    "unchanged": [
+      "60 FPS 设置",
+      "怪物、投射物、技能、伤害与自然刷新规则",
+      "渲染质量和 HUD",
+      "TapTap 入口、登录、存档与版本号"
+    ]
+  },
+  "correctness": {
+    "typescript": {
+      "areas": 97,
+      "routes": 1164,
+      "visibility": 582,
+      "errors": [],
+      "status": "passed"
+    },
+    "existingTests": {
+      "passed": 140,
+      "failed": 0
+    },
+    "typecheck": "npm run check passed",
+    "cocosWebBuild": {
+      "command": "pwsh -NoProfile -File src/cocos/Build-Local.ps1 -OutputName perf-navigation-heap-20261114",
+      "passed": true,
+      "versionIncremented": false
+    },
+    "nativeThreeWay": {
+      "status": "passed",
+      "errors": [],
+      "cases": [
+        {
+          "area": "S01",
+          "queries": 12
+        },
+        {
+          "area": "S01-T1",
+          "queries": 15
+        },
+        {
+          "area": "H12",
+          "queries": 6
+        },
+        {
+          "area": "H13",
+          "queries": 6
+        },
+        {
+          "area": "U1-06",
+          "queries": 8
+        },
+        {
+          "area": "live-0",
+          "queries": 12
+        }
+      ],
+      "scope": "每个查询依次比较原版、TypeScript 堆版、WASM 版的完整路线，重复冷/缓存两轮；WASM 不扩大声称覆盖全部97区域。",
+      "validatedRun": "src/cocos/test-results/performance/navigation-heap-wasm-native-micro-v5"
+    }
+  },
+  "local": {
+    "h12": {
+      "area": "H12",
+      "queries": 6,
+      "variants": {
+        "baseline": {
+          "coldMs": 0.7333333333372138,
+          "searchMs": 0.5049999999988359,
+          "cachedMs": 0.10708333333362438,
+          "checksum": 16032
+        },
+        "heap": {
+          "coldMs": 0.449999999992239,
+          "searchMs": 0.27999999999689557,
+          "cachedMs": 0.1125,
+          "checksum": 16032
+        },
+        "wasm": {
+          "coldMs": 0.7250000000058208,
+          "searchMs": 0.2183333333329453,
+          "cachedMs": 0.11124999999980598,
+          "checksum": 16032
+        }
+      }
+    },
+    "live": {
+      "area": "live-0",
+      "queries": 12,
+      "variants": {
+        "baseline": {
+          "coldMs": 1.6958333333362439,
+          "searchMs": 1.2483333333337212,
+          "cachedMs": 0.19291666666661816,
+          "checksum": 40116
+        },
+        "heap": {
+          "coldMs": 1.4708333333304229,
+          "searchMs": 1.0891666666662787,
+          "cachedMs": 0.19458333333338185,
+          "checksum": 40116
+        },
+        "wasm": {
+          "coldMs": 1.0708333333362439,
+          "searchMs": 0.2975000000005821,
+          "cachedMs": 0.1518750000000485,
+          "checksum": 40116
+        }
+      }
+    },
+    "allCases": [
+      {
+        "area": "S01",
+        "queries": 12,
+        "variants": {
+          "baseline": {
+            "coldMs": 3.0208333333284827,
+            "searchMs": 1.7099999999996118,
+            "cachedMs": 0.16666666666666669,
+            "checksum": 46992
+          },
+          "heap": {
+            "coldMs": 2.129166666670547,
+            "searchMs": 0.789999999999418,
+            "cachedMs": 0.16583333333328482,
+            "checksum": 46992
+          },
+          "wasm": {
+            "coldMs": 2.9624999999941792,
+            "searchMs": 0.5516666666662786,
+            "cachedMs": 0.16770833333333335,
+            "checksum": 46992
+          }
+        }
+      },
+      {
+        "area": "S01-T1",
+        "queries": 15,
+        "variants": {
+          "baseline": {
+            "coldMs": 0.26333333333410947,
+            "searchMs": 0.22799999999968956,
+            "cachedMs": 0.18233333333356616,
+            "checksum": 10320
+          },
+          "heap": {
+            "coldMs": 0.25333333333643776,
+            "searchMs": 0.20399999999906868,
+            "cachedMs": 0.16449999999992237,
+            "checksum": 10320
+          },
+          "wasm": {
+            "coldMs": 0.2600000000015522,
+            "searchMs": 0.18533333333286767,
+            "cachedMs": 0.16683333333329453,
+            "checksum": 10320
+          }
+        }
+      },
+      {
+        "area": "H12",
+        "queries": 6,
+        "variants": {
+          "baseline": {
+            "coldMs": 0.7333333333372138,
+            "searchMs": 0.5049999999988359,
+            "cachedMs": 0.10708333333362438,
+            "checksum": 16032
+          },
+          "heap": {
+            "coldMs": 0.449999999992239,
+            "searchMs": 0.27999999999689557,
+            "cachedMs": 0.1125,
+            "checksum": 16032
+          },
+          "wasm": {
+            "coldMs": 0.7250000000058208,
+            "searchMs": 0.2183333333329453,
+            "cachedMs": 0.11124999999980598,
+            "checksum": 16032
+          }
+        }
+      },
+      {
+        "area": "H13",
+        "queries": 6,
+        "variants": {
+          "baseline": {
+            "coldMs": 1.9416666666608458,
+            "searchMs": 1.4066666666670549,
+            "cachedMs": 0.36041666666666666,
+            "checksum": 32400
+          },
+          "heap": {
+            "coldMs": 1.2833333333352734,
+            "searchMs": 0.6683333333329453,
+            "cachedMs": 0.2375,
+            "checksum": 32400
+          },
+          "wasm": {
+            "coldMs": 2.1000000000058208,
+            "searchMs": 0.5333333333352736,
+            "cachedMs": 0.22791666666647264,
+            "checksum": 32400
+          }
+        }
+      },
+      {
+        "area": "U1-06",
+        "queries": 8,
+        "variants": {
+          "baseline": {
+            "coldMs": 1.2375000000029104,
+            "searchMs": 0.8025000000008731,
+            "cachedMs": 0.12624999999970896,
+            "checksum": 28224
+          },
+          "heap": {
+            "coldMs": 0.7875000000058208,
+            "searchMs": 0.4187499999985448,
+            "cachedMs": 0.13812500000021827,
+            "checksum": 28224
+          },
+          "wasm": {
+            "coldMs": 1.25,
+            "searchMs": 0.3100000000005821,
+            "cachedMs": 0.13531250000014552,
+            "checksum": 28224
+          }
+        }
+      },
+      {
+        "area": "live-0",
+        "queries": 12,
+        "variants": {
+          "baseline": {
+            "coldMs": 1.6958333333362439,
+            "searchMs": 1.2483333333337212,
+            "cachedMs": 0.19291666666661816,
+            "checksum": 40116
+          },
+          "heap": {
+            "coldMs": 1.4708333333304229,
+            "searchMs": 1.0891666666662787,
+            "cachedMs": 0.19458333333338185,
+            "checksum": 40116
+          },
+          "wasm": {
+            "coldMs": 1.0708333333362439,
+            "searchMs": 0.2975000000005821,
+            "cachedMs": 0.1518750000000485,
+            "checksum": 40116
+          }
+        }
+      }
+    ],
+    "h12WarmSearchReductionPercent": 44.55445544603148,
+    "h12ColdReductionPercent": 38.63636363774666,
+    "validatedRun": "src/cocos/test-results/performance/navigation-heap-wasm-native-micro-v5",
+    "status": "passed",
+    "hostWorkload": {
+      "scope": "Creator CLI build-log content changes observed during the run; last-access metadata ignored; other host applications are not measured",
+      "writes": [],
+      "errors": []
+    },
+    "usage": {
+      "seconds": 20.013,
+      "pathCalls": 49,
+      "pathMs": 61.999999999883585,
+      "searchCalls": 38,
+      "searchMs": 19.999999999883585
+    },
+    "methodology": "原生 Creator 编译模块，6轮正反顺序。每轮冷图新实例；暖图清路线缓存的重搜索；正常缓存命中分别统计。报告每轮平均单次耗时的中位数。WASM 包括图边缓存双向复制、宿主回调、路线重建与简化，不只计内核循环。缓存路径不调用 WASM，其微小差额不归因于 WASM。无并行 Creator 构建的V5复测用作最终局部数字；V4先前数值保留。",
+    "limitation": "暖图强制路线未命中是局部诊断，不等同于每帧负载；线性工作区与数据布局变化也包含在 WASM 差额内。"
+  },
+  "movingComparison": {
+    "status": "failed",
+    "order": [
+      "baseline",
+      "heap",
+      "wasm",
+      "wasm",
+      "heap",
+      "baseline"
+    ],
+    "secondsEach": 60,
+    "summary": {
+      "baseline": {
+        "windows": 2,
+        "seconds": 120.01940000000008,
+        "frames": 6423,
+        "fps": 53.51634819037586,
+        "corePercent": 66.18096741026862,
+        "mainMs": 3.9985955161139657,
+        "p99Ms": [
+          34.20000000001164,
+          34.5
+        ],
+        "minimumOneSecondFps": 43,
+        "hits": 233,
+        "kills": 33,
+        "pathWindows": [
+          {
+            "cpu": 66.84153340576856,
+            "main": 4.056668352829592,
+            "events": {
+              "projectile": 65,
+              "hit": 91,
+              "enemy_recoil": 90,
+              "miss": 5,
+              "action": 65,
+              "block": 11,
+              "notice": 13,
+              "loot_drop": 10,
+              "loot_roll": 17,
+              "experience": 17,
+              "defeat": 17,
+              "skill_cast": 16,
+              "skill_release": 16,
+              "skill_segment": 32,
+              "poise": 28,
+              "skill_hit": 28,
+              "supply_pickup": 5,
+              "skill_zone": 3,
+              "skill_status": 10,
+              "skill_end": 3,
+              "enemy_respawn": 12,
+              "enemy_attack_begin": 3,
+              "enemy_attack_lock": 3,
+              "enemy_attack_release": 3,
+              "enemy_attack_end": 3
+            }
+          },
+          {
+            "cpu": 65.52044764529637,
+            "main": 3.9422506134969324,
+            "events": {
+              "projectile": 65,
+              "hit": 88,
+              "enemy_recoil": 87,
+              "miss": 8,
+              "action": 65,
+              "block": 9,
+              "notice": 13,
+              "loot_drop": 10,
+              "loot_roll": 16,
+              "experience": 16,
+              "defeat": 16,
+              "skill_cast": 16,
+              "skill_release": 16,
+              "skill_segment": 32,
+              "poise": 26,
+              "skill_hit": 26,
+              "supply_pickup": 5,
+              "skill_zone": 3,
+              "skill_status": 7,
+              "skill_end": 3,
+              "enemy_respawn": 12,
+              "enemy_attack_begin": 2,
+              "enemy_attack_lock": 2,
+              "enemy_attack_release": 2,
+              "enemy_attack_end": 2
+            }
+          }
+        ]
+      },
+      "heap": {
+        "windows": 2,
+        "seconds": 120.02079999999992,
+        "frames": 6419,
+        "fps": 53.482396384626696,
+        "corePercent": 64.38883926786029,
+        "mainMs": 3.935281975385574,
+        "p99Ms": [
+          33.90000000002328,
+          34.09999999997672
+        ],
+        "minimumOneSecondFps": 44,
+        "hits": 233,
+        "kills": 33,
+        "pathWindows": [
+          {
+            "cpu": 64.65352045084173,
+            "main": 3.985826059456041,
+            "events": {
+              "projectile": 65,
+              "hit": 88,
+              "enemy_recoil": 87,
+              "miss": 10,
+              "action": 65,
+              "block": 6,
+              "notice": 14,
+              "loot_drop": 10,
+              "loot_roll": 16,
+              "experience": 16,
+              "defeat": 16,
+              "skill_cast": 15,
+              "skill_release": 15,
+              "skill_segment": 29,
+              "poise": 27,
+              "skill_hit": 27,
+              "supply_pickup": 3,
+              "skill_zone": 4,
+              "skill_status": 9,
+              "skill_end": 4,
+              "enemy_respawn": 12,
+              "enemy_attack_begin": 3,
+              "enemy_attack_lock": 3,
+              "enemy_attack_release": 3,
+              "enemy_attack_end": 3
+            }
+          },
+          {
+            "cpu": 64.1241422062838,
+            "main": 3.8862121584280005,
+            "events": {
+              "projectile": 64,
+              "hit": 90,
+              "enemy_recoil": 89,
+              "miss": 8,
+              "action": 64,
+              "block": 9,
+              "notice": 13,
+              "loot_drop": 10,
+              "loot_roll": 17,
+              "experience": 17,
+              "defeat": 17,
+              "skill_cast": 16,
+              "skill_release": 16,
+              "skill_segment": 32,
+              "poise": 28,
+              "skill_hit": 28,
+              "supply_pickup": 5,
+              "skill_zone": 3,
+              "skill_status": 9,
+              "skill_end": 3,
+              "enemy_respawn": 12,
+              "enemy_attack_begin": 5,
+              "enemy_attack_lock": 4,
+              "enemy_attack_release": 4,
+              "enemy_attack_end": 4
+            }
+          }
+        ],
+        "changeVsBaseline": {
+          "corePercent": -2.7079207399592464,
+          "mainPercent": -1.5833944812183254
+        }
+      },
+      "wasm": {
+        "windows": 2,
+        "seconds": 120.0148,
+        "frames": 6452,
+        "fps": 53.76003626219433,
+        "corePercent": 65.85021180721044,
+        "mainMs": 4.07114476131432,
+        "p99Ms": [
+          34.40000000002328,
+          34.5
+        ],
+        "minimumOneSecondFps": 44,
+        "hits": 225,
+        "kills": 32,
+        "pathWindows": [
+          {
+            "cpu": 66.29314970786349,
+            "main": 4.0885659561322205,
+            "events": {
+              "projectile": 63,
+              "hit": 81,
+              "enemy_recoil": 79,
+              "miss": 13,
+              "action": 63,
+              "block": 8,
+              "notice": 15,
+              "loot_drop": 11,
+              "loot_roll": 15,
+              "experience": 15,
+              "defeat": 15,
+              "skill_cast": 14,
+              "skill_release": 14,
+              "skill_segment": 28,
+              "poise": 25,
+              "skill_hit": 25,
+              "supply_pickup": 1,
+              "skill_zone": 3,
+              "skill_status": 8,
+              "skill_end": 3,
+              "enemy_respawn": 11,
+              "enemy_attack_begin": 4,
+              "enemy_attack_lock": 4,
+              "enemy_attack_release": 4,
+              "enemy_attack_end": 4
+            }
+          },
+          {
+            "cpu": 65.40729162153428,
+            "main": 4.053604354587868,
+            "events": {
+              "projectile": 64,
+              "hit": 91,
+              "enemy_recoil": 90,
+              "miss": 8,
+              "action": 64,
+              "block": 8,
+              "notice": 13,
+              "loot_drop": 10,
+              "loot_roll": 17,
+              "experience": 17,
+              "defeat": 17,
+              "skill_cast": 16,
+              "skill_release": 16,
+              "skill_segment": 32,
+              "poise": 28,
+              "skill_hit": 28,
+              "supply_pickup": 5,
+              "skill_zone": 3,
+              "skill_status": 9,
+              "skill_end": 3,
+              "enemy_respawn": 12,
+              "enemy_attack_begin": 5,
+              "enemy_attack_lock": 4,
+              "enemy_attack_release": 4,
+              "enemy_attack_end": 4
+            }
+          }
+        ],
+        "changeVsBaseline": {
+          "corePercent": -0.4997745061775305,
+          "mainPercent": 1.8143681927313748
+        }
+      }
+    },
+    "errors": [
+      "baseline: 1-second FPS below floor 50",
+      "heap: 1-second FPS below floor 50",
+      "wasm: 1-second FPS below floor 50",
+      "wasm: 1-second FPS below floor 50",
+      "heap: 1-second FPS below floor 50",
+      "baseline: 1-second FPS below floor 50",
+      "Concurrent Creator build"
+    ],
+    "hostWorkload": {
+      "scope": "Creator CLI build-log content changes observed during the run; last-access metadata ignored; other host applications are not measured",
+      "writes": [
+        {
+          "name": "build-perf-render-all-hair-lod-v2-20261114-out.log",
+          "first": "2026-11-14T07:22:56.223Z",
+          "last": "2026-11-14T07:22:56.223Z",
+          "events": 1,
+          "before": {
+            "size": 184364,
+            "mtimeMs": 1794640974211.8286,
+            "sha256": "474661c762d20fc9449b7b3d88a55112d50cacce0cedb317eba5ed9d6c98e59e"
+          },
+          "after": {
+            "size": 185052,
+            "mtimeMs": 1794640975908.7717,
+            "sha256": "a90273834bb8341dfb00f7b46e00c26b08b6fd224bf6926b0a30faf80893ac1f"
+          }
+        }
+      ],
+      "errors": []
+    },
+    "memory": {
+      "errors": [],
+      "warnings": [],
+      "peakBytes": 524452864,
+      "peakMB": 524.452864
+    },
+    "conclusion": "保留全部失败门槛与战斗量差异；这组原版也未达到最低一秒50FPS，不能作为通过的性能基线。构建收尾在07:22:56 UTC的setup阶段写日志，既有严格监控仍拒绝整组，未覆盖或放宽该拒绝。主线程候选约少1.58%，低于原版首尾约2.82%的漂移；CPU约少2.71%，绝对差1.79个单核百分点，低于现有3个百分点噪声量，不作为稳定全局收益。",
+    "usage": {
+      "seconds": 20.01970000000001,
+      "pathCalls": 45,
+      "pathMs": 237.0000000000582,
+      "searchCalls": 36,
+      "searchMs": 17.40000000008149
+    }
+  },
+  "finalNormalStartup": {
+    "file": "src/cocos/test-results/performance/navigation-heap-final-moving-300s-v2/report.json",
+    "status": "failed",
+    "errors": [
+      "1-H12-move-hunt-BOW: 1-second FPS below floor 50",
+      "1-H12-move-hunt-BOW: single rendered frame exceeds 250ms",
+      "Host workload: concurrent Creator build logs changed; run is ineligible"
+    ],
+    "summary": {
+      "H12-move-hunt-BOW": {
+        "windows": 1,
+        "fps": 58.58845270654867,
+        "p95Ms": 19.699999999953434,
+        "p99Ms": 28.5999999998603,
+        "over33Ratio": 0.002255554302469832,
+        "mainThreadMsPerFrame": 4.058632421764872,
+        "processCpuSeconds": 222.1,
+        "drawCalls": 148,
+        "drawCallsP95": 158,
+        "triangles": 112478,
+        "trianglesP95": 113363,
+        "minOneSecondFps": 2,
+        "peakProcessMemoryBytes": 492709888,
+        "normalizedCpuPercent": 18.34295932636659,
+        "corePercent": 73.37183730546636,
+        "coreEquivalents": 0.7337183730546636,
+        "maxMs": 899,
+        "over100Count": 12,
+        "hits": 437
+      }
+    },
+    "resources": {
+      "errors": [],
+      "warnings": [],
+      "peakBytes": 506893312,
+      "peakMB": 506.893312
+    },
+    "scope": "复用原有 moving-combat-v6 / farm-regression 协议，新启动进程，当前构建默认 TypeScript 路径；不注入 WASM 或替换函数，不运行局部基准或暂停/恢复诊断。",
+    "priorAttempt": {
+      "file": "src/cocos/test-results/performance/navigation-heap-final-moving-300s-v1/report.json",
+      "status": "failed",
+      "errors": [
+        "1-H12-move-hunt-BOW: 1-second FPS below floor 50",
+        "1-H12-move-hunt-BOW: single rendered frame exceeds 250ms",
+        "Host workload: concurrent Creator build logs changed; run is ineligible"
+      ],
+      "hostWorkload": {
+        "scope": "Creator CLI build-log content changes observed during the run; last-access metadata ignored; other host applications are not measured",
+        "writes": [
+          {
+            "name": "build-perf-ui-sort-probe-20261114-out.log",
+            "first": "2026-11-14T07:35:25.654Z",
+            "last": "2026-11-14T07:35:38.324Z",
+            "events": 2,
+            "before": null,
+            "after": {
+              "size": 26234,
+              "mtimeMs": 1794641738036.1902,
+              "sha256": "4b147041e896251a5f20ae7fadfaeb646a4a60e49ffc001ceca47a95fce15277"
+            }
+          },
+          {
+            "name": "build-perf-ui-sort-probe-20261114-err.log",
+            "first": "2026-11-14T07:35:25.655Z",
+            "last": "2026-11-14T07:35:38.327Z",
+            "events": 2,
+            "before": null,
+            "after": {
+              "size": 1391,
+              "mtimeMs": 1794641738045.3318,
+              "sha256": "5407775c4dc1a90cc7da6f444ef7a9993a8740379092e6157d21ebb9a368aa7e"
+            }
+          },
+          {
+            "name": "build-perf-ui-sort-probe-retry1-20261114-out.log",
+            "first": "2026-11-14T07:36:08.723Z",
+            "last": "2026-11-14T07:38:59.635Z",
+            "events": 6,
+            "before": null,
+            "after": {
+              "size": 180727,
+              "mtimeMs": 1794641939549.8108,
+              "sha256": "9d816f81f6dc0eb37ec6b04a9628932c8d75e5b27c52fd1d9c810f7547a6a5cb"
+            }
+          },
+          {
+            "name": "build-perf-ui-sort-probe-retry1-20261114-err.log",
+            "first": "2026-11-14T07:36:08.725Z",
+            "last": "2026-11-14T07:38:59.637Z",
+            "events": 2,
+            "before": null,
+            "after": {
+              "size": 67024,
+              "mtimeMs": 1794641827326.5554,
+              "sha256": "39d8d2616505280f7f0c69bc3115aed7a5fbc2dee8f7e84a9fa172cb1173996f"
+            }
+          }
+        ],
+        "errors": []
+      },
+      "note": "完整保留首次失败；复测不覆盖它。"
+    }
+  },
+  "environment": {
+    "serial": "emulator-5558",
+    "avd": "SingularityNav34",
+    "reason": "原 emulator-5556 由另一会话使用，故单独创建使用已安装系统镜像的临时实例，未下载新系统镜像；原实例不改动。",
+    "guest": "Android 14 / 4 virtual CPUs / 4096 MB / 2412x1080 / 480 dpi / WebGL2 / legacy forward / 60 FPS",
+    "controls": "该实例重启后使用宿主 P 核掩码21845和来宾TSC。蓝牙和Google搜索后台关闭；Google Play services曾短暂关闭后恢复，正式数据时启用。Chrome匿名使用并关闭首次通知提示。",
+    "timerAudit": "07:23:03 UTC 已将本任务 qemu 的 timer policy 设为 ControlMask4/StateMask0，未改变系统电源计划或游戏帧率。局部 micro.json 于07:22:54.886 UTC写入，计时前还有至少10秒预热，因此该设置早于所有六段计时。openAndroid 初始环境快照读取较早，timer字段尚显示 system-managed；以此审计和最终正常启动报告为准。",
+    "interruptions": [
+      {
+        "run": "navigation-heap-wasm-native-v1",
+        "reason": "共享5556浏览器被另一会话关闭，无计时窗口。"
+      },
+      {
+        "run": "navigation-heap-wasm-native-v2",
+        "reason": "新实例首次启动的Google Play services重启导致依赖其字体提供器的Chrome被Android终止，无计时窗口。"
+      },
+      {
+        "run": "navigation-heap-wasm-native-v3",
+        "reason": "新Chrome首次通知提示阻挡，无计时窗口。"
+      }
+    ]
+  },
+  "wasmPrototype": {
+    "source": "src/cocos/tools/navigation-wasm/navigation.rs",
+    "builder": "src/cocos/tools/navigation-wasm/Build-NavigationWasm.ps1",
+    "bytes": 17434,
+    "sha256": "98ecb4455f8bbb3ecfe1f08b1980ca6d05de3046791fb3d7c62b84624224d1f3",
+    "linearMemoryBytes": 2097152,
+    "language": "Rust 1.95.0，现有工具链，安装已校验的wasm32标准库，无第三方crate。",
+    "compilerDownload": "src/cocos/test-results/performance/navigation-heap-wasm-20261114/compiler-download.json",
+    "platformLoaderIntegrated": false,
+    "platformVerified": false
+  },
+  "evidence": {
+    "localAndABCCBA": "src/cocos/test-results/performance/navigation-heap-wasm-native-v4",
+    "sourceEquivalence": "src/cocos/test-results/performance/navigation-heap-wasm-20261114/source-equivalence.json",
+    "finalNormalStartup": "src/cocos/test-results/performance/navigation-heap-final-moving-300s-v2/report.json",
+    "temporaryDrivers": "src/cocos/temp/navigation-wasm-20261114",
+    "sourceHashes": {
+      "baseline": "792611472ce184468217e3d7aed4128123ea91962c5619ba9b7a729f9556aafd",
+      "candidate": "58a3640f77184baecf48ed6b435057b9f2d906e76d6dcba538128bc7fde5d90a"
+    },
+    "official": [
+      "https://developer.taptap.cn/minigameapidoc/quick-start/guide/performance/",
+      "https://docs.cocos.com/creator/3.8/manual/zh/scripting/wasm-support.html",
+      "https://doc.rust-lang.org/rustc/platform-support/wasm32-unknown-unknown.html"
+    ],
+    "controlledLocal": "src/cocos/test-results/performance/navigation-heap-wasm-native-micro-v5"
+  },
+  "delivery": {
+    "candidateMatchesMeasuredSnapshot": true,
+    "temporaryEmulatorStopped": true,
+    "temporaryPreviewServerStopped": true,
+    "finished": "2026-11-14T07:47:28.369Z"
+  }
+}

@@ -1,0 +1,689 @@
+{
+  "date": "2026-11-11",
+  "version": "0.3.15",
+  "status": "local validation and guest test package produced; iPhone exit/thermal verification pending",
+  "userReport": {
+    "device": "iPhone 14",
+    "version": "0.3.14",
+    "area": "S13 / 断镐石场",
+    "symptom": "exits after a few seconds; reports memory pressure and heating",
+    "deviceCrashLogAvailable": false
+  },
+  "platformVerified": false,
+  "iphone14Verified": false,
+  "uploaded": false,
+  "findings": [
+    "Pinned Cocos 3.8.8 Graphics.activeSubModel allocates 65535*32 vertex bytes plus 65535*2*2 index bytes per submodel (~2.25 MiB), even for small shapes. The scene has roughly 80 Graphics components, including masks and hidden controls; allocation depends on which have rendered.",
+    "The current local two-minute exercise did not reproduce runaway GPU buffer/texture growth. Large standing allocations and entry peaks are relevant to the reported few-second exit, but no iPhone process memory/crash trace was available to establish the exact termination cause.",
+    "Fire cards repeatedly submitted unchanged transforms, invalidating Cocos scene-graph state for stationary phases."
+  ],
+  "implementation": [
+    "CompactGraphics extends the engine Graphics component through the documented protected _uploadData hook. It retains native paths/tessellation/shaders/masks and uses GFX Buffer.resize before native upload to fit actual vertex/index counts. Buffers grow by capacity when needed, without resizing every frame.",
+    "24 existing component factories now create CompactGraphics; existing getComponent(Graphics), colors, paths, layout and touch bounds remain compatible. Native JSB follows the original upload path; this adapter targets the WebGL backend used by TapTap.",
+    "Fire sprite position, rotation and scale setters run only when their values change. Animation timing, texture phases, transforms and tints remain equivalent in sampled poses.",
+    "PlatformServices uses official optional tap.onMemoryWarning/offMemoryWarning. App records version/area/time/Android level/gfx counters under [MemoryPressure] and the single local key sword-fire-last-memory-warning, retaining iOS level=null and unregistering the exact listener on disposal."
+  ],
+  "constraints": "No frame-rate cap/reduction, map-size reduction, terrain/collision/gameplay change or picture-content removal. Existing Cocos renderer/components and GFX buffer API are reused; no new dependency or permanent test framework.",
+  "graphicsComparisons": [
+    {
+      "backend": "webgl2",
+      "bufferBytesBefore": 121418110,
+      "bufferBytesAfter": 56291694,
+      "savedBytes": 65126416,
+      "savedMiB": 62.109,
+      "reductionPercent": 53.638,
+      "drawCallsBefore": 182,
+      "drawCallsAfter": 182,
+      "trianglesBefore": 200154,
+      "trianglesAfter": 200154
+    },
+    {
+      "backend": "webgl1",
+      "bufferBytesBefore": 121381726,
+      "bufferBytesAfter": 56255310,
+      "savedBytes": 65126416,
+      "savedMiB": 62.109,
+      "reductionPercent": 53.654,
+      "drawCallsBefore": 182,
+      "drawCallsAfter": 182,
+      "trianglesBefore": 200154,
+      "trianglesAfter": 200154
+    }
+  ],
+  "measurementScope": "Same-page A/B in actual Creator 3.8.8 runtime, mobile viewport/UA, DPR 3. Baseline temporarily restores original full buffer sizing; both use the exact same paths/geometry. Numbers are GFX buffer accounting, not whole phone process memory or measured temperature/CPU utilization.",
+  "graphicsValidation": {
+    "details": [
+      {
+        "backend": "webgl2",
+        "rows": [
+          {
+            "view": "quarry",
+            "compact": {
+              "memory": {
+                "bufferSize": 56291694,
+                "textureSize": 289369396
+              },
+              "draws": 182,
+              "triangles": 200154
+            },
+            "baseline": {
+              "memory": {
+                "bufferSize": 121418110,
+                "textureSize": 289369396
+              },
+              "draws": 182,
+              "triangles": 200154
+            },
+            "indices": null
+          },
+          {
+            "view": "pause",
+            "compact": {
+              "memory": {
+                "bufferSize": 58696522,
+                "textureSize": 291046312
+              },
+              "draws": 212,
+              "triangles": 200406
+            },
+            "baseline": {
+              "memory": {
+                "bufferSize": 135575206,
+                "textureSize": 291046312
+              },
+              "draws": 212,
+              "triangles": 200406
+            },
+            "indices": null
+          },
+          {
+            "view": "one",
+            "compact": {
+              "memory": {
+                "bufferSize": 56300654,
+                "textureSize": 289369396
+              },
+              "draws": 183,
+              "triangles": 200156
+            },
+            "baseline": {
+              "memory": {
+                "bufferSize": 123777626,
+                "textureSize": 289369396
+              },
+              "draws": 183,
+              "triangles": 200156
+            },
+            "indices": 6
+          },
+          {
+            "view": "many",
+            "compact": {
+              "memory": {
+                "bufferSize": 56570478,
+                "textureSize": 289369396
+              },
+              "draws": 183,
+              "triangles": 202554
+            },
+            "baseline": {
+              "memory": {
+                "bufferSize": 123777626,
+                "textureSize": 289369396
+              },
+              "draws": 183,
+              "triangles": 202554
+            },
+            "indices": 7200
+          },
+          {
+            "view": "small-again",
+            "compact": {
+              "memory": {
+                "bufferSize": 56300654,
+                "textureSize": 289369396
+              },
+              "draws": 183,
+              "triangles": 200158
+            },
+            "baseline": {
+              "memory": {
+                "bufferSize": 123777626,
+                "textureSize": 289369396
+              },
+              "draws": 183,
+              "triangles": 200158
+            },
+            "indices": 12
+          }
+        ],
+        "growth": {
+          "resizes": 0
+        },
+        "errors": []
+      },
+      {
+        "backend": "webgl1",
+        "rows": [
+          {
+            "view": "quarry",
+            "compact": {
+              "memory": {
+                "bufferSize": 56255310,
+                "textureSize": 289369396
+              },
+              "draws": 182,
+              "triangles": 200154
+            },
+            "baseline": {
+              "memory": {
+                "bufferSize": 121381726,
+                "textureSize": 289369396
+              },
+              "draws": 182,
+              "triangles": 200154
+            },
+            "indices": null
+          },
+          {
+            "view": "pause",
+            "compact": {
+              "memory": {
+                "bufferSize": 58660138,
+                "textureSize": 291046312
+              },
+              "draws": 212,
+              "triangles": 200406
+            },
+            "baseline": {
+              "memory": {
+                "bufferSize": 135538822,
+                "textureSize": 291046312
+              },
+              "draws": 212,
+              "triangles": 200406
+            },
+            "indices": null
+          },
+          {
+            "view": "one",
+            "compact": {
+              "memory": {
+                "bufferSize": 56264270,
+                "textureSize": 289369396
+              },
+              "draws": 183,
+              "triangles": 200156
+            },
+            "baseline": {
+              "memory": {
+                "bufferSize": 123741242,
+                "textureSize": 289369396
+              },
+              "draws": 183,
+              "triangles": 200156
+            },
+            "indices": 6
+          },
+          {
+            "view": "many",
+            "compact": {
+              "memory": {
+                "bufferSize": 56534094,
+                "textureSize": 289369396
+              },
+              "draws": 183,
+              "triangles": 202554
+            },
+            "baseline": {
+              "memory": {
+                "bufferSize": 123741242,
+                "textureSize": 289369396
+              },
+              "draws": 183,
+              "triangles": 202554
+            },
+            "indices": 7200
+          },
+          {
+            "view": "small-again",
+            "compact": {
+              "memory": {
+                "bufferSize": 56264270,
+                "textureSize": 289369396
+              },
+              "draws": 183,
+              "triangles": 200158
+            },
+            "baseline": {
+              "memory": {
+                "bufferSize": 123741242,
+                "textureSize": 289369396
+              },
+              "draws": 183,
+              "triangles": 200158
+            },
+            "indices": 12
+          }
+        ],
+        "growth": {
+          "resizes": 0
+        },
+        "errors": []
+      }
+    ],
+    "pixels": [
+      {
+        "backend": "webgl1",
+        "view": "quarry",
+        "identical": false,
+        "pixels": 403,
+        "maximumChannelDifference": 1
+      },
+      {
+        "backend": "webgl1",
+        "view": "pause",
+        "identical": true,
+        "pixels": 0,
+        "maximumChannelDifference": 0
+      },
+      {
+        "backend": "webgl1",
+        "view": "one",
+        "identical": false,
+        "pixels": 326,
+        "maximumChannelDifference": 1
+      },
+      {
+        "backend": "webgl1",
+        "view": "many",
+        "identical": false,
+        "pixels": 116,
+        "maximumChannelDifference": 1
+      },
+      {
+        "backend": "webgl1",
+        "view": "small-again",
+        "identical": false,
+        "pixels": 13,
+        "maximumChannelDifference": 1
+      },
+      {
+        "backend": "webgl2",
+        "view": "quarry",
+        "identical": false,
+        "pixels": 170,
+        "maximumChannelDifference": 1
+      },
+      {
+        "backend": "webgl2",
+        "view": "pause",
+        "identical": true,
+        "pixels": 0,
+        "maximumChannelDifference": 0
+      },
+      {
+        "backend": "webgl2",
+        "view": "one",
+        "identical": false,
+        "pixels": 63,
+        "maximumChannelDifference": 1
+      },
+      {
+        "backend": "webgl2",
+        "view": "many",
+        "identical": false,
+        "pixels": 68,
+        "maximumChannelDifference": 1
+      },
+      {
+        "backend": "webgl2",
+        "view": "small-again",
+        "identical": false,
+        "pixels": 7,
+        "maximumChannelDifference": 1
+      }
+    ],
+    "summary": "WebGL 1 and 2 tested: quarry, pause menu, one rectangle, 1200 rectangles, clearing back to a small shape, and 12 repeated redraws. Draw/triangle counts match. No repeated buffer resizes after warmup. Ten image pairs: pause pairs identical; others differ only by <=1 channel unit (at most 403 pixels out of ~3M)."
+  },
+  "fireValidation": {
+    "poseCases": [
+      0.12,
+      0.47,
+      0.8,
+      "rotated"
+    ],
+    "transformAndTintTolerance": 1e-05,
+    "observedSetterCountsFor120IdenticalVolumeSamples": {
+      "old": {
+        "setWorldPosition": 1200,
+        "setWorldRotation": 1200,
+        "setPosition": 1200,
+        "setScale": 1200
+      },
+      "current": {}
+    },
+    "errors": [],
+    "scope": "Static controlled repeats demonstrate avoided redundant submissions, not a phone CPU percentage."
+  },
+  "releaseSoak": {
+    "build": "Clean standard-engine Web export of source version 0.3.15, same application snapshot used for the guest package; actual native bundle graph exercised.",
+    "area": "S13",
+    "level": 12,
+    "wallSeconds": 120,
+    "gameSeconds": 119.4590999999933,
+    "casts": 85,
+    "errors": [],
+    "fixture": "Actual game update, keyboard movement, rules and FIR skills. HP/focus replenished in the temporary fixture to sustain the load; campaign interruptions suppressed. Not a complete campaign/device playthrough.",
+    "initialGfx": {
+      "bufferSize": 56497230,
+      "textureSize": 258772336
+    },
+    "warm20SecondsGfx": {
+      "bufferSize": 56797422,
+      "textureSize": 259362160
+    },
+    "finalGfx": {
+      "bufferSize": 56808554,
+      "textureSize": 259362160
+    },
+    "bufferGrowthAfterWarmupBytes": 11132,
+    "finalHeapAfterForcedGc": {
+      "usedSize": 64923836,
+      "totalSize": 68210688,
+      "embedderHeapUsedSize": 11599744,
+      "backingStorageSize": 22719765
+    },
+    "notes": "Warm-up allocates bounded effects/text pools. Forced GC is a diagnostic at the sample endpoints, not game runtime code. No claim of zero remaining engine retention or a proven iOS crash fix."
+  },
+  "memoryWarningApiValidation": {
+    "result": {
+      "seen": [
+        null,
+        15
+      ],
+      "exactUnsubscribe": true,
+      "remaining": 0
+    },
+    "scope": "Actual exported PlatformServices with a fake Tap host; not a platform/device verification."
+  },
+  "validation": {
+    "types": "npm --prefix src/cocos run check and check:core passed.",
+    "rules": "116 existing checks passed; final workspace rerun logged separately.",
+    "creatorAndExport": "Actual Creator preview, clean production-style Web export, official wechatgame -> TapTap conversion and existing package/report checks completed.",
+    "pending": [
+      "iPhone 14 real TapTap entry peak/termination/thermal retest",
+      "Device memory warning or OS termination trace if the exit recurs",
+      "Actual TapTap parsed delivery size and playable-before-load resource measurement"
+    ]
+  },
+  "imageCacheInvestigation": {
+    "source": "https://github.com/cocos/cocos-engine/issues/19207",
+    "result": "Considered an upstream duplicate ImageAsset-reference report. Isolated method tests can demonstrate duplicate cleanup, but local Web and actual mini-game terrain-bundle resource loads did not reproduce a residual reference. The experimental engine/build-output patch was removed and is not in the delivered package. It is not asserted as this crash cause."
+  },
+  "package": {
+    "version": "0.3.15",
+    "sha256": "7332db53fc6e22e9b1c1b239d4e3a8d7cf2a026007d97c32b5c2149d5ccbedab",
+    "zipBytes": 211705237,
+    "path": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-quarry-memory-v1\\SwordAndFire_0.3.15_TapTap_guest-test_20261111T053335Z\\SwordAndFire_0.3.15_TapTap_guest-test_20261111T053335Z.zip",
+    "markers": {
+      "compactGraphics": true,
+      "memoryWarningRecord": true,
+      "experimentalEnginePatch": false
+    },
+    "loginMode": "guest",
+    "buildMode": "guest-test",
+    "initialPayload": {
+      "files": 27,
+      "rawBytes": 5282684,
+      "zipBytes": 1284102,
+      "zipMiB": 1.22,
+      "budgetMiB": 20.0,
+      "withinLocalBudget": true,
+      "sha256": "779cb10a216be18b87b8ec5345c935ec544db7333791e8649877ce4cf7e64b9e",
+      "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+    },
+    "total": {
+      "files": 2109,
+      "rawBytes": 232118135,
+      "uploadZipBytes": 211705237,
+      "uploadZipSha256": "7332db53fc6e22e9b1c1b239d4e3a8d7cf2a026007d97c32b5c2149d5ccbedab",
+      "uploadZipMiB": 201.9,
+      "uploadZipMB": 211.71,
+      "consoleObservedLimitBytes": 300000000,
+      "withinConsoleObservedLimit": true
+    },
+    "firstPlayableResources": {
+      "measured": false,
+      "note": "Bootstrap audit size is not all resources needed before play; target-platform/network measurement pending."
+    },
+    "sourceAllocation": "Official Build-TapTap.ps1 allocated 0.3.15 once in the isolated C: build checkout; canonical workspace version synchronized to that allocation without another package increment."
+  },
+  "sourceSnapshot": {
+    "builtAt": "2026-11-11T05:33:35.661Z",
+    "manifest": "temp/quarry-v1/packaged-source-manifest.json",
+    "isolatedBuild": "C:/Users/Alexa/AppData/Local/Temp/Singularity-movement-perf/src/cocos",
+    "workspaceFilesChangedAfterSnapshot": [
+      "src/cocos/assets/scripts/app/ChapterGame.ts",
+      "src/cocos/assets/scripts/app/Hud.ts",
+      "src/cocos/assets/scripts/app/Menus.ts",
+      "src/cocos/assets/scripts/core/GameSession.ts",
+      "src/cocos/assets/scripts/features/world/runtime/SceneInteraction.ts",
+      "src/cocos/assets/scripts/features/persistence/common/CombatPersistence.ts",
+      "src/cocos/assets/scripts/features/navigation/runtime/MapPanel.ts",
+      "src/cocos/assets/scripts/features/navigation/runtime/MiniMap.ts",
+      "src/cocos/assets/scripts/features/journey/common/JourneyGuide.ts",
+      "src/cocos/assets/scripts/features/journey/runtime/JourneyPanel.ts",
+      "src/cocos/assets/scripts/features/journey/runtime/QuestTracker.ts",
+      "src/cocos/assets/scripts/features/combat/runtime/BossPresence.ts",
+      "src/cocos/assets/scripts/features/combat/runtime/EnemyCombatFeedback.ts",
+      "src/cocos/assets/scripts/features/automation/common/Automation.ts",
+      "src/cocos/assets/scripts/features/automation/runtime/AutomationHud.ts"
+    ],
+    "note": "Other concurrent workspace edits after the package snapshot are preserved and are not automatically included in this immutable package. All memory changes described here are in the package; marker/SHA checks passed."
+  },
+  "changedSources": [
+    {
+      "path": "src/cocos/assets/scripts/app/ChapterGame.ts",
+      "sha256Before": "2390b44c4735ed5584e49b99037b350b2de83e942a42ab3efa3482f51a5ec4ad",
+      "packagedSourceSha256": "ad4906fb4bf4677774863133212063054b4a4b38cc43d610c5ec7cc7dc667cdc",
+      "currentWorkspaceSha256": "def9e4e90142bb2bd7b612e55bee3b5ca7f872fe34f5aa0a4f27e427187e2e83"
+    },
+    {
+      "path": "src/cocos/assets/scripts/app/Hud.ts",
+      "sha256Before": "2d94e3ad31c7a640e0c8714771db53bcb3359e64bfa70d9669fae6bca59036d1",
+      "packagedSourceSha256": "bfab9c198c490d885193e1975ede81ab53bfb1b088ef95891d8956af724907d1",
+      "currentWorkspaceSha256": "c4ee57991dd7bf9a12b639fdad464198ac1534329d6327d054e952fcbaa7ebad"
+    },
+    {
+      "path": "src/cocos/assets/scripts/platform/PlatformServices.ts",
+      "sha256Before": "c4156bf4a1645d4e4b0ff763e500de8022c9a0d7b67005581339c3795ecbe0a9",
+      "packagedSourceSha256": "74b7e3a69037321e5a766f72ca1b51827ed25a5ed36922c4ebfe8a5dc5548f36",
+      "currentWorkspaceSha256": "74b7e3a69037321e5a766f72ca1b51827ed25a5ed36922c4ebfe8a5dc5548f36"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/ui/CompactGraphics.ts",
+      "sha256Before": null,
+      "packagedSourceSha256": "350f4df46f492d3a794e79cb5abb72956145b6f9975cee12400ed2fdbd953286",
+      "currentWorkspaceSha256": "350f4df46f492d3a794e79cb5abb72956145b6f9975cee12400ed2fdbd953286"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/ui/DoubleGoldFrame.ts",
+      "sha256Before": "7dfc570d9eb00e7c2ea3f248a94ad33dd6cb69ae33a93056bb42fe98cd4a0f8d",
+      "packagedSourceSha256": "975d4067abb50ff2f059013f3b8fcb7bf4f4d7a76c2af697ab5cfda44ca0e932",
+      "currentWorkspaceSha256": "975d4067abb50ff2f059013f3b8fcb7bf4f4d7a76c2af697ab5cfda44ca0e932"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/ui/FeedbackView.ts",
+      "sha256Before": "621a079441bfe63e7f73f141a3180f5cff7d5f8eaa936f5d9b3740b793249fda",
+      "packagedSourceSha256": "f761b20f48fe43a5036ad2ed570e5b87a142c9cedd8ea1d3f2006e07879cb04f",
+      "currentWorkspaceSha256": "f761b20f48fe43a5036ad2ed570e5b87a142c9cedd8ea1d3f2006e07879cb04f"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/ui/GoldPanelShell.ts",
+      "sha256Before": "268228f0bdc99c42028c3284c26f65ed3e3de5a9e343cd68e2b906a655442afc",
+      "packagedSourceSha256": "c3bb872960d633f07c03f6a3ad497a4547e9d091519610a6302062518b05b0f7",
+      "currentWorkspaceSha256": "c3bb872960d633f07c03f6a3ad497a4547e9d091519610a6302062518b05b0f7"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/ui/MenuPanel.ts",
+      "sha256Before": "7923eb57fc20e060dfa307f2457bf88bba801b55056a8d60fedf1443e4a734d4",
+      "packagedSourceSha256": "cd9a0ae6947a224a939cf29d032405014fa017fae6eea80bbb269eea0db3563d",
+      "currentWorkspaceSha256": "cd9a0ae6947a224a939cf29d032405014fa017fae6eea80bbb269eea0db3563d"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/ui/RpgPanel.ts",
+      "sha256Before": "2d2c1cbfd1ed1728f422716332d68a1180bcbf31bc31588c8a0190afa41802c5",
+      "packagedSourceSha256": "93723a3d35e166b7a5b6d5ec071b8f0debecb9bfce94c6f37eb4ddd57c2c2d22",
+      "currentWorkspaceSha256": "93723a3d35e166b7a5b6d5ec071b8f0debecb9bfce94c6f37eb4ddd57c2c2d22"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/ui/UiChrome.ts",
+      "sha256Before": "36dd3d184d404d341ea05cdd7a20b9790a84dd4b00120b8255b1afca0aaf536a",
+      "packagedSourceSha256": "584ef2acdf09784d75477ca3a33ea80dcff19d57c53b888de10416183a927751",
+      "currentWorkspaceSha256": "584ef2acdf09784d75477ca3a33ea80dcff19d57c53b888de10416183a927751"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/ui/UiSkin.ts",
+      "sha256Before": "ae97eb083204df5292568c0e8d1cc91b7c0332de2372a770244ba81a970a3b0b",
+      "packagedSourceSha256": "8c82982a2d22e44f8b9a410d861c3ee7bf6daea98c49f9bb96bba274028c9517",
+      "currentWorkspaceSha256": "8c82982a2d22e44f8b9a410d861c3ee7bf6daea98c49f9bb96bba274028c9517"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/portals/runtime/PortalHud.ts",
+      "sha256Before": "c18fdc2b459dcf7b7529b95f6b155e0490f6f6a7dd8ed5b5620bcf6647d60bc0",
+      "packagedSourceSha256": "86fc141378a18e9c99997b0508a1acf24e0d9d2eb925dfce38c1f96db4d57715",
+      "currentWorkspaceSha256": "86fc141378a18e9c99997b0508a1acf24e0d9d2eb925dfce38c1f96db4d57715"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/navigation/runtime/MiniMap.ts",
+      "sha256Before": "4f12ad36e5ef134cd8fbe7b6f0cb03e26aa1a88463c41f385b432166cd5beeb5",
+      "packagedSourceSha256": "093d425877565fe6f64a3438f3fd2cb84d6ccd68ed1ed2a272403947c52271c7",
+      "currentWorkspaceSha256": "1f8fd219c835ad2ca6f37a097ee7853f65b585ab2fe9b628b379a284909d747d"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/loading/runtime/LoadingScreen.ts",
+      "sha256Before": "c67df4d2d7ec51d710abdce1051d25473743978fdbf8734400b9a27afc2696db",
+      "packagedSourceSha256": "934b15b37d38961a12e6ddb225b3851b40bf4fcab9fbd72d446f999dbc8e31a0",
+      "currentWorkspaceSha256": "934b15b37d38961a12e6ddb225b3851b40bf4fcab9fbd72d446f999dbc8e31a0"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/journey/runtime/JourneyStartScreen.ts",
+      "sha256Before": "0d6691a618608c837a3b047d56b5112876acbd4b9d31a19ac487169bdbf69638",
+      "packagedSourceSha256": "f686b755d2080f47c89b808fd8e5877d35e333dbe0cc875c2c3af13c39ac1b9a",
+      "currentWorkspaceSha256": "f686b755d2080f47c89b808fd8e5877d35e333dbe0cc875c2c3af13c39ac1b9a"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/journey/runtime/QuestTracker.ts",
+      "sha256Before": "dcf18a3e8740fc6657b364109f0e1c73c9262b69f41c23df609fb0d80fecc959",
+      "packagedSourceSha256": "dbd8b42ded36a72534154d18461d331860b8db12cf25a4428fd3bf90a273b98a",
+      "currentWorkspaceSha256": "120d97386f9307db136cc116625afcc4f206fadad8d6207a404342a06db25077"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/equipment/runtime/CharacterPanel.ts",
+      "sha256Before": "d641b1c7ec1a70eaa130737aa1c0abe751115249ee3ba0c4ebfecd93d7372566",
+      "packagedSourceSha256": "ebc920207d454a06b1ed6e694b6bfbcf11e83ff0ed6f808011a39a5d09c28bfb",
+      "currentWorkspaceSha256": "ebc920207d454a06b1ed6e694b6bfbcf11e83ff0ed6f808011a39a5d09c28bfb"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/equipment/runtime/EquipmentGallery.ts",
+      "sha256Before": "e2e1a6f883c1a4c5016274b32520c5c6b4b102cbe28a4c03517be05b902bd859",
+      "packagedSourceSha256": "a8be568da911526fda1bdfc6f6cd2a62417b12277f2a6bd9821f7d160dd9bf6c",
+      "currentWorkspaceSha256": "a8be568da911526fda1bdfc6f6cd2a62417b12277f2a6bd9821f7d160dd9bf6c"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/equipment/runtime/EquipmentIconFrame.ts",
+      "sha256Before": "ad54a629b78d281af1c84f26ea936bb33a4982a59c44a58b2ec93dd74d4d379b",
+      "packagedSourceSha256": "a6e541667d17b1e17c8bf3e4f368b959388a77173d9e8068b24a195be4e0d0b8",
+      "currentWorkspaceSha256": "a6e541667d17b1e17c8bf3e4f368b959388a77173d9e8068b24a195be4e0d0b8"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/equipment/runtime/EquipmentPanels.ts",
+      "sha256Before": "c956fe83834f55427ba1f1dcae9fd33c29f38edd14bf7518e1bab9989418a097",
+      "packagedSourceSha256": "42102eabe882cb998ba843db179eb332c7a5f81f47d2ac1f9b2b0df007b8a4e3",
+      "currentWorkspaceSha256": "42102eabe882cb998ba843db179eb332c7a5f81f47d2ac1f9b2b0df007b8a4e3"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/equipment/runtime/EquipmentPickupNotice.ts",
+      "sha256Before": "e59ae1c774014c6e94d30a71d52a4e4eb8cf1ee90691ca8ea02ba02efdced9dd",
+      "packagedSourceSha256": "22d735becb098ab3cfcf30a3527c665fa44bebc70da121ae3f8d6b940f244ae9",
+      "currentWorkspaceSha256": "22d735becb098ab3cfcf30a3527c665fa44bebc70da121ae3f8d6b940f244ae9"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/dice/runtime/DicePanel.ts",
+      "sha256Before": "49e32abe4e731a3e31d8ef7a2ffb5d301dbc0f7639efdb9456ce319cc33608cd",
+      "packagedSourceSha256": "e10592ce90bde9b48a6414f2d258e3647d859cbaa9d2ba754d9bed9f4241bbe2",
+      "currentWorkspaceSha256": "e10592ce90bde9b48a6414f2d258e3647d859cbaa9d2ba754d9bed9f4241bbe2"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/combat/runtime/BossPresence.ts",
+      "sha256Before": "b936c6ac036981542b2c8776f76096c8f8e7ab707b4cd29ea04acec8409f16b8",
+      "packagedSourceSha256": "cbc1f4391e3ffefc6c617d49769e70a9415f0ec17f6c2be521d664f9ac68efdc",
+      "currentWorkspaceSha256": "a28f6be6e2629ba6a358afbfdaf54c91098206c74b118d08109897f435a8ac2e"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/combat/runtime/CombatImpactFeedback.ts",
+      "sha256Before": "e58ebd1f5f758651db75e495c2c0ad6d947f3c77f20e609c16e5923fb7ff4f3a",
+      "packagedSourceSha256": "b5aa84bc5024980a34381b6f914fb73f47ba07927002bb104c843e91b680b7a5",
+      "currentWorkspaceSha256": "b5aa84bc5024980a34381b6f914fb73f47ba07927002bb104c843e91b680b7a5"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/combat/runtime/EnemyCombatFeedback.ts",
+      "sha256Before": "2614e073b8392332339258b5bfed62013574cb6c8b5e3146195a70729e4f73cc",
+      "packagedSourceSha256": "dd8ac8dbe23fae9e698f7a826056a1015d724d0c8a6584c1a1595172a81f0161",
+      "currentWorkspaceSha256": "8e5ab20bf58d20490dcb2ec5ddbaf24523618d94fe034b960f0f23c4850e704a"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/combat/runtime/SkillFireSprites.ts",
+      "sha256Before": "1d239e392617b54d30e31740e90b536b4c3532b1343c140f8b1794ca4f3dc4c7",
+      "packagedSourceSha256": "6210bdb46d2bab4e89a08697d8b56a8563b7ce366bb6a824b4758d8b3a8c9c29",
+      "currentWorkspaceSha256": "6210bdb46d2bab4e89a08697d8b56a8563b7ce366bb6a824b4758d8b3a8c9c29"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/cinematics/runtime/CinematicCues.ts",
+      "sha256Before": "87767d7e4231a6b30b45da587d963c4f71cb90e5715014e85b5d38e71568416b",
+      "packagedSourceSha256": "cef0543c407f87f0937d509e919d4205334474d9a3e55cdb00e29182ad6f0d6d",
+      "currentWorkspaceSha256": "cef0543c407f87f0937d509e919d4205334474d9a3e55cdb00e29182ad6f0d6d"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/automation/runtime/AutomationHud.ts",
+      "sha256Before": "a54ae99f572229648e47f09503bd1110c7c50ee5cb9a0dff1b926ee9f62dfbff",
+      "packagedSourceSha256": "f7c56c512a873a19ca66f1581dae721ebb31e187c73e44113aef3c5e9d577203",
+      "currentWorkspaceSha256": "8f0cf61edb86e0b33f489bd6ebd4c75f18032c6a87f9bb0396e73be733080f7b"
+    }
+  ],
+  "references": [
+    {
+      "url": "https://docs.cocos.com/creator/3.8/api/en/class/GraphicsComponent",
+      "use": "Graphics impl/model and protected upload hook, combined with installed 3.8.8 graphics.ts buffer allocation code."
+    },
+    {
+      "url": "https://developer.taptap.cn/minigameapidoc/dev/api/device/memory/tap.onMemoryWarning/",
+      "use": "Memory warning callback; level supplied only on Android."
+    },
+    {
+      "url": "https://developer.taptap.cn/minigameapidoc/dev/api/device/memory/tap.offMemoryWarning/",
+      "use": "Exact listener unsubscription."
+    },
+    {
+      "url": "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/performance-test/",
+      "use": "Real iOS memory/CPU monitoring requires observing the game WebContent process; desktop counters are not device measurements."
+    }
+  ],
+  "evidenceDirectory": "temp/quarry-v1",
+  "evidenceFiles": [
+    "source-before.json",
+    "compact-call-sites.json",
+    "graphics-qa.json",
+    "graphics-visual.json",
+    "fire-qa.json",
+    "release-final.json",
+    "memory-api-qa.json",
+    "package-qa.json",
+    "packaged-source-manifest.json",
+    "guest-build.log",
+    "clean-web-build.log",
+    "rules.log",
+    "final-rules.log"
+  ]
+}

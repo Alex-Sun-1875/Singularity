@@ -1,0 +1,306 @@
+{
+  "verifiedOn": "2026-11-11",
+  "sourceVersion": "0.3.14",
+  "status": "local-validation",
+  "platformVerified": false,
+  "uploaded": false,
+  "packageProduced": false,
+  "reportedIssue": {
+    "device": "iPhone 14",
+    "scenario": "Noticeably hot while moving and fighting monsters",
+    "reportedVersion": "not provided",
+    "temperatureMeasured": false
+  },
+  "frameRatePolicy": {
+    "constraint": "Preserve the existing frame-rate setting; no new or lower mobile FPS cap.",
+    "applicationOverrideAdded": false
+  },
+  "changes": [
+    "HUD reads level/points directly and derives only the displayed skill views; complete character-panel attributes retain their existing implementation.",
+    "Reuse unchanged atlas frames, facing, transforms and material uniforms; retain all gameplay/animation clocks, hit flash, recoil and corpse fade.",
+    "Pause/resume skeletal animation on transitions; newly equipped weapons still sample while paused.",
+    "Reuse ordinary camera bearing and a position vector; find the nearest eligible enemy without temporary arrays/sorting.",
+    "Skip caption projection, text and skin submissions outside the existing four-metre range.",
+    "Reuse Cocos MeshUtils.createDynamicMesh/ Mesh.updateSubMesh buffers for thunder, update renderer bounds, and omit unused normal/UV channels."
+  ],
+  "method": {
+    "environment": "Cocos Creator 3.8.8 Browser Preview, desktop headless Chromium on Windows, 844x390 mobile UA, requested DPR3. Cocos reported a 1688x780 render window. Not an iPhone or TapTap runtime measurement.",
+    "sourceVerification": "Refresh the isolated C-drive Creator mirror through its project-scoped asset database. Verify the compiled optimization marker before each accepted run. Earlier unrefreshed/in-flight preview runs are excluded.",
+    "comparison": "Seed-19 sessions, identical areas and ordinary update loop. The 16-second combat fixture positions the player near an existing enemy once, then uses existing automatic hunting input. No HP, damage, rewards, enemy count or timing rules are changed.",
+    "metrics": "Calls per HUD/game update, collected with temporary diagnostic wrappers. Combat draws/triangles are frame averages. The FPS values are settings, not measured phone FPS.",
+    "limits": [
+      "No phone CPU/GPU, thermal or battery measurements.",
+      "Overall draw calls and triangle counts remain essentially unchanged; this pass targets repeated submissions and allocation churn.",
+      "Desktop wrapper timings/software GPU cannot predict iPhone temperature improvement.",
+      "Unmatched raw diagnostic kill/cast event counters are excluded. Defeat counts use actual final enemy HP."
+    ]
+  },
+  "stages": [
+    {
+      "stage": "S01-T1",
+      "frameRateSettingBefore": 60,
+      "frameRateSettingAfter": 60,
+      "drawCallsBefore": 190,
+      "drawCallsAfter": 190,
+      "trianglesBefore": 249795,
+      "trianglesAfter": 249795,
+      "callsPerUpdate": {
+        "setPosition": {
+          "before": 17.722,
+          "after": 5.713
+        },
+        "setScale": {
+          "before": 1.189,
+          "after": 0.187
+        },
+        "setWorldRotation": {
+          "before": 3.0,
+          "after": 0.0
+        },
+        "setRotationFromEuler": {
+          "before": 1.0,
+          "after": 0.0
+        },
+        "material.setProperty": {
+          "before": 1.0,
+          "after": 1.0
+        },
+        "progressionView": {
+          "before": 1.0,
+          "after": 0.0
+        }
+      }
+    },
+    {
+      "stage": "S01",
+      "frameRateSettingBefore": 60,
+      "frameRateSettingAfter": 60,
+      "drawCallsBefore": 218,
+      "drawCallsAfter": 218,
+      "trianglesBefore": 318655,
+      "trianglesAfter": 318655,
+      "callsPerUpdate": {
+        "setPosition": {
+          "before": 24.889,
+          "after": 6.894
+        },
+        "setScale": {
+          "before": 0.281,
+          "after": 0.282
+        },
+        "setWorldRotation": {
+          "before": 2.0,
+          "after": 0.0
+        },
+        "setRotationFromEuler": {
+          "before": 1.0,
+          "after": 0.0
+        },
+        "material.setProperty": {
+          "before": 1.0,
+          "after": 1.0
+        },
+        "progressionView": {
+          "before": 1.0,
+          "after": 0.0
+        }
+      }
+    },
+    {
+      "stage": "S03",
+      "frameRateSettingBefore": 60,
+      "frameRateSettingAfter": 60,
+      "drawCallsBefore": 194,
+      "drawCallsAfter": 194,
+      "trianglesBefore": 212910,
+      "trianglesAfter": 212914,
+      "callsPerUpdate": {
+        "setPosition": {
+          "before": 34.894,
+          "after": 5.894
+        },
+        "setScale": {
+          "before": 18.282,
+          "after": 0.282
+        },
+        "setWorldRotation": {
+          "before": 11.0,
+          "after": 0.0
+        },
+        "setRotationFromEuler": {
+          "before": 10.0,
+          "after": 0.0
+        },
+        "material.setProperty": {
+          "before": 10.0,
+          "after": 1.0
+        },
+        "progressionView": {
+          "before": 1.0,
+          "after": 0.0
+        }
+      }
+    },
+    {
+      "stage": "S03-moving-combat",
+      "frameRateSettingBefore": 60,
+      "frameRateSettingAfter": 60,
+      "drawCallsBefore": 205.423,
+      "drawCallsAfter": 205.398,
+      "trianglesBefore": 226731,
+      "trianglesAfter": 226725,
+      "callsPerUpdate": {
+        "setPosition": {
+          "before": 37.9,
+          "after": 11.139
+        },
+        "setScale": {
+          "before": 21.859,
+          "after": 4.032
+        },
+        "setWorldRotation": {
+          "before": 11.302,
+          "after": 0.3
+        },
+        "setRotationFromEuler": {
+          "before": 10.094,
+          "after": 0.975
+        },
+        "material.setProperty": {
+          "before": 11.951,
+          "after": 2.961
+        },
+        "progressionView": {
+          "before": 1.0,
+          "after": 0.0
+        }
+      },
+      "movementMetresBefore": 59.86311304393153,
+      "movementMetresAfter": 59.858404222136514,
+      "enemyCount": 9,
+      "defeatedBefore": 6,
+      "defeatedAfter": 6,
+      "playerHpBefore": 305,
+      "playerHpAfter": 305
+    }
+  ],
+  "dynamicMeshFixture": {
+    "pulses": 36,
+    "allocationsBeforeAlgorithm": 36,
+    "allocationsAfterObserved": 4,
+    "growthAndShrinkVerified": true,
+    "cullingBoundsVerified": true,
+    "cleared": true,
+    "visualComparison": {
+      "size": [
+        2532,
+        1170
+      ],
+      "identical": false,
+      "differenceBounds": [
+        1008,
+        431,
+        1386,
+        670
+      ],
+      "meanAbsoluteError": 0.00012512208404783445
+    },
+    "visualReview": "Native Cocos render reviewed for the thunder pattern, brightness and body occlusion. Static/dynamic renders share vertex/colour/index values; the complete images are not claimed bit-identical.",
+    "tradeoff": "Pooled buffers retain their high-water capacity until scene disposal. The existing eight-sheet limit remains."
+  },
+  "validation": {
+    "existingRulesPassed": 116,
+    "typescript": [
+      "npm --prefix src/cocos run check",
+      "npm --prefix src/cocos run check:core"
+    ],
+    "mobileTouch": {
+      "simultaneousMoveAttack": true,
+      "oilCancel": true,
+      "bowCancelWithoutArrow": true,
+      "dashAfterCancel": true,
+      "errors": [],
+      "harnessNote": "The unchanged browser-touch check initially injected touches during the opening cinematic exit fade, which clears input by design. Replayed with an in-memory wait for cinematic completion; no tracked test file was changed."
+    },
+    "pausedEquipment": [
+      {
+        "id": "W07",
+        "visible": "W07",
+        "paused": true
+      },
+      {
+        "id": "W11",
+        "visible": "W11",
+        "paused": true
+      },
+      {
+        "id": "W01",
+        "visible": "W01",
+        "paused": true
+      }
+    ],
+    "animationResumed": true,
+    "baselineErrors": [],
+    "optimizedErrors": [],
+    "renderErrors": []
+  },
+  "evidence": {
+    "baseline": "temp/thermal-v2/baseline.json",
+    "optimized": "temp/thermal-v2/optimized.json",
+    "render": "temp/thermal-v2/render-validation.json",
+    "visual": "temp/thermal-v2/thunder-review.jpg",
+    "rules": "temp/thermal-v2/rules.log"
+  },
+  "sourceFiles": [
+    {
+      "path": "src/cocos/assets/scripts/app/ChapterGame.ts",
+      "beforeSha256": "454e45e95b1c5a7a7beda2d0317d29e7379d01fd5c9891551a7975c906e33a25",
+      "afterSha256": "16372e0860e4ea7e496b466cc74a410f57d47e9d4069d95df798d73ebdad3b02"
+    },
+    {
+      "path": "src/cocos/assets/scripts/app/Hud.ts",
+      "beforeSha256": "4ab4c2055dfa0c9c63907b120ecfa3b87fabd3086c251bd6db65a0deb64036af",
+      "afterSha256": "2d94e3ad31c7a640e0c8714771db53bcb3359e64bfa70d9669fae6bca59036d1"
+    },
+    {
+      "path": "src/cocos/assets/scripts/core/GameSession.ts",
+      "beforeSha256": "73d58a8826209f8a01d9c28044f2ef7d7e8e2a0cefb47948e9d3f24edbf669df",
+      "afterSha256": "2f74141f7bc8433e053e0b01c5cb62bb6ce7d0b92796f9b7a9c6397ac627cb45"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/portals/runtime/PortalHud.ts",
+      "beforeSha256": "fa84f9429735a9b79500fefde74f0cfc4a42c96bc67abc4cd4eaf760572f0e4f",
+      "afterSha256": "c18fdc2b459dcf7b7529b95f6b155e0490f6f6a7dd8ed5b5620bcf6647d60bc0"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/combat/common/PureCombat.ts",
+      "beforeSha256": "8e9b786b055906f0a1c9d51e37307f7e1422e66bee570e0fbb14c88186971fc1",
+      "afterSha256": "a9c9b74a9748b8ec2b02f5a1577b5b626f36836b424f7fd08a48a219361836e3"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/combat/runtime/ThunderArcField.ts",
+      "beforeSha256": "8e38534eee1cbed69603d0975d776903cd0e337d27075d1a469e2bc4feb1ee37",
+      "afterSha256": "4e967864949593773f28ae59d5e219eb0587cde2f6f8cbdea5d5b6b0f51aa0ea"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/actors/runtime/Actors.ts",
+      "beforeSha256": "557a1675910d6a4e6c6a092f3e64caf25f330bab8b838a01f04918e5ed087557",
+      "afterSha256": "a0e2b698c89e57dee7cc5dff09fb9e5d9e7a98802ab502dc693528867a4c31a8"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/actors/runtime/FlatActors.ts",
+      "beforeSha256": "e6f863ece4e05f64dd9b3e53c907a9530e73ef152136df6e004d8afe8a7ed601",
+      "afterSha256": "cf89a95e4e7ccdd3b0bf46d25afb38d0e78a705f22a1c5024b6844d19f6b209e"
+    }
+  ],
+  "officialReferences": [
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/runtime/runtime-suggestions/",
+    "https://docs.cocos.com/creator/3.8/api/zh/class/utils.MeshUtils",
+    "https://docs.cocos.com/creator/3.8/api/en/class/Mesh"
+  ],
+  "pending": [
+    "Build the updated source and test in the real TapTap runtime on the reported iPhone 14.",
+    "Compare the same 10-15 minute moving-combat route at unchanged FPS, brightness, scene, skills and charging state; record frame time, CPU/GPU load, process memory and temperature/power where available.",
+    "If GPU load dominates, profile hero skin/shadow passes, transparent combat overdraw and HUD batching before selecting visual/asset changes."
+  ]
+}

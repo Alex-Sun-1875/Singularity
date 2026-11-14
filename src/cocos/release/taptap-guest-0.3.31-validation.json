@@ -1,0 +1,55 @@
+{
+  "verifiedAt": "2026-11-12T16:27:36.203861+00:00",
+  "version": "0.3.31",
+  "package": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-guest-20261113\\SwordAndFire_0.3.31_TapTap_guest-test_20261112T162638Z\\SwordAndFire_0.3.31_TapTap_guest-test_20261112T162638Z.zip",
+  "sha256": "d5f0b12fa5a92f8c072d67f67ca84fd4e60916f159f94be292200cc5349ce96c",
+  "bytes": 219802465,
+  "buildMode": "guest-test",
+  "loginMode": "guest",
+  "localSaveOnly": true,
+  "purpose": "Guest replacement for v0.3.30 login-required test package; skips business login and reuses existing local save keys.",
+  "checks": {
+    "typescript": true,
+    "existingRuleTestsPassed": 140,
+    "existingRuleTestsFailed": 0,
+    "releaseConfiguration": true,
+    "creatorBuild": true,
+    "officialConversion": true,
+    "renderPolicy": true,
+    "subpackageAudit": true,
+    "zipCRC": "passed by report-taptap.py",
+    "deliveredSha256MatchesOfficialZipAndSidecar": true,
+    "zippedGuestEntry": true,
+    "zippedLoginMode": "guest",
+    "zippedVersionAndCompiledVersion": true
+  },
+  "sourceIntegrity": {
+    "businessScriptsBeforeAndAfter": 197,
+    "changes": [],
+    "manifest": "business-source-before.json"
+  },
+  "payload": {
+    "completeUploadZipBytes": 219802465,
+    "offlineInitialPayload": {
+      "files": 26,
+      "rawBytes": 5577490,
+      "zipBytes": 1352985,
+      "zipMiB": 1.29,
+      "budgetMiB": 20.0,
+      "withinLocalBudget": true,
+      "sha256": "4abc3bc61c03d0df3253010603519ff75026528ddeaaaec77af87f949dcfb771",
+      "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+    },
+    "actualPlatformInitialBytes": null,
+    "actualResourcesNeededBeforePlayBytes": null,
+    "subpackageCount": 76,
+    "contentPackCount": 64
+  },
+  "uploaded": false,
+  "platformVerified": false,
+  "pending": [
+    "Upload and confirm platform parsing and actual delivered first package.",
+    "Validate guest startup, touch, lifecycle recovery and local-save continuity on a real TapTap device.",
+    "Deploy login service and configure serviceUrl before switching to a login-required release."
+  ]
+}

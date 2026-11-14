@@ -1,0 +1,395 @@
+{
+  "status": "passed-art-runtime-input-all97-navigation-and-live-preview",
+  "reviewedAtUtc": "2026-11-08T05:19:09.205200+00:00",
+  "package": "portal-carved-v2",
+  "preview": "http://127.0.0.1:7470/?view=2d&v=carved6",
+  "artReview": {
+    "reviewer": "Codex visual review",
+    "status": "passed",
+    "direction": "bilaterally symmetric worn grey Gothic stone with octagonal carved seal and restrained cold-blue incision light",
+    "sampleAreas": [
+      "S01-T1",
+      "S01",
+      "U1-02",
+      "S06",
+      "H07"
+    ],
+    "mobile": "four stable DPR2 representative captures reviewed",
+    "native3d": "original T1 native scene viewed; painted face and original non-trigger colliders present",
+    "backing": "old exposed native cap and square floor corners removed; actual alpha projection proof saved separately",
+    "userAcceptance": "no claim of user approval"
+  },
+  "generation": {
+    "record": "generation.json",
+    "tool": "OpenAI image_gen built-in cloud",
+    "prompt": "prompt.txt",
+    "derivedImages": [
+      {
+        "path": "src/cocos/assets/resources/flat2d/waypoints-v1/waystone-face-carved-v6.png",
+        "size": [
+          512,
+          768
+        ],
+        "sha256": "bd5ad3328439aeb2bf5f72b2e9a88b554dcc29b1471eb9b3004e287c2a966c76",
+        "rgbaMirrorMaxError": 0,
+        "alphaAbove128Fraction": 0.773345947265625
+      },
+      {
+        "path": "src/cocos/assets/resources/flat2d/waypoints-v1/waystone-rune-carved-v6.png",
+        "size": [
+          512,
+          768
+        ],
+        "sha256": "8e0b2da628df11a3dfb7a5ded2a5a16f16b4add26f00ed1d273a4ae003783e0e",
+        "rgbaMirrorMaxError": 0,
+        "alphaAbove128Fraction": 0.005472819010416667
+      },
+      {
+        "path": "src/cocos/assets/resources/flat2d/waypoints-v1/waystone-glow-carved-v6.png",
+        "size": [
+          256,
+          384
+        ],
+        "sha256": "47dcadd3318af1c469f55b9741ae8b2139e9325696353253b68f56576f8a8ee1",
+        "rgbaMirrorMaxError": 0,
+        "alphaAbove128Fraction": 0.0
+      },
+      {
+        "path": "src/cocos/assets/resources/flat2d/waypoints-v1/waystone-floor-face-carved-v6.png",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "34ab2762225682cc44a39383700df07c802ede07c9db01a1b49d17f78437209a",
+        "rgbaMirrorMaxError": 0,
+        "alphaAbove128Fraction": 0.78106689453125
+      },
+      {
+        "path": "src/cocos/assets/resources/flat2d/waypoints-v1/waystone-floor-carved-v6.png",
+        "size": [
+          512,
+          512
+        ],
+        "sha256": "21974df187a33febcd6d5b9daccdec81185c3268479d3435205bda09dc40f4b8",
+        "rgbaMirrorMaxError": 0,
+        "alphaAbove128Fraction": 0.01398468017578125
+      }
+    ],
+    "pixelPreparation": "Pillow, no local model inference"
+  },
+  "build": {
+    "proof": "portal-carved-v2-build.json",
+    "proofSha256": "2dea48c4c5f0500e3658c4fa3ccf1929e53a59797aa26f22112244eacaea717e",
+    "mainJs": {
+      "relativePath": "assets/main/index.b7846.js",
+      "bytes": 1103533,
+      "sha256": "6f8ceb9d0d1a8b77a3e50f3e385c2e711a3e5d49a17c9fa6a5e7a5d12b9590f8",
+      "chapterGameRfPush": true,
+      "markers": {
+        "PortalHud": true,
+        "PortalPresentation": true,
+        "WaystoneGlow:": true,
+        "flat2d/waypoints-v1/waystone-rune-carved-v6": true,
+        "revealedExits": true,
+        "nearestExit": true,
+        "readoutVisible": true,
+        "fadedOccluders": true,
+        "terrainDetails": true,
+        "shipwreck": true,
+        "gorges": true,
+        "entranceClusters": true,
+        "progressionView": true,
+        "combatSkillView": true,
+        "nativePortals": true,
+        "portalMounts": true,
+        "planPortalMounts": true,
+        "WaystoneCarvedFace:": true,
+        "painted-carved-stone-cold-blue": true,
+        "waystone-face-carved-v6": true,
+        "waystone-floor-face-carved-v6": true
+      }
+    },
+    "copy": {
+      "identical": true,
+      "files": 2080,
+      "totalBytes": 575392097,
+      "buildTreeSha256": "8377e2307d6c8200a825dbd595a9168a9cb13dbc82c13e5342f68d77f1d4b7e9",
+      "hashDefinition": "SHA256 of compact UTF8 JSON ordered file records (path,bytes,sha256)"
+    },
+    "sourceSnapshotFileCount": 151,
+    "sourceDriftAfterFinalQA": []
+  },
+  "navigation": {
+    "report": "navigation-review.json",
+    "reportSha256": "7a12308933e16cbc67f8c9475af14cf311eceef4517026e2d9da0aafa7260b8b",
+    "areas": 97,
+    "exitEndpoints": 320,
+    "standing": 316,
+    "floor": 4,
+    "originalExitAndArrivalTargets": 640,
+    "newRegressions": 0,
+    "runtimeErrors": [],
+    "failedRequests": [],
+    "sixTexturesSameAnchorStable": true,
+    "all320FaceMaterialState": {
+      "technique": 0,
+      "alphaTest": true,
+      "alphaThreshold": 0.35,
+      "depthWrite": true,
+      "depthTest": true,
+      "blend": false
+    }
+  },
+  "inputs": {
+    "report": "input-review.json",
+    "reportSha256": "de4694459cdbf8b20486cd3d65319cc05414f700bba8b08f4b89c15cba378df9",
+    "modes": [
+      {
+        "mode": "desktop",
+        "status": "passed-actual-input-locks-duplicate-orientation-and-resource-gates",
+        "travels": [
+          {
+            "from": "S01-T1",
+            "to": "S01",
+            "input": "real keyboard F"
+          },
+          {
+            "from": "S01",
+            "to": "S01-T1",
+            "input": "real pointer/touch portal label"
+          },
+          {
+            "from": "S01-T1",
+            "to": "S01-T2",
+            "input": "real keyboard F"
+          },
+          {
+            "from": "S01-T2",
+            "to": "S01-T1",
+            "input": "real pointer/touch portal label"
+          }
+        ],
+        "rapidRebuildCount": 1,
+        "fixedWorldTransformMaxDelta": 0,
+        "textureReferenceCounts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "mode": "mobile",
+        "status": "passed-actual-input-locks-duplicate-orientation-and-resource-gates",
+        "travels": [
+          {
+            "from": "S01-T1",
+            "to": "S01",
+            "input": "real touch interact"
+          },
+          {
+            "from": "S01",
+            "to": "S01-T1",
+            "input": "real pointer/touch portal label"
+          },
+          {
+            "from": "S01-T1",
+            "to": "S01-T2",
+            "input": "real touch interact"
+          },
+          {
+            "from": "S01-T2",
+            "to": "S01-T1",
+            "input": "real pointer/touch portal label"
+          }
+        ],
+        "rapidRebuildCount": 1,
+        "fixedWorldTransformMaxDelta": 0,
+        "textureReferenceCounts": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    ],
+    "errors": [],
+    "failedRequests": []
+  },
+  "live": {
+    "report": "live-preview-review.json",
+    "httpMainSha256": "6f8ceb9d0d1a8b77a3e50f3e385c2e711a3e5d49a17c9fa6a5e7a5d12b9590f8",
+    "firstScene": "S01-T1",
+    "portalCount": 3,
+    "errors": [],
+    "failedRequests": []
+  },
+  "screenshots": {
+    "preview": "runtime-preview.jpg",
+    "sources": "runtime-preview.sources.json",
+    "scope": "actual production game screenshot crops, no generated scene or paint-over"
+  },
+  "renderGate": "Three real Cocos Director.EVENT_AFTER_DRAW callbacks plus 200ms before GPU/readout/pointer sampling. Earlier browser-RAF-only captures remain diagnostic records.",
+  "scope": "97 area-entry/render/navigation fixtures with original actor construction, representative real keyboard/touch travel and original lock/unlock guards. Not a complete campaign playthrough or physical-device performance benchmark.",
+  "sourceFilesSha256": {
+    "FirstChapter.scene": "26DDAC767BC2CAB8AF5AEC5D27B9BBED62932A14D7BD57BF98821942739BF15E",
+    "FirstChapter.scene.meta": "8CD873EA532F6BFDD3ADF1BC4AA2D53F45220E52665C17574640676DB73019F2",
+    "resources.meta": "847A2CD6AE9F26A771D1E42E233CAAE4FB435013104238C3FFB07C3BA229A971",
+    "scripts.meta": "D195110E5D619A2BFE190467432C39E278E69FB1C7DE4333EA9C14A14A1B4D38",
+    "scripts/core.meta": "846E8F36E4B0E687FF051D1C41F90B32D68178CAF4CE79A8ACA0270142A09A02",
+    "scripts/core/CampaignLoot.ts": "D57F8800D5C2B6226A0F3A9F966B4429241BFDEFBF9B785005EFACB959B4C4C2",
+    "scripts/core/CampaignLoot.ts.meta": "A8CF72C233C60FCC6C0CE40932A715C475A1BEE1A9BCD0DC5BCF294433FFDEED",
+    "scripts/core/CheckPersistence.ts": "BCFB3E43F41F7FAF4257E9B5A843EC0F4F21B1DD4784F92D8F0D3B82C5AD5EE3",
+    "scripts/core/CheckPersistence.ts.meta": "A0B9A56F41154C73BF40D3F30CF0D7B092473EFF4C64BA91A858AC3798343E5A",
+    "scripts/core/CombatPersistence.ts": "7D033FC5B9BE02550B5A4596E5AAE69A4599D1053A9D008BB06BBEB2E0B4F98C",
+    "scripts/core/CombatPersistence.ts.meta": "D88C98C0795AC27CC003C53FA37087A2FD4EA643F97F041E1A7FF31F599C7C91",
+    "scripts/core/Contracts.ts": "56756248DCC9F41FFF591986D7D4A3E1F039958192E52A8C84D69FFDA1A757CA",
+    "scripts/core/Contracts.ts.meta": "C865D611F932BB76D39267AE094CC4EA58B2EDCA6951C57686E158D071D63EE2",
+    "scripts/core/EnemyCombat.ts": "B996DD7E710B30557C09E4FF97CEC9D949B33003FEB1E100776BD41DAF735583",
+    "scripts/core/EnemyCombat.ts.meta": "03B91C6C9B0D68D5323936A3F6A583C5F7036EF533FB6641A9542D8A73668910",
+    "scripts/core/GameSession.ts": "AE39CD4231F59D66AB0F8E8E8D567FF376400AD60F140585CBB3F4D32AE9F32E",
+    "scripts/core/GameSession.ts.meta": "1F8B3837F7F13DDBB9DAFE7E50E67560561B7C031019C1987DA070DF14EE63A5",
+    "scripts/core/Progression.ts": "4004ED520F3D6BF6910AC68377DBFE5C54CE24EECDBA695C1F3F888D1233A65A",
+    "scripts/core/Progression.ts.meta": "3105289C5A476FB075D557A2CA651E584BAB8399B561009E59A59372979873A2",
+    "scripts/core/PureCombat.ts": "A86485586DCF42EBC4EC67348EC0D7C8E4E1BFAAAA6EF2AA4DD61AB6787F9562",
+    "scripts/core/PureCombat.ts.meta": "37985294CFF8EA59ABFDF4D25859A55353DF5E10A1118D8A7667BDDEF276597D",
+    "scripts/core/SaveStore.ts": "B65D6BF0BCDA49EA5B408D9948DD1F60055FC215A794CE5E95CD23950C0BCF23",
+    "scripts/core/SaveStore.ts.meta": "73C5557364C79C0A839B012A050C3B9A4409712B5877D1B0FA5B127FD5FA6F23",
+    "scripts/core/SkillChecks.ts": "F35B4120F5067C9D3C39A237428E6937900472257D50F6524D54246923CF8774",
+    "scripts/core/SkillChecks.ts.meta": "7B61BCD0DB96627CBC6251D9815E8E7952014D63113151B4371211F418C063DC",
+    "scripts/core/TouchOwnership.ts": "0B243EADA09C252A1E261289A5EB8E7AE9CB0D40A7CE17D59BBF34D933EFB29F",
+    "scripts/core/TouchOwnership.ts.meta": "E066F77766FD36E541F1221884D019A579C5378909424A5717E1E8BD097521CE",
+    "scripts/data.meta": "88C79C048B20E4031DBF34025E237EEC71B3BCEA7927DEEAB09E8B22B90311D1",
+    "scripts/data/Campaign.ts": "653524DCC4F769236408E86B3E3A84E9AA8F2B265F94FD644FBEFF5BCB8A11E2",
+    "scripts/data/Campaign.ts.meta": "DE789E77082DD034C17AE334DD12EF9CCF5957761624A54D02255E537C0C8317",
+    "scripts/data/CampaignEvents.ts": "1733D09557ED009B94DBD73D23A32A207D3E4BDA97B99E3AC1FAEA311A3A5445",
+    "scripts/data/CampaignEvents.ts.meta": "F5180078211FE20FEF7A3984D3C5513C9B1B563C35D2E7AB821D30659669ADAC",
+    "scripts/data/CampaignGeography.ts": "5116930107A0ADAC64830D08172D9F8BAE78BEF43DB5C9317364FF62F8B9E289",
+    "scripts/data/CampaignGeography.ts.meta": "61D2592695785601E27B13295FE6B5261A8333F4DF6097358881E91F0ECB204A",
+    "scripts/data/CampaignLoot.ts": "8E88EA9D54E25FCF3737216B668BD4779CB07D88F026A47A331ACC5A3545AC7B",
+    "scripts/data/CampaignLoot.ts.meta": "455DE608EABD9554971C6FD47EC4406BF0959E0C45BF05B2720E1FC76A1D5A93",
+    "scripts/data/CampaignTerrain.ts": "6A128679E30FF90A45BF68C3ED2557446F54AF475F71D7B699CD9E7E06D5D4E5",
+    "scripts/data/CampaignTerrain.ts.meta": "C10D6E0BF0FE033B2733DAB4BE13B17B5F7F154E52956345539D7249DCB765EC",
+    "scripts/data/CampaignWorld.ts": "8DAF28FD1D1DF550E92D7ED6F23DCCD3E6698F6996095B0CA1E45A63861F9110",
+    "scripts/data/CampaignWorld.ts.meta": "881DE3597A869AD4819B865D6A86D32C4E8D8928C778806C4D8671B6E34703C0",
+    "scripts/data/EnemyCombat.ts": "7AD70AD1BD7E9AB39A86C74AE019103F4048F1D31EE3815DC2786DD347C210B0",
+    "scripts/data/EnemyCombat.ts.meta": "EA5392F3AB93C531F83D3A346809B3FE3ECD2078CDD6C606139ABAD134C50B80",
+    "scripts/data/Equipment.ts": "EC8D7DCA9D01D1C8BF29E98F326BCDB1DEFC5072D7A8470A4C1839F2628A50C9",
+    "scripts/data/Equipment.ts.meta": "382D2AD376E76D0CE709C9930CE6DC4E6079C4BBC934901A416796BD925A7034",
+    "scripts/data/EquipmentCatalog.ts": "3003BB7E8ABFFCA01645A2085AFFCC8A7942AB40B72C753309C4223906FA48B8",
+    "scripts/data/EquipmentCatalog.ts.meta": "3490EE33412E709F6C413D8274D9BC88116F88D54BEDBA44CA3D48984FCAACD9",
+    "scripts/data/MapArt.ts": "84D09DEF80E743CF5DD01028B99C0EAC63C9C0314A204FE2A3C392D6FAB4BF46",
+    "scripts/data/MapArt.ts.meta": "D893261E06921C598DFA129E66D0EF20D6A768592A27A8B6879F70BCDDE98857",
+    "scripts/data/PureSkills.ts": "BA0B6A6873514641FC6BE39F5E5664B79676D27D32C7B3ABE03701BA4BD09DA9",
+    "scripts/data/PureSkills.ts.meta": "EF0883CAF0BDA937F58D3A9B2FEB55672E05B128EB81CBA0A7CBC8F3A33D7F14",
+    "scripts/data/SceneDressing.ts": "C5845FFA41AC055116AAA1ADC517B78EE7B6746EF687C8D020EAFEE5EB446951",
+    "scripts/data/SceneDressing.ts.meta": "54BC5E63AD4C4FC5583795E076170E47AB2F150D82D659F40F3BF57D3AA6F906",
+    "scripts/data/SkillChecks.ts": "835101AF9A102F1253061702BBA0D80BBD1C14CECEB23BD32AE9EC0BFCE6F5D3",
+    "scripts/data/SkillChecks.ts.meta": "0943C87CBB27C4E0AA8A3458662D7413B6E0D5EAD2060090C2E570D479B3D917",
+    "scripts/data/WorldData.ts": "D1617D7D06437C948B4C2E7EA47F89D9F601407B17006469616EB8388914FBA1",
+    "scripts/data/WorldData.ts.meta": "91FE1E568222D83F3E935D1DE02A2D22CD0CE6E74D21DFAB49B71F9782DA2A2C",
+    "scripts/runtime.meta": "3B04982B92F21F7A00BED49329E20B8531A93933A0D4B9A4DF2C319E54EDA4AA",
+    "scripts/runtime/Actors.ts": "BF877D5212DBD31A27AED254788B0B962234B443A65057433BE4D4BF5A11024B",
+    "scripts/runtime/Actors.ts.meta": "C74F4D8A78337F04919B1AA22076FEC291BD3F457D5C5ECD93644F88F1A7ED2D",
+    "scripts/runtime/AssetBundles.ts": "79B14DDC1A1726B406A128CC1849BC0A76F27D2D9432804D69718CBFA749AF9D",
+    "scripts/runtime/AssetBundles.ts.meta": "3BDAD9D6EADDD019F37F254F6CCE0C17DF395B0D8BD7BAD61354DE23632F7ADA",
+    "scripts/runtime/AtlasUi.ts": "459DBD2FFEE684436BE0BBD1BAEC6877B1CCA6917DFDB4331513FBEDC7367F9C",
+    "scripts/runtime/AtlasUi.ts.meta": "C2A7C66523E183F9DD6D0E1B56279F0B5A87E76C859E964DF1B0B9D50A1DA37F",
+    "scripts/runtime/BossHud.ts": "277852AF9B6DD99CB3D3F81073F6D4EA0DDA21A0041F5147A30D0B8C592027F9",
+    "scripts/runtime/BossHud.ts.meta": "07C8A1D382033BC7D5BAE4588157C76F6E11A92BF8D6FC41313978AA12C093E5",
+    "scripts/runtime/ChapterGame.ts": "5CAD5FFB5BA7FAC5C0886B6DADAE8A048A3B9FC5064C0DDAB941E974D089AD54",
+    "scripts/runtime/ChapterGame.ts.meta": "3C349E854A7789FE54AF5CBEE60D9581643687FDC9AA4E17E96BA4DD8AAD3451",
+    "scripts/runtime/CharacterPanel.ts": "BA71100FFD38009B0021DE7FCA6F768A5E8BA1C8D7E893907EC0B0D061ED81CB",
+    "scripts/runtime/CharacterPanel.ts.meta": "E07EFA9BC69CC1A3F3F467B21F6421A70714218B8F7DCB9FE1E71AC815583D21",
+    "scripts/runtime/CharacterPreview.ts": "813D0A8F33F3FD44920EAE0EDD5B6B229DA9527D41C948AEFE2096D0F0637F84",
+    "scripts/runtime/CharacterPreview.ts.meta": "78E27F8E5D9048FBF67B7F8CDE4F9E7784A7435A61007337748373370B416137",
+    "scripts/runtime/CheckpointCompass.ts": "D0502F4E08C96286E7DD3E0562C77E5206785952EEBE7D3DEC5E79B7B47B04A0",
+    "scripts/runtime/CheckpointCompass.ts.meta": "5CFACE673E40380D3E1AB3D13B5E7F6348B284935D30066C83C8884DF4EAC32D",
+    "scripts/runtime/CombatPanel.ts": "3F524ED8F91DD3F1365F18F0C44875F0F9C1F7E189C23385FE7AA60938287222",
+    "scripts/runtime/CombatPanel.ts.meta": "F742504A88AAAE56A915A0A7DA97D23A615768255DA51B5271C1EB6ACC6F77DE",
+    "scripts/runtime/DicePanel.ts": "E1648F36596B70E883DD1A06768E69994F2AE4634B48FE13E4812E831C549BB3",
+    "scripts/runtime/DicePanel.ts.meta": "5BE5571872008A15D7C83AC090482AC1037072B84E75DF54328A044B5C49826C",
+    "scripts/runtime/Effects.ts": "271B73ABAC26920F8AAC8B46E733DD66626278206DD2EEB912B426E89E391469",
+    "scripts/runtime/Effects.ts.meta": "312B4CEB6F26DFECA79669A4D15A2A10E7836AA3106B49CCE13B6C9FD330D6E3",
+    "scripts/runtime/EnvironmentAssets.ts": "50EBA4EB77C541E84AB192C041C2D4AF1E06FCCB70D8EB0D5D8B46BCD2405AED",
+    "scripts/runtime/EnvironmentAssets.ts.meta": "B04C4DF1A32A1E731FB17218B31B78D48B4659994979CA6F87F7779C2ADD2CA5",
+    "scripts/runtime/EnvironmentPresentation.ts": "A8388582620031EE0B249E78695DE50639BAB2738C7A7BBD922B1C39518D2D41",
+    "scripts/runtime/EnvironmentPresentation.ts.meta": "03EC1CE2BCEEA646F66A63B2B1F175AB45F5EFAB392EE0E8DD18DDDFB0CE4012",
+    "scripts/runtime/EquipmentArt.ts": "CCA11C3A291E175F2122EFAEE5D3B0D19E69E854B6FA80B9B03D52984986E421",
+    "scripts/runtime/EquipmentArt.ts.meta": "0444E869716EF86141CDCD9CCA63BAE79E84D9F0A84AF0644244A5C7FD82064C",
+    "scripts/runtime/EquipmentGallery.ts": "108A5DA43C7A7B496365D40D8C76FB6123AF9F28D686AF9B0F4CEA78BE60A6B8",
+    "scripts/runtime/EquipmentGallery.ts.meta": "097213990EBF3D5919309971AFEDC500B9CC02E1A470A85576AFA56B553FD590",
+    "scripts/runtime/EquipmentPresentation.ts": "3BCA0A6BC6C2B6490607FF5F207CB50FEC9021E82655057CD42F3DE0FE69D62C",
+    "scripts/runtime/EquipmentPresentation.ts.meta": "F2E8B96673C4200F56B722933E6736ACB6DEE740DBD1275687B9A156F414AD02",
+    "scripts/runtime/FlatActors.ts": "A68302112397AFFE1947D9166DC34C6325D12ED032D48825C079DC9B116AD676",
+    "scripts/runtime/FlatActors.ts.meta": "FA538D767324FC8E515C919F4CA04D5AA74337CAC6C62EEC3087EE5C41AF7D91",
+    "scripts/runtime/FlatCharacterPreview.ts": "6442EBA2614767DEE4E44946EADA7B1ABB221955CEC99B3465DCABA583AD507E",
+    "scripts/runtime/FlatCharacterPreview.ts.meta": "21BB0CC98773C61BBB3F74F1777E646F585F8351B6926FAB620E153626880F44",
+    "scripts/runtime/FlatWorldLayers.ts": "15D90484F3CBCA3D4BCC31A99E448E2E58651358AB342278045B39937C01D305",
+    "scripts/runtime/FlatWorldLayers.ts.meta": "D5E425F5F80B7CA0E54B569ED29FA3D6254185B6F0FBA04D8699657DE9BD9089",
+    "scripts/runtime/FlatWorldPresentation.ts": "1AAB9CBB29F447B7A070A18B92437FB6B7844BE02F2253A03BF913004B362C3F",
+    "scripts/runtime/FlatWorldPresentation.ts.meta": "EAB5FC8BD7B8B8D62C34F25B50DA3261C047CE0A9B7E204000F34369EE41C5CD",
+    "scripts/runtime/Hud.ts": "8AFCF77EA0517A1B5143776885BD7B3A37AF538BE62261F3504C3BBF4D4FD6CB",
+    "scripts/runtime/Hud.ts.meta": "4A94F02813901D7544173680A8DBAFAD76916792AF8367BC841698838F4FD1CA",
+    "scripts/runtime/LoadingScreen.ts": "84A7CD21597ACED4316FB73DE715C7D9903061D01E197834E068CB8D93DA3B4A",
+    "scripts/runtime/LoadingScreen.ts.meta": "C7BF6CA6F5F0E9D73D70C9EBDCD6C81D5E836113C2DA8AD9CFC7C3C08B46ED16",
+    "scripts/runtime/LocalCartography.ts": "511BEC0F351C4332538503A08E829299F662E2430F1A33C89D23E6A14CECBCE2",
+    "scripts/runtime/LocalCartography.ts.meta": "E00A9A5D470E04D89738F07A56FA62942E1E61FCBA649A996371273198260506",
+    "scripts/runtime/LocalMapCapture.ts": "7C70C879EB5719FACA3923AD63364B859E5372C2B9461252547D5FD8FA0CA121",
+    "scripts/runtime/LocalMapCapture.ts.meta": "E67E2472755CB4B2015C7ED044D3A7AD2C68E6139849CD42C1C1B3529FB0AA20",
+    "scripts/runtime/MapPanel.ts": "03E4197402976243DCBD1C704C56D8023AD5F3B675CB8C4A25031A8AC0745C14",
+    "scripts/runtime/MapPanel.ts.meta": "3ACCC751D4DB5245B864A0612747CD343326A9403B8A3C6B4645B12A3DC6A621",
+    "scripts/runtime/Menus.ts": "ED73183FAA2282A5E6BC74CAEC4CB8F4A153BFE1EC9E1E8D5392A3A89B49203F",
+    "scripts/runtime/Menus.ts.meta": "CB55A94047E078C89488D2A35DFBA2BFFC897BEDB01CEF9F708199D96AEDF52B",
+    "scripts/runtime/MeshTangents.ts": "0488CF4A0D545F608C7AA37FF71CA3C972DD14015206658591918616347898D0",
+    "scripts/runtime/MeshTangents.ts.meta": "8354C422E9F38A0CF541D7A7DB5B5BA4B2D864A1E93FFFF0F94A5263898AAC71",
+    "scripts/runtime/MiniMap.ts": "346299F2616287B36A5DE0262287D24FA2E0A0103DA1D09A3CFB533819B79836",
+    "scripts/runtime/MiniMap.ts.meta": "8241397DFBFFDFB6BCB3A25273885FE722A1B2BDAA47FA083E123852749A4791",
+    "scripts/runtime/NativeActorMaterials.ts": "5518BC83C9355FD8D61E9793626B309053E4177FB04FDF1B077E7B2BAD036CE1",
+    "scripts/runtime/NativeActorMaterials.ts.meta": "723F1E7FF9C05E39EF6D8798EDA050B752A13F77ECAABAEFD7F48266B2B753F2",
+    "scripts/runtime/NativeEnemyVfx.ts": "93DD53BD33A003A49D40640D97C4E0464B07780E7FDAD8C2E69B336E39C5C881",
+    "scripts/runtime/NativeEnemyVfx.ts.meta": "220179050BEFFA6529E69041E9CD9B2AB45E1B463EC311B30740D6DBE5624EFE",
+    "scripts/runtime/NativeSkillVfx.ts": "2329358E82D13BFE02389CDEE49321E63DB1D1FB4D7569B4BFF3D8D174B1A837",
+    "scripts/runtime/NativeSkillVfx.ts.meta": "327DA0D77CDA8D4FDAA7168E0C2E721D2BD0BB5096B0107D4B50B34247A642D1",
+    "scripts/runtime/Navigation.ts": "69A3446BB117E2CF74B1931F8651D9D4A03C9D21B404EF9E3C51B1343CAB66FB",
+    "scripts/runtime/Navigation.ts.meta": "4C54063E5A20E898F0779B4A02091372866210C2FA538CF6E1736F05CE78C1D7",
+    "scripts/runtime/PaintedTerrainDetails.ts": "99D418C34E2ACF0B097EFE884500BC2F45B46DB10D7768618FE40E70131DBF51",
+    "scripts/runtime/PaintedTerrainDetails.ts.meta": "2A91ED66D8874A042484D3F256E398D64EA2E6C8245EA8CB3E6BDE5463428CCE",
+    "scripts/runtime/PlatformServices.ts": "DB7235BE3B3E7FA14391C7BA13222CD8D7D55D1147742E98D72321F2F3C38C68",
+    "scripts/runtime/PlatformServices.ts.meta": "70E92950A2409B26F2900A43230CF477E7B00F56D7BB107F04AC89BC624127E7",
+    "scripts/runtime/PortalHud.ts": "8960D21A0527ABE70047C058B3D2C58BBEBFF6081ACB7B93B77D726F8B2DDF1B",
+    "scripts/runtime/PortalHud.ts.meta": "890ECED973392616193E170DF2D41541C074023734F3CFC129F651ADC52E2D89",
+    "scripts/runtime/PortalPlacement.ts": "A4BA6C065B6616204529F9DDAC350BF5A74C87FDF56094D82F290A5C1BCB32C9",
+    "scripts/runtime/PortalPlacement.ts.meta": "800F9FD451AEF53DDCC125D9EDBEC1E19B0786F763CF26C89A7CD6A19B3BD83A",
+    "scripts/runtime/PortalPresentation.ts": "E40FEB4B55F2EAA1BB14F1259D53B59226ADC0FF65123AD8D12E5DFA18574242",
+    "scripts/runtime/PortalPresentation.ts.meta": "7E9DF84C944A1CFD3AFD6ADF99059423A9F87B37765AE6E5DD96ABFA1E45F568",
+    "scripts/runtime/PortalStoneMesh.ts": "5EAD66C6506B7261D599A987004D4EA7839876F4D5A240817F6EC2CA0C8F509E",
+    "scripts/runtime/PortalStoneMesh.ts.meta": "CBBE761842F0C9DC510D1B36613FBB4215A3581D7EA217865C66D47E8B7D988D",
+    "scripts/runtime/RangedCamera.ts": "94D124DE040BB40CB2E6AB4A4D4DD0424928910F41F377C916A2A22930006DAC",
+    "scripts/runtime/RangedCamera.ts.meta": "AC26CAED4750AFE552C058D05B6217215A7E9AB6035C659E1C6B7BA575319777",
+    "scripts/runtime/SceneBuilder.ts": "86B81C5DBA61AED5978CA29EE18664FB93094415300FB11DC2C430F89BC7EC6A",
+    "scripts/runtime/SceneBuilder.ts.meta": "65F272FDC5C2CF487F1B214A8C04AD6734D828CEA496FCD4FAA45B569A051D4B",
+    "scripts/runtime/SurfaceMaterials.ts": "5D234DDAA563893071C057CD28473759A48FC5BF43D63A9C66D58ABEE88BF474",
+    "scripts/runtime/SurfaceMaterials.ts.meta": "21B2A3095BC4D7536A4C2EEDF0F8B2E6E685BCD9C4CBC7B038FF0B348A9C533B",
+    "scripts/runtime/Terrain.ts": "135129D87FB9612CA7961DF8DAA410C6D8AB1EDE42E50C105B3BF94725D80D73",
+    "scripts/runtime/Terrain.ts.meta": "2E8D46B8F963950E24BCA5071598C24204C00023C739F877C7E854B46016B856",
+    "scripts/runtime/UiChrome.ts": "77733283D39699B1AC1A14523A5B881E0377A629523EBDDE364FEA48336ECE5C",
+    "scripts/runtime/UiChrome.ts.meta": "D0B804385A6FC3BA2357EDC3F13E5A079EE03E0EB657A7533477A34D497B72A2",
+    "scripts/runtime/UiSkin.ts": "ABDD1A3EDC4BA094D921F39888903BB3C9E14A2190F8B12BB1270D127A92DBF7",
+    "scripts/runtime/UiSkin.ts.meta": "A3F77A22A6246FB4941BEA9FBB2CADB86ABF817B69C4888DB8498DF8FF155049",
+    "scripts/runtime/UiTheme.ts": "C39D0E956C35BCA20B0FED0B85A5F849008A0151EB01D51243E23355D2D044FE",
+    "scripts/runtime/UiTheme.ts.meta": "996637696E0CCF1D80BDBE36C458422BCCF9FDC39433AAFEF34A92D387AC7A1D",
+    "scripts/runtime/VfxAssets.ts": "75339306AEB3C9FB804FC46C8AD091CCFE11B528F859CBD186ABCDDB88D3CBB9",
+    "scripts/runtime/VfxAssets.ts.meta": "22B50AE54C9D3C0B0BDD1E58367DBF25CD8ED45115C5865099AA8D09EAFA73C3",
+    "scripts/runtime/WeaponMaterials.ts": "30AAC856C7C73F768F086A1172DF58DDF57A8C9AA5AD613BFDEE1E10924E701E",
+    "scripts/runtime/WeaponMaterials.ts.meta": "291E72A580FE84AD0ACE16425889C692DCF44E3AC1AF56CCCC9AC603CB6EC3F2"
+  }
+}

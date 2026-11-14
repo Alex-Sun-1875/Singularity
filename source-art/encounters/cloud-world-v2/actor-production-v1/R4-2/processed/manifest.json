@@ -1,0 +1,252 @@
+{
+  "revision": "r4-2-source-actor-v1",
+  "sourceDesign": "source-art/encounters/cloud-world-v2/actor-production-v1/R4-2/sheet-v1.png",
+  "loaded3DModel": false,
+  "image": "atlas.png",
+  "columns": 4,
+  "frameWidth": 384,
+  "frameHeight": 384,
+  "directions": [
+    "down",
+    "left",
+    "up",
+    "right"
+  ],
+  "origin": [
+    193.363,
+    342.0
+  ],
+  "perFrameOrigins": [
+    [
+      193.363,
+      342.0
+    ],
+    [
+      192.981,
+      340.301
+    ],
+    [
+      193.543,
+      340.328
+    ],
+    [
+      193.363,
+      342.0
+    ],
+    [
+      193.234,
+      342.0
+    ],
+    [
+      188.729,
+      340.912
+    ],
+    [
+      198.644,
+      339.442
+    ],
+    [
+      193.234,
+      342.0
+    ],
+    [
+      193.237,
+      341.0
+    ],
+    [
+      197.057,
+      341.586
+    ],
+    [
+      193.236,
+      339.075
+    ],
+    [
+      193.237,
+      341.0
+    ],
+    [
+      189.493,
+      342.0
+    ],
+    [
+      192.335,
+      341.863
+    ],
+    [
+      185.999,
+      341.299
+    ],
+    [
+      189.493,
+      342.0
+    ]
+  ],
+  "alphaBounds": [
+    [
+      108,
+      51,
+      296,
+      343
+    ],
+    [
+      114,
+      46,
+      291,
+      346
+    ],
+    [
+      112,
+      48,
+      291,
+      345
+    ],
+    [
+      60,
+      90,
+      321,
+      327
+    ],
+    [
+      106,
+      50,
+      260,
+      345
+    ],
+    [
+      90,
+      48,
+      297,
+      344
+    ],
+    [
+      112,
+      48,
+      269,
+      343
+    ],
+    [
+      40,
+      91,
+      338,
+      327
+    ],
+    [
+      96,
+      51,
+      281,
+      342
+    ],
+    [
+      100,
+      50,
+      271,
+      346
+    ],
+    [
+      98,
+      48,
+      270,
+      344
+    ],
+    [
+      78,
+      91,
+      310,
+      331
+    ],
+    [
+      118,
+      49,
+      283,
+      344
+    ],
+    [
+      84,
+      48,
+      301,
+      346
+    ],
+    [
+      115,
+      48,
+      283,
+      344
+    ],
+    [
+      41,
+      91,
+      337,
+      329
+    ]
+  ],
+  "frameScaleFactors": {
+    "atlas": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "alphaThreshold": 0.025,
+  "camera": {
+    "worldUnitsPerPixel": 0.00665
+  },
+  "actions": {
+    "idle": {
+      "image": "atlas.png",
+      "frames": 1,
+      "frameIndices": [
+        0
+      ],
+      "fps": 1,
+      "loop": true
+    },
+    "walk": {
+      "image": "atlas.png",
+      "frames": 2,
+      "frameIndices": [
+        1,
+        2
+      ],
+      "fps": 3.5,
+      "loop": true,
+      "nominalSpeedMetresPerSecond": 1.7
+    },
+    "attack_bow": {
+      "image": "atlas.png",
+      "frames": 3,
+      "frameIndices": [
+        0,
+        3,
+        0
+      ],
+      "phaseStarts": [
+        0,
+        0.75,
+        0.875
+      ],
+      "fps": 5,
+      "loop": false
+    }
+  },
+  "limitations": [
+    "Four actual drawn directions and16 actual source drawings only; no mirrored/invented poses.",
+    "One reviewed global pixel/world scale; no frame fitting or generated in-betweens.",
+    "Primary pose source only; additional requiredCombatMoves are not implicitly covered.",
+    "No independently drawn hit/death; own idle fallback/hide remains explicit.",
+    "Static review and actual game gait/collision/texture-lifetime acceptance are separate."
+  ]
+}

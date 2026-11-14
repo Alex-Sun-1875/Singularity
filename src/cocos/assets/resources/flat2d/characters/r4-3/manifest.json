@@ -1,0 +1,267 @@
+{
+  "revision": "r4-3-source-actor-v1-runtime1024",
+  "sourceDesign": "source-art/encounters/cloud-world-v2/actor-production-v1/R4-3/sheet-v1.png",
+  "loaded3DModel": false,
+  "image": "atlas.png",
+  "columns": 4,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "directions": [
+    "down",
+    "left",
+    "up",
+    "right"
+  ],
+  "origin": [
+    134.876,
+    228.0
+  ],
+  "perFrameOrigins": [
+    [
+      134.876,
+      228.0
+    ],
+    [
+      134.954667,
+      229.118
+    ],
+    [
+      134.736667,
+      229.756
+    ],
+    [
+      134.876,
+      228.0
+    ],
+    [
+      130.104,
+      227.333333
+    ],
+    [
+      123.284,
+      226.947333
+    ],
+    [
+      123.459333,
+      228.549333
+    ],
+    [
+      130.104,
+      227.333333
+    ],
+    [
+      118.436667,
+      227.333333
+    ],
+    [
+      118.080667,
+      226.91
+    ],
+    [
+      118.931333,
+      228.058667
+    ],
+    [
+      118.436667,
+      227.333333
+    ],
+    [
+      131.059333,
+      227.333333
+    ],
+    [
+      133.872,
+      228.728667
+    ],
+    [
+      136.072,
+      229.75
+    ],
+    [
+      131.059333,
+      227.333333
+    ]
+  ],
+  "alphaBounds": [
+    [
+      81.333333,
+      28.666667,
+      184.0,
+      230.0
+    ],
+    [
+      78.666667,
+      30.666667,
+      182.666667,
+      229.333333
+    ],
+    [
+      74.0,
+      30.666667,
+      183.333333,
+      229.333333
+    ],
+    [
+      50.0,
+      30.666667,
+      198.666667,
+      227.333333
+    ],
+    [
+      88.0,
+      30.0,
+      168.0,
+      229.333333
+    ],
+    [
+      54.666667,
+      29.333333,
+      188.666667,
+      226.666667
+    ],
+    [
+      72.0,
+      30.666667,
+      181.333333,
+      229.333333
+    ],
+    [
+      33.333333,
+      29.333333,
+      219.333333,
+      228.0
+    ],
+    [
+      69.333333,
+      29.333333,
+      172.0,
+      229.333333
+    ],
+    [
+      70.666667,
+      29.333333,
+      174.0,
+      230.666667
+    ],
+    [
+      70.666667,
+      30.666667,
+      178.666667,
+      229.333333
+    ],
+    [
+      54.666667,
+      30.0,
+      208.0,
+      232.666667
+    ],
+    [
+      89.333333,
+      30.0,
+      168.666667,
+      229.333333
+    ],
+    [
+      66.666667,
+      30.666667,
+      200.0,
+      227.333333
+    ],
+    [
+      72.666667,
+      30.666667,
+      182.0,
+      229.333333
+    ],
+    [
+      36.0,
+      30.0,
+      220.666667,
+      227.333333
+    ]
+  ],
+  "frameScaleFactors": {
+    "atlas": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "alphaThreshold": 0.025,
+  "camera": {
+    "worldUnitsPerPixel": 0.009975
+  },
+  "actions": {
+    "idle": {
+      "image": "atlas.png",
+      "frames": 1,
+      "frameIndices": [
+        0
+      ],
+      "fps": 1,
+      "loop": true
+    },
+    "walk": {
+      "image": "atlas.png",
+      "frames": 2,
+      "frameIndices": [
+        1,
+        2
+      ],
+      "fps": 3.5,
+      "loop": true,
+      "nominalSpeedMetresPerSecond": 1.7
+    },
+    "spell": {
+      "image": "atlas.png",
+      "frames": 3,
+      "frameIndices": [
+        0,
+        3,
+        0
+      ],
+      "phaseStarts": [
+        0,
+        0.28,
+        0.6
+      ],
+      "fps": 5,
+      "loop": false
+    }
+  },
+  "limitations": [
+    "Four actual drawn directions and16 actual source drawings only; no mirrored/invented poses.",
+    "One reviewed global pixel/world scale; no frame fitting or generated in-betweens.",
+    "Primary pose source only; additional requiredCombatMoves are not implicitly covered.",
+    "No independently drawn hit/death; own idle fallback/hide remains explicit.",
+    "Static review and actual game gait/collision/texture-lifetime acceptance are separate."
+  ],
+  "runtimeAtlasResample": {
+    "scale": 0.6666666666666666,
+    "sourceAtlasSize": [
+      1536,
+      1536
+    ],
+    "runtimeAtlasSize": [
+      1024,
+      1024
+    ],
+    "filter": "Pillow LANCZOS, one whole-atlas resize",
+    "sourceAtlasSha256": "dd2b0662c714f4dcee2db817dd4a3ebbcde654f98a8a1968d03e01aac24de235",
+    "sourceManifestSha256": "285539f86cbf0b2a8d4ab1ac602ed39096ecfe5faa2635a7216b70ed14521ff1",
+    "perFrameRescale": false
+  }
+}

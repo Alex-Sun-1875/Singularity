@@ -1,0 +1,84 @@
+{
+  "source": "reference-original.png",
+  "sourceOriginalName": "codex-clipboard-ef85b7b2-2c6f-4be0-97af-3da7e7212e5d.png",
+  "method": "Pillow deterministic layout and pixel composition; no new image generation",
+  "assets": [
+    "src/cocos/assets/resources/ui/quiet-bronze/double-gold-frame-v6.png",
+    "src/cocos/assets/resources/ui/quiet-bronze/rpg-serif-v2.ttf"
+  ],
+  "originalBackgroundPatch": [
+    280,
+    299,
+    560,
+    310
+  ],
+  "originalBackgroundMedianRGB": [
+    32,
+    29,
+    26
+  ],
+  "frame": {
+    "sliceInsets": [
+      48,
+      48,
+      48,
+      48
+    ],
+    "sharedSkinPixelScale": 0.75
+  },
+  "comparison": {
+    "heroFrameLeft": 177,
+    "heroFrameWidth": 537,
+    "questFrameLeft": 177,
+    "questFrameWidthBothStates": 537,
+    "collapsedHeightInScreenshotPixels": 104,
+    "expandedHeightInScreenshotPixels": 168
+  },
+  "behaviorIntent": [
+    "task text area toggles expanded/collapsed",
+    "navigation action is independent",
+    "toggling display does not start or resume navigation"
+  ],
+  "disclosureArrowsVisible": false,
+  "revision": "Reduce expanded location/progress font sizes to 28/28 screenshot pixels; preserve central objective size, compact panel geometry and collapsed state.",
+  "expandedLayout": {
+    "previousHeightInScreenshotPixels": 216,
+    "currentHeightInScreenshotPixels": 168,
+    "rowCenters": [
+      38,
+      84,
+      130
+    ],
+    "previousFontSizes": [
+      34,
+      36,
+      29
+    ],
+    "fontSizes": [
+      28,
+      36,
+      28
+    ],
+    "heightReductionPercent": 22.22
+  },
+  "outputs": [
+    "design-review-v8.png",
+    "collapsed-game-v8.png",
+    "expanded-game-v8.png"
+  ],
+  "artReview": {
+    "status": "visually checked: smaller location/progress text, central objective and geometry unchanged",
+    "userApproved": true,
+    "collapsedMatchesV7Exactly": true,
+    "approvalConstraint": "Retain navigation-state text colour changes"
+  },
+  "implementedInGame": true,
+  "platformValidated": false,
+  "sha256": "4c933b098d09d15202258f3af2eebe6028be0b314ca0e9e30bfd301dfa260215",
+  "implementation": {
+    "source": "src/cocos/assets/scripts/features/journey/runtime/QuestTracker.ts",
+    "verification": "test-results/quest-tracker-expand-v8/verification.json",
+    "record": "docs/assets/quest-tracker-expand-v8.md",
+    "packageVersion": "0.3.13"
+  }
+}

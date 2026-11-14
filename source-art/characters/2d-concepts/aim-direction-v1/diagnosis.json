@@ -1,0 +1,66 @@
+{
+  "status": "3D comparison prepared; default 2D retained per user steering",
+  "currentRenderer": "native unlit camera-facing quad with four authored bitmap views",
+  "directions": [
+    "down",
+    "right",
+    "up",
+    "left"
+  ],
+  "bodyFacing": "nearest of four screen directions; cannot produce genuine continuous 3D turn",
+  "aimAndProjectile": "continuous world-space angle",
+  "confirmedArtworkIssue": "attack_bow_W07 up view depicts a sideward draw and left-pointing nocked arrow; front/back poses disagree with nominal screen direction",
+  "previousFixLimit": "bow-alignment-v1 aligned flying mesh with displayed flight; it did not replace the misdirected nocked-arrow/arm artwork",
+  "reuse": {
+    "native3DActor": {
+      "id": "player",
+      "profile": "native-kit-v1",
+      "expectedSkinJoints": 65,
+      "expectedSkeletonSizes": [
+        65,
+        67
+      ],
+      "clips": [
+        "attack_staff",
+        "death",
+        "attack_bow",
+        "attack_sword",
+        "dodge",
+        "hit",
+        "idle",
+        "interact",
+        "run",
+        "spell",
+        "walk"
+      ],
+      "state": "idle",
+      "speed": 0,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": -7
+      },
+      "skeletons": [
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67
+      ]
+    },
+    "previewViewCount": 8,
+    "errors": [],
+    "appearance": "existing retained brown-haired ranger differs from approved silver-haired burgundy 2D character"
+  },
+  "productionChanges": "opt-in player=3d composition added; default 2D artwork unchanged",
+  "resolution": "Reuse existing native model with silver hair and burgundy cloth; continuous turn and diagonal shooting verified. Face and costume remain an approximation, not an exact 2D design recreation.",
+  "record": "../../3d-player-aim-v1/README.md"
+}

@@ -1,0 +1,6382 @@
+{
+  "areas": {
+    "S01": {
+      "id": "S01",
+      "name": "石桥镇",
+      "subtitle": "河风穿过铁匠街；旅店、行会与渡口各有真实入口。",
+      "kind": "town",
+      "palette": "meadow",
+      "width": 156,
+      "depth": 144,
+      "atlas": {
+        "x": 18,
+        "z": 40
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "第三杯旅店",
+          "style": "inn",
+          "x": -35,
+          "z": -32,
+          "width": 22,
+          "depth": 18,
+          "height": 9,
+          "enter": "S01-T1",
+          "rotation": 180
+        },
+        {
+          "name": "行会副本室",
+          "style": "house",
+          "x": 35,
+          "z": 32,
+          "width": 22,
+          "depth": 18,
+          "height": 8,
+          "enter": "S01-T2"
+        },
+        {
+          "name": "洛恩的铁匠街",
+          "style": "workshop",
+          "x": -35,
+          "z": 32,
+          "width": 22,
+          "depth": 18,
+          "height": 7,
+          "enter": "S01-T3"
+        },
+        {
+          "name": "渡口转运仓",
+          "style": "barn",
+          "x": 35,
+          "z": -32,
+          "width": 24,
+          "depth": 18,
+          "height": 8,
+          "enter": "S01-T4",
+          "rotation": 180
+        },
+        {
+          "name": "镇拘留所",
+          "style": "gate",
+          "x": 0,
+          "z": 52,
+          "width": 20,
+          "depth": 10,
+          "height": 7,
+          "enter": "S01-T5"
+        },
+        {
+          "name": "广场回返亭",
+          "style": "house",
+          "x": 0,
+          "z": -52,
+          "width": 14,
+          "depth": 10,
+          "height": 5,
+          "enter": "S01-T6",
+          "rotation": 180
+        }
+      ],
+      "objects": [
+        {
+          "id": "s01-cp",
+          "label": "石桥镇整备处",
+          "action": "checkpoint",
+          "x": 0,
+          "z": -12,
+          "radius": 2.5,
+          "description": "长凳与清水旁可以安全整理装备；已领取的物资不会因休整补回。"
+        },
+        {
+          "id": "s01-streets",
+          "label": "镇内街路牌",
+          "action": "inspect",
+          "x": -8,
+          "z": 0,
+          "radius": 2.5,
+          "description": "旅店连渡口街，行会后巷通拘留所；广场上有人等着安全回返者。",
+          "evidence": "s01-streets"
+        },
+        {
+          "id": "s01-memorial",
+          "label": "第七远征阵亡碑",
+          "action": "inspect",
+          "x": 5,
+          "z": 9,
+          "radius": 2.5,
+          "description": "碑上称所有人已经阵亡，石缝却卡着近年更换灯油的收据；这不是完整真相。",
+          "evidence": "s01-memorial"
+        },
+        {
+          "id": "s01-riverwall",
+          "label": "石桥旧水位",
+          "action": "inspect",
+          "x": -54,
+          "z": -7,
+          "radius": 2.5,
+          "description": "墙面有三道洪水刻线，南渡的旧仓院曾淹过；桥下河水仍向南流。",
+          "evidence": "s01-riverwall"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "road-S01-S02",
+          "to": "S02",
+          "label": "前往南渡码头",
+          "x": 0,
+          "z": -70,
+          "entry": {
+            "x": 0,
+            "z": 50
+          }
+        },
+        {
+          "id": "road-S01-S03",
+          "to": "S03",
+          "label": "前往农庄与墓园",
+          "x": 76,
+          "z": -10,
+          "entry": {
+            "x": -60,
+            "z": 0
+          }
+        },
+        {
+          "id": "road-S01-S04",
+          "to": "S04",
+          "label": "前往劫车隘口",
+          "x": 76,
+          "z": 10,
+          "entry": {
+            "x": -66,
+            "z": 0
+          }
+        },
+        {
+          "id": "road-S01-S20",
+          "to": "S20",
+          "label": "前往铁脊观察台",
+          "x": 0,
+          "z": 70,
+          "entry": {
+            "x": 0,
+            "z": -54
+          }
+        },
+        {
+          "id": "door-town-1-S01",
+          "to": "S01-T1",
+          "x": -35,
+          "z": -20,
+          "label": "进入第三杯旅店",
+          "entry": {
+            "x": 0,
+            "z": -10.9
+          }
+        },
+        {
+          "id": "door-town-2-S01",
+          "to": "S01-T2",
+          "x": 35,
+          "z": 20,
+          "label": "进入行会办事处与副本室",
+          "entry": {
+            "x": 0,
+            "z": -9.9
+          }
+        },
+        {
+          "id": "door-town-3-S01",
+          "to": "S01-T3",
+          "x": -35,
+          "z": 20,
+          "label": "进入铁匠街与洛恩工坊",
+          "entry": {
+            "x": 0,
+            "z": -10.9
+          }
+        },
+        {
+          "id": "door-town-4-S01",
+          "to": "S01-T4",
+          "x": 35,
+          "z": -20,
+          "label": "进入渡口街与镇仓院",
+          "entry": {
+            "x": 0,
+            "z": -12.899999999999999
+          }
+        },
+        {
+          "id": "door-town-5-S01",
+          "to": "S01-T5",
+          "x": 0,
+          "z": 44,
+          "label": "进入拘留所与值房",
+          "entry": {
+            "x": 0,
+            "z": -9.9
+          }
+        },
+        {
+          "id": "door-town-6-S01",
+          "to": "S01-T6",
+          "x": 0,
+          "z": -44,
+          "label": "进入广场与回返接洽点",
+          "entry": {
+            "x": 19.059320076877395,
+            "z": -1.0439624759758137
+          }
+        }
+      ],
+      "checkpoint": true,
+      "obstacles": [
+        {
+          "x": -35,
+          "z": -32,
+          "width": 22,
+          "depth": 18,
+          "height": 9,
+          "kind": "building"
+        },
+        {
+          "x": 35,
+          "z": 32,
+          "width": 22,
+          "depth": 18,
+          "height": 8,
+          "kind": "building"
+        },
+        {
+          "x": -35,
+          "z": 32,
+          "width": 22,
+          "depth": 18,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "x": 35,
+          "z": -32,
+          "width": 24,
+          "depth": 18,
+          "height": 8,
+          "kind": "building"
+        },
+        {
+          "x": 0,
+          "z": 52,
+          "width": 20,
+          "depth": 10,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "x": 0,
+          "z": -52,
+          "width": 14,
+          "depth": 10,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "kind": "tree",
+          "x": -60,
+          "z": 48,
+          "width": 4,
+          "depth": 4,
+          "height": 8
+        },
+        {
+          "kind": "tree",
+          "x": 58,
+          "z": -48,
+          "width": 4,
+          "depth": 4,
+          "height": 8
+        },
+        {
+          "kind": "crate",
+          "x": 49,
+          "z": -17,
+          "width": 3,
+          "depth": 4,
+          "height": 2
+        }
+      ]
+    },
+    "S02": {
+      "id": "S02",
+      "name": "南渡码头",
+      "subtitle": "栈桥、坡街与旧仓院之间仍有往来的脚印。",
+      "kind": "town",
+      "palette": "marsh",
+      "width": 132,
+      "depth": 112,
+      "atlas": {
+        "x": 25,
+        "z": 17
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "河运旧仓",
+          "style": "barn",
+          "x": -28,
+          "z": 24,
+          "width": 24,
+          "depth": 16,
+          "height": 8
+        },
+        {
+          "name": "坡街船工屋",
+          "style": "house",
+          "x": 28,
+          "z": 23,
+          "width": 16,
+          "depth": 14,
+          "height": 7
+        },
+        {
+          "name": "栈桥值房",
+          "style": "house",
+          "x": 29,
+          "z": -29,
+          "width": 14,
+          "depth": 12,
+          "height": 5
+        }
+      ],
+      "objects": [
+        {
+          "id": "s02-manifest",
+          "label": "转运底簿",
+          "action": "inspect",
+          "x": -28,
+          "z": 12,
+          "radius": 2.5,
+          "description": "底簿记下遗物匣的换船日期，信使不是向南逃走，而是返回了劫车隘口。",
+          "evidence": "s02-manifest"
+        },
+        {
+          "id": "s02-rope",
+          "label": "新系的渡绳",
+          "action": "inspect",
+          "x": 14,
+          "z": -26,
+          "radius": 2.5,
+          "description": "渡绳结法来自猎场避居者。河道照常通行，不需要替任何人搬箱交货。",
+          "evidence": "s02-rope"
+        },
+        {
+          "id": "s02-slope",
+          "label": "泥坡上的两种车辙",
+          "action": "inspect",
+          "x": -13,
+          "z": -19,
+          "radius": 2.5,
+          "description": "轻车辙向镇上，宽军车辙绕去旧军需站；坡街是调查的分路口。",
+          "evidence": "s02-slope"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "road-S02-S01",
+          "to": "S01",
+          "label": "返回石桥镇",
+          "x": 0,
+          "z": 54,
+          "entry": {
+            "x": 0,
+            "z": -66
+          }
+        },
+        {
+          "id": "road-S02-S18",
+          "to": "S18",
+          "label": "前往旧军需站",
+          "x": -64,
+          "z": 0,
+          "entry": {
+            "x": 58,
+            "z": 0
+          }
+        },
+        {
+          "id": "road-S02-S19",
+          "to": "S19",
+          "label": "前往林间伏击地",
+          "x": 64,
+          "z": 0,
+          "entry": {
+            "x": -66,
+            "z": 0
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -28,
+          "z": 24,
+          "width": 24,
+          "depth": 16,
+          "height": 8,
+          "kind": "building"
+        },
+        {
+          "x": 28,
+          "z": 23,
+          "width": 16,
+          "depth": 14,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "x": 29,
+          "z": -29,
+          "width": 14,
+          "depth": 12,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "kind": "crate",
+          "x": -44,
+          "z": 22,
+          "width": 4,
+          "depth": 5,
+          "height": 2
+        },
+        {
+          "kind": "tree",
+          "x": 47,
+          "z": 39,
+          "width": 4,
+          "depth": 4,
+          "height": 7
+        }
+      ]
+    },
+    "S03": {
+      "id": "S03",
+      "name": "农庄与墓园",
+      "subtitle": "菜畦外的旧墓墙留下了比碑文更新的痕迹。",
+      "kind": "wild",
+      "palette": "meadow",
+      "width": 132,
+      "depth": 120,
+      "atlas": {
+        "x": 38,
+        "z": 28
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "田边农舍",
+          "style": "house",
+          "x": -29,
+          "z": -27,
+          "width": 18,
+          "depth": 16,
+          "height": 7
+        },
+        {
+          "name": "谷物棚",
+          "style": "barn",
+          "x": 29,
+          "z": -28,
+          "width": 22,
+          "depth": 16,
+          "height": 7
+        },
+        {
+          "name": "墓园守夜屋",
+          "style": "ruin",
+          "x": 28,
+          "z": 29,
+          "width": 16,
+          "depth": 12,
+          "height": 4
+        }
+      ],
+      "objects": [
+        {
+          "id": "s03-witness",
+          "label": "篱外的目击记录",
+          "action": "inspect",
+          "x": -29,
+          "z": -15,
+          "radius": 2.5,
+          "description": "农人看见带测距线的年轻人被押向石场，袖口有一道新鲜炭印。",
+          "evidence": "s03-witness"
+        },
+        {
+          "id": "s03-graves",
+          "label": "没有遗体的纪念墓",
+          "action": "inspect",
+          "x": 19,
+          "z": 17,
+          "radius": 2.5,
+          "description": "远征者的名字刻在空墓上，封土里没有棺钉；当年有人急着结束追问。",
+          "evidence": "s03-graves"
+        },
+        {
+          "id": "s03-dated-grave",
+          "label": "调查 · 空墓上的第二层刻痕",
+          "action": "dice_check",
+          "x": 19,
+          "z": 14,
+          "radius": 2.5,
+          "description": "比对空墓上被改过的日期，看看工役是否在“阵亡”之后仍然留着自己的锤痕。",
+          "check": "grave-record"
+        },
+        {
+          "id": "s03-hedge",
+          "label": "菜园旁的小径",
+          "action": "inspect",
+          "x": -12,
+          "z": 27,
+          "radius": 2.5,
+          "description": "压低的篱口可以步行绕开主路，通向林间车轮痕；不是需要消耗品的门。",
+          "evidence": "s03-hedge"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "road-S03-S01",
+          "to": "S01",
+          "label": "返回石桥镇",
+          "x": -64,
+          "z": 0,
+          "entry": {
+            "x": 72,
+            "z": -10
+          }
+        },
+        {
+          "id": "road-S03-S04",
+          "to": "S04",
+          "label": "前往劫车隘口",
+          "x": 0,
+          "z": 58,
+          "entry": {
+            "x": 0,
+            "z": -56
+          }
+        },
+        {
+          "id": "road-S03-S19",
+          "to": "S19",
+          "label": "前往林间伏击地",
+          "x": 0,
+          "z": -58,
+          "entry": {
+            "x": 0,
+            "z": 58
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -29,
+          "z": -27,
+          "width": 18,
+          "depth": 16,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "x": 29,
+          "z": -28,
+          "width": 22,
+          "depth": 16,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "x": 28,
+          "z": 29,
+          "width": 16,
+          "depth": 12,
+          "height": 4,
+          "kind": "building"
+        },
+        {
+          "kind": "wall",
+          "x": -37,
+          "z": 24,
+          "width": 18,
+          "depth": 2,
+          "height": 2
+        },
+        {
+          "kind": "wall",
+          "x": 36,
+          "z": 40,
+          "width": 20,
+          "depth": 2,
+          "height": 2
+        },
+        {
+          "kind": "rock",
+          "x": -46,
+          "z": -39,
+          "width": 5,
+          "depth": 4,
+          "height": 2
+        },
+        {
+          "kind": "tree",
+          "x": 47,
+          "z": -8,
+          "width": 4,
+          "depth": 4,
+          "height": 8
+        }
+      ]
+    },
+    "S04": {
+      "id": "S04",
+      "name": "劫车隘口",
+      "subtitle": "信使的车仍完整；新的封签盖在旧的拉线痕上。",
+      "kind": "wild",
+      "palette": "stone",
+      "width": 144,
+      "depth": 124,
+      "atlas": {
+        "x": 46,
+        "z": 40
+      },
+      "spawn": {
+        "x": 0,
+        "z": -18
+      },
+      "buildings": [
+        {
+          "name": "桥边扣车棚",
+          "style": "barn",
+          "x": -32,
+          "z": 29,
+          "width": 22,
+          "depth": 14,
+          "height": 6
+        },
+        {
+          "name": "高地守望屋",
+          "style": "ruin",
+          "x": 34,
+          "z": 29,
+          "width": 16,
+          "depth": 14,
+          "height": 5
+        },
+        {
+          "name": "侧口废税房",
+          "style": "house",
+          "x": -34,
+          "z": -28,
+          "width": 16,
+          "depth": 14,
+          "height": 6
+        }
+      ],
+      "objects": [
+        {
+          "id": "s04-relic",
+          "label": "归位车轴，取回遗物匣",
+          "action": "recover",
+          "x": -12,
+          "z": 4,
+          "radius": 2.5,
+          "description": "车轴支撑和匣锁仍可徒手操作。先解除车前守军，再取回原信和完整星片；主线车不会受损。"
+        },
+        {
+          "id": "s04-letter",
+          "label": "查看有近日日期的原信",
+          "action": "letter",
+          "x": -12,
+          "z": 8,
+          "radius": 2.5,
+          "description": "原信写着“请让我们看一次真正的早晨”。纸上是伊芙琳的签名，与旅店的试光样片不同。"
+        },
+        {
+          "id": "s04-hammer",
+          "label": "轴边的新锤痕",
+          "action": "inspect",
+          "x": -27,
+          "z": 18,
+          "radius": 2.5,
+          "description": "三短一长的锤痕来自洛恩工坊，不是灰披军制式维修；有人临行时留下记号。",
+          "evidence": "s04-hammer"
+        },
+        {
+          "id": "s04-blind",
+          "label": "高地遮光板",
+          "action": "inspect",
+          "x": 30,
+          "z": 17,
+          "radius": 2.5,
+          "description": "把日光挡在星片之外，星点才显出地下没有登记的星座。高地和侧路都能走回车旁。",
+          "evidence": "s04-blind"
+        },
+        {
+          "id": "s04-cp",
+          "label": "隘口安全转角",
+          "action": "checkpoint",
+          "x": 0,
+          "z": -18,
+          "radius": 2.5,
+          "description": "石壁转角留出清理装备的位置。救车成功后记录此处，来回走路不会重置守军。"
+        }
+      ],
+      "enemies": [
+        {
+          "id": "s04-raider-front",
+          "kind": "raider",
+          "x": 10,
+          "z": 6
+        },
+        {
+          "id": "s04-raider-axle",
+          "kind": "raider",
+          "x": 18,
+          "z": 16
+        },
+        {
+          "id": "s04-archer-bank",
+          "kind": "archer",
+          "x": 34,
+          "z": 4
+        }
+      ],
+      "exits": [
+        {
+          "id": "road-S04-S01",
+          "to": "S01",
+          "label": "返回石桥镇",
+          "x": -70,
+          "z": 0,
+          "entry": {
+            "x": 72,
+            "z": 10
+          }
+        },
+        {
+          "id": "road-S04-S03",
+          "to": "S03",
+          "label": "返回农庄与墓园",
+          "x": 0,
+          "z": -60,
+          "entry": {
+            "x": 0,
+            "z": 54
+          }
+        },
+        {
+          "id": "road-S04-S07",
+          "to": "S07",
+          "label": "前往废磨坊村",
+          "x": 70,
+          "z": 0,
+          "entry": {
+            "x": -72,
+            "z": -10
+          }
+        },
+        {
+          "id": "road-S04-S08",
+          "to": "S08",
+          "label": "前往陷井谷",
+          "x": 0,
+          "z": 60,
+          "entry": {
+            "x": 0,
+            "z": -62
+          }
+        }
+      ],
+      "checkpoint": true,
+      "obstacles": [
+        {
+          "x": -32,
+          "z": 29,
+          "width": 22,
+          "depth": 14,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": 34,
+          "z": 29,
+          "width": 16,
+          "depth": 14,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "x": -34,
+          "z": -28,
+          "width": 16,
+          "depth": 14,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "kind": "rock",
+          "x": -48,
+          "z": 3,
+          "width": 9,
+          "depth": 18,
+          "height": 6
+        },
+        {
+          "kind": "rock",
+          "x": 50,
+          "z": 22,
+          "width": 8,
+          "depth": 14,
+          "height": 6
+        },
+        {
+          "kind": "crate",
+          "x": -28,
+          "z": 34,
+          "width": 3,
+          "depth": 3,
+          "height": 2
+        },
+        {
+          "kind": "barrel",
+          "x": 28,
+          "z": -12,
+          "width": 2,
+          "depth": 2,
+          "height": 2
+        }
+      ]
+    },
+    "S05": {
+      "id": "S05",
+      "name": "白桦猎场",
+      "subtitle": "夜祈在安全营屋旁修弓，猎径从树根与岩脊间分开。",
+      "kind": "wild",
+      "palette": "forest",
+      "width": 144,
+      "depth": 124,
+      "atlas": {
+        "x": 60,
+        "z": 24
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "猎人营屋",
+          "style": "house",
+          "x": -31,
+          "z": -27,
+          "width": 20,
+          "depth": 14,
+          "height": 6
+        },
+        {
+          "name": "晾皮棚",
+          "style": "tent",
+          "x": -31,
+          "z": 27,
+          "width": 16,
+          "depth": 14,
+          "height": 5
+        },
+        {
+          "name": "岩脊巡林亭",
+          "style": "tower",
+          "x": 33,
+          "z": 28,
+          "width": 12,
+          "depth": 12,
+          "height": 10
+        }
+      ],
+      "objects": [
+        {
+          "id": "s05-nightqi",
+          "label": "夜祈：猎径与弓具",
+          "action": "merchant",
+          "x": -31,
+          "z": -16,
+          "radius": 2.5,
+          "description": "夜祈先看你的鞋底，再指向伏击地。她售出的路线曾被转卖，实际见到她即可访问独立的猎商库存。",
+          "actor": "nightqi",
+          "merchant": "nightqi"
+        },
+        {
+          "id": "find-a06",
+          "label": "白桦树根宝囊",
+          "action": "cache",
+          "x": 34,
+          "z": -27,
+          "radius": 2.5,
+          "description": "游猎者皮甲缝在干燥的树根囊里，皮革留着旧猎径的弯折；此处只保存这一件装备。",
+          "item": "A06",
+          "amount": 1
+        },
+        {
+          "id": "s05-prints",
+          "label": "避开营地的铁靴印",
+          "action": "inspect",
+          "x": 17,
+          "z": 8,
+          "radius": 2.5,
+          "description": "铁靴印在猎屋外突然转向，不是普通猎人跟踪兽群；可以沿南侧小径去看。",
+          "evidence": "s05-prints"
+        },
+        {
+          "id": "s05-keeper",
+          "label": "修过的猎径标记",
+          "action": "inspect",
+          "x": -15,
+          "z": 25,
+          "radius": 2.5,
+          "description": "三角刻痕指向可步行的岩脊绕路。夜祈给的是观察方法，不是每条路必有战斗的保证。",
+          "evidence": "s05-keeper"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "road-S05-S19",
+          "to": "S19",
+          "label": "前往林间伏击地",
+          "x": -70,
+          "z": 0,
+          "entry": {
+            "x": 66,
+            "z": 0
+          }
+        },
+        {
+          "id": "road-S05-S06",
+          "to": "S06",
+          "label": "前往芦苇避居营",
+          "x": 0,
+          "z": -60,
+          "entry": {
+            "x": -10,
+            "z": 48
+          }
+        },
+        {
+          "id": "road-S05-S07",
+          "to": "S07",
+          "label": "前往废磨坊村",
+          "x": 0,
+          "z": 60,
+          "entry": {
+            "x": 0,
+            "z": -66
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -31,
+          "z": -27,
+          "width": 20,
+          "depth": 14,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": -31,
+          "z": 27,
+          "width": 16,
+          "depth": 14,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "x": 33,
+          "z": 28,
+          "width": 12,
+          "depth": 12,
+          "height": 10,
+          "kind": "building"
+        },
+        {
+          "kind": "tree",
+          "x": 45,
+          "z": -37,
+          "width": 4,
+          "depth": 4,
+          "height": 10
+        },
+        {
+          "kind": "tree",
+          "x": -47,
+          "z": 41,
+          "width": 4,
+          "depth": 4,
+          "height": 11
+        },
+        {
+          "kind": "tree",
+          "x": 47,
+          "z": 13,
+          "width": 5,
+          "depth": 5,
+          "height": 12
+        },
+        {
+          "kind": "rock",
+          "x": 36,
+          "z": -40,
+          "width": 8,
+          "depth": 5,
+          "height": 3
+        }
+      ]
+    },
+    "S06": {
+      "id": "S06",
+      "name": "芦苇避居营",
+      "subtitle": "干地平台上的棚屋相互留出门道，炊烟藏在芦苇之后。",
+      "kind": "camp",
+      "palette": "marsh",
+      "width": 126,
+      "depth": 108,
+      "atlas": {
+        "x": 73,
+        "z": 10
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "西侧食棚",
+          "style": "tent",
+          "x": -26,
+          "z": -24,
+          "width": 17,
+          "depth": 12,
+          "height": 5
+        },
+        {
+          "name": "共用修补棚",
+          "style": "tent",
+          "x": 28,
+          "z": -24,
+          "width": 18,
+          "depth": 13,
+          "height": 5
+        },
+        {
+          "name": "高台避雨屋",
+          "style": "house",
+          "x": -26,
+          "z": 24,
+          "width": 18,
+          "depth": 14,
+          "height": 6
+        },
+        {
+          "name": "芦苇藏物棚",
+          "style": "tent",
+          "x": 29,
+          "z": 25,
+          "width": 15,
+          "depth": 12,
+          "height": 4
+        }
+      ],
+      "objects": [
+        {
+          "id": "s06-cook",
+          "label": "仍然温热的锅",
+          "action": "inspect",
+          "x": -12,
+          "z": -20,
+          "radius": 2.5,
+          "description": "锅边列着轮值的人名。这里的人愿意谈通路和失踪者，但不会变成第六个商人账户。",
+          "evidence": "s06-cook"
+        },
+        {
+          "id": "s06-reed",
+          "label": "芦苇内的隐蔽出口",
+          "action": "inspect",
+          "x": -16,
+          "z": 26,
+          "radius": 2.5,
+          "description": "剪断的芦茎让出干地路面，足以让伤者步行撤离；位置只记在自己的日志里。",
+          "evidence": "s06-reed"
+        },
+        {
+          "id": "s06-routes",
+          "label": "传给夜祈的窄纸条",
+          "action": "inspect",
+          "x": 24,
+          "z": 13,
+          "radius": 2.5,
+          "description": "纸条记着一辆沿堤道东去的军车，路线标记比猎场旧图新；庄园可能保留付款副本。",
+          "evidence": "s06-routes"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "road-S06-S05",
+          "to": "S05",
+          "label": "返回白桦猎场",
+          "x": -10,
+          "z": 52,
+          "entry": {
+            "x": 0,
+            "z": -56
+          }
+        },
+        {
+          "id": "road-S06-S14",
+          "to": "S14",
+          "label": "前往湿林庄园",
+          "x": 10,
+          "z": 52,
+          "entry": {
+            "x": -10,
+            "z": -64
+          }
+        },
+        {
+          "id": "road-S06-S15",
+          "to": "S15",
+          "label": "前往古渠泵院",
+          "x": 61,
+          "z": 0,
+          "entry": {
+            "x": -66,
+            "z": 0
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -26,
+          "z": -24,
+          "width": 17,
+          "depth": 12,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "x": 28,
+          "z": -24,
+          "width": 18,
+          "depth": 13,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "x": -26,
+          "z": 24,
+          "width": 18,
+          "depth": 14,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": 29,
+          "z": 25,
+          "width": 15,
+          "depth": 12,
+          "height": 4,
+          "kind": "building"
+        },
+        {
+          "kind": "tree",
+          "x": -45,
+          "z": -36,
+          "width": 4,
+          "depth": 4,
+          "height": 8
+        },
+        {
+          "kind": "crate",
+          "x": -39,
+          "z": 25,
+          "width": 3,
+          "depth": 4,
+          "height": 2
+        }
+      ]
+    },
+    "S07": {
+      "id": "S07",
+      "name": "废磨坊村",
+      "subtitle": "街巷绕过水轮院与旧驿房；地窖插销就在地表这一侧。",
+      "kind": "town",
+      "palette": "forest",
+      "width": 156,
+      "depth": 144,
+      "atlas": {
+        "x": 60,
+        "z": 52
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "废磨坊与水轮",
+          "style": "mill",
+          "x": -34,
+          "z": 31,
+          "width": 24,
+          "depth": 20,
+          "height": 13
+        },
+        {
+          "name": "旧驿房",
+          "style": "inn",
+          "x": 35,
+          "z": 31,
+          "width": 24,
+          "depth": 18,
+          "height": 8
+        },
+        {
+          "name": "空置村舍",
+          "style": "house",
+          "x": -35,
+          "z": -30,
+          "width": 22,
+          "depth": 16,
+          "height": 7
+        },
+        {
+          "name": "村口小工棚",
+          "style": "workshop",
+          "x": 34,
+          "z": -31,
+          "width": 20,
+          "depth": 16,
+          "height": 6
+        }
+      ],
+      "objects": [
+        {
+          "id": "s07-signal",
+          "label": "核对猎记上的回短信号",
+          "action": "independent_clue",
+          "x": -13,
+          "z": 18,
+          "radius": 2.5,
+          "description": "窗板内侧有近日的回短信号，独立证明下城有人居住；不必先信任弥菈才能发现。",
+          "evidence": "s07-living-signal"
+        },
+        {
+          "id": "find-t02",
+          "label": "旧驿房双钉线索箱",
+          "action": "cache",
+          "x": 35,
+          "z": 18,
+          "radius": 2.5,
+          "description": "双钉木箱只存三张黑契封印及对应制作笔记；与陷井谷隐龛的弓是两笔独立收据。",
+          "item": "T02",
+          "amount": 3
+        },
+        {
+          "id": "s07-huntbook",
+          "label": "水轮院猎记",
+          "action": "inspect",
+          "x": -34,
+          "z": 17,
+          "radius": 2.5,
+          "description": "纸页把猎径伏击与地下转运连在一起，末行提醒不要把住处标在公开图上。",
+          "evidence": "s07-huntbook"
+        },
+        {
+          "id": "s07-latch",
+          "label": "磨坊地窖的普通插销",
+          "action": "inspect",
+          "x": -11,
+          "z": 31,
+          "radius": 2.5,
+          "description": "插销从地表能够直接够到，不耗钥匙，也不需要击败队长。下去后可以原路返回。",
+          "evidence": "s07-latch"
+        },
+        {
+          "id": "s07-receipts",
+          "label": "不同付款方的两张收条",
+          "action": "inspect",
+          "x": 34,
+          "z": -18,
+          "radius": 2.5,
+          "description": "相同货号分别向军营和庄园收款，磨坊不只是藏箱子的空院。两张收条留作后续对质。",
+          "evidence": "s07-receipts"
+        }
+      ],
+      "enemies": [
+        {
+          "id": "s07-lane-raider",
+          "kind": "raider",
+          "x": 18,
+          "z": 0
+        },
+        {
+          "id": "s07-lane-shield",
+          "kind": "shield",
+          "x": 32,
+          "z": 3
+        },
+        {
+          "id": "s07-mill-archer",
+          "kind": "archer",
+          "x": -17,
+          "z": -8
+        }
+      ],
+      "exits": [
+        {
+          "id": "road-S07-S04",
+          "to": "S04",
+          "label": "返回劫车隘口",
+          "x": -76,
+          "z": -10,
+          "entry": {
+            "x": 66,
+            "z": 0
+          }
+        },
+        {
+          "id": "road-S07-S05",
+          "to": "S05",
+          "label": "返回白桦猎场",
+          "x": 0,
+          "z": -70,
+          "entry": {
+            "x": 0,
+            "z": 56
+          }
+        },
+        {
+          "id": "road-S07-S08",
+          "to": "S08",
+          "label": "前往陷井谷",
+          "x": -76,
+          "z": 10,
+          "entry": {
+            "x": 68,
+            "z": 0
+          }
+        },
+        {
+          "id": "road-S07-S13",
+          "to": "S13",
+          "label": "前往旧石场",
+          "x": 76,
+          "z": 10,
+          "entry": {
+            "x": -68,
+            "z": -10
+          }
+        },
+        {
+          "id": "road-S07-S14",
+          "to": "S14",
+          "label": "前往湿林庄园",
+          "x": 76,
+          "z": -10,
+          "entry": {
+            "x": -72,
+            "z": 0
+          }
+        },
+        {
+          "id": "road-S07-S17",
+          "to": "S17",
+          "label": "前往峭壁洞窟",
+          "x": 0,
+          "z": 70,
+          "entry": {
+            "x": 0,
+            "z": -54
+          }
+        },
+        {
+          "id": "E01-S07",
+          "to": "U1-01",
+          "x": -15,
+          "z": 32,
+          "label": "拉开普通插销，走下磨坊地窖",
+          "entry": {
+            "x": 0,
+            "z": -50.5
+          },
+          "unlock": "e01_open"
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -34,
+          "z": 31,
+          "width": 24,
+          "depth": 20,
+          "height": 13,
+          "kind": "building"
+        },
+        {
+          "x": 35,
+          "z": 31,
+          "width": 24,
+          "depth": 18,
+          "height": 8,
+          "kind": "building"
+        },
+        {
+          "x": -35,
+          "z": -30,
+          "width": 22,
+          "depth": 16,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "x": 34,
+          "z": -31,
+          "width": 20,
+          "depth": 16,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "kind": "crate",
+          "x": 48,
+          "z": 27,
+          "width": 3,
+          "depth": 4,
+          "height": 2
+        },
+        {
+          "kind": "barrel",
+          "x": 17,
+          "z": -16,
+          "width": 2,
+          "depth": 2,
+          "height": 2
+        },
+        {
+          "kind": "tree",
+          "x": 58,
+          "z": -47,
+          "width": 4,
+          "depth": 4,
+          "height": 9
+        }
+      ]
+    },
+    "S08": {
+      "id": "S08",
+      "name": "陷井谷",
+      "subtitle": "谷底采坑与高道相互可见，危险有绕行的余地。",
+      "kind": "wild",
+      "palette": "stone",
+      "width": 148,
+      "depth": 136,
+      "atlas": {
+        "x": 43,
+        "z": 67
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "旧采坑吊棚",
+          "style": "workshop",
+          "x": -33,
+          "z": -28,
+          "width": 20,
+          "depth": 14,
+          "height": 6
+        },
+        {
+          "name": "高道警戒残屋",
+          "style": "ruin",
+          "x": 34,
+          "z": 31,
+          "width": 18,
+          "depth": 14,
+          "height": 5
+        },
+        {
+          "name": "誓痕隐龛背墙",
+          "style": "ruin",
+          "x": -33,
+          "z": 30,
+          "width": 18,
+          "depth": 12,
+          "height": 4
+        }
+      ],
+      "objects": [
+        {
+          "id": "find-w08",
+          "label": "双线索指向的誓痕隐龛",
+          "action": "cache",
+          "x": -33,
+          "z": 20,
+          "radius": 2.5,
+          "description": "旧誓道标与废驿收条指向同一处隐龛。银鹿的足迹只有这一把；这里不是第二个地下地窖。",
+          "item": "W08",
+          "amount": 1
+        },
+        {
+          "id": "s08-fault",
+          "label": "边坡上的新断层",
+          "action": "inspect",
+          "x": 20,
+          "z": -25,
+          "radius": 2.5,
+          "description": "碎石仍在松动，北侧高道有完整路面；没有必须跳下致命采坑的入口。",
+          "evidence": "s08-fault"
+        },
+        {
+          "id": "s08-drag",
+          "label": "采坑拖痕",
+          "action": "inspect",
+          "x": -12,
+          "z": 5,
+          "radius": 2.5,
+          "description": "拖痕从旧吊架通向军营，但绳结方向显示人曾被活着转运，不是坠崖遗骸。",
+          "evidence": "s08-drag"
+        },
+        {
+          "id": "s08-pass",
+          "label": "扶正高道的旧誓路标",
+          "action": "secret_pass",
+          "x": 20,
+          "z": 24,
+          "radius": 2.5,
+          "description": "路标露出背面的弯枝记号，证明高道可以安全折返；这一条发现只结算一次。"
+        }
+      ],
+      "enemies": [
+        {
+          "id": "s08-pass-warden",
+          "kind": "raider",
+          "x": 35,
+          "z": -5
+        },
+        {
+          "id": "s08-pit-archer",
+          "kind": "archer",
+          "x": 15,
+          "z": -6
+        }
+      ],
+      "exits": [
+        {
+          "id": "road-S08-S04",
+          "to": "S04",
+          "label": "返回劫车隘口",
+          "x": 0,
+          "z": -66,
+          "entry": {
+            "x": 0,
+            "z": 56
+          }
+        },
+        {
+          "id": "road-S08-S07",
+          "to": "S07",
+          "label": "返回废磨坊村",
+          "x": 72,
+          "z": 0,
+          "entry": {
+            "x": -72,
+            "z": 10
+          }
+        },
+        {
+          "id": "road-S08-S09",
+          "to": "S09",
+          "label": "前往灰披军营",
+          "x": -72,
+          "z": 0,
+          "entry": {
+            "x": 72,
+            "z": 0
+          }
+        },
+        {
+          "id": "road-S08-S11",
+          "to": "S11",
+          "label": "前往松岬石塔",
+          "x": 0,
+          "z": 66,
+          "entry": {
+            "x": -10,
+            "z": -56
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -33,
+          "z": -28,
+          "width": 20,
+          "depth": 14,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": 34,
+          "z": 31,
+          "width": 18,
+          "depth": 14,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "x": -33,
+          "z": 30,
+          "width": 18,
+          "depth": 12,
+          "height": 4,
+          "kind": "building"
+        },
+        {
+          "kind": "rock",
+          "x": -39,
+          "z": 1,
+          "width": 13,
+          "depth": 14,
+          "height": 6
+        },
+        {
+          "kind": "rock",
+          "x": 43,
+          "z": 40,
+          "width": 8,
+          "depth": 9,
+          "height": 5
+        },
+        {
+          "kind": "rock",
+          "x": -54,
+          "z": -42,
+          "width": 7,
+          "depth": 12,
+          "height": 5
+        }
+      ]
+    },
+    "S09": {
+      "id": "S09",
+      "name": "灰披军营",
+      "subtitle": "外营、军需仓与办公棚分成三个院面，侧后岗哨仍可绕过。",
+      "kind": "camp",
+      "palette": "meadow",
+      "width": 156,
+      "depth": 144,
+      "atlas": {
+        "x": 23,
+        "z": 72
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "灰披军需仓",
+          "style": "barn",
+          "x": -35,
+          "z": 32,
+          "width": 24,
+          "depth": 18,
+          "height": 8
+        },
+        {
+          "name": "军饷办公棚",
+          "style": "tent",
+          "x": 35,
+          "z": 32,
+          "width": 22,
+          "depth": 18,
+          "height": 6
+        },
+        {
+          "name": "西侧兵帐",
+          "style": "tent",
+          "x": -35,
+          "z": -31,
+          "width": 22,
+          "depth": 16,
+          "height": 6
+        },
+        {
+          "name": "东侧兵帐",
+          "style": "tent",
+          "x": 35,
+          "z": -31,
+          "width": 22,
+          "depth": 16,
+          "height": 6
+        }
+      ],
+      "objects": [
+        {
+          "id": "find-a01",
+          "label": "外营武备箱",
+          "action": "cache",
+          "x": -35,
+          "z": 18,
+          "radius": 2.5,
+          "description": "白枝护额留在编制已注销的武备箱里，箱号与被扣工役的旧名单一致。",
+          "item": "A01",
+          "amount": 1
+        },
+        {
+          "id": "find-a09",
+          "label": "篝火旁的旧兵袋",
+          "action": "cache",
+          "x": -20,
+          "z": -29,
+          "radius": 2.5,
+          "description": "旧兵袋中的护手“老兵的回敬”经过多次缝补；它与武备箱有独立的发现收据。",
+          "item": "A09",
+          "amount": 1
+        },
+        {
+          "id": "s09-payroll",
+          "label": "两列不相符的兵饷名单",
+          "action": "inspect",
+          "x": 35,
+          "z": 18,
+          "radius": 2.5,
+          "description": "仍在领饷的人被写成阵亡，付款附约指向湿林庄园。名单可以支持后续交涉。",
+          "evidence": "s09-payroll"
+        },
+        {
+          "id": "s09-sideentry",
+          "label": "巡逻换班缝隙",
+          "action": "inspect",
+          "x": -16,
+          "z": 30,
+          "radius": 2.5,
+          "description": "侧后的运水面没有连续岗哨。这里的放行只影响这一处接近面，不会让整个地区停战。",
+          "evidence": "s09-sideentry"
+        },
+        {
+          "id": "s09-order",
+          "label": "队长的扣押令抄件",
+          "action": "inspect",
+          "x": 17,
+          "z": -28,
+          "radius": 2.5,
+          "description": "扣押令要求星片与有测绘本领的工匠分别移交，北岭哨关保管着原件。",
+          "evidence": "s09-order"
+        }
+      ],
+      "enemies": [
+        {
+          "id": "s09-tax-raider",
+          "kind": "raider",
+          "x": 18,
+          "z": 1
+        },
+        {
+          "id": "s09-tax-shield",
+          "kind": "shield",
+          "x": 33,
+          "z": 0
+        },
+        {
+          "id": "s09-back-raider",
+          "kind": "raider",
+          "x": -19,
+          "z": 3
+        },
+        {
+          "id": "s09-back-archer",
+          "kind": "archer",
+          "x": -34,
+          "z": 0
+        }
+      ],
+      "exits": [
+        {
+          "id": "road-S09-S08",
+          "to": "S08",
+          "label": "返回陷井谷",
+          "x": 76,
+          "z": 0,
+          "entry": {
+            "x": -68,
+            "z": 0
+          }
+        },
+        {
+          "id": "road-S09-S10",
+          "to": "S10",
+          "label": "前往北岭哨关",
+          "x": 0,
+          "z": 70,
+          "entry": {
+            "x": 0,
+            "z": -62
+          }
+        },
+        {
+          "id": "road-S09-S20",
+          "to": "S20",
+          "label": "前往铁脊观察台",
+          "x": -76,
+          "z": 0,
+          "entry": {
+            "x": 58,
+            "z": 0
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -35,
+          "z": 32,
+          "width": 24,
+          "depth": 18,
+          "height": 8,
+          "kind": "building"
+        },
+        {
+          "x": 35,
+          "z": 32,
+          "width": 22,
+          "depth": 18,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": -35,
+          "z": -31,
+          "width": 22,
+          "depth": 16,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": 35,
+          "z": -31,
+          "width": 22,
+          "depth": 16,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "kind": "crate",
+          "x": -49,
+          "z": 32,
+          "width": 4,
+          "depth": 6,
+          "height": 2
+        },
+        {
+          "kind": "barrel",
+          "x": 8,
+          "z": 17,
+          "width": 2,
+          "depth": 2,
+          "height": 2
+        },
+        {
+          "kind": "wall",
+          "x": 49,
+          "z": 28,
+          "width": 3,
+          "depth": 22,
+          "height": 3
+        }
+      ]
+    },
+    "S10": {
+      "id": "S10",
+      "name": "北岭哨关",
+      "subtitle": "先看盾锤与石墩，再进入关前战场；关后扣货架仍清晰可见。",
+      "kind": "camp",
+      "palette": "stone",
+      "width": 144,
+      "depth": 136,
+      "atlas": {
+        "x": 24,
+        "z": 91
+      },
+      "spawn": {
+        "x": 0,
+        "z": -23
+      },
+      "buildings": [
+        {
+          "name": "北岭关墙西段",
+          "style": "gate",
+          "x": -29,
+          "z": 30,
+          "width": 28,
+          "depth": 12,
+          "height": 10
+        },
+        {
+          "name": "北岭关墙东段",
+          "style": "gate",
+          "x": 29,
+          "z": 30,
+          "width": 28,
+          "depth": 12,
+          "height": 10
+        },
+        {
+          "name": "扣货值房",
+          "style": "house",
+          "x": -31,
+          "z": -31,
+          "width": 18,
+          "depth": 14,
+          "height": 7
+        },
+        {
+          "name": "哨关修整棚",
+          "style": "tent",
+          "x": 32,
+          "z": -31,
+          "width": 18,
+          "depth": 14,
+          "height": 5
+        }
+      ],
+      "objects": [
+        {
+          "id": "s10-cp",
+          "label": "关前安全转角",
+          "action": "checkpoint",
+          "x": 0,
+          "z": -23,
+          "radius": 2.5,
+          "description": "队长战前可在石墙转角整备。重试保留已完成事件，未败队长恢复完整战斗状态。"
+        },
+        {
+          "id": "s10-pillar-marks",
+          "label": "观察石墩的新撞痕",
+          "action": "inspect",
+          "x": -11,
+          "z": -12,
+          "radius": 2.5,
+          "description": "两座石墩承受过盾冲。侧走让队长撞墩能制造失衡，零油与基础武器也有完整解法。",
+          "evidence": "s10-pillar-marks"
+        },
+        {
+          "id": "s10-gate",
+          "label": "抬起主横杆，开启扣货架",
+          "action": "captain_gate",
+          "x": 0,
+          "z": 22,
+          "radius": 2.5,
+          "description": "灰披队长败后才能抬杆。未熄之誓与三张回响祷文分别去重，战胜本身不会把剑塞进背包。"
+        },
+        {
+          "id": "s10-detention",
+          "label": "带着原封签的扣押令",
+          "action": "inspect",
+          "x": -31,
+          "z": -20,
+          "radius": 2.5,
+          "description": "原令把活着的工匠写成“设施附属人员”。它能作为证据，普通道路不因此变成剧情出口。",
+          "evidence": "s10-detention"
+        }
+      ],
+      "enemies": [
+        {
+          "id": "s10-captain",
+          "kind": "captain",
+          "x": 0,
+          "z": 5
+        }
+      ],
+      "exits": [
+        {
+          "id": "road-S10-S09",
+          "to": "S09",
+          "label": "返回灰披军营",
+          "x": 0,
+          "z": -66,
+          "entry": {
+            "x": 0,
+            "z": 66
+          }
+        },
+        {
+          "id": "road-S10-S11",
+          "to": "S11",
+          "label": "前往松岬石塔",
+          "x": 70,
+          "z": 0,
+          "entry": {
+            "x": -60,
+            "z": 0
+          }
+        }
+      ],
+      "checkpoint": true,
+      "obstacles": [
+        {
+          "x": -29,
+          "z": 30,
+          "width": 28,
+          "depth": 12,
+          "height": 10,
+          "kind": "building"
+        },
+        {
+          "x": 29,
+          "z": 30,
+          "width": 28,
+          "depth": 12,
+          "height": 10,
+          "kind": "building"
+        },
+        {
+          "x": -31,
+          "z": -31,
+          "width": 18,
+          "depth": 14,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "x": 32,
+          "z": -31,
+          "width": 18,
+          "depth": 14,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "kind": "pillar",
+          "x": -3,
+          "z": 0,
+          "width": 1.4,
+          "depth": 1.4,
+          "height": 2.8
+        },
+        {
+          "kind": "pillar",
+          "x": 3,
+          "z": 0,
+          "width": 1.4,
+          "depth": 1.4,
+          "height": 2.8
+        },
+        {
+          "kind": "barrel",
+          "x": 19,
+          "z": 13,
+          "width": 2,
+          "depth": 2,
+          "height": 2
+        }
+      ]
+    },
+    "S11": {
+      "id": "S11",
+      "name": "松岬石塔",
+      "subtitle": "阶坡绕塔而上，军营、废誓院与谷中道路分别落在视野里。",
+      "kind": "ruin",
+      "palette": "stone",
+      "width": 132,
+      "depth": 124,
+      "atlas": {
+        "x": 52,
+        "z": 87
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "松岬塔基",
+          "style": "tower",
+          "x": -30,
+          "z": 28,
+          "width": 18,
+          "depth": 18,
+          "height": 18
+        },
+        {
+          "name": "塔旁守夜屋",
+          "style": "house",
+          "x": 30,
+          "z": 29,
+          "width": 18,
+          "depth": 14,
+          "height": 6
+        },
+        {
+          "name": "断桥旧亭",
+          "style": "ruin",
+          "x": -29,
+          "z": -28,
+          "width": 18,
+          "depth": 12,
+          "height": 4
+        }
+      ],
+      "objects": [
+        {
+          "id": "find-a02",
+          "label": "断桥眺望袋",
+          "action": "cache",
+          "x": -29,
+          "z": -17,
+          "radius": 2.5,
+          "description": "游隼兜帽藏在眺望点的干燥袋中。这里提供方向与视野，不能隔着整片石壁攻击军营。",
+          "item": "A02",
+          "amount": 1
+        },
+        {
+          "id": "s11-horizon",
+          "label": "三处不同的远方轮廓",
+          "action": "inspect",
+          "x": -15,
+          "z": 28,
+          "radius": 2.5,
+          "description": "西北是关墙，东方是坍塌的礼堂，东南有崖边平台；远望只记录地理，不自动发现内部。",
+          "evidence": "s11-horizon"
+        },
+        {
+          "id": "s11-stair",
+          "label": "塔基完整的缓阶",
+          "action": "inspect",
+          "x": -30,
+          "z": 15,
+          "radius": 2.5,
+          "description": "石阶沿塔基外侧接回平地，扶手上留有测距线的磨痕；上下层没有跳崖捷径。",
+          "evidence": "s11-stair"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "road-S11-S08",
+          "to": "S08",
+          "label": "返回陷井谷",
+          "x": -10,
+          "z": -60,
+          "entry": {
+            "x": 0,
+            "z": 62
+          }
+        },
+        {
+          "id": "road-S11-S10",
+          "to": "S10",
+          "label": "返回北岭哨关",
+          "x": -64,
+          "z": 0,
+          "entry": {
+            "x": 66,
+            "z": 0
+          }
+        },
+        {
+          "id": "road-S11-S12",
+          "to": "S12",
+          "label": "前往废誓院",
+          "x": 64,
+          "z": 0,
+          "entry": {
+            "x": -66,
+            "z": 0
+          }
+        },
+        {
+          "id": "road-S11-S17",
+          "to": "S17",
+          "label": "前往峭壁洞窟",
+          "x": 10,
+          "z": -60,
+          "entry": {
+            "x": 0,
+            "z": 54
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -30,
+          "z": 28,
+          "width": 18,
+          "depth": 18,
+          "height": 18,
+          "kind": "building"
+        },
+        {
+          "x": 30,
+          "z": 29,
+          "width": 18,
+          "depth": 14,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": -29,
+          "z": -28,
+          "width": 18,
+          "depth": 12,
+          "height": 4,
+          "kind": "building"
+        },
+        {
+          "kind": "rock",
+          "x": 45,
+          "z": -24,
+          "width": 8,
+          "depth": 14,
+          "height": 5
+        },
+        {
+          "kind": "wall",
+          "x": 29,
+          "z": 41,
+          "width": 20,
+          "depth": 2,
+          "height": 2
+        },
+        {
+          "kind": "tree",
+          "x": -48,
+          "z": 41,
+          "width": 4,
+          "depth": 4,
+          "height": 8
+        }
+      ]
+    },
+    "S12": {
+      "id": "S12",
+      "name": "废誓院",
+      "subtitle": "坍塌礼堂、侧室与檐廊围成留有退路的旧院。",
+      "kind": "ruin",
+      "palette": "stone",
+      "width": 144,
+      "depth": 132,
+      "atlas": {
+        "x": 77,
+        "z": 78
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "坍塌礼堂",
+          "style": "ruin",
+          "x": -32,
+          "z": 30,
+          "width": 28,
+          "depth": 20,
+          "height": 10
+        },
+        {
+          "name": "誓院记录侧室",
+          "style": "ruin",
+          "x": 33,
+          "z": 30,
+          "width": 22,
+          "depth": 16,
+          "height": 6
+        },
+        {
+          "name": "南侧檐廊残段",
+          "style": "ruin",
+          "x": 33,
+          "z": -28,
+          "width": 24,
+          "depth": 10,
+          "height": 5
+        }
+      ],
+      "objects": [
+        {
+          "id": "s12-command",
+          "label": "三天轮换的旧命令",
+          "action": "inspect",
+          "x": 33,
+          "z": 18,
+          "radius": 2.5,
+          "description": "命令原文许诺三天轮换，后附封条却没有放人记录。它是背景证据，不是万能开门钥匙。",
+          "evidence": "s12-command"
+        },
+        {
+          "id": "s12-swordtrace",
+          "label": "朝向门内的剑痕",
+          "action": "inspect",
+          "x": -32,
+          "z": 17,
+          "radius": 2.5,
+          "description": "剑痕朝向礼堂内部，旧守卫也许在拦阻离开的人；只有痕迹还不足以指认全部责任。",
+          "evidence": "s12-swordtrace"
+        },
+        {
+          "id": "s12-coldlight",
+          "label": "没有燃料的冷白余光",
+          "action": "inspect",
+          "x": 18,
+          "z": -25,
+          "radius": 2.5,
+          "description": "碎金属在遮光后重复一段手势，记录有缺帧，不能把它当成读心或死者的同意。",
+          "evidence": "s12-coldlight"
+        }
+      ],
+      "enemies": [
+        {
+          "id": "s12-scavenger-raider",
+          "kind": "raider",
+          "x": 10,
+          "z": 5
+        },
+        {
+          "id": "s12-scavenger-archer",
+          "kind": "archer",
+          "x": 28,
+          "z": 4
+        }
+      ],
+      "exits": [
+        {
+          "id": "road-S12-S11",
+          "to": "S11",
+          "label": "返回松岬石塔",
+          "x": -70,
+          "z": 0,
+          "entry": {
+            "x": 60,
+            "z": 0
+          }
+        },
+        {
+          "id": "road-S12-S13",
+          "to": "S13",
+          "label": "前往旧石场",
+          "x": 0,
+          "z": -64,
+          "entry": {
+            "x": 0,
+            "z": 62
+          }
+        },
+        {
+          "id": "road-S12-S16",
+          "to": "S16",
+          "label": "前往东境驿口",
+          "x": 70,
+          "z": 0,
+          "entry": {
+            "x": -66,
+            "z": 10
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -32,
+          "z": 30,
+          "width": 28,
+          "depth": 20,
+          "height": 10,
+          "kind": "building"
+        },
+        {
+          "x": 33,
+          "z": 30,
+          "width": 22,
+          "depth": 16,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": 33,
+          "z": -28,
+          "width": 24,
+          "depth": 10,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "kind": "rock",
+          "x": -45,
+          "z": -28,
+          "width": 9,
+          "depth": 10,
+          "height": 4
+        },
+        {
+          "kind": "wall",
+          "x": -34,
+          "z": 43,
+          "width": 30,
+          "depth": 2,
+          "height": 3
+        },
+        {
+          "kind": "rock",
+          "x": 46,
+          "z": 43,
+          "width": 6,
+          "depth": 6,
+          "height": 4
+        }
+      ]
+    },
+    "S13": {
+      "id": "S13",
+      "name": "旧石场",
+      "subtitle": "采面前有工棚与吊料平台，固定梯的绞把在上方这一侧。",
+      "kind": "wild",
+      "palette": "stone",
+      "width": 148,
+      "depth": 136,
+      "atlas": {
+        "x": 80,
+        "z": 57
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "露天采面旧支架",
+          "style": "workshop",
+          "x": -33,
+          "z": 31,
+          "width": 24,
+          "depth": 18,
+          "height": 8
+        },
+        {
+          "name": "工役登记棚",
+          "style": "house",
+          "x": 34,
+          "z": 31,
+          "width": 20,
+          "depth": 16,
+          "height": 6
+        },
+        {
+          "name": "吊料机房",
+          "style": "workshop",
+          "x": 34,
+          "z": -30,
+          "width": 20,
+          "depth": 16,
+          "height": 7
+        }
+      ],
+      "objects": [
+        {
+          "id": "s13-witness",
+          "label": "工棚留下的目击板",
+          "action": "inspect",
+          "x": 34,
+          "z": 18,
+          "radius": 2.5,
+          "description": "有人看见凯尔带着测距线被送进旧采掘廊，他在石壁上刻了可复核的退路标记。",
+          "evidence": "s13-witness"
+        },
+        {
+          "id": "s13-ladder",
+          "label": "固定梯的上方绞把",
+          "action": "inspect",
+          "x": -12,
+          "z": 29,
+          "radius": 2.5,
+          "description": "绞把从地表安全处放下固定梯，之后双向通行；下方未放梯时无法隔墙操作。",
+          "evidence": "s13-ladder"
+        },
+        {
+          "id": "s13-workmarks",
+          "label": "新旧不同的工役锤痕",
+          "action": "inspect",
+          "x": -33,
+          "z": 18,
+          "radius": 2.5,
+          "description": "新锤痕压在旧封矿记号上，表明停工记录与实际运作不符；往东北仍是未制作地区。",
+          "evidence": "s13-workmarks"
+        },
+        {
+          "id": "s13-sequence-runes",
+          "label": "调查 · 三短一长的检修记号",
+          "action": "dice_check",
+          "x": -33,
+          "z": 15,
+          "radius": 2.5,
+          "description": "用新旧锤痕还原连动锁的检修顺序。",
+          "check": "quarry-runes"
+        },
+        {
+          "id": "s13-sling",
+          "label": "可回退的吊料平台",
+          "action": "inspect",
+          "x": 19,
+          "z": -27,
+          "radius": 2.5,
+          "description": "吊索旁留出步行通道，平台不是消耗合成材料的收费传送，也不吞掉学徒关键证据。",
+          "evidence": "s13-sling"
+        }
+      ],
+      "enemies": [
+        {
+          "id": "s13-overseer-shield",
+          "kind": "shield",
+          "x": 21,
+          "z": 0
+        },
+        {
+          "id": "s13-overseer-raider",
+          "kind": "raider",
+          "x": 34,
+          "z": 0
+        }
+      ],
+      "exits": [
+        {
+          "id": "road-S13-S07",
+          "to": "S07",
+          "label": "返回废磨坊村",
+          "x": -72,
+          "z": -10,
+          "entry": {
+            "x": 72,
+            "z": 10
+          }
+        },
+        {
+          "id": "road-S13-S12",
+          "to": "S12",
+          "label": "返回废誓院",
+          "x": 0,
+          "z": 66,
+          "entry": {
+            "x": 0,
+            "z": -60
+          }
+        },
+        {
+          "id": "road-S13-S14",
+          "to": "S14",
+          "label": "前往湿林庄园",
+          "x": 0,
+          "z": -66,
+          "entry": {
+            "x": 0,
+            "z": 64
+          }
+        },
+        {
+          "id": "road-S13-S16",
+          "to": "S16",
+          "label": "前往东境驿口",
+          "x": 72,
+          "z": 0,
+          "entry": {
+            "x": -66,
+            "z": -10
+          }
+        },
+        {
+          "id": "road-S13-S17",
+          "to": "S17",
+          "label": "前往峭壁洞窟",
+          "x": -72,
+          "z": 10,
+          "entry": {
+            "x": 58,
+            "z": 0
+          }
+        },
+        {
+          "id": "E02-S13",
+          "to": "U1-03",
+          "x": -14,
+          "z": 32,
+          "label": "从上方放下固定梯，进入采掘廊",
+          "entry": {
+            "x": 0,
+            "z": 50.5
+          },
+          "unlock": "e02_open"
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -33,
+          "z": 31,
+          "width": 24,
+          "depth": 18,
+          "height": 8,
+          "kind": "building"
+        },
+        {
+          "x": 34,
+          "z": 31,
+          "width": 20,
+          "depth": 16,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": 34,
+          "z": -30,
+          "width": 20,
+          "depth": 16,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "kind": "rock",
+          "x": -48,
+          "z": -25,
+          "width": 9,
+          "depth": 22,
+          "height": 7
+        },
+        {
+          "kind": "crate",
+          "x": 47,
+          "z": -30,
+          "width": 4,
+          "depth": 5,
+          "height": 2
+        },
+        {
+          "kind": "rock",
+          "x": 48,
+          "z": 44,
+          "width": 7,
+          "depth": 8,
+          "height": 6
+        }
+      ]
+    },
+    "S14": {
+      "id": "S14",
+      "name": "湿林庄园",
+      "subtitle": "墙内庭院通账房，侧门保留另一种接近方式。",
+      "kind": "town",
+      "palette": "marsh",
+      "width": 156,
+      "depth": 140,
+      "atlas": {
+        "x": 88,
+        "z": 30
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "湿林主宅",
+          "style": "house",
+          "x": -35,
+          "z": 32,
+          "width": 26,
+          "depth": 20,
+          "height": 11
+        },
+        {
+          "name": "独立账房",
+          "style": "house",
+          "x": 35,
+          "z": 32,
+          "width": 22,
+          "depth": 18,
+          "height": 7
+        },
+        {
+          "name": "林边马厩",
+          "style": "barn",
+          "x": -35,
+          "z": -31,
+          "width": 24,
+          "depth": 16,
+          "height": 8
+        },
+        {
+          "name": "庄园守门屋",
+          "style": "gate",
+          "x": 35,
+          "z": -31,
+          "width": 20,
+          "depth": 14,
+          "height": 7
+        }
+      ],
+      "objects": [
+        {
+          "id": "s14-contract",
+          "label": "付款链的第二份契约",
+          "action": "inspect",
+          "x": 35,
+          "z": 18,
+          "radius": 2.5,
+          "description": "契约副本把军营军饷与地下工役的费用并列，弥菈附约中的缺项在这里有独立旁证。",
+          "evidence": "s14-contract"
+        },
+        {
+          "id": "s14-huntroute",
+          "label": "被转卖的猎径副图",
+          "action": "inspect",
+          "x": -35,
+          "z": 18,
+          "radius": 2.5,
+          "description": "副图保留了原售图者没有同意公开的住处位置。它会改变之后对刻板的讨论。",
+          "evidence": "s14-huntroute"
+        },
+        {
+          "id": "s14-sidedoor",
+          "label": "庭院运柴侧门",
+          "action": "inspect",
+          "x": -18,
+          "z": -28,
+          "radius": 2.5,
+          "description": "侧门通向马厩院，人可以徒步通过；已有名单能帮助解释来意，失败仍有实体绕行面。",
+          "evidence": "s14-sidedoor"
+        },
+        {
+          "id": "s14-clock",
+          "label": "没有署名的押工时刻表",
+          "action": "inspect",
+          "x": 18,
+          "z": -28,
+          "radius": 2.5,
+          "description": "时刻表标出泵院与石场的交接，却不记工匠姓名。它不会因玩家休息自动推进新的扣押。",
+          "evidence": "s14-clock"
+        }
+      ],
+      "enemies": [
+        {
+          "id": "s14-yard-shield",
+          "kind": "shield",
+          "x": 18,
+          "z": 0
+        },
+        {
+          "id": "s14-yard-raider",
+          "kind": "raider",
+          "x": 34,
+          "z": 0
+        },
+        {
+          "id": "s14-yard-archer",
+          "kind": "archer",
+          "x": -18,
+          "z": 0
+        }
+      ],
+      "exits": [
+        {
+          "id": "road-S14-S06",
+          "to": "S06",
+          "label": "返回芦苇避居营",
+          "x": -10,
+          "z": -68,
+          "entry": {
+            "x": 10,
+            "z": 48
+          }
+        },
+        {
+          "id": "road-S14-S07",
+          "to": "S07",
+          "label": "返回废磨坊村",
+          "x": -76,
+          "z": 0,
+          "entry": {
+            "x": 72,
+            "z": -10
+          }
+        },
+        {
+          "id": "road-S14-S13",
+          "to": "S13",
+          "label": "返回旧石场",
+          "x": 0,
+          "z": 68,
+          "entry": {
+            "x": 0,
+            "z": -62
+          }
+        },
+        {
+          "id": "road-S14-S15",
+          "to": "S15",
+          "label": "前往古渠泵院",
+          "x": 10,
+          "z": -68,
+          "entry": {
+            "x": -10,
+            "z": 56
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -35,
+          "z": 32,
+          "width": 26,
+          "depth": 20,
+          "height": 11,
+          "kind": "building"
+        },
+        {
+          "x": 35,
+          "z": 32,
+          "width": 22,
+          "depth": 18,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "x": -35,
+          "z": -31,
+          "width": 24,
+          "depth": 16,
+          "height": 8,
+          "kind": "building"
+        },
+        {
+          "x": 35,
+          "z": -31,
+          "width": 20,
+          "depth": 14,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "kind": "wall",
+          "x": -54,
+          "z": 29,
+          "width": 2,
+          "depth": 32,
+          "height": 3
+        },
+        {
+          "kind": "wall",
+          "x": 54,
+          "z": 29,
+          "width": 2,
+          "depth": 32,
+          "height": 3
+        },
+        {
+          "kind": "tree",
+          "x": 57,
+          "z": -45,
+          "width": 4,
+          "depth": 4,
+          "height": 10
+        }
+      ]
+    },
+    "S15": {
+      "id": "S15",
+      "name": "古渠泵院",
+      "subtitle": "干阶通向西北前厅，旧渠堤道继续伸向东南。",
+      "kind": "ruin",
+      "palette": "marsh",
+      "width": 144,
+      "depth": 124,
+      "atlas": {
+        "x": 93,
+        "z": 12
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "古渠泵屋",
+          "style": "workshop",
+          "x": -32,
+          "z": 28,
+          "width": 24,
+          "depth": 18,
+          "height": 8
+        },
+        {
+          "name": "堤路检修所",
+          "style": "house",
+          "x": 32,
+          "z": 28,
+          "width": 20,
+          "depth": 16,
+          "height": 6
+        },
+        {
+          "name": "废水闸塔",
+          "style": "tower",
+          "x": 32,
+          "z": -28,
+          "width": 12,
+          "depth": 12,
+          "height": 12
+        }
+      ],
+      "objects": [
+        {
+          "id": "s15-steps",
+          "label": "通往E04的稳定干阶",
+          "action": "inspect",
+          "x": -15,
+          "z": 26,
+          "radius": 2.5,
+          "description": "干阶足够完整，可以普通进入西北前厅并原路返回；前厅深闸的控制位在另一侧。",
+          "evidence": "s15-steps"
+        },
+        {
+          "id": "s15-canal",
+          "label": "人工渠与自然河的分水碑",
+          "action": "inspect",
+          "x": -17,
+          "z": -26,
+          "radius": 2.5,
+          "description": "渠水来自东南检修系统，与石桥河不是一条会逆坡的河；堤道沿地形折行。",
+          "evidence": "s15-canal"
+        },
+        {
+          "id": "s15-r3-boundary",
+          "label": "东南堤道：沉钟河湾方向",
+          "action": "boundary",
+          "x": 50,
+          "z": -12,
+          "radius": 2.5,
+          "description": "这里是真实地理延续的可见入口。沉钟河湾尚未制作，当前停在路障前，不会传送至空场景。"
+        },
+        {
+          "id": "s15-pressure",
+          "label": "旧泵检修图",
+          "action": "inspect",
+          "x": 32,
+          "z": 16,
+          "radius": 2.5,
+          "description": "图上把西北前厅与深部闸室分开，证明勘探支口不能直接穿过终堡或领取后期奖励。",
+          "evidence": "s15-pressure"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "road-S15-S06",
+          "to": "S06",
+          "label": "返回芦苇避居营",
+          "x": -70,
+          "z": 0,
+          "entry": {
+            "x": 57,
+            "z": 0
+          }
+        },
+        {
+          "id": "road-S15-S14",
+          "to": "S14",
+          "label": "返回湿林庄园",
+          "x": -10,
+          "z": 60,
+          "entry": {
+            "x": 10,
+            "z": -64
+          }
+        },
+        {
+          "id": "road-S15-S16",
+          "to": "S16",
+          "label": "前往东境驿口",
+          "x": 10,
+          "z": 60,
+          "entry": {
+            "x": 0,
+            "z": -58
+          }
+        },
+        {
+          "id": "E04-S15",
+          "to": "U2-01",
+          "x": -15,
+          "z": 30,
+          "label": "沿稳定干阶进入西北前厅",
+          "entry": {
+            "x": 0,
+            "z": -46.5
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -32,
+          "z": 28,
+          "width": 24,
+          "depth": 18,
+          "height": 8,
+          "kind": "building"
+        },
+        {
+          "x": 32,
+          "z": 28,
+          "width": 20,
+          "depth": 16,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": 32,
+          "z": -28,
+          "width": 12,
+          "depth": 12,
+          "height": 12,
+          "kind": "building"
+        },
+        {
+          "kind": "rock",
+          "x": 48,
+          "z": 41,
+          "width": 8,
+          "depth": 7,
+          "height": 4
+        },
+        {
+          "kind": "crate",
+          "x": -47,
+          "z": 28,
+          "width": 3,
+          "depth": 4,
+          "height": 2
+        }
+      ]
+    },
+    "S16": {
+      "id": "S16",
+      "name": "东境驿口",
+      "subtitle": "关外驿道与旧渠堤路在分路碑前相接，远山仍是远山。",
+      "kind": "wild",
+      "palette": "stone",
+      "width": 144,
+      "depth": 128,
+      "atlas": {
+        "x": 96,
+        "z": 67
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "东境驿亭",
+          "style": "inn",
+          "x": -31,
+          "z": 29,
+          "width": 22,
+          "depth": 18,
+          "height": 7
+        },
+        {
+          "name": "石料称重棚",
+          "style": "workshop",
+          "x": 32,
+          "z": 29,
+          "width": 20,
+          "depth": 16,
+          "height": 6
+        },
+        {
+          "name": "废关检查屋",
+          "style": "gate",
+          "x": 31,
+          "z": -29,
+          "width": 18,
+          "depth": 14,
+          "height": 7
+        }
+      ],
+      "objects": [
+        {
+          "id": "s16-r2-boundary",
+          "label": "东北驿道：沉桥高地方向",
+          "action": "boundary",
+          "x": 50,
+          "z": 20,
+          "radius": 2.5,
+          "description": "驿道继续通向沉桥高地，当前只展示未制作地区的地理边缘；发现路牌不会领取下一幕奖励。"
+        },
+        {
+          "id": "s16-fork",
+          "label": "两套不同年代的分路碑",
+          "action": "inspect",
+          "x": -15,
+          "z": 27,
+          "radius": 2.5,
+          "description": "较新的刻字指向矿业聚落，旧字沿渠南下。两条线不是穿过庄园房屋的空中直路。",
+          "evidence": "s16-fork"
+        },
+        {
+          "id": "s16-mail",
+          "label": "退回的矿务函件",
+          "action": "inspect",
+          "x": -31,
+          "z": 16,
+          "radius": 2.5,
+          "description": "函件称矿工需要“继续保障安全”，日期新于停工公告；这只是下一幕可追的钩子。",
+          "evidence": "s16-mail"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "road-S16-S12",
+          "to": "S12",
+          "label": "返回废誓院",
+          "x": -70,
+          "z": 10,
+          "entry": {
+            "x": 66,
+            "z": 0
+          }
+        },
+        {
+          "id": "road-S16-S13",
+          "to": "S13",
+          "label": "返回旧石场",
+          "x": -70,
+          "z": -10,
+          "entry": {
+            "x": 68,
+            "z": 0
+          }
+        },
+        {
+          "id": "road-S16-S15",
+          "to": "S15",
+          "label": "返回古渠泵院",
+          "x": 0,
+          "z": -62,
+          "entry": {
+            "x": 10,
+            "z": 56
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -31,
+          "z": 29,
+          "width": 22,
+          "depth": 18,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "x": 32,
+          "z": 29,
+          "width": 20,
+          "depth": 16,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": 31,
+          "z": -29,
+          "width": 18,
+          "depth": 14,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "kind": "rock",
+          "x": -49,
+          "z": -30,
+          "width": 8,
+          "depth": 16,
+          "height": 6
+        },
+        {
+          "kind": "tree",
+          "x": 48,
+          "z": -43,
+          "width": 4,
+          "depth": 4,
+          "height": 8
+        }
+      ]
+    },
+    "S17": {
+      "id": "S17",
+      "name": "峭壁洞窟",
+      "subtitle": "平台与洞厅都有退路，封门只能从地下内侧先解开。",
+      "kind": "ruin",
+      "palette": "stone",
+      "width": 128,
+      "depth": 120,
+      "atlas": {
+        "x": 64,
+        "z": 70
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "崖侧残亭",
+          "style": "ruin",
+          "x": -28,
+          "z": -28,
+          "width": 20,
+          "depth": 14,
+          "height": 5
+        },
+        {
+          "name": "洞口石门框",
+          "style": "gate",
+          "x": 29,
+          "z": 28,
+          "width": 20,
+          "depth": 14,
+          "height": 9
+        },
+        {
+          "name": "观察者旧旁屋",
+          "style": "house",
+          "x": -28,
+          "z": 29,
+          "width": 18,
+          "depth": 14,
+          "height": 6
+        }
+      ],
+      "objects": [
+        {
+          "id": "s17-sealed",
+          "label": "只能从内侧解开的石门",
+          "action": "inspect",
+          "x": 16,
+          "z": 29,
+          "radius": 2.5,
+          "description": "门楔藏在地下回声洞一侧。地表只能观察封门，追踪线不会让你从这里首次开门。",
+          "evidence": "s17-sealed"
+        },
+        {
+          "id": "s17-track",
+          "label": "折回林地的追踪痕",
+          "action": "inspect",
+          "x": -28,
+          "z": -17,
+          "radius": 2.5,
+          "description": "兽蹄印绕过石门而去，猎径秘密与地下门槛是两件事；平台上没有必须跳下的断崖。",
+          "evidence": "s17-track"
+        },
+        {
+          "id": "s17-echo",
+          "label": "会重放敲击声的岩缝",
+          "action": "inspect",
+          "x": -28,
+          "z": 18,
+          "radius": 2.5,
+          "description": "岩缝中的白枝金属重复三次旧敲击，间隔完全相同；声音不是门内此刻有人答应。",
+          "evidence": "s17-echo"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "road-S17-S07",
+          "to": "S07",
+          "label": "返回废磨坊村",
+          "x": 0,
+          "z": -58,
+          "entry": {
+            "x": 0,
+            "z": 66
+          }
+        },
+        {
+          "id": "road-S17-S11",
+          "to": "S11",
+          "label": "返回松岬石塔",
+          "x": 0,
+          "z": 58,
+          "entry": {
+            "x": 10,
+            "z": -56
+          }
+        },
+        {
+          "id": "road-S17-S13",
+          "to": "S13",
+          "label": "返回旧石场",
+          "x": 62,
+          "z": 0,
+          "entry": {
+            "x": -68,
+            "z": 10
+          }
+        },
+        {
+          "id": "E03-S17",
+          "to": "U1-02",
+          "x": 15,
+          "z": 30,
+          "label": "通过已解开的石门回声洞",
+          "entry": {
+            "x": 14.754016353428042,
+            "z": 26.72929292774861
+          },
+          "requires": "e03_open"
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -28,
+          "z": -28,
+          "width": 20,
+          "depth": 14,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "x": 29,
+          "z": 28,
+          "width": 20,
+          "depth": 14,
+          "height": 9,
+          "kind": "building"
+        },
+        {
+          "x": -28,
+          "z": 29,
+          "width": 18,
+          "depth": 14,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "kind": "rock",
+          "x": 44,
+          "z": -25,
+          "width": 12,
+          "depth": 26,
+          "height": 8
+        },
+        {
+          "kind": "rock",
+          "x": -43,
+          "z": 1,
+          "width": 9,
+          "depth": 16,
+          "height": 6
+        }
+      ]
+    },
+    "S18": {
+      "id": "S18",
+      "name": "旧军需站",
+      "subtitle": "旧车道绕仓院返回南渡，墙上只剩过期的转交条。",
+      "kind": "ruin",
+      "palette": "meadow",
+      "width": 128,
+      "depth": 112,
+      "atlas": {
+        "x": 11,
+        "z": 12
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "废军需仓",
+          "style": "barn",
+          "x": -28,
+          "z": 26,
+          "width": 24,
+          "depth": 18,
+          "height": 8
+        },
+        {
+          "name": "车道小值房",
+          "style": "house",
+          "x": 29,
+          "z": 26,
+          "width": 18,
+          "depth": 14,
+          "height": 6
+        },
+        {
+          "name": "旧修车棚",
+          "style": "workshop",
+          "x": 29,
+          "z": -26,
+          "width": 18,
+          "depth": 14,
+          "height": 6
+        }
+      ],
+      "objects": [
+        {
+          "id": "s18-transfer",
+          "label": "装备已送修的转交条",
+          "action": "inspect",
+          "x": -28,
+          "z": 13,
+          "radius": 2.5,
+          "description": "旧营垒箱里只有送修单，阵线之锚现在由洛恩专售；这里不会再留一双复制装备。",
+          "evidence": "s18-transfer"
+        },
+        {
+          "id": "s18-road",
+          "label": "通回码头的旧车道",
+          "action": "inspect",
+          "x": -14,
+          "z": -23,
+          "radius": 2.5,
+          "description": "青苔下的石轮槽仍连着南渡，军需站是一段调查回环，不是免费领齐装备的第二起点。",
+          "evidence": "s18-road"
+        },
+        {
+          "id": "s18-ration",
+          "label": "被划掉的配给姓名",
+          "action": "inspect",
+          "x": 29,
+          "z": 15,
+          "radius": 2.5,
+          "description": "配给簿划掉了几位被宣布阵亡的工匠，之后仍有同样数量的口粮领用；可以留待独立核对。",
+          "evidence": "s18-ration"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "road-S18-S02",
+          "to": "S02",
+          "label": "返回南渡码头",
+          "x": 62,
+          "z": 0,
+          "entry": {
+            "x": -60,
+            "z": 0
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -28,
+          "z": 26,
+          "width": 24,
+          "depth": 18,
+          "height": 8,
+          "kind": "building"
+        },
+        {
+          "x": 29,
+          "z": 26,
+          "width": 18,
+          "depth": 14,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": 29,
+          "z": -26,
+          "width": 18,
+          "depth": 14,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "kind": "crate",
+          "x": -43,
+          "z": 24,
+          "width": 4,
+          "depth": 5,
+          "height": 2
+        },
+        {
+          "kind": "tree",
+          "x": -43,
+          "z": -35,
+          "width": 4,
+          "depth": 4,
+          "height": 9
+        },
+        {
+          "kind": "wall",
+          "x": 30,
+          "z": 39,
+          "width": 20,
+          "depth": 2,
+          "height": 3
+        }
+      ]
+    },
+    "S19": {
+      "id": "S19",
+      "name": "林间伏击地",
+      "subtitle": "箭位高坡、侧路与幸存者躲处围着一段被反复利用的车辙。",
+      "kind": "wild",
+      "palette": "forest",
+      "width": 144,
+      "depth": 128,
+      "atlas": {
+        "x": 45,
+        "z": 18
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "高坡箭位残棚",
+          "style": "ruin",
+          "x": -32,
+          "z": 30,
+          "width": 20,
+          "depth": 14,
+          "height": 5
+        },
+        {
+          "name": "幸存者藏身猎屋",
+          "style": "house",
+          "x": 32,
+          "z": -29,
+          "width": 18,
+          "depth": 14,
+          "height": 6
+        },
+        {
+          "name": "路旁破车棚",
+          "style": "barn",
+          "x": -32,
+          "z": -30,
+          "width": 20,
+          "depth": 14,
+          "height": 6
+        }
+      ],
+      "objects": [
+        {
+          "id": "s19-hammer",
+          "label": "车轮上的三短一长锤痕",
+          "action": "inspect",
+          "x": -32,
+          "z": -18,
+          "radius": 2.5,
+          "description": "锤痕与洛恩的工坊手法相同；即使先绕去找人，关键线索也不会被油火烧毁。",
+          "evidence": "s19-hammer"
+        },
+        {
+          "id": "s19-survivor",
+          "label": "幸存者留下的口述",
+          "action": "inspect",
+          "x": 32,
+          "z": -18,
+          "radius": 2.5,
+          "description": "口述先讲箭从哪里来，再提一位带测距线的年轻人被活着押走；学徒与猎径在同一现场交叠。",
+          "evidence": "s19-survivor"
+        },
+        {
+          "id": "s19-arrowline",
+          "label": "提前削好的箭位",
+          "action": "inspect",
+          "x": -32,
+          "z": 19,
+          "radius": 2.5,
+          "description": "箭位早于商队抵达就已修好，说明伏击者拿到了猎径位置，单看军靴印还不能认定泄密者。",
+          "evidence": "s19-arrowline"
+        },
+        {
+          "id": "s19-wheeltrack",
+          "label": "偏离大道的窄轮痕",
+          "action": "inspect",
+          "x": -12,
+          "z": 23,
+          "radius": 2.5,
+          "description": "窄轮痕通向磨坊，不是每个岔口都藏着同样一队敌人。侧路可以回到现场中心。",
+          "evidence": "s19-wheeltrack"
+        }
+      ],
+      "enemies": [
+        {
+          "id": "s19-road-raider",
+          "kind": "raider",
+          "x": 15,
+          "z": 1
+        },
+        {
+          "id": "s19-arrow-archer",
+          "kind": "archer",
+          "x": -14,
+          "z": 2
+        },
+        {
+          "id": "s19-flank-raider",
+          "kind": "raider",
+          "x": 31,
+          "z": 7
+        }
+      ],
+      "exits": [
+        {
+          "id": "road-S19-S02",
+          "to": "S02",
+          "label": "返回南渡码头",
+          "x": -70,
+          "z": 0,
+          "entry": {
+            "x": 60,
+            "z": 0
+          }
+        },
+        {
+          "id": "road-S19-S03",
+          "to": "S03",
+          "label": "返回农庄与墓园",
+          "x": 0,
+          "z": 62,
+          "entry": {
+            "x": 0,
+            "z": -54
+          }
+        },
+        {
+          "id": "road-S19-S05",
+          "to": "S05",
+          "label": "返回白桦猎场",
+          "x": 70,
+          "z": 0,
+          "entry": {
+            "x": -66,
+            "z": 0
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -32,
+          "z": 30,
+          "width": 20,
+          "depth": 14,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "x": 32,
+          "z": -29,
+          "width": 18,
+          "depth": 14,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": -32,
+          "z": -30,
+          "width": 20,
+          "depth": 14,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "kind": "tree",
+          "x": 47,
+          "z": 34,
+          "width": 4,
+          "depth": 4,
+          "height": 11
+        },
+        {
+          "kind": "tree",
+          "x": -48,
+          "z": -42,
+          "width": 4,
+          "depth": 4,
+          "height": 10
+        },
+        {
+          "kind": "rock",
+          "x": 47,
+          "z": -39,
+          "width": 7,
+          "depth": 6,
+          "height": 4
+        },
+        {
+          "kind": "barrel",
+          "x": 22,
+          "z": 22,
+          "width": 2,
+          "depth": 2,
+          "height": 2
+        }
+      ]
+    },
+    "S20": {
+      "id": "S20",
+      "name": "铁脊观察台",
+      "subtitle": "西侧山脊路径接镇与军营，观察屋旁的旧路标仍能扶正。",
+      "kind": "wild",
+      "palette": "stone",
+      "width": 128,
+      "depth": 120,
+      "atlas": {
+        "x": 8,
+        "z": 65
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "铁脊旧警戒屋",
+          "style": "house",
+          "x": -28,
+          "z": 28,
+          "width": 20,
+          "depth": 16,
+          "height": 7
+        },
+        {
+          "name": "山脊观察残塔",
+          "style": "tower",
+          "x": 29,
+          "z": 28,
+          "width": 14,
+          "depth": 14,
+          "height": 12
+        },
+        {
+          "name": "背风修路棚",
+          "style": "workshop",
+          "x": -28,
+          "z": -27,
+          "width": 18,
+          "depth": 14,
+          "height": 5
+        }
+      ],
+      "objects": [
+        {
+          "id": "find-a14",
+          "label": "旧路标后的背囊",
+          "action": "cache",
+          "x": 17,
+          "z": 26,
+          "radius": 2.5,
+          "description": "林海行者短靴收在修路人的背囊里，装备独立记录，不被道标事件或材料结算吞掉。",
+          "item": "A14",
+          "amount": 1
+        },
+        {
+          "id": "s20-sign-fee",
+          "label": "道标背旧驿费袋",
+          "action": "cache",
+          "x": -28,
+          "z": 16,
+          "radius": 2.5,
+          "description": "驿费袋只剩十五枚旧币，和短靴、道标各有独立收据；普通休整不会补回。",
+          "item": "gold",
+          "amount": 15
+        },
+        {
+          "id": "s20-sign",
+          "label": "扶正旧誓道标",
+          "action": "inspect",
+          "x": -13,
+          "z": 25,
+          "radius": 2.5,
+          "description": "道标背面描着弯枝与双钉，把谷中隐龛同磨坊收条连起来；它不是必需钥匙。",
+          "evidence": "s20-sign"
+        },
+        {
+          "id": "s20-view",
+          "label": "军营侧背的观察位",
+          "action": "inspect",
+          "x": 29,
+          "z": 16,
+          "radius": 2.5,
+          "description": "看得到军需仓的运水面，山脊石壁仍会挡住射线；情报要靠亲自接近才能利用。",
+          "evidence": "s20-view"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "road-S20-S01",
+          "to": "S01",
+          "label": "返回石桥镇",
+          "x": 0,
+          "z": -58,
+          "entry": {
+            "x": 0,
+            "z": 66
+          }
+        },
+        {
+          "id": "road-S20-S09",
+          "to": "S09",
+          "label": "返回灰披军营",
+          "x": 62,
+          "z": 0,
+          "entry": {
+            "x": -72,
+            "z": 0
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -28,
+          "z": 28,
+          "width": 20,
+          "depth": 16,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "x": 29,
+          "z": 28,
+          "width": 14,
+          "depth": 14,
+          "height": 12,
+          "kind": "building"
+        },
+        {
+          "x": -28,
+          "z": -27,
+          "width": 18,
+          "depth": 14,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "kind": "rock",
+          "x": 44,
+          "z": -25,
+          "width": 10,
+          "depth": 20,
+          "height": 7
+        },
+        {
+          "kind": "rock",
+          "x": -43,
+          "z": 1,
+          "width": 8,
+          "depth": 14,
+          "height": 5
+        }
+      ]
+    },
+    "S01-T1": {
+      "id": "S01-T1",
+      "name": "第三杯旅店",
+      "subtitle": "公共厅后是客房与厨房，两道侧门实际连着镇内街巷。",
+      "kind": "interior",
+      "palette": "warm",
+      "width": 36,
+      "depth": 32,
+      "atlas": {
+        "x": 18,
+        "z": 40
+      },
+      "spawn": {
+        "x": 0,
+        "z": -7
+      },
+      "buildings": [],
+      "objects": [
+        {
+          "id": "t1-mira",
+          "label": "弥菈：一份遗库委托",
+          "action": "offer",
+          "x": -5,
+          "z": 0,
+          "radius": 2.5,
+          "description": "弥菈把试光样片移到背光处：“拿回遗物匣，先谈清分成。”她衣内另有一份近日求援信抄件。",
+          "actor": "mira",
+          "merchant": "mira"
+        },
+        {
+          "id": "t1-lockbox",
+          "label": "巧手 · 遗落的铜簧匣",
+          "action": "dice_check",
+          "x": 4,
+          "z": -5,
+          "radius": 2.5,
+          "description": "无人认领的铜簧匣；尝试巧手检定，失败不影响委托。",
+          "check": "inn-lockbox"
+        },
+        {
+          "id": "t1-thirdcup",
+          "label": "倒扣的第三只杯子",
+          "action": "inspect",
+          "x": -8,
+          "z": 3,
+          "radius": 2.5,
+          "description": "杯底留着旧磨痕。问起给谁，弥菈说是一个欠她钱的人，却没有说出名字。",
+          "evidence": "t1-thirdcup"
+        },
+        {
+          "id": "t1-sample",
+          "label": "只含零散星点的试光样片",
+          "action": "inspect",
+          "x": -2,
+          "z": 4,
+          "radius": 2.5,
+          "description": "样片在背光下才有星点，无法显示完整路线；原信与完整星片仍在隘口的遗物匣里。",
+          "evidence": "t1-sample"
+        },
+        {
+          "id": "t1-guestbook",
+          "label": "旅店最近的住客簿",
+          "action": "inspect",
+          "x": 10,
+          "z": 9,
+          "radius": 2.5,
+          "description": "信使先送抄件与样片，再返程运原件。两次来访日期不同，来路可以独立核对。",
+          "evidence": "t1-guestbook"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "door-town-1-S01-T1",
+          "to": "S01",
+          "x": 0,
+          "z": -14.4,
+          "label": "回到石桥镇街面",
+          "entry": {
+            "x": -31.587995226998466,
+            "z": -19.220113194742506
+          }
+        },
+        {
+          "id": "town-lane-12-S01-T1",
+          "to": "S01-T2",
+          "x": 16.4,
+          "z": 0,
+          "label": "沿后巷去行会",
+          "entry": {
+            "x": -12.213717328880882,
+            "z": -1.448310305054144
+          }
+        },
+        {
+          "id": "town-lane-41-S01-T1",
+          "to": "S01-T4",
+          "x": -16.4,
+          "z": 0,
+          "label": "回渡口街仓院",
+          "entry": {
+            "x": 17.089473788183682,
+            "z": -1.1359648766036377
+          }
+        }
+      ],
+      "checkpoint": true,
+      "obstacles": [
+        {
+          "kind": "wall",
+          "x": 0,
+          "z": 15.7,
+          "width": 36,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 17.7,
+          "z": -9,
+          "width": 0.6,
+          "depth": 14,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 17.7,
+          "z": 9,
+          "width": 0.6,
+          "depth": 14,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -10,
+          "z": -15.7,
+          "width": 16,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 10,
+          "z": -15.7,
+          "width": 16,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -17.7,
+          "z": -9,
+          "width": 0.6,
+          "depth": 14,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -17.7,
+          "z": 9,
+          "width": 0.6,
+          "depth": 14,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -14,
+          "z": 7,
+          "width": 8,
+          "depth": 0.5,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 0,
+          "z": 7,
+          "width": 12,
+          "depth": 0.5,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 14,
+          "z": 7,
+          "width": 8,
+          "depth": 0.5,
+          "height": 3.2
+        },
+        {
+          "kind": "table",
+          "x": -5,
+          "z": 3,
+          "width": 4,
+          "depth": 2,
+          "height": 0.9
+        },
+        {
+          "kind": "bench",
+          "x": -5,
+          "z": -2,
+          "width": 4,
+          "depth": 0.7,
+          "height": 0.55
+        },
+        {
+          "kind": "shelf",
+          "x": 12,
+          "z": 13,
+          "width": 6,
+          "depth": 1.2,
+          "height": 2
+        },
+        {
+          "kind": "table",
+          "x": 10,
+          "z": 12,
+          "width": 3,
+          "depth": 2,
+          "height": 0.9
+        }
+      ]
+    },
+    "S01-T2": {
+      "id": "S01-T2",
+      "name": "行会办事处与副本室",
+      "subtitle": "等候厅通往两间副本室，纸上记录能独立核对。",
+      "kind": "interior",
+      "palette": "warm",
+      "width": 34,
+      "depth": 30,
+      "atlas": {
+        "x": 18,
+        "z": 40
+      },
+      "spawn": {
+        "x": 0,
+        "z": -7
+      },
+      "buildings": [],
+      "objects": [
+        {
+          "id": "t2-independent",
+          "label": "查阅信使的独立报失副本",
+          "action": "independent_clue",
+          "x": -10,
+          "z": 9,
+          "radius": 2.5,
+          "description": "报失副本注明遗物匣遭截与近日求援日期。你可以带着不信任独立追查，接约不是唯一入局方式。",
+          "evidence": "t2-courier-copy"
+        },
+        {
+          "id": "t2-contract",
+          "label": "两份契约的装订孔",
+          "action": "inspect",
+          "x": 10,
+          "z": 9,
+          "radius": 2.5,
+          "description": "公开副本比弥菈手里的契约少一页，装订孔证明附约被抽走；后面仍需名单和活人作证。",
+          "evidence": "t2-contract"
+        },
+        {
+          "id": "t2-notice",
+          "label": "行会的证人回返告示",
+          "action": "inspect",
+          "x": -7,
+          "z": -8,
+          "radius": 2.5,
+          "description": "安全撤回的人在广场登记，再到相应工坊安置；空白栏位不是已经完成的救援。",
+          "evidence": "t2-notice"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "door-town-2-S01-T2",
+          "to": "S01",
+          "x": 0,
+          "z": -13.4,
+          "label": "回到石桥镇街面",
+          "entry": {
+            "x": 32.41689915799204,
+            "z": 17.638307801592724
+          }
+        },
+        {
+          "id": "town-lane-12-S01-T2",
+          "to": "S01-T1",
+          "x": -15.4,
+          "z": 0,
+          "label": "沿后巷回旅店",
+          "entry": {
+            "x": 13.18096537413684,
+            "z": -1.3739781939659832
+          }
+        },
+        {
+          "id": "town-lane-26-S01-T2",
+          "to": "S01-T6",
+          "x": 0,
+          "z": 13.4,
+          "label": "步行前往广场",
+          "entry": {
+            "x": 0,
+            "z": -14.899999999999999
+          }
+        },
+        {
+          "id": "town-lane-52-S01-T2",
+          "to": "S01-T5",
+          "x": 15.4,
+          "z": 0,
+          "label": "沿侧道去拘留所",
+          "entry": {
+            "x": -11.252212510516081,
+            "z": -1.530174474054683
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "kind": "wall",
+          "x": -9.5,
+          "z": 14.7,
+          "width": 15,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 9.5,
+          "z": 14.7,
+          "width": 15,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 16.7,
+          "z": -8.5,
+          "width": 0.6,
+          "depth": 13,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 16.7,
+          "z": 8.5,
+          "width": 0.6,
+          "depth": 13,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -9.5,
+          "z": -14.7,
+          "width": 15,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 9.5,
+          "z": -14.7,
+          "width": 15,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -16.7,
+          "z": -8.5,
+          "width": 0.6,
+          "depth": 13,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -16.7,
+          "z": 8.5,
+          "width": 0.6,
+          "depth": 13,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -13,
+          "z": 5,
+          "width": 8,
+          "depth": 0.5,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 0,
+          "z": 5,
+          "width": 10,
+          "depth": 0.5,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 13,
+          "z": 5,
+          "width": 8,
+          "depth": 0.5,
+          "height": 3.2
+        },
+        {
+          "kind": "shelf",
+          "x": -11,
+          "z": 12,
+          "width": 8,
+          "depth": 1.2,
+          "height": 2
+        },
+        {
+          "kind": "shelf",
+          "x": 11,
+          "z": 12,
+          "width": 8,
+          "depth": 1.2,
+          "height": 2
+        },
+        {
+          "kind": "table",
+          "x": -10,
+          "z": 7,
+          "width": 4,
+          "depth": 2,
+          "height": 0.9
+        },
+        {
+          "kind": "table",
+          "x": 8,
+          "z": -7,
+          "width": 4,
+          "depth": 2,
+          "height": 0.9
+        }
+      ]
+    },
+    "S01-T3": {
+      "id": "S01-T3",
+      "name": "铁匠街与洛恩工坊",
+      "subtitle": "锻造间与测绘小室分开，南面的工作院留着试装空间。",
+      "kind": "interior",
+      "palette": "warm",
+      "width": 40,
+      "depth": 32,
+      "atlas": {
+        "x": 18,
+        "z": 40
+      },
+      "spawn": {
+        "x": 0,
+        "z": -7
+      },
+      "buildings": [],
+      "objects": [
+        {
+          "id": "t3-lorn",
+          "label": "洛恩：失踪的测绘学徒",
+          "action": "merchant",
+          "x": -11,
+          "z": 9,
+          "radius": 2.5,
+          "description": "洛恩认得三短一长的维修锤痕，谈起凯尔时把盾放下。工坊提供阵线之锚的唯一付费来源。",
+          "actor": "lorn",
+          "merchant": "lorn"
+        },
+        {
+          "id": "find-j08",
+          "label": "可跳过的整备教学：归乡信物",
+          "action": "cache",
+          "x": -5,
+          "z": -5,
+          "radius": 2.5,
+          "description": "洛恩把归乡信物放在教学台上。拿取不要求击打次数，跳过讲解也保留唯一领取记录。",
+          "item": "J08",
+          "amount": 1
+        },
+        {
+          "id": "t3-measure",
+          "label": "凯尔未完成的通路图",
+          "action": "inspect",
+          "x": 11,
+          "z": 9,
+          "radius": 2.5,
+          "description": "图上每一段退路都有测距，空白指向石场和地下旧居；凯尔想画人人都能走的地图。",
+          "evidence": "t3-measure"
+        },
+        {
+          "id": "t3-transfer",
+          "label": "阵线之锚送修单",
+          "action": "inspect",
+          "x": 11,
+          "z": -7,
+          "radius": 2.5,
+          "description": "旧军需箱中的靴子已经送到此处，价签三十二币；旧箱不会再复制一双。",
+          "evidence": "t3-transfer"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "door-town-3-S01-T3",
+          "to": "S01",
+          "x": 0,
+          "z": -14.4,
+          "label": "回到石桥镇街面",
+          "entry": {
+            "x": -32.41689915799204,
+            "z": 17.638307801592724
+          }
+        },
+        {
+          "id": "town-lane-63-S01-T3",
+          "to": "S01-T6",
+          "x": 18.4,
+          "z": 0,
+          "label": "沿石路回广场",
+          "entry": {
+            "x": -19.059320076877395,
+            "z": -1.0439624759758137
+          }
+        },
+        {
+          "id": "town-lane-34-S01-T3",
+          "to": "S01-T4",
+          "x": 0,
+          "z": 14.4,
+          "label": "沿坡街去仓院",
+          "entry": {
+            "x": 0,
+            "z": 12.899999999999999
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "kind": "wall",
+          "x": -11,
+          "z": 15.7,
+          "width": 18,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 11,
+          "z": 15.7,
+          "width": 18,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 19.7,
+          "z": -9,
+          "width": 0.6,
+          "depth": 14,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 19.7,
+          "z": 9,
+          "width": 0.6,
+          "depth": 14,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -11,
+          "z": -15.7,
+          "width": 18,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 11,
+          "z": -15.7,
+          "width": 18,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -19.7,
+          "z": 0,
+          "width": 0.6,
+          "depth": 32,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -11.5,
+          "z": 5,
+          "width": 17,
+          "depth": 0.5,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 11.5,
+          "z": 5,
+          "width": 17,
+          "depth": 0.5,
+          "height": 3.2
+        },
+        {
+          "kind": "forge",
+          "x": -12,
+          "z": 12,
+          "width": 5,
+          "depth": 3,
+          "height": 1.5
+        },
+        {
+          "kind": "shelf",
+          "x": 12,
+          "z": 12,
+          "width": 8,
+          "depth": 1.5,
+          "height": 2
+        },
+        {
+          "kind": "table",
+          "x": 10,
+          "z": -10,
+          "width": 5,
+          "depth": 2,
+          "height": 0.9
+        },
+        {
+          "kind": "bench",
+          "x": -12,
+          "z": -9,
+          "width": 6,
+          "depth": 1,
+          "height": 0.55
+        }
+      ]
+    },
+    "S01-T4": {
+      "id": "S01-T4",
+      "name": "渡口街与镇仓院",
+      "subtitle": "北仓与票房隔着装卸门道，临水工作院接回旅店街。",
+      "kind": "interior",
+      "palette": "marsh",
+      "width": 44,
+      "depth": 36,
+      "atlas": {
+        "x": 18,
+        "z": 40
+      },
+      "spawn": {
+        "x": 0,
+        "z": -7
+      },
+      "buildings": [],
+      "objects": [
+        {
+          "id": "t4-courier",
+          "label": "信使到镇的签收印",
+          "action": "inspect",
+          "x": -12,
+          "z": 9,
+          "radius": 2.5,
+          "description": "先到的是不含路线的样片与抄件，第二趟原件没有抵镇。签收印与南渡底簿可交叉核对。",
+          "evidence": "t4-courier"
+        },
+        {
+          "id": "t4-warehouse",
+          "label": "不一致的转运货号",
+          "action": "inspect",
+          "x": 12,
+          "z": 9,
+          "radius": 2.5,
+          "description": "同一货号在军营与镇仓出现两种收费标准；这里只是转运证据，不要求跑一趟送货任务。",
+          "evidence": "t4-warehouse"
+        },
+        {
+          "id": "t4-watergate",
+          "label": "通向南渡的水门街",
+          "action": "inspect",
+          "x": -5,
+          "z": -10,
+          "radius": 2.5,
+          "description": "街面上的退水线指向真正的南渡码头，镇内部街路不额外充当检查点或传送奖励。",
+          "evidence": "t4-watergate"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "door-town-4-S01-T4",
+          "to": "S01",
+          "x": 0,
+          "z": -16.4,
+          "label": "回到石桥镇街面",
+          "entry": {
+            "x": 31.587995226998466,
+            "z": -19.220113194742506
+          }
+        },
+        {
+          "id": "town-lane-34-S01-T4",
+          "to": "S01-T3",
+          "x": 0,
+          "z": 16.4,
+          "label": "沿坡街回工坊",
+          "entry": {
+            "x": 0,
+            "z": 10.9
+          }
+        },
+        {
+          "id": "town-lane-41-S01-T4",
+          "to": "S01-T1",
+          "x": 20.4,
+          "z": 0,
+          "label": "沿渡口街去旅店",
+          "entry": {
+            "x": -13.18096537413684,
+            "z": -1.3739781939659832
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "kind": "wall",
+          "x": -12,
+          "z": 17.7,
+          "width": 20,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 12,
+          "z": 17.7,
+          "width": 20,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 21.7,
+          "z": -10,
+          "width": 0.6,
+          "depth": 16,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 21.7,
+          "z": 10,
+          "width": 0.6,
+          "depth": 16,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -12,
+          "z": -17.7,
+          "width": 20,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 12,
+          "z": -17.7,
+          "width": 20,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -21.7,
+          "z": 0,
+          "width": 0.6,
+          "depth": 36,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -13,
+          "z": 5,
+          "width": 18,
+          "depth": 0.5,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 13,
+          "z": 5,
+          "width": 18,
+          "depth": 0.5,
+          "height": 3.2
+        },
+        {
+          "kind": "shelf",
+          "x": -13,
+          "z": 14,
+          "width": 10,
+          "depth": 1.2,
+          "height": 2
+        },
+        {
+          "kind": "table",
+          "x": 12,
+          "z": 12,
+          "width": 6,
+          "depth": 2,
+          "height": 0.9
+        },
+        {
+          "kind": "bench",
+          "x": 9,
+          "z": -10,
+          "width": 5,
+          "depth": 1,
+          "height": 0.55
+        }
+      ]
+    },
+    "S01-T5": {
+      "id": "S01-T5",
+      "name": "拘留所与值房",
+      "subtitle": "中央走廊连接值班桌和旧拘留间，外门通行会和广场。",
+      "kind": "interior",
+      "palette": "stone",
+      "width": 32,
+      "depth": 30,
+      "atlas": {
+        "x": 18,
+        "z": 40
+      },
+      "spawn": {
+        "x": 0,
+        "z": -7
+      },
+      "buildings": [],
+      "objects": [
+        {
+          "id": "t5-registry",
+          "label": "没有审判日期的登记簿",
+          "action": "inspect",
+          "x": -10,
+          "z": 8,
+          "radius": 2.5,
+          "description": "登记簿把工役写成暂押，日期栏却空了十八年；此处与未来的救援结果分别记录。",
+          "evidence": "t5-registry"
+        },
+        {
+          "id": "t5-watch",
+          "label": "值房交接牌",
+          "action": "inspect",
+          "x": 10,
+          "z": 8,
+          "radius": 2.5,
+          "description": "镇拘留所只负责本地登记，灰披军的命令不能自动让所有岗哨放行，也不能代替现场救人。",
+          "evidence": "t5-watch"
+        },
+        {
+          "id": "t5-evidence",
+          "label": "证物转交清单",
+          "action": "inspect",
+          "x": 10,
+          "z": -6,
+          "radius": 2.5,
+          "description": "清单指向军营原令，不会凭一张纸就完成队长战或领取扣货架上的装备。",
+          "evidence": "t5-evidence"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "door-town-5-S01-T5",
+          "to": "S01",
+          "x": 0,
+          "z": -13.4,
+          "label": "回到石桥镇街面",
+          "entry": {
+            "x": 0,
+            "z": 40.5
+          }
+        },
+        {
+          "id": "town-lane-52-S01-T5",
+          "to": "S01-T2",
+          "x": -14.4,
+          "z": 0,
+          "label": "沿值房侧道去行会",
+          "entry": {
+            "x": 12.213717328880882,
+            "z": -1.448310305054144
+          }
+        },
+        {
+          "id": "town-lane-56-S01-T5",
+          "to": "S01-T6",
+          "x": 0,
+          "z": 13.4,
+          "label": "由正门去广场",
+          "entry": {
+            "x": 0,
+            "z": 14.899999999999999
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "kind": "wall",
+          "x": -9,
+          "z": 14.7,
+          "width": 14,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 9,
+          "z": 14.7,
+          "width": 14,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 15.7,
+          "z": 0,
+          "width": 0.6,
+          "depth": 30,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -9,
+          "z": -14.7,
+          "width": 14,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 9,
+          "z": -14.7,
+          "width": 14,
+          "depth": 0.6,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -15.7,
+          "z": -8.5,
+          "width": 0.6,
+          "depth": 13,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -15.7,
+          "z": 8.5,
+          "width": 0.6,
+          "depth": 13,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": -6,
+          "z": 10,
+          "width": 0.5,
+          "depth": 10,
+          "height": 3.2
+        },
+        {
+          "kind": "wall",
+          "x": 6,
+          "z": 10,
+          "width": 0.5,
+          "depth": 10,
+          "height": 3.2
+        },
+        {
+          "kind": "table",
+          "x": -10,
+          "z": 11,
+          "width": 5,
+          "depth": 2,
+          "height": 0.9
+        },
+        {
+          "kind": "shelf",
+          "x": 10,
+          "z": 12,
+          "width": 6,
+          "depth": 1.2,
+          "height": 2
+        },
+        {
+          "kind": "shelf",
+          "x": 11,
+          "z": -10,
+          "width": 6,
+          "depth": 1.2,
+          "height": 2
+        }
+      ]
+    },
+    "S01-T6": {
+      "id": "S01-T6",
+      "name": "广场与回返接洽点",
+      "subtitle": "围合小广场里桌椅等着真实回返的人，石路接行会与铁匠街。",
+      "kind": "interior",
+      "palette": "meadow",
+      "width": 48,
+      "depth": 40,
+      "atlas": {
+        "x": 18,
+        "z": 40
+      },
+      "spawn": {
+        "x": 0,
+        "z": -7
+      },
+      "buildings": [],
+      "objects": [
+        {
+          "id": "t6-return",
+          "label": "尚待填写的回返记录",
+          "action": "inspect",
+          "x": -12,
+          "z": 7,
+          "radius": 2.5,
+          "description": "姓名只有在人实际安全撤回后才填上。广场没有复制一位仍在地下的学徒或守卫。",
+          "evidence": "t6-return"
+        },
+        {
+          "id": "t6-line",
+          "label": "通往工坊的测距刻线",
+          "action": "inspect",
+          "x": 12,
+          "z": 7,
+          "radius": 2.5,
+          "description": "凯尔曾沿这条线练习测绘，石路现在仍能通往洛恩工坊；地图需要亲自走过才算可用。",
+          "evidence": "t6-line"
+        },
+        {
+          "id": "t6-table",
+          "label": "三把不同高度的椅子",
+          "action": "inspect",
+          "x": 12,
+          "z": -9,
+          "radius": 2.5,
+          "description": "椅子为伤者、工匠与普通旅人留出位置。等待回返不会自动产生额外金币或物资。",
+          "evidence": "t6-table"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "door-town-6-S01-T6",
+          "to": "S01",
+          "x": 22.4,
+          "z": 0,
+          "label": "回到石桥镇街面",
+          "entry": {
+            "x": 0,
+            "z": -40.5
+          }
+        },
+        {
+          "id": "town-lane-26-S01-T6",
+          "to": "S01-T2",
+          "x": 0,
+          "z": -18.4,
+          "label": "回行会办事处",
+          "entry": {
+            "x": 0,
+            "z": 9.9
+          }
+        },
+        {
+          "id": "town-lane-63-S01-T6",
+          "to": "S01-T3",
+          "x": -22.4,
+          "z": 0,
+          "label": "穿过广场去铁匠街",
+          "entry": {
+            "x": 15.128729978286836,
+            "z": -1.24450489956479
+          }
+        },
+        {
+          "id": "town-lane-56-S01-T6",
+          "to": "S01-T5",
+          "x": 0,
+          "z": 18.4,
+          "label": "走向拘留所值房",
+          "entry": {
+            "x": 0,
+            "z": 9.9
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "kind": "wall",
+          "x": -13,
+          "z": 19.7,
+          "width": 22,
+          "depth": 0.6,
+          "height": 1.3
+        },
+        {
+          "kind": "wall",
+          "x": 13,
+          "z": 19.7,
+          "width": 22,
+          "depth": 0.6,
+          "height": 1.3
+        },
+        {
+          "kind": "wall",
+          "x": 23.7,
+          "z": -11,
+          "width": 0.6,
+          "depth": 18,
+          "height": 1.3
+        },
+        {
+          "kind": "wall",
+          "x": 23.7,
+          "z": 11,
+          "width": 0.6,
+          "depth": 18,
+          "height": 1.3
+        },
+        {
+          "kind": "wall",
+          "x": -13,
+          "z": -19.7,
+          "width": 22,
+          "depth": 0.6,
+          "height": 1.3
+        },
+        {
+          "kind": "wall",
+          "x": 13,
+          "z": -19.7,
+          "width": 22,
+          "depth": 0.6,
+          "height": 1.3
+        },
+        {
+          "kind": "wall",
+          "x": -23.7,
+          "z": -11,
+          "width": 0.6,
+          "depth": 18,
+          "height": 1.3
+        },
+        {
+          "kind": "wall",
+          "x": -23.7,
+          "z": 11,
+          "width": 0.6,
+          "depth": 18,
+          "height": 1.3
+        },
+        {
+          "kind": "wall",
+          "x": -14,
+          "z": 15,
+          "width": 14,
+          "depth": 0.6,
+          "height": 1.3
+        },
+        {
+          "kind": "wall",
+          "x": 14,
+          "z": 15,
+          "width": 14,
+          "depth": 0.6,
+          "height": 1.3
+        },
+        {
+          "kind": "table",
+          "x": -12,
+          "z": 10,
+          "width": 5,
+          "depth": 2,
+          "height": 0.9
+        },
+        {
+          "kind": "bench",
+          "x": 12,
+          "z": 10,
+          "width": 6,
+          "depth": 1,
+          "height": 0.55
+        },
+        {
+          "kind": "shelf",
+          "x": 13,
+          "z": -12,
+          "width": 6,
+          "depth": 1.2,
+          "height": 1.6
+        }
+      ]
+    },
+    "U1-01": {
+      "id": "U1-01",
+      "name": "地下货栈",
+      "subtitle": "装卸洞厅的旧账架之间仍留着交涉与侧行的空间。",
+      "kind": "underground",
+      "palette": "cave",
+      "width": 136,
+      "depth": 116,
+      "atlas": {
+        "x": 60,
+        "z": 52
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "旧账架室",
+          "style": "house",
+          "x": -30,
+          "z": 27,
+          "width": 22,
+          "depth": 16,
+          "height": 5
+        },
+        {
+          "name": "看守卸货房",
+          "style": "workshop",
+          "x": 31,
+          "z": 27,
+          "width": 22,
+          "depth": 16,
+          "height": 6
+        },
+        {
+          "name": "侧道货物棚",
+          "style": "barn",
+          "x": 31,
+          "z": -28,
+          "width": 22,
+          "depth": 16,
+          "height": 6
+        }
+      ],
+      "objects": [
+        {
+          "id": "u101-ledger",
+          "label": "仍在更新的转运账",
+          "action": "inspect",
+          "x": -30,
+          "z": 15,
+          "radius": 2.5,
+          "description": "账本记着活人的口粮、劳役和向庄园收款的货号；它同时回应契约与猎径，却不是两次领奖。",
+          "evidence": "u101-ledger"
+        },
+        {
+          "id": "u101-living",
+          "label": "用头盔作锅盖的灶痕",
+          "action": "inspect",
+          "x": 16,
+          "z": -25,
+          "radius": 2.5,
+          "description": "锅盖边是今天才落下的面粉，早已宣布阵亡的队伍并没有停止生活。",
+          "evidence": "u101-living"
+        },
+        {
+          "id": "u101-watch",
+          "label": "可说话的看守留下的便笺",
+          "action": "inspect",
+          "x": 31,
+          "z": 15,
+          "radius": 2.5,
+          "description": "便笺提醒交班者别堵住侧通道。局部交涉失败仍可沿另一侧接近，不会把E01永久焊死。",
+          "evidence": "u101-watch"
+        }
+      ],
+      "enemies": [
+        {
+          "id": "u101-watch-raider",
+          "kind": "raider",
+          "x": 15,
+          "z": 0
+        },
+        {
+          "id": "u101-watch-shield",
+          "kind": "shield",
+          "x": 31,
+          "z": 0
+        }
+      ],
+      "exits": [
+        {
+          "id": "E01-U1-01",
+          "to": "S07",
+          "x": 0,
+          "z": -54,
+          "label": "沿干阶回废磨坊村",
+          "entry": {
+            "x": -13.870641252741514,
+            "z": 28.68721434137511
+          },
+          "requires": "e01_open"
+        },
+        {
+          "id": "u1-corridor-0102-U1-01",
+          "to": "U1-02",
+          "x": -66,
+          "z": 0,
+          "label": "沿岩廊去回声洞",
+          "entry": {
+            "x": 58.563770522934014,
+            "z": -0.6650766729805132
+          }
+        },
+        {
+          "id": "u1-corridor-0103-U1-01",
+          "to": "U1-03",
+          "x": 66,
+          "z": 0,
+          "label": "进入分段支护的采掘廊",
+          "entry": {
+            "x": -66.55032210815357,
+            "z": -0.59137335288796
+          }
+        },
+        {
+          "id": "u1-corridor-0104-U1-01",
+          "to": "U1-04",
+          "x": 0,
+          "z": 56,
+          "label": "顺着面包气味去工匠旧居",
+          "entry": {
+            "x": 0,
+            "z": -58.5
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -30,
+          "z": 27,
+          "width": 22,
+          "depth": 16,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "x": 31,
+          "z": 27,
+          "width": 22,
+          "depth": 16,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": 31,
+          "z": -28,
+          "width": 22,
+          "depth": 16,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "kind": "rock",
+          "x": -47,
+          "z": -26,
+          "width": 9,
+          "depth": 24,
+          "height": 6
+        },
+        {
+          "kind": "crate",
+          "x": 45,
+          "z": 28,
+          "width": 4,
+          "depth": 6,
+          "height": 3
+        }
+      ]
+    },
+    "U1-02": {
+      "id": "U1-02",
+      "name": "回声洞",
+      "subtitle": "天然洞厅里高低岩台相通，石门内楔就在洞侧。",
+      "kind": "underground",
+      "palette": "cave",
+      "width": 128,
+      "depth": 116,
+      "atlas": {
+        "x": 64,
+        "z": 70
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "旧测声棚",
+          "style": "workshop",
+          "x": -28,
+          "z": 27,
+          "width": 20,
+          "depth": 14,
+          "height": 5
+        },
+        {
+          "name": "通地表的石门基座",
+          "style": "gate",
+          "x": 29,
+          "z": 27,
+          "width": 20,
+          "depth": 16,
+          "height": 9
+        },
+        {
+          "name": "岩台避风小室",
+          "style": "ruin",
+          "x": -28,
+          "z": -27,
+          "width": 18,
+          "depth": 14,
+          "height": 5
+        }
+      ],
+      "objects": [
+        {
+          "id": "u102-echo",
+          "label": "三次相同的敲击",
+          "action": "inspect",
+          "x": -28,
+          "z": 16,
+          "radius": 2.5,
+          "description": "白枝金属重放同一段敲击，间隔没有变化；记录缺少视角，不能当成此刻的呼救者。",
+          "evidence": "u102-echo"
+        },
+        {
+          "id": "u102-wedge",
+          "label": "E03石门的内楔",
+          "action": "inspect",
+          "x": 16,
+          "z": 27,
+          "radius": 2.5,
+          "description": "从这一侧解开门楔，才会把峭壁洞窟变成双向返回出口；门外的人无法隔墙首次操作。",
+          "evidence": "u102-wedge"
+        },
+        {
+          "id": "u102-ramp",
+          "label": "连接高低岩台的干坡",
+          "action": "inspect",
+          "x": -12,
+          "z": -24,
+          "radius": 2.5,
+          "description": "碎石铺出的干坡有完整脚印，从回声源可步行退回货栈，不需要坠落或跳跃系统。",
+          "evidence": "u102-ramp"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "E03-U1-02",
+          "to": "S17",
+          "x": 16,
+          "z": 30,
+          "label": "从内侧解开石门，走向峭壁洞窟",
+          "entry": {
+            "x": 13.822822610506453,
+            "z": 26.70390330941807
+          },
+          "unlock": "e03_open"
+        },
+        {
+          "id": "u1-corridor-0102-U1-02",
+          "to": "U1-01",
+          "x": 62,
+          "z": 0,
+          "label": "沿岩廊回地下货栈",
+          "entry": {
+            "x": -62.55645531465032,
+            "z": -0.6260990336999411
+          }
+        },
+        {
+          "id": "u1-corridor-0204-U1-02",
+          "to": "U1-04",
+          "x": 0,
+          "z": 56,
+          "label": "沿干坡去工匠旧居",
+          "entry": {
+            "x": -66.55032210815357,
+            "z": -0.59137335288796
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -28,
+          "z": 27,
+          "width": 20,
+          "depth": 14,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "x": 29,
+          "z": 27,
+          "width": 20,
+          "depth": 16,
+          "height": 9,
+          "kind": "building"
+        },
+        {
+          "x": -28,
+          "z": -27,
+          "width": 18,
+          "depth": 14,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "kind": "rock",
+          "x": 43,
+          "z": -24,
+          "width": 12,
+          "depth": 22,
+          "height": 8
+        },
+        {
+          "kind": "rock",
+          "x": -43,
+          "z": 0,
+          "width": 9,
+          "depth": 18,
+          "height": 5
+        }
+      ]
+    },
+    "U1-03": {
+      "id": "U1-03",
+      "name": "废采掘廊",
+      "subtitle": "分段支护把矿道分成岔口，未放下的固定梯只能从上方操作。",
+      "kind": "underground",
+      "palette": "cave",
+      "width": 144,
+      "depth": 116,
+      "atlas": {
+        "x": 80,
+        "z": 57
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "西段支护工房",
+          "style": "workshop",
+          "x": -33,
+          "z": 27,
+          "width": 24,
+          "depth": 16,
+          "height": 6
+        },
+        {
+          "name": "矿梯机台",
+          "style": "tower",
+          "x": 33,
+          "z": 27,
+          "width": 16,
+          "depth": 16,
+          "height": 10
+        },
+        {
+          "name": "东段旧工具间",
+          "style": "house",
+          "x": 33,
+          "z": -27,
+          "width": 22,
+          "depth": 16,
+          "height": 5
+        }
+      ],
+      "objects": [
+        {
+          "id": "u103-ladder",
+          "label": "固定梯下方的安全立足点",
+          "action": "inspect",
+          "x": 17,
+          "z": 27,
+          "radius": 2.5,
+          "description": "这里能够看见上方绞把，但放梯前不能够到它。可以退回E01或已开的E03，不会困在梯底。",
+          "evidence": "u103-ladder"
+        },
+        {
+          "id": "u103-marks",
+          "label": "凯尔的退路测量记号",
+          "action": "inspect",
+          "x": -33,
+          "z": 16,
+          "radius": 2.5,
+          "description": "每段岔路都标出可折返的距离，测绘者在尝试让普通工匠也能离开，而不是寻找宝箱。",
+          "evidence": "u103-marks"
+        },
+        {
+          "id": "u103-arsenal-boundary",
+          "label": "深处军械长廊与绞盘井",
+          "action": "boundary",
+          "x": 49,
+          "z": -22,
+          "radius": 2.5,
+          "description": "成段矿道继续通往U1-06与U1-09，属于后续幕的未制作空间。当前保留实体封闭面与返回路线。"
+        }
+      ],
+      "enemies": [
+        {
+          "id": "u103-prospector-raider",
+          "kind": "raider",
+          "x": 15,
+          "z": 0
+        },
+        {
+          "id": "u103-prospector-archer",
+          "kind": "archer",
+          "x": 33,
+          "z": 0
+        }
+      ],
+      "exits": [
+        {
+          "id": "E02-U1-03",
+          "to": "S13",
+          "x": 0,
+          "z": 54,
+          "label": "攀梯回旧石场",
+          "entry": {
+            "x": -12.938787199530685,
+            "z": 28.664759769953584
+          },
+          "requires": "e02_open"
+        },
+        {
+          "id": "u1-corridor-0103-U1-03",
+          "to": "U1-01",
+          "x": -70,
+          "z": 0,
+          "label": "沿装卸道回地下货栈",
+          "entry": {
+            "x": 62.55645531465032,
+            "z": -0.6260990336999411
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -33,
+          "z": 27,
+          "width": 24,
+          "depth": 16,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": 33,
+          "z": 27,
+          "width": 16,
+          "depth": 16,
+          "height": 10,
+          "kind": "building"
+        },
+        {
+          "x": 33,
+          "z": -27,
+          "width": 22,
+          "depth": 16,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "kind": "rock",
+          "x": -49,
+          "z": -27,
+          "width": 10,
+          "depth": 24,
+          "height": 7
+        },
+        {
+          "kind": "wall",
+          "x": 34,
+          "z": 42,
+          "width": 22,
+          "depth": 2,
+          "height": 4
+        }
+      ]
+    },
+    "U1-04": {
+      "id": "U1-04",
+      "name": "工匠旧居",
+      "subtitle": "阵亡者正在吃晚饭。长桌旁留出了测距线和一把空椅子。",
+      "kind": "underground",
+      "palette": "warm",
+      "width": 144,
+      "depth": 128,
+      "atlas": {
+        "x": 68,
+        "z": 62
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "工匠共用厨房",
+          "style": "house",
+          "x": -33,
+          "z": 30,
+          "width": 24,
+          "depth": 18,
+          "height": 6
+        },
+        {
+          "name": "伊芙琳的值守居所",
+          "style": "house",
+          "x": 34,
+          "z": 30,
+          "width": 24,
+          "depth": 18,
+          "height": 7
+        },
+        {
+          "name": "测绘与修补间",
+          "style": "workshop",
+          "x": 34,
+          "z": -29,
+          "width": 24,
+          "depth": 16,
+          "height": 6
+        },
+        {
+          "name": "工匠旧卧房",
+          "style": "house",
+          "x": -33,
+          "z": -29,
+          "width": 24,
+          "depth": 16,
+          "height": 6
+        }
+      ],
+      "objects": [
+        {
+          "id": "u104-dinner",
+          "label": "伊芙琳：阵亡者的晚饭",
+          "action": "meeting",
+          "x": -10,
+          "z": 6,
+          "radius": 2.5,
+          "description": "伊芙琳按住凯尔跨过碗沿的测距线：“吃完再量。”她问弥菈这次带了几个回来的人，旧关系在现场显露。",
+          "actor": "evelyn"
+        },
+        {
+          "id": "u104-kael",
+          "label": "凯尔：复核一张可走的退路图",
+          "action": "inspect",
+          "x": 11,
+          "z": 6,
+          "radius": 2.5,
+          "description": "凯尔先请你走一次自己测出的退路，随后才谈被押工役。他是一位有目标的成年测绘师，不是可领取的人质奖励。",
+          "actor": "kael",
+          "evidence": "u104-kael-route"
+        },
+        {
+          "id": "u104-bread",
+          "label": "用头盔压过的面团",
+          "action": "inspect",
+          "x": -33,
+          "z": 18,
+          "radius": 2.5,
+          "description": "头盔边还沾着面粉，桌边每个人都真实吃饭。碑上被宣布阵亡的姓名与眼前生活互相矛盾。",
+          "evidence": "u104-bread"
+        },
+        {
+          "id": "u104-lamp",
+          "label": "十八年换过的灯罩",
+          "action": "inspect",
+          "x": 34,
+          "z": 18,
+          "radius": 2.5,
+          "description": "灯罩修补了许多次，伊芙琳仍在准备撤离；继续值守不是别人可以替她默认的选择。",
+          "evidence": "u104-lamp"
+        },
+        {
+          "id": "u104-finish",
+          "label": "核对撤离与扣押令，结束第一幕",
+          "action": "finish",
+          "x": 0,
+          "z": -25,
+          "radius": 2.5,
+          "description": "确认救援已实际完成、灰披扣押令与星片分别结算。第一幕到此收尾，后续地区仍需要制作，不生成空地图。"
+        },
+        {
+          "id": "u104-cp",
+          "label": "工匠公共空地整备",
+          "action": "checkpoint",
+          "x": 0,
+          "z": -12,
+          "radius": 2.5,
+          "description": "公共空地可安全整备和保存，已获证据、已解救的人与地下门楔不会因普通回访重置。"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "u1-corridor-0104-U1-04",
+          "to": "U1-01",
+          "x": 0,
+          "z": -62,
+          "label": "沿公共通道回地下货栈",
+          "entry": {
+            "x": 0,
+            "z": 52.5
+          }
+        },
+        {
+          "id": "u1-corridor-0204-U1-04",
+          "to": "U1-02",
+          "x": -70,
+          "z": 0,
+          "label": "从居所侧门去回声洞",
+          "entry": {
+            "x": 0,
+            "z": 52.5
+          }
+        },
+        {
+          "id": "u1-corridor-0405-U1-04",
+          "to": "U1-05",
+          "x": 70,
+          "z": 0,
+          "label": "穿过工作带去囚工监区",
+          "entry": {
+            "x": -68.5476212665875,
+            "z": -0.5753964555687506
+          }
+        }
+      ],
+      "checkpoint": true,
+      "obstacles": [
+        {
+          "x": -33,
+          "z": 30,
+          "width": 24,
+          "depth": 18,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": 34,
+          "z": 30,
+          "width": 24,
+          "depth": 18,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "x": 34,
+          "z": -29,
+          "width": 24,
+          "depth": 16,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": -33,
+          "z": -29,
+          "width": 24,
+          "depth": 16,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "kind": "crate",
+          "x": -49,
+          "z": 28,
+          "width": 4,
+          "depth": 5,
+          "height": 2
+        }
+      ]
+    },
+    "U1-05": {
+      "id": "U1-05",
+      "name": "囚工监区",
+      "subtitle": "值房、工作带与检修侧廊围着真实的囚室，正门不是唯一接近面。",
+      "kind": "underground",
+      "palette": "cave",
+      "width": 148,
+      "depth": 128,
+      "atlas": {
+        "x": 72,
+        "z": 58
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "西侧囚工房",
+          "style": "gate",
+          "x": -34,
+          "z": 30,
+          "width": 26,
+          "depth": 18,
+          "height": 7
+        },
+        {
+          "name": "监工值房",
+          "style": "house",
+          "x": 35,
+          "z": 30,
+          "width": 24,
+          "depth": 18,
+          "height": 7
+        },
+        {
+          "name": "强制工作带",
+          "style": "workshop",
+          "x": 35,
+          "z": -30,
+          "width": 26,
+          "depth": 18,
+          "height": 7
+        },
+        {
+          "name": "检修工具小室",
+          "style": "house",
+          "x": -34,
+          "z": -29,
+          "width": 20,
+          "depth": 16,
+          "height": 5
+        }
+      ],
+      "objects": [
+        {
+          "id": "u105-release",
+          "label": "解除囚室横闩，释放工役",
+          "action": "release_workers",
+          "x": -34,
+          "z": 17,
+          "radius": 2.5,
+          "description": "囚室横闩由工作带控制。先处理现场守卫或通过检修侧廊解除陷阱，再真正带人离开危险位置。"
+        },
+        {
+          "id": "u105-trap",
+          "label": "从检修侧廊拆除诱片",
+          "action": "disable_trap",
+          "x": -34,
+          "z": -17,
+          "radius": 2.5,
+          "description": "侧廊可以徒步接近诱片背面。拆除是可选的接近方式，不消耗关键证据，也不要求先做满人物支线。"
+        },
+        {
+          "id": "u105-precision-disarm",
+          "label": "巧手 · 逆转诱片连动锁",
+          "action": "dice_check",
+          "x": -31,
+          "z": -17,
+          "radius": 2.5,
+          "description": "用巧手逆转连动锁；失败消耗20专注，仍可沿侧廊或击败守军救援。",
+          "check": "undercity-disarm"
+        },
+        {
+          "id": "u105-list",
+          "label": "附有活人指印的工役名单",
+          "action": "inspect",
+          "x": 35,
+          "z": 17,
+          "radius": 2.5,
+          "description": "名单上的指印与军营阵亡栏对应，活人证据揭开契约附约；读取和救援不是同一个动作。",
+          "evidence": "u105-list"
+        },
+        {
+          "id": "u105-tools",
+          "label": "被扣下的测距工具",
+          "action": "inspect",
+          "x": 35,
+          "z": -17,
+          "radius": 2.5,
+          "description": "工具仍标着凯尔的刻线。归还工具不会自动获得他的原谅，安全撤离与后续合作分别处理。",
+          "evidence": "u105-tools"
+        },
+        {
+          "id": "u105-furnace-boundary",
+          "label": "通往回声工坊的深廊",
+          "action": "boundary",
+          "x": -50,
+          "z": 33,
+          "radius": 2.5,
+          "description": "工作带后继续通向U1-06与U1-07，深层炉厅留待下一幕；这里没有凭空生成新Boss或新装备。"
+        }
+      ],
+      "enemies": [
+        {
+          "id": "u105-overseer-shield",
+          "kind": "shield",
+          "x": 18,
+          "z": 1
+        },
+        {
+          "id": "u105-overseer-raider",
+          "kind": "raider",
+          "x": 34,
+          "z": 0
+        },
+        {
+          "id": "u105-corridor-archer",
+          "kind": "archer",
+          "x": -18,
+          "z": 0
+        }
+      ],
+      "exits": [
+        {
+          "id": "u1-corridor-0405-U1-05",
+          "to": "U1-04",
+          "x": -72,
+          "z": 0,
+          "label": "沿检修通道回工匠旧居",
+          "entry": {
+            "x": 66.55032210815357,
+            "z": -0.59137335288796
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -34,
+          "z": 30,
+          "width": 26,
+          "depth": 18,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "x": 35,
+          "z": 30,
+          "width": 24,
+          "depth": 18,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "x": 35,
+          "z": -30,
+          "width": 26,
+          "depth": 18,
+          "height": 7,
+          "kind": "building"
+        },
+        {
+          "x": -34,
+          "z": -29,
+          "width": 20,
+          "depth": 16,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "kind": "crate",
+          "x": 49,
+          "z": 28,
+          "width": 4,
+          "depth": 5,
+          "height": 3
+        },
+        {
+          "kind": "barrel",
+          "x": 9,
+          "z": 22,
+          "width": 2,
+          "depth": 2,
+          "height": 2
+        },
+        {
+          "kind": "rock",
+          "x": -52,
+          "z": -30,
+          "width": 7,
+          "depth": 18,
+          "height": 6
+        }
+      ]
+    },
+    "U2-01": {
+      "id": "U2-01",
+      "name": "沉钟地宫·西北前厅",
+      "subtitle": "干阶、泵管与深闸构成一个能原路返回的勘探前厅。",
+      "kind": "underground",
+      "palette": "cave",
+      "width": 120,
+      "depth": 108,
+      "atlas": {
+        "x": 93,
+        "z": 12
+      },
+      "spawn": {
+        "x": 0,
+        "z": -12
+      },
+      "buildings": [
+        {
+          "name": "西北检修侧室",
+          "style": "workshop",
+          "x": -27,
+          "z": 25,
+          "width": 22,
+          "depth": 16,
+          "height": 6
+        },
+        {
+          "name": "深闸石框",
+          "style": "gate",
+          "x": 28,
+          "z": 25,
+          "width": 22,
+          "depth": 18,
+          "height": 10
+        },
+        {
+          "name": "旧探勘休息室",
+          "style": "house",
+          "x": 28,
+          "z": -25,
+          "width": 20,
+          "depth": 14,
+          "height": 5
+        }
+      ],
+      "objects": [
+        {
+          "id": "u201-dry",
+          "label": "来自泵院的稳定干阶",
+          "action": "inspect",
+          "x": -14,
+          "z": -22,
+          "radius": 2.5,
+          "description": "干阶通回古渠泵院，前厅内没有水下操作或一次性跳落；随时可以沿原路回到地表。",
+          "evidence": "u201-dry"
+        },
+        {
+          "id": "u201-gate-map",
+          "label": "深闸内侧控制示意",
+          "action": "inspect",
+          "x": -27,
+          "z": 14,
+          "radius": 2.5,
+          "description": "控制位明确画在U2-03一侧，要从河湾旧堂等合法道路进入深部再开；前厅不直通终堡。",
+          "evidence": "u201-gate-map"
+        },
+        {
+          "id": "u201-deep-gate",
+          "label": "从U2-03内部才能开启的深闸",
+          "action": "boundary",
+          "x": 28,
+          "z": 13,
+          "radius": 2.5,
+          "description": "隔着闸门能看见退水石渠，当前未制作水道长厅与闸室；没有可用的传送连接，也不会发后期主奖。"
+        },
+        {
+          "id": "u201-pipe",
+          "label": "冷水管上的旧检修符号",
+          "action": "inspect",
+          "x": 28,
+          "z": -14,
+          "radius": 2.5,
+          "description": "符号与泵院检修图一致，冷水阴影仍保留青灰；地下暖灯不会把整片水道染成黄色。",
+          "evidence": "u201-pipe"
+        }
+      ],
+      "enemies": [],
+      "exits": [
+        {
+          "id": "E04-U2-01",
+          "to": "S15",
+          "x": 0,
+          "z": -50,
+          "label": "沿干阶回古渠泵院",
+          "entry": {
+            "x": -13.822822610506453,
+            "z": 26.70390330941807
+          }
+        }
+      ],
+      "checkpoint": false,
+      "obstacles": [
+        {
+          "x": -27,
+          "z": 25,
+          "width": 22,
+          "depth": 16,
+          "height": 6,
+          "kind": "building"
+        },
+        {
+          "x": 28,
+          "z": 25,
+          "width": 22,
+          "depth": 18,
+          "height": 10,
+          "kind": "building"
+        },
+        {
+          "x": 28,
+          "z": -25,
+          "width": 20,
+          "depth": 14,
+          "height": 5,
+          "kind": "building"
+        },
+        {
+          "kind": "rock",
+          "x": 43,
+          "z": 38,
+          "width": 6,
+          "depth": 7,
+          "height": 5
+        }
+      ]
+    }
+  },
+  "equipment": {
+    "W01": {
+      "id": "W01",
+      "name": "佣兵长剑",
+      "kind": "sword",
+      "slot": "weapon",
+      "level": 1,
+      "quality": "普通",
+      "description": "24斩击；0.44秒；追步斩20专注/6秒"
+    },
+    "W02": {
+      "id": "W02",
+      "name": "未熄之誓",
+      "kind": "sword",
+      "slot": "weapon",
+      "level": 3,
+      "quality": "稀有",
+      "description": "每第三次直接命中追加4火伤，冷却2秒",
+      "set": "oath"
+    },
+    "W07": {
+      "id": "W07",
+      "name": "白蜡木短弓",
+      "kind": "bow",
+      "slot": "weapon",
+      "level": 1,
+      "quality": "普通",
+      "description": "松手18穿刺，蓄力30；普通箭无限",
+      "twoHanded": true
+    },
+    "W08": {
+      "id": "W08",
+      "name": "银鹿的足迹",
+      "kind": "bow",
+      "slot": "weapon",
+      "level": 2,
+      "quality": "稀有",
+      "description": "蓄力命中后移动+8%；箭式贯穿两敌",
+      "twoHanded": true,
+      "set": "wind"
+    },
+    "W11": {
+      "id": "W11",
+      "name": "灰木短杖",
+      "kind": "staff",
+      "slot": "weapon",
+      "level": 1,
+      "quality": "普通",
+      "description": "16奥术直弹；基础弹无限"
+    },
+    "A01": {
+      "id": "A01",
+      "name": "白枝护额",
+      "kind": "armor",
+      "slot": "head",
+      "level": 2,
+      "quality": "精良",
+      "description": "最大生命+4",
+      "maxHp": 4,
+      "armor": 2,
+      "set": "oath"
+    },
+    "A02": {
+      "id": "A02",
+      "name": "游隼兜帽",
+      "kind": "armor",
+      "slot": "head",
+      "level": 2,
+      "quality": "稀有",
+      "description": "对超过5米目标主攻击+6%",
+      "armor": 2,
+      "set": "wind"
+    },
+    "A06": {
+      "id": "A06",
+      "name": "游猎者皮甲",
+      "kind": "armor",
+      "slot": "chest",
+      "level": 2,
+      "quality": "精良",
+      "description": "闪避后首次物理伤害-10%，2秒/8秒",
+      "armor": 6,
+      "set": "wind"
+    },
+    "A09": {
+      "id": "A09",
+      "name": "老兵的回敬",
+      "kind": "armor",
+      "slot": "hands",
+      "level": 2,
+      "quality": "稀有",
+      "description": "闪避险过后下一次近战削韧+4，6秒",
+      "armor": 1,
+      "set": "oath"
+    },
+    "A10": {
+      "id": "A10",
+      "name": "银弦手套",
+      "kind": "armor",
+      "slot": "hands",
+      "level": 2,
+      "quality": "稀有",
+      "description": "弓蓄力时间-10%，保持完整周期",
+      "armor": 1,
+      "set": "wind"
+    },
+    "A13": {
+      "id": "A13",
+      "name": "阵线之锚",
+      "kind": "armor",
+      "slot": "feet",
+      "level": 2,
+      "quality": "精良",
+      "description": "普通敌推移距离-15%",
+      "armor": 1,
+      "set": "oath"
+    },
+    "A14": {
+      "id": "A14",
+      "name": "林海行者短靴",
+      "kind": "armor",
+      "slot": "feet",
+      "level": 2,
+      "quality": "稀有",
+      "description": "持续移动1.5秒后速度+5%",
+      "armor": 1,
+      "set": "wind"
+    },
+    "J03": {
+      "id": "J03",
+      "name": "探险家的印戒",
+      "kind": "ring",
+      "slot": "ringLeft",
+      "level": 2,
+      "quality": "精良",
+      "description": "主攻击命中标记目标回复2专注，3秒",
+      "set": "seeker"
+    },
+    "J08": {
+      "id": "J08",
+      "name": "归乡信物",
+      "kind": "necklace",
+      "slot": "necklace",
+      "level": 2,
+      "quality": "精良",
+      "description": "最大生命+6；显示已发现检查点方向",
+      "maxHp": 6,
+      "set": "seeker"
+    },
+    "T01": {
+      "id": "T01",
+      "name": "奥术札记",
+      "kind": "spell",
+      "slot": "spell",
+      "level": 1,
+      "quality": "普通",
+      "description": "消耗1张；7米12奥术，冷却6秒"
+    },
+    "T02": {
+      "id": "T02",
+      "name": "黑契封印",
+      "kind": "spell",
+      "slot": "spell",
+      "level": 2,
+      "quality": "稀有",
+      "description": "消耗1张；10奥术并标记8秒，冷却8秒"
+    },
+    "T03": {
+      "id": "T03",
+      "name": "回响祷文",
+      "kind": "spell",
+      "slot": "spell",
+      "level": 2,
+      "quality": "稀有",
+      "description": "消耗1张；12奥术；已标记追加8并回复4生命，冷却8秒"
+    },
+    "L01": {
+      "id": "L01",
+      "name": "风暴王的遗嘱",
+      "kind": "sword",
+      "slot": "weapon",
+      "level": 3,
+      "quality": "传奇",
+      "description": "直接剑击留下雷痕，武器技引爆并向最近一敌传导"
+    },
+    "L02": {
+      "id": "L02",
+      "name": "阿斯特拉的回信",
+      "kind": "bow",
+      "slot": "weapon",
+      "level": 3,
+      "quality": "传奇",
+      "description": "箭矢折返；每一程每敌最多一次",
+      "twoHanded": true
+    }
+  }
+}

@@ -1,0 +1,20 @@
+TapTap 自动化测试异常反馈摘要
+
+小游戏：剑与火：破晓之战
+MiniApp ID：tapmcddcmbhf5lxqng
+后台 version_id：458336（日志未记录三段式游戏版本）
+设备：Redmi 23113RKC6C，Android 16
+TapTap：2.96.15-rel#100299，versionCode 296151002
+原始附件：8BhLhOExw9xfFxiA7fU3U0gvNN4l3ZgI.device_61_logs.zip
+
+现象与证据：
+1. log.log 五次报“网络连接异常，需要开启 Wi-Fi”。
+2. logcat.txt:41682，设备日志 11-10 02:05:06.935，com.taptap 发生 FATAL EXCEPTION。
+3. logcat.txt:41707，异常为 java.net.UnknownHostException，无法解析 tap-android-dev.tapsvc.com。
+   相关堆栈：InitHelper.simpleGet -> TestMainPageActivity$j.invokeSuspend。
+4. logcat.txt:57513，02:05:29.994 发起指定小游戏版本的启动请求；57538 行记录被带到 TapTap LoginActivity。
+5. log.log 最终报 minigame_activity_not_exists；test_over.jpg 停在 TapTap 手机号登录/注册页。
+6. 此日志捕获区间未检出 Cocos 初始化、项目 JavaScript 异常、OOM 或 TapTap ANR 记录，无法用于判断游戏内存/帧率表现。
+
+请协助核查云测设备网络/DNS和 TapTap 登录状态，并在可进入小游戏后重跑同一版本；如复现请排查宿主测试辅助页对网络异常的处理及自动化登录流程。
+两个日志的时钟约差 8 小时，以上 logcat 时间均按原文保留。

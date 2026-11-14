@@ -1,0 +1,785 @@
+{
+  "date": "2026-11-14",
+  "status": "implementation_and_functionality_verified_android_timing_provisional",
+  "scope": "Current TapTap Cocos game: optional CPU kernels; no UI control and no gameplay frame-rate change. Not a whole-game CPU result or TapTap App/device acceptance.",
+  "switch": {
+    "buildDefault": "src/cocos/release/taptap.json.computationWasm",
+    "default": true,
+    "true": "Use the WASM backend when ready; automatically use JS if unsupported or loading/execution fails.",
+    "false": "Run migrated operations in JS without loading the optional module at startup.",
+    "runtimeModule": "chunks:///_virtual/NavigationWasm.ts",
+    "runtimeFunction": "await setComputationWasmEnabled(true/false)",
+    "inspect": "navigationWasmState() reports enabled, state, activeBackend and operation counters. Await enable and assert activeBackend before measuring a WASM window.",
+    "devOnly": "__chapter.wasm.setEnabled(true/false); __chapter.wasm.inspect()",
+    "packaging": "Default-off retains the module so one immutable build can be toggled. engineWasmSubpackage=false makes this optional module unavailable.",
+    "persistence": "No UI and no stored user preference; restart uses the build default.",
+    "engineScope": "The switch controls our migrated CPU kernels; Cocos Bullet is managed independently by the engine."
+  },
+  "migrated": [
+    "Existing A* search, resident obstacle broad phase and per-unit grid edges retained.",
+    "Arbitrary-radius sampled line-of-sight collision loops (.18m sampling unchanged).",
+    "Stable 49-candidate connector search; host Math.hypot preserves JS distance ordering.",
+    "Path simplification collision loops; return original indices to preserve endpoint and intermediate point metadata.",
+    "Batch visibility for exploration cells in LocalCartography.track."
+  ],
+  "retainedJavaScript": [
+    "Cheap point collision probes: a preliminary microbench showed the per-call bridge was slower. Removed the unused bridge.",
+    "Path cache, gameplay rules/state, UI/rendering, and platform interfaces."
+  ],
+  "kernel": {
+    "abi": 3,
+    "sourceSha256": "b66a8a7911af11ba36cef9c40abc698189e363a870255d61570bf540d5fc4d81",
+    "sha256": "ebd54a4d50f4497826eb7dcbe3d1f48f46bd16940eedb7f6eafdaea4bc1e6028",
+    "bytes": 33561,
+    "compiler": "rustc 1.95.0 (59807616e 2026-04-14)",
+    "target": "wasm32-unknown-unknown",
+    "cpu": "mvp",
+    "maximumMemoryBytes": 33554432
+  },
+  "build": {
+    "path": "src/cocos/build/perf-computation-wasm-verified-20261114",
+    "target": "web-mobile",
+    "creator": "3.8.8",
+    "sourceVerifiedBinaryMatches": true,
+    "version": "0.3.40",
+    "editorProfile": "src/cocos/temp/computation-wasm-v3-editor-profile",
+    "priorFinalAttempt": "Creator failed at startup opening engine.json twice; preserved temp/navigation-wasm-v3-20261114/failed-final-build.log. A fresh isolated editor profile succeeded. No engine settings reset.",
+    "rustCommentOnlyRebuild": "Final Rust distance-import comment clarified; rebuilt binary SHA unchanged from the tested compiled game."
+  },
+  "verification": {
+    "fullTypecheck": "passed",
+    "existingTests": {
+      "passed": 140,
+      "failed": 0
+    },
+    "tapConfigCheck": "passed",
+    "sourceEquivalence": {
+      "areas": 97,
+      "routes": 4500,
+      "visibilityQueries": 8992,
+      "batchTargets": 26520,
+      "publicJSPointProbeRegressionQueries": 26520,
+      "failures": [],
+      "inspection": {
+        "ready": true,
+        "contexts": 4,
+        "uploads": 198,
+        "uploadedBytes": 32064,
+        "searches": 1109,
+        "visibilityQueries": 15638,
+        "batchTargets": 26520,
+        "connectors": 5622,
+        "simplifications": 1108,
+        "memoryBytes": 5898240
+      }
+    },
+    "runtimeRaces": {
+      "passed": true,
+      "defaultOffSkipsLoading": true,
+      "disableWhileLoadingRemainsOff": true,
+      "repeatedEnableReusesModule": true,
+      "disabledQueriesUseOnlyJavaScript": true,
+      "reEnableUsesWasm": true,
+      "loadFailureFallsBackAndExplicitToggleRetries": true,
+      "unpackagedModuleStaysOff": true
+    },
+    "cartography": {
+      "passed": true,
+      "movementComparisons": 30,
+      "areas": 5,
+      "batchTargets": 539,
+      "scope": "Actual LocalCartography.track before/after; Cocos graphics/storage stubbed. No render or platform acceptance claim."
+    },
+    "packageFixture": {
+      "passed": true,
+      "results": [
+        {
+          "name": "on",
+          "enabled": true,
+          "available": true,
+          "modulePackaged": true,
+          "path": "cocos-js/assets/navigation-search-ebd54a4d50f4.wasm"
+        },
+        {
+          "name": "off",
+          "enabled": false,
+          "available": true,
+          "modulePackaged": true,
+          "path": "cocos-js/assets/navigation-search-ebd54a4d50f4.wasm"
+        },
+        {
+          "name": "unavailable",
+          "enabled": false,
+          "available": false,
+          "modulePackaged": false,
+          "path": "cocos-js/assets/navigation-search-ebd54a4d50f4.wasm"
+        }
+      ],
+      "scope": "Source/hash and export checks using real Cocos TapTap subpackage declarations/engine loader in an isolated fixture; not a complete conversion or TapTap App acceptance."
+    },
+    "desktopCompiledGame": {
+      "status": "passed",
+      "browser": "157.0.8103.51",
+      "switch": {
+        "initial": {
+          "enabled": true,
+          "available": true,
+          "state": "ready",
+          "activeBackend": true,
+          "abi": 3,
+          "bytes": 33561,
+          "ready": true,
+          "contexts": 2,
+          "uploads": 2,
+          "uploadedBytes": 1056,
+          "searches": 0,
+          "visibilityQueries": 1,
+          "batchTargets": 56,
+          "connectors": 0,
+          "simplifications": 0,
+          "memoryBytes": 1245184
+        },
+        "disabled": {
+          "enabled": false,
+          "available": true,
+          "state": "disabled",
+          "activeBackend": false,
+          "abi": 3,
+          "bytes": 33561,
+          "ready": true,
+          "contexts": 0,
+          "uploads": 3,
+          "uploadedBytes": 1088,
+          "searches": 1,
+          "visibilityQueries": 2,
+          "batchTargets": 56,
+          "connectors": 2,
+          "simplifications": 1,
+          "memoryBytes": 1310720
+        },
+        "disabledCountersUnchanged": true,
+        "enabled": {
+          "enabled": true,
+          "available": true,
+          "state": "ready",
+          "activeBackend": true,
+          "abi": 3,
+          "bytes": 33561,
+          "ready": true,
+          "contexts": 1,
+          "uploads": 4,
+          "uploadedBytes": 1120,
+          "searches": 2,
+          "visibilityQueries": 3,
+          "batchTargets": 56,
+          "connectors": 4,
+          "simplifications": 2,
+          "memoryBytes": 1310720
+        },
+        "equalRoutes": true,
+        "actorReady": true,
+        "failure": ""
+      },
+      "404Fallback": {
+        "state": {
+          "enabled": true,
+          "available": true,
+          "state": "fallback",
+          "activeBackend": false,
+          "abi": 3,
+          "bytes": 33561
+        },
+        "routeValid": true,
+        "failure": ""
+      },
+      "pageErrors": []
+    },
+    "androidCompiledGame": {
+      "status": "passed",
+      "browser": "Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Mobile Safari/537.36",
+      "environment": {
+        "backend": "android-emulator",
+        "serial": "emulator-5558",
+        "emulatorGraphics": {
+          "hostGpuMode": "host",
+          "vulkanDisabled": true,
+          "hostFeatureOverrides": [
+            "-Vulkan"
+          ],
+          "hostTransportConfig": {
+            "drawFlushInterval": "800",
+            "writeBufferSize": "1048576",
+            "name": "pipe",
+            "dataRingSize": "32768",
+            "writeStepSize": "4096"
+          },
+          "guestEgl": "emulation",
+          "guestBootEgl": "",
+          "guestHwuiRenderer": "skiagl",
+          "guestVulkan": "ranchu",
+          "guestGlTransport": "pipe",
+          "guestGlDrawFlushInterval": "800",
+          "guestVsync": "60",
+          "bluetoothOn": "0"
+        },
+        "clocksource": "tsc",
+        "availableClocksources": [
+          "tsc",
+          "hpet"
+        ],
+        "model": "sdk_gphone64_x86_64",
+        "androidRelease": "14",
+        "api": "34",
+        "abi": "x86_64",
+        "online": "0-3",
+        "logicalCores": 4,
+        "clockTicksPerSecond": 100,
+        "wmSize": "Physical size: 2412x1080",
+        "wmDensity": "Physical density: 480",
+        "hostAffinity": 21845,
+        "hostPriority": "Normal",
+        "hostTimerPolicy": {
+          "version": 1,
+          "controlMask": 4,
+          "stateMask": 0
+        }
+      },
+      "switch": {
+        "initial": {
+          "enabled": true,
+          "available": true,
+          "state": "ready",
+          "activeBackend": true,
+          "abi": 3,
+          "bytes": 33561,
+          "ready": true,
+          "contexts": 2,
+          "uploads": 2,
+          "uploadedBytes": 1056,
+          "searches": 0,
+          "visibilityQueries": 1,
+          "batchTargets": 56,
+          "connectors": 0,
+          "simplifications": 0,
+          "memoryBytes": 1245184
+        },
+        "disabled": {
+          "enabled": false,
+          "available": true,
+          "state": "disabled",
+          "activeBackend": false,
+          "abi": 3,
+          "bytes": 33561,
+          "ready": true,
+          "contexts": 0,
+          "uploads": 3,
+          "uploadedBytes": 1088,
+          "searches": 1,
+          "visibilityQueries": 2,
+          "batchTargets": 56,
+          "connectors": 2,
+          "simplifications": 1,
+          "memoryBytes": 1310720
+        },
+        "disabledCountersUnchanged": true,
+        "enabled": {
+          "enabled": true,
+          "available": true,
+          "state": "ready",
+          "activeBackend": true,
+          "abi": 3,
+          "bytes": 33561,
+          "ready": true,
+          "contexts": 1,
+          "uploads": 4,
+          "uploadedBytes": 1120,
+          "searches": 2,
+          "visibilityQueries": 3,
+          "batchTargets": 56,
+          "connectors": 4,
+          "simplifications": 2,
+          "memoryBytes": 1310720
+        },
+        "equalRoutes": true,
+        "actorReady": true,
+        "failure": ""
+      },
+      "pageErrors": []
+    }
+  },
+  "localPerformance": {
+    "method": "Six balanced forward/reverse rounds in a single process. Full path includes connectors/cache/simplification. Cold new maps, warm graph re-search with route-cache miss, and route-cache hits are separate. Visibility-batch times are normalized per target, not per entire batch. Game paused for isolated microbench; no whole-game CPU/FPS inference.",
+    "baseline": "Current JS and v3 use the same compiled Navigation source. The v2 comparison adapter uses an ES2017-transpiled v2 snapshot, so do not interpret that column as an exact engine-build upgrade claim.",
+    "desktop": {
+      "paths": [
+        {
+          "area": "S01",
+          "queries": 12,
+          "medianMillisecondsPerPath": {
+            "js": {
+              "cold": 2.0124999980131784,
+              "search": 0.5781249996895592,
+              "cached": 0.029427083364377417
+            },
+            "wasm-v2": {
+              "cold": 0.8333333333333334,
+              "search": 0.2203125000620882,
+              "cached": 0.03007812495343387
+            },
+            "wasm-v3": {
+              "cold": 0.7333333318432171,
+              "search": 0.14895833345750967,
+              "cached": 0.006640624953433871
+            }
+          },
+          "v3LessTimeThanCurrentJSPercent": {
+            "cold": 63.56107664262392,
+            "search": 74.23423419891941,
+            "cached": 77.43362850063286
+          }
+        },
+        {
+          "area": "S01-T1",
+          "queries": 15,
+          "medianMillisecondsPerPath": {
+            "js": {
+              "cold": 0.11333333452542624,
+              "search": 0.058333333333333334,
+              "cached": 0.03260416667908431
+            },
+            "wasm-v2": {
+              "cold": 0.0799999992052714,
+              "search": 0.046250000099341076,
+              "cached": 0.0314583333209157
+            },
+            "wasm-v3": {
+              "cold": 0.046666665871938066,
+              "search": 0.015000000099341075,
+              "cached": 0.006354166691501935
+            }
+          },
+          "v3LessTimeThanCurrentJSPercent": {
+            "cold": 58.82353054610915,
+            "search": 74.2857141154153,
+            "cached": 80.51118203987664
+          }
+        },
+        {
+          "area": "H12",
+          "queries": 6,
+          "medianMillisecondsPerPath": {
+            "js": {
+              "cold": 0.36666666964689887,
+              "search": 0.16875000049670535,
+              "cached": 0.020572916759798922
+            },
+            "wasm-v2": {
+              "cold": 0.1916666676600774,
+              "search": 0.06354166691501936,
+              "cached": 0.020312500031044085
+            },
+            "wasm-v3": {
+              "cold": 0.15000000099341074,
+              "search": 0.03437500012417634,
+              "cached": 0.0049479167597989235
+            }
+          },
+          "v3LessTimeThanCurrentJSPercent": {
+            "cold": 59.09090915248414,
+            "search": 79.62962961600259,
+            "cached": 75.94936674478974
+          }
+        },
+        {
+          "area": "H13",
+          "queries": 6,
+          "medianMillisecondsPerPath": {
+            "js": {
+              "cold": 1.0333333313465118,
+              "search": 0.520833333954215,
+              "cached": 0.10807291666666666
+            },
+            "wasm-v2": {
+              "cold": 0.46666666865348816,
+              "search": 0.2291666672875484,
+              "cached": 0.059895833333333336
+            },
+            "wasm-v3": {
+              "cold": 0.3499999940395355,
+              "search": 0.11562500024835268,
+              "cached": 0.024479166759798922
+            }
+          },
+          "v3LessTimeThanCurrentJSPercent": {
+            "cold": 66.12903276975892,
+            "search": 77.79999997878076,
+            "cached": 77.34939750418606
+          }
+        },
+        {
+          "area": "U1-06",
+          "queries": 8,
+          "medianMillisecondsPerPath": {
+            "js": {
+              "cold": 0.6750000007450581,
+              "search": 0.2937500001862645,
+              "cached": 0.02617187495343387
+            },
+            "wasm-v2": {
+              "cold": 0.3125,
+              "search": 0.11640624981373549,
+              "cached": 0.025390625
+            },
+            "wasm-v3": {
+              "cold": 0.23750000074505806,
+              "search": 0.0625,
+              "cached": 0.005468750023283064
+            }
+          },
+          "v3LessTimeThanCurrentJSPercent": {
+            "cold": 64.81481474327289,
+            "search": 78.72340426881047,
+            "cached": 79.10447748579993
+          }
+        },
+        {
+          "area": "live-0",
+          "queries": 12,
+          "medianMillisecondsPerPath": {
+            "js": {
+              "cold": 0.6916666651765506,
+              "search": 0.2723958330849806,
+              "cached": 0.03567708330228925
+            },
+            "wasm-v2": {
+              "cold": 0.3749999975164731,
+              "search": 0.12916666641831398,
+              "cached": 0.03190104166666667
+            },
+            "wasm-v3": {
+              "cold": 0.2999999995032946,
+              "search": 0.06718749987582365,
+              "cached": 0.007161458255723119
+            }
+          },
+          "v3LessTimeThanCurrentJSPercent": {
+            "cold": 56.62650600246602,
+            "search": 75.33460805369117,
+            "cached": 79.92700749933894
+          }
+        }
+      ],
+      "geometry": [
+        {
+          "area": "S01",
+          "targetsPerBatch": 96,
+          "medianMillisecondsPerTarget": {
+            "js": {
+              "visible": 0.0025390625038805106,
+              "batch": 0.002669270810050269
+            },
+            "wasm-v3": {
+              "visible": 0.0008463541550251346,
+              "batch": 0.0007486979205471773
+            }
+          }
+        },
+        {
+          "area": "S01-T1",
+          "targetsPerBatch": 96,
+          "medianMillisecondsPerTarget": {
+            "js": {
+              "visible": 0.002539062503880511,
+              "batch": 0.002636718757761021
+            },
+            "wasm-v3": {
+              "visible": 0.0008463541744276881,
+              "batch": 0.0007812499922389785
+            }
+          }
+        },
+        {
+          "area": "H12",
+          "targetsPerBatch": 96,
+          "medianMillisecondsPerTarget": {
+            "js": {
+              "visible": 0.002343749996119489,
+              "batch": 0.00244140625
+            },
+            "wasm-v3": {
+              "visible": 0.0005208333410943548,
+              "batch": 0.0004557291589056452
+            }
+          }
+        }
+      ],
+      "resident": {
+        "ready": true,
+        "contexts": 4,
+        "uploads": 399,
+        "uploadedBytes": 142304,
+        "searches": 2770,
+        "visibilityQueries": 58132,
+        "batchTargets": 27648,
+        "connectors": 27560,
+        "simplifications": 2770,
+        "memoryBytes": 5832704
+      },
+      "failures": []
+    },
+    "android": {
+      "paths": [
+        {
+          "area": "S01",
+          "queries": 12,
+          "medianMillisecondsPerPath": {
+            "js": {
+              "cold": 2.08749999999903,
+              "search": 0.714583333333394,
+              "cached": 0.15781250000001515
+            },
+            "wasm-v2": {
+              "cold": 0.9625000000014552,
+              "search": 0.31302083333351527,
+              "cached": 0.15859374999998482
+            },
+            "wasm-v3": {
+              "cold": 0.75,
+              "search": 0.16927083333333334,
+              "cached": 0.027994791666742458
+            }
+          },
+          "v3LessTimeThanCurrentJSPercent": {
+            "cold": 64.07185628740845,
+            "search": 76.3119533527717,
+            "cached": 82.26072607256094
+          }
+        },
+        {
+          "area": "S01-T1",
+          "queries": 15,
+          "medianMillisecondsPerPath": {
+            "js": {
+              "cold": 0.23333333333333334,
+              "search": 0.18583333333323632,
+              "cached": 0.15875000000002426
+            },
+            "wasm-v2": {
+              "cold": 0.20666666666705472,
+              "search": 0.17208333333352738,
+              "cached": 0.15791666666670306
+            },
+            "wasm-v3": {
+              "cold": 0.06666666666666667,
+              "search": 0.035416666666666666,
+              "cached": 0.027083333333333334
+            }
+          },
+          "v3LessTimeThanCurrentJSPercent": {
+            "cold": 71.42857142857143,
+            "search": 80.94170403586449,
+            "cached": 82.93963254593437
+          }
+        },
+        {
+          "area": "H12",
+          "queries": 6,
+          "medianMillisecondsPerPath": {
+            "js": {
+              "cold": 0.47499999999611947,
+              "search": 0.26770833333345456,
+              "cached": 0.10572916666660603
+            },
+            "wasm-v2": {
+              "cold": 0.27499999999417923,
+              "search": 0.1479166666661816,
+              "cached": 0.10729166666669698
+            },
+            "wasm-v3": {
+              "cold": 0.19999999999708962,
+              "search": 0.046875,
+              "cached": 0.01953125
+            }
+          },
+          "v3LessTimeThanCurrentJSPercent": {
+            "cold": 57.894736842373995,
+            "search": 82.49027237354878,
+            "cached": 81.52709359604852
+          }
+        },
+        {
+          "area": "H13",
+          "queries": 6,
+          "medianMillisecondsPerPath": {
+            "js": {
+              "cold": 1.1333333333362439,
+              "search": 0.6343749999996362,
+              "cached": 0.23645833333330302
+            },
+            "wasm-v2": {
+              "cold": 0.6416666666627862,
+              "search": 0.3000000000004851,
+              "cached": 0.1796875000001516
+            },
+            "wasm-v3": {
+              "cold": 0.4666666666647264,
+              "search": 0.13750000000012125,
+              "cached": 0.043229166666757614
+            }
+          },
+          "v3LessTimeThanCurrentJSPercent": {
+            "cold": 58.82352941204165,
+            "search": 78.3251231526778,
+            "cached": 81.718061673968
+          }
+        },
+        {
+          "area": "U1-06",
+          "queries": 8,
+          "medianMillisecondsPerPath": {
+            "js": {
+              "cold": 0.75,
+              "search": 0.3914062499998181,
+              "cached": 0.11992187499993179
+            },
+            "wasm-v2": {
+              "cold": 0.4000000000014552,
+              "search": 0.19218750000027285,
+              "cached": 0.12031249999995453
+            },
+            "wasm-v3": {
+              "cold": 0.28125,
+              "search": 0.0796874999996362,
+              "cached": 0.02089843749990905
+            }
+          },
+          "v3LessTimeThanCurrentJSPercent": {
+            "cold": 62.5,
+            "search": 79.64071856295773,
+            "cached": 82.57328990234606
+          }
+        },
+        {
+          "area": "live-0",
+          "queries": 12,
+          "medianMillisecondsPerPath": {
+            "js": {
+              "cold": 1.3666666666661818,
+              "search": 0.9911458333332728,
+              "cached": 0.18398437499998482
+            },
+            "wasm-v2": {
+              "cold": 0.46666666666715173,
+              "search": 0.21197916666672728,
+              "cached": 0.1348958333333788
+            },
+            "wasm-v3": {
+              "cold": 0.33333333333333337,
+              "search": 0.0880208333334546,
+              "cached": 0.02447916666665151
+            }
+          },
+          "v3LessTimeThanCurrentJSPercent": {
+            "cold": 75.60975609755232,
+            "search": 91.11928533892574,
+            "cached": 86.69497523001422
+          }
+        }
+      ],
+      "geometry": [
+        {
+          "area": "S01",
+          "targetsPerBatch": 96,
+          "medianMillisecondsPerTarget": {
+            "js": {
+              "visible": 0.01894531249998484,
+              "batch": 0.019140624999996213
+            },
+            "wasm-v3": {
+              "visible": 0.0008138020833522812,
+              "batch": 0.0008789062500227374
+            }
+          }
+        },
+        {
+          "area": "S01-T1",
+          "targetsPerBatch": 96,
+          "medianMillisecondsPerTarget": {
+            "js": {
+              "visible": 0.01647135416664014,
+              "batch": 0.016503906250003787
+            },
+            "wasm-v3": {
+              "visible": 0.0008789062499848418,
+              "batch": 0.0007812500000075792
+            }
+          }
+        },
+        {
+          "area": "H12",
+          "targetsPerBatch": 96,
+          "medianMillisecondsPerTarget": {
+            "js": {
+              "visible": 0.018424479166678037,
+              "batch": 0.01806640625
+            },
+            "wasm-v3": {
+              "visible": 0.0005533854166515084,
+              "batch": 0.0005208333333257542
+            }
+          }
+        }
+      ],
+      "resident": {
+        "ready": true,
+        "contexts": 4,
+        "uploads": 399,
+        "uploadedBytes": 142304,
+        "searches": 2770,
+        "visibilityQueries": 58132,
+        "batchTargets": 27648,
+        "connectors": 27560,
+        "simplifications": 2770,
+        "memoryBytes": 5832704
+      },
+      "failures": [],
+      "performanceAcceptance": "provisional: shared-host overlap not excluded",
+      "timingAudit": {
+        "notice": "Another session reported a 17:11 ASG diagnostic overlapping this session and withdrew its own comparison.",
+        "rejectedAttemptFinishedLocal": "2026-11-14 17:11:53 +08:00; rejected before timing, no micro data.",
+        "successfulAttemptFinishedLocal": "2026-11-14 17:13:21 +08:00",
+        "limitation": "The successful retry did not record exact microbench start/end timestamps. The other session diagnostic interval has not been established, so absence of overlap cannot be proven.",
+        "decision": "Keep raw numbers and functional on/off/path results, but treat the stated 82.5% H12 local speedup as provisional pending an uncontested rerun. No whole-game CPU claim."
+      }
+    },
+    "wholeGameCpuPercentChange": null
+  },
+  "rejectedTrials": [
+    {
+      "path": "src/cocos/test-results/performance/navigation-wasm-v3-20261114/node-micro-initial.json",
+      "reason": "Route coordinates matched, but rich endpoint metadata was lost by early WASM simplification. Corrected by returning original route indices; all six real/micro query batches now match."
+    },
+    {
+      "path": "src/cocos/test-results/performance/navigation-wasm-v3-20261114/android-micro.json",
+      "reason": "Native UI audit found the launcher covering Chrome; sample rejected before timing. Retried using the foreground tab; native audit, compiled game and microbench passed."
+    }
+  ],
+  "limits": [
+    "No new controlled whole-game CPU/GPU/FPS comparison.",
+    "Desktop and Android-emulator Chrome checks do not replace real TapTap AppID/runtime and phone acceptance.",
+    "Module-only TapTap package export fixture is not a full conversion/upload or platform function splitting.",
+    "Four resident map contexts can still evict one another; switching workloads and cold module/context startup have separate costs.",
+    "Android timing acceptance downgraded after a shared-host overlap notice; raw results remain preserved, and functionality verification remains passed."
+  ],
+  "artifacts": {
+    "rawEvidence": "src/cocos/test-results/performance/navigation-wasm-v3-20261114",
+    "drivers": "src/cocos/temp/navigation-wasm-v3-20261114",
+    "instructions": "src/cocos/release/README.md"
+  },
+  "cleanup": {
+    "previewServer": 65384,
+    "ownedEmulator": "SingularityNav34 / emulator-5558",
+    "status": "completed",
+    "verification": "Preview server PID 65384 and owned QEMU PID 77284 both exited; adb lists only the other session emulator-5556."
+  }
+}

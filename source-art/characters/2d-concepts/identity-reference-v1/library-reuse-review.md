@@ -1,0 +1,15 @@
+# Character identity and stock-library reuse
+
+The original `appearance-v5/male-direction.png` is the identity authority. Stock characters cannot supply its face, jaw, curls or clothing. This update reuses the project's matching native source art and Cocos Creator SpriteFrame/quad rendering. No stock-library assets, code, runtime packages or new test dependencies were imported.
+
+Primary sources checked 2026-11-07:
+
+| Library | Relevant capability | License / compatibility finding | Decision |
+| --- | --- | --- | --- |
+| [AutoSprite Ninja](https://www.autosprite.io/free-sprite-sheets/ninja) | Transparent PNG sequences, directional idle/walk/run; [PNG/JSON export documentation](https://www.autosprite.io/docs/reference-export-formats) | [Official free license](https://www.autosprite.io/free/license) identifies the free pack as CC0. This is a finished ninja sprite set, not a transferable character rig. | Can inform phase and movement references. Its green hooded stock head would replace the requested identity, so no stock pixels were imported. |
+| [Universal LPC generator](https://liberatedpixelcup.github.io/Universal-LPC-Spritesheet-Character-Generator/) / [source repository](https://github.com/LiberatedPixelCup/Universal-LPC-Spritesheet-Character-Generator) | Layered body/head/hair/clothing assembly and directional animation organization | Pixel-art pipeline and component-specific licenses/credits; not a blanket CC0 realistic-character library. | Reuse the principle of one fixed identity across every action; existing realistic PNGs and Cocos already provide the required rendering. No LPC components or code copied. |
+| [CraftPix free werewolves](https://craftpix.net/freebies/free-werewolf-sprite-sheets-pixel-art/) | Pixel wolf animation sheets, PSD/PNG | [Official terms](https://craftpix.net/file-licenses/) allow commercial use subject to terms, prohibit standalone redistribution/resale, and restrict AI-related use. | Wrong species/style; not downloaded or supplied to ImageGen. |
+| [Summer sprites](https://www.summerengine.com/asset-store/sprites) / [animations](https://www.summerengine.com/asset-store/animations) | Mixed PNG sheets and rigged 3D assets | [Asset Library License](https://www.summerengine.com/legal/asset-library) is not a blanket CC0 license. Platform/export scope and upstream licenses require asset-specific review. | No compatible identity asset identified; no import. |
+| [Kenney support/license](https://kenney.nl/support), [Toon Characters](https://kenney.nl/assets/toon-characters), [Animated Characters](https://kenney.nl/assets/animated-characters-protagonists) | CC0 stylized 2D / 3D character packs | Useful prototypes, but their style and identity differ from the supplied realistic design. | No stock pixels or rig imported. |
+
+The implementation uses one approved four-direction head reference for native head-only edits, preserves the installed body/phase/weapon geometry, and samples the HUD portrait directly from the original design PNG. Native ImageGen outputs remain unchanged byte-for-byte. Existing read-only alpha/crop/registration helpers adapt metadata; they do not repaint images.

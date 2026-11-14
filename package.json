@@ -1,0 +1,31 @@
+{
+  "name": "sword-and-fire",
+  "version": "0.3.41",
+  "private": true,
+  "description": "剑与火：Cocos Creator 3.8.8 设定图2D第一章",
+  "scripts": {
+    "start:2d": "pwsh -NoProfile -File src/cocos/Run-Concept2D.ps1",
+    "start": "pwsh -NoProfile -File src/cocos/Run-Concept2D.ps1",
+    "start:3d": "pwsh -NoProfile -File src/cocos/Run-Local.ps1",
+    "build": "pwsh -NoProfile -File src/cocos/Build-Local.ps1 -Platform web-mobile -OutputName concept-2d",
+    "build:3d": "pwsh -NoProfile -File src/cocos/Build-Local.ps1",
+    "build:tap:audit": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -AuditOnly",
+    "build:tap:preview": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -WebPreview",
+    "build:tap": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1",
+    "pack:taptap": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -TestPackage",
+    "pack:taptap:guest": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -TestPackage -GuestTest",
+    "version:tap": "node src/cocos/tools/taptap-config.cjs --version",
+    "check:tap": "node src/cocos/tools/taptap-config.cjs --check",
+    "test": "npm --prefix src/cocos test",
+    "test:perf": "node src/cocos/tools/performance/run.cjs",
+    "test:perf:soak": "node src/cocos/tools/performance/run.cjs --profile soak",
+    "test:perf:world": "node src/cocos/tools/performance/verify-world.cjs",
+    "test:perf:device": "node src/cocos/tools/performance/device-gate.cjs",
+    "test:perf:android": "node src/cocos/tools/performance/run.cjs --backend android",
+    "test:perf:android:moving": "node src/cocos/tools/performance/farm.cjs",
+    "test:perf:android:full": "node src/cocos/tools/performance/run-isolated.cjs --backend android --profile regression",
+    "test:perf:android:soak": "node src/cocos/tools/performance/run.cjs --backend android --profile soak",
+    "check": "npm --prefix src/cocos run check",
+    "test:lua-baseline": "pwsh -NoProfile -File src/Test-Local.ps1"
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "date": "2026-11-07",
+  "scope": "Remove surplus 3D staging, superseded review builds and verified duplicate archives; retain both 2D and 3D entrypoints.",
+  "root": "F:\\workspace\\Singularity",
+  "status": "completed-recycled",
+  "targets": [
+    {
+      "path": "src/.tmp/actor-hand-review",
+      "files": 5,
+      "bytes": 32364459.0
+    },
+    {
+      "path": "src/.tmp/character-fidelity",
+      "files": 2895,
+      "bytes": 2074849109.0
+    },
+    {
+      "path": "src/.tmp/character-redesign-review",
+      "files": 2,
+      "bytes": 393507.0
+    },
+    {
+      "path": "src/.tmp/character-redesign-v6",
+      "files": 343,
+      "bytes": 732861767.0
+    },
+    {
+      "path": "src/.tmp/import-probe",
+      "files": 5,
+      "bytes": 13778.0
+    },
+    {
+      "path": "src/.tmp/native-kit-review",
+      "files": 32,
+      "bytes": 341196544.0
+    },
+    {
+      "path": "src/.tmp/skin-probe",
+      "files": 6,
+      "bytes": 23043.0
+    },
+    {
+      "path": "src/.tmp/native-production/actors",
+      "files": 87,
+      "bytes": 93494027.0
+    },
+    {
+      "path": "src/.tmp/native-production/hand-review",
+      "files": 5,
+      "bytes": 1194167.0
+    },
+    {
+      "path": "src/.tmp/native-production/previous-production",
+      "files": 668,
+      "bytes": 64326642.0
+    },
+    {
+      "path": "src/cocos/build/native-candidate",
+      "files": 1444,
+      "bytes": 122062396.0
+    },
+    {
+      "path": "src/cocos/build/props-review",
+      "files": 1357,
+      "bytes": 173393214.0
+    },
+    {
+      "path": "src/cocos/build/reference-ui",
+      "files": 1357,
+      "bytes": 173393199.0
+    },
+    {
+      "path": "src/.tools/blender-4.5.15-windows-x64.zip",
+      "files": 1,
+      "bytes": 398649826.0
+    },
+    {
+      "path": "src/.tools/quaternius-ready-kits/modular-fantasy-outfits-standard.zip",
+      "files": 1,
+      "bytes": 294347394.0
+    },
+    {
+      "path": "src/.tools/quaternius-ready-kits/universal-base-characters-standard.zip",
+      "files": 1,
+      "bytes": 128968391.0
+    },
+    {
+      "path": "src/.tools/quaternius-ready-kits/universal-animation-library-2-standard.zip",
+      "files": 1,
+      "bytes": 18735003.0
+    },
+    {
+      "path": "src/.tools/research-animation-kaykit/KayKit_Adventurers_2.0_FREE.zip",
+      "files": 1,
+      "bytes": 13024345.0
+    },
+    {
+      "path": "src/.tools/research-animation-kaykit/KayKit_Character_Animations_1.1_FREE.zip",
+      "files": 1,
+      "bytes": 14858957.0
+    }
+  ],
+  "removed_file_count": 8212,
+  "removed_bytes": 4678149768.0,
+  "preserved_roots": [
+    "assets",
+    "source-art",
+    "src/cocos/assets",
+    "src/.tmp/native-production/source",
+    "src/.tmp/native-production/animation",
+    "src/.tmp/native-production/props",
+    "src/cocos/build/concept-2d",
+    "src/cocos/build/web-mobile",
+    "src/cocos/build/web-desktop",
+    "src/cocos/artifacts",
+    "src/cocos/build-templates",
+    "src/cocos/asset-pipeline",
+    "src/assets",
+    "src/scripts"
+  ],
+  "preserved_file_count": 7917,
+  "preserved_sha256_snapshot": "src/cocos/test-results/3d-cleanup-preserved-before.json",
+  "archive_verification": "All non-directory archive members have same-size and CRC32-matching extracted originals. Extracted source libraries and licenses retained.",
+  "canonical_source_note": "native-production/source, animation and props are current 3D rebuilding inputs despite their .tmp parent and remain untouched.",
+  "old_broad_cleanup_plan": "tools/latest-version-cleanup.json was not executed; narrative, maps and unrelated historical assets remain untouched.",
+  "method": "Windows recycle bin; recoverable, disk space is not released until these recycled items are purged.",
+  "permanent_delete_result": "Not executed: automatic approval review rejected the batch command as blocked by policy without a more detailed reason.",
+  "validation": {
+    "protected_files_checked": 7917,
+    "protected_hashes_changed": 0,
+    "hash_report": "src/cocos/test-results/3d-cleanup-hash-verification.json",
+    "recovery_targets_verified": 19,
+    "recovery_report": "src/cocos/test-results/3d-cleanup-recovery-verification.json",
+    "npm_test": {
+      "status": "passed",
+      "tests": 95,
+      "failures": 0
+    },
+    "npm_run_check": {
+      "status": "passed",
+      "exit_code": 0
+    },
+    "retained_builds_browser_checks": {
+      "2d": {
+        "status": "passed",
+        "report": "src/cocos/test-results/3d-cleanup-2026-11-07/test-results/flat2d-browser-release.json",
+        "checks": "Desktop and mobile-landscape real movement, inventory, touch attack, saved-position reload; zero runtime errors or failed requests."
+      },
+      "3d": {
+        "status": "passed",
+        "report": "src/cocos/test-results/3d-cleanup-2026-11-07/test-results/browser-release.json",
+        "checks": "Desktop and mobile-landscape real movement, inventory, touch attack, saved-position reload; zero runtime errors or failed requests."
+      }
+    },
+    "rebuild": "Not required: runtime source, imported resources and retained builds are byte-for-byte unchanged."
+  }
+}

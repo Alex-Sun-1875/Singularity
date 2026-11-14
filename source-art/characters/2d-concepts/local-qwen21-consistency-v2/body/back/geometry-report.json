@@ -1,0 +1,131 @@
+{
+  "direction": "back",
+  "status": "single-frame local deterministic guide; requires native masked Qwen seam retouch and final artistic review",
+  "paths": {
+    "original": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\back\\original-rgba.png",
+    "guide": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\back\\guide-rgba.png",
+    "mask": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\back\\edit-mask.png",
+    "reference": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\back\\reference-standing-rgba.png",
+    "prompt": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\back\\prompt.txt"
+  },
+  "source_waist_y": 358,
+  "guide_waist_y": 336.0,
+  "waist_raise_px": 22.0,
+  "head": {
+    "method": "Approved standing head pixels 1:1 integer translation, no resampling or regeneration",
+    "translation_xy": [
+      -11,
+      21
+    ],
+    "scale": 1,
+    "source_polygon": [
+      [
+        229,
+        81
+      ],
+      [
+        276,
+        82
+      ],
+      [
+        291,
+        104
+      ],
+      [
+        293,
+        136
+      ],
+      [
+        283,
+        157
+      ],
+      [
+        276,
+        170
+      ],
+      [
+        278,
+        181
+      ],
+      [
+        234,
+        181
+      ],
+      [
+        225,
+        168
+      ],
+      [
+        219,
+        150
+      ],
+      [
+        212,
+        126
+      ],
+      [
+        214,
+        104
+      ]
+    ],
+    "nontransparent_head_layer_pixels_exact_reference": true,
+    "running_head_landing_and_forward_body_lean_preserved": true
+  },
+  "body_mapping": {
+    "source_y_knots": [
+      0.0,
+      210.0,
+      330.0,
+      435.0,
+      618.0,
+      768.0
+    ],
+    "destination_y_knots": [
+      0.0,
+      210.0,
+      308.0,
+      413.0,
+      618.0,
+      768.0
+    ],
+    "x_coordinates": "unchanged",
+    "waist_coat_plateau": "source y330..435 rigid integer translation -22px; complete arms/weapons excluded",
+    "waist_to_fixed_ankle_y618_gain_percent": 8.462,
+    "overall_height_target": "unchanged head landing, original ground boots and anchor; no bbox fit"
+  },
+  "protection": {
+    "original_arms_hands_pixels_exact": true,
+    "original_boot_pixels_exact": true,
+    "original_weapon_pixels_exact": true,
+    "mask_intersection_protected_pixels": 0,
+    "head_hands_equipment_independent_masks": true
+  },
+  "geometry_changed_pixels": 44282,
+  "qwen_edit_mask_nonzero_pixels": 32661,
+  "occlusion_underlay": {
+    "method": "SciPy distance_transform_edt nearest valid original cloth pixels under independent original hand/sword/boot layers; Qwen mask includes newly revealed underlay seams",
+    "source_pixels": 11082,
+    "visible_destination_pixels": 1792
+  },
+  "foot_anchor_xy": [
+    256,
+    712
+  ],
+  "native_runtime_scale_modified": false,
+  "production_modified": false,
+  "new_model_inference": false,
+  "cloud_generation": false,
+  "limitations": [
+    "Body-only guide is provisional until final local Qwen output and composite visual review; measured projected garment distance is not anatomical bone length.",
+    "Lifted boot stays exactly original; the bent leg therefore keeps phase/foot placement, with larger local knee transition than the grounded leg.",
+    "Back-run sword remains original in this body guide; a separate independent sword layer can be integrated afterward."
+  ],
+  "sha256": {
+    "original-rgba.png": "caf13e1502d75419c5163b8ae7f08b012c990f2033452827a9c0259a88a47848",
+    "reference-standing-rgba.png": "c40ddae5f25f3486700063a4268d760a4896177171cd82ac0ef078a55499b9f6",
+    "guide-rgba.png": "b144358a6cdbb56f96207f0a176eea8cb041d18a30f7436e753ddd0d62e79d1f",
+    "edit-mask.png": "821d016c0210d147c7daefb859c1f6e7108558fb49557e267af88d0795a78d53",
+    "prompt.txt": "cb62310e6f78b787826b47479d18cbf33f149844c09319a52c598b3a796ae345"
+  },
+  "back_run_head_landing_note": "Rear standing approved head is copied at original1:1 scale with integer offset(-11,+21), retaining the rear run drawing head landing about21 canvas pixels lower than standing due to the current run pose/lean. The body edit raises waist22px and changes projected leg/torso proportion only; it does not additionally raise the rear-run crown, increase runtime UPP or fit the complete alpha bbox."
+}

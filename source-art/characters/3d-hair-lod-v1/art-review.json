@@ -1,0 +1,78 @@
+{
+  "date": "2026-11-14",
+  "reviewer": "Codex visual inspection",
+  "status": "ACCEPTED_FOR_CURRENT_GAME_ASSET",
+  "userFinalArtApproval": "Not separately requested/recorded",
+  "scope": "Default curly hairstyle only; generated LoD recorded separately in geometry-report.json. Android emulator Cocos Web build; not TapTap physical-device acceptance.",
+  "cases": {
+    "gamePoses": 3,
+    "gameScreenshots": 9,
+    "bakedHeadPreviewAngles": 4,
+    "previewScreenshots": 8
+  },
+  "findings": [
+    "Curly silhouette, hairline, temples and nape retained",
+    "Fine curl surface detail simplified; modest angularity at close zoom accepted for requested game LoD",
+    "No visible scalp holes or detached hair in reviewed views",
+    "Original material, skinning, animation and shadow settings retained"
+  ],
+  "neutralPreviewDiagnostic": {
+    "pointLightFluxMultiplier": 0.02,
+    "reason": "Original head preview clips bright values; lower identical lights expose geometry detail; diagnostic only"
+  },
+  "errors": [],
+  "gamePixelChecks": [
+    {
+      "pose": 0,
+      "draws": [
+        146,
+        146,
+        146
+      ],
+      "triangles": [
+        139056,
+        111324,
+        139056
+      ],
+      "hairRoiMeanAbs": 0.23448391702359955,
+      "restoredRoiMaxDiff": 0
+    },
+    {
+      "pose": 1,
+      "draws": [
+        148,
+        148,
+        148
+      ],
+      "triangles": [
+        139003,
+        111271,
+        139003
+      ],
+      "hairRoiMeanAbs": 0.23179642227261274,
+      "restoredRoiMaxDiff": 0
+    },
+    {
+      "pose": 2,
+      "draws": [
+        144,
+        144,
+        144
+      ],
+      "triangles": [
+        139035,
+        111303,
+        139035
+      ],
+      "hairRoiMeanAbs": 0.1980347694633409,
+      "restoredRoiMaxDiff": 0
+    }
+  ],
+  "performanceAcceptance": "NOT_APPROVED; V1 low preview FPS, V2 concurrent Creator build. No stable overall CPU/GPU gain claimed.",
+  "runtimeSHA256": "accacd63da9f5770de5196946eec499f39978c49dccd40e706b4d260693152dd",
+  "reports": [
+    "test-results/performance/hair-lod-neutral-qa-v1/report.json",
+    "test-results/performance/hair-lod-moving-abba-v1/comparison.json",
+    "test-results/performance/hair-lod-moving-abba-v2/comparison.json"
+  ]
+}

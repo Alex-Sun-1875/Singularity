@@ -1,0 +1,114 @@
+{
+  "status": "passed-frozen-rune-source-art-and-pixel-alpha-review",
+  "completedAtUtc": "2026-11-08T09:44:23.343692+00:00",
+  "generationRecord": {
+    "path": "source-art/maps/waypoints-runes-v8/generation.json",
+    "sha256": "5bba1f2974f5a4682a995a1ebed9e20015a7708c02a0a83a1b1342b950d83d99",
+    "bytes": 2315
+  },
+  "snapshotManifest": {
+    "path": "src/cocos/temp/map-art-build-project/temp/portal-runes-v2-snapshot-manifest.json",
+    "sha256": "0ac8c47ac92b6ff552727a2ba6d21bfd1232795715ef1a62f031b6578cf7afbc",
+    "bytes": 65084
+  },
+  "sources": [
+    {
+      "path": "src/cocos/assets/scripts/runtime/SceneBuilder.ts",
+      "sha256": "700a50479d835622e53e76f8c1473a5d27a8f60c7440d6cf74a60bb7e649e4ae",
+      "matchesFrozenSnapshot": true
+    },
+    {
+      "path": "src/cocos/assets/scripts/runtime/PortalPlacement.ts",
+      "sha256": "2ff8a6aeea4b52e139b44dad9d22f3ab584afeb44ef1b8103c0f7049b6a1cbe2",
+      "matchesFrozenSnapshot": true
+    },
+    {
+      "path": "src/cocos/assets/scripts/runtime/PortalPresentation.ts",
+      "sha256": "2f482cc8b9d0f6a4b72da0fb343c9adb8c389ae2dccd64e43488e905bcd063e0",
+      "matchesFrozenSnapshot": true
+    },
+    {
+      "path": "src/cocos/assets/scripts/runtime/PortalHud.ts",
+      "sha256": "443dc7973adb53a683c0d710fdd01e7e3dfcbc629fa908e70aa08d3f82e8931d",
+      "matchesFrozenSnapshot": true
+    },
+    {
+      "path": "src/cocos/assets/scripts/runtime/Navigation.ts",
+      "sha256": "69a3446bb117e2cf74b1931f8651d9d4a03c9d21b404ef9e3c51b1343cab66fb",
+      "matchesFrozenSnapshot": true
+    },
+    {
+      "path": "src/cocos/assets/scripts/runtime/Terrain.ts",
+      "sha256": "135129d87fb9612ca7961df8daa410c6d8ab1ede42e50c105b3bf94725d80d73",
+      "matchesFrozenSnapshot": true
+    }
+  ],
+  "outputs": [
+    {
+      "file": "src/cocos/assets/resources/flat2d/waypoints-v1/rune-sigil-v8.png",
+      "sha256": "825e7b55e8d0b84c32d015112f7ca3cda2ab1ddb470820c173a7f35bdde654bc",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "actualMirrorMaxError": 0,
+      "innerDiskRadiusFraction": 0.2,
+      "innerAlphaMin": 0,
+      "innerAlphaMax": 255,
+      "innerTransparentFraction": 0.8462706511175899,
+      "innerVisibleFraction": 0.14206754130223517,
+      "hasInnerRuneAndTransparentGaps": true,
+      "alphaBounds": [
+        37,
+        30,
+        475,
+        461
+      ],
+      "alpha128Bounds": [
+        41,
+        33,
+        471,
+        457
+      ]
+    },
+    {
+      "file": "src/cocos/assets/resources/flat2d/waypoints-v1/rune-glow-v8.png",
+      "sha256": "a867f8f5720cca9152e495df261ad2cb792dd04743bfeba5065b8dd45a3d095d",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "actualMirrorMaxError": 0,
+      "innerDiskRadiusFraction": 0.2,
+      "innerAlphaMin": 0,
+      "innerAlphaMax": 115,
+      "innerTransparentFraction": 0.7673712342079689,
+      "innerVisibleFraction": 0.15038872691933916,
+      "hasInnerRuneAndTransparentGaps": true,
+      "alphaBounds": [
+        32,
+        26,
+        480,
+        466
+      ],
+      "alpha128Bounds": null
+    }
+  ],
+  "meaningOfAlphaCheck": "Inner disk radius20% of image contains both visible rune pixels and fully transparent gaps; does not require the whole center to be empty. Exact horizontal pixel mirroring checked on both RGBA outputs.",
+  "runtimeArtReview": "Root viewed final desktop/mobile four-view contacts and original-pixel T1 crop; rune shape, thickness, negative space, purple glow and label clearance accepted before final input/all97. User approval is not claimed.",
+  "sourceOnlyV1LegacyAudit": {
+    "path": "src/cocos/temp/portal-runes-v1-placement-reuse-review.json",
+    "sha256": "26688aabb19d303f86b68772fd38b77f6596e361c225c4f52b9a34972099b48a",
+    "bytes": 1003
+  },
+  "legacyAuditScope": "Historical read-only check preserved legacy planPortalMounts body and independent final Nav. Current v2 source SHA is listed separately above.",
+  "parallelWorkspaceChangesExcludedFromFrozenPackage": [
+    {
+      "path": "scripts/core/PureCombat.ts",
+      "snapshotSha256": "CC775E5E48C90E25E0D6A091A85CFE391C094072D77B37429E8C35FD9CE4531C",
+      "currentSha256": "DC4C27D696B2D07AD7B4ADCA6A301F559DFC55D426A14FD94B2BE3DFEFB289B6"
+    }
+  ]
+}

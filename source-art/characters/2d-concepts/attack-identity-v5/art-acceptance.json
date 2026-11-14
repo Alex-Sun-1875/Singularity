@@ -1,0 +1,42 @@
+{
+  "status": "accepted-local-art",
+  "date": "2026-11-08",
+  "authority": "User image3; W01 sword attack phase0",
+  "coverage": {
+    "actions": 88,
+    "atlases": 69,
+    "physicalFrames": 996,
+    "equipmentIdles": 56,
+    "dynamicCostumeEdits": 148,
+    "outlierContactSheets": 46,
+    "outlierCandidatesReviewed": 550
+  },
+  "checks": [
+    "four-direction standing/held/attack at same 400px/world and support anchor",
+    "all 46 continuous-mesh outlier sheets independently reviewed; old static thumbnails superseded by final four-direction/native proofs",
+    "9 prior critical native frame defects repaired and independently reviewed",
+    "death hand skin/edge compared against frozen source under rigid translation; no additional or missing hand contours",
+    "new complete static hand/cuff/fingertips and chest/waist/neck/shoulder seams reviewed",
+    "head-edge cleanup pilot and final head details reviewed; visible main body protected",
+    "continuous mesh has no folded triangles; feet/support and original flight offsets retained",
+    "final reference lock preserves accepted phase0 model and neutral leg/boot pixel density across four directions"
+  ],
+  "rejectedMethods": [
+    "whole-frame cloud costume pilot: changed embroidery/boots",
+    "hard bone-tile retarget: duplicate shadows and knee holes; never installed"
+  ],
+  "generation": "two built-in cloud OpenAI image_gen edits; only reviewed arm-down garment portions used with exact accepted head/belt/legs/boots protection",
+  "localLegReportSHA256": "630d81bbef504d6c56931cbaba771340f68a5f7ce43e3067d4952ce9f1db74c9",
+  "headEdgeReportSHA256": "d638b6f242f63e0bdedad52ff4739a8a0ac1f0a522739b237343ebe760e21bd0",
+  "sourceManifestSHA256": "524da53186a5a4512a47c284a599100364c379ca696aa5e96be07f35c9284398",
+  "runtimeValidation": "tracked separately in runtime-audit.json and verification.json after installation/build",
+  "measurementLimit": "Pose-based bone metrics are an internal estimator, not independent anatomical truth; corrections are bounded to preserve natural poses.",
+  "referenceLock": {
+    "frames": 64,
+    "staticIdles": 56,
+    "acceptedReadyRecovery": 8,
+    "otherContinuousMeshFrames": 932,
+    "reportSHA256": "4e64b2fa82a6e5527a5064d26aebd92c3077ed7cd46ba242b6b7c42f266b5028",
+    "reason": "Approved attack reference is immutable. Idles use the identical original leg and boot pixels at identical world scale; phase0 and recovery phase3 share the accepted ready pose. Family medians apply only to other poses."
+  }
+}

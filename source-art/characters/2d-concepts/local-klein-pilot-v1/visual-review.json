@@ -1,0 +1,81 @@
+{
+  "runtime_verdict": "accepted: three local model jobs succeeded",
+  "artwork_verdict": "experimental, not approved for production",
+  "full_frame_findings": [
+    "Running phase broadly preserved",
+    "Back-carried sword was incorrectly moved toward the waist",
+    "Head/face and clothing details drifted from reference"
+  ],
+  "head_crop_findings": [
+    "Local mask compositing preserves every pixel outside its mask",
+    "Generated hairstyle and face orientation still differ from the standing reference",
+    "Current narrow mask exposes an original-face edge; composited trial is rejected"
+  ],
+  "production_sources_unchanged": true,
+  "source_checks": {
+    "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\assets\\W01-explore-idle.png": "df887b28a9bef335aa326d86bf2117a07f1faeef192ac1b55145123b549481cd",
+    "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png": "2c8827afbfba74cdae51d9ea344b8d64f24d897b47b952f3742925dcba5f3316"
+  },
+  "manifest_sha256": "4065d59acbccb8c85642cf31cab840a8fce3577a87806ce2c558096098b41df8",
+  "runs": [
+    {
+      "completed_utc": "2026-11-07T01:25:31.285627+00:00",
+      "elapsed_seconds": 20.07,
+      "prompt_id": "8914e548-750a-432f-ad65-f47268f7e05d",
+      "megapixels": 0.25,
+      "seed": 1707,
+      "endpoint": "http://127.0.0.1:8188",
+      "proxy_used": false,
+      "cloud_image_generation": false,
+      "outputs": [
+        "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-pilot-v1\\results\\running-head-reference\\running-head-reference_00001_.png"
+      ],
+      "dimensions": [
+        [
+          416,
+          624
+        ]
+      ]
+    },
+    {
+      "completed_utc": "2026-11-07T01:26:22.080049+00:00",
+      "elapsed_seconds": 5.05,
+      "prompt_id": "6ff2ca18-58c3-407d-adf6-450d421d7df2",
+      "megapixels": 0.375,
+      "seed": 1707,
+      "endpoint": "http://127.0.0.1:8188",
+      "proxy_used": false,
+      "cloud_image_generation": false,
+      "outputs": [
+        "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-pilot-v1\\results\\running-head-reference-512\\running-head-reference-512_00001_.png"
+      ],
+      "dimensions": [
+        [
+          512,
+          768
+        ]
+      ]
+    },
+    {
+      "completed_utc": "2026-11-07T01:28:20.635797+00:00",
+      "elapsed_seconds": 15.06,
+      "prompt_id": "efc207ca-1a67-4f39-84a0-ebd9d8bfc1db",
+      "megapixels": 0.25,
+      "seed": 1707,
+      "endpoint": "http://127.0.0.1:8188",
+      "proxy_used": false,
+      "cloud_image_generation": false,
+      "outputs": [
+        "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-pilot-v1\\results\\head-local\\head-local_00001_.png"
+      ],
+      "dimensions": [
+        [
+          512,
+          512
+        ]
+      ]
+    }
+  ],
+  "selected_artwork": null,
+  "preview": "comparison-preview.jpg"
+}

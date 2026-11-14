@@ -1,0 +1,28 @@
+const {chromium}=require('playwright');
+const fs=require('node:fs');const path=require('node:path');const assert=require('node:assert/strict');
+let launched;
+(async()=>{
+ const out=path.resolve(__dirname,'../test-results');fs.mkdirSync(out,{recursive:true});
+ const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true,args:['--enable-unsafe-swiftshader']});
+ launched=browser;
+ const page=await browser.newPage({viewport:{width:1280,height:720}}),events=[];
+ page.on('console',m=>{if(['error','warning'].includes(m.type()))events.push({type:m.type(),text:m.text()});});page.on('pageerror',e=>events.push({type:'pageerror',text:e.stack||String(e)}));
+ await page.goto(process.env.CHAPTER_URL||'http://localhost:7456/',{waitUntil:'domcontentloaded',timeout:60000});
+ await page.waitForFunction(()=>globalThis.__chapter?.inspect().ready||globalThis.__chapter?.inspect().errors, undefined, {timeout:55000});
+ await page.waitForTimeout(150);
+ const state=await page.evaluate(()=>globalThis.__chapter?.inspect()||{body:document.body.innerText.slice(0,1500)});
+ fs.writeFileSync(path.join(out,'browser-smoke.json'),JSON.stringify({state,events},null,2));
+ await page.screenshot({path:path.join(out,'cocos-title.png')});
+ assert.equal(state.ready,true,'Cocos actor/scenery boot must succeed');
+ await page.mouse.click(640,540);
+ const before=await page.evaluate(()=>({...globalThis.__chapter.state.player}));
+ await page.keyboard.down('KeyW');await page.waitForTimeout(650);await page.keyboard.up('KeyW');
+ const after=await page.evaluate(()=>({...globalThis.__chapter.state.player}));
+ assert.ok(Math.hypot(after.x-before.x,after.z-before.z)>1,'real keyboard input must move the rendered character');
+ await page.screenshot({path:path.join(out,'cocos-inn-playable.png')});
+ await page.keyboard.press('KeyB');await page.waitForTimeout(100);await page.screenshot({path:path.join(out,'cocos-inventory.png')});
+ await page.keyboard.press('Escape');
+ fs.writeFileSync(path.join(out,'browser-smoke.json'),JSON.stringify({state,events},null,2));
+ console.log(JSON.stringify({state,movement:{before:{x:before.x,z:before.z},after:{x:after.x,z:after.z}},events:events.slice(-20)},null,2));await browser.close();
+ assert.equal(events.filter(e=>e.type==='pageerror'||e.type==='error').length,0,'runtime must not emit errors');
+})().catch(e=>{console.error(e);process.exitCode=1;}).finally(async()=>{await launched?.close();});

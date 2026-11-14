@@ -1,0 +1,169 @@
+{
+  "id": "U2-4",
+  "generation": {
+    "status": "completed",
+    "provider": "builtin_image_gen",
+    "modelVersion": "not exposed",
+    "transparentRequested": true,
+    "requestedSize": [
+      1536,
+      1536
+    ],
+    "startedAt": "2026-11-08T02:34:35.278154+00:00",
+    "completedAt": "2026-11-08T02:48:48.092609+00:00",
+    "output": "sheet-v1.png"
+  },
+  "reference": {
+    "sourceBoard": "source-art/encounters/cloud-world-v2/u2-catacombs.png",
+    "sourceSize": [
+      1254,
+      1254
+    ],
+    "sourceMode": "RGB",
+    "sourceSha256": "5aa3ca9b0efb147be6c109a1353e6e2e190960885285afbcd202f53b9c242a5b",
+    "sourcePosition": "middle row, left-to-right 4",
+    "cropRect": [
+      885,
+      565,
+      1245,
+      895
+    ],
+    "cropSize": [
+      360,
+      330
+    ],
+    "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/u2-4-reference.png",
+    "cropSha256": "9b89f9ab6acfe8c4bb9ebd623e696f04f9022eb084197014e6ec915300e7375a",
+    "exactSourcePixels": true,
+    "alphaRemovalPerformed": false,
+    "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/u2-catacombs.txt",
+    "neighborFragmentsToIgnore": "none known; visual review still required"
+  },
+  "requestedSheet": {
+    "size": [
+      1536,
+      1536
+    ],
+    "columns": [
+      "down",
+      "left",
+      "up",
+      "right"
+    ],
+    "rows": [
+      "idle",
+      "walk-a",
+      "walk-b",
+      "primary"
+    ],
+    "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+    "productionAtlas": [
+      1024,
+      1024
+    ],
+    "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+  },
+  "sourcePrompt": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/u2-4-sheet-prompt.txt",
+  "promptSha256": "b758e66d6b07d89710c525e1fba84403f0e55bf5c28c0e21564436fc03321490",
+  "sourceOnly": true,
+  "runtimeIntegrated": false,
+  "anchorBasis": "Support center of both stone feet, never mallet tip, arch or hanging cloth.",
+  "status": "source-generated-and-static-reviewed",
+  "originalBuiltinPath": "C:\\Users\\Alexa\\.codex\\generated_images\\01a1b89a-a42b-7c92-879a-01bbcf0b9c69\\exec-ddcd0e1f-d8fb-411f-b2e8-6d4af81325ca.png",
+  "actualOutput": {
+    "size": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "cff6ae9a2db6bc4de4b4d42e7f16f90ff444e48a37d1c4156e68ff0f8265ef92",
+    "bytes": 2340016,
+    "alpha1to3": 291244,
+    "alphaOver200": 541728
+  },
+  "outputs": {
+    "raw": "raw.png",
+    "candidate": "sheet-v1.png"
+  },
+  "output": "sheet-v1.png",
+  "selectedSource": "sheet-v1.png",
+  "selectedSha256": "cff6ae9a2db6bc4de4b4d42e7f16f90ff444e48a37d1c4156e68ff0f8265ef92",
+  "selectedSize": [
+    1254,
+    1254
+  ],
+  "actualLayout": {
+    "columns": [
+      "down",
+      "left",
+      "up",
+      "right"
+    ],
+    "rows": [
+      "idle",
+      "walk-a",
+      "walk-b",
+      "primary-attack"
+    ],
+    "grid": [
+      4,
+      4
+    ],
+    "boundariesX": [
+      0,
+      314,
+      627,
+      941,
+      1254
+    ],
+    "boundariesY": [
+      0,
+      314,
+      627,
+      941,
+      1254
+    ],
+    "verification": "Actual selected sheet visually checked on neutral grey, not assumed from request."
+  },
+  "supportCount": 2,
+  "artReviewFile": "art-review.json",
+  "fileRecords": [
+    {
+      "path": "prompt.txt",
+      "sha256": "d476108dc9695c80cadb90bfba3eb439071d74fb520384a382679dc5917bec41",
+      "bytes": 4139
+    },
+    {
+      "path": "raw.png",
+      "sha256": "cff6ae9a2db6bc4de4b4d42e7f16f90ff444e48a37d1c4156e68ff0f8265ef92",
+      "bytes": 2340016,
+      "size": [
+        1254,
+        1254
+      ]
+    },
+    {
+      "path": "sheet-v1.png",
+      "sha256": "cff6ae9a2db6bc4de4b4d42e7f16f90ff444e48a37d1c4156e68ff0f8265ef92",
+      "bytes": 2340016,
+      "size": [
+        1254,
+        1254
+      ]
+    }
+  ],
+  "repairs": {
+    "method": "Original16cells selected without repair.",
+    "protectedOriginalCells": 16,
+    "localProcessing": "Only crop/repack, uniform whole2x2patch1254to628resample and selected cell composition. No per-frame bbox fitting. U2-3 only cloud-derived alpha repair, details in alpha-cleanup.json."
+  },
+  "promptFileSha256": "d476108dc9695c80cadb90bfba3eb439071d74fb520384a382679dc5917bec41",
+  "promptTextSha256": "b758e66d6b07d89710c525e1fba84403f0e55bf5c28c0e21564436fc03321490",
+  "promptSha256Type": "Tool prompt UTF8 text with LF, distinct from Windows CRLF file byte SHA256",
+  "artReview": {
+    "file": "art-review.json",
+    "status": "static-approved-for-source-processing",
+    "runtimeAcceptance": false,
+    "generationAndArtReviewSeparate": true
+  }
+}

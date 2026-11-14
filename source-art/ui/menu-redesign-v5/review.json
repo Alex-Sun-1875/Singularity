@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-11",
+  "type": "ui-design-proposal",
+  "revision": "v5-top-center-collapsible-automation-status",
+  "generator": "OpenAI built-in image_gen (cloud)",
+  "output": "menu-ui-proposal-v5.png",
+  "reference": {
+    "role": "gameplay-and-shared-frame-reference",
+    "path": "reference-gameplay.jpg",
+    "derivedFrom": "../menu-redesign-v4/menu-ui-proposal-v4.png"
+  },
+  "generation": {
+    "status": "completed",
+    "prompt": "prompt.txt"
+  },
+  "artReview": {
+    "status": "visual-direction-approved; implementation-user-review-pending",
+    "selfReview": {
+      "placement": "Top-center between portrait and minimap; left mode strip removed.",
+      "states": [
+        "Collapsed / automation off",
+        "Expanded / three mode choices",
+        "Collapsed / automation enabled, waiting for enemies, with separate stop control"
+      ],
+      "frame": "Shared dark-gold fine double-line frame retained.",
+      "text": "Reviewed 自动操作, 寻路, 战斗, 挂机, 自动战斗·待敌, 停止 and behavior note."
+    },
+    "limitations": [
+      "Raster design only; actual touch geometry, viewport ratio, safe areas and runtime transitions remain to be implemented and verified."
+    ],
+    "directionApprovedOn": "2026-11-11"
+  },
+  "interactionContract": {
+    "expand": "Reveal options without changing current automation state.",
+    "collapse": "Hide options without stopping automation.",
+    "choose": "Select a mode and collapse, then display actual state.",
+    "stop": "Stop actual automation; never confuse stopping with collapse.",
+    "status": "Derived from current automation mode, navigation target and actual status; distinguish enabled/waiting from fighting.",
+    "manualTakeover": "Preserve existing rules: navigation pauses with explicit continuation; battle/idle assistance stops.",
+    "relaunch": "Never auto-enable automation from the visual expansion preference."
+  },
+  "implementation": {
+    "status": "implemented-and-locally-verified",
+    "runtimeComponents": [
+      "AutomationHud.ts",
+      "MenuPanel.ts",
+      "UiSkin.ts",
+      "UiChrome.ts"
+    ],
+    "artResources": "components/provenance.json",
+    "verification": "../../../test-results/ui-menu-v5/integration.json",
+    "pending": "TapTap physical-device validation and user review of runtime art."
+  }
+}

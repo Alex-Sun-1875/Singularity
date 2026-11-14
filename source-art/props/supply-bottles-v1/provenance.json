@@ -1,0 +1,115 @@
+{
+  "date": "2026-11-12",
+  "generation": {
+    "tool": "OpenAI image_gen (cloud)",
+    "status": "completed",
+    "prompts": "prompts.json"
+  },
+  "processing": {
+    "script": "tools/design/prepare-supply-bottles.py",
+    "method": "Alpha-aware crop and Lanczos resize; local translucent contact shadow; original generated alpha preserved."
+  },
+  "artReview": {
+    "status": "superseded after user reported floating appearance",
+    "date": "2026-11-12",
+    "notes": "Three distinct physical bottle cutouts; original colors; subtle contact shadows; no supply UI glyphs or halos. Checked 844x390/DPR3 and 932x430. One mesh per supply pile.",
+    "evidence": [
+      "test-results/supply-bottles-v1/bottles-844x390.png",
+      "test-results/supply-bottles-v1/bottles-detail.png",
+      "test-results/supply-bottles-v1/browser-review.json"
+    ],
+    "pending": [
+      "TapTap package and target-device validation"
+    ],
+    "followup": "source-art/props/supply-bottles-v2/README.md"
+  },
+  "assets": [
+    {
+      "item": "health",
+      "source": "source-art/props/supply-bottles-v1/raw/health.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceCrop": [
+        112,
+        72,
+        1194,
+        1168
+      ],
+      "output": "src/cocos/assets/resources/equipment/supplies-v1/health-bottle.png",
+      "outputSize": [
+        256,
+        256
+      ],
+      "sha256": "d7f6b135d88a78b32e1806879d50ee55d02488030da8c590788e1c680901035c",
+      "bytes": 71176,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "8f2c260517daab7b4b5c6c81dd957691f3a480d3995065286f23dd15b1f326f0"
+    },
+    {
+      "item": "focus",
+      "source": "source-art/props/supply-bottles-v1/raw/focus.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceCrop": [
+        77,
+        70,
+        1191,
+        1206
+      ],
+      "output": "src/cocos/assets/resources/equipment/supplies-v1/focus-bottle.png",
+      "outputSize": [
+        256,
+        256
+      ],
+      "sha256": "e374deb0d7ba5e59493efbcaef7d6cff7032a32c0631a258f92b84f2869767e1",
+      "bytes": 66433,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "fb5239ae0e701a7451b314b37102c8af8f67bfb58ee5e8951d57139bd0793600"
+    },
+    {
+      "item": "oil",
+      "source": "source-art/props/supply-bottles-v1/raw/oil.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceCrop": [
+        105,
+        70,
+        1141,
+        1171
+      ],
+      "output": "src/cocos/assets/resources/equipment/supplies-v1/oil-bottle.png",
+      "outputSize": [
+        256,
+        256
+      ],
+      "sha256": "b836a4681643e33054f96109a2c936226cb5b36415d18399000072bd35a4b3f4",
+      "bytes": 74130,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "sourceSha256": "68a98e2a790269dd45799276212c33396fb3d2b96535a5f41e67fcf62d44433a"
+    }
+  ],
+  "verification": {
+    "typeChecks": [
+      "full",
+      "core"
+    ],
+    "webBuild": "concept-2d completed",
+    "pickupRules": "existing supply rule driver passed",
+    "browser": "full inventory, use then auto-pickup, partial stacks, object priority, material state, zero page errors and art warnings"
+  }
+}

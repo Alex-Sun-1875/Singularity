@@ -1,0 +1,749 @@
+{
+  "title": "HUD/UI 与主角绘制提交优化，以及当前 CPU 热点分析",
+  "date": "2026-11-14",
+  "debugWindowSeconds": 120,
+  "scope": "主工程 Cocos Creator 3.8.8 / TapTap 小游戏，保留现有60FPS设置、分辨率、材质、阴影、模型拓扑和操作布局。Web/模拟器数据不能替代 TapTap 手机验收。",
+  "implementation": [
+    {
+      "file": "src/cocos/assets/scripts/features/actors/runtime/HeroBodyBatches.ts",
+      "change": "以公开 Mesh.merge 合并相同骨骼/材质/局部变换/顶点布局的稳定衣物，保留原节点和资源，原生 SkinnedMeshRenderer；面部、头发、头罩和武器不参与。原始材质属性、动画、阴影、三角形保留。",
+      "observedFrozenHeroDraws": {
+        "before": 38,
+        "after": 30
+      },
+      "trianglesBeforeAndAfter": 115328,
+      "tradeoff": "运行时生成合批网格，试验记录新增固定图形缓冲 2263796 字节（约2.16MiB），不因击杀或重生增加。原预制体资源仍由现有资源层管理，未为节省空间强行释放共享源网格。CPU/GPU净收益未证实。"
+    },
+    {
+      "files": [
+        "src/cocos/assets/scripts/shared/ui/HudFrameGeometry.ts",
+        "src/cocos/assets/scripts/features/journey/runtime/QuestTracker.ts",
+        "src/cocos/assets/scripts/features/automation/runtime/AutomationHud.ts"
+      ],
+      "change": "把HUD相邻装饰底板的相同几何提交到已有阴影Graphics，原节点生命周期和输入区域保持。未修改内存会话维护的DoubleGoldFrame/UiSkin资源层。"
+    },
+    {
+      "files": [
+        "src/cocos/assets/scripts/app/Hud.ts",
+        "src/cocos/assets/scripts/shared/ui/UiChrome.ts"
+      ],
+      "change": "头像金属圆框与血量弧线共用同一个Graphics，原几何和颜色保持。未采用改变字形栅格的Label缓存试验。"
+    }
+  ],
+  "integrationBoundary": {
+    "existing": [
+      {
+        "path": "src\\cocos\\assets\\scripts\\app\\Hud.ts",
+        "beforeSha256": "8cb32832cc1f215ebbac2f923820872e393c28ff13f0c5114857a72c2b93a467",
+        "afterSha256": "8a15fba55d892c0a1ac4fc6053e9af6a2c72d248cf5b738beb116b19d9d16218"
+      },
+      {
+        "path": "src\\cocos\\assets\\scripts\\shared\\ui\\UiChrome.ts",
+        "beforeSha256": "584ef2acdf09784d75477ca3a33ea80dcff19d57c53b888de10416183a927751",
+        "afterSha256": "34dbcc050aab816cacd9c7ff825e21d24eef5bfc8ac87ade00ed85cf1ce96610"
+      },
+      {
+        "path": "src\\cocos\\assets\\scripts\\features\\actors\\runtime\\Actors.ts",
+        "beforeSha256": "356b0d7f5c42bde5c114d8c76e192a43ab1fc022e65f1ecbf89d9f9d4581e0bf",
+        "afterSha256": "96350778d808b0b029001402a851f76294576161bee276e7814d20b972112f75"
+      },
+      {
+        "path": "src\\cocos\\assets\\scripts\\features\\journey\\runtime\\QuestTracker.ts",
+        "beforeSha256": "dbd8b42ded36a72534154d18461d331860b8db12cf25a4428fd3bf90a273b98a",
+        "afterSha256": "3806a39baca6460277fa21515df1ca13a866deb94557f5b6ea4108c9f36122cb"
+      },
+      {
+        "path": "src\\cocos\\assets\\scripts\\features\\automation\\runtime\\AutomationHud.ts",
+        "beforeSha256": "8886e3764df1f7d0cb352b36d435bb64db8782857d23c5c27c09c8f788f72fd6",
+        "afterSha256": "0c1b3dd15ebe18385268e22d0ab0a24abb5aeb413fe75a8a6d0315ff89cdfde1"
+      }
+    ],
+    "new": [
+      {
+        "path": "src\\cocos\\assets\\scripts\\features\\actors\\runtime\\HeroBodyBatches.ts",
+        "sha256": "805b293dabaa0c9adf8a67221c75cda5e2300444ed1a3ac4769b2fcf2ec2d5b7"
+      },
+      {
+        "path": "src\\cocos\\assets\\scripts\\features\\actors\\runtime\\HeroBodyBatches.ts.meta",
+        "sha256": "722536823a5e85ef5918aaba147bd2bba164e5c9fc779bcc61c2de9b84ec1d08"
+      },
+      {
+        "path": "src\\cocos\\assets\\scripts\\shared\\ui\\HudFrameGeometry.ts",
+        "sha256": "6ac13387daf4cc5d081354d0cab2eb58ac7ffe556a1b7f645cbee55a75aca1cb"
+      },
+      {
+        "path": "src\\cocos\\assets\\scripts\\shared\\ui\\HudFrameGeometry.ts.meta",
+        "sha256": "3ae0653f800474421e98ebddcbb4d04746c399b047886ff089e843605ee20aed"
+      }
+    ]
+  },
+  "isolation": "基准和候选均在独立 temp/render-opt-20261114 快照构建，未在CPU窗口触发构建。只合入已核对的小范围源代码差异与两个新TS文件及Creator生成的meta。未重写资源、缓存、图标、材质、发型、加载和卸载策略；已有内存修改保留。",
+  "checks": {
+    "typecheck": {
+      "status": "passed",
+      "log": "src/cocos/temp/render-opt-main-typecheck.log"
+    },
+    "existingTests": {
+      "passed": 140,
+      "failed": 0,
+      "log": "src/cocos/temp/render-opt-main-tests.log"
+    },
+    "visual": {
+      "report": "src\\cocos\\test-results\\performance\\render-opt-visual-v4\\report.json",
+      "pixelComparison": "src\\cocos\\test-results\\performance\\render-opt-visual-v4\\pixel-comparison.json",
+      "hudStates": [
+        "HP200",
+        "HP80",
+        "HP0",
+        "expandedQuestAndAutomation"
+      ],
+      "hudMaxChannelDifference": 1,
+      "heroPairs": 28,
+      "heroPixelExactPairs": 25,
+      "worstHeroChangedPixelsAbove3": 6,
+      "note": "仅少数边缘栅格差异；所有姿势、几何量与绘制顺序对照保留。"
+    },
+    "lifecycle": {
+      "status": "passed",
+      "report": "src/cocos/test-results/performance/render-opt-lifecycle/report.json",
+      "cases": [
+        "源部件隐藏/恢复时整组合批回退",
+        "实际world rebuild保留同一主角与3个合批网格",
+        "CharacterPreview创建/关闭恢复原引用计数",
+        "主角合批owner销毁时仍保护存活预览网格"
+      ],
+      "meshFinalRefCounts": [
+        0,
+        0,
+        0
+      ],
+      "note": "预览销毁同时停用并移除宿主Sprite，与真实菜单关闭一致。v1/v2试验未移除宿主显示节点，引用已销毁SpriteFrame后出错，属于诊断夹具问题；原失败/中止保留，未修改CharacterPreview。仅确认所有权和引用计数，不声称完成另一会话的内存验收。"
+    }
+  },
+  "continuousHunt": [
+    {
+      "report": "src\\cocos\\test-results\\performance\\render-opt-android-control-v2\\report.json",
+      "status": "passed",
+      "errors": [],
+      "metrics": {
+        "windows": 1,
+        "fps": 59.98916954444022,
+        "p95Ms": 19,
+        "p99Ms": 21.69999999999709,
+        "over33Ratio": 0.00022139812918580838,
+        "mainThreadMsPerFrame": 3.6800698472437454,
+        "processCpuSeconds": 201.92000000000002,
+        "drawCalls": 167,
+        "drawCallsP95": 179,
+        "triangles": 140118,
+        "trianglesP95": 140941,
+        "minOneSecondFps": 58,
+        "peakProcessMemoryBytes": 511347712,
+        "normalizedCpuPercent": 16.76031258912632,
+        "corePercent": 67.04125035650527,
+        "coreEquivalents": 0.6704125035650528,
+        "maxMs": 37,
+        "over100Count": 0,
+        "hits": 402
+      },
+      "kills": 80,
+      "respawns": 73,
+      "frameRate": 60,
+      "measurementStarted": "2026-11-14T01:17:51.815Z",
+      "buildHashes": {
+        "http://127.0.0.1:7571/taptap-render-control/assets/main/index.e54dc.js": "c26b5371026d570247e0d083e43b9dd11093db029de802ea6d65233e2ad1193a"
+      }
+    },
+    {
+      "report": "src\\cocos\\test-results\\performance\\render-opt-android-candidate-v2\\report.json",
+      "status": "passed",
+      "errors": [],
+      "metrics": {
+        "windows": 1,
+        "fps": 59.996538788981404,
+        "p95Ms": 19,
+        "p99Ms": 21.699999999953434,
+        "over33Ratio": 0.00022147167930900837,
+        "mainThreadMsPerFrame": 3.758743107075628,
+        "processCpuSeconds": 201.11,
+        "drawCalls": 154,
+        "drawCallsP95": 169,
+        "triangles": 140066,
+        "trianglesP95": 140970,
+        "minOneSecondFps": 58,
+        "peakProcessMemoryBytes": 498980864,
+        "normalizedCpuPercent": 16.70067533475259,
+        "corePercent": 66.80270133901035,
+        "coreEquivalents": 0.6680270133901035,
+        "maxMs": 37.29999999998836,
+        "over100Count": 0,
+        "hits": 414
+      },
+      "kills": 82,
+      "respawns": 73,
+      "frameRate": 60,
+      "measurementStarted": "2026-11-14T01:23:25.472Z",
+      "buildHashes": {
+        "http://127.0.0.1:7571/taptap-render-candidate-qa/assets/main/index.0c706.js": "b10efc8986df198a56d3f04d63f1a092cec1c9c68245611e0d6512a97f53d500"
+      }
+    },
+    {
+      "report": "src\\cocos\\test-results\\performance\\render-opt-android-candidate-v3\\report.json",
+      "status": "failed",
+      "errors": [
+        "H12-move-hunt-BOW: p99Ms regression 21.70 -> 29.40"
+      ],
+      "metrics": {
+        "windows": 1,
+        "fps": 59.269426748841745,
+        "p95Ms": 19.100000000093132,
+        "p99Ms": 29.400000000023283,
+        "over33Ratio": 0.0004484053584440334,
+        "mainThreadMsPerFrame": 3.719833034413183,
+        "processCpuSeconds": 194.73000000000002,
+        "drawCalls": 152,
+        "drawCallsP95": 165,
+        "triangles": 140005,
+        "trianglesP95": 140955,
+        "minOneSecondFps": 54,
+        "peakProcessMemoryBytes": 492529664,
+        "normalizedCpuPercent": 16.17186339928533,
+        "corePercent": 64.68745359714131,
+        "coreEquivalents": 0.6468745359714131,
+        "maxMs": 43.09999999997672,
+        "over100Count": 0,
+        "hits": 407
+      },
+      "kills": 81,
+      "respawns": 76,
+      "frameRate": 60,
+      "measurementStarted": "2026-11-14T01:29:04.803Z",
+      "buildHashes": {
+        "http://127.0.0.1:7571/taptap-render-candidate-qa/assets/main/index.0c706.js": "b10efc8986df198a56d3f04d63f1a092cec1c9c68245611e0d6512a97f53d500"
+      }
+    },
+    {
+      "report": "src\\cocos\\test-results\\performance\\render-opt-android-control-v3\\report.json",
+      "status": "failed",
+      "errors": [
+        "1-H12-move-hunt-BOW: 1-second FPS below floor 50"
+      ],
+      "metrics": {
+        "windows": 1,
+        "fps": 57.85043528175639,
+        "p95Ms": 20.9000000001397,
+        "p99Ms": 31.800000000046566,
+        "over33Ratio": 0.0011485012059262662,
+        "mainThreadMsPerFrame": 3.6585399942578234,
+        "processCpuSeconds": 194.32999999999998,
+        "drawCalls": 168,
+        "drawCallsP95": 181,
+        "triangles": 140039,
+        "trianglesP95": 140928,
+        "minOneSecondFps": 49,
+        "peakProcessMemoryBytes": 495444992,
+        "normalizedCpuPercent": 16.13849424103319,
+        "corePercent": 64.55397696413276,
+        "coreEquivalents": 0.6455397696413275,
+        "maxMs": 43.39999999990687,
+        "over100Count": 0,
+        "hits": 427
+      },
+      "kills": 83,
+      "respawns": 77,
+      "frameRate": 60,
+      "measurementStarted": "2026-11-14T01:34:31.989Z",
+      "buildHashes": {
+        "http://127.0.0.1:7571/taptap-render-control/assets/main/index.e54dc.js": "c26b5371026d570247e0d083e43b9dd11093db029de802ea6d65233e2ad1193a"
+      }
+    }
+  ],
+  "cpuBenefitConclusion": "Android第1对CPU67.04→66.80%单核，主线程3.680→3.759ms/帧；复测CPU64.55与64.69%，主线程3.659与3.720ms/帧。未确认总CPU或主线程稳定下降，不能把绘制调用降幅等同CPU收益。第1对约60FPS通过；第2候选p99退化、反向原版也出现49FPS最低秒窗口，原始失败保留，不修改限帧、节拍器或门槛。",
+  "gpuUtilization": {
+    "scope": "Windows GPU Engine 原生计数，同一宿主模拟器进程、相同刷怪年龄约最后25秒，取进程最忙引擎，不累加各引擎。并非物理安卓手机GPU。",
+    "androidHost": [
+      {
+        "file": "src\\cocos\\test-results\\performance\\render-opt-android-control-v3\\gpu-engine.jsonl",
+        "processId": 28192,
+        "start": "2026-11-14T01:39:00.1123669Z",
+        "end": "2026-11-14T01:39:22.3603880Z",
+        "samples": 23,
+        "warmupSamplesOmitted": 2,
+        "meanPercent": 11.180963943595412,
+        "medianPercent": 11.096041686123206,
+        "minPercent": 8.9711149199751,
+        "maxPercent": 14.089267258563575,
+        "nonzeroStatuses": []
+      },
+      {
+        "file": "src\\cocos\\test-results\\performance\\render-opt-android-candidate-v3\\gpu-engine.jsonl",
+        "processId": 28192,
+        "start": "2026-11-14T01:33:31.0238072Z",
+        "end": "2026-11-14T01:33:53.2387147Z",
+        "samples": 23,
+        "warmupSamplesOmitted": 2,
+        "meanPercent": 11.187560416596407,
+        "medianPercent": 10.659601586665026,
+        "minPercent": 9.815291417090757,
+        "maxPercent": 12.87875644153787,
+        "nonzeroStatuses": []
+      }
+    ],
+    "conclusion": "平均11.18096→11.18756%，无明确下降。",
+    "desktopAbba": [
+      {
+        "label": "1-control",
+        "nativeGpu": {
+          "file": "src\\cocos\\test-results\\performance\\render-opt-gpu-abba-v1\\1-control-gpu-engine.jsonl",
+          "processId": 54836,
+          "start": "2026-11-14T01:40:32.1810863Z",
+          "end": "2026-11-14T01:40:54.3684168Z",
+          "samples": 23,
+          "warmupSamplesOmitted": 2,
+          "meanPercent": 21.771996138998798,
+          "medianPercent": 22.694730944363513,
+          "minPercent": 13.399193740468398,
+          "maxPercent": 29.607898060473513,
+          "nonzeroStatuses": []
+        },
+        "queryMs": {
+          "samples": 1801,
+          "median": 15.872,
+          "mean": 14.121113301499166,
+          "p95": 18.05824,
+          "disjointCount": 0
+        }
+      },
+      {
+        "label": "2-candidate-qa",
+        "nativeGpu": {
+          "file": "src\\cocos\\test-results\\performance\\render-opt-gpu-abba-v1\\2-candidate-qa-gpu-engine.jsonl",
+          "processId": 54836,
+          "start": "2026-11-14T01:41:31.8281450Z",
+          "end": "2026-11-14T01:41:54.0349365Z",
+          "samples": 23,
+          "warmupSamplesOmitted": 2,
+          "meanPercent": 23.408908486158047,
+          "medianPercent": 25.076239345950675,
+          "minPercent": 12.878028391991252,
+          "maxPercent": 27.411013222762392,
+          "nonzeroStatuses": []
+        },
+        "queryMs": {
+          "samples": 1800,
+          "median": 3.65056,
+          "mean": 3.3862774755555556,
+          "p95": 5.51424,
+          "disjointCount": 0
+        }
+      },
+      {
+        "label": "3-candidate-qa",
+        "nativeGpu": {
+          "file": "src\\cocos\\test-results\\performance\\render-opt-gpu-abba-v1\\3-candidate-qa-gpu-engine.jsonl",
+          "processId": 54836,
+          "start": "2026-11-14T01:42:31.5441269Z",
+          "end": "2026-11-14T01:42:53.7054113Z",
+          "samples": 23,
+          "warmupSamplesOmitted": 2,
+          "meanPercent": 22.054900255424705,
+          "medianPercent": 24.266411899840236,
+          "minPercent": 12.778138797470278,
+          "maxPercent": 26.729180627353372,
+          "nonzeroStatuses": []
+        },
+        "queryMs": {
+          "samples": 1801,
+          "median": 3.648512,
+          "mean": 3.4117004686285397,
+          "p95": 5.508096,
+          "disjointCount": 0
+        }
+      },
+      {
+        "label": "4-control",
+        "nativeGpu": {
+          "file": "src\\cocos\\test-results\\performance\\render-opt-gpu-abba-v1\\4-control-gpu-engine.jsonl",
+          "processId": 54836,
+          "start": "2026-11-14T01:43:31.6744736Z",
+          "end": "2026-11-14T01:43:53.8203595Z",
+          "samples": 23,
+          "warmupSamplesOmitted": 2,
+          "meanPercent": 21.57967304931962,
+          "medianPercent": 21.57589777063336,
+          "minPercent": 13.75142383817351,
+          "maxPercent": 29.460308643774674,
+          "nonzeroStatuses": []
+        },
+        "queryMs": {
+          "samples": 1800,
+          "median": 15.804928,
+          "mean": 13.869852302222222,
+          "p95": 18.130944,
+          "disjointCount": 0
+        }
+      }
+    ],
+    "queryCaution": "桌面GPU elapsed query与原生忙碌率走势不一致：query span包含提交间隙/等待和共享GPU调度，不能把其降幅当硬件忙碌率或功耗降幅。原始结果保留。"
+  },
+  "currentCpuFocus": {
+    "report": "src\\cocos\\test-results\\performance\\cpu-focus-current-120s\\focus-summary.json",
+    "rawReport": "src\\cocos\\test-results\\performance\\cpu-focus-current-120s\\report.json",
+    "seconds": 120.49920000000002,
+    "kills": 34,
+    "respawns": 29,
+    "enemySlots": 19,
+    "method": "同一候选Android模拟器，2分钟正常移动刷怪，在0–20秒和100–120秒采样调用栈。以精确加载的打包源码映射到业务模块和引擎方法，/proc记录各线程CPU。父子调用耗时重叠，不可相加。",
+    "profileOverhead": "启用采样器和Debugger的本轮总CPU93.61%及主线程4.452ms/帧只存为诊断观测，不能用作普通刷怪CPU或与未插桩基准计算优化百分比。",
+    "mainHotspots": [
+      {
+        "part": "引擎渲染收集和提交",
+        "sampledMsPerFrame": [
+          1.10319,
+          1.20383
+        ],
+        "entry": "Root.frameMove",
+        "details": [
+          {
+            "part": "渲染管线",
+            "msPerFrame": [
+              0.6718,
+              0.71594
+            ]
+          },
+          {
+            "part": "其中ForwardStage",
+            "msPerFrame": [
+              0.45218,
+              0.46749
+            ]
+          },
+          {
+            "part": "其中WebGL2状态绑定",
+            "msPerFrame": [
+              0.29207,
+              0.34479
+            ],
+            "work": "useProgram、纹理、输入顶点缓冲和深度/混合/光栅状态绑定，原始函数w3及bindStates源码已核对。"
+          },
+          {
+            "part": "UI收集",
+            "msPerFrame": [
+              0.23858,
+              0.26533
+            ],
+            "entry": "UI.update/UI.walk",
+            "work": "遍历可见UI节点、组装批次、处理Graphics/Sprite/Mask等渲染器。属于Root.frameMove子项。"
+          }
+        ]
+      },
+      {
+        "part": "战斗、移动、敌人规则",
+        "sampledMsPerFrame": [
+          0.57559,
+          0.7328
+        ],
+        "file": "src/cocos/assets/scripts/core/GameSession.ts:427",
+        "details": [
+          {
+            "part": "敌人AI",
+            "msPerFrame": [
+              0.19328,
+              0.32059
+            ]
+          },
+          {
+            "part": "移动/碰撞",
+            "msPerFrame": [
+              0.18012,
+              0.24324
+            ]
+          },
+          {
+            "part": "全调用路径视线检测",
+            "msPerFrame": [
+              0.12871,
+              0.15643
+            ],
+            "file": "src/cocos/assets/scripts/features/world/runtime/SceneBuilder.ts:637",
+            "note": "有PhysicsSystem.raycastClosest；和前两项存在重叠。低帧>20ms时advance会分步。"
+          }
+        ]
+      },
+      {
+        "part": "角色呈现更新",
+        "sampledMsPerFrame": [
+          0.38806,
+          0.43674
+        ],
+        "details": [
+          {
+            "part": "2D怪物/NPC",
+            "msPerFrame": [
+              0.22782,
+              0.2579
+            ],
+            "file": "src/cocos/assets/scripts/features/actors/runtime/FlatActors.ts:307",
+            "work": "遍历状态槽、位置/朝向、动画采样、图集帧UV、受击色与材质状态；未在更新入口按视口跳过远处怪物。"
+          },
+          {
+            "part": "3D主角业务更新",
+            "msPerFrame": [
+              0.13801,
+              0.16493
+            ],
+            "file": "src/cocos/assets/scripts/features/actors/runtime/Actors.ts:354",
+            "note": "不含引擎自身骨骼动画和渲染成本，不能作为完整主角CPU。"
+          }
+        ]
+      },
+      {
+        "part": "HUD业务逻辑",
+        "sampledMsPerFrame": [
+          0.12735,
+          0.16077
+        ],
+        "file": "src/cocos/assets/scripts/app/Hud.ts:350",
+        "work": "属性/技能/冷却读取、字符串、颜色/控件状态和小地图；与UI引擎收集是不同阶段。"
+      },
+      {
+        "part": "血条/飘字",
+        "sampledMsPerFrame": [
+          0.08126,
+          0.1004
+        ]
+      },
+      {
+        "part": "技能特效业务逻辑",
+        "sampledMsPerFrame": [
+          0.03989,
+          0.09113
+        ]
+      },
+      {
+        "part": "GC采样",
+        "sampledMsPerFrame": [
+          0.2614,
+          0.2787
+        ],
+        "note": "采样、浏览器冷启动和临时分配均可影响。只记录，内存优化仍由另一会话负责，不改其回收和资源所有权策略。"
+      }
+    ],
+    "threadCpu": {
+      "scope": "Android per-thread /proc ticks; threads surviving both snapshots only; does not include exited/replaced threads. Sampling itself adds profiler CPU.",
+      "survivingCpuSeconds": 111.96,
+      "exited": [
+        {
+          "pid": 4016,
+          "tid": 4042,
+          "name": "CrAsyncTask #1"
+        },
+        {
+          "pid": 4016,
+          "tid": 4044,
+          "name": "CrAsyncTask #2"
+        },
+        {
+          "pid": 4016,
+          "tid": 4054,
+          "name": "CrAsyncTask #3"
+        }
+      ],
+      "top": [
+        {
+          "pid": 4312,
+          "tid": 4326,
+          "name": "CrRendererMain",
+          "cpuSeconds": 36.83,
+          "corePercent": 30.171213238305892
+        },
+        {
+          "pid": 4115,
+          "tid": 4139,
+          "name": "CrGpuMain",
+          "cpuSeconds": 29.759999999999998,
+          "corePercent": 24.379454411403295
+        },
+        {
+          "pid": 4115,
+          "tid": 4168,
+          "name": "CompositorGpuTh",
+          "cpuSeconds": 9.870000000000001,
+          "corePercent": 8.08552469894323
+        },
+        {
+          "pid": 4312,
+          "tid": 4338,
+          "name": "Compositor",
+          "cpuSeconds": 8.83,
+          "corePercent": 7.233554517899567
+        },
+        {
+          "pid": 4115,
+          "tid": 4162,
+          "name": "VizCompositorTh",
+          "cpuSeconds": 7.08,
+          "corePercent": 5.799950847874171
+        },
+        {
+          "pid": 4312,
+          "tid": 4329,
+          "name": "ThreadPoolForeg",
+          "cpuSeconds": 5.1000000000000005,
+          "corePercent": 4.177930695502581
+        },
+        {
+          "pid": 4312,
+          "tid": 4332,
+          "name": "Chrome_ChildIOT",
+          "cpuSeconds": 3.2,
+          "corePercent": 2.62144671090358
+        },
+        {
+          "pid": 4312,
+          "tid": 4330,
+          "name": "ThreadPoolForeg",
+          "cpuSeconds": 2.35,
+          "corePercent": 1.9251249283198166
+        },
+        {
+          "pid": 4312,
+          "tid": 4331,
+          "name": "ThreadPoolForeg",
+          "cpuSeconds": 2.0799999999999996,
+          "corePercent": 1.7039403620873268
+        },
+        {
+          "pid": 4016,
+          "tid": 4371,
+          "name": "Gamepad polling",
+          "cpuSeconds": 1.82,
+          "corePercent": 1.4909478168264112
+        },
+        {
+          "pid": 4115,
+          "tid": 4160,
+          "name": "Chrome_ChildIOT",
+          "cpuSeconds": 1.28,
+          "corePercent": 1.048578684361432
+        },
+        {
+          "pid": 4016,
+          "tid": 4375,
+          "name": "AudioTrack",
+          "cpuSeconds": 0.9999999999999999,
+          "corePercent": 0.8192020971573687
+        },
+        {
+          "pid": 4312,
+          "tid": 4377,
+          "name": "AudioOutputDevi",
+          "cpuSeconds": 0.66,
+          "corePercent": 0.5406733841238633
+        },
+        {
+          "pid": 4115,
+          "tid": 4158,
+          "name": "ThreadPoolForeg",
+          "cpuSeconds": 0.38,
+          "corePercent": 0.3112967969198001
+        },
+        {
+          "pid": 4016,
+          "tid": 4102,
+          "name": "Chrome_IOThread",
+          "cpuSeconds": 0.29000000000000004,
+          "corePercent": 0.23756860817563696
+        },
+        {
+          "pid": 4016,
+          "tid": 4016,
+          "name": ".android.chrome",
+          "cpuSeconds": 0.2200000000000002,
+          "corePercent": 0.1802244613746213
+        },
+        {
+          "pid": 4115,
+          "tid": 4131,
+          "name": "binder:4115_1",
+          "cpuSeconds": 0.22,
+          "corePercent": 0.18022446137462114
+        },
+        {
+          "pid": 4115,
+          "tid": 4342,
+          "name": "binder:4115_5",
+          "cpuSeconds": 0.22,
+          "corePercent": 0.18022446137462114
+        },
+        {
+          "pid": 4115,
+          "tid": 4344,
+          "name": "binder:4115_6",
+          "cpuSeconds": 0.21,
+          "corePercent": 0.17203244040304744
+        },
+        {
+          "pid": 4115,
+          "tid": 4199,
+          "name": "binder:4115_4",
+          "cpuSeconds": 0.16,
+          "corePercent": 0.131072335545179
+        },
+        {
+          "pid": 4312,
+          "tid": 4340,
+          "name": "CompositorTileW",
+          "cpuSeconds": 0.1,
+          "corePercent": 0.08192020971573688
+        },
+        {
+          "pid": 4115,
+          "tid": 4132,
+          "name": "binder:4115_2",
+          "cpuSeconds": 0.09000000000000001,
+          "corePercent": 0.0737281887441632
+        },
+        {
+          "pid": 4016,
+          "tid": 4109,
+          "name": "NetworkService",
+          "cpuSeconds": 0.08999999999999986,
+          "corePercent": 0.07372818874416308
+        },
+        {
+          "pid": 4016,
+          "tid": 4096,
+          "name": "ThreadPoolForeg",
+          "cpuSeconds": 0.050000000000000044,
+          "corePercent": 0.040960104857868475
+        },
+        {
+          "pid": 4312,
+          "tid": 4383,
+          "name": "ThreadPoolForeg",
+          "cpuSeconds": 0.030000000000000006,
+          "corePercent": 0.024576062914721065
+        }
+      ]
+    },
+    "nextPriorities": [
+      "首先定位渲染命令/状态切换，以及UI遍历的实际节点和批次；减少draw call并未自动减少节点遍历/材质准备。",
+      "业务侧优先减少同一帧重复视线检测及无变化的2D怪物呈现更新，保留60FPS和攻击/碰撞规则。",
+      "HUD按值变化更新其派生文本/技能状态；当前HUD业务逻辑约0.13–0.16ms，优先级低于前两项。",
+      "后续调试每轮2分钟；仅对明确变化做前后对照，不为本轮定位反复跑长测。"
+    ]
+  },
+  "limitations": [
+    "TapTap真实AppID/Android真机CPU/GPU/温度功耗尚未验证。",
+    "连续自然刷怪的敌人行为与屏内数量会波动；范围不是确定性单帧微基准。",
+    "本次未证实CPU/GPU总占用降低；确认的是绘制调用下降与画面几何保持。",
+    "两个失败的复测均保留，不宣称全部60FPS验收完成。"
+  ],
+  "references": [
+    "https://docs.cocos.com/creator/3.8/api/en/class/Mesh",
+    "https://devblogs.microsoft.com/directx/gpus-in-the-task-manager/",
+    "https://registry.khronos.org/webgl/extensions/EXT_disjoint_timer_query_webgl2/"
+  ],
+  "integrationVerified": true
+}

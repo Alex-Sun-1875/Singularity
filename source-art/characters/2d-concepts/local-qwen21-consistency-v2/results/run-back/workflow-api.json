@@ -1,0 +1,213 @@
+{
+  "1": {
+    "class_type": "UNETLoader",
+    "inputs": {
+      "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+      "weight_dtype": "default"
+    }
+  },
+  "2": {
+    "class_type": "CLIPLoader",
+    "inputs": {
+      "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+      "type": "qwen_image",
+      "device": "cpu"
+    }
+  },
+  "3": {
+    "class_type": "VAELoader",
+    "inputs": {
+      "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+    }
+  },
+  "4": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "qwen21-consistency-v2/run-back/guide.png"
+    }
+  },
+  "6": {
+    "class_type": "JoinImageWithAlpha",
+    "inputs": {
+      "image": [
+        "4",
+        0
+      ],
+      "alpha": [
+        "4",
+        1
+      ]
+    }
+  },
+  "8": {
+    "class_type": "TextEncodeQwenImage21",
+    "inputs": {
+      "clip": [
+        "2",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ],
+      "prompt": "图1是已用原始像素完成身材比例与整把背剑加长引导的背面跑步角色，图2只作同一角色已认可的站姿身份、服装和裤色参考。仅修复局部编辑遮罩内的领口连接、上提腰带和髋部衣摆连接、裤裆膝部布料过渡，以及延长后剑鞘中段的两处接缝与极少露出衣料。图1腰线已上提约22像素，腿部比例适度修长；保持图1现有跑步相位、前倾、屈腿、轮廓和原脚部锚点(256,712)，不得再次整体加高、放大人物或改变步态。图1整把剑已经沿原轴加长约26%，真实金属鞘帽已完整移到约(177,466)，保持目前长度、角度、鞘宽、圆钝帽轮廓和所有金属细节，严禁再拉长、截断、压扁或重画鞘帽；原图(206,413)附近斜金线属于衣摆，保持为衣料边缘。只让剑鞘中段棕皮纹理与原明暗自然衔接。头部已按图2原像素复用，保持头型、银色短卷发、头大小和位置；保留原袖子、双手手指、指缝、护腕、剑柄、护手、肩部固定点、包袋和两只靴子。上衣保持图2同样暗酒红、金线刺绣，袖子和长裤保持暗炭灰色及原布料褶皱明暗，不要变浅灰白。保持512×768画布，单个完整背面角色、真实透明背景、RGBA PNG，不添灰底白底、地面或投影。只修复局部接缝，不复制站姿，不重画脸和手，不改变现有装备长度和位置。",
+      "negative_prompt": "",
+      "resolution": 0,
+      "images.image_1": [
+        "6",
+        0
+      ],
+      "images.image_2": [
+        "7",
+        0
+      ]
+    }
+  },
+  "9": {
+    "class_type": "QwenImage21Cache",
+    "inputs": {
+      "model": [
+        "1",
+        0
+      ],
+      "device": "cpu",
+      "dtype": "default"
+    }
+  },
+  "10": {
+    "class_type": "CFGGuider",
+    "inputs": {
+      "model": [
+        "9",
+        0
+      ],
+      "positive": [
+        "8",
+        0
+      ],
+      "negative": [
+        "8",
+        1
+      ],
+      "cfg": 1
+    }
+  },
+  "11": {
+    "class_type": "RandomNoise",
+    "inputs": {
+      "noise_seed": 20261107
+    }
+  },
+  "12": {
+    "class_type": "KSamplerSelect",
+    "inputs": {
+      "sampler_name": "euler"
+    }
+  },
+  "13": {
+    "class_type": "ManualSigmas",
+    "inputs": {
+      "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+    }
+  },
+  "14": {
+    "class_type": "SamplerCustomAdvanced",
+    "inputs": {
+      "noise": [
+        "11",
+        0
+      ],
+      "guider": [
+        "10",
+        0
+      ],
+      "sampler": [
+        "12",
+        0
+      ],
+      "sigmas": [
+        "13",
+        0
+      ],
+      "latent_image": [
+        "20",
+        0
+      ]
+    }
+  },
+  "15": {
+    "class_type": "VAEDecode",
+    "inputs": {
+      "samples": [
+        "14",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "16": {
+    "class_type": "SaveImage",
+    "inputs": {
+      "images": [
+        "15",
+        0
+      ],
+      "filename_prefix": "qwen21-consistency-v2/run-back"
+    }
+  },
+  "17": {
+    "class_type": "VAEEncode",
+    "inputs": {
+      "pixels": [
+        "6",
+        0
+      ],
+      "vae": [
+        "3",
+        0
+      ]
+    }
+  },
+  "18": {
+    "class_type": "LoadImageMask",
+    "inputs": {
+      "image": "qwen21-consistency-v2/run-back/mask.png",
+      "channel": "red"
+    }
+  },
+  "20": {
+    "class_type": "SetLatentNoiseMask",
+    "inputs": {
+      "samples": [
+        "17",
+        0
+      ],
+      "mask": [
+        "18",
+        0
+      ]
+    }
+  },
+  "5": {
+    "class_type": "LoadImage",
+    "inputs": {
+      "image": "qwen21-consistency-v2/run-back/reference.png"
+    }
+  },
+  "7": {
+    "class_type": "JoinImageWithAlpha",
+    "inputs": {
+      "image": [
+        "5",
+        0
+      ],
+      "alpha": [
+        "5",
+        1
+      ]
+    }
+  }
+}

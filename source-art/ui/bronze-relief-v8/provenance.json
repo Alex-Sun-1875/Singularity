@@ -1,0 +1,97 @@
+{
+  "version": "bronze-relief-v8-with-ornament-revision",
+  "date": "2026-11-08",
+  "generator": "Cloud OpenAI image_gen built-in tool; two representative sprite generations.",
+  "prompts": "source-art/ui/bronze-relief-v8/prompts.json",
+  "reference": "source-art/ui/bronze-relief-v8/reference-compass-crop.png",
+  "referenceUse": "User-provided style reference only; no reference pixels copied into runtime sprites.",
+  "generationStatus": "Both generations completed; original RGBA outputs retained.",
+  "localProcessing": "Pillow: alpha-body crop, slight circle aspect alignment, Lanczos512 resize; lower arc alpha mask derived from the same rendered rim. User-requested metal brightness: frame1.48x, button rim1.55x with radial protection of dark leather; no procedural repaint of relief.",
+  "assets": [
+    {
+      "source": "compass-frame-generated.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceSHA256": "20296519b93e23554a6db3b910de6be5e0e9a469d45f0650d935a9acf6beede6",
+      "alphaBodyBounds": [
+        31,
+        21,
+        1214,
+        1221
+      ],
+      "asset": "src\\cocos\\assets\\resources\\ui\\quiet-bronze\\compass-frame-v8.png",
+      "runtimeSize": [
+        512,
+        512
+      ],
+      "sha256": "c4315ae1a8fc47ee36927f50e48c57656215e3ddb6d655af19e93523a0aba828"
+    },
+    {
+      "source": "button-medallion-generated.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceSHA256": "d58985e6055f37ce8afbb412ed7261644a4fbdb190a2815900ea9cc6f5fa6829",
+      "alphaBodyBounds": [
+        45,
+        38,
+        1199,
+        1213
+      ],
+      "asset": "src\\cocos\\assets\\resources\\ui\\quiet-bronze\\button-medallion-v8.png",
+      "runtimeSize": [
+        512,
+        512
+      ],
+      "sha256": "fbd24cc85387973aa24d7a9627e815b7564e34a864d30713106e1f9aab6cd6a2"
+    },
+    {
+      "asset": "src\\cocos\\assets\\resources\\ui\\quiet-bronze\\leather-inset-v8.png",
+      "derivedFrom": "button-medallion-v8.png; central leather only",
+      "runtimeSize": [
+        256,
+        256
+      ],
+      "sha256": "a959d586b55531da0f969d7fbe42b3bd602a5ed85a54a24bfd1db307f064931c"
+    },
+    {
+      "asset": "src\\cocos\\assets\\resources\\ui\\quiet-bronze\\compass-tool-rail-v8.png",
+      "derivedFrom": "compass-frame-v8.png",
+      "runtimeSize": [
+        512,
+        512
+      ],
+      "sha256": "352bbd812b7e85df42abb329e886a1210a84b14e3d4f2695b3a5ae512dfbcebf",
+      "angularAlphaMaskDegrees": [
+        220,
+        320
+      ]
+    }
+  ],
+  "artReview": {
+    "generatedSample": "Material relief, patina, leather grain and dark grooves inspected; selected for integrated pilot.",
+    "runtime": "Desktop1280x720 and mobile844x390 screenshots inspected after integrated brighter-metal and scroll-ornament revision; no missing alpha edges or center occlusion. Detailed curls on rims, supply-panel corner ornaments and brighter raised bronze edges checked.",
+    "userAcceptance": "User rejected the aged-brass material direction on2026-11-08 and requested clean bright gold matching the SupplyBelt outer surround.",
+    "evidence": [
+      "src/cocos/test-results/hud-scroll-v9-desktop.png",
+      "src/cocos/test-results/hud-scroll-v9-mobile.png",
+      "src/cocos/test-results/hud-scroll-v9-details.png",
+      "src/cocos/test-results/hud-scroll-v9-hidpi-desktop.png"
+    ],
+    "detailMethod": "Actual deviceScaleFactor2 runtime screenshot, cropped and downsampled for detail board; no UI art painted into screenshot."
+  },
+  "ornamentReference": "source-art/ui/bronze-relief-v8/reference-ornament-supply.png",
+  "userRevision": "Same double-metal border and curled/leaf motifs as supply reference, including skill buttons; brighter metal.",
+  "ornamentImplementation": "Existing UiChrome.frame reused for panels. UiChrome.circleOrnament places2 curls on small button rims and4 motifs on minimap, with gold inlay/highlight and dark undercut; no full bright ring overlay.",
+  "validation": {
+    "typeScript": "npm run check passed",
+    "desktopErrors": 0,
+    "mobileErrors": 0,
+    "interactionReport": "src/cocos/test-results/hud-arc-interactions.json",
+    "touchReport": "src/cocos/test-results/flat2d-browser-touch.json"
+  },
+  "supersededBy": "source-art/ui/clean-gold-v11/provenance.json"
+}

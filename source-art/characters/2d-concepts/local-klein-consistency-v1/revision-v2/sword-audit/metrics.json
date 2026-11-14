@@ -1,0 +1,173 @@
+{
+  "method": "pure local geometry; original cap RGBA integer translation; middle-only axial resampling",
+  "status": "prototype, not installed; local visual acceptance pending",
+  "base_xy": [
+    283.0,
+    192.0
+  ],
+  "legacy_tip_xy": [
+    200.0,
+    373.0
+  ],
+  "source_tip_xy": [
+    198.01587756184927,
+    380.20570908826704
+  ],
+  "source_tip_uncertainty_px": 1.0,
+  "target_tip_xy_requested": [
+    166.8,
+    445.4
+  ],
+  "target_tip_xy_raster": [
+    167.01587756184927,
+    445.20570908826704
+  ],
+  "target_error_xy_px": [
+    0.2158775618492541,
+    -0.194290911732935
+  ],
+  "translation_xy_integer": [
+    -31,
+    65
+  ],
+  "translation_sn": [
+    72.00571716127273,
+    -1.084756235655945
+  ],
+  "tip_transform_singular_values": [
+    1.0,
+    1.0
+  ],
+  "tip_rotation_degrees": 0,
+  "tip_rgba_source_vs_translated_equal": true,
+  "cap_opaque_rgb_exact_original": true,
+  "tip_source_alpha_nonzero_pixels": 484,
+  "tip_target_alpha_nonzero_pixels": 484,
+  "tip_source_bbox_xyxy": [
+    197,
+    345,
+    223,
+    381
+  ],
+  "source_tip_pixels_at_or_below_y382": 0,
+  "source_background_gray_pixels_inside_cap": 0,
+  "tip_source_rgba_sha256_raw": "47bd995bea036b5e7bad4cf031b97b81880de6902e9f172bafb3c8edbc228241",
+  "middle_start_s": 75.0,
+  "tip_lock_start_s": 168.0,
+  "middle_axial_scale_only": 1.7742550232394918,
+  "visible_length_ratio_from_actual_tip": 1.3486733106463191,
+  "changed_pixels": 2346,
+  "changed_outside_item_union": 0,
+  "original_pixels_above_y250_equal": true,
+  "exposed_old_item_fill_pixels": 625,
+  "cap_alpha_byte_sum_source": 110975,
+  "cap_alpha_byte_sum_target": 110975,
+  "source_tip_core_rgb_probe_xy": [
+    199,
+    380
+  ],
+  "source_tip_core_rgb_probe": [
+    122,
+    84,
+    64
+  ],
+  "quality_boundaries": [
+    "No model output is sampled. No tip resize, axial warp, redraw or rotation.",
+    "Only middle shaft is resampled along its axis. Tip RGBA is copied by integer translation.",
+    "Tiny exposed old-tip slivers are filled by interpolation from adjacent original cloth; hidden cloth cannot be exactly recovered.",
+    "No original cap matte exists; boundary accuracy still needs local visual acceptance.",
+    "Hands/occlusions should be restored from before.png by the integrating caller."
+  ],
+  "prior_stage_numeric_audit": {
+    "guide": {
+      "changed_pixels_total": 4841,
+      "cap_terminal_probe_xy": [
+        199,
+        380
+      ],
+      "terminal_original_rgb": [
+        122,
+        84,
+        64
+      ],
+      "terminal_rgb": [
+        146,
+        116,
+        115
+      ],
+      "tip_from_legacy_affine_xy": [
+        164.022228586589,
+        455.4879927235738
+      ],
+      "legacy_affine_tip_misplacement_from_requested": [
+        -2.777771413411017,
+        10.087992723573848
+      ]
+    },
+    "v1_candidate": {
+      "changed_pixels_total": 4555,
+      "cap_terminal_probe_xy": [
+        199,
+        380
+      ],
+      "terminal_original_rgb": [
+        122,
+        84,
+        64
+      ],
+      "terminal_rgb": [
+        113,
+        125,
+        107
+      ],
+      "tip_from_legacy_affine_xy": [
+        164.022228586589,
+        455.4879927235738
+      ],
+      "legacy_affine_tip_misplacement_from_requested": [
+        -2.777771413411017,
+        10.087992723573848
+      ]
+    }
+  },
+  "boundary_evidence": {
+    "line_profiles_csv": "source-tip-line-profiles.csv",
+    "s_axis_unit": [
+      -0.41682762759001507,
+      0.908985549322804
+    ],
+    "n_axis_unit": [
+      0.908985549322804,
+      0.41682762759001507
+    ],
+    "gb_means_g_minus_b": "Gold/copper cap has positive G-B; burgundy cloth near the cap has near-zero G-B. The cap chroma frontier ends around s205..207, while pants colour starts contaminating the sampled signal after s207.",
+    "source_gold_probe_199_380_G_minus_B": 20,
+    "source_next_row_probe_199_381_G_minus_B": 11,
+    "not_a_proof": "A flattened RGB image does not uniquely identify a material matte. Pixel profiles constrain the cap endpoint, but the boundary is a documented local estimate and needs visual acceptance."
+  },
+  "input_sha256": {
+    "before": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\guides\\sword-back\\before.png",
+      "sha256": "43998bf3092078923ee28740a54f4755e0016299aaa9140084ca1177c4239937"
+    },
+    "guide": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\guides\\sword-back\\guide.png",
+      "sha256": "542afa4b337a5b6c8217007fead11ebc7bac64df9fca14eb7827748be4d50ce6"
+    },
+    "v1_candidate": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\results\\sword-back\\constrained-candidate.png",
+      "sha256": "49d4cdd44f7ecd0c70434fb688d6df05065c6cee459d9d25f03633f500d714c2"
+    }
+  },
+  "output_sha256": {
+    "tip-preserved-candidate.png": "929711ed566e197a39b81ceef4ccf27c15425bbd3a2f93bad9c4a8792d2517a1",
+    "source-sword-alpha.png": "d3f1fce69d214758e15c5fc9bcff17de13578f44bfa92c4b277a4004573ca8cc",
+    "source-tip-rgba.png": "e05b345478c7169926c6ac87e7b6c10a92c7c39f5ba705a9a0685dd5c4e54a76",
+    "translated-tip-rgba.png": "0d952195bbb94ed1ad9232f567979d5c49a47ad372881ebf20927a67293cd931",
+    "target-sword-alpha.png": "703539d37a09f30cc1217891cb410840e9fb7c614cde6031c50f7b5e3228fd90",
+    "middle-alpha.png": "6531e0225649da553bc7482a44ebffd5595358980f65048fa1d2fb89fbf41aef",
+    "translated-tip-alpha.png": "06970e439b181f26545d8573662e0df52df52a1ee83143d9eebc5ae5b210a3bf",
+    "old-tip-cleanup-alpha.png": "29c6c3e20e4dc62c0c43cdf792b7127a32948614d273b0d0bf609a505b86f6b8",
+    "change-mask.png": "e0cde3cdeeb7abd066e1785db21e4fad7de562480a32f1abc8be3fff9835ec2a"
+  }
+}

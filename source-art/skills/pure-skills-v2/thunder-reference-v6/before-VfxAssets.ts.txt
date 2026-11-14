@@ -1,0 +1,98 @@
+import {Node,Material,Texture2D,ParticleSystem,CurveRange,GradientRange,Color,Vec3,Vec4,resources,assetManager,js,gfx} from 'cc';
+
+export type VfxKind='flame'|'ember'|'smoke'|'spark'|'dust'|'arcane'|'seal'|'prayer'|'charge'|'arrowWake'|'slash'|'rune'|'scorch'|'flash'|'fireCore'|'fireRoll'|'fireGlow'|'impactScorch'|'heal';
+export type VfxLineStyle='core'|'glow'|'solid';
+type Profile={texture:string;rate:number;capacity:number;life:[number,number];size:[number,number];speed:[number,number];color:string;end:string;alpha:number;radius:number;shape:number;render?:number;gravity?:number;grow?:boolean;blend?:boolean;spin?:boolean;fast?:boolean;tintGain?:number;alphaGain?:number};
+const profiles:Record<VfxKind,Profile>={
+ flame:{texture:'flame_02',rate:19,capacity:28,life:[.36,.7],size:[.34,.64],speed:[.55,1.25],color:'#ffcc76',end:'#b24e25',alpha:.75,radius:.72,shape:2,render:3,grow:false},
+ ember:{texture:'spark_01',rate:7,capacity:14,life:[.45,.95],size:[.025,.055],speed:[1,2.1],color:'#ffd893',end:'#c74d22',alpha:.85,radius:.6,shape:2,gravity:.12},
+ smoke:{texture:'smoke_04',rate:4,capacity:12,life:[.65,1.2],size:[.45,.78],speed:[.35,.65],color:'#81796d',end:'#b1aaa1',alpha:.2,radius:.65,shape:2,grow:true,blend:true,spin:true},
+ spark:{texture:'spark_01',rate:0,capacity:24,life:[.16,.38],size:[.035,.085],speed:[1.7,3.7],color:'#ffe3a7',end:'#d77c38',alpha:1,radius:.025,shape:3,render:1,gravity:.65},
+ dust:{texture:'dirt_01',rate:0,capacity:18,life:[.28,.6],size:[.16,.34],speed:[.4,1.2],color:'#b4a083',end:'#8f8778',alpha:.4,radius:.16,shape:4,grow:true,blend:true,spin:true},
+ arcane:{texture:'magic_01',rate:22,capacity:24,life:[.15,.34],size:[.11,.23],speed:[.1,.45],color:'#93d5ef',end:'#5b79bd',alpha:.78,radius:.06,shape:3,spin:true},
+ seal:{texture:'magic_03',rate:18,capacity:24,life:[.18,.38],size:[.12,.25],speed:[.1,.4],color:'#d0a1ec',end:'#704caa',alpha:.7,radius:.06,shape:3,spin:true},
+ prayer:{texture:'star_01',rate:18,capacity:24,life:[.18,.4],size:[.09,.2],speed:[.15,.5],color:'#f0dfad',end:'#a9c4b6',alpha:.78,radius:.06,shape:3,spin:true},
+ charge:{texture:'light_01',rate:9,capacity:14,life:[.18,.35],size:[.08,.17],speed:[.05,.2],color:'#c2e9f8',end:'#7ab9d7',alpha:.52,radius:.13,shape:3,spin:true},
+ arrowWake:{texture:'trace_01',rate:22,capacity:18,life:[.08,.18],size:[.035,.075],speed:[0,.05],color:'#dbeaf1',end:'#91a7b8',alpha:.48,radius:.015,shape:3},
+ slash:{texture:'slash_02',rate:0,capacity:3,life:[.18,.23],size:[1.7,1.7],speed:[0,0],color:'#e1f2fa',end:'#a8cadb',alpha:.62,radius:0,shape:3,render:2},
+ rune:{texture:'circle_03',rate:0,capacity:3,life:[.3,.4],size:[1.2,1.2],speed:[0,0],color:'#9eb9d3',end:'#7c90ac',alpha:.55,radius:0,shape:3,render:2,grow:true},
+ scorch:{texture:'scorch_01',rate:0,capacity:2,life:[3.7,4],size:[2.2,2.2],speed:[0,0],color:'#392b23',end:'#51463a',alpha:.4,radius:0,shape:3,render:2,blend:true},
+ flash:{texture:'light_01',rate:0,capacity:4,life:[.12,.2],size:[.35,.55],speed:[0,0],color:'#ffe7b2',end:'#dd915a',alpha:.8,radius:0,shape:3},
+ // Production coloured RGBA uses white tint; CC0 masks remain for ash/old props.
+ fireCore:{texture:'light_01',rate:15,capacity:6,life:[.12,.22],size:[.3,.55],speed:[0,.12],color:'#fff2b0',end:'#ff6a22',alpha:.95,radius:.06,shape:3,fast:true},
+ fireRoll:{texture:'fire-tongues-v1',rate:8,capacity:10,life:[.24,.44],size:[.9,1.3],speed:[.18,.5],color:'#ffffff',end:'#ffffff',alpha:.92,radius:.10,shape:2,grow:true,blend:true,fast:true},
+ fireGlow:{texture:'fire-tongues-v1',rate:4,capacity:6,life:[.12,.25],size:[.85,1.15],speed:[.1,.3],color:'#ffffff',end:'#ffffff',alpha:.26,radius:.07,shape:2,fast:true,tintGain:.8,alphaGain:.8},
+ impactScorch:{texture:'scorch_01',rate:0,capacity:2,life:[.65,.9],size:[2.2,2.2],speed:[0,0],color:'#4c2419',end:'#53392b',alpha:.26,radius:0,shape:3,render:2,blend:true},
+ heal:{texture:'star_01',rate:0,capacity:10,life:[.35,.65],size:[.045,.11],speed:[.08,.25],color:'#f7e7b7',end:'#a3d2bc',alpha:.65,radius:.15,shape:2,fast:true},
+};
+const textures=['circle_03','dirt_01','flame_02','light_01','magic_01','magic_03','slash_02','smoke_04','spark_01','trace_01','star_01','scorch_01','fire-tongues-v1','ribbon-white-v1','ribbon-soft-v1'];
+const texturePaths:Record<string,string>={'fire-tongues-v1':'vfx/production/fire-tongues-v1','ribbon-white-v1':'vfx/production/ribbon-white-v1','ribbon-soft-v1':'vfx/production/ribbon-soft-v1'};
+export const vfxColor=(hex:string,alpha=255)=>{const c=new Color().fromHEX(hex);c.a=alpha;return c;};
+export function constant(curve:CurveRange,value:number){curve.mode=CurveRange.Mode.Constant;curve.constant=value;}
+function range(curve:CurveRange,min:number,max:number){curve.mode=CurveRange.Mode.TwoConstants;curve.constantMin=min;curve.constantMax=max;}
+function curve(curve:CurveRange,keys:[number,number][]){curve.mode=CurveRange.Mode.Curve;curve.spline.assignSorted(keys.map(([time,value])=>[time,{value}] as [number,{value:number}]));}
+function gradient(out:GradientRange,colors:[number,string][],alpha:[number,number][]){out.mode=GradientRange.Mode.Gradient;out.gradient.setKeys(colors.map(([time,color])=>({time,color:vfxColor(color)})),alpha.map(([time,alpha])=>({time,alpha:Math.round(alpha*255)})));}
+/** Native module classes are registered by ParticleSystem. Configure them before
+ * activating the node so Cocos onLoad binds and initializes them, as with a prefab. */
+function nativeModule<T>(name:string):T{const ctor=js.getClassByName(name) as new()=>T;if(!ctor)throw new Error('Cocos particle module unavailable: '+name);return new ctor();}
+
+/** CC0 masks and separately documented generated RGBA with built-in shaders. */
+export class VfxAssets {
+ private static textures=new Map<string,Texture2D>();
+ private static materials=new Map<string,Material>();
+ private static pending:Promise<void>|null=null;
+ static preload():Promise<void>{
+  if(this.pending)return this.pending;
+  this.pending=Promise.all(textures.map(name=>new Promise<void>((resolve,reject)=>resources.load((texturePaths[name]??'vfx/kenney/'+name)+'/texture',Texture2D,(error,texture)=>{if(error){reject(new Error('VFX '+name+': '+error.message));return;}texture.setWrapMode(Texture2D.WrapMode.CLAMP_TO_EDGE,Texture2D.WrapMode.CLAMP_TO_EDGE);if(name.startsWith('ribbon-')){texture.setFilters(Texture2D.Filter.LINEAR,Texture2D.Filter.LINEAR);texture.setMipFilter(Texture2D.Filter.NONE);}this.textures.set(name,texture);resolve();})))).then(()=>undefined).catch(error=>{this.dispose();throw error;});return this.pending;
+ }
+ static material(texture:string,shader:'particle'|'line'='particle',alphaBlend=false,tintGain=1,alphaGain=1):Material {
+  // builtin-particle-trail defaults to 119/255 grey. A colour-only Line must
+  // sample explicit white or the alleged bright core loses 53% of its RGB.
+  if(shader==='line'&&!texture)texture='ribbon-white-v1';
+  const key=texture+shader+alphaBlend+':'+tintGain+':'+alphaGain;const cached=this.materials.get(key);if(cached)return cached;
+  const material=new Material();material.name=(texture.startsWith('ribbon-')?'ProjectProcedural:':texturePaths[texture]?'OpenAIImageGen:':'KenneyCC0:')+key;
+  // Creator 3.8 registers these built-ins under their particles/ asset folder.
+  // A short name silently creates a material with no passes, crashing the CPU renderer.
+  // The built-in trail alpha technique expects premultiplied RGB, whereas
+  // native Line supplies straight vertex colors. Keep its shader and explicitly
+  // select straight-alpha blending for solid electric ribbons. Glow uses the
+  // built-in additive technique and a separate soft alpha cross section.
+  material.initialize({effectName:shader==='line'?'particles/builtin-particle-trail':'particles/builtin-particle',technique:alphaBlend?1:0,
+   ...(shader==='line'&&alphaBlend?{states:{blendState:{targets:[{blend:true,blendSrc:gfx.BlendFactor.SRC_ALPHA,blendDst:gfx.BlendFactor.ONE_MINUS_SRC_ALPHA,blendSrcAlpha:gfx.BlendFactor.ONE,blendDstAlpha:gfx.BlendFactor.ONE_MINUS_SRC_ALPHA}]}}}:{})});
+  material.setProperty('tintColor',new Vec4(.5*tintGain,.5*tintGain,.5*tintGain,.5*alphaGain));
+  if(texture){const image=this.textures.get(texture);if(!image)throw new Error('VfxAssets.preload must complete before '+texture);material.setProperty('mainTexture',image);}
+  this.materials.set(key,material);return material;
+ }
+ static lineMaterial(style:VfxLineStyle,electric=false):Material {
+  if(style==='glow')return this.material('ribbon-soft-v1','line',false,1.65);
+  // Blue lightning uses a coloured hot filament rather than exposure-clipped
+  // white. Other weapon/arrow cores retain their existing metallic highlight.
+  if(style==='core')return this.material('ribbon-white-v1','line',true,electric?1.05:1.25);
+  return this.material('ribbon-white-v1','line',electric,electric?1.1:1);
+ }
+ static lineTexture(style:VfxLineStyle):Texture2D {
+  const name=style==='glow'?'ribbon-soft-v1':'ribbon-white-v1',texture=this.textures.get(name);
+  if(!texture)throw new Error('VfxAssets.preload must complete before '+name);
+  return texture;
+ }
+ static solid(color:string):Material{
+  const key='solid'+color;const cached=this.materials.get(key);if(cached)return cached;
+  const material=new Material();material.initialize({effectName:'builtin-standard'});material.setProperty('mainColor',vfxColor(color));material.setProperty('roughness',.52);material.setProperty('metallic',color==='#b8bcb8'?.65:0);this.materials.set(key,material);return material;
+ }
+ static reset(ps:ParticleSystem,kind:VfxKind){const p=profiles[kind];ps.duration=10;ps.loop=true;ps.bursts=[];constant(ps.rateOverTime,p.rate);ps.startColor.color=vfxColor(p.color,Math.round(p.alpha*255));if(p.spin)range(ps.startRotationZ,-Math.PI,Math.PI);else constant(ps.startRotationZ,0);}
+ static emitter(kind:VfxKind,parent:Node):{node:Node;system:ParticleSystem;life:number}{
+  const p=profiles[kind],node=new Node('VFX:'+kind);node.active=false;parent.addChild(node);
+  const ps=node.addComponent(ParticleSystem);ps.playOnAwake=false;ps.loop=true;ps.duration=10;ps.capacity=p.capacity;ps.simulationSpace=0;ps.scaleSpace=1;
+  range(ps.startLifetime,...p.life);range(ps.startSizeX,...p.size);range(ps.startSpeed,...p.speed);constant(ps.rateOverTime,p.rate);constant(ps.rateOverDistance,0);constant(ps.gravityModifier,p.gravity??0);constant(ps.startDelay,0);
+  if(p.spin)range(ps.startRotationZ,-Math.PI,Math.PI);else constant(ps.startRotationZ,0);
+  ps.startColor.color=vfxColor(p.color,Math.round(p.alpha*255));
+  const shape=nativeModule<NonNullable<ParticleSystem['shapeModule']>>('cc.ShapeModule');shape.shapeType=p.shape;shape.radius=p.radius;shape.angle=18;shape.length=.15;if(p.shape===2)shape.emitFrom=0;shape.rotation=new Vec3(90,0,0);shape.enable=true;ps.shapeModule=shape;
+  const color=nativeModule<NonNullable<ParticleSystem['colorOverLifetimeModule']>>('cc.ColorOvertimeModule');color.enable=true;gradient(color.color,[[0,'#ffffff'],[p.fast ? .3 : .5,'#ffffff'],[1,p.end]],p.fast?[[0,0],[.08,1],[.38,.9],[.6,.32],[1,0]]:[[0,0],[.08,1],[.5,.85],[1,0]]);ps.colorOverLifetimeModule=color;
+  const size=nativeModule<NonNullable<ParticleSystem['sizeOvertimeModule']>>('cc.SizeOvertimeModule');size.enable=true;curve(size.size,p.grow?[[0,.55],[.45,1],[1,1.4]]:[[0,.8],[.15,1],[1,.12]]);ps.sizeOvertimeModule=size;
+  ps.renderer.renderMode=p.render??0;ps.renderer.velocityScale=.08;ps.renderer.lengthScale=2;
+  // OnInit establishes the renderer's particle-system owner after activation.
+  node.active=true;ps.setSharedMaterial(this.material(p.texture,'particle',p.blend,p.tintGain,p.alphaGain),0);ps.stop();this.reset(ps,kind);
+  return {node,system:ps,life:p.life[1]};
+ }
+ static dispose(){for(const material of this.materials.values())material.destroy();this.materials.clear();for(const texture of this.textures.values())assetManager.releaseAsset(texture);this.textures.clear();this.pending=null;}
+}

@@ -1,0 +1,13 @@
+{
+  "source": "C:\\ProgramData\\cocos\\editors\\Creator\\3.8.8\\resources\\resources\\3d\\engine\\templates\\launcher\\application.ejs",
+  "sourceSHA256": "f0946a3090b71c7829af8cbc3a127a4a1b93787109bf676648659e0d540bb2f4",
+  "creator": "3.8.8",
+  "copiedTemplates": [
+    "src\\cocos\\build-templates\\web-mobile\\application.ejs",
+    "src\\cocos\\build-templates\\web-desktop\\application.ejs"
+  ],
+  "onlyCodeChange": "onPostInitBase: cc.settings.overrideSettings('screen', 'exactFitScreen', false)",
+  "reason": "Native Android BrowserWindow keyboard-resize guard misclassifies rotation from915px portrait to412px landscape; public exactFitScreen false uses the normal CSS-sized SubFrame without the guard.",
+  "officialDocumentation": "https://docs.cocos.com/creator/3.8/manual/en/release-notes/build-template-settings-upgrade-guide-v3.6.html",
+  "runtimeEvidence": "src/cocos/test-results/reference-loading-subframe-settings-probe.json"
+}

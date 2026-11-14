@@ -1,0 +1,323 @@
+{
+  "recorded": "2026-11-13T05:12:04.470955+00:00",
+  "version": "0.3.35",
+  "selectedPerformanceVersion": "V35",
+  "buildMode": "guest-test",
+  "localSaveOnly": true,
+  "uploaded": false,
+  "platformVerified": false,
+  "targetDevice": {
+    "priorUserConfirmed": "iPhone 14",
+    "reference": "../../../docs/performance/iphone14-moving-combat-2026-11-12.md",
+    "physicalDeviceVerifiedThisIteration": false
+  },
+  "quality": {
+    "frameRateSetting": 60,
+    "resolutionChanged": false,
+    "projectileRulesChanged": false,
+    "skillDamageChanged": false,
+    "emissionCountsPreserved": true,
+    "geometrySimplified": false,
+    "iOSLineUploads": "Original engine path retained; Android upload-byte gains do not apply to iOS."
+  },
+  "tests": {
+    "typeCheck": true,
+    "coreTypeCheck": true,
+    "existingTestsPassed": 140,
+    "translationEquivalenceOutputs": 300000,
+    "webBuild": true,
+    "tapCocosBuild": true,
+    "legacyRenderPolicy": true,
+    "officialConversion": true,
+    "zipCRC": true,
+    "sha256RecheckedOnDeliveryCopy": true,
+    "tapConfigurationCheck": true,
+    "nativeMeshBinsMatched": 16,
+    "rejectedParticleAdapterAbsent": true,
+    "editorDiagnosticsAbsent": true,
+    "finalTestLog": "../temp/volley-v35-final-tests.log"
+  },
+  "sources": {
+    "scriptsChecked": 202,
+    "onlyGeneratedBuildInfoChangedDuringPackageBuild": true,
+    "before": "../test-results/performance/volley-v35-package-source-before.json",
+    "after": "../test-results/performance/volley-v35-package-source-after.json",
+    "measuredSelectedSource": "../test-results/performance/v35-measured-selected-source/",
+    "postMeasurementChange": "Only two early returns from prewarm methods after object destruction; no timed update/render/gameplay code changed. Exact two-line delta verified, final type check and Tap compilation passed.",
+    "onlySelectedAndGeneratedVersionDifferFromMeasuredControl": true,
+    "changedFromControl": [
+      "assets/scripts/app/BuildInfo.ts",
+      "assets/scripts/app/ChapterGame.ts",
+      "assets/scripts/app/Hud.ts",
+      "assets/scripts/features/combat/runtime/Effects.ts",
+      "assets/scripts/features/combat/runtime/EnemyCombatFeedback.ts",
+      "assets/scripts/shared/assets/ContactParticleBursts.ts",
+      "assets/scripts/shared/assets/ManagedLine.ts",
+      "assets/scripts/shared/assets/VfxAssets.ts",
+      "assets/scripts/shared/i18n/Localization.ts"
+    ]
+  },
+  "package": {
+    "path": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-volley-performance-v35\\SwordAndFire_0.3.35_TapTap_guest-test_20261113T050635Z\\SwordAndFire_0.3.35_TapTap_guest-test_20261113T050635Z.zip",
+    "bytes": 224493802,
+    "sha256": "2ab72cf15bc9afb8e9630f4a7fc6286842cdbaf2b9d701ea33ef92229019b462",
+    "zipEntries": 4025,
+    "subpackageCount": 76
+  },
+  "initialPackageLocalAudit": {
+    "files": 26,
+    "rawBytes": 5590883,
+    "zipBytes": 1357407,
+    "zipMiB": 1.29,
+    "budgetMiB": 20.0,
+    "withinLocalBudget": true,
+    "sha256": "489a198159021956813e28919a3eddab78d093971be6d7e304be73af82e30d32",
+    "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+  },
+  "beforePlayableResources": {
+    "status": "not-measured",
+    "note": "Local main-payload ZIP excludes on-demand bundles required before gameplay. Actual TapTap startup transfer remains a platform/device check."
+  },
+  "performance": {
+    "summary": "../test-results/performance/volley-v35-comparison.json",
+    "routine": [
+      {
+        "report": "android-v35-reboot-control/report.json",
+        "status": "passed",
+        "mainThreadMsPerFrame": 3.449914589564639,
+        "processCorePercent": 66.71376786067971,
+        "fps": 59.99752751963693,
+        "minOneSecondFps": 58,
+        "peakPssMB": 509.45024,
+        "draws": 167,
+        "drawsP95": 181
+      },
+      {
+        "report": "android-v35-reboot-final/report.json",
+        "status": "passed",
+        "mainThreadMsPerFrame": 3.4525379673220717,
+        "processCorePercent": 65.31847074492832,
+        "fps": 59.99821882884009,
+        "minOneSecondFps": 58,
+        "peakPssMB": 512.828416,
+        "draws": 166,
+        "drawsP95": 181
+      }
+    ],
+    "volley": {
+      "scope": "Existing training range, 20-monster horde, BOW_05 rank5. Built-in training unlimited resource; normal ultimate input. Training reset between 4-second trials, never within measured casts. Not natural-hunt or thermal acceptance.",
+      "before": {
+        "coldMainMsPerFrame": 5.597271111111111,
+        "coldProcessCorePercent": 105.88249094532196,
+        "coldMaxFrameMs": 79.90000000002328,
+        "warmMeanMainMsPerFrame": 4.188980914496163,
+        "warmMeanProcessCorePercent": 86.99119229404201,
+        "peakDrawCalls": 357,
+        "warmMaxFrameMs": [
+          46.70000000006985,
+          31.70000000006985,
+          34.89999999990687,
+          40.300000000046566,
+          37
+        ],
+        "warmOver33Frames": [
+          1,
+          0,
+          1,
+          2,
+          3
+        ],
+        "casts": 6,
+        "skillHits": 143
+      },
+      "after": {
+        "coldMainMsPerFrame": 4.837575,
+        "coldProcessCorePercent": 96.13546866351088,
+        "coldMaxFrameMs": 35.40000000002328,
+        "warmMeanMainMsPerFrame": 3.7634855705394203,
+        "warmMeanProcessCorePercent": 78.42379277784886,
+        "peakDrawCalls": 274,
+        "warmMaxFrameMs": [
+          24.900000000023283,
+          24.20000000006985,
+          28.600000000093132,
+          31.599999999976717,
+          24.900000000023283
+        ],
+        "warmOver33Frames": [
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "casts": 6,
+        "skillHits": 142
+      },
+      "observedReductionPercent": {
+        "coldMainMsPerFrame": 13.572615941419064,
+        "coldProcessCorePercent": 9.20550904572549,
+        "coldMaxFrameMs": 55.694618272824826,
+        "warmMeanMainMsPerFrame": 10.157490631773857,
+        "warmMeanProcessCorePercent": 9.848582701607512,
+        "peakDrawCalls": 23.24929971988795
+      }
+    },
+    "androidFrozenUpload": {
+      "beforeBytes": 569696,
+      "afterBytes": 82880,
+      "reductionPercent": 85.45189013087682,
+      "sourceBufferSliceCopies": 0,
+      "drawCalls": 253,
+      "triangles": 187546,
+      "pixelDiff": {
+        "max": 1,
+        "changedAbove3": 0,
+        "repeatMax": 1
+      }
+    },
+    "gpuHardwareTime": null,
+    "physicalPowerAndTemperatureMeasured": false,
+    "scope": "Android14 emulator Chrome, H12 Lv17 BOW 300-second old/new routine; then six 4-second old/new training casts, all after the same owned-AVD cold boot. Not ABBA, full multi-scene acceptance, or physical-device energy acceptance."
+  },
+  "visual": {
+    "arrowAndLine": "Frozen arrow scene: no pixel differences outside CHAR-number text; CHAR spacing differs slightly with the same font/size/color/outline. Native line active geometry passed 120 cases.",
+    "particleEmission": "284 requests, 284 emissions, 852 particles; count/location/scale/color/angle/dt=0 checked, including unprepared rank branch.",
+    "particleGrouping": "Same-particle frozen image: 196 pixels above 3/255 in about 2.78 million due to small additive overlap-order changes; individual particle profiles retained.",
+    "mesh": "Raw GLB differs only in triangle index ordering; all source/cooked attributes and triangle winding checked. 32 poses: 8 pixels above 3/255; 16 audited cooked binaries match the actual ZIP.",
+    "androidUpload": "GPU buffers zeroed before each redraw; max difference 1/255; no source-buffer slice copies."
+  },
+  "meshProvenance": "performance-v35-mesh.json",
+  "failedAndUnselected": [
+    "../test-results/performance/android-v35-final/report.json",
+    "../test-results/performance/android-v35-late-control-smoke/report.json",
+    "../test-results/performance/android-v34-final/report.json",
+    "../test-results/performance/volley-v35-pre-reset-comparison.json"
+  ],
+  "notShipped": [
+    "V21 actor-direction/experience experiments",
+    "Cocos meshOptimize import that widened indices",
+    "V22 custom Graphics shader batching",
+    "V33/V34 ManagedParticleSystem upload adapter",
+    "V29 warm-particle residue; corrected and reverified before selected runs"
+  ],
+  "environmentReset": {
+    "oldAndCandidateBothDegradedTo35Fps": true,
+    "bothPassing300SecondRunsCollectedAfterSameRestart": true,
+    "restartNotCountedAsCodeBenefit": true,
+    "oldQemuPid": 18216,
+    "newQemuPid": 54920
+  },
+  "buildStartup": {
+    "normalCliStillUnresolved": true,
+    "normalAttempts": 2,
+    "versionAllocatedOnce": true,
+    "method": "Node Inspector startup completed this Creator build; later a transparent fs.openSync diagnostic wrapper was attached. Native file-open behavior and engine installation unchanged; cause of normal startup failure unresolved. All diagnostic code is editor-only under temp and absent from the game ZIP."
+  },
+  "environmentCleanup": {
+    "ownedEmulatorPid": 54920,
+    "bluetoothChanged": false,
+    "timerPolicyChanged": false,
+    "restoredAffinity": 16777215,
+    "serversStopped": [
+      {
+        "created": "2026-11-13T10:47:23.171784+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7533 --directory F:\\workspace\\Singularity\\temp\\perf-v21-workspace\\src\\cocos\\build\\perf-v22-batch",
+        "pid": 59304
+      },
+      {
+        "created": "2026-11-13T10:49:52.366241+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7534 --directory F:\\workspace\\Singularity\\temp\\perf-v21-workspace\\src\\cocos\\build\\perf-v22-batch-r2",
+        "pid": 55288
+      },
+      {
+        "created": "2026-11-13T11:01:06.33639+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7535 --directory F:\\workspace\\Singularity\\temp\\perf-v21-workspace\\src\\cocos\\build\\perf-v24-arrow-instancing",
+        "pid": 11100
+      },
+      {
+        "created": "2026-11-13T11:05:18.047323+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7536 --directory F:\\workspace\\Singularity\\temp\\perf-v21-workspace\\src\\cocos\\build\\perf-v25-volley",
+        "pid": 17496
+      },
+      {
+        "created": "2026-11-13T11:09:26.398285+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7537 --directory F:\\workspace\\Singularity\\temp\\perf-v21-workspace\\src\\cocos\\build\\perf-v26-volley-warm",
+        "pid": 56668
+      },
+      {
+        "created": "2026-11-13T11:18:22.899406+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7538 --directory F:\\workspace\\Singularity\\temp\\perf-v21-workspace\\src\\cocos\\build\\perf-v27-volley-cpu",
+        "pid": 71304
+      },
+      {
+        "created": "2026-11-13T11:23:32.055406+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7539 --directory F:\\workspace\\Singularity\\temp\\perf-v21-workspace\\src\\cocos\\build\\perf-v28-volley",
+        "pid": 22068
+      },
+      {
+        "created": "2026-11-13T11:30:14.598121+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7540 --directory F:\\workspace\\Singularity\\temp\\perf-v21-workspace\\src\\cocos\\build\\perf-v29-contact-batch",
+        "pid": 43584
+      },
+      {
+        "created": "2026-11-13T11:36:01.386884+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7541 --directory F:\\workspace\\Singularity\\temp\\perf-v21-workspace\\src\\cocos\\build\\perf-v30-contact-clear",
+        "pid": 8612
+      },
+      {
+        "created": "2026-11-13T11:39:17.351315+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7542 --directory F:\\workspace\\Singularity\\temp\\perf-v21-workspace\\src\\cocos\\build\\perf-v31-final",
+        "pid": 11140
+      },
+      {
+        "created": "2026-11-13T11:46:08.792896+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7543 --directory F:\\workspace\\Singularity\\temp\\perf-v21-workspace\\src\\cocos\\build\\perf-v32-mesh-cache",
+        "pid": 5028
+      },
+      {
+        "created": "2026-11-13T12:00:10.412183+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7544 --directory F:\\workspace\\Singularity\\temp\\perf-v21-workspace\\src\\cocos\\build\\perf-v33-particle-upload",
+        "pid": 22112
+      },
+      {
+        "created": "2026-11-13T12:34:27.188526+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7545 --directory F:/workspace/Singularity/temp/perf-v21-workspace/src/cocos/build/perf-v34-prefix-views",
+        "pid": 68308
+      },
+      {
+        "created": "2026-11-13T12:39:24.44513+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7546 --directory F:/workspace/Singularity/temp/perf-v21-workspace/src/cocos/build/perf-v35-native-particles",
+        "pid": 57412
+      },
+      {
+        "created": "2026-11-13T10:03:26.740191+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7530 --directory src/cocos/build/concept-2d-performance-v19",
+        "pid": 76648
+      },
+      {
+        "created": "2026-11-13T10:19:26.591629+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7531 --directory temp/perf-v21-workspace/src/cocos/build/perf-v21-control",
+        "pid": 22116
+      },
+      {
+        "created": "2026-11-13T10:27:31.166764+08:00",
+        "command": "\"C:\\Python314\\python.exe\" src/cocos/tools/serve-web.py --port 7532 --directory temp/perf-v21-workspace/src/cocos/build/perf-v21-candidate",
+        "pid": 3040
+      }
+    ],
+    "ownedEmulatorShutdownRequested": true,
+    "ownedEmulatorShutdownObserved": true
+  },
+  "pending": [
+    "Real iPhone 14 TapTap entry/touch/background recovery/storage/resource-pack and sustained combat validation.",
+    "Physical-device CPU/GPU bottleneck trace, temperature/power and actual startup download.",
+    "Production login service remains unconfigured; guest-test uses prior authorization and existing local save."
+  ],
+  "officialReferences": [
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/runtime/runtime-guide/",
+    "https://docs.cocos.com/creator/3.8/manual/en/asset/model/mesh.html",
+    "https://docs.cocos.com/creator/3.8/manual/en/ui-system/components/engine/ui-batch.html",
+    "https://github.com/zeux/meshoptimizer/blob/master/js/README.md"
+  ]
+}

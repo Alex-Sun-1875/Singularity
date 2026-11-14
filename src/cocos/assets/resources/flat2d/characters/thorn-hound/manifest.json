@@ -1,0 +1,314 @@
+{
+  "revision": "monster-ecology-v1-six-authored-poses",
+  "sourceDesign": "source-art/encounters/monster-ecology-v1/thorn-hound/raw.png",
+  "loaded3DModel": false,
+  "image": "atlas.png",
+  "columns": 6,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "directions": [
+    "down",
+    "left",
+    "up",
+    "right"
+  ],
+  "origin": [
+    143.0,
+    238
+  ],
+  "perFrameOrigins": [
+    [
+      143.0,
+      238
+    ],
+    [
+      143.0,
+      238
+    ],
+    [
+      143.0,
+      238
+    ],
+    [
+      143.0,
+      238
+    ],
+    [
+      143.0,
+      238
+    ],
+    [
+      143.0,
+      238
+    ],
+    [
+      132.5,
+      205
+    ],
+    [
+      132.5,
+      205
+    ],
+    [
+      132.5,
+      205
+    ],
+    [
+      132.5,
+      205
+    ],
+    [
+      132.5,
+      205
+    ],
+    [
+      132.5,
+      205
+    ],
+    [
+      119.0,
+      237
+    ],
+    [
+      119.0,
+      237
+    ],
+    [
+      119.0,
+      237
+    ],
+    [
+      119.0,
+      237
+    ],
+    [
+      119.0,
+      237
+    ],
+    [
+      119.0,
+      237
+    ],
+    [
+      135.0,
+      201
+    ],
+    [
+      135.0,
+      201
+    ],
+    [
+      135.0,
+      201
+    ],
+    [
+      135.0,
+      201
+    ],
+    [
+      135.0,
+      201
+    ],
+    [
+      135.0,
+      201
+    ]
+  ],
+  "alphaBounds": [
+    [
+      53,
+      48,
+      233,
+      233
+    ],
+    [
+      60,
+      45,
+      243,
+      245
+    ],
+    [
+      64,
+      44,
+      241,
+      238
+    ],
+    [
+      33,
+      47,
+      241,
+      228
+    ],
+    [
+      11,
+      35,
+      245,
+      243
+    ],
+    [
+      22,
+      50,
+      230,
+      236
+    ],
+    [
+      16,
+      70,
+      249,
+      210
+    ],
+    [
+      13,
+      71,
+      248,
+      205
+    ],
+    [
+      9,
+      72,
+      246,
+      203
+    ],
+    [
+      11,
+      79,
+      256,
+      204
+    ],
+    [
+      0,
+      71,
+      252,
+      190
+    ],
+    [
+      14,
+      73,
+      243,
+      208
+    ],
+    [
+      27,
+      37,
+      211,
+      224
+    ],
+    [
+      30,
+      28,
+      212,
+      238
+    ],
+    [
+      25,
+      27,
+      207,
+      237
+    ],
+    [
+      16,
+      35,
+      213,
+      221
+    ],
+    [
+      15,
+      16,
+      236,
+      246
+    ],
+    [
+      27,
+      41,
+      227,
+      223
+    ],
+    [
+      16,
+      65,
+      254,
+      206
+    ],
+    [
+      11,
+      66,
+      251,
+      201
+    ],
+    [
+      8,
+      69,
+      247,
+      199
+    ],
+    [
+      10,
+      74,
+      243,
+      201
+    ],
+    [
+      3,
+      63,
+      253,
+      181
+    ],
+    [
+      10,
+      71,
+      242,
+      205
+    ]
+  ],
+  "alphaThreshold": 0.025,
+  "camera": {
+    "worldUnitsPerPixel": 0.006756756756756757
+  },
+  "actions": {
+    "idle": {
+      "image": "atlas.png",
+      "frames": 1,
+      "frameIndices": [
+        0
+      ],
+      "fps": 1,
+      "loop": true
+    },
+    "walk": {
+      "image": "atlas.png",
+      "frames": 2,
+      "frameIndices": [
+        1,
+        2
+      ],
+      "fps": 6,
+      "loop": true,
+      "nominalSpeedMetresPerSecond": 2.8
+    },
+    "attack_sword": {
+      "image": "atlas.png",
+      "frames": 4,
+      "frameIndices": [
+        0,
+        3,
+        4,
+        5
+      ],
+      "phaseStarts": [
+        0,
+        0.24,
+        0.55,
+        0.8
+      ],
+      "fps": 6,
+      "loop": false
+    }
+  },
+  "limitations": [
+    "Four actually drawn directions, no invented diagonal or mirrored views.",
+    "Six authored poses, not a skeletal animation or generated in-between sequence.",
+    "One fixed support-plane pivot per direction across all six source cells; no per-frame fitting or scaling.",
+    "No independent corpse drawing. A real defeat may briefly fade the current pose.",
+    "Windup, active and recovery use the real EnemyCombat phase, not a separate timer."
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-10",
+  "type": "ui-design-proposal",
+  "revision": "v3-dark-gold-shared-frame",
+  "generator": "OpenAI built-in image_gen (cloud)",
+  "output": "menu-ui-proposal-v3.png",
+  "references": [
+    {
+      "role": "edit-target",
+      "path": "../menu-redesign-v2/menu-ui-proposal-v2.png"
+    },
+    {
+      "role": "frame-material-reference",
+      "path": "../menu-redesign-v2/reference-dark-gold-frame.jpg",
+      "source": "../../../src/cocos/assets/resources/ui/quiet-bronze/unified-gold-panel-v13.png"
+    }
+  ],
+  "generation": {
+    "status": "completed",
+    "prompt": "prompt.txt"
+  },
+  "artReview": {
+    "status": "pending-user-review",
+    "selfReview": {
+      "frame": "Both menu borders now use rounded dark-gold double fine outlines matching the existing shared skin.",
+      "layout": "Horizontal command strip and settings palette retained.",
+      "text": "Main Chinese labels visually reviewed."
+    }
+  },
+  "sharedStyleDecision": {
+    "palette": "UI_FRAME_GOLD in UiChrome.ts",
+    "ornament": "UiChrome",
+    "skin": "UiSkin + unified-gold-panel-v13",
+    "policy": "Reuse existing shared frame assets/components; centralize frame geometry and styling when integrating. No per-menu black frame or separately copied color palette."
+  },
+  "implementation": {
+    "status": "design-only",
+    "note": "Runtime integration remains paused while the user reviews the visual proposal."
+  }
+}

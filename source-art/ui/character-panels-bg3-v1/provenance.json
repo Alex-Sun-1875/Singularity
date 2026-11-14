@@ -1,0 +1,107 @@
+{
+  "date": "2026-11-10",
+  "method": "OpenAI built-in image_gen, cloud generation; no local generative model",
+  "generation_status": "complete",
+  "art_review_status": "Assistant reviewed visual consistency and corrected one generated skill-name glyph; user approval pending",
+  "scope": "Visual concepts only; no runtime UI or game assets replaced",
+  "target": {
+    "logical_viewport": [
+      844,
+      390
+    ],
+    "platform": "TapTap minigame / Cocos Creator 3.8.8",
+    "touch_validation": "Pending implementation; bitmap concepts do not certify touch targets or safe areas"
+  },
+  "design_reference": {
+    "title": "Baldur's Gate 3 Community Update #15: Absolute Frenzy (2022 early-access UI case study)",
+    "url": "https://www.baldursgate3.game/news/community-update-15-absolute-frenzy_49",
+    "usage": "Reference research for character sheet / inventory / spellbook hierarchy, filters, and tooltips; no official screenshot supplied to image_gen"
+  },
+  "hero_board": {
+    "file": "references/hero-identity.jpg",
+    "sha256": "524c2864e4ebc21526f566a3bb5978ce59a90d646dde2646356e1b36ea1017a2",
+    "sources": [
+      "source-art/characters/2d-hairstyle-portraits-v1/curly-original.png",
+      "source-art/characters/3d-sword-carry-v1/runtime/comparison/W01-front.png"
+    ],
+    "instructions": "Face and curly silver hair from portrait; burgundy vest, dark sleeves, belts and boots from body reference"
+  },
+  "notes": [
+    "The first generated screen was selected as a style reference for the other three; this does not mean the user approved it.",
+    "Illustrated values and item art are examples, not live game screenshots or final production assets.",
+    "Fonts from Windows are used only for rasterized deterministic review layout/correction; no font file is redistributed."
+  ],
+  "screens": [
+    {
+      "screen": "人物",
+      "file": "screens/01-character.png",
+      "prompt": "prompts/01-character.txt",
+      "original_cloud_file": "C:\\Users\\Alexa\\.codex\\generated_images\\01a1c46b-eff4-7a71-a1ee-6621fccd0eb5\\exec-6f5abce3-d112-402a-92c4-eb473b944899.png",
+      "original_sha256": "e3a0c3bdeb0b56830644a533a7f64a46d8f060f48ad9bf8db4f051a8c9f9140b",
+      "final_sha256": "e3a0c3bdeb0b56830644a533a7f64a46d8f060f48ad9bf8db4f051a8c9f9140b",
+      "native_size": [
+        1844,
+        853
+      ],
+      "reference_inputs": [
+        "references/hero-identity.jpg"
+      ],
+      "postprocess": "None; original generation copied without pixel edits"
+    },
+    {
+      "screen": "装备",
+      "file": "screens/02-equipment.png",
+      "prompt": "prompts/02-equipment.txt",
+      "original_cloud_file": "C:\\Users\\Alexa\\.codex\\generated_images\\01a1c46b-eff4-7a71-a1ee-6621fccd0eb5\\exec-5ec92e73-12d1-48f7-96c6-7bf16dadb2c8.png",
+      "original_sha256": "4f601eeffac63622f7071127c0133c76e99f3830cda9435ae4054f604f98ad27",
+      "final_sha256": "4f601eeffac63622f7071127c0133c76e99f3830cda9435ae4054f604f98ad27",
+      "native_size": [
+        1844,
+        853
+      ],
+      "reference_inputs": [
+        "screens/01-character.png",
+        "references/hero-identity.jpg"
+      ],
+      "postprocess": "None; original generation copied without pixel edits"
+    },
+    {
+      "screen": "技能",
+      "file": "screens/03-skills.png",
+      "prompt": "prompts/03-skills.txt",
+      "original_cloud_file": "C:\\Users\\Alexa\\.codex\\generated_images\\01a1c46b-eff4-7a71-a1ee-6621fccd0eb5\\exec-55897f73-e755-48a5-bcd1-dbb02f360bc9.png",
+      "original_sha256": "f57cc888c5b2d5e56fbaff1f06bca830b0b4b74365761bdde1b9c926efe3cfb3",
+      "final_sha256": "8a69d8ff699ec02630c7ed77e1f05bdfadcb9c5c6d235ee8d3484ab690d9498b",
+      "native_size": [
+        1844,
+        853
+      ],
+      "reference_inputs": [
+        "screens/01-character.png",
+        "references/hero-identity.jpg"
+      ],
+      "postprocess": "Pillow: first glyph 破 → 铁 in 铁誓壁垒; raw generation preserved in review/03-skills-generated.png"
+    },
+    {
+      "screen": "锻造强化",
+      "file": "screens/04-forging.png",
+      "prompt": "prompts/04-forging.txt",
+      "original_cloud_file": "C:\\Users\\Alexa\\.codex\\generated_images\\01a1c46b-eff4-7a71-a1ee-6621fccd0eb5\\exec-dc88f04c-4761-4a90-99d9-c632ace6c7b4.png",
+      "original_sha256": "d389e3cc94a2b371066b1495b83596f24a36431e50ded912111e8ad5952f852e",
+      "final_sha256": "d389e3cc94a2b371066b1495b83596f24a36431e50ded912111e8ad5952f852e",
+      "native_size": [
+        1844,
+        853
+      ],
+      "reference_inputs": [
+        "screens/01-character.png",
+        "references/hero-identity.jpg"
+      ],
+      "postprocess": "None; original generation copied without pixel edits"
+    }
+  ],
+  "overview": {
+    "file": "review/overview.jpg",
+    "method": "Pillow 2×2 review layout; generated screens reduced with Lanczos"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "protocol": "moving-combat-v6",
+  "cases": [
+    {"id":"oath-idle","area":"U1-06","mode":"idle"},
+    {"id":"oath-run","area":"U1-06","mode":"run"},
+    {"id":"oath-stationary-WAR","area":"U1-06","mode":"combat","family":"WAR"},
+    {"id":"oath-stationary-BOW","area":"U1-06","mode":"combat","family":"BOW"},
+    {"id":"oath-stationary-FIR","area":"U1-06","mode":"combat","family":"FIR"},
+    {"id":"oath-stationary-THU","area":"U1-06","mode":"combat","family":"THU"},
+    {"id":"oath-moving-WAR","area":"U1-06","mode":"move-combat","family":"WAR"},
+    {"id":"oath-moving-BOW","area":"U1-06","mode":"move-combat","family":"BOW"},
+    {"id":"oath-moving-FIR","area":"U1-06","mode":"move-combat","family":"FIR"},
+    {"id":"oath-moving-THU","area":"U1-06","mode":"move-combat","family":"THU"},
+    {"id":"quarry-run","area":"S13","mode":"run"}
+  ],
+  "profiles": {
+    "smoke":{"seconds":8,"repeats":1,"cases":["oath-moving-BOW","oath-moving-FIR"]},
+    "regression":{"seconds":20,"repeats":3},
+    "soak":{"seconds":30,"repeats":10,"cases":["oath-moving-WAR","oath-moving-BOW","oath-moving-FIR","oath-moving-THU"]}
+  }
+}

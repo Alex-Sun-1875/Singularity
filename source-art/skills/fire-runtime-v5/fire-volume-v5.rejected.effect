@@ -1,0 +1,79 @@
+CCEffect %{
+  techniques:
+  - passes:
+    - vert: fire-vs:vert
+      frag: fire-fs:frag
+      rasterizerState: { cullMode: back }
+      depthStencilState: { depthTest: true, depthWrite: false }
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: one
+          blendDstAlpha: one_minus_src_alpha
+      properties:
+        noiseMap: { value: white }
+        fire: { value: [0, 1, 0, 0] }
+        shape: { value: [0.18, 1, 0, 0] }
+}%
+
+CCProgram fire-vs %{
+  precision highp float;
+  #include <legacy/input>
+  #include <builtin/uniforms/cc-global>
+  #include <legacy/local-batch>
+  uniform FireParams { vec4 fire; vec4 shape; };
+  out vec3 v_local;
+  out vec3 v_world;
+  out vec3 v_normal;
+  vec4 vert () {
+    vec4 p;
+    CCVertInput(p);
+    v_local = p.xyz;
+    // Inward-only turbulence keeps the submitted footprint authoritative.
+    float warp = .94 + .055 * sin(p.x*18.0 + fire.x*8.0 + fire.z) * sin(p.z*15.0 - fire.x*6.0 + p.y*13.0);
+    p.xyz *= warp;
+    mat4 world;
+    CCGetWorldMatrix(world);
+    vec4 wp = world*p;
+    v_world = wp.xyz;
+    v_normal = normalize(mat3(world)*a_normal);
+    return cc_matProj * cc_matView * wp;
+  }
+}%
+
+CCProgram fire-fs %{
+  precision highp float;
+  #include <legacy/output-standard>
+  #include <builtin/uniforms/cc-global>
+  uniform sampler2D noiseMap;
+  uniform FireParams { vec4 fire; vec4 shape; };
+  in vec3 v_local;
+  in vec3 v_world;
+  in vec3 v_normal;
+  vec4 frag () {
+    vec3 p = v_local * 2.0;
+    float clock = fire.x * shape.y;
+    vec2 flow = vec2(clock*.13 + fire.z*.071, -clock*.43);
+    // Three independently advected scales, stored in a tiny tileable noise map.
+    float n = texture(noiseMap, fract(p.xz*1.35 + p.y*vec2(.39,-.63) + flow)).r*.57;
+    n += texture(noiseMap, fract(p.xy*2.9 + p.z*.27 - flow*.71)).g*.29;
+    n += texture(noiseMap, fract(p.yz*5.8 + flow*1.37)).b*.14;
+    vec3 view = normalize(cc_cameraPos.xyz-v_world);
+    float facing = max(0.0,dot(normalize(v_normal),view));
+    float heat = clamp(n*.88 + shape.x + pow(facing,1.5)*.16 - max(0.0,p.y)*.10,0.0,1.0);
+    vec3 ember = vec3(.105,.019,.004);
+    vec3 red = vec3(.57,.055,.005);
+    vec3 orange = vec3(1.0,.29,.012);
+    vec3 gold = vec3(1.0,.75,.15);
+    vec3 ivory = vec3(1.0,.98,.76);
+    vec3 color = mix(ember,red,smoothstep(.24,.47,heat));
+    color = mix(color,orange,smoothstep(.44,.67,heat));
+    color = mix(color,gold,smoothstep(.65,.84,heat));
+    color = mix(color,ivory,smoothstep(.84,1.0,heat));
+    float density = smoothstep(.12,.38,n+facing*.12);
+    float alpha = fire.y * smoothstep(.015,.25,facing) * density;
+    return CCFragOutput(vec4(color,alpha));
+  }
+}%

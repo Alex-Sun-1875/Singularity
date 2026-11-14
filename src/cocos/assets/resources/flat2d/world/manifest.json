@@ -1,0 +1,948 @@
+{
+  "version": "flat-world-v2",
+  "status": "source-ready-runtime-review-required",
+  "coordinateFrame": "Existing +X/+Z metre coordinates, navigation, colliders and height fields unchanged",
+  "coverage": "Every original area uses existing tiled ground/road meshes plus painted cutout objects; S01-T1 retains its validated whole-map painting",
+  "images": {
+    "world-props-v1": {
+      "resource": "flat2d/world/world-props-v1",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "49795a567212a63237ea21d51497fa691b249b6bf4255048675d97398ebd50ab"
+    },
+    "small-props-v1": {
+      "resource": "flat2d/world/small-props-v1",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "1b4a1c4c4b5bb9f82879115f1d62bd4cba0948e419d8ec2168ef9aa3f68626b9"
+    },
+    "structures-v1": {
+      "resource": "flat2d/world/structures-v1",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "0662c1adcbb967567192988be26358368d4a231bb2dea54b5735a8fd93b537e3"
+    },
+    "house-v1": {
+      "resource": "flat2d/world/house-v1",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "497d68a94bdd6b537b8d79d835ddd6c71ac4e7994a40a202a19e34d07b5a2b2e"
+    },
+    "tower-v1": {
+      "resource": "flat2d/world/tower-v1",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "26cef94dd0e2d81cc9367050c5e7aaf2a6ba30be1c8d2ad49c40d96d6804f73a"
+    },
+    "water-v1": {
+      "resource": "flat2d/world/water-v1",
+      "dimensions": [
+        1254,
+        1254
+      ],
+      "sha256": "2ca68e7b133ee1cf6da1c640a9305a6fcd2425394adc2abec30c77c4dee13d09"
+    }
+  },
+  "sprites": {
+    "oak": {
+      "image": "world-props-v1",
+      "rect": [
+        9,
+        7,
+        304,
+        304
+      ],
+      "cell": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "birch": {
+      "image": "world-props-v1",
+      "rect": [
+        367,
+        7,
+        214,
+        300
+      ],
+      "cell": [
+        314,
+        0,
+        313,
+        314
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "pine": {
+      "image": "world-props-v1",
+      "rect": [
+        673,
+        7,
+        229,
+        300
+      ],
+      "cell": [
+        627,
+        0,
+        313,
+        314
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "rocks": {
+      "image": "world-props-v1",
+      "rect": [
+        952,
+        80,
+        290,
+        230
+      ],
+      "cell": [
+        940,
+        0,
+        314,
+        314
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "cottage-small": {
+      "image": "world-props-v1",
+      "rect": [
+        8,
+        320,
+        306,
+        307
+      ],
+      "cell": [
+        0,
+        314,
+        314,
+        313
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "tower-small": {
+      "image": "world-props-v1",
+      "rect": [
+        348,
+        315,
+        244,
+        312
+      ],
+      "cell": [
+        314,
+        314,
+        313,
+        313
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "tent": {
+      "image": "world-props-v1",
+      "rect": [
+        627,
+        353,
+        311,
+        267
+      ],
+      "cell": [
+        627,
+        314,
+        313,
+        313
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "ruin": {
+      "image": "world-props-v1",
+      "rect": [
+        947,
+        335,
+        298,
+        286
+      ],
+      "cell": [
+        940,
+        314,
+        314,
+        313
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "wood-fence": {
+      "image": "world-props-v1",
+      "rect": [
+        13,
+        627,
+        288,
+        293
+      ],
+      "cell": [
+        0,
+        627,
+        314,
+        313
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "stone-wall": {
+      "image": "world-props-v1",
+      "rect": [
+        323,
+        627,
+        292,
+        276
+      ],
+      "cell": [
+        314,
+        627,
+        313,
+        313
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "cargo": {
+      "image": "world-props-v1",
+      "rect": [
+        644,
+        660,
+        282,
+        246
+      ],
+      "cell": [
+        627,
+        627,
+        313,
+        313
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "chest": {
+      "image": "world-props-v1",
+      "rect": [
+        977,
+        684,
+        250,
+        256
+      ],
+      "cell": [
+        940,
+        627,
+        314,
+        313
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "table-group": {
+      "image": "world-props-v1",
+      "rect": [
+        10,
+        967,
+        304,
+        279
+      ],
+      "cell": [
+        0,
+        940,
+        314,
+        314
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "shelf": {
+      "image": "world-props-v1",
+      "rect": [
+        361,
+        946,
+        233,
+        301
+      ],
+      "cell": [
+        314,
+        940,
+        313,
+        314
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "signpost": {
+      "image": "world-props-v1",
+      "rect": [
+        663,
+        944,
+        209,
+        300
+      ],
+      "cell": [
+        627,
+        940,
+        313,
+        314
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "forge": {
+      "image": "world-props-v1",
+      "rect": [
+        940,
+        940,
+        310,
+        305
+      ],
+      "cell": [
+        940,
+        940,
+        314,
+        314
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "chair": {
+      "image": "small-props-v1",
+      "rect": [
+        80,
+        7,
+        197,
+        307
+      ],
+      "cell": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "stool": {
+      "image": "small-props-v1",
+      "rect": [
+        348,
+        79,
+        243,
+        234
+      ],
+      "cell": [
+        314,
+        0,
+        313,
+        314
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "round-table": {
+      "image": "small-props-v1",
+      "rect": [
+        634,
+        48,
+        306,
+        265
+      ],
+      "cell": [
+        627,
+        0,
+        313,
+        314
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "table": {
+      "image": "small-props-v1",
+      "rect": [
+        940,
+        47,
+        310,
+        266
+      ],
+      "cell": [
+        940,
+        0,
+        314,
+        314
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "barrel": {
+      "image": "small-props-v1",
+      "rect": [
+        46,
+        314,
+        223,
+        313
+      ],
+      "cell": [
+        0,
+        314,
+        314,
+        313
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "crate": {
+      "image": "small-props-v1",
+      "rect": [
+        336,
+        338,
+        271,
+        289
+      ],
+      "cell": [
+        314,
+        314,
+        313,
+        313
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "books": {
+      "image": "small-props-v1",
+      "rect": [
+        637,
+        351,
+        295,
+        275
+      ],
+      "cell": [
+        627,
+        314,
+        313,
+        313
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "lantern": {
+      "image": "small-props-v1",
+      "rect": [
+        1004,
+        326,
+        189,
+        301
+      ],
+      "cell": [
+        940,
+        314,
+        314,
+        313
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "jug": {
+      "image": "small-props-v1",
+      "rect": [
+        62,
+        627,
+        212,
+        300
+      ],
+      "cell": [
+        0,
+        627,
+        314,
+        313
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "bowl": {
+      "image": "small-props-v1",
+      "rect": [
+        333,
+        627,
+        280,
+        279
+      ],
+      "cell": [
+        314,
+        627,
+        313,
+        313
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "candlestick": {
+      "image": "small-props-v1",
+      "rect": [
+        675,
+        627,
+        212,
+        297
+      ],
+      "cell": [
+        627,
+        627,
+        313,
+        313
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "firepit": {
+      "image": "small-props-v1",
+      "rect": [
+        940,
+        627,
+        309,
+        313
+      ],
+      "cell": [
+        940,
+        627,
+        314,
+        313
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "grass": {
+      "image": "small-props-v1",
+      "rect": [
+        19,
+        974,
+        281,
+        250
+      ],
+      "cell": [
+        0,
+        940,
+        314,
+        314
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "fern": {
+      "image": "small-props-v1",
+      "rect": [
+        316,
+        950,
+        294,
+        277
+      ],
+      "cell": [
+        314,
+        940,
+        313,
+        314
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "stump": {
+      "image": "small-props-v1",
+      "rect": [
+        630,
+        965,
+        304,
+        263
+      ],
+      "cell": [
+        627,
+        940,
+        313,
+        314
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "door": {
+      "image": "small-props-v1",
+      "rect": [
+        968,
+        940,
+        257,
+        302
+      ],
+      "cell": [
+        940,
+        940,
+        314,
+        314
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "pillar": {
+      "image": "structures-v1",
+      "rect": [
+        106,
+        8,
+        206,
+        409
+      ],
+      "cell": [
+        0,
+        0,
+        418,
+        418
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "gate": {
+      "image": "structures-v1",
+      "rect": [
+        430,
+        8,
+        394,
+        410
+      ],
+      "cell": [
+        418,
+        0,
+        418,
+        418
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "wagon": {
+      "image": "structures-v1",
+      "rect": [
+        860,
+        60,
+        383,
+        343
+      ],
+      "cell": [
+        836,
+        0,
+        418,
+        418
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "waterwheel": {
+      "image": "structures-v1",
+      "rect": [
+        13,
+        432,
+        405,
+        400
+      ],
+      "cell": [
+        0,
+        418,
+        418,
+        418
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "gravestone": {
+      "image": "structures-v1",
+      "rect": [
+        469,
+        418,
+        316,
+        399
+      ],
+      "cell": [
+        418,
+        418,
+        418,
+        418
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "crystal": {
+      "image": "structures-v1",
+      "rect": [
+        880,
+        430,
+        324,
+        396
+      ],
+      "cell": [
+        836,
+        418,
+        418,
+        418
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "rope-fence": {
+      "image": "structures-v1",
+      "rect": [
+        14,
+        898,
+        388,
+        329
+      ],
+      "cell": [
+        0,
+        836,
+        418,
+        418
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "broken-wall": {
+      "image": "structures-v1",
+      "rect": [
+        429,
+        869,
+        395,
+        354
+      ],
+      "cell": [
+        418,
+        836,
+        418,
+        418
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "footbridge": {
+      "image": "structures-v1",
+      "rect": [
+        836,
+        863,
+        414,
+        356
+      ],
+      "cell": [
+        836,
+        836,
+        418,
+        418
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "house": {
+      "image": "house-v1",
+      "rect": [
+        0,
+        10,
+        1254,
+        1231
+      ],
+      "cell": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    },
+    "tower": {
+      "image": "tower-v1",
+      "rect": [
+        165,
+        27,
+        892,
+        1213
+      ],
+      "cell": [
+        0,
+        0,
+        1254,
+        1254
+      ],
+      "source": "Built-in ImageGen painted artwork; native SpriteFrame crop only"
+    }
+  },
+  "sourceAssetFamilies": {
+    "table": "table",
+    "round-table": "round-table",
+    "chair": "chair",
+    "stool": "stool",
+    "shelf": "shelf",
+    "barrel": "barrel",
+    "crate": "crate",
+    "chest": "chest",
+    "lantern": "lantern",
+    "jug": "jug",
+    "bowl": "bowl",
+    "candlestick": "candlestick",
+    "books": "books",
+    "rocks-0": "rocks",
+    "rocks-1": "rocks",
+    "rocks-2": "rocks",
+    "rocks-3": "rocks",
+    "rocks-4": "rocks",
+    "rocks-5": "rocks",
+    "tree": "oak",
+    "fern-0": "fern",
+    "fern-1": "fern",
+    "fern-2": "fern",
+    "fern-3": "fern",
+    "stump": "stump",
+    "grass-0": "grass",
+    "grass-1": "grass",
+    "grass-2": "grass",
+    "grass-3": "grass",
+    "firepit": "firepit",
+    "door": "door"
+  },
+  "modelDimensions": {
+    "table": [
+      2.2559,
+      0.87699,
+      1.39024
+    ],
+    "round-table": [
+      0.79618,
+      0.74603,
+      0.79618
+    ],
+    "chair": [
+      0.68973,
+      2.27432,
+      0.65755
+    ],
+    "stool": [
+      0.42458,
+      0.43744,
+      0.44236
+    ],
+    "shelf": [
+      1.37396,
+      2.06344,
+      0.5813
+    ],
+    "barrel": [
+      0.742,
+      0.87026,
+      0.75589
+    ],
+    "crate": [
+      0.8245,
+      0.34963,
+      0.40891
+    ],
+    "chest": [
+      0.95307,
+      0.61972,
+      0.5226
+    ],
+    "lantern": [
+      0.22103,
+      0.52894,
+      0.23458
+    ],
+    "jug": [
+      0.27546,
+      0.21145,
+      0.16792
+    ],
+    "bowl": [
+      0.13085,
+      0.07323,
+      0.12421
+    ],
+    "candlestick": [
+      0.09793,
+      0.21975,
+      0.09923
+    ],
+    "books": [
+      0.55305,
+      0.23742,
+      0.16358
+    ],
+    "rocks-0": [
+      2.2381,
+      1.48289,
+      3.37923
+    ],
+    "rocks-1": [
+      2.64272,
+      1.26155,
+      3.27339
+    ],
+    "rocks-2": [
+      2.1067,
+      1.10009,
+      2.08003
+    ],
+    "rocks-3": [
+      2.13084,
+      1.77355,
+      1.96217
+    ],
+    "rocks-4": [
+      1.82249,
+      1.20894,
+      3.0008
+    ],
+    "rocks-5": [
+      2.13755,
+      1.25729,
+      2.75855
+    ],
+    "tree": [
+      2.30633,
+      4.38354,
+      3.92981
+    ],
+    "fern-0": [
+      0.55194,
+      0.2868,
+      0.61342
+    ],
+    "fern-1": [
+      0.98973,
+      0.42609,
+      0.895
+    ],
+    "fern-2": [
+      0.87447,
+      0.35076,
+      0.76598
+    ],
+    "fern-3": [
+      0.57278,
+      0.21309,
+      0.59328
+    ],
+    "stump": [
+      1.4246,
+      0.57101,
+      1.5904
+    ],
+    "grass-0": [
+      0.2168,
+      0.21636,
+      0.19255
+    ],
+    "grass-1": [
+      0.24566,
+      0.14161,
+      0.24502
+    ],
+    "grass-2": [
+      0.27876,
+      0.13898,
+      0.25299
+    ],
+    "grass-3": [
+      0.31819,
+      0.14528,
+      0.32657
+    ],
+    "firepit": [
+      1.4485,
+      0.38833,
+      1.43324
+    ],
+    "door": [
+      2.02906,
+      2.96833,
+      0.29633
+    ]
+  },
+  "groundSources": [
+    "surfaces/*-color",
+    "surfaces/pbr-v3/*-color"
+  ],
+  "groundLicenses": "Existing licensed source albedos; see surfaces/pbr-v3 provenance and THIRD_PARTY_NOTICES. No normal maps or photographed models are rendered in the flat presentation.",
+  "limits": [
+    "Architecture uses shared hand-painted style families; it is not a unique illustration per named building.",
+    "Existing albedo scans become repeating unlit map textures; these are genuine textured assets, not newly painted terrain.",
+    "Large rock footprints are covered by repeated small painted rock clusters to retain near-camera texel density.",
+    "Image generation requested seamless water; actual edge quality still needs the engine visual review.",
+    "Source coverage does not establish full first-chapter playthrough or physical-phone performance."
+  ]
+}

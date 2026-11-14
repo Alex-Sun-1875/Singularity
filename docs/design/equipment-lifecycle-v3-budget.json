@@ -1,0 +1,1004 @@
+{
+  "status": "design budget; chapters 1-2 implemented separately, chapters 3-8 catalogue prepared; not runtime configuration or human playtime measurements",
+  "confirmedScope": {
+    "firstTwoChaptersCombined": true,
+    "legendaryWeaponGuaranteeStartsAtChapter": 2,
+    "allBossesCanDropArtifact": true,
+    "battleEquipmentIsPoolAvailabilityNotGuaranteedOwnership": true,
+    "legendaryWeaponGuaranteeRoute": "task",
+    "noKillMilestoneOrBossFirstClearGuaranteesForNewBattleEquipment": true
+  },
+  "summary": {
+    "firstTwoCatalogueEntries": 8,
+    "firstTwoTaskGuaranteedItems": 4,
+    "firstTwoBattleRandomTargets": 4,
+    "minimumCoreEntries": 56,
+    "epicCatalogueEntries": 28,
+    "legendaryCatalogueEntries": 28,
+    "taskGuaranteedItems": 28,
+    "battleRandomTargets": 28,
+    "weaponFamilies": 22,
+    "minimumWeaponItemDefinitions": 88,
+    "minimumNonWeaponDefinitions": 34,
+    "minimumTotalItemDefinitions": 122,
+    "catalogueEntriesAreNotGuaranteedInventory": true
+  },
+  "chapters": [
+    {
+      "chapter": 1,
+      "name": "兽潮之夜",
+      "levelRange": [
+        1,
+        10
+      ],
+      "targetDays": [
+        1,
+        4
+      ],
+      "blueWeaponEndOfChapterBudget": 100,
+      "stageEnhancementCap": 3
+    },
+    {
+      "chapter": 2,
+      "name": "群山战火",
+      "levelRange": [
+        11,
+        20
+      ],
+      "targetDays": [
+        5,
+        10
+      ],
+      "blueWeaponEndOfChapterBudget": 135,
+      "stageEnhancementCap": 6
+    },
+    {
+      "chapter": 3,
+      "name": "沉钟回响",
+      "levelRange": [
+        21,
+        24
+      ],
+      "targetDays": [
+        11,
+        17
+      ],
+      "blueWeaponEndOfChapterBudget": 180,
+      "stageEnhancementCap": 8
+    },
+    {
+      "chapter": 4,
+      "name": "沉没王座",
+      "levelRange": [
+        25,
+        28
+      ],
+      "targetDays": [
+        18,
+        25
+      ],
+      "blueWeaponEndOfChapterBudget": 240,
+      "stageEnhancementCap": 10
+    },
+    {
+      "chapter": 5,
+      "name": "诸城烽火",
+      "levelRange": [
+        29,
+        32
+      ],
+      "targetDays": [
+        26,
+        33
+      ],
+      "blueWeaponEndOfChapterBudget": 320,
+      "stageEnhancementCap": 10
+    },
+    {
+      "chapter": 6,
+      "name": "黑冠围城",
+      "levelRange": [
+        33,
+        35
+      ],
+      "targetDays": [
+        34,
+        42
+      ],
+      "blueWeaponEndOfChapterBudget": 425,
+      "stageEnhancementCap": 12
+    },
+    {
+      "chapter": 7,
+      "name": "永夜降临",
+      "levelRange": [
+        36,
+        38
+      ],
+      "targetDays": [
+        43,
+        51
+      ],
+      "blueWeaponEndOfChapterBudget": 565,
+      "stageEnhancementCap": 12
+    },
+    {
+      "chapter": 8,
+      "name": "破晓之战",
+      "levelRange": [
+        39,
+        40
+      ],
+      "targetDays": [
+        52,
+        60
+      ],
+      "blueWeaponEndOfChapterBudget": 750,
+      "stageEnhancementCap": 15
+    }
+  ],
+  "baseBossRates": {
+    "artifact": 0.01,
+    "legendary": 0.036,
+    "epic": 0.1,
+    "noAdditionalHighTier": 0.854
+  },
+  "pity": {
+    "epicOrHigherMaxMisses": 9,
+    "legendaryOrHigherMaxMisses": 49,
+    "artifactHardPity": null,
+    "scope": "character-wide valid Boss draws; preserved across bosses, chapters, tiers, days and pool-version migration; payout from current Boss pool"
+  },
+  "artifactPoolConditionalWeights": {
+    "weaponFamily": 0.7,
+    "universalNecklace": 0.3,
+    "weaponFormsAreChoicesNotExtraRolls": true
+  },
+  "artifactAtLeastOneByBossKills": {
+    "10": 0.095618,
+    "20": 0.182093,
+    "30": 0.2603,
+    "50": 0.394994,
+    "100": 0.633968,
+    "200": 0.86602
+  },
+  "independentDrawExpectedBossKills": {
+    "legendaryOrHigherWithPity50": 19.6754,
+    "epicOrHigherWithEpicPityOnlyUpperBound": 5.436,
+    "note": "Legendary pity can additionally shorten epic-or-higher wait; the epic-only figure is not the joint-system exact mean."
+  },
+  "budgetUnitsAreNotDamage": true,
+  "growthAnchors": [
+    [
+      1,
+      30
+    ],
+    [
+      10,
+      100
+    ],
+    [
+      20,
+      135
+    ],
+    [
+      24,
+      180
+    ],
+    [
+      28,
+      240
+    ],
+    [
+      32,
+      320
+    ],
+    [
+      35,
+      425
+    ],
+    [
+      38,
+      565
+    ],
+    [
+      40,
+      750
+    ]
+  ],
+  "fixedReplacementExamples": {
+    "chapter1LegendaryWithMaxBudget": 153.4,
+    "chapter3Rare": 180,
+    "chapter2LegendaryWithMaxBudget": 207.09,
+    "chapter4Rare": 240
+  },
+  "tenDayEstimate": {
+    "assumptions": "450 manual repeat kills/day plus up to 1000 idle XP within frozen daily combat cap; one-shot content spread across sessions; 12710 late XP withheld before Lv20; not measured human playtime",
+    "days": [
+      {
+        "day": 1,
+        "openingLevel": 1,
+        "combatCap": 1000,
+        "oneShotBudget": 1000,
+        "actualCombatXp": 1000,
+        "totalXp": 2000,
+        "endLevel": 6
+      },
+      {
+        "day": 2,
+        "openingLevel": 6,
+        "combatCap": 1500,
+        "oneShotBudget": 1500,
+        "actualCombatXp": 1500,
+        "totalXp": 5000,
+        "endLevel": 8
+      },
+      {
+        "day": 3,
+        "openingLevel": 8,
+        "combatCap": 1500,
+        "oneShotBudget": 2500,
+        "actualCombatXp": 1500,
+        "totalXp": 9000,
+        "endLevel": 10
+      },
+      {
+        "day": 4,
+        "openingLevel": 10,
+        "combatCap": 1500,
+        "oneShotBudget": 4763,
+        "actualCombatXp": 1500,
+        "totalXp": 15263,
+        "endLevel": 12
+      },
+      {
+        "day": 5,
+        "openingLevel": 12,
+        "combatCap": 3000,
+        "oneShotBudget": 3000,
+        "actualCombatXp": 3000,
+        "totalXp": 21263,
+        "endLevel": 13
+      },
+      {
+        "day": 6,
+        "openingLevel": 13,
+        "combatCap": 3000,
+        "oneShotBudget": 4000,
+        "actualCombatXp": 3000,
+        "totalXp": 28263,
+        "endLevel": 15
+      },
+      {
+        "day": 7,
+        "openingLevel": 15,
+        "combatCap": 3000,
+        "oneShotBudget": 4000,
+        "actualCombatXp": 3000,
+        "totalXp": 35263,
+        "endLevel": 16
+      },
+      {
+        "day": 8,
+        "openingLevel": 16,
+        "combatCap": 6000,
+        "oneShotBudget": 4500,
+        "actualCombatXp": 6000,
+        "totalXp": 45763,
+        "endLevel": 17
+      },
+      {
+        "day": 9,
+        "openingLevel": 17,
+        "combatCap": 6000,
+        "oneShotBudget": 4500,
+        "actualCombatXp": 6000,
+        "totalXp": 56263,
+        "endLevel": 19
+      },
+      {
+        "day": 10,
+        "openingLevel": 19,
+        "combatCap": 6000,
+        "oneShotBudget": 3586,
+        "actualCombatXp": 6000,
+        "totalXp": 65849,
+        "endLevel": 20
+      }
+    ]
+  },
+  "earlyGoldGuaranteeDraft": {
+    "chapter1": 450,
+    "chapter2": 900,
+    "task": 675,
+    "battle": 675,
+    "total": 1350,
+    "includesExistingQuestAndCommonBossFirstClearGold": 562,
+    "additionalGoldToDistribute": 788,
+    "doubleHandedLegendaryRank6CostAtCurrentFormula": 452,
+    "epicArmorOrAccessoryRank3CostAtCurrentFormula": 58,
+    "extraExplorationAndRepeatIncomeNotIncluded": true,
+    "battleSource": "chapter boss first-clear gold: 225 in chapter 1, 450 in chapter 2; no item milestones",
+    "goldGuaranteeDoesNotGuaranteeEquipment": true
+  },
+  "coreEquipmentEntries": [
+    {
+      "chapter": 1,
+      "route": "task",
+      "quality": "epic",
+      "slot": "weapon",
+      "name": "守夜者之约",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": 6,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 1,
+      "route": "task",
+      "quality": "legendary",
+      "slot": "ring",
+      "name": "石桥誓戒",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": 8,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 1,
+      "route": "battle",
+      "quality": "epic",
+      "slot": "chest",
+      "name": "猎场守卫甲",
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": 8,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 1,
+      "route": "battle",
+      "quality": "legendary",
+      "slot": "necklace",
+      "name": "暮林猎坠",
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": 8,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 2,
+      "route": "task",
+      "quality": "epic",
+      "slot": "hands",
+      "name": "熔镜护手",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": 14,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 2,
+      "route": "task",
+      "quality": "legendary",
+      "slot": "weapon",
+      "name": "断岳之誓",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": 16,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 2,
+      "route": "battle",
+      "quality": "epic",
+      "slot": "weapon",
+      "name": "矿火征途",
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": 16,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 2,
+      "route": "battle",
+      "quality": "legendary",
+      "slot": "weapon",
+      "name": "山桥破阵",
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": 18,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 3,
+      "route": "task",
+      "quality": "epic",
+      "slot": "armor",
+      "name": "本章任务史诗防具",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 3,
+      "route": "task",
+      "quality": "epic",
+      "slot": "accessory",
+      "name": "本章任务史诗饰品",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 3,
+      "route": "task",
+      "quality": "legendary",
+      "slot": "weapon",
+      "name": "沉钟余响",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 3,
+      "route": "task",
+      "quality": "legendary",
+      "slot": "armor",
+      "name": "本章任务传奇防具",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 3,
+      "route": "battle",
+      "quality": "epic",
+      "slot": "armor",
+      "name": "本章战斗史诗防具",
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 3,
+      "route": "battle",
+      "quality": "epic",
+      "slot": "weapon",
+      "name": "本章战斗史诗武器",
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 3,
+      "route": "battle",
+      "quality": "legendary",
+      "slot": "accessory",
+      "name": "本章战斗传奇饰品",
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 3,
+      "route": "battle",
+      "quality": "legendary",
+      "slot": "weapon",
+      "name": "河湾破阵",
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 4,
+      "route": "task",
+      "quality": "epic",
+      "slot": "armor",
+      "name": "本章任务史诗防具",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 4,
+      "route": "task",
+      "quality": "epic",
+      "slot": "accessory",
+      "name": "本章任务史诗饰品",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 4,
+      "route": "task",
+      "quality": "legendary",
+      "slot": "weapon",
+      "name": "无眠誓约",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 4,
+      "route": "task",
+      "quality": "legendary",
+      "slot": "armor",
+      "name": "本章任务传奇防具",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 4,
+      "route": "battle",
+      "quality": "epic",
+      "slot": "armor",
+      "name": "本章战斗史诗防具",
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 4,
+      "route": "battle",
+      "quality": "epic",
+      "slot": "weapon",
+      "name": "本章战斗史诗武器",
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 4,
+      "route": "battle",
+      "quality": "legendary",
+      "slot": "accessory",
+      "name": "本章战斗传奇饰品",
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 4,
+      "route": "battle",
+      "quality": "legendary",
+      "slot": "weapon",
+      "name": "王座裁决",
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 5,
+      "route": "task",
+      "quality": "epic",
+      "slot": "armor",
+      "name": "本章任务史诗防具",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 5,
+      "route": "task",
+      "quality": "epic",
+      "slot": "accessory",
+      "name": "本章任务史诗饰品",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 5,
+      "route": "task",
+      "quality": "legendary",
+      "slot": "weapon",
+      "name": "诸城盟誓",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 5,
+      "route": "task",
+      "quality": "legendary",
+      "slot": "armor",
+      "name": "本章任务传奇防具",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 5,
+      "route": "battle",
+      "quality": "epic",
+      "slot": "armor",
+      "name": "本章战斗史诗防具",
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 5,
+      "route": "battle",
+      "quality": "epic",
+      "slot": "weapon",
+      "name": "本章战斗史诗武器",
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 5,
+      "route": "battle",
+      "quality": "legendary",
+      "slot": "accessory",
+      "name": "本章战斗传奇饰品",
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 5,
+      "route": "battle",
+      "quality": "legendary",
+      "slot": "weapon",
+      "name": "裂旗破阵",
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 6,
+      "route": "task",
+      "quality": "epic",
+      "slot": "armor",
+      "name": "本章任务史诗防具",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 6,
+      "route": "task",
+      "quality": "epic",
+      "slot": "accessory",
+      "name": "本章任务史诗饰品",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 6,
+      "route": "task",
+      "quality": "legendary",
+      "slot": "weapon",
+      "name": "城垣余烬",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 6,
+      "route": "task",
+      "quality": "legendary",
+      "slot": "armor",
+      "name": "本章任务传奇防具",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 6,
+      "route": "battle",
+      "quality": "epic",
+      "slot": "armor",
+      "name": "本章战斗史诗防具",
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 6,
+      "route": "battle",
+      "quality": "epic",
+      "slot": "weapon",
+      "name": "本章战斗史诗武器",
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 6,
+      "route": "battle",
+      "quality": "legendary",
+      "slot": "accessory",
+      "name": "本章战斗传奇饰品",
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 6,
+      "route": "battle",
+      "quality": "legendary",
+      "slot": "weapon",
+      "name": "黑冠终令",
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 7,
+      "route": "task",
+      "quality": "epic",
+      "slot": "armor",
+      "name": "本章任务史诗防具",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 7,
+      "route": "task",
+      "quality": "epic",
+      "slot": "accessory",
+      "name": "本章任务史诗饰品",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 7,
+      "route": "task",
+      "quality": "legendary",
+      "slot": "weapon",
+      "name": "长夜守望",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 7,
+      "route": "task",
+      "quality": "legendary",
+      "slot": "armor",
+      "name": "本章任务传奇防具",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 7,
+      "route": "battle",
+      "quality": "epic",
+      "slot": "armor",
+      "name": "本章战斗史诗防具",
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 7,
+      "route": "battle",
+      "quality": "epic",
+      "slot": "weapon",
+      "name": "本章战斗史诗武器",
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 7,
+      "route": "battle",
+      "quality": "legendary",
+      "slot": "accessory",
+      "name": "本章战斗传奇饰品",
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 7,
+      "route": "battle",
+      "quality": "legendary",
+      "slot": "weapon",
+      "name": "斩翼黎明",
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 8,
+      "route": "task",
+      "quality": "epic",
+      "slot": "armor",
+      "name": "本章任务史诗防具",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 8,
+      "route": "task",
+      "quality": "epic",
+      "slot": "accessory",
+      "name": "本章任务史诗饰品",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 8,
+      "route": "task",
+      "quality": "legendary",
+      "slot": "weapon",
+      "name": "破晓之誓",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 8,
+      "route": "task",
+      "quality": "legendary",
+      "slot": "armor",
+      "name": "本章任务传奇防具",
+      "playerItemsPerClaim": 1,
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "guaranteed_task_reward"
+    },
+    {
+      "chapter": 8,
+      "route": "battle",
+      "quality": "epic",
+      "slot": "armor",
+      "name": "本章战斗史诗防具",
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 8,
+      "route": "battle",
+      "quality": "epic",
+      "slot": "weapon",
+      "name": "本章战斗史诗武器",
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 8,
+      "route": "battle",
+      "quality": "legendary",
+      "slot": "accessory",
+      "name": "本章战斗传奇饰品",
+      "weaponChoices": 1,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    },
+    {
+      "chapter": 8,
+      "route": "battle",
+      "quality": "legendary",
+      "slot": "weapon",
+      "name": "永夜终结",
+      "weaponChoices": 4,
+      "growth": "fixed",
+      "requiredLevelDraft": null,
+      "delivery": "random_pool_target",
+      "itemsPerSuccessfulDraw": 1
+    }
+  ],
+  "firstTwoCatalogueBudgetShare": {
+    "task": 0.4713,
+    "battle": 0.5287,
+    "notes": "Normalized budget of catalogue entries, not expected drop income or player-owned equipment. Uses draft wear levels, full-weapon weight 1, other-slot weight .65; excludes unique-effect performance."
+  },
+  "implementationReport": "equipment-lifecycle-v3-integration.md"
+}

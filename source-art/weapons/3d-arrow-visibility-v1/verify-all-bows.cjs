@@ -1,0 +1,53 @@
+// Actual native model/arrow verification in the existing isolated test profile.
+const {chromium}=require('../../../src/cocos/node_modules/playwright');
+const fs=require('node:fs'),path=require('node:path'),assert=require('node:assert/strict');
+const out=path.join(__dirname,'runtime','aim-verification');fs.mkdirSync(out,{recursive:true});
+(async()=>{const browser=await chromium.launch({executablePath:'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true,args:['--enable-unsafe-swiftshader']});try{
+ const page=await browser.newPage({viewport:{width:1440,height:900}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
+ await page.goto((process.env.ARROW_REVIEW_URL??'http://127.0.0.1:7469/')+'?view=2d&player=3d&test=max&revision=weapons-final');await page.waitForFunction(()=>globalThis.System);
+ await page.evaluate(async()=>{globalThis.cc=await System.import('cc');globalThis.app=()=>cc.director.getScene()?.getChildByName('ChapterGame')?.getComponent('ChapterGame');});
+ await page.waitForFunction(()=>app()?.actors&&!app().loading||app()?.failure,undefined,{timeout:90000});assert.equal(await page.evaluate(()=>app().failure),'');
+ const initial=await page.evaluate(()=>{const a=app();a.enabled=false;a.menu='';a.hud.root.active=false;a.manualCameraHeight=2;a.positionCamera(1);if(!a.session.equip('W07'))throw Error('Bow equip failed');return {actors:a.actors.inspect(),paintedWorld:!!a.flatWorld,flatPortrait:a.hud.flatMode,heroInFlatCast:a.actors.cast.active.has('player')};});
+ assert.ok(initial.paintedWorld);assert.equal(initial.heroInFlatCast,false);assert.equal(initial.flatPortrait,false);assert.ok(initial.actors.find(a=>a.id==='player').skeletons.every(n=>n===67));
+ await page.evaluate(()=>{
+  globalThis.angleForScreen=degrees=>{const a=app(),r=a.camera.node.right,u=a.camera.node.up,t=degrees*Math.PI/180,k=u.x*u.x+u.z*u.z;return Math.atan2(r.x*Math.sin(t)+u.x*Math.cos(t)/k,r.z*Math.sin(t)+u.z*Math.cos(t)/k);};
+  globalThis.step=(input,dt=1/60)=>{const a=app();a.process(a.session.advance(dt,{x:0,z:0,...input}));a.actors.update(a.session,dt,!!input.x||!!input.z,false,Math.hypot(input.x||0,input.z||0)||1);a.effects.update(a.session);a.positionCamera(dt);a.flatWorld.update(a.camera,a.session);};
+  globalThis.inspectArrow=()=>{
+   const a=app(),p=a.actors.player.active.get('player'),arrow=p.weapons.arrow,points=[];
+   for(const renderer of arrow.getComponentsInChildren(cc.MeshRenderer)){
+    const v=renderer.mesh?.readAttribute(0,'a_position');if(!v)continue;
+    for(let i=0;i<v.length;i+=3){const q=cc.Vec3.transformMat4(new cc.Vec3(),new cc.Vec3(v[i],v[i+1],v[i+2]),renderer.node.worldMatrix);points.push([q.x,q.y,q.z]);}
+   }
+   const center=[0,0,0];for(const p of points)for(let j=0;j<3;j++)center[j]+=p[j]/points.length;
+   const matrix=Array.from({length:3},()=>[0,0,0]);for(const p of points){const q=p.map((v,j)=>v-center[j]);for(let i=0;i<3;i++)for(let j=0;j<3;j++)matrix[i][j]+=q[i]*q[j];}
+   let axis=[1,.5,.3];for(let n=0;n<15;n++){const next=matrix.map(row=>row.reduce((s,v,i)=>s+v*axis[i],0)),norm=Math.hypot(...next);axis=next.map(v=>v/norm);}
+   const angle=a.session.state.action?.angle??a.session.state.player.angle,forward=[Math.sin(angle),0,Math.cos(angle)],dot=axis.reduce((sum,v,j)=>sum+v*forward[j],0),angleError=Math.acos(Math.min(1,Math.abs(dot)))*180/Math.PI;
+   const sign=dot<0?-1:1,arrowYaw=Math.atan2(axis[0]*sign,axis[2]*sign),yawError=Math.abs(Math.atan2(Math.sin(arrowYaw-angle),Math.cos(arrowYaw-angle)))*180/Math.PI;
+   const point=new cc.Vec3();a.camera.worldToScreen(p.root.worldPosition.clone().add(new cc.Vec3(0,.9,0)),point);
+   return {angle,yaw:p.root.eulerAngles.y,modelEuler:{...p.model.eulerAngles},axis,angleError,yawError,center,arrowActive:arrow.active,pose:p.state,clip:{x:Math.max(0,Math.min(960,point.x-240)),y:Math.max(0,Math.min(340,900-point.y-320)),width:480,height:560}};
+  };
+  for(let n=0;n<65;n++)step({aim:angleForScreen(0),attack:true});
+ });
+
+ const results=[];
+ for(const id of process.env.CARRY_CONTROLS_ONLY?[]:['W07','W08','W09','W10','DU2-04','DE02','L02']){
+  await page.evaluate(id=>{const a=app();a.session.cancelInput();for(let i=0;i<140;i++)step({attack:false});a.session.state.inventory[id]=1;if(!a.session.equip(id))throw Error('equip '+id);for(let i=0;i<65;i++)step({aim:angleForScreen(45),attack:true});},id);
+  const turns=[];
+  for(const d of [0,45,90,135,180,225,270,315]){await page.evaluate(d=>step({aim:angleForScreen(d),attack:true}),d);await page.waitForTimeout(18);turns.push(await page.evaluate(()=>inspectArrow()));}
+  const flight=[];
+  for(let i=0;i<48;i++)flight.push(await page.evaluate(()=>{step({attack:false});const a=app(),q=a.session.state.projectiles.find(q=>q.owner==='player'&&q.kind==='arrow'),body=q&&a.effects.bodies.find(b=>b.key===q.id);return q&&body?{id:q.id,position:{...body.node.worldPosition},forward:{...cc.Vec3.transformQuat(new cc.Vec3(),new cc.Vec3(0,0,1),body.node.worldRotation)},height:a.camera.orthoHeight}:null;}));
+  let maxFlightError=0,samples=0;
+  for(let i=1;i<flight.length;i++){const a=flight[i-1],b=flight[i];if(!a||!b||a.id!==b.id)continue;const delta=['x','y','z'].map(k=>b.position[k]-a.position[k]),length=Math.hypot(...delta);if(length<1e-6)continue;const dot=delta.reduce((s,v,j)=>s+v/length*b.forward[['x','y','z'][j]],0);maxFlightError=Math.max(maxFlightError,Math.acos(Math.min(1,Math.max(-1,dot)))*180/Math.PI);samples++;}
+  const maxYaw=Math.max(...turns.map(x=>x.yawError));assert.ok(maxYaw<.001);assert.ok(samples>2);assert.ok(maxFlightError<.01);for(let n=0;n<150;n++)await page.evaluate(()=>step({attack:false}));
+  const returned=await page.evaluate(()=>{const p=app().actors.player.active.get('player'),b=p.swordCarry.grips.bow;return{stowed:b.stowed,correctParent:b.node.parent===b.backParent,localError:cc.Vec3.distance(b.node.position,b.items[p.renderedWeaponId].position)};});assert.equal(returned.stowed,true);assert.equal(returned.correctParent,true);assert.ok(returned.localError<1e-6);results.push({id,turns:turns.length,maxYawErrorDegrees:maxYaw,flightSamples:samples,maxFlightErrorDegrees:maxFlightError,returned});
+ }
+ const controls=[];
+ for(const[id,kind]of[['W01','sword'],['L01','greatsword'],['W11','staff']]){
+  await page.evaluate(id=>{const a=app();a.session.cancelInput();for(let i=0;i<150;i++)step({attack:false});a.session.state.inventory[id]=1;if(!a.session.equip(id))throw Error('equip '+id);for(let i=0;i<3;i++)step({attack:false});},id);
+  const inspect=()=>page.evaluate(kind=>{const p=app().actors.player.active.get('player'),b=p.swordCarry.grips[kind];return{stowed:b.stowed,legacyBackParent:b.backParent===p.swordCarry.socket,correctParent:b.node.parent===(b.stowed?b.backParent:b.handParent),localError:cc.Vec3.distance(b.node.position,b.stowed?b.items[p.renderedWeaponId].position:b.handPosition)};},kind);
+  const before=await inspect();assert.equal(before.stowed,true);assert.equal(before.legacyBackParent,true);
+  await page.evaluate(()=>{for(let i=0;i<5;i++)step({attack:i===0});});const held=await inspect();assert.equal(held.stowed,false);assert.equal(held.correctParent,true);assert.ok(held.localError<1e-6);
+  await page.evaluate(()=>{for(let i=0;i<220;i++)step({attack:false});});const returned=await inspect();assert.equal(returned.stowed,true);assert.equal(returned.correctParent,true);assert.ok(returned.localError<1e-6);controls.push({id,before,held,returned});
+ }
+ assert.deepEqual(errors,[]);const file=process.env.CARRY_CONTROLS_ONLY?'carry-controls.json':'all-bows-review.json';fs.writeFileSync(path.join(__dirname,'runtime',file),JSON.stringify({results,controls,errors},null,2));console.log(JSON.stringify({bows:results.length,controls:controls.length,errors}));
+}finally{await browser.close();}})().catch(e=>{console.error(e);process.exitCode=1;});

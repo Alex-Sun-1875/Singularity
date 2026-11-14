@@ -1,0 +1,168 @@
+{
+  "date": "2026-11-07",
+  "local_model": "FLUX.2 Klein 4B distilled FP8",
+  "model_jobs_success": 4,
+  "cloud_generation": false,
+  "downloads_performed": false,
+  "production_sources_unchanged": true,
+  "manifest_sha256": "4065d59acbccb8c85642cf31cab840a8fce3577a87806ce2c558096098b41df8",
+  "preview": "comparison-constrained.jpg",
+  "scope": "four representative single frames; no atlas installation or all-phase animation approval",
+  "cases": [
+    {
+      "case": "sword-back",
+      "native_job_status": "success",
+      "output": "source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\results\\sword-back\\constrained-candidate.png",
+      "output_sha256": "49d4cdd44f7ecd0c70434fb688d6df05065c6cee459d9d25f03633f500d714c2",
+      "size": [
+        512,
+        768
+      ],
+      "head_region_original_pixels": true,
+      "model": {
+        "case": "sword-back",
+        "prompt_id": "254284dc-40f8-49ba-baa8-98cbe7a18224",
+        "elapsed_seconds": 18.13,
+        "size": [
+          512,
+          768
+        ],
+        "outside_mask_equal_to_guide": true,
+        "local_endpoint": "127.0.0.1:8188",
+        "proxy_used": false,
+        "cloud_generation": false,
+        "production_modified": false,
+        "status": "awaiting visual review",
+        "guide_notes": {
+          "weapon_start_xy": [
+            283.0,
+            192.0
+          ],
+          "old_tip_xy": [
+            200.0,
+            373.0
+          ],
+          "guide_tip_xy": [
+            166.8,
+            445.4
+          ],
+          "scabbard_axial_factor": 1.4,
+          "intent": "approximately 30 percent longer complete sword; same grip position and width"
+        }
+      }
+    },
+    {
+      "case": "clothing-side",
+      "native_job_status": "success",
+      "output": "source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\results\\clothing-side\\constrained-candidate.png",
+      "output_sha256": "7082ec9f83fec0ed8333ff2df0455e763a8df446e82d6160f3fd26edc6fa89d0",
+      "size": [
+        512,
+        768
+      ],
+      "head_region_original_pixels": true,
+      "model": {
+        "case": "clothing-side",
+        "prompt_id": "25a7aa7c-ab7d-4600-9eee-4dc09277d877",
+        "elapsed_seconds": 14.08,
+        "size": [
+          512,
+          768
+        ],
+        "outside_mask_equal_to_guide": true,
+        "local_endpoint": "127.0.0.1:8188",
+        "proxy_used": false,
+        "cloud_generation": false,
+        "production_modified": false,
+        "status": "awaiting visual review",
+        "guide_notes": {
+          "target": "standing costume palette; preserve garment shape and equipment",
+          "reference": "explore-idle-right-p0"
+        }
+      },
+      "fixed_original_wine_cloth_mask_median_Lab8_signed": {
+        "before": [
+          96.0,
+          14.0,
+          8.0
+        ],
+        "after": [
+          72.0,
+          15.0,
+          6.0
+        ],
+        "standing": [
+          72.0,
+          13.0,
+          7.0
+        ]
+      }
+    },
+    {
+      "case": "run-front",
+      "native_job_status": "success",
+      "output": "source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\results\\run-front\\constrained-candidate.png",
+      "output_sha256": "582b2a758f575d1fc6f1dd33bacd21ad3dfe7b45902edb2a6da0443582f3ac80",
+      "size": [
+        512,
+        768
+      ],
+      "head_region_original_pixels": true,
+      "model": {
+        "case": "run-front",
+        "prompt_id": "249b669e-5922-4205-b209-22eeabd408d6",
+        "elapsed_seconds": 14.15,
+        "size": [
+          512,
+          768
+        ],
+        "outside_mask_equal_to_guide": true,
+        "local_endpoint": "127.0.0.1:8188",
+        "proxy_used": false,
+        "cloud_generation": false,
+        "production_modified": false,
+        "status": "awaiting visual review",
+        "guide_notes": {
+          "geometry_guide": "head and feet fixed; waist raised 32px; torso210px->178px; lower body292px->324px",
+          "input": "explore-run-front-p0",
+          "reference": "explore-idle-front-p0",
+          "model_role": "masked local retouch of waist, clothes and leg transitions"
+        }
+      },
+      "contact_boot_region_y650_plus_original_pixels": true
+    },
+    {
+      "case": "run-back",
+      "native_job_status": "success",
+      "output": "source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\results\\run-back\\constrained-candidate.png",
+      "output_sha256": "23b6e85ff196874d5cf86b6a4122682dc42150b875634ed5be35d8ecf85a0b3c",
+      "size": [
+        512,
+        768
+      ],
+      "head_region_original_pixels": true,
+      "model": {
+        "case": "run-back",
+        "prompt_id": "e4bf13c0-52e2-4f58-91bf-f5cb4036fdae",
+        "elapsed_seconds": 14.09,
+        "size": [
+          512,
+          768
+        ],
+        "outside_mask_equal_to_guide": true,
+        "local_endpoint": "127.0.0.1:8188",
+        "proxy_used": false,
+        "cloud_generation": false,
+        "production_modified": false,
+        "status": "awaiting visual review",
+        "guide_notes": {
+          "geometry_guide": "head and feet fixed; waist raised 32px; torso210px->178px; lower body292px->324px",
+          "input": "explore-run-back-p0",
+          "reference": "explore-idle-back-p0",
+          "model_role": "masked local retouch of waist, clothes and leg transitions"
+        }
+      },
+      "contact_boot_region_y650_plus_original_pixels": true
+    }
+  ]
+}

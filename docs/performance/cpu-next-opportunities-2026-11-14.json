@@ -1,0 +1,91 @@
+{
+  "title": "下一步CPU/GPU优化机会排序",
+  "date": "2026-11-14",
+  "scope": "当前保留版本，只做代码审计和短窗口分组诊断，未修改游戏代码。固定20怪靶场先正常运行20秒，再冻结同一帧，每组排除12秒并还原。无V8采样器、GPU timer、强制GC或构建。不是新优化前后验收。",
+  "raw": "src\\cocos\\test-results\\performance\\cpu-next-isolation-v1\\report.json",
+  "frameRate": 60,
+  "restoredCountersMatch": true,
+  "threadCpu": {
+    "scope": "Android Chrome /proc任务CPU秒；短窗近似，100%=一个核心；GPU命令处理线程的CPU不是硬件GPU利用率。",
+    "windowSeconds": 20.1957,
+    "processCorePercent": 54.26897804978288,
+    "rendererMainCorePercent": 17.31924205037478,
+    "gpuCommandCorePercent": 21.36970994925276,
+    "compositorCombinedCorePercent": 9.032077843475022,
+    "mainTaskMsPerFrame": 2.7885380165289253
+  },
+  "frozenFrame": {
+    "full": {
+      "draws": 170,
+      "triangles": 122973
+    },
+    "uiDraws": 114,
+    "uiDrawShare": 0.6705882352941176,
+    "feedbackDraws": 60,
+    "otherHudDraws": 54,
+    "heroDraws": 32,
+    "heroTriangles": 115432,
+    "heroTriangleShare": 0.9386775958950339,
+    "inventory": {
+      "feedbackBars": 20,
+      "feedbackText": 0,
+      "uiGraphics": 33,
+      "uiLabels": 47,
+      "uiMasks": 1,
+      "heroRenderers": 12
+    }
+  },
+  "timingCaution": "冻结完整帧初次与还原时主线程1.38/1.16ms，进程CPU34.40/29.55%单核；关闭反馈层时短窗CPU反而升高。短窗计时未给出可重复的单项CPU收益，仅用恢复一致的绘制计数确定提交来源，不把排除百分比当可实现的CPU降幅。",
+  "priorities": [
+    {
+      "rank": 1,
+      "part": "怪物头顶血条与名字的提交组织",
+      "evidence": "20个可见血条共60次绘制；每个是独立Graphics底板、两层共享白Sprite和描边名字，按整条血条依次交错。",
+      "file": "src/cocos/assets/scripts/features/combat/runtime/EnemyCombatFeedback.ts:110",
+      "approach": "先做一个保持圆角、掉血拖尾、透明度、描边、覆盖顺序和世界投影的小样。将底板与填充组织为能共享材质/纹理的提交，避免Graphics在每个血条中打断批次。名字仅在身份或等级变化时更新；不盲改字体缓存模式。",
+      "risk": "血条重叠时的绘制顺序、UIOpacity、文字字形/位置必须验收；不能简单按类型全局重排或把全部填充换Graphics。"
+    },
+    {
+      "rank": 2,
+      "part": "其余HUD的静态装饰绘制",
+      "evidence": "其余HUD54次绘制；整层UI有33个Graphics，其中20个血条背景；当前可见Mask仅1个，不应把大量Mask列为本场景既成事实。",
+      "files": [
+        "src/cocos/assets/scripts/app/Hud.ts",
+        "src/cocos/assets/scripts/shared/ui/UiChrome.ts",
+        "src/cocos/assets/scripts/shared/ui/DoubleGoldFrame.ts"
+      ],
+      "approach": "优先合并不重叠控件的静态装饰或复用现有图集；动态血量/冷却继续原频率更新；保持原布局与触控区。",
+      "risk": "Graphics/Mask不参与普通2D自动合批；UIStaticBatch已被该引擎标为不建议使用，且不能直接罩住现有Graphics/Mask。避免为合批扩大全局图集和修改内存会话缓存。"
+    },
+    {
+      "rank": 3,
+      "part": "相同图集的2D怪物共享材质/实例化",
+      "evidence": "现有共享quad，但每只怪创建独立Material，并通过uniform设置帧UV与受击色。20怪按raider、shield、archer及atlas/attack/hurt图片分组，材质与纹理切换有进一步减少空间。",
+      "file": "src/cocos/assets/scripts/features/actors/runtime/FlatActors.ts:228",
+      "approach": "评估同纹理连续排序组共享材质；用Cocos支持的实例属性表达UV和颜色，先对一类怪验证。",
+      "risk": "透明排序、半透明边缘、受击高亮、独立动画帧、动态图集切换均须保持；并非给现有材质勾选instancing即可。"
+    },
+    {
+      "rank": 4,
+      "part": "HUD派生状态按值变化更新",
+      "evidence": "HUD仍逐帧生成技能view、文字和提示信息；大量Label自身已经会忽略相同字符串，不能宣称这些文字每帧重新上传。既有采样HUD业务逻辑约0.13–0.16ms，收益上限较小。",
+      "file": "src/cocos/assets/scripts/app/Hud.ts:350",
+      "approach": "装备/技能描述等静态信息按依赖变化更新；血量与冷却动画保持60FPS。作为后续整理，优先级低于渲染提交。"
+    }
+  ],
+  "heroFollowup": {
+    "evidence": "主角32次绘制、115432个实际提交三角形，约占本固定靶场帧94%的三角形。此占比不等于GPU时间或CPU占比。",
+    "approach": "若继续查GPU，再拆主渲染/阴影通道与蒙皮成本，寻找重复计算或可等价的离线合并；已有主角合批未证实总CPU收益，暂不继续增加运行时网格副本。",
+    "constraints": "保持材质、阴影效果与帧率；资源变更须与内存优化协调。"
+  },
+  "recommendedNextStep": "先做头顶反馈层的绘制小样，记录drawcall、原生图形命令线程CPU与主线程CPU，再用相同20怪靶场各2分钟做实际对照，保留完全相同的画面效果。",
+  "limits": [
+    "全部为Android模拟器Chrome，真机TapTap开销与比例可能不同。",
+    "本次只确定候选方向，未实现或声称新的CPU/GPU降幅。",
+    "没有改写资源、模型、贴图、加载卸载、引用计数或其他会话的内存工作。"
+  ],
+  "officialReferences": [
+    "https://docs.cocos.com/creator/3.8/manual/en/ui-system/components/engine/ui-batch.html",
+    "https://docs.cocos.com/creator/3.8/manual/en/shader/instanced-attributes.html"
+  ]
+}

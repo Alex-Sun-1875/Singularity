@@ -1,0 +1,299 @@
+[
+  {
+    "id": "FIR_01",
+    "name": "赤焰枪",
+    "type": "active",
+    "offensive": true,
+    "ranks": [
+      {
+        "rank": 1,
+        "effect": "紧凑火核、小范围爆燃并附燃烧",
+        "geometry": {
+          "kind": "projectileWithImpactDisk",
+          "origin": "projectileImpact",
+          "radiusMetres": 0.45
+        },
+        "hits": 1,
+        "radius": 0.45,
+        "range": 12,
+        "targets": null
+      },
+      {
+        "rank": 2,
+        "effect": "爆燃半径0.45→0.60米",
+        "geometry": {
+          "kind": "projectileWithImpactDisk",
+          "origin": "projectileImpact",
+          "radiusMetres": 0.6
+        },
+        "hits": 1,
+        "radius": 0.6,
+        "range": 13.5,
+        "targets": null
+      },
+      {
+        "rank": 3,
+        "effect": "半径0.75米；对已燃烧目标的直接命中强化5%",
+        "geometry": {
+          "kind": "projectileWithImpactDisk",
+          "origin": "projectileImpact",
+          "radiusMetres": 0.75
+        },
+        "hits": 1,
+        "radius": 0.75,
+        "range": 15,
+        "targets": null
+      },
+      {
+        "rank": 4,
+        "effect": "半径0.90米、射程16.5米",
+        "geometry": {
+          "kind": "projectileWithImpactDisk",
+          "origin": "projectileImpact",
+          "radiusMetres": 0.9
+        },
+        "hits": 1,
+        "radius": 0.9,
+        "range": 16.5,
+        "targets": null
+      },
+      {
+        "rank": 5,
+        "effect": "半径1.10米；上述直接命中强化提高到10%",
+        "geometry": {
+          "kind": "projectileWithImpactDisk",
+          "origin": "projectileImpact",
+          "radiusMetres": 1.1
+        },
+        "hits": 1,
+        "radius": 1.1,
+        "range": 18,
+        "targets": null
+      }
+    ]
+  },
+  {
+    "id": "FIR_03",
+    "name": "焰心护盾",
+    "type": "active",
+    "offensive": false,
+    "ranks": [
+      {
+        "rank": 1,
+        "effect": "15%最大生命护盾、4秒",
+        "geometry": {
+          "kind": "selfShield",
+          "origin": "caster"
+        },
+        "hits": 0,
+        "radius": 0,
+        "range": 0,
+        "targets": 1
+      },
+      {
+        "rank": 2,
+        "effect": "护盾18%",
+        "geometry": {
+          "kind": "selfShield",
+          "origin": "caster"
+        },
+        "hits": 0,
+        "radius": 0,
+        "range": 0,
+        "targets": 1
+      },
+      {
+        "rank": 3,
+        "effect": "护盾21%；有效吸收攻击后强化下一次赤焰枪的燃烧施加时长0.5秒",
+        "geometry": {
+          "kind": "selfShield",
+          "origin": "caster"
+        },
+        "hits": 0,
+        "radius": 0,
+        "range": 0,
+        "targets": 1
+      },
+      {
+        "rank": 4,
+        "effect": "护盾24%",
+        "geometry": {
+          "kind": "selfShield",
+          "origin": "caster"
+        },
+        "hits": 0,
+        "radius": 0,
+        "range": 0,
+        "targets": 1
+      },
+      {
+        "rank": 5,
+        "effect": "护盾27%；上述奖励同时适用于下一次焚星坠落的既有燃烧刷新",
+        "geometry": {
+          "kind": "selfShield",
+          "origin": "caster"
+        },
+        "hits": 0,
+        "radius": 0,
+        "range": 0,
+        "targets": 1
+      }
+    ]
+  },
+  {
+    "id": "FIR_04",
+    "name": "炎墙封路",
+    "type": "active",
+    "offensive": true,
+    "ranks": [
+      {
+        "rank": 1,
+        "effect": "4×1.2米可旋转条带火域",
+        "geometry": {
+          "kind": "placedStrip",
+          "origin": "aimPoint",
+          "lengthMetres": 4,
+          "widthMetres": 1.2
+        },
+        "hits": 3,
+        "radius": 0,
+        "range": 12,
+        "targets": null
+      },
+      {
+        "rank": 2,
+        "effect": "条带5×1.35米",
+        "geometry": {
+          "kind": "placedStrip",
+          "origin": "aimPoint",
+          "lengthMetres": 5,
+          "widthMetres": 1.35
+        },
+        "hits": 3,
+        "radius": 0,
+        "range": 13.5,
+        "targets": null
+      },
+      {
+        "rank": 3,
+        "effect": "条带6×1.5米；火墙直接伤害命中已燃烧目标时提高5%",
+        "geometry": {
+          "kind": "placedStrip",
+          "origin": "aimPoint",
+          "lengthMetres": 6,
+          "widthMetres": 1.5
+        },
+        "hits": 3,
+        "radius": 0,
+        "range": 15,
+        "targets": null
+      },
+      {
+        "rank": 4,
+        "effect": "条带7.5×1.7米，伤害按四拍组织",
+        "geometry": {
+          "kind": "placedStrip",
+          "origin": "aimPoint",
+          "lengthMetres": 7.5,
+          "widthMetres": 1.7
+        },
+        "hits": 4,
+        "radius": 0,
+        "range": 16.5,
+        "targets": null
+      },
+      {
+        "rank": 5,
+        "effect": "条带9×2米；上述对燃烧目标加成提高到10%",
+        "geometry": {
+          "kind": "placedStrip",
+          "origin": "aimPoint",
+          "lengthMetres": 9,
+          "widthMetres": 2
+        },
+        "hits": 4,
+        "radius": 0,
+        "range": 18,
+        "targets": null
+      }
+    ]
+  },
+  {
+    "id": "FIR_05",
+    "name": "焚天火海",
+    "type": "ultimate",
+    "offensive": true,
+    "ranks": [
+      {
+        "rank": 1,
+        "effect": "7×4米火焰锋面＋四拍余焰",
+        "geometry": {
+          "kind": "filledWaveRectangle",
+          "origin": "aimPoint",
+          "widthMetres": 7,
+          "depthMetres": 4
+        },
+        "hits": 5,
+        "radius": 0,
+        "range": 14,
+        "targets": null
+      },
+      {
+        "rank": 2,
+        "effect": "选区8×5米",
+        "geometry": {
+          "kind": "filledWaveRectangle",
+          "origin": "aimPoint",
+          "widthMetres": 8,
+          "depthMetres": 5
+        },
+        "hits": 5,
+        "radius": 0,
+        "range": 15,
+        "targets": null
+      },
+      {
+        "rank": 3,
+        "effect": "选区9×6米",
+        "geometry": {
+          "kind": "filledWaveRectangle",
+          "origin": "aimPoint",
+          "widthMetres": 9,
+          "depthMetres": 6
+        },
+        "hits": 5,
+        "radius": 0,
+        "range": 16,
+        "targets": null
+      },
+      {
+        "rank": 4,
+        "effect": "选区10.5×7米",
+        "geometry": {
+          "kind": "filledWaveRectangle",
+          "origin": "aimPoint",
+          "widthMetres": 10.5,
+          "depthMetres": 7
+        },
+        "hits": 5,
+        "radius": 0,
+        "range": 17,
+        "targets": null
+      },
+      {
+        "rank": 5,
+        "effect": "选区12×8米；最后一拍对已燃烧目标强化10%",
+        "geometry": {
+          "kind": "filledWaveRectangle",
+          "origin": "aimPoint",
+          "widthMetres": 12,
+          "depthMetres": 8
+        },
+        "hits": 5,
+        "radius": 0,
+        "range": 18,
+        "targets": null
+      }
+    ]
+  }
+]

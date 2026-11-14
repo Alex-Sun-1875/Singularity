@@ -1,0 +1,314 @@
+{
+  "revision": "monster-variety-v2-six-authored-poses",
+  "sourceDesign": "source-art/encounters/monster-variety-v2/bramble-boar/raw.png",
+  "loaded3DModel": false,
+  "image": "atlas.png",
+  "columns": 6,
+  "frameWidth": 192,
+  "frameHeight": 192,
+  "directions": [
+    "down",
+    "left",
+    "up",
+    "right"
+  ],
+  "origin": [
+    102.0,
+    178
+  ],
+  "perFrameOrigins": [
+    [
+      102.0,
+      178
+    ],
+    [
+      102.0,
+      178
+    ],
+    [
+      102.0,
+      178
+    ],
+    [
+      102.0,
+      178
+    ],
+    [
+      102.0,
+      178
+    ],
+    [
+      102.0,
+      178
+    ],
+    [
+      97.0,
+      153
+    ],
+    [
+      97.0,
+      153
+    ],
+    [
+      97.0,
+      153
+    ],
+    [
+      97.0,
+      153
+    ],
+    [
+      97.0,
+      153
+    ],
+    [
+      97.0,
+      153
+    ],
+    [
+      100.5,
+      170
+    ],
+    [
+      100.5,
+      170
+    ],
+    [
+      100.5,
+      170
+    ],
+    [
+      100.5,
+      170
+    ],
+    [
+      100.5,
+      170
+    ],
+    [
+      100.5,
+      170
+    ],
+    [
+      96.5,
+      149
+    ],
+    [
+      96.5,
+      149
+    ],
+    [
+      96.5,
+      149
+    ],
+    [
+      96.5,
+      149
+    ],
+    [
+      96.5,
+      149
+    ],
+    [
+      96.5,
+      149
+    ]
+  ],
+  "alphaBounds": [
+    [
+      36,
+      12,
+      168,
+      178
+    ],
+    [
+      36,
+      11,
+      164,
+      182
+    ],
+    [
+      31,
+      11,
+      168,
+      175
+    ],
+    [
+      35,
+      12,
+      173,
+      174
+    ],
+    [
+      19,
+      23,
+      180,
+      183
+    ],
+    [
+      37,
+      12,
+      171,
+      176
+    ],
+    [
+      12,
+      33,
+      182,
+      155
+    ],
+    [
+      12,
+      34,
+      182,
+      153
+    ],
+    [
+      12,
+      33,
+      182,
+      153
+    ],
+    [
+      11,
+      32,
+      180,
+      146
+    ],
+    [
+      8,
+      39,
+      189,
+      152
+    ],
+    [
+      13,
+      34,
+      182,
+      153
+    ],
+    [
+      29,
+      17,
+      172,
+      175
+    ],
+    [
+      27,
+      11,
+      174,
+      170
+    ],
+    [
+      27,
+      12,
+      175,
+      168
+    ],
+    [
+      17,
+      15,
+      176,
+      177
+    ],
+    [
+      7,
+      13,
+      183,
+      180
+    ],
+    [
+      19,
+      15,
+      173,
+      165
+    ],
+    [
+      11,
+      36,
+      182,
+      153
+    ],
+    [
+      10,
+      34,
+      183,
+      149
+    ],
+    [
+      10,
+      34,
+      182,
+      148
+    ],
+    [
+      10,
+      30,
+      181,
+      150
+    ],
+    [
+      4,
+      42,
+      187,
+      151
+    ],
+    [
+      11,
+      35,
+      181,
+      152
+    ]
+  ],
+  "alphaThreshold": 0.025,
+  "camera": {
+    "worldUnitsPerPixel": 0.008132530120481929
+  },
+  "actions": {
+    "idle": {
+      "image": "atlas.png",
+      "frames": 1,
+      "frameIndices": [
+        0
+      ],
+      "fps": 1,
+      "loop": true
+    },
+    "walk": {
+      "image": "atlas.png",
+      "frames": 2,
+      "frameIndices": [
+        1,
+        2
+      ],
+      "fps": 6,
+      "loop": true,
+      "nominalSpeedMetresPerSecond": 2.4
+    },
+    "attack_sword": {
+      "image": "atlas.png",
+      "frames": 4,
+      "frameIndices": [
+        0,
+        3,
+        4,
+        5
+      ],
+      "phaseStarts": [
+        0,
+        0.24,
+        0.55,
+        0.8
+      ],
+      "fps": 6,
+      "loop": false
+    }
+  },
+  "limitations": [
+    "Four actually drawn directions, no invented diagonal or mirrored views.",
+    "Six authored poses, not a skeletal animation or generated in-between sequence.",
+    "One fixed support-plane pivot per direction across all six source cells; no per-frame fitting or scaling.",
+    "No independent corpse drawing. A real defeat may briefly fade the current pose.",
+    "Windup, active and recovery use the real EnemyCombat phase, not a separate timer."
+  ]
+}

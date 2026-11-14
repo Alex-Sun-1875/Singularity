@@ -1,0 +1,116 @@
+{
+  "verifiedAt": "2026-11-13T12:57:59.383448+00:00",
+  "version": "0.3.37",
+  "buildMode": "guest-test",
+  "loginMode": "guest",
+  "localSaveOnly": true,
+  "package": {
+    "path": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-startup-fix\\SwordAndFire_0.3.37_TapTap_guest-test_20261113T125629Z\\SwordAndFire_0.3.37_TapTap_guest-test_20261113T125629Z.zip",
+    "bytes": 224498376,
+    "sha256": "f560a183b299fddc82665830236ebbd6e0f95f90a6bf3fecbe3fdafc0eb98f12"
+  },
+  "replacesBrokenVersion": "0.3.36",
+  "diagnosis": {
+    "userReport": "0.3.36 stays on the Cocos logo.",
+    "rootCause": "The source module policy excludes WebGL 1, while Creator defaults the wechatgame build override gfx-webgl2 to off. Both renderer implementations were absent; first-screen initialized WebGL 1 but the Cocos device manager then threw while creating its swapchain.",
+    "reproducedUsingDeliveredEngine": true,
+    "runtimeBefore": {
+      "source": "src/cocos/temp/taptap-startup-fix/broken-0.3.36-engine.js",
+      "scope": "Local Chromium execution of the actual minigame engine with fixture system/input APIs; not TapTap platform/device validation",
+      "constructors": {
+        "webgl1": "undefined",
+        "webgl2": "undefined"
+      },
+      "initialized": false,
+      "error": "TypeError: Cannot read properties of undefined (reading 'createSwapchain')\n    at e._initSwapchain (<anonymous>:1:292778)\n    at e.init (<anonymous>:1:292448)\n    at eval (eval at evaluate (:290:30), <anonymous>:6:38)\n    at UtilityScript.evaluate (<anonymous>:292:16)\n    at UtilityScript.<anonymous> (<anonymous>:1:44)",
+      "events": []
+    }
+  },
+  "fix": {
+    "buildOverride": {
+      "overwriteProjectSettings": {
+        "includeModules": {
+          "gfx-webgl2": "on"
+        }
+      }
+    },
+    "webgl1Enabled": false,
+    "fpsSettingChanged": false,
+    "saveOrGameplayChanges": false,
+    "buildGuards": [
+      "Require an actual WebGL2Device export in the compiled engine, not just a surviving DeviceManager reference.",
+      "Reject a compiled WebGLDevice export.",
+      "Require firstScreen.start to request WebGL 2.",
+      "Check intermediate Cocos output and final official-converter output."
+    ],
+    "runtimeAfter": {
+      "source": "F:\\workspace\\Singularity\\src\\cocos\\build\\taptap-guest-test-package\\game\\cocos-js\\cc.60daa.js",
+      "scope": "Local Chromium execution of the actual minigame engine with fixture system/input APIs; not TapTap platform/device validation",
+      "constructors": {
+        "webgl1": "undefined",
+        "webgl2": "function"
+      },
+      "initialized": true,
+      "gfxAPI": 7,
+      "contextVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+      "renderer": "WebKit WebGL",
+      "glError": 0,
+      "swapchainReady": true,
+      "events": []
+    },
+    "zippedEngineBytesMatchExecutedEngine": true
+  },
+  "checks": {
+    "typescript": true,
+    "existingTestsPassed": 140,
+    "existingTestsFailed": 0,
+    "existingRenderPolicyTestExtended": true,
+    "broken036RejectedByGuard": true,
+    "creatorBuild": true,
+    "officialConversion": true,
+    "renderBackendAndFirstScreen": true,
+    "releaseConfiguration": true,
+    "subpackageAudit": true,
+    "zipCRC": "passed by report-taptap.py",
+    "deliveredSha256MatchesConverterAndSidecar": true,
+    "zippedGuestEntry": true
+  },
+  "sourceIntegrity": {
+    "scriptsBefore": 200,
+    "scriptsAfter": 200,
+    "onlyChangedScript": "assets/scripts/app/BuildInfo.ts",
+    "businessScriptsUnchanged": true,
+    "before": "source-before.json",
+    "after": "source-after.json"
+  },
+  "payload": {
+    "completeUploadZipBytes": 224498376,
+    "offlineInitialPayload": {
+      "files": 26,
+      "rawBytes": 5629072,
+      "zipBytes": 1357566,
+      "zipMiB": 1.29,
+      "budgetMiB": 20.0,
+      "withinLocalBudget": true,
+      "sha256": "ea332976a6561181c631b28a25f935ddcc579c1d2ab7732f3c38855c010c68f8",
+      "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+    },
+    "subpackageCount": 76,
+    "contentPackCount": 64,
+    "actualPlatformInitialBytes": null,
+    "actualResourcesNeededBeforePlayBytes": null
+  },
+  "uploaded": false,
+  "platformVerified": false,
+  "pending": [
+    "TapTap real-device complete startup, touch, lifecycle recovery and local-save continuity.",
+    "Actual platform initial payload and resources required before play.",
+    "Production login service remains unconfigured; this is the authorized guest test mode."
+  ],
+  "references": [
+    "https://docs.cocos.com/creator/3.8/manual/zh/editor/publish/publish-wechatgame.html",
+    "https://developer.taptap.cn/minigameapidoc/dev/engine/Cocos-Laya-Egret/",
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/runtime/runtime-guide/"
+  ],
+  "localApiDefinition": "C:/ProgramData/cocos/editors/Creator/3.8.8/resources/app.asar.unpacked/builtin/builder/@types/public/options.d.ts"
+}

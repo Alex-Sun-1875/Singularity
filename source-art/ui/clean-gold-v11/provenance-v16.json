@@ -1,0 +1,113 @@
+{
+  "version": "supply-matched-continuous-gold-v16",
+  "date": "2026-11-08",
+  "userDirection": "Continuous ornamental patterns on skill and minimap frames, matching the middle supply belt style.",
+  "ownership": "Project-original deterministic SVG adaptation of existing UiChrome.frame gold line scrolls and v13 supply panel. No new model generation, dependencies or external downloads.",
+  "palette": {
+    "metal": "#B99456",
+    "light": "#D2B985",
+    "ornament": "#C29B5A",
+    "glint": "#D9CCA2",
+    "low": "#AB853B",
+    "mid": "#BE995A",
+    "shadow": "#1D170C"
+  },
+  "reference": {
+    "runtime": "src/cocos/test-results/hud-supplies-v13-frame-comparison.png",
+    "crop": [
+      18,
+      317,
+      468,
+      489
+    ],
+    "derived": "source-art/ui/clean-gold-v11/supply-reference-v16.png",
+    "source": "src/cocos/assets/scripts/runtime/UiChrome.ts frame() plus unified-gold-panel-v13.svg"
+  },
+  "construction": "Dark inset wide ribbon with raised inner/outer gold lips. Continuous gold line vine and connected open return curls replace separated dark engraved acanthus crowns.",
+  "continuity": "One closed periodic cubic Bezier path per texture. Repeat anchors carry shared rounded tangent vectors: previous control2 is anchor minus tangent; next control1 is anchor plus tangent. The final anchor/tangent is the same object value as the first. Open C/S returns are integral parts of the stem at repeat/half-repeat anchors, with no disconnected hooks or underpassing baseline.",
+  "sampling": "Verified 10-level trilinear mipmapped non-atlased skill and map frames. Cocos-generated metadata is retained and enables mipmaps; fresh single-level engraved imports also initialize through the public Texture2D.image setter.",
+  "exporter": "@resvg/resvg-js@2.6.2 (MPL-2.0), existing project dependency",
+  "assets": [
+    {
+      "id": "unified-gold-skill-v16",
+      "source": "source-art/ui/clean-gold-v11/unified-gold-skill-v16.svg",
+      "sourceSHA256": "90651bf9b01c5bb11105336b9724b125fa4b6b762042d7f933486d279359d7e6",
+      "asset": "src/cocos/assets/resources/ui/quiet-bronze/unified-gold-skill-v16.png",
+      "pngSHA256": "f7b83f92d5bc837c7c36a4a4684c0eefe6c3b687c0a7fa1dfcbac2be55c2f2d1",
+      "bytes": 117828,
+      "size": [
+        512,
+        512
+      ],
+      "outerRadius": 250.5,
+      "innerApertureRadius": 195,
+      "continuousClosedStem": true,
+      "cycles": 8,
+      "integralOpenReturns": 16,
+      "continuity": {
+        "pathCount": 1,
+        "cubicSegments": 64,
+        "positionSeamError": 0,
+        "tangentSeamError": 0,
+        "maxTangentJoinArithmeticError": 4.618527782440651e-14,
+        "curlConnection": "Integral to the main stem at repeat/half-repeat anchors; no disconnected secondary hooks."
+      },
+      "engraving": "A single 360-degree C1-closed stem with integrated open C/S returns. There is no baseline behind the curls, closed leaf block or detached ornament. Three-pass gold strokes on dark inset match UiChrome.frame."
+    },
+    {
+      "id": "unified-gold-ring-v16",
+      "source": "source-art/ui/clean-gold-v11/unified-gold-ring-v16.svg",
+      "sourceSHA256": "93f32814b6b0b69155dda761e655680488f57d74c9c66b88c02652f8b342d19c",
+      "asset": "src/cocos/assets/resources/ui/quiet-bronze/unified-gold-ring-v16.png",
+      "pngSHA256": "9aad21f7fb6bf7ed18edf13993c5c161027f8ec2b61979a8cf217631c92d2c44",
+      "bytes": 118965,
+      "size": [
+        512,
+        512
+      ],
+      "outerRadius": 250.5,
+      "innerApertureRadius": 216.5,
+      "continuousClosedStem": true,
+      "cycles": 12,
+      "integralOpenReturns": 24,
+      "continuity": {
+        "pathCount": 1,
+        "cubicSegments": 96,
+        "positionSeamError": 0,
+        "tangentSeamError": 0,
+        "maxTangentJoinArithmeticError": 5.1514348342607263e-14,
+        "curlConnection": "Integral to the main stem at repeat/half-repeat anchors; no disconnected secondary hooks."
+      },
+      "engraving": "A single 360-degree C1-closed stem with integrated open C/S returns. There is no baseline behind the curls, closed leaf block or detached ornament. Three-pass gold strokes on dark inset match UiChrome.frame."
+    }
+  ],
+  "artReview": {
+    "isolated": "Parent reviewed the final fused continuous C/S sample against the unchanged supply belt reference. Deep inset, shared gold lips and open line scrolls approved for runtime integration; geometry frozen.",
+    "runtime": "Actual desktopDPR2, mobile844x390 and narrow667x375 screenshots inspected. Continuous C/S gold strokes on a dark double-lipped ribbon match the unchanged middle supply panel; compass letters, icons and ranks remain readable.",
+    "userAcceptance": "Not recorded.",
+    "evidence": [
+      "src/cocos/test-results/hud-continuous-v16-detail.png",
+      "src/cocos/test-results/hud-skill-v16-outdoor.png",
+      "src/cocos/test-results/hud-skill-v16-mobile.png",
+      "src/cocos/test-results/hud-skill-v16-narrow.png"
+    ]
+  },
+  "deterministicVerification": {
+    "hashes": "SVG and PNG SHA256 match all records.",
+    "mapAperture": "Every pixel at radius<=214 around the raster center has alpha0; no ornamental path intrudes into the map opening.",
+    "continuity": "All serialized control-vector join discrepancies below1e-10 source pixels; seam position and tangent are exactly reused.",
+    "integralReturnConnections": "Every open C/S return belongs to the single stem path; no disconnected branch geometry."
+  },
+  "validation": {
+    "typescript": "npm run check passed",
+    "build": "Cocos Creator3.8.8 web-mobile hud-continuous-v16 completed in isolated current-assets project. UI source bytes match the build snapshot.",
+    "runtimeReport": "src/cocos/test-results/hud-skill-v16-review.json",
+    "namesToggle": true,
+    "cooldownCenter": true,
+    "chartRadiusAt240": 102,
+    "frameApertureRadiusInSourcePixels": 216.5,
+    "newTestsOrDependencies": false,
+    "desktopErrors": 0,
+    "mobileErrors": 0
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "schemaVersion": 1,
+  "revision": "combat-tempo-v1",
+  "date": "2026-11-09",
+  "reason": "用户反馈技能释放和箭矢飞行显慢；缩短技能前后摇，提高玩家箭矢与法术弹速。",
+  "historicalCatalogUnchanged": true,
+  "rules": {
+    "playerProjectileSpeeds": {
+      "basicArrow": 24,
+      "skillArrow": 32,
+      "basicMagic": 18,
+      "skillFire": 24
+    }
+  },
+  "skills": {
+    "WAR_01": {"windupSeconds": 0.14, "releaseCommitSeconds": 0.14, "recoverySeconds": 0.2},
+    "WAR_02": {"windupSeconds": 0.12, "releaseCommitSeconds": 0.12, "recoverySeconds": 0.2},
+    "WAR_03": {"windupSeconds": 0.15, "releaseCommitSeconds": 0.15, "recoverySeconds": 0.2},
+    "WAR_04": {"windupSeconds": 0.41, "releaseCommitSeconds": 0.41, "recoverySeconds": 0.2},
+    "WAR_05": {"windupSeconds": 0.49, "releaseCommitSeconds": 0.49, "recoverySeconds": 0.36},
+    "BOW_01": {"windupSeconds": 0.19, "releaseCommitSeconds": 0.19, "recoverySeconds": 0.2},
+    "BOW_02": {"windupSeconds": 0.3, "releaseCommitSeconds": 0.3, "recoverySeconds": 0.2},
+    "BOW_03": {"windupSeconds": 0.14, "releaseCommitSeconds": 0.14, "recoverySeconds": 0.2},
+    "BOW_04": {"windupSeconds": 0.17, "releaseCommitSeconds": 0.17, "recoverySeconds": 0.2},
+    "BOW_05": {"windupSeconds": 0.56, "releaseCommitSeconds": 0.56, "recoverySeconds": 0.36},
+    "FIR_01": {"windupSeconds": 0.19, "releaseCommitSeconds": 0.19, "recoverySeconds": 0.2},
+    "FIR_02": {"windupSeconds": 0.41, "releaseCommitSeconds": 0.41, "recoverySeconds": 0.2},
+    "FIR_03": {"windupSeconds": 0.17, "releaseCommitSeconds": 0.17, "recoverySeconds": 0.2},
+    "FIR_04": {"windupSeconds": 0.14, "releaseCommitSeconds": 0.14, "recoverySeconds": 0.2},
+    "FIR_05": {"windupSeconds": 0.49, "releaseCommitSeconds": 0.49, "recoverySeconds": 0.36},
+    "THU_01": {"windupSeconds": 0.15, "releaseCommitSeconds": 0.15, "recoverySeconds": 0.2},
+    "THU_02": {"windupSeconds": 0.19, "releaseCommitSeconds": 0.19, "recoverySeconds": 0.2},
+    "THU_03": {"windupSeconds": 0.15, "releaseCommitSeconds": 0.15, "recoverySeconds": 0.2},
+    "THU_04": {"windupSeconds": 0.12, "releaseCommitSeconds": 0.12, "recoverySeconds": 0.2},
+    "THU_05": {"windupSeconds": 0.41, "releaseCommitSeconds": 0.41, "recoverySeconds": 0.36},
+    "COM_02": {"windupSeconds": 0.26, "releaseCommitSeconds": 0.26, "recoverySeconds": 0.2}
+  }
+}

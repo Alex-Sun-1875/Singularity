@@ -1,0 +1,112 @@
+{
+  "date": "2026-11-12",
+  "generation": {
+    "tool": "OpenAI image_gen (cloud)",
+    "status": "completed",
+    "prompts": "prompts.json",
+    "inputs": "512px references in refs/, reduced from v1 and the first v2 opaque cutouts",
+    "additionalPrompt": "focus-height-prompt.txt"
+  },
+  "processing": {
+    "script": "tools/design/prepare-supply-bottles-v2.py",
+    "method": "Opaque bottle interiors, silhouette antialiasing, tight neutral contact shadow in the horizontal ground plane."
+  },
+  "artReview": {
+    "status": "accepted in controlled Web scene",
+    "date": "2026-11-12",
+    "notes": "Opaque bodies with consistent 136px height on a shared 0.56m footprint; ground-plane mapping and tight contact shadow; no camera-facing supply billboard. Natural fixed orientations from loot IDs.",
+    "evidence": [
+      "test-results/supply-bottles-v2/bottles-detail.png",
+      "test-results/supply-bottles-v2/bottles-844x390.png",
+      "test-results/supply-bottles-v2/browser-review.json"
+    ],
+    "pending": [
+      "TapTap runtime and target-device verification"
+    ]
+  },
+  "assets": [
+    {
+      "item": "health",
+      "source": "source-art/props/supply-bottles-v2/raw/health.png",
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "sourceSha256": "583f79fc1016c55799417bd12ec83221db8771a2eb563182b7864c4477bae92a",
+      "output": "src/cocos/assets/resources/equipment/supplies-v2/health-bottle.png",
+      "outputSize": [
+        256,
+        256
+      ],
+      "sha256": "bf2a8ec35bba858e7f63a6eec5c547fed2f141c8faa113935b31974d5139d6c8",
+      "bytes": 44135,
+      "bottleCoreOpaque": true,
+      "bottleHeightPixels": 136,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "item": "focus",
+      "source": "source-art/props/supply-bottles-v2/raw/focus.png",
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "sourceSha256": "fa3b89ae240929f22caf4b8787d45c33da89fd8ce24fc262474cc55b46166d99",
+      "output": "src/cocos/assets/resources/equipment/supplies-v2/focus-bottle.png",
+      "outputSize": [
+        256,
+        256
+      ],
+      "sha256": "9d0a724966b8aedf959921d4372be3581630d02e2c594b254a06261b60aa4de4",
+      "bytes": 56630,
+      "bottleCoreOpaque": true,
+      "bottleHeightPixels": 136,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    },
+    {
+      "item": "oil",
+      "source": "source-art/props/supply-bottles-v2/raw/oil.png",
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "sourceSha256": "3e036f1ef5cad486a275a2dda12aed44138aea0f08d9304a125e4f2e242d6cd3",
+      "output": "src/cocos/assets/resources/equipment/supplies-v2/oil-bottle.png",
+      "outputSize": [
+        256,
+        256
+      ],
+      "sha256": "48cae130b6e55777e55dea4cbb0a410fb2017b265567cb8f84f88462b6f43b51",
+      "bytes": 44871,
+      "bottleCoreOpaque": true,
+      "bottleHeightPixels": 136,
+      "alphaExtrema": [
+        0,
+        255
+      ]
+    }
+  ],
+  "verification": {
+    "typeChecks": [
+      "full",
+      "core"
+    ],
+    "webBuild": "concept-2d completed",
+    "geometry": {
+      "maxTerrainClearanceError": 0,
+      "cameraIndependent": true,
+      "distinctAngles": 3
+    },
+    "consistentHeights": true,
+    "bottleCenterAlpha": 255,
+    "pickup": "use then auto-pickup and partial stacks passed",
+    "browserErrors": [],
+    "artWarnings": []
+  }
+}

@@ -1,0 +1,2911 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-08",
+  "status": "design-catalog-only-not-installed",
+  "scope": "97个最新设计节点的地形美术整理；32个现运行区保留旧名称与现代码元数据。artTreatment均为后续制作方向，不声明已重绘、已接入或已通过美术验收。",
+  "sources": {
+    "latestNodeNames": "docs/design/world-combat-v4.md",
+    "namingAuthority": "docs/design/campaign-v6.md",
+    "runtimeAreas": "src/cocos/assets/scripts/data/WorldData.ts",
+    "runtimeTerrain": "src/cocos/assets/scripts/runtime/Terrain.ts",
+    "styleReference": "source-art/maps/style-unification-v1/user-style-reference.png",
+    "styleReferenceNote": "仓库hall与用户附件构图风格一致；不声称文件或像素逐字节相同。",
+    "projectCompositionReference": "src/cocos/assets/resources/flat2d/maps/hall.png"
+  },
+  "terrainCategories": [
+    "town-stone",
+    "meadow-earth",
+    "birch-forest",
+    "reed-marsh",
+    "mountain-quarry",
+    "oath-ruin",
+    "warm-interior",
+    "inhabited-undercity",
+    "drowned-crypt"
+  ],
+  "priorityDefinitions": {
+    "P0": "首批代表区：S12、S05、S06、U1-02、U1-04、S01-T3、S01；先做样张并检查材质、围合、尺度和接缝。",
+    "P1": "其余已在当前32区运行版出现的节点，代表样张审阅后展开。",
+    "P2": "仅有设计的65节点，按本目录规划，未接入现运行版。"
+  },
+  "runtimeMetadataNotes": {
+    "units": "metres",
+    "coordinateFrame": "+X east / +Z north",
+    "dimensions": "现WorldData逻辑活动区宽深，不是美术图像尺寸或候选远距战场尺寸。",
+    "ramps": "getTerrain(area).ramps原始记录，包含起终点、高差、宽度和材质。",
+    "waters": "原Terrain水体及水位，不因美术分类新增水面。",
+    "bridges": "保留现有完整桥与brokenBridges独立记录；空数组表示代码中没有该项。",
+    "names": "designName为新设计名；currentRuntime.name为现运行名，未做显示名迁移。",
+    "artTreatment": "仅美术处理提案；不改变既有地理、任务、通路、碰撞与存档。"
+  },
+  "counts": {
+    "total": 97,
+    "currentRuntime": 32,
+    "designOnly": 65,
+    "regions": {
+      "R1": 26,
+      "R2": 17,
+      "R3": 18,
+      "R4": 17,
+      "U1": 10,
+      "U2": 9
+    },
+    "priority": {
+      "P0": 7,
+      "P1": 25,
+      "P2": 65
+    },
+    "primaryTerrain": {
+      "town-stone": 28,
+      "reed-marsh": 6,
+      "meadow-earth": 7,
+      "mountain-quarry": 18,
+      "birch-forest": 3,
+      "oath-ruin": 8,
+      "warm-interior": 11,
+      "inhabited-undercity": 8,
+      "drowned-crypt": 8
+    }
+  },
+  "areas": [
+    {
+      "id": "S01",
+      "designName": "石桥镇",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "meadow-earth",
+          "reed-marsh"
+        ]
+      },
+      "priority": "P0",
+      "artTreatment": "以河道与老石桥串起磨旧铺石街巷，屋脚苔线、门前踩踏和岸边潮痕分别组织，保留广场留白。",
+      "currentRuntime": {
+        "name": "石桥镇",
+        "kind": "town",
+        "palette": "meadow",
+        "dimensionsMetres": {
+          "width": 156,
+          "depth": 144
+        },
+        "ramps": [],
+        "waters": [
+          {
+            "id": "s01-stonebridge-river",
+            "x": 14,
+            "z": 0,
+            "width": 6,
+            "depth": 144,
+            "kind": "river",
+            "y": -0.65
+          }
+        ],
+        "bridges": [
+          {
+            "id": "s01-complete-stone-bridge",
+            "x": 14,
+            "z": 0,
+            "width": 22,
+            "depth": 10,
+            "axis": "x",
+            "deckHeight": 0,
+            "material": "stone",
+            "supports": [
+              {
+                "x": 6.96,
+                "z": -3.2
+              },
+              {
+                "x": 6.96,
+                "z": 3.2
+              },
+              {
+                "x": 21.04,
+                "z": -3.2
+              },
+              {
+                "x": 21.04,
+                "z": 3.2
+              }
+            ]
+          }
+        ],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S02",
+      "designName": "南渡码头",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "reed-marsh",
+        "secondary": [
+          "town-stone",
+          "warm-interior"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "泥坡车辙接到灰木栈桥，河仓墙脚画出旧水位与湿干交界，货绳沿装卸面成组。",
+      "currentRuntime": {
+        "name": "南渡码头",
+        "kind": "town",
+        "palette": "marsh",
+        "dimensionsMetres": {
+          "width": 132,
+          "depth": 112
+        },
+        "ramps": [],
+        "waters": [
+          {
+            "id": "s02-south-harbor",
+            "x": -38,
+            "z": -28,
+            "width": 22,
+            "depth": 18,
+            "kind": "harbor",
+            "y": -0.65
+          }
+        ],
+        "bridges": [
+          {
+            "id": "s02-working-wooden-landing",
+            "x": -38,
+            "z": -28,
+            "width": 36,
+            "depth": 6,
+            "axis": "x",
+            "deckHeight": 0,
+            "material": "wood",
+            "supports": [
+              {
+                "x": -49.519999999999996,
+                "z": -29.92
+              },
+              {
+                "x": -49.519999999999996,
+                "z": -26.08
+              },
+              {
+                "x": -26.48,
+                "z": -29.92
+              },
+              {
+                "x": -26.48,
+                "z": -26.08
+              }
+            ]
+          }
+        ],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S03",
+      "designName": "空誓墓园",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "meadow-earth",
+        "secondary": [
+          "oath-ruin"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "田埂柔草逐步过渡到墓门旧石，空墓与新修锤痕形成辨识点，避免墓园遍地同款碎石。",
+      "currentRuntime": {
+        "name": "农庄与墓园",
+        "kind": "wild",
+        "palette": "meadow",
+        "dimensionsMetres": {
+          "width": 132,
+          "depth": 120
+        },
+        "ramps": [
+          {
+            "id": "s03-cemetery-rise",
+            "start": {
+              "x": 0,
+              "z": -50
+            },
+            "end": {
+              "x": 0,
+              "z": 25
+            },
+            "rise": 1.6,
+            "startHeight": 0,
+            "endHeight": 1.6,
+            "width": 132,
+            "material": "earth"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S04",
+      "designName": "血刃隘口",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "meadow-earth",
+          "town-stone"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "用两侧层理岩壁框出车道，浅色车辙和磨损石坎引向完整任务车，高坡入口保持连续。",
+      "currentRuntime": {
+        "name": "劫车隘口",
+        "kind": "wild",
+        "palette": "stone",
+        "dimensionsMetres": {
+          "width": 144,
+          "depth": 124
+        },
+        "ramps": [
+          {
+            "id": "s04-bridge-bank",
+            "start": {
+              "x": -12,
+              "z": 0
+            },
+            "end": {
+              "x": 32,
+              "z": 0
+            },
+            "rise": 3.4,
+            "startHeight": 0,
+            "endHeight": 3.4,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S05",
+      "designName": "白桦猎场",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "birch-forest",
+        "secondary": [
+          "meadow-earth",
+          "mountain-quarry"
+        ]
+      },
+      "priority": "P0",
+      "artTreatment": "白桦成疏密有别的树组，灰白树根、暗橄榄草与落叶土连成猎径，营屋周边保留清楚脚印。",
+      "currentRuntime": {
+        "name": "白桦猎场",
+        "kind": "wild",
+        "palette": "forest",
+        "dimensionsMetres": {
+          "width": 144,
+          "depth": 124
+        },
+        "ramps": [
+          {
+            "id": "s05-birch-ridge",
+            "start": {
+              "x": -15,
+              "z": 0
+            },
+            "end": {
+              "x": 45,
+              "z": 0
+            },
+            "rise": 2.2,
+            "startHeight": 0,
+            "endHeight": 2.2,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S06",
+      "designName": "芦苇避居营",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "reed-marsh",
+        "secondary": [
+          "meadow-earth",
+          "warm-interior"
+        ]
+      },
+      "priority": "P0",
+      "artTreatment": "芦苇集中围住浅水与棚后，干土平台、灰木门槛和少量炊火区别于湿泥，住处通道可读。",
+      "currentRuntime": {
+        "name": "芦苇避居营",
+        "kind": "camp",
+        "palette": "marsh",
+        "dimensionsMetres": {
+          "width": 126,
+          "depth": 108
+        },
+        "ramps": [
+          {
+            "id": "s06-dry-platform",
+            "start": {
+              "x": 0,
+              "z": -38
+            },
+            "end": {
+              "x": 0,
+              "z": 22
+            },
+            "rise": 1,
+            "startHeight": 0,
+            "endHeight": 1,
+            "width": 126,
+            "material": "earth"
+          }
+        ],
+        "waters": [
+          {
+            "id": "s06-reed-pool",
+            "x": 43,
+            "z": 0,
+            "width": 12,
+            "depth": 22,
+            "kind": "pool",
+            "y": 0.04525925925925922
+          }
+        ],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S07",
+      "designName": "断轮磨坊",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "birch-forest",
+        "secondary": [
+          "town-stone",
+          "reed-marsh"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "水轮院的湿石与磨坊门前踏泥相接，旧驿石巷穿过树影，地窖入口用结构和磨损辨认。",
+      "currentRuntime": {
+        "name": "废磨坊村",
+        "kind": "town",
+        "palette": "forest",
+        "dimensionsMetres": {
+          "width": 156,
+          "depth": 144
+        },
+        "ramps": [
+          {
+            "id": "s07-mill-street",
+            "start": {
+              "x": 0,
+              "z": -40
+            },
+            "end": {
+              "x": 0,
+              "z": 30
+            },
+            "rise": 1.2,
+            "startHeight": 0,
+            "endHeight": 1.2,
+            "width": 156,
+            "material": "earth"
+          }
+        ],
+        "waters": [
+          {
+            "id": "s07-waterwheel-race",
+            "x": -56,
+            "z": 31,
+            "width": 12,
+            "depth": 28,
+            "kind": "canal",
+            "y": 0.5499999999999999
+          }
+        ],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S08",
+      "designName": "陷井谷",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "oath-ruin",
+          "meadow-earth"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "采坑断层与上方完整高道用不同岩层切面区分，索桩附近留工作磨痕，隐龛嵌入遗迹石墙。",
+      "currentRuntime": {
+        "name": "陷井谷",
+        "kind": "wild",
+        "palette": "stone",
+        "dimensionsMetres": {
+          "width": 148,
+          "depth": 136
+        },
+        "ramps": [
+          {
+            "id": "s08-quarry-high-road",
+            "start": {
+              "x": -18,
+              "z": 0
+            },
+            "end": {
+              "x": 42,
+              "z": 0
+            },
+            "rise": 4.2,
+            "startHeight": 0,
+            "endHeight": 4.2,
+            "width": 148,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S09",
+      "designName": "灰披军营",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "meadow-earth",
+        "secondary": [
+          "town-stone",
+          "warm-interior"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "三片帐院以夯土车道、踩秃草带和军需堆置区分，篝火仅局部暖亮，营后留草地退路。",
+      "currentRuntime": {
+        "name": "灰披军营",
+        "kind": "camp",
+        "palette": "meadow",
+        "dimensionsMetres": {
+          "width": 156,
+          "depth": 144
+        },
+        "ramps": [
+          {
+            "id": "s09-camp-terrace",
+            "start": {
+              "x": 0,
+              "z": -20
+            },
+            "end": {
+              "x": 0,
+              "z": 44
+            },
+            "rise": 2.4,
+            "startHeight": 0,
+            "endHeight": 2.4,
+            "width": 156,
+            "material": "earth"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S10",
+      "designName": "裂隘关",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "mountain-quarry",
+          "oath-ruin"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "关墙石基、磨旧门道和宽阔战场形成主次，石墩与横杆保持结构可辨，石屑收在墙脚。",
+      "currentRuntime": {
+        "name": "北岭哨关",
+        "kind": "camp",
+        "palette": "stone",
+        "dimensionsMetres": {
+          "width": 144,
+          "depth": 136
+        },
+        "ramps": [
+          {
+            "id": "s10-north-wall-slope",
+            "start": {
+              "x": 0,
+              "z": 18
+            },
+            "end": {
+              "x": 0,
+              "z": 58
+            },
+            "rise": 2,
+            "startHeight": 0,
+            "endHeight": 2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S11",
+      "designName": "松岬哨塔",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "oath-ruin",
+          "meadow-earth"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "实体阶坡沿塔基盘绕，松针土与旧石桥残段相接，崖边岩面和塔脚接触阴影明确高差。",
+      "currentRuntime": {
+        "name": "松岬石塔",
+        "kind": "ruin",
+        "palette": "stone",
+        "dimensionsMetres": {
+          "width": 132,
+          "depth": 124
+        },
+        "ramps": [
+          {
+            "id": "s11-tower-ascent",
+            "start": {
+              "x": 0,
+              "z": 0
+            },
+            "end": {
+              "x": 0,
+              "z": 40
+            },
+            "rise": 5.2,
+            "startHeight": 0,
+            "endHeight": 5.2,
+            "width": 132,
+            "material": "rock"
+          }
+        ],
+        "waters": [
+          {
+            "id": "s11-broken-bridge-gully",
+            "x": -10,
+            "z": -23,
+            "width": 6,
+            "depth": 18,
+            "kind": "river",
+            "y": -0.65
+          }
+        ],
+        "bridges": [
+          {
+            "id": "s11-repaired-gully-crossing",
+            "x": -10,
+            "z": -18,
+            "width": 20,
+            "depth": 6,
+            "axis": "x",
+            "deckHeight": 0,
+            "material": "wood",
+            "supports": [
+              {
+                "x": -16.4,
+                "z": -19.92
+              },
+              {
+                "x": -16.4,
+                "z": -16.08
+              },
+              {
+                "x": -3.5999999999999996,
+                "z": -19.92
+              },
+              {
+                "x": -3.5999999999999996,
+                "z": -16.08
+              }
+            ]
+          }
+        ],
+        "brokenBridges": [
+          {
+            "id": "s11-broken-old-stone-span",
+            "x": -10,
+            "z": -29,
+            "width": 20,
+            "depth": 3,
+            "axis": "x",
+            "deckHeight": 0,
+            "material": "stone",
+            "supports": [
+              {
+                "x": -16.4,
+                "z": -29.96
+              },
+              {
+                "x": -16.4,
+                "z": -28.04
+              },
+              {
+                "x": -3.5999999999999996,
+                "z": -29.96
+              },
+              {
+                "x": -3.5999999999999996,
+                "z": -28.04
+              }
+            ],
+            "gapWidth": 6
+          }
+        ]
+      }
+    },
+    {
+      "id": "S12",
+      "designName": "铁誓残院",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "oath-ruin",
+        "secondary": [
+          "town-stone",
+          "meadow-earth"
+        ]
+      },
+      "priority": "P0",
+      "artTreatment": "以参考图的冷灰大块铺石、断拱和贴墙苔藓建立残院，空基座留浅色旧轮廓，主通道不堆碎石。",
+      "currentRuntime": {
+        "name": "废誓院",
+        "kind": "ruin",
+        "palette": "stone",
+        "dimensionsMetres": {
+          "width": 144,
+          "depth": 132
+        },
+        "ramps": [
+          {
+            "id": "s12-oath-court",
+            "start": {
+              "x": 0,
+              "z": -26
+            },
+            "end": {
+              "x": 0,
+              "z": 35
+            },
+            "rise": 3.2,
+            "startHeight": 0,
+            "endHeight": 3.2,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S13",
+      "designName": "断镐石场",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "town-stone",
+          "meadow-earth"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "采面保留方向一致的凿痕与分层色带，吊料平台有集中石粉，固定梯落点和工棚入口清晰。",
+      "currentRuntime": {
+        "name": "旧石场",
+        "kind": "wild",
+        "palette": "stone",
+        "dimensionsMetres": {
+          "width": 148,
+          "depth": 136
+        },
+        "ramps": [
+          {
+            "id": "s13-quarry-ramp",
+            "start": {
+              "x": -30,
+              "z": 0
+            },
+            "end": {
+              "x": 35,
+              "z": 0
+            },
+            "rise": 3.8,
+            "startHeight": 0,
+            "endHeight": 3.8,
+            "width": 148,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S14",
+      "designName": "湿林庄园",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "reed-marsh",
+        "secondary": [
+          "town-stone",
+          "birch-forest"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "湿林外缘接庄园排水边沟，院内较干铺石与墙外泥叶分层，正门和侧门靠磨损路径识别。",
+      "currentRuntime": {
+        "name": "湿林庄园",
+        "kind": "town",
+        "palette": "marsh",
+        "dimensionsMetres": {
+          "width": 156,
+          "depth": 140
+        },
+        "ramps": [
+          {
+            "id": "s14-manor-court",
+            "start": {
+              "x": 0,
+              "z": -35
+            },
+            "end": {
+              "x": 0,
+              "z": 38
+            },
+            "rise": 1.4,
+            "startHeight": 0,
+            "endHeight": 1.4,
+            "width": 156,
+            "material": "earth"
+          }
+        ],
+        "waters": [
+          {
+            "id": "s14-wet-wood-pool",
+            "x": -53,
+            "z": -44,
+            "width": 12,
+            "depth": 10,
+            "kind": "pool",
+            "y": -0.65
+          }
+        ],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S15",
+      "designName": "古渠泵院",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "oath-ruin",
+        "secondary": [
+          "reed-marsh",
+          "town-stone"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "泵院用旧渠砌石、闸槽锈痕与高低水线组织，干阶保持明净，苔藓只聚于水边和阴角。",
+      "currentRuntime": {
+        "name": "古渠泵院",
+        "kind": "ruin",
+        "palette": "marsh",
+        "dimensionsMetres": {
+          "width": 144,
+          "depth": 124
+        },
+        "ramps": [
+          {
+            "id": "s15-canal-dyke",
+            "start": {
+              "x": -30,
+              "z": 0
+            },
+            "end": {
+              "x": 48,
+              "z": 0
+            },
+            "rise": 1.8,
+            "startHeight": 0,
+            "endHeight": 1.8,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [
+          {
+            "id": "s15-old-pump-canal",
+            "x": -47,
+            "z": -29,
+            "width": 16,
+            "depth": 30,
+            "kind": "canal",
+            "y": -0.65
+          }
+        ],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S16",
+      "designName": "断岳驿口",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "meadow-earth",
+          "town-stone"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "两条驿路在风化分路碑前汇合，远山压低对比，近处旧车辙与完整路肩指明可折返方向。",
+      "currentRuntime": {
+        "name": "东境驿口",
+        "kind": "wild",
+        "palette": "stone",
+        "dimensionsMetres": {
+          "width": 144,
+          "depth": 128
+        },
+        "ramps": [
+          {
+            "id": "s16-highland-pass",
+            "start": {
+              "x": -40,
+              "z": 0
+            },
+            "end": {
+              "x": 42,
+              "z": 0
+            },
+            "rise": 3.1,
+            "startHeight": 0,
+            "endHeight": 3.1,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S17",
+      "designName": "峭壁洞窟",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "inhabited-undercity",
+          "oath-ruin"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "崖面层理围出安全平台，洞口外石屑收边，封门嵌在厚岩壁中并保留完整回程坡。",
+      "currentRuntime": {
+        "name": "峭壁洞窟",
+        "kind": "ruin",
+        "palette": "stone",
+        "dimensionsMetres": {
+          "width": 128,
+          "depth": 120
+        },
+        "ramps": [
+          {
+            "id": "s17-cliff-platform",
+            "start": {
+              "x": 0,
+              "z": -30
+            },
+            "end": {
+              "x": 0,
+              "z": 40
+            },
+            "rise": 4.4,
+            "startHeight": 0,
+            "endHeight": 4.4,
+            "width": 128,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S18",
+      "designName": "残旗军需站",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "meadow-earth",
+        "secondary": [
+          "town-stone",
+          "oath-ruin"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "取消使用的军需院用断续草侵车辙、残旗与旧仓墙痕表现，侧窗和通行车道保持低杂物密度。",
+      "currentRuntime": {
+        "name": "旧军需站",
+        "kind": "ruin",
+        "palette": "meadow",
+        "dimensionsMetres": {
+          "width": 128,
+          "depth": 112
+        },
+        "ramps": [
+          {
+            "id": "s18-old-cart-slope",
+            "start": {
+              "x": 0,
+              "z": -30
+            },
+            "end": {
+              "x": 0,
+              "z": 34
+            },
+            "rise": 1.1,
+            "startHeight": 0,
+            "endHeight": 1.1,
+            "width": 128,
+            "material": "earth"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S19",
+      "designName": "猎径伏杀地",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "birch-forest",
+        "secondary": [
+          "meadow-earth",
+          "mountain-quarry"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "弯曲车辙穿过树根与侧坡，伏兵高地用岩脊成组而非树海遮满，伤者躲处保留安静留白。",
+      "currentRuntime": {
+        "name": "林间伏击地",
+        "kind": "wild",
+        "palette": "forest",
+        "dimensionsMetres": {
+          "width": 144,
+          "depth": 128
+        },
+        "ramps": [
+          {
+            "id": "s19-arrow-bank",
+            "start": {
+              "x": -35,
+              "z": 0
+            },
+            "end": {
+              "x": 34,
+              "z": 0
+            },
+            "rise": 3,
+            "startHeight": 0,
+            "endHeight": 3,
+            "width": 144,
+            "material": "earth"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S20",
+      "designName": "铁脊观察台",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "town-stone",
+          "meadow-earth"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "沿铁灰山脊画连续上下山旧路，观察屋前压实小平台与远处军营轮廓形成清楚景深。",
+      "currentRuntime": {
+        "name": "铁脊观察台",
+        "kind": "wild",
+        "palette": "stone",
+        "dimensionsMetres": {
+          "width": 128,
+          "depth": 120
+        },
+        "ramps": [
+          {
+            "id": "s20-iron-ridge",
+            "start": {
+              "x": -35,
+              "z": 0
+            },
+            "end": {
+              "x": 32,
+              "z": 0
+            },
+            "rise": 4,
+            "startHeight": 0,
+            "endHeight": 4,
+            "width": 128,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S01-T1",
+      "designName": "第三杯旅店",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "warm-interior",
+        "secondary": [
+          "town-stone"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "灰褐旧橡木地板保留桌椅磨痕与中央过道，冷灰墙脚压住全屋橙光，烛灯只暖亮邻近桌面。",
+      "currentRuntime": {
+        "name": "第三杯旅店",
+        "kind": "interior",
+        "palette": "warm",
+        "dimensionsMetres": {
+          "width": 36,
+          "depth": 32
+        },
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S01-T2",
+      "designName": "远征行会厅",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "warm-interior",
+        "secondary": [
+          "town-stone"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "等候厅与副本室靠地板磨损方向和低饱和织物区别，纸张集中桌面，门洞与走廊连续可读。",
+      "currentRuntime": {
+        "name": "行会办事处与副本室",
+        "kind": "interior",
+        "palette": "warm",
+        "dimensionsMetres": {
+          "width": 34,
+          "depth": 30
+        },
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S01-T3",
+      "designName": "洛恩铁匠铺",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "warm-interior",
+        "secondary": [
+          "town-stone",
+          "mountain-quarry"
+        ]
+      },
+      "priority": "P0",
+      "artTreatment": "锻造区用灰石炉基、炭尘和铁屑局部压暗，测绘室保留干净木面，炉火亮度集中炉口。",
+      "currentRuntime": {
+        "name": "铁匠街与洛恩工坊",
+        "kind": "interior",
+        "palette": "warm",
+        "dimensionsMetres": {
+          "width": 40,
+          "depth": 32
+        },
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S01-T4",
+      "designName": "南渡转运仓",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "reed-marsh",
+          "warm-interior"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "仓内干木板、工作院旧铺石与临水潮湿岸石逐段过渡，装卸门道留连续车轮磨损。",
+      "currentRuntime": {
+        "name": "渡口街与镇仓院",
+        "kind": "interior",
+        "palette": "marsh",
+        "dimensionsMetres": {
+          "width": 44,
+          "depth": 36
+        },
+        "ramps": [],
+        "waters": [
+          {
+            "id": "t4-warehouse-waterfront",
+            "x": -15,
+            "z": -11,
+            "width": 8,
+            "depth": 8,
+            "kind": "harbor",
+            "y": -0.65
+          }
+        ],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S01-T5",
+      "designName": "镇拘留所",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "warm-interior",
+        "secondary": [
+          "town-stone",
+          "oath-ruin"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "值房灰木桌面与拘留间冷灰砌石形成区别，门槛磨痕贯通中央走廊，壁灯避免照成橙色地牢。",
+      "currentRuntime": {
+        "name": "拘留所与值房",
+        "kind": "interior",
+        "palette": "stone",
+        "dimensionsMetres": {
+          "width": 32,
+          "depth": 30
+        },
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "S01-T6",
+      "designName": "归途广场亭",
+      "region": {
+        "id": "R1",
+        "name": "铁誓边境"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "meadow-earth",
+          "warm-interior"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "小广场用不规则灰石与少量缝草围合桌椅，回返亭前留有人停坐的平静空间，路口清楚相接。",
+      "currentRuntime": {
+        "name": "广场与回返接洽点",
+        "kind": "interior",
+        "palette": "meadow",
+        "dimensionsMetres": {
+          "width": 48,
+          "depth": 40
+        },
+        "ramps": [],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "H01",
+      "designName": "断岳山驿",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "town-stone",
+          "meadow-earth"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "山驿石路沿缓坡进入灰木驿棚，车轮压痕与伤者休息处分开，远山采用低对比灰蓝。",
+      "currentRuntime": null
+    },
+    {
+      "id": "H02",
+      "designName": "岩炉镇",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "mountain-quarry",
+          "warm-interior"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "矿镇街面混入集中石粉，炉屋与居民门前分别用暗铁和灰木组织，生活巷保持干净可读。",
+      "currentRuntime": null
+    },
+    {
+      "id": "H03",
+      "designName": "熔镜工匠院",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "warm-interior",
+          "inhabited-undercity"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "镜架工作院以耐火石带和稳固木台分区，冷白反光仅落在装置旁，疏散通道留净。",
+      "currentRuntime": null
+    },
+    {
+      "id": "H04",
+      "designName": "双裂采坑",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "meadow-earth",
+          "town-stone"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "两片采面以不同走向的岩层与连通坡区分，矿车轨迹形成视觉导线，坑底不靠整片黑色遮高差。",
+      "currentRuntime": null
+    },
+    {
+      "id": "H05",
+      "designName": "封炉矿井",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "inhabited-undercity",
+          "town-stone"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "封井口用厚石基、停机绳索与暗木井架围合，操作面有手触磨光，回程路保持自然日光。",
+      "currentRuntime": null
+    },
+    {
+      "id": "H06",
+      "designName": "伤工棚街",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "warm-interior",
+        "secondary": [
+          "town-stone",
+          "mountain-quarry"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "棚街以中性布棚、灰木长凳和修补痕表现生活，通行带免石粉堆积，灯光柔和集中。",
+      "currentRuntime": null
+    },
+    {
+      "id": "H07",
+      "designName": "天堑石梁",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "oath-ruin",
+          "town-stone"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "天堑石梁用完整桥面、风蚀护边和深沟层次建立尺度，侧坡与桥前退缝画出连续边界。",
+      "currentRuntime": null
+    },
+    {
+      "id": "H08",
+      "designName": "断岳前堡",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "mountain-quarry",
+          "oath-ruin"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "桥堡以厚重灰石墩与门洞建立主形，前场铺装磨损指向放桥机构，碎石集中在旧断口。",
+      "currentRuntime": null
+    },
+    {
+      "id": "H09",
+      "designName": "破阵军械岸",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "mountain-quarry",
+          "warm-interior"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "同岸武备台用整洁耐磨石台与暗铁器架区分于战场，安全站位留白，浅暖工作灯局部点亮。",
+      "currentRuntime": null
+    },
+    {
+      "id": "H10",
+      "designName": "巨岩矿门",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "oath-ruin",
+        "secondary": [
+          "mountain-quarry",
+          "inhabited-undercity"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "巨岩矿门保留古砌石与后加机械的材质接缝，采掘机轨迹和旧卫基座分区，门外退路明亮。",
+      "currentRuntime": null
+    },
+    {
+      "id": "H11",
+      "designName": "铁契公署",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "warm-interior",
+          "oath-ruin"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "公署门廊与侧办事厅采用规整旧石、灰木文书台和脚下磨损，征用记录集中在可识别桌面。",
+      "currentRuntime": null
+    },
+    {
+      "id": "H12",
+      "designName": "北岗军寨",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "meadow-earth",
+          "mountain-quarry"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "北岗军寨用夯土巡逻路连接石脚木栅，岗哨与营后路有疏密区别，帐布避免金黄泛光。",
+      "currentRuntime": null
+    },
+    {
+      "id": "H13",
+      "designName": "风蚀誓廊",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "oath-ruin",
+        "secondary": [
+          "mountain-quarry",
+          "town-stone"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "风蚀廊柱与有护边的连续路面形成节奏，三段旧锤痕收在局部石槽，钟晶冷光不过曝。",
+      "currentRuntime": null
+    },
+    {
+      "id": "H14",
+      "designName": "鹰背岩林",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "birch-forest",
+          "meadow-earth"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "鹰背岩柱按层理成组，少量针叶与灌木嵌在背风裂隙，柱间射线和实体山路保持可读。",
+      "currentRuntime": null
+    },
+    {
+      "id": "H15",
+      "designName": "天索吊崖",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "town-stone",
+          "inhabited-undercity"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "吊崖平台采用灰木踏板、暗铁绳轮和浅色载料磨痕，岩壁接触处压暗，回退平台连续。",
+      "currentRuntime": null
+    },
+    {
+      "id": "H16",
+      "designName": "山南古道",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "meadow-earth",
+          "birch-forest"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "山南古道由裸岩逐渐过渡到河湾草土，路肩碎石顺坡沉积，以植被变化提示下降旅程。",
+      "currentRuntime": null
+    },
+    {
+      "id": "H17",
+      "designName": "余烬废窑",
+      "region": {
+        "id": "R2",
+        "name": "断岳高地"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "town-stone",
+          "oath-ruin"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "废窑保留局部煤灰、耐火砖与冷掉的窑槽，双路窑沟在灰褐底色中清楚分开，避免满地熔岩。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B01",
+      "designName": "旱谷出口",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "meadow-earth",
+          "inhabited-undercity"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "长廊出口由冷灰岩影过渡到干谷日光，撤离脚印指向缓坡，门外不直接铺成码头街面。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B02",
+      "designName": "北岸风道",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "meadow-earth",
+        "secondary": [
+          "town-stone",
+          "reed-marsh"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "北岸风道以被风压低的草带、旧矮墙与两组脚印组织，临河湿泥局限岸边低处。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B03",
+      "designName": "归帆镇",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "reed-marsh",
+          "warm-interior"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "归帆镇用旧石街、灰木门面与成组缆绳建立河港身份，住户门口与湿码头分明。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B04",
+      "designName": "余烬灯坊",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "warm-interior",
+        "secondary": [
+          "town-stone",
+          "reed-marsh"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "灯坊以暗木工作台和中性铜壶形成小尺度工艺空间，反光与灯焰聚在校准区，室内保持自然材质色。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B05",
+      "designName": "河湾旅店",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "warm-interior",
+        "secondary": [
+          "town-stone",
+          "reed-marsh"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "河湾旅店使用灰褐木面、湿披风挂位和窗外河色，桌边局部烛光区别于第三杯旅店的内陆生活感。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B06",
+      "designName": "风帆市集",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "reed-marsh",
+          "warm-interior"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "市集石街留货车轮印和摊布阴影，帆布采用旧米白与灰蓝，装载清单所在摊台清楚突出。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B07",
+      "designName": "沉钟山岗",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "meadow-earth",
+        "secondary": [
+          "oath-ruin",
+          "mountain-quarry"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "山岗草坡环抱断续石环，内外两圈干路用踩踏差异区分，旧堂轮廓保持主要方向线。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B08",
+      "designName": "沉钟旧堂",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "oath-ruin",
+        "secondary": [
+          "drowned-crypt",
+          "town-stone"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "旧堂以冷灰礼堂铺石、钟纹磨损和侧门湿痕建立沉钟身份，人物交涉处留清楚空地。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B09",
+      "designName": "黑签仓院",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "reed-marsh",
+          "warm-interior"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "黑签仓院以成组货箱、封签台和侧檐雨线组织，干路绕开积水，旧木与石面维持低饱和。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B10",
+      "designName": "怒潮码头",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "reed-marsh",
+          "warm-interior"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "码头战台以耐磨灰木与石锚墩分出落脚面，潮水只在外缘，货台与链位明显，地面少高对比杂纹。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B11",
+      "designName": "天钩吊臂台",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "reed-marsh",
+          "inhabited-undercity"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "吊臂台用放射状踏痕指向实体枢轴，暗铁吊钩与灰木承台清楚分层，机构旁留回退通道。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B12",
+      "designName": "分潮水渠",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "reed-marsh",
+        "secondary": [
+          "town-stone",
+          "oath-ruin"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "分潮渠采用旧砌石渠壁、退潮水线和折线干岸，水面保持暗青灰，地理设施轮廓胜过装饰。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B13",
+      "designName": "芦苇迷湾",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "reed-marsh",
+        "secondary": [
+          "meadow-earth",
+          "mountain-quarry"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "芦苇团块沿浅水弯折，干石坡和双岸路用亮度与材质区分，拖钩泥痕集中在调查局部。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B14",
+      "designName": "沉船墓场",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "reed-marsh",
+        "secondary": [
+          "town-stone",
+          "oath-ruin"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "沉船以倾斜肋骨木、真实潮痕和甲板侧梯成为地标，船腹暗部保留细节，泥滩不铺统一水纹。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B15",
+      "designName": "南岸农庄",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "meadow-earth",
+        "secondary": [
+          "reed-marsh",
+          "warm-interior"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "南岸农庄以田埂草、旧渠湿边和低矮篱门组织，古兽迁徙带留宽阔缓坡与连贯足迹。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B16",
+      "designName": "东岸古渡",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "reed-marsh",
+          "meadow-earth"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "古渡以露出水面的旧石陆桥和两端干路建立连续性，岸边碎石随水流成带，避免假悬空桥。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B17",
+      "designName": "旧誓墓园",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "oath-ruin",
+        "secondary": [
+          "meadow-earth",
+          "drowned-crypt"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "墓园沿两批封炉年代使用不同修补石和苔线，钟摆基座与干路相接，安息区不散放战利品杂物。",
+      "currentRuntime": null
+    },
+    {
+      "id": "B18",
+      "designName": "双契宅院",
+      "region": {
+        "id": "R3",
+        "name": "风暴河湾"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "warm-interior",
+          "reed-marsh"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "宅院正门采用磨旧规整石路，侧入账房用较窄灰木廊，两份付款凭据集中同一对质空间。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F01",
+      "designName": "黑冠外集",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "meadow-earth",
+          "warm-interior"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "外集以较浅旧铺石、灰布商棚和城防告示建立安全整备气氛，黑冠城墙只作远处主轮廓。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F02",
+      "designName": "流火长街",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "warm-interior",
+          "inhabited-undercity"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "长街以居民门槛、修补路面和局部工火区别于军用区，家属站位与实际出口路径清楚相接。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F03",
+      "designName": "黑冠西门",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "oath-ruin",
+          "meadow-earth"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "西门用厚灰石门洞、暗铁门构与侧入踏痕组织，门外和门内铺装磨损连续，拒绝纯黑入口。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F04",
+      "designName": "铁锁工坊",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "warm-interior",
+        "secondary": [
+          "town-stone",
+          "inhabited-undercity"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "铁锁工坊以危险工位石带、灰木检修侧路和备用镜架分区，铁锁与煤灰聚在装置边缘。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F05",
+      "designName": "黑旗旧营",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "meadow-earth",
+          "warm-interior"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "旧营以褪黑旗帜、夯土营路和石基办公间分主次，营后可通行草带保持自然，避免整片黑压压。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F06",
+      "designName": "黑印文书院",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "warm-interior",
+          "oath-ruin"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "文书院以回廊石地和集中纸架构成可辨院落，古刻副本与现代征令在不同桌面呈现，侧道完整。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F07",
+      "designName": "东仓暗街",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "warm-interior",
+          "inhabited-undercity"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "暗街以仓檐下冷阴影、门口少量暖灯与长条踩踏带引导出口，狭窄处不放大体积装饰。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F08",
+      "designName": "铁旗广场",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "oath-ruin",
+          "inhabited-undercity"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "广场采用大块低对比灰石和三组明确石垛，旗影与装置磨痕形成方向，预警范围内减少杂纹。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F09",
+      "designName": "西境弩台",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "mountain-quarry",
+          "oath-ruin"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "西弩台以迎风石墙、长向磨痕和暗铁销轴突出机械结构，通往平台的实体阶路保留护边。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F10",
+      "designName": "东境弩台",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "mountain-quarry",
+          "oath-ruin"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "东弩台以背风修补石与不同墙角轮廓区别西台，独立销轴工作位清楚，回路不被器架遮住。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F11",
+      "designName": "凌城连廊",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "oath-ruin",
+        "secondary": [
+          "town-stone",
+          "mountain-quarry"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "凌城连廊以连续石墙路、侧龛浅浮雕和远处低对比城景强调高度，完整栏缘指明安全通行面。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F12",
+      "designName": "决战休整庭",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "warm-interior",
+          "meadow-earth"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "休整庭以平整旧铺石、背风长凳和少量缝草表现安全喘息，双台与决战门方向清楚分开。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F13",
+      "designName": "黑冠决战庭",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "town-stone",
+        "secondary": [
+          "oath-ruin",
+          "inhabited-undercity"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "决战庭用低对比大块铺石、厚石垛和两内弩口构成主形，中央交战留白，墙脚破损收边。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F14",
+      "designName": "黑冠军械库",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "warm-interior",
+        "secondary": [
+          "town-stone",
+          "inhabited-undercity"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "军械库以干净石台、暗铁绞盘和成组器架组织，同平台主箱与独立侧格凭轮廓区分。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F15",
+      "designName": "黑冠档案楼",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "warm-interior",
+        "secondary": [
+          "town-stone",
+          "oath-ruin"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "档案楼采用灰木书架、旧石柱和两代文书台，阅读面自然亮，侧廊不被书堆封死。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F16",
+      "designName": "干涸护城壕",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "meadow-earth",
+        "secondary": [
+          "town-stone",
+          "reed-marsh"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "干壕以旧水线、沉积裂泥和连续外城坡表现退水，壕壁石基与坡面杂草形成高度参照。",
+      "currentRuntime": null
+    },
+    {
+      "id": "F17",
+      "designName": "铁棘检修坡",
+      "region": {
+        "id": "R4",
+        "name": "黑冠城域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "town-stone",
+          "inhabited-undercity"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "检修坡用磨亮踏步、暗铁管架与岩壁切面组织，侧路和正坡材质呼应，检修箱归入工作区。",
+      "currentRuntime": null
+    },
+    {
+      "id": "U1-01",
+      "designName": "暗仓货栈",
+      "region": {
+        "id": "U1",
+        "name": "誓火深城"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "inhabited-undercity",
+        "secondary": [
+          "mountain-quarry",
+          "town-stone"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "暗仓以人工装卸石台嵌入天然洞壁，灰木账架与低位灯成组，通行坡和侧行缝保持明确。",
+      "currentRuntime": {
+        "name": "地下货栈",
+        "kind": "underground",
+        "palette": "cave",
+        "dimensionsMetres": {
+          "width": 136,
+          "depth": 116
+        },
+        "ramps": [
+          {
+            "id": "u101-loading-ramp",
+            "start": {
+              "x": 0,
+              "z": -20
+            },
+            "end": {
+              "x": 0,
+              "z": 34
+            },
+            "rise": 1.4,
+            "startHeight": 0,
+            "endHeight": 1.4,
+            "width": 136,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "U1-02",
+      "designName": "鸣岩洞厅",
+      "region": {
+        "id": "U1",
+        "name": "誓火深城"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "mountain-quarry",
+        "secondary": [
+          "inhabited-undercity",
+          "oath-ruin"
+        ]
+      },
+      "priority": "P0",
+      "artTreatment": "洞厅用连续层理岩台与两层实体坡强调五米高差，局部砌石门框区别天然岩面，灯位只点亮实际落脚处。",
+      "currentRuntime": {
+        "name": "回声洞",
+        "kind": "underground",
+        "palette": "cave",
+        "dimensionsMetres": {
+          "width": 128,
+          "depth": 116
+        },
+        "ramps": [
+          {
+            "id": "u102-dry-ramp",
+            "start": {
+              "x": -25,
+              "z": -12
+            },
+            "end": {
+              "x": 5,
+              "z": -12
+            },
+            "rise": 5,
+            "startHeight": 0,
+            "endHeight": 5,
+            "width": 128,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "U1-03",
+      "designName": "断链矿廊",
+      "region": {
+        "id": "U1",
+        "name": "誓火深城"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "inhabited-undercity",
+        "secondary": [
+          "mountain-quarry",
+          "town-stone"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "矿廊以分段木支护、切削岩面和配重磨痕组织岔口，固定梯与回程路连接明确，不靠满地重复岩簇。",
+      "currentRuntime": {
+        "name": "废采掘廊",
+        "kind": "underground",
+        "palette": "cave",
+        "dimensionsMetres": {
+          "width": 144,
+          "depth": 116
+        },
+        "ramps": [
+          {
+            "id": "u103-extraction-ramp",
+            "start": {
+              "x": -40,
+              "z": 0
+            },
+            "end": {
+              "x": 35,
+              "z": 0
+            },
+            "rise": 3,
+            "startHeight": 0,
+            "endHeight": 3,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "U1-04",
+      "designName": "余火居所",
+      "region": {
+        "id": "U1",
+        "name": "誓火深城"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "inhabited-undercity",
+        "secondary": [
+          "warm-interior",
+          "town-stone"
+        ]
+      },
+      "priority": "P0",
+      "artTreatment": "余火居所以灰褐木板、修补石墙和长桌餐具表现仍在生活，冷环境中只在饭桌与灯旁留温暖。",
+      "currentRuntime": {
+        "name": "工匠旧居",
+        "kind": "underground",
+        "palette": "warm",
+        "dimensionsMetres": {
+          "width": 144,
+          "depth": 128
+        },
+        "ramps": [
+          {
+            "id": "u104-residential-terrace",
+            "start": {
+              "x": 0,
+              "z": -30
+            },
+            "end": {
+              "x": 0,
+              "z": 30
+            },
+            "rise": 1.1,
+            "startHeight": 0,
+            "endHeight": 1.1,
+            "width": 144,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "U1-05",
+      "designName": "铁锁监区",
+      "region": {
+        "id": "U1",
+        "name": "誓火深城"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "inhabited-undercity",
+        "secondary": [
+          "town-stone",
+          "oath-ruin"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "监区以值房铺石、工作带磨痕和囚室旧门槛区别功能，检修侧廊保留较干净窄路，禁止全区同灰岩。",
+      "currentRuntime": {
+        "name": "囚工监区",
+        "kind": "underground",
+        "palette": "cave",
+        "dimensionsMetres": {
+          "width": 148,
+          "depth": 128
+        },
+        "ramps": [
+          {
+            "id": "u105-work-band",
+            "start": {
+              "x": -30,
+              "z": 0
+            },
+            "end": {
+              "x": 40,
+              "z": 0
+            },
+            "rise": 1.6,
+            "startHeight": 0,
+            "endHeight": 1.6,
+            "width": 148,
+            "material": "rock"
+          }
+        ],
+        "waters": [],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "U1-06",
+      "designName": "三誓军械廊",
+      "region": {
+        "id": "U1",
+        "name": "誓火深城"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "oath-ruin",
+        "secondary": [
+          "inhabited-undercity",
+          "town-stone"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "军械廊以三组有方向的旧剑基座和通门磨损组织，第三剑向内的轮廓清楚，停机旁路采用同质旧石。",
+      "currentRuntime": null
+    },
+    {
+      "id": "U1-07",
+      "designName": "震炉工坊",
+      "region": {
+        "id": "U1",
+        "name": "誓火深城"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "inhabited-undercity",
+        "secondary": [
+          "town-stone",
+          "mountain-quarry"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "震炉工坊以冷白炉槽、灰石工作环和暗铁泄压管建立工业遗迹感，工人安全路免强光遮挡。",
+      "currentRuntime": null
+    },
+    {
+      "id": "U1-08",
+      "designName": "天火深炉",
+      "region": {
+        "id": "U1",
+        "name": "誓火深城"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "inhabited-undercity",
+        "secondary": [
+          "oath-ruin",
+          "mountain-quarry"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "深炉以古石腔体与局部冷白折光组织天火接近面，深部迁行口保留空间层次，不改成熔岩战利品厅。",
+      "currentRuntime": null
+    },
+    {
+      "id": "U1-09",
+      "designName": "悬链绞盘井",
+      "region": {
+        "id": "U1",
+        "name": "誓火深城"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "inhabited-undercity",
+        "secondary": [
+          "mountain-quarry",
+          "town-stone"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "绞盘井用悬链、实体平台和井壁凿痕强调垂直尺度，工作磨光面与湿暗岩壁分开，回廊连续。",
+      "currentRuntime": null
+    },
+    {
+      "id": "U1-10",
+      "designName": "见日长廊",
+      "region": {
+        "id": "U1",
+        "name": "誓火深城"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "inhabited-undercity",
+        "secondary": [
+          "mountain-quarry",
+          "meadow-earth"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "见日长廊从冷灰人工石地逐步接到带尘日光，门内外脚印连续，撤离队伍所走路面留净。",
+      "currentRuntime": null
+    },
+    {
+      "id": "U2-01",
+      "designName": "封潮前厅",
+      "region": {
+        "id": "U2",
+        "name": "沉钟禁域"
+      },
+      "implementedInCurrentRuntime": true,
+      "terrain": {
+        "primary": "drowned-crypt",
+        "secondary": [
+          "oath-ruin",
+          "reed-marsh"
+        ]
+      },
+      "priority": "P1",
+      "artTreatment": "前厅以退潮水线、厚闸石基和明晰干阶建立封潮空间，回退柄邻近石面有手触磨损。",
+      "currentRuntime": {
+        "name": "沉钟地宫·西北前厅",
+        "kind": "underground",
+        "palette": "cave",
+        "dimensionsMetres": {
+          "width": 120,
+          "depth": 108
+        },
+        "ramps": [
+          {
+            "id": "u201-dry-stair-approach",
+            "start": {
+              "x": 0,
+              "z": -30
+            },
+            "end": {
+              "x": 0,
+              "z": 25
+            },
+            "rise": 1.2,
+            "startHeight": 0,
+            "endHeight": 1.2,
+            "width": 120,
+            "material": "rock"
+          }
+        ],
+        "waters": [
+          {
+            "id": "u201-retreated-water",
+            "x": -42,
+            "z": -25,
+            "width": 13,
+            "depth": 22,
+            "kind": "canal",
+            "y": -0.6220510894064614
+          }
+        ],
+        "bridges": [],
+        "brokenBridges": []
+      }
+    },
+    {
+      "id": "U2-02",
+      "designName": "沉潮长厅",
+      "region": {
+        "id": "U2",
+        "name": "沉钟禁域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "drowned-crypt",
+        "secondary": [
+          "oath-ruin",
+          "town-stone"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "长厅以折线干渠与两侧潮湿砌石拉出纵深，浅积水只在低槽，外侧退路和镜眼方向可读。",
+      "currentRuntime": null
+    },
+    {
+      "id": "U2-03",
+      "designName": "镇闸广场",
+      "region": {
+        "id": "U2",
+        "name": "沉钟禁域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "drowned-crypt",
+        "secondary": [
+          "oath-ruin",
+          "inhabited-undercity"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "镇闸广场用分区闸槽、旧水位带和厚实石墩组织，泄压通道有连续工作磨痕，中央落脚面低杂纹。",
+      "currentRuntime": null
+    },
+    {
+      "id": "U2-04",
+      "designName": "守库人旧居",
+      "region": {
+        "id": "U2",
+        "name": "沉钟禁域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "warm-interior",
+        "secondary": [
+          "drowned-crypt",
+          "oath-ruin"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "守库旧居在潮冷石廊中保留干木生活台、修补织物和小灯，旧记录集中阅读面，避免王墓陈设。",
+      "currentRuntime": null
+    },
+    {
+      "id": "U2-05",
+      "designName": "沉钟下殿",
+      "region": {
+        "id": "U2",
+        "name": "沉钟禁域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "drowned-crypt",
+        "secondary": [
+          "oath-ruin",
+          "town-stone"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "下殿以磨损钟纹、层层石台和侧室干路建立方向，潮痕沿墙收边，入口回程保持清楚。",
+      "currentRuntime": null
+    },
+    {
+      "id": "U2-06",
+      "designName": "覆文档案廊",
+      "region": {
+        "id": "U2",
+        "name": "沉钟禁域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "drowned-crypt",
+        "secondary": [
+          "oath-ruin",
+          "warm-interior"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "档案廊以原刻石壁与现代拓本台形成材质对照，两处读光位置明显，侧室与主廊边界完整。",
+      "currentRuntime": null
+    },
+    {
+      "id": "U2-07",
+      "designName": "禁域祭仪库",
+      "region": {
+        "id": "U2",
+        "name": "沉钟禁域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "drowned-crypt",
+        "secondary": [
+          "oath-ruin",
+          "inhabited-undercity"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "祭仪库以成组镜座、旧储图槽和双侧回廊组织，反光克制且方向明确，不加入无依据王墓宝堆。",
+      "currentRuntime": null
+    },
+    {
+      "id": "U2-08",
+      "designName": "无名囚室",
+      "region": {
+        "id": "U2",
+        "name": "沉钟禁域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "drowned-crypt",
+        "secondary": [
+          "oath-ruin",
+          "town-stone"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "无名囚室用两代封门修补、潮湿墙脚与较干门槛讲清时间层次，旧空间保持安静而非突袭竞技场。",
+      "currentRuntime": null
+    },
+    {
+      "id": "U2-09",
+      "designName": "堡外检修道",
+      "region": {
+        "id": "U2",
+        "name": "沉钟禁域"
+      },
+      "implementedInCurrentRuntime": false,
+      "terrain": {
+        "primary": "drowned-crypt",
+        "secondary": [
+          "inhabited-undercity",
+          "town-stone"
+        ]
+      },
+      "priority": "P2",
+      "artTreatment": "检修道用暗铁闸构、干燥高路与低槽潮石引向堡外，门内外磨损连贯，出口只显外城地形。",
+      "currentRuntime": null
+    }
+  ]
+}

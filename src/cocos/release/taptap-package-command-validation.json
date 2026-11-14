@@ -1,0 +1,23 @@
+{
+  "verifiedOn": "2026-11-10",
+  "command": "npm run pack:taptap",
+  "version": "0.3.3",
+  "miniAppId": "tapmcddcmbhf5lxqng",
+  "package": "build/taptap-test-package/game.zip",
+  "report": "artifacts/taptap-test/upload-settings.json",
+  "zipBytes": 272706685,
+  "sha256": "5a3e61177c18e5c12863e298e60ad1764ef841898837b3a6345a2ac02f0b33ea",
+  "buildMode": "test",
+  "checks": {
+    "npmPipeline": "passed: Cocos build + official converter + ZIP/package validation",
+    "versionAndAppId": "matched source, ZIP and upload report",
+    "subpackageCount": 71,
+    "strictReleaseGuard": "still rejects missing login service",
+    "startupRetry": "observed transient startup failure; retry pattern and PowerShell syntax verified"
+  },
+  "remainingIntegration": [
+    "Deploy login service and set serviceUrl."
+  ],
+  "uploaded": false,
+  "platformValidated": false
+}

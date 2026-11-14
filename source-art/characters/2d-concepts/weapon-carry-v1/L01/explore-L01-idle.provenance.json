@@ -1,0 +1,92 @@
+{
+  "weaponId": "L01",
+  "kind": "idle",
+  "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\weapon-carry-v1\\L01\\explore-L01-idle.png",
+  "rawOutputPath": "C:\\Users\\Alexa\\.codex\\generated_images\\01a1afe7-a561-7993-8c2e-3cbc5161a83d\\exec-80f2808e-9260-4253-b28d-089be87f8438.png",
+  "editTarget": "F:/workspace/Singularity/src/cocos/assets/resources/flat2d/characters/raphael/hero-v6/hero-v4-idle-readable.png",
+  "baseActionKey": "idle_W01",
+  "layout": {
+    "columns": 2,
+    "rows": 2
+  },
+  "promptFile": "explore-L01-idle.prompt.txt",
+  "tool": "built-in image_gen",
+  "sha256": "fe14907c935f0ef9ec77bf090a2c1efcc238a11124a885ff4dae567c034d6d10",
+  "rawSHA": "fe14907c935f0ef9ec77bf090a2c1efcc238a11124a885ff4dae567c034d6d10",
+  "editTargetSha256": "5f28fdb0c18329b0dbcc85c2c43af408c732ee9acec2ed6faa668557de1c9b87",
+  "fullInputSHA": [
+    {
+      "sha256": "5f28fdb0c18329b0dbcc85c2c43af408c732ee9acec2ed6faa668557de1c9b87",
+      "path": "F:/workspace/Singularity/src/cocos/assets/resources/flat2d/characters/raphael/hero-v6/hero-v4-idle-readable.png"
+    },
+    {
+      "sha256": "3e476c03d5cb90316dbd0ca9e28213f295aeae2e894c03a0123fc53e1bd004a7",
+      "path": "F:/workspace/Singularity/src/cocos/assets/resources/flat2d/characters/raphael/hero-v6/L01-walk-readable.png"
+    }
+  ],
+  "inputs": [
+    "F:/workspace/Singularity/src/cocos/assets/resources/flat2d/characters/raphael/hero-v6/hero-v4-idle-readable.png",
+    "F:/workspace/Singularity/src/cocos/assets/resources/flat2d/characters/raphael/hero-v6/L01-walk-readable.png"
+  ],
+  "pixelEdits": false,
+  "registrationOverrides": {
+    "1": [
+      32,
+      2
+    ],
+    "2": [
+      32,
+      1
+    ]
+  },
+  "registrationReview": {
+    "reason": "The default 32px search reached its boundary. Read-only lower-body matching over +/-128px confirms an interior maximum for these same-scale neutral idle bodies; no unchecked registrationAccepted bypass is used.",
+    "method": "Existing SciPy FFT binary-alpha>=128 lower-body IoU on the original accepted support/pelvis ROI; translation only, no scaling and no use of carried-gear alpha height.",
+    "maximumSearchWindowPixels": 128,
+    "reviewedFrameIndices": [
+      1,
+      2
+    ],
+    "matches": [
+      {
+        "index": 1,
+        "bodyOnlyTranslationXY": [
+          32,
+          2
+        ],
+        "lowerBodyMaskIoU": 0.919409,
+        "registrationROI": [
+          984,
+          279,
+          215,
+          221
+        ],
+        "manualOverride": false,
+        "searchRadius": 128,
+        "atSearchBoundary": false
+      },
+      {
+        "index": 2,
+        "bodyOnlyTranslationXY": [
+          32,
+          1
+        ],
+        "lowerBodyMaskIoU": 0.841647,
+        "registrationROI": [
+          218,
+          792,
+          215,
+          221
+        ],
+        "manualOverride": false,
+        "searchRadius": 128,
+        "atSearchBoundary": false
+      }
+    ],
+    "sourceSHA256": "fe14907c935f0ef9ec77bf090a2c1efcc238a11124a885ff4dae567c034d6d10",
+    "editTargetSHA256": "5f28fdb0c18329b0dbcc85c2c43af408c732ee9acec2ed6faa668557de1c9b87",
+    "rawSHA256": "fe14907c935f0ef9ec77bf090a2c1efcc238a11124a885ff4dae567c034d6d10",
+    "worldUnitsPerPixel": 0.0031950718685831623,
+    "pixelEdits": false
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "status": "DESIGN_COMPLETE_IMAGE_OUTPUT_BLOCKED",
+  "tool": "built-in image_gen",
+  "runtimeModified": false,
+  "design": "docs/superpowers/specs/2026-11-06-weapon-carry-design.md",
+  "references": [
+    {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\appearance-v5\\male-direction-soft-geralt-v3.png",
+      "sha256": "324ef98a04e1271920e431b7e409ec4770720a851ee3f818a8bb87717f11c3ac"
+    },
+    {
+      "path": "F:\\workspace\\Singularity\\src\\cocos\\assets\\resources\\flat2d\\characters\\raphael\\hero-v6\\W11-walk-readable.png",
+      "sha256": "4a692edc52dd0b38698f11a46822d9aef9c05864c9fbe6cf22f2867e52b2240d"
+    },
+    {
+      "path": "F:\\workspace\\Singularity\\src\\cocos\\assets\\resources\\flat2d\\characters\\raphael\\hero-v6\\W07-walk-readable.png",
+      "sha256": "5b7c83e2a1627e9d6e455f9111f386fd03d08b15567a9f5ee35af0fea0169bcc"
+    }
+  ],
+  "attempts": [
+    {
+      "prompt": "design-board.prompt.txt",
+      "requestId": "78bcc09f-90e4-4992-b3d3-a88cda37c4f7",
+      "result": "http400 moderation_blocked/output/other"
+    },
+    {
+      "prompt": "carry-only-board.prompt.txt",
+      "requestId": "d3d3ddc0-9ce0-4581-a4b2-0c78d456bd17",
+      "result": "http400 moderation_blocked/output/other"
+    }
+  ],
+  "fallbackCLIUsed": false,
+  "generatedImages": [],
+  "review": {
+    "status": "PASS_WITH_TWO_CLARIFICATIONS_APPLIED",
+    "notes": [
+      "28 PNG covers exploration idle/walk/run only; dodge/interact/transition require consistent corresponding poses.",
+      "Changing equipment cancels old presentation transition and selects new true equipment immediately."
+    ]
+  }
+}

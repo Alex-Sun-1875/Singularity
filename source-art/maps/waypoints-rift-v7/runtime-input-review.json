@@ -1,0 +1,425 @@
+{
+  "schema": "portal-rift-runtime-input-review-v1",
+  "recordedAtUTC": "2026-11-08T06:33:25.710966+00:00",
+  "status": "passed-desktop-mobile-input-animation-cleanup-and-native3D",
+  "scope": "Compiled frozen release package; original GameSession and actors. Direct area-entry fixtures are explicitly distinguished from actual exit input. Mobile is desktop Chrome touch+DPR2 emulation, not a physical phone benchmark. Full97/navigation evidence is separately owned by terrain_dressing.",
+  "bundle": {
+    "relativePath": "assets/main/index.78c55.js",
+    "bytes": 1104276,
+    "sha256": "1c28e4a96120a7bd0cd22ae0c23c0229d19e1b9a498dded11b65c72736becadb",
+    "chapterGameRfPush": true,
+    "markers": {
+      "PortalHud": true,
+      "PortalPresentation": true,
+      "ExitRift:": true,
+      "blue-violet-spatial-rift": true,
+      "flat2d/waypoints-v1/rift-edge-v7": true,
+      "nativePortals": true,
+      "portalMounts": true,
+      "planExitRifts": true,
+      "revealedExits": true,
+      "nearestExit": true,
+      "readoutVisible": true,
+      "fadedOccluders": true,
+      "terrainDetails": true,
+      "shipwreck": true,
+      "gorges": true,
+      "entranceClusters": true,
+      "progressionView": true,
+      "combatSkillView": true
+    }
+  },
+  "stagingURL": "http://127.0.0.1:7479/?view=2d",
+  "buildProof": "source-art/maps/waypoints-rift-v7/portal-rift-v1-build.json",
+  "runtimeRawInput": "src/cocos/test-results/portal-rift-v1-input-final.json",
+  "sourceSHA256": {
+    "src/cocos/assets/scripts/runtime/PortalPresentation.ts": "d047338fb5d80cfa6950ac3105459fc42cf41693cb7fdd0408d1fc402eb2e4f1",
+    "src/cocos/assets/scripts/data/PortalRiftArt.ts": "1e2a43cfd8b007da673ebe336ee4b165690d59fa20758bf42a6099d6635f81f5",
+    "src/cocos/assets/scripts/runtime/PortalPlacement.ts": "1e6d1c7b0428c2812fc8ca670883a26d4830caed706601e494bbaee3a09af0b0",
+    "src/cocos/assets/scripts/runtime/SceneBuilder.ts": "65b1138cfd16adaeb89438a1ca7797df813dd3f602cfb9a86742b0d6d0d0814a",
+    "src/cocos/assets/scripts/runtime/PortalHud.ts": "ee897de3cd76de3e0a3108c30698a51b7b4f78e1125704435e344bfda6f9fbe8"
+  },
+  "samplingGate": "Actual Cocos Director.EVENT_AFTER_DRAW three times, then 200ms, before snapshots/screenshots/pointers; disposal validated after actual engine frames.",
+  "productionChangesByQA": "None. Authorized Creator-generated PortalRiftArt.ts.meta copied to missing main source after unchanged TS hash verification; recorded in build proof.",
+  "desktopAndMobile": [
+    {
+      "mode": "desktop",
+      "viewportCSS": {
+        "width": 1280,
+        "height": 720
+      },
+      "devicePixelRatio": 1,
+      "status": "passed-actual-input-locks-duplicate-orientation-and-resource-gates",
+      "legalTravels": [
+        {
+          "from": "S01-T1",
+          "to": "S01",
+          "input": "real keyboard F",
+          "exitId": "door-town-1-S01-T1",
+          "approachNativeNavigationClear": true,
+          "approachActualDistance": 1.099999809265137,
+          "entryPreserved": true
+        },
+        {
+          "from": "S01",
+          "to": "S01-T1",
+          "input": "real pointer/touch portal label",
+          "exitId": "door-town-1-S01",
+          "approachNativeNavigationClear": true,
+          "approachActualDistance": 1.0999977052643566,
+          "entryPreserved": true
+        },
+        {
+          "from": "S01-T1",
+          "to": "S01-T2",
+          "input": "real keyboard F",
+          "exitId": "town-lane-12-S01-T1",
+          "approachNativeNavigationClear": true,
+          "approachActualDistance": 1.111174859709968,
+          "entryPreserved": true
+        },
+        {
+          "from": "S01-T2",
+          "to": "S01-T1",
+          "input": "real pointer/touch portal label",
+          "exitId": "town-lane-12-S01-T2",
+          "approachNativeNavigationClear": true,
+          "approachActualDistance": 1.1000095794228752,
+          "entryPreserved": true
+        }
+      ],
+      "rapidDuplicate": {
+        "input": "two rapid real keyboard F presses",
+        "travelRebuildCount": 1,
+        "heldAttackAfter": false,
+        "actionAfter": null
+      },
+      "E03": {
+        "lockedAtS17": "locked",
+        "flagInitiallyFalse": true,
+        "lockedInteractionStaysS17": true,
+        "realU102ExitOpensFlag": true,
+        "realReciprocalReturn": "U1-02",
+        "flagAssignedByQA": false
+      },
+      "outOfRange": {
+        "distance": 1.5499996185302738,
+        "radius": 1.35,
+        "staysT1": true
+      },
+      "fixedOrientation": {
+        "cameraRotatedAndZoomed": true,
+        "worldTransformMaxDelta": 0
+      },
+      "animation": {
+        "realGameSessionTimeDelta": 1.4207999999970187,
+        "uvChanges": [
+          {
+            "state": "open",
+            "deepZ": 0.0383615999999195,
+            "deepW": -0.025574399999946328,
+            "mistZ": -0.02699519999994335,
+            "mistW": 0.0312575999999344
+          }
+        ],
+        "flowPairsPerRift": 4,
+        "movedPairsAcrossT1Rifts": 12,
+        "mirrorMaxError": 0,
+        "lens": {
+          "vertices": 297,
+          "uvMirrorError": 0,
+          "positionMirrorError": 0,
+          "minZ": -0.2800000011920929
+        },
+        "lockedRealClockDelta": 1.4347000000029482,
+        "lockedFlowActiveCount": 0,
+        "lockedUVOffsetsZero": true
+      },
+      "fourTextureRefs": {
+        "start": [
+          {
+            "field": "texture",
+            "uuid": "d53125fe-daf4-514b-91f9-93c97b04a548@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "glowTexture",
+            "uuid": "5f6890d9-2be9-5b43-a485-f17157dc4830@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "nebulaTexture",
+            "uuid": "966661df-f45a-51b9-a4ec-9412d0296d19@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "lightTexture",
+            "uuid": "debe5623-0790-4ea8-a198-2aa8fa94f54a@6c48a",
+            "refCount": 1
+          }
+        ],
+        "afterRoundTrip": [
+          {
+            "field": "texture",
+            "uuid": "d53125fe-daf4-514b-91f9-93c97b04a548@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "glowTexture",
+            "uuid": "5f6890d9-2be9-5b43-a485-f17157dc4830@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "nebulaTexture",
+            "uuid": "966661df-f45a-51b9-a4ec-9412d0296d19@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "lightTexture",
+            "uuid": "debe5623-0790-4ea8-a198-2aa8fa94f54a@6c48a",
+            "refCount": 1
+          }
+        ],
+        "end": [
+          {
+            "field": "texture",
+            "uuid": "d53125fe-daf4-514b-91f9-93c97b04a548@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "glowTexture",
+            "uuid": "5f6890d9-2be9-5b43-a485-f17157dc4830@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "nebulaTexture",
+            "uuid": "966661df-f45a-51b9-a4ec-9412d0296d19@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "lightTexture",
+            "uuid": "debe5623-0790-4ea8-a198-2aa8fa94f54a@6c48a",
+            "refCount": 1
+          }
+        ],
+        "sameAnchorStable": true
+      },
+      "resourceCleanup": {
+        "observations": 9,
+        "maxAliveAfterAFTER_DRAW3": 0,
+        "allOwnerFieldsCleared": true,
+        "scope": "Original world/HUD/portal roots, all 7 materials per created state, all native meshes, terrain/detail objects and four texture fields; mesh/material collections empty and textures null."
+      }
+    },
+    {
+      "mode": "mobile",
+      "viewportCSS": {
+        "width": 915,
+        "height": 412
+      },
+      "devicePixelRatio": 2,
+      "status": "passed-actual-input-locks-duplicate-orientation-and-resource-gates",
+      "legalTravels": [
+        {
+          "from": "S01-T1",
+          "to": "S01",
+          "input": "real touch interact",
+          "exitId": "door-town-1-S01-T1",
+          "approachNativeNavigationClear": true,
+          "approachActualDistance": 1.099999809265137,
+          "entryPreserved": true
+        },
+        {
+          "from": "S01",
+          "to": "S01-T1",
+          "input": "real pointer/touch portal label",
+          "exitId": "door-town-1-S01",
+          "approachNativeNavigationClear": true,
+          "approachActualDistance": 1.0999977052643566,
+          "entryPreserved": true
+        },
+        {
+          "from": "S01-T1",
+          "to": "S01-T2",
+          "input": "real touch interact",
+          "exitId": "town-lane-12-S01-T1",
+          "approachNativeNavigationClear": true,
+          "approachActualDistance": 1.111174859709968,
+          "entryPreserved": true
+        },
+        {
+          "from": "S01-T2",
+          "to": "S01-T1",
+          "input": "real pointer/touch portal label",
+          "exitId": "town-lane-12-S01-T2",
+          "approachNativeNavigationClear": true,
+          "approachActualDistance": 1.1000095794228752,
+          "entryPreserved": true
+        }
+      ],
+      "rapidDuplicate": {
+        "input": "two rapid real near-label touch taps",
+        "travelRebuildCount": 1,
+        "heldAttackAfter": false,
+        "actionAfter": null
+      },
+      "E03": {
+        "lockedAtS17": "locked",
+        "flagInitiallyFalse": true,
+        "lockedInteractionStaysS17": true,
+        "realU102ExitOpensFlag": true,
+        "realReciprocalReturn": "U1-02",
+        "flagAssignedByQA": false
+      },
+      "outOfRange": {
+        "distance": 1.5499996185302738,
+        "radius": 1.35,
+        "staysT1": true
+      },
+      "fixedOrientation": {
+        "cameraRotatedAndZoomed": true,
+        "worldTransformMaxDelta": 0
+      },
+      "animation": {
+        "realGameSessionTimeDelta": 1.4244999999999992,
+        "uvChanges": [
+          {
+            "state": "open",
+            "deepZ": 0.038464200000040215,
+            "deepW": -0.025642800000026805,
+            "mistZ": -0.027067400000028295,
+            "mistW": 0.031341200000032765
+          }
+        ],
+        "flowPairsPerRift": 4,
+        "movedPairsAcrossT1Rifts": 12,
+        "mirrorMaxError": 0,
+        "lens": {
+          "vertices": 297,
+          "uvMirrorError": 0,
+          "positionMirrorError": 0,
+          "minZ": -0.2800000011920929
+        },
+        "lockedRealClockDelta": 1.4204999999999615,
+        "lockedFlowActiveCount": 0,
+        "lockedUVOffsetsZero": true
+      },
+      "fourTextureRefs": {
+        "start": [
+          {
+            "field": "texture",
+            "uuid": "d53125fe-daf4-514b-91f9-93c97b04a548@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "glowTexture",
+            "uuid": "5f6890d9-2be9-5b43-a485-f17157dc4830@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "nebulaTexture",
+            "uuid": "966661df-f45a-51b9-a4ec-9412d0296d19@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "lightTexture",
+            "uuid": "debe5623-0790-4ea8-a198-2aa8fa94f54a@6c48a",
+            "refCount": 1
+          }
+        ],
+        "afterRoundTrip": [
+          {
+            "field": "texture",
+            "uuid": "d53125fe-daf4-514b-91f9-93c97b04a548@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "glowTexture",
+            "uuid": "5f6890d9-2be9-5b43-a485-f17157dc4830@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "nebulaTexture",
+            "uuid": "966661df-f45a-51b9-a4ec-9412d0296d19@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "lightTexture",
+            "uuid": "debe5623-0790-4ea8-a198-2aa8fa94f54a@6c48a",
+            "refCount": 1
+          }
+        ],
+        "end": [
+          {
+            "field": "texture",
+            "uuid": "d53125fe-daf4-514b-91f9-93c97b04a548@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "glowTexture",
+            "uuid": "5f6890d9-2be9-5b43-a485-f17157dc4830@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "nebulaTexture",
+            "uuid": "966661df-f45a-51b9-a4ec-9412d0296d19@6c48a",
+            "refCount": 1
+          },
+          {
+            "field": "lightTexture",
+            "uuid": "debe5623-0790-4ea8-a198-2aa8fa94f54a@6c48a",
+            "refCount": 1
+          }
+        ],
+        "sameAnchorStable": true
+      },
+      "resourceCleanup": {
+        "observations": 9,
+        "maxAliveAfterAFTER_DRAW3": 0,
+        "allOwnerFieldsCleared": true,
+        "scope": "Original world/HUD/portal roots, all 7 materials per created state, all native meshes, terrain/detail objects and four texture fields; mesh/material collections empty and textures null."
+      }
+    }
+  ],
+  "runtimeErrors": [],
+  "requestFailures": [],
+  "stableMobileSamples": {
+    "raw": "src/cocos/test-results/portal-rift-v1-mobile-final.json",
+    "contact": "src/cocos/test-results/portal-rift-v1-mobile-final/mobile-four-contact.jpg",
+    "screenshots": [
+      "src/cocos/test-results/portal-rift-v1-mobile-final/mobile-inn-overlay-portal.png",
+      "src/cocos/test-results/portal-rift-v1-mobile-final/mobile-town-portal.png",
+      "src/cocos/test-results/portal-rift-v1-mobile-final/mobile-cave-portal.png",
+      "src/cocos/test-results/portal-rift-v1-mobile-final/mobile-wetland-portal.png"
+    ],
+    "errors": [],
+    "failed": [],
+    "visualReview": "Actually viewed contact sheet; complete blue-violet silhouette, destination labels and character readable in four environments; no stone or square carrier."
+  },
+  "native3D": {
+    "raw": "src/cocos/test-results/portal-rift-v1-native3D-final.json",
+    "screenshot": "src/cocos/test-results/portal-rift-v1-native3D-final/desktop-native-inn-portal.png",
+    "nativePortalsReady": true,
+    "flatPortalsReady": false,
+    "solidCarriers": 0,
+    "colliders": 0,
+    "errors": [],
+    "failed": [],
+    "visualReview": "Actually viewed complete T1 image: native 3D world displays the same symmetric blue-violet rift, no solid stone carrier."
+  },
+  "motionCapture": {
+    "gif": "src/cocos/test-results/portal-rift-v1-input-final/motion-T1/T1-real-gameTime-rift.gif",
+    "gifSHA256": "9bbcb6c2eab1142c85074056a4aff905ad41b7f86ed59bc8ee6acf5c6c7e8c40",
+    "gifBytes": 1315532,
+    "gifFrames": 22,
+    "gifGameTimeSpan": 4.753799999996907,
+    "rawPNGCount": 24,
+    "rawGameTimeStart": 22.40834995917605,
+    "rawGameTimeEnd": 27.67184995917593,
+    "sourceIndex": "src/cocos/test-results/portal-rift-v1-input-final/motion-T1/source-index.json",
+    "processing": "Pillow crop,2x Lanczos resize and GIF encoding of actual browser PNG captures; gameTime-based duration, no generated or synthesized animation frames",
+    "timeAssignedByQA": false
+  },
+  "all97Navigation": "Separate terrain_dressing report; not implied by this input summary.",
+  "artAcceptance": "Root explicitly reviewed and passed T1/four desktop contact/H07 before this input run; mobile and native3D images are provided for final review."
+}

@@ -1,0 +1,119 @@
+{
+  "__version__": "1.3.9",
+  "common": {
+    "name": "SwordAndFire",
+    "useSplashScreen": false,
+    "mainBundleCompressionType": "merge_dep",
+    "platform": "web-mobile",
+    "buildPath": "project://build",
+    "startScene": "e0158e35-9bac-42ca-a8e1-16cdd7e71953",
+    "scenes": [
+      {
+        "url": "db://assets/FirstChapter.scene",
+        "uuid": "e0158e35-9bac-42ca-a8e1-16cdd7e71953"
+      }
+    ]
+  },
+  "bundleConfig": {
+    "custom": {
+      "default": {
+        "displayName": "i18n:builder.asset_bundle.defaultConfig",
+        "configs": {
+          "native": {
+            "preferredOptions": {
+              "isRemote": false,
+              "compressionType": "merge_dep"
+            }
+          },
+          "web": {
+            "preferredOptions": {
+              "isRemote": false,
+              "compressionType": "merge_dep"
+            },
+            "fallbackOptions": {
+              "compressionType": "merge_dep"
+            }
+          },
+          "miniGame": {
+            "fallbackOptions": {
+              "isRemote": false,
+              "compressionType": "merge_dep"
+            },
+            "configMode": "overwrite",
+            "overwriteSettings": {
+              "wechatgame": {
+                "isRemote": false,
+                "compressionType": "subpackage"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "textureCompressConfig": {
+    "userPreset": {
+      "45b01a21-e9db-5bc5-aaf7-622e250b4046": {
+        "name": "Environment opaque ASTC6 + PNG",
+        "options": {
+          "web": {
+            "astc_6x6": {
+              "quality": "thorough"
+            },
+            "png": {
+              "quality": 100
+            }
+          }
+        }
+      },
+      "a0200d77-4313-5910-94cb-f59fd43ef1e1": {
+        "name": "Environment cutout ASTC4 RGBA + PNG",
+        "options": {
+          "web": {
+            "astc_4x4": {
+              "quality": "thorough"
+            },
+            "png": {
+              "quality": 100
+            }
+          }
+        }
+      },
+      "b856c76b-3b6a-5089-8e4e-0bed6a9df2df": {
+        "name": "Environment normal ASTC4 linear + PNG",
+        "options": {
+          "web": {
+            "astc_4x4": {
+              "quality": "thorough"
+            },
+            "png": {
+              "quality": 100
+            }
+          }
+        }
+      },
+      "f87b536e-99d6-4ddd-ac2c-965255c1067a": {
+        "name": "Mobile color ASTC4 exhaustive + original PNG",
+        "options": {
+          "web": {
+            "astc_4x4": {
+              "quality": "exhaustive"
+            },
+            "png": {
+              "quality": 100
+            }
+          },
+          "miniGame": {
+            "astc_4x4": {
+              "quality": "exhaustive"
+            },
+            "png": {
+              "quality": 100
+            }
+          }
+        }
+      }
+    },
+    "genMipmaps": true
+  }
+}

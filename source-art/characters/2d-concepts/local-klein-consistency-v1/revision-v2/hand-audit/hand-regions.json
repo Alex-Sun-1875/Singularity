@@ -1,0 +1,4637 @@
+{
+  "status": "local pixel audit only; no visual acceptance, model invocation or source edits",
+  "coordinate_system": "512x768 pixel XY, half-open right/bottom endpoints",
+  "skin_detection": "8-connected RGB/HSV gates in y230..469, gold/gray reduced; local windows disambiguate hands from warm leather. Gates are evidence, not final compositing masks.",
+  "restore_order": "Complete all guide/model compositing and all colour/palette conversions first. Finally copy approved before pixels across the before+guide+current hand union envelope, including fingers, wrist, antialiasing and vacated contour. Uncomposited raw-only displacements are diagnostics, not current erase regions. Assert equality to before in the final protection mask. Sword-left needs an original-alpha occlusion-aware matte, preserving gaps and the intended scabbard.",
+  "inputs_sha256": {
+    "finalize-candidates.py": "706b4dcada5cfb9706e0ed126534307fd48cc03a591841748afab844fda89e7b",
+    "prepare-cases.py": "df5b356bf6b3453d6d325ef6b35045b4ffa71c8d36f5a046fb8dd70efbe9eb87"
+  },
+  "cases": {
+    "sword-back": {
+      "reproduction_exact": true,
+      "file_sha256": {
+        "before": "43998bf3092078923ee28740a54f4755e0016299aaa9140084ca1177c4239937",
+        "guide": "542afa4b337a5b6c8217007fead11ebc7bac64df9fca14eb7827748be4d50ce6",
+        "raw-model": "fb58609bb13bfecb84c15fd4d61be97fd9829c9e1571bf7a1b2c57f3c30c2f04",
+        "constrained-candidate": "49d4cdd44f7ecd0c70434fb688d6df05065c6cee459d9d25f03633f500d714c2"
+      },
+      "all_changes_from_before": {
+        "guide": {
+          "changed_pixels": 4841,
+          "changed_box": [
+            158,
+            189,
+            291,
+            452
+          ],
+          "changed_over_8_rgb_levels": 3946,
+          "max_absolute_rgb_delta": 205
+        },
+        "raw-model": {
+          "changed_pixels": 391191,
+          "changed_box": [
+            0,
+            0,
+            512,
+            768
+          ],
+          "changed_over_8_rgb_levels": 14111,
+          "max_absolute_rgb_delta": 205
+        },
+        "constrained-candidate": {
+          "changed_pixels": 4555,
+          "changed_box": [
+            158,
+            210,
+            285,
+            452
+          ],
+          "changed_over_8_rgb_levels": 3746,
+          "max_absolute_rgb_delta": 204
+        }
+      },
+      "band_changes_from_before": {
+        "guide": {
+          "changed_pixels": 4134,
+          "changed_box": [
+            158,
+            230,
+            276,
+            452
+          ],
+          "changed_over_8_rgb_levels": 3497,
+          "max_absolute_rgb_delta": 205
+        },
+        "raw-model": {
+          "changed_pixels": 122262,
+          "changed_box": [
+            0,
+            230,
+            512,
+            470
+          ],
+          "changed_over_8_rgb_levels": 9489,
+          "max_absolute_rgb_delta": 205
+        },
+        "constrained-candidate": {
+          "changed_pixels": 4176,
+          "changed_box": [
+            158,
+            230,
+            276,
+            452
+          ],
+          "changed_over_8_rgb_levels": 3485,
+          "max_absolute_rgb_delta": 204
+        }
+      },
+      "full_band_warm_components": {
+        "before": [
+          {
+            "pixels": 4270,
+            "box": [
+              187,
+              230,
+              320,
+              394
+            ],
+            "median_rgb": [
+              141.0,
+              106.0,
+              89.0
+            ]
+          },
+          {
+            "pixels": 1081,
+            "box": [
+              329,
+              374,
+              358,
+              431
+            ],
+            "median_rgb": [
+              161.0,
+              122.0,
+              108.0
+            ]
+          },
+          {
+            "pixels": 1070,
+            "box": [
+              152,
+              374,
+              181,
+              431
+            ],
+            "median_rgb": [
+              164.0,
+              125.0,
+              111.0
+            ]
+          },
+          {
+            "pixels": 548,
+            "box": [
+              243,
+              307,
+              298,
+              322
+            ],
+            "median_rgb": [
+              117.0,
+              95.0,
+              86.0
+            ]
+          },
+          {
+            "pixels": 543,
+            "box": [
+              283,
+              321,
+              324,
+              373
+            ],
+            "median_rgb": [
+              110.0,
+              85.0,
+              74.0
+            ]
+          },
+          {
+            "pixels": 109,
+            "box": [
+              276,
+              279,
+              293,
+              295
+            ],
+            "median_rgb": [
+              108.0,
+              69.0,
+              61.0
+            ]
+          },
+          {
+            "pixels": 102,
+            "box": [
+              270,
+              235,
+              284,
+              252
+            ],
+            "median_rgb": [
+              129.0,
+              86.5,
+              69.0
+            ]
+          },
+          {
+            "pixels": 64,
+            "box": [
+              286,
+              345,
+              295,
+              356
+            ],
+            "median_rgb": [
+              144.5,
+              97.0,
+              87.5
+            ]
+          },
+          {
+            "pixels": 55,
+            "box": [
+              250,
+              323,
+              260,
+              333
+            ],
+            "median_rgb": [
+              113.0,
+              80.0,
+              66.0
+            ]
+          },
+          {
+            "pixels": 43,
+            "box": [
+              267,
+              255,
+              277,
+              262
+            ],
+            "median_rgb": [
+              123.0,
+              77.0,
+              68.0
+            ]
+          }
+        ],
+        "guide": [
+          {
+            "pixels": 4696,
+            "box": [
+              165,
+              230,
+              320,
+              446
+            ],
+            "median_rgb": [
+              141.0,
+              107.0,
+              90.0
+            ]
+          },
+          {
+            "pixels": 1081,
+            "box": [
+              329,
+              374,
+              358,
+              431
+            ],
+            "median_rgb": [
+              161.0,
+              122.0,
+              108.0
+            ]
+          },
+          {
+            "pixels": 926,
+            "box": [
+              152,
+              374,
+              179,
+              428
+            ],
+            "median_rgb": [
+              169.0,
+              132.0,
+              117.0
+            ]
+          },
+          {
+            "pixels": 548,
+            "box": [
+              243,
+              307,
+              298,
+              322
+            ],
+            "median_rgb": [
+              117.0,
+              95.0,
+              86.0
+            ]
+          },
+          {
+            "pixels": 543,
+            "box": [
+              283,
+              321,
+              324,
+              373
+            ],
+            "median_rgb": [
+              110.0,
+              85.0,
+              74.0
+            ]
+          },
+          {
+            "pixels": 109,
+            "box": [
+              276,
+              279,
+              293,
+              295
+            ],
+            "median_rgb": [
+              108.0,
+              69.0,
+              61.0
+            ]
+          },
+          {
+            "pixels": 102,
+            "box": [
+              270,
+              235,
+              284,
+              252
+            ],
+            "median_rgb": [
+              129.0,
+              86.5,
+              69.0
+            ]
+          },
+          {
+            "pixels": 76,
+            "box": [
+              208,
+              307,
+              221,
+              319
+            ],
+            "median_rgb": [
+              89.0,
+              70.0,
+              60.0
+            ]
+          },
+          {
+            "pixels": 64,
+            "box": [
+              286,
+              345,
+              295,
+              356
+            ],
+            "median_rgb": [
+              144.5,
+              97.0,
+              87.5
+            ]
+          },
+          {
+            "pixels": 55,
+            "box": [
+              250,
+              323,
+              260,
+              333
+            ],
+            "median_rgb": [
+              113.0,
+              80.0,
+              66.0
+            ]
+          },
+          {
+            "pixels": 43,
+            "box": [
+              267,
+              255,
+              277,
+              262
+            ],
+            "median_rgb": [
+              123.0,
+              77.0,
+              68.0
+            ]
+          }
+        ],
+        "raw-model": [
+          {
+            "pixels": 4415,
+            "box": [
+              151,
+              230,
+              272,
+              449
+            ],
+            "median_rgb": [
+              153.0,
+              102.0,
+              78.0
+            ]
+          },
+          {
+            "pixels": 1984,
+            "box": [
+              199,
+              334,
+              320,
+              394
+            ],
+            "median_rgb": [
+              163.0,
+              117.0,
+              96.0
+            ]
+          },
+          {
+            "pixels": 1040,
+            "box": [
+              329,
+              376,
+              358,
+              431
+            ],
+            "median_rgb": [
+              163.0,
+              121.0,
+              108.5
+            ]
+          },
+          {
+            "pixels": 584,
+            "box": [
+              283,
+              320,
+              324,
+              372
+            ],
+            "median_rgb": [
+              110.0,
+              84.0,
+              73.0
+            ]
+          },
+          {
+            "pixels": 402,
+            "box": [
+              245,
+              305,
+              298,
+              321
+            ],
+            "median_rgb": [
+              107.0,
+              87.0,
+              78.0
+            ]
+          },
+          {
+            "pixels": 71,
+            "box": [
+              285,
+              346,
+              295,
+              359
+            ],
+            "median_rgb": [
+              144.0,
+              94.0,
+              84.0
+            ]
+          },
+          {
+            "pixels": 67,
+            "box": [
+              251,
+              323,
+              265,
+              333
+            ],
+            "median_rgb": [
+              114.0,
+              75.0,
+              61.0
+            ]
+          },
+          {
+            "pixels": 59,
+            "box": [
+              280,
+              280,
+              293,
+              293
+            ],
+            "median_rgb": [
+              109.0,
+              67.0,
+              60.0
+            ]
+          },
+          {
+            "pixels": 54,
+            "box": [
+              271,
+              243,
+              279,
+              252
+            ],
+            "median_rgb": [
+              136.0,
+              89.0,
+              72.0
+            ]
+          },
+          {
+            "pixels": 42,
+            "box": [
+              267,
+              255,
+              277,
+              261
+            ],
+            "median_rgb": [
+              129.0,
+              83.5,
+              72.5
+            ]
+          }
+        ],
+        "constrained-candidate": [
+          {
+            "pixels": 5207,
+            "box": [
+              152,
+              230,
+              320,
+              449
+            ],
+            "median_rgb": [
+              140.0,
+              108.0,
+              95.0
+            ]
+          },
+          {
+            "pixels": 1081,
+            "box": [
+              329,
+              374,
+              358,
+              431
+            ],
+            "median_rgb": [
+              161.0,
+              122.0,
+              108.0
+            ]
+          },
+          {
+            "pixels": 548,
+            "box": [
+              243,
+              307,
+              298,
+              322
+            ],
+            "median_rgb": [
+              117.0,
+              95.0,
+              86.0
+            ]
+          },
+          {
+            "pixels": 543,
+            "box": [
+              283,
+              321,
+              324,
+              373
+            ],
+            "median_rgb": [
+              110.0,
+              85.0,
+              74.0
+            ]
+          },
+          {
+            "pixels": 298,
+            "box": [
+              235,
+              230,
+              253,
+              257
+            ],
+            "median_rgb": [
+              129.0,
+              91.0,
+              70.0
+            ]
+          },
+          {
+            "pixels": 109,
+            "box": [
+              276,
+              279,
+              293,
+              295
+            ],
+            "median_rgb": [
+              108.0,
+              69.0,
+              61.0
+            ]
+          },
+          {
+            "pixels": 102,
+            "box": [
+              270,
+              235,
+              284,
+              252
+            ],
+            "median_rgb": [
+              129.0,
+              86.5,
+              69.0
+            ]
+          },
+          {
+            "pixels": 76,
+            "box": [
+              208,
+              307,
+              221,
+              319
+            ],
+            "median_rgb": [
+              89.0,
+              70.0,
+              60.0
+            ]
+          },
+          {
+            "pixels": 64,
+            "box": [
+              286,
+              345,
+              295,
+              356
+            ],
+            "median_rgb": [
+              144.5,
+              97.0,
+              87.5
+            ]
+          },
+          {
+            "pixels": 55,
+            "box": [
+              250,
+              323,
+              260,
+              333
+            ],
+            "median_rgb": [
+              113.0,
+              80.0,
+              66.0
+            ]
+          },
+          {
+            "pixels": 49,
+            "box": [
+              226,
+              284,
+              235,
+              305
+            ],
+            "median_rgb": [
+              156.0,
+              129.0,
+              123.0
+            ]
+          },
+          {
+            "pixels": 43,
+            "box": [
+              267,
+              255,
+              277,
+              262
+            ],
+            "median_rgb": [
+              123.0,
+              77.0,
+              68.0
+            ]
+          }
+        ]
+      },
+      "palette_details": [],
+      "palette_changes_after_geometric_protection": null,
+      "no_palette_branch": true,
+      "hands": {
+        "screen-left": {
+          "box": [
+            142,
+            364,
+            204,
+            453
+          ],
+          "original_box": [
+            142,
+            364,
+            192,
+            443
+          ],
+          "search": [
+            140,
+            360,
+            200,
+            448
+          ],
+          "risk": "The new scabbard crosses this envelope. Its warm leather passes a skin gate. A rectangular before paste here can remove the intended longer scabbard or its tip. Preserve the hand/arm occlusion; do not treat the entire envelope as an unconditional restore rectangle.",
+          "original_skin_core_box": [
+            152,
+            374,
+            181,
+            431
+          ],
+          "guide_primary_skin_core_box": [
+            152,
+            374,
+            179,
+            428
+          ],
+          "union_erase_box": [
+            142,
+            364,
+            204,
+            453
+          ],
+          "union_erase_sources": [
+            "before",
+            "guide",
+            "constrained-candidate"
+          ],
+          "source_protection_box": [
+            142,
+            364,
+            192,
+            443
+          ],
+          "bright_components": {
+            "before": [
+              {
+                "pixels": 437,
+                "box": [
+                  152,
+                  375,
+                  178,
+                  427
+                ],
+                "median_rgb": [
+                  188.0,
+                  144.0,
+                  128.0
+                ]
+              },
+              {
+                "pixels": 53,
+                "box": [
+                  187,
+                  384,
+                  200,
+                  393
+                ],
+                "median_rgb": [
+                  170.0,
+                  132.0,
+                  110.0
+                ]
+              }
+            ],
+            "guide": [
+              {
+                "pixels": 403,
+                "box": [
+                  152,
+                  375,
+                  175,
+                  426
+                ],
+                "median_rgb": [
+                  190.0,
+                  144.0,
+                  129.0
+                ]
+              },
+              {
+                "pixels": 62,
+                "box": [
+                  184,
+                  384,
+                  200,
+                  414
+                ],
+                "median_rgb": [
+                  151.5,
+                  126.5,
+                  116.0
+                ]
+              }
+            ],
+            "raw-model": [
+              {
+                "pixels": 776,
+                "box": [
+                  152,
+                  374,
+                  194,
+                  438
+                ],
+                "median_rgb": [
+                  176.0,
+                  132.0,
+                  117.0
+                ]
+              }
+            ],
+            "constrained-candidate": [
+              {
+                "pixels": 403,
+                "box": [
+                  152,
+                  375,
+                  175,
+                  426
+                ],
+                "median_rgb": [
+                  190.0,
+                  144.0,
+                  129.0
+                ]
+              },
+              {
+                "pixels": 328,
+                "box": [
+                  163,
+                  377,
+                  194,
+                  443
+                ],
+                "median_rgb": [
+                  156.0,
+                  128.0,
+                  117.5
+                ]
+              }
+            ]
+          },
+          "all_roi_changes_from_before": {
+            "guide": {
+              "changed_pixels": 1483,
+              "changed_box": [
+                158,
+                364,
+                204,
+                452
+              ],
+              "changed_over_8_rgb_levels": 1407,
+              "max_absolute_rgb_delta": 205
+            },
+            "raw-model": {
+              "changed_pixels": 5510,
+              "changed_box": [
+                142,
+                364,
+                204,
+                453
+              ],
+              "changed_over_8_rgb_levels": 2274,
+              "max_absolute_rgb_delta": 205
+            },
+            "constrained-candidate": {
+              "changed_pixels": 1514,
+              "changed_box": [
+                158,
+                364,
+                204,
+                452
+              ],
+              "changed_over_8_rgb_levels": 1407,
+              "max_absolute_rgb_delta": 204
+            }
+          },
+          "original_warm_skin_pixels": 1354,
+          "original_warm_skin_changed_in_current": 424,
+          "original_warm_skin_unprotected": 1354,
+          "original_warm_skin_palette_changed": 0,
+          "original_bright_core_changed": {
+            "changed_pixels": 84,
+            "changed_box": [
+              166,
+              402,
+              181,
+              430
+            ],
+            "changed_over_8_rgb_levels": 72,
+            "max_absolute_rgb_delta": 90
+          },
+          "post_geometry_changes_in_roi": {
+            "changed_pixels": 1353,
+            "changed_box": [
+              159,
+              364,
+              204,
+              450
+            ],
+            "changed_over_8_rgb_levels": 1022,
+            "max_absolute_rgb_delta": 151
+          },
+          "active_composite_pixels": 1397,
+          "palette_changes_in_roi": null
+        },
+        "screen-right": {
+          "box": [
+            317,
+            362,
+            370,
+            443
+          ],
+          "original_box": [
+            317,
+            362,
+            370,
+            443
+          ],
+          "search": [
+            319,
+            360,
+            369,
+            443
+          ],
+          "risk": "No final hand change detected in the original flesh component; keep as an explicit final-stage guard.",
+          "original_skin_core_box": [
+            329,
+            374,
+            358,
+            431
+          ],
+          "guide_primary_skin_core_box": [
+            329,
+            374,
+            358,
+            431
+          ],
+          "union_erase_box": [
+            317,
+            362,
+            370,
+            443
+          ],
+          "union_erase_sources": [
+            "before",
+            "guide",
+            "constrained-candidate"
+          ],
+          "source_protection_box": [
+            317,
+            362,
+            370,
+            443
+          ],
+          "bright_components": {
+            "before": [
+              {
+                "pixels": 531,
+                "box": [
+                  331,
+                  376,
+                  357,
+                  431
+                ],
+                "median_rgb": [
+                  188.0,
+                  144.0,
+                  130.0
+                ]
+              },
+              {
+                "pixels": 46,
+                "box": [
+                  329,
+                  401,
+                  335,
+                  414
+                ],
+                "median_rgb": [
+                  153.5,
+                  110.5,
+                  95.5
+                ]
+              }
+            ],
+            "guide": [
+              {
+                "pixels": 531,
+                "box": [
+                  331,
+                  376,
+                  357,
+                  431
+                ],
+                "median_rgb": [
+                  188.0,
+                  144.0,
+                  130.0
+                ]
+              },
+              {
+                "pixels": 46,
+                "box": [
+                  329,
+                  401,
+                  335,
+                  414
+                ],
+                "median_rgb": [
+                  153.5,
+                  110.5,
+                  95.5
+                ]
+              }
+            ],
+            "raw-model": [
+              {
+                "pixels": 381,
+                "box": [
+                  333,
+                  386,
+                  357,
+                  427
+                ],
+                "median_rgb": [
+                  190.0,
+                  140.0,
+                  127.0
+                ]
+              },
+              {
+                "pixels": 137,
+                "box": [
+                  331,
+                  376,
+                  355,
+                  390
+                ],
+                "median_rgb": [
+                  189.0,
+                  164.0,
+                  150.0
+                ]
+              },
+              {
+                "pixels": 60,
+                "box": [
+                  329,
+                  398,
+                  335,
+                  415
+                ],
+                "median_rgb": [
+                  153.0,
+                  109.0,
+                  96.0
+                ]
+              }
+            ],
+            "constrained-candidate": [
+              {
+                "pixels": 531,
+                "box": [
+                  331,
+                  376,
+                  357,
+                  431
+                ],
+                "median_rgb": [
+                  188.0,
+                  144.0,
+                  130.0
+                ]
+              },
+              {
+                "pixels": 46,
+                "box": [
+                  329,
+                  401,
+                  335,
+                  414
+                ],
+                "median_rgb": [
+                  153.5,
+                  110.5,
+                  95.5
+                ]
+              }
+            ]
+          },
+          "all_roi_changes_from_before": {
+            "guide": {
+              "changed_pixels": 0,
+              "changed_box": null,
+              "changed_over_8_rgb_levels": 0,
+              "max_absolute_rgb_delta": 0
+            },
+            "raw-model": {
+              "changed_pixels": 4254,
+              "changed_box": [
+                317,
+                362,
+                370,
+                443
+              ],
+              "changed_over_8_rgb_levels": 305,
+              "max_absolute_rgb_delta": 32
+            },
+            "constrained-candidate": {
+              "changed_pixels": 0,
+              "changed_box": null,
+              "changed_over_8_rgb_levels": 0,
+              "max_absolute_rgb_delta": 0
+            }
+          },
+          "original_warm_skin_pixels": 1181,
+          "original_warm_skin_changed_in_current": 0,
+          "original_warm_skin_unprotected": 1181,
+          "original_warm_skin_palette_changed": 0,
+          "original_bright_core_changed": {
+            "changed_pixels": 0,
+            "changed_box": null,
+            "changed_over_8_rgb_levels": 0,
+            "max_absolute_rgb_delta": 0
+          },
+          "post_geometry_changes_in_roi": {
+            "changed_pixels": 0,
+            "changed_box": null,
+            "changed_over_8_rgb_levels": 0,
+            "max_absolute_rgb_delta": 0
+          },
+          "active_composite_pixels": 0,
+          "palette_changes_in_roi": null
+        }
+      }
+    },
+    "clothing-side": {
+      "reproduction_exact": true,
+      "file_sha256": {
+        "before": "a545a93e55b09fa99f5ac659f360fd864d8e42046266cf3b02b66b36b29b3eaf",
+        "guide": "a545a93e55b09fa99f5ac659f360fd864d8e42046266cf3b02b66b36b29b3eaf",
+        "raw-model": "e00a13ac8b9293be4b778bc78805960dbbfb37d3f4df1fa9211ba4c3f08c2326",
+        "constrained-candidate": "7082ec9f83fec0ed8333ff2df0455e763a8df446e82d6160f3fd26edc6fa89d0"
+      },
+      "all_changes_from_before": {
+        "guide": {
+          "changed_pixels": 0,
+          "changed_box": null,
+          "changed_over_8_rgb_levels": 0,
+          "max_absolute_rgb_delta": 0
+        },
+        "raw-model": {
+          "changed_pixels": 392617,
+          "changed_box": [
+            0,
+            0,
+            512,
+            768
+          ],
+          "changed_over_8_rgb_levels": 34651,
+          "max_absolute_rgb_delta": 140
+        },
+        "constrained-candidate": {
+          "changed_pixels": 19716,
+          "changed_box": [
+            172,
+            200,
+            337,
+            412
+          ],
+          "changed_over_8_rgb_levels": 15665,
+          "max_absolute_rgb_delta": 28
+        }
+      },
+      "band_changes_from_before": {
+        "guide": {
+          "changed_pixels": 0,
+          "changed_box": null,
+          "changed_over_8_rgb_levels": 0,
+          "max_absolute_rgb_delta": 0
+        },
+        "raw-model": {
+          "changed_pixels": 122748,
+          "changed_box": [
+            0,
+            230,
+            512,
+            470
+          ],
+          "changed_over_8_rgb_levels": 26497,
+          "max_absolute_rgb_delta": 120
+        },
+        "constrained-candidate": {
+          "changed_pixels": 16840,
+          "changed_box": [
+            172,
+            230,
+            337,
+            412
+          ],
+          "changed_over_8_rgb_levels": 13195,
+          "max_absolute_rgb_delta": 28
+        }
+      },
+      "full_band_warm_components": {
+        "before": [
+          {
+            "pixels": 6396,
+            "box": [
+              183,
+              230,
+              338,
+              396
+            ],
+            "median_rgb": [
+              139.0,
+              106.0,
+              92.0
+            ]
+          },
+          {
+            "pixels": 1972,
+            "box": [
+              190,
+              352,
+              296,
+              425
+            ],
+            "median_rgb": [
+              150.0,
+              112.0,
+              93.0
+            ]
+          },
+          {
+            "pixels": 1595,
+            "box": [
+              359,
+              251,
+              403,
+              308
+            ],
+            "median_rgb": [
+              187.0,
+              139.0,
+              123.0
+            ]
+          },
+          {
+            "pixels": 311,
+            "box": [
+              205,
+              422,
+              247,
+              435
+            ],
+            "median_rgb": [
+              139.0,
+              123.0,
+              111.0
+            ]
+          },
+          {
+            "pixels": 196,
+            "box": [
+              211,
+              261,
+              221,
+              294
+            ],
+            "median_rgb": [
+              140.5,
+              105.0,
+              94.0
+            ]
+          },
+          {
+            "pixels": 95,
+            "box": [
+              221,
+              260,
+              233,
+              277
+            ],
+            "median_rgb": [
+              132.0,
+              89.0,
+              82.0
+            ]
+          },
+          {
+            "pixels": 53,
+            "box": [
+              183,
+              313,
+              191,
+              324
+            ],
+            "median_rgb": [
+              167.0,
+              139.0,
+              117.0
+            ]
+          }
+        ],
+        "guide": [
+          {
+            "pixels": 6396,
+            "box": [
+              183,
+              230,
+              338,
+              396
+            ],
+            "median_rgb": [
+              139.0,
+              106.0,
+              92.0
+            ]
+          },
+          {
+            "pixels": 1972,
+            "box": [
+              190,
+              352,
+              296,
+              425
+            ],
+            "median_rgb": [
+              150.0,
+              112.0,
+              93.0
+            ]
+          },
+          {
+            "pixels": 1595,
+            "box": [
+              359,
+              251,
+              403,
+              308
+            ],
+            "median_rgb": [
+              187.0,
+              139.0,
+              123.0
+            ]
+          },
+          {
+            "pixels": 311,
+            "box": [
+              205,
+              422,
+              247,
+              435
+            ],
+            "median_rgb": [
+              139.0,
+              123.0,
+              111.0
+            ]
+          },
+          {
+            "pixels": 196,
+            "box": [
+              211,
+              261,
+              221,
+              294
+            ],
+            "median_rgb": [
+              140.5,
+              105.0,
+              94.0
+            ]
+          },
+          {
+            "pixels": 95,
+            "box": [
+              221,
+              260,
+              233,
+              277
+            ],
+            "median_rgb": [
+              132.0,
+              89.0,
+              82.0
+            ]
+          },
+          {
+            "pixels": 53,
+            "box": [
+              183,
+              313,
+              191,
+              324
+            ],
+            "median_rgb": [
+              167.0,
+              139.0,
+              117.0
+            ]
+          }
+        ],
+        "raw-model": [
+          {
+            "pixels": 5606,
+            "box": [
+              182,
+              230,
+              329,
+              424
+            ],
+            "median_rgb": [
+              140.0,
+              103.0,
+              85.0
+            ]
+          },
+          {
+            "pixels": 1501,
+            "box": [
+              359,
+              251,
+              403,
+              307
+            ],
+            "median_rgb": [
+              187.0,
+              137.0,
+              121.0
+            ]
+          },
+          {
+            "pixels": 155,
+            "box": [
+              212,
+              262,
+              220,
+              295
+            ],
+            "median_rgb": [
+              129.0,
+              93.0,
+              79.0
+            ]
+          },
+          {
+            "pixels": 128,
+            "box": [
+              309,
+              365,
+              338,
+              397
+            ],
+            "median_rgb": [
+              142.5,
+              108.5,
+              86.0
+            ]
+          },
+          {
+            "pixels": 53,
+            "box": [
+              282,
+              230,
+              293,
+              253
+            ],
+            "median_rgb": [
+              114.0,
+              86.0,
+              62.0
+            ]
+          },
+          {
+            "pixels": 51,
+            "box": [
+              234,
+              426,
+              247,
+              435
+            ],
+            "median_rgb": [
+              116.0,
+              102.0,
+              90.0
+            ]
+          },
+          {
+            "pixels": 50,
+            "box": [
+              196,
+              333,
+              210,
+              339
+            ],
+            "median_rgb": [
+              232.5,
+              215.5,
+              206.0
+            ]
+          }
+        ],
+        "constrained-candidate": [
+          {
+            "pixels": 4558,
+            "box": [
+              183,
+              230,
+              338,
+              396
+            ],
+            "median_rgb": [
+              145.0,
+              110.0,
+              94.0
+            ]
+          },
+          {
+            "pixels": 1803,
+            "box": [
+              190,
+              352,
+              296,
+              425
+            ],
+            "median_rgb": [
+              150.0,
+              114.0,
+              93.0
+            ]
+          },
+          {
+            "pixels": 1595,
+            "box": [
+              359,
+              251,
+              403,
+              308
+            ],
+            "median_rgb": [
+              187.0,
+              139.0,
+              123.0
+            ]
+          },
+          {
+            "pixels": 387,
+            "box": [
+              218,
+              311,
+              258,
+              333
+            ],
+            "median_rgb": [
+              126.0,
+              105.0,
+              96.0
+            ]
+          },
+          {
+            "pixels": 311,
+            "box": [
+              205,
+              422,
+              247,
+              435
+            ],
+            "median_rgb": [
+              139.0,
+              123.0,
+              111.0
+            ]
+          },
+          {
+            "pixels": 136,
+            "box": [
+              212,
+              263,
+              221,
+              292
+            ],
+            "median_rgb": [
+              134.0,
+              95.0,
+              82.0
+            ]
+          },
+          {
+            "pixels": 53,
+            "box": [
+              183,
+              313,
+              191,
+              324
+            ],
+            "median_rgb": [
+              167.0,
+              139.0,
+              117.0
+            ]
+          }
+        ]
+      },
+      "palette_details": [
+        {
+          "region": "wine-burgundy",
+          "source_median_Lab8": [
+            96.0,
+            14.0,
+            8.0
+          ],
+          "model_median_Lab8": [
+            71.0,
+            17.0,
+            6.0
+          ],
+          "standing_median_Lab8": [
+            72.0,
+            13.0,
+            7.0
+          ],
+          "selected_median_Lab8": [
+            71.0,
+            15.0,
+            6.0
+          ],
+          "method": "Model palette projected into standing-reference tolerance, applied to original material detail"
+        },
+        {
+          "region": "dark-sleeves",
+          "source_median_Lab8": [
+            108.0,
+            1.0,
+            -1.0
+          ],
+          "model_median_Lab8": [
+            68.0,
+            4.0,
+            -7.0
+          ],
+          "standing_median_Lab8": [
+            89.0,
+            2.0,
+            -3.0
+          ],
+          "selected_median_Lab8": [
+            87.0,
+            4.0,
+            -5.0
+          ],
+          "method": "Model palette projected into standing-reference tolerance, applied to original material detail"
+        }
+      ],
+      "palette_changes_after_geometric_protection": {
+        "changed_pixels": 0,
+        "changed_box": null,
+        "changed_over_8_rgb_levels": 0,
+        "max_absolute_rgb_delta": 0
+      },
+      "no_palette_branch": false,
+      "hands": {
+        "screen-left": {
+          "box": [
+            181,
+            304,
+            256,
+            402
+          ],
+          "original_box": [
+            184,
+            312,
+            256,
+            402
+          ],
+          "search": [
+            190,
+            312,
+            252,
+            390
+          ],
+          "risk": "The existing exclusion ellipse (170,302,215,351) misses the palm and fingers at x200..244,y326..381. Warm leather at the lower edge can pass a skin gate. Full patch restoration restores some cuff/nearby cloth as intended context.",
+          "original_skin_core_box": [
+            195,
+            326,
+            244,
+            381
+          ],
+          "guide_primary_skin_core_box": [
+            195,
+            326,
+            244,
+            381
+          ],
+          "union_erase_box": [
+            181,
+            304,
+            256,
+            402
+          ],
+          "union_erase_sources": [
+            "before",
+            "guide",
+            "constrained-candidate"
+          ],
+          "source_protection_box": [
+            184,
+            312,
+            256,
+            402
+          ],
+          "bright_components": {
+            "before": [
+              {
+                "pixels": 1441,
+                "box": [
+                  195,
+                  326,
+                  244,
+                  381
+                ],
+                "median_rgb": [
+                  212.0,
+                  161.0,
+                  146.0
+                ]
+              },
+              {
+                "pixels": 73,
+                "box": [
+                  216,
+                  312,
+                  228,
+                  324
+                ],
+                "median_rgb": [
+                  166.0,
+                  132.0,
+                  123.0
+                ]
+              },
+              {
+                "pixels": 45,
+                "box": [
+                  194,
+                  378,
+                  201,
+                  390
+                ],
+                "median_rgb": [
+                  171.0,
+                  139.0,
+                  129.0
+                ]
+              }
+            ],
+            "guide": [
+              {
+                "pixels": 1441,
+                "box": [
+                  195,
+                  326,
+                  244,
+                  381
+                ],
+                "median_rgb": [
+                  212.0,
+                  161.0,
+                  146.0
+                ]
+              },
+              {
+                "pixels": 73,
+                "box": [
+                  216,
+                  312,
+                  228,
+                  324
+                ],
+                "median_rgb": [
+                  166.0,
+                  132.0,
+                  123.0
+                ]
+              },
+              {
+                "pixels": 45,
+                "box": [
+                  194,
+                  378,
+                  201,
+                  390
+                ],
+                "median_rgb": [
+                  171.0,
+                  139.0,
+                  129.0
+                ]
+              }
+            ],
+            "raw-model": [
+              {
+                "pixels": 1042,
+                "box": [
+                  200,
+                  325,
+                  243,
+                  376
+                ],
+                "median_rgb": [
+                  224.0,
+                  164.0,
+                  148.0
+                ]
+              },
+              {
+                "pixels": 65,
+                "box": [
+                  194,
+                  374,
+                  202,
+                  390
+                ],
+                "median_rgb": [
+                  166.0,
+                  127.0,
+                  112.0
+                ]
+              },
+              {
+                "pixels": 40,
+                "box": [
+                  190,
+                  333,
+                  200,
+                  351
+                ],
+                "median_rgb": [
+                  164.0,
+                  137.0,
+                  125.0
+                ]
+              }
+            ],
+            "constrained-candidate": [
+              {
+                "pixels": 1361,
+                "box": [
+                  195,
+                  326,
+                  244,
+                  381
+                ],
+                "median_rgb": [
+                  209.0,
+                  159.0,
+                  145.0
+                ]
+              },
+              {
+                "pixels": 45,
+                "box": [
+                  194,
+                  378,
+                  201,
+                  390
+                ],
+                "median_rgb": [
+                  171.0,
+                  139.0,
+                  129.0
+                ]
+              }
+            ]
+          },
+          "all_roi_changes_from_before": {
+            "guide": {
+              "changed_pixels": 0,
+              "changed_box": null,
+              "changed_over_8_rgb_levels": 0,
+              "max_absolute_rgb_delta": 0
+            },
+            "raw-model": {
+              "changed_pixels": 7341,
+              "changed_box": [
+                181,
+                304,
+                256,
+                402
+              ],
+              "changed_over_8_rgb_levels": 5346,
+              "max_absolute_rgb_delta": 109
+            },
+            "constrained-candidate": {
+              "changed_pixels": 3135,
+              "changed_box": [
+                181,
+                304,
+                256,
+                402
+              ],
+              "changed_over_8_rgb_levels": 2311,
+              "max_absolute_rgb_delta": 28
+            }
+          },
+          "original_warm_skin_pixels": 3416,
+          "original_warm_skin_changed_in_current": 1590,
+          "original_warm_skin_unprotected": 3416,
+          "original_warm_skin_palette_changed": 1590,
+          "original_bright_core_changed": {
+            "changed_pixels": 570,
+            "changed_box": [
+              199,
+              326,
+              244,
+              381
+            ],
+            "changed_over_8_rgb_levels": 377,
+            "max_absolute_rgb_delta": 28
+          },
+          "post_geometry_changes_in_roi": {
+            "changed_pixels": 3135,
+            "changed_box": [
+              181,
+              304,
+              256,
+              402
+            ],
+            "changed_over_8_rgb_levels": 2311,
+            "max_absolute_rgb_delta": 28
+          },
+          "original_bright_core_selected_as_garment": {
+            "wine": 681,
+            "dark-sleeve": 10
+          },
+          "active_composite_pixels": 2948,
+          "palette_changes_in_roi": {
+            "changed_pixels": 3135,
+            "changed_box": [
+              181,
+              304,
+              256,
+              402
+            ],
+            "changed_over_8_rgb_levels": 2311,
+            "max_absolute_rgb_delta": 28
+          }
+        },
+        "screen-right": {
+          "box": [
+            349,
+            239,
+            415,
+            320
+          ],
+          "original_box": [
+            349,
+            239,
+            415,
+            320
+          ],
+          "search": [
+            350,
+            239,
+            413,
+            320
+          ],
+          "risk": "The other exclusion ellipse (320,226,376,273) does not span the complete hand. Existing final hand is largely unchanged because the garment palette mask is spatially distant.",
+          "original_skin_core_box": [
+            359,
+            251,
+            403,
+            308
+          ],
+          "guide_primary_skin_core_box": [
+            359,
+            251,
+            403,
+            308
+          ],
+          "union_erase_box": [
+            349,
+            239,
+            415,
+            320
+          ],
+          "union_erase_sources": [
+            "before",
+            "guide",
+            "constrained-candidate"
+          ],
+          "source_protection_box": [
+            349,
+            239,
+            415,
+            320
+          ],
+          "bright_components": {
+            "before": [
+              {
+                "pixels": 1269,
+                "box": [
+                  361,
+                  251,
+                  403,
+                  304
+                ],
+                "median_rgb": [
+                  193.0,
+                  144.0,
+                  127.0
+                ]
+              }
+            ],
+            "guide": [
+              {
+                "pixels": 1269,
+                "box": [
+                  361,
+                  251,
+                  403,
+                  304
+                ],
+                "median_rgb": [
+                  193.0,
+                  144.0,
+                  127.0
+                ]
+              }
+            ],
+            "raw-model": [
+              {
+                "pixels": 1194,
+                "box": [
+                  360,
+                  251,
+                  403,
+                  303
+                ],
+                "median_rgb": [
+                  194.0,
+                  143.0,
+                  128.0
+                ]
+              }
+            ],
+            "constrained-candidate": [
+              {
+                "pixels": 1269,
+                "box": [
+                  361,
+                  251,
+                  403,
+                  304
+                ],
+                "median_rgb": [
+                  193.0,
+                  144.0,
+                  127.0
+                ]
+              }
+            ]
+          },
+          "all_roi_changes_from_before": {
+            "guide": {
+              "changed_pixels": 0,
+              "changed_box": null,
+              "changed_over_8_rgb_levels": 0,
+              "max_absolute_rgb_delta": 0
+            },
+            "raw-model": {
+              "changed_pixels": 5330,
+              "changed_box": [
+                349,
+                239,
+                415,
+                320
+              ],
+              "changed_over_8_rgb_levels": 525,
+              "max_absolute_rgb_delta": 71
+            },
+            "constrained-candidate": {
+              "changed_pixels": 0,
+              "changed_box": null,
+              "changed_over_8_rgb_levels": 0,
+              "max_absolute_rgb_delta": 0
+            }
+          },
+          "original_warm_skin_pixels": 1601,
+          "original_warm_skin_changed_in_current": 0,
+          "original_warm_skin_unprotected": 1601,
+          "original_warm_skin_palette_changed": 0,
+          "original_bright_core_changed": {
+            "changed_pixels": 0,
+            "changed_box": null,
+            "changed_over_8_rgb_levels": 0,
+            "max_absolute_rgb_delta": 0
+          },
+          "post_geometry_changes_in_roi": {
+            "changed_pixels": 0,
+            "changed_box": null,
+            "changed_over_8_rgb_levels": 0,
+            "max_absolute_rgb_delta": 0
+          },
+          "original_bright_core_selected_as_garment": {
+            "wine": 768,
+            "dark-sleeve": 50
+          },
+          "active_composite_pixels": 0,
+          "palette_changes_in_roi": {
+            "changed_pixels": 0,
+            "changed_box": null,
+            "changed_over_8_rgb_levels": 0,
+            "max_absolute_rgb_delta": 0
+          }
+        }
+      }
+    },
+    "run-front": {
+      "reproduction_exact": true,
+      "file_sha256": {
+        "before": "0b3ffcb8cafc43ee9e8e149b683c1349f52d6efef03b91f71b249b749c03df51",
+        "guide": "c331d54adec55a98c4e960b81a502bfaaeb4cd4dc06fe00582b32970bcc40bd5",
+        "raw-model": "dc2d6791940aee7b3781802a94d2225d58ab6449cb626ada0f7ded525914b515",
+        "constrained-candidate": "582b2a758f575d1fc6f1dd33bacd21ad3dfe7b45902edb2a6da0443582f3ac80"
+      },
+      "all_changes_from_before": {
+        "guide": {
+          "changed_pixels": 76031,
+          "changed_box": [
+            130,
+            210,
+            385,
+            712
+          ],
+          "changed_over_8_rgb_levels": 58674,
+          "max_absolute_rgb_delta": 244
+        },
+        "raw-model": {
+          "changed_pixels": 392719,
+          "changed_box": [
+            0,
+            0,
+            512,
+            768
+          ],
+          "changed_over_8_rgb_levels": 62696,
+          "max_absolute_rgb_delta": 249
+        },
+        "constrained-candidate": {
+          "changed_pixels": 74167,
+          "changed_box": [
+            132,
+            209,
+            383,
+            650
+          ],
+          "changed_over_8_rgb_levels": 36818,
+          "max_absolute_rgb_delta": 221
+        }
+      },
+      "band_changes_from_before": {
+        "guide": {
+          "changed_pixels": 49516,
+          "changed_box": [
+            130,
+            230,
+            385,
+            470
+          ],
+          "changed_over_8_rgb_levels": 41301,
+          "max_absolute_rgb_delta": 244
+        },
+        "raw-model": {
+          "changed_pixels": 122789,
+          "changed_box": [
+            0,
+            230,
+            512,
+            470
+          ],
+          "changed_over_8_rgb_levels": 42166,
+          "max_absolute_rgb_delta": 249
+        },
+        "constrained-candidate": {
+          "changed_pixels": 45193,
+          "changed_box": [
+            132,
+            230,
+            383,
+            470
+          ],
+          "changed_over_8_rgb_levels": 22490,
+          "max_absolute_rgb_delta": 221
+        }
+      },
+      "full_band_warm_components": {
+        "before": [
+          {
+            "pixels": 5885,
+            "box": [
+              201,
+              230,
+              334,
+              372
+            ],
+            "median_rgb": [
+              152.0,
+              113.0,
+              92.0
+            ]
+          },
+          {
+            "pixels": 3015,
+            "box": [
+              170,
+              343,
+              263,
+              451
+            ],
+            "median_rgb": [
+              134.0,
+              103.0,
+              88.0
+            ]
+          },
+          {
+            "pixels": 1100,
+            "box": [
+              343,
+              368,
+              375,
+              420
+            ],
+            "median_rgb": [
+              205.0,
+              156.0,
+              142.0
+            ]
+          },
+          {
+            "pixels": 800,
+            "box": [
+              265,
+              371,
+              333,
+              428
+            ],
+            "median_rgb": [
+              158.0,
+              118.0,
+              99.0
+            ]
+          },
+          {
+            "pixels": 128,
+            "box": [
+              169,
+              230,
+              188,
+              251
+            ],
+            "median_rgb": [
+              154.5,
+              136.0,
+              116.0
+            ]
+          },
+          {
+            "pixels": 96,
+            "box": [
+              257,
+              319,
+              265,
+              336
+            ],
+            "median_rgb": [
+              130.5,
+              88.0,
+              67.5
+            ]
+          },
+          {
+            "pixels": 95,
+            "box": [
+              263,
+              230,
+              275,
+              247
+            ],
+            "median_rgb": [
+              209.0,
+              186.0,
+              172.0
+            ]
+          },
+          {
+            "pixels": 66,
+            "box": [
+              266,
+              272,
+              271,
+              300
+            ],
+            "median_rgb": [
+              113.0,
+              74.0,
+              64.0
+            ]
+          },
+          {
+            "pixels": 58,
+            "box": [
+              253,
+              335,
+              262,
+              349
+            ],
+            "median_rgb": [
+              104.0,
+              71.0,
+              47.5
+            ]
+          },
+          {
+            "pixels": 50,
+            "box": [
+              230,
+              352,
+              237,
+              365
+            ],
+            "median_rgb": [
+              112.5,
+              91.5,
+              76.0
+            ]
+          },
+          {
+            "pixels": 48,
+            "box": [
+              188,
+              230,
+              196,
+              240
+            ],
+            "median_rgb": [
+              132.5,
+              112.0,
+              99.0
+            ]
+          },
+          {
+            "pixels": 48,
+            "box": [
+              238,
+              353,
+              250,
+              365
+            ],
+            "median_rgb": [
+              93.0,
+              68.0,
+              57.5
+            ]
+          },
+          {
+            "pixels": 46,
+            "box": [
+              334,
+              230,
+              341,
+              242
+            ],
+            "median_rgb": [
+              118.5,
+              85.5,
+              70.5
+            ]
+          },
+          {
+            "pixels": 44,
+            "box": [
+              216,
+              256,
+              223,
+              269
+            ],
+            "median_rgb": [
+              145.0,
+              94.0,
+              84.0
+            ]
+          }
+        ],
+        "guide": [
+          {
+            "pixels": 5472,
+            "box": [
+              201,
+              230,
+              333,
+              397
+            ],
+            "median_rgb": [
+              154.0,
+              114.0,
+              93.0
+            ]
+          },
+          {
+            "pixels": 2813,
+            "box": [
+              170,
+              323,
+              263,
+              423
+            ],
+            "median_rgb": [
+              134.0,
+              103.0,
+              88.0
+            ]
+          },
+          {
+            "pixels": 931,
+            "box": [
+              343,
+              344,
+              375,
+              388
+            ],
+            "median_rgb": [
+              204.0,
+              156.0,
+              142.0
+            ]
+          },
+          {
+            "pixels": 95,
+            "box": [
+              169,
+              230,
+              188,
+              245
+            ],
+            "median_rgb": [
+              160.0,
+              136.0,
+              118.0
+            ]
+          },
+          {
+            "pixels": 83,
+            "box": [
+              257,
+              302,
+              265,
+              317
+            ],
+            "median_rgb": [
+              132.0,
+              87.0,
+              68.0
+            ]
+          },
+          {
+            "pixels": 56,
+            "box": [
+              266,
+              263,
+              271,
+              286
+            ],
+            "median_rgb": [
+              113.5,
+              74.0,
+              64.0
+            ]
+          },
+          {
+            "pixels": 55,
+            "box": [
+              263,
+              230,
+              273,
+              241
+            ],
+            "median_rgb": [
+              211.0,
+              188.0,
+              177.0
+            ]
+          },
+          {
+            "pixels": 48,
+            "box": [
+              253,
+              316,
+              262,
+              327
+            ],
+            "median_rgb": [
+              103.5,
+              71.0,
+              48.5
+            ]
+          },
+          {
+            "pixels": 46,
+            "box": [
+              303,
+              308,
+              310,
+              319
+            ],
+            "median_rgb": [
+              127.0,
+              95.5,
+              89.5
+            ]
+          },
+          {
+            "pixels": 44,
+            "box": [
+              230,
+              330,
+              237,
+              341
+            ],
+            "median_rgb": [
+              112.5,
+              91.5,
+              76.0
+            ]
+          },
+          {
+            "pixels": 42,
+            "box": [
+              238,
+              331,
+              250,
+              341
+            ],
+            "median_rgb": [
+              92.0,
+              67.5,
+              57.5
+            ]
+          }
+        ],
+        "raw-model": [
+          {
+            "pixels": 4840,
+            "box": [
+              201,
+              230,
+              332,
+              347
+            ],
+            "median_rgb": [
+              158.0,
+              113.0,
+              92.0
+            ]
+          },
+          {
+            "pixels": 2680,
+            "box": [
+              171,
+              323,
+              265,
+              422
+            ],
+            "median_rgb": [
+              138.0,
+              102.0,
+              86.0
+            ]
+          },
+          {
+            "pixels": 902,
+            "box": [
+              343,
+              344,
+              379,
+              387
+            ],
+            "median_rgb": [
+              208.0,
+              155.5,
+              141.0
+            ]
+          },
+          {
+            "pixels": 696,
+            "box": [
+              266,
+              347,
+              334,
+              398
+            ],
+            "median_rgb": [
+              158.0,
+              117.0,
+              95.0
+            ]
+          },
+          {
+            "pixels": 123,
+            "box": [
+              169,
+              230,
+              195,
+              244
+            ],
+            "median_rgb": [
+              154.0,
+              127.0,
+              107.0
+            ]
+          },
+          {
+            "pixels": 59,
+            "box": [
+              265,
+              230,
+              273,
+              241
+            ],
+            "median_rgb": [
+              214.0,
+              192.0,
+              183.0
+            ]
+          },
+          {
+            "pixels": 49,
+            "box": [
+              267,
+              264,
+              271,
+              286
+            ],
+            "median_rgb": [
+              115.0,
+              71.0,
+              60.0
+            ]
+          },
+          {
+            "pixels": 40,
+            "box": [
+              230,
+              330,
+              237,
+              341
+            ],
+            "median_rgb": [
+              114.0,
+              84.5,
+              68.5
+            ]
+          }
+        ],
+        "constrained-candidate": [
+          {
+            "pixels": 5373,
+            "box": [
+              201,
+              230,
+              334,
+              347
+            ],
+            "median_rgb": [
+              153.0,
+              112.0,
+              90.0
+            ]
+          },
+          {
+            "pixels": 2125,
+            "box": [
+              170,
+              349,
+              263,
+              422
+            ],
+            "median_rgb": [
+              137.0,
+              99.0,
+              82.0
+            ]
+          },
+          {
+            "pixels": 1073,
+            "box": [
+              343,
+              368,
+              375,
+              420
+            ],
+            "median_rgb": [
+              208.0,
+              156.0,
+              141.0
+            ]
+          },
+          {
+            "pixels": 399,
+            "box": [
+              265,
+              346,
+              310,
+              378
+            ],
+            "median_rgb": [
+              156.0,
+              114.0,
+              93.0
+            ]
+          },
+          {
+            "pixels": 322,
+            "box": [
+              312,
+              392,
+              333,
+              428
+            ],
+            "median_rgb": [
+              155.0,
+              118.5,
+              100.0
+            ]
+          },
+          {
+            "pixels": 129,
+            "box": [
+              169,
+              230,
+              188,
+              251
+            ],
+            "median_rgb": [
+              152.0,
+              134.0,
+              115.0
+            ]
+          },
+          {
+            "pixels": 111,
+            "box": [
+              205,
+              343,
+              216,
+              363
+            ],
+            "median_rgb": [
+              130.0,
+              102.0,
+              93.0
+            ]
+          },
+          {
+            "pixels": 82,
+            "box": [
+              257,
+              302,
+              265,
+              317
+            ],
+            "median_rgb": [
+              132.5,
+              86.0,
+              65.5
+            ]
+          },
+          {
+            "pixels": 64,
+            "box": [
+              263,
+              230,
+              273,
+              244
+            ],
+            "median_rgb": [
+              205.5,
+              183.0,
+              170.0
+            ]
+          },
+          {
+            "pixels": 54,
+            "box": [
+              266,
+              262,
+              271,
+              286
+            ],
+            "median_rgb": [
+              117.5,
+              72.0,
+              62.0
+            ]
+          },
+          {
+            "pixels": 52,
+            "box": [
+              215,
+              256,
+              223,
+              270
+            ],
+            "median_rgb": [
+              142.5,
+              86.0,
+              78.0
+            ]
+          },
+          {
+            "pixels": 48,
+            "box": [
+              188,
+              230,
+              196,
+              240
+            ],
+            "median_rgb": [
+              131.0,
+              111.5,
+              97.5
+            ]
+          },
+          {
+            "pixels": 47,
+            "box": [
+              334,
+              230,
+              341,
+              242
+            ],
+            "median_rgb": [
+              120.0,
+              84.0,
+              67.0
+            ]
+          },
+          {
+            "pixels": 44,
+            "box": [
+              253,
+              316,
+              262,
+              327
+            ],
+            "median_rgb": [
+              104.0,
+              71.0,
+              48.0
+            ]
+          }
+        ]
+      },
+      "palette_details": [
+        {
+          "region": "wine-burgundy",
+          "source_median_Lab8": [
+            81.0,
+            15.0,
+            8.0
+          ],
+          "model_median_Lab8": [
+            79.0,
+            18.0,
+            10.0
+          ],
+          "standing_median_Lab8": [
+            82.0,
+            16.0,
+            8.0
+          ],
+          "selected_median_Lab8": [
+            80.0,
+            18.0,
+            10.0
+          ],
+          "method": "Model palette projected into standing-reference tolerance, applied to original material detail"
+        },
+        {
+          "region": "dark-sleeves",
+          "source_median_Lab8": [
+            84.0,
+            2.0,
+            -1.0
+          ],
+          "model_median_Lab8": [
+            83.0,
+            2.0,
+            -1.0
+          ],
+          "standing_median_Lab8": [
+            79.0,
+            2.0,
+            -2.0
+          ],
+          "selected_median_Lab8": [
+            81.0,
+            2.0,
+            -1.0
+          ],
+          "method": "Model palette projected into standing-reference tolerance, applied to original material detail"
+        }
+      ],
+      "palette_changes_after_geometric_protection": {
+        "changed_pixels": 19467,
+        "changed_box": [
+          132,
+          209,
+          383,
+          420
+        ],
+        "changed_over_8_rgb_levels": 0,
+        "max_absolute_rgb_delta": 7
+      },
+      "no_palette_branch": false,
+      "hands": {
+        "screen-left": {
+          "box": [
+            190,
+            266,
+            276,
+            351
+          ],
+          "original_box": [
+            190,
+            278,
+            276,
+            351
+          ],
+          "search": [
+            195,
+            265,
+            274,
+            348
+          ],
+          "risk": "Original palm extends to x263, beyond the old protection polygon near x229..237. Guide compresses the hand from y290..339 into y278..319; the final combines both positions. Restore the full union after all palette operations, including background and cuff pixels.",
+          "original_skin_core_box": [
+            202,
+            290,
+            263,
+            339
+          ],
+          "guide_primary_skin_core_box": [
+            202,
+            278,
+            263,
+            319
+          ],
+          "union_erase_box": [
+            190,
+            266,
+            276,
+            351
+          ],
+          "union_erase_sources": [
+            "before",
+            "guide",
+            "constrained-candidate"
+          ],
+          "source_protection_box": [
+            190,
+            278,
+            276,
+            351
+          ],
+          "bright_components": {
+            "before": [
+              {
+                "pixels": 1559,
+                "box": [
+                  202,
+                  290,
+                  263,
+                  339
+                ],
+                "median_rgb": [
+                  211.0,
+                  167.0,
+                  155.0
+                ]
+              },
+              {
+                "pixels": 42,
+                "box": [
+                  247,
+                  265,
+                  258,
+                  273
+                ],
+                "median_rgb": [
+                  165.0,
+                  124.0,
+                  101.5
+                ]
+              }
+            ],
+            "guide": [
+              {
+                "pixels": 1325,
+                "box": [
+                  202,
+                  278,
+                  263,
+                  319
+                ],
+                "median_rgb": [
+                  211.0,
+                  167.0,
+                  155.0
+                ]
+              }
+            ],
+            "raw-model": [
+              {
+                "pixels": 1349,
+                "box": [
+                  202,
+                  277,
+                  264,
+                  319
+                ],
+                "median_rgb": [
+                  212.0,
+                  165.0,
+                  153.0
+                ]
+              }
+            ],
+            "constrained-candidate": [
+              {
+                "pixels": 1458,
+                "box": [
+                  202,
+                  278,
+                  263,
+                  338
+                ],
+                "median_rgb": [
+                  215.0,
+                  165.0,
+                  152.0
+                ]
+              }
+            ]
+          },
+          "all_roi_changes_from_before": {
+            "guide": {
+              "changed_pixels": 7306,
+              "changed_box": [
+                190,
+                266,
+                276,
+                351
+              ],
+              "changed_over_8_rgb_levels": 6772,
+              "max_absolute_rgb_delta": 244
+            },
+            "raw-model": {
+              "changed_pixels": 7308,
+              "changed_box": [
+                190,
+                266,
+                276,
+                351
+              ],
+              "changed_over_8_rgb_levels": 6868,
+              "max_absolute_rgb_delta": 249
+            },
+            "constrained-candidate": {
+              "changed_pixels": 6625,
+              "changed_box": [
+                190,
+                266,
+                276,
+                351
+              ],
+              "changed_over_8_rgb_levels": 3228,
+              "max_absolute_rgb_delta": 221
+            }
+          },
+          "original_warm_skin_pixels": 2977,
+          "original_warm_skin_changed_in_current": 2798,
+          "original_warm_skin_unprotected": 1931,
+          "original_warm_skin_palette_changed": 2179,
+          "original_bright_core_changed": {
+            "changed_pixels": 1454,
+            "changed_box": [
+              202,
+              290,
+              263,
+              339
+            ],
+            "changed_over_8_rgb_levels": 754,
+            "max_absolute_rgb_delta": 192
+          },
+          "post_geometry_changes_in_roi": {
+            "changed_pixels": 5455,
+            "changed_box": [
+              190,
+              266,
+              276,
+              351
+            ],
+            "changed_over_8_rgb_levels": 0,
+            "max_absolute_rgb_delta": 7
+          },
+          "original_bright_core_selected_as_garment": {
+            "wine": 1030,
+            "dark-sleeve": 35
+          },
+          "active_composite_pixels": 0,
+          "palette_changes_in_roi": {
+            "changed_pixels": 5455,
+            "changed_box": [
+              190,
+              266,
+              276,
+              351
+            ],
+            "changed_over_8_rgb_levels": 0,
+            "max_absolute_rgb_delta": 7
+          }
+        },
+        "screen-right": {
+          "box": [
+            331,
+            332,
+            388,
+            432
+          ],
+          "original_box": [
+            331,
+            356,
+            388,
+            432
+          ],
+          "search": [
+            333,
+            330,
+            388,
+            434
+          ],
+          "risk": "Geometric protection restores this original hand, but palette_lock runs later and changes its RGB. Include the guide/raw hand at y344..387 to erase any shifted contour if blending logic changes.",
+          "original_skin_core_box": [
+            343,
+            368,
+            375,
+            420
+          ],
+          "guide_primary_skin_core_box": [
+            343,
+            344,
+            375,
+            388
+          ],
+          "union_erase_box": [
+            331,
+            332,
+            388,
+            432
+          ],
+          "union_erase_sources": [
+            "before",
+            "guide",
+            "constrained-candidate"
+          ],
+          "source_protection_box": [
+            331,
+            356,
+            388,
+            432
+          ],
+          "bright_components": {
+            "before": [
+              {
+                "pixels": 871,
+                "box": [
+                  343,
+                  374,
+                  375,
+                  419
+                ],
+                "median_rgb": [
+                  210.0,
+                  162.0,
+                  147.0
+                ]
+              }
+            ],
+            "guide": [
+              {
+                "pixels": 732,
+                "box": [
+                  343,
+                  349,
+                  375,
+                  385
+                ],
+                "median_rgb": [
+                  211.0,
+                  163.0,
+                  148.0
+                ]
+              }
+            ],
+            "raw-model": [
+              {
+                "pixels": 724,
+                "box": [
+                  344,
+                  344,
+                  376,
+                  387
+                ],
+                "median_rgb": [
+                  214.0,
+                  160.0,
+                  146.0
+                ]
+              }
+            ],
+            "constrained-candidate": [
+              {
+                "pixels": 832,
+                "box": [
+                  343,
+                  374,
+                  375,
+                  419
+                ],
+                "median_rgb": [
+                  215.0,
+                  162.0,
+                  147.0
+                ]
+              }
+            ]
+          },
+          "all_roi_changes_from_before": {
+            "guide": {
+              "changed_pixels": 4181,
+              "changed_box": [
+                331,
+                332,
+                385,
+                432
+              ],
+              "changed_over_8_rgb_levels": 2913,
+              "max_absolute_rgb_delta": 217
+            },
+            "raw-model": {
+              "changed_pixels": 5690,
+              "changed_box": [
+                331,
+                332,
+                388,
+                432
+              ],
+              "changed_over_8_rgb_levels": 2943,
+              "max_absolute_rgb_delta": 219
+            },
+            "constrained-candidate": {
+              "changed_pixels": 2186,
+              "changed_box": [
+                343,
+                332,
+                383,
+                420
+              ],
+              "changed_over_8_rgb_levels": 0,
+              "max_absolute_rgb_delta": 6
+            }
+          },
+          "original_warm_skin_pixels": 1135,
+          "original_warm_skin_changed_in_current": 820,
+          "original_warm_skin_unprotected": 0,
+          "original_warm_skin_palette_changed": 820,
+          "original_bright_core_changed": {
+            "changed_pixels": 633,
+            "changed_box": [
+              343,
+              369,
+              375,
+              420
+            ],
+            "changed_over_8_rgb_levels": 0,
+            "max_absolute_rgb_delta": 6
+          },
+          "post_geometry_changes_in_roi": {
+            "changed_pixels": 2186,
+            "changed_box": [
+              343,
+              332,
+              383,
+              420
+            ],
+            "changed_over_8_rgb_levels": 0,
+            "max_absolute_rgb_delta": 6
+          },
+          "original_bright_core_selected_as_garment": {
+            "wine": 423,
+            "dark-sleeve": 5
+          },
+          "active_composite_pixels": 0,
+          "palette_changes_in_roi": {
+            "changed_pixels": 2186,
+            "changed_box": [
+              343,
+              332,
+              383,
+              420
+            ],
+            "changed_over_8_rgb_levels": 0,
+            "max_absolute_rgb_delta": 6
+          }
+        }
+      }
+    },
+    "run-back": {
+      "reproduction_exact": true,
+      "file_sha256": {
+        "before": "17f7a8ae15096d3870658304b59f403227b56b681a052a6d6c538f78381306dc",
+        "guide": "ffc3f4c2ba5709af3df1ef0676257b98005ea82e7a5a43d275d7ddee87e61932",
+        "raw-model": "9c418aaa216d29ce938df11117f1955274d6af5184381a730fe5bc53ca0c7ff7",
+        "constrained-candidate": "23b6e85ff196874d5cf86b6a4122682dc42150b875634ed5be35d8ecf85a0b3c"
+      },
+      "all_changes_from_before": {
+        "guide": {
+          "changed_pixels": 77314,
+          "changed_box": [
+            131,
+            210,
+            376,
+            712
+          ],
+          "changed_over_8_rgb_levels": 58256,
+          "max_absolute_rgb_delta": 227
+        },
+        "raw-model": {
+          "changed_pixels": 392875,
+          "changed_box": [
+            0,
+            0,
+            512,
+            768
+          ],
+          "changed_over_8_rgb_levels": 69131,
+          "max_absolute_rgb_delta": 232
+        },
+        "constrained-candidate": {
+          "changed_pixels": 73568,
+          "changed_box": [
+            133,
+            209,
+            372,
+            650
+          ],
+          "changed_over_8_rgb_levels": 45196,
+          "max_absolute_rgb_delta": 232
+        }
+      },
+      "band_changes_from_before": {
+        "guide": {
+          "changed_pixels": 47004,
+          "changed_box": [
+            131,
+            230,
+            376,
+            470
+          ],
+          "changed_over_8_rgb_levels": 37889,
+          "max_absolute_rgb_delta": 227
+        },
+        "raw-model": {
+          "changed_pixels": 122805,
+          "changed_box": [
+            0,
+            230,
+            512,
+            470
+          ],
+          "changed_over_8_rgb_levels": 40617,
+          "max_absolute_rgb_delta": 232
+        },
+        "constrained-candidate": {
+          "changed_pixels": 42005,
+          "changed_box": [
+            133,
+            230,
+            372,
+            470
+          ],
+          "changed_over_8_rgb_levels": 24643,
+          "max_absolute_rgb_delta": 232
+        }
+      },
+      "full_band_warm_components": {
+        "before": [
+          {
+            "pixels": 3060,
+            "box": [
+              203,
+              230,
+              283,
+              399
+            ],
+            "median_rgb": [
+              148.0,
+              114.5,
+              97.0
+            ]
+          },
+          {
+            "pixels": 2155,
+            "box": [
+              204,
+              346,
+              331,
+              414
+            ],
+            "median_rgb": [
+              168.0,
+              129.0,
+              110.0
+            ]
+          },
+          {
+            "pixels": 949,
+            "box": [
+              141,
+              358,
+              176,
+              403
+            ],
+            "median_rgb": [
+              194.0,
+              156.0,
+              139.0
+            ]
+          },
+          {
+            "pixels": 897,
+            "box": [
+              250,
+              314,
+              332,
+              365
+            ],
+            "median_rgb": [
+              130.0,
+              107.0,
+              97.0
+            ]
+          },
+          {
+            "pixels": 479,
+            "box": [
+              283,
+              275,
+              311,
+              316
+            ],
+            "median_rgb": [
+              118.0,
+              81.0,
+              72.0
+            ]
+          },
+          {
+            "pixels": 431,
+            "box": [
+              314,
+              357,
+              340,
+              397
+            ],
+            "median_rgb": [
+              140.0,
+              115.0,
+              106.0
+            ]
+          },
+          {
+            "pixels": 423,
+            "box": [
+              274,
+              230,
+              313,
+              272
+            ],
+            "median_rgb": [
+              146.0,
+              99.0,
+              84.0
+            ]
+          },
+          {
+            "pixels": 176,
+            "box": [
+              185,
+              394,
+              202,
+              422
+            ],
+            "median_rgb": [
+              142.0,
+              111.0,
+              96.5
+            ]
+          },
+          {
+            "pixels": 55,
+            "box": [
+              309,
+              258,
+              319,
+              270
+            ],
+            "median_rgb": [
+              129.0,
+              85.0,
+              77.0
+            ]
+          }
+        ],
+        "guide": [
+          {
+            "pixels": 2349,
+            "box": [
+              203,
+              230,
+              283,
+              370
+            ],
+            "median_rgb": [
+              147.0,
+              114.0,
+              96.0
+            ]
+          },
+          {
+            "pixels": 1815,
+            "box": [
+              204,
+              325,
+              331,
+              383
+            ],
+            "median_rgb": [
+              170.0,
+              129.0,
+              110.0
+            ]
+          },
+          {
+            "pixels": 801,
+            "box": [
+              141,
+              335,
+              176,
+              373
+            ],
+            "median_rgb": [
+              194.0,
+              155.0,
+              139.0
+            ]
+          },
+          {
+            "pixels": 761,
+            "box": [
+              250,
+              298,
+              332,
+              341
+            ],
+            "median_rgb": [
+              130.0,
+              108.0,
+              97.0
+            ]
+          },
+          {
+            "pixels": 411,
+            "box": [
+              283,
+              265,
+              311,
+              300
+            ],
+            "median_rgb": [
+              118.0,
+              80.0,
+              72.0
+            ]
+          },
+          {
+            "pixels": 361,
+            "box": [
+              314,
+              335,
+              340,
+              365
+            ],
+            "median_rgb": [
+              140.0,
+              115.0,
+              106.0
+            ]
+          },
+          {
+            "pixels": 212,
+            "box": [
+              274,
+              230,
+              304,
+              262
+            ],
+            "median_rgb": [
+              139.5,
+              95.0,
+              78.0
+            ]
+          },
+          {
+            "pixels": 149,
+            "box": [
+              185,
+              367,
+              202,
+              390
+            ],
+            "median_rgb": [
+              142.0,
+              112.0,
+              98.0
+            ]
+          },
+          {
+            "pixels": 105,
+            "box": [
+              256,
+              230,
+              270,
+              245
+            ],
+            "median_rgb": [
+              180.0,
+              150.0,
+              144.0
+            ]
+          },
+          {
+            "pixels": 97,
+            "box": [
+              304,
+              230,
+              313,
+              251
+            ],
+            "median_rgb": [
+              150.0,
+              102.0,
+              94.0
+            ]
+          },
+          {
+            "pixels": 47,
+            "box": [
+              309,
+              250,
+              319,
+              261
+            ],
+            "median_rgb": [
+              128.0,
+              85.0,
+              76.0
+            ]
+          }
+        ],
+        "raw-model": [
+          {
+            "pixels": 4285,
+            "box": [
+              184,
+              230,
+              331,
+              401
+            ],
+            "median_rgb": [
+              164.0,
+              124.0,
+              108.0
+            ]
+          },
+          {
+            "pixels": 601,
+            "box": [
+              287,
+              323,
+              337,
+              371
+            ],
+            "median_rgb": [
+              128.0,
+              99.0,
+              89.0
+            ]
+          },
+          {
+            "pixels": 559,
+            "box": [
+              157,
+              285,
+              190,
+              317
+            ],
+            "median_rgb": [
+              143.0,
+              111.0,
+              98.0
+            ]
+          },
+          {
+            "pixels": 345,
+            "box": [
+              250,
+              302,
+              297,
+              321
+            ],
+            "median_rgb": [
+              131.0,
+              106.0,
+              93.0
+            ]
+          },
+          {
+            "pixels": 191,
+            "box": [
+              270,
+              230,
+              290,
+              263
+            ],
+            "median_rgb": [
+              153.0,
+              105.0,
+              90.0
+            ]
+          },
+          {
+            "pixels": 64,
+            "box": [
+              283,
+              277,
+              293,
+              290
+            ],
+            "median_rgb": [
+              130.5,
+              81.0,
+              71.0
+            ]
+          },
+          {
+            "pixels": 42,
+            "box": [
+              256,
+              323,
+              262,
+              333
+            ],
+            "median_rgb": [
+              150.5,
+              110.5,
+              84.5
+            ]
+          }
+        ],
+        "constrained-candidate": [
+          {
+            "pixels": 4312,
+            "box": [
+              203,
+              230,
+              340,
+              398
+            ],
+            "median_rgb": [
+              155.0,
+              118.0,
+              103.0
+            ]
+          },
+          {
+            "pixels": 864,
+            "box": [
+              141,
+              358,
+              175,
+              403
+            ],
+            "median_rgb": [
+              195.0,
+              155.0,
+              139.0
+            ]
+          },
+          {
+            "pixels": 488,
+            "box": [
+              251,
+              299,
+              307,
+              328
+            ],
+            "median_rgb": [
+              126.0,
+              103.0,
+              93.0
+            ]
+          },
+          {
+            "pixels": 192,
+            "box": [
+              274,
+              230,
+              304,
+              262
+            ],
+            "median_rgb": [
+              140.0,
+              91.0,
+              76.0
+            ]
+          },
+          {
+            "pixels": 157,
+            "box": [
+              283,
+              265,
+              301,
+              288
+            ],
+            "median_rgb": [
+              130.0,
+              84.0,
+              73.0
+            ]
+          },
+          {
+            "pixels": 152,
+            "box": [
+              185,
+              396,
+              202,
+              419
+            ],
+            "median_rgb": [
+              146.5,
+              111.5,
+              97.0
+            ]
+          },
+          {
+            "pixels": 63,
+            "box": [
+              217,
+              303,
+              231,
+              314
+            ],
+            "median_rgb": [
+              111.0,
+              90.0,
+              83.0
+            ]
+          },
+          {
+            "pixels": 56,
+            "box": [
+              204,
+              402,
+              216,
+              411
+            ],
+            "median_rgb": [
+              144.5,
+              105.5,
+              82.5
+            ]
+          }
+        ]
+      },
+      "palette_details": [
+        {
+          "region": "wine-burgundy",
+          "source_median_Lab8": [
+            93.0,
+            15.0,
+            8.0
+          ],
+          "model_median_Lab8": [
+            94.0,
+            18.0,
+            8.0
+          ],
+          "standing_median_Lab8": [
+            84.0,
+            16.0,
+            8.0
+          ],
+          "selected_median_Lab8": [
+            86.0,
+            18.0,
+            8.0
+          ],
+          "method": "Model palette projected into standing-reference tolerance, applied to original material detail"
+        },
+        {
+          "region": "dark-sleeves",
+          "source_median_Lab8": [
+            80.0,
+            2.0,
+            -1.0
+          ],
+          "model_median_Lab8": [
+            98.0,
+            2.0,
+            -2.0
+          ],
+          "standing_median_Lab8": [
+            78.0,
+            2.0,
+            -1.0
+          ],
+          "selected_median_Lab8": [
+            80.0,
+            2.0,
+            -2.0
+          ],
+          "method": "Model palette projected into standing-reference tolerance, applied to original material detail"
+        }
+      ],
+      "palette_changes_after_geometric_protection": {
+        "changed_pixels": 17782,
+        "changed_box": [
+          133,
+          209,
+          372,
+          421
+        ],
+        "changed_over_8_rgb_levels": 2401,
+        "max_absolute_rgb_delta": 12
+      },
+      "no_palette_branch": false,
+      "hands": {
+        "screen-left": {
+          "box": [
+            129,
+            323,
+            188,
+            415
+          ],
+          "original_box": [
+            129,
+            346,
+            188,
+            415
+          ],
+          "search": [
+            131,
+            275,
+            202,
+            416
+          ],
+          "risk": "Original hand y358..403 shifts to y335..373 in the guide. The raw model proposes another hand-like component at x157..190,y285..317, but it is excluded in the current final, so it is diagnostic only and intentionally outside this union erase box.",
+          "original_skin_core_box": [
+            141,
+            358,
+            176,
+            403
+          ],
+          "guide_primary_skin_core_box": [
+            141,
+            335,
+            176,
+            373
+          ],
+          "union_erase_box": [
+            129,
+            323,
+            188,
+            415
+          ],
+          "union_erase_sources": [
+            "before",
+            "guide",
+            "constrained-candidate"
+          ],
+          "source_protection_box": [
+            129,
+            346,
+            188,
+            415
+          ],
+          "bright_components": {
+            "before": [
+              {
+                "pixels": 757,
+                "box": [
+                  141,
+                  360,
+                  176,
+                  403
+                ],
+                "median_rgb": [
+                  197.0,
+                  158.0,
+                  141.0
+                ]
+              }
+            ],
+            "guide": [
+              {
+                "pixels": 640,
+                "box": [
+                  141,
+                  337,
+                  175,
+                  373
+                ],
+                "median_rgb": [
+                  197.0,
+                  158.0,
+                  142.0
+                ]
+              }
+            ],
+            "raw-model": [
+              {
+                "pixels": 172,
+                "box": [
+                  172,
+                  285,
+                  189,
+                  307
+                ],
+                "median_rgb": [
+                  181.0,
+                  147.5,
+                  133.0
+                ]
+              },
+              {
+                "pixels": 104,
+                "box": [
+                  184,
+                  383,
+                  202,
+                  400
+                ],
+                "median_rgb": [
+                  172.5,
+                  132.5,
+                  114.5
+                ]
+              }
+            ],
+            "constrained-candidate": [
+              {
+                "pixels": 687,
+                "box": [
+                  141,
+                  360,
+                  175,
+                  402
+                ],
+                "median_rgb": [
+                  197.0,
+                  157.0,
+                  142.0
+                ]
+              }
+            ]
+          },
+          "all_roi_changes_from_before": {
+            "guide": {
+              "changed_pixels": 4121,
+              "changed_box": [
+                131,
+                323,
+                188,
+                415
+              ],
+              "changed_over_8_rgb_levels": 2698,
+              "max_absolute_rgb_delta": 210
+            },
+            "raw-model": {
+              "changed_pixels": 5427,
+              "changed_box": [
+                129,
+                323,
+                188,
+                415
+              ],
+              "changed_over_8_rgb_levels": 2681,
+              "max_absolute_rgb_delta": 226
+            },
+            "constrained-candidate": {
+              "changed_pixels": 2068,
+              "changed_box": [
+                134,
+                323,
+                188,
+                415
+              ],
+              "changed_over_8_rgb_levels": 224,
+              "max_absolute_rgb_delta": 10
+            }
+          },
+          "original_warm_skin_pixels": 999,
+          "original_warm_skin_changed_in_current": 707,
+          "original_warm_skin_unprotected": 0,
+          "original_warm_skin_palette_changed": 707,
+          "original_bright_core_changed": {
+            "changed_pixels": 557,
+            "changed_box": [
+              141,
+              362,
+              176,
+              403
+            ],
+            "changed_over_8_rgb_levels": 95,
+            "max_absolute_rgb_delta": 10
+          },
+          "post_geometry_changes_in_roi": {
+            "changed_pixels": 2068,
+            "changed_box": [
+              134,
+              323,
+              188,
+              415
+            ],
+            "changed_over_8_rgb_levels": 224,
+            "max_absolute_rgb_delta": 10
+          },
+          "original_bright_core_selected_as_garment": {
+            "wine": 320,
+            "dark-sleeve": 9
+          },
+          "active_composite_pixels": 0,
+          "palette_changes_in_roi": {
+            "changed_pixels": 2068,
+            "changed_box": [
+              134,
+              323,
+              188,
+              415
+            ],
+            "changed_over_8_rgb_levels": 224,
+            "max_absolute_rgb_delta": 10
+          }
+        },
+        "screen-right": {
+          "box": null,
+          "original_box": null,
+          "search": [
+            216,
+            230,
+            287,
+            345
+          ],
+          "risk": "Do not restore this region as a hand. Pasting before into the rejected [208,240,280,356] candidate would damage the intended vest/scabbard work. Warm-material statistics are retained only as classification error evidence.",
+          "original_skin_core_box": null,
+          "guide_primary_skin_core_box": null,
+          "union_erase_box": null,
+          "union_erase_sources": [],
+          "source_protection_box": null,
+          "bright_components": {
+            "before": [
+              {
+                "pixels": 681,
+                "box": [
+                  220,
+                  259,
+                  261,
+                  345
+                ],
+                "median_rgb": [
+                  165.0,
+                  140.0,
+                  132.0
+                ]
+              },
+              {
+                "pixels": 163,
+                "box": [
+                  259,
+                  230,
+                  279,
+                  251
+                ],
+                "median_rgb": [
+                  179.0,
+                  151.0,
+                  143.0
+                ]
+              },
+              {
+                "pixels": 81,
+                "box": [
+                  241,
+                  232,
+                  256,
+                  254
+                ],
+                "median_rgb": [
+                  159.0,
+                  117.0,
+                  95.0
+                ]
+              },
+              {
+                "pixels": 42,
+                "box": [
+                  251,
+                  321,
+                  261,
+                  331
+                ],
+                "median_rgb": [
+                  151.0,
+                  135.0,
+                  126.0
+                ]
+              }
+            ],
+            "guide": [
+              {
+                "pixels": 677,
+                "box": [
+                  216,
+                  252,
+                  261,
+                  345
+                ],
+                "median_rgb": [
+                  164.0,
+                  138.0,
+                  131.0
+                ]
+              },
+              {
+                "pixels": 107,
+                "box": [
+                  256,
+                  326,
+                  271,
+                  345
+                ],
+                "median_rgb": [
+                  184.0,
+                  137.0,
+                  120.0
+                ]
+              },
+              {
+                "pixels": 76,
+                "box": [
+                  259,
+                  230,
+                  270,
+                  245
+                ],
+                "median_rgb": [
+                  185.0,
+                  155.0,
+                  148.0
+                ]
+              },
+              {
+                "pixels": 70,
+                "box": [
+                  241,
+                  230,
+                  256,
+                  248
+                ],
+                "median_rgb": [
+                  160.0,
+                  118.0,
+                  95.5
+                ]
+              }
+            ],
+            "raw-model": [
+              {
+                "pixels": 697,
+                "box": [
+                  219,
+                  230,
+                  276,
+                  345
+                ],
+                "median_rgb": [
+                  169.0,
+                  138.0,
+                  128.0
+                ]
+              },
+              {
+                "pixels": 104,
+                "box": [
+                  242,
+                  230,
+                  254,
+                  252
+                ],
+                "median_rgb": [
+                  175.5,
+                  128.0,
+                  105.0
+                ]
+              },
+              {
+                "pixels": 90,
+                "box": [
+                  239,
+                  251,
+                  256,
+                  273
+                ],
+                "median_rgb": [
+                  173.0,
+                  132.0,
+                  111.0
+                ]
+              },
+              {
+                "pixels": 51,
+                "box": [
+                  267,
+                  311,
+                  280,
+                  320
+                ],
+                "median_rgb": [
+                  153.0,
+                  131.0,
+                  124.0
+                ]
+              },
+              {
+                "pixels": 46,
+                "box": [
+                  250,
+                  308,
+                  274,
+                  314
+                ],
+                "median_rgb": [
+                  170.0,
+                  145.5,
+                  139.0
+                ]
+              },
+              {
+                "pixels": 40,
+                "box": [
+                  227,
+                  230,
+                  240,
+                  238
+                ],
+                "median_rgb": [
+                  176.0,
+                  126.5,
+                  107.5
+                ]
+              }
+            ],
+            "constrained-candidate": [
+              {
+                "pixels": 263,
+                "box": [
+                  238,
+                  257,
+                  261,
+                  297
+                ],
+                "median_rgb": [
+                  164.0,
+                  134.0,
+                  125.0
+                ]
+              },
+              {
+                "pixels": 100,
+                "box": [
+                  256,
+                  326,
+                  271,
+                  345
+                ],
+                "median_rgb": [
+                  186.5,
+                  134.5,
+                  116.0
+                ]
+              },
+              {
+                "pixels": 64,
+                "box": [
+                  239,
+                  230,
+                  254,
+                  245
+                ],
+                "median_rgb": [
+                  160.5,
+                  119.0,
+                  95.5
+                ]
+              },
+              {
+                "pixels": 59,
+                "box": [
+                  216,
+                  317,
+                  228,
+                  336
+                ],
+                "median_rgb": [
+                  156.0,
+                  130.0,
+                  123.0
+                ]
+              },
+              {
+                "pixels": 45,
+                "box": [
+                  216,
+                  333,
+                  227,
+                  345
+                ],
+                "median_rgb": [
+                  154.0,
+                  126.0,
+                  112.0
+                ]
+              },
+              {
+                "pixels": 40,
+                "box": [
+                  227,
+                  307,
+                  240,
+                  317
+                ],
+                "median_rgb": [
+                  158.0,
+                  136.0,
+                  129.0
+                ]
+              }
+            ]
+          },
+          "all_roi_changes_from_before": {
+            "guide": {
+              "changed_pixels": 8350,
+              "changed_box": [
+                208,
+                240,
+                280,
+                356
+              ],
+              "changed_over_8_rgb_levels": 7551,
+              "max_absolute_rgb_delta": 211
+            },
+            "raw-model": {
+              "changed_pixels": 8351,
+              "changed_box": [
+                208,
+                240,
+                280,
+                356
+              ],
+              "changed_over_8_rgb_levels": 7438,
+              "max_absolute_rgb_delta": 203
+            },
+            "constrained-candidate": {
+              "changed_pixels": 8352,
+              "changed_box": [
+                208,
+                240,
+                280,
+                356
+              ],
+              "changed_over_8_rgb_levels": 7186,
+              "max_absolute_rgb_delta": 213
+            }
+          },
+          "original_warm_skin_pixels": 2696,
+          "original_warm_skin_changed_in_current": 2696,
+          "original_warm_skin_unprotected": 2595,
+          "original_warm_skin_palette_changed": 2243,
+          "original_bright_core_changed": {
+            "changed_pixels": 601,
+            "changed_box": [
+              228,
+              263,
+              260,
+              330
+            ],
+            "changed_over_8_rgb_levels": 568,
+            "max_absolute_rgb_delta": 161
+          },
+          "post_geometry_changes_in_roi": {
+            "changed_pixels": 7651,
+            "changed_box": [
+              208,
+              240,
+              280,
+              356
+            ],
+            "changed_over_8_rgb_levels": 2890,
+            "max_absolute_rgb_delta": 12
+          },
+          "original_bright_core_selected_as_garment": {
+            "wine": 251,
+            "dark-sleeve": 71
+          },
+          "active_composite_pixels": 0,
+          "palette_changes_in_roi": {
+            "changed_pixels": 7651,
+            "changed_box": [
+              208,
+              240,
+              280,
+              356
+            ],
+            "changed_over_8_rgb_levels": 2890,
+            "max_absolute_rgb_delta": 12
+          },
+          "rejected_skin_candidate": {
+            "box": [
+              208,
+              240,
+              280,
+              356
+            ],
+            "original_box": [
+              208,
+              247,
+              280,
+              356
+            ],
+            "original_skin_core_box": [
+              228,
+              263,
+              260,
+              330
+            ],
+            "guide_primary_skin_core_box": [
+              228,
+              255,
+              260,
+              312
+            ],
+            "union_erase_box": [
+              208,
+              240,
+              280,
+              356
+            ],
+            "source_protection_box": [
+              208,
+              247,
+              280,
+              356
+            ]
+          },
+          "status": "not_visible_or_false_positive",
+          "restore_enabled": false,
+          "semantic_identity": "burgundy vest and diagonal sword/scabbard; no visible screen-right hand",
+          "visual_review_source": "Root inspected before/current local crops and rejected this warm-colour candidate as a semantic false positive.",
+          "statistics_scope": "All warm-skin/core-labelled counts and bright_components in this rejected entry are legacy colour-candidate measurements, not hand measurements."
+        }
+      }
+    }
+  },
+  "post_audit_review_correction": {
+    "case": "run-back",
+    "side": "screen-right",
+    "status": "not_visible_or_false_positive",
+    "decision": "Only the visible screen-left hand is eligible for hand restoration in this case. Rejected coordinates and numerical measurements remain as diagnostic evidence.",
+    "basis": "Root local visual review of 8 before/current crop pairs; the other 7 hand core boxes were visually confirmed.",
+    "unchanged_artifacts": "Contact sheet and audit script intentionally retained unchanged as original numeric-audit evidence; rerunning that initial script alone does not include this later semantic correction."
+  }
+}

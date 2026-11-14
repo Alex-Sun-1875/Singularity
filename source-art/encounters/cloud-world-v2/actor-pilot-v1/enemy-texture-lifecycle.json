@@ -1,0 +1,115 @@
+{
+  "status": "representative-game-transition-probes-passed",
+  "runtime": "src/cocos/assets/scripts/runtime/FlatActors.ts",
+  "officialEngineVersion": "3.8.8",
+  "officialSources": [
+    "C:/ProgramData/cocos/editors/Creator/3.8.8/resources/resources/3d/engine/cocos/asset/assets/asset.ts:315",
+    "C:/ProgramData/cocos/editors/Creator/3.8.8/resources/resources/3d/engine/cocos/asset/assets/asset.ts:331",
+    "C:/ProgramData/cocos/editors/Creator/3.8.8/resources/resources/3d/engine/cocos/asset/asset-manager/release-manager.ts:208",
+    "C:/ProgramData/cocos/editors/Creator/3.8.8/resources/resources/3d/engine/cocos/asset/asset-manager/asset-manager.ts:754"
+  ],
+  "officialDocumentation": "https://docs.cocos.com/creator/3.8/manual/en/asset/release-manager.html",
+  "ownership": {
+    "scope": "Only explicitly registered enemy concept textures",
+    "uniquePerScene": true,
+    "loaded": "addRef once per unique Texture2D",
+    "destroy": "Destroy actor nodes/materials/frames/meshes first, then decRef each owned enemy texture and clear ownership/cache",
+    "lateDisposedLoad": "Enemy addRef/decRef pair, reject creation; Hero/NPC no ownership mutation",
+    "forceReleaseAssetUsed": false,
+    "excludedSharedConcepts": [
+      "raphael",
+      "mira",
+      "lorn",
+      "nightqi",
+      "kael",
+      "evelyn"
+    ],
+    "portraitOwnershipUnchanged": true
+  },
+  "diagnostic": "FlatActors.inspectTextureOwnership(): own ref set/count/estimated RGBA bytes; retain old actor instance across transition to verify count0 then engine cache release and reload",
+  "memory": {
+    "sourceRGBABytes": 9437184,
+    "productionRGBABytes": 4194304,
+    "thirtyTwoTypesSourceMiB": 288,
+    "thirtyTwoTypesProductionMiB": 128,
+    "scope": "RGBA8 level0 only, excludes driver/image/mesh; mipmaps disabled"
+  },
+  "verification": {
+    "typeCheck": "npm run check passed2026-11-08",
+    "browserTransitionRelease": "passed: each1024enemy texture ref1->0/isValidfalse after unload",
+    "reentryReload": "passed: ref1 on return",
+    "heroPortraitRegression": "Hero texture remained valid during enemy unload; full inventory UX not newly reverified"
+  },
+  "runtimeEvidence": [
+    {
+      "concept": "mine-crawler",
+      "file": "src/cocos/test-results/enemy-combat-v1/mine-crawler-runtime.json",
+      "sha256": "c48a7766d32bf8fbc8e68b09847c773dd0d38c6069a86a87803a873bc1471993",
+      "area": "H04",
+      "seen": [
+        "walk-0",
+        "walk-1",
+        "attack"
+      ],
+      "afterUnload": {
+        "refCount": 0,
+        "isValid": false,
+        "heroValid": true,
+        "ownership": {
+          "disposed": false,
+          "enemyTextureCount": 0,
+          "estimatedEnemyRgbaBytes": 0,
+          "textures": [],
+          "heroAndNpcRefsOwned": false
+        }
+      },
+      "reload": {
+        "concept": "mine-crawler",
+        "refCount": 1,
+        "width": 1024,
+        "height": 1024,
+        "valid": true,
+        "failure": ""
+      },
+      "consoleErrors": 0,
+      "requestFailures": 0,
+      "rootVisualReview": "PASS after real game sample at7473",
+      "native3D": "legacy unchanged"
+    },
+    {
+      "concept": "mine-worker",
+      "file": "src/cocos/test-results/enemy-combat-v1/mine-worker-runtime.json",
+      "sha256": "c8149a9761d38bc26c74e7be36a3cf107b43c698f6a0e9ed48ac8b2b11c43af4",
+      "area": "H03",
+      "seen": [
+        "walk-0",
+        "walk-1",
+        "attack"
+      ],
+      "afterUnload": {
+        "refCount": 0,
+        "isValid": false,
+        "heroValid": true,
+        "ownership": {
+          "disposed": false,
+          "enemyTextureCount": 0,
+          "estimatedEnemyRgbaBytes": 0,
+          "textures": [],
+          "heroAndNpcRefsOwned": false
+        }
+      },
+      "reload": {
+        "concept": "mine-worker",
+        "refCount": 1,
+        "width": 1024,
+        "height": 1024,
+        "valid": true,
+        "failure": ""
+      },
+      "consoleErrors": 0,
+      "requestFailures": 0,
+      "rootVisualReview": "PASS after real game sample at7473",
+      "native3D": "legacy unchanged"
+    }
+  ]
+}

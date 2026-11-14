@@ -1,0 +1,332 @@
+{
+  "revision": "monster-ecology-v1-six-authored-poses",
+  "sourceDesign": "source-art/encounters/monster-ecology-v1/marsh-spitter/raw.png",
+  "loaded3DModel": false,
+  "image": "atlas.png",
+  "columns": 6,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "directions": [
+    "down",
+    "left",
+    "up",
+    "right"
+  ],
+  "origin": [
+    128.5,
+    236
+  ],
+  "perFrameOrigins": [
+    [
+      128.5,
+      236
+    ],
+    [
+      128.5,
+      236
+    ],
+    [
+      128.5,
+      236
+    ],
+    [
+      128.5,
+      236
+    ],
+    [
+      128.5,
+      236
+    ],
+    [
+      128.5,
+      236
+    ],
+    [
+      132.5,
+      190
+    ],
+    [
+      132.5,
+      190
+    ],
+    [
+      132.5,
+      190
+    ],
+    [
+      132.5,
+      190
+    ],
+    [
+      132.5,
+      190
+    ],
+    [
+      132.5,
+      190
+    ],
+    [
+      129.5,
+      221
+    ],
+    [
+      129.5,
+      221
+    ],
+    [
+      129.5,
+      221
+    ],
+    [
+      129.5,
+      221
+    ],
+    [
+      129.5,
+      221
+    ],
+    [
+      129.5,
+      221
+    ],
+    [
+      132.5,
+      187
+    ],
+    [
+      132.5,
+      187
+    ],
+    [
+      132.5,
+      187
+    ],
+    [
+      132.5,
+      187
+    ],
+    [
+      132.5,
+      187
+    ],
+    [
+      132.5,
+      187
+    ]
+  ],
+  "alphaBounds": [
+    [
+      15,
+      36,
+      242,
+      236
+    ],
+    [
+      17,
+      35,
+      243,
+      236
+    ],
+    [
+      15,
+      35,
+      242,
+      237
+    ],
+    [
+      9,
+      36,
+      237,
+      235
+    ],
+    [
+      8,
+      36,
+      237,
+      232
+    ],
+    [
+      8,
+      35,
+      235,
+      234
+    ],
+    [
+      11,
+      67,
+      254,
+      192
+    ],
+    [
+      15,
+      65,
+      254,
+      190
+    ],
+    [
+      13,
+      67,
+      251,
+      189
+    ],
+    [
+      12,
+      67,
+      246,
+      193
+    ],
+    [
+      6,
+      64,
+      243,
+      193
+    ],
+    [
+      4,
+      74,
+      247,
+      189
+    ],
+    [
+      20,
+      27,
+      239,
+      220
+    ],
+    [
+      20,
+      27,
+      233,
+      222
+    ],
+    [
+      29,
+      26,
+      231,
+      221
+    ],
+    [
+      16,
+      12,
+      230,
+      220
+    ],
+    [
+      17,
+      9,
+      232,
+      222
+    ],
+    [
+      15,
+      30,
+      233,
+      219
+    ],
+    [
+      11,
+      64,
+      254,
+      185
+    ],
+    [
+      13,
+      64,
+      250,
+      190
+    ],
+    [
+      14,
+      65,
+      252,
+      187
+    ],
+    [
+      9,
+      50,
+      242,
+      190
+    ],
+    [
+      9,
+      50,
+      243,
+      190
+    ],
+    [
+      7,
+      67,
+      247,
+      190
+    ]
+  ],
+  "alphaThreshold": 0.025,
+  "camera": {
+    "worldUnitsPerPixel": 0.00475
+  },
+  "actions": {
+    "idle": {
+      "image": "atlas.png",
+      "frames": 1,
+      "frameIndices": [
+        0
+      ],
+      "fps": 1,
+      "loop": true
+    },
+    "walk": {
+      "image": "atlas.png",
+      "frames": 2,
+      "frameIndices": [
+        1,
+        2
+      ],
+      "fps": 6,
+      "loop": true,
+      "nominalSpeedMetresPerSecond": 1.35
+    },
+    "spell": {
+      "image": "atlas.png",
+      "frames": 4,
+      "frameIndices": [
+        0,
+        3,
+        4,
+        5
+      ],
+      "phaseStarts": [
+        0,
+        0.24,
+        0.55,
+        0.8
+      ],
+      "fps": 6,
+      "loop": false
+    },
+    "attack_sword": {
+      "image": "atlas.png",
+      "frames": 4,
+      "frameIndices": [
+        0,
+        3,
+        4,
+        5
+      ],
+      "phaseStarts": [
+        0,
+        0.24,
+        0.55,
+        0.8
+      ],
+      "fps": 6,
+      "loop": false
+    }
+  },
+  "limitations": [
+    "Four actually drawn directions, no invented diagonal or mirrored views.",
+    "Six authored poses, not a skeletal animation or generated in-between sequence.",
+    "One fixed support-plane pivot per direction across all six source cells; no per-frame fitting or scaling.",
+    "No independent corpse drawing. A real defeat may briefly fade the current pose.",
+    "Windup, active and recovery use the real EnemyCombat phase, not a separate timer."
+  ]
+}

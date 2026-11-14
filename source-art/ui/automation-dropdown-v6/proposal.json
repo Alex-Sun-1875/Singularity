@@ -1,0 +1,63 @@
+{
+  "status": "design-review-only",
+  "integrated": false,
+  "artReview": "pending user review",
+  "reference": "reference.jpg",
+  "generator": "Deterministic Pillow layout using existing game skins, icons and font",
+  "header": {
+    "width": 128,
+    "height": 26,
+    "hitHeight": 48
+  },
+  "popup": {
+    "width": 144,
+    "height": 80,
+    "topFromViewport": 50,
+    "labels": [
+      "自动",
+      "挂机"
+    ],
+    "iconCentersX": [
+      38,
+      106
+    ],
+    "iconY": 20,
+    "labelY": 41,
+    "experienceY": 67
+  },
+  "touch": {
+    "headerCenterY": 30,
+    "modeCentersY": 86,
+    "modeWidths": 60,
+    "height": 48,
+    "horizontalGap": 8,
+    "verticalGap": 8,
+    "decorativeFrameNotHitRegion": true,
+    "footerHitStartsAt": 110
+  },
+  "sceneValidation": {
+    "area": "S01-T1",
+    "blocked": false,
+    "left": "鍑哄彂",
+    "position": {
+      "x": 0,
+      "z": -7
+    }
+  },
+  "interaction": [
+    "header click opens/closes",
+    "choose another mode switches and closes",
+    "choose running mode again stops",
+    "choose paused mode resumes",
+    "outside tap closes"
+  ],
+  "sources": [
+    "menu-pill-frame-v5.png",
+    "menu-pill-inset-v5.png",
+    "double-gold-frame-v6.png",
+    "double-gold-inset-v6.png",
+    "automation-battle-v5.png",
+    "automation-hunt-v5.png",
+    "rpg-serif-v2.ttf"
+  ]
+}

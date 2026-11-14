@@ -1,0 +1,77 @@
+{
+  "status": "Static concept revision only; pending user art review. No runtime code, animation clips, damage rules, save data or preview build changed.",
+  "feedback": "近战连击的效果还需要更炫一点",
+  "previousDesign": "../fire-melee-direction-v1/design-spec.json",
+  "direction": "三刀仍为斜劈、反手横斩、双手下劈；强化银白刀锋、细金边、交错残痕与末刀金白爆点。轻、轻、重逐刀递进，挥击/接触时集中亮起，收招快速消散。",
+  "stages": [
+    {
+      "stage": 1,
+      "name": "斜劈",
+      "visual": "较厚的银白短弧，明亮主刃、半透明钢色内部和细金边，方向性短火星。",
+      "intensityProposal": 1.0,
+      "contact": "沿真实剑刃接触点产生紧凑金白星芒。"
+    },
+    {
+      "stage": 2,
+      "name": "反手横斩",
+      "visual": "更明亮的横向主弧，与上一刀较淡的斜向残痕构成交叉层次；少量更丰富的接触金属碎屑。",
+      "intensityProposal": 1.35,
+      "previousTrailIntensityProposal": [
+        0.15,
+        0.25
+      ],
+      "contact": "本刀接触一次；上一刀残痕仅为已发生轨迹的短暂残留。"
+    },
+    {
+      "stage": 3,
+      "name": "双手下劈",
+      "visual": "最强的近竖向银白刃面、细金边和金白接触爆点，短促方向碎屑、低位破碎半环尘浪与局部地面反光。",
+      "intensityProposal": 2.2,
+      "contact": "爆点集中在实际接触位置，保留敌人头部、身体轮廓与握剑位置。"
+    }
+  ],
+  "presentationEnvelopeProposal": {
+    "mainTrailSeconds": [
+      0.08,
+      0.14
+    ],
+    "contactCorePeakSeconds": [
+      0.04,
+      0.07
+    ],
+    "fadingTrailMaximumSeconds": 0.22,
+    "finisherDustSeconds": [
+      0.12,
+      0.18
+    ],
+    "note": "这些为待接入调试的表现建议，不是图像帧数据或已运行参数。实际接触由核心动作事件驱动。"
+  },
+  "continuity": [
+    "只保留已真实执行的上一刀轨迹，按世界位置和经过时间衰减；残痕不追踪目标、不画未来轨迹。",
+    "第三刀预备只增加窄金属刃光；重斩爆点、碎屑和尘环在实际接触时出现。",
+    "收招列快速退亮，回到可辨识的战斗待机，下一轮有清楚的新起势。"
+  ],
+  "unchangedProposal": [
+    "沿用上一版三刀1.32秒、各刀基础伤害输入24及既有成长/装备计算的初次接入提案。",
+    "沿用近身实际刀路与判定上限，刀光和尘环不增加伤害、段数、射程或控制。",
+    "三刀动作和输入窗口仍按上一版提案制作并验证，当前未接入。"
+  ],
+  "reuse": {
+    "feedback": "沿用公共CombatImpact的light/heavy及暴击、击杀择强规则；不将各档震动或闪光简单叠加。",
+    "colors": "状态、伤害数字与UI继续通过FeedbackPalette/FeedbackView；刀光的暖金为物理接触材质，不表示火系附魔。",
+    "reducedMotion": "遵守现有减少动态偏好，保留简洁刀路和音效，降低强闪、振动与额外尘屑。"
+  },
+  "acceptancePending": [
+    "用户确认强化后的刀光与末刀视觉强度。",
+    "三段动作的握剑、脚部锚点、真实刀路、帧间过渡与接触时刻。",
+    "空挥、单次命中、护甲接触、暴击与击杀时的反馈一致性。",
+    "844×390横屏中角色、目标、血条与真实弹道可读性。",
+    "持续连按、多目标战斗、特效池回收及TapTap目标设备性能。"
+  ],
+  "deliverables": {
+    "contactPeaks": "contact-peaks-v2.png",
+    "storyboard": "storyboard-v2.png",
+    "comparison": "before-after-v2.png"
+  },
+  "comparisonNote": "上一版接触列由Pillow裁切并等比放大；上下两版显示尺寸一致，未对旧版特效降亮或调色。"
+}

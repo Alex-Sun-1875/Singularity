@@ -1,0 +1,183 @@
+{
+  "title": "重复查询与怪物呈现 CPU 优化",
+  "date": "2026-11-14",
+  "status": "implemented-and-measured",
+  "objective": "保持现有画面效果与60FPS，优化重复视线检测、碰撞查询、怪物呈现；按用户后续要求采用固定靶场，每版2分钟比较CPU。",
+  "changes": [
+    {
+      "file": "src/cocos/assets/scripts/features/world/runtime/SceneBuilder.ts",
+      "work": "视线查询仅复用同一渲染帧、完全一致的四个Float64端点坐标与NPC肩高类别。128槽、最多4次探测，冲突时仍比较所有原始坐标；满槽回退原始物理射线。新场景障碍会使缓存失效。静态group2障碍不变，未量化坐标、未跨帧复用。",
+      "scratchBytes": 4224
+    },
+    {
+      "files": [
+        "src/cocos/assets/scripts/features/navigation/runtime/Navigation.ts",
+        "src/cocos/assets/scripts/features/world/runtime/SceneBuilder.ts"
+      ],
+      "work": "仅对场景移动碰撞的不可变足迹启用4米格宽索引；少于8个障碍仍使用原线性路径。格子只负责候选筛选，原严格矩形/半径判定保持。巨大障碍单独存放，避免充满格子。跳过没有位移的轴查询，保留原子步和轴滑动顺序。其他寻路/地图缓存默认不建此索引。"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/actors/runtime/FlatActors.ts",
+      "work": "相同角色角度和完全相同相机旋转复用朝向结果，预计算图集方向角；保留完整动画时钟、受击、死亡、帧采样和所有渲染质量。未移动怪物不再重复算地面高度；复用当前敌人id索引，替代每个角色重复扫描敌人列表。场景销毁时清理此索引。"
+    }
+  ],
+  "sourceBoundary": {
+    "files": [
+      {
+        "path": "src\\cocos\\assets\\scripts\\features\\world\\runtime\\SceneBuilder.ts",
+        "beforeSha256": "9085e913363645ba8fd98e7d7828dba11d1f0d07552431e1293b679f034b3939",
+        "afterSha256": "7e39bfabe6c998343f537abd13581888800f436d0ae31ad022cf4823fbd8ea47"
+      },
+      {
+        "path": "src\\cocos\\assets\\scripts\\features\\navigation\\runtime\\Navigation.ts",
+        "beforeSha256": "946dd9c28affc7cc2f70830aa36eeed73b3d8f7282f01f16056a16b34aafbda8",
+        "afterSha256": "197383be1208d9db87ba237dcff3436adc73408a32a3212a6d5341ec74c64ee9"
+      },
+      {
+        "path": "src\\cocos\\assets\\scripts\\features\\actors\\runtime\\FlatActors.ts",
+        "beforeSha256": "6e1b97baa514d04d7a72d5acd28caea71125ed0f5de5acdd9469f030f543863c",
+        "afterSha256": "1deb4fb88773dc23fedde4646e49dc5bb9d269f680a4a8b7651af8f52ff7486e"
+      }
+    ]
+  },
+  "memoryCoordination": "只修改上述3份代码中的查询/呈现逻辑和查询辅助数据清理，不改资源文件、贴图/模型、加载和卸载、引用计数、FrameCache、GameResources、UiSkin、角色材质或内存会话的优化。未引入依赖、常驻资源、逐击杀缓存和新的GPU缓冲。",
+  "verification": {
+    "navigation": "src/cocos/test-results/performance/cpu-query-correctness/navigation.json",
+    "navigationCoverage": "97张地图、272452个随机/边界碰撞样本、12条路线；包含密集/大障碍溢出、边界、半径及新增障碍失效检查。",
+    "stateAndVisual": "src/cocos/test-results/performance/cpu-query-correctness-retained/runtime.json",
+    "stateAndVisualCoverage": "当前保留版本：12组状态按稳定id比较，状态、动画时钟、变换、材质色完全一致；4张PNG字节完全相同。每版9000次视线和3000次实际场景移动与原判定一致，H12索引实际启用。",
+    "liveAndroid": "src/cocos/test-results/performance/cpu-query-correctness/move-live-android.json",
+    "liveAndroidCoverage": "按原有缓存碰撞足迹核对4079次实际移动，零差异。",
+    "townCollision": "src/cocos/test-results/performance/cpu-query-correctness/town-collision-final.json",
+    "townCollisionCoverage": "实际S01-T1城镇22个碰撞体，5000次移动与5000次查询保持一致；线性精确矩形检查99831次，索引后4575次，减少95.42%；61个格子、79个障碍引用。此比例是检查次数，并非CPU耗时降幅。",
+    "images": [
+      {
+        "state": "idle",
+        "byteIdenticalPng": true
+      },
+      {
+        "state": "active",
+        "byteIdenticalPng": true
+      },
+      {
+        "state": "dead",
+        "byteIdenticalPng": true
+      },
+      {
+        "state": "camera-turn",
+        "byteIdenticalPng": true
+      }
+    ],
+    "typecheck": {
+      "status": "passed",
+      "log": "src/cocos/temp/cpu-query-typecheck-retained.log"
+    },
+    "existingTests": {
+      "passed": 140,
+      "failed": 0,
+      "log": "src/cocos/temp/cpu-query-tests-retained.log"
+    }
+  },
+  "diagnosticQueryCounts": {
+    "report": "src/cocos/test-results/performance/cpu-query-moving-candidate-120s/report.json",
+    "scope": "CPU窗口之后单独10秒计数，CPU结论不使用此插桩窗口。",
+    "visibleRequests": 9943,
+    "actualRaycasts": 6928,
+    "visibilityParityMismatches": 0,
+    "facingRequests": 11366,
+    "facingCacheEligible": 9086
+  },
+  "primaryComparison": {
+    "protocol": "固定靶场20只40级怪、BOW、距离8米，6秒原生重置波次，固定移动/普攻/技能时序，两版各120秒。使用靶场原有无限资源设置。原生重置会恢复生命，未在正式游戏添加补血或改规则。",
+    "before": "src/cocos/test-results/performance/cpu-query-training-control-v2-120s/report.json",
+    "after": "src/cocos/test-results/performance/cpu-query-training-candidate-v2-120s/report.json",
+    "status": "passed-protocol-no-demonstrated-cpu-benefit",
+    "noInstrumentationInCpuWindow": [
+      "V8采样器",
+      "GPU query",
+      "截图",
+      "强制GC",
+      "构建"
+    ],
+    "beforeMetrics": {
+      "fps": 59.61464456800121,
+      "minOneSecondFps": 54,
+      "p99Ms": 20.0999999998603,
+      "mainThreadMsPerFrame": 2.665948386199221,
+      "corePercent": 51.4288273464351,
+      "normalizedCpuPercent": 12.857206836608775,
+      "drawCalls": 176,
+      "triangles": 123371
+    },
+    "afterMetrics": {
+      "fps": 59.97912544051713,
+      "minOneSecondFps": 58,
+      "p99Ms": 19.5,
+      "mainThreadMsPerFrame": 2.6444,
+      "corePercent": 53.32214717807964,
+      "normalizedCpuPercent": 13.33053679451991,
+      "drawCalls": 176,
+      "triangles": 123369
+    },
+    "comparison": {
+      "mainThreadPercent": -0.8082821974637611,
+      "cpuPercent": 3.6814369087024845,
+      "fpsDelta": 0.36448087251591943
+    },
+    "workloadEqual": true,
+    "hits": 220,
+    "skillReleases": 40,
+    "projectiles": 60,
+    "monsters": 20,
+    "waveResets": 20,
+    "deadFrames": 0,
+    "cpuNoisePolicy": "既有CPU比较噪声阈值为3个单核百分点；本轮差1.89个百分点。单次前后对照不能证实CPU净收益。",
+    "retainedBuildUrl": "http://127.0.0.1:7571/taptap-cpu-query-range/",
+    "beforeBuildUrl": "http://127.0.0.1:7571/taptap-cpu-query-control/"
+  },
+  "excludedExperiments": [
+    {
+      "report": "src/cocos/test-results/performance/cpu-query-native-control-120s/report.json",
+      "pairedWith": "src/cocos/test-results/performance/cpu-query-native-candidate-120s/report.json",
+      "reason": "自带挂机复测出现空跑，击杀46对4，不满足相同持续战斗负载；尽管既有宽松验证器显示passed，本次验收明确排除，不据此计算CPU收益。"
+    },
+    {
+      "report": "src/cocos/test-results/performance/cpu-query-moving-candidate-120s/report.json",
+      "reason": "实时诊断参考当时读取了当前碰撞节点，而原函数使用缓存足迹，出现328次移动差异，故未作为通过的整体性能验收。按相同缓存输入重新验证，Android4079次实际移动和城镇5000次移动均无差异；原失败保留。"
+    },
+    {
+      "report": "src/cocos/test-results/performance/cpu-query-training-control-120s/report.json",
+      "reason": "临时靶场脚本使用了错误菜单状态，计时前Unknown or unbuilt area:TRAINING；改用原生training-range菜单状态。未产生CPU窗口，原失败保留。"
+    },
+    {
+      "report": "src/cocos/test-results/performance/cpu-query-training-candidate-final-120s/report.json",
+      "reason": "后续尝试用角度差替代逐方向三角函数。1202376次方向差分和画面对照通过，但主线程2.6649ms/帧与原版2.6659基本一致，总CPU54.42%单核也未降低；已撤回该额外快速分支，保留更简单且已有完整测量的版本。"
+    }
+  ],
+  "limitations": [
+    "Android模拟器Chrome性能与物理TapTap手机不同；没有手机CPU/GPU、功耗和温度结论。",
+    "固定靶场不代表所有野外路线和障碍密度；碰撞索引在城镇另行验证。",
+    "CPU百分比口径：100%=一个核心，另存4核归一化百分比；GPU进程消耗的CPU不是GPU硬件利用率。"
+  ],
+  "cpuBenefit": "未证实总CPU下降，主线程基本持平。不得将查询次数降幅当作总CPU降幅。",
+  "buildHashes": {
+    "before": {
+      "temp\\render-opt-20261114\\src\\cocos\\build\\taptap-cpu-query-control\\assets\\main\\index.004cd.js": "33ef1045310bd5a2236b9c9f3320526636be081a8d81e6fcc3889ad24525c6ef"
+    },
+    "retained": {
+      "temp\\render-opt-20261114\\src\\cocos\\build\\taptap-cpu-query-range\\assets\\main\\index.8c8c4.js": "fb2442a1e19569ac076a31798c06402c649629b990aa6d55d04c91cb8257e4ea"
+    }
+  },
+  "completionAudit": {
+    "threeTargetedOptimizationsImplemented": true,
+    "exactVisibilityAndCollisionParityVerified": true,
+    "monsterAnimationAndImagesPreserved": true,
+    "existing60FpsPolicyUnchanged": true,
+    "sameFixedRangeWorkload120SecondsEach": true,
+    "cpuComparisonReportedWithoutPositiveClaim": true,
+    "memoryResourceOwnershipUntouched": true,
+    "sourceMatchesRetainedMeasuredCandidate": true,
+    "allRequiredChecksPassed": true
+  },
+  "nextEvidenceBasedTarget": "若继续降低总CPU，应回到渲染收集、原生绘制提交及GPU/合成线程的CPU开销；本轮目标函数的重复工作减少未反映为可确认的进程CPU下降。"
+}

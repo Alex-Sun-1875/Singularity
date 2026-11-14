@@ -1,0 +1,302 @@
+{
+  "title": "连续刷怪 CPU / GPU 分析",
+  "date": "2026-11-14",
+  "timeZone": "Asia/Shanghai",
+  "scope": "H12 / Lv17 / BOW / 60 FPS，复用既有 farm-driver 连续移动、真实伤害、有限药品、自然重生；只分析 CPU / GPU。无玩法或运行帧率改动。",
+  "conclusion": "本次两组5分钟记录未观察到随重生次数持续上升的CPU；主要可定位工作量为渲染提交、主角几何和HUD绘制，随后是战斗/碰撞、角色呈现和动态UI。",
+  "definitions": {
+    "cpu": "100% = 一个CPU核心；Chrome进程族合计包含GPU/合成线程消耗的CPU时间。GPU进程CPU不是GPU硬件利用率。",
+    "profile": "V8采样主线程调用栈，ms/帧是采样估计。父子函数inclusive时间不可相加。",
+    "gpu": "WebGL2 EXT_disjoint_timer_query_webgl2异步计时；工作量分项来自真实WebGL绘制调用。三角形占比和提交占比不是GPU时间占比。"
+  },
+  "continuousHunt": {
+    "androidEmulator": {
+      "evidence": "src/cocos/test-results/performance/texture-pair-before/report.json",
+      "minutes": 5,
+      "corePercent": 70.36646432100714,
+      "normalizedPercent": 17.591616080251786,
+      "logicalCores": 4,
+      "mainThreadMsPerFrame": 3.927891773450935,
+      "fps": 59.87992127618938,
+      "minOneSecondFps": 57,
+      "firstMinuteCorePercent": 76.1428933299559,
+      "lastMinuteCorePercent": 71.6330236212886,
+      "kills": 86,
+      "respawns": 80
+    },
+    "desktop": {
+      "evidence": "src/cocos/test-results/performance/cpu-gpu-audit-20261114-v3",
+      "browser": "157.0.8103.51",
+      "renderer": "ANGLE (NVIDIA, NVIDIA GeForce RTX 3080 (0x00002216) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "canvas": [
+        1688,
+        780
+      ],
+      "minutes": 5,
+      "cpuCorePercent": 53.739019376760226,
+      "mainThreadMsPerFrame": 2.7830152163047703,
+      "fps": 59.99987338284422,
+      "minOneSecondFps": 59,
+      "p99FrameMs": 18.599999994039536,
+      "maxFrameMs": 27.19999998807907,
+      "drawCalls": {
+        "min": 137,
+        "p50": 171,
+        "p95": 182,
+        "max": 204
+      },
+      "triangles": {
+        "min": 138661,
+        "p50": 140043,
+        "p95": 140939,
+        "max": 204860
+      },
+      "kills": 78,
+      "respawns": 77,
+      "firstMinuteCorePercent": 54.74297875175959,
+      "lastMinuteCorePercent": 53.74016480020789,
+      "sourceChangesDuringRun": [],
+      "pageErrors": []
+    }
+  },
+  "cpuAttribution": [
+    {
+      "file": "early-hunt.cpuprofile",
+      "frames": 903,
+      "categories": [
+        {
+          "name": "engine-render-and-ui",
+          "sampledMsPerFrame": 1.1522336655592473
+        },
+        {
+          "name": "other-script-engine-and-driver",
+          "sampledMsPerFrame": 0.6424008859357698
+        },
+        {
+          "name": "gameplay-simulation",
+          "sampledMsPerFrame": 0.2684750830564784
+        },
+        {
+          "name": "actor-presentation",
+          "sampledMsPerFrame": 0.19130786267995567
+        },
+        {
+          "name": "hud-update",
+          "sampledMsPerFrame": 0.15350055370985602
+        },
+        {
+          "name": "world-presentation",
+          "sampledMsPerFrame": 0.07469213732004429
+        },
+        {
+          "name": "combat-effects",
+          "sampledMsPerFrame": 0.0718172757475083
+        },
+        {
+          "name": "health-and-damage-feedback",
+          "sampledMsPerFrame": 0.05828017718715395
+        },
+        {
+          "name": "garbage-collector",
+          "sampledMsPerFrame": 0.029759689922480622
+        },
+        {
+          "name": "portal-hud",
+          "sampledMsPerFrame": 0.013426356589147287
+        },
+        {
+          "name": "ground-loot",
+          "sampledMsPerFrame": 0.005220376522702104
+        }
+      ]
+    },
+    {
+      "file": "late-hunt.cpuprofile",
+      "frames": 904,
+      "categories": [
+        {
+          "name": "engine-render-and-ui",
+          "sampledMsPerFrame": 1.1495055309734514
+        },
+        {
+          "name": "other-script-engine-and-driver",
+          "sampledMsPerFrame": 0.5612433628318583
+        },
+        {
+          "name": "gameplay-simulation",
+          "sampledMsPerFrame": 0.23612389380530982
+        },
+        {
+          "name": "hud-update",
+          "sampledMsPerFrame": 0.12307300884955752
+        },
+        {
+          "name": "actor-presentation",
+          "sampledMsPerFrame": 0.11962942477876105
+        },
+        {
+          "name": "health-and-damage-feedback",
+          "sampledMsPerFrame": 0.04861393805309735
+        },
+        {
+          "name": "combat-effects",
+          "sampledMsPerFrame": 0.0476858407079646
+        },
+        {
+          "name": "world-presentation",
+          "sampledMsPerFrame": 0.04196460176991151
+        },
+        {
+          "name": "portal-hud",
+          "sampledMsPerFrame": 0.005134955752212389
+        },
+        {
+          "name": "garbage-collector",
+          "sampledMsPerFrame": 0.0035896017699115043
+        },
+        {
+          "name": "ground-loot",
+          "sampledMsPerFrame": 0.003038716814159292
+        }
+      ]
+    }
+  ],
+  "frozenRenderWorkload": {
+    "evidence": "src/cocos/test-results/performance/cpu-gpu-render-breakdown-20261114/report.json",
+    "method": "public Director.pause()固定同一模拟时刻；正序和倒序排除各组后还原。两次完整帧和分组计数相同。无相机时Cocos计数器会保留旧值，使用WebGL实际调用计数确认0绘制。",
+    "full": {
+      "drawCalls": 170,
+      "triangles": 139069
+    },
+    "hero": {
+      "drawCalls": 40,
+      "triangles": 115432
+    },
+    "cast": {
+      "drawCalls": 8,
+      "triangles": 16
+    },
+    "effects": {
+      "drawCalls": 2,
+      "triangles": 10
+    },
+    "loot": {
+      "drawCalls": 0,
+      "triangles": 0
+    },
+    "ui": {
+      "drawCalls": 109,
+      "triangles": 11367
+    },
+    "world": {
+      "drawCalls": 61,
+      "triangles": 127702
+    },
+    "heroTriangleShare": 0.8300340118933767,
+    "uiDrawCallShare": 0.6411764705882353
+  },
+  "desktopGpuTime": {
+    "scope": "RTX3080桌面Chrome正常走打的5秒诊断窗口；含异步query观测。另有模拟器和用户应用共享宿主，GPU耗时波动，不能把短排除窗口差值当作可重复优化收益。",
+    "samples": 300,
+    "p50Ms": 2.19648,
+    "p95Ms": 6.083584,
+    "maxMs": 8.424448,
+    "disjointCount": 0
+  },
+  "findings": [
+    {
+      "priority": 1,
+      "part": "HUD/UI 与引擎提交",
+      "cpu": "Root.frameMove约1.15ms/帧，其中UI.update约0.34–0.37ms/帧；Hud.update另约0.12–0.15ms/帧，内含MiniMap。",
+      "gpuWorkload": "固定帧UI 109/170次绘制调用（64.1%），11367个三角形。",
+      "locations": [
+        "src/cocos/assets/scripts/app/Hud.ts:350",
+        "src/cocos/assets/scripts/features/navigation/runtime/MiniMap.ts:70",
+        "src/cocos/assets/scripts/features/combat/runtime/EnemyCombatFeedback.ts:108"
+      ],
+      "interpretation": "节点遍历、批次收集、Graphics/文字/贴图之间的提交；布局不变仍存在每帧渲染开销。应以具体绘制分项为后续优化依据。"
+    },
+    {
+      "priority": 1,
+      "part": "3D主角、发型、靴子、弓和箭袋",
+      "gpuWorkload": "固定帧主角40次提交、115432个实际提交三角形，占总量83.0%；MeshRenderer库存的几何三角形与经过实际绘制路径后的统计不是同一口径。",
+      "locations": [
+        "src/cocos/assets/scripts/features/actors/runtime/Actors.ts:352",
+        "src/cocos/assets/scripts/features/actors/runtime/NativeActorMaterials.ts:89",
+        "src/cocos/assets/resources/actors/raphael/hair-curly.glb"
+      ],
+      "interpretation": "主角多部件和PBR/蒙皮是明确的GPU几何工作来源；已含本轮已有发型精简，不能重复把旧版减少量当新收益。尚未逐通道归因额外绘制遍数。"
+    },
+    {
+      "priority": 2,
+      "part": "战斗模拟、移动碰撞、视线",
+      "cpu": "GameSession.advance约0.236–0.268ms/帧；其中move约0.096–0.105ms/帧，enemyStep约0.087–0.090ms/帧。SceneBuilder.visible约0.076–0.082ms/帧，和前述调用存在重叠。",
+      "locations": [
+        "src/cocos/assets/scripts/core/GameSession.ts:427",
+        "src/cocos/assets/scripts/features/world/runtime/SceneBuilder.ts:631",
+        "src/cocos/assets/scripts/features/navigation/runtime/Navigation.ts:10"
+      ],
+      "interpretation": "每步遍历敌人、移动/碰撞、Bullet视线；dt超过20ms时advance分多步，低帧时同帧计算会增多。敌人规模影响这部分，当前19个状态槽未随77次重生增加。"
+    },
+    {
+      "priority": 2,
+      "part": "角色动画与2D怪物呈现",
+      "cpu": "Player3DActors.update约0.12–0.19ms/帧；FlatActors对敌人逐帧采样、朝向、贴图UV和颜色处理，没有在此更新入口先按视口跳过远处敌人的呈现计算。",
+      "locations": [
+        "src/cocos/assets/scripts/features/actors/runtime/Player3DActors.ts:32",
+        "src/cocos/assets/scripts/features/actors/runtime/FlatActors.ts:307"
+      ],
+      "gpuWorkload": "本固定帧屏内怪物为8次提交、16个三角形；此数不能扩大为任意镜头或怪物密度。"
+    },
+    {
+      "priority": 2,
+      "part": "弹道、拖尾、粒子和技能叠加",
+      "cpu": "Effects.update普通走打约0.048–0.072ms/帧；这不含所有引擎粒子模拟、渲染和GPU成本。",
+      "locations": [
+        "src/cocos/assets/scripts/features/combat/runtime/Effects.ts:318",
+        "src/cocos/assets/scripts/shared/assets/VfxAssets.ts:117"
+      ],
+      "gpuWorkload": "连续战斗提交中位171、最高204；三角形中位140043、最高204860。固定帧仅有2次特效绘制，不能用该瞬时帧排除大招峰值。",
+      "interpretation": "透明拖尾与粒子叠加会增加几何/上传/混合工作；手机fill-rate是否成为瓶颈尚未实测。"
+    },
+    {
+      "priority": 3,
+      "part": "地图卡片与探索小地图",
+      "cpu": "FlatWorldPresentation约0.042–0.075ms/帧，MiniMap约0.048–0.069ms/帧（包含在Hud.update内）。",
+      "locations": [
+        "src/cocos/assets/scripts/features/world/runtime/FlatWorldLayers.ts:238",
+        "src/cocos/assets/scripts/features/navigation/runtime/MiniMap.ts:70"
+      ],
+      "interpretation": "卡片剔除、遮挡淡化、探索后雾层重绘、约10Hz标记更新；当前已有缓存，不能描述成整张地图每帧重建。"
+    },
+    {
+      "priority": 3,
+      "part": "血条/飘字、掉落物与存档",
+      "cpu": "EnemyCombatFeedback约0.049–0.058ms/帧，GroundLootPresentation约0.003–0.005ms/帧。存档有约2秒一次的序列化/校验/同步写入路径，但本轮未证实为主热点。",
+      "locations": [
+        "src/cocos/assets/scripts/features/combat/runtime/EnemyCombatFeedback.ts:188",
+        "src/cocos/assets/scripts/features/equipment/runtime/GroundLootPresentation.ts:62",
+        "src/cocos/assets/scripts/features/persistence/common/SaveStore.ts:47"
+      ],
+      "interpretation": "旧版投影重复读窗口尺寸已在所测冻结构建中缓存，当前不列为首要问题。掉落和存档可随游戏状态增大而影响后续成本，需要更长实测才能判断，非当前确定主因。"
+    }
+  ],
+  "limitations": [
+    "只覆盖H12/Lv17/BOW和5分钟自然刷怪，不能外推所有职业、20怪大招或30分钟热降频。",
+    "独立桌面诊断和现有Android报告来自不同环境，只分别描述，不跨环境计算优化百分比。",
+    "桌面GPU query有效，但分组短窗口GPU时间噪声大，未把绘制量降幅当作实际GPU时间收益。",
+    "TapTap手机CPU/GPU利用率、硬件GPU时间、功耗和温度未取得；最终平台判断仍需真实AppID和目标设备。",
+    "独立编辑器预览两次因发型资源启动失败，失败报告保留；正式诊断改用已完成刷怪验证的冻结构建，未修改或重启另一会话。"
+  ],
+  "evidence": {
+    "sources": "src/cocos/test-results/performance/cpu-gpu-audit-20261114-v3/source-files.json",
+    "cpu": "src/cocos/test-results/performance/cpu-gpu-audit-20261114-v3/cpu-attribution.json",
+    "desktop": "src/cocos/test-results/performance/cpu-gpu-audit-20261114-v3/report.json",
+    "gpu": "src/cocos/test-results/performance/cpu-gpu-render-breakdown-20261114/report.json"
+  },
+  "references": [
+    "https://registry.khronos.org/webgl/extensions/EXT_disjoint_timer_query_webgl2/",
+    "https://docs.cocos.com/creator/3.8/manual/en/shader/effect-builtin-unlit.html",
+    "https://docs.cocos.com/creator/3.8/manual/en/engine/renderable/model-component.html"
+  ]
+}

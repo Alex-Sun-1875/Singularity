@@ -1,0 +1,17 @@
+export const zhCN={
+ moveToSlot:'移至{slot}槽',slotMoved:'{skill}已移至{slot}槽，原槽技能自动交换。',
+ 'formation.horde':'群怪实战',groupDetail:'近战、盾兵、远程混编 · 会追击、攻击，可击杀',monsterCount:'怪物数量',monsterCountValue:'{count}只 · 点击轮换 5 / 10 / 20只',newWave:'再来一波',newWaveDetail:'重新生成整群怪物，恢复状态并清空统计',groupStats:'存活 {remaining}/{total} · 击杀 {defeated}',hudGroupArea:'群怪实战 · 存活 {count}/{total}', 'monster.raider':'近战怪','monster.shield':'盾兵','monster.archer':'远程怪',
+ hudGroupProgress:'群怪击杀 {kills}/{total}',
+ entryDetail:'独立靶位 · 技能试放 · 不保存进度',skillNotice:'选择技能自动装入；切换等级后关闭面板即可试放。',mobilityReady:'闪避已就绪，使用独立闪避按钮',equipped:'已装入{skill}与对应流派武器',debugTitle:'独立靶场 · 临时不保存',equip:'装入选中技能与武器',passiveInstruction:'选择技能将自动装入被动槽。',activeInstruction:'普通技能 Q/E/R/T 或1—4，终极 G；选择技能自动装入。',target:'训练靶',
+ skillsSummary:'Lv40 · 全流派 · 1—5级 · 不保存',resetDetail:'靶位、状态与统计归零',retaliate:'反击演练',retaliateOn:'开启 · 靶标会追击和攻击，用于防守测试',retaliateOff:'关闭 · 靶标不主动攻击',injure:'生命减半',injureDetail:'用于测试治疗技能，保持当前技能配置',
+ title:'技能靶场',description:'临时角色 Lv40 · 2米地格 · 靶标不主动攻击\n退出返回原旅程，靶场配置和统计不写入存档。',
+ skills:'选择技能与等级',skillsDetail:'全部流派 · 主动、终极、被动 · 1—5级',
+ 'formation.single':'单靶','formation.cluster':'五靶密集阵','formation.line':'五靶直线阵',selected:'已选中',
+ distance:'切换起始靶距',distanceValue:'{metres}米 · 点击轮换 1.5 / 4 / 8 / 12米',
+ resource:'职业资源',unlimited:'无限 · 每帧补满，保留技能冷却',normal:'正常消耗与恢复',
+ report:'本轮统计',stats:'伤害 {damage} · 命中 {hits} · MISS {misses} · 暴击 {criticals}\nDPS {dps} · 首次命中后 {seconds}秒',
+ reset:'重置本轮',exit:'退出靶场',resume:'继续试放',
+ reportDescription:'统计实际扣血事件，包含多段、持续与附加伤害。命中次数为伤害事件数；DPS从首次命中计时，包含停手时间，至少按1秒计算。重置或变更技能配置后清零。',
+ toolbar:'靶场设置',hudArea:'技能靶场 · {count}靶 · {distance}m',hudDamage:'伤害 {damage} · 命中 {hits}',hudDps:'DPS {dps} · 设置查看统计',
+ resetNotice:'靶位、生命、资源、冷却与本轮统计已重置',saved:'靶场临时状态 · 不保存',
+};

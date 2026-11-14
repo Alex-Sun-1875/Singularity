@@ -1,0 +1,13 @@
+# Source-only actor preparation
+
+`python tools/design/prepare-enemy-actor.py <per-ID-folder>` reads that folder's `processing-spec.json` and the explicit generation output; `--id`, `--sheet` and `--units-per-pixel` can set one-off values. The per-ID spec is the reproducible source of selected repaired sheet, actual direction order, one global pixel/world scale and reviewed anchors. It never writes generation.json, invokes a model or installs runtime resources.
+
+The accepted pilot method is reused: solid-body seeds at alpha64 identify subjects while all original RGBA pixels with alpha>3 are retained exactly once, including faint contact shadows; only alpha<=3 is cleared. Disconnected lens rings or three statues on one plinth can have multiple seed components in one cell. Detached edges return to nearest subject, and complete component envelopes preserve tips crossing nominal grid lines. If one cell lacks a subject, processing stops instead of borrowing another identity.
+
+No pose is fitted independently to a box. All16 cells use one common canvas at least384; a wider source weapon expands every cell rather than shrinking that pose. `processed/atlas.png` is the exact-pixel source pack, normally1536 square. `processed/runtime-1024/` is a single whole-atlas Pillow LANCZOS resize; all origins/rectangles and inverse UPP conversion preserve physical scale. The helper also supports larger exact-pixel packs when genuine source tips need them.
+
+Human walking aligns a narrow head/helmet ROI by translation only, so moving shields do not lift the root. Machines use their rigid gear/chassis ROI; `coreRois` can specialize directions, `corePoints` can set reviewed points. All override coordinates use the original nominal source-cell local pixels, before packing. `origins` keys are `row,column`. Primary actions default to the idle support projection, preserving crouch; inspect planted feet/base and provide explicit support origins rather than anchoring a weapon/stake tip. Lens0-leg and stationary3-statue plinth paths use ground projection and base geometry, not fictional feet/walk clips.
+
+A source-static pass lives only in `processed/review.json`; the producing agent's generation/art-review records remain separate. Missing opposite directions, almost-identical side walk poses, identity drift or clipped weapons are holds for targeted image edits, never mirrored/fabricated fallback drawings. Actor batches cover primary poses, not complete per-move animation or3D.
+
+`python tools/design/prepare-enemy-actor.py --batch` reads independent per-ID evidence and writes derived `batch-status.json`/`batch-review-contact.jpg` only. `batch-plan.json` owns allocation/holds. Root must authorize final installation/mapping after batch review.

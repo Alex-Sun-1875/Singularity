@@ -1,0 +1,339 @@
+[
+  {
+    "id": "WAR_01",
+    "name": "断空斩",
+    "windup": 0.14,
+    "recovery": 0.2,
+    "ranks": [
+      {
+        "rank": 1,
+        "effect": "前方110°双斩",
+        "geometry": {
+          "kind": "meleeFan",
+          "origin": "caster",
+          "radiusMetres": 2.4,
+          "angleDegrees": 110
+        },
+        "hits": 2,
+        "radius": 0,
+        "range": 2.4,
+        "targets": null,
+        "peak": 0.08
+      },
+      {
+        "rank": 2,
+        "effect": "扇面120°",
+        "geometry": {
+          "kind": "meleeFan",
+          "origin": "caster",
+          "radiusMetres": 2.4,
+          "angleDegrees": 120
+        },
+        "hits": 2,
+        "radius": 0,
+        "range": 2.4,
+        "targets": null,
+        "peak": 0.09
+      },
+      {
+        "rank": 3,
+        "effect": "三段连斩、扇面130°",
+        "geometry": {
+          "kind": "meleeFan",
+          "origin": "caster",
+          "radiusMetres": 2.54,
+          "angleDegrees": 130
+        },
+        "hits": 3,
+        "radius": 0,
+        "range": 2.54,
+        "targets": null,
+        "peak": 0.1
+      },
+      {
+        "rank": 4,
+        "effect": "扇面140°，近身覆盖更稳",
+        "geometry": {
+          "kind": "meleeFan",
+          "origin": "caster",
+          "radiusMetres": 2.64,
+          "angleDegrees": 140
+        },
+        "hits": 3,
+        "radius": 0,
+        "range": 2.64,
+        "targets": null,
+        "peak": 0.12
+      },
+      {
+        "rank": 5,
+        "effect": "扇面150°；末刀命中强化下一次普攻20%，3秒内一次",
+        "geometry": {
+          "kind": "meleeFan",
+          "origin": "caster",
+          "radiusMetres": 2.76,
+          "angleDegrees": 150
+        },
+        "hits": 3,
+        "radius": 0,
+        "range": 2.76,
+        "targets": null,
+        "peak": 0.14
+      }
+    ]
+  },
+  {
+    "id": "BOW_02",
+    "name": "连穿箭",
+    "windup": 0.3,
+    "recovery": 0.2,
+    "ranks": [
+      {
+        "rank": 1,
+        "effect": "同一支箭连续转向2敌，首击固定半径3米",
+        "geometry": {
+          "kind": "impactChainProjectile",
+          "origin": "primaryImpact",
+          "radiusMetres": 3,
+          "primaryProjectileCount": 1,
+          "childProjectileLimit": 0,
+          "totalTargetLimit": 2
+        },
+        "hits": 1,
+        "radius": 3,
+        "range": 12,
+        "targets": 2,
+        "peak": 0.08
+      },
+      {
+        "rank": 2,
+        "effect": "3敌、半径4米",
+        "geometry": {
+          "kind": "impactChainProjectile",
+          "origin": "primaryImpact",
+          "radiusMetres": 4,
+          "primaryProjectileCount": 1,
+          "childProjectileLimit": 0,
+          "totalTargetLimit": 3
+        },
+        "hits": 1,
+        "radius": 4,
+        "range": 13.5,
+        "targets": 3,
+        "peak": 0.09
+      },
+      {
+        "rank": 3,
+        "effect": "4敌、半径5米，后续伤害80%",
+        "geometry": {
+          "kind": "impactChainProjectile",
+          "origin": "primaryImpact",
+          "radiusMetres": 5,
+          "primaryProjectileCount": 1,
+          "childProjectileLimit": 0,
+          "totalTargetLimit": 4
+        },
+        "hits": 1,
+        "radius": 5,
+        "range": 15,
+        "targets": 4,
+        "peak": 0.1
+      },
+      {
+        "rank": 4,
+        "effect": "5敌、半径6米，后续伤害85%",
+        "geometry": {
+          "kind": "impactChainProjectile",
+          "origin": "primaryImpact",
+          "radiusMetres": 6,
+          "primaryProjectileCount": 1,
+          "childProjectileLimit": 0,
+          "totalTargetLimit": 5
+        },
+        "hits": 1,
+        "radius": 6,
+        "range": 16.5,
+        "targets": 5,
+        "peak": 0.12
+      },
+      {
+        "rank": 5,
+        "effect": "6敌、半径7米，后续伤害90%",
+        "geometry": {
+          "kind": "impactChainProjectile",
+          "origin": "primaryImpact",
+          "radiusMetres": 7,
+          "primaryProjectileCount": 1,
+          "childProjectileLimit": 0,
+          "totalTargetLimit": 6
+        },
+        "hits": 1,
+        "radius": 7,
+        "range": 18,
+        "targets": 6,
+        "peak": 0.14
+      }
+    ]
+  },
+  {
+    "id": "FIR_02",
+    "name": "焚星坠落",
+    "windup": 0.41,
+    "recovery": 0.2,
+    "ranks": [
+      {
+        "rank": 1,
+        "effect": "选点火核、半径2.8米主爆",
+        "geometry": {
+          "kind": "filledImpactDisk",
+          "origin": "aimPoint",
+          "radiusMetres": 2.8
+        },
+        "hits": 1,
+        "radius": 2.8,
+        "range": 12,
+        "targets": null,
+        "peak": 0.08
+      },
+      {
+        "rank": 2,
+        "effect": "半径3.2米",
+        "geometry": {
+          "kind": "filledImpactDisk",
+          "origin": "aimPoint",
+          "radiusMetres": 3.2
+        },
+        "hits": 1,
+        "radius": 3.2,
+        "range": 13.5,
+        "targets": null,
+        "peak": 0.09
+      },
+      {
+        "rank": 3,
+        "effect": "半径3.6米；主爆75%＋0.30秒后次爆25%",
+        "geometry": {
+          "kind": "filledImpactDisk",
+          "origin": "aimPoint",
+          "radiusMetres": 3.6
+        },
+        "hits": 2,
+        "radius": 3.6,
+        "range": 15,
+        "targets": null,
+        "peak": 0.1
+      },
+      {
+        "rank": 4,
+        "effect": "半径4米、选点16.5米",
+        "geometry": {
+          "kind": "filledImpactDisk",
+          "origin": "aimPoint",
+          "radiusMetres": 4
+        },
+        "hits": 2,
+        "radius": 4,
+        "range": 16.5,
+        "targets": null,
+        "peak": 0.12
+      },
+      {
+        "rank": 5,
+        "effect": "半径4.5米；次爆命中已燃烧目标时刷新自身已有燃烧，持续上限照旧",
+        "geometry": {
+          "kind": "filledImpactDisk",
+          "origin": "aimPoint",
+          "radiusMetres": 4.5
+        },
+        "hits": 2,
+        "radius": 4.5,
+        "range": 18,
+        "targets": null,
+        "peak": 0.14
+      }
+    ]
+  },
+  {
+    "id": "THU_02",
+    "name": "连锁雷弧",
+    "windup": 0.19,
+    "recovery": 0.2,
+    "ranks": [
+      {
+        "rank": 1,
+        "effect": "固定首击包络，2敌、半径3米",
+        "geometry": {
+          "kind": "boundedArcGraph",
+          "origin": "primaryImpact",
+          "radiusMetres": 3,
+          "totalTargetLimit": 2
+        },
+        "hits": 1,
+        "radius": 3,
+        "range": 12,
+        "targets": 2,
+        "peak": 0.08
+      },
+      {
+        "rank": 2,
+        "effect": "3敌、半径4米",
+        "geometry": {
+          "kind": "boundedArcGraph",
+          "origin": "primaryImpact",
+          "radiusMetres": 4,
+          "totalTargetLimit": 3
+        },
+        "hits": 1,
+        "radius": 4,
+        "range": 13.5,
+        "targets": 3,
+        "peak": 0.09
+      },
+      {
+        "rank": 3,
+        "effect": "4敌、半径5米",
+        "geometry": {
+          "kind": "boundedArcGraph",
+          "origin": "primaryImpact",
+          "radiusMetres": 5,
+          "totalTargetLimit": 4
+        },
+        "hits": 1,
+        "radius": 5,
+        "range": 15,
+        "targets": 4,
+        "peak": 0.1
+      },
+      {
+        "rank": 4,
+        "effect": "6敌、半径6.5米",
+        "geometry": {
+          "kind": "boundedArcGraph",
+          "origin": "primaryImpact",
+          "radiusMetres": 6.5,
+          "totalTargetLimit": 6
+        },
+        "hits": 1,
+        "radius": 6.5,
+        "range": 16.5,
+        "targets": 6,
+        "peak": 0.12
+      },
+      {
+        "rank": 5,
+        "effect": "8敌、半径8米，完整近邻雷网",
+        "geometry": {
+          "kind": "boundedArcGraph",
+          "origin": "primaryImpact",
+          "radiusMetres": 8,
+          "totalTargetLimit": 8
+        },
+        "hits": 1,
+        "radius": 8,
+        "range": 18,
+        "targets": 8,
+        "peak": 0.14
+      }
+    ]
+  }
+]

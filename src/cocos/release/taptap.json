@@ -1,0 +1,139 @@
+{
+  "schemaVersion": 1,
+  "presentation": "painted-world-native-hero",
+  "orientation": "landscape",
+  "initialPackageBudgetMiB": 20,
+  "engineWasmSubpackage": true,
+  "computationWasm": true,
+  "packs": [
+    {
+      "path": "ui/quiet-bronze",
+      "name": "panel-art"
+    },
+    {
+      "path": "ui/combat-relief",
+      "name": "skill-icons"
+    },
+    {
+      "path": "atlas",
+      "name": "map-atlas"
+    },
+    {
+      "path": "audio/music",
+      "name": "background-music"
+    },
+    {
+      "path": "environment",
+      "name": "environment",
+      "includeFiles": [
+        "library.json"
+      ]
+    },
+    {
+      "path": "equipment",
+      "name": "equipment-art",
+      "excludeFiles": [
+        "v3/bow-progression.png",
+        "v3/jewelry-progression.png",
+        "v3/oath-progression-v3b.png",
+        "v3/seeker-progression.png",
+        "v3/staff-progression.png",
+        "v3/sword-progression.png",
+        "v3/wind-progression.png"
+      ]
+    },
+    {
+      "path": "vfx",
+      "name": "combat-vfx"
+    },
+    {
+      "path": "flat2d/maps",
+      "name": "painted-interiors",
+      "includeImages": [
+        "inn-readable-v4.png"
+      ]
+    },
+    {
+      "path": "flat2d/world",
+      "name": "painted-props",
+      "includeImages": [
+        "water-v1.png",
+        "small-props-natural-v3.png",
+        "structures-natural-v3.png",
+        "house-natural-v3.png",
+        "tower-natural-v3.png"
+      ]
+    },
+    {
+      "path": "flat2d/terrain-v1",
+      "name": "painted-terrain"
+    },
+    {
+      "path": "flat2d/waypoints-v1",
+      "name": "waystones",
+      "includeImages": [
+        "rune-sigil-v8.png",
+        "rune-glow-v8.png"
+      ]
+    },
+    {
+      "path": "actors/raphael",
+      "name": "actor-raphael",
+      "excludeFiles": [
+        "raphael.fbx",
+        "raphael-designed.glb",
+        "raphael-refined.glb",
+        "inspection.json"
+      ]
+    },
+    {
+      "path": "actors/player-melee-combo",
+      "name": "hero-melee-combo"
+    },
+    {
+      "path": "actors/appearance-v3",
+      "name": "hero-appearance",
+      "referencedMaterialManifests": [
+        "actors/raphael/manifest.json"
+      ]
+    },
+    {
+      "path": "actors/native-shared",
+      "name": "native-materials",
+      "referencedMaterialManifests": [
+        "actors/raphael/manifest.json"
+      ]
+    },
+    {
+      "path": "actors/hairstyles-v3",
+      "name": "hero-hairstyles"
+    },
+    {
+      "path": "actors/props-native",
+      "name": "native-weapons"
+    }
+  ],
+  "collections": [
+    {
+      "path": "flat2d/characters",
+      "namePrefix": "cast-",
+      "exclude": [
+        "raphael"
+      ],
+      "referencedImagesOnly": true
+    }
+  ],
+  "excludedResourceTrees": [
+    "actors",
+    "flat2d/characters",
+    "surfaces"
+  ],
+  "excludedResourceFiles": [
+    "flat2d/hero-head-appearance-v5.png",
+    "flat2d/hero-head-design-reference.png",
+    "flat2d/hero-head-face-v3.png",
+    "flat2d/hero-head-soft-geralt-v3.png",
+    "flat2d/hero-reference.png"
+  ],
+  "note": "Only the current painted world and native 3D hero ship in this profile. Historical art and models remain in the source project. No account credentials belong in this file."
+}

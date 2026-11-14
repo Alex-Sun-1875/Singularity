@@ -1,0 +1,138 @@
+{
+  "direction": "front",
+  "status": "single-frame local deterministic guide; requires native masked Qwen seam retouch and final artistic review",
+  "paths": {
+    "original": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\front\\original-rgba.png",
+    "guide": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\front\\guide-rgba.png",
+    "mask": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\front\\edit-mask.png",
+    "reference": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\front\\reference-standing-rgba.png",
+    "prompt": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\front\\prompt.txt"
+  },
+  "source_waist_y": 365,
+  "guide_waist_y": 343.0,
+  "waist_raise_px": 22.0,
+  "head": {
+    "method": "Approved standing head pixels 1:1 integer translation, no resampling or regeneration",
+    "translation_xy": [
+      11,
+      10
+    ],
+    "scale": 1,
+    "source_polygon": [
+      [
+        233,
+        82
+      ],
+      [
+        273,
+        83
+      ],
+      [
+        291,
+        106
+      ],
+      [
+        296,
+        140
+      ],
+      [
+        287,
+        163
+      ],
+      [
+        281,
+        177
+      ],
+      [
+        282,
+        184
+      ],
+      [
+        270,
+        194
+      ],
+      [
+        241,
+        194
+      ],
+      [
+        231,
+        184
+      ],
+      [
+        230,
+        174
+      ],
+      [
+        221,
+        157
+      ],
+      [
+        215,
+        133
+      ],
+      [
+        215,
+        111
+      ]
+    ],
+    "nontransparent_head_layer_pixels_exact_reference": true,
+    "running_head_landing_and_forward_body_lean_preserved": true
+  },
+  "body_mapping": {
+    "source_y_knots": [
+      0.0,
+      210.0,
+      330.0,
+      435.0,
+      618.0,
+      768.0
+    ],
+    "destination_y_knots": [
+      0.0,
+      210.0,
+      308.0,
+      413.0,
+      618.0,
+      768.0
+    ],
+    "x_coordinates": "unchanged",
+    "waist_coat_plateau": "source y330..435 rigid integer translation -22px; complete arms/weapons excluded",
+    "waist_to_fixed_ankle_y618_gain_percent": 8.696,
+    "overall_height_target": "unchanged head landing, original ground boots and anchor; no bbox fit"
+  },
+  "protection": {
+    "original_arms_hands_pixels_exact": true,
+    "original_boot_pixels_exact": true,
+    "original_weapon_pixels_exact": true,
+    "mask_intersection_protected_pixels": 0,
+    "head_hands_equipment_independent_masks": true
+  },
+  "geometry_changed_pixels": 45064,
+  "qwen_edit_mask_nonzero_pixels": 32993,
+  "occlusion_underlay": {
+    "method": "SciPy distance_transform_edt nearest valid original cloth pixels under independent original hand/sword/boot layers; Qwen mask includes newly revealed underlay seams",
+    "source_pixels": 10311,
+    "visible_destination_pixels": 1103
+  },
+  "foot_anchor_xy": [
+    256,
+    712
+  ],
+  "native_runtime_scale_modified": false,
+  "production_modified": false,
+  "new_model_inference": false,
+  "cloud_generation": false,
+  "limitations": [
+    "Body-only guide is provisional until final local Qwen output and composite visual review; measured projected garment distance is not anatomical bone length.",
+    "Lifted boot stays exactly original; the bent leg therefore keeps phase/foot placement, with larger local knee transition than the grounded leg.",
+    "Back-run sword remains original in this body guide; a separate independent sword layer can be integrated afterward."
+  ],
+  "sha256": {
+    "original-rgba.png": "1ada50d505569159058fd49803a9ad243a3a53991e73d8867493a9aff1132f7b",
+    "reference-standing-rgba.png": "cb9f904ab1c10d9acb9b1c643c9d40fd9ca0b86600e6f7cf65dd9059df45025f",
+    "guide-rgba.png": "07da115b9b6a6b2632a3e456b19010d19270ac23017c5eed321edae8ef968a0f",
+    "edit-mask.png": "95dfef329ea57b4f351119ac7e7113a4d36b71e71b9bea3173a23b2b8516a347",
+    "prompt.txt": "ba799437b5c67066c573564999f5ce6f98b656866f259209dfdfaec73b632e17"
+  }
+}

@@ -1,0 +1,219 @@
+{
+  "date": "2026-11-08",
+  "reviewer": "independent agent shape_review",
+  "reviewScope": "Latest current5: restored original first-hit split bow, round dim dark-red arcane, no frost card. WAR/FIR/THU evidence reused after matching image hashes to archived review.",
+  "inputs": [
+    {
+      "file": "current-overview.jpg",
+      "sha256": "07cbc70306031585bbb6e43d4b507cdbf203275de18dfde85abe198a405b4acf"
+    },
+    {
+      "file": "current-silhouettes.jpg",
+      "sha256": "0bd81d26ccdd143f42ba47e0280f82630854c977a59c6557f6fb1a3871549d83"
+    }
+  ],
+  "additionalInspection": [
+    "updated current-overview.jpg and current-silhouettes.jpg",
+    "combat-bow.png matched to previously inspected native source SHA256",
+    "native combat-arc-round-v5.png",
+    "WAR/FIR/THU image hashes matched archived evidence"
+  ],
+  "currentStyleCards": [
+    "WAR",
+    "BOW",
+    "FIR",
+    "THU",
+    "ARC"
+  ],
+  "frostCardPresent": false,
+  "countLabelSeenInOverview": "37 skills / 185 ranks; no frost card; catalog arithmetic out of scope",
+  "overall": {
+    "fiveVisualFamiliesDistinctInGrayscale": true,
+    "qualitativeRangedSeparationVisible": true,
+    "immediateMandatoryDirectionReworkIdentified": false,
+    "status": "BOW and THU retain user-selected directions; ARC round-dark-red sample and remaining new work are concepts awaiting user review",
+    "preciseMetresVerified": false,
+    "strictSameFormationAndCameraVerified": false,
+    "animationVerified": false,
+    "actualProjectileCountsAndDamageVerified": false,
+    "runtimeImplementedOrReady": false,
+    "quantitativeBrightnessVerified": false
+  },
+  "entries": [
+    {
+      "style": "WAR",
+      "file": "combat-war-awakened.png",
+      "status": "concept-candidate-ready-for-user-review",
+      "statusZh": "概念可送审，非用户已接受",
+      "constraints": {
+        "rangedCasterEnemySeparation": "visually consistent",
+        "flyingBladeCorridor": "visually consistent",
+        "targetContactHighlights": "visually consistent"
+      },
+      "evidence": [
+        "左前施法者与右后敌群之间保留明显空地。",
+        "刃弧与长向切割轨迹跨越空地，在路径上敌人位置出现局部接触亮点。",
+        "灰度下是明亮弧刃走廊，与直箭、火团、雷网和独立载荷不同。"
+      ],
+      "limitations": [
+        "多个刃弧是静态概念中的路径阶段，不能由图中刃弧数量认定真实伤害段数。",
+        "9—14m普通射程、18m终极走廊及宽度仍须实机坐标和判定验证。"
+      ],
+      "sha256": "9ade26ff82130ec3d0d3a2e7d0f55fdfa0a1fa716010bb53f81b96ff7b30c5c5",
+      "size": [
+        1536,
+        1024
+      ],
+      "newUserAcceptanceClaimed": false,
+      "runtimeReady": false,
+      "evidenceReusedFromHashMatchedArchive": "independent-art-review-straight-arrow-red-core-v1.json"
+    },
+    {
+      "style": "BOW",
+      "file": "combat-bow.png",
+      "status": "concept-direction-explicitly-selected-by-user-as-relayed",
+      "statusZh": "保留用户明确选回的首版分裂箭方向，非运行验收",
+      "priorUserDirectionAcceptedAsRelayedByRoot": true,
+      "constraints": {
+        "restoredExactOriginalAsset": "combat-bow.png selected by user reference thumbnail as confirmed by root",
+        "primaryHitThenChildBranches": "visually consistent",
+        "boundedChildrenAndFirstImpactEnvelope": "design rule only; not verified by static image",
+        "smoothArcFrozenAtFirstImpact": "visible smooth arcs; freeze timing not verifiable in static image",
+        "noInFlightHomingRecursionRefillOrWallPass": "not verifiable in static image"
+      },
+      "evidence": [
+        "恢复原combat-bow.png，当前原图SHA256与先前已经原图检查的历史审阅一致；不是后来单箭转向或直线贯穿图。",
+        "主箭从左前到前排首击目标，多个细子箭路线从该接触点通向后排不同敌人，图中首击后分裂拓扑清楚。",
+        "本轮用户按附图明确选回的是这一方向；其他弓术仍直线，不能把分裂箭例外泛化。"
+      ],
+      "limitations": [
+        "静态图不能验证五级子箭1—5/总2—6目标的真实弹体数、首击点3—7m等级包络、选敌/弧线冻结时点。",
+        "不中途追踪、不递归分裂、不补位、不穿墙仍需数据与运行验证，不能由平滑弧线自动推断通过。",
+        "此前单箭要求已被本轮恢复首版分裂箭覆盖，旧直线单箭报告已另存归档，不作为当前BOW_02标准。"
+      ],
+      "sha256": "92b61c5eb03ac2f6902359c824bb2de0ff5b9195f8f3d3b9d3ec239881c280ab",
+      "size": [
+        1536,
+        1024
+      ],
+      "newUserAcceptanceClaimed": false,
+      "runtimeReady": false
+    },
+    {
+      "style": "FIR",
+      "file": "combat-fir-redesign-v4.png",
+      "status": "concept-candidate-ready-for-user-review",
+      "statusZh": "概念可送审，非用户已接受",
+      "constraints": {
+        "remoteExplosion": "visually consistent",
+        "volumetricConnectedExplosionBody": "visually consistent",
+        "notHollowPerimeterOnly": "visually consistent",
+        "singleFallingCoreBeforeImpact": "not shown in this impact still"
+      },
+      "evidence": [
+        "火焰集中在远端敌群，施法者与爆炸团之间仍有大片空地。",
+        "爆燃呈连续滚卷的立体外壳，内部有亮核和厚火舌，已不是只有边缘亮环。",
+        "中心与边缘敌人的身体/脚部有火焰接触，外侧两名敌人未被同等火面覆盖。",
+        "灰度下是有体积的宽亮团，与其他四系线状或弹体形状不同。"
+      ],
+      "limitations": [
+        "这张展示爆炸阶段，未同时展示火核下坠；不能凭单帧证明全过程只有单一火核。",
+        "高亮处遮住部分腿脚；实机需要短峰值后退亮，并以统一爆炸中心组织火舌，避免退化为每敌复制小旋涡。",
+        "2.8—4.5m半径、完整伤害覆盖、既有伤害不变及爆炸各时点尚未由图片验证。"
+      ],
+      "sha256": "158cb7de6fb1c7c86dca04ab7698649d3675a2a8f8b974ac824a0eadbed15abf",
+      "size": [
+        1536,
+        1024
+      ],
+      "newUserAcceptanceClaimed": false,
+      "runtimeReady": false,
+      "evidenceReusedFromHashMatchedArchive": "independent-art-review-straight-arrow-red-core-v1.json"
+    },
+    {
+      "style": "THU",
+      "file": "combat-thu.png",
+      "status": "concept-candidate-ready-for-user-review",
+      "statusZh": "保留用户此前认可方向，仍非运行验收",
+      "priorUserDirectionAcceptedAsRelayedByRoot": true,
+      "constraints": {
+        "originalPreferredArcDirectionRetained": "same selected original file",
+        "broadTargetConnectingNetwork": "visually consistent",
+        "notVerticalThreePillars": "visually consistent"
+      },
+      "evidence": [
+        "沿用根代理转述为用户此前认可的原combat-thu.png，没有选择增强版。",
+        "主电弧跨过空地进入远处敌群，再以宽面不规则分叉连接多名可辨认角色。",
+        "角色躯干附近有局部电接点，不是仅在空中画无目标的闪电。",
+        "灰度下仍是清楚的网状多路径连接。"
+      ],
+      "limitations": [
+        "保留此前认可的是视觉方向，不是精确范围、伤害、跳跃距离或动画时序已通过。",
+        "单张静态图不能验证每目标去重、遮挡、真实分叉顺序和性能。"
+      ],
+      "sha256": "286240daba8d53f6ad88b8a9aadfc49a0d0a147e457c0ad4177c4db6b1bd1b74",
+      "size": [
+        1536,
+        1024
+      ],
+      "newUserAcceptanceClaimed": false,
+      "runtimeReady": false,
+      "evidenceReusedFromHashMatchedArchive": "independent-art-review-straight-arrow-red-core-v1.json"
+    },
+    {
+      "style": "ARC",
+      "file": "combat-arc-round-v5.png",
+      "status": "concept-candidate-ready-for-user-review",
+      "statusZh": "圆形暗红法球新样可送审，尚未获用户接受",
+      "constraints": {
+        "roundTranslucentDarkRedOrbs": "visually consistent",
+        "lowRedCenterInsteadOfWhiteHotDiamondCore": "visually consistent; no quantitative brightness test",
+        "nonFireMaterial": "visually consistent",
+        "independentPayloadsToRemoteTargets": "visually consistent"
+      },
+      "evidence": [
+        "必要原图检查中，飞行载荷已经是圆形暗红透明球体；不再是尖菱形白炽芯。",
+        "圆球边缘与暗红内部可辨，中心未出现上版的大块刺眼白色亮核；这是定性视觉观察，不是亮度数值验收。",
+        "未见火舌、燃烧烟或余烬；远端接触亮点与圆形法球属于奥术载荷，不当作火球。"
+      ],
+      "limitations": [
+        "新圆形暗红样仍待用户审阅，不能将本次定性复核写成用户已接受。",
+        "灰度小图中暗红法球较弱，后续手机可读性仍需实机检查；不能为提升可见性擅自恢复白炽中心。",
+        "静态图不验证每敌两枚20%/80%载荷、固定选敌、失效不补位、真实弹数或动画时序。"
+      ],
+      "sha256": "b2c689e7d532e34d210547f41614ee116c7415cc013f8a98586421c8f3a1d32b",
+      "size": [
+        1536,
+        1024
+      ],
+      "newUserAcceptanceClaimed": false,
+      "runtimeReady": false
+    }
+  ],
+  "sourceImagesModified": false,
+  "latestUserFeedback": {
+    "summary": "恢复原combat-bow.png首版分裂箭；冰系删除；奥术飞弹为圆形暗红透明法球和低亮红中心，移除尖菱白炽芯。",
+    "bowChildrenByRank": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "bowTotalTargetsByRank": [
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "firstImpactEnvelopeMetresByRank": [
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "bowPolicy": "freeze child targets and smooth arcs at first hit; no mid-flight homing, recursion, refill or wall traversal; other bow skills stay straight"
+  }
+}

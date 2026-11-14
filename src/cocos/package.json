@@ -1,0 +1,28 @@
+{
+  "name": "sword-and-fire-chapter-one",
+  "version": "0.3.41",
+  "private": true,
+  "creator": {
+    "version": "3.8.8"
+  },
+  "scripts": {
+    "postinstall": "node tools/patch-fairygui.cjs",
+    "test": "tsx --test tests/*.test.ts",
+    "check:core": "tsc -p tsconfig.core.json --noEmit",
+    "check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@resvg/resvg-js": "2.6.2",
+    "@types/node": "22.15.30",
+    "@types/three": "0.187.0",
+    "playwright": "^1.56.1",
+    "tsx": "4.20.6",
+    "typescript": "5.9.3"
+  },
+  "uuid": "a1cb5b59-5073-4cc9-bbe4-aa406b685b56",
+  "dependencies": {
+    "fairygui-cc": "1.2.2",
+    "i18next": "26.4.0",
+    "three": "0.187.0"
+  }
+}

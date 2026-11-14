@@ -1,0 +1,78 @@
+{
+  "created": "2026-11-11",
+  "stage": "static_ui_proposal_not_implemented",
+  "generator": "built-in cloud OpenAI image_gen",
+  "reference": "style-reference.jpg",
+  "generated_source_resolution": [
+    1844,
+    853
+  ],
+  "device_baseline": {
+    "logical_viewport": [
+      844,
+      390
+    ],
+    "physical_export": [
+      2532,
+      1170
+    ],
+    "density": 3
+  },
+  "postprocess": "Pillow: synchronized inventory portrait/worn slots, added missing common necklace, reused approved unique BOW skill icons, resized and composed overview",
+  "local_model_used": false,
+  "runtime_files_modified": false,
+  "new_dependencies": false,
+  "checks": {
+    "class_names": "four existing combat families only",
+    "equipment_filter": "current family plus common; all means all owned gear",
+    "attribute_points": "Lv11 gives30; current18/16/10/12 spends16 leaving14; draft21/16/10/14 spends21 leaving9",
+    "hp_example": "without equipment HP bonuses:170+4*(12-10)=178; preview170+4*(14-10)=186",
+    "strength_example": "0.8% per point above10;18=6.4%,21=8.8%",
+    "skill_points": "Lv11 chapter2 gives12; three skills rank2 spend3 leaving9; one rank2→3 costs2 leaving7",
+    "bow_02": "rank2→3: targets3→4; radius4m→5m",
+    "unique_skill_icons": "existing rpg-bow-01 through05 reused"
+  },
+  "art_review": {
+    "status": "reviewed_as_visual_proposal_user_review_pending",
+    "reviewed": "dark-gold direction, four classes, distinct preview/current state, two independent point pools, numeric consistency, inventory state consistency",
+    "refinement_required": "Pixel-level alignment, font scale, exact48px touch regions and8px gaps, safe-area/platform-capsule layout, scroll behavior, skill-list density, all9 worn-slot presentation.",
+    "scope": "generated hero/item paintings illustrate the proposal; production must reuse approved character, item icons and shared UI components."
+  },
+  "deliverables": [
+    {
+      "file": "01-equipment-current.png",
+      "title": "装备 · 当前职业",
+      "note": "默认显示本职业与通用装备；武器 / 防具 / 首饰独立筛选。",
+      "sha256": "a886878a470b4435c7d33beaffebfe118db75305b161004b012904d463657fa9",
+      "prompt": "01-equipment-current-prompt.txt"
+    },
+    {
+      "file": "02-equipment-all.png",
+      "title": "装备 · 全部装备",
+      "note": "仅扩大浏览范围；其他职业装备可预览，再前往职业页切换。",
+      "sha256": "9b63f2e6c2f5b1aa0c4578b79fc6fbf7e7524c7e8e870854534597e2d235265f",
+      "prompt": "02-equipment-all-prompt.txt"
+    },
+    {
+      "file": "03-profession-preview.png",
+      "title": "职业选择 · 预览",
+      "note": "当前与预览分别标记；点击确认才切换，不重置既有加点。",
+      "sha256": "3d60d7259bb7cf266147d45a353c78ff2500457cc0144af08e4800ecf7d9f810",
+      "prompt": "03-profession-preview-prompt.txt"
+    },
+    {
+      "file": "04-attribute-points.png",
+      "title": "加点 · 属性",
+      "note": "四项属性同时可见；先调整草稿，核对收益后统一应用。",
+      "sha256": "f7539b69b53d464f1dc8605474bdb2142625c04ecc79cb47beab9b374e5e4b04",
+      "prompt": "04-attribute-points-prompt.txt"
+    },
+    {
+      "file": "05-skill-points.png",
+      "title": "加点 · 技能",
+      "note": "展示升级收益与逐级成本；各职业共享技能点，属性点独立。",
+      "sha256": "fb4127d02a2c42f148e0b5462f787111577086131a0c84e73fb8a27c2dd71e1e",
+      "prompt": "05-skill-points-prompt.txt"
+    }
+  ]
+}

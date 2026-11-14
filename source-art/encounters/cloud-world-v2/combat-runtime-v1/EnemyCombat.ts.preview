@@ -1,0 +1,3838 @@
+/** Prepared by tools/design/prepare-enemy-combat.py. Adapter tuning is explicitly separated from authored damage/timings. */
+import {MONSTER_COMBAT_PROFILES,installHuntProfiles} from '../../world/data/MonsterEcology';
+import {applyEarlyChapterBosses} from './EarlyChapterBosses';
+export type EnemyDamageElement='physical'|'fire'|'lightning'|'arcane';
+export interface EnemyGeometry {
+ kind:'fan'|'rectangle'|'circle'|'ring'|'line'|'none';origin:'caster'|'lockedTarget'|'arenaPoint';
+ radiusMetres?:number;innerRadiusMetres?:number;angleDegrees?:number;gapAngleDegrees?:number;gapDirectionDegrees?:number;
+ widthMetres?:number;lengthMetres?:number;offsetX?:number;offsetZ?:number;arenaPoint?:{x:number;z:number};onlyBelowHp?:number;
+}
+export type EnemyStatusDef={kind:'slow';percent:number;seconds:number}|{kind:'burn';baseDamagePerSecond:number;seconds:number};
+export interface EnemyAttackableAnchor {kind:'stake'|'mirrorFrame'|'chainLock';placement:'casterFront'|'zoneEnd'|'zoneCenter';offsetMetres?:number;hp:number;radius:number;directHitsOnly:true;reward:false;expiresWithZone?:true;expiresWithStep?:true;interruptOwner?:true}
+export interface EnemyProjectileDef {kind:'crossbow'|'spell';speed:number;range:number;radius:number;count:number;spreadDegrees:number;element:EnemyDamageElement;status?:EnemyStatusDef;collidesWithWalls:true;homing:false}
+export interface EnemyZoneDef {duration:number;tickInterval:number;tickBaseDamage:number;element:EnemyDamageElement;maxTicks:number;maxActivePerOwner:number;status?:EnemyStatusDef;attackableAnchor?:EnemyAttackableAnchor;hitOncePerTarget?:boolean;blocksMovement:false}
+export interface EnemySelfMove {mode:'charge'|'visibleReposition';distance:number;duration:number;collisionStops:true;collisionStaggerSeconds?:number}
+export interface EnemySupportDef {effect:'nextWindupReduction'|'rallyApproach';radius:number;maxAffected:number;hasteSeconds?:number;minWindup?:number;duration:number;excludeSelf:true;affectsExistingOnly:true}
+export interface EnemyAttackStep {
+ id:string;windup:number;lock:number;active:number;baseDamage:number;element:EnemyDamageElement;geometry:EnemyGeometry[];
+ maxHitsPerTarget:1;requiresLineOfSight:true;requiresSameLayer:true;targetTracking:'untilFinalLock';
+ projectile?:EnemyProjectileDef;zone?:EnemyZoneDef;selfMove?:EnemySelfMove;support?:EnemySupportDef;attackableAnchor?:EnemyAttackableAnchor;
+}
+export interface EnemyAttackDef {
+ id:string;label:string;legacyKind:'swing'|'charge'|'shot'|'short';pose:'attack_sword'|'attack_bow'|'spell'|'interact';
+ minRange:number;maxRange:number;steps:EnemyAttackStep[];recovery:number;interruptible:boolean;cooldown?:number;requiresLivingAllies?:boolean;
+}
+export interface EnemyCombatProfile {
+ id:string;name:string;route:'legacy'|'profile';body:'human'|'machine'|'beast';hurtRadius?:number;solidBody?:boolean;recoveryDamageMultiplier?:number;movement:{speed:number;turnRate:number;preferredRange:number;awarenessRange:number;damagedAwarenessRange:number;stationary?:true;facingPoint?:{x:number;z:number}};
+ defense?:{guardArcDegrees:number;frontalDamageMultiplier:number;breakOpenSeconds:number};
+ attackSlotCost:number;cycle:string[];attacks:Record<string,EnemyAttackDef>;
+ halfHealth?:{threshold:number;once:boolean;queuedAttackId?:string;followUpAfter?:Record<string,string>};
+ policy:{playerForcedDisplacement:0;hitReactionMovesEnemy:boolean;teleport:false;spawnReinforcements:false;idleBetweenMoves:number;offscreenTellSeconds:number};
+ source:{catalog:string;catalogSha256:string;description:string;adapterTuning:string[]};
+}
+export const ENEMY_COMBAT_PROFILES:Record<string,EnemyCombatProfile> = {
+  ...MONSTER_COMBAT_PROFILES,
+  "R1-1": {
+    "id": "R1-1",
+    "name": "灰披刀兵",
+    "body": "human",
+    "movement": {
+      "speed": 1.7,
+      "turnRate": 3.2,
+      "preferredRange": 1.4,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "blade-swing"
+    ],
+    "attacks": {
+      "blade-swing": {
+        "id": "blade-swing",
+        "label": "举刃短扇",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "swing",
+            "windup": 0.65,
+            "lock": 0.2,
+            "active": 0.16,
+            "baseDamage": 12,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 1.4,
+                "angleDegrees": 80
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 0.65,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "举棍亮扇；侧移或用破阵技能打断起手，圆盾不提供重盾减伤",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "route": "legacy"
+  },
+  "R1-2": {
+    "id": "R1-2",
+    "name": "铁板盾卫",
+    "body": "human",
+    "movement": {
+      "speed": 1.7,
+      "turnRate": 3.2,
+      "preferredRange": 1.8,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "shield-thrust"
+    ],
+    "attacks": {
+      "shield-thrust": {
+        "id": "shield-thrust",
+        "label": "抬盾直击",
+        "legacyKind": "charge",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "thrust",
+            "windup": 0.75,
+            "lock": 0.25,
+            "active": 0.16,
+            "baseDamage": 16,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "caster",
+                "lengthMetres": 1.8,
+                "widthMetres": 0.9
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 0.85,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "抬盾亮直线；侧绕或用任一流派破阵技能开盾2s",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "defense": {
+      "guardArcDegrees": 120,
+      "frontalDamageMultiplier": 0.4,
+      "breakOpenSeconds": 2
+    },
+    "route": "legacy"
+  },
+  "R1-3": {
+    "id": "R1-3",
+    "name": "猎径弩手",
+    "body": "human",
+    "movement": {
+      "speed": 1.7,
+      "turnRate": 3.2,
+      "preferredRange": 15,
+      "awarenessRange": 18,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "crossbow"
+    ],
+    "attacks": {
+      "crossbow": {
+        "id": "crossbow",
+        "label": "弩线瞄准",
+        "legacyKind": "shot",
+        "pose": "attack_bow",
+        "minRange": 0,
+        "maxRange": 18,
+        "steps": [
+          {
+            "id": "bolt",
+            "windup": 1.1,
+            "lock": 0.3,
+            "active": 0.02,
+            "baseDamage": 14,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "caster",
+                "lengthMetres": 16,
+                "widthMetres": 0.65
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "projectile": {
+              "kind": "crossbow",
+              "speed": 8,
+              "range": 18,
+              "radius": 0.4,
+              "collidesWithWalls": true,
+              "homing": false,
+              "count": 1,
+              "spreadDegrees": 0,
+              "element": "physical"
+            }
+          }
+        ],
+        "recovery": 1.8,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "虚线转实线；侧走、掩体、趁装填接近",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "route": "legacy"
+  },
+  "R1-4": {
+    "id": "R1-4",
+    "name": "绊索猎兵",
+    "body": "human",
+    "movement": {
+      "speed": 1.7,
+      "turnRate": 3.2,
+      "preferredRange": 12,
+      "awarenessRange": 18,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "snare-line"
+    ],
+    "attacks": {
+      "snare-line": {
+        "id": "snare-line",
+        "label": "展开绊索",
+        "legacyKind": "shot",
+        "pose": "interact",
+        "minRange": 0,
+        "maxRange": 16,
+        "steps": [
+          {
+            "id": "snare",
+            "windup": 1.2,
+            "lock": 0.35,
+            "active": 0.16,
+            "baseDamage": 0,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "lockedTarget",
+                "lengthMetres": 6,
+                "widthMetres": 0.6
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "zone": {
+              "duration": 3,
+              "maxActivePerOwner": 2,
+              "blocksMovement": false,
+              "hitOncePerTarget": true,
+              "tickInterval": 0.25,
+              "tickBaseDamage": 10,
+              "element": "physical",
+              "maxTicks": 12,
+              "status": {
+                "kind": "slow",
+                "percent": 0.2,
+                "seconds": 1
+              },
+              "attackableAnchor": {
+                "kind": "stake",
+                "placement": "zoneEnd",
+                "hp": 12,
+                "radius": 0.45,
+                "directHitsOnly": true,
+                "reward": false,
+                "expiresWithZone": true
+              }
+            }
+          }
+        ],
+        "recovery": 1.1,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "蹲身展开可见绊索；跨旁路或攻击索桩，索命中仅减速20%持续1s",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "Attackable hazard anchor HP12/radius0.45 are explicit adapter defaults; one baseline free weapon hit clears it, and it gives no resource/loot reward.",
+        "The visible stake/chain lock is placed at the hazard zone end (a circular pin landing has its end at its center). This endpoint is adapter placement: line/rectangle length is clipped by real visibility and same layer; the anchor backs off by its radius to a reachable legal endpoint. If no counterable anchor exists, do not create an uncounterable zone. The source specifies a visible bypassable chain, not a unique authored lock coordinate."
+      ]
+    },
+    "route": "profile"
+  },
+  "R2-1": {
+    "id": "R2-1",
+    "name": "裂岩镐卫",
+    "body": "human",
+    "movement": {
+      "speed": 1.7,
+      "turnRate": 3.2,
+      "preferredRange": 1.4,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "pick-strike"
+    ],
+    "attacks": {
+      "pick-strike": {
+        "id": "pick-strike",
+        "label": "过肩裂岩镐",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "pick",
+            "windup": 0.9,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 18,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "caster",
+                "lengthMetres": 2.5,
+                "widthMetres": 0.7
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.0,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "镐头过肩、狭长红槽；横移后从侧面攻击",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "route": "profile"
+  },
+  "R2-2": {
+    "id": "R2-2",
+    "name": "岩脊弩哨",
+    "body": "human",
+    "movement": {
+      "speed": 1.7,
+      "turnRate": 3.2,
+      "preferredRange": 15,
+      "awarenessRange": 18,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "crossbow"
+    ],
+    "attacks": {
+      "crossbow": {
+        "id": "crossbow",
+        "label": "弩线瞄准",
+        "legacyKind": "shot",
+        "pose": "attack_bow",
+        "minRange": 0,
+        "maxRange": 18,
+        "steps": [
+          {
+            "id": "bolt",
+            "windup": 1.2,
+            "lock": 0.35,
+            "active": 0.02,
+            "baseDamage": 16,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "caster",
+                "lengthMetres": 16,
+                "widthMetres": 0.65
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "projectile": {
+              "kind": "crossbow",
+              "speed": 8,
+              "range": 18,
+              "radius": 0.4,
+              "collidesWithWalls": true,
+              "homing": false,
+              "count": 1,
+              "spreadDegrees": 0,
+              "element": "physical"
+            }
+          }
+        ],
+        "recovery": 1.9,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "高处弩光与弦响；石垛遮线，必须有步行可达的上坡",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "route": "profile"
+  },
+  "R2-3": {
+    "id": "R2-3",
+    "name": "废矿爬机",
+    "body": "machine",
+    "movement": {
+      "speed": 1.35,
+      "turnRate": 1.35,
+      "preferredRange": 1.7,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "pincer"
+    ],
+    "attacks": {
+      "pincer": {
+        "id": "pincer",
+        "label": "四足钳击",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "clamp",
+            "windup": 1.0,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 14,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 1.7,
+                "angleDegrees": 100
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.2,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "四足压低、钳口亮弧；离开弧面，后腿转向慢",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "route": "profile"
+  },
+  "R2-4": {
+    "id": "R2-4",
+    "name": "断岳号兵",
+    "body": "human",
+    "movement": {
+      "speed": 1.7,
+      "turnRate": 3.2,
+      "preferredRange": 10,
+      "awarenessRange": 18,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "horn",
+      "close-jab"
+    ],
+    "attacks": {
+      "horn": {
+        "id": "horn",
+        "label": "号声协同",
+        "legacyKind": "short",
+        "pose": "interact",
+        "minRange": 2,
+        "maxRange": 16,
+        "steps": [
+          {
+            "id": "signal",
+            "windup": 1.5,
+            "lock": 0.4,
+            "active": 0.12,
+            "baseDamage": 0,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "circle",
+                "origin": "caster",
+                "radiusMetres": 8
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "support": {
+              "effect": "nextWindupReduction",
+              "radius": 8,
+              "maxAffected": 7,
+              "affectsExistingOnly": true,
+              "excludeSelf": true,
+              "duration": 6,
+              "hasteSeconds": 0.1,
+              "minWindup": 0.65
+            }
+          }
+        ],
+        "recovery": 1.3,
+        "interruptible": true,
+        "requiresLivingAllies": true
+      },
+      "close-jab": {
+        "id": "close-jab",
+        "label": "近身短击",
+        "legacyKind": "short",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "jab",
+            "windup": 0.65,
+            "lock": 0.2,
+            "active": 0.16,
+            "baseDamage": 12,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 1.4,
+                "angleDegrees": 80
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 0.8,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "举号出现圈纹；破阵打断号声，否则现有同组敌未来一次起手缩短0.10s且不低于0.65s，不增援",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "close-jab fallback timing .65/.2/.8 reuses basic melee when no eligible living allies remain; horn never summons entities."
+      ]
+    },
+    "route": "profile"
+  },
+  "R3-1": {
+    "id": "R3-1",
+    "name": "码头快刀",
+    "body": "human",
+    "movement": {
+      "speed": 1.7,
+      "turnRate": 3.2,
+      "preferredRange": 1.4,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "blade-swing"
+    ],
+    "attacks": {
+      "blade-swing": {
+        "id": "blade-swing",
+        "label": "举刃短扇",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "swing",
+            "windup": 0.7,
+            "lock": 0.25,
+            "active": 0.16,
+            "baseDamage": 14,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 1.4,
+                "angleDegrees": 80
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 0.8,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "屈膝亮短扇；退一步，出手后侧击",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "route": "profile"
+  },
+  "R3-2": {
+    "id": "R3-2",
+    "name": "赤焰术士",
+    "body": "human",
+    "movement": {
+      "speed": 1.7,
+      "turnRate": 3.2,
+      "preferredRange": 12,
+      "awarenessRange": 18,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "fire-seal"
+    ],
+    "attacks": {
+      "fire-seal": {
+        "id": "fire-seal",
+        "label": "赤焰印落区",
+        "legacyKind": "shot",
+        "pose": "spell",
+        "minRange": 0,
+        "maxRange": 16,
+        "steps": [
+          {
+            "id": "eruption",
+            "windup": 1.2,
+            "lock": 0.35,
+            "active": 0.16,
+            "baseDamage": 12,
+            "element": "fire",
+            "geometry": [
+              {
+                "kind": "circle",
+                "origin": "lockedTarget",
+                "radiusMetres": 1.5
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "zone": {
+              "duration": 3,
+              "maxActivePerOwner": 2,
+              "blocksMovement": false,
+              "tickInterval": 1,
+              "tickBaseDamage": 4,
+              "element": "fire",
+              "maxTicks": 3
+            }
+          }
+        ],
+        "recovery": 1.0,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "举手聚成赤焰印，1.20s后指定落区爆炎；直接12基准伤与3s法术余焰，不投物品",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "The 4 base damage/second lingering flame is retained from the prior encounter source, reskinned as authored spell afterburn; no thrown item."
+      ]
+    },
+    "route": "profile"
+  },
+  "R3-3": {
+    "id": "R3-3",
+    "name": "青铜钟卫",
+    "body": "machine",
+    "movement": {
+      "speed": 1.2,
+      "turnRate": 1.8,
+      "preferredRange": 2.6,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "bell-ring"
+    ],
+    "attacks": {
+      "bell-ring": {
+        "id": "bell-ring",
+        "label": "钟腹环震",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "ring",
+            "windup": 1.15,
+            "lock": 0.35,
+            "active": 0.16,
+            "baseDamage": 18,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "ring",
+                "origin": "caster",
+                "radiusMetres": 2.8,
+                "innerRadiusMetres": 0.9,
+                "gapAngleDegrees": 0,
+                "gapDirectionDegrees": 180
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.3,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "钟腹倾斜、地面环带；走进内圈或退外圈，警示无声模式也可读",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "route": "profile"
+  },
+  "R3-4": {
+    "id": "R3-4",
+    "name": "钩刃战士",
+    "body": "human",
+    "movement": {
+      "speed": 1.7,
+      "turnRate": 3.2,
+      "preferredRange": 2.5,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "hook-blade"
+    ],
+    "attacks": {
+      "hook-blade": {
+        "id": "hook-blade",
+        "label": "钩刃直击",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "hook",
+            "windup": 1.0,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 16,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "caster",
+                "lengthMetres": 3,
+                "widthMetres": 0.65
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.15,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "钩刃后收亮直线；横移或破阵打断，命中仅伤害与短受击，不带动角色",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "route": "profile"
+  },
+  "R4-1": {
+    "id": "R4-1",
+    "name": "黑冠盾兵",
+    "body": "human",
+    "movement": {
+      "speed": 1.7,
+      "turnRate": 3.2,
+      "preferredRange": 1.8,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "shield-thrust"
+    ],
+    "attacks": {
+      "shield-thrust": {
+        "id": "shield-thrust",
+        "label": "抬盾直击",
+        "legacyKind": "charge",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "thrust",
+            "windup": 0.85,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 18,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "caster",
+                "lengthMetres": 1.8,
+                "widthMetres": 0.9
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.0,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "半圆钢盾抵地；绕侧、破阵打断起盾",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "defense": {
+      "guardArcDegrees": 120,
+      "frontalDamageMultiplier": 0.4,
+      "breakOpenSeconds": 2
+    },
+    "route": "profile"
+  },
+  "R4-2": {
+    "id": "R4-2",
+    "name": "堡垒重弩手",
+    "body": "human",
+    "movement": {
+      "speed": 1.7,
+      "turnRate": 3.2,
+      "preferredRange": 15,
+      "awarenessRange": 18,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "crossbow"
+    ],
+    "attacks": {
+      "crossbow": {
+        "id": "crossbow",
+        "label": "弩线瞄准",
+        "legacyKind": "shot",
+        "pose": "attack_bow",
+        "minRange": 0,
+        "maxRange": 18,
+        "steps": [
+          {
+            "id": "bolt",
+            "windup": 1.4,
+            "lock": 0.4,
+            "active": 0.02,
+            "baseDamage": 20,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "caster",
+                "lengthMetres": 16,
+                "widthMetres": 0.65
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "projectile": {
+              "kind": "crossbow",
+              "speed": 8,
+              "range": 18,
+              "radius": 0.4,
+              "collidesWithWalls": true,
+              "homing": false,
+              "count": 1,
+              "spreadDegrees": 0,
+              "element": "physical"
+            }
+          }
+        ],
+        "recovery": 2.1,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "重弩架定、长实线；石垛遮挡，禁止穿墙",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "route": "profile"
+  },
+  "R4-3": {
+    "id": "R4-3",
+    "name": "折镜工兵",
+    "body": "human",
+    "movement": {
+      "speed": 1.7,
+      "turnRate": 3.2,
+      "preferredRange": 13,
+      "awarenessRange": 18,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "mirror-line"
+    ],
+    "attacks": {
+      "mirror-line": {
+        "id": "mirror-line",
+        "label": "折镜光带",
+        "legacyKind": "shot",
+        "pose": "spell",
+        "minRange": 0,
+        "maxRange": 16,
+        "steps": [
+          {
+            "id": "beam",
+            "windup": 1.5,
+            "lock": 0.4,
+            "active": 0.16,
+            "baseDamage": 14,
+            "element": "arcane",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "caster",
+                "lengthMetres": 16,
+                "widthMetres": 0.7
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "attackableAnchor": {
+              "kind": "mirrorFrame",
+              "placement": "casterFront",
+              "offsetMetres": 0.8,
+              "hp": 12,
+              "radius": 0.5,
+              "directHitsOnly": true,
+              "reward": false,
+              "expiresWithStep": true,
+              "interruptOwner": true
+            }
+          }
+        ],
+        "recovery": 1.3,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "实体镜框转亮并画窄光带；离开光带、攻击镜架可打断，不能反射全部玩家法术",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "Arcane is an enemy optical-damage label only, never an ARC player skill/unlock.",
+        "Mirror frame HP12/radius0.5 is a targetable adapter anchor, not another reward-bearing enemy; destroying it interrupts this beam step.",
+        "Mirror frame is a physical counter at0.8m in front of its caster, not the far beam endpoint; placement is an explicit reachable adapter offset."
+      ]
+    },
+    "route": "profile"
+  },
+  "R4-4": {
+    "id": "R4-4",
+    "name": "铁旗军士",
+    "body": "human",
+    "movement": {
+      "speed": 1.7,
+      "turnRate": 3.2,
+      "preferredRange": 2,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "banner-double",
+      "banner-rally"
+    ],
+    "attacks": {
+      "banner-double": {
+        "id": "banner-double",
+        "label": "旗杆双击",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "first",
+            "windup": 1.0,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 20,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 2,
+                "angleDegrees": 100
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          },
+          {
+            "id": "second",
+            "windup": 0.65,
+            "lock": 0.25,
+            "active": 0.16,
+            "baseDamage": 20,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 2,
+                "angleDegrees": 110
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.2,
+        "interruptible": true
+      },
+      "banner-rally": {
+        "id": "banner-rally",
+        "label": "号令现有同伴",
+        "legacyKind": "short",
+        "pose": "interact",
+        "minRange": 0,
+        "maxRange": 12,
+        "steps": [
+          {
+            "id": "rally",
+            "windup": 1.0,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 0,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "circle",
+                "origin": "caster",
+                "radiusMetres": 8
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "support": {
+              "effect": "rallyApproach",
+              "radius": 8,
+              "maxAffected": 2,
+              "duration": 2,
+              "affectsExistingOnly": true,
+              "excludeSelf": true
+            }
+          }
+        ],
+        "recovery": 1.2,
+        "interruptible": true,
+        "requiresLivingAllies": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "旗杆下压、两段各有扇形；退圈等第二击结束，号令仅移动现有同伴",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "Second banner swing telegraph .65s and rally radius/count are adapter defaults; each swing has an independent warning."
+      ]
+    },
+    "route": "profile"
+  },
+  "U1-1": {
+    "id": "U1-1",
+    "name": "铸炉卫兵",
+    "body": "machine",
+    "movement": {
+      "speed": 1.3,
+      "turnRate": 3.2,
+      "preferredRange": 2.1,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "hammer-arm"
+    ],
+    "attacks": {
+      "hammer-arm": {
+        "id": "hammer-arm",
+        "label": "锤臂矩形",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "hammer",
+            "windup": 1.0,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 17,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "caster",
+                "lengthMetres": 2.2,
+                "widthMetres": 1.2
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.1,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "锤臂拉后亮矩形；侧移、打膝关节",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "route": "profile"
+  },
+  "U1-2": {
+    "id": "U1-2",
+    "name": "鸣震甲虫",
+    "body": "machine",
+    "movement": {
+      "speed": 1.9,
+      "turnRate": 2.4,
+      "preferredRange": 1.3,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "resonance"
+    ],
+    "attacks": {
+      "resonance": {
+        "id": "resonance",
+        "label": "六足鸣震",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "pulse",
+            "windup": 0.85,
+            "lock": 0.25,
+            "active": 0.16,
+            "baseDamage": 9,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "circle",
+                "origin": "caster",
+                "radiusMetres": 1.35
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 0.9,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "六足停步触角发亮；离开小圈，按一组两只计且不会分裂生新怪",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "route": "profile"
+  },
+  "U1-3": {
+    "id": "U1-3",
+    "name": "提灯狱卒",
+    "body": "human",
+    "movement": {
+      "speed": 1.7,
+      "turnRate": 3.2,
+      "preferredRange": 2.3,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "lantern-hook"
+    ],
+    "attacks": {
+      "lantern-hook": {
+        "id": "lantern-hook",
+        "label": "举灯钩刺",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "hook",
+            "windup": 1.0,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 15,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "caster",
+                "lengthMetres": 2.4,
+                "widthMetres": 0.7
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.0,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "灯举高、钩杆直线；绕柱，破阵打断前摇；投降后不再判敌",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "route": "profile"
+  },
+  "U1-4": {
+    "id": "U1-4",
+    "name": "负重搬机",
+    "body": "machine",
+    "movement": {
+      "speed": 1,
+      "turnRate": 1.4,
+      "preferredRange": 2.7,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "counterweight"
+    ],
+    "attacks": {
+      "counterweight": {
+        "id": "counterweight",
+        "label": "配重落框",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "slam",
+            "windup": 1.4,
+            "lock": 0.4,
+            "active": 0.16,
+            "baseDamage": 20,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "lockedTarget",
+                "lengthMetres": 2,
+                "widthMetres": 2
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.5,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "配重架升起、方形落点；走出方框，搬机不投掷任务物",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "route": "profile"
+  },
+  "U2-1": {
+    "id": "U2-1",
+    "name": "渠底爬卫",
+    "body": "machine",
+    "movement": {
+      "speed": 1.45,
+      "turnRate": 1.9,
+      "preferredRange": 1.8,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "hook-feet"
+    ],
+    "attacks": {
+      "hook-feet": {
+        "id": "hook-feet",
+        "label": "钩足四角",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "feet",
+            "windup": 0.9,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 13,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "caster",
+                "lengthMetres": 2,
+                "widthMetres": 1.8
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.0,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "钩足张开亮四角；侧移，在干道战斗不用游泳",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "route": "profile"
+  },
+  "U2-2": {
+    "id": "U2-2",
+    "name": "铭板守卫",
+    "body": "human",
+    "movement": {
+      "speed": 1.15,
+      "turnRate": 3.2,
+      "preferredRange": 1.8,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "tablet-swing"
+    ],
+    "attacks": {
+      "tablet-swing": {
+        "id": "tablet-swing",
+        "label": "石板短扇",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "swing",
+            "windup": 1.1,
+            "lock": 0.35,
+            "active": 0.16,
+            "baseDamage": 18,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 1.8,
+                "angleDegrees": 90
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.2,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "石板护身、棍击短扇；诱挥后绕背",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "defense": {
+      "guardArcDegrees": 120,
+      "frontalDamageMultiplier": 0.4,
+      "breakOpenSeconds": 2
+    },
+    "route": "profile"
+  },
+  "U2-3": {
+    "id": "U2-3",
+    "name": "巡游镜眼",
+    "body": "machine",
+    "movement": {
+      "speed": 1.7,
+      "turnRate": 3.2,
+      "preferredRange": 14,
+      "awarenessRange": 18,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "lens-bolt"
+    ],
+    "attacks": {
+      "lens-bolt": {
+        "id": "lens-bolt",
+        "label": "镜眼地面光点",
+        "legacyKind": "shot",
+        "pose": "spell",
+        "minRange": 0,
+        "maxRange": 18,
+        "steps": [
+          {
+            "id": "light",
+            "windup": 1.3,
+            "lock": 0.35,
+            "active": 0.02,
+            "baseDamage": 12,
+            "element": "arcane",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "caster",
+                "lengthMetres": 18,
+                "widthMetres": 0.5
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "projectile": {
+              "kind": "spell",
+              "speed": 9,
+              "range": 18,
+              "radius": 0.4,
+              "collidesWithWalls": true,
+              "homing": false,
+              "count": 1,
+              "spreadDegrees": 0,
+              "element": "arcane"
+            }
+          }
+        ],
+        "recovery": 1.3,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "单镜头光点沿地走；打实体镜头或侧移，漂浮高度仍在所有基础武器命中范围",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "Mirror floats only visually; its gameplay collider stays within basic weapon height."
+      ]
+    },
+    "route": "profile"
+  },
+  "U2-4": {
+    "id": "U2-4",
+    "name": "撞钟傀儡",
+    "body": "machine",
+    "movement": {
+      "speed": 1.15,
+      "turnRate": 3.2,
+      "preferredRange": 3.1,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 1,
+    "cycle": [
+      "gapped-bell"
+    ],
+    "attacks": {
+      "gapped-bell": {
+        "id": "gapped-bell",
+        "label": "缺口钟震",
+        "legacyKind": "swing",
+        "pose": "spell",
+        "minRange": 0,
+        "maxRange": 3.4,
+        "steps": [
+          {
+            "id": "ring",
+            "windup": 1.35,
+            "lock": 0.4,
+            "active": 0.16,
+            "baseDamage": 19,
+            "element": "arcane",
+            "geometry": [
+              {
+                "kind": "ring",
+                "origin": "caster",
+                "radiusMetres": 3.2,
+                "innerRadiusMetres": 1,
+                "gapAngleDegrees": 90,
+                "gapDirectionDegrees": 180
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.4,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "木槌抬起、缺口环带；去缺口或破阵打断起手，钟声不召幽魂",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "route": "profile"
+  },
+  "BOSS_R1": {
+    "id": "BOSS_R1",
+    "name": "裂隘统领·灰披队长",
+    "body": "human",
+    "movement": {
+      "speed": 1.5,
+      "turnRate": 3.2,
+      "preferredRange": 2.8,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 2,
+    "cycle": [
+      "sweep",
+      "charge"
+    ],
+    "attacks": {
+      "sweep": {
+        "id": "sweep",
+        "label": "锤横扫",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "sweep",
+            "windup": 0.8,
+            "lock": 0.25,
+            "active": 0.16,
+            "baseDamage": 22,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 2.1,
+                "angleDegrees": 150
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1,
+        "interruptible": true
+      },
+      "charge": {
+        "id": "charge",
+        "label": "盾冲",
+        "legacyKind": "charge",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 4.12,
+        "steps": [
+          {
+            "id": "charge",
+            "windup": 1,
+            "lock": 0.35,
+            "active": 0.55,
+            "baseDamage": 24,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 1,
+                "angleDegrees": 150
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "selfMove": {
+              "mode": "charge",
+              "distance": 3.8,
+              "collisionStops": true,
+              "duration": 0.55,
+              "collisionStaggerSeconds": 1.5
+            }
+          }
+        ],
+        "recovery": 1.5,
+        "interruptible": true
+      },
+      "short": {
+        "id": "short",
+        "label": "半血短击",
+        "legacyKind": "short",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "short",
+            "windup": 0.6,
+            "lock": 0.25,
+            "active": 0.16,
+            "baseDamage": 14,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 1.5,
+                "angleDegrees": 150
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.2,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "锤横扫：0.80s前摇/末0.25s锁向，150°×2.1m，22伤，后摇1.00s；盾冲：1.00/0.35s，3.8m直道24伤，冲锋结束原地露出1.50s破绽；半血横扫追加：另给0.60s短扇，14伤，后摇1.20s",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "Preserves the tested R1 sweep/charge/half-health short-step states and their 150 degree geometry. Charge ending recovery is the new authored 1.50s opening, independent of obstacle collision.",
+        "Charge start range is travel distance +0.32m player collider radius, so the authored movement can physically reach a stationary target; damage and windup are unchanged."
+      ]
+    },
+    "defense": {
+      "guardArcDegrees": 120,
+      "frontalDamageMultiplier": 0.4,
+      "breakOpenSeconds": 0
+    },
+    "halfHealth": {
+      "threshold": 0.5,
+      "once": false,
+      "followUpAfter": {
+        "sweep": "short"
+      }
+    },
+    "route": "legacy"
+  },
+  "BOSS_R2": {
+    "id": "BOSS_R2",
+    "name": "断岳铁卫·守桥铠卫",
+    "body": "human",
+    "movement": {
+      "speed": 1.5,
+      "turnRate": 3.2,
+      "preferredRange": 1.8,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 2,
+    "cycle": [
+      "shield-rush"
+    ],
+    "attacks": {
+      "shield-rush": {
+        "id": "shield-rush",
+        "label": "盾锋突击",
+        "legacyKind": "charge",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 1.52,
+        "steps": [
+          {
+            "id": "rush",
+            "windup": 0.75,
+            "lock": 0.25,
+            "active": 0.28,
+            "baseDamage": 16,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "caster",
+                "lengthMetres": 1.2,
+                "widthMetres": 0.9
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "selfMove": {
+              "mode": "charge",
+              "distance": 1.2,
+              "collisionStops": true,
+              "duration": 0.27999999999999997
+            }
+          }
+        ],
+        "recovery": 0.85,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "盾锋突击：0.75/0.25s直线16基准伤，后摇0.85s；两岩脊弩哨错开瞄准；所有流派破阵技能都能削韧或开普通盾，不要求近身互动动作",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "The two R2-2 escorts are existing authored spawns; their attack slots must be staggered, never spawned by the boss.",
+        "Charge start range is travel distance +0.32m player collider radius, so the authored movement can physically reach a stationary target; damage and windup are unchanged."
+      ]
+    },
+    "defense": {
+      "guardArcDegrees": 120,
+      "frontalDamageMultiplier": 0.4,
+      "breakOpenSeconds": 0
+    },
+    "route": "profile"
+  },
+  "BOSS_R3": {
+    "id": "BOSS_R3",
+    "name": "焚潮统领·灰烬掠夺者",
+    "body": "human",
+    "movement": {
+      "speed": 1.5,
+      "turnRate": 3.2,
+      "preferredRange": 11,
+      "awarenessRange": 18,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 2,
+    "cycle": [
+      "fire-seal",
+      "flame-cleave"
+    ],
+    "attacks": {
+      "fire-seal": {
+        "id": "fire-seal",
+        "label": "爆炎印",
+        "legacyKind": "shot",
+        "pose": "spell",
+        "minRange": 0,
+        "maxRange": 16,
+        "steps": [
+          {
+            "id": "eruption",
+            "windup": 1.2,
+            "lock": 0.35,
+            "active": 0.16,
+            "baseDamage": 12,
+            "element": "fire",
+            "geometry": [
+              {
+                "kind": "circle",
+                "origin": "lockedTarget",
+                "radiusMetres": 1.6
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "zone": {
+              "duration": 3,
+              "maxActivePerOwner": 2,
+              "blocksMovement": false,
+              "tickInterval": 1,
+              "tickBaseDamage": 4,
+              "element": "fire",
+              "maxTicks": 3
+            }
+          }
+        ],
+        "recovery": 1,
+        "interruptible": true,
+        "cooldown": 3.5
+      },
+      "flame-cleave": {
+        "id": "flame-cleave",
+        "label": "裂焰斩",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "cleave",
+            "windup": 0.9,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 18,
+            "element": "fire",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 2,
+                "angleDegrees": 120
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.2,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "爆炎印：1.20/0.35s聚焰，直接12基准伤与3s法术余焰；裂焰斩：0.90/0.30s扇形18基准伤，后摇1.20s；两近战一弩手固定随从，起手可被破阵技能打断，不投掷物品",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "Afterburn 4/s, 1s recovery and 3.5s seal cooldown retain prior-source concrete values where v8 gives no replacement. Fixed escorts are owned by WorldData, not this profile."
+      ]
+    },
+    "route": "profile"
+  },
+  "BOSS_R4": {
+    "id": "BOSS_R4",
+    "name": "黑冠统帅·阿德里安",
+    "body": "human",
+    "movement": {
+      "speed": 1.5,
+      "turnRate": 3.2,
+      "preferredRange": 2.8,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 2,
+    "cycle": [
+      "double-slash",
+      "shield-charge"
+    ],
+    "attacks": {
+      "double-slash": {
+        "id": "double-slash",
+        "label": "重斩两段",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "first",
+            "windup": 0.85,
+            "lock": 0.25,
+            "active": 0.16,
+            "baseDamage": 22,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 2.4,
+                "angleDegrees": 120
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          },
+          {
+            "id": "second",
+            "windup": 0.65,
+            "lock": 0.25,
+            "active": 0.16,
+            "baseDamage": 18,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 2.4,
+                "angleDegrees": 130
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.35,
+        "interruptible": true
+      },
+      "shield-charge": {
+        "id": "shield-charge",
+        "label": "统帅盾冲",
+        "legacyKind": "charge",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 5.12,
+        "steps": [
+          {
+            "id": "charge",
+            "windup": 1.05,
+            "lock": 0.35,
+            "active": 0.65,
+            "baseDamage": 26,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 1.1,
+                "angleDegrees": 100
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "selfMove": {
+              "mode": "charge",
+              "distance": 4.8,
+              "collisionStops": true,
+              "duration": 0.65,
+              "collisionStaggerSeconds": 1.5
+            }
+          }
+        ],
+        "recovery": 1.5,
+        "interruptible": true
+      },
+      "inner-bolts": {
+        "id": "inner-bolts",
+        "label": "半血内弩号令",
+        "legacyKind": "shot",
+        "pose": "interact",
+        "minRange": 0,
+        "maxRange": 30,
+        "steps": [
+          {
+            "id": "call",
+            "windup": 1.4,
+            "lock": 0,
+            "active": 0.02,
+            "baseDamage": 0,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "none",
+                "origin": "caster"
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          },
+          {
+            "id": "left-port",
+            "windup": 1,
+            "lock": 1,
+            "active": 0.02,
+            "baseDamage": 16,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "arenaPoint",
+                "lengthMetres": 36,
+                "widthMetres": 0.65,
+                "arenaPoint": {
+                  "x": -23,
+                  "z": 24
+                }
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "projectile": {
+              "kind": "crossbow",
+              "speed": 8,
+              "range": 36,
+              "radius": 0.4,
+              "collidesWithWalls": true,
+              "homing": false,
+              "count": 1,
+              "spreadDegrees": 0,
+              "element": "physical"
+            }
+          },
+          {
+            "id": "right-port",
+            "windup": 1,
+            "lock": 1,
+            "active": 0.02,
+            "baseDamage": 16,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "arenaPoint",
+                "lengthMetres": 36,
+                "widthMetres": 0.65,
+                "arenaPoint": {
+                  "x": 23,
+                  "z": 24
+                }
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "projectile": {
+              "kind": "crossbow",
+              "speed": 8,
+              "range": 36,
+              "radius": 0.4,
+              "collidesWithWalls": true,
+              "homing": false,
+              "count": 1,
+              "spreadDegrees": 0,
+              "element": "physical"
+            }
+          }
+        ],
+        "recovery": 0.5,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "重斩两段：0.85/0.25s→22伤，另0.65s提示→18伤，后摇1.35s；盾冲：1.05/0.35s，4.8m、26伤，冲锋结束原地露出1.50s破绽；半血号令1.40s后两内弩口依次锁线1.00s各16伤，仅一轮，外弩台不复活",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "Slash fan dimensions, charge active .65s, fixed F13 inner-port coordinates and projectile speed/range are adapter geometry. Inner ports are one queued volley, not revived outer-tower entities.",
+        "Only the two fixed F13 ports use36m projectile range and line warning length: each is24.70m from the boss at(0,15), so the ordinary18m moving-crossbow range cannot reach the central encounter. Both ports keep their fixed positions, separate1s lock warnings,16 base damage and once-only half-health trigger.",
+        "Charge start range is travel distance +0.32m player collider radius, so the authored movement can physically reach a stationary target; damage and windup are unchanged."
+      ]
+    },
+    "defense": {
+      "guardArcDegrees": 120,
+      "frontalDamageMultiplier": 0.4,
+      "breakOpenSeconds": 0
+    },
+    "halfHealth": {
+      "threshold": 0.5,
+      "once": true,
+      "queuedAttackId": "inner-bolts"
+    },
+    "route": "profile"
+  },
+  "ELITE_01": {
+    "id": "ELITE_01",
+    "name": "断镐监工",
+    "body": "human",
+    "movement": {
+      "speed": 1.5,
+      "turnRate": 3.2,
+      "preferredRange": 2.5,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 2,
+    "cycle": [
+      "split-pick",
+      "rope-pull"
+    ],
+    "attacks": {
+      "split-pick": {
+        "id": "split-pick",
+        "label": "裂地镐",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "pick",
+            "windup": 0.95,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 18,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "caster",
+                "lengthMetres": 3,
+                "widthMetres": 0.65
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.1,
+        "interruptible": true
+      },
+      "rope-pull": {
+        "id": "rope-pull",
+        "label": "横拉绳",
+        "legacyKind": "shot",
+        "pose": "interact",
+        "minRange": 0,
+        "maxRange": 12,
+        "steps": [
+          {
+            "id": "rope",
+            "windup": 1.2,
+            "lock": 0.35,
+            "active": 0.16,
+            "baseDamage": 0,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "caster",
+                "lengthMetres": 6,
+                "widthMetres": 0.6
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "zone": {
+              "duration": 3,
+              "maxActivePerOwner": 2,
+              "blocksMovement": false,
+              "hitOncePerTarget": true,
+              "tickInterval": 0.25,
+              "tickBaseDamage": 12,
+              "element": "physical",
+              "maxTicks": 12,
+              "status": {
+                "kind": "slow",
+                "percent": 0.2,
+                "seconds": 1
+              },
+              "attackableAnchor": {
+                "kind": "stake",
+                "placement": "zoneEnd",
+                "hp": 12,
+                "radius": 0.45,
+                "directHitsOnly": true,
+                "reward": false,
+                "expiresWithZone": true
+              }
+            }
+          }
+        ],
+        "recovery": 1.2,
+        "interruptible": true
+      },
+      "lamp-sweep": {
+        "id": "lamp-sweep",
+        "label": "收灯横扫",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "lamp",
+            "windup": 1.1,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 16,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 2.2,
+                "angleDegrees": 140
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.2,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "裂地镐：0.95/0.30s窄直道18伤，后摇1.10s；横拉绳：1.20/0.35s地面绳带12伤与20%减速1s，后摇1.20s，可砍索；半血收灯：1.10s举灯后横扫16伤，亮扇照常可见、无熄屏",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "Attackable hazard anchor HP12/radius0.45 are explicit adapter defaults; one baseline free weapon hit clears it, and it gives no resource/loot reward.",
+        "The visible stake/chain lock is placed at the hazard zone end (a circular pin landing has its end at its center). This endpoint is adapter placement: line/rectangle length is clipped by real visibility and same layer; the anchor backs off by its radius to a reachable legal endpoint. If no counterable anchor exists, do not create an uncounterable zone. The source specifies a visible bypassable chain, not a unique authored lock coordinate."
+      ]
+    },
+    "halfHealth": {
+      "threshold": 0.5,
+      "once": true,
+      "queuedAttackId": "lamp-sweep"
+    },
+    "route": "profile"
+  },
+  "ELITE_02": {
+    "id": "ELITE_02",
+    "name": "裂风督猎",
+    "body": "human",
+    "movement": {
+      "speed": 1.5,
+      "turnRate": 3.2,
+      "preferredRange": 15,
+      "awarenessRange": 18,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 2,
+    "cycle": [
+      "double-arrow",
+      "pin-arrow"
+    ],
+    "attacks": {
+      "double-arrow": {
+        "id": "double-arrow",
+        "label": "双风箭",
+        "legacyKind": "shot",
+        "pose": "attack_bow",
+        "minRange": 0,
+        "maxRange": 18,
+        "steps": [
+          {
+            "id": "first",
+            "windup": 1.25,
+            "lock": 0.35,
+            "active": 0.02,
+            "baseDamage": 14,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "caster",
+                "lengthMetres": 16,
+                "widthMetres": 0.65
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "projectile": {
+              "kind": "crossbow",
+              "speed": 8,
+              "range": 18,
+              "radius": 0.4,
+              "collidesWithWalls": true,
+              "homing": false,
+              "count": 1,
+              "spreadDegrees": 0,
+              "element": "physical"
+            }
+          },
+          {
+            "id": "second",
+            "windup": 0.7,
+            "lock": 0.3,
+            "active": 0.02,
+            "baseDamage": 14,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "caster",
+                "lengthMetres": 16,
+                "widthMetres": 0.65
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "projectile": {
+              "kind": "crossbow",
+              "speed": 8,
+              "range": 18,
+              "radius": 0.4,
+              "collidesWithWalls": true,
+              "homing": false,
+              "count": 1,
+              "spreadDegrees": 0,
+              "element": "physical"
+            }
+          }
+        ],
+        "recovery": 1.6,
+        "interruptible": true
+      },
+      "pin-arrow": {
+        "id": "pin-arrow",
+        "label": "钉地箭",
+        "legacyKind": "shot",
+        "pose": "attack_bow",
+        "minRange": 0,
+        "maxRange": 18,
+        "steps": [
+          {
+            "id": "pin",
+            "windup": 1.3,
+            "lock": 0.4,
+            "active": 0.16,
+            "baseDamage": 16,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "circle",
+                "origin": "lockedTarget",
+                "radiusMetres": 1.2
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "zone": {
+              "duration": 4,
+              "maxActivePerOwner": 2,
+              "blocksMovement": false,
+              "hitOncePerTarget": true,
+              "tickInterval": 1,
+              "tickBaseDamage": 0,
+              "element": "physical",
+              "maxTicks": 4,
+              "attackableAnchor": {
+                "kind": "stake",
+                "placement": "zoneEnd",
+                "hp": 12,
+                "radius": 0.45,
+                "directHitsOnly": true,
+                "reward": false,
+                "expiresWithZone": true
+              }
+            }
+          }
+        ],
+        "recovery": 1.3,
+        "interruptible": true
+      },
+      "rock-reposition": {
+        "id": "rock-reposition",
+        "label": "沿山路换岩位",
+        "legacyKind": "short",
+        "pose": "interact",
+        "minRange": 0,
+        "maxRange": 24,
+        "steps": [
+          {
+            "id": "walk",
+            "windup": 0,
+            "lock": 0,
+            "active": 2,
+            "baseDamage": 0,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "none",
+                "origin": "caster"
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "selfMove": {
+              "mode": "visibleReposition",
+              "distance": 4,
+              "collisionStops": true,
+              "duration": 2.0
+            }
+          }
+        ],
+        "recovery": 0.5,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "双风箭：首箭1.25/0.35s、第二箭另0.70s提示，各14伤，后摇1.60s；钉地箭：1.30/0.40s圆落点16伤，留下可破坏索桩4s；半血换岩位：沿可见山路走位2s，无瞬移无无敌",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "Pin-arrow aftermath has zero additional damage: source gives a destructible stake and duration, not extra damage. Reposition is path movement, never teleport/invulnerability.",
+        "Attackable hazard anchor HP12/radius0.45 are explicit adapter defaults; one baseline free weapon hit clears it, and it gives no resource/loot reward.",
+        "The visible stake/chain lock is placed at the hazard zone end (a circular pin landing has its end at its center). This endpoint is adapter placement: line/rectangle length is clipped by real visibility and same layer; the anchor backs off by its radius to a reachable legal endpoint. If no counterable anchor exists, do not create an uncounterable zone. The source specifies a visible bypassable chain, not a unique authored lock coordinate."
+      ]
+    },
+    "halfHealth": {
+      "threshold": 0.5,
+      "once": true,
+      "queuedAttackId": "rock-reposition"
+    },
+    "route": "profile"
+  },
+  "ELITE_03": {
+    "id": "ELITE_03",
+    "name": "沉船打捞王",
+    "body": "human",
+    "movement": {
+      "speed": 1.5,
+      "turnRate": 3.2,
+      "preferredRange": 2.8,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 2,
+    "cycle": [
+      "hook",
+      "rope-sweep"
+    ],
+    "attacks": {
+      "hook": {
+        "id": "hook",
+        "label": "拖钩直击",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "hook",
+            "windup": 1.1,
+            "lock": 0.35,
+            "active": 0.16,
+            "baseDamage": 18,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "caster",
+                "lengthMetres": 3,
+                "widthMetres": 0.7
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.2,
+        "interruptible": true
+      },
+      "rope-sweep": {
+        "id": "rope-sweep",
+        "label": "缆绳横扫",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "sweep",
+            "windup": 1.2,
+            "lock": 0.35,
+            "active": 0.16,
+            "baseDamage": 20,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 2.4,
+                "angleDegrees": 140
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.4,
+        "interruptible": true
+      },
+      "anchor": {
+        "id": "anchor",
+        "label": "半血吊锚",
+        "legacyKind": "short",
+        "pose": "interact",
+        "minRange": 0,
+        "maxRange": 14,
+        "steps": [
+          {
+            "id": "drop",
+            "windup": 1.5,
+            "lock": 0.5,
+            "active": 0.16,
+            "baseDamage": 22,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "circle",
+                "origin": "lockedTarget",
+                "radiusMetres": 1.8
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.8,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "拖钩：1.10/0.35s直道18伤短受击，后摇1.20s；缆绳横扫：1.20/0.35s扇形20伤，后摇1.40s；半血吊锚：1.50/0.50s固定圆落点22伤，锚落后站立恢复1.80s，无必死落水",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit."
+      ]
+    },
+    "halfHealth": {
+      "threshold": 0.5,
+      "once": true,
+      "queuedAttackId": "anchor"
+    },
+    "route": "profile"
+  },
+  "ELITE_04": {
+    "id": "ELITE_04",
+    "name": "铁棘典狱长",
+    "body": "human",
+    "movement": {
+      "speed": 1.5,
+      "turnRate": 3.2,
+      "preferredRange": 2.4,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 2,
+    "cycle": [
+      "spike-rush",
+      "hammer-double",
+      "key-chain"
+    ],
+    "attacks": {
+      "spike-rush": {
+        "id": "spike-rush",
+        "label": "钉甲突击",
+        "legacyKind": "charge",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.82,
+        "steps": [
+          {
+            "id": "rush",
+            "windup": 1,
+            "lock": 0.35,
+            "active": 0.4,
+            "baseDamage": 20,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "caster",
+                "lengthMetres": 2.5,
+                "widthMetres": 1
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "selfMove": {
+              "mode": "charge",
+              "distance": 2.5,
+              "collisionStops": true,
+              "duration": 0.4
+            }
+          }
+        ],
+        "recovery": 1.2,
+        "interruptible": true
+      },
+      "hammer-double": {
+        "id": "hammer-double",
+        "label": "锤击两段",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "first",
+            "windup": 1.1,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 18,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 2,
+                "angleDegrees": 100
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          },
+          {
+            "id": "second",
+            "windup": 0.75,
+            "lock": 0.25,
+            "active": 0.16,
+            "baseDamage": 14,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 2,
+                "angleDegrees": 110
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.5,
+        "interruptible": true
+      },
+      "key-chain": {
+        "id": "key-chain",
+        "label": "钥链锁道",
+        "legacyKind": "shot",
+        "pose": "interact",
+        "minRange": 0,
+        "maxRange": 12,
+        "steps": [
+          {
+            "id": "chain",
+            "windup": 1.4,
+            "lock": 0.4,
+            "active": 0.16,
+            "baseDamage": 0,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "caster",
+                "lengthMetres": 6,
+                "widthMetres": 0.6
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "zone": {
+              "duration": 3,
+              "maxActivePerOwner": 2,
+              "blocksMovement": false,
+              "hitOncePerTarget": true,
+              "tickInterval": 0.25,
+              "tickBaseDamage": 12,
+              "element": "physical",
+              "maxTicks": 12,
+              "attackableAnchor": {
+                "kind": "chainLock",
+                "placement": "zoneEnd",
+                "hp": 12,
+                "radius": 0.45,
+                "directHitsOnly": true,
+                "reward": false,
+                "expiresWithZone": true
+              }
+            }
+          }
+        ],
+        "recovery": 1.2,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "钉甲突击：1.00/0.35s直道20伤，后摇1.20s；锤击两段：1.10s起手18伤，另0.75s提示14伤，后摇1.50s；钥链锁道：1.40s可打断，画一条可绕锁链，12伤，不封唯一退路",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "Charge start range is travel distance +0.32m player collider radius, so the authored movement can physically reach a stationary target; damage and windup are unchanged.",
+        "Attackable hazard anchor HP12/radius0.45 are explicit adapter defaults; one baseline free weapon hit clears it, and it gives no resource/loot reward.",
+        "The visible stake/chain lock is placed at the hazard zone end (a circular pin landing has its end at its center). This endpoint is adapter placement: line/rectangle length is clipped by real visibility and same layer; the anchor backs off by its radius to a reachable legal endpoint. If no counterable anchor exists, do not create an uncounterable zone. The source specifies a visible bypassable chain, not a unique authored lock coordinate."
+      ]
+    },
+    "defense": {
+      "guardArcDegrees": 120,
+      "frontalDamageMultiplier": 0.4,
+      "breakOpenSeconds": 0
+    },
+    "route": "profile"
+  },
+  "ELITE_05": {
+    "id": "ELITE_05",
+    "name": "震炉巨像",
+    "body": "machine",
+    "movement": {
+      "speed": 1.5,
+      "turnRate": 1.3,
+      "preferredRange": 3,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 2,
+    "cycle": [
+      "double-hammer",
+      "pressure-ring"
+    ],
+    "attacks": {
+      "double-hammer": {
+        "id": "double-hammer",
+        "label": "双锤落地",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "hammers",
+            "windup": 1.4,
+            "lock": 0.4,
+            "active": 0.16,
+            "baseDamage": 22,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "lockedTarget",
+                "lengthMetres": 1.6,
+                "widthMetres": 1.6,
+                "offsetX": -1
+              },
+              {
+                "kind": "rectangle",
+                "origin": "lockedTarget",
+                "lengthMetres": 1.6,
+                "widthMetres": 1.6,
+                "offsetX": 1
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.6,
+        "interruptible": true
+      },
+      "pressure-ring": {
+        "id": "pressure-ring",
+        "label": "冷光泄压",
+        "legacyKind": "short",
+        "pose": "spell",
+        "minRange": 0,
+        "maxRange": 4.3,
+        "steps": [
+          {
+            "id": "ring",
+            "windup": 1.6,
+            "lock": 0.5,
+            "active": 0.16,
+            "baseDamage": 18,
+            "element": "arcane",
+            "geometry": [
+              {
+                "kind": "ring",
+                "origin": "caster",
+                "radiusMetres": 4,
+                "innerRadiusMetres": 1.2,
+                "gapAngleDegrees": 80,
+                "gapDirectionDegrees": 180
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.5,
+        "interruptible": true
+      },
+      "overload-hammer": {
+        "id": "overload-hammer",
+        "label": "过载重复锤击",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "extra-hammer",
+            "windup": 1.8,
+            "lock": 0.5,
+            "active": 0.16,
+            "baseDamage": 22,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "lockedTarget",
+                "lengthMetres": 1.6,
+                "widthMetres": 1.6,
+                "offsetX": -1
+              },
+              {
+                "kind": "rectangle",
+                "origin": "lockedTarget",
+                "lengthMetres": 1.6,
+                "widthMetres": 1.6,
+                "offsetX": 1
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.8,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "双锤落地：1.40/0.40s两个固定方框各22伤，同招只结一次，后摇1.60s；冷光泄压：1.60/0.50s带缺口环带18伤，后摇1.50s；半血过载：1.80s明确屈膝后重复一次锤击，暴露膝齿1.80s，无锁血",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "Both hammer boxes share one hit ledger for this step, not 22 damage twice at the overlap. The once-only overload queues after the current action to repeat a hammer with its own1.8s warning."
+      ]
+    },
+    "halfHealth": {
+      "threshold": 0.5,
+      "once": true,
+      "queuedAttackId": "overload-hammer"
+    },
+    "route": "profile"
+  },
+  "ELITE_06": {
+    "id": "ELITE_06",
+    "name": "三刃守誓阵",
+    "body": "machine",
+    "movement": {
+      "speed": 2,
+      "turnRate": 2.8,
+      "preferredRange": 2.2,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 2,
+    "cycle": [
+      "three-blades",
+      "oath-cut"
+    ],
+    "attacks": {
+      "three-blades": {
+        "id": "three-blades",
+        "label": "第一剑→第二剑→第三剑",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.8,
+        "steps": [
+          {
+            "id": "first",
+            "windup": 0.9,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 16,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 2.5,
+                "angleDegrees": 120
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          },
+          {
+            "id": "second",
+            "windup": 0.85,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 16,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "caster",
+                "lengthMetres": 3.2,
+                "widthMetres": 1.4
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          },
+          {
+            "id": "third",
+            "windup": 1.1,
+            "lock": 0.35,
+            "active": 0.16,
+            "baseDamage": 20,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "caster",
+                "lengthMetres": 5,
+                "widthMetres": 0.75
+              },
+              {
+                "kind": "fan",
+                "origin": "caster",
+                "radiusMetres": 3,
+                "angleDegrees": 240,
+                "gapAngleDegrees": 80,
+                "gapDirectionDegrees": 180,
+                "onlyBelowHp": 0.5
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.8,
+        "interruptible": true
+      },
+      "oath-cut": {
+        "id": "oath-cut",
+        "label": "守誓追斩",
+        "legacyKind": "shot",
+        "pose": "spell",
+        "minRange": 4,
+        "maxRange": 12,
+        "steps": [
+          {
+            "id": "ground-cut",
+            "windup": 1.25,
+            "lock": 0.4,
+            "active": 0.16,
+            "baseDamage": 20,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "caster",
+                "lengthMetres": 12,
+                "widthMetres": 0.9
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.8,
+        "interruptible": true,
+        "cooldown": 7
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "第一剑：0.90/0.30s扇形16伤；第二剑：另0.85s矩形16伤；第三剑：另1.10s窄直道20伤朝门内，三击后1.80s全阵恢复；半血顺序仍1→2→3，仅第三剑多一道有缺口扇形，各段不重叠堵满地面",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "2026-11-12 user-requested behavior review supersedes the fixed door-facing emplacement: the shared base visibly glides at2m/s and tracks the player until each final lock; no teleport or invented walking frames.",
+        "Three statues remain one logical formation and one HP/reward ledger. Existing independently drawn blade poses are reused; the ranged cut uses the third-blade pose. Independent statue anchors remain an art limitation.",
+        "Melee starts within2.8m and retains all three original windups, locks, damage,1.8s recovery and the half-health third-sword gap. The melee third cut returns to5m rather than the historical30m fixed-axis adapter.",
+        "Beyond4m, a12m x0.9m ground-cut has1.25s warning,0.4s final lock,20damage,1.8s recovery and7s cooldown. Between moves the formation closes distance using existing collision/navigation. Movement and attack positions are authoritative; no HP/loot increase."
+      ]
+    },
+    "route": "profile"
+  },
+  "ELITE_07": {
+    "id": "ELITE_07",
+    "name": "深闸镇守",
+    "body": "machine",
+    "movement": {
+      "speed": 1.5,
+      "turnRate": 3.2,
+      "preferredRange": 3,
+      "awarenessRange": 12,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 2,
+    "cycle": [
+      "wheel-rush",
+      "counterweight"
+    ],
+    "attacks": {
+      "wheel-rush": {
+        "id": "wheel-rush",
+        "label": "闸轮盾撞",
+        "legacyKind": "charge",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 3.32,
+        "steps": [
+          {
+            "id": "rush",
+            "windup": 1.2,
+            "lock": 0.4,
+            "active": 0.5,
+            "baseDamage": 22,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "caster",
+                "lengthMetres": 3,
+                "widthMetres": 1.2
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock",
+            "selfMove": {
+              "mode": "charge",
+              "distance": 3,
+              "collisionStops": true,
+              "duration": 0.5
+            }
+          }
+        ],
+        "recovery": 1.4,
+        "interruptible": true
+      },
+      "counterweight": {
+        "id": "counterweight",
+        "label": "配重砸击",
+        "legacyKind": "swing",
+        "pose": "attack_sword",
+        "minRange": 0,
+        "maxRange": 2.5,
+        "steps": [
+          {
+            "id": "slam",
+            "windup": 1.5,
+            "lock": 0.45,
+            "active": 0.16,
+            "baseDamage": 24,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "rectangle",
+                "origin": "lockedTarget",
+                "lengthMetres": 2.2,
+                "widthMetres": 2.2
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.6,
+        "interruptible": true
+      },
+      "sluice-channels": {
+        "id": "sluice-channels",
+        "label": "半血交替光槽",
+        "legacyKind": "shot",
+        "pose": "spell",
+        "minRange": 0,
+        "maxRange": 16,
+        "steps": [
+          {
+            "id": "left",
+            "windup": 1.8,
+            "lock": 0.5,
+            "active": 0.16,
+            "baseDamage": 16,
+            "element": "arcane",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "caster",
+                "lengthMetres": 12,
+                "widthMetres": 1.1,
+                "offsetX": -2
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          },
+          {
+            "id": "right",
+            "windup": 1,
+            "lock": 0.4,
+            "active": 0.16,
+            "baseDamage": 16,
+            "element": "arcane",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "caster",
+                "lengthMetres": 12,
+                "widthMetres": 1.1,
+                "offsetX": 2
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.4,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "闸轮盾撞：1.20/0.40s直道22伤，后摇1.40s；配重砸击：1.50/0.45s方框24伤，后摇1.60s；半血泄流：1.80s提示两道交替光槽各16伤，干石侧道始终安全，无淹水倒计时",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "Second-channel warning1.0s and line offsets/dimensions are adapter defaults. Bounded strips leave dry side lanes; no water level/countdown system is introduced.",
+        "Charge start range is travel distance +0.32m player collider radius, so the authored movement can physically reach a stationary target; damage and windup are unchanged."
+      ]
+    },
+    "defense": {
+      "guardArcDegrees": 120,
+      "frontalDamageMultiplier": 0.4,
+      "breakOpenSeconds": 0
+    },
+    "halfHealth": {
+      "threshold": 0.5,
+      "once": true,
+      "queuedAttackId": "sluice-channels"
+    },
+    "route": "profile"
+  },
+  "ELITE_08": {
+    "id": "ELITE_08",
+    "name": "覆文守秘者",
+    "body": "machine",
+    "movement": {
+      "speed": 1.5,
+      "turnRate": 3.2,
+      "preferredRange": 13,
+      "awarenessRange": 18,
+      "damagedAwarenessRange": 30
+    },
+    "attackSlotCost": 2,
+    "cycle": [
+      "double-mirrors",
+      "tablet-seals"
+    ],
+    "attacks": {
+      "double-mirrors": {
+        "id": "double-mirrors",
+        "label": "聚镜→左束→右束",
+        "legacyKind": "shot",
+        "pose": "spell",
+        "minRange": 0,
+        "maxRange": 16,
+        "steps": [
+          {
+            "id": "focus",
+            "windup": 1.4,
+            "lock": 0.4,
+            "active": 0.02,
+            "baseDamage": 0,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "none",
+                "origin": "caster"
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          },
+          {
+            "id": "left",
+            "windup": 0.8,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 14,
+            "element": "arcane",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "caster",
+                "lengthMetres": 16,
+                "widthMetres": 0.6,
+                "offsetX": -1.2
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          },
+          {
+            "id": "right",
+            "windup": 0.8,
+            "lock": 0.3,
+            "active": 0.16,
+            "baseDamage": 14,
+            "element": "arcane",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "caster",
+                "lengthMetres": 16,
+                "widthMetres": 0.6,
+                "offsetX": 1.2
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.5,
+        "interruptible": true
+      },
+      "tablet-seals": {
+        "id": "tablet-seals",
+        "label": "双铭板落印",
+        "legacyKind": "shot",
+        "pose": "spell",
+        "minRange": 0,
+        "maxRange": 16,
+        "steps": [
+          {
+            "id": "seals",
+            "windup": 1.5,
+            "lock": 0.5,
+            "active": 0.16,
+            "baseDamage": 18,
+            "element": "physical",
+            "geometry": [
+              {
+                "kind": "circle",
+                "origin": "lockedTarget",
+                "radiusMetres": 1.1,
+                "offsetX": -1.4
+              },
+              {
+                "kind": "circle",
+                "origin": "lockedTarget",
+                "radiusMetres": 1.1,
+                "offsetX": 1.4
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 1.4,
+        "interruptible": true
+      },
+      "open-core": {
+        "id": "open-core",
+        "label": "半血开镜",
+        "legacyKind": "shot",
+        "pose": "spell",
+        "minRange": 0,
+        "maxRange": 18,
+        "steps": [
+          {
+            "id": "core-beam",
+            "windup": 1.8,
+            "lock": 0.5,
+            "active": 0.16,
+            "baseDamage": 20,
+            "element": "arcane",
+            "geometry": [
+              {
+                "kind": "line",
+                "origin": "caster",
+                "lengthMetres": 18,
+                "widthMetres": 0.9
+              }
+            ],
+            "maxHitsPerTarget": 1,
+            "requiresLineOfSight": true,
+            "requiresSameLayer": true,
+            "targetTracking": "untilFinalLock"
+          }
+        ],
+        "recovery": 2,
+        "interruptible": true
+      }
+    },
+    "policy": {
+      "playerForcedDisplacement": 0,
+      "hitReactionMovesEnemy": false,
+      "teleport": false,
+      "spawnReinforcements": false,
+      "idleBetweenMoves": 0.5,
+      "offscreenTellSeconds": 1
+    },
+    "source": {
+      "catalog": "source-art/skills/pure-skills-v2/campaign-v8.json",
+      "catalogSha256": "bcf05627a6273175a58708d6a6ec9bc8abf7f03251d35de95ff85cae042017eb",
+      "description": "双镜扫线：1.40/0.40s先左后右各14伤，每束独立0.80s提示，后摇1.50s；铭板落印：1.50/0.50s两小圆18伤，后摇1.40s；半血开镜：1.80s中枢聚光后20伤直线，完成后暴露镜芯2.00s，远近均可命中",
+      "adapterTuning": [
+        "Unspecified shape dimensions, movement speed/turn rate, preferred/start ranges and active windows adapt the existing Cocos state machine; these are tuning defaults, not newly claimed source values.",
+        "Damaged awareness is bounded30m for every identity including legacy, covering the largest legal player skill envelope (THU05 center18m +radius9m +target collider0.3m =27.3m). Initial awareness and ordinary18m projectile/start ranges remain unchanged; this is not unlimited pursuit.",
+        "Opening focus1.4s precedes each independent0.8s beam warning. Two seal disks share a step hit ledger. The exposed core remains hittable from any legal range."
+      ]
+    },
+    "halfHealth": {
+      "threshold": 0.5,
+      "once": true,
+      "queuedAttackId": "open-core"
+    },
+    "route": "profile"
+  }
+};
+installHuntProfiles(ENEMY_COMBAT_PROFILES);
+applyEarlyChapterBosses(ENEMY_COMBAT_PROFILES);
+for(const profile of Object.values(ENEMY_COMBAT_PROFILES))profile.policy.hitReactionMovesEnemy=!profile.movement.stationary&&!profile.solidBody;

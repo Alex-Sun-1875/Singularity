@@ -1,0 +1,286 @@
+{
+  "prompt": [
+    2,
+    "092a71f3-7866-4f6e-b9cb-7aa9fa94adbd",
+    {
+      "1": {
+        "class_type": "UNETLoader",
+        "inputs": {
+          "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+          "weight_dtype": "default"
+        }
+      },
+      "2": {
+        "class_type": "CLIPLoader",
+        "inputs": {
+          "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+          "type": "qwen_image",
+          "device": "cpu"
+        }
+      },
+      "3": {
+        "class_type": "VAELoader",
+        "inputs": {
+          "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+        }
+      },
+      "4": {
+        "class_type": "LoadImage",
+        "inputs": {
+          "image": "qwen21-consistency-v2/run-front-refined/guide.png"
+        }
+      },
+      "6": {
+        "class_type": "JoinImageWithAlpha",
+        "inputs": {
+          "image": [
+            "4",
+            0
+          ],
+          "alpha": [
+            "4",
+            1
+          ]
+        }
+      },
+      "8": {
+        "class_type": "TextEncodeQwenImage21",
+        "inputs": {
+          "clip": [
+            "2",
+            0
+          ],
+          "vae": [
+            "3",
+            0
+          ],
+          "prompt": "图1是已经用原始像素做好比例引导的正面向镜头跑步角色，图2是已验收站姿设计参考。只修补图1遮罩里的领口接缝、上提后的腰带与髋部衣摆连接、裤裆及膝部布料过渡。严格保持图1已经确定的轮廓、跑步相位、前倾和屈腿姿态，腰线已上提约22像素，腿部视觉比例适度修长；不要再增加整体身高或拉满画布。头部已经按图2原像素同尺度复用，不要改变头型、脸、银色短卷发、头大小或位置。完整保留原袖子、双手手指、护腕、剑柄护手剑鞘、包袋与两只靴子的形状和位置；不得重画或拉伸装备。衣服为图2相同的暗酒红、金线刺绣与深灰袖子，裤子同为暗炭灰；保留原布料褶皱和明暗，不要把裤子变成明亮灰白色。只抚平局部接缝，不增删衣饰、不扩大躯干、不改变步态，不复制站姿。保持512×768、原脚部锚点(256,712)、单个完整角色和透明背景，输出RGBA PNG。",
+          "negative_prompt": "",
+          "resolution": 0,
+          "images.image_1": [
+            "6",
+            0
+          ],
+          "images.image_2": [
+            "7",
+            0
+          ]
+        }
+      },
+      "9": {
+        "class_type": "QwenImage21Cache",
+        "inputs": {
+          "model": [
+            "1",
+            0
+          ],
+          "device": "cpu",
+          "dtype": "default"
+        }
+      },
+      "10": {
+        "class_type": "CFGGuider",
+        "inputs": {
+          "model": [
+            "9",
+            0
+          ],
+          "positive": [
+            "8",
+            0
+          ],
+          "negative": [
+            "8",
+            1
+          ],
+          "cfg": 1.0
+        }
+      },
+      "11": {
+        "class_type": "RandomNoise",
+        "inputs": {
+          "noise_seed": 20261107
+        }
+      },
+      "12": {
+        "class_type": "KSamplerSelect",
+        "inputs": {
+          "sampler_name": "euler"
+        }
+      },
+      "13": {
+        "class_type": "ManualSigmas",
+        "inputs": {
+          "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+        }
+      },
+      "14": {
+        "class_type": "SamplerCustomAdvanced",
+        "inputs": {
+          "noise": [
+            "11",
+            0
+          ],
+          "guider": [
+            "10",
+            0
+          ],
+          "sampler": [
+            "12",
+            0
+          ],
+          "sigmas": [
+            "13",
+            0
+          ],
+          "latent_image": [
+            "20",
+            0
+          ]
+        }
+      },
+      "15": {
+        "class_type": "VAEDecode",
+        "inputs": {
+          "samples": [
+            "14",
+            0
+          ],
+          "vae": [
+            "3",
+            0
+          ]
+        }
+      },
+      "16": {
+        "class_type": "SaveImage",
+        "inputs": {
+          "images": [
+            "15",
+            0
+          ],
+          "filename_prefix": "qwen21-consistency-v2/run-front-refined"
+        }
+      },
+      "17": {
+        "class_type": "VAEEncode",
+        "inputs": {
+          "pixels": [
+            "6",
+            0
+          ],
+          "vae": [
+            "3",
+            0
+          ]
+        }
+      },
+      "18": {
+        "class_type": "LoadImageMask",
+        "inputs": {
+          "image": "qwen21-consistency-v2/run-front-refined/mask.png",
+          "channel": "red"
+        }
+      },
+      "20": {
+        "class_type": "SetLatentNoiseMask",
+        "inputs": {
+          "samples": [
+            "17",
+            0
+          ],
+          "mask": [
+            "18",
+            0
+          ]
+        }
+      },
+      "5": {
+        "class_type": "LoadImage",
+        "inputs": {
+          "image": "qwen21-consistency-v2/run-front-refined/reference.png"
+        }
+      },
+      "7": {
+        "class_type": "JoinImageWithAlpha",
+        "inputs": {
+          "image": [
+            "5",
+            0
+          ],
+          "alpha": [
+            "5",
+            1
+          ]
+        }
+      }
+    },
+    {
+      "client_id": "raphael-qwen21-consistency-v2",
+      "create_time": 1794024816040
+    },
+    [
+      "16"
+    ]
+  ],
+  "outputs": {
+    "16": {
+      "images": [
+        {
+          "filename": "run-front-refined_00001_.png",
+          "subfolder": "qwen21-consistency-v2",
+          "type": "output",
+          "metadata": {
+            "kind": "image",
+            "width": 512,
+            "height": 768
+          }
+        }
+      ]
+    }
+  },
+  "status": {
+    "status_str": "success",
+    "completed": true,
+    "messages": [
+      [
+        "execution_start",
+        {
+          "prompt_id": "092a71f3-7866-4f6e-b9cb-7aa9fa94adbd",
+          "timestamp": 1794024816041
+        }
+      ],
+      [
+        "execution_cached",
+        {
+          "nodes": [
+            "1",
+            "2",
+            "3",
+            "9",
+            "11",
+            "12",
+            "13"
+          ],
+          "prompt_id": "092a71f3-7866-4f6e-b9cb-7aa9fa94adbd",
+          "timestamp": 1794024816066
+        }
+      ],
+      [
+        "execution_success",
+        {
+          "prompt_id": "092a71f3-7866-4f6e-b9cb-7aa9fa94adbd",
+          "timestamp": 1794024895787
+        }
+      ]
+    ]
+  },
+  "meta": {
+    "16": {
+      "node_id": "16",
+      "display_node": "16",
+      "parent_node": null,
+      "real_node_id": "16"
+    }
+  }
+}

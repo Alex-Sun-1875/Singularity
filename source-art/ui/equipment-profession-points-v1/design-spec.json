@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "date": "2026-11-11",
+  "scope": "UI静态视觉方案，未实现",
+  "navigation": [
+    "人物",
+    "装备",
+    "职业",
+    "加点",
+    "技能",
+    "锻造"
+  ],
+  "equipment": {
+    "defaultOnEveryEntry": "当前职业",
+    "scope": "全部装备仅指已持有装备，非全游戏图鉴",
+    "filters": {
+      "profession": [
+        "当前职业",
+        "全部装备"
+      ],
+      "type": [
+        "全部",
+        "武器",
+        "防具",
+        "首饰"
+      ],
+      "combination": "两个筛选按交集生效"
+    },
+    "currentProfession": "读取实际启用的战斗流派；不读取正在预览的职业卡片",
+    "inclusion": {
+      "WAR": "单手剑及通用装备",
+      "BOW": "弓及通用装备",
+      "FIR": "法杖及通用装备",
+      "THU": "法杖及通用装备"
+    },
+    "compatibility": "通用防具与首饰默认显示；双手武器、副手、等级条件继续单独判断",
+    "allGear": "其他职业装备可以预览；保持当前职业和穿戴不变",
+    "foreignAction": "前往职业选择，并预选对应职业。法杖适配烈焰与雷霆时须由玩家明确选择",
+    "emptyState": "本职业暂无此类装备；提供查看全部装备入口"
+  },
+  "profession": {
+    "choices": [
+      "破军战技",
+      "逐风弓术",
+      "烈焰秘术",
+      "雷霆秘术"
+    ],
+    "identity": "现有四战斗流派在界面中称职业；不新增职业规则",
+    "selection": "选择卡片仅预览，当前与预览分别标记",
+    "confirmation": "确认切换前展示目标职业、将采用的已持有武器及技能配置变化",
+    "persistence": "保留属性分配和全局技能投资；恢复该流派已保存技能槽",
+    "equipment": "保留可兼容通用装备；不兼容副手须在确认摘要说明卸入行囊，不删除装备、不免费生成新装备",
+    "availability": "沿用安全检查点/整备可用规则；战斗中明确原因并禁用确认"
+  },
+  "allocation": {
+    "subpages": [
+      "属性加点",
+      "技能加点"
+    ],
+    "independentPools": "属性点与技能点分开；所有职业共用技能点池",
+    "attributeRows": [
+      "力量",
+      "敏捷",
+      "智力",
+      "体质"
+    ],
+    "attributeExample": {
+      "current": [
+        18,
+        16,
+        10,
+        12
+      ],
+      "draft": [
+        21,
+        16,
+        10,
+        14
+      ],
+      "remaining": [
+        14,
+        9
+      ],
+      "spent": 5,
+      "hp": [
+        178,
+        186
+      ],
+      "strengthBonusPercent": [
+        6.4,
+        8.8
+      ]
+    },
+    "skillExample": {
+      "id": "BOW_02",
+      "name": "连穿箭",
+      "rank": [
+        2,
+        3
+      ],
+      "cost": 2,
+      "remaining": [
+        9,
+        7
+      ],
+      "targets": [
+        3,
+        4
+      ],
+      "radiusMeters": [
+        4,
+        5
+      ]
+    },
+    "costs": "开放1级免费；2/3/4/5级逐次消耗1/2/3/4点",
+    "currentProfessionDefault": "技能加点先展示当前职业，其他职业投资不重置；全局投入仍计入同一池",
+    "draft": "加减仅修改预览；应用统一提交；撤销恢复实际分配",
+    "navigationGuard": "有未应用改动时切页/关闭提供继续编辑与放弃预览；点数本身为草稿，不额外生成点数",
+    "respec": "安全检查点可免费重配；本系重配与全部重配须明确退款范围，复用已有规则",
+    "skillTab": "保留原技能页负责1—4主动槽、终极与被动配置；加点页只负责成长",
+    "insufficient": "明确显示需要与剩余，禁用继续增加；不得压低角色基础免费1级"
+  },
+  "device": {
+    "baseline": [
+      844,
+      390
+    ],
+    "physicalExport": [
+      2532,
+      1170
+    ],
+    "touchMin": [
+      48,
+      48
+    ],
+    "targetGap": 8,
+    "finalization": "本轮为视觉与信息结构稿；尚需按实际安全区、平台胶囊和固定48逻辑像素点击区细化。不可把生图像素或导出尺寸视为Cocos布局值",
+    "scenes": "仅玩家主动打开的完整管理面板覆盖画面；不增加常驻HUD；关闭恢复原HUD"
+  },
+  "art": {
+    "direction": "沿用现有暖暗金、深褐黑、暖象牙字与语义青色",
+    "reuse": "后续实现复用项目已验收人物、装备图标、各技能独立图标与公共UI组件；生成画面不是新增玩法资源接入证明"
+  },
+  "status": {
+    "cloudGeneration": "五屏已完成",
+    "localVisualReview": "已检查信息结构、文案与示例数字；已同步两种装备视图人物并补齐12格，替换现有独立弓术图标",
+    "userApproval": "2026-11-11 用户确认按本方案实现",
+    "pixelSpecification": "已按逻辑触控尺寸及安全区细化；浏览器检查见 implementation-result.json",
+    "cocosImplementation": "已实现并通过本地浏览器验证",
+    "tests": "TypeScript、60项既有规则检查、16个浏览器界面状态通过；TapTap真机待验"
+  },
+  "implementationRecord": "implementation-result.json",
+  "latestAlignmentReview": "../rpg-alignment-v5/implementation-result.json"
+}

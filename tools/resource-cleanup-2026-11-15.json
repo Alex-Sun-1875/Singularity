@@ -1,0 +1,91 @@
+{
+  "date": "2026-11-15",
+  "preparedAtUtc": "2026-11-15T01:18:18.468907+08:00",
+  "root": "F:\\workspace\\Singularity",
+  "archiveRoot": "F:\\workspace\\Singularity-cleanup-20261115\\retired-v10-and-duplicate-ui",
+  "status": "completed-archived-and-verified",
+  "method": "Move selected tracked resource files to an external same-volume recoverable archive; Git index and history are unchanged.",
+  "scope": "Only withdrawn v10 large artifacts and two byte-identical older UI captures. Preserve current Cocos assets, source dependencies, representative v10 still images, code, prompts, provenance and review reports.",
+  "files": 7,
+  "bytes": 100655114,
+  "targets": [
+    {
+      "path": "source-art/characters/3d-locomotion-v10/raphael.blend",
+      "reason": "withdrawn-v10-model",
+      "bytes": 64295990,
+      "sha256": "c5acfdef9cb6de5a8388f92288d6e1f82bfc6f16370ccc0bbbad5127f2851bdf",
+      "archivePath": "F:\\workspace\\Singularity-cleanup-20261115\\retired-v10-and-duplicate-ui\\source-art\\characters\\3d-locomotion-v10\\raphael.blend",
+      "retainedEquivalent": null
+    },
+    {
+      "path": "source-art/characters/3d-locomotion-v10/raphael-polish.glb",
+      "reason": "withdrawn-v10-export",
+      "bytes": 29152916,
+      "sha256": "13db555b0e861d0e595ab8f34f8a552c666128ceae151f846dd3e9b7130b21ce",
+      "archivePath": "F:\\workspace\\Singularity-cleanup-20261115\\retired-v10-and-duplicate-ui\\source-art\\characters\\3d-locomotion-v10\\raphael-polish.glb",
+      "retainedEquivalent": null
+    },
+    {
+      "path": "source-art/characters/3d-locomotion-v10/preview/side-leg-angle.gif",
+      "reason": "withdrawn-v10-animation-preview",
+      "bytes": 862456,
+      "sha256": "1e49a3836deecd9946d1e5ec05a7aa765d4226bd84810098e971140d83c8d74c",
+      "archivePath": "F:\\workspace\\Singularity-cleanup-20261115\\retired-v10-and-duplicate-ui\\source-art\\characters\\3d-locomotion-v10\\preview\\side-leg-angle.gif",
+      "retainedEquivalent": null
+    },
+    {
+      "path": "source-art/characters/3d-locomotion-v10/preview/leg-angle-pilot.jpg",
+      "reason": "withdrawn-v10-pilot-preview",
+      "bytes": 137457,
+      "sha256": "acd8bf2f336e00aa91e0b54651a7fbd9e0f629eb19750b945be0f0dfa9d3db41",
+      "archivePath": "F:\\workspace\\Singularity-cleanup-20261115\\retired-v10-and-duplicate-ui\\source-art\\characters\\3d-locomotion-v10\\preview\\leg-angle-pilot.jpg",
+      "retainedEquivalent": null
+    },
+    {
+      "path": "source-art/characters/3d-locomotion-v10/preview/side-pilot-cropped.jpg",
+      "reason": "withdrawn-v10-pilot-preview",
+      "bytes": 111961,
+      "sha256": "40212ce88dab425924832fb1373f671b70ccc328876c5d340e5d71e3e6449b08",
+      "archivePath": "F:\\workspace\\Singularity-cleanup-20261115\\retired-v10-and-duplicate-ui\\source-art\\characters\\3d-locomotion-v10\\preview\\side-pilot-cropped.jpg",
+      "retainedEquivalent": null
+    },
+    {
+      "path": "source-art/ui/quest-tracker-expand-v5/collapsed-game-v6.png",
+      "reason": "identical-to-retained-v8",
+      "bytes": 3047167,
+      "sha256": "f69bac1b34c9ba0be5de6d6c153b0a69212cf7687bf6b8b1e34e152e054975e2",
+      "archivePath": "F:\\workspace\\Singularity-cleanup-20261115\\retired-v10-and-duplicate-ui\\source-art\\ui\\quest-tracker-expand-v5\\collapsed-game-v6.png",
+      "retainedEquivalent": "source-art/ui/quest-tracker-expand-v5/collapsed-game-v8.png"
+    },
+    {
+      "path": "source-art/ui/quest-tracker-expand-v5/collapsed-game-v7.png",
+      "reason": "identical-to-retained-v8",
+      "bytes": 3047167,
+      "sha256": "f69bac1b34c9ba0be5de6d6c153b0a69212cf7687bf6b8b1e34e152e054975e2",
+      "archivePath": "F:\\workspace\\Singularity-cleanup-20261115\\retired-v10-and-duplicate-ui\\source-art\\ui\\quest-tracker-expand-v5\\collapsed-game-v7.png",
+      "retainedEquivalent": "source-art/ui/quest-tracker-expand-v5/collapsed-game-v8.png"
+    }
+  ],
+  "completedAtUtc": "2026-11-14T17:19:40.932873+00:00",
+  "verification": {
+    "protectedPathsChecked": 15920,
+    "protectedExistingFilesChecked": 15918,
+    "protectedFilesChanged": 0,
+    "archiveHashesMatched": 7,
+    "retainedCanonicalUiHashMatched": true,
+    "gitIndexUnchanged": true,
+    "runtimeAndBuildInputsChanged": false,
+    "trackedWorktreeBytesBefore": 7158295919,
+    "trackedWorktreeBytesAfter": 7057641559,
+    "trackedWorktreeGiBAfter": 6.5729,
+    "note": "No game build or TapTap device test was performed: this batch changes no runtime resources, code or build inputs. Moving files outside the worktree does not reclaim disk space from the external archive or Git/LFS history."
+  },
+  "intentionallyEditedDocumentation": [
+    "source-art/characters/3d-locomotion-v10/README.md",
+    "source-art/ui/quest-tracker-expand-v5/brief.md"
+  ],
+  "restore": {
+    "procedure": "For each target, verify the archived SHA-256, create its original parent if needed, and move archivePath to root/path only when the original path is absent.",
+    "archiveManifest": "F:\\workspace\\Singularity-cleanup-20261115\\retired-v10-and-duplicate-ui\\cleanup-manifest.json"
+  }
+}

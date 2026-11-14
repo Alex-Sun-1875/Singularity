@@ -1,0 +1,108 @@
+{
+  "verifiedAt": "2026-11-14T10:04:24.039201+08:00",
+  "version": "0.3.40",
+  "buildMode": "test",
+  "loginMode": "platform",
+  "change": "Remove the independent Cocos minigame first screen via the project build template; retain WebGL 2 context initialization and the existing game LoadingScreen. The engine splash totalTime remains zero.",
+  "replaces": "0.3.39 startup display",
+  "package": {
+    "path": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-no-cocos-splash-v40\\SwordAndFire_0.3.40_TapTap_test_20261114T020225Z\\SwordAndFire_0.3.40_TapTap_test_20261114T020225Z.zip",
+    "bytes": 219021910,
+    "sha256": "4eb481d37aa842f0d205e9ed928e1be5553dbf02bcf660dac4374095cdae38ea",
+    "zipEntries": 4108
+  },
+  "checks": {
+    "existingTestsPassed": 140,
+    "existingTestsFailed": 0,
+    "buildScriptSyntax": true,
+    "creatorBuild": true,
+    "sceneClassBinding": true,
+    "zippedChapterGameScriptAndSceneBinding": true,
+    "officialConversion": true,
+    "startupPolicy": true,
+    "defaultSplashRejectedByBuildGuard": true,
+    "packageAudit": true,
+    "zipCRC": "passed by report-taptap.py",
+    "deliverySha256": true,
+    "zippedStartupAndEngineMatchRuntimeProbe": true,
+    "zippedPlatformLoginEntry": true
+  },
+  "runtimeProbe": {
+    "startupSource": "F:\\workspace\\Singularity\\src\\cocos\\build\\taptap-no-cocos-splash-v40-package\\game\\first-screen.79473.js",
+    "startup": {
+      "imageRequests": 0,
+      "animationFrameRequests": 0,
+      "contextRequests": [
+        "webgl2"
+      ],
+      "promiseChainCompleted": true,
+      "webgl2Published": true,
+      "pixel": [
+        4,
+        9,
+        10,
+        255
+      ],
+      "glError": 0
+    },
+    "source": "F:\\workspace\\Singularity\\src\\cocos\\build\\taptap-no-cocos-splash-v40-package\\game\\cocos-js\\cc.60daa.js",
+    "scope": "Local Chromium execution of the actual minigame engine with fixture system/input APIs; not TapTap platform/device validation",
+    "constructors": {
+      "webgl1": "undefined",
+      "webgl2": "function"
+    },
+    "initialized": true,
+    "gfxAPI": 7,
+    "contextVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "renderer": "WebKit WebGL",
+    "glError": 0,
+    "swapchainReady": true,
+    "events": []
+  },
+  "sourceIntegrity": {
+    "frozenSourceProject": "C:\\Users\\Alexa\\AppData\\Local\\Temp\\Singularity-no-cocos-splash-v40-source-build",
+    "typeScriptFiles": 206,
+    "changesFrom0_3_39": [
+      "assets/scripts/app/BuildInfo.ts"
+    ],
+    "gameplayScriptsMatch0_3_39": true,
+    "workspaceChangesAfterSourceCopyNotIncluded": [
+      "assets/scripts/features/actors/runtime/FlatActors.ts",
+      "assets/scripts/features/navigation/runtime/Navigation.ts",
+      "assets/scripts/features/world/runtime/SceneBuilder.ts"
+    ],
+    "note": "This package is the 0.3.39 gameplay snapshot with the new startup template and generated 0.3.40 version. The listed later workspace changes were left untouched."
+  },
+  "payload": {
+    "completeUploadZipBytes": 219021910,
+    "offlineInitialPayload": {
+      "files": 26,
+      "rawBytes": 5639732,
+      "zipBytes": 1363762,
+      "zipMiB": 1.3,
+      "budgetMiB": 20.0,
+      "withinLocalBudget": true,
+      "sha256": "1899d6ccb3dbb9a21fa3add1c01cf92beb28e52bf8a70f7dba36a6d2753e7071",
+      "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+    },
+    "subpackageCount": 76,
+    "contentPackCount": 64,
+    "actualPlatformInitialBytes": null,
+    "actualResourcesNeededBeforePlayBytes": null
+  },
+  "buildRecovery": {
+    "mainProjectEngineSettingsOpenError": true,
+    "initialJunctionBuildRejectedForMissingSceneClass": true,
+    "invalidIntermediatePackage": "SwordAndFire_0.3.40_TapTap_test_20261114T015813Z",
+    "fullSourceCopyBuildNoMissingClass": true,
+    "versionAllocatedOnce": true
+  },
+  "uploaded": false,
+  "platformVerified": false,
+  "pending": [
+    "真实 TapTap App 下冷启动、收起后恢复、原生登录与前后台会话恢复。",
+    "目标设备触控、本机存档延续、资源分包及加载失败恢复。",
+    "平台解析、最低基础库版本、实际首包及可玩前下载量。",
+    "Android 横屏和 iPhone 14 以上目标真机的内存、帧率与温升。"
+  ]
+}

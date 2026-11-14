@@ -1,0 +1,2132 @@
+{
+  "front": {
+    "guide_path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\front\\guide-rgba.png",
+    "guide_sha256": "07da115b9b6a6b2632a3e456b19010d19270ac23017c5eed321edae8ef968a0f",
+    "feature_protect_mask": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\palette\\final-feature-protection\\front-feature-protect-mask.png",
+    "feature_protect_sha256": "f436af1983c7ffb1ebe5b13bf3e843d4133194cdf9b158cf3fa7f02c735665b5",
+    "method": "remove whole-arm lock only; independently restore original/new weapon, head, boots, complete hand/wrist boxes, arm warm skin, gold/warm details and alpha-edge protection",
+    "sleeve_edit_nonzero_pixels": 3988,
+    "sleeve_edit_pixels_inside_previously_locked_arm": 3988,
+    "hands_wrist_protected_pixels": 19667,
+    "pure_bright_skin_evidence_pixels": 2590,
+    "skin_evidence_scope": "Bright skin gate inside previously audited hand cores. Full hand/wrist windows, including ambiguous shadows, are protected separately; colour gate is not claimed to segment all skin.",
+    "pure_skin_guide_vs_original_RGBA_identical": true,
+    "local_calibration_pure_skin_vs_original_RGBA_identical": true,
+    "local_calibration_hands_wrists_vs_guide_RGBA_identical": true,
+    "local_calibration_weapon_head_boots_vs_guide_RGBA_identical": true,
+    "local_calibration_alpha_vs_guide_identical": true,
+    "cloth_mask_overlap_with_protected_features": 0,
+    "local_calibration_report": {
+      "direction": "front",
+      "method": "separate conservative wine/sleeve/trouser ROIs; bounded low-frequency ICC Lab L affine plus signed a/b offset; original fine-L residual",
+      "Lab_encoding": "Pillow ImageCms sRGB to ICC Lab D50; L8/2.55=Lstar, signed a/b decoded from NumPy bytes",
+      "materials": {
+        "wine_vest": {
+          "guide_or_original": {
+            "interior_pixel_count": 3557,
+            "mask_nonzero_pixel_count": 4439,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                71.0,
+                41.0,
+                42.0
+              ],
+              [
+                85.0,
+                52.0,
+                51.0
+              ],
+              [
+                98.0,
+                61.0,
+                61.0
+              ],
+              [
+                113.0,
+                72.0,
+                72.0
+              ],
+              [
+                124.0,
+                82.0,
+                82.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                53.0,
+                14.0,
+                5.0
+              ],
+              [
+                66.0,
+                15.0,
+                6.0
+              ],
+              [
+                77.0,
+                16.0,
+                7.0
+              ],
+              [
+                91.0,
+                18.0,
+                8.0
+              ],
+              [
+                101.0,
+                19.0,
+                9.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              20.784,
+              25.882,
+              30.196,
+              35.686,
+              39.608
+            ],
+            "Lab_D50_median": [
+              30.196,
+              16.0,
+              7.0
+            ],
+            "Lstar_IQR": 9.804
+          },
+          "candidate_before": {
+            "interior_pixel_count": 3557,
+            "mask_nonzero_pixel_count": 4439,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                71.0,
+                41.0,
+                42.0
+              ],
+              [
+                85.0,
+                52.0,
+                51.0
+              ],
+              [
+                98.0,
+                61.0,
+                61.0
+              ],
+              [
+                113.0,
+                72.0,
+                72.0
+              ],
+              [
+                124.0,
+                82.0,
+                82.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                53.0,
+                14.0,
+                5.0
+              ],
+              [
+                66.0,
+                15.0,
+                6.0
+              ],
+              [
+                77.0,
+                16.0,
+                7.0
+              ],
+              [
+                91.0,
+                18.0,
+                8.0
+              ],
+              [
+                101.0,
+                19.0,
+                9.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              20.784,
+              25.882,
+              30.196,
+              35.686,
+              39.608
+            ],
+            "Lab_D50_median": [
+              30.196,
+              16.0,
+              7.0
+            ],
+            "Lstar_IQR": 9.804
+          },
+          "standing_reference": {
+            "interior_pixel_count": 5770,
+            "mask_nonzero_pixel_count": 7120,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                74.0,
+                44.0,
+                43.0
+              ],
+              [
+                86.0,
+                53.0,
+                52.0
+              ],
+              [
+                98.0,
+                61.0,
+                61.0
+              ],
+              [
+                108.0,
+                68.0,
+                67.0
+              ],
+              [
+                119.0,
+                76.0,
+                76.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                56.0,
+                14.0,
+                6.0
+              ],
+              [
+                67.0,
+                15.0,
+                7.0
+              ],
+              [
+                77.0,
+                17.0,
+                7.0
+              ],
+              [
+                85.0,
+                18.0,
+                8.0
+              ],
+              [
+                95.0,
+                19.0,
+                9.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              21.961,
+              26.275,
+              30.196,
+              33.333,
+              37.255
+            ],
+            "Lab_D50_median": [
+              30.196,
+              17.0,
+              7.0
+            ],
+            "Lstar_IQR": 7.059
+          },
+          "status": "calibrated",
+          "L_lowpass_sigma": 1.2,
+          "L_scale": 0.9,
+          "L_offset": 8.264933776855472,
+          "L_delta_cap": [
+            -36,
+            36
+          ],
+          "chroma_delta_ab": [
+            1.0,
+            0.0
+          ],
+          "candidate_after": {
+            "interior_pixel_count": 3557,
+            "mask_nonzero_pixel_count": 4439,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                75.0,
+                43.0,
+                44.0
+              ],
+              [
+                88.0,
+                52.0,
+                53.0
+              ],
+              [
+                100.0,
+                61.0,
+                61.0
+              ],
+              [
+                114.0,
+                71.0,
+                72.0
+              ],
+              [
+                123.0,
+                80.0,
+                80.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                56.0,
+                15.0,
+                5.0
+              ],
+              [
+                67.0,
+                16.0,
+                6.0
+              ],
+              [
+                78.0,
+                17.0,
+                7.0
+              ],
+              [
+                90.0,
+                19.0,
+                8.0
+              ],
+              [
+                99.0,
+                20.0,
+                9.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              21.961,
+              26.275,
+              30.588,
+              35.294,
+              38.824
+            ],
+            "Lab_D50_median": [
+              30.588,
+              17.0,
+              7.0
+            ],
+            "Lstar_IQR": 9.02
+          },
+          "before_error_vs_standing": {
+            "signed_delta_Lstar_astar_bstar": [
+              0.0,
+              -1.0,
+              0.0
+            ],
+            "deltaE76_between_ROI_medians": 1.0
+          },
+          "after_error_vs_standing": {
+            "signed_delta_Lstar_astar_bstar": [
+              0.392,
+              0.0,
+              0.0
+            ],
+            "deltaE76_between_ROI_medians": 0.392
+          }
+        },
+        "charcoal_sleeves": {
+          "guide_or_original": {
+            "interior_pixel_count": 3509,
+            "mask_nonzero_pixel_count": 3988,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                46.0,
+                44.0,
+                46.0
+              ],
+              [
+                61.0,
+                57.0,
+                61.0
+              ],
+              [
+                81.0,
+                78.0,
+                84.0
+              ],
+              [
+                96.0,
+                93.0,
+                99.0
+              ],
+              [
+                106.0,
+                103.0,
+                109.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                46.0,
+                1.0,
+                -4.0
+              ],
+              [
+                63.0,
+                2.0,
+                -4.0
+              ],
+              [
+                85.0,
+                2.0,
+                -3.0
+              ],
+              [
+                102.0,
+                3.0,
+                -1.0
+              ],
+              [
+                112.0,
+                3.0,
+                0.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              18.039,
+              24.706,
+              33.333,
+              40.0,
+              43.922
+            ],
+            "Lab_D50_median": [
+              33.333,
+              2.0,
+              -3.0
+            ],
+            "Lstar_IQR": 15.294
+          },
+          "candidate_before": {
+            "interior_pixel_count": 3509,
+            "mask_nonzero_pixel_count": 3988,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                46.0,
+                44.0,
+                46.0
+              ],
+              [
+                61.0,
+                57.0,
+                61.0
+              ],
+              [
+                81.0,
+                78.0,
+                84.0
+              ],
+              [
+                96.0,
+                93.0,
+                99.0
+              ],
+              [
+                106.0,
+                103.0,
+                109.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                46.0,
+                1.0,
+                -4.0
+              ],
+              [
+                63.0,
+                2.0,
+                -4.0
+              ],
+              [
+                85.0,
+                2.0,
+                -3.0
+              ],
+              [
+                102.0,
+                3.0,
+                -1.0
+              ],
+              [
+                112.0,
+                3.0,
+                0.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              18.039,
+              24.706,
+              33.333,
+              40.0,
+              43.922
+            ],
+            "Lab_D50_median": [
+              33.333,
+              2.0,
+              -3.0
+            ],
+            "Lstar_IQR": 15.294
+          },
+          "standing_reference": {
+            "interior_pixel_count": 4747,
+            "mask_nonzero_pixel_count": 5273,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                49.0,
+                46.0,
+                48.0
+              ],
+              [
+                59.0,
+                57.0,
+                60.0
+              ],
+              [
+                71.0,
+                69.0,
+                73.0
+              ],
+              [
+                82.0,
+                79.0,
+                85.0
+              ],
+              [
+                89.0,
+                87.0,
+                92.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                49.0,
+                1.0,
+                -4.0
+              ],
+              [
+                62.0,
+                1.0,
+                -3.0
+              ],
+              [
+                75.0,
+                2.0,
+                -2.0
+              ],
+              [
+                86.0,
+                2.0,
+                -1.0
+              ],
+              [
+                95.0,
+                3.0,
+                0.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              19.216,
+              24.314,
+              29.412,
+              33.725,
+              37.255
+            ],
+            "Lab_D50_median": [
+              29.412,
+              2.0,
+              -2.0
+            ],
+            "Lstar_IQR": 9.412
+          },
+          "status": "calibrated",
+          "L_lowpass_sigma": 1.2,
+          "L_scale": 0.9,
+          "L_offset": -1.9740493774414034,
+          "L_delta_cap": [
+            -36,
+            36
+          ],
+          "chroma_delta_ab": [
+            0.0,
+            1.0
+          ],
+          "candidate_after": {
+            "interior_pixel_count": 3509,
+            "mask_nonzero_pixel_count": 3988,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                41.0,
+                38.0,
+                39.0
+              ],
+              [
+                54.0,
+                50.0,
+                52.0
+              ],
+              [
+                71.0,
+                68.0,
+                72.0
+              ],
+              [
+                85.0,
+                81.0,
+                86.0
+              ],
+              [
+                94.0,
+                90.0,
+                95.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                39.0,
+                1.0,
+                -3.0
+              ],
+              [
+                54.0,
+                2.0,
+                -3.0
+              ],
+              [
+                75.0,
+                2.0,
+                -2.0
+              ],
+              [
+                90.0,
+                3.0,
+                -1.0
+              ],
+              [
+                99.0,
+                3.0,
+                1.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              15.294,
+              21.176,
+              29.412,
+              35.294,
+              38.824
+            ],
+            "Lab_D50_median": [
+              29.412,
+              2.0,
+              -2.0
+            ],
+            "Lstar_IQR": 14.118
+          },
+          "before_error_vs_standing": {
+            "signed_delta_Lstar_astar_bstar": [
+              3.921,
+              0.0,
+              -1.0
+            ],
+            "deltaE76_between_ROI_medians": 4.047
+          },
+          "after_error_vs_standing": {
+            "signed_delta_Lstar_astar_bstar": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "deltaE76_between_ROI_medians": 0.0
+          }
+        },
+        "dark_gray_trousers": {
+          "guide_or_original": {
+            "interior_pixel_count": 14469,
+            "mask_nonzero_pixel_count": 15330,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                66.0,
+                60.0,
+                58.0
+              ],
+              [
+                77.0,
+                70.0,
+                68.0
+              ],
+              [
+                91.0,
+                84.0,
+                82.0
+              ],
+              [
+                116.0,
+                107.0,
+                106.0
+              ],
+              [
+                134.0,
+                124.0,
+                124.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                66.0,
+                2.0,
+                1.0
+              ],
+              [
+                77.0,
+                2.0,
+                1.0
+              ],
+              [
+                92.0,
+                3.0,
+                2.0
+              ],
+              [
+                117.0,
+                4.0,
+                3.0
+              ],
+              [
+                135.0,
+                4.0,
+                3.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              25.882,
+              30.196,
+              36.078,
+              45.882,
+              52.941
+            ],
+            "Lab_D50_median": [
+              36.078,
+              3.0,
+              2.0
+            ],
+            "Lstar_IQR": 15.686
+          },
+          "candidate_before": {
+            "interior_pixel_count": 14469,
+            "mask_nonzero_pixel_count": 15330,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                66.0,
+                60.0,
+                58.0
+              ],
+              [
+                77.0,
+                70.0,
+                68.0
+              ],
+              [
+                91.0,
+                84.0,
+                82.0
+              ],
+              [
+                116.0,
+                107.0,
+                106.0
+              ],
+              [
+                134.0,
+                124.0,
+                124.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                66.0,
+                2.0,
+                1.0
+              ],
+              [
+                77.0,
+                2.0,
+                1.0
+              ],
+              [
+                92.0,
+                3.0,
+                2.0
+              ],
+              [
+                117.0,
+                4.0,
+                3.0
+              ],
+              [
+                135.0,
+                4.0,
+                3.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              25.882,
+              30.196,
+              36.078,
+              45.882,
+              52.941
+            ],
+            "Lab_D50_median": [
+              36.078,
+              3.0,
+              2.0
+            ],
+            "Lstar_IQR": 15.686
+          },
+          "standing_reference": {
+            "interior_pixel_count": 16187,
+            "mask_nonzero_pixel_count": 17218,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                71.0,
+                64.0,
+                62.0
+              ],
+              [
+                82.0,
+                74.0,
+                73.0
+              ],
+              [
+                94.0,
+                85.0,
+                85.0
+              ],
+              [
+                103.0,
+                95.0,
+                94.0
+              ],
+              [
+                111.0,
+                102.0,
+                102.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                71.0,
+                2.0,
+                1.0
+              ],
+              [
+                83.0,
+                3.0,
+                1.0
+              ],
+              [
+                95.0,
+                3.0,
+                2.0
+              ],
+              [
+                104.0,
+                4.0,
+                2.0
+              ],
+              [
+                113.0,
+                4.0,
+                3.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              27.843,
+              32.549,
+              37.255,
+              40.784,
+              44.314
+            ],
+            "Lab_D50_median": [
+              37.255,
+              3.0,
+              2.0
+            ],
+            "Lstar_IQR": 8.235
+          },
+          "status": "calibrated",
+          "L_lowpass_sigma": 1.2,
+          "L_scale": 0.9,
+          "L_offset": 11.803235626220697,
+          "L_delta_cap": [
+            -36,
+            36
+          ],
+          "chroma_delta_ab": [
+            0.0,
+            0.0
+          ],
+          "candidate_after": {
+            "interior_pixel_count": 14469,
+            "mask_nonzero_pixel_count": 15330,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                70.0,
+                64.0,
+                62.0
+              ],
+              [
+                80.0,
+                73.0,
+                71.0
+              ],
+              [
+                93.0,
+                86.0,
+                85.0
+              ],
+              [
+                116.0,
+                107.0,
+                106.0
+              ],
+              [
+                132.0,
+                122.0,
+                122.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                71.0,
+                2.0,
+                1.0
+              ],
+              [
+                81.0,
+                2.0,
+                1.0
+              ],
+              [
+                95.0,
+                3.0,
+                2.0
+              ],
+              [
+                117.0,
+                4.0,
+                3.0
+              ],
+              [
+                133.0,
+                4.0,
+                3.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              27.843,
+              31.765,
+              37.255,
+              45.882,
+              52.157
+            ],
+            "Lab_D50_median": [
+              37.255,
+              3.0,
+              2.0
+            ],
+            "Lstar_IQR": 14.118
+          },
+          "before_error_vs_standing": {
+            "signed_delta_Lstar_astar_bstar": [
+              -1.177,
+              0.0,
+              0.0
+            ],
+            "deltaE76_between_ROI_medians": 1.177
+          },
+          "after_error_vs_standing": {
+            "signed_delta_Lstar_astar_bstar": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "deltaE76_between_ROI_medians": 0.0
+          }
+        }
+      },
+      "strength": 1.0,
+      "status": "numerical palette candidate; not artistic acceptance; no production writes",
+      "alpha_bytes_identical": true,
+      "outside_mask_RGBA_bytes_identical": true,
+      "protected_RGBA_bytes_identical": true,
+      "union_nonzero_pixel_count": 23757,
+      "limitations": [
+        "Material/geometry proxy masks are conservative, not manually traced semantic masks. Excluded seams and boundaries retain the input colour.",
+        "Exact weapon and ambiguous hand/pouch boundaries require caller-provided protect_mask on the final guide geometry.",
+        "Distribution differences include pose, baked shading and view. DeltaE76 between unpaired ROI medians is a diagnostic, not perceptual/artistic acceptance.",
+        "Preserving fine-L residual is before ICC quantization, mask blending and sRGB gamut clipping; exact RGB fold identity is not claimed."
+      ]
+    },
+    "no_model_network_vision_upload_or_production_write": true,
+    "status": "feature protection numerically verified; material masks remain conservative proxies; artistic review pending"
+  },
+  "back": {
+    "guide_path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\sword\\back-run\\merged-guide-rgba.png",
+    "guide_sha256": "4706afcb97655e3ef7c9fbf0acef99eb7b51479efd13e9cedb5b9c5964322fc8",
+    "feature_protect_mask": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\palette\\final-feature-protection\\back-feature-protect-mask.png",
+    "feature_protect_sha256": "e6f4174f7537b3f21ee264b6f637d28d029d7fa3a261855bf60275459adf384c",
+    "method": "remove whole-arm lock only; independently restore original/new weapon, head, boots, complete hand/wrist boxes, arm warm skin, gold/warm details and alpha-edge protection",
+    "sleeve_edit_nonzero_pixels": 3949,
+    "sleeve_edit_pixels_inside_previously_locked_arm": 3949,
+    "hands_wrist_protected_pixels": 10261,
+    "pure_bright_skin_evidence_pixels": 797,
+    "skin_evidence_scope": "Bright skin gate inside previously audited hand cores. Full hand/wrist windows, including ambiguous shadows, are protected separately; colour gate is not claimed to segment all skin.",
+    "pure_skin_guide_vs_original_RGBA_identical": true,
+    "local_calibration_pure_skin_vs_original_RGBA_identical": true,
+    "local_calibration_hands_wrists_vs_guide_RGBA_identical": true,
+    "local_calibration_weapon_head_boots_vs_guide_RGBA_identical": true,
+    "local_calibration_alpha_vs_guide_identical": true,
+    "cloth_mask_overlap_with_protected_features": 0,
+    "local_calibration_report": {
+      "direction": "back",
+      "method": "separate conservative wine/sleeve/trouser ROIs; bounded low-frequency ICC Lab L affine plus signed a/b offset; original fine-L residual",
+      "Lab_encoding": "Pillow ImageCms sRGB to ICC Lab D50; L8/2.55=Lstar, signed a/b decoded from NumPy bytes",
+      "materials": {
+        "wine_vest": {
+          "guide_or_original": {
+            "interior_pixel_count": 2815,
+            "mask_nonzero_pixel_count": 3725,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                74.0,
+                44.0,
+                43.0
+              ],
+              [
+                97.0,
+                61.0,
+                61.0
+              ],
+              [
+                117.0,
+                76.0,
+                75.0
+              ],
+              [
+                132.0,
+                88.0,
+                88.0
+              ],
+              [
+                144.0,
+                98.0,
+                98.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                55.4,
+                13.0,
+                6.0
+              ],
+              [
+                77.0,
+                16.0,
+                7.0
+              ],
+              [
+                94.0,
+                18.0,
+                8.0
+              ],
+              [
+                108.0,
+                19.0,
+                8.0
+              ],
+              [
+                119.0,
+                20.0,
+                9.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              21.725,
+              30.196,
+              36.863,
+              42.353,
+              46.667
+            ],
+            "Lab_D50_median": [
+              36.863,
+              18.0,
+              8.0
+            ],
+            "Lstar_IQR": 12.157
+          },
+          "candidate_before": {
+            "interior_pixel_count": 2815,
+            "mask_nonzero_pixel_count": 3725,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                74.0,
+                44.0,
+                43.0
+              ],
+              [
+                97.0,
+                61.0,
+                61.0
+              ],
+              [
+                117.0,
+                76.0,
+                75.0
+              ],
+              [
+                132.0,
+                88.0,
+                88.0
+              ],
+              [
+                144.0,
+                98.0,
+                98.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                55.4,
+                13.0,
+                6.0
+              ],
+              [
+                77.0,
+                16.0,
+                7.0
+              ],
+              [
+                94.0,
+                18.0,
+                8.0
+              ],
+              [
+                108.0,
+                19.0,
+                8.0
+              ],
+              [
+                119.0,
+                20.0,
+                9.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              21.725,
+              30.196,
+              36.863,
+              42.353,
+              46.667
+            ],
+            "Lab_D50_median": [
+              36.863,
+              18.0,
+              8.0
+            ],
+            "Lstar_IQR": 12.157
+          },
+          "standing_reference": {
+            "interior_pixel_count": 5470,
+            "mask_nonzero_pixel_count": 6573,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                71.0,
+                42.0,
+                41.0
+              ],
+              [
+                86.0,
+                51.0,
+                51.0
+              ],
+              [
+                100.0,
+                61.0,
+                60.0
+              ],
+              [
+                112.0,
+                70.0,
+                70.0
+              ],
+              [
+                123.0,
+                79.0,
+                79.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                53.0,
+                13.0,
+                6.0
+              ],
+              [
+                66.0,
+                15.0,
+                7.0
+              ],
+              [
+                78.0,
+                18.0,
+                8.0
+              ],
+              [
+                89.0,
+                19.0,
+                9.0
+              ],
+              [
+                99.0,
+                20.0,
+                9.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              20.784,
+              25.882,
+              30.588,
+              34.902,
+              38.824
+            ],
+            "Lab_D50_median": [
+              30.588,
+              18.0,
+              8.0
+            ],
+            "Lstar_IQR": 9.02
+          },
+          "status": "calibrated",
+          "L_lowpass_sigma": 1.2,
+          "L_scale": 0.9,
+          "L_offset": -6.545401000976568,
+          "L_delta_cap": [
+            -36,
+            36
+          ],
+          "chroma_delta_ab": [
+            0.0,
+            0.0
+          ],
+          "candidate_after": {
+            "interior_pixel_count": 2815,
+            "mask_nonzero_pixel_count": 3725,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                62.0,
+                34.0,
+                33.0
+              ],
+              [
+                83.0,
+                48.0,
+                49.0
+              ],
+              [
+                101.0,
+                61.0,
+                61.0
+              ],
+              [
+                115.0,
+                72.0,
+                72.0
+              ],
+              [
+                125.0,
+                80.0,
+                81.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                43.0,
+                13.0,
+                6.0
+              ],
+              [
+                63.0,
+                16.0,
+                7.0
+              ],
+              [
+                78.0,
+                18.0,
+                8.0
+              ],
+              [
+                91.0,
+                19.0,
+                8.0
+              ],
+              [
+                101.0,
+                20.0,
+                9.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              16.863,
+              24.706,
+              30.588,
+              35.686,
+              39.608
+            ],
+            "Lab_D50_median": [
+              30.588,
+              18.0,
+              8.0
+            ],
+            "Lstar_IQR": 10.98
+          },
+          "before_error_vs_standing": {
+            "signed_delta_Lstar_astar_bstar": [
+              6.275,
+              0.0,
+              0.0
+            ],
+            "deltaE76_between_ROI_medians": 6.275
+          },
+          "after_error_vs_standing": {
+            "signed_delta_Lstar_astar_bstar": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "deltaE76_between_ROI_medians": 0.0
+          }
+        },
+        "charcoal_sleeves": {
+          "guide_or_original": {
+            "interior_pixel_count": 3513,
+            "mask_nonzero_pixel_count": 3949,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                43.0,
+                39.0,
+                41.0
+              ],
+              [
+                55.0,
+                51.0,
+                54.0
+              ],
+              [
+                66.0,
+                62.0,
+                66.0
+              ],
+              [
+                78.0,
+                75.0,
+                79.0
+              ],
+              [
+                101.0,
+                95.0,
+                101.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                41.0,
+                1.0,
+                -3.0
+              ],
+              [
+                55.0,
+                2.0,
+                -2.0
+              ],
+              [
+                68.0,
+                2.0,
+                -2.0
+              ],
+              [
+                82.0,
+                3.0,
+                -1.0
+              ],
+              [
+                105.0,
+                4.0,
+                0.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              16.078,
+              21.569,
+              26.667,
+              32.157,
+              41.176
+            ],
+            "Lab_D50_median": [
+              26.667,
+              2.0,
+              -2.0
+            ],
+            "Lstar_IQR": 10.588
+          },
+          "candidate_before": {
+            "interior_pixel_count": 3513,
+            "mask_nonzero_pixel_count": 3949,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                43.0,
+                39.0,
+                41.0
+              ],
+              [
+                55.0,
+                51.0,
+                54.0
+              ],
+              [
+                66.0,
+                62.0,
+                66.0
+              ],
+              [
+                78.0,
+                75.0,
+                79.0
+              ],
+              [
+                101.0,
+                95.0,
+                101.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                41.0,
+                1.0,
+                -3.0
+              ],
+              [
+                55.0,
+                2.0,
+                -2.0
+              ],
+              [
+                68.0,
+                2.0,
+                -2.0
+              ],
+              [
+                82.0,
+                3.0,
+                -1.0
+              ],
+              [
+                105.0,
+                4.0,
+                0.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              16.078,
+              21.569,
+              26.667,
+              32.157,
+              41.176
+            ],
+            "Lab_D50_median": [
+              26.667,
+              2.0,
+              -2.0
+            ],
+            "Lstar_IQR": 10.588
+          },
+          "standing_reference": {
+            "interior_pixel_count": 4355,
+            "mask_nonzero_pixel_count": 4831,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                56.0,
+                53.0,
+                55.0
+              ],
+              [
+                62.0,
+                59.0,
+                62.0
+              ],
+              [
+                69.0,
+                66.0,
+                70.0
+              ],
+              [
+                77.5,
+                74.0,
+                79.0
+              ],
+              [
+                87.0,
+                83.0,
+                88.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                57.0,
+                1.0,
+                -3.0
+              ],
+              [
+                65.0,
+                2.0,
+                -2.0
+              ],
+              [
+                73.0,
+                2.0,
+                -2.0
+              ],
+              [
+                81.5,
+                2.0,
+                -1.0
+              ],
+              [
+                91.0,
+                3.0,
+                0.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              22.353,
+              25.49,
+              28.627,
+              31.961,
+              35.686
+            ],
+            "Lab_D50_median": [
+              28.627,
+              2.0,
+              -2.0
+            ],
+            "Lstar_IQR": 6.471
+          },
+          "status": "calibrated",
+          "L_lowpass_sigma": 1.2,
+          "L_scale": 0.9,
+          "L_offset": 10.461988067626955,
+          "L_delta_cap": [
+            -36,
+            36
+          ],
+          "chroma_delta_ab": [
+            0.0,
+            0.0
+          ],
+          "candidate_after": {
+            "interior_pixel_count": 3513,
+            "mask_nonzero_pixel_count": 3949,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                47.0,
+                44.0,
+                46.0
+              ],
+              [
+                59.0,
+                55.0,
+                58.0
+              ],
+              [
+                69.0,
+                65.0,
+                69.0
+              ],
+              [
+                81.0,
+                77.0,
+                81.0
+              ],
+              [
+                101.0,
+                96.0,
+                102.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                47.0,
+                1.0,
+                -3.0
+              ],
+              [
+                60.0,
+                2.0,
+                -3.0
+              ],
+              [
+                72.0,
+                2.0,
+                -2.0
+              ],
+              [
+                85.0,
+                3.0,
+                -1.0
+              ],
+              [
+                105.0,
+                4.0,
+                0.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              18.431,
+              23.529,
+              28.235,
+              33.333,
+              41.176
+            ],
+            "Lab_D50_median": [
+              28.235,
+              2.0,
+              -2.0
+            ],
+            "Lstar_IQR": 9.804
+          },
+          "before_error_vs_standing": {
+            "signed_delta_Lstar_astar_bstar": [
+              -1.96,
+              0.0,
+              0.0
+            ],
+            "deltaE76_between_ROI_medians": 1.96
+          },
+          "after_error_vs_standing": {
+            "signed_delta_Lstar_astar_bstar": [
+              -0.392,
+              0.0,
+              0.0
+            ],
+            "deltaE76_between_ROI_medians": 0.392
+          }
+        },
+        "dark_gray_trousers": {
+          "guide_or_original": {
+            "interior_pixel_count": 14653,
+            "mask_nonzero_pixel_count": 15643,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                53.0,
+                47.0,
+                45.0
+              ],
+              [
+                69.0,
+                62.0,
+                60.0
+              ],
+              [
+                97.0,
+                89.0,
+                88.0
+              ],
+              [
+                124.0,
+                114.0,
+                114.0
+              ],
+              [
+                142.0,
+                132.0,
+                132.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                51.0,
+                2.0,
+                1.0
+              ],
+              [
+                68.0,
+                3.0,
+                1.0
+              ],
+              [
+                98.0,
+                3.0,
+                2.0
+              ],
+              [
+                125.0,
+                4.0,
+                2.0
+              ],
+              [
+                143.0,
+                5.0,
+                3.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              20.0,
+              26.667,
+              38.431,
+              49.02,
+              56.078
+            ],
+            "Lab_D50_median": [
+              38.431,
+              3.0,
+              2.0
+            ],
+            "Lstar_IQR": 22.353
+          },
+          "candidate_before": {
+            "interior_pixel_count": 14653,
+            "mask_nonzero_pixel_count": 15643,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                53.0,
+                47.0,
+                45.0
+              ],
+              [
+                69.0,
+                62.0,
+                60.0
+              ],
+              [
+                97.0,
+                89.0,
+                88.0
+              ],
+              [
+                124.0,
+                114.0,
+                114.0
+              ],
+              [
+                142.0,
+                132.0,
+                132.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                51.0,
+                2.0,
+                1.0
+              ],
+              [
+                68.0,
+                3.0,
+                1.0
+              ],
+              [
+                98.0,
+                3.0,
+                2.0
+              ],
+              [
+                125.0,
+                4.0,
+                2.0
+              ],
+              [
+                143.0,
+                5.0,
+                3.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              20.0,
+              26.667,
+              38.431,
+              49.02,
+              56.078
+            ],
+            "Lab_D50_median": [
+              38.431,
+              3.0,
+              2.0
+            ],
+            "Lstar_IQR": 22.353
+          },
+          "standing_reference": {
+            "interior_pixel_count": 16411,
+            "mask_nonzero_pixel_count": 17449,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                77.0,
+                69.0,
+                68.0
+              ],
+              [
+                91.0,
+                82.0,
+                82.0
+              ],
+              [
+                103.0,
+                94.0,
+                94.0
+              ],
+              [
+                113.0,
+                104.0,
+                104.0
+              ],
+              [
+                122.0,
+                113.0,
+                113.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                77.0,
+                3.0,
+                0.0
+              ],
+              [
+                92.0,
+                3.0,
+                1.0
+              ],
+              [
+                104.0,
+                4.0,
+                1.0
+              ],
+              [
+                114.0,
+                4.0,
+                2.0
+              ],
+              [
+                124.0,
+                5.0,
+                2.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              30.196,
+              36.078,
+              40.784,
+              44.706,
+              48.627
+            ],
+            "Lab_D50_median": [
+              40.784,
+              4.0,
+              1.0
+            ],
+            "Lstar_IQR": 8.627
+          },
+          "status": "calibrated",
+          "L_lowpass_sigma": 1.2,
+          "L_scale": 0.9,
+          "L_offset": 16.073686981201163,
+          "L_delta_cap": [
+            -36,
+            36
+          ],
+          "chroma_delta_ab": [
+            1.0,
+            -1.0
+          ],
+          "candidate_after": {
+            "interior_pixel_count": 14653,
+            "mask_nonzero_pixel_count": 15643,
+            "quantile_percent": [
+              10,
+              25,
+              50,
+              75,
+              90
+            ],
+            "RGB_quantiles": [
+              [
+                63.0,
+                56.0,
+                56.0
+              ],
+              [
+                78.0,
+                69.0,
+                69.0
+              ],
+              [
+                104.0,
+                94.0,
+                95.0
+              ],
+              [
+                129.0,
+                117.0,
+                120.0
+              ],
+              [
+                145.0,
+                133.0,
+                136.0
+              ]
+            ],
+            "Lab8_signed_quantiles": [
+              [
+                62.0,
+                3.0,
+                0.0
+              ],
+              [
+                77.0,
+                4.0,
+                0.0
+              ],
+              [
+                104.0,
+                4.0,
+                1.0
+              ],
+              [
+                129.0,
+                5.0,
+                1.0
+              ],
+              [
+                145.0,
+                6.0,
+                2.0
+              ]
+            ],
+            "Lstar_quantiles": [
+              24.314,
+              30.196,
+              40.784,
+              50.588,
+              56.863
+            ],
+            "Lab_D50_median": [
+              40.784,
+              4.0,
+              1.0
+            ],
+            "Lstar_IQR": 20.392
+          },
+          "before_error_vs_standing": {
+            "signed_delta_Lstar_astar_bstar": [
+              -2.353,
+              -1.0,
+              1.0
+            ],
+            "deltaE76_between_ROI_medians": 2.745
+          },
+          "after_error_vs_standing": {
+            "signed_delta_Lstar_astar_bstar": [
+              0.0,
+              0.0,
+              0.0
+            ],
+            "deltaE76_between_ROI_medians": 0.0
+          }
+        }
+      },
+      "strength": 1.0,
+      "status": "numerical palette candidate; not artistic acceptance; no production writes",
+      "alpha_bytes_identical": true,
+      "outside_mask_RGBA_bytes_identical": true,
+      "protected_RGBA_bytes_identical": true,
+      "union_nonzero_pixel_count": 23317,
+      "limitations": [
+        "Material/geometry proxy masks are conservative, not manually traced semantic masks. Excluded seams and boundaries retain the input colour.",
+        "Exact weapon and ambiguous hand/pouch boundaries require caller-provided protect_mask on the final guide geometry.",
+        "Distribution differences include pose, baked shading and view. DeltaE76 between unpaired ROI medians is a diagnostic, not perceptual/artistic acceptance.",
+        "Preserving fine-L residual is before ICC quantization, mask blending and sRGB gamut clipping; exact RGB fold identity is not claimed."
+      ]
+    },
+    "no_model_network_vision_upload_or_production_write": true,
+    "status": "feature protection numerically verified; material masks remain conservative proxies; artistic review pending"
+  }
+}

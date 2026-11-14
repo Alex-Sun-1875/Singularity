@@ -1,0 +1,427 @@
+{
+  "date": "2026-11-04",
+  "credit": "Powered by Poly Haven; Fabric082A from ambientCG",
+  "purpose": "First-chapter material source candidates only; no runtime installation.",
+  "processing": "Official 1K PNG bytes copied unchanged. No RGB tint, resampling, normal generation, AO baked into albedo, or cross-asset map mixing. ZIP extraction only for ambientCG.",
+  "existingWorkflowReused": "Download helper from tools/materials/fetch_surfaces.py; its runtime-export function was not called.",
+  "runtimeInstalled": false,
+  "licenseSources": [
+    "https://polyhaven.com/license",
+    "https://docs.ambientcg.com/license/"
+  ],
+  "apiTerms": "https://github.com/Poly-Haven/Public-API/blob/master/ToS.md",
+  "physicalDimensionReference": "https://github.com/Poly-Haven/Public-API/blob/master/swagger.yml",
+  "materials": [
+    {
+      "id": "grey-planks",
+      "label": "灰褐旧木板",
+      "sourceProvider": "Poly Haven",
+      "sourceAsset": "wood_planks_grey",
+      "sourcePage": "https://polyhaven.com/a/wood_planks_grey",
+      "license": "CC0-1.0",
+      "licenseSource": "https://polyhaven.com/license",
+      "sourceMetadata": "source-art/materials/chapter-one-v3/pbr-library/wood_planks_grey/info.json",
+      "authors": {
+        "Rob Tuytel": "All"
+      },
+      "sourceDimensionsMillimetres": [
+        1500,
+        1500.0001192092896
+      ],
+      "tileMetres": [
+        1.5,
+        1.5
+      ],
+      "physicalScaleStatus": "official API dimensions in millimetres; converted to metres",
+      "normalConvention": "OpenGL +Y",
+      "metallic": 0,
+      "status": "source-complete design candidate; offline and in-engine visual approval pending",
+      "visualReview": "原色低饱和灰褐；五条宽板、钉头和细纵纹清楚。比组合板v2更暗、更旧且偏冷；适合旧地板/棚屋候选，不能据来源确认橡木树种。",
+      "maps": [
+        {
+          "role": "albedo",
+          "file": "grey-planks/albedo.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/wood_planks_grey/wood_planks_grey_diff_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/wood_planks_grey/wood_planks_grey_diff_1k.png",
+          "officialMd5": "d60af478ac79df738c418977367b7e05",
+          "sha256": "3e6aeb842edd813759fdc96a6ffe6b695c888280f42501de589442311749ac5d",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 5566063,
+          "colorSpace": "sRGB",
+          "pngBitDepth": 16,
+          "storedImageMode": "RGB"
+        },
+        {
+          "role": "normal",
+          "file": "grey-planks/normal.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/wood_planks_grey/wood_planks_grey_nor_gl_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/wood_planks_grey/wood_planks_grey_nor_gl_1k.png",
+          "officialMd5": "0133a783487fff34b45edd8196878465",
+          "sha256": "a9f2ad602eca2d59e84f203b1087e819e62ae517532bb25f7eb02a13c826e08b",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 5350344,
+          "colorSpace": "linear",
+          "pngBitDepth": 16,
+          "storedImageMode": "RGB"
+        },
+        {
+          "role": "roughness",
+          "file": "grey-planks/roughness.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/wood_planks_grey/wood_planks_grey_rough_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/wood_planks_grey/wood_planks_grey_rough_1k.png",
+          "officialMd5": "d519c5f0d242e2fd3534536572118597",
+          "sha256": "f6d4d20bd344335b9f114d2f6873dffe8b62e774d268dd6fe43750caa045643e",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 1832684,
+          "colorSpace": "linear",
+          "pngBitDepth": 16,
+          "storedImageMode": "I;16"
+        },
+        {
+          "role": "ao",
+          "file": "grey-planks/ao.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/wood_planks_grey/wood_planks_grey_ao_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/wood_planks_grey/wood_planks_grey_ao_1k.png",
+          "officialMd5": "e5fd885bc3eda550b457c5028abf82d0",
+          "sha256": "fa5198238930aacb7a081fde36372fab1c3895f806046165da1566c4fbdb27cf",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 1264854,
+          "colorSpace": "linear",
+          "pngBitDepth": 16,
+          "storedImageMode": "RGB"
+        }
+      ]
+    },
+    {
+      "id": "grey-paving",
+      "label": "灰米铺石",
+      "sourceProvider": "Poly Haven",
+      "sourceAsset": "cobblestone_floor_08",
+      "sourcePage": "https://polyhaven.com/a/cobblestone_floor_08",
+      "license": "CC0-1.0",
+      "licenseSource": "https://polyhaven.com/license",
+      "sourceMetadata": "source-art/materials/chapter-one-v3/pbr-library/cobblestone_floor_08/info.json",
+      "authors": {
+        "Rob Tuytel": "All"
+      },
+      "sourceDimensionsMillimetres": [
+        2000,
+        2000
+      ],
+      "tileMetres": [
+        2.0,
+        2.0
+      ],
+      "physicalScaleStatus": "official API dimensions in millimetres; converted to metres",
+      "normalConvention": "OpenGL +Y",
+      "metallic": 0,
+      "status": "source-complete design candidate; offline and in-engine visual approval pending",
+      "visualReview": "原色灰米为主，含少量青灰、粉灰单石和稀疏绿缝；比旧04款绿植少。矩形圆角石块较组合板的不规则板石更规整，适合聚落步道候选；来源未证为石灰岩。",
+      "maps": [
+        {
+          "role": "albedo",
+          "file": "grey-paving/albedo.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/cobblestone_floor_08/cobblestone_floor_08_diff_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/cobblestone_floor_08/cobblestone_floor_08_diff_1k.png",
+          "officialMd5": "9f42289364d5c92b26f15e8dc97a3fe2",
+          "sha256": "b59d5660021f7adfc303b2924f5351aa80c5c36fc73fe378a204f7f739602b0a",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 1951481,
+          "colorSpace": "sRGB",
+          "pngBitDepth": 8,
+          "storedImageMode": "RGB"
+        },
+        {
+          "role": "normal",
+          "file": "grey-paving/normal.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/cobblestone_floor_08/cobblestone_floor_08_nor_gl_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/cobblestone_floor_08/cobblestone_floor_08_nor_gl_1k.png",
+          "officialMd5": "65b0b7b23a97753aea97143c31727d39",
+          "sha256": "0a6d3f1205c76ce64b01d04f22b570d239fd82b24df3be29791451f741ee4abb",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 2126688,
+          "colorSpace": "linear",
+          "pngBitDepth": 8,
+          "storedImageMode": "RGB"
+        },
+        {
+          "role": "roughness",
+          "file": "grey-paving/roughness.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/cobblestone_floor_08/cobblestone_floor_08_rough_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/cobblestone_floor_08/cobblestone_floor_08_rough_1k.png",
+          "officialMd5": "3645113707917a4e956d881654fd93ae",
+          "sha256": "c44f6bc7b7280c36fe51c7c892d8413b09b61ae929df2169642e6c227429c93e",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 627072,
+          "colorSpace": "linear",
+          "pngBitDepth": 8,
+          "storedImageMode": "L"
+        },
+        {
+          "role": "ao",
+          "file": "grey-paving/ao.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/cobblestone_floor_08/cobblestone_floor_08_ao_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/cobblestone_floor_08/cobblestone_floor_08_ao_1k.png",
+          "officialMd5": "ec0ff83ab8090911fe31400701e3e89b",
+          "sha256": "585a62fe2c5fd54c6257c8ff5f8046571e70b3155ab1d05fd14e66f2fa6bd074",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 458404,
+          "colorSpace": "linear",
+          "pngBitDepth": 8,
+          "storedImageMode": "L"
+        }
+      ]
+    },
+    {
+      "id": "natural-rock",
+      "label": "自然灰岩面",
+      "sourceProvider": "Poly Haven",
+      "sourceAsset": "rock_boulder_dry",
+      "sourcePage": "https://polyhaven.com/a/rock_boulder_dry",
+      "license": "CC0-1.0",
+      "licenseSource": "https://polyhaven.com/license",
+      "sourceMetadata": "source-art/materials/chapter-one-v3/pbr-library/rock_boulder_dry/info.json",
+      "authors": {
+        "Dimitrios Savva": "Photography",
+        "Rico Cilliers": "Processing"
+      },
+      "sourceDimensionsMillimetres": [
+        1799.9999523162842,
+        1800.0001907348633
+      ],
+      "tileMetres": [
+        1.8,
+        1.8
+      ],
+      "physicalScaleStatus": "official API dimensions in millimetres; converted to metres",
+      "normalConvention": "OpenGL +Y",
+      "metallic": 0,
+      "status": "source-complete design candidate; offline and in-engine visual approval pending",
+      "visualReview": "原色浅灰米，有自然裂隙、深浅矿物斑和少量黄褐地衣；与旧红褐rock_face不同。不是纯冷灰、没有规则铺石接缝；适合崖壁/块石候选，不能据来源确认岩性。",
+      "maps": [
+        {
+          "role": "albedo",
+          "file": "natural-rock/albedo.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/rock_boulder_dry/rock_boulder_dry_diff_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/rock_boulder_dry/rock_boulder_dry_diff_1k.png",
+          "officialMd5": "3903508680ae823cd0d3c843fccfdf5a",
+          "sha256": "0bfb547e1785e4639a3735b2412099dac8d3077e39777299e4e273da6efd8ed5",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 5690647,
+          "colorSpace": "sRGB",
+          "pngBitDepth": 16,
+          "storedImageMode": "RGB"
+        },
+        {
+          "role": "normal",
+          "file": "natural-rock/normal.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/rock_boulder_dry/rock_boulder_dry_nor_gl_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/rock_boulder_dry/rock_boulder_dry_nor_gl_1k.png",
+          "officialMd5": "90a2f0d635e2216aa6ce4ac927459c7f",
+          "sha256": "7ae21a2702d613d9d3eedcfb8b42d212b69302c07e2c4fd94ecaa91d52e9345b",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 5462248,
+          "colorSpace": "linear",
+          "pngBitDepth": 16,
+          "storedImageMode": "RGB"
+        },
+        {
+          "role": "roughness",
+          "file": "natural-rock/roughness.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/rock_boulder_dry/rock_boulder_dry_rough_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/rock_boulder_dry/rock_boulder_dry_rough_1k.png",
+          "officialMd5": "4b293c21fd24f194a7f512b1f05c363c",
+          "sha256": "ef66a872c0197e766f024cfaee95a48589c3435fa83581840dffdc2523a9a19c",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 2520145,
+          "colorSpace": "linear",
+          "pngBitDepth": 16,
+          "storedImageMode": "RGB"
+        },
+        {
+          "role": "ao",
+          "file": "natural-rock/ao.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/rock_boulder_dry/rock_boulder_dry_ao_1k.png",
+          "sourceUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/png/1k/rock_boulder_dry/rock_boulder_dry_ao_1k.png",
+          "officialMd5": "b5dc46ece4362a3b6721e5293e3aeda6",
+          "sha256": "256cf33b664f8504845a5de69cf229da2bf49bd68ba270ff5ec9ecda32c0ee1f",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 1795337,
+          "colorSpace": "linear",
+          "pngBitDepth": 16,
+          "storedImageMode": "I;16"
+        }
+      ]
+    },
+    {
+      "id": "neutral-woven",
+      "label": "中性亚麻方向（细平织替代候选）",
+      "sourceProvider": "ambientCG",
+      "sourceAsset": "Fabric082A",
+      "sourcePage": "https://ambientcg.com/a/Fabric082A",
+      "license": "CC0-1.0",
+      "licenseSource": "https://docs.ambientcg.com/license/",
+      "sourceMetadata": "source-art/materials/chapter-one-v3/pbr-library/Fabric082A/api-v3.json",
+      "creationMethod": "surface-fully-procedural",
+      "fiberIdentity": "unknown; official asset is a generic fine grey woven fabric, not certified linen",
+      "sourceDimensions": {
+        "width": 0,
+        "height": 0,
+        "depth": 0
+      },
+      "tileMetres": null,
+      "physicalScaleStatus": "unknown; official API dimensions are zero and no measured scale is supplied",
+      "previewTileMetres": [
+        0.25,
+        0.25
+      ],
+      "previewScaleNote": "Design-only 0.25m tile suggestion to inspect fine clothing weave; not a measured scan scale.",
+      "normalConvention": "OpenGL +Y",
+      "metallic": 0,
+      "status": "source-complete design substitute; linen identity and measured scale unresolved",
+      "visualReview": "原色中性浅灰细平织，没有蓝染、格纹或毛毡纤维。比组合板的粗麻织纹更细、更干净、更浅；作为衣料基底候选合理，但官方未说明亚麻纤维，且是程序材质，不能标为扫描亚麻。",
+      "sourceArchive": {
+        "file": "source-art/materials/chapter-one-v3/pbr-library/Fabric082A/Fabric082A_1K-PNG.zip",
+        "sourceUrl": "https://ambientcg.com/get?file=Fabric082A_1K-PNG.zip",
+        "resolvedUrl": "https://acg-download.struffelproductions.com/file/ambientCG-Web/download/Fabric082A_Gf0xOZw3/Fabric082A_1K-PNG.zip",
+        "officialHash": {
+          "algorithm": "SHA1",
+          "value": "2b38a8922d984646510163c2bd1005525308e051",
+          "source": "x-bz-content-sha1 HTTP response header"
+        },
+        "sha256": "15810f52cbcce871515348921127daf22362c1f89b329d144b8aecfa9e92c48d",
+        "bytes": 14710719
+      },
+      "maps": [
+        {
+          "role": "albedo",
+          "file": "neutral-woven/albedo.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/Fabric082A/Fabric082A_1K-PNG_Color.png",
+          "sourceUrl": "https://ambientcg.com/get?file=Fabric082A_1K-PNG.zip#Fabric082A_1K-PNG_Color.png",
+          "officialMd5": null,
+          "officialMd5Note": "No per-file MD5 published by ambientCG API. Original ZIP verified using official x-bz-content-sha1; entry integrity checked against its ZIP CRC32.",
+          "officialArchiveHash": {
+            "algorithm": "SHA1",
+            "value": "2b38a8922d984646510163c2bd1005525308e051",
+            "source": "x-bz-content-sha1 HTTP response header"
+          },
+          "officialZipCrc32": "252d0235",
+          "sha256": "05dd11ee9c29b07dc91df6d8e82e00c91355070eb44e7673c1e8ad266c23e335",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 683041,
+          "colorSpace": "sRGB",
+          "pngBitDepth": 8,
+          "storedImageMode": "P"
+        },
+        {
+          "role": "normal",
+          "file": "neutral-woven/normal.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/Fabric082A/Fabric082A_1K-PNG_NormalGL.png",
+          "sourceUrl": "https://ambientcg.com/get?file=Fabric082A_1K-PNG.zip#Fabric082A_1K-PNG_NormalGL.png",
+          "officialMd5": null,
+          "officialMd5Note": "No per-file MD5 published by ambientCG API. Original ZIP verified using official x-bz-content-sha1; entry integrity checked against its ZIP CRC32.",
+          "officialArchiveHash": {
+            "algorithm": "SHA1",
+            "value": "2b38a8922d984646510163c2bd1005525308e051",
+            "source": "x-bz-content-sha1 HTTP response header"
+          },
+          "officialZipCrc32": "9769db14",
+          "sha256": "729345c636de108066a89aa8475d1768f9f4a65634e343c52324b0366a3adf3e",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 4883935,
+          "colorSpace": "linear",
+          "pngBitDepth": 16,
+          "storedImageMode": "RGB"
+        },
+        {
+          "role": "roughness",
+          "file": "neutral-woven/roughness.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/Fabric082A/Fabric082A_1K-PNG_Roughness.png",
+          "sourceUrl": "https://ambientcg.com/get?file=Fabric082A_1K-PNG.zip#Fabric082A_1K-PNG_Roughness.png",
+          "officialMd5": null,
+          "officialMd5Note": "No per-file MD5 published by ambientCG API. Original ZIP verified using official x-bz-content-sha1; entry integrity checked against its ZIP CRC32.",
+          "officialArchiveHash": {
+            "algorithm": "SHA1",
+            "value": "2b38a8922d984646510163c2bd1005525308e051",
+            "source": "x-bz-content-sha1 HTTP response header"
+          },
+          "officialZipCrc32": "b9c89aac",
+          "sha256": "cb7f56ad0558e70c7841b286e8bc4c2954a8f938eaee8836a65089c0bf95b1ea",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 503123,
+          "colorSpace": "linear",
+          "pngBitDepth": 8,
+          "storedImageMode": "L"
+        },
+        {
+          "role": "ao",
+          "file": "neutral-woven/ao.png",
+          "sourceFile": "source-art/materials/chapter-one-v3/pbr-library/Fabric082A/Fabric082A_1K-PNG_AmbientOcclusion.png",
+          "sourceUrl": "https://ambientcg.com/get?file=Fabric082A_1K-PNG.zip#Fabric082A_1K-PNG_AmbientOcclusion.png",
+          "officialMd5": null,
+          "officialMd5Note": "No per-file MD5 published by ambientCG API. Original ZIP verified using official x-bz-content-sha1; entry integrity checked against its ZIP CRC32.",
+          "officialArchiveHash": {
+            "algorithm": "SHA1",
+            "value": "2b38a8922d984646510163c2bd1005525308e051",
+            "source": "x-bz-content-sha1 HTTP response header"
+          },
+          "officialZipCrc32": "b6a16c0f",
+          "sha256": "7e796580f7435a19af96c531951a8f9cb0500e9becad3907023d9f62fe023bbe",
+          "size": [
+            1024,
+            1024
+          ],
+          "bytes": 588826,
+          "colorSpace": "linear",
+          "pngBitDepth": 8,
+          "storedImageMode": "L"
+        }
+      ]
+    }
+  ]
+}

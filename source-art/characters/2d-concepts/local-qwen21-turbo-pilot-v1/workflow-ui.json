@@ -1,0 +1,1006 @@
+{
+  "id": "57ae0428-09d7-56e6-8cb4-11ed3d1a53cf",
+  "revision": 0,
+  "last_node_id": 17,
+  "last_link_id": 20,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "UNETLoader",
+      "pos": [
+        0,
+        0
+      ],
+      "size": [
+        480,
+        100
+      ],
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            1
+          ]
+        }
+      ],
+      "title": "Turbo 主模型 · INT8 ConvRot",
+      "properties": {
+        "Node name for S&R": "UNETLoader",
+        "cnr_id": "comfy-core",
+        "ver": "0.44.0"
+      },
+      "widgets_values": [
+        "qwen_image_2.1_turbo_int8_convrot.safetensors",
+        "default"
+      ],
+      "widgets_values_named": {
+        "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+        "weight_dtype": "default"
+      }
+    },
+    {
+      "id": 2,
+      "type": "CLIPLoader",
+      "pos": [
+        0,
+        170
+      ],
+      "size": [
+        480,
+        135
+      ],
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": [
+            2
+          ]
+        }
+      ],
+      "title": "文本/视觉编码器 · CPU",
+      "properties": {
+        "Node name for S&R": "CLIPLoader",
+        "cnr_id": "comfy-core",
+        "ver": "0.44.0"
+      },
+      "widgets_values": [
+        "qwen3vl_8b_int8_convrot.safetensors",
+        "qwen_image",
+        "cpu"
+      ],
+      "widgets_values_named": {
+        "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+        "type": "qwen_image",
+        "device": "cpu"
+      }
+    },
+    {
+      "id": 3,
+      "type": "VAELoader",
+      "pos": [
+        0,
+        375
+      ],
+      "size": [
+        480,
+        75
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            3,
+            19
+          ]
+        }
+      ],
+      "title": "Qwen 2.1 专用 RGBA VAE",
+      "properties": {
+        "Node name for S&R": "VAELoader",
+        "cnr_id": "comfy-core",
+        "ver": "0.44.0"
+      },
+      "widgets_values": [
+        "qwen_image_2.1_vae_bf16.safetensors"
+      ],
+      "widgets_values_named": {
+        "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+      }
+    },
+    {
+      "id": 4,
+      "type": "LoadImage",
+      "pos": [
+        0,
+        560
+      ],
+      "size": [
+        350,
+        415
+      ],
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            4
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            5
+          ]
+        }
+      ],
+      "title": "图1 · 正面跑步编辑目标",
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "cnr_id": "comfy-core",
+        "ver": "0.44.0"
+      },
+      "widgets_values": [
+        "qwen21-trial/front-run/run-front-p0-rgba.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "qwen21-trial/front-run/run-front-p0-rgba.png",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 5,
+      "type": "LoadImage",
+      "pos": [
+        0,
+        1040
+      ],
+      "size": [
+        350,
+        415
+      ],
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            6
+          ]
+        },
+        {
+          "name": "MASK",
+          "type": "MASK",
+          "links": [
+            7
+          ]
+        }
+      ],
+      "title": "图2 · 已验收站姿参考",
+      "properties": {
+        "Node name for S&R": "LoadImage",
+        "cnr_id": "comfy-core",
+        "ver": "0.44.0"
+      },
+      "widgets_values": [
+        "qwen21-trial/front-run/standing-front-p0-rgba.png",
+        "image"
+      ],
+      "widgets_values_named": {
+        "image": "qwen21-trial/front-run/standing-front-p0-rgba.png",
+        "upload": "image"
+      }
+    },
+    {
+      "id": 6,
+      "type": "JoinImageWithAlpha",
+      "pos": [
+        390,
+        620
+      ],
+      "size": [
+        275,
+        100
+      ],
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 4
+        },
+        {
+          "name": "alpha",
+          "type": "MASK",
+          "link": 5
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            8
+          ]
+        }
+      ],
+      "title": "图1 · 恢复透明 Alpha",
+      "properties": {
+        "Node name for S&R": "JoinImageWithAlpha",
+        "cnr_id": "comfy-core",
+        "ver": "0.44.0"
+      }
+    },
+    {
+      "id": 7,
+      "type": "JoinImageWithAlpha",
+      "pos": [
+        390,
+        1100
+      ],
+      "size": [
+        275,
+        100
+      ],
+      "flags": {},
+      "order": 10,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "image",
+          "type": "IMAGE",
+          "link": 6
+        },
+        {
+          "name": "alpha",
+          "type": "MASK",
+          "link": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            9
+          ]
+        }
+      ],
+      "title": "图2 · 恢复透明 Alpha",
+      "properties": {
+        "Node name for S&R": "JoinImageWithAlpha",
+        "cnr_id": "comfy-core",
+        "ver": "0.44.0"
+      }
+    },
+    {
+      "id": 8,
+      "type": "TextEncodeQwenImage21",
+      "pos": [
+        720,
+        0
+      ],
+      "size": [
+        600,
+        720
+      ],
+      "flags": {},
+      "order": 12,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 2
+        },
+        {
+          "name": "images.image_1",
+          "type": "IMAGE",
+          "link": 8,
+          "shape": 7
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 3,
+          "shape": 7
+        },
+        {
+          "name": "images.image_2",
+          "type": "IMAGE",
+          "link": 9,
+          "shape": 7
+        }
+      ],
+      "outputs": [
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "links": [
+            11
+          ]
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "links": [
+            12
+          ]
+        },
+        {
+          "name": "latent",
+          "type": "LATENT",
+          "links": [
+            17
+          ]
+        }
+      ],
+      "title": "双图编辑 · 中文指令 · 保持原尺寸",
+      "properties": {
+        "Node name for S&R": "TextEncodeQwenImage21",
+        "cnr_id": "comfy-core",
+        "ver": "0.44.0"
+      },
+      "widgets_values": [
+        "编辑图1的正面跑步角色，图2仅作为同一角色的已认可站姿、服装和裤色参考，不改成站姿。将图1上衣校准为图2的暗酒红色，袖子为暗炭灰，长裤的色相和明暗材质与图2一致；保留原有金色刺绣、褶皱和阴影。保留图1头型、银发、脸部朝向、头部大小及位置，保留原跑步相位、身体前倾、手臂和弯腿姿势、两只手指与手腕、剑及剑鞘和固定点、腰带、包袋、靴子。保持512×768画布、原人物尺度和原脚部位置；不得整体放大或移动人物。仅一个完整角色，保持透明背景，输出带Alpha通道的RGBA PNG，不添加背景/地面/投影。",
+        "",
+        0
+      ],
+      "widgets_values_named": {
+        "prompt": "编辑图1的正面跑步角色，图2仅作为同一角色的已认可站姿、服装和裤色参考，不改成站姿。将图1上衣校准为图2的暗酒红色，袖子为暗炭灰，长裤的色相和明暗材质与图2一致；保留原有金色刺绣、褶皱和阴影。保留图1头型、银发、脸部朝向、头部大小及位置，保留原跑步相位、身体前倾、手臂和弯腿姿势、两只手指与手腕、剑及剑鞘和固定点、腰带、包袋、靴子。保持512×768画布、原人物尺度和原脚部位置；不得整体放大或移动人物。仅一个完整角色，保持透明背景，输出带Alpha通道的RGBA PNG，不添加背景/地面/投影。",
+        "negative_prompt": "",
+        "resolution": 0
+      }
+    },
+    {
+      "id": 9,
+      "type": "QwenImage21Cache",
+      "pos": [
+        720,
+        800
+      ],
+      "size": [
+        350,
+        135
+      ],
+      "flags": {},
+      "order": 11,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 1
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            10
+          ]
+        }
+      ],
+      "title": "参考前缀缓存 · CPU / 无损",
+      "properties": {
+        "Node name for S&R": "QwenImage21Cache",
+        "cnr_id": "comfy-core",
+        "ver": "0.44.0"
+      },
+      "widgets_values": [
+        "cpu",
+        "default"
+      ],
+      "widgets_values_named": {
+        "device": "cpu",
+        "dtype": "default"
+      }
+    },
+    {
+      "id": 10,
+      "type": "CFGGuider",
+      "pos": [
+        1400,
+        0
+      ],
+      "size": [
+        330,
+        160
+      ],
+      "flags": {},
+      "order": 13,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 10
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 11
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 12
+        }
+      ],
+      "outputs": [
+        {
+          "name": "GUIDER",
+          "type": "GUIDER",
+          "links": [
+            14
+          ]
+        }
+      ],
+      "title": "CFG 1 · 官方 Turbo 参数",
+      "properties": {
+        "Node name for S&R": "CFGGuider",
+        "cnr_id": "comfy-core",
+        "ver": "0.44.0"
+      },
+      "widgets_values": [
+        1
+      ],
+      "widgets_values_named": {
+        "cfg": 1
+      }
+    },
+    {
+      "id": 11,
+      "type": "RandomNoise",
+      "pos": [
+        1400,
+        240
+      ],
+      "size": [
+        330,
+        100
+      ],
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "NOISE",
+          "type": "NOISE",
+          "links": [
+            13
+          ]
+        }
+      ],
+      "title": "固定种子 · 20261107",
+      "properties": {
+        "Node name for S&R": "RandomNoise",
+        "cnr_id": "comfy-core",
+        "ver": "0.44.0"
+      },
+      "widgets_values": [
+        20261107,
+        "fixed"
+      ],
+      "widgets_values_named": {
+        "noise_seed": 20261107,
+        "control_after_generate": "fixed"
+      }
+    },
+    {
+      "id": 12,
+      "type": "KSamplerSelect",
+      "pos": [
+        1400,
+        400
+      ],
+      "size": [
+        330,
+        75
+      ],
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SAMPLER",
+          "type": "SAMPLER",
+          "links": [
+            15
+          ]
+        }
+      ],
+      "title": "Euler",
+      "properties": {
+        "Node name for S&R": "KSamplerSelect",
+        "cnr_id": "comfy-core",
+        "ver": "0.44.0"
+      },
+      "widgets_values": [
+        "euler"
+      ],
+      "widgets_values_named": {
+        "sampler_name": "euler"
+      }
+    },
+    {
+      "id": 13,
+      "type": "ManualSigmas",
+      "pos": [
+        1400,
+        560
+      ],
+      "size": [
+        520,
+        100
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "SIGMAS",
+          "type": "SIGMAS",
+          "links": [
+            16
+          ]
+        }
+      ],
+      "title": "Turbo 官方固定日程 · 8 步",
+      "properties": {
+        "Node name for S&R": "ManualSigmas",
+        "cnr_id": "comfy-core",
+        "ver": "0.44.0"
+      },
+      "widgets_values": [
+        "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+      ],
+      "widgets_values_named": {
+        "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+      }
+    },
+    {
+      "id": 14,
+      "type": "SamplerCustomAdvanced",
+      "pos": [
+        1990,
+        0
+      ],
+      "size": [
+        330,
+        185
+      ],
+      "flags": {},
+      "order": 14,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "noise",
+          "type": "NOISE",
+          "link": 13
+        },
+        {
+          "name": "guider",
+          "type": "GUIDER",
+          "link": 14
+        },
+        {
+          "name": "sampler",
+          "type": "SAMPLER",
+          "link": 15
+        },
+        {
+          "name": "sigmas",
+          "type": "SIGMAS",
+          "link": 16
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 17
+        }
+      ],
+      "outputs": [
+        {
+          "name": "output",
+          "type": "LATENT",
+          "links": [
+            18
+          ]
+        },
+        {
+          "name": "denoised_output",
+          "type": "LATENT",
+          "links": []
+        }
+      ],
+      "title": "8 步 Turbo 采样",
+      "properties": {
+        "Node name for S&R": "SamplerCustomAdvanced",
+        "cnr_id": "comfy-core",
+        "ver": "0.44.0"
+      }
+    },
+    {
+      "id": 15,
+      "type": "VAEDecode",
+      "pos": [
+        1990,
+        260
+      ],
+      "size": [
+        330,
+        110
+      ],
+      "flags": {},
+      "order": 15,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "samples",
+          "type": "LATENT",
+          "link": 18
+        },
+        {
+          "name": "vae",
+          "type": "VAE",
+          "link": 19
+        }
+      ],
+      "outputs": [
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            20
+          ]
+        }
+      ],
+      "title": "RGBA 解码",
+      "properties": {
+        "Node name for S&R": "VAEDecode",
+        "cnr_id": "comfy-core",
+        "ver": "0.44.0"
+      }
+    },
+    {
+      "id": 16,
+      "type": "SaveImage",
+      "pos": [
+        2390,
+        0
+      ],
+      "size": [
+        530,
+        650
+      ],
+      "flags": {},
+      "order": 16,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 20
+        }
+      ],
+      "outputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "links": []
+        }
+      ],
+      "title": "保存评估候选 · RGBA PNG",
+      "properties": {
+        "Node name for S&R": "SaveImage",
+        "cnr_id": "comfy-core",
+        "ver": "0.44.0"
+      },
+      "widgets_values": [
+        "qwen21_local_pilot/front-run/ui-candidate"
+      ],
+      "widgets_values_named": {
+        "filename_prefix": "qwen21_local_pilot/front-run/ui-candidate"
+      }
+    },
+    {
+      "id": 17,
+      "type": "MarkdownNote",
+      "pos": [
+        720,
+        1040
+      ],
+      "size": [
+        1600,
+        400
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [],
+      "outputs": [],
+      "title": "评估说明 · 无云端",
+      "properties": {},
+      "widgets_values": [
+        "# Raphael · Qwen-Image-2.1-Turbo 本地评估工作流\n\n**仅供单帧小样评估，全部生成节点在本机运行，无云端/API推理、无第三方节点。输出是候选，不代表已通过美术验收。**\n\n图1为512×768正面跑步编辑目标；图2只提供已验收站姿的服装/裤色参考。两个LoadImage的RGB与MASK均经JoinImageWithAlpha恢复RGBA。中文指令来自本次trial的front-run/prompt.txt。resolution=0，采样直接使用编码节点的latent输出，保持原画布与人物锚点。\n\n主模型与编码器使用官方INT8 ConvRot权重，编码器CPU，前缀缓存CPU/default无损，CFG=1，Euler，固定种子20261107。ManualSigmas的9个边界构成官方8步日程；调整步数需同时选择适配的日程。可选9B提示词增强已省略。\n\n在本地offline服务中执行。保存路径前缀为qwen21_local_pilot/front-run/ui-candidate。检查头型、银发、脸朝向、跑姿、手腕/手指、剑鞘及固定点、比例、颜色与透明边缘；必要时通过本地遮罩合成保护其他区域，再决定是否采用。"
+      ],
+      "widgets_values_named": {
+        "text": "# Raphael · Qwen-Image-2.1-Turbo 本地评估工作流\n\n**仅供单帧小样评估，全部生成节点在本机运行，无云端/API推理、无第三方节点。输出是候选，不代表已通过美术验收。**\n\n图1为512×768正面跑步编辑目标；图2只提供已验收站姿的服装/裤色参考。两个LoadImage的RGB与MASK均经JoinImageWithAlpha恢复RGBA。中文指令来自本次trial的front-run/prompt.txt。resolution=0，采样直接使用编码节点的latent输出，保持原画布与人物锚点。\n\n主模型与编码器使用官方INT8 ConvRot权重，编码器CPU，前缀缓存CPU/default无损，CFG=1，Euler，固定种子20261107。ManualSigmas的9个边界构成官方8步日程；调整步数需同时选择适配的日程。可选9B提示词增强已省略。\n\n在本地offline服务中执行。保存路径前缀为qwen21_local_pilot/front-run/ui-candidate。检查头型、银发、脸朝向、跑姿、手腕/手指、剑鞘及固定点、比例、颜色与透明边缘；必要时通过本地遮罩合成保护其他区域，再决定是否采用。"
+      },
+      "color": "#243440",
+      "bgcolor": "#17242D"
+    }
+  ],
+  "links": [
+    [
+      1,
+      1,
+      0,
+      9,
+      0,
+      "MODEL"
+    ],
+    [
+      2,
+      2,
+      0,
+      8,
+      0,
+      "CLIP"
+    ],
+    [
+      3,
+      3,
+      0,
+      8,
+      2,
+      "VAE"
+    ],
+    [
+      4,
+      4,
+      0,
+      6,
+      0,
+      "IMAGE"
+    ],
+    [
+      5,
+      4,
+      1,
+      6,
+      1,
+      "MASK"
+    ],
+    [
+      6,
+      5,
+      0,
+      7,
+      0,
+      "IMAGE"
+    ],
+    [
+      7,
+      5,
+      1,
+      7,
+      1,
+      "MASK"
+    ],
+    [
+      8,
+      6,
+      0,
+      8,
+      1,
+      "IMAGE"
+    ],
+    [
+      9,
+      7,
+      0,
+      8,
+      3,
+      "IMAGE"
+    ],
+    [
+      10,
+      9,
+      0,
+      10,
+      0,
+      "MODEL"
+    ],
+    [
+      11,
+      8,
+      0,
+      10,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      12,
+      8,
+      1,
+      10,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      13,
+      11,
+      0,
+      14,
+      0,
+      "NOISE"
+    ],
+    [
+      14,
+      10,
+      0,
+      14,
+      1,
+      "GUIDER"
+    ],
+    [
+      15,
+      12,
+      0,
+      14,
+      2,
+      "SAMPLER"
+    ],
+    [
+      16,
+      13,
+      0,
+      14,
+      3,
+      "SIGMAS"
+    ],
+    [
+      17,
+      8,
+      2,
+      14,
+      4,
+      "LATENT"
+    ],
+    [
+      18,
+      14,
+      0,
+      15,
+      0,
+      "LATENT"
+    ],
+    [
+      19,
+      3,
+      0,
+      15,
+      1,
+      "VAE"
+    ],
+    [
+      20,
+      15,
+      0,
+      16,
+      0,
+      "IMAGE"
+    ]
+  ],
+  "groups": [
+    {
+      "id": 1,
+      "title": "01 · 本地模型",
+      "bounding": [
+        -30,
+        -65,
+        540,
+        545
+      ],
+      "color": "#345A70",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 2,
+      "title": "02 · 目标与参考 / RGBA",
+      "bounding": [
+        -30,
+        495,
+        725,
+        990
+      ],
+      "color": "#466D5D",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 3,
+      "title": "03 · 指令与无损缓存",
+      "bounding": [
+        690,
+        -65,
+        660,
+        1040
+      ],
+      "color": "#6D5779",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 4,
+      "title": "04 · 官方 8 步采样",
+      "bounding": [
+        1370,
+        -65,
+        980,
+        780
+      ],
+      "color": "#8A6A39",
+      "font_size": 24,
+      "flags": {}
+    },
+    {
+      "id": 5,
+      "title": "05 · 评估输出",
+      "bounding": [
+        2360,
+        -65,
+        590,
+        780
+      ],
+      "color": "#48637C",
+      "font_size": 24,
+      "flags": {}
+    }
+  ],
+  "config": {},
+  "extra": {
+    "frontendVersion": "1.57.6",
+    "ds": {
+      "scale": 0.48,
+      "offset": [
+        95,
+        170
+      ]
+    },
+    "workflowRendererVersion": "LG"
+  },
+  "version": 0.4
+}

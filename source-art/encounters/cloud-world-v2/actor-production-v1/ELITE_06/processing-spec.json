@@ -1,0 +1,90 @@
+{
+  "id": "ELITE_06",
+  "selectedSource": "sheet-v3.png",
+  "actualRows": [
+    "idle",
+    "step0",
+    "step1",
+    "step2"
+  ],
+  "stationary": true,
+  "formationCount": 3,
+  "commonBaseCount": 1,
+  "directions": [
+    "down",
+    "left",
+    "up",
+    "right"
+  ],
+  "clips": {
+    "idle": {
+      "sourceRows": [
+        0
+      ]
+    },
+    "attack_sword_step0": {
+      "sourceRows": [
+        0,
+        1,
+        0
+      ],
+      "phaseStarts": [
+        0,
+        0.28,
+        0.6
+      ]
+    },
+    "attack_sword_step1": {
+      "sourceRows": [
+        0,
+        2,
+        0
+      ],
+      "phaseStarts": [
+        0,
+        0.28,
+        0.6
+      ]
+    },
+    "attack_sword_step2": {
+      "sourceRows": [
+        0,
+        3,
+        0
+      ],
+      "phaseStarts": [
+        0,
+        0.28,
+        0.6
+      ]
+    }
+  },
+  "aliases": {
+    "attack_sword": "attack_sword_step0"
+  },
+  "walkClips": false,
+  "basePolicy": "Protect per-direction idle lower plinth ROI/support-plane anchor across all rows. No walk playback, no translational base animation.",
+  "runtimeNote": "Root will select optional step clip via e.combat.stepIndex; this source task does not change combat timings/hit geometry/runtime.",
+  "sheet": "sheet-v4-protected.png",
+  "worldUnitsPerPixel": 0.008429118773946361,
+  "rows": [
+    "idle",
+    "step0",
+    "step1",
+    "step2"
+  ],
+  "body": "three-statues-one-plinth",
+  "coreRoi": [
+    0.08,
+    0.78,
+    0.92,
+    0.98
+  ],
+  "nominalSpeed": 1.5,
+  "scaleBasis": {
+    "method": "One global down-idle silhouette calibration; no per-frame fitting",
+    "heightMetres": 2.2,
+    "neutralDownPixels": 261,
+    "gameSizeReview": "pending"
+  }
+}

@@ -1,0 +1,218 @@
+{
+  "schema_version": "1.0.0",
+  "project_id": "sword_and_fire",
+  "title": "剑与火",
+  "language": "zh-CN",
+  "visual_direction": {
+    "camera": "2.5D 俯视斜角；固定相机为主，遮挡物可淡出",
+    "reference_boundary": "借鉴写实奇幻的皮革、金属、布料层次与可信功能性装备；人物、脸、服装组合及标志全部原创，不复刻现有游戏角色。",
+    "readability": "成人比例，玩家青绿、普通敌人锈红、指挥官蓝灰；细节与材质需达到所选概念图方向，同时在2.5D镜头下保留可读剪影。",
+    "quality_target": "细节丰富的写实手绘2.5D，成人比例，可信皮革层次、自然布褶和钢铁高光；严格参考已选角色概念图的质感与轮廓，不以明显棱角和方块式低模作为最终外观。"
+  },
+  "characters": [
+    {
+      "id": "char_player",
+      "name": "行路人",
+      "role": "玩家",
+      "faction": "caravan",
+      "chapters": [
+        "ch01",
+        "ch02",
+        "ch03",
+        "ch04"
+      ],
+      "silhouette": "中等身形，短肩披布，单手钢剑，腰侧油壶；短衣摆避免遮住腿部动作。",
+      "palette": [
+        "palette_teal",
+        "palette_iron",
+        "palette_leather"
+      ],
+      "motivation": "原本接护送差事，运粮车被截后决定把车和人一起带回。",
+      "arc": "收取报酬的护送者 → 连接营地与城内补给的行动者；不设天命或身世反转。",
+      "voice": "台词少，直接问路和办事；不设置默认姓名、性别台词或宏大自述。",
+      "model_asset_id": "model_player",
+      "model_scope": "现有静态分件GLB与四方向透明图仅作内部灰盒参考，非最终角色美术。目标为细致写实手绘2.5D与成人比例；正式模型、绑定、动作、碰撞和引擎接入仍需分别制作验收。",
+      "combat": "挥剑、闪避或短冲、推击、投油点火；剑与火共用此角色，不制作两套职业身体。",
+      "model_status": "delivered_blockout",
+      "source_scene_path": "../../source-art/blockout/sword_and_fire_assets.blend",
+      "final_art_accepted": false,
+      "additional_study_asset_ids": [
+        "ref_player_four_view_v2",
+        "study_player_refined_mesh"
+      ]
+    },
+    {
+      "id": "char_ahe",
+      "name": "阿禾",
+      "role": "营地管事",
+      "faction": "camp",
+      "chapters": [
+        "ch01",
+        "ch02",
+        "ch03",
+        "ch04"
+      ],
+      "silhouette": "女性，土黄长外衣，发髻，账册与小挎包；无武器，装备重实用不性感化。",
+      "palette": [
+        "palette_cloth",
+        "palette_leather"
+      ],
+      "motivation": "先把人喂饱，再核对每一袋粮；不赞同为复仇毁掉仓库。",
+      "arc": "守住营地物资 → 协调补给线 → 在城门接车。",
+      "voice": "简短、务实，不长篇解释世界观。",
+      "model_asset_id": "model_ahe",
+      "model_scope": "现有静态分件GLB与四方向透明图仅作内部灰盒参考，非最终角色美术。目标为细致写实手绘2.5D与成人比例；正式模型、绑定、动作、碰撞和引擎接入仍需分别制作验收。",
+      "model_status": "delivered_blockout",
+      "source_scene_path": "../../source-art/blockout/sword_and_fire_assets.blend",
+      "final_art_accepted": false
+    },
+    {
+      "id": "char_zhou",
+      "name": "老周",
+      "role": "铁匠与旧矿工",
+      "faction": "camp",
+      "chapters": [
+        "ch01",
+        "ch02",
+        "ch04"
+      ],
+      "silhouette": "宽肩，深色皮围裙，卷袖，腰挂小锤；少量银白胡茬，脸不靠复杂细节辨认。",
+      "palette": [
+        "palette_leather",
+        "palette_charcoal",
+        "palette_iron"
+      ],
+      "motivation": "修好能用的工具，把熟悉的矿道重新连上路。",
+      "arc": "修车修剑 → 指出旧矿道 → 修复城门绞盘。",
+      "voice": "只说眼前能怎么做，用一句话给出可玩的提示。",
+      "model_asset_id": "model_zhou",
+      "model_scope": "现有静态分件GLB与四方向透明图仅作内部灰盒参考，非最终角色美术。目标为细致写实手绘2.5D与成人比例；正式模型、绑定、动作、碰撞和引擎接入仍需分别制作验收。",
+      "model_status": "delivered_blockout",
+      "source_scene_path": "../../source-art/blockout/sword_and_fire_assets.blend",
+      "final_art_accepted": false
+    },
+    {
+      "id": "char_luoduo",
+      "name": "罗铎",
+      "role": "封路守备官与最终头目",
+      "faction": "blockade",
+      "chapters": [
+        "ch02",
+        "ch03",
+        "ch04"
+      ],
+      "silhouette": "暗钢胸甲，蓝灰短披风，低矮钢盔脊，方盾与钢剑；脸部可见，不戴夸张角盔。",
+      "palette": [
+        "palette_charcoal",
+        "palette_iron",
+        "palette_bluegray"
+      ],
+      "motivation": "以保城为由截留粮油，按自身指令分配物资；将道路失控视为权威失效。",
+      "arc": "盖章命令与缴获账单先出现 → 城门当面阻拦 → 失去补给和部下支持后投降。",
+      "voice": "镇定、命令式，不自称恶人；论点被玩家搬走粮袋和打开城门的行动反驳。",
+      "model_asset_id": "model_luoduo",
+      "model_scope": "现有静态分件GLB与四方向透明图仅作内部灰盒参考，非最终角色美术。目标为细致写实手绘2.5D与成人比例；正式模型、绑定、动作、碰撞和引擎接入仍需分别制作验收。",
+      "combat": "方盾冲锋、两段重斩、号令弩兵；优先复用近战骨架，新增动作后再做终章。",
+      "model_status": "delivered_blockout",
+      "source_scene_path": "../../source-art/blockout/sword_and_fire_assets.blend",
+      "final_art_accepted": false
+    },
+    {
+      "id": "enemy_raider",
+      "name": "围路兵",
+      "role": "基础近战敌人",
+      "faction": "blockade",
+      "chapters": [
+        "ch01",
+        "ch02",
+        "ch03",
+        "ch04"
+      ],
+      "silhouette": "锈红布甲，铁帽，铁箍短棍和小圆木盾；与玩家青绿披布明显区分。小盾只用于造型，基础兵不使用完整架盾防御。",
+      "palette": [
+        "palette_rust",
+        "palette_leather",
+        "palette_iron"
+      ],
+      "motivation": "受命收取路费、看守缴获物；逃跑或倒地退出，不做死亡特写。",
+      "model_asset_id": "model_raider",
+      "model_scope": "现有静态分件GLB与四方向透明图仅作内部灰盒参考，非最终角色美术。目标为细致写实手绘2.5D与成人比例；正式模型、绑定、动作、碰撞和引擎接入仍需分别制作验收。",
+      "combat": "抬手预警后短距离挥击；可被推离窄道、被火逼走。",
+      "model_status": "delivered_blockout",
+      "source_scene_path": "../../source-art/blockout/sword_and_fire_assets.blend",
+      "final_art_accepted": false,
+      "additional_study_asset_ids": [
+        "ref_raider_detail_v2"
+      ]
+    },
+    {
+      "id": "enemy_shield",
+      "name": "盾兵",
+      "role": "围路兵变体",
+      "faction": "blockade",
+      "chapters": [
+        "ch02",
+        "ch03",
+        "ch04"
+      ],
+      "silhouette": "复用围路兵身体，改用宽方木盾并抬高肩线；显著的架盾姿态区分基础兵。",
+      "palette": [
+        "palette_rust",
+        "palette_wood",
+        "palette_iron"
+      ],
+      "motivation": "守住窄口和搬运路线。",
+      "model_asset_id": "model_shield_variant",
+      "model_scope": "计划复用围路兵，不增加新身体或独立职业。",
+      "combat": "正面减伤但不能抵挡背击与脚边火；推击可打断抬盾。",
+      "model_status": "planned"
+    },
+    {
+      "id": "enemy_archer",
+      "name": "弩手",
+      "role": "围路兵远程变体",
+      "faction": "blockade",
+      "chapters": [
+        "ch02",
+        "ch03",
+        "ch04"
+      ],
+      "silhouette": "复用围路兵身体，短弩横向轮廓，肩部布片更短。",
+      "palette": [
+        "palette_rust",
+        "palette_wood",
+        "palette_iron"
+      ],
+      "motivation": "控制高台和桥面。",
+      "model_asset_id": "model_archer_variant",
+      "model_scope": "后续计划复用围路兵；首章不要求。",
+      "combat": "瞄准线提前可见，单发射击后长装填；掩体完全阻挡弹体。",
+      "model_status": "planned"
+    },
+    {
+      "id": "boss_roadblock",
+      "name": "路障头目",
+      "role": "首章木门小头目",
+      "faction": "blockade",
+      "chapters": [
+        "ch01"
+      ],
+      "silhouette": "围路兵体型加宽约15%，非对称肩甲，大方盾与单手短柄铁锤，腰挂门钥匙；不做巨型怪物。",
+      "palette": [
+        "palette_rust",
+        "palette_iron",
+        "palette_charcoal"
+      ],
+      "motivation": "截住运粮车并把粮油交往城门；只关心眼前差事。",
+      "model_asset_id": "model_roadblock_boss",
+      "model_scope": "现有静态分件GLB与四方向透明图仅作内部灰盒参考，非最终角色美术。目标为细致写实手绘2.5D与成人比例；正式模型、绑定、动作、碰撞和引擎接入仍需分别制作验收。",
+      "combat": "扇形横扫、直线冲撞；半血后增加一次短横扫，不加独立变身阶段。",
+      "model_status": "delivered_blockout",
+      "source_scene_path": "../../source-art/blockout/sword_and_fire_assets.blend",
+      "final_art_accepted": false,
+      "additional_study_asset_ids": [
+        "ref_captain_detail_v2"
+      ]
+    }
+  ]
+}

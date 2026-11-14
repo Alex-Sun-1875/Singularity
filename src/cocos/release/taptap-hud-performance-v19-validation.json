@@ -1,0 +1,101 @@
+{
+  "recorded": "2026-11-13T01:55:25.723883+00:00",
+  "version": "0.3.33",
+  "selectedPerformanceVersion": "V19",
+  "buildMode": "guest-test",
+  "localSaveOnly": true,
+  "uploaded": false,
+  "platformVerified": false,
+  "tests": {
+    "typeCheck": true,
+    "existingTestsPassed": 140,
+    "webBuild": true,
+    "tapCocosBuild": true,
+    "legacyRenderPolicy": true,
+    "officialConversion": true,
+    "zipCRC": true,
+    "entryVersionAndAssetMarkers": true,
+    "unselectedV20Absent": true,
+    "editorDiagnosticsAbsent": true,
+    "tapConfigurationCheck": true
+  },
+  "sources": {
+    "scriptsChecked": 201,
+    "unchangedDuringPackageBuild": true,
+    "normalizedHudMatchesMeasuredV19": true,
+    "boundary": "../test-results/performance/hud-v19-package-source-before.json"
+  },
+  "package": {
+    "path": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-hud-performance-v19\\SwordAndFire_0.3.33_TapTap_guest-test_20261113T015321Z\\SwordAndFire_0.3.33_TapTap_guest-test_20261113T015321Z.zip",
+    "bytes": 224521013,
+    "sha256": "97e978ea37c8199485c1cd59b23aacba7b6ab046cdead9dc1b70dec7218eb2a2",
+    "zipEntries": 4025,
+    "subpackageCount": 76
+  },
+  "initialPackageLocalAudit": {
+    "files": 26,
+    "rawBytes": 5579206,
+    "zipBytes": 1353586,
+    "zipMiB": 1.29,
+    "budgetMiB": 20.0,
+    "withinLocalBudget": true,
+    "sha256": "9f37e6f94a89f6f77bac124ce35106c474d129e87612d02dd668738b121e61eb",
+    "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+  },
+  "beforePlayableResources": {
+    "status": "not-measured",
+    "note": "Local main-payload audit excludes on-demand bundles needed before gameplay. Real TapTap startup transfer remains a separate device/platform check."
+  },
+  "performance": {
+    "scope": "Android14 four-core emulator Chrome; H12 Lv17 BOW 300 seconds moving combat, 60FPS and original quality; 2 original controls, one selected V19 and one discarded V20 experiment. Not ABBA or physical energy acceptance.",
+    "summary": "../test-results/performance/hud-render-v19-comparison.json",
+    "frozenSceneDrawCallReduction": 28,
+    "mainThreadObservedReductionPercentRange": [
+      3.09,
+      6.2
+    ],
+    "processCpuObservedReductionPercentRange": [
+      1.36,
+      3.57
+    ],
+    "drawCallMedianObservedReductionPercentRange": [
+      14.49,
+      14.88
+    ],
+    "gpuHardwareTime": null,
+    "gpuTimerSupported": false
+  },
+  "visual": {
+    "reviewed": "Four classes plus BOW ready/cooldown/disabled/names/ghost. Original RGB/resolution retained for icons; alpha edges/resampled composite are not pixel-identical.",
+    "evidence": "../test-results/performance/hud-v19-visual/"
+  },
+  "notShipped": {
+    "version": "V20",
+    "reason": "Guarded fillRange writes removed redundant calls but did not show further CPU benefit. Raw data and source snapshot preserved."
+  },
+  "pending": [
+    "Real TapTap entry/touch/background recovery/storage/resource-pack and physical-device validation.",
+    "GPU hardware time/power/temperature and actual startup download.",
+    "Production login service remains unconfigured; this package uses existing guest-test authorization."
+  ],
+  "buildStartup": {
+    "normalCliStillUnresolved": true,
+    "method": "Editor-only Node Inspector plus transparent fs.openSync diagnostic wrapper; unchanged native open semantics, no engine installation changes, no diagnostic code in game or performance measurement."
+  },
+  "officialReferences": [
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/runtime/runtime-suggestions/",
+    "https://docs.cocos.com/creator/3.8/manual/en/ui-system/components/engine/ui-batch.html"
+  ],
+  "environmentCleanup": {
+    "hostAffinityRestored": true,
+    "restoredAffinity": 16777215,
+    "ownedEmulatorShutdownRequested": true,
+    "ownedPreviewServersStopped": [
+      7520,
+      7521,
+      7522
+    ],
+    "bluetoothUnchangedFromInitialZero": true,
+    "ownedEmulatorShutdownObserved": true
+  }
+}

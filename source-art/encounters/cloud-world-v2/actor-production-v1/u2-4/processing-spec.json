@@ -1,0 +1,182 @@
+{
+  "id": "U2-4",
+  "sheet": "sheet-v1.png",
+  "worldUnitsPerPixel": 0.006043956043956043,
+  "directions": [
+    "down",
+    "left",
+    "up",
+    "right"
+  ],
+  "rows": [
+    "idle",
+    "walk-a",
+    "walk-b",
+    "primary"
+  ],
+  "body": "mechanical-supports",
+  "coreRoi": [
+    0.25,
+    0.15,
+    0.75,
+    0.6
+  ],
+  "nominalSpeed": 1.7,
+  "scaleBasis": {
+    "method": "One global neutral-down calibration, fixed for all16 drawings; no per-frame fit",
+    "neutralHeightPixels": 273,
+    "provisionalPhysicalHeightMetres": 1.65,
+    "gameSizeReview": "pending root batch review"
+  },
+  "origins": {
+    "3,0": [
+      163.68,
+      281.0
+    ],
+    "3,1": [
+      165.95,
+      285.0
+    ],
+    "3,2": [
+      161.785,
+      280.5
+    ],
+    "3,3": [
+      168.075,
+      281.5
+    ]
+  },
+  "anchorReview": {
+    "method": "Explicit primary support polygon centers from reviewed foot-only ROIs in original nominal source cells; no toe-tip whole-body alignment.",
+    "primarySupports": [
+      {
+        "direction": "down",
+        "sourceLocalFootRois": [
+          [
+            55,
+            250,
+            145,
+            290
+          ],
+          [
+            205,
+            250,
+            295,
+            290
+          ]
+        ],
+        "contactCentres": [
+          [
+            95.42,
+            281.0
+          ],
+          [
+            231.94,
+            281.0
+          ]
+        ],
+        "supportPolygonProjection": [
+          163.68,
+          281.0
+        ],
+        "basis": "Both planted/braced stone feet, never hammer/baton/hanging cloth. Detection only; no image pixel edit."
+      },
+      {
+        "direction": "left",
+        "sourceLocalFootRois": [
+          [
+            75,
+            245,
+            160,
+            283
+          ],
+          [
+            165,
+            255,
+            250,
+            295
+          ]
+        ],
+        "contactCentres": [
+          [
+            151.64,
+            283.0
+          ],
+          [
+            180.26,
+            287.0
+          ]
+        ],
+        "supportPolygonProjection": [
+          165.95,
+          285.0
+        ],
+        "basis": "Both planted/braced stone feet, never hammer/baton/hanging cloth. Detection only; no image pixel edit."
+      },
+      {
+        "direction": "up",
+        "sourceLocalFootRois": [
+          [
+            60,
+            245,
+            145,
+            290
+          ],
+          [
+            200,
+            245,
+            295,
+            290
+          ]
+        ],
+        "contactCentres": [
+          [
+            101.71,
+            280.0
+          ],
+          [
+            221.86,
+            281.0
+          ]
+        ],
+        "supportPolygonProjection": [
+          161.785,
+          280.5
+        ],
+        "basis": "Both planted/braced stone feet, never hammer/baton/hanging cloth. Detection only; no image pixel edit."
+      },
+      {
+        "direction": "right",
+        "sourceLocalFootRois": [
+          [
+            50,
+            250,
+            160,
+            295
+          ],
+          [
+            200,
+            235,
+            310,
+            280
+          ]
+        ],
+        "contactCentres": [
+          [
+            122.77,
+            287.0
+          ],
+          [
+            213.38,
+            276.0
+          ]
+        ],
+        "supportPolygonProjection": [
+          168.075,
+          281.5
+        ],
+        "basis": "Both planted/braced stone feet, never hammer/baton/hanging cloth. Detection only; no image pixel edit."
+      }
+    ]
+  }
+}

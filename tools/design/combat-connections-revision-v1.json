@@ -1,0 +1,280 @@
+{
+  "schemaVersion": 1,
+  "revision": "combat-connections-v1",
+  "date": "2026-11-08",
+  "reason": "用户要求闪电按最近敌人互相连接成网，并将原分裂箭改成同一支箭转向连续穿透。",
+  "base": "source-art/skills/pure-skills-v2/skill-catalog.json",
+  "historicalCatalogUnchanged": true,
+  "rules": {
+    "straightBowSkillIds": [
+      "BOW_01",
+      "BOW_03",
+      "BOW_05"
+    ],
+    "splitBowSkillId": null,
+    "splitChildPathsFrozenAtFirstImpact": false,
+    "singleChainingArrowSkillId": "BOW_02",
+    "singleChainingArrowProjectileLimit": 1,
+    "lightningNetworkSkillIds": [
+      "THU_02",
+      "THU_04",
+      "THU_05"
+    ],
+    "lightningNetworkConnections": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+    "lightningNetworkEdgesDoNotAddDamage": true
+  },
+  "skills": {
+    "BOW_02": {
+      "name": "连穿箭",
+      "targetShape": "同一支箭首击后转向最近敌人连续贯穿",
+      "mechanic": "保留0.4s前摇、0.4s释放承诺和0.25s后摇。始终只有一支实体箭、同一projectileId；首击后冻结3/4/5/6/7m包络，在每次真实命中时从当前箭位置选择该包络内最近的存活可见未命中敌人。换目标时冻结下一段瞄点与平滑路线，飞行中不持续追踪目标；实际命中才续接下一名，落空、无合法目标、到达总2/3/4/5/6敌上限或被墙挡住即结束。不生成子箭，不重复命中，不补偿落空伤害。首目标全伤，后续目标沿用75/75/80/85/90%伤害系数。",
+      "projectilePolicy": {
+        "primaryProjectileCount": 1,
+        "childProjectileCount": 0,
+        "sameProjectileIdThroughoutCast": true,
+        "freezeInitialDirectionAt": "release",
+        "freezeEnvelopeAt": "firstValidHostileImpact",
+        "selectionAt": "eachActualHostileContact",
+        "selectionOrdering": [
+          "distanceToCurrentArrowPosition",
+          "stableEntityId"
+        ],
+        "candidateFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenPrimaryImpactRadius,visibleFromCurrentContact,notPreviouslyHit",
+        "freezeNextAimPointAndPathAt": "eachActualHostileContact",
+        "noMidflightRetarget": true,
+        "homingBetweenContacts": false,
+        "recruitOutsideEnvelope": false,
+        "targetLimitFromRank": "targetLimit",
+        "totalCountIncludesPrimary": true,
+        "hitLedgerKey": [
+          "castId",
+          "targetId"
+        ],
+        "uniqueTargetsPerCast": true,
+        "wallHitEndsProjectile": true,
+        "missedFrozenEndpointEndsProjectile": true,
+        "noLegalNextTargetEndsProjectile": true,
+        "missingTargetDamageRedistributed": false
+      },
+      "counterplay": "首箭按原方向飞行；每段路线在换目标时冻结，侧移离开瞄点或利用遮挡可中断连穿。只有真实接触才继续转向，不追着移动目标不断修正方向，也不穿墙。",
+      "ranks": [
+        {
+          "rank": 1,
+          "geometry": {
+            "kind": "impactChainProjectile",
+            "origin": "primaryImpact",
+            "radiusMetres": 3,
+            "primaryProjectileCount": 1,
+            "childProjectileLimit": 0,
+            "totalTargetLimit": 2
+          },
+          "evolution": "12m投送一支实体箭；首击后在固定3m范围内转向最近的未命中敌人，同一支箭依次连穿最多2敌，不分裂。",
+          "vfxAnchor": "singleProjectileTrail",
+          "vfxDirection": "只有一支木杆金属箭和已经飞过的细淡青尾迹；真实命中后同一箭体转向下一名最近敌人，逐段冻结瞄点与平滑路线，不提前铺开未来路径，不生成并行子箭。",
+          "vfxLayers": {
+            "material": "单支实体木箭、钢箭头与细淡青短尾",
+            "direction": "同一箭体在真实命中后转向最近可见未命中敌人；每段目标和路线在换目标时冻结",
+            "contact": "每个实际穿刺点短闪，同一cast每敌一次",
+            "fade": "已飞路径快速淡出，不生成未来目标连线或分叉",
+            "growth": "增强实体箭锋、已飞弯道和实际连续穿刺的可读性，保持原S/CD与总目标上限"
+          }
+        },
+        {
+          "rank": 2,
+          "geometry": {
+            "kind": "impactChainProjectile",
+            "origin": "primaryImpact",
+            "radiusMetres": 4,
+            "primaryProjectileCount": 1,
+            "childProjectileLimit": 0,
+            "totalTargetLimit": 3
+          },
+          "evolution": "13.5m投送一支实体箭；首击后在固定4m范围内转向最近的未命中敌人，同一支箭依次连穿最多3敌，不分裂。",
+          "vfxAnchor": "singleProjectileTrail",
+          "vfxDirection": "只有一支木杆金属箭和已经飞过的细淡青尾迹；真实命中后同一箭体转向下一名最近敌人，逐段冻结瞄点与平滑路线，不提前铺开未来路径，不生成并行子箭。",
+          "vfxLayers": {
+            "material": "单支实体木箭、钢箭头与细淡青短尾",
+            "direction": "同一箭体在真实命中后转向最近可见未命中敌人；每段目标和路线在换目标时冻结",
+            "contact": "每个实际穿刺点短闪，同一cast每敌一次",
+            "fade": "已飞路径快速淡出，不生成未来目标连线或分叉",
+            "growth": "增强实体箭锋、已飞弯道和实际连续穿刺的可读性，保持原S/CD与总目标上限"
+          }
+        },
+        {
+          "rank": 3,
+          "geometry": {
+            "kind": "impactChainProjectile",
+            "origin": "primaryImpact",
+            "radiusMetres": 5,
+            "primaryProjectileCount": 1,
+            "childProjectileLimit": 0,
+            "totalTargetLimit": 4
+          },
+          "evolution": "15m投送一支实体箭；首击后在固定5m范围内转向最近的未命中敌人，同一支箭依次连穿最多4敌，不分裂。",
+          "vfxAnchor": "singleProjectileTrail",
+          "vfxDirection": "只有一支木杆金属箭和已经飞过的细淡青尾迹；真实命中后同一箭体转向下一名最近敌人，逐段冻结瞄点与平滑路线，不提前铺开未来路径，不生成并行子箭。",
+          "vfxLayers": {
+            "material": "单支实体木箭、钢箭头与细淡青短尾",
+            "direction": "同一箭体在真实命中后转向最近可见未命中敌人；每段目标和路线在换目标时冻结",
+            "contact": "每个实际穿刺点短闪，同一cast每敌一次",
+            "fade": "已飞路径快速淡出，不生成未来目标连线或分叉",
+            "growth": "增强实体箭锋、已飞弯道和实际连续穿刺的可读性，保持原S/CD与总目标上限"
+          }
+        },
+        {
+          "rank": 4,
+          "geometry": {
+            "kind": "impactChainProjectile",
+            "origin": "primaryImpact",
+            "radiusMetres": 6,
+            "primaryProjectileCount": 1,
+            "childProjectileLimit": 0,
+            "totalTargetLimit": 5
+          },
+          "evolution": "16.5m投送一支实体箭；首击后在固定6m范围内转向最近的未命中敌人，同一支箭依次连穿最多5敌，不分裂。",
+          "vfxAnchor": "singleProjectileTrail",
+          "vfxDirection": "只有一支木杆金属箭和已经飞过的细淡青尾迹；真实命中后同一箭体转向下一名最近敌人，逐段冻结瞄点与平滑路线，不提前铺开未来路径，不生成并行子箭。",
+          "vfxLayers": {
+            "material": "单支实体木箭、钢箭头与细淡青短尾",
+            "direction": "同一箭体在真实命中后转向最近可见未命中敌人；每段目标和路线在换目标时冻结",
+            "contact": "每个实际穿刺点短闪，同一cast每敌一次",
+            "fade": "已飞路径快速淡出，不生成未来目标连线或分叉",
+            "growth": "增强实体箭锋、已飞弯道和实际连续穿刺的可读性，保持原S/CD与总目标上限"
+          }
+        },
+        {
+          "rank": 5,
+          "geometry": {
+            "kind": "impactChainProjectile",
+            "origin": "primaryImpact",
+            "radiusMetres": 7,
+            "primaryProjectileCount": 1,
+            "childProjectileLimit": 0,
+            "totalTargetLimit": 6
+          },
+          "evolution": "18m投送一支实体箭；首击后在固定7m范围内转向最近的未命中敌人，同一支箭依次连穿最多6敌，不分裂。",
+          "vfxAnchor": "singleProjectileTrail",
+          "vfxDirection": "只有一支木杆金属箭和已经飞过的细淡青尾迹；真实命中后同一箭体转向下一名最近敌人，逐段冻结瞄点与平滑路线，不提前铺开未来路径，不生成并行子箭。",
+          "vfxLayers": {
+            "material": "单支实体木箭、钢箭头与细淡青短尾",
+            "direction": "同一箭体在真实命中后转向最近可见未命中敌人；每段目标和路线在换目标时冻结",
+            "contact": "每个实际穿刺点短闪，同一cast每敌一次",
+            "fade": "已飞路径快速淡出，不生成未来目标连线或分叉",
+            "growth": "增强实体箭锋、已飞弯道和实际连续穿刺的可读性，保持原S/CD与总目标上限"
+          }
+        }
+      ]
+    },
+    "THU_02": {
+      "graphPolicy": {
+        "countIncludesPrimary": true,
+        "freezeCenterAt": "firstValidImpact",
+        "freezeTargetsAt": "firstValidImpact",
+        "candidateFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFixedEnvelope,unoccluded",
+        "ordering": [
+          "distanceToFrozenCenter",
+          "stableEntityId"
+        ],
+        "recruitOutsideEnvelope": false,
+        "selectionUnique": true,
+        "selectionTargetRevisit": false,
+        "maxHitsPerTargetPerPulse": 1,
+        "hitLedgerKey": [
+          "castId",
+          "targetId",
+          "pulseIndex"
+        ],
+        "recruitAfterFirstPulse": false,
+        "revalidatePerPulse": true,
+        "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
+        "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
+        "missingTargetDamageRedistributed": false,
+        "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+        "connectionDistanceOrdering": [
+          "nearestLegalEdge",
+          "stableEntityId"
+        ],
+        "closedLoopNeighboursPerTarget": 2,
+        "casterConnections": "oneEntryToNearestReachableTarget",
+        "edgeDamagePolicy": "oneDeclaredHitPerTargetPerPulseRegardlessOfEdgeCount",
+        "blockedEdges": "omit; do not connect through walls",
+        "edgeSelectionRevalidatedPerPulse": true
+      },
+      "mechanic": "数量含首目标。中心在首次命中瞬间冻结；候选必须同场同层、敌对存活、位于中心半径内并有合法无遮挡连接；按中心距离、稳定ID排序。主目标全伤，额外目标各70%；每cast每敌一次，不回跳、不补空位、不因主目标死亡移动中心。技能雷弧不是装备额外链。 已声明目标之间按最近合法可见距离构造连通骨架，并补充每个目标的两名最近邻形成局部闭环；施法者只接入网络一次，不从首目标向所有目标放射。额外电边只组织同一拍电网，不增加任何伤害次数或招募新目标。"
+    },
+    "THU_04": {
+      "graphPolicy": {
+        "countIncludesPrimary": false,
+        "freezeCenterAt": "release",
+        "freezeTargetsAt": "release",
+        "candidateFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFixedEnvelope,unoccluded",
+        "ordering": [
+          "distanceToFrozenCenter",
+          "stableEntityId"
+        ],
+        "recruitOutsideEnvelope": false,
+        "selectionUnique": true,
+        "selectionTargetRevisit": false,
+        "maxHitsPerTargetPerPulse": 1,
+        "hitLedgerKey": [
+          "castId",
+          "targetId",
+          "pulseIndex"
+        ],
+        "recruitAfterFirstPulse": false,
+        "revalidatePerPulse": true,
+        "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
+        "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
+        "missingTargetDamageRedistributed": false,
+        "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+        "connectionDistanceOrdering": [
+          "nearestLegalEdge",
+          "stableEntityId"
+        ],
+        "closedLoopNeighboursPerTarget": 2,
+        "casterConnections": "oneEntryToNearestReachableTarget",
+        "edgeDamagePolicy": "oneDeclaredHitPerTargetPerPulseRegardlessOfEdgeCount",
+        "blockedEdges": "omit; do not connect through walls",
+        "edgeSelectionRevalidatedPerPulse": true
+      },
+      "mechanic": "以远处选点为扇面起点、按施法朝向展开；固定几何内按稳定排序冻结目标集合，数量不足不回跳。两拍各50%，同一目标每拍一次；每拍重验存活敌对、同场同层、固定扇面与无遮挡连接，失效者本拍跳过且不补位。替代原自身电冲。 已声明目标之间按最近合法可见距离构造连通骨架，并补充每个目标的两名最近邻形成局部闭环；施法者只接入网络一次，不从首目标向所有目标放射。额外电边只组织同一拍电网，不增加任何伤害次数或招募新目标。"
+    },
+    "THU_05": {
+      "graphPolicy": {
+        "countIncludesPrimary": false,
+        "freezeCenterAt": "release",
+        "freezeTargetsAt": "firstPulse",
+        "candidateFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFixedEnvelope,unoccluded",
+        "ordering": [
+          "distanceToFrozenCenter",
+          "stableEntityId"
+        ],
+        "recruitOutsideEnvelope": false,
+        "selectionUnique": true,
+        "selectionTargetRevisit": false,
+        "maxHitsPerTargetPerPulse": 1,
+        "hitLedgerKey": [
+          "castId",
+          "targetId",
+          "pulseIndex"
+        ],
+        "recruitAfterFirstPulse": false,
+        "revalidatePerPulse": true,
+        "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
+        "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
+        "missingTargetDamageRedistributed": false,
+        "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+        "connectionDistanceOrdering": [
+          "nearestLegalEdge",
+          "stableEntityId"
+        ],
+        "closedLoopNeighboursPerTarget": 2,
+        "casterConnections": "oneEntryToNearestReachableTarget",
+        "edgeDamagePolicy": "oneDeclaredHitPerTargetPerPulseRegardlessOfEdgeCount",
+        "blockedEdges": "omit; do not connect through walls",
+        "edgeSelectionRevalidatedPerPulse": true
+      },
+      "mechanic": "释放时冻结中心，首拍冻结目标集合，三拍间隔0.25s，每敌每拍最多一次；三拍均分总倍率。每拍重验存活敌对、同场同层、固定范围与无遮挡连接，走出范围或被遮挡者本拍跳过；死亡者退出，不招募新目标补位，不把每条电边都算伤害。 已声明目标之间按最近合法可见距离构造连通骨架，并补充每个目标的两名最近邻形成局部闭环；施法者只接入网络一次，不从首目标向所有目标放射。额外电边只组织同一拍电网，不增加任何伤害次数或招募新目标。"
+    }
+  }
+}

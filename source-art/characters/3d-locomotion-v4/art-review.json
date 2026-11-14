@@ -1,0 +1,21 @@
+{
+  "generation": "not used; existing v3 animation stabilized with native Blender quaternion interpolation, IK and CopyRotation",
+  "runtimeGLBSHA256": "fc410c4b198deb08cb43bf3d142adcfc79c8dbbd2e1341cc6f5ac74b562a2ca8",
+  "actualEngineViewsReviewed": true,
+  "reviewed": [
+    "runtime/body-sway-contact.jpg",
+    "runtime/side-walk-run.jpg",
+    "runtime/after/equipment-contact.jpg"
+  ],
+  "observations": [
+    "Rear head, shoulders and chest remain much steadier at matched gait phases; the large alternating side lean is reduced.",
+    "Foot placement, leg flexion and fore/aft arm swing remain visible; reduced body bounce is not accomplished by slowing the animation.",
+    "Side views retain the existing forward run lean; walking has less head bob.",
+    "Staff hands and back-mounted bow/quiver remain connected; the current 16 mesh character and four hairstyles are reused."
+  ],
+  "engineeringChecks": "Saved-source loop/scale/rotation checks, complete-source Cocos web-mobile build, 96 static views, 240 normal-speed continuous frames, live gait/pause/sword and 2D/3D/hair/inventory checks passed",
+  "agentArtReview": "passed for local integration; user visual judgment pending",
+  "userApproved": false,
+  "subsequentUserFeedback": "2026-11-10: run still looked crouched and lacked head/chest lift and knee lift; replaced by v5 upright Sprint_Loop adaptation.",
+  "supersededRunBy": "source-art/characters/3d-locomotion-v5/README.md"
+}

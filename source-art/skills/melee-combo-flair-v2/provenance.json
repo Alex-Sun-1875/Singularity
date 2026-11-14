@@ -1,0 +1,80 @@
+{
+  "recordedAt": "2026-11-10T19:00:36.629416+08:00",
+  "backend": "OpenAI cloud image_gen built-in",
+  "localInferenceUsed": false,
+  "cliUsed": false,
+  "userFeedback": "近战连击的效果还需要更炫一点",
+  "referenceCaching": "Unknown; one necessary project reference supplied per job.",
+  "jobs": [
+    {
+      "kind": "contact-peaks",
+      "file": "contact-peaks-raw-v2.png",
+      "size": [
+        2172,
+        724
+      ],
+      "sha256": "444e80b86cd42e34d4fff7a3440ce23d07e850c44656683f2da6aca07726bc01",
+      "prompt": "prompts/contact-peaks-v2.txt",
+      "reference": "references/contact-baseline.jpg",
+      "generationSucceeded": true,
+      "internalArtReview": "Static concept usable: visibly stronger silver/gold trails and contact sparks, distinct final-hit crescendo, readable upper-body silhouettes, original three connected poses and twelve-panel choreography retained. Exact anatomy, attack range and frame continuity are not validated by the concept.",
+      "userArtAccepted": false,
+      "runtimeIntegrated": false
+    },
+    {
+      "kind": "storyboard",
+      "file": "storyboard-raw-v2.png",
+      "size": [
+        1448,
+        1086
+      ],
+      "sha256": "6742a64b16d71f3ca05c777490d15d3aab3b755ccd3fac5794ab15abcdafeb9c",
+      "prompt": "prompts/storyboard-v2.txt",
+      "reference": "../fire-melee-direction-v1/melee-combo-raw-v1.png",
+      "generationSucceeded": true,
+      "internalArtReview": "Static concept usable: visibly stronger silver/gold trails and contact sparks, distinct final-hit crescendo, readable upper-body silhouettes, original three connected poses and twelve-panel choreography retained. Exact anatomy, attack range and frame continuity are not validated by the concept.",
+      "userArtAccepted": false,
+      "runtimeIntegrated": false
+    }
+  ],
+  "acceptance": "Generation success and internal concept review recorded separately. Pending user art review; no runtime animation, damage/collision integration or target-device acceptance claimed.",
+  "previousVersion": "../fire-melee-direction-v1/melee-combo-v1.png",
+  "derivedFiles": [
+    {
+      "file": "contact-peaks-v2.png",
+      "size": [
+        2172,
+        992
+      ],
+      "sha256": "6646d00ed3c3a67f161ac63169a5534609dc2199b98d6ba7de7612a23288a09b",
+      "processing": "Pillow external Chinese label bands. Comparison scales and arranges the previous contact crops and the new output; no old-image dimming or generated-pixel retouch."
+    },
+    {
+      "file": "storyboard-v2.png",
+      "size": [
+        1698,
+        1352
+      ],
+      "sha256": "d118b06b0ec5ea504245ed595e1a519445ea6973673e0b6032d10ddbc8a16a20",
+      "processing": "Pillow external Chinese label bands. Comparison scales and arranges the previous contact crops and the new output; no old-image dimming or generated-pixel retouch."
+    },
+    {
+      "file": "before-after-v2.png",
+      "size": [
+        1536,
+        1232
+      ],
+      "sha256": "67ab4f662f0dc88804128f4e3b9f9307c1351c94188637973311a49ad8dbfd37",
+      "processing": "Pillow external Chinese label bands. Comparison scales and arranges the previous contact crops and the new output; no old-image dimming or generated-pixel retouch."
+    }
+  ],
+  "internalReview": {
+    "conceptReviewed": true,
+    "annotationLayoutReviewed": true,
+    "headerSpacingCorrected": true,
+    "previousVersionPreserved": true,
+    "userArtAccepted": false,
+    "runtimeAnimationAccepted": false,
+    "poseRigOrFrameContinuityValidated": false
+  }
+}

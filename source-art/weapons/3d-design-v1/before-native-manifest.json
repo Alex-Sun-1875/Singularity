@@ -1,0 +1,1580 @@
+{
+  "version": "v5-redesign-v6",
+  "status": "candidate-not-installed",
+  "runtimeProfile": "native-kit-v1",
+  "equipmentResources": {
+    "W01": "sword",
+    "W02": "oath-sword",
+    "L01": "greatsword",
+    "W07": "bow",
+    "W08": "wind-bow",
+    "L02": "astra-bow",
+    "W11": "staff"
+  },
+  "props": {
+    "sword": {
+      "id": "sword",
+      "resource": "actors/props-native/sword/sword/sword",
+      "source": "source-art/characters/redesign-v6/props/sword.blend",
+      "sourceSHA256": "c8660726d869d2ddb9e1f27feeb7f797906c9c5247f140bec281cf5c71929264",
+      "fbx": "src/.tmp/character-redesign-v6/props/sword/sword.fbx",
+      "exportSHA256": "81ebe747ce4f5143eab238a9fd09b2639ccfccce411d923b78636c70cf34e5fd",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 2608,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 2249,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 2608,
+      "materials": [
+        {
+          "runtimeName": "V5_sword_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/sword_albedo.png",
+            "normal": "../props-native/textures/sword_normal.png",
+            "orm": "../props-native/textures/sword_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/sword_albedo.png",
+          "sha256": "a2e9748949644200506ab17adeba7993529b0086f237bd60edf01b75c86a8dfa",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/sword_normal.png",
+          "sha256": "13c876326c64b7c7c5527f62af9068743f068d236ac2ff66a4c06113ee0807cc",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/sword_orm.png",
+          "sha256": "54e78c62f15f7fa08955631dc3dddd001db2c7c6fcc862ffd5294104a66e5c1a",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_sword_00": {
+          "vertices": 744,
+          "triangles": 1456
+        },
+        "V5_sword_01": {
+          "vertices": 582,
+          "triangles": 1152
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 8.688304120596513e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 2608,
+        "trianglesAfter": 2608,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "bow": {
+      "id": "bow",
+      "resource": "actors/props-native/bow/bow/bow",
+      "source": "source-art/characters/redesign-v6/props/bow.blend",
+      "sourceSHA256": "aacce06da9ee121478db6c78e898770ab1ec1a9ef946201a3e24c334510071f5",
+      "fbx": "src/.tmp/character-redesign-v6/props/bow/bow.fbx",
+      "exportSHA256": "efb7a31c109e9b66b8dde704b9af9f3013537002164af1f271214a0aa1183172",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Original Bow Basis/Draw positions retained; UV-only edits and separate rigid grip accessories"
+        }
+      ],
+      "uv": {
+        "triangles": 772,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 996,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 772,
+      "materials": [
+        {
+          "runtimeName": "V5_bow_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/bow_albedo.png",
+            "normal": "../props-native/textures/bow_normal.png",
+            "orm": "../props-native/textures/bow_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/bow_albedo.png",
+          "sha256": "d9bef64487fe67ba82a44c8ba952f03444e4a16fffaf7e0ab6b4fb39f18d3a66",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/bow_normal.png",
+          "sha256": "1100c95b094f071819c0c57bf11fa61e413b65b92c4ecfe7f52bcb6764b242e0",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/bow_orm.png",
+          "sha256": "2163af8ac4660f734caf6725b6781490c9dbd584a7738e1abc5ad169234c9311",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_bow_00": {
+          "vertices": 802,
+          "triangles": 684
+        },
+        "V5_bow_01": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_bow_02": {
+          "vertices": 24,
+          "triangles": 44
+        }
+      },
+      "morph": {
+        "shapeName": "Draw",
+        "baseVerticesPreserved": true,
+        "drawPositionsPreserved": true,
+        "originPreserved": true
+      },
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 9.577804860327888e-08,
+        "maxMorphPositionErrorMeters": 1.0635442832861624e-07,
+        "maxUVError": 0,
+        "trianglesBefore": 772,
+        "trianglesAfter": 772,
+        "shapeNamesAfterFBXImport": [
+          "Draw"
+        ]
+      }
+    },
+    "hammer": {
+      "id": "hammer",
+      "resource": "actors/props-native/hammer/hammer/hammer",
+      "source": "source-art/characters/redesign-v6/props/hammer.blend",
+      "sourceSHA256": "26874c9d9129fda3cd887bd139740c77815ed8503cf9729920cb43d66086296f",
+      "fbx": "src/.tmp/character-redesign-v6/props/hammer/hammer.fbx",
+      "exportSHA256": "b002155cac3458016c5e2b2d70019a57b5edb68fa2618fd1a4a680e298df6c3f",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tools/makehuman-community/clothes/culturalibre_war_hammer/warhammer.obj",
+          "sha256": "4bb50626d07015312f5e696373a64ca49f7831e9ce9cc2c50646305ba273cbe6",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 5740,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 4331,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 5740,
+      "materials": [
+        {
+          "runtimeName": "V5_hammer_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/hammer_albedo.png",
+            "normal": "../props-native/textures/hammer_normal.png",
+            "orm": "../props-native/textures/hammer_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/hammer_albedo.png",
+          "sha256": "b94f7983f7ee522bd57ca9844aa11ec89a43b6c200a9c286a74c3849601cbcdf",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/hammer_normal.png",
+          "sha256": "4889f37fe4bb1116f972bc06460d2b68fe7714155f1f82db22b1ad623f6c41b1",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/hammer_orm.png",
+          "sha256": "3d326528968f36a09924cb7abd911056be1f500c31e95eebb0595b12fc76f94f",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_hammer_00": {
+          "vertices": 2400,
+          "triangles": 4780
+        },
+        "V5_hammer_01": {
+          "vertices": 486,
+          "triangles": 960
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 9.996002603429588e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 5740,
+        "trianglesAfter": 5740,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "oath-sword": {
+      "id": "oath-sword",
+      "resource": "actors/props-native/oath-sword/oath-sword/oath-sword",
+      "source": "source-art/characters/redesign-v6/props/oath-sword.blend",
+      "sourceSHA256": "ee60f4226cdcc1159e1d3d7433b1346b84007dc708b26648eed9c30aa897fbc2",
+      "fbx": "src/.tmp/character-redesign-v6/props/oath-sword/oath-sword.fbx",
+      "exportSHA256": "91a482abd52517913da7c867f648850d46ffa23a8cb56bb1e234edb759a8bb10",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 3148,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 2729,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 3148,
+      "materials": [
+        {
+          "runtimeName": "V5_oath_sword_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/oath-sword_albedo.png",
+            "normal": "../props-native/textures/oath-sword_normal.png",
+            "orm": "../props-native/textures/oath-sword_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/oath-sword_albedo.png",
+          "sha256": "4e367ab2c66c7a9d7b34a24ca72e4953759473bfcb90bfb77c2639c426cb7350",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/oath-sword_normal.png",
+          "sha256": "327939228c3cd5d301bc706aefdf066afd433b552ba3f3a6000d1190ccd22b53",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/oath-sword_orm.png",
+          "sha256": "4cd02faf290e9fd002d63c26890b385a2cd93f67d39b6b88bf55a7df0b6c00f4",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_oath_sword_00": {
+          "vertices": 744,
+          "triangles": 1456
+        },
+        "V5_oath_sword_01": {
+          "vertices": 582,
+          "triangles": 1152
+        },
+        "V5_oath_sword_02": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_oath_sword_03": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_oath_sword_04": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_oath_sword_05": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_oath_sword_06": {
+          "vertices": 56,
+          "triangles": 108
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 8.688304120596513e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 3148,
+        "trianglesAfter": 3148,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "greatsword": {
+      "id": "greatsword",
+      "resource": "actors/props-native/greatsword/greatsword/greatsword",
+      "source": "source-art/characters/redesign-v6/props/greatsword.blend",
+      "sourceSHA256": "ac62cb9eefcc56aa3c217918b50fd0607d8e0a99e20d1b20cb1bf0f6acf94855",
+      "fbx": "src/.tmp/character-redesign-v6/props/greatsword/greatsword.fbx",
+      "exportSHA256": "47c718b4be1edbe21b947a8bda247d348728a2dbc999fbcf188d1f36a6ebb468",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 2816,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 2934,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 2816,
+      "materials": [
+        {
+          "runtimeName": "V5_greatsword_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/greatsword_albedo.png",
+            "normal": "../props-native/textures/greatsword_normal.png",
+            "orm": "../props-native/textures/greatsword_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/greatsword_albedo.png",
+          "sha256": "489014f04879fad0c13d4c02262eb5c92bf610c7b92ce7c24d645fd74a87f309",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/greatsword_normal.png",
+          "sha256": "8ee09c6dab6029d18f18b039f4eca38d205bc723ea04edb75355799178d1dddd",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/greatsword_orm.png",
+          "sha256": "31cfb87590939e903c24ca4dae38923e1849fec75a4845075f43b0099a3b014a",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_greatsword_00": {
+          "vertices": 841,
+          "triangles": 908
+        },
+        "V5_greatsword_01": {
+          "vertices": 582,
+          "triangles": 1152
+        },
+        "V5_greatsword_02": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_greatsword_03": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_greatsword_04": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_greatsword_05": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_greatsword_06": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_greatsword_07": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_greatsword_08": {
+          "vertices": 56,
+          "triangles": 108
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 8.148614227820872e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 2816,
+        "trianglesAfter": 2816,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "wind-bow": {
+      "id": "wind-bow",
+      "resource": "actors/props-native/wind-bow/wind-bow/wind-bow",
+      "source": "source-art/characters/redesign-v6/props/wind-bow.blend",
+      "sourceSHA256": "e71442788832c7c8b497047043f41c3897e6b699cff09abcbc608f9d532d5888",
+      "fbx": "src/.tmp/character-redesign-v6/props/wind-bow/wind-bow.fbx",
+      "exportSHA256": "d10b403eb77e291f25b675a1acab84efcc75c7f96d5400f4a178384d6ad5b8e0",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Original Bow Basis/Draw positions retained; UV-only edits and separate rigid grip accessories"
+        }
+      ],
+      "uv": {
+        "triangles": 880,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 1116,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 880,
+      "materials": [
+        {
+          "runtimeName": "V5_wind_bow_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/wind-bow_albedo.png",
+            "normal": "../props-native/textures/wind-bow_normal.png",
+            "orm": "../props-native/textures/wind-bow_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/wind-bow_albedo.png",
+          "sha256": "f17185f062f80524808b2fdf4f8c0379e7b94592039edb89a8113a161c16325a",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/wind-bow_normal.png",
+          "sha256": "162b5f82e008de0433ee32dc3e931f164768c705264007c72e4975469fded2ab",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/wind-bow_orm.png",
+          "sha256": "37906ba76926e62c205cb81ec66ea416553e8e7cc7ec669c35b8840494c7683c",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_wind_bow_00": {
+          "vertices": 802,
+          "triangles": 684
+        },
+        "V5_wind_bow_01": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_wind_bow_02": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_wind_bow_03": {
+          "vertices": 32,
+          "triangles": 60
+        },
+        "V5_wind_bow_04": {
+          "vertices": 18,
+          "triangles": 24
+        },
+        "V5_wind_bow_05": {
+          "vertices": 18,
+          "triangles": 24
+        }
+      },
+      "morph": {
+        "shapeName": "Draw",
+        "baseVerticesPreserved": true,
+        "drawPositionsPreserved": true,
+        "originPreserved": true
+      },
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 9.577804860327888e-08,
+        "maxMorphPositionErrorMeters": 1.0635442832861624e-07,
+        "maxUVError": 0,
+        "trianglesBefore": 880,
+        "trianglesAfter": 880,
+        "shapeNamesAfterFBXImport": [
+          "Draw"
+        ]
+      }
+    },
+    "astra-bow": {
+      "id": "astra-bow",
+      "resource": "actors/props-native/astra-bow/astra-bow/astra-bow",
+      "source": "source-art/characters/redesign-v6/props/astra-bow.blend",
+      "sourceSHA256": "9ddd934cb5f617103f2da4812e9bd5f417a748363879475355a9dca21bacb99a",
+      "fbx": "src/.tmp/character-redesign-v6/props/astra-bow/astra-bow.fbx",
+      "exportSHA256": "2a0b386a848b69d3d84426a38b480c45eb25432787fcc7fb4601c5eac524e5a2",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Original Bow Basis/Draw positions retained; UV-only edits and separate rigid grip accessories"
+        }
+      ],
+      "uv": {
+        "triangles": 1264,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 1452,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 1264,
+      "materials": [
+        {
+          "runtimeName": "V5_astra_bow_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/astra-bow_albedo.png",
+            "normal": "../props-native/textures/astra-bow_normal.png",
+            "orm": "../props-native/textures/astra-bow_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/astra-bow_albedo.png",
+          "sha256": "0753c41d180d580f2777a3c86515453da397b3281f786067a28d251ee723110f",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/astra-bow_normal.png",
+          "sha256": "3394dbab2467044120d362bc4eb4bd717b9972364afa75c77d6cc7dc0ef33105",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/astra-bow_orm.png",
+          "sha256": "835bc3f192e0e29601b0594d2550c2275b8e17b4227faa4537c0c088e43bb2c6",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_astra_bow_00": {
+          "vertices": 802,
+          "triangles": 684
+        },
+        "V5_astra_bow_01": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_astra_bow_02": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_astra_bow_03": {
+          "vertices": 32,
+          "triangles": 60
+        },
+        "V5_astra_bow_04": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_astra_bow_05": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_astra_bow_06": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_astra_bow_07": {
+          "vertices": 56,
+          "triangles": 108
+        }
+      },
+      "morph": {
+        "shapeName": "Draw",
+        "baseVerticesPreserved": true,
+        "drawPositionsPreserved": true,
+        "originPreserved": true
+      },
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 9.577804860327888e-08,
+        "maxMorphPositionErrorMeters": 1.0635442832861624e-07,
+        "maxUVError": 0,
+        "trianglesBefore": 1264,
+        "trianglesAfter": 1264,
+        "shapeNamesAfterFBXImport": [
+          "Draw"
+        ]
+      }
+    },
+    "arrow": {
+      "id": "arrow",
+      "resource": "actors/props-native/arrow/arrow/arrow",
+      "source": "source-art/characters/redesign-v6/props/arrow.blend",
+      "sourceSHA256": "2413e98a167ece8281155c89f505fc9fc27c404d2ffa86d1ff3807ea52d4ab44",
+      "fbx": "src/.tmp/character-redesign-v6/props/arrow/arrow.fbx",
+      "exportSHA256": "df5a5c30fb830894015a1bb72479f278c391572119d81ee8f079be32784b273a",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 52,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 92,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 52,
+      "materials": [
+        {
+          "runtimeName": "V5_arrow_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/arrow_albedo.png",
+            "normal": "../props-native/textures/arrow_normal.png",
+            "orm": "../props-native/textures/arrow_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/arrow_albedo.png",
+          "sha256": "a25286ca4327bf15bf9332755e4f4aa8a6b7394c6671a3dcfd86de73a867ae09",
+          "role": "albedo",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/arrow_normal.png",
+          "sha256": "c4b65d126b14925deef9bf5e6ed2f564053efd57150cdaba5e3a5505762ff630",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/arrow_orm.png",
+          "sha256": "298255f230ad5fe588d1ff26892610f611744f17cb79a5728d996795865d7036",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_arrow_00": {
+          "vertices": 73,
+          "triangles": 52
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 2.986047320518992e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 52,
+        "trianglesAfter": 52,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "staff": {
+      "id": "staff",
+      "resource": "actors/props-native/staff/staff/staff",
+      "source": "source-art/characters/redesign-v6/props/staff.blend",
+      "sourceSHA256": "823f85e1fccfbe95527c376d0f7049cb8633fff873ff9d4066fa960adb9758d7",
+      "fbx": "src/.tmp/character-redesign-v6/props/staff/staff.fbx",
+      "exportSHA256": "486772d07554d4b4c9631d01f0a64589b0cb25ec18d481711398109ce1bd9716",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 572,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 773,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 572,
+      "materials": [
+        {
+          "runtimeName": "V5_staff_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/staff_albedo.png",
+            "normal": "../props-native/textures/staff_normal.png",
+            "orm": "../props-native/textures/staff_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/staff_albedo.png",
+          "sha256": "05537e18703e046b4175f78d8aaf132eb26fa1bf975ae7682b992c7f9a791d21",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/staff_normal.png",
+          "sha256": "88daab312a5c0dac3312acc042a3d9869bc96b7173aad92987c692230b88943d",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/staff_orm.png",
+          "sha256": "1dff112e200d0d0dee4255c5877935a639be03a114ddd03c792f24f94dc77483",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_staff_00": {
+          "vertices": 498,
+          "triangles": 440
+        },
+        "V5_staff_01": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_staff_02": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_staff_03": {
+          "vertices": 24,
+          "triangles": 44
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 1.418650867890392e-07,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 572,
+        "trianglesAfter": 572,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "dagger": {
+      "id": "dagger",
+      "resource": "actors/props-native/dagger/dagger/dagger",
+      "source": "source-art/characters/redesign-v6/props/dagger.blend",
+      "sourceSHA256": "2fa98a49361fd252a561252679d9ace582b754c839d9b042243cc24c09fe23fa",
+      "fbx": "src/.tmp/character-redesign-v6/props/dagger/dagger.fbx",
+      "exportSHA256": "4cfad047e847aa26520a612493585e589356bcbb02942a72d8ef691251a0230f",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 1483,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 1467,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 1483,
+      "materials": [
+        {
+          "runtimeName": "V5_dagger_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/dagger_albedo.png",
+            "normal": "../props-native/textures/dagger_normal.png",
+            "orm": "../props-native/textures/dagger_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/dagger_albedo.png",
+          "sha256": "c8f5ce6411b68e0cfb2ec5d1512c16e79f723ef0f6ca5b2a651bded9b7c9f104",
+          "role": "albedo",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/dagger_normal.png",
+          "sha256": "ca2a79511dd08aa00decf3063b0d66e56840491b251afb1d9b41ef1984af8aa9",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/dagger_orm.png",
+          "sha256": "e13b666fbfc1386666b4fe2a802d44ab809256e6f722438ec1c2a3d72faf633e",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_dagger_00": {
+          "vertices": 303,
+          "triangles": 331
+        },
+        "V5_dagger_01": {
+          "vertices": 582,
+          "triangles": 1152
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 4.077600834762052e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 1483,
+        "trianglesAfter": 1483,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "shield": {
+      "id": "shield",
+      "resource": "actors/props-native/shield/shield/shield",
+      "source": "source-art/characters/redesign-v6/props/shield.blend",
+      "sourceSHA256": "b9951de5db389217e10ad326f4a43c1d1a45d778da02bd6dc9a6e27ffaca708d",
+      "fbx": "src/.tmp/character-redesign-v6/props/shield/shield.fbx",
+      "exportSHA256": "3e5a728d1501204f997cfceea1cccde9bd9958020c0abe5d2fb29fef96446fb0",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tmp/native-production/source/props/native-props.blend",
+          "sha256": "2735db760e33eccb7395187f619026803713efa3aacfe7f8e82c121b30dba75e",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 284,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 371,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 284,
+      "materials": [
+        {
+          "runtimeName": "V5_shield_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/shield_albedo.png",
+            "normal": "../props-native/textures/shield_normal.png",
+            "orm": "../props-native/textures/shield_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/shield_albedo.png",
+          "sha256": "18d970cfd6212654ea39c336a3150394d9246506888a6ce69eb101100edaf1e0",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/shield_normal.png",
+          "sha256": "5f25fb236d715a831ff959cb07d02cd9aad8b8c1bd308178aebbfdfe2e05ef74",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/shield_orm.png",
+          "sha256": "e12111f820c4141ffb3df0ac279116547de57573f0deed35143724fea4760726",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_shield_00": {
+          "vertices": 322,
+          "triangles": 284
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 4.7706993910878737e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 284,
+        "trianglesAfter": 284,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "lorn-shield": {
+      "id": "lorn-shield",
+      "resource": "actors/props-native/lorn-shield/lorn-shield/lorn-shield",
+      "source": "source-art/characters/redesign-v6/props/lorn-shield.blend",
+      "sourceSHA256": "ee806cc2cbee73d5db1eb931d9e86bd497ad027ee2f7100a3e6b6bde4ee5d95a",
+      "fbx": "src/.tmp/character-redesign-v6/props/lorn-shield/lorn-shield.fbx",
+      "exportSHA256": "2178a09c85bbb8ac45b240480e00f314453bdefba61f8caafcfc2b31eab903e1",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/shield_square.gltf",
+          "sha256": "7d70e034e5af0cde3a6e8b2cc53da46af01f6981c79917ad0c6501a7f5c87d16",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 654,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 728,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 654,
+      "materials": [
+        {
+          "runtimeName": "V5_lorn_shield_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/lorn-shield_albedo.png",
+            "normal": "../props-native/textures/lorn-shield_normal.png",
+            "orm": "../props-native/textures/lorn-shield_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/lorn-shield_albedo.png",
+          "sha256": "fa6f5d85915031b621d92275d2810da911033edfa8867bac0eb9de298c7eb256",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/lorn-shield_normal.png",
+          "sha256": "d53cce8ec159cc01d1090bec357a0dee161111e3fca60adc89fe838ce267909f",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/lorn-shield_orm.png",
+          "sha256": "6c1e50116e723d6c4376afca9dc0828a25a557ff00d2877147d1fba8df67e847",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_lorn_shield_00": {
+          "vertices": 286,
+          "triangles": 262
+        },
+        "V5_lorn_shield_01": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_lorn_shield_02": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_lorn_shield_03": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_lorn_shield_04": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_lorn_shield_05": {
+          "vertices": 24,
+          "triangles": 44
+        },
+        "V5_lorn_shield_06": {
+          "vertices": 24,
+          "triangles": 44
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 7.337970941989624e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 654,
+        "trianglesAfter": 654,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "captain-shield": {
+      "id": "captain-shield",
+      "resource": "actors/props-native/captain-shield/captain-shield/captain-shield",
+      "source": "source-art/characters/redesign-v6/props/captain-shield.blend",
+      "sourceSHA256": "600a508bf0c4ac1ce3277e987d663790b74ff04fec84b498f935a4709a23cbd9",
+      "fbx": "src/.tmp/character-redesign-v6/props/captain-shield/captain-shield.fbx",
+      "exportSHA256": "e46eb4d7d880b7752cd58dc30354ee42a1ef5138302189cdb006f989c452023d",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "source": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/Assets/gltf/shield_square.gltf",
+          "sha256": "7d70e034e5af0cde3a6e8b2cc53da46af01f6981c79917ad0c6501a7f5c87d16",
+          "operation": "Native axis/grip adaptation, maintained bevel edges and accessory details; hammer zero-area faces cleaned with Blender native operations"
+        }
+      ],
+      "uv": {
+        "triangles": 478,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 512,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 478,
+      "materials": [
+        {
+          "runtimeName": "V5_captain_shield_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/captain-shield_albedo.png",
+            "normal": "../props-native/textures/captain-shield_normal.png",
+            "orm": "../props-native/textures/captain-shield_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/captain-shield_albedo.png",
+          "sha256": "2e47c044be1f908ddf65f90a01fb5347ad211640cc3dbb79830740077563786c",
+          "role": "albedo",
+          "dimensions": [
+            512,
+            512
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/captain-shield_normal.png",
+          "sha256": "dd4a18e1bf932c718bb21a57d14fcb6280083f107d79841eee90ea701585aeae",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/captain-shield_orm.png",
+          "sha256": "f5a253a1049d1f1ea4417ae5c8fb67823cb8cd53e23fb9e8a3e6860dde726df1",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_captain_shield_00": {
+          "vertices": 286,
+          "triangles": 262
+        },
+        "V5_captain_shield_01": {
+          "vertices": 56,
+          "triangles": 108
+        },
+        "V5_captain_shield_02": {
+          "vertices": 56,
+          "triangles": 108
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 6.999184876121944e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 478,
+        "trianglesAfter": 478,
+        "shapeNamesAfterFBXImport": []
+      }
+    },
+    "map-kit": {
+      "id": "map-kit",
+      "resource": "actors/props-native/map-kit/map-kit/map-kit",
+      "source": "source-art/characters/redesign-v6/props/map-kit.blend",
+      "sourceSHA256": "9fd08c41a32ca885ad222fef493078a5605a1c311a789922ef55e82c9aaa1787",
+      "fbx": "src/.tmp/character-redesign-v6/props/map-kit/map-kit.fbx",
+      "exportSHA256": "3985a5f75d4d8cb8fa59842a1ea9c1f152d95b859516dd71673b9bf88f34977f",
+      "license": "Project-authored adaptation of CC0 sources",
+      "sources": [
+        {
+          "method": "Blender Cylinder and beveled Curve adapters; no matching map tube in downloaded libraries"
+        }
+      ],
+      "uv": {
+        "triangles": 1508,
+        "zeroAreaUVTriangles": 0,
+        "uniqueUVs": 1518,
+        "method": "Native Blender UV operations; export RuntimeUV as UV0"
+      },
+      "triangles": 1508,
+      "materials": [
+        {
+          "runtimeName": "V5_map_kit_Atlas",
+          "maps": {
+            "albedo": "../props-native/textures/map-kit_albedo.png",
+            "normal": "../props-native/textures/map-kit_normal.png",
+            "orm": "../props-native/textures/map-kit_orm.png"
+          },
+          "sourcePBR": {
+            "effectiveFactors": {
+              "roughness": 1,
+              "metallic": 1
+            }
+          },
+          "ormChannels": {
+            "occlusion": "R",
+            "roughness": "G",
+            "metallic": "B"
+          }
+        }
+      ],
+      "textures": [
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/map-kit_albedo.png",
+          "sha256": "b04ef4ab0d9a9e11102e7f758912e1a7332dc7ed7b38bf6f2266b8ccbd47f030",
+          "role": "albedo",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/map-kit_normal.png",
+          "sha256": "bcbc2d8bd3691ff0c3584151a27fdae4f8480e09ea87c0e9291ebd2d38101548",
+          "role": "normal",
+          "dimensions": [
+            256,
+            256
+          ]
+        },
+        {
+          "path": "src/.tmp/character-redesign-v6/props/textures/map-kit_orm.png",
+          "sha256": "eeacc0fb6dc61ce5b483ce031245ac1cb17a71ed9a8f2b3a3434a36ce77fe1cf",
+          "role": "orm",
+          "dimensions": [
+            256,
+            256
+          ]
+        }
+      ],
+      "geometry": {
+        "V5_map_kit_00": {
+          "vertices": 32,
+          "triangles": 60
+        },
+        "V5_map_kit_01": {
+          "vertices": 32,
+          "triangles": 60
+        },
+        "V5_map_kit_02": {
+          "vertices": 32,
+          "triangles": 60
+        },
+        "V5_map_kit_03": {
+          "vertices": 32,
+          "triangles": 60
+        },
+        "V5_map_kit_04": {
+          "vertices": 606,
+          "triangles": 1200
+        },
+        "V5_map_kit_05": {
+          "vertices": 18,
+          "triangles": 24
+        },
+        "V5_map_kit_06": {
+          "vertices": 24,
+          "triangles": 44
+        }
+      },
+      "morph": null,
+      "fbxRoundtrip": {
+        "passed": true,
+        "maxPositionErrorMeters": 3.0384398996829987e-08,
+        "maxMorphPositionErrorMeters": 0,
+        "maxUVError": 0,
+        "trianglesBefore": 1508,
+        "trianglesAfter": 1508,
+        "shapeNamesAfterFBXImport": []
+      }
+    }
+  },
+  "materialProvenance": [
+    {
+      "source": "source-art/materials/chapter-one-v3/pbr-library/wood_planks_grey",
+      "license": "CC0-1.0",
+      "provider": "Poly Haven",
+      "asset": "wood_planks_grey"
+    },
+    {
+      "source": "assets/materials/chapter-one-v3/ui/ui-smoked-leather-albedo-v1.png",
+      "license": "Project-owned artwork",
+      "method": "Reused leather albedo; Blender bump relief baked to tangent normal"
+    },
+    {
+      "source": "Native Blender Wave Texture",
+      "method": "Directional brushed-metal roughness and microscopic relief; no claimed scanned steel"
+    }
+  ],
+  "profileResources": {
+    "mira": [
+      "dagger",
+      "dagger"
+    ],
+    "lorn": [
+      "sword",
+      "lorn-shield"
+    ],
+    "captain": [
+      "hammer",
+      "captain-shield"
+    ],
+    "nightqi": [
+      "wind-bow",
+      "arrow"
+    ],
+    "kael": [
+      "map-kit"
+    ],
+    "evelyn": {
+      "environmentModel": "lantern",
+      "sourceAsset": "wooden_lantern_01",
+      "sourceManifest": "src/cocos/asset-pipeline/environment/sources.json",
+      "license": "CC0-1.0",
+      "height": 0.48,
+      "palmToModelSole": [
+        0,
+        -0.445,
+        0
+      ],
+      "additionalPointLights": 0
+    },
+    "raider": [
+      "sword"
+    ],
+    "raider-shield": [
+      "sword",
+      "shield"
+    ],
+    "raider-archer": [
+      "bow",
+      "arrow"
+    ]
+  },
+  "cocosBinding": {
+    "bowEuler": [
+      90,
+      0,
+      180
+    ],
+    "arrowEuler": [
+      0,
+      0,
+      0
+    ],
+    "arrowPosition": [
+      0,
+      0.35595446825027466,
+      0
+    ],
+    "policy": "Keep original dynamic attach_bow_l/attach_arrow_r and animated Draw sampling"
+  },
+  "bake": {
+    "tool": "Blender 4.5.15 LTS native Smart UV Project, Pack Islands and Cycles bake",
+    "albedo": "Base Color emitted into sRGB image, including metallic surfaces",
+    "normal": "Tangent-space normal from source image relief and native directional metal finishing",
+    "orm": "R=1 unoccluded, G=actual roughness, B=actual metallic; linear image",
+    "uv0": "Independent packed RuntimeUV; no collapsed source-atlas corners",
+    "budget": "Main albedo512, tiny albedo256, all normal/ORM256"
+  },
+  "sourceLicenses": [
+    {
+      "creator": "Kay Lousberg / KayKit",
+      "package": "Adventurers Free 2.0",
+      "license": "CC0-1.0",
+      "officialURL": "https://kaylousberg.itch.io/kaykit-adventurers",
+      "file": "src/.tools/research-animation-kaykit/adventurers-free-2.0/KayKit_Adventurers_2.0_FREE/License.txt",
+      "sha256": "d4adc31660d1db22eb60eba648e01db41577548f6fa1a3576cb4a6283dae0a58"
+    },
+    {
+      "creator": "culturalibre",
+      "asset": "culturalibre_war_hammer",
+      "license": "CC0 as declared by asset metadata and .mhclo",
+      "source": "http://www.makehumancommunity.org/node/2051",
+      "assetMetadata": "src/.tools/makehuman-community/packs/equipment01.json",
+      "assetLicenseFile": "src/.tools/makehuman-community/clothes/culturalibre_war_hammer/culturalibre_war_hammer.mhclo",
+      "objHeaderNote": "OBJ carries generic MakeClothes Unknown/AGPL3 exporter header; archive metadata and asset-specific .mhclo both explicitly identify culturalibre and CC0. Both are retained for provenance."
+    }
+  ]
+}

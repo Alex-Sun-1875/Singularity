@@ -1,0 +1,684 @@
+{
+  "date": "2026-11-11",
+  "sourceVersion": "0.3.14",
+  "status": "source and local Creator preview validated; target-device thermal verification pending",
+  "platformVerified": false,
+  "iphone14ThermalVerified": false,
+  "packageProduced": false,
+  "uploaded": false,
+  "environment": {
+    "engine": "Cocos Creator 3.8.8",
+    "runtime": "Windows desktop Chrome, Creator preview 7456; mobile UA/touch and 844x390 CSS viewport at DPR 3",
+    "primaryMode": "painted 2D world with native 3D player, matching TapTap release mode",
+    "physics": "existing Bullet terrain/obstacle colliders",
+    "frameRateSetting": 60,
+    "frameRatePolicy": "Existing settings retained. No new cap or lower frame-rate limit.",
+    "interpretation": "Geometry, device buffer accounting and draw submissions are desktop browser measurements; they are not phone temperature, battery, FPS or GPU-time measurements."
+  },
+  "implementation": [
+    "Partition outdoor painted ground into 16x16 existing grid-cell meshes (~24m sides), using native Cocos bounds/frustum culling.",
+    "Retain one continuous collision mesh with the exact original position/index topology and collision filters.",
+    "Preserve layout/transform nodes but avoid creating hidden painted-world 3D volume renderers/materials.",
+    "Disable instancing on unique procedural surfaces; pool repeated cutout quad geometry by UV layout across scene travels and release at chapter disposal.",
+    "Render the two rectangular health-bar fills with built-in white texture Sprites; retain background Graphics, dimensions, colors and HP/lag timing."
+  ],
+  "loadingScope": "All current-area collision/gameplay data and shared textures remain resident. This is render culling and geometry reuse, not full asynchronous map/resource streaming.",
+  "mapComparisons": [
+    {
+      "area": "S01",
+      "frameRateSetting": 60,
+      "trianglesBefore": 318467,
+      "trianglesAfter": 277317,
+      "triangleReductionPercent": 12.921,
+      "drawCallsBefore": 210,
+      "drawCallsAfter": 213,
+      "groundTrianglesTotal": 43186,
+      "groundTrianglesSubmitted": 2048,
+      "groundReductionPercent": 95.258,
+      "groundChunks": 90,
+      "visibleChunks": 4,
+      "colliderIdentical": true,
+      "geometryAndGlobalUvsIdentical": true,
+      "collider": {
+        "positionsHash": "6e02d51",
+        "indicesHash": "8a34cf2e",
+        "vertices": 21888,
+        "triangles": 43186,
+        "group": 4,
+        "mask": 8,
+        "convex": false
+      },
+      "geometry": {
+        "sameTriangles": true,
+        "duplicates": 0,
+        "missingVertices": 0,
+        "uvHash": "86dbc23d"
+      }
+    },
+    {
+      "area": "S03",
+      "frameRateSetting": 60,
+      "trianglesBefore": 212726,
+      "trianglesAfter": 180996,
+      "triangleReductionPercent": 14.916,
+      "drawCallsBefore": 187,
+      "drawCallsAfter": 191,
+      "groundTrianglesTotal": 34290,
+      "groundTrianglesSubmitted": 2560,
+      "groundReductionPercent": 92.534,
+      "groundChunks": 72,
+      "visibleChunks": 5,
+      "colliderIdentical": true,
+      "geometryAndGlobalUvsIdentical": true,
+      "collider": {
+        "positionsHash": "8b0d9b3d",
+        "indicesHash": "1439bb87",
+        "vertices": 17408,
+        "triangles": 34290,
+        "group": 4,
+        "mask": 8,
+        "convex": false
+      },
+      "geometry": {
+        "sameTriangles": true,
+        "duplicates": 0,
+        "missingVertices": 0,
+        "uvHash": "db9d1c3d"
+      }
+    },
+    {
+      "area": "S11",
+      "frameRateSetting": 60,
+      "trianglesBefore": 224782,
+      "trianglesAfter": 192236,
+      "triangleReductionPercent": 14.479,
+      "drawCallsBefore": 186,
+      "drawCallsAfter": 190,
+      "groundTrianglesTotal": 35100,
+      "groundTrianglesSubmitted": 2560,
+      "groundReductionPercent": 92.707,
+      "groundChunks": 81,
+      "visibleChunks": 5,
+      "colliderIdentical": true,
+      "geometryAndGlobalUvsIdentical": true,
+      "collider": {
+        "positionsHash": "a312e20",
+        "indicesHash": "23fa3f19",
+        "vertices": 17816,
+        "triangles": 35100,
+        "group": 4,
+        "mask": 8,
+        "convex": false
+      },
+      "geometry": {
+        "sameTriangles": true,
+        "duplicates": 0,
+        "missingVertices": 0,
+        "uvHash": "c93bd1d5"
+      }
+    },
+    {
+      "area": "U1-02",
+      "frameRateSetting": 60,
+      "trianglesBefore": 216731,
+      "trianglesAfter": 186557,
+      "triangleReductionPercent": 13.922,
+      "drawCallsBefore": 189,
+      "drawCallsAfter": 193,
+      "groundTrianglesTotal": 32736,
+      "groundTrianglesSubmitted": 2560,
+      "groundReductionPercent": 92.18,
+      "groundChunks": 72,
+      "visibleChunks": 5,
+      "colliderIdentical": true,
+      "geometryAndGlobalUvsIdentical": true,
+      "collider": {
+        "positionsHash": "10d95305",
+        "indicesHash": "62ce64c9",
+        "vertices": 16625,
+        "triangles": 32736,
+        "group": 4,
+        "mask": 8,
+        "convex": false
+      },
+      "geometry": {
+        "sameTriangles": true,
+        "duplicates": 0,
+        "missingVertices": 0,
+        "uvHash": "79946ffd"
+      }
+    },
+    {
+      "area": "H08",
+      "frameRateSetting": 60,
+      "trianglesBefore": 220948,
+      "trianglesAfter": 185762,
+      "triangleReductionPercent": 15.925,
+      "drawCallsBefore": 186,
+      "drawCallsAfter": 190,
+      "groundTrianglesTotal": 37752,
+      "groundTrianglesSubmitted": 2560,
+      "groundReductionPercent": 93.219,
+      "groundChunks": 81,
+      "visibleChunks": 5,
+      "colliderIdentical": true,
+      "geometryAndGlobalUvsIdentical": true,
+      "collider": {
+        "positionsHash": "4469b859",
+        "indicesHash": "34a65d15",
+        "vertices": 19152,
+        "triangles": 37752,
+        "group": 4,
+        "mask": 8,
+        "convex": false
+      },
+      "geometry": {
+        "sameTriangles": true,
+        "duplicates": 0,
+        "missingVertices": 0,
+        "uvHash": "952f80e9"
+      }
+    }
+  ],
+  "mapTradeoff": "3-4 additional draw calls in these fixed views; geometry reduction alone does not establish total frame-time or thermal benefit.",
+  "visual": {
+    "comparisons": [
+      {
+        "area": "S01",
+        "pose": "spawn",
+        "identical": true,
+        "meanAbsoluteError": 0.0,
+        "maxChannelError": 0,
+        "bounds": null
+      },
+      {
+        "area": "S01",
+        "pose": "boundary",
+        "identical": true,
+        "meanAbsoluteError": 0.0,
+        "maxChannelError": 0,
+        "bounds": null
+      },
+      {
+        "area": "S01",
+        "pose": "wide",
+        "identical": false,
+        "meanAbsoluteError": 1.0801906536503693e-05,
+        "maxChannelError": 6,
+        "bounds": [
+          675,
+          302,
+          2143,
+          1158
+        ]
+      },
+      {
+        "area": "S03",
+        "pose": "spawn",
+        "identical": true,
+        "meanAbsoluteError": 0.0,
+        "maxChannelError": 0,
+        "bounds": null
+      },
+      {
+        "area": "S03",
+        "pose": "boundary",
+        "identical": true,
+        "meanAbsoluteError": 0.0,
+        "maxChannelError": 0,
+        "bounds": null
+      },
+      {
+        "area": "S03",
+        "pose": "wide",
+        "identical": false,
+        "meanAbsoluteError": 8.517753383472183e-05,
+        "maxChannelError": 8,
+        "bounds": [
+          61,
+          43,
+          1838,
+          1094
+        ]
+      },
+      {
+        "area": "S11",
+        "pose": "spawn",
+        "identical": true,
+        "meanAbsoluteError": 0.0,
+        "maxChannelError": 0,
+        "bounds": null
+      },
+      {
+        "area": "S11",
+        "pose": "boundary",
+        "identical": true,
+        "meanAbsoluteError": 0.0,
+        "maxChannelError": 0,
+        "bounds": null
+      },
+      {
+        "area": "S11",
+        "pose": "wide",
+        "identical": true,
+        "meanAbsoluteError": 0.0,
+        "maxChannelError": 0,
+        "bounds": null
+      },
+      {
+        "area": "U1-02",
+        "pose": "spawn",
+        "identical": true,
+        "meanAbsoluteError": 0.0,
+        "maxChannelError": 0,
+        "bounds": null
+      },
+      {
+        "area": "U1-02",
+        "pose": "boundary",
+        "identical": true,
+        "meanAbsoluteError": 0.0,
+        "maxChannelError": 0,
+        "bounds": null
+      },
+      {
+        "area": "U1-02",
+        "pose": "wide",
+        "identical": true,
+        "meanAbsoluteError": 0.0,
+        "maxChannelError": 0,
+        "bounds": null
+      },
+      {
+        "area": "H08",
+        "pose": "spawn",
+        "identical": true,
+        "meanAbsoluteError": 0.0,
+        "maxChannelError": 0,
+        "bounds": null
+      },
+      {
+        "area": "H08",
+        "pose": "boundary",
+        "identical": true,
+        "meanAbsoluteError": 0.0,
+        "maxChannelError": 0,
+        "bounds": null
+      },
+      {
+        "area": "H08",
+        "pose": "wide",
+        "identical": true,
+        "meanAbsoluteError": 0.0,
+        "maxChannelError": 0,
+        "bounds": null
+      }
+    ],
+    "summary": "15 before/after views: 13 pixel-identical, two wide views have small rasterization differences (max channel difference 6/8); spawn and chunk-boundary views identical. Contact sheets inspected, no cracks observed.",
+    "healthBars": {
+      "identical": false,
+      "meanAbsoluteError": 0.0031169126350800917,
+      "maxChannelError": 59,
+      "bounds": [
+        1019,
+        677,
+        1063,
+        688
+      ]
+    },
+    "healthCaveat": "Opaque full/partial/empty bar samples are pixel-identical. Translucent sample differs: Sprite fills now correctly follow parent UIOpacity, including the existing death fade; old Graphics fills did not."
+  },
+  "sceneRevisit": {
+    "method": "12 alternating S01/S03 scene loads, comparing same-area buffer counters after warmup (one round trip = two loads).",
+    "steadyBufferGrowthPerRoundTripBeforeBytes": 519936,
+    "steadyBufferGrowthPerRoundTripAfterBytes": 28416,
+    "growthReductionPercent": 94.535,
+    "remainingGrowth": "28416 bytes per round trip remain. This is not a claim of zero growth or a complete engine memory-leak fix.",
+    "textureFootprint": "Stable when returning to the same area in this sample.",
+    "activeWorlds": 1,
+    "lifecycle": {
+      "result": {
+        "counts": [
+          {
+            "area": "S01",
+            "cacheSize": 20,
+            "valid": true
+          },
+          {
+            "area": "S03",
+            "cacheSize": 24,
+            "valid": true
+          },
+          {
+            "area": "S01",
+            "cacheSize": 24,
+            "valid": true
+          }
+        ],
+        "reused": true,
+        "clearedAtChapterDisposal": true,
+        "allOwnedMeshesDestroyed": true,
+        "remainingWorlds": 0
+      },
+      "errors": []
+    },
+    "engineFinding": "Installed 3.8.8 custom RenderInstancingQueue retains instance buffers; InstancedBuffer.merge keys by underlying index-buffer identity. New scene quad geometry created new retained buffers. Stable shared quad meshes avoid this churn without touching private engine caches."
+  },
+  "healthBarFixture": {
+    "scope": "Four isolated native HUD health bars: full, partially damaged, translucent and empty; gameplay state untouched.",
+    "spriteInitial": {
+      "draws": 55,
+      "triangles": 234440,
+      "memory": {
+        "bufferSize": 107637726,
+        "textureSize": 244995136
+      }
+    },
+    "graphics": {
+      "draws": 59,
+      "triangles": 234440,
+      "memory": {
+        "bufferSize": 126513854,
+        "textureSize": 244995140
+      }
+    },
+    "spriteFinal": {
+      "draws": 55,
+      "triangles": 234440,
+      "memory": {
+        "bufferSize": 107637726,
+        "textureSize": 244995140
+      }
+    },
+    "savedBytes": 18876128,
+    "errors": []
+  },
+  "healthMemoryScope": "18876128 fewer gfx device buffer bytes for four isolated bars; not total process memory or a universal per-enemy/phone saving.",
+  "movingCombat": {
+    "area": "S03-moving-combat",
+    "frameRate": 60,
+    "memory": {
+      "bufferSize": 159830846,
+      "textureSize": 285681920
+    },
+    "feedback": {
+      "alwaysVisible": true,
+      "barLimit": 200,
+      "textLimit": 24,
+      "allocatedBars": 3,
+      "allocatedTexts": 3,
+      "bars": [],
+      "texts": [],
+      "misses": []
+    },
+    "draws": 208.03863134657837,
+    "triangles": 194626.9426048565,
+    "moved": 59.92511358080184,
+    "events": {
+      "kills": 0,
+      "casts": 0
+    },
+    "enemies": [
+      {
+        "id": "hunt-S03-0-0",
+        "hp": 0,
+        "phase": "dead"
+      },
+      {
+        "id": "hunt-S03-0-1",
+        "hp": 0,
+        "phase": "dead"
+      },
+      {
+        "id": "hunt-S03-0-2",
+        "hp": 36,
+        "phase": "idle"
+      },
+      {
+        "id": "hunt-S03-1-0",
+        "hp": 44,
+        "phase": "idle"
+      },
+      {
+        "id": "hunt-S03-1-1",
+        "hp": 0,
+        "phase": "dead"
+      },
+      {
+        "id": "hunt-S03-1-2",
+        "hp": 0,
+        "phase": "dead"
+      },
+      {
+        "id": "hunt-S03-2-0",
+        "hp": 36,
+        "phase": "idle"
+      },
+      {
+        "id": "hunt-S03-2-1",
+        "hp": 0,
+        "phase": "dead"
+      },
+      {
+        "id": "hunt-S03-2-2",
+        "hp": 0,
+        "phase": "dead"
+      }
+    ],
+    "hp": 305,
+    "deadEnemies": 6,
+    "enemyCount": 9,
+    "baselineTriangles": 226725.1130820399,
+    "baselineDrawCalls": 205.3980044345898,
+    "triangleReductionPercent": 14.157,
+    "errors": [],
+    "eventCounterCaveat": "Temporary kill/cast event hooks did not match event names. Deaths are verified from final authoritative enemy HP; these event counters are not used as evidence."
+  },
+  "validation": {
+    "existingRules": "npm --prefix src/cocos test: 116/116 passed (after map change; later edits affect rendering only).",
+    "typeCheck": "npm --prefix src/cocos run check: passed after final source changes.",
+    "coreTypeCheck": "npm --prefix src/cocos run check:core: passed after final source changes.",
+    "terrain": {
+      "reports": [
+        {
+          "id": "S01",
+          "start": {
+            "x": 2.4,
+            "z": 0
+          },
+          "end": {
+            "x": 25.6,
+            "z": 0
+          },
+          "actual": {
+            "x": 25.45337677001953,
+            "z": 0
+          },
+          "heightRange": [
+            0,
+            0
+          ],
+          "maxFootError": 0.007091317176818879,
+          "oldMeshesAlive": 0,
+          "oldMaterialsAlive": 0,
+          "roadFacing": 0.3942782323015308
+        },
+        {
+          "id": "S02",
+          "start": {
+            "x": -56.6,
+            "z": -28
+          },
+          "end": {
+            "x": -19.4,
+            "z": -28
+          },
+          "actual": {
+            "x": -19.506765365600586,
+            "z": -28
+          },
+          "heightRange": [
+            0,
+            0
+          ],
+          "maxFootError": 0.00999995708465573,
+          "oldMeshesAlive": 0,
+          "oldMaterialsAlive": 0,
+          "roadFacing": 0.3976265718188188
+        },
+        {
+          "id": "S11",
+          "start": {
+            "x": -20.6,
+            "z": -18
+          },
+          "end": {
+            "x": 0.6,
+            "z": -18
+          },
+          "actual": {
+            "x": 0.5651797652244568,
+            "z": -18.01838493347168
+          },
+          "heightRange": [
+            0,
+            0
+          ],
+          "maxFootError": 0.00999995708465573,
+          "oldMeshesAlive": 0,
+          "oldMaterialsAlive": 0,
+          "roadFacing": 0.3964474392957982
+        },
+        {
+          "id": "U1-02",
+          "start": {
+            "x": -25,
+            "z": -12
+          },
+          "end": {
+            "x": 5,
+            "z": -12
+          },
+          "actual": {
+            "x": 4.943966388702393,
+            "z": -11.947784423828125
+          },
+          "heightRange": [
+            0.0004982250079426697,
+            4.999947735733565
+          ],
+          "maxFootError": 0.02099285981834509,
+          "oldMeshesAlive": 0,
+          "oldMaterialsAlive": 0,
+          "roadFacing": 0.39455673144505
+        }
+      ],
+      "errors": []
+    },
+    "touch": {
+      "simultaneousMoveAttack": true,
+      "cancelAtVisibleEdge": true,
+      "oilCancel": true,
+      "bowCancelWithoutArrow": true,
+      "dashAfterCancel": true,
+      "errors": []
+    },
+    "cacheLifecycle": "Same meshes reused across area changes; cache cleared and meshes destroyed at chapter disposal; no remaining world nodes.",
+    "testHarnessChanges": "Only temporary probes and in-memory adaptations of existing browser tools. Existing touch script awaited cinematic exit before inputs; terrain script ran release painted mode. No new test suite or dependency.",
+    "native3dDebugControl": {
+      "passed": false,
+      "details": "Default all-native 3D debug entrance initially showed resource-load failure. A direct retry loaded once, but the existing physics route later failed in EnvironmentAssets.place / SubModel.set with localSetLayout undefined. This path is not certified by this report; painted release-mode terrain/physics checks passed.",
+      "evidence": "temp/map-chunks-v1/physics-3d-validation.log"
+    },
+    "pending": [
+      "Real TapTap AppID/runtime verification",
+      "iPhone 14 sustained moving-combat temperature, power and frame-time A/B under the same settings",
+      "Native all-3D debug entrance resource/material failure investigation"
+    ]
+  },
+  "remainingPriorities": {
+    "s03DiagnosticContributions": {
+      "hud": {
+        "draws": 137,
+        "triangles": 14720
+      },
+      "hero": {
+        "draws": 26,
+        "triangles": 156032
+      },
+      "roads": {
+        "draws": 7,
+        "triangles": 1980
+      },
+      "ground": {
+        "draws": 5,
+        "triangles": 2560
+      },
+      "particles": {
+        "draws": 6,
+        "triangles": 40
+      },
+      "shadows": {
+        "draws": 13,
+        "triangles": 78024
+      }
+    },
+    "method": "Temporary isolated renderer switches, final map version before health-fill change. Small dynamic scene variations possible. Contributions overlap: hero includes shadows; do not add them.",
+    "next": [
+      "Profile native hero and shadow passes, then evaluate existing importer vertex-cache/vertex-fetch optimization with visual validation. No mesh quality/shadow reduction applied here.",
+      "Reduce HUD material/texture interruptions and background Graphics allocation using existing Sprite batching where equivalent."
+    ],
+    "lowerPriority": "Roads and particles are comparatively small in the fixed S03 sample."
+  },
+  "sources": [
+    {
+      "url": "https://docs.cocos.com/creator/3.8/manual/en/engine/renderable/model-component.html",
+      "use": "Native MeshRenderer and instancing constraints"
+    },
+    {
+      "url": "https://github.com/cocos/cocos-docs/blob/master/versions/3.8/en/asset/model/mesh.md",
+      "use": "Existing mesh importer optimization options; not enabled by this change"
+    },
+    {
+      "localEngine": "cocos/rendering/custom/web-pipeline-types.ts; cocos/rendering/instanced-buffer.ts",
+      "use": "Observed 3.8.8 buffer lifecycle and merge identity"
+    }
+  ],
+  "changedSources": [
+    {
+      "file": "src/cocos/assets/scripts/features/world/runtime/FlatWorldLayers.ts",
+      "sha256Before": "a9503ce020611f14c805ae4822ffde2f5ac173b7379b08cfcd95531cad42d1ff",
+      "sha256After": "07e2a44079ee43273318678acc97db38393f068f227cedf483de5fb46475b786"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/world/runtime/PaintedTerrainDetails.ts",
+      "sha256Before": "3301eccacee5fa6877dde8b4e69439f61731413661bfe6e90d6623fef3bb5b7a",
+      "sha256After": "87bef0f0bf61641704c80aa81f3cd39cd3dce7c7bc15ba699e2d5efec064878a"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/world/runtime/SceneBuilder.ts",
+      "sha256Before": "8f292b70c8b1e67eb54dcbf33f04e0889cae4d95996f902415228c5c15076cc8",
+      "sha256After": "3e26f7f2e66fa228257379d65059c322fdef7ed4dcacc1f45a0b7b7be4ba6492"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/combat/runtime/EnemyCombatFeedback.ts",
+      "sha256Before": "56b44a25b28a3070dc5925467e0a340a762cc85058f8dea61646d28bfb7bebd0",
+      "sha256After": "2614e073b8392332339258b5bfed62013574cb6c8b5e3146195a70729e4f73cc"
+    }
+  ],
+  "evidenceDirectory": "temp/map-chunks-v1",
+  "evidenceFiles": [
+    "baseline.json",
+    "final.json",
+    "final-visual-comparison.json",
+    "baseline-revisit.json",
+    "final-revisit.json",
+    "cache-lifecycle.json",
+    "health-bars.json",
+    "health-visual.json",
+    "complete-moving.json",
+    "final-terrain.json",
+    "touch-validation.json",
+    "physics-3d-validation.log"
+  ]
+}

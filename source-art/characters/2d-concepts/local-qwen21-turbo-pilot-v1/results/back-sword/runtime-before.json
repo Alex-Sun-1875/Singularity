@@ -1,0 +1,67 @@
+{
+  "system": {
+    "os": "win32",
+    "ram_total": 68425322496,
+    "ram_free": 19957186560,
+    "comfyui_version": "0.44.0",
+    "required_frontend_version": "1.57.6",
+    "installed_templates_version": "0.11.101",
+    "required_templates_version": "0.11.101",
+    "comfy_package_versions": [
+      {
+        "name": "comfyui-frontend-package",
+        "installed": "1.57.6",
+        "required": "1.57.6"
+      },
+      {
+        "name": "comfyui-workflow-templates",
+        "installed": "0.11.101",
+        "required": "0.11.101"
+      },
+      {
+        "name": "comfyui-embedded-docs",
+        "installed": "0.5.16",
+        "required": "0.5.16"
+      },
+      {
+        "name": "comfy-aimdo",
+        "installed": "0.6.0",
+        "required": "0.6.0"
+      },
+      {
+        "name": "comfy-kitchen",
+        "installed": "0.2.40",
+        "required": "0.2.40"
+      }
+    ],
+    "python_version": "3.13.14 (tags/v3.13.14:fd17997, Jun 10 2026, 13:03:48) [MSC v.1944 64 bit (AMD64)]",
+    "pytorch_version": "2.14.1+cu130",
+    "embedded_python": true,
+    "deploy_environment": "local-portable",
+    "argv": [
+      "main.py",
+      "--listen",
+      "127.0.0.1",
+      "--port",
+      "8188",
+      "--offline",
+      "--disable-all-custom-nodes",
+      "--use-pytorch-cross-attention",
+      "--reserve-vram",
+      "1.0",
+      "--preview-method",
+      "none"
+    ]
+  },
+  "devices": [
+    {
+      "name": "cuda:0 NVIDIA GeForce RTX 3080 : cudaMallocAsync",
+      "type": "cuda",
+      "index": 0,
+      "vram_total": 10736893952,
+      "vram_free": 4759185912,
+      "torch_vram_total": 33554432,
+      "torch_vram_free": 24865272
+    }
+  ]
+}

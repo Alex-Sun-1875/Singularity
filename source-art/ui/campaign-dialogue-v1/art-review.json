@@ -1,0 +1,44 @@
+{
+  "generation": "succeeded",
+  "review_state": "implemented_ui_visually_checked",
+  "ui_visual_review": {
+    "solid_black_panels_removed": true,
+    "subtitle_and_controls_do_not_overlap": true,
+    "character_and_campfire_above_subtitles": true,
+    "permanent_title_and_counter_removed": true,
+    "dialogue_text_matches_source": true,
+    "speaker_correction": "Canonical 山驿斥候 from CampaignScenes.ts. Locally typeset using the existing OFL bundled RPG font.",
+    "output_size": [
+      2532,
+      1170
+    ],
+    "logical_reference": [
+      844,
+      390
+    ],
+    "skip_label": "跳过剧情",
+    "skip_label_review": "User requested wording applied to v2; dimensions unchanged."
+  },
+  "limitations": [
+    "Generated scene reconstruction remains only a UI composition aid; not a production character/environment asset.",
+    "No new facial closeup performance or motion-capture assets are claimed.",
+    "Runtime Web checks are recorded separately; TapTap native device and host UI acceptance remain pending."
+  ],
+  "user_art_acceptance": "UI design approved by user on 2026-11-11; generated scene is not a production art asset.",
+  "engine_changes": true,
+  "implementation_review": {
+    "reference": "cinematic-dialogue-proposal-v2.png",
+    "actual": "../../../../test-results/cinematic-v1/iphone14-highland-final.png",
+    "checks": [
+      "No framed black panels, title strip or counter",
+      "Speaker and two subtitle lines aligned to the approved H01 composition",
+      "18 logical pixel reference caption, 27 reference line height, 14 reference speaker",
+      "Continue and Skip story in independent >=48 logical pixel hit targets",
+      "Real scene and actors are clear above subtitles",
+      "21 scenes, locale and lifecycle coverage recorded separately"
+    ],
+    "pending": [
+      "TapTap device and host capsule acceptance"
+    ]
+  }
+}

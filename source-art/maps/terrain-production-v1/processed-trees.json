@@ -1,0 +1,58 @@
+{
+  "date": "2026-11-08",
+  "source": {
+    "file": "src/cocos/assets/resources/flat2d/world/world-props-natural-v3.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "92da1a8af714d17f19a09e4013e7d334944b095b280776a3113e5c7d55bb78a2",
+    "bytes": 2387132
+  },
+  "processed": {
+    "file": "src/cocos/assets/resources/flat2d/terrain-v1/world-props-muted.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "73b55b1e6c71ba9b7464342237b2a4740f40a8476d606842d2a0543c12dba914",
+    "bytes": 2228078
+  },
+  "method": "Only green RGB pixels in oak/birch/pine rects; saturation 0.65, then 0.08 luma-preserving grey-olive blend; soft green-dominance mask.",
+  "mask": "weight=clamp((G-max(R,B)-3)/30,0,1), alpha>8; no operations outside the three crop rectangles",
+  "treeRects": {
+    "oak": {
+      "rect": [
+        10,
+        5,
+        304,
+        307
+      ],
+      "selectedPixelFraction": 0.468541
+    },
+    "birch": {
+      "rect": [
+        314,
+        5,
+        269,
+        304
+      ],
+      "selectedPixelFraction": 0.381285
+    },
+    "pine": {
+      "rect": [
+        673,
+        5,
+        231,
+        303
+      ],
+      "selectedPixelFraction": 0.460232
+    }
+  },
+  "alphaPreserved": true,
+  "otherSpritePixelsPreserved": true,
+  "runtimeValidated": false,
+  "artReview": "selective-color candidate; normal-camera acceptance pending"
+}

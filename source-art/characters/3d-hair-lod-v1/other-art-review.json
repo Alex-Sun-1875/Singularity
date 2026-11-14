@@ -1,0 +1,234 @@
+{
+  "date": "2026-11-14",
+  "reviewer": "Codex visual inspection",
+  "scope": "Dante/Nero/Vergil geometry simplification and native hairstyle switching; Android emulator Cocos Web build, not TapTap physical-device acceptance",
+  "status": "ACCEPTED_FOR_CURRENT_GAME_ASSETS",
+  "styles": {
+    "dante": {
+      "status": "ACCEPTED_FOR_CURRENT_GAME_ASSET",
+      "triangles": {
+        "before": 10796,
+        "after": 2700
+      },
+      "vertices": {
+        "before": 9159,
+        "after": 2901
+      },
+      "runtimeSHA256": "ae96aabd51e7ebad3b6664b0fbb880f003a6fc001bd610d9d46793ac24aa6f6e",
+      "headComparison": "head-dante-comparison.jpg",
+      "findings": [
+        "Hairline, silhouette, side locks and nape retained",
+        "Fine surface detail simplified; small closeup angularity accepted for requested LoD",
+        "No visible scalp holes, detached hair or head penetration in inspected views"
+      ]
+    },
+    "nero": {
+      "status": "ACCEPTED_FOR_CURRENT_GAME_ASSET",
+      "triangles": {
+        "before": 6452,
+        "after": 1600
+      },
+      "vertices": {
+        "before": 4814,
+        "after": 1509
+      },
+      "runtimeSHA256": "3d9bf6facf378299b895f6b6f8e40510d56eeee3f2144be932e3ddc99aaba0cb",
+      "headComparison": "head-nero-comparison.jpg",
+      "findings": [
+        "Hairline, silhouette, side locks and nape retained",
+        "Fine surface detail simplified; small closeup angularity accepted for requested LoD",
+        "No visible scalp holes, detached hair or head penetration in inspected views"
+      ]
+    },
+    "vergil": {
+      "status": "ACCEPTED_FOR_CURRENT_GAME_ASSET",
+      "triangles": {
+        "before": 8434,
+        "after": 2100
+      },
+      "vertices": {
+        "before": 6303,
+        "after": 1930
+      },
+      "runtimeSHA256": "d7339205a3471dff1a89a9bec975b00e34104b2b455d6eb2aea988b076fa26dd",
+      "headComparison": "head-vergil-comparison.jpg",
+      "findings": [
+        "Hairline, silhouette, side locks and nape retained",
+        "Fine surface detail simplified; small closeup angularity accepted for requested LoD",
+        "No visible scalp holes, detached hair or head penetration in inspected views"
+      ]
+    }
+  },
+  "validation": {
+    "creatorBuild": "perf-render-all-hair-lod-v2-20261114",
+    "creatorExitCode": 36,
+    "gamePosesPerStyle": 3,
+    "gameScreenshots": 27,
+    "bakedHeadPreviewDirectionsPerStyle": 4,
+    "previewScreenshots": 24,
+    "scriptAndGraphicsErrors": [],
+    "neutralPreviewPointLightFluxMultiplier": 0.02
+  },
+  "gamePixelChecks": [
+    {
+      "style": "dante",
+      "pose": 0,
+      "draws": [
+        157,
+        157,
+        157
+      ],
+      "triangles": [
+        123946,
+        107754,
+        123946
+      ],
+      "triangleReductionIncludingShadow": 16192,
+      "roiMeanAbs": 0.1437179810195683,
+      "restoredRoiMaxDiff": 0
+    },
+    {
+      "style": "dante",
+      "pose": 1,
+      "draws": [
+        143,
+        143,
+        143
+      ],
+      "triangles": [
+        123820,
+        107628,
+        123820
+      ],
+      "triangleReductionIncludingShadow": 16192,
+      "roiMeanAbs": 0.13918283362727807,
+      "restoredRoiMaxDiff": 0
+    },
+    {
+      "style": "dante",
+      "pose": 2,
+      "draws": [
+        144,
+        144,
+        144
+      ],
+      "triangles": [
+        123874,
+        107682,
+        123874
+      ],
+      "triangleReductionIncludingShadow": 16192,
+      "roiMeanAbs": 0.14449483497102544,
+      "restoredRoiMaxDiff": 0
+    },
+    {
+      "style": "nero",
+      "pose": 0,
+      "draws": [
+        146,
+        146,
+        146
+      ],
+      "triangles": [
+        115703,
+        105999,
+        115703
+      ],
+      "triangleReductionIncludingShadow": 9704,
+      "roiMeanAbs": 0.07598471487360377,
+      "restoredRoiMaxDiff": 0
+    },
+    {
+      "style": "nero",
+      "pose": 1,
+      "draws": [
+        144,
+        144,
+        144
+      ],
+      "triangles": [
+        115652,
+        105948,
+        115652
+      ],
+      "triangleReductionIncludingShadow": 9704,
+      "roiMeanAbs": 0.0759217267153775,
+      "restoredRoiMaxDiff": 0
+    },
+    {
+      "style": "nero",
+      "pose": 2,
+      "draws": [
+        144,
+        144,
+        144
+      ],
+      "triangles": [
+        115666,
+        105962,
+        115666
+      ],
+      "triangleReductionIncludingShadow": 9704,
+      "roiMeanAbs": 0.06160241874527589,
+      "restoredRoiMaxDiff": 0
+    },
+    {
+      "style": "vergil",
+      "pose": 0,
+      "draws": [
+        141,
+        141,
+        141
+      ],
+      "triangles": [
+        119124,
+        106456,
+        119124
+      ],
+      "triangleReductionIncludingShadow": 12668,
+      "roiMeanAbs": 0.08919123204837491,
+      "restoredRoiMaxDiff": 0
+    },
+    {
+      "style": "vergil",
+      "pose": 1,
+      "draws": [
+        146,
+        146,
+        146
+      ],
+      "triangles": [
+        119181,
+        106513,
+        119181
+      ],
+      "triangleReductionIncludingShadow": 12668,
+      "roiMeanAbs": 0.08881330309901739,
+      "restoredRoiMaxDiff": 0
+    },
+    {
+      "style": "vergil",
+      "pose": 2,
+      "draws": [
+        146,
+        146,
+        146
+      ],
+      "triangles": [
+        119074,
+        106406,
+        119074
+      ],
+      "triangleReductionIncludingShadow": 12668,
+      "roiMeanAbs": 0.0871756109851348,
+      "restoredRoiMaxDiff": 0
+    }
+  ],
+  "lifecycleFix": "Disable and call native SkinnedMeshRenderer.destroy(); do not clear skeleton then materials manually. Three native hairstyle switches completed without descriptor errors.",
+  "performanceAcceptance": "NOT_MEASURED_IN_THIS_VISUAL_QA; no overall CPU/GPU percentage claimed",
+  "reports": [
+    "test-results/performance/all-hair-lod-neutral-qa-v2/report.json",
+    "test-results/performance/all-hair-lod-neutral-qa-v2/pixel-checks.json"
+  ],
+  "earlierFailure": "test-results/performance/all-hair-lod-neutral-qa-v1/report.json"
+}

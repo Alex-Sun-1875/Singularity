@@ -1,0 +1,84 @@
+{
+  "status": "PASS actor evidence inherited by byte/SHA-unchanged v4; original v3 actual presentation/lifetime/ELITE06step evidence preserved",
+  "buildEvidence": "test-results/campaign-v1/build.json",
+  "buildEvidenceSha256": "1738bde243e2746a05be88e785c5e0aa1c37c25a9202c886e518846425d6e24d",
+  "compiledAtlasCount": 32,
+  "main": "src/cocos/build/concept-2d-campaign-v4/assets/main/index.33620.js",
+  "mainSha256": "3cedd845c92a40be521e2780ae8773a372d47a9650b0272efae93155ce5e171d",
+  "sourceRuntimeIndexSnapshotUnchanged": true,
+  "runtimeFilesRewrittenForQa": false,
+  "gameplayEvidence": [
+    {
+      "file": "src/cocos/test-results/enemy-actors-v1/actual-actor-render-report.json",
+      "sha256": "6d71bc40dc04c79d3aafbcf49662eaa5cc304cefc590b23684db2218c083bf4f",
+      "method": "Controlled S02 north-stage renderer fixture, four identities maximum per scene lifecycle. EnemyState template IDs are injected only for presentation and loaded through the real FlatActors.build mapping. No natural navigation, combat or quest completion claim.",
+      "summary": {
+        "identities": 36,
+        "newIdentities": 32,
+        "maximumFixtureIdentitiesPerScene": 4,
+        "nativeFramesChecked": 1004,
+        "renderedPoseSamples": 568,
+        "sceneLifecycles": 9,
+        "oldEnemyRefsZero": true,
+        "heroRetained": true,
+        "reloadPassed": true
+      },
+      "consoleErrors": 0,
+      "requestFailures": 0
+    },
+    {
+      "file": "test-results/enemy-actors-v1/elite06-live-steps.json",
+      "sha256": "886a969a20691bb515922d51f9e15c6ee87f0fa9f9d51639a83fee2523a90de8",
+      "method": "Only session level/HP and player location set for isolated QA; enemy phases and clips progress naturally. No forced action/phase/ordinal/frame.",
+      "status": "PASS",
+      "allTraceStationary": true,
+      "sampledStepClips": [
+        "attack_sword_step0",
+        "attack_sword_step1",
+        "attack_sword_step2"
+      ],
+      "actualPlinthStructuralBottomY": [
+        320,
+        320,
+        320
+      ],
+      "plinthMaxDriftPx": 0
+    }
+  ],
+  "rootVisualReview": "All36 identity contacts independently reviewed; U1-3 faint protected grey edge acceptable on actual ground",
+  "limits": [
+    "Renderer fixture uses controlled S02 template injection through real FlatActors.build, not natural campaign navigation/combat/quest traversal",
+    "Live E06 uses real U1-06 and naturally progressing phases, with player level/HP/location isolated for QA",
+    "No new native3D, full per-move animation, independent hit/death, or full97-scene visual acceptance is implied"
+  ],
+  "v4Inheritance": {
+    "status": "PASS confirmed by current build report",
+    "buildEvidence": "test-results/campaign-v1/build.json",
+    "buildEvidenceSha256": "1738bde243e2746a05be88e785c5e0aa1c37c25a9202c886e518846425d6e24d",
+    "flatActorsSha256": "a68302112397affe1947d9166dc34c6325d12ed032d48825c079dc9b116ad676",
+    "flatActorsUnchanged": true,
+    "all32AtlasesUnchanged": true,
+    "new30ManifestHashesMatchInstallationIndex": true,
+    "compiledResourceChanges": {
+      "native": [],
+      "import": []
+    },
+    "sourceIndexSha256": "d7d2a13af4f3bb1584319e2110e9d4a49d1a406f16cadf4d1701c4e15a949b8b",
+    "actorEvidence": "Original v3 renderer/lifetime and real E06step reports remain unmodified and inherited",
+    "vfxAcceptance": "Separate VFX-specific QA; no conclusion added by this actor overlay",
+    "runtimeFilesRewrittenForQa": false
+  },
+  "currentActorBuild": {
+    "build": "src/cocos/build/concept-2d-campaign-v4",
+    "url": "http://127.0.0.1:7476/",
+    "defaultView": "2d"
+  },
+  "originalActorQaBuild": {
+    "file": "test-results/campaign-v1/build-v3.json",
+    "sha256": "dfad65678c93db8c6896d04af5588926239f1e5e07aaf9f51d50690d058d8be2",
+    "build": "src/cocos/build/concept-2d-campaign-v3",
+    "url": "http://127.0.0.1:7475/",
+    "main": "src/cocos/build/concept-2d-campaign-v3/assets/main/index.93b53.js",
+    "mainSha256": "d897f333f360670d22256476d2980c6c74e16bf56bd569a759ed9861a2d9cd60"
+  }
+}

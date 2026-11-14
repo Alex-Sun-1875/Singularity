@@ -1,0 +1,156 @@
+{
+  "date": "2026-11-08",
+  "scope": "Four secondary terrain materials; generation and initial art review recorded separately.",
+  "method": "Four distinct built-in cloud image_gen calls, one per material; no CLI or local model inference.",
+  "modelVersion": "not-reported-by-tool",
+  "entries": [
+    {
+      "key": "wet-earth",
+      "generation": {
+        "status": "succeeded",
+        "method": "Cloud OpenAI built-in image_gen__imagegen",
+        "original": "C:/Users/Alexa/.codex/generated_images/01a1b87b-efea-7752-9562-f7a5055099f1/exec-3e43970b-41bb-49dc-9d6d-f9acbe70779b.png",
+        "file": "source-art/maps/terrain-production-v1/raw/wet-earth.png",
+        "actualDimensions": [
+          1254,
+          1254
+        ],
+        "requestedDimensions": [
+          1024,
+          1024
+        ],
+        "mode": "RGB",
+        "sha256": "c4503766a50a0a2dae1586f221bfcf003d3547ef53167be770d66b6a6eb8b66c",
+        "promptFile": "source-art/maps/terrain-production-v1/prompts.json",
+        "promptKey": "wet-earth",
+        "reference": "source-art/maps/style-unification-v1/terrain-style-board.png",
+        "transparentBackground": false,
+        "pixelProcessing": "none; byte-for-byte copy of raw generated output"
+      },
+      "artReview": {
+        "status": "initial-style-candidate-pass",
+        "reviewer": "Codex internal visual review",
+        "findings": [
+          "低饱和灰褐湿土、嵌入砾石和稀疏暗苔符合湿岸地面方向。",
+          "没有水洼、芦苇或高物体；可与实际岸线独立混合。",
+          "砾石细节略密，需在512运行图与正常镜头下确认不会抢人物。"
+        ],
+        "tileSeamsVerified": false,
+        "runtimeValidated": false,
+        "userAcceptance": "not-recorded",
+        "productionAccepted": false
+      }
+    },
+    {
+      "key": "bedrock",
+      "generation": {
+        "status": "succeeded",
+        "method": "Cloud OpenAI built-in image_gen__imagegen",
+        "original": "C:/Users/Alexa/.codex/generated_images/01a1b87b-efea-7752-9562-f7a5055099f1/exec-98babcea-491f-49b5-883b-d10f024e4e40.png",
+        "file": "source-art/maps/terrain-production-v1/raw/bedrock.png",
+        "actualDimensions": [
+          1254,
+          1254
+        ],
+        "requestedDimensions": [
+          1024,
+          1024
+        ],
+        "mode": "RGB",
+        "sha256": "af984e38955fcd0880fbd66201397f4133ceeba08311d7a81737848ea9c87972",
+        "promptFile": "source-art/maps/terrain-production-v1/prompts.json",
+        "promptKey": "bedrock",
+        "reference": "source-art/maps/style-unification-v1/terrain-style-board.png",
+        "transparentBackground": false,
+        "pixelProcessing": "none; byte-for-byte copy of raw generated output"
+      },
+      "artReview": {
+        "status": "initial-style-candidate-pass",
+        "reviewer": "Codex internal visual review",
+        "findings": [
+          "灰褐连续岩面与浅层理清楚，人工砌石和深黑裂缝均未出现。",
+          "矿物色差与表面阴影克制，适合洞厅、岩坡、采场。",
+          "斜向层理较明显，需在重复平铺与长岩坡中检查图案周期。"
+        ],
+        "tileSeamsVerified": false,
+        "runtimeValidated": false,
+        "userAcceptance": "not-recorded",
+        "productionAccepted": false
+      }
+    },
+    {
+      "key": "wood",
+      "generation": {
+        "status": "succeeded",
+        "method": "Cloud OpenAI built-in image_gen__imagegen",
+        "original": "C:/Users/Alexa/.codex/generated_images/01a1b87b-efea-7752-9562-f7a5055099f1/exec-a86008ed-4328-4453-9fbf-b75a573de05d.png",
+        "file": "source-art/maps/terrain-production-v1/raw/wood.png",
+        "actualDimensions": [
+          1254,
+          1254
+        ],
+        "requestedDimensions": [
+          1024,
+          1024
+        ],
+        "mode": "RGB",
+        "sha256": "3dad449e82d38d05ea21989ca9ba36392dc5d06ddfc4b51465d38fc7d21625c3",
+        "promptFile": "source-art/maps/terrain-production-v1/prompts.json",
+        "promptKey": "wood",
+        "reference": "source-art/maps/style-unification-v1/terrain-style-board.png",
+        "transparentBackground": false,
+        "pixelProcessing": "none; byte-for-byte copy of raw generated output"
+      },
+      "artReview": {
+        "status": "initial-style-candidate-pass",
+        "reviewer": "Codex internal visual review",
+        "findings": [
+          "灰棕木板和细木纹、浅接缝、少量钉头符合旧木室内方向。",
+          "板材笔触与其他地表接近，无橙色厚漆、地毯或工具。",
+          "木板端接位置和竖纹连续性仍需平铺接缝处理后审阅。"
+        ],
+        "tileSeamsVerified": false,
+        "runtimeValidated": false,
+        "userAcceptance": "not-recorded",
+        "productionAccepted": false
+      }
+    },
+    {
+      "key": "water",
+      "generation": {
+        "status": "succeeded",
+        "method": "Cloud OpenAI built-in image_gen__imagegen",
+        "original": "C:/Users/Alexa/.codex/generated_images/01a1b87b-efea-7752-9562-f7a5055099f1/exec-8a634ef3-76f7-41d0-8552-8f92f0f08543.png",
+        "file": "source-art/maps/terrain-production-v1/raw/water.png",
+        "actualDimensions": [
+          1254,
+          1254
+        ],
+        "requestedDimensions": [
+          1024,
+          1024
+        ],
+        "mode": "RGB",
+        "sha256": "44a15889e1637ac33176b28d6db0bf6beb7da2b06b6a71c0e1adbbc0dffdc94d",
+        "promptFile": "source-art/maps/terrain-production-v1/prompts.json",
+        "promptKey": "water",
+        "reference": "source-art/maps/style-unification-v1/terrain-style-board.png",
+        "transparentBackground": false,
+        "pixelProcessing": "none; byte-for-byte copy of raw generated output"
+      },
+      "artReview": {
+        "status": "initial-style-candidate-pass",
+        "reviewer": "Codex internal visual review",
+        "findings": [
+          "低饱和灰青河水、柔和水纹与浅色反光符合方向。",
+          "没有岸线、植物、船、泡沫条或魔法高光，便于沿实际水体铺设。",
+          "水纹尺度与横纵平铺连续性需在真实河道、码头和地下渠中验证。"
+        ],
+        "tileSeamsVerified": false,
+        "runtimeValidated": false,
+        "userAcceptance": "not-recorded",
+        "productionAccepted": false
+      }
+    }
+  ]
+}

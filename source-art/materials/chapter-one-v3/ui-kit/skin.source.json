@@ -1,0 +1,527 @@
+{
+  "id": "whitebranch-quiet-bronze-v1",
+  "version": 4,
+  "status": "runtime-imported-warm-gold-refresh-awaiting-engine-review",
+  "created": "2026-11-04",
+  "designReference": "docs/superpowers/plans/2026-11-05-clear-color-redesign.md",
+  "sourceDirectory": "source-art/materials/chapter-one-v3/ui-kit",
+  "assetDirectory": "assets/materials/chapter-one-v3/ui-kit",
+  "sourcePxPerLogicalUnit": 2,
+  "standardSourceStrokePx": 3.4,
+  "standardDisplayStrokePx": 1.7,
+  "palette": {
+    "canvas": "#100C08",
+    "surfaceSuggested": "#221810",
+    "surfaceOverlay": "#FFE9BF",
+    "surfaceOverlayOpacity": 0.035,
+    "button": "#221810",
+    "hover": "#302217",
+    "pressed": "#16130E",
+    "disabled": "#1B1510",
+    "line": "#8D6030",
+    "hoverBoundary": "#F7DA9D",
+    "disabledBoundary": "#6D5B43",
+    "goldAccent": "#DAAE65",
+    "activeCyan": "#83CDE6",
+    "textPrimarySuggested": "#F1F5F5",
+    "textSecondarySuggested": "#B4C5D4",
+    "textDisabledSuggested": "#8092A5",
+    "healthBerry": "#C35D75",
+    "healthHighlight": "#F18E9F",
+    "focusCyan": "#4598B9",
+    "whitebranch": "#DAE5EB",
+    "buttonBottom": "#110D09",
+    "goldHighlight": "#F7DA9D",
+    "goldShadow": "#4D301B"
+  },
+  "sampling": {
+    "minFilter": "linear",
+    "magFilter": "linear",
+    "wrapMode": "clamp-to-edge",
+    "mipmap": "none-for-initial-ui-evaluation",
+    "trimTransparentPixels": false,
+    "atlasRotate": false,
+    "suggestedAtlasPaddingPx": 4
+  },
+  "cocosProposal": {
+    "version": "3.8.8",
+    "runtimeImported": true,
+    "sliceCoordinateSpace": "source-pixels",
+    "displayRule": "UITransform contentSize = desired logical size * 2; sprite child local scale = 0.5. Keep labels and hit targets as unscaled siblings. Merely assigning 128x64 to a SLICED node does not halve its source border.",
+    "spriteSizeMode": "CUSTOM",
+    "spriteTrim": false,
+    "nineSliceInsetsAreNotContentPadding": true,
+    "contentPaddingLogicalPx": {
+      "left": 16,
+      "right": 16,
+      "top": 12,
+      "bottom": 12
+    },
+    "touchTargetMinLogicalPx": [
+      48,
+      48
+    ],
+    "panelSurfaceRule": "Parent Graphics owns the opaque semantic deep brown-black fill. panel-surface is only a 3.5% warm-ivory polish; multiply by Color.WHITE so danger/selected/dark variants remain visible."
+  },
+  "assets": [
+    {
+      "id": "panel-frame",
+      "role": "panel.border",
+      "sourceSizePx": [
+        256,
+        128
+      ],
+      "referenceDisplayPx": [
+        128,
+        64
+      ],
+      "spriteMode": "SLICED",
+      "insetsPx": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24
+      },
+      "alphaExpectation": "transparent-center-and-exterior",
+      "minimumDisplayPx": [
+        48,
+        48
+      ]
+    },
+    {
+      "id": "panel-surface",
+      "role": "panel.surface",
+      "sourceSizePx": [
+        256,
+        128
+      ],
+      "referenceDisplayPx": [
+        128,
+        64
+      ],
+      "spriteMode": "SLICED",
+      "insetsPx": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24
+      },
+      "alphaExpectation": "transparent-exterior-translucent-center",
+      "minimumDisplayPx": [
+        48,
+        48
+      ]
+    },
+    {
+      "id": "button-normal",
+      "role": "button.normal",
+      "sourceSizePx": [
+        256,
+        128
+      ],
+      "referenceDisplayPx": [
+        128,
+        64
+      ],
+      "spriteMode": "SLICED",
+      "insetsPx": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24
+      },
+      "alphaExpectation": "transparent-exterior-opaque-center",
+      "minimumDisplayPx": [
+        80,
+        48
+      ]
+    },
+    {
+      "id": "button-hover",
+      "role": "button.hover",
+      "sourceSizePx": [
+        256,
+        128
+      ],
+      "referenceDisplayPx": [
+        128,
+        64
+      ],
+      "spriteMode": "SLICED",
+      "insetsPx": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24
+      },
+      "alphaExpectation": "transparent-exterior-opaque-center",
+      "minimumDisplayPx": [
+        80,
+        48
+      ]
+    },
+    {
+      "id": "button-pressed",
+      "role": "button.pressed",
+      "sourceSizePx": [
+        256,
+        128
+      ],
+      "referenceDisplayPx": [
+        128,
+        64
+      ],
+      "spriteMode": "SLICED",
+      "insetsPx": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24
+      },
+      "alphaExpectation": "transparent-exterior-opaque-center",
+      "minimumDisplayPx": [
+        80,
+        48
+      ]
+    },
+    {
+      "id": "button-disabled",
+      "role": "button.disabled",
+      "sourceSizePx": [
+        256,
+        128
+      ],
+      "referenceDisplayPx": [
+        128,
+        64
+      ],
+      "spriteMode": "SLICED",
+      "insetsPx": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24
+      },
+      "alphaExpectation": "transparent-exterior-opaque-center",
+      "minimumDisplayPx": [
+        80,
+        48
+      ]
+    },
+    {
+      "id": "indicator-selected",
+      "role": "selection.persistent-marker",
+      "sourceSizePx": [
+        32,
+        64
+      ],
+      "referenceDisplayPx": [
+        16,
+        32
+      ],
+      "spriteMode": "SIMPLE",
+      "alphaExpectation": "transparent-with-visible-mark",
+      "stretch": false
+    },
+    {
+      "id": "bar-track",
+      "role": "bar.shared-track",
+      "sourceSizePx": [
+        512,
+        32
+      ],
+      "referenceDisplayPx": [
+        256,
+        16
+      ],
+      "spriteMode": "SLICED",
+      "insetsPx": {
+        "left": 24,
+        "right": 24,
+        "top": 8,
+        "bottom": 8
+      },
+      "alphaExpectation": "transparent-exterior-opaque-center",
+      "stretch": "horizontal-only"
+    },
+    {
+      "id": "bar-health-fill",
+      "role": "bar.health-fill",
+      "sourceSizePx": [
+        488,
+        12
+      ],
+      "referenceDisplayPx": [
+        244,
+        6
+      ],
+      "spriteMode": "FILLED",
+      "fillType": "HORIZONTAL",
+      "fillStart": 0,
+      "alphaExpectation": "intentionally-opaque",
+      "stretch": "horizontal-only",
+      "cropRatherThanCompressForValue": true
+    },
+    {
+      "id": "bar-focus-fill",
+      "role": "bar.focus-fill",
+      "sourceSizePx": [
+        488,
+        12
+      ],
+      "referenceDisplayPx": [
+        244,
+        6
+      ],
+      "spriteMode": "FILLED",
+      "fillType": "HORIZONTAL",
+      "fillStart": 0,
+      "alphaExpectation": "intentionally-opaque",
+      "stretch": "horizontal-only",
+      "cropRatherThanCompressForValue": true
+    },
+    {
+      "id": "bar-cap-left",
+      "role": "bar.fixed-left-cap",
+      "sourceSizePx": [
+        24,
+        32
+      ],
+      "referenceDisplayPx": [
+        12,
+        16
+      ],
+      "spriteMode": "SIMPLE",
+      "alphaExpectation": "transparent-with-visible-mark",
+      "stretch": false
+    },
+    {
+      "id": "bar-cap-right",
+      "role": "bar.fixed-right-cap",
+      "sourceSizePx": [
+        24,
+        32
+      ],
+      "referenceDisplayPx": [
+        12,
+        16
+      ],
+      "spriteMode": "SIMPLE",
+      "alphaExpectation": "transparent-with-visible-mark",
+      "stretch": false
+    },
+    {
+      "id": "mask-disabled",
+      "role": "overlay.disabled-content",
+      "sourceSizePx": [
+        256,
+        128
+      ],
+      "referenceDisplayPx": [
+        128,
+        64
+      ],
+      "spriteMode": "SLICED",
+      "insetsPx": {
+        "left": 24,
+        "right": 24,
+        "top": 24,
+        "bottom": 24
+      },
+      "alphaExpectation": "transparent-exterior-translucent-center",
+      "minimumDisplayPx": [
+        48,
+        48
+      ]
+    },
+    {
+      "id": "mask-cooldown",
+      "role": "overlay.cooldown-radial",
+      "sourceSizePx": [
+        128,
+        128
+      ],
+      "referenceDisplayPx": [
+        64,
+        64
+      ],
+      "spriteMode": "FILLED",
+      "fillType": "RADIAL",
+      "fillCenterNormalized": [
+        0.5,
+        0.5
+      ],
+      "alphaExpectation": "intentionally-uniform-translucent",
+      "stretch": false,
+      "requiresParentShapeClip": true
+    },
+    {
+      "id": "divider-horizontal",
+      "role": "divider.horizontal",
+      "sourceSizePx": [
+        512,
+        16
+      ],
+      "referenceDisplayPx": [
+        256,
+        8
+      ],
+      "spriteMode": "SLICED",
+      "insetsPx": {
+        "left": 8,
+        "right": 8,
+        "top": 4,
+        "bottom": 4
+      },
+      "alphaExpectation": "transparent-with-visible-mark",
+      "stretch": "horizontal-only"
+    },
+    {
+      "id": "divider-vertical",
+      "role": "divider.vertical",
+      "sourceSizePx": [
+        16,
+        256
+      ],
+      "referenceDisplayPx": [
+        8,
+        128
+      ],
+      "spriteMode": "SLICED",
+      "insetsPx": {
+        "left": 4,
+        "right": 4,
+        "top": 8,
+        "bottom": 8
+      },
+      "alphaExpectation": "transparent-with-visible-mark",
+      "stretch": "vertical-only"
+    },
+    {
+      "id": "branch-white-top-left",
+      "role": "ornament.single-whitebranch",
+      "sourceSizePx": [
+        192,
+        192
+      ],
+      "referenceDisplayPx": [
+        96,
+        96
+      ],
+      "spriteMode": "SIMPLE",
+      "alphaExpectation": "transparent-with-visible-mark",
+      "stretch": false,
+      "maximumPerPanel": 1
+    }
+  ],
+  "buttonStateRoles": {
+    "normal": {
+      "asset": "button-normal",
+      "meaning": "enabled idle"
+    },
+    "hover": {
+      "asset": "button-hover",
+      "meaning": "pointer hover only; do not require it on touch"
+    },
+    "pressed": {
+      "asset": "button-pressed",
+      "meaning": "momentary pointer or touch press; same bounds"
+    },
+    "disabled": {
+      "asset": "button-disabled",
+      "meaning": "unavailable; runtime must separately disable interaction and explain why"
+    },
+    "selected": {
+      "baseAsset": "button-normal",
+      "overlayAsset": "indicator-selected",
+      "meaning": "persistent selection; reserve icon/text space for this marker"
+    }
+  },
+  "barAssembly": {
+    "coordinateSpace": "top-left-origin-source-pixels-before-0.5-scale",
+    "referenceTrackSizePx": [
+      512,
+      32
+    ],
+    "minimumTrackDisplayWidthPx": 96,
+    "fillRectSourcePx": {
+      "x": 12,
+      "y": 10,
+      "width": 488,
+      "height": 12
+    },
+    "atOtherWidth": "fill width = track source width - 24; fill x=12, y=10, height=12. Keep track height=32.",
+    "leftCapPositionSourcePx": [
+      0,
+      0
+    ],
+    "rightCapPositionSourcePx": [
+      488,
+      0
+    ],
+    "rightCapAtOtherWidth": "x = track source width - 24; y = 0",
+    "layerOrder": [
+      "bar-track",
+      "bar-health-fill OR bar-focus-fill",
+      "bar-cap-left",
+      "bar-cap-right",
+      "external-value-label"
+    ],
+    "valueRange": [
+      0,
+      1
+    ],
+    "zeroValue": "hide fill only; keep both fixed caps and track",
+    "labelPolicy": "Keep Health/Focus labels and numeric values outside the thin bar; color alone must not identify the resource."
+  },
+  "cooldownAssembly": {
+    "layerOrder": [
+      "ability-icon",
+      "mask-cooldown-radial",
+      "external-numeric-countdown"
+    ],
+    "alphaIsVisualScrimNotStencil": true,
+    "shapePolicy": "The full square is deliberate. Clip to the owning icon shape. Do not nine-slice or bake a fixed 75% wedge into the texture.",
+    "radialDirection": "Choose and verify start angle/direction in the engine; preview uses CSS only and is not a Cocos result."
+  },
+  "provenance": {
+    "vectors": "Original Whitebranch project geometric SVGs, authored for this pack. No BG3 pixels, paths, icons, textures or copied ornaments.",
+    "existingLibraryReviewed": {
+      "name": "Kenney Fantasy UI Borders",
+      "version": "1.0 (2023)",
+      "license": "CC0",
+      "url": "https://kenney.nl/assets/fantasy-ui-borders",
+      "usedAs": "Nine-slice workflow reference only; no Kenney files or paths included in this pack."
+    },
+    "exporter": {
+      "name": "@resvg/resvg-js",
+      "version": "2.6.2",
+      "license": "MPL-2.0",
+      "url": "https://github.com/thx/resvg-js",
+      "existingProjectDependency": true
+    },
+    "existingWorkflow": "src/cocos/tools/render-ui-icons.cjs",
+    "reasonForOriginalVectors": "The existing project-original layered control geometry is retained and adapted to a visible 3.4px-source warm metal bevel, original scroll engravings and separate cap layers. Only editable SVG paint/style is adapted; rasterization reuses the installed renderer.",
+    "originalAssetLicense": "Project-original contributions; no separate redistribution license is granted by this candidate pack. Project owner determines release license."
+  },
+  "verificationLimits": [
+    "17 PNGs are synchronized into existing Cocos resources without modifying import metadata or UUIDs; this color refresh still requires an actual engine review.",
+    "PNG alpha and source geometry can be checked locally; browser nine-slice preview is not engine validation.",
+    "No mobile Cocos build, atlas packing, GPU compression, pixel snapping, touch safe area or actual-device acceptance has been performed.",
+    "No tileable leather or vellum is claimed; this pack contains no edited bitmap texture.",
+    "No labels, abilities, input logic, gameplay functions, keyboard-focus behavior or screen-reader semantics are implemented by textures."
+  ],
+  "referenceDocs": [
+    "https://docs.cocos.com/creator/3.8/manual/en/ui-system/components/editor/sprite.html",
+    "https://docs.cocos.com/creator/3.8/api/en/class/SpriteFrame"
+  ],
+  "updated": "2026-11-05",
+  "materialStyle": {
+    "direction": "Original warm black-gold fantasy controls, informed by the user BG3 inventory reference: honey-gold/champagne highlights, brown-copper shadows and deep brown-black faces; no copied pixels or vector paths.",
+    "buttonFace": "Deep brown-black vertical gradient; hover raises the warm-black brightness. Press retains a near-black face, reverses the bevel and adds a thin cyan inner feedback line. Disabled is muted dark copper-gray.",
+    "edge": "Saturated honey-gold 3.4-source-pixel bevel (1.7 logical pixels), champagne highlights and copper-brown shadow stops; original corner engravings inside unchanged 24-source-pixel nine-slice corners.",
+    "panel": "Transparent-center warm-gold matching surround; parent draws the semantic deep brown-black fill. Surface is only 3.5% warm-ivory polish, never opaque brown.",
+    "geometryContract": "All asset sizes, insets, resource IDs, Cocos UUIDs, hit bounds and layouts retained."
+  },
+  "detailSourceStrokePx": 1.35
+}

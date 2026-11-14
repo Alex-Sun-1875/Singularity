@@ -1,0 +1,34 @@
+{
+  "status": "accepted",
+  "manifestSHA256": "81553dc076504b19eed2e20698d598479569a535739b58e977f99ed177c9a061",
+  "reviewer": "Codex visual inspection",
+  "reviewed": [
+    "shared-body-walk.jpg",
+    "shared-body-run.jpg",
+    "shared-run-held-preview.jpg",
+    "shared-run-stowed-preview.jpg",
+    "shared-walk-held-preview.jpg",
+    "shared-walk-stowed-preview.jpg"
+  ],
+  "findings": {
+    "body": "One existing W01 locomotion body reused for all seven weapons and both carry modes; original wide stride preserved.",
+    "head": "Measured cycle range at 400px/m is 6px horizontal and 5px vertical; hips/feet retain original motion.",
+    "rearBoots": "Four rear walk calf/boot donors visually accepted; continuous ankle shapes and intact boot soles; upper bodies protected.",
+    "outfit": "Walk/run use one reference palette; no weapon-dependent pale running outfit.",
+    "equipment": "Existing isolated weapons reused; held bows and back quivers split, hands mask grip; rear held weapon behind torso."
+  },
+  "generation": {
+    "provider": "OpenAI image_gen cloud",
+    "calls": 1,
+    "prompt": "back-walk.prompt.txt",
+    "result": "back-walk-cloud.png",
+    "usedRegion": "rear walk calves and boots below normalized y573; upper body from reviewed existing assets"
+  },
+  "runtimeStatus": "accepted: actual Cocos source bytes, 816 samples, five scenes, 60 frame captures and ordinary save keyboard run verified",
+  "runtimeExamples": [
+    "runtime/run-right-0.jpg",
+    "runtime/walk-up-1.jpg",
+    "runtime/held-W07-up.jpg",
+    "runtime/held-W07-down.jpg"
+  ]
+}

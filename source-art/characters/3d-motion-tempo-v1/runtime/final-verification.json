@@ -1,0 +1,161 @@
+{
+  "created": "2026-11-09T14:18:36.296768+08:00",
+  "source": {
+    "meshUVWeightsSHA256": "6e158f2ad696655576de5a60ee2a34951b97a8a6210ec2a29b55823c31d11001",
+    "meshUVWeightsUnchanged": true,
+    "bindPoseUnchanged": true,
+    "unchangedActions": [
+      "attack_bow",
+      "attack_staff",
+      "attack_sword",
+      "death",
+      "dodge",
+      "hit",
+      "idle",
+      "idle_staff",
+      "interact",
+      "spell",
+      "walk",
+      "walk_staff"
+    ],
+    "maxRunArmSpineHelperLocalChannelError": 0,
+    "exportedMeshes": 13,
+    "exportedHierarchyBones": 67,
+    "sourceActionCount": 14
+  },
+  "stride": {
+    "method": "Existing accepted jog adapted with Blender built-in quaternion.slerp on the connected thigh/calf/foot chain and root-only vertical shoe correction; no IK",
+    "originalPlantedFootSpeed": 5.810870704767939,
+    "adaptedPlantedFootSpeed": 3.59997269868743,
+    "targetSpeed": 3.6,
+    "clips": [
+      {
+        "clip": "run",
+        "frames": 57,
+        "duration": 0.9333333333333333,
+        "legRotationAmplitude": 0.5907386779785158,
+        "nominalSpeedMetresPerSecond": 3.59997269868743,
+        "maxShoeFloorErrorMetres": 2.6609301567726007e-07,
+        "unchangedLocalChannels": "All arm, hand, wrist, spine and attachment-helper rotations/translations; mesh, bind pose and weights unchanged",
+        "ground": "Root-only vertical sole correction; original air clearance scaled to 0.65"
+      },
+      {
+        "clip": "run_staff",
+        "frames": 57,
+        "duration": 0.9333333333333333,
+        "legRotationAmplitude": 0.5907386779785158,
+        "nominalSpeedMetresPerSecond": 3.59997269868743,
+        "maxShoeFloorErrorMetres": 2.7630925178434573e-07,
+        "unchangedLocalChannels": "All arm, hand, wrist, spine and attachment-helper rotations/translations; mesh, bind pose and weights unchanged",
+        "ground": "Root-only vertical sole correction; original air clearance scaled to 0.65"
+      }
+    ],
+    "fbxSHA256": "ffdcd70af36c81e06c7c758071b01eda779482817860763328072fd20e42af99"
+  },
+  "runtime": {
+    "samples": 600,
+    "runAnimationRate": {
+      "before": 0.6132589609463702,
+      "after": 1.000006022886522
+    },
+    "runCycleSeconds": {
+      "before": 1.5219236843546045,
+      "after": 0.9333277159800552
+    },
+    "gameplayActionEmissionScheduleUnchanged": true,
+    "liveGameToWallTimeRatio": 1.0240637904115526,
+    "pauseGameSeconds": 0,
+    "resumeGameSeconds": 0.30209999999404147,
+    "errors": []
+  },
+  "weapons": {
+    "all34InstalledPropFBXHashesUnchanged": true,
+    "inventoryEquips": 24,
+    "remainingPreviewStages": 0,
+    "bowAimSamples": 56,
+    "flightSegments": 301,
+    "maxArrowYawErrorDegrees": 3.107204864255124e-05,
+    "maxFlightErrorDegrees": 1.2074182697257333e-06
+  },
+  "media": {
+    "previews": [
+      {
+        "file": "tempo-comparison.gif",
+        "frames": 60,
+        "durationMilliseconds": 2000,
+        "size": [
+          1500,
+          896
+        ],
+        "bytes": 17995289,
+        "sha256": "46b4fd48fb0c3facde9712f8f3a99604dd53778ab33cd0ff122b2a17fb229aa5",
+        "video": {
+          "file": "tempo-comparison.webm",
+          "bytes": 491155,
+          "sha256": "e94092153036f8db94865540df3f2e3e944868735c5c667ba2adc5c90c492a3d",
+          "fps": 30,
+          "seconds": 2
+        }
+      },
+      {
+        "file": "run-comparison.gif",
+        "frames": 60,
+        "durationMilliseconds": 2000,
+        "size": [
+          420,
+          1184
+        ],
+        "bytes": 6898373,
+        "sha256": "16cea245a09eafc7abf9afbb911a5e1fd43f1e48146cc4d9af2a769b739a35d9",
+        "video": {
+          "file": "run-comparison.webm",
+          "bytes": 470417,
+          "sha256": "11fbcc5b1176c88ed32b0dae4a996d25c8f74cdc106974b1994af77437f5e2db",
+          "fps": 30,
+          "seconds": 2
+        }
+      }
+    ],
+    "decodedVideos": [
+      {
+        "file": "tempo-comparison.webm",
+        "seconds": 2,
+        "width": 1500,
+        "height": 896,
+        "decodedMean": 49.175218253968254
+      },
+      {
+        "file": "run-comparison.webm",
+        "seconds": 2,
+        "width": 420,
+        "height": 1184,
+        "decodedMean": 48.71125656906907
+      }
+    ],
+    "playback": "Both sides use native 1/30-second simulation frames, encoded with repeating 30/30/40ms durations; 2 seconds shown in 2 seconds"
+  },
+  "validation": {
+    "typecheck": "npm run check passed",
+    "whitespace": "Focused git diff --check passed",
+    "build": "Cocos Creator 3.8.8; original Build-Local.ps1; real source-copy mirror on C:",
+    "buildLogSHA256": "6e34ec6321d97e5ef4907bb8bf06aac540aeae7ebbb1f21b293c3baefa24dba9",
+    "inputs": [
+      {
+        "path": "src/cocos/assets/scripts/runtime/Actors.ts",
+        "sha256": "2fa57e0a0e418b4a24998c9ca0ad10945f4e5f7a1b8a5803bfe775b9a0a4b188"
+      },
+      {
+        "path": "src/cocos/assets/resources/actors/raphael/manifest.json",
+        "sha256": "67229f3a16734f281689f35ab49776669a83c8d79bd78570ce02e9447adfa664"
+      },
+      {
+        "path": "src/cocos/assets/resources/actors/raphael/raphael.fbx",
+        "sha256": "ffdcd70af36c81e06c7c758071b01eda779482817860763328072fd20e42af99"
+      }
+    ],
+    "copiedBuildFiles": 2623,
+    "allCopiedBuildHashesMatch": true,
+    "url": "http://127.0.0.1:7469/?view=2d&player=3d"
+  },
+  "scope": "Native player motion tempo; existing gameplay timing and weapon models retained; no claim of exhaustive skill collision or mobile-performance acceptance"
+}

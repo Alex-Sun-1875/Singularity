@@ -1,0 +1,167 @@
+{
+  "created": "2026-11-09T16:47:51.119805+08:00",
+  "scope": "Original native model only; face/body/clothing geometry, UV and weights retained; modest complexion adjustment, original hair refinement and fabric-only embroidered material",
+  "source": {
+    "faceGeometryUVWeightsPreserved": true,
+    "allBodyClothingGeometryUVWeightsPreserved": true,
+    "all14MotionCurvesPreserved": true,
+    "bindPosePreserved": true,
+    "headAndBodyMeshHashes": {
+      "raphael_native_arms_Male_Ranger_Arms": "5681dd32babcb16a4d56e8f0605460c5599d42c95a587e4d822edcfd18dd82b4",
+      "raphael_native_arms_Male_Ranger_Arms_Bracer": "173f29eb4176f5df110ed9025b76ae0d1a5d21a60ca9f0246d7b1f745269df52",
+      "raphael_native_body_Male_Ranger_Body": "22c8ea7605136bab2f30cc7116e6fb65b6bcf13bf87dfbe4c6525babc73f50b1",
+      "raphael_native_body_Male_Ranger_Body_Belt_1": "ce0f4f2988c521aa1da45618f6c446bb6a160b2459ddcc571fa5744f66053278",
+      "raphael_native_body_Male_Ranger_Body_Belt_2": "c44a0912f1a230c0bd7d050294a5f314e8b0ffd8656ed669f53afaf1fc27b757",
+      "raphael_native_brows_Eyebrows": "752437f2b7fe45913b70ef46c50fdf907de97d63bd6aa0ea4c2bb4b5a108b0c8",
+      "raphael_native_eyes_Eyes": "dc145263142f316543cf371203c8c91c02be8997c273e5a136cecc9d7cba4249",
+      "raphael_native_feet_Male_Ranger_Feet_Boots": "fbb509468182db50b8edf8ef82975aac2b2887727e5d829f20911571a329d750",
+      "raphael_native_head_SuperHero_Male": "81203a430e3cd4e8f8dd66b14dd9fc98b0375094910521d8352ba7824855e75a",
+      "raphael_native_hood_Male_Ranger_Head_Hood": "d758a3008e04ed4824097d4665d37ccf57cf343e938d38130a057cd6947c3c45",
+      "raphael_native_legs_Male_Ranger_Legs": "995b6d7b40ecb183131b62412ea9605ee4899b6ea5b89f7c3ee2d421ab26e311",
+      "raphael_native_pauldrons_Male_Ranger_Acc_Pauldron": "81f37f75467deb7ce932d6bc1725ea50c19bdf2b05f80d5a9bbb40974c7da4d6"
+    },
+    "actionHash": "d750b968d57df03615edbc6d07e06bc76127f056b7bce2be55e26b38f6bdf6be",
+    "bindHash": "3534cced9a1594450ed2a544866348c7dc5da7ff10998ba627462cdd07c1c3f1",
+    "renderers": 13,
+    "triangles": 39384
+  },
+  "runtime": {
+    "views": 13,
+    "validMeshRenderers": 13,
+    "clips": 14,
+    "motionSamples": 300,
+    "inventoryEquips": 24,
+    "previewStagesRemaining": 0,
+    "bowTurnSamples": 56,
+    "bowFlightSegments": 301,
+    "maxArrowYawErrorDegrees": 0.00011545816941985022,
+    "maxFlightDirectionErrorDegrees": 0,
+    "runAnimationRate": 1.000008911471401,
+    "pauseGameSeconds": 0,
+    "default2D": {
+      "result": {
+        "idle": "stowed",
+        "attack": "ready",
+        "returned": "stowed",
+        "dash": "stowed"
+      },
+      "errors": []
+    },
+    "errors": []
+  },
+  "materials": {
+    "cloudTool": "Built-in OpenAI image_gen.imagegen, one UV texture edit; no CLI or local inference",
+    "generation": "../generation-prompt.txt",
+    "provenance": [
+      {
+        "source": "src/cocos/assets/resources/actors/native-shared/textures/b837904994a02372-T_Superhero_Male_Ligh.png",
+        "sha256": "42497ac2daf3f1f416f833b633aec96fb61b9941f4676354a1a6474197641dfe",
+        "output": "skin-head.png",
+        "sourceMedian": [
+          169.0,
+          118.0,
+          82.0
+        ],
+        "targetMedian": [
+          184,
+          143,
+          118
+        ],
+        "method": "Modest uniform RGB tone shift on original skin texels; original facial geometry, UVs, features and per-channel contrast retained"
+      },
+      {
+        "source": "src/cocos/assets/resources/actors/native-shared/textures/917f81f829d903ac-T_Regular_Male_Dark_BaseColor.png",
+        "sha256": "1d207971aeabed7de924877ccc622821379e92d4d330254d5000d0017945d602",
+        "output": "skin-hands.png",
+        "sourceMedian": [
+          169.0,
+          114.0,
+          80.0
+        ],
+        "targetMedian": [
+          184,
+          143,
+          118
+        ],
+        "method": "Modest uniform RGB tone shift on original skin texels; original facial geometry, UVs, features and per-channel contrast retained"
+      },
+      {
+        "source": "src/cocos/assets/resources/actors/player-aim-v1/cloth-burgundy.png",
+        "cloudOutput": "cloth-cloud.png",
+        "generatedSize": [
+          1254,
+          1254
+        ],
+        "runtimeSize": [
+          1024,
+          1024
+        ],
+        "outsideFabricMaskPixelsUnchanged": true,
+        "method": "Cloud OpenAI image_gen embroidery; Pillow/SciPy UV-size normalization and fabric-only composite; leather/hardware/padding and alpha protected"
+      }
+    ],
+    "activeAppearance": "2d-design-v3",
+    "rejectedV1V2NotSelected": true
+  },
+  "build": {
+    "typecheck": "npm run check passed",
+    "focusedWhitespaceCheck": "passed",
+    "engine": "Cocos Creator 3.8.8",
+    "method": "Original Build-Local.ps1, real-assets C-drive mirror copied back to canonical served build",
+    "inputs": [
+      {
+        "path": "src/cocos/assets/scripts/runtime/Actors.ts",
+        "sha256": "6a9f4675ef50ca42c2bb3d749bb3519b4bf99ad1ce68b99b7c3e2609b53df3a5"
+      },
+      {
+        "path": "src/cocos/assets/resources/actors/raphael/manifest.json",
+        "sha256": "68be0287bb06c77e78899069ead7cfeab4739e9cf991fe550b1d1c4878be9b74"
+      },
+      {
+        "path": "src/cocos/assets/resources/actors/raphael/raphael-polish.glb",
+        "sha256": "baaca13c6ca79a8e3540cd6061a4763cde0dfede8044746b14d3412692f5a230"
+      },
+      {
+        "path": "src/cocos/assets/resources/actors/appearance-v3/textures/brocade-normal.png",
+        "sha256": "eb5bce086ebd63a9bf83f1346fe4bb61e354d0429def1b89697109b92e55562b"
+      },
+      {
+        "path": "src/cocos/assets/resources/actors/appearance-v3/textures/brocade-orm.png",
+        "sha256": "e420203b98b32f12bd3c6e630eb08a88397246fb83b64f90a98f2b1a53e6abcb"
+      },
+      {
+        "path": "src/cocos/assets/resources/actors/appearance-v3/textures/cloth-burgundy.png",
+        "sha256": "b0e441c0bd221de07112790a3f4b3c4d947c333510e8d2587e28148de7d90a9b"
+      },
+      {
+        "path": "src/cocos/assets/resources/actors/appearance-v3/textures/cloth-charcoal.png",
+        "sha256": "d24c7640dd557c0a7c403882f5f04ec750170233136376f7665b7f92cc208fe8"
+      },
+      {
+        "path": "src/cocos/assets/resources/actors/appearance-v3/textures/hair-silver.png",
+        "sha256": "ccf1c425e21765aef8716d92c9017c1626fae32e31c35954498b80f321d4522e"
+      },
+      {
+        "path": "src/cocos/assets/resources/actors/appearance-v3/textures/skin-hands.png",
+        "sha256": "a976bf9504fcd19395b9f29d43549d5aca999d29e70932777fb95cf3c68f7a28"
+      },
+      {
+        "path": "src/cocos/assets/resources/actors/appearance-v3/textures/skin-head.png",
+        "sha256": "69133abf411653125092530695e26edbc837176ec8de9526435412a1e9645ac0"
+      }
+    ],
+    "copiedFiles": 2864,
+    "allCopiedHashesMatch": true,
+    "legacyFBXUnchanged": true,
+    "runtimeFormat": "Native glTF with unused COLOR sets disabled",
+    "url": "http://127.0.0.1:7469/?view=2d&player=3d&revision=appearance-v3"
+  },
+  "previews": {
+    "comparison": "appearance-comparison.jpg",
+    "turntable": "appearance-turntable.gif",
+    "turntableSamples": 8,
+    "source": "Actual native Cocos actor, same pose/camera/light; deterministic crop/scale/layout only",
+    "cloudTexture": "../cloth-cloud.png",
+    "prompt": "../generation-prompt.txt"
+  }
+}

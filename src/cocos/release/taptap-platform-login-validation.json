@@ -1,0 +1,59 @@
+{
+  "verifiedOn": "2026-11-13",
+  "sourceVersion": "0.3.37",
+  "status": "client-integrated; real TapTap platform/device acceptance pending",
+  "userDecision": "Use TapTap minigame platform login directly; no custom account/authentication server",
+  "implementation": {
+    "provider": "taptap-minigame",
+    "apis": [
+      "tap.login",
+      "tap.checkSession"
+    ],
+    "initialLogin": "Require real platform API and a nonempty code from the login success callback",
+    "foreground": "Pause gameplay while checking; repeat platform login when checkSession fails or times out",
+    "runtimeStatus": "platform-ready (client platform readiness, not a verified game-server identity)",
+    "customAuthService": false,
+    "serviceUrlRequired": false,
+    "serverIdentityExchange": false,
+    "retainsTemporaryCode": false,
+    "customToken": false,
+    "storesSecret": false,
+    "previewAndGuestRemainExplicit": true,
+    "localSaveKeysOrSchemaChanged": false,
+    "accountScopedLocalSave": false,
+    "cloudSaveIntegrated": false,
+    "history": "services/taptap-auth and prior validation reports retained as inactive history"
+  },
+  "checks": {
+    "fullTypeScript": "passed: npm run check",
+    "coreTypeScript": "passed: npm --prefix src/cocos run check:core",
+    "existingTests": {
+      "passed": 140,
+      "failed": 0,
+      "loginCases": 5,
+      "realPlatformAPIsUsed": false
+    },
+    "configuration": "passed: npm run check:tap; release --check no longer requires a backend URL",
+    "nodeToolSyntax": "passed: taptap-config.cjs and convert-taptap.cjs",
+    "pythonReporterSyntax": "passed via ast.parse",
+    "scope": "Tests use isolated callback fixtures; not platform authentication or real-device acceptance"
+  },
+  "notPerformed": [
+    "New Cocos/package build",
+    "Upload, review or release",
+    "Live TapTap login or code exchange",
+    "Real-device acceptance"
+  ],
+  "pending": [
+    "First launch, cancellation/failure, offline retry and timeout in real TapTap AppID runtime",
+    "Foreground checkSession success, invalidation/relogin and gameplay suspension/resume on device",
+    "TapTap account switching: local saves remain device-local and are not claimed to be isolated per account",
+    "Confirm platform account/compliance capabilities and any console configuration on device; login success alone does not certify real-name/anti-addiction integration"
+  ],
+  "sources": [
+    "https://developer.taptap.cn/minigameapidoc/dev/api/open-api/login/tap.login/",
+    "https://developer.taptap.cn/minigameapidoc/dev/api/open-api/login/tap.checkSession/",
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/open-capabilities/login-management/",
+    "extensions/taptap-minigame-tools/tap-minigame.d.ts"
+  ]
+}

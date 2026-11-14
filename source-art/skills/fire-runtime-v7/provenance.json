@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-11",
+  "generator": "OpenAI cloud built-in image_gen",
+  "generationStatus": "completed",
+  "sourceImage": "generated-atlas.png",
+  "sourceSha256": "eee464c0e09e2f89fb2b7638f7a833f813dfc8e5e47ffc8227c39893f93039d7",
+  "prompt": "prompt.txt",
+  "reference": {
+    "file": "style-reference.png",
+    "role": "style reference only",
+    "original": "source-art/skills/pure-skills-v2/combat-fir-redesign-v4.png",
+    "crop": [
+      470,
+      80,
+      1470,
+      650
+    ],
+    "sentSize": [
+      800,
+      456
+    ]
+  },
+  "output": {
+    "size": [
+      1536,
+      1024
+    ],
+    "alpha": true,
+    "phases": 16
+  },
+  "internalSourceReview": "Matches requested dense rolling combustion, small hot core and dark red outer gas; source alpha inspected separately from RGB preview.",
+  "runtimeReview": "Current colour review: src/cocos/test-results/fire-color-v8/validation.json",
+  "userArtAcceptance": "pending; direction confirmed and no-black-smoke revision implemented",
+  "derivedImages": "processing.json",
+  "coreSource": "../fire-runtime-v6/provenance.json",
+  "implementation": "Transparent animated keyframes and Cocos native particles; not a real-time fluid solver or a generated 3D animation.",
+  "latestUserRevision": "不要有黑色的烟啊",
+  "runtimeDerivativeRevision": "Neutral charcoal smoke and dark ash removed by deterministic fire/ivory alpha selection in derive.py; native fire-explosion dust burst removed. Raw generation retained only for provenance.",
+  "colourRevision": "User reported pale colours. v8 restores selected flame alpha coverage, holds density during phase transitions, and strengthens persistent fire opacity while preserving the no-black-smoke masks."
+}

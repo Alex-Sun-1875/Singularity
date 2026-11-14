@@ -1,0 +1,572 @@
+{
+  "verifiedAt": "2026-11-13T16:44:11.322Z",
+  "verifiedLocalDate": "2026-11-14",
+  "timezone": "Asia/Shanghai",
+  "version": "0.3.37",
+  "status": "Actor resource cleanup, lazy geometry and conservative hair simplification implemented; functional checks passed; emulator results recorded; physical phone acceptance pending",
+  "scope": {
+    "engine": "Cocos Creator 3.8.8",
+    "target": "TapTap minigame",
+    "device": "Dedicated Android 14 emulator, four cores / four GiB, Chrome WebGL2",
+    "requestedPhone": "iPhone 14",
+    "phonePackageCreated": false,
+    "uploadedOrPublished": false,
+    "frameRate": 60,
+    "textureResolutionChanged": false
+  },
+  "findings": {
+    "unusedEmbeddedImages": {
+      "count": 19,
+      "bytes": 11090822,
+      "action": "Physically removed unreachable images and their buffer views after runtime texture restoration was already in use"
+    },
+    "hairstyles": "Previous pass loaded only selected hair textures but all four hair geometries still belonged to the main prefab. This pass splits geometry into separate files and retains one selected mesh only.",
+    "clothing": "One modular outfit, not multiple full outfits. Twelve non-hair mesh parts contain no identical position triangles at 1e-6 coordinate precision in the overlap audit. Clothing parts, face, skeleton and animation accessor bytes are preserved.",
+    "clothingMaterials": {
+      "before": 13,
+      "after": 10,
+      "action": "Reuse semantically identical runtime material records instead of distinguishing them by authoring name/part"
+    },
+    "appearanceTextures": "Existing diffuse, normal and ORM/roughness maps remain at their original pixel resolution; source file compression and uploaded GPU texture size are separate quantities",
+    "historicalModels": {
+      "archive": "source-art/performance/runtime-actor-v2/legacy",
+      "files": [
+        {
+          "name": "raphael.fbx",
+          "bytes": 9040620,
+          "sha256": "ffdcd70af36c81e06c7c758071b01eda779482817860763328072fd20e42af99"
+        },
+        {
+          "name": "raphael.fbx.meta",
+          "bytes": 44003,
+          "sha256": "c529b4ae62c6d6f0c8569ec2129814ab53e0fb55efb2544b088d2ef71cf0b3c9"
+        },
+        {
+          "name": "raphael-designed.glb",
+          "bytes": 6866976,
+          "sha256": "748798beb3b014576bc19d6205f98a5c07c766d5ba9949f3931e153bb79d4994"
+        },
+        {
+          "name": "raphael-designed.glb.meta",
+          "bytes": 40787,
+          "sha256": "98279700cd8036f6bb5be46cfb6ce46fa1c9a041ed60eea21a9a6872c1f44259"
+        },
+        {
+          "name": "raphael-refined.glb",
+          "bytes": 10791232,
+          "sha256": "9624fc5872b60f6c39d0c0377e80c52c11af64b7c815635a217b9c15e20fd0a2"
+        },
+        {
+          "name": "raphael-refined.glb.meta",
+          "bytes": 61869,
+          "sha256": "3f55e6ba9bb114750748517a6ad4968cbb8b4799e44eff76f153e2defaccb035"
+        }
+      ],
+      "action": "Three unreferenced previous model revisions and their original UUID metadata moved outside Cocos runtime assets; files preserved"
+    }
+  },
+  "implementation": {
+    "geometryOwner": "assets/scripts/features/actors/runtime/HairstyleGeometry.ts",
+    "policy": "Load a single imported Mesh and source Material from the actor bundle; drive it with the existing hero skeleton. Detach renderer resources before releasing old geometry; page previews retain shared meshes/skeletons while alive. Late and superseded requests release their references.",
+    "processingTool": "tools/prepare-runtime-actor.cjs",
+    "library": "Already installed meshoptimizer 1.1.1, MIT; no download or dependency change",
+    "simplification": "Offline attribute-aware simplification; lock borders; relative error budget 0.001; retained position/normal/UV/skin attributes copied exactly. This is lossy hair geometry, not a pixel-identical geometry claim.",
+    "preservation": {
+      "bodyAndAnimationAccessorsCopiedExactly": true,
+      "verifiedProtectedAccessorCount": 5716,
+      "bodyPoseAndEquipmentTransformsChanged": false,
+      "sourceArchive": "source-art/performance/runtime-actor-v2/raphael-polish.glb",
+      "sourceSha256": "e08f6fd6d73d7bcb3a72b99f90b36216f6d91672c7f454c1327b32038bc1ab56"
+    },
+    "hair": [
+      {
+        "id": "curly",
+        "beforeTriangles": 48576,
+        "afterTriangles": 18366,
+        "beforeVertices": 30423,
+        "afterVertices": 14193,
+        "reportedRelativeError": 0.0009779388783499599,
+        "estimatedErrorMetres": 0.0003004034272285072,
+        "fileBytes": 982620
+      },
+      {
+        "id": "dante",
+        "beforeTriangles": 19872,
+        "afterTriangles": 10796,
+        "beforeVertices": 14327,
+        "afterVertices": 9159,
+        "reportedRelativeError": 0.000979332602582872,
+        "estimatedErrorMetres": 0.000274119354032612,
+        "fileBytes": 630012
+      },
+      {
+        "id": "nero",
+        "beforeTriangles": 14112,
+        "afterTriangles": 6452,
+        "beforeVertices": 8961,
+        "afterVertices": 4814,
+        "reportedRelativeError": 0.0009982798947021365,
+        "estimatedErrorMetres": 0.00022977848314540035,
+        "fileBytes": 351936
+      },
+      {
+        "id": "vergil",
+        "beforeTriangles": 17934,
+        "afterTriangles": 8434,
+        "beforeVertices": 11359,
+        "afterVertices": 6303,
+        "reportedRelativeError": 0.00097652617841959,
+        "estimatedErrorMetres": 0.00023080044883344586,
+        "fileBytes": 453152
+      }
+    ],
+    "baseTriangles": 31578,
+    "sourceFileBytes": {
+      "previousMonolithicGlb": 17818640,
+      "currentBodyGlb": 2727956,
+      "defaultSelectedHairGlb": 982620,
+      "scope": "Source GLB file sizes; not process RAM or final asset transfer size"
+    },
+    "runtimeOutputs": {
+      "assets/resources/actors/raphael/hair-curly.glb": {
+        "bytes": 982620,
+        "sha256": "9bf2f550ae6ca4b3fd7d6b3032e0bf8cfbd37740eb1d5e448b13d422d259b994"
+      },
+      "assets/resources/actors/raphael/hair-dante.glb": {
+        "bytes": 630012,
+        "sha256": "7168d871df25f2fcef9e00c089479bc4ec157d3103adc9ef4a7eb40b8937bd12"
+      },
+      "assets/resources/actors/raphael/hair-nero.glb": {
+        "bytes": 351936,
+        "sha256": "7984d376987bb163d7da321d5efce500b30b7279c3d3669445ff97eb6854607a"
+      },
+      "assets/resources/actors/raphael/hair-vergil.glb": {
+        "bytes": 453152,
+        "sha256": "95c6102e74e5b800014a4a73654b9b60a0a109c1b41107c495f1e2bee5ceab9e"
+      },
+      "assets/resources/actors/raphael/raphael-polish.glb": {
+        "bytes": 2727956,
+        "sha256": "6db2efc896aaa3b825b073b4d0e2008de55e6c3b97917db8d1ad4a1c5a9ecd58"
+      }
+    }
+  },
+  "builtBundleComparison": {
+    "webBefore": {
+      "build": "concept-2d-resource-verified",
+      "fileCount": 244,
+      "bytes": 46796380,
+      "roots": {
+        "raphael-designed": 64,
+        "raphael-polish": 109,
+        "raphael-refined": 98,
+        "raphael": 70,
+        "manifest": 1,
+        "inspection": 1
+      },
+      "scope": "Cocos built actor-raphael directory bytes; not complete game size, not a ZIP size, not resident process memory"
+    },
+    "webAfter": {
+      "build": "concept-2d-actor-runtime",
+      "fileCount": 40,
+      "bytes": 8335076,
+      "roots": {
+        "raphael-polish": 41,
+        "hair-curly": 4,
+        "hair-dante": 4,
+        "hair-vergil": 4,
+        "hair-nero": 4,
+        "manifest": 1,
+        "inspection": 1
+      },
+      "scope": "Cocos built actor-raphael directory bytes; not complete game size, not a ZIP size, not resident process memory"
+    },
+    "tapWebBefore": {
+      "build": "taptap-resource-verified",
+      "fileCount": 74,
+      "bytes": 22357928,
+      "roots": {
+        "raphael-polish": 109,
+        "manifest": 1
+      },
+      "scope": "Cocos built actor-raphael directory bytes; not complete game size, not a ZIP size, not resident process memory"
+    },
+    "tapWebAfter": {
+      "build": "taptap-actor-runtime",
+      "fileCount": 39,
+      "bytes": 8328904,
+      "roots": {
+        "raphael-polish": 41,
+        "hair-curly": 4,
+        "hair-dante": 4,
+        "hair-vergil": 4,
+        "hair-nero": 4,
+        "manifest": 1
+      },
+      "scope": "Cocos built actor-raphael directory bytes; not complete game size, not a ZIP size, not resident process memory"
+    }
+  },
+  "verification": {
+    "fullTypeScript": "passed: npm run check",
+    "coreTypeScript": "passed: npm --prefix src/cocos run check:core",
+    "existingTests": {
+      "passed": 140,
+      "failed": 0,
+      "log": "src/cocos/temp/runtime-actor-final-tests.log",
+      "newTrackedTests": false
+    },
+    "tapConfiguration": "passed: node src/cocos/tools/taptap-config.cjs --check",
+    "builds": [
+      {
+        "name": "concept-2d-actor-runtime",
+        "status": "passed",
+        "kind": "WebPreview production bundle; not platform or physical device acceptance",
+        "pipeline": "Legacy Forward",
+        "frameRate": 60
+      },
+      {
+        "name": "taptap-actor-runtime",
+        "status": "passed",
+        "kind": "WebPreview production bundle; not platform or physical device acceptance",
+        "pipeline": "Legacy Forward",
+        "frameRate": 60
+      }
+    ],
+    "rootStageSourceMatch": {
+      "files": 201,
+      "path": "src/cocos/test-results/performance/runtime-actor-source.json",
+      "sha256": "bf9d2ef57af95fd11203d619ce3db70fd63d72217c850f44b303aa1fd7f6901e",
+      "generatedConfigurationExcluded": true
+    },
+    "processingRecipe": "Dry run reproduced all five output GLB SHA256 values; Node/Python syntax and git whitespace checks passed",
+    "functional": {
+      "report": "src/cocos/test-results/performance/runtime-actor-qa-final/report.json",
+      "sha256": "cc86117b45bfae9f5fcaa5d3c77090a73b7902969294fd841971897d1868542b",
+      "status": "passed",
+      "errors": [],
+      "mapBuilds": 10,
+      "hairstyles": [
+        "curly",
+        "dante",
+        "nero",
+        "vergil",
+        "curly"
+      ],
+      "rapidSwitchLastRequestWins": "curly",
+      "combatWindows": [
+        "WAR",
+        "FIR",
+        "THU",
+        "BOW",
+        "FIR",
+        "WAR"
+      ]
+    },
+    "geometryLeases": {
+      "report": "src/cocos/test-results/performance/runtime-actor-visual-final/report.json",
+      "beforeHairRendererCount": 4,
+      "after": [
+        {
+          "selected": "curly",
+          "residentHairMeshes": [
+            {
+              "style": "curly",
+              "bytes": 1242288
+            }
+          ],
+          "renderers": [
+            {
+              "name": "raphael_native_hair_Curly_Redesigned",
+              "enabled": true,
+              "active": true,
+              "sameAnimationRoot": true,
+              "joints": 67,
+              "mesh": "680ed121-7e9c-4856-a2f9-f1578e89e490@01d89"
+            }
+          ]
+        },
+        {
+          "selected": "dante",
+          "residentHairMeshes": [
+            {
+              "style": "dante",
+              "bytes": 789000
+            }
+          ],
+          "renderers": [
+            {
+              "name": "raphael_native_hair_Dante_Redesigned",
+              "enabled": true,
+              "active": true,
+              "sameAnimationRoot": true,
+              "joints": 67,
+              "mesh": "9224355c-1420-4c1c-97dd-4d05c0e57719@f6377"
+            }
+          ]
+        },
+        {
+          "selected": "nero",
+          "residentHairMeshes": [
+            {
+              "style": "nero",
+              "bytes": 424032
+            }
+          ],
+          "renderers": [
+            {
+              "name": "raphael_native_hair_Nero_Redesigned",
+              "enabled": true,
+              "active": true,
+              "sameAnimationRoot": true,
+              "joints": 67,
+              "mesh": "d80b4983-1327-428c-8140-2687b06ea109@a79de"
+            }
+          ]
+        },
+        {
+          "selected": "vergil",
+          "residentHairMeshes": [
+            {
+              "style": "vergil",
+              "bytes": 555024
+            }
+          ],
+          "renderers": [
+            {
+              "name": "raphael_native_hair_Vergil_Redesigned",
+              "enabled": true,
+              "active": true,
+              "sameAnimationRoot": true,
+              "joints": 67,
+              "mesh": "c941be15-6690-4df0-acff-5ccd1e96f017@3a655"
+            }
+          ]
+        },
+        {
+          "selected": "curly",
+          "residentHairMeshes": [
+            {
+              "style": "curly",
+              "bytes": 1242288
+            }
+          ],
+          "renderers": [
+            {
+              "name": "raphael_native_hair_Curly_Redesigned",
+              "enabled": true,
+              "active": true,
+              "sameAnimationRoot": true,
+              "joints": 67,
+              "mesh": "680ed121-7e9c-4856-a2f9-f1578e89e490@01d89"
+            }
+          ]
+        }
+      ],
+      "initialWholeSceneGfxBufferMiB": {
+        "before": 18.063135147094727,
+        "after": 10.707548141479492,
+        "decrease": 7.355587005615234,
+        "decreasePercent": 40.72154111518291
+      },
+      "scope": "Matching frozen S01 scene diagnostic; full-scene graphics buffers, not just actor allocations"
+    },
+    "visual": {
+      "comparison": "src/cocos/test-results/performance/runtime-actor-visual-after/comparison.png",
+      "scope": "Same frozen idle, same front/side/back camera, full-resolution crop differences; texture pixels unchanged, hair geometry simplified",
+      "hairViews": 12,
+      "review": "Front/side/back of all four hair styles and full outfit inspected; silhouette, identity, clothes and attachment remain intact",
+      "maxMeanChannelDifferenceOutOf255": 0.22063634713144517,
+      "finalBuildCapture": "src/cocos/test-results/performance/runtime-actor-visual-final/report.json",
+      "finalHeadCapturesByteIdenticalToInspected": true,
+      "note": "Final build removes only unused material records and historical bundle contents relative to the inspected geometry; hairstyle output SHA256 values are identical"
+    }
+  },
+  "performance": {
+    "protocol": "Existing moving-combat-v6 routine farming: H12, Lv17, BOW, 19 enemies; normal movement/input, actual hits, natural respawn and finite consumables; 300 seconds per build; no build or desktop browser test during measured windows.",
+    "beforeReport": "src/cocos/test-results/performance/runtime-actor-pair-before/report.json",
+    "afterReport": "src/cocos/test-results/performance/runtime-actor-pair-after/report.json",
+    "before": {
+      "status": "passed",
+      "errors": [],
+      "seconds": 300,
+      "fixture": {
+        "area": "H12",
+        "entry": {
+          "x": 15.42983158520316,
+          "z": -34.431698217428384
+        },
+        "level": 17,
+        "weapon": "W07",
+        "family": "BOW",
+        "control": "move",
+        "automation": "manual",
+        "enemies": 19,
+        "spitters": 4,
+        "startHP": 200,
+        "frameRate": 60
+      },
+      "buildHashes": {
+        "http://127.0.0.1:7567/concept-2d-resource-verified/assets/main/index.98ca5.js": "afea5256a48186c69ca0ee37cc013650345f11967d14e8bd91c43c854daf1d22"
+      },
+      "averageFps": 59.999395388408125,
+      "minOneSecondFps": 58,
+      "p95Ms": 19.20000000006985,
+      "mainThreadMsPerFrame": 3.82445213443331,
+      "cpuOneCorePercent": 69.65989269140856,
+      "cpuFourCoreNormalizedPercent": 17.41497317285214,
+      "drawCalls": 167,
+      "triangles": 200603,
+      "measuredWindowPeakProcessPssMiB": 480.4404296875,
+      "wholeRunPeakProcessPssMiB": 496.0400390625,
+      "boundaries": [
+        {
+          "label": "warm-0",
+          "processPssMiB": 444.4189453125,
+          "jsHeapMiB": 58.4734992980957,
+          "gfxTextureMiB": 175.54636764526367,
+          "gfxBufferMiB": 18.841766357421875
+        },
+        {
+          "label": "end-0",
+          "processPssMiB": 455.6220703125,
+          "jsHeapMiB": 62.76201629638672,
+          "gfxTextureMiB": 181.47162628173828,
+          "gfxBufferMiB": 18.909215927124023
+        }
+      ],
+      "kills": 78,
+      "hits": 546,
+      "respawns": 73,
+      "movedMetres": 992.6024136213206
+    },
+    "after": {
+      "status": "failed",
+      "errors": [
+        "baseline environment/protocol mismatch"
+      ],
+      "seconds": 300,
+      "fixture": {
+        "area": "H12",
+        "entry": {
+          "x": 15.42983158520316,
+          "z": -34.431698217428384
+        },
+        "level": 17,
+        "weapon": "W07",
+        "family": "BOW",
+        "control": "move",
+        "automation": "manual",
+        "enemies": 19,
+        "spitters": 4,
+        "startHP": 200,
+        "frameRate": 60
+      },
+      "buildHashes": {
+        "http://127.0.0.1:7567/concept-2d-actor-runtime/assets/main/index.207a6.js": "32a4f06ea911921469b0deb5cc830257c3b97ffad75efa42f50188eeed58c8b2"
+      },
+      "averageFps": 59.950500805607696,
+      "minOneSecondFps": 58,
+      "p95Ms": 18.900000000023283,
+      "mainThreadMsPerFrame": 3.8083102626620864,
+      "cpuOneCorePercent": 68.37200803946648,
+      "cpuFourCoreNormalizedPercent": 17.09300200986662,
+      "drawCalls": 168,
+      "triangles": 140220,
+      "measuredWindowPeakProcessPssMiB": 462.55078125,
+      "wholeRunPeakProcessPssMiB": 468.96484375,
+      "boundaries": [
+        {
+          "label": "warm-0",
+          "processPssMiB": 429.45703125,
+          "jsHeapMiB": 58.34959411621094,
+          "gfxTextureMiB": 175.54636764526367,
+          "gfxBufferMiB": 11.494998931884766
+        },
+        {
+          "label": "end-0",
+          "processPssMiB": 428.0546875,
+          "jsHeapMiB": 61.2288818359375,
+          "gfxTextureMiB": 181.72162628173828,
+          "gfxBufferMiB": 11.401004791259766
+        }
+      ],
+      "kills": 86,
+      "hits": 562,
+      "respawns": 79,
+      "movedMetres": 1005.9288026129861
+    },
+    "changes": {
+      "triangles": {
+        "before": 200603,
+        "after": 140220,
+        "decrease": 60383,
+        "decreasePercent": 30.10074625005608
+      },
+      "gfxBuffersEndMiB": {
+        "before": 18.909215927124023,
+        "after": 11.401004791259766,
+        "decrease": 7.508211135864258,
+        "decreasePercent": 39.706623293111925
+      },
+      "processPssEndMiB": {
+        "before": 455.6220703125,
+        "after": 428.0546875,
+        "decrease": 27.5673828125,
+        "decreasePercent": 6.050493294495635
+      },
+      "cpuOneCorePercent": {
+        "before": 69.65989269140856,
+        "after": 68.37200803946648,
+        "decrease": 1.287884651942079,
+        "decreasePercent": 1.8488180245229104
+      }
+    },
+    "gateAudit": {
+      "rawReportsUnmodified": true,
+      "rawBaselineErrors": [],
+      "rawCandidateErrors": [
+        "baseline environment/protocol mismatch"
+      ],
+      "candidateAbsoluteSampleErrors": [],
+      "environmentAndProtocolFields": [
+        {
+          "field": "environment",
+          "structurallyEqual": true,
+          "orderedJsonEqual": false
+        },
+        {
+          "field": "measurementHash",
+          "structurallyEqual": true,
+          "orderedJsonEqual": true
+        },
+        {
+          "field": "workloadRulesHash",
+          "structurallyEqual": true,
+          "orderedJsonEqual": true
+        },
+        {
+          "field": "farmHarnessHash",
+          "structurallyEqual": true,
+          "orderedJsonEqual": true
+        },
+        {
+          "field": "budgetHash",
+          "structurallyEqual": true,
+          "orderedJsonEqual": true
+        }
+      ],
+      "canonicalComparisonErrors": [],
+      "orderingCaveat": "Existing metrics.cjs hashes JSON.stringify object insertion order. Structural values and all other protocol fields are checked separately; original statuses and every failure remain recorded."
+    }
+  },
+  "limitations": [
+    "Emulator process-family PSS and graphics counters are not iPhone resident memory, hardware GPU utilization, power or temperature.",
+    "Hair geometry simplification is lossy; visual comparison and conservative error limit support this revision, not a guarantee for future asset revisions.",
+    "Five-minute windows do not prove a multi-hour leak-free run. Real TapTap AppID runtime and physical iPhone heat/OOM acceptance remain pending.",
+    "Source GLB, built bundle, graphics texture/buffer and process RAM numbers must not be added together.",
+    "Normal/roughness/ORM textures remain in use; this pass does not claim every appearance allocation is waste."
+  ],
+  "references": [
+    "https://github.com/zeux/meshoptimizer/blob/master/js/README.md",
+    "https://docs.cocos.com/creator/3.8/manual/en/asset/release-manager.html"
+  ]
+}

@@ -1,0 +1,1311 @@
+{
+  "date": "2026-11-13",
+  "status": "v17-moving-hunt-passed-cpu-unchanged-full-baseline-not-approved",
+  "version": "0.3.32",
+  "webBenchmarkVersion": "0.3.31",
+  "scope": "Android emulator Chrome performance and shared Cocos source correctness; not physical TapTap energy/temperature acceptance",
+  "package": {
+    "filename": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-u1-performance-v17\\SwordAndFire_0.3.32_TapTap_guest-test_20261112T180420Z\\SwordAndFire_0.3.32_TapTap_guest-test_20261112T180420Z.zip",
+    "bytes": 219802906,
+    "sha256": "74317b0cf2bef90f74b0d18a745ea1e2483982a4e7b3c579e72037ff22d90631",
+    "loginMode": "guest",
+    "localSaveOnly": true,
+    "offlineMainPackageAudit": {
+      "files": 26,
+      "rawBytes": 5578825,
+      "zipBytes": 1353442,
+      "zipMiB": 1.29,
+      "budgetMiB": 20,
+      "withinLocalBudget": true,
+      "sha256": "2c7016a165445985c95c9269a522780be852a0d3371477a63b5f76de9b39a1f2",
+      "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+    },
+    "actualPlatformFirstPackageBytes": null,
+    "resourcesNeededBeforePlayBytes": null,
+    "buildMode": "guest-test",
+    "uploaded": false,
+    "platformVerified": false,
+    "uploadSettings": "../artifacts/taptap-u1-performance-v17/upload-settings.json"
+  },
+  "source": {
+    "trackedScripts": 199,
+    "generatedResourceTables": 2,
+    "businessScripts": 197,
+    "boundary": "../test-results/performance/v17-source-boundary.json",
+    "snapshot": "../test-results/performance/v17-source-snapshot.json",
+    "unchangedBeforeAndAfterPackage": true,
+    "generatedVersionDifferences": "Excluded generated BuildInfo/TapAuth only; Web0.3.31, guest0.3.32. All199 tracked source files remain byte-identical.",
+    "changedSinceBoundaryAfterTiming": []
+  },
+  "changes": [
+    "Legacy forward pipeline with source/build/runtime guards",
+    "Avoid discarded painted-world camera target rays; reuse collision footprint and LOS objects",
+    "Retain animation evaluator across combat-ready transitions; cache frequently changing numeric glyphs",
+    "Warm native particle and solid projectile shader variants during loading",
+    "Reuse bounded minimap Graphics Path/Point pools and avoid repeated readout activation",
+    "Invalidate stale generated static-mesh caches as well as morph caches; native geometry unchanged",
+    "Release owned native Line models, generated buffers and material instances; prewarm six actual ribbon variants",
+    "Browser-only Cocos3.8.8 RAF timestamp clock compatibility; explicitly excluded from minigame/native/Editor",
+    "Remove minimap navigation readout and proposed top strip; keep map markers and automation position"
+  ],
+  "checks": {
+    "types": true,
+    "taptapConfiguration": true,
+    "rules": {
+      "passed": 140,
+      "failed": 0
+    },
+    "creatorBuild": true,
+    "officialConversion": true,
+    "renderPolicy": true,
+    "packageAudit": true,
+    "zipCRC": "passed by report-taptap.py",
+    "correctness": {
+      "report": "../test-results/performance/world-qa-final-v8/report.json",
+      "status": "passed",
+      "collisionQueries": 31126,
+      "visibilityQueries": 12000,
+      "cameraConfigurations": 1080,
+      "meshIndexErrors": 0,
+      "fogStates": 15,
+      "latestV13": {
+        "report": "../test-results/performance/world-qa-final-v13/report.json",
+        "status": "passed",
+        "collisionQueries": 31126
+      },
+      "latestV14": {
+        "report": "../test-results/performance/world-qa-final-v14/report.json",
+        "status": "passed",
+        "collisionQueries": 31126,
+        "scope": "Movement, visibility, camera, fog buffers, warmup cleanup and native mesh indices",
+        "sourceDrift": []
+      }
+    },
+    "androidGraphicsProbe": {
+      "v7Errors": "../test-results/performance/android-gl-7501.json",
+      "v8Clean": "../test-results/performance/android-gl-7502.json"
+    },
+    "resourceBudgetRules": "Current140 checks and typecheck passed; native fractional triangle estimate preserved without rounding",
+    "workloadGuard": "Driver/compare reject changed enemy, skill, combat and loadout rules; all140 checks passed",
+    "browserClock": {
+      "report": "../test-results/performance/near60-pacer-v14/report.json",
+      "status": "passed",
+      "nativeTicksAndDrawsMatch": true,
+      "minimumOneSecondFPS": [
+        52,
+        57,
+        56
+      ],
+      "publicPauseResume": true,
+      "manualClockInjection": false,
+      "acceptanceBaseline": false,
+      "minigameCompiledNoop": true,
+      "compiledEvidence": "taptap-u1-performance-v14/assets/main/index.dd510.js exports installer returning no-op and installed=false; browser window/RAF adapter eliminated by MINIGAME constant"
+    },
+    "crlfAwareDiffWhitespace": "passed; CRLF recognized without rewriting shared source files",
+    "nativeV16": {
+      "vfx": "../test-results/performance/vfx-resources-v15-qa/report.json",
+      "flatUV": "../test-results/performance/flat-uv-v16-qa/report.json",
+      "uniformIsolation": "../test-results/performance/webgl-resource-v16-ready/actor-uniform-isolation.json",
+      "passed": true
+    },
+    "hostBuildGuard": {
+      "readOnlyMetadataIgnored": true,
+      "contentChangesDetected": true,
+      "idempotentStop": true
+    },
+    "v17Build": {
+      "wrapper": "Startup failed without build completion; original logs preserved",
+      "actual": "Native Creator CLI same generated config completed with exit36; official conversion and ZIP audit passed"
+    }
+  },
+  "performance": {
+    "protocol": "moving-combat-v6",
+    "approvedBaseline": null,
+    "scope": "Historical version comparison includes gameplay changes: V1/V8 stationary ELITE_06 versus V11 pursuing formation and oath-cut, plus shared combat changes. Do not attribute all differences to performance. No approved baseline.",
+    "v8Soak": {
+      "status": "failed",
+      "report": "../test-results/performance/android-clean-v8-soak/report.json",
+      "windows": 40,
+      "errors": [
+        "8-oath-moving-WAR: single rendered frame exceeds 250ms",
+        "9-oath-moving-WAR: single rendered frame exceeds 250ms",
+        "10-oath-moving-WAR: single rendered frame exceeds 250ms",
+        "retained heap grew >12MiB after warmup",
+        "graphics allocation grew >8MiB after warmup"
+      ],
+      "retainedHeapGrowthMiB": 15.6089,
+      "graphicsGrowthMiB": 14.8175,
+      "scope": "Superseded V8 failures preserved; no approved baseline. Retention diagnosis found callback closure chains holding previous maps."
+    },
+    "v11": {
+      "status": "v3 stopped after2windows when user added50FPS and memory budgets; partial report retained as aborted, not a baseline",
+      "regression": "../test-results/performance/android-final-v11-regression/report.json",
+      "soak": "../test-results/performance/android-final-v11-soak/report.json",
+      "sourceBoundary": "../test-results/performance/v11-source-boundary.json",
+      "scope": "No profiler. Same v3 protocol,60FPS,4vCPU host affinity21845; final source after readout removal and callback retention fix. No baseline approval before full gates."
+    },
+    "resourceBudgetV4": {
+      "status": "old-reference run aborted after23windows; identical-current-game control preparing",
+      "firstSmoke": "../test-results/performance/android-budget-v4-smoke/report.json",
+      "firstSmokeResult": "failed: BOW average50.67FPS, minimum1second45FPS; memory observed peak564.33MB; no memory budget failure",
+      "samplingChange": "Batch Chrome PSS into one ADB transaction; preserve all process counters. First sequential reader took median262.5ms, so its failed smoke is retained and cannot be mixed with batched-reader baselines. Measurement harness hash added.",
+      "batchSmoke": "../test-results/performance/android-budget-v4-batch-smoke/report.json",
+      "approvedBaseline": null,
+      "smokeStatus": "passed",
+      "smokePeakProcessMemoryMB": 553.404416,
+      "smokeMinOneSecondFps": {
+        "oath-moving-BOW": 52,
+        "oath-moving-FIR": 53
+      },
+      "measurementHash": "d9f99e83eb11db03cd0b623ba178bdd4a30e03ad9564f04ef62d620ad21a4517",
+      "beforeReport": "../test-results/performance/android-budget-v4-before/report.json",
+      "candidateReport": "../test-results/performance/android-budget-v4-regression/report.json",
+      "soakReport": "../test-results/performance/android-budget-v4-soak/report.json",
+      "scope": "All three runs use the same versioned1-second batch-PSS collector and50FPS/1000MB budget; no old-protocol comparison or baseline approval."
+    },
+    "currentEngineControl": {
+      "status": "same-game matched smokes completed; candidate failed50FPS floor",
+      "provenance": "../test-results/performance/current-crp-control-provenance.json",
+      "url": "http://127.0.0.1:7507/",
+      "serverPid": 73508,
+      "project": "temp/performance-current-crp-control-v11",
+      "build": "build/concept-2d-performance-current-crp-control-v2",
+      "renderingCustomPipeline": true,
+      "sourceScriptsMatching": 197,
+      "compiledGameMainIdentical": true,
+      "nativeResourceFilesIdentical": 1401,
+      "mainSha256": "f3b4b824c56d64544c90f25341a2f52e9d10eacb58aea0ff2ffa13be89d24ce3",
+      "worldQa": "world-qa-current-crp-control-v2 passed31126 movement/collision,12000LOS,1080cameras,15fog states; need native smoke verification",
+      "scope": "This isolates pipeline overhead using identical current gameplay and art; not cumulative attribution of all optimizations.",
+      "smokeSummary": {
+        "control": "android-current-crp-control-smoke/report.json",
+        "candidate": "android-current-legacy-candidate-smoke/report.json",
+        "workloadHash": "292b10a98cac0b86bb5c67f2b01a495fc0812dd8d9a8b94e37ce6b13686a2770",
+        "environmentFingerprint": "47b63a816cd23b18ff796f42113670d264dd124cab6242cafdbe184668ec98ad",
+        "sourceAndRulesControlled": true,
+        "scope": "Short-only: mainCPU/frame lower14.5-17.7%, coreload lower13-15%, but FPS gates fail. No baseline approval or longtest completion."
+      }
+    },
+    "hostTimerDiagnostic": {
+      "status": "complete, all minimum1secondFPS failed; default timer restored, not adopted",
+      "scope": "Owned emulator environment diagnosis only, not gameCPU/power gain; reports excludeapprovedbaseline",
+      "originalTimerMasks": [
+        0,
+        0
+      ],
+      "honorTimerMasks": [
+        4,
+        0
+      ],
+      "nativeRoundTripVerified": true,
+      "script": "../temp/android-timer-abba.ps1",
+      "queryTool": "../tools/performance/Set-AndroidTimerPolicy.ps1",
+      "restoreRequired": false
+    },
+    "environmentRecovery": {
+      "beforeEmptyWebGLFPS": 34.987468671679196,
+      "afterEmptyWebGLFPS": 59.99220101386818,
+      "report": "../test-results/performance/emulator-refresh-control-v2-gles/report.json",
+      "changes": [
+        "Cold restart dedicated AVD",
+        "Official -feature -Vulkan compatibility workaround; retain hardware GLES/WebGL",
+        "Disable crashing Bluetooth inside dedicated AVD only; original setting1 saved for restore"
+      ],
+      "scope": "Multiple environment changes; not attributed to game code or solely to Vulkan"
+    },
+    "finalV5": {
+      "status": "completed failed; deterministic metric correction stored separately",
+      "sequence": "../test-results/performance/android-gles-v5-sequence.json",
+      "soak": "../test-results/performance/android-gles-v5-soak/report.json",
+      "control": "../test-results/performance/android-gles-v5-control/report.json",
+      "candidate": "../test-results/performance/android-gles-v5-candidate/report.json",
+      "legalHealing": "Normal health-potion button input with3initial bottles, action/5secondcooldown and actual damage; no stats/inventory replenishment",
+      "previousV4": "Partial control aborted because stationary WAR died; invalid as baseline; all failures preserved",
+      "soakResult": {
+        "status": "failed",
+        "windows": 40,
+        "measuredSeconds": 1201.7001654,
+        "peakProcessMemoryMB": 545.975296,
+        "minimumOneSecondFPS": 46,
+        "minimumAverageFPS": 59.17727150775142,
+        "errors": [
+          "2-oath-moving-WAR: 1-second FPS below floor 50",
+          "3-oath-moving-WAR: 1-second FPS below floor 50",
+          "graphics allocation grew >8MiB after warmup"
+        ],
+        "retainedHeapGrowthMiB": 7.516548156738281,
+        "graphicsGrowthMiB": 13.487340927124023,
+        "interpretation": "Memory absolute userbudgets pass, no late CPU failure; two early WAR FPS windows and graphics growth fail. No approved baseline."
+      },
+      "controlResult": {
+        "status": "failed",
+        "windows": 33,
+        "peakProcessMemoryMB": 572.2112,
+        "errors": [
+          "1-oath-moving-WAR: 1-second FPS below floor 50",
+          "1-oath-moving-THU: 1-second FPS below floor 50",
+          "1-oath-moving-THU: p99 exceeds 80ms",
+          "1-oath-moving-THU: single rendered frame exceeds 250ms",
+          "2-quarry-run: 1-second FPS below floor 50",
+          "2-oath-stationary-THU: 1-second FPS below floor 50",
+          "2-oath-stationary-THU: single rendered frame exceeds 250ms",
+          "2-oath-stationary-BOW: 1-second FPS below floor 50",
+          "2-oath-stationary-BOW: single rendered frame exceeds 250ms",
+          "3-oath-moving-WAR: 1-second FPS below floor 50",
+          "3-oath-moving-THU: 1-second FPS below floor 50"
+        ],
+        "beforeReferenceErrors": [],
+        "nativeGraphicsErrors": [],
+        "measurementHash": "bb60dee17c7422b44a0bed3f073be3f75f5f1941d3046102fb1c410dbda83340",
+        "workloadHash": "f5fd1c0feb57361c2e75c236e979fe59ef0887a8d99cdec6f75e793511cfd153"
+      },
+      "correctedReports": {
+        "control": "../test-results/performance/android-gles-v5-control-windowfix/report.json",
+        "candidate": "../test-results/performance/android-gles-v5-candidate-windowfix/report.json",
+        "soak": "../test-results/performance/android-gles-v5-soak-windowfix/report.json"
+      }
+    },
+    "lineLifecycleFix": {
+      "build": "concept-2d-performance-v13",
+      "sourceBoundary": "../test-results/performance/v13-source-boundary.json",
+      "scriptsTracked": 198,
+      "trackedResourceGenerators": [
+        "ResourcePacks.ts",
+        "NativeTextureReuse.ts"
+      ],
+      "generatedVersionAuthExcluded": [
+        "BuildInfo.ts",
+        "TapAuthConfig.ts"
+      ],
+      "nativeQA": "../test-results/performance/managed-line-v13-qa/report.json",
+      "nativeQAStatus": "passed6variants byteexact vertices +ownedbufferdisposal +no residualwarmup +clean nativeGL",
+      "lifetimeComparison": "../test-results/performance/managed-line-lifecycle-comparison.json",
+      "oldGenerationalLineBuffers": [
+        764,
+        0
+      ],
+      "secondCycleGraphicsBufferGrowthBytes": [
+        1330388,
+        152888
+      ],
+      "scope": "Instrumented lifecycle diagnosis only; repeated cached asset buffers remain valid; V13 includes shared-workspace suppliesHUD changes. No timingbaseline approval."
+    },
+    "v13": {
+      "status": "33regression passed,20minute soak failed only1secondFPS; heap/gfx/memory/lateCPU/nativegraphics gates pass",
+      "sequence": "../test-results/performance/android-v13-sequence.json",
+      "regression": "../test-results/performance/android-v13-regression/report.json",
+      "soak": "../test-results/performance/android-v13-soak/report.json",
+      "before": "../test-results/performance/android-gles-v5-control-windowfix/report.json",
+      "measurementHash": "bab295b3149e1d7ab0bb169af11c96f5893a12715ca76bc0d1724ec3b41fbb93",
+      "scope": "Application-version comparison; same actual gameplayrules and sampler, with corrected deterministic FPSanalysis and documented raw-data lineage. No physicalpowerclaims.",
+      "regressionResult": {
+        "status": "passed",
+        "windows": 33,
+        "minimumAverageFPS": 59.09966452022979,
+        "minimumOneSecondFPS": 50,
+        "peakMemoryMB": 560.142336,
+        "errors": [],
+        "movingMainCPUChangePercent": {
+          "oath-moving-WAR": -20.795469739695804,
+          "oath-moving-BOW": -20.231204966776872,
+          "oath-moving-FIR": -25.085146645138522,
+          "oath-moving-THU": -27.454673899680206
+        },
+        "movingCoreCPUChangePercent": {
+          "oath-moving-WAR": -18.68385860267059,
+          "oath-moving-BOW": -20.81409682997255,
+          "oath-moving-FIR": -19.65684389836958,
+          "oath-moving-THU": -24.75552970612547
+        }
+      },
+      "soakResult": {
+        "status": "failed",
+        "windows": 40,
+        "minimumOneSecondFPS": 44,
+        "peakMemoryMB": 549.545984,
+        "errors": [
+          "1-oath-moving-WAR: 1-second FPS below floor 50",
+          "2-oath-moving-FIR: 1-second FPS below floor 50",
+          "2-oath-moving-WAR: 1-second FPS below floor 50",
+          "3-oath-moving-BOW: 1-second FPS below floor 50",
+          "3-oath-moving-FIR: 1-second FPS below floor 50",
+          "3-oath-moving-THU: 1-second FPS below floor 50",
+          "4-oath-moving-BOW: 1-second FPS below floor 50",
+          "4-oath-moving-WAR: 1-second FPS below floor 50",
+          "7-oath-moving-FIR: 1-second FPS below floor 50",
+          "8-oath-moving-BOW: 1-second FPS below floor 50",
+          "9-oath-moving-WAR: 1-second FPS below floor 50",
+          "10-oath-moving-THU: 1-second FPS below floor 50",
+          "10-oath-moving-WAR: 1-second FPS below floor 50"
+        ],
+        "heapGrowthMiB": 7.136493682861328,
+        "graphicsGrowthMiB": 4.948652267456055,
+        "nativeGraphicsErrors": []
+      }
+    },
+    "webClockAttribution": {
+      "passive": "../test-results/performance/near60-pacer-v13/report.json",
+      "passiveStatus": "nativeRAF59.6-59.9FPS, minimum53-58; engine56.3-57.1FPS, minimum47-52; lost75-108callbacks beforeupdate, ticks==draws",
+      "ABBA": "../test-results/performance/raf-clock-abba-v13/report.json",
+      "ABBAStatus": "completed; mappedclock0/0missedcallbacks,min56/56; originalclock41/5missed,min52/53; target60unchanged; nativeGLclean; clockrestored",
+      "fixScope": "Optional browser-only Creator3.8.8 Pacer clock-origin compatibility. MiniGame/native/editor skipped, ordinaryfallback on shape mismatch. Cocos originallimiter/target/callback/cancel/scheduling retained. No game-energy claim from webclock repair."
+    },
+    "historicalTopLevelV8": {
+      "status": "regression-failed-soak-running",
+      "referenceProvenance": "../test-results/performance/repaired-reference-provenance.json",
+      "resourceDiff": "../test-results/performance/v1-v8-resource-diff.json",
+      "sequence": "../test-results/performance/clean-v8-final-sequence.json",
+      "regression": "../test-results/performance/android-clean-v8-regression/report.json",
+      "soak": "../test-results/performance/android-clean-v8-soak/report.json",
+      "nativeUi": "startup and each round; requires unobstructed Chrome, real device screenshot and native hierarchy",
+      "reference": "../test-results/performance/android-clean-v8-before/report.json",
+      "referenceStatus": "failed",
+      "regressionStatus": "failed",
+      "windowsBefore": 33,
+      "windowsAfter": 33,
+      "framesBefore": 30176,
+      "framesAfter": 36945,
+      "nativeGraphicsErrorsBefore": 0,
+      "nativeGraphicsErrorsAfter": 0,
+      "regressionErrors": [
+        "1-oath-run: FPS below absolute floor 45",
+        "1-oath-run: p99 exceeds 80ms",
+        "1-oath-run: single rendered frame exceeds 250ms",
+        "1-oath-stationary-WAR: single rendered frame exceeds 250ms",
+        "1-oath-moving-WAR: single rendered frame exceeds 250ms",
+        "1-quarry-run: FPS below absolute floor 45",
+        "1-quarry-run: p99 exceeds 80ms",
+        "1-quarry-run: single rendered frame exceeds 250ms",
+        "2-oath-stationary-FIR: single rendered frame exceeds 250ms",
+        "2-oath-stationary-BOW: single rendered frame exceeds 250ms",
+        "oath-run: repeated >100ms stalls increased",
+        "oath-stationary-WAR: repeated >100ms stalls increased",
+        "oath-stationary-BOW: repeated >100ms stalls increased",
+        "oath-stationary-FIR: repeated >100ms stalls increased",
+        "oath-moving-WAR: repeated >100ms stalls increased",
+        "quarry-run: repeated >100ms stalls increased"
+      ],
+      "comparison": {
+        "oath-idle": {
+          "before": {
+            "windows": 3,
+            "fps": 53.339065106066684,
+            "p95Ms": 33.5,
+            "p99Ms": 41.09999999962747,
+            "over33Ratio": 0.041121495327102804,
+            "mainThreadMsPerFrame": 5.393433644859836,
+            "processCpuSeconds": 29.639999999999997,
+            "drawCalls": 200,
+            "triangles": 200400,
+            "corePercent": 147.7729811552206,
+            "maxMs": 125.3999999994412,
+            "over100Count": 3,
+            "hits": 0
+          },
+          "after": {
+            "windows": 3,
+            "fps": 59.900984870029426,
+            "p95Ms": 19.299999999813735,
+            "p99Ms": 20.90000000037253,
+            "over33Ratio": 0,
+            "mainThreadMsPerFrame": 4.011751666666683,
+            "processCpuSeconds": 20.509999999999962,
+            "drawCalls": 200,
+            "triangles": 200522,
+            "corePercent": 102.34877922957122,
+            "maxMs": 115.70000000018626,
+            "over100Count": 1,
+            "hits": 0
+          },
+          "fpsChangePercent": 12.302277422587228,
+          "mainThreadChangePercent": -25.617854398003992,
+          "coreLoadChangePercent": -30.739179497188218
+        },
+        "oath-run": {
+          "before": {
+            "windows": 3,
+            "fps": 48.26704817446819,
+            "p95Ms": 37.60000000055879,
+            "p99Ms": 45.59999999962747,
+            "over33Ratio": 0.09504132231404959,
+            "mainThreadMsPerFrame": 6.14385520833333,
+            "processCpuSeconds": 28.91999999999998,
+            "drawCalls": 200,
+            "triangles": 199969,
+            "corePercent": 144.0300672626394,
+            "maxMs": 172.29999999981374,
+            "over100Count": 3,
+            "hits": 0
+          },
+          "after": {
+            "windows": 3,
+            "fps": 57.80742751825184,
+            "p95Ms": 24,
+            "p99Ms": 34.09999999962747,
+            "over33Ratio": 0.009490940465918895,
+            "mainThreadMsPerFrame": 5.190677308024162,
+            "processCpuSeconds": 28.96,
+            "drawCalls": 200,
+            "triangles": 200771,
+            "corePercent": 144.44375331566636,
+            "maxMs": 886,
+            "over100Count": 7,
+            "hits": 0
+          },
+          "fpsChangePercent": 19.765823071049592,
+          "mainThreadChangePercent": -15.514328837312252,
+          "coreLoadChangePercent": 0.28722200918827046
+        },
+        "oath-stationary-WAR": {
+          "before": {
+            "windows": 3,
+            "fps": 44.73338944772153,
+            "p95Ms": 39.09999999962747,
+            "p99Ms": 53.59999999962747,
+            "over33Ratio": 0.11817168338907469,
+            "mainThreadMsPerFrame": 6.185281390134522,
+            "processCpuSeconds": 28.330000000000055,
+            "drawCalls": 197,
+            "triangles": 202577,
+            "corePercent": 141.39079814711292,
+            "maxMs": 190,
+            "over100Count": 9,
+            "hits": 122
+          },
+          "after": {
+            "windows": 3,
+            "fps": 54.16318210621781,
+            "p95Ms": 27.40000000037253,
+            "p99Ms": 52.5,
+            "over33Ratio": 0.02857142857142857,
+            "mainThreadMsPerFrame": 5.478636866359446,
+            "processCpuSeconds": 28.220000000000002,
+            "drawCalls": 200,
+            "triangles": 201606,
+            "corePercent": 140.87419345967436,
+            "maxMs": 262.20000000018626,
+            "over100Count": 11,
+            "hits": 120
+          },
+          "fpsChangePercent": 21.079986951394723,
+          "mainThreadChangePercent": -11.42461400223712,
+          "coreLoadChangePercent": -0.36537362700297393
+        },
+        "oath-stationary-BOW": {
+          "before": {
+            "windows": 3,
+            "fps": 45.567059193432584,
+            "p95Ms": 39.5,
+            "p99Ms": 48.90000000037253,
+            "over33Ratio": 0.12786885245901639,
+            "mainThreadMsPerFrame": 6.167289532293997,
+            "processCpuSeconds": 28.43999999999992,
+            "drawCalls": 208,
+            "triangles": 208554,
+            "corePercent": 141.81024234846748,
+            "maxMs": 170.3999999994412,
+            "over100Count": 3,
+            "hits": 66
+          },
+          "after": {
+            "windows": 3,
+            "fps": 58.69214119503638,
+            "p95Ms": 22.5,
+            "p99Ms": 30.90000000037253,
+            "over33Ratio": 0.0050933786078098476,
+            "mainThreadMsPerFrame": 4.7717660472972865,
+            "processCpuSeconds": 27.95,
+            "drawCalls": 210,
+            "triangles": 208610,
+            "corePercent": 139.2568205773571,
+            "maxMs": 761.9000000003725,
+            "over100Count": 8,
+            "hits": 70
+          },
+          "fpsChangePercent": 28.80388208922524,
+          "mainThreadChangePercent": -22.627825038686467,
+          "coreLoadChangePercent": -1.800590513649858
+        },
+        "oath-stationary-FIR": {
+          "before": {
+            "windows": 3,
+            "fps": 44.43040866835593,
+            "p95Ms": 40.299999999813735,
+            "p99Ms": 48.69999999925494,
+            "over33Ratio": 0.14819004524886878,
+            "mainThreadMsPerFrame": 6.170233480176214,
+            "processCpuSeconds": 28.390000000000008,
+            "drawCalls": 208,
+            "triangles": 193159,
+            "corePercent": 141.56894524069867,
+            "maxMs": 124.79999999981374,
+            "over100Count": 3,
+            "hits": 87
+          },
+          "after": {
+            "windows": 3,
+            "fps": 56.736750213874636,
+            "p95Ms": 26.59999999962747,
+            "p99Ms": 39.5,
+            "over33Ratio": 0.015817223198594025,
+            "mainThreadMsPerFrame": 5.618757469244287,
+            "processCpuSeconds": 30.46,
+            "drawCalls": 199,
+            "triangles": 193245,
+            "corePercent": 151.9859810047163,
+            "maxMs": 910.2999999998137,
+            "over100Count": 8,
+            "hits": 94
+          },
+          "fpsChangePercent": 27.69801564819612,
+          "mainThreadChangePercent": -8.937684654944,
+          "coreLoadChangePercent": 7.3582774430553055
+        },
+        "oath-stationary-THU": {
+          "before": {
+            "windows": 3,
+            "fps": 45.335049581656975,
+            "p95Ms": 40,
+            "p99Ms": 49.5,
+            "over33Ratio": 0.13091309130913092,
+            "mainThreadMsPerFrame": 6.1721408140814145,
+            "processCpuSeconds": 28.589999999999975,
+            "drawCalls": 199,
+            "triangles": 193111,
+            "corePercent": 142.49207961588198,
+            "maxMs": 162.29999999981374,
+            "over100Count": 3,
+            "hits": 81
+          },
+          "after": {
+            "windows": 3,
+            "fps": 56.17498056046061,
+            "p95Ms": 24.199999999254942,
+            "p99Ms": 34.09999999962747,
+            "over33Ratio": 0.008912655971479501,
+            "mainThreadMsPerFrame": 5.15177272727273,
+            "processCpuSeconds": 28.61999999999999,
+            "drawCalls": 198,
+            "triangles": 193294,
+            "corePercent": 142.732063858465,
+            "maxMs": 175.8999999994412,
+            "over100Count": 4,
+            "hits": 79
+          },
+          "fpsChangePercent": 23.910707231672657,
+          "mainThreadChangePercent": -16.531834213515808,
+          "coreLoadChangePercent": 0.16841935581961565
+        },
+        "oath-moving-WAR": {
+          "before": {
+            "windows": 3,
+            "fps": 42.27773177190369,
+            "p95Ms": 40.30000000074506,
+            "p99Ms": 56.799999999813735,
+            "over33Ratio": 0.16136631330977622,
+            "mainThreadMsPerFrame": 7.40312367491166,
+            "processCpuSeconds": 29.679999999999964,
+            "drawCalls": 185,
+            "triangles": 201318,
+            "corePercent": 147.92031070362216,
+            "maxMs": 223.09999999962747,
+            "over100Count": 8,
+            "hits": 120
+          },
+          "after": {
+            "windows": 3,
+            "fps": 56.01194400090435,
+            "p95Ms": 25,
+            "p99Ms": 41.39999999944121,
+            "over33Ratio": 0.020353982300884955,
+            "mainThreadMsPerFrame": 5.663830810329479,
+            "processCpuSeconds": 29.61999999999999,
+            "drawCalls": 189,
+            "triangles": 202211,
+            "corePercent": 147.73586654557315,
+            "maxMs": 263,
+            "over100Count": 11,
+            "hits": 132
+          },
+          "fpsChangePercent": 32.48568845438378,
+          "mainThreadChangePercent": -23.494040366723112,
+          "coreLoadChangePercent": -0.12469157019185939
+        },
+        "oath-moving-BOW": {
+          "before": {
+            "windows": 3,
+            "fps": 43.91582989356319,
+            "p95Ms": 41.299999999813735,
+            "p99Ms": 50.200000000186265,
+            "over33Ratio": 0.14074914869466515,
+            "mainThreadMsPerFrame": 6.608543700340516,
+            "processCpuSeconds": 29.35,
+            "drawCalls": 217,
+            "triangles": 208476,
+            "corePercent": 146.2339018085339,
+            "maxMs": 201.3999999994412,
+            "over100Count": 3,
+            "hits": 81
+          },
+          "after": {
+            "windows": 3,
+            "fps": 58.24060361160974,
+            "p95Ms": 22.700000000186265,
+            "p99Ms": 32.09999999962747,
+            "over33Ratio": 0.006003430531732418,
+            "mainThreadMsPerFrame": 5.189608919382507,
+            "processCpuSeconds": 28.090000000000018,
+            "drawCalls": 209,
+            "triangles": 208643,
+            "corePercent": 140.1603712073328,
+            "maxMs": 173.09999999962747,
+            "over100Count": 4,
+            "hits": 83
+          },
+          "fpsChangePercent": 32.618702077963356,
+          "mainThreadChangePercent": -21.471217340741756,
+          "coreLoadChangePercent": -4.15329860318796
+        },
+        "oath-moving-FIR": {
+          "before": {
+            "windows": 3,
+            "fps": 44.328749566105515,
+            "p95Ms": 39.799999999813735,
+            "p99Ms": 50.90000000037253,
+            "over33Ratio": 0.14173228346456693,
+            "mainThreadMsPerFrame": 6.496556805399331,
+            "processCpuSeconds": 28.68000000000002,
+            "drawCalls": 205,
+            "triangles": 193619,
+            "corePercent": 142.84955617504264,
+            "maxMs": 132.5,
+            "over100Count": 3,
+            "hits": 27
+          },
+          "after": {
+            "windows": 3,
+            "fps": 57.59284793049691,
+            "p95Ms": 24.700000000186265,
+            "p99Ms": 32.5,
+            "over33Ratio": 0.008665511265164644,
+            "mainThreadMsPerFrame": 5.543347487001737,
+            "processCpuSeconds": 30.060000000000002,
+            "drawCalls": 192,
+            "triangles": 193777,
+            "corePercent": 150.02088464391136,
+            "maxMs": 141.20000000018626,
+            "over100Count": 3,
+            "hits": 33
+          },
+          "fpsChangePercent": 29.92211261139055,
+          "mainThreadChangePercent": -14.672531110716601,
+          "coreLoadChangePercent": 5.02019653465442
+        },
+        "oath-moving-THU": {
+          "before": {
+            "windows": 3,
+            "fps": 46.34870323280665,
+            "p95Ms": 39.40000000037253,
+            "p99Ms": 47.799999999813735,
+            "over33Ratio": 0.11612903225806452,
+            "mainThreadMsPerFrame": 6.306924812030075,
+            "processCpuSeconds": 29.539999999999964,
+            "drawCalls": 196,
+            "triangles": 193586,
+            "corePercent": 147.17174248338867,
+            "maxMs": 133.1000000005588,
+            "over100Count": 3,
+            "hits": 12
+          },
+          "after": {
+            "windows": 3,
+            "fps": 58.90649905578022,
+            "p95Ms": 22.799999999813735,
+            "p99Ms": 29.299999999813735,
+            "over33Ratio": 0.004191114836546521,
+            "mainThreadMsPerFrame": 5.1850770533446235,
+            "processCpuSeconds": 28.059999999999953,
+            "drawCalls": 194,
+            "triangles": 193767,
+            "corePercent": 139.95904856098142,
+            "maxMs": 122,
+            "over100Count": 2,
+            "hits": 10
+          },
+          "fpsChangePercent": 27.094168654291238,
+          "mainThreadChangePercent": -17.787555617368312,
+          "coreLoadChangePercent": -4.900868740628894
+        },
+        "quarry-run": {
+          "before": {
+            "windows": 3,
+            "fps": 45.60270799058343,
+            "p95Ms": 38.700000000186265,
+            "p99Ms": 47.5,
+            "over33Ratio": 0.13867822318526543,
+            "mainThreadMsPerFrame": 6.3833118161925535,
+            "processCpuSeconds": 28.580000000000002,
+            "drawCalls": 203,
+            "triangles": 202614,
+            "corePercent": 142.59577618937357,
+            "maxMs": 125.29999999981374,
+            "over100Count": 3,
+            "hits": 0
+          },
+          "after": {
+            "windows": 3,
+            "fps": 55.20292698186173,
+            "p95Ms": 29.299999999813735,
+            "p99Ms": 43.90000000037253,
+            "over33Ratio": 0.02710027100271003,
+            "mainThreadMsPerFrame": 5.549441734417342,
+            "processCpuSeconds": 30.380000000000024,
+            "drawCalls": 206,
+            "triangles": 203230,
+            "corePercent": 151.4963795581717,
+            "maxMs": 977.6000000005588,
+            "over100Count": 7,
+            "hits": 0
+          },
+          "fpsChangePercent": 21.05186164220918,
+          "mainThreadChangePercent": -13.063282913109974,
+          "coreLoadChangePercent": 6.241842224679739
+        }
+      }
+    },
+    "status": "routine-moving-hunt-passed; full-suite historical failures retained",
+    "sequence": "../test-results/performance/android-v6b-v16-sequence.json",
+    "regression": "../test-results/performance/android-v6b-v16-regression/report.json",
+    "soak": "../test-results/performance/android-v6b-v16-soak/report.json",
+    "before": "../test-results/performance/android-v6b-v16-control/report.json",
+    "v14": {
+      "status": "failed-performance-acceptance",
+      "regression": {
+        "status": "failed",
+        "windows": 33,
+        "minimumAverageFPS": 56.275455382805895,
+        "minimumOneSecondFPS": 44,
+        "peakMemoryMB": 566.64576,
+        "errors": [
+          "2-oath-moving-WAR: 1-second FPS below floor 50",
+          "2-oath-stationary-THU: 1-second FPS below floor 50",
+          "oath-stationary-WAR: drawCalls regression 192.00 -> 224.00"
+        ],
+        "nativeGraphicsErrors": [],
+        "measurementHash": "bab295b3149e1d7ab0bb169af11c96f5893a12715ca76bc0d1724ec3b41fbb93"
+      },
+      "soak": {
+        "status": "failed",
+        "windows": 40,
+        "minimumAverageFPS": 55.431606448921734,
+        "minimumOneSecondFPS": 46,
+        "peakMemoryMB": 559.177728,
+        "errors": [
+          "3-oath-moving-BOW: 1-second FPS below floor 50",
+          "3-oath-moving-FIR: 1-second FPS below floor 50",
+          "3-oath-moving-THU: 1-second FPS below floor 50",
+          "7-oath-moving-WAR: 1-second FPS below floor 50"
+        ],
+        "nativeGraphicsErrors": [],
+        "measurementHash": "bab295b3149e1d7ab0bb169af11c96f5893a12715ca76bc0d1724ec3b41fbb93"
+      },
+      "retainedMemory": {
+        "heapGrowthMiB": 9.002986907958984,
+        "graphicsGrowthMiB": 4.964921951293945,
+        "processPssGrowthMiB": 20.333984375
+      },
+      "movingCPUChanges": {
+        "oath-moving-WAR": {
+          "mainThreadPercent": -20.640145565939783,
+          "coreLoadPercent": -7.309267478042624
+        },
+        "oath-moving-BOW": {
+          "mainThreadPercent": -18.93312886074494,
+          "coreLoadPercent": -6.604741329268327
+        },
+        "oath-moving-FIR": {
+          "mainThreadPercent": -26.02445615608059,
+          "coreLoadPercent": -18.704806520894845
+        },
+        "oath-moving-THU": {
+          "mainThreadPercent": -30.2162873725884,
+          "coreLoadPercent": -26.45656316033238
+        }
+      },
+      "approvedBaseline": null,
+      "scope": "Same-gameplay application-version comparison to current CRP control, emulator Chrome only. Includes browser-specific compatibility and concurrent HUD changes. No physical energy inference.",
+      "observationalProbes": "After first3failed soak FPSwindows, one Android top+hostCPUdelta snapshot and2 SurfaceFlinger --list queries; unchanged game/harness. Rawprobes in temp/v14-soak-*.txt. No approved baseline.",
+      "extendedDiagnostic": {
+        "report": "../test-results/performance/near60-pacer-v14-extended/report.json",
+        "status": "complete",
+        "diagnosticOnly": true,
+        "windows": 12,
+        "extraSkippedFrames": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "nativeMinima": [
+          49,
+          57,
+          58,
+          57,
+          54,
+          57,
+          56,
+          58,
+          47,
+          58,
+          57,
+          58
+        ],
+        "drawMinima": [
+          49,
+          57,
+          58,
+          57,
+          53,
+          57,
+          56,
+          57,
+          47,
+          58,
+          57,
+          58
+        ],
+        "largestNativeGapMs": 152.90000000037253,
+        "nativeGraphicsErrors": [],
+        "peakMemoryMB": 553.887744,
+        "interpretation": "Remaining49/47FPS dips also occurred in nativeRAF delivery, with zero additional engine tick/draw losses. Does not identify host versus game rendering/compositor blocking. No approved baseline.",
+        "longTaskLimitation": "No corresponding >=50ms longtask entries recorded; support flag not recorded. Does not exclude all script/render blocking."
+      },
+      "additionalRenderDiagnostic": {
+        "scope": "Post-V14 targeted WAR render attribution; no source or acceptance harness changes",
+        "qemuPid": 69884,
+        "qemuCreated": "2026-11-12T22:16:03.104442+08:00",
+        "serial": "emulator-5556",
+        "originalAffinity": 16777215,
+        "testAffinity": 21845,
+        "timerControlMask": 0,
+        "timerStateMask": 0,
+        "bluetoothAtNewBoot": 0,
+        "bluetoothDuringTest": 0,
+        "processSession": 63804,
+        "report": "war-render-trace-v14/report.json",
+        "status": "running",
+        "started": "2026-11-12T14:16:03Z"
+      }
+    },
+    "v16": {
+      "status": "v16-soak-passed-full-regression-failed",
+      "protocol": "moving-combat-v6",
+      "measurementHash": "181365cbcfea366fa143506ba74f713eb12b1e0bd1567a1698d06e55846278b1",
+      "sourceBoundary": "../test-results/performance/v16-source-boundary.json",
+      "sourceSnapshot": "../test-results/performance/v16-source-snapshot.json",
+      "nativeVfxQA": "../test-results/performance/vfx-resources-v15-qa/report.json",
+      "nativeFlatUVQA": "../test-results/performance/flat-uv-v16-qa/report.json",
+      "actorUniformIsolation": "../test-results/performance/webgl-resource-v16-ready/actor-uniform-isolation.json",
+      "types": "passed",
+      "rules": 140,
+      "sourceChanges": [
+        "Effects.ts material-affine ribbon pools with existing160cap",
+        "SkillFireSprites.ts owned native dynamic meshes for exact5 wake stages",
+        "FlatActors.ts fixed body quads and per-actor unlit UV uniforms"
+      ],
+      "optimizationBefore": "FrozenV14 Legacy: same gameplay, pipeline and previewclock; freshV6 reference required",
+      "approvedBaseline": null,
+      "sequence": "../test-results/performance/android-v6b-v16-sequence.json",
+      "acceptanceOrder": "40window20minutesoak, then33reference/33candidate; stop ifsoakfails",
+      "packageStatus": "0.3.29 official conversion, ZIP CRC/SHA256 and source-boundary checks passed; no upload",
+      "packageAudit": "../artifacts/taptap-u1-performance-v16/report.json",
+      "smoke": {
+        "report": "../test-results/performance/android-v6-v16-smoke/report.json",
+        "status": "passed",
+        "minimumOneSecondFps": [
+          58,
+          59
+        ],
+        "sampledPeakMB": 526.086144
+      },
+      "firstV6Series": {
+        "sequence": "../test-results/performance/android-v6-v16-sequence.json",
+        "status": "aborted-sampler-integer-assumption",
+        "reason": "NativeCocos3.8.8 WebGL2 numTris can be fractional indexCount/3; preserved raw THU counter198780.33333333334. No FPS/memory/CPU budget change.",
+        "measurementHash": "cf4957d75f74ba19191d0905e94fa4d5a4cbcd0b3f48dd6bdde6614a94b50d96"
+      },
+      "soak": {
+        "status": "passed",
+        "windows": 40,
+        "minimumOneSecondFps": 57,
+        "peakMB": 548.78208,
+        "retainedGrowth": {
+          "heapMiB": 8.648185729980469,
+          "gfxMiB": 3.452207565307617,
+          "pssMiB": 40.8466796875
+        },
+        "nativeErrors": []
+      },
+      "acceptanceSummary": "../test-results/performance/v16-v6-acceptance-summary.json",
+      "regression": {
+        "status": "failed",
+        "windows": 33,
+        "minimumOneSecondFps": 1,
+        "peakMB": 566.29248,
+        "failedWindows": [
+          {
+            "id": "oath-idle",
+            "round": 1,
+            "minOneSecondFps": 39,
+            "maxMs": 125.60000000009313,
+            "validation": [
+              "1-second FPS below floor 50"
+            ]
+          },
+          {
+            "id": "oath-run",
+            "round": 1,
+            "minOneSecondFps": 1,
+            "maxMs": 989.5999999996275,
+            "validation": [
+              "1-second FPS below floor 50",
+              "single rendered frame exceeds 250ms"
+            ]
+          },
+          {
+            "id": "oath-moving-BOW",
+            "round": 2,
+            "minOneSecondFps": 47,
+            "maxMs": 64,
+            "validation": [
+              "1-second FPS below floor 50"
+            ]
+          },
+          {
+            "id": "oath-stationary-WAR",
+            "round": 3,
+            "minOneSecondFps": 25,
+            "maxMs": 148.60000000009313,
+            "validation": [
+              "1-second FPS below floor 50"
+            ]
+          },
+          {
+            "id": "oath-stationary-BOW",
+            "round": 3,
+            "minOneSecondFps": 4,
+            "maxMs": 695.6999999997206,
+            "validation": [
+              "1-second FPS below floor 50",
+              "single rendered frame exceeds 250ms"
+            ]
+          }
+        ],
+        "errors": [
+          "1-oath-idle: 1-second FPS below floor 50",
+          "1-oath-run: 1-second FPS below floor 50",
+          "1-oath-run: single rendered frame exceeds 250ms",
+          "2-oath-moving-BOW: 1-second FPS below floor 50",
+          "3-oath-stationary-WAR: 1-second FPS below floor 50",
+          "3-oath-stationary-BOW: 1-second FPS below floor 50",
+          "3-oath-stationary-BOW: single rendered frame exceeds 250ms",
+          "oath-run: repeated >100ms stalls increased",
+          "oath-stationary-BOW: repeated >100ms stalls increased"
+        ],
+        "nativeErrors": []
+      }
+    },
+    "historicalTopLevelV14": {
+      "protocol": "moving-combat-v5",
+      "status": "v14-full-acceptance-failed",
+      "sequence": "../test-results/performance/android-v14-sequence.json",
+      "regression": "../test-results/performance/android-v14-regression/report.json",
+      "soak": "../test-results/performance/android-v14-soak/report.json",
+      "before": "../test-results/performance/android-gles-v5-control-windowfix/report.json"
+    },
+    "v17": {
+      "webVersion": "0.3.31",
+      "sourceBoundary": "test-results/performance/v17-source-boundary.json",
+      "runtimeChanges": [
+        "Automation builds views only for equipped skills",
+        "Skip discarded manual auto-aim while automation owns input",
+        "Avoid unchanged automation HUD refresh",
+        "Avoid identical minimap transforms and reuse camera orientation scratch values",
+        "Avoid duplicate pickup notice animation and transforms"
+      ],
+      "checks": {
+        "typecheck": "passed",
+        "rules": 140
+      },
+      "nativeAutoCpuABBA": {
+        "scope": "H12 Lv17 BOW native automation only; not moving combat or physical energy",
+        "beforeMeanCorePercent": 92.1402,
+        "afterMeanCorePercent": 86.5531,
+        "relativeReductionPercent": 6.0638,
+        "report": "test-results/performance/farm-cpu-v17-abba-summary.json"
+      },
+      "routinePolicy": {
+        "seconds": 300,
+        "primary": "continuously moving normal-input combat",
+        "secondary": "native automation",
+        "longTests": "explicit large change or release validation"
+      },
+      "movingHunt": {
+        "status": "passed",
+        "report": "../test-results/performance/android-moving-hunt-v17-paired/report.json",
+        "comparison": "../test-results/performance/moving-hunt-v17-pair-summary.json",
+        "reportSha256": "2cd9c270fd32189bf8df3d69bb5c523ed38d790b886584aff61da20472e08d35",
+        "fingerprint": "3b8e54df0d41fb5f9c7d7a333bbb0dec15151578eb69a4fd68a4cce29b1cb1e9",
+        "farmHarnessHash": "13a534e4e6bb0b445da473a00d04f74eb2ea9641b9920f365e358db4e54b9687",
+        "measurementHash": "ba7b2dfa5e0420df0707c8c434b7b853d4d48336a631495ff225918f4fef3414",
+        "fps": 59.698640625196894,
+        "minOneSecondFps": 51,
+        "mainThreadMsPerFrame": 4.433275116692599,
+        "normalizedCpuPercent": 25.64294799026295,
+        "corePercent": 102.5717919610518,
+        "coreEquivalents": 1.025717919610518,
+        "peakMemoryMB": 531.887104,
+        "movedMetres": 1012.6308597783367,
+        "kills": 84,
+        "respawns": 77,
+        "movingFrames": 17943,
+        "frames": 17996,
+        "cpuBenefitMeasured": false,
+        "coreRelativeChangePercent": 0.09905243873304936
+      },
+      "rejectedExperiments": [
+        "circular-hud-prototype-v17: cooldown square-corner visual defect and no clear CPU benefit; no runtime changes shipped"
+      ],
+      "previousRoutineReview": {
+        "report": "test-results/performance/android-moving-hunt-v17-routine/acceptance-review.json",
+        "accepted": false
+      },
+      "approvedRoutineBaseline": {
+        "report": "../test-results/performance/android-moving-hunt-v17-paired/report.json",
+        "scope": "H12 Lv17 BOW 300s moving hunt only",
+        "fullSuiteApproved": false
+      },
+      "referenceAdvice": {
+        "accepted": "Measure first, optimize identified bottleneck, repeat same5min moving-combat workload",
+        "priorities": [
+          "UI batching interruptions and render submission",
+          "Measured per-frame allocations and redundant updates",
+          "Verify dynamic atlas specifically in TapTap build; Chrome atlasCount1 does not prove platform state"
+        ],
+        "profilerScope": "CC_USE_PROFILER is native C++ only; current measurements are Android Chrome with external CDP profiler diagnostics",
+        "cpuGoalStillOpen": true
+      }
+    },
+    "buildInterference": {
+      "evidence": "test-results/performance/v16-concurrent-build-evidence.json",
+      "affected": "4 of5 V16 candidate low-FPS windows overlap concurrent Creator builds; remaining moving-BOW47FPS still unexplained",
+      "approvedBaseline": false
+    },
+    "historicalTopLevelV16": {
+      "version": "0.3.29",
+      "package": {
+        "filename": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-u1-performance-v16\\SwordAndFire_0.3.29_TapTap_guest-test_20261112T152916Z\\SwordAndFire_0.3.29_TapTap_guest-test_20261112T152916Z.zip",
+        "bytes": 219802464,
+        "sha256": "2f1ae5c8ae065c262ee2eafbd6b11ded8a12705bd26de7095ce479db4cfcef38",
+        "loginMode": "guest",
+        "localSaveOnly": true,
+        "offlineMainPackageAudit": {
+          "files": 26,
+          "rawBytes": 5577490,
+          "zipBytes": 1352985,
+          "zipMiB": 1.29,
+          "budgetMiB": 20,
+          "withinLocalBudget": true,
+          "sha256": "719b3fb8c0e7aeeb995c18688c173cc9ae4eaa233a75ee4d3c930954e70a28b7",
+          "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+        },
+        "actualPlatformFirstPackageBytes": null,
+        "resourcesNeededBeforePlayBytes": null,
+        "buildMode": "guest-test",
+        "uploaded": false,
+        "platformVerified": false
+      },
+      "source": {
+        "trackedScripts": 199,
+        "generatedResourceTables": 2,
+        "businessScripts": 197,
+        "boundary": "../test-results/performance/v16-source-boundary.json",
+        "snapshot": "../test-results/performance/v16-source-snapshot.json",
+        "unchangedBeforeAndAfterPackage": true,
+        "generatedVersionDifferences": "Only excluded generated BuildInfo/TapAuth configuration; Web0.3.28, guest0.3.29. All199 tracked source files byte-identical.",
+        "changedSinceBoundaryAfterTiming": []
+      }
+    }
+  },
+  "cpuUnits": {
+    "actualAndroidLogicalCores": 4,
+    "source": "Android /proc utime+stime, CLK_TCK100; sum Chrome process CPU once",
+    "conversion": "normalizedPercent * 4 = corePercent; raw CPU seconds and main-thread ms/frame are not multiplied again"
+  },
+  "cacheRepair": {
+    "meshCachesChecked": 309,
+    "morphCachesChecked": 17,
+    "staticCachesInvalidated": 2,
+    "backup": "../temp/morph-cache-backup-20261112-070418-504959",
+    "quiver": {
+      "staleVertices": 702,
+      "actualVertices": 732,
+      "invalidDrawIndex": 65531
+    },
+    "geometryChanged": false
+  },
+  "historicalScope": "Protocol-v1 Android reports do not include the native graphics validity gate. Preserve failures and partial runs; do not approve them as protocol-v2 baselines or final benefit estimates. Protocol-v2 reports also lack the native-overlay gate; matched runs with first-run fullscreen guidance are retained only as diagnostics.",
+  "hostRestore": {
+    "date": "2026-11-12T18:06:10.436Z",
+    "emulatorPid": 38632,
+    "originalAffinity": 16777215,
+    "restoredAffinity": 16777215,
+    "timerMasks": {
+      "control": 0,
+      "state": 0
+    },
+    "bluetoothOriginal": 0,
+    "bluetoothFinal": 0,
+    "ownedEmulatorGracefullyClosed": true,
+    "stoppedOwnedPorts": [
+      7510,
+      7512,
+      7513
+    ],
+    "retainedPreview": 7514,
+    "unownedCreator62320Untouched": true
+  },
+  "pending": [
+    "Moving-combat CPU is effectively unchanged in V16/V17 pair; continue profiling-driven render and CPU optimization; no heat reduction claim",
+    "Full11-case baseline remains unapproved; historical failures and build-interference evidence retained",
+    "Native-auto long run was stopped after user changed duration/scenario; pickup-path stall observed and not fixed in V17",
+    "Verify dynamic atlas initialization, compressed texture compatibility and resource behavior in actual TapTap runtime",
+    "Physical energy/temperature and platform-delivered firstpackage/preplay bytes remain outside emulator evidence"
+  ],
+  "ui": {
+    "navigationReadout": "Removed per user request, including minimap text, coordinates and proposed top strip",
+    "automationPosition": "Original top and scale retained; no relocation",
+    "markers": "Map, enemy crowns and objective flags retained",
+    "validation": "V11 native device screenshot verified; no readout nodes; automation y303.75 exactly matches original; map crowns/flags remain. world-qa-final-v11 passed."
+  },
+  "acceptanceBudget": {
+    "requestedByUser": "2026-11-12",
+    "protocol": "moving-combat-v6",
+    "configuration": "../tools/performance/budget.json",
+    "version": "resource-budget-v1",
+    "minimumFps": 50,
+    "fpsWindowMs": 1000,
+    "targetProcessMemoryBytes": 800000000,
+    "maximumProcessMemoryBytes": 1000000000,
+    "memorySampleIntervalMs": 1000,
+    "maximumMemorySampleGapMs": 3000,
+    "maximumMainThreadMsPerFrame": 16.67,
+    "cpuRegressionRatio": 1.15,
+    "cpuCoreNoisePercent": 3,
+    "cpuFrameNoiseMs": 0.3,
+    "memoryRegressionRatio": 1.15,
+    "memoryRegressionNoiseBytes": 32000000,
+    "units": "1MB=1000000bytes; process-memory peak is sampled, not continuous; Android Chrome-family PSS includes container overhead",
+    "cpu": "Report normalized percent, normalized*actual core count, and core equivalents; relative limits retained. No arbitrary absolute process CPU percent invented."
+  },
+  "gameplayControlAudit": {
+    "oldSourceVersions": [
+      "V1-assets-repaired",
+      "V8"
+    ],
+    "oldElite06": "stationary, fixed door facing, no oath-cut",
+    "currentV11Elite06": "2m/s pursuit, tracking, oath-cut",
+    "changedScriptsBetweenV7BoundaryAndV11": [
+      "ChapterGame",
+      "GameSession",
+      "FlatActors",
+      "combat/common/EnemyCombat",
+      "combat/data/EnemyCombat",
+      "NativeEnemyVfx",
+      "MiniMap"
+    ],
+    "decision": "Use isolated current-game Cocos CRP control for pipeline-only attribution; preserve historical failures and scope",
+    "sourceManifest": "../test-results/performance/v11-source-boundary.json",
+    "controlProvenance": "../test-results/performance/current-crp-control-provenance.json"
+  },
+  "historicalPackages": [
+    {
+      "version": "0.3.27",
+      "package": {
+        "filename": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-u1-performance-v1\\SwordAndFire_0.3.27_TapTap_guest-test_20261112T071151Z\\SwordAndFire_0.3.27_TapTap_guest-test_20261112T071151Z.zip",
+        "bytes": 219801785,
+        "sha256": "8586356e7c90d92f9b5da08cb07d53a0f529d44d88b38c3bde35cf2ba84b58b7",
+        "loginMode": "guest",
+        "localSaveOnly": true,
+        "offlineMainPackageAudit": {
+          "files": 26,
+          "rawBytes": 5575818,
+          "zipBytes": 1352291,
+          "zipMiB": 1.29,
+          "budgetMiB": 20,
+          "withinLocalBudget": true,
+          "sha256": "929d9c9552e57a62ef361ef6e3c662e94d7efeb9c67e2122a3ee8a015af5f599",
+          "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+        },
+        "actualPlatformFirstPackageBytes": null,
+        "resourcesNeededBeforePlayBytes": null,
+        "buildMode": "guest-test",
+        "uploaded": false,
+        "platformVerified": false
+      },
+      "source": {
+        "nonGeneratedScripts": 197,
+        "boundary": "../test-results/performance/v7-source-boundary.json",
+        "snapshot": "../test-results/performance/v7-source-snapshot.json",
+        "unchangedBeforeAndAfterPackage": true,
+        "generatedVersionDifferences": "Web0.3.25, delivery0.3.27; auto-allocated0.3.26 failed before Creator startup and retained in logs"
+      },
+      "scope": "Historical V8 source; superseded by V14 package"
+    },
+    {
+      "version": "0.3.28",
+      "package": {
+        "filename": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-u1-performance-v14\\SwordAndFire_0.3.28_TapTap_guest-test_20261112T132821Z\\SwordAndFire_0.3.28_TapTap_guest-test_20261112T132821Z.zip",
+        "bytes": 219801980,
+        "sha256": "e3ec37dfab07c7c4812a97545d12a8422e8b229dc35d8e6ba8654b398412e5b0",
+        "loginMode": "guest",
+        "localSaveOnly": true,
+        "offlineMainPackageAudit": {
+          "files": 26,
+          "rawBytes": 5575780,
+          "zipBytes": 1352477,
+          "zipMiB": 1.29,
+          "budgetMiB": 20,
+          "withinLocalBudget": true,
+          "sha256": "f56360aa6aeb782f8a09fac983059a3e6b4502812622d69c9043ad0ec1ac8b0c",
+          "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+        },
+        "actualPlatformFirstPackageBytes": null,
+        "resourcesNeededBeforePlayBytes": null,
+        "buildMode": "guest-test",
+        "uploaded": false,
+        "platformVerified": false
+      },
+      "source": {
+        "trackedScripts": 199,
+        "generatedResourceTables": 2,
+        "businessScripts": 197,
+        "boundary": "../test-results/performance/v14-source-boundary.json",
+        "snapshot": "../test-results/performance/v14-source-snapshot.json",
+        "unchangedBeforeAndAfterPackage": true,
+        "generatedVersionDifferences": "Only excluded BuildInfo/TapAuth release configuration; Web0.3.27, guest package0.3.28. All199 tracked scripts including2 resource tables byte-identical.",
+        "changedSinceBoundaryAfterTiming": []
+      },
+      "scope": "HistoricalV14; superseded byV16 0.3.29 package"
+    }
+  ]
+}

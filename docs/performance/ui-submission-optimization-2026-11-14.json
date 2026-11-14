@@ -1,0 +1,178 @@
+{
+  "date": "2026-11-14",
+  "status": "retained-and-validated",
+  "scope": "CPU / rendering submission optimization; no memory resource lifecycle changes; Android emulator Web preview, not TapTap phone acceptance.",
+  "retained": [
+    {
+      "file": "src/cocos/assets/scripts/features/combat/runtime/EnemyCombatFeedback.ts",
+      "change": "At full opacity, append lag/current rectangles to the existing per-bar background Graphics. Keep original per-bar/name order, semantic colors, dimensions and original Sprite fills for lethal fade. Retessellate only when fractions/mode change, once per bar/frame.",
+      "draws": "20 visible bars + names: 60 -> 40; native fade still 60. No shared global reordering or label cache/font changes."
+    },
+    {
+      "file": "src/cocos/assets/scripts/app/Hud.ts",
+      "change": "Two adjacent stationary minimap reserved rims share one Graphics. Keep original slot nodes, positions, sizes and interaction/layout metadata. Interactive button faces retain original independent press transforms.",
+      "draws": "Visible minimap HUD frozen fixture: 78 -> 77; triangles unchanged. Training HUD hides minimap, so this gain is outside the training benchmark."
+    }
+  ],
+  "notRetained": [
+    {
+      "candidate": "Merge minimap static terrain and exploration fog",
+      "reason": "One fewer draw, but exploration would retessellate previously static terrain. Retained original independent terrain/fog cache."
+    },
+    {
+      "candidate": "Same-atlas monster instancing",
+      "reason": "Not enabled: installed Cocos 3.8.8 legacy forward pipeline collects instanced passes in a separate queue and records it before ordinary transparent queue. Enabling instancing would bypass existing interleaved transparent model order, affecting overlapping monsters / hero / effects. Per-actor UV, tint and transparency remain intact.",
+      "engineEvidence": [
+        "C:/ProgramData/cocos/editors/Creator/3.8.8/resources/resources/3d/engine/cocos/rendering/forward/forward-stage.ts:146",
+        "C:/ProgramData/cocos/editors/Creator/3.8.8/resources/resources/3d/engine/cocos/rendering/forward/forward-stage.ts:198",
+        "C:/ProgramData/cocos/editors/Creator/3.8.8/resources/resources/3d/engine/cocos/rendering/forward/forward-stage.ts:204"
+      ]
+    }
+  ],
+  "protocol": {
+    "fixture": {
+      "area": "TRAINING",
+      "family": "BOW",
+      "level": 40,
+      "monsterCount": 20,
+      "formation": "horde",
+      "distance": 8,
+      "waveSeconds": 6,
+      "unlimitedResource": true,
+      "seed": 73014,
+      "playerMovement": "fixed horizontal +/-0.25, reverses every3 seconds",
+      "skills": "BOW slots0 and1 at seconds1 and3 of each6-second wave; basic attack holds at0-.5,2-2.5,4-4.5",
+      "nativeWaveReset": true,
+      "frameRate": 60
+    },
+    "secondsEach": 120,
+    "quality": {
+      "frameRate": 60,
+      "csmLevel": 1,
+      "customPipeline": false,
+      "engineMobile": true
+    },
+    "fingerprint": "8619b2f4430234f17d921e4077f441d3b61719e2b0c576f9ee50337f86debbe7",
+    "harnessHash": "b2fb793b7adb9f78b995ca2b755ec79956e0543bf160783fa7730eb1eb31756f",
+    "driverHash": "487b0df6ac65bf600dfccca696f7be5c719542ab32d707dda0e2c28bff472885",
+    "measurementHash": "44a1468e09a92a72cc41020bef0b589d9530ecf1ed442c175b402355215ad223",
+    "before": "src/cocos/test-results/performance/ui-batch-before-v2-120s/report.json",
+    "after": "src/cocos/test-results/performance/ui-batch-after-120s/report.json",
+    "measurement": "Native Android Chrome process /proc CPU; 100% = one logical core, normalized over 4 cores. CDP threadTicks main-thread TaskDuration / actual rendered frames. No profiler, screenshot, GPU query, forcedGC or Creator build inside either measurement window."
+  },
+  "before": {
+    "fps": 59.97662602468358,
+    "minOneSecondFps": 57,
+    "p99Ms": 20.20000000001164,
+    "mainThreadMsPerFrame": 3.557944306246545,
+    "corePercent": 83.22627168516415,
+    "normalizedCpuPercent": 20.806567921291037,
+    "drawCalls": 176,
+    "triangles": 123371
+  },
+  "after": {
+    "fps": 59.93718576299069,
+    "minOneSecondFps": 58,
+    "p99Ms": 19.599999999976717,
+    "mainThreadMsPerFrame": 3.2143787522478906,
+    "corePercent": 74.16490892930581,
+    "normalizedCpuPercent": 18.541227232326452,
+    "drawCalls": 156,
+    "triangles": 123371
+  },
+  "comparison": {
+    "mainThreadPercent": -9.65629375916508,
+    "cpuPercent": -10.887623069475561,
+    "fpsDelta": -0.03944026169289572,
+    "drawCallsPercent": -11.363636363636365,
+    "trianglesIdentical": true
+  },
+  "coverage": {
+    "before": {
+      "minute": 2,
+      "seconds": 120.23240000000001,
+      "frames": 7211,
+      "hp": 435,
+      "status": "playing",
+      "monsterCount": 20,
+      "live": 20,
+      "hits": 220,
+      "kills": 0,
+      "skillReleases": 40,
+      "projectiles": 60,
+      "waveResets": 20,
+      "skillInputs": 40,
+      "deadFrames": 0,
+      "movedMetres": 0.1616992097673951,
+      "corePercent": 82.47734239305511,
+      "mainThreadMsPerFrame": 3.5187180055401663
+    },
+    "after": {
+      "minute": 2,
+      "seconds": 120.21920000000007,
+      "frames": 7205,
+      "hp": 435,
+      "status": "playing",
+      "monsterCount": 20,
+      "live": 20,
+      "hits": 220,
+      "kills": 0,
+      "skillReleases": 40,
+      "projectiles": 60,
+      "waveResets": 20,
+      "skillInputs": 40,
+      "deadFrames": 0,
+      "movedMetres": 0.15075014648011562,
+      "corePercent": 73.14982758964334,
+      "mainThreadMsPerFrame": 3.169206265594677
+    },
+    "equal": "20 live slots, 220 hits, 40 skill releases, 60 projectiles, 20 wave resets, no dead frames. Small movement-clock/actual frame count differences recorded in raw reports."
+  },
+  "visualValidation": {
+    "healthbars": "src/cocos/test-results/performance/ui-batch-visual-final/healthbar-pixel-acceptance.json",
+    "result": "Full, loss/lag, empty, partial-opacity fade and overlapping bars/names: exact pixels in bar region. UI camera only frozen fixture, not a full-scene bitwise acceptance.",
+    "minimap": "src/cocos/test-results/performance/ui-batch-map-final/pixels.json",
+    "minimapResult": "Initial, explored, rotated and pressed states: identical slot positions/radii/interaction flags, same triangles, one fewer draw. Full-frame raster differences <=4/255 channel levels, mean absolute channel delta <0.00042; inspected thumbnail differences, no visible layout/control change."
+  },
+  "verification": {
+    "typecheck": "npm --prefix src/cocos run check: passed after integration",
+    "existingTests": "npm --prefix src/cocos test: 140 passed, 0 failed after integration",
+    "build": "Isolated Web preview taptap-ui-batch-final; Cocos 3.8.8 legacy forward render policy passed. No release/version bump or publish.",
+    "diffCheck": "passed with CRLF recognized as line endings"
+  },
+  "boundaries": {
+    "sources": [
+      {
+        "file": "app/Hud.ts",
+        "beforeSha256": "8a15fba55d892c0a1ac4fc6053e9af6a2c72d248cf5b738beb116b19d9d16218",
+        "candidateSha256": "caac5c0de1573b3e224f633353727857bb5afcc7022ab0180b81a34c9d6c8ec4"
+      },
+      {
+        "file": "features/combat/runtime/EnemyCombatFeedback.ts",
+        "beforeSha256": "ddf4b3c78b4181ea200e4e8fde9fbcad4e3f854d4c3d2e4f7287e454056bd601",
+        "candidateSha256": "925f39727268d5f4b85a875939795d99138a899f75df9caabff7d23da77ef343"
+      }
+    ],
+    "unchanged": [
+      "MiniMap.ts original terrain/fog caching",
+      "FlatActors.ts",
+      "UiChrome.ts",
+      "FrameCache / GameResources / UiSkin",
+      "textures, bundles, asset refcounts, atlas sizes",
+      "frame cap 60, canvas, pipeline, shadows, hero geometry"
+    ],
+    "note": "Targeted r+b integration required original source hashes to match this turn backup; no revert/reset of other chat modifications."
+  },
+  "limits": [
+    "One 2-minute pair on an emulator; observed CPU differences are this run, not device-wide guaranteed gains.",
+    "Hardware GPU utilization / GPU frame time and power were not measured. Draw submissions fell 11.36%; triangles are unchanged. This is not a measured 11.36% GPU utilization decrease.",
+    "Real TapTap Android device acceptance remains pending."
+  ],
+  "officialReferences": [
+    "https://docs.cocos.com/creator/3.8/manual/en/ui-system/components/engine/ui-batch.html",
+    "https://docs.cocos.com/creator/3.8/manual/en/shader/instanced-attributes.html"
+  ],
+  "finished": "2026-11-14T03:35:57.591709+00:00",
+  "cleanup": "Stopped own isolated port7571 HTTP server and own SingularityPerf34 emulator; retained build artifacts and source-boundary backups.",
+  "workspaceCleanup": "See workspace-cleanup-2026-11-14.json: completed temporary builds/source snapshots moved to a recoverable directory outside the project. Runtime sources and raw validation evidence retained."
+}

@@ -1,0 +1,148 @@
+{
+  "status": "read-only geometry audit; representative p0 body proportion guide, no runtime replacement",
+  "conclusion": "Installed idle and run use action-wide UPP calibrated to a similar world height. No direction-specific scale error. Short-legged perception is body/leg projection, coat-hem and bent-leg pose; independently fitting alpha bounds would falsify scale and ground anchoring.",
+  "canvas": {
+    "size": [
+      512,
+      768
+    ],
+    "pixels_per_world_unit": 400,
+    "foot_anchor_xy": [
+      256,
+      712
+    ]
+  },
+  "runtime_manifest_path": "F:\\workspace\\Singularity\\src\\cocos\\assets\\resources\\flat2d\\characters\\raphael\\manifest.json",
+  "runtime_manifest_sha256": "4065d59acbccb8c85642cf31cab840a8fce3577a87806ce2c558096098b41df8",
+  "measurements": [
+    {
+      "state": "standing",
+      "direction": "front",
+      "runtime_action": "explore_idle_W01",
+      "runtime_image": "locomotion-v1/W01-explore-idle.png",
+      "runtime_world_units_per_pixel": 0.003191794871794872,
+      "source_canvas_scale": 1.2767179487179487,
+      "required_canvas_scale_runtime_upp_times_400": 1.2767179487179487,
+      "alpha16_bounds_canvas": [
+        151,
+        91,
+        360,
+        712
+      ],
+      "alpha_any_bounds_canvas": [
+        147,
+        89,
+        362,
+        715
+      ],
+      "alpha16_bbox_world_height": 1.5525,
+      "alpha16_crown_above_anchor_world": 1.5525,
+      "canvas_anchor_xy": [
+        256,
+        712
+      ],
+      "source_rgba_sha256": "cb9f904ab1c10d9acb9b1c643c9d40fd9ca0b86600e6f7cf65dd9059df45025f",
+      "runtime_png_sha256": "df887b28a9bef335aa326d86bf2117a07f1faeef192ac1b55145123b549481cd",
+      "source_original_sha256": "df887b28a9bef335aa326d86bf2117a07f1faeef192ac1b55145123b549481cd"
+    },
+    {
+      "state": "run",
+      "direction": "front",
+      "runtime_action": "explore_run_W01",
+      "runtime_image": "locomotion-v2/W01-explore-run-a.png",
+      "runtime_world_units_per_pixel": 0.0043342618384401115,
+      "source_canvas_scale": 1.7337047353760446,
+      "required_canvas_scale_runtime_upp_times_400": 1.7337047353760446,
+      "alpha16_bounds_canvas": [
+        131,
+        99,
+        383,
+        716
+      ],
+      "alpha_any_bounds_canvas": [
+        130,
+        87,
+        385,
+        716
+      ],
+      "alpha16_bbox_world_height": 1.5425,
+      "alpha16_crown_above_anchor_world": 1.5325,
+      "canvas_anchor_xy": [
+        256,
+        712
+      ],
+      "source_rgba_sha256": "1ada50d505569159058fd49803a9ad243a3a53991e73d8867493a9aff1132f7b",
+      "runtime_png_sha256": "2c8827afbfba74cdae51d9ea344b8d64f24d897b47b952f3742925dcba5f3316",
+      "source_original_sha256": "2c8827afbfba74cdae51d9ea344b8d64f24d897b47b952f3742925dcba5f3316"
+    },
+    {
+      "state": "standing",
+      "direction": "back",
+      "runtime_action": "explore_idle_W01",
+      "runtime_image": "locomotion-v1/W01-explore-idle.png",
+      "runtime_world_units_per_pixel": 0.003191794871794872,
+      "source_canvas_scale": 1.2767179487179487,
+      "required_canvas_scale_runtime_upp_times_400": 1.2767179487179487,
+      "alpha16_bounds_canvas": [
+        151,
+        88,
+        359,
+        712
+      ],
+      "alpha_any_bounds_canvas": [
+        147,
+        85,
+        361,
+        715
+      ],
+      "alpha16_bbox_world_height": 1.56,
+      "alpha16_crown_above_anchor_world": 1.56,
+      "canvas_anchor_xy": [
+        256,
+        712
+      ],
+      "source_rgba_sha256": "c40ddae5f25f3486700063a4268d760a4896177171cd82ac0ef078a55499b9f6",
+      "runtime_png_sha256": "df887b28a9bef335aa326d86bf2117a07f1faeef192ac1b55145123b549481cd",
+      "source_original_sha256": "df887b28a9bef335aa326d86bf2117a07f1faeef192ac1b55145123b549481cd"
+    },
+    {
+      "state": "run",
+      "direction": "back",
+      "runtime_action": "explore_run_W01",
+      "runtime_image": "locomotion-v2/W01-explore-run-a.png",
+      "runtime_world_units_per_pixel": 0.0043342618384401115,
+      "source_canvas_scale": 1.7337047353760446,
+      "required_canvas_scale_runtime_upp_times_400": 1.7337047353760446,
+      "alpha16_bounds_canvas": [
+        134,
+        111,
+        372,
+        714
+      ],
+      "alpha_any_bounds_canvas": [
+        131,
+        90,
+        376,
+        716
+      ],
+      "alpha16_bbox_world_height": 1.5075,
+      "alpha16_crown_above_anchor_world": 1.5025,
+      "canvas_anchor_xy": [
+        256,
+        712
+      ],
+      "source_rgba_sha256": "caf13e1502d75419c5163b8ae7f08b012c990f2033452827a9c0259a88a47848",
+      "runtime_png_sha256": "2c8827afbfba74cdae51d9ea344b8d64f24d897b47b952f3742925dcba5f3316",
+      "source_original_sha256": "2c8827afbfba74cdae51d9ea344b8d64f24d897b47b952f3742925dcba5f3316"
+    }
+  ],
+  "method_choice": "Existing prepare-inputs.py supplies the world-scale/foot-anchor policy; its old full horizontal strip warp is rejected because it distorts hands/weapons. Installed Pillow/NumPy/SciPy ndimage.map_coordinates perform deterministic body-only premultiplied resampling. No dependencies installed.",
+  "mature_components": {
+    "Pillow": "HPND",
+    "NumPy": "BSD-3-Clause",
+    "SciPy": "BSD-3-Clause"
+  },
+  "art_review": "One necessary 880x790 local deterministic coordinate board was viewed through Codex cloud vision. No image generation, model call, server access or external upload by this preparation script. Runtime verification and artistic acceptance remain separate.",
+  "production_modified": false,
+  "back_run_head_landing_note": "Rear standing approved head is copied at original1:1 scale with integer offset(-11,+21), retaining the rear run drawing head landing about21 canvas pixels lower than standing due to the current run pose/lean. The body edit raises waist22px and changes projected leg/torso proportion only; it does not additionally raise the rear-run crown, increase runtime UPP or fit the complete alpha bbox."
+}

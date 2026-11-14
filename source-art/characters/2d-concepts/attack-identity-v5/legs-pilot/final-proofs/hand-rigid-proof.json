@@ -1,0 +1,68 @@
+{
+  "image": "face-v1/hero-v6/hero-v4-bow-hit-death-readable.png",
+  "index": 11,
+  "comparison": "Expected frozen input rigid-translated by actual reported delta vs final mesh output",
+  "skinPixelsInROI": 1763,
+  "extraSkinOutsideOneNativePixel": 0,
+  "maxRGBAErrorSkinInterior": 65,
+  "skinInteriorPixels": 716,
+  "actualBodyDeltaNative": [
+    -10.693402988333588,
+    -2.1221917496440312
+  ],
+  "warp": {
+    "method": "single continuous SciPy Delaunay inverse mesh; no nearest-bone branch sampling",
+    "vertices": 522,
+    "triangles": 952,
+    "correctionAmplitude": 1.0,
+    "minJacobian": 0.5544415421527666,
+    "maxJacobian": 1.664667448706314,
+    "foldedTriangles": 0,
+    "occlusionContactPinned": true,
+    "mappedBonePoints": [
+      [
+        149.84370180586413,
+        118.55809881396404
+      ],
+      [
+        155.3020422490319,
+        97.49987169904506
+      ],
+      [
+        211.16332527373964,
+        123.37342955829466
+      ],
+      [
+        223.40866356522582,
+        112.2107969469801
+      ],
+      [
+        291.02893257647526,
+        148.67954146989842
+      ],
+      [
+        286.7815119468364,
+        150.37169484802885
+      ]
+    ],
+    "shrinkAttempts": [
+      {
+        "amplitude": 1.0,
+        "foldedTriangles": 0,
+        "minJacobian": 0.5544415421527666,
+        "maxJacobian": 1.664667448706314
+      }
+    ]
+  },
+  "roiCaveat": "This broad colour ROI includes warm leather/pant background. Its max RGBA difference is not a tight hand-only identity test.",
+  "independentTightNativeReview": {
+    "reviewer": "audit_runtime",
+    "frozenCostumeInput": true,
+    "nonbowDeath7HandPixels": 874,
+    "bowDeath11HandPixels": 1186,
+    "extraSkinPixels": 0,
+    "lostSkinPixels": 0,
+    "visibleHandRGBAErrors": 0,
+    "note": "Separate exact delta/cropOffset reconstruction using tight hand ROIs; source finger lines preserved."
+  }
+}

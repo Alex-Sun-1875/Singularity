@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-12",
+  "status": "implemented_and_reviewed_in_native_Cocos_browser_output; user_acceptance_pending",
+  "userReference": "user-rounded-reference.jpg",
+  "gallery": "runtime-overview.jpg",
+  "decisions": {
+    "shell": "Shared DoubleGoldFrame rounded panel for all six primary tabs; phone floats with visible outside world.",
+    "header": "Visible 40 logical pixels on phones, proportional on desktop; native targets remain 48px with 8px gaps.",
+    "equipment": "4 columns × 3 rows in both scopes; empty cells retained; one row of scope tabs and a category selector; overflow scrolls.",
+    "theme": "Existing approved deep-brown textures, native serif text, gold metal and teal selection.",
+    "otherPages": "Character stats, combat skill catalog/slots, enhancement, affix pool, recipe and inheritance pages all use the same preparation skin."
+  },
+  "reused": [
+    "Cocos native Button / ScrollView / Mask",
+    "Shared RpgPanel / DoubleGoldFrame",
+    "Existing approved preparation and forge artwork; one selected outline cleaned deterministically"
+  ],
+  "newDependencies": [],
+  "imageGeneration": "None; reused approved artwork and deterministic Pillow extraction.",
+  "validation": {
+    "typeScript": "npm run check passed",
+    "existingRules": "60 passed",
+    "runtimeScreens": 15,
+    "regressionStates": 33,
+    "androidAndDesktopStates": 14,
+    "runtimeErrors": 0,
+    "networkFailures": 0,
+    "overlappingControls": 0,
+    "minimumTarget": "48 CSS px",
+    "minimumGap": "8 CSS px",
+    "functional": [
+      "category filtering",
+      "profession preview/confirm",
+      "attribute and skill drafts/application",
+      "respec and leaving guards",
+      "active-slot reassignment without duplicates",
+      "save/reload",
+      "native enhancement and recipe transactions with exact cost deduction"
+    ],
+    "defaultEntry": "all seven pages checked at port 7469",
+    "buildFilesMatched": 3535
+  },
+  "fixtures": "Independent browser contexts. Canonical gear/experience fixtures; gold/iron/runes and one recipe supplied only in the isolated cost-preview profile. User save not cleared or replaced.",
+  "preview": {
+    "url": "http://127.0.0.1:7469/",
+    "output": "src/cocos/build/concept-2d",
+    "candidate": "src/cocos/build/concept-2d-rpg-floating-v3",
+    "backup": "src/cocos/temp/default-before-rpg-floating-v3-20261112",
+    "publicRelease": false
+  },
+  "remaining": [
+    "TapTap real AppID and physical-device acceptance; Web checks are not platform acceptance."
+  ],
+  "sourceHashes": [
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/RpgPanel.ts",
+      "sha256": "36963d42afee882364cc4825a64baa49c2d1125e3c8ae417f6e854e190c430cb"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/equipment/runtime/EquipmentPanels.ts",
+      "sha256": "b97c472d63955dd833994091122d3a0afc24ac30aa40cc7be00a1a96a5d13b2c"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/progression/runtime/PreparationPanels.ts",
+      "sha256": "8e5b7780208291fb4d89098f7d6d738778db6d9aaba889d623defc0c69abd1c0"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/progression/runtime/SkillBook.ts",
+      "sha256": "1b1f2baa2a1181856340f5d95a9c31d987ecf83212c0f0dde14f99244aba0046"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/crafting/runtime/ForgeWorkshop.ts",
+      "sha256": "7ebebda39364d27251c28d2e801539d3bffb7d384b4c761bbe920ce273a29c4d"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/crafting/runtime/ForgingPanel.ts",
+      "sha256": "11b110dd8bcaad2abc989442540380dbd610e2e4cbdc5d9ad72ef09a0fd590f5"
+    },
+    {
+      "file": "src/cocos/assets/scripts/app/ChapterGame.ts",
+      "sha256": "e25a3d88f3e2c59556917f8f2ef9c88813c262d48cc97a59e0780d4c25c872dd"
+    }
+  ]
+}

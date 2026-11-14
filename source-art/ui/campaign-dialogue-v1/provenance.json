@@ -1,0 +1,44 @@
+{
+  "date": "2026-11-11",
+  "tool": "cloud OpenAI image_gen built-in",
+  "generation_status": "succeeded",
+  "prompt": "prompt.txt",
+  "input_references": [
+    {
+      "path": "reference-clean.png",
+      "source": "User supplied comparison screenshot; deterministic left H01 frame crop [960,1360,1920,1900].",
+      "sha256": "547f0653dbc54c1c6bb10bb084f6b5112cbc4a0d8b2df78247d1df8f3923e037"
+    }
+  ],
+  "raw_output": "generation-raw.png",
+  "raw_size": [
+    1846,
+    852
+  ],
+  "output": "cinematic-dialogue-proposal-v2.png",
+  "output_size": [
+    2532,
+    1170
+  ],
+  "output_sha256": "41985c35f28495a30717ea8aaba6971b12745a0aefac3a332805797a4f5104aa",
+  "postprocess": [
+    "Local Pillow deterministic pixel patch and bundled-font typesetting to correct speaker 山野斥候 to repository canonical 山驿斥候.",
+    "Proportional LANCZOS fit to 2532×1170, with minimal crop for exact target aspect ratio.",
+    "User wording correction: 跳过演出 → 跳过剧情. Local deterministic terrain patch and bundled RPG font typesetting; no new generation. Original v1 retained."
+  ],
+  "style_reference": "Baldurs Gate 3 cinematic subtitle hierarchy; no BG3 media supplied to image_gen.",
+  "art_review": "art-review.json",
+  "implemented": true,
+  "generation_note": "Scene outpainted/recomposed by image_gen for design communication, not a runtime screenshot or approved character asset.",
+  "previous_output": "cinematic-dialogue-proposal-v1.png",
+  "implementation": {
+    "date": "2026-11-11",
+    "source": "src/cocos/assets/scripts/features/cinematics/",
+    "screenshot": "test-results/cinematic-v1/iphone14-highland-final.png",
+    "validation": [
+      "test-results/cinematic-v1/integration.json",
+      "test-results/cinematic-v1/responsive.json"
+    ],
+    "note": "Actual Cocos UI uses existing scene/actors; generated scene pixels were not installed."
+  }
+}

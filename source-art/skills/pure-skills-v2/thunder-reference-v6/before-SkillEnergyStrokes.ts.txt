@@ -1,0 +1,112 @@
+import type {Vec3} from 'cc';
+import type {CombatSkillEvent,Point} from '../core/Contracts';
+import type {SkillVfxHost} from './NativeSkillVfx';
+import type {VfxLineStyle} from './VfxAssets';
+
+/** Material direction sampled from the original combat-thu reference: cool
+ * ice-blue microfilaments inside a blue-violet corona, rather than a solid
+ * cyan tube. Effects imports this palette for native material selection. */
+export const THUNDER_COLORS={body:'#4767dd',core:'#b1c6fc',halo:'#687ddc',flare:'#d3e1ff',ground:'#292e70',residual:'#4e5dcf'} as const;
+export const isThunderColor=(value:string)=>Object.values(THUNDER_COLORS).some(color=>color===value.toLowerCase());
+const BLUE=THUNDER_COLORS.body,CORE=THUNDER_COLORS.core,HALO=THUNDER_COLORS.halo;
+const clamp=(value:number,low:number,high:number)=>Math.max(low,Math.min(high,value));
+const mix=(a:Point,b:Point,t:number):Point=>({x:a.x+(b.x-a.x)*t,z:a.z+(b.z-a.z)*t});
+const noise=(seed:number)=>{const value=Math.sin(seed*127.1+91.7)*43758.5453;return (value-Math.floor(value))*2-1;};
+const field=(seed:number,t:number)=>{const i=Math.floor(t),f=t-i;return noise(seed+i*19)*(1-f)+noise(seed+(i+1)*19)*f;};
+const rankOf=(rank:number)=>clamp(Math.round(rank||1),1,5);
+function hash(value:string){let seed=2166136261;for(let i=0;i<value.length;i++)seed=Math.imul(seed^value.charCodeAt(i),16777619);return seed>>>0;}
+function detail(host:SkillVfxHost,points:Vec3[],color:string,width:number,alpha:number,style:VfxLineStyle='solid'){
+ if(host.detailLine)host.detailLine(points,color,width,Math.round(alpha),style);
+ else host.line(points,color,width,Math.round(alpha),false,style);
+}
+
+/** Only the frozen event edge is drawn. Jitter and short forks remain inside a
+ * narrow visual envelope; this function never finds targets or submits hits. */
+export function drawLightning(host:SkillVfxHost,event:CombatSkillEvent,alpha:number,time:number,sourceAnchor?:Vec3,pulse=0):void {
+ const from=event.from,to=event.to??from,rank=rankOf(event.rank),network=event.phase==='network',dx=to.x-from.x,dz=to.z-from.z,length=Math.hypot(dx,dz);
+ const brightness=clamp(Math.round(alpha),0,255);if(!brightness)return;
+ const sourceOffset=sourceAnchor?.clone().subtract(host.at(from,.82));
+ const seed=hash(`${event.castId}:${event.segment}:${event.sourceId??''}:${event.targetId??''}:${pulse}`)%100003;
+ const phase=Math.floor(time*24),motion=(time*24-phase),tremble=noise(seed+phase)*.045*(1-motion)+noise(seed+phase+1)*.045*motion;
+ if(length<.04){
+  // A compact hot contact star uses three ribbons total. Keeping it compact
+  // reserves the common pool for the full frozen graph and its fine branches.
+  const reach=.16+rank*.018,a=(event.angle??0)+.47,centre=host.at(to,.82);
+  const cross=[host.at({x:to.x-Math.cos(a)*reach,z:to.z+Math.sin(a)*reach},.82),centre,host.at({x:to.x+Math.cos(a)*reach,z:to.z-Math.sin(a)*reach},.82)];
+  const vertical=[host.at(to,.82-reach*.78),centre,host.at(to,.82+reach*1.35)];
+  host.line(vertical,THUNDER_COLORS.flare,.028,brightness,true,'core');
+  host.line(cross,CORE,.023,brightness,true,'core');
+  detail(host,vertical,HALO,.42,brightness*.44,'glow');
+  return;
+ }
+ const perpendicular={x:dz/length,z:-dx/length},forward={x:dx/length,z:dz/length};
+ // Creator 3.8.8 Line preallocates 100 vertices. Keep even the longest frozen
+ // edge within that public renderer's capacity; never mutate engine internals.
+ const count=Math.round(clamp(Math.ceil(length/.105),14,99)),spread=clamp(.12+length*.016,.16,.30),points:Vec3[]=[];
+ const worldPoints:Point[]=[];
+ for(let i=0;i<=count;i++){
+  const t=i===0?0:i===count?1:(i+noise(seed+i*61)*.30)/count,base=mix(from,to,t),envelope=i===0||i===count?0:Math.pow(Math.max(0,Math.sin(Math.PI*t)),.35);
+  // Three spatial frequencies: long irregular bends, broken intermediate
+  // elbows and fine hot fractures. Dense small fractures remove the old
+  // uniformly thick, widely spaced neon-wire silhouette.
+  const broad=field(seed,t*length*.85),medium=field(seed+172,t*length*3.3),fine=noise(seed+i*43+7)+noise(seed+i*37+phase*13)*.12;
+  const side=envelope*(broad*spread+medium*.082+fine*.036+tremble*.28);
+  const p={x:base.x+perpendicular.x*side,z:base.z+perpendicular.z*side};worldPoints.push(p);
+  const point=host.at(p,.82+(i===0||i===count?0:noise(seed+i*11)*.08*envelope));
+  if(sourceOffset)point.add(sourceOffset.clone().multiplyScalar(1-t));points.push(point);
+ }
+ // Four ribbons per network edge: thin blue-violet body, finer ice filament,
+ // a soft corona, and one short travelling hot fracture. The fracture makes
+ // the brightness discontinuous without making the entire edge neon-white.
+ // Each new pulse changes its whole fractal seed while endpoints stay frozen.
+ host.line(points,BLUE,.040+rank*.0018,Math.round(brightness*.70),true,'solid');
+ host.line(points,CORE,.020+rank*.0012,Math.round(brightness*.84),true,'core');
+ detail(host,points,HALO,.24+rank*.014,brightness*.40,'glow');
+ const spot=.16+((seed+pulse*7)%5)*.13,start=Math.max(0,Math.floor(count*spot)),end=Math.min(count,Math.ceil(count*(spot+.16+rank*.006)));
+ if(end>start)detail(host,points.slice(start,end+1),THUNDER_COLORS.flare,.032+rank*.001,brightness*.98,'core');
+ const forks=!network&&length>2&&rank>=2?1:0;
+ for(let i=0;i<forks;i++){
+  const index=Math.round(count*(forks===1?.59:.30+i*.39)),base=worldPoints[index],sign=noise(seed+i*23)>0?1:-1;
+  const reach=Math.min(.35+rank*.055,length*.19),side=reach*.72*sign,branch:Vec3[]=[points[index]];
+  for(let j=1;j<=9;j++){
+   const t=j/9,jitter=noise(seed+i*101+j*17)*.055*Math.sin(Math.PI*t);
+   const q={x:base.x+forward.x*reach*t*.78+perpendicular.x*(side*t+jitter),z:base.z+forward.z*reach*t*.78+perpendicular.z*(side*t+jitter)};
+   branch.push(host.at(q,.82+noise(seed+j*3)*.025));
+  }
+  if(sourceOffset)for(let j=1;j<branch.length;j++)branch[j].add(sourceOffset.clone().multiplyScalar(1-index/count));
+  detail(host,branch,CORE,.015,brightness*.68,'core');
+  detail(host,branch,HALO,.15,brightness*.30,'glow');
+ }
+}
+
+/** Newest first. Reclip the supplied travelled path by arc length, so a split
+ * arrow can show its bend without drawing an untravelled route to the target. */
+export function drawArrowWake(host:SkillVfxHost,points:readonly Point[],color:string,split:boolean,rank:number,visualPoints?:readonly Vec3[],opacity=1):void {
+ if(points.length<2||opacity<=0)return;
+ // A child's whole already-flown curve establishes the split fan. Its head
+ // still has a short bright wake; the faint path survives contact for .24s.
+ if(split){
+  const flown=points.map((p,i)=>visualPoints?.[i]?.clone()??host.at(p,1.05));
+  host.line(flown,'#c6ddb0',.026,Math.round(115*opacity),true,'solid');
+  detail(host,flown,'#d3eab0',.14,48*opacity,'glow');
+ }
+ const limit=split?1.25:.70,path:Point[]=[{...points[0]}];let travelled=0;
+ for(let i=1;i<points.length;i++){
+  const previous=points[i-1],next=points[i],length=Math.hypot(next.x-previous.x,next.z-previous.z);
+  if(length<.00001)continue;
+  if(travelled+length>=limit){path.push(mix(previous,next,(limit-travelled)/length));break;}
+  path.push({...next});travelled+=length;
+ }
+ if(path.length<2)return;
+ const native=path.map((p,i)=>visualPoints?.[i]?.clone()??host.at(p,1.05)),alpha=(split?225:190)*opacity;
+ host.line(native,split?'#d8efb4':color,split?.044:.032,Math.round(alpha),true,'solid');
+ host.line(native,split?'#f5f8de':'#f1efdf',split?.018:.012,Math.round(alpha*.82),true,'core');
+}
+
+/** One small physical puncture, called once by the authoritative contact event. */
+export function drawArrowContact(host:SkillVfxHost,point:Point,angle:number,rank:number):void {
+ const tier=rankOf(rank);
+ host.burst('spark',point,.78,3+Math.floor(tier/2),.34+tier*.018,'#e5d8ab',-angle);
+ host.burst('flash',point,.78,1,.34+tier*.017,'#e8f0cc');
+ host.burst('dust',point,.61,2+Math.floor(tier/3),.25+tier*.008,'#b9ae8e');
+}

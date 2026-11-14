@@ -1,0 +1,134 @@
+{
+  "version": "clean-gold-v12",
+  "date": "2026-11-08",
+  "userDirection": "Gold was too bright. Reduce brightness moderately, make skill borders slightly thicker, and leave navigation/map rim widths unchanged. Skill-name visibility is implemented separately in runtime.",
+  "ownership": "Original project-owned SVG family derived from SupplyBelt panel surround; no external art/download or new image generation.",
+  "designSource": "source-art/materials/chapter-one-v3/ui-kit/panel-frame.svg",
+  "changes": {
+    "metalRGBMultiplier": 0.85,
+    "normalRimWidth": 18.725,
+    "skillRimWidth": 23.225,
+    "skillWidthIncreasePercent": 24.032,
+    "outerRadiusUnchanged": 253,
+    "darkInsetUnchanged": true,
+    "mapAndRailWidthsUnchanged": true
+  },
+  "palette": {
+    "#C99D45": "#AB853B",
+    "#DAAE65": "#B99456",
+    "#F7DA9D": "#D2B985",
+    "#E0B46A": "#BE995A",
+    "#FFF0BF": "#D9CCA2",
+    "#E4B66A": "#C29B5A"
+  },
+  "exporter": "@resvg/resvg-js@2.6.2 (MPL-2.0), existing dependency",
+  "assets": [
+    {
+      "id": "clean-gold-ring-v12",
+      "source": "source-art/ui/clean-gold-v11/clean-gold-ring-v12.svg",
+      "sourceSHA256": "6d7a818be98be1c9d6417c0ebfacaa8c4eae0049adc4e86b621283f53703bf5f",
+      "derivedFrom": "clean-gold-ring-v11.svg",
+      "derivedFromSHA256": "6f94c8646a5b8134781931141fd130460981fe2474369422e46f71782ed5ceec",
+      "asset": "src/cocos/assets/resources/ui/quiet-bronze/clean-gold-ring-v12.png",
+      "pngSHA256": "0d3f96975472dfed59f4135d7b839cb0c07305e02e41cb45d7854df075390798",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 66766,
+      "outerRadiusIncludingShadow": 253,
+      "totalRimWidth": 18.725
+    },
+    {
+      "id": "clean-gold-medallion-v12",
+      "source": "source-art/ui/clean-gold-v11/clean-gold-medallion-v12.svg",
+      "sourceSHA256": "9c426df29f61d8e0b6757656d65f189107fa0041340643e1247885f257c6f76d",
+      "derivedFrom": "clean-gold-medallion-v11.svg",
+      "derivedFromSHA256": "2c268e72985bfcddd8d3b9b10d91fb03c3747c979a5f0bf6819c68a626c2ac6a",
+      "asset": "src/cocos/assets/resources/ui/quiet-bronze/clean-gold-medallion-v12.png",
+      "pngSHA256": "685ab36d4cb7fc6aba58f710e9a6b08707982872076486216c7f839fc6ad1b43",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 66951,
+      "outerRadiusIncludingShadow": 253,
+      "totalRimWidth": 18.725
+    },
+    {
+      "id": "clean-gold-rail-v12",
+      "source": "source-art/ui/clean-gold-v11/clean-gold-rail-v12.svg",
+      "sourceSHA256": "df4c628e212a68f9f18eef99b53b4a9d2f538fc0825474c032628508e8a34050",
+      "derivedFrom": "clean-gold-rail-v11.svg",
+      "derivedFromSHA256": "aa5f8cff066a501df81df978b5bc32b85baf806fa2c5568e21e07e095bbe5303",
+      "asset": "src/cocos/assets/resources/ui/quiet-bronze/clean-gold-rail-v12.png",
+      "pngSHA256": "b7117994a3486fe76df8d1ec711b4d301811952d4e0fbdef89bba51f59283b7b",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 19289,
+      "outerRadiusIncludingShadow": 253,
+      "totalRimWidth": 18.725
+    },
+    {
+      "id": "clean-gold-skill-v12",
+      "source": "source-art/ui/clean-gold-v11/clean-gold-skill-v12.svg",
+      "sourceSHA256": "01fa85c6d7e8ba07e2b47e33eeeb2a6094fa1ab241661219ecc078fe8b5b969b",
+      "derivedFrom": "clean-gold-medallion-v11.svg",
+      "derivedFromSHA256": "2c268e72985bfcddd8d3b9b10d91fb03c3747c979a5f0bf6819c68a626c2ac6a",
+      "asset": "src/cocos/assets/resources/ui/quiet-bronze/clean-gold-skill-v12.png",
+      "pngSHA256": "852385d04f17802fdbeca32d92c4b6708c12b603a523602c0a89cf2b740a2c46",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 72263,
+      "outerRadiusIncludingShadow": 253,
+      "totalRimWidth": 23.225
+    }
+  ],
+  "artReview": {
+    "source": "Isolated v11/v12 side-by-side preview inspected at160px and60px: v12 gold is moderately dimmer, skill lip visibly wider, smooth clean hue and outer silhouette retained. All source geometry/palette checked.",
+    "runtime": "Desktop1280x720 atDPR2 and mobile844x390 inspected: moderated gold brightness, slightly thicker skill rims, hidden/shown name layouts and pause toggle verified.",
+    "userAcceptance": "Not recorded.",
+    "isolatedPreview": "source-art/ui/clean-gold-v11/isolated-preview-v12.png",
+    "evidence": [
+      "src/cocos/test-results/hud-gold-v12-hidpi-hidden.png",
+      "src/cocos/test-results/hud-gold-v12-hidpi-shown.png",
+      "src/cocos/test-results/hud-gold-v12-mobile-hidden.png",
+      "src/cocos/test-results/hud-gold-v12-desktop-settings.png",
+      "src/cocos/test-results/hud-gold-v12-name-comparison.png"
+    ]
+  },
+  "alphaValidation": {
+    "ringCenter": 0,
+    "railCenter": 0,
+    "normalCenter": 255,
+    "skillCenter": 255,
+    "allVisibleCircleBounds": [
+      3,
+      3,
+      509,
+      509
+    ]
+  },
+  "interfacePreference": {
+    "default": "Skill names hidden; icons and cooldowns centered",
+    "control": "暂停 → 显示技能名称：开/关",
+    "persistence": "Cosmetic localStorage preference; preserved on reload andresize"
+  },
+  "validation": {
+    "typeScript": "npm run check passed",
+    "build": "concept-2d web-mobile build passed",
+    "runtimeReport": "src/cocos/test-results/hud-gold-v12-name-toggle.json",
+    "defaultHidden": true,
+    "toggleThroughPause": true,
+    "pausePreserved": true,
+    "persistedAfterReload": true,
+    "preservedAfterResize": true,
+    "toggleBackOff": true,
+    "desktopErrors": 0,
+    "mobileErrors": 0
+  }
+}

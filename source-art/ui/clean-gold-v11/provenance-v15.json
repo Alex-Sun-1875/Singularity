@@ -1,0 +1,89 @@
+{
+  "version": "unified-gold-v15",
+  "date": "2026-11-08",
+  "userDirection": "Further widen the skill frames and upper-right minimap surround, with richer matched ornamental patterns.",
+  "ownership": "Project-original deterministic SVG refinement of existing v13/v14 gold family. No generation or external download.",
+  "palette": {
+    "metal": "#B99456",
+    "light": "#D2B985",
+    "ornament": "#C29B5A",
+    "glint": "#D9CCA2",
+    "low": "#AB853B",
+    "mid": "#BE995A",
+    "shadow": "#1D170C"
+  },
+  "construction": "Broad layered metal band; recessed grooves, narrow raised inner/outer lips; embossed acanthus leaves and twin scrolls baked once into the shared SVG texture. Native ornament must not be overlaid for these v15 assets.",
+  "geometry": {
+    "skill": {
+      "outerRadius": 250.5,
+      "innerApertureRadius": 195,
+      "visibleRadialBand": 55.5,
+      "approximateAt58": 6.29,
+      "approximateAt64": 6.94,
+      "approximateAt86": 9.32
+    },
+    "ring": {
+      "outerRadius": 250.5,
+      "innerApertureRadius": 216.5,
+      "visibleRadialBand": 34,
+      "approximateAt240": 15.94
+    }
+  },
+  "sampling": "Verified 10-level trilinear mipmapped, non-atlased skill and map textures. Cocos-generated PNG metadata enables mipmaps; UiSkin also initializes fresh single-level engraved textures through the public image setter.",
+  "exporter": "@resvg/resvg-js@2.6.2 (MPL-2.0), existing project dependency",
+  "assets": [
+    {
+      "id": "unified-gold-skill-v15",
+      "source": "source-art/ui/clean-gold-v11/unified-gold-skill-v15.svg",
+      "sourceSHA256": "4b45b3dec516295ef8b836ea1ca8a10176cc91043c547839348a034e10f35d8c",
+      "asset": "src/cocos/assets/resources/ui/quiet-bronze/unified-gold-skill-v15.png",
+      "pngSHA256": "12362eb97eb2d66b7df1eb03595b6f16280dbb91c317e10dc39600f01608631a",
+      "bytes": 159686,
+      "size": [
+        512,
+        512
+      ],
+      "innerApertureRadius": 195,
+      "outerRadius": 250.5,
+      "geometry": "Outer silhouette retained; wider band grows inward.",
+      "engraving": "Four cardinal large twin-scroll crowns with acanthus leaves; four diagonal leaf settings."
+    },
+    {
+      "id": "unified-gold-ring-v15",
+      "source": "source-art/ui/clean-gold-v11/unified-gold-ring-v15.svg",
+      "sourceSHA256": "cf0edc89051bb2be135c15c2b78c29648a5ea15ec636c2eb137357a07c1cd074",
+      "asset": "src/cocos/assets/resources/ui/quiet-bronze/unified-gold-ring-v15.png",
+      "pngSHA256": "81866c2ec62ff1d26993a6b5e0b0b0a7db4040d9880d108c78a354ca9785a78b",
+      "bytes": 131056,
+      "size": [
+        512,
+        512
+      ],
+      "innerApertureRadius": 216.5,
+      "outerRadius": 250.5,
+      "geometry": "Outer silhouette retained; wider band grows inward.",
+      "engraving": "Eight twin-scroll crowns centered at22.5°+45°n, leaving compass axes clear."
+    }
+  ],
+  "artReview": {
+    "isolated": "Inspected actual-size 58/64/86 px skill and240 px map direct-vector preview. Wider bezels and eight settings are visibly richer; paired-scroll/leaf vocabulary and restrained v13 palette retained. Map opening is transparent and circular.",
+    "runtime": "Inspected integrated desktopDPR2, mobile844x390 and narrow667x375 captures: skill and compass bands are visibly wider; matched baked scroll/leaf engravings fill the bands; icons, ranks, hotkeys and compass axes remain readable.",
+    "userAcceptance": "Not recorded.",
+    "evidence": [
+      "src/cocos/test-results/hud-ornate-v15-detail.png",
+      "src/cocos/test-results/hud-skill-v15-outdoor.png",
+      "src/cocos/test-results/hud-skill-v15-mobile.png",
+      "src/cocos/test-results/hud-skill-v15-narrow.png"
+    ]
+  },
+  "validation": {
+    "typeScript": "npm run check passed",
+    "build": "Cocos Creator3.8.8 web-mobile hud-ornate-v15-final completed in isolated current-assets project.",
+    "runtimeReport": "src/cocos/test-results/hud-skill-v15-review.json",
+    "namesToggle": true,
+    "cooldownCenter": true,
+    "insideMetalMaskRatio": 0.75,
+    "chartRadiusAt240": 100.8,
+    "errors": 0
+  }
+}

@@ -1,0 +1,723 @@
+{
+  "verifiedOn": "2026-11-13T16:13:55.239Z",
+  "verifiedLocalDate": "2026-11-14",
+  "timezone": "Asia/Shanghai",
+  "sourceVersion": "0.3.37",
+  "status": "Implemented and functionally verified; uploaded texture memory reduced; no demonstrated process-memory or CPU improvement; real TapTap runtime and iPhone thermal acceptance pending",
+  "scope": {
+    "engine": "Cocos Creator 3.8.8",
+    "target": "TapTap minigame",
+    "device": "Android SingularityPerf34 emulator, 4 logical cores / 4 GiB RAM, Android Chrome WebGL2",
+    "requestedPhone": "iPhone 14",
+    "sourceAndWebBuildOnly": true,
+    "newPhonePackage": false,
+    "uploadedOrPublished": false
+  },
+  "changes": {
+    "nativeActor": {
+      "source": "assets/scripts/features/actors/runtime/NativeActorMaterials.ts",
+      "removedUnusedEmbeddedMaterialDependencies": 17,
+      "geometryImagesSkeletonAnimationChanged": false,
+      "binarySha256": "fba8d1fd6f8eb354fe9185ca896a3fed9671af1e5aae9eaae42557910c4b6e88",
+      "beforeSha256": "7355fc0d6c39e7ba3578f1f30c4720d019f8273b3b38312e9866e6007d8595cc",
+      "afterSha256": "e08f6fd6d73d7bcb3a72b99f90b36216f6d91672c7f454c1327b32038bc1ab56",
+      "archive": "source-art/performance/runtime-material-dependencies-v1/",
+      "generatedMaterials": "Explicit references; UUID-less runtime materials destroyed directly at zero references using public Cocos APIs"
+    },
+    "hair": {
+      "source": "assets/scripts/features/actors/runtime/Actors.ts",
+      "policy": "Load only selected 3D hairstyle; async load before swap; release previous style and selected HUD portrait after replacement; page previews retain shared assets only while alive",
+      "rapidRequests": "Last request wins, including return to the loaded hairstyle",
+      "residentHairAtlasMiB": 5.333332061767578
+    },
+    "maps": {
+      "source": "assets/scripts/features/world/runtime/MapResources.ts",
+      "policy": "Current area plus directly reachable outgoing exits only; evict departed regions; neighboring surfaces warm sequentially after playability without hidden scene, AI or physics instances",
+      "pressurePolicy": "Release neighboring assets and cancel old prefetch work while retaining current area",
+      "sharedAssets": "Per-region Cocos addRef/decRef; unique GPU allocations shared by the asset manager; per-region byte sums are not additive",
+      "diskCache": "Downloaded bundle files and map definitions are not deleted"
+    },
+    "ui": {
+      "source": "assets/scripts/shared/assets/FrameCache.ts",
+      "policy": "Node/page leases for equipment art, skill frames, portraits, loot and loading background; last owner retires dynamic frame after draw, then releases texture; small common UI skin entries remain shared"
+    },
+    "vfx": {
+      "source": "assets/scripts/features/combat/runtime/Effects.ts",
+      "policy": "Player fire sequences and thunder ground atlases load only for their active weapon family; old renderers detached before asset disposal; common enemy masks and shared steel effects remain available"
+    },
+    "cpu": {
+      "source": "assets/scripts/features/combat/runtime/EnemyCombatFeedback.ts",
+      "policy": "Read viewport dimensions once per feedback update batch instead of once per enemy projection"
+    },
+    "unchanged": [
+      "60 FPS target",
+      "resolution and texture sampling quality",
+      "model binary art, UVs, skeleton, geometry and animation",
+      "enemy population, respawn rules, damage, skills, navigation and map connectivity"
+    ]
+  },
+  "originalOrdinaryWebTextureBreakdown": {
+    "evidence": "src/cocos/test-results/performance/memory-audit-release-20261113/summary.json",
+    "unit": "MiB of uploaded Texture2D assets, not total process memory",
+    "groups": {
+      "ui": {
+        "MiB": 24.09362030029297,
+        "count": 49
+      },
+      "vfx": {
+        "MiB": 25.62896728515625,
+        "count": 26
+      },
+      "flatActors": {
+        "MiB": 36.125,
+        "count": 8
+      },
+      "world": {
+        "MiB": 31.328018188476562,
+        "count": 10
+      },
+      "hairExternal": {
+        "MiB": 21.333328247070312,
+        "count": 4
+      },
+      "heroEmbedded": {
+        "MiB": 84.6666145324707,
+        "count": 41
+      },
+      "heroAppearance": {
+        "MiB": 18,
+        "count": 6
+      },
+      "heroShared": {
+        "MiB": 12.66665267944336,
+        "count": 11
+      },
+      "weapons": {
+        "MiB": 4.9375,
+        "count": 25
+      },
+      "other": {
+        "MiB": 5,
+        "count": 8
+      }
+    },
+    "existingTapReuseMiB": 33.99998092651367,
+    "note": "About 34 MiB of ordinary Web duplication was already avoided by the previous Tap release adapter; do not count that as a new Tap-platform saving"
+  },
+  "selectedTapBundleTextureBreakdown": {
+    "evidence": "src/cocos/test-results/performance/resource-lifecycle-qa-verified/report.json",
+    "area": "H12",
+    "scope": "Functionality QA snapshot before the later combat windows; not the end of the measured ordinary Web farming run",
+    "assetGroupsByBundle": {
+      "resources": {
+        "MiB": 1.5394439697265625,
+        "count": 8
+      },
+      "skill-icons": {
+        "MiB": 3.4166526794433594,
+        "count": 11
+      },
+      "panel-art": {
+        "MiB": 11.342201232910156,
+        "count": 20
+      },
+      "combat-vfx": {
+        "MiB": 14.12896728515625,
+        "count": 16
+      },
+      "native-materials": {
+        "MiB": 12.66665267944336,
+        "count": 11
+      },
+      "native-weapons": {
+        "MiB": 4.9375,
+        "count": 25
+      },
+      "hero-appearance": {
+        "MiB": 18,
+        "count": 6
+      },
+      "waystones": {
+        "MiB": 2,
+        "count": 2
+      },
+      "painted-terrain": {
+        "MiB": 21.330669403076172,
+        "count": 9
+      },
+      "painted-props": {
+        "MiB": 11.997344970703125,
+        "count": 2
+      },
+      "hero-hairstyles": {
+        "MiB": 5.333332061767578,
+        "count": 1
+      },
+      "cast-cave-spider": {
+        "MiB": 3.375,
+        "count": 1
+      },
+      "cast-thorn-hound": {
+        "MiB": 6,
+        "count": 1
+      },
+      "cast-marsh-spitter": {
+        "MiB": 6,
+        "count": 1
+      },
+      "cast-bramble-boar": {
+        "MiB": 3.375,
+        "count": 1
+      },
+      "cast-r2-4": {
+        "MiB": 4,
+        "count": 1
+      },
+      "cast-mine-worker": {
+        "MiB": 4,
+        "count": 1
+      },
+      "cast-rock-scorpion": {
+        "MiB": 3.375,
+        "count": 1
+      }
+    },
+    "gfxTextureMiB": 175.2784538269043,
+    "unmappedAtlasAndRenderTextureMiB": 38.460689544677734
+  },
+  "cpuDiagnosis": {
+    "evidence": "src/cocos/test-results/performance/memory-audit-release-20261113/summary.json",
+    "finding": "Camera exclusion in a frozen gameplay diagnostic removed a large part of process CPU. Graphics submission/composition and Cocos rendering/animation remain material; this is not hardware GPU utilization. This lifetime-focused change did not demonstrate a CPU reduction.",
+    "businessHotspots": [
+      "FlatActors direction/frame and actor updates",
+      "GameSession combat/advance and navigation",
+      "HUD and enemy combat feedback"
+    ],
+    "profileCaveat": "Sampled inclusive stacks overlap; module totals must not be added or interpreted as independent percentages"
+  },
+  "verification": {
+    "fullTypeScript": "passed: npm run check",
+    "coreTypeScript": "passed: npm --prefix src/cocos run check:core",
+    "existingTests": {
+      "passed": 140,
+      "failed": 0,
+      "log": "src/cocos/temp/resource-lifecycle-verified-tests.log",
+      "newTestsOrDependenciesAdded": false
+    },
+    "tapConfiguration": "passed: node src/cocos/tools/taptap-config.cjs --check",
+    "builds": [
+      {
+        "name": "concept-2d-resource-verified",
+        "status": "passed",
+        "kind": "Cocos WebPreview, production bundling",
+        "rendering": "Legacy Forward, WebGL2, 60 FPS",
+        "isolatedBuildRoot": "C:/Users/Alexa/AppData/Local/Temp/Singularity-memory-audit-20261113/src/cocos/build/concept-2d-resource-verified"
+      },
+      {
+        "name": "taptap-resource-verified",
+        "status": "passed",
+        "kind": "Cocos WebPreview, production bundling",
+        "rendering": "Legacy Forward, WebGL2, 60 FPS",
+        "isolatedBuildRoot": "C:/Users/Alexa/AppData/Local/Temp/Singularity-memory-audit-20261113/src/cocos/build/taptap-resource-verified"
+      }
+    ],
+    "sourceManifest": {
+      "path": "src/cocos/test-results/performance/resource-lifecycle-source-verified.json",
+      "sha256": "622452f2ab09d5bf3cfdd9b5bce3eb10bccdfefbfa83f7eec51559492447f2bb",
+      "matchingSourceFiles": 200,
+      "generatedPreviewConfigExcluded": true
+    },
+    "functional": {
+      "path": "src/cocos/test-results/performance/resource-lifecycle-qa-verified/report.json",
+      "sha256": "21c3793e9c8ea6cdf99ed0c176fafe9d478b8dae393efef86a1d11fcf7d3b01d",
+      "status": "passed",
+      "errors": [],
+      "route": [
+        "S01",
+        "S04",
+        "S07",
+        "S13",
+        "S07",
+        "S04",
+        "S01",
+        "H12",
+        "H13",
+        "S01-T1"
+      ],
+      "retainedNeighborhoods": [
+        {
+          "current": "S01",
+          "retained": [
+            "S01-T1",
+            "S01",
+            "S01-T2",
+            "S01-T4",
+            "S02",
+            "S03",
+            "S04",
+            "S20",
+            "S01-T3",
+            "S01-T5",
+            "S01-T6"
+          ]
+        },
+        {
+          "current": "S04",
+          "retained": [
+            "S01",
+            "S03",
+            "S04",
+            "S07",
+            "S08"
+          ]
+        },
+        {
+          "current": "S07",
+          "retained": [
+            "S04",
+            "S07",
+            "S08",
+            "S05",
+            "S13",
+            "S14",
+            "S17",
+            "U1-01"
+          ]
+        },
+        {
+          "current": "S13",
+          "retained": [
+            "S07",
+            "S13",
+            "S14",
+            "S17",
+            "S12",
+            "S16",
+            "U1-03"
+          ]
+        },
+        {
+          "current": "S07",
+          "retained": [
+            "S07",
+            "S13",
+            "S14",
+            "S17",
+            "S04",
+            "S05",
+            "S08",
+            "U1-01"
+          ]
+        },
+        {
+          "current": "S04",
+          "retained": [
+            "S07",
+            "S04",
+            "S08",
+            "S01",
+            "S03"
+          ]
+        },
+        {
+          "current": "S01",
+          "retained": [
+            "S04",
+            "S01",
+            "S03",
+            "S02",
+            "S20",
+            "S01-T1",
+            "S01-T2",
+            "S01-T3",
+            "S01-T4",
+            "S01-T5",
+            "S01-T6"
+          ]
+        },
+        {
+          "current": "H12",
+          "retained": [
+            "H12",
+            "H07",
+            "H08",
+            "H13"
+          ]
+        },
+        {
+          "current": "H13",
+          "retained": [
+            "H12",
+            "H13",
+            "H14"
+          ]
+        },
+        {
+          "current": "S01-T1",
+          "retained": [
+            "S01-T1",
+            "S01",
+            "S01-T2",
+            "S01-T4"
+          ]
+        }
+      ],
+      "hairSwitches": [
+        {
+          "id": "curly",
+          "ok": true,
+          "loadedHairAtlases": 1,
+          "embeddedTextures": 0,
+          "portraitKeys": [
+            "curly"
+          ]
+        },
+        {
+          "id": "dante",
+          "ok": true,
+          "loadedHairAtlases": 1,
+          "embeddedTextures": 0,
+          "portraitKeys": [
+            "dante"
+          ]
+        },
+        {
+          "id": "nero",
+          "ok": true,
+          "loadedHairAtlases": 1,
+          "embeddedTextures": 0,
+          "portraitKeys": [
+            "nero"
+          ]
+        },
+        {
+          "id": "vergil",
+          "ok": true,
+          "loadedHairAtlases": 1,
+          "embeddedTextures": 0,
+          "portraitKeys": [
+            "vergil"
+          ]
+        },
+        {
+          "id": "curly",
+          "ok": true,
+          "loadedHairAtlases": 1,
+          "embeddedTextures": 0,
+          "portraitKeys": [
+            "curly"
+          ]
+        }
+      ],
+      "rapidHair": {
+        "selected": "curly",
+        "loadedHairAtlases": 1,
+        "portraitKeys": [
+          "curly"
+        ]
+      },
+      "menuCloseRounds": [
+        {
+          "gfxTextureMiB": 164.57569885253906,
+          "residentTextureAssets": 115
+        },
+        {
+          "gfxTextureMiB": 164.57569885253906,
+          "residentTextureAssets": 115
+        },
+        {
+          "gfxTextureMiB": 164.57569885253906,
+          "residentTextureAssets": 115
+        }
+      ],
+      "combatWindows": [
+        {
+          "family": "WAR",
+          "hits": 4,
+          "skillHits": 3,
+          "gfxTextureMiB": 178.71881866455078
+        },
+        {
+          "family": "FIR",
+          "hits": 10,
+          "skillHits": 2,
+          "gfxTextureMiB": 192.46881103515625
+        },
+        {
+          "family": "THU",
+          "hits": 5,
+          "skillHits": 2,
+          "gfxTextureMiB": 185.13547134399414
+        },
+        {
+          "family": "BOW",
+          "hits": 6,
+          "skillHits": 2,
+          "gfxTextureMiB": 183.88547134399414
+        },
+        {
+          "family": "FIR",
+          "hits": 10,
+          "skillHits": 2,
+          "gfxTextureMiB": 194.13547134399414
+        },
+        {
+          "family": "WAR",
+          "hits": 6,
+          "skillHits": 3,
+          "gfxTextureMiB": 183.88547134399414
+        }
+      ],
+      "memoryPressure": {
+        "beforeGfxTextureMiB": 130.48903274536133,
+        "afterGfxTextureMiB": 123.82237243652344,
+        "retainedAssetsAfter": [
+          {
+            "id": "S01-T1",
+            "residentAssets": 5,
+            "textureBytes": 14676848,
+            "prefetchedFiles": 0
+          },
+          {
+            "id": "S01",
+            "residentAssets": 0,
+            "textureBytes": 0,
+            "prefetchedFiles": 0
+          },
+          {
+            "id": "S01-T2",
+            "residentAssets": 0,
+            "textureBytes": 0,
+            "prefetchedFiles": 0
+          },
+          {
+            "id": "S01-T4",
+            "residentAssets": 0,
+            "textureBytes": 0,
+            "prefetchedFiles": 0
+          }
+        ]
+      }
+    },
+    "visual": {
+      "path": "src/cocos/test-results/performance/resource-lifecycle-visual-after/comparison.png",
+      "scope": "Frozen native idle pose, identical camera/crop, source and candidate. Not thermal performance.",
+      "maxMeanChannelDifferenceOutOf255": 0.10203277009728623,
+      "hairStyles": [
+        "curly",
+        "dante",
+        "nero",
+        "vergil"
+      ],
+      "review": "Character, hair and clothing preserved in frozen-pose side-by-side inspection; tiny torch/background differences; GLB BIN hash identical"
+    }
+  },
+  "measuredComparison": {
+    "protocol": "Existing farm.cjs routine profile, 300 s each, actual movement/attacks/respawns in H12 with BOW. One before/after window, default performance thresholds unchanged. No build/test workload during measured windows.",
+    "beforeReport": "src/cocos/test-results/performance/resource-lifecycle-pair-before/report.json",
+    "afterReport": "src/cocos/test-results/performance/resource-lifecycle-pair-after/report.json",
+    "before": {
+      "status": "failed",
+      "errors": [
+        "1-H12-move-hunt-BOW: 1-second FPS below floor 50"
+      ],
+      "warnings": [],
+      "seconds": 300,
+      "profile": "farm-routine",
+      "fixture": {
+        "area": "H12",
+        "entry": {
+          "x": 15.42983158520316,
+          "z": -34.431698217428384
+        },
+        "level": 17,
+        "weapon": "W07",
+        "family": "BOW",
+        "control": "move",
+        "automation": "manual",
+        "enemies": 19,
+        "spitters": 4,
+        "startHP": 200,
+        "frameRate": 60
+      },
+      "fingerprint": "00dba4f9dc66f9f298e5097b3b080ac2d65bc7a40a1350626f5e22e120e831b2",
+      "buildHashes": {
+        "http://127.0.0.1:7567/concept-2d-memory-audit/assets/main/index.f7f02.js": "3cc0ab0265fd30c0d5c12aed744edccb4072ce005a88b38b5d2473cf14a16736"
+      },
+      "averageFps": 59.46334554788663,
+      "minOneSecondFps": 45,
+      "p95FrameMs": 19.399999999906868,
+      "mainThreadMsPerFrame": 4.216554810967778,
+      "processCpuOneCorePercent": 89.93054806097425,
+      "processCpuFourCorePercent": 22.48263701524356,
+      "measuredWindowPeakProcessPssMiB": 490.48046875,
+      "wholeRunPeakProcessPssMiB": 494.216796875,
+      "boundaries": [
+        {
+          "label": "warm-0",
+          "processPssMiB": 458.8759765625,
+          "jsHeapMiB": 58.81598663330078,
+          "gfxTextureMiB": 296.1749725341797,
+          "gfxBufferMiB": 18.85443115234375
+        },
+        {
+          "label": "end-0",
+          "processPssMiB": 455.216796875,
+          "jsHeapMiB": 62.853599548339844,
+          "gfxTextureMiB": 302.6002311706543,
+          "gfxBufferMiB": 18.90938377380371
+        }
+      ],
+      "finalWorkload": {
+        "kills": 80,
+        "hits": 544,
+        "respawns": 73,
+        "movedMetres": 1000.7815356371743
+      }
+    },
+    "after": {
+      "status": "failed",
+      "errors": [
+        "baseline environment/protocol mismatch"
+      ],
+      "warnings": [],
+      "seconds": 300,
+      "profile": "farm-routine",
+      "fixture": {
+        "area": "H12",
+        "entry": {
+          "x": 15.42983158520316,
+          "z": -34.431698217428384
+        },
+        "level": 17,
+        "weapon": "W07",
+        "family": "BOW",
+        "control": "move",
+        "automation": "manual",
+        "enemies": 19,
+        "spitters": 4,
+        "startHP": 200,
+        "frameRate": 60
+      },
+      "fingerprint": "fc636781715eceb214f12ee35042d4641fe252daefedf4b09689855deb39f9b0",
+      "buildHashes": {
+        "http://127.0.0.1:7567/concept-2d-resource-verified/assets/main/index.98ca5.js": "afea5256a48186c69ca0ee37cc013650345f11967d14e8bd91c43c854daf1d22"
+      },
+      "averageFps": 59.88797574191577,
+      "minOneSecondFps": 54,
+      "p95FrameMs": 19.5,
+      "mainThreadMsPerFrame": 4.40780395962733,
+      "processCpuOneCorePercent": 92.39261297495312,
+      "processCpuFourCorePercent": 23.09815324373828,
+      "measuredWindowPeakProcessPssMiB": 480.66796875,
+      "wholeRunPeakProcessPssMiB": 498.92578125,
+      "boundaries": [
+        {
+          "label": "warm-0",
+          "processPssMiB": 416.337890625,
+          "jsHeapMiB": 58.46763610839844,
+          "gfxTextureMiB": 175.54636764526367,
+          "gfxBufferMiB": 18.841777801513672
+        },
+        {
+          "label": "end-0",
+          "processPssMiB": 452.12109375,
+          "jsHeapMiB": 61.90507125854492,
+          "gfxTextureMiB": 181.97162628173828,
+          "gfxBufferMiB": 18.900060653686523
+        }
+      ],
+      "finalWorkload": {
+        "kills": 84,
+        "hits": 562,
+        "respawns": 79,
+        "movedMetres": 1014.2569204107003
+      }
+    },
+    "reductions": {
+      "endGfxTextureMiB": {
+        "before": 302.6002311706543,
+        "after": 181.97162628173828,
+        "saved": 120.62860488891602,
+        "savedPercent": 39.86401610542272
+      },
+      "endProcessPssMiB": {
+        "before": 455.216796875,
+        "after": 452.12109375,
+        "saved": 3.095703125,
+        "savedPercent": 0.6800502851062552
+      },
+      "measuredWindowPeakProcessPssMiB": {
+        "before": 490.48046875,
+        "after": 480.66796875,
+        "saved": 9.8125,
+        "savedPercent": 2.000589345587474
+      },
+      "processCpuOneCorePercent": {
+        "before": 89.93054806097425,
+        "after": 92.39261297495312,
+        "saved": -2.462064913978878,
+        "savedPercent": -2.737740364163645
+      }
+    },
+    "comparisonGate": null,
+    "gateAudit": {
+      "rawReportsUnmodified": true,
+      "baselineErrors": [
+        "1-H12-move-hunt-BOW: 1-second FPS below floor 50"
+      ],
+      "candidateErrors": [
+        "baseline environment/protocol mismatch"
+      ],
+      "candidateAbsoluteSampleErrors": [],
+      "fingerprintFields": [
+        {
+          "field": "environment",
+          "structurallyEqual": true,
+          "orderedJsonEqual": false
+        },
+        {
+          "field": "measurementHash",
+          "structurallyEqual": true,
+          "orderedJsonEqual": true
+        },
+        {
+          "field": "workloadRulesHash",
+          "structurallyEqual": true,
+          "orderedJsonEqual": true
+        },
+        {
+          "field": "farmHarnessHash",
+          "structurallyEqual": true,
+          "orderedJsonEqual": true
+        },
+        {
+          "field": "budgetHash",
+          "structurallyEqual": true,
+          "orderedJsonEqual": true
+        }
+      ],
+      "reason": "PowerShell transportConfig property insertion order changed. metrics.cjs fingerprints JSON.stringify without canonical key ordering; recorded environment values and all protocol hashes are identical.",
+      "canonicalEnvironmentSha256": "8491276fdc7d0c8c41899f5346e997008c8a960bd5c1323cdf9bed5baebc3758",
+      "comparisonAfterProvenKeyOrderNormalization": [],
+      "note": "Derived audit only; no thresholds or measured data changed and original reports remain failed. Baseline one-second FPS floor failure is retained."
+    }
+  },
+  "limitations": [
+    "Android Chrome process-family PSS includes browser, renderer and graphics processes; this is not iPhone resident memory or hardware GPU utilization.",
+    "Large texture savings do not imply the same-sized process PSS reduction because graphics allocations, decoded images and process accounting differ.",
+    "This is a finite five-minute farming comparison, not a multi-hour leak or thermal guarantee. Physical iPhone temperature and real TapTap runtime are unmeasured.",
+    "Do not claim CPU/heat has been solved from resource-lifetime changes; report measured CPU and all performance gate failures.",
+    "Cocos dynamic atlas/render buffers may retain bounded capacity after a page closes; cache release does not promise a return to exact cold-start process memory."
+  ],
+  "preservedExperiments": {
+    "earlySteelFailure": "resource-lifecycle-qa-web retained; fixed by keeping shared steel assets available",
+    "earlyTapHairDiagnostic": "resource-lifecycle-qa-tap retained; path matcher corrected for the Tap hairstyle bundle",
+    "interruptedPair": "resource-lifecycle-moving-before was deliberately cancelled before the final material-lifetime fix; excluded from benefit evidence"
+  },
+  "references": [
+    "https://docs.cocos.com/creator/3.8/manual/en/asset/release-manager.html",
+    "https://docs.cocos.com/creator/3.8/manual/en/asset/asset-manager.html",
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/basic/subpackage/"
+  ]
+}

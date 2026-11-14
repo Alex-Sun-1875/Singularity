@@ -1,0 +1,1262 @@
+{
+  "date": "2026-11-14",
+  "version": "0.3.38",
+  "status": "performance-not-accepted",
+  "checks": {
+    "before": true,
+    "after": false,
+    "samePerformanceFingerprint": true,
+    "functional": true,
+    "firstDraw": true,
+    "completeSkillPreload": true,
+    "closedPagesStable": true,
+    "pixels": true,
+    "allocation": true,
+    "native": true
+  },
+  "scope": {
+    "changed": "Texture lifetime, lossless equipment atlas splitting, exhaustive ASTC4 opaque-color imports and proactive page/skill prewarming.",
+    "build": "Isolated Cocos 3.8.8 Web release preview, same TapTap resource profile; no version bump, upload, phone package or publishing.",
+    "notAccepted": [
+      "TapTap container under the real AppID",
+      "iPhone 14 physical memory, frame pacing, battery and temperature",
+      "Physical GPU ASTC memory savings"
+    ]
+  },
+  "quality": {
+    "resolutionChanged": false,
+    "frameRateCap": 60,
+    "shadowResolutionMobile": 1024,
+    "sourcePngPixelsPreserved": true,
+    "buildPngPixelChecks": {
+      "checked": 53,
+      "failures": [],
+      "excludedEquipmentSheetsStillPresent": [],
+      "astcFiles": 18
+    },
+    "losslessEquipmentCrops": 35,
+    "astcImages": 18,
+    "astc": "4x4 exhaustive with original PNG fallback; transparent sprites/hair, UI, normal and ORM/roughness remain original.",
+    "minimumOpaqueRgbPsnr": 45.08972377544586,
+    "visualEvidence": [
+      "texture-world-astc-decoded/comparison.png",
+      "texture-head-astc-decoded/comparison.png",
+      "texture-codec/visual-comparison.json",
+      "texture-preloaded-visual/inventory.png"
+    ],
+    "astcVisualScope": "Decoded-base-level ASTC comparison on desktop, plus separate emulator runtime format audit; no perceptible difference observed, not a claim of mathematically lossless ASTC."
+  },
+  "unattributedTextureAudit": {
+    "area": "H12",
+    "beforeBytes": 40328956,
+    "beforeMiB": 38.460689544677734,
+    "allocationSumMatchesCounter": true,
+    "breakdownMiB": {
+      "dynamicUiAtlas": 16,
+      "shadowMaps": 13,
+      "charFontAtlas": 4,
+      "skeletalAnimationPool": 3.515625,
+      "generatedTextAndBuiltins": 1.9450645446777344
+    },
+    "afterGeneratedBytes": 25911036,
+    "afterGeneratedMiB": 24.710689544677734,
+    "reclaimedMiB": 13.75,
+    "changes": [
+      "Delay public shadow enable until real casters exist: remove the redundant 4 MiB startup shadow color without changing size/filtering.",
+      "Pack original UI pixels 1:1 into 1280 instead of 2048 canvas: normal atlas 16 -> 6.25 MiB.",
+      "Keep active shadows, font atlas and baked animation pool for image quality and frame rate."
+    ],
+    "note": "The 38.46 MiB was generated engine textures, not an unidentified leak. A second atlas can exist during pages or story UI; final repeated page cycles are stable."
+  },
+  "pagePreload": {
+    "policy": "Common page textures, every 33 skill icon and only currently owned/equipped item icons before gameplay. No resource-by-resource population on first visible page. Warm raw chrome textures without pinning drawable page SpriteFrames.",
+    "commonTextures": 93,
+    "commonTextureMiB": 12.672447204589844,
+    "skills": 33,
+    "initialOwnedItems": 3,
+    "initialOwnedIconMiB": 1.736114501953125,
+    "equivalentWholeEquipmentAtlasMiB": 18.0057373046875,
+    "firstOpenDesktopMs": 113,
+    "desktopReopenMs": [
+      9,
+      0.5999999940395355,
+      13.199999988079071
+    ],
+    "nativeFirstSkillPage": {
+      "elapsedMs": 102.20000000018626,
+      "blank": []
+    },
+    "firstVisibleDraws": [
+      {
+        "action": "checks",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "combat-family:BOW",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "combat-family:FIR",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "combat-family:THU",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "combat-family:COM",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "combat-family:WAR",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "close",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "checks",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "close",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "allocation:skills",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "close",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "attributes",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "close",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "inventory",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "close",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "profession",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "close",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "checks",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "close",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "allocation:skills",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "close",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "attributes",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "close",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "inventory",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "close",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "profession",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "close",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "checks",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "close",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "allocation:skills",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "close",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "attributes",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "close",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "inventory",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "close",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "profession",
+        "draws": 1,
+        "blank": []
+      },
+      {
+        "action": "close",
+        "draws": 1,
+        "blank": []
+      }
+    ],
+    "retirement": "Old owned-icon sets retire when prewarm refreshes after ownership changes; actual page frames/preview targets retire on close. Skill/common warm data intentionally remains resident. Models, hairstyles and maps retain separate demand lifetimes."
+  },
+  "memoryTradeoff": {
+    "desktopPngFallbackH12BeforeMiB": 175.2784538269043,
+    "desktopPngFallbackH12AfterMiB": 184.43697357177734,
+    "explanation": "The final build deliberately preloads all skills and common pages, unlike the baseline. This uses part of the reclaimed engine memory; do not present the 13.75 MiB engine saving as an equal net process-RAM saving.",
+    "desktopPngFallbackCloseCycles": [
+      {
+        "label": "initial",
+        "textureMiB": 137.19264602661133,
+        "atlases": 1
+      },
+      {
+        "label": "H12",
+        "textureMiB": 184.43697357177734,
+        "atlases": 1
+      },
+      {
+        "label": "inventory-0",
+        "textureMiB": 192.40253067016602,
+        "atlases": 2
+      },
+      {
+        "label": "closed-0",
+        "textureMiB": 184.43697357177734,
+        "atlases": 1
+      },
+      {
+        "label": "inventory-1",
+        "textureMiB": 192.40253067016602,
+        "atlases": 2
+      },
+      {
+        "label": "closed-1",
+        "textureMiB": 184.43697357177734,
+        "atlases": 1
+      },
+      {
+        "label": "inventory-2",
+        "textureMiB": 192.40253067016602,
+        "atlases": 2
+      },
+      {
+        "label": "closed-2",
+        "textureMiB": 184.43697357177734,
+        "atlases": 1
+      }
+    ],
+    "nativeAstcH12EstimateMiB": 167.68724060058594,
+    "nativeAstcEstimateOnly": true
+  },
+  "mapLifetime": {
+    "policy": "Only current map and direct neighbors; neighbors retain only surface resources. Retire departed actor/prop/NPC atlases, and all nonadjacent map resources. Memory warning trims neighbors.",
+    "route": [
+      "S01",
+      "S04",
+      "S07",
+      "S13",
+      "S07",
+      "S04",
+      "S01",
+      "H12",
+      "H13",
+      "S01-T1"
+    ],
+    "observed": [
+      {
+        "area": "S01",
+        "textureMiB": 167.7342185974121,
+        "scope": {
+          "current": "S01",
+          "retainedAreas": [
+            "S01-T1",
+            "S01",
+            "S01-T2",
+            "S01-T4",
+            "S02",
+            "S03",
+            "S04",
+            "S20",
+            "S01-T3",
+            "S01-T5",
+            "S01-T6"
+          ],
+          "areas": [
+            {
+              "id": "S01-T1",
+              "residentAssets": 1,
+              "textureBytes": 6288240,
+              "prefetchedFiles": 1
+            },
+            {
+              "id": "S01",
+              "residentAssets": 13,
+              "textureBytes": 40537972,
+              "prefetchedFiles": 5
+            },
+            {
+              "id": "S01-T2",
+              "residentAssets": 4,
+              "textureBytes": 5592400,
+              "prefetchedFiles": 4
+            },
+            {
+              "id": "S01-T4",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            },
+            {
+              "id": "S02",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S03",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            },
+            {
+              "id": "S04",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S20",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S01-T3",
+              "residentAssets": 4,
+              "textureBytes": 5592400,
+              "prefetchedFiles": 4
+            },
+            {
+              "id": "S01-T5",
+              "residentAssets": 4,
+              "textureBytes": 5592400,
+              "prefetchedFiles": 4
+            },
+            {
+              "id": "S01-T6",
+              "residentAssets": 4,
+              "textureBytes": 5592400,
+              "prefetchedFiles": 4
+            }
+          ],
+          "neighborPolicy": "direct outgoing exits, one hop; neighboring surfaces warm without scene instances"
+        }
+      },
+      {
+        "area": "S04",
+        "textureMiB": 213.11223983764648,
+        "scope": {
+          "current": "S04",
+          "retainedAreas": [
+            "S01",
+            "S03",
+            "S04",
+            "S07",
+            "S08"
+          ],
+          "areas": [
+            {
+              "id": "S01",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            },
+            {
+              "id": "S03",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            },
+            {
+              "id": "S04",
+              "residentAssets": 28,
+              "textureBytes": 95806664,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S07",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S08",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            }
+          ],
+          "neighborPolicy": "direct outgoing exits, one hop; neighboring surfaces warm without scene instances"
+        }
+      },
+      {
+        "area": "S07",
+        "textureMiB": 235.7273406982422,
+        "scope": {
+          "current": "S07",
+          "retainedAreas": [
+            "S04",
+            "S07",
+            "S08",
+            "S05",
+            "S13",
+            "S14",
+            "S17",
+            "U1-01"
+          ],
+          "areas": [
+            {
+              "id": "S04",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S07",
+              "residentAssets": 34,
+              "textureBytes": 118219976,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S08",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S05",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S13",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S14",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S17",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "U1-01",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            }
+          ],
+          "neighborPolicy": "direct outgoing exits, one hop; neighboring surfaces warm without scene instances"
+        }
+      },
+      {
+        "area": "S13",
+        "textureMiB": 183.7286605834961,
+        "scope": {
+          "current": "S13",
+          "retainedAreas": [
+            "S07",
+            "S13",
+            "S14",
+            "S17",
+            "S12",
+            "S16",
+            "U1-03"
+          ],
+          "areas": [
+            {
+              "id": "S07",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S13",
+              "residentAssets": 25,
+              "textureBytes": 63695416,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S14",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S17",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S12",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            },
+            {
+              "id": "S16",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "U1-03",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            }
+          ],
+          "neighborPolicy": "direct outgoing exits, one hop; neighboring surfaces warm without scene instances"
+        }
+      },
+      {
+        "area": "S07",
+        "textureMiB": 235.7273406982422,
+        "scope": {
+          "current": "S07",
+          "retainedAreas": [
+            "S07",
+            "S13",
+            "S14",
+            "S17",
+            "S04",
+            "S05",
+            "S08",
+            "U1-01"
+          ],
+          "areas": [
+            {
+              "id": "S07",
+              "residentAssets": 34,
+              "textureBytes": 118219976,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S13",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S14",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S17",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S04",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S05",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S08",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "U1-01",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            }
+          ],
+          "neighborPolicy": "direct outgoing exits, one hop; neighboring surfaces warm without scene instances"
+        }
+      },
+      {
+        "area": "S04",
+        "textureMiB": 213.11223983764648,
+        "scope": {
+          "current": "S04",
+          "retainedAreas": [
+            "S07",
+            "S04",
+            "S08",
+            "S01",
+            "S03"
+          ],
+          "areas": [
+            {
+              "id": "S07",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S04",
+              "residentAssets": 28,
+              "textureBytes": 95806664,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S08",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S01",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            },
+            {
+              "id": "S03",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            }
+          ],
+          "neighborPolicy": "direct outgoing exits, one hop; neighboring surfaces warm without scene instances"
+        }
+      },
+      {
+        "area": "S01",
+        "textureMiB": 167.7342185974121,
+        "scope": {
+          "current": "S01",
+          "retainedAreas": [
+            "S04",
+            "S01",
+            "S03",
+            "S02",
+            "S20",
+            "S01-T1",
+            "S01-T2",
+            "S01-T3",
+            "S01-T4",
+            "S01-T5",
+            "S01-T6"
+          ],
+          "areas": [
+            {
+              "id": "S04",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S01",
+              "residentAssets": 13,
+              "textureBytes": 40537972,
+              "prefetchedFiles": 5
+            },
+            {
+              "id": "S03",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            },
+            {
+              "id": "S02",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S20",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            },
+            {
+              "id": "S01-T1",
+              "residentAssets": 1,
+              "textureBytes": 6288240,
+              "prefetchedFiles": 1
+            },
+            {
+              "id": "S01-T2",
+              "residentAssets": 4,
+              "textureBytes": 5592400,
+              "prefetchedFiles": 4
+            },
+            {
+              "id": "S01-T3",
+              "residentAssets": 4,
+              "textureBytes": 5592400,
+              "prefetchedFiles": 4
+            },
+            {
+              "id": "S01-T4",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            },
+            {
+              "id": "S01-T5",
+              "residentAssets": 4,
+              "textureBytes": 5592400,
+              "prefetchedFiles": 4
+            },
+            {
+              "id": "S01-T6",
+              "residentAssets": 4,
+              "textureBytes": 5592400,
+              "prefetchedFiles": 4
+            }
+          ],
+          "neighborPolicy": "direct outgoing exits, one hop; neighboring surfaces warm without scene instances"
+        }
+      },
+      {
+        "area": "H12",
+        "textureMiB": 184.43697357177734,
+        "scope": {
+          "current": "H12",
+          "retainedAreas": [
+            "H12",
+            "H07",
+            "H08",
+            "H13"
+          ],
+          "areas": [
+            {
+              "id": "H12",
+              "residentAssets": 25,
+              "textureBytes": 64438160,
+              "prefetchedFiles": 0
+            },
+            {
+              "id": "H07",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            },
+            {
+              "id": "H08",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            },
+            {
+              "id": "H13",
+              "residentAssets": 4,
+              "textureBytes": 5592400,
+              "prefetchedFiles": 4
+            }
+          ],
+          "neighborPolicy": "direct outgoing exits, one hop; neighboring surfaces warm without scene instances"
+        }
+      },
+      {
+        "area": "H13",
+        "textureMiB": 183.10363388061523,
+        "scope": {
+          "current": "H13",
+          "retainedAreas": [
+            "H12",
+            "H13",
+            "H14"
+          ],
+          "areas": [
+            {
+              "id": "H12",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            },
+            {
+              "id": "H13",
+              "residentAssets": 25,
+              "textureBytes": 64438160,
+              "prefetchedFiles": 4
+            },
+            {
+              "id": "H14",
+              "residentAssets": 6,
+              "textureBytes": 8388600,
+              "prefetchedFiles": 6
+            }
+          ],
+          "neighborPolicy": "direct outgoing exits, one hop; neighboring surfaces warm without scene instances"
+        }
+      },
+      {
+        "area": "S01-T1",
+        "textureMiB": 139.64755249023438,
+        "scope": {
+          "current": "S01-T1",
+          "retainedAreas": [
+            "S01-T1",
+            "S01",
+            "S01-T2",
+            "S01-T4"
+          ],
+          "areas": [
+            {
+              "id": "S01-T1",
+              "residentAssets": 5,
+              "textureBytes": 14676848,
+              "prefetchedFiles": 0
+            },
+            {
+              "id": "S01",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            },
+            {
+              "id": "S01-T2",
+              "residentAssets": 4,
+              "textureBytes": 5592400,
+              "prefetchedFiles": 4
+            },
+            {
+              "id": "S01-T4",
+              "residentAssets": 5,
+              "textureBytes": 6990500,
+              "prefetchedFiles": 5
+            }
+          ],
+          "neighborPolicy": "direct outgoing exits, one hop; neighboring surfaces warm without scene instances"
+        }
+      }
+    ],
+    "hairSwitches": [
+      {
+        "style": "curly",
+        "loadedTextures": 1
+      },
+      {
+        "style": "dante",
+        "loadedTextures": 1
+      },
+      {
+        "style": "nero",
+        "loadedTextures": 1
+      },
+      {
+        "style": "vergil",
+        "loadedTextures": 1
+      },
+      {
+        "style": "curly",
+        "loadedTextures": 1
+      }
+    ],
+    "rapidHairPassed": true,
+    "families": [
+      {
+        "family": "WAR",
+        "hits": 5,
+        "casts": 2
+      },
+      {
+        "family": "FIR",
+        "hits": 10,
+        "casts": 2
+      },
+      {
+        "family": "THU",
+        "hits": 5,
+        "casts": 2
+      },
+      {
+        "family": "BOW",
+        "hits": 6,
+        "casts": 2
+      },
+      {
+        "family": "FIR",
+        "hits": 10,
+        "casts": 2
+      },
+      {
+        "family": "WAR",
+        "hits": 6,
+        "casts": 1
+      }
+    ]
+  },
+  "performance": {
+    "interruptedQuietRun": {
+      "file": "texture-preloaded-quiet-after/report.json",
+      "status": "cancelled",
+      "note": "Interrupted session and long host-time discontinuity; excluded from all conclusions."
+    },
+    "initialAttempt": {
+      "file": "texture-preloaded-pair-after/report.json",
+      "status": "failed",
+      "errors": [
+        "1-H12-move-hunt-BOW: 1-second FPS below floor 50",
+        "1-H12-move-hunt-BOW: single rendered frame exceeds 250ms",
+        "H12-move-hunt-BOW: repeated >100ms stalls increased"
+      ],
+      "note": "Stalls clustered at 17:56:01-05Z and 17:56:27Z while host activity was ongoing. Cause is not proven. Unchanged-code quiet rerun kept separately; no thresholds relaxed."
+    },
+    "protocol": "moving-combat-v6",
+    "secondsEach": 300,
+    "fixture": {
+      "area": "H12",
+      "family": "BOW",
+      "level": 17,
+      "control": "move"
+    },
+    "fingerprint": "284764be93002ae7ddf1d0d7cb007ad2e65d2af101b5fbe06ab3a90e7af6dc61",
+    "sameHarness": true,
+    "sameMeasurement": true,
+    "before": {
+      "windows": 1,
+      "fps": 59.87992127618938,
+      "p95Ms": 18.79999999993015,
+      "p99Ms": 21.699999999953434,
+      "over33Ratio": 0.0002773771219349828,
+      "mainThreadMsPerFrame": 3.927891773450935,
+      "processCpuSeconds": 211.84,
+      "drawCalls": 167,
+      "drawCallsP95": 179,
+      "triangles": 140073,
+      "trianglesP95": 140967,
+      "minOneSecondFps": 57,
+      "peakProcessMemoryBytes": 488051712,
+      "normalizedCpuPercent": 17.591616080251786,
+      "corePercent": 70.36646432100714,
+      "coreEquivalents": 0.7036646432100714,
+      "maxMs": 43.09999999997672,
+      "over100Count": 0,
+      "hits": 427
+    },
+    "after": {
+      "windows": 1,
+      "fps": 59.24949532511687,
+      "p95Ms": 19.40000000037253,
+      "p99Ms": 23.600000000093132,
+      "over33Ratio": 0.0020735261152208025,
+      "mainThreadMsPerFrame": 4.551123115718688,
+      "processCpuSeconds": 249.43,
+      "drawCalls": 168,
+      "drawCallsP95": 181,
+      "triangles": 140076,
+      "trianglesP95": 140974,
+      "minOneSecondFps": 5,
+      "peakProcessMemoryBytes": 506400768,
+      "normalizedCpuPercent": 20.704121068848277,
+      "corePercent": 82.81648427539311,
+      "coreEquivalents": 0.8281648427539311,
+      "maxMs": 900.3999999999069,
+      "over100Count": 7,
+      "hits": 419
+    },
+    "beforeRetained": [
+      {
+        "label": "warm-0",
+        "pssMiB": 434.9912109375,
+        "textureMiB": 175.54636764526367
+      },
+      {
+        "label": "end-0",
+        "pssMiB": 430.4580078125,
+        "textureMiB": 181.72162628173828
+      }
+    ],
+    "afterRetained": [
+      {
+        "label": "warm-0",
+        "pssMiB": 456.498046875,
+        "textureMiB": 167.9551544189453
+      },
+      {
+        "label": "end-0",
+        "pssMiB": 449.8408203125,
+        "textureMiB": 174.13041305541992
+      }
+    ],
+    "memoryBudget": {
+      "errors": [],
+      "warnings": [],
+      "peakBytes": 531814400,
+      "peakMB": 531.8144
+    },
+    "hostBuildWrites": [],
+    "nativeGraphicsErrors": [],
+    "limits": "Android emulator Chrome process-family PSS, not the TapTap process or physical iPhone energy/heat."
+  },
+  "nativeTextureFormatAudit": {
+    "url": "http://127.0.0.1:7567/taptap-texture-preloaded/?view=2d&player=3d",
+    "errors": [],
+    "astcExtension": true,
+    "renderer": "Android Emulator OpenGL ES Translator (NVIDIA GeForce RTX 3080/PCIe/SSE2)",
+    "gfx": {
+      "bufferSize": 11557626,
+      "textureSize": 175640124
+    },
+    "prewarm": {
+      "commonTextures": 93,
+      "commonTextureBytes": 13288024,
+      "skillIcons": 33,
+      "skillReady": true,
+      "ownedEquipmentIcons": 3
+    },
+    "assets": [
+      {
+        "uuid": "da191ce9-43d8-4458-9ccf-3d8a60fc5e74@6c48a",
+        "width": 512,
+        "height": 512,
+        "format": "ASTC_RGBA_4X4",
+        "gfxBytes": 262144,
+        "nativeUrl": "assets/hero-appearance/native/da/da191ce9-43d8-4458-9ccf-3d8a60fc5e74.5fcc5.astc"
+      },
+      {
+        "uuid": "45f9474c-0510-4d38-aadf-749b3dcffa63@6c48a",
+        "width": 1024,
+        "height": 1024,
+        "format": "ASTC_RGBA_4X4",
+        "gfxBytes": 1048576,
+        "nativeUrl": "assets/hero-appearance/native/45/45f9474c-0510-4d38-aadf-749b3dcffa63.ed64d.astc"
+      },
+      {
+        "uuid": "7c520286-35f2-4bcd-a0d6-b88d3db62474@6c48a",
+        "width": 256,
+        "height": 256,
+        "format": "ASTC_RGBA_4X4",
+        "gfxBytes": 87408,
+        "nativeUrl": "assets/native-materials/native/7c/7c520286-35f2-4bcd-a0d6-b88d3db62474.e7d26.astc"
+      },
+      {
+        "uuid": "fd969e82-262e-430d-8312-881ba6e309dd@6c48a",
+        "width": 512,
+        "height": 512,
+        "format": "ASTC_RGBA_4X4",
+        "gfxBytes": 349552,
+        "nativeUrl": "assets/native-materials/native/fd/fd969e82-262e-430d-8312-881ba6e309dd.38985.astc"
+      },
+      {
+        "uuid": "3c1a0b17-1d05-4ab5-9496-c93f9e5ef967@6c48a",
+        "width": 512,
+        "height": 512,
+        "format": "ASTC_RGBA_4X4",
+        "gfxBytes": 262144,
+        "nativeUrl": "assets/hero-appearance/native/3c/3c1a0b17-1d05-4ab5-9496-c93f9e5ef967.168e4.astc"
+      },
+      {
+        "uuid": "946b4f6e-783e-4f2c-b071-ac3baff64724@6c48a",
+        "width": 512,
+        "height": 512,
+        "format": "ASTC_RGBA_4X4",
+        "gfxBytes": 349552,
+        "nativeUrl": "assets/native-materials/native/94/946b4f6e-783e-4f2c-b071-ac3baff64724.2a6fb.astc"
+      },
+      {
+        "uuid": "b0ef4005-3aa8-46d8-b083-0670039c47a5@6c48a",
+        "width": 1024,
+        "height": 1024,
+        "format": "ASTC_RGBA_4X4",
+        "gfxBytes": 1048576,
+        "nativeUrl": "assets/hero-appearance/native/b0/b0ef4005-3aa8-46d8-b083-0670039c47a5.bd37a.astc"
+      },
+      {
+        "uuid": "2a2c8d50-33c7-5725-9077-14376119c78c@6c48a",
+        "width": 512,
+        "height": 512,
+        "format": "ASTC_RGBA_4X4",
+        "gfxBytes": 349552,
+        "nativeUrl": "assets/painted-terrain/native/2a/2a2c8d50-33c7-5725-9077-14376119c78c.d7d7a.astc"
+      },
+      {
+        "uuid": "6dcfc733-3fb7-5494-9e93-1f27a568b0d4@6c48a",
+        "width": 512,
+        "height": 512,
+        "format": "ASTC_RGBA_4X4",
+        "gfxBytes": 349552,
+        "nativeUrl": "assets/painted-terrain/native/6d/6dcfc733-3fb7-5494-9e93-1f27a568b0d4.2b10b.astc"
+      },
+      {
+        "uuid": "99e5ab04-d8a4-5013-8b09-752773dff2fb@6c48a",
+        "width": 512,
+        "height": 512,
+        "format": "ASTC_RGBA_4X4",
+        "gfxBytes": 349552,
+        "nativeUrl": "assets/painted-terrain/native/99/99e5ab04-d8a4-5013-8b09-752773dff2fb.fb19d.astc"
+      },
+      {
+        "uuid": "af46a6fa-517a-587a-8c0d-3c40dfdf440b@6c48a",
+        "width": 512,
+        "height": 512,
+        "format": "ASTC_RGBA_4X4",
+        "gfxBytes": 349552,
+        "nativeUrl": "assets/painted-terrain/native/af/af46a6fa-517a-587a-8c0d-3c40dfdf440b.5a5c3.astc"
+      },
+      {
+        "uuid": "fdb0b984-c690-533c-b3cd-8f7214a51243@6c48a",
+        "width": 512,
+        "height": 512,
+        "format": "ASTC_RGBA_4X4",
+        "gfxBytes": 349552,
+        "nativeUrl": "assets/painted-terrain/native/fd/fdb0b984-c690-533c-b3cd-8f7214a51243.cd6bc.astc"
+      },
+      {
+        "uuid": "57bcdd91-f40d-5b22-8462-9c59e61306b4@6c48a",
+        "width": 512,
+        "height": 512,
+        "format": "ASTC_RGBA_4X4",
+        "gfxBytes": 349552,
+        "nativeUrl": "assets/painted-terrain/native/57/57bcdd91-f40d-5b22-8462-9c59e61306b4.67d25.astc"
+      },
+      {
+        "uuid": "8157fa6b-8480-53bb-899e-30aab498fa30@6c48a",
+        "width": 512,
+        "height": 512,
+        "format": "ASTC_RGBA_4X4",
+        "gfxBytes": 349552,
+        "nativeUrl": "assets/painted-terrain/native/81/8157fa6b-8480-53bb-899e-30aab498fa30.1cbac.astc"
+      }
+    ],
+    "pageTiming": {
+      "elapsedMs": 102.20000000018626,
+      "blank": []
+    },
+    "scope": "Android emulator WebGL runtime format audit, outside the 300s performance window. Does not establish physical GPU storage or iPhone thermal behavior."
+  },
+  "verification": {
+    "typeScript": "Full and core --noEmit passed",
+    "rules": "140/140 existing tests passed",
+    "equipment": "35 original-region copies checked; all 35 built PNGs and all 18 original PNG fallbacks decoded pixel-identically.",
+    "build": "taptap-texture-preloaded",
+    "rawRoot": "src/cocos/test-results/performance/",
+    "raw": [
+      "texture-pair-before/report.json",
+      "texture-preloaded-pair-after/report.json",
+      "texture-preloaded-quiet-after/report.json",
+      "texture-preloaded-pages/report.json",
+      "texture-preloaded-qa/report.json",
+      "texture-preloaded-allocation/report.json",
+      "texture-native-format/report.json",
+      "texture-preloaded-build-pixels.json"
+    ],
+    "intermediateEvidence": "Earlier cache-only and bounded-family builds are superseded by the final all-skill/page-preloaded build; the interrupted texture-pair-after was cancelled and is not used."
+  },
+  "sources": [
+    "https://docs.cocos.com/creator/3.8/manual/en/asset/compress-texture.html",
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/runtime/memory/",
+    "https://developer.android.com/studio/releases/emulator",
+    "https://developer.android.com/games/playgames/graphics"
+  ],
+  "sourceSha256": {
+    "assets/scripts/app/ChapterGame.ts": "fdbfc18e658a8398eb6a23ccb3f6894a7f11913ca2eabd5f50417af1a3582e0f",
+    "assets/scripts/app/PreparationResources.ts": "8834abfcb181967c2ab19d16a87b1ce3bf64ddc482bba196ec89a0751a2cb78d",
+    "assets/scripts/shared/assets/FrameCache.ts": "fbaa91177e516e040ba00235901bfed75d8513fa2d47a871856b689a9f9881fa",
+    "assets/scripts/shared/assets/GameResources.ts": "705f6112220f6864c1023a4a19f6180a4c116a6ad4d994ff9f78659806c0fc47",
+    "assets/scripts/shared/ui/UiSkin.ts": "27065a4edc8a4f84bf83ef29abc6f3454a8c3cbcabe8013637e20c8149643d94",
+    "assets/scripts/shared/ui/DoubleGoldFrame.ts": "c8c2d573621be1a57379ebd4dc0d01a9023e6c35445a944e7299d2d3ad509ae2",
+    "assets/scripts/features/progression/runtime/SkillBook.ts": "b3c875a5b94485f198f1ca5417af70c44533deb1a8384b9e6bbc54d0848cbffa",
+    "assets/scripts/features/equipment/runtime/EquipmentArt.ts": "494a9b41ec86669d4f83f836b0fd6e782a5b54548a2971ea54fca02b4d826511",
+    "assets/scripts/features/world/runtime/MapResources.ts": "b6b17747101e36ce690a90f78d733ba2975654fe9c5d87cf6ddf42d7a8a4958a",
+    "assets/resources/equipment/v3/manifest.json": "27722953667332c579cd0ba7c1a1f1f827eff8cef153b18f28c78762f4896883",
+    "settings/v2/packages/builder.json": "9be956c954445a6f4d0d332d97a03fc45821c78a290343d908937993833953b0",
+    "release/taptap.json": "7150ce4a4b5f16d5523cab915af41ca9b83d63deac405b83141468169e685dd2",
+    "release/taptap-texture-compression.json": "53acc3b81da5bb2ee9c8bbe5e1113b94cfacc53120e6363b13076ca881df5fb3",
+    "tools/prepare-mobile-textures.py": "8673778c1722eb2ef4292cfeaa7801274ddfc28996204f7c47459d61f30d31d9",
+    "tools/prepare-equipment-icon-crops.py": "20f05a1dac84cf02fefd9f8672ae2559920471e8a005c9e318d3320728c756af",
+    "tools/performance/metrics.cjs": "c0872b5a48d333d1ff51ae057c2d711262b8fb362154372a85a61ab5a83d0ef8"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "date": "2026-11-10",
+  "type": "ui-design-proposal",
+  "revision": "v4-compact-mode-selector-inset-close",
+  "generator": "OpenAI built-in image_gen (cloud)",
+  "output": "menu-ui-proposal-v4.png",
+  "reference": {
+    "role": "edit-target",
+    "path": "../menu-redesign-v3/menu-ui-proposal-v3.png"
+  },
+  "generation": {
+    "status": "completed",
+    "prompt": "prompt.txt"
+  },
+  "artReview": {
+    "status": "pending-user-review",
+    "selfReview": {
+      "selector": "Reduced selector height and width; removed instruction caption and large medallion bezels; short labels and engraved icons retained.",
+      "close": "Selector close mark moved from upper corner to dedicated end cell; settings close mark moved inward/down.",
+      "sharedFrame": "Existing rounded dark-gold double outline retained.",
+      "text": "寻路、战斗、挂机 and settings labels visually reviewed."
+    },
+    "limitations": [
+      "Raster proposal demonstrates visual hierarchy and spacing only.",
+      "The generated bitmap is not a validated layout measurement. Minimum touch targets, gaps and exact safe-area geometry must be enforced and checked during implementation."
+    ]
+  },
+  "intendedSharedMetrics": {
+    "unit": "logical pixels, design targets only",
+    "minimumTouch": 48,
+    "minimumAdjacentGap": 8,
+    "closeHitInset": 8,
+    "closeGlyph": 14,
+    "closeCenterDistanceFromFrame": 32
+  },
+  "implementation": {
+    "status": "design-only",
+    "note": "No runtime changes in this revision."
+  }
+}

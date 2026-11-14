@@ -1,0 +1,760 @@
+{
+  "status": "Original-input provenance and preparation record; actual model inferences are recorded separately under results/. No production replacement.",
+  "model_family_requested": "Qwen2.1Turbo (runtime/model selection remains the parent task)",
+  "scope": "All new files stay inside this pilot directory. Production and previous trials are read-only.",
+  "preferred_model_input_policy": "RGBA originals for native transparent editing. In ComfyUI preserve the original alpha using JoinImageWithAlpha after LoadImage; RGB grey-matte copies remain only for provenance verification or an explicit compatibility comparison.",
+  "canvas_policy": {
+    "size": [
+      512,
+      768
+    ],
+    "backgroundRGB": [
+      228,
+      228,
+      228
+    ],
+    "pixelsPerWorldUnit": 400.0,
+    "footAnchorXY": [
+      256,
+      712
+    ],
+    "standingTargetWorldHeight": 1.556,
+    "standingTargetCanvasPixels": 622.4,
+    "policy": "Preserve actual installed world proportions across every image; single native-to-canvas scale = action UPP *400, never fit individual alpha bbox."
+  },
+  "originals": {
+    "standing-front": {
+      "label": "standing-front",
+      "source_original": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\assets\\W01-explore-idle.png",
+        "sha256": "df887b28a9bef335aa326d86bf2117a07f1faeef192ac1b55145123b549481cd",
+        "size": [
+          1536,
+          1024
+        ],
+        "mode": "RGBA"
+      },
+      "source_crop_xywh": [
+        301,
+        9,
+        168,
+        490
+      ],
+      "runtime_original": {
+        "path": "F:\\workspace\\Singularity\\src\\cocos\\assets\\resources\\flat2d\\characters\\raphael\\locomotion-v1\\W01-explore-idle.png",
+        "sha256": "df887b28a9bef335aa326d86bf2117a07f1faeef192ac1b55145123b549481cd",
+        "size": [
+          1536,
+          1024
+        ],
+        "mode": "RGBA"
+      },
+      "native_original": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\geometry-inputs\\explore-idle-front-p0-native.png",
+        "sha256": "a9d07138a80b9bc02bdb1f03c14d771ffda7da1b958b882ccae755087e814815",
+        "size": [
+          168,
+          490
+        ],
+        "mode": "RGBA"
+      },
+      "native_byte_copy": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-native\\standing-front-p0.png",
+        "sha256": "a9d07138a80b9bc02bdb1f03c14d771ffda7da1b958b882ccae755087e814815",
+        "size": [
+          168,
+          490
+        ],
+        "mode": "RGBA"
+      },
+      "original_rgb_canvas": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\geometry-inputs\\explore-idle-front-p0.png",
+        "sha256": "298a44a1f538066d977ecc69830ebe0450e5699427e931cf0ec130b778d3bb71",
+        "size": [
+          512,
+          768
+        ],
+        "mode": "RGB"
+      },
+      "rgba_canvas": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\standing-front-p0-rgba.png",
+        "sha256": "cb9f904ab1c10d9acb9b1c643c9d40fd9ca0b86600e6f7cf65dd9059df45025f",
+        "size": [
+          512,
+          768
+        ],
+        "mode": "RGBA"
+      },
+      "model_rgb_byte_copy": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\standing-front-p0-model-rgb.png",
+        "sha256": "298a44a1f538066d977ecc69830ebe0450e5699427e931cf0ec130b778d3bb71",
+        "size": [
+          512,
+          768
+        ],
+        "mode": "RGB"
+      },
+      "rgba_canvas_provenance": "Reconstructed from unedited native RGBA with the historical action-wide affine; no model, guide, body warp or candidate pixels. Not a byte copy of a pre-existing 512x768 RGBA file.",
+      "rgba_raw_pixel_sha256": "66ddf1285a6ef74e39c56135ae949712e41dc27fa51d1135101fa3ca128203db",
+      "native_to_canvas_affine": [
+        1.2767179487179487,
+        0,
+        147.47897435897437,
+        0,
+        1.2767179487179487,
+        88.96164102564103
+      ],
+      "canvas_foot_anchor_xy": [
+        256,
+        712
+      ],
+      "pixels_per_world_unit": 400.0,
+      "alpha_matches_original_canvas": true,
+      "flattened_rgb_pixels_match_original_canvas": true
+    },
+    "standing-back": {
+      "label": "standing-back",
+      "source_original": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\assets\\W01-explore-idle.png",
+        "sha256": "df887b28a9bef335aa326d86bf2117a07f1faeef192ac1b55145123b549481cd",
+        "size": [
+          1536,
+          1024
+        ],
+        "mode": "RGBA"
+      },
+      "source_crop_xywh": [
+        301,
+        519,
+        167,
+        493
+      ],
+      "runtime_original": {
+        "path": "F:\\workspace\\Singularity\\src\\cocos\\assets\\resources\\flat2d\\characters\\raphael\\locomotion-v1\\W01-explore-idle.png",
+        "sha256": "df887b28a9bef335aa326d86bf2117a07f1faeef192ac1b55145123b549481cd",
+        "size": [
+          1536,
+          1024
+        ],
+        "mode": "RGBA"
+      },
+      "native_original": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\geometry-inputs\\explore-idle-back-p0-native.png",
+        "sha256": "c5768312a13899be4159f34b4b3b9d531b1652cc667a4fe3979b5c0fa74abcc0",
+        "size": [
+          167,
+          493
+        ],
+        "mode": "RGBA"
+      },
+      "native_byte_copy": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-native\\standing-back-p0.png",
+        "sha256": "c5768312a13899be4159f34b4b3b9d531b1652cc667a4fe3979b5c0fa74abcc0",
+        "size": [
+          167,
+          493
+        ],
+        "mode": "RGBA"
+      },
+      "original_rgb_canvas": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\geometry-inputs\\explore-idle-back-p0.png",
+        "sha256": "43998bf3092078923ee28740a54f4755e0016299aaa9140084ca1177c4239937",
+        "size": [
+          512,
+          768
+        ],
+        "mode": "RGB"
+      },
+      "rgba_canvas": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\standing-back-p0-rgba.png",
+        "sha256": "c40ddae5f25f3486700063a4268d760a4896177171cd82ac0ef078a55499b9f6",
+        "size": [
+          512,
+          768
+        ],
+        "mode": "RGBA"
+      },
+      "model_rgb_byte_copy": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\standing-back-p0-model-rgb.png",
+        "sha256": "43998bf3092078923ee28740a54f4755e0016299aaa9140084ca1177c4239937",
+        "size": [
+          512,
+          768
+        ],
+        "mode": "RGB"
+      },
+      "rgba_canvas_provenance": "Reconstructed from unedited native RGBA with the historical action-wide affine; no model, guide, body warp or candidate pixels. Not a byte copy of a pre-existing 512x768 RGBA file.",
+      "rgba_raw_pixel_sha256": "9d2064587416c8a26b768a28423b9f6b05fcdd7509948a0d3a9a0a94c4ae3953",
+      "native_to_canvas_affine": [
+        1.2767179487179487,
+        0,
+        147.47897435897437,
+        0,
+        1.2767179487179487,
+        85.13148717948718
+      ],
+      "canvas_foot_anchor_xy": [
+        256,
+        712
+      ],
+      "pixels_per_world_unit": 400.0,
+      "alpha_matches_original_canvas": true,
+      "flattened_rgb_pixels_match_original_canvas": true
+    },
+    "run-front": {
+      "label": "run-front",
+      "source_original": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+        "sha256": "2c8827afbfba74cdae51d9ea344b8d64f24d897b47b952f3742925dcba5f3316",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA"
+      },
+      "source_crop_xywh": [
+        54,
+        18,
+        147,
+        363
+      ],
+      "runtime_original": {
+        "path": "F:\\workspace\\Singularity\\src\\cocos\\assets\\resources\\flat2d\\characters\\raphael\\locomotion-v2\\W01-explore-run-a.png",
+        "sha256": "2c8827afbfba74cdae51d9ea344b8d64f24d897b47b952f3742925dcba5f3316",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA"
+      },
+      "native_original": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\geometry-inputs\\explore-run-front-p0-native.png",
+        "sha256": "f85d2cf00b994009dedf9714de3395dbf6fb95e3820762bd89f731dbb47b2c55",
+        "size": [
+          147,
+          363
+        ],
+        "mode": "RGBA"
+      },
+      "native_byte_copy": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-native\\run-front-p0.png",
+        "sha256": "f85d2cf00b994009dedf9714de3395dbf6fb95e3820762bd89f731dbb47b2c55",
+        "size": [
+          147,
+          363
+        ],
+        "mode": "RGBA"
+      },
+      "original_rgb_canvas": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\geometry-inputs\\explore-run-front-p0.png",
+        "sha256": "0b3ffcb8cafc43ee9e8e149b683c1349f52d6efef03b91f71b249b749c03df51",
+        "size": [
+          512,
+          768
+        ],
+        "mode": "RGB"
+      },
+      "rgba_canvas": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\run-front-p0-rgba.png",
+        "sha256": "1ada50d505569159058fd49803a9ad243a3a53991e73d8867493a9aff1132f7b",
+        "size": [
+          512,
+          768
+        ],
+        "mode": "RGBA"
+      },
+      "model_rgb_byte_copy": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\run-front-p0-model-rgb.png",
+        "sha256": "0b3ffcb8cafc43ee9e8e149b683c1349f52d6efef03b91f71b249b749c03df51",
+        "size": [
+          512,
+          768
+        ],
+        "mode": "RGB"
+      },
+      "rgba_canvas_provenance": "Reconstructed from unedited native RGBA with the historical action-wide affine; no model, guide, body warp or candidate pixels. Not a byte copy of a pre-existing 512x768 RGBA file.",
+      "rgba_raw_pixel_sha256": "2d835bfd5c1a465afa250e8066d740cd9eb7ef8c523cadeb8983bcdaa0ea186f",
+      "native_to_canvas_affine": [
+        1.7337047353760446,
+        0,
+        130.30640668523677,
+        0,
+        1.7337047353760446,
+        86.99944289693588
+      ],
+      "canvas_foot_anchor_xy": [
+        256,
+        712
+      ],
+      "pixels_per_world_unit": 400.0,
+      "alpha_matches_original_canvas": true,
+      "flattened_rgb_pixels_match_original_canvas": true
+    },
+    "run-back": {
+      "label": "run-back",
+      "source_original": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+        "sha256": "2c8827afbfba74cdae51d9ea344b8d64f24d897b47b952f3742925dcba5f3316",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA"
+      },
+      "source_crop_xywh": [
+        59,
+        781,
+        141,
+        361
+      ],
+      "runtime_original": {
+        "path": "F:\\workspace\\Singularity\\src\\cocos\\assets\\resources\\flat2d\\characters\\raphael\\locomotion-v2\\W01-explore-run-a.png",
+        "sha256": "2c8827afbfba74cdae51d9ea344b8d64f24d897b47b952f3742925dcba5f3316",
+        "size": [
+          1024,
+          1536
+        ],
+        "mode": "RGBA"
+      },
+      "native_original": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\geometry-inputs\\explore-run-back-p0-native.png",
+        "sha256": "ea296b7d81775b54a50d23cb8c92f56b77174a39d51a04a24681843b4bad3d1b",
+        "size": [
+          141,
+          361
+        ],
+        "mode": "RGBA"
+      },
+      "native_byte_copy": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-native\\run-back-p0.png",
+        "sha256": "ea296b7d81775b54a50d23cb8c92f56b77174a39d51a04a24681843b4bad3d1b",
+        "size": [
+          141,
+          361
+        ],
+        "mode": "RGBA"
+      },
+      "original_rgb_canvas": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\geometry-inputs\\explore-run-back-p0.png",
+        "sha256": "17f7a8ae15096d3870658304b59f403227b56b681a052a6d6c538f78381306dc",
+        "size": [
+          512,
+          768
+        ],
+        "mode": "RGB"
+      },
+      "rgba_canvas": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\run-back-p0-rgba.png",
+        "sha256": "caf13e1502d75419c5163b8ae7f08b012c990f2033452827a9c0259a88a47848",
+        "size": [
+          512,
+          768
+        ],
+        "mode": "RGBA"
+      },
+      "model_rgb_byte_copy": {
+        "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\run-back-p0-model-rgb.png",
+        "sha256": "17f7a8ae15096d3870658304b59f403227b56b681a052a6d6c538f78381306dc",
+        "size": [
+          512,
+          768
+        ],
+        "mode": "RGB"
+      },
+      "rgba_canvas_provenance": "Reconstructed from unedited native RGBA with the historical action-wide affine; no model, guide, body warp or candidate pixels. Not a byte copy of a pre-existing 512x768 RGBA file.",
+      "rgba_raw_pixel_sha256": "b8d28bd8c6fc3a36fb0bb4fe4f5bf5d2247b542afac8493bf8b90b5b268e0c7b",
+      "native_to_canvas_affine": [
+        1.7337047353760446,
+        0,
+        131.17325905292478,
+        0,
+        1.7337047353760446,
+        90.46685236768803
+      ],
+      "canvas_foot_anchor_xy": [
+        256,
+        712
+      ],
+      "pixels_per_world_unit": 400.0,
+      "alpha_matches_original_canvas": true,
+      "flattened_rgb_pixels_match_original_canvas": true
+    }
+  },
+  "groups": [
+    {
+      "name": "front-run",
+      "goal": "Standing-reference costume/trouser palette first, then a separate original-input leg proportion trial.",
+      "images": [
+        {
+          "image_index": 1,
+          "role": "edit_target_original_running_pose",
+          "original_label": "run-front",
+          "model_input": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\run-front-p0-rgba.png",
+            "sha256": "1ada50d505569159058fd49803a9ad243a3a53991e73d8867493a9aff1132f7b",
+            "size": [
+              512,
+              768
+            ],
+            "mode": "RGBA"
+          },
+          "preserved_rgba": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\run-front-p0-rgba.png",
+            "sha256": "1ada50d505569159058fd49803a9ad243a3a53991e73d8867493a9aff1132f7b",
+            "size": [
+              512,
+              768
+            ],
+            "mode": "RGBA"
+          },
+          "optional_rgb_review_or_compatibility_copy": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\run-front-p0-model-rgb.png",
+            "sha256": "0b3ffcb8cafc43ee9e8e149b683c1349f52d6efef03b91f71b249b749c03df51",
+            "size": [
+              512,
+              768
+            ],
+            "mode": "RGB"
+          },
+          "comfyui_alpha_loading": "Use LoadImage followed by JoinImageWithAlpha to reconstruct the RGBA tensor from the preserved original alpha; verify/invert the LoadImage MASK convention as needed. Do not send only the IMAGE RGB tensor or substitute the grey-matte copy for the alpha trial.",
+          "source_original": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+            "sha256": "2c8827afbfba74cdae51d9ea344b8d64f24d897b47b952f3742925dcba5f3316",
+            "size": [
+              1024,
+              1536
+            ],
+            "mode": "RGBA"
+          },
+          "source_crop_xywh": [
+            54,
+            18,
+            147,
+            363
+          ]
+        },
+        {
+          "image_index": 2,
+          "role": "approved_identity_costume_trouser_and_body_proportion_reference_only",
+          "original_label": "standing-front",
+          "model_input": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\standing-front-p0-rgba.png",
+            "sha256": "cb9f904ab1c10d9acb9b1c643c9d40fd9ca0b86600e6f7cf65dd9059df45025f",
+            "size": [
+              512,
+              768
+            ],
+            "mode": "RGBA"
+          },
+          "preserved_rgba": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\standing-front-p0-rgba.png",
+            "sha256": "cb9f904ab1c10d9acb9b1c643c9d40fd9ca0b86600e6f7cf65dd9059df45025f",
+            "size": [
+              512,
+              768
+            ],
+            "mode": "RGBA"
+          },
+          "optional_rgb_review_or_compatibility_copy": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\standing-front-p0-model-rgb.png",
+            "sha256": "298a44a1f538066d977ecc69830ebe0450e5699427e931cf0ec130b778d3bb71",
+            "size": [
+              512,
+              768
+            ],
+            "mode": "RGB"
+          },
+          "comfyui_alpha_loading": "Use LoadImage followed by JoinImageWithAlpha to reconstruct the RGBA tensor from the preserved original alpha; verify/invert the LoadImage MASK convention as needed. Do not send only the IMAGE RGB tensor or substitute the grey-matte copy for the alpha trial.",
+          "source_original": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\assets\\W01-explore-idle.png",
+            "sha256": "df887b28a9bef335aa326d86bf2117a07f1faeef192ac1b55145123b549481cd",
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA"
+          },
+          "source_crop_xywh": [
+            301,
+            9,
+            168,
+            490
+          ]
+        }
+      ],
+      "first_prompt": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\front-run\\prompt.txt",
+      "separate_geometry_prompt": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\front-run\\prompt-proportions.txt",
+      "protected_regions_from_previous_audit_xyxy": {
+        "hands_context": [
+          [
+            190,
+            266,
+            276,
+            351
+          ],
+          [
+            335,
+            360,
+            383,
+            428
+          ]
+        ],
+        "hands_cores": [
+          [
+            202,
+            290,
+            263,
+            339
+          ],
+          [
+            343,
+            368,
+            375,
+            420
+          ]
+        ]
+      }
+    },
+    {
+      "name": "back-sword",
+      "goal": "Extend only original rear standing scabbard; preserve original tip and hands. Rear runner retained as optional subsequent trial.",
+      "images": [
+        {
+          "image_index": 1,
+          "role": "edit_target_original_rear_standing_sword",
+          "original_label": "standing-back",
+          "model_input": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\standing-back-p0-rgba.png",
+            "sha256": "c40ddae5f25f3486700063a4268d760a4896177171cd82ac0ef078a55499b9f6",
+            "size": [
+              512,
+              768
+            ],
+            "mode": "RGBA"
+          },
+          "preserved_rgba": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\standing-back-p0-rgba.png",
+            "sha256": "c40ddae5f25f3486700063a4268d760a4896177171cd82ac0ef078a55499b9f6",
+            "size": [
+              512,
+              768
+            ],
+            "mode": "RGBA"
+          },
+          "optional_rgb_review_or_compatibility_copy": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\standing-back-p0-model-rgb.png",
+            "sha256": "43998bf3092078923ee28740a54f4755e0016299aaa9140084ca1177c4239937",
+            "size": [
+              512,
+              768
+            ],
+            "mode": "RGB"
+          },
+          "comfyui_alpha_loading": "Use LoadImage followed by JoinImageWithAlpha to reconstruct the RGBA tensor from the preserved original alpha; verify/invert the LoadImage MASK convention as needed. Do not send only the IMAGE RGB tensor or substitute the grey-matte copy for the alpha trial.",
+          "source_original": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\assets\\W01-explore-idle.png",
+            "sha256": "df887b28a9bef335aa326d86bf2117a07f1faeef192ac1b55145123b549481cd",
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA"
+          },
+          "source_crop_xywh": [
+            301,
+            519,
+            167,
+            493
+          ]
+        }
+      ],
+      "first_prompt": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\back-sword\\prompt.txt",
+      "protected_regions_from_previous_audit_xyxy": {
+        "hands_context": [
+          [
+            146,
+            368,
+            187,
+            437
+          ],
+          [
+            323,
+            368,
+            364,
+            437
+          ]
+        ],
+        "hands_cores": [
+          [
+            152,
+            374,
+            181,
+            431
+          ],
+          [
+            329,
+            374,
+            358,
+            431
+          ]
+        ]
+      },
+      "sword_geometry": {
+        "upper_attachment_xy": [
+          283,
+          192
+        ],
+        "original_actual_tip_xy": [
+          198.016,
+          380.206
+        ],
+        "requested_tip_xy": [
+          167.016,
+          445.206
+        ],
+        "original_tip_translation_xy": [
+          -31,
+          65
+        ],
+        "tip_detail_source": "original standing-back pixels, not revision candidate"
+      },
+      "optional_back_run_images": [
+        {
+          "image_index": 1,
+          "role": "optional_edit_target_original_rear_runner",
+          "original_label": "run-back",
+          "model_input": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\run-back-p0-rgba.png",
+            "sha256": "caf13e1502d75419c5163b8ae7f08b012c990f2033452827a9c0259a88a47848",
+            "size": [
+              512,
+              768
+            ],
+            "mode": "RGBA"
+          },
+          "preserved_rgba": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\run-back-p0-rgba.png",
+            "sha256": "caf13e1502d75419c5163b8ae7f08b012c990f2033452827a9c0259a88a47848",
+            "size": [
+              512,
+              768
+            ],
+            "mode": "RGBA"
+          },
+          "optional_rgb_review_or_compatibility_copy": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\run-back-p0-model-rgb.png",
+            "sha256": "17f7a8ae15096d3870658304b59f403227b56b681a052a6d6c538f78381306dc",
+            "size": [
+              512,
+              768
+            ],
+            "mode": "RGB"
+          },
+          "comfyui_alpha_loading": "Use LoadImage followed by JoinImageWithAlpha to reconstruct the RGBA tensor from the preserved original alpha; verify/invert the LoadImage MASK convention as needed. Do not send only the IMAGE RGB tensor or substitute the grey-matte copy for the alpha trial.",
+          "source_original": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+            "sha256": "2c8827afbfba74cdae51d9ea344b8d64f24d897b47b952f3742925dcba5f3316",
+            "size": [
+              1024,
+              1536
+            ],
+            "mode": "RGBA"
+          },
+          "source_crop_xywh": [
+            59,
+            781,
+            141,
+            361
+          ]
+        },
+        {
+          "image_index": 2,
+          "role": "optional_approved_rear_identity_costume_and_proportions_reference_only",
+          "original_label": "standing-back",
+          "model_input": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\standing-back-p0-rgba.png",
+            "sha256": "c40ddae5f25f3486700063a4268d760a4896177171cd82ac0ef078a55499b9f6",
+            "size": [
+              512,
+              768
+            ],
+            "mode": "RGBA"
+          },
+          "preserved_rgba": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\standing-back-p0-rgba.png",
+            "sha256": "c40ddae5f25f3486700063a4268d760a4896177171cd82ac0ef078a55499b9f6",
+            "size": [
+              512,
+              768
+            ],
+            "mode": "RGBA"
+          },
+          "optional_rgb_review_or_compatibility_copy": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\standing-back-p0-model-rgb.png",
+            "sha256": "43998bf3092078923ee28740a54f4755e0016299aaa9140084ca1177c4239937",
+            "size": [
+              512,
+              768
+            ],
+            "mode": "RGB"
+          },
+          "comfyui_alpha_loading": "Use LoadImage followed by JoinImageWithAlpha to reconstruct the RGBA tensor from the preserved original alpha; verify/invert the LoadImage MASK convention as needed. Do not send only the IMAGE RGB tensor or substitute the grey-matte copy for the alpha trial.",
+          "source_original": {
+            "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\assets\\W01-explore-idle.png",
+            "sha256": "df887b28a9bef335aa326d86bf2117a07f1faeef192ac1b55145123b549481cd",
+            "size": [
+              1536,
+              1024
+            ],
+            "mode": "RGBA"
+          },
+          "source_crop_xywh": [
+            301,
+            519,
+            167,
+            493
+          ]
+        }
+      ],
+      "optional_back_run_prompt": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\back-sword\\prompt-run-back-optional.txt"
+    }
+  ],
+  "recommended_single_frame_order": [
+    "front-run colour-only from original",
+    "front-run proportions from original, only if colour trial is useful",
+    "back-sword from original",
+    "optional run-back from original"
+  ],
+  "postprocess_contract": [
+    "A prompt does not freeze pixels. Keep model output as a candidate and composite only a reviewed local edit mask over the preserved RGBA original.",
+    "Restore original head, hands/wrists, sword details outside the intended edit, feet and transparent edges after all geometry and colour work; audit changed pixels outside the final edit mask.",
+    "For sword extension keep the original tip with an integer translation and preserve foreground-hand occlusion/finger gaps; do not paste an opaque grey hand rectangle over the scabbard.",
+    "Check head identity, hairstyle, leg proportions, forward lean, costume/trouser colour, hand anatomy, sword cap, attachment, feet anchors and alpha before acceptance.",
+    "No candidate may replace production, source art or runtime manifest before explicit visual acceptance."
+  ],
+  "cautions": [
+    "Historical 512x768 inputs are RGB and separate alpha; preserved true RGBA canvases are reconstructed from the original native RGBA with exactly the historical affine. Native source PNGs are also byte-copied.",
+    "Optional model RGB copies are exact byte copies of original unwarped geometry-inputs RGB files on (228,228,228). The first trial should instead use RGBA + JoinImageWithAlpha to evaluate native transparent editing.",
+    "Existing before is unwarped; guides, raw-model, candidate, constrained-candidate and candidate-v2 are deliberately excluded from all input pixel sources.",
+    "Audit rectangles are guidance from the previous trial, not accepted new edit masks. No artistic acceptance is claimed by the metadata checks."
+  ],
+  "source_records_used": [
+    "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\cases.json",
+    "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\prepare-cases.py",
+    "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\geometry-inputs\\inputs.json",
+    "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\revision-v2\\README.md",
+    "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\revision-v2\\revision-report.json",
+    "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\revision-v2\\hand-audit\\hand-regions.json"
+  ],
+  "verification": {
+    "native_byte_copies_equal": true,
+    "source_crop_pixels_equal_native": true,
+    "rgba_alpha_matches_historical_alpha": true,
+    "rgba_flatten_matches_historical_unedited_RGB": true,
+    "original_sources_unchanged": true,
+    "model_inference_called": false,
+    "network_used": false,
+    "production_modified": false,
+    "stage": "input preparation only; not the later inference stage"
+  }
+}

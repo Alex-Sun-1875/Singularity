@@ -1,0 +1,43 @@
+{
+  "version": "0.3.7",
+  "date": "2026-11-10",
+  "userDecision": "Standalone guest test package; existing local saves only",
+  "buildCommand": "npm run pack:taptap:guest",
+  "buildMode": "guest-test",
+  "loginMode": "guest",
+  "localSaveOnly": true,
+  "implementation": {
+    "nativeEntryFlag": "globalThis.__SINGULARITY_GUEST_TEST__ = true",
+    "loginStatus": "guest",
+    "customSessionCreated": false,
+    "existingStorageAdapterAndSaveKeysReused": true,
+    "ordinaryTestAndReleaseLoginGatePreserved": true
+  },
+  "validation": {
+    "typeCheck": "passed",
+    "existingClientChecks": {"passed": 102, "failed": 0},
+    "existingAuthServiceChecks": {"passed": 3, "failed": 0},
+    "guestAccessWithoutAuthCallsOrToken": "passed",
+    "requiredLoginWithEmptyConfigStillBlocks": "passed",
+    "guestFlagOutsideTestPackageRejected": "passed by PowerShell entry and converter",
+    "browserReview": "../../../test-results/taptap-guest-v1/browser-review.json",
+    "browserViewports": ["1280x720 desktop", "915x412 Android-style landscape"],
+    "browserChecks": ["Guest title and local-only notice", "Real keyboard/touch movement", "Existing storage adapter writes and reloads saved position", "Simulated Cocos hide/show preserves guest access and pauses gameplay", "Zero business-login API calls", "Ordinary minigame fixture still blocks without service configuration"],
+    "browserErrors": 0,
+    "browserFailedRequests": 0,
+    "nativeEntryVersionSubpackagesAndZipIntegrity": "passed"
+  },
+  "package": {
+    "path": "../artifacts/taptap-guest-test/SwordAndFire_0.3.7_TapTap_guest-test_20261110T020542Z/SwordAndFire_0.3.7_TapTap_guest-test_20261110T020542Z.zip",
+    "bytes": 272991992,
+    "sha256": "93ac558c00ceda0f9dc96f3294011c405d3f7087b271ab44665e476d7b447416",
+    "subpackages": 71,
+    "initialPayloadRawBytes": 4919741,
+    "initialPayloadLocalZipBytes": 1170275
+  },
+  "limitations": ["Browser storage/lifecycle simulation is not TapTap real-device acceptance", "Platform-delivered initial payload and pre-play download volume have not been measured", "Formal account login still needs the server, HTTPS domain and platform domain configuration"],
+  "uploaded": false,
+  "platformVerified": false,
+  "realDeviceVerified": false,
+  "releasePreflightPassed": false
+}

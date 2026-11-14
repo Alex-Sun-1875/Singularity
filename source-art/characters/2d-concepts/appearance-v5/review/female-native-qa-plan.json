@@ -1,0 +1,56 @@
+{
+  "status": "READY_TO_RUN_AFTER_ROOT_UNIFIED_BUILD",
+  "scope": "Real Cocos native flat actors in their existing story areas, then four-direction shader/anchor review. No new test code, build or browser launched during preparation.",
+  "runtimePort": 7469,
+  "runtimeQuery": "?view=2d",
+  "existingPlaywrightPackage": "src/cocos/node_modules/playwright",
+  "existingDEVHook": "globalThis.__chapter exposes app, areas, state and inspect(). Existing app.session.enter(area, entry), app.rebuild(), app.actors inspection and per-actor angle/show allow native review without gameplay-code changes.",
+  "targets": [
+    {
+      "id": "mira",
+      "area": "S01-T1",
+      "object": "t1-mira",
+      "x": -5,
+      "z": 0,
+      "note": "Third Cup Inn; primary existing merchant placement."
+    },
+    {
+      "id": "nightqi",
+      "area": "S05",
+      "object": "s05-nightqi",
+      "x": -31,
+      "z": -16,
+      "note": "Birch hunting grounds; existing merchant."
+    },
+    {
+      "id": "evelyn",
+      "area": "U1-04",
+      "object": "u104-dinner",
+      "objectX": -10,
+      "actualActorX": -7.7,
+      "z": 6,
+      "note": "FlatActors applies +2.3 x offset for meeting action."
+    },
+    {
+      "id": "mira",
+      "area": "U1-04",
+      "x": -3,
+      "z": 3,
+      "note": "Additional existing dinner actor from FlatActors.build()."
+    }
+  ],
+  "checks": [
+    "All selected images resolve to atlas-appearance-v5-soft-v2.png and their manifests.",
+    "Actual area scene uses native unlit mesh material and alphaThreshold16/255 with no background panel, halo, red noise, clipped props or missing hair.",
+    "Front/right/back/left preserve dark bangs and braided ponytail, role outfit/props, fuller profile cheeks and rounded chin.",
+    "Boot ground contact stays stable, actor's original world height is retained relative to player and area props.",
+    "Capture real engine screenshots and console errors as evidence under review; no Pillow/image postprocessing."
+  ],
+  "sources": [
+    "src/cocos/assets/scripts/data/WorldData.ts:106",
+    "src/cocos/assets/scripts/data/WorldData.ts:268",
+    "src/cocos/assets/scripts/data/WorldData.ts:345",
+    "src/cocos/assets/scripts/runtime/FlatActors.ts",
+    "src/cocos/assets/scripts/runtime/ChapterGame.ts:54"
+  ]
+}

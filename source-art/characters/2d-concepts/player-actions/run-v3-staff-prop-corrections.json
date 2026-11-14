@@ -1,0 +1,136 @@
+{
+  "date": "2026-11-06",
+  "reason": "After-fix native Cocos review accepted base legs but rejected W11 B prop short upper shaft and hand-relative crystal height jump at A4->B1/B4->A1.",
+  "rejectedSuffix": "-rejected-prop-short",
+  "tool": "built-in image_gen.imagegen",
+  "pixelEditsAfterGeneration": false,
+  "selected": [
+    {
+      "name": "run-staff-v3-b",
+      "generated": "C:/Users/Alexa/.codex/generated_images/01a1ae3f-b29b-74f2-ac4c-efdfdf42f242/exec-58175664-60b5-4f21-a01f-3a5b94780440.png",
+      "prompt": "Use case: precise-object-edit. FIRST image is Raphael staff run B, SECOND image is staff run A. FINAL SMALL PROP LENGTH MATCH: in FIRST image, leave the CRYSTAL HEAD, UPPER SHAFT and FIST GRIP exactly where they are. Extend ONLY THE LOWER STAFF SHAFT BELOW THE FIST by about20pixels, with the same straight gray-brown wood continuing downward along the existing shaft angle, then place the small dark ferrule at the new butt end. Current B staff lower end stops too close to the hand; A second image has more lower shaft. We need equal hand-relative staff lengths at A/B transition.\nFor FRONT cells, old B butt localy190 should end aroundy212, crystal stayslocaly85, grip unmoved. RIGHT PROFILE butt oldlocaly175 should end aroundlocaly198; crystal stays current shoulder-level height. BACK butt oldlocaly180 should end aroundlocaly198. LEFT PROFILE butt oldlocaly157 should end aroundlocaly183. These are staff endpoints only, not boots. Keep staff angle and width, muted gray wood, clear colorless quartz, leather binding and simple ferrule. No added orb, glow, rings or sword. Do not lengthen upper part or change shaft in hand. Goal total staff length about130pixels, matching A second image; not huge walking-stick height.\nAll16 PEOPLE AND THEIR RUN POSES are strictly invariant from FIRST image. Exact same legs/support-foot side, knees, boot positions, ground line, pelvis, torso, shoulders, hands/fingers, face/hair, cape/armor/clothes, body scale and frame centers. Do not redraw/reframe/shift person or change hand position. Only add the missing20pixels of wood BELOW each fixed fist and relocate butt cap. No other visual changes.\nExact1536x1024 RGBA,4columns x4rows384x256 cells, unchanged down/right/up/left. Full figures/props within cell. Every empty area alpha0 transparent, no fog/haze/gradient/floor/shadow/checkerboard/text/grid. Keep head/upperstaff placement and all人物姿态不动，只延长握点下方杖杆约20像素，与A片下段长度一致。",
+      "frameRects": [
+        [
+          36,
+          0,
+          384,
+          256
+        ],
+        [
+          361,
+          0,
+          384,
+          256
+        ],
+        [
+          716,
+          0,
+          384,
+          256
+        ],
+        [
+          1042,
+          0,
+          384,
+          256
+        ],
+        [
+          29,
+          256,
+          384,
+          256
+        ],
+        [
+          353,
+          256,
+          384,
+          256
+        ],
+        [
+          707,
+          256,
+          384,
+          256
+        ],
+        [
+          1030,
+          256,
+          384,
+          256
+        ],
+        [
+          48,
+          512,
+          384,
+          256
+        ],
+        [
+          374,
+          512,
+          384,
+          256
+        ],
+        [
+          729,
+          512,
+          384,
+          256
+        ],
+        [
+          1054,
+          512,
+          384,
+          256
+        ],
+        [
+          40,
+          768,
+          384,
+          256
+        ],
+        [
+          364,
+          768,
+          384,
+          256
+        ],
+        [
+          719,
+          768,
+          384,
+          256
+        ],
+        [
+          1041,
+          768,
+          384,
+          256
+        ]
+      ],
+      "frameRectsMethod": "Alpha>32 horizontal character islands separated by20px empty gaps, measured full-width per row. Each island centred in384x256 metadata window; PNG bytes untouched."
+    }
+  ],
+  "imagegenEditChain": [
+    {
+      "output": "C:/Users/Alexa/.codex/generated_images/01a1ae3f-b29b-74f2-ac4c-efdfdf42f242/exec-3cf60867-7453-4cf0-b848-0476adad5a3e.png",
+      "prompt": "Use case: precise-object-edit / identity-preserve. FIRST IMAGE is Raphael RUN STAFF PART B and is the EDIT TARGET. SECOND IMAGE is run STAFF PART A for EXACT prop length/hand-relative geometry continuity. THIRD IMAGE is staff-progression design reference; use ONLY its FAR-LEFT BASIC STAFF ART_STAFF_1: weathered gray ash wood with natural knots, brown leather binding around a small clear colorless quartz crystal, simple dark ferrule. No green/blue glowing plastic orb, no gold jewelry, no fantasy satellite rings.\nChange ONLY the STAFF PROP in ALL16 first-image cells. Every original B character pixel-level pose stays faithful: identical knees, boot side/support, trousers folds, adult anatomy, pelvis, head/body position, face, curly hair, cape, leather cuirass, ivory sleeves, steel shoulder, both arms/hands and baseline. Hands must remain at existing exact positions; do not move grip hand. Do not change any running leg pose or staff-hand arm. Keep same B support half, front SCREEN-RIGHT boot low and back SCREEN-LEFT boot low.\nCRITICAL LENGTH/GRIP: B's old staff is about one third too short above the hand. Replace it with the SAME long staff geometry as corresponding A frame in SECOND image: about140pixels total shaft+quartz length relative220pixel man, with hand at the MIDDLE of shaft, about65pixels below crystal tip and65pixels above butt tip. Preserve the long ABOVE-GRIP segment: in side views crystal tip reaches NEAR THE SHOULDER BEHIND THE ARM, never down beside fist/waist. Match A's slight backward shaft angle per corresponding direction and column, not the old B's more horizontal short stick. The grip in B stays at original fist coordinates. In front views crystal tip near upper chest/shoulder height, butt near lower shin. In back views same shoulder-level crystal on right side. In LEFT profile crystal above and behind right shoulder, not at waist. Keep staff bottom clear of ground and boots, all tips inside cell. B4->A1 and A4->B1 must keep staff same overall length and same height relative to fixed hand. No collapsed, telescoping, broken or foreshortened short wand.\nMaterials should be subdued gray-brown wood and clear pale quartz, close enough to A's warm painted lighting to avoid a color flash. Keep quartz compact and colorless, no neon green plastic sphere. Do not recolor man/clothes or lighting. Highest priority is matching A's long shaft geometry ABOVE and BELOW the fixed grip.\nExact output1536x1024 RGBA,4columns x4rows384x256 cells, unchanged original rows front/down,right,back/up,left. True transparent alpha0 background, no fog/haze/gradient/floor/shadow/checkerboard/text/grid. No scaling, cropping, translations or new frames. Edit ONLY staff, preserve accepted B running people and exact locations.",
+      "disposition": "Grey wood/quartz design accepted, length too long; refined before install"
+    },
+    {
+      "output": "C:/Users/Alexa/.codex/generated_images/01a1ae3f-b29b-74f2-ac4c-efdfdf42f242/exec-4588b30b-a30f-4b69-91da-8d677d24df18.png",
+      "prompt": "Use case: precise-object-edit. FIRST image is Raphael run staff B. It already has correct gray wood/quartz staff design, but every staff is TOO LONG. SECOND image is run staff A which defines the EXACT correct staff length. Edit ONLY each of the16 staff props in FIRST image: SHRINK THE STAFF ITSELF TO70PERCENT OF ITS CURRENT LENGTH, centered on the EXISTING FIXED FIST GRIP, moving both endpoints inward toward the hand. Keep same gray wood, leather knot binding, compact clear quartz, thin shaft width and ferrule. Do not enlarge or shorten the person, do not move the fist, arm or any body pixel. The shortened staff must now match corresponding A-frame prop's hand-relative length, not body-height walking stick length.\nConcrete endpoint target: each hero is about225pixels tall, staff should be ONLY about130pixels total long (around58percent of body height), NOT180/200pixels. In FRONT cells, local crystal top should be near y85, grip stays near y135, butt near y210. Current first-image crystal at y60 and butt y236 are wrong; move TOP DOWN about25pixels and BOTTOM UP about27pixels. In SIDE cells crystal should be at SHOULDER/BACK UPPER ARM level, aroundlocaly75, and butt aroundlocaly200; never at hair level or near ground. Keep above-grip shaft length about55px and below-grip length about65px. Adjust all16 staffs consistently. Staff A second image is the length target. Preserve low backward-canted angle likeA, fully contained inside cell.\nALL sixteen existing running people are invariant: same B leg poses/support side, knees/boots/ground/head/pelvis positions, face, curlyhair, tealgray cape, brown armor, ivory sleeves, steel shoulder, adult proportions and lighting. No pose redesign, hand move, crop, reframe, flip, scale or other prop changes. No sword/bow or new accessories. The sole change is70percent staff length, endpoints shrink toward the unmoved fist; no shaft moves in grip.\nOutput EXACT1536x1024 RGBA,4columns x4rows384x256cells same rows front/right/back/left. True alpha0 transparent empty space, no fog/gradient/floor/shadow/text/grid. Do not retain oversized staff from first image; matching A's moderate130pixel prop is the entire correction.",
+      "disposition": "Reduced staff around fixed grip; lower segment remained too short, refined before install"
+    },
+    {
+      "output": "C:/Users/Alexa/.codex/generated_images/01a1ae3f-b29b-74f2-ac4c-efdfdf42f242/exec-58175664-60b5-4f21-a01f-3a5b94780440.png",
+      "prompt": "Use case: precise-object-edit. FIRST image is Raphael staff run B, SECOND image is staff run A. FINAL SMALL PROP LENGTH MATCH: in FIRST image, leave the CRYSTAL HEAD, UPPER SHAFT and FIST GRIP exactly where they are. Extend ONLY THE LOWER STAFF SHAFT BELOW THE FIST by about20pixels, with the same straight gray-brown wood continuing downward along the existing shaft angle, then place the small dark ferrule at the new butt end. Current B staff lower end stops too close to the hand; A second image has more lower shaft. We need equal hand-relative staff lengths at A/B transition.\nFor FRONT cells, old B butt localy190 should end aroundy212, crystal stayslocaly85, grip unmoved. RIGHT PROFILE butt oldlocaly175 should end aroundlocaly198; crystal stays current shoulder-level height. BACK butt oldlocaly180 should end aroundlocaly198. LEFT PROFILE butt oldlocaly157 should end aroundlocaly183. These are staff endpoints only, not boots. Keep staff angle and width, muted gray wood, clear colorless quartz, leather binding and simple ferrule. No added orb, glow, rings or sword. Do not lengthen upper part or change shaft in hand. Goal total staff length about130pixels, matching A second image; not huge walking-stick height.\nAll16 PEOPLE AND THEIR RUN POSES are strictly invariant from FIRST image. Exact same legs/support-foot side, knees, boot positions, ground line, pelvis, torso, shoulders, hands/fingers, face/hair, cape/armor/clothes, body scale and frame centers. Do not redraw/reframe/shift person or change hand position. Only add the missing20pixels of wood BELOW each fixed fist and relocate butt cap. No other visual changes.\nExact1536x1024 RGBA,4columns x4rows384x256 cells, unchanged down/right/up/left. Full figures/props within cell. Every empty area alpha0 transparent, no fog/haze/gradient/floor/shadow/checkerboard/text/grid. Keep head/upperstaff placement and all人物姿态不动，只延长握点下方杖杆约20像素，与A片下段长度一致。",
+      "disposition": "Selected final: shoulder-level quartz, moderate total length, lower shaft extended to match A hand-relative dimensions"
+    }
+  ],
+  "visualReview": {
+    "pose": "Opposite B support legs remain, no new gait phase or body size change intentionally introduced. Source layout drift handled by metadata rectangles and measured body origins.",
+    "prop": "Crystal/top shaft raised to shoulder level instead of waist; lower shaft length is now closer to A. Muted gray wood and pale colorless head replace old short wand. A still has older warm metal/head detail; exact material identity acrossA/B is not claimed.",
+    "framing": "Generator tightened columns; frameRectsByImage isolates all16 B figures with384x256 windows. No PNG cropping/editing.",
+    "runtime": "Not rebuilt by this agent. Root to inspect native phase3/4/7/0 of final combined build."
+  }
+}

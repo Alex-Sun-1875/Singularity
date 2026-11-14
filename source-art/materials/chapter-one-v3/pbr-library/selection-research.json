@@ -1,0 +1,87 @@
+{
+  "date": "2026-11-04",
+  "target": "Match chapter-one-v3/material-direction-board-v2 without recoloring unsuitable originals.",
+  "visualReviewMethod": "Opened actual existing 1K albedos, official albedo-map previews for a small shortlist, then the four retained official 1K PNG albedos. No material-render thumbnail was mistaken for albedo.",
+  "officialSourcesReviewed": [
+    "https://polyhaven.com/license",
+    "https://github.com/Poly-Haven/Public-API/blob/master/ToS.md",
+    "https://github.com/Poly-Haven/Public-API/blob/master/swagger.yml",
+    "https://docs.ambientcg.com/license/",
+    "https://docs.ambientcg.com/api/v2/full_json/",
+    "https://docs.ambientcg.com/api/v3/assets/"
+  ],
+  "retained": [
+    "wood_planks_grey",
+    "cobblestone_floor_08",
+    "rock_boulder_dry",
+    "Fabric082A"
+  ],
+  "excludedAfterVisualReview": [
+    {
+      "asset": "wood_floor_worn",
+      "sourcePage": "https://polyhaven.com/a/wood_floor_worn",
+      "reviewedFile": "source-art/materials/natural-v1/wood/color-1k.jpg",
+      "reason": "Existing actual albedo is amber/orange varnished wood; not grey-brown source."
+    },
+    {
+      "asset": "rock_face",
+      "sourcePage": "https://polyhaven.com/a/rock_face",
+      "reviewedFile": "source-art/materials/natural-v1/rock/color-1k.jpg",
+      "reason": "Existing actual albedo is reddish brown; not natural grey rock source."
+    },
+    {
+      "asset": "rough_linen",
+      "sourcePage": "https://polyhaven.com/a/rough_linen",
+      "reviewedFile": "source-art/materials/natural-v1/fabric/color-1k.jpg",
+      "reason": "Existing actual albedo and official description confirm blue dyed linen; not undyed neutral cloth."
+    },
+    {
+      "asset": "cobblestone_floor_04",
+      "sourcePage": "https://polyhaven.com/a/cobblestone_floor_04",
+      "reviewedFile": "source-art/materials/natural-v1/cobble/color-1k.jpg",
+      "reason": "Grey-beige stones fit, but dense moss/plants conflict with quieter paving direction; 08 retained instead."
+    },
+    {
+      "asset": "rock_01",
+      "sourcePage": "https://polyhaven.com/a/rock_01",
+      "albedoUrl": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/rock_01/rock_01_diff_1k.jpg",
+      "reason": "Actual 1K albedo appears flat, finely sandy/weathered, with weak large fracture character; rock_boulder_dry retained instead."
+    },
+    {
+      "asset": "dark_rock",
+      "sourcePage": "https://polyhaven.com/a/dark_rock",
+      "albedoPreviewUrl": "https://cdn.polyhaven.com/asset_img/map_previews/dark_rock/dark_rock_diff_1k.jpg",
+      "reason": "Dark brown-black fractured slab pattern is much darker than board grey-rock direction."
+    },
+    {
+      "asset": "rock_3",
+      "sourcePage": "https://polyhaven.com/a/rock_3",
+      "albedoPreviewUrl": "https://cdn.polyhaven.com/asset_img/map_previews/rock_3/rock_3_diff_1k.jpg",
+      "reason": "Brown-grey pitted surface has prominent orange/ochre speckling; not the preferred cool-grey direction."
+    },
+    {
+      "asset": "monastery_stone_floor",
+      "sourcePage": "https://polyhaven.com/a/monastery_stone_floor",
+      "albedoPreviewUrl": "https://cdn.polyhaven.com/asset_img/map_previews/monastery_stone_floor/monastery_stone_floor_diff_1k.jpg",
+      "reason": "Irregular slabs match shape idea but original is too dark/russet; no RGB recolor performed."
+    },
+    {
+      "asset": "Fabric043",
+      "sourcePage": "https://ambientcg.com/a/Fabric043",
+      "reason": "Actual official Color preview is loose grey felt fibers, not plain linen weave; also no AO listed in official map data."
+    },
+    {
+      "asset": "Fabric045",
+      "sourcePage": "https://ambientcg.com/a/Fabric045",
+      "reason": "Actual official Color preview is coarse white rug-like loops, unsuitable as clothing linen base."
+    }
+  ],
+  "metadataOnlyExcluded": [
+    {
+      "asset": "Fabric001",
+      "reason": "Official map list lacks AO; albedo preview URL returned 404, so no visual conclusion is claimed."
+    }
+  ],
+  "linenLimit": "No retained asset is certified flax linen. Fabric082A is a neutral fine woven substitute whose official v3 technique is fully procedural; scale and fiber identity unknown.",
+  "downloadLimit": "Only four complete 1K map sets retained. Temporary selection-only albedos/previews and duplicate search responses removed after review."
+}

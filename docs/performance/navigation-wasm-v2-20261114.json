@@ -1,0 +1,475 @@
+{
+  "title": "在 TypeScript 堆优化基础上的 WASM2 常驻导航内核",
+  "date": "2026-11-14",
+  "decision": {
+    "defaultEnabled": true,
+    "userRequested": true,
+    "typescriptFallback": true,
+    "overallCpuImprovementEstablished": false,
+    "platformVerified": false,
+    "conclusion": "按用户最终要求默认启用。已确认局部冷图与暖图重搜索提速，但未证明整游戏CPU下降；首组完整对照观测值反而偏高，保留该结果。"
+  },
+  "implementation": {
+    "baseline": "上一轮已经优化的 TypeScript 二叉堆与数字网格键，不与未优化旧版混算。",
+    "changes": [
+      "保留相同A*邻居顺序、稳定同分排序、双精度、20,000次展开上限与路线缓存/简化。",
+      "将既有矩形空间索引和网格边视线采样移入Rust/WASM，移除每条未知图边的JS回调。",
+      "每张不可变地图仅上传一次障碍数据；图边、搜索工作区和整数位移距离缓存常驻WASM，不再逐查询双向复制整个图边数组。",
+      "最多保留4张地图的LRU上下文；场景销毁和内存警告释放上下文分配。线性内存高水位不会随reset缩小，链接上限32MiB。",
+      "距离缓存只在首次遇到某个位移时调用宿主Math.hypot，保留原始f64分数与路线。",
+      "启动异步加载，不阻塞登录和场景；模块缺失、ABI不匹配、运行异常或不支持的地图均保留TypeScript路径。"
+    ],
+    "reuse": "复用项目既有A*规则、TinyQueue ISC索引堆适配和矩形空间索引；没有引入新寻路依赖或第三方Rust crate。",
+    "scope": "只迁移Navigation网格搜索内核；Cocos渲染、战斗规则、Bullet射线、HUD、存档、输入和60FPS配置不变。"
+  },
+  "localBenchmark": {
+    "status": "passed",
+    "hostWorkload": {
+      "scope": "Creator CLI build-log content changes observed during the run; last-access metadata ignored; other host applications are not measured",
+      "writes": [],
+      "errors": []
+    },
+    "cases": [
+      {
+        "area": "S01",
+        "queries": 12,
+        "variants": {
+          "ts-heap": {
+            "coldMs": 2.08749999999903,
+            "warmSearchMs": 0.7249999999995149,
+            "routeCacheMs": 0.15729166666666666,
+            "checksum": 46992
+          },
+          "wasm-v1": {
+            "coldMs": 2.79999999999806,
+            "warmSearchMs": 0.5158333333335274,
+            "routeCacheMs": 0.15770833333347886,
+            "checksum": 46992
+          },
+          "wasm-v2": {
+            "coldMs": 0.8874999999995149,
+            "warmSearchMs": 0.31249999999951494,
+            "routeCacheMs": 0.15645833333328482,
+            "checksum": 46992
+          }
+        }
+      },
+      {
+        "area": "S01-T1",
+        "queries": 15,
+        "variants": {
+          "ts-heap": {
+            "coldMs": 0.22666666666821886,
+            "warmSearchMs": 0.18799999999968955,
+            "routeCacheMs": 0.1575,
+            "checksum": 10320
+          },
+          "wasm-v1": {
+            "coldMs": 0.2566666666651145,
+            "warmSearchMs": 0.17866666666658904,
+            "routeCacheMs": 0.15866666666658907,
+            "checksum": 10320
+          },
+          "wasm-v2": {
+            "coldMs": 0.20666666666899497,
+            "warmSearchMs": 0.17066666666651142,
+            "routeCacheMs": 0.1569999999999224,
+            "checksum": 10320
+          }
+        }
+      },
+      {
+        "area": "H12",
+        "queries": 6,
+        "variants": {
+          "ts-heap": {
+            "coldMs": 0.47499999999611947,
+            "warmSearchMs": 0.27166666666647266,
+            "routeCacheMs": 0.10333333333328483,
+            "checksum": 16032
+          },
+          "wasm-v1": {
+            "coldMs": 0.7333333333372138,
+            "warmSearchMs": 0.2033333333344975,
+            "routeCacheMs": 0.1074999999999515,
+            "checksum": 16032
+          },
+          "wasm-v2": {
+            "coldMs": 0.2749999999990299,
+            "warmSearchMs": 0.15499999999980596,
+            "routeCacheMs": 0.10583333333318781,
+            "checksum": 16032
+          }
+        }
+      },
+      {
+        "area": "H13",
+        "queries": 6,
+        "variants": {
+          "ts-heap": {
+            "coldMs": 1.2416666666637561,
+            "warmSearchMs": 0.6483333333337213,
+            "routeCacheMs": 0.24458333333362436,
+            "checksum": 32400
+          },
+          "wasm-v1": {
+            "coldMs": 1.858333333332363,
+            "warmSearchMs": 0.504999999999806,
+            "routeCacheMs": 0.21666666666642415,
+            "checksum": 32400
+          },
+          "wasm-v2": {
+            "coldMs": 0.6333333333313931,
+            "warmSearchMs": 0.32166666666647264,
+            "routeCacheMs": 0.18125000000000002,
+            "checksum": 32400
+          }
+        }
+      },
+      {
+        "area": "U1-06",
+        "queries": 8,
+        "variants": {
+          "ts-heap": {
+            "coldMs": 0.7750000000014552,
+            "warmSearchMs": 0.38374999999941795,
+            "routeCacheMs": 0.11749999999992725,
+            "checksum": 28224
+          },
+          "wasm-v1": {
+            "coldMs": 1.1625000000021828,
+            "warmSearchMs": 0.29499999999970894,
+            "routeCacheMs": 0.12093750000003638,
+            "checksum": 28224
+          },
+          "wasm-v2": {
+            "coldMs": 0.40625,
+            "warmSearchMs": 0.19624999999941792,
+            "routeCacheMs": 0.12406249999985448,
+            "checksum": 28224
+          }
+        }
+      },
+      {
+        "area": "live-0",
+        "queries": 12,
+        "variants": {
+          "ts-heap": {
+            "coldMs": 1.3750000000024252,
+            "warmSearchMs": 0.9808333333334303,
+            "routeCacheMs": 0.18062500000002424,
+            "checksum": 40116
+          },
+          "wasm-v1": {
+            "coldMs": 0.925000000000485,
+            "warmSearchMs": 0.2791666666661816,
+            "routeCacheMs": 0.13666666666673943,
+            "checksum": 40116
+          },
+          "wasm-v2": {
+            "coldMs": 0.4583333333333333,
+            "warmSearchMs": 0.21833333333343036,
+            "routeCacheMs": 0.13395833333343035,
+            "checksum": 40116
+          }
+        }
+      }
+    ],
+    "h12ColdReductionVsOptimizedTs": 42.10526315762599,
+    "h12WarmReductionVsOptimizedTs": 42.944785276104305,
+    "methodology": "Android14 / Chrome113，原生Creator编译的同一TypeScript路径外壳；TS堆版、WASM1、WASM2分别跑6轮正反顺序。冷图包含上下文分配、索引准备和上传；暖图重搜索强制路线缓存未命中；缓存命中另列。报告每轮平均单次耗时的中位数，不能换算整个游戏加速比例。",
+    "boundary": {
+      "oldGeometryCallbacks": 561936,
+      "newGeometryCallbacks": 0,
+      "oldDistanceCallbacks": 1312109,
+      "newDistanceCallbacks": 146871,
+      "newModuleImports": [
+        {
+          "module": "navigation",
+          "name": "hypot",
+          "kind": "function"
+        }
+      ]
+    },
+    "resident": {
+      "ready": true,
+      "contexts": 4,
+      "uploads": 271,
+      "uploadedBytes": 96000,
+      "searches": 1996,
+      "memoryBytes": 5832704
+    },
+    "note": "路线缓存命中不执行WASM搜索；该项的小差额不归因于WASM。此处cold指地图首次路径查询，不是游戏冷启动时间。"
+  },
+  "wholeGame": {
+    "status": "passed",
+    "order": [
+      "typescript",
+      "wasm2",
+      "wasm2",
+      "typescript"
+    ],
+    "secondsEach": 60,
+    "summary": {
+      "typescript": {
+        "windows": 2,
+        "seconds": 120.02220000000008,
+        "frames": 7175,
+        "fps": 59.78060725432457,
+        "cpuCorePercent": 71.02019459733278,
+        "mainThreadMsPerFrame": 3.8585708710801394,
+        "minOneSecondFps": 57,
+        "p99Ms": [
+          22.70000000006985,
+          22.5
+        ],
+        "kills": 33,
+        "hits": 231,
+        "casts": 32
+      },
+      "wasm2": {
+        "windows": 2,
+        "seconds": 120.02450000000012,
+        "frames": 7108,
+        "fps": 59.221242329690966,
+        "cpuCorePercent": 76.46772117359365,
+        "mainThreadMsPerFrame": 4.057487760270119,
+        "minOneSecondFps": 52,
+        "p99Ms": [
+          27.79999999993015,
+          25.5
+        ],
+        "kills": 30,
+        "hits": 239,
+        "casts": 29
+      }
+    },
+    "observedChange": {
+      "cpuPercent": 7.670390946049954,
+      "mainThreadPercent": 5.155195947827607
+    },
+    "hostWorkload": {
+      "scope": "Creator CLI build-log content changes observed during the run; last-access metadata ignored; other host applications are not measured",
+      "writes": [],
+      "errors": []
+    },
+    "errors": [],
+    "memory": {
+      "errors": [],
+      "warnings": [],
+      "peakBytes": 540898304,
+      "peakMB": 540.898304
+    },
+    "conclusion": "四个窗口通过现有绝对帧率、内存与真实走打规则检查，但这不等于整体CPU优化成功。WASM组观测CPU约高7.7%、主线程约高5.2%；战斗量与帧节奏不同，宿主还存在其他任务且未采集完整负载轨迹，不将差额归因于某一个因素，也不宣称总体降耗或降温。"
+  },
+  "correctness": {
+    "areas": 97,
+    "routeComparisons": 4500,
+    "status": "passed",
+    "acceleratedSearches": 1109,
+    "afterAllMaps": {
+      "ready": true,
+      "contexts": 4,
+      "uploads": 195,
+      "uploadedBytes": 31136,
+      "searches": 1109,
+      "memoryBytes": 5898240
+    },
+    "afterReset": {
+      "ready": true,
+      "contexts": 0,
+      "uploads": 195,
+      "uploadedBytes": 31136,
+      "searches": 1109,
+      "memoryBytes": 5898240
+    },
+    "failures": [],
+    "existingTests": {
+      "passed": 140,
+      "failed": 0
+    },
+    "fullTypecheck": true,
+    "coreTypecheck": true,
+    "tapConfigurationCheck": true,
+    "fallback": {
+      "status": "passed",
+      "blockedRequests": 2,
+      "result": {
+        "state": {
+          "state": "fallback",
+          "abi": 2,
+          "bytes": 23628
+        },
+        "activeBackend": false,
+        "actorReady": true,
+        "gameFailure": "",
+        "route": [
+          {
+            "x": -5,
+            "z": 0
+          },
+          {
+            "x": -2,
+            "z": 9
+          },
+          {
+            "x": -1,
+            "z": 10
+          },
+          {
+            "x": 1,
+            "z": 10
+          },
+          {
+            "x": 2,
+            "z": 9
+          },
+          {
+            "x": 5,
+            "z": 0
+          }
+        ],
+        "collisionFree": true
+      },
+      "scope": "只让本模块请求返回404，Bullet和游戏资源正常；游戏已启动，TS路径绕墙有效。"
+    },
+    "finalEnabledSmoke": {
+      "status": "passed",
+      "result": {
+        "state": {
+          "state": "ready",
+          "abi": 2,
+          "bytes": 23628,
+          "ready": true,
+          "contexts": 1,
+          "uploads": 1,
+          "uploadedBytes": 32,
+          "searches": 1,
+          "memoryBytes": 1179648
+        },
+        "activeBackend": true,
+        "actorReady": true,
+        "gameFailure": "",
+        "route": [
+          {
+            "x": -5,
+            "z": 0
+          },
+          {
+            "x": -2,
+            "z": 9
+          },
+          {
+            "x": -1,
+            "z": 10
+          },
+          {
+            "x": 1,
+            "z": 10
+          },
+          {
+            "x": 2,
+            "z": 9
+          },
+          {
+            "x": 5,
+            "z": 0
+          }
+        ],
+        "collisionFree": true
+      },
+      "scope": "最终默认开启构建的实际Android启动；模块ready且真实完成一次网格搜索，非仅检查存在WebAssembly对象。"
+    }
+  },
+  "build": {
+    "initialEnabled": "src/cocos/build/perf-navigation-wasm-v2-20261114",
+    "finalEnabled": "src/cocos/build/perf-navigation-wasm-v2-enabled-20261114",
+    "finalCommand": "pwsh -NoProfile -File src/cocos/Build-Local.ps1 -OutputName perf-navigation-wasm-v2-enabled-20261114 -EditorUserData F:/workspace/Singularity/src/cocos/temp/navigation-wasm-v2-editor-profile",
+    "passed": true,
+    "versionIncremented": false,
+    "preparation": "tools/prepare-navigation-wasm.cjs验证Rust源SHA、二进制SHA、字节数、ABI与WASM头。哈希文件名防止旧模块缓存；Web导出直接下载字节，TapTap调用官方loadSubpackage后以包内路径instantiate。Build-Local和Build-TapTap复用相同步骤。",
+    "module": {
+      "abi": 2,
+      "sourceSha256": "5f2081c75ad94b438c3573b8b765517d6f1a7335ce4f2160b18b45d72240833a",
+      "sha256": "fa9806074a36562c4d8ee17618c1649d963aa1ec8e015925d4865f0da2b211a9",
+      "bytes": 23628,
+      "compiler": "rustc 1.95.0 (59807616e 2026-04-14)",
+      "target": "wasm32-unknown-unknown",
+      "cpu": "mvp",
+      "maximumMemoryBytes": 33554432
+    },
+    "packageSmoke": {
+      "engineTransport": {
+        "requested": true,
+        "localValidationPassed": true,
+        "packages": [
+          {
+            "name": "__ccWasmAssetSubpkg__",
+            "root": "cocos-js/assets/"
+          },
+          {
+            "name": "__ccWasmChunkSubpkg__",
+            "root": "cocos-js/chunks/"
+          }
+        ],
+        "modules": [
+          {
+            "path": "cocos-js/assets/navigation-search-fa9806074a36.wasm",
+            "bytes": 23628,
+            "sha256": "fa9806074a36562c4d8ee17618c1649d963aa1ec8e015925d4865f0da2b211a9",
+            "subpackage": "__ccWasmAssetSubpkg__"
+          }
+        ],
+        "wasmBytes": 23628,
+        "wasmBytesInMainPackage": 0,
+        "note": "Whole engine modules are packaged separately. They can still be required during startup."
+      },
+      "platformFunctionSplit": {
+        "verified": false,
+        "status": "requires-compatible-sdk-export-and-console-collection",
+        "note": "The installed Cocos converter exports game.zip, not the documented game_wasm_split.zip. Cocos transport packs do not prove platform function splitting.",
+        "guide": "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/launch/wasm-subpackage/"
+      },
+      "scope": "Module-only export/ownership smoke using the unchanged real Cocos TapTap package declarations and engine loader. Not a complete game conversion, upload, TapTap App runtime or AppID acceptance.",
+      "status": "passed"
+    },
+    "limits": "分包归属验证是基于真实旧Cocos包声明的模块级检查，不是本轮完整TapTap转换/上传包验收。完整ZIP、首包、可玩前下载量、真实AppID及真机表现未测量。",
+    "discardedAttempt": {
+      "name": "perf-navigation-wasm-v2-default-20261114",
+      "reason": "短暂关闭配置时的构建两次在Creator启动写engine.json时退出；日志保留。最终已恢复开启，并用隔离EditorUserData成功重建，未重置或覆盖引擎设置。"
+    }
+  },
+  "configuration": {
+    "file": "src/cocos/release/taptap.json",
+    "key": "navigationWasm",
+    "value": true,
+    "requires": "engineWasmSubpackage=true",
+    "generated": "src/cocos/assets/scripts/features/navigation/runtime/NavigationWasmConfig.ts",
+    "disable": "将navigationWasm设为false并通过现有构建脚本重新构建。",
+    "runtimeFallback": "平台无WASM、分包/初始化失败、非法地图或内核异常时使用TS；不更改玩法。"
+  },
+  "evidence": {
+    "local": "src/cocos/test-results/performance/navigation-wasm-v2-native-micro-v1",
+    "moving": "src/cocos/test-results/performance/navigation-wasm-v2-moving-abba-v1",
+    "sourceEquivalence": "src/cocos/test-results/performance/navigation-wasm-v2-20261114/source-equivalence.json",
+    "fallback": "src/cocos/test-results/performance/navigation-wasm-v2-fallback-v1",
+    "finalEnabledSmoke": "src/cocos/test-results/performance/navigation-wasm-v2-enabled-final-smoke-v1",
+    "temporaryDrivers": "src/cocos/temp/navigation-wasm-v2-20261114",
+    "sourceHashes": {
+      "rust": "5f2081c75ad94b438c3573b8b765517d6f1a7335ce4f2160b18b45d72240833a",
+      "wasm": "fa9806074a36562c4d8ee17618c1649d963aa1ec8e015925d4865f0da2b211a9",
+      "bridge": "5efe0d791a6bb4d73715223f5ad8580f71593990d3ec87fb4d537259bce86b78"
+    },
+    "official": [
+      "https://developer.taptap.cn/minigameapidoc/quick-start/guide/performance/",
+      "https://developer.taptap.cn/minigameapidoc/dev/tutorial/basic/subpackage/",
+      "https://docs.cocos.com/creator/3.8/manual/zh/advanced-topics/wasm-asm-load.html"
+    ]
+  },
+  "delivery": {
+    "defaultWasmEnabled": true,
+    "temporaryEmulatorStopped": true,
+    "temporaryPreviewServersStopped": true,
+    "finished": "2026-11-14T08:32:45.580Z"
+  }
+}

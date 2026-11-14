@@ -1,0 +1,577 @@
+{
+  "id": "U2-3",
+  "method": "builtin_image_gen background-extraction, then conservative local semantic-alpha composition",
+  "provider": "builtin_image_gen",
+  "modelVersion": "not exposed",
+  "source": "raw.png",
+  "sourceSha256": "c25a71d53a42afc85fb9dfadd7f4942605931569c91c70e3bcd2f5ef3bd27770",
+  "cloudEdit": "raw-alpha-repair-v2.png",
+  "cloudEditSha256": "44e9555d3c2e2c047a4c09f3408e0f3e80d3ad4aa2b49df70e1b48b24b819f85",
+  "output": "sheet-v2.png",
+  "outputSha256": "58dc1fb9e4fbefa0615af0aa412659cfb6359b4350f29bfa3cdd586fdc3e56f5",
+  "prompt": "prompt-alpha-repair-v2.txt",
+  "rawUnchanged": true,
+  "originalSize": [
+    1254,
+    1254
+  ],
+  "cloudActualSize": [
+    1254,
+    1254
+  ],
+  "removedMask": "alpha-repair-removed-mask.png",
+  "removedTotalPixels": 39438,
+  "allRetainedRgbaByteExact": true,
+  "allOriginalAlphaOver128SolidRgbaByteExact": true,
+  "bodyProtected": "Every source alpha>128 solid pixel plus1pxedge dilation protected. Source threshold is only protection, not deletion selection. Removal requires cloud semantic transparent alpha AND exact reviewed floorROI. All retainedRGBA exact. No RGB threshold, global strip, ring redraw or isolated-component claim.",
+  "isolatedAttempt": "Stopped because all16alpha>3 shadows connect to entity; switched to authorized local cloud repair.",
+  "frames": [
+    {
+      "frameRow": 0,
+      "frameColumn": 0,
+      "sourceRect": [
+        0,
+        0,
+        314,
+        314
+      ],
+      "cloudRemovalFloorRoi": [
+        40,
+        276,
+        275,
+        314
+      ],
+      "protectedFinialRoi": [
+        155,
+        276,
+        170,
+        293
+      ],
+      "removedPixels": 2256,
+      "removedBbox": [
+        86,
+        278,
+        231,
+        300
+      ],
+      "removedMaxAlpha": 105,
+      "connectedComponentRemoval": false,
+      "reason": "Cloud background-extraction semantic alpha constrained to reviewed floor; original finial protected. Connected alpha3 bridge forbids isolated-component deletion.",
+      "protectedFinialRoiIsEnvelopeOnly": true,
+      "actualProtection": "Original solid128 mask plus1px8-neighbour dilation, preventing a rectangular retained floor patch."
+    },
+    {
+      "frameRow": 0,
+      "frameColumn": 1,
+      "sourceRect": [
+        314,
+        0,
+        627,
+        314
+      ],
+      "cloudRemovalFloorRoi": [
+        354,
+        276,
+        589,
+        314
+      ],
+      "protectedFinialRoi": [
+        463,
+        276,
+        479,
+        292
+      ],
+      "removedPixels": 2467,
+      "removedBbox": [
+        401,
+        276,
+        545,
+        303
+      ],
+      "removedMaxAlpha": 101,
+      "connectedComponentRemoval": false,
+      "reason": "Cloud background-extraction semantic alpha constrained to reviewed floor; original finial protected. Connected alpha3 bridge forbids isolated-component deletion.",
+      "protectedFinialRoiIsEnvelopeOnly": true,
+      "actualProtection": "Original solid128 mask plus1px8-neighbour dilation, preventing a rectangular retained floor patch."
+    },
+    {
+      "frameRow": 0,
+      "frameColumn": 2,
+      "sourceRect": [
+        627,
+        0,
+        941,
+        314
+      ],
+      "cloudRemovalFloorRoi": [
+        667,
+        276,
+        902,
+        314
+      ],
+      "protectedFinialRoi": [
+        776,
+        276,
+        792,
+        293
+      ],
+      "removedPixels": 2339,
+      "removedBbox": [
+        713,
+        279,
+        857,
+        302
+      ],
+      "removedMaxAlpha": 99,
+      "connectedComponentRemoval": false,
+      "reason": "Cloud background-extraction semantic alpha constrained to reviewed floor; original finial protected. Connected alpha3 bridge forbids isolated-component deletion.",
+      "protectedFinialRoiIsEnvelopeOnly": true,
+      "actualProtection": "Original solid128 mask plus1px8-neighbour dilation, preventing a rectangular retained floor patch."
+    },
+    {
+      "frameRow": 0,
+      "frameColumn": 3,
+      "sourceRect": [
+        941,
+        0,
+        1254,
+        314
+      ],
+      "cloudRemovalFloorRoi": [
+        981,
+        276,
+        1216,
+        314
+      ],
+      "protectedFinialRoi": [
+        1089,
+        276,
+        1105,
+        293
+      ],
+      "removedPixels": 2392,
+      "removedBbox": [
+        1026,
+        279,
+        1168,
+        302
+      ],
+      "removedMaxAlpha": 110,
+      "connectedComponentRemoval": false,
+      "reason": "Cloud background-extraction semantic alpha constrained to reviewed floor; original finial protected. Connected alpha3 bridge forbids isolated-component deletion.",
+      "protectedFinialRoiIsEnvelopeOnly": true,
+      "actualProtection": "Original solid128 mask plus1px8-neighbour dilation, preventing a rectangular retained floor patch."
+    },
+    {
+      "frameRow": 1,
+      "frameColumn": 0,
+      "sourceRect": [
+        0,
+        314,
+        314,
+        627
+      ],
+      "cloudRemovalFloorRoi": [
+        40,
+        590,
+        275,
+        627
+      ],
+      "protectedFinialRoi": [
+        139,
+        590,
+        153,
+        603
+      ],
+      "removedPixels": 2462,
+      "removedBbox": [
+        86,
+        590,
+        232,
+        615
+      ],
+      "removedMaxAlpha": 96,
+      "connectedComponentRemoval": false,
+      "reason": "Cloud background-extraction semantic alpha constrained to reviewed floor; original finial protected. Connected alpha3 bridge forbids isolated-component deletion.",
+      "protectedFinialRoiIsEnvelopeOnly": true,
+      "actualProtection": "Original solid128 mask plus1px8-neighbour dilation, preventing a rectangular retained floor patch."
+    },
+    {
+      "frameRow": 1,
+      "frameColumn": 1,
+      "sourceRect": [
+        314,
+        314,
+        627,
+        627
+      ],
+      "cloudRemovalFloorRoi": [
+        354,
+        590,
+        589,
+        627
+      ],
+      "protectedFinialRoi": [
+        452,
+        590,
+        462,
+        598
+      ],
+      "removedPixels": 2486,
+      "removedBbox": [
+        399,
+        591,
+        544,
+        615
+      ],
+      "removedMaxAlpha": 85,
+      "connectedComponentRemoval": false,
+      "reason": "Cloud background-extraction semantic alpha constrained to reviewed floor; original finial protected. Connected alpha3 bridge forbids isolated-component deletion.",
+      "protectedFinialRoiIsEnvelopeOnly": true,
+      "actualProtection": "Original solid128 mask plus1px8-neighbour dilation, preventing a rectangular retained floor patch."
+    },
+    {
+      "frameRow": 1,
+      "frameColumn": 2,
+      "sourceRect": [
+        627,
+        314,
+        941,
+        627
+      ],
+      "cloudRemovalFloorRoi": [
+        667,
+        590,
+        902,
+        627
+      ],
+      "protectedFinialRoi": [
+        783,
+        590,
+        796,
+        601
+      ],
+      "removedPixels": 2403,
+      "removedBbox": [
+        713,
+        591,
+        856,
+        615
+      ],
+      "removedMaxAlpha": 105,
+      "connectedComponentRemoval": false,
+      "reason": "Cloud background-extraction semantic alpha constrained to reviewed floor; original finial protected. Connected alpha3 bridge forbids isolated-component deletion.",
+      "protectedFinialRoiIsEnvelopeOnly": true,
+      "actualProtection": "Original solid128 mask plus1px8-neighbour dilation, preventing a rectangular retained floor patch."
+    },
+    {
+      "frameRow": 1,
+      "frameColumn": 3,
+      "sourceRect": [
+        941,
+        314,
+        1254,
+        627
+      ],
+      "cloudRemovalFloorRoi": [
+        981,
+        590,
+        1216,
+        627
+      ],
+      "protectedFinialRoi": [
+        1100,
+        590,
+        1111,
+        598
+      ],
+      "removedPixels": 2545,
+      "removedBbox": [
+        1026,
+        590,
+        1173,
+        616
+      ],
+      "removedMaxAlpha": 101,
+      "connectedComponentRemoval": false,
+      "reason": "Cloud background-extraction semantic alpha constrained to reviewed floor; original finial protected. Connected alpha3 bridge forbids isolated-component deletion.",
+      "protectedFinialRoiIsEnvelopeOnly": true,
+      "actualProtection": "Original solid128 mask plus1px8-neighbour dilation, preventing a rectangular retained floor patch."
+    },
+    {
+      "frameRow": 2,
+      "frameColumn": 0,
+      "sourceRect": [
+        0,
+        627,
+        314,
+        941
+      ],
+      "cloudRemovalFloorRoi": [
+        40,
+        903,
+        275,
+        941
+      ],
+      "protectedFinialRoi": [
+        165,
+        903,
+        179,
+        914
+      ],
+      "removedPixels": 2466,
+      "removedBbox": [
+        88,
+        903,
+        231,
+        929
+      ],
+      "removedMaxAlpha": 81,
+      "connectedComponentRemoval": false,
+      "reason": "Cloud background-extraction semantic alpha constrained to reviewed floor; original finial protected. Connected alpha3 bridge forbids isolated-component deletion.",
+      "protectedFinialRoiIsEnvelopeOnly": true,
+      "actualProtection": "Original solid128 mask plus1px8-neighbour dilation, preventing a rectangular retained floor patch."
+    },
+    {
+      "frameRow": 2,
+      "frameColumn": 1,
+      "sourceRect": [
+        314,
+        627,
+        627,
+        941
+      ],
+      "cloudRemovalFloorRoi": [
+        354,
+        903,
+        589,
+        941
+      ],
+      "protectedFinialRoi": [
+        469,
+        903,
+        479,
+        909
+      ],
+      "removedPixels": 2526,
+      "removedBbox": [
+        400,
+        903,
+        543,
+        928
+      ],
+      "removedMaxAlpha": 84,
+      "connectedComponentRemoval": false,
+      "reason": "Cloud background-extraction semantic alpha constrained to reviewed floor; original finial protected. Connected alpha3 bridge forbids isolated-component deletion.",
+      "protectedFinialRoiIsEnvelopeOnly": true,
+      "actualProtection": "Original solid128 mask plus1px8-neighbour dilation, preventing a rectangular retained floor patch."
+    },
+    {
+      "frameRow": 2,
+      "frameColumn": 2,
+      "sourceRect": [
+        627,
+        627,
+        941,
+        941
+      ],
+      "cloudRemovalFloorRoi": [
+        667,
+        903,
+        902,
+        941
+      ],
+      "protectedFinialRoi": [
+        771,
+        903,
+        784,
+        913
+      ],
+      "removedPixels": 2503,
+      "removedBbox": [
+        712,
+        903,
+        856,
+        928
+      ],
+      "removedMaxAlpha": 82,
+      "connectedComponentRemoval": false,
+      "reason": "Cloud background-extraction semantic alpha constrained to reviewed floor; original finial protected. Connected alpha3 bridge forbids isolated-component deletion.",
+      "protectedFinialRoiIsEnvelopeOnly": true,
+      "actualProtection": "Original solid128 mask plus1px8-neighbour dilation, preventing a rectangular retained floor patch."
+    },
+    {
+      "frameRow": 2,
+      "frameColumn": 3,
+      "sourceRect": [
+        941,
+        627,
+        1254,
+        941
+      ],
+      "cloudRemovalFloorRoi": [
+        981,
+        903,
+        1216,
+        941
+      ],
+      "protectedFinialRoi": [
+        1087,
+        903,
+        1097,
+        911
+      ],
+      "removedPixels": 2507,
+      "removedBbox": [
+        1026,
+        903,
+        1170,
+        928
+      ],
+      "removedMaxAlpha": 83,
+      "connectedComponentRemoval": false,
+      "reason": "Cloud background-extraction semantic alpha constrained to reviewed floor; original finial protected. Connected alpha3 bridge forbids isolated-component deletion.",
+      "protectedFinialRoiIsEnvelopeOnly": true,
+      "actualProtection": "Original solid128 mask plus1px8-neighbour dilation, preventing a rectangular retained floor patch."
+    },
+    {
+      "frameRow": 3,
+      "frameColumn": 0,
+      "sourceRect": [
+        0,
+        941,
+        314,
+        1254
+      ],
+      "cloudRemovalFloorRoi": [
+        40,
+        1217,
+        275,
+        1254
+      ],
+      "protectedFinialRoi": [
+        155,
+        1217,
+        168,
+        1228
+      ],
+      "removedPixels": 2416,
+      "removedBbox": [
+        83,
+        1217,
+        232,
+        1242
+      ],
+      "removedMaxAlpha": 95,
+      "connectedComponentRemoval": false,
+      "reason": "Cloud background-extraction semantic alpha constrained to reviewed floor; original finial protected. Connected alpha3 bridge forbids isolated-component deletion.",
+      "protectedFinialRoiIsEnvelopeOnly": true,
+      "actualProtection": "Original solid128 mask plus1px8-neighbour dilation, preventing a rectangular retained floor patch."
+    },
+    {
+      "frameRow": 3,
+      "frameColumn": 1,
+      "sourceRect": [
+        314,
+        941,
+        627,
+        1254
+      ],
+      "cloudRemovalFloorRoi": [
+        354,
+        1217,
+        589,
+        1254
+      ],
+      "protectedFinialRoi": [
+        450,
+        1217,
+        459,
+        1222
+      ],
+      "removedPixels": 2578,
+      "removedBbox": [
+        399,
+        1217,
+        546,
+        1243
+      ],
+      "removedMaxAlpha": 91,
+      "connectedComponentRemoval": false,
+      "reason": "Cloud background-extraction semantic alpha constrained to reviewed floor; original finial protected. Connected alpha3 bridge forbids isolated-component deletion.",
+      "protectedFinialRoiIsEnvelopeOnly": true,
+      "actualProtection": "Original solid128 mask plus1px8-neighbour dilation, preventing a rectangular retained floor patch."
+    },
+    {
+      "frameRow": 3,
+      "frameColumn": 2,
+      "sourceRect": [
+        627,
+        941,
+        941,
+        1254
+      ],
+      "cloudRemovalFloorRoi": [
+        667,
+        1217,
+        902,
+        1254
+      ],
+      "protectedFinialRoi": [
+        779,
+        1217,
+        788,
+        1223
+      ],
+      "removedPixels": 2477,
+      "removedBbox": [
+        712,
+        1217,
+        857,
+        1243
+      ],
+      "removedMaxAlpha": 79,
+      "connectedComponentRemoval": false,
+      "reason": "Cloud background-extraction semantic alpha constrained to reviewed floor; original finial protected. Connected alpha3 bridge forbids isolated-component deletion.",
+      "protectedFinialRoiIsEnvelopeOnly": true,
+      "actualProtection": "Original solid128 mask plus1px8-neighbour dilation, preventing a rectangular retained floor patch."
+    },
+    {
+      "frameRow": 3,
+      "frameColumn": 3,
+      "sourceRect": [
+        941,
+        941,
+        1254,
+        1254
+      ],
+      "cloudRemovalFloorRoi": [
+        981,
+        1217,
+        1216,
+        1254
+      ],
+      "protectedFinialRoi": [
+        1102,
+        1217,
+        1111,
+        1222
+      ],
+      "removedPixels": 2615,
+      "removedBbox": [
+        1025,
+        1217,
+        1172,
+        1243
+      ],
+      "removedMaxAlpha": 95,
+      "connectedComponentRemoval": false,
+      "reason": "Cloud background-extraction semantic alpha constrained to reviewed floor; original finial protected. Connected alpha3 bridge forbids isolated-component deletion.",
+      "protectedFinialRoiIsEnvelopeOnly": true,
+      "actualProtection": "Original solid128 mask plus1px8-neighbour dilation, preventing a rectangular retained floor patch."
+    }
+  ],
+  "scope": "SingleU2-3source derivative only, no generic processor permission",
+  "runtimeIntegrated": false,
+  "protectedSolidMask": "alpha-repair-protected-solid-mask.png"
+}

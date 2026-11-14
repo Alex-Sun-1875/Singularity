@@ -1,0 +1,15 @@
+# First-chapter enemy drawings
+
+These sprites derive from the existing project concept illustrations `assets/concepts/raider-detail-reference-v2.png` and `assets/concepts/captain-detail-reference-v2.png`. No 3D model, screenshot, Blender render or fabricated corpse transform was used.
+
+Four runtime identities each contain three unchanged imagegen PNGs: `atlas.png` for idle/walk, `attack.png` for melee/bow attacks, and `hurt.png` for hit/death. Each image is 1536×1024 with 384×256 cells. Rows face down/right/up/left. Walk sheets contain idle, left stride, passing step and right stride. Attack sheets show preparation, forward action, contact/release and recovery. Damage sheets show standing recoil, buckling, falling and a fully lying body. Frame indices select these actual drawn poses.
+
+The light raider has a short sword, the shield raider a real round wood/iron shield and sword, the hooded archer a bow/string/quiver, and the captain the original tall shield and squared warhammer. The source concepts' clothing, faces and illustrated finish guide all four.
+
+`prompts.json`, `generation-records.json` and `generation-corrections.json` preserve exact prompts, reference paths and built-in imagegen output paths. Original and rejected variants remain here for traceability. Runtime selections are recorded in each manifest's `sourceArtifacts`; rejected background/edge variants are never copied to runtime. In particular, the original captain damage drawing is selected because its resized variants introduced background alpha or edge bleed.
+
+`package_atlases.py` only copies bytes and reads image dimensions/alpha with Pillow. It never writes cropped, rescaled, composited or otherwise edited image pixels. Per-action `alphaBounds` and `perFrameOrigins` come from the source alpha. The original lowest-eight-row median could choose just the nearer foot, causing large horizontal jumps. The corrected X anchor averages the two lowest local sole-envelope midpoints; falling/lying frames use a broad lower-body support span with the outer 5% excluded so a thin weapon tip is not treated as a foot. Original Y contacts remain unchanged. `contactSupport` records the actual read regions. The before/after native browser pose fixtures are recorded in `origin-adjustment-v3.json`; they are not a normal playthrough. Broad stride/collapse drawings still have their authored weight shifts. Metadata files record unchanged selected PNG hashes.
+
+Per-action `worldUnitsPerPixel` normalizes the different generated batches' body scale. FlatActors should prefer this value over the manifest-level camera fallback. Frame dimensions remain identical across every action of each identity. Full sheets were visually reviewed and selected frames have no alpha≥24 pixels touching cell edges; this does not claim that low-frame motion or four views have the fidelity of a full production animation set.
+
+Only five needed actions are shipped per identity. No extra eleven-action set, tests, dependency or build was added. Integration and actual gameplay review belong to the existing Cocos runtime.

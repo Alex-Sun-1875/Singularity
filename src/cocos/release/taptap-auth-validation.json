@@ -1,0 +1,55 @@
+{
+  "verifiedOn": "2026-11-10",
+  "version": "0.3.1",
+  "implementation": [
+    "tap.login code validation",
+    "server official code2Session",
+    "opaque custom sessions backed by SQLite",
+    "login gate and retry",
+    "tap.checkSession and custom session check on foreground",
+    "expiry relogin",
+    "browser preview explicitly separated"
+  ],
+  "checks": {
+    "typescript": "passed",
+    "coreTypescript": "passed",
+    "clientAndRulesTests": 100,
+    "serverTests": 3,
+    "browserAuth": "fixture only; landscape/portrait, no runtime errors",
+    "browserGameplay": "desktop/mobile landscape; movement, attack, inventory, save reload; no errors or failed requests",
+    "unconfiguredReleaseBuild": "correctly rejected",
+    "zipIntegrity": "passed",
+    "clientSecretAndFixtureExclusion": "passed"
+  },
+  "evidence": {
+    "authBrowser": "test-results/taptap-auth-ui.json",
+    "gameplayBrowser": "test-results/taptap-auth-browser-release.json",
+    "packageReport": "artifacts/taptap-auth-audit/report.json"
+  },
+  "auditPackage": {
+    "path": "build/taptap-auth-audit-package/game.zip",
+    "identity": "unbound-local-audit",
+    "zipBytes": 272468619,
+    "sha256": "c5f77be572192c40d5dce9a7150e790485ea0a16b36d2a8455462df9caa2b81c",
+    "initialPayloadZipBytes": 1148287,
+    "uploadReady": false
+  },
+  "serviceArchive": {
+    "path": "artifacts/taptap-auth-service.zip",
+    "zipBytes": 9301,
+    "sha256": "16f72e29cf491ff80fff2b996e2f3ad3848ebcde3c36256f75a808984de11edd"
+  },
+  "pending": [
+    "Deploy service with persistent volume and HTTPS",
+    "Set MiniApp Secret in server environment only",
+    "Set public serviceUrl and whitelist request domain in TapTap console",
+    "Update actual privacy declaration",
+    "Build bound 0.3.1 package, upload and real-device verify"
+  ],
+  "notPerformed": [
+    "Live TapTap identity exchange",
+    "Server deployment",
+    "Docker image build or image download",
+    "Upload or platform/device verification"
+  ]
+}

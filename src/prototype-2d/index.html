@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#19130e">
+  <link rel="icon" href="data:,">
+  <title>剑与火 · 白枝前厅</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <main id="game" aria-label="白枝前厅游戏场景"></main>
+  <div class="vignette" aria-hidden="true"></div>
+
+  <header class="hud-top">
+    <section class="vitals" aria-label="拉斐尔的状态">
+      <div class="portrait-mark" aria-hidden="true">✧</div>
+      <div class="vitals-body">
+        <div class="identity"><strong>拉斐尔</strong><span id="health-text">100 / 100</span></div>
+        <div class="bar health" aria-label="生命"><div id="health-fill"></div></div>
+        <div class="bar focus" aria-label="专注"><div id="focus-fill"></div></div>
+      </div>
+    </section>
+    <section class="quest" aria-label="当前任务">
+      <div class="scene-name">剑与火 · 白枝前厅 <span>2D可玩样片</span></div>
+      <div id="objective">击败守卫，取回封印匣</div>
+      <div class="quest-progress">守卫 <span id="kill-count">0 / 2</span></div>
+    </section>
+    <nav class="top-actions" aria-label="游戏菜单">
+      <button id="restart" class="quiet-button" type="button" aria-label="重新开始">重来</button>
+      <button id="pause" class="quiet-button" type="button">暂停</button>
+      <a class="quiet-button back-link" href="http://127.0.0.1:7458/">返回3D</a>
+    </nav>
+  </header>
+
+  <div id="notice" role="status" aria-live="polite"></div>
+
+  <div class="movement">
+    <div id="joystick" aria-label="移动摇杆">
+      <div class="joystick-cross" aria-hidden="true"></div>
+      <div id="stick" aria-hidden="true"></div>
+    </div>
+    <span class="movement-label">移动 <kbd>W A S D</kbd></span>
+  </div>
+
+  <section class="weapon-dock" aria-label="切换武器">
+    <div id="weapon-name">佣兵长剑</div>
+    <div class="weapon-slots">
+      <button type="button" data-weapon="W01" class="weapon selected" aria-label="切换佣兵长剑" aria-pressed="true"><img class="weapon-symbol" src="assets/ui/weapon-sword.png" alt=""><span>长剑</span><kbd>1</kbd></button>
+      <button type="button" data-weapon="W07" class="weapon" aria-label="切换白蜡木短弓" aria-pressed="false"><img class="weapon-symbol" src="assets/ui/weapon-bow.png" alt=""><span>短弓</span><kbd>2</kbd></button>
+      <button type="button" data-weapon="W11" class="weapon" aria-label="切换灰木短杖" aria-pressed="false"><img class="weapon-symbol" src="assets/ui/weapon-staff.png" alt=""><span>短杖</span><kbd>3</kbd></button>
+    </div>
+  </section>
+
+  <section class="combat-controls" aria-label="战斗操作">
+    <button type="button" data-action="attack" class="action action-attack" aria-label="攻击"><img class="action-icon" src="assets/ui/attack.png" alt=""><span>攻击</span><kbd>J</kbd></button>
+    <button type="button" data-action="dash" class="action action-dash" aria-label="闪避"><img class="action-icon" src="assets/ui/dash.png" alt=""><span>闪避</span><kbd>空格</kbd></button>
+    <button type="button" data-action="skill" class="action action-skill" aria-label="武技"><img class="action-icon" src="assets/ui/skill.png" alt=""><span>武技</span><kbd>R</kbd></button>
+    <button type="button" data-action="spell" class="action action-spell" aria-label="施放法术"><img class="action-icon" src="assets/ui/spell.png" alt=""><span>法术</span><kbd>Q</kbd></button>
+    <button type="button" data-action="interact" class="action action-interact" aria-label="互动"><img class="action-icon" src="assets/ui/interact.png" alt=""><span>互动</span><kbd>F</kbd></button>
+  </section>
+
+  <section id="intro" class="overlay" aria-labelledby="intro-title">
+    <div class="intro-scrim"></div>
+    <div class="dialog intro-dialog">
+      <div class="chapter-mark" aria-hidden="true">✧</div>
+      <p class="edition">2D可玩样片</p>
+      <h1 id="intro-title">剑与火</h1>
+      <p class="location-title">白枝前厅</p>
+      <div class="gold-rule" aria-hidden="true"></div>
+      <p class="intro-story">旧誓的回声仍在石墙间徘徊。<br>穿过守卫，带回那只封印匣。</p>
+      <div class="begin-actions">
+        <button type="button" id="begin" class="gold-button" disabled>准备旅途</button>
+        <button type="button" id="resume" class="quiet-button" hidden>继续旅程</button>
+      </div>
+      <p class="touch-guide">左手移动，右手战斗 · 可在入口营火切换长剑、短弓与短杖</p>
+      <p class="desktop-guide"><kbd>WASD</kbd> 移动 <kbd>J</kbd> 攻击 <kbd>空格</kbd> 闪避 <kbd>R</kbd> 武技 <kbd>Q</kbd> 法术 <kbd>F</kbd> 互动</p>
+      <a class="subtle-link" href="http://127.0.0.1:7458/">返回3D场景</a>
+    </div>
+  </section>
+
+  <section id="pause-panel" class="overlay" aria-labelledby="pause-title" hidden>
+    <div class="dialog small-dialog">
+      <p class="edition">白枝前厅</p>
+      <h2 id="pause-title">旅程暂歇</h2>
+      <p>石厅会等你回来。</p>
+      <button type="button" id="continue" class="gold-button">继续旅程</button>
+    </div>
+  </section>
+
+  <section id="ending" class="overlay" aria-labelledby="ending-title" hidden>
+    <div class="dialog small-dialog">
+      <div class="chapter-mark" aria-hidden="true">◇</div>
+      <p class="edition">白枝前厅</p>
+      <h2 id="ending-title">封印匣已取回</h2>
+      <p id="ending-text">守卫倒下了，通往深处的道路再次敞开。</p>
+      <p id="ending-summary" class="ending-summary"></p>
+      <button type="button" id="again" class="gold-button">再探一次</button>
+      <a class="subtle-link" href="http://127.0.0.1:7458/">返回3D场景</a>
+    </div>
+  </section>
+
+  <section id="rotate" aria-label="横屏提示">
+    <div class="rotate-symbol" aria-hidden="true">↻</div>
+    <h2>请横向握持</h2>
+    <p>转动屏幕，进入白枝前厅。</p>
+  </section>
+  <script src="vendor/phaser.min.js" defer></script>
+  <script src="game.bundle.js" defer></script>
+</body>
+</html>

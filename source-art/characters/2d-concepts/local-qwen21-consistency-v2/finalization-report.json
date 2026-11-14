@@ -1,0 +1,98 @@
+{
+  "run-front": {
+    "qwen_rgb_blend_pixels": 28285,
+    "masked_pixels_with_reduced_alpha_confidence": 6452,
+    "guide_alpha_preserved_before_neck_repair": true,
+    "neck_repair": {
+      "direction": "front",
+      "method": "Local original running neck/collar/shoulder pixels with a narrow inward feathered polygon; no generation, no model calls; copied standing hair/face core untouched",
+      "source_original_sha256": "1ada50d505569159058fd49803a9ad243a3a53991e73d8867493a9aff1132f7b",
+      "frozen_guide_sha256": "07da115b9b6a6b2632a3e456b19010d19270ac23017c5eed321edae8ef968a0f",
+      "layer_sha256": "1ada50d505569159058fd49803a9ad243a3a53991e73d8867493a9aff1132f7b",
+      "mask_sha256": "fcb24ef347a220c86f76832067faf206d039369501c94eff4d428323c7aa26aa",
+      "repair_mask_bounds_xyxy": [
+        234,
+        186,
+        316,
+        243
+      ],
+      "neck_collar_translation_y": 0,
+      "potential_original_opaque_coverage_hole_pixels": 535,
+      "protected_intersection_pixels": 0,
+      "preserve": "Exact current candidate pixels in approved standing hair/face core, hands/arms, boots, weapon; waist and legs lie entirely outside repair mask",
+      "production_modified": false,
+      "new_model_inference": false,
+      "cloud_generation": false,
+      "status": "Local neck seam repair only; frozen guide and raw remain unchanged",
+      "changed_pixels": 3312,
+      "outside_repair_mask_rgba_exact": true,
+      "protected_hair_face_hands_boots_weapon_rgba_exact": true,
+      "waist_legs_rgba_exact": true,
+      "guide_modified": false,
+      "raw_modified": false
+    },
+    "final": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\final\\run-front.png",
+    "raw": "results/run-front-refined/raw-model.png",
+    "method": "Actual masked local Qwen inference, protected source geometry, alpha-aware RGB composite and separate deterministic palette calibration",
+    "raw_model_modified": false,
+    "production_modified": false
+  },
+  "run-back": {
+    "qwen_rgb_blend_pixels": 27596,
+    "masked_pixels_with_reduced_alpha_confidence": 6741,
+    "guide_alpha_preserved_before_neck_repair": true,
+    "neck_repair": {
+      "direction": "back",
+      "method": "Local original running neck/collar/shoulder pixels with a narrow inward feathered polygon; no generation, no model calls; copied standing hair/face core untouched",
+      "source_original_sha256": "caf13e1502d75419c5163b8ae7f08b012c990f2033452827a9c0259a88a47848",
+      "frozen_guide_sha256": "b144358a6cdbb56f96207f0a176eea8cb041d18a30f7436e753ddd0d62e79d1f",
+      "layer_sha256": "cc6e4721318e3d6a69565339877e79ea5d32f4ffe194e22743e5cba9ccb39d7e",
+      "mask_sha256": "d0c7604af10008049fb1fda6fb7e40af9cc45ff7961e045879a0b352143d5068",
+      "repair_mask_bounds_xyxy": [
+        203,
+        179,
+        283,
+        235
+      ],
+      "neck_collar_translation_y": 7,
+      "potential_original_opaque_coverage_hole_pixels": 513,
+      "protected_intersection_pixels": 0,
+      "preserve": "Exact current candidate pixels in approved standing hair/face core, hands/arms, boots, weapon; waist and legs lie entirely outside repair mask",
+      "production_modified": false,
+      "new_model_inference": false,
+      "cloud_generation": false,
+      "status": "Local neck seam repair only; frozen guide and raw remain unchanged",
+      "changed_pixels": 3187,
+      "outside_repair_mask_rgba_exact": true,
+      "protected_hair_face_hands_boots_weapon_rgba_exact": true,
+      "waist_legs_rgba_exact": true,
+      "guide_modified": false,
+      "raw_modified": false
+    },
+    "final": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\final\\run-back.png",
+    "raw": "results/run-back/raw-model.png",
+    "method": "Actual masked local Qwen inference, protected source geometry, alpha-aware RGB composite and separate deterministic palette calibration",
+    "raw_model_modified": false,
+    "production_modified": false
+  },
+  "standing-back": {
+    "qwen_rgb_blend_pixels": 1815,
+    "masked_pixels_with_reduced_alpha_confidence": 82,
+    "guide_alpha_preserved_before_neck_repair": true,
+    "final": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\final\\standing-back.png",
+    "raw": "results/sword-back/raw-model.png",
+    "method": "Actual masked local Qwen inference, protected source geometry, alpha-aware RGB composite and separate deterministic palette calibration",
+    "raw_model_modified": false,
+    "production_modified": false
+  },
+  "run-right": {
+    "qwen_rgb_blend_pixels": 27197,
+    "masked_pixels_with_reduced_alpha_confidence": 2,
+    "guide_alpha_preserved_before_neck_repair": true,
+    "final": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\final\\run-right.png",
+    "raw": "results/clothing-side/raw-model.png",
+    "method": "Actual masked local Qwen inference, protected source geometry, alpha-aware RGB composite and separate deterministic palette calibration",
+    "raw_model_modified": false,
+    "production_modified": false
+  }
+}

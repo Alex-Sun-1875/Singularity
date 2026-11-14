@@ -1,0 +1,137 @@
+{
+  "date": "2026-11-12",
+  "request": "Extract approved UI designs into public variables and native components.",
+  "status": "implemented_and_browser_reviewed",
+  "configuration": "src/cocos/assets/scripts/shared/ui/PreparationTheme.ts",
+  "components": "src/cocos/assets/scripts/shared/ui/PreparationControls.ts",
+  "documentation": "docs/design/preparation-components.md",
+  "publicExports": [
+    "PREPARATION_DESIGN",
+    "PREPARATION_SKINS",
+    "PREPARATION_SKIN_INSETS",
+    "PreparationControls",
+    "equipmentIconFrame appearance:preparation"
+  ],
+  "configurationScope": [
+    "screen and artwork units",
+    "semantic color roles using existing palette",
+    "responsive dialog and input sizes",
+    "header/footer and typography",
+    "component dimensions and primary page columns",
+    "skin paths, versions and nine-slice insets"
+  ],
+  "componentScope": [
+    "identity label",
+    "side tab",
+    "profession card",
+    "attribute row",
+    "skill row",
+    "point counter",
+    "row/card backgrounds",
+    "shared icon and equipment frame rendering"
+  ],
+  "reuse": [
+    "RpgPanel",
+    "PreparationSkin",
+    "DoubleGoldFrame",
+    "UiSkin",
+    "equipmentIconFrame",
+    "native Cocos Button/Label/Sprite/Mask/ScrollView"
+  ],
+  "pages": [
+    "character",
+    "equipment",
+    "profession",
+    "attribute allocation",
+    "skill allocation",
+    "combat skill configuration",
+    "workshop enhancement",
+    "affix pool",
+    "crafting",
+    "inheritance"
+  ],
+  "validation": {
+    "typeScript": "npm run check passed",
+    "skinCatalog": "63 registered assets exist",
+    "Cocos": "Creator3.8.8 web-mobile completed",
+    "phoneStates": 15,
+    "desktopStates": 15,
+    "functionalStates": 33,
+    "additionalProfileStates": 28,
+    "defaultPreviewPages": 7,
+    "runtimeErrors": 0,
+    "missingSprites": 0,
+    "overlappingControls": 0,
+    "pixelComparedStates": 30,
+    "sameDataComparedStates": 24,
+    "sameDataMaxChannelError": 2,
+    "sameDataMaxMeanError": 0.00013675213675213676,
+    "sourceAndBuildMatched": true,
+    "filesCopiedAndVerified": 3608
+  },
+  "visualComparison": "24 same-data states retain dialog geometry and appearance, with only small rasterization rounding differences.6 additional states have different movement-speed or randomized affix text; exact label differences recorded in pixel-comparison.json.",
+  "sourceHashes": [
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/PreparationTheme.ts",
+      "sha256": "f71c7dc768bf049eea40ef06397d95245131f31551f9119b4ec29d138712391c"
+    },
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/PreparationControls.ts",
+      "sha256": "670757b90c1936c272b36b6c6b684c01cff9f5abe6e48abeacd8f16d196625ea"
+    },
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/PreparationSkin.ts",
+      "sha256": "e3f91548cee8671ce95de14fc38dff19fba930c4c82116c36c12cb53bfe59eb6"
+    },
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/RpgPanel.ts",
+      "sha256": "056798d24e8708d4f19eae6a5e010dfd5e29bfd5bcab0072ac2fd588666524d3"
+    },
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/UiSkin.ts",
+      "sha256": "dea17108c81c638a27727472806dd7bcf21f9541af0de077f72bd911efdb0448"
+    },
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/UiTheme.ts",
+      "sha256": "e92bbcc70888d93623fb9a2238860581e560d3ef0e60f0fa74a97fef3b243eaf"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/equipment/runtime/EquipmentIconFrame.ts",
+      "sha256": "dda3e4d214009e3bccd1cc9e7d0520404d8da0ef0fb0c2643cd9f3a149a1e21e"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/equipment/runtime/EquipmentPanels.ts",
+      "sha256": "30134f6a943dd06fedac2a5ce8b3141f0aeb7ea51f69aa71acbce22fe7aadc0b"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/progression/runtime/PreparationPanels.ts",
+      "sha256": "adf7bd7d93f16193422330e2b9735e8de8c13f22a6620a0f242c3c847456e738"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/progression/runtime/SkillBook.ts",
+      "sha256": "1417708619a09436f9e6cbafc8e3609ff943c0397a594faf6a4a69cbca345f93"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/crafting/runtime/ForgeWorkshop.ts",
+      "sha256": "f792de73693623c9ecaaa88f0e4dec8f3f104c0b33b925f270af5a0dbe67d4ec"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/crafting/runtime/ForgingPanel.ts",
+      "sha256": "607d948831fd7df0cb519c3f39a8a301d5d284cc158a2e917462624965ac25e6"
+    }
+  ],
+  "newRuntimeDependencies": [],
+  "newArtwork": false,
+  "gameplayFilesChangedByThisRefactor": [],
+  "preview": {
+    "url": "http://127.0.0.1:7469/?preview=rpg-shared-v6",
+    "output": "src/cocos/build/concept-2d",
+    "candidate": "src/cocos/build/concept-2d-rpg-shared-v6",
+    "backup": "src/cocos/temp/default-before-rpg-shared-v6-20261112",
+    "published": false
+  },
+  "fixtures": "Independent browser profiles, canonical progression/gear APIs and rendered controls. User save not cleared or replaced.",
+  "remaining": [
+    "TapTap physical-device/platform acceptance remains separate."
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "version": "native65-v6-prerender-v1",
+  "id": "mira",
+  "frameWidth": 96,
+  "frameHeight": 160,
+  "origin": [
+    48.0,
+    108.0
+  ],
+  "directions": [
+    "down",
+    "right",
+    "up",
+    "left"
+  ],
+  "directionYawDegrees": [
+    0,
+    90,
+    180,
+    270
+  ],
+  "layout": "one direction per row, chronological frames in columns; top-left coordinates",
+  "camera": {
+    "projection": "orthographic",
+    "elevationDegrees": 36.86989764584402,
+    "orthoScale": 4.375,
+    "worldUnitsPerPixel": 0.02734375
+  },
+  "canvasFit": {
+    "worldBoundsProjected": [
+      -0.5497519969940186,
+      -0.30364322662353516,
+      0.549751877784729,
+      1.5019071996212008
+    ],
+    "frameWidth": 192,
+    "frameHeight": 320,
+    "origin": [
+      96,
+      216
+    ],
+    "marginPixels": 8,
+    "sampling": "All requested actor native motion samples and all 8 directions; evaluated mesh bounds"
+  },
+  "background": "transparent RGBA; no ground geometry or baked floor shadow",
+  "source": {
+    "nativeSource": "src/.tmp/native-production/source/mira.blend",
+    "nativeSourceSHA256": "677800177d722feb139cfb86c61aed1c8ddc441fcf146d82f4fcc522ef0ff72b",
+    "faceHairRevision": "v5-natural-face-hair-3",
+    "wardrobeRevision": "existing v5_wardrobe_adapter",
+    "rigBones": 67,
+    "actionSource": "Existing Native65 canonical actions; Quaternius CC0",
+    "propSourceFolder": "source-art/characters/redesign-v6/props",
+    "rootLayerOmitted": "Opaque scalp underlayer is excluded because its copied deform data leaves a static fragment in large native poses.",
+    "sourceRigAndActionsEdited": false,
+    "hairSources": [
+      {
+        "asset": "elvs_wavy_bob",
+        "author": "Elvaerwyn",
+        "license": "CC-BY",
+        "source": "http://www.makehumancommunity.org/node/1551"
+      }
+    ]
+  },
+  "actions": {
+    "idle": {
+      "image": "idle.png",
+      "frames": 1,
+      "fps": 1,
+      "loop": true,
+      "holdLastFrame": false,
+      "width": 96,
+      "height": 640,
+      "weapon": "none",
+      "directions": [
+        "down",
+        "right",
+        "up",
+        "left"
+      ],
+      "sourceAction": "idle",
+      "sourceFrames": [
+        0.0
+      ],
+      "sourceFrameRange": [
+        0.0,
+        75.0
+      ],
+      "alphaBoundsPerFrame": [
+        [
+          33,
+          57,
+          61,
+          115
+        ],
+        [
+          34,
+          57,
+          63,
+          116
+        ],
+        [
+          35,
+          55,
+          63,
+          116
+        ],
+        [
+          33,
+          56,
+          62,
+          114
+        ]
+      ],
+      "seconds": 1.0
+    }
+  },
+  "sourceRender": {
+    "frameWidth": 192,
+    "frameHeight": 320,
+    "origin": [
+      96,
+      216
+    ],
+    "worldUnitsPerPixel": 0.013671875,
+    "rawFramesFolder": "frames",
+    "preservedAtFullResolution": true
+  },
+  "runtimeSheetScale": 0.5,
+  "runtimeScaleMethod": "Blender Image.scale 50%; full-resolution transparent source frames retained"
+}

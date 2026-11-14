@@ -1,0 +1,151 @@
+{
+  "scope": "static gait comparison only; no runtime installation",
+  "records": [
+    {
+      "direction": "left",
+      "sourceColumn": 2,
+      "upperBodyAlignmentBtoA": [
+        -11,
+        -3
+      ],
+      "upperBodySilhouetteIoU": 0.929,
+      "legSilhouetteIoU": 0.7917,
+      "legXorFractionOfUnion": 0.2083,
+      "legRgbMeanAbsoluteDifference": 26.27,
+      "feet": [
+        {
+          "pose": "A",
+          "footComponents": [
+            {
+              "centroid": [
+                100.8,
+                262.5
+              ],
+              "bounds": [
+                56,
+                235,
+                160,
+                296
+              ],
+              "area": 2899
+            },
+            {
+              "centroid": [
+                235.0,
+                253.5
+              ],
+              "bounds": [
+                187,
+                235,
+                262,
+                281
+              ],
+              "area": 1802
+            }
+          ]
+        },
+        {
+          "pose": "B-aligned",
+          "footComponents": [
+            {
+              "centroid": [
+                99.3,
+                263.0
+              ],
+              "bounds": [
+                52,
+                235,
+                152,
+                296
+              ],
+              "area": 2913
+            },
+            {
+              "centroid": [
+                227.2,
+                247.8
+              ],
+              "bounds": [
+                204,
+                235,
+                250,
+                264
+              ],
+              "area": 854
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "direction": "right",
+      "sourceColumn": 4,
+      "upperBodyAlignmentBtoA": [
+        12,
+        7
+      ],
+      "upperBodySilhouetteIoU": 0.8859,
+      "legSilhouetteIoU": 0.6486,
+      "legXorFractionOfUnion": 0.3514,
+      "legRgbMeanAbsoluteDifference": 26.81,
+      "feet": [
+        {
+          "pose": "A",
+          "footComponents": [
+            {
+              "centroid": [
+                83.0,
+                252.3
+              ],
+              "bounds": [
+                52,
+                235,
+                138,
+                281
+              ],
+              "area": 1925
+            },
+            {
+              "centroid": [
+                210.8,
+                264.3
+              ],
+              "bounds": [
+                154,
+                235,
+                262,
+                300
+              ],
+              "area": 3115
+            }
+          ]
+        },
+        {
+          "pose": "B-aligned",
+          "footComponents": [
+            {
+              "centroid": [
+                165.7,
+                262.8
+              ],
+              "bounds": [
+                65,
+                235,
+                242,
+                305
+              ],
+              "area": 4663
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "decision": "Targeted cloud correction recommended for row3 left/right lower legs; existing contact silhouettes remain too similar to form a readable2-pose side gait.",
+  "preserve": [
+    "all14 other complete cells",
+    "head/face/helmet/upper-body proportions and pickaxe/grip in edited2 cells"
+  ],
+  "suggestedEdit": "Only row3 col2 andcol4 legs below apron: passing pose, one support leg under pelvis, opposite knee raised with boot under pelvis; not another wide contact pose. Keep actual screen directions.",
+  "sourcePixelsEdited": false
+}

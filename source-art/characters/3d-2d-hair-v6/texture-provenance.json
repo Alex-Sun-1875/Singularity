@@ -1,0 +1,26 @@
+{
+  "tool": "OpenAI image_gen built-in cloud",
+  "purpose": "Hair-only extraction of the project's accepted four-view 2D design; not a replacement portrait",
+  "reference": "source-art/characters/2d-concepts/identity-reference-v1/head-identity-master.png",
+  "prompt": "generation-prompt.txt",
+  "originalOutput": "C:/Users/Alexa/.codex/generated_images/01a1bc2e-cdab-70e1-bf38-a332bd524624/exec-745742b7-623f-4c43-80d1-615c4ddb2d4b.png",
+  "workspaceOutput": "hair-four-view.png",
+  "generationStatus": "completed; RGBA transparent four-view hair cutout",
+  "artReviewStatus": "Assistant visual review completed on actual Cocos close-ups, top-down gameplay and sampled action poses; generation completion was evaluated separately",
+  "processing": "Pillow crops; SciPy silhouette intersection and protective masks; Blender native OpenVDB remesh, smooth, decimate, UV pack, emission bake",
+  "downloads": "none",
+  "faceBodyClothes": "Original meshes, UVs, materials, weights and 14 motion curves preserved",
+  "finalRefinements": [
+    "Forehead/temple opening fitted to unchanged native head",
+    "Soft submillimetre relief",
+    "Masked normal-direction projection, opposite-profile fallback",
+    "Top curl projection from accepted back reference",
+    "Full UV padding extension",
+    "Rounded skull prior removes square top-down hull corners"
+  ],
+  "sampler": {
+    "mipfilter": "linear",
+    "anisotropy": 4,
+    "canonicalGPUmipLevels": 12
+  }
+}

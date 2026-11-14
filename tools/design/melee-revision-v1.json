@@ -1,0 +1,519 @@
+{
+  "schemaVersion": 1,
+  "revision": "melee-restoration-v1",
+  "date": "2026-11-08",
+  "reason": "用户明确要求破军战技改回近战；保持当前S/CD、命中段数、等级与装备联动，恢复原近身空间身份。",
+  "base": "source-art/skills/pure-skills-v2/skill-catalog.json",
+  "nearRangeSource": "source-art/skills/pure-skills-v1/skill-catalog.json",
+  "nearRangeSourceSha256": "ca27d0474ba79edbabd712370c823b4b3b2ae2024681c0faecb53e81ce904c87",
+  "historicalCatalogUnchanged": true,
+  "style": {
+    "shape": "近身扇形连斩、碰撞安全突进与短距裂地",
+    "timing": "挥剑近身接触→回斩→终结重击",
+    "silhouette": "meleeWeaponArcs",
+    "spectacle": "银白刀锋紧随武器，金色终结接触；施法者身前近战范围，不发射远程月牙弹体。"
+  },
+  "rules": {
+    "meleeSkillIds": [
+      "WAR_01",
+      "WAR_02",
+      "WAR_04",
+      "WAR_05"
+    ],
+    "declaredSelfMovementSkill": "WAR_02 collision-safe rush; no automatic approach for other skills"
+  },
+  "skills": {
+    "WAR_01": {
+      "name": "断空斩",
+      "targetShape": "前方扇形刀弧，角度随级成长",
+      "targetingMode": "direction",
+      "mechanic": "近身扇形连斩，伤害随挥剑触点结算，不发射飞刃。",
+      "ranks": [
+        {
+          "rank": 1,
+          "rangeMetres": 2.4,
+          "castRangeMetres": 2.4,
+          "radiusMetres": 0,
+          "geometry": {
+            "kind": "meleeFan",
+            "origin": "caster",
+            "radiusMetres": 2.4,
+            "angleDegrees": 110
+          },
+          "evolution": "双段短银弧，起手斩与回斩各一次。",
+          "vfxAnchor": "weaponContact",
+          "vfxDirection": "近身扇形连斩，伤害随挥剑触点结算，不发射飞刃。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        },
+        {
+          "rank": 2,
+          "rangeMetres": 2.4,
+          "castRangeMetres": 2.4,
+          "radiusMetres": 0.0,
+          "geometry": {
+            "kind": "meleeFan",
+            "origin": "caster",
+            "radiusMetres": 2.4,
+            "angleDegrees": 120
+          },
+          "evolution": "弧刃加宽，第二刀形成清晰交叉金线。",
+          "vfxAnchor": "weaponContact",
+          "vfxDirection": "近身扇形连斩，伤害随挥剑触点结算，不发射飞刃。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        },
+        {
+          "rank": 3,
+          "rangeMetres": 2.54,
+          "castRangeMetres": 2.54,
+          "radiusMetres": 0.0,
+          "geometry": {
+            "kind": "meleeFan",
+            "origin": "caster",
+            "radiusMetres": 2.54,
+            "angleDegrees": 130
+          },
+          "evolution": "增加第三刀终结，三击总倍率按本级上限结算。",
+          "vfxAnchor": "weaponContact",
+          "vfxDirection": "近身扇形连斩，伤害随挥剑触点结算，不发射飞刃。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        },
+        {
+          "rank": 4,
+          "rangeMetres": 2.64,
+          "castRangeMetres": 2.64,
+          "radiusMetres": 0.0,
+          "geometry": {
+            "kind": "meleeFan",
+            "origin": "caster",
+            "radiusMetres": 2.64,
+            "angleDegrees": 140
+          },
+          "evolution": "第三刀出现半环剑印，刃缘碎光向外展开。",
+          "vfxAnchor": "weaponContact",
+          "vfxDirection": "近身扇形连斩，伤害随挥剑触点结算，不发射飞刃。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        },
+        {
+          "rank": 5,
+          "rangeMetres": 2.76,
+          "castRangeMetres": 2.76,
+          "radiusMetres": 0.0,
+          "geometry": {
+            "kind": "meleeFan",
+            "origin": "caster",
+            "radiusMetres": 2.76,
+            "angleDegrees": 150
+          },
+          "evolution": "三刃汇成金白扇形剑阵，终结爆环；三次伤害，不按幻剑数量加伤。",
+          "vfxAnchor": "weaponContact",
+          "vfxDirection": "近身扇形连斩，伤害随挥剑触点结算，不发射飞刃。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        }
+      ]
+    },
+    "WAR_02": {
+      "name": "破军突袭",
+      "targetShape": "自身沿地面突进后十字斩",
+      "targetingMode": "direction",
+      "mechanic": "自身沿地面突进0.18秒，碰撞提前停止；到达实际落点后十字斩，不移动敌人、不获得无敌。",
+      "ranks": [
+        {
+          "rank": 1,
+          "rangeMetres": 3.5,
+          "castRangeMetres": 3.5,
+          "radiusMetres": 0.8,
+          "geometry": {
+            "kind": "meleeRushCross",
+            "origin": "caster",
+            "radiusMetres": 0.8,
+            "lengthMetres": 1.6,
+            "widthMetres": 0.65,
+            "anglesDegrees": [
+              -45,
+              45
+            ]
+          },
+          "evolution": "前冲一道直线残光，落点一斩。",
+          "vfxAnchor": "weaponContact",
+          "vfxDirection": "自身沿地面突进0.18秒，碰撞提前停止；到达实际落点后十字斩，不移动敌人、不获得无敌。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        },
+        {
+          "rank": 2,
+          "rangeMetres": 3.5,
+          "castRangeMetres": 3.5,
+          "radiusMetres": 0.84,
+          "geometry": {
+            "kind": "meleeRushCross",
+            "origin": "caster",
+            "radiusMetres": 0.84,
+            "lengthMetres": 1.68,
+            "widthMetres": 0.7,
+            "anglesDegrees": [
+              -45,
+              45
+            ]
+          },
+          "evolution": "突袭尾迹分出两道金属刃线。",
+          "vfxAnchor": "weaponContact",
+          "vfxDirection": "自身沿地面突进0.18秒，碰撞提前停止；到达实际落点后十字斩，不移动敌人、不获得无敌。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        },
+        {
+          "rank": 3,
+          "rangeMetres": 3.71,
+          "castRangeMetres": 3.71,
+          "radiusMetres": 0.9,
+          "geometry": {
+            "kind": "meleeRushCross",
+            "origin": "caster",
+            "radiusMetres": 0.9,
+            "lengthMetres": 1.8,
+            "widthMetres": 0.75,
+            "anglesDegrees": [
+              -45,
+              45
+            ]
+          },
+          "evolution": "落点增加反向回斩，共两次伤害。",
+          "vfxAnchor": "weaponContact",
+          "vfxDirection": "自身沿地面突进0.18秒，碰撞提前停止；到达实际落点后十字斩，不移动敌人、不获得无敌。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        },
+        {
+          "rank": 4,
+          "rangeMetres": 3.85,
+          "castRangeMetres": 3.85,
+          "radiusMetres": 0.96,
+          "geometry": {
+            "kind": "meleeRushCross",
+            "origin": "caster",
+            "radiusMetres": 0.96,
+            "lengthMetres": 1.92,
+            "widthMetres": 0.8,
+            "anglesDegrees": [
+              -45,
+              45
+            ]
+          },
+          "evolution": "残影形成穿阵十字，落点光印扩张。",
+          "vfxAnchor": "weaponContact",
+          "vfxDirection": "自身沿地面突进0.18秒，碰撞提前停止；到达实际落点后十字斩，不移动敌人、不获得无敌。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        },
+        {
+          "rank": 5,
+          "rangeMetres": 4.02,
+          "castRangeMetres": 4.02,
+          "radiusMetres": 1.04,
+          "geometry": {
+            "kind": "meleeRushCross",
+            "origin": "caster",
+            "radiusMetres": 1.04,
+            "lengthMetres": 2.08,
+            "widthMetres": 0.85,
+            "anglesDegrees": [
+              -45,
+              45
+            ]
+          },
+          "evolution": "金白长锋贯穿路径，十字终结爆裂；残影不产生第三次伤害。",
+          "vfxAnchor": "weaponContact",
+          "vfxDirection": "自身沿地面突进0.18秒，碰撞提前停止；到达实际落点后十字斩，不移动敌人、不获得无敌。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        }
+      ]
+    },
+    "WAR_04": {
+      "name": "裂地审判",
+      "targetShape": "指定地面圆形落刃",
+      "targetingMode": "point",
+      "mechanic": "短距指定地面圆盘落刃，主击70%/余震30%沿原段数结算，无远程条带。",
+      "ranks": [
+        {
+          "rank": 1,
+          "rangeMetres": 4,
+          "castRangeMetres": 4,
+          "radiusMetres": 2.0,
+          "geometry": {
+            "kind": "meleeImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 2.0
+          },
+          "evolution": "武器落地，单圈短促裂光。",
+          "vfxAnchor": "nearGroundImpact",
+          "vfxDirection": "短距指定地面圆盘落刃，主击70%/余震30%沿原段数结算，无远程条带。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        },
+        {
+          "rank": 2,
+          "rangeMetres": 4,
+          "castRangeMetres": 4,
+          "radiusMetres": 2.1,
+          "geometry": {
+            "kind": "meleeImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 2.1
+          },
+          "evolution": "裂光分为四条放射纹。",
+          "vfxAnchor": "nearGroundImpact",
+          "vfxDirection": "短距指定地面圆盘落刃，主击70%/余震30%沿原段数结算，无远程条带。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        },
+        {
+          "rank": 3,
+          "rangeMetres": 4.24,
+          "castRangeMetres": 4.24,
+          "radiusMetres": 2.24,
+          "geometry": {
+            "kind": "meleeImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 2.24
+          },
+          "evolution": "追加一次延迟裂纹伤害，总倍率由本级统一拆分。",
+          "vfxAnchor": "nearGroundImpact",
+          "vfxDirection": "短距指定地面圆盘落刃，主击70%/余震30%沿原段数结算，无远程条带。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        },
+        {
+          "rank": 4,
+          "rangeMetres": 4.4,
+          "castRangeMetres": 4.4,
+          "radiusMetres": 2.4,
+          "geometry": {
+            "kind": "meleeImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 2.4
+          },
+          "evolution": "地面展开六角重刃纹，中心与外缘分层爆开。",
+          "vfxAnchor": "nearGroundImpact",
+          "vfxDirection": "短距指定地面圆盘落刃，主击70%/余震30%沿原段数结算，无远程条带。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        },
+        {
+          "rank": 5,
+          "rangeMetres": 4.6,
+          "castRangeMetres": 4.6,
+          "radiusMetres": 2.6,
+          "geometry": {
+            "kind": "meleeImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 2.6
+          },
+          "evolution": "巨刃光影落下，两次冲击形成辉金审判阵；装饰碎石不阻路。",
+          "vfxAnchor": "nearGroundImpact",
+          "vfxDirection": "短距指定地面圆盘落刃，主击70%/余震30%沿原段数结算，无远程条带。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        }
+      ]
+    },
+    "WAR_05": {
+      "name": "破晓裁决",
+      "targetShape": "前方大扇形三段终结",
+      "targetingMode": "direction",
+      "mechanic": "近身大扇形三段终结，伤害20%/20%/60%，无远程飞刃。",
+      "ranks": [
+        {
+          "rank": 1,
+          "rangeMetres": 3.5,
+          "castRangeMetres": 3.5,
+          "radiusMetres": 0,
+          "geometry": {
+            "kind": "meleeFan",
+            "origin": "caster",
+            "radiusMetres": 3.5,
+            "angleDegrees": 120
+          },
+          "evolution": "两道银色开路斩，第三刀金色终结。",
+          "vfxAnchor": "weaponContact",
+          "vfxDirection": "近身大扇形三段终结，伤害20%/20%/60%，无远程飞刃。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        },
+        {
+          "rank": 2,
+          "rangeMetres": 3.5,
+          "castRangeMetres": 3.5,
+          "radiusMetres": 0.0,
+          "geometry": {
+            "kind": "meleeFan",
+            "origin": "caster",
+            "radiusMetres": 3.5,
+            "angleDegrees": 130
+          },
+          "evolution": "开路斩留实体感刃痕，终结有薄金环。",
+          "vfxAnchor": "weaponContact",
+          "vfxDirection": "近身大扇形三段终结，伤害20%/20%/60%，无远程飞刃。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        },
+        {
+          "rank": 3,
+          "rangeMetres": 3.71,
+          "castRangeMetres": 3.71,
+          "radiusMetres": 0.0,
+          "geometry": {
+            "kind": "meleeFan",
+            "origin": "caster",
+            "radiusMetres": 3.71,
+            "angleDegrees": 140
+          },
+          "evolution": "背后浮现三柄透明光剑，随三段斩击同拍落下。",
+          "vfxAnchor": "weaponContact",
+          "vfxDirection": "近身大扇形三段终结，伤害20%/20%/60%，无远程飞刃。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        },
+        {
+          "rank": 4,
+          "rangeMetres": 3.85,
+          "castRangeMetres": 3.85,
+          "radiusMetres": 0.0,
+          "geometry": {
+            "kind": "meleeFan",
+            "origin": "caster",
+            "radiusMetres": 3.85,
+            "angleDegrees": 150
+          },
+          "evolution": "剑翼向两侧展开，末击刻出完整旭日纹。",
+          "vfxAnchor": "weaponContact",
+          "vfxDirection": "近身大扇形三段终结，伤害20%/20%/60%，无远程飞刃。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        },
+        {
+          "rank": 5,
+          "rangeMetres": 4.02,
+          "castRangeMetres": 4.02,
+          "radiusMetres": 0.0,
+          "geometry": {
+            "kind": "meleeFan",
+            "origin": "caster",
+            "radiusMetres": 4.02,
+            "angleDegrees": 160
+          },
+          "evolution": "破晓剑冠显形，三段巨刃贯穿金白光阵；末击爆环与低频轰鸣，幻剑只作表演。",
+          "vfxAnchor": "weaponContact",
+          "vfxDirection": "近身大扇形三段终结，伤害20%/20%/60%，无远程飞刃。",
+          "vfxLayers": {
+            "material": "近身实体银白刃缘与金色接触碎光",
+            "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+            "contact": "仅在声明段的真实命中点爆发",
+            "fade": "接触后迅速退亮，不延长伤害窗",
+            "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          }
+        }
+      ]
+    }
+  }
+}

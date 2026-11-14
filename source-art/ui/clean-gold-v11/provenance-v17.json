@@ -1,0 +1,98 @@
+{
+  "version": "skill-soft-depth-v17",
+  "date": "2026-11-08",
+  "userDirection": "Add soft shadows or blurred halo layers around skill buttons, with Honor of Kings as visual inspiration.",
+  "ownership": "Project-original procedural textures exported with existing Resvg/Pillow. The official screenshot was viewed only as visual reference and is not part of either texture. No model generation or new dependencies.",
+  "reference": {
+    "acceptedFrame": "unified-gold-skill-v16",
+    "previewWorld": "Project runtime screenshots hud-skill-v16-outdoor.png and hud-skill-v16-hidpi.png",
+    "previewStatus": "Isolated concept and actual runtime verification are recorded separately; runtime evidence is listed below.",
+    "officialURL": "https://www.honorofkings.com/de/img/2.jpg",
+    "officialNecessaryCrop": "src/cocos/test-results/hok-official-skill-reference-v17.png",
+    "visualInterpretation": "Diffuse dark separation from world terrain, with restrained perimeter haze. Official artwork is reference-only and is not included in either new texture."
+  },
+  "construction": "Two reusable transparent sprite layers behind each accepted v16 face: broad dark ambient/contact shadow plus subtle neutral-champagne perimeter haze. Soft alpha fades avoid hard circles or panels.",
+  "assets": [
+    {
+      "id": "skill-soft-shadow-v17",
+      "source": "source-art/ui/clean-gold-v11/skill-soft-shadow-v17.svg",
+      "sourceSHA256": "1858dd6b9947ea6f3ad2907742b130248dc4c909513c0087be56ec3d130e9e84",
+      "asset": "src/cocos/assets/resources/ui/quiet-bronze/skill-soft-shadow-v17.png",
+      "pngSHA256": "33906bd25029536f887e9ed7533842857a1e5b69cd525f109cdecd328ddbcd31",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 68483,
+      "displayDiameterRatio": 1.6,
+      "description": "Neutral dark ambient/contact shadow; baked lower weighting. Place centered behind the skill face."
+    },
+    {
+      "id": "skill-soft-halo-v17",
+      "source": "source-art/ui/clean-gold-v11/skill-soft-halo-v17.svg",
+      "sourceSHA256": "ac75d3cc0593ce3b2c2ebdf9af2ef1796c86d15e9a544c008f53272a2cf4374f",
+      "asset": "src/cocos/assets/resources/ui/quiet-bronze/skill-soft-halo-v17.png",
+      "pngSHA256": "32b2318bd8b3b27b9916e985be74de2cb2d044e23e66b457b7cb1114fff56738",
+      "size": [
+        512,
+        512
+      ],
+      "bytes": 60100,
+      "displayDiameterRatio": 1.36,
+      "description": "Restrained desaturated champagne-gray soft rim halo. Centered; 0.15 alpha peak near the face edge, with no solid line or face artwork."
+    }
+  ],
+  "sampling": "Runtime verified all14 soft-layer sprites reuse 10-level trilinear mipmapped non-atlased textures. Cocos-generated metadata retained with mipmaps enabled.",
+  "layerOrder": [
+    "shadow",
+    "halo",
+    "accepted v16 face",
+    "icon and labels"
+  ],
+  "alphaValidation": {
+    "shadow": {
+      "maxAlpha": 122,
+      "edgeMaxAlpha": 0,
+      "alphaAtTopFaceEdge": 57,
+      "alphaAtBottomFaceEdge": 105
+    },
+    "halo": {
+      "maxAlpha": 35,
+      "edgeMaxAlpha": 0,
+      "alphaAtTopFaceEdge": 34,
+      "alphaAtBottomFaceEdge": 34
+    }
+  },
+  "artReview": {
+    "isolated": "Asset task inspected the 58/86 previews and alpha fade; parent reviewed isolated-preview-v17.png and approved first-pass strength for runtime integration without brightening. Geometry and alpha frozen.",
+    "runtime": "Actual desktopDPR2, mobile844x390 and narrow667x375 captures inspected. Diffuse contact shadow and subtle edge haze separate buttons from terrain; frame scrolls and icons stay crisp; adjacent mobile shadows leave visible gaps without hard clipped edges.",
+    "userAcceptance": "Not recorded.",
+    "evidence": [
+      "src/cocos/test-results/hud-soft-depth-v17-comparison.png",
+      "src/cocos/test-results/hud-skill-v17-outdoor.png",
+      "src/cocos/test-results/hud-skill-v17-outdoor-without-soft.png",
+      "src/cocos/test-results/hud-skill-v17-mobile.png",
+      "src/cocos/test-results/hud-skill-v17-narrow.png"
+    ]
+  },
+  "validation": {
+    "typescript": "npm run check passed",
+    "build": "Cocos Creator3.8.8 web-mobile hud-soft-depth-v17 completed using isolated current-assets project; UI source bytes match.",
+    "runtimeReport": "src/cocos/test-results/hud-skill-v17-review.json",
+    "hitTargets": "All7 hit/face dimensions equal v16; center hit true, visible shadow outside hit remains non-UI.",
+    "inputLayers": "Soft sprites have no Button, BlockInputEvents or touch listener; attached to pressed face before frame.",
+    "utilityNoSoftLayers": true,
+    "namesToggle": true,
+    "cooldownCenter": true,
+    "errors": 0
+  },
+  "deployment": {
+    "mainPreview": "http://127.0.0.1:7469/?view=2d&ui=v17",
+    "mainStatus": "A concurrent concept-2d build replaced the initial deployment while a startup probe was loading. After that build completed, a fresh main-page probe reported ready=true, failure empty and soft shadow present; zero page errors.",
+    "independentPreview": "http://127.0.0.1:7551/?view=2d&ui=v17",
+    "previewPid": 7180,
+    "independentBuild": "hud-soft-depth-v17-preview",
+    "independentSmoke": "src/cocos/test-results/hud-soft-depth-v17-preview-smoke.json",
+    "independentStatus": "Ready with both soft layers active, 10 mip levels and zero page errors. Separate output keeps this review link independent of concept-2d rebuilds."
+  }
+}

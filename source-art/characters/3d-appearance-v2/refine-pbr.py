@@ -1,0 +1,9 @@
+"""Relief and thread roughness on the original garment UV; no geometry changes."""
+from pathlib import Path
+from PIL import Image
+import numpy as np,json
+from scipy.ndimage import gaussian_filter
+BASE=Path(__file__).resolve().parent;ROOT=BASE.parents[2];manifest=json.loads((BASE/'manifest.json').read_text(encoding='utf-8'));record=next(r for r in manifest['materials']if r['runtimeName']=='Raphael_Refined_Native_Jerkin')
+color=np.array(Image.open(BASE/'textures/jerkin-embroidered.png').convert('RGB')).astype(float)/255;mask=np.array(Image.open(BASE/'textures/fabric-mask.png').resize((1024,1024),Image.Resampling.BILINEAR)).astype(float)/255;r,g,b=color[:,:,0],color[:,:,1],color[:,:,2];gold=(r>.25)&(g/r.clip(.01)>.60)&(g/r.clip(.01)<.93)&(b/g.clip(.01)<.82)&(mask>.5);height=gaussian_filter(gold.astype(float),.8);dy,dx=np.gradient(height)
+anchor=ROOT/'src/cocos/assets/resources/actors/raphael';normal=np.array(Image.open((anchor/record['maps']['normal']).resolve()).convert('RGB').resize((1024,1024),Image.Resampling.LANCZOS)).astype(float)/255*2-1;normal[:,:,0]-=dx*.5;normal[:,:,1]+=dy*.5;normal/=np.linalg.norm(normal,axis=2,keepdims=True).clip(.001);Image.fromarray(np.uint8(np.clip(normal*.5+.5,0,1)*255)).save(BASE/'textures/jerkin-normal.png')
+orm=np.array(Image.open((anchor/record['maps']['orm']).resolve()).convert('RGB').resize((1024,1024),Image.Resampling.LANCZOS)).copy();orm[:,:,1]=np.uint8(orm[:,:,1]*(1-height*.22));orm[:,:,2]=np.maximum(orm[:,:,2],np.uint8(height*36));Image.fromarray(orm).save(BASE/'textures/jerkin-orm.png');record['maps']['normal']='../appearance-v2/textures/jerkin-normal.png';record['maps']['orm']='../appearance-v2/textures/jerkin-orm.png';(BASE/'manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n',encoding='utf-8');print('Refined embroidery relief/roughness on original UV')

@@ -1,0 +1,355 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-08",
+  "method": "Cloud OpenAI built-in image_gen__imagegen",
+  "generationCalls": 2,
+  "localModelInference": false,
+  "requestedDimensions": [
+    2048,
+    2048
+  ],
+  "actualDimensions": [
+    1254,
+    1254
+  ],
+  "transparentBackgroundRequested": true,
+  "source": {
+    "path": "source-art/maps/terrain-production-v1/raw/terrain-props-v2.png",
+    "originalPath": "C:/Users/Alexa/.codex/generated_images/01a1b87b-b5b9-7e93-89db-41e8117a797b/exec-d5d14554-73ca-483e-9d7b-09f27e90b28b.png",
+    "dimensions": [
+      1254,
+      1254
+    ],
+    "mode": "RGBA",
+    "sha256": "661af115485fca487b47e6ec07fcbbd5d1976e7d22cc54af32b32cf20b94f293",
+    "bytes": 1088536
+  },
+  "reference": {
+    "path": "source-art/maps/style-unification-v1/terrain-style-board.png",
+    "role": "Approved art-direction style reference only",
+    "sha256": "06440741d41ef3465b588689b2f86b1018c202ba3d5b03acad3d3cf96bf4fe81"
+  },
+  "iterations": [
+    {
+      "version": 1,
+      "source": {
+        "path": "source-art/maps/terrain-production-v1/raw/terrain-props.png",
+        "originalPath": "C:/Users/Alexa/.codex/generated_images/01a1b87b-b5b9-7e93-89db-41e8117a797b/exec-de3a0990-8c0d-42ae-b27d-679050592e9a.png",
+        "sha256": "759af8c175f4546815a518fdb4eea90a1386219df255af8fdbdd4ed7b7286c5f",
+        "status": "rejected-for-overlapping-reed-silhouettes"
+      },
+      "prompt": "Use case: stylized-concept.\nAsset type: ONE production transparent environment sprite ATLAS for an existing hand-painted medieval fantasy RPG. Requested output size 2048 by 2048.\nInput image 1 is a STYLE REFERENCE ONLY: the approved nine-environment art direction board. Translate its muted natural stone, olive grass and reed materials into isolated reusable cutout props. Do not copy buildings, ground panels, room layouts or frames from that board.\nPrimary request: exactly TWELVE isolated environmental sprite cutouts in a strictly regular FOUR COLUMN by THREE ROW grid, row-major layout. Each equal cell contains exactly one complete distinct prop or cohesive natural cluster, centered horizontally, its bottom ground contact around 87% down the cell, with generous fully transparent padding on every side. No silhouette or stray leaf crosses a cell boundary. No cell borders are drawn.\nCamera for every object: consistent orthographic three-quarter game view from above, about 40 degrees downward, visible front/right surfaces, one consistent soft upper-left light. The finish is refined hand painting, believable worn edges and stone strata, subdued naturally varied grey-brown rock, olive-sage grass and dark green ferns, not photographic collage, not low-poly render, not cartoon plastic. Keep very subtle contact shading inside the natural object's bottom footprint only. Entire surroundings must be genuine transparent alpha.\nStrict arrangement:\nROW 1 COLUMN 1: rocks-a — a broad low cluster of three rounded weathered cool grey-brown boulders, asymmetrical silhouette.\nROW 1 COLUMN 2: rocks-b — two taller broken angular slate-grey rocks leaning together, a clear narrow vertical silhouette with chipped strata.\nROW 1 COLUMN 3: rocks-c — one squat flat-faced cracked grey granite slab and two smaller side stones, broad calm top surface.\nROW 1 COLUMN 4: rocks-d — an asymmetric stepped cluster of four eroded warm-grey stones, with sparse dark moss in crevices.\nROW 2 COLUMN 1: rocks-e — a very LOW loose scree/pebble cluster of varied small pale grey-brown stone chips, no raised mound, no soil base.\nROW 2 COLUMN 2: rocks-f — an elongated low natural layered rock ledge, weathered grey-brown horizontal strata, clear long silhouette.\nROW 2 COLUMN 3: grass-a — a small low irregular tuft of muted olive-sage meadow grass with fine mixed leaf blades, no soil clod.\nROW 2 COLUMN 4: grass-b — a wider flatter sparse tuft of muted olive grass with a different asymmetric outline and a few dry straw blades, no soil clod.\nROW 3 COLUMN 1: fern-a — a compact restrained dark desaturated green fern, two or three clearly readable arching fronds, no pot or ground.\nROW 3 COLUMN 2: fern-b — a broader lower fern group with a few separate curved fronds and a distinct different outline, muted natural green, no pot or ground.\nROW 3 COLUMN 3: reed-a — a modest narrow stand of natural olive-brown wetland reeds with long slender leaves and three brown seed heads, upright asymmetrical silhouette, no water or ground.\nROW 3 COLUMN 4: reed-b — a wider leaning reed stand with varied stalk heights, fine subdued olive leaves and four small brown seed heads, different silhouette, no water or ground.\nText: none. Asset names above are instructions only and MUST NOT appear visually.\nConstraints: exactly four columns and three rows, twelve isolated sprites, all completely inside their own cells. Genuine transparent alpha behind and between objects, no checkerboard painted into the file, no opaque grey/white background. No floor tile bases, rectangular patches, dirt platforms, disks, scenery, walls, architecture, characters, monsters, weapons, magic, colored aura, UI, labels, symbols, numbers, watermark, decorative framing, horizon, long cast shadows, excessive saturated lime-green foliage or bright blue rocks. Preserve readable silhouettes and fine material variation at small mobile game scale."
+    },
+    {
+      "version": 2,
+      "prompt": "Use case: precise-object-edit.\nAsset type: correction of this existing transparent 4-column by 3-row environment sprite atlas.\nInput image is the EDIT TARGET atlas, not a scene or background. Preserve its overall canvas, transparency, exact 4 by 3 layout, order, camera, hand-painted material style, subdued colors and all the first TEN sprites.\nChange only the TWO REED CLUSTERS in the bottom row, columns 3 and 4. Currently some fine leaves touch or cross the vertical cell border between them. Make each of these two reed clusters 25 percent NARROWER around the center of its OWN equal cell. Keep their stalk heights and natural brown seed heads, slim olive leaves and independent distinct silhouettes. Each reed's full visible alpha silhouette must be strictly inside its own cell, with at least 12 percent of that cell width as completely transparent padding on BOTH left and right sides. Every leaf and stray stem belongs to its own isolated plant, never connects to the adjacent cell. Bottom row column 3 is a modest narrow upright reed stand with three brown seed heads; column 4 is a wider leaning reed stand with four small brown seed heads, but still fully contained in its own cell.\nKeep all other rocks, grass and ferns in their original cells with their original visual design. Keep six different rock forms in positions 1 through 6, two low olive grass forms at positions 7 and 8, two dark green fern forms at positions 9 and 10. Exactly twelve sprites total. Do not redraw a ground patch under any object. No text, numbers, cell lines, frame, checkerboard, characters or scene. All space behind and between objects must be real transparent alpha. Return a transparent PNG. Do not add colored halo or stray bright pixels. This is a targeted sprite isolation correction, not a new composition.",
+      "status": "selected-for-runtime-cutout-review",
+      "note": "Targeted cloud edit narrowed the two reed silhouettes. Other sprites retained their designs but are not claimed pixel-identical."
+    }
+  ],
+  "grid": {
+    "columns": 4,
+    "rows": 3,
+    "order": "row-major"
+  },
+  "cropPolicy": {
+    "method": "Pillow alpha-bound reads only; no source pixel resampling, recoloring, masking or transparency cleanup",
+    "alphaThreshold": 32,
+    "paddingPixels": 2,
+    "rectFormat": "x,y,width,height"
+  },
+  "alpha": {
+    "extrema": [
+      0,
+      255
+    ],
+    "fullyTransparentFraction": 0.6850588483678386,
+    "above32Fraction": 0.1971890906038476,
+    "above128Fraction": 0.1873017508247929,
+    "brightRedPixelsAboveAlpha8": 0
+  },
+  "crops": {
+    "rocks-a": {
+      "image": "terrain-props",
+      "rect": [
+        16,
+        164,
+        290,
+        209
+      ],
+      "cell": [
+        0,
+        0,
+        314,
+        418
+      ],
+      "alphaBounds": [
+        18,
+        166,
+        286,
+        205
+      ],
+      "alphaCoreInsideCell": true
+    },
+    "rocks-b": {
+      "image": "terrain-props",
+      "rect": [
+        356,
+        83,
+        225,
+        288
+      ],
+      "cell": [
+        314,
+        0,
+        313,
+        418
+      ],
+      "alphaBounds": [
+        358,
+        85,
+        221,
+        284
+      ],
+      "alphaCoreInsideCell": true
+    },
+    "rocks-c": {
+      "image": "terrain-props",
+      "rect": [
+        630,
+        185,
+        296,
+        175
+      ],
+      "cell": [
+        627,
+        0,
+        313,
+        418
+      ],
+      "alphaBounds": [
+        632,
+        187,
+        292,
+        171
+      ],
+      "alphaCoreInsideCell": true
+    },
+    "rocks-d": {
+      "image": "terrain-props",
+      "rect": [
+        957,
+        127,
+        275,
+        239
+      ],
+      "cell": [
+        940,
+        0,
+        314,
+        418
+      ],
+      "alphaBounds": [
+        959,
+        129,
+        271,
+        235
+      ],
+      "alphaCoreInsideCell": true
+    },
+    "rocks-e": {
+      "image": "terrain-props",
+      "rect": [
+        18,
+        647,
+        260,
+        97
+      ],
+      "cell": [
+        0,
+        418,
+        314,
+        418
+      ],
+      "alphaBounds": [
+        20,
+        649,
+        256,
+        93
+      ],
+      "alphaCoreInsideCell": true
+    },
+    "rocks-f": {
+      "image": "terrain-props",
+      "rect": [
+        315,
+        590,
+        310,
+        157
+      ],
+      "cell": [
+        314,
+        418,
+        313,
+        418
+      ],
+      "alphaBounds": [
+        317,
+        592,
+        306,
+        153
+      ],
+      "alphaCoreInsideCell": true
+    },
+    "grass-a": {
+      "image": "terrain-props",
+      "rect": [
+        660,
+        586,
+        228,
+        166
+      ],
+      "cell": [
+        627,
+        418,
+        313,
+        418
+      ],
+      "alphaBounds": [
+        662,
+        588,
+        224,
+        162
+      ],
+      "alphaCoreInsideCell": true
+    },
+    "grass-b": {
+      "image": "terrain-props",
+      "rect": [
+        955,
+        616,
+        275,
+        127
+      ],
+      "cell": [
+        940,
+        418,
+        314,
+        418
+      ],
+      "alphaBounds": [
+        957,
+        618,
+        271,
+        123
+      ],
+      "alphaCoreInsideCell": true
+    },
+    "fern-a": {
+      "image": "terrain-props",
+      "rect": [
+        53,
+        982,
+        223,
+        155
+      ],
+      "cell": [
+        0,
+        836,
+        314,
+        418
+      ],
+      "alphaBounds": [
+        55,
+        984,
+        219,
+        151
+      ],
+      "alphaCoreInsideCell": true
+    },
+    "fern-b": {
+      "image": "terrain-props",
+      "rect": [
+        319,
+        992,
+        282,
+        144
+      ],
+      "cell": [
+        314,
+        836,
+        313,
+        418
+      ],
+      "alphaBounds": [
+        321,
+        994,
+        278,
+        140
+      ],
+      "alphaCoreInsideCell": true
+    },
+    "reed-a": {
+      "image": "terrain-props",
+      "rect": [
+        708,
+        863,
+        117,
+        271
+      ],
+      "cell": [
+        627,
+        836,
+        313,
+        418
+      ],
+      "alphaBounds": [
+        710,
+        865,
+        113,
+        267
+      ],
+      "alphaCoreInsideCell": true
+    },
+    "reed-b": {
+      "image": "terrain-props",
+      "rect": [
+        980,
+        874,
+        194,
+        260
+      ],
+      "cell": [
+        940,
+        836,
+        314,
+        418
+      ],
+      "alphaBounds": [
+        982,
+        876,
+        190,
+        256
+      ],
+      "alphaCoreInsideCell": true
+    }
+  },
+  "generationStatus": "succeeded-and-saved",
+  "artReview": {
+    "reviewer": "Codex internal visual review",
+    "status": "suitable-candidate-for-cutout-runtime-review",
+    "findings": [
+      "12格顺序、材质与轮廓符合要求；六种岩体分别为圆岩、竖岩、平岩、阶岩、低碎石与长岩层。",
+      "草与蕨保持低橄榄/暗绿，芦苇有棕穗与两种轮廓，和批准方向板的材质配色一致。",
+      "v2全部alpha>32的主体完整处于各自单元格内，芦苇相互分离；无地砖底座、网格或文字。"
+    ],
+    "limits": [
+      "实际图集为1254×1254，单格约313×418；保留原尺寸，未放大。",
+      "生成透明背景仍含极低alpha残留及隐藏RGB，未做像素清理。现有alpha-test约0.12会剔除此类残留；alpha>8未检出高亮红色像素。",
+      "仍需按世界尺寸、镜头、接地和重复程度在真实运行场景审阅。"
+    ],
+    "userAcceptance": "not-recorded-for-this-production-atlas",
+    "runtimeInstalled": false
+  },
+  "runtimeResourcesWritten": false
+}

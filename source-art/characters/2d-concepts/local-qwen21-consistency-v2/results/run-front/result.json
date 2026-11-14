@@ -1,0 +1,42 @@
+{
+  "model": "Qwen-Image-2.1-Turbo INT8 convrot",
+  "case": "run-front",
+  "prompt_id": "a3469e8d-8e39-4f35-be32-3406f7dcefe4",
+  "started_utc": "2026-11-07T04:10:33.871176+00:00",
+  "elapsed_seconds": 82.62,
+  "new_model_inference": true,
+  "endpoint": "http://127.0.0.1:8188",
+  "cloud_generation": false,
+  "steps": 8,
+  "cfg": 1,
+  "sampler": "euler",
+  "seed": 20261107,
+  "native_noise_mask": true,
+  "initial_latent": "prepared RGBA guide encoded by the local VAE",
+  "reference_inputs": {
+    "guide": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\front\\guide-rgba.png",
+      "sha256": "7728c89357db30360bd39ff203da4d551d57ddc44aa3e75471922453a718788a",
+      "snapshot": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\results\\run-front\\input-guide.png"
+    },
+    "mask": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\front\\edit-mask.png",
+      "sha256": "bf8507589b278b3dd9f96d6171435844835cb79f2cd4ce0cfacc7e6f1f087b84",
+      "snapshot": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\results\\run-front\\input-mask.png"
+    },
+    "reference": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\body\\front\\reference-standing-rgba.png",
+      "sha256": "cb9f904ab1c10d9acb9b1c643c9d40fd9ca0b86600e6f7cf65dd9059df45025f",
+      "snapshot": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\results\\run-front\\input-reference.png"
+    }
+  },
+  "mode": "RGBA",
+  "size": [
+    512,
+    768
+  ],
+  "raw_output_sha256": "482126b8c2ea403af60bf6bb745518fae5190a7d60b6fd4bb624b559e068bac3",
+  "postprocessing_applied_to_raw": false,
+  "production_modified": false,
+  "delivery_status": "diagnostic only; guide underlay repaired after submission, superseded by run-front-refined"
+}

@@ -1,0 +1,75 @@
+{
+  "verifiedAt": "2026-11-13T12:43:06.973691+00:00",
+  "version": "0.3.36",
+  "package": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-guest-20261113-current\\SwordAndFire_0.3.36_TapTap_guest-test_20261113T124153Z\\SwordAndFire_0.3.36_TapTap_guest-test_20261113T124153Z.zip",
+  "sha256": "1d4e1b406dcab8fa8a9e3943aec4e66629e47bc4c7a5518286f1499ec1ed898e",
+  "bytes": 224318275,
+  "buildMode": "guest-test",
+  "loginMode": "guest",
+  "localSaveOnly": true,
+  "checks": {
+    "typescript": true,
+    "existingTestsPassed": 140,
+    "existingTestsFailed": 0,
+    "releaseConfiguration": true,
+    "creatorBuild": true,
+    "officialConversion": true,
+    "renderPolicy": true,
+    "subpackageAudit": true,
+    "zipCRC": "passed by report-taptap.py",
+    "deliveredSha256MatchesOfficialZipAndSidecar": true,
+    "zippedGuestEntry": true,
+    "zippedVersionAndCompiledVersion": true,
+    "miniAppIdMatchesProject": true
+  },
+  "sourceIntegrity": {
+    "scriptsBefore": 200,
+    "scriptsAfter": 200,
+    "changes": [
+      "assets/scripts/app/BuildInfo.ts"
+    ],
+    "businessScriptsUnchanged": true,
+    "before": "source-before.json",
+    "after": "source-after.json"
+  },
+  "buildRecovery": {
+    "reason": "Existing Windows UNKNOWN file-open failure for settings/v2/packages/engine.json; the initial Creator retry also failed.",
+    "action": "Backed up settings and rewrote identical bytes; resumed the existing workflow retaining assigned version 0.3.36.",
+    "settingsBytesUnchanged": true,
+    "settingsSha256": "38bb9139283c4e97b9dc533b55ac3b9a0ce3aed8977f24bfd373002814253b91",
+    "record": "build-audit/settings-rewrite.json",
+    "versionAllocatedOnce": true
+  },
+  "payload": {
+    "completeUploadZipBytes": 224318275,
+    "zipEntries": 4025,
+    "offlineInitialPayload": {
+      "files": 26,
+      "rawBytes": 5218622,
+      "zipBytes": 1297693,
+      "zipMiB": 1.24,
+      "budgetMiB": 20.0,
+      "withinLocalBudget": true,
+      "sha256": "a533c302fdc60ba913f40bd94cc89b2d0d3a91da8587a4ec84b599b307afd695",
+      "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+    },
+    "actualPlatformInitialBytes": null,
+    "actualResourcesNeededBeforePlayBytes": null,
+    "subpackageCount": 76,
+    "contentPackCount": 64
+  },
+  "uploaded": false,
+  "platformVerified": false,
+  "pending": [
+    "TapTap platform parsing and actual delivered first package/resources needed before play.",
+    "Real TapTap device guest startup, touch input, lifecycle recovery and local-save continuity.",
+    "Deploy login service and configure serviceUrl before switching to login-required release."
+  ],
+  "subsequentRuntimeFinding": {
+    "recordedAt": "2026-11-13T12:57:59.383448+00:00",
+    "status": "startup-broken-do-not-use",
+    "issue": "Both WebGL renderer implementations stripped from compiled engine; local device initialization reproduces createSwapchain failure. Earlier checks cover configuration/structure only.",
+    "replacementVersion": "0.3.37",
+    "replacementValidation": "taptap-startup-fix-validation.json"
+  }
+}

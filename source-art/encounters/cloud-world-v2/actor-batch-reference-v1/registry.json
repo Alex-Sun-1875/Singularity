@@ -1,0 +1,3312 @@
+{
+  "schemaVersion": 1,
+  "status": "30 minimal references and prompts prepared; no generation/runtime writes",
+  "scope": {
+    "common": 19,
+    "bosses": 11,
+    "total": 30
+  },
+  "excludedRetained": {
+    "R1-1": "raider",
+    "R1-2": "raider-shield",
+    "R1-3": "raider-archer",
+    "BOSS_R1": "captain"
+  },
+  "excludedPilots": {
+    "R2-1": "mine-worker",
+    "R2-3": "mine-crawler"
+  },
+  "authority": {
+    "campaign": "source-art/skills/pure-skills-v2/campaign-v8.json",
+    "worldDesign": "docs/design/world-combat-v4.md",
+    "combatData": "source-art/encounters/cloud-world-v2/combat-runtime-v1/enemy-combat-profiles.json",
+    "combatDataSha256": "be15f6e877e35e3fe120e769d52c3c12a216b5a9a7c58932d4fd1fe26cee1ff8"
+  },
+  "contactSheet": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/reference-contact-30.jpg",
+  "contactSize": [
+    1500,
+    1520
+  ],
+  "cropPolicy": "Explicit per-subject rectangles, complete weapons/supports/plinth favored over hard grid. Native RGB source pixels retained; no generated/background-removal pixels. Neighbor fragments explicitly excluded in per-ID prompts.",
+  "generationStarted": false,
+  "runtimeWritten": false,
+  "identityConflicts": [
+    {
+      "id": "BOSS_R4",
+      "unusedSource": "assets/concepts/revision-v5/rivals-v5-balanced.png",
+      "actualHistoricalLabel": "RODERICK",
+      "samePersonAliasAuthorized": false,
+      "resolution": "Root confirmed: use only current explicit cloud R4 top-left Adrian identity; do not borrow historical named face"
+    }
+  ],
+  "items": [
+    {
+      "id": "R1-4",
+      "name": "绊索猎兵",
+      "region": "R1",
+      "proposedConceptId": "r1-4",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Practical adult rope trapper, red headband, patched brown coat, green scarf, visible rope coil, belt stakes and boots.",
+      "primaryDrawing": "Crouch and place a clearly visible snare stake, guiding the rope with the other hand. No crossbow firing.",
+      "primaryRuntimeMove": "snare-line",
+      "primaryRuntimePose": "interact",
+      "requiredCombatMoves": [
+        {
+          "id": "snare-line",
+          "label": "展开绊索",
+          "pose": "interact",
+          "stepIds": [
+            "snare"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.2,
+              "lock": 0.35,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r1-stonebridge.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "30324cab74a4d712d17a0c0b59a5db8b555437b4b66a3ddbe83ff2fbd45f1193",
+        "sourcePosition": "middle row, left-to-right 4",
+        "cropRect": [
+          980,
+          595,
+          1235,
+          995
+        ],
+        "cropSize": [
+          255,
+          400
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/r1-4-reference.png",
+        "cropSha256": "b4b8a9a021374a6de143433d5807addc34d538ddc8a5c3e75fec1383411ee193",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r1-stonebridge.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/r1-4-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "R2-2",
+      "name": "岩脊弩哨",
+      "region": "R2",
+      "proposedConceptId": "r2-2",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Adult highland crossbow scout, leather goggles, practical hood/scarf, slate-green layered leather, one complete wood-and-steel crossbow.",
+      "primaryDrawing": "Brace the crossbow and commit to an aimed bolt release. Keep stock, both bow arms and trigger grip complete.",
+      "primaryRuntimeMove": "crossbow",
+      "primaryRuntimePose": "attack_bow",
+      "requiredCombatMoves": [
+        {
+          "id": "crossbow",
+          "label": "弩线瞄准",
+          "pose": "attack_bow",
+          "stepIds": [
+            "bolt"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.2,
+              "lock": 0.35,
+              "active": 0.02
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r2-highlands.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "8dd1f033b85c438375aa1c9e2e4766d5e34445e7608a196315c5b7db99b81929",
+        "sourcePosition": "middle row, left-to-right 2",
+        "cropRect": [
+          340,
+          505,
+          575,
+          855
+        ],
+        "cropSize": [
+          235,
+          350
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/r2-2-reference.png",
+        "cropSha256": "8139811af3db3331c4efab36be967a874ae0378ed54b7c087ec9b44d3458c77a",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r2-highlands.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/r2-2-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "R2-4",
+      "name": "断岳号兵",
+      "region": "R2",
+      "proposedConceptId": "r2-4",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Adult ridge signal soldier, bluegrey cloak, practical steel helmet, one short spear and the visible brass horn.",
+      "primaryDrawing": "Raise the horn to the mouth and blow a clear signal while retaining the single spear in the other hand; no new reinforcements in the image.",
+      "primaryRuntimeMove": "horn",
+      "primaryRuntimePose": "interact",
+      "requiredCombatMoves": [
+        {
+          "id": "horn",
+          "label": "号声协同",
+          "pose": "interact",
+          "stepIds": [
+            "signal"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.5,
+              "lock": 0.4,
+              "active": 0.12
+            }
+          ]
+        },
+        {
+          "id": "close-jab",
+          "label": "近身短击",
+          "pose": "attack_sword",
+          "stepIds": [
+            "jab"
+          ],
+          "stepTimings": [
+            {
+              "windup": 0.65,
+              "lock": 0.2,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r2-highlands.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "8dd1f033b85c438375aa1c9e2e4766d5e34445e7608a196315c5b7db99b81929",
+        "sourcePosition": "middle row, left-to-right 4",
+        "cropRect": [
+          985,
+          490,
+          1220,
+          855
+        ],
+        "cropSize": [
+          235,
+          365
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/r2-4-reference.png",
+        "cropSha256": "cffdfa9c98173e01e9cb5837a4d2a7762e8c8afd9f4623e1d21d8d156c1effe6",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r2-highlands.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/r2-4-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "R3-1",
+      "name": "码头快刀",
+      "region": "R3",
+      "proposedConceptId": "r3-1",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Lean adult dock knifeman, dark hair/headwrap, worn teal cloth, soot-dark leather and one curved short blade.",
+      "primaryDrawing": "Short controlled curved-blade slash, free hand counterbalances, feet planted without a leap.",
+      "primaryRuntimeMove": "blade-swing",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "blade-swing",
+          "label": "举刃短扇",
+          "pose": "attack_sword",
+          "stepIds": [
+            "swing"
+          ],
+          "stepTimings": [
+            {
+              "windup": 0.7,
+              "lock": 0.25,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r3-bellriver.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "31a88a41f02c58ee6666fa134637282396a10f068c18ce6394deb38694c4c088",
+        "sourcePosition": "middle row, left-to-right 1",
+        "cropRect": [
+          40,
+          525,
+          280,
+          850
+        ],
+        "cropSize": [
+          240,
+          325
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/r3-1-reference.png",
+        "cropSha256": "fddb80a10cd622e2db39bef106ab1baffdd8ccd33da9b4ed4cd801e341b19197",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r3-bellriver.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/r3-1-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "R3-2",
+      "name": "赤焰术士",
+      "region": "R3",
+      "proposedConceptId": "r3-2",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Adult human fire caster in worn teal dock clothes, leather belts/apron and fire-resistant gloves; keep the same face and clothing.",
+      "primaryDrawing": "Raise an OPEN HAND to place a restrained fire seal. The old overhead clay-flask throw in this historical reference is retired; do not throw a flask or show an oil projectile. Strapped containers may stay at the belt.",
+      "primaryRuntimeMove": "fire-seal",
+      "primaryRuntimePose": "spell",
+      "requiredCombatMoves": [
+        {
+          "id": "fire-seal",
+          "label": "赤焰印落区",
+          "pose": "spell",
+          "stepIds": [
+            "eruption"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.2,
+              "lock": 0.35,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r3-bellriver.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "31a88a41f02c58ee6666fa134637282396a10f068c18ce6394deb38694c4c088",
+        "sourcePosition": "middle row, left-to-right 2",
+        "cropRect": [
+          310,
+          520,
+          565,
+          842
+        ],
+        "cropSize": [
+          255,
+          322
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/r3-2-reference.png",
+        "cropSha256": "f48a08af0cb464e8caa82d5eef1a4f47362b546ecd13278e018e5bc956f98984",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r3-bellriver.txt",
+        "neighborFragmentsToIgnore": "A tiny finial/edge of the separate equipment design below may occur at the bottom crop perimeter. Ignore it; only the standing caster is the identity. The flask-in-hand reference pose is historical and must adapt to the specified open-hand fire cast."
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/r3-2-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ],
+      "sourceHistoryAdaptation": "Current identity uses authored fire casting; old oil-pot throwing pose is reference history, not the required new attack pose."
+    },
+    {
+      "id": "R3-3",
+      "name": "青铜钟卫",
+      "region": "R3",
+      "proposedConceptId": "r3-3",
+      "bodyTemplate": "mechanical-supports",
+      "supportCount": 2,
+      "identityInvariants": "Nonhuman ancient bronze archive guardian: bell-shaped engraved torso, top handle, two articulated stone support feet, hanging side rods, no human face.",
+      "primaryDrawing": "Brace the stone feet and tilt/strike the bell torso for a ring pulse. No human sword, bow or casting hands.",
+      "primaryRuntimeMove": "bell-ring",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "bell-ring",
+          "label": "钟腹环震",
+          "pose": "attack_sword",
+          "stepIds": [
+            "ring"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.15,
+              "lock": 0.35,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r3-bellriver.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "31a88a41f02c58ee6666fa134637282396a10f068c18ce6394deb38694c4c088",
+        "sourcePosition": "middle row, left-to-right 3",
+        "cropRect": [
+          590,
+          525,
+          865,
+          850
+        ],
+        "cropSize": [
+          275,
+          325
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/r3-3-reference.png",
+        "cropSha256": "3b7ec2b5506a13d718bcb928813b414295c555128001028a06118811193d6400",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r3-bellriver.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/r3-3-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/mechanical-supports.txt",
+      "anchorBasis": "Support polygon/chassis projection, not nearest toe; keep rigid core height stable.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "R3-4",
+      "name": "钩刃战士",
+      "region": "R3",
+      "proposedConceptId": "r3-4",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Adult dock hook fighter, cloth headwrap, sleeveless weathered teal workwear, rope harness and one complete LONG wooden boathook.",
+      "primaryDrawing": "Drive the boathook forward with both hands then brace. Preserve the entire shaft and curved metal hook.",
+      "primaryRuntimeMove": "hook-blade",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "hook-blade",
+          "label": "钩刃直击",
+          "pose": "attack_sword",
+          "stepIds": [
+            "hook"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.0,
+              "lock": 0.3,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r3-bellriver.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "31a88a41f02c58ee6666fa134637282396a10f068c18ce6394deb38694c4c088",
+        "sourcePosition": "middle row, left-to-right 4",
+        "cropRect": [
+          860,
+          535,
+          1254,
+          855
+        ],
+        "cropSize": [
+          394,
+          320
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/r3-4-reference.png",
+        "cropSha256": "5286a954f8c6539e5066d0bdc0771c6b348b0afbd5f3a23b9aaedc50d1777d32",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r3-bellriver.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/r3-4-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "R4-1",
+      "name": "黑冠盾兵",
+      "region": "R4",
+      "proposedConceptId": "r4-1",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Adult fortress shield infantry, practical steel helmet, ivory tabard with navy cross, long navy steel shield and straight sword.",
+      "primaryDrawing": "Step into a controlled shield thrust with the sword retained, shield never fused into the torso.",
+      "primaryRuntimeMove": "shield-thrust",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "shield-thrust",
+          "label": "抬盾直击",
+          "pose": "attack_sword",
+          "stepIds": [
+            "thrust"
+          ],
+          "stepTimings": [
+            {
+              "windup": 0.85,
+              "lock": 0.3,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r4-greyrock.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "aa04a728fab0fd053ea9672b3b6218398ffde6d71db0325db64faf45d27f9678",
+        "sourcePosition": "middle row, left-to-right 1",
+        "cropRect": [
+          35,
+          535,
+          280,
+          925
+        ],
+        "cropSize": [
+          245,
+          390
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/r4-1-reference.png",
+        "cropSha256": "b4a1806f48c1bbe9b5e4f635f7659232055cdf2880ef515af8f3342ce118696c",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r4-greyrock.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/r4-1-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "R4-2",
+      "name": "堡垒重弩手",
+      "region": "R4",
+      "proposedConceptId": "r4-2",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Adult fortress heavy crossbow soldier, enclosed steel helmet, navy quilted/plate kit, steel bracers and a broad complete heavy crossbow.",
+      "primaryDrawing": "Brace the heavy crossbow and release a bolt; keep both limbs, front stirrup, stock, trigger grip and all toes visible.",
+      "primaryRuntimeMove": "crossbow",
+      "primaryRuntimePose": "attack_bow",
+      "requiredCombatMoves": [
+        {
+          "id": "crossbow",
+          "label": "弩线瞄准",
+          "pose": "attack_bow",
+          "stepIds": [
+            "bolt"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.4,
+              "lock": 0.4,
+              "active": 0.02
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r4-greyrock.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "aa04a728fab0fd053ea9672b3b6218398ffde6d71db0325db64faf45d27f9678",
+        "sourcePosition": "middle row, left-to-right 2",
+        "cropRect": [
+          345,
+          540,
+          615,
+          930
+        ],
+        "cropSize": [
+          270,
+          390
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/r4-2-reference.png",
+        "cropSha256": "da2b94f01fb0231a5171ed6e71a1fe12b1cda3f54a44a8747ae3fd869b23c02d",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r4-greyrock.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/r4-2-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "R4-3",
+      "name": "折镜工兵",
+      "region": "R4",
+      "proposedConceptId": "r4-3",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Adult optical field engineer with visible face and glasses, ivory/navy work coat, leather tool belts and a complete hinged silver mirror assembly with rods.",
+      "primaryDrawing": "Adjust/deploy the hinged mirror assembly as an optical worker preparing a narrow beam. Not a bow shot or sword swing; retain the same person and mirror mechanism.",
+      "primaryRuntimeMove": "mirror-line",
+      "primaryRuntimePose": "spell",
+      "requiredCombatMoves": [
+        {
+          "id": "mirror-line",
+          "label": "折镜光带",
+          "pose": "spell",
+          "stepIds": [
+            "beam"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.5,
+              "lock": 0.4,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r4-greyrock.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "aa04a728fab0fd053ea9672b3b6218398ffde6d71db0325db64faf45d27f9678",
+        "sourcePosition": "middle row, left-to-right 3",
+        "cropRect": [
+          650,
+          535,
+          875,
+          930
+        ],
+        "cropSize": [
+          225,
+          395
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/r4-3-reference.png",
+        "cropSha256": "27fd407e596041fb67916fd556de82d41f1e0c77b9abf03b6a5f7c9c0b1816fb",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r4-greyrock.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/r4-3-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "R4-4",
+      "name": "铁旗军士",
+      "region": "R4",
+      "proposedConceptId": "r4-4",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Adult fortress standard bearer, steel halfplate and navy tabard, a pole with THREE hanging navy pennants bearing pale simple star/cross marks, straight sword.",
+      "primaryDrawing": "Committed sword cut with the banner retained and balanced. Do not replace the banner with a spear or remove any pennant.",
+      "primaryRuntimeMove": "banner-double",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "banner-double",
+          "label": "旗杆双击",
+          "pose": "attack_sword",
+          "stepIds": [
+            "first",
+            "second"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.0,
+              "lock": 0.3,
+              "active": 0.16
+            },
+            {
+              "windup": 0.65,
+              "lock": 0.25,
+              "active": 0.16
+            }
+          ]
+        },
+        {
+          "id": "banner-rally",
+          "label": "号令现有同伴",
+          "pose": "interact",
+          "stepIds": [
+            "rally"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.0,
+              "lock": 0.3,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r4-greyrock.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "aa04a728fab0fd053ea9672b3b6218398ffde6d71db0325db64faf45d27f9678",
+        "sourcePosition": "middle row, left-to-right 4",
+        "cropRect": [
+          940,
+          515,
+          1240,
+          935
+        ],
+        "cropSize": [
+          300,
+          420
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/r4-4-reference.png",
+        "cropSha256": "8ac567cb2295e74d83e1c8f7d12f808c7e25a8417a0d58d515d85ad41ec37d4e",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r4-greyrock.txt",
+        "neighborFragmentsToIgnore": "The crop intentionally preserves the complete banner tips; a small fragment of ELITE_04 boot/shadow may occur at upper-left. Ignore that fragment and generate ONLY the standard bearer."
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/r4-4-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "U1-1",
+      "name": "铸炉卫兵",
+      "region": "U1",
+      "proposedConceptId": "u1-1",
+      "bodyTemplate": "mechanical-supports",
+      "supportCount": 2,
+      "identityInvariants": "Empty nonhuman articulated bronze forge guard, narrow furnace head, cold-white chest slit, visible knee cranks, short hammer and stone/metal support feet.",
+      "primaryDrawing": "Bring the short hammer arm down in a controlled mechanical strike, opposite arm balances; no flesh or human face.",
+      "primaryRuntimeMove": "hammer-arm",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "hammer-arm",
+          "label": "锤臂矩形",
+          "pose": "attack_sword",
+          "stepIds": [
+            "hammer"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.0,
+              "lock": 0.3,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/u1-oathcity.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "404a6f13cc0ec1ef75d6a08a6b2d972ad2746f02a9b8cfb63a4ffa445ac751d2",
+        "sourcePosition": "middle row, left-to-right 1",
+        "cropRect": [
+          0,
+          475,
+          260,
+          820
+        ],
+        "cropSize": [
+          260,
+          345
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/u1-1-reference.png",
+        "cropSha256": "18e64a69f33c77e2cbf0c75cb70d7952c8b71de61afbaa76413567673de6c3d5",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/u1-oathcity.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/u1-1-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/mechanical-supports.txt",
+      "anchorBasis": "Support polygon/chassis projection, not nearest toe; keep rigid core height stable.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "U1-2",
+      "name": "鸣震甲虫",
+      "region": "U1",
+      "proposedConceptId": "u1-2",
+      "bodyTemplate": "mechanical-supports",
+      "supportCount": 6,
+      "identityInvariants": "Small SIX-LEGGED scrap-bronze resonance beetle, domed plated carapace, exposed gears, forked antennae, cold-white small core.",
+      "primaryDrawing": "Brace all six mechanical legs and flex the forked antennae for a resonance pulse. No arms, human face or extra pincers.",
+      "primaryRuntimeMove": "resonance",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "resonance",
+          "label": "六足鸣震",
+          "pose": "attack_sword",
+          "stepIds": [
+            "pulse"
+          ],
+          "stepTimings": [
+            {
+              "windup": 0.85,
+              "lock": 0.25,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/u1-oathcity.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "404a6f13cc0ec1ef75d6a08a6b2d972ad2746f02a9b8cfb63a4ffa445ac751d2",
+        "sourcePosition": "middle row, left-to-right 2",
+        "cropRect": [
+          270,
+          525,
+          595,
+          820
+        ],
+        "cropSize": [
+          325,
+          295
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/u1-2-reference.png",
+        "cropSha256": "ce05ddd33be349e036edfd2b613e53cb190bb68f50145e5220bcb5f5ca191aaa",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/u1-oathcity.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/u1-2-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/mechanical-supports.txt",
+      "anchorBasis": "Support polygon/chassis projection, not nearest toe; keep rigid core height stable.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "U1-3",
+      "name": "提灯狱卒",
+      "region": "U1",
+      "proposedConceptId": "u1-3",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Adult human gaoler in worn practical brown/russet clothes, broad work hat, one small caged lantern and a complete long hooked pole.",
+      "primaryDrawing": "Controlled hooked-pole strike while the lantern remains visible in the other hand/belt support. Keep hook, staff end and both boots intact.",
+      "primaryRuntimeMove": "lantern-hook",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "lantern-hook",
+          "label": "举灯钩刺",
+          "pose": "attack_sword",
+          "stepIds": [
+            "hook"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.0,
+              "lock": 0.3,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/u1-oathcity.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "404a6f13cc0ec1ef75d6a08a6b2d972ad2746f02a9b8cfb63a4ffa445ac751d2",
+        "sourcePosition": "middle row, left-to-right 3",
+        "cropRect": [
+          640,
+          470,
+          900,
+          820
+        ],
+        "cropSize": [
+          260,
+          350
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/u1-3-reference.png",
+        "cropSha256": "801258340df82f648b043edf424458ba9881992d06fa192bd52ee173e673a7d1",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/u1-oathcity.txt",
+        "neighborFragmentsToIgnore": "A tiny finial of the separate equipment staff below may occur at the lower-right crop perimeter. Ignore it; keep only the human gaoler, carried lantern and hooked pole."
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/u1-3-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "U1-4",
+      "name": "负重搬机",
+      "region": "U1",
+      "proposedConceptId": "u1-4",
+      "bodyTemplate": "mechanical-supports",
+      "supportCount": 2,
+      "identityInvariants": "Nonhuman bronze counterweight carrier, broad U-shaped weight gantry around compact central chassis, hinged stone feet, paired heavy block weights.",
+      "primaryDrawing": "Lower the heavy counterweight frame in a braced mechanical slam. The U frame is attached machinery, not an archway or a separate building.",
+      "primaryRuntimeMove": "counterweight",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "counterweight",
+          "label": "配重落框",
+          "pose": "attack_sword",
+          "stepIds": [
+            "slam"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.4,
+              "lock": 0.4,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/u1-oathcity.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "404a6f13cc0ec1ef75d6a08a6b2d972ad2746f02a9b8cfb63a4ffa445ac751d2",
+        "sourcePosition": "middle row, left-to-right 4",
+        "cropRect": [
+          935,
+          475,
+          1250,
+          825
+        ],
+        "cropSize": [
+          315,
+          350
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/u1-4-reference.png",
+        "cropSha256": "b1df2c6451f424a10968eb3901838a3544e50e71c5584475ace5720054b60abd",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/u1-oathcity.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/u1-4-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/mechanical-supports.txt",
+      "anchorBasis": "Support polygon/chassis projection, not nearest toe; keep rigid core height stable.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "U2-1",
+      "name": "渠底爬卫",
+      "region": "U2",
+      "proposedConceptId": "u2-1",
+      "bodyTemplate": "mechanical-supports",
+      "supportCount": 4,
+      "identityInvariants": "Small jointed limestone-and-bronze canal crawler with FOUR complete hooked feet, compact slab shell and visible dry mechanical hinges.",
+      "primaryDrawing": "Two front hooked feet strike while the rear supports brace; preserve exactly four legs and the hooked foot tips.",
+      "primaryRuntimeMove": "hook-feet",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "hook-feet",
+          "label": "钩足四角",
+          "pose": "attack_sword",
+          "stepIds": [
+            "feet"
+          ],
+          "stepTimings": [
+            {
+              "windup": 0.9,
+              "lock": 0.3,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/u2-catacombs.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "5aa3ca9b0efb147be6c109a1353e6e2e190960885285afbcd202f53b9c242a5b",
+        "sourcePosition": "middle row, left-to-right 1",
+        "cropRect": [
+          20,
+          635,
+          355,
+          890
+        ],
+        "cropSize": [
+          335,
+          255
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/u2-1-reference.png",
+        "cropSha256": "1de4265c13bd8bb8c0b0888326a9ecee286dbf15893b1be7db2432d4047a1b39",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/u2-catacombs.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/u2-1-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/mechanical-supports.txt",
+      "anchorBasis": "Support polygon/chassis projection, not nearest toe; keep rigid core height stable.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "U2-2",
+      "name": "铭板守卫",
+      "region": "U2",
+      "proposedConceptId": "u2-2",
+      "bodyTemplate": "mechanical-supports",
+      "supportCount": 2,
+      "identityInvariants": "Nonhuman humanoid BRONZE inscription sentinel, empty narrow metal head, navy cloth remnants, limestone tablet in one hand and blunt baton in the other, stone/metal feet.",
+      "primaryDrawing": "Sweep the blunt stone tablet/baton in a short braced arc. No human skin, scholar face or new writing.",
+      "primaryRuntimeMove": "tablet-swing",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "tablet-swing",
+          "label": "石板短扇",
+          "pose": "attack_sword",
+          "stepIds": [
+            "swing"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.1,
+              "lock": 0.35,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/u2-catacombs.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "5aa3ca9b0efb147be6c109a1353e6e2e190960885285afbcd202f53b9c242a5b",
+        "sourcePosition": "middle row, left-to-right 2",
+        "cropRect": [
+          360,
+          550,
+          590,
+          895
+        ],
+        "cropSize": [
+          230,
+          345
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/u2-2-reference.png",
+        "cropSha256": "3a9c5d741075c71b8ebaaab1ced07adfc0735e0a0c27ca125af6fed2993149c2",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/u2-catacombs.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/u2-2-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/mechanical-supports.txt",
+      "anchorBasis": "Support polygon/chassis projection, not nearest toe; keep rigid core height stable.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "U2-3",
+      "name": "巡游镜眼",
+      "region": "U2",
+      "proposedConceptId": "u2-3",
+      "bodyTemplate": "mechanical-supports",
+      "supportCount": 0,
+      "identityInvariants": "Tiny floating optical CONSTRUCT: three distinct bronze orbital rings around ONE physical glass lens, small metal finials, no face, spirit, ghost or legs.",
+      "primaryDrawing": "Aim the single physical lens and open/tilt its rings for a narrow light bolt. Lens remains low and physically reachable, no screen-filling beam or particles.",
+      "primaryRuntimeMove": "lens-bolt",
+      "primaryRuntimePose": "spell",
+      "requiredCombatMoves": [
+        {
+          "id": "lens-bolt",
+          "label": "镜眼地面光点",
+          "pose": "spell",
+          "stepIds": [
+            "light"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.3,
+              "lock": 0.35,
+              "active": 0.02
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/u2-catacombs.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "5aa3ca9b0efb147be6c109a1353e6e2e190960885285afbcd202f53b9c242a5b",
+        "sourcePosition": "middle row, left-to-right 3",
+        "cropRect": [
+          635,
+          565,
+          885,
+          855
+        ],
+        "cropSize": [
+          250,
+          290
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/u2-3-reference.png",
+        "cropSha256": "cb44d23105ee237ce96aa7f998616a347682d09463e0f3f998721e28baabe00e",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/u2-catacombs.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/u2-3-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/mechanical-supports.txt",
+      "anchorBasis": "Ground projection below the low physical glass lens; no invented sole/leg anchor, no unreachable floating collider.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "U2-4",
+      "name": "撞钟傀儡",
+      "region": "U2",
+      "proposedConceptId": "u2-4",
+      "bodyTemplate": "mechanical-supports",
+      "supportCount": 2,
+      "identityInvariants": "Hunched nonhuman bronze bell-striker automaton, bell torso, visibly attached wooden mallet and two articulated stone support feet, navy cloth remnant.",
+      "primaryDrawing": "Strike the bell torso with the attached wooden mallet while bracing both support feet; show the rear opening, not a new weapon.",
+      "primaryRuntimeMove": "gapped-bell",
+      "primaryRuntimePose": "spell",
+      "requiredCombatMoves": [
+        {
+          "id": "gapped-bell",
+          "label": "缺口钟震",
+          "pose": "spell",
+          "stepIds": [
+            "ring"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.35,
+              "lock": 0.4,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/u2-catacombs.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "5aa3ca9b0efb147be6c109a1353e6e2e190960885285afbcd202f53b9c242a5b",
+        "sourcePosition": "middle row, left-to-right 4",
+        "cropRect": [
+          885,
+          565,
+          1245,
+          895
+        ],
+        "cropSize": [
+          360,
+          330
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/u2-4-reference.png",
+        "cropSha256": "9b89f9ab6acfe8c4bb9ebd623e696f04f9022eb084197014e6ec915300e7375a",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/u2-catacombs.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/u2-4-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/mechanical-supports.txt",
+      "anchorBasis": "Support polygon/chassis projection, not nearest toe; keep rigid core height stable.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "BOSS_R2",
+      "name": "断岳铁卫·守桥铠卫",
+      "region": "R2",
+      "proposedConceptId": "boss-r2",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Stocky mature human bridge warden, dented riveted halfplate, pale linen/bluegrey cloth, tall angled steel shield with arch ornament and masonry-arch crowned ONE-HANDED hammer.",
+      "primaryDrawing": "A grounded shield-first rush/brace, retaining the full angled shield and hammer. No giant body proportions or teleport pose.",
+      "primaryRuntimeMove": "shield-rush",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "shield-rush",
+          "label": "盾锋突击",
+          "pose": "attack_sword",
+          "stepIds": [
+            "rush"
+          ],
+          "stepTimings": [
+            {
+              "windup": 0.75,
+              "lock": 0.25,
+              "active": 0.28
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r2-highlands.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "8dd1f033b85c438375aa1c9e2e4766d5e34445e7608a196315c5b7db99b81929",
+        "sourcePosition": "top left",
+        "cropRect": [
+          80,
+          0,
+          565,
+          515
+        ],
+        "cropSize": [
+          485,
+          515
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/boss-r2-reference.png",
+        "cropSha256": "26d7e58638fd9d18acb076f268ab366043bf04f5f3a8bd99d35a0c5699a82d8a",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r2-highlands.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/boss-r2-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "BOSS_R3",
+      "name": "焚潮统领·灰烬掠夺者",
+      "region": "R3",
+      "proposedConceptId": "boss-r3",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Adult human Ash Reaver commander, dark wavy hair, weathered teal/soot-dark leather apron, strapped flasks, fire-resistant gloves and complete long chopping cleaver.",
+      "primaryDrawing": "Primary move is a restrained OPEN-HAND fire-seal cast, with the cleaver lowered safely in the other hand. Historical strapped oil flasks are not thrown; no flaming body or oil projectile.",
+      "primaryRuntimeMove": "fire-seal",
+      "primaryRuntimePose": "spell",
+      "requiredCombatMoves": [
+        {
+          "id": "fire-seal",
+          "label": "爆炎印",
+          "pose": "spell",
+          "stepIds": [
+            "eruption"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.2,
+              "lock": 0.35,
+              "active": 0.16
+            }
+          ]
+        },
+        {
+          "id": "flame-cleave",
+          "label": "裂焰斩",
+          "pose": "attack_sword",
+          "stepIds": [
+            "cleave"
+          ],
+          "stepTimings": [
+            {
+              "windup": 0.9,
+              "lock": 0.3,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r3-bellriver.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "31a88a41f02c58ee6666fa134637282396a10f068c18ce6394deb38694c4c088",
+        "sourcePosition": "top left",
+        "cropRect": [
+          110,
+          0,
+          525,
+          525
+        ],
+        "cropSize": [
+          415,
+          525
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/boss-r3-reference.png",
+        "cropSha256": "0cf8690a2f5df471f9ac68d4a810e8db650dce47caf761483531f27b004c343f",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r3-bellriver.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/boss-r3-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ],
+      "sourceHistoryAdaptation": "Current identity uses authored fire casting; old oil-pot throwing pose is reference history, not the required new attack pose."
+    },
+    {
+      "id": "BOSS_R4",
+      "name": "黑冠统帅·阿德里安",
+      "region": "R4",
+      "proposedConceptId": "boss-r4",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Adrian Voss as the explicit R4 TOP-LEFT commander: visible adult face, short dark hair, dark engraved steel halfplate, midnight navy cloak, broad twin-ring-seal sapphire steel shield and straight LONG sword. No king crown.",
+      "primaryDrawing": "Heavy committed sword slash with shield retained, grounded authoritative stance. This is Adrian from THIS reference only, not Raphael, captain or Roderick.",
+      "primaryRuntimeMove": "double-slash",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "double-slash",
+          "label": "重斩两段",
+          "pose": "attack_sword",
+          "stepIds": [
+            "first",
+            "second"
+          ],
+          "stepTimings": [
+            {
+              "windup": 0.85,
+              "lock": 0.25,
+              "active": 0.16
+            },
+            {
+              "windup": 0.65,
+              "lock": 0.25,
+              "active": 0.16
+            }
+          ]
+        },
+        {
+          "id": "shield-charge",
+          "label": "统帅盾冲",
+          "pose": "attack_sword",
+          "stepIds": [
+            "charge"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.05,
+              "lock": 0.35,
+              "active": 0.65
+            }
+          ]
+        },
+        {
+          "id": "inner-bolts",
+          "label": "半血内弩号令",
+          "pose": "interact",
+          "stepIds": [
+            "call",
+            "left-port",
+            "right-port"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.4,
+              "lock": 0,
+              "active": 0.02
+            },
+            {
+              "windup": 1,
+              "lock": 1,
+              "active": 0.02
+            },
+            {
+              "windup": 1,
+              "lock": 1,
+              "active": 0.02
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r4-greyrock.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "aa04a728fab0fd053ea9672b3b6218398ffde6d71db0325db64faf45d27f9678",
+        "sourcePosition": "top left",
+        "cropRect": [
+          145,
+          0,
+          645,
+          535
+        ],
+        "cropSize": [
+          500,
+          535
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/boss-r4-reference.png",
+        "cropSha256": "4de7e12368762d2b384395f1d01f7a9167c70eb4032ed3c10638a71268889a69",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r4-greyrock.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/boss-r4-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ],
+      "sourceHistoryAdaptation": " Use the explicit R4 top-left Adrian reference. The historical rivals-v5-balanced sheet labels its officer RODERICK; no same-person alias is authorized, so that face is NOT a reference."
+    },
+    {
+      "id": "ELITE_01",
+      "name": "断镐监工",
+      "region": "R1",
+      "proposedConceptId": "elite-01",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Adult old quarry foreman, dark tousled hair, brown work apron/cloak, thick rope coil over shoulder, complete quarry pickaxe, caged belt lamp and work boots.",
+      "primaryDrawing": "Braced downward quarry-pick cleave, both hands gripping correctly; retain lamp, rope and the complete pick head.",
+      "primaryRuntimeMove": "split-pick",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "split-pick",
+          "label": "裂地镐",
+          "pose": "attack_sword",
+          "stepIds": [
+            "pick"
+          ],
+          "stepTimings": [
+            {
+              "windup": 0.95,
+              "lock": 0.3,
+              "active": 0.16
+            }
+          ]
+        },
+        {
+          "id": "rope-pull",
+          "label": "横拉绳",
+          "pose": "interact",
+          "stepIds": [
+            "rope"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.2,
+              "lock": 0.35,
+              "active": 0.16
+            }
+          ]
+        },
+        {
+          "id": "lamp-sweep",
+          "label": "收灯横扫",
+          "pose": "attack_sword",
+          "stepIds": [
+            "lamp"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.1,
+              "lock": 0.3,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r1-stonebridge.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "30324cab74a4d712d17a0c0b59a5db8b555437b4b66a3ddbe83ff2fbd45f1193",
+        "sourcePosition": "top right",
+        "cropRect": [
+          700,
+          5,
+          1170,
+          595
+        ],
+        "cropSize": [
+          470,
+          590
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/elite-01-reference.png",
+        "cropSha256": "7a75c3a4cead6efbc2b5e277aab64024645f18f2eb99194b9fe2cb80f3e22da3",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r1-stonebridge.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/elite-01-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "ELITE_02",
+      "name": "裂风督猎",
+      "region": "R2",
+      "proposedConceptId": "elite-02",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Lean adult highland ranger, practical slate-green hood and layered leathers, full angular wind-ribbon longbow, quiver and visible boots; no wings.",
+      "primaryDrawing": "Draw and release the LONG bow with correct grip/string alignment; all bow tips and arrow remain complete. No new feathered costume or ice projectile.",
+      "primaryRuntimeMove": "double-arrow",
+      "primaryRuntimePose": "attack_bow",
+      "requiredCombatMoves": [
+        {
+          "id": "double-arrow",
+          "label": "双风箭",
+          "pose": "attack_bow",
+          "stepIds": [
+            "first",
+            "second"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.25,
+              "lock": 0.35,
+              "active": 0.02
+            },
+            {
+              "windup": 0.7,
+              "lock": 0.3,
+              "active": 0.02
+            }
+          ]
+        },
+        {
+          "id": "pin-arrow",
+          "label": "钉地箭",
+          "pose": "attack_bow",
+          "stepIds": [
+            "pin"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.3,
+              "lock": 0.4,
+              "active": 0.16
+            }
+          ]
+        },
+        {
+          "id": "rock-reposition",
+          "label": "沿山路换岩位",
+          "pose": "interact",
+          "stepIds": [
+            "walk"
+          ],
+          "stepTimings": [
+            {
+              "windup": 0,
+              "lock": 0,
+              "active": 2
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r2-highlands.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "8dd1f033b85c438375aa1c9e2e4766d5e34445e7608a196315c5b7db99b81929",
+        "sourcePosition": "top right",
+        "cropRect": [
+          680,
+          0,
+          1125,
+          515
+        ],
+        "cropSize": [
+          445,
+          515
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/elite-02-reference.png",
+        "cropSha256": "8b1961206660dc334259791aea70346ad2b5386b1ba0d15b7729e069ca907e0c",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r2-highlands.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/elite-02-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "ELITE_03",
+      "name": "沉船打捞王",
+      "region": "R3",
+      "proposedConceptId": "elite-03",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Broad adult salvage captain, visible dark-haired bearded face, weathered teal sea coat, heavy boat hook, thick rope belt, brass diving helmet CARRIED AT HIP, boots.",
+      "primaryDrawing": "Two-handed heavy boathook thrust/sweep with the carried helmet retained; do not put the helmet over the face or crop the long hook.",
+      "primaryRuntimeMove": "hook",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "hook",
+          "label": "拖钩直击",
+          "pose": "attack_sword",
+          "stepIds": [
+            "hook"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.1,
+              "lock": 0.35,
+              "active": 0.16
+            }
+          ]
+        },
+        {
+          "id": "rope-sweep",
+          "label": "缆绳横扫",
+          "pose": "attack_sword",
+          "stepIds": [
+            "sweep"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.2,
+              "lock": 0.35,
+              "active": 0.16
+            }
+          ]
+        },
+        {
+          "id": "anchor",
+          "label": "半血吊锚",
+          "pose": "interact",
+          "stepIds": [
+            "drop"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.5,
+              "lock": 0.5,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r3-bellriver.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "31a88a41f02c58ee6666fa134637282396a10f068c18ce6394deb38694c4c088",
+        "sourcePosition": "top right",
+        "cropRect": [
+          650,
+          0,
+          1120,
+          525
+        ],
+        "cropSize": [
+          470,
+          525
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/elite-03-reference.png",
+        "cropSha256": "5e4a80296a108e6b2479a274979305345109ac789864e3ba505a93ccb1c7d052",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r3-bellriver.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/elite-03-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "ELITE_04",
+      "name": "铁棘典狱长",
+      "region": "R4",
+      "proposedConceptId": "elite-04",
+      "bodyTemplate": "human",
+      "supportCount": 2,
+      "identityInvariants": "Muscular adult maintenance gaoler, visible bald/shaven head and dark beard, segmented work armour, ONE iron-thorn pauldron, keys at belt, compact pole hammer.",
+      "primaryDrawing": "Low braced hammer/shield rush posture, complete compact hammer and belt keys; do not turn shoulder thorns into a crown or monster anatomy.",
+      "primaryRuntimeMove": "spike-rush",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "spike-rush",
+          "label": "钉甲突击",
+          "pose": "attack_sword",
+          "stepIds": [
+            "rush"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1,
+              "lock": 0.35,
+              "active": 0.4
+            }
+          ]
+        },
+        {
+          "id": "hammer-double",
+          "label": "锤击两段",
+          "pose": "attack_sword",
+          "stepIds": [
+            "first",
+            "second"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.1,
+              "lock": 0.3,
+              "active": 0.16
+            },
+            {
+              "windup": 0.75,
+              "lock": 0.25,
+              "active": 0.16
+            }
+          ]
+        },
+        {
+          "id": "key-chain",
+          "label": "钥链锁道",
+          "pose": "interact",
+          "stepIds": [
+            "chain"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.4,
+              "lock": 0.4,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/r4-greyrock.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "aa04a728fab0fd053ea9672b3b6218398ffde6d71db0325db64faf45d27f9678",
+        "sourcePosition": "top right",
+        "cropRect": [
+          770,
+          0,
+          1140,
+          535
+        ],
+        "cropSize": [
+          370,
+          535
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/elite-04-reference.png",
+        "cropSha256": "ab27ed2401f4143058fcb8666eaee4a4829403dc83ff691421f3ce7e0f379e29",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/r4-greyrock.txt",
+        "neighborFragmentsToIgnore": "The crop preserves full boots; a few pixels of R4-4 banner tip may occur at lower-right. Ignore that fragment and generate ONLY the gaoler."
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/elite-04-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/human.txt",
+      "anchorBasis": "Pelvis/support-plane projection using stable torso/head landmarks; attack support soles rather than weapon tip.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "ELITE_05",
+      "name": "震炉巨像",
+      "region": "U1",
+      "proposedConceptId": "elite-05",
+      "bodyTemplate": "mechanical-supports",
+      "supportCount": 2,
+      "identityInvariants": "Heavy ancient BRONZE forge colossus, squat powerful body, TWO hammer-shaped forearms, exposed crank knees, cold-white furnace slit, narrow mechanical chimney head, russet waist cloth. No lava/fire/human souls.",
+      "primaryDrawing": "Both attached hammer forearms slam down together with feet braced. Preserve two complete hammer heads, cold-white core and mechanical proportions.",
+      "primaryRuntimeMove": "double-hammer",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "double-hammer",
+          "label": "双锤落地",
+          "pose": "attack_sword",
+          "stepIds": [
+            "hammers"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.4,
+              "lock": 0.4,
+              "active": 0.16
+            }
+          ]
+        },
+        {
+          "id": "pressure-ring",
+          "label": "冷光泄压",
+          "pose": "spell",
+          "stepIds": [
+            "ring"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.6,
+              "lock": 0.5,
+              "active": 0.16
+            }
+          ]
+        },
+        {
+          "id": "overload-hammer",
+          "label": "过载重复锤击",
+          "pose": "attack_sword",
+          "stepIds": [
+            "extra-hammer"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.8,
+              "lock": 0.5,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/u1-oathcity.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "404a6f13cc0ec1ef75d6a08a6b2d972ad2746f02a9b8cfb63a4ffa445ac751d2",
+        "sourcePosition": "top left",
+        "cropRect": [
+          10,
+          0,
+          610,
+          475
+        ],
+        "cropSize": [
+          600,
+          475
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/elite-05-reference.png",
+        "cropSha256": "02d0bdf290cbf280938e8a7d2aed360aeb5650ab30aaa88e49465de8353f749c",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/u1-oathcity.txt",
+        "neighborFragmentsToIgnore": "The crop keeps the complete right hammer; faint adjacent formation sword/shadow at extreme right is not part of this machine."
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/elite-05-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/mechanical-supports.txt",
+      "anchorBasis": "Support polygon/chassis projection, not nearest toe; keep rigid core height stable.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "ELITE_06",
+      "name": "三刃守誓阵",
+      "region": "U1",
+      "proposedConceptId": "elite-06",
+      "bodyTemplate": "three-statues-one-plinth",
+      "supportCount": 0,
+      "identityInvariants": "THREE articulated antique bronze sword-bearing empty armour statues on ONE low circular/oval stone-and-bronze plinth, pale branch engravings, curved mechanical head crests, three complete swords and full plinth.",
+      "primaryDrawing": "One coordinated three-sword formation. Primary attack sequence is first blade, second blade, third blade; each view retains ALL THREE statues and the SAME single base.",
+      "primaryRuntimeMove": "three-blades",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "three-blades",
+          "label": "第一剑→第二剑→第三剑",
+          "pose": "attack_sword",
+          "stepIds": [
+            "first",
+            "second",
+            "third"
+          ],
+          "stepTimings": [
+            {
+              "windup": 0.9,
+              "lock": 0.3,
+              "active": 0.16
+            },
+            {
+              "windup": 0.85,
+              "lock": 0.3,
+              "active": 0.16
+            },
+            {
+              "windup": 1.1,
+              "lock": 0.35,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/u1-oathcity.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "404a6f13cc0ec1ef75d6a08a6b2d972ad2746f02a9b8cfb63a4ffa445ac751d2",
+        "sourcePosition": "top right",
+        "cropRect": [
+          610,
+          0,
+          1254,
+          480
+        ],
+        "cropSize": [
+          644,
+          480
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/elite-06-reference.png",
+        "cropSha256": "1677e36e9e3490b635147ef64e092a881026b7b8df6e6dcc2dd3919bf8b2f3b8",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/u1-oathcity.txt",
+        "neighborFragmentsToIgnore": "All three statues and the plinth are ONE target identity. Any clipped hammer edge at extreme left belongs to the neighboring colossus and must be ignored."
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/elite-06-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/three-statues-one-plinth.txt",
+      "anchorBasis": "One shared plinth support-plane center. All three complete statues remain grouped; no single-body connected-component assumption.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "first-blade-ready",
+          "second-blade-ready",
+          "third-blade-cleave"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ],
+      "runtimeAdapterNeeds": [
+        "Stationary shared base; no fabricated walk animation.",
+        "Per-step first/second/third sword pose selection and scene-authored three attack origins require explicit runtime adaptation/review."
+      ]
+    },
+    {
+      "id": "ELITE_07",
+      "name": "深闸镇守",
+      "region": "U2",
+      "proposedConceptId": "elite-07",
+      "bodyTemplate": "mechanical-supports",
+      "supportCount": 2,
+      "identityInvariants": "Tall nonhuman ancient bronze sluice maintenance automaton, narrow rack head, visible rack-and-pinion hips, large complete wheel-shaped shield and blunt stone-counterweight arm, navy cloth, dry stone feet.",
+      "primaryDrawing": "Wheel-shield-first mechanical rush, counterweight arm retained and feet braced; not a water monster or a human knight.",
+      "primaryRuntimeMove": "wheel-rush",
+      "primaryRuntimePose": "attack_sword",
+      "requiredCombatMoves": [
+        {
+          "id": "wheel-rush",
+          "label": "闸轮盾撞",
+          "pose": "attack_sword",
+          "stepIds": [
+            "rush"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.2,
+              "lock": 0.4,
+              "active": 0.5
+            }
+          ]
+        },
+        {
+          "id": "counterweight",
+          "label": "配重砸击",
+          "pose": "attack_sword",
+          "stepIds": [
+            "slam"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.5,
+              "lock": 0.45,
+              "active": 0.16
+            }
+          ]
+        },
+        {
+          "id": "sluice-channels",
+          "label": "半血交替光槽",
+          "pose": "spell",
+          "stepIds": [
+            "left",
+            "right"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.8,
+              "lock": 0.5,
+              "active": 0.16
+            },
+            {
+              "windup": 1,
+              "lock": 0.4,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/u2-catacombs.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "5aa3ca9b0efb147be6c109a1353e6e2e190960885285afbcd202f53b9c242a5b",
+        "sourcePosition": "top left",
+        "cropRect": [
+          20,
+          0,
+          595,
+          565
+        ],
+        "cropSize": [
+          575,
+          565
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/elite-07-reference.png",
+        "cropSha256": "c54609dabc058b117185e6b23fd8ceb7693a13c716a4aa0e0d9486562e907c7d",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/u2-catacombs.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/elite-07-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/mechanical-supports.txt",
+      "anchorBasis": "Support polygon/chassis projection, not nearest toe; keep rigid core height stable.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    },
+    {
+      "id": "ELITE_08",
+      "name": "覆文守秘者",
+      "region": "U2",
+      "proposedConceptId": "elite-08",
+      "bodyTemplate": "mechanical-supports",
+      "supportCount": 3,
+      "identityInvariants": "Nonhuman ancient BRONZE TRIPOD archive automaton, three complete hinged support legs, TWO hinged silver optical mirror shutters, ONE central violet physical crystal lens, layered limestone inscription plates with no legible writing.",
+      "primaryDrawing": "Open/angle the two mirror shutters around the single lens for a focused optical beam; keep the tripod chassis and all feet visible. No human scholar face or additional eyes.",
+      "primaryRuntimeMove": "double-mirrors",
+      "primaryRuntimePose": "spell",
+      "requiredCombatMoves": [
+        {
+          "id": "double-mirrors",
+          "label": "聚镜→左束→右束",
+          "pose": "spell",
+          "stepIds": [
+            "focus",
+            "left",
+            "right"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.4,
+              "lock": 0.4,
+              "active": 0.02
+            },
+            {
+              "windup": 0.8,
+              "lock": 0.3,
+              "active": 0.16
+            },
+            {
+              "windup": 0.8,
+              "lock": 0.3,
+              "active": 0.16
+            }
+          ]
+        },
+        {
+          "id": "tablet-seals",
+          "label": "双铭板落印",
+          "pose": "spell",
+          "stepIds": [
+            "seals"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.5,
+              "lock": 0.5,
+              "active": 0.16
+            }
+          ]
+        },
+        {
+          "id": "open-core",
+          "label": "半血开镜",
+          "pose": "spell",
+          "stepIds": [
+            "core-beam"
+          ],
+          "stepTimings": [
+            {
+              "windup": 1.8,
+              "lock": 0.5,
+              "active": 0.16
+            }
+          ]
+        }
+      ],
+      "reference": {
+        "sourceBoard": "source-art/encounters/cloud-world-v2/u2-catacombs.png",
+        "sourceSize": [
+          1254,
+          1254
+        ],
+        "sourceMode": "RGB",
+        "sourceSha256": "5aa3ca9b0efb147be6c109a1353e6e2e190960885285afbcd202f53b9c242a5b",
+        "sourcePosition": "top right",
+        "cropRect": [
+          675,
+          0,
+          1200,
+          580
+        ],
+        "cropSize": [
+          525,
+          580
+        ],
+        "cropFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/references/elite-08-reference.png",
+        "cropSha256": "461cf1cbdbb30f70901366ee62bfa2642f4243be259a60e1321d56b97e470a5e",
+        "exactSourcePixels": true,
+        "alphaRemovalPerformed": false,
+        "sourceGenerationPrompt": "source-art/encounters/cloud-world-v2/prompts/u2-catacombs.txt",
+        "neighborFragmentsToIgnore": "none known; visual review still required"
+      },
+      "promptFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/prompts/elite-08-sheet-prompt.txt",
+      "templateFile": "source-art/encounters/cloud-world-v2/actor-batch-reference-v1/templates/mechanical-supports.txt",
+      "anchorBasis": "Support polygon/chassis projection, not nearest toe; keep rigid core height stable.",
+      "generation": {
+        "status": "not-started",
+        "providerPlanned": "OpenAI cloud image_gen",
+        "output": null,
+        "outputSha256": null
+      },
+      "review": {
+        "referenceCrop": "prepared-awaiting-root-contact-review",
+        "generationArt": "not-generated",
+        "runtime": "not-installed"
+      },
+      "requestedSheet": {
+        "size": [
+          1536,
+          1536
+        ],
+        "columns": [
+          "down",
+          "left",
+          "up",
+          "right"
+        ],
+        "rows": [
+          "idle",
+          "walk-a",
+          "walk-b",
+          "primary"
+        ],
+        "actualOutputDimensionsAndDirectionOrderMustBeInspected": true,
+        "productionAtlas": [
+          1024,
+          1024
+        ],
+        "productionResample": "One whole1536 atlas ->1024 at2/3, all pixel coordinates x2/3 and worldUnitsPerPixel /2/3; never per-frame fitting"
+      },
+      "limitations": [
+        "Minimal first sheet covers a primary action drawing only. All requiredCombatMoves remain explicit; no full multi-step action-library acceptance is implied.",
+        "Concept reference crop is not an installed animation, hit/death pose, collision or3D model."
+      ]
+    }
+  ]
+}

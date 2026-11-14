@@ -1,0 +1,112 @@
+{
+  "conclusion": "Direction-specific runtime scale is not the cause: one UPP is shared by all four directions in each action. Projected source geometry, leg-fold timing, costume color/material variations are the primary candidates. Numerical silhouette measurements alone cannot certify anatomy or artistic quality.",
+  "runtimeScale": {
+    "idle": 0.003191794871794872,
+    "walk": 0.004376933895921238,
+    "run": 0.0043342618384401115,
+    "perDirectionScaleOverrides": false,
+    "productionEdited": false
+  },
+  "standingAuthority": {
+    "targetWorld": 1.556,
+    "observedExploreFourDirectionWorldHeightRange": [
+      1.5512123,
+      1.5607877
+    ],
+    "observedHeldFourDirectionWorldHeightRange": [
+      1.5544041,
+      1.5639795
+    ]
+  },
+  "runExplorePhase0": {
+    "frontBBoxWorld": 1.5429972,
+    "rightBBoxWorld": 1.5299944,
+    "backBBoxWorld": 1.5039889
+  },
+  "runExplorePhase4": {
+    "frontBBoxWorld": 1.5690028,
+    "rightBBoxWorld": 1.5343287,
+    "backBBoxWorld": 1.5343287
+  },
+  "runExploreMedianTopAboveAnchor": {
+    "front": 1.5603342,
+    "right": 1.5321616,
+    "back": 1.5473314,
+    "note": "Entire alpha top; silver-hair-only proxy confirms similar trend. Front is not globally shorter above its anchor."
+  },
+  "runExploreMedianBBoxWorld": {
+    "front": 1.4996546,
+    "right": 1.5321616,
+    "back": 1.523493
+  },
+  "legPosePhaseMismatch": {
+    "frontP2LowestAboveAnchor": 0.0541783,
+    "rightP2LowestAboveAnchor": -0.0151699,
+    "frontP6LowestAboveAnchor": 0.0910195,
+    "rightP6LowestAboveAnchor": 0.0065014,
+    "note": "Front retracts/lifts its feet earlier than side. Matching ordinal is not matching support pose; independent bbox fitting would hide this and distort head/body scale."
+  },
+  "legGapProxyMedianWorld": {
+    "exploreFront": 0.5331142,
+    "exploreRight": 0.6393036,
+    "exploreBack": 0.5807911,
+    "heldFront": 0.5482841,
+    "heldRight": 0.6588078,
+    "heldBack": 0.5786239,
+    "note": "Projected visible leg separation-to-sole distance, not anatomical leg length; coat, folded knee, overlap and direction matter. Front/back values being lower supports a leg-pose/proportion review but does not justify scaling entire character."
+  },
+  "clothDiagnostic": {
+    "idleFrontMedianCoolNeutralRGB": [
+      57,
+      53,
+      52
+    ],
+    "idleRightMedianCoolNeutralRGB": [
+      82,
+      79,
+      85
+    ],
+    "runFrontP0MedianCoolNeutralRGB": [
+      149,
+      138,
+      134
+    ],
+    "runRightP0MedianCoolNeutralRGB": [
+      84,
+      81,
+      86
+    ],
+    "note": "Only automated chest central ROI proxy. It detects strong front difference; a fabric-only human-reviewed mask is required before actual color transfer. Back idle did not yield enough selected neutral pixels. Do not apply these RGB values as an unrestricted image recolor."
+  },
+  "recommendedNumericTargets": [
+    {
+      "purpose": "Scale and origin invariants",
+      "target": "Keep canvas400 px/world and(256,712) ground anchor. Keep action UPP uniform across directions and phases. Source crops may change only with explicit origin transfer; never fit separate bboxes."
+    },
+    {
+      "purpose": "Standing authority",
+      "target": "Use1.556 world standing-equivalent height, corresponding622.4 px on512x768 canvas. Existing accepted four-direction variation is approximately±0.01 world(4 canvas px)."
+    },
+    {
+      "purpose": "Running stature comparison",
+      "target": "Compare contact pose to contact pose. Current side p0/p4 alpha-top-to-anchor is1.5235/1.5365 world exploration and1.5365/1.5408 held; use about1.53–1.55 as a contact-pose visual reference, while preserving intended head bob rather than making every frame identical."
+    },
+    {
+      "purpose": "Front/back leg review",
+      "target": "Review front/back projected thigh/shin and coat-hem/crotch placement against side rather than increasing total scale. Proxy medians are about17%/9% lower than side(explore) and17%/12% lower(held), a diagnostic range for focused local proportion edits; visual confirmation is required before selecting a final percentage."
+    },
+    {
+      "purpose": "Direction phase alignment",
+      "target": "If same ordinal is intended to share support timing, inspect front p2/p6 first. Their lowest foot is0.054/0.091 world above the anchor while right is approximately0; retain p3/p7 airborne lifts(about0.15–0.18 world). Do not flatten genuine flight."
+    },
+    {
+      "purpose": "Costume consistency",
+      "target": "Sample accepted idle cloth of the corresponding direction, with cloth-only mask excluding leather straps, skin, sword and hair. Use idle side/front as material authority; preserve shading and colored trim."
+    }
+  ],
+  "inputsCount": 24,
+  "allFrameMeasurementsCount": 104,
+  "phase0AndPhase4Overview": "overview.jpg",
+  "phase2Overview": "overview-run-p2.jpg",
+  "sourceSnapshotsUnchanged": true
+}

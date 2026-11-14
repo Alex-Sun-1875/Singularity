@@ -1,0 +1,96 @@
+{
+  "id": "U2-3",
+  "reviewedAt": "2026-11-08T02:59:42.958328+00:00",
+  "staticArtReview": "passed-for-pilot",
+  "scope": "Source-only packed4direction16drawing review; not installed/runtime acceptance",
+  "source": "sheet-v2.png",
+  "sourceSha256": "58dc1fb9e4fbefa0615af0aa412659cfb6359b4350f29bfa3cdd586fdc3e56f5",
+  "sourceDimensions": [
+    1254,
+    1254
+  ],
+  "sourceUnchanged": true,
+  "processingSpecSha256": "f009461c873f9e285591ad3da5a4c3dcd0e79a5c9c3f4ec0320aed5694448bdc",
+  "manifestSha256": "d442865969a4f7ca4b0149da1d0d8df5e010b5b2f9eb09c05b7cec0bb1b52d68",
+  "sourceAtlasSha256": "94cff0dc1b969abdca87d7d7a279b59f9415fed39b5814b654a0b366f752254a",
+  "sourceAtlasDimensions": [
+    1536,
+    1536
+  ],
+  "productionManifestSha256": "7bcb484893033468e448800ecd69fa122913d596f29d4267f8929edb3dd0b81d",
+  "productionAtlasSha256": "31976e710a5f4ce53761b8c506e71f2d4885795d1dcd3f564eaf5fdb341c418d",
+  "productionAtlasDimensions": [
+    1024,
+    1024
+  ],
+  "singleGlobalWorldUnitsPerPixel": 0.003917910447761195,
+  "perFrameScale": false,
+  "directionReview": {
+    "actualOrder": [
+      "down",
+      "left",
+      "up",
+      "right"
+    ],
+    "allFourIndependent": true,
+    "mirroredDirectionsIntroduced": false
+  },
+  "anatomyReview": "Zero supports/3orbitalrings/1physicalglasslens retained",
+  "anchorReview": "Physical optical center/bezel height (rear mount when glass occluded); side x uses ring-axis mount, not front surface parallax. All16 explicit; fixed0.65m core above ground projection. No finial/floor anchor.",
+  "hoverReview": {
+    "supportCount": 0,
+    "mode": "low-hover",
+    "physicalCoreHeightMetres": 0.65,
+    "maximumConfiguredCoreHeightErrorMetres": 9.328358208104959e-07,
+    "all16ExplicitSourceCorePoints": true,
+    "floorShadow": "cloud repaired source derivative, see parent alpha-cleanup.json",
+    "basis": "Lens physical core/rear mount, never finial or floor"
+  },
+  "loopReview": {
+    "artifact": "walk-loop.gif",
+    "encodedFramesInspected": [
+      {
+        "index": 0,
+        "size": [
+          768,
+          768
+        ],
+        "durationMs": 280,
+        "rgbSha256": "fa1c5aa6f203d2dca88321bd662c0bde5eedc73980e9a949c47cd5d3592e1847"
+      },
+      {
+        "index": 1,
+        "size": [
+          768,
+          768
+        ],
+        "durationMs": 280,
+        "rgbSha256": "8a9317d189408b80be561f42e568d4f53a152149bdfbc047478e3961d01554e3"
+      }
+    ],
+    "result": "Two distinct gait/tilt phases visible with rigid core continuity. Ground-plane projection preserves depth instead of aligning every foremost toe. Coarse2pose cadence is a pilot limitation, actual locomotion remains pending."
+  },
+  "edgeReview": {
+    "all16FramesOwned": true,
+    "clippedAppendagesFound": false,
+    "scaleFactorsAllOne": true,
+    "sourceAlphaAbove3PreservedExactlyOnce": true,
+    "reviewedContact": "anchor-contact-preview.jpg"
+  },
+  "primaryReview": "Primary ring tilt preserves explicit physical lens core height",
+  "minimalPoses": true,
+  "loaded3DModel": false,
+  "runtimeInstalled": true,
+  "runtimeAcceptance": "pending root actual Cocos batch review",
+  "gameScaleAcceptance": "pending root in-game scale/readability review",
+  "limitations": [
+    "Four actual drawn directions and16 actual source drawings only; no mirrored/invented poses.",
+    "One reviewed global pixel/world scale; no frame fitting or generated in-betweens.",
+    "Primary pose source only; additional requiredCombatMoves are not implicitly covered.",
+    "No independently drawn hit/death; own idle fallback/hide remains explicit.",
+    "Static review and actual game gait/collision/texture-lifetime acceptance are separate."
+  ],
+  "rootBatchReview": "passed30/30 source-and-packed static contact review; runtime acceptance separate",
+  "atlasSha256": "94cff0dc1b969abdca87d7d7a279b59f9415fed39b5814b654a0b366f752254a",
+  "runtimePlayReview": "pending after authorized batch installation"
+}

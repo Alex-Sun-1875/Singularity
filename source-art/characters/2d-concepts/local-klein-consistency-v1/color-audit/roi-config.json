@@ -1,0 +1,1070 @@
+{
+  "status": "measurement ROI configuration only; do not use these color gates as generation or composite masks",
+  "manifestSHA256": "4065d59acbccb8c85642cf31cab840a8fce3577a87806ce2c558096098b41df8",
+  "method": {
+    "coordinates": "Absolute source-atlas XY, half-open ROI endpoints; frameRect is XYWH from current manifest. No rescale or compositing for measurement.",
+    "roiDefinition": {
+      "wineBody": "whole frame width, y=.20h..56h of manifest crop",
+      "blueBiasedSleeveCandidate": "whole frame width, y=.17h..48h of manifest crop",
+      "sensitivity": "wineBody .16h..60h; sleeve .15h..60h"
+    },
+    "interiorMask": "alpha>=250 then scipy.ndimage.binary_erosion, 3x3 connectivity-default cross, 2 iterations",
+    "wineBodyGate": "HSV hue >=345 or <=15 deg; S22..80%; V10..86%; R>=B+5",
+    "blueBiasedSleeveGate": "B>=R+2 and B>=G+2; S1.5..40%; V10..70.6%",
+    "colorSpace": "Stored RGB treated as sRGB because no embedded gAMA/sRGB/iCCP/cHRM. Pillow ImageCms sRGB -> Lab D50. L* from 8bit Lab /255*100, signed a/b bytes decoded. HSV from Pillow 8bit HSV; hue circular mean.",
+    "comparison": "Median of each phase median; compare each direction separately with its idle. deltaE76 is Euclidean difference of these masked median Lab vectors; not CIEDE2000 or a paired-pixel perceptual proof.",
+    "limitations": [
+      "ROIs are geometric upper-torso bands, not hand-traced garment semantic masks; sleeve candidates can include pauldron/metal or other blue-biased low-chroma fabric.",
+      "Red selection can include warm red leather straps or shaded red cloth. Belt/skin are reduced by hue selection but cannot be guaranteed absent without local visual review.",
+      "Shoulder/arm pose, chest perspective, folds, sword occlusion and baked lighting vary by phase; distributions do not identify intrinsic albedo independently of shading.",
+      "Very low sleeve chroma makes hue unstable; judge L*, RGB/chroma and local visual appearance together.",
+      "No image was opened through view_image, browser, computer vision upload or remote image service; no visual acceptance claim."
+    ]
+  },
+  "frames": [
+    {
+      "action": "explore_idle_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\assets\\W01-explore-idle.png",
+      "sheet": "idle",
+      "direction": "down",
+      "phase": 0,
+      "frameIndex": 0,
+      "frameRectXYWH": [
+        301,
+        9,
+        168,
+        490
+      ],
+      "worldUnitsPerPixel": 0.003191794871794872,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          301,
+          107,
+          469,
+          283
+        ],
+        "blueBiasedSleeveCandidate": [
+          301,
+          92,
+          469,
+          244
+        ]
+      }
+    },
+    {
+      "action": "explore_idle_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\assets\\W01-explore-idle.png",
+      "sheet": "idle",
+      "direction": "right",
+      "phase": 0,
+      "frameIndex": 1,
+      "frameRectXYWH": [
+        1097,
+        9,
+        98,
+        491
+      ],
+      "worldUnitsPerPixel": 0.003191794871794872,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          1097,
+          107,
+          1195,
+          284
+        ],
+        "blueBiasedSleeveCandidate": [
+          1097,
+          92,
+          1195,
+          245
+        ]
+      }
+    },
+    {
+      "action": "explore_idle_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\assets\\W01-explore-idle.png",
+      "sheet": "idle",
+      "direction": "up",
+      "phase": 0,
+      "frameIndex": 2,
+      "frameRectXYWH": [
+        301,
+        519,
+        167,
+        493
+      ],
+      "worldUnitsPerPixel": 0.003191794871794872,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          301,
+          618,
+          468,
+          795
+        ],
+        "blueBiasedSleeveCandidate": [
+          301,
+          603,
+          468,
+          756
+        ]
+      }
+    },
+    {
+      "action": "explore_idle_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\assets\\W01-explore-idle.png",
+      "sheet": "idle",
+      "direction": "left",
+      "phase": 0,
+      "frameIndex": 3,
+      "frameRectXYWH": [
+        1107,
+        520,
+        99,
+        492
+      ],
+      "worldUnitsPerPixel": 0.003191794871794872,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          1107,
+          618,
+          1206,
+          796
+        ],
+        "blueBiasedSleeveCandidate": [
+          1107,
+          604,
+          1206,
+          756
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+      "sheet": "run-a",
+      "direction": "down",
+      "phase": 0,
+      "frameIndex": 0,
+      "frameRectXYWH": [
+        54,
+        18,
+        147,
+        363
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          54,
+          91,
+          201,
+          221
+        ],
+        "blueBiasedSleeveCandidate": [
+          54,
+          80,
+          201,
+          192
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+      "sheet": "run-a",
+      "direction": "down",
+      "phase": 1,
+      "frameIndex": 1,
+      "frameRectXYWH": [
+        314,
+        27,
+        140,
+        355
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          314,
+          98,
+          454,
+          226
+        ],
+        "blueBiasedSleeveCandidate": [
+          314,
+          87,
+          454,
+          197
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+      "sheet": "run-a",
+      "direction": "down",
+      "phase": 2,
+      "frameIndex": 2,
+      "frameRectXYWH": [
+        569,
+        22,
+        139,
+        344
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          569,
+          91,
+          708,
+          215
+        ],
+        "blueBiasedSleeveCandidate": [
+          569,
+          80,
+          708,
+          187
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+      "sheet": "run-a",
+      "direction": "down",
+      "phase": 3,
+      "frameIndex": 3,
+      "frameRectXYWH": [
+        831,
+        12,
+        135,
+        335
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          831,
+          79,
+          966,
+          200
+        ],
+        "blueBiasedSleeveCandidate": [
+          831,
+          69,
+          966,
+          173
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+      "sheet": "run-a",
+      "direction": "right",
+      "phase": 0,
+      "frameIndex": 4,
+      "frameRectXYWH": [
+        14,
+        399,
+        231,
+        366
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          14,
+          472,
+          245,
+          604
+        ],
+        "blueBiasedSleeveCandidate": [
+          14,
+          461,
+          245,
+          575
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+      "sheet": "run-a",
+      "direction": "right",
+      "phase": 1,
+      "frameIndex": 5,
+      "frameRectXYWH": [
+        293,
+        401,
+        170,
+        363
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          293,
+          474,
+          463,
+          604
+        ],
+        "blueBiasedSleeveCandidate": [
+          293,
+          463,
+          463,
+          575
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+      "sheet": "run-a",
+      "direction": "right",
+      "phase": 2,
+      "frameIndex": 6,
+      "frameRectXYWH": [
+        508,
+        398,
+        221,
+        365
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          508,
+          471,
+          729,
+          602
+        ],
+        "blueBiasedSleeveCandidate": [
+          508,
+          460,
+          729,
+          573
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+      "sheet": "run-a",
+      "direction": "right",
+      "phase": 3,
+      "frameIndex": 7,
+      "frameRectXYWH": [
+        780,
+        393,
+        211,
+        331
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          780,
+          459,
+          991,
+          578
+        ],
+        "blueBiasedSleeveCandidate": [
+          780,
+          449,
+          991,
+          552
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+      "sheet": "run-a",
+      "direction": "up",
+      "phase": 0,
+      "frameIndex": 8,
+      "frameRectXYWH": [
+        59,
+        781,
+        141,
+        361
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          59,
+          853,
+          200,
+          983
+        ],
+        "blueBiasedSleeveCandidate": [
+          59,
+          842,
+          200,
+          954
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+      "sheet": "run-a",
+      "direction": "up",
+      "phase": 1,
+      "frameIndex": 9,
+      "frameRectXYWH": [
+        317,
+        783,
+        137,
+        360
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          317,
+          855,
+          454,
+          985
+        ],
+        "blueBiasedSleeveCandidate": [
+          317,
+          844,
+          454,
+          956
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+      "sheet": "run-a",
+      "direction": "up",
+      "phase": 2,
+      "frameIndex": 10,
+      "frameRectXYWH": [
+        570,
+        779,
+        139,
+        367
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          570,
+          852,
+          709,
+          985
+        ],
+        "blueBiasedSleeveCandidate": [
+          570,
+          841,
+          709,
+          955
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+      "sheet": "run-a",
+      "direction": "up",
+      "phase": 3,
+      "frameIndex": 11,
+      "frameRectXYWH": [
+        829,
+        771,
+        134,
+        334
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          829,
+          838,
+          963,
+          958
+        ],
+        "blueBiasedSleeveCandidate": [
+          829,
+          828,
+          963,
+          931
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+      "sheet": "run-a",
+      "direction": "left",
+      "phase": 0,
+      "frameIndex": 12,
+      "frameRectXYWH": [
+        15,
+        1165,
+        238,
+        367
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          15,
+          1238,
+          253,
+          1371
+        ],
+        "blueBiasedSleeveCandidate": [
+          15,
+          1227,
+          253,
+          1341
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+      "sheet": "run-a",
+      "direction": "left",
+      "phase": 1,
+      "frameIndex": 13,
+      "frameRectXYWH": [
+        304,
+        1168,
+        170,
+        364
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          304,
+          1241,
+          474,
+          1372
+        ],
+        "blueBiasedSleeveCandidate": [
+          304,
+          1230,
+          474,
+          1343
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+      "sheet": "run-a",
+      "direction": "left",
+      "phase": 2,
+      "frameIndex": 14,
+      "frameRectXYWH": [
+        553,
+        1165,
+        215,
+        367
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          553,
+          1238,
+          768,
+          1371
+        ],
+        "blueBiasedSleeveCandidate": [
+          553,
+          1227,
+          768,
+          1341
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-a.png",
+      "sheet": "run-a",
+      "direction": "left",
+      "phase": 3,
+      "frameIndex": 15,
+      "frameRectXYWH": [
+        802,
+        1158,
+        214,
+        329
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          802,
+          1224,
+          1016,
+          1342
+        ],
+        "blueBiasedSleeveCandidate": [
+          802,
+          1214,
+          1016,
+          1316
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-b.png",
+      "sheet": "run-b",
+      "direction": "down",
+      "phase": 4,
+      "frameIndex": 0,
+      "frameRectXYWH": [
+        51,
+        16,
+        160,
+        368
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          51,
+          90,
+          211,
+          222
+        ],
+        "blueBiasedSleeveCandidate": [
+          51,
+          79,
+          211,
+          193
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-b.png",
+      "sheet": "run-b",
+      "direction": "down",
+      "phase": 5,
+      "frameIndex": 1,
+      "frameRectXYWH": [
+        311,
+        22,
+        157,
+        362
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          311,
+          94,
+          468,
+          225
+        ],
+        "blueBiasedSleeveCandidate": [
+          311,
+          84,
+          468,
+          196
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-b.png",
+      "sheet": "run-b",
+      "direction": "down",
+      "phase": 6,
+      "frameIndex": 2,
+      "frameRectXYWH": [
+        572,
+        18,
+        151,
+        351
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          572,
+          88,
+          723,
+          215
+        ],
+        "blueBiasedSleeveCandidate": [
+          572,
+          78,
+          723,
+          186
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-b.png",
+      "sheet": "run-b",
+      "direction": "down",
+      "phase": 7,
+      "frameIndex": 3,
+      "frameRectXYWH": [
+        829,
+        11,
+        149,
+        336
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          829,
+          78,
+          978,
+          199
+        ],
+        "blueBiasedSleeveCandidate": [
+          829,
+          68,
+          978,
+          172
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-b.png",
+      "sheet": "run-b",
+      "direction": "right",
+      "phase": 4,
+      "frameIndex": 4,
+      "frameRectXYWH": [
+        13,
+        397,
+        240,
+        364
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          13,
+          470,
+          253,
+          601
+        ],
+        "blueBiasedSleeveCandidate": [
+          13,
+          459,
+          253,
+          572
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-b.png",
+      "sheet": "run-b",
+      "direction": "right",
+      "phase": 5,
+      "frameIndex": 5,
+      "frameRectXYWH": [
+        287,
+        400,
+        186,
+        365
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          287,
+          473,
+          473,
+          604
+        ],
+        "blueBiasedSleeveCandidate": [
+          287,
+          462,
+          473,
+          575
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-b.png",
+      "sheet": "run-b",
+      "direction": "right",
+      "phase": 6,
+      "frameIndex": 6,
+      "frameRectXYWH": [
+        512,
+        397,
+        228,
+        369
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          512,
+          471,
+          740,
+          604
+        ],
+        "blueBiasedSleeveCandidate": [
+          512,
+          460,
+          740,
+          574
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-b.png",
+      "sheet": "run-b",
+      "direction": "right",
+      "phase": 7,
+      "frameIndex": 7,
+      "frameRectXYWH": [
+        771,
+        392,
+        229,
+        352
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          771,
+          462,
+          1000,
+          589
+        ],
+        "blueBiasedSleeveCandidate": [
+          771,
+          452,
+          1000,
+          561
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-b.png",
+      "sheet": "run-b",
+      "direction": "up",
+      "phase": 4,
+      "frameIndex": 8,
+      "frameRectXYWH": [
+        50,
+        779,
+        153,
+        366
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          50,
+          852,
+          203,
+          984
+        ],
+        "blueBiasedSleeveCandidate": [
+          50,
+          841,
+          203,
+          955
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-b.png",
+      "sheet": "run-b",
+      "direction": "up",
+      "phase": 5,
+      "frameIndex": 9,
+      "frameRectXYWH": [
+        307,
+        781,
+        157,
+        366
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          307,
+          854,
+          464,
+          986
+        ],
+        "blueBiasedSleeveCandidate": [
+          307,
+          843,
+          464,
+          957
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-b.png",
+      "sheet": "run-b",
+      "direction": "up",
+      "phase": 6,
+      "frameIndex": 10,
+      "frameRectXYWH": [
+        566,
+        779,
+        151,
+        367
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          566,
+          852,
+          717,
+          985
+        ],
+        "blueBiasedSleeveCandidate": [
+          566,
+          841,
+          717,
+          955
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-b.png",
+      "sheet": "run-b",
+      "direction": "up",
+      "phase": 7,
+      "frameIndex": 11,
+      "frameRectXYWH": [
+        819,
+        770,
+        157,
+        337
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          819,
+          837,
+          976,
+          959
+        ],
+        "blueBiasedSleeveCandidate": [
+          819,
+          827,
+          976,
+          932
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-b.png",
+      "sheet": "run-b",
+      "direction": "left",
+      "phase": 4,
+      "frameIndex": 12,
+      "frameRectXYWH": [
+        8,
+        1165,
+        249,
+        362
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          8,
+          1237,
+          257,
+          1368
+        ],
+        "blueBiasedSleeveCandidate": [
+          8,
+          1227,
+          257,
+          1339
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-b.png",
+      "sheet": "run-b",
+      "direction": "left",
+      "phase": 5,
+      "frameIndex": 13,
+      "frameRectXYWH": [
+        290,
+        1166,
+        188,
+        365
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          290,
+          1239,
+          478,
+          1370
+        ],
+        "blueBiasedSleeveCandidate": [
+          290,
+          1228,
+          478,
+          1341
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-b.png",
+      "sheet": "run-b",
+      "direction": "left",
+      "phase": 6,
+      "frameIndex": 14,
+      "frameRectXYWH": [
+        536,
+        1164,
+        234,
+        367
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          536,
+          1237,
+          770,
+          1370
+        ],
+        "blueBiasedSleeveCandidate": [
+          536,
+          1226,
+          770,
+          1340
+        ]
+      }
+    },
+    {
+      "action": "explore_run_W01",
+      "sourcePath": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\locomotion-alignment-v1\\head-scale-v2\\assets\\W01-explore-run-b.png",
+      "sheet": "run-b",
+      "direction": "left",
+      "phase": 7,
+      "frameIndex": 15,
+      "frameRectXYWH": [
+        792,
+        1156,
+        228,
+        355
+      ],
+      "worldUnitsPerPixel": 0.0043342618384401115,
+      "absoluteAtlasROIs": {
+        "wineBody": [
+          792,
+          1227,
+          1020,
+          1355
+        ],
+        "blueBiasedSleeveCandidate": [
+          792,
+          1216,
+          1020,
+          1326
+        ]
+      }
+    }
+  ]
+}

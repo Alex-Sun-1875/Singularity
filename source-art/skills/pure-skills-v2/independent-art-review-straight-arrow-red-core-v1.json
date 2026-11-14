@@ -1,0 +1,191 @@
+{
+  "date": "2026-11-08",
+  "reviewer": "independent agent shape_review",
+  "reviewScope": "Current five selected concept candidates only; original historical review is preserved in its separate file.",
+  "inputs": [
+    {
+      "file": "current-overview.jpg",
+      "sha256": "91f9fd7826d052306968931c0ba18a585f9f21de13a147b45d5b7246fda65a74"
+    },
+    {
+      "file": "current-silhouettes.jpg",
+      "sha256": "46ec25dd5f4ed7759ca357b6f63fe589f53fc49cd47c00420a80b71153c4352e"
+    }
+  ],
+  "additionalInspection": [
+    "native combat-bow-straight-v6.png",
+    "native combat-arc-red-v4.png",
+    "read-only in-memory crops of bow release hand, earlier contact and terminal arrow area"
+  ],
+  "currentStyleCards": [
+    "WAR",
+    "BOW",
+    "FIR",
+    "THU",
+    "ARC"
+  ],
+  "frostCardPresent": false,
+  "countLabelSeenInOverview": "37 skills / 185 ranks; catalog arithmetic not independently audited in this art-only task",
+  "overall": {
+    "fiveVisualFamiliesDistinctInGrayscale": true,
+    "qualitativeRangedSeparationVisible": true,
+    "immediateMandatoryDirectionReworkIdentified": false,
+    "status": "concept candidates ready to show user, not user-accepted deliverables",
+    "preciseMetresVerified": false,
+    "strictSameFormationAndCameraVerified": false,
+    "animationVerified": false,
+    "actualProjectileCountsAndDamageVerified": false,
+    "runtimeImplementedOrReady": false
+  },
+  "entries": [
+    {
+      "style": "WAR",
+      "file": "combat-war-awakened.png",
+      "status": "concept-candidate-ready-for-user-review",
+      "statusZh": "概念可送审，非用户已接受",
+      "constraints": {
+        "rangedCasterEnemySeparation": "visually consistent",
+        "flyingBladeCorridor": "visually consistent",
+        "targetContactHighlights": "visually consistent"
+      },
+      "evidence": [
+        "左前施法者与右后敌群之间保留明显空地。",
+        "刃弧与长向切割轨迹跨越空地，在路径上敌人位置出现局部接触亮点。",
+        "灰度下是明亮弧刃走廊，与直箭、火团、雷网和独立载荷不同。"
+      ],
+      "limitations": [
+        "多个刃弧是静态概念中的路径阶段，不能由图中刃弧数量认定真实伤害段数。",
+        "9—14m普通射程、18m终极走廊及宽度仍须实机坐标和判定验证。"
+      ],
+      "sha256": "9ade26ff82130ec3d0d3a2e7d0f55fdfa0a1fa716010bb53f81b96ff7b30c5c5",
+      "size": [
+        1536,
+        1024
+      ],
+      "newUserAcceptanceClaimed": false,
+      "runtimeReady": false
+    },
+    {
+      "style": "BOW",
+      "file": "combat-bow-straight-v6.png",
+      "status": "concept-candidate-ready-for-user-review",
+      "statusZh": "概念可送审，非用户已接受",
+      "constraints": {
+        "straightNonHomingRoute": "visually consistent",
+        "noSplitBranches": "visually consistent",
+        "singleCurrentArrowPresentation": "no obvious duplicate visible; not runtime entity-count proof",
+        "nockedArrowAtBow": "not visible",
+        "oldEmbeddedArrowsAtEarlierContacts": "no obvious retained arrowheads or fletching visible",
+        "offLineTargetsUnhitPresentation": "visually consistent"
+      },
+      "evidence": [
+        "原图显示一条从左前延伸至右后共线目标的细直轨迹，没有转弯或分叉。",
+        "释放者持下垂空弓，手边没有另搭在弦上的箭。",
+        "必要局部检查中，前两个接触点主要是小穿刺火花，未见明显留置箭头或羽尾；末端接触处可辨细杆/羽状箭体细节。",
+        "线外敌人没有同等接触光，整体没有巨型发光箭或华丽星弓。"
+      ],
+      "limitations": [
+        "末端细箭体与命中火花有一定混合；正式拆分生产素材时仍应逐像素核对实体箭轮廓。",
+        "单帧不能证明运行中始终只有1个弹体，也不能证明0.35s拉弓、真实先后贯穿、2—6目标上限、遮挡或取消行为。",
+        "长细线在静态图里接近路线示意，实际应短时淡出，避免看起来是持续激光。"
+      ],
+      "sha256": "a2f3ca3e283ff60268a2bc2fa1bb91a4d8a3a77d473526fa67a8cbb7cb4b10db",
+      "size": [
+        1536,
+        1024
+      ],
+      "newUserAcceptanceClaimed": false,
+      "runtimeReady": false
+    },
+    {
+      "style": "FIR",
+      "file": "combat-fir-redesign-v4.png",
+      "status": "concept-candidate-ready-for-user-review",
+      "statusZh": "概念可送审，非用户已接受",
+      "constraints": {
+        "remoteExplosion": "visually consistent",
+        "volumetricConnectedExplosionBody": "visually consistent",
+        "notHollowPerimeterOnly": "visually consistent",
+        "singleFallingCoreBeforeImpact": "not shown in this impact still"
+      },
+      "evidence": [
+        "火焰集中在远端敌群，施法者与爆炸团之间仍有大片空地。",
+        "爆燃呈连续滚卷的立体外壳，内部有亮核和厚火舌，已不是只有边缘亮环。",
+        "中心与边缘敌人的身体/脚部有火焰接触，外侧两名敌人未被同等火面覆盖。",
+        "灰度下是有体积的宽亮团，与其他四系线状或弹体形状不同。"
+      ],
+      "limitations": [
+        "这张展示爆炸阶段，未同时展示火核下坠；不能凭单帧证明全过程只有单一火核。",
+        "高亮处遮住部分腿脚；实机需要短峰值后退亮，并以统一爆炸中心组织火舌，避免退化为每敌复制小旋涡。",
+        "2.8—4.5m半径、完整伤害覆盖、既有伤害不变及爆炸各时点尚未由图片验证。"
+      ],
+      "sha256": "158cb7de6fb1c7c86dca04ab7698649d3675a2a8f8b974ac824a0eadbed15abf",
+      "size": [
+        1536,
+        1024
+      ],
+      "newUserAcceptanceClaimed": false,
+      "runtimeReady": false
+    },
+    {
+      "style": "THU",
+      "file": "combat-thu.png",
+      "status": "concept-candidate-ready-for-user-review",
+      "statusZh": "保留用户此前认可方向，仍非运行验收",
+      "priorUserDirectionAcceptedAsRelayedByRoot": true,
+      "constraints": {
+        "originalPreferredArcDirectionRetained": "same selected original file",
+        "broadTargetConnectingNetwork": "visually consistent",
+        "notVerticalThreePillars": "visually consistent"
+      },
+      "evidence": [
+        "沿用根代理转述为用户此前认可的原combat-thu.png，没有选择增强版。",
+        "主电弧跨过空地进入远处敌群，再以宽面不规则分叉连接多名可辨认角色。",
+        "角色躯干附近有局部电接点，不是仅在空中画无目标的闪电。",
+        "灰度下仍是清楚的网状多路径连接。"
+      ],
+      "limitations": [
+        "保留此前认可的是视觉方向，不是精确范围、伤害、跳跃距离或动画时序已通过。",
+        "单张静态图不能验证每目标去重、遮挡、真实分叉顺序和性能。"
+      ],
+      "sha256": "286240daba8d53f6ad88b8a9aadfc49a0d0a147e457c0ad4177c4db6b1bd1b74",
+      "size": [
+        1536,
+        1024
+      ],
+      "newUserAcceptanceClaimed": false,
+      "runtimeReady": false
+    },
+    {
+      "style": "ARC",
+      "file": "combat-arc-red-v4.png",
+      "status": "concept-candidate-ready-for-user-review",
+      "statusZh": "概念可送审，非用户已接受",
+      "constraints": {
+        "redDenseForceBodySilverWhiteCore": "visually consistent",
+        "nonFireMaterial": "visually consistent",
+        "independentPayloadsToRemoteTargets": "visually consistent",
+        "noFrostOrDarkCutPlanes": "visually consistent"
+      },
+      "evidence": [
+        "必要原图检查中，飞弹有密实红色壳与银白亮芯，呈独立载荷而非细激光。",
+        "未见火舌、烟雾、余烬或橙黄燃烧拖尾，红色可读为力场能量而非火球。",
+        "各条独立轨迹从施法者通往远端具体敌人，接触点有红白局部爆光。",
+        "没有冰晶、黑紫平面、地面三角切片或巨型星门；与雷系跨敌人互连拓扑不同。"
+      ],
+      "limitations": [
+        "静态图不能证明每名固定目标准确只有两枚载荷、20%/80%分摊或失效不补位。",
+        "本图的多枚独立奥术载荷与弓术单箭是不同规则，不能借此允许BOW分叉。",
+        "局部符号和接触爆光是否符合用户最终审美仍需用户观看，不作自动接受。"
+      ],
+      "sha256": "f1bf2089bbdf95f7d8bb67af2e00d660a45df854b96fe3abfa44b092fe6aad3a",
+      "size": [
+        1536,
+        1024
+      ],
+      "newUserAcceptanceClaimed": false,
+      "runtimeReady": false
+    }
+  ],
+  "sourceImagesModified": false
+}

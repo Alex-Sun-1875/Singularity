@@ -1,0 +1,267 @@
+{
+  "revision": "elite_07-source-actor-v1-runtime1024",
+  "sourceDesign": "source-art/encounters/cloud-world-v2/actor-production-v1/ELITE_07/sheet-v2.png",
+  "loaded3DModel": false,
+  "image": "atlas.png",
+  "columns": 4,
+  "frameWidth": 256,
+  "frameHeight": 256,
+  "directions": [
+    "down",
+    "left",
+    "up",
+    "right"
+  ],
+  "origin": [
+    130.512,
+    197.5
+  ],
+  "perFrameOrigins": [
+    [
+      130.512,
+      197.5
+    ],
+    [
+      130.191,
+      197.819
+    ],
+    [
+      130.726,
+      197.915
+    ],
+    [
+      130.512,
+      197.5
+    ],
+    [
+      131.347,
+      197.0
+    ],
+    [
+      130.0195,
+      194.244
+    ],
+    [
+      135.515,
+      195.659
+    ],
+    [
+      131.347,
+      197.0
+    ],
+    [
+      125.7795,
+      197.5
+    ],
+    [
+      128.4715,
+      196.2775
+    ],
+    [
+      128.028,
+      196.6815
+    ],
+    [
+      125.7795,
+      197.5
+    ],
+    [
+      127.1785,
+      198.0
+    ],
+    [
+      142.895,
+      197.181
+    ],
+    [
+      139.5685,
+      197.6865
+    ],
+    [
+      127.1785,
+      198.0
+    ]
+  ],
+  "alphaBounds": [
+    [
+      60.5,
+      53.0,
+      193.0,
+      200.5
+    ],
+    [
+      58.0,
+      53.0,
+      194.5,
+      200.0
+    ],
+    [
+      54.5,
+      54.0,
+      194.0,
+      198.5
+    ],
+    [
+      49.5,
+      59.0,
+      195.0,
+      190.5
+    ],
+    [
+      76.0,
+      53.0,
+      173.0,
+      199.0
+    ],
+    [
+      62.0,
+      53.0,
+      178.5,
+      195.0
+    ],
+    [
+      63.0,
+      53.0,
+      182.5,
+      196.0
+    ],
+    [
+      62.0,
+      59.0,
+      193.5,
+      182.5
+    ],
+    [
+      73.0,
+      53.0,
+      200.5,
+      199.5
+    ],
+    [
+      50.0,
+      53.0,
+      201.5,
+      210.5
+    ],
+    [
+      64.0,
+      51.0,
+      203.0,
+      196.0
+    ],
+    [
+      65.0,
+      59.0,
+      209.0,
+      190.5
+    ],
+    [
+      72.0,
+      53.0,
+      175.0,
+      238.0
+    ],
+    [
+      72.5,
+      53.0,
+      197.0,
+      228.0
+    ],
+    [
+      66.0,
+      53.0,
+      199.5,
+      225.5
+    ],
+    [
+      63.5,
+      59.0,
+      193.5,
+      189.0
+    ]
+  ],
+  "frameScaleFactors": {
+    "atlas": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "alphaThreshold": 0.025,
+  "camera": {
+    "worldUnitsPerPixel": 0.01818181818181818
+  },
+  "actions": {
+    "idle": {
+      "image": "atlas.png",
+      "frames": 1,
+      "frameIndices": [
+        0
+      ],
+      "fps": 1,
+      "loop": true
+    },
+    "walk": {
+      "image": "atlas.png",
+      "frames": 2,
+      "frameIndices": [
+        1,
+        2
+      ],
+      "fps": 3.5,
+      "loop": true,
+      "nominalSpeedMetresPerSecond": 1.5
+    },
+    "attack_sword": {
+      "image": "atlas.png",
+      "frames": 3,
+      "frameIndices": [
+        0,
+        3,
+        0
+      ],
+      "phaseStarts": [
+        0,
+        0.28,
+        0.6
+      ],
+      "fps": 5,
+      "loop": false
+    }
+  },
+  "limitations": [
+    "Four actual drawn directions and16 actual source drawings only; no mirrored/invented poses.",
+    "One reviewed global pixel/world scale; no frame fitting or generated in-betweens.",
+    "Primary pose source only; additional requiredCombatMoves are not implicitly covered.",
+    "No independently drawn hit/death; own idle fallback/hide remains explicit.",
+    "Static review and actual game gait/collision/texture-lifetime acceptance are separate."
+  ],
+  "runtimeAtlasResample": {
+    "scale": 0.5,
+    "sourceAtlasSize": [
+      2048,
+      2048
+    ],
+    "runtimeAtlasSize": [
+      1024,
+      1024
+    ],
+    "filter": "Pillow LANCZOS, one whole-atlas resize",
+    "sourceAtlasSha256": "6d1dcc6fd012dc034ce812c0cf753ce092d663361f51a5c728989216eb38b711",
+    "sourceManifestSha256": "ae8990509680ebfcbac2489677dcf825994f0def01f1c43bfbead5943075ebee",
+    "perFrameRescale": false
+  }
+}

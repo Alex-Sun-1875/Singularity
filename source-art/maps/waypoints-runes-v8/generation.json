@@ -1,0 +1,65 @@
+{
+  "style": "bg3-inspired-rune-circle",
+  "generation": {
+    "provider": "OpenAI built-in image_gen (cloud)",
+    "initial": {
+      "file": "rune-initial-generated.png",
+      "sha256": "e279a1aa7632fd2d56860725840c438102d90399d28a015c57ce614e5f2e1542",
+      "prompt": "prompt.txt",
+      "artReview": "rejected-by-Codex-raised-emblem-appearance"
+    },
+    "revision": {
+      "file": "rune-revised-generated.png",
+      "sha256": "e056220db0fbe15055a7b6f430841a15ae05f1a97bbba1b4c589336987e45046",
+      "prompt": "revision-prompt.txt",
+      "artReview": "representative-flat-stroke-sample-reviewed-runtime-pending"
+    }
+  },
+  "reference": {
+    "url": "https://www.pcgamer.com/baldurs-gate-3-waypoints-fast-travel/",
+    "image": "https://cdn.mos.cms.futurecdn.net/Cyw6vuKNEbRa5iKmWnC8wX.jpg",
+    "role": "visual research; cropped screenshot supplied only to initial cloud generation; not shipped as a runtime asset"
+  },
+  "processing": {
+    "script": "tools/model-pipeline/prepare_waypoint_runes.py",
+    "operations": [
+      "Pillow Lanczos 512px resize",
+      "original generated alpha retained as input",
+      "alpha cutoff 8 and 1.18 gain",
+      "one-pixel alpha dilation for distant readability",
+      "left-half exact horizontal mirroring",
+      "slight lavender color grading",
+      "separate 3px Gaussian narrow glow mask"
+    ],
+    "noLocalGenerativeInference": true
+  },
+  "outputs": [
+    {
+      "file": "src/cocos/assets/resources/flat2d/waypoints-v1/rune-sigil-v8.png",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "825e7b55e8d0b84c32d015112f7ca3cda2ab1ddb470820c173a7f35bdde654bc",
+      "horizontalMirrorMaxError": 0
+    },
+    {
+      "file": "src/cocos/assets/resources/flat2d/waypoints-v1/rune-glow-v8.png",
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "sha256": "a867f8f5720cca9152e495df261ad2cb792dd04743bfeba5065b8dd45a3d095d",
+      "horizontalMirrorMaxError": 0
+    }
+  ],
+  "animation": "Runtime glow modulation only; not a generated animation sequence",
+  "acceptance": {
+    "generationSucceeded": true,
+    "representativeArtReviewedByCodex": true,
+    "runtimeArtReview": "pending",
+    "userApproval": "not-claimed"
+  }
+}

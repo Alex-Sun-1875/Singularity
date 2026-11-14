@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-10",
+  "method": "OpenAI built-in image_gen, cloud; two separate image calls, one state per call",
+  "generation_status": "complete",
+  "art_review_status": "Assistant checked three-slot count, rarity, existing values, one newly revealed affix, phase limit and currency arithmetic; user review pending",
+  "scope": "Visual design only; no runtime UI, combat rules or saves changed",
+  "design": "../../../docs/design/equipment-random-enhancement-v2.md",
+  "reference_inputs": [
+    {
+      "file": "../character-panels-bg3-v1/screens/04-forging.png",
+      "sha256": "d389e3cc94a2b371066b1495b83596f24a36431e50ded912111e8ad5952f852e",
+      "role": "Style and shell reference; earlier deterministic enhancement values superseded by the new prompts"
+    }
+  ],
+  "illustrated_transaction": {
+    "item": "最后一班岗",
+    "catalog_id": "DG_L01",
+    "rarity": "传奇",
+    "rank_before": 5,
+    "rank_after": 6,
+    "affix_capacity": 3,
+    "phase_cap": 6,
+    "item_cap": 12,
+    "gold": {
+      "before": 868,
+      "cost": 130,
+      "after": 738
+    },
+    "iron": {
+      "before": 96,
+      "cost": 3,
+      "after": 93
+    },
+    "new_affix": "力量 +2",
+    "values_status": "Illustrative affix ranges and probabilities; not implemented balance data"
+  },
+  "target": {
+    "logical_viewport": [
+      844,
+      390
+    ],
+    "platform": "TapTap minigame / Cocos Creator 3.8.8",
+    "validation": "Raster concepts only; touch targets, safe area and actual device validation pending implementation"
+  },
+  "screens": [
+    {
+      "title": "强化前：查看随机候选",
+      "file": "screens/01-preview.png",
+      "prompt": "prompts/01-preview.txt",
+      "native_size": [
+        1844,
+        853
+      ],
+      "original_cloud_file": "C:\\Users\\Alexa\\.codex\\generated_images\\01a1c46b-eff4-7a71-a1ee-6621fccd0eb5\\exec-58abc338-1067-4fe7-89ea-add02b2c591e.png",
+      "sha256": "26dc6505f9b0198503753bc056043820163e56bca5d1385c0ad49228e8ef95c2",
+      "postprocess": "None; copied byte-for-byte from cloud output"
+    },
+    {
+      "title": "强化后：揭晓第三条属性",
+      "file": "screens/02-result.png",
+      "prompt": "prompts/02-result.txt",
+      "native_size": [
+        1844,
+        853
+      ],
+      "original_cloud_file": "C:\\Users\\Alexa\\.codex\\generated_images\\01a1c46b-eff4-7a71-a1ee-6621fccd0eb5\\exec-110fd9cc-e877-48ea-98a5-2e2a10aa74bc.png",
+      "sha256": "f7776a5c55dbb0d3d7445728c9b03e1c826d5bd1c64ed54757aab1e8352313b8",
+      "postprocess": "None; copied byte-for-byte from cloud output"
+    }
+  ],
+  "overview": {
+    "file": "review/overview.jpg",
+    "method": "Pillow side-by-side review layout; Lanczos downsampling and rasterized Windows UI label text; no font file redistributed"
+  }
+}

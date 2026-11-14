@@ -1,0 +1,55 @@
+{
+  "recordedAt": "2026-11-10T18:18:43.220750+08:00",
+  "backend": "OpenAI cloud image_gen built-in",
+  "localInferenceUsed": false,
+  "cliUsed": false,
+  "referenceCaching": "Unknown; each job supplied one necessary project reference. No third-party screenshots supplied to generation.",
+  "jobs": [
+    {
+      "kind": "fire",
+      "file": "fire-direction-raw-v1.png",
+      "size": [
+        1536,
+        1024
+      ],
+      "sha256": "dc1b0ba22c71bae96325bb4905a4591b64f9ce596808c276fe5a5ca99feaf316",
+      "prompt": "prompts/fire-direction-v1.txt",
+      "generationSucceeded": true,
+      "internalArtReview": "Usable as a static concept; poses, metric scale, frame timing and gameplay integration require separate verification.",
+      "userArtAccepted": false,
+      "runtimeIntegrated": false
+    },
+    {
+      "kind": "melee",
+      "file": "melee-combo-raw-v1.png",
+      "size": [
+        1448,
+        1086
+      ],
+      "sha256": "973b909ae7094c0a78d6d527e99015ee14764b673d48007adc3a3e5c7014e81a",
+      "prompt": "prompts/melee-combo-v1.txt",
+      "generationSucceeded": true,
+      "internalArtReview": "Usable as a static concept; poses, metric scale, frame timing and gameplay integration require separate verification.",
+      "userArtAccepted": false,
+      "runtimeIntegrated": false
+    }
+  ],
+  "references": [
+    "../rank-vfx-draft-v1/references/fire-bright-material-reference.jpg",
+    "references/melee-project-style.jpg"
+  ],
+  "researchMediaPolicy": "Third-party research screenshots remain under ignored temp/fire-melee-research-v1; not copied to runtime or used as production textures.",
+  "acceptance": "Generation success and internal static-concept review do not constitute user art acceptance, animation acceptance, damage/collision implementation, or TapTap validation.",
+  "derivedFiles": [
+    {
+      "file": "fire-direction-v1.png",
+      "sha256": "bc17e0ee3095a194032d3887e140e1e3c8b2db582ef5da1c2944f0eb79148e5e",
+      "processing": "Pillow: unchanged original concept pixels plus external Chinese label bands; no generated pixel retouch."
+    },
+    {
+      "file": "melee-combo-v1.png",
+      "sha256": "14573e723349977afaf4c2b087da78e14df284421a838e6e36cf9144431435e5",
+      "processing": "Pillow: unchanged original concept pixels plus external Chinese label bands; no generated pixel retouch."
+    }
+  ]
+}

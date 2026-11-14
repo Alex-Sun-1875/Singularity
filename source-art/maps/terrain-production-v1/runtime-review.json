@@ -1,0 +1,2059 @@
+{
+  "date": "2026-11-08",
+  "completedAt": "2026-11-08T09:42:38.344523+08:00",
+  "status": "first-pass-map-art-implementation-and-runtime-review-passed",
+  "reference": "source-art/maps/style-unification-v1/user-style-reference.png",
+  "direction": "docs/maps/map-art-style-v1.md",
+  "build": {
+    "name": "map-art-release3",
+    "mainJs": {
+      "relativePath": "assets/main/index.15cd3.js",
+      "bytes": 1040062,
+      "sha256": "cba8498105f5050527ee1a18bc398446324c0d344d12890b65dc09d6db3761e8",
+      "chapterGameRfPush": true,
+      "markers": {
+        "fadedOccluders": true,
+        "terrainDetails": true,
+        "shipwreck": true,
+        "gorges": true,
+        "entranceClusters": true
+      },
+      "waterAndGorgeBarrierGroup4": true,
+      "groundMeshReuseChecks": {
+        "readAttribute": true,
+        "ATTR_POSITION": true,
+        "ATTR_NORMAL": true,
+        "readIndices": true,
+        ".017": true
+      }
+    },
+    "tree": {
+      "identical": true,
+      "files": 1944,
+      "totalBytes": 555431184,
+      "buildTreeSha256": "3853dac06e8d87e7cebe43713160013a20a086b0d9679cad9571768d1653e7ed",
+      "hashDefinition": "SHA256 of compact UTF8 JSON ordered file records (path,bytes,sha256)"
+    },
+    "verificationRecord": "source-art/maps/terrain-production-v1/map-art-release3-build.json",
+    "preview": "http://127.0.0.1:7470/?view=2d"
+  },
+  "generation": {
+    "method": "Cloud OpenAI built-in image_gen",
+    "productionCalls": 12,
+    "groundGenerations": 9,
+    "propsInitialAndTargetedEdit": 2,
+    "shipwreckGeneration": 1,
+    "conceptBoardSeparateCalls": 1,
+    "localModelInference": false,
+    "newDependenciesDownloaded": false,
+    "deterministicProcessing": "Existing Pillow/NumPy; original files preserved"
+  },
+  "summary": {
+    "currentAreas": 97,
+    "artFamilies": 9,
+    "originalTerrainAreasUnchanged": 32,
+    "expandedTerrainAreas": 65,
+    "productionAreaRendersPassed": 97,
+    "closeupViewsPassed": 76,
+    "desktopViews": 38,
+    "mobileEmulatedViews": 38,
+    "physicalWalkingRoutesPassed": 9,
+    "inputAndPersistenceViewportsPassed": 2,
+    "runtimeErrors": 0,
+    "failedRequests": 0,
+    "maxCapsuleFootErrorMetres": 0.059371389747806286
+  },
+  "sourceTerrainReview": "source-art/maps/terrain-production-v1/campaign-terrain-review.json",
+  "sourceCoverage": "source-art/maps/terrain-production-v1/current-area-coverage.json",
+  "familyCounts": {
+    "town-stone": 28,
+    "reed-marsh": 6,
+    "meadow-earth": 7,
+    "mountain-quarry": 18,
+    "birch-forest": 3,
+    "oath-ruin": 8,
+    "warm-interior": 11,
+    "inhabited-undercity": 8,
+    "drowned-crypt": 8
+  },
+  "resourceLifecycle": {
+    "scope": "Strict cc.isValid after each previous-area switch; final live scene excluded from these totals",
+    "totals": {
+      "layerMeshes": {
+        "captured": 1657,
+        "aliveAfterSwitch": 0
+      },
+      "layerMaterials": {
+        "captured": 1691,
+        "aliveAfterSwitch": 0
+      },
+      "layerFrames": {
+        "captured": 1241,
+        "aliveAfterSwitch": 0
+      },
+      "detailMeshes": {
+        "captured": 55,
+        "aliveAfterSwitch": 0
+      },
+      "detailMaterials": {
+        "captured": 53,
+        "aliveAfterSwitch": 0
+      }
+    }
+  },
+  "occlusionChecks": [
+    {
+      "id": "S05-trail",
+      "mode": "desktop",
+      "faded": 1,
+      "restored": {
+        "awayPoint": {
+          "x": 50.4,
+          "z": -43.4
+        },
+        "tracked": 1,
+        "restored": 1,
+        "details": [
+          {
+            "key": "tower",
+            "faded": false,
+            "usesOpaque": true
+          }
+        ]
+      },
+      "standingEvidence": {
+        "navigationClear": true,
+        "physicalFootprintSource": "SceneBuilder BoxCollider.worldBounds, player radius .32m",
+        "physicalFootprintHits": [],
+        "targetInteraction": "s05-prints",
+        "currentInteraction": "s05-prints",
+        "anchorDistance": 1.1999999999999993
+      }
+    },
+    {
+      "id": "S12-ruin-entry",
+      "mode": "desktop",
+      "faded": 1,
+      "restored": {
+        "awayPoint": {
+          "x": 50.4,
+          "z": -46.199999999999996
+        },
+        "tracked": 1,
+        "restored": 1,
+        "details": [
+          {
+            "key": "ruin",
+            "faded": false,
+            "usesOpaque": true
+          }
+        ]
+      },
+      "standingEvidence": {
+        "navigationClear": true,
+        "physicalFootprintSource": "SceneBuilder BoxCollider.worldBounds, player radius .32m",
+        "physicalFootprintHits": [],
+        "targetInteraction": "s12-swordtrace",
+        "currentInteraction": "s12-swordtrace",
+        "anchorDistance": 1.1999999999999993
+      }
+    },
+    {
+      "id": "S05-trail",
+      "mode": "mobile",
+      "faded": 1,
+      "restored": {
+        "awayPoint": {
+          "x": 50.4,
+          "z": -43.4
+        },
+        "tracked": 1,
+        "restored": 1,
+        "details": [
+          {
+            "key": "tower",
+            "faded": false,
+            "usesOpaque": true
+          }
+        ]
+      },
+      "standingEvidence": {
+        "navigationClear": true,
+        "physicalFootprintSource": "SceneBuilder BoxCollider.worldBounds, player radius .32m",
+        "physicalFootprintHits": [],
+        "targetInteraction": "s05-prints",
+        "currentInteraction": "s05-prints",
+        "anchorDistance": 1.1999999999999993
+      }
+    },
+    {
+      "id": "S12-ruin-entry",
+      "mode": "mobile",
+      "faded": 1,
+      "restored": {
+        "awayPoint": {
+          "x": 50.4,
+          "z": -46.199999999999996
+        },
+        "tracked": 1,
+        "restored": 1,
+        "details": [
+          {
+            "key": "ruin",
+            "faded": false,
+            "usesOpaque": true
+          }
+        ]
+      },
+      "standingEvidence": {
+        "navigationClear": true,
+        "physicalFootprintSource": "SceneBuilder BoxCollider.worldBounds, player radius .32m",
+        "physicalFootprintHits": [],
+        "targetInteraction": "s12-swordtrace",
+        "currentInteraction": "s12-swordtrace",
+        "anchorDistance": 1.1999999999999993
+      }
+    }
+  ],
+  "walkingRoutes": [
+    {
+      "id": "S01",
+      "bridges": 1,
+      "waters": 1,
+      "gorges": 0,
+      "terrainDetails": {
+        "ready": true,
+        "waterPatches": 1,
+        "waterVertices": 1695,
+        "waterEdgeFadeMetres": [
+          0.35,
+          0.65
+        ],
+        "dryGorgePatches": 0,
+        "canalRims": 0,
+        "bridgeRailingRuns": 2,
+        "bridgeBeams": 4,
+        "bridgePosts": 18,
+        "bridgeSupportPiers": 4,
+        "bridgeBatches": 1
+      },
+      "start": {
+        "x": 2.4000000000000004,
+        "z": 0
+      },
+      "end": {
+        "x": 25.6,
+        "z": 0
+      },
+      "actual": {
+        "x": 25.44005584716797,
+        "z": 0
+      },
+      "heightRange": [
+        0,
+        0
+      ],
+      "maxFootError": 0.010654721260070832,
+      "oldMeshesAlive": 0,
+      "oldMaterialsAlive": 0,
+      "roadFacing": 0.3942782323015308
+    },
+    {
+      "id": "S02",
+      "bridges": 1,
+      "waters": 1,
+      "gorges": 0,
+      "terrainDetails": {
+        "ready": true,
+        "waterPatches": 1,
+        "waterVertices": 598,
+        "waterEdgeFadeMetres": [
+          0.35,
+          0.65
+        ],
+        "dryGorgePatches": 0,
+        "canalRims": 0,
+        "bridgeRailingRuns": 2,
+        "bridgeBeams": 4,
+        "bridgePosts": 32,
+        "bridgeSupportPiers": 4,
+        "bridgeBatches": 1
+      },
+      "start": {
+        "x": -56.6,
+        "z": -28
+      },
+      "end": {
+        "x": -19.4,
+        "z": -28
+      },
+      "actual": {
+        "x": -19.520130157470703,
+        "z": -28
+      },
+      "heightRange": [
+        0,
+        0
+      ],
+      "maxFootError": 0.00999995708465573,
+      "oldMeshesAlive": 0,
+      "oldMaterialsAlive": 0,
+      "roadFacing": 0.3976265718188188
+    },
+    {
+      "id": "S11",
+      "bridges": 1,
+      "waters": 1,
+      "gorges": 0,
+      "terrainDetails": {
+        "ready": true,
+        "waterPatches": 1,
+        "waterVertices": 345,
+        "waterEdgeFadeMetres": [
+          0.35,
+          0.65
+        ],
+        "dryGorgePatches": 0,
+        "canalRims": 0,
+        "bridgeRailingRuns": 6,
+        "bridgeBeams": 12,
+        "bridgePosts": 36,
+        "bridgeSupportPiers": 8,
+        "bridgeBatches": 2
+      },
+      "start": {
+        "x": -20.6,
+        "z": -18
+      },
+      "end": {
+        "x": 0.5999999999999996,
+        "z": -18
+      },
+      "actual": {
+        "x": 0.49008601903915405,
+        "z": -18.0578670501709
+      },
+      "heightRange": [
+        0,
+        0
+      ],
+      "maxFootError": 0.014694664478302033,
+      "oldMeshesAlive": 0,
+      "oldMaterialsAlive": 0,
+      "roadFacing": 0.3964474392957982
+    },
+    {
+      "id": "U1-02",
+      "bridges": 0,
+      "waters": 0,
+      "gorges": 0,
+      "terrainDetails": {
+        "ready": true,
+        "waterPatches": 0,
+        "waterVertices": 0,
+        "waterEdgeFadeMetres": [
+          0.35,
+          0.65
+        ],
+        "dryGorgePatches": 0,
+        "canalRims": 0,
+        "bridgeRailingRuns": 0,
+        "bridgeBeams": 0,
+        "bridgePosts": 0,
+        "bridgeSupportPiers": 0,
+        "bridgeBatches": 0
+      },
+      "start": {
+        "x": -25,
+        "z": -12
+      },
+      "end": {
+        "x": 5,
+        "z": -12
+      },
+      "actual": {
+        "x": 4.968727111816406,
+        "z": -11.97159194946289
+      },
+      "heightRange": [
+        0.00023907467103566625,
+        4.999983711435404
+      ],
+      "maxFootError": 0.020979147528668918,
+      "oldMeshesAlive": 0,
+      "oldMaterialsAlive": 0,
+      "roadFacing": 0.39455673144505
+    },
+    {
+      "id": "H07",
+      "bridges": 1,
+      "waters": 0,
+      "gorges": 1,
+      "terrainDetails": {
+        "ready": true,
+        "waterPatches": 0,
+        "waterVertices": 0,
+        "waterEdgeFadeMetres": [
+          0.35,
+          0.65
+        ],
+        "dryGorgePatches": 1,
+        "canalRims": 0,
+        "bridgeRailingRuns": 2,
+        "bridgeBeams": 4,
+        "bridgePosts": 26,
+        "bridgeSupportPiers": 4,
+        "bridgeBatches": 1
+      },
+      "start": {
+        "x": -10.600000000000001,
+        "z": 0
+      },
+      "end": {
+        "x": 22.6,
+        "z": 0
+      },
+      "actual": {
+        "x": 22.520030975341797,
+        "z": 0
+      },
+      "heightRange": [
+        1.6,
+        1.6
+      ],
+      "maxFootError": 0.04491353988647484,
+      "oldMeshesAlive": 0,
+      "oldMaterialsAlive": 0,
+      "roadFacing": 0.40008857792577146
+    },
+    {
+      "id": "H07:ramp",
+      "bridges": 1,
+      "waters": 0,
+      "gorges": 1,
+      "terrainDetails": {
+        "ready": true,
+        "waterPatches": 0,
+        "waterVertices": 0,
+        "waterEdgeFadeMetres": [
+          0.35,
+          0.65
+        ],
+        "dryGorgePatches": 1,
+        "canalRims": 0,
+        "bridgeRailingRuns": 2,
+        "bridgeBeams": 4,
+        "bridgePosts": 26,
+        "bridgeSupportPiers": 4,
+        "bridgeBatches": 1
+      },
+      "start": {
+        "x": -18,
+        "z": -50
+      },
+      "end": {
+        "x": -18,
+        "z": 50
+      },
+      "actual": {
+        "x": -18.00670051574707,
+        "z": 49.87525177001953
+      },
+      "heightRange": [
+        1.3799530481953864e-05,
+        3.1999850727885732
+      ],
+      "maxFootError": 0.0105251321047202,
+      "oldMeshesAlive": 0,
+      "oldMaterialsAlive": 0,
+      "roadFacing": 0.40008857792577146
+    },
+    {
+      "id": "B10",
+      "bridges": 1,
+      "waters": 1,
+      "gorges": 0,
+      "terrainDetails": {
+        "ready": true,
+        "waterPatches": 1,
+        "waterVertices": 952,
+        "waterEdgeFadeMetres": [
+          0.35,
+          0.65
+        ],
+        "dryGorgePatches": 0,
+        "canalRims": 0,
+        "bridgeRailingRuns": 2,
+        "bridgeBeams": 4,
+        "bridgePosts": 64,
+        "bridgeSupportPiers": 4,
+        "bridgeBatches": 1
+      },
+      "start": {
+        "x": -18.6,
+        "z": -16
+      },
+      "end": {
+        "x": 56.6,
+        "z": -16
+      },
+      "actual": {
+        "x": 56.519893646240234,
+        "z": -16
+      },
+      "heightRange": [
+        0.3218304,
+        0.3218304
+      ],
+      "maxFootError": 0.01441590167083745,
+      "oldMeshesAlive": 0,
+      "oldMaterialsAlive": 0,
+      "roadFacing": 0.40008857792577146
+    },
+    {
+      "id": "B12",
+      "bridges": 1,
+      "waters": 1,
+      "gorges": 0,
+      "terrainDetails": {
+        "ready": true,
+        "waterPatches": 1,
+        "waterVertices": 792,
+        "waterEdgeFadeMetres": [
+          0.35,
+          0.65
+        ],
+        "dryGorgePatches": 0,
+        "canalRims": 2,
+        "bridgeRailingRuns": 2,
+        "bridgeBeams": 4,
+        "bridgePosts": 22,
+        "bridgeSupportPiers": 4,
+        "bridgeBatches": 1
+      },
+      "start": {
+        "x": 26.4,
+        "z": -22
+      },
+      "end": {
+        "x": 53.6,
+        "z": -22
+      },
+      "actual": {
+        "x": 53.51984786987305,
+        "z": -22
+      },
+      "heightRange": [
+        0.22955520000000001,
+        0.22955520000000001
+      ],
+      "maxFootError": 0.013600333590698288,
+      "oldMeshesAlive": 0,
+      "oldMaterialsAlive": 0,
+      "roadFacing": 0.40008857792577146
+    },
+    {
+      "id": "B14",
+      "bridges": 1,
+      "waters": 1,
+      "gorges": 0,
+      "terrainDetails": {
+        "ready": true,
+        "waterPatches": 1,
+        "waterVertices": 1054,
+        "waterEdgeFadeMetres": [
+          0.35,
+          0.65
+        ],
+        "dryGorgePatches": 0,
+        "canalRims": 0,
+        "bridgeRailingRuns": 2,
+        "bridgeBeams": 4,
+        "bridgePosts": 42,
+        "bridgeSupportPiers": 4,
+        "bridgeBatches": 1
+      },
+      "start": {
+        "x": 44,
+        "z": -48.6
+      },
+      "end": {
+        "x": 44,
+        "z": 0.6000000000000014
+      },
+      "actual": {
+        "x": 44,
+        "z": 0.4799574613571167
+      },
+      "heightRange": [
+        0.19910033066462546,
+        0.20540142632402153
+      ],
+      "maxFootError": 0.059371389747806286,
+      "oldMeshesAlive": 0,
+      "oldMaterialsAlive": 0,
+      "roadFacing": 0.40147609851601374
+    }
+  ],
+  "inputAndPersistence": [
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "startupBytes": 150924001,
+      "inputMovement": 2.479264305879544,
+      "saved": {
+        "x": -1.494805097579956,
+        "z": -8.97795581817627
+      },
+      "restored": {
+        "x": -1.494805097579956,
+        "z": -8.97795581817627
+      },
+      "errors": [],
+      "failed": []
+    },
+    {
+      "name": "mobile-landscape",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "startupBytes": 150924001,
+      "inputMovement": 2.01863114738722,
+      "saved": {
+        "x": -1.292296051979065,
+        "z": -8.550755500793457
+      },
+      "restored": {
+        "x": -1.292296051979065,
+        "z": -8.550755500793457
+      },
+      "errors": [],
+      "failed": []
+    }
+  ],
+  "visualReview": {
+    "status": "accepted-first-pass",
+    "images": [
+      "source-art/maps/terrain-production-v1/runtime-style-review.jpg",
+      "source-art/maps/terrain-production-v1/runtime-dry-landforms-review.jpg"
+    ],
+    "findings": [
+      "Nine terrain families retain stone, earth, forest litter, wet banks, bedrock and timber identities within the approved restrained painted direction.",
+      "Built exterior courts and underground homes use masonry rather than whole-area wooden floors or meadow defaults.",
+      "Shore fades, canal rims, continuous bridge rails, low wall feet and foreground occlusion preserve readable travel and interaction space.",
+      "B14 has a genuine independently painted shipwreck within blocked harbor water.",
+      "H07 intersecting-gorge bands were removed by using actual Ground triangles; centroid bridge omissions were removed to eliminate pale sawteeth."
+    ],
+    "resolvedDefects": [
+      {
+        "id": "H07-gorge-grid-intersection",
+        "failedBuild": "map-art-release",
+        "fixedBuild": "map-art-release2",
+        "cause": "Independently sampled overlay triangles intersected the rendered ground."
+      },
+      {
+        "id": "H07-bridge-edge-sawteeth",
+        "failedBuild": "map-art-release2",
+        "fixedBuild": "map-art-release3",
+        "cause": "Whole-triangle bridge exclusions left pale base-ground gaps; continuous below-deck coverage fixes them."
+      }
+    ]
+  },
+  "areaCoverage": [
+    {
+      "id": "S01",
+      "name": "石桥镇",
+      "family": "town-stone",
+      "ground": "meadow",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S02",
+      "name": "南渡码头",
+      "family": "reed-marsh",
+      "ground": "wet-earth",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S03",
+      "name": "空誓墓园",
+      "family": "meadow-earth",
+      "ground": "meadow",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S04",
+      "name": "血刃隘口",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 4,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S05",
+      "name": "白桦猎场",
+      "family": "birch-forest",
+      "ground": "forest",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S06",
+      "name": "芦苇避居营",
+      "family": "reed-marsh",
+      "ground": "wet-earth",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 1,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S07",
+      "name": "断轮磨坊",
+      "family": "birch-forest",
+      "ground": "forest",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 4,
+      "waters": 1,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S08",
+      "name": "陷井谷",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 4,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S09",
+      "name": "灰披军营",
+      "family": "meadow-earth",
+      "ground": "meadow",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 5,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S10",
+      "name": "裂隘关",
+      "family": "town-stone",
+      "ground": "bedrock",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S11",
+      "name": "松岬哨塔",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S12",
+      "name": "铁誓残院",
+      "family": "oath-ruin",
+      "ground": "flagstone",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S13",
+      "name": "断镐石场",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S14",
+      "name": "湿林庄园",
+      "family": "reed-marsh",
+      "ground": "wet-earth",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 1,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S15",
+      "name": "古渠泵院",
+      "family": "oath-ruin",
+      "ground": "wet-earth",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 1,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S16",
+      "name": "断岳驿口",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S17",
+      "name": "峭壁洞窟",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S18",
+      "name": "残旗军需站",
+      "family": "meadow-earth",
+      "ground": "meadow",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S19",
+      "name": "猎径伏杀地",
+      "family": "birch-forest",
+      "ground": "forest",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 4,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S20",
+      "name": "铁脊观察台",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S01-T1",
+      "name": "第三杯旅店",
+      "family": "warm-interior",
+      "ground": null,
+      "road": null,
+      "presentation": "flat-world-image",
+      "ready": true,
+      "actors": 2,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S01-T2",
+      "name": "远征行会厅",
+      "family": "warm-interior",
+      "ground": "wood",
+      "road": "wood",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S01-T3",
+      "name": "洛恩铁匠铺",
+      "family": "warm-interior",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S01-T4",
+      "name": "南渡转运仓",
+      "family": "town-stone",
+      "ground": "cobble",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 1,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S01-T5",
+      "name": "镇拘留所",
+      "family": "warm-interior",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "S01-T6",
+      "name": "归途广场亭",
+      "family": "town-stone",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U1-01",
+      "name": "暗仓货栈",
+      "family": "inhabited-undercity",
+      "ground": "bedrock",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U1-02",
+      "name": "鸣岩洞厅",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U1-03",
+      "name": "断链矿廊",
+      "family": "inhabited-undercity",
+      "ground": "bedrock",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 4,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U1-04",
+      "name": "余火居所",
+      "family": "inhabited-undercity",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 4,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U1-05",
+      "name": "铁锁监区",
+      "family": "inhabited-undercity",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U2-01",
+      "name": "封潮前厅",
+      "family": "drowned-crypt",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 1,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H01",
+      "name": "断岳山驿",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H02",
+      "name": "岩炉镇",
+      "family": "town-stone",
+      "ground": "cobble",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H03",
+      "name": "熔镜工匠院",
+      "family": "town-stone",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H04",
+      "name": "双裂采坑",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 4,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 2,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H05",
+      "name": "封炉矿井",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H06",
+      "name": "伤工棚街",
+      "family": "warm-interior",
+      "ground": "earth",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H07",
+      "name": "天堑石梁",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 4,
+      "waters": 0,
+      "bridges": 1,
+      "dryLandforms": 1,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H08",
+      "name": "断岳前堡",
+      "family": "town-stone",
+      "ground": "flagstone",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 4,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H09",
+      "name": "破阵军械岸",
+      "family": "town-stone",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H10",
+      "name": "巨岩矿门",
+      "family": "oath-ruin",
+      "ground": "flagstone",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H11",
+      "name": "铁契公署",
+      "family": "town-stone",
+      "ground": "cobble",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H12",
+      "name": "北岗军寨",
+      "family": "town-stone",
+      "ground": "earth",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 4,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H13",
+      "name": "风蚀誓廊",
+      "family": "oath-ruin",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H14",
+      "name": "鹰背岩林",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H15",
+      "name": "天索吊崖",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 1,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H16",
+      "name": "山南古道",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "H17",
+      "name": "余烬废窑",
+      "family": "mountain-quarry",
+      "ground": "earth",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 1,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B01",
+      "name": "旱谷出口",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 1,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B02",
+      "name": "北岸风道",
+      "family": "meadow-earth",
+      "ground": "meadow",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 1,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B03",
+      "name": "归帆镇",
+      "family": "town-stone",
+      "ground": "cobble",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B04",
+      "name": "余烬灯坊",
+      "family": "warm-interior",
+      "ground": "wet-earth",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B05",
+      "name": "河湾旅店",
+      "family": "warm-interior",
+      "ground": "earth",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B06",
+      "name": "风帆市集",
+      "family": "town-stone",
+      "ground": "cobble",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B07",
+      "name": "沉钟山岗",
+      "family": "meadow-earth",
+      "ground": "meadow",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B08",
+      "name": "沉钟旧堂",
+      "family": "oath-ruin",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B09",
+      "name": "黑签仓院",
+      "family": "town-stone",
+      "ground": "wet-earth",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B10",
+      "name": "怒潮码头",
+      "family": "town-stone",
+      "ground": "wet-earth",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 5,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B11",
+      "name": "天钩吊臂台",
+      "family": "town-stone",
+      "ground": "bedrock",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B12",
+      "name": "分潮水渠",
+      "family": "reed-marsh",
+      "ground": "wet-earth",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B13",
+      "name": "芦苇迷湾",
+      "family": "reed-marsh",
+      "ground": "wet-earth",
+      "road": "bedrock",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 4,
+      "waters": 2,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B14",
+      "name": "沉船墓场",
+      "family": "reed-marsh",
+      "ground": "wet-earth",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B15",
+      "name": "南岸农庄",
+      "family": "meadow-earth",
+      "ground": "meadow",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B16",
+      "name": "东岸古渡",
+      "family": "town-stone",
+      "ground": "wet-earth",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B17",
+      "name": "旧誓墓园",
+      "family": "oath-ruin",
+      "ground": "flagstone",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "B18",
+      "name": "双契宅院",
+      "family": "town-stone",
+      "ground": "cobble",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F01",
+      "name": "黑冠外集",
+      "family": "town-stone",
+      "ground": "cobble",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F02",
+      "name": "流火长街",
+      "family": "town-stone",
+      "ground": "cobble",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F03",
+      "name": "黑冠西门",
+      "family": "town-stone",
+      "ground": "flagstone",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F04",
+      "name": "铁锁工坊",
+      "family": "warm-interior",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F05",
+      "name": "黑旗旧营",
+      "family": "town-stone",
+      "ground": "earth",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F06",
+      "name": "黑印文书院",
+      "family": "town-stone",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F07",
+      "name": "东仓暗街",
+      "family": "town-stone",
+      "ground": "cobble",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F08",
+      "name": "铁旗广场",
+      "family": "town-stone",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 4,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F09",
+      "name": "西境弩台",
+      "family": "town-stone",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F10",
+      "name": "东境弩台",
+      "family": "town-stone",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F11",
+      "name": "凌城连廊",
+      "family": "oath-ruin",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F12",
+      "name": "决战休整庭",
+      "family": "town-stone",
+      "ground": "flagstone",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F13",
+      "name": "黑冠决战庭",
+      "family": "town-stone",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F14",
+      "name": "黑冠军械库",
+      "family": "warm-interior",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F15",
+      "name": "黑冠档案楼",
+      "family": "warm-interior",
+      "ground": "flagstone",
+      "road": "cobble",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F16",
+      "name": "干涸护城壕",
+      "family": "meadow-earth",
+      "ground": "earth",
+      "road": "earth",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 1,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "F17",
+      "name": "铁棘检修坡",
+      "family": "mountain-quarry",
+      "ground": "bedrock",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U1-06",
+      "name": "三誓军械廊",
+      "family": "oath-ruin",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U1-07",
+      "name": "震炉工坊",
+      "family": "inhabited-undercity",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U1-08",
+      "name": "天火深炉",
+      "family": "inhabited-undercity",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U1-09",
+      "name": "悬链绞盘井",
+      "family": "inhabited-undercity",
+      "ground": "bedrock",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 1,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U1-10",
+      "name": "见日长廊",
+      "family": "inhabited-undercity",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U2-02",
+      "name": "沉潮长厅",
+      "family": "drowned-crypt",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 4,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U2-03",
+      "name": "镇闸广场",
+      "family": "drowned-crypt",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U2-04",
+      "name": "守库人旧居",
+      "family": "warm-interior",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U2-05",
+      "name": "沉钟下殿",
+      "family": "drowned-crypt",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U2-06",
+      "name": "覆文档案廊",
+      "family": "drowned-crypt",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U2-07",
+      "name": "禁域祭仪库",
+      "family": "drowned-crypt",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 2,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U2-08",
+      "name": "无名囚室",
+      "family": "drowned-crypt",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 1,
+      "waters": 0,
+      "bridges": 0,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    },
+    {
+      "id": "U2-09",
+      "name": "堡外检修道",
+      "family": "drowned-crypt",
+      "ground": "flagstone",
+      "road": "flagstone",
+      "presentation": "painted-terrain-v1",
+      "ready": true,
+      "actors": 3,
+      "waters": 1,
+      "bridges": 1,
+      "dryLandforms": 0,
+      "oldWorldReleased": true
+    }
+  ],
+  "checks": {
+    "typecheck": "npm run check passed against the exact stable release3 scripts/scene snapshot",
+    "existingTerrainNavigationTests": "8 existing terrain/navigation checks passed; terrain and navigation source hashes remain identical across release2/release3",
+    "diffWhitespace": "git diff --check passed on task-owned tracked code"
+  },
+  "evidence": [
+    {
+      "file": "src/cocos/test-results/map-art-release3-all97.json",
+      "sha256": "9c0dd4164b7b0c2949e043577b0f26242fac95b273a6fc13295b35ddf020631a",
+      "bytes": 1211506
+    },
+    {
+      "file": "src/cocos/test-results/map-art-release3-closeups.json",
+      "sha256": "6829facaae4e042cfd82c371aa237ddb7a5a3390484594e469445b24b9d1243d",
+      "bytes": 703834
+    },
+    {
+      "file": "src/cocos/test-results/map-art-release3-browser-terrain.json",
+      "sha256": "15ec2fba96af06bbfb9e9df88566680ff05dddc54377a3d53957445a0aa7691a",
+      "bytes": 8127
+    },
+    {
+      "file": "src/cocos/test-results/map-art-release3-browser-release.json",
+      "sha256": "0f803044c943025cc4768c9a4a23e4ef4f2ca5c8eb62e04982bbea6907d070c7",
+      "bytes": 848
+    }
+  ],
+  "limits": [
+    "Direct area entries verify production rendering and cleanup, rather than legal story progression.",
+    "Mobile checks use browser touch/mobile emulation; physical-phone performance was not measured.",
+    "Existing compatible architecture and furniture are retained; this pass does not provide unique commissioned art for every building or full new character art.",
+    "512-square ground texture repetition remains visible in wide empty views; later composition and local landmark polish can build on this first pass."
+  ]
+}

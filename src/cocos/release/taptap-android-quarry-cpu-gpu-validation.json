@@ -1,0 +1,210 @@
+{
+  "date": "2026-11-12",
+  "version": "0.3.21",
+  "status": "passed-local-android-emulator",
+  "scene": "S13 断镐石场（WorldData旧名：旧石场）",
+  "targetFpsUnchanged": 60,
+  "defaultRunSpeedMetresPerSecond": 4,
+  "fastComparisonOnlyMetresPerSecond": 5.2,
+  "environment": {
+    "android": "14",
+    "api": "34",
+    "abi": "x86_64",
+    "nativeBridge": "libndk_translation.so",
+    "display": "Physical size: 1080x2412",
+    "density": "Physical density: 480",
+    "cpuTicksPerSecond": "100",
+    "hostCpu": {
+      "Name": "12th Gen Intel(R) Core(TM) i9-12900KF",
+      "NumberOfCores": 16,
+      "NumberOfLogicalProcessors": 24
+    },
+    "measuredAt": "2026-11-12T02:07:42.5120026+08:00"
+  },
+  "runtime": {
+    "route": {
+      "from": {
+        "x": 46,
+        "z": -44
+      },
+      "to": {
+        "x": 65.97375326953177,
+        "z": -60.64479439127648
+      },
+      "clearance": 74.81310045707237
+    },
+    "area": "S13",
+    "canvas": [
+      1608,
+      768
+    ],
+    "frameRate": 60,
+    "api": 7,
+    "timerBits": null,
+    "ua": "Mozilla/5.0 (Linux; Android 14; sdk_gphone64_x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Mobile Safari/537.36",
+    "viewport": [
+      804,
+      384
+    ],
+    "dpr": 3,
+    "fullscreen": true,
+    "renderer": "Android Emulator OpenGL ES Translator (NVIDIA GeForce RTX 3080/PCIe/SSE2)"
+  },
+  "coldCacheControlledAB": {
+    "run": {
+      "before": {
+        "samples": 2,
+        "frames": 204,
+        "fps": 12.049303588518873,
+        "mainThreadMsPerFrame": 69.19048153846154,
+        "mainThreadRangeMs": [
+          67.95117307692307,
+          70.42979000000003
+        ],
+        "emulatorHostGpu3DPercent": 2.082822037348093,
+        "guidancePeakMs": 979,
+        "drawCallsPerFrame": 146.47076923076924,
+        "navigationGridBytes": 0
+      },
+      "after": {
+        "samples": 2,
+        "frames": 922,
+        "fps": 57.51424242894467,
+        "mainThreadMsPerFrame": 4.849738584603801,
+        "mainThreadRangeMs": [
+          4.765751082251082,
+          4.93372608695652
+        ],
+        "emulatorHostGpu3DPercent": 9.574482300753065,
+        "guidancePeakMs": 56.39999999990687,
+        "drawCallsPerFrame": 146.47287784679088,
+        "navigationGridBytes": 40826
+      },
+      "mainThreadReductionPercent": 92.99074312424328
+    },
+    "fast": {
+      "before": {
+        "samples": 2,
+        "frames": 219,
+        "fps": 13.671467039188297,
+        "mainThreadMsPerFrame": 59.603849122807034,
+        "mainThreadRangeMs": [
+          57.01563157894737,
+          62.19206666666669
+        ],
+        "emulatorHostGpu3DPercent": 2.57318352872324,
+        "guidancePeakMs": 1051.5,
+        "drawCallsPerFrame": 145.86804511278194,
+        "navigationGridBytes": 0
+      },
+      "after": {
+        "samples": 2,
+        "frames": 927,
+        "fps": 57.824046676814,
+        "mainThreadMsPerFrame": 4.71843161633276,
+        "mainThreadRangeMs": [
+          4.631323275862062,
+          4.805539956803458
+        ],
+        "emulatorHostGpu3DPercent": 10.193922471060768,
+        "guidancePeakMs": 43.9000000001397,
+        "drawCallsPerFrame": 146.03883499664855,
+        "navigationGridBytes": 40826
+      },
+      "mainThreadReductionPercent": 92.0836796854999
+    }
+  },
+  "normalCacheSteady": {
+    "idle": {
+      "samples": 2,
+      "frames": 962,
+      "fps": 60.02747783167102,
+      "mainThreadMsPerFrame": 3.5655145530145544,
+      "mainThreadRangeMs": [
+        3.409288981288985,
+        3.7217401247401245
+      ],
+      "emulatorHostGpu3DPercent": 10.61752614621231,
+      "guidancePeakMs": 0.9000000001396984,
+      "drawCallsPerFrame": 176.0,
+      "navigationGridBytes": 40826
+    },
+    "run": {
+      "samples": 2,
+      "frames": 951,
+      "fps": 59.3570725087558,
+      "mainThreadMsPerFrame": 4.039192714968153,
+      "mainThreadRangeMs": [
+        3.7918291666666675,
+        4.286556263269638
+      ],
+      "emulatorHostGpu3DPercent": 10.22346428600068,
+      "guidancePeakMs": 26.399999999906868,
+      "drawCallsPerFrame": 173.86198911889596,
+      "navigationGridBytes": 40826
+    },
+    "fast": {
+      "samples": 2,
+      "frames": 957,
+      "fps": 59.75349045549427,
+      "mainThreadMsPerFrame": 3.954522348686681,
+      "mainThreadRangeMs": [
+        3.785634655532359,
+        4.123410041841003
+      ],
+      "emulatorHostGpu3DPercent": 10.3599018545949,
+      "guidancePeakMs": 23.799999999813735,
+      "drawCallsPerFrame": 174.2382578768529,
+      "navigationGridBytes": 40826
+    }
+  },
+  "discoveryFrames": 7633,
+  "coldABFrames": 2272,
+  "steadyFrames": 2870,
+  "applicationErrors": [],
+  "fix": {
+    "file": "src\\cocos\\assets\\scripts\\features\\navigation\\runtime\\Navigation.ts",
+    "sha256": "601904e45500a834a834d6a6948b8a1760f7ebc3cb47aac3fc51f084eaa9e5c1",
+    "beforeSha256": "b212e3d36d1c6a36a252baa1305529ea61838d60348f26f6a8e06f9bbbfdbf77",
+    "compiledFile": "src\\cocos\\build\\concept-2d-android-quarry\\assets\\main\\index.2d031.js",
+    "compiledSha256": "8fe982479479c0e8fde8537c4c65e5535d2c2b601b9800c8a8e4fdec080c1075",
+    "changes": [
+      "Retain existing A* and exact collider-footprint checks; precompute frontier coordinates and f-scores instead of decoding keys and recalculating hypot in every comparison.",
+      "Lazy directed-grid edge memoization with two bytes per cell; new Navigation instance invalidates it when scene geometry rebuilds.",
+      "Reuse unreachable results and evict one oldest route at the200-entry limit instead of clearing the entire route cache."
+    ]
+  },
+  "validation": {
+    "typescript": "passed",
+    "coreTypescript": "passed",
+    "existingTests": 116,
+    "existingTestsFailed": 0,
+    "cocosWebBuild": "passed",
+    "coldAB": "8 stages in paired forward/reverse order, route and edge caches cleared at each stage start; same loaded build, only Navigation.path switched.",
+    "steady": "6 stages in two reverse-order rounds; compiled optimized build, no injected methods.",
+    "profiling": "Separate diagnostic profile confirmed guidance/navigation dominance. Profiling stopped after19.92fps tripped an initial20fps diagnostic floor; raw profile retained and excluded from A/B averages.",
+    "gpuTimer": "EXT_disjoint_timer_query_webgl2 unavailable on Android Chrome113; no device GPU elapsed queries claimed.",
+    "gpuCounter": "Windows WDDM PERF_100NSEC_TIMER for entire qemu emulator process; 100*delta(rawUtilization)/delta(Timestamp_Sys100NS), interval includes counter collection while same mode continues."
+  },
+  "scope": {
+    "platform": "Actual Android14 API34 x86_64 AVD, Chrome113; WHPX + host RTX3080. Not TapTap client or ARM phone.",
+    "thermal": "No physical phone temperature, power or throttling measured.",
+    "memory": "40826bytes is the primary Navigation instance edge cache, not total game memory change. Other navigation instances allocate their own lazy grids. Quantized Chrome heap snapshots and browser-only meminfo are not comparable to TapTap device91 PSS.",
+    "discoveryVsFinalBuild": "Discovery used existing7469 build; final A/B and steady used isolated7492 build. Only within-build paired A/B is used to quantify the navigation fix; draw-call differences between test procedures/builds are not attributed to this fix.",
+    "gameplay": "Lv40 seed19; unobstructed26m back-and-forth route at least74.8m from enemies, no combat.",
+    "taptapPackage": "Existing0.3.21 guest ZIP predates this navigation fix; no new TapTap package or upload in this emulator follow-up."
+  },
+  "artifacts": "src/cocos/test-results/android-quarry-v1/",
+  "preview": "http://127.0.0.1:7492/?view=2d&player=3d",
+  "report": "docs/performance/android-quarry-cpu-gpu-2026-11-12.md",
+  "cleanup": {
+    "emulator": "Stopped after sampling; independent AVD and installed system images retained.",
+    "preview": "Independent preview retained on7492; original7469 preview unchanged."
+  },
+  "laterMovementConfiguration": {
+    "runMetresPerSecond": 5,
+    "walkMetresPerSecond": 2,
+    "validation": "src/cocos/release/taptap-movement-speed-v4-validation.json",
+    "note": "User changed defaults after the emulator benchmark; original4.0/5.2 performance samples remain historical."
+  }
+}

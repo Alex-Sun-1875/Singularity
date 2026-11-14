@@ -1,0 +1,71 @@
+{
+  "date": "2026-11-08",
+  "staticArtReview": "passed-for-pilot",
+  "reviewer": "Codex visual review of original sheet, apron seam detail, registered lower-body composite and16-frame anchor contact sheet",
+  "generationEvidence": [
+    "../r2-1-generation.json",
+    "../r2-1-side-passing-generation.json"
+  ],
+  "processingEvidence": [
+    "composite-processing.json",
+    "packing-processing.json",
+    "runtime-resample.json"
+  ],
+  "identity": [
+    "Same adult male miner, steel lamp helmet, brown beard, greyblue scarf, leather harness/apron, olive trousers and brown strapped boots",
+    "Original head/face/helmet/torso/arms/grip/pickaxe/apron pixels retained in both edited side cells",
+    "Other14 complete cells and all pixels outside authored lower-leg masks remain original RGBA byte-for-byte",
+    "Cloud edited legs are only row3 col2/4; lifted knee, planted support boot and narrowed passing silhouette read clearly; no old wide-stride boot fragments remain"
+  ],
+  "anchors": [
+    "One common .00665m/pixel source scale,1 multipliers on every frame; no per-frame fit",
+    "Walk origins follow stable helmet/core to idle height; advancing boot pixels do not move the entire body vertically",
+    "Attack anchors follow braced support feet instead of the pickaxe tip; genuine torso crouch remains",
+    "All16 subjects complete and padded, actual down,left,up,right without mirroring"
+  ],
+  "animationScope": [
+    "Two actual walking drawings per direction; side view now has contact and passing, not a newly generated full four-phase walk",
+    "Single committed strike drawing between actual idle windup/recovery",
+    "No invented hit/death/diagonal/native3D animation"
+  ],
+  "runtimeInstalled": true,
+  "runtimePlayReview": "passed representative real-game walk0/walk1/attack, HP loss and scene unload/reload at7473",
+  "userAcceptance": "not claimed",
+  "rootStaticReview": "Parent reviewed final-side-review and anchor-contact; passing gait silhouette and original upper-body preservation approved for two-pilot sample build",
+  "runtimeConceptId": "mine-worker",
+  "runtimeEvidence": {
+    "concept": "mine-worker",
+    "file": "src/cocos/test-results/enemy-combat-v1/mine-worker-runtime.json",
+    "sha256": "c8149a9761d38bc26c74e7be36a3cf107b43c698f6a0e9ed48ac8b2b11c43af4",
+    "area": "H03",
+    "seen": [
+      "walk-0",
+      "walk-1",
+      "attack"
+    ],
+    "afterUnload": {
+      "refCount": 0,
+      "isValid": false,
+      "heroValid": true,
+      "ownership": {
+        "disposed": false,
+        "enemyTextureCount": 0,
+        "estimatedEnemyRgbaBytes": 0,
+        "textures": [],
+        "heroAndNpcRefsOwned": false
+      }
+    },
+    "reload": {
+      "concept": "mine-worker",
+      "refCount": 1,
+      "width": 1024,
+      "height": 1024,
+      "valid": true,
+      "failure": ""
+    },
+    "consoleErrors": 0,
+    "requestFailures": 0,
+    "rootVisualReview": "PASS after real game sample at7473",
+    "native3D": "legacy unchanged"
+  }
+}

@@ -1,0 +1,191 @@
+{
+  "status": "single-frame local geometry guide; model not invoked; artistic acceptance pending",
+  "source_path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-turbo-pilot-v1\\originals-512x768\\standing-back-p0-rgba.png",
+  "source_sha256": "c40ddae5f25f3486700063a4268d760a4896177171cd82ac0ef078a55499b9f6",
+  "reused_geometry_module": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-klein-consistency-v1\\revision-v2\\sword-audit\\preserve_tip.py",
+  "reused_module_sha256": "d18349956b66a439037deb6044cfef481d64ed520fdbae1ff9313f995dfbff63",
+  "reused_config_sha256": "6fa045641a618093ec1e109c3db6a5faeb50d2a3c75808932e5abb74f3de6e98",
+  "legacy_make_layers_actually_called": true,
+  "translation_xy_integer": [
+    -31,
+    65
+  ],
+  "shoulder_mount_xy": [
+    283.0,
+    192.0
+  ],
+  "source_actual_tip_xy": [
+    198.01587756184927,
+    380.20570908826704
+  ],
+  "target_actual_tip_xy": [
+    167.01587756184927,
+    445.20570908826704
+  ],
+  "shoulder_mount_to_tip_length_ratio": 1.3486733106463191,
+  "full_sword_length_ratio_reference": 1.257163275575974,
+  "full_sword_measurement_limit": "Approx. 25.7% with upper grip/pommel reference s=-73.5 (~313,125). Overall visual length is approximate; complete sword includes this upper segment, while shoulder-to-tip grows 34.9%.",
+  "middle_axial_scale": 1.7742550232394918,
+  "middle_normal_scale": 1.0,
+  "terminal_transform": "complete original cap RGBA, integer translation only; no resampling/rotation/redraw",
+  "terminal_source_and_translated_rgba_bytes_equal": true,
+  "cap_core_equals_source_rgba": true,
+  "hand_core_rgba_byte_exact": true,
+  "hand_policy": "source RGBA foreground over sword; alpha>=230 exact original bytes; alpha=0 finger gaps stay open; no rectangle matte",
+  "hand_boxes_xyxy": [
+    [
+      146,
+      368,
+      187,
+      437
+    ],
+    [
+      323,
+      368,
+      364,
+      437
+    ]
+  ],
+  "changed_pixels": 2311,
+  "changed_outside_original_and_target_sword_union": 0,
+  "head_grip_mount_rgba_exact_above_y250": true,
+  "feet_exact_from_y650": true,
+  "model_seam_mask_nonzero_pixels": 1870,
+  "model_seam_mask_bbox_xyxy": [
+    181,
+    259,
+    264,
+    418
+  ],
+  "original_matte_rgb_differs_from_true_rgba_rgb_pixels": 83942,
+  "gray_background_issue": "Old RGB before is composited on (228,228,228). Old make_layers discards alpha. This adapter never uses that flattened RGB for composition: original true RGBA + premultiplied interpolation prevent gray/white hand-edge rectangles and transparent-RGB interpolation halos.",
+  "alpha_policy": "True original alpha, premultiplied RGBA interpolation, translated item alpha clipped to source alpha; no opaque review background is introduced. Original alpha exactly preserved outside the edit union.",
+  "uncertainties": [
+    "Sword is flattened into character; old 8x-supersampled item matte is a manually constrained estimate, not a recovered original item layer. Source cap boundary may contain tiny clothing-colour mixtures.",
+    "Exposed old sword/terminal slivers have no recorded hidden cloth. Adjacent original cloth/alpha interpolates an estimate; Qwen is restricted to the saved small seam mask for cleanup. This is not exact hidden-cloth recovery.",
+    "Original hand alpha is used as foreground within the audited hand boxes; any source-alpha defects are inherited. Finger-gap locations are retained from the source, not resegmented from skin colour."
+  ],
+  "legacy_geometry_metrics": {
+    "method": "pure local geometry; original cap RGBA integer translation; middle-only axial resampling",
+    "status": "prototype, not installed; local visual acceptance pending",
+    "base_xy": [
+      283.0,
+      192.0
+    ],
+    "legacy_tip_xy": [
+      200.0,
+      373.0
+    ],
+    "source_tip_xy": [
+      198.01587756184927,
+      380.20570908826704
+    ],
+    "source_tip_uncertainty_px": 1.0,
+    "target_tip_xy_requested": [
+      166.8,
+      445.4
+    ],
+    "target_tip_xy_raster": [
+      167.01587756184927,
+      445.20570908826704
+    ],
+    "target_error_xy_px": [
+      0.2158775618492541,
+      -0.194290911732935
+    ],
+    "translation_xy_integer": [
+      -31,
+      65
+    ],
+    "translation_sn": [
+      72.00571716127273,
+      -1.084756235655945
+    ],
+    "tip_transform_singular_values": [
+      1.0,
+      1.0
+    ],
+    "tip_rotation_degrees": 0,
+    "tip_rgba_source_vs_translated_equal": true,
+    "cap_opaque_rgb_exact_original": true,
+    "tip_source_alpha_nonzero_pixels": 484,
+    "tip_target_alpha_nonzero_pixels": 484,
+    "tip_source_bbox_xyxy": [
+      197,
+      345,
+      223,
+      381
+    ],
+    "source_tip_pixels_at_or_below_y382": 0,
+    "source_background_gray_pixels_inside_cap": 0,
+    "tip_source_rgba_sha256_raw": "4e795fa8f37c73f5462b8e1200560d0a617d929550a57480ce5097c64f027322",
+    "middle_start_s": 75.0,
+    "tip_lock_start_s": 168.0,
+    "middle_axial_scale_only": 1.7742550232394918,
+    "visible_length_ratio_from_actual_tip": 1.3486733106463191,
+    "changed_pixels": 2344,
+    "changed_outside_item_union": 0,
+    "original_pixels_above_y250_equal": true,
+    "exposed_old_item_fill_pixels": 625,
+    "cap_alpha_byte_sum_source": 110975,
+    "cap_alpha_byte_sum_target": 110975,
+    "source_tip_core_rgb_probe_xy": [
+      199,
+      380
+    ],
+    "source_tip_core_rgb_probe": [
+      120,
+      82,
+      61
+    ],
+    "quality_boundaries": [
+      "No model output is sampled. No tip resize, axial warp, redraw or rotation.",
+      "Only middle shaft is resampled along its axis. Tip RGBA is copied by integer translation.",
+      "Tiny exposed old-tip slivers are filled by interpolation from adjacent original cloth; hidden cloth cannot be exactly recovered.",
+      "No original cap matte exists; boundary accuracy still needs local visual acceptance.",
+      "Hands/occlusions should be restored from before.png by the integrating caller."
+    ]
+  },
+  "model_called": false,
+  "network_used": false,
+  "cloud_visual_inspection_used": false,
+  "production_modified": false,
+  "outputs": {
+    "guide-rgba.png": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\sword\\guide-rgba.png",
+      "sha256": "52bf475c6f16b7556844353144178e73c209cbf48b2f67630ec91309ffc83d65"
+    },
+    "edit-mask.png": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\sword\\edit-mask.png",
+      "sha256": "16658845a0afc96a908d0ab96a6fc7f018c76020bbb46240cc7629da571a1f4b"
+    },
+    "hand-protection-alpha.png": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\sword\\hand-protection-alpha.png",
+      "sha256": "17feb5ad61a1660aac15c57aca94d1f13df838ee36fbd9330ca75f575c839d2f"
+    },
+    "source-cap-rgba.png": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\sword\\source-cap-rgba.png",
+      "sha256": "5bf77ab58a05e25de0a9033ca05e44b2cee4b93d77d065cdcb786df1bc5978cf"
+    },
+    "translated-cap-rgba.png": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\sword\\translated-cap-rgba.png",
+      "sha256": "b874fa6d0041582f9f347fd24a1dc22eb212e67f8707d53310f1f07edda62403"
+    },
+    "source-sword-mask.png": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\sword\\source-sword-mask.png",
+      "sha256": "d3f1fce69d214758e15c5fc9bcff17de13578f44bfa92c4b277a4004573ca8cc"
+    },
+    "translated-cap-mask.png": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\sword\\translated-cap-mask.png",
+      "sha256": "06970e439b181f26545d8573662e0df52df52a1ee83143d9eebc5ae5b210a3bf"
+    },
+    "exposed-cloth-cleanup-mask.png": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\sword\\exposed-cloth-cleanup-mask.png",
+      "sha256": "29c6c3e20e4dc62c0c43cdf792b7127a32948614d273b0d0bf609a505b86f6b8"
+    },
+    "middle-mask.png": {
+      "path": "F:\\workspace\\Singularity\\source-art\\characters\\2d-concepts\\local-qwen21-consistency-v2\\sword\\middle-mask.png",
+      "sha256": "6531e0225649da553bc7482a44ebffd5595358980f65048fa1d2fb89fbf41aef"
+    }
+  }
+}

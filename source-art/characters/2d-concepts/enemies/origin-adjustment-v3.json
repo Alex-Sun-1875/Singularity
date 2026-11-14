@@ -1,0 +1,7139 @@
+{
+  "revision": "v3-ground-anchors",
+  "change": "Only perFrameOrigins X and default origin X; original alpha-derived Y and PNG bytes retained",
+  "beforeFixture": "src/cocos/test-results/enemy-flat-visual-qa-before-fix",
+  "afterFixture": "src/cocos/test-results/enemy-flat-visual-qa-origin-adjustment",
+  "fixtureDisclaimer": "Independent pose fixtures, not legal gameplay or pass evidence for bow override fix",
+  "proof": [
+    {
+      "id": "raider",
+      "changes": 46,
+      "PNGHashes": {
+        "atlas.png": "9c095988f386e8bc1de2340f8c5479093f22b49412581e4e7a2718f7a3e8ff01",
+        "attack.png": "de9aea25afd461a44a8c63277a4bb177372f0aedf4654f1bcdc944edce9d2532",
+        "hurt.png": "284352279f4d3306de86fff540dbb69b0be091efe7a86d5424dbac0f734aefb5"
+      },
+      "originYUnchanged": true
+    },
+    {
+      "id": "raider-archer",
+      "changes": 48,
+      "PNGHashes": {
+        "atlas.png": "2102ebf94cc85afe19c2b71aa17e21b72789cd4e849cf24053e85b269b930379",
+        "attack.png": "8b09d8c86a2e1339485170a99db84b8b385a825b9f602c015a8ed406f9f73431",
+        "hurt.png": "21aa227dc95af89fccc7a583c7f5c3071e36324a2f801f65957716a0be19ec9d"
+      },
+      "originYUnchanged": true
+    },
+    {
+      "id": "raider-shield",
+      "changes": 47,
+      "PNGHashes": {
+        "atlas.png": "246dde1a7d6706a871fcd9d17864b13938d4c9b82b8fbba09edf1cd4dba2731a",
+        "attack.png": "fbd02c137713a802ffc1c740cb0543887141d775d1dea4b2f4c3f79eeefc7996",
+        "hurt.png": "a6f8c35c80616a14352ee700e1ddb6908937abcf7f524359460aab868eab3b27"
+      },
+      "originYUnchanged": true
+    },
+    {
+      "id": "captain",
+      "changes": 48,
+      "PNGHashes": {
+        "atlas.png": "e41e91d601870f4b3190f698560548c9fc3e06fb43ee9cbd27d66535d2ee816b",
+        "attack.png": "a5c5caae9be584931d5efa19c550985f97313ff149238b482c7ba97f874e6d13",
+        "hurt.png": "76e3b0e5d2fa1145633c3d4bcf75f4d8783f56cb56b9bdf4b538f46a6186be47"
+      },
+      "originYUnchanged": true
+    }
+  ],
+  "frameChanges": {
+    "raider": {
+      "atlas.png": [
+        {
+          "index": 0,
+          "old": [
+            236,
+            237
+          ],
+          "proposed": [
+            198,
+            237
+          ],
+          "supports": [
+            {
+              "center": 150,
+              "peak": 235,
+              "range": [
+                137,
+                164
+              ],
+              "initialRange": [
+                137,
+                164
+              ]
+            },
+            {
+              "center": 247,
+              "peak": 235,
+              "range": [
+                234,
+                260
+              ],
+              "initialRange": [
+                233,
+                260
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 1,
+          "old": [
+            169,
+            237
+          ],
+          "proposed": [
+            190,
+            237
+          ],
+          "supports": [
+            {
+              "center": 169,
+              "peak": 235,
+              "range": [
+                159,
+                179
+              ],
+              "initialRange": [
+                159,
+                179
+              ]
+            },
+            {
+              "center": 211,
+              "peak": 218,
+              "range": [
+                202,
+                220
+              ],
+              "initialRange": [
+                202,
+                220
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 2,
+          "old": [
+            181,
+            236
+          ],
+          "proposed": [
+            195,
+            236
+          ],
+          "supports": [
+            {
+              "center": 182,
+              "peak": 235,
+              "range": [
+                172,
+                191
+              ],
+              "initialRange": [
+                172,
+                192
+              ]
+            },
+            {
+              "center": 208,
+              "peak": 222,
+              "range": [
+                199,
+                217
+              ],
+              "initialRange": [
+                198,
+                217
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 3,
+          "old": [
+            186,
+            237
+          ],
+          "proposed": [
+            196,
+            237
+          ],
+          "supports": [
+            {
+              "center": 186,
+              "peak": 235,
+              "range": [
+                175,
+                196
+              ],
+              "initialRange": [
+                175,
+                196
+              ]
+            },
+            {
+              "center": 207,
+              "peak": 212,
+              "range": [
+                204,
+                210
+              ],
+              "initialRange": [
+                204,
+                210
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 4,
+          "old": [
+            144,
+            236
+          ],
+          "proposed": [
+            192,
+            236
+          ],
+          "supports": [
+            {
+              "center": 143,
+              "peak": 234,
+              "range": [
+                133,
+                153
+              ],
+              "initialRange": [
+                133,
+                154
+              ]
+            },
+            {
+              "center": 240,
+              "peak": 228,
+              "range": [
+                221,
+                258
+              ],
+              "initialRange": [
+                221,
+                258
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 5,
+          "old": [
+            221,
+            235
+          ],
+          "proposed": [
+            189,
+            235
+          ],
+          "supports": [
+            {
+              "center": 226,
+              "peak": 234,
+              "range": [
+                215,
+                236
+              ],
+              "initialRange": [
+                211,
+                253
+              ]
+            },
+            {
+              "center": 152,
+              "peak": 228,
+              "range": [
+                138,
+                167
+              ],
+              "initialRange": [
+                131,
+                167
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 6,
+          "old": [
+            190,
+            233
+          ],
+          "proposed": [
+            184,
+            233
+          ],
+          "supports": [
+            {
+              "center": 184,
+              "peak": 232,
+              "range": [
+                167,
+                201
+              ],
+              "initialRange": [
+                147,
+                201
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 7,
+          "old": [
+            230,
+            233
+          ],
+          "proposed": [
+            190,
+            233
+          ],
+          "supports": [
+            {
+              "center": 236,
+              "peak": 232,
+              "range": [
+                228,
+                245
+              ],
+              "initialRange": [
+                221,
+                266
+              ]
+            },
+            {
+              "center": 143,
+              "peak": 228,
+              "range": [
+                131,
+                155
+              ],
+              "initialRange": [
+                118,
+                155
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 8,
+          "old": [
+            225,
+            236
+          ],
+          "proposed": [
+            190,
+            236
+          ],
+          "supports": [
+            {
+              "center": 141,
+              "peak": 234,
+              "range": [
+                128,
+                154
+              ],
+              "initialRange": [
+                128,
+                155
+              ]
+            },
+            {
+              "center": 238,
+              "peak": 234,
+              "range": [
+                225,
+                251
+              ],
+              "initialRange": [
+                224,
+                251
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 9,
+          "old": [
+            173,
+            237
+          ],
+          "proposed": [
+            192,
+            237
+          ],
+          "supports": [
+            {
+              "center": 172,
+              "peak": 236,
+              "range": [
+                163,
+                182
+              ],
+              "initialRange": [
+                163,
+                182
+              ]
+            },
+            {
+              "center": 213,
+              "peak": 218,
+              "range": [
+                206,
+                220
+              ],
+              "initialRange": [
+                206,
+                220
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 10,
+          "old": [
+            180,
+            237
+          ],
+          "proposed": [
+            180,
+            237
+          ],
+          "supports": [
+            {
+              "center": 180,
+              "peak": 235,
+              "range": [
+                171,
+                189
+              ],
+              "initialRange": [
+                171,
+                201
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 11,
+          "old": [
+            175,
+            237
+          ],
+          "proposed": [
+            175,
+            237
+          ],
+          "supports": [
+            {
+              "center": 175,
+              "peak": 235,
+              "range": [
+                166,
+                184
+              ],
+              "initialRange": [
+                166,
+                185
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 12,
+          "old": [
+            239,
+            236
+          ],
+          "proposed": [
+            193,
+            236
+          ],
+          "supports": [
+            {
+              "center": 242,
+              "peak": 234,
+              "range": [
+                231,
+                252
+              ],
+              "initialRange": [
+                229,
+                252
+              ]
+            },
+            {
+              "center": 144,
+              "peak": 229,
+              "range": [
+                126,
+                163
+              ],
+              "initialRange": [
+                126,
+                163
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 13,
+          "old": [
+            153,
+            236
+          ],
+          "proposed": [
+            193,
+            236
+          ],
+          "supports": [
+            {
+              "center": 146,
+              "peak": 235,
+              "range": [
+                135,
+                156
+              ],
+              "initialRange": [
+                117,
+                162
+              ]
+            },
+            {
+              "center": 240,
+              "peak": 231,
+              "range": [
+                227,
+                253
+              ],
+              "initialRange": [
+                227,
+                263
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 14,
+          "old": [
+            198,
+            233
+          ],
+          "proposed": [
+            200,
+            233
+          ],
+          "supports": [
+            {
+              "center": 200,
+              "peak": 231,
+              "range": [
+                172,
+                227
+              ],
+              "initialRange": [
+                172,
+                227
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 15,
+          "old": [
+            234,
+            236
+          ],
+          "proposed": [
+            194,
+            236
+          ],
+          "supports": [
+            {
+              "center": 139,
+              "peak": 234,
+              "range": [
+                131,
+                147
+              ],
+              "initialRange": [
+                108,
+                154
+              ]
+            },
+            {
+              "center": 248,
+              "peak": 231,
+              "range": [
+                234,
+                262
+              ],
+              "initialRange": [
+                234,
+                271
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        }
+      ],
+      "attack.png": [
+        {
+          "index": 0,
+          "old": [
+            250,
+            238
+          ],
+          "proposed": [
+            202,
+            238
+          ],
+          "supports": [
+            {
+              "center": 143,
+              "peak": 237,
+              "range": [
+                130,
+                156
+              ],
+              "initialRange": [
+                130,
+                160
+              ]
+            },
+            {
+              "center": 260,
+              "peak": 237,
+              "range": [
+                247,
+                272
+              ],
+              "initialRange": [
+                243,
+                272
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 1,
+          "old": [
+            233,
+            238
+          ],
+          "proposed": [
+            186,
+            238
+          ],
+          "supports": [
+            {
+              "center": 128,
+              "peak": 237,
+              "range": [
+                116,
+                141
+              ],
+              "initialRange": [
+                116,
+                145
+              ]
+            },
+            {
+              "center": 244,
+              "peak": 237,
+              "range": [
+                232,
+                257
+              ],
+              "initialRange": [
+                228,
+                257
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 2,
+          "old": [
+            224,
+            238
+          ],
+          "proposed": [
+            165,
+            238
+          ],
+          "supports": [
+            {
+              "center": 224,
+              "peak": 236,
+              "range": [
+                208,
+                240
+              ],
+              "initialRange": [
+                208,
+                240
+              ]
+            },
+            {
+              "center": 106,
+              "peak": 233,
+              "range": [
+                96,
+                115
+              ],
+              "initialRange": [
+                96,
+                116
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 3,
+          "old": [
+            137,
+            238
+          ],
+          "proposed": [
+            188,
+            238
+          ],
+          "supports": [
+            {
+              "center": 134,
+              "peak": 236,
+              "range": [
+                123,
+                146
+              ],
+              "initialRange": [
+                123,
+                149
+              ]
+            },
+            {
+              "center": 242,
+              "peak": 232,
+              "range": [
+                226,
+                259
+              ],
+              "initialRange": [
+                226,
+                259
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 4,
+          "old": [
+            139,
+            228
+          ],
+          "proposed": [
+            192,
+            228
+          ],
+          "supports": [
+            {
+              "center": 135,
+              "peak": 226,
+              "range": [
+                123,
+                147
+              ],
+              "initialRange": [
+                123,
+                147
+              ]
+            },
+            {
+              "center": 249,
+              "peak": 222,
+              "range": [
+                230,
+                268
+              ],
+              "initialRange": [
+                230,
+                268
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 5,
+          "old": [
+            119,
+            228
+          ],
+          "proposed": [
+            172,
+            228
+          ],
+          "supports": [
+            {
+              "center": 113,
+              "peak": 226,
+              "range": [
+                102,
+                124
+              ],
+              "initialRange": [
+                102,
+                124
+              ]
+            },
+            {
+              "center": 230,
+              "peak": 222,
+              "range": [
+                210,
+                249
+              ],
+              "initialRange": [
+                210,
+                249
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 6,
+          "old": [
+            104,
+            227
+          ],
+          "proposed": [
+            156,
+            227
+          ],
+          "supports": [
+            {
+              "center": 95,
+              "peak": 226,
+              "range": [
+                84,
+                106
+              ],
+              "initialRange": [
+                79,
+                106
+              ]
+            },
+            {
+              "center": 218,
+              "peak": 222,
+              "range": [
+                198,
+                239
+              ],
+              "initialRange": [
+                198,
+                239
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 7,
+          "old": [
+            129,
+            228
+          ],
+          "proposed": [
+            177,
+            228
+          ],
+          "supports": [
+            {
+              "center": 126,
+              "peak": 227,
+              "range": [
+                114,
+                137
+              ],
+              "initialRange": [
+                113,
+                137
+              ]
+            },
+            {
+              "center": 228,
+              "peak": 222,
+              "range": [
+                208,
+                247
+              ],
+              "initialRange": [
+                208,
+                247
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 8,
+          "old": [
+            146,
+            226
+          ],
+          "proposed": [
+            197,
+            226
+          ],
+          "supports": [
+            {
+              "center": 136,
+              "peak": 225,
+              "range": [
+                121,
+                151
+              ],
+              "initialRange": [
+                121,
+                155
+              ]
+            },
+            {
+              "center": 258,
+              "peak": 223,
+              "range": [
+                247,
+                270
+              ],
+              "initialRange": [
+                244,
+                270
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 9,
+          "old": [
+            213,
+            225
+          ],
+          "proposed": [
+            176,
+            225
+          ],
+          "supports": [
+            {
+              "center": 126,
+              "peak": 224,
+              "range": [
+                115,
+                136
+              ],
+              "initialRange": [
+                115,
+                142
+              ]
+            },
+            {
+              "center": 227,
+              "peak": 223,
+              "range": [
+                212,
+                242
+              ],
+              "initialRange": [
+                212,
+                242
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 10,
+          "old": [
+            103,
+            228
+          ],
+          "proposed": [
+            150,
+            228
+          ],
+          "supports": [
+            {
+              "center": 102,
+              "peak": 226,
+              "range": [
+                92,
+                111
+              ],
+              "initialRange": [
+                88,
+                125
+              ]
+            },
+            {
+              "center": 198,
+              "peak": 217,
+              "range": [
+                182,
+                215
+              ],
+              "initialRange": [
+                182,
+                215
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 11,
+          "old": [
+            228,
+            228
+          ],
+          "proposed": [
+            187,
+            228
+          ],
+          "supports": [
+            {
+              "center": 236,
+              "peak": 226,
+              "range": [
+                218,
+                254
+              ],
+              "initialRange": [
+                218,
+                254
+              ]
+            },
+            {
+              "center": 138,
+              "peak": 224,
+              "range": [
+                128,
+                148
+              ],
+              "initialRange": [
+                128,
+                150
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 12,
+          "old": [
+            159,
+            224
+          ],
+          "proposed": [
+            210,
+            224
+          ],
+          "supports": [
+            {
+              "center": 154,
+              "peak": 222,
+              "range": [
+                134,
+                174
+              ],
+              "initialRange": [
+                134,
+                174
+              ]
+            },
+            {
+              "center": 266,
+              "peak": 218,
+              "range": [
+                251,
+                281
+              ],
+              "initialRange": [
+                251,
+                281
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 13,
+          "old": [
+            146,
+            224
+          ],
+          "proposed": [
+            200,
+            224
+          ],
+          "supports": [
+            {
+              "center": 146,
+              "peak": 222,
+              "range": [
+                126,
+                166
+              ],
+              "initialRange": [
+                126,
+                166
+              ]
+            },
+            {
+              "center": 253,
+              "peak": 216,
+              "range": [
+                237,
+                269
+              ],
+              "initialRange": [
+                237,
+                269
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 14,
+          "old": [
+            142,
+            222
+          ],
+          "proposed": [
+            200,
+            222
+          ],
+          "supports": [
+            {
+              "center": 133,
+              "peak": 221,
+              "range": [
+                112,
+                154
+              ],
+              "initialRange": [
+                112,
+                154
+              ]
+            },
+            {
+              "center": 267,
+              "peak": 219,
+              "range": [
+                252,
+                282
+              ],
+              "initialRange": [
+                252,
+                284
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 15,
+          "old": [
+            159,
+            224
+          ],
+          "proposed": [
+            208,
+            224
+          ],
+          "supports": [
+            {
+              "center": 159,
+              "peak": 223,
+              "range": [
+                138,
+                180
+              ],
+              "initialRange": [
+                138,
+                180
+              ]
+            },
+            {
+              "center": 256,
+              "peak": 214,
+              "range": [
+                240,
+                273
+              ],
+              "initialRange": [
+                240,
+                273
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        }
+      ],
+      "hurt.png": [
+        {
+          "index": 0,
+          "old": [
+            257,
+            239
+          ],
+          "proposed": [
+            211,
+            239
+          ],
+          "supports": [
+            {
+              "center": 262,
+              "peak": 237,
+              "range": [
+                251,
+                274
+              ],
+              "initialRange": [
+                249,
+                274
+              ]
+            },
+            {
+              "center": 160,
+              "peak": 235,
+              "range": [
+                149,
+                171
+              ],
+              "initialRange": [
+                149,
+                173
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 1,
+          "old": [
+            251,
+            233
+          ],
+          "proposed": [
+            210,
+            233
+          ],
+          "supports": [
+            {
+              "center": 259,
+              "peak": 232,
+              "range": [
+                248,
+                270
+              ],
+              "initialRange": [
+                246,
+                270
+              ]
+            },
+            {
+              "center": 161,
+              "peak": 231,
+              "range": [
+                150,
+                172
+              ],
+              "initialRange": [
+                150,
+                172
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 2,
+          "old": [
+            222,
+            229
+          ],
+          "proposed": [
+            194,
+            229
+          ],
+          "supports": [
+            {
+              "center": 226,
+              "peak": 228,
+              "range": [
+                212,
+                241
+              ],
+              "initialRange": [
+                212,
+                241
+              ]
+            },
+            {
+              "center": 102,
+              "peak": 227,
+              "range": [
+                93,
+                112
+              ],
+              "initialRange": [
+                93,
+                127
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 3,
+          "old": [
+            236,
+            231
+          ],
+          "proposed": [
+            193,
+            231
+          ],
+          "supports": [
+            {
+              "center": 182,
+              "peak": 229,
+              "range": [
+                74,
+                290
+              ],
+              "initialRange": [
+                73,
+                306
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 4,
+          "old": [
+            176,
+            227
+          ],
+          "proposed": [
+            212,
+            227
+          ],
+          "supports": [
+            {
+              "center": 170,
+              "peak": 225,
+              "range": [
+                154,
+                185
+              ],
+              "initialRange": [
+                154,
+                185
+              ]
+            },
+            {
+              "center": 253,
+              "peak": 221,
+              "range": [
+                234,
+                272
+              ],
+              "initialRange": [
+                234,
+                272
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 5,
+          "old": [
+            169,
+            224
+          ],
+          "proposed": [
+            204,
+            224
+          ],
+          "supports": [
+            {
+              "center": 166,
+              "peak": 222,
+              "range": [
+                150,
+                181
+              ],
+              "initialRange": [
+                150,
+                181
+              ]
+            },
+            {
+              "center": 242,
+              "peak": 216,
+              "range": [
+                221,
+                262
+              ],
+              "initialRange": [
+                221,
+                262
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 6,
+          "old": [
+            173,
+            221
+          ],
+          "proposed": [
+            185,
+            221
+          ],
+          "supports": [
+            {
+              "center": 147,
+              "peak": 219,
+              "range": [
+                105,
+                189
+              ],
+              "initialRange": [
+                105,
+                192
+              ]
+            },
+            {
+              "center": 216,
+              "peak": 216,
+              "range": [
+                196,
+                235
+              ],
+              "initialRange": [
+                196,
+                235
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 7,
+          "old": [
+            171,
+            219
+          ],
+          "proposed": [
+            192,
+            219
+          ],
+          "supports": [
+            {
+              "center": 196,
+              "peak": 217,
+              "range": [
+                74,
+                318
+              ],
+              "initialRange": [
+                72,
+                318
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 8,
+          "old": [
+            244,
+            223
+          ],
+          "proposed": [
+            202,
+            223
+          ],
+          "supports": [
+            {
+              "center": 254,
+              "peak": 222,
+              "range": [
+                240,
+                267
+              ],
+              "initialRange": [
+                238,
+                267
+              ]
+            },
+            {
+              "center": 150,
+              "peak": 221,
+              "range": [
+                139,
+                160
+              ],
+              "initialRange": [
+                139,
+                163
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 9,
+          "old": [
+            216,
+            223
+          ],
+          "proposed": [
+            185,
+            223
+          ],
+          "supports": [
+            {
+              "center": 220,
+              "peak": 221,
+              "range": [
+                205,
+                236
+              ],
+              "initialRange": [
+                203,
+                236
+              ]
+            },
+            {
+              "center": 150,
+              "peak": 219,
+              "range": [
+                139,
+                161
+              ],
+              "initialRange": [
+                139,
+                164
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 10,
+          "old": [
+            164,
+            219
+          ],
+          "proposed": [
+            180,
+            219
+          ],
+          "supports": [
+            {
+              "center": 164,
+              "peak": 217,
+              "range": [
+                108,
+                220
+              ],
+              "initialRange": [
+                108,
+                224
+              ]
+            },
+            {
+              "center": 274,
+              "peak": 210,
+              "range": [
+                259,
+                290
+              ],
+              "initialRange": [
+                251,
+                290
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 11,
+          "old": [
+            129,
+            216
+          ],
+          "proposed": [
+            180,
+            216
+          ],
+          "supports": [
+            {
+              "center": 135,
+              "peak": 215,
+              "range": [
+                69,
+                201
+              ],
+              "initialRange": [
+                67,
+                286
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 12,
+          "old": [
+            242,
+            224
+          ],
+          "proposed": [
+            204,
+            224
+          ],
+          "supports": [
+            {
+              "center": 247,
+              "peak": 222,
+              "range": [
+                236,
+                258
+              ],
+              "initialRange": [
+                234,
+                259
+              ]
+            },
+            {
+              "center": 160,
+              "peak": 218,
+              "range": [
+                140,
+                181
+              ],
+              "initialRange": [
+                140,
+                181
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 13,
+          "old": [
+            253,
+            221
+          ],
+          "proposed": [
+            216,
+            221
+          ],
+          "supports": [
+            {
+              "center": 256,
+              "peak": 219,
+              "range": [
+                244,
+                268
+              ],
+              "initialRange": [
+                244,
+                271
+              ]
+            },
+            {
+              "center": 177,
+              "peak": 214,
+              "range": [
+                157,
+                197
+              ],
+              "initialRange": [
+                157,
+                197
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 14,
+          "old": [
+            220,
+            216
+          ],
+          "proposed": [
+            194,
+            216
+          ],
+          "supports": [
+            {
+              "center": 226,
+              "peak": 215,
+              "range": [
+                177,
+                276
+              ],
+              "initialRange": [
+                139,
+                278
+              ]
+            },
+            {
+              "center": 89,
+              "peak": 211,
+              "range": [
+                83,
+                95
+              ],
+              "initialRange": [
+                83,
+                102
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 15,
+          "old": [
+            181,
+            207
+          ],
+          "proposed": [
+            205,
+            207
+          ],
+          "supports": [
+            {
+              "center": 190,
+              "peak": 206,
+              "range": [
+                53,
+                327
+              ],
+              "initialRange": [
+                53,
+                327
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        }
+      ]
+    },
+    "raider-archer": {
+      "atlas.png": [
+        {
+          "index": 0,
+          "old": [
+            226,
+            233
+          ],
+          "proposed": [
+            192,
+            233
+          ],
+          "supports": [
+            {
+              "center": 149,
+              "peak": 231,
+              "range": [
+                136,
+                162
+              ],
+              "initialRange": [
+                136,
+                163
+              ]
+            },
+            {
+              "center": 236,
+              "peak": 231,
+              "range": [
+                223,
+                248
+              ],
+              "initialRange": [
+                222,
+                248
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 1,
+          "old": [
+            198,
+            234
+          ],
+          "proposed": [
+            201,
+            234
+          ],
+          "supports": [
+            {
+              "center": 201,
+              "peak": 233,
+              "range": [
+                190,
+                212
+              ],
+              "initialRange": [
+                176,
+                214
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 2,
+          "old": [
+            206,
+            234
+          ],
+          "proposed": [
+            191,
+            234
+          ],
+          "supports": [
+            {
+              "center": 208,
+              "peak": 233,
+              "range": [
+                196,
+                219
+              ],
+              "initialRange": [
+                196,
+                219
+              ]
+            },
+            {
+              "center": 174,
+              "peak": 221,
+              "range": [
+                166,
+                182
+              ],
+              "initialRange": [
+                166,
+                182
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 3,
+          "old": [
+            216,
+            235
+          ],
+          "proposed": [
+            196,
+            235
+          ],
+          "supports": [
+            {
+              "center": 220,
+              "peak": 233,
+              "range": [
+                209,
+                230
+              ],
+              "initialRange": [
+                208,
+                231
+              ]
+            },
+            {
+              "center": 171,
+              "peak": 214,
+              "range": [
+                163,
+                179
+              ],
+              "initialRange": [
+                163,
+                179
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 4,
+          "old": [
+            160,
+            230
+          ],
+          "proposed": [
+            190,
+            230
+          ],
+          "supports": [
+            {
+              "center": 154,
+              "peak": 228,
+              "range": [
+                143,
+                164
+              ],
+              "initialRange": [
+                143,
+                164
+              ]
+            },
+            {
+              "center": 226,
+              "peak": 225,
+              "range": [
+                209,
+                244
+              ],
+              "initialRange": [
+                209,
+                244
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 5,
+          "old": [
+            227,
+            228
+          ],
+          "proposed": [
+            191,
+            228
+          ],
+          "supports": [
+            {
+              "center": 234,
+              "peak": 227,
+              "range": [
+                222,
+                246
+              ],
+              "initialRange": [
+                218,
+                261
+              ]
+            },
+            {
+              "center": 148,
+              "peak": 224,
+              "range": [
+                138,
+                157
+              ],
+              "initialRange": [
+                128,
+                157
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 6,
+          "old": [
+            198,
+            229
+          ],
+          "proposed": [
+            185,
+            229
+          ],
+          "supports": [
+            {
+              "center": 200,
+              "peak": 228,
+              "range": [
+                183,
+                217
+              ],
+              "initialRange": [
+                183,
+                217
+              ]
+            },
+            {
+              "center": 170,
+              "peak": 224,
+              "range": [
+                160,
+                179
+              ],
+              "initialRange": [
+                153,
+                179
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 7,
+          "old": [
+            157,
+            227
+          ],
+          "proposed": [
+            195,
+            227
+          ],
+          "supports": [
+            {
+              "center": 150,
+              "peak": 225,
+              "range": [
+                139,
+                160
+              ],
+              "initialRange": [
+                128,
+                160
+              ]
+            },
+            {
+              "center": 240,
+              "peak": 224,
+              "range": [
+                228,
+                253
+              ],
+              "initialRange": [
+                224,
+                265
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 8,
+          "old": [
+            166,
+            227
+          ],
+          "proposed": [
+            197,
+            227
+          ],
+          "supports": [
+            {
+              "center": 156,
+              "peak": 225,
+              "range": [
+                142,
+                169
+              ],
+              "initialRange": [
+                142,
+                169
+              ]
+            },
+            {
+              "center": 238,
+              "peak": 224,
+              "range": [
+                225,
+                250
+              ],
+              "initialRange": [
+                224,
+                250
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 9,
+          "old": [
+            212,
+            227
+          ],
+          "proposed": [
+            195,
+            227
+          ],
+          "supports": [
+            {
+              "center": 214,
+              "peak": 225,
+              "range": [
+                204,
+                224
+              ],
+              "initialRange": [
+                204,
+                233
+              ]
+            },
+            {
+              "center": 176,
+              "peak": 210,
+              "range": [
+                168,
+                183
+              ],
+              "initialRange": [
+                168,
+                183
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 10,
+          "old": [
+            207,
+            229
+          ],
+          "proposed": [
+            191,
+            229
+          ],
+          "supports": [
+            {
+              "center": 208,
+              "peak": 227,
+              "range": [
+                199,
+                217
+              ],
+              "initialRange": [
+                199,
+                217
+              ]
+            },
+            {
+              "center": 174,
+              "peak": 215,
+              "range": [
+                165,
+                184
+              ],
+              "initialRange": [
+                164,
+                184
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 11,
+          "old": [
+            214,
+            229
+          ],
+          "proposed": [
+            190,
+            229
+          ],
+          "supports": [
+            {
+              "center": 215,
+              "peak": 228,
+              "range": [
+                206,
+                224
+              ],
+              "initialRange": [
+                206,
+                226
+              ]
+            },
+            {
+              "center": 165,
+              "peak": 216,
+              "range": [
+                157,
+                173
+              ],
+              "initialRange": [
+                151,
+                173
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 12,
+          "old": [
+            175,
+            231
+          ],
+          "proposed": [
+            196,
+            231
+          ],
+          "supports": [
+            {
+              "center": 166,
+              "peak": 229,
+              "range": [
+                147,
+                184
+              ],
+              "initialRange": [
+                147,
+                184
+              ]
+            },
+            {
+              "center": 225,
+              "peak": 227,
+              "range": [
+                209,
+                241
+              ],
+              "initialRange": [
+                209,
+                241
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 13,
+          "old": [
+            230,
+            229
+          ],
+          "proposed": [
+            196,
+            229
+          ],
+          "supports": [
+            {
+              "center": 154,
+              "peak": 227,
+              "range": [
+                146,
+                162
+              ],
+              "initialRange": [
+                127,
+                169
+              ]
+            },
+            {
+              "center": 238,
+              "peak": 226,
+              "range": [
+                226,
+                250
+              ],
+              "initialRange": [
+                226,
+                261
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 14,
+          "old": [
+            178,
+            231
+          ],
+          "proposed": [
+            194,
+            231
+          ],
+          "supports": [
+            {
+              "center": 174,
+              "peak": 229,
+              "range": [
+                156,
+                193
+              ],
+              "initialRange": [
+                156,
+                193
+              ]
+            },
+            {
+              "center": 215,
+              "peak": 225,
+              "range": [
+                206,
+                224
+              ],
+              "initialRange": [
+                206,
+                233
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 15,
+          "old": [
+            231,
+            229
+          ],
+          "proposed": [
+            196,
+            229
+          ],
+          "supports": [
+            {
+              "center": 150,
+              "peak": 228,
+              "range": [
+                142,
+                159
+              ],
+              "initialRange": [
+                123,
+                166
+              ]
+            },
+            {
+              "center": 242,
+              "peak": 226,
+              "range": [
+                229,
+                256
+              ],
+              "initialRange": [
+                229,
+                265
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        }
+      ],
+      "attack.png": [
+        {
+          "index": 0,
+          "old": [
+            151,
+            237
+          ],
+          "proposed": [
+            192,
+            237
+          ],
+          "supports": [
+            {
+              "center": 243,
+              "peak": 235,
+              "range": [
+                231,
+                255
+              ],
+              "initialRange": [
+                227,
+                255
+              ]
+            },
+            {
+              "center": 142,
+              "peak": 235,
+              "range": [
+                130,
+                153
+              ],
+              "initialRange": [
+                130,
+                156
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 1,
+          "old": [
+            151,
+            237
+          ],
+          "proposed": [
+            192,
+            237
+          ],
+          "supports": [
+            {
+              "center": 243,
+              "peak": 235,
+              "range": [
+                231,
+                255
+              ],
+              "initialRange": [
+                228,
+                255
+              ]
+            },
+            {
+              "center": 142,
+              "peak": 235,
+              "range": [
+                130,
+                153
+              ],
+              "initialRange": [
+                130,
+                156
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 2,
+          "old": [
+            150,
+            237
+          ],
+          "proposed": [
+            193,
+            237
+          ],
+          "supports": [
+            {
+              "center": 244,
+              "peak": 235,
+              "range": [
+                231,
+                256
+              ],
+              "initialRange": [
+                228,
+                256
+              ]
+            },
+            {
+              "center": 142,
+              "peak": 235,
+              "range": [
+                130,
+                153
+              ],
+              "initialRange": [
+                130,
+                155
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 3,
+          "old": [
+            150,
+            237
+          ],
+          "proposed": [
+            193,
+            237
+          ],
+          "supports": [
+            {
+              "center": 244,
+              "peak": 235,
+              "range": [
+                231,
+                256
+              ],
+              "initialRange": [
+                229,
+                256
+              ]
+            },
+            {
+              "center": 142,
+              "peak": 235,
+              "range": [
+                130,
+                154
+              ],
+              "initialRange": [
+                130,
+                156
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 4,
+          "old": [
+            137,
+            236
+          ],
+          "proposed": [
+            178,
+            236
+          ],
+          "supports": [
+            {
+              "center": 130,
+              "peak": 235,
+              "range": [
+                122,
+                139
+              ],
+              "initialRange": [
+                122,
+                142
+              ]
+            },
+            {
+              "center": 226,
+              "peak": 231,
+              "range": [
+                208,
+                244
+              ],
+              "initialRange": [
+                208,
+                244
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 5,
+          "old": [
+            137,
+            236
+          ],
+          "proposed": [
+            178,
+            236
+          ],
+          "supports": [
+            {
+              "center": 130,
+              "peak": 235,
+              "range": [
+                122,
+                139
+              ],
+              "initialRange": [
+                122,
+                142
+              ]
+            },
+            {
+              "center": 226,
+              "peak": 231,
+              "range": [
+                208,
+                244
+              ],
+              "initialRange": [
+                208,
+                244
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 6,
+          "old": [
+            138,
+            236
+          ],
+          "proposed": [
+            178,
+            236
+          ],
+          "supports": [
+            {
+              "center": 130,
+              "peak": 235,
+              "range": [
+                122,
+                139
+              ],
+              "initialRange": [
+                122,
+                142
+              ]
+            },
+            {
+              "center": 226,
+              "peak": 232,
+              "range": [
+                209,
+                244
+              ],
+              "initialRange": [
+                209,
+                244
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 7,
+          "old": [
+            139,
+            236
+          ],
+          "proposed": [
+            180,
+            236
+          ],
+          "supports": [
+            {
+              "center": 132,
+              "peak": 235,
+              "range": [
+                123,
+                141
+              ],
+              "initialRange": [
+                123,
+                143
+              ]
+            },
+            {
+              "center": 227,
+              "peak": 231,
+              "range": [
+                209,
+                245
+              ],
+              "initialRange": [
+                209,
+                245
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 8,
+          "old": [
+            152,
+            234
+          ],
+          "proposed": [
+            197,
+            234
+          ],
+          "supports": [
+            {
+              "center": 142,
+              "peak": 233,
+              "range": [
+                130,
+                155
+              ],
+              "initialRange": [
+                130,
+                158
+              ]
+            },
+            {
+              "center": 252,
+              "peak": 232,
+              "range": [
+                242,
+                262
+              ],
+              "initialRange": [
+                240,
+                262
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 9,
+          "old": [
+            152,
+            234
+          ],
+          "proposed": [
+            197,
+            234
+          ],
+          "supports": [
+            {
+              "center": 142,
+              "peak": 233,
+              "range": [
+                130,
+                155
+              ],
+              "initialRange": [
+                130,
+                159
+              ]
+            },
+            {
+              "center": 252,
+              "peak": 232,
+              "range": [
+                242,
+                262
+              ],
+              "initialRange": [
+                240,
+                262
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 10,
+          "old": [
+            152,
+            234
+          ],
+          "proposed": [
+            197,
+            234
+          ],
+          "supports": [
+            {
+              "center": 142,
+              "peak": 232,
+              "range": [
+                130,
+                155
+              ],
+              "initialRange": [
+                130,
+                158
+              ]
+            },
+            {
+              "center": 252,
+              "peak": 232,
+              "range": [
+                242,
+                262
+              ],
+              "initialRange": [
+                241,
+                262
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 11,
+          "old": [
+            152,
+            234
+          ],
+          "proposed": [
+            200,
+            234
+          ],
+          "supports": [
+            {
+              "center": 144,
+              "peak": 233,
+              "range": [
+                131,
+                156
+              ],
+              "initialRange": [
+                131,
+                159
+              ]
+            },
+            {
+              "center": 255,
+              "peak": 232,
+              "range": [
+                245,
+                265
+              ],
+              "initialRange": [
+                244,
+                265
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 12,
+          "old": [
+            170,
+            238
+          ],
+          "proposed": [
+            210,
+            238
+          ],
+          "supports": [
+            {
+              "center": 166,
+              "peak": 236,
+              "range": [
+                148,
+                185
+              ],
+              "initialRange": [
+                148,
+                185
+              ]
+            },
+            {
+              "center": 253,
+              "peak": 232,
+              "range": [
+                239,
+                267
+              ],
+              "initialRange": [
+                239,
+                267
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 13,
+          "old": [
+            170,
+            238
+          ],
+          "proposed": [
+            210,
+            238
+          ],
+          "supports": [
+            {
+              "center": 166,
+              "peak": 236,
+              "range": [
+                148,
+                185
+              ],
+              "initialRange": [
+                148,
+                185
+              ]
+            },
+            {
+              "center": 254,
+              "peak": 232,
+              "range": [
+                240,
+                268
+              ],
+              "initialRange": [
+                240,
+                268
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 14,
+          "old": [
+            170,
+            238
+          ],
+          "proposed": [
+            210,
+            238
+          ],
+          "supports": [
+            {
+              "center": 166,
+              "peak": 236,
+              "range": [
+                148,
+                185
+              ],
+              "initialRange": [
+                148,
+                185
+              ]
+            },
+            {
+              "center": 254,
+              "peak": 232,
+              "range": [
+                239,
+                268
+              ],
+              "initialRange": [
+                239,
+                268
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 15,
+          "old": [
+            170,
+            238
+          ],
+          "proposed": [
+            210,
+            238
+          ],
+          "supports": [
+            {
+              "center": 166,
+              "peak": 236,
+              "range": [
+                148,
+                185
+              ],
+              "initialRange": [
+                148,
+                185
+              ]
+            },
+            {
+              "center": 254,
+              "peak": 232,
+              "range": [
+                240,
+                268
+              ],
+              "initialRange": [
+                240,
+                268
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        }
+      ],
+      "hurt.png": [
+        {
+          "index": 0,
+          "old": [
+            160,
+            245
+          ],
+          "proposed": [
+            197,
+            245
+          ],
+          "supports": [
+            {
+              "center": 154,
+              "peak": 243,
+              "range": [
+                144,
+                164
+              ],
+              "initialRange": [
+                144,
+                167
+              ]
+            },
+            {
+              "center": 240,
+              "peak": 241,
+              "range": [
+                226,
+                255
+              ],
+              "initialRange": [
+                226,
+                255
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 1,
+          "old": [
+            147,
+            245
+          ],
+          "proposed": [
+            181,
+            245
+          ],
+          "supports": [
+            {
+              "center": 140,
+              "peak": 244,
+              "range": [
+                131,
+                150
+              ],
+              "initialRange": [
+                131,
+                153
+              ]
+            },
+            {
+              "center": 222,
+              "peak": 241,
+              "range": [
+                208,
+                236
+              ],
+              "initialRange": [
+                207,
+                236
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 2,
+          "old": [
+            170,
+            245
+          ],
+          "proposed": [
+            184,
+            245
+          ],
+          "supports": [
+            {
+              "center": 104,
+              "peak": 243,
+              "range": [
+                87,
+                120
+              ],
+              "initialRange": [
+                87,
+                120
+              ]
+            },
+            {
+              "center": 270,
+              "peak": 243,
+              "range": [
+                257,
+                283
+              ],
+              "initialRange": [
+                237,
+                283
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 3,
+          "old": [
+            175,
+            251
+          ],
+          "proposed": [
+            184,
+            251
+          ],
+          "supports": [
+            {
+              "center": 157,
+              "peak": 249,
+              "range": [
+                104,
+                210
+              ],
+              "initialRange": [
+                103,
+                245
+              ]
+            },
+            {
+              "center": 70,
+              "peak": 240,
+              "range": [
+                55,
+                84
+              ],
+              "initialRange": [
+                55,
+                84
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 4,
+          "old": [
+            180,
+            236
+          ],
+          "proposed": [
+            206,
+            236
+          ],
+          "supports": [
+            {
+              "center": 176,
+              "peak": 234,
+              "range": [
+                161,
+                190
+              ],
+              "initialRange": [
+                161,
+                190
+              ]
+            },
+            {
+              "center": 237,
+              "peak": 228,
+              "range": [
+                220,
+                254
+              ],
+              "initialRange": [
+                220,
+                254
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 5,
+          "old": [
+            156,
+            236
+          ],
+          "proposed": [
+            182,
+            236
+          ],
+          "supports": [
+            {
+              "center": 154,
+              "peak": 234,
+              "range": [
+                138,
+                169
+              ],
+              "initialRange": [
+                138,
+                169
+              ]
+            },
+            {
+              "center": 210,
+              "peak": 226,
+              "range": [
+                191,
+                229
+              ],
+              "initialRange": [
+                191,
+                229
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 6,
+          "old": [
+            109,
+            236
+          ],
+          "proposed": [
+            182,
+            236
+          ],
+          "supports": [
+            {
+              "center": 111,
+              "peak": 234,
+              "range": [
+                94,
+                128
+              ],
+              "initialRange": [
+                94,
+                131
+              ]
+            },
+            {
+              "center": 172,
+              "peak": 228,
+              "range": [
+                141,
+                203
+              ],
+              "initialRange": [
+                133,
+                210
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 7,
+          "old": [
+            175,
+            235
+          ],
+          "proposed": [
+            179,
+            235
+          ],
+          "supports": [
+            {
+              "center": 153,
+              "peak": 234,
+              "range": [
+                79,
+                227
+              ],
+              "initialRange": [
+                60,
+                248
+              ]
+            },
+            {
+              "center": 300,
+              "peak": 217,
+              "range": [
+                296,
+                304
+              ],
+              "initialRange": [
+                296,
+                304
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 8,
+          "old": [
+            245,
+            218
+          ],
+          "proposed": [
+            204,
+            218
+          ],
+          "supports": [
+            {
+              "center": 254,
+              "peak": 217,
+              "range": [
+                241,
+                267
+              ],
+              "initialRange": [
+                238,
+                267
+              ]
+            },
+            {
+              "center": 153,
+              "peak": 216,
+              "range": [
+                143,
+                163
+              ],
+              "initialRange": [
+                143,
+                168
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 9,
+          "old": [
+            211,
+            218
+          ],
+          "proposed": [
+            172,
+            218
+          ],
+          "supports": [
+            {
+              "center": 219,
+              "peak": 216,
+              "range": [
+                200,
+                238
+              ],
+              "initialRange": [
+                200,
+                238
+              ]
+            },
+            {
+              "center": 124,
+              "peak": 216,
+              "range": [
+                114,
+                135
+              ],
+              "initialRange": [
+                114,
+                140
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 10,
+          "old": [
+            72,
+            216
+          ],
+          "proposed": [
+            148,
+            216
+          ],
+          "supports": [
+            {
+              "center": 59,
+              "peak": 214,
+              "range": [
+                40,
+                78
+              ],
+              "initialRange": [
+                38,
+                86
+              ]
+            },
+            {
+              "center": 124,
+              "peak": 214,
+              "range": [
+                112,
+                137
+              ],
+              "initialRange": [
+                112,
+                210
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 11,
+          "old": [
+            65,
+            204
+          ],
+          "proposed": [
+            170,
+            204
+          ],
+          "supports": [
+            {
+              "center": 70,
+              "peak": 203,
+              "range": [
+                52,
+                88
+              ],
+              "initialRange": [
+                52,
+                143
+              ]
+            },
+            {
+              "center": 160,
+              "peak": 196,
+              "range": [
+                155,
+                166
+              ],
+              "initialRange": [
+                152,
+                173
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 12,
+          "old": [
+            224,
+            213
+          ],
+          "proposed": [
+            195,
+            213
+          ],
+          "supports": [
+            {
+              "center": 228,
+              "peak": 212,
+              "range": [
+                213,
+                242
+              ],
+              "initialRange": [
+                213,
+                243
+              ]
+            },
+            {
+              "center": 162,
+              "peak": 203,
+              "range": [
+                143,
+                180
+              ],
+              "initialRange": [
+                143,
+                180
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 13,
+          "old": [
+            198,
+            208
+          ],
+          "proposed": [
+            176,
+            208
+          ],
+          "supports": [
+            {
+              "center": 205,
+              "peak": 207,
+              "range": [
+                191,
+                219
+              ],
+              "initialRange": [
+                191,
+                221
+              ]
+            },
+            {
+              "center": 146,
+              "peak": 203,
+              "range": [
+                127,
+                165
+              ],
+              "initialRange": [
+                127,
+                165
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 14,
+          "old": [
+            217,
+            207
+          ],
+          "proposed": [
+            184,
+            207
+          ],
+          "supports": [
+            {
+              "center": 222,
+              "peak": 206,
+              "range": [
+                148,
+                295
+              ],
+              "initialRange": [
+                137,
+                297
+              ]
+            },
+            {
+              "center": 82,
+              "peak": 200,
+              "range": [
+                65,
+                99
+              ],
+              "initialRange": [
+                65,
+                99
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 15,
+          "old": [
+            148,
+            213
+          ],
+          "proposed": [
+            188,
+            213
+          ],
+          "supports": [
+            {
+              "center": 209,
+              "peak": 211,
+              "range": [
+                107,
+                311
+              ],
+              "initialRange": [
+                71,
+                314
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        }
+      ]
+    },
+    "raider-shield": {
+      "atlas.png": [
+        {
+          "index": 0,
+          "old": [
+            262,
+            249
+          ],
+          "proposed": [
+            203,
+            249
+          ],
+          "supports": [
+            {
+              "center": 262,
+              "peak": 247,
+              "range": [
+                249,
+                274
+              ],
+              "initialRange": [
+                244,
+                274
+              ]
+            },
+            {
+              "center": 144,
+              "peak": 242,
+              "range": [
+                126,
+                161
+              ],
+              "initialRange": [
+                126,
+                167
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 1,
+          "old": [
+            211,
+            252
+          ],
+          "proposed": [
+            211,
+            252
+          ],
+          "supports": [
+            {
+              "center": 211,
+              "peak": 250,
+              "range": [
+                200,
+                222
+              ],
+              "initialRange": [
+                200,
+                222
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 2,
+          "old": [
+            184,
+            249
+          ],
+          "proposed": [
+            200,
+            249
+          ],
+          "supports": [
+            {
+              "center": 184,
+              "peak": 247,
+              "range": [
+                174,
+                194
+              ],
+              "initialRange": [
+                174,
+                195
+              ]
+            },
+            {
+              "center": 215,
+              "peak": 224,
+              "range": [
+                207,
+                223
+              ],
+              "initialRange": [
+                207,
+                223
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 3,
+          "old": [
+            165,
+            249
+          ],
+          "proposed": [
+            166,
+            249
+          ],
+          "supports": [
+            {
+              "center": 166,
+              "peak": 248,
+              "range": [
+                152,
+                179
+              ],
+              "initialRange": [
+                152,
+                179
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 4,
+          "old": [
+            151,
+            248
+          ],
+          "proposed": [
+            200,
+            248
+          ],
+          "supports": [
+            {
+              "center": 150,
+              "peak": 247,
+              "range": [
+                140,
+                161
+              ],
+              "initialRange": [
+                138,
+                161
+              ]
+            },
+            {
+              "center": 250,
+              "peak": 237,
+              "range": [
+                229,
+                271
+              ],
+              "initialRange": [
+                229,
+                271
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 5,
+          "old": [
+            252,
+            245
+          ],
+          "proposed": [
+            204,
+            245
+          ],
+          "supports": [
+            {
+              "center": 254,
+              "peak": 243,
+              "range": [
+                244,
+                264
+              ],
+              "initialRange": [
+                238,
+                287
+              ]
+            },
+            {
+              "center": 154,
+              "peak": 237,
+              "range": [
+                142,
+                166
+              ],
+              "initialRange": [
+                127,
+                166
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 6,
+          "old": [
+            209,
+            249
+          ],
+          "proposed": [
+            190,
+            249
+          ],
+          "supports": [
+            {
+              "center": 206,
+              "peak": 248,
+              "range": [
+                184,
+                227
+              ],
+              "initialRange": [
+                184,
+                227
+              ]
+            },
+            {
+              "center": 174,
+              "peak": 224,
+              "range": [
+                167,
+                181
+              ],
+              "initialRange": [
+                167,
+                181
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 7,
+          "old": [
+            237,
+            244
+          ],
+          "proposed": [
+            188,
+            244
+          ],
+          "supports": [
+            {
+              "center": 242,
+              "peak": 243,
+              "range": [
+                228,
+                256
+              ],
+              "initialRange": [
+                223,
+                271
+              ]
+            },
+            {
+              "center": 133,
+              "peak": 226,
+              "range": [
+                124,
+                142
+              ],
+              "initialRange": [
+                122,
+                142
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 8,
+          "old": [
+            243,
+            248
+          ],
+          "proposed": [
+            196,
+            248
+          ],
+          "supports": [
+            {
+              "center": 254,
+              "peak": 247,
+              "range": [
+                238,
+                270
+              ],
+              "initialRange": [
+                238,
+                272
+              ]
+            },
+            {
+              "center": 138,
+              "peak": 245,
+              "range": [
+                125,
+                150
+              ],
+              "initialRange": [
+                124,
+                152
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 9,
+          "old": [
+            191,
+            251
+          ],
+          "proposed": [
+            189,
+            251
+          ],
+          "supports": [
+            {
+              "center": 189,
+              "peak": 249,
+              "range": [
+                178,
+                200
+              ],
+              "initialRange": [
+                168,
+                215
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 10,
+          "old": [
+            196,
+            247
+          ],
+          "proposed": [
+            184,
+            247
+          ],
+          "supports": [
+            {
+              "center": 198,
+              "peak": 245,
+              "range": [
+                188,
+                207
+              ],
+              "initialRange": [
+                187,
+                208
+              ]
+            },
+            {
+              "center": 170,
+              "peak": 221,
+              "range": [
+                161,
+                179
+              ],
+              "initialRange": [
+                161,
+                179
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 11,
+          "old": [
+            184,
+            248
+          ],
+          "proposed": [
+            182,
+            248
+          ],
+          "supports": [
+            {
+              "center": 182,
+              "peak": 246,
+              "range": [
+                172,
+                192
+              ],
+              "initialRange": [
+                165,
+                192
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 12,
+          "old": [
+            242,
+            250
+          ],
+          "proposed": [
+            198,
+            250
+          ],
+          "supports": [
+            {
+              "center": 242,
+              "peak": 248,
+              "range": [
+                231,
+                253
+              ],
+              "initialRange": [
+                231,
+                253
+              ]
+            },
+            {
+              "center": 155,
+              "peak": 241,
+              "range": [
+                133,
+                177
+              ],
+              "initialRange": [
+                133,
+                177
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 13,
+          "old": [
+            149,
+            246
+          ],
+          "proposed": [
+            184,
+            246
+          ],
+          "supports": [
+            {
+              "center": 139,
+              "peak": 244,
+              "range": [
+                127,
+                151
+              ],
+              "initialRange": [
+                108,
+                157
+              ]
+            },
+            {
+              "center": 230,
+              "peak": 241,
+              "range": [
+                215,
+                246
+              ],
+              "initialRange": [
+                215,
+                255
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 14,
+          "old": [
+            190,
+            249
+          ],
+          "proposed": [
+            194,
+            249
+          ],
+          "supports": [
+            {
+              "center": 194,
+              "peak": 247,
+              "range": [
+                171,
+                217
+              ],
+              "initialRange": [
+                171,
+                217
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 15,
+          "old": [
+            135,
+            248
+          ],
+          "proposed": [
+            187,
+            248
+          ],
+          "supports": [
+            {
+              "center": 132,
+              "peak": 247,
+              "range": [
+                123,
+                141
+              ],
+              "initialRange": [
+                99,
+                150
+              ]
+            },
+            {
+              "center": 242,
+              "peak": 241,
+              "range": [
+                231,
+                254
+              ],
+              "initialRange": [
+                231,
+                269
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        }
+      ],
+      "attack.png": [
+        {
+          "index": 0,
+          "old": [
+            126,
+            252
+          ],
+          "proposed": [
+            195,
+            252
+          ],
+          "supports": [
+            {
+              "center": 124,
+              "peak": 250,
+              "range": [
+                108,
+                139
+              ],
+              "initialRange": [
+                108,
+                144
+              ]
+            },
+            {
+              "center": 266,
+              "peak": 247,
+              "range": [
+                248,
+                283
+              ],
+              "initialRange": [
+                245,
+                283
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 1,
+          "old": [
+            130,
+            251
+          ],
+          "proposed": [
+            195,
+            251
+          ],
+          "supports": [
+            {
+              "center": 124,
+              "peak": 249,
+              "range": [
+                110,
+                137
+              ],
+              "initialRange": [
+                110,
+                144
+              ]
+            },
+            {
+              "center": 266,
+              "peak": 247,
+              "range": [
+                248,
+                283
+              ],
+              "initialRange": [
+                246,
+                283
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 2,
+          "old": [
+            129,
+            252
+          ],
+          "proposed": [
+            195,
+            252
+          ],
+          "supports": [
+            {
+              "center": 124,
+              "peak": 250,
+              "range": [
+                110,
+                139
+              ],
+              "initialRange": [
+                110,
+                145
+              ]
+            },
+            {
+              "center": 266,
+              "peak": 247,
+              "range": [
+                248,
+                283
+              ],
+              "initialRange": [
+                246,
+                283
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 3,
+          "old": [
+            128,
+            252
+          ],
+          "proposed": [
+            195,
+            252
+          ],
+          "supports": [
+            {
+              "center": 124,
+              "peak": 250,
+              "range": [
+                109,
+                140
+              ],
+              "initialRange": [
+                109,
+                146
+              ]
+            },
+            {
+              "center": 266,
+              "peak": 247,
+              "range": [
+                248,
+                283
+              ],
+              "initialRange": [
+                246,
+                283
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 4,
+          "old": [
+            122,
+            252
+          ],
+          "proposed": [
+            186,
+            252
+          ],
+          "supports": [
+            {
+              "center": 118,
+              "peak": 250,
+              "range": [
+                97,
+                139
+              ],
+              "initialRange": [
+                96,
+                139
+              ]
+            },
+            {
+              "center": 253,
+              "peak": 242,
+              "range": [
+                228,
+                278
+              ],
+              "initialRange": [
+                228,
+                278
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 5,
+          "old": [
+            120,
+            251
+          ],
+          "proposed": [
+            185,
+            251
+          ],
+          "supports": [
+            {
+              "center": 116,
+              "peak": 250,
+              "range": [
+                97,
+                135
+              ],
+              "initialRange": [
+                94,
+                135
+              ]
+            },
+            {
+              "center": 254,
+              "peak": 243,
+              "range": [
+                229,
+                279
+              ],
+              "initialRange": [
+                229,
+                279
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 6,
+          "old": [
+            120,
+            251
+          ],
+          "proposed": [
+            186,
+            251
+          ],
+          "supports": [
+            {
+              "center": 118,
+              "peak": 250,
+              "range": [
+                103,
+                134
+              ],
+              "initialRange": [
+                93,
+                134
+              ]
+            },
+            {
+              "center": 254,
+              "peak": 243,
+              "range": [
+                228,
+                279
+              ],
+              "initialRange": [
+                228,
+                279
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 7,
+          "old": [
+            120,
+            252
+          ],
+          "proposed": [
+            186,
+            252
+          ],
+          "supports": [
+            {
+              "center": 118,
+              "peak": 250,
+              "range": [
+                103,
+                134
+              ],
+              "initialRange": [
+                94,
+                134
+              ]
+            },
+            {
+              "center": 254,
+              "peak": 242,
+              "range": [
+                229,
+                280
+              ],
+              "initialRange": [
+                229,
+                280
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 8,
+          "old": [
+            258,
+            251
+          ],
+          "proposed": [
+            198,
+            251
+          ],
+          "supports": [
+            {
+              "center": 270,
+              "peak": 250,
+              "range": [
+                246,
+                293
+              ],
+              "initialRange": [
+                245,
+                293
+              ]
+            },
+            {
+              "center": 125,
+              "peak": 247,
+              "range": [
+                110,
+                140
+              ],
+              "initialRange": [
+                110,
+                140
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 9,
+          "old": [
+            256,
+            251
+          ],
+          "proposed": [
+            196,
+            251
+          ],
+          "supports": [
+            {
+              "center": 268,
+              "peak": 249,
+              "range": [
+                245,
+                292
+              ],
+              "initialRange": [
+                244,
+                292
+              ]
+            },
+            {
+              "center": 124,
+              "peak": 248,
+              "range": [
+                109,
+                140
+              ],
+              "initialRange": [
+                109,
+                140
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 10,
+          "old": [
+            258,
+            251
+          ],
+          "proposed": [
+            196,
+            251
+          ],
+          "supports": [
+            {
+              "center": 269,
+              "peak": 249,
+              "range": [
+                245,
+                293
+              ],
+              "initialRange": [
+                245,
+                293
+              ]
+            },
+            {
+              "center": 124,
+              "peak": 248,
+              "range": [
+                109,
+                140
+              ],
+              "initialRange": [
+                109,
+                140
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 11,
+          "old": [
+            258,
+            251
+          ],
+          "proposed": [
+            198,
+            251
+          ],
+          "supports": [
+            {
+              "center": 269,
+              "peak": 249,
+              "range": [
+                245,
+                293
+              ],
+              "initialRange": [
+                245,
+                293
+              ]
+            },
+            {
+              "center": 126,
+              "peak": 247,
+              "range": [
+                110,
+                141
+              ],
+              "initialRange": [
+                110,
+                141
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 12,
+          "old": [
+            144,
+            250
+          ],
+          "proposed": [
+            201,
+            250
+          ],
+          "supports": [
+            {
+              "center": 130,
+              "peak": 248,
+              "range": [
+                105,
+                156
+              ],
+              "initialRange": [
+                105,
+                156
+              ]
+            },
+            {
+              "center": 272,
+              "peak": 247,
+              "range": [
+                251,
+                293
+              ],
+              "initialRange": [
+                251,
+                295
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 13,
+          "old": [
+            141,
+            250
+          ],
+          "proposed": [
+            206,
+            250
+          ],
+          "supports": [
+            {
+              "center": 130,
+              "peak": 248,
+              "range": [
+                105,
+                156
+              ],
+              "initialRange": [
+                105,
+                156
+              ]
+            },
+            {
+              "center": 282,
+              "peak": 246,
+              "range": [
+                262,
+                303
+              ],
+              "initialRange": [
+                262,
+                308
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 14,
+          "old": [
+            140,
+            250
+          ],
+          "proposed": [
+            208,
+            250
+          ],
+          "supports": [
+            {
+              "center": 130,
+              "peak": 248,
+              "range": [
+                104,
+                155
+              ],
+              "initialRange": [
+                104,
+                155
+              ]
+            },
+            {
+              "center": 287,
+              "peak": 246,
+              "range": [
+                266,
+                308
+              ],
+              "initialRange": [
+                266,
+                311
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 15,
+          "old": [
+            144,
+            250
+          ],
+          "proposed": [
+            211,
+            250
+          ],
+          "supports": [
+            {
+              "center": 132,
+              "peak": 248,
+              "range": [
+                106,
+                157
+              ],
+              "initialRange": [
+                106,
+                157
+              ]
+            },
+            {
+              "center": 290,
+              "peak": 246,
+              "range": [
+                267,
+                313
+              ],
+              "initialRange": [
+                267,
+                313
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        }
+      ],
+      "hurt.png": [
+        {
+          "index": 0,
+          "old": [
+            270,
+            251
+          ],
+          "proposed": [
+            208,
+            251
+          ],
+          "supports": [
+            {
+              "center": 271,
+              "peak": 249,
+              "range": [
+                259,
+                283
+              ],
+              "initialRange": [
+                249,
+                283
+              ]
+            },
+            {
+              "center": 146,
+              "peak": 244,
+              "range": [
+                131,
+                161
+              ],
+              "initialRange": [
+                131,
+                167
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 1,
+          "old": [
+            267,
+            250
+          ],
+          "proposed": [
+            207,
+            250
+          ],
+          "supports": [
+            {
+              "center": 268,
+              "peak": 248,
+              "range": [
+                257,
+                280
+              ],
+              "initialRange": [
+                245,
+                280
+              ]
+            },
+            {
+              "center": 146,
+              "peak": 242,
+              "range": [
+                129,
+                164
+              ],
+              "initialRange": [
+                129,
+                168
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 2,
+          "old": [
+            141,
+            249
+          ],
+          "proposed": [
+            201,
+            249
+          ],
+          "supports": [
+            {
+              "center": 82,
+              "peak": 247,
+              "range": [
+                77,
+                88
+              ],
+              "initialRange": [
+                77,
+                96
+              ]
+            },
+            {
+              "center": 148,
+              "peak": 242,
+              "range": [
+                121,
+                174
+              ],
+              "initialRange": [
+                119,
+                177
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 3,
+          "old": [
+            243,
+            255
+          ],
+          "proposed": [
+            185,
+            255
+          ],
+          "supports": [
+            {
+              "center": 237,
+              "peak": 254,
+              "range": [
+                207,
+                267
+              ],
+              "initialRange": [
+                139,
+                306
+              ]
+            },
+            {
+              "center": 90,
+              "peak": 239,
+              "range": [
+                81,
+                100
+              ],
+              "initialRange": [
+                81,
+                100
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 4,
+          "old": [
+            165,
+            250
+          ],
+          "proposed": [
+            210,
+            250
+          ],
+          "supports": [
+            {
+              "center": 163,
+              "peak": 249,
+              "range": [
+                148,
+                178
+              ],
+              "initialRange": [
+                142,
+                178
+              ]
+            },
+            {
+              "center": 258,
+              "peak": 236,
+              "range": [
+                235,
+                280
+              ],
+              "initialRange": [
+                235,
+                280
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 5,
+          "old": [
+            146,
+            252
+          ],
+          "proposed": [
+            189,
+            252
+          ],
+          "supports": [
+            {
+              "center": 142,
+              "peak": 250,
+              "range": [
+                126,
+                158
+              ],
+              "initialRange": [
+                124,
+                164
+              ]
+            },
+            {
+              "center": 236,
+              "peak": 232,
+              "range": [
+                222,
+                249
+              ],
+              "initialRange": [
+                222,
+                249
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 6,
+          "old": [
+            168,
+            250
+          ],
+          "proposed": [
+            194,
+            250
+          ],
+          "supports": [
+            {
+              "center": 166,
+              "peak": 248,
+              "range": [
+                146,
+                185
+              ],
+              "initialRange": [
+                124,
+                228
+              ]
+            },
+            {
+              "center": 106,
+              "peak": 241,
+              "range": [
+                95,
+                117
+              ],
+              "initialRange": [
+                94,
+                117
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 7,
+          "old": [
+            272,
+            245
+          ],
+          "proposed": [
+            189,
+            245
+          ],
+          "supports": [
+            {
+              "center": 274,
+              "peak": 243,
+              "range": [
+                226,
+                322
+              ],
+              "initialRange": [
+                223,
+                331
+              ]
+            },
+            {
+              "center": 128,
+              "peak": 242,
+              "range": [
+                89,
+                168
+              ],
+              "initialRange": [
+                84,
+                201
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 8,
+          "old": [
+            251,
+            246
+          ],
+          "proposed": [
+            199,
+            246
+          ],
+          "supports": [
+            {
+              "center": 260,
+              "peak": 244,
+              "range": [
+                241,
+                278
+              ],
+              "initialRange": [
+                240,
+                279
+              ]
+            },
+            {
+              "center": 138,
+              "peak": 241,
+              "range": [
+                127,
+                148
+              ],
+              "initialRange": [
+                126,
+                150
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 9,
+          "old": [
+            229,
+            244
+          ],
+          "proposed": [
+            173,
+            244
+          ],
+          "supports": [
+            {
+              "center": 232,
+              "peak": 243,
+              "range": [
+                208,
+                256
+              ],
+              "initialRange": [
+                208,
+                256
+              ]
+            },
+            {
+              "center": 114,
+              "peak": 237,
+              "range": [
+                104,
+                125
+              ],
+              "initialRange": [
+                103,
+                127
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 10,
+          "old": [
+            182,
+            247
+          ],
+          "proposed": [
+            164,
+            247
+          ],
+          "supports": [
+            {
+              "center": 180,
+              "peak": 246,
+              "range": [
+                166,
+                193
+              ],
+              "initialRange": [
+                145,
+                226
+              ]
+            },
+            {
+              "center": 107,
+              "peak": 237,
+              "range": [
+                97,
+                117
+              ],
+              "initialRange": [
+                95,
+                117
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 11,
+          "old": [
+            188,
+            244
+          ],
+          "proposed": [
+            179,
+            244
+          ],
+          "supports": [
+            {
+              "center": 196,
+              "peak": 243,
+              "range": [
+                154,
+                238
+              ],
+              "initialRange": [
+                148,
+                255
+              ]
+            },
+            {
+              "center": 84,
+              "peak": 240,
+              "range": [
+                52,
+                117
+              ],
+              "initialRange": [
+                38,
+                146
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 12,
+          "old": [
+            250,
+            249
+          ],
+          "proposed": [
+            200,
+            249
+          ],
+          "supports": [
+            {
+              "center": 251,
+              "peak": 247,
+              "range": [
+                239,
+                263
+              ],
+              "initialRange": [
+                236,
+                264
+              ]
+            },
+            {
+              "center": 148,
+              "peak": 237,
+              "range": [
+                129,
+                167
+              ],
+              "initialRange": [
+                129,
+                172
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 13,
+          "old": [
+            225,
+            248
+          ],
+          "proposed": [
+            193,
+            248
+          ],
+          "supports": [
+            {
+              "center": 228,
+              "peak": 246,
+              "range": [
+                216,
+                239
+              ],
+              "initialRange": [
+                216,
+                250
+              ]
+            },
+            {
+              "center": 158,
+              "peak": 230,
+              "range": [
+                135,
+                181
+              ],
+              "initialRange": [
+                135,
+                181
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 14,
+          "old": [
+            192,
+            240
+          ],
+          "proposed": [
+            178,
+            240
+          ],
+          "supports": [
+            {
+              "center": 206,
+              "peak": 239,
+              "range": [
+                165,
+                246
+              ],
+              "initialRange": [
+                110,
+                281
+              ]
+            },
+            {
+              "center": 63,
+              "peak": 236,
+              "range": [
+                56,
+                70
+              ],
+              "initialRange": [
+                56,
+                79
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 15,
+          "old": [
+            243,
+            246
+          ],
+          "proposed": [
+            210,
+            246
+          ],
+          "supports": [
+            {
+              "center": 228,
+              "peak": 245,
+              "range": [
+                184,
+                273
+              ],
+              "initialRange": [
+                175,
+                280
+              ]
+            },
+            {
+              "center": 85,
+              "peak": 239,
+              "range": [
+                41,
+                129
+              ],
+              "initialRange": [
+                41,
+                146
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        }
+      ]
+    },
+    "captain": {
+      "atlas.png": [
+        {
+          "index": 0,
+          "old": [
+            227,
+            233
+          ],
+          "proposed": [
+            199,
+            233
+          ],
+          "supports": [
+            {
+              "center": 238,
+              "peak": 232,
+              "range": [
+                224,
+                253
+              ],
+              "initialRange": [
+                224,
+                253
+              ]
+            },
+            {
+              "center": 160,
+              "peak": 231,
+              "range": [
+                144,
+                176
+              ],
+              "initialRange": [
+                144,
+                176
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 1,
+          "old": [
+            182,
+            234
+          ],
+          "proposed": [
+            198,
+            234
+          ],
+          "supports": [
+            {
+              "center": 182,
+              "peak": 232,
+              "range": [
+                172,
+                192
+              ],
+              "initialRange": [
+                172,
+                193
+              ]
+            },
+            {
+              "center": 214,
+              "peak": 221,
+              "range": [
+                205,
+                223
+              ],
+              "initialRange": [
+                205,
+                223
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 2,
+          "old": [
+            203,
+            233
+          ],
+          "proposed": [
+            195,
+            233
+          ],
+          "supports": [
+            {
+              "center": 212,
+              "peak": 232,
+              "range": [
+                202,
+                221
+              ],
+              "initialRange": [
+                200,
+                221
+              ]
+            },
+            {
+              "center": 178,
+              "peak": 231,
+              "range": [
+                169,
+                188
+              ],
+              "initialRange": [
+                169,
+                190
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 3,
+          "old": [
+            187,
+            234
+          ],
+          "proposed": [
+            200,
+            234
+          ],
+          "supports": [
+            {
+              "center": 187,
+              "peak": 233,
+              "range": [
+                176,
+                198
+              ],
+              "initialRange": [
+                176,
+                198
+              ]
+            },
+            {
+              "center": 214,
+              "peak": 218,
+              "range": [
+                206,
+                223
+              ],
+              "initialRange": [
+                206,
+                223
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 4,
+          "old": [
+            217,
+            232
+          ],
+          "proposed": [
+            202,
+            232
+          ],
+          "supports": [
+            {
+              "center": 173,
+              "peak": 231,
+              "range": [
+                163,
+                183
+              ],
+              "initialRange": [
+                163,
+                183
+              ]
+            },
+            {
+              "center": 232,
+              "peak": 229,
+              "range": [
+                211,
+                252
+              ],
+              "initialRange": [
+                211,
+                252
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 5,
+          "old": [
+            234,
+            232
+          ],
+          "proposed": [
+            200,
+            232
+          ],
+          "supports": [
+            {
+              "center": 238,
+              "peak": 230,
+              "range": [
+                226,
+                251
+              ],
+              "initialRange": [
+                220,
+                266
+              ]
+            },
+            {
+              "center": 161,
+              "peak": 222,
+              "range": [
+                149,
+                173
+              ],
+              "initialRange": [
+                141,
+                173
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 6,
+          "old": [
+            202,
+            232
+          ],
+          "proposed": [
+            201,
+            232
+          ],
+          "supports": [
+            {
+              "center": 201,
+              "peak": 230,
+              "range": [
+                185,
+                217
+              ],
+              "initialRange": [
+                168,
+                217
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 7,
+          "old": [
+            224,
+            233
+          ],
+          "proposed": [
+            191,
+            233
+          ],
+          "supports": [
+            {
+              "center": 226,
+              "peak": 232,
+              "range": [
+                216,
+                237
+              ],
+              "initialRange": [
+                212,
+                258
+              ]
+            },
+            {
+              "center": 156,
+              "peak": 222,
+              "range": [
+                144,
+                168
+              ],
+              "initialRange": [
+                137,
+                168
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 8,
+          "old": [
+            234,
+            234
+          ],
+          "proposed": [
+            203,
+            234
+          ],
+          "supports": [
+            {
+              "center": 244,
+              "peak": 232,
+              "range": [
+                223,
+                264
+              ],
+              "initialRange": [
+                223,
+                264
+              ]
+            },
+            {
+              "center": 162,
+              "peak": 232,
+              "range": [
+                151,
+                173
+              ],
+              "initialRange": [
+                151,
+                173
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 9,
+          "old": [
+            205,
+            233
+          ],
+          "proposed": [
+            204,
+            233
+          ],
+          "supports": [
+            {
+              "center": 204,
+              "peak": 231,
+              "range": [
+                192,
+                215
+              ],
+              "initialRange": [
+                175,
+                215
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 10,
+          "old": [
+            199,
+            232
+          ],
+          "proposed": [
+            191,
+            232
+          ],
+          "supports": [
+            {
+              "center": 174,
+              "peak": 230,
+              "range": [
+                165,
+                184
+              ],
+              "initialRange": [
+                164,
+                184
+              ]
+            },
+            {
+              "center": 208,
+              "peak": 230,
+              "range": [
+                199,
+                217
+              ],
+              "initialRange": [
+                198,
+                218
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 11,
+          "old": [
+            194,
+            233
+          ],
+          "proposed": [
+            193,
+            233
+          ],
+          "supports": [
+            {
+              "center": 193,
+              "peak": 231,
+              "range": [
+                182,
+                204
+              ],
+              "initialRange": [
+                171,
+                204
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 12,
+          "old": [
+            233,
+            233
+          ],
+          "proposed": [
+            204,
+            233
+          ],
+          "supports": [
+            {
+              "center": 238,
+              "peak": 231,
+              "range": [
+                227,
+                248
+              ],
+              "initialRange": [
+                226,
+                248
+              ]
+            },
+            {
+              "center": 170,
+              "peak": 227,
+              "range": [
+                150,
+                190
+              ],
+              "initialRange": [
+                150,
+                190
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 13,
+          "old": [
+            153,
+            233
+          ],
+          "proposed": [
+            188,
+            233
+          ],
+          "supports": [
+            {
+              "center": 149,
+              "peak": 232,
+              "range": [
+                136,
+                162
+              ],
+              "initialRange": [
+                121,
+                168
+              ]
+            },
+            {
+              "center": 228,
+              "peak": 219,
+              "range": [
+                212,
+                245
+              ],
+              "initialRange": [
+                212,
+                250
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 14,
+          "old": [
+            175,
+            233
+          ],
+          "proposed": [
+            196,
+            233
+          ],
+          "supports": [
+            {
+              "center": 178,
+              "peak": 231,
+              "range": [
+                160,
+                197
+              ],
+              "initialRange": [
+                160,
+                197
+              ]
+            },
+            {
+              "center": 214,
+              "peak": 219,
+              "range": [
+                206,
+                222
+              ],
+              "initialRange": [
+                206,
+                223
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 15,
+          "old": [
+            149,
+            233
+          ],
+          "proposed": [
+            190,
+            233
+          ],
+          "supports": [
+            {
+              "center": 146,
+              "peak": 231,
+              "range": [
+                135,
+                157
+              ],
+              "initialRange": [
+                116,
+                163
+              ]
+            },
+            {
+              "center": 234,
+              "peak": 224,
+              "range": [
+                223,
+                246
+              ],
+              "initialRange": [
+                223,
+                255
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        }
+      ],
+      "attack.png": [
+        {
+          "index": 0,
+          "old": [
+            239,
+            239
+          ],
+          "proposed": [
+            196,
+            239
+          ],
+          "supports": [
+            {
+              "center": 238,
+              "peak": 237,
+              "range": [
+                227,
+                250
+              ],
+              "initialRange": [
+                223,
+                250
+              ]
+            },
+            {
+              "center": 154,
+              "peak": 226,
+              "range": [
+                135,
+                172
+              ],
+              "initialRange": [
+                135,
+                173
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 1,
+          "old": [
+            141,
+            237
+          ],
+          "proposed": [
+            188,
+            237
+          ],
+          "supports": [
+            {
+              "center": 143,
+              "peak": 235,
+              "range": [
+                130,
+                156
+              ],
+              "initialRange": [
+                130,
+                159
+              ]
+            },
+            {
+              "center": 234,
+              "peak": 226,
+              "range": [
+                215,
+                253
+              ],
+              "initialRange": [
+                215,
+                253
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 2,
+          "old": [
+            237,
+            239
+          ],
+          "proposed": [
+            189,
+            239
+          ],
+          "supports": [
+            {
+              "center": 237,
+              "peak": 237,
+              "range": [
+                224,
+                250
+              ],
+              "initialRange": [
+                222,
+                250
+              ]
+            },
+            {
+              "center": 141,
+              "peak": 232,
+              "range": [
+                128,
+                154
+              ],
+              "initialRange": [
+                128,
+                155
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 3,
+          "old": [
+            238,
+            239
+          ],
+          "proposed": [
+            192,
+            239
+          ],
+          "supports": [
+            {
+              "center": 238,
+              "peak": 237,
+              "range": [
+                226,
+                249
+              ],
+              "initialRange": [
+                223,
+                249
+              ]
+            },
+            {
+              "center": 146,
+              "peak": 230,
+              "range": [
+                131,
+                160
+              ],
+              "initialRange": [
+                131,
+                165
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 4,
+          "old": [
+            153,
+            233
+          ],
+          "proposed": [
+            198,
+            233
+          ],
+          "supports": [
+            {
+              "center": 152,
+              "peak": 231,
+              "range": [
+                141,
+                163
+              ],
+              "initialRange": [
+                140,
+                163
+              ]
+            },
+            {
+              "center": 244,
+              "peak": 225,
+              "range": [
+                223,
+                265
+              ],
+              "initialRange": [
+                223,
+                265
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 5,
+          "old": [
+            150,
+            237
+          ],
+          "proposed": [
+            192,
+            237
+          ],
+          "supports": [
+            {
+              "center": 148,
+              "peak": 235,
+              "range": [
+                136,
+                160
+              ],
+              "initialRange": [
+                134,
+                160
+              ]
+            },
+            {
+              "center": 235,
+              "peak": 225,
+              "range": [
+                213,
+                257
+              ],
+              "initialRange": [
+                213,
+                257
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 6,
+          "old": [
+            129,
+            236
+          ],
+          "proposed": [
+            178,
+            236
+          ],
+          "supports": [
+            {
+              "center": 127,
+              "peak": 234,
+              "range": [
+                115,
+                139
+              ],
+              "initialRange": [
+                113,
+                139
+              ]
+            },
+            {
+              "center": 230,
+              "peak": 228,
+              "range": [
+                207,
+                253
+              ],
+              "initialRange": [
+                207,
+                253
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 7,
+          "old": [
+            146,
+            233
+          ],
+          "proposed": [
+            194,
+            233
+          ],
+          "supports": [
+            {
+              "center": 143,
+              "peak": 231,
+              "range": [
+                132,
+                154
+              ],
+              "initialRange": [
+                129,
+                154
+              ]
+            },
+            {
+              "center": 244,
+              "peak": 226,
+              "range": [
+                222,
+                266
+              ],
+              "initialRange": [
+                222,
+                266
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 8,
+          "old": [
+            245,
+            233
+          ],
+          "proposed": [
+            196,
+            233
+          ],
+          "supports": [
+            {
+              "center": 246,
+              "peak": 232,
+              "range": [
+                223,
+                269
+              ],
+              "initialRange": [
+                223,
+                269
+              ]
+            },
+            {
+              "center": 146,
+              "peak": 225,
+              "range": [
+                135,
+                157
+              ],
+              "initialRange": [
+                135,
+                157
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 9,
+          "old": [
+            243,
+            233
+          ],
+          "proposed": [
+            190,
+            233
+          ],
+          "supports": [
+            {
+              "center": 246,
+              "peak": 231,
+              "range": [
+                223,
+                268
+              ],
+              "initialRange": [
+                223,
+                268
+              ]
+            },
+            {
+              "center": 134,
+              "peak": 225,
+              "range": [
+                123,
+                146
+              ],
+              "initialRange": [
+                123,
+                146
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 10,
+          "old": [
+            241,
+            232
+          ],
+          "proposed": [
+            187,
+            232
+          ],
+          "supports": [
+            {
+              "center": 244,
+              "peak": 230,
+              "range": [
+                221,
+                267
+              ],
+              "initialRange": [
+                220,
+                267
+              ]
+            },
+            {
+              "center": 130,
+              "peak": 226,
+              "range": [
+                119,
+                141
+              ],
+              "initialRange": [
+                119,
+                142
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 11,
+          "old": [
+            236,
+            233
+          ],
+          "proposed": [
+            190,
+            233
+          ],
+          "supports": [
+            {
+              "center": 237,
+              "peak": 231,
+              "range": [
+                214,
+                260
+              ],
+              "initialRange": [
+                214,
+                260
+              ]
+            },
+            {
+              "center": 144,
+              "peak": 219,
+              "range": [
+                133,
+                156
+              ],
+              "initialRange": [
+                133,
+                156
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 12,
+          "old": [
+            159,
+            236
+          ],
+          "proposed": [
+            196,
+            236
+          ],
+          "supports": [
+            {
+              "center": 162,
+              "peak": 234,
+              "range": [
+                139,
+                184
+              ],
+              "initialRange": [
+                139,
+                184
+              ]
+            },
+            {
+              "center": 231,
+              "peak": 224,
+              "range": [
+                215,
+                247
+              ],
+              "initialRange": [
+                215,
+                247
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 13,
+          "old": [
+            150,
+            233
+          ],
+          "proposed": [
+            193,
+            233
+          ],
+          "supports": [
+            {
+              "center": 152,
+              "peak": 231,
+              "range": [
+                130,
+                174
+              ],
+              "initialRange": [
+                130,
+                174
+              ]
+            },
+            {
+              "center": 234,
+              "peak": 224,
+              "range": [
+                217,
+                250
+              ],
+              "initialRange": [
+                217,
+                250
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 14,
+          "old": [
+            130,
+            230
+          ],
+          "proposed": [
+            190,
+            230
+          ],
+          "supports": [
+            {
+              "center": 126,
+              "peak": 229,
+              "range": [
+                103,
+                149
+              ],
+              "initialRange": [
+                103,
+                150
+              ]
+            },
+            {
+              "center": 254,
+              "peak": 224,
+              "range": [
+                238,
+                269
+              ],
+              "initialRange": [
+                238,
+                269
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 15,
+          "old": [
+            155,
+            235
+          ],
+          "proposed": [
+            193,
+            235
+          ],
+          "supports": [
+            {
+              "center": 158,
+              "peak": 234,
+              "range": [
+                135,
+                180
+              ],
+              "initialRange": [
+                135,
+                180
+              ]
+            },
+            {
+              "center": 228,
+              "peak": 223,
+              "range": [
+                209,
+                247
+              ],
+              "initialRange": [
+                209,
+                247
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        }
+      ],
+      "hurt.png": [
+        {
+          "index": 0,
+          "old": [
+            256,
+            252
+          ],
+          "proposed": [
+            198,
+            252
+          ],
+          "supports": [
+            {
+              "center": 260,
+              "peak": 251,
+              "range": [
+                243,
+                277
+              ],
+              "initialRange": [
+                242,
+                277
+              ]
+            },
+            {
+              "center": 137,
+              "peak": 248,
+              "range": [
+                116,
+                158
+              ],
+              "initialRange": [
+                116,
+                158
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 1,
+          "old": [
+            250,
+            251
+          ],
+          "proposed": [
+            199,
+            251
+          ],
+          "supports": [
+            {
+              "center": 256,
+              "peak": 249,
+              "range": [
+                239,
+                274
+              ],
+              "initialRange": [
+                229,
+                274
+              ]
+            },
+            {
+              "center": 142,
+              "peak": 247,
+              "range": [
+                123,
+                160
+              ],
+              "initialRange": [
+                123,
+                160
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 2,
+          "old": [
+            93,
+            250
+          ],
+          "proposed": [
+            180,
+            250
+          ],
+          "supports": [
+            {
+              "center": 195,
+              "peak": 248,
+              "range": [
+                85,
+                305
+              ],
+              "initialRange": [
+                85,
+                322
+              ]
+            },
+            {
+              "center": 58,
+              "peak": 248,
+              "range": [
+                39,
+                78
+              ],
+              "initialRange": [
+                36,
+                81
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 3,
+          "old": [
+            148,
+            251
+          ],
+          "proposed": [
+            185,
+            251
+          ],
+          "supports": [
+            {
+              "center": 174,
+              "peak": 250,
+              "range": [
+                115,
+                232
+              ],
+              "initialRange": [
+                57,
+                319
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 4,
+          "old": [
+            162,
+            249
+          ],
+          "proposed": [
+            204,
+            249
+          ],
+          "supports": [
+            {
+              "center": 154,
+              "peak": 247,
+              "range": [
+                140,
+                168
+              ],
+              "initialRange": [
+                140,
+                168
+              ]
+            },
+            {
+              "center": 254,
+              "peak": 243,
+              "range": [
+                230,
+                278
+              ],
+              "initialRange": [
+                230,
+                278
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 5,
+          "old": [
+            159,
+            248
+          ],
+          "proposed": [
+            182,
+            248
+          ],
+          "supports": [
+            {
+              "center": 157,
+              "peak": 247,
+              "range": [
+                141,
+                173
+              ],
+              "initialRange": [
+                99,
+                173
+              ]
+            },
+            {
+              "center": 208,
+              "peak": 234,
+              "range": [
+                185,
+                232
+              ],
+              "initialRange": [
+                183,
+                232
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 6,
+          "old": [
+            111,
+            248
+          ],
+          "proposed": [
+            182,
+            248
+          ],
+          "supports": [
+            {
+              "center": 102,
+              "peak": 246,
+              "range": [
+                81,
+                122
+              ],
+              "initialRange": [
+                78,
+                124
+              ]
+            },
+            {
+              "center": 146,
+              "peak": 245,
+              "range": [
+                135,
+                158
+              ],
+              "initialRange": [
+                129,
+                259
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 7,
+          "old": [
+            185,
+            248
+          ],
+          "proposed": [
+            184,
+            248
+          ],
+          "supports": [
+            {
+              "center": 191,
+              "peak": 246,
+              "range": [
+                97,
+                285
+              ],
+              "initialRange": [
+                34,
+                305
+              ]
+            },
+            {
+              "center": 336,
+              "peak": 230,
+              "range": [
+                334,
+                339
+              ],
+              "initialRange": [
+                334,
+                339
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 8,
+          "old": [
+            245,
+            251
+          ],
+          "proposed": [
+            196,
+            251
+          ],
+          "supports": [
+            {
+              "center": 254,
+              "peak": 249,
+              "range": [
+                227,
+                280
+              ],
+              "initialRange": [
+                227,
+                280
+              ]
+            },
+            {
+              "center": 138,
+              "peak": 246,
+              "range": [
+                125,
+                150
+              ],
+              "initialRange": [
+                125,
+                150
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 9,
+          "old": [
+            215,
+            248
+          ],
+          "proposed": [
+            166,
+            248
+          ],
+          "supports": [
+            {
+              "center": 215,
+              "peak": 246,
+              "range": [
+                188,
+                242
+              ],
+              "initialRange": [
+                188,
+                242
+              ]
+            },
+            {
+              "center": 118,
+              "peak": 239,
+              "range": [
+                101,
+                135
+              ],
+              "initialRange": [
+                101,
+                135
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 10,
+          "old": [
+            203,
+            247
+          ],
+          "proposed": [
+            170,
+            247
+          ],
+          "supports": [
+            {
+              "center": 152,
+              "peak": 246,
+              "range": [
+                76,
+                229
+              ],
+              "initialRange": [
+                40,
+                253
+              ]
+            },
+            {
+              "center": 280,
+              "peak": 243,
+              "range": [
+                265,
+                296
+              ],
+              "initialRange": [
+                262,
+                305
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 11,
+          "old": [
+            156,
+            247
+          ],
+          "proposed": [
+            182,
+            247
+          ],
+          "supports": [
+            {
+              "center": 190,
+              "peak": 245,
+              "range": [
+                57,
+                322
+              ],
+              "initialRange": [
+                43,
+                330
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 12,
+          "old": [
+            214,
+            253
+          ],
+          "proposed": [
+            178,
+            253
+          ],
+          "supports": [
+            {
+              "center": 218,
+              "peak": 251,
+              "range": [
+                201,
+                234
+              ],
+              "initialRange": [
+                201,
+                235
+              ]
+            },
+            {
+              "center": 138,
+              "peak": 240,
+              "range": [
+                114,
+                163
+              ],
+              "initialRange": [
+                114,
+                163
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 13,
+          "old": [
+            208,
+            252
+          ],
+          "proposed": [
+            173,
+            252
+          ],
+          "supports": [
+            {
+              "center": 210,
+              "peak": 251,
+              "range": [
+                195,
+                224
+              ],
+              "initialRange": [
+                195,
+                235
+              ]
+            },
+            {
+              "center": 136,
+              "peak": 241,
+              "range": [
+                112,
+                159
+              ],
+              "initialRange": [
+                112,
+                159
+              ]
+            }
+          ],
+          "method": "mean of two lowest independent sole runs"
+        },
+        {
+          "index": 14,
+          "old": [
+            218,
+            248
+          ],
+          "proposed": [
+            162,
+            248
+          ],
+          "supports": [
+            {
+              "center": 222,
+              "peak": 247,
+              "range": [
+                207,
+                237
+              ],
+              "initialRange": [
+                150,
+                285
+              ]
+            },
+            {
+              "center": 64,
+              "peak": 239,
+              "range": [
+                32,
+                97
+              ],
+              "initialRange": [
+                26,
+                98
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        },
+        {
+          "index": 15,
+          "old": [
+            96,
+            250
+          ],
+          "proposed": [
+            189,
+            250
+          ],
+          "supports": [
+            {
+              "center": 82,
+              "peak": 248,
+              "range": [
+                62,
+                103
+              ],
+              "initialRange": [
+                34,
+                108
+              ]
+            },
+            {
+              "center": 164,
+              "peak": 247,
+              "range": [
+                131,
+                196
+              ],
+              "initialRange": [
+                123,
+                225
+              ]
+            }
+          ],
+          "method": "broad collapse support span, outer 5% excluded"
+        }
+      ]
+    }
+  }
+}

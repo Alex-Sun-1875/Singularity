@@ -1,0 +1,151 @@
+{
+  "source": "unchanged saved baseline blend; same frame 1; actual existing alpha bounds",
+  "camera": {
+    "projection": "ORTHO",
+    "elevation_degrees": 32,
+    "scale_m": 2.35,
+    "target_z_m": 0.9525550539659434,
+    "image_size": [
+      512,
+      512
+    ]
+  },
+  "views": {
+    "front_right": {
+      "root_px": [
+        256.0000305175781,
+        432.00025939941406
+      ],
+      "canonical_axis_head_marker_px": [
+        256.00006103515625,
+        92.03036499023438
+      ],
+      "posed_head_bone_tip_px": [
+        257.5406494140625,
+        91.2139892578125
+      ],
+      "render_alpha_bbox": [
+        154,
+        87,
+        319,
+        457
+      ],
+      "alpha_height": 370,
+      "root_to_alpha_top_height": 345.00025939941406,
+      "alpha_below_root": 24.999740600585938,
+      "component_projected_extents": {
+        "head_and_hair": {
+          "top_y": 88.198486328125,
+          "bottom_y": 145.32110595703125
+        },
+        "feet": {
+          "top_y": 395.7008972167969,
+          "bottom_y": 456.1314010620117
+        }
+      }
+    },
+    "back_right": {
+      "root_px": [
+        256.00006103515625,
+        432.00022888183594
+      ],
+      "canonical_axis_head_marker_px": [
+        256.00006103515625,
+        92.0303955078125
+      ],
+      "posed_head_bone_tip_px": [
+        257.5406494140625,
+        92.8468017578125
+      ],
+      "render_alpha_bbox": [
+        186,
+        90,
+        330,
+        447
+      ],
+      "alpha_height": 357,
+      "root_to_alpha_top_height": 342.00022888183594,
+      "alpha_below_root": 14.999771118164062,
+      "component_projected_extents": {
+        "head_and_hair": {
+          "top_y": 91.20199584960938,
+          "bottom_y": 144.00396728515625
+        },
+        "feet": {
+          "top_y": 389.7648468017578,
+          "bottom_y": 445.68160247802734
+        }
+      }
+    },
+    "back_left": {
+      "root_px": [
+        255.9999237060547,
+        432.00022888183594
+      ],
+      "canonical_axis_head_marker_px": [
+        255.9999542236328,
+        92.0303955078125
+      ],
+      "posed_head_bone_tip_px": [
+        254.45936584472656,
+        92.8468017578125
+      ],
+      "render_alpha_bbox": [
+        193,
+        91,
+        358,
+        447
+      ],
+      "alpha_height": 356,
+      "root_to_alpha_top_height": 341.00022888183594,
+      "alpha_below_root": 14.999771118164062,
+      "component_projected_extents": {
+        "head_and_hair": {
+          "top_y": 91.40362548828125,
+          "bottom_y": 144.00650024414062
+        },
+        "feet": {
+          "top_y": 389.7648468017578,
+          "bottom_y": 445.6816101074219
+        }
+      }
+    },
+    "front_left": {
+      "root_px": [
+        255.9999542236328,
+        432.00025939941406
+      ],
+      "canonical_axis_head_marker_px": [
+        255.9999237060547,
+        92.03036499023438
+      ],
+      "posed_head_bone_tip_px": [
+        254.45933532714844,
+        91.2139892578125
+      ],
+      "render_alpha_bbox": [
+        182,
+        87,
+        326,
+        457
+      ],
+      "alpha_height": 370,
+      "root_to_alpha_top_height": 345.00025939941406,
+      "alpha_below_root": 24.999740600585938,
+      "component_projected_extents": {
+        "head_and_hair": {
+          "top_y": 87.99752807617188,
+          "bottom_y": 145.3023681640625
+        },
+        "feet": {
+          "top_y": 395.7008972167969,
+          "bottom_y": 456.1314010620117
+        }
+      }
+    }
+  },
+  "alpha_height_range_px": 14,
+  "root_to_top_height_range_px": 4.000030517578125,
+  "below_root_range_px": 9.999969482421875,
+  "conclusion": "The 14px raw alpha-height range is not camera/root scale drift: 10px is foot/toe projection below a shared ground origin, and 4px is upper silhouette variation. Keep identical world scale and origin. Root-to-top range is 2px at 256 or 1.5px at 192; raw silhouette-height criterion remains 7px at 256 and needs an explicit criterion distinction, not per-view resizing."
+}

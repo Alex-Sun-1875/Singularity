@@ -1,0 +1,227 @@
+{
+  "date": "2026-11-08",
+  "status": "source-typecheck-and-final-runtime-marker-review-passed",
+  "scope": "Revealed area-exit markers, destination labels and six-region map navigation. Checkpoints remain rest locations; no fast-travel rules added.",
+  "sourceFiles": [
+    {
+      "file": "src/cocos/assets/scripts/runtime/MiniMap.ts",
+      "sha256": "2ceb88bbd4069882ebbba57c293ea4274505371d626f6f1799cafe20df27b489",
+      "bytes": 9001
+    },
+    {
+      "file": "src/cocos/assets/scripts/runtime/MapPanel.ts",
+      "sha256": "03e4197402976243dcbd1c704c56d8023ad5f3b675cb8c4a25031a8ac0745c14",
+      "bytes": 25865
+    }
+  ],
+  "atlases": [
+    {
+      "id": "highlands",
+      "source": {
+        "file": "source-art/maps/world-atlas-v3/05-sunken-bridge-highlands-draft.png",
+        "sha256": "7962df47fe2c689050cf5bc7b9dd56cadaedb7d2c94dd383dd8773335b3bfe96",
+        "bytes": 3877254
+      },
+      "preservedProjectSource": {
+        "file": "source-art/maps/world-atlas-v3/05-sunken-bridge-highlands-draft.png",
+        "sha256": "7962df47fe2c689050cf5bc7b9dd56cadaedb7d2c94dd383dd8773335b3bfe96",
+        "bytes": 3877254
+      },
+      "target": {
+        "file": "src/cocos/assets/resources/atlas/highlands.png",
+        "sha256": "7962df47fe2c689050cf5bc7b9dd56cadaedb7d2c94dd383dd8773335b3bfe96",
+        "bytes": 3877254,
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "mode": "RGB"
+      },
+      "importerMeta": {
+        "file": "src/cocos/assets/resources/atlas/highlands.png.meta",
+        "sha256": "c7b608abe8092ad5fd4c2e77e97ef168dddb60d9ce8105ef28a2b2c295307f9a",
+        "bytes": 994
+      },
+      "resource": "atlas/highlands",
+      "copyMethod": "byte-for-byte original project atlas reuse; no resample, repaint or generated edit",
+      "sourcePromptRecord": "source-art/maps/world-atlas-v3/v3-r2-prompt.txt",
+      "licenseClassification": "Existing project-authored atlas artwork; not Baldurs Gate 3 or third-party stock pixels.",
+      "sampler": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "mipfilter": "none"
+      }
+    },
+    {
+      "id": "riverbend",
+      "source": {
+        "file": "source-art/maps/world-atlas-v3/06-drowned-bell-riverbend-draft.png",
+        "sha256": "f7865be085a1f1ccdf1b9710c3b92dfdecfba38cf9002645f48de6f054c772c8",
+        "bytes": 4080440
+      },
+      "preservedProjectSource": {
+        "file": "source-art/maps/world-atlas-v3/06-drowned-bell-riverbend-draft.png",
+        "sha256": "f7865be085a1f1ccdf1b9710c3b92dfdecfba38cf9002645f48de6f054c772c8",
+        "bytes": 4080440
+      },
+      "target": {
+        "file": "src/cocos/assets/resources/atlas/riverbend.png",
+        "sha256": "f7865be085a1f1ccdf1b9710c3b92dfdecfba38cf9002645f48de6f054c772c8",
+        "bytes": 4080440,
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "mode": "RGB"
+      },
+      "importerMeta": {
+        "file": "src/cocos/assets/resources/atlas/riverbend.png.meta",
+        "sha256": "0b65e3fb712ca8dd7336a8d56ac1079616fc6e8ce642d3b65ba46664ef8659b9",
+        "bytes": 994
+      },
+      "resource": "atlas/riverbend",
+      "copyMethod": "byte-for-byte original project atlas reuse; no resample, repaint or generated edit",
+      "sourcePromptRecord": "source-art/maps/world-atlas-v3/v3-r3-prompt.txt",
+      "licenseClassification": "Existing project-authored atlas artwork; not Baldurs Gate 3 or third-party stock pixels.",
+      "sampler": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "mipfilter": "none"
+      }
+    },
+    {
+      "id": "city",
+      "source": {
+        "file": "source-art/maps/world-atlas-v3/07-greystone-city-domain-draft.png",
+        "sha256": "60b20c9ab0247e4fe8c51a85ea9c5b7bb7894ab47ce300819088fd359b8f201b",
+        "bytes": 4309585
+      },
+      "preservedProjectSource": {
+        "file": "source-art/maps/world-atlas-v3/07-greystone-city-domain-draft.png",
+        "sha256": "60b20c9ab0247e4fe8c51a85ea9c5b7bb7894ab47ce300819088fd359b8f201b",
+        "bytes": 4309585
+      },
+      "target": {
+        "file": "src/cocos/assets/resources/atlas/city.png",
+        "sha256": "60b20c9ab0247e4fe8c51a85ea9c5b7bb7894ab47ce300819088fd359b8f201b",
+        "bytes": 4309585,
+        "dimensions": [
+          1536,
+          1024
+        ],
+        "mode": "RGB"
+      },
+      "importerMeta": {
+        "file": "src/cocos/assets/resources/atlas/city.png.meta",
+        "sha256": "5f719f7e2a716a6aed899ec918d79a4d4fd3f15199dc4b653b24b1fffbdd9cb7",
+        "bytes": 989
+      },
+      "resource": "atlas/city",
+      "copyMethod": "byte-for-byte original project atlas reuse; no resample, repaint or generated edit",
+      "sourcePromptRecord": "source-art/maps/world-atlas-v3/v3-r4-prompt.txt",
+      "licenseClassification": "Existing project-authored atlas artwork; not Baldurs Gate 3 or third-party stock pixels.",
+      "sampler": {
+        "wrapModeS": "clamp-to-edge",
+        "wrapModeT": "clamp-to-edge",
+        "mipfilter": "none"
+      }
+    }
+  ],
+  "provenance": {
+    "sourceStatus": "source-art/maps/world-atlas-v3/STATUS.md",
+    "sourceContract": "docs/maps/world-atlas-v3.md",
+    "assetPolicy": "Only existing project atlas PNG bytes enter the runtime; no BG3 image, icon, XAML or UI texture is copied."
+  },
+  "uiTokens": {
+    "cyan": {
+      "hex": "#83CDE6",
+      "source": "UI_COLORS.route",
+      "usage": "hollow diamond, cardinal ticks, available destination label"
+    },
+    "lavender": {
+      "hex": "#C4A5ED",
+      "source": "UI_COLORS.purple",
+      "usage": "outer rune ring and distance/state text"
+    },
+    "outline": {
+      "hex": "#100B1A",
+      "usage": "near-black graphic outline and label backing"
+    },
+    "glyph": "lavender circle with near-black halo, cyan hollow diamond and four cardinal ticks",
+    "checkpoint": "existing gold rest marker retained; legend text is 休整点",
+    "animation": "static glyphs and labels; no fast pulse introduced",
+    "lockedExit": "same rune shape with lower-opacity cyan/lavender and 未开启 wording; reads existing exit.requires flag only",
+    "mapMarkerTouchTarget": "mobile size=max(84,controlH), controlH>=46 CSS px after current design-resolution conversion"
+  },
+  "minimap": {
+    "discovery": "Only exits accepted by existing LocalCartography.revealed are drawn.",
+    "insideCircle": "rune at actual local metre coordinates relative to player",
+    "outsideCircle": "arrow/rune clamped inside chart rim; nearest exit keeps exact bearing; crowded secondary glyphs step slightly along rim while arrows retain true destination bearing",
+    "persistentReadout": "nearest revealed destination name and straight-line metre distance; only one name plate prevents label crowding",
+    "nodeNames": [
+      "DiscoveredExitReadout",
+      "ExitDestinationName",
+      "ExitDistance"
+    ],
+    "inspectApi": "hud.miniMap.inspect(): area, revealedExits, nearestExit, readoutVisible, readoutName, readoutDistance, chartRadius"
+  },
+  "mapPanel": {
+    "localExits": "persistent destination name on dark backing, native rune shape, large marker hit area; selection preserves existing details/mark behavior",
+    "regionIds": [
+      "surface",
+      "highlands",
+      "riverbend",
+      "city",
+      "undercity",
+      "necropolis"
+    ],
+    "regionNames": [
+      "铁誓边境",
+      "断岳高地",
+      "风暴河湾",
+      "黑冠城域",
+      "誓火深城",
+      "沉钟禁域"
+    ],
+    "regionPicker": "expandable header control; switches to two columns when six rows exceed available height",
+    "nodeNames": [
+      "map:regions",
+      "MapRegionPicker",
+      "map:regions:dismiss",
+      "map:layer:<regionId>",
+      "map:local",
+      "map:place:exit:<exit.id>",
+      "ExitRuneIcon",
+      "ExitDestinationName"
+    ],
+    "inspectApi": "hud.mapPanel.inspect(): mode, region, regionPickerOpen, regionCount, regionAreaCount, selectedPoi, revealedExits, worldPositions"
+  },
+  "positionCorrection": {
+    "coordinateSource": {
+      "file": "src/cocos/assets/scripts/data/CampaignGeography.ts",
+      "sha256": "5116930107a0adac64830d08172d9f8bae78bef43db5c9317364ff62f8b9e289",
+      "bytes": 13772
+    },
+    "formula": "point=CAMPAIGN_ATLAS[id] ?? AREAS[id].atlas; x=point.x/100*fieldW; y=(1-point.z/100)*fieldH",
+    "reason": "The first 32 AREAS retain older atlas coordinates while expanded locations use campaign coordinates. Using one campaign composition frame removes mixed old/new underground placement.",
+    "oldU2Behavior": "All U2 locations returned the same center coordinate.",
+    "oldU1Behavior": "Five original U1 locations used a hardcoded hand layout, while later U1 points fell back to a different coordinate frame.",
+    "currentBehavior": "All six regions use their project atlas and distinct campaign composition coordinates, with AREAS.atlas fallback.",
+    "worldRuleImpact": "Display coordinates only; no WorldData metre positions, exits, locks, GameSession state or travel methods edited."
+  },
+  "validation": {
+    "typeCheck": {
+      "command": "npm run check",
+      "workingDirectory": "src/cocos",
+      "status": "passed",
+      "exitCode": 0
+    },
+    "sourcePngCopies": "All three runtime images match both project assets and preserved source-art copies by SHA-256.",
+    "sourceLineEndings": "MiniMap.ts and MapPanel.ts use LF.",
+    "buildUnderReview": "portal-sigil-v1",
+    "runtimeQa": "pending-final-root-and-QA-review",
+    "gpuAndVisualAcceptance": "not-claimed-by-this-source-record",
+    "mobileRealDevicePerformance": "not-validated"
+  },
+  "runtimeReview": "source-art/maps/waypoints-v1/runtime-review.json"
+}

@@ -1,0 +1,1377 @@
+{
+  "status": "passed-final-v2-desktop-and-mobile-real-input-native3D-pulse-and-resource-review",
+  "completedAtUtc": "2026-11-08T09:44:23.343692+00:00",
+  "package": "portal-runes-v2",
+  "buildProof": {
+    "path": "source-art/maps/waypoints-runes-v8/portal-runes-v2-build.json",
+    "sha256": "8faac5dc6f1d9c5ddd8f84c25e4c879c425183ec456e524e10048e9786da6334",
+    "bytes": 458413
+  },
+  "mainJs": {
+    "relativePath": "assets/main/index.72dad.js",
+    "bytes": 1143572,
+    "sha256": "3b4e553c9e22020176750fb8b5f3915db0cab06ceed07fd77b5c189346687a75",
+    "chapterGameRfPush": true,
+    "markers": {
+      "PortalHud": true,
+      "PortalPresentation": true,
+      "ExitSigilMount:": true,
+      "bg3-inspired-rune-circle": true,
+      "open-center-circle": true,
+      "flat2d/waypoints-v1/rune-sigil-v8": true,
+      "nativePortals": true,
+      "portalMounts": true,
+      "planExitSigils": true,
+      "revealedExits": true,
+      "nearestExit": true,
+      "readoutVisible": true,
+      "fadedOccluders": true,
+      "terrainDetails": true,
+      "shipwreck": true,
+      "gorges": true,
+      "entranceClusters": true,
+      "progressionView": true,
+      "combatSkillView": true
+    }
+  },
+  "scope": "Original production handlers. Desktop real F and pointer label; mobile real touch interact and label; four fresh-start round-trip legs per mode plus actual E03 locked/unlock/return, out-of-range and duplicate gestures. E03 fixtures enter areas directly; this is not a full progression playthrough. No actor/animation substitutions, source edits or service operations.",
+  "rootArtApprovedBeforeFinalRuns": true,
+  "userArtApprovalClaimed": false,
+  "modes": [
+    {
+      "mode": "desktop",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "source": {
+        "path": "src/cocos/test-results/portal-runes-v2-input-final.json",
+        "sha256": "c33527ff090ffbeca1a80a2b129d64b9231e9298533bd5cf4cc7be8373f2a024",
+        "bytes": 417054
+      },
+      "legalTravels": [
+        {
+          "input": "real keyboard F",
+          "from": "S01-T1",
+          "to": "S01",
+          "exitId": "door-town-1-S01-T1",
+          "actualApproachDistance": 1.099999809265137,
+          "afterPlayer": {
+            "x": -31.587995529174805,
+            "z": -19.22011375427246
+          },
+          "oldResourcesAlive": 0
+        },
+        {
+          "input": "real pointer/touch portal label",
+          "from": "S01",
+          "to": "S01-T1",
+          "exitId": "door-town-1-S01",
+          "actualApproachDistance": 1.0999977052643566,
+          "afterPlayer": {
+            "x": 0,
+            "z": -10.899999618530273
+          },
+          "oldResourcesAlive": 0
+        },
+        {
+          "input": "real keyboard F",
+          "from": "S01-T1",
+          "to": "S01-T2",
+          "exitId": "town-lane-12-S01-T1",
+          "actualApproachDistance": 1.111174859709968,
+          "afterPlayer": {
+            "x": -12.213717460632324,
+            "z": -1.4483102560043335
+          },
+          "oldResourcesAlive": 0
+        },
+        {
+          "input": "real pointer/touch portal label",
+          "from": "S01-T2",
+          "to": "S01-T1",
+          "exitId": "town-lane-12-S01-T2",
+          "actualApproachDistance": 1.1000095794228752,
+          "afterPlayer": {
+            "x": 13.180965423583984,
+            "z": -1.3739781379699707
+          },
+          "oldResourcesAlive": 0
+        }
+      ],
+      "rapidDuplicate": {
+        "input": "two rapid real keyboard F presses",
+        "rebuildCount": 1,
+        "pointerStart": null
+      },
+      "locked": {
+        "exit": "E03-S17",
+        "areaAfterActualGesture": "S17",
+        "flagAfter": false
+      },
+      "realUnlock": {
+        "exit": "E03-U1-02",
+        "input": "real keyboard F",
+        "afterArea": "S17",
+        "flagAfter": true,
+        "reciprocalInput": "real keyboard F",
+        "reciprocalAfterArea": "U1-02",
+        "flagsAssignedByQA": false
+      },
+      "outOfRange": {
+        "actualDistance": 1.5499996185302738,
+        "areaAfterGesture": "S01-T1"
+      },
+      "fixedOrientationMaxTransformDelta": 0,
+      "pulse": {
+        "scope": "Real running GameSession time, static circle/core transforms and UV; glow alpha changes only. No time assignment.",
+        "gameTimeDelta": 1.4253000000044702,
+        "before": {
+          "time": 1.35789999999851,
+          "period": 8,
+          "wave": 0.8755109147442455,
+          "glowAlpha": 129,
+          "lockedGlowAlpha": 18,
+          "minimumAlpha": 110,
+          "maximumAlpha": 130,
+          "coreStatic": true
+        },
+        "after": {
+          "time": 2.78289999999851,
+          "period": 8,
+          "wave": 0.8168379329971007,
+          "glowAlpha": 128,
+          "lockedGlowAlpha": 18,
+          "minimumAlpha": 110,
+          "maximumAlpha": 130,
+          "coreStatic": true
+        },
+        "coreTransformsAndUVStatic": true
+      },
+      "textureRefsAtT1Start": [
+        {
+          "field": "texture",
+          "uuid": "22327f25-8ba6-5432-9521-14ccf4869973@6c48a",
+          "refCount": 1
+        },
+        {
+          "field": "glowTexture",
+          "uuid": "641e1962-fbe8-5dda-8289-e0b9ab25f000@6c48a",
+          "refCount": 1
+        }
+      ],
+      "textureRefsAtT1End": [
+        {
+          "field": "texture",
+          "uuid": "22327f25-8ba6-5432-9521-14ccf4869973@6c48a",
+          "refCount": 1
+        },
+        {
+          "field": "glowTexture",
+          "uuid": "641e1962-fbe8-5dda-8289-e0b9ab25f000@6c48a",
+          "refCount": 1
+        }
+      ],
+      "oldResourcesAlive": 0,
+      "glyph": {
+        "resource": "flat2d/waypoints-v1/rune-sigil-v8",
+        "blendFactors": {
+          "one": 1,
+          "srcAlpha": 2,
+          "oneMinusSrcAlpha": 4
+        },
+        "textures": [
+          {
+            "role": "core",
+            "uuid": "22327f25-8ba6-5432-9521-14ccf4869973@6c48a",
+            "native": "assets/resources/native/22/22327f25-8ba6-5432-9521-14ccf4869973.7b210.png",
+            "refCount": 1,
+            "gpu": {
+              "width": 512,
+              "height": 512,
+              "size": 1048576,
+              "levels": 1
+            },
+            "sourceSha256": "825e7b55e8d0b84c32d015112f7ca3cda2ab1ddb470820c173a7f35bdde654bc",
+            "nativeSha256": "825e7b55e8d0b84c32d015112f7ca3cda2ab1ddb470820c173a7f35bdde654bc"
+          },
+          {
+            "role": "glow",
+            "uuid": "641e1962-fbe8-5dda-8289-e0b9ab25f000@6c48a",
+            "native": "assets/resources/native/64/641e1962-fbe8-5dda-8289-e0b9ab25f000.a0ea6.png",
+            "refCount": 1,
+            "gpu": {
+              "width": 512,
+              "height": 512,
+              "size": 1048576,
+              "levels": 1
+            },
+            "sourceSha256": "a867f8f5720cca9152e495df261ad2cb792dd04743bfeba5065b8dd45a3d095d",
+            "nativeSha256": "a867f8f5720cca9152e495df261ad2cb792dd04743bfeba5065b8dd45a3d095d"
+          }
+        ],
+        "materials": [
+          {
+            "state": "open",
+            "role": "core",
+            "color": {
+              "r": 255,
+              "g": 255,
+              "b": 255,
+              "a": 238
+            },
+            "depth": {
+              "depthTest": true,
+              "depthWrite": false,
+              "depthFunc": 1,
+              "stencilTestFront": false,
+              "stencilFuncFront": 7,
+              "stencilReadMaskFront": 65535,
+              "stencilWriteMaskFront": 65535,
+              "stencilFailOpFront": 1,
+              "stencilZFailOpFront": 1,
+              "stencilPassOpFront": 1,
+              "stencilRefFront": 1,
+              "stencilTestBack": false,
+              "stencilFuncBack": 7,
+              "stencilReadMaskBack": 65535,
+              "stencilWriteMaskBack": 65535,
+              "stencilFailOpBack": 1,
+              "stencilZFailOpBack": 1,
+              "stencilPassOpBack": 1,
+              "stencilRefBack": 1
+            },
+            "blend": {
+              "blend": true,
+              "blendSrc": 2,
+              "blendDst": 4,
+              "blendEq": 0,
+              "blendSrcAlpha": 1,
+              "blendDstAlpha": 4,
+              "blendAlphaEq": 0,
+              "blendColorMask": 15
+            }
+          },
+          {
+            "state": "open",
+            "role": "glow",
+            "color": {
+              "r": 255,
+              "g": 255,
+              "b": 255,
+              "a": 111
+            },
+            "depth": {
+              "depthTest": true,
+              "depthWrite": false,
+              "depthFunc": 1,
+              "stencilTestFront": false,
+              "stencilFuncFront": 7,
+              "stencilReadMaskFront": 65535,
+              "stencilWriteMaskFront": 65535,
+              "stencilFailOpFront": 1,
+              "stencilZFailOpFront": 1,
+              "stencilPassOpFront": 1,
+              "stencilRefFront": 1,
+              "stencilTestBack": false,
+              "stencilFuncBack": 7,
+              "stencilReadMaskBack": 65535,
+              "stencilWriteMaskBack": 65535,
+              "stencilFailOpBack": 1,
+              "stencilZFailOpBack": 1,
+              "stencilPassOpBack": 1,
+              "stencilRefBack": 1
+            },
+            "blend": {
+              "blend": true,
+              "blendSrc": 2,
+              "blendDst": 1,
+              "blendEq": 0,
+              "blendSrcAlpha": 1,
+              "blendDstAlpha": 4,
+              "blendAlphaEq": 0,
+              "blendColorMask": 15
+            }
+          },
+          {
+            "state": "locked",
+            "role": "core",
+            "color": {
+              "r": 164,
+              "g": 158,
+              "b": 188,
+              "a": 96
+            },
+            "depth": {
+              "depthTest": true,
+              "depthWrite": false,
+              "depthFunc": 1,
+              "stencilTestFront": false,
+              "stencilFuncFront": 7,
+              "stencilReadMaskFront": 65535,
+              "stencilWriteMaskFront": 65535,
+              "stencilFailOpFront": 1,
+              "stencilZFailOpFront": 1,
+              "stencilPassOpFront": 1,
+              "stencilRefFront": 1,
+              "stencilTestBack": false,
+              "stencilFuncBack": 7,
+              "stencilReadMaskBack": 65535,
+              "stencilWriteMaskBack": 65535,
+              "stencilFailOpBack": 1,
+              "stencilZFailOpBack": 1,
+              "stencilPassOpBack": 1,
+              "stencilRefBack": 1
+            },
+            "blend": {
+              "blend": true,
+              "blendSrc": 2,
+              "blendDst": 4,
+              "blendEq": 0,
+              "blendSrcAlpha": 1,
+              "blendDstAlpha": 4,
+              "blendAlphaEq": 0,
+              "blendColorMask": 15
+            }
+          },
+          {
+            "state": "locked",
+            "role": "glow",
+            "color": {
+              "r": 255,
+              "g": 255,
+              "b": 255,
+              "a": 18
+            },
+            "depth": {
+              "depthTest": true,
+              "depthWrite": false,
+              "depthFunc": 1,
+              "stencilTestFront": false,
+              "stencilFuncFront": 7,
+              "stencilReadMaskFront": 65535,
+              "stencilWriteMaskFront": 65535,
+              "stencilFailOpFront": 1,
+              "stencilZFailOpFront": 1,
+              "stencilPassOpFront": 1,
+              "stencilRefFront": 1,
+              "stencilTestBack": false,
+              "stencilFuncBack": 7,
+              "stencilReadMaskBack": 65535,
+              "stencilWriteMaskBack": 65535,
+              "stencilFailOpBack": 1,
+              "stencilZFailOpBack": 1,
+              "stencilPassOpBack": 1,
+              "stencilRefBack": 1
+            },
+            "blend": {
+              "blend": true,
+              "blendSrc": 2,
+              "blendDst": 1,
+              "blendEq": 0,
+              "blendSrcAlpha": 1,
+              "blendDstAlpha": 4,
+              "blendAlphaEq": 0,
+              "blendColorMask": 15
+            }
+          }
+        ],
+        "alphaReview": {
+          "status": "prepared-source-alpha-review-not-runtime-art-approval",
+          "core": {
+            "file": "src/cocos/assets/resources/flat2d/waypoints-v1/rune-sigil-v8.png",
+            "sha256": "825e7b55e8d0b84c32d015112f7ca3cda2ab1ddb470820c173a7f35bdde654bc",
+            "size": [
+              512,
+              512
+            ],
+            "mode": "RGBA",
+            "actualMirrorMaxError": 0,
+            "innerDiskRadiusFraction": 0.2,
+            "innerAlphaMin": 0,
+            "innerAlphaMax": 255,
+            "innerTransparentFraction": 0.8462706511175899,
+            "innerVisibleFraction": 0.14206754130223517,
+            "hasInnerRuneAndTransparentGaps": true,
+            "alphaBounds": [
+              37,
+              30,
+              475,
+              461
+            ],
+            "alpha128Bounds": [
+              41,
+              33,
+              471,
+              457
+            ]
+          },
+          "glow": {
+            "file": "src/cocos/assets/resources/flat2d/waypoints-v1/rune-glow-v8.png",
+            "sha256": "a867f8f5720cca9152e495df261ad2cb792dd04743bfeba5065b8dd45a3d095d",
+            "size": [
+              512,
+              512
+            ],
+            "mode": "RGBA",
+            "actualMirrorMaxError": 0,
+            "innerDiskRadiusFraction": 0.2,
+            "innerAlphaMin": 0,
+            "innerAlphaMax": 115,
+            "innerTransparentFraction": 0.7673712342079689,
+            "innerVisibleFraction": 0.15038872691933916,
+            "hasInnerRuneAndTransparentGaps": true,
+            "alphaBounds": [
+              32,
+              26,
+              480,
+              466
+            ],
+            "alpha128Bounds": null
+          }
+        }
+      }
+    },
+    {
+      "mode": "mobile",
+      "viewport": {
+        "width": 915,
+        "height": 412
+      },
+      "source": {
+        "path": "src/cocos/test-results/portal-runes-v2-mobile-final.json",
+        "sha256": "041976af8a7c0d27f276c261d2bbc1f21ea939cb87928660e279a642caf318f2",
+        "bytes": 425527
+      },
+      "legalTravels": [
+        {
+          "input": "real touch interact",
+          "from": "S01-T1",
+          "to": "S01",
+          "exitId": "door-town-1-S01-T1",
+          "actualApproachDistance": 1.099999809265137,
+          "afterPlayer": {
+            "x": -31.587995529174805,
+            "z": -19.22011375427246
+          },
+          "oldResourcesAlive": 0
+        },
+        {
+          "input": "real pointer/touch portal label",
+          "from": "S01",
+          "to": "S01-T1",
+          "exitId": "door-town-1-S01",
+          "actualApproachDistance": 1.0999977052643566,
+          "afterPlayer": {
+            "x": 0,
+            "z": -10.899999618530273
+          },
+          "oldResourcesAlive": 0
+        },
+        {
+          "input": "real touch interact",
+          "from": "S01-T1",
+          "to": "S01-T2",
+          "exitId": "town-lane-12-S01-T1",
+          "actualApproachDistance": 1.111174859709968,
+          "afterPlayer": {
+            "x": -12.213717460632324,
+            "z": -1.4483102560043335
+          },
+          "oldResourcesAlive": 0
+        },
+        {
+          "input": "real pointer/touch portal label",
+          "from": "S01-T2",
+          "to": "S01-T1",
+          "exitId": "town-lane-12-S01-T2",
+          "actualApproachDistance": 1.1000095794228752,
+          "afterPlayer": {
+            "x": 13.180965423583984,
+            "z": -1.3739781379699707
+          },
+          "oldResourcesAlive": 0
+        }
+      ],
+      "rapidDuplicate": {
+        "input": "two rapid real near-label touch taps",
+        "rebuildCount": 1,
+        "pointerStart": {
+          "heldAttack": false,
+          "action": null
+        }
+      },
+      "locked": {
+        "exit": "E03-S17",
+        "areaAfterActualGesture": "S17",
+        "flagAfter": false
+      },
+      "realUnlock": {
+        "exit": "E03-U1-02",
+        "input": "real touch interact",
+        "afterArea": "S17",
+        "flagAfter": true,
+        "reciprocalInput": "real touch interact",
+        "reciprocalAfterArea": "U1-02",
+        "flagsAssignedByQA": false
+      },
+      "outOfRange": {
+        "actualDistance": 1.5499996185302738,
+        "areaAfterGesture": "S01-T1"
+      },
+      "fixedOrientationMaxTransformDelta": 0,
+      "pulse": {
+        "scope": "Real running GameSession time, static circle/core transforms and UV; glow alpha changes only. No time assignment.",
+        "gameTimeDelta": 1.4119000000059614,
+        "before": {
+          "time": 1.5141000000014906,
+          "period": 8,
+          "wave": 0.9280606760207943,
+          "glowAlpha": 129,
+          "lockedGlowAlpha": 18,
+          "minimumAlpha": 110,
+          "maximumAlpha": 130,
+          "coreStatic": true
+        },
+        "after": {
+          "time": 2.9251000000014917,
+          "period": 8,
+          "wave": 0.7474561542918917,
+          "glowAlpha": 127,
+          "lockedGlowAlpha": 18,
+          "minimumAlpha": 110,
+          "maximumAlpha": 130,
+          "coreStatic": true
+        },
+        "coreTransformsAndUVStatic": true
+      },
+      "textureRefsAtT1Start": [
+        {
+          "field": "texture",
+          "uuid": "22327f25-8ba6-5432-9521-14ccf4869973@6c48a",
+          "refCount": 1
+        },
+        {
+          "field": "glowTexture",
+          "uuid": "641e1962-fbe8-5dda-8289-e0b9ab25f000@6c48a",
+          "refCount": 1
+        }
+      ],
+      "textureRefsAtT1End": [
+        {
+          "field": "texture",
+          "uuid": "22327f25-8ba6-5432-9521-14ccf4869973@6c48a",
+          "refCount": 1
+        },
+        {
+          "field": "glowTexture",
+          "uuid": "641e1962-fbe8-5dda-8289-e0b9ab25f000@6c48a",
+          "refCount": 1
+        }
+      ],
+      "oldResourcesAlive": 0,
+      "glyph": {
+        "resource": "flat2d/waypoints-v1/rune-sigil-v8",
+        "blendFactors": {
+          "one": 1,
+          "srcAlpha": 2,
+          "oneMinusSrcAlpha": 4
+        },
+        "textures": [
+          {
+            "role": "core",
+            "uuid": "22327f25-8ba6-5432-9521-14ccf4869973@6c48a",
+            "native": "assets/resources/native/22/22327f25-8ba6-5432-9521-14ccf4869973.7b210.png",
+            "refCount": 1,
+            "gpu": {
+              "width": 512,
+              "height": 512,
+              "size": 1048576,
+              "levels": 1
+            },
+            "sourceSha256": "825e7b55e8d0b84c32d015112f7ca3cda2ab1ddb470820c173a7f35bdde654bc",
+            "nativeSha256": "825e7b55e8d0b84c32d015112f7ca3cda2ab1ddb470820c173a7f35bdde654bc"
+          },
+          {
+            "role": "glow",
+            "uuid": "641e1962-fbe8-5dda-8289-e0b9ab25f000@6c48a",
+            "native": "assets/resources/native/64/641e1962-fbe8-5dda-8289-e0b9ab25f000.a0ea6.png",
+            "refCount": 1,
+            "gpu": {
+              "width": 512,
+              "height": 512,
+              "size": 1048576,
+              "levels": 1
+            },
+            "sourceSha256": "a867f8f5720cca9152e495df261ad2cb792dd04743bfeba5065b8dd45a3d095d",
+            "nativeSha256": "a867f8f5720cca9152e495df261ad2cb792dd04743bfeba5065b8dd45a3d095d"
+          }
+        ],
+        "materials": [
+          {
+            "state": "open",
+            "role": "core",
+            "color": {
+              "r": 255,
+              "g": 255,
+              "b": 255,
+              "a": 238
+            },
+            "depth": {
+              "depthTest": true,
+              "depthWrite": false,
+              "depthFunc": 1,
+              "stencilTestFront": false,
+              "stencilFuncFront": 7,
+              "stencilReadMaskFront": 65535,
+              "stencilWriteMaskFront": 65535,
+              "stencilFailOpFront": 1,
+              "stencilZFailOpFront": 1,
+              "stencilPassOpFront": 1,
+              "stencilRefFront": 1,
+              "stencilTestBack": false,
+              "stencilFuncBack": 7,
+              "stencilReadMaskBack": 65535,
+              "stencilWriteMaskBack": 65535,
+              "stencilFailOpBack": 1,
+              "stencilZFailOpBack": 1,
+              "stencilPassOpBack": 1,
+              "stencilRefBack": 1
+            },
+            "blend": {
+              "blend": true,
+              "blendSrc": 2,
+              "blendDst": 4,
+              "blendEq": 0,
+              "blendSrcAlpha": 1,
+              "blendDstAlpha": 4,
+              "blendAlphaEq": 0,
+              "blendColorMask": 15
+            }
+          },
+          {
+            "state": "open",
+            "role": "glow",
+            "color": {
+              "r": 255,
+              "g": 255,
+              "b": 255,
+              "a": 124
+            },
+            "depth": {
+              "depthTest": true,
+              "depthWrite": false,
+              "depthFunc": 1,
+              "stencilTestFront": false,
+              "stencilFuncFront": 7,
+              "stencilReadMaskFront": 65535,
+              "stencilWriteMaskFront": 65535,
+              "stencilFailOpFront": 1,
+              "stencilZFailOpFront": 1,
+              "stencilPassOpFront": 1,
+              "stencilRefFront": 1,
+              "stencilTestBack": false,
+              "stencilFuncBack": 7,
+              "stencilReadMaskBack": 65535,
+              "stencilWriteMaskBack": 65535,
+              "stencilFailOpBack": 1,
+              "stencilZFailOpBack": 1,
+              "stencilPassOpBack": 1,
+              "stencilRefBack": 1
+            },
+            "blend": {
+              "blend": true,
+              "blendSrc": 2,
+              "blendDst": 1,
+              "blendEq": 0,
+              "blendSrcAlpha": 1,
+              "blendDstAlpha": 4,
+              "blendAlphaEq": 0,
+              "blendColorMask": 15
+            }
+          },
+          {
+            "state": "locked",
+            "role": "core",
+            "color": {
+              "r": 164,
+              "g": 158,
+              "b": 188,
+              "a": 96
+            },
+            "depth": {
+              "depthTest": true,
+              "depthWrite": false,
+              "depthFunc": 1,
+              "stencilTestFront": false,
+              "stencilFuncFront": 7,
+              "stencilReadMaskFront": 65535,
+              "stencilWriteMaskFront": 65535,
+              "stencilFailOpFront": 1,
+              "stencilZFailOpFront": 1,
+              "stencilPassOpFront": 1,
+              "stencilRefFront": 1,
+              "stencilTestBack": false,
+              "stencilFuncBack": 7,
+              "stencilReadMaskBack": 65535,
+              "stencilWriteMaskBack": 65535,
+              "stencilFailOpBack": 1,
+              "stencilZFailOpBack": 1,
+              "stencilPassOpBack": 1,
+              "stencilRefBack": 1
+            },
+            "blend": {
+              "blend": true,
+              "blendSrc": 2,
+              "blendDst": 4,
+              "blendEq": 0,
+              "blendSrcAlpha": 1,
+              "blendDstAlpha": 4,
+              "blendAlphaEq": 0,
+              "blendColorMask": 15
+            }
+          },
+          {
+            "state": "locked",
+            "role": "glow",
+            "color": {
+              "r": 255,
+              "g": 255,
+              "b": 255,
+              "a": 18
+            },
+            "depth": {
+              "depthTest": true,
+              "depthWrite": false,
+              "depthFunc": 1,
+              "stencilTestFront": false,
+              "stencilFuncFront": 7,
+              "stencilReadMaskFront": 65535,
+              "stencilWriteMaskFront": 65535,
+              "stencilFailOpFront": 1,
+              "stencilZFailOpFront": 1,
+              "stencilPassOpFront": 1,
+              "stencilRefFront": 1,
+              "stencilTestBack": false,
+              "stencilFuncBack": 7,
+              "stencilReadMaskBack": 65535,
+              "stencilWriteMaskBack": 65535,
+              "stencilFailOpBack": 1,
+              "stencilZFailOpBack": 1,
+              "stencilPassOpBack": 1,
+              "stencilRefBack": 1
+            },
+            "blend": {
+              "blend": true,
+              "blendSrc": 2,
+              "blendDst": 1,
+              "blendEq": 0,
+              "blendSrcAlpha": 1,
+              "blendDstAlpha": 4,
+              "blendAlphaEq": 0,
+              "blendColorMask": 15
+            }
+          }
+        ],
+        "alphaReview": {
+          "status": "prepared-source-alpha-review-not-runtime-art-approval",
+          "core": {
+            "file": "src/cocos/assets/resources/flat2d/waypoints-v1/rune-sigil-v8.png",
+            "sha256": "825e7b55e8d0b84c32d015112f7ca3cda2ab1ddb470820c173a7f35bdde654bc",
+            "size": [
+              512,
+              512
+            ],
+            "mode": "RGBA",
+            "actualMirrorMaxError": 0,
+            "innerDiskRadiusFraction": 0.2,
+            "innerAlphaMin": 0,
+            "innerAlphaMax": 255,
+            "innerTransparentFraction": 0.8462706511175899,
+            "innerVisibleFraction": 0.14206754130223517,
+            "hasInnerRuneAndTransparentGaps": true,
+            "alphaBounds": [
+              37,
+              30,
+              475,
+              461
+            ],
+            "alpha128Bounds": [
+              41,
+              33,
+              471,
+              457
+            ]
+          },
+          "glow": {
+            "file": "src/cocos/assets/resources/flat2d/waypoints-v1/rune-glow-v8.png",
+            "sha256": "a867f8f5720cca9152e495df261ad2cb792dd04743bfeba5065b8dd45a3d095d",
+            "size": [
+              512,
+              512
+            ],
+            "mode": "RGBA",
+            "actualMirrorMaxError": 0,
+            "innerDiskRadiusFraction": 0.2,
+            "innerAlphaMin": 0,
+            "innerAlphaMax": 115,
+            "innerTransparentFraction": 0.7673712342079689,
+            "innerVisibleFraction": 0.15038872691933916,
+            "hasInnerRuneAndTransparentGaps": true,
+            "alphaBounds": [
+              32,
+              26,
+              480,
+              466
+            ],
+            "alpha128Bounds": null
+          }
+        }
+      }
+    }
+  ],
+  "native3D": {
+    "source": {
+      "path": "src/cocos/test-results/portal-runes-v2-native3D-final.json",
+      "sha256": "de046a18aa8eb54e9967f36eaedda9148c7cdd81fe4e0dfa0b51578cffa933bc",
+      "bytes": 53156
+    },
+    "screenshot": {
+      "path": "src/cocos/test-results/portal-runes-v2-native3D-final/desktop-native-inn-portal.png",
+      "sha256": "523b93f18ae079c45610688262ae909509e13360a9e5698e2f07e764e5c11a0a",
+      "bytes": 1229514
+    },
+    "nativePresentationReady": true,
+    "flatPresentationReady": false,
+    "actualPortalColliders": 0,
+    "glyph": {
+      "resource": "flat2d/waypoints-v1/rune-sigil-v8",
+      "blendFactors": {
+        "one": 1,
+        "srcAlpha": 2,
+        "oneMinusSrcAlpha": 4
+      },
+      "textures": [
+        {
+          "role": "core",
+          "uuid": "22327f25-8ba6-5432-9521-14ccf4869973@6c48a",
+          "native": "assets/resources/native/22/22327f25-8ba6-5432-9521-14ccf4869973.7b210.png",
+          "refCount": 1,
+          "gpu": {
+            "width": 512,
+            "height": 512,
+            "size": 1048576,
+            "levels": 1
+          },
+          "sourceSha256": "825e7b55e8d0b84c32d015112f7ca3cda2ab1ddb470820c173a7f35bdde654bc",
+          "nativeSha256": "825e7b55e8d0b84c32d015112f7ca3cda2ab1ddb470820c173a7f35bdde654bc"
+        },
+        {
+          "role": "glow",
+          "uuid": "641e1962-fbe8-5dda-8289-e0b9ab25f000@6c48a",
+          "native": "assets/resources/native/64/641e1962-fbe8-5dda-8289-e0b9ab25f000.a0ea6.png",
+          "refCount": 1,
+          "gpu": {
+            "width": 512,
+            "height": 512,
+            "size": 1048576,
+            "levels": 1
+          },
+          "sourceSha256": "a867f8f5720cca9152e495df261ad2cb792dd04743bfeba5065b8dd45a3d095d",
+          "nativeSha256": "a867f8f5720cca9152e495df261ad2cb792dd04743bfeba5065b8dd45a3d095d"
+        }
+      ],
+      "materials": [
+        {
+          "state": "open",
+          "role": "core",
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 238
+          },
+          "depth": {
+            "depthTest": true,
+            "depthWrite": false,
+            "depthFunc": 1,
+            "stencilTestFront": false,
+            "stencilFuncFront": 7,
+            "stencilReadMaskFront": 65535,
+            "stencilWriteMaskFront": 65535,
+            "stencilFailOpFront": 1,
+            "stencilZFailOpFront": 1,
+            "stencilPassOpFront": 1,
+            "stencilRefFront": 1,
+            "stencilTestBack": false,
+            "stencilFuncBack": 7,
+            "stencilReadMaskBack": 65535,
+            "stencilWriteMaskBack": 65535,
+            "stencilFailOpBack": 1,
+            "stencilZFailOpBack": 1,
+            "stencilPassOpBack": 1,
+            "stencilRefBack": 1
+          },
+          "blend": {
+            "blend": true,
+            "blendSrc": 2,
+            "blendDst": 4,
+            "blendEq": 0,
+            "blendSrcAlpha": 1,
+            "blendDstAlpha": 4,
+            "blendAlphaEq": 0,
+            "blendColorMask": 15
+          }
+        },
+        {
+          "state": "open",
+          "role": "glow",
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 130
+          },
+          "depth": {
+            "depthTest": true,
+            "depthWrite": false,
+            "depthFunc": 1,
+            "stencilTestFront": false,
+            "stencilFuncFront": 7,
+            "stencilReadMaskFront": 65535,
+            "stencilWriteMaskFront": 65535,
+            "stencilFailOpFront": 1,
+            "stencilZFailOpFront": 1,
+            "stencilPassOpFront": 1,
+            "stencilRefFront": 1,
+            "stencilTestBack": false,
+            "stencilFuncBack": 7,
+            "stencilReadMaskBack": 65535,
+            "stencilWriteMaskBack": 65535,
+            "stencilFailOpBack": 1,
+            "stencilZFailOpBack": 1,
+            "stencilPassOpBack": 1,
+            "stencilRefBack": 1
+          },
+          "blend": {
+            "blend": true,
+            "blendSrc": 2,
+            "blendDst": 1,
+            "blendEq": 0,
+            "blendSrcAlpha": 1,
+            "blendDstAlpha": 4,
+            "blendAlphaEq": 0,
+            "blendColorMask": 15
+          }
+        },
+        {
+          "state": "locked",
+          "role": "core",
+          "color": {
+            "r": 164,
+            "g": 158,
+            "b": 188,
+            "a": 96
+          },
+          "depth": {
+            "depthTest": true,
+            "depthWrite": false,
+            "depthFunc": 1,
+            "stencilTestFront": false,
+            "stencilFuncFront": 7,
+            "stencilReadMaskFront": 65535,
+            "stencilWriteMaskFront": 65535,
+            "stencilFailOpFront": 1,
+            "stencilZFailOpFront": 1,
+            "stencilPassOpFront": 1,
+            "stencilRefFront": 1,
+            "stencilTestBack": false,
+            "stencilFuncBack": 7,
+            "stencilReadMaskBack": 65535,
+            "stencilWriteMaskBack": 65535,
+            "stencilFailOpBack": 1,
+            "stencilZFailOpBack": 1,
+            "stencilPassOpBack": 1,
+            "stencilRefBack": 1
+          },
+          "blend": {
+            "blend": true,
+            "blendSrc": 2,
+            "blendDst": 4,
+            "blendEq": 0,
+            "blendSrcAlpha": 1,
+            "blendDstAlpha": 4,
+            "blendAlphaEq": 0,
+            "blendColorMask": 15
+          }
+        },
+        {
+          "state": "locked",
+          "role": "glow",
+          "color": {
+            "r": 255,
+            "g": 255,
+            "b": 255,
+            "a": 18
+          },
+          "depth": {
+            "depthTest": true,
+            "depthWrite": false,
+            "depthFunc": 1,
+            "stencilTestFront": false,
+            "stencilFuncFront": 7,
+            "stencilReadMaskFront": 65535,
+            "stencilWriteMaskFront": 65535,
+            "stencilFailOpFront": 1,
+            "stencilZFailOpFront": 1,
+            "stencilPassOpFront": 1,
+            "stencilRefFront": 1,
+            "stencilTestBack": false,
+            "stencilFuncBack": 7,
+            "stencilReadMaskBack": 65535,
+            "stencilWriteMaskBack": 65535,
+            "stencilFailOpBack": 1,
+            "stencilZFailOpBack": 1,
+            "stencilPassOpBack": 1,
+            "stencilRefBack": 1
+          },
+          "blend": {
+            "blend": true,
+            "blendSrc": 2,
+            "blendDst": 1,
+            "blendEq": 0,
+            "blendSrcAlpha": 1,
+            "blendDstAlpha": 4,
+            "blendAlphaEq": 0,
+            "blendColorMask": 15
+          }
+        }
+      ],
+      "alphaReview": {
+        "status": "prepared-source-alpha-review-not-runtime-art-approval",
+        "core": {
+          "file": "src/cocos/assets/resources/flat2d/waypoints-v1/rune-sigil-v8.png",
+          "sha256": "825e7b55e8d0b84c32d015112f7ca3cda2ab1ddb470820c173a7f35bdde654bc",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGBA",
+          "actualMirrorMaxError": 0,
+          "innerDiskRadiusFraction": 0.2,
+          "innerAlphaMin": 0,
+          "innerAlphaMax": 255,
+          "innerTransparentFraction": 0.8462706511175899,
+          "innerVisibleFraction": 0.14206754130223517,
+          "hasInnerRuneAndTransparentGaps": true,
+          "alphaBounds": [
+            37,
+            30,
+            475,
+            461
+          ],
+          "alpha128Bounds": [
+            41,
+            33,
+            471,
+            457
+          ]
+        },
+        "glow": {
+          "file": "src/cocos/assets/resources/flat2d/waypoints-v1/rune-glow-v8.png",
+          "sha256": "a867f8f5720cca9152e495df261ad2cb792dd04743bfeba5065b8dd45a3d095d",
+          "size": [
+            512,
+            512
+          ],
+          "mode": "RGBA",
+          "actualMirrorMaxError": 0,
+          "innerDiskRadiusFraction": 0.2,
+          "innerAlphaMin": 0,
+          "innerAlphaMax": 115,
+          "innerTransparentFraction": 0.7673712342079689,
+          "innerVisibleFraction": 0.15038872691933916,
+          "hasInnerRuneAndTransparentGaps": true,
+          "alphaBounds": [
+            32,
+            26,
+            480,
+            466
+          ],
+          "alpha128Bounds": null
+        }
+      }
+    },
+    "oldResourcesAlive": 0
+  },
+  "representativePreviews": [
+    {
+      "mode": "desktop",
+      "area": "S01-T1",
+      "exit": "door-town-1-S01-T1",
+      "screenshot": {
+        "path": "src/cocos/test-results/portal-runes-v2-preview/desktop-inn-overlay-portal.png",
+        "sha256": "8ef1b2c80d4b9376046da7981df02a3a0369d5373f6660df15550bc87f65e3e0",
+        "bytes": 885200
+      },
+      "labelClearance": {
+        "id": "door-town-1-S01-T1",
+        "labelVisible": true,
+        "label": {
+          "x": 514.9565071871638,
+          "y": 92.905211902735,
+          "width": 240,
+          "height": 54
+        },
+        "glyphAlpha128Bounds": {
+          "x": 547.0658821190652,
+          "y": 172.39540090537673,
+          "width": 175.78125,
+          "height": 173.32848833506404
+        },
+        "verticalGapPixels": 25.490189002641728,
+        "overlapAreaPixels": 0
+      }
+    },
+    {
+      "mode": "desktop",
+      "area": "S01",
+      "exit": "door-town-1-S01",
+      "screenshot": {
+        "path": "src/cocos/test-results/portal-runes-v2-preview/desktop-town-portal.png",
+        "sha256": "4065a0f5478c92c8903d61132c34394a9e8208942bc201821ddb82c7752a4abf",
+        "bytes": 1407813
+      },
+      "labelClearance": {
+        "id": "door-town-1-S01",
+        "labelVisible": true,
+        "label": {
+          "x": 403.809025533812,
+          "y": 102.65913903441981,
+          "width": 240,
+          "height": 54
+        },
+        "glyphAlpha128Bounds": {
+          "x": 441.65039742651334,
+          "y": 181.26953270128206,
+          "width": 164.31725543478296,
+          "height": 162.0244564871254
+        },
+        "verticalGapPixels": 24.61039366686225,
+        "overlapAreaPixels": 0
+      }
+    },
+    {
+      "mode": "desktop",
+      "area": "U1-02",
+      "exit": "E03-U1-02",
+      "screenshot": {
+        "path": "src/cocos/test-results/portal-runes-v2-preview/desktop-cave-portal.png",
+        "sha256": "073b931ebdb9cd03538ded877816bc3c6dba717862f8a1ff15621d1af347f2c4",
+        "bytes": 1387165
+      },
+      "labelClearance": {
+        "id": "E03-U1-02",
+        "labelVisible": true,
+        "label": {
+          "x": 426.09173165600384,
+          "y": 193.4183233482919,
+          "width": 240,
+          "height": 54.00000000000006
+        },
+        "glyphAlpha128Bounds": {
+          "x": 458.2011064988009,
+          "y": 272.90851243535064,
+          "width": 175.78124999999983,
+          "height": 173.32848833506404
+        },
+        "verticalGapPixels": 25.490189087058695,
+        "overlapAreaPixels": 0
+      }
+    },
+    {
+      "mode": "desktop",
+      "area": "S06",
+      "exit": "road-S06-S05",
+      "screenshot": {
+        "path": "src/cocos/test-results/portal-runes-v2-preview/desktop-wetland-portal.png",
+        "sha256": "ec74eba97a13123598662d59da5ab338de57bf561097b2dcd7d75ba45167f269",
+        "bytes": 1486043
+      },
+      "labelClearance": {
+        "id": "road-S06-S05",
+        "labelVisible": true,
+        "label": {
+          "x": 391.33956244287504,
+          "y": 182.44319880385046,
+          "width": 240,
+          "height": 54
+        },
+        "glyphAlpha128Bounds": {
+          "x": 429.1809343516343,
+          "y": 261.0535933522123,
+          "width": 164.3172554347825,
+          "height": 162.02445648712478
+        },
+        "verticalGapPixels": 24.610394548361853,
+        "overlapAreaPixels": 0
+      }
+    },
+    {
+      "mode": "mobile",
+      "area": "S01-T1",
+      "exit": "door-town-1-S01-T1",
+      "screenshot": {
+        "path": "src/cocos/test-results/portal-runes-v2-mobile-preview/mobile-inn-overlay-portal.png",
+        "sha256": "c252a76f7601a705f9a02a22a8906152a1d64395b9b98603b52af271550afcd3",
+        "bytes": 1351618
+      },
+      "labelClearance": {
+        "id": "door-town-1-S01-T1",
+        "labelVisible": true,
+        "label": {
+          "x": 366.48622359106747,
+          "y": 38.062426785053844,
+          "width": 158.00000000000006,
+          "height": 46
+        },
+        "glyphAlpha128Bounds": {
+          "x": 395.1932547968573,
+          "y": 98.648479385016,
+          "width": 100.5859375,
+          "height": 99.18241276950886
+        },
+        "verticalGapPixels": 14.586052599962159,
+        "overlapAreaPixels": 0
+      }
+    },
+    {
+      "mode": "mobile",
+      "area": "S01",
+      "exit": "door-town-1-S01",
+      "screenshot": {
+        "path": "src/cocos/test-results/portal-runes-v2-mobile-preview/mobile-town-portal.png",
+        "sha256": "11b0249b0f675f360d794bf2cd14379949d5a5d2f429940dc1d6a9868ad367e5",
+        "bytes": 2282521
+      },
+      "labelClearance": {
+        "id": "door-town-1-S01",
+        "labelVisible": true,
+        "label": {
+          "x": 302.885164557001,
+          "y": 43.64384062090818,
+          "width": 158,
+          "height": 45.99999999999994
+        },
+        "glyphAlpha128Bounds": {
+          "x": 334.87217180581075,
+          "y": 103.72645477390836,
+          "width": 94.0259850543481,
+          "height": 92.71399454541069
+        },
+        "verticalGapPixels": 14.082614153000236,
+        "overlapAreaPixels": 0
+      }
+    },
+    {
+      "mode": "mobile",
+      "area": "U1-02",
+      "exit": "E03-U1-02",
+      "screenshot": {
+        "path": "src/cocos/test-results/portal-runes-v2-mobile-preview/mobile-cave-portal.png",
+        "sha256": "d020db8f47629ee2419cf443717cb234fb613a92baf536b47449512a0af12cbe",
+        "bytes": 2204900
+      },
+      "labelClearance": {
+        "id": "E03-U1-02",
+        "labelVisible": true,
+        "label": {
+          "x": 315.6358242087217,
+          "y": 95.57826281931523,
+          "width": 158,
+          "height": 46
+        },
+        "glyphAlpha128Bounds": {
+          "x": 344.34285537345113,
+          "y": 156.16431545951053,
+          "width": 100.58593750000006,
+          "height": 99.18241276950886
+        },
+        "verticalGapPixels": 14.586052640195305,
+        "overlapAreaPixels": 0
+      }
+    },
+    {
+      "mode": "mobile",
+      "area": "S06",
+      "exit": "road-S06-S05",
+      "screenshot": {
+        "path": "src/cocos/test-results/portal-runes-v2-mobile-preview/mobile-wetland-portal.png",
+        "sha256": "e0843a9cf1fa6c9bcdf6da7cd8a9fedc876c9bd8157ecabd69f3ab86426fb7de",
+        "bytes": 2457537
+      },
+      "labelClearance": {
+        "id": "road-S06-S05",
+        "labelVisible": true,
+        "label": {
+          "x": 295.74986070483754,
+          "y": 89.29805268619646,
+          "width": 158,
+          "height": 46.00000000000006
+        },
+        "glyphAlpha128Bounds": {
+          "x": 327.7368679597597,
+          "y": 149.380667350059,
+          "width": 94.02598505434787,
+          "height": 92.71399454541032
+        },
+        "verticalGapPixels": 14.0826146638625,
+        "overlapAreaPixels": 0
+      }
+    },
+    {
+      "mode": "desktop",
+      "area": "H07",
+      "exit": "campaign-road-H07-H11",
+      "screenshot": {
+        "path": "src/cocos/test-results/portal-runes-v2-H07-preview/desktop-upright-H07-portal.png",
+        "sha256": "8a2a0ec356a473fc1466dd9754898a4d984817baa3cbb22b157d222fc4df5c73",
+        "bytes": 1304938
+      },
+      "labelClearance": {
+        "id": "campaign-road-H07-H11",
+        "labelVisible": true,
+        "label": {
+          "x": 504.67352480789543,
+          "y": 98.72244141731437,
+          "width": 240,
+          "height": 54
+        },
+        "glyphAlpha128Bounds": {
+          "x": 542.0802209293947,
+          "y": 177.09654683921565,
+          "width": 164.31725543478308,
+          "height": 162.02445648712512
+        },
+        "verticalGapPixels": 24.374105421901277,
+        "overlapAreaPixels": 0
+      }
+    }
+  ],
+  "finalReplyImage": {
+    "path": "src/cocos/test-results/portal-runes-v2-preview/desktop-T1-sigil-and-player-crop.png",
+    "sha256": "30dc077a1cbe517b7f3476b450af450550048c1304d13f84501b91f77000c1f6",
+    "bytes": 120148
+  },
+  "finalReplyImageProcessing": "Original browser screenshot crop only; no enlargement or scene synthesis.",
+  "renderGate": "3 real Cocos Director.EVENT_AFTER_DRAW +200ms",
+  "runtimeErrors": 0,
+  "failedRequests": 0,
+  "parallelWorkspaceChangesExcludedFromFrozenPackage": [
+    {
+      "path": "scripts/core/PureCombat.ts",
+      "snapshotSha256": "CC775E5E48C90E25E0D6A091A85CFE391C094072D77B37429E8C35FD9CE4531C",
+      "currentSha256": "DC4C27D696B2D07AD7B4ADCA6A301F559DFC55D426A14FD94B2BE3DFEFB289B6"
+    }
+  ]
+}

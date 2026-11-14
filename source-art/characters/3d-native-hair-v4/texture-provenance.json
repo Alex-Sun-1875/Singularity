@@ -1,0 +1,36 @@
+{
+  "tool": "Built-in cloud OpenAI image_gen.imagegen, one UV texture edit",
+  "rawGeneratedSize": [
+    1254,
+    1254
+  ],
+  "runtimeColorSize": [
+    1024,
+    1024
+  ],
+  "inputs": [
+    "cloud-input-uv.png",
+    "hair-2d-reference.jpg"
+  ],
+  "prompt": "generation-prompt.txt",
+  "composite": "Native broad lock shading + masked fine generated strand detail; original UV alpha retained; nearest-color padding avoids mip seams",
+  "normal": "Author tangent normal retained; low-amplitude fine-strand height gradients added and vectors normalized",
+  "roughness": "Subtle strand variation, zero metallic",
+  "allFaceAndClothingTexturesUnchanged": true,
+  "generationStatus": "Completed",
+  "artReview": "Pending actual Cocos character views",
+  "files": [
+    {
+      "path": "hair-detail-color.png",
+      "sha256": "b223a28898363ac808e119e1d8b9181c3499cf3b390d8032d4f6979f48877c8c"
+    },
+    {
+      "path": "hair-detail-normal.png",
+      "sha256": "14d5b56a5f6d0cdd83a72ea8cfdcdd096ef22a89c4805c26674b5b7b196d53f5"
+    },
+    {
+      "path": "hair-detail-orm.png",
+      "sha256": "5dd50c9e5c70daf9cb85f866b90c81edc297f154fb73b4ec963177dc38a34293"
+    }
+  ]
+}

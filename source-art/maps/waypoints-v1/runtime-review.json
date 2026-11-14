@@ -1,0 +1,3391 @@
+{
+  "date": "2026-11-08",
+  "completedAt": "2026-11-08T10:17:18.193810+08:00",
+  "status": "portal-visual-discoverability-and-targeted-runtime-review-passed",
+  "build": "portal-sigil-v3",
+  "buildRecord": "source-art/maps/waypoints-v1/portal-sigil-v3-build.json",
+  "mainJs": {
+    "file": "src/cocos/build/portal-sigil-v3/assets/main/index.f2513.js",
+    "sha256": "6b24fc34fac96a9d54bfc15b8fc746bc424b131458441950dab69350d3d8386d"
+  },
+  "preview": "http://127.0.0.1:7470/?view=2d&v=portal3",
+  "summary": {
+    "productionAreasPassed": 97,
+    "actualExitPortalsPassed": 320,
+    "newJourneyRealTravelTransitions": 8,
+    "realE03UnlockAndReturnTransitions": 4,
+    "viewports": [
+      "desktop 1280x720",
+      "mobile landscape 915x412 DPR2"
+    ],
+    "minimumMobileNearPlateCssHeight": 45.99999999999994,
+    "worldMapRegions": 6,
+    "runtimeErrors": 0,
+    "failedRequests": 0
+  },
+  "generation": {
+    "method": "Cloud OpenAI built-in image_gen",
+    "calls": 1,
+    "record": "source-art/maps/waypoints-v1/generation.json",
+    "completePrompt": "source-art/maps/waypoints-v1/prompt.txt",
+    "deterministicProcessing": "Existing Pillow/NumPy stroke-alpha extraction; cloud source preserved",
+    "runtimeTexture": "src/cocos/assets/resources/flat2d/waypoints-v1/ancient-sigil.png",
+    "localModelInference": false,
+    "dependenciesDownloaded": false
+  },
+  "artReview": {
+    "status": "first-pass-accepted",
+    "contactSheet": "source-art/maps/waypoints-v1/runtime-portal-review.jpg",
+    "sourceIndex": "source-art/maps/waypoints-v1/runtime-portal-review.sources.json",
+    "reviewed": "Town, forest, wetland, original E03 cave, full-image inn and locked entrance; normal product camera and original props retained",
+    "findings": [
+      "Double lavender circles and high-contrast destination labels remain visible across different ground surfaces.",
+      "Known offscreen exits display direction and distance; nearby desktop F and touch labels use original interaction.",
+      "Locked status is explicitly labelled and retains the existing gate condition.",
+      "Original E03 quiet approach now keeps player and circle above the bottom HUD; active attack still expands the view."
+    ]
+  },
+  "cameraRegression": [
+    {
+      "mode": "desktop",
+      "input": "real keyboard J",
+      "quietHeight": 4.3,
+      "attackHeight": 7.624560494245856,
+      "restoredHeight": 4.332827531145933,
+      "quietBounds": {
+        "cameraHeight": 4.3,
+        "player": {
+          "x": 553.2863002735023,
+          "y": 262.12247250660664,
+          "width": 44.892966010733744,
+          "height": 130.93781753130622
+        },
+        "portals": [
+          {
+            "id": "E03-U1-02",
+            "anchor": {
+              "x": 546.0917336957725,
+              "y": 447.98907244770464
+            },
+            "upright": {
+              "x": 437.2545243934467,
+              "y": 227.3844212849138,
+              "width": 217.67441860465146,
+              "height": 217.67441860465124
+            },
+            "ground": {
+              "x": 224.51073293408035,
+              "y": 235.6079573275867,
+              "width": 611.0039014472151,
+              "height": 399.30590895880204
+            }
+          },
+          {
+            "id": "u1-corridor-0102-U1-02",
+            "anchor": {
+              "x": 5112.541944511802,
+              "y": 789.2761741218947
+            },
+            "upright": {
+              "x": 5003.704735209477,
+              "y": 568.6715229591041,
+              "width": 217.67441860465078,
+              "height": 217.67441860465124
+            },
+            "ground": {
+              "x": 4823.119043826279,
+              "y": 593.9594140854862,
+              "width": 611.0039014472159,
+              "height": 394.85173045786985
+            }
+          },
+          {
+            "id": "u1-corridor-0204-U1-02",
+            "anchor": {
+              "x": -1876.4851387089755,
+              "y": 990.6541815513309
+            },
+            "upright": {
+              "x": -1985.3223480113013,
+              "y": 770.0495303885406,
+              "width": 217.674418604651,
+              "height": 217.67441860465067
+            },
+            "ground": {
+              "x": -2203.425822816696,
+              "y": 834.87028579456,
+              "width": 627.0829514852994,
+              "height": 332.10956874462363
+            }
+          }
+        ]
+      }
+    },
+    {
+      "mode": "mobile",
+      "input": "real touch attack",
+      "quietHeight": 4.3,
+      "attackHeight": 7.640263830480896,
+      "restoredHeight": 4.323193269186195,
+      "quietBounds": {
+        "cameraHeight": 4.3,
+        "player": {
+          "x": 398.75271837381666,
+          "y": 149.99230188393,
+          "width": 25.688752772808698,
+          "height": 74.92552892069185
+        },
+        "portals": [
+          {
+            "id": "E03-U1-02",
+            "anchor": {
+              "x": 394.6358274987823,
+              "y": 256.3493007391138
+            },
+            "upright": {
+              "x": 332.35675773134034,
+              "y": 130.11441701818353,
+              "width": 124.55813953488382,
+              "height": 124.55813953488374
+            },
+            "ground": {
+              "x": 210.62003261848062,
+              "y": 134.82010708704632,
+              "width": 349.63001027257303,
+              "height": 228.4917145708701
+            }
+          },
+          {
+            "id": "u1-corridor-0102-U1-02",
+            "anchor": {
+              "x": 3007.660114799066,
+              "y": 451.64136447490034
+            },
+            "upright": {
+              "x": 2945.3810450316237,
+              "y": 325.4064807539702,
+              "width": 124.55813953488405,
+              "height": 124.55813953488382
+            },
+            "ground": {
+              "x": 2842.0458994067944,
+              "y": 339.8767740096222,
+              "width": 349.63001027257314,
+              "height": 225.9429346508922
+            }
+          },
+          {
+            "id": "u1-corridor-0204-U1-02",
+            "anchor": {
+              "x": -991.6164939328237,
+              "y": 566.8743353928555
+            },
+            "upright": {
+              "x": -1053.8955637002657,
+              "y": 440.6394516719255,
+              "width": 124.55813953488371,
+              "height": 124.55813953488348
+            },
+            "ground": {
+              "x": -1178.699218727797,
+              "y": 477.73132837648103,
+              "width": 358.83080001658834,
+              "height": 190.04047544831252
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "resourceLifecycle": {
+    "layerMeshes": {
+      "captured": 1657,
+      "aliveAfterSwitch": 0
+    },
+    "layerMaterials": {
+      "captured": 1691,
+      "aliveAfterSwitch": 0
+    },
+    "layerFrames": {
+      "captured": 1241,
+      "aliveAfterSwitch": 0
+    },
+    "detailMeshes": {
+      "captured": 55,
+      "aliveAfterSwitch": 0
+    },
+    "detailMaterials": {
+      "captured": 53,
+      "aliveAfterSwitch": 0
+    },
+    "portalRoot": {
+      "captured": 97,
+      "aliveAfterSwitch": 0
+    },
+    "portalMeshes": {
+      "captured": 418,
+      "aliveAfterSwitch": 0
+    },
+    "portalMaterials": {
+      "captured": 224,
+      "aliveAfterSwitch": 0
+    }
+  },
+  "textureReferenceCounts": [
+    1
+  ],
+  "gates": {
+    "outOfRangeTravelRejected": true,
+    "lockedGateRejected": true,
+    "originalE03UnlockAndReturnPassed": true,
+    "nearLabelTouchDoesNotAttack": true,
+    "sixRegionUiNavigationPassedBothViewports": true,
+    "mapRenderTextureAndCameraCleanupPassed": true,
+    "typecheck": "npm run check against the exact stable build snapshot",
+    "nativeBuildWhitelist": "Array.from(Set) explicitly used before concat, preserving all current enemy concept mappings"
+  },
+  "resolvedDefects": [
+    {
+      "id": "creator-set-spread",
+      "failureBuild": "portal-sigil-v1",
+      "fixedIn": "portal-sigil-v2",
+      "description": "Creator loose array spread concatenated the Set object rather than enemy concept IDs; explicit Array.from restores real existing resources."
+    },
+    {
+      "id": "quiet-exit-camera",
+      "failureBuild": "portal-sigil-v2",
+      "fixedIn": "portal-sigil-v3",
+      "description": "Distant idle-enemy framing pushed the nearby E03 circle below HUD; quiet safe approaches within3.2m now keep normal follow framing."
+    }
+  ],
+  "evidence": [
+    {
+      "file": "src/cocos/test-results/portal-sigil-v3-review.json",
+      "sha256": "8d7234a5075b9d7db3842ee4860384019d33f7e781e652310608320967161b5e"
+    },
+    {
+      "file": "src/cocos/test-results/portal-sigil-v3-all97.json",
+      "sha256": "af85ab27640ae077adfd708d56df08a5b61b45d90686402ff2bd8ae6e141eae9"
+    }
+  ],
+  "areas": [
+    {
+      "id": "S01",
+      "exits": [
+        {
+          "id": "road-S01-S02",
+          "to": "S02",
+          "x": 0,
+          "z": -70,
+          "requires": null
+        },
+        {
+          "id": "road-S01-S03",
+          "to": "S03",
+          "x": 76,
+          "z": -10,
+          "requires": null
+        },
+        {
+          "id": "road-S01-S04",
+          "to": "S04",
+          "x": 76,
+          "z": 10,
+          "requires": null
+        },
+        {
+          "id": "road-S01-S20",
+          "to": "S20",
+          "x": 0,
+          "z": 70,
+          "requires": null
+        },
+        {
+          "id": "door-town-1-S01",
+          "to": "S01-T1",
+          "x": -35,
+          "z": -20,
+          "requires": null
+        },
+        {
+          "id": "door-town-2-S01",
+          "to": "S01-T2",
+          "x": 35,
+          "z": 20,
+          "requires": null
+        },
+        {
+          "id": "door-town-3-S01",
+          "to": "S01-T3",
+          "x": -35,
+          "z": 20,
+          "requires": null
+        },
+        {
+          "id": "door-town-4-S01",
+          "to": "S01-T4",
+          "x": 35,
+          "z": -20,
+          "requires": null
+        },
+        {
+          "id": "door-town-5-S01",
+          "to": "S01-T5",
+          "x": 0,
+          "z": 44,
+          "requires": null
+        },
+        {
+          "id": "door-town-6-S01",
+          "to": "S01-T6",
+          "x": 0,
+          "z": -44,
+          "requires": null
+        }
+      ],
+      "portals": 10,
+      "open": 10,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S02",
+      "exits": [
+        {
+          "id": "road-S02-S01",
+          "to": "S01",
+          "x": 0,
+          "z": 54,
+          "requires": null
+        },
+        {
+          "id": "road-S02-S18",
+          "to": "S18",
+          "x": -64,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "road-S02-S19",
+          "to": "S19",
+          "x": 64,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S03",
+      "exits": [
+        {
+          "id": "road-S03-S01",
+          "to": "S01",
+          "x": -64,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "road-S03-S04",
+          "to": "S04",
+          "x": 0,
+          "z": 58,
+          "requires": null
+        },
+        {
+          "id": "road-S03-S19",
+          "to": "S19",
+          "x": 0,
+          "z": -58,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S04",
+      "exits": [
+        {
+          "id": "road-S04-S01",
+          "to": "S01",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "road-S04-S03",
+          "to": "S03",
+          "x": 0,
+          "z": -60,
+          "requires": null
+        },
+        {
+          "id": "road-S04-S07",
+          "to": "S07",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "road-S04-S08",
+          "to": "S08",
+          "x": 0,
+          "z": 60,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S05",
+      "exits": [
+        {
+          "id": "road-S05-S19",
+          "to": "S19",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "road-S05-S06",
+          "to": "S06",
+          "x": 0,
+          "z": -60,
+          "requires": null
+        },
+        {
+          "id": "road-S05-S07",
+          "to": "S07",
+          "x": 0,
+          "z": 60,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S06",
+      "exits": [
+        {
+          "id": "road-S06-S05",
+          "to": "S05",
+          "x": -10,
+          "z": 52,
+          "requires": null
+        },
+        {
+          "id": "road-S06-S14",
+          "to": "S14",
+          "x": 10,
+          "z": 52,
+          "requires": null
+        },
+        {
+          "id": "road-S06-S15",
+          "to": "S15",
+          "x": 61,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S07",
+      "exits": [
+        {
+          "id": "road-S07-S04",
+          "to": "S04",
+          "x": -76,
+          "z": -10,
+          "requires": null
+        },
+        {
+          "id": "road-S07-S05",
+          "to": "S05",
+          "x": 0,
+          "z": -70,
+          "requires": null
+        },
+        {
+          "id": "road-S07-S08",
+          "to": "S08",
+          "x": -76,
+          "z": 10,
+          "requires": null
+        },
+        {
+          "id": "road-S07-S13",
+          "to": "S13",
+          "x": 76,
+          "z": 10,
+          "requires": null
+        },
+        {
+          "id": "road-S07-S14",
+          "to": "S14",
+          "x": 76,
+          "z": -10,
+          "requires": null
+        },
+        {
+          "id": "road-S07-S17",
+          "to": "S17",
+          "x": 0,
+          "z": 70,
+          "requires": null
+        },
+        {
+          "id": "E01-S07",
+          "to": "U1-01",
+          "x": -15,
+          "z": 32,
+          "requires": null
+        }
+      ],
+      "portals": 7,
+      "open": 7,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S08",
+      "exits": [
+        {
+          "id": "road-S08-S04",
+          "to": "S04",
+          "x": 0,
+          "z": -66,
+          "requires": null
+        },
+        {
+          "id": "road-S08-S07",
+          "to": "S07",
+          "x": 72,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "road-S08-S09",
+          "to": "S09",
+          "x": -72,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "road-S08-S11",
+          "to": "S11",
+          "x": 0,
+          "z": 66,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S09",
+      "exits": [
+        {
+          "id": "road-S09-S08",
+          "to": "S08",
+          "x": 76,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "road-S09-S10",
+          "to": "S10",
+          "x": 0,
+          "z": 70,
+          "requires": null
+        },
+        {
+          "id": "road-S09-S20",
+          "to": "S20",
+          "x": -76,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S10",
+      "exits": [
+        {
+          "id": "road-S10-S09",
+          "to": "S09",
+          "x": 0,
+          "z": -66,
+          "requires": null
+        },
+        {
+          "id": "road-S10-S11",
+          "to": "S11",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 2,
+      "open": 2,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S11",
+      "exits": [
+        {
+          "id": "road-S11-S08",
+          "to": "S08",
+          "x": -10,
+          "z": -60,
+          "requires": null
+        },
+        {
+          "id": "road-S11-S10",
+          "to": "S10",
+          "x": -64,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "road-S11-S12",
+          "to": "S12",
+          "x": 64,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "road-S11-S17",
+          "to": "S17",
+          "x": 10,
+          "z": -60,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S12",
+      "exits": [
+        {
+          "id": "road-S12-S11",
+          "to": "S11",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "road-S12-S13",
+          "to": "S13",
+          "x": 0,
+          "z": -64,
+          "requires": null
+        },
+        {
+          "id": "road-S12-S16",
+          "to": "S16",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S13",
+      "exits": [
+        {
+          "id": "road-S13-S07",
+          "to": "S07",
+          "x": -72,
+          "z": -10,
+          "requires": null
+        },
+        {
+          "id": "road-S13-S12",
+          "to": "S12",
+          "x": 0,
+          "z": 66,
+          "requires": null
+        },
+        {
+          "id": "road-S13-S14",
+          "to": "S14",
+          "x": 0,
+          "z": -66,
+          "requires": null
+        },
+        {
+          "id": "road-S13-S16",
+          "to": "S16",
+          "x": 72,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "road-S13-S17",
+          "to": "S17",
+          "x": -72,
+          "z": 10,
+          "requires": null
+        },
+        {
+          "id": "E02-S13",
+          "to": "U1-03",
+          "x": -14,
+          "z": 32,
+          "requires": null
+        }
+      ],
+      "portals": 6,
+      "open": 6,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S14",
+      "exits": [
+        {
+          "id": "road-S14-S06",
+          "to": "S06",
+          "x": -10,
+          "z": -68,
+          "requires": null
+        },
+        {
+          "id": "road-S14-S07",
+          "to": "S07",
+          "x": -76,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "road-S14-S13",
+          "to": "S13",
+          "x": 0,
+          "z": 68,
+          "requires": null
+        },
+        {
+          "id": "road-S14-S15",
+          "to": "S15",
+          "x": 10,
+          "z": -68,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S15",
+      "exits": [
+        {
+          "id": "road-S15-S06",
+          "to": "S06",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "road-S15-S14",
+          "to": "S14",
+          "x": -10,
+          "z": 60,
+          "requires": null
+        },
+        {
+          "id": "road-S15-S16",
+          "to": "S16",
+          "x": 10,
+          "z": 60,
+          "requires": null
+        },
+        {
+          "id": "E04-S15",
+          "to": "U2-01",
+          "x": -15,
+          "z": 30,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-S15-B15",
+          "to": "B15",
+          "x": -70,
+          "z": -20,
+          "requires": null
+        }
+      ],
+      "portals": 5,
+      "open": 5,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S16",
+      "exits": [
+        {
+          "id": "road-S16-S12",
+          "to": "S12",
+          "x": -70,
+          "z": 10,
+          "requires": null
+        },
+        {
+          "id": "road-S16-S13",
+          "to": "S13",
+          "x": -70,
+          "z": -10,
+          "requires": null
+        },
+        {
+          "id": "road-S16-S15",
+          "to": "S15",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-S16-H01",
+          "to": "H01",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S17",
+      "exits": [
+        {
+          "id": "road-S17-S07",
+          "to": "S07",
+          "x": 0,
+          "z": -58,
+          "requires": null
+        },
+        {
+          "id": "road-S17-S11",
+          "to": "S11",
+          "x": 0,
+          "z": 58,
+          "requires": null
+        },
+        {
+          "id": "road-S17-S13",
+          "to": "S13",
+          "x": 62,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "E03-S17",
+          "to": "U1-02",
+          "x": 15,
+          "z": 30,
+          "requires": "e03_open"
+        }
+      ],
+      "portals": 4,
+      "open": 3,
+      "locked": 1,
+      "portalColliders": 0
+    },
+    {
+      "id": "S18",
+      "exits": [
+        {
+          "id": "road-S18-S02",
+          "to": "S02",
+          "x": 62,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 1,
+      "open": 1,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S19",
+      "exits": [
+        {
+          "id": "road-S19-S02",
+          "to": "S02",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "road-S19-S03",
+          "to": "S03",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "road-S19-S05",
+          "to": "S05",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S20",
+      "exits": [
+        {
+          "id": "road-S20-S01",
+          "to": "S01",
+          "x": 0,
+          "z": -58,
+          "requires": null
+        },
+        {
+          "id": "road-S20-S09",
+          "to": "S09",
+          "x": 62,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 2,
+      "open": 2,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S01-T1",
+      "exits": [
+        {
+          "id": "door-town-1-S01-T1",
+          "to": "S01",
+          "x": 0,
+          "z": -14.4,
+          "requires": null
+        },
+        {
+          "id": "town-lane-12-S01-T1",
+          "to": "S01-T2",
+          "x": 16.4,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "town-lane-41-S01-T1",
+          "to": "S01-T4",
+          "x": -16.4,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S01-T2",
+      "exits": [
+        {
+          "id": "door-town-2-S01-T2",
+          "to": "S01",
+          "x": 0,
+          "z": -13.4,
+          "requires": null
+        },
+        {
+          "id": "town-lane-12-S01-T2",
+          "to": "S01-T1",
+          "x": -15.4,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "town-lane-26-S01-T2",
+          "to": "S01-T6",
+          "x": 0,
+          "z": 13.4,
+          "requires": null
+        },
+        {
+          "id": "town-lane-52-S01-T2",
+          "to": "S01-T5",
+          "x": 15.4,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S01-T3",
+      "exits": [
+        {
+          "id": "door-town-3-S01-T3",
+          "to": "S01",
+          "x": 0,
+          "z": -14.4,
+          "requires": null
+        },
+        {
+          "id": "town-lane-63-S01-T3",
+          "to": "S01-T6",
+          "x": 18.4,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "town-lane-34-S01-T3",
+          "to": "S01-T4",
+          "x": 0,
+          "z": 14.4,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S01-T4",
+      "exits": [
+        {
+          "id": "door-town-4-S01-T4",
+          "to": "S01",
+          "x": 0,
+          "z": -16.4,
+          "requires": null
+        },
+        {
+          "id": "town-lane-34-S01-T4",
+          "to": "S01-T3",
+          "x": 0,
+          "z": 16.4,
+          "requires": null
+        },
+        {
+          "id": "town-lane-41-S01-T4",
+          "to": "S01-T1",
+          "x": 20.4,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S01-T5",
+      "exits": [
+        {
+          "id": "door-town-5-S01-T5",
+          "to": "S01",
+          "x": 0,
+          "z": -13.4,
+          "requires": null
+        },
+        {
+          "id": "town-lane-52-S01-T5",
+          "to": "S01-T2",
+          "x": -14.4,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "town-lane-56-S01-T5",
+          "to": "S01-T6",
+          "x": 0,
+          "z": 13.4,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "S01-T6",
+      "exits": [
+        {
+          "id": "door-town-6-S01-T6",
+          "to": "S01",
+          "x": 22.4,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "town-lane-26-S01-T6",
+          "to": "S01-T2",
+          "x": 0,
+          "z": -18.4,
+          "requires": null
+        },
+        {
+          "id": "town-lane-63-S01-T6",
+          "to": "S01-T3",
+          "x": -22.4,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "town-lane-56-S01-T6",
+          "to": "S01-T5",
+          "x": 0,
+          "z": 18.4,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "U1-01",
+      "exits": [
+        {
+          "id": "E01-U1-01",
+          "to": "S07",
+          "x": 0,
+          "z": -54,
+          "requires": "e01_open"
+        },
+        {
+          "id": "u1-corridor-0102-U1-01",
+          "to": "U1-02",
+          "x": -66,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "u1-corridor-0103-U1-01",
+          "to": "U1-03",
+          "x": 66,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "u1-corridor-0104-U1-01",
+          "to": "U1-04",
+          "x": 0,
+          "z": 56,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 3,
+      "locked": 1,
+      "portalColliders": 0
+    },
+    {
+      "id": "U1-02",
+      "exits": [
+        {
+          "id": "E03-U1-02",
+          "to": "S17",
+          "x": 16,
+          "z": 30,
+          "requires": null
+        },
+        {
+          "id": "u1-corridor-0102-U1-02",
+          "to": "U1-01",
+          "x": 62,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "u1-corridor-0204-U1-02",
+          "to": "U1-04",
+          "x": 0,
+          "z": 56,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "U1-03",
+      "exits": [
+        {
+          "id": "E02-U1-03",
+          "to": "S13",
+          "x": 0,
+          "z": 54,
+          "requires": "e02_open"
+        },
+        {
+          "id": "u1-corridor-0103-U1-03",
+          "to": "U1-01",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U1-03-U1-06",
+          "to": "U1-06",
+          "x": -70,
+          "z": -20,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U1-03-U1-09",
+          "to": "U1-09",
+          "x": 0,
+          "z": -56,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 3,
+      "locked": 1,
+      "portalColliders": 0
+    },
+    {
+      "id": "U1-04",
+      "exits": [
+        {
+          "id": "u1-corridor-0104-U1-04",
+          "to": "U1-01",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "u1-corridor-0204-U1-04",
+          "to": "U1-02",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "u1-corridor-0405-U1-04",
+          "to": "U1-05",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "U1-05",
+      "exits": [
+        {
+          "id": "u1-corridor-0405-U1-05",
+          "to": "U1-04",
+          "x": -72,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U1-05-U1-06",
+          "to": "U1-06",
+          "x": -72,
+          "z": -20,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U1-05-U1-07",
+          "to": "U1-07",
+          "x": -72,
+          "z": 20,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "U2-01",
+      "exits": [
+        {
+          "id": "E04-U2-01",
+          "to": "S15",
+          "x": 0,
+          "z": -50,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U2-01-U2-02",
+          "to": "U2-02",
+          "x": -58,
+          "z": 0,
+          "requires": "u2_deep_gate_open"
+        }
+      ],
+      "portals": 2,
+      "open": 1,
+      "locked": 1,
+      "portalColliders": 0
+    },
+    {
+      "id": "H01",
+      "exits": [
+        {
+          "id": "campaign-road-H01-H02",
+          "to": "H02",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H01-H05",
+          "to": "H05",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H01-S16",
+          "to": "S16",
+          "x": 70,
+          "z": -20,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "H02",
+      "exits": [
+        {
+          "id": "campaign-road-H02-H01",
+          "to": "H01",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H02-H03",
+          "to": "H03",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H02-H04",
+          "to": "H04",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H02-H06",
+          "to": "H06",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H02-H11",
+          "to": "H11",
+          "x": 70,
+          "z": -20,
+          "requires": null
+        }
+      ],
+      "portals": 5,
+      "open": 5,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "H03",
+      "exits": [
+        {
+          "id": "campaign-road-H03-H02",
+          "to": "H02",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H03-H06",
+          "to": "H06",
+          "x": -70,
+          "z": -20,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H03-H11",
+          "to": "H11",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H03-H15",
+          "to": "H15",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "H04",
+      "exits": [
+        {
+          "id": "campaign-road-H04-H02",
+          "to": "H02",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H04-H05",
+          "to": "H05",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H04-H07",
+          "to": "H07",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H04-H11",
+          "to": "H11",
+          "x": -20,
+          "z": -62,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "H05",
+      "exits": [
+        {
+          "id": "campaign-road-H05-H01",
+          "to": "H01",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H05-H04",
+          "to": "H04",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H05-H14",
+          "to": "H14",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "E05-H05",
+          "to": "U1-09",
+          "x": -20,
+          "z": -62,
+          "requires": "e05_open"
+        }
+      ],
+      "portals": 4,
+      "open": 3,
+      "locked": 1,
+      "portalColliders": 0
+    },
+    {
+      "id": "H06",
+      "exits": [
+        {
+          "id": "campaign-road-H06-H02",
+          "to": "H02",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H06-H03",
+          "to": "H03",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 2,
+      "open": 2,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "H07",
+      "exits": [
+        {
+          "id": "campaign-road-H07-H04",
+          "to": "H04",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H07-H08",
+          "to": "H08",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H07-H11",
+          "to": "H11",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H07-H12",
+          "to": "H12",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H07-H15",
+          "to": "H15",
+          "x": -20,
+          "z": -62,
+          "requires": null
+        }
+      ],
+      "portals": 5,
+      "open": 5,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "H08",
+      "exits": [
+        {
+          "id": "campaign-road-H08-H07",
+          "to": "H07",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H08-H12",
+          "to": "H12",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H08-H15",
+          "to": "H15",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H08-H09",
+          "to": "H09",
+          "x": 70,
+          "z": 0,
+          "requires": "m4_bridge_open"
+        }
+      ],
+      "portals": 4,
+      "open": 3,
+      "locked": 1,
+      "portalColliders": 0
+    },
+    {
+      "id": "H09",
+      "exits": [
+        {
+          "id": "campaign-road-H09-H10",
+          "to": "H10",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H09-H08",
+          "to": "H08",
+          "x": -70,
+          "z": 0,
+          "requires": "m4_bridge_open"
+        }
+      ],
+      "portals": 2,
+      "open": 1,
+      "locked": 1,
+      "portalColliders": 0
+    },
+    {
+      "id": "H10",
+      "exits": [
+        {
+          "id": "campaign-road-H10-H09",
+          "to": "H09",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        }
+      ],
+      "portals": 1,
+      "open": 1,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "H11",
+      "exits": [
+        {
+          "id": "campaign-road-H11-H02",
+          "to": "H02",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H11-H03",
+          "to": "H03",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H11-H04",
+          "to": "H04",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H11-H07",
+          "to": "H07",
+          "x": -20,
+          "z": 62,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "H12",
+      "exits": [
+        {
+          "id": "campaign-road-H12-H07",
+          "to": "H07",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H12-H08",
+          "to": "H08",
+          "x": -20,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H12-H13",
+          "to": "H13",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "H13",
+      "exits": [
+        {
+          "id": "campaign-road-H13-H12",
+          "to": "H12",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H13-H14",
+          "to": "H14",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 2,
+      "open": 2,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "H14",
+      "exits": [
+        {
+          "id": "campaign-road-H14-H05",
+          "to": "H05",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H14-H13",
+          "to": "H13",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 2,
+      "open": 2,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "H15",
+      "exits": [
+        {
+          "id": "campaign-road-H15-H03",
+          "to": "H03",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H15-H07",
+          "to": "H07",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H15-H08",
+          "to": "H08",
+          "x": -20,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H15-H16",
+          "to": "H16",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H15-H17",
+          "to": "H17",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        }
+      ],
+      "portals": 5,
+      "open": 5,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "H16",
+      "exits": [
+        {
+          "id": "campaign-road-H16-H15",
+          "to": "H15",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H16-H17",
+          "to": "H17",
+          "x": -70,
+          "z": -20,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H16-B02",
+          "to": "B02",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "H17",
+      "exits": [
+        {
+          "id": "campaign-road-H17-H15",
+          "to": "H15",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-H17-H16",
+          "to": "H16",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 2,
+      "open": 2,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "B01",
+      "exits": [
+        {
+          "id": "campaign-road-B01-B03",
+          "to": "B03",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B01-B18",
+          "to": "B18",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "E07-B01",
+          "to": "U1-10",
+          "x": 70,
+          "z": -20,
+          "requires": "e07_open"
+        }
+      ],
+      "portals": 3,
+      "open": 2,
+      "locked": 1,
+      "portalColliders": 0
+    },
+    {
+      "id": "B02",
+      "exits": [
+        {
+          "id": "campaign-road-B02-B17",
+          "to": "B17",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B02-B07",
+          "to": "B07",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B02-H16",
+          "to": "H16",
+          "x": -20,
+          "z": -62,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "B03",
+      "exits": [
+        {
+          "id": "campaign-road-B03-B01",
+          "to": "B01",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B03-B04",
+          "to": "B04",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B03-B05",
+          "to": "B05",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B03-B06",
+          "to": "B06",
+          "x": -20,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B03-B18",
+          "to": "B18",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        }
+      ],
+      "portals": 5,
+      "open": 5,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "B04",
+      "exits": [
+        {
+          "id": "campaign-road-B04-B03",
+          "to": "B03",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B04-B15",
+          "to": "B15",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B04-B14",
+          "to": "B14",
+          "x": -20,
+          "z": -62,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "B05",
+      "exits": [
+        {
+          "id": "campaign-road-B05-B03",
+          "to": "B03",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B05-B06",
+          "to": "B06",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B05-B12",
+          "to": "B12",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B05-B17",
+          "to": "B17",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "B06",
+      "exits": [
+        {
+          "id": "campaign-road-B06-B03",
+          "to": "B03",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B06-B05",
+          "to": "B05",
+          "x": -20,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B06-B12",
+          "to": "B12",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B06-B14",
+          "to": "B14",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "B07",
+      "exits": [
+        {
+          "id": "campaign-road-B07-B02",
+          "to": "B02",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B07-B08",
+          "to": "B08",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B07-B17",
+          "to": "B17",
+          "x": -70,
+          "z": -20,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "B08",
+      "exits": [
+        {
+          "id": "campaign-road-B08-B07",
+          "to": "B07",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B08-B09",
+          "to": "B09",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B08-B12",
+          "to": "B12",
+          "x": -20,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "E06-B08",
+          "to": "U2-05",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "B09",
+      "exits": [
+        {
+          "id": "campaign-road-B09-B08",
+          "to": "B08",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B09-B11",
+          "to": "B11",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B09-B16",
+          "to": "B16",
+          "x": -20,
+          "z": -62,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "B10",
+      "exits": [
+        {
+          "id": "campaign-road-B10-B11",
+          "to": "B11",
+          "x": -70,
+          "z": 0,
+          "requires": "harbor_access"
+        }
+      ],
+      "portals": 1,
+      "open": 0,
+      "locked": 1,
+      "portalColliders": 0
+    },
+    {
+      "id": "B11",
+      "exits": [
+        {
+          "id": "campaign-road-B11-B09",
+          "to": "B09",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B11-B12",
+          "to": "B12",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B11-B10",
+          "to": "B10",
+          "x": 70,
+          "z": 0,
+          "requires": "harbor_access"
+        }
+      ],
+      "portals": 3,
+      "open": 2,
+      "locked": 1,
+      "portalColliders": 0
+    },
+    {
+      "id": "B12",
+      "exits": [
+        {
+          "id": "campaign-road-B12-B05",
+          "to": "B05",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B12-B06",
+          "to": "B06",
+          "x": -70,
+          "z": -20,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B12-B08",
+          "to": "B08",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B12-B11",
+          "to": "B11",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B12-B13",
+          "to": "B13",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        }
+      ],
+      "portals": 5,
+      "open": 5,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "B13",
+      "exits": [
+        {
+          "id": "campaign-road-B13-B12",
+          "to": "B12",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B13-B14",
+          "to": "B14",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B13-B16",
+          "to": "B16",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "B14",
+      "exits": [
+        {
+          "id": "campaign-road-B14-B04",
+          "to": "B04",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B14-B06",
+          "to": "B06",
+          "x": -20,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B14-B13",
+          "to": "B13",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B14-B15",
+          "to": "B15",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "B15",
+      "exits": [
+        {
+          "id": "campaign-road-B15-B04",
+          "to": "B04",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B15-B14",
+          "to": "B14",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B15-S15",
+          "to": "S15",
+          "x": 70,
+          "z": -20,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "B16",
+      "exits": [
+        {
+          "id": "campaign-road-B16-B13",
+          "to": "B13",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B16-B09",
+          "to": "B09",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B16-F01",
+          "to": "F01",
+          "x": -70,
+          "z": -20,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "B17",
+      "exits": [
+        {
+          "id": "campaign-road-B17-B02",
+          "to": "B02",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B17-B05",
+          "to": "B05",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B17-B07",
+          "to": "B07",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B17-B18",
+          "to": "B18",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "B18",
+      "exits": [
+        {
+          "id": "campaign-road-B18-B01",
+          "to": "B01",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B18-B03",
+          "to": "B03",
+          "x": -20,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-B18-B17",
+          "to": "B17",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "F01",
+      "exits": [
+        {
+          "id": "campaign-road-F01-F02",
+          "to": "F02",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F01-F03",
+          "to": "F03",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F01-B16",
+          "to": "B16",
+          "x": 70,
+          "z": -20,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "F02",
+      "exits": [
+        {
+          "id": "campaign-road-F02-F01",
+          "to": "F01",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F02-F07",
+          "to": "F07",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F02-F16",
+          "to": "F16",
+          "x": 70,
+          "z": -20,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "F03",
+      "exits": [
+        {
+          "id": "campaign-road-F03-F01",
+          "to": "F01",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F03-F04",
+          "to": "F04",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F03-F05",
+          "to": "F05",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "F04",
+      "exits": [
+        {
+          "id": "campaign-road-F04-F03",
+          "to": "F03",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F04-F06",
+          "to": "F06",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F04-F08",
+          "to": "F08",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "F05",
+      "exits": [
+        {
+          "id": "campaign-road-F05-F03",
+          "to": "F03",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F05-F06",
+          "to": "F06",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F05-F09",
+          "to": "F09",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "F06",
+      "exits": [
+        {
+          "id": "campaign-road-F06-F04",
+          "to": "F04",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F06-F05",
+          "to": "F05",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F06-F08",
+          "to": "F08",
+          "x": -20,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F06-F11",
+          "to": "F11",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "F07",
+      "exits": [
+        {
+          "id": "campaign-road-F07-F02",
+          "to": "F02",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F07-F08",
+          "to": "F08",
+          "x": -70,
+          "z": -20,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F07-F17",
+          "to": "F17",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "F08",
+      "exits": [
+        {
+          "id": "campaign-road-F08-F04",
+          "to": "F04",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F08-F06",
+          "to": "F06",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F08-F07",
+          "to": "F07",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F08-F11",
+          "to": "F11",
+          "x": -20,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F08-F17",
+          "to": "F17",
+          "x": 70,
+          "z": -20,
+          "requires": null
+        }
+      ],
+      "portals": 5,
+      "open": 5,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "F09",
+      "exits": [
+        {
+          "id": "campaign-road-F09-F05",
+          "to": "F05",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F09-F11",
+          "to": "F11",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 2,
+      "open": 2,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "F10",
+      "exits": [
+        {
+          "id": "campaign-road-F10-F11",
+          "to": "F11",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F10-F17",
+          "to": "F17",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        }
+      ],
+      "portals": 2,
+      "open": 2,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "F11",
+      "exits": [
+        {
+          "id": "campaign-road-F11-F06",
+          "to": "F06",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F11-F08",
+          "to": "F08",
+          "x": -20,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F11-F09",
+          "to": "F09",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F11-F10",
+          "to": "F10",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F11-F12",
+          "to": "F12",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        }
+      ],
+      "portals": 5,
+      "open": 5,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "F12",
+      "exits": [
+        {
+          "id": "campaign-road-F12-F11",
+          "to": "F11",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F12-F13",
+          "to": "F13",
+          "x": 0,
+          "z": 62,
+          "requires": "final_ready"
+        }
+      ],
+      "portals": 2,
+      "open": 1,
+      "locked": 1,
+      "portalColliders": 0
+    },
+    {
+      "id": "F13",
+      "exits": [
+        {
+          "id": "campaign-road-F13-F15",
+          "to": "F15",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F13-F12",
+          "to": "F12",
+          "x": 0,
+          "z": -62,
+          "requires": "final_ready"
+        },
+        {
+          "id": "campaign-road-F13-F14",
+          "to": "F14",
+          "x": 70,
+          "z": 0,
+          "requires": "boss_defeated:BOSS_R4"
+        }
+      ],
+      "portals": 3,
+      "open": 1,
+      "locked": 2,
+      "portalColliders": 0
+    },
+    {
+      "id": "F14",
+      "exits": [
+        {
+          "id": "campaign-road-F14-F13",
+          "to": "F13",
+          "x": -70,
+          "z": 0,
+          "requires": "boss_defeated:BOSS_R4"
+        }
+      ],
+      "portals": 1,
+      "open": 0,
+      "locked": 1,
+      "portalColliders": 0
+    },
+    {
+      "id": "F15",
+      "exits": [
+        {
+          "id": "campaign-road-F15-F13",
+          "to": "F13",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 1,
+      "open": 1,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "F16",
+      "exits": [
+        {
+          "id": "campaign-road-F16-F02",
+          "to": "F02",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F16-F17",
+          "to": "F17",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "E08-F16",
+          "to": "U2-09",
+          "x": 70,
+          "z": 0,
+          "requires": "e08_open"
+        }
+      ],
+      "portals": 3,
+      "open": 2,
+      "locked": 1,
+      "portalColliders": 0
+    },
+    {
+      "id": "F17",
+      "exits": [
+        {
+          "id": "campaign-road-F17-F07",
+          "to": "F07",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F17-F08",
+          "to": "F08",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F17-F10",
+          "to": "F10",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-F17-F16",
+          "to": "F16",
+          "x": -20,
+          "z": -62,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "U1-06",
+      "exits": [
+        {
+          "id": "campaign-road-U1-06-U1-03",
+          "to": "U1-03",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U1-06-U1-05",
+          "to": "U1-05",
+          "x": 70,
+          "z": -20,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U1-06-U1-07",
+          "to": "U1-07",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U1-06-U1-09",
+          "to": "U1-09",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        }
+      ],
+      "portals": 4,
+      "open": 4,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "U1-07",
+      "exits": [
+        {
+          "id": "campaign-road-U1-07-U1-05",
+          "to": "U1-05",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U1-07-U1-06",
+          "to": "U1-06",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U1-07-U1-08",
+          "to": "U1-08",
+          "x": -20,
+          "z": -62,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "U1-08",
+      "exits": [
+        {
+          "id": "campaign-road-U1-08-U1-07",
+          "to": "U1-07",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U1-08-U1-09",
+          "to": "U1-09",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U1-08-U1-10",
+          "to": "U1-10",
+          "x": -20,
+          "z": 62,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "U1-09",
+      "exits": [
+        {
+          "id": "campaign-road-U1-09-U1-03",
+          "to": "U1-03",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U1-09-U1-06",
+          "to": "U1-06",
+          "x": -20,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U1-09-U1-08",
+          "to": "U1-08",
+          "x": 20,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "E05-U1-09",
+          "to": "H05",
+          "x": -40,
+          "z": 62,
+          "requires": "e05_open"
+        }
+      ],
+      "portals": 4,
+      "open": 3,
+      "locked": 1,
+      "portalColliders": 0
+    },
+    {
+      "id": "U1-10",
+      "exits": [
+        {
+          "id": "campaign-road-U1-10-U1-08",
+          "to": "U1-08",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "E07-U1-10",
+          "to": "B01",
+          "x": -70,
+          "z": 0,
+          "requires": "e07_open"
+        }
+      ],
+      "portals": 2,
+      "open": 1,
+      "locked": 1,
+      "portalColliders": 0
+    },
+    {
+      "id": "U2-02",
+      "exits": [
+        {
+          "id": "campaign-road-U2-02-U2-03",
+          "to": "U2-03",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U2-02-U2-01",
+          "to": "U2-01",
+          "x": 70,
+          "z": -20,
+          "requires": "u2_deep_gate_open"
+        }
+      ],
+      "portals": 2,
+      "open": 1,
+      "locked": 1,
+      "portalColliders": 0
+    },
+    {
+      "id": "U2-03",
+      "exits": [
+        {
+          "id": "campaign-road-U2-03-U2-02",
+          "to": "U2-02",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U2-03-U2-04",
+          "to": "U2-04",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U2-03-U2-06",
+          "to": "U2-06",
+          "x": -20,
+          "z": -62,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "U2-04",
+      "exits": [
+        {
+          "id": "campaign-road-U2-04-U2-03",
+          "to": "U2-03",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U2-04-U2-05",
+          "to": "U2-05",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U2-04-U2-08",
+          "to": "U2-08",
+          "x": -20,
+          "z": -62,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "U2-05",
+      "exits": [
+        {
+          "id": "campaign-road-U2-05-U2-04",
+          "to": "U2-04",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U2-05-U2-06",
+          "to": "U2-06",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "E06-U2-05",
+          "to": "B08",
+          "x": 70,
+          "z": -20,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "U2-06",
+      "exits": [
+        {
+          "id": "campaign-road-U2-06-U2-03",
+          "to": "U2-03",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U2-06-U2-05",
+          "to": "U2-05",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U2-06-U2-07",
+          "to": "U2-07",
+          "x": 0,
+          "z": -62,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "U2-07",
+      "exits": [
+        {
+          "id": "campaign-road-U2-07-U2-06",
+          "to": "U2-06",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U2-07-U2-08",
+          "to": "U2-08",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U2-07-U2-09",
+          "to": "U2-09",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        }
+      ],
+      "portals": 3,
+      "open": 3,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "U2-08",
+      "exits": [
+        {
+          "id": "campaign-road-U2-08-U2-07",
+          "to": "U2-07",
+          "x": 70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "campaign-road-U2-08-U2-04",
+          "to": "U2-04",
+          "x": 0,
+          "z": 62,
+          "requires": null
+        }
+      ],
+      "portals": 2,
+      "open": 2,
+      "locked": 0,
+      "portalColliders": 0
+    },
+    {
+      "id": "U2-09",
+      "exits": [
+        {
+          "id": "campaign-road-U2-09-U2-07",
+          "to": "U2-07",
+          "x": -70,
+          "z": 0,
+          "requires": null
+        },
+        {
+          "id": "E08-U2-09",
+          "to": "F16",
+          "x": -70,
+          "z": -20,
+          "requires": "e08_open"
+        }
+      ],
+      "portals": 2,
+      "open": 1,
+      "locked": 1,
+      "portalColliders": 0
+    }
+  ],
+  "limits": [
+    "All-area coverage uses production area-entry render fixtures, not a complete legal playthrough.",
+    "Targeted real F/touch travel is recorded separately from visual fixtures.",
+    "Mobile is browser touch emulation at DPR2; physical-phone performance was not measured."
+  ]
+}

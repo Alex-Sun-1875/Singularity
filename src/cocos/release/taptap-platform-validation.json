@@ -1,0 +1,76 @@
+{
+  "verifiedOn": "2026-11-10",
+  "version": "0.3.2",
+  "versionSource": "../../package.json",
+  "configurationGuide": "release/README.md",
+  "checks": {
+    "typescript": "passed",
+    "coreTypescript": "passed",
+    "clientAndRulesTests": 102,
+    "versionFormatAndNumericComparison": "passed",
+    "wrongAppIdAndNonIncreasingVersion": "correctly rejected",
+    "unconfiguredRelease": "correctly rejected",
+    "packageRejectionProbes": [
+      "version mismatch",
+      "lowercase subpackages",
+      "duplicate package name",
+      "outside package root"
+    ],
+    "packageIntegrityAndGraph": "passed",
+    "browserGameplay": "desktop and mobile landscape: movement, attack, inventory, save/reload; 0 errors or failed requests",
+    "browserUpdate": "fixture only: keeps held input, defers installation, failed save blocks restart, successful save precedes apply",
+    "resourceFailureRecovery": "four intentionally aborted requests, retry succeeds, no duplicate camera"
+  },
+  "package": {
+    "path": "build/taptap-platform-audit-package/game.zip",
+    "identity": "unbound-local-audit",
+    "zipBytes": 272472203,
+    "sha256": "6092d6acdac4316d939482a69665580fddfeeb84413a8f0e93698a18ba97bda9",
+    "initialPayloadRawBytes": 4863825,
+    "initialPayloadZipBytes": 1150022,
+    "contentPacks": 59,
+    "declaredSubpackages": 71,
+    "openingDependencies": {
+      "observedIn": "Web release preview using the same resource profile",
+      "bundles": [
+        "__ccWasmAssetSubpkg__",
+        "__ccWasmChunkSubpkg__",
+        "actor-raphael",
+        "cast-mira",
+        "combat-vfx",
+        "environment",
+        "hero-appearance",
+        "hero-hairstyles",
+        "native-materials",
+        "native-weapons",
+        "painted-interiors",
+        "resources",
+        "surface-materials",
+        "waystones"
+      ],
+      "rawBytesIncludingInitialPayload": 171248083,
+      "deflatedContentBytesIncludingInitialZip": 151116243,
+      "webColdStartTransferBytes": [
+        143661220,
+        143661220
+      ],
+      "note": "Whole declared packs plus both generated WASM packs; not a measurement of TapTap network traffic or loading time."
+    },
+    "platformVerified": false,
+    "uploadReady": false
+  },
+  "evidence": {
+    "package": "artifacts/taptap-platform-audit/report.json",
+    "uploadSettings": "artifacts/taptap-platform-audit/upload-settings.json",
+    "browserUI": "test-results/taptap-platform-ui.json",
+    "browserGameplay": "test-results/taptap-platform-browser-release.json"
+  },
+  "pending": [
+    "Deploy login service and configure HTTPS request domain and privacy declaration",
+    "Confirm increasing/unique version against actual console packages",
+    "Confirm minimum base library after platform parsing",
+    "Real-device subpackage and performance validation",
+    "Validate actual updates between published versions; development/experience builds cannot prove update delivery",
+    "Platform WASM function splitting/collection if selected; not implied by Cocos transport packs"
+  ]
+}

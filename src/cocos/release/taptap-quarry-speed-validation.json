@@ -1,0 +1,150 @@
+{
+  "verifiedOn": "2026-11-12",
+  "version": "0.3.21",
+  "status": "local-validation",
+  "platformVerified": false,
+  "thermalVerified": false,
+  "uploaded": false,
+  "requestedArea": "S13 断镐石场（用户确认）",
+  "ordinaryRun": {
+    "beforeMetresPerSecond": 5.2,
+    "afterMetresPerSecond": 4,
+    "reductionPercent": 23.08,
+    "legacyReferenceMetresPerSecond": 3.6,
+    "previousIncreaseOverLegacyPercent": 44.44
+  },
+  "slowWalkMetresPerSecond": 1.6,
+  "frameRateSetting": 60,
+  "changes": [
+    "Centralize model run/walk constants in ChapterGame and reduce ordinary native-character movement to 4m/s.",
+    "Keep slow walk at 1.6m/s by deriving input scaling from the new run-speed constant. Manual movement and automation share GameSession movement; animation already follows measured displacement.",
+    "Add explicit PureCombat/EnemyCombat field types to fix existing cyclic type inference exposed by the current core checks; no combat behavior changes."
+  ],
+  "verification": {
+    "types": "passed",
+    "coreTypes": "passed",
+    "existingRulesPassed": 116,
+    "webBuild": "passed",
+    "miniGameBuild": "passed",
+    "officialConversion": "passed",
+    "zipIntegrity": "passed",
+    "sha256Rechecked": true,
+    "compiledSpeedMarkerVerified": true,
+    "measuredRunMetresPerSecond": 3.9999686112983825,
+    "measuredSlowMetresPerSecond": 1.599967453464044,
+    "navigationArrivalDistance": 0.874022529280283,
+    "runtimeErrors": [],
+    "defaultPreview": "7469 rebuilt; boot S01-T1 with movementSpeed=4, frameRate setting=60, no page errors"
+  },
+  "causality": {
+    "explorationScanGameSecondsBefore": 4.034246268324895,
+    "explorationScanGameSecondsAfter": 3.142924491240935,
+    "drawCallsPerFrameBefore": 174.6172839506173,
+    "drawCallsPerFrameAfter": 174.67241379310346,
+    "interpretation": "Lower movement speed reduces distance-triggered exploration work, but the quarry draws essentially the same geometry per frame. Speed is not established as the sole thermal cause.",
+    "limits": "Short controlled desktop Web sample using game time and software GPU, not phone temperature, power or true phone FPS. A fresh chart-memory fixture is used for each accepted run; earlier cache-contaminated exploration comparisons were discarded."
+  },
+  "sourceInventory": {
+    "beforePackage": "test-results/quarry-speed-v3/source-before-package.json",
+    "changedAfterSnapshot": [
+      "src/cocos/assets/scripts/app/BuildInfo.ts",
+      "src/cocos/assets/scripts/features/progression/common/CombatLoadouts.ts"
+    ],
+    "note": "Generated BuildInfo changes with packaging. Concurrent CombatLoadouts changes were preserved and are not movement-speed edits; this inventory is not claimed to be an immutable manifest of every packaged source file."
+  },
+  "package": {
+    "version": "0.3.21",
+    "title": "剑与火：破晓之战",
+    "miniAppId": "tapmcddcmbhf5lxqng",
+    "buildMode": "guest-test",
+    "purpose": "upload-guest-test",
+    "loginMode": "guest",
+    "localSaveOnly": true,
+    "projectName": "SwordAndFire",
+    "builtAt": "2026-11-11T17:42:03.981Z",
+    "packageIdentity": "provided-app-id",
+    "packageFilename": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-speed-v3\\SwordAndFire_0.3.21_TapTap_guest-test_20261111T174203Z\\SwordAndFire_0.3.21_TapTap_guest-test_20261111T174203Z.zip",
+    "converterPackageFilename": "F:\\workspace\\Singularity\\src\\cocos\\build\\taptap-speed-v3-package\\game.zip",
+    "packageSha256": "d05f34255ed338a1ddac95f32b34e9c5683b3d105ad3ab59a5616127b565522c",
+    "uploadZipBytes": 218931910,
+    "minimumBaseLibraryVersion": null,
+    "minimumBaseLibraryAction": "Confirm the platform-parsed minimum library version after uploading; not the WeChat libVersion field.",
+    "orientation": "landscape",
+    "subpackageCount": 76,
+    "contentPackCount": 64,
+    "storeArtwork": {
+      "artVersion": "taptap-v1",
+      "icon": "release/branding/taptap-v1/icon-512.png",
+      "iconLarge": "release/branding/taptap-v1/icon-1024.png",
+      "coverLandscape": "release/branding/taptap-v1/cover-landscape-1920x1080.jpg",
+      "coverSquare": "release/branding/taptap-v1/cover-square-1440x1440.jpg",
+      "webIcon": "release/branding/taptap-v1/icon-192.png",
+      "favicon": "release/branding/taptap-v1/icon-32.png"
+    },
+    "cocosWasmTransportPacks": [
+      "__ccWasmAssetSubpkg__",
+      "__ccWasmChunkSubpkg__"
+    ],
+    "platformWasmFunctionSplitVerified": false,
+    "wasm": {
+      "engineTransport": {
+        "requested": true,
+        "localValidationPassed": true,
+        "packages": [
+          {
+            "name": "__ccWasmAssetSubpkg__",
+            "root": "cocos-js/assets",
+            "files": 2,
+            "rawBytes": 469505,
+            "deflatedContentBytes": 181867,
+            "dependencies": []
+          },
+          {
+            "name": "__ccWasmChunkSubpkg__",
+            "root": "cocos-js/chunks",
+            "files": 1,
+            "rawBytes": 93014,
+            "deflatedContentBytes": 16089,
+            "dependencies": []
+          }
+        ],
+        "modules": [
+          {
+            "path": "cocos-js/assets/bullet.release.wasm.wasm",
+            "bytes": 469455,
+            "sha256": "effe0a64dfd4fc1128ac1c51f4418a5a04509a7595df05ea52f5077b7057d56d",
+            "subpackage": "__ccWasmAssetSubpkg__"
+          }
+        ],
+        "wasmBytes": 469455,
+        "wasmBytesInMainPackage": 0,
+        "note": "Whole engine modules are packaged separately. They can still be required during startup."
+      },
+      "platformFunctionSplit": {
+        "verified": false,
+        "status": "requires-compatible-sdk-export-and-console-collection",
+        "note": "The installed Cocos converter exports game.zip, not the documented game_wasm_split.zip. Cocos transport packs do not prove platform function splitting.",
+        "guide": "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/launch/wasm-subpackage/"
+      }
+    },
+    "authServiceUrl": "",
+    "requestDomain": "",
+    "localBlockers": [
+      "Deploy login service and set serviceUrl."
+    ],
+    "consoleChecks": [
+      "Confirm unique increasing version against live/review packages.",
+      "Use platform-parsed minimum library version.",
+      "Whitelist HTTPS request domain and complete privacy declaration.",
+      "Complete credentials/filing and real-device self-test before review."
+    ],
+    "packageAuditPassed": true,
+    "localConfigurationReady": false,
+    "releasePreflightPassed": false,
+    "platformVerified": false,
+    "uploaded": false
+  },
+  "packageHashRechecked": "d05f34255ed338a1ddac95f32b34e9c5683b3d105ad3ab59a5616127b565522c",
+  "evidence": "test-results/quarry-speed-v3/review.json",
+  "nextDeviceCheck": "Use this guest package for the same S13 route on the reported phone; keep brightness, charging and FPS configuration consistent; compare at least 10-15 minutes of running."
+}

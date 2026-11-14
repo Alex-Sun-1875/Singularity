@@ -1,0 +1,346 @@
+{
+  "prompt": [
+    1,
+    "6ff2ca18-58c3-407d-adf6-450d421d7df2",
+    {
+      "1": {
+        "class_type": "UNETLoader",
+        "inputs": {
+          "unet_name": "flux-2-klein-4b-fp8.safetensors",
+          "weight_dtype": "default"
+        }
+      },
+      "2": {
+        "class_type": "CLIPLoader",
+        "inputs": {
+          "clip_name": "qwen_3_4b.safetensors",
+          "type": "flux2",
+          "device": "cpu"
+        }
+      },
+      "3": {
+        "class_type": "VAELoader",
+        "inputs": {
+          "vae_name": "flux2-vae.safetensors"
+        }
+      },
+      "4": {
+        "class_type": "LoadImage",
+        "inputs": {
+          "image": "local-klein-pilot/running-right-input.png"
+        }
+      },
+      "5": {
+        "class_type": "LoadImage",
+        "inputs": {
+          "image": "local-klein-pilot/standing-right-input.png"
+        }
+      },
+      "6": {
+        "class_type": "ImageScaleToTotalPixels",
+        "inputs": {
+          "image": [
+            "4",
+            0
+          ],
+          "upscale_method": "nearest-exact",
+          "megapixels": 0.375,
+          "resolution_steps": 16
+        }
+      },
+      "7": {
+        "class_type": "ImageScaleToTotalPixels",
+        "inputs": {
+          "image": [
+            "5",
+            0
+          ],
+          "upscale_method": "nearest-exact",
+          "megapixels": 0.375,
+          "resolution_steps": 16
+        }
+      },
+      "8": {
+        "class_type": "GetImageSize",
+        "inputs": {
+          "image": [
+            "6",
+            0
+          ]
+        }
+      },
+      "9": {
+        "class_type": "CLIPTextEncode",
+        "inputs": {
+          "clip": [
+            "2",
+            0
+          ],
+          "text": "Edit image 1 using image 2 as the character reference. Return one full-body man running toward the right, with exactly image 1's running pose, forward torso lean, stride, body scale, placement, burgundy-and-gold vest, navy sleeves, trousers, brown boots and sheathed sword. Change only his head and the small neck seam: match image 2's actual head size relative to the body, adult oval face, substantial jaw with softly rounded chin, and short swept silver-white wavy hair. Image 2 is shown at the same physical scale, so do not enlarge its head. Preserve the recognizable man and all body details from image 1. Keep the flat light gray background and full-body framing. No extra figure, portrait, text or panels.\n"
+        }
+      },
+      "10": {
+        "class_type": "ConditioningZeroOut",
+        "inputs": {
+          "conditioning": [
+            "9",
+            0
+          ]
+        }
+      },
+      "11": {
+        "class_type": "VAEEncode",
+        "inputs": {
+          "pixels": [
+            "6",
+            0
+          ],
+          "vae": [
+            "3",
+            0
+          ]
+        }
+      },
+      "12": {
+        "class_type": "VAEEncode",
+        "inputs": {
+          "pixels": [
+            "7",
+            0
+          ],
+          "vae": [
+            "3",
+            0
+          ]
+        }
+      },
+      "13": {
+        "class_type": "ReferenceLatent",
+        "inputs": {
+          "conditioning": [
+            "9",
+            0
+          ],
+          "latent": [
+            "11",
+            0
+          ]
+        }
+      },
+      "14": {
+        "class_type": "ReferenceLatent",
+        "inputs": {
+          "conditioning": [
+            "10",
+            0
+          ],
+          "latent": [
+            "11",
+            0
+          ]
+        }
+      },
+      "15": {
+        "class_type": "ReferenceLatent",
+        "inputs": {
+          "conditioning": [
+            "13",
+            0
+          ],
+          "latent": [
+            "12",
+            0
+          ]
+        }
+      },
+      "16": {
+        "class_type": "ReferenceLatent",
+        "inputs": {
+          "conditioning": [
+            "14",
+            0
+          ],
+          "latent": [
+            "12",
+            0
+          ]
+        }
+      },
+      "17": {
+        "class_type": "CFGGuider",
+        "inputs": {
+          "model": [
+            "1",
+            0
+          ],
+          "positive": [
+            "15",
+            0
+          ],
+          "negative": [
+            "16",
+            0
+          ],
+          "cfg": 1.0
+        }
+      },
+      "18": {
+        "class_type": "EmptyFlux2LatentImage",
+        "inputs": {
+          "width": [
+            "8",
+            0
+          ],
+          "height": [
+            "8",
+            1
+          ],
+          "batch_size": 1
+        }
+      },
+      "19": {
+        "class_type": "Flux2Scheduler",
+        "inputs": {
+          "steps": 4,
+          "width": [
+            "8",
+            0
+          ],
+          "height": [
+            "8",
+            1
+          ]
+        }
+      },
+      "20": {
+        "class_type": "KSamplerSelect",
+        "inputs": {
+          "sampler_name": "euler"
+        }
+      },
+      "21": {
+        "class_type": "RandomNoise",
+        "inputs": {
+          "noise_seed": 1707
+        }
+      },
+      "22": {
+        "class_type": "SamplerCustomAdvanced",
+        "inputs": {
+          "noise": [
+            "21",
+            0
+          ],
+          "guider": [
+            "17",
+            0
+          ],
+          "sampler": [
+            "20",
+            0
+          ],
+          "sigmas": [
+            "19",
+            0
+          ],
+          "latent_image": [
+            "18",
+            0
+          ]
+        }
+      },
+      "23": {
+        "class_type": "VAEDecode",
+        "inputs": {
+          "samples": [
+            "22",
+            0
+          ],
+          "vae": [
+            "3",
+            0
+          ]
+        }
+      },
+      "24": {
+        "class_type": "SaveImage",
+        "inputs": {
+          "images": [
+            "23",
+            0
+          ],
+          "filename_prefix": "local-klein-pilot/running-head-reference-512"
+        }
+      }
+    },
+    {
+      "client_id": "local-klein-pilot",
+      "create_time": 1794014777057
+    },
+    [
+      "24"
+    ]
+  ],
+  "outputs": {
+    "24": {
+      "images": [
+        {
+          "filename": "running-head-reference-512_00001_.png",
+          "subfolder": "local-klein-pilot",
+          "type": "output",
+          "metadata": {
+            "kind": "image",
+            "width": 512,
+            "height": 768
+          }
+        }
+      ]
+    }
+  },
+  "status": {
+    "status_str": "success",
+    "completed": true,
+    "messages": [
+      [
+        "execution_start",
+        {
+          "prompt_id": "6ff2ca18-58c3-407d-adf6-450d421d7df2",
+          "timestamp": 1794014777060
+        }
+      ],
+      [
+        "execution_cached",
+        {
+          "nodes": [
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "9",
+            "10",
+            "20",
+            "21"
+          ],
+          "prompt_id": "6ff2ca18-58c3-407d-adf6-450d421d7df2",
+          "timestamp": 1794014777096
+        }
+      ],
+      [
+        "execution_success",
+        {
+          "prompt_id": "6ff2ca18-58c3-407d-adf6-450d421d7df2",
+          "timestamp": 1794014781839
+        }
+      ]
+    ]
+  },
+  "meta": {
+    "24": {
+      "node_id": "24",
+      "display_node": "24",
+      "parent_node": null,
+      "real_node_id": "24"
+    }
+  }
+}

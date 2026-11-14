@@ -1,0 +1,70 @@
+{
+  "verifiedAt": "2026-11-14T23:52:40.941127+08:00",
+  "version": "0.3.41",
+  "buildMode": "test",
+  "loginMode": "platform",
+  "command": "npm run pack:taptap -- -OutputName taptap-20261114-current",
+  "package": {
+    "path": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-20261114-current\\SwordAndFire_0.3.41_TapTap_test_20261114T155119Z\\SwordAndFire_0.3.41_TapTap_test_20261114T155119Z.zip",
+    "bytes": 221312757,
+    "sha256": "dd457591efaa54178ecfaf0be0f9a846e34bd18eba5fabc8e1b221a69b6316d5",
+    "zipEntries": 4134
+  },
+  "checks": {
+    "typeScript": true,
+    "existingTestsPassed": 140,
+    "existingTestsFailed": 0,
+    "creatorBuild": true,
+    "officialConversion": true,
+    "packageAudit": true,
+    "zipCRC": "passed by report-taptap.py",
+    "deliverySha256": true,
+    "zippedVersionAndAppId": true,
+    "zippedPlatformLogin": true,
+    "zippedChapterGameAndSceneBinding": true,
+    "zippedNavigationWasmHash": true,
+    "renderAndStartupPolicy": true
+  },
+  "sourceIntegrity": {
+    "files": 3523,
+    "changedDuringBuild": [
+      "assets/scripts/app/BuildInfo.ts",
+      "tools/prepare-navigation-wasm.cjs"
+    ],
+    "addedDuringBuild": [],
+    "gameplayAndArtUnchangedDuringBuild": true,
+    "snapshot": "F:\\workspace\\Singularity\\src\\cocos\\artifacts\\taptap-20261114-current\\SwordAndFire_0.3.41_TapTap_test_20261114T155119Z\\source-snapshot.json"
+  },
+  "buildRecovery": {
+    "creatorExportCompleted": true,
+    "postExportGuardFailure": "Cocos intermediate game.json uses subpackages; the navigation WASM helper only read subPackages.",
+    "fix": "Accept both Cocos subpackages and TapTap subPackages, consistent with the existing converter.",
+    "resumedFromExport": true,
+    "versionAllocatedOnce": true,
+    "verification": "Helper passed on both the Cocos intermediate lowercase field and normalized TapTap camelCase field."
+  },
+  "payload": {
+    "completeUploadZipBytes": 221312757,
+    "offlineInitialPayload": {
+      "files": 26,
+      "rawBytes": 5662443,
+      "zipBytes": 1371405,
+      "zipMiB": 1.31,
+      "budgetMiB": 20.0,
+      "withinLocalBudget": true,
+      "sha256": "99969cfd84bc24a24cd85af8371752852e3e7ce6f2d8c82a6b2feb6bbdbc8904",
+      "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+    },
+    "subpackageCount": 76,
+    "contentPackCount": 64,
+    "actualPlatformInitialBytes": null,
+    "actualResourcesNeededBeforePlayBytes": null
+  },
+  "uploaded": false,
+  "platformVerified": false,
+  "pending": [
+    "真实 TapTap 下冷启动、平台登录、触控、前后台恢复、本机存档与分包加载失败恢复。",
+    "后台解析、最低基础库版本、实际首包及可玩前下载量。",
+    "Android 横屏与 iPhone 14 以上目标真机的内存、帧率及温升验收。"
+  ]
+}

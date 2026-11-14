@@ -1,0 +1,230 @@
+{
+  "prompt": [
+    1,
+    "537d457d-47c8-4f01-95c9-2f061993be28",
+    {
+      "1": {
+        "class_type": "UNETLoader",
+        "inputs": {
+          "unet_name": "qwen_image_2.1_turbo_int8_convrot.safetensors",
+          "weight_dtype": "default"
+        }
+      },
+      "2": {
+        "class_type": "CLIPLoader",
+        "inputs": {
+          "clip_name": "qwen3vl_8b_int8_convrot.safetensors",
+          "type": "qwen_image",
+          "device": "cpu"
+        }
+      },
+      "3": {
+        "class_type": "VAELoader",
+        "inputs": {
+          "vae_name": "qwen_image_2.1_vae_bf16.safetensors"
+        }
+      },
+      "8": {
+        "class_type": "TextEncodeQwenImage21",
+        "inputs": {
+          "clip": [
+            "2",
+            0
+          ],
+          "vae": [
+            "3",
+            0
+          ],
+          "prompt": "只编辑<image1>背面站姿角色的棕色背负剑鞘中段，将剑鞘沿当前右上至左下的轴线延长约35%，末端从原位置约(198,380)移至(167,445)。保留剑柄、金色柄头、护手、肩部固定点、鞘宽、原金属鞘帽的形状、角度和细节；增加中段长度，不把末端拉扁或重画。保留原头型、银发、暗酒红服装、裤色、身材、手指与腕部、腰带包袋、双脚位置及站姿；剑鞘经过手部时保持原手在前的遮挡及指间空隙。保持512×768画布、原人物尺度和脚部锚点，一个完整背面角色，保持透明背景，输出带Alpha通道的RGBA PNG，不添加背景/地面/投影。",
+          "negative_prompt": "",
+          "resolution": 0,
+          "images.image_1": [
+            "6",
+            0
+          ]
+        }
+      },
+      "9": {
+        "class_type": "QwenImage21Cache",
+        "inputs": {
+          "model": [
+            "1",
+            0
+          ],
+          "device": "cpu",
+          "dtype": "default"
+        }
+      },
+      "10": {
+        "class_type": "CFGGuider",
+        "inputs": {
+          "model": [
+            "9",
+            0
+          ],
+          "positive": [
+            "8",
+            0
+          ],
+          "negative": [
+            "8",
+            1
+          ],
+          "cfg": 1.0
+        }
+      },
+      "11": {
+        "class_type": "RandomNoise",
+        "inputs": {
+          "noise_seed": 20261107
+        }
+      },
+      "12": {
+        "class_type": "KSamplerSelect",
+        "inputs": {
+          "sampler_name": "euler"
+        }
+      },
+      "13": {
+        "class_type": "ManualSigmas",
+        "inputs": {
+          "sigmas": "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0"
+        }
+      },
+      "14": {
+        "class_type": "SamplerCustomAdvanced",
+        "inputs": {
+          "noise": [
+            "11",
+            0
+          ],
+          "guider": [
+            "10",
+            0
+          ],
+          "sampler": [
+            "12",
+            0
+          ],
+          "sigmas": [
+            "13",
+            0
+          ],
+          "latent_image": [
+            "8",
+            2
+          ]
+        }
+      },
+      "15": {
+        "class_type": "VAEDecode",
+        "inputs": {
+          "samples": [
+            "14",
+            0
+          ],
+          "vae": [
+            "3",
+            0
+          ]
+        }
+      },
+      "16": {
+        "class_type": "SaveImage",
+        "inputs": {
+          "images": [
+            "15",
+            0
+          ],
+          "filename_prefix": "qwen21-trial/back-sword"
+        }
+      },
+      "4": {
+        "class_type": "LoadImage",
+        "inputs": {
+          "image": "qwen21-trial/back-sword/standing-back-p0-rgba.png"
+        }
+      },
+      "6": {
+        "class_type": "JoinImageWithAlpha",
+        "inputs": {
+          "image": [
+            "4",
+            0
+          ],
+          "alpha": [
+            "4",
+            1
+          ]
+        }
+      }
+    },
+    {
+      "client_id": "qwen21-local-evaluation",
+      "create_time": 1794022886078
+    },
+    [
+      "16"
+    ]
+  ],
+  "outputs": {
+    "16": {
+      "images": [
+        {
+          "filename": "back-sword_00001_.png",
+          "subfolder": "qwen21-trial",
+          "type": "output",
+          "metadata": {
+            "kind": "image",
+            "width": 512,
+            "height": 768
+          }
+        }
+      ]
+    }
+  },
+  "status": {
+    "status_str": "success",
+    "completed": true,
+    "messages": [
+      [
+        "execution_start",
+        {
+          "prompt_id": "537d457d-47c8-4f01-95c9-2f061993be28",
+          "timestamp": 1794022886079
+        }
+      ],
+      [
+        "execution_cached",
+        {
+          "nodes": [
+            "1",
+            "2",
+            "3",
+            "9",
+            "11",
+            "12",
+            "13"
+          ],
+          "prompt_id": "537d457d-47c8-4f01-95c9-2f061993be28",
+          "timestamp": 1794022886090
+        }
+      ],
+      [
+        "execution_success",
+        {
+          "prompt_id": "537d457d-47c8-4f01-95c9-2f061993be28",
+          "timestamp": 1794022946333
+        }
+      ]
+    ]
+  },
+  "meta": {
+    "16": {
+      "node_id": "16",
+      "display_node": "16",
+      "parent_node": null,
+      "real_node_id": "16"
+    }
+  }
+}

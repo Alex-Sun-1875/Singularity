@@ -1,0 +1,289 @@
+{
+  "verifiedOn": "2026-11-10",
+  "version": "0.3.2",
+  "status": "local-validation",
+  "platformVerified": false,
+  "uploaded": false,
+  "reportedPlatformBaseline": {
+    "source": "User-provided TapTap console screenshot, Honor X60i tab",
+    "averageMemoryMB": 1315.87,
+    "peakMemoryWithin10MinutesMB": 1637.07,
+    "fpsAverage": 30.172043,
+    "stutterPercent": 8.7,
+    "observation": "FPS drops from about 46 to about 16 around minute 3; device errors cannot be diagnosed without logs."
+  },
+  "changes": [
+    "Reuse GLB textures only when build-time decoded RGBA SHA256 and wrap/filter settings match the external runtime PNG. Preserve reference ownership and anisotropic filtering. Nonmatching maps retain the existing loader.",
+    "Rebuild minimap fog only after new exploration, region change or journey replacement; redraw pins at most about 10Hz during ordinary updates; retain unchanged heading geometry."
+  ],
+  "measurement": {
+    "environment": "Headless Chrome on Windows, Cocos release Web preview with TapTap resource profile, 1280x720, 60 drawn frames per stage. Controlled scene jumps, not a natural gameplay or real-device performance run.",
+    "metric": "Cocos graphics device texture allocation; excludes JS heap, graphics buffers, decoded images, driver/process memory. Not comparable to TapTap process-memory figures.",
+    "rows": [
+      {
+        "area": "S01-T1",
+        "frames": 60,
+        "textureBytesBefore": 562923212,
+        "textureBytesAfter": 460162784,
+        "savedTextureBytes": 102760428,
+        "fogRedrawsBefore": 3,
+        "fogRedrawsAfter": 0,
+        "pinRedrawsBefore": 60,
+        "pinRedrawsAfter": 9
+      },
+      {
+        "area": "S01",
+        "frames": 60,
+        "textureBytesBefore": 595044036,
+        "textureBytesAfter": 492283608,
+        "savedTextureBytes": 102760428,
+        "fogRedrawsBefore": 3,
+        "fogRedrawsAfter": 0,
+        "pinRedrawsBefore": 60,
+        "pinRedrawsAfter": 10
+      },
+      {
+        "area": "S03",
+        "frames": 60,
+        "textureBytesBefore": 601336828,
+        "textureBytesAfter": 498576400,
+        "savedTextureBytes": 102760428,
+        "fogRedrawsBefore": 3,
+        "fogRedrawsAfter": 0,
+        "pinRedrawsBefore": 60,
+        "pinRedrawsAfter": 10
+      },
+      {
+        "area": "H01",
+        "frames": 60,
+        "textureBytesBefore": 588753916,
+        "textureBytesAfter": 485993488,
+        "savedTextureBytes": 102760428,
+        "fogRedrawsBefore": 3,
+        "fogRedrawsAfter": 0,
+        "pinRedrawsBefore": 60,
+        "pinRedrawsAfter": 9
+      },
+      {
+        "area": "S01-T1",
+        "frames": 60,
+        "textureBytesBefore": 562923212,
+        "textureBytesAfter": 460162784,
+        "savedTextureBytes": 102760428,
+        "fogRedrawsBefore": 3,
+        "fogRedrawsAfter": 0,
+        "pinRedrawsBefore": 60,
+        "pinRedrawsAfter": 9
+      },
+      {
+        "area": "S03",
+        "frames": 60,
+        "textureBytesBefore": 601336828,
+        "textureBytesAfter": 498576400,
+        "savedTextureBytes": 102760428,
+        "fogRedrawsBefore": 3,
+        "fogRedrawsAfter": 0,
+        "pinRedrawsBefore": 60,
+        "pinRedrawsAfter": 9
+      },
+      {
+        "area": "S01-T1",
+        "frames": 60,
+        "textureBytesBefore": 562923212,
+        "textureBytesAfter": 460162784,
+        "savedTextureBytes": 102760428,
+        "fogRedrawsBefore": 3,
+        "fogRedrawsAfter": 0,
+        "pinRedrawsBefore": 60,
+        "pinRedrawsAfter": 10
+      }
+    ],
+    "errors": [],
+    "sameAreaReturn": "S01-T1 texture allocation returns to the same 460162784 bytes on both returns; this is not proof of overall leak freedom."
+  },
+  "checks": {
+    "typescript": "passed",
+    "coreTypescript": "passed",
+    "existingTests": {
+      "passed": 102,
+      "failed": 0
+    },
+    "tapConfig": "passed",
+    "browserGameplay": [
+      {
+        "name": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "startupBytes": 123766512,
+        "startupPacks": {
+          "bundles": [
+            "actor-raphael",
+            "cast-mira",
+            "combat-vfx",
+            "environment",
+            "hero-appearance",
+            "internal",
+            "main",
+            "native-weapons",
+            "painted-interiors",
+            "resources",
+            "surface-materials",
+            "waystones"
+          ],
+          "level": 1,
+          "paintedWorld": true,
+          "nativeHero": true
+        },
+        "inputMovement": 3.2322828684102585,
+        "saved": {
+          "x": -1.4986975193023682,
+          "z": -9.863836288452148
+        },
+        "restored": {
+          "x": -1.4986975193023682,
+          "z": -9.863836288452148
+        },
+        "errors": [],
+        "failed": []
+      },
+      {
+        "name": "mobile-landscape",
+        "viewport": {
+          "width": 915,
+          "height": 412
+        },
+        "startupBytes": 123766512,
+        "startupPacks": {
+          "bundles": [
+            "actor-raphael",
+            "cast-mira",
+            "combat-vfx",
+            "environment",
+            "hero-appearance",
+            "internal",
+            "main",
+            "native-weapons",
+            "painted-interiors",
+            "resources",
+            "surface-materials",
+            "waystones"
+          ],
+          "level": 1,
+          "paintedWorld": true,
+          "nativeHero": true
+        },
+        "inputMovement": 2.753047199608658,
+        "saved": {
+          "x": -1.5271193981170654,
+          "z": -9.290671348571777
+        },
+        "restored": {
+          "x": -1.5271193981170654,
+          "z": -9.290671348571777
+        },
+        "errors": [],
+        "failed": []
+      }
+    ],
+    "minigameConversionAndPackageIntegrity": "passed",
+    "textureReuseAndNewJourney": {
+      "result": {
+        "idleFogDraws": 0,
+        "styles": [
+          {
+            "id": "curly",
+            "active": 1,
+            "textures": [
+              {
+                "uuid": "4c20edfe-18b8-43a9-ac1e-8cfb2e6cced9@bcb27",
+                "valid": true,
+                "refs": 2
+              }
+            ]
+          },
+          {
+            "id": "dante",
+            "active": 1,
+            "textures": [
+              {
+                "uuid": "4c20edfe-18b8-43a9-ac1e-8cfb2e6cced9@240d8",
+                "valid": true,
+                "refs": 2
+              }
+            ]
+          },
+          {
+            "id": "nero",
+            "active": 1,
+            "textures": [
+              {
+                "uuid": "4c20edfe-18b8-43a9-ac1e-8cfb2e6cced9@2a87f",
+                "valid": true,
+                "refs": 2
+              }
+            ]
+          },
+          {
+            "id": "vergil",
+            "active": 1,
+            "textures": [
+              {
+                "uuid": "4c20edfe-18b8-43a9-ac1e-8cfb2e6cced9@51278",
+                "valid": true,
+                "refs": 2
+              }
+            ]
+          }
+        ],
+        "oldSeed": 1121727684
+      },
+      "reset": {
+        "seed": 1121736380,
+        "area": "S01-T1",
+        "journeyMatches": true,
+        "failure": ""
+      },
+      "errors": []
+    }
+  },
+  "package": {
+    "identity": "unbound-local-audit",
+    "path": "src/cocos/build/taptap-perf-audit-package/game.zip",
+    "uploadZipBytes": 272473498,
+    "sha256": "28d4f1a532db376a7c3e9b2fa4e8ee7355568117d6903b8afad28f8dc9d36121",
+    "initialRawBytes": 4870033,
+    "initialZipBytes": 1151394,
+    "note": "No upload or real AppID validation. Source artwork and complete pack contents are retained; this pass reduces loaded resources, not full upload size."
+  },
+  "evidence": {
+    "before": "test-results/taptap-perf-before.json",
+    "after": "test-results/taptap-perf-after.json",
+    "gameplay": "src/cocos/test-results/taptap-perf-browser-release.json",
+    "package": "src/cocos/artifacts/taptap-perf-audit/report.json",
+    "finalFocusedCheck": "test-results/taptap-perf-final-check.json"
+  },
+  "sourceSHA256": {
+    "src/cocos/assets/scripts/runtime/MiniMap.ts": "0a00991af1f7225de81a754fede7947c448372537b64e8b99876358e103b7954",
+    "src/cocos/assets/scripts/runtime/NativeActorMaterials.ts": "736a521da617099bf11f4a9d3cb194e279e084f0c3035041ce956b71902b9424",
+    "src/cocos/assets/scripts/runtime/NativeTextureReuse.ts": "4f39c58b75e509094ed2f640c0def1aef098e80d5963052a02662fdc7ffeea65",
+    "src/cocos/tools/prepare-native-texture-reuse.py": "4812fc40c1f9a02510a4770b54bc4908ef7930a25348719b777dc0764f3cfd57",
+    "src/cocos/tools/prepare-taptap.py": "e3a7a6ce852b752e0770a810574006990b653355c86b4bb9ae54333e26e07321"
+  },
+  "nextPriorities": [
+    "Load equipped weapon variants on demand instead of instantiating every held/stowed variant at startup, with explicit loading/error recovery.",
+    "Avoid loading hidden 3D environment textures/meshes in the painted profile while preserving collision/navigation and the 3D comparison path.",
+    "Evaluate platform-supported GPU texture compression and render resolution on actual devices before any visual-quality change."
+  ],
+  "pending": [
+    "Device 61 log analyzed: TapTap host networking/native crash and account-login block before minigame entry. See taptap-device-61-log-analysis.json. Obtain other failed-device or actual in-game logs.",
+    "Rebuild with the real AppID and a console-confirmed increasing version, then run the same 10-minute device route on Honor X60i, PCEM00, HONOR X10 and PD2024.",
+    "Measure process memory, CPU/GPU load, frame time, thermal behavior, repeated scene travel and foreground/background recovery; confirm whether the minute-3 FPS drop is scene load, memory pressure or thermal throttling."
+  ],
+  "officialReferences": [
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/runtime/runtime-suggestions/",
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/performance-test/",
+    "https://docs.cocos.com/creator/3.8/manual/zh/asset/release-manager.html"
+  ]
+}

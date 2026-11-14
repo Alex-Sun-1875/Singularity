@@ -1,0 +1,220 @@
+{
+  "id": "U2-2",
+  "reviewedAt": "2026-11-08T02:59:42.942204+00:00",
+  "staticArtReview": "passed-for-pilot",
+  "scope": "Source-only packed4direction16drawing review; not installed/runtime acceptance",
+  "source": "sheet-v2.png",
+  "sourceSha256": "11d85e35f3207e7eb3489d29f59287059c85b539b55d1a1f4d3e518d76c840c7",
+  "sourceDimensions": [
+    1254,
+    1254
+  ],
+  "sourceUnchanged": true,
+  "processingSpecSha256": "fe050950b3451b43b8816cdadbb29a99d3eddf2ee92494c40cfb00ce19045079",
+  "manifestSha256": "5605202ae378c44451c1d6a819fb382e1309216693e2681dcece2f16c25d28b0",
+  "sourceAtlasSha256": "a99b489f82593ecafcff82749aa3302ce5967c94e585f49c8263fc41b2af8358",
+  "sourceAtlasDimensions": [
+    1536,
+    1536
+  ],
+  "productionManifestSha256": "020e401c0b4f262a4e0f1940768c3556c7304eda02c4293f7c5390bf11d6f377",
+  "productionAtlasSha256": "0d657ff517290644b81f6b0afad433f24504c7140b221b4bb9cd7f98fcae313d",
+  "productionAtlasDimensions": [
+    1024,
+    1024
+  ],
+  "singleGlobalWorldUnitsPerPixel": 0.0065140845070422535,
+  "perFrameScale": false,
+  "directionReview": {
+    "actualOrder": [
+      "down",
+      "left",
+      "up",
+      "right"
+    ],
+    "allFourIndependent": true,
+    "mirroredDirectionsIntroduced": false
+  },
+  "anatomyReview": "Exactly2mechanical legs and genuine2arms retained; complete tools and stone feet visible",
+  "anchorReview": {
+    "method": "Explicit primary support polygon centers from reviewed foot-only ROIs in original nominal source cells; no toe-tip whole-body alignment.",
+    "primarySupports": [
+      {
+        "direction": "down",
+        "sourceLocalFootRois": [
+          [
+            60,
+            255,
+            140,
+            292
+          ],
+          [
+            190,
+            240,
+            270,
+            278
+          ]
+        ],
+        "contactCentres": [
+          [
+            104.48,
+            287.0
+          ],
+          [
+            236.64,
+            273.0
+          ]
+        ],
+        "supportPolygonProjection": [
+          170.56,
+          280.0
+        ],
+        "basis": "Both planted/braced stone feet, never hammer/baton/hanging cloth. Detection only; no image pixel edit."
+      },
+      {
+        "direction": "left",
+        "sourceLocalFootRois": [
+          [
+            65,
+            250,
+            150,
+            282
+          ],
+          [
+            205,
+            230,
+            280,
+            265
+          ]
+        ],
+        "contactCentres": [
+          [
+            91.44,
+            278.0
+          ],
+          [
+            224.05,
+            265.0
+          ]
+        ],
+        "supportPolygonProjection": [
+          157.745,
+          271.5
+        ],
+        "basis": "Both planted/braced stone feet, never hammer/baton/hanging cloth. Detection only; no image pixel edit."
+      },
+      {
+        "direction": "up",
+        "sourceLocalFootRois": [
+          [
+            60,
+            250,
+            145,
+            290
+          ],
+          [
+            205,
+            240,
+            280,
+            275
+          ]
+        ],
+        "contactCentres": [
+          [
+            89.35,
+            283.0
+          ],
+          [
+            209.68,
+            269.0
+          ]
+        ],
+        "supportPolygonProjection": [
+          149.515,
+          276.0
+        ],
+        "basis": "Both planted/braced stone feet, never hammer/baton/hanging cloth. Detection only; no image pixel edit."
+      },
+      {
+        "direction": "right",
+        "sourceLocalFootRois": [
+          [
+            40,
+            235,
+            140,
+            268
+          ],
+          [
+            175,
+            255,
+            270,
+            295
+          ]
+        ],
+        "contactCentres": [
+          [
+            78.1,
+            268.0
+          ],
+          [
+            196.35,
+            286.0
+          ]
+        ],
+        "supportPolygonProjection": [
+          137.225,
+          277.0
+        ],
+        "basis": "Both planted/braced stone feet, never hammer/baton/hanging cloth. Detection only; no image pixel edit."
+      }
+    ]
+  },
+  "hoverReview": null,
+  "loopReview": {
+    "artifact": "walk-loop.gif",
+    "encodedFramesInspected": [
+      {
+        "index": 0,
+        "size": [
+          768,
+          768
+        ],
+        "durationMs": 280,
+        "rgbSha256": "11d8833ea771e47249792f18cba86eea2e954e72b49ed30db18baa2eff68bca4"
+      },
+      {
+        "index": 1,
+        "size": [
+          768,
+          768
+        ],
+        "durationMs": 280,
+        "rgbSha256": "9512ba04173ab5dff64ead3c9705ceecaad8084dca708300371ae57c52888b67"
+      }
+    ],
+    "result": "Two distinct gait/tilt phases visible with rigid core continuity. Ground-plane projection preserves depth instead of aligning every foremost toe. Coarse2pose cadence is a pilot limitation, actual locomotion remains pending."
+  },
+  "edgeReview": {
+    "all16FramesOwned": true,
+    "clippedAppendagesFound": false,
+    "scaleFactorsAllOne": true,
+    "sourceAlphaAbove3PreservedExactlyOnce": true,
+    "reviewedContact": "anchor-contact-preview.jpg"
+  },
+  "primaryReview": "Explicit foot-support center anchors retain genuine crouch/brace and never follow tool tips",
+  "minimalPoses": true,
+  "loaded3DModel": false,
+  "runtimeInstalled": true,
+  "runtimeAcceptance": "pending root actual Cocos batch review",
+  "gameScaleAcceptance": "pending root in-game scale/readability review",
+  "limitations": [
+    "Four actual drawn directions and16 actual source drawings only; no mirrored/invented poses.",
+    "One reviewed global pixel/world scale; no frame fitting or generated in-betweens.",
+    "Primary pose source only; additional requiredCombatMoves are not implicitly covered.",
+    "No independently drawn hit/death; own idle fallback/hide remains explicit.",
+    "Static review and actual game gait/collision/texture-lifetime acceptance are separate."
+  ],
+  "rootBatchReview": "passed30/30 source-and-packed static contact review; runtime acceptance separate",
+  "atlasSha256": "a99b489f82593ecafcff82749aa3302ce5967c94e585f49c8263fc41b2af8358",
+  "runtimePlayReview": "pending after authorized batch installation"
+}
