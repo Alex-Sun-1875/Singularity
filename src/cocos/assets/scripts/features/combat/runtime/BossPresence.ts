@@ -1,5 +1,6 @@
+import {viewportMetrics} from '../../../platform/ViewportMetrics';
 import {journeyText} from '../../journey/locales';
-import {Camera,Label,Node,Vec2,Vec3,screen} from 'cc';
+import {Camera,Label,Node,Vec2,Vec3} from 'cc';
 import type {GameSession} from '../../../core/GameSession';
 import type {Hud} from '../../../app/Hud';
 import type {SceneBuilder} from '../../world/runtime/SceneBuilder';
@@ -35,7 +36,7 @@ export class BossPresence {
   // Use the body axis for horizontal alignment; head height still comes from
   // the authored sprite/model, so animation and level text cannot shift the bar.
   this.anchor.set(enemy.x,this.world.height(enemy),enemy.z);this.camera.worldToScreen(this.anchor,this.bodyProjected);
-  const u=this.unit,pixels=screen.windowSize,x=this.bodyProjected.x/Math.max(1,pixels.width)*this.width-this.width/2,y=this.projected.y/Math.max(1,pixels.height)*this.height-this.height/2+(BOSS_HEAD_GAP+BOSS_HEAD_HEIGHT/2)*u;
+  const u=this.unit,pixels=viewportMetrics.windowSize,x=this.bodyProjected.x/Math.max(1,pixels.width)*this.width-this.width/2,y=this.projected.y/Math.max(1,pixels.height)*this.height-this.height/2+(BOSS_HEAD_GAP+BOSS_HEAD_HEIGHT/2)*u;
   const halfW=92*u,halfH=BOSS_HEAD_HEIGHT/2*u;if(!Number.isFinite(x+y)||Math.abs(x)+halfW>this.width/2-16||Math.abs(y)+halfH>this.height/2-16){this.hide();return;}
   // Never shift a world nameplate onto the player or an existing control.
   // The ordinary enemy HP bar remains available when this larger marker culls.

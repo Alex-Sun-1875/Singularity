@@ -17,6 +17,7 @@ export class BackgroundMusic {
  private allowed=false;
  private playing=false;
  private level=0;
+ private submittedVolume=0;
  enabled=true;
  failed=false;
 
@@ -57,15 +58,24 @@ export class BackgroundMusic {
   this.allowed=allowed;
   if(!allowed||this.suspended){this.pause();return;}
   const target=this.enabled&&this.requested&&this.clip?(quiet ? .13 : .28):0;
-  this.level+=(target-this.level)*(1-Math.exp(-Math.min(dt,.5)*2.8));
-  this.source.volume=this.level;
+  if(this.level!==target){
+   this.level+=(target-this.level)*(1-Math.exp(-Math.min(dt,.5)*2.8));
+   // Finish the exponential fade instead of sending imperceptible changes forever.
+   if(Math.abs(target-this.level)<.0001)this.level=target;
+   this.submitVolume(this.level);
+  }
   if(target>0&&this.clip&&!this.playing){this.source.play();this.playing=true;}
   if(target===0&&this.level<.001)this.pause();
  }
 
+ private submitVolume(value:number):void{
+  if(value===this.submittedVolume)return;
+  this.source.volume=value;this.submittedVolume=value;
+ }
+
  private pause():void{
   if(this.playing)this.source.pause();
-  this.playing=false;this.level=0;this.source.volume=0;
+  this.playing=false;this.level=0;this.submitVolume(0);
  }
 
  private load():void{

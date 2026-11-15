@@ -1,5 +1,6 @@
+import {viewportMetrics} from '../../../platform/ViewportMetrics';
 import {CompactGraphics} from '../../../shared/ui/CompactGraphics';
-import {Camera,Color,Graphics,Label,Node,Quat,UITransform,Vec3,screen,sys} from 'cc';
+import {Camera,Color,Graphics,Label,Node,Quat,UITransform,Vec3,sys} from 'cc';
 import type {ExitDef} from '../../../core/Contracts';
 import type {GameSession} from '../../../core/GameSession';
 import {AREAS} from '../../world/data/WorldData';
@@ -22,7 +23,7 @@ export class PortalHud {
 
  private build():void{
   this.clear();this.width=this.hud.width;this.height=this.hud.height;
-  const mobile=sys.isMobile,scale=this.height/Math.max(1,screen.windowSize.height/screen.devicePixelRatio);
+  const mobile=sys.isMobile,scale=this.height/Math.max(1,viewportMetrics.windowSize.height/viewportMetrics.devicePixelRatio);
   this.plateH=mobile?Math.max(38,22*scale):30;this.plateW=mobile?Math.max(190,118*scale):168;this.touchH=mobile?Math.max(this.plateH,44*scale):this.plateH;
   this.root=this.hud.node('PortalHud',this.hud.root);
   for(const exit of this.world.area.exits){
@@ -45,7 +46,7 @@ export class PortalHud {
  private sigilLabelPoint(mount:PortalMount):Vec3{
   const frame=SIGIL_FRAME,center=new Vec3(mount.position.x,mount.position.y+frame.centerHeight,mount.position.z);
   const rotation=Quat.multiply(new Quat(),Quat.fromEuler(new Quat(),0,frame.yaw,0),Quat.fromEuler(new Quat(),frame.pitch,0,0));
-  const projectedCenter=this.camera.worldToScreen(center),pixels=screen.windowSize;
+  const projectedCenter=this.camera.worldToScreen(center),pixels=viewportMetrics.windowSize;
   let top=-Infinity;
   for(const x of [-.5,.5])for(const y of [-.5,.5]){
    const corner=Vec3.transformQuat(new Vec3(),new Vec3(x*frame.size,y*frame.size,0),rotation).add(center);
@@ -58,7 +59,7 @@ export class PortalHud {
   if(this.disposed)return;
   if(!this.root?.isValid||this.width!==this.hud.width||this.height!==this.hud.height)this.build();
   this.root!.active=!hidden;if(hidden)return;
-  const p=game.state.player,pixels=screen.windowSize,halfW=this.width/2,halfH=this.height/2;
+  const p=game.state.player,pixels=viewportMetrics.windowSize,halfW=this.width/2,halfH=this.height/2;
   for(const sign of this.signs){
    const e=sign.exit,distance=Math.hypot(e.x-p.x,e.z-p.z),near=distance<=1.35;
    sign.distance=distance;sign.near=near;sign.locked=!!game.exitRequirement(e);

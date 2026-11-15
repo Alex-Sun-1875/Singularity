@@ -1,4 +1,5 @@
 import {CAMPAIGN_LEVEL_LIST} from './Campaign';
+import {campaignText} from '../locales';
 import {GROWING_QUESTS} from '../../equipment/data/GrowingEquipment';
 /** Physical actions and their persistent outcomes. Walking into a region never pays a quest. */
 export interface CampaignChoiceDef {id:string;label:string;text:string;sets:string[]}
@@ -8,13 +9,14 @@ export interface CampaignEventDef {
  clearEncounter?:boolean;sets?:string[];gold?:number;iron?:number;runes?:number;cores?:number;
  items?:string[];recipes?:string[];experienceEvent?:string;experience?:number;
  choices?:CampaignChoiceDef[];peacefulResolution?:boolean;choiceItems?:string[];optional?:boolean;
+ confirmLabel?:string;completionText?:string;prerequisiteHints?:Record<string,string>;
 }
 const event=(id:string,area:string,label:string,description:string,extra:Omit<CampaignEventDef,'id'|'area'|'label'|'description'>={}):CampaignEventDef=>({id,area,label,description,...extra});
 export const CAMPAIGN_EVENT_LIST:CampaignEventDef[]=[
  event('s07-skill-archive','S07','阅读磨坊的永久技能档案','把旧驿房的练习记录与水轮院猎记逐页比对，保存一次档案经验。旧符咒已退役，不因阅读补回任何消耗品。',{experience:220}),
  event('s13-evacuate','S13','先疏散工人，固定吊料机','沿旧石场侧面打开工棚出口，让工人离开吊料落区，再把机台固定在地面的安全卡位。',{sets:['s13_workers_safe']}),
  event('s13-dismiss-overseer','S13','出示扣押令，解除监工职权','在工人已经离开危险面后，把现场扣押原令与工役名单当面对照，取消这份没有合法期限的监工任命。',{requires:['s13_workers_safe','s10-detention'],peacefulResolution:true,sets:['s13_overseer_dismissed']}),
- event('h14-cancel-hunt','H14','缴销猎契，撤下督猎封锁','读过被转卖的猎径副图后，将同一份猎契交到岩林登记台，明确沿线藏身处不属于可出售的追猎目标。',{requires:['s14-huntroute'],peacefulResolution:true,sets:['h14_hunt_cancelled']}),
+ event('h14-cancel-hunt','H14','缴销猎契，撤下督猎封锁','读过被转卖的猎径副图后，将同一份猎契交到岩林登记台，明确沿线藏身处不属于可出售的追猎目标。',{requires:['s14-huntroute'],peacefulResolution:true,sets:['h14_hunt_cancelled'],confirmLabel:campaignText('event.cancelHunt'),completionText:campaignText('event.huntComplete'),prerequisiteHints:{'s14-huntroute':campaignText('event.huntPrerequisite')}}),
  event('b14-return-contract','B14','核对返还凭据，解除打捞封锁','核对归帆镇鉴定过的绳结货号，再将合法返还凭据交给封锁者；同一首领事件不因和平处理少领固定装备。',{requires:['campaign-clue-B03'],peacefulResolution:true,sets:['b14_salvage_released']}),
  event('f17-release','F17','从检修面解除典狱长扣押','先沿检修侧路核实出口，再当面出示当前征掘令的权限限制，解除这处超出原令的扣押。',{requires:['current_order_verified','f07_exit_verified'],peacefulResolution:true,sets:['f17_detention_lifted']}),
  event('h03-evacuate','H03','疏散工位，插入固定卡销','先让工匠离开镜架的转动面，再从地面的控制台插入固定卡销；不用指定同伴或消耗材料。',{sets:['h03_workers_safe'],peacefulResolution:true}),

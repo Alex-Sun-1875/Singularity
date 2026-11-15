@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>剑与火 · 首领刷新与导航设计稿</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header class="page-head">
+    <div><p class="edition">剑与火　／　玩法与界面提案 v1</p><h1>首领出现时，知道去哪。</h1><p class="intro">轻提醒、看状态、一键前往。保留 10 分钟复战节奏，让等待发生在探索途中。</p></div>
+    <div class="stamp">设计评审稿<br><span>2026.11.15 · 尚未接入游戏</span></div>
+  </header>
+  <section class="prototype" aria-label="首领提醒交互设计稿">
+    <div class="preview-head"><div><h2>刷新提示与导航</h2><p>844 × 390 逻辑视口 · 现有场景裁切作布局背景 · 距离、倒计时与状态为演示数据</p></div><button id="show-hit" class="quiet">查看触控范围</button></div>
+    <nav class="state-tabs" aria-label="预览状态">
+      <button data-state="notice" aria-pressed="true">刷新提醒</button><button data-state="elite">精英出现</button><button data-state="list">目标列表</button><button data-state="route">正在寻路</button><button data-state="paused">遇敌暂停</button><button data-state="arrived">抵达入口</button><button data-state="cooldown">等待复战</button><button data-state="combat">战斗中</button>
+    </nav>
+    <div class="viewport"><div id="game" class="game" data-state="notice">
+      <div class="terrain" aria-hidden="true"></div>
+      <div class="hero panel"><img src="../../../src/cocos/assets/resources/flat2d/hero-head-soft-geralt-v3.png" alt=""><div><b>拉斐尔 · Lv18</b><span class="hp-label">生命 268 / 315</span><div class="bar"><i></i></div><span class="sub">终极 · 无需蓄能</span><div class="bar mana"><i></i></div></div></div>
+      <div class="quest panel" id="quest"><button id="quest-info" class="quest-info" aria-label="展开当前目标"><span id="quest-place">旅程 · 第二章</span><b id="quest-name">夺取石梁前哨</b><small id="quest-progress">48m · 固定守军</small></button><button id="nav-action">出发</button></div>
+      <button class="automatic panel" id="automatic">自动 <span>⌄</span></button>
+      <button class="minimap" id="map-open" aria-label="打开地图首领与精英列表"><div class="map-grid"></div><span class="map-road"></span><span class="map-player">▲</span><span class="map-crown">♛</span><span class="map-dots">· ·</span><span class="map-label">首领与精英</span><span class="map-count">2 可挑战</span></button>
+      <div class="notice panel" id="notice" role="status"><span class="notice-crown">♛</span><div><b id="notice-name">守桥铠卫 · 可再战</b><small id="notice-detail">断岳前堡 · 已准备好</small></div><button id="notice-go">前往</button></div>
+      <div class="passive-message" id="passive-message"></div>
+      <button class="joystick" id="manual" aria-label="模拟手动移动接管"><i></i></button>
+      <div class="combat-buttons" aria-label="现有七按钮示意">
+        <button class="skill s1" aria-label="技能1"><img src="../../../src/cocos/assets/resources/ui/combat-relief/skill-war-01.png" alt=""><small>1</small></button>
+        <button class="skill s2" aria-label="技能2"><img src="../../../src/cocos/assets/resources/ui/combat-relief/skill-war-02.png" alt=""><small>2</small></button>
+        <button class="skill ult" aria-label="终极"><img src="../../../src/cocos/assets/resources/ui/combat-relief/skill-war-p2.png" alt=""></button>
+        <button class="skill s4" aria-label="技能4"><img src="../../../src/cocos/assets/resources/ui/combat-relief/skill-war-04.png" alt=""><small>4</small></button>
+        <button class="skill s3" aria-label="技能3"><img src="../../../src/cocos/assets/resources/ui/combat-relief/skill-war-03.png" alt=""><small>3</small></button>
+        <button class="skill dodge" aria-label="闪避"><img src="../../../src/cocos/assets/resources/ui/combat-relief/dash.png" alt=""></button>
+        <button class="skill attack" aria-label="普攻"><img src="../../../src/cocos/assets/resources/ui/combat-relief/attack.png" alt=""></button>
+      </div>
+      <div id="arrival-point" class="arrival-point"><span>◇</span><small>再战入口</small></div>
+      <button id="start-fight" class="world-action panel">发起再战</button>
+      <div class="fight-label" id="fight-label"><span>守桥铠卫</span><div class="bar enemy"><i></i></div></div>
+      <button id="scrim" class="scrim" aria-label="关闭列表"></button>
+      <aside id="boss-panel" class="boss-panel panel" aria-label="地图首领与精英">
+        <div class="panel-heading"><h3>首领与精英</h3><button id="close-panel" aria-label="关闭列表">×</button></div>
+        <div class="chapter-tabs"><button data-chapter="1">第一章</button><button data-chapter="2" class="selected">第二章</button></div>
+        <div class="list-summary" id="list-summary">已发现目标 · 2 可挑战</div>
+        <div class="boss-list" id="boss-list"></div>
+        <div class="selection-note" id="selection-note">抵达入口后，由你发起再战。</div>
+        <div class="panel-actions"><button id="follow">关注提醒</button><button id="panel-go" class="primary">自动前往</button></div>
+      </aside>
+      <span class="preview-watermark">UI 布局示意</span>
+    </div></div>
+    <div class="scene-caption"><b id="caption-title">到时只提醒，不接管操作</b><p id="caption-text">顶部显示 4 秒，随后收起。点“前往”才开始导航；错过提示，仍可从地图查看。</p><button id="simulate" class="quiet">演示 4 秒收起</button></div>
+  </section>
+
+  <section class="design-section" id="rhythm"><div class="section-title"><h2>先保留现有节奏，把状态说清楚</h2><p>以下时间为 v1 建议；10 分钟与 50 秒沿用现有规则。</p></div>
+    <div class="timing"><div><strong>首次发现</strong><span>固定遭遇已在场</span><small>不让主线等刷新</small></div><i></i><div><strong>击败</strong><span>开始 10:00 冷却</span><small>每个目标独立计时</small></div><i></i><div><strong>剩余 00:30</strong><span>关注目标轻提示</span><small>每轮最多一次</small></div><i></i><div><strong>冷却结束</strong><span>提示“可再战”</span><small>持续有效，不限时消失</small></div><i></i><div><strong>抵达入口</strong><span>玩家发起再战</span><small>导航不会代替开战</small></div></div>
+    <div class="rules-columns"><article><h3>具名 Boss 与精英</h3><p>7 个目标统一沿用 <b>600 秒</b>，离线计时、每个目标最多保留一场再战机会。跨图、读档不重置；死亡或脱战不开始新一轮冷却。</p><p>普通提醒仅覆盖当前章节已发现的目标；跨章只提醒已关注目标。战斗、剧情中先收进列表，安全后合并提醒。</p></article><article><h3>循环精英群首</h3><p>保留 <b>50 秒游戏时间 + 离出生点 20 米</b>及现有危险区检查。计时结束仅代表具备刷新条件，实际生成后才能显示“已出现”。</p><p>当前地图轻提示 3 秒；同地图同类群首 120 秒内最多一条横幅，列表与地图状态始终及时更新。关注目标每个生命轮次单独提醒一次。</p></article><article><h3>控制轮刷与打扰</h3><p>同屏最多一条提醒；3 秒内多目标合并成“2 个目标可挑战”。普通横幅间隔至少 30 秒，返回前台只汇总一次。</p><p>不缩短冷却、不加离线库存。7 个具名目标独立冷却的理论上限约 42 次/小时，尚未扣除战斗与赶路；实际收益需连续试玩测量。</p></article></div>
+  </section>
+
+  <section class="design-section"><div class="section-title"><h2>一、二章实际目标</h2><p>从当前组装后的 AREAS 枚举，不依赖目录中旧的 design-only 标注。等级为首次遭遇等级。</p></div>
+    <div class="roster-wrap"><table><thead><tr><th>章节</th><th>目标</th><th>定位</th><th>首次等级</th><th>地点</th><th>再次挑战</th></tr></thead><tbody id="roster"></tbody></table></div>
+    <div class="wildlife"><b>另有两类循环精英</b><p><span>荆背群首 Lv9</span>：峭壁洞窟 S17、铁脊观察台 S20。<span>烬牙群首 Lv18–19</span>：鹰背岩林 H14、余烬废窑 H17、震炉工坊 U1-07。</p></div>
+  </section>
+
+  <section class="design-section"><div class="section-title"><h2>导航只负责把人安全带到</h2><p>复用当前导航与任务框，所有提示都以真实目标状态为准。</p></div>
+    <div class="nav-rules"><article><h3>途中</h3><p>“前往”会替换当前导航目的地，保留原任务追踪。只显示下一出口方向及本段距离；跨图不虚构直线距离或 ETA。任务框可展开查看“第 1/2 段”。</p></article><article><h3>中断</h3><p>遇敌、手动操作、菜单、剧情、后台、死亡时停止移动。恢复需要点“继续”。目标消失、路径被锁或资源失败时解释原因，不自动换目标。</p></article><article><h3>抵达</h3><p>先到经碰撞与危险区域验证的入口。具名目标未首胜时停在战场接近点；复战时停在既有复战交互点。冷却未到允许提前前往，到点仍不自动开战。</p></article><article><h3>遭遇隔离</h3><p>H17 群首与裂岳獠王出生点仅相距约 2.5 米。实装前调整群首位置并设置动态战场禁刷区；不直接用固定 20 米套所有 Boss，需按攻击范围、追击范围和通路验证。</p></article></div>
+  </section>
+
+  <details class="implementation"><summary>实现边界与验收清单</summary><div>
+    <h3>复用与最小新增</h3><p><code>BossLoot</code> 的复战冷却与收据、<code>GameSession.growingRematch</code> 的现场复战、<code>Automation.navigate</code> 与 <code>availableRoute</code> 的跨图路径、<code>QuestTracker</code> 的状态呈现、<code>MiniMap / MapPanel</code> 的目标入口。现有 <code>DoubleGoldFrame / GoldPanelShell / FeedbackPalette</code> 负责皮肤、结构与颜色。无需引入导航库或生成新美术。</p>
+    <p>新增统一遭遇目录与只读状态解析：<code>未发现 / 等级锁定 / 在场 / 冷却 / 可再战 / 战斗中</code>，保留目标 ID、区域、实例轮次与导航锚点。循环群首需从 <code>HUNT_VARIANTS.elite</code> 识别，不能只检查 <code>ELITE_</code> 前缀。未访问区域只显示未发现状态，地图不可达必须给出实际锁定原因。</p>
+    <p>具名目标根据击败收据与 <code>readyAt</code> 判定，不能仅把 <code>remaining=0</code> 当成可再战。提醒键包含目标 ID、轮次和提醒阶段；恢复时先重算状态，再处理未读。关注与已送达轮次保存到既有存档，届时配套校验；不保存“继续自动移动”的指令。</p>
+    <h3>UI 状态与输入</h3><p>提示条 280 × 48；右侧前往列 56，左侧只读。任务框沿用头像宽度，收起 35 / 展开 56，导航列 52；48 × 48 的实际热区与相邻操作留 8。列表约 326 × 350，行高 56，关闭按钮 48 且内缩；长列表滚动，底部动作固定。全部坐标按逻辑像素，实际接入从安全区取约束。</p>
+    <p>顶部自动控件保留；提醒条不得进入人物、目标、弹道与预警区域。若这些投影进入提醒槽，跳过横幅、只更新地图标识，不把提示向下挤进场景。战斗时条幅隐藏，地图只留静态标识；不叠加第二份头顶名称或血条。点击地图后的列表属于主动打开的界面，关闭即释放输入拦截。</p>
+    <h3>计时及奖励边界</h3><p>具名目标保留本机日历 600 秒冷却与现有时间回拨保护；群首使用会话游戏时间，后台不补算。当前没有服务器可信时钟，不能承诺防设备时间修改或回滚存档。此稿不增加平台 API，不改首胜奖励、掉落池、保底或每日重复经验额度。统一 10 分钟同时避免仅靠低级精英更短冷却成为最优刷奖路径；章节与等级收益仍按现有规则。</p>
+    <h3>按顺序落地</h3><ol><li>目录及状态解析，先确认 7 个具名目标与 5 个群首位置，统一身份与真实刷新事件。</li><li>补地图列表、关注与提醒去重，沿用既有存档和生命周期。</li><li>接入安全导航锚点，处理暂停、恢复、冷却变化与重进地图。</li><li>解决 H17 遭遇重叠，复查其他战场、入口和循环出生点。</li><li>复用现有规则检查，检查 844×390 / 932×430 / 安全区压力布局，再做 TapTap 真机与连续实玩。</li></ol>
+    <p>实装验收须覆盖：首次进入不误报刷新、后台跨冷却、读档不重复提示、多目标同时到时、群首到期但被阻塞、导航跨区锁定、战斗与摇杆接管、路上目标失效、抵达未开战、同轮奖励去重。30–60 分钟真人路线记录提醒次数、有效战斗次数、等待时间与掉落；设计稿不能替代这些验收。</p>
+    <h3>核对来源</h3><p><a href="../../../src/cocos/assets/scripts/features/world/data/WorldData.ts">WorldData.ts</a>、<a href="../../../src/cocos/assets/scripts/features/world/data/MonsterEcology.ts">MonsterEcology.ts</a>、<a href="../../../src/cocos/assets/scripts/features/campaign/data/Campaign.ts">Campaign.ts</a>、<a href="../../../src/cocos/assets/scripts/features/equipment/common/BossLoot.ts">BossLoot.ts</a>、<a href="../../../docs/design/equipment-lifecycle-v3-integration.md">装备生命周期 v3</a>、<a href="../../../docs/design/ui-layout-guidelines.md">界面布局规范</a>。场景来自既有任务框 v8 截图的中央裁切；头像、字体、边框和技能图案复用仓库资源。</p>
+  </div></details>
+  <footer>本次仅交付 UI 与玩法设计提案；未改游戏运行代码、刷新数值或打包发布。视觉与交互为设计验证，TapTap 真机待接入后验收。</footer>
+</main>
+<script src="prototype.js"></script>
+</body>
+</html>

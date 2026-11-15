@@ -76,6 +76,7 @@ export class EquipmentPickupNotice {
 
  clear(){this.current=null;this.pending=[];this.announcedDrops.clear();if(this.root)this.root.active=false;}
  get visible(){return !!this.root?.active;}
+ get hasNotice(){return !!this.current;}
  get dropVisible(){return !!this.current?.dropId;}
  get height(){return (this.current?.dropId?64:58)*this.unit;}
  inspect(){return {visible:this.visible,current:this.current?{id:this.current.dropId,item:this.current.item.id,elapsed:this.current.elapsed,duration:this.current.duration,available:this.current.available}:null,pending:this.pending.map(n=>({id:n.dropId,item:n.item.id,elapsed:n.elapsed}))};}

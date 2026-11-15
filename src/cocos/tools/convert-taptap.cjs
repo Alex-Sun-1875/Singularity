@@ -41,9 +41,8 @@ if(!fs.existsSync(path.join(extension,'converter/node_modules')))throw new Error
 if(!/^[A-Za-z][A-Za-z0-9_-]*$/.test(release.projectName))throw new Error('English projectName must use ASCII letters, digits, underscores or hyphens for package filenames.');
 const buildMode=audit?'audit':guestTest?'guest-test':profile.name;
 const builtAt=new Date().toISOString();
-const buildStamp=builtAt.replace(/[-:]/g,'').replace(/\.\d{3}Z$/,'Z');
 const converterVersion=require(path.join(extension,'package.json')).version;
-const packageFilename=`${release.projectName}_${release.version}_TapTap_${audit?'audit_':guestTest?'guest_':''}${buildStamp}_${profile.name}.zip`;
+const packageFilename=`${release.projectName}_${release.version}.zip`;
 const releaseInfo={schemaVersion:1,projectName:release.projectName,title:release.title,version:release.version,
  platform:'TapTap-minigame',buildMode,buildProfile:profile,releaseNotes,builtAt,timeZone:'UTC',packageFilename,
  miniAppId:audit?null:release.miniAppId,orientation:release.orientation,cocosVersion:'3.8.8',converterVersion,
@@ -54,8 +53,12 @@ const releaseInfo={schemaVersion:1,projectName:release.projectName,title:release
 // Native entry configuration must run before any Cocos modules. Always overwrite
 // the previous profile so converting the same source cannot retain guest access.
 const entryFile=path.join(source,'game.js');
-const entry=fs.readFileSync(entryFile,'utf8').replace(/^\s*globalThis\.__SINGULARITY_GUEST_TEST__\s*=\s*(?:true|false);[^\n]*\n?/gm,'');
-fs.writeFileSync(entryFile,`globalThis.__SINGULARITY_GUEST_TEST__ = ${guestTest};\n`+entry);
+const entry=fs.readFileSync(entryFile,'utf8')
+ .replace(/^\s*globalThis\.__SINGULARITY_GUEST_TEST__\s*=\s*(?:true|false);[^\n]*\n?/gm,'')
+ .replace(/^.*\/\/ Singularity window cache entry\r?\n?/gm,'');
+fs.copyFileSync(path.join(__dirname,'runtime/taptap-window-cache.js'),path.join(source,'singularity-window-cache.js'));
+const windowCacheEntry="require('./singularity-window-cache.js').installWindowInfoCache(typeof wx === 'undefined' ? globalThis.tap : wx); // Singularity window cache entry\n";
+fs.writeFileSync(entryFile,`globalThis.__SINGULARITY_GUEST_TEST__ = ${guestTest};\n`+windowCacheEntry+entry);
 const configFile=path.join(source,'game.json');
 const config=JSON.parse(fs.readFileSync(configFile,'utf8'));
 config.deviceOrientation=release.orientation;
@@ -89,7 +92,7 @@ fs.writeFileSync(path.join(source,'BUILD_README.txt'),[
  `构建时间：${builtAt}（UTC）；Cocos Creator 3.8.8；官方转换器 ${converterVersion}`,
  `MiniApp ID：${releaseInfo.miniAppId||'未绑定，仅本地审计'}`,
  '内容范围：第一、二章可玩；第三至八章保留规划。',
- guestTest?'登录模式：游客测试，未登录 TapTap；仅使用本机存档，不提供云存档或跨设备同步。':'登录模式：直接调用 TapTap 小游戏 tap.login；回到前台调用 tap.checkSession，失效后重新登录。无需自建登录服务。',
+ guestTest?'登录模式：游客测试，未登录 TapTap；仅使用本机存档，不提供云存档或跨设备同步。':'登录模式：冷启动及回前台先静默调用 tap.checkSession；登录态失效后调用 tap.login，仅失败时显示重试提示。无需自建登录服务。',
  '账号边界：未执行服务端 code2Session，不取得 openid、不创建游戏账号或自定义 token；不以临时 code 标识玩家。本机存档尚未按账号隔离或接入云同步。',
  '完整 ZIP 由官方转换器生成，所有分包已包含；上传时直接选择 ZIP，不要额外套一层目录。',
  'release-info.json 记录构建信息；包旁的报告和 SHA-256 文件记录体积与校验值。',
@@ -109,7 +112,7 @@ const {convertWechatToTap}=require(path.join(extension,'dist/converter-ts.js'));
   buildProfile:profile,releaseNotes,
   platformValidated:false,uploadPerformed:false,converterVersion,
   login:{mode:guestTest?'guest':'platform',provider:'taptap-minigame',localSaveOnly:true,
-   clientFlow:guestTest?'guest test -> existing local save only':'tap.login -> platform-ready; foreground tap.checkSession -> tap.login if invalid',
+   clientFlow:guestTest?'guest test -> existing local save only':'cold start/foreground tap.checkSession -> platform-ready if valid, tap.login if invalid; retry prompt on failure only',
    customAuthService:false,identityExchange:false,accountScopedLocalSave:false,
    platformValidated:false},
  },null,2)+'\n');

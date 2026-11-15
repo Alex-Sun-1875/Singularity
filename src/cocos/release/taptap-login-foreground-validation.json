@@ -1,0 +1,48 @@
+{
+  "verifiedOn": "2026-11-15",
+  "sourceVersion": "0.3.44",
+  "status": "source fix verified locally; new package and real TapTap acceptance pending",
+  "problem": "Initial load and every foreground session check displayed the game-owned TapTap login modal; cold starts requested a new code without checking the host session.",
+  "implementation": {
+    "coldStart": "tap.checkSession first; reuse valid host session; tap.login only after host check fails",
+    "foreground": "Check host session with gameplay/input still gated; retain the current game/menu instead of displaying the login modal",
+    "initialPresentation": "Existing journey loading screen, indeterminate progress during authentication",
+    "failurePresentation": "Show retry only on login/check failure; remove the old failure prompt when retrying or succeeding",
+    "localCheckTimeout": "Fail recoverably without treating a local timeout/cancellation as proof of host session expiry",
+    "customAuthService": false,
+    "persistsTemporaryCodeOrSessionProof": false,
+    "guestAndPreviewChanged": false
+  },
+  "checks": {
+    "fullTypeScript": "passed: npm run check",
+    "coreTypeScript": "passed: npm --prefix src/cocos run check:core",
+    "tapConfiguration": "passed: npm run check:tap",
+    "converterSyntax": "passed: node --check src/cocos/tools/convert-taptap.cjs",
+    "existingSuite": {
+      "passed": 142,
+      "failed": 0,
+      "environment": "Existing mesh-cache test invokes python. Initial run lacked that command (139/140); final suite used a temporary PATH alias to the installed python3, without changing repository tests or system configuration."
+    },
+    "loginCases": "5 existing login tests passed, covering cold session reuse, concurrency, expired-session login, failure/retry, timeout and late callbacks/disposal",
+    "modalBranches": "Passed with the actual renderModal method extracted from TypeScript and isolated UI callbacks: initial loading reused once; foreground checking/logging retains game/menu; failures prompt retry; retry/success clear prior failure prompt",
+    "whitespace": "passed: git -c core.whitespace=cr-at-eol diff --check (existing source uses CRLF)",
+    "scope": "Callback fixtures and source checks only; not a real platform authentication or rendered-device acceptance"
+  },
+  "notPerformed": [
+    "New Cocos export or TapTap package build",
+    "Upload, review or release",
+    "Live TapTap login or real-device verification"
+  ],
+  "pending": [
+    "Real AppID: first-ever launch with no valid host session, including any native platform login/authorization UI",
+    "Cold start with valid host session: no unnecessary tap.login and no game-owned login modal",
+    "Foreground from gameplay/menu/story: no login-modal flash, input gated until check callback, gameplay resumes correctly",
+    "Expired host session: renew via tap.login; offline/cancel/timeout preserves local save and offers retry"
+  ],
+  "sources": [
+    "https://developer.taptap.cn/minigameapidoc/dev/api/open-api/login/tap.login/",
+    "https://developer.taptap.cn/minigameapidoc/dev/api/open-api/login/tap.checkSession/",
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/open-capabilities/login-management/",
+    "extensions/taptap-minigame-tools/tap-minigame.d.ts"
+  ]
+}

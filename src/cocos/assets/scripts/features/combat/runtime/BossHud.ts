@@ -1,11 +1,12 @@
-import {Node,Sprite,UITransform,screen,sys} from 'cc';
+import {viewportMetrics} from '../../../platform/ViewportMetrics';
+import {Node,Sprite,UITransform,sys} from 'cc';
 import type {EnemyState} from '../../../core/GameSession';
 import type {Hud} from '../../../app/Hud';
 import {UiSkin} from '../../../shared/ui/UiSkin';
 import {FeedbackView as F} from '../../../shared/ui/FeedbackView';
 
 export const BOSS_HEAD_HEIGHT=38,BOSS_HEAD_GAP=6;
-export const bossHudScale=(hud:Hud)=>sys.isMobile?hud.height/Math.max(1,screen.windowSize.height/Math.max(1,screen.devicePixelRatio)):1.25;
+export const bossHudScale=(hud:Hud)=>sys.isMobile?hud.height/Math.max(1,viewportMetrics.windowSize.height/Math.max(1,viewportMetrics.devicePixelRatio)):1.25;
 
 /** Part of the world-anchored boss nameplate. No screen-wide banner or input. */
 export class BossHealthStrip {

@@ -28,5 +28,35 @@
     "id": "20261115-gold-frame-edge-match",
     "category": "修复",
     "summary": "公共双层暗金框的直边按原有圆角色泽连续衔接，消除任务框上下边过亮及切片接缝色差；保留圆角、线宽与透明通道，并同步小游戏静态图集。"
+  },
+  {
+    "id": "20261115-boss-campaign-navigation",
+    "category": "新增",
+    "summary": "首领提示、首领目录与剧情前置条件提供可达目标导航，支持查看与前往；沿用区域门禁、剧情顺序和自动行走规则。"
+  },
+  {
+    "id": "20261115-login-hero-hud",
+    "category": "调整",
+    "summary": "普通登录失败页接入暗金界面，冷启动与回前台优先静默检查平台登录态；人物头像圈显示本级经验，药品快捷入口使用专用图标。"
+  },
+  {
+    "id": "20261115-normal-artifact-pool",
+    "category": "调整",
+    "summary": "普通 Boss 神器掉落使用冻结顺序的完整武器池并保留原记录校验；dev 仍使用职业池的传奇、神器保底及独立存档。"
+  },
+  {
+    "id": "20261115-heat-load-and-autosave",
+    "category": "修复",
+    "summary": "减少重复窗口信息查询、稳定音乐音量提交、空菜单刷新及路线搜索；连续经验和金币收益合并存档，关键进度及切后台及时保存，保留双槽与写后校验。"
+  },
+  {
+    "id": "20261115-ui-render-batching",
+    "category": "调整",
+    "summary": "合并 HUD 中共享字体的渲染顺序，短动态文字复用字符缓存，攻击范围提示复用有界原生 Label 池以减少重复纹理上传；保留 3D、骨骼动画、帧率和分辨率设置。手机温升待新包真机验证。"
+  },
+  {
+    "id": "20261115-unified-cross-platform-pipeline",
+    "category": "调整",
+    "summary": "macOS 与 Windows 共用 Node 打包流程，兼容 dev/test/release、编译档位校验、正式更新日志与构建锁；交付统一为 src/out/<版本号>/SwordAndFire_<版本号>.zip，构建不自动上传。"
   }
 ]

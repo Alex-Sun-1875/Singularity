@@ -1,0 +1,258 @@
+{
+  "date": "2026-11-15",
+  "scope": "Approved boss-alert-navigation-v2 integrated into the Cocos concept-2d game",
+  "designApproved": true,
+  "designProof": "source-art/ui/boss-alert-navigation-v2/fixed-entry-tone-v3.png",
+  "implementation": {
+    "entry": "Fixed beast portrait, approved brightness 0.93/saturation 0.72/sepia 0.18; one shared outer ring; count badge close to rim",
+    "minimapToolLogicalSize": {
+      "visibleDiameter": 28,
+      "hitDiameter": 48,
+      "bossPortrait": 20,
+      "badgeDiameter": 11,
+      "minimumHitGap": 8
+    },
+    "inventoryLabel": "背包",
+    "panel": {
+      "chapterTabs": false,
+      "inclusiveLevelDelta": 5,
+      "width": 306,
+      "heightTwoRows": 280,
+      "heightOneRow": 220,
+      "heightEmpty": 224,
+      "visibleRows": 2,
+      "rowHeight": 52,
+      "rowGap": 8,
+      "portrait": 32,
+      "overflow": "Native Cocos ScrollView, fixed footer",
+      "requirePriorDefeat": true
+    },
+    "notice": {
+      "size": [
+        310,
+        52
+      ],
+      "gapBelowAutomatic": 8,
+      "seconds": 10,
+      "clock": "visible gameplay time",
+      "priority": "above ordinary and equipment messages",
+      "dedup": "per instance/lifetime, existing save receipts",
+      "requirePriorDefeat": true
+    },
+    "navigation": "Existing route gates, collision/path queries and manual navigation; safe approach; pauses on enemy, manual control or menu; explicit continue; rematch never auto-starts",
+    "refresh": {
+      "namedBosses": {
+        "instances": 7,
+        "seconds": 600,
+        "clock": "existing calendar clock",
+        "behavior": "Ready notice then manual challenge at authored rematch entrance"
+      },
+      "wildElites": {
+        "instances": 5,
+        "seconds": 50,
+        "clock": "existing gameplay time",
+        "conditions": "20m clearance, hazards and occupancy; notice only after actual spawn"
+      }
+    }
+  },
+  "checks": {
+    "typeScript": true,
+    "coreTypeScript": true,
+    "existingRelatedTests": {
+      "passed": 76,
+      "failed": 0,
+      "suites": [
+        "navigation",
+        "storage.save",
+        "chapter.rules",
+        "world"
+      ]
+    },
+    "rules": {
+      "passed": true,
+      "scenarios": [
+        "inclusive level window",
+        "10-second expiry",
+        "lifetime dedup across restore",
+        "follow persistence",
+        "named calendar cooldown versus gameplay time",
+        "manual rematch only",
+        "wild waiting versus actual spawn",
+        "22m safe wait destination",
+        "pause/continue"
+      ]
+    },
+    "cocosWebUi": {
+      "status": "passed",
+      "report": "src/cocos/test-results/boss-awareness-v2/verification.json",
+      "viewports": [
+        {
+          "name": "iphone14",
+          "size": [
+            844,
+            390
+          ],
+          "nativeEntry": true,
+          "errors": []
+        },
+        {
+          "name": "iphone14promax",
+          "size": [
+            932,
+            430
+          ],
+          "nativeEntry": true,
+          "errors": []
+        },
+        {
+          "name": "android",
+          "size": [
+            915,
+            412
+          ],
+          "nativeEntry": true,
+          "errors": []
+        },
+        {
+          "name": "desktop",
+          "size": [
+            1280,
+            720
+          ],
+          "nativeEntry": true,
+          "errors": []
+        }
+      ],
+      "mobileDensity": 3,
+      "scenarios": [
+        "Actual Cocos concept-2d scene",
+        "48px hit targets and minimum 8px gaps",
+        "28px shared ring and 20px approved head",
+        "8px notice gap below automatic capsule",
+        "portrait/text separation",
+        "native touch drag scrolling",
+        "fixed footer and row selection",
+        "follow action",
+        "navigation pause/continue",
+        "menu close does not auto-resume",
+        "10-second auto-dismiss",
+        "single-target and empty states"
+      ]
+    },
+    "cocosBuild": {
+      "completed": true,
+      "engine": "3.8.8",
+      "output": "build/boss-awareness-preview",
+      "log": "temp/build-boss-awareness-preview-out.log",
+      "webEntry": "concept-2d using existing release bundle graph",
+      "postExport": "Packaged existing navigation WASM and branding, enabled existing browser release-preview flag"
+    },
+    "sorting": {
+      "passed": true,
+      "priority": [
+        "boss before elite",
+        "actual refresh time descending",
+        "level descending"
+      ],
+      "timestampScenarios": [
+        "actual initial spawn",
+        "wild respawn",
+        "named ready deadline",
+        "manual rematch",
+        "cooldown retains last spawn time",
+        "save/load and return preserve time",
+        "retry preserves time",
+        "legacy times stay unknown",
+        "invalid timestamp rejected"
+      ],
+      "existingRelatedTests": {
+        "passed": 69,
+        "failed": 0
+      },
+      "nativeUi": {
+        "viewports": [
+          "iphone14",
+          "desktop"
+        ],
+        "errors": 0,
+        "preserved": [
+          "panel instance",
+          "selected target",
+          "scroll offset"
+        ],
+        "report": "src/cocos/test-results/boss-awareness-sorting/verification.json"
+      },
+      "designPreview": "source-art/ui/boss-alert-navigation-v2/12-sorted-new-refresh.png"
+    },
+    "defeatedHistory": {
+      "passed": true,
+      "typeScript": true,
+      "coreTypeScript": true,
+      "existingTests": {
+        "passed": 58,
+        "failed": 0
+      },
+      "rules": [
+        "visit and damage do not unlock",
+        "suppressed spawn and spawn count alone do not unlock",
+        "real named defeat unlocks",
+        "real wild hunt defeat unlocks",
+        "same species elsewhere stays hidden",
+        "save/load preserves eligibility",
+        "named rematch and wild respawn remain visible",
+        "defeated targets still obey level ±5",
+        "hidden targets cannot be followed/navigated",
+        "legacy named defeat flags supported"
+      ],
+      "nativeUi": {
+        "viewports": [
+          "iphone14",
+          "desktop"
+        ],
+        "errors": 0,
+        "checks": [
+          "new run empty state",
+          "unbeaten badge hidden",
+          "only three controlled defeated targets shown",
+          "prior sorting and scrolling retained"
+        ],
+        "report": "src/cocos/test-results/boss-awareness-history/verification.json"
+      }
+    }
+  },
+  "platform": {
+    "taptapDeviceValidated": false,
+    "uploadOrReleasePerformed": false,
+    "remaining": "Real TapTap touch, safe area, lifecycle and device acceptance"
+  },
+  "sorting": {
+    "priority": [
+      "boss before elite",
+      "actual refresh time descending",
+      "level descending"
+    ],
+    "tieBreak": "stable identity",
+    "cooldownCompletion": "existing named ready deadline",
+    "legacySaves": "unknown historical times stay unknown; level breaks ties",
+    "persistentSpawnTime": true,
+    "preserveSelectionAndScroll": true
+  },
+  "defeatedHistory": {
+    "required": true,
+    "proof": [
+      "instance kill receipt",
+      "named boss defeat flag",
+      "positive wild hunt-cycle receipt"
+    ],
+    "neverCountsAsDefeat": [
+      "visited",
+      "seen",
+      "damaged",
+      "dead state alone",
+      "respawn count alone"
+    ],
+    "persistsAcrossRespawnAndReload": true,
+    "levelDelta": 5,
+    "sorting": "boss, refresh time descending, level descending"
+  }
+}

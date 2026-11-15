@@ -10,7 +10,7 @@ const zh={
  'attribute.strength':'力量','attribute.dexterity':'敏捷','attribute.intellect':'智力','attribute.vitality':'体质',
  'current':'当前','preview':'预览','common':'通用','foreign':'其他职业','currentProfession':'当前职业：{name}',
  'hero':'拉斐尔 · Lv{level}','previewOnly':'浏览职业不会立即切换。','profession.weapon':'主武器：{name}',
- 'profession.growth':'成长属性：{name}','profession.useWeapon':'将穿戴：{name}','profession.offhand':'副手将卸回行囊：{name}',
+ 'profession.growth':'成长属性：{name}','profession.useWeapon':'将穿戴：{name}','profession.offhand':'副手将卸回背包：{name}',
  'profession.preserve':'属性加点与技能投资保留，恢复本职业技能配置。','profession.cancel':'取消预览','profession.apply':'切换为{name}',
  'profession.saved':'职业已切换，配置已保存。','profession.loading':'正在准备职业武器…','profession.failed':'武器准备失败，请重试；原配置已保留。',
  'profession.stale':'配置已变化，请重新确认。','profession.noChange':'当前职业','profession.choose':'前往职业选择',

@@ -12,15 +12,15 @@ export const GROWING_ITEMS:ItemDef[]=[
  {id:'DG_L04',name:'雨前的静默',kind:'staff',slot:'weapon',level:1,quality:'传奇',weaponFamily:'双手雷杖',twoHanded:true,artSource:'W14',growthAttribute:'intellect',description:'迟雷：雷术首次命中留下1.2秒后爆发的雷印；另一次雷术命中可提前引爆并增强，间隔5秒。',source:'鸣岩洞厅雷痕铜匣 / 三誓守卫Boss随机'},
  {id:'DG_L05',name:'迟归者的指环',kind:'ring',slot:'ringLeft',level:1,quality:'传奇',artSource:'J03',description:'归途未尽：直接攻击或本人燃烧击杀后回复已损失生命的12%，间隔5秒；装备附伤击杀不触发。',source:'S06营地旧物匣随机发现；既有支线所得保留'},
  {id:'DG_L06',name:'逆钟之坠',kind:'necklace',slot:'necklace',level:1,quality:'传奇',artSource:'J06',description:'逆拍：精准闪避真实攻击后，4秒内下一主动技能首次命中伤害+20%，间隔8秒。',source:'鸣岩洞厅 / 绞盘井随机发现「逆行的钟声」，完成后固定奖励'},
- {id:'DG_A01',name:'王庭的黄昏',kind:'sword',slot:'weapon',level:1,quality:'神器',weaponFamily:'双手大剑',twoHanded:true,artSource:'L01',growthAttribute:'strength',description:'黄昏重演：每4次有效近战战技在原判定锚点留下延迟0.45秒的影斩，最多2名原目标，各0.65倍技能威力，最短间隔5秒。',source:'黑冠Boss / S18封存军械箱极稀有随机'},
- {id:'DG_A02',name:'第二次黎明',kind:'necklace',slot:'necklace',level:1,quality:'神器',artSource:'J08',description:'未完的归途：敌方致命伤保留1生命并给予20%最大生命护盾2秒，间隔120秒；换装、休整、重载不重置。',source:'墓园 / 残院奇遇隐藏任务，或深闸古代守卫极稀有随机'},
+ {id:'DG_A01',name:'王庭的黄昏',kind:'sword',slot:'weapon',level:1,quality:'神器',weaponFamily:'双手大剑',twoHanded:true,artSource:'L01',growthAttribute:'strength',description:'黄昏重演：每4次有效近战战技在原判定锚点留下延迟0.45秒的影斩，最多2名原目标，各0.65倍技能威力，最短间隔5秒。',source:'任意Boss共享掉落 / S18封存军械箱极稀有随机'},
+ {id:'DG_A02',name:'第二次黎明',kind:'necklace',slot:'necklace',level:1,quality:'神器',artSource:'J08',description:'未完的归途：敌方致命伤保留1生命并给予20%最大生命护盾2秒，间隔120秒；换装、休整、重载不重置。',source:'任意Boss共享掉落；既有隐藏任务所得保留'},
 ];
 for(const [id,name,kind,family,art,attribute]of [
  ['DG_A03','王庭的逐星','bow','双手弓','W10','dexterity'],
  ['DG_A04','王庭的余烬','staff','双手火杖','W12','intellect'],
  ['DG_A05','王庭的惊雷','staff','双手雷杖','W14','intellect'],
-] as const)GROWING_ITEMS.push({id,name,kind,slot:'weapon',level:1,quality:'神器',weaponFamily:family,twoHanded:true,artSource:art,growthAttribute:attribute,description:'王庭重演：每4次有效主动战技在命中处留下延迟0.45秒的残影，最多2名原目标，各0.65倍技能威力，间隔5秒。',source:'挑战各地Boss有机会获得'});
-for(const item of GROWING_ITEMS){item.growthMode='level';if(item.quality==='神器')item.source='挑战各地Boss有机会获得。'+(item.slot==='weapon'?'第二章隐藏任务「第十三声钟响」四流派自选一件；既有独立发现场景保留。':'');}
+] as const)GROWING_ITEMS.push({id,name,kind,slot:'weapon',level:1,quality:'神器',weaponFamily:family,twoHanded:true,artSource:art,growthAttribute:attribute,description:'王庭重演：每4次有效主动战技在命中处留下延迟0.45秒的残影，最多2名原目标，各0.65倍技能威力，间隔5秒。',source:'任意Boss均有机会掉落，不受章节与武器掉落偏好限制'});
+for(const item of GROWING_ITEMS){item.growthMode='level';if(item.quality==='神器')item.source='任意Boss均有机会掉落，不受章节与武器掉落偏好限制。'+(item.slot==='weapon'?'第二章隐藏任务「第十三声钟响」四流派自选一件；既有独立发现场景保留。':'');}
 export const ARTIFACT_WEAPONS=['DG_A01','DG_A03','DG_A04','DG_A05'] as const;
 export const artifactWeaponForStyle={WAR:'DG_A01',BOW:'DG_A03',FIR:'DG_A04',THU:'DG_A05'} as const;
 export const GROWING_EQUIPMENT:Record<string,ItemDef>=Object.fromEntries(GROWING_ITEMS.map(i=>[i.id,i]));
@@ -70,5 +70,5 @@ export function growingJournal(area:string,flags:Record<string,boolean>,receipts
 }
 export function installGrowingSources(areas:Record<string,AreaDef>){
  for(const s of GROWING_SCENES)areas[s.area].objects.push({id:`growing-scene:${s.id}`,eventId:s.id,action:'growing_scene',label:s.label,description:'仔细调查这处独立发现；抽取结果会保存，本旅程每件成长装备只能获得一次。',x:s.x,z:s.z,radius:1.35});
- for(const area of Object.values(areas))for(const e of area.enemies)if(e.bossId)area.objects.push({id:`growing-rematch:${e.bossId}`,eventId:e.id,action:'growing_rematch',label:'再战Boss · 随机战利品',description:'击败后10分钟可主动再战，有机会获得珍稀装备与成长神器；武器按掉落偏好匹配。',x:area.spawn.x+3,z:area.spawn.z,radius:1.35});
+ for(const area of Object.values(areas))for(const e of area.enemies)if(e.bossId)area.objects.push({id:`growing-rematch:${e.bossId}`,eventId:e.id,action:'growing_rematch',label:'再战Boss · 随机战利品',description:'击败后10分钟可主动再战；任意Boss可掉落全部成长神器，其他武器按掉落偏好匹配。',x:area.spawn.x+3,z:area.spawn.z,radius:1.35});
 }

@@ -1,0 +1,70 @@
+{
+  "verifiedAt": "2026-11-15T09:34:52.775881+08:00",
+  "version": "0.3.46",
+  "buildMode": "test",
+  "loginMode": "platform",
+  "workflow": "Existing Build-TapTap.ps1 stages, using the installed macOS Creator 3.8.8 and existing Python runtime; official converter and report-taptap.py.",
+  "package": {
+    "path": "/Users/sunlh/workspace/singularity/src/out/0.3.46/SwordAndFire_0.3.46.zip",
+    "bytes": 219023913,
+    "sha256": "254ee839c95e3c71a67577ee4fc21ea842d1a985d79bd7b44828711fb9ce3fc7",
+    "zipEntries": 3946
+  },
+  "includedChanges": [
+    "Provider-neutral ordinary login screen, failure-only retry prompt and silent startup/foreground session checks.",
+    "Original HUD preserved; portrait ring uses level XP and top header appends current/required XP separated by middle dots."
+  ],
+  "checks": {
+    "typeScript": true,
+    "coreTypeScript": true,
+    "existingTestsPassed": 147,
+    "existingTestsFailed": 0,
+    "cocosExport": true,
+    "officialConversion": true,
+    "renderAndStartupPolicy": true,
+    "navigationWasm": true,
+    "zipCRC": "passed by report-taptap.py",
+    "deliverySha256": true,
+    "zippedAppIdAndVersion": true,
+    "zippedNativePlatformLogin": true,
+    "zippedLoginUI": true,
+    "zippedSilentCheckOrder": true,
+    "zippedXPHeaderExpression": "\"拉斐尔·Lv\"+M.level+\"·\"+at",
+    "zippedChapterSceneBinding": true,
+    "releaseConfigurationAfterBuild": true
+  },
+  "sourceIntegrity": {
+    "scripts": 221,
+    "changedDuringBuild": [
+      "src/cocos/assets/scripts/app/BuildInfo.ts"
+    ],
+    "nonGeneratedScriptsUnchanged": true,
+    "before": "/Users/sunlh/workspace/singularity/src/out/0.3.46/logs/source-before.json",
+    "after": "/Users/sunlh/workspace/singularity/src/out/0.3.46/logs/source-after.json"
+  },
+  "payload": {
+    "completeUploadZipBytes": 219023913,
+    "offlineInitialPayload": {
+      "files": 27,
+      "rawBytes": 5685671,
+      "zipBytes": 1378830,
+      "zipMiB": 1.31,
+      "budgetMiB": 20.0,
+      "withinLocalBudget": true,
+      "sha256": "54fbd00a9be84cb87ba1087b075eb974ffa090ab894b2a7228af4e3be8be5547",
+      "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+    },
+    "subpackageCount": 76,
+    "actualPlatformInitialBytes": null,
+    "actualResourcesNeededBeforePlayBytes": null
+  },
+  "uploaded": false,
+  "platformVerified": false,
+  "pending": [
+    "TapTap real-device first authorization, valid/invalid foreground session, offline retry and startup acceptance.",
+    "Touch, local save continuity and subpackage loading on target devices.",
+    "Platform-parsed minimum library, actual first-package and pre-play resource download sizes."
+  ],
+  "deliveryOrganizedOn": "2026-11-15",
+  "originalZipBytesPreserved": true
+}

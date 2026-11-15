@@ -4,7 +4,8 @@ import {currentLocale} from '../shared/i18n/Localization';
 import {cinematicText as ct} from '../features/cinematics/locales';
 import type {GameSession} from '../core/GameSession';
 import {EQUIPMENT,MERCHANTS,RECIPES,canonicalMerchant,type EquipmentSlot} from '../features/equipment/data/Equipment';
-import {getArea} from '../features/world/data/WorldData';
+import {getArea,AREAS} from '../features/world/data/WorldData';
+import {campaignPrerequisiteTargets} from '../features/campaign/common/CampaignNavigation';
 import {Hud} from './Hud';
 import {ACTION_NAMES} from '../features/progression/common/SkillChecks';
 import {equipmentOutcome,bonusText} from '../features/equipment/common/EquipmentDice';
@@ -24,6 +25,7 @@ import {showJourneyStart} from '../features/journey/runtime/JourneyStartScreen';
 import {renderProfessionPanel,renderAllocationPanel,discardPreparationPreview} from '../features/progression/runtime/PreparationPanels';
 import {automationText as autoText} from '../features/automation/locales';
 import {worldText} from '../features/world/locales';
+import {campaignText} from '../features/campaign/locales';
 export function renderMenu(hud:Hud,game:GameSession,menu:string,loading:boolean,failure:string,page:number,merchantId:string,visited:Record<string,boolean>,saved:string,updateReady=false,guestTest=false,musicLabel='背景音乐：开',skillEffectDebug=false){
  const s=game.state,d=s.dialogue;
  if(menu!=='checks')discardCombatSkillPreview(game);
@@ -43,14 +45,26 @@ export function renderMenu(hud:Hud,game:GameSession,menu:string,loading:boolean,
    {label:'清除 Boss 再战等待',detail:'从旅程页重新挑战，仍需真实击杀',action:'dev:boss-ready',disabled:!v.bossWaits},
    {label:'技能训练场',detail:'技能1—5级、靶阵、群怪与伤害统计',action:'training:enter'},
   ],[{label:'返回暂停',action:'pause'},{label:'继续旅途',action:'close'}],hud.touchTargetSize,{placement:'right',width:sys.isMobile?620:560});return;
+
+ }
+ if(menu.startsWith('campaign-prerequisites:')){
+  const id=menu.slice('campaign-prerequisites:'.length),targets=campaignPrerequisiteTargets(game,AREAS,id);
+  hud.showList(campaignText('event.choosePrerequisite'),`${game.campaignEventAvailability(id,true).reason}\n\n${campaignText('event.navigationHint')}`,targets.map(target=>({label:target.destination.label,detail:`${getArea(target.destination.area).name} · ${target.blocked?autoText('route.locked'):campaignText('event.navigate')}`,action:`campaign-prerequisite-go:${id}:${target.id}`,disabled:target.blocked})),[{label:campaignText('event.return'),action:'close'}]);return;
  }
  if(menu.startsWith('interaction:')){
-  const object=getArea(s.area).objects.find(o=>o.id===menu.slice(12)&&game.interactionVisible(o));
+  const object=getArea(s.area).objects.find(o=>o.id===menu.slice(12)&&(game.interactionVisible(o)||game.interactionAvailability(o).completed));
   if(!object){hud.show(autoText('interaction.unavailable'),autoText('task.failed'),[{label:autoText('interaction.cancel'),action:'close'}]);return;}
+  const status=game.interactionAvailability(object);
+  if(object.action==='campaign_event'||!status.available||status.readOnly){
+   const prerequisites=!status.available&&!status.completed?campaignPrerequisiteTargets(game,AREAS,object.eventId??''):[];
+   const navigation=prerequisites.length?{label:campaignText('event.goPrerequisite'),action:prerequisites.length===1&&!prerequisites[0].blocked?`campaign-prerequisite-go:${object.eventId}:${prerequisites[0].id}`:`campaign-prerequisites:${object.eventId}`}:undefined;
+   const body=status.completed?`${campaignText('event.completed')}\n\n${status.reason}`:`${status.reason}\n\n${object.description}`;
+   hud.show(object.label,body,status.completed||status.readOnly?[{label:worldText('interaction.return'),action:'close'}]:[navigation??{label:status.available?status.confirmLabel:worldText('interaction.locked'),action:'interaction-confirm:'+object.id,disabled:!status.available},{label:worldText('talk.later'),action:'close'}]);return;
+  }
   const merchant=object.action==='merchant'?MERCHANTS[canonicalMerchant(object.merchant??object.actor??'')]:undefined;
   const title=merchant?.name??(object.actor?object.label.split(/[：:]/)[0]:object.label);
-  const body=merchant?worldText('talk.merchant'):object.actor==='kael'?worldText('talk.kael'):`${object.description}\n\n${worldText(object.action==='journey_task'?'talk.task':'talk.proceed')}`;
-  const choice=merchant?worldText('talk.shop'):object.action==='journey_task'?autoText('interaction.investigate'):object.actor==='kael'?worldText('talk.route'):worldText('talk.ready');
+  const body=merchant?worldText('talk.merchant'):object.actor==='kael'?worldText('talk.kael'):`${object.description}\n\n${object.action==='journey_task'?worldText('talk.task'):status.reason}`;
+  const choice=merchant?worldText('talk.shop'):object.action==='journey_task'?autoText('interaction.investigate'):object.actor==='kael'?worldText('talk.route'):status.confirmLabel;
   hud.show(title,body,[{label:choice,action:'interaction-confirm:'+object.id},{label:worldText(merchant?'talk.noThanks':'talk.later'),action:'close'}]);return;
  }
  if(menu==='hunting'){
@@ -77,17 +91,17 @@ export function renderMenu(hud:Hud,game:GameSession,menu:string,loading:boolean,
  if(menu==='exploration-skills'){renderCharacterPanel(hud,game,'skills');return;}
  if(menu==='equipment-catalog'){renderCharacterPanel(hud,game,'catalog');return;}
  if(menu==='check-history'){
-  const entries=Object.entries(s.dice.records),gears=Object.entries(s.dice.gear??{});if(!entries.length&&!gears.length){hud.show('机遇记录','获得装备后可以免费摇骰追加铸印。行囊中选择装备，点击摇骰锻印；每件一次，原装备保底。也可以核对信件，或拆解铜簧匣。',[{label:'探索手段',action:'exploration-skills'},{back:true,label:'返回旅途',action:'close'}]);return;}
+  const entries=Object.entries(s.dice.records),gears=Object.entries(s.dice.gear??{});if(!entries.length&&!gears.length){hud.show('机遇记录','获得装备后可以免费摇骰追加铸印。背包中选择装备，点击摇骰锻印；每件一次，原装备保底。也可以核对信件，或拆解铜簧匣。',[{label:'探索手段',action:'exploration-skills'},{back:true,label:'返回旅途',action:'close'}]);return;}
   const rows=entries.map(([id,r])=>{const d=SKILL_CHECKS[id],roll=r.rolls[r.rolls.length-1];return {label:`${roll.success?'达成':'转机'} · ${d.title}`,detail:`掷骰 ${roll.faces.join(' / ')} → ${roll.kept} +准备${roll.bonus}${roll.assist?' +线索'+roll.assist:''} = ${roll.total} / 目标${d.dc}${r.committed?' · 已记录':' · 待确认'}`,action:'check-log:'+id};});
   rows.push(...gears.map(([id,r])=>{const outcome=equipmentOutcome(s.seed,r);return {label:`${outcome?.name??'未掷骰'} · ${EQUIPMENT[id].name}`,detail:`${outcome?bonusText(outcome.bonus)||'保留原装':'免费机遇尚未使用'} · ${r.claimed?'已结算':'待结算'}`,action:'check-log:gear:'+id};}));
   hud.showList('机遇记录',`余烬 ${s.dice.inspiration}/4 · 装备免费锻印一次，原装备保底。`,rows,[{label:'探索手段',action:'exploration-skills'},{back:true,label:'返回旅途',action:'close'}]);return;
  }
- if(menu.startsWith('check-log:gear:')){const id=menu.slice(15),r=s.dice.gear?.[id];if(r){const o=equipmentOutcome(s.seed,r);hud.show(EQUIPMENT[id].name,`${o?.name??'未使用锻造骰'}\n${o?bonusText(o.bonus)||o.description:'每件装备可以免费掷骰一次。'}${o?.upgrade?'\n额外发现：'+EQUIPMENT[o.upgrade].name:''}\n\n${r.claimed?'铸印已封存，穿戴该装备时生效。':'在行囊中选择这件装备可继续结算。'}`,[{back:true,label:'返回记录',action:'check-history'},{label:'行囊',action:'inventory'}]);return;}}
+ if(menu.startsWith('check-log:gear:')){const id=menu.slice(15),r=s.dice.gear?.[id];if(r){const o=equipmentOutcome(s.seed,r);hud.show(EQUIPMENT[id].name,`${o?.name??'未使用锻造骰'}\n${o?bonusText(o.bonus)||o.description:'每件装备可以免费掷骰一次。'}${o?.upgrade?'\n额外发现：'+EQUIPMENT[o.upgrade].name:''}\n\n${r.claimed?'铸印已封存，穿戴该装备时生效。':'在背包中选择这件装备可继续结算。'}`,[{back:true,label:'返回记录',action:'check-history'},{label:'背包',action:'inventory'}]);return;}}
  if(menu.startsWith('check-log:')){const id=menu.slice(10),r=s.dice.records[id],d=SKILL_CHECKS[id];if(r&&d){const roll=r.rolls[r.rolls.length-1];hud.show(d.title,`${ACTION_NAMES[d.skill]} · 目标 ${d.dc}\n${r.context.mode==='advantage'?'线索充分：两骰择高':r.context.mode==='disadvantage'?'局势不利：两骰取低':'行动掷骰'}\n\n${r.rolls.map(v=>`第${v.attempt}次：${v.faces.join(' / ')} → ${v.kept} +${v.bonus}${v.assist?' +'+v.assist:''} = ${v.total} · ${v.success?'成功':'失败'}`).join('\n')}\n\n${roll.success?d.successText:d.failureText}`,[{back:true,label:'返回记录',action:'check-history'},{back:true,label:'返回旅途',action:'close'}]);return;}}
  if(menu==='inventory'||menu==='equipment'){renderEquipmentPanel(hud,game);return;}
  if(renderForging(hud,game,menu))return;
  if(menu==='shop'){const merchant=MERCHANTS[merchantId];if(!merchant){hud.clearModal();return;}hud.showList(`${merchant.name}的货物`,`金币 ${s.player.gold} · 本趟余货；休整不会补货。`,Object.keys(merchant.stock).map(id=>({label:`${EQUIPMENT[id].name} ${merchant.prices[id]}币`,detail:`余${s.merchantStock[merchantId][id]} · ${EQUIPMENT[id].description}`,action:'buy:'+id,disabled:!s.merchantStock[merchantId][id]||!!s.inventory[id]||s.player.gold<merchant.prices[id]})),[...(merchantId==='lorn'?[{label:'锻造与强化',action:'forge'}]:[]),{label:'结束交易',action:'close'}],hud.touchTargetSize);return;}
- if(menu==='help'){hud.show('旅途手册','WASD / 左摇杆移动，Shift慢行，鼠标瞄准，J / 鼠标左键基础攻击；弓按住蓄力、松手放箭。\nQ/E/R/T（或1—4）使用四个普通技能，G使用终极，空格独立闪避。技能默认自动瞄准射程内无遮挡的最近怪物，轻点释放；按住时实时跟随，目标失效后重新索敌。鼠标／触摸板按住或触屏原地长按技能、终极、闪避按钮3.6秒可查看说明，松开关闭且不施放。触屏拖动改为本次手动瞄准，键盘按住技能键后移动鼠标也可手动选点，松开释放。设置→操作可切换默认自动/手动瞄准。移入取消区放弃。Esc或鼠标右键也可取消瞄准。技能超距或被墙阻挡不会自动跑近。\n主要输出无冷却；战术、防守和闪避按各自冷却恢复；终极消耗45点当前职业资源，有短暂释放间隔。普攻与闪避不耗资源；技能消耗体力／专注／法力并自动恢复。命中值与目标闪避值决定接触后的命中率，范围60%—100%；弓术专注上限提高命中，当前专注多少不影响命中。敏捷同时提升闪避。实体箭仍须碰到目标，落空与被闪避均显示MISS；主动闪避仍按动作时机避开攻击。5使用生命药水，6使用对应职业药水，共享5秒冷却。C打开战斗技能，V打开成长属性，B行囊，M地图，F交互。火墙与陷阱用于延缓追击，护盾和机动技能用于应对危险。\n脱战后可随时更换装备。安全检查点可以配置技能、锻造与重配属性。怪物倒地后尸体保留约30秒，掉落装备会留在地面。靠近后点击拾取（键盘F）；顶部自动任务会连续寻路、战斗，抵达调查目标后弹出交互，确认后继续推进；挂机只在当前场景刷怪。左侧寻路抵达人物或物件后也会自动打开交互。仅挂机刷怪经验受每日递减与5000上限限制，在挂机顶栏查看；自动任务与手动战斗不占用挂机额度。自动任务与挂机会自动寻路拾取，未拾取装备随存档保留。拾取装备后可免费摇骰追加铸印，可能增加生命、护甲或伤害，也可能额外获得高品质装备。行囊中选择装备，点击摇骰锻印；每件一次，原装备保底。探索行动中Enter/空格掷骰，R消耗余烬重掷，G采用线索。',[{label:'战斗技能',action:'checks'},{back:true,label:'返回旅途',action:'close'}]);return;}
+ if(menu==='help'){hud.show('旅途手册','WASD / 左摇杆移动，Shift慢行，鼠标瞄准，J / 鼠标左键基础攻击；弓按住蓄力、松手放箭。\nQ/E/R/T（或1—4）使用四个普通技能，G使用终极，空格独立闪避。技能默认自动瞄准射程内无遮挡的最近怪物，轻点释放；按住时实时跟随，目标失效后重新索敌。鼠标／触摸板按住或触屏原地长按技能、终极、闪避按钮3.6秒可查看说明，松开关闭且不施放。触屏拖动改为本次手动瞄准，键盘按住技能键后移动鼠标也可手动选点，松开释放。设置→操作可切换默认自动/手动瞄准。移入取消区放弃。Esc或鼠标右键也可取消瞄准。技能超距或被墙阻挡不会自动跑近。\n主要输出无冷却；战术、防守和闪避按各自冷却恢复；终极消耗45点当前职业资源，有短暂释放间隔。普攻与闪避不耗资源；技能消耗体力／专注／法力并自动恢复。命中值与目标闪避值决定接触后的命中率，范围60%—100%；弓术专注上限提高命中，当前专注多少不影响命中。敏捷同时提升闪避。实体箭仍须碰到目标，落空与被闪避均显示MISS；主动闪避仍按动作时机避开攻击。5使用生命药水，6使用对应职业药水，共享5秒冷却。C打开战斗技能，V打开成长属性，B背包，M地图，F交互。火墙与陷阱用于延缓追击，护盾和机动技能用于应对危险。\n脱战后可随时更换装备。安全检查点可以配置技能、锻造与重配属性。怪物倒地后尸体保留约30秒，掉落装备会留在地面。靠近后点击拾取（键盘F）；顶部自动任务会连续寻路、战斗，抵达调查目标后弹出交互，确认后继续推进；挂机只在当前场景刷怪。左侧寻路抵达人物或物件后也会自动打开交互。仅挂机刷怪经验受每日递减与5000上限限制，在挂机顶栏查看；自动任务与手动战斗不占用挂机额度。自动任务与挂机会自动寻路拾取，未拾取装备随存档保留。拾取装备后可免费摇骰追加铸印，可能增加生命、护甲或伤害，也可能额外获得高品质装备。背包中选择装备，点击摇骰锻印；每件一次，原装备保底。探索行动中Enter/空格掷骰，R消耗余烬重掷，G采用线索。',[{label:'战斗技能',action:'checks'},{back:true,label:'返回旅途',action:'close'}]);return;}
  if(menu==='settings'){
   const musicState=musicLabel.replace(/^背景音乐[：:]\s*/,''),musicFailed=musicState!=='开'&&musicState!=='关',tab=hud.settingsTab;
   const names:MenuRow={label:'技能名称',detail:'',skin:'menu-skillnames-v5',action:'toggle-skill-names',value:hud.skillNamesVisible?'开':'关',selected:hud.skillNamesVisible,toggle:true};

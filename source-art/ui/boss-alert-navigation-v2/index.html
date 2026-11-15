@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>首领与精英 · 按等级筛选设计稿</title><link rel="stylesheet" href="style.css?v=boss-head-tone-v3"></head>
+<body><main>
+<header><div><p class="kicker">剑与火 · UI 设计稿</p><h1>首领与精英</h1><p class="subtitle">保留原面板，去掉章节切换；只显示与你相差 5 级以内的目标。</p></div><label class="level-control" for="player-level">预览角色等级<select id="player-level"><option value="4">Lv4</option><option value="10">Lv10</option><option value="13">Lv13</option><option value="18">Lv18</option><option value="25">Lv25</option></select></label></header>
+<nav class="states" aria-label="设计状态"><button data-mode="list" aria-pressed="true">目标列表</button><button data-mode="entry">打开入口</button><button data-mode="notice">刷新提醒</button><button data-mode="elite">精英出现</button><button data-mode="stack">消息叠放</button><button data-mode="route">自动寻路</button><button data-mode="paused">暂停</button><button data-mode="cooldown">冷却</button><button data-mode="arrived">抵达</button><button class="hits" id="hits">触控范围</button></nav>
+<section class="stage-wrap"><div class="stage" id="stage" data-mode="list">
+  <img class="scene" src="assets/scene.png" alt="沿用已确认任务框 v8 的完整游戏画面，原 HUD 比例保留">
+  <span class="hero-name" id="hero-name">拉斐尔 · Lv4</span>
+  <button class="auto" id="auto" aria-label="自动操作">自动</button>
+  <div class="tracker" id="tracker"><button class="tracker-text" id="tracker-text" aria-label="展开导航详情"><span class="place" id="place">断轮磨坊</span><span class="target" id="target">→ 夺回断轮磨坊 <small>35m</small></span><span class="progress" id="progress">本段 35m · 第 1/2 段</span></button><img class="track-divider" src="../../../src/cocos/assets/resources/ui/quiet-bronze/settings-footer-rule-v11.png" alt=""><button id="navigate">出发</button></div>
+  <button class="minimap-tool inventory-entry" id="inventory-open" aria-label="背包"><img src="assets/tool-inventory.png" alt=""></button>
+  <button class="minimap-tool checks-entry" id="checks-open" aria-label="技能"><img src="assets/tool-checks.png" alt=""><small class="tool-badge top">9</small></button>
+  <button class="minimap-tool settings-entry" id="settings-open" aria-label="设置"><img src="assets/tool-settings.png" alt=""></button>
+  <button class="minimap-tool boss-entry" id="boss-open" aria-label="首领与精英：打开等级相近的目标" title="首领与精英"><img src="assets/boss-entry-beast-v1.png" alt=""><small class="tool-badge" id="entry-count">1</small></button>
+  <div class="message-stack" id="message-stack">
+    <div class="spawn-notice" id="spawn-notice" role="status"><img class="notice-portrait" id="notice-portrait" src="assets/overseer.png" alt=""><div class="notice-copy"><span id="notice-title">断镐监工 <small>可再战</small></span><small id="notice-place">断镐石场 · Lv8</small></div><img class="notice-divider" src="../../../src/cocos/assets/resources/ui/quiet-bronze/settings-footer-rule-v11.png" alt=""><button id="notice-go">前往</button></div>
+    <div class="ordinary-message" id="ordinary-message">拾取 · 废铁 ×2</div>
+  </div>
+  <div class="arrival" id="arrival"><img src="../../../src/cocos/assets/resources/ui/quiet-bronze/automation-compass-v5.png" alt=""><span>已抵达入口</span></div>
+  <button class="world-action" id="fight">发起再战</button>
+  <button class="veil" id="veil" aria-label="关闭首领列表"></button>
+  <aside class="target-panel" id="target-panel" aria-label="首领与精英">
+    <img class="crest" src="../../../src/cocos/assets/resources/ui/quiet-bronze/double-gold-stag-v6.png" alt="">
+    <h2>首领与精英</h2><button class="close" id="close" aria-label="关闭列表"><span></span><span></span></button>
+    <img class="rule title-rule" src="../../../src/cocos/assets/resources/ui/quiet-bronze/settings-title-rule-v11.png" alt="">
+    <div class="level-hint" id="level-hint">Lv1–9 <span>1 个目标</span></div>
+    <div class="encounter-list" id="encounter-list" aria-label="等级相近的目标"></div>
+    <img class="rule footer-rule" src="../../../src/cocos/assets/resources/ui/quiet-bronze/settings-row-rule-v11.png" alt="">
+    <p class="selected-detail" id="selected-detail"></p>
+    <div class="actions"><button id="follow"><span>关注提醒</span></button><button class="primary" id="go"><span>自动前往</span></button></div>
+  </aside>
+  <span class="design-mark">设计示意 · 状态与距离为演示数据</span>
+</div></section>
+<div class="caption"><div><h3 id="caption-title">按角色等级筛选，章节页签取消</h3><p id="caption">保留头像、选择和底部操作。升级后按 ±5 级重新筛选，列表不会展开全部章节。</p></div><button id="demo">查看打开入口</button></div>
+<details class="notes"><summary>这版的交互与筛选规则</summary><p>背包、技能、设置和首领共用 28 像素的暗金圆框，沿用既有图标和用途。可见圆框缩小，圆形触控直径仍为 48 像素，相邻触控圆边缘至少间隔 8 像素。点击固定兽首头像打开首领与精英列表；头像不随目标变化，数量只统计当前等级 ±5 级的目标，没有合适目标时显示空态，不自动扩大范围。</p><p>每个角色单独裁切头像：人物展示头肩，裂岳獠王展示眼睛、鼻部与獠牙，三刃阵保留三体辨识。列表保留等级、地点、状态和底部“关注提醒 / 自动前往”。选择只改变选中态，点击前往才开始导航。</p><p>首领和精英顶部提示显示 10 秒后自动收起，无须点击。点击“前往”立即切入导航并收起提示；收起后不反复弹出，同一目标可从“首领”入口查看。提示距“自动”可见底边 8 像素，普通消息排在它下面，收起后补位。</p></details>
+<section class="details"><h2>沿用当前定稿</h2><p>任务追踪 v8 ／ 双层暗金框 v6 ／ 设置分隔线 v11 ／ 原稿控件校色 v5 ／ 切角按钮 v8</p><div class="references"><figure><img src="../quest-tracker-expand-v5/design-review-v8.png" alt="已确认任务追踪 v8"><figcaption>沿用原任务框与导航状态</figcaption></figure><figure><img src="../double-gold-frame-v6/reference-design.png" alt="已有设置面板原稿"><figcaption>保留原金属框、内衬与鹿首</figcaption></figure><figure><img src="../rpg-shared-v6/runtime-overview.jpg" alt="最新公共管理界面"><figcaption>沿用原头像、列表和状态层级</figcaption></figure></div></section>
+<footer>本次为 UI 设计稿。等级、距离和倒计时用于预览，尚未接入游戏规则与 TapTap 真机。</footer>
+</main><script src="prototype.js"></script></body></html>

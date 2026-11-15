@@ -2,12 +2,13 @@ import type {EnemyState,GameSession} from '../../../core/GameSession';
 import {CAMPAIGN_ENEMY_TEMPLATES} from '../../campaign/data/Campaign';
 import {enemyProfile} from './EnemyCombat';
 import {trainingText} from '../../debug/locales';
+import {HUNT_VARIANTS} from '../../world/data/MonsterEcology';
 
 export const BOSS_NOTICE_RANGE=48;
 export type BossKind='boss'|'elite';
 export function bossKind(enemy:Pick<EnemyState,'bossId'|'templateId'|'kind'>):BossKind|null {
  const id=enemy.bossId??enemy.templateId??'';
- if(id.startsWith('ELITE_'))return 'elite';
+ if(id.startsWith('ELITE_')||HUNT_VARIANTS.some(v=>v.id===id&&v.elite))return 'elite';
  return enemy.bossId||enemy.kind==='captain'?'boss':null;
 }
 // All world labels resolve the same authored identity, including training targets.

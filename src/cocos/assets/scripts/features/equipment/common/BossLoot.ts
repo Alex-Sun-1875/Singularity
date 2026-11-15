@@ -9,18 +9,21 @@ import {equipmentRandomWord} from './EquipmentDice';
 import {BUILD_PROFILE} from '../../../shared/BuildProfile';
 
 export const BOSS_LOOT_POLICY={artifact:.01,legendary:.036,epic:.10,epicPity:10,legendaryPity:50,respawnSeconds:600} as const;
-type Meta=[number,number,number,LootStyle,number,number,number,string,string,string];
+type Meta=[3|4|5,number,number,LootStyle,number,number,number,string,string,string];
 interface Host {state():GameState;now():number;grant(id:string,source:string,at:Point):void;changed():void;emit(type:string,text?:string,extra?:Record<string,unknown>):void}
 const CLOCK='boss:v3:clock',EPIC='boss:v3:epic-misses',LEGEND='boss:v3:legend-misses',DRAWS='boss:v3:draws';
 const styles:LootStyle[]=['WAR','BOW','FIR','THU'];
+// Frozen order and weights are part of issued save proofs; change the schema for a new pool.
+const ARTIFACT_POOL_V4=['DG_A01','DG_A03','DG_A04','DG_A05','DG_A02'] as const;
 const owned=(s:GameState,id:string)=>!!s.inventory[id]||!!s.groundLoot.some(d=>d.item===id)||s.receipts[`growing-owned:${id}`]!==undefined;
 const atCapacity=(s:GameState,id:string)=>(s.inventory[id]??0)>=equipmentStackLimit(id)||s.groundLoot.some(d=>d.item===id)||equipmentStackLimit(id)===1&&owned(s,id);
 const roll=(seed:number,key:string)=>equipmentRandomWord(seed,key)%2147483646+1;
 const baseKey=(area:string,id:string)=>`boss:v3:${area}:${id}`;
-// Existing random records remain readable; forced records are accepted only by dev.
+// Schema 4 normal draws use the frozen all-weapon pool. Legacy dev 4/5
+// proofs keep their forced tiers in the isolated dev storage namespace.
 const guaranteed=()=>BUILD_PROFILE.name==='dev'&&BUILD_PROFILE.guaranteedBossHighTierLoot;
 const recordKey=(m:Meta)=>baseKey(m[8],m[9])+(m[0]===5?':dev-artifact':'');
-const recordTier=(m:Meta,n:number)=>m[0]===4?2:m[0]===5?3:bossDropTier(n/2147483647,m[4],m[5]);
+const recordTier=(m:Meta,n:number)=>guaranteed()&&m[0]===4?2:m[0]===5?3:bossDropTier(n/2147483647,m[4],m[5]);
 const nowSeconds=(s:GameState,now:number)=>Math.max(Number(s.receipts[CLOCK]??0),Math.max(0,Math.min(9999999399,Math.floor((Number.isFinite(now)?now:0)/1000))));
 export function bossLootView(s:GameState,now:number,boss?:string){
  const remaining=boss?Math.max(0,Number(s.receipts[`boss:v3:ready:${boss}`]??0)-nowSeconds(s,now)):0;
@@ -34,12 +37,17 @@ export function bossDropTier(n:number,epicMisses:number,legendMisses:number){
 }
 function pool(meta:Meta,tier:number){
  const [, ,chapter,style,,,,boss]=meta;
- if(tier===3)return [artifactWeaponForStyle[style],'DG_A02'];
+ if(tier===3)return meta[0]===4&&!guaranteed()?[...ARTIFACT_POOL_V4]:[artifactWeaponForStyle[style],'DG_A02'];
  if(tier===1)return lifecycleBattlePool(chapter,'史诗',style);
  if(tier===2){const legacy=(GROWING_BOSS_DROPS[boss]??[]).map(d=>d.item).filter(id=>EQUIPMENT[id]?.quality==='传奇'&&(!EQUIPMENT[id].weaponFamily||style==='WAR'&&EQUIPMENT[id].kind==='sword'||style==='BOW'&&EQUIPMENT[id].kind==='bow'||style==='FIR'&&EQUIPMENT[id].weaponFamily==='双手火杖'||style==='THU'&&EQUIPMENT[id].weaponFamily==='双手雷杖'));return [...lifecycleBattlePool(chapter,'传奇',style),...legacy];}
  return [];
 }
-function initialIndex(seed:number,key:string,meta:Meta,tier:number,candidates:string[]){const n=roll(seed,`${key}:${meta[1]}:item`)/2147483647;return tier===3?(n<.7?0:1):Math.min(candidates.length-1,Math.floor(n*candidates.length));}
+function initialIndex(seed:number,key:string,meta:Meta,tier:number,candidates:string[]){
+ const n=roll(seed,`${key}:${meta[1]}:item`)/2147483647;
+ if(tier!==3)return Math.min(candidates.length-1,Math.floor(n*candidates.length));
+ if(meta[0]!==4||guaranteed())return n<.7?0:1; // Preserve the original style-bound draws.
+ const weapons=candidates.length-1;return n<.7?Math.floor(n/.7*weapons):weapons;
+}
 /** One bounded active record per boss; only actual item proofs are archived. */
 export class BossLoot {
  constructor(private host:Host){}
@@ -67,7 +75,7 @@ export class BossLoot {
   }
   s.dropRolls[key]={roll:n,result};s.receipts[`roll:${key}`]=result;s.receipts[`${key}:meta`]=JSON.stringify(meta);s.receipts[`${key}:life`]=cycle;
   s.receipts[EPIC]=tier>=1?0:meta[4]+1;s.receipts[LEGEND]=tier>=2?0:meta[5]+1;s.receipts[DRAWS]=meta[6];
-  this.host.emit('loot_roll',result,{id:key,tier,devGuaranteed:kind!==3,epicMisses:s.receipts[EPIC],legendMisses:s.receipts[LEGEND]});
+  this.host.emit('loot_roll',result,{id:key,tier,devGuaranteed:guaranteed()&&kind!==3,epicMisses:s.receipts[EPIC],legendMisses:s.receipts[LEGEND]});
  }
  defeat(e:EnemyState){
   if(!e.bossId||e.hp>0||e.phase!=='dead')return false;
@@ -76,7 +84,7 @@ export class BossLoot {
   const chapter=e.lootChapter??chapterForArea(s.area),gold=8+Math.min(2,chapter)*4;
   s.player.gold=Math.min(9999,s.player.gold+gold);s.player.iron=Math.min(9999,s.player.iron+2);
   this.host.emit('reward',tr('loot.bossResources',{gold}),{id:key,gold,iron:2});
-  this.draw(e,chapter,guaranteed()?4:3);
+  this.draw(e,chapter,4);
   if(guaranteed())this.draw(e,chapter,5);
   const now=nowSeconds(s,this.host.now());s.receipts[CLOCK]=now;s.receipts[`boss:v3:ready:${e.bossId}`]=now+600;
   this.host.changed();return true;
@@ -86,7 +94,7 @@ export class BossLoot {
 function readBossRecord(s:GameState,source:string){
  try{
   const raw=s.receipts[`${source}:meta`];if(typeof raw!=='string')return null;const m=JSON.parse(raw) as Meta;
-  if(!Array.isArray(m)||m.length!==10||!(m[0]===3||guaranteed()&&(m[0]===4||m[0]===5))||!Number.isInteger(m[1])||m[1]<0||m[1]>1e7||![1,2].includes(m[2])||!styles.includes(m[3])||!Number.isInteger(m[4])||m[4]<0||m[4]>9||!Number.isInteger(m[5])||m[5]<0||m[5]>49||!Number.isInteger(m[6])||m[6]<1||m[6]>Number(s.receipts[DRAWS]??0)||[m[7],m[8],m[9]].some(v=>typeof v!=='string'||!v))return null;
+  if(!Array.isArray(m)||m.length!==10||!(m[0]===3||m[0]===4||guaranteed()&&m[0]===5)||!Number.isInteger(m[1])||m[1]<0||m[1]>1e7||![1,2].includes(m[2])||!styles.includes(m[3])||!Number.isInteger(m[4])||m[4]<0||m[4]>9||!Number.isInteger(m[5])||m[5]<0||m[5]>49||!Number.isInteger(m[6])||m[6]<1||m[6]>Number(s.receipts[DRAWS]??0)||[m[7],m[8],m[9]].some(v=>typeof v!=='string'||!v))return null;
   const key=recordKey(m),r=s.dropRolls[source];if(!r||source!==key&&source!==`${key}:owned:${r.result}`)return null;
   const enemy=(s.area===m[8]?s.enemies:s.encounters[m[8]]??[]).find(e=>e.id===m[9]);
   if(!enemy||enemy.bossId!==m[7]||Number(s.receipts[`${key}:life`]??-1)<m[1]||!s.receipts[`kill:${m[8]}:${m[9]}`])return null;

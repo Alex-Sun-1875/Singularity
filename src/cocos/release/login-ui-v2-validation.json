@@ -1,0 +1,101 @@
+{
+  "verifiedOn": "2026-11-15",
+  "sourceVersion": "0.3.45",
+  "implementationStatus": "implemented and verified in an exported Cocos Web preview; TapTap device acceptance pending",
+  "design": "source-art/ui/login-v2/login-retry-proposal-v2.png; user-approved ordinary login design",
+  "changes": [
+    "Dedicated LoginScreen uses the existing valley artwork, shared DoubleGoldFrame, GoldMenuActions/GoldMenuButton and bundled RPG font; no new runtime bitmap or dependency",
+    "Player-facing heading, login states and errors use ordinary login wording; no TapTap provider or version label in the page",
+    "First startup uses the journey loading screen; foreground session checks keep the game/menu visible; only failure opens the full login-retry screen",
+    "Successful retry removes the login page and restores underlying UI ownership; game access remains gated during all pending authentication",
+    "Layout follows the approved screen and actual Cocos safe area, including 48-logical-pixel mobile retry target",
+    "Neutral soft shadow improves title contrast on the existing artwork without tinting the landscape"
+  ],
+  "checks": {
+    "fullTypeScript": "passed: npm run check after final source edit",
+    "coreTypeScript": "passed: npm --prefix src/cocos run check:core",
+    "existingTests": {
+      "passed": 146,
+      "failed": 0,
+      "note": "Existing mesh-cache test invoked installed python3 through a temporary python PATH alias; no system configuration, test dependency or repository test added"
+    },
+    "creator": "passed: Cocos Creator 3.8.8 web-mobile build, final invocation completed with Creator success exit 36 and Finished log",
+    "renderPolicy": "passed: existing render-policy checker",
+    "navigationWasm": "passed: existing exported WASM check",
+    "browserUI": [
+      {
+        "name": "iphone14",
+        "viewport": [
+          844,
+          390
+        ],
+        "retryHitLogicalHeight": 48,
+        "errors": []
+      },
+      {
+        "name": "iphone14pro",
+        "viewport": [
+          852,
+          393
+        ],
+        "retryHitLogicalHeight": 48,
+        "errors": []
+      },
+      {
+        "name": "iphone14promax",
+        "viewport": [
+          932,
+          430
+        ],
+        "retryHitLogicalHeight": 48,
+        "errors": []
+      },
+      {
+        "name": "android",
+        "viewport": [
+          915,
+          412
+        ],
+        "retryHitLogicalHeight": 48,
+        "errors": []
+      },
+      {
+        "name": "desktop",
+        "viewport": [
+          1280,
+          720
+        ],
+        "retryHitLogicalHeight": 72,
+        "errors": []
+      }
+    ],
+    "browserFlow": "Actual exported Cocos scene with isolated tap callback fixtures: first failure, real button click, pending login gate and loading UI, successful retry/world startup, hide/show valid-session check without login-modal flash, same menu retained and no extra login call",
+    "resizing": "Failed iPhone layout resized 844×390 -> 932×430 -> 844×390; page rebuilt and retry target remained >=48 logical pixels",
+    "localSave": "Fixture storage sentinel preserved throughout authentication; production save schema/keys unchanged",
+    "visualReview": "Actual Cocos phone screenshot checked against approved v2 concept",
+    "sourceCheck": "No missing script component or TypeScript error found in Creator build logs"
+  },
+  "evidence": {
+    "browser": "src/cocos/test-results/login-ui-v2/verification.json",
+    "phone": "src/cocos/test-results/login-ui-v2/iphone14-failed.png",
+    "recovery": "src/cocos/test-results/login-ui-v2/iphone14-recovered.png",
+    "previewBuild": "src/cocos/build/login-ui-preview",
+    "buildLog": "src/cocos/temp/build-login-ui-preview-out.log"
+  },
+  "runtimeSources": [
+    "src/cocos/assets/scripts/features/login/runtime/LoginScreen.ts",
+    "src/cocos/assets/scripts/app/ChapterGame.ts",
+    "src/cocos/assets/scripts/platform/TapLogin.ts"
+  ],
+  "notPerformed": [
+    "New TapTap ZIP build",
+    "Upload, review or release",
+    "Live TapTap authentication",
+    "TapTap real-device acceptance"
+  ],
+  "pending": [
+    "Real AppID first authorization/cancel/offline/timeout and invalid-session retry",
+    "TapTap Android/iPhone native safe areas, foreground recovery and touch acceptance"
+  ],
+  "scope": "Web fixtures verify exported UI and integration only; they do not certify platform authentication or a real-device release."
+}

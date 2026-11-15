@@ -1,0 +1,154 @@
+{
+  "recordedAt": "2026-11-15T08:11:00.520254+08:00",
+  "sourceVersion": "0.3.45",
+  "status": "source-fixed-package-built-phone-thermal-acceptance-pending",
+  "scope": "按用户要求优化额外持续负载，并将两秒全量同步自动存档改为事件与定时结合。",
+  "changes": [
+    {
+      "file": "src/cocos/assets/scripts/app/ChapterGame.ts",
+      "behavior": "空菜单使用独立 gameplay 状态键；正常模拟 revision 不再触发发型枚举、骰盘视图、空骰盘销毁和空菜单清理。肖像竖屏提示也只清理一次；保留前台登录提示和当前导航修复。"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/equipment/common/EquipmentDice.ts",
+      "behavior": "先检查是否存在待处理装备骰；没有时避免每帧装备可用性、敌人威胁和本地化文案计算。仍即时打开真实待处理装备骰。"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/automation/common/AutomationRoute.ts",
+      "behavior": "同次引导刷新以一个广度优先树服务所有猎区候选。每次刷新重新读取等级和门禁，避免跨刷新陈旧缓存；原先可达攻击位置修复保留。"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/journey/common/JourneyGuide.ts",
+      "behavior": "先筛等级，再复用共享区域路线树；目标选择、局部碰撞寻路和移动敌人重查保持原语义。"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/persistence/common/AutoSavePolicy.ts",
+      "behavior": "正常 dirty 进度15秒兜底；经验、金币、击败与掉落在首个请求后三秒内合并，连续请求不顺延截止；关键事件批次及时提交，失败两秒重试。"
+    }
+  ],
+  "savePolicy": {
+    "ordinaryDirtySeconds": 15,
+    "progressBatchSeconds": 3,
+    "retrySeconds": 2,
+    "immediateEvents": [
+      "item",
+      "quest",
+      "journey_complete",
+      "complete",
+      "travel",
+      "retry",
+      "death",
+      "rest",
+      "captain_defeated",
+      "check_roll",
+      "check_result",
+      "loot_roll",
+      "experience.levels > 0",
+      "campaign_battle.complete = true"
+    ],
+    "lifecycle": "现有 enterBackground、内存压力、销毁、手动保存和离开旅途等同步提交仍直接执行；不依赖下一帧或异步回调。",
+    "retained": [
+      "完整快照格式及迁移",
+      "交替双槽",
+      "校验和",
+      "写后读回",
+      "失败不标记已保存",
+      "损坏原档保护与新旅程备份",
+      "训练场/临时测试不覆盖正常进度"
+    ],
+    "tradeoff": "异常终止且没收到后台事件时，普通位置/战斗时间可能回退约15秒，普通收益约3秒；关键进度依提交成功与否，写入失败继续保留并重试。",
+    "theoreticalPeriodicWritesPerMinute": {
+      "before": 30,
+      "after": 4,
+      "reductionPercent": 86.6666666667
+    },
+    "note": "频率仅计算定时保存，关键事件、普通收益及手动/后台保存会增加实际次数；不是手机功耗百分比。"
+  },
+  "localValidation": {
+    "typescript": "passed",
+    "existingAndNecessaryAdditionalTests": {
+      "passed": 146,
+      "failed": 0,
+      "addedThisRound": 4,
+      "log": "src/cocos/test-results/performance/iphone-heat-round2-20261115/tests.log"
+    },
+    "navigation": {
+      "scope": "Local real area data; no phone timing",
+      "routeComparisons": 3880,
+      "allRoutesAndGatesIdentical": true,
+      "guidanceUpdates": 25,
+      "baselineExitChecks": 49950,
+      "optimizedExitChecks": 2400,
+      "reductionPercent": 95.1951951951952,
+      "selectedGuidanceIdentical": true
+    },
+    "runtime": {
+      "scope": "Extracted current ChapterGame methods with mocked presenters/platform",
+      "frames": 600,
+      "steady": {
+        "prepare": 600,
+        "diceView": 0,
+        "diceClear": 1,
+        "diceShow": 0,
+        "renderMenu": 1,
+        "modalClear": 0,
+        "hair": 0,
+        "saves": 0
+      },
+      "menuClosePortraitDiceDialogueDeathTransitions": true,
+      "oneImmediateCommitPerCriticalEventBatch": true,
+      "rewardDeferred": true,
+      "backgroundFlushesBeforeDeadline": true,
+      "repeatedBackgroundEventDoesNotCommitTwice": true
+    },
+    "equipmentDice": {
+      "frames": 600,
+      "beforeEquipmentAvailabilityChecks": 600,
+      "afterEquipmentAvailabilityChecks": 0,
+      "pendingOwnedGearStillOpens": true
+    },
+    "tapConfig": "passed",
+    "whitespace": "passed with existing CRLF recognized",
+    "bundledAutoSavePolicy": {
+      "compiledModuleExecuted": true,
+      "periodic15Seconds": true,
+      "progress3SecondsNonSliding": true,
+      "retry2Seconds": true,
+      "levelUpImmediate": true
+    },
+    "creatorExport": "passed",
+    "officialTapTapConversion": "passed",
+    "rendererStartupWasm": "passed",
+    "zipCRCAndSHA256": "passed",
+    "sourceStableDuringBuild": 215
+  },
+  "package": {
+    "version": "0.3.45",
+    "path": "/Users/sunlh/workspace/singularity/src/cocos/artifacts/taptap-heat-round2-20261115/SwordAndFire_0.3.45_TapTap_test_20261115T000938Z/SwordAndFire_0.3.45_TapTap_test_20261115T000938Z.zip",
+    "bytes": 218551292,
+    "sha256": "2543fb38dc08499d9fee204981da2c8e5cedb437c49e821486a58052e9b6bbc7",
+    "zipCRC": "passed",
+    "javascriptFilesCompared": 90,
+    "allJavaScriptMatchesAuditedDirectory": true,
+    "nonGeneratedSourceHashesStable": 215,
+    "uploaded": false,
+    "phoneLoaded": false
+  },
+  "limits": [
+    "本轮没有新真机采样，之前手机采样为0.3.43；不声称0.3.45已降温或实际耗电减少。",
+    "本地调用计数与合成状态不是iPhone整机CPU或GPU测量。",
+    "HUD合批、阴影和连续战斗GPU负载仍需要同场景实机对照；本轮优先处理证据充分的重复逻辑。",
+    "本轮以当前工作区为构建基线，保留此前并行会话已经完成的导航与登录恢复改动。"
+  ],
+  "references": [
+    "https://dev.epicgames.com/documentation/en-us/unreal-engine/saving-and-loading-your-game-in-unreal-engine",
+    "https://developer.taptap.cn/minigameapidoc/dev/api/base/app/life-cycle/tap.onHide/",
+    "https://developer.taptap.cn/minigameapidoc/dev/api/storage/tap.getStorageSync/"
+  ],
+  "sourceBaseline": "src/cocos/test-results/performance/iphone-heat-round2-20261115/source-baseline.json",
+  "sourceReviewDiff": "src/cocos/test-results/performance/iphone-heat-round2-20261115/round2-only.diff",
+  "pending": [
+    "0.3.45 真机触控、菜单/装备骰、切后台/前台和存档重启验收。",
+    "同设备、同场景、相近起始热状态与亮度/充电条件，连续移动战斗10–15分钟验证温升。",
+    "Android真机验收仍需单列。"
+  ]
+}

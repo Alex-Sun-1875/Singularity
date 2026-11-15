@@ -26,8 +26,8 @@
 ## 版本与产物
 
 - 根 `package.json.version` 是唯一版本来源。沿用现有打包入口：每次实际打包 patch +1，同次调用内部重试不重复递增，Web 预览不递增。dev / test / release 共用一直递增的版本序列，失败不回退；不因创建文档、准备日志或 `-ValidateOnly` 校验而递增版本。
-- 平台身份维护在 `src/cocos/release/taptap-project.json`；资源与分包复用 `release/taptap.json`、`Build-TapTap.ps1` 及现有官方转换工具。不手改生成的运行版本或平台配置。
-- 产物目录以 `-dev` / `-test` / `-release` 结尾，ZIP 以 `_dev.zip` / `_test.zip` / `_release.zip` 结尾；自定义输出名和交付目录同样补齐后缀。例如 `artifacts/taptap-dev/SwordAndFire_0.3.42_TapTap_<UTC时间>-dev/SwordAndFire_0.3.42_TapTap_<UTC时间>_dev.zip`。包名、交付说明和报告须能区分 dev / test / release；dev 还须记录实际加速开关与倍率。内部记录应包含版本、构建时间、源码提交及必要的工作区内容快照、登录方式、ZIP 与 SHA-256、验证结果及待办。
+- 平台身份维护在 `src/cocos/release/taptap-project.json`；资源与分包复用 `release/taptap.json`、统一入口 `tools/build-taptap.cjs` 及现有官方转换工具（`Build-TapTap.ps1` 仅转发兼容）。不手改生成的运行版本或平台配置。
+- 交付统一为 `src/out/<版本号>/SwordAndFire_<版本号>.zip`，不增加日期、任务或档位后缀。dev / test / release 在编译配置、包内 `release-info.json` 与包旁清单中区分；dev 另记录实际加速开关与倍率。内部记录应包含版本、构建时间、源码提交及必要的工作区内容快照、登录方式、ZIP 与 SHA-256、验证结果及待办。
 - 版本号仍为三段整数，不以拼接 `-dev` / `-test` 替代平台版本；档位单独记录。现有 `guest-test` / `audit` 等包名用于既有登录或审计变体，不表示新增玩法档位。
 - 完整上传 ZIP、首包、可玩前资源量分别记录；本地审计量与平台实际限制分开。改动包内容后必须重新生成相关报告与校验值，不能沿用旧哈希。
 - 已有类型检查、规则检查、分包校验与手动验证优先复用；按本次变更检查档位和机制，不默认新增测试代码或依赖。
@@ -82,7 +82,7 @@
 | `npm run build:tap:audit` | 正常 test 规则、无身份本地审计 |
 | `npm run build:tap:preview` | 正常 test 规则的 Web 预览，不升版 |
 
-脚本可使用 `-Profile dev|test|release`，默认 `test`；旧 `-TestPackage` 只作为 test 别名。`-GuestTest` 不允许与 dev、release、audit 或 Web 预览混用；audit 只使用 test。`-ValidateOnly` 可核对档位和路径，不分配版本、不调用引擎、不生成上传包。
+统一 Node 脚本使用 `--mode dev|test|release`（兼容入口使用 `-Profile dev|test|release`），默认 `test`；旧 `-TestPackage` 只作为 test 别名。`-GuestTest` 不允许与 dev、release、audit 或 Web 预览混用；audit 只使用 test。`--check`（兼容 `-ValidateOnly`）可核对档位和路径，不分配版本、不调用引擎、不生成上传包。
 
 档位生成到 `assets/scripts/shared/BuildProfile.ts`，业务只读取编译后的只读配置。实际导出的 JS 必须包含唯一且匹配的档位标记，转换和报告均检查；不能把旧 test 导出改名为 dev。dev 存储在现有 `PlatformServices` 层统一加 `singularity.dev.` 前缀，所有读、写、删、枚举均隔离；目前无云存档或排行榜接入。dev / release 打包结束或失败后恢复工作区的 test 配置，避免影响后续编辑器预览。
 

@@ -1,0 +1,156 @@
+{
+  "createdOn": "2026-11-15",
+  "status": "implemented; original HUD restored; Cocos Web verified",
+  "request": "保持原版HUD，只让头像圈接入经验数据，并在顶部姓名、等级后追加xxx/xxx。",
+  "changes": [
+    "Portrait ring uses existing pure progressionView() level XP fraction, retaining original radius, stroke width and arc direction.",
+    "Existing top name label appends the full current/required XP ratio; separator spaces tightened and existing saved marker reserved.",
+    "No separate XP row or third meter."
+  ],
+  "headerExample": "拉斐尔·Lv4·290/490",
+  "preserved": [
+    "Original health caption at y15 and 16-unit bar at y-2",
+    "Original resource caption at y-22 and 16-unit bar at y-39",
+    "Original health/resource feedback colors",
+    "Original portrait and gold placement",
+    "Original saved check/dot position and behavior",
+    "Original frame dimensions, quest position and touch targets"
+  ],
+  "frameCreatorUnits": [
+    328,
+    116
+  ],
+  "frameLogicalAt844x390": [
+    177.66666666666666,
+    62.833333333333336
+  ],
+  "sample": {
+    "level": 4,
+    "xp": 290,
+    "xpToNext": 490,
+    "fraction": 0.5918367346938775
+  },
+  "maxLevel": "Full original ring arc, top header shows 已满级.",
+  "runtimeSources": [
+    "src/cocos/assets/scripts/app/Hud.ts"
+  ],
+  "restoredSharedComponent": "UiSkin.ts matches the exact pre-change file, with no remaining modification.",
+  "checks": {
+    "typescript": "npm run check: passed",
+    "baselineSourceComparison": "Original health/resource/gold/save construction and feedback lines match the pre-change snapshot exactly; UiSkin.ts matches byte for byte.",
+    "creator": "Cocos Creator 3.8.8 Web export; success exit 36 and Finished marker.",
+    "renderPolicy": "passed",
+    "browserScope": "Exported Cocos Web UI, isolated callback fixtures, production reward calculation and presentation. No TapTap platform or real-device acceptance.",
+    "cases": [
+      "0/100",
+      "25/100",
+      "290/490",
+      "Health changes do not redraw XP ring",
+      "Level-up resets to 0/720",
+      "38289/38290 full numeric caption",
+      "Level 40 full arc",
+      "Original meter coordinates and height",
+      "No separate XP label",
+      "Header avoids original save marker",
+      "Resize preserves current XP and original frame size"
+    ],
+    "views": [
+      {
+        "name": "iphone14",
+        "viewport": [
+          844,
+          390
+        ],
+        "panelLogical": {
+          "x": 5.999999999999972,
+          "y": 6.000000000000021,
+          "width": 177.66666666666666,
+          "height": 62.83333333333333
+        },
+        "headerFontLogical": 10.291666666666666,
+        "longestHeaderFontLogical": 7.583333333333333,
+        "errors": []
+      },
+      {
+        "name": "iphone14promax",
+        "viewport": [
+          932,
+          430
+        ],
+        "panelLogical": {
+          "x": 5.999999999999929,
+          "y": 6.000000000000028,
+          "width": 195.88888888888889,
+          "height": 69.27777777777777
+        },
+        "headerFontLogical": 12.541666666666666,
+        "longestHeaderFontLogical": 9.555555555555555,
+        "errors": []
+      },
+      {
+        "name": "android",
+        "viewport": [
+          915,
+          412
+        ],
+        "panelLogical": {
+          "x": 5.999999999999972,
+          "y": 5.999999999999979,
+          "width": 187.68888888888887,
+          "height": 66.37777777777778
+        },
+        "headerFontLogical": 11.444444444444445,
+        "longestHeaderFontLogical": 8.583333333333334,
+        "errors": []
+      },
+      {
+        "name": "desktop",
+        "viewport": [
+          1280,
+          720
+        ],
+        "panelLogical": {
+          "x": 10,
+          "y": 10,
+          "width": 280,
+          "height": 116
+        },
+        "headerFontLogical": 12,
+        "longestHeaderFontLogical": 9,
+        "errors": []
+      }
+    ],
+    "visualReview": "Actual exported phone detail and whole game scene inspected. Original thin bars and labels restored; XP appears only in the original portrait ring and top header.",
+    "notPerformed": [
+      "New TapTap ZIP/upload",
+      "TapTap real-device acceptance"
+    ]
+  },
+  "evidence": "src/cocos/test-results/experience-ring-v4/verification.json",
+  "method": "Screenshots from real exported Cocos UI, isolated browser fixture callbacks and production gainExperience(); no concept compositing or generated image.",
+  "userAcceptedFinalPixels": false,
+  "outputs": [
+    {
+      "path": "phone-preview.png",
+      "bytes": 2727768,
+      "sha256": "016551becac601167d50fc7f4701fb4f9a2280be0eb50850f9914f1d85a66355"
+    },
+    {
+      "path": "hero-detail.png",
+      "bytes": 115271,
+      "sha256": "583dcf93b2d240e851193f59b7f684a545de351f28ba039ae9183bf1db1be616"
+    }
+  ],
+  "packaging": {
+    "version": "0.3.46",
+    "mode": "test",
+    "loginMode": "platform",
+    "package": "src/out/0.3.46/SwordAndFire_0.3.46.zip",
+    "sha256": "254ee839c95e3c71a67577ee4fc21ea842d1a985d79bd7b44828711fb9ce3fc7",
+    "verifiedInZip": true,
+    "uploaded": false,
+    "realDeviceAccepted": false,
+    "validation": "src/cocos/release/taptap-login-xp-0.3.46-validation.json"
+  },
+  "finalCaptionRevision": "用户要求等级后也使用间隔点；源码与0.3.46 ZIP已核实。现有PNG仍为此前使用空格的截图。"
+}

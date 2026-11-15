@@ -11,7 +11,18 @@ if($Platform -eq 'wechatgame'){
 }
 $buildLockDirectory=Join-Path $project 'temp'
 New-Item -ItemType Directory -Force -Path $buildLockDirectory | Out-Null
-try{$localBuildLock=[System.IO.File]::Open((Join-Path $buildLockDirectory 'taptap-build.lock'),[System.IO.FileMode]::OpenOrCreate,[System.IO.FileAccess]::ReadWrite,[System.IO.FileShare]::None)}catch{throw 'Another local or TapTap build is using this project; wait for it to finish.'}
+$localBuildLockPath=Join-Path $buildLockDirectory 'taptap-build.lock'
+if(Test-Path -LiteralPath $localBuildLockPath){
+ $lockOwnerText=[System.IO.File]::ReadAllText($localBuildLockPath)
+ $lockOwnerId=0
+ if(![int]::TryParse($lockOwnerText,[ref]$lockOwnerId) -or $lockOwnerId -le 0){throw ('Inspect the existing build lock: '+$localBuildLockPath)}
+ if(Get-Process -Id $lockOwnerId -ErrorAction SilentlyContinue){throw 'Another local or TapTap build is using this project; wait for it to finish.'}
+ Remove-Item -LiteralPath $localBuildLockPath
+}
+try{$localBuildLock=[System.IO.File]::Open($localBuildLockPath,[System.IO.FileMode]::CreateNew,[System.IO.FileAccess]::ReadWrite,[System.IO.FileShare]::Read)}catch{throw 'Another local or TapTap build is using this project; wait for it to finish.'}
+$lockOwnerBytes=[System.Text.Encoding]::ASCII.GetBytes([string]$PID)
+$localBuildLock.Write($lockOwnerBytes,0,$lockOwnerBytes.Length)
+$localBuildLock.Flush()
 try{
 $releaseJson=& node (Join-Path $project 'tools/taptap-config.cjs') --prepare --json --mode preview
 if($LASTEXITCODE -ne 0){throw 'Game release configuration validation failed.'}
@@ -72,4 +83,4 @@ $notices=Join-Path $project 'build-templates/web-desktop/THIRD_PARTY_NOTICES.txt
 if($LASTEXITCODE -ne 0){throw 'Web game icon export failed.'}
 if(Test-Path -LiteralPath $notices){Copy-Item -LiteralPath $notices -Destination (Join-Path $project ('build/'+$OutputName+'/THIRD_PARTY_NOTICES.txt')) -Force}
 Write-Output ('Built '+$Platform+' at '+(Join-Path $project ('build/'+$OutputName)))
-}finally{$localBuildLock.Dispose()}
+}finally{$localBuildLock.Dispose();Remove-Item -LiteralPath $localBuildLockPath}

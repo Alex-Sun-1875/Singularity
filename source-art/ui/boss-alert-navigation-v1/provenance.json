@@ -1,0 +1,63 @@
+{
+  "date": "2026-11-15",
+  "status": "Superseded after user rejected visual alignment",
+  "implementedInGame": false,
+  "platformValidated": false,
+  "userApproved": false,
+  "generation": "No generative image model used. Native HTML/CSS prototype with existing project assets and deterministic screenshot cropping/composition.",
+  "designSkill": "frontend-design",
+  "baseViewport": {
+    "width": 844,
+    "height": 390,
+    "devicePixelRatio": 3
+  },
+  "assets": [
+    "source-art/ui/quest-tracker-expand-v5/collapsed-game-v8.png",
+    "src/cocos/assets/resources/flat2d/hero-head-soft-geralt-v3.png",
+    "src/cocos/assets/resources/ui/quiet-bronze/double-gold-frame-v6.png",
+    "src/cocos/assets/resources/ui/quiet-bronze/rpg-serif-v2.ttf",
+    "src/cocos/assets/resources/ui/combat-relief/"
+  ],
+  "knownMockupLimits": [
+    "Scene crop is enlarged and composed for design review, not a new runtime screenshot.",
+    "Map geometry, distance, cooldown states and player stats are illustrative.",
+    "Existing HUD context is represented; only alert, target list and navigation transitions are proposed here.",
+    "Prototype interaction and layout checks do not establish Cocos gameplay, dense-combat occlusion or device safe-area acceptance.",
+    "No new game dependency, platform API or generated artwork is required for the proposed integration."
+  ],
+  "decisions": {
+    "namedTargetCooldownSeconds": 600,
+    "namedCooldownBasis": "Existing independent real-calendar rematch cooldown; preserve in v1",
+    "repeatSpawn": "Manual rematch at existing local interaction; expiry is ready-to-rematch, not automatic respawn",
+    "wildEliteCooldownSeconds": 50,
+    "wildCooldownBasis": "Existing game time plus 20 metre and hazard/occupancy checks",
+    "alertSeconds": 4,
+    "wildAlertSeconds": 3,
+    "wildOrdinaryBannerThrottleSeconds": 120,
+    "mergeWindowSeconds": 3,
+    "ordinaryBannerMinimumIntervalSeconds": 30,
+    "followedAdvanceReminderSeconds": 30
+  },
+  "evidence": [
+    "Runtime-assembled AREAS enumeration, saved in roster-audit.json",
+    "BossLoot.ts and GameSession.ts",
+    "BossAwareness.ts and MonsterEcology.ts",
+    "Automation.ts, JourneyGuide.ts and QuestTracker.ts",
+    "docs/design/equipment-lifecycle-v3-integration.md",
+    "docs/design/ui-layout-guidelines.md"
+  ],
+  "followupConcerns": [
+    "H17 beast-h17-ridgebreaker (0,42) and hunt-H17-0-0 (0,39.52) are 2.48m apart; isolate the boss arena before implementation acceptance.",
+    "bossKind currently does not classify HUNT_VARIANTS.elite; unify named elite and wild alpha identity without granting wild mobs boss loot.",
+    "Existing local clock rollback guard is not server authority; no claim of tamper-proof cooldown."
+  ],
+  "visualReview": {
+    "status": "Reviewed final design board and full-screen notice, navigation and cooldown views",
+    "notes": [
+      "Player remains below the notice slot in this design composition",
+      "Old screenshot HUD removed from composed scene area",
+      "Actual gameplay obstruction, dense combat and platform safe areas remain implementation acceptance items"
+    ]
+  },
+  "supersededBy": "source-art/ui/boss-alert-navigation-v2/"
+}

@@ -1,0 +1,123 @@
+{
+  "recordedAt": "2026-11-15T03:24:37.107644+08:00",
+  "sourceVersion": "0.3.43",
+  "diagnosticBasis": "docs/performance/iphone-taptap-live-20261115.json",
+  "changes": {
+    "viewport": {
+      "implementation": "src/cocos/assets/scripts/platform/ViewportMetrics.ts",
+      "consumers": 16,
+      "refresh": "initial read, Cocos window-resize, Game.EVENT_SHOW; ref-counted release on scene destroy",
+      "engineSingletonPatched": false,
+      "consumerPaths": [
+        "src/cocos/assets/scripts/app/Hud.ts",
+        "src/cocos/assets/scripts/app/ChapterGame.ts",
+        "src/cocos/assets/scripts/shared/ui/RpgPanel.ts",
+        "src/cocos/assets/scripts/features/equipment/runtime/EquipmentGallery.ts",
+        "src/cocos/assets/scripts/features/equipment/runtime/CharacterPanel.ts",
+        "src/cocos/assets/scripts/features/portals/runtime/PortalHud.ts",
+        "src/cocos/assets/scripts/features/journey/runtime/TaskPresence.ts",
+        "src/cocos/assets/scripts/features/world/runtime/SceneInteraction.ts",
+        "src/cocos/assets/scripts/features/world/runtime/FlatWorldLayers.ts",
+        "src/cocos/assets/scripts/features/navigation/runtime/MapPanel.ts",
+        "src/cocos/assets/scripts/features/combat/runtime/EnemyCombatFeedback.ts",
+        "src/cocos/assets/scripts/features/combat/runtime/CombatImpactFeedback.ts",
+        "src/cocos/assets/scripts/features/combat/runtime/BossPresence.ts",
+        "src/cocos/assets/scripts/features/combat/runtime/BossHud.ts",
+        "src/cocos/assets/scripts/features/cinematics/runtime/CinematicSubtitles.ts",
+        "src/cocos/assets/scripts/features/cinematics/runtime/CinematicCues.ts"
+      ]
+    },
+    "music": {
+      "path": "src/cocos/assets/scripts/features/audio/runtime/BackgroundMusic.ts",
+      "behavior": "Retain fade; converge to target at absolute error < 0.0001; only submit changed volume; suppress repeated zero writes while paused"
+    },
+    "frameRateSettingChanged": false,
+    "resolutionChanged": false
+  },
+  "validation": {
+    "typescript": "passed",
+    "existingTests": {
+      "passed": 140,
+      "failed": 0,
+      "log": "src/cocos/test-results/performance/iphone-optimization-20261115/optimization-tests-with-python.log",
+      "environmentNote": "Initial run lacked the python command; rerun with existing Python venv on PATH passed."
+    },
+    "sourceBehaviorHarness": {
+      "kind": "temporary simulated Cocos API, executing transpiled real source; not device acceptance",
+      "viewport": "1000 window/DPR access pairs => one snapshot read; resize/foreground invalidation, immutable Size copy, two owners, idempotent cleanup and reacquire verified",
+      "audio": "600 steady frames and 600 paused frames => 0 repeated writes; normal/quiet targets, fade-out, suspend/resume and toggle verified",
+      "file": "src/cocos/test-results/performance/iphone-optimization-20261115/verify-optimization.cjs"
+    },
+    "skill": {
+      "path": ".agents/skills/taptap-device-performance/SKILL.md",
+      "installedLink": "/Users/sunlh/.codex/skills/taptap-device-performance",
+      "validator": "quick_validate.py passed, using existing cached PyYAML",
+      "consoleCollector": "GameGlobal.cc and cc contexts, deadline, cancel/take cleanup, duplicate start rejection and watchdog verified in local harness",
+      "iphoneLive": {
+        "device": "iPhone15,2",
+        "os": "26.6.2",
+        "runtimeVersion": "0.3.42",
+        "unprofiledFrames": 650,
+        "unprofiledDurationMs": 15007,
+        "unprofiledFPS": 43.31312054374625,
+        "jsStacks": 3180,
+        "cpuSamples": 19,
+        "sourcesSaved": 42,
+        "profilerStopEvents": "ScriptProfiler, Memory and CPUProfiler trackingComplete all received",
+        "cleanupConfirmed": true,
+        "rawDirectories": [
+          "src/cocos/test-results/performance/iphone-skill-validation-20261115-retry",
+          "src/cocos/test-results/performance/iphone-skill-profile-validation-20261115"
+        ],
+        "interpretation": "Collector validation on OLD 0.3.42 build, not post-optimization measurements",
+        "deviceSelectionAfterChange": "USB ambiguity guard and snapshot verified on same phone; target detached normally."
+      },
+      "android": "Official ADB/Chrome preparation, capture, troubleshooting and cleanup documented; no Android device acceptance this session",
+      "sharedInstallLink": "/Users/sunlh/.agents/skills/taptap-device-performance",
+      "projectCompatibilityLink": ".claude/skills/taptap-device-performance"
+    }
+  },
+  "package": {
+    "status": "built-and-locally-validated",
+    "version": "0.3.43",
+    "path": "src/cocos/artifacts/taptap-perf-20261115/SwordAndFire_0.3.43_TapTap_test_20261114T192407Z/SwordAndFire_0.3.43_TapTap_test_20261114T192407Z.zip",
+    "bytes": 218548566,
+    "sha256": "c1bc295e42aed2f5e2cf59aaee514ee196b02284297f11d9dc7bc2c1bcbf7a96",
+    "subpackageCount": 76,
+    "offlineInitialPayload": {
+      "files": 26,
+      "rawBytes": 5632107,
+      "zipBytes": 1362160,
+      "zipMiB": 1.3,
+      "budgetMiB": 20.0,
+      "withinLocalBudget": true,
+      "sha256": "bd87efc82e35b472d605a75dc241d87f6fcce694951b620575936a12eae27fb4",
+      "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+    },
+    "actualPlatformInitialBytes": null,
+    "actualPlayableResourcesBytes": null,
+    "sourceOptimizationsInZIP": [
+      {
+        "file": "assets/main/index.5832b.js",
+        "musicWriteDedupe": true,
+        "viewportCache": true,
+        "lifecycleOwnership": true
+      }
+    ],
+    "creatorBuild": true,
+    "officialConversion": true,
+    "packageAuditPassed": true,
+    "rendererAndWasmChecks": true,
+    "typescriptAfterBuild": true,
+    "releaseConfigAfterBuild": true,
+    "uploaded": false,
+    "newBuildDeviceAcceptance": false,
+    "buildWarnings": "Existing ButtonComponent deprecation and Babel >500KB formatting notices; build completed successfully."
+  },
+  "pending": [
+    "Load optimization package on TapTap and measure the same scene again; current phone still runs 0.3.42.",
+    "Verify actual resize/foreground/touch/audio behavior in the new phone build.",
+    "Moving/combat and sustained thermal/GPU measurements.",
+    "Android physical-device acceptance."
+  ]
+}

@@ -7,13 +7,13 @@ import {COMBAT_SKILLS} from '../../combat/data/PureSkills';
 import {HUNT_ENCOUNTERS} from '../../world/data/MonsterEcology';
 import {JOURNEY_TASKS,chapterForArea} from '../../journey/data/ChapterJourney';
 import {journeyGuidance,type JourneyGuidance} from '../../journey/common/JourneyGuide';
-import {availableRoute} from './AutomationRoute';
+import {availableRoute,enemyApproachPath} from './AutomationRoute';
 import {automationText as tr} from '../locales';
 export {availableRoute} from './AutomationRoute';
 
 export type AutomationMode='manual'|'quest'|'idle';
 export type AutomationPause='manual'|'menu'|'story'|'dialogue'|'dice'|'background'|'auth'|'portrait'|'failure'|'blocked';
-export interface NavigationTarget {area:string;point:Point;label:string;exitId?:string;objectId?:string;taskId?:string}
+export interface NavigationTarget {area:string;point:Point;label:string;exitId?:string;objectId?:string;taskId?:string;bossKey?:string}
 export interface AutomationStep {input:InputFrame;travel?:ExitDef;pickup?:string;interact?:string;notice?:string}
 const distance=(a:Point,b:Point)=>Math.hypot(a.x-b.x,a.z-b.z);
 const still=():InputFrame=>({x:0,z:0});
@@ -81,11 +81,11 @@ export class Automation {
  navigate(target:NavigationTarget){this.stop();this.destination={...target,point:{...target.point}};this.status=tr('navigation.travel',{target:target.label});}
  private resetRoute(){this.route=[];this.routeGoal=null;this.replanAt=0;this.lastPosition=null;this.stuck=0;this.lastWalkAt=-Infinity;}
  private visible(world:WorldQuery,a:Point,b:Point){return world.visible(a,b)&&Math.abs(world.height(a)-world.height(b))<1.2;}
- private walk(game:GameSession,world:WorldQuery,goal:Point,dt:number):InputFrame|null {
+ private walk(game:GameSession,world:WorldQuery,goal:Point,dt:number,enemy?:EnemyState):InputFrame|null {
   const p=game.state.player,now=game.state.time;
   if(this.lastPosition&&now-this.lastWalkAt<.25){this.stuck=distance(p,this.lastPosition)<.015?this.stuck+dt:0;if(this.stuck>4)return null;if(this.stuck>1)this.replanAt=0;}else this.stuck=0;
   this.lastPosition={x:p.x,z:p.z};this.lastWalkAt=now;
-  if(!this.routeGoal||distance(goal,this.routeGoal)>1||now>=this.replanAt||!this.route.length){this.route=world.path?.(p,goal)??[];this.routeGoal={...goal};this.replanAt=now+.8;if(!this.route.length)return null;}
+  if(!this.routeGoal||distance(goal,this.routeGoal)>1||now>=this.replanAt||!this.route.length){this.route=enemy?enemyApproachPath(game,world,enemy):world.path?.(p,goal)??[];this.routeGoal={x:goal.x,z:goal.z};this.replanAt=now+.8;if(!this.route.length)return null;}
   while(this.route.length&&distance(p,this.route[0])<.18)this.route.shift();
   const next=this.route[0];if(!next)return still();
   const d=distance(p,next),amount=Math.min(1,d/(6.5*Math.max(.01,dt)));
@@ -237,12 +237,13 @@ export class Automation {
    const candidates=s.enemies.filter(e=>eligible(e)&&(this.blocked.get(e.id)??0)<=now);
    const priority=(e:EnemyState)=>distance(e,p)-(distance(e,p)<6&&this.visible(world,p,e)?20:0);
    candidates.sort((a,b)=>priority(a)-priority(b));
-   // At most three path queries per bounded scan; retain the selected target.
+   // At most three candidates per bounded scan; retain the selected approach.
+   let approach:Point[]=[];
    for(const candidate of candidates.slice(0,3)){
-    if(this.visible(world,p,candidate)&&distance(p,candidate)<=game.basicAttackProfile().rangeMetres||world.path?.(p,candidate).length){enemy=candidate;break;}
+    approach=enemyApproachPath(game,world,candidate);if(approach.length){enemy=candidate;break;}
     this.blocked.set(candidate.id,now+8);
    }
-   if(enemy){this.enemyId=enemy.id;this.resetRoute();this.restPoint=null;}
+   if(enemy){this.enemyId=enemy.id;this.resetRoute();this.route=approach;this.routeGoal={x:enemy.x,z:enemy.z};this.replanAt=now+.8;this.restPoint=null;}
   }
   if(!enemy){this.enemyId='';return null;}
   this.status=tr(this.mode==='idle'?'hunt.fight':'task.fight');
@@ -289,7 +290,7 @@ export class Automation {
   if(visible&&d<=reach){frame.attack=true;this.stuck=0;return {input:frame};}
   // Freeze facing through the current action, then repath toward a moving target.
   if(s.action)return {input:frame};
-  const movement=this.walk(game,world,enemy,dt);
+  const movement=this.walk(game,world,enemy,dt,enemy);
   if(movement)return {input:{...frame,...movement}};
   this.blocked.set(enemy.id,now+8);this.enemyId='';this.resetRoute();this.status=tr('target.blocked',{mode:this.modeLabel});
   return {input:still()};

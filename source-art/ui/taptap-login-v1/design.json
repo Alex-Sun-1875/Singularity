@@ -1,0 +1,131 @@
+{
+  "createdOn": "2026-11-15",
+  "purpose": "TapTap 游戏内登录失败重试页 UI 设计稿；不接入运行代码",
+  "viewport": {
+    "logical": [
+      844,
+      390
+    ],
+    "targetPhysical": [
+      2532,
+      1170
+    ],
+    "safeMarginsLogical": {
+      "left": 44,
+      "right": 44,
+      "top": 20,
+      "bottom": 28
+    },
+    "note": "设计安全边距；实现时读取真实设备安全区，不硬编码机型"
+  },
+  "palette": {
+    "panel": "#19130e",
+    "inset": "#121210",
+    "primary": "#173639",
+    "gold": "#daae65",
+    "line": "#8d6030",
+    "muted": "#c2a37a"
+  },
+  "typography": {
+    "display": "现有中文宋体／衬线标题，暗金",
+    "body": "清晰中文正文，暖白",
+    "rolesLogical": {
+      "gameTitle": 38,
+      "subtitle": 17,
+      "panelTitle": 21,
+      "body": 14.5,
+      "button": 18,
+      "reassurance": 12.5
+    }
+  },
+  "layout": {
+    "description": "山谷全屏背景，居中窄幅标题和单张登录失败面板；内容与按钮共用安全区中轴。",
+    "wireframe": [
+      "             剑与火",
+      "            破晓之战",
+      "          ─── ◆ ───",
+      "        ┌────────────────┐",
+      "        │  TapTap 登录   │",
+      "        │暂时无法连接TapTap│",
+      "        │请检查网络后重试 │",
+      "        │  [重试登录]    │",
+      "        │本地进度已保留   │",
+      "        └────────────────┘"
+    ],
+    "panelLogical": {
+      "x": 262,
+      "y": 144,
+      "width": 320,
+      "height": 200
+    },
+    "buttonLogical": {
+      "x": 312,
+      "y": 264,
+      "width": 220,
+      "height": 44
+    },
+    "touchTarget": "后续接入时至少48逻辑像素；本稿的44为可见按钮高度"
+  },
+  "states": {
+    "shown": "登录失败、需要手动重试",
+    "normalStart": "沿用旅途加载画面，不显示本页",
+    "foregroundValid": "静默校验，保留游戏和菜单，不显示本页",
+    "retry": "禁用重复触发并显示连接中，成功后回到原流程"
+  },
+  "reviewBeforeGeneration": {
+    "retained": "现有山谷、宋体标题、暗金双层框、深青切角按钮。",
+    "revised": "去掉把版本号放在登录标题、大面积装饰和额外操作的方案；只保留状态、行动、进度保留说明。",
+    "constraints": "不新增游客、云存档、换账号、跳过登录或点空白关闭能力。"
+  },
+  "references": [
+    {
+      "path": "/Users/sunlh/workspace/singularity/source-art/ui/loading-clear-v2/stonebridge-valley.png",
+      "sha256": "0b2d326c62bb9459f721d3347d42e83a2a51d691db825462faca1ca0e1966703"
+    },
+    {
+      "path": "/Users/sunlh/workspace/singularity/source-art/ui/start-menu-v8/centered-menu-proposal-v8.png",
+      "sha256": "b7e85a1967cce52c8aa1e8adf653b9932ac156e622ba57eefeeb760b0279b4ac"
+    },
+    {
+      "path": "/Users/sunlh/workspace/singularity/source-art/ui/double-gold-frame-v6/reference-design.png",
+      "sha256": "038340cca3ab7f9d9e4ff4ad001880ee34fd6ee197745d0e4b4bf525e7c6759d"
+    }
+  ],
+  "promptFile": "prompt.txt",
+  "generation": {
+    "tool": "built-in cloud OpenAI image_gen",
+    "status": "succeeded",
+    "generatedFile": "/Users/sunlh/.codex/generated_images/01a1dc80-396d-7451-98c7-18f5456fa65d/exec-623b2be4-3099-449b-bd43-255593b092f8.png",
+    "output": "login-retry-proposal-v1.png",
+    "actualDimensions": [
+      1844,
+      853
+    ],
+    "pngBitDepth": 8,
+    "pngColorType": 2,
+    "bytes": 2988707,
+    "sha256": "8952ff8105a8c2057a6ac89c92e4c0618b48b243685bdeaa8027495394b1e3a6",
+    "operation": "Existing project landscape as base plus approved menu/frame style references; new UI concept generated in one call",
+    "originalPreserved": true,
+    "prompt": "prompt.txt",
+    "exactModelVersionAndSeed": "not exposed by built-in tool"
+  },
+  "artReview": {
+    "status": "assistant visual inspection passed; awaiting user design review",
+    "inspected": "Full generated output displayed by image_gen",
+    "text": "All seven requested text strings are legible and correct, including 剑与火、破晓之战、TapTap 登录、暂时无法连接 TapTap、请检查网络后重试、重试登录、本地进度已保留。",
+    "style": "Natural spring valley retained; restrained rounded double gold panel border; warm serif title and deep teal chamfered primary action match existing UI direction.",
+    "composition": "Single centered failure/retry panel, scenery visible around it, one action; no guest/account/cloud-save controls added.",
+    "limitations": [
+      "Actual generated canvas is 1844×853, close to the 844:390 design aspect; it is not a 2532×1170 export.",
+      "Raster concept only; safe-area fitting, live text, touch target bounds, loading/retry state transitions and real-device acceptance are not implemented by this image."
+    ],
+    "userApproved": false,
+    "userFeedback": "2026-11-15: 去掉玩家界面中的 TapTap 名称，普通登录文案；其他视觉设计未表示已验收。",
+    "revision": "../login-v2/design.json"
+  },
+  "integration": {
+    "status": "concept only",
+    "runtimeChanged": false
+  }
+}

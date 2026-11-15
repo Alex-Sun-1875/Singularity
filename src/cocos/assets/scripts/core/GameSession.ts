@@ -1,6 +1,7 @@
 import {authoredWaypoint,waypointUnlocked} from '../features/navigation/common/FastTravel';
 import {navigationText as mapText} from '../features/navigation/locales';
 import {equipmentText as gearText} from '../features/equipment/locales';
+import {bossKind} from '../features/combat/common/BossAwareness';
 import type { AreaDef, EnemySpawn, ExitDef, GameEvent, InputFrame, InteractionDef, Point, WorldQuery, SkillProjectileMetadata,AttackFeedbackMetadata } from './Contracts';
 import { EQUIPMENT, MERCHANTS, RECIPES, canonicalItem, canonicalMerchant,equipmentPowerMultiplier,equipmentStackLimit, type EquipmentSlot,type ItemDef } from '../features/equipment/data/Equipment';
 import {SKILLS,freshDiceState,skillModifiers,rollMode,drawCheckRoll,checkChance,type DiceState,type DiceView,type CheckContext} from '../features/progression/common/SkillChecks';
@@ -16,6 +17,8 @@ import {freshProgression,allocatedSkillRank,skillPlanRemaining,unlockSkills,awar
 import {PURE_SKILLS,COMBAT_RULES,RETIRED_SPELL_TO_SKILL} from '../features/combat/data/PureSkills';
 import {CAMPAIGN_ENEMY_TEMPLATES,CAMPAIGN_LEVELS,MAIN_XP_EVENTS} from '../features/campaign/data/Campaign';
 import {CAMPAIGN_EVENTS,type CampaignEventDef} from '../features/campaign/data/CampaignEvents';
+import {campaignText} from '../features/campaign/locales';
+import {worldText} from '../features/world/locales';
 import {campaignFighter,combatGroup,CAMPAIGN_FORMATION} from '../features/campaign/data/CampaignBattles';
 import {validateCurrentSnapshot,migrateRemovedOil} from '../features/persistence/common/CombatPersistence';
 import {CampaignLoot} from '../features/campaign/common/CampaignLoot';
@@ -30,7 +33,7 @@ import type {EnemyDamageElement} from '../features/combat/data/EnemyCombat';
 import {ChapterJourney,initializeLifecycleJourney} from '../features/journey/common/ChapterJourney';
 import {CampaignDirector} from '../features/cinematics/common/CampaignDirector';
 import {EnemyHitResponse} from '../features/combat/common/EnemyHitResponse';
-import {playableArea,chapterForArea,PLAYABLE_CHAPTERS} from '../features/journey/data/ChapterJourney';
+import {playableArea,chapterForArea,PLAYABLE_CHAPTERS,JOURNEY_TASKS} from '../features/journey/data/ChapterJourney';
 import {COMBAT_LOADOUTS,prepareCombatLoadout,rememberCombatLoadout,activateCombatLoadout,assignedLoadout,migrateFourSkillKit,type CombatFamily} from '../features/progression/common/CombatLoadouts';
 import {huntingExperienceView,takeCombatExperience,ensureDailyExperience} from '../features/progression/common/HuntingExperience';
 import {huntingKillExperience} from '../features/progression/data/HuntingExperience';
@@ -46,7 +49,7 @@ export const DISENGAGEMENT_SECONDS={cleared:1,retreat:5} as const;
 // Shared by basic hit detection, projectile travel and the targeting display.
 export const BASIC_ATTACK={sword:{rangeMetres:1.85,angleDegrees:110},bow:{rangeMetres:9,angleDegrees:0},staff:{rangeMetres:7,angleDegrees:0}} as const;
 export interface PlayerState extends Point { hp:number; maxHp:number; focus:number; maxFocus:number; resourceVersion:1; staminaPotions:number; manaPotions:number; healthPotions:number; focusPotions:number; gold:number; iron:number; runes:number; cores:number; angle:number; hurtTime:number; shield:number; movingTime:number }
-export interface EnemyState extends EnemySpawn { hp:number; maxHp:number; angle:number; phase:'idle'|'approach'|'windup'|'active'|'recovery'|'stagger'|'dead'; phaseTime:number; attackCount:number; targetAngle:number; attackKind:'swing'|'charge'|'shot'|'short'; struck:boolean; markedUntil:number; lightningUntil:number; pushImmuneUntil:number; staggerProtectedUntil:number; halfAnnounced:boolean;combat?:EnemyMoveState;respawnAt?:number;respawnCount?:number;diedAt?:number }
+export interface EnemyState extends EnemySpawn { hp:number; maxHp:number; angle:number; phase:'idle'|'approach'|'windup'|'active'|'recovery'|'stagger'|'dead'; phaseTime:number; attackCount:number; targetAngle:number; attackKind:'swing'|'charge'|'shot'|'short'; struck:boolean; markedUntil:number; lightningUntil:number; pushImmuneUntil:number; staggerProtectedUntil:number; halfAnnounced:boolean;combat?:EnemyMoveState;respawnAt?:number;respawnCount?:number;diedAt?:number;spawnedAt?:number }
 export interface GroundLoot extends Point {id:string;area:string;item:string;source:string;createdAt:number;count?:number;supplyVersion?:2|3}
 export const LOOT_PICKUP_RADIUS=1.35;
 export const CORPSE_SECONDS=30;
@@ -127,6 +130,18 @@ export class GameSession {
   prepareCombatLoadout(this.state.combat,this.state.equipment.weapon,this.state.progression);
  }
  private changed(){this.state.revision++;this.dirty=true;}
+ setBossPreference(id:string,followed:boolean){
+  if(id.length>140||!/^[A-Za-z0-9_-]+\/[A-Za-z0-9_:-]+$/.test(id))return;
+  const key=`boss-ui:follow:${id}`;
+  if((this.state.receipts[key]===true)===followed)return;
+  if(followed)this.state.receipts[key]=true;else delete this.state.receipts[key];
+  this.changed();
+ }
+ rememberBossNotice(id:string,token:string){
+  if(id.length>140||!/^[A-Za-z0-9_-]+\/[A-Za-z0-9_:-]+$/.test(id)||!/^(alive|ready):\d+$/.test(token))return;
+  const key=`boss-ui:noticed:${id}`;if(this.state.receipts[key]===token)return;
+  this.state.receipts[key]=token;this.changed();
+ }
  private emit(type:string,text?:string,extra:Record<string,unknown>={}){this.events.push({type,text,...extra});}
  private drain(){const events=this.events;this.events=[];return events;}
  private id(prefix:string){return `${prefix}:${++this.state.sequence}`;}
@@ -218,6 +233,15 @@ export class GameSession {
   this.state.player.x=clamp(p.x,-area.width/2+.35,area.width/2-.35);this.state.player.z=clamp(p.z,-area.depth/2+.35,area.depth/2-.35);
   this.state.enemies=this.state.flags[`visited:${area.id}`]&&this.state.encounters[area.id]?clone(this.state.encounters[area.id]):area.enemies.map(e=>this.spawn(e));
   this.syncHuntingPacks();
+  // Scenery may have changed since this encounter was saved. Repair only living
+  // actors inside a collider; retain health, deaths, respawn clocks and rewards.
+  for(const enemy of this.state.enemies){
+   if(enemy.hp<=0)continue;
+   const position=this.world.recoverPosition?.(enemy,Math.max(.35,enemyHurtRadius(enemy)));
+   if(position&&(position.x!==enemy.x||position.z!==enemy.z)){
+    enemy.x=position.x;enemy.z=position.z;enemy.combat=undefined;enemy.phase='recovery';enemy.phaseTime=.5;
+   }
+  }
   if(!fastTravel)this.pruneSupplies(true);
   if(!fastTravel)this.respawnHunts();
   this.state.encounters[area.id]=clone(this.state.enemies);
@@ -229,7 +253,11 @@ export class GameSession {
   if(!fastTravel)this.discoverWaypoint();
   this.recalculate();this.changed();this.emit('area',area.name,{id:area.id});return this.drain();
  }
- private spawn(e:EnemySpawn):EnemyState {const def=CAMPAIGN_ENEMY_TEMPLATES[e.templateId??e.bossId??''],level=e.level??def?.level??1,base=huntingBaseHp(e)??def?.baseHp??def?.hp??e.hp??({raider:72,shield:105,archer:60,captain:360}[e.kind]),maxHp=campaignFighter(e)?.maxHp??Math.round(base*enemyHealthMultiplier(e)*(1+.14*(level-1))),movement=enemyProfile(e)?.movement,angle=movement?.stationary&&movement.facingPoint?aim(e,movement.facingPoint):0;return {...e,level,hp:maxHp,maxHp,angle,phase:'idle',phaseTime:.35,attackCount:0,targetAngle:angle,attackKind:'swing',struck:false,markedUntil:0,lightningUntil:0,pushImmuneUntil:0,staggerProtectedUntil:0,halfAnnounced:false};}
+ private spawn(e:EnemySpawn):EnemyState {const def=CAMPAIGN_ENEMY_TEMPLATES[e.templateId??e.bossId??''],level=e.level??def?.level??1,base=huntingBaseHp(e)??def?.baseHp??def?.hp??e.hp??({raider:72,shield:105,archer:60,captain:360}[e.kind]),maxHp=campaignFighter(e)?.maxHp??Math.round(base*enemyHealthMultiplier(e)*(1+.14*(level-1))),movement=enemyProfile(e)?.movement,angle=movement?.stationary&&movement.facingPoint?aim(e,movement.facingPoint):0;const enemy:EnemyState={...e,level,hp:maxHp,maxHp,angle,phase:'idle',phaseTime:.35,attackCount:0,targetAngle:angle,attackKind:'swing',struck:false,markedUntil:0,lightningUntil:0,pushImmuneUntil:0,staggerProtectedUntil:0,halfAnnounced:false};
+  // Keep the original timestamp on retry/restoration; only real new lives get a new one.
+  if(bossKind(e)&&enemy.spawnedAt===undefined&&!('phase' in e)){const now=this.calendarNow();enemy.spawnedAt=Math.max(Number(this.state.receipts['boss:v3:clock']??0),Math.max(0,Math.min(9999999399,Math.floor((Number.isFinite(now)?now:0)/1000))));}
+  return enemy;
+ }
  private enemyDamage(e:EnemyState,base:number){const def=CAMPAIGN_ENEMY_TEMPLATES[e.templateId??e.bossId??''],reference=e.kind==='captain'?22:e.kind==='shield'?16:e.kind==='archer'?14:12;return (def?.baseDamage??def?.damage??reference)*(base/reference)*(1+.045*((e.level??1)-1))*enemyDamageMultiplier(e);}
  private checkHelp(id:string):string|null {
   const s=this.state;if(['mira-motive','mira-terms'].includes(id)&&s.flags.saw_copy)return '已核对的求援抄件';
@@ -246,7 +274,7 @@ export class GameSession {
   s.dice.active={id,area:s.area,sourceId,context:record?.context??this.checkContext(id)};this.cancelInput();this.changed();this.emit('check_open',def.title,{id});
  }
  diceView():DiceView|null {const s=this.state,a=s.dice.active;if(!a)return null;if(a.id.startsWith('gear:'))return this.equipmentDice.view();const d=SKILL_CHECKS[a.id],r=s.dice.records[a.id],roll=r?.rolls[r.rolls.length-1]??null;return {id:d.id,title:d.title,prompt:d.prompt,skillLabel:ACTION_NAMES[d.skill],abilityLabel:'行动',dc:d.dc,mode:a.context.mode,modifiers:a.context.modifiers.map((m,i)=>({...m,label:i?'经验准备':'行动准备'})),help:a.context.helpLabel?{label:a.context.helpLabel,enabled:a.context.helpDie}:null,roll,attempt:r?.rolls.length??0,inspiration:s.dice.inspiration,canReroll:!!roll&&!roll.success&&s.dice.inspiration>0&&(r?.rolls.length??0)<5,canCancel:!roll,successText:d.successText,failureText:d.failureText,chance:checkChance(d.dc,a.context)};}
- prepareEquipmentDice():boolean {return !this.state.dice.active&&!this.state.dialogue&&this.equipmentAvailability().available&&this.equipmentDice.open();}
+ prepareEquipmentDice():boolean {return !this.state.dice.active&&!this.state.dialogue&&this.equipmentDice.hasPending()&&this.equipmentAvailability().available&&this.equipmentDice.open();}
  openEquipmentDice(item:string):boolean {if(!this.state.inventory[item]||this.state.dice.active||this.state.dialogue||!this.equipmentAvailability().available)return false;this.equipmentDice.enqueue(item,this.state.provenance[item],true);return this.equipmentDice.open(item);}
  toggleCheckHelp():GameEvent[]{const a=this.state.dice.active;if(a&&a.context.helpLabel&&!this.state.dice.records[a.id]?.rolls.length){a.context.helpDie=!a.context.helpDie;this.changed();}return this.drain();}
  rollCheck(reroll=false,expectedAttempt=0):GameEvent[]{const s=this.state,a=s.dice.active;if(!a||s.status==='dead')return [];const def=SKILL_CHECKS[a.id],old=s.dice.records[a.id],count=old?.rolls.length??0;
@@ -382,21 +410,81 @@ export class GameSession {
   if(o.action==='journey_task')return this.journey.visible(o.eventId??'');
   return !o.eventId||growingQuestVisible(o.eventId,this.state.flags);
  }
+ campaignEventAvailability(id:string,requirementsOnly=false){
+  const d=CAMPAIGN_EVENTS[id],s=this.state,confirmLabel=d?.confirmLabel??campaignText('event.confirm');
+  const status=(available:boolean,completed:boolean,reason:string)=>({available,completed,reason,confirmLabel});
+  if(!d)return status(false,false,campaignText('event.unavailable'));
+  if(s.receipts[`campaign:${id}`])return status(false,true,d.completionText??d.choices?.find(c=>c.id===s.receipts[`campaign:choice:${id}`])?.text??campaignText('event.complete',{label:d.label}));
+  if(!requirementsOnly&&d.area!==s.area)return status(false,false,campaignText('event.unavailable'));
+  // Creator's loose spread transform treats Set as one array element; materialise it explicitly.
+  const describe=(flags:string[])=>Array.from(new Set(flags.map(flag=>d.prerequisiteHints?.[flag]??Object.values(CAMPAIGN_EVENTS).find(event=>event.sets?.includes(flag))?.label??campaignText('event.requires'))));
+  const missing=d.requires?.filter(flag=>!s.flags[flag])??[],reasons:string[]=[];
+  if(missing.length)reasons.push(campaignText('event.requiresAll',{requirements:describe(missing).join('；')}));
+  if(d.requiresAny?.length&&!d.requiresAny.some(flag=>s.flags[flag]))reasons.push(campaignText('event.requiresAny',{requirements:describe(d.requiresAny).join(' / ')}));
+  if(reasons.length)return status(false,false,reasons.join('\n'));
+  if(requirementsOnly)return status(true,false,campaignText('event.ready'));
+  if(d.clearEncounter&&(!this.campaign.battleReady()||s.enemies.some(e=>e.hp>0&&!e.respawnSeconds)))return status(false,false,campaignText('event.clearEncounter'));
+  if(!d.peacefulResolution&&!this.safe())return status(false,false,campaignText('event.leaveCombat'));
+  return status(true,false,campaignText('event.ready'));
+ }
+ private cacheSource(o:InteractionDef){const item=canonicalItem(o.item??'');return item==='W08'?'design_reward_ch01_oath_sword':EQUIPMENT[item]?`design_find_${item.toLowerCase()}`:`cache:${o.id}`;}
+ /** The scene prompt, arrival menu and committed action share the same saved outcome. */
+ interactionAvailability(o:InteractionDef){
+  const s=this.state,a=o.action;
+  const status=(available:boolean,completed:boolean,reason:string,readOnly=false)=>({available,completed,reason,readOnly,confirmLabel:worldText('interaction.confirm')});
+  const done=(reason=worldText('interaction.completed',{label:o.label}))=>status(false,true,reason,true);
+  const locked=(reason:string)=>status(false,false,reason);
+  if(a==='campaign_event')return {...this.campaignEventAvailability(o.eventId??''),readOnly:false};
+  const flags:Record<string,string>={recover:'recovered',rescue_cart:'cart_rescued',captain_gate:'gate_raised',gate:'gate_raised',release_workers:'workers_released',disable_trap:'trap_disabled',finish:'chapter1_complete'};
+  const results={recover:'interaction.recovered',rescue_cart:'interaction.recovered',captain_gate:'interaction.gateDone',gate:'interaction.gateDone',release_workers:'interaction.workersDone',disable_trap:'interaction.trapDone'} as const;
+  const result=results[a as keyof typeof results];
+  if(flags[a]&&s.flags[flags[a]])return done(result?worldText(result):undefined);
+  if(a==='cache'){
+   const source=this.cacheSource(o),item=canonicalItem(o.item??'');
+   if(s.receipts[source]&&!Object.keys(s.pending).some(key=>key.startsWith(source+'|')))return done(worldText('interaction.cacheDone'));
+   if(EQUIPMENT[item]&&(s.inventory[item]??0)>=equipmentStackLimit(item))return locked(worldText('interaction.full',{name:EQUIPMENT[item].name}));
+  }
+  if(a==='growing_scene'){
+   const roll=s.dropRolls[`growing:scene:${o.eventId}`];
+   if(roll)return done(worldText(roll.result==='none'||roll.result==='field-investigation'?'interaction.traceNone':roll.result.startsWith('flag:')?'interaction.traceClue':'interaction.traceItem'));
+  }
+  if(a==='skill_archive'&&s.progression.xpReceipts[`archive:${s.area}:${o.id}`]!==undefined)return done();
+  if(['inspect','secret_pass','independent_clue'].includes(a)&&(s.receipts[`interaction:${s.area}:${o.id}`]||o.evidence&&s.flags[o.evidence]))return done(o.description);
+  if(a==='journey_task'){
+   const task=JOURNEY_TASKS.find(t=>t.id===o.eventId);
+   if(task&&this.journey.taskDone(task))return done();
+   if(!task||this.journey.currentTask(task.chapter)?.id!==task.id)return locked(worldText('interaction.previous'));
+   if(!this.journey.ready(task))return locked(task.goal==='hunt'?worldText('interaction.hunt',{count:this.journey.progress(task),total:task.kills??0}):worldText('interaction.clear'));
+  }
+  if(a==='dice_check'){
+   const record=s.dice.records[o.check??''],def=SKILL_CHECKS[o.check??''];
+   if(record?.committed&&def)return done(record.rolls[record.rolls.length-1]?.success?def.successText:def.failureText);
+   if(o.check==='undercity-disarm'&&s.flags.trap_disabled)return done(worldText('interaction.trapDone'));
+   if(o.check==='undercity-disarm'&&!s.flags.meeting)return locked(worldText('interaction.meeting'));
+  }
+  if(a==='growing_rematch'){
+   const enemy=s.enemies.find(e=>e.id===o.eventId);
+   if(!enemy?.bossId||enemy.hp>0||!s.flags[`boss_defeated:${enemy.bossId}`]&&!s.receipts[`kill:${s.area}:${enemy.id}`])return locked(gearText('loot.rematchFirst'));
+   const seconds=this.bossLoot.view(enemy.bossId).remaining;
+   if(seconds)return locked(gearText('loot.rematchWait',{time:`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`}));
+  }
+  if(a==='letter'&&!s.flags.recovered)return locked(worldText('interaction.letter'));
+  if(['captain_gate','gate'].includes(a)&&!s.flags.captain_defeated)return locked(worldText('interaction.captain'));
+  if(['release_workers','disable_trap'].includes(a)&&!s.flags.meeting)return locked(worldText('interaction.meeting'));
+  if(['recover','rescue_cart'].includes(a)&&s.enemies.some(e=>e.hp>0&&!e.respawnSeconds)||a==='release_workers'&&!s.flags.trap_disabled&&s.enemies.some(e=>e.hp>0))return locked(worldText('interaction.clear'));
+  if(a==='finish'&&!this.canComplete())return locked(this.questObjective());
+  if(a==='merchant'&&canonicalMerchant(o.merchant??o.actor??'')==='mira'&&!s.flags.accepted)return locked(worldText('interaction.contract'));
+  if(['offer','merchant','meeting','finish','checkpoint','recover','rescue_cart','release_workers','disable_trap','cache','journey_task','growing_scene','growing_rematch','dice_check'].includes(a)&&!this.safe())return locked(worldText('interaction.safe'));
+  return status(true,false,worldText('interaction.ready'),['inspect','secret_pass','independent_clue','barrel'].includes(a));
+ }
  canApproachInteraction(){const s=this.state;return s.status!=='dead'&&!s.dialogue&&!s.dice.active&&!s.action&&this.safe()&&!this.inCombat();}
  approachInteractionVisible(o:InteractionDef){
-  if(!this.interactionVisible(o))return false;
+  if(!this.interactionVisible(o)||!this.interactionAvailability(o).available)return false;
   const s=this.state,a=o.action;
   if(a==='journey_task'){const task=this.journey.currentTask();return !!task&&task.id===o.eventId&&task.goal==='observe';}
-  if(a==='campaign_event'){
-   const d=CAMPAIGN_EVENTS[o.eventId??''];
-   return !!d&&d.area===s.area&&!s.receipts[`campaign:${d.id}`]&&!d.requires?.some(f=>!s.flags[f])
-    &&(!d.requiresAny?.length||d.requiresAny.some(f=>s.flags[f]))&&(!d.clearEncounter||this.campaign.battleReady()&&!s.enemies.some(e=>e.hp>0&&!e.respawnSeconds));
-  }
-  const completed:Record<string,string>={independent_clue:'independent_clue',letter:'read_letter',recover:'recovered',rescue_cart:'cart_rescued',release_workers:'workers_released',disable_trap:'trap_disabled',captain_gate:'gate_raised',gate:'gate_raised',finish:'chapter1_complete'};
-  if(completed[a]&&s.flags[completed[a]])return false;
-  if(a==='letter'&&!s.flags.recovered||['release_workers','disable_trap'].includes(a)&&!s.flags.meeting||['captain_gate','gate'].includes(a)&&!s.flags.captain_defeated||a==='finish'&&!this.canComplete())return false;
-  if(['recover','rescue_cart'].includes(a)&&s.enemies.some(e=>e.hp>0&&!e.respawnSeconds))return false;
-  return !!o.actor||['offer','merchant','meeting',...Object.keys(completed)].includes(a);
+  if(a==='campaign_event')return true;
+  if(a==='letter'&&s.flags.read_letter||a==='independent_clue'&&s.flags.independent_clue)return false;
+  return !!o.actor||['offer','merchant','meeting','letter','independent_clue','recover','rescue_cart','release_workers','disable_trap','captain_gate','gate','finish'].includes(a);
  }
  private recalculate(){syncRandomForging(this.state);if(!this.areaDef){this.enemyRules.reset();for(const enemy of [...this.state.enemies,...Object.values(this.state.encounters).flat()])EnemyCombat.restore(enemy);}let bonus=0;for(const [key,id]of Object.entries(this.state.equipment))if(key!=='spells'&&typeof id==='string')bonus+=this.itemView(id)?.maxHp??0;if((this.setCounts().oath??0)>=2)bonus+=8;this.state.player.maxHp=baseMaxHp(this.state.progression)+bonus;this.state.player.hp=Math.min(this.state.player.hp,this.state.player.maxHp);this.state.player.shield=Math.min(this.state.player.shield,this.state.player.maxHp*.35);synchronizeResource(this.state);}
  combatSkillView(ids?:readonly string[]){return this.combatRules.view(ids);}
@@ -741,6 +829,8 @@ export class GameSession {
   const s=this.state,p=s.player;if(s.status==='dead'||s.dialogue||s.dice.active)return [];
   if(!point(object)||dist(p,object)>Math.min(1.35,object.radius??1.35)||!this.visible(p,object)){this.emit('notice','靠近并绕过阻挡后交互');return this.drain();}
   const def=this.areaDef?.objects.find(o=>o.id===object.id);if(this.areaDef?.objects.length&&(!def||def.action!==object.action))return [];
+  const access=this.interactionAvailability(object);
+  if(access.completed||!access.available){this.emit(access.completed?'inspect':'notice',access.reason,{id:object.id});return this.drain();}
   if(!this.interactionVisible(object))return [];
   const a=object.action;
   if(['offer','merchant','meeting','finish','checkpoint','recover','release_workers','disable_trap','cache'].includes(a)&&!this.safe()){this.emit('notice','附近仍有敌人或火焰');return this.drain();}
@@ -753,7 +843,7 @@ export class GameSession {
   else if(a==='skill_archive'){this.gainExperience(`archive:${s.area}:${object.id}`,s.area.startsWith('U2')?900:s.area.startsWith('H')?450:220);this.emit('inspect','永久技能档案已记录，按角色等级开放技能');}
   else if(a==='dice_check'&&object.check){this.beginCheck(object.check,object.id);}
   else if(a==='offer'){s.flags.offer_seen=true;this.offer();}
-  else if(a==='independent_clue'){s.flags.independent_clue=true;this.emit('notice',object.description||'信使的记录指向地下。无需接约也可追查。');this.changed();}
+  else if(a==='independent_clue'){s.flags.independent_clue=true;s.receipts[`interaction:${s.area}:${object.id}`]=true;this.emit('notice',object.description||'信使的记录指向地下。无需接约也可追查。');this.changed();}
   else if(a==='recover'||a==='rescue_cart'){
    if(s.enemies.some(e=>e.hp>0&&!e.respawnSeconds)){this.emit('notice','先解除圣匣车旁的全部守军');return this.drain();}
    if(a==='rescue_cart'){s.flags.cart_rescued=true;this.gold('design_reward_coin_ch01_obj02',20);}
@@ -776,9 +866,9 @@ export class GameSession {
   else if(a==='cache')this.cache(object);
   else if(a==='merchant'){
    const id=canonicalMerchant(object.merchant??object.actor??'');if(MERCHANTS[id]){if(id==='mira'&&!s.flags.accepted){this.emit('notice','弥菈的补给只向接约者开放');}else{if(!s.discoveredMerchants.includes(id))s.discoveredMerchants.push(id);this.merchant=id;this.merchantAnchor={x:object.x,z:object.z};this.emit('shop',MERCHANTS[id].name,{id});this.changed();}}
-  }else if(a==='secret_pass'){s.flags[`evidence:${object.id}`]=true;this.emit('inspect',object.description,{id:object.id});this.changed();}
+  }else if(a==='secret_pass'){s.flags[`evidence:${object.id}`]=true;s.receipts[`interaction:${s.area}:${object.id}`]=true;this.emit('inspect',object.description,{id:object.id});this.changed();}
   else if(a==='barrel'){this.emit('inspect','封存的军需桶，不参与战斗爆炸');}
-  else {if(object.evidence)s.flags[object.evidence]=true;this.emit('inspect',object.description,{id:object.id});this.changed();}
+  else {if(object.evidence)s.flags[object.evidence]=true;s.receipts[`interaction:${s.area}:${object.id}`]=true;this.emit('inspect',object.description,{id:object.id});this.changed();}
   this.syncProgression();return this.drain();
  }
  private growingRematch(id:string){
@@ -791,18 +881,17 @@ export class GameSession {
   s.enemies[index]={...this.spawn({...authored,level:this.bossLoot.rematchLevel(authored),lootChapter:releasedEquipmentChapter(s.progression.level)}),respawnCount:(enemy.respawnCount??0)+1};
   this.changed();this.emit('notice',gearText('loot.rematchStarted'));
  }
- private beginCampaignEvent(id:string){const d=CAMPAIGN_EVENTS[id],s=this.state;if(!d||d.area!==s.area)return;if(d.requires?.some(flag=>!s.flags[flag])||d.requiresAny?.length&&!d.requiresAny.some(flag=>s.flags[flag])){this.emit('notice','先完成现场前置行动，再执行这项操作');return;}if(s.receipts[`campaign:${id}`]){this.emit('inspect','这项现场行动已经完成，结果已保存');return;}if(d.clearEncounter&&(!this.campaign.battleReady()||s.enemies.some(e=>e.hp>0&&!e.respawnSeconds))){this.emit('notice','先处理本地固定守军及其增援');return;}if(!d.peacefulResolution&&!this.safe()){this.emit('notice','先离开敌人的攻击范围');return;}
-  const itemOptions=(d.choiceItems??[]).filter(item=>!s.inventory[item]&&(!GROWING_EQUIPMENT[item]||!growingOwned(s,item)));if(d.choices?.length){this.dialogue(`campaign:${id}`,d.optional?d.label:'现场行动',d.description,d.choices.map(c=>[c.id,c.label]));}else if(itemOptions.length){this.dialogue(`campaign:${id}`,'武备自选',d.description,itemOptions.map(item=>[`equipment:${item}`,EQUIPMENT[item]?.name??item]));}else this.finishCampaignEvent(d);
+ private beginCampaignEvent(id:string){const d=CAMPAIGN_EVENTS[id],s=this.state;if(!d||d.area!==s.area)return;const status=this.campaignEventAvailability(id);if(!status.available){this.emit(status.completed?'inspect':'notice',status.reason,{id});return;}
+  const itemOptions=(d.choiceItems??[]).filter(item=>!s.inventory[item]&&(!GROWING_EQUIPMENT[item]||!growingOwned(s,item)));if(d.choices?.length){this.dialogue(`campaign:${id}`,d.optional?d.label:'现场行动',d.description,[...d.choices.map(c=>[c.id,c.label] as [string,string]),['cancel:campaign',worldText('talk.later')]]);}else if(itemOptions.length){this.dialogue(`campaign:${id}`,'武备自选',d.description,[...itemOptions.map(item=>[`equipment:${item}`,EQUIPMENT[item]?.name??item] as [string,string]),['cancel:campaign',worldText('talk.later')]]);}else this.finishCampaignEvent(d);
  }
  private finishCampaignEvent(d:CampaignEventDef,choice?:string){const s=this.state,key=`campaign:${d.id}`;if(s.receipts[key])return;const choiceDef=d.choices?.find(c=>c.id===choice),chosenItem=choice?.startsWith('equipment:')?choice.slice(10):null;if(d.choices?.length&&!choiceDef||chosenItem&&!d.choiceItems?.includes(chosenItem))return;
   const shared=d.experienceEvent&&s.progression.xpReceipts[d.experienceEvent]!==undefined;for(const flag of [...d.sets??[],...choiceDef?.sets??[]])s.flags[flag]=true;
   if(d.peacefulResolution)for(const e of s.enemies)if(e.hp>0&&!e.respawnSeconds){e.hp=0;e.phase='dead';this.once(`kill:${s.area}:${e.id}`,()=>{const level=e.level??1,template=CAMPAIGN_ENEMY_TEMPLATES[e.bossId??e.templateId??''];if(!campaignFighter(e)?.deferExperience)this.gainExperience(`enemy:${s.area}:${e.id}`,template?.firstClearExperience??(20+8*(level-1))*(e.bossId?3:1));this.lootRules.enemy(e);if(e.bossId)s.flags[`boss_defeated:${e.bossId}`]=true;});}s.encounters[s.area]=clone(s.enemies);this.lootRules.encounter();
   if(!shared){if(d.gold)this.gold(key,d.gold);s.player.iron=Math.min(9999,s.player.iron+(d.iron??0));s.player.runes=Math.min(9999,s.player.runes+(d.runes??0));s.player.cores=Math.min(9999,s.player.cores+(d.cores??0));for(const item of d.items??[])this.grant(item,1,key);if(chosenItem)this.grant(chosenItem,1,key);else if(d.choiceItems?.length&&!d.choiceItems.some(item=>!s.inventory[item])){s.player.iron=Math.min(9999,s.player.iron+2);s.player.gold=Math.min(9999,s.player.gold+12);}if(d.experienceEvent)this.awardExperience(d.experienceEvent);if(d.experience)this.gainExperience(key,d.experience);}
-  for(const recipe of d.recipes??[])if(RECIPES[recipe]&&!s.recipes.includes(recipe))s.recipes.push(recipe);s.receipts[key]=true;s.dialogue=null;this.syncProgression();if(d.id.startsWith('investigate-'))this.growingLoot.opportunity();this.campaign.task(d.id);if(s.flags.m8_complete){s.flags.complete=true;s.status='complete';this.emit('complete','终局行动已完成，世界进度已保存');}this.changed();this.emit('quest',choiceDef?.text??d.description,{id:d.id});
+  for(const recipe of d.recipes??[])if(RECIPES[recipe]&&!s.recipes.includes(recipe))s.recipes.push(recipe);s.receipts[key]=true;if(choice)s.receipts[`campaign:choice:${d.id}`]=choice;s.dialogue=null;this.syncProgression();if(d.id.startsWith('investigate-'))this.growingLoot.opportunity();this.campaign.task(d.id);if(s.flags.m8_complete){s.flags.complete=true;s.status='complete';this.emit('complete','终局行动已完成，世界进度已保存');}this.changed();this.emit('quest',choiceDef?.text??d.completionText??campaignText('event.complete',{label:d.label}),{id:d.id});
  }
  private cache(o:InteractionDef){
-  const s=this.state,item=canonicalItem(o.item??'');
-  const source=item==='W08'?'design_reward_ch01_oath_sword':EQUIPMENT[item]?`design_find_${item.toLowerCase()}`:`cache:${o.id}`;
+  const s=this.state,source=this.cacheSource(o);
   this.once(source,()=>{const item=o.item??'iron',n=Math.floor(clamp(o.amount??1,1,9999));if(item==='gold')this.gold(o.id.includes('sign')?'design_container_coin_ch01_sign':`coin:${o.id}`,n);else if(item==='iron'){s.player.iron=Math.min(9999,s.player.iron+n);this.emit('reward',`废铁 +${n}`,{id:o.id,value:n});}else if((EQUIPMENT[canonicalItem(item)]||RETIRED_SPELL_TO_SKILL[canonicalItem(item)])&&canonicalItem(item)!=='W02'&&canonicalItem(item)!=='T03'&&!['J03','A13','A10','L01','L02'].includes(canonicalItem(item))){this.grant(item,n,source);}if(o.evidence==='legendary'||o.item==='W08'||o.id.includes('hidden'))this.rollLegend(`cache:${o.id}:legend`,.18);});
   for(const [key,left]of Object.entries(s.pending)){if(!key.startsWith(`${source}|`))continue;delete s.pending[key];this.grant(key.split('|')[1],left,source);}
   if(this.equipped('A12'))for(const object of this.areaDef?.objects??[])if(object.id!==o.id&&dist(s.player,object)<=4&&this.visible(s.player,object))this.emit('clue_reveal',object.label,{id:object.id,at:{x:object.x,z:object.z},duration:3});
@@ -817,7 +906,7 @@ export class GameSession {
  }
  choose(id:string):GameEvent[]{
   const s=this.state,d=s.dialogue;if(!d||s.dice.active||!d.options.some(o=>o.id===id))return [];
-  if(d.id.startsWith('campaign:')){const event=CAMPAIGN_EVENTS[d.id.slice(9)];if(event)this.finishCampaignEvent(event,id);return this.drain();}
+  if(d.id.startsWith('campaign:')){if(id==='cancel:campaign'){s.dialogue=null;this.changed();return this.drain();}const event=CAMPAIGN_EVENTS[d.id.slice(9)];if(event)this.finishCampaignEvent(event,id);return this.drain();}
   if(d.id==='offer'&&id.startsWith('check:')){this.beginCheck(id.slice(6),'t1-mira');return this.drain();}
   if(id==='shop'&&s.flags.accepted){const anchor=this.areaDef?.objects.find(o=>o.action==='offer'&&o.merchant==='mira');if(anchor&&dist(s.player,anchor)<=1.35&&this.visible(s.player,anchor)&&this.safe()){this.merchant='mira';this.merchantAnchor={x:anchor.x,z:anchor.z};if(!s.discoveredMerchants.includes('mira'))s.discoveredMerchants.push('mira');s.dialogue=null;this.emit('shop',MERCHANTS.mira.name,{id:'mira'});this.changed();return this.drain();}}
   if(d.id==='offer'&&id==='ask_letter'){s.flags.saw_copy=true;this.dialogue('offer','弥菈','她展示抄件日期和求援段，遮住姓名。“近日确实有人求援；那个人，我会亲自去找。”',[['accept','带着这些已公开的信息接约，预支60金币。'],['reject','保留立场，独立追查。']]);this.changed();return this.drain();}
@@ -846,7 +935,7 @@ export class GameSession {
  explorationGuide():string {
   const s=this.state,p=this.progressionView(),ground=HUNTING_GROUNDS[s.area];
   const suggested=ground?s.area:Object.keys(HUNTING_GROUNDS).filter(id=>locationEntryLevel(id)<=p.level).sort((a,b)=>Math.abs(HUNTING_GROUNDS[a].level-p.level)-Math.abs(HUNTING_GROUNDS[b].level-p.level))[0];
-  const hunt=HUNTING_GROUNDS[suggested],names=[...new Set(hunt.packs.flat())].map(id=>CAMPAIGN_ENEMY_TEMPLATES[id]?.name??id).join('、');
+  const hunt=HUNTING_GROUNDS[suggested],names=Array.from(new Set(hunt.packs.flat())).map(id=>CAMPAIGN_ENEMY_TEMPLATES[id]?.name??id).join('、');
   const alive=s.enemies.filter(e=>e.respawnSeconds&&e.hp>0).length;
   return `${this.objective()}\n${p.level<40?`升级经验 ${p.xp} / ${p.xpToNext}`:'已达最高等级，继续狩猎可获得掉落'}\n${ground?`本地游荡怪 ${alive} / ${HUNT_ENCOUNTERS[s.area].length}`:`推荐 Lv${hunt.level} ${CAMPAIGN_LEVELS[suggested]?.name??suggested}`}：${names}。怪群击败后28秒起补充，远离出生点20米后刷新。\n${growingJournal(s.area,s.flags,s.receipts,s.inventory)}\n任务路线：${this.journey.taskHint()}\n狩猎路线：自由选择猎区成长，再挑战本章关底。\nN 打开旅程 · 八章规划，当前开放前两章`;
  }
@@ -918,7 +1007,9 @@ export class GameSession {
  rest():boolean{if(this.state.status==='dead'||!!this.state.dice.active||!this.safe()||!this.checkpointNear())return false;const p=this.state.player;p.hp=p.maxHp;p.focus=p.maxFocus;for(const def of Object.values(SUPPLIES))p[def.stock]=def.capacity;this.state.cooldowns.consumable=0;this.setCheckpoint();this.changed();this.emit('rest','检查点休整：生命、职业资源、药水补满；技能消耗职业资源并自动恢复');return true;}
  retry():GameEvent[]{const s=this.state;if(s.status!=='dead')return [];this.meleeChain.reset();this.hitResponse.reset();s.encounters[s.area]=s.enemies.map(e=>e.hp<=0?clone(e):this.spawn({...e,hp:e.maxHp}));this.combatRules.resetTransient();delete s.combat.engagement;this.enemyRules.reset();s.status=s.flags.m8_complete?'complete':'playing';s.area=s.checkpoint.area;s.player.x=s.checkpoint.x;s.player.z=s.checkpoint.z;s.player.hp=s.player.maxHp;s.player.focus=s.player.maxFocus;for(const def of Object.values(SUPPLIES))s.player[def.stock]=def.capacity;s.cooldowns.consumable=0;s.player.hurtTime=0;s.player.shield=0;s.action=null;s.dialogue=null;s.projectiles=[];s.fireZones=[];s.enemies=clone(s.encounters[s.area]??[]);this.areaDef=null;this.previous={x:0,z:0};this.changed();this.emit('retry','已返回检查点；固定守军进度保留，野外怪群按狩猎周期补充',{to:s.area,entry:{x:s.player.x,z:s.player.z}});return this.drain();}
  private rollLegend(source:string,chance:number,at?:Point){const s=this.state;if(s.dropRolls[source])return;const n=sourceRandom(s.seed,source);let result='none';if(n/2147483647<chance){const pool=['L01','L02'].filter(id=>!s.inventory[id]&&!s.groundLoot.some(d=>d.item===id));if(pool.length){result=pool[(n*48271%2147483647)%pool.length];if(at)this.dropEquipment(result,`legend:${source}`,at);else this.grant(result,1,`legend:${source}`);}else{s.player.iron=Math.min(9999,s.player.iron+3);result='duplicate_iron';}}s.dropRolls[source]={roll:n,result};s.receipts[`roll:${source}`]=result;this.changed();this.emit('loot_roll',result,{id:source});}
- snapshot():GameState{this.state.encounters[this.state.area]=clone(this.state.enemies);rememberCombatLoadout(this.state.combat,this.state.progression);return clone(this.state);}
+ /** Serialize once at the save boundary; callers receive detached data via snapshot. */
+ serializeSnapshot():string{this.state.encounters[this.state.area]=this.state.enemies;rememberCombatLoadout(this.state.combat,this.state.progression);return JSON.stringify(this.state);}
+ snapshot():GameState{return JSON.parse(this.serializeSnapshot());}
  static restore(snapshot:unknown,world:WorldQuery,calendarNow:()=>number=Date.now):GameSession {
   validateSnapshot(snapshot);
   const game=new GameSession(snapshot.seed-1,world,calendarNow);game.state=clone(snapshot);const s=game.state,oilMigrated=migrateRemovedOil(s),skillsMigrated=migrateFourSkillKit(s),journeyMigrated=initializeLifecycleJourney(s),curveMigrated=updateExperienceCurve(s.progression),resourcesMigrated=migrateClassResource(s),migrated=oilMigrated||resourcesMigrated||skillsMigrated||journeyMigrated||curveMigrated||!s.forging||s.forging.version===1||!s.groundLoot;s.groundLoot??=[];if(!s.forging)s.forging=freshForging();syncRandomForging(s);
@@ -933,7 +1024,18 @@ export class GameSession {
 /** Reject malformed/unknown snapshots before any state is installed or written. */
 export function validateSnapshot(value:unknown):asserts value is GameState {
  const fail=()=>{throw new Error('无效或不支持的首章存档');};
- const jsonSafe=(v:unknown,depth=0):boolean=>depth<20&&(v===null||typeof v==='boolean'||typeof v==='string'&&v.length<10000||typeof v==='number'&&Number.isFinite(v)||Array.isArray(v)&&v.length<=20000&&v.every(x=>jsonSafe(x,depth+1))||record(v)&&Object.keys(v).length<=20000&&Object.entries(v).every(([k,x])=>k.length<300&&k!=='__proto__'&&k!=='constructor'&&k!=='prototype'&&jsonSafe(x,depth+1)));
+ // Avoid allocating entry pairs and callbacks for every object in a whole save.
+ const jsonSafe=(v:unknown,depth=0):boolean=>{
+  if(depth>=20)return false;
+  if(v===null||typeof v==='boolean')return true;
+  if(typeof v==='string')return v.length<10000;
+  if(typeof v==='number')return Number.isFinite(v);
+  if(Array.isArray(v)){if(v.length>20000)return false;for(let i=0;i<v.length;i++)if(i in v&&!jsonSafe(v[i],depth+1))return false;return true;}
+  if(!record(v))return false;
+  const keys=Object.keys(v);if(keys.length>20000)return false;
+  for(let i=0;i<keys.length;i++){const k=keys[i];if(k.length>=300||k==='__proto__'||k==='constructor'||k==='prototype'||!jsonSafe(v[k],depth+1))return false;}
+  return true;
+ };
  if(!jsonSafe(value))return fail();
  validateCurrentSnapshot(value);
 }

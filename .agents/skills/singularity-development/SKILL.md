@@ -39,7 +39,7 @@ dev 覆盖须集中配置、只对 dev 生效，并记录本次实际开关；�
 
 ## 当前入口与交付
 
-`npm run pack:taptap`、`npm run build:tap` 和脚本无参数调用均默认 test。显式档位入口为 `npm run pack:taptap:dev`、`npm run pack:taptap:test`、`npm run pack:taptap:release`，脚本参数为 `-Profile dev|test|release`。只有明确要求正式发布包时才选择 release。旧 `-TestPackage` 作为 test 兼容别名保留；游客测试仍单独使用 `pack:taptap:guest`。`-ValidateOnly` 只检查参数与配置，不升版、不导出。
+`npm run pack:taptap`、`npm run build:tap` 和脚本无参数调用均默认 test。显式档位入口为 `npm run pack:taptap:dev`、`npm run pack:taptap:test`、`npm run pack:taptap:release`，统一 Node 脚本参数为 `--mode dev|test|release`，兼容入口接受 `-Profile dev|test|release`。只有明确要求正式发布包时才选择 release。旧 `-TestPackage` 作为 test 兼容别名保留；游客测试仍单独使用 `pack:taptap:guest`。`--check`（兼容 `-ValidateOnly`）只检查参数与配置，不升版、不导出。
 
 dev 覆盖来自生成的只读 `shared/BuildProfile.ts`，导出与转换核对实际编译标记，不能靠改包名转换档位。dev 在平台存储层使用 `singularity.dev.` 前缀隔离所有本机数据，打包结束或失败后恢复编辑器的正常 test 配置。无冷却保留动作与资源消耗；经验倍率只作用于怪物奖励，不放大任务经验；每日经验不限同时跳过共享限额、挂机子限额及其衰减。 Boss 每次有效击杀按当前职业与章节分别结算一件传奇和一件神器，未拥有优先；唯一装备已集齐或数量已满时沿用原重复补偿。保留真实击杀、复战间隔、拾取与来源凭证校验，不通过加载同一尸体重复领奖。test / release 保持正常概率与保底，并拒绝 dev 强制掉落凭证。规则变更会更新编译标记的配置摘要，旧包不能只改名或改报告冒充新规则。
 
@@ -47,7 +47,7 @@ dev 另提供按需点击的“DEV 快速验证”，入口在暂停与设置 �
 
 本地 `Build-Local.ps1` 与 `Build-TapTap.ps1` 共用项目构建锁，忙碌时在改配置或升版前拒绝第二次导出；不能绕过锁并行导出不同档位。
 
-版本只取根 `package.json.version`；dev / test / release 共用一直递增的版本序列，单次实际打包 patch +1、内部重试不重复递增，失败不回退版本，Web 预览和参数校验不递增。产物目录必须以 `-dev` / `-test` / `-release` 结尾，ZIP 必须以 `_dev.zip` / `_test.zip` / `_release.zip` 结尾，自定义输出目录也补齐档位后缀。保留真实 AppID、现有官方转换、分包与包体检查；不手改生成配置或伪造平台验收。
+版本只取根 `package.json.version`；dev / test / release 共用一直递增的版本序列，单次实际打包 patch +1、内部重试不重复递增，失败不回退版本，Web 预览和参数校验不递增。交付固定为 `src/out/<版本号>/SwordAndFire_<版本号>.zip`；不创建自定义交付目录或档位后缀，档位单独进入编译配置、说明与清单。保留真实 AppID、现有官方转换、分包与包体检查；不手改生成配置或伪造平台验收。
 
 release 打包须先确定“上次已发布 release → 本次产物”的差异基线，整理功能、调整、修复、兼容／存档变化和已知问题。test / dev 的中间版本不能替代上一正式发布基线；从未发布时写“首次发布”，基线无法核实时明确记录并取得必要信息，不捏造。日志归档到 `docs/releases/<版本>.md`，作为 `RELEASE_NOTES.md` 随本次 release 交付目录提供。内容以实际代码、资源、历史产物与验证记录为据，不照抄提交标题，不把未接入或未验收内容写成完成。
 

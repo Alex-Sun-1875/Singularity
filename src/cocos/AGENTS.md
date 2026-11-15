@@ -13,7 +13,7 @@
 - Cocos 插件的 `wechatgame` 构建是官方转换流程的中间步骤。最终目标为 TapTap 小游戏，业务实现应核对 TapTap 的能力与差异；不能仅凭微信或浏览器能运行就判定兼容。
 - 小游戏入口须显式设置发布场景与人物模式，不依赖 HTML 注入、`location` / `history` / URL 查询参数或其他浏览器 DOM/BOM。网页调试参数和本地试玩特例须与发布配置隔离；不得因调试环境改变正式游戏的存档或规则。
 - 资源访问优先复用 `GameResources.ts`、`AssetBundles.ts`、Cocos Asset Manager 及官方适配层。按 [TapTap 分包规范](https://developer.taptap.cn/minigameapidoc/dev/tutorial/basic/subpackage/)组织 `game.json` 的 `subPackages` 与按需加载，处理加载失败和重试；不绕过平台文件、网络及缓存约束。
-- 复用 `release/taptap.json`、`tools/prepare-taptap.py` 与 `Build-TapTap.ps1`，默认根目录命令为 `npm run pack:taptap`（test），`build:tap` 与脚本无参数也默认 test；`pack:taptap:dev` / `pack:taptap:release` 显式选择档位，release 仅在明确要求时使用。审计和 Web 验证使用 `npm run build:tap:audit`、`npm run build:tap:preview`。保持现有官方插件与第三方许可来源记录；确需升级或引入依赖时先确认版本兼容、维护情况与许可证。
+- 复用 `release/taptap.json`、`tools/prepare-taptap.py` 与统一入口 `tools/build-taptap.cjs`（`Build-TapTap.ps1` 仅转发兼容），默认根目录命令为 `npm run pack:taptap`（test），`build:tap` 与脚本无参数也默认 test；`pack:taptap:dev` / `pack:taptap:release` 显式选择档位，release 仅在明确要求时使用。审计和 Web 验证使用 `npm run build:tap:audit`、`npm run build:tap:preview`。保持现有官方插件与第三方许可来源记录；确需升级或引入依赖时先确认版本兼容、维护情况与许可证。
 - 分开记录完整上传包、首包、可玩前资源、内存与帧率。内部体积预算不是平台限制；Web 预览和本地转换结果不是 TapTap 真机结论。发布相关改动应复用现有检查并覆盖实际变动的入口、触控、生命周期、存档与资源加载，不默认扩写测试。
 - AppID 必须来自真实小游戏项目；无 AppID 时只制作并标注本地审计结果。上传、提审和公开发布按用户授权范围执行，平台或真机尚未验证的部分如实列出。
 
@@ -38,12 +38,13 @@ dev 的“快速验证”仅在暂停和设置 → 旅途中按需开启，提�
 ## 开发与测试约定
 
 - 打包先遵守[开发与打包规范](../../docs/development/build-profiles.md)：`test` 为默认正常测试包；明确要求开发加速时使用 `dev`，默认技能无冷却、怪物经验 ×5、每日经验不限、Boss 分别保底结算传奇与神器，仅对 dev 生效，存储使用独立前缀；只有明确要求 release／正式发布包时才制作 `release`，须关闭开发覆盖与游客绕过。release 自动从已登记的正式清单汇总更新日志、源码和资源差异，随包交付并在包体校验通过后归档于 `docs/releases/<版本>.md`；完成实际变更时追加 `release/changes.json`，只有真实上线后才登记 `release/published-release.json`。
-- dev / test / release 版本共用一直递增的序列，每次实际打包 patch +1、失败不回退、同次内部重试不重复递增。自定义输出也必须带档位：目录以 `-dev` / `-test` / `-release`，ZIP 以 `_dev.zip` / `_test.zip` / `_release.zip` 结尾。`-ValidateOnly` 不打包、不升版。
+- dev / test / release 版本共用一直递增的序列，每次实际打包 patch +1、失败不回退、同次内部重试不重复递增。交付固定为 `src/out/<版本号>/SwordAndFire_<版本号>.zip`，不再自定义交付目录或增加后缀；档位进入编译配置与清单。`--check`（兼容 `-ValidateOnly`）不打包、不升版。
 
 - 性能优化保持既有帧率设置，不新增或降低手机帧率上限。用户于2026-11-11明确要求不能用限帧解决发热；优先减少计算、渲染提交、常驻资源和重复分配，并在相同帧率下对照验证。
 
-- 版本以仓库根 `package.json.version` 为唯一来源，`Build-TapTap.ps1` 在每次正式、测试、游客测试或审计打包前自动 patch +1；Web 预览不递增，同次调用内部重试不重复递增。平时无需手动升版；`npm run version:tap -- minor` / `major` 或指定三段整数版本可用于主动调整基线，下一次打包仍会 patch +1。TapTap 构建自动同步 Cocos package/lock、运行版本、包体与上传清单。平台标识只维护在 `release/taptap-project.json`，不得手改生成的 `BuildInfo.ts` / `TapAuthConfig.ts`，或用微信 `libVersion` 冒充 TapTap 上传最低库版本。发布配置及分包/体积校验见 [`release/README.md`](release/README.md)。
-- `npm run pack:taptap` 一键生成带真实 AppID、正常平台登录的上传测试包，保留客户端登录门禁并如实记录待验证项；`npm run pack:taptap:release` 执行正式发布前检查，仅在明确要求 release 时使用。用户于 2026-11-10 明确授权独立的游客测试包：`npm run pack:taptap:guest` 跳过业务登录，仅用现有本机存档，游戏内与包体标明游客测试；该开关仅允许用于专门的测试包，不用于正式或审计构建，普通 test 不自动切游客。打包不代表上传、登录联调或平台验收通过。
+- 版本以仓库根 `package.json.version` 为唯一来源，统一脚本 `tools/build-taptap.cjs` 在每次正式、测试、游客测试或审计打包前自动 patch +1；Web 预览不递增，同次调用内部重试不重复递增。平时无需手动升版；`npm run version:tap -- minor` / `major` 或指定三段整数版本可用于主动调整基线，下一次打包仍会 patch +1。TapTap 构建自动同步 Cocos package/lock、运行版本、包体与上传清单。平台标识只维护在 `release/taptap-project.json`，不得手改生成的 `BuildInfo.ts` / `TapAuthConfig.ts`，或用微信 `libVersion` 冒充 TapTap 上传最低库版本。发布配置及分包/体积校验见 [`release/README.md`](release/README.md)。
+- **打包固定入口为 `npm run pack:taptap`。** Mac/Windows 共用 `tools/build-taptap.cjs`，交付固定为仓库根 `src/out/<版本号>/SwordAndFire_<版本号>.zip`（英文游戏名取自发布配置的 `projectName`），该目录必须由 Git 忽略；不要创建任务名、日期或游戏名前后缀的交付文件夹，也不要复制临时脚本维护另一份流程。先运行 `--check` 可无副作用预检，所有默认检查通过并实际导出/转换后才交付；不把旧 ZIP 当成本次成功结果。
+- `npm run pack:taptap` 一键生成带真实 AppID 的上传测试包，允许生成尚有登录服务待办的测试产物，必须如实记录待办并保留客户端登录门禁；`npm run pack:taptap:release` 执行正式发布前检查，仅在明确要求 release 时使用。用户于 2026-11-10 明确授权独立的游客测试包：`npm run pack:taptap:guest` 跳过业务登录，仅用现有本机存档，游戏内与包体标明游客测试；该开关仅允许用于测试包，不用于正式或审计构建。打包不代表上传、登录联调或平台验收通过。
 
 与[仓库根目录的开发约定](../../AGENTS.md)保持一致：
 

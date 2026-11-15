@@ -1,0 +1,204 @@
+{
+  "recordedAt": "2026-11-15T00:01:11.562Z",
+  "sourceVersion": "0.3.44",
+  "measuredPhoneVersion": "0.3.43",
+  "scope": "窗口查询以外的持续发热来源排查；本轮仅新增审计记录与临时验证脚本。",
+  "findings": [
+    {
+      "priority": 1,
+      "id": "render-and-ui",
+      "status": "measured-workload-gpu-share-unmeasured",
+      "finding": "持续渲染提交和 UI 遍历占有较多 JS 样本；高分辨率、透明叠加、动态阴影是持续图形负载候选。",
+      "evidence": {
+        "canvas": [
+          2556,
+          1179
+        ],
+        "pixelsPerFrame": 3013524,
+        "frameRate": 60,
+        "drawCallsMedian": 135,
+        "drawCallsRange": [
+          132,
+          190
+        ],
+        "trianglesMedian": 133143,
+        "rootFrameMoveSamples": 439,
+        "uiBatcherSamples": 166,
+        "hudUpdateSamples": 69,
+        "totalJSStacks": 1381
+      },
+      "sites": [
+        "assets/scripts/app/Hud.ts:358",
+        "assets/scripts/app/ChapterGame.ts:202",
+        "assets/scripts/app/ChapterGame.ts:247",
+        "assets/scripts/features/world/runtime/FlatWorldLayers.ts",
+        "assets/scripts/features/actors/runtime/Player3DActors.ts"
+      ],
+      "assessment": "渲染阶段统计是 JS 渲染提交路径，不是 GPU 利用率。透明表面、UI Graphics/不同纹理与材质可能切断合批；必须结合实际批次、遮挡及 GPU 时间确认。",
+      "next": "保持帧率和画面，优先核查批次切断、透明重叠、屏幕外提交和阴影投射对象范围。"
+    },
+    {
+      "priority": 2,
+      "id": "empty-modal-loop",
+      "status": "confirmed-redundant-work",
+      "finding": "无菜单、对白、骰盘时，状态 revision 每帧增加，使 renderModal 的版本键每帧变化。",
+      "evidence": {
+        "scope": "Current renderModal method, synthetic 600 playing frames with no menu/dialogue/dice; no phone timing measured",
+        "frames": 600,
+        "calls": {
+          "prepareEquipmentDice": 600,
+          "diceView": 600,
+          "clearDicePanel": 600,
+          "renderMenu": 600,
+          "clearEmptyModal": 600,
+          "hairstyleEnumeration": 600
+        }
+      },
+      "sites": [
+        "assets/scripts/app/ChapterGame.ts:603",
+        "assets/scripts/app/Menus.ts:27",
+        "assets/scripts/core/GameSession.ts:234",
+        "assets/scripts/core/GameSession.ts:436"
+      ],
+      "assessment": "每帧运行 prepareEquipmentDice/equipmentAvailability、发型枚举、diceView、dicePanel.clear 和 renderMenu/clearModal。没有证据表明完整菜单每帧重建；清理的通常是空容器。",
+      "next": "分别按骰盘待处理状态和真正的菜单显示状态驱动；保留装备骰自动弹出、死亡、对白、前后台恢复及旧菜单清理。"
+    },
+    {
+      "priority": 3,
+      "id": "guidance-route-repetition",
+      "status": "confirmed-recomputation-profiled",
+      "finding": "狩猎引导每 0.4 秒重新调用多次 availableRoute；它对每个猎区各做一次区域图广度搜索。",
+      "evidence": {
+        "profileJourneyGuidanceSamples": 24,
+        "profileAvailableRouteSamples": 14,
+        "totalJSStacks": 1381,
+        "syntheticLocalAudit": {
+          "scope": "Mac Node, synthetic unchanged hunting state, real journeyGuidance/availableRoute and area data; not iPhone CPU time",
+          "guidanceUpdates": 25,
+          "unchangedPlayerAndFlags": true,
+          "exitRequirementChecks": 49950,
+          "checksPerUpdate": 1998,
+          "elapsedMs": 11.208696000000032,
+          "target": "U1-07"
+        }
+      },
+      "sites": [
+        "assets/scripts/app/ChapterGame.ts:921",
+        "assets/scripts/features/journey/common/JourneyGuide.ts:39",
+        "assets/scripts/features/automation/common/AutomationRoute.ts:5"
+      ],
+      "assessment": "相同玩家位置和解锁条件下仍重复遍历区域图。本地 25 次更新执行 49,950 次出口条件检查；这是合成状态的调用计数，不代表手机 CPU 毫秒。已有 guidancePath 只缓存地图内几何路径，没有缓存猎区筛选使用的区域图可达性。",
+      "next": "复用同一次可达区域搜索；在区域、等级、门禁条件变化时失效，不缓存动态敌人目标/本地寻路终点。"
+    },
+    {
+      "priority": 4,
+      "id": "save-native-io",
+      "status": "measured-serialization-part-fixed-native-io-remains",
+      "finding": "GameSession.advance 持续标记 dirty，静止时也保持两秒一次自动存档。",
+      "evidence": {
+        "saveWriteSamples": 168,
+        "storageSetSamples": 59,
+        "storageGetSamples": 32,
+        "totalJSStacks": 1381
+      },
+      "sites": [
+        "assets/scripts/core/GameSession.ts:436",
+        "assets/scripts/app/ChapterGame.ts:900",
+        "assets/scripts/features/persistence/common/SaveStore.ts:47",
+        "assets/scripts/platform/PlatformServices.ts"
+      ],
+      "assessment": "0.3.44 已减少全量序列化与校验分配；同步写入、双槽及读回验证仍有原生桥接成本。不能据旧包样本推算新包剩余百分比。",
+      "next": "先实测 0.3.44 存档路径；若仍显著，再设计与前后台持久化兼容的合并/异步队列，不能直接延长存档间隔或去掉校验。"
+    },
+    {
+      "priority": 5,
+      "id": "actors-enemies-effects",
+      "status": "measured-updates-combat-tail-pending",
+      "finding": "3D 主角骨骼动画、平面敌人动画、敌人规则和特效持续更新；战斗的透明特效可能进一步增加渲染与分配。",
+      "evidence": {
+        "actorPresenterSamples": 76,
+        "flatActorsSamples": 59,
+        "sessionAdvanceSamples": 118,
+        "effectsUpdateSamples": 37,
+        "totalJSStacks": 1381,
+        "profileMovingFrames": 129,
+        "profileActionFrames": 0
+      },
+      "sites": [
+        "assets/scripts/features/actors/runtime/Player3DActors.ts:32",
+        "assets/scripts/features/actors/runtime/FlatActors.ts:334",
+        "assets/scripts/core/GameSession.ts:448",
+        "assets/scripts/features/combat/runtime/Effects.ts:318"
+      ],
+      "assessment": "这些包含必要玩法工作；当前 profile 多为静止，不能从它推断持续战斗热点或直接停更屏幕外敌人。需要区分玩法模拟与纯画面更新。",
+      "next": "新包分别采移动、连续战斗和静止；优先让屏幕外纯呈现免更新，并检查现有池峰值、粒子数量和骨骼开销。"
+    },
+    {
+      "priority": 6,
+      "id": "platform-debug-log",
+      "status": "confirmed-in-measured-runtime-setting-not-changed",
+      "finding": "TapTap 容器的 API 调用日志包含时间格式化，日志开启会放大桥接调用成本。",
+      "evidence": {
+        "platformLoggerSamples": 57,
+        "totalJSStacks": 1381,
+        "source": "profile/sources/script-0.js:2 (LogManager.logToBuffer -> time zone formatting / toLocaleString)"
+      },
+      "assessment": "项目 Creator debug=false；容器 API 日志与之不同。业务未发现常态每帧 console 输出。当前无游戏调试目标，未重新核实容器日志开关或修改平台设置。",
+      "next": "在相同场景对照容器日志开关，并用接近发布的运行环境验收；继续减少原生 API 重复调用。"
+    }
+  ],
+  "alreadyHandledOrBounded": [
+    "业务窗口缓存、引擎入口 getWindowInfo 缓存和音乐稳定音量去重已在现有源码中。",
+    "平面玩法已关闭不需要的自动物理模拟；碰撞/视线查询仍服务玩法。",
+    "小地图约 0.2 秒更新，地形/迷雾变化检查与视口剔除已有缓存。",
+    "邻图资源预热串行且有区域所有权；短窗口图形内存稳定，不能据此证明长期无泄漏。"
+  ],
+  "validation": {
+    "existingPhoneProfile": "src/cocos/test-results/performance/iphone-heat-diagnosis-20261115/profile",
+    "businessSourceReviewed": true,
+    "emptyModalLocal": {
+      "scope": "Current renderModal method, synthetic 600 playing frames with no menu/dialogue/dice; no phone timing measured",
+      "frames": 600,
+      "calls": {
+        "prepareEquipmentDice": 600,
+        "diceView": 600,
+        "clearDicePanel": 600,
+        "renderMenu": 600,
+        "clearEmptyModal": 600,
+        "hairstyleEnumeration": 600
+      }
+    },
+    "guidanceLocal": {
+      "scope": "Mac Node, synthetic unchanged hunting state, real journeyGuidance/availableRoute and area data; not iPhone CPU time",
+      "guidanceUpdates": 25,
+      "unchangedPlayerAndFlags": true,
+      "exitRequirementChecks": 49950,
+      "checksPerUpdate": 1998,
+      "elapsedMs": 11.208696000000032,
+      "target": "U1-07"
+    },
+    "sourceProductionChangesThisTurn": false,
+    "buildPerformedThisTurn": false,
+    "newPhoneCapture": false,
+    "targetDiscovery": "Paired iPhone found; no inspectable TapTap game target at audit time; enumeration and connection ended normally.",
+    "rawArtifacts": [
+      "src/cocos/test-results/performance/iphone-heat-diagnosis-20261115/other-heat-profile-mapping.json",
+      "src/cocos/test-results/performance/iphone-heat-diagnosis-20261115/audit-empty-modal.cjs",
+      "src/cocos/test-results/performance/iphone-heat-diagnosis-20261115/empty-modal-audit.json",
+      "src/cocos/temp/heat-guidance-audit.ts",
+      "src/cocos/test-results/performance/iphone-heat-diagnosis-20261115/guidance-route-audit.json"
+    ]
+  },
+  "limits": [
+    "采样是 0.3.43；0.3.44 尚未上机，所以此处没有新包温降或整机功耗结论。",
+    "inclusive JS 样本相互重叠，不能相加；选中 Inspector 目标不是整机，时间戳为零不能换算逐帧耗时。",
+    "没有 GPU 时间/利用率、温度、功率或热降频指标；持续发热的主因排序仍需实机 A/B。",
+    "充电、亮度、壳体/环境与低电量状态未记录；这些条件需要在同场景前后对照中保持一致。"
+  ],
+  "references": [
+    "https://docs.cocos.com/creator/3.8/manual/zh/ui-system/components/engine/ui-batch.html",
+    "https://docs.cocos.com/creator/3.8/manual/zh/render-pipeline/builtin-pipeline.html",
+    "https://docs.cocos.com/creator/3.8/manual/en/concepts/scene/light/shadow.html",
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/runtime/runtime-suggestions/"
+  ]
+}

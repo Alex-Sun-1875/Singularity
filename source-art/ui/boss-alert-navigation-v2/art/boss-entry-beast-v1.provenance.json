@@ -1,0 +1,36 @@
+{
+  "date": "2026-11-15",
+  "method": "OpenAI built-in image_gen, transparent image generation",
+  "prompt": "boss-entry-beast-v1.prompt.txt",
+  "source": "boss-entry-beast-v1-generated.png",
+  "output": "../assets/boss-entry-beast-v1.png",
+  "purpose": "Fixed universal boss list entry, independent of selected or spawned target",
+  "constraints": [
+    "single existing outer ring only",
+    "no text or intrinsic frame",
+    "28px visible control, 48px circular touch target"
+  ],
+  "generationCompleted": true,
+  "review": {
+    "subject": "Front-facing ivory and bronze beast head with distinct eyes and tusks",
+    "alpha": "Genuine transparency checked",
+    "userApproved": false,
+    "implementedInGame": false,
+    "smallSizeCheck": "Reviewed brightness 0.93, saturation 0.72, sepia 0.18 in the 20px icon box; confirmed in-app filter and final rendering",
+    "fixedIdentityCheck": "render.cjs verifies the same icon asset at Lv4, Lv10, Lv13, Lv18, Lv25",
+    "proof": "../fixed-entry-tone-v3.png"
+  },
+  "displayTreatment": {
+    "method": "CSS presentation only, generated source and alpha remain unchanged",
+    "brightness": 0.93,
+    "saturation": 0.72,
+    "sepia": 0.18,
+    "badge": {
+      "right": 9,
+      "bottom": 9,
+      "diameter": 11,
+      "placement": "Tucked onto the lower-right perimeter"
+    },
+    "iconBox": 20
+  }
+}

@@ -1,19 +1,21 @@
-import {retainViewportMetrics} from '../platform/ViewportMetrics';
-import {navigationText as mapText} from '../features/navigation/locales';
+import {viewportMetrics,retainViewportMetrics} from '../platform/ViewportMetrics';
 import {skillWeaponRequirement} from '../features/combat/common/SkillWeapons';
 import {updateJourneyCooldowns} from '../features/journey/runtime/JourneyPanel';
 import {journeyText as lifecycleText} from '../features/journey/locales';
 import {BUILD_INFO} from './BuildInfo';
+import {worldText} from '../features/world/locales';
+import {CAMPAIGN_EVENTS} from '../features/campaign/data/CampaignEvents';
+import {campaignPrerequisiteTargets} from '../features/campaign/common/CampaignNavigation';
 import {PreparationResources} from './PreparationResources';
 import {currentLocale,LOCALE_PREFERENCE,setLocale} from '../shared/i18n/Localization';
-import {_decorator,Component,Node,Camera,Vec3,Vec4,Quat,Color,DirectionalLight,PhysicsSystem,CapsuleCharacterController,input,Input,EventKeyboard,KeyCode,EventMouse,EventTouch,UITransform,Layers,view,screen,AudioSource,AudioClip,director,Director,Material,tween,Tween,sys,SpriteFrame,Texture2D,Rect,Size,JsonAsset,dynamicAtlasManager} from 'cc';
+import {_decorator,Component,Node,Camera,Vec3,Vec4,Quat,Color,DirectionalLight,PhysicsSystem,CapsuleCharacterController,input,Input,EventKeyboard,KeyCode,EventMouse,EventTouch,UITransform,Layers,view,AudioSource,AudioClip,director,Director,Material,tween,Tween,sys,SpriteFrame,Texture2D,Rect,Size,JsonAsset,dynamicAtlasManager} from 'cc';
 import {DEV} from 'cc/env';
 import {gameResources as resources,isTapRelease} from '../shared/assets/GameResources';
 import type {GameEvent,InputFrame,InteractionDef,ExitDef,Point,WorldQuery} from '../core/Contracts';
 import {GameSession,type GroundLoot} from '../core/GameSession';
 import {Automation,type AutomationPause,type NavigationTarget} from '../features/automation/common/Automation';
 import {automationText as autoText} from '../features/automation/locales';
-import {journeyGuidance,resetJourneyGuidance} from '../features/journey/common/JourneyGuide';
+import {journeyGuidance,resetJourneyGuidance,navigationGuidance} from '../features/journey/common/JourneyGuide';
 import {TaskPresence} from '../features/journey/runtime/TaskPresence';
 import {JOURNEY_TASKS,chapterForArea} from '../features/journey/data/ChapterJourney';
 import {SceneInteraction,type SceneInteractionTarget} from '../features/world/runtime/SceneInteraction';
@@ -23,6 +25,7 @@ import {SUPPLIES,isSupplyId} from '../features/equipment/data/Supplies';
 import {CombatImpactFeedback} from '../features/combat/runtime/CombatImpactFeedback';
 import {eventFeedbackRole,qualityFeedbackRole,type FeedbackRole} from '../shared/ui/FeedbackPalette';
 import {SaveStore} from '../features/persistence/common/SaveStore';
+import {AutoSavePolicy} from '../features/persistence/common/AutoSavePolicy';
 import {discardCombatSkillPreview} from '../features/progression/runtime/CombatPanel';
 import {SkillEffectDebug} from '../features/debug/runtime/SkillEffectDebug';
 import {TrainingRange,TRAINING_MONSTER_COUNTS,type TargetFormation} from '../features/debug/common/TrainingRange';
@@ -57,7 +60,9 @@ import {CheckpointCompass} from '../features/navigation/runtime/CheckpointCompas
 import {loadBundleWithDependencies} from '../shared/assets/AssetBundles';
 import {DicePanel} from '../features/dice/runtime/DicePanel';
 import {SurfaceMaterials} from '../features/world/runtime/SurfaceMaterials';
+import {navigationText as mapText} from '../features/navigation/locales';
 import {LoadingScreen} from '../features/loading/runtime/LoadingScreen';
+import {showLoginScreen} from '../features/login/runtime/LoginScreen';
 import {LocalCartography} from '../features/navigation/runtime/LocalCartography';
 import {prepareNavigationWasm,setComputationWasmEnabled,navigationWasmState} from '../features/navigation/runtime/NavigationWasm';
 import {Navigation} from '../features/navigation/runtime/Navigation';
@@ -66,6 +71,9 @@ import {resourceProfile} from '../features/combat/common/ClassResource';
 import {ATTRIBUTES,baseMaxHp,cumulativeXp,allocatedSkillRank,unlockSkills,skillRankSpent,type Attribute} from '../features/progression/common/Progression';
 import {skillFramingPoints,rangedCameraFrame} from '../features/navigation/runtime/RangedCamera';
 import {nearestBoss,bossKind,bossName} from '../features/combat/common/BossAwareness';
+import {BossDirectory} from '../features/combat/common/BossDirectory';
+import {BossPanel} from '../features/combat/runtime/BossPanel';
+import {bossText} from '../features/combat/locales/bosses';
 import {EnemyCombatFeedback} from '../features/combat/runtime/EnemyCombatFeedback';
 import {CampaignPresentation} from '../features/cinematics/runtime/CampaignPresentation';
 import type {CampaignBeat} from '../features/cinematics/data/CampaignScenes';
@@ -104,8 +112,13 @@ export class ChapterGame extends Component {
  private readonly impactSound=(id:string,volume:number)=>{const clip=this.sounds.get(id);if(clip)this.audio.playOneShot(clip,volume);};
  private keys=new Set<number>();private touches=new TouchOwnership();private heldAttack=false;private mouseAim:number|undefined;private pulse:Partial<InputFrame>={};
  private automation=new Automation();
+ private readonly bosses=new BossDirectory(AREAS);
+ private bossPanel:BossPanel|undefined;
+ private bossPanelClock=0;
+ private bossTravel:NavigationTarget|null=null;
+ private bossTravelArea='';
  private automationDismissedTouch=false;
- private aiming:string|null=null;private aimTarget:Point|undefined;private compass=new CheckpointCompass(AREAS);private compassText='';private compassTime=0;private encounterTime=.2;private encounterText='';private menu='title';private modalKey='';private loading=false;private failure='';private saved='';private saveTime=0;private toastRole:FeedbackRole='text.normal';private toast='';private toastTime=0;private page=0;private merchant='';private visited:Record<string,boolean>={};private cleanup:()=>void;private audio:AudioSource;private sounds=new Map<string,AudioClip>();private lastAimTime=-999;
+ private aiming:string|null=null;private aimTarget:Point|undefined;private compass=new CheckpointCompass(AREAS);private compassText='';private compassTime=0;private encounterTime=.2;private encounterText='';private menu='title';private modalKey='';private loading=false;private failure='';private saved='';private readonly autosave=new AutoSavePolicy();private toastRole:FeedbackRole='text.normal';private toast='';private toastTime=0;private page=0;private merchant='';private visited:Record<string,boolean>={};private cleanup:()=>void;private audio:AudioSource;private sounds=new Map<string,AudioClip>();private lastAimTime=-999;
  private manualSkillAim=false;
  private manualBasicAim=false;
  private aimGesture:{id:number;start:Point;anchor:Point;right:Point;up:Point;scale:number;manual:boolean}|null=null;
@@ -120,13 +133,14 @@ export class ChapterGame extends Component {
  private readonly mapResources=new MapResources();
  private preparationResources:PreparationResources;private preparingPage=false;private pagePreparationRevision=0;
  private taskPresence:TaskPresence|undefined;
+ private authPromptVisible=false;
  private bootPrepared=false;private startupFailure=false;private destroyed=false;private bootPromise:Promise<void>|undefined;private accessPromise:Promise<void>|undefined;
  private background=false;private resetFrameTime=false;private resumeSavedJourney=false;private returnToMainMenu=false;
  private pendingPreparationAction:string|undefined;
- private query:WorldQuery={move:(p,d,r)=>this.moveCharacter(p,d,r),visible:(a,b)=>this.world?this.world.visible(a,b):true,height:p=>this.world?.height(p)??0,path:(a,b)=>this.world?.path(a,b)??[],inView:p=>this.reinforcementInView(p)};
+ private query:WorldQuery={move:(p,d,r)=>this.moveCharacter(p,d,r),visible:(a,b)=>this.world?this.world.visible(a,b):true,height:p=>this.world?.height(p)??0,path:(a,b)=>this.world?.path(a,b)??[],recoverPosition:(p,r)=>this.world?.recoverPosition(p,r),inView:p=>this.reinforcementInView(p)};
  private reinforcementInView(point:Point){
   if(!this.camera||!this.world)return false;
-  const size=screen.windowSize,y=this.world.height(point);
+  const size=viewportMetrics.windowSize,y=this.world.height(point);
   // Check feet and head with a margin for names, the minimap and touch controls.
   for(const height of [.1,2.2]){const p=this.camera.worldToScreen(new Vec3(point.x,y+height,point.z));if(p.z<0||p.z>1||p.x<size.width*.06||p.x>size.width*.94||p.y<size.height*.14||p.y>size.height*.86)return false;}
   return true;
@@ -309,9 +323,13 @@ export class ChapterGame extends Component {
   if(this.trainingRange)return null;
   const task=JOURNEY_TASKS.find(t=>t.id===this.trackedTaskId);
   if(task&&this.session.journey.taskDone(task)){this.trackedTaskId=this.session.journey.currentTask(task.chapter)?.id;if(this.automation.destination?.taskId===task.id||this.automation.pausedDestination?.taskId===task.id)this.automation.stop();}
+  const target=this.automation.destination??this.automation.pausedDestination;
+  if(target)return navigationGuidance(this.session,AREAS,this.query,target);
+  if(this.bossTravel&&this.automation.mode==='manual'&&!this.automation.active&&this.bossTravel.area===this.session.state.area&&distance(this.bossTravel.point,this.session.state.player)<=1.35)return navigationGuidance(this.session,AREAS,this.query,this.bossTravel);
   return journeyGuidance(this.session,AREAS,this.query,this.trackedTaskId);
  }
  private startJourneyNavigation(id?:string){
+  this.bossTravel=null;
   if(id){const task=JOURNEY_TASKS.find(t=>t.id===id);if(!task||this.session.journey.currentTask(task.chapter)?.id!==id){this.say('请先完成当前阶段，已完成的任务无需再次寻路。');return;}this.trackedTaskId=id;this.session.journey.select('task');}
   const guide=this.currentGuidance();if(!guide)return;
   if(guide.blocked){this.say('目标路线尚未开放或道路受阻，请查看任务地点与等级条件。');return;}
@@ -321,14 +339,16 @@ export class ChapterGame extends Component {
  private startNavigation(target:NavigationTarget){
   if(this.trainingRange)return;
   if(this.loading||this.failure||this.session.state.status==='dead'||this.session.state.dialogue||this.session.state.dice.active||this.campaignView?.active)return;
-  this.clearInput();this.menu='';this.modalKey='';this.hud.clearModal();this.automation.navigate(target);this.say('正在前往'+target.label+'；移动可接管。');
+  if(target.bossKey){const fresh=this.bosses.navigation(this.session,target.bossKey,this.session.state.area===target.area?this.query:undefined);if(!fresh){this.say(bossText('blocked'));return;}target=fresh;}
+  this.bossTravel=target.bossKey?target:null;this.bossTravelArea=this.session.state.area;
+  this.clearInput();this.menu='';this.modalKey='';this.hud.clearModal();this.automation.navigate(target);this.guideTime=1;this.hud.setGuidance(this.currentGuidance());this.say('正在前往'+target.label+'；移动可接管。');
  }
  private say(text:string,time=4,role:FeedbackRole='text.normal'){this.toast=text;this.toastTime=time;this.toastRole=role;}
  private play(id:string){const clip=this.sounds.get(id);if(clip)this.audio.playOneShot(clip,.35);}
  private async enterTrainingRange(){
   if(this.trainingRange){this.open('training-range');return;}
   if(this.failure||this.hud.portrait||this.session.state.status==='dead'||this.session.state.dialogue||this.session.state.dice.active||this.campaignView?.active)return;
-  this.clearInput();this.automation.stop();discardCombatSkillPreview(this.session);
+  this.clearInput();this.automation.stop();this.bossTravel=null;discardCombatSkillPreview(this.session);
   if(!this.save())return;
   this.rangeReturn={session:this.session,menu:this.menu==='title'?'title':'',saved:this.saved,taskId:this.trackedTaskId};
   this.trainingRange=new TrainingRange(this.query);this.session=this.trainingRange.session;this.trackedTaskId=undefined;this.hud.trainingRange=this.trainingRange;
@@ -364,8 +384,9 @@ export class ChapterGame extends Component {
   s.combat.ultimate??=Object.values(COMBAT_SKILLS).find(d=>d.type==='ultimate'&&d.style==='THU')?.id??null;
   this.saved='临时满级测试 · 返回普通链接恢复原进度';this.say('临时测试：设置 → 技能效果调试可切换1—5级；F8快速打开。',12);
  }
- private save():boolean{if(this.hud?.mapTravel.busy)return false;if(!this.store||!this.session)return true;if(this.trainingRange){this.saved=trainingText('saved');this.session.dirty=false;this.saveTime=0;return true;}if(this.temporaryMax){this.saved='临时满级测试 · 返回普通链接恢复原进度';this.session.dirty=false;this.saveTime=0;return true;}const r=this.store.write(this.session);this.saved=r.ok?'已保存 ✓':'尚未保存';if(!r.ok)this.say(r.error??'本地保存失败',8);this.saveTime=0;return r.ok;}
+ private save():boolean{if(this.hud?.mapTravel.busy)return false;if(!this.store||!this.session)return true;if(this.trainingRange){this.saved=trainingText('saved');this.session.dirty=false;this.autosave.committed(true);return true;}if(this.temporaryMax){this.saved='临时满级测试 · 返回普通链接恢复原进度';this.session.dirty=false;this.autosave.committed(true);return true;}const r=this.store.write(this.session);this.saved=r.ok?'已保存 ✓':'尚未保存';if(!r.ok)this.say(r.error??'本地保存失败',8);this.autosave.committed(r.ok);return r.ok;}
  private process(events:GameEvent[]){
+  let saveRequested=this.autosave.observe(events);
   this.trainingRange?.observe(events);
   this.impact?.onEvents(events,this.session);
   this.effects?.onEvents(events,this.session);
@@ -376,12 +397,12 @@ export class ChapterGame extends Component {
    if(e.type==='item'&&item){if(e.lootId&&highlightedEquipment(item.quality))this.hud.dismissEquipmentDrop(String(e.lootId));else this.hud.showEquipmentPickup(item,Math.max(1,Number(e.value)||1));}
    else if(e.type==='loot_drop'&&item&&highlightedEquipment(item.quality)){/* The authoritative pile owns its 24-second HUD notice. */}
    else if(e.text&&!['miss','loot_roll'].includes(e.type))this.say(e.text,e.type==='inspect'?7:e.type==='level_up'?8:4,item&&['loot_drop','equip'].includes(e.type)?qualityFeedbackRole(item.quality):eventFeedbackRole(e));
-   if(e.type==='travel'||e.type==='retry'){void this.rebuild();this.save();}
+   if(e.type==='travel'||e.type==='retry'){void this.rebuild();saveRequested=true;}
    if(e.type==='journey_open')this.open('journey');
    if(e.type==='hunting_open')this.open('hunting');
-   if(e.type==='journey_complete')this.save();
+   if(e.type==='journey_complete')saveRequested=true;
    if(e.type==='shop'){this.merchant=String(e.id);this.open('shop');}
-   if(e.type==='complete'){this.open('complete');this.play('complete');this.save();}
+   if(e.type==='complete'){this.open('complete');this.play('complete');saveRequested=true;}
    if(['reward','item','quest','rest','dialogue'].includes(e.type))this.play('interact');
    if(e.type==='campaign_battle')this.play(e.complete?'complete':'interact');
    if(e.type==='check_roll')this.play('dice');
@@ -395,6 +416,8 @@ export class ChapterGame extends Component {
     this.play(def?.style==='BOW'?'arrow':def?.style==='WAR'?'sword':'spell');
    }
   }
+  // One commit per event batch, even when a kill levels up and grants items.
+  if(saveRequested)this.save();
  }
  private interaction():{object?:InteractionDef;exit?:ExitDef;loot?:string;prompt?:SceneInteractionTarget}{
   const p=this.session.state.player,a=this.world.area,task=this.trackedTaskId??this.session.journey.currentTask()?.id;
@@ -412,28 +435,36 @@ export class ChapterGame extends Component {
    const current=this.sceneInteraction?.visibleTargetId;return Number(v.id===current)-Number(u.id===current)||priority(u)-priority(v)||delta;
   });
   const object=objects[0];
-  if(object){const verbs:Record<string,string>={offer:'交谈',merchant:'交易',meeting:'交谈',inspect:'查看',dice_check:'调查',cache:'开启',locked_cache:'开启',recover:'取回',letter:'读信',checkpoint:'休整',journey_task:'调查',journey_board:'查看旅程',hunting_guide:'查看猎区',release_workers:'解救',disable_trap:'拆除',captain_gate:'开启',finish:'确认',growing_scene:'调查',growing_rematch:'挑战',skill_archive:'阅读'};return {object,prompt:{id:object.id,name:object.label,verb:verbs[object.action]??'操作',point:object,height:this.world.height(object),objective:object.id===this.hud.activeGuidance?.targetId,avoid:object.id===this.hud.activeGuidance?.targetId?{point:p,height:this.world.height(p)+1}:undefined}};}
+  if(object){const status=this.session.interactionAvailability(object);const verbs:Record<string,string>={offer:'交谈',merchant:'交易',meeting:'交谈',inspect:'查看',dice_check:'调查',cache:'开启',locked_cache:'开启',recover:'取回',letter:'读信',checkpoint:'休整',journey_task:'调查',journey_board:'查看旅程',hunting_guide:'查看猎区',release_workers:'解救',disable_trap:'拆除',captain_gate:'开启',finish:'确认',growing_scene:'调查',growing_rematch:'挑战',skill_archive:'阅读'};return {object,prompt:{id:object.id,name:object.label,verb:status.completed?worldText('interaction.viewResult'):!status.available?worldText('interaction.viewRequirements'):object.action==='campaign_event'?status.confirmLabel:verbs[object.action]??'操作',point:object,height:this.world.height(object),objective:object.id===this.hud.activeGuidance?.targetId,avoid:object.id===this.hud.activeGuidance?.targetId?{point:p,height:this.world.height(p)+1}:undefined}};}
   const exit=a.exits.filter(e=>distance(p,e)<=1.35&&visible(e)).sort((u,v)=>distance(u,p)-distance(v,p))[0];
   if(exit)return {exit,prompt:{id:exit.id,name:getArea(exit.to).name,verb:'进入',point:exit,height:this.world.height(exit),blocked:this.session.exitRequirement(exit)??undefined,objective:exit.id===this.hud.activeGuidance?.targetId,avoid:exit.id===this.hud.activeGuidance?.targetId?{point:p,height:this.world.height(p)+1}:undefined}};
   // Full supplies explain their limit without taking priority over usable targets.
   const full=this.session.nearbyLoot(true)[0];return full?lootTarget(full):{};
  }
- private interact(expectedId?:string){const c=this.interaction();if(expectedId&&expectedId!==(c.loot??c.object?.id??c.exit?.id))return;if(c.loot&&c.prompt?.blocked){this.say(c.prompt.blocked);return;}this.sceneInteraction?.update(null,true);this.takeControl();if(c.loot){this.process(this.session.pickupLoot(c.loot));this.save();}else if(c.object){if(c.object.actor||['merchant','offer','meeting','letter','journey_task','campaign_event'].includes(c.object.action)){this.arrivalInteraction(c.object.id);return;}this.process(this.session.interact(c.object));this.save();}else if(c.exit)this.process(this.session.travel(c.exit));else this.say('靠近人物或场景物件后，会显示对应的操作。');this.modalKey='';this.renderModal();}
+ private interact(expectedId?:string){const c=this.interaction();if(expectedId&&expectedId!==(c.loot??c.object?.id??c.exit?.id))return;if(c.loot&&c.prompt?.blocked){this.say(c.prompt.blocked);return;}this.sceneInteraction?.update(null,true);this.takeControl();if(c.loot){this.process(this.session.pickupLoot(c.loot));this.save();}else if(c.object){if(!this.session.interactionAvailability(c.object).available||c.object.actor||['merchant','offer','meeting','letter','journey_task','campaign_event'].includes(c.object.action)){this.arrivalInteraction(c.object.id);return;}this.process(this.session.interact(c.object));this.save();}else if(c.exit)this.process(this.session.travel(c.exit));else this.say('靠近人物或场景物件后，会显示对应的操作。');this.modalKey='';this.renderModal();}
  private arrivalInteraction(id:string,confirmed=false){
   const s=this.session.state,p=s.player,object=this.world.area.objects.find(o=>o.id===id);
   // Resolve the selected destination itself; nearby loot or another NPC must
   // never replace the target when an automatic route finishes.
-  if(!object||!this.session.interactionVisible(object)||s.status==='dead'||s.dialogue||s.dice.active||s.action
+  if(!object||!this.session.interactionVisible(object)&&!this.session.interactionAvailability(object).completed||s.status==='dead'||s.dialogue||s.dice.active||s.action
    ||distance(p,object)>Math.min(1.35,object.radius??1.35)||!this.world.visible(p,object)||Math.abs(this.world.height(p)-this.world.height(object))>=1.2){
    this.automation.pause('blocked',autoText('task.failed'));this.say(autoText('task.failed'));return;
   }
   this.sceneInteraction?.rememberApproach(this.world.area.objects,p);this.sceneInteraction?.update(null,true);this.clearInput(false);
-  // Existing story conversations open directly. Merchants greet the player
-  // before trading; quest actions wait for a dialogue choice before committing.
-  if(!confirmed&&!['offer','meeting','letter','dice_check','journey_board','hunting_guide'].includes(object.action)){
+  const access=this.session.interactionAvailability(object);
+  if(!access.available||access.readOnly){
+   if(access.available){this.process(this.session.interact(object));this.save();}
    this.open('interaction:'+id);return;
   }
-  this.process(this.session.interact(object));this.save();this.modalKey='';this.renderModal();
+  // Authored choices are already a confirmation; do not put a second one before them.
+  const event=object.action==='campaign_event'?CAMPAIGN_EVENTS[object.eventId??'']:undefined;
+  const hasChoices=!!(event?.choices?.length||event?.choiceItems?.length);
+  if(!confirmed&&!hasChoices&&!['offer','meeting','letter','dice_check','journey_board','hunting_guide'].includes(object.action)){
+   this.open('interaction:'+id);return;
+  }
+  this.process(this.session.interact(object));this.save();
+  if(!s.dialogue&&!s.dice.active&&(object.action==='campaign_event'||this.session.interactionAvailability(object).completed)){this.menu='interaction:'+id;this.automation.pause('menu');}
+  this.modalKey='';this.renderModal();
  }
  private get updatePromptVisible():boolean{const u=this.platform?.updates;return !!u&&(u.status==='applying'||u.ready&&u.promptPending)&&!this.hud?.portrait&&!this.loading&&(!this.session||(this.menu==='title'||this.menu==='pause')&&!this.session.state.dialogue&&!this.session.state.dice.active);}
  private click(action:string){
@@ -548,15 +579,37 @@ export class ChapterGame extends Component {
   if(action.startsWith('settings-tab:')){const tab=action.slice(13);if(this.menu!=='settings'||!['audio','controls','journey'].includes(tab))return;this.hud.settingsTab=tab as 'audio'|'controls'|'journey';this.modalKey='';this.renderModal();return;}
   if(action==='toggle-skill-names'){if(this.menu!=='pause'&&this.menu!=='settings'||this.loading||this.hud.portrait)return;this.hud.setSkillNamesVisible(!this.hud.skillNamesVisible);this.modalKey='';this.renderModal();return;}
   if(action==='toggle-skill-aim'){if(this.menu!=='settings'||this.loading||this.hud.portrait)return;this.clearInput();this.hud.skillAimMode=this.hud.skillAimMode==='auto'?'manual':'auto';try{this.platform.setItem('sword-fire-skill-aim-mode',this.hud.skillAimMode);}catch{this.say('瞄准设置已应用，本机偏好暂未保存。');}this.modalKey='';this.renderModal();return;}
+  if(action==='bosses'){
+   if(this.loading||this.failure||this.trainingRange||this.session.state.status==='dead'||this.session.state.dialogue||this.hud.portrait)return;
+   this.automation.pauseNavigation();this.open('bosses');return;
+  }
+  if(action.startsWith('boss-follow:')){
+   if(this.menu!=='bosses')return;this.bosses.follow(this.session,action.slice(12));this.save();this.bossPanel?.update();return;
+  }
+  if(action.startsWith('boss-go:')){
+   if(this.loading||this.failure||this.trainingRange||this.session.state.status==='dead'||this.session.state.dialogue||this.menu&&this.menu!=='bosses')return;
+   const key=action.slice(8),row=this.bosses.find(this.session,key);if(!row){this.say(bossText('outOfRange'));return;}
+   const target=this.bosses.navigation(this.session,key,this.session.state.area===row.area?this.query:undefined);if(!target){this.say(bossText('blocked'));return;}
+   this.bosses.dismiss();this.hud.setBossAwareness(null,this.bosses.count);this.startNavigation(target);return;
+  }
   if(action==='supplies'){if(this.failure||this.menu||this.session.state.dialogue||this.hud.portrait||this.aiming||this.heldAttack||this.campaignView?.active)return;this.hud.toggleSupplyBelt();return;}
   if(action==='potion-health'||action==='potion-focus'||action==='potion-resource'){if(this.loading||this.failure||this.menu||this.session.state.dialogue||this.hud.portrait||this.aiming||this.heldAttack)return;const ok=this.session.useConsumable(action==='potion-health'?'health':'resource');if(ok){this.play('interact');this.save();}return;}
+  if(action.startsWith('campaign-prerequisite-go:')){
+   if(this.failure||this.hud.portrait||this.session.state.status==='dead'||this.session.state.dialogue||this.session.state.dice.active)return;
+   const selected=action.slice('campaign-prerequisite-go:'.length),split=selected.indexOf(':'),id=selected.slice(0,split),key=selected.slice(split+1);
+   const target=campaignPrerequisiteTargets(this.session,AREAS,id).find(target=>target.id===key);
+   if(!target||target.blocked){this.say(target?autoText('route.locked'):autoText('task.failed'));this.modalKey='';this.renderModal();return;}
+   const guide=navigationGuidance(this.session,AREAS,this.query,target.destination);
+   if(!guide||guide.blocked){this.say(autoText('route.locked'));return;}
+   this.startNavigation(target.destination);return;
+  }
   if(action==='journey'||action.startsWith('journey-')){
    if(this.loading||this.failure||this.session.state.dialogue)return;
    const parts=action.split(':');
    if(action==='journey-current'){this.open(`journey-chapter:${JOURNEY_TASKS.find(t=>t.id===this.trackedTaskId)?.chapter??chapterForArea(this.session.state.area)}`);return;}
    if(action==='journey-stop'){this.automation.stop();this.clearInput(false);this.say('自动寻路已关闭。');this.modalKey='';this.renderModal();return;}
    if(action==='journey-toggle-navigation'){
-    if(this.automation.destination){this.automation.stop();this.clearInput(false);this.say('自动寻路已关闭。');return;}
+    if(this.automation.destination){if(this.automation.destination.bossKey){this.automation.pauseNavigation();this.clearInput(false);this.say('首领寻路已暂停，点击继续可恢复。');}else{this.automation.stop();this.clearInput(false);this.say('自动寻路已关闭。');}return;}
     const paused=this.automation.pausedDestination;if(paused&&!paused.taskId){this.startNavigation(paused);return;}
     const task=JOURNEY_TASKS.find(t=>t.id===paused?.taskId);this.startJourneyNavigation(task&&!this.session.journey.taskDone(task)?task.id:undefined);return;
    }
@@ -570,18 +623,18 @@ export class ChapterGame extends Component {
    if(parts[0]==='journey-track'){this.automation.stop();this.trackedTaskId=undefined;this.session.journey.select(parts[1]);this.open('');this.guideTime=1;this.say(parts[1]==='task'?'正在跟随任务；点击自动寻路即可出发。':parts[1]==='hunt'?'正在跟随狩猎；点击自动寻路前往猎区。':'任务与狩猎并列指引');return;}
    if(parts[0]==='journey-life-claim'){const ok=this.session.claimLifecycleReward(parts[1],parts[2]);this.say(lifecycleText(ok?'life.claimOk':'life.claimFailed'));this.save();this.open(`journey-chapter:${parts[1].startsWith('LC1_')?1:2}`);return;}
    if(parts[0]==='journey-loot-set'){this.session.bossLoot.selectStyle(parts[1]);this.save();this.open(`journey-loot:${parts[2]}`);return;}
-   if(parts[0]==='journey-claim'){const ok=this.session.claimJourneyWeapon(Number(parts[1]),parts[2],parts[3]);this.say(ok?'史诗武器已领取，可在行囊装备。':'需要脱战且奖励尚未领取。');this.open(`journey-chapter:${parts[1]}`);return;}
+   if(parts[0]==='journey-claim'){const ok=this.session.claimJourneyWeapon(Number(parts[1]),parts[2],parts[3]);this.say(ok?'史诗武器已领取，可在背包装备。':'需要脱战、奖励尚未领取，并选择尚未拥有的武器。');this.save();this.open(`journey-chapter:${parts[1]}`);return;}
    if(parts[0]==='journey-map'){this.open('map');this.hud.atlas(this.session,this.visited,parts[1]);return;}
    this.open(action);return;
   }
   if(action==='begin'||action==='close'&&this.menu==='title'){if(this.loading)return;if(this.failure){this.say('角色资源仍在载入，请稍后重试。');void this.rebuild();return;}this.returnToMainMenu=false;this.menu='';this.clearInput();this.hud.clearModal();this.music?.start();this.save();return;}
   if(action.startsWith('interaction-confirm:')){const id=action.slice(20);if(this.menu!=='interaction:'+id)return;this.menu='';this.hud.clearModal();this.automation.resumeAfter('menu');this.arrivalInteraction(id,true);return;}
   if(action==='interact'||action.startsWith('interact:')){if(!this.menu)this.interact(action.startsWith('interact:')?action.slice(9):undefined);return;}
-  if(action==='close'){if(this.session.state.dialogue)return;if(this.returnToMainMenu){this.open('title');return;}discardCombatSkillPreview(this.session);const preserveAutomation=this.menu==='automation',cancelInteraction=this.menu.startsWith('interaction:');this.pagePreparationRevision++;this.preparingPage=false;this.menu='';this.clearInput(false);if(!preserveAutomation)this.automation.resumeAfter('menu');if(cancelInteraction)this.automation.pause('manual');this.modalKey='';this.hud.clearModal();return;}
-  if(action.startsWith('choice:')){this.process(this.session.choose(action.slice(7)));this.save();this.modalKey='';this.renderModal();return;}
+  if(action==='close'){if(this.session.state.dialogue)return;if(this.returnToMainMenu){this.open('title');return;}discardCombatSkillPreview(this.session);const preserveAutomation=this.menu==='automation',completedInteraction=this.menu.startsWith('interaction:')&&this.world.area.objects.some(o=>o.id===this.menu.slice(12)&&this.session.interactionAvailability(o).completed),cancelInteraction=this.menu.startsWith('interaction:')&&!completedInteraction||this.menu.startsWith('campaign-prerequisites:');this.pagePreparationRevision++;this.preparingPage=false;this.menu='';this.clearInput(false);if(!preserveAutomation)this.automation.resumeAfter('menu');if(cancelInteraction)this.automation.pause('manual');this.modalKey='';this.hud.clearModal();return;}
+  if(action.startsWith('choice:')){const dialogue=this.session.state.dialogue?.id;this.process(this.session.choose(action.slice(7)));this.save();if(dialogue?.startsWith('campaign:')&&!this.session.state.dialogue){this.automation.resumeAfter('dialogue');const object=this.world.area.objects.find(o=>o.action==='campaign_event'&&o.eventId===dialogue.slice(9));if(object&&this.session.interactionAvailability(object).completed){this.menu='interaction:'+object.id;this.automation.pause('menu');}else if(action==='choice:cancel:campaign'){this.menu='';this.automation.pause('manual');}}this.modalKey='';this.renderModal();return;}
   if(action==='cancel-new'){this.open(this.returnToMainMenu?'title':'pause');return;}
   if(action==='new'){this.open('confirm-new');return;}
-  if(action==='confirm-new'){const fresh=new GameSession(Date.now()%2147483646,this.query);fresh.enter(getArea('S01-T1'));this.applyPlaytestLevel(fresh);const r=this.temporaryMax?{ok:true,error:undefined,warning:undefined}:this.store.startFresh(fresh);if(!r.ok){this.say(r.error||'新旅程未创建');return;}if(r.warning)this.say(r.warning,8);this.returnToMainMenu=false;this.automation.stop();this.trackedTaskId=undefined;this.hud.clearEquipmentPickups();this.session=fresh;this.applyTemporaryMax();this.menu='';this.music?.start();void this.rebuild();return;}
+  if(action==='confirm-new'){const fresh=new GameSession(Date.now()%2147483646,this.query);fresh.enter(getArea('S01-T1'));this.applyPlaytestLevel(fresh);const r=this.temporaryMax?{ok:true,error:undefined,warning:undefined}:this.store.startFresh(fresh);if(!r.ok){this.say(r.error||'新旅程未创建');return;}if(r.warning)this.say(r.warning,8);this.returnToMainMenu=false;this.automation.stop();this.bossTravel=null;this.trackedTaskId=undefined;this.hud.clearEquipmentPickups();this.session=fresh;this.applyTemporaryMax();this.menu='';this.music?.start();void this.rebuild();return;}
   if(action==='retry'){this.menu='';this.process(this.session.retry());this.modalKey='';return;}
   if(action==='rest'){const ok=this.session.rest();this.say(ok?'已在检查点休整，生命、职业资源、各类药水已补满。':'在安全检查点旁才能休整。');this.save();this.modalKey='';this.renderModal();return;}
   if(action==='next'||action==='previous'){const pages=Math.max(1,Math.ceil(Object.keys(this.session.state.inventory).filter(id=>this.session.state.inventory[id]>0).length/6));this.page=Math.min(pages-1,Math.max(0,this.page+(action==='next'?1:-1)));this.modalKey='';this.renderModal();return;}
@@ -632,6 +685,7 @@ export class ChapterGame extends Component {
   if(menu==='title')this.returnToMainMenu=false;else if(this.menu==='title')this.returnToMainMenu=true;
   if((menu==='inventory'||menu==='equipment')&&this.menu!=='inventory'&&this.menu!=='equipment')beginEquipmentVisit(this.session);
   if(menu.startsWith('allocation:')&&!this.menu.startsWith('allocation:'))beginAllocation(this.session);
+  if(menu&&this.automation.destination?.bossKey)this.automation.pauseNavigation();
   this.hud.collapseAutomation();this.clearInput(true,'menu');if(!menu)this.automation.resumeAfter('menu');
   if(menu==='inventory'||menu==='equipment'||menu==='appearance'||menu==='profession'||menu.startsWith('allocation:'))this.session?.prepareEquipmentChange();
   if(menu)this.sceneInteraction?.update(null,true);this.menu=menu;this.modalKey='';this.save();
@@ -639,15 +693,42 @@ export class ChapterGame extends Component {
  }
  private renderModal(){
   if(!this.hud||this.destroyed)return;
+  if(this.authPromptVisible&&this.platform?.auth.state.status!=='failed'){this.authPromptVisible=false;this.hud.clearModal();this.modalKey='';}
   if(this.updatePromptVisible){const u=this.platform.updates,key='update:'+u.status+u.message;this.loadingScreen?.hide();this.dicePanel?.clear();if(this.modalKey!==key){this.modalKey=key;this.hud.show('游戏更新',u.message,u.ready?[{label:'保存并更新',action:'update:apply'},{label:'稍后',action:'update:later'}]:[]);}return;}
   if(this.startupFailure&&this.platform?.auth.ready){const key='startup:'+this.failure;if(this.modalKey!==key){this.modalKey=key;this.hud.show('暂时无法启程',this.failure+'\n本地进度已保留。',[{label:'重试载入',action:'resources:retry'}]);}return;}
   if(this.platform&&!this.platform.auth.ready){
-   this.loadingScreen?.hide();this.dicePanel?.clear();const state=this.platform.auth.state,key='auth:'+state.status+state.message;
-   if(this.modalKey!==key){this.modalKey=key;this.hud.show(`TapTap 登录 · v${BUILD_INFO.version}`,state.message+(state.status==='failed'?'\n本地进度已保留。':''),state.status==='failed'?[{label:'重试登录',action:'auth:retry'}]:[]);}
+   const state=this.platform.auth.state;
+   if(state.status!=='failed'){
+    // Keep the existing game/menu visible during foreground checks. Access
+    // remains gated until the official host callback confirms the session.
+    if(!this.session&&this.modalKey!=='auth:pending'){this.modalKey='auth:pending';this.loadingScreen?.show(-1,'正在准备旅途');}
+    this.loadingScreen?.update();
+    return;
+   }
+   this.loadingScreen?.hide();this.dicePanel?.clear();this.authPromptVisible=true;const key='auth:'+state.status+state.message;
+   if(this.modalKey!==key){this.modalKey=key;showLoginScreen(this.hud,state);}
    return;
   }
   if(this.preparingPage)return;
-  if(!this.session)return;if(!this.menu&&!this.loading&&!this.failure&&!this.campaignView?.active&&!this.automation.active)this.session.prepareEquipmentDice();if(this.hud.portrait){this.hud.clearModal();this.modalKey='';return;}const s=this.session.state,d=s.dialogue,key=[this.menu,d?.id,d?.text,s.status,this.loading,this.failure,this.page,s.revision].join('|');if(this.modalKey===key)return;this.modalKey=key;this.hud.hairstyles=this.actors instanceof Player3DActors?this.actors.player.playerHairstyles():this.actors instanceof Actors?this.actors.playerHairstyles():[];const check=this.session.diceView();if(check&&!this.loading&&!this.failure){this.clearInput(true,'dice');this.dicePanel.show(check);return;}this.dicePanel?.clear();if(d)this.clearInput(true,'dialogue');if(this.trainingRange&&(this.menu==='training-range'||s.status==='dead')){renderTrainingRange(this.hud,this.trainingRange);return;}if(this.skillDebugAvailable&&this.menu==='skill-effect-debug'&&!d&&s.status!=='dead'){this.skillEffectDebug.render(this.hud,this.session,!!this.trainingRange);return;}renderMenu(this.hud,this.session,this.menu,this.loading,this.failure,this.page,this.merchant,this.visited,this.saved,this.platform.updates.ready,this.platform.auth.state.status==='guest',this.music?.label,this.skillDebugAvailable);}
+  if(!this.session)return;
+  if(!this.menu&&!this.loading&&!this.failure&&!this.campaignView?.active&&!this.automation.active)this.session.prepareEquipmentDice();
+  if(this.hud.portrait){if(this.modalKey!=='portrait'){this.hud.clearModal();this.modalKey='portrait';}return;}
+  const s=this.session.state,d=s.dialogue;
+  // Simulation revision changes every frame. Empty gameplay has no menu data
+  // to refresh; still check pending equipment dice before taking this path.
+  if(!this.menu&&!d&&s.status!=='dead'&&!s.dice.active&&!this.loading&&!this.failure){
+   if(this.modalKey!=='gameplay'){
+    this.modalKey='gameplay';this.dicePanel?.clear();
+    renderMenu(this.hud,this.session,'',false,'',this.page,this.merchant,this.visited,this.saved);
+   }
+   return;
+  }
+  if(this.menu==='bosses'&&!d&&s.status!=='dead'&&!s.dice.active&&!this.loading&&!this.failure){
+   if(this.modalKey!=='bosses'||!this.bossPanel?.valid){this.bossPanel=new BossPanel(this.hud,this.session,this.bosses,this.bossPanel?.selectedKey);this.modalKey='bosses';}
+   return;
+  }
+  const timedInteraction=this.menu.startsWith('interaction:')&&this.world.area.objects.some(o=>o.id===this.menu.slice(12)&&o.action==='growing_rematch');
+  const key=[this.menu,d?.id,d?.text,s.status,this.loading,this.failure,this.page,s.revision,timedInteraction?Math.floor(Date.now()/1000):''].join('|');if(this.modalKey===key)return;this.modalKey=key;this.hud.hairstyles=this.actors instanceof Player3DActors?this.actors.player.playerHairstyles():this.actors instanceof Actors?this.actors.playerHairstyles():[];const check=this.session.diceView();if(check&&!this.loading&&!this.failure){this.clearInput(true,'dice');this.dicePanel.show(check);return;}this.dicePanel?.clear();if(d)this.clearInput(true,'dialogue');if(this.trainingRange&&(this.menu==='training-range'||s.status==='dead')){renderTrainingRange(this.hud,this.trainingRange);return;}if(this.skillDebugAvailable&&this.menu==='skill-effect-debug'&&!d&&s.status!=='dead'){this.skillEffectDebug.render(this.hud,this.session,!!this.trainingRange);return;}renderMenu(this.hud,this.session,this.menu,this.loading,this.failure,this.page,this.merchant,this.visited,this.saved,this.platform.updates.ready,this.platform.auth.state.status==='guest',this.music?.label,this.skillDebugAvailable);}
  private controlForKey(code:number):string|undefined {
   const slots:Record<number,string>={[KeyCode.KEY_Q]:'combat0',[KeyCode.KEY_E]:'combat1',[KeyCode.KEY_R]:'combat2',[KeyCode.KEY_T]:'combat3',[KeyCode.DIGIT_1]:'combat0',[KeyCode.DIGIT_2]:'combat1',[KeyCode.DIGIT_3]:'combat2',[KeyCode.DIGIT_4]:'combat3',[KeyCode.KEY_G]:'ultimate'};
   return slots[code];
@@ -909,7 +990,7 @@ export class ChapterGame extends Component {
   if(!Vec3.strictEquals(position,this.followCameraPosition))this.camera.node.setPosition(this.followCameraPosition);
   const heightDelta=(frame.height-this.camera.orthoHeight)*weight;if(heightDelta!==0)this.camera.orthoHeight+=heightDelta;
  }
- update(dt:number){if(this.background)return;if(this.resetFrameTime){dt=0;this.resetFrameTime=false;}this.impact?.beforeCamera();this.music?.update(dt,!!this.platform?.auth.ready&&!!this.session&&this.menu!=='title'&&!this.updatePromptVisible&&!this.failure,!!this.menu||this.loading||!!this.session?.state.dialogue||!!this.session?.state.dice.active||!!this.campaignView?.active||this.session?.state.status==='dead');if(this.hud?.resize()){this.clearInput(false);this.modalKey='';this.renderModal();}this.hud?.updateEquipmentPickups(Math.min(dt,.1),!!this.session&&!!this.world&&!!this.platform?.auth.ready&&!this.updatePromptVisible&&!this.loading&&!this.failure&&!this.menu&&!this.session.state.dialogue&&!this.session.state.dice.active&&!this.campaignView?.active&&this.session.state.status!=='dead',this.session);if(this.updatePromptVisible){this.clearInput();this.renderModal();return;}if(this.platform&&!this.platform.auth.ready){this.sceneInteraction?.update(null,true);this.campaignView?.suspend();this.clearInput(true,'auth');this.renderModal();return;}this.loadingScreen?.update(dt);if(!this.session||!this.world||!this.hud)return;if(this.updateCampaign(dt)){this.impact?.clear();return;}this.positionCamera(Math.min(dt,.1));this.flatWorld?.update(this.camera,this.session);this.nativePortals?.update(this.camera,this.session);this.world.presentation?.update(this.session);this.toastTime-=dt;if(this.toastTime<=0)this.toast='';this.saveTime+=dt;
+ update(dt:number){if(this.background)return;if(this.resetFrameTime){dt=0;this.resetFrameTime=false;}this.impact?.beforeCamera();this.music?.update(dt,!!this.platform?.auth.ready&&!!this.session&&this.menu!=='title'&&!this.updatePromptVisible&&!this.failure,!!this.menu||this.loading||!!this.session?.state.dialogue||!!this.session?.state.dice.active||!!this.campaignView?.active||this.session?.state.status==='dead');if(this.hud?.resize()){this.clearInput(false);this.modalKey='';this.renderModal();}this.hud?.updateEquipmentPickups(Math.min(dt,.1),!!this.session&&!!this.world&&!!this.platform?.auth.ready&&!this.updatePromptVisible&&!this.loading&&!this.failure&&!this.menu&&!this.session.state.dialogue&&!this.session.state.dice.active&&!this.campaignView?.active&&this.session.state.status!=='dead',this.session);if(this.updatePromptVisible){this.clearInput();this.renderModal();return;}if(this.platform&&!this.platform.auth.ready){this.sceneInteraction?.update(null,true);this.campaignView?.suspend();this.clearInput(true,'auth');this.renderModal();return;}this.loadingScreen?.update(dt);if(!this.session||!this.world||!this.hud)return;if(this.updateCampaign(dt)){this.impact?.clear();return;}this.positionCamera(Math.min(dt,.1));this.flatWorld?.update(this.camera,this.session);this.nativePortals?.update(this.camera,this.session);this.world.presentation?.update(this.session);this.toastTime-=dt;if(this.toastTime<=0)this.toast='';this.autosave.advance(dt);
   const v=this.touches.vector(),sx=(this.keys.has(KeyCode.KEY_D)?1:0)-(this.keys.has(KeyCode.KEY_A)?1:0)+v.x,sz=(this.keys.has(KeyCode.KEY_W)?1:0)-(this.keys.has(KeyCode.KEY_S)?1:0)+v.z,right=this.camera.node.right,up=this.camera.node.up;let x=right.x*sx+up.x*sz,z=right.z*sx+up.z*sz;const length=Math.hypot(x,z),walk=this.keys.has(KeyCode.SHIFT_LEFT)||this.keys.has(KeyCode.SHIFT_RIGHT);let moveAmount=Math.min(1,Math.hypot(sx,sz))*(walk?(!this.flatMode||this.modelPlayer?MODEL_WALK_SPEED/MODEL_RUN_SPEED:.48):1);if(length>0){x=x/length*moveAmount;z=z/length*moveAmount;}
   let paused=this.hud.portrait||this.menu||this.loading||this.failure||this.session.state.dialogue||this.session.state.dice.active;
   this.updateSkillPress(dt,!!paused);
@@ -924,6 +1005,11 @@ export class ChapterGame extends Component {
    let frame:InputFrame={x,z,aim,attack,...this.pulse};
    if(this.automation.active&&length>.05)this.takeControl();
    if(this.automation.active){
+    const destination=this.automation.destination;
+    if(destination?.bossKey&&this.bossTravelArea!==this.session.state.area){
+     this.bossTravelArea=this.session.state.area;const fresh=this.bosses.navigation(this.session,destination.bossKey,this.query);
+     if(fresh){this.automation.destination=fresh;this.bossTravel=fresh;this.guideTime=1;}else this.automation.pauseNavigation(bossText('blocked'));
+    }
     const step=this.automation.update(this.session,this.query,AREAS,Math.min(dt,.1));frame=step.input;if(step.notice)this.say(step.notice,6);
     if(step.pickup)this.process(this.session.pickupLoot(step.pickup));
     if(step.interact)this.arrivalInteraction(step.interact);
@@ -937,7 +1023,7 @@ export class ChapterGame extends Component {
    const s=this.session.state,p=s.player,target=this.sceneInteraction?.approach(this.world.area.objects,p,Math.min(dt,.1),o=>this.session.approachInteractionVisible(o)&&this.session.canApproachInteraction()&&this.world.visible(p,o)&&Math.abs(this.world.height(p)-this.world.height(o))<1.2,this.hud.activeGuidance?.targetId);
    if(target){this.arrivalInteraction(target.id);paused=this.menu||s.dialogue||s.dice.active;x=0;z=0;moveAmount=0;}
   }
-  if(this.session.dirty&&this.saveTime>2)this.save();
+  if(this.autosave.due(this.session.dirty))this.save();
   this.actors?.update(this.session,Math.min(dt,.1),!paused&&moveAmount>.1,!!paused,moveAmount);
   this.groundLootView?.update(this.session,!paused&&this.session.state.status!=='dead');
   this.impact?.update(dt,this.session,!!paused);
@@ -960,6 +1046,10 @@ export class ChapterGame extends Component {
   if(paused)this.effects?.clear(true);
   else this.effects?.update(this.session,target&&info?{target,skillId:info.id,rank:info.rank.rank,angle:Math.atan2(target.x-this.session.state.player.x,target.z-this.session.state.player.z),geometry:info.rank.geometry,valid:distance(this.session.state.player,target)<=info.rank.castRangeMetres+.001&&this.world.visible(this.session.state.player,target)&&Math.abs(this.world.height(this.session.state.player)-this.world.height(target))<1.2}:undefined,range);
   const context=this.interaction().prompt??null;this.sceneInteraction?.update(context,!!paused||s.status==='dead'||!!this.automation.destination||this.heldAttack||!!this.aiming||!!s.action||s.enemies.some(e=>e.hp>0&&distance(e,p)<3&&this.world.visible(p,e)));
+  const bossVisible=!paused&&!this.trainingRange&&!this.hud.automationExpanded&&!this.campaignView?.active&&s.status!=='dead';
+  const bossNotice=this.trainingRange?null:this.bosses.update(this.session,Math.max(0,dt),!!bossVisible);
+  this.hud.setBossAwareness(bossNotice,this.trainingRange?0:this.bosses.count);
+  this.bossPanelClock+=dt;if(this.bossPanelClock>=.5){this.bossPanelClock=0;if(this.menu==='bosses'&&this.bossPanel?.valid)this.bossPanel.update();}
   this.encounterTime+=dt;this.compassTime+=dt;if(this.compassTime>=.5){this.compassTime=0;const st=this.session.state,home=st.equipment.necklace==='J08'&&!st.enemies.some(e=>e.hp>0&&distance(e,st.player)<7)?this.compass.find(st.area,st.player,st.flags,st.progression.level):null;if(home){const dx=home.target.x-st.player.x,dz=home.target.z-st.player.z,r=this.camera.node.right,u=this.camera.node.up,angle=Math.atan2(dx*r.x+dz*r.z,dx*u.x+dz*u.z),arrows=['↑','↗','→','↘','↓','↙','←','↖'];this.compassText='归乡信物 '+arrows[(Math.round(angle/(Math.PI/4))+8)%8]+' '+getArea(home.area).name;}else this.compassText='';}this.hud.trainingRange=this.trainingRange;this.hud.update(this.session,this.camera,this.loading?'正在准备场景与人物…':this.toast||this.encounterDirection(),this.saved,this.compassText,this.toast?this.toastRole:'text.normal');this.taskPresence?.update(this.session,this.hud.activeGuidance,!!paused||this.hud.automationExpanded,this.sceneInteraction?.visibleTargetId);this.portalHud?.update(this.session,!!this.menu||this.loading||!!this.failure||!!this.session.state.dialogue||!!this.session.state.dice.active||this.hud.portrait,this.sceneInteraction?.visibleTargetId??this.taskPresence?.captionTargetId);this.renderModal();if(this.menu.startsWith('journey'))updateJourneyCooldowns(this.hud,this.session);this.dicePanel?.update(Math.min(dt,.1));
  }
  onDestroy(){this.viewportCleanup?.();if(this.previousPhysicsAutoSimulation!==undefined){PhysicsSystem.instance.autoSimulation=this.previousPhysicsAutoSimulation;this.previousPhysicsAutoSimulation=undefined;}this.memoryCleanup();for(const type of [Input.EventType.TOUCH_START,Input.EventType.TOUCH_MOVE,Input.EventType.TOUCH_END,Input.EventType.TOUCH_CANCEL] as const)input.off(type,this.movementTouch,this);this.destroyed=true;this.music?.dispose();this.platform?.auth.dispose();this.platform?.updates.dispose();input.off(Input.EventType.KEY_DOWN,this.keyDown,this);input.off(Input.EventType.KEY_UP,this.keyUp,this);input.off(Input.EventType.MOUSE_MOVE,this.mouseMove,this);input.off(Input.EventType.MOUSE_DOWN,this.mouseDown,this);input.off(Input.EventType.MOUSE_UP,this.mouseUp,this);input.off(Input.EventType.MOUSE_WHEEL,this.mouseWheel,this);if(this.camera)Tween.stopAllByTarget(this.camera);this.cleanup?.();this.save();this.dicePanel?.clear();this.loadingScreen?.destroy();this.impact?.destroy();this.sceneInteraction?.destroy();this.groundLootView?.destroy();this.taskPresence?.destroy();this.portalHud?.destroy();this.enemyFeedback?.destroy();this.campaignView?.destroy();this.hud?.destroy();this.actors?.destroy();this.effects?.destroy();this.flatWorld?.destroy();this.nativePortals?.destroy();this.flatPortrait?.destroy();this.flatHead?.destroy();this.world?.destroy();this.mapResources.destroy();this.preparationResources?.destroy();UiSkin.dispose();EquipmentArt.dispose();SceneBuilder.releaseAssets();Effects.dispose();if(DEV)delete(globalThis as any).__chapter;}

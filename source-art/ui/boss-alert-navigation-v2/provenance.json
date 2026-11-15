@@ -1,0 +1,179 @@
+{
+  "date": "2026-11-15",
+  "method": "Pillow deterministic crop, nine-slice composition and source-pixel reuse",
+  "designReferenceVersions": [
+    "quest-tracker-expand-v5 / approved v8",
+    "double-gold-frame-v6",
+    "settings-alignment-v11",
+    "rpg-alignment-v5",
+    "start-menu-v8"
+  ],
+  "scene": "source-art/ui/quest-tracker-expand-v5/collapsed-game-v8.png",
+  "sceneTransform": "Full frame resized once to 2532x1170; no crop, zoom, or relocated player/HUD",
+  "removedScenePixels": "Prior central debug/encounter labels and the static name line; native preview text supplies the displayed player level",
+  "frameSource": "src/cocos/assets/resources/ui/quiet-bronze/double-gold-frame-v6.png",
+  "materialSource": "src/cocos/assets/resources/ui/quiet-bronze/double-gold-inset-v6.png",
+  "nineSlice": {
+    "sourceInset": 48,
+    "physicalScale": 1.5,
+    "renderDensity": 3
+  },
+  "revision": "fixed-beast-entry-single-housing",
+  "layout": {
+    "panelWidth": 306,
+    "panelHeightWithTwoRows": 280,
+    "panelHeightWithOneRow": 220,
+    "emptyPanelHeight": 224,
+    "noticeSize": [
+      310,
+      52
+    ],
+    "noticeTop": 54,
+    "automaticVisualBottom": 46,
+    "visibleNoticeGap": 8,
+    "rowHeight": 52,
+    "gap": 8,
+    "navigationDefault": "collapsed"
+  },
+  "eligibility": {
+    "levelDelta": 5,
+    "inclusive": true,
+    "chapterTabs": false,
+    "emptyBehavior": "Show an empty state; never widen the range automatically",
+    "requirePriorDefeat": true
+  },
+  "entry": "Explicit 首领 button on the existing lower-right minimap rim mount; map body no longer opens the list",
+  "entryIdentity": {
+    "asset": "assets/boss-entry-beast-v1.png",
+    "source": "art/boss-entry-beast-v1-generated.png",
+    "provenance": "art/boss-entry-beast-v1.provenance.json",
+    "fixedAcrossTargets": true,
+    "intrinsicRing": false,
+    "displayTreatment": {
+      "brightness": 0.93,
+      "saturation": 0.72,
+      "sepia": 0.18
+    },
+    "badge": {
+      "right": 9,
+      "bottom": 9,
+      "diameter": 11
+    },
+    "iconBox": 20,
+    "inventoryLabel": "背包"
+  },
+  "minimapTools": {
+    "visibleDiameter": 28,
+    "hitDiameter": 48,
+    "minimumCircularHitGap": 8,
+    "commonHousing": "Only the central plain material of hud-skill-face-v19 + one outer unified-gold-ring-v16; no nested inner ornament",
+    "actions": [
+      "inventory",
+      "checks",
+      "settings",
+      "boss"
+    ]
+  },
+  "noticeLifetimeMs": 10000,
+  "portraits": {
+    "method": "Individual head/face framing from existing runtime identity sprites, no regenerated characters",
+    "cropRects": {
+      "warden": [
+        92,
+        17,
+        164,
+        89
+      ],
+      "huntmaster": [
+        100,
+        17,
+        172,
+        89
+      ],
+      "golem": [
+        82,
+        48,
+        174,
+        140
+      ],
+      "oath": [
+        44,
+        22,
+        204,
+        182
+      ],
+      "overseer": [
+        95,
+        22,
+        167,
+        94
+      ],
+      "beast": [
+        59,
+        105,
+        163,
+        209
+      ],
+      "captain": [
+        156,
+        17,
+        228,
+        89
+      ]
+    }
+  },
+  "restored": [
+    "title and stag crest",
+    "enemy identity portraits",
+    "selected row",
+    "follow reminder and automatic travel actions"
+  ],
+  "generatedArt": true,
+  "implementedInGame": true,
+  "userApproved": true,
+  "platformValidated": false,
+  "review": {
+    "date": "2026-11-15",
+    "visual": "Reviewed small brightness reduction from 1.02 to 0.93; avatar size, frame and badge remain unchanged",
+    "inAppConfirmedFilter": "brightness(0.93) saturate(0.72) sepia(0.18)",
+    "proof": "fixed-entry-tone-v3.png",
+    "userApproved": true,
+    "approval": "2026-11-15 用户：可以就按照这版来做吧"
+  },
+  "runtime": {
+    "module": "src/cocos/assets/scripts/features/combat",
+    "assetExport": "runtime-export.json",
+    "validation": "src/cocos/release/boss-awareness-validation.json",
+    "platformValidated": false
+  },
+  "sorting": {
+    "priority": [
+      "boss before elite",
+      "actual refresh time descending",
+      "level descending"
+    ],
+    "tieBreak": "stable identity",
+    "cooldownCompletion": "existing named ready deadline",
+    "legacySaves": "unknown historical times stay unknown; level breaks ties",
+    "persistentSpawnTime": true,
+    "preserveSelectionAndScroll": true
+  },
+  "defeatedHistory": {
+    "required": true,
+    "proof": [
+      "instance kill receipt",
+      "named boss defeat flag",
+      "positive wild hunt-cycle receipt"
+    ],
+    "neverCountsAsDefeat": [
+      "visited",
+      "seen",
+      "damaged",
+      "dead state alone",
+      "respawn count alone"
+    ],
+    "persistsAcrossRespawnAndReload": true,
+    "levelDelta": 5,
+    "sorting": "boss, refresh time descending, level descending"
+  }
+}

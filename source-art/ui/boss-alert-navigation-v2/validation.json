@@ -1,0 +1,222 @@
+{
+  "date": "2026-11-15",
+  "scope": "UI design prototype only",
+  "errors": [],
+  "checks": [
+    "only previously defeated targets appear; never reveal first encounters",
+    "boss before elite, newer refresh before older, level descending",
+    "inclusive level +/-5 boundaries and cross-chapter selection",
+    "empty state does not widen filter",
+    "HUD level matches preview",
+    "chapter tabs removed",
+    "explicit minimap rim button opens list",
+    "selection does not start navigation",
+    "follow and travel restored",
+    "navigation start stop resume",
+    "menu closes into paused navigation",
+    "notice restored directly below automatic",
+    "notice starts its own 10s lifetime, remains at 9s and closes without clicking",
+    "ordinary messages refill after automatic dismissal",
+    "four shared 28px minimap housings, 48px circular hit regions and minimum 8px separation",
+    "per-character face portraits use existing identity sprites"
+  ],
+  "filtered": [
+    {
+      "level": 4,
+      "range": [
+        1,
+        9
+      ],
+      "ids": [
+        "overseer"
+      ]
+    },
+    {
+      "level": 10,
+      "range": [
+        5,
+        15
+      ],
+      "ids": [
+        "overseer"
+      ]
+    },
+    {
+      "level": 13,
+      "range": [
+        8,
+        18
+      ],
+      "ids": [
+        "warden",
+        "huntmaster",
+        "oath",
+        "overseer"
+      ]
+    },
+    {
+      "level": 18,
+      "range": [
+        13,
+        23
+      ],
+      "ids": [
+        "warden",
+        "huntmaster",
+        "oath"
+      ]
+    },
+    {
+      "level": 25,
+      "range": [
+        20,
+        30
+      ],
+      "ids": []
+    }
+  ],
+  "stack": {
+    "notice": {
+      "x": 303,
+      "y": 256.53125,
+      "w": 310,
+      "h": 52
+    },
+    "other": {
+      "x": 415.015625,
+      "y": 316.53125,
+      "w": 85.96875,
+      "h": 18
+    },
+    "auto": {
+      "x": 394,
+      "y": 212.53125,
+      "w": 128,
+      "h": 48
+    }
+  },
+  "noticeTiming": {
+    "duration": 10000,
+    "remaining": 10000
+  },
+  "entry": {
+    "width": 48,
+    "height": 48
+  },
+  "tools": [
+    {
+      "id": "inventory-open",
+      "x": 661,
+      "y": 53,
+      "width": 48,
+      "height": 48,
+      "visible": 28,
+      "hitShape": "circle(24px at 50% 50%)"
+    },
+    {
+      "id": "checks-open",
+      "x": 661,
+      "y": 109,
+      "width": 48,
+      "height": 48,
+      "visible": 28,
+      "hitShape": "circle(24px at 50% 50%)"
+    },
+    {
+      "id": "settings-open",
+      "x": 703,
+      "y": 147,
+      "width": 48,
+      "height": 48,
+      "visible": 28,
+      "hitShape": "circle(24px at 50% 50%)"
+    },
+    {
+      "id": "boss-open",
+      "x": 769,
+      "y": 126,
+      "width": 48,
+      "height": 48,
+      "visible": 28,
+      "hitShape": "circle(24px at 50% 50%)"
+    }
+  ],
+  "toolGaps": [
+    {
+      "a": "inventory-open",
+      "b": "checks-open",
+      "gap": 8
+    },
+    {
+      "a": "inventory-open",
+      "b": "settings-open",
+      "gap": 54.956301409869994
+    },
+    {
+      "a": "inventory-open",
+      "b": "boss-open",
+      "gap": 82.3572015655445
+    },
+    {
+      "a": "checks-open",
+      "b": "settings-open",
+      "gap": 8.639209034025178
+    },
+    {
+      "a": "checks-open",
+      "b": "boss-open",
+      "gap": 61.32977636490436
+    },
+    {
+      "a": "settings-open",
+      "b": "boss-open",
+      "gap": 21.260378283691168
+    }
+  ],
+  "dimensions": [
+    {
+      "name": "close",
+      "x": 754,
+      "y": 64,
+      "w": 48,
+      "h": 48
+    },
+    {
+      "name": "守桥铠卫断岳前堡 · Lv18可再战章节首领",
+      "x": 529,
+      "y": 138,
+      "w": 264,
+      "h": 52
+    },
+    {
+      "name": "裂风督猎鹰背岩林 · Lv1704:45后可再战",
+      "x": 529,
+      "y": 198,
+      "w": 264,
+      "h": 52
+    },
+    {
+      "name": "三刃守誓阵三誓军械廊 · Lv1602:09后可再战",
+      "x": 529,
+      "y": 258,
+      "w": 264,
+      "h": 52
+    },
+    {
+      "name": "follow",
+      "x": 531,
+      "y": 280,
+      "w": 127,
+      "h": 48
+    },
+    {
+      "name": "go",
+      "x": 666,
+      "y": 280,
+      "w": 127,
+      "h": 48
+    }
+  ],
+  "userApproved": true,
+  "platformValidated": false
+}

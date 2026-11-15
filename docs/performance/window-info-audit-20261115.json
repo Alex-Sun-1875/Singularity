@@ -1,0 +1,211 @@
+{
+  "recordedAt": "2026-11-14T23:55:31.665Z",
+  "version": "0.3.44",
+  "status": "audit-complete-no-additional-runtime-change-required",
+  "scope": "统一排查窗口尺寸、屏幕像素比、安全区及相关系统信息读取；覆盖业务、Cocos 3.8.8、FairyGUI、平台适配层和最终 ZIP。",
+  "conclusion": "当前游戏已识别的高频窗口信息读取均经过现有缓存；新发现的六处安全区调用、两处 FairyGUI 尺寸读取也已覆盖。未发现需要另行修改的高频原生窗口查询。",
+  "coverage": {
+    "businessFiles": 214,
+    "viewportConsumerFiles": 16,
+    "packagedJavaScriptFiles": 90,
+    "engineRoot": "/Applications/Cocos/Creator/3.8.8/CocosCreator.app/Contents/Resources/resources/3d/engine",
+    "productionCodeChangedInThisAudit": false,
+    "rebuilt": false
+  },
+  "findings": [
+    {
+      "category": "业务窗口尺寸与 DPR",
+      "sites": [
+        "src/cocos/assets/scripts/app/ChapterGame.ts",
+        "src/cocos/assets/scripts/app/Hud.ts",
+        "src/cocos/assets/scripts/features/cinematics/runtime/CinematicCues.ts",
+        "src/cocos/assets/scripts/features/cinematics/runtime/CinematicSubtitles.ts",
+        "src/cocos/assets/scripts/features/combat/runtime/BossHud.ts",
+        "src/cocos/assets/scripts/features/combat/runtime/BossPresence.ts",
+        "src/cocos/assets/scripts/features/combat/runtime/CombatImpactFeedback.ts",
+        "src/cocos/assets/scripts/features/combat/runtime/EnemyCombatFeedback.ts",
+        "src/cocos/assets/scripts/features/equipment/runtime/CharacterPanel.ts",
+        "src/cocos/assets/scripts/features/equipment/runtime/EquipmentGallery.ts",
+        "src/cocos/assets/scripts/features/journey/runtime/TaskPresence.ts",
+        "src/cocos/assets/scripts/features/navigation/runtime/MapPanel.ts",
+        "src/cocos/assets/scripts/features/portals/runtime/PortalHud.ts",
+        "src/cocos/assets/scripts/features/world/runtime/FlatWorldLayers.ts",
+        "src/cocos/assets/scripts/features/world/runtime/SceneInteraction.ts",
+        "src/cocos/assets/scripts/shared/ui/RpgPanel.ts"
+      ],
+      "route": "viewportMetrics -> cc.screen -> screenAdapter -> cached getWindowInfo",
+      "result": "16 个消费模块使用 ViewportMetrics；仅缓存模块自身直接访问 screen.windowSize/devicePixelRatio，业务无直接平台窗口/系统信息调用。"
+    },
+    {
+      "category": "安全区",
+      "sites": [
+        {
+          "file": "src/cocos/assets/scripts/app/Hud.ts",
+          "line": 118,
+          "expression": "sys.getSafeAreaRect",
+          "call": true
+        },
+        {
+          "file": "src/cocos/assets/scripts/app/Hud.ts",
+          "line": 245,
+          "expression": "sys.getSafeAreaRect",
+          "call": true
+        },
+        {
+          "file": "src/cocos/assets/scripts/features/cinematics/runtime/CinematicSubtitles.ts",
+          "line": 16,
+          "expression": "sys.getSafeAreaRect",
+          "call": true
+        },
+        {
+          "file": "src/cocos/assets/scripts/features/journey/runtime/JourneyStartScreen.ts",
+          "line": 23,
+          "expression": "sys.getSafeAreaRect",
+          "call": true
+        },
+        {
+          "file": "src/cocos/assets/scripts/shared/ui/MenuPanel.ts",
+          "line": 58,
+          "expression": "sys.getSafeAreaRect",
+          "call": true
+        },
+        {
+          "file": "src/cocos/assets/scripts/shared/ui/RpgPanel.ts",
+          "line": 22,
+          "expression": "sys.getSafeAreaRect",
+          "call": true
+        }
+      ],
+      "route": "sys.getSafeAreaRect(false) -> safeAreaEdge/getSafeArea/windowSize/devicePixelRatio -> cached getWindowInfo",
+      "frequency": "HUD 构建、技能说明和面板/字幕/启程界面构造时；无业务逐帧安全区调用。",
+      "result": "6 处均被入口缓存覆盖。调用 false 不触发引擎对称安全区分支中的方向查询。"
+    },
+    {
+      "category": "Cocos 输入与显示",
+      "sites": [
+        "pal/input/minigame/touch-input.ts:55",
+        "pal/input/minigame/mouse-input.ts:47",
+        "pal/screen-adapter/minigame/screen-adapter.ts:71",
+        "cocos/2d/framework/canvas.ts:228",
+        "cocos/ui/view.ts",
+        "cocos/gfx/device-manager.ts:201"
+      ],
+      "route": "screen/screenAdapter -> Cocos PAL copied getWindowInfo -> cached platform getter",
+      "result": "缓存安装早于 PAL cloneObject，因此已绑定/复制的 getter 仍被覆盖。触控三个查询、画布、渲染尺寸和视图换算共享缓存。"
+    },
+    {
+      "category": "FairyGUI",
+      "sites": [
+        "src/chunks/bundle.b8e6b.js:3922",
+        "src/chunks/bundle.b8e6b.js:5489"
+      ],
+      "frequency": "滚动惯性参数计算、onWinResize",
+      "route": "cc.screen.windowSize -> cached getWindowInfo",
+      "result": "两处额外读取均已覆盖，无需修改第三方库。"
+    },
+    {
+      "category": "可视范围",
+      "sites": [
+        "cocos/ui/view.ts:345",
+        "assets/scripts/app/Hud.ts:496"
+      ],
+      "route": "view.getVisibleSize -> _visibleRect",
+      "result": "读取引擎内存并返回 Size；不调用原生窗口接口。"
+    },
+    {
+      "category": "入口、Web 兼容和视频适配",
+      "sites": [
+        "game.js:25",
+        "game.js:99",
+        "check-version.js:5",
+        "web-adapter.69d48.js:2592",
+        "web-adapter.69d48.js:2970",
+        "web-adapter.69d48.js:3043",
+        "web-adapter.69d48.js:3460",
+        "engine-adapter.1eea2.js:573"
+      ],
+      "route": "wx.getSystemInfoSync",
+      "frequency": "模块初始化、启动画布/平台判断、可选视频初始化",
+      "result": "这些属于一次性初始化；Web 兼容层 innerWidth/innerHeight/clientWidth/clientHeight/DPR 后续读取模块内存值，没有新增逐帧原生查询。"
+    },
+    {
+      "category": "Cocos 系统信息缓存与方向",
+      "sites": [
+        "pal/system-info/minigame/system-info.ts:97",
+        "pal/system-info/minigame/system-info.ts:127",
+        "pal/minigame/wechat.ts:143",
+        "cocos/render-scene/core/render-window.ts:256"
+      ],
+      "result": "Cocos 自带 getSystemInfoSync 缓存，启动和 resize 刷新；旧 SDK 兼容分支每 500ms 探测，尺寸连续稳定 10 次即停止。isLandscape 会直接查询 wx 系统信息，用于交换链 resize、对称安全区及加速度计。当前业务安全区均传 false，未启用加速度计，正常更新无此高频路径。没有全局缓存权限/网络/设备动态状态。"
+    }
+  ],
+  "verification": {
+    "package": {
+      "archive": "src/cocos/artifacts/taptap-heat-20261115/SwordAndFire_0.3.44_TapTap_test_20261114T234916Z/SwordAndFire_0.3.44_TapTap_test_20261114T234916Z.zip",
+      "javascriptFilesCompared": 90,
+      "allJavaScriptMatchesAuditedDirectory": true,
+      "sha256": "27ca856f9c8ce85b7dc7d6e73fcd649aa2cb02b100a305cdd556ff86b763fc13"
+    },
+    "engineRoutes": {
+      "scope": "Local Cocos source + converted package cache; mocked platform, not a phone measurement",
+      "baseline": {
+        "counts": {
+          "touch1000EventsTwoFingers": 3000,
+          "sixSafeAreaLayouts": 36,
+          "canvasSize": 2,
+          "renderResolution": 2,
+          "fairyguiTwoSizeReads": 4,
+          "resizeEventAndNextTouch": 7,
+          "foregroundAndNextTouch": 3
+        },
+        "stableWindowReads": 3044,
+        "nativeSystemReads": 0,
+        "actualCocosPALExecuted": true,
+        "twoFingerCoordinatesCorrect": true,
+        "allTouchPhasesDelivered": true,
+        "safeAreaCorrect": true,
+        "resizeDimensionsCorrect": true,
+        "foregroundDPRCorrect": true
+      },
+      "cached": {
+        "counts": {
+          "touch1000EventsTwoFingers": 1,
+          "sixSafeAreaLayouts": 0,
+          "canvasSize": 0,
+          "renderResolution": 0,
+          "fairyguiTwoSizeReads": 0,
+          "resizeEventAndNextTouch": 1,
+          "foregroundAndNextTouch": 1
+        },
+        "stableWindowReads": 1,
+        "nativeSystemReads": 0,
+        "actualCocosPALExecuted": true,
+        "twoFingerCoordinatesCorrect": true,
+        "allTouchPhasesDelivered": true,
+        "safeAreaCorrect": true,
+        "resizeDimensionsCorrect": true,
+        "foregroundDPRCorrect": true
+      }
+    },
+    "details": "引擎路径复核使用安装的原始 Cocos PAL 源码和 ZIP 对应的已转换缓存模块，平台/事件/数学对象以本地替身提供。实际执行触控与安全区算法；FairyGUI/画布仅复核它们调用的同一 screenAdapter getter，没有运行完整 UI 或原生容器。",
+    "existingCacheLifecycleCheck": "上一轮 verify-window-cache.cjs 已验证重复安装、拷贝隔离、无效样本重试、清理、只读/缺接口回退。",
+    "rawArtifacts": [
+      "src/cocos/test-results/performance/iphone-heat-diagnosis-20261115/business-window-audit.json",
+      "src/cocos/test-results/performance/iphone-heat-diagnosis-20261115/window-callsite-audit.json",
+      "src/cocos/test-results/performance/iphone-heat-diagnosis-20261115/audit-engine-window-paths.cjs",
+      "src/cocos/test-results/performance/iphone-heat-diagnosis-20261115/engine-window-paths-check.json",
+      "src/cocos/test-results/performance/iphone-heat-diagnosis-20261115/window-audit-package-check.json"
+    ]
+  },
+  "limits": [
+    "本轮为源码、包体与本地调用链检查，没有新真机采样；手机此前采样版本为 0.3.43。",
+    "1 次原生查询是本地固定窗口模拟结果，不能换算为整机 CPU、温度或耗电改善。",
+    "0.3.44 的真实平台触控、旋转/窗口变化、前后台恢复及长时间降温验收仍待上机。"
+  ],
+  "references": [
+    "docs/performance/iphone-heat-fix-20261115.json",
+    "https://developer.taptap.cn/minigameapidoc/dev/api/base/system/tap.getWindowInfo/",
+    "https://developer.taptap.cn/minigameapidoc/dev/api/ui/window/tap.onWindowResize/",
+    "https://developer.taptap.cn/minigameapidoc/dev/api/base/app/life-cycle/tap.onShow/"
+  ]
+}

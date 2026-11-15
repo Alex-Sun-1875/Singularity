@@ -18,6 +18,8 @@ export interface GoldPanelMetrics {
 }
 export interface GoldPanelShellOptions extends GoldPanelMeasure {
  title:string;height:number;centeredTitle?:boolean;dismissAction?:string;tabs?:readonly GoldPanelTab[];fill?:Color;
+ /** Optional compact header rule, measured from the top of the content panel. */
+ titleRuleY?:number;
 }
 
 /** Shared chrome only. Page owners retain body layout, data, scrolling and routing. */
@@ -59,7 +61,7 @@ export class GoldPanelShell extends Component {
    UiSkin.asset(back,BACK.skin,BACK.glyphLogical*o.unit,BACK.glyphLogical*o.unit,false);
   }
   if(r){this.referenceDivider(this.node,'title',o.height/2-R.rules.title.y*r);this.referenceDivider(this.node,'tabs',o.height/2-R.rules.tabs.y*r);}
-  else this.divider(this.node,'title',o.height/2-m.bodyTop+m.gap/2,Math.min(o.width-2*m.padding,o.width*RULES.title.width/R.width));
+  else this.divider(this.node,'title',o.height/2-(o.titleRuleY??m.bodyTop-m.gap/2),Math.min(o.width-2*m.padding,o.width*RULES.title.width/R.width));
   if(o.tabs?.length){const tabs=o.tabs,w=(o.width-2*m.padding-(tabs.length-1)*m.gap)/tabs.length;
    tabs.forEach((tab,i)=>{
     const x=(i-(tabs.length-1)/2)*(w+m.gap),n=this.action(this.node,tab.label,tab.action,x,o.height/2-m.tabsY,w,o.hit,r?R.tabsSize*r:o.mobile?27:18,!!tab.disabled),label=n.getComponentInChildren(Label)!,visualX=r?-o.width/2+(R.tabsFirstX+i*R.tabsStep)*r:x;

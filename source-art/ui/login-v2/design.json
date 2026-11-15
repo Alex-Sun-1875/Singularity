@@ -1,0 +1,94 @@
+{
+  "createdOn": "2026-11-15",
+  "purpose": "普通登录 UI 文案修订设计稿；后台登录渠道不展示给玩家；尚未接入游戏",
+  "userDirection": "不要展示taptap登陆啊，就普通的登陆吧，只是后台用的taptap",
+  "supersedes": "../taptap-login-v1/login-retry-proposal-v1.png",
+  "viewport": {
+    "logical": [
+      844,
+      390
+    ],
+    "actualImage": [
+      1844,
+      853
+    ],
+    "deviceSafeAreas": "后续实现按实际安全区适配"
+  },
+  "changes": {
+    "panelHeading": {
+      "from": "TapTap 登录",
+      "to": "登录"
+    },
+    "status": {
+      "from": "暂时无法连接 TapTap",
+      "to": "暂时无法连接"
+    }
+  },
+  "visibleText": [
+    "剑与火",
+    "破晓之战",
+    "登录",
+    "暂时无法连接",
+    "请检查网络后重试",
+    "重试登录",
+    "本地进度已保留"
+  ],
+  "namingRule": "所有游戏自有的登录标题、状态、错误提示和按钮使用普通登录文案，不展示 TapTap 或后台接口等实现细节。",
+  "states": {
+    "shown": "登录失败后手动重试",
+    "normalStart": "沿用旅途加载画面",
+    "foregroundValid": "静默校验并保留当前游戏和菜单"
+  },
+  "generation": {
+    "tool": "built-in cloud OpenAI image_gen",
+    "operation": "narrow text edit of the prior design",
+    "status": "succeeded",
+    "generatedFile": "/Users/sunlh/.codex/generated_images/01a1dc80-396d-7451-98c7-18f5456fa65d/exec-a67f1c87-f931-409a-8e95-b2942c63fed1.png",
+    "output": "login-retry-proposal-v2.png",
+    "bytes": 2783073,
+    "sha256": "af5afdd35966ef85e055accdfb9fed4774d845f2ee30da46e036836f3412aa3b",
+    "prompt": "prompt.txt",
+    "modelVersionAndSeed": "not exposed by tool"
+  },
+  "reference": {
+    "path": "../taptap-login-v1/login-retry-proposal-v1.png",
+    "sha256": "8952ff8105a8c2057a6ac89c92e4c0618b48b243685bdeaa8027495394b1e3a6"
+  },
+  "artReview": {
+    "generationSuccess": true,
+    "assistantReview": "passed: no provider name or logo is visible; both replacements are correct and centered; remaining five strings retained; composition, colors, panel and button visually consistent",
+    "pixelIdenticalOutsideText": "not asserted for generative edits",
+    "userApproved": true,
+    "approvalDate": "2026-11-15",
+    "approvalEvidence": "用户在下一条消息回复“可以”，随后提出人物经验 HUD 设计需求。"
+  },
+  "integration": {
+    "status": "implemented in Cocos; Web preview verified",
+    "runtimeChanged": true,
+    "implementedOn": "2026-11-15",
+    "runtimeSource": "src/cocos/assets/scripts/features/login/runtime/LoginScreen.ts",
+    "reusedAssets": [
+      "ui/loading/stonebridge-valley",
+      "ui/quiet-bronze/double-gold-frame-v6",
+      "ui/quiet-bronze/double-gold-inset-v6",
+      "ui/quiet-bronze/start-menu-title-v8",
+      "ui/quiet-bronze/start-menu-subtitle-v8",
+      "ui/quiet-bronze/start-menu-rule-v8",
+      "ui/quiet-bronze/start-menu-primary-v8",
+      "ui/quiet-bronze/rpg-serif-v2"
+    ],
+    "verification": "src/cocos/release/login-ui-v2-validation.json",
+    "realDeviceAccepted": false
+  },
+  "packaging": {
+    "version": "0.3.46",
+    "mode": "test",
+    "loginMode": "platform",
+    "package": "src/out/0.3.46/SwordAndFire_0.3.46.zip",
+    "sha256": "254ee839c95e3c71a67577ee4fc21ea842d1a985d79bd7b44828711fb9ce3fc7",
+    "verifiedInZip": true,
+    "uploaded": false,
+    "realDeviceAccepted": false,
+    "validation": "src/cocos/release/taptap-login-xp-0.3.46-validation.json"
+  }
+}

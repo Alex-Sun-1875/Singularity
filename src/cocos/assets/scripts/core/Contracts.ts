@@ -21,6 +21,9 @@ export interface WorldQuery {
   visible(from: Point, to: Point): boolean;
   height(point: Point): number;
   path?(from: Point, to: Point): Point[];
+  /** Repair an actor embedded in scenery when entering/restoring a scene.
+   * Return the original point when clear, or undefined if no safe repair exists. */
+  recoverPosition?(point: Point, radius: number): Point | undefined;
   /** Optional presentation check for placing visible reinforcement squads.
    * Collision, line of sight and damage continue to use their world queries. */
   inView?(point: Point): boolean;

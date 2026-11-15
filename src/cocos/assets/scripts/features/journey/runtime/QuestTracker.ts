@@ -38,10 +38,12 @@ export class QuestTracker {
    hud.labels.set(key,label);return label;
   };
   this.lines={area:line('area'),objective:line('objective'),'quest-route':line('quest-route'),'quest-distance':line('quest-distance')};
+  // Digits, m/km and the blocked caption form a small, fixed-size alphabet.
+  this.lines['quest-distance'].cacheMode=Label.CacheMode.CHAR;
   this.divider=hud.node('QuestActionDivider',this.root,0,0,1,24*layout.scale).addComponent(CompactGraphics);
   this.actionLabel=hud.text(this.navigationButton,'出发',0,0,1,12*layout.scale,C.ink,22*layout.scale);
   applyRpgFont(this.actionLabel);this.actionLabel.horizontalAlign=Label.HorizontalAlign.CENTER;
-  this.actionLabel.enableWrapText=false;this.actionLabel.overflow=Label.Overflow.CLAMP;
+  this.actionLabel.enableWrapText=false;this.actionLabel.overflow=Label.Overflow.CLAMP;this.actionLabel.cacheMode=Label.CacheMode.CHAR;
   this.positionContent();this.setFeedback('state.idle');
  }
 

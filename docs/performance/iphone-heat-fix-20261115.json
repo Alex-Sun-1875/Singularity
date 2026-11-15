@@ -1,0 +1,223 @@
+{
+  "recordedAt": "2026-11-15T07:50:53.225193+08:00",
+  "status": "source-fixed-package-built-phone-thermal-acceptance-pending",
+  "sourceVersion": "0.3.44",
+  "scope": "iPhone 发热与掉帧定位后，按用户要求先减少持续负载；未降低帧率、分辨率或画质。",
+  "device": {
+    "productType": "iPhone15,2",
+    "model": "iPhone 14 Pro",
+    "iOS": "26.6.2",
+    "runtimeVersionMeasured": "0.3.43",
+    "canvas": [
+      2556,
+      1179
+    ],
+    "frameRateSetting": 60,
+    "userObservation": "已经明显发热，但这段还算流畅",
+    "chargingBrightnessLowPowerState": "not recorded"
+  },
+  "measurement": {
+    "baseline-retry": {
+      "durationMs": 20001,
+      "frames": 1188,
+      "fps": 59.397030148492576,
+      "frameMs": {
+        "p50": 17.0,
+        "p95": 22.0,
+        "p99": 30.0,
+        "max": 65
+      },
+      "drawCallsMedian": 135.0,
+      "trianglesMedian": 133143.0,
+      "movingFrames": 1150,
+      "actionFrames": 241,
+      "profiled": false,
+      "cleanup": {
+        "collectorRemoved": true
+      },
+      "rawDirectory": "src/cocos/test-results/performance/iphone-heat-diagnosis-20261115/baseline-retry"
+    },
+    "profile": {
+      "durationMs": 15002,
+      "frames": 893,
+      "fps": 59.52539661378483,
+      "frameMs": {
+        "p50": 17.0,
+        "p95": 20.0,
+        "p99": 29.360000001695134,
+        "max": 52
+      },
+      "drawCallsMedian": 131,
+      "trianglesMedian": 132318,
+      "movingFrames": 129,
+      "actionFrames": 0,
+      "profiled": true,
+      "cleanup": {
+        "collectorRemoved": true
+      },
+      "rawDirectory": "src/cocos/test-results/performance/iphone-heat-diagnosis-20261115/profile"
+    },
+    "hot-followup": {
+      "durationMs": 60001,
+      "frames": 3569,
+      "fps": 59.48234196096732,
+      "frameMs": {
+        "p50": 17.0,
+        "p95": 19.0,
+        "p99": 24.0,
+        "max": 50
+      },
+      "drawCallsMedian": 136,
+      "trianglesMedian": 132914,
+      "movingFrames": 212,
+      "actionFrames": 0,
+      "profiled": false,
+      "cleanup": {
+        "collectorRemoved": true
+      },
+      "rawDirectory": "src/cocos/test-results/performance/iphone-heat-diagnosis-20261115/hot-followup"
+    }
+  },
+  "findings": [
+    {
+      "path": "Cocos PAL touch-input -> screenAdapter.windowSize/devicePixelRatio -> tap.getWindowInfo",
+      "evidence": "Cocos 3.8.8 source and this phone source agree: three window queries for each touch event. 127/1381 JS stacks pass through the Cocos touch handler; 84/85 windowSize stacks belong to touch, one to the capture setup. The previous business viewport fix is present and does not cover this engine path.",
+      "classification": "confirmed redundant native calls; not measured GPU or thermal time"
+    },
+    {
+      "path": "ChapterGame.save -> SaveStore.write -> GameSession.snapshot / validateSnapshot / synchronous storage",
+      "evidence": "168/1381 JS stacks pass through SaveStore.write. Existing path clones current enemies, stringifies/parses the whole state, validates, then stringifies the whole state again. Automatic saves remain every two seconds when dirty.",
+      "classification": "confirmed repeated serialization/validation; native IO remains synchronous"
+    },
+    {
+      "path": "Root.frameMove / UI",
+      "evidence": "439/1381 stacks pass through Root.frameMove, 166 through UI.update. Baseline draw calls 132–190 and triangles 131939–183427.",
+      "classification": "remaining render workload, not proof of GPU saturation"
+    }
+  ],
+  "profileBoundary": "15-second independent profile: mostly stationary, 129 moving frames and zero action frames. Inclusive sample counts overlap; zero device timestamps prohibit converting these fractions to CPU ms, power or thermal contributions. Selected Inspector target averaged 22.0% of one CPU core; not whole TapTap or whole-phone CPU.",
+  "changes": [
+    {
+      "file": "src/cocos/tools/runtime/taptap-window-cache.js",
+      "behavior": "Cache documented platform window information before Cocos copies its functions. Register resize/foreground invalidation before engine listeners. Copy return values/safeArea, preserve native behavior for invalid values or unsupported hosts, provide exact cleanup. No Cocos getter or engine source patch."
+    },
+    {
+      "file": "src/cocos/tools/convert-taptap.cjs",
+      "behavior": "Copy the project-owned cache adapter and install it once in the mini-game entry before engine import; reuse the official converter."
+    },
+    {
+      "file": "src/cocos/assets/scripts/core/GameSession.ts",
+      "behavior": "Serialize a save once; public snapshot still returns fully detached JSON data. Validate identical fields and depth/size rules with indexed loops instead of allocating Object.entries pairs/callbacks for every nested object."
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/persistence/common/SaveStore.ts",
+      "behavior": "Reuse serialized payload after validating its decoded snapshot. Double slots, revisions, checksum, read-after-write verification, two-second schedule, errors/retry and new-journey backups retained."
+    }
+  ],
+  "validation": {
+    "typescript": "passed",
+    "existingTests": {
+      "passed": 140,
+      "failed": 0,
+      "log": "src/cocos/test-results/performance/iphone-heat-diagnosis-20261115/tests.log"
+    },
+    "windowCacheLocal": {
+      "touchEvents": 1000,
+      "engineReads": 3000,
+      "nativeReads": 1,
+      "resizeBeforeEngine": true,
+      "foreground": true,
+      "mutableReturnIsolation": true,
+      "invalidResultRetry": true,
+      "cleanupCopiedFunctionFallback": true,
+      "unsupportedHostFallback": true,
+      "artifact": "src/cocos/test-results/performance/iphone-heat-diagnosis-20261115/verify-window-cache.cjs"
+    },
+    "convertedEntry": {
+      "convertedEntryRunsBeforeCocosImport": true,
+      "cacheModuleInPackage": true,
+      "copiedCocosCalls": 3000,
+      "nativeQueries": 1,
+      "compiledSerializeSnapshot": true
+    },
+    "saveLocal": {
+      "scope": "Node on Mac, identical generated multi-area save; not iPhone thermal or native IO measurement",
+      "bytes": 115411,
+      "envelopeBytes": 132276,
+      "exactPayloadAndEnvelopeMatch": true,
+      "detachedSnapshot": true,
+      "rounds": [
+        {
+          "name": "old",
+          "msPerSave": 4.700603836666666
+        },
+        {
+          "name": "new",
+          "msPerSave": 2.8963549233333334
+        },
+        {
+          "name": "new",
+          "msPerSave": 2.899753870000001
+        },
+        {
+          "name": "old",
+          "msPerSave": 4.439552239999999
+        }
+      ],
+      "meanReductionPercent": 36.586325827303334
+    },
+    "phoneApiShape": "Actual 0.3.43 phone runtime exposes all five documented callbacks/getter; window getter is writable/configurable. Read-only check; no platform API replacement was left installed on phone.",
+    "sourceFilesStableDuringBuild": 216,
+    "creatorExport": "passed",
+    "officialConversion": "passed",
+    "rendererAndWasm": "passed",
+    "zipCRCAndDeliverySHA256": "passed"
+  },
+  "package": {
+    "path": "/Users/sunlh/workspace/singularity/src/cocos/artifacts/taptap-heat-20261115/SwordAndFire_0.3.44_TapTap_test_20261114T234916Z/SwordAndFire_0.3.44_TapTap_test_20261114T234916Z.zip",
+    "bytes": 218549902,
+    "sha256": "27ca856f9c8ce85b7dc7d6e73fcd649aa2cb02b100a305cdd556ff86b763fc13",
+    "initialPayload": {
+      "files": 27,
+      "rawBytes": 5635228,
+      "zipBytes": 1363469,
+      "zipMiB": 1.3,
+      "budgetMiB": 20.0,
+      "withinLocalBudget": true,
+      "sha256": "9b5115c4215e05e0e5bd052f74d5db4c5c722b3d5a6dbb79ec78ed3e7ee5ffcf",
+      "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+    },
+    "uploaded": false,
+    "newBuildLoadedOnPhone": false
+  },
+  "cleanup": {
+    "successfulCollectorsRemoved": true,
+    "profilersStopped": [
+      "CPUProfiler",
+      "Memory",
+      "ScriptProfiler"
+    ],
+    "firstCaptureTimedOut": true,
+    "firstCaptureCollectorAbsentOnReconnect": true,
+    "allOwnedInspectorConnectionsClosed": true
+  },
+  "limits": [
+    "No measured GPU utilization/GPU duration, temperature, power or thermal-state/frequency data.",
+    "Short-window GPU allocations and sampled JS category memory cannot prove absence/presence of a leak.",
+    "0.3.43 long low-FPS thermal state was not reproduced in the accepted windows; current recorded heat did not prevent near-60 FPS.",
+    "No claim of a measured temperature drop or iPhone-wide CPU percentage improvement from the new source.",
+    "Native async storage migration was not attempted; preserving save durability and lifecycle semantics takes precedence."
+  ],
+  "pending": [
+    "Load 0.3.44 in TapTap; verify touch start/move/end/cancel, multi-touch, resize and foreground recovery.",
+    "At unchanged frame rate, brightness, charging state and scene, compare continuous moving combat for 10–15 minutes from comparable starting heat.",
+    "Verify save/reload, foreground recovery and music with the new package; Android physical-device acceptance remains separate."
+  ],
+  "references": [
+    "https://developer.taptap.cn/minigameapidoc/dev/api/base/system/tap.getWindowInfo/",
+    "https://developer.taptap.cn/minigameapidoc/dev/api/ui/window/tap.onWindowResize/",
+    "https://developer.taptap.cn/minigameapidoc/dev/api/base/app/life-cycle/tap.onShow/",
+    "https://developer.taptap.cn/minigameapidoc/dev/engine/Cocos-Laya-Egret/",
+    "https://support.apple.com/en-us/118431"
+  ]
+}

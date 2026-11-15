@@ -1,5 +1,6 @@
+import {viewportMetrics} from '../../../platform/ViewportMetrics';
 import {CompactGraphics} from '../../../shared/ui/CompactGraphics';
-import {Camera,Color,Graphics,Label,Node,Sprite,SpriteFrame,Texture2D,UITransform,UIOpacity,Vec3,builtinResMgr,screen,sys,isValid,director,Director} from 'cc';
+import {Camera,Color,Graphics,Label,Node,Sprite,SpriteFrame,Texture2D,UITransform,UIOpacity,Vec3,builtinResMgr,sys,isValid,director,Director} from 'cc';
 import type {GameEvent,Point} from '../../../core/Contracts';
 import type {EnemyState,GameSession} from '../../../core/GameSession';
 import type {Hud} from '../../../app/Hud';
@@ -80,7 +81,7 @@ export class EnemyCombatFeedback {
  }
 
  private viewportWidth=1;private viewportHeight=1;
- private refreshViewport(){const pixels=screen.windowSize;this.viewportWidth=Math.max(1,pixels.width);this.viewportHeight=Math.max(1,pixels.height);}
+ private refreshViewport(){const pixels=viewportMetrics.windowSize;this.viewportWidth=Math.max(1,pixels.width);this.viewportHeight=Math.max(1,pixels.height);}
  private project(enemy:FeedbackTarget,extraY:number,point:Vec3):boolean {
   let projected=this.cacheProjection?this.projections.get(enemy.id):undefined;
   if(!projected||projected.epoch!==this.projectionEpoch){

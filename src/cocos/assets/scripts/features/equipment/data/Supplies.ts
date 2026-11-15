@@ -4,7 +4,7 @@ import {ITEM_STACK_LIMIT} from './Equipment';
 export type SupplyId='SUPPLY_HEALTH'|'SUPPLY_FOCUS'|'SUPPLY_STAMINA'|'SUPPLY_MANA';
 export interface SupplyDef {name:string;stock:'healthPotions'|'focusPotions'|'staminaPotions'|'manaPotions';capacity:number;icon:string;groundArt:string;groundSize:number;feedback:FeedbackRole}
 const GROUND_BOTTLE_SIZE=.56;
-/** Physical ground props are separate from the HUD glyphs; carrying rules are shared. */
+/** Ground props and potion shortcuts share groundArt; icon remains the resource lookup key. */
 export const SUPPLIES:Record<SupplyId,SupplyDef>={
  SUPPLY_HEALTH:{name:'生命药剂',stock:'healthPotions',capacity:ITEM_STACK_LIMIT,icon:'potion-health',groundArt:'equipment/supplies-v2/health-bottle',groundSize:GROUND_BOTTLE_SIZE,feedback:'damage.heal'},
  SUPPLY_FOCUS:{name:'专注药水',stock:'focusPotions',capacity:ITEM_STACK_LIMIT,icon:'potion-focus',groundArt:'equipment/supplies-v2/focus-bottle',groundSize:GROUND_BOTTLE_SIZE,feedback:'resource.focus'},

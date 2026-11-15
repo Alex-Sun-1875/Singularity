@@ -13,34 +13,38 @@ export class TapLogin {
  private pending:Promise<boolean>|undefined;
  private disposed=false;
  private readonly cancellations=new Set<()=>void>();
- constructor(private readonly api:TapLoginAPI|undefined,readonly required:boolean,private readonly config:LoginConfig,private readonly changed:()=>void=()=>{}){this.state={status:required?'idle':config.guestTest?'guest':'preview',message:required?'等待 TapTap 登录':config.guestTest?'游客测试 · 仅本机存档（未登录 TapTap）':'浏览器预览（不代表平台登录）'};}
+ constructor(private readonly api:TapLoginAPI|undefined,readonly required:boolean,private readonly config:LoginConfig,private readonly changed:()=>void=()=>{}){this.state={status:required?'idle':config.guestTest?'guest':'preview',message:required?'等待登录':config.guestTest?'游客测试 · 仅本机存档（未登录）':'浏览器预览（不代表正式登录）'};}
  get ready():boolean{return !this.disposed&&(!this.required||this.state.status==='platform-ready'&&this.platformReady);}
  ensure(resume=false):Promise<boolean>{
   if(this.disposed)return Promise.resolve(false);
   if(!this.required)return Promise.resolve(true);
   if(this.pending)return this.pending;
   if(!resume&&this.ready)return Promise.resolve(true);
-  this.pending=this.authenticate(resume).finally(()=>{this.pending=undefined;});return this.pending;
+  this.pending=this.authenticate().finally(()=>{this.pending=undefined;});return this.pending;
  }
  private set(status:LoginStatus,message:string,error?:string){if(!this.disposed){this.state={status,message,...(error?{error}:{})};this.changed();}}
- private async authenticate(resume:boolean):Promise<boolean>{
+ private async authenticate():Promise<boolean>{
   try{
-   if(!this.api?.login||!this.api.checkSession)throw new LoginError('PLATFORM_UNAVAILABLE','TapTap 登录暂不可用，请在 TapTap 中重新打开游戏。');
-   if(resume&&this.platformReady){
-    this.set('checking','正在检查 TapTap 登录状态…');
-    const valid=await this.call<void>((success,fail)=>this.api!.checkSession!({success,fail})).then(()=>true,()=>false);
-    if(this.disposed)return false;
-    if(valid){this.set('platform-ready','TapTap 登录已就绪');return true;}
-   }
-   this.platformReady=false;this.set('logging-in','正在登录 TapTap…');
+   if(!this.api?.login||!this.api.checkSession)throw new LoginError('PLATFORM_UNAVAILABLE','登录暂不可用，请关闭游戏后重新打开。');
+   // The host can retain a valid session even after recreating the game.
+   // Check it on cold starts too; never persist a code as proof of login.
+   this.set('checking','正在检查登录状态…');
+   const valid=await this.call<void>((success,fail)=>this.api!.checkSession!({success,fail})).then(()=>true,error=>{
+    // A local timeout or cancellation does not prove the host session expired.
+    if(error instanceof LoginError)throw error;
+    return false;
+   });
+   if(this.disposed)return false;
+   if(valid){this.platformReady=true;this.set('platform-ready','登录已就绪');return true;}
+   this.platformReady=false;this.set('logging-in','正在登录…');
    const result=await this.call<{code?:string}>((success,fail)=>this.api!.login!({timeout:this.config.timeoutMs,success,fail}));
-   if(typeof result?.code!=='string'||!result.code.trim())throw new LoginError('EMPTY_CODE','未取得 TapTap 登录凭证，请重试。');
+   if(typeof result?.code!=='string'||!result.code.trim())throw new LoginError('EMPTY_CODE','登录未完成，请重试。');
    if(this.disposed)return false;
    // This is platform login readiness, not an openid or a game-server session.
    // Never persist/log the one-time code or manufacture a token from it.
-   this.platformReady=true;this.set('platform-ready','TapTap 登录已就绪');return true;
+   this.platformReady=true;this.set('platform-ready','登录已就绪');return true;
   }catch(error){
-   this.platformReady=false;const known=error instanceof LoginError?error:new LoginError('PLATFORM_FAILED','TapTap 登录未完成，请检查网络后重试。');
+   this.platformReady=false;const known=error instanceof LoginError?error:new LoginError('PLATFORM_FAILED','暂时无法连接，请检查网络后重试。');
    this.set('failed',known.message,known.code);return false;
   }
  }

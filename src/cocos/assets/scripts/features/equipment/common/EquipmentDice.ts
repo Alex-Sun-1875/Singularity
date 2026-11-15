@@ -47,6 +47,7 @@ interface Host {state():GameState;grant(item:string,count:number,source:string):
 export class EquipmentDice {
  constructor(private host:Host){}
  private get s(){return this.host.state();}
+ hasPending():boolean {const gear=this.s.dice.gear;if(gear)for(const id in gear)if(Object.prototype.hasOwnProperty.call(gear,id)&&!gear[id].claimed)return true;return false;}
  enqueue(item:string,source:string,manual=false){if(!EQUIPMENT[item]||EQUIPMENT[item].kind==='spell'||!manual&&source.startsWith('gear-upgrade:'))return;this.s.dice.gear??={};this.s.dice.gear[item]??={item,source,level:this.s.progression.level,face:null,claimed:false};}
  open(item?:string){if(this.s.dice.active)return false;const r=item?this.s.dice.gear?.[item]:Object.values(this.s.dice?.gear??{}).find(r=>!r.claimed&&!this.s.receipts[`gear-deferred:${r.item}`]);if(!r||r.claimed)return false;this.s.dice.active={id:'gear:'+r.item,area:this.s.area,sourceId:r.source,context:{mode:'normal',modifiers:[],helpDie:false,helpLabel:null}};this.host.changed();return true;}
  view():DiceView|null {const a=this.s.dice.active;if(!a?.id.startsWith('gear:'))return null;const r=this.s.dice.gear![a.id.slice(5)],d=EQUIPMENT[r.item],outcome=equipmentOutcome(this.s.seed,r),possibleUpgrade=equipmentUpgrade(this.s.seed,r);

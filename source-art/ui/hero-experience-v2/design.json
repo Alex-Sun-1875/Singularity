@@ -1,0 +1,122 @@
+{
+  "createdOn": "2026-11-15",
+  "purpose": "按用户反馈将经验重设计为与生命/职业资源统一的第三条完整进度条；不接入游戏",
+  "method": "Deterministic Pillow layout using the original screenshot material, native bar-track/fill skins, and bundled RPG font; no image generation or new runtime asset",
+  "source": "source-art/ui/quest-tracker-expand-v5/collapsed-game-v8.png",
+  "sourceSha256": "f69bac1b34c9ba0be5de6d6c153b0a69212cf7687bf6b8b1e34e152e054975e2",
+  "frame": {
+    "sourceBounds": [
+      177,
+      18,
+      714,
+      208
+    ],
+    "sourceSize": [
+      537,
+      190
+    ],
+    "heightAdded": 0,
+    "widthAdded": 0,
+    "creatorSize": [
+      328,
+      116
+    ],
+    "logicalSizeAt844x390": [
+      177.66666666666666,
+      62.833333333333336
+    ]
+  },
+  "rows": [
+    {
+      "label": "生命",
+      "right": "85 / 135",
+      "fraction": 0.6296296296296297,
+      "sourceBounds": [
+        342,
+        72,
+        350,
+        35
+      ],
+      "fontSourcePixels": 29
+    },
+    {
+      "label": "专注",
+      "right": "80 / 100",
+      "fraction": 0.8,
+      "sourceBounds": [
+        342,
+        114,
+        350,
+        35
+      ],
+      "fontSourcePixels": 29
+    },
+    {
+      "label": "经验",
+      "right": "还需 200",
+      "fraction": 0.5918367346938775,
+      "sourceBounds": [
+        342,
+        156,
+        350,
+        35
+      ],
+      "fontSourcePixels": 29
+    }
+  ],
+  "sample": {
+    "level": 4,
+    "thisLevelXp": 290,
+    "xpToNextLevel": 490,
+    "remaining": 200,
+    "progress": 0.5918367346938775
+  },
+  "maxLevel": "Full experience bar with 已满级; no remaining zero.",
+  "detail": "Full current/required XP stays in the existing character detail page; remaining XP is always visible on HUD.",
+  "resource": "BOW focus shown using resource.focus; actual resource name and color follow profession.",
+  "savedCheck": "Remove the saved check from the proposed frame; pause already contains save state. Persistence unchanged.",
+  "touchTargetsAdded": false,
+  "checks": {
+    "allMetersInsideOriginalFrame": true,
+    "worstRemaining38290Fits": true,
+    "fontSizeLogical": 9.666666666666666,
+    "sameNativeFrameSize": true,
+    "onlyModifiedInsideHeroFrame": true,
+    "modifiedBounds": [
+      332,
+      29,
+      706,
+      200
+    ]
+  },
+  "artReview": {
+    "assistantStatus": "passed: three native cut-corner meters share border, text alignment and spacing; visible XP fill and remaining amount; original outer frame dimensions preserved",
+    "userApproved": false
+  },
+  "runtimeChanged": false,
+  "outputs": [
+    {
+      "path": "design-review.png",
+      "bytes": 787474,
+      "sha256": "b707c58db4b35a62b74e206c80dd07232a0074c0aa425c1914276418b333c7e8"
+    },
+    {
+      "path": "hero-detail.png",
+      "bytes": 302389,
+      "sha256": "cd47a1d8f8ffe603b93b56bebe157864da8b1dc9a6e96ea78073356d000e4848"
+    },
+    {
+      "path": "phone-preview.png",
+      "bytes": 3423978,
+      "sha256": "6f2cbcad2b242cbe5b13621a73503550f78b93b2151d923e0d4db0074b8f6b10"
+    },
+    {
+      "path": "scene-preview.png",
+      "bytes": 3022635,
+      "sha256": "b301c56d58c1a3febf6826f77d2ca5e45f67b0de94aec1138d72ad296fec83e4"
+    }
+  ],
+  "status": "superseded by portrait experience ring",
+  "supersededBy": "source-art/ui/hero-experience-ring-v4",
+  "supersededReason": "用户选择头像外圈表达经验，要求经验数值使用当前/本级所需，取消第三条进度条和升级还需描述。"
+}

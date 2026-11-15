@@ -39,6 +39,7 @@ export class AutomationHud {
  get expanded(){return this.opened;}
  get visible(){return this.root.activeInHierarchy;}
  get bottom(){return this.root.position.y-(this.opened?-this.trayY+this.trayHeight/2:this.hit/2);}
+ get visualBottom(){return this.root.position.y-this.visualHeight/2;}
  setExpanded(expanded:boolean){if(this.opened===expanded)return;this.opened=expanded;this.render();}
  toggle(){this.setExpanded(!this.opened);}
  update(state:AutomationHudState,visible:boolean){
@@ -52,7 +53,7 @@ export class AutomationHud {
  contains(point:Vec2):boolean{return this.targets.some(n=>n.isValid&&n.activeInHierarchy&&!!n.getComponent(UITransform)?.hitTest(point));}
  private label(parent:Node,text:string,x:number,y:number,w:number,h:number,size=13){
   const label=this.hud.text(parent,text,x,y,w,size*this.scale,C.ink,h);applyRpgFont(label);
-  label.lineHeight=size*this.scale*1.25;label.enableWrapText=false;label.overflow=Label.Overflow.CLAMP;label.horizontalAlign=Label.HorizontalAlign.CENTER;return label;
+  label.lineHeight=size*this.scale*1.25;label.enableWrapText=false;label.overflow=Label.Overflow.CLAMP;label.horizontalAlign=Label.HorizontalAlign.CENTER;label.cacheMode=Label.CacheMode.CHAR;return label;
  }
  private button(parent:Node,action:string,x:number,y:number,w:number,h:number,run:()=>void,faceHeight:number):Node {
   const n=this.hud.node(action,parent,x,y,w,h),b=n.addComponent(Button);b.transition=Button.Transition.NONE;n.addComponent(BlockInputEvents);this.targets.push(n);

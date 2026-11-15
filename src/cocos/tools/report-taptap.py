@@ -109,10 +109,12 @@ def measure(root, output, browser_report=None):
     if config.get('productVersion') != release['version'] or build_info['version'] != release['version']:
         raise SystemExit('Package version does not match the build manifest')
     stamp = datetime.fromisoformat(build_info['builtAt'].replace('Z', '+00:00')).strftime('%Y%m%dT%H%M%SZ')
-    variant = 'audit_' if identity['buildMode'] == 'audit' else 'guest_' if guest_test else ''
-    package_name = f"{release['projectName']}_{release['version']}_TapTap_{variant}{stamp}_{profile_name}.zip"
-    if not re.fullmatch(r'[A-Za-z][A-Za-z0-9_.-]*\.zip', package_name) or build_info.get('packageFilename') != package_name:
-        raise SystemExit('Package filename does not match its identity, version, mode and UTC build timestamp')
+    package_name = f"{release['projectName']}_{release['version']}.zip"
+    legacy_name = f"{release['projectName']}_{release['version']}_TapTap_{identity['buildMode']}_{stamp}.zip"
+    if not re.fullmatch(r'[A-Za-z][A-Za-z0-9_-]*_(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)\.zip', package_name) or build_info.get('packageFilename') not in (package_name, legacy_name):
+        raise SystemExit('Package filename does not match its version/build identity')
+    # Legacy ZIP bytes stay immutable when organizing an existing version.
+    output = output.resolve() / release['version']
     if build_info.get('projectName') != release['projectName'] or build_info.get('buildMode') != identity['buildMode']:
         raise SystemExit('Package English name/build mode drift')
     if config.get('productName') != release['title'] or config.get('deviceOrientation') != release['orientation'] or config.get('networkTimeout') != release['networkTimeout']:
@@ -149,7 +151,8 @@ def measure(root, output, browser_report=None):
         main_files = [p for p in main_files if p not in members]
         report_packs.append({'name': pack['name'], 'root': str(relative), 'files': len(files),
                              'rawBytes': sum(p.stat().st_size for p in files)})
-    first_zip = output / 'initial-payload.local-audit.zip'
+    first_zip = output / 'checks/initial.zip'
+    first_zip.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(first_zip, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
         for p in main_files:
             archive.write(p, p.relative_to(game).as_posix())
@@ -246,7 +249,7 @@ def measure(root, output, browser_report=None):
             'note': 'Whole declared packs plus both generated WASM packs; not a measurement of TapTap network traffic or loading time.'}
     checks_passed = report['initialPayload']['withinLocalBudget'] and report['total']['withinConsoleObservedLimit']
     build_mode = identity.get('buildMode', release.get('buildMode', 'audit' if expected_id is None else 'release'))
-    delivery = output.resolve() / (Path(package_name).stem.removesuffix('_' + profile_name) + '-' + profile_name)
+    delivery = output.resolve()
     delivered_zip = delivery / package_name
     upload_settings = {'version': release['version'], 'title': release['title'], 'miniAppId': release['miniAppId'],
         'buildMode': build_mode, 'buildProfile': profile, 'releaseNotes': release_notes,
@@ -255,6 +258,7 @@ def measure(root, output, browser_report=None):
         'projectName': release['projectName'], 'builtAt': build_info['builtAt'],
         'packageIdentity': identity['identity'], 'packageFilename': str(delivered_zip),
         'converterPackageFilename': str(upload_zip),
+        'sourcePackageFilename': build_info['packageFilename'],
         'packageSha256': upload_hash, 'uploadZipBytes': upload_zip.stat().st_size,
         'minimumBaseLibraryVersion': release['minimumBaseLibraryVersion'],
         'minimumBaseLibraryAction': 'Confirm the platform-parsed minimum library version after uploading; not the WeChat libVersion field.',
@@ -288,8 +292,6 @@ def measure(root, output, browser_report=None):
         if hashlib.file_digest(stream, 'sha256').hexdigest() != upload_hash:
             raise SystemExit('Exported ZIP checksum mismatch')
     (delivery / (package_name + '.sha256')).write_text(upload_hash + '  ' + package_name + '\n', encoding='ascii')
-    for name in ('report.json', 'upload-settings.json'):
-        shutil.copyfile(output / name, delivery / name)
     if profile_name == 'release':
         for name in ('RELEASE_NOTES.md', 'source-manifest.json', 'release-changes.json'):
             shutil.copyfile(game / name, delivery / name)
@@ -314,7 +316,7 @@ def measure(root, output, browser_report=None):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('build', type=Path)
-    parser.add_argument('--output', type=Path, required=True)
+    parser.add_argument('--output', type=Path, default=PROJECT.parent / 'out', help='Output root; files are grouped under <version>/')
     parser.add_argument('--browser-report', type=Path)
     args = parser.parse_args()
     measure(args.build, args.output, args.browser_report)

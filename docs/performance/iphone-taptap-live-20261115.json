@@ -1,0 +1,839 @@
+{
+  "title": "TapTap iPhone 真机性能定位：重复窗口查询与音量写入",
+  "date": "2026-11-15",
+  "timeZone": "Asia/Shanghai",
+  "status": "diagnosis-complete-production-fix-not-applied",
+  "environment": {
+    "deviceProductType": "iPhone15,2",
+    "hardwareModel": "D73AP",
+    "iOS": "26.6.2",
+    "transport": "USB / Apple Web Inspector",
+    "appBundle": "com.easyplay.taptap.now",
+    "runtimeVersion": "0.3.42",
+    "engine": "Cocos Creator 3.8.8",
+    "area": "H13",
+    "logicalViewport": [
+      852,
+      393
+    ],
+    "canvas": [
+      2556,
+      1179
+    ],
+    "frameRateSetting": 60,
+    "renderer": "Apple GPU",
+    "cleanupImageCache": true,
+    "gpuTimerQuerySupported": false,
+    "mode": "角色静止、存活、无菜单；17个敌人状态槽，16个存活；全部窗口移动距离与HP保持不变"
+  },
+  "conclusion": "本次真机的首要可复现瓶颈是每帧重复屏幕信息读取引起的同步平台桥接与调试日志格式化。事件驱动尺寸缓存的临时原型将同场景FPS从约33–35提高到约50，恢复后回落；绘制量、画布与帧率设置未变。背景音乐每帧重复写相同音量是另一条已定位的原生调用路径。尚未正式修改生产代码或验收持续战斗、GPU、温度。",
+  "findings": [
+    {
+      "priority": 1,
+      "name": "重复窗口信息查询",
+      "evidence": "原样窗口中screen.windowSize正好5次/绘制帧，screen.devicePixelRatio正好1次/帧。设备上的Cocos窗口getter内部调用getWindowInfo两次，因此该静止路径对应约11次原生窗口查询/帧。调用栈含TapTap invokeSync/getWindowInfo、同步XHR send，以及API日志的Asia/Shanghai日期格式化。",
+      "locations": [
+        {
+          "file": "src/cocos/assets/scripts/app/Hud.ts",
+          "line": 495
+        },
+        {
+          "file": "src/cocos/assets/scripts/features/combat/runtime/CombatImpactFeedback.ts",
+          "line": 47
+        },
+        {
+          "file": "src/cocos/assets/scripts/features/world/runtime/FlatWorldLayers.ts",
+          "line": 240
+        },
+        {
+          "file": "src/cocos/assets/scripts/features/combat/runtime/EnemyCombatFeedback.ts",
+          "line": 83
+        },
+        {
+          "file": "src/cocos/assets/scripts/features/journey/runtime/TaskPresence.ts",
+          "line": 35
+        }
+      ],
+      "optimization": "在shared/platform边界增加公共视口数据快照，统一保存物理尺寸、逻辑尺寸与DPR；初始化、Cocos窗口变化以及现有平台前台恢复入口刷新。HUD、投影、剔除和反馈读取同一快照。无受击效果时提前跳过其呈现计算。生产实现使用公共接口，不沿用诊断时覆盖引擎属性的手段。",
+      "diagnostic": "同帧缓存15秒42.46FPS；恢复34.43FPS。事件刷新缓存15秒50.00FPS；恢复33.24FPS。所有这些窗口draw p50=107，triangles p50=128493。"
+    },
+    {
+      "priority": 2,
+      "name": "稳定音量仍每帧写入",
+      "evidence": "BackgroundMusic.update在稳定音量0.28时仍每帧写AudioSource.volume；引擎setter继续写原生player并读回。窗口缓存后的调用栈中，775/2949个样本经过该更新入口。",
+      "location": {
+        "file": "src/cocos/assets/scripts/features/audio/runtime/BackgroundMusic.ts",
+        "line": 61
+      },
+      "optimization": "在业务音频层记录上次实际提交音量，相同值不重复写；淡入淡出到达足够接近目标时吸附到目标，并停止重复提交。保留静音、开关、暂停、恢复和淡变行为。",
+      "diagnostic": "与视口缓存合并时，在约17秒探针寿命中跳过860次完全相同音量写入，实际新写入0次；音乐仍播放、音量仍0.28。FPS50.33，恢复两项后33.10；相对只缓存视口的50.00，没有证实额外显著FPS收益。CPU观察下降不能作为严格隔离的音频优化百分比。"
+    },
+    {
+      "priority": 3,
+      "name": "缓存后剩余帧时间与高分辨率渲染",
+      "evidence": "组合诊断仍只有约50FPS。实际画布3013524像素，是旧桌面1688×780样本的约2.29倍。GPU timer query不可用，未取得硬件GPU忙碌度、GPU毫秒、温度或热降频证据。",
+      "optimization": "先落地前两项，再在同机同场景测移动战斗与热稳态。继续分析渲染提交、阴影、主角材质和透明层；通过平台工具或可用的Apple Instruments验证GPU。若需要渲染比例对照，须保留60FPS、触控映射和HUD清晰度并做画面验收。本轮不降低分辨率，也不把2.29倍像素推断为2.29倍GPU耗时。",
+      "pixelRatioToOldReference": 2.288798760481225
+    }
+  ],
+  "samples": [
+    {
+      "name": "current-unprofiled",
+      "durationMs": 20009,
+      "drawCount": 772,
+      "fps": 38.58263781298416,
+      "frameIntervalMs": {
+        "p50": 25,
+        "p95": 31,
+        "p99": 63,
+        "max": 69
+      },
+      "drawCalls": {
+        "p50": 107,
+        "min": 107,
+        "max": 107
+      },
+      "triangles": {
+        "p50": 128493,
+        "min": 128487,
+        "max": 128499
+      },
+      "gfxAllocatedBytes": {
+        "bufferMin": 9732014,
+        "bufferMax": 9732014,
+        "textureMin": 169052528,
+        "textureMax": 169052528
+      },
+      "startState": {
+        "area": "H13",
+        "time": 6892.279333377317,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "endState": {
+        "area": "H13",
+        "time": 6912.294333377627,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "actionFrames": 0,
+      "movingFrames": 0
+    },
+    {
+      "name": "current-profiled",
+      "durationMs": 20006,
+      "drawCount": 735,
+      "fps": 36.738978306508045,
+      "frameIntervalMs": {
+        "p50": 26.000000000014552,
+        "p95": 30,
+        "p99": 65.00000000001455,
+        "max": 70
+      },
+      "drawCalls": {
+        "p50": 107,
+        "min": 107,
+        "max": 107
+      },
+      "triangles": {
+        "p50": 128493,
+        "min": 128487,
+        "max": 128501
+      },
+      "gfxAllocatedBytes": {
+        "bufferMin": 9732014,
+        "bufferMax": 9732014,
+        "textureMin": 169052528,
+        "textureMax": 169052528
+      },
+      "startState": {
+        "area": "H13",
+        "time": 6923.576333377831,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "endState": {
+        "area": "H13",
+        "time": 6943.585333378163,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "actionFrames": 0,
+      "movingFrames": 0
+    },
+    {
+      "name": "viewport-original-a",
+      "durationMs": 15012,
+      "drawCount": 533,
+      "fps": 35.50492938982148,
+      "frameIntervalMs": {
+        "p50": 27,
+        "p95": 34.000000000029104,
+        "p99": 66,
+        "max": 68.0000000000291
+      },
+      "drawCalls": {
+        "p50": 107,
+        "min": 107,
+        "max": 107
+      },
+      "triangles": {
+        "p50": 128493,
+        "min": 128487,
+        "max": 128503
+      },
+      "gfxAllocatedBytes": {
+        "bufferMin": 9731522,
+        "bufferMax": 9731522,
+        "textureMin": 168790384,
+        "textureMax": 168790384
+      },
+      "startState": {
+        "area": "H13",
+        "time": 7049.027333379746,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "endState": {
+        "area": "H13",
+        "time": 7064.026333379952,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "actionFrames": 0,
+      "movingFrames": 0,
+      "probeMetadata": {
+        "counts": {
+          "windowSize": 4735,
+          "devicePixelRatio": 947
+        },
+        "refreshes": 0,
+        "probeFrames": 947
+      },
+      "webInspectorCpuObservation": {
+        "samples": 51,
+        "meanCorePercent": 45.813725714590035,
+        "meanMainThreadCorePercent": 40.64313716514438,
+        "scope": "Web Inspector target process/thread observations, not whole TapTap app or GPU usage",
+        "boundary": "CPU tracking starts after frame capture begins and stops after it finishes; longer monitoring window. Runtime emits timestamp=0, so exact per-frame alignment and time-weighted averaging are unavailable. Do not convert to CPU milliseconds per measured frame."
+      }
+    },
+    {
+      "name": "viewport-cache-b",
+      "durationMs": 15002,
+      "drawCount": 637,
+      "fps": 42.46100519930676,
+      "frameIntervalMs": {
+        "p50": 23,
+        "p95": 26,
+        "p99": 58,
+        "max": 67
+      },
+      "drawCalls": {
+        "p50": 107,
+        "min": 107,
+        "max": 107
+      },
+      "triangles": {
+        "p50": 128493,
+        "min": 128485,
+        "max": 128501
+      },
+      "gfxAllocatedBytes": {
+        "bufferMin": 9731522,
+        "bufferMax": 9731522,
+        "textureMin": 168790384,
+        "textureMax": 168790384
+      },
+      "startState": {
+        "area": "H13",
+        "time": 7074.733333380111,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "endState": {
+        "area": "H13",
+        "time": 7089.739333380359,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "actionFrames": 0,
+      "movingFrames": 0,
+      "probeMetadata": {
+        "counts": {
+          "windowSize": 5480,
+          "devicePixelRatio": 1096
+        },
+        "refreshes": 1096,
+        "probeFrames": 1096
+      },
+      "webInspectorCpuObservation": {
+        "samples": 53,
+        "meanCorePercent": 44.26037691224296,
+        "meanMainThreadCorePercent": 36.55283035422271,
+        "scope": "Web Inspector target process/thread observations, not whole TapTap app or GPU usage",
+        "boundary": "CPU tracking starts after frame capture begins and stops after it finishes; longer monitoring window. Runtime emits timestamp=0, so exact per-frame alignment and time-weighted averaging are unavailable. Do not convert to CPU milliseconds per measured frame."
+      }
+    },
+    {
+      "name": "viewport-restored-a",
+      "durationMs": 15014,
+      "drawCount": 517,
+      "fps": 34.43452777407753,
+      "frameIntervalMs": {
+        "p50": 27,
+        "p95": 35,
+        "p99": 65,
+        "max": 70
+      },
+      "drawCalls": {
+        "p50": 107,
+        "min": 107,
+        "max": 107
+      },
+      "triangles": {
+        "p50": 128493,
+        "min": 128485,
+        "max": 128501
+      },
+      "gfxAllocatedBytes": {
+        "bufferMin": 9731522,
+        "bufferMax": 9731522,
+        "textureMin": 168790384,
+        "textureMax": 168790384
+      },
+      "startState": {
+        "area": "H13",
+        "time": 7101.036333380515,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "endState": {
+        "area": "H13",
+        "time": 7116.0453333807445,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "actionFrames": 0,
+      "movingFrames": 0,
+      "probeMetadata": {
+        "counts": {
+          "windowSize": 2950,
+          "devicePixelRatio": 590
+        },
+        "refreshes": 0,
+        "probeFrames": 590
+      },
+      "webInspectorCpuObservation": {
+        "samples": 34,
+        "meanCorePercent": 46.20882326013901,
+        "meanMainThreadCorePercent": 41.86764694662655,
+        "scope": "Web Inspector target process/thread observations, not whole TapTap app or GPU usage",
+        "boundary": "CPU tracking starts after frame capture begins and stops after it finishes; longer monitoring window. Runtime emits timestamp=0, so exact per-frame alignment and time-weighted averaging are unavailable. Do not convert to CPU milliseconds per measured frame."
+      }
+    },
+    {
+      "name": "viewport-event-cache-b",
+      "durationMs": 15001,
+      "drawCount": 750,
+      "fps": 49.996666888874074,
+      "frameIntervalMs": {
+        "p50": 19,
+        "p95": 25.999999999941792,
+        "p99": 33,
+        "max": 76
+      },
+      "drawCalls": {
+        "p50": 107,
+        "min": 107,
+        "max": 107
+      },
+      "triangles": {
+        "p50": 128493,
+        "min": 128483,
+        "max": 128501
+      },
+      "gfxAllocatedBytes": {
+        "bufferMin": 9731522,
+        "bufferMax": 9731522,
+        "textureMin": 168790384,
+        "textureMax": 168790384
+      },
+      "startState": {
+        "area": "H13",
+        "time": 7149.869333381246,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "endState": {
+        "area": "H13",
+        "time": 7164.8683333814215,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "actionFrames": 0,
+      "movingFrames": 0,
+      "probeMetadata": {
+        "counts": {
+          "windowSize": 4265,
+          "devicePixelRatio": 853
+        },
+        "refreshes": 1
+      },
+      "webInspectorCpuObservation": {
+        "samples": 34,
+        "meanCorePercent": 31.92941037346335,
+        "meanMainThreadCorePercent": 26.84117634156171,
+        "scope": "Web Inspector target process/thread observations, not whole TapTap app or GPU usage",
+        "boundary": "CPU tracking starts after frame capture begins and stops after it finishes; longer monitoring window. Runtime emits timestamp=0, so exact per-frame alignment and time-weighted averaging are unavailable. Do not convert to CPU milliseconds per measured frame."
+      }
+    },
+    {
+      "name": "viewport-restored-final",
+      "durationMs": 15012.0,
+      "drawCount": 499,
+      "fps": 33.24007460698108,
+      "frameIntervalMs": {
+        "p50": 27.999999999941792,
+        "p95": 38.0,
+        "p99": 66.0,
+        "max": 73.0
+      },
+      "drawCalls": {
+        "p50": 107,
+        "min": 107,
+        "max": 107
+      },
+      "triangles": {
+        "p50": 128493,
+        "min": 128485,
+        "max": 128501
+      },
+      "gfxAllocatedBytes": {
+        "bufferMin": 9731522,
+        "bufferMax": 9731522,
+        "textureMin": 168790384,
+        "textureMax": 168790384
+      },
+      "startState": {
+        "area": "H13",
+        "time": 7167.0003333814575,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "endState": {
+        "area": "H13",
+        "time": 7182.0293333816935,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "actionFrames": 0,
+      "movingFrames": 0,
+      "probeMetadata": {
+        "restored": true
+      },
+      "webInspectorCpuObservation": {
+        "samples": 34,
+        "meanCorePercent": 49.2117639429429,
+        "meanMainThreadCorePercent": 43.67647036384134,
+        "scope": "Web Inspector target process/thread observations, not whole TapTap app or GPU usage",
+        "boundary": "CPU tracking starts after frame capture begins and stops after it finishes; longer monitoring window. Runtime emits timestamp=0, so exact per-frame alignment and time-weighted averaging are unavailable. Do not convert to CPU milliseconds per measured frame."
+      }
+    },
+    {
+      "name": "event-cache-profiled",
+      "durationMs": 12011,
+      "drawCount": 590,
+      "fps": 49.12163849804346,
+      "frameIntervalMs": {
+        "p50": 19,
+        "p95": 25,
+        "p99": 54.99999999994179,
+        "max": 79
+      },
+      "drawCalls": {
+        "p50": 107,
+        "min": 107,
+        "max": 107
+      },
+      "triangles": {
+        "p50": 128493,
+        "min": 128485,
+        "max": 128501
+      },
+      "gfxAllocatedBytes": {
+        "bufferMin": 9731522,
+        "bufferMax": 9731522,
+        "textureMin": 168790384,
+        "textureMax": 168790384
+      },
+      "startState": {
+        "area": "H13",
+        "time": 7224.267333382321,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "endState": {
+        "area": "H13",
+        "time": 7236.281333382503,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "actionFrames": 0,
+      "movingFrames": 0
+    },
+    {
+      "name": "combined-cache-b",
+      "durationMs": 15001,
+      "drawCount": 755,
+      "fps": 50.32997800146657,
+      "frameIntervalMs": {
+        "p50": 19,
+        "p95": 26,
+        "p99": 55,
+        "max": 78.00000000005821
+      },
+      "drawCalls": {
+        "p50": 107,
+        "min": 107,
+        "max": 107
+      },
+      "triangles": {
+        "p50": 128493,
+        "min": 128487,
+        "max": 128499
+      },
+      "gfxAllocatedBytes": {
+        "bufferMin": 9731522,
+        "bufferMax": 9731522,
+        "textureMin": 168790384,
+        "textureMax": 168790384
+      },
+      "startState": {
+        "area": "H13",
+        "time": 7282.289333383222,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "endState": {
+        "area": "H13",
+        "time": 7297.280333383347,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "actionFrames": 0,
+      "movingFrames": 0,
+      "probeMetadata": {
+        "volumeSkipped": 860,
+        "volumeSent": 0,
+        "volume": 0.28,
+        "playing": true
+      },
+      "webInspectorCpuObservation": {
+        "samples": 34,
+        "meanCorePercent": 27.097057679120233,
+        "meanMainThreadCorePercent": 23.85882360794965,
+        "scope": "Web Inspector target process/thread observations, not whole TapTap app or GPU usage",
+        "boundary": "CPU tracking starts after frame capture begins and stops after it finishes; longer monitoring window. Runtime emits timestamp=0, so exact per-frame alignment and time-weighted averaging are unavailable. Do not convert to CPU milliseconds per measured frame."
+      }
+    },
+    {
+      "name": "combined-restored-a",
+      "durationMs": 15015,
+      "drawCount": 497,
+      "fps": 33.1002331002331,
+      "frameIntervalMs": {
+        "p50": 28,
+        "p95": 38,
+        "p99": 68.99999999994179,
+        "max": 84
+      },
+      "drawCalls": {
+        "p50": 107,
+        "min": 107,
+        "max": 107
+      },
+      "triangles": {
+        "p50": 128493,
+        "min": 128485,
+        "max": 128501
+      },
+      "gfxAllocatedBytes": {
+        "bufferMin": 9731522,
+        "bufferMax": 9731522,
+        "textureMin": 168790384,
+        "textureMax": 168790384
+      },
+      "startState": {
+        "area": "H13",
+        "time": 7299.386333383381,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "endState": {
+        "area": "H13",
+        "time": 7314.394333383612,
+        "moved": 21283.092317474548,
+        "hp": 180,
+        "status": "playing",
+        "menu": "",
+        "enemySlots": 17,
+        "aliveEnemies": 16
+      },
+      "actionFrames": 0,
+      "movingFrames": 0,
+      "probeMetadata": {
+        "restored": true,
+        "volume": 0.28,
+        "playing": true,
+        "canvas": [
+          2556,
+          1179
+        ],
+        "frameRate": 60
+      },
+      "webInspectorCpuObservation": {
+        "samples": 34,
+        "meanCorePercent": 46.547058554256665,
+        "meanMainThreadCorePercent": 43.020588145536536,
+        "scope": "Web Inspector target process/thread observations, not whole TapTap app or GPU usage",
+        "boundary": "CPU tracking starts after frame capture begins and stops after it finishes; longer monitoring window. Runtime emits timestamp=0, so exact per-frame alignment and time-weighted averaging are unavailable. Do not convert to CPU milliseconds per measured frame."
+      }
+    }
+  ],
+  "profiles": [
+    {
+      "name": "current-profile-events",
+      "sampleCount": 11937,
+      "inclusiveSamples": {
+        "BackgroundMusic.update": 567,
+        "screen.windowSize": 8538,
+        "screen.devicePixelRatio.adapter": 4980,
+        "Root.frameMove": 744
+      },
+      "firstNativeOrScriptFrame": [
+        [
+          "send",
+          5275
+        ],
+        [
+          "toLocaleString",
+          4438
+        ],
+        [
+          "",
+          974
+        ],
+        [
+          "parse",
+          111
+        ],
+        [
+          "encode",
+          85
+        ],
+        [
+          "get",
+          72
+        ],
+        [
+          "stringify",
+          69
+        ],
+        [
+          "N2",
+          65
+        ],
+        [
+          "f",
+          50
+        ],
+        [
+          "entries",
+          35
+        ],
+        [
+          "open",
+          32
+        ],
+        [
+          "createForOfIteratorHelperLoose",
+          30
+        ]
+      ],
+      "note": "Raw stack positions checked against actual device script source. Inclusive sample sets overlap and cannot be added. Sample proportions are not CPU-time or GPU-time percentages; runtime emitted zero timestamps."
+    },
+    {
+      "name": "event-cache-profile-events",
+      "sampleCount": 2949,
+      "inclusiveSamples": {
+        "BackgroundMusic.update": 775,
+        "Root.frameMove": 1045
+      },
+      "firstNativeOrScriptFrame": [
+        [
+          "",
+          1116
+        ],
+        [
+          "send",
+          765
+        ],
+        [
+          "N2",
+          120
+        ],
+        [
+          "get",
+          103
+        ],
+        [
+          "parse",
+          54
+        ],
+        [
+          "createForOfIteratorHelperLoose",
+          48
+        ],
+        [
+          "encode",
+          47
+        ],
+        [
+          "f",
+          36
+        ],
+        [
+          "stringify",
+          35
+        ],
+        [
+          "ie",
+          33
+        ],
+        [
+          "forEach",
+          33
+        ],
+        [
+          "bindBufferBase",
+          28
+        ]
+      ],
+      "note": "Raw stack positions checked against actual device script source. Inclusive sample sets overlap and cannot be added. Sample proportions are not CPU-time or GPU-time percentages; runtime emitted zero timestamps."
+    }
+  ],
+  "restoration": {
+    "restored": true,
+    "screenOwnWindowSize": false,
+    "screenOwnDpr": false,
+    "audioOwnVolume": false,
+    "volume": 0.28,
+    "musicPlaying": true,
+    "frameRate": 60,
+    "canvas": [
+      2556,
+      1179
+    ],
+    "captureDone": true
+  },
+  "limits": [
+    "所有连续帧窗口均为H13静止状态，未覆盖移动战斗或冷启动。",
+    "调试模式下平台每API日志格式化会放大同步API成本，发行配置中须关闭不必要日志后重新验收；不建议修改TapTap SDK内部实现。",
+    "原样FPS在多轮间由38.6漂移至33左右；A/B/恢复方向一致，但不把短窗收益当作长期热稳态百分比。",
+    "CPUProfiler事件timestamp全部为0，仅报告样本均值；CPU监测与帧窗口边界不完全重合。",
+    "脚本分析器有采样开销，其帧率不用于A/B收益；缓存对照窗口未启用ScriptProfiler。",
+    "Cocos纹理/缓冲与Web Inspector内存分类均不等于完整TapTap进程内存。短窗不能证明内存泄漏或不存在泄漏。",
+    "本次临时诊断已恢复并断开；未修改游戏源代码、发布设置、帧率或图形质量，未注入角色/存档数据，也未打包或上传。游戏自身的正常计时与存档流程一直保留。"
+  ],
+  "references": [
+    "https://developer.taptap.cn/minigameapidoc/dev/dev-support/debugging/",
+    "https://webkit.org/web-inspector/timelines-tab/",
+    "https://raw.githubusercontent.com/WebKit/WebKit/main/Source/JavaScriptCore/inspector/protocol/ScriptProfiler.json",
+    "https://raw.githubusercontent.com/WebKit/WebKit/main/Source/JavaScriptCore/inspector/protocol/CPUProfiler.json"
+  ],
+  "evidenceDirectory": "src/cocos/test-results/performance/iphone-live-20261115",
+  "diagnosticTool": {
+    "name": "pymobiledevice3",
+    "version": "11.55.0",
+    "license": "GPL-3.0-or-later",
+    "scope": "isolated /tmp virtualenv, not a game dependency",
+    "download": "Official PyPI distributions with pip archive integrity; sockets bound to en0 using macOS IP_BOUND_IF. System default TUN was detected and avoided; no proxy fallback."
+  }
+}

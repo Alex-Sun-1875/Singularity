@@ -1,4 +1,5 @@
-import {Button,Camera,EventTouch,Label,Node,UITransform,Vec2,Vec3,screen,sys} from 'cc';
+import {viewportMetrics} from '../../../platform/ViewportMetrics';
+import {Button,Camera,EventTouch,Label,Node,UITransform,Vec2,Vec3,sys} from 'cc';
 import type {Point,InteractionDef} from '../../../core/Contracts';
 import type {Hud} from '../../../app/Hud';
 import {FeedbackView as F} from '../../../shared/ui/FeedbackView';
@@ -49,7 +50,7 @@ export class SceneInteraction {
   if(!this.root?.isValid||this.width!==this.hud.width||this.height!==this.hud.height)this.build();
   if(this.target?.id!==target?.id)this.pressedId=null;
   this.target=target;this.root!.active=!!target&&!hidden;if(!target||hidden)return;
-  const at=this.camera.worldToScreen(new Vec3(target.point.x,target.height+(target.anchorHeight??2.4),target.point.z)),pixels=screen.windowSize;
+  const at=this.camera.worldToScreen(new Vec3(target.point.x,target.height+(target.anchorHeight??2.4),target.point.z)),pixels=viewportMetrics.windowSize;
   const x=at.x/Math.max(1,pixels.width)*this.width-this.width/2,y=at.y/Math.max(1,pixels.height)*this.height-this.height/2;
   const halfW=this.faceWidth/2,halfH=this.faceHeight/2;
   const avoid=target.avoid&&this.camera.worldToScreen(new Vec3(target.avoid.point.x,target.avoid.height,target.avoid.point.z));

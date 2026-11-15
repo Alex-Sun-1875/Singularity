@@ -5,6 +5,7 @@ import {Node,Mesh,MeshRenderer,MeshCollider,Material,Vec3,Vec4,Color,Quat,utils,
 import type {AreaDef,Point,Obstacle,WorldQuery,Building} from '../../../core/Contracts';
 import {playableExits} from '../../journey/data/ChapterJourney';
 import {Navigation} from '../../navigation/runtime/Navigation';
+import {enemyHurtRadius} from '../../combat/common/EnemyCombat';
 import {getTerrain,TerrainDef,BridgeDef} from './Terrain';
 import {SurfaceMaterials} from './SurfaceMaterials';
 import {withTangents} from '../../actors/runtime/MeshTangents';
@@ -479,6 +480,9 @@ export class SceneBuilder implements WorldQuery {
   }
  }
  private clearForDecoration(x:number,z:number,radius=1,tall=false){
+  // Late dressing must reserve authored encounter/respawn footprints too. The
+  // stone collider is wider than the candidate radius, so keep a full metre.
+  if(tall&&this.area.enemies.some(e=>Math.abs(e.x-x)<1+Math.max(.4,enemyHurtRadius(e))&&Math.abs(e.z-z)<1+Math.max(.4,enemyHurtRadius(e))))return false;
   if([...this.area.obstacles,...this.terrain.barriers,...this.layoutObstacles].some(o=>Math.abs(o.x-x)<o.width/2+radius&&Math.abs(o.z-z)<o.depth/2+radius))return false;
   if(this.area.objects.some(o=>Math.hypot(o.x-x,o.z-z)<(tall?2:1.4)+radius)||this.area.exits.some(e=>Math.hypot(e.x-x,e.z-z)<2.2+radius))return false;
   if(Math.hypot(this.area.spawn.x-x,this.area.spawn.z-z)<(tall?2.6:1.6))return false;
@@ -660,5 +664,16 @@ export class SceneBuilder implements WorldQuery {
   return visible;
  }
  path(from:Point,to:Point){return this.navigation.path(from,to);}
+ recoverPosition(point:Point,radius:number):Point|undefined {
+  const nav=this.navigation;if(!nav.blocked(point,radius))return point;
+  // Use the final terrain/dressing footprints and existing navigation. A nearby
+  // empty pocket across water or on another floor is not a valid recovery site.
+  const height=this.height(point);
+  for(let distance=.5;distance<=6;distance+=.5)for(let i=0;i<24;i++){
+   const angle=i*Math.PI/12,candidate={x:point.x+Math.cos(angle)*distance,z:point.z+Math.sin(angle)*distance};
+   if(!nav.blocked(candidate,radius)&&Math.abs(this.height(candidate)-height)<.6&&nav.path(this.area.spawn,candidate).length>1)return candidate;
+  }
+  return undefined;
+ }
  destroy(){this.navigation.dispose();this.movementNavigation?.dispose();this.roadNavigation?.dispose();this.presentation?.destroy();this.root.destroy();const unique=new Set<Mesh>();this.meshes.forEach(mesh=>unique.add(mesh));this.generatedMeshes.forEach(mesh=>unique.add(mesh));unique.forEach(mesh=>mesh.destroy());for(const material of this.materials.values())material.destroy();for(const texture of this.textures)texture.destroy();this.meshes.clear();this.generatedMeshes.clear();this.materials.clear();this.textures.clear();}
 }

@@ -3,7 +3,8 @@ import {skillWeaponRequirement} from '../features/combat/common/SkillWeapons';
 import {BUILD_PROFILE} from '../shared/BuildProfile';
 import {CompactMask as Mask} from '../shared/ui/CompactMask';
 import {CompactGraphics} from '../shared/ui/CompactGraphics';
-import {Node,Graphics,Label,Sprite,SpriteFrame,UITransform,Canvas,Camera,Layers,Color,Vec2,Vec3,view,ResolutionPolicy,EventTouch,sys,screen,director,Sorting2D,ButtonComponent as Button,BlockInputEvents} from 'cc';
+import {LabelVariants} from '../shared/ui/LabelVariants';
+import {Node,Graphics,Label,Sprite,SpriteFrame,UITransform,Canvas,Camera,Layers,Color,Vec2,Vec3,view,ResolutionPolicy,EventTouch,sys,director,Sorting2D,ButtonComponent as Button,BlockInputEvents} from 'cc';
 import type {GameSession} from '../core/GameSession';
 import type {AutomationMode,NavigationTarget} from '../features/automation/common/Automation';
 import type {JourneyGuidance} from '../features/journey/common/JourneyGuide';
@@ -21,22 +22,30 @@ import {MiniMap,MINIMAP_RENDER_ORDER} from '../features/navigation/runtime/MiniM
 import {COMBAT_SKILLS} from '../features/combat/data/PureSkills';
 import {COMBAT_SKILL_ICONS} from '../features/combat/runtime/CombatSkillIcons';
 import {assignedLoadout} from '../features/progression/common/CombatLoadouts';
+import {progressionView} from '../features/progression/common/Progression';
 import {MenuPanel,type MenuChoice,type MenuRow,type MenuPresentation} from '../shared/ui/MenuPanel';
 import {AutomationHud,type AutomationExperience} from '../features/automation/runtime/AutomationHud';
 import {EquipmentPickupNotice} from '../features/equipment/runtime/EquipmentPickupNotice';
+import {BossNotice} from '../features/combat/runtime/BossNotice';
+import type {BossEntry} from '../features/combat/common/BossDirectory';
 import type {TrainingRange} from '../features/debug/common/TrainingRange';
 import {trainingText} from '../features/debug/locales';
+import {SUPPLIES} from '../features/equipment/data/Supplies';
 import {resourceProfile,skillResourceText} from '../features/combat/common/ClassResource';
 
 export interface HudActions {click(action:string):void;touch(control:string,phase:'start'|'move'|'end'|'cancel',event:EventTouch):void;navigate(target:NavigationTarget):void;}
-const TITLES:Record<string,string>={attack:'攻击',dash:'闪避',combat0:'主动一',combat1:'主动二',combat2:'主动三',combat3:'主动四',ultimate:'终极',interact:'交互',map:'地图',inventory:'行囊',checks:'技能',settings:'设置',supplies:'药品',pause:'暂停','potion-health':'生命药','potion-resource':'资源药',rest:'补给'};
+const TITLES:Record<string,string>={attack:'攻击',dash:'闪避',combat0:'主动一',combat1:'主动二',combat2:'主动三',combat3:'主动四',ultimate:'终极',interact:'交互',map:'地图',inventory:'背包',bosses:'首领与精英',checks:'技能',settings:'设置',supplies:'药品',pause:'暂停','potion-health':'生命药','potion-resource':'资源药',rest:'补给'};
+const POTION_ART:Record<string,string>=Object.fromEntries(Object.values(SUPPLIES).map(supply=>[supply.icon,supply.groundArt]));
 const COMBAT_ARC_SPAN=102*Math.PI/180,COMBAT_ARC_CENTER=Math.PI*.75;
 const KEYS:Record<string,string>={attack:'J',dash:'空格',combat0:'Q',combat1:'E',combat2:'R',combat3:'T',ultimate:'G',interact:'F',map:'M',inventory:'B',checks:'C',pause:'Esc','potion-health':'5','potion-resource':'6'};
 
 export class Hud {
- get uiUnit(){return this.touchMode?this.height/Math.max(1,viewportMetrics.windowSize.height/Math.max(1,viewportMetrics.devicePixelRatio)):1.25;}
  trainingRange:TrainingRange|undefined;private trainingButton:Node|null=null;
  private equipmentNotice=new EquipmentPickupNotice(this);
+ private readonly bossNotice=new BossNotice(this);
+ private bossMessage:{entry:BossEntry;ready:boolean}|null=null;
+ setBossAwareness(notice:{entry:BossEntry;ready:boolean}|null,count:number){this.bossMessage=notice;const label=this.labels.get('bosses');if(label){label.string=count?String(count):'';label.node.parent!.active=count>0;}this.layoutTopMessages();}
+ get uiUnit(){return this.touchMode?this.height/Math.max(1,viewportMetrics.windowSize.height/Math.max(1,viewportMetrics.devicePixelRatio)):1.25;}
  private equipmentPickupsAvailable=false;
  showEquipmentPickup(item:ItemDef,count=1){this.equipmentNotice.enqueue(item,count);this.layoutTopMessages();}
  clearEquipmentPickups(){this.equipmentNotice.clear();this.layoutTopMessages();}
@@ -54,7 +63,7 @@ export class Hud {
  flatPortraitViewsForWeapon:((weapon:string)=>SpriteFrame[])|null=null;
  private flatHead:SpriteFrame|null=null;private defaultHead:SpriteFrame|null=null;private portraitImage:Sprite|null=null;private portraitSize=64;
  readonly modalDisposers=new Set<()=>void>();
- private miniMap:MiniMap|null=null;private portraitRing:Graphics|null=null;private lastHealth=-1;
+ private miniMap:MiniMap|null=null;private portraitRing:Graphics|null=null;private lastExperience=-1;private lastExperienceLevel=-1;
  readonly mapTravel={busy:false,error:''};
  private mapPanel=new MapPanel(this);private pixelWidth=0;private pixelHeight=0;
  private pointerTargets=new Set<Node>();private cooldownLabels=new Map<string,Label>();private counts=new Map<string,Label>();
@@ -67,6 +76,7 @@ export class Hud {
  private supplyBeltExpanded=false;
  private combatArcActions:string[]=[];private combatUtilityActions:string[]=[];
  private attackRangeY=0;private aimCancelGap=12;
+ private attackRangeRoot:Node|undefined;private attackRangeText:LabelVariants|undefined;
  private mapDock:Node|null=null;private mapDockHome={x:0,y:0};private mapDockSlots:{node:Node;radius:number;interactive:boolean}[]=[];
  private automationHud:AutomationHud|null=null;private automationLabel:Label|null=null;private navigationButton:Node|null=null;
  private questTracker:QuestTracker|null=null;
@@ -91,7 +101,7 @@ export class Hud {
  isOverAutomation(point:Vec2){return !!this.automationHud?.contains(point);}
  toggleAutomation(){this.automationHud?.toggle();this.layoutTopMessages();}
  collapseAutomation(){this.automationHud?.setExpanded(false);this.layoutTopMessages();}
- get touchTargetSize():number{return this.touchMode?Math.max(80,48*this.height/Math.max(1,screen.windowSize.height/Math.max(1,screen.devicePixelRatio))):44;}
+ get touchTargetSize():number{return this.touchMode?Math.max(80,48*this.height/Math.max(1,viewportMetrics.windowSize.height/Math.max(1,viewportMetrics.devicePixelRatio))):44;}
  setSkillNamesVisible(show:boolean):void{
   this.showSkillNames=show;
   for(const [action,label]of this.buttonLabels){
@@ -118,7 +128,7 @@ export class Hud {
   const upgrade=rank?.upgradeEffect?`本阶效果：${skillResourceText(rank.upgradeEffect)}`:'';
   const body=def?[mechanic,effect,upgrade].filter(Boolean).join('\n'):'前往战斗技能页，将已解锁的技能装入这个位置。';
   const status=!def?'尚未配置':!model?.unlocked?`角色 Lv.${model?.requiredLevel??def.unlockLevel} 解锁`:!equipped?'未配置到技能栏':!model.compatible?skillWeaponRequirement(def):!model.resourceEnough?`${resource.name}不足，需要 ${model.resourceCost}点`:model.cooldown>0?`剩余冷却 ${model.cooldown.toFixed(1)}秒`:!model.ready?'终极技能暂未就绪':'可施放';
-  const scale=this.touchMode?this.height/Math.max(1,screen.windowSize.height/Math.max(1,screen.devicePixelRatio)):1;
+  const scale=this.touchMode?this.height/Math.max(1,viewportMetrics.windowSize.height/Math.max(1,viewportMetrics.devicePixelRatio)):1;
   const safe=sys.getSafeAreaRect(false),inset=8*scale,left=-this.width/2+Math.max(inset,safe.x),right=-this.width/2+Math.min(this.width-inset,safe.x+safe.width),bottom=-this.height/2+Math.max(inset,safe.y),top=-this.height/2+Math.min(this.height-inset,safe.y+safe.height);
   const padding=16*scale,font=13*scale,line=19*scale;
   let width=Math.min(280*scale,right-left),bodyWidth=width-2*padding;
@@ -143,7 +153,7 @@ export class Hud {
   panel.setPosition(x,Math.max(bottom+height/2,y));
  }
  private actionIconY(action:string,diameter:number):number{return action.startsWith('potion-')||this.isSkillControl(action)&&!this.showSkillNames?0:diameter*.14;}
- private actionIconSize(action:string,diameter:number):number{return diameter*(this.isSkillControl(action) ? this.showSkillNames ? .44 : this.iconPaths.get(action)?.startsWith('rpg-') ? .75 : .56 : .43);}
+ private actionIconSize(action:string,diameter:number):number{return diameter*(action.startsWith('potion-') ? .78 : this.isSkillControl(action) ? this.showSkillNames ? .44 : this.iconPaths.get(action)?.startsWith('rpg-') ? .75 : .56 : .43);}
  private layoutActionIcon(action:string,diameter:number):void {
   const icon=this.actionIcons.get(action),shade=this.cooldownShades.get(action),size=this.actionIconSize(action,diameter),y=this.actionIconY(action,diameter),clip=icon?.node.parent;
   const clipped=clip?.name==='SkillIconClip';
@@ -151,7 +161,7 @@ export class Hud {
   for(const node of [icon?.node,shade])if(node){node.getComponent(UITransform)!.setContentSize(size/node.scale.x,size/node.scale.y);node.setPosition(0,clipped?0:y);}
   this.cooldownLabels.get(action)?.node.setPosition(0,y);
  }
- private actionIconPath(action:string,path:string):string{return `ui/${this.isSkillControl(action)?'combat-relief':'icons'}/${path}`;}
+ private actionIconPath(action:string,path:string):string{if(action.startsWith('potion-')&&POTION_ART[path])return POTION_ART[path];return action==='bosses'?'ui/boss-awareness/boss-entry':`ui/${this.isSkillControl(action)?'combat-relief':'icons'}/${path}`;}
  /** Borrow concept-art frames from the actor presenter; no UI rebuild or asset ownership transfer. */
  setFlatPortrait(frame:SpriteFrame|null,headFrame?:SpriteFrame){this.flatMode=true;this.flatPortrait=frame;this.flatHead=headFrame??frame;this.refreshPortrait();}
  /** Borrow the painted portrait corresponding to the selected hairstyle. */
@@ -177,13 +187,14 @@ export class Hud {
  private roundButton(action:string,x:number,y:number,hit:number,diameter:number,touch:boolean,iconPath=action,parent=this.root,iconOnly=false,bezelOrder?:number):Node {
   const n=this.node(action,parent,x,y,hit,hit);this.pointerTargets.add(n);
   this.circularHitArea(n,hit);
-  const skill=this.isSkillControl(action),face=this.node('ButtonFace',n,0,0,diameter,diameter);
+  const skill=this.isSkillControl(action),mapTool=iconOnly&&parent.name==='MapTools',face=this.node('ButtonFace',n,0,0,diameter,diameter);
   // Same shadow, halo and bezel, precomposed into one shared sprite. Keep
   // the pressed transform and hit target, with two fewer translucent draws.
   const faceSize=skill?diameter*1.6:diameter;
-  const bezel=UiSkin.asset(face,skill?'hud-skill-face-v19':'unified-gold-medallion-v13',faceSize,faceSize,false),order=bezelOrder??(skill?-30:undefined);if(order!==undefined)this.controlOrder(bezel,order);
+  const bezel=mapTool?UiSkin.sprite(face,'ui/boss-awareness/tool-face',diameter,diameter):UiSkin.asset(face,skill?'hud-skill-face-v19':'unified-gold-medallion-v13',faceSize,faceSize,false),order=bezelOrder??(skill?-30:undefined);if(order!==undefined)this.controlOrder(bezel,order);
+  if(mapTool){const ring=UiSkin.asset(face,'unified-gold-ring-v16',diameter,diameter,false);if(order!==undefined)this.controlOrder(ring,order+1);}
   // The broad skill bezel includes its engraved scrollwork in the mipmapped skin.
-  if(!skill)UiChrome.circleOrnament(this.node('MetalScrollwork',face),diameter/2);
+  if(!skill&&!mapTool)UiChrome.circleOrnament(this.node('MetalScrollwork',face),diameter/2);
   const clipDiameter=skill?diameter*.75:diameter-8; // Keep disabled shading inside the thicker metal's inner lip.
   // Keep the original visibility/pressed-transform group; its fill is already circular.
   const clip=this.node('RoundButtonClip',face,0,0,clipDiameter,clipDiameter);clip.active=false;
@@ -193,13 +204,14 @@ export class Hud {
   if(touch){this.buttonLabels.set(action,label);for(const [event,phase]of [[Node.EventType.TOUCH_START,'start'],[Node.EventType.TOUCH_MOVE,'move'],[Node.EventType.TOUCH_END,'end'],[Node.EventType.TOUCH_CANCEL,'cancel']]as const)n.on(event,(e:EventTouch)=>{e.propagationStopped=true;if(button.interactable||this.isDescribableSkill(action)||phase==='end'||phase==='cancel')this.actions.touch(action,phase,e);});}
   else n.on(Button.EventType.CLICK,()=>this.actions.click(action));
   if(skill||iconPath){
-   const iconSize=iconOnly?diameter*.58:this.actionIconSize(action,diameter);
+   const iconSize=iconOnly?diameter*(action==='bosses'?20/28:.58):this.actionIconSize(action,diameter);
    // Skill frames load through setActionIcon so an older asynchronous request
    // cannot overwrite a newly assigned skill or fill a now-empty slot.
    const iconY=iconOnly?0:this.actionIconY(action,diameter),iconParent=skill?this.node('SkillIconClip',n,0,iconY,iconSize,iconSize):n;
    // The HUD-specific image owns its circular alpha; no stencil on this subtree.
-   const icon=skill?this.node('ControlIcon',iconParent,0,0,iconSize,iconSize).addComponent(Sprite):UiSkin.sprite(n,this.actionIconPath(action,iconPath),iconSize,iconSize,C.ink);
-   icon.sizeMode=Sprite.SizeMode.CUSTOM;icon.trim=false;icon.color=skill?Color.WHITE:C.ink;icon.node.name='ControlIcon';icon.node.active=!!iconPath;icon.node.setPosition(0,skill?0:iconY);
+   const painted=skill||action==='bosses'||action.startsWith('potion-');
+   const icon=skill||action.startsWith('potion-')?this.node('ControlIcon',iconParent,0,0,iconSize,iconSize).addComponent(Sprite):UiSkin.sprite(n,this.actionIconPath(action,iconPath),iconSize,iconSize,painted?Color.WHITE:C.ink);
+   icon.sizeMode=Sprite.SizeMode.CUSTOM;icon.trim=false;icon.color=painted?Color.WHITE:C.ink;icon.node.name='ControlIcon';icon.node.active=!!iconPath;icon.node.setPosition(0,skill?0:iconY);if(action.startsWith('potion-'))icon.node.setRotationFromEuler(0,0,45);else if(action==='supplies')icon.node.setRotationFromEuler(0,0,-45);
   }
   else{
    const mark=this.node(action==='settings'?'SettingsMark':'PauseMark',n,0,iconOnly?0:diameter*.14,32,32).addComponent(CompactGraphics);mark.strokeColor=C.ink;mark.lineWidth=2.5;
@@ -224,8 +236,8 @@ export class Hud {
  private iconButton(action:string,x:number,y:number,hit:number,diameter:number,touch=true,iconPath=action,parent=this.root):Node {
   const n=this.roundButton(action,x,y,hit,diameter,touch,iconPath,parent),iconSize=this.actionIconSize(action,diameter),iconY=this.actionIconY(action,diameter);
   const icon=(n.getChildByName('SkillIconClip')??n).getChildByName('ControlIcon')!.getComponent(Sprite)!;
-  this.actionIcons.set(action,icon);this.iconPaths.set(action,this.isSkillControl(action)?'':iconPath);this.actionDiameters.set(action,diameter);
-  if(this.isSkillControl(action))this.setActionIcon(action,iconPath);
+  this.actionIcons.set(action,icon);this.iconPaths.set(action,this.isSkillControl(action)||action.startsWith('potion-')?'':iconPath);this.actionDiameters.set(action,diameter);
+  if(this.isSkillControl(action)||action.startsWith('potion-'))this.setActionIcon(action,iconPath);
   const shade=this.isSkillControl(action)?UiSkin.sprite(icon.node.parent!,'ui/combat-relief/hud-circular/cooldown',iconSize,iconSize):UiSkin.asset(icon.node.parent!,'mask-cooldown',iconSize,iconSize,false);shade.node.name='CooldownShade';shade.node.setPosition(0,this.isSkillControl(action)?0:iconY);shade.fillType=Sprite.FillType.RADIAL;shade.fillCenter=new Vec2(.5,.5);shade.fillStart=.25;shade.fillRange=-1;shade.type=Sprite.Type.FILLED;shade.node.active=false;this.cooldownShades.set(action,shade.node);
   if(this.isSkillControl(action)){this.controlOrder(icon,-10);this.controlOrder(shade,-5);}
   const clip=n.getChildByName('ButtonFace')!.getChildByName('RoundButtonClip')!,disabled=this.node('DisabledShade',clip,0,0,diameter,diameter),fill=disabled.addComponent(CompactGraphics),radius=clip.getComponent(UITransform)!.width/2;
@@ -243,7 +255,7 @@ export class Hud {
   const size=view.getVisibleSize();this.width=size.width;this.height=size.height;this.root.getComponent(UITransform)!.setContentSize(this.width,this.height);this.camera.orthoHeight=this.height/2;
   this.touchMode=sys.isMobile;this.pointerTargets.clear();this.cooldownLabels.clear();this.counts.clear();this.buttonLabels.clear();this.actionIcons.clear();this.actionDiameters.clear();this.cooldownShades.clear();this.disabledShades.clear();this.iconPaths.clear();this.iconGroups.clear();this.tooltips.clear();
   this.combatControls.clear();this.combatLayoutKey='';this.combatArcActions=[];this.combatUtilityActions=[];
-  const cssHeight=Math.max(1,screen.windowSize.height/Math.max(1,screen.devicePixelRatio)),pixelScale=this.height/cssHeight,touchMin=Math.max(80,48*pixelScale),unit=this.touchMode?touchMin:64,gap=this.touchMode?8*pixelScale:12;
+  const cssHeight=Math.max(1,viewportMetrics.windowSize.height/Math.max(1,viewportMetrics.devicePixelRatio)),pixelScale=this.height/cssHeight,touchMin=Math.max(80,48*pixelScale),unit=this.touchMode?touchMin:64,gap=this.touchMode?8*pixelScale:12;
   // Safe-area insets already reserve the hardware obstruction. Use a small
   // screen gutter only where it is larger; never add another gutter on top.
   const safe=sys.getSafeAreaRect(false),edge=this.touchMode?UI_HUD_INSETS.information*pixelScale:10,left=-this.width/2+Math.max(edge,safe.x),right=-this.width/2+Math.min(this.width-edge,safe.x+safe.width),top=-this.height/2+Math.min(this.height-edge,safe.y+safe.height),bottom=-this.height/2+Math.max(edge,safe.y);
@@ -254,20 +266,24 @@ export class Hud {
   const art=this.node('ConceptPortrait',crop,0,0,this.portraitSize,this.portraitSize),image=this.portraitImage=art.addComponent(Sprite);image.sizeMode=Sprite.SizeMode.CUSTOM;image.trim=false;this.refreshPortrait();
   // One owner assigns the image. A late default load must not replace a selected hairstyle.
   void UiSkin.frame('portraits/native-raphael',0,image.node).then(frame=>{this.defaultHead=frame;if(this.portraitImage===image&&image.isValid)this.refreshPortrait();}).catch(error=>console.warn('[HUD] Default portrait unavailable:',error));
-  this.portraitRing=UiChrome.circle(portrait,35);this.lastHealth=-1;portrait.on(Node.EventType.TOUCH_END,()=>this.actions.click('checks'));
+  this.portraitRing=UiChrome.circle(portrait,35);this.lastExperience=-1;this.lastExperienceLevel=-1;portrait.on(Node.EventType.TOUCH_END,()=>this.actions.click('checks'));
   const bx=44;
-  this.labels.set('name',this.text(stats,'拉斐尔',bx,39,this.barWidth,this.touchMode?23:18,C.gold,28));this.labels.get('name')!.fontFamily='SimSun';
+  this.labels.set('name',this.text(stats,'拉斐尔',bx-20,39,this.barWidth-40,this.touchMode?23:18,C.gold,28));this.labels.get('name')!.fontFamily='SimSun';this.labels.get('name')!.enableWrapText=false;
   this.labels.set('health',this.text(stats,'',bx,15,this.barWidth,this.touchMode?21:14,C.ink,28));this.health=UiSkin.bar(this.node('Health',stats,bx,-2,this.barWidth,16),this.barWidth,'health');
   this.labels.set('focus',this.text(stats,'',bx,-22,this.barWidth,this.touchMode?20:13,C.muted,28));this.focus=UiSkin.bar(this.node('Focus',stats,bx,-39,this.barWidth,16),this.barWidth,'focus');
   this.labels.set('stats',this.text(stats,'',-statsW/2+54,-44,92,this.touchMode?17:11,C.muted,22));
   this.labels.set('save',this.text(stats,'',statsW/2-29,40,32,this.touchMode?18:12,C.muted,24));this.labels.get('save')!.horizontalAlign=Label.HorizontalAlign.RIGHT;
+  this.labels.get('save')!.overflow=Label.Overflow.CLAMP;this.labels.get('save')!.cacheMode=Label.CacheMode.CHAR;
+  // These captions stay clear of both bar skins. Keep the native panel/portrait
+  // order, then submit their shared glyph texture together within HeroStatus.
+  for(const key of ['health','focus','stats','save'])this.labels.get(key)!.node.setSiblingIndex(stats.children.length-1);
   const questExpanded=this.questTracker?.expanded??false;
   this.questTracker=new QuestTracker(this,{left,top:top-statsH-(this.touchMode?8*pixelScale:6),width:statsW,scale:this.touchMode?pixelScale:1.25,hit:this.touchMode?touchMin:48,expanded:questExpanded});
   this.navigationButton=this.questTracker.navigationButton;this.automationLabel=this.questTracker.actionLabel;
   for(const target of [this.questTracker.root,this.questTracker.textButton,this.navigationButton])this.pointerTargets.add(target);
   // Medallion centres sit toward the outer gold lip. Empty mounts remain
   // decorative extension points and never intercept map/world input.
-  const toolHit=this.touchMode?touchMin:44,toolFace=this.touchMode?28*pixelScale:32,reserveFace=this.touchMode?18*pixelScale:20;
+  const toolHit=this.touchMode?touchMin:48,toolFace=this.touchMode?28*pixelScale:32,reserveFace=this.touchMode?18*pixelScale:20;
   const miniRight=Math.min(this.width/2-10,right+12),miniTop=Math.min(this.height/2-10,top+12);
   const attackSize=unit*1.32,maxArcRadius=(unit+gap)/(2*Math.sin(COMBAT_ARC_SPAN/6)),arcStart=COMBAT_ARC_CENTER+COMBAT_ARC_SPAN/2,arcEnd=COMBAT_ARC_CENTER-COMBAT_ARC_SPAN/2;
   // Fit the actual arc/attack hit bounds to the bottom-right edge. A fan
@@ -279,11 +295,10 @@ export class Hud {
   // than pushing them away from the map to fit the native touch targets.
   const miniSize=this.touchMode?256:240,orbitRadius=miniSize*247.5/512;
   const firstAngle=155*Math.PI/180,toolStep=Math.max(40*Math.PI/180,2*Math.asin(Math.min(1,(toolHit+gap)/(2*orbitRadius))));
-  // Keep supplies immediately to the right of settings on the same gold rim.
-  // Four live mounts share the full touch gap; spread the two empty mounts
-  // evenly along the remaining arc.
-  const reserveStep=(Math.PI*2-toolStep*3)/3,mountAngles=[...[0,1,2,3].map(i=>firstAngle+toolStep*i),...[1,2].map(i=>firstAngle+toolStep*3+reserveStep*i)];
-  const toolActions=['inventory','checks','settings','supplies',undefined,undefined] as const;
+  // Five live mounts share the full touch gap on the same gold rim.
+  // Keep the remaining decorative mount centred in the unused arc.
+  const reserveStep=(Math.PI*2-toolStep*4)/2,mountAngles=[...[0,1,2,3,4].map(i=>firstAngle+toolStep*i),firstAngle+toolStep*4+reserveStep];
+  const toolActions=['inventory','checks','settings','bosses','supplies',undefined] as const;
   const mountPoints=mountAngles.map((angle,i)=>({x:Math.cos(angle)*orbitRadius,y:Math.sin(angle)*orbitRadius,radius:(toolActions[i]?toolHit:reserveFace)/2}));
   const miniX=miniRight-Math.max(miniSize/2,...mountPoints.map(p=>p.x+p.radius)),miniY=miniTop-Math.max(miniSize/2,...mountPoints.map(p=>p.y+p.radius));
   const miniHost=this.node('MiniMapHost',this.root,miniX,miniY,miniSize,miniSize);this.circularHitArea(miniHost,miniSize);this.pointerTargets.add(miniHost);this.miniMap=new MiniMap(this,miniHost,0,0,miniSize);
@@ -293,7 +308,11 @@ export class Hud {
   for(let i=0;i<6;i++){
    const {x,y}=mountPoints[i],action=toolActions[i],face=action?toolFace:reserveFace;
    if(action){
-    const n=this.roundButton(action,x,y,toolHit,toolFace,false,action==='settings'?'':action==='supplies'?'potion-health':action,tools,true,MINIMAP_RENDER_ORDER.toolBezel);this.mapDockSlots.push({node:n,radius:toolHit/2,interactive:true});
+    const n=this.roundButton(action,x,y,toolHit,toolFace,false,action==='settings'?'':action==='supplies'?'supplies-bottle':action,tools,true,MINIMAP_RENDER_ORDER.toolBezel);this.mapDockSlots.push({node:n,radius:toolHit/2,interactive:true});
+    if(action==='bosses'){
+     const u=this.touchMode?pixelScale:toolFace/28,badge=this.node('BossCountBadge',n,9.5*u,-9.5*u,11*u,11*u),g=badge.addComponent(CompactGraphics);g.fillColor=C.dark;g.strokeColor=C.gold;g.lineWidth=.75*u;g.circle(0,0,5.5*u);g.fill();g.stroke();
+     const count=this.text(badge,'',0,0,11*u,7*u,C.gold,11*u);count.horizontalAlign=Label.HorizontalAlign.CENTER;count.lineHeight=9*u;this.labels.set('bosses',count);
+    }
     if(action==='checks'){const mark=this.skillPointMark=this.node('SkillPointMark',n,toolFace*.32,toolFace*.32,0,0),g=mark.addComponent(CompactGraphics);g.fillColor=C.gold;g.strokeColor=C.dark;g.lineWidth=2;g.circle(0,0,3*pixelScale);g.fill();g.stroke();mark.active=false;}
     n.on(Node.EventType.MOUSE_ENTER,()=>{const hint=this.labels.get('hint');if(hint&&!this.touchMode)hint.string=action==='supplies'?`药品 · 点击${this.supplyBeltExpanded?'收起':'展开'}药品栏`:TITLES[action];});
     if(action==='checks'){const count=this.text(n,'',toolFace*.42,toolFace*.42,28,this.touchMode?16:11,C.gold,24);count.horizontalAlign=Label.HorizontalAlign.CENTER;count.enableOutline=true;count.outlineColor=C.dark;count.outlineWidth=2;this.labels.set('checks',count);}
@@ -317,7 +336,7 @@ export class Hud {
   this.dashControl=this.iconButton('dash',ax,ay,unit,skillFace);
   for(const action of ['combat0','combat1','combat2','combat3','ultimate']){
    const n=this.iconButton(action,ax,ay,unit,skillFace,true,'');n.active=false;this.combatControls.set(action,n);
-   if(action!=='ultimate'){const index=this.text(n,String(Number(action.slice(6))+1),-skillFace*.32,skillFace*.32,24,this.touchMode?17:11,C.muted,24);index.node.name='SkillSlotIndex';index.horizontalAlign=Label.HorizontalAlign.CENTER;}
+   if(action!=='ultimate'){const index=this.text(n,String(Number(action.slice(6))+1),-skillFace*.32,skillFace*.32,24,this.touchMode?17:11,C.muted,24);index.node.name='SkillSlotIndex';index.horizontalAlign=Label.HorizontalAlign.CENTER;index.overflow=Label.Overflow.CLAMP;index.cacheMode=Label.CacheMode.CHAR;}
   }
   const supplySlots=['potion-health','potion-resource',null,null] as const;
   const supplyHit=this.touchMode?touchMin:52,supplyFace=this.touchMode?Math.min(72,supplyHit):48,supplyStep=supplyHit+gap,padding=4*pixelScale;
@@ -336,7 +355,13 @@ export class Hud {
   this.labels.set('compass',this.text(this.root,'',0,top-22,statsW,this.touchMode?21:14,C.gold,36));this.labels.get('compass')!.horizontalAlign=Label.HorizontalAlign.CENTER;
   this.labels.set('hint',this.text(this.root,this.touchMode?'':'WASD 移动 · Shift 慢行 · 滚轮缩放',0,bottom+132,Math.max(220,Math.min(480,this.width-600)),12,C.muted,24));this.labels.get('hint')!.horizontalAlign=Label.HorizontalAlign.CENTER;
   this.attackRangeY=bottom+220;
-  const range=this.text(this.root,'',0,this.attackRangeY,Math.max(260,Math.min(520,this.width-620)),this.touchMode?22:16,C.ink,36);range.node.name='AttackRangeHint';range.horizontalAlign=Label.HorizontalAlign.CENTER;range.enableOutline=true;range.outlineWidth=2;range.outlineColor=new Color(9,7,5,240);range.node.active=false;this.labels.set('attack-range',range);
+  const rangeWidth=Math.max(260,Math.min(520,this.width-620));
+  const rangeRoot=this.attackRangeRoot=this.node('AttackRangeHint',this.root,0,this.attackRangeY,rangeWidth,36);
+  this.attackRangeText=new LabelVariants(()=>{
+   const label=this.text(rangeRoot,'',0,0,rangeWidth,this.touchMode?22:16,C.ink,36);
+   label.horizontalAlign=Label.HorizontalAlign.CENTER;label.enableOutline=true;label.outlineWidth=2;label.outlineColor=new Color(9,7,5,240);return label;
+  });
+  this.labels.set('attack-range',this.attackRangeText.empty);
   this.labels.set('weapon',this.text(this.root,'',ax,bottom-4,unit*2.7,this.touchMode?20:13,C.muted,28));this.labels.get('weapon')!.horizontalAlign=Label.HorizontalAlign.CENTER;
   this.labels.get('weapon')!.node.active=false; // Inventory and the attack tooltip already provide weapon details without a permanent bottom gutter.
   // Native shared glyphs retain stable counters instead of uploading a new
@@ -347,6 +372,7 @@ export class Hud {
   for(const key of ['toast','compass','weapon']){const label=this.labels.get(key)!;label.color=key==='compass'?C.route:C.ink;label.enableOutline=true;label.outlineWidth=2;label.outlineColor=new Color(9,7,5,240);}
   const lane=Math.min(-(left+statsW)-gap,miniX-orbitRadius-toolHit/2-gap);
   this.automationHud=new AutomationHud(this,this.touchMode?pixelScale:1.25,top,Math.max(0,2*lane));
+  this.bossNotice.mount(this.touchMode?pixelScale:1.25);
   const trainingHit=this.touchMode?touchMin:48,trainingWidth=this.touchMode?120*pixelScale:160;
   this.trainingButton=this.button(this.root,trainingText('toolbar'),0,top-trainingHit/2,trainingWidth,trainingHit,'training:settings');this.trainingButton.active=false;
   // Use the safe bottom lane above supplies; an aiming gesture must never
@@ -360,13 +386,13 @@ export class Hud {
  }
  refreshMiniMap(game:GameSession,worldCamera:Camera,paused=false){if(this.trainingRange)return;if(paused)this.miniMap?.refreshContacts(game);else this.miniMap?.update(game,worldCamera,this.guidance);}
  update(game:GameSession,worldCamera:Camera,toast:string,save:string,compass='',toastRole:FeedbackRole='text.normal'){
-  // The HUD reads level/points only. Detailed gear-derived attributes belong
+  // Read lightweight progression here; detailed gear-derived attributes belong
   // to the character panel, rather than a full equipment scan every frame.
   const s=game.state,p=s.player,weapon=EQUIPMENT[s.equipment.weapon],growth=s.progression,combat=s.combat;
   // setAutomation owns final bar visibility; avoid disabling and re-enabling its labels within every training frame.
   const practice=this.trainingRange;if(this.trainingButton)this.trainingButton.active=!!practice&&!this.portrait&&!this.modal.children.length;const mini=this.root.getChildByName('MiniMapHost')??this.mapDock?.getChildByName('MiniMapHost');if(mini)mini.active=!practice;
   this.refreshMiniMap(game,worldCamera);this.labels.get('checks')!.string=growth.unspentPoints?String(growth.unspentPoints):'';this.labels.get('compass')!.string=compass;this.layoutTopMessages();
-  this.labels.get('name')!.string=`拉斐尔 · Lv${growth.level}`;this.labels.get('health')!.string=`生命 ${Math.ceil(p.hp)} / ${p.maxHp}${p.shield>0?` 盾${Math.ceil(p.shield)}`:''}`;
+  this.labels.get('health')!.string=`生命 ${Math.ceil(p.hp)} / ${p.maxHp}${p.shield>0?` 盾${Math.ceil(p.shield)}`:''}`;
   const resource=resourceProfile(s);this.labels.get('focus')!.string=`${resource.name} ${Math.floor(p.focus)} / ${p.maxFocus}`;F.tint(this.labels.get('focus')!,resource.feedback);this.labels.get('save')!.string=save.startsWith('已保存')?'✓':'·';F.tint(this.labels.get('save')!,save.startsWith('已保存')?'state.success':save==='尚未保存'?'state.failure':'state.idle');
   // Expanded training trackers need the final area caption only, without dirtying it with the campaign area first.
   this.guidanceClock+=director.getDeltaTime();
@@ -380,7 +406,16 @@ export class Hud {
   this.labels.get('stats')!.string=`金币 ${p.gold}`;
   this.labels.get('weapon')!.string=weapon?.name??'';this.labels.get('toast')!.string=toast;F.tint(this.labels.get('toast')!,toastRole);const healthRole=playerHealthFeedbackRole(p.hp,p.maxHp);F.tint(this.labels.get('health')!,healthRole==='health.player'?'health.text':healthRole);F.tint(this.labels.get('stats')!,'reward.gold');
   for(const[fill,value,max,role]of [[this.health,p.hp,p.maxHp,'health.player'],[this.focus,p.focus,p.maxFocus,resource.feedback]]as const){F.bar(fill,value,max,role);fill.node.active=value>0;}
-  if(this.portraitRing&&p.hp!==this.lastHealth){this.lastHealth=p.hp;const g=this.portraitRing;g.clear();UiChrome.drawCircle(g,35);g.lineWidth=2;F.ink(g,playerHealthFeedbackRole(p.hp,p.maxHp),'stroke');const fraction=Math.max(0,p.hp/p.maxHp);if(fraction>0){g.moveTo(0,-37);g.arc(0,0,37,-Math.PI/2,-Math.PI/2+Math.PI*2*fraction,true);g.stroke();}}
+  // XP is local to this level, using the same curve as the character panel.
+  // Redraw only when progression changes; health updates never touch this ring.
+  if(this.portraitRing&&(growth.totalXp!==this.lastExperience||growth.level!==this.lastExperienceLevel)){
+   this.lastExperience=growth.totalXp;this.lastExperienceLevel=growth.level;
+   const progress=progressionView(growth),full=progress.level>=progress.maxLevel,fraction=full?1:Math.max(0,Math.min(1,progress.xp/progress.xpToNext));
+   const experience=full?'已满级':`${progress.xp}/${progress.xpToNext}`;
+   this.labels.get('name')!.string=`拉斐尔·Lv${growth.level}·${experience}`;
+   const g=this.portraitRing;g.clear();UiChrome.drawCircle(g,35);g.lineWidth=2;F.ink(g,'reward.experience','stroke');
+   if(fraction>0){g.moveTo(0,-37);g.arc(0,0,37,-Math.PI/2,-Math.PI/2+Math.PI*2*fraction,true);g.stroke();}
+  }
   if(this.skillPointMark)this.skillPointMark.active=game.state.progression.skillPoints>0;
   const actions:Record<string,string>={combat0:combat.activeSlots[0],combat1:combat.activeSlots[1],combat2:combat.activeSlots[2],combat3:combat.activeSlots[3],ultimate:combat.ultimate,dash:'COM_01'};
   const loadout=assignedLoadout(combat),skillViews=game.combatSkillView(Object.entries(actions).map(([action,id])=>id??(action.startsWith('combat')?loadout?.activeSlots[Number(action.slice(6))]:action==='ultimate'?loadout?.ultimate:'')).filter(id=>!!id));
@@ -396,7 +431,7 @@ export class Hud {
     this.counts.get(action)!.string=String(stock);this.counts.get(action)!.color=stock>0?C.ink:C.red;
     label.string=remaining>1e-6?remaining.toFixed(1):'';label.node.active=remaining>1e-6;
     const shade=this.cooldownShades.get(action)!;shade.active=remaining>1e-6;const sprite=shade.getComponent(Sprite)!;if(sprite.spriteFrame)sprite.fillRange=-Math.min(1,remaining/5);
-    const icon=this.actionIcons.get(action)!;icon.node.parent!.getComponent(Button)!.interactable=stock>0&&!full&&!busy&&remaining<=1e-6;F.tint(icon,stock<=0?'text.disabled':health?'damage.taken':resource.feedback);this.setDisabledShade(action,stock<=0||full);
+    const icon=this.actionIcons.get(action)!;icon.node.parent!.getComponent(Button)!.interactable=stock>0&&!full&&!busy&&remaining<=1e-6;icon.color=Color.WHITE;this.setDisabledShade(action,stock<=0||full);
     if(action==='potion-resource')this.setActionIcon(action,resource.icon);
     this.tooltips.set(action,stock<=0?'补给已用尽 · 在安全检查点补满':full?`${health?'生命':resource.name}已满 · 无需使用药水`:health?'5 · 恢复40%生命（至少40点）· 共享5秒药水冷却':`6 · ${resource.potion} · 恢复45%${resource.name}上限 · 共享5秒药水冷却`);continue;
    }
@@ -465,13 +500,17 @@ export class Hud {
  setAimCancelVisible(visible:boolean):void {
   this.cancel.active=visible;
   const hint=this.labels.get('hint');if(hint)hint.node.active=!visible;
-  const range=this.labels.get('attack-range');if(range){const top=this.cancel.position.y+this.cancel.getComponent(UITransform)!.height/2;range.node.setPosition(0,visible?Math.max(this.attackRangeY,top+this.aimCancelGap+range.node.getComponent(UITransform)!.height/2):this.attackRangeY);}
+  const range=this.attackRangeRoot;if(range){const top=this.cancel.position.y+this.cancel.getComponent(UITransform)!.height/2;range.setPosition(0,visible?Math.max(this.attackRangeY,top+this.aimCancelGap+range.getComponent(UITransform)!.height/2):this.attackRangeY);}
  }
- setAttackRangeHint(text:string,valid=true){const label=this.labels.get('attack-range');if(!label)return;label.string=text;label.color=valid?C.ink:C.red;label.node.active=!!text;}
+ setAttackRangeHint(text:string,valid=true){if(this.attackRangeText)this.labels.set('attack-range',this.attackRangeText.set(text,valid?C.ink:C.red));}
  private layoutTopMessages(){
-  const top=this.trainingButton?.active?this.trainingButton.position.y-this.trainingButton.getComponent(UITransform)!.height/2-12:this.automationHud?.visible?this.automationHud.bottom-12:this.height/2-22,compass=this.labels.get('compass'),passiveVisible=!this.automationExpanded&&!this.modal.children.length,toast=this.labels.get('toast');
+  const u=this.uiUnit,passiveVisible=!this.automationExpanded&&!this.modal.children.length&&!this.trainingRange;
+  const base=this.trainingButton?.active?this.trainingButton.position.y-this.trainingButton.getComponent(UITransform)!.height/2-12:this.automationHud?.visible?this.automationHud.bottom-12:this.height/2-22;
+  const noticeTop=(this.automationHud?.visible?this.automationHud.visualBottom:base)-8*u;
+  this.bossNotice.layout(noticeTop,this.bossMessage,passiveVisible&&!this.portrait);
+  const stacked=this.bossNotice.visible,top=stacked?noticeTop-this.bossNotice.height-8*u:base,compass=this.labels.get('compass'),toast=this.labels.get('toast');
   if(compass){compass.node.active=passiveVisible&&!(this.equipmentNotice.dropVisible&&this.equipmentPickupsAvailable);if(compass.node.position.y!==top-18)compass.node.setPosition(0,top-18);}
-  if(toast){const y=this.equipmentNotice.dropVisible?top-this.equipmentNotice.height/2:top-(compass?.string?83:35);this.equipmentNotice.layout(0,y,this.equipmentPickupsAvailable&&passiveVisible&&!this.portrait);toast.node.active=passiveVisible&&!this.equipmentNotice.visible;if(toast.node.position.y!==y)toast.node.setPosition(0,y);}
+  if(toast){const half=Math.max(35,this.equipmentNotice.hasNotice?this.equipmentNotice.height/2:0),y=stacked?top-(compass?.string?36+8*u:0)-half:top-(compass?.string?83:35);this.equipmentNotice.layout(0,y,this.equipmentPickupsAvailable&&passiveVisible&&!this.portrait);toast.node.active=passiveVisible&&!this.equipmentNotice.visible;if(toast.node.position.y!==y)toast.node.setPosition(0,y);}
  }
  private setActionIcon(action:string,path:string){
   const group=this.isSkillControl(action)?this.skillIconGroup:'';
@@ -483,9 +522,9 @@ export class Hud {
   UiSkin.releaseOwner(icon.node);
   const diameter=this.actionDiameters.get(action);if(diameter)this.layoutActionIcon(action,diameter);
   if(!path)return;
-  void UiSkin.hudSkillFrame(this.actionIconPath(action,path),icon.node,group).then(frame=>{if(icon.isValid&&this.iconPaths.get(action)===path&&this.iconGroups.get(action)===group)icon.spriteFrame=frame;}).catch(()=>{});
+  void UiSkin.hudSkillFrame(this.actionIconPath(action,path),icon.node,group).then(frame=>{if(icon.isValid&&this.iconPaths.get(action)===path&&this.iconGroups.get(action)===group){if(action.startsWith('potion-'))frame.packable=false;icon.spriteFrame=frame;}}).catch(()=>{});
  }
- isOverUI(screenPoint:Vec2):boolean {if(this.automationHud?.contains(screenPoint))return true;for(const node of this.pointerTargets)if(node.isValid&&node.activeInHierarchy&&node.getComponent(UITransform)?.hitTest(screenPoint))return true;return false;}
+ isOverUI(screenPoint:Vec2):boolean {if(this.automationHud?.contains(screenPoint)||this.bossNotice.contains(screenPoint))return true;for(const node of this.pointerTargets)if(node.isValid&&node.activeInHierarchy&&node.getComponent(UITransform)?.hitTest(screenPoint))return true;return false;}
  clearModal(){for(const dispose of Array.from(this.modalDisposers))dispose();this.modalDisposers.clear();this.mapPanel.hide();for(const child of [...this.modal.children])child.destroy();this.modal.removeAllChildren();}
  show(title:string,body:string,buttons:MenuChoice[],wide=false,presentation:MenuPresentation={}){
   new MenuPanel(this,{width:wide?1000:undefined,...presentation}).show(title,body,buttons);
@@ -497,6 +536,6 @@ export class Hud {
  atlasKey(code:number):boolean{return this.mapPanel.key(code);}
  // Button.onDisable restores the child target's scale; disable every nested button before destroying any faces.
  private deactivateControls(node:Node){for(const button of node.getComponentsInChildren(Button))button.enabled=false;node.active=false;}
- resize(){const pixels=screen.windowSize;if(pixels.width!==this.pixelWidth||pixels.height!==this.pixelHeight){this.pixelWidth=pixels.width;this.pixelHeight=pixels.height;director.root?.resize(pixels.width,pixels.height);view.setDesignResolutionSize(UI_DESIGN_SIZE.width,UI_DESIGN_SIZE.height,ResolutionPolicy.FIXED_HEIGHT);}const s=view.getVisibleSize();if(Math.abs(s.width-this.width)<1&&Math.abs(s.height-this.height)<1){this.mapPanel.refreshLayout();return false;}const obsolete=this.root.children.filter(child=>child!==this.modal&&child.name!=='CampaignScene');for(const child of obsolete)this.deactivateControls(child);this.miniMap?.destroy();this.miniMap=null;for(const child of obsolete)child.destroy();this.labels.clear();this.build();return true;}
+ resize(){const pixels=viewportMetrics.windowSize;if(pixels.width!==this.pixelWidth||pixels.height!==this.pixelHeight){this.pixelWidth=pixels.width;this.pixelHeight=pixels.height;director.root?.resize(pixels.width,pixels.height);view.setDesignResolutionSize(UI_DESIGN_SIZE.width,UI_DESIGN_SIZE.height,ResolutionPolicy.FIXED_HEIGHT);}const s=view.getVisibleSize();if(Math.abs(s.width-this.width)<1&&Math.abs(s.height-this.height)<1){this.mapPanel.refreshLayout();return false;}const obsolete=this.root.children.filter(child=>child!==this.modal&&child.name!=='CampaignScene');for(const child of obsolete)this.deactivateControls(child);this.miniMap?.destroy();this.miniMap=null;for(const child of obsolete)child.destroy();this.labels.clear();this.build();return true;}
  destroy(){this.deactivateControls(this.root);this.miniMap?.destroy();this.clearModal();this.root.destroy();this.camera.node.destroy();}
 }

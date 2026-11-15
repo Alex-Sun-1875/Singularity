@@ -1,0 +1,403 @@
+{
+  "title": "渲染提交与动态文字优化：保留3D角色和骨骼动画",
+  "recordedAt": "2026-11-15T12:40:43.116335+08:00",
+  "status": "implemented-validated-and-test-package-built-phone-thermal-validation-pending",
+  "beforeVersion": "0.3.48",
+  "packageVersion": "0.3.49",
+  "scope": "按用户要求优化前两项：UI绘制提交和动态文字上传。角色模型、骨骼、动画、战斗规则、帧率与分辨率保持。没有新增依赖或测试用例，没有引擎全局补丁或跳过GPU上传。",
+  "changes": [
+    {
+      "file": "src/cocos/assets/scripts/app/Hud.ts",
+      "behavior": "在HeroStatus自身层级内把不遮挡血条的生命/资源/金币/保存文字放到同一绘制段；保存标记和技能栏单字符编号复用原生CHAR字形。父级触控节点和位置不变。"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/journey/runtime/QuestTracker.ts",
+      "behavior": "仅任务距离和短导航动作使用原生CHAR；任务正文、目标名称与复杂长文本保留原方案。"
+    },
+    {
+      "file": "src/cocos/assets/scripts/features/automation/runtime/AutomationHud.ts",
+      "behavior": "固定字号CLAMP的简短模式名和经验计数共享字形，避免每次经验变更重新上传整段文字。"
+    },
+    {
+      "file": "src/cocos/assets/scripts/shared/ui/LabelVariants.ts",
+      "behavior": "攻击距离提示保留原生TTF、描边、字号、字距和SHRINK；最多6份原生Label布局按文本及颜色复用，隐藏项通过原生UIOpacity=0退出绘制，避免反复onEnable使纹理失效。空标签另有一个不产生字图的入口；节点随HUD销毁。"
+    }
+  ],
+  "reuseBasis": "已核对Cocos3.8.8官方Label缓存、2D合批文档及本机引擎实现。优先使用Label.CHAR与原生节点绘制顺序；CHAR不支持原有SHRINK/粗体等样式的路径保留。短提示需要反复切换且必须保留完整TTF排版，因此仅为这条路径加有界原生Label复用适配。",
+  "renderValidation": {
+    "environment": {
+      "before": {
+        "area": "U1-06",
+        "time": 0,
+        "canvas": [
+          1792,
+          828
+        ],
+        "frameRate": 60,
+        "actorClass": "t",
+        "heroMeshes": 24,
+        "animationClips": [
+          "walk_staff",
+          "attack_bow",
+          "attack_staff",
+          "attack_sword",
+          "death",
+          "dodge",
+          "hit",
+          "idle",
+          "idle_staff",
+          "interact",
+          "run",
+          "run_staff",
+          "spell",
+          "walk"
+        ],
+        "baked": false,
+        "policy": {
+          "cleanup": true,
+          "dynamicAtlas": false
+        }
+      },
+      "after": {
+        "area": "U1-06",
+        "time": 0,
+        "canvas": [
+          1792,
+          828
+        ],
+        "frameRate": 60,
+        "actorClass": "t",
+        "heroMeshes": 24,
+        "animationClips": [
+          "walk_staff",
+          "attack_bow",
+          "attack_staff",
+          "attack_sword",
+          "death",
+          "dodge",
+          "hit",
+          "idle",
+          "idle_staff",
+          "interact",
+          "run",
+          "run_staff",
+          "spell",
+          "walk"
+        ],
+        "baked": false,
+        "policy": {
+          "cleanup": true,
+          "dynamicAtlas": false
+        }
+      }
+    },
+    "uiBatches": [
+      {
+        "state": "normal",
+        "before": 61,
+        "after": 51
+      },
+      {
+        "state": "range-valid",
+        "before": 62,
+        "after": 52
+      },
+      {
+        "state": "range-invalid",
+        "before": 62,
+        "after": 52
+      },
+      {
+        "state": "cancel-aim",
+        "before": 66,
+        "after": 56
+      },
+      {
+        "state": "quest-expanded",
+        "before": 62,
+        "after": 53
+      },
+      {
+        "state": "automation-expanded",
+        "before": 67,
+        "after": 57
+      },
+      {
+        "state": "supplies",
+        "before": 78,
+        "after": 68
+      },
+      {
+        "state": "settings",
+        "before": 100,
+        "after": 90
+      },
+      {
+        "state": "inventory",
+        "before": 194,
+        "after": 184
+      }
+    ],
+    "inputGeometryIdenticalInAllNineStates": true,
+    "pixelReport": "src/cocos/test-results/performance/ui-render-optimization-20261115/compiled-v3-pixels.json",
+    "pixelBoundary": "除有意切到CHAR的少量文字字形区域外，九组画面最大通道差不超过1/255。整图并非逐像素相同，CHAR字形栅格/间距存在局部变化，已查看代表截图。攻击距离原生TTF复用的独立前后/恢复像素差均0。UI比较只在浏览器诊断中关闭世界相机以隔离UI；正式代码未关闭世界相机。",
+    "lifecycle": [
+      {
+        "requested": {
+          "width": 844,
+          "height": 390
+        },
+        "viewport": [
+          1558.2608695652175,
+          720
+        ],
+        "portrait": false,
+        "canvas": [
+          1688,
+          780
+        ],
+        "allocated": 6,
+        "active": 1,
+        "hidden": true,
+        "current": "攻击距离 1.85米 · 前方扇形",
+        "frameRate": 60
+      },
+      {
+        "requested": {
+          "width": 1024,
+          "height": 472
+        },
+        "viewport": [
+          1562.0338983050847,
+          720
+        ],
+        "portrait": false,
+        "canvas": [
+          2048,
+          944
+        ],
+        "allocated": 6,
+        "active": 1,
+        "hidden": true,
+        "current": "攻击距离 1.85米 · 前方扇形",
+        "frameRate": 60
+      },
+      {
+        "requested": {
+          "width": 414,
+          "height": 896
+        },
+        "viewport": [
+          332.67857142857144,
+          720
+        ],
+        "portrait": true,
+        "canvas": [
+          828,
+          1792
+        ],
+        "allocated": 6,
+        "active": 1,
+        "hidden": true,
+        "current": "攻击距离 1.85米 · 前方扇形",
+        "frameRate": 60
+      },
+      {
+        "requested": {
+          "width": 896,
+          "height": 414
+        },
+        "viewport": [
+          1558.2608695652175,
+          720
+        ],
+        "portrait": false,
+        "canvas": [
+          1792,
+          828
+        ],
+        "allocated": 6,
+        "active": 1,
+        "hidden": true,
+        "current": "攻击距离 1.85米 · 前方扇形",
+        "frameRate": 60
+      }
+    ],
+    "lifecycleBoundary": "浏览器实测新的画布尺寸，通过公开Game.EVENT_SHOW失效现有视口缓存并重建HUD；非TapTap真机旋转验收。"
+  },
+  "textValidation": {
+    "compiled240Frames": [
+      {
+        "kind": "before",
+        "frames": 240,
+        "uploads": 180,
+        "restored": true
+      },
+      {
+        "kind": "after",
+        "frames": 240,
+        "uploads": 2,
+        "restored": true
+      }
+    ],
+    "conditions": "同样240帧循环隐藏、普通近战提示、自动瞄准提示及有效/无效颜色。首个普通提示在测量前已预热，候选仅首次补建另外两种变体。180到2指整段TTF字图上传次数，不是全部GPU上传次数或整机功耗比例。",
+    "rangeExactPixels": {
+      "after": {
+        "max": 0,
+        "pixelsAbove3": 0
+      },
+      "restored": {
+        "max": 0,
+        "pixelsAbove3": 0
+      }
+    },
+    "cacheLimit": 6,
+    "cacheLimitAfter24UniqueHintsAndFourResizesVerified": true,
+    "hiddenVariantsDrawCount": 0,
+    "supplementalGuidanceTitle": "两个编译版本均已确认非空：↗ 战火中的山驿。补充截图的取消瞄准状态不同，不用于像素对照。"
+  },
+  "continuousCombat": {
+    "fixture": {
+      "area": "H12",
+      "family": "BOW",
+      "level": 17,
+      "control": "move"
+    },
+    "windowSeconds": 20,
+    "canvas": [
+      1792,
+      828
+    ],
+    "frameRateSetting": 60,
+    "imageCleanup": true,
+    "dynamicAtlas": false,
+    "firstABBA": {
+      "before": {
+        "mainThreadMsPerFrame": 6.352233062152183,
+        "fps": 59.879185752672356,
+        "drawMedianSamples": [
+          130,
+          129
+        ]
+      },
+      "after": {
+        "mainThreadMsPerFrame": 6.591088254922399,
+        "fps": 59.978548773928004,
+        "drawMedianSamples": [
+          118,
+          118
+        ]
+      }
+    },
+    "warmBAAB": {
+      "before": {
+        "mainThreadMsPerFrame": 7.7750045833333346,
+        "fps": 59.973313224441284,
+        "drawMedianSamples": [
+          130,
+          129
+        ]
+      },
+      "after": {
+        "mainThreadMsPerFrame": 5.230801556105215,
+        "fps": 59.837285731829134,
+        "drawMedianSamples": [
+          117,
+          118
+        ]
+      }
+    },
+    "coverage": "8个20秒实测窗，均为H12/Lv17/BOW正常移动、有限药水、真实伤害/技能/击败，角色存活；使用项目现有page-driver与farm-driver。所有窗口约59.8至60.0FPS。",
+    "acceptedConclusion": "总绘制批次中位数原版129–130，候选117–118。",
+    "cpuConclusion": "CPU读数轮次波动明显，两个页面的寿命/缓存条件也不完全相同：第一组均值6.35→6.59ms/帧，后续预热组7.78→5.23ms/帧。两组均保留，不批准稳定CPU改善百分比，不换算GPU或温降收益。",
+    "raw": [
+      "src/cocos/test-results/performance/ui-render-optimization-20261115/continuous-combat-abba.json",
+      "src/cocos/test-results/performance/ui-render-optimization-20261115/continuous-combat-baab-warm.json"
+    ]
+  },
+  "threeDimensionalFidelity": {
+    "actorSourceHashesUnchanged": true,
+    "sameHeroMeshes": 24,
+    "sameAnimationClips": 14,
+    "WARRealtimeSkeletonEnabled": true,
+    "sources": "source-before.json / source-after.json 与source-scope-verification.json；两编译版本运行时网格/动画列表完全一致。移动战斗继续使用3D主角。"
+  },
+  "memoryTradeoff": {
+    "measuredTextureBytesBefore": 189699316,
+    "measuredTextureBytesAfter": 189939376,
+    "observedIncreaseBytes": 240060,
+    "scope": "这组浏览器战斗窗的Cocos纹理分配计数；提示池换取少量纹理保留以减少重复重绘，不是完整App内存或泄漏结论。"
+  },
+  "checks": {
+    "typescript": "passed",
+    "coreTypescript": "passed",
+    "existingTestsPassed": 150,
+    "newTestCases": 0,
+    "creatorWebBefore": "passed",
+    "creatorWebAfter": "passed",
+    "rawDiff": "src/cocos/test-results/performance/ui-render-optimization-20261115/ui-only.diff",
+    "sourceScope": "src/cocos/test-results/performance/ui-render-optimization-20261115/source-scope-verification.json",
+    "postPreviewFormattingEquivalence": "src/cocos/test-results/performance/ui-render-optimization-20261115/newline-equivalence.json",
+    "runtimeErrors": [],
+    "finalPackageTypescript": "passed",
+    "finalPackageCoreTypescript": "passed",
+    "finalPackageTestsPassed": 150,
+    "creatorTapTap": "passed",
+    "officialConversion": "passed",
+    "zipCRC": "passed",
+    "sha256": "passed",
+    "scriptsStableDuringBuild": 225,
+    "whitespace": "passed; existing CRLF recognized with core.whitespace=cr-at-eol",
+    "finalSourceDelta": [
+      "src/cocos/assets/scripts/app/BuildInfo.ts",
+      "src/cocos/assets/scripts/app/Hud.ts",
+      "src/cocos/assets/scripts/features/automation/runtime/AutomationHud.ts",
+      "src/cocos/assets/scripts/features/journey/runtime/QuestTracker.ts",
+      "src/cocos/assets/scripts/shared/ui/LabelVariants.ts"
+    ],
+    "unexpectedScriptChanges": []
+  },
+  "package": {
+    "status": "complete",
+    "path": "/Users/sunlh/workspace/singularity/src/out/0.3.49/SwordAndFire_0.3.49.zip",
+    "bytes": 219965713,
+    "sha256": "9e4a091cc605a786f6731ee8c62fd85f3116525d169be10cb93bd1b8465d217d",
+    "zipCRC": "passed",
+    "compiledModules": [
+      {
+        "path": "assets/main/index.e7c43.js",
+        "sha256": "2971759daa8c64e9650f196f61b88f37837c834a22a83adecf9b23eb871bbc31",
+        "modulePresent": true,
+        "boundedVariantFields": true
+      }
+    ],
+    "scriptsStableDuringBuild": 225,
+    "uploaded": false,
+    "phoneLoaded": false,
+    "platformVerified": false
+  },
+  "cleanup": {
+    "browserAndLocalDriverStopped": true,
+    "ownedPreviewPortsStopped": [
+      7385,
+      7386,
+      7387
+    ],
+    "successfulProbeRestorationsConfirmed": true,
+    "phonePatchesInstalled": false
+  },
+  "limits": [
+    "没有加载新包的TapTap真机采样；手机调试目标已关闭，已请求重新打开，尚未收到已打开回复。",
+    "没有GPU硬件耗时、功率、温度或热降频数据，不能把绘制/上传减少换算为降温百分比。",
+    "画面与生命周期验证属于本机Cocos浏览器，不能替代小游戏入口、真机触控/多点、真实前后台和持续温升验收。",
+    "最初试验直接把攻击距离改为CHAR会改变字距，未采纳；V1/V2可视化夹具的过期小地图/未实际改变画布/错误screen.emit已分别登记，最终选择V3。"
+  ],
+  "pending": [
+    "加载0.3.49后检查真机触控、旋转/前后台、菜单和存档重启。",
+    "同设备、同亮度与充电条件连续移动战斗10–15分钟，确认实际温升与耗电。"
+  ],
+  "references": [
+    "https://docs.cocos.com/creator/3.8/manual/en/ui-system/components/editor/label.html",
+    "https://docs.cocos.com/creator/3.8/manual/en/ui-system/components/engine/ui-batch.html"
+  ]
+}

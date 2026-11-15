@@ -1,5 +1,6 @@
+import {viewportMetrics} from '../../../platform/ViewportMetrics';
 import {gameResources as resources} from '../../../shared/assets/GameResources';
-import {Camera,Color,JsonAsset,Material,Mesh,MeshRenderer,Node,Quat,Rect,Size,SpriteFrame,Texture2D,Vec3,Vec4,gfx,geometry,primitives,screen,utils} from 'cc';
+import {Camera,Color,JsonAsset,Material,Mesh,MeshRenderer,Node,Quat,Rect,Size,SpriteFrame,Texture2D,Vec3,Vec4,gfx,geometry,primitives,utils} from 'cc';
 import type {SceneBuilder,FlatEnvironmentObject,FlatEnvironmentPatch} from './SceneBuilder';
 import {getMapArt,mapArtSurface,MAP_ART_SURFACES,type MapArtSurface,type MapArtProfile} from '../data/MapArt';
 import {SurfaceMaterials} from './SurfaceMaterials';
@@ -237,7 +238,7 @@ export class FlatWorldLayers {
   this.cardGroups=Array.from(groups.values());this.groupBoundsDirty=true;
  }
  private cullCards(rotationChanged:boolean){
-  const position=this.camera.node.worldPosition,camera=this.camera.camera,viewport=screen.windowSize;
+  const position=this.camera.node.worldPosition,camera=this.camera.camera,viewport=viewportMetrics.windowSize;
   if(!rotationChanged&&!this.groupBoundsDirty&&Vec3.squaredDistance(position,this.cullPosition)<.0625&&Math.abs(this.camera.orthoHeight-this.cullHeight)<.05&&camera.aspect===this.cullAspect&&viewport.width===this.cullWidth&&viewport.height===this.cullViewportHeight&&this.camera.projection===this.cullProjection&&this.camera.near===this.cullNear&&this.camera.far===this.cullFar)return false;
   if(rotationChanged||this.groupBoundsDirty){
    const right=this.camera.node.right,up=this.camera.node.up,min=new Vec3(),max=new Vec3();

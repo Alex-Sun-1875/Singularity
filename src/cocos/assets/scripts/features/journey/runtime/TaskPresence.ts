@@ -1,4 +1,5 @@
-import {Camera,Graphics,Label,Node,Vec2,Vec3,screen,sys} from 'cc';
+import {viewportMetrics} from '../../../platform/ViewportMetrics';
+import {Camera,Graphics,Label,Node,Vec2,Vec3,sys} from 'cc';
 import type {Hud} from '../../../app/Hud';
 import type {GameSession} from '../../../core/GameSession';
 import type {SceneBuilder} from '../../world/runtime/SceneBuilder';
@@ -32,7 +33,7 @@ export class TaskPresence {
   const p=game.state.player;if(!this.world.visible(p,target.point)||Math.abs(this.world.height(p)-this.world.height(target.point))>6){this.hide();return;}
   this.anchor.set(target.point.x,this.world.height(target.point),target.point.z);this.anchor.add(Vec3.multiplyScalar(this.projected,this.camera.node.up,target.type==='exit'?3.1:2));
   this.camera.worldToScreen(this.anchor,this.projected);if(this.projected.z<0||this.projected.z>1){this.hide();return;}
-  const pixels=screen.windowSize,x=this.projected.x/Math.max(1,pixels.width)*this.width-this.width/2,y=this.projected.y/Math.max(1,pixels.height)*this.height-this.height/2,halfW=150,halfH=31;
+  const pixels=viewportMetrics.windowSize,x=this.projected.x/Math.max(1,pixels.width)*this.width-this.width/2,y=this.projected.y/Math.max(1,pixels.height)*this.height-this.height/2,halfW=150,halfH=31;
   const fits=(w:number,h:number)=>{
    if(Math.abs(x)+w>this.width/2-16||Math.abs(y)+h>this.height/2-16)return false;
    for(const [dx,dy]of [[0,0],[-w,-h],[w,-h],[-w,h],[w,h]]){this.sample.set((x+dx+this.width/2)/this.width*pixels.width,(y+dy+this.height/2)/this.height*pixels.height);if(this.hud.isOverUI(this.sample))return false;}return true;

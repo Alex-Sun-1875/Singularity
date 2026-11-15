@@ -1,5 +1,6 @@
+import {viewportMetrics} from '../../../platform/ViewportMetrics';
 import {CompactGraphics} from '../../../shared/ui/CompactGraphics';
-import {Camera,Color,Graphics,Node,Vec3,screen} from 'cc';
+import {Camera,Color,Graphics,Node,Vec3} from 'cc';
 import type {Hud} from '../../../app/Hud';
 import type {GameSession} from '../../../core/GameSession';
 import type {SceneBuilder} from '../../world/runtime/SceneBuilder';
@@ -8,7 +9,7 @@ import type {CampaignBeat} from '../common/CinematicTypes';
 export class CinematicCues {
  private canvas:Graphics;
  constructor(root:Node,private hud:Hud,private camera:Camera,private world:SceneBuilder,private game:GameSession){const layer=hud.node('CinematicCues',root,0,0,hud.width,hud.height);layer.setSiblingIndex(0);this.canvas=layer.addComponent(CompactGraphics);}
- private project(x:number,z:number,y=.1){const p=this.camera.worldToScreen(new Vec3(x,this.world.height({x,z})+y,z)),pixels=screen.windowSize;return{x:p.x*this.hud.width/Math.max(1,pixels.width)-this.hud.width/2,y:p.y*this.hud.height/Math.max(1,pixels.height)-this.hud.height/2};}
+ private project(x:number,z:number,y=.1){const p=this.camera.worldToScreen(new Vec3(x,this.world.height({x,z})+y,z)),pixels=viewportMetrics.windowSize;return{x:p.x*this.hud.width/Math.max(1,pixels.width)-this.hud.width/2,y:p.y*this.hud.height/Math.max(1,pixels.height)-this.hud.height/2};}
  draw(b:CampaignBeat,time:number){
   const g=this.canvas,w=this.hud.width,h=this.hud.height,t=time,p=this.game.state.player;g.clear();
   if(b.cue==='dusk'){g.fillColor=new Color(10,15,43,Math.round(135*Math.sin(Math.min(1,t/4)*Math.PI)));g.rect(-w/2,-h/2,w,h);g.fill();}

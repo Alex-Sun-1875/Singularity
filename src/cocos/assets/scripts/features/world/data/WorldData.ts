@@ -1,9 +1,13 @@
 import type { AreaDef, Building, EnemySpawn, InteractionDef, Obstacle, Point } from '../../../core/Contracts';
 import {installJourney} from '../../journey/data/ChapterJourney';
 import {installCampaign} from './CampaignWorld';
+import {CAMPAIGN_EVENTS} from '../../campaign/data/CampaignEvents';
+import {CAMPAIGN_ENEMY_TEMPLATES} from '../../campaign/data/Campaign';
+import {FIELD_DISCOVERIES} from '../../campaign/data/FieldQuests';
+import {worldText} from '../locales';
 import {installCampaignScenes} from '../../cinematics/data/CampaignScenes';
 import {installMonsterEcology} from './MonsterEcology';
-import {installGrowingSources} from '../../equipment/data/GrowingEquipment';
+import {installGrowingSources,GROWING_SCENES} from '../../equipment/data/GrowingEquipment';
 import {installCampaignCombat} from '../../campaign/data/CampaignBattles';
 
 // Local coordinates are metres: +X east and +Z north. Atlas coordinates are
@@ -450,6 +454,19 @@ installCampaignCombat(AREAS);
 installGrowingSources(AREAS);
 installJourney(AREAS);
 installCampaignScenes(AREAS);
+// Prerequisites name their real source and location rather than internal flag IDs.
+for(const event of Object.values(CAMPAIGN_EVENTS))for(const flag of [...event.requires??[],...event.requiresAny??[]]){
+ if(event.prerequisiteHints?.[flag])continue;
+ const source=Object.values(CAMPAIGN_EVENTS).find(e=>e.sets?.includes(flag)||e.choices?.some(c=>c.sets.includes(flag)));
+ const legacy:Record<string,string>={workers_released:'release_workers',gate_raised:'captain_gate'};
+ const clue=Object.values(AREAS).flatMap(area=>area.objects.filter(o=>o.evidence===flag||legacy[flag]&&o.action===legacy[flag]).map(object=>({area,object})))[0];
+ const area=source?AREAS[source.area]:clue?.area,label=source?.label??clue?.object.label;
+ const boss=flag.startsWith('boss_defeated:')?flag.slice(14):'',arena=boss?Object.values(AREAS).find(a=>a.enemies.some(e=>e.bossId===boss)):undefined;
+ const discovery=FIELD_DISCOVERIES.find(d=>d.flag===flag),scene=GROWING_SCENES.find(s=>s.flag===flag);
+ const hint=area&&label?worldText('interaction.prerequisite',{area:area.name,label}):arena?worldText('interaction.defeat',{area:arena.name,label:CAMPAIGN_ENEMY_TEMPLATES[boss]?.name??arena.name}):discovery?worldText('interaction.discovery',{chapter:discovery.chapter,name:discovery.name}):scene?worldText('interaction.investigate',{area:AREAS[scene.area].name,label:scene.label}):flag==='workers_returned'?worldText('interaction.returnWorkers'):undefined;
+ if(hint)(event.prerequisiteHints??={})[flag]=hint;
+}
+
 
 export function getArea(id: string): AreaDef {
   const found = AREAS[id];

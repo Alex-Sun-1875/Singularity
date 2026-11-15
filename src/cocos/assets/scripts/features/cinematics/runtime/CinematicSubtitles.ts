@@ -1,4 +1,5 @@
-import {ButtonComponent as Button,Color,Label,Node,screen,sys,UIOpacity,Vec2} from 'cc';
+import {viewportMetrics} from '../../../platform/ViewportMetrics';
+import {ButtonComponent as Button,Color,Label,Node,sys,UIOpacity,Vec2} from 'cc';
 import type {Hud} from '../../../app/Hud';
 import {UiSkin} from '../../../shared/ui/UiSkin';
 import {applyRpgFont} from '../../../shared/ui/RpgFont';
@@ -12,7 +13,7 @@ export class CinematicSubtitles {
  readonly root:Node;readonly layout:ReturnType<typeof cinematicLayout>;
  private opacity:UIOpacity;private speaker:Label;private caption:Label;private controls:Label[]=[];
  constructor(private hud:Hud){
-  const w=hud.width,h=hud.height,cssHeight=screen.windowSize.height/Math.max(1,screen.devicePixelRatio),scale=h/Math.max(1,cssHeight),safe=sys.getSafeAreaRect(false);
+  const w=hud.width,h=hud.height,cssHeight=viewportMetrics.windowSize.height/Math.max(1,viewportMetrics.devicePixelRatio),scale=h/Math.max(1,cssHeight),safe=sys.getSafeAreaRect(false);
   this.layout=cinematicLayout(w,h,{left:safe.x,right:Math.max(0,w-safe.x-safe.width),top:Math.max(0,h-safe.y-safe.height),bottom:safe.y});
   // Phone targets use real logical-screen units. Desktop follows the same design scale.
   this.layout.hit=Math.max(this.layout.hit,48*scale);

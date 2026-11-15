@@ -1,11 +1,12 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { AREAS, R1_ROADS, getArea } from '../assets/scripts/features/world/data/WorldData';
-import type { AreaDef, Point } from '../assets/scripts/core/Contracts';
+import type { AreaDef, Point, WorldQuery } from '../assets/scripts/core/Contracts';
 import { Navigation } from '../assets/scripts/features/navigation/runtime/Navigation';
 import { GameSession } from '../assets/scripts/core/GameSession';
 import {CAMPAIGN_BOSSES,CAMPAIGN_LEVEL_LIST} from '../assets/scripts/features/campaign/data/Campaign';
 import {CAMPAIGN_EVENTS} from '../assets/scripts/features/campaign/data/CampaignEvents';
+import {awardXp,cumulativeXp} from '../assets/scripts/features/progression/common/Progression';
 import {CAMPAIGN_ROADS} from '../assets/scripts/features/world/data/CampaignGeography';
 
 const expectedRoads = `01-02 01-03 01-04 01-20 02-18 02-19 03-04 03-19 04-07 04-08 05-19 05-06 05-07 06-14 06-15 07-08 07-13 07-14 07-17 08-09 08-11 09-10 09-20 10-11 11-12 11-17 12-13 12-16 13-14 13-16 13-17 14-15 15-16`.split(' ').map(edge => edge.split('-').map(id => `S${id}`).sort().join('|')).sort();
@@ -187,4 +188,33 @@ test('the existing S08 pass guard supplies one real kill drop and T1 is a safe o
   opening.enter(getArea('S01-T1'));
   assert.equal(opening.state.checkpoint.area,'S01-T1');
   assert.deepEqual({x:opening.state.checkpoint.x,z:opening.state.checkpoint.z},getArea('S01-T1').spawn);
+});
+
+test('hunt-contract interaction reports its prerequisite, commits once, and restores its completed state',()=>{
+ const world:WorldQuery={move:(p,d)=>({x:p.x+d.x,z:p.z+d.z}),visible:()=>true,height:()=>0};
+ const g=new GameSession(19,world);awardXp(g.state.progression,'fixture',cumulativeXp(18));
+ const rockwood=getArea('H14'),action=rockwood.objects.find(o=>o.eventId==='h14-cancel-hunt')!;
+ g.enter(rockwood,action);
+ const unavailable=g.campaignEventAvailability(action.eventId!);
+ assert.equal(unavailable.available,false);assert.equal(unavailable.completed,false);
+ assert.match(unavailable.reason,/湿林庄园/);assert.match(unavailable.reason,/被转卖的猎径副图/);
+ const hp=g.state.enemies.map(e=>e.hp),blocked=g.interact(action);
+ assert.ok(blocked.some(e=>e.type==='notice'&&e.text?.includes('被转卖的猎径副图')));
+ assert.equal(g.state.receipts['campaign:h14-cancel-hunt'],undefined);assert.equal(g.state.flags.h14_hunt_cancelled,undefined);assert.deepEqual(g.state.enemies.map(e=>e.hp),hp);
+ const estate=getArea('S14'),clue=estate.objects.find(o=>o.evidence==='s14-huntroute')!;
+ g.enter(estate,clue);g.interact(clue);assert.equal(g.state.flags['s14-huntroute'],true);
+ g.enter(rockwood,action);const ready=g.campaignEventAvailability(action.eventId!);
+ assert.equal(ready.available,true);assert.equal(ready.confirmLabel,'缴销猎契');
+ const wildlife=g.state.enemies.filter(e=>e.respawnSeconds).map(e=>({id:e.id,hp:e.hp})),done=g.interact(action);
+ assert.equal(g.state.flags.h14_hunt_cancelled,true);assert.equal(g.state.receipts['campaign:h14-cancel-hunt'],true);
+ assert.ok(g.state.enemies.filter(e=>!e.respawnSeconds).every(e=>e.hp===0));
+ assert.deepEqual(g.state.enemies.filter(e=>e.respawnSeconds).map(e=>({id:e.id,hp:e.hp})),wildlife);
+ assert.ok(done.some(e=>e.type==='quest'&&e.id==='h14-cancel-hunt'&&e.text?.includes('封锁已解除')));
+ const rewards=()=>JSON.stringify({gold:g.state.player.gold,iron:g.state.player.iron,xp:g.state.progression.totalXp,inventory:g.state.inventory,rolls:g.state.dropRolls}),paid=rewards();
+ assert.equal(g.campaignEventAvailability(action.eventId!).completed,true);assert.equal(g.approachInteractionVisible(action),false);
+ assert.ok(g.interact(action).some(e=>e.type==='inspect'));assert.equal(rewards(),paid,'repeat confirmation never pays again');
+ const restored=GameSession.restore(g.snapshot(),world);restored.enter(rockwood,action);
+ assert.equal(restored.campaignEventAvailability(action.eventId!).completed,true);
+ assert.equal(restored.campaignEventAvailability(action.eventId!).available,false);
+ assert.match(restored.campaignEventAvailability(action.eventId!).reason,/猎契已缴销/);
 });

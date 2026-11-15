@@ -1,0 +1,12 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><title>首领刷新与导航 设计总览</title><style>
+@font-face{font-family:Rpg;src:url('../../../src/cocos/assets/resources/ui/quiet-bronze/rpg-serif-v2.ttf')}*{box-sizing:border-box}body{margin:0;width:1808px;padding:40px;background:#171d1b;color:#eee5cf;font:16px/1.5 -apple-system,BlinkMacSystemFont,'PingFang SC',sans-serif}header{display:flex;align-items:end;justify-content:space-between;margin-bottom:26px}h1{font:36px Rpg,serif;margin:0 0 8px}header p{margin:0;color:#b1bdb2;font-size:16px}.version{text-align:right;color:#d4bd86}.version small{display:block;color:#9eafa2;margin-top:7px;font-size:14px}.grid{display:grid;grid-template-columns:844px 844px;gap:24px 40px}figure{margin:0}figcaption{display:flex;justify-content:space-between;align-items:center;height:38px}figcaption b{font-size:17px;font-weight:500;color:#ebd39f}figcaption span{color:#a4b4a7;font-size:14px}img{width:844px;height:390px;display:block;border-radius:8px}.note{color:#b3bfb3;margin:9px 0 0;font-size:14px}footer{border-top:1px solid #3f4b41;margin-top:26px;padding-top:18px;display:flex;gap:36px;color:#c3cdbf;font-size:16px}footer b{color:#e6cc91;font-weight:500}footer small{margin-left:auto;color:#859b89;font-size:13px}
+</style></head><body>
+<header><div><h1>首领刷新与自动导航</h1><p>剑与火 · 第一、二章　／　通知短暂出现，导航复用任务框，详细状态按需展开。</p></div><div class="version">UI 设计稿 v1<small>844 × 390 逻辑视口 · 2026.11.15</small></div></header>
+<div class="grid">
+<figure><figcaption><b>刷新时 · 顶部轻提醒</b><span>4 秒后收起</span></figcaption><img src="01-notice.png" alt="顶部可再战提醒与前往按钮"><p class="note">点击前往才开始寻路；错过提示仍可从地图进入目标列表。</p></figure>
+<figure><figcaption><b>主动查看 · 首领与精英列表</b><span>按章节查看 · 内容可滚动</span></figcaption><img src="02-list.png" alt="首领与精英目标列表"><p class="note">在场、冷却、可再战分别表达；复用已有暗金框、字体与状态色。</p></figure>
+<figure><figcaption><b>正在寻路 · 原任务框接管导航</b><span>停止 / 继续 / 抵达</span></figcaption><img src="03-route.png" alt="左侧任务框显示蓝色导航状态"><p class="note">只到安全入口；遇敌先暂停，不替玩家开战，也不自动恢复移动。</p></figure>
+<figure><figcaption><b>尚在冷却 · 关注或提前前往</b><span>10 分钟独立冷却</span></figcaption><img src="06-cooldown.png" alt="精英冷却倒计时及提前前往"><p class="note">关注目标在剩余 30 秒时提醒一次；到时可再战，不限时消失。</p></figure>
+</div>
+<footer><span><b>3 个 Boss + 4 个具名精英</b>　沿用 600 秒复战</span><span><b>2 类循环精英</b>　50 秒 + 安全刷新条件</span><small>既有场景合成示意 · 非游戏实装截图 · 待用户审阅</small></footer>
+</body></html>

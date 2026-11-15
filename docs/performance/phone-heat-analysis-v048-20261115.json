@@ -1,0 +1,475 @@
+{
+  "title": "0.3.48 手机发热：当前真机负载分析",
+  "recordedAt": "2026-11-15T11:56:30.088975+08:00",
+  "status": "current-device-workload-profiled-thermal-contribution-unmeasured",
+  "scope": "本轮只做真机采样与源码分析，没有修改游戏源码、画质、帧率、存档或发布设置。手机由用户实际移动、攻击、施法和重试；游戏自身正常存档继续运行。",
+  "environment": {
+    "device": {
+      "ProductType": "iPhone12,1",
+      "ProductVersion": "27.2.1"
+    },
+    "engine": "Cocos Creator 3.8.8",
+    "runtimeVersion": "0.3.48",
+    "target": "com.easyplay.taptap.now / tjapp://game-runtime",
+    "canvas": [
+      1792,
+      828
+    ],
+    "dpr": 2,
+    "frameRateSetting": 60,
+    "transport": "USB WebInspector",
+    "debugMode": true,
+    "TapTapVersion": "not collected",
+    "chargingBrightnessLowPowerState": "not provided",
+    "differentFromHistoricalDevice": "历史 0.3.42/43 采样为 iPhone15,2，本轮为 iPhone12,1，不能合并作版本A/B。"
+  },
+  "conclusion": "当前最充分的证据指向持续渲染提交、UI遍历/文字贴图更新，以及移动战斗的规则、动画和特效叠加负载。S07正常帧采样出现约34.7FPS；随后敌人更少的战斗profile约57.4FPS，说明负载随现场变化。没有温度、功率、GPU硬件时间或热降频数据，不能断言各路径的发热贡献或已发生热降频。",
+  "findings": [
+    {
+      "priority": 1,
+      "id": "render-ui-submission",
+      "status": "confirmed-workload-thermal-share-unmeasured",
+      "evidence": "精确映射当前手机脚本：Root.frameMove 在静止为主窗口经过904/1789个JS样本、战斗窗口691/1676；UIBatcher.update分别241和177个。S07正常窗口draw calls中位数140、峰值206，战斗profile中位数145、峰值210。",
+      "meaning": "画面持续提交场景、UI与图形状态；即使某段达到60FPS，也没有据此证明低耗电。",
+      "next": "保持帧率，先按实际批次核查UI/纹理/材质切批、透明覆盖、重复缓冲提交和可见对象。阴影保留为待GPU对照项，不把Root.frameMove当成GPU耗时。"
+    },
+    {
+      "priority": 2,
+      "id": "dynamic-texture-labels",
+      "status": "confirmed-current-stack-path",
+      "evidence": "战斗profile的71/1676个JS样本经过texSubImage2D，已核对同栈为Label dirty-renderer -> updateRenderData -> _updateTexture -> _uploadTexture -> Texture.uploadData。",
+      "meaning": "部分文字刷新会重新生成整段字图并上传；现有生命/资源/金币/冷却等已设置CHAR，不能据此声称所有HUD均未缓存，也尚未定位这些样本各自的具体Label实例。",
+      "next": "定位发生整段重绘的Label，检查重复dirty、文本/样式变化与缓存方式。固定字号的小字符集复用CHAR或BMFont，SHRINK与中文大字符集需保留适配限制并验收。"
+    },
+    {
+      "priority": 3,
+      "id": "combat-animation-presentation",
+      "status": "confirmed-profile-paths",
+      "evidence": "战斗JS样本包含GameSession.advance、移动碰撞、Effects、FlatActors和Player3DActors；现有角色路径还经过骨骼曲线求值和关节/图形缓冲提交。",
+      "meaning": "2D风格画面仍含3D主角和持续呈现工作；敌人、移动和技能叠加时CPU及图形提交继续增加。",
+      "next": "区分必要玩法模拟与纯呈现，复核屏幕外动画、无变化节点与特效上传；不可仅为省电改变战斗规则或直接停更敌人。"
+    },
+    {
+      "priority": 4,
+      "id": "historical-fixes-present",
+      "status": "verified-in-exact-phone-source",
+      "evidence": "当前手机脚本包含installWindowInfoCache启动接入、submittedVolume去重、gameplay空菜单键、15秒普通自动存档和serializeSnapshot。",
+      "meaning": "旧版约11次/帧窗口查询和每帧音量写入不能直接作为本次主因。当前profile同步send、日志日期格式化仍可见，但不再呈现旧版主导形态。存档在战斗样本中仍存在，不能宣称成本归零。"
+    }
+  ],
+  "samples": [
+    {
+      "directory": "src/cocos/test-results/performance/phone-heat-analysis-20261115/current-baseline",
+      "label": "current-v048-S04-death-baseline",
+      "version": "0.3.48",
+      "device": {
+        "ProductType": "iPhone12,1",
+        "ProductVersion": "27.2.1"
+      },
+      "profiled": false,
+      "durationMs": 20003,
+      "frames": 937,
+      "fps": 46.84297355396691,
+      "frameMs": {
+        "p50": 18.0,
+        "p95": 29.0,
+        "p99": 55.59999999999991,
+        "max": 581
+      },
+      "drawCalls": {
+        "median": 136,
+        "min": 131,
+        "max": 152
+      },
+      "trianglesMedian": 113551,
+      "canvas": [
+        1792,
+        828
+      ],
+      "frameRateSetting": 60,
+      "startState": {
+        "area": "S04",
+        "time": 243.07399999998466,
+        "moved": 563.8917383812723,
+        "hp": 0,
+        "status": "dead",
+        "menu": "",
+        "loading": false,
+        "enemySlots": 27,
+        "aliveEnemies": 26
+      },
+      "endState": {
+        "area": "S04",
+        "time": 249.0369999999841,
+        "moved": 579.7288702990022,
+        "hp": 130,
+        "status": "playing",
+        "menu": "",
+        "loading": false,
+        "enemySlots": 27,
+        "aliveEnemies": 26
+      },
+      "movingFrames": 192,
+      "actionFrames": 0,
+      "textureBytesRange": [
+        196411916,
+        203753900
+      ],
+      "cleanup": {
+        "collectorRemoved": true
+      },
+      "warnings": [],
+      "trackingComplete": {},
+      "webInspectorCPU": null
+    },
+    {
+      "directory": "src/cocos/test-results/performance/phone-heat-analysis-20261115/current-profile",
+      "label": "current-v048-S04-profile",
+      "version": "0.3.48",
+      "device": {
+        "ProductType": "iPhone12,1",
+        "ProductVersion": "27.2.1"
+      },
+      "profiled": true,
+      "durationMs": 12001,
+      "frames": 720,
+      "fps": 59.995000416631946,
+      "frameMs": {
+        "p50": 17.0,
+        "p95": 18.0,
+        "p99": 19.0,
+        "max": 32
+      },
+      "drawCalls": {
+        "median": 145.0,
+        "min": 135,
+        "max": 145
+      },
+      "trianglesMedian": 111297.0,
+      "canvas": [
+        1792,
+        828
+      ],
+      "frameRateSetting": 60,
+      "startState": {
+        "area": "S04",
+        "time": 261.6709999999828,
+        "moved": 595.5069383277614,
+        "hp": 130,
+        "status": "playing",
+        "menu": "",
+        "loading": false,
+        "enemySlots": 27,
+        "aliveEnemies": 19
+      },
+      "endState": {
+        "area": "S04",
+        "time": 273.6679999999844,
+        "moved": 595.5069383277614,
+        "hp": 130,
+        "status": "playing",
+        "menu": "",
+        "loading": false,
+        "enemySlots": 27,
+        "aliveEnemies": 19
+      },
+      "movingFrames": 0,
+      "actionFrames": 23,
+      "textureBytesRange": [
+        198095628,
+        198095628
+      ],
+      "cleanup": {
+        "collectorRemoved": true
+      },
+      "warnings": [],
+      "trackingComplete": {
+        "ScriptProfiler.trackingComplete": 1,
+        "Memory.trackingComplete": 1,
+        "CPUProfiler.trackingComplete": 1
+      },
+      "webInspectorCPU": {
+        "samples": 26,
+        "meanPercent": 43.0692316202017,
+        "timestampsAllZero": true,
+        "scope": "Selected WebInspector target, 100% = one core. Monitor window can extend beyond frame window; no per-frame alignment or time weighting."
+      }
+    },
+    {
+      "directory": "src/cocos/test-results/performance/phone-heat-analysis-20261115/standing-baseline",
+      "label": "current-v048-standing-unprofiled",
+      "version": "0.3.48",
+      "device": {
+        "ProductType": "iPhone12,1",
+        "ProductVersion": "27.2.1"
+      },
+      "profiled": false,
+      "durationMs": 20023,
+      "frames": 647,
+      "fps": 32.31284023373121,
+      "frameMs": {
+        "p50": 25.0,
+        "p95": 49.0,
+        "p99": 143.0999999999999,
+        "max": 1021
+      },
+      "drawCalls": {
+        "median": 133,
+        "min": 92,
+        "max": 202
+      },
+      "trianglesMedian": 112785,
+      "canvas": [
+        1792,
+        828
+      ],
+      "frameRateSetting": 60,
+      "startState": {
+        "area": "S04",
+        "time": 332.3379999999728,
+        "moved": 711.9539964175366,
+        "hp": 65,
+        "status": "playing",
+        "menu": "",
+        "loading": false,
+        "enemySlots": 27,
+        "aliveEnemies": 24
+      },
+      "endState": {
+        "area": "S07",
+        "time": 349.79999999996,
+        "moved": 768.0350835243011,
+        "hp": 53,
+        "status": "playing",
+        "menu": "",
+        "loading": true,
+        "enemySlots": 27,
+        "aliveEnemies": 27
+      },
+      "movingFrames": 486,
+      "actionFrames": 86,
+      "textureBytesRange": [
+        193735760,
+        200029168
+      ],
+      "cleanup": {
+        "collectorRemoved": true
+      },
+      "warnings": [],
+      "trackingComplete": {},
+      "webInspectorCPU": null
+    },
+    {
+      "directory": "src/cocos/test-results/performance/phone-heat-analysis-20261115/combat-baseline-retry",
+      "label": "current-v048-moving-combat-unprofiled",
+      "version": "0.3.48",
+      "device": {
+        "ProductType": "iPhone12,1",
+        "ProductVersion": "27.2.1"
+      },
+      "profiled": false,
+      "durationMs": 20002,
+      "frames": 694,
+      "fps": 34.696530346965304,
+      "frameMs": {
+        "p50": 25.0,
+        "p95": 44.39999999999998,
+        "p99": 114.88000000000045,
+        "max": 182
+      },
+      "drawCalls": {
+        "median": 140.0,
+        "min": 58,
+        "max": 206
+      },
+      "trianglesMedian": 105287.0,
+      "canvas": [
+        1792,
+        828
+      ],
+      "frameRateSetting": 60,
+      "startState": {
+        "area": "S07",
+        "time": 367.97899999994667,
+        "moved": 809.2285724201123,
+        "hp": 26,
+        "status": "playing",
+        "menu": "",
+        "loading": false,
+        "enemySlots": 27,
+        "aliveEnemies": 18
+      },
+      "endState": {
+        "area": "S07",
+        "time": 387.0209999999312,
+        "moved": 829.7175540655817,
+        "hp": 135,
+        "status": "playing",
+        "menu": "",
+        "loading": false,
+        "enemySlots": 32,
+        "aliveEnemies": 24
+      },
+      "movingFrames": 178,
+      "actionFrames": 108,
+      "textureBytesRange": [
+        218185600,
+        218185600
+      ],
+      "cleanup": {
+        "collectorRemoved": true
+      },
+      "warnings": [],
+      "trackingComplete": {},
+      "webInspectorCPU": null
+    },
+    {
+      "directory": "src/cocos/test-results/performance/phone-heat-analysis-20261115/combat-profile",
+      "label": "current-v048-moving-combat-profile",
+      "version": "0.3.48",
+      "device": {
+        "ProductType": "iPhone12,1",
+        "ProductVersion": "27.2.1"
+      },
+      "profiled": true,
+      "durationMs": 10001,
+      "frames": 574,
+      "fps": 57.3942605739426,
+      "frameMs": {
+        "p50": 17.0,
+        "p95": 21.399999999999977,
+        "p99": 47.27999999999997,
+        "max": 65
+      },
+      "drawCalls": {
+        "median": 145.0,
+        "min": 124,
+        "max": 210
+      },
+      "trianglesMedian": 107847.0,
+      "canvas": [
+        1792,
+        828
+      ],
+      "frameRateSetting": 60,
+      "startState": {
+        "area": "S07",
+        "time": 409.22599999991326,
+        "moved": 882.4338667872943,
+        "hp": 114,
+        "status": "playing",
+        "menu": "",
+        "loading": false,
+        "enemySlots": 32,
+        "aliveEnemies": 11
+      },
+      "endState": {
+        "area": "S07",
+        "time": 419.23899999991255,
+        "moved": 912.8690513975143,
+        "hp": 110,
+        "status": "playing",
+        "menu": "",
+        "loading": false,
+        "enemySlots": 32,
+        "aliveEnemies": 8
+      },
+      "movingFrames": 469,
+      "actionFrames": 140,
+      "textureBytesRange": [
+        218185600,
+        218185600
+      ],
+      "cleanup": {
+        "collectorRemoved": true
+      },
+      "warnings": [],
+      "trackingComplete": {
+        "ScriptProfiler.trackingComplete": 1,
+        "Memory.trackingComplete": 1,
+        "CPUProfiler.trackingComplete": 1
+      },
+      "webInspectorCPU": {
+        "samples": 22,
+        "meanPercent": 46.97727272727273,
+        "timestampsAllZero": true,
+        "scope": "Selected WebInspector target, 100% = one core. Monitor window can extend beyond frame window; no per-frame alignment or time weighting."
+      }
+    }
+  ],
+  "inclusiveStackCounts": {
+    "current-profile": {
+      "Root.frameMove": 904,
+      "UIBatcher.update": 241,
+      "ChapterGame.update": 663,
+      "GameSession.advance": 124,
+      "Hud.update": 89,
+      "FlatActors.update": 82,
+      "texSubImage2D": 9,
+      "bufferData": 51,
+      "bindBufferBase": 50,
+      "send": 15,
+      "toLocaleString": 4,
+      "totalStacks": 1789
+    },
+    "combat-profile": {
+      "Root.frameMove": 691,
+      "UIBatcher.update": 177,
+      "ChapterGame.update": 647,
+      "GameSession.advance": 156,
+      "Hud.update": 72,
+      "FlatActors.update": 56,
+      "texSubImage2D": 71,
+      "bufferData": 25,
+      "bindBufferBase": 40,
+      "send": 33,
+      "toLocaleString": 5,
+      "totalStacks": 1676
+    }
+  },
+  "sourceVerification": {
+    "deviceSourcesSha256": {
+      "current-profile": "bebe9f51f77c565c5783959a9c214a54ebc071f53623ca3be2863a503aec62b4",
+      "combat-profile": "bebe9f51f77c565c5783959a9c214a54ebc071f53623ca3be2863a503aec62b4"
+    },
+    "identicalAcrossProfiles": true,
+    "stackCoordinates": "1-based UTF-16 code units, checked against this session source. Engine anonymous System.register correctly distinguished from preceding localized modules."
+  },
+  "exclusions": [
+    {
+      "directory": "src/cocos/test-results/performance/phone-heat-analysis-20261115/combat-baseline",
+      "reason": "目标还被前一段采样占用，连接选择正常拒绝，无frames.json、无采样注入；排除。"
+    },
+    {
+      "directory": "src/cocos/test-results/performance/phone-heat-analysis-20261115/current-baseline",
+      "reason": "包含死亡、重试与移动，不能当稳定死亡或站立场景。"
+    },
+    {
+      "directory": "src/cocos/test-results/performance/phone-heat-analysis-20261115/standing-baseline",
+      "reason": "命名standing，但实际486帧移动、86帧动作、S04到S07切图且末尾loading，不能当静止基线；约32.3FPS和长帧包含加载影响。"
+    }
+  ],
+  "limits": [
+    "所有inclusive样本相互重叠，不能相加，也不是功耗百分比。",
+    "CPUProfiler时间戳均为零，选中目标约43%/47%单核均值不是整机CPU；不能换算逐帧毫秒。",
+    "S07非profile窗口与后续profile的活敌数量、位置、重试/收益状态不同，不构成A/B；不能把34.7到57.4称作优化收益或温降。",
+    "GFX纹理与缓冲为资源分配量，不是完整App内存。S07窗口纹理约218MB保持稳定；短窗无法证明长期不存在泄漏。",
+    "设备没有可用xctrace，仅安装CommandLineTools；未获取GPU硬件时间、温度、功率和热状态，充电/亮度条件未知。"
+  ],
+  "cleanup": {
+    "allSuccessfulCollectorsRemoved": true,
+    "profileTrackingCompleted": true,
+    "warnings": [],
+    "gameSourceChangedByThisAnalysis": false,
+    "frameRateAndResolutionChanged": false
+  },
+  "nextValidation": [
+    "同设备、同场景、相近起始温度、明确亮度/充电状态，连续移动战斗10–15分钟；另比较关闭非必要容器日志后的正常体验。",
+    "对UI/文字、渲染批次/缓冲、纯动画呈现分别做单变量对照，保持60FPS设置；记录功率/温升或设备热状态，才确认降温贡献。"
+  ],
+  "references": [
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/runtime/runtime-guide/",
+    "https://developer.taptap.cn/minigameapidoc/dev/dev-support/debugging/",
+    "https://docs.cocos.com/creator/3.8/manual/en/ui-system/components/editor/label.html"
+  ]
+}

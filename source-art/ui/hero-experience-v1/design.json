@@ -1,0 +1,125 @@
+{
+  "createdOn": "2026-11-15",
+  "purpose": "人物经验 HUD 同高设计提案；尚未修改游戏代码",
+  "userConstraint": "用户必须知道升级还需多少经验，左上人物区域不能增高",
+  "sourceEvidence": {
+    "frame": "src/cocos/assets/scripts/app/Hud.ts:248 — statsW=328 (mobile), statsH=116, 720-high Cocos canvas",
+    "checkmark": "src/cocos/assets/scripts/app/Hud.ts:366 — save.startsWith(已保存) displays ✓; otherwise ·",
+    "persistence": "src/cocos/assets/scripts/app/ChapterGame.ts save() — actual successful SaveStore.write generates 已保存 ✓; failure already emits a message",
+    "pauseAlreadyHasSaveState": "src/cocos/assets/scripts/app/Menus.ts:101 — paused journey includes saved text",
+    "experience": "src/cocos/assets/scripts/features/progression/common/Progression.ts — xpToNext, cumulativeXp and pure progressionView already available; no experience display in current Hud",
+    "sceneReference": "../quest-tracker-expand-v5/collapsed-game-v8.png, retained earlier phone screenshot used as a layout reference; not a new live capture"
+  },
+  "layout": {
+    "creatorSize": [
+      328,
+      116
+    ],
+    "referenceViewport": [
+      844,
+      390
+    ],
+    "logicalSize": [
+      177.66666666666666,
+      62.833333333333336
+    ],
+    "heightAdded": 0,
+    "widthAdded": 0,
+    "questMoved": false,
+    "rows": [
+      "拉斐尔 · Lv4",
+      "生命 85 / 135，数值位于生命条内",
+      "职业资源 80 / 100，数值位于资源条内",
+      "升级还需 200 经验，底部细线表示本级进度"
+    ],
+    "portraitAndGold": "保持当前头像、头像环和金币区域",
+    "newInputTargets": false
+  },
+  "experience": {
+    "data": "nextCost=xpToNext(level); currentXp=totalXp-cumulativeXp(level); remaining=max(0,nextCost-currentXp)",
+    "sample": {
+      "level": 4,
+      "totalXp": 880,
+      "currentLevelXp": 290,
+      "requiredForThisLevel": 490,
+      "remaining": 200,
+      "ratio": 0.5918367346938775
+    },
+    "maxLevel": "Lv40 显示已满级，进度填满，不显示还需0或除以0",
+    "longValues": "固定宽度实测 升级还需38,290经验 和 已满级 均未溢出",
+    "accessibility": "常驻文字回答剩余数值，紫色和细线仅辅助识别，不依赖颜色或点击",
+    "detail": "完整当前经验/所需经验可沿用人物详情页展示，不在 HUD 新增小尺寸触控入口",
+    "notIdleDailyQuota": true,
+    "runtimeRecommendation": "复用纯 Progression 规则；仅 level/totalXp 变化时刷新，避免为 HUD 每帧调用会扫描装备的 GameSession.progressionView"
+  },
+  "saveState": {
+    "meaning": "✓ 是本机自动存档成功提示，不是任务完成或升级就绪",
+    "proposal": "删除人物框常驻存档勾和点；暂停页已有存档状态展示，沿用即可；保存失败继续明确提示",
+    "persistenceRulesChanged": false
+  },
+  "resourceColor": "沿用 FeedbackPalette 的实际职业资源色。弓示例为绿色专注；法师为蓝色法力，战士为体力。经验复用 reward.experience #C4A5ED。",
+  "shield": "护盾出现时保留真实护盾数值，同一生命条中追加盾值，不用经验覆盖战斗信息",
+  "method": "Existing screenshot and skin pixels plus editable HTML/CSS/live text rendered using already installed Playwright and Chrome. No image generation, no new dependency or runtime UI integration.",
+  "references": [
+    {
+      "path": "source-art/ui/quest-tracker-expand-v5/collapsed-game-v8.png",
+      "sha256": "f69bac1b34c9ba0be5de6d6c153b0a69212cf7687bf6b8b1e34e152e054975e2"
+    },
+    {
+      "path": "src/cocos/assets/resources/ui/quiet-bronze/leather-inset-v8.png",
+      "sha256": "a959d586b55531da0f969d7fbe42b3bd602a5ed85a54a24bfd1db307f064931c"
+    },
+    {
+      "path": "src/cocos/assets/resources/ui/quiet-bronze/rpg-serif-v2.ttf",
+      "sha256": "73e4bc99c6cc3e656844d9436f59b162e6a4608af8bcba15dafd92a8ca5908ab"
+    }
+  ],
+  "artReview": {
+    "assistantStatus": "passed local visual review of board and 844×390 preview",
+    "heightComparison": [
+      {
+        "proposal": "false",
+        "width": 599.6499633789062,
+        "height": 212.14923095703125
+      },
+      {
+        "proposal": "true",
+        "width": 599.64990234375,
+        "height": 212.14923095703125
+      }
+    ],
+    "longText": {
+      "maxLevelRemainingFits": true,
+      "maxLevelCaptionFits": true
+    },
+    "userApproved": false,
+    "limitations": [
+      "静态示例不是正在运行的游戏或当前玩家存档",
+      "接入后仍需在日常 concept-2d 入口及 TapTap 真机检查文字、护盾、升级、满级、安全区、恢复与主画面遮挡"
+    ],
+    "userFeedback": "先完成登录改造，再重设计经验；经验也应为一个进度条，当前紫色文字与细线方案不好看。",
+    "status": "superseded; not accepted by user",
+    "replacement": "../hero-experience-v2/design.json"
+  },
+  "artifacts": [
+    "design-review.png",
+    "phone-preview.png",
+    "design.html",
+    "phone-preview.html",
+    "render-design.cjs",
+    "layout-check.json"
+  ],
+  "runtimeChanged": false,
+  "outputs": [
+    {
+      "path": "design-review.png",
+      "bytes": 2069602,
+      "sha256": "d4e0e48731dd2e636d1df93f0b93ab65f4208ad7ff4a59ef17a901cee6cdc62c"
+    },
+    {
+      "path": "phone-preview.png",
+      "bytes": 3167983,
+      "sha256": "d7a67bad67683de439f39405e2b06fcc091462306cbb9752e30ebb9227152241"
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "createdOn": "2026-11-15",
+  "status": "superseded; extra meter layout changes withdrawn at user request",
+  "request": "头像外圈改为经验进度；经验使用当前/本级升级所需，去掉升级还需描述，保持人物框高度。",
+  "design": {
+    "ring": "Existing portrait bezel plus reward.experience arc, clockwise from twelve oclock; local-to-level XP, not cumulative total XP or health.",
+    "caption": "经验 290/490",
+    "placement": "Right column footer; retain name/level, two health/resource meters and gold inside the same existing frame.",
+    "frameCreatorUnits": [
+      328,
+      116
+    ],
+    "frameLogicalAt844x390": [
+      177.66666666666666,
+      62.833333333333336
+    ],
+    "heightAdded": 0,
+    "widthAdded": 0,
+    "state": "Level-up resets to the new level fraction; level 40 uses a full ring and 经验 已满级.",
+    "bars": "Reuse UiSkin.bar and existing textures; optional height allows readable captions inside two tracks, with the default 16 retained for other callers.",
+    "colors": "FeedbackPalette/FeedbackView: reward.experience, health.player, profession resource role, text.normal, low-health feedback.",
+    "savedCheck": "Removed the saved check/dot from this HUD; existing save logic and pause save status continue.",
+    "touchAreasAdded": false
+  },
+  "sample": {
+    "level": 4,
+    "xp": 290,
+    "xpToNext": 490,
+    "fraction": 0.5918367346938775
+  },
+  "implementation": {
+    "sources": [
+      "src/cocos/assets/scripts/app/Hud.ts",
+      "src/cocos/assets/scripts/shared/ui/UiSkin.ts"
+    ],
+    "calculation": "Existing pure progressionView(), only on totalXp/level changes; no new progression rule or dependency.",
+    "newRuntimeBitmaps": 0
+  },
+  "validation": {
+    "typescript": "npm run check: passed",
+    "existingRuleTests": {
+      "passed": 57,
+      "failed": 0,
+      "files": [
+        "tests/chapter.rules.test.ts",
+        "tests/skill-points.rules.test.ts"
+      ]
+    },
+    "creator": "Cocos Creator 3.8.8 web-mobile export; success exit 36 and Finished marker; final UI build completed 08:56:23 local time.",
+    "renderPolicy": "passed",
+    "navigationWasm": "passed",
+    "browserEvidence": "src/cocos/test-results/experience-ring-v3/verification.json",
+    "browserScope": "Exported Cocos Web UI, isolated callback fixtures, production reward calculation and presentation. No TapTap platform or real-device acceptance.",
+    "cases": [
+      "0/100 empty",
+      "25/100 clockwise quarter",
+      "290/490 partial",
+      "HP changes leave XP arc unchanged",
+      "level up to 0/720",
+      "38289/38290 longest non-full caption",
+      "full level 40",
+      "resize iPhone 844x390 -> 932x430 -> 844x390"
+    ],
+    "views": [
+      {
+        "name": "iphone14",
+        "viewport": [
+          844,
+          390
+        ],
+        "panelLogical": {
+          "x": 5.999999999999972,
+          "y": 6.000000000000021,
+          "width": 177.66666666666666,
+          "height": 62.83333333333333
+        },
+        "xpFontLogical": 10.291666666666666,
+        "errors": []
+      },
+      {
+        "name": "iphone14promax",
+        "viewport": [
+          932,
+          430
+        ],
+        "panelLogical": {
+          "x": 5.999999999999929,
+          "y": 6.000000000000028,
+          "width": 195.88888888888889,
+          "height": 69.27777777777777
+        },
+        "xpFontLogical": 12.541666666666666,
+        "errors": []
+      },
+      {
+        "name": "android",
+        "viewport": [
+          915,
+          412
+        ],
+        "panelLogical": {
+          "x": 5.999999999999972,
+          "y": 5.999999999999979,
+          "width": 187.68888888888887,
+          "height": 66.37777777777778
+        },
+        "xpFontLogical": 11.444444444444445,
+        "errors": []
+      },
+      {
+        "name": "desktop",
+        "viewport": [
+          1280,
+          720
+        ],
+        "panelLogical": {
+          "x": 10,
+          "y": 10,
+          "width": 280,
+          "height": 116
+        },
+        "xpFontLogical": 13,
+        "errors": []
+      }
+    ],
+    "visualReview": "Assistant inspected actual exported phone crop and whole game screenshot: two legible meters, purple XP ring/caption, no extra third track, same compact bounds and clear main game region.",
+    "userAcceptedRequirements": true,
+    "userAcceptedFinalPixels": false,
+    "notPerformed": [
+      "TapTap ZIP build or upload",
+      "Live TapTap authentication",
+      "TapTap real-device acceptance"
+    ]
+  },
+  "method": "Screenshots of the real Cocos exported UI, captured at 844x390 logical / 2532x1170 physical pixels using isolated browser callbacks and production gainExperience(). No generated bitmap or concept compositing.",
+  "outputs": [
+    {
+      "path": "phone-preview.png",
+      "bytes": 2745107,
+      "sha256": "af99fadc1b878814e4757417b5e7828cff3bd599d01a30f11d609c23f7310921"
+    },
+    {
+      "path": "hero-detail.png",
+      "bytes": 123087,
+      "sha256": "1ccd0143e6c7b5a9088a30eb1add025284b2d840468c0d953f30d0e71b9c2504"
+    }
+  ],
+  "supersededBy": "source-art/ui/hero-experience-ring-v4",
+  "supersededReason": "用户要求血条、资源条等全部保持原版，仅替换头像圈的数据并在顶部姓名/等级后追加经验数值。"
+}

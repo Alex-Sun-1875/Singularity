@@ -1,5 +1,6 @@
+import {viewportMetrics} from '../../../platform/ViewportMetrics';
 import {CompactGraphics} from '../../../shared/ui/CompactGraphics';
-import {Camera,Graphics,Node,UITransform,Vec2,Vec3,screen} from 'cc';
+import {Camera,Graphics,Node,UITransform,Vec2,Vec3} from 'cc';
 import type {GameEvent,Point} from '../../../core/Contracts';
 import type {GameSession} from '../../../core/GameSession';
 import {impactKey,impactStyle,type ImpactStyle} from '../data/CombatImpact';
@@ -28,7 +29,7 @@ export class CombatImpactFeedback {
   for(const {event,style}of chosen.values()){
    const enemy=game.state.enemies.find(e=>e.id===event.id),point=event.at??enemy;if(!point)continue;
    // Offscreen contacts do not consume impact/sound budget or shake the camera.
-   const at=this.camera.worldToScreen(this.bodyPoint(event.id!,point)),size=screen.windowSize;
+   const at=this.camera.worldToScreen(this.bodyPoint(event.id!,point)),size=viewportMetrics.windowSize;
    if(at.z<0||at.z>1||at.x<0||at.x>size.width||at.y<0||at.y>size.height)continue;
    let cue=this.contacts.find(c=>!c.node.active)|| (this.contacts.length<12?this.create():this.contacts.reduce((a,b)=>a.start<b.start?a:b));
    const duplicate=this.contacts.find(c=>c.node.active&&c.id===event.id&&this.clock-c.start<.045);if(duplicate){if(duplicate.style.priority>=style.priority)continue;cue=duplicate;}
@@ -44,10 +45,10 @@ export class CombatImpactFeedback {
  private create():Contact {const node=this.hud.node('ContactImpact',this.root,0,0,1,1),ink=node.addComponent(CompactGraphics);node.active=false;const cue={node,ink,id:'',point:{x:0,z:0},start:0,style:undefined as unknown as ImpactStyle,angle:0};this.contacts.push(cue);return cue;}
  update(dt:number,game:GameSession,paused:boolean){
   if(paused){this.clear();return;}this.clock+=Math.min(.1,Math.max(0,dt));
-  const cssHeight=screen.windowSize.height/Math.max(1,screen.devicePixelRatio),scale=this.hud.height/Math.max(1,cssHeight);
+  const cssHeight=viewportMetrics.windowSize.height/Math.max(1,viewportMetrics.devicePixelRatio),scale=this.hud.height/Math.max(1,cssHeight);
   if(this.kick&&!this.reducedMotion){const age=(this.clock-this.kick.start)/.13;if(age>=1)this.kick=null;else{const amount=this.kick.strength*scale*Math.sin(age*Math.PI*3)*Math.exp(-age*4),worldPixel=2*this.camera.orthoHeight/this.hud.height;this.offset.set(this.camera.node.right).multiplyScalar(this.kick.direction.x*amount*worldPixel).add(this.camera.node.up.clone().multiplyScalar(this.kick.direction.y*amount*worldPixel));this.camera.node.setPosition(this.camera.node.position.clone().add(this.offset));this.maximumKick=Math.max(this.maximumKick,Math.abs(amount)/scale);}}
   for(const cue of this.contacts){if(!cue.node.active)continue;const progress=(this.clock-cue.start)/cue.style.duration;if(progress>=1){cue.node.active=false;continue;}
-   const p=game.state.enemies.find(e=>e.id===cue.id)??cue.point,at=this.camera.worldToScreen(this.bodyPoint(cue.id,p)),pixels=screen.windowSize;
+   const p=game.state.enemies.find(e=>e.id===cue.id)??cue.point,at=this.camera.worldToScreen(this.bodyPoint(cue.id,p)),pixels=viewportMetrics.windowSize;
    if(at.z<0||at.z>1||at.x<0||at.x>pixels.width||at.y<0||at.y>pixels.height){cue.node.active=false;continue;}
    cue.node.setPosition(at.x/pixels.width*this.hud.width-this.hud.width/2,at.y/pixels.height*this.hud.height-this.hud.height/2);
    const g=cue.ink,radius=cue.style.radius*scale*(.55+progress*.7),fade=Math.pow(1-progress,1.4),alpha=Math.round((this.reducedMotion?110:235)*fade);g.clear();

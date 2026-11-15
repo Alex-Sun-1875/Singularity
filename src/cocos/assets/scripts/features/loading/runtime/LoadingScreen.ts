@@ -54,7 +54,7 @@ export class LoadingScreen {
   if(!this.root?.isValid)return;const known=this.progress>=0;
   if(this.percentage)this.percentage.string=known?`${Math.round(this.progress*100)}%`:'';
   if(this.message)this.message.string=this.status;
-  if(this.tip)this.tip.string=this.width<this.height?'横屏游玩，地图与行囊会更清晰。':TIPS[Math.min(TIPS.length-1,Math.floor(Math.max(0,this.progress)*TIPS.length))];
+  if(this.tip)this.tip.string=this.width<this.height?'横屏游玩，地图与背包会更清晰。':TIPS[Math.min(TIPS.length-1,Math.floor(Math.max(0,this.progress)*TIPS.length))];
   if(this.fill){const width=this.fill.node.getComponent(UITransform)!.width;this.fill.clear();if(known){this.fill.strokeColor=GOLD;this.fill.lineWidth=2;this.fill.moveTo(-width/2,0);this.fill.lineTo(-width/2+width*this.progress,0);this.fill.stroke();}}
  }
 }

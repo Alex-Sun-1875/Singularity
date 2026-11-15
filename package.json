@@ -1,6 +1,6 @@
 {
   "name": "sword-and-fire",
-  "version": "0.3.43",
+  "version": "0.3.49",
   "private": true,
   "description": "剑与火：Cocos Creator 3.8.8 设定图2D第一章",
   "scripts": {
@@ -9,14 +9,11 @@
     "start:3d": "pwsh -NoProfile -File src/cocos/Run-Local.ps1",
     "build": "pwsh -NoProfile -File src/cocos/Build-Local.ps1 -Platform web-mobile -OutputName concept-2d",
     "build:3d": "pwsh -NoProfile -File src/cocos/Build-Local.ps1",
-    "build:tap:audit": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -AuditOnly",
-    "build:tap:preview": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -WebPreview",
-    "build:tap": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1",
-    "pack:taptap": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1",
-    "pack:taptap:dev": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -Profile dev",
-    "pack:taptap:test": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -Profile test",
-    "pack:taptap:release": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -Profile release",
-    "pack:taptap:guest": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -TestPackage -GuestTest",
+    "build:tap:audit": "node src/cocos/tools/build-taptap.cjs --mode audit",
+    "build:tap:preview": "node src/cocos/tools/build-taptap.cjs --mode preview",
+    "build:tap": "node src/cocos/tools/build-taptap.cjs --mode test",
+    "pack:taptap": "node src/cocos/tools/build-taptap.cjs --mode test",
+    "pack:taptap:guest": "node src/cocos/tools/build-taptap.cjs --mode test --guest",
     "version:tap": "node src/cocos/tools/taptap-config.cjs --version",
     "release:tap:record": "node src/cocos/tools/release-notes.cjs --record-published",
     "check:tap": "node src/cocos/tools/taptap-config.cjs --check",
@@ -30,6 +27,9 @@
     "test:perf:android:full": "node src/cocos/tools/performance/run-isolated.cjs --backend android --profile regression",
     "test:perf:android:soak": "node src/cocos/tools/performance/run.cjs --backend android --profile soak",
     "check": "npm --prefix src/cocos run check",
-    "test:lua-baseline": "pwsh -NoProfile -File src/Test-Local.ps1"
+    "test:lua-baseline": "pwsh -NoProfile -File src/Test-Local.ps1",
+    "pack:taptap:dev": "node src/cocos/tools/build-taptap.cjs --mode dev",
+    "pack:taptap:test": "node src/cocos/tools/build-taptap.cjs --mode test",
+    "pack:taptap:release": "node src/cocos/tools/build-taptap.cjs --mode release"
   }
 }

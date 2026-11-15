@@ -44,7 +44,7 @@ export class SaveStore {
   try{
    // A failed attempt never advances revision. Replace that alternate slot's
    // pending bytes with the latest whole snapshot; the last verified slot stays intact.
-   const snapshot=session.snapshot();validateSnapshot(snapshot);const payload=JSON.stringify(snapshot),revision=this.revision+1;const envelope:Envelope={version:1,revision,payload,hash:checksum(payload)};this.pending={text:JSON.stringify(envelope),slot:revision%2?'a':'b',revision,stateRevision:snapshot.revision};
+   const payload=session.serializeSnapshot(),snapshot:unknown=JSON.parse(payload);validateSnapshot(snapshot);const revision=this.revision+1;const envelope:Envelope={version:1,revision,payload,hash:checksum(payload)};this.pending={text:JSON.stringify(envelope),slot:revision%2?'a':'b',revision,stateRevision:snapshot.revision};
    const pending=this.pending;
    this.storage.setItem(this.key(pending.slot),pending.text);
    if(this.storage.getItem(this.key(pending.slot))!==pending.text)return {ok:false,error:'保存未通过写后校验；进度仍在当前会话，正在等待重试。'};
