@@ -10,6 +10,9 @@ export const UI_FRAME_GOLD={
 /** Shared skin geometry. Control measurements are logical screen units. */
 export const UI_FRAME_LAYOUT={skin:'unified-gold-panel-v13',panelSkin:'double-gold-frame-v6',panelMaterial:'double-gold-inset-v6',crestSkin:'double-gold-stag-v6',crestShadowSkin:'double-gold-stag-shadow-v11',crestWidth:118,crestHeight:72,crestOffset:12,crestShadowPadding:4,capsuleSkin:'menu-pill-frame-v5',cornerRadius:12,padding:12,hit:48,gap:8,closeInset:8,closeGlyph:14} as const;
 
+/** Shared top-left return artwork; callers preserve their existing navigation action. */
+export const UI_PANEL_BACK={skin:'rpg-return-arrow-v3',glyphLogical:20} as const;
+
 /** Measured slots from the approved 425×506 settings panel; input minima win. */
 export const UI_GOLD_PANEL_RULES={
  title:{skin:'settings-title-rule-v11',width:356,height:8},

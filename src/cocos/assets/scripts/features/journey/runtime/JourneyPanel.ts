@@ -33,20 +33,20 @@ export function renderJourney(hud:Hud,game:GameSession,menu:string){
   hud.showList(fieldText('ui.side'),fieldText('ui.chapterHint',false,{chapter}),quests.map(q=>{
    const hidden='hidden'in q?q.hidden:undefined,discovered=!hidden||s.flags[hidden],next=q.steps.find(id=>!s.receipts[`campaign:${id}`]),event=FIELD_QUEST_EVENTS.find(e=>e.id===next);
    return {label:!discovered?fieldText('ui.undiscovered'):`${fieldText(next?'ui.progress':'ui.complete')} · ${q.name}`,detail:!discovered?fieldText('ui.explore'):`${q.reward}${event?'\n'+fieldText('ui.next')+'：'+getArea(event.area).name+' · '+event.label:''}`,action:discovered&&next?`journey-field-task:${next}`:'journey-unavailable'};
-  }),[{label:fieldText('ui.backChapter'),action:`journey-chapter:${chapter}`},{label:fieldText('ui.return'),action:'close'}]);return;
+  }),[{back:true,label:fieldText('ui.backChapter'),action:`journey-chapter:${chapter}`},{label:fieldText('ui.return'),action:'close'}]);return;
  }
  if(parts[0]==='journey-field-task'){
   const q=FIELD_QUESTS.find(q=>q.steps.some(id=>id===parts[1])),event=FIELD_QUEST_EVENTS.find(e=>e.id===parts[1]);if(!q||!event||'hidden'in q&&!s.flags[q.hidden])return;
   const done=!!s.receipts[`campaign:${event.id}`],ready=!done&&event.requires?.every(f=>s.flags[f]);
-  hud.show(event.label,`${getArea(event.area).name}\n\n${event.description}\n\n${fieldText('ui.reward')}：${q.reward}`,[...(ready?[{label:fieldText('ui.go'),action:`journey-field-go:${event.id}`}]:[]),{label:fieldText('ui.map'),action:`journey-map:${event.area}`},{label:fieldText('ui.backField'),action:`journey-field:${q.chapter}`}]);return;
+  hud.show(event.label,`${getArea(event.area).name}\n\n${event.description}\n\n${fieldText('ui.reward')}：${q.reward}`,[...(ready?[{label:fieldText('ui.go'),action:`journey-field-go:${event.id}`}]:[]),{label:fieldText('ui.map'),action:`journey-map:${event.area}`},{back:true,label:fieldText('ui.backField'),action:`journey-field:${q.chapter}`}]);return;
  }
  if(parts[0]==='journey-life-reward'){
   const group=lifecycleGroup(parts[1]);if(!group||group.route!=='task'||group.chapter>2)return;
-  hud.showList(tr('life.choose',{name:group.name}),tr('life.choice'),group.items.map(id=>{const item=EQUIPMENT[id];return {label:item.name,detail:group.slot==='weapon'?tr('life.weaponChoice',{level:item.requiredLevel??1,family:item.weaponFamily??'',power:item.power??0}):game.itemView(id).description,action:`journey-life-claim:${group.id}:${id}`};}),[{label:'返回本章',action:`journey-chapter:${group.chapter}`}]);return;
+  hud.showList(tr('life.choose',{name:group.name}),tr('life.choice'),group.items.map(id=>{const item=EQUIPMENT[id];return {label:item.name,detail:group.slot==='weapon'?tr('life.weaponChoice',{level:item.requiredLevel??1,family:item.weaponFamily??'',power:item.power??0}):game.itemView(id).description,action:`journey-life-claim:${group.id}:${id}`};}),[{back:true,label:'返回本章',action:`journey-chapter:${group.chapter}`}]);return;
  }
  if(parts[0]==='journey-loot-style'){
   const chapter=Number(parts[1]),current=game.bossLoot.view().style;
-  hud.showList(tr('life.preference',{style:styleName(current)}),tr('life.preferenceHint'),['WAR','BOW','FIR','THU'].map(style=>({label:styleName(style),detail:current===style?tr('life.selected'):'',action:`journey-loot-set:${style}:${chapter}`})),[{label:'返回奖池',action:`journey-loot:${chapter}`}]);return;
+  hud.showList(tr('life.preference',{style:styleName(current)}),tr('life.preferenceHint'),['WAR','BOW','FIR','THU'].map(style=>({label:styleName(style),detail:current===style?tr('life.selected'):'',action:`journey-loot-set:${style}:${chapter}`})),[{back:true,label:'返回奖池',action:`journey-loot:${chapter}`}]);return;
  }
  if(parts[0]==='journey-loot'){
   const chapter=Number(parts[1]),v=game.bossLoot.view(),daily=game.huntingExperience();
@@ -55,12 +55,12 @@ export function renderJourney(hud:Hud,game:GameSession,menu:string){
   rows.push({label:tr('life.preference',{style:styleName(v.style)}),detail:tr('life.preferenceHint'),action:`journey-loot-style:${chapter}`});
   const bosses=Object.values(AREAS).filter(a=>playableArea(a.id)&&chapterForArea(a.id)===chapter).flatMap(a=>a.enemies.filter(e=>!!e.bossId).map(e=>({area:a.id,enemy:e})));
   for(const b of bosses)rows.push({label:`${b.area} · ${PLAYABLE_CHAPTERS.find(c=>c.boss===b.enemy.bossId)?.bossName??CAMPAIGN_ENEMY_TEMPLATES[b.enemy.bossId!]?.name??getArea(b.area).name}`,detail:bossStatus(game,b.enemy.bossId!),action:`journey-map:${b.area}`});
-  hud.showList(tr('life.title',{chapter}),`${tr('life.rules')}\n${tr('life.daily',{earned:daily.earned,cap:daily.cap,idle:daily.idleEarned,idleCap:daily.idleCap,level:daily.startingLevel})}`,rows,[{label:'返回本章',action:`journey-chapter:${chapter}`}]);
+  hud.showList(tr('life.title',{chapter}),`${tr('life.rules')}\n${tr('life.daily',{earned:daily.earned,cap:daily.cap,idle:daily.idleEarned,idleCap:daily.idleCap,level:daily.startingLevel})}`,rows,[{back:true,label:'返回本章',action:`journey-chapter:${chapter}`}]);
   for(const b of bosses){const label=hud.root.getComponentsInChildren(Label).find(l=>l.node.name==='MenuRowDetail'&&l.node.parent?.name===`journey-map:${b.area}`);if(label)label.node.name='BossCooldown:'+b.enemy.bossId;}
   updateJourneyCooldowns(hud,game,true);return;
  }
  if(parts[0]==='journey-loot-item'){
-  const item=EQUIPMENT[parts[1]];if(!item)return;hud.show(item.name,game.itemView(item.id).description,[{label:'返回奖池',action:`journey-loot:${Number(parts[2])||item.chapter||chapterForArea(s.area)}`}]);return;
+  const item=EQUIPMENT[parts[1]];if(!item)return;hud.show(item.name,game.itemView(item.id).description,[{back:true,label:'返回奖池',action:`journey-loot:${Number(parts[2])||item.chapter||chapterForArea(s.area)}`}]);return;
  }
  const navigation=(id?:string)=>{
   const a=hud.automationView,same=!!id&&a.taskId===id;
@@ -68,12 +68,12 @@ export function renderJourney(hud:Hud,game:GameSession,menu:string){
  };
  if(parts[0]==='journey-reward'){
   const chapter=Number(parts[1]),route=parts[2];
-  hud.showList(`第${chapter}章 · ${route==='task'?'任务':route==='hunt'?'狩猎':'关底'}史诗武器`,'四流派任选一件；来源独立，选择后永久保存。',chapterWeaponIds(chapter,route).map(id=>({label:EQUIPMENT[id].name,detail:`Lv${EQUIPMENT[id].requiredLevel} · ${EQUIPMENT[id].weaponFamily}\n攻击/技能威力 +${EQUIPMENT[id].power!/3}%`,action:`journey-claim:${chapter}:${route}:${id}`})),[{label:'返回本章',action:`journey-chapter:${chapter}`}]);return;
+  hud.showList(`第${chapter}章 · ${route==='task'?'任务':route==='hunt'?'狩猎':'关底'}史诗武器`,'四流派任选一件；来源独立，选择后永久保存。',chapterWeaponIds(chapter,route).map(id=>({label:EQUIPMENT[id].name,detail:`Lv${EQUIPMENT[id].requiredLevel} · ${EQUIPMENT[id].weaponFamily}\n攻击/技能威力 +${EQUIPMENT[id].power!/3}%`,action:`journey-claim:${chapter}:${route}:${id}`})),[{back:true,label:'返回本章',action:`journey-chapter:${chapter}`}]);return;
  }
  if(parts[0]==='journey-task'){
   const task=JOURNEY_TASKS.find(t=>t.id===parts[1]);if(!task)return;
   const done=j.taskDone(task),goal=task.goal==='hunt'?`游荡怪 ${j.progress(task)} / ${task.kills}`:task.goal==='clear'?'击败本地固定敌阵（含固定首领），游荡怪无需清空':'在现场观察战况';
-  hud.show(task.name,`${task.story}\n\n地点：${getArea(task.area).name} · ${task.area}\n目标：${goal}\n奖励：经验 ${task.experience} · 金币 ${task.gold} · 铁 ${task.iron}\n状态：${done?'已完成':j.currentTask(task.chapter)?.id===task.id?'进行中 · 可开启自动寻路':'先完成前一阶段'}\n\n抵达调查目标后自动打开交互；清场与狩猎自动结算。此处寻路遇敌暂停；顶部“自动任务”会连续赶路、战斗，等待确认调查后推进下一阶段。`,[...(j.currentTask(task.chapter)?.id===task.id?[navigation(task.id)]:[]),{label:'在地图查看地点',action:`journey-map:${task.area}`},{label:'返回本章',action:`journey-chapter:${task.chapter}`}]);return;
+  hud.show(task.name,`${task.story}\n\n地点：${getArea(task.area).name} · ${task.area}\n目标：${goal}\n奖励：经验 ${task.experience} · 金币 ${task.gold} · 铁 ${task.iron}\n状态：${done?'已完成':j.currentTask(task.chapter)?.id===task.id?'进行中 · 可开启自动寻路':'先完成前一阶段'}\n\n抵达调查目标后自动打开交互；清场与狩猎自动结算。此处寻路遇敌暂停；顶部“自动任务”会连续赶路、战斗，等待确认调查后推进下一阶段。`,[...(j.currentTask(task.chapter)?.id===task.id?[navigation(task.id)]:[]),{label:'在地图查看地点',action:`journey-map:${task.area}`},{back:true,label:'返回本章',action:`journey-chapter:${task.chapter}`}]);return;
  }
  if(parts[0]==='journey-chapter'){
   const chapter=PLAYABLE_CHAPTERS.find(c=>c.id===Number(parts[1]));if(!chapter)return;
@@ -84,7 +84,7 @@ export function renderJourney(hud:Hud,game:GameSession,menu:string){
   rows.push({label:fieldText('ui.side'),detail:fieldText('ui.entryDetail'),action:`journey-field:${chapter.id}`});
   rows.push({label:tr('life.sources'),detail:tr('life.rules'),action:`journey-loot:${chapter.id}`});
   for(const route of ['task','hunt','boss'])if(j.rewardAvailable(chapter.id,route))rows.push({label:tr('life.legacy',{route}),detail:tr('life.legacyHint'),action:`journey-reward:${chapter.id}:${route}`});
-  hud.showList(`第${chapter.id}章 ${chapter.name}`,`任务 ${done}/5 · 关底 ${won?'已通关':'未通关'} · Lv${chapter.level}—${chapter.endLevel}\n${chapter.story}\n${tr('growth.hunt')}`,rows,[navigation(j.currentTask(chapter.id)?.id),{label:j.tracking()==='hunt'?'切换任务':'切换狩猎',action:j.tracking()==='hunt'?'journey-track:task':'journey-track:hunt'},{label:'八章旅程',action:'journey'}]);return;
+  hud.showList(`第${chapter.id}章 ${chapter.name}`,`任务 ${done}/5 · 关底 ${won?'已通关':'未通关'} · Lv${chapter.level}—${chapter.endLevel}\n${chapter.story}\n${tr('growth.hunt')}`,rows,[navigation(j.currentTask(chapter.id)?.id),{label:j.tracking()==='hunt'?'切换任务':'切换狩猎',action:j.tracking()==='hunt'?'journey-track:task':'journey-track:hunt'},{back:true,label:'八章旅程',action:'journey'}]);return;
  }
- hud.showList('破晓之战 · 八章旅程',tr('growth.summary',{earned:game.huntingExperience().earned,cap:game.huntingExperience().cap}),j.chapters().map(c=>({label:`第${c.id}章 ${c.name}`,detail:c.available?(c.complete?'已通关 · 可继续任务与狩猎':'已开放 · 任务和刷怪均可推进'):'尚未开放',disabled:!c.available,action:c.available?`journey-chapter:${c.id}`:'journey-locked'})),[{label:'出发狩猎',action:'hunting'},{label:'战役见闻',action:'campaign-log'},{label:'返回旅途',action:'close'}]);
+ hud.showList('破晓之战 · 八章旅程',tr('growth.summary',{earned:game.huntingExperience().earned,cap:game.huntingExperience().cap}),j.chapters().map(c=>({label:`第${c.id}章 ${c.name}`,detail:c.available?(c.complete?'已通关 · 可继续任务与狩猎':'已开放 · 任务和刷怪均可推进'):'尚未开放',disabled:!c.available,action:c.available?`journey-chapter:${c.id}`:'journey-locked'})),[{label:'出发狩猎',action:'hunting'},{label:'战役见闻',action:'campaign-log'},{back:true,label:'返回旅途',action:'close'}]);
 }

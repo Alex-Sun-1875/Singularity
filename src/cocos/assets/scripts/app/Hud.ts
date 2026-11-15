@@ -1,3 +1,4 @@
+import {viewportMetrics} from '../platform/ViewportMetrics';
 import {skillWeaponRequirement} from '../features/combat/common/SkillWeapons';
 import {CompactMask as Mask} from '../shared/ui/CompactMask';
 import {CompactGraphics} from '../shared/ui/CompactGraphics';
@@ -32,6 +33,7 @@ const COMBAT_ARC_SPAN=102*Math.PI/180,COMBAT_ARC_CENTER=Math.PI*.75;
 const KEYS:Record<string,string>={attack:'J',dash:'空格',combat0:'Q',combat1:'E',combat2:'R',combat3:'T',ultimate:'G',interact:'F',map:'M',inventory:'B',checks:'C',pause:'Esc','potion-health':'5','potion-resource':'6'};
 
 export class Hud {
+ get uiUnit(){return this.touchMode?this.height/Math.max(1,viewportMetrics.windowSize.height/Math.max(1,viewportMetrics.devicePixelRatio)):1.25;}
  trainingRange:TrainingRange|undefined;private trainingButton:Node|null=null;
  private equipmentNotice=new EquipmentPickupNotice(this);
  private equipmentPickupsAvailable=false;
@@ -51,6 +53,7 @@ export class Hud {
  private flatHead:SpriteFrame|null=null;private defaultHead:SpriteFrame|null=null;private portraitImage:Sprite|null=null;private portraitSize=64;
  readonly modalDisposers=new Set<()=>void>();
  private miniMap:MiniMap|null=null;private portraitRing:Graphics|null=null;private lastHealth=-1;
+ readonly mapTravel={busy:false,error:''};
  private mapPanel=new MapPanel(this);private pixelWidth=0;private pixelHeight=0;
  private pointerTargets=new Set<Node>();private cooldownLabels=new Map<string,Label>();private counts=new Map<string,Label>();
  private skillPointMark?:Node;
@@ -488,7 +491,7 @@ export class Hud {
  showList(title:string,subtitle:string,rows:MenuRow[],footer:MenuChoice[],minimumHit=0,presentation:MenuPresentation={}){
   new MenuPanel(this,{placement:'right',...presentation},minimumHit).showList(title,subtitle,rows,footer);
  }
- atlas(current:string,visited:Record<string,boolean>,selected?:string){this.mapPanel.show(current,visited,selected);}
+ atlas(game:GameSession,visited:Record<string,boolean>,selected?:string){this.mapPanel.show(game,visited,selected);}
  atlasKey(code:number):boolean{return this.mapPanel.key(code);}
  // Button.onDisable restores the child target's scale; disable every nested button before destroying any faces.
  private deactivateControls(node:Node){for(const button of node.getComponentsInChildren(Button))button.enabled=false;node.active=false;}

@@ -1,0 +1,162 @@
+{
+  "title": "剑与火 · 旅途地图重制",
+  "date": "2026-11-15",
+  "status": "runtime-implemented-web-verified",
+  "deliverable": "Original editable design mockup plus Cocos implementation, actual Web runtime screenshots and validation report. HTML interactions remain isolated design fixtures.",
+  "design": {
+    "palette": {
+      "void": "#090705",
+      "panel": "#19130E",
+      "bronze": "#8D6030",
+      "gold": "#DAAE65",
+      "ivory": "#EDE4CB",
+      "arcane": "#B8A2E2"
+    },
+    "type": {
+      "heading": "Songti SC / STSong, serif; matches character/equipment page",
+      "body": "PingFang SC / Microsoft YaHei, sans-serif",
+      "minimumEssentialText": 14,
+      "minimumTouchTarget": 48,
+      "minimumTouchGap": 8
+    },
+    "layout": "Full-screen landscape atlas; narrow header; map at left and one compact waypoint column at right; legends are a temporary overlay.",
+    "distinctiveChoices": [
+      "Use existing game geography as the dominant surface, with dark feathered exploration fog.",
+      "Put all discovered waypoint destinations in a dedicated travel column; remove quest and experience clutter.",
+      "Use warm gold only for hierarchy, selections and the travel action; violet rune symbols identify teleport destinations.",
+      "Place return at top left, leaving the top-right platform capsule clear.",
+      "Reuse the implemented equipment page leather, double-gold frame, active underline, rounded selection outline and gold action artwork."
+    ],
+    "review": "Kept the established warm-gold game theme. Replaced the permanent left legend and journal sidebar with a larger map plus destination list; no generic dashboard cards."
+  },
+  "safeArea": {
+    "rule": "Use the runtime safe rectangle and capsule rectangle, converted into the same layout coordinate space. Decorative terrain may bleed; text, controls and hit areas remain inside the safe rectangle and outside the capsule.",
+    "previewInsets": "Injected design fixtures only, not measured hardware values. Rotate fixture swaps the island to the other short edge.",
+    "fixtures": [
+      {
+        "name": "iPhone 14",
+        "width": 844,
+        "height": 390,
+        "left": 47,
+        "right": 47,
+        "bottom": 21,
+        "island": false
+      },
+      {
+        "name": "iPhone 14 Pro",
+        "width": 852,
+        "height": 393,
+        "left": 59,
+        "right": 59,
+        "bottom": 21,
+        "island": true
+      },
+      {
+        "name": "iPhone 14 Pro Max",
+        "width": 932,
+        "height": 430,
+        "left": 59,
+        "right": 59,
+        "bottom": 21,
+        "island": true
+      },
+      {
+        "name": "Android 横屏",
+        "width": 915,
+        "height": 412,
+        "left": 32,
+        "right": 16,
+        "bottom": 16,
+        "island": false
+      }
+    ],
+    "acceptance": "Check both landscape orientations, actual platform capsule, safe-rectangle changes, all visible and invisible touch areas, and device touch behavior. Browser fixtures do not establish device compatibility."
+  },
+  "fastTravel": {
+    "eligibility": "Only authored, personally discovered and unlocked teleport destinations; visiting an arbitrary area is insufficient.",
+    "flow": "Select a map rune or list destination, then press the single travel button. No trip to a departure rune and no additional confirmation dialog.",
+    "scope": "All unlocked destinations, including other authored regions. The mock shows Rockforge Town, Brokenpeak Waystation and Stonebridge Town.",
+    "blocked": [
+      "Nearby combat or active hostile projectiles",
+      "Transaction or reward submission in progress",
+      "Destination no longer available or not unlocked"
+    ],
+    "states": [
+      "Ready",
+      "Blocked with a specific explanation",
+      "Travelling with duplicate input disabled",
+      "Arrival feedback",
+      "Failure keeps the selection and offers retry"
+    ],
+    "noSideEffects": "Travel must not restock shops, reset encounters, restore resources, grant rewards or advance quests.",
+    "mockNotice": "The HTML mock uses demonstration records. Actual Cocos fast travel now validates durable discovery and authored safe destinations in GameSession."
+  },
+  "sources": [
+    {
+      "path": "docs/maps/map-ui-bg3-reference.md",
+      "use": "Existing local BG3 reference study: map hierarchy, terrain, fog and waypoint sidebar"
+    },
+    {
+      "url": "https://gameriv.com/baldurs-gate-3-where-to-find-miri/",
+      "use": "Web image search reference for BG3 map composition, not a runtime asset"
+    },
+    {
+      "path": "docs/assets/warm-gold-alignment-v6.md",
+      "use": "Established game material and color direction"
+    },
+    {
+      "path": "docs/design/ui-layout-guidelines.md",
+      "use": "Landscape baseline, safe area, 48px targets and 8px separation"
+    },
+    {
+      "path": "docs/story/exploration-map-logic.md",
+      "use": "Discovery, authored travel destinations and unsafe-state restrictions"
+    },
+    {
+      "path": "src/cocos/assets/resources/atlas/highlands.png",
+      "use": "Existing original regional atlas, reused without modification"
+    },
+    {
+      "path": "source-art/maps/world-atlas-v3/00-world-geography-draft.png",
+      "use": "Existing original world overview, reused without modification"
+    },
+    {
+      "path": "source-art/ui/equipment-rounded-v8/review/equipment-fresh.jpg",
+      "use": "Latest implemented equipment page visual reference"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/ui/PreparationTheme.ts",
+      "use": "Existing 48px targets, 8px gaps and shared preparation skin catalog"
+    },
+    {
+      "path": "src/cocos/assets/resources/ui/quiet-bronze/double-gold-frame-rpg-v4.png",
+      "use": "Reused shared equipment outer frame"
+    },
+    {
+      "path": "src/cocos/assets/resources/ui/quiet-bronze/leather-inset-v8.png",
+      "use": "Reused shared equipment leather material"
+    },
+    {
+      "path": "src/cocos/assets/resources/ui/quiet-bronze/prep-button-gold-v2.png",
+      "use": "Reused shared equipment primary action"
+    },
+    {
+      "path": "src/cocos/assets/resources/ui/quiet-bronze/rpg-active-rule-v4.png",
+      "use": "Reused shared equipment active-tab underline"
+    }
+  ],
+  "limits": [
+    "Map marks and discovery shapes are illustrative design placements, not collision or navigation coordinates.",
+    "This mock is a layout and interaction proposal, not Cocos or TapTap runtime acceptance.",
+    "Runtime must reuse existing FairyGUI, theme, feedback semantics and platform viewport adapters."
+  ],
+  "userSteering": "2026-11-15: Also reference the existing character/equipment page.",
+  "runtime": {
+    "implemented": "2026-11-15",
+    "screenshots": "runtime/",
+    "validation": "src/cocos/release/map-ui-v1-validation.json",
+    "uiChecks": 33,
+    "regressionTests": 150,
+    "hardwareAcceptance": "TapTap iOS/Android real device checks pending"
+  }
+}

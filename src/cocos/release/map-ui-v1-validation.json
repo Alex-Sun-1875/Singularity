@@ -1,0 +1,161 @@
+{
+  "date": "2026-11-15",
+  "feature": "Map redesign and discovered safe-waypoint fast travel",
+  "version": "0.3.47",
+  "status": "implemented-web-verified-device-acceptance-pending",
+  "runtime": {
+    "map": "assets/scripts/features/navigation/runtime/MapPanel.ts",
+    "rules": "assets/scripts/features/navigation/common/FastTravel.ts",
+    "session": "assets/scripts/core/GameSession.ts",
+    "transition": "assets/scripts/app/ChapterGame.ts",
+    "viewport": "assets/scripts/platform/ViewportMetrics.ts",
+    "localization": "assets/scripts/features/navigation/locales/index.ts"
+  },
+  "behavior": [
+    "Equipment-page leather, double-gold frame, active underline and gold action reused",
+    "Top-left return in actual Cocos safe rectangle; platform menu rectangle converted to design units",
+    "Regional, local captured terrain and discovered-region world overview",
+    "On-demand legend, native scrolling destination list, zoom and locate; clustered crowded map markers",
+    "Authored safe checkpoints activate on personal approach outside combat; old checkpoint proofs migrate once",
+    "Only personally visited and unlocked authored destinations from released regions",
+    "Cross-region and same-area direct travel; no departure-rune visit or extra confirmation",
+    "Nearby combat/projectiles, active interaction or submission, unsafe arrival and insufficient level block travel",
+    "In-memory transaction blocks duplicate requests and saving until actual scene load succeeds",
+    "Failure restores origin and keeps destination selected; retry loads the selected destination",
+    "Travel does not call rest or exit quest effects and preserves supplies, health, focus, merchant stock and encounters"
+  ],
+  "checks": {
+    "typescript": "passed: npm --prefix src/cocos run check",
+    "coreTypescript": "passed: npm --prefix src/cocos run check:core",
+    "regression": {
+      "command": "PATH=/tmp/singularity-enemy-fix-bin:$PATH npm --prefix src/cocos test",
+      "passed": 150,
+      "failed": 0,
+      "note": "Existing python alias required by an unrelated static mesh fixture; no dependencies added."
+    },
+    "cocosBuild": {
+      "target": "daily Web concept-2d",
+      "result": "passed",
+      "versionIncremented": false,
+      "renderPolicy": "legacy forward passed",
+      "navigationWasm": "passed"
+    },
+    "ui": {
+      "passed": 33,
+      "pageErrors": 0,
+      "viewports": [
+        {
+          "name": "iPhone 14",
+          "logical": [
+            844,
+            390
+          ]
+        },
+        {
+          "name": "iPhone 14 Pro",
+          "logical": [
+            852,
+            393
+          ]
+        },
+        {
+          "name": "iPhone 14 Pro Max",
+          "logical": [
+            932,
+            430
+          ]
+        },
+        {
+          "name": "Android landscape",
+          "logical": [
+            915,
+            412
+          ]
+        },
+        {
+          "name": "Desktop",
+          "logical": [
+            1280,
+            720
+          ]
+        }
+      ],
+      "scenarios": [
+        "Regional and discovered-world maps",
+        "Local captured map and custom marker placement/removal",
+        "Native list scrolling and selecting a real authored waypoint",
+        "Zoom and fit",
+        "Cross-region travel through actual SceneBuilder and actor loading, preserving hp/focus/potions",
+        "Active projectile blocks travel",
+        "Injected destination load failure restores origin, retains selection and allows successful retry",
+        "Both landscape safe-rectangle fixtures, minimum 48 logical touch targets",
+        "Changing platform menu rectangle reserves the header and content area"
+      ],
+      "report": "source-art/ui/map-redesign-v1/runtime/review.json",
+      "fixtureNotice": "Exploration, safe rectangles and menu rectangles are isolated test fixtures, not hardware measurements."
+    },
+    "commitSnapshot": {
+      "scope": "Task-only staged snapshot on repository HEAD; unrelated working-tree changes excluded",
+      "typescript": "passed",
+      "coreTypescript": "passed",
+      "navigationTests": {
+        "passed": 7,
+        "failed": 0
+      },
+      "temporaryArtifacts": "Task implementation scripts, preview config/logs, duplicate raw UI results and nonportable render helper removed before commit; curated screenshots and validation records retained."
+    }
+  },
+  "assets": [
+    {
+      "runtime": "assets/resources/atlas/world.jpg",
+      "source": "source-art/maps/world-atlas-v3/00-world-geography-draft.png",
+      "processing": "Deterministic JPEG encoding with macOS sips, quality 82; original dimensions retained",
+      "ownership": "Existing project artwork; no BG3 game assets distributed",
+      "sha256": "c34360f957ec5e91d58235c25dff1b5006a8011fab33c4e2eb6acf12b58e830b",
+      "bytes": 931290,
+      "sourceSha256": "85cd74d023a17011466bd00bca35fd06561c66549dbdf607bb35f59e58014b64"
+    }
+  ],
+  "platformReferences": [
+    {
+      "source": "extensions/taptap-minigame-tools/tap-minigame.d.ts",
+      "declarations": [
+        "getMenuButtonBoundingClientRect",
+        "onMenuButtonBoundingClientRectWeightChange",
+        "offMenuButtonBoundingClientRectWeightChange"
+      ]
+    },
+    {
+      "source": "https://developer.taptap.cn/minigameapidoc/dev/api/base/system/tap.getWindowInfo/",
+      "use": "Window logical-pixel dimensions; Cocos supplies the oriented safe rectangle"
+    }
+  ],
+  "limitations": [
+    "Browser exploration records, failure injection, safe rectangles and capsule rectangles are isolated review fixtures, not user save data or device measurements.",
+    "World overview expresses discovered regions; exact authored map locations remain on regional atlases.",
+    "TapTap real-AppID iOS/Android hardware, both orientations, actual capsule, touch, lifecycle and persistence still require device acceptance.",
+    "No TapTap package, upload or public release was produced by this request."
+  ],
+  "screenshots": [
+    {
+      "path": "source-art/ui/map-redesign-v1/runtime/01-regional-safe.png",
+      "sha256": "2f628e44edeb2d078d3dc3f9beb2f6b91be86139ca49328e383a137289742cb8"
+    },
+    {
+      "path": "source-art/ui/map-redesign-v1/runtime/02-world.png",
+      "sha256": "7d786d0e11c52ef79f0ecc0ab7c79c4b82cb3633ddd95507752ef04ffcb7db19"
+    },
+    {
+      "path": "source-art/ui/map-redesign-v1/runtime/03-capsule-layout.png",
+      "sha256": "bc68e0feceedb44c764e31b6cb1413fa9e2bb1b4596f56b1926142757c546266"
+    },
+    {
+      "path": "source-art/ui/map-redesign-v1/runtime/04-projectile-blocked.png",
+      "sha256": "932f1124696e047776a73c9a23ece60b6c9ea7f293971d012312d4be4071a56d"
+    },
+    {
+      "path": "source-art/ui/map-redesign-v1/runtime/05-failure-retry.png",
+      "sha256": "93b99ed7980b2eeea8f0f954c5a850d1335507d3c4d62b8663ced3c034bf3462"
+    }
+  ]
+}

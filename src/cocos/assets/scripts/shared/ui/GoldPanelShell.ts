@@ -3,7 +3,7 @@ import {_decorator,BlockInputEvents,ButtonComponent as Button,Color,Component,Gr
 import {DoubleGoldFrame} from './DoubleGoldFrame';
 import {FeedbackView as F} from './FeedbackView';
 import {applyRpgFont} from './RpgFont';
-import {UI_FRAME_LAYOUT as L,UI_GOLD_PANEL_RULES as RULES,UI_SETTINGS_REFERENCE as R} from './UiChrome';
+import {UI_FRAME_LAYOUT as L,UI_GOLD_PANEL_RULES as RULES,UI_SETTINGS_REFERENCE as R,UI_PANEL_BACK as BACK} from './UiChrome';
 import {UiSkin} from './UiSkin';
 import {UI_COLORS as C} from './UiTheme';
 
@@ -52,11 +52,11 @@ export class GoldPanelShell extends Component {
   if(!this.node.getComponent(BlockInputEvents))this.node.addComponent(BlockInputEvents);
   UiSkin.panel(this.node,o.width,o.height,o.fill??C.inset,'panel',!!o.crest,m.pixelScale);
   const centered=o.centeredTitle!==false,titleWidth=o.width-2*m.padding-(o.dismissAction?(m.closeX+o.hit/2+m.gap)*(centered?2:1):0);
-  const title=this.caption(this.node,'MenuTitle',o.title,centered?(r?R.titleX*r:0):-o.width/2+m.padding+titleWidth/2,o.height/2-m.titleY,titleWidth,o.hit,m.titleFont);
+  const title=this.caption(this.node,'MenuTitle',o.title,centered?(r?R.titleX*r:0):-o.width/2+m.padding+(o.dismissAction?m.closeX+o.hit/2+m.gap:0)+titleWidth/2,o.height/2-m.titleY,titleWidth,o.hit,m.titleFont);
   title.horizontalAlign=centered?Label.HorizontalAlign.CENTER:Label.HorizontalAlign.LEFT;title.fontFamily='SimSun';
   if(!r)title.overflow=Label.Overflow.SHRINK;
-  if(o.dismissAction){const close=this.action(this.node,'×',o.dismissAction,o.width/2-m.closeX,o.height/2-m.closeY,o.hit,o.hit,r?R.closeSize*r:L.closeGlyph*o.unit),glyph=close.getComponentInChildren(Label)!;
-   if(r)glyph.node.setPosition(m.closeX-R.closeOffset*r,m.closeY-R.closeOffset*r);
+  if(o.dismissAction){const back=this.action(this.node,'',o.dismissAction,-o.width/2+m.closeX,o.height/2-m.closeY,o.hit,o.hit,L.closeGlyph*o.unit);
+   UiSkin.asset(back,BACK.skin,BACK.glyphLogical*o.unit,BACK.glyphLogical*o.unit,false);
   }
   if(r){this.referenceDivider(this.node,'title',o.height/2-R.rules.title.y*r);this.referenceDivider(this.node,'tabs',o.height/2-R.rules.tabs.y*r);}
   else this.divider(this.node,'title',o.height/2-m.bodyTop+m.gap/2,Math.min(o.width-2*m.padding,o.width*RULES.title.width/R.width));
@@ -86,6 +86,7 @@ export class GoldPanelShell extends Component {
  }
  /** Quiet footer actions from the approved panel, independent of page callbacks. */
  footer(actions:readonly GoldPanelAction[]):void {
+  actions=actions.filter(a=>a.action!==this.options.dismissAction);
   const o=this.options,m=this.metrics,r=m.referenceScale,y=Math.min(r?R.footerY*r:o.height-m.padding-o.hit/2,o.height-m.padding-o.hit/2);
   const available=o.width-2*m.padding,width=Math.min((available-(actions.length-1)*m.gap)/Math.max(1,actions.length),r&&actions.length===2?R.footerStep*r-m.gap:o.width);
   actions.forEach((a,i)=>this.action(this.node,a.label,a.action,r&&actions.length===2?-o.width/2+(R.footerFirstX+i*R.footerStep)*r:(i-(actions.length-1)/2)*(width+m.gap),o.height/2-y,width,o.hit,r?Math.max(o.mobile?14*o.unit:0,R.footerSize*r):o.mobile?27:18,!!a.disabled));

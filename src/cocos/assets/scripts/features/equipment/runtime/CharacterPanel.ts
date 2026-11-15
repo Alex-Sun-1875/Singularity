@@ -1,16 +1,18 @@
+import {viewportMetrics} from '../../../platform/ViewportMetrics';
 import {resourceProfile} from '../../combat/common/ClassResource';
 import {CompactMask as Mask} from '../../../shared/ui/CompactMask';
 import {CompactGraphics} from '../../../shared/ui/CompactGraphics';
 import {FeedbackView as F} from '../../../shared/ui/FeedbackView';
 import {qualityFeedbackRole} from '../../../shared/ui/FeedbackPalette';
 import {equipmentIconFrame} from './EquipmentIconFrame';
-import {BlockInputEvents,ButtonComponent as Button,Color,EventTouch,Graphics,Label,Node,ScrollView,ScrollBar,screen,sys,UITransform} from 'cc';
+import {BlockInputEvents,ButtonComponent as Button,Color,EventTouch,Graphics,Label,Node,ScrollView,ScrollBar,sys,UITransform} from 'cc';
 import type {GameSession} from '../../../core/GameSession';
 import {SKILLS,ACTION_NAMES,type SkillId} from '../../progression/common/SkillChecks';
 import {EQUIPMENT,type EquipmentSlot,type ItemDef} from '../data/Equipment';
 import {getArea} from '../../world/data/WorldData';
 import {Hud} from '../../../app/Hud';
 import {UiSkin} from '../../../shared/ui/UiSkin';
+import {UI_PANEL_BACK} from '../../../shared/ui/UiChrome';
 import {UI_COLORS as C} from '../../../shared/ui/UiTheme';
 import {EQUIPMENT_SLOT_NAMES,EQUIPMENT_SLOT_ICONS} from './EquipmentPresentation';
 import {CharacterPreview} from '../../actors/runtime/CharacterPreview';
@@ -36,7 +38,7 @@ class CharacterPanel {
  private readonly mobile=sys.isMobile;private readonly font:number;private readonly hit:number;
  private hover:Node|null=null;private panel:Node;private right:Node;private summaryHost:Node;private skillButtons=new Map<SkillId,Node>();private detail:Node|null=null;private preview:CharacterPreview|FlatCharacterPreview|null=null;
  private width=0;private height=0;private bodyH=0;private leftW=0;private middleW=0;private rightW=0;
- constructor(private readonly hud:Hud,private readonly game:GameSession,private readonly tab:CharacterTab,private readonly state:ViewState){const cssHeight=screen.windowSize.height/Math.max(1,screen.devicePixelRatio);this.font=this.mobile?Math.max(28,Math.ceil(14*hud.height/cssHeight)):17;this.hit=this.mobile?Math.max(88,Math.ceil(48*hud.height/cssHeight)):48;}
+ constructor(private readonly hud:Hud,private readonly game:GameSession,private readonly tab:CharacterTab,private readonly state:ViewState){const cssHeight=viewportMetrics.windowSize.height/Math.max(1,viewportMetrics.devicePixelRatio);this.font=this.mobile?Math.max(28,Math.ceil(14*hud.height/cssHeight)):17;this.hit=this.mobile?Math.max(88,Math.ceil(48*hud.height/cssHeight)):48;}
  private label(parent:Node,value:string,x:number,y:number,w:number,size=this.font,color=C.ink,h=40){const actual=Math.max(size,12*this.hud.height/390),l=this.hud.text(parent,value,x,y,w,actual,color,Math.max(h,actual*1.34));applyRpgFont(l);l.lineHeight=actual*1.34;l.overflow=Label.Overflow.CLAMP;l.enableWrapText=true;return l;}
  private button(parent:Node,title:string,x:number,y:number,w:number,h:number,name:string,click:()=>void,selected=false){
   const n=this.hud.node(name,parent,x,y,w,h);UiSkin.button(n,w,h);const label=this.label(n,title,0,0,w-16,this.font,C.ink,h-4);label.horizontalAlign=Label.HorizontalAlign.CENTER;
@@ -47,12 +49,13 @@ class CharacterPanel {
  private scroll(parent:Node,x:number,y:number,w:number,h:number,contentH:number){const host=this.hud.node('CharacterScroll',parent,x,y,w,h),viewport=this.hud.node('Viewport',host,0,0,w,h);viewport.addComponent(Mask).type=Mask.Type.GRAPHICS_RECT;const content=this.hud.node('Content',viewport,0,h/2,w,Math.max(h,contentH));content.getComponent(UITransform)!.setAnchorPoint(.5,1);const scroll=host.addComponent(ScrollView);scroll.content=content;scroll.horizontal=false;scroll.vertical=true;scroll.cancelInnerEvents=true;if(contentH>h+1){const track=this.hud.node('CharacterScrollbar',host,w/2-2,0,3,h),bar=track.addComponent(ScrollBar),handle=UiSkin.asset(track,'bar-focus-fill',3,24,false);handle.node.setScale(1,1,1);handle.node.getComponent(UITransform)!.setContentSize(3,24);handle.color=C.route;bar.handle=handle;bar.direction=1;bar.enableAutoHide=false;scroll.verticalScrollBar=bar;}return content;}
  show(){
   this.hud.clearModal();const shade=this.hud.node('CharacterBackdrop',this.hud.modal,0,0,this.hud.width,this.hud.height);shade.addComponent(BlockInputEvents);const g=shade.addComponent(CompactGraphics);g.fillColor=new Color(0,0,0,176);g.rect(-this.hud.width/2,-this.hud.height/2,this.hud.width,this.hud.height);g.fill();
-  this.width=Math.min(this.hud.width-40,1460);this.height=Math.min(this.hud.height-36,676);this.panel=this.hud.panel(this.hud.modal,0,0,this.width,this.height,C.background);this.panel.name='CharacterPanel';
+  const safe=sys.getSafeAreaRect(false),left=-this.hud.width/2+Math.max(20,safe.x),right=-this.hud.width/2+Math.min(this.hud.width-20,safe.x+safe.width),bottom=-this.hud.height/2+Math.max(18,safe.y),top=-this.hud.height/2+Math.min(this.hud.height-18,safe.y+safe.height);
+  this.width=Math.min(right-left,1460);this.height=Math.min(top-bottom,676);this.panel=this.hud.panel(this.hud.modal,(left+right)/2,(top+bottom)/2,this.width,this.height,C.background);this.panel.name='CharacterPanel';
   this.leftW=this.mobile?250:224;this.middleW=440;this.rightW=this.width-this.leftW-this.middleW-64;this.bodyH=this.height-this.hit-112;
-  const headerY=this.height/2-this.hit/2-10;this.label(this.panel,'拉斐尔',-this.width/2+112,headerY,190,this.mobile?32:25,C.gold,this.hit);
- const tabs:[CharacterTab,string,string][]=[['inventory','装备与行囊','inventory'],['attributes','属性成长','attributes'],['skills','战斗技能','checks'],['catalog','装备图谱','equipment-catalog']];const tabW=this.mobile?156:126;
+  const headerY=this.height/2-this.hit/2-10;this.label(this.panel,'拉斐尔',-this.width/2+this.hit+115,headerY,190,this.mobile?32:25,C.gold,this.hit);
+ const tabs:[CharacterTab,string,string][]=[['inventory','装备与背包','inventory'],['attributes','属性成长','attributes'],['skills','战斗技能','checks'],['catalog','装备图谱','equipment-catalog']];const tabW=this.mobile?156:126;
  tabs.forEach(([id,title,action],i)=>this.button(this.panel,title,-100+i*(tabW+Math.max(8,8*this.hud.height/390)),headerY,tabW,this.hit,'character:tab:'+id,()=>this.hud.actions.click(action),this.tab===id&&id!=='skills'));
-  this.button(this.panel,'×',this.width/2-this.hit/2-12,headerY,this.hit,this.hit,'character:close',()=>this.hud.actions.click('close'));
+  const back=this.button(this.panel,'',-this.width/2+this.hit/2+12,headerY,this.hit,this.hit,'character:return',()=>{if(this.tab==='inventory')this.state.filter='all';this.hud.actions.click(this.tab==='inventory'?'inventory':'close');});UiSkin.asset(back,UI_PANEL_BACK.skin,UI_PANEL_BACK.glyphLogical*this.hud.uiUnit,UI_PANEL_BACK.glyphLogical*this.hud.uiUnit,false);
   this.rule(this.panel,this.height/2-this.hit-15,this.width-36);
   const bodyY=-8;const leftX=-this.width/2+16+this.leftW/2,middleX=-this.width/2+this.leftW+32+this.middleW/2,rightX=this.width/2-16-this.rightW/2;
   if(this.tab==='catalog'){
@@ -63,7 +66,6 @@ class CharacterPanel {
    this.right=this.hud.panel(this.panel,rightX,bodyY,this.rightW,this.bodyH,C.dark);this.right.name='CharacterContent';this.paintRight();
   }
  this.label(this.panel,'旅程 · '+getArea(this.game.state.area).name,-this.width/2+235,-this.height/2+27,440,this.mobile?24:15,C.muted,34);
-  this.button(this.panel,'返回旅途',this.width/2-112,-this.height/2+this.hit/2+8,190,this.hit,'character:return',()=>this.hud.actions.click('close'));
  }
  private summary(host:Node){
   if(this.tab==='skills'){this.skillSummary(host);return;}
@@ -99,7 +101,6 @@ class CharacterPanel {
   this.label(this.right,this.game.state.equipment.head==='A02'?'头罩会遮住发型，摘下后显示所选款式':'选择即生效 · 拖动人物可查看侧面',0,h/2-60,w-28,this.font-2,C.muted,32).horizontalAlign=Label.HorizontalAlign.CENTER;
   const content=this.scroll(this.right,0,-(96-footer)/2,w-20,viewH,this.hud.hairstyles.length*rowH+8);
   this.hud.hairstyles.forEach((style,i)=>{const y=-i*rowH-this.hit/2-4;this.button(content,style.label+(style.selected?' · 已使用':''),0,y,w-44,this.hit,'character:hairstyle:'+style.id,()=>this.hud.actions.click('hairstyle:'+style.id),style.selected);this.label(content,style.description,0,y-this.hit/2-this.font*.65-7,w-48,this.font-2,C.muted,this.font+12).horizontalAlign=Label.HorizontalAlign.CENTER;});
-  this.button(this.right,'返回装备',0,-h/2+this.hit/2+8,w-24,this.hit,'character:hairstyles:back',()=>{this.state.filter='all';this.hud.actions.click('inventory');});
  }
  private inventory(){
  const w=this.rightW,h=this.bodyH,top=h/2-12,filterH=this.hit,gap=Math.max(8,8*this.hud.height/390),filterW=(w-24-3*gap)/4,filterNames:[Filter,string][]=[['all','全部'],['weapon','武器'],['armor','防具'],['jewelry','首饰']];

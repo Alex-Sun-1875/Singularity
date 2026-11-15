@@ -15,13 +15,15 @@ import {GoldMenuActions} from './GoldMenuActions';
 import {GoldPanelShell,type GoldPanelVariant} from './GoldPanelShell';
 import {GoldPanelToggle} from './GoldPanelToggle';
 
-export interface MenuChoice {label:string;action:string;primary?:boolean;disabled?:boolean}
+export interface MenuChoice {label:string;action:string;primary?:boolean;disabled?:boolean;/** Navigation to a parent page, rendered only at the top left. */back?:boolean}
 export interface MenuRow extends MenuChoice {detail:string;icon?:string;skin?:string;selected?:boolean;disabled?:boolean;value?:string;toggle?:boolean}
 export interface MenuPresentation {
  placement?:'left'|'right'|'center';
  /** Width in the established 720-high Cocos design space. */
  width?:number;
  quiet?:boolean;
+ /** Mandatory confirmation screens keep an explicit top-left cancel action. */
+ dismissOnBackdrop?:boolean;
  dismissAction?:string;
  tabs?:{label:string;action:string;selected:boolean}[];
  centeredTitle?:boolean;
@@ -83,7 +85,7 @@ export class MenuPanel {
   shade.addComponent(BlockInputEvents);
   // Only dismiss screens which explicitly offer a way back. Dialogue, login,
   // new-game confirmation and mandatory recovery retain their own choices.
-  if(dismiss){const b=shade.addComponent(Button);b.transition=Button.Transition.NONE;shade.on(Button.EventType.CLICK,()=>hud.actions.click(dismiss));}
+  if(dismiss&&this.options.dismissOnBackdrop!==false){const b=shade.addComponent(Button);b.transition=Button.Transition.NONE;shade.on(Button.EventType.CLICK,()=>hud.actions.click(dismiss));}
   const {left,right,bottom,top}=this.bounds,placement=this.options.placement??'center',inset=Math.min(this.options.rightInset??0,Math.max(0,this.options.keepCenterClear?right-this.width-this.pad:right-left-this.width)),x=placement==='left'?left+this.width/2:placement==='right'?right-this.width/2-inset:(left+right)/2;
   const panel=hud.node('MenuSheet',hud.modal,x,(top+bottom-this.crestReserve)/2,this.width,height);this.shell=panel.addComponent(GoldPanelShell);
   this.shell.configure({title,width:this.width,height,hit:this.hit,unit:this.scale,mobile:this.mobile,variant:this.variant,crest:this.options.crest,centeredTitle:this.options.centeredTitle,dismissAction:dismiss,tabs:this.options.tabs},action=>hud.actions.click(action));
@@ -138,8 +140,12 @@ export class MenuPanel {
   if(visualOffset)for(const child of n.children)if(child.name!=='MenuRowFace')child.setPosition(child.position.x,child.position.y+visualOffset);
   n.on(Button.EventType.CLICK,()=>{if(!row.disabled)this.hud.actions.click(row.action);});
  }
+ private navigation(buttons:readonly MenuChoice[]){
+  const back=buttons.find(b=>b.back)??buttons.find(b=>b.action==='close');
+  return {dismiss:this.options.dismissAction??back?.action,actions:buttons.filter(b=>!b.back&&b.action!=='close'&&b.action!==this.options.dismissAction)};
+ }
  show(title:string,body:string,buttons:MenuChoice[]){
-  const dismiss=this.options.dismissAction??buttons.find(b=>b.action==='close')?.action,choices=buttons.filter(b=>!(b.action==='close'&&b.label==='返回旅途'));
+  const {dismiss,actions:choices}=this.navigation(buttons);
   const width=this.width-2*this.pad,textWidth=width-2*CONTENT.textInset*this.scale,textHeight=this.textHeight(body,textWidth),introTop=CONTENT.introTop*this.scale,bodyHeight=body?introTop+textHeight+CONTENT.bodyBottom*this.scale:0,choiceGap=body&&choices.length?this.gap*1.5:0,heights=choices.map(b=>Math.max(this.hit,this.textHeight(b.label,width-16*this.scale,this.mobile?27:18)+16*this.scale));
   const choicesHeight=heights.reduce((s,h)=>s+h,0)+Math.max(0,choices.length-1)*this.gap,choiceViewHeight=Math.min(choicesHeight,this.maxHeight*.5),bodyViewHeight=Math.min(bodyHeight,this.maxHeight-this.header-this.pad-choiceGap-choiceViewHeight);
   const {panel,height}=this.surface(title,this.header+bodyViewHeight+choiceGap+choiceViewHeight+this.pad,dismiss);
@@ -151,7 +157,7 @@ export class MenuPanel {
  }
  showList(title:string,subtitle:string,rows:MenuRow[],footer:MenuChoice[]){
   if(this.referenceScale){this.showReferenceList(title,rows,footer);return;}
-  const dismiss=this.options.dismissAction??footer.find(b=>b.action==='close')?.action,actions=footer.filter(b=>b.action!=='close'||b.label.startsWith('继续')),width=this.width-2*this.pad;
+  const {dismiss,actions}=this.navigation(footer),width=this.width-2*this.pad;
   const subtitleWidth=width-2*CONTENT.textInset*this.scale,subtitleTextHeight=this.textHeight(subtitle,subtitleWidth),introTop=CONTENT.introTop*this.scale,subtitleHeight=subtitle?introTop+subtitleTextHeight:0,heights=rows.map(r=>this.rowHeight(r)),empty=rows.length?0:this.textHeight('暂无可选内容',width)+this.gap;
   const contentHeight=subtitleHeight+(subtitle?this.gap:0)+heights.reduce((s,h)=>s+h,0)+Math.max(0,rows.length-1)*this.gap+empty;
   // A footer with more than two actions becomes a vertical group so targets
@@ -165,7 +171,7 @@ export class MenuPanel {
    actions.forEach((b,i)=>this.choice(panel,b,stack?0:(i-(actions.length-1)/2)*(actionWidth+this.gap),-height/2+this.pad+this.hit/2+(stack?(actions.length-1-i)*(this.hit+this.gap):0),actionWidth,this.hit,b.action==='close'&&b.label.startsWith('继续'),true,true));}
  }
  private showReferenceList(title:string,rows:MenuRow[],footer:MenuChoice[]){
-  const r=this.referenceScale,dismiss=this.options.dismissAction??footer.find(b=>b.action==='close')?.action,actions=footer.filter(b=>b.action!=='close'),referenceRows=rows.length===3&&rows.every(row=>row.toggle&&!row.detail),heights=rows.map(row=>Math.max(R.rowHeight*r,this.rowHeight(row))),centers:number[]=[];
+  const r=this.referenceScale,{dismiss,actions}=this.navigation(footer),referenceRows=rows.length===3&&rows.every(row=>row.toggle&&!row.detail),heights=rows.map(row=>Math.max(R.rowHeight*r,this.rowHeight(row))),centers:number[]=[];
   // Grouped switches use contiguous phone hit bands; visible rows retain the approved slots.
   rows.forEach((_,i)=>centers.push(Math.max((R.rowFirstY+i*R.rowStep)*r,i?centers[i-1]+heights[i-1]/2+(referenceRows?0:this.gap)+heights[i]/2:this.header+heights[i]/2)));
   const last=rows.length?centers[centers.length-1]+heights[heights.length-1]/2:this.header,{panel,height}=this.surface(title,this.referenceHeight,dismiss);

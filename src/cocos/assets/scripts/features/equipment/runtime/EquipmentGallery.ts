@@ -1,11 +1,13 @@
+import {viewportMetrics} from '../../../platform/ViewportMetrics';
 import {CompactMask as Mask} from '../../../shared/ui/CompactMask';
 import {CompactGraphics} from '../../../shared/ui/CompactGraphics';
-import {BlockInputEvents,ButtonComponent as Button,Color,Graphics,isValid,Label,Node,ScrollBar,ScrollView,screen,sys,UITransform} from 'cc';
+import {BlockInputEvents,ButtonComponent as Button,Color,Graphics,isValid,Label,Node,ScrollBar,ScrollView,sys,UITransform} from 'cc';
 import type {GameSession} from '../../../core/GameSession';
 import {EQUIPMENT} from '../data/Equipment';
 import {EquipmentArt,type EquipmentArtDef,type EquipmentArtManifest,type EquipmentFamily} from './EquipmentArt';
 import type {Hud} from '../../../app/Hud';
 import {UiSkin} from '../../../shared/ui/UiSkin';
+import {UI_PANEL_BACK} from '../../../shared/ui/UiChrome';
 import {UI_COLORS as C} from '../../../shared/ui/UiTheme';
 
 type Selection={family:EquipmentFamily;selected:Partial<Record<EquipmentFamily,string>>};
@@ -27,9 +29,9 @@ class Gallery {
  private data:EquipmentArtManifest|null=null;private revision=0;private disposed=false;private main:Node|null=null;private detail:Node|null=null;
  private readonly dispose=()=>this.destroy();
  constructor(private readonly hud:Hud,private readonly game:GameSession,host:Node,private readonly width:number,private readonly height:number,private readonly state:Selection){
-  const cssHeight=screen.windowSize.height/Math.max(1,screen.devicePixelRatio);
+  const cssHeight=viewportMetrics.windowSize.height/Math.max(1,viewportMetrics.devicePixelRatio);
   this.font=sys.isMobile?Math.max(28,Math.ceil(14*hud.height/cssHeight)):17;
-  this.hit=sys.isMobile?Math.max(84,Math.ceil(44*hud.height/cssHeight)):48;
+  this.hit=sys.isMobile?Math.max(84,Math.ceil(48*hud.height/cssHeight)):48;
   this.gap=sys.isMobile?14:10;
   this.root=hud.node('EquipmentGallery',host,0,0,width,height);hud.modalDisposers.add(this.dispose);
  }
@@ -122,8 +124,8 @@ class Gallery {
   if(!this.alive()||this.detail)return;this.revision++;if(this.main)this.main.active=false;
   const detail=this.hud.panel(this.root,0,0,this.width,this.height,C.background);detail.name='EquipmentGalleryDetail';detail.addComponent(BlockInputEvents);this.detail=detail;
   const backW=Math.max(190,this.hit*2.25),headerY=this.height/2-this.hit/2,titleW=this.width-backW-this.gap-24;
-  this.label(detail,art.name,-this.width/2+titleW/2+12,headerY,titleW,this.hit,this.font+2,C.goldLight);
-  this.button(detail,'返回图鉴',this.width/2-backW/2,headerY,backW,this.hit,'gallery:detail-back',()=>this.paint());
+  const back=this.button(detail,'返回图鉴',-this.width/2+backW/2,headerY,backW,this.hit,'gallery:detail-back',()=>this.paint()),arrow=UiSkin.asset(back,UI_PANEL_BACK.skin,UI_PANEL_BACK.glyphLogical*this.hud.uiUnit,UI_PANEL_BACK.glyphLogical*this.hud.uiUnit,false);arrow.node.setPosition(-backW/2+24*this.hud.uiUnit,0);back.getComponentInChildren(Label)!.node.setPosition(12*this.hud.uiUnit,0);
+  this.label(detail,art.name,-this.width/2+backW+this.gap+titleW/2,headerY,titleW,this.hit,this.font+2,C.goldLight);
   const bodyH=this.height-this.hit-this.gap*2,artW=this.width*.43,bodyY=-this.hit/2;
   const image=this.hud.node('GalleryEnlargedArtwork',detail,-this.width/2+artW/2,bodyY,artW-16,bodyH);this.artwork(image,art,artW-16,bodyH);
   const infoW=this.width-artW-this.gap-12,infoX=-this.width/2+artW+this.gap+infoW/2,ids=this.mapped(art),mapped=ids.length?ids.map(id=>`${EQUIPMENT[id].name}（${id}）\n${this.owned(id)?'已获得':'尚未获得'}`).join('\n\n'):'后续设计';

@@ -1,3 +1,5 @@
+import {authoredWaypoint,waypointUnlocked} from '../features/navigation/common/FastTravel';
+import {navigationText as mapText} from '../features/navigation/locales';
 import {equipmentText as gearText} from '../features/equipment/locales';
 import type { AreaDef, EnemySpawn, ExitDef, GameEvent, InputFrame, InteractionDef, Point, WorldQuery, SkillProjectileMetadata,AttackFeedbackMetadata } from './Contracts';
 import { EQUIPMENT, MERCHANTS, RECIPES, canonicalItem, canonicalMerchant,equipmentPowerMultiplier,equipmentStackLimit, type EquipmentSlot,type ItemDef } from '../features/equipment/data/Equipment';
@@ -117,7 +119,7 @@ export class GameSession {
  enemyHitReaction(id:string){return this.hitResponse.view(id);}
   constructor(seed:number, private world:WorldQuery,private calendarNow:()=>number=Date.now) {
   const n=Number.isFinite(seed)?Math.floor(Math.abs(seed))%2147483646+1:73014;
-  this.state={forging:freshForging(),dice:freshDiceState(),version:3,progression:freshProgression(),combat:freshCombat(),seed:n,area:'S01',time:0,sequence:0,revision:0,status:'playing',player:{x:0,z:0,hp:120,maxHp:120,focus:100,maxFocus:100,resourceVersion:1,staminaPotions:2,manaPotions:2,healthPotions:3,focusPotions:2,gold:0,iron:0,runes:0,cores:0,angle:0,hurtTime:0,shield:0,movingTime:0},enemies:[],encounters:{},projectiles:[],fireZones:[],barrels:[],flags:{},inventory:{W01:1,W07:1,W11:1},provenance:{W01:'initial',W07:'initial',W11:'initial'},pending:{},equipment:{weapon:'W01',offhand:null,head:null,chest:null,hands:null,feet:null,ringLeft:null,ringRight:null,necklace:null,spells:[null,null]},dialogue:null,action:null,cooldowns:{},receipts:{initial:true,'lifecycle:v3':true},recipes:[],merchantStock:Object.fromEntries(Object.entries(MERCHANTS).map(([id,m])=>[id,{...m.stock}])),discoveredMerchants:[],checkpoint:{area:'S01',x:0,z:0},dropRolls:{},movedDistance:0,effectCounters:{},enemyHazards:[],groundLoot:[]};
+  this.state={forging:freshForging(),dice:freshDiceState(),version:3,progression:freshProgression(),combat:freshCombat(),seed:n,area:'S01',time:0,sequence:0,revision:0,status:'playing',player:{x:0,z:0,hp:120,maxHp:120,focus:100,maxFocus:100,resourceVersion:1,staminaPotions:2,manaPotions:2,healthPotions:3,focusPotions:2,gold:0,iron:0,runes:0,cores:0,angle:0,hurtTime:0,shield:0,movingTime:0},enemies:[],encounters:{},projectiles:[],fireZones:[],barrels:[],flags:{},inventory:{W01:1,W07:1,W11:1},provenance:{W01:'initial',W07:'initial',W11:'initial'},pending:{},equipment:{weapon:'W01',offhand:null,head:null,chest:null,hands:null,feet:null,ringLeft:null,ringRight:null,necklace:null,spells:[null,null]},dialogue:null,action:null,cooldowns:{},receipts:{initial:true,'lifecycle:v3':true,'waypoint:v1':true},recipes:[],merchantStock:Object.fromEntries(Object.entries(MERCHANTS).map(([id,m])=>[id,{...m.stock}])),discoveredMerchants:[],checkpoint:{area:'S01',x:0,z:0},dropRolls:{},movedDistance:0,effectCounters:{},enemyHazards:[],groundLoot:[]};
   prepareCombatLoadout(this.state.combat,this.state.equipment.weapon,this.state.progression);
  }
  private changed(){this.state.revision++;this.dirty=true;}
@@ -184,7 +186,7 @@ export class GameSession {
   if(!owned)this.equipmentDice.enqueue(id,source);
   this.emit('item',`获得${def.name}${accepted>1?` ×${accepted}`:''}`,{id,value:accepted});this.changed();
  }
- enter(area:AreaDef,entry?:Point):GameEvent[]{
+ enter(area:AreaDef,entry?:Point,fastTravel=false):GameEvent[]{
   this.hitResponse.reset();this.meleeChain.reset();
   this.enemyRules.reset();
   const same=this.state.area===area.id;if(!same)this.state.dice.active=null;
@@ -195,14 +197,15 @@ export class GameSession {
   this.state.player.x=clamp(p.x,-area.width/2+.35,area.width/2-.35);this.state.player.z=clamp(p.z,-area.depth/2+.35,area.depth/2-.35);
   this.state.enemies=this.state.flags[`visited:${area.id}`]&&this.state.encounters[area.id]?clone(this.state.encounters[area.id]):area.enemies.map(e=>this.spawn(e));
   this.syncHuntingPacks();
-  this.pruneSupplies(true);
-  this.respawnHunts();
+  if(!fastTravel)this.pruneSupplies(true);
+  if(!fastTravel)this.respawnHunts();
   this.state.encounters[area.id]=clone(this.state.enemies);
   this.state.projectiles=[];this.state.fireZones=[];this.state.action=null;this.state.dialogue=null;this.previous={x:0,z:0};this.merchant=null;this.merchantAnchor=null;this.navigation.clear();
   this.state.barrels=area.obstacles.filter(o=>o.kind==='barrel').map((o,i)=>({id:`${area.id}:barrel:${i}`,x:o.x,z:o.z,fuse:-1,exploded:!!this.state.flags[`${area.id}:barrel:${i}:exploded`]}));
   this.state.flags[`visited:${area.id}`]=true;
-  if(chapterForArea(area.id)>=2&&unlockSkills(this.state.progression,true)){activateCombatLoadout(this.state.combat,this.state.progression);this.state.progression.ultimateGiftClaimed=true;this.state.combat.charge=0;this.emit('notice','全部技能已开放为1级，获得2技能点；请在安全检查点自由加点。');}
-  if(area.checkpoint&&this.safe())this.setCheckpoint();
+  if(!fastTravel&&chapterForArea(area.id)>=2&&unlockSkills(this.state.progression,true)){activateCombatLoadout(this.state.combat,this.state.progression);this.state.progression.ultimateGiftClaimed=true;this.state.combat.charge=0;this.emit('notice','全部技能已开放为1级，获得2技能点；请在安全检查点自由加点。');}
+  if(!fastTravel&&area.checkpoint&&this.safe())this.setCheckpoint();
+  if(!fastTravel)this.discoverWaypoint();
   this.recalculate();this.changed();this.emit('area',area.name,{id:area.id});return this.drain();
  }
  private spawn(e:EnemySpawn):EnemyState {const def=CAMPAIGN_ENEMY_TEMPLATES[e.templateId??e.bossId??''],level=e.level??def?.level??1,base=huntingBaseHp(e)??def?.baseHp??def?.hp??e.hp??({raider:72,shield:105,archer:60,captain:360}[e.kind]),maxHp=campaignFighter(e)?.maxHp??Math.round(base*enemyHealthMultiplier(e)*(1+.14*(level-1))),movement=enemyProfile(e)?.movement,angle=movement?.stationary&&movement.facingPoint?aim(e,movement.facingPoint):0;return {...e,level,hp:maxHp,maxHp,angle,phase:'idle',phaseTime:.35,attackCount:0,targetAngle:angle,attackKind:'swing',struck:false,markedUntil:0,lightningUntil:0,pushImmuneUntil:0,staggerProtectedUntil:0,halfAnnounced:false};}
@@ -432,6 +435,7 @@ export class GameSession {
   let remaining=dt;let first=true;
   while(remaining>1e-8){const step=Math.min(.02,remaining);this.step(step,clean,first,idleHunting);remaining-=step;first=false;if(this.state.player.hp<=0)break;}
   this.updateCombatEngagement();
+  this.discoverWaypoint();
   const task=this.journey.currentTask();
   if(task&&task.goal!=='observe'&&this.state.player.hp>0&&this.safe()&&this.journey.complete(task.id))this.campaign.task(task.id);
   // The active encounter already is authoritative. Detach it at snapshot/travel, not every rendered frame.
@@ -827,6 +831,42 @@ export class GameSession {
  }
  private canComplete(){const f=this.state.flags;return f.captain_defeated&&f.gate_raised&&f.recovered&&f.read_letter&&f.meeting&&f.workers_released&&(f.trap_handled||f.trap_disabled)&&f.choice_made;}
  questObjective():string{if(this.areaDef?.objects.some(o=>o.action==='journey_board'))return this.journey.taskHint();const f=this.state.flags;if(f.m8_complete)return '终局已完成 · 可继续探索已开放道路';if(!f.accepted&&!f.independent_clue&&!f.recovered)return f.rejected?'向信使或军营取得独立线索':'与弥菈谈委托，或向信使独立追查';if(!f.recovered)return '找回圣匣车中被截获的原信与完整星片';if(!f.read_letter)return '亲自阅读遗物匣中的原信';if(!f.meeting)return '前往 U1-04 长桌，与伊芙琳见面并表明立场';if(!f.workers_released)return '前往 U1-05 释放被扣押的工匠';if(!f.workers_departed)return '从 U1-05 核验过的出口带工匠实际离场';if(!f.captain_defeated)return '回地表击败 S10 灰披队长';if(!f.gate_raised)return '亲手抬起 S10 横杆，领取未熄之誓';if(!f.choice_made)return '回 U1-04 长桌确认救援与星片的约定';if(!f.m3_heat_test)return '前往 H03 疏散工位，实际完成散热回退试验';if(!f.m4_bridge_open)return '在 H08 接回手柄，放下通往军械岸的矿桥';if(!f.m4_bridge_reward)return '在 H09 打开桥后武备台';if(!f.m4_contact)return '前往 U1-08，建立第一次可中止接触';if(!f.m5_pressure)return '从 U2-03 内侧分区泄压，打开深闸';if(!f.m5_archive)return '在 U2-06 核验两个角度的原刻与现代拓本';if(!f.m6_verified)return '在 B10 战后完成校光、复秤、封签并开匣';if(!f.m7_prepared)return '在 F04 或 F07 实际核验一条安全出口';if(!f.west_tower_down||!f.east_tower_down)return `亲手卸下${!f.west_tower_down?' F09 西':''}${!f.east_tower_down?' F10 东':''}弩台固定销`;if(!f['boss_defeated:BOSS_R4'])return '进入 F13 决战庭，击败阿德里安';if(!f.m7_vault)return '在 F14 转动同侧绞盘，开启黑冠主箱';if(!f.core_plans_known)return '在 U2-07 解除镜阵，取得迁行与静眠原图';if(!f.core_exit_verified)return '在 U1-08 实走迁行口，核验两端安全线';return '回 U1-08 选择并亲手执行终局方案';}
+ private fastTravelOrigin:{state:GameState;area:AreaDef}|undefined;
+ private discoverWaypoint():void {
+  const area=this.areaDef;if(!area||this.state.flags[`waypoint:${area.id}`])return;
+  const waypoint=authoredWaypoint(area);
+  if(waypoint&&dist(this.state.player,waypoint.point)<=3&&this.safe()&&!this.inCombat()){
+   this.state.flags[`waypoint:${area.id}`]=true;this.changed();
+  }
+ }
+ fastTravelAvailability(area:AreaDef):{available:boolean;reason:string} {
+  const s=this.state,point=authoredWaypoint(area)?.point;
+  const blocked=(reason:string)=>({available:false,reason});
+  if(!point||!waypointUnlocked(s.flags,area))return blocked(mapText('map.notUnlocked'));
+  if(this.fastTravelOrigin)return blocked(mapText('map.busy'));
+  if(s.status==='dead'||s.player.hp<=0)return blocked(mapText('map.dead'));
+  if(s.dialogue||s.dice.active||s.action)return blocked(mapText('map.submitting'));
+  if(s.projectiles.some(q=>q.remaining>0&&dist(q,s.player)<18))return blocked(mapText('map.projectiles'));
+  if(!this.safe()||this.inCombat())return blocked(mapText('map.combat'));
+  const level=locationEntryLevel(area.id);if(this.progressionView().level<level)return blocked(mapText('map.level',{level}));
+  const encounter=s.area===area.id?s.enemies:s.encounters[area.id]??area.enemies;
+  if(encounter.some(e=>(!('hp'in e)||e.hp!>0)&&(!e.trainingDummy||e.trainingAttacks)&&dist(e,point)<14))return blocked(mapText('map.unsafeArrival'));
+  if(s.area===area.id&&dist(s.player,point)<2)return blocked(mapText('map.here'));
+  return {available:true,reason:mapText('map.direct')};
+ }
+ /** Transaction stays in memory until the scene has actually loaded. No healing, rewards or exit effects. */
+ fastTravel(area:AreaDef):boolean {
+  if(!this.areaDef||!this.fastTravelAvailability(area).available)return false;
+  const s=this.state,point=authoredWaypoint(area)!.point;
+  this.fastTravelOrigin={state:this.snapshot(),area:this.areaDef};
+  s.encounters[s.area]=clone(s.enemies);this.enemyRules.reset();this.hitResponse.reset();this.meleeChain.reset();this.combatRules.resetTransient();
+  s.area=area.id;s.player.x=point.x;s.player.z=point.z;s.enemies=clone(s.encounters[area.id]??[]);
+  s.projectiles=[];s.fireZones=[];s.action=null;s.dialogue=null;this.areaDef=null;this.previous={x:0,z:0};this.navigation.clear();this.changed();return true;
+ }
+ completeFastTravel(success:boolean):void {
+  const origin=this.fastTravelOrigin;this.fastTravelOrigin=undefined;if(!origin||success)return;
+  this.enemyRules.reset();this.state=origin.state;this.areaDef=origin.area;this.hitResponse.reset();this.meleeChain.reset();this.navigation.clear();this.previous={x:0,z:0};this.dirty=true;
+ }
  travel(exit:ExitDef):GameEvent[]{
   const s=this.state,def=this.areaDef?.exits.find(e=>e.id===exit.id&&e.to===exit.to);if(!def||s.status==='dead'||s.dialogue||s.dice.active)return [];
   if(dist(s.player,def)>1.35||!this.visible(s.player,def)){this.emit('notice','走到出口再离开');return this.drain();}
@@ -861,10 +901,11 @@ export class GameSession {
  static restore(snapshot:unknown,world:WorldQuery,calendarNow:()=>number=Date.now):GameSession {
   validateSnapshot(snapshot);
   const game=new GameSession(snapshot.seed-1,world,calendarNow);game.state=clone(snapshot);const s=game.state,oilMigrated=migrateRemovedOil(s),skillsMigrated=migrateFourSkillKit(s),journeyMigrated=initializeLifecycleJourney(s),curveMigrated=updateExperienceCurve(s.progression),resourcesMigrated=migrateClassResource(s),migrated=oilMigrated||resourcesMigrated||skillsMigrated||journeyMigrated||curveMigrated||!s.forging||s.forging.version===1||!s.groundLoot;s.groundLoot??=[];if(!s.forging)s.forging=freshForging();syncRandomForging(s);
+  if(!s.receipts['waypoint:v1']){for(const [key,value]of Object.entries(s.flags))if(value&&key.startsWith('checkpoint:')&&s.flags['visited:'+key.slice(11)])s.flags['waypoint:'+key.slice(11)]=true;s.receipts['waypoint:v1']=true;game.dirty=true;}
   // Resume current-format durable state; in-flight input and effects never resume.
   s.dialogue=null;s.action=null;s.projectiles=[];s.fireZones=[];s.combat.casts=[];
   game.combatRules.clearSkillCooldowns();s.player.hurtTime=0;
-  activateCombatLoadout(s.combat,s.progression);game.recalculate();game.dirty=migrated;return game;
+  activateCombatLoadout(s.combat,s.progression);game.recalculate();game.dirty=game.dirty||migrated;return game;
  }
 }
 

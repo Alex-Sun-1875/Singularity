@@ -5,7 +5,7 @@ import {forgingSlot} from '../data/EquipmentForging';
 import {Hud} from '../../../app/Hud';
 import {equipmentIcon} from '../../equipment/runtime/EquipmentPresentation';
 import {renderForgeWorkshop,workshopHeader,workshopStatus} from './ForgeWorkshop';
-import {RpgPanel} from '../../../shared/ui/RpgPanel';
+import {RpgPanel,type RpgFooterAction} from '../../../shared/ui/RpgPanel';
 import {UI_COLORS as C} from '../../../shared/ui/UiTheme';
 import {PreparationSkin as P} from '../../../shared/ui/PreparationSkin';
 import {PreparationControls as Controls} from '../../../shared/ui/PreparationControls';
@@ -14,8 +14,8 @@ import {PreparationControls as Controls} from '../../../shared/ui/PreparationCon
 export function renderForging(hud:Hud,game:GameSession,menu:string):boolean {
  if(menu!=='craft'&&!menu.startsWith('craft-preview:')&&menu!=='forge'&&!menu.startsWith('forge-'))return false;
  if(menu==='forge'||/^forge-(item|result|pool):/.test(menu)){renderForgeWorkshop(hud,game,menu);return true;}
- const s=game.state,p=s.player,access=game.forgingAvailability(),parts=menu.split(':'),item=parts[1],d=EQUIPMENT[item],balance=`金币 ${p.gold} · 废铁 ${p.iron} · 符纹 ${p.runes} · 锻造芯 ${p.cores}`,footer=[{label:'装备养成',action:'forge'},{label:'锻造配方',action:'craft'},{label:'返回行囊',action:'inventory'}];
- const show=(title:string,subtitle:string,rows:Parameters<Hud['showList']>[2],buttons=footer)=>{
+ const s=game.state,p=s.player,access=game.forgingAvailability(),parts=menu.split(':'),item=parts[1],d=EQUIPMENT[item],balance=`金币 ${p.gold} · 废铁 ${p.iron} · 符纹 ${p.runes} · 锻造芯 ${p.cores}`,footer=[{label:'装备养成',action:'forge'},{label:'锻造配方',action:'craft'},{back:true,label:'返回背包',action:'inventory'}];
+ const show=(title:string,subtitle:string,rows:Parameters<Hud['showList']>[2],buttons:RpgFooterAction[]=footer)=>{
   const ui=new RpgPanel(hud,game,'forge','ForgeServices',true),u=ui.scale,craft=menu.startsWith('craft'),top=ui.bodyTop-ui.hit-ui.gap,h=top-ui.bodyBottom;
   const intro=ui.surface(ui.panel,ui.x(146),(top+ui.bodyBottom)/2,276*u,h,C.background),body=ui.surface(ui.panel,ui.x(564),(top+ui.bodyBottom)/2,544*u,h,C.background);intro.name='ForgeServiceSummary';body.name='ForgeServiceRows';
   ui.text(intro,title,0,h/2-18*u,250*u,32*u,C.ink,18*u);P.rule(ui,intro,0,h/2-38*u,246);const summary=ui.text(intro,subtitle,0,-18*u,248*u,h-62*u,C.muted,13*u);summary.verticalAlign=Label.VerticalAlign.TOP;
@@ -38,7 +38,7 @@ export function renderForging(hud:Hud,game:GameSession,menu:string):boolean {
  if(!d||!s.inventory[item]){show('装备养成','尚未拥有这件装备。',[]);return true;}
  if(menu.startsWith('forge-targets:')){
   const ids=Object.keys(s.inventory).filter(id=>id!==item&&s.inventory[id]>0&&EQUIPMENT[id]&&forgingSlot(d)===forgingSlot(EQUIPMENT[id]));
-  show('选择传承目标',`来源：${game.itemView(item).name}\n${ids.length?'原装备与独有特效保留；强化经验转移，不复制。':'尚无其他同部位装备，可以先继续探索。'}`,ids.map(id=>{const q=game.forging.transfer(item,id);return {label:EQUIPMENT[id].name,detail:`传承后＋${q.after} · 费用 ${q.gold} 金币${q.reserve?` · 保留经验 ${q.reserve}`:''}`,action:`forge-transfer:${item}:${id}`,icon:equipmentIcon(EQUIPMENT[id])};}),[{label:'返回来源装备',action:`forge-item:${item}`},{label:'装备列表',action:'forge'}]);return true;
+  show('选择传承目标',`来源：${game.itemView(item).name}\n${ids.length?'原装备与独有特效保留；强化经验转移，不复制。':'尚无其他同部位装备，可以先继续探索。'}`,ids.map(id=>{const q=game.forging.transfer(item,id);return {label:EQUIPMENT[id].name,detail:`传承后＋${q.after} · 费用 ${q.gold} 金币${q.reserve?` · 保留经验 ${q.reserve}`:''}`,action:`forge-transfer:${item}:${id}`,icon:equipmentIcon(EQUIPMENT[id])};}),[{back:true,label:'返回来源装备',action:`forge-item:${item}`},{label:'装备列表',action:'forge'}]);return true;
  }
  if(menu.startsWith('forge-transfer:')){
   const q=game.forging.transfer(item,parts[2]),target=EQUIPMENT[q.to];

@@ -49,6 +49,6 @@ export function renderForgeWorkshop(hud:Hud,game:GameSession,menu:string){
   const reason=q.reason.includes('请前往')?'需在检查点或洛恩工坊操作':!q.step?(v.rank>=v.maximum?'已达装备强化极限':'阶段已满，下阶段可继续培养'):q.reason,roll=v.lastRoll;
   center(result?(roll?(roll.added?'新增 ':'增强 ')+FORGING_STAT_NAMES[roll.stat]+' '+forgingValue(roll.stat,roll.amount):'强化记录已保存'):q.allowed?'成功率 100%':reason,704,b-19,240,38,12.5,result||q.allowed?F.color('state.success'):F.color('state.blocked'));
  }
- const primary=result?{label:q.step?'继续强化':'返回强化',action:'forge-item:'+id,enabled:true,primary:true}:{label:q.step?`强化 · ${q.step.gold}金币`:v.rank>=v.maximum?'已达装备极限':'已达阶段上限',action:q.step?`forge-submit:${id}:${q.token}`:'forge-info',enabled:q.allowed,primary:true};
- ui.footer(workshopStatus(game),[{label:pool?'返回预览':'传承预览',action:pool?'forge-item:'+id:'forge-targets:'+id},primary,{label:'返回旅途',action:'close'}]);workshopHeader(ui,id,'enhance');
+ const primary=result?{back:!q.step,label:q.step?'继续强化':'返回强化',action:'forge-item:'+id,enabled:true,primary:true}:{label:q.step?`强化 · ${q.step.gold}金币`:v.rank>=v.maximum?'已达装备极限':'已达阶段上限',action:q.step?`forge-submit:${id}:${q.token}`:'forge-info',enabled:q.allowed,primary:true};
+ ui.footer(workshopStatus(game),[{back:pool,label:pool?'返回预览':'传承预览',action:pool?'forge-item:'+id:'forge-targets:'+id},primary,{label:'返回旅途',action:'close'}]);workshopHeader(ui,id,'enhance');
 }

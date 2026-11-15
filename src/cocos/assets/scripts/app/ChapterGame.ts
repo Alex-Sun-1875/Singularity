@@ -1,3 +1,5 @@
+import {retainViewportMetrics} from '../platform/ViewportMetrics';
+import {navigationText as mapText} from '../features/navigation/locales';
 import {skillWeaponRequirement} from '../features/combat/common/SkillWeapons';
 import {updateJourneyCooldowns} from '../features/journey/runtime/JourneyPanel';
 import {journeyText as lifecycleText} from '../features/journey/locales';
@@ -139,7 +141,9 @@ export class ChapterGame extends Component {
  }
  private previousPhysicsAutoSimulation:boolean|undefined;
  private equipmentPreparing=false;
+ private viewportCleanup:(()=>void)|undefined;
  async start(){
+  this.viewportCleanup=retainViewportMetrics();
   void prepareNavigationWasm();
   // Pack original pixels at 1:1; this changes empty atlas capacity, not art size.
   if(dynamicAtlasManager.atlasCount===0)dynamicAtlasManager.textureSize=1280;
@@ -214,13 +218,13 @@ export class ChapterGame extends Component {
   let ready=0;await Promise.all(startup.map(task=>task.then(()=>{if(!this.startupFailure&&!this.destroyed)this.loadingScreen.show(.16+(++ready)*.44/startup.length,'正在布置场景与特效');})));
   if(this.destroyed)return;await this.rebuild();if(this.resumeSavedJourney){this.music?.start();this.resumeSavedJourney=false;}this.renderModal();console.log('[Chapter] Cocos first chapter initialized',this.session.state.area);
  }
- private async rebuild(){
+ private async rebuild(fastTravel=false){
   this.pagePreparationRevision++;this.preparingPage=false;
   this.session.setMovementSpeed(!this.flatMode||this.modelPlayer?MODEL_RUN_SPEED:3.6);
   this.combatFocus=null;
   const retainedPlayer=this.modelPlayer&&this.actors instanceof Player3DActors?this.actors.takePlayer():undefined;
   this.loading=true;this.clearInput(false);this.campaignView?.destroy();this.campaignView=undefined;this.impact?.destroy();this.impact=undefined;this.sceneInteraction?.destroy();this.sceneInteraction=undefined;this.groundLootView?.destroy();this.groundLootView=undefined;this.taskPresence?.destroy();this.taskPresence=undefined;this.portalHud?.destroy();this.portalHud=undefined;this.enemyFeedback?.destroy();this.enemyFeedback=undefined;this.actors?.destroy();this.effects?.destroy();this.flatWorld?.destroy();this.flatWorld=undefined;this.nativePortals?.destroy();this.nativePortals=undefined;this.flatPortrait?.destroy();this.flatPortrait=undefined;this.world?.destroy();const area=this.trainingRange?.area??getArea(this.session.state.area),entry={x:this.session.state.player.x,z:this.session.state.player.z};
-  this.loadingScreen?.show(.64,'正在进入'+area.name);this.mapResources.select(area,id=>AREAS[id]);this.world=new SceneBuilder(director.getScene()!,area,this.flatMode,this.mapResources);LocalCartography.setLayout(area.id,this.world.layoutObstacles);this.session.enter(this.world.area,entry);resetJourneyGuidance(this.session);this.guideArea='';this.encounterTime=.2;this.encounterText='';this.compassText='';
+  this.loadingScreen?.show(.64,'正在进入'+area.name);this.mapResources.select(area,id=>AREAS[id]);this.world=new SceneBuilder(director.getScene()!,area,this.flatMode,this.mapResources);LocalCartography.setLayout(area.id,this.world.layoutObstacles);this.session.enter(this.world.area,entry,fastTravel);resetJourneyGuidance(this.session);this.guideArea='';this.encounterTime=.2;this.encounterText='';this.compassText='';
   if(this.trainingRange){this.trainingRange.reset();buildTrainingFloor(this.world);}
   this.portalHud=new PortalHud(this.hud,this.camera,this.world);
   this.sceneInteraction=new SceneInteraction(this.hud,this.camera,this.sceneInteract);
@@ -243,6 +247,33 @@ export class ChapterGame extends Component {
   // texture on the first size-dirty frame without destroying the old color.
   director.getScene()!.globals.shadows.enabled=true;
   this.campaignView=new CampaignPresentation(this.hud,this.camera,this.world,this.session,this.campaignFinished,this.campaignSound,this.campaignArmy);this.hud.previewSource=this.actors.playerModel();this.loadingScreen?.show(1,'旅途已就绪');this.positionCamera(1);await this.effects.prepareShaders(this.session.state.player,this.session);await this.enemyFeedback?.prepareTextGlyphs();await this.preparationResources.prepare(this.session).catch(error=>console.warn('[Chapter] Initial page prewarm failed',error));await new Promise<void>(resolve=>director.once(Director.EVENT_AFTER_DRAW,resolve));if(this.destroyed)return;this.world.syncPhysics();this.loadingScreen?.hide();this.loading=false;this.modalKey='';this.positionCamera(1);this.renderModal();if(this.flatMode&&!this.trainingRange)this.mapResources.prefetch(id=>AREAS[id]);
+ }
+ private async travelFromMap(id:string):Promise<void>{
+  const game=this.session,destination=AREAS[id],travel=this.hud.mapTravel;
+  if(this.menu!=='map'||travel.busy||this.loading||this.failure||this.trainingRange||!destination)return;
+  if(this.equipmentPreparing||this.preparingPage||this.campaignView?.active){travel.error=mapText('map.submitting');this.modalKey='';this.renderModal();return;}
+  const status=game.fastTravelAvailability(destination);
+  if(!status.available){travel.error=status.reason;this.modalKey='';this.renderModal();return;}
+  // Pause input and automatic movement before taking the transactional snapshot.
+  this.automation.stop();this.clearInput(false);this.effects?.clear();this.impact?.clear();
+  if(!game.fastTravel(destination))return;
+  travel.busy=true;travel.error='';this.modalKey='';this.renderModal();
+  try{
+   await new Promise<void>(resolve=>director.once(Director.EVENT_AFTER_DRAW,resolve));
+   await this.rebuild(true);
+   if(this.destroyed)return;
+   if(this.failure)throw new Error('Destination presentation unavailable');
+   game.completeFastTravel(true);travel.busy=false;this.menu='';this.hud.clearModal();this.say(mapText('map.arrived',{name:destination.name}),5);this.save();
+  }catch(error){
+   game.completeFastTravel(false);
+   if(this.destroyed)return;
+   console.warn('[Map] Fast travel failed; restoring origin',error);
+   this.failure='';
+   try{await this.rebuild(true);}catch(recoveryError){console.error('[Map] Origin presentation unavailable',recoveryError);this.loading=false;this.failure='旅途资源载入失败，请返回后重试。';}
+   travel.busy=false;travel.error=mapText('map.failure');this.menu='map';this.modalKey='';this.renderModal();
+  }finally{
+   game.completeFastTravel(false);travel.busy=false;
+  }
  }
  private async prepareHairstylePortrait(){
   const actors=this.actors instanceof Player3DActors?this.actors.player:this.actors instanceof Actors?this.actors:null;
@@ -332,7 +363,7 @@ export class ChapterGame extends Component {
   s.combat.ultimate??=Object.values(COMBAT_SKILLS).find(d=>d.type==='ultimate'&&d.style==='THU')?.id??null;
   this.saved='临时满级测试 · 返回普通链接恢复原进度';this.say('临时测试：设置 → 技能效果调试可切换1—5级；F8快速打开。',12);
  }
- private save():boolean{if(!this.store||!this.session)return true;if(this.trainingRange){this.saved=trainingText('saved');this.session.dirty=false;this.saveTime=0;return true;}if(this.temporaryMax){this.saved='临时满级测试 · 返回普通链接恢复原进度';this.session.dirty=false;this.saveTime=0;return true;}const r=this.store.write(this.session);this.saved=r.ok?'已保存 ✓':'尚未保存';if(!r.ok)this.say(r.error??'本地保存失败',8);this.saveTime=0;return r.ok;}
+ private save():boolean{if(this.hud?.mapTravel.busy)return false;if(!this.store||!this.session)return true;if(this.trainingRange){this.saved=trainingText('saved');this.session.dirty=false;this.saveTime=0;return true;}if(this.temporaryMax){this.saved='临时满级测试 · 返回普通链接恢复原进度';this.session.dirty=false;this.saveTime=0;return true;}const r=this.store.write(this.session);this.saved=r.ok?'已保存 ✓':'尚未保存';if(!r.ok)this.say(r.error??'本地保存失败',8);this.saveTime=0;return r.ok;}
  private process(events:GameEvent[]){
   this.trainingRange?.observe(events);
   this.impact?.onEvents(events,this.session);
@@ -532,7 +563,7 @@ export class ChapterGame extends Component {
    if(parts[0]==='journey-life-claim'){const ok=this.session.claimLifecycleReward(parts[1],parts[2]);this.say(lifecycleText(ok?'life.claimOk':'life.claimFailed'));this.save();this.open(`journey-chapter:${parts[1].startsWith('LC1_')?1:2}`);return;}
    if(parts[0]==='journey-loot-set'){this.session.bossLoot.selectStyle(parts[1]);this.save();this.open(`journey-loot:${parts[2]}`);return;}
    if(parts[0]==='journey-claim'){const ok=this.session.claimJourneyWeapon(Number(parts[1]),parts[2],parts[3]);this.say(ok?'史诗武器已领取，可在行囊装备。':'需要脱战且奖励尚未领取。');this.open(`journey-chapter:${parts[1]}`);return;}
-   if(parts[0]==='journey-map'){this.open('map');this.hud.atlas(this.session.state.area,this.visited,parts[1]);return;}
+   if(parts[0]==='journey-map'){this.open('map');this.hud.atlas(this.session,this.visited,parts[1]);return;}
    this.open(action);return;
   }
   if(action==='begin'||action==='close'&&this.menu==='title'){if(this.loading)return;if(this.failure){this.say('角色资源仍在载入，请稍后重试。');void this.rebuild();return;}this.returnToMainMenu=false;this.menu='';this.clearInput();this.hud.clearModal();this.music?.start();this.save();return;}
@@ -554,7 +585,8 @@ export class ChapterGame extends Component {
   if(action.startsWith('craft-submit:')){const [,recipe,token]=action.split(':'),q=this.session.forging.craft(recipe),ok=this.session.craft(recipe,token);this.say(ok?'装备锻造完成。':q.reason||'资源已变化，请重新确认费用。');this.open(ok?'forge-item:'+q.item:'craft-preview:'+recipe);return;}
   if(action==='forge-info')return;
   if(action.startsWith('craft:')){const ok=this.session.craft(action.slice(6));this.say(ok?'装备锻造完成。':'需要安全检查点、已学图纸与足够材料。');this.save();this.modalKey='';this.renderModal();return;}
-  if(action.startsWith('atlas:')){this.hud.atlas(this.session.state.area,this.visited,action.slice(6));return;}
+  if(action.startsWith('map-travel:')){void this.travelFromMap(action.slice(11));return;}
+  if(action.startsWith('atlas:')){this.hud.atlas(this.session,this.visited,action.slice(6));return;}
   this.page=0;this.open(action);
  }
  private async equipPrepared(id:string,slot?:string){
@@ -922,6 +954,6 @@ export class ChapterGame extends Component {
   const context=this.interaction().prompt??null;this.sceneInteraction?.update(context,!!paused||s.status==='dead'||!!this.automation.destination||this.heldAttack||!!this.aiming||!!s.action||s.enemies.some(e=>e.hp>0&&distance(e,p)<3&&this.world.visible(p,e)));
   this.encounterTime+=dt;this.compassTime+=dt;if(this.compassTime>=.5){this.compassTime=0;const st=this.session.state,home=st.equipment.necklace==='J08'&&!st.enemies.some(e=>e.hp>0&&distance(e,st.player)<7)?this.compass.find(st.area,st.player,st.flags,st.progression.level):null;if(home){const dx=home.target.x-st.player.x,dz=home.target.z-st.player.z,r=this.camera.node.right,u=this.camera.node.up,angle=Math.atan2(dx*r.x+dz*r.z,dx*u.x+dz*u.z),arrows=['↑','↗','→','↘','↓','↙','←','↖'];this.compassText='归乡信物 '+arrows[(Math.round(angle/(Math.PI/4))+8)%8]+' '+getArea(home.area).name;}else this.compassText='';}this.hud.trainingRange=this.trainingRange;this.hud.update(this.session,this.camera,this.loading?'正在准备场景与人物…':this.toast||this.encounterDirection(),this.saved,this.compassText,this.toast?this.toastRole:'text.normal');this.taskPresence?.update(this.session,this.hud.activeGuidance,!!paused||this.hud.automationExpanded,this.sceneInteraction?.visibleTargetId);this.portalHud?.update(this.session,!!this.menu||this.loading||!!this.failure||!!this.session.state.dialogue||!!this.session.state.dice.active||this.hud.portrait,this.sceneInteraction?.visibleTargetId??this.taskPresence?.captionTargetId);this.renderModal();if(this.menu.startsWith('journey'))updateJourneyCooldowns(this.hud,this.session);this.dicePanel?.update(Math.min(dt,.1));
  }
- onDestroy(){if(this.previousPhysicsAutoSimulation!==undefined){PhysicsSystem.instance.autoSimulation=this.previousPhysicsAutoSimulation;this.previousPhysicsAutoSimulation=undefined;}this.memoryCleanup();for(const type of [Input.EventType.TOUCH_START,Input.EventType.TOUCH_MOVE,Input.EventType.TOUCH_END,Input.EventType.TOUCH_CANCEL] as const)input.off(type,this.movementTouch,this);this.destroyed=true;this.music?.dispose();this.platform?.auth.dispose();this.platform?.updates.dispose();input.off(Input.EventType.KEY_DOWN,this.keyDown,this);input.off(Input.EventType.KEY_UP,this.keyUp,this);input.off(Input.EventType.MOUSE_MOVE,this.mouseMove,this);input.off(Input.EventType.MOUSE_DOWN,this.mouseDown,this);input.off(Input.EventType.MOUSE_UP,this.mouseUp,this);input.off(Input.EventType.MOUSE_WHEEL,this.mouseWheel,this);if(this.camera)Tween.stopAllByTarget(this.camera);this.cleanup?.();this.save();this.dicePanel?.clear();this.loadingScreen?.destroy();this.impact?.destroy();this.sceneInteraction?.destroy();this.groundLootView?.destroy();this.taskPresence?.destroy();this.portalHud?.destroy();this.enemyFeedback?.destroy();this.campaignView?.destroy();this.hud?.destroy();this.actors?.destroy();this.effects?.destroy();this.flatWorld?.destroy();this.nativePortals?.destroy();this.flatPortrait?.destroy();this.flatHead?.destroy();this.world?.destroy();this.mapResources.destroy();this.preparationResources?.destroy();UiSkin.dispose();EquipmentArt.dispose();SceneBuilder.releaseAssets();Effects.dispose();if(DEV)delete(globalThis as any).__chapter;}
+ onDestroy(){this.viewportCleanup?.();if(this.previousPhysicsAutoSimulation!==undefined){PhysicsSystem.instance.autoSimulation=this.previousPhysicsAutoSimulation;this.previousPhysicsAutoSimulation=undefined;}this.memoryCleanup();for(const type of [Input.EventType.TOUCH_START,Input.EventType.TOUCH_MOVE,Input.EventType.TOUCH_END,Input.EventType.TOUCH_CANCEL] as const)input.off(type,this.movementTouch,this);this.destroyed=true;this.music?.dispose();this.platform?.auth.dispose();this.platform?.updates.dispose();input.off(Input.EventType.KEY_DOWN,this.keyDown,this);input.off(Input.EventType.KEY_UP,this.keyUp,this);input.off(Input.EventType.MOUSE_MOVE,this.mouseMove,this);input.off(Input.EventType.MOUSE_DOWN,this.mouseDown,this);input.off(Input.EventType.MOUSE_UP,this.mouseUp,this);input.off(Input.EventType.MOUSE_WHEEL,this.mouseWheel,this);if(this.camera)Tween.stopAllByTarget(this.camera);this.cleanup?.();this.save();this.dicePanel?.clear();this.loadingScreen?.destroy();this.impact?.destroy();this.sceneInteraction?.destroy();this.groundLootView?.destroy();this.taskPresence?.destroy();this.portalHud?.destroy();this.enemyFeedback?.destroy();this.campaignView?.destroy();this.hud?.destroy();this.actors?.destroy();this.effects?.destroy();this.flatWorld?.destroy();this.nativePortals?.destroy();this.flatPortrait?.destroy();this.flatHead?.destroy();this.world?.destroy();this.mapResources.destroy();this.preparationResources?.destroy();UiSkin.dispose();EquipmentArt.dispose();SceneBuilder.releaseAssets();Effects.dispose();if(DEV)delete(globalThis as any).__chapter;}
 }
 
