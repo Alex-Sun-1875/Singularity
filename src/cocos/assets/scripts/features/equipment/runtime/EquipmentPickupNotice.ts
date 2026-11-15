@@ -4,17 +4,22 @@ import type {ItemDef} from '../data/Equipment';
 import {qualityFeedbackRole} from '../../../shared/ui/FeedbackPalette';
 import {EquipmentArt} from './EquipmentArt';
 import {FeedbackView as F} from '../../../shared/ui/FeedbackView';
-import {applyRpgFont} from '../../../shared/ui/RpgFont';
+import {applyRpgFont,fitRpgLine} from '../../../shared/ui/RpgFont';
 import {UiSkin} from '../../../shared/ui/UiSkin';
 import type {Hud} from '../../../app/Hud';
+import type {GameSession} from '../../../core/GameSession';
+import {EQUIPMENT} from '../data/Equipment';
+import {EQUIPMENT_DROP_NOTICE_SECONDS,equipmentDropPriority,highlightedEquipment} from '../common/LootFeedback';
+import {equipmentText} from '../locales';
 
-type Pickup={item:ItemDef;count:number;elapsed:number;duration:number;priority:number};
+type Pickup={item:ItemDef;count:number;elapsed:number;duration:number;priority:number;dropId?:string;available?:boolean};
 
 /** A single passive HUD lane. Acquisition events survive unrelated system toasts,
  * menus and layout rebuilds; only visible time counts toward dismissal. */
 export class EquipmentPickupNotice {
  private current:Pickup|null=null;
  private pending:Pickup[]=[];
+ private announcedDrops=new Set<string>();
  private root:Node|null=null;
  private opacity:UIOpacity|null=null;
  private sheen:Graphics|null=null;
@@ -34,17 +39,46 @@ export class EquipmentPickupNotice {
  }
 
  enqueue(item:ItemDef,count=1){
-  const priority=item.quality==='神器'?2:item.quality==='传奇'?1:0;
-  const next:Pickup={item,count,elapsed:0,duration:priority?5.4:item.quality==='史诗'?3.6:3,priority};
+  const priority=equipmentDropPriority(item.quality);
+  this.queue({item,count,elapsed:0,duration:priority>=2?5.4:priority===1?3.6:3,priority});
+ }
+
+ /** Reconcile against the authoritative pile IDs, including reloads and travel.
+  * A collected/removed pile cannot survive in the current slot or its queue. */
+ syncGroundLoot(game:GameSession){
+  const drops=new Map(game.state.groundLoot.filter(d=>d.area===game.state.area).map(d=>[d.id,d]));
+  this.pending=this.pending.filter(n=>!n.dropId||drops.has(n.dropId));
+  if(this.current?.dropId&&!drops.has(this.current.dropId)){this.current=this.pending.shift()??null;this.render();}
+  for(const drop of drops.values()){
+   const item=EQUIPMENT[drop.item];if(!item||!highlightedEquipment(item.quality))continue;
+   const available=game.canPickupLoot(drop);
+   if(this.current?.dropId===drop.id&&this.current.available!==available){this.current.available=available;this.render();}
+   const waiting=this.pending.find(n=>n.dropId===drop.id);if(waiting)waiting.available=available;
+   if(this.announcedDrops.has(drop.id)||Math.hypot(drop.x-game.state.player.x,drop.z-game.state.player.z)>=30)continue;
+   this.announcedDrops.add(drop.id);
+   this.queue({item,count:1,elapsed:0,duration:EQUIPMENT_DROP_NOTICE_SECONDS,priority:equipmentDropPriority(item.quality),dropId:drop.id,available});
+  }
+ }
+
+ dismissDrop(id:string){
+  this.pending=this.pending.filter(n=>n.dropId!==id);
+  if(this.current?.dropId===id){this.current=this.pending.shift()??null;this.render();}
+ }
+
+ private queue(next:Pickup){
+  const priority=next.priority;
   if(!this.current||priority>this.current.priority){
-   if(this.current){this.current.elapsed=0;this.pending.push(this.current);}
+   if(this.current)this.pending.push(this.current);
    this.current=next;this.render();
   }else this.pending.push(next);
   this.pending.sort((a,b)=>b.priority-a.priority);
  }
 
- clear(){this.current=null;this.pending=[];if(this.root)this.root.active=false;}
+ clear(){this.current=null;this.pending=[];this.announcedDrops.clear();if(this.root)this.root.active=false;}
  get visible(){return !!this.root?.active;}
+ get dropVisible(){return !!this.current?.dropId;}
+ get height(){return (this.current?.dropId?64:58)*this.unit;}
+ inspect(){return {visible:this.visible,current:this.current?{id:this.current.dropId,item:this.current.item.id,elapsed:this.current.elapsed,duration:this.current.duration,available:this.current.available}:null,pending:this.pending.map(n=>({id:n.dropId,item:n.item.id,elapsed:n.elapsed}))};}
 
  layout(x:number,y:number,visible:boolean){
   this.anchor.x=x;this.anchor.y=y;
@@ -65,6 +99,7 @@ export class EquipmentPickupNotice {
   for(const child of [...root.children])child.destroy();root.removeAllChildren();this.sheen=null;this.glow=null;
   const notice=this.current;if(!notice){root.active=false;return;}
   const {item,priority}=notice,s=this.unit,w=this.width,role=qualityFeedbackRole(item.quality);
+  if(notice.dropId){this.renderDrop(root,notice);this.animate();return;}
   // Reuse the approved paired metal lips and material rather than painting a
   // second notification skin. The frame is decorative and never captures input.
   const frame=this.hud.node('PickupFrame',root,0,0,w,58*s);UiSkin.panel(frame,w,58*s,F.color('text.outline',230),'capsule');
@@ -83,6 +118,23 @@ export class EquipmentPickupNotice {
   const rule=UiSkin.sprite(root,'ui/quiet-bronze/rpg-equipment-title-rule-v5',textWidth,10*s,F.color(role,priority?235:140));rule.node.name='PickupEngraving';rule.node.setPosition(textX,-23*s);
   if(priority)this.sheen=this.hud.node('PickupSheen',root,0,0,w,50*s).addComponent(CompactGraphics);
   this.animate();
+ }
+
+ private renderDrop(root:Node,notice:Pickup){
+  const {item}=notice,s=this.unit,w=this.width,role=qualityFeedbackRole(item.quality);
+  root.getComponent(UITransform)!.setContentSize(w,64*s);
+  const frame=this.hud.node('DropFrame',root,0,0,w,64*s);
+  UiSkin.panel(frame,w,64*s,F.color('text.outline',230),'panel',false,s/2,'loot-drop-panel-v1');
+  const iconX=-w/2+35*s;
+  this.glow=UiSkin.sprite(root,'ui/quiet-bronze/skill-soft-halo-v17',70*s,62*s,F.color(role,150));this.glow.node.setPosition(iconX,0);
+  const icon=this.hud.node('DropEquipment',root,iconX,0,48*s,48*s),sprite=icon.addComponent(Sprite);sprite.sizeMode=Sprite.SizeMode.CUSTOM;sprite.trim=false;
+  void EquipmentArt.itemFrame(item,icon).then(frame=>{if(!icon.isValid)return;const scale=Math.min(48*s/frame.rect.width,48*s/frame.rect.height);icon.getComponent(UITransform)!.setContentSize(frame.rect.width*scale,frame.rect.height*scale);sprite.spriteFrame=frame;}).catch(error=>{if(icon.isValid)console.warn('[EquipmentDrop]',String(error));});
+  const width=w-84*s,x=-w/2+72*s+width/2;
+  const title=this.hud.text(root,equipmentText('loot.dropTitle',{quality:item.quality}),x,20*s,width,11.5*s,F.color(role),16*s);
+  const name=this.hud.text(root,fitRpgLine(item.name,width,20*s),x,0,width,20*s,F.color(role),27*s);
+  const hint=this.hud.text(root,fitRpgLine(equipmentText(notice.available?'loot.autoPickup':'loot.dropFull'),width,11*s),x,-20*s,width,11*s,F.color('text.normal'),16*s);
+  title.node.name='DropQuality';name.node.name='DropName';hint.node.name='DropHint';
+  for(const label of [title,name,hint]){applyRpgFont(label);label.horizontalAlign=Label.HorizontalAlign.LEFT;label.enableWrapText=false;label.overflow=Label.Overflow.CLAMP;label.enableOutline=true;label.outlineColor=F.color('text.outline',220);label.outlineWidth=.6*s;}
  }
 
  private animate(){

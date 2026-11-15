@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-15",
+  "scope": "dev/test/release packaging integration",
+  "existingChecks": {
+    "typeCheckPassed": true,
+    "existingRulesPassed": 140,
+    "existingRulesFailed": 0
+  },
+  "profileProbes": {
+    "profiles": [
+      "dev",
+      "test",
+      "release"
+    ],
+    "actualSkillRecast": true,
+    "monsterExperienceMultiplier": true,
+    "questExperienceUnchanged": true,
+    "sharedAndIdleDailyLimits": true,
+    "devLevelCapAndSnapshotValidation": true,
+    "platformStorageIsolation": true
+  },
+  "scriptPreflight": {
+    "default": "test",
+    "releaseRequiresExplicitProfile": true,
+    "invalidCombinationsRejected": 7,
+    "validateOnlyDoesNotIncrement": true,
+    "workspaceRestoredProfile": "test"
+  },
+  "releaseLogValidation": {
+    "environment": "isolated Git and package fixtures; no production release package generated",
+    "firstRelease": true,
+    "publishedArtifactManifestRegistered": true,
+    "allChangesSincePublishedBaseline": true,
+    "uncommittedAssetsAndDeletions": true,
+    "concurrentSourceChangesRejected": true,
+    "oldVersionAndRelabeledExportRejected": true,
+    "notesAndManifestsInsideZip": true,
+    "sidecarsAndArchiveAfterPackageChecks": true,
+    "buildDoesNotAdvancePublishedBaseline": true,
+    "realRepositorySourceSnapshotPreviewPassed": true
+  },
+  "versionSequence": [
+    "0.3.41",
+    "0.3.42",
+    "0.3.43"
+  ],
+  "packages": [
+    {
+      "profile": "dev",
+      "version": "0.3.42",
+      "package": "artifacts/taptap-dev/SwordAndFire_0.3.42_TapTap_20261115T041644Z-dev/SwordAndFire_0.3.42_TapTap_20261115T041644Z_dev.zip",
+      "sha256": "b67d40aa95bdf3444335d23470d2ee3fbae8a4d7333212d8009b038b8aa837fe",
+      "uploadZipBytes": 221313572,
+      "initialPayloadLocalAuditBytes": 1372219,
+      "initialPayloadIsPlatformMeasurement": false,
+      "playableBeforeDownloadBytes": null,
+      "subpackageCount": 76,
+      "buildProfile": {
+        "schemaVersion": 1,
+        "name": "dev",
+        "marker": "singularity-build-profile-v1-dev",
+        "noSkillCooldown": true,
+        "monsterExperienceMultiplier": 2,
+        "unlimitedDailyExperience": true,
+        "storagePrefix": "singularity.dev."
+      },
+      "loginMode": "platform",
+      "packageAuditPassed": true,
+      "uploaded": false,
+      "platformVerified": false
+    },
+    {
+      "profile": "test",
+      "version": "0.3.43",
+      "package": "artifacts/taptap-test/SwordAndFire_0.3.43_TapTap_20261115T041841Z-test/SwordAndFire_0.3.43_TapTap_20261115T041841Z_test.zip",
+      "sha256": "035f8aa0c1484585705f81c519e79117c7a68e3a9e78b58ec522c227713da86a",
+      "uploadZipBytes": 221313546,
+      "initialPayloadLocalAuditBytes": 1372190,
+      "initialPayloadIsPlatformMeasurement": false,
+      "playableBeforeDownloadBytes": null,
+      "subpackageCount": 76,
+      "buildProfile": {
+        "schemaVersion": 1,
+        "name": "test",
+        "marker": "singularity-build-profile-v1-test",
+        "noSkillCooldown": false,
+        "monsterExperienceMultiplier": 1,
+        "unlimitedDailyExperience": false,
+        "storagePrefix": ""
+      },
+      "loginMode": "platform",
+      "packageAuditPassed": true,
+      "uploaded": false,
+      "platformVerified": false
+    }
+  ],
+  "limitations": [
+    "No upload, review submission or public release was performed.",
+    "TapTap platform and real-device login, touch, lifecycle, persistence and performance remain unverified.",
+    "Initial payload is an offline audit; playable-before-download resource volume was not measured on TapTap.",
+    "There is no registered published version yet; the first real release log will state first release."
+  ]
+}

@@ -5,6 +5,7 @@ export const en:Record<EquipmentMessageKey,string>={
  'combat.wait':'Safe in {seconds}s · Resume the journey to continue',
  'combat.settling':'Threats cleared · Gear changes available after {seconds}s of safety',
  'loot.pickup':'Pick up','loot.supplyFull':'At capacity · {count}/{capacity}',
+ 'loot.dropTitle':'{quality} equipment dropped','loot.autoPickup':'Collect automatically when nearby','loot.dropFull':'At capacity · Equipment remains on the ground','loot.groundName':'{quality} · {name}',
  'loot.bossResources':'Boss loot · Gold +{gold} · Iron +2',
  'loot.rematchFirst':'Defeat this Boss before starting a rematch.',
  'loot.rematchSafe':'Leave nearby enemies’ attack range first.',

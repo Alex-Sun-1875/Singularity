@@ -1,4 +1,5 @@
 import {HUNT_EXPERIENCE_POLICY as POLICY,dailyCombatExperienceCap} from '../data/HuntingExperience';
+import {BUILD_PROFILE} from '../../../shared/BuildProfile';
 
 type Receipts=Record<string,string|number|boolean>;
 const DAY='hunt:daily:day',EARNED='hunt:daily:earned',CARRY='hunt:daily:carry';
@@ -13,7 +14,9 @@ export function huntingExperienceView(receipts:Receipts,now:number,level=1){
  const earned=Math.min(cap,actualEarned),idleEarned=Math.min(POLICY.dailyCap,oldIdle);
  const remaining=Math.max(0,cap-actualEarned),idleRemaining=Math.max(0,POLICY.dailyCap-oldIdle);
  const rate=!remaining||!idleRemaining?0:POLICY.rates[Math.min(POLICY.rates.length-1,Math.floor(idleEarned/POLICY.dailyCap*POLICY.rates.length))];
- return {day,startingLevel,earned,actualEarned,cap,remaining,rate,idleEarned,idleCap:POLICY.dailyCap,idleRemaining};
+ const unlimited=BUILD_PROFILE.unlimitedDailyExperience&&level<40;
+ const devMax=BUILD_PROFILE.unlimitedDailyExperience&&level>=40;
+ return {day,startingLevel,earned,actualEarned,cap:unlimited?-1:devMax?0:cap,remaining:unlimited?Infinity:devMax?0:remaining,rate:unlimited?100:devMax?0:rate,idleEarned,idleCap:unlimited?-1:POLICY.dailyCap,idleRemaining:unlimited?Infinity:devMax?0:idleRemaining};
 }
 /** Freeze before the first playing step or any XP, including exempt quest XP. */
 export function ensureDailyExperience(receipts:Receipts,now:number,level:number){
@@ -24,6 +27,8 @@ export function ensureDailyExperience(receipts:Receipts,now:number,level:number)
 }
 export function takeCombatExperience(receipts:Receipts,now:number,level:number,base:number,levelRemaining:number,idle=false){
  ensureDailyExperience(receipts,now,level);const view=huntingExperienceView(receipts,now,level);
+ // Dev never spends the normal shared/idle budgets or applies their diminishing rate.
+ if(BUILD_PROFILE.unlimitedDailyExperience)return Math.max(0,Math.min(Math.floor(base),Math.floor(levelRemaining)));
  const scaled=idle?Math.max(0,Math.floor(base))*view.rate+Number(receipts[CARRY]??0):Math.max(0,Math.floor(base))*100;
  const amount=Math.max(0,Math.min(Math.floor(scaled/100),view.remaining,idle?view.idleRemaining:Infinity,Math.floor(levelRemaining)));
  receipts[TOTAL]=view.actualEarned+amount;

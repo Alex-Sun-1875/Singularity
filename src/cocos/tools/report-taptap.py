@@ -67,6 +67,32 @@ def measure(root, output, browser_report=None):
             raise SystemExit('Missing game entry/configuration: ' + required)
     project_config = json.loads((game / 'project.config.json').read_text(encoding='utf-8'))
     build_info = json.loads((game / 'release-info.json').read_text(encoding='utf-8'))
+    profile = release['buildProfile']
+    if build_info.get('buildProfile') != profile or identity.get('buildProfile') != profile:
+        raise SystemExit('Compiled gameplay profile and build manifest differ')
+    profile_name = profile['name']
+    if profile_name not in ('dev', 'test', 'release'):
+        raise SystemExit('Unknown gameplay profile')
+    markers = set()
+    for script in game.rglob('*.js'):
+        markers.update(re.findall(r'singularity-build-profile-v\d+-(?:dev|test|release)(?:-[a-f0-9]{12})?', script.read_text(encoding='utf-8')))
+    if markers != {profile['marker']}:
+        raise SystemExit('Package contains missing or mixed compiled gameplay profiles')
+    release_notes = build_info.get('releaseNotes')
+    if identity.get('releaseNotes') != release_notes:
+        raise SystemExit('Release notes identity drift')
+    if profile_name == 'release':
+        if not release_notes or identity['buildMode'] != 'release':
+            raise SystemExit('Release package must include its release update log')
+        for filename, digest_key in (('RELEASE_NOTES.md', 'notesSha256'), ('source-manifest.json', 'sourceManifestSha256'), ('release-changes.json', 'changesSha256')):
+            file = game / filename
+            if not file.is_file() or hashlib.sha256(file.read_bytes()).hexdigest() != release_notes[digest_key]:
+                raise SystemExit('Release metadata is missing or corrupt: ' + filename)
+        source_manifest = json.loads((game / 'source-manifest.json').read_text(encoding='utf-8'))
+        if source_manifest.get('version') != release['version'] or source_manifest.get('profile') != 'release':
+            raise SystemExit('Release source manifest does not match this package')
+    elif release_notes or any((game / name).exists() for name in ('RELEASE_NOTES.md', 'source-manifest.json', 'release-changes.json')):
+        raise SystemExit('Non-release package contains stale release metadata')
     guest_test = identity['buildMode'] == 'guest-test'
     login_mode = 'guest' if guest_test else 'platform'
     if build_info.get('loginMode') != login_mode or identity.get('login', {}).get('mode') != login_mode:
@@ -83,7 +109,8 @@ def measure(root, output, browser_report=None):
     if config.get('productVersion') != release['version'] or build_info['version'] != release['version']:
         raise SystemExit('Package version does not match the build manifest')
     stamp = datetime.fromisoformat(build_info['builtAt'].replace('Z', '+00:00')).strftime('%Y%m%dT%H%M%SZ')
-    package_name = f"{release['projectName']}_{release['version']}_TapTap_{identity['buildMode']}_{stamp}.zip"
+    variant = 'audit_' if identity['buildMode'] == 'audit' else 'guest_' if guest_test else ''
+    package_name = f"{release['projectName']}_{release['version']}_TapTap_{variant}{stamp}_{profile_name}.zip"
     if not re.fullmatch(r'[A-Za-z][A-Za-z0-9_.-]*\.zip', package_name) or build_info.get('packageFilename') != package_name:
         raise SystemExit('Package filename does not match its identity, version, mode and UTC build timestamp')
     if build_info.get('projectName') != release['projectName'] or build_info.get('buildMode') != identity['buildMode']:
@@ -219,10 +246,11 @@ def measure(root, output, browser_report=None):
             'note': 'Whole declared packs plus both generated WASM packs; not a measurement of TapTap network traffic or loading time.'}
     checks_passed = report['initialPayload']['withinLocalBudget'] and report['total']['withinConsoleObservedLimit']
     build_mode = identity.get('buildMode', release.get('buildMode', 'audit' if expected_id is None else 'release'))
-    delivery = output.resolve() / Path(package_name).stem
+    delivery = output.resolve() / (Path(package_name).stem.removesuffix('_' + profile_name) + '-' + profile_name)
     delivered_zip = delivery / package_name
     upload_settings = {'version': release['version'], 'title': release['title'], 'miniAppId': release['miniAppId'],
-        'buildMode': build_mode, 'purpose': 'upload-guest-test' if guest_test else 'upload-test' if build_mode == 'test' else build_mode,
+        'buildMode': build_mode, 'buildProfile': profile, 'releaseNotes': release_notes,
+        'purpose': 'upload-guest-test' if guest_test else 'upload-test' if build_mode == 'test' else build_mode,
         'loginMode': login_mode, 'localSaveOnly': True,
         'projectName': release['projectName'], 'builtAt': build_info['builtAt'],
         'packageIdentity': identity['identity'], 'packageFilename': str(delivered_zip),
@@ -262,6 +290,15 @@ def measure(root, output, browser_report=None):
     (delivery / (package_name + '.sha256')).write_text(upload_hash + '  ' + package_name + '\n', encoding='ascii')
     for name in ('report.json', 'upload-settings.json'):
         shutil.copyfile(output / name, delivery / name)
+    if profile_name == 'release':
+        for name in ('RELEASE_NOTES.md', 'source-manifest.json', 'release-changes.json'):
+            shutil.copyfile(game / name, delivery / name)
+        archive = PROJECT.parents[1] / 'docs/releases' / (release['version'] + '.md')
+        archive.parent.mkdir(parents=True, exist_ok=True)
+        text = (game / 'RELEASE_NOTES.md').read_bytes()
+        if archive.exists() and archive.read_bytes() != text:
+            raise SystemExit('Refusing to overwrite a different archived release log: ' + str(archive))
+        archive.write_bytes(text)
     notes = (game / 'BUILD_README.txt').read_text(encoding='utf-8') + '\n' + '\n'.join([
         f"完整 ZIP：{upload_zip.stat().st_size:,} 字节 / {report['total']['uploadZipMB']} MB",
         f"主包文件：{report['initialPayload']['rawBytes']:,} 字节；本地压缩测量：{report['initialPayload']['zipMiB']} MiB。",

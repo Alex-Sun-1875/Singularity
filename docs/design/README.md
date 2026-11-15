@@ -1,5 +1,7 @@
 # 剑与火 当前与历史设计资料
 
+长期界面规范统一维护于 [`singularity-ui-design`](../../.agents/skills/singularity-ui-design/SKILL.md) 及其[布局参考](../../.agents/skills/singularity-ui-design/references/ui-layout-guidelines.md)；本目录的版本设计和验收记录继续保留。[开发与打包规范](../development/build-profiles.md)定义 dev / test / release 的玩法区别，界面不能自行改变对应的冷却、经验与限额。
+
 2026-11-12 [怪物行为复核与三刃守誓阵优化](enemy-behavior-review-2026-11-12.md)：全部56身份的追击、冷却站位、招式距离与卡柱复核；三刃阵移阵追击、近身三剑与有冷却的追斩，附规则对照、实际画面和平台待验边界。
 
 2026-11-12 [前两章野外支线与隐藏任务](field-quests-v1.md)：每章两条固定紫装支线与一条约5%探索触发的隐藏任务；一章隐藏橙装、二章隐藏成长神器四流派自选。传奇和神器同为橙色，仅神器带雕纹与冠形徽记。

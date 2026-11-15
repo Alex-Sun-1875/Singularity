@@ -15,6 +15,7 @@ import {GOLD_FRAME_ATLAS_PATHS,GOLD_FRAME_ATLAS_REGIONS} from './GoldFrameAtlas'
 const ROOT='ui/quiet-bronze/';
 const INSETS:Record<string,readonly number[]>={
  ...PREPARATION_SKIN_INSETS,
+ 'loot-drop-panel-v1':[38,38,24,24],
  'rpg-tab-selected-v3':[24,24,12,12],'rpg-button-gold-v3':[24,24,12,12],'rpg-button-dark-v3':[24,24,12,12],'rpg-selection-frame-v3':[24,24,18,18],
  'rpg-outer-frame-v2':[32,32,32,32],'rpg-inner-frame-v2':[32,32,32,32],
  'rpg-button-gold-v2':[24,24,12,12],'rpg-button-dark-v2':[24,24,12,12],

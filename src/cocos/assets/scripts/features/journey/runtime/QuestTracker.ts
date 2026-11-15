@@ -82,6 +82,11 @@ export class QuestTracker {
   this.textButton.setPosition((textLeft+textRight)/2,0);
   this.textButton.getComponent(UITransform)!.setContentSize(textWidth,Math.max(hit,height-12*scale));
   this.navigationButton.setPosition(navX,0);this.navigationButton.getComponent(UITransform)!.setContentSize(hit,hit);
+  // Grow collapsed touch targets downward so the gap above stays clear.
+  for(const node of [this.textButton,this.navigationButton]){
+   const transform=node.getComponent(UITransform)!;
+   transform.setAnchorPoint(.5,Math.max(.5,1-height/(2*transform.height)));
+  }
   this.actionLabel.node.getComponent(UITransform)!.setContentSize(column-12*scale,22*scale);
   const distanceWidth=this.values['quest-distance']?Math.max(22*scale,Math.min(32*scale,this.values['quest-distance'].length*9.5*.56*scale)):0;
   const titleWidth=this.opened||!distanceWidth?textWidth:textWidth-distanceWidth-4*scale;

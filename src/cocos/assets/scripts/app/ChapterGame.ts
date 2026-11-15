@@ -31,6 +31,7 @@ import {trainingText} from '../features/debug/locales';
 import {TouchOwnership} from '../shared/input/TouchOwnership';
 import {getArea,AREAS} from '../features/world/data/WorldData';
 import {EQUIPMENT,equipmentStackLimit} from '../features/equipment/data/Equipment';
+import {highlightedEquipment} from '../features/equipment/common/LootFeedback';
 import {recordEquipmentChange,recordEquipmentPreparing,beginEquipmentVisit,selectEquipmentCategory,selectEquipmentSocket} from '../features/equipment/runtime/EquipmentPanels';
 import {browseCombatFamily} from '../features/progression/runtime/SkillBook';
 import {hasPreparationPreview,discardPreparationPreview,beginAllocation,browseAllocationFamily,resetAllocationPreview,chooseProfession,professionPreview,professionBusy} from '../features/progression/runtime/PreparationPanels';
@@ -81,7 +82,7 @@ export class ChapterGame extends Component {
  private readonly modelPlayer=this.flatMode&&(isTapRelease||new URLSearchParams(location.search).get('player')!=='2d');
  // The local-only profile lives in memory. Its expanded attribute budget must
  // never enter SaveStore or relax the normal progression validator.
- private readonly temporaryMax=!isTapRelease&&typeof location!=='undefined'&&['127.0.0.1','localhost','[::1]'].includes(location.hostname)&&new URLSearchParams(location.search).get('test')==='max';
+ private readonly temporaryMax=DEV&&!isTapRelease&&typeof location!=='undefined'&&['127.0.0.1','localhost','[::1]'].includes(location.hostname)&&new URLSearchParams(location.search).get('test')==='max';
  private readonly skillEffectDebug=new SkillEffectDebug();
  private trainingRange:TrainingRange|undefined;
  private rangeReturn:{session:GameSession;menu:string;saved:string;taskId:string|undefined}|undefined;
@@ -228,7 +229,7 @@ export class ChapterGame extends Component {
   if(this.trainingRange){this.trainingRange.reset();buildTrainingFloor(this.world);}
   this.portalHud=new PortalHud(this.hud,this.camera,this.world);
   this.sceneInteraction=new SceneInteraction(this.hud,this.camera,this.sceneInteract);
-  this.groundLootView=new GroundLootPresentation(this.world,this.camera);
+  this.groundLootView=new GroundLootPresentation(this.world,this.camera,this.hud);
   this.taskPresence=new TaskPresence(this.hud,this.camera,this.world);
   this.impact=new CombatImpactFeedback(this.hud,this.camera,this.world,this.impactSound,this.enemyHead);this.impact.reducedMotion=this.hud.reducedMotion;
   let presentationFailure='';
@@ -344,7 +345,7 @@ export class ChapterGame extends Component {
   if(!this.trainingRange)return;this.clearInput();this.trainingRange.reset();this.combatFocus=null;this.effects?.clear();this.impact?.clear();this.actors?.update(this.session,0,false,true);this.positionCamera(1);this.say(trainingText('resetNotice'));this.save();
  }
  private applyPlaytestLevel(session:GameSession){
-  if(!isTapRelease&&COMBAT_RULES.localPlaytestMaxLevel&&typeof location!=='undefined'&&new URLSearchParams(location.search).get('progression')!=='natural'&&['127.0.0.1','localhost','[::1]'].includes(location.hostname))session.raiseToMaxLevel();
+  if(DEV&&!isTapRelease&&COMBAT_RULES.localPlaytestMaxLevel&&typeof location!=='undefined'&&new URLSearchParams(location.search).get('progression')!=='natural'&&['127.0.0.1','localhost','[::1]'].includes(location.hostname))session.raiseToMaxLevel();
  }
  private applyTemporaryMax(){
   if(!this.temporaryMax)return;
@@ -372,7 +373,8 @@ export class ChapterGame extends Component {
   this.actors?.onCombatEvents(events,this.session.state.time);
   for(const e of events){
    const item=EQUIPMENT[String(e.type==='loot_drop'?e.item:e.id)];
-   if(e.type==='item'&&item)this.hud.showEquipmentPickup(item,Math.max(1,Number(e.value)||1));
+   if(e.type==='item'&&item){if(e.lootId&&highlightedEquipment(item.quality))this.hud.dismissEquipmentDrop(String(e.lootId));else this.hud.showEquipmentPickup(item,Math.max(1,Number(e.value)||1));}
+   else if(e.type==='loot_drop'&&item&&highlightedEquipment(item.quality)){/* The authoritative pile owns its 24-second HUD notice. */}
    else if(e.text&&!['miss','loot_roll'].includes(e.type))this.say(e.text,e.type==='inspect'?7:e.type==='level_up'?8:4,item&&['loot_drop','equip'].includes(e.type)?qualityFeedbackRole(item.quality):eventFeedbackRole(e));
    if(e.type==='travel'||e.type==='retry'){void this.rebuild();this.save();}
    if(e.type==='journey_open')this.open('journey');
@@ -444,6 +446,12 @@ export class ChapterGame extends Component {
   if(action==='resources:retry'){void this.ensureAccess();return;}
   if(action==='auth:retry'){void this.ensureAccess();return;}
   if(this.updatePromptVisible||!this.platform?.auth.ready||!this.session||!this.world||this.loading)return;
+  if(action==='dev-tools'){if(this.session.developmentTools.enabled&&!this.trainingRange)this.open('dev-tools');return;}
+  if(action.startsWith('dev:')){
+   if(this.menu!=='dev-tools'||this.trainingRange||!this.session.developmentTools.enabled)return;
+   const result=this.session.developmentTools.run(action.slice(4));this.say(result.message);
+   if(result.ok)this.save();this.modalKey='';this.renderModal();return;
+  }
   if(action==='training:enter'){void this.enterTrainingRange();return;}
   if(this.trainingRange){
    if(action==='training:exit'){void this.leaveTrainingRange();return;}
@@ -901,7 +909,7 @@ export class ChapterGame extends Component {
   if(!Vec3.strictEquals(position,this.followCameraPosition))this.camera.node.setPosition(this.followCameraPosition);
   const heightDelta=(frame.height-this.camera.orthoHeight)*weight;if(heightDelta!==0)this.camera.orthoHeight+=heightDelta;
  }
- update(dt:number){if(this.background)return;if(this.resetFrameTime){dt=0;this.resetFrameTime=false;}this.impact?.beforeCamera();this.music?.update(dt,!!this.platform?.auth.ready&&!!this.session&&this.menu!=='title'&&!this.updatePromptVisible&&!this.failure,!!this.menu||this.loading||!!this.session?.state.dialogue||!!this.session?.state.dice.active||!!this.campaignView?.active||this.session?.state.status==='dead');if(this.hud?.resize()){this.clearInput(false);this.modalKey='';this.renderModal();}this.hud?.updateEquipmentPickups(Math.min(dt,.1),!!this.session&&!!this.world&&!!this.platform?.auth.ready&&!this.updatePromptVisible&&!this.loading&&!this.failure&&!this.menu&&!this.session.state.dialogue&&!this.session.state.dice.active&&!this.campaignView?.active&&this.session.state.status!=='dead');if(this.updatePromptVisible){this.clearInput();this.renderModal();return;}if(this.platform&&!this.platform.auth.ready){this.sceneInteraction?.update(null,true);this.campaignView?.suspend();this.clearInput(true,'auth');this.renderModal();return;}this.loadingScreen?.update(dt);if(!this.session||!this.world||!this.hud)return;if(this.updateCampaign(dt)){this.impact?.clear();return;}this.positionCamera(Math.min(dt,.1));this.flatWorld?.update(this.camera,this.session);this.nativePortals?.update(this.camera,this.session);this.world.presentation?.update(this.session);this.toastTime-=dt;if(this.toastTime<=0)this.toast='';this.saveTime+=dt;
+ update(dt:number){if(this.background)return;if(this.resetFrameTime){dt=0;this.resetFrameTime=false;}this.impact?.beforeCamera();this.music?.update(dt,!!this.platform?.auth.ready&&!!this.session&&this.menu!=='title'&&!this.updatePromptVisible&&!this.failure,!!this.menu||this.loading||!!this.session?.state.dialogue||!!this.session?.state.dice.active||!!this.campaignView?.active||this.session?.state.status==='dead');if(this.hud?.resize()){this.clearInput(false);this.modalKey='';this.renderModal();}this.hud?.updateEquipmentPickups(Math.min(dt,.1),!!this.session&&!!this.world&&!!this.platform?.auth.ready&&!this.updatePromptVisible&&!this.loading&&!this.failure&&!this.menu&&!this.session.state.dialogue&&!this.session.state.dice.active&&!this.campaignView?.active&&this.session.state.status!=='dead',this.session);if(this.updatePromptVisible){this.clearInput();this.renderModal();return;}if(this.platform&&!this.platform.auth.ready){this.sceneInteraction?.update(null,true);this.campaignView?.suspend();this.clearInput(true,'auth');this.renderModal();return;}this.loadingScreen?.update(dt);if(!this.session||!this.world||!this.hud)return;if(this.updateCampaign(dt)){this.impact?.clear();return;}this.positionCamera(Math.min(dt,.1));this.flatWorld?.update(this.camera,this.session);this.nativePortals?.update(this.camera,this.session);this.world.presentation?.update(this.session);this.toastTime-=dt;if(this.toastTime<=0)this.toast='';this.saveTime+=dt;
   const v=this.touches.vector(),sx=(this.keys.has(KeyCode.KEY_D)?1:0)-(this.keys.has(KeyCode.KEY_A)?1:0)+v.x,sz=(this.keys.has(KeyCode.KEY_W)?1:0)-(this.keys.has(KeyCode.KEY_S)?1:0)+v.z,right=this.camera.node.right,up=this.camera.node.up;let x=right.x*sx+up.x*sz,z=right.z*sx+up.z*sz;const length=Math.hypot(x,z),walk=this.keys.has(KeyCode.SHIFT_LEFT)||this.keys.has(KeyCode.SHIFT_RIGHT);let moveAmount=Math.min(1,Math.hypot(sx,sz))*(walk?(!this.flatMode||this.modelPlayer?MODEL_WALK_SPEED/MODEL_RUN_SPEED:.48):1);if(length>0){x=x/length*moveAmount;z=z/length*moveAmount;}
   let paused=this.hud.portrait||this.menu||this.loading||this.failure||this.session.state.dialogue||this.session.state.dice.active;
   this.updateSkillPress(dt,!!paused);
@@ -931,7 +939,7 @@ export class ChapterGame extends Component {
   }
   if(this.session.dirty&&this.saveTime>2)this.save();
   this.actors?.update(this.session,Math.min(dt,.1),!paused&&moveAmount>.1,!!paused,moveAmount);
-  this.groundLootView?.update(this.session);
+  this.groundLootView?.update(this.session,!paused&&this.session.state.status!=='dead');
   this.impact?.update(dt,this.session,!!paused);
   const daily=this.session.huntingExperience();
   this.hud.setAutomation(this.automation.mode,!!this.automation.destination,this.automation.status,!paused&&this.session.state.status!=='dead',this.automation.paused,(this.automation.destination??this.automation.pausedDestination)?.taskId,daily);

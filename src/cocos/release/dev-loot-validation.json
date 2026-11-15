@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-15",
+  "workspaceVersion": "0.3.43",
+  "scope": "code-only dev profile update; no new package or version allocation",
+  "devRules": {
+    "monsterExperienceMultiplier": 5,
+    "guaranteedBossLegendary": true,
+    "guaranteedBossArtifact": true,
+    "duplicates": "existing unique-item/stack-cap compensation",
+    "bossRematchSeconds": 600
+  },
+  "checks": {
+    "typeCheckPassed": true,
+    "existingRulesPassed": 140,
+    "existingRulesFailed": 0,
+    "killPickupRestoreCasesPerProfile": 96,
+    "profiles": [
+      "dev",
+      "test",
+      "release"
+    ],
+    "chapters": [
+      1,
+      2
+    ],
+    "lootStyles": [
+      "WAR",
+      "BOW",
+      "FIR",
+      "THU"
+    ],
+    "seedsPerCombination": 12,
+    "rematchesAndArchivedItemProofs": true,
+    "uniqueDuplicateCompensation": true,
+    "sameKillDoesNotPayTwice": true,
+    "oldRandomLootSavesAcceptedInDev": true,
+    "forcedLootSavesRejectedOutsideDev": true,
+    "normalQuestExperienceUnchanged": true,
+    "oldCompiledProfileRejected": true
+  },
+  "limitations": [
+    "No package was rebuilt; existing 0.3.42 dev remains its original 2x rules.",
+    "TapTap platform and real-device acceptance are pending."
+  ]
+}

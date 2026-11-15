@@ -1,5 +1,7 @@
 # 当前设计与开发资料
 
+长期规范入口：[开发 skill](../.agents/skills/singularity-development/SKILL.md)、[UI 设计 skill](../.agents/skills/singularity-ui-design/SKILL.md)、[dev / test / release 打包与 release 日志](development/build-profiles.md)。未指定打包类型时默认 test；UI 布局规范已迁入 UI 设计 skill，原文档保留跳转。
+
 2026-11-11 [装备与经验生命周期v3已接入](design/equipment-lifecycle-v3-integration.md)：前两章十天成长预算、按等级共享战斗经验日限额、四份任务装备与四类战斗随机目标、所有Boss共享神器1%／传奇3.6%及10分钟复战。八章目录已配表，后六章保持关闭；旧档保留，TapTap真机待验。
 
 2026-11-10 [金币锻造与装备强化第一版已接入](design/equipment-forging-integration-v1.md)：装备分别配置强化上限，品质默认＋3／5／8／10／12／15，前两章阶段＋3／6；金币用于锻造、强化与传承，支持洛恩与行囊入口及旧档迁移。精炼、宝石和后续章节继续按[完整方案](design/equipment-forging-and-gold-v1.md)扩展。

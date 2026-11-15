@@ -1,7 +1,7 @@
 import {registerMessages} from '../../../shared/i18n/Localization';
 const zh={
  'mode.task':'自动','mode.hunt':'挂机','mode.operations':'自动操作','action.resume':'继续','action.stop':'停止','action.navigate':'寻路',
- 'daily.header':'战斗{earned}/{cap}','daily.loading':'战斗—/—','daily.maxLevel':'已满级',
+ 'daily.header':'战斗{earned}/{cap}','daily.loading':'战斗—/—','daily.maxLevel':'已满级','daily.unlimited':'DEV 经验不限',
  'task.select':'自动 · 选择下一目标','task.travel':'自动 · 前往{target}','task.fight':'自动 · 处理敌人','task.interact':'自动 · 调查目标','task.settle':'自动 · 等待任务结算',
  'hunt.search':'挂机 · 寻找猎物','hunt.fight':'挂机 · 正在战斗','hunt.wait':'挂机 · 等待猎物刷新','hunt.empty':'本场景没有循环猎物','hunt.unreachable':'挂机 · 寻找可达猎物','hunt.capped':'挂机 · 今日经验额度已满',
  'loot.collect':'{mode} · 拾取掉落','loot.approach':'{mode} · 前往拾取','target.blocked':'{mode} · 暂时跳过受阻目标',
@@ -16,7 +16,7 @@ const zh={
 };
 const en:Record<keyof typeof zh,string>={
  'mode.task':'Auto','mode.hunt':'Hunt','mode.operations':'Automation','action.resume':'Resume','action.stop':'Stop','action.navigate':'Travel',
- 'daily.header':'XP {earned}/{cap}','daily.loading':'XP —/—','daily.maxLevel':'Max level',
+ 'daily.header':'XP {earned}/{cap}','daily.loading':'XP —/—','daily.maxLevel':'Max level','daily.unlimited':'DEV XP unlimited',
  'task.select':'Auto · Finding objective','task.travel':'Auto · Going to {target}','task.fight':'Auto · Fighting','task.interact':'Auto · Investigating','task.settle':'Auto · Awaiting completion',
  'hunt.search':'Hunt · Finding prey','hunt.fight':'Hunt · Fighting','hunt.wait':'Hunt · Awaiting respawn','hunt.empty':'No repeatable enemies here','hunt.unreachable':'Hunt · Finding reachable prey','hunt.capped':'Hunt · Daily XP capped',
  'loot.collect':'{mode} · Collecting loot','loot.approach':'{mode} · Approaching loot','target.blocked':'{mode} · Skipping blocked target',

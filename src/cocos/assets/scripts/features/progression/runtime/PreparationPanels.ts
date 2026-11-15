@@ -1,4 +1,5 @@
 import {playerCombatAttributes} from '../../combat/common/CombatAccuracy';
+import {BUILD_PROFILE} from '../../../shared/BuildProfile';
 import {RESOURCE_RULES,resourceProfile,skillResourceText,resourceCostText} from '../../combat/common/ClassResource';
 import {Label,Node,ScrollView,Vec2} from 'cc';
 import type {GameSession} from '../../../core/GameSession';
@@ -100,7 +101,7 @@ function rankFacts(skill:typeof COMBAT_SKILL_LIST[number],rank:typeof COMBAT_SKI
  const values:{label:string;value:number;suffix:string;icon:string}[]=[];
  const add=(label:string,value:number|undefined,suffix='',icon='stat-target')=>{if(typeof value==='number'&&value>0)values.push({label,value,suffix,icon});};
  if(skill.id==='BOW_06'){add(t('fact.damage'),Number(rank.maxDamagePerTargetS.toFixed(3)),'S');add('减速',Math.round((rank.slowPercent??0)*100),'%','stat-radius');}
- else if(skill.id==='FIR_04'){add('减速',Math.round((rank.slowPercent??0)*100),'%','stat-radius');add('冷却',rank.cooldownSeconds,'秒');}
+ else if(skill.id==='FIR_04'){add('减速',Math.round((rank.slowPercent??0)*100),'%','stat-radius');add('冷却',BUILD_PROFILE.noSkillCooldown?0:rank.cooldownSeconds,'秒');}
  else if(skill.id==='BOW_07'){add(t('fact.damage'),Number(rank.maxDamagePerTargetS.toFixed(3)),'S');add('撤离',rank.moveMetres,'米','stat-radius');}
  else if(skill.id==='THU_06'){add('移速',Math.round((rank.speedPercent??0)*100),'%','stat-radius');add('减伤',Math.round((rank.reductionPercent??0)*100),'%','stat-life');}
  else if(skill.id==='BOW_02'){add(t('fact.chainTargets'),rank.targetLimit??undefined);add(t('fact.radius'),rank.radiusMetres,'米','stat-radius');}

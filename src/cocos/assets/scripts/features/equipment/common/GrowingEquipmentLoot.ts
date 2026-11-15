@@ -9,7 +9,7 @@ import {equipmentRandomWord} from './EquipmentDice';
 
 interface Host {state():GameState;grant(item:string,count:number,source:string,at?:Point):void;changed():void;emit(type:string,text?:string,extra?:Record<string,unknown>):void}
 export function growingRandom(seed:number,key:string){let n=seed;for(let i=0;i<key.length;i++)n=(n*131+key.charCodeAt(i))%2147483647;return ((n+1)*48271)%2147483647;}
-export const growingOwned=(s:GameState,id:string)=>!!s.inventory[id]||s.receipts[`growing-owned:${id}`]!==undefined||!!s.groundLoot?.some(d=>d.item===id);
+export const growingOwned=(s:GameState,id:string,collectingDropId?:string)=>!!s.inventory[id]||s.receipts[`growing-owned:${id}`]!==undefined||!!s.groundLoot?.some(d=>d.item===id&&d.id!==collectingDropId);
 
 /** All acquisition routes share one durable item ownership receipt. */
 export class GrowingEquipmentLoot {

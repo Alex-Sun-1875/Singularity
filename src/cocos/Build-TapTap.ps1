@@ -1,4 +1,5 @@
 param(
+ [ValidateSet('dev','test','release')][string]$Profile='test',
  [string]$TapAppId='',
  [switch]$AuditOnly,
  [switch]$WebPreview,
@@ -7,34 +8,66 @@ param(
  [string]$PreviousVersion='',
  [string]$ArtifactDirectory='',
  [ValidatePattern('^[a-zA-Z0-9][a-zA-Z0-9_-]*$')][string]$OutputName='',
- [string]$EditorUserData=''
+ [string]$EditorUserData='',
+ [switch]$ValidateOnly
 )
 $ErrorActionPreference='Stop'
 $project=$PSScriptRoot
-if((@($AuditOnly,$WebPreview,$TestPackage)|Where-Object {$_}).Count -gt 1){throw 'Choose only one of AuditOnly, WebPreview or TestPackage.'}
-if($GuestTest -and !$TestPackage){throw '-GuestTest requires -TestPackage; guest access is never enabled for release or audit builds.'}
+if($TestPackage -and $Profile -ne 'test'){throw '-TestPackage is a legacy alias for -Profile test.'}
+if($AuditOnly -and $WebPreview){throw 'Choose only one of AuditOnly or WebPreview.'}
+if(($AuditOnly -and $Profile -ne 'test') -or ($WebPreview -and $Profile -eq 'release')){throw 'Audit uses test gameplay; a Web preview cannot be a release package.'}
+if($GuestTest -and ($Profile -ne 'test' -or $AuditOnly -or $WebPreview)){throw '-GuestTest is allowed only in a test package.'}
 if($AuditOnly -and ![string]::IsNullOrWhiteSpace($TapAppId)){throw '-AuditOnly must not bind a platform identity.'}
 $editor='C:\ProgramData\cocos\editors\Creator\3.8.8\CocosCreator.exe'
-if(!(Test-Path -LiteralPath $editor)){throw 'Cocos Creator 3.8.8 is not installed at the configured path.'}
-$mode=if($WebPreview){'preview'}elseif($AuditOnly){'audit'}elseif($TestPackage){'test'}else{'release'}
-$prepareArgs=@((Join-Path $project 'tools/taptap-config.cjs'),'--prepare','--json','--mode',$mode)
+if(!$ValidateOnly -and !(Test-Path -LiteralPath $editor)){throw 'Cocos Creator 3.8.8 is not installed at the configured path.'}
+$mode=if($WebPreview){'preview'}elseif($AuditOnly){'audit'}else{$Profile}
+if([string]::IsNullOrWhiteSpace($OutputName)){$OutputName=if($WebPreview){'taptap-preview'}elseif($AuditOnly){'taptap-audit'}elseif($GuestTest){'taptap-guest'}else{'taptap'}}
+if(!$OutputName.EndsWith('-'+$Profile,[System.StringComparison]::OrdinalIgnoreCase)){$OutputName+='-'+$Profile}
+if([string]::IsNullOrWhiteSpace($ArtifactDirectory)){$ArtifactDirectory=Join-Path $project ('artifacts/'+$OutputName)}
+$ArtifactDirectory=[System.IO.Path]::GetFullPath($ArtifactDirectory)
+if(!$ArtifactDirectory.EndsWith('-'+$Profile,[System.StringComparison]::OrdinalIgnoreCase)){$ArtifactDirectory+='-'+$Profile}
+if($Profile -eq 'release'){
+ $baselineJson=& node (Join-Path $project 'tools/release-notes.cjs') --check-baseline
+ if($LASTEXITCODE -ne 0){throw 'Published release baseline is unavailable.'}
+}
+if($ValidateOnly){
+ $checkArgs=@((Join-Path $project 'tools/taptap-config.cjs'),'--json','--mode',$mode,'--profile',$Profile)
+ if($TapAppId){$checkArgs+=@('--app-id',$TapAppId)}
+ if($PreviousVersion){$checkArgs+=@('--previous-version',$PreviousVersion)}
+ & node @checkArgs
+ if($LASTEXITCODE -ne 0){throw 'Build configuration validation failed.'}
+ @{profile=$Profile;mode=$mode;outputName=$OutputName;artifactDirectory=$ArtifactDirectory;guestTest=[bool]$GuestTest;versionAllocated=$false}|ConvertTo-Json -Compress
+ return
+}
+$temp=Join-Path $project 'temp'
+New-Item -ItemType Directory -Path $temp -Force | Out-Null
+# One project mutates generated sources and one version sequence; serialize packages.
+try{$buildLock=[System.IO.File]::Open((Join-Path $temp 'taptap-build.lock'),[System.IO.FileMode]::OpenOrCreate,[System.IO.FileAccess]::ReadWrite,[System.IO.FileShare]::None)}catch{throw 'Another TapTap build is using this project; wait for it to finish.'}
+$preparedProfile=$false
+try{
+$prepareArgs=@((Join-Path $project 'tools/taptap-config.cjs'),'--prepare','--json','--mode',$mode,'--profile',$Profile)
 # Allocate one version per package invocation, before resource preparation or Creator retries.
 if(!$WebPreview){$prepareArgs+=@('--version','patch')}
 if($TapAppId){$prepareArgs+=@('--app-id',$TapAppId)}
 if($PreviousVersion){$prepareArgs+=@('--previous-version',$PreviousVersion)}
+$preparedProfile=$true
 $releaseJson=& node @prepareArgs
 if($LASTEXITCODE -ne 0){throw 'TapTap release configuration validation failed.'}
 $release=$releaseJson|ConvertFrom-Json
 if(!$WebPreview){Write-Output ('TapTap package version auto-incremented to '+$release.version)}
 if(!$AuditOnly){$TapAppId=$release.miniAppId}
-if([string]::IsNullOrWhiteSpace($OutputName)){$OutputName=if($WebPreview){'taptap-preview'}elseif($AuditOnly){'taptap-audit'}elseif($GuestTest){'taptap-guest-test'}elseif($TestPackage){'taptap-test'}else{'taptap-release'}}
 $platform=if($WebPreview){'web-mobile'}else{'wechatgame'}
 & node (Join-Path $project 'tools/prepare-navigation-wasm.cjs') --prepare
 if($LASTEXITCODE -ne 0){throw 'Navigation WASM source verification failed.'}
-& python (Join-Path $project 'tools/prepare-taptap.py') --platform $platform --output-name $OutputName --mode $mode
+& python (Join-Path $project 'tools/prepare-taptap.py') --platform $platform --output-name $OutputName --mode $mode --profile $Profile
 if($LASTEXITCODE -ne 0){throw 'TapTap resource profile preparation failed.'}
 & python (Join-Path $project 'tools/refresh-morph-build-cache.py') --project $project
 if($LASTEXITCODE -ne 0){throw 'Mesh cache validation failed.'}
+if($Profile -eq 'release'){
+ $notesDirectory=Join-Path $temp ('release-notes-'+$OutputName)
+ & node (Join-Path $project 'tools/release-notes.cjs') --prepare --version $release.version --output $notesDirectory
+ if($LASTEXITCODE -ne 0){throw 'Release update log generation failed.'}
+}
 $configPath=Join-Path $project ('temp/build-'+$OutputName+'.json')
 $outLog=Join-Path $project ('temp/build-'+$OutputName+'-out.log')
 $errLog=Join-Path $project ('temp/build-'+$OutputName+'-err.log')
@@ -69,6 +102,13 @@ for($attempt=1;$attempt -le 2;$attempt++){
  throw ('Cocos build did not complete (exit '+$run.ExitCode+'). Inspect '+$outLog+' and '+$errLog)
 }
 $buildRoot=Join-Path $project ('build/'+$OutputName)
+& node (Join-Path $project 'tools/build-profile.cjs') --verify-build $buildRoot --profile $Profile
+if($LASTEXITCODE -ne 0){throw 'Cocos export does not contain the requested gameplay profile.'}
+if($Profile -eq 'release'){
+ & node (Join-Path $project 'tools/release-notes.cjs') --verify-source $notesDirectory
+ if($LASTEXITCODE -ne 0){throw 'Release inputs changed during export.'}
+ foreach($noteFile in @('RELEASE_NOTES.md','source-manifest.json','release-changes.json')){Copy-Item -LiteralPath (Join-Path $notesDirectory $noteFile) -Destination (Join-Path $buildRoot $noteFile) -Force}
+}
 & node (Join-Path $project 'tools/render-policy.cjs') --build $buildRoot
 if($LASTEXITCODE -ne 0){throw 'Generated rendering configuration violated the performance policy.'}
 & node (Join-Path $project 'tools/prepare-navigation-wasm.cjs') --build $buildRoot
@@ -88,9 +128,9 @@ if($WebPreview){
  if([string]::IsNullOrWhiteSpace($ArtifactDirectory)){$ArtifactDirectory=Join-Path $project ('artifacts/'+$OutputName)}
  $ArtifactDirectory=[System.IO.Path]::GetFullPath($ArtifactDirectory)
  $version=$release.version
- $convertArgs=@((Join-Path $project 'tools/convert-taptap.cjs'),'--source',$buildRoot,'--target',$packageRoot,'--version',$version)
+ $convertArgs=@((Join-Path $project 'tools/convert-taptap.cjs'),'--source',$buildRoot,'--target',$packageRoot,'--version',$version,'--profile',$Profile)
  if($AuditOnly){$convertArgs+='--audit-only'}else{$convertArgs+=@('--app-id',$TapAppId)}
- if($TestPackage){$convertArgs+='--test-package'}
+ if($Profile -eq 'test' -and !$AuditOnly){$convertArgs+='--test-package'}
  if($GuestTest){$convertArgs+='--guest-test'}
  & node @convertArgs
  if($LASTEXITCODE -ne 0){throw 'TapTap conversion failed.'}
@@ -108,5 +148,15 @@ if($WebPreview){
  Write-Output 'Platform WASM function split: not verified; requires a compatible SDK export and console function collection.'
  Write-Output ('Upload settings: '+$settingsPath)
  if($settings.localBlockers.Count){Write-Warning ('Package generated; game integration still requires: '+($settings.localBlockers -join ' '))}
- if($TestPackage){Write-Output 'Upload-test package only. Complete the recorded integration and platform/device checks before release.'}
+ if($Profile -ne 'release'){Write-Output ($Profile+' package only. Complete the recorded platform/device checks before release.')}
+ if($Profile -eq 'release'){Write-Output ('Release notes: '+(Join-Path (Split-Path -Parent $settings.packageFilename) 'RELEASE_NOTES.md'))}
+}
+}finally{
+ try{
+  # A dev package must not leave the editor or the next preview running accelerated rules.
+  if($preparedProfile -and $Profile -ne 'test'){
+   $restoredConfig=& node (Join-Path $project 'tools/taptap-config.cjs') --prepare --json --mode preview --profile test
+   if($LASTEXITCODE -ne 0){throw 'Could not restore normal test gameplay configuration after packaging.'}
+  }
+ }finally{$buildLock.Dispose()}
 }

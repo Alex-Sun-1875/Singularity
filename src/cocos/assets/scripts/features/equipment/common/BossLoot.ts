@@ -6,6 +6,7 @@ import {GROWING_BOSS_DROPS,artifactWeaponForStyle} from '../data/GrowingEquipmen
 import {lifecycleBattlePool,releasedEquipmentChapter,type LootStyle} from '../data/EquipmentLifecycle';
 import {chapterForArea} from '../../journey/data/ChapterJourney';
 import {equipmentRandomWord} from './EquipmentDice';
+import {BUILD_PROFILE} from '../../../shared/BuildProfile';
 
 export const BOSS_LOOT_POLICY={artifact:.01,legendary:.036,epic:.10,epicPity:10,legendaryPity:50,respawnSeconds:600} as const;
 type Meta=[number,number,number,LootStyle,number,number,number,string,string,string];
@@ -16,6 +17,10 @@ const owned=(s:GameState,id:string)=>!!s.inventory[id]||!!s.groundLoot.some(d=>d
 const atCapacity=(s:GameState,id:string)=>(s.inventory[id]??0)>=equipmentStackLimit(id)||s.groundLoot.some(d=>d.item===id)||equipmentStackLimit(id)===1&&owned(s,id);
 const roll=(seed:number,key:string)=>equipmentRandomWord(seed,key)%2147483646+1;
 const baseKey=(area:string,id:string)=>`boss:v3:${area}:${id}`;
+// Existing random records remain readable; forced records are accepted only by dev.
+const guaranteed=()=>BUILD_PROFILE.name==='dev'&&BUILD_PROFILE.guaranteedBossHighTierLoot;
+const recordKey=(m:Meta)=>baseKey(m[8],m[9])+(m[0]===5?':dev-artifact':'');
+const recordTier=(m:Meta,n:number)=>m[0]===4?2:m[0]===5?3:bossDropTier(n/2147483647,m[4],m[5]);
 const nowSeconds=(s:GameState,now:number)=>Math.max(Number(s.receipts[CLOCK]??0),Math.max(0,Math.min(9999999399,Math.floor((Number.isFinite(now)?now:0)/1000))));
 export function bossLootView(s:GameState,now:number,boss?:string){
  const remaining=boss?Math.max(0,Number(s.receipts[`boss:v3:ready:${boss}`]??0)-nowSeconds(s,now)):0;
@@ -50,36 +55,43 @@ export class BossLoot {
   if(inventory){s.provenance[item]=archive;s.receipts[`grant:${archive}:${item}`]=true;if(s.receipts[`growing-owned:${item}`]===key)s.receipts[`growing-owned:${item}`]=archive;}
   for(const d of s.groundLoot)if(d.source===key)d.source=archive;
  }
- defeat(e:EnemyState){
-  if(!e.bossId||e.hp>0||e.phase!=='dead')return false;
-  const s=this.s,cycle=e.respawnCount??0,key=baseKey(s.area,e.id),life=`${key}:life`;
-  if(Number(s.receipts[life]??-1)>=cycle)return false;
-  this.archive(key);const view=this.view(),chapter=e.lootChapter??chapterForArea(s.area);
-  const meta:Meta=[3,cycle,Math.min(2,chapter),view.style,view.epicMisses,view.legendMisses,view.draws+1,e.bossId,s.area,e.id];
-  const n=roll(s.seed,`${key}:${cycle}:quality`),tier=bossDropTier(n/2147483647,meta[4],meta[5]),candidates=pool(meta,tier);
-  const gold=8+meta[2]*4;s.player.gold=Math.min(9999,s.player.gold+gold);s.player.iron=Math.min(9999,s.player.iron+2);
-  this.host.emit('reward',tr('loot.bossResources',{gold}),{id:key,gold,iron:2});
+ private draw(e:EnemyState,chapter:number,kind:3|4|5){
+  const s=this.s,cycle=e.respawnCount??0,view=this.view();
+  const meta:Meta=[kind,cycle,Math.min(2,chapter),view.style,view.epicMisses,view.legendMisses,view.draws+1,e.bossId!,s.area,e.id],key=recordKey(meta);
+  this.archive(key);
+  const n=roll(s.seed,`${key}:${cycle}:quality`),tier=recordTier(meta,n),candidates=pool(meta,tier);
   let result='none';if(candidates.length){const start=initialIndex(s.seed,key,meta,tier,candidates);let item=candidates[start];for(let i=0;i<candidates.length;i++){const id=candidates[(start+i)%candidates.length];if(!owned(s,id)){item=id;break;}}
    if(owned(s,item)){const stackable=candidates.find(id=>!atCapacity(s,id));if(stackable)item=stackable;}
    result=atCapacity(s,item)?`duplicate:${item}`:item;
    if(result===item)this.host.grant(item,key,e);else {s.player.gold=Math.min(9999,s.player.gold+12+meta[2]*4);s.player.iron=Math.min(9999,s.player.iron+2);}
   }
-  s.dropRolls[key]={roll:n,result};s.receipts[`roll:${key}`]=result;s.receipts[`${key}:meta`]=JSON.stringify(meta);s.receipts[life]=cycle;
+  s.dropRolls[key]={roll:n,result};s.receipts[`roll:${key}`]=result;s.receipts[`${key}:meta`]=JSON.stringify(meta);s.receipts[`${key}:life`]=cycle;
   s.receipts[EPIC]=tier>=1?0:meta[4]+1;s.receipts[LEGEND]=tier>=2?0:meta[5]+1;s.receipts[DRAWS]=meta[6];
+  this.host.emit('loot_roll',result,{id:key,tier,devGuaranteed:kind!==3,epicMisses:s.receipts[EPIC],legendMisses:s.receipts[LEGEND]});
+ }
+ defeat(e:EnemyState){
+  if(!e.bossId||e.hp>0||e.phase!=='dead')return false;
+  const s=this.s,cycle=e.respawnCount??0,key=baseKey(s.area,e.id);
+  if(Number(s.receipts[`${key}:life`]??-1)>=cycle)return false;
+  const chapter=e.lootChapter??chapterForArea(s.area),gold=8+Math.min(2,chapter)*4;
+  s.player.gold=Math.min(9999,s.player.gold+gold);s.player.iron=Math.min(9999,s.player.iron+2);
+  this.host.emit('reward',tr('loot.bossResources',{gold}),{id:key,gold,iron:2});
+  this.draw(e,chapter,guaranteed()?4:3);
+  if(guaranteed())this.draw(e,chapter,5);
   const now=nowSeconds(s,this.host.now());s.receipts[CLOCK]=now;s.receipts[`boss:v3:ready:${e.bossId}`]=now+600;
-  this.host.emit('loot_roll',result,{id:key,tier,epicMisses:s.receipts[EPIC],legendMisses:s.receipts[LEGEND]});this.host.changed();return true;
+  this.host.changed();return true;
  }
  rematchLevel(e:{level?:number}){const chapter=releasedEquipmentChapter(this.s.progression.level),top=chapter===1?10:20;return Math.max(e.level??1,Math.min(this.s.progression.level,top));}
 }
 function readBossRecord(s:GameState,source:string){
  try{
   const raw=s.receipts[`${source}:meta`];if(typeof raw!=='string')return null;const m=JSON.parse(raw) as Meta;
-  if(!Array.isArray(m)||m.length!==10||m[0]!==3||!Number.isInteger(m[1])||m[1]<0||m[1]>1e7||![1,2].includes(m[2])||!styles.includes(m[3])||!Number.isInteger(m[4])||m[4]<0||m[4]>9||!Number.isInteger(m[5])||m[5]<0||m[5]>49||!Number.isInteger(m[6])||m[6]<1||m[6]>Number(s.receipts[DRAWS]??0)||[m[7],m[8],m[9]].some(v=>typeof v!=='string'||!v))return null;
-  const key=baseKey(m[8],m[9]),r=s.dropRolls[source];if(!r||source!==key&&source!==`${key}:owned:${r.result}`)return null;
+  if(!Array.isArray(m)||m.length!==10||!(m[0]===3||guaranteed()&&(m[0]===4||m[0]===5))||!Number.isInteger(m[1])||m[1]<0||m[1]>1e7||![1,2].includes(m[2])||!styles.includes(m[3])||!Number.isInteger(m[4])||m[4]<0||m[4]>9||!Number.isInteger(m[5])||m[5]<0||m[5]>49||!Number.isInteger(m[6])||m[6]<1||m[6]>Number(s.receipts[DRAWS]??0)||[m[7],m[8],m[9]].some(v=>typeof v!=='string'||!v))return null;
+  const key=recordKey(m),r=s.dropRolls[source];if(!r||source!==key&&source!==`${key}:owned:${r.result}`)return null;
   const enemy=(s.area===m[8]?s.enemies:s.encounters[m[8]]??[]).find(e=>e.id===m[9]);
   if(!enemy||enemy.bossId!==m[7]||Number(s.receipts[`${key}:life`]??-1)<m[1]||!s.receipts[`kill:${m[8]}:${m[9]}`])return null;
   const expected=roll(s.seed,`${key}:${m[1]}:quality`);if(r.roll!==expected||s.receipts[`roll:${source}`]!==r.result)return null;
-  const tier=bossDropTier(expected/2147483647,m[4],m[5]);return {m,key,r,tier,candidates:pool(m,tier)};
+  const tier=recordTier(m,expected);return {m,key,r,tier,candidates:pool(m,tier)};
  }catch{return null;}
 }
 function validChoice(s:GameState,id:string,data:NonNullable<ReturnType<typeof readBossRecord>>){

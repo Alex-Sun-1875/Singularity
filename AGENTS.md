@@ -1,5 +1,11 @@
 # 开发约定
 
+## 开发与设计技能
+
+- 当前 Cocos / TapTap 小游戏开发、修复、构建与交付使用 [`singularity-development`](.agents/skills/singularity-development/SKILL.md)。
+- UI、HUD、交互的新增、调整和验收使用 [`singularity-ui-design`](.agents/skills/singularity-ui-design/SKILL.md)，完整长期规范维护在其[参考规范](.agents/skills/singularity-ui-design/references/ui-layout-guidelines.md)。通用前端技能不能替代已确认的项目规则。
+- 两个技能的源文件随仓库维护；用户技能目录的入口链接到同一份源文件，避免维护多份规则。
+
 ## 当前主目标：TapTap 小游戏
 
 - **用户已明确：当前游戏主要针对 TapTap 小游戏平台开发和发布。** 主工程为 `src/cocos/`，使用 Cocos Creator 3.8.8 / TypeScript，优先适配 Android 手机横屏。功能实现、依赖选型、资源组织和性能优化均应以 TapTap 小游戏运行环境为主要约束。
@@ -11,11 +17,22 @@
 - **旧 TapTap Maker / UrhoX / Lua 工程及其自动维护规则仅适用于历史工程。** 当前主工程使用 TapTap **小游戏**文档与 Cocos 工作流；不得将下方 Maker 专用的文档来源限制、提交/构建流程或资源元数据规则套用到 `src/cocos/`。细则见 [`src/cocos/AGENTS.md`](src/cocos/AGENTS.md)。
 - 官方依据：[小游戏文档总览](https://developer.taptap.cn/minigameapidoc/quick-start/document-guide/)、[Cocos 官方适配](https://developer.taptap.cn/minigameapidoc/dev/engine/Cocos-Laya-Egret/)、[分包加载规范](https://developer.taptap.cn/minigameapidoc/dev/tutorial/basic/subpackage/)。
 
+## 打包档位与 release 日志
+
+- 打包区分 `dev`、`test`、`release`。**默认 test；只有用户明确要求 release／正式发布包时才制作 release。** 一次指定不改变后续默认值，已明确指定时不重复确认。
+- dev 用于明确要求的开发加速流程，默认技能无冷却、怪物经验 ×5、取消每日经验获取限制、Boss 分别保底结算传奇与神器；当次明确指定的覆盖优先。加速集中配置，仅对 dev 生效，不污染正常存档和 test / release 的冷却、经验及每日限额。
+- test 是采用正常玩法规则的测试包；release 采用正常规则，关闭开发加速与游客绕过。审计／Web 预览和游客登录方式单独记录，不替代三种玩法档位。
+- release 必须附“上一已发布正式版本 → 当前产物”的更新日志，覆盖中间 dev / test 的实际变化；归档到 `docs/releases/<版本>.md`，并以 `RELEASE_NOTES.md` 随 release 交付。首次发布、基线缺失、未验收及未上线状态据实说明，不编造差异。
+- 详细规则见[开发与打包规范](docs/development/build-profiles.md)。`npm run pack:taptap`、`build:tap` 和脚本无参数均默认 test；显式使用 `pack:taptap:dev` / `pack:taptap:release` 或 `-Profile` 选择档位。三档共用根版本序列，每次实际打包 patch +1，失败不回退、内部重试不重复递增；产物目录以 `-<档位>`、ZIP 以 `_<档位>.zip` 结尾。打包不自动授权上传、提审或公开发布。
+- 已完成的实际变更追加到 `src/cocos/release/changes.json`。release 自动汇总上一已发布清单未包含的更新条目与源码／资源差异；真实上线后才登记 `release/published-release.json`，打包不会推进正式发布基线。
+
+dev 的“快速验证”仅在暂停和设置 → 旅途中按需开启，提供手动补给、有限材料、等级推进、清除 Boss 再战等待及既有训练场入口；test / release 拒绝执行。工具不在开局自动修改进度，不自动完成剧情或发放未验证来源的装备。
+
 ## HUD与界面设计
 
 - **默认按iPhone 14及以上机型的横屏规格设计UI。** 基准为2532×1170物理像素、844×390逻辑视口（3倍像素密度），适配Pro/Plus/Max及后续更大视口、刘海/灵动岛和底部手势安全区。TapTap小游戏仍是主要运行平台；不得把物理像素直接当成按钮与文字的布局单位。
 - **正常探索和战斗时，HUD不得遮挡游戏的主要区域。** 人物、目标、攻击预警、弹道、移动与交互的观察和操作优先；控件沿边缘紧凑布局，次要内容折叠或按需展示，不得为装饰、对称或完整展开挤占主画面。
-- 所有界面新增与调整遵守[界面布局设计规范](docs/design/ui-layout-guidelines.md)。透明底板、文字及不可见触控区也纳入遮挡检查；控件不重叠或占用面积减小不能代替实际游戏画面的验收。
+- 所有界面新增与调整遵守 [`singularity-ui-design` 技能](.agents/skills/singularity-ui-design/SKILL.md)及其[界面布局设计规范](.agents/skills/singularity-ui-design/references/ui-layout-guidelines.md)。原 `docs/design/ui-layout-guidelines.md` 保留跳转。透明底板、文字及不可见触控区也纳入遮挡检查；控件不重叠或占用面积减小不能代替实际游戏画面的验收。
 
 ## 实现与验证
 

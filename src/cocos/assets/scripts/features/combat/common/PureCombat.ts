@@ -14,6 +14,7 @@ import {GrowingEquipmentCombat,validateGrowingPulses,type GrowingPulse} from './
 import {enemyProfile,enemyCanInterrupt,enemyHurtRadius} from './EnemyCombat';
 import {validateCombatLoadouts,weaponCombatFamily,type CombatFamily,type CombatLoadout} from '../../progression/common/CombatLoadouts';
 import {combatActionBeatCount,combatActionDuration,combatSegmentInterval} from './CombatActionTiming';
+import {BUILD_PROFILE} from '../../../shared/BuildProfile';
 export {combatActionBeatCount,combatActionDuration,combatSegmentInterval} from './CombatActionTiming';
 
 export interface CombatSkillView {
@@ -87,8 +88,8 @@ export class PureCombat {
  }
  private passiveEvent(id:string,c:CombatCast,to?:EnemyState,status='passive',from?:Point){const d=PURE_SKILLS[id],rank=d.ranks.find(r=>r.primaryValue===c.passives[id])?.rank??1;this.event('skill_status',c,{skillId:id,family:d.style,rank,from:at(from??c.from),to:at(to??this.s.player),targetId:to?.id,status,duration:.25});}
  compatible(id:string){const d=PURE_SKILLS[id];return !!d&&skillWeaponCompatible(d,this.s.equipment.weapon);}
- view(ids?:readonly string[]):CombatSkillView[]{const skills=ids?ids.map(id=>PURE_SKILLS[id]).filter((d):d is CombatSkillDef=>!!d):Object.values(PURE_SKILLS);return skills.map(d=>{const r=allocatedSkillRank(this.s.progression,d.id),rank=r?.rank??0,cd=this.c.cooldowns[d.id]??0;return {id:d.id,name:d.name,family:d.style,type:d.type,rank,requiredLevel:d.unlockLevel,nextRequiredLevel:null,cooldown:cd,resourceCost:d.resourceCost,resourceEnough:this.s.player.focus+1e-8>=d.resourceCost,ready:!!r&&cd<=0&&this.compatible(d.id)&&this.s.player.focus+1e-8>=d.resourceCost&& (d.type!=='ultimate'||this.c.ultimateLock<=0),compatible:this.compatible(d.id),assignedSlot:d.type==='passive'?this.c.passiveSlots.indexOf(d.id)<0?null:this.c.passiveSlots.indexOf(d.id):d.type==='ultimate'?this.c.ultimate===d.id?0:null:this.c.activeSlots.indexOf(d.id)<0?null:this.c.activeSlots.indexOf(d.id),description:skillResourceText(r?.evolution??r?.effect??d.mechanic??''),range:r?.castRangeMetres??d.ranks[0].castRangeMetres,shape:r?.geometry?.kind??'self',unlocked:!!r};});}
- cooldownFor(d:CombatSkillDef,r:CombatSkillRank){const reduction=(this.equipped('J04')?.05:0)+(this.equipped('W16')&&['FIR','THU'].includes(d.style)&&d.type!=='ultimate'?.04:0)+(d.id==='COM_01'&&this.equipped('DR2-01')?.06:0);return r.cooldownSeconds*(1-Math.min(.2,reduction));}
+ view(ids?:readonly string[]):CombatSkillView[]{const skills=ids?ids.map(id=>PURE_SKILLS[id]).filter((d):d is CombatSkillDef=>!!d):Object.values(PURE_SKILLS);return skills.map(d=>{const r=allocatedSkillRank(this.s.progression,d.id),rank=r?.rank??0,cd=BUILD_PROFILE.noSkillCooldown?0:this.c.cooldowns[d.id]??0;return {id:d.id,name:d.name,family:d.style,type:d.type,rank,requiredLevel:d.unlockLevel,nextRequiredLevel:null,cooldown:cd,resourceCost:d.resourceCost,resourceEnough:this.s.player.focus+1e-8>=d.resourceCost,ready:!!r&&cd<=0&&this.compatible(d.id)&&this.s.player.focus+1e-8>=d.resourceCost&& (BUILD_PROFILE.noSkillCooldown||d.type!=='ultimate'||this.c.ultimateLock<=0),compatible:this.compatible(d.id),assignedSlot:d.type==='passive'?this.c.passiveSlots.indexOf(d.id)<0?null:this.c.passiveSlots.indexOf(d.id):d.type==='ultimate'?this.c.ultimate===d.id?0:null:this.c.activeSlots.indexOf(d.id)<0?null:this.c.activeSlots.indexOf(d.id),description:skillResourceText(r?.evolution??r?.effect??d.mechanic??''),range:r?.castRangeMetres??d.ranks[0].castRangeMetres,shape:r?.geometry?.kind??'self',unlocked:!!r};});}
+ cooldownFor(d:CombatSkillDef,r:CombatSkillRank){if(BUILD_PROFILE.noSkillCooldown)return 0;const reduction=(this.equipped('J04')?.05:0)+(this.equipped('W16')&&['FIR','THU'].includes(d.style)&&d.type!=='ultimate'?.04:0)+(d.id==='COM_01'&&this.equipped('DR2-01')?.06:0);return r.cooldownSeconds*(1-Math.min(.2,reduction));}
  /** Resolve again during preview and on release so dead, occluded or distant
   * enemies cannot leave an automatic cast aimed at a stale ground point. */
  autoAimTarget(id:string):Point|undefined {
@@ -105,7 +106,8 @@ export class PureCombat {
   return nearest?at(nearest):add(p,dir(p.angle,r.castRangeMetres*.72));
  }
  clearSkillCooldowns(){
-  for(const key of Object.keys(this.c.cooldowns))if(key==='skillRetry'||PURE_SKILLS[key]&&PURE_SKILLS[key].type!=='passive'&&PURE_SKILLS[key].ranks[0].cooldownSeconds===0)this.c.cooldowns[key]=0;
+  for(const key of Object.keys(this.c.cooldowns))if(key==='skillRetry'||PURE_SKILLS[key]&&PURE_SKILLS[key].type!=='passive'&&(BUILD_PROFILE.noSkillCooldown||PURE_SKILLS[key].ranks[0].cooldownSeconds===0))this.c.cooldowns[key]=0;
+  if(BUILD_PROFILE.noSkillCooldown)this.c.ultimateLock=0;
   if('COM_01' in this.c.cooldowns||'dash' in this.s.cooldowns)this.s.cooldowns.dash=this.c.cooldowns.COM_01??0;
  }
  cast(id:string,target?:Point,angle?:number):boolean {
@@ -114,8 +116,8 @@ export class PureCombat {
  if(!d||d.type==='passive'||!r||!s.progression.learned[id])return reject('技能尚未开放');
  if(s.status==='dead'||s.dialogue||s.dice.active||s.action)return false;
  if(!this.compatible(id))return reject(skillWeaponRequirement(d));
- if((this.c.cooldowns[id]??0)>0)return reject('技能冷却中');
- if(d.type==='ultimate'&&this.c.ultimateLock>0)return reject('终极释放间隔中');
+ if(!BUILD_PROFILE.noSkillCooldown&&(this.c.cooldowns[id]??0)>0)return reject('技能冷却中');
+ if(!BUILD_PROFILE.noSkillCooldown&&d.type==='ultimate'&&this.c.ultimateLock>0)return reject('终极释放间隔中');
  if(p.focus+1e-8<d.resourceCost)return reject(`${resourceProfile(s).name}不足，需要${d.resourceCost}点；可普攻、闪避或使用对应药水`);
  if(target&&(!Number.isFinite(target.x)||!Number.isFinite(target.z)))return false;
  if(id==='COM_02'&&p.hp>=p.maxHp)return reject('生命已满');
@@ -174,7 +176,7 @@ export class PureCombat {
  if(!d.offensive||d.targetingMode==='self')c.to=at(c.from);
  const action=this.s.action;if(action?.id===c.id){action.rank=r.rank;action.angle=c.angle;action.target=at(c.to);}this.s.player.angle=c.angle;
  this.s.player.focus=Math.max(0,this.s.player.focus-d.resourceCost);
- c.releaseTime=this.s.time;this.c.cooldowns[c.skillId]=this.cooldownFor(d,r);if(d.type==='ultimate')this.c.ultimateLock=d.sharedUltimateLockSeconds;this.event('skill_release',c,c.rush?{phase:'rush',duration:c.rush.duration}:{});
+ c.releaseTime=this.s.time;this.c.cooldowns[c.skillId]=this.cooldownFor(d,r);if(d.type==='ultimate')this.c.ultimateLock=BUILD_PROFILE.noSkillCooldown?0:d.sharedUltimateLockSeconds;this.event('skill_release',c,c.rush?{phase:'rush',duration:c.rush.duration}:{});
  if(c.rush){if(action?.id===c.id)action.releaseAt=(action.releaseAt??d.windupSeconds)+c.rush.duration;return;}
  if(r.shieldMaxHpPercent){this.shield(this.s.player.maxHp*r.shieldMaxHpPercent/100*(c.skillId==='WAR_03'&&this.equipped('W15',c)?1.12:1)*(1+(c.upgrades?.shieldPercent??0)/100),4);this.c.buffs.shieldSkill=c.skillId==='WAR_03'?1:2;this.c.buffs.shieldRank=r.rank;if(c.skillId==='WAR_03'){this.c.buffs.ironShield=this.s.time+4;this.c.buffs.ironAbsorbed=0;if(this.equipped('A13',c))this.c.buffs.ironDefense=this.s.time+3;}this.event('skill_status',c,{duration:4,status:'shield',value:this.s.player.shield});return;}
  if(c.procs.includes('passive-ready:THU_P1'))this.thunderWeapon(c,1);

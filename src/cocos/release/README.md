@@ -1,5 +1,13 @@
 # TapTap 小游戏发布配置
 
+**打包规范（2026-11-15）：** dev / test / release 已接入，`npm run pack:taptap`、`build:tap` 和脚本无参数均默认 test。开发加速用 `pack:taptap:dev`，默认技能无冷却、怪物经验 ×5、每日经验不限、Boss 传奇与神器分别保底，并隔离本机数据；只有明确要求正式包时才用 `pack:taptap:release`。三档共用持续递增的根版本，目录以 `-<档位>`、ZIP 以 `_<档位>.zip` 结尾。release 自动汇总上一正式清单至当前输入的更新条目与资源差异，将 `RELEASE_NOTES.md`、源码清单和差异明细纳入 ZIP 并随包提供，校验通过后归档。实际上线后才登记发布基线，打包不会自动推进。详见[开发与打包规范](../../../docs/development/build-profiles.md)与[开发 skill](../../../.agents/skills/singularity-development/SKILL.md)。
+
+2026-11-15 **dev 加速追加**：怪物经验由 2 倍提高到 5 倍，Boss 每次有效击杀分别结算传奇与神器，沿用职业／章节池、唯一装备重复补偿和复战间隔；test / release 正常概率不变。已完成类型、140 项既有检查及三档共 288 组击杀／拾取／存读档专项验证。本次仅更新代码，旧 0.3.42 dev 包仍为原 2 倍规则，尚未重打新包。[验证记录](dev-loot-validation.json)。
+
+2026-11-15 本轮已实际生成 **0.3.42 dev** 与默认命令的 **0.3.43 test**，均通过 Cocos 导出、官方转换、档位标记、分包、ZIP CRC 与交付 SHA-256 校验；每包约 221.31 MB，离线主包约 1.31 MiB，76 个分包。140 项既有检查、类型检查、三档机制探针及发布基线／日志隔离样例通过；release 隔离样例另验证了日志入包、旁置清单和校验后归档。未制作生产 release 包、未上传，TapTap 平台和真机待验。[验证记录](build-profiles-validation.json)。
+
+2026-11-15 **DEV 快速验证工具**：暂停与设置 → 旅途新增手动补满生命／职业资源、补齐药水、金币与锻造材料各补至 9999、等级＋5／升至40、清除 Boss 再战等待，另复用原独立技能训练场。140 项既有检查、类型、三档执行权限及存读档检查通过；844×390、932×430（3倍密度）与1280×720实际 Web 预览中，通过指针／触控使用工具并往返训练场，保留旅程状态。普通本地构建与 TapTap 构建已共用锁，验证并行请求在改配置前被拒绝。仅生成 Web 验证构建，未重打或上传 TapTap ZIP。[验证记录](dev-tools-validation.json)。
+
 **当前登录方案（2026-11-13）：直接使用 TapTap 小游戏平台能力，不部署自建登录服务。** 普通小游戏构建调用 `tap.login`，前台恢复调用 `tap.checkSession`、失效后重登；不再要求服务器、Secret 或 `serviceUrl`。下方带版本日期的自建服务待办是历史记录，不作为当前构建前置条件。[本轮验证和待验项](taptap-platform-login-validation.json)。
 
 2026-11-14 **0.3.41 当前工作区测试包**：绑定真实 AppID，使用 TapTap 平台登录；纳入本次打包开始时的全部当前资源与玩法代码。完整 ZIP **221.31 MB**，离线主包审计 **1.31 MiB**，76 个分包；导航 WASM 已在引擎资源分包中，主包无 WASM。类型、140 项现有测试、Cocos 导出、官方转换、ZIP CRC、交付 SHA-256、场景脚本绑定及渲染／启动策略校验通过。修复导航 WASM 后处理只识别 TapTap `subPackages`、不识别 Cocos 中间产物 `subpackages` 的误报后，沿用本次导出继续转换，版本仅分配一次。3523 份源文件的构建前后核对中，只有生成版本与该工具修复改变，玩法与美术未变；清单随包保存。未上传，实际平台首包、可玩前下载量及真机验收仍待完成。[0.3.41 测试包](../artifacts/taptap-20261114-current/SwordAndFire_0.3.41_TapTap_test_20261114T155119Z/SwordAndFire_0.3.41_TapTap_test_20261114T155119Z.zip)、[验证记录](taptap-package-0.3.41-validation.json)。
@@ -56,11 +64,12 @@
 ```powershell
 npm run version:tap -- minor       # 可选：手动调整 minor / major / 明确版本；每次打包仍会自动 patch +1
 npm run check:tap                  # 核对版本、标识及生成文件的一致性
-npm run pack:taptap                # 一键生成真实 AppID 的上传测试包
+npm run pack:taptap                # 默认：一键生成真实 AppID、正常玩法的上传测试包
 npm run pack:taptap:guest          # 游客测试包：跳过业务登录，仅使用现有本机存档
 npm run build:tap:audit            # 无平台包体身份的审计构建
 npm run build:tap:preview          # 相同资源组织的 Web 验证
-npm run build:tap -- -PreviousVersion '0.3.1' # 和后台已确认版本比较，仍需完成平台与真机验收
+npm run pack:taptap:dev            # 开发加速，独立本机存档
+npm run pack:taptap:release        # 仅明确要求 release 时；自动生成正式版本更新日志
 ```
 
 TapTap 打包入口 `Build-TapTap.ps1` 在每次打包前自动将根 `package.json.version` 的末位加 1（例如 `0.3.7` → `0.3.8`），再同步 Cocos package/lock 和运行配置。正式、上传测试、游客测试及审计包均适用，直接调用脚本或通过 `Build-Local.ps1 -Platform wechatgame` 转入也适用；Web 预览不递增。平时打包无需先执行 `version:tap`。
@@ -68,7 +77,7 @@ TapTap 打包入口 `Build-TapTap.ps1` 在每次打包前自动将根 `package.j
 `npm run pack:taptap` 自动递增版本并读取 MiniApp ID，依次准备配置、执行 Cocos、调用官方转换器、校验入口/版本/分包/体积和 ZIP 完整性，最后打印完整输出路径。参数、编辑器路径和发布配置预检失败时不递增；版本分配后若资源准备、构建或转换失败，保留已递增版本，下次重新调用打包再加 1；同次调用内部的 Creator 启动重试及重复配置同步不再次递增。打包不会自动上传。
 
 - 对外交付包：`artifacts/taptap-test/<包名去掉.zip>/<包名>.zip`，上传时直接选择该 ZIP。
-- 命名规则：`英文名_版本_TapTap_类型_UTC构建时间.zip`，例如 `SwordAndFire_0.3.5_TapTap_test_20261110T083000Z.zip`。英文名来自 `taptap-project.json.projectName`，只允许英文字母、数字、下划线及连字符；版本来自根配置。类型为 `test`（上传测试）、`release`（本地正式预检）或 `audit`（无身份审计）；末尾 `Z` 表示 UTC。构建时间区分同版本重打包，同名不同内容拒绝覆盖。
+- 命名规则：`英文名_版本_TapTap_UTC构建时间_档位.zip`，例如 `SwordAndFire_0.3.43_TapTap_20261115T083000Z_test.zip`。英文名来自 `taptap-project.json.projectName`，只允许英文字母、数字、下划线及连字符；版本来自根配置。档位为 `dev`、`test` 或 `release`；游客／审计变体在时间前另加 `guest_`／`audit_`，仍以 `_test.zip` 结尾。目录以 `-<档位>` 结尾，时间中的 `Z` 表示 UTC。构建时间区分同版本重打包，同名不同内容拒绝覆盖。
 - 包旁附带 `BUILD_README.txt`、`upload-settings.json`、`report.json` 和 `<包名>.zip.sha256`；说明包括内容范围、时间、引擎/转换器版本、AppID、体积和待完成项。SHA-256 对应完整 ZIP，本身放在包外，避免循环校验。
 - ZIP 内保留官方转换器生成的根入口与全部分包，附 `release-info.json` 和 `BUILD_README.txt`；不会再套一层目录。店铺封面等上传物料仍由清单指向独立文件，不混入游戏包。
 - 官方转换原件：`build/taptap-test-package/game.zip`，与交付 ZIP 的字节和 SHA-256 完全一致。
@@ -77,9 +86,9 @@ TapTap 打包入口 `Build-TapTap.ps1` 在每次打包前自动将根 `package.j
 
 不同命名包各自保留一份配套报告；上层报告指向最近一次构建。`Build-TapTap.ps1 -ArtifactDirectory <目录>` 可指定交付位置，不改变包内根目录结构。Web 预览不生成上传 ZIP。
 
-上传测试模式绑定真实 AppID，报告标记 `buildMode: test`、`loginMode: platform`、`customAuthService: false`、`releasePreflightPassed: false`。客户端直接调用平台登录，不再因缺少业务服务地址停住；平台接口缺失、空凭证、超时或失败仍显示重试并暂停玩法。`npm run build:tap` 执行本地正式预检，不要求自建登录服务。审计模式不绑定平台身份，不能代替真实小游戏登录验收。
+上传测试模式绑定真实 AppID，报告标记 `buildMode: test`、`loginMode: platform`、`customAuthService: false`、`releasePreflightPassed: false`。客户端直接调用平台登录，不再因缺少业务服务地址停住；平台接口缺失、空凭证、超时或失败仍显示重试并暂停玩法。`npm run pack:taptap:release` 执行本地正式预检，不要求自建登录服务。审计模式不绑定平台身份，不能代替真实小游戏登录验收。
 
-2026-11-10 经用户明确选择，增加独立的游客试玩命令 `npm run pack:taptap:guest`。它等价于 `Build-TapTap.ps1 -TestPackage -GuestTest`，输出到 `artifacts/taptap-guest-test/`，包名类型为 `guest-test`。原生 `game.js` 在加载 Cocos 前显式设置游客构建标志；游戏标题和暂停页显示“游客测试 / 仅本机存档”，不调用业务登录、不创建账号或登录 token，也无云端同步。复用现有 TapTap 本地存储和存档键，不清空已有进度。包内说明和上传报告记录 `loginMode: guest`；正式预检与平台验收状态继续为 false。`-GuestTest` 不得单独用于正式、审计或 Web 构建，普通测试包仍保留登录门禁。
+2026-11-10 经用户明确选择，增加独立的游客试玩命令 `npm run pack:taptap:guest`。它等价于 `Build-TapTap.ps1 -TestPackage -GuestTest`，输出到 `artifacts/taptap-guest-test/`，报告类型为 `guest-test`，目录及 ZIP 分别以 `-test` / `_test.zip` 结尾。原生 `game.js` 在加载 Cocos 前显式设置游客构建标志；游戏标题和暂停页显示“游客测试 / 仅本机存档”，不调用业务登录、不创建账号或登录 token，也无云端同步。复用现有 TapTap 本地存储和存档键，不清空已有进度。包内说明和上传报告记录 `loginMode: guest`；正式预检与平台验收状态继续为 false。`-GuestTest` 不得单独用于正式、审计或 Web 构建，普通测试包仍保留登录门禁。
 
 Creator 若在启动阶段遇到 Windows 的 `engine.json` 临时打开失败，脚本保存首轮日志并只重试一次；实际构建失败和配置错误直接报错，旧 ZIP 不作为本次成功结果。
 

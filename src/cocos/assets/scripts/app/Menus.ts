@@ -32,6 +32,18 @@ export function renderMenu(hud:Hud,game:GameSession,menu:string,loading:boolean,
  if(d){hud.show(d.speaker,d.text,d.options.map(o=>({label:o.label,action:'choice:'+o.id})));return;}
  if(s.status==='dead'){hud.show('旅途尚未结束','返回最近检查点。已击败的敌人、证据与战利品仍然保留。',[{label:'返回检查点',action:'retry'}]);return;}
  if(!menu){hud.clearModal();return;}
+ if(menu==='dev-tools'&&game.developmentTools.enabled){
+  const v=game.developmentTools.view();
+  hud.showList('DEV 快速验证',`Lv${v.level} · 生命 ${Math.ceil(v.hp)}/${v.maxHp} · 职业资源 ${Math.floor(v.resource)}/${v.maxResource}\n金币 ${v.gold} · 铁 ${v.iron} · 符文 ${v.runes} · 核心 ${v.cores}\n${v.feedback||'手动操作，仅修改当前独立 dev 旅程。'}`,[
+   {label:'补满生命与职业资源',detail:'保留敌人、伤害与技能消耗规则',action:'dev:refill'},
+   {label:'补齐药水',detail:'四类药水补至正常携带上限',action:'dev:supplies'},
+   {label:'补充金币与锻造材料',detail:'金币、铁、符文、核心各 9999',action:'dev:materials'},
+   {label:'等级＋5',detail:'保留剧情、任务和已持有装备',action:'dev:level5',disabled:v.level>=40},
+   {label:'升至40级',detail:'按正常成长获得技能与属性点',action:'dev:level40',disabled:v.level>=40},
+   {label:'清除 Boss 再战等待',detail:'从旅程页重新挑战，仍需真实击杀',action:'dev:boss-ready',disabled:!v.bossWaits},
+   {label:'技能训练场',detail:'技能1—5级、靶阵、群怪与伤害统计',action:'training:enter'},
+  ],[{label:'返回暂停',action:'pause'},{label:'继续旅途',action:'close'}],hud.touchTargetSize,{placement:'right',width:sys.isMobile?620:560});return;
+ }
  if(menu.startsWith('interaction:')){
   const object=getArea(s.area).objects.find(o=>o.id===menu.slice(12)&&game.interactionVisible(o));
   if(!object){hud.show(autoText('interaction.unavailable'),autoText('task.failed'),[{label:autoText('interaction.cancel'),action:'close'}]);return;}
@@ -89,6 +101,7 @@ export function renderMenu(hud:Hud,game:GameSession,menu:string,loading:boolean,
    {label:'当前旅程',detail:getArea(s.area).name,action:'journey'},
    {label:ct('ui.language'),detail:'',action:'toggle-story-locale',value:currentLocale()==='en'?'EN':'中文'},
    {label:'暂停与旅途',detail:`${saved} · v${BUILD_INFO.version}`,action:'pause'},
+   ...(game.developmentTools.enabled?[{label:'DEV 快速验证',detail:'补给、成长与 Boss 再战',action:'dev-tools'}]:[]),
    {label:trainingText('title'),detail:trainingText('entryDetail'),action:'training:enter'},
    ...(skillEffectDebug?[{label:'技能效果调试',detail:'1—5级技能预览',action:'skill-effect-debug'}]:[]),
   ];
@@ -103,6 +116,7 @@ export function renderMenu(hud:Hud,game:GameSession,menu:string,loading:boolean,
   {label:'旅程',detail:game.objective(),action:'journey'},
   {label:'检查点休整',detail:'',action:'rest'},
   {label:'游戏设置',detail:'音乐、动态与技能名称',action:'settings'},
+  ...(game.developmentTools.enabled?[{label:'DEV 快速验证',detail:'补给、成长与 Boss 再战',action:'dev-tools'}]:[]),
   {label:'操作与帮助',detail:'',action:'help'},
   {label:trainingText('title'),detail:trainingText('entryDetail'),action:'training:enter'},
    ...(skillEffectDebug?[{label:'技能效果调试',detail:'1—5级技能预览',action:'skill-effect-debug'}]:[]),

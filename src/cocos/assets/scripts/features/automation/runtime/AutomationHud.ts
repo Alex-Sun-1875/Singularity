@@ -105,6 +105,6 @@ export class AutomationHud {
   // Quota/status changes never replace a button during an ongoing press.
   if(!this.root.active||!this.experienceValue?.isValid)return;
   const d=this.state.experience,full=!!d&&d.cap>0&&d.earned>=d.cap;
-  this.experienceValue.string=d?d.cap===0?tr('daily.maxLevel'):tr('daily.header',{earned:d.earned,cap:d.cap}):tr('daily.loading');F.tint(this.experienceValue,full?'state.paused':'text.secondary');
+  this.experienceValue.string=d?d.cap<0?tr('daily.unlimited'):d.cap===0?tr('daily.maxLevel'):tr('daily.header',{earned:d.earned,cap:d.cap}):tr('daily.loading');F.tint(this.experienceValue,full?'state.paused':'text.secondary');
  }
 }

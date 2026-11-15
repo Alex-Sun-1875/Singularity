@@ -36,6 +36,9 @@ import {huntingExperienceView,takeCombatExperience,ensureDailyExperience} from '
 import {huntingKillExperience} from '../features/progression/data/HuntingExperience';
 import {BossLoot} from '../features/equipment/common/BossLoot';
 import {releasedEquipmentChapter} from '../features/equipment/data/EquipmentLifecycle';
+import {BUILD_PROFILE} from '../shared/BuildProfile';
+import {DevelopmentTools} from '../features/debug/common/DevelopmentTools';
+import {highlightedEquipment} from '../features/equipment/common/LootFeedback';
 
 export const ENEMY_ARCHER_START_RANGE=14;
 export const ENEMY_ARCHER_SHOT_RANGE=18;
@@ -81,6 +84,7 @@ const sourceRandom=(seed:number,source:string)=>{let n=seed;for(let i=0;i<source
  * Rules are independent of the renderer and storage platform. */
 export class GameSession {
  state:GameState;
+ readonly developmentTools=new DevelopmentTools({state:()=>this.state,experience:(source,amount)=>this.gainExperience(source,amount),changed:()=>this.changed()});
  dirty=false;
  private areaDef:AreaDef|null=null;
  // Presentation profiles configure travel speed without changing saved state.
@@ -154,7 +158,7 @@ export class GameSession {
   const drop:GroundLoot={id:this.id('loot'),area:s.area,item,count,source,supplyVersion:3,x:place.x,z:place.z,createdAt:s.time};
   s.groundLoot.push(drop);this.changed();this.emit('loot_drop',`${SUPPLIES[item].name} ×${count}`,{id:drop.id,item,count,at:{x:drop.x,z:drop.z}});
  }
- canPickupLoot(drop:GroundLoot){const def=isSupplyId(drop.item)?SUPPLIES[drop.item]:undefined;return def?this.state.player[def.stock]<def.capacity:(this.state.inventory[drop.item]??0)<equipmentStackLimit(drop.item);}
+ canPickupLoot(drop:GroundLoot){const def=isSupplyId(drop.item)?SUPPLIES[drop.item]:undefined;return def?this.state.player[def.stock]<def.capacity:(this.state.inventory[drop.item]??0)<equipmentStackLimit(drop.item)&&(!GROWING_EQUIPMENT[drop.item]||!growingOwned(this.state,drop.item,drop.id));}
  nearbyLoot(includeUnavailable=false){return this.state.groundLoot.filter(d=>d.area===this.state.area&&(includeUnavailable||this.canPickupLoot(d))&&dist(d,this.state.player)<=LOOT_PICKUP_RADIUS&&this.visible(this.state.player,d)).sort((a,b)=>Number(!this.canPickupLoot(a))-Number(!this.canPickupLoot(b))||Number(isSupplyId(a.item))-Number(isSupplyId(b.item))||dist(a,this.state.player)-dist(b,this.state.player)||a.id.localeCompare(b.id));}
  private collectSupply(drop:GroundLoot){
   if(!isSupplyId(drop.item))return;
@@ -163,9 +167,21 @@ export class GameSession {
   p[def.stock]+=taken;if(taken===count)this.state.groundLoot=this.state.groundLoot.filter(d=>d.id!==drop.id);else drop.count=count-taken;
   this.changed();this.emit('supply_pickup',`${def.name} +${taken}`,{id:drop.id,item:drop.item,value:taken,remaining:count-taken});
  }
- private collectNearbySupplies(){
+ private collectGroundEquipment(drop:GroundLoot){
+  if(!this.canPickupLoot(drop))return;
+  const owned=this.state.inventory[drop.item]??0;
+  this.grant(drop.item,1,drop.source,drop.id);
+  // Only remove the physical drop after its real inventory transaction succeeds.
+  if((this.state.inventory[drop.item]??0)<=owned)return;
+  this.state.groundLoot=this.state.groundLoot.filter(d=>d.id!==drop.id);this.changed();
+ }
+ private collectNearbyLoot(){
   if(this.state.player.hp<=0)return;
-  for(const drop of this.state.groundLoot)if(drop.area===this.state.area&&isSupplyId(drop.item)&&this.canPickupLoot(drop)&&dist(drop,this.state.player)<=LOOT_PICKUP_RADIUS&&this.visible(this.state.player,drop))this.collectSupply(drop);
+  for(const drop of this.state.groundLoot){
+   if(drop.area!==this.state.area||!this.canPickupLoot(drop)||dist(drop,this.state.player)>LOOT_PICKUP_RADIUS||!this.visible(this.state.player,drop))continue;
+   if(isSupplyId(drop.item))this.collectSupply(drop);
+   else if(highlightedEquipment(EQUIPMENT[drop.item]?.quality??''))this.collectGroundEquipment(drop);
+  }
  }
  pickupLoot(id:string):GameEvent[]{
   const s=this.state,drop=s.groundLoot.find(d=>d.id===id&&d.area===s.area);
@@ -173,18 +189,23 @@ export class GameSession {
   if(dist(s.player,drop)>LOOT_PICKUP_RADIUS||!this.visible(s.player,drop)){this.emit('notice','靠近并绕过阻挡后拾取');return this.drain();}
   if(isSupplyId(drop.item)){if(!this.canPickupLoot(drop))this.emit('notice',`${SUPPLIES[drop.item].name}已满`);else this.collectSupply(drop);return this.drain();}
   if(!this.canPickupLoot(drop)){this.emit('notice',`${EQUIPMENT[drop.item].name}已满 · ${equipmentStackLimit(drop.item)}/${equipmentStackLimit(drop.item)}`);return this.drain();}
-  s.groundLoot=s.groundLoot.filter(d=>d.id!==id);this.grant(drop.item,1,drop.source);this.changed();return this.drain();
+  this.collectGroundEquipment(drop);return this.drain();
  }
  corpseOpacity(enemy:EnemyState){return enemy.hp>0?1:enemy.diedAt===undefined?0:clamp((enemy.diedAt+CORPSE_SECONDS-this.state.time)/3,0,1);}
- private grant(item:string,count:number,source:string){
+ private grant(item:string,count:number,source:string,lootId?:string){
   const id=canonicalItem(item),def=EQUIPMENT[id];if(RETIRED_SPELL_TO_SKILL[id]){this.state.receipts[`legacy-skill:${source}:${id}`]=true;this.emit('skill_learned','传承已记录；技能按章节开放，强化请分配技能点',{id:RETIRED_SPELL_TO_SKILL[id]});this.changed();return;}if(!def)return;
-  if(GROWING_EQUIPMENT[id]){if(growingOwned(this.state,id)){this.emit('notice',`${def.name}本旅程已经获得过，不会重复领取。`);return;}this.state.receipts[`growing-owned:${id}`]=source;count=1;}
+  if(GROWING_EQUIPMENT[id]){if(growingOwned(this.state,id,lootId)){this.emit('notice',`${def.name}本旅程已经获得过，不会重复领取。`);return;}this.state.receipts[`growing-owned:${id}`]=source;count=1;}
   const owned=this.state.inventory[id]??0,accepted=Math.max(0,Math.min(count,equipmentStackLimit(id)-owned));
   if(!accepted){this.emit('notice',`${def.name}已达叠加上限 ${equipmentStackLimit(id)}`);return;}
   this.state.inventory[id]=owned+accepted;
   this.state.provenance[id]??=source;this.state.receipts[`grant:${source}:${id}`]=true;
-  if(!owned)this.equipmentDice.enqueue(id,source);
-  this.emit('item',`获得${def.name}${accepted>1?` ×${accepted}`:''}`,{id,value:accepted});this.changed();
+  if(!owned){
+   // A proximity pickup must not replace its dismissed alert with a full-screen
+   // forge dialog. Keep the existing free roll available from the equipment page.
+   if(lootId&&highlightedEquipment(def.quality))this.state.receipts[`gear-deferred:${id}`]=true;
+   this.equipmentDice.enqueue(id,source);
+  }
+  this.emit('item',`获得${def.name}${accepted>1?` ×${accepted}`:''}`,{id,value:accepted,...(lootId?{lootId}:{})});this.changed();
  }
  enter(area:AreaDef,entry?:Point,fastTravel=false):GameEvent[]{
   this.hitResponse.reset();this.meleeChain.reset();
@@ -422,7 +443,7 @@ export class GameSession {
  raiseToMaxLevel():boolean{const remaining=cumulativeXp(40)-this.state.progression.totalXp;return remaining>0&&this.gainExperience('local-playtest-level40',remaining);}
  awardExperience(source:string):boolean{const event=MAIN_XP_EVENTS.find(e=>e.id===source);if(!event)return false;return this.gainExperience(source,event.experience);}
  huntingExperience(){return huntingExperienceView(this.state.receipts,this.calendarNow(),this.state.progression.level);}
- private gainExperience(source:string,amount:number,repeat=false,idleHunting=false){const p=this.state.progression;if(ensureDailyExperience(this.state.receipts,this.calendarNow(),p.level))this.changed();if(!repeat&&p.xpReceipts[source]!==undefined)return false;if(repeat){const remaining=cumulativeXp(40)-p.totalXp;if(remaining<=0)return false;amount=takeCombatExperience(this.state.receipts,this.calendarNow(),p.level,amount,remaining,idleHunting);}if(amount<=0)return false;rememberCombatLoadout(this.state.combat,p);const levels=awardXp(p,source,amount,repeat);activateCombatLoadout(this.state.combat,p);this.state.player.hp+=5*levels;this.recalculate();if(p.secondChapter&&!p.ultimateGiftClaimed){p.ultimateGiftClaimed=true;this.state.combat.charge=0;this.emit('notice',COMBAT_RULES.ultimateRequiresCharge?'终极技能已开放':'终极技能已开放，使用当前职业资源');}this.changed();this.emit('experience',`经验 +${amount}`,{id:source,value:amount,level:p.level,levels});return true;}
+ private gainExperience(source:string,amount:number,repeat=false,idleHunting=false){if(/^(enemy:|hunt:|growing-rematch:)/.test(source))amount*=BUILD_PROFILE.monsterExperienceMultiplier;const p=this.state.progression;if(ensureDailyExperience(this.state.receipts,this.calendarNow(),p.level))this.changed();if(!repeat&&p.xpReceipts[source]!==undefined)return false;if(repeat){const remaining=cumulativeXp(40)-p.totalXp;if(remaining<=0)return false;amount=takeCombatExperience(this.state.receipts,this.calendarNow(),p.level,amount,remaining,idleHunting);}if(amount<=0)return false;rememberCombatLoadout(this.state.combat,p);const levels=awardXp(p,source,amount,repeat);activateCombatLoadout(this.state.combat,p);this.state.player.hp+=5*levels;this.recalculate();if(p.secondChapter&&!p.ultimateGiftClaimed){p.ultimateGiftClaimed=true;this.state.combat.charge=0;this.emit('notice',COMBAT_RULES.ultimateRequiresCharge?'终极技能已开放':'终极技能已开放，使用当前职业资源');}this.changed();this.emit('experience',`经验 +${amount}`,{id:source,value:amount,level:p.level,levels});return true;}
  private syncProgression(){const f=this.state.flags;if(f.recovered&&f.read_letter)this.awardExperience('M1_XP_1');if(f.workers_departed||f.workers_returned)this.awardExperience('M2_XP_1');if(f.captain_defeated&&f.gate_raised)this.awardExperience('M2_XP_2');if(f.m7_prepared&&(f.west_tower_down||f.east_tower_down))this.awardExperience('M7_XP_2');if(f.m7_prepared&&f.west_tower_down&&f.east_tower_down){this.awardExperience('M7_XP_3');f.final_ready=true;}}
  /** Pointer cancellation/menu/background is distinct from a legal bow release. */
  cancelInput():void{this.meleeChain.reset();const a=this.state.action;if(a&&(a.kind==='bowAim'||a.kind==='bow'&&!a.emitted||a.kind.startsWith('spell:')&&!a.emitted||a.kind.startsWith('pure:')&&!a.emitted))this.state.action=null;this.previous={x:0,z:0};}
@@ -460,7 +481,7 @@ export class GameSession {
   if(a)speed*=a.skillId==='BOW_07'&&a.emitted&&a.elapsed<(a.releaseAt??0)+.2?0:a.skillId==='WAR_02'&&a.emitted&&a.elapsed<(a.releaseAt??0)?0:a.skillId==='COM_02'&&this.equipped('DE03')?1:a.kind==='dash'?0:a.kind==='bowAim'?.6:a.kind==='sword'&&a.elapsed>=(a.releaseAt??.12)&&a.elapsed<(a.releaseAt??.12)+.10?.35:.65;
   const before={x:p.x,z:p.z};this.move(p,{x:input.x/norm*speed*dt,z:input.z/norm*speed*dt});s.movedDistance+=dist(before,p);this.combatRules.growingMove(dist(before,p),dt);
   if(a)this.actionStep(a,dt,input.attack===true,input.aim);
-  this.collectNearbySupplies();
+  this.collectNearbyLoot();
   for(const e of s.enemies){const reeling=this.hitResponse.step(e,dt);if(e.hp>0&&!reeling)this.enemyStep(e,dt);}
   this.projectilesStep(dt);this.environmentStep(dt);this.deaths(idleHunting);
  }

@@ -49,6 +49,7 @@ export class EquipmentArt {
   void this.frame(art,slot,node).then(frame=>{if(!node.isValid)return;const r=frame.rect,s=Math.min(width/r.width,height/r.height);node.getComponent(UITransform)!.setContentSize(r.width*s,r.height*s);sprite.spriteFrame=frame;}).catch(error=>{if(node.isValid)console.warn('[EquipmentArt]',String(error));});return node;
  }
  static async itemFrame(item:ItemDef,owner?:Node):Promise<SpriteFrame>{
+  if(item.id==='DG_L01')return UiSkin.frame('ui/quiet-bronze/last-watch-sword-v2',0,owner);
   const data=await this.manifest(),visualId=item.artSource??item.id,art=Object.values(data.items).find(a=>a.existingIds?.includes(visualId));
   if(art)return this.frame(art,item.slot==='spell'?undefined:item.slot,owner);
   const campaign=await this.campaignFrame(visualId,owner);if(campaign)return campaign;

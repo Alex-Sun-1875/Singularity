@@ -1,0 +1,198 @@
+{
+  "date": "2026-11-15",
+  "workspaceVersion": "0.3.43",
+  "scope": "dev manual verification tools; Web preview only, no TapTap ZIP produced",
+  "actions": [
+    "refill-health-resource",
+    "restock-four-potions",
+    "gold-iron-runes-cores-to-9999",
+    "level-plus-5",
+    "level-40",
+    "clear-existing-boss-rematch-waits"
+  ],
+  "existingFeaturesReused": [
+    "isolated-training-session",
+    "skill-ranks-1-through-5",
+    "single-target-formation-horde",
+    "training-resource-mode",
+    "damage-statistics"
+  ],
+  "checks": {
+    "typeCheckPassed": true,
+    "existingTestsPassed": 140,
+    "existingTestsFailed": 0,
+    "devOnlyActionGuard": true,
+    "testAndReleaseCommandsRejected": true,
+    "newJourneyHasNoAutomaticGrants": true,
+    "normalDamageResourceAndCooldownRulesPreserved": true,
+    "normalGrowthAndSnapshotValidation": true,
+    "currencyAndPotionCapacity": true,
+    "storyAndEquipmentUnchangedByLevelTools": true,
+    "deadAndUnknownActionsRejected": true,
+    "saveRestore": true,
+    "sharedLocalAndTapTapBuildLock": true,
+    "concurrentBuildRejectedBeforeProfileWrites": true
+  },
+  "browser": [
+    {
+      "name": "iphone14",
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "deviceScaleFactor": 3,
+      "toolsOpened": true,
+      "materials": 9999,
+      "level": 6,
+      "trainingReturnPreserved": true,
+      "touches": {
+        "materials": {
+          "x": 669.5833333333334,
+          "y": 197.00001249999997,
+          "width": 311.83333333333337,
+          "height": 59.04166666666666,
+          "visible": true
+        },
+        "level5": {
+          "x": 669.5833333333334,
+          "y": 196.99997499999998,
+          "width": 311.83333333333337,
+          "height": 59.041666666666686,
+          "visible": true
+        },
+        "supplies": {
+          "x": 669.5833333333334,
+          "y": 311.85416666666663,
+          "width": 311.83333333333337,
+          "height": 59.041666666666686,
+          "visible": true
+        },
+        "back": {
+          "x": 589.625,
+          "y": 347.5,
+          "width": 151.91666666666674,
+          "height": 48,
+          "visible": true
+        },
+        "training": {
+          "x": 669.5833333333334,
+          "y": 285.9791749999998,
+          "width": 311.83333333333337,
+          "height": 59.041666666666686,
+          "visible": true
+        }
+      },
+      "errors": []
+    },
+    {
+      "name": "iphone14max",
+      "viewport": {
+        "width": 932,
+        "height": 430
+      },
+      "deviceScaleFactor": 3,
+      "toolsOpened": true,
+      "materials": 9999,
+      "level": 6,
+      "trainingReturnPreserved": true,
+      "touches": {
+        "materials": {
+          "x": 739.6944444444445,
+          "y": 341.99305555555554,
+          "width": 346.2777777777778,
+          "height": 65.09722222222217,
+          "visible": true
+        },
+        "level5": {
+          "x": 739.6944444444445,
+          "y": 217.00002638888887,
+          "width": 346.2777777777778,
+          "height": 65.0972222222222,
+          "visible": true
+        },
+        "supplies": {
+          "x": 739.6944444444445,
+          "y": 311.8958333333333,
+          "width": 346.2777777777778,
+          "height": 65.09722222222223,
+          "visible": true
+        },
+        "back": {
+          "x": 651.125,
+          "y": 386.83333333333337,
+          "width": 169.1388888888889,
+          "height": 48.00000000000006,
+          "visible": true
+        },
+        "training": {
+          "x": 739.6944444444445,
+          "y": 322.2847180555556,
+          "width": 346.2777777777778,
+          "height": 65.09722222222223,
+          "visible": true
+        }
+      },
+      "errors": []
+    },
+    {
+      "name": "desktop",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "deviceScaleFactor": 1,
+      "toolsOpened": true,
+      "materials": 9999,
+      "level": 6,
+      "trainingReturnPreserved": true,
+      "touches": {
+        "materials": {
+          "x": 984,
+          "y": 397,
+          "width": 536,
+          "height": 82,
+          "visible": true
+        },
+        "level5": {
+          "x": 984,
+          "y": 487,
+          "width": 536,
+          "height": 82,
+          "visible": true
+        },
+        "supplies": {
+          "x": 984,
+          "y": 307,
+          "width": 536,
+          "height": 81.99999999999994,
+          "visible": true
+        },
+        "back": {
+          "x": 848,
+          "y": 670,
+          "width": 264,
+          "height": 44,
+          "visible": true
+        },
+        "training": {
+          "x": 984,
+          "y": 599,
+          "width": 536,
+          "height": 82,
+          "visible": true
+        }
+      },
+      "errors": []
+    }
+  ],
+  "visualReview": {
+    "iphone14": "right-side scrollable panel, player remains visible, fixed return/continue actions; touch targets >=48 logical pixels",
+    "desktop": "shared gold panel and visible scroll thumb; fixed return/continue actions",
+    "screenshots": ".tmp/dev-tools-ui/*-tools.png (local preview evidence)"
+  },
+  "limitations": [
+    "Browser screenshots and touch emulation do not replace TapTap platform/device acceptance.",
+    "No upload, review submission or public release performed.",
+    "Existing TapTap ZIPs were not rebuilt with these tools."
+  ]
+}

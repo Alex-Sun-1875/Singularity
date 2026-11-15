@@ -65,13 +65,13 @@ def pack_exclusions(pack):
     return sorted(excluded)
 
 
-def prepare(platform, output_name, mode='audit'):
+def prepare(platform, output_name, mode='test', gameplay_profile='test'):
     spec = spec_from_file_location('native_texture_reuse', PROJECT / 'tools/prepare-native-texture-reuse.py')
     reuse = module_from_spec(spec)
     spec.loader.exec_module(reuse)
     reuse.prepare()
     release = json.loads(subprocess.check_output(['node', str(PROJECT / 'tools/taptap-config.cjs'),
-                         '--prepare', '--json', '--mode', mode], encoding='utf-8'))
+                         '--prepare', '--json', '--mode', mode, '--profile', gameplay_profile], encoding='utf-8'))
     profile = json.loads((PROJECT / 'release/taptap.json').read_text(encoding='utf-8'))
     if 'surfaces' in profile['excludedResourceTrees']:
         hero = json.loads((RESOURCE_ROOT / 'actors/raphael/manifest.json').read_text(encoding='utf-8'))
@@ -158,7 +158,7 @@ def prepare(platform, output_name, mode='audit'):
     write_json(path, config)
     write_json(PROJECT / 'temp/taptap-resource-plan.json', {'profile': profile, 'packs': packs,
                'bundles': bundles, 'excludedAssets': excluded_assets,
-               'identity': 'provided-app-id' if mode in ('test', 'release') else 'unbound', 'platform': platform, 'release': release})
+               'identity': 'provided-app-id' if mode in ('dev', 'test', 'release') else 'unbound', 'platform': platform, 'release': release})
     print(path)
 
 
@@ -166,8 +166,9 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--platform', choices=['wechatgame', 'web-mobile'], default='wechatgame')
     parser.add_argument('--output-name', default='taptap-audit')
-    parser.add_argument('--mode', choices=['audit', 'preview', 'test', 'release'], default='audit')
+    parser.add_argument('--mode', choices=['audit', 'preview', 'dev', 'test', 'release'], default='test')
+    parser.add_argument('--profile', choices=['dev', 'test', 'release'], default='test')
     args = parser.parse_args()
     if not args.output_name.replace('-', '').replace('_', '').isalnum():
         parser.error('output-name must be a simple directory name')
-    prepare(args.platform, args.output_name, args.mode)
+    prepare(args.platform, args.output_name, args.mode, args.profile)

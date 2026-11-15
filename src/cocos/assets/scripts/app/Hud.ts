@@ -1,5 +1,6 @@
 import {viewportMetrics} from '../platform/ViewportMetrics';
 import {skillWeaponRequirement} from '../features/combat/common/SkillWeapons';
+import {BUILD_PROFILE} from '../shared/BuildProfile';
 import {CompactMask as Mask} from '../shared/ui/CompactMask';
 import {CompactGraphics} from '../shared/ui/CompactGraphics';
 import {Node,Graphics,Label,Sprite,SpriteFrame,UITransform,Canvas,Camera,Layers,Color,Vec2,Vec3,view,ResolutionPolicy,EventTouch,sys,screen,director,Sorting2D,ButtonComponent as Button,BlockInputEvents} from 'cc';
@@ -39,7 +40,8 @@ export class Hud {
  private equipmentPickupsAvailable=false;
  showEquipmentPickup(item:ItemDef,count=1){this.equipmentNotice.enqueue(item,count);this.layoutTopMessages();}
  clearEquipmentPickups(){this.equipmentNotice.clear();this.layoutTopMessages();}
- updateEquipmentPickups(dt:number,available:boolean){this.equipmentPickupsAvailable=available;this.equipmentNotice.update(dt,available&&!this.portrait&&!this.automationExpanded&&!this.modal.children.length);this.layoutTopMessages();}
+ dismissEquipmentDrop(id:string){this.equipmentNotice.dismissDrop(id);this.layoutTopMessages();}
+ updateEquipmentPickups(dt:number,available:boolean,game?:GameSession){if(game)this.equipmentNotice.syncGroundLoot(game);this.equipmentPickupsAvailable=available;this.equipmentNotice.update(dt,available&&!this.portrait&&!this.automationExpanded&&!this.modal.children.length);this.layoutTopMessages();}
  private guidance:JourneyGuidance|null=null;private guidanceClock=Infinity;
  setGuidance(guide:JourneyGuidance|null){this.guidance=guide;}
  get activeGuidance(){return this.guidance;}
@@ -110,7 +112,7 @@ export class Hud {
   const model=def?game.combatSkillView([def.id])[0]:undefined,rank=def?.ranks[Math.max(0,(model?.rank??1)-1)],resource=resourceProfile(game.state);
   const kind=def?.type==='ultimate'?'终极技能':def?.type==='mobility'?'闪避技能':'主动技能';
   const title=def?`${def.name} · ${model?.unlocked?`${model.rank}级`: '未解锁'}`:'空技能位';
-  const facts=rank?`冷却 ${rank.cooldownSeconds}秒 · ${rank.castRangeMetres?`距离 ${rank.castRangeMetres}米 · `:''}${model?.resourceCost?`消耗 ${model.resourceCost}${resource.name}`:'无消耗'}`:'';
+  const facts=rank?`冷却 ${BUILD_PROFILE.noSkillCooldown?0:rank.cooldownSeconds}秒 · ${rank.castRangeMetres?`距离 ${rank.castRangeMetres}米 · `:''}${model?.resourceCost?`消耗 ${model.resourceCost}${resource.name}`:'无消耗'}`:'';
   const mechanic=def?skillResourceText(def.mechanic??def.effect??rank?.effect??''):'';
   const effect=rank?.effect&&rank.effect!==mechanic?skillResourceText(rank.effect):'';
   const upgrade=rank?.upgradeEffect?`本阶效果：${skillResourceText(rank.upgradeEffect)}`:'';
@@ -260,7 +262,7 @@ export class Hud {
   this.labels.set('stats',this.text(stats,'',-statsW/2+54,-44,92,this.touchMode?17:11,C.muted,22));
   this.labels.set('save',this.text(stats,'',statsW/2-29,40,32,this.touchMode?18:12,C.muted,24));this.labels.get('save')!.horizontalAlign=Label.HorizontalAlign.RIGHT;
   const questExpanded=this.questTracker?.expanded??false;
-  this.questTracker=new QuestTracker(this,{left,top:top-statsH-(this.touchMode?16*pixelScale:12),width:statsW,scale:this.touchMode?pixelScale:1.25,hit:this.touchMode?touchMin:48,expanded:questExpanded});
+  this.questTracker=new QuestTracker(this,{left,top:top-statsH-(this.touchMode?8*pixelScale:6),width:statsW,scale:this.touchMode?pixelScale:1.25,hit:this.touchMode?touchMin:48,expanded:questExpanded});
   this.navigationButton=this.questTracker.navigationButton;this.automationLabel=this.questTracker.actionLabel;
   for(const target of [this.questTracker.root,this.questTracker.textButton,this.navigationButton])this.pointerTargets.add(target);
   // Medallion centres sit toward the outer gold lip. Empty mounts remain
@@ -330,7 +332,7 @@ export class Hud {
    }
   });
   this.labels.set('toast',this.text(this.root,'',0,top-72,Math.max(240,Math.min(580,this.width-740)),this.touchMode?24:17,C.ink,70));this.labels.get('toast')!.horizontalAlign=Label.HorizontalAlign.CENTER;
-  this.equipmentNotice.mount(Math.min(260*(this.touchMode?pixelScale:1.25),this.labels.get('toast')!.node.getComponent(UITransform)!.width),this.touchMode?pixelScale:1.25);
+  this.equipmentNotice.mount(Math.min(320*(this.touchMode?pixelScale:1.25),this.labels.get('toast')!.node.getComponent(UITransform)!.width),this.touchMode?pixelScale:1.25);
   this.labels.set('compass',this.text(this.root,'',0,top-22,statsW,this.touchMode?21:14,C.gold,36));this.labels.get('compass')!.horizontalAlign=Label.HorizontalAlign.CENTER;
   this.labels.set('hint',this.text(this.root,this.touchMode?'':'WASD 移动 · Shift 慢行 · 滚轮缩放',0,bottom+132,Math.max(220,Math.min(480,this.width-600)),12,C.muted,24));this.labels.get('hint')!.horizontalAlign=Label.HorizontalAlign.CENTER;
   this.attackRangeY=bottom+220;
@@ -468,8 +470,8 @@ export class Hud {
  setAttackRangeHint(text:string,valid=true){const label=this.labels.get('attack-range');if(!label)return;label.string=text;label.color=valid?C.ink:C.red;label.node.active=!!text;}
  private layoutTopMessages(){
   const top=this.trainingButton?.active?this.trainingButton.position.y-this.trainingButton.getComponent(UITransform)!.height/2-12:this.automationHud?.visible?this.automationHud.bottom-12:this.height/2-22,compass=this.labels.get('compass'),passiveVisible=!this.automationExpanded&&!this.modal.children.length,toast=this.labels.get('toast');
-  if(compass){compass.node.active=passiveVisible;if(compass.node.position.y!==top-18)compass.node.setPosition(0,top-18);}
-  if(toast){const y=top-(compass?.string?83:35);this.equipmentNotice.layout(0,y,this.equipmentPickupsAvailable&&passiveVisible&&!this.portrait);toast.node.active=passiveVisible&&!this.equipmentNotice.visible;if(toast.node.position.y!==y)toast.node.setPosition(0,y);}
+  if(compass){compass.node.active=passiveVisible&&!(this.equipmentNotice.dropVisible&&this.equipmentPickupsAvailable);if(compass.node.position.y!==top-18)compass.node.setPosition(0,top-18);}
+  if(toast){const y=this.equipmentNotice.dropVisible?top-this.equipmentNotice.height/2:top-(compass?.string?83:35);this.equipmentNotice.layout(0,y,this.equipmentPickupsAvailable&&passiveVisible&&!this.portrait);toast.node.active=passiveVisible&&!this.equipmentNotice.visible;if(toast.node.position.y!==y)toast.node.setPosition(0,y);}
  }
  private setActionIcon(action:string,path:string){
   const group=this.isSkillControl(action)?this.skillIconGroup:'';

@@ -9,6 +9,10 @@ if($Platform -eq 'wechatgame'){
  if($LASTEXITCODE -ne 0){throw 'TapTap release build failed.'}
  return
 }
+$buildLockDirectory=Join-Path $project 'temp'
+New-Item -ItemType Directory -Force -Path $buildLockDirectory | Out-Null
+try{$localBuildLock=[System.IO.File]::Open((Join-Path $buildLockDirectory 'taptap-build.lock'),[System.IO.FileMode]::OpenOrCreate,[System.IO.FileAccess]::ReadWrite,[System.IO.FileShare]::None)}catch{throw 'Another local or TapTap build is using this project; wait for it to finish.'}
+try{
 $releaseJson=& node (Join-Path $project 'tools/taptap-config.cjs') --prepare --json --mode preview
 if($LASTEXITCODE -ne 0){throw 'Game release configuration validation failed.'}
 $release=$releaseJson|ConvertFrom-Json
@@ -68,3 +72,4 @@ $notices=Join-Path $project 'build-templates/web-desktop/THIRD_PARTY_NOTICES.txt
 if($LASTEXITCODE -ne 0){throw 'Web game icon export failed.'}
 if(Test-Path -LiteralPath $notices){Copy-Item -LiteralPath $notices -Destination (Join-Path $project ('build/'+$OutputName+'/THIRD_PARTY_NOTICES.txt')) -Force}
 Write-Output ('Built '+$Platform+' at '+(Join-Path $project ('build/'+$OutputName)))
+}finally{$localBuildLock.Dispose()}

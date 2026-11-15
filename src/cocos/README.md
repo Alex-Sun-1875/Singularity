@@ -140,6 +140,8 @@ python tools/report-build.py build/web-mobile
 
 ## TapTap 小游戏发布准备（2026-11-10）
 
+2026-11-15 起打包遵守[开发 skill](../../.agents/skills/singularity-development/SKILL.md)与[开发与打包规范](../../docs/development/build-profiles.md)：默认 `npm run pack:taptap` / `build:tap`（test），开发加速用 `pack:taptap:dev`；仅明确要求 release 时使用 `pack:taptap:release`，自动生成正式版本差异日志。三档版本持续递增，目录以 `-<档位>`、ZIP 以 `_<档位>.zip` 结尾；下方带日期的历史规则和命令不改变本约定。
+
 **基础接入更新 0.3.2：** 版本、标识、运行配置、分包审计和上传清单已统一；新增保存后更新提示与启动资源失败重试。后续统一使用根目录 `npm run version:tap -- patch` 更新版本。当前要求、操作命令和仍待后台完成的事项见 [`release/README.md`](release/README.md)，下方 0.3.0/0.3.1 内容为此前阶段记录。
 
 **历史登录更新 0.3.1（已被 2026-11-13 平台登录方案替代）：** 客户端已接入 `tap.login → 服务端 code2Session → 自定义会话`，增加登录门禁、失败重试、`tap.checkSession` 前台恢复及过期重登。可部署服务和操作步骤见 [登录服务](../../services/taptap-auth/README.md)。公开配置为 [`release/taptap-auth.json`](release/taptap-auth.json)，Secret 只配置在服务器。当前 `serviceUrl` 为空，正式身份构建会拒绝，需部署及配置请求域名后再出上传包；本地审计和 Web 预览仍可构建。旧 `build/taptap-release-package/game.zip`（0.3.0）不包含完整登录，请勿作为本次登录更新包上传。真实 TapTap 身份交换与真机验收尚未进行。
@@ -155,12 +157,12 @@ python tools/report-build.py build/web-mobile
 ```powershell
 npm run build:tap:audit       # 无平台身份，本地构建、官方转换、包体测量
 npm run build:tap:preview     # 同一资源方案的 Web 验证构建
-npm run build:tap -- -TapAppId 'tapmcddcmbhf5lxqng'
+npm run pack:taptap           # 默认正常测试包；release 仅在明确要求时另行制作
 ```
 
 `Build-TapTap.ps1` 统一准备配置并执行 Cocos；旧的 `Build-Local.ps1 -Platform wechatgame` 也转到此入口。正式身份构建不允许空 AppID；审计模式不填造 AppID，并清除 Cocos 中间产物自动插入的微信示例身份。AppID 是 TapTap 小游戏身份，不是 Maker 项目 ID。转换前将 `game.json` 分包键统一为官方要求的 `subPackages`。
 
-发布版本固定为当前绘制场景与 3D 主角，横屏，从 Lv1 新旅程开始；不执行 localhost 满级或 `test=max` 入口。既有技能免冷却等已确认玩法规则保持不变。普通 Web 试玩仍使用原路径和既有试玩设置。
+本段历史发布方案固定为当时的绘制场景与 3D 主角，横屏，从 Lv1 新旅程开始，不执行 localhost 满级或 `test=max` 入口。2026-11-15 起，无冷却、怪物双倍经验和取消每日经验限制归入 dev 覆盖；test / release 使用正常玩法，具体实现及隔离状态须按新规范核实，不能因本段历史记录继续携带开发加速。
 
 资源按地图图册、室内、地形、场景物件、传送点、环境、装备、战斗特效、3D 主角、材质和各个 2D NPC/敌人拆包。只在发布构建中过滤历史 2D 主角图集、旧主角模型和未使用的旧地图/传送点图片，源素材与原 UUID 不移动、不删除。`GameResources.ts` 将既有资源路径接到 Cocos 按需 Bundle 加载，Web 验证使用相同路径规则。构建参数使用本机 3.8.8 自带的 `bundleConfigs` 与资源过滤能力，未修改官方插件。
 

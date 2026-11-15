@@ -2,6 +2,8 @@
 
 以用户确认的[设置页实装对照](../../test-results/settings-alignment-v11/reference-vs-runtime.png)为视觉基准。继续使用 Cocos 原生 Node、Button、Label、Sprite、ScrollView 与既有图片，不增加运行依赖或生成新皮肤。
 
+2026-11-15按用户反馈修正公共框直边与圆角的亮度差：保留原版四个48×48圆角和全图透明通道，直边RGB按相邻圆角的切线采样连续衔接。当前运行素材与静态图集由[确定性修正脚本](../../source-art/ui/frame-edge-match-v1/prepare.py)复现，来源及哈希见[处理记录](../../source-art/ui/frame-edge-match-v1/provenance.json)；原始提取图保留在`source-art/ui/double-gold-frame-v6/`。
+
 ## 组件边界
 
 | 组件／配置 | 管理内容 | 页面管理内容 |

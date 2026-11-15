@@ -4,6 +4,7 @@ export const zh={
  'combat.wait':'脱战还需 {seconds} 秒 · 返回旅途继续',
  'combat.settling':'威胁已解除，安全等待 {seconds} 秒后可换装',
  'loot.pickup':'拾取','loot.supplyFull':'携带已满 · {count}/{capacity}',
+ 'loot.dropTitle':'{quality}装备掉落','loot.autoPickup':'靠近自动拾取','loot.dropFull':'携带已满 · 装备保留在原地','loot.groundName':'{quality} · {name}',
  'loot.bossResources':'Boss战利品 · 金币 +{gold} · 废铁 +2',
  'loot.rematchFirst':'先击败此地Boss，再来开启挑战',
  'loot.rematchSafe':'先离开附近敌人的攻击范围',

@@ -1,6 +1,6 @@
 {
   "name": "sword-and-fire",
-  "version": "0.3.41",
+  "version": "0.3.43",
   "private": true,
   "description": "剑与火：Cocos Creator 3.8.8 设定图2D第一章",
   "scripts": {
@@ -12,9 +12,13 @@
     "build:tap:audit": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -AuditOnly",
     "build:tap:preview": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -WebPreview",
     "build:tap": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1",
-    "pack:taptap": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -TestPackage",
+    "pack:taptap": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1",
+    "pack:taptap:dev": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -Profile dev",
+    "pack:taptap:test": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -Profile test",
+    "pack:taptap:release": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -Profile release",
     "pack:taptap:guest": "pwsh -NoProfile -File src/cocos/Build-TapTap.ps1 -TestPackage -GuestTest",
     "version:tap": "node src/cocos/tools/taptap-config.cjs --version",
+    "release:tap:record": "node src/cocos/tools/release-notes.cjs --record-published",
     "check:tap": "node src/cocos/tools/taptap-config.cjs --check",
     "test": "npm --prefix src/cocos test",
     "test:perf": "node src/cocos/tools/performance/run.cjs",
