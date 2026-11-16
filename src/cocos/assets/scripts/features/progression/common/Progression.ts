@@ -60,7 +60,7 @@ export function awardXp(p:ProgressionState,source:string,amount:number,repeat=fa
  const old=p.level;p.xpReceipts[source]=(p.xpReceipts[source]??0)+amount;p.totalXp+=amount;p.level=levelForXp(p.totalXp);p.unspentPoints+=(p.level-old)*3;p.skillPoints=(p.skillPoints??0)+p.level-old;unlockSkills(p);return p.level-old;
 }
 export function skillPlanRemaining(p:ProgressionState,learned:Record<string,number>,legacy:boolean|number=false):number|null {
- const catalog=combatSkillCatalog(typeof legacy==='number'?legacy:legacy?2:4),ids=Object.keys(catalog);if(!learned||Object.keys(learned).length!==ids.length)return null;
+ const catalog=combatSkillCatalog(typeof legacy==='number'?legacy:legacy?2:5),ids=Object.keys(catalog);if(!learned||Object.keys(learned).length!==ids.length)return null;
  let spent=0;for(const id of ids){const rank=learned[id],unlocked=p.level>=catalog[id].unlockLevel||p.secondChapter;if(!Number.isInteger(rank)||rank<0||rank>5||unlocked!==(rank>0))return null;spent+=skillRankSpent(rank);}
  const remaining=totalSkillPoints(p)-spent;return remaining>=0?remaining:null;
 }

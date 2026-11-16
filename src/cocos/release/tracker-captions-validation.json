@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "feature": "quest-tracker-captions",
+  "createdAt": "2026-11-15T17:18:55.833137+00:00",
+  "profile": "test",
+  "version": "0.3.50",
+  "behavior": "Only the left tracker caption and follow-up hint changed; journey-toggle-navigation still dispatches auto:quest. Top automation caption, handlers, disabled states, semantic colors and touch bounds retain their existing definitions.",
+  "captions": [
+    "出发",
+    "停止",
+    "继续",
+    "抵达"
+  ],
+  "topTaskCaption": "自动",
+  "checks": {
+    "typescript": "passed",
+    "profile": "normal test verified",
+    "renderPolicy": "passed",
+    "browserStates": 27,
+    "views": [
+      {
+        "name": "phone",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "states": 9
+      },
+      {
+        "name": "large-phone",
+        "viewport": {
+          "width": 932,
+          "height": 430
+        },
+        "states": 9
+      },
+      {
+        "name": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "states": 9
+      }
+    ],
+    "runtimeErrors": 0,
+    "consoleErrors": 0,
+    "fbxMetadataChanged": 0
+  },
+  "evidence": "src/cocos/test-results/tracker-captions",
+  "preview": "http://127.0.0.1:7487/?view=2d&player=3d&progression=natural",
+  "buildProvenance": "Reused the completed concurrent standard Build-Local concept-2d export after its build lock was released. Verified emitted tracker caption branch and follow-up text include this edit; no lock bypass or extra version increment. Runtime caption states and the shared controller were then verified by real browser input.",
+  "limits": "Browser input checks use fresh isolated sessions. Arrival and blocked states are explicit display-only fixtures, not fabricated quest completion. TapTap device validation was not repeated for this caption-only change."
+}

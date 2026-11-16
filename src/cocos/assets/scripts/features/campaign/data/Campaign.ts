@@ -2188,7 +2188,7 @@ export const CAMPAIGN_BOSSES:CampaignEnemyDef[] = [
       "position": "top left",
       "spriteReady": false
     },
-    "baseHp": 150,
+    "baseHp": 450,
     "level": 18,
     "damageIsLevelOneBase": true,
     "enemyForcedDisplacement": 0,

@@ -12,6 +12,7 @@ import {COMBAT_LOADOUTS,professionAcceptsItem,type CombatFamily} from '../common
 import {ATTRIBUTES,SKILL_RANK_COSTS,skillPlanRemaining,type Attribute} from '../common/Progression';
 import {COMBAT_SKILLS,COMBAT_SKILL_LIST,type CombatStyle} from '../../combat/data/PureSkills';
 import {COMBAT_SKILL_ICONS} from '../../combat/runtime/CombatSkillIcons';
+import {skillRoleLabel,skillRankFacts} from '../../combat/runtime/CombatSkillDescription';
 import {EQUIPMENT} from '../../equipment/data/Equipment';
 import {preparationText as t} from '../locales';
 import {PreparationSkin as P} from '../../../shared/ui/PreparationSkin';
@@ -100,6 +101,9 @@ function pair(ui:RpgPanel,before:string,after:string,y:number,color=C.ink){
 function rankFacts(skill:typeof COMBAT_SKILL_LIST[number],rank:typeof COMBAT_SKILL_LIST[number]['ranks'][number]){
  const values:{label:string;value:number;suffix:string;icon:string}[]=[];
  const add=(label:string,value:number|undefined,suffix='',icon='stat-target')=>{if(typeof value==='number'&&value>0)values.push({label,value,suffix,icon});};
+ if(skill.activation==='automatic'){add('强化合计',Number(rank.maxDamagePerTargetS.toFixed(3)),'S');add('触发间隔',rank.cooldownSeconds,'秒');return values;}
+ if(rank.maxDamagePerTargetS>0&&skill.damageRole!=='support'){add('单敌合计',Number(rank.maxDamagePerTargetS.toFixed(3)),'S');add('冷却',rank.cooldownSeconds,'秒');return values;}
+ if(skill.id==='COM_02'){add('治疗合计',rank.healMaxHpPercent,'%','stat-life');add('冷却',rank.cooldownSeconds,'秒');return values;}
  if(skill.id==='BOW_06'){add(t('fact.damage'),Number(rank.maxDamagePerTargetS.toFixed(3)),'S');add('减速',Math.round((rank.slowPercent??0)*100),'%','stat-radius');}
  else if(skill.id==='FIR_04'){add('减速',Math.round((rank.slowPercent??0)*100),'%','stat-radius');add('冷却',BUILD_PROFILE.noSkillCooldown?0:rank.cooldownSeconds,'秒');}
  else if(skill.id==='BOW_07'){add(t('fact.damage'),Number(rank.maxDamagePerTargetS.toFixed(3)),'S');add('撤离',rank.moveMetres,'米','stat-radius');}
@@ -150,7 +154,7 @@ export function renderAllocationPanel(hud:Hud,game:GameSession,tab:'attributes'|
   art(ui,'skill-cost',710,Y(101),176,24,true);center(ui,investment?t('allocation.upgrade',{count:investment}):rank<5?t('allocation.costShort',{count:cost}):t('allocation.maxed'),710,Y(101),170,26,16,C.gold);
   const facts=rankFacts(skill,current),after=rankFacts(skill,preview);
   facts.forEach((fact,i)=>{const y=Y(132+i*32);art(ui,fact.icon,604,y,20,20);text(ui,fact.label,662,y,80,28,15);const val=text(ui,`${fact.value}${fact.suffix} → ${after[i]?.value??fact.value}${fact.suffix}`,768,y,128,28,17,rank!==old?F.color('state.selected'):C.ink);val.horizontalAlign=Label.HorizontalAlign.RIGHT;if(i===0)rule(ui,710,y+12,238);});
-  rule(ui,710,Y(180),238);const compact=skill.id==='BOW_02',summary=skill.id==='BOW_06'?t('allocation.trapSummary'):skill.id==='BOW_07'?t('allocation.retreatSummary'):'',description=resourceCostText(skill)+'\n'+skillResourceText(compact?t('allocation.bowChainSummary'):(summary?summary+'\n\n':'')+(skill.mechanic??preview.upgradeEffect??preview.evolution??'')),descH=compact?26:Math.max(42,description.split('\n').reduce((n,line)=>n+Math.max(1,Math.ceil(line.length/17)),0)*18),content=ui.scroll(right,0,ui.y(Y(205)+(!ui.referenceLayout?8:0))-ui.bodyY,244*u,42*u,descH*u),desc=ui.text(content,description,0,-descH*u/2,238*u,descH*u,C.ink,13.5*u);desc.verticalAlign=Label.VerticalAlign.TOP;desc.lineHeight=18*u;if(compact){desc.enableWrapText=false;desc.overflow=Label.Overflow.SHRINK;}
+  rule(ui,710,Y(180),238);const description=[skillRoleLabel(skill),...skillRankFacts(skill,preview),resourceCostText(skill),skillResourceText(skill.mechanic??preview.upgradeEffect??preview.evolution??'')].join('\n'),descH=Math.max(42,description.split('\n').reduce((n,line)=>n+Math.max(1,Math.ceil(line.length/17)),0)*18),content=ui.scroll(right,0,ui.y(Y(205)+(!ui.referenceLayout?8:0))-ui.bodyY,244*u,42*u,descH*u),desc=ui.text(content,description,0,-descH*u/2,238*u,descH*u,C.ink,13.5*u);desc.verticalAlign=Label.VerticalAlign.TOP;desc.lineHeight=18*u;
   [-1,1].forEach((delta,i)=>P.step(ui,delta<0?'−':'+',650+i*114,!ui.referenceLayout?b-hu/2-25:256,'AllocationRank:'+delta,safe&&rank>0&&(delta<0?rank>1:rank<5&&remaining>=cost),()=>{const plan={...v.learned,[skill.id]:rank+delta};if(skillPlanRemaining(original,plan)!==null){v.learned=plan;v.notice=t('allocation.preview');refresh();}},58));
   art(ui,'info',611,!ui.referenceLayout?b-10:300,16,17);text(ui,t('allocation.free'),740,!ui.referenceLayout?b-10:300,238,20,11.5,C.ink);
  }

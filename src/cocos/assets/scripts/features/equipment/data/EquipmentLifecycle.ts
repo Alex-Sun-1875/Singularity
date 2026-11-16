@@ -1,6 +1,8 @@
 import type {ItemDef,EquipmentSlot} from './Equipment';
+import {equipmentText} from '../locales';
 
 export type LootStyle='WAR'|'BOW'|'FIR'|'THU';
+export function mainBossChapter(bossId:string|undefined):1|2|undefined {return bossId==='BOSS_R1'?1:bossId==='BOSS_R2'?2:undefined;}
 export type LifecycleQuality='史诗'|'传奇';
 export interface LifecycleGroup {id:string;chapter:number;route:'task'|'battle';quality:LifecycleQuality;name:string;slot:EquipmentSlot;requiredLevel:number;task?:string;items:string[]}
 export const LIFECYCLE_PHASES=[
@@ -30,7 +32,7 @@ export const LIFECYCLE_GROUPS:LifecycleGroup[]=[];
 function group(chapter:number,route:'task'|'battle',quality:LifecycleQuality,tag:string,name:string,slot:EquipmentSlot,requiredLevel:number,task?:string){
  const id=`LC${chapter}_${route==='task'?'T':'B'}_${tag}`,items:string[]=[],weapon=slot==='weapon';
  const d:LifecycleGroup={id,chapter,route,quality,name,slot,requiredLevel,task,items};LIFECYCLE_GROUPS.push(d);
- const source=route==='task'?'完成对应任务后固定领取':'本章随机掉落；不保证获得指定款式';
+ const source=route==='task'?equipmentText('loot.mainBossSource'):'本章随机掉落；不保证获得指定款式';
  const description=`第${chapter}章 · ${quality} · 阶段装备，基础数值不随人物等级成长。\n${source}`;
  if(weapon)for(const style of STYLES){
   const key=`${id}_${style.id}`,power=Math.round(lifecycleWeaponBase(requiredLevel)*(quality==='传奇'?1.18:1.10));items.push(key);

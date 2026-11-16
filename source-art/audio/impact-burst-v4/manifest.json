@@ -1,0 +1,1678 @@
+{
+  "schemaVersion": 4,
+  "date": "2026-11-16",
+  "userFeedback": "V3基本可以，希望更加爆炸，特别是火焰和雷霆；保留此前材质感。",
+  "production": "Original deterministic synthesis; no recordings, AI audio calls, downloaded samples or new dependencies.",
+  "runtimeIntegration": "Offline audition revision only; game audio and all previous studies preserved.",
+  "listeningAcceptance": "Pending audition of the new attack bodies; V3 received basic approval, not a device acceptance.",
+  "taptapDeviceAcceptance": "Not performed",
+  "designNotes": {
+    "fire": {
+      "userPreference": "2026-11-16: v3 is broadly acceptable; make fire/lightning more explosive while retaining natural material identity.",
+      "provenance": "Original deterministic NumPy/SciPy synthesis; no recordings, AI calls, external samples or downloads.",
+      "sourceChanges": {
+        "ignition": "Several brief, differently damped micro-fronts establish a 5-25ms contact instead of simply raising the old flame bed.",
+        "body": "Finite noise excites damped 146/229/347/493Hz pressure-volume modes, reinforced by a short 120-450Hz turbulent packet. No sub-bass sine/kick oscillator.",
+        "expansion": "Independent irregular packets expand over 70-250ms with changing bandwidth and non-repeating timing; the low-mid roll is separate from the ignition transient.",
+        "tail": "Sparse embers only, progressively weaker; no long constant white-noise wall or periodic flutter modulation.",
+        "chargeAndWall": "Gathering is modestly denser and still below impact. Wall uses a small one-off ignition and intermittent flame tongues, not a sequence of full explosions."
+      },
+      "mix": "Local active-window energy controls ignition/body balance; final gain is only a safety cap at .64. Three variants independently change excitation, microtiming, modes and packet shapes.",
+      "comparison": "Assess v3/v4 at equal peak or matched loudness. Greater onset/body contrast is separate from overall playback loudness.",
+      "acceptance": "Numerical envelope/energy verification is not artistic or device listening acceptance."
+    },
+    "thunder": {
+      "direction": "More explosive and full-bodied than v3, retaining a natural dry electric-arc identity.",
+      "provenance": "Original deterministic NumPy/SciPy synthesis. No recordings, downloaded soundbanks, local AI or cloud generation.",
+      "structure": {
+        "front": "One 2–5ms broadband fracture with a small pressure impulse; the leading discharge remains strongest.",
+        "body": "A separate 20–100ms low-mid turbulent shock and rapidly damped non-harmonic structure modes, rather than merely a louder click.",
+        "aftercracks": "Two much quieter local cracks; neither a repeating gunfire train nor a sustained high hiss.",
+        "tail": "Body resolves within roughly 0.16 seconds; no long distant-thunder rumble."
+      },
+      "differenceFromV3": "v3 concentrated most single-hit energy in about 20ms. v4 adds independent short pressure and low-mid body sources so matching loudness still leaves a broader attack/body envelope.",
+      "network": "Existing 0/.25/.50-second groups remain aligned. The later groups are subordinate and have less body than the main arc.",
+      "excluded": [
+        "ascending laser whistle",
+        "sawtooth buzz",
+        "continuous oscillator carrier",
+        "long high-frequency spray",
+        "sub-bass rumble"
+      ],
+      "timing": "Original .44/.44/1.10-second file lengths preserved; near-silent padding retains existing cue schedules.",
+      "variants": "Three deterministic variants alter turbulent excitation, short damping and branch microtiming; no large pitch shifts.",
+      "mix": "Peak cap 0.64 preserves headroom; no individual-cue loudness normalization. Root audition assembly matches loudness.",
+      "acceptance": "Envelope and peak measurements are technical evidence only; explosive quality and realism remain pending human audition."
+    },
+    "physical": "V3 physical source files are byte-identical; contact-to-preparation balance is reinforced by only 1.065x."
+  },
+  "presentationLevels": [
+    {
+      "profession": "WAR",
+      "presentationTargetLufs": -23.7,
+      "presentationLinearGain": 1.3867558288718884,
+      "measuredMasterLufs": -23.69
+    },
+    {
+      "profession": "BOW",
+      "presentationTargetLufs": -25.8,
+      "presentationLinearGain": 1.494514042366458,
+      "measuredMasterLufs": -25.81
+    },
+    {
+      "profession": "FIR",
+      "presentationTargetLufs": -23.0,
+      "presentationLinearGain": 1.2808550945362784,
+      "measuredMasterLufs": -22.99
+    },
+    {
+      "profession": "THU",
+      "presentationTargetLufs": -24.1,
+      "presentationLinearGain": 1.3851601859244613,
+      "measuredMasterLufs": -24.1
+    }
+  ],
+  "comparison": {
+    "reference": "PCM WAV; MP3 is a convenience preview and can shift gated loudness for sparse transients.",
+    "processing": "Scalar gain only, no dynamics processor for matching.",
+    "schedule": "Same v3 event onsets and sections; preparation remains bounded by release.",
+    "baselineHashes": {
+      "source-art/audio/impact-refinement-v3/demos/fir-15s.wav": "b991d20d7be7ea5a9ec0122ee02e6ae1e6fa507e77afeb07b7c9e0cf3d2ecdc5",
+      "source-art/audio/impact-refinement-v3/demos/thu-15s.wav": "5e8afcd46d17f357c54a9c74a0a151af0bf9e780b25f0572e7df355f00ebbe32"
+    },
+    "pairs": [
+      {
+        "profession": "FIR",
+        "targetLufs": -23.0,
+        "beforeMeasuredLufs": -22.99,
+        "afterMeasuredLufs": -22.99
+      },
+      {
+        "profession": "THU",
+        "targetLufs": -29.7,
+        "beforeMeasuredLufs": -29.7,
+        "afterMeasuredLufs": -29.7
+      }
+    ]
+  },
+  "assets": [
+    {
+      "cue": "war_swing",
+      "variation": 1,
+      "path": "clips/war_swing_v01.wav",
+      "description": "Short non-tonal blade air, separate from contact; no pitched steel sweep.",
+      "sha256": "256d8a87889767192491a41e5cddfb31ccd816eff44aa1726de3a9545aeab3d7",
+      "metrics": {
+        "durationSeconds": 0.22,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -8.345,
+        "oversampledPeakDbfs": -8.34,
+        "rmsDbfs": -25.611,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 2665.1,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "war_swing",
+      "variation": 2,
+      "path": "clips/war_swing_v02.wav",
+      "description": "Short non-tonal blade air, separate from contact; no pitched steel sweep.",
+      "sha256": "e4b0086e139066b2dc39122536aadbb66af7b939d7b666050e3b99f036e62f8c",
+      "metrics": {
+        "durationSeconds": 0.22,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -8.29,
+        "oversampledPeakDbfs": -7.999,
+        "rmsDbfs": -25.593,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 2501.9,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "war_swing",
+      "variation": 3,
+      "path": "clips/war_swing_v03.wav",
+      "description": "Short non-tonal blade air, separate from contact; no pitched steel sweep.",
+      "sha256": "f886cc19f5d30dd7dfc0bf74f61c7828e437387a10b185fc3c6c5afa1f4ec1da",
+      "metrics": {
+        "durationSeconds": 0.22,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -9.412,
+        "oversampledPeakDbfs": -9.299,
+        "rmsDbfs": -25.591,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 2550.0,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "war_slash",
+      "variation": 1,
+      "path": "clips/war_slash_v01.wav",
+      "description": "Dry cutting onset, brief damped steel modes, cloth/body compression.",
+      "sha256": "5898dd84c1df8da6559a24cbde3060a4202822bc98e08fe4d21a949ab793bd01",
+      "metrics": {
+        "durationSeconds": 0.25,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -4.731,
+        "oversampledPeakDbfs": -4.316,
+        "rmsDbfs": -27.922,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1960.4,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "war_slash",
+      "variation": 2,
+      "path": "clips/war_slash_v02.wav",
+      "description": "Dry cutting onset, brief damped steel modes, cloth/body compression.",
+      "sha256": "18bbde14c80f63bdebc2538c1ccba48b23a907df65e7d0bdd9cf0ec201f6b344",
+      "metrics": {
+        "durationSeconds": 0.25,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -4.731,
+        "oversampledPeakDbfs": -4.197,
+        "rmsDbfs": -28.497,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 2039.4,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "war_slash",
+      "variation": 3,
+      "path": "clips/war_slash_v03.wav",
+      "description": "Dry cutting onset, brief damped steel modes, cloth/body compression.",
+      "sha256": "686067417803c1fbfd52ded31850d7e000c661c9bdae1736aa9773af019f7bcd",
+      "metrics": {
+        "durationSeconds": 0.25,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -4.976,
+        "oversampledPeakDbfs": -4.971,
+        "rmsDbfs": -28.101,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 2237.6,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "war_armor",
+      "variation": 1,
+      "path": "clips/war_armor_v01.wav",
+      "description": "Noise-excited non-harmonic plate with strong damping, no long bell.",
+      "sha256": "42d4e3c93c1304a455e0c488fbc4c9661cdaac8d927b39ad6bef06d4c276a468",
+      "metrics": {
+        "durationSeconds": 0.3,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.244,
+        "oversampledPeakDbfs": -5.194,
+        "rmsDbfs": -27.838,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1664.3,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "war_armor",
+      "variation": 2,
+      "path": "clips/war_armor_v02.wav",
+      "description": "Noise-excited non-harmonic plate with strong damping, no long bell.",
+      "sha256": "1db603ba3328e7db13ed6002616df58bb16421b4e90d01de10824d9c775fda96",
+      "metrics": {
+        "durationSeconds": 0.3,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -6.62,
+        "oversampledPeakDbfs": -6.529,
+        "rmsDbfs": -28.368,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1900.9,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "war_armor",
+      "variation": 3,
+      "path": "clips/war_armor_v03.wav",
+      "description": "Noise-excited non-harmonic plate with strong damping, no long bell.",
+      "sha256": "bf673c7188908582d44e87be1aacdee3f058b76308bb7eae0fb993b791670da2",
+      "metrics": {
+        "durationSeconds": 0.3,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -4.731,
+        "oversampledPeakDbfs": -4.726,
+        "rmsDbfs": -29.123,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1964.6,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "war_finish",
+      "variation": 1,
+      "path": "clips/war_finish_v01.wav",
+      "description": "A slightly thicker physical cut; restrained body and short steel decay.",
+      "sha256": "54c661280ed3e4cebb322f6700969c8b86bea84153e2a22da854e407a99571ae",
+      "metrics": {
+        "durationSeconds": 0.34,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.889,
+        "oversampledPeakDbfs": -5.883,
+        "rmsDbfs": -27.63,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1719.2,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "war_finish",
+      "variation": 2,
+      "path": "clips/war_finish_v02.wav",
+      "description": "A slightly thicker physical cut; restrained body and short steel decay.",
+      "sha256": "cab86608f75f25bc858c35bf9c6f077de47b6d7dbc5b4ae261df664156479164",
+      "metrics": {
+        "durationSeconds": 0.34,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -4.731,
+        "oversampledPeakDbfs": -4.649,
+        "rmsDbfs": -28.719,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1960.4,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "war_finish",
+      "variation": 3,
+      "path": "clips/war_finish_v03.wav",
+      "description": "A slightly thicker physical cut; restrained body and short steel decay.",
+      "sha256": "889c4153678e7b6c0401fbe7c147a9ede3c43eb7743ad972eae0144df4fe09be",
+      "metrics": {
+        "durationSeconds": 0.34,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -4.731,
+        "oversampledPeakDbfs": -4.726,
+        "rmsDbfs": -27.495,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1996.8,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "bow_draw",
+      "variation": 1,
+      "path": "clips/bow_draw_v01.wav",
+      "description": "Quiet irregular hand/string friction and wood strain; no musical drone.",
+      "sha256": "ed7a3bc8917941fd3b0262b5aa9241267c592e6887680d95c14bd7c88f5b1b32",
+      "metrics": {
+        "durationSeconds": 0.62,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -19.128,
+        "oversampledPeakDbfs": -19.097,
+        "rmsDbfs": -34.318,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1298.1,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "bow_draw",
+      "variation": 2,
+      "path": "clips/bow_draw_v02.wav",
+      "description": "Quiet irregular hand/string friction and wood strain; no musical drone.",
+      "sha256": "d0c9e67dc4190791962de580256ba795e7f755ec989eae377f80c6f49d929a41",
+      "metrics": {
+        "durationSeconds": 0.62,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -18.178,
+        "oversampledPeakDbfs": -18.152,
+        "rmsDbfs": -34.318,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1273.6,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "bow_draw",
+      "variation": 3,
+      "path": "clips/bow_draw_v03.wav",
+      "description": "Quiet irregular hand/string friction and wood strain; no musical drone.",
+      "sha256": "5d0316f07126068a0d15358c3431cb3d115036d1bf2d8676cff5da59aec01267",
+      "metrics": {
+        "durationSeconds": 0.62,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -17.574,
+        "oversampledPeakDbfs": -17.567,
+        "rmsDbfs": -34.168,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1243.5,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "bow_release",
+      "variation": 1,
+      "path": "clips/bow_release_v01.wav",
+      "description": "Short string-tension snap, damped bow-limb modes and a little arrow air.",
+      "sha256": "6b348b8a4f6c011b427c302508c0f52bd58e245dd8c992643d7e72517e83bec6",
+      "metrics": {
+        "durationSeconds": 0.25,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.36,
+        "oversampledPeakDbfs": -5.113,
+        "rmsDbfs": -28.329,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1912.9,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "bow_release",
+      "variation": 2,
+      "path": "clips/bow_release_v02.wav",
+      "description": "Short string-tension snap, damped bow-limb modes and a little arrow air.",
+      "sha256": "f58ef14d49e81077a0dc5424e7235d54eec348ccdb74abad7c2fdb38e27f9b27",
+      "metrics": {
+        "durationSeconds": 0.25,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -6.043,
+        "oversampledPeakDbfs": -5.851,
+        "rmsDbfs": -27.574,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1838.5,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "bow_release",
+      "variation": 3,
+      "path": "clips/bow_release_v03.wav",
+      "description": "Short string-tension snap, damped bow-limb modes and a little arrow air.",
+      "sha256": "bbc0eb0438fcbf4ea4153993239241ef7bc097237a44cd5575b9d43f1b21ffc2",
+      "metrics": {
+        "durationSeconds": 0.25,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -6.638,
+        "oversampledPeakDbfs": -6.471,
+        "rmsDbfs": -28.403,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1793.9,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "bow_pierce",
+      "variation": 1,
+      "path": "clips/bow_pierce_v01.wav",
+      "description": "Dry puncture, fabric drag and brief shaft damping; no gun-like boom.",
+      "sha256": "42efbff3edaa45193e5de2f0bb34b9b8c9d68ceddd41a6ebe8781079547aea67",
+      "metrics": {
+        "durationSeconds": 0.22,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -6.723,
+        "oversampledPeakDbfs": -6.591,
+        "rmsDbfs": -29.382,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1493.2,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "bow_pierce",
+      "variation": 2,
+      "path": "clips/bow_pierce_v02.wav",
+      "description": "Dry puncture, fabric drag and brief shaft damping; no gun-like boom.",
+      "sha256": "ab67dbc382530e6a135c652ff651d14ef5a4db30e0a3dd3bb8521bb7c01748ec",
+      "metrics": {
+        "durationSeconds": 0.22,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -4.731,
+        "oversampledPeakDbfs": -4.726,
+        "rmsDbfs": -30.369,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1884.8,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "bow_pierce",
+      "variation": 3,
+      "path": "clips/bow_pierce_v03.wav",
+      "description": "Dry puncture, fabric drag and brief shaft damping; no gun-like boom.",
+      "sha256": "849f7ae7c10d998ea6ea53ee4c80ebf5f591ff14b561e29ffc06f8146fbd54c8",
+      "metrics": {
+        "durationSeconds": 0.22,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -6.487,
+        "oversampledPeakDbfs": -6.481,
+        "rmsDbfs": -29.312,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1751.6,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "bow_heavy",
+      "variation": 1,
+      "path": "clips/bow_heavy_v01.wav",
+      "description": "The same puncture identity with slightly firmer wood/body contact.",
+      "sha256": "369c886452f6653693ee6329033b5cee63e6ed4865a2e170be119abb99bc3a35",
+      "metrics": {
+        "durationSeconds": 0.31,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.857,
+        "oversampledPeakDbfs": -5.852,
+        "rmsDbfs": -28.583,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1438.6,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "bow_heavy",
+      "variation": 2,
+      "path": "clips/bow_heavy_v02.wav",
+      "description": "The same puncture identity with slightly firmer wood/body contact.",
+      "sha256": "62d1cfca61c9895b9b177c9ad276f63cbcf2950207483bfc5fa04baa92aa9250",
+      "metrics": {
+        "durationSeconds": 0.31,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -6.961,
+        "oversampledPeakDbfs": -6.945,
+        "rmsDbfs": -29.009,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1681.9,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "bow_heavy",
+      "variation": 3,
+      "path": "clips/bow_heavy_v03.wav",
+      "description": "The same puncture identity with slightly firmer wood/body contact.",
+      "sha256": "f9fc75818d27d1c053a8cede49a17925758bdd4dd4d9a5c288def2d588c1d676",
+      "metrics": {
+        "durationSeconds": 0.31,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -4.734,
+        "oversampledPeakDbfs": -4.328,
+        "rmsDbfs": -28.756,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1445.0,
+        "finite": true
+      },
+      "sourceBank": "v3-physical"
+    },
+    {
+      "cue": "fir_charge",
+      "variation": 1,
+      "path": "clips/fir_charge_v01.wav",
+      "description": "Irregular gathering flame with a modest compression; quieter than the impact.",
+      "sha256": "403231259297c15ce851d19e20d4f77577f8a42bc61dfceba72da9fdc08b13b2",
+      "metrics": {
+        "durationSeconds": 0.64,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -12.755,
+        "oversampledPeakDbfs": -12.604,
+        "rmsDbfs": -29.226,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1457.2,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "fir_charge",
+      "variation": 2,
+      "path": "clips/fir_charge_v02.wav",
+      "description": "Irregular gathering flame with a modest compression; quieter than the impact.",
+      "sha256": "bbd551286964ed89aa942070d0e318660261a46b45dcf41809347b671f5a95c8",
+      "metrics": {
+        "durationSeconds": 0.64,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -11.743,
+        "oversampledPeakDbfs": -11.723,
+        "rmsDbfs": -28.994,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1405.1,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "fir_charge",
+      "variation": 3,
+      "path": "clips/fir_charge_v03.wav",
+      "description": "Irregular gathering flame with a modest compression; quieter than the impact.",
+      "sha256": "c4ecc91ffcd3f5e0e7a8361a9fc9b94f79b20b93f55b726ccb46b487589dfd7e",
+      "metrics": {
+        "durationSeconds": 0.64,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -10.337,
+        "oversampledPeakDbfs": -10.315,
+        "rmsDbfs": -29.29,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1241.3,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "fir_burst",
+      "variation": 1,
+      "path": "clips/fir_burst_v01.wav",
+      "description": "Defined ignition contact, short low-mid pressure volume, rolling combustion and sparse embers.",
+      "sha256": "adc7fbccd592c7124b160c2f5f89e1cfae9bc8e97d3838be153f48b52331b16f",
+      "metrics": {
+        "durationSeconds": 0.82,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -3.876,
+        "oversampledPeakDbfs": -3.871,
+        "rmsDbfs": -24.491,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1111.7,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "fir_burst",
+      "variation": 2,
+      "path": "clips/fir_burst_v02.wav",
+      "description": "Defined ignition contact, short low-mid pressure volume, rolling combustion and sparse embers.",
+      "sha256": "2a23262eedadba2d65a784d58d0468f85f1f6f019f715ebde8f175d58c9ba049",
+      "metrics": {
+        "durationSeconds": 0.82,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -3.944,
+        "oversampledPeakDbfs": -3.748,
+        "rmsDbfs": -24.647,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1196.4,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "fir_burst",
+      "variation": 3,
+      "path": "clips/fir_burst_v03.wav",
+      "description": "Defined ignition contact, short low-mid pressure volume, rolling combustion and sparse embers.",
+      "sha256": "0d47e177764f5dfb134e330b037fdf4c9b6839c1f84cfb8750a1bd348ee1c35e",
+      "metrics": {
+        "durationSeconds": 0.82,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -4.355,
+        "oversampledPeakDbfs": -4.325,
+        "rmsDbfs": -25.291,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1074.4,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "fir_wall",
+      "variation": 1,
+      "path": "clips/fir_wall_v01.wav",
+      "description": "One small ignition followed by sparse natural flame tongues; no repeating explosions.",
+      "sha256": "890d80d1c685a13efba730a15afeb44df9a6cd6522f53e51105ccd520b0ccf5e",
+      "metrics": {
+        "durationSeconds": 2.6,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -17.037,
+        "oversampledPeakDbfs": -16.985,
+        "rmsDbfs": -34.584,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1568.3,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "fir_wall",
+      "variation": 2,
+      "path": "clips/fir_wall_v02.wav",
+      "description": "One small ignition followed by sparse natural flame tongues; no repeating explosions.",
+      "sha256": "b00dcb12610723597bb77e12bc1d8cf9dea96e24d4fc8e7bfca8ad131776cf39",
+      "metrics": {
+        "durationSeconds": 2.6,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -15.576,
+        "oversampledPeakDbfs": -15.557,
+        "rmsDbfs": -34.003,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1485.7,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "fir_wall",
+      "variation": 3,
+      "path": "clips/fir_wall_v03.wav",
+      "description": "One small ignition followed by sparse natural flame tongues; no repeating explosions.",
+      "sha256": "89edd33b82e83e1d3acc59a278467ea8b9c38114cf45e213417ee3ddaf139b89",
+      "metrics": {
+        "durationSeconds": 2.6,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -15.761,
+        "oversampledPeakDbfs": -15.751,
+        "rmsDbfs": -34.32,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1418.8,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "thu_charge",
+      "variation": 1,
+      "path": "clips/thu_charge_v01.wav",
+      "description": "Separated small pre-discharge arcs with a short pressure contact; no tonal rise or sustained hum.",
+      "sha256": "5c1aa56c83192371c1838096d03654a4f4df4803ebeac06626ce7b8de34d85dc",
+      "metrics": {
+        "durationSeconds": 0.44,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -17.928,
+        "oversampledPeakDbfs": -17.923,
+        "rmsDbfs": -42.69,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 3294.0,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "thu_charge",
+      "variation": 2,
+      "path": "clips/thu_charge_v02.wav",
+      "description": "Separated small pre-discharge arcs with a short pressure contact; no tonal rise or sustained hum.",
+      "sha256": "b381425f1fb003fa70499d071d65ac08dd0b455899ad94c881720baef65a1807",
+      "metrics": {
+        "durationSeconds": 0.44,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -19.839,
+        "oversampledPeakDbfs": -19.833,
+        "rmsDbfs": -42.43,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 3315.6,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "thu_charge",
+      "variation": 3,
+      "path": "clips/thu_charge_v03.wav",
+      "description": "Separated small pre-discharge arcs with a short pressure contact; no tonal rise or sustained hum.",
+      "sha256": "cf617080cd3c833d2569c9b9bb06e94591151bb4104f1d7a4fe847d185d56578",
+      "metrics": {
+        "durationSeconds": 0.44,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -17.96,
+        "oversampledPeakDbfs": -17.955,
+        "rmsDbfs": -42.232,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 2971.6,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "thu_crack",
+      "variation": 1,
+      "path": "clips/thu_crack_v01.wav",
+      "description": "A dry leading fracture, an audible 20–100ms low-mid electric shock body, and two subordinate short aftercracks.",
+      "sha256": "f6da78691928ce155666df7efbb168f19e64f054a9ecd67150835434fdf49240",
+      "metrics": {
+        "durationSeconds": 0.44,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -3.876,
+        "oversampledPeakDbfs": -3.846,
+        "rmsDbfs": -25.245,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 772.0,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "thu_crack",
+      "variation": 2,
+      "path": "clips/thu_crack_v02.wav",
+      "description": "A dry leading fracture, an audible 20–100ms low-mid electric shock body, and two subordinate short aftercracks.",
+      "sha256": "371940e1c38d1bb5bd20685389e5a1c0ce744f8042a08489e6215ae70286c57e",
+      "metrics": {
+        "durationSeconds": 0.44,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -3.876,
+        "oversampledPeakDbfs": -3.871,
+        "rmsDbfs": -26.461,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 748.3,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "thu_crack",
+      "variation": 3,
+      "path": "clips/thu_crack_v03.wav",
+      "description": "A dry leading fracture, an audible 20–100ms low-mid electric shock body, and two subordinate short aftercracks.",
+      "sha256": "a6acb6d2ebd3bfa36ff85443ece75e24e78fdcdb233184e5d334995287c42f36",
+      "metrics": {
+        "durationSeconds": 0.44,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -3.876,
+        "oversampledPeakDbfs": -3.735,
+        "rmsDbfs": -24.941,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 796.4,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "thu_network",
+      "variation": 1,
+      "path": "clips/thu_network_v01.wav",
+      "description": "A strong first discharge with a compact thunder body, followed by weaker grouped arcs at 0.25 and 0.50 seconds.",
+      "sha256": "18785e75ac7d4a7cf237890757368fbdcf56f7c60c9619d356bfc3044e6793ed",
+      "metrics": {
+        "durationSeconds": 1.1,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -3.876,
+        "oversampledPeakDbfs": -3.8,
+        "rmsDbfs": -27.584,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 866.9,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "thu_network",
+      "variation": 2,
+      "path": "clips/thu_network_v02.wav",
+      "description": "A strong first discharge with a compact thunder body, followed by weaker grouped arcs at 0.25 and 0.50 seconds.",
+      "sha256": "0d696880277e0519dd3799bf085052090ca6be6958e53d5fa6b8d7877f9220c5",
+      "metrics": {
+        "durationSeconds": 1.1,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -3.876,
+        "oversampledPeakDbfs": -3.871,
+        "rmsDbfs": -28.606,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 960.0,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    },
+    {
+      "cue": "thu_network",
+      "variation": 3,
+      "path": "clips/thu_network_v03.wav",
+      "description": "A strong first discharge with a compact thunder body, followed by weaker grouped arcs at 0.25 and 0.50 seconds.",
+      "sha256": "83f896beb6a0deb0e3b9206d6712b06dc962138ffeeb17b208d8f2e1e2ef9aae",
+      "metrics": {
+        "durationSeconds": 1.1,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -3.876,
+        "oversampledPeakDbfs": -3.796,
+        "rmsDbfs": -28.443,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 957.5,
+        "finite": true
+      },
+      "sourceBank": "v4-elemental"
+    }
+  ],
+  "objectiveChanges": [
+    {
+      "cue": "fir_charge",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 0.64,
+        "low45To180HzEnergyPercent": 0.08,
+        "high3500To10000HzEnergyPercent": 4.478,
+        "first20msEnergyPercent": 0.0,
+        "energyAfter100msPercent": 92.051,
+        "effectiveEndMinus40DbSeconds": 0.59617,
+        "periodicityPeak90To1800Hz": 0.11063
+      },
+      "after": {
+        "durationSeconds": 0.64,
+        "low45To180HzEnergyPercent": 1.255,
+        "high3500To10000HzEnergyPercent": 4.255,
+        "first20msEnergyPercent": 0.0,
+        "energyAfter100msPercent": 93.72,
+        "effectiveEndMinus40DbSeconds": 0.60694,
+        "periodicityPeak90To1800Hz": 0.09969
+      }
+    },
+    {
+      "cue": "fir_burst",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 0.82,
+        "low45To180HzEnergyPercent": 0.23,
+        "high3500To10000HzEnergyPercent": 5.399,
+        "first20msEnergyPercent": 4.118,
+        "energyAfter100msPercent": 42.228,
+        "effectiveEndMinus40DbSeconds": 0.66379,
+        "periodicityPeak90To1800Hz": 0.12175
+      },
+      "after": {
+        "durationSeconds": 0.82,
+        "low45To180HzEnergyPercent": 8.187,
+        "high3500To10000HzEnergyPercent": 7.824,
+        "first20msEnergyPercent": 27.078,
+        "energyAfter100msPercent": 24.261,
+        "effectiveEndMinus40DbSeconds": 0.67957,
+        "periodicityPeak90To1800Hz": 0.13889
+      }
+    },
+    {
+      "cue": "fir_wall",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 2.6,
+        "low45To180HzEnergyPercent": 0.131,
+        "high3500To10000HzEnergyPercent": 3.82,
+        "first20msEnergyPercent": 0.0,
+        "energyAfter100msPercent": 98.993,
+        "effectiveEndMinus40DbSeconds": 2.35429,
+        "periodicityPeak90To1800Hz": 0.13795
+      },
+      "after": {
+        "durationSeconds": 2.6,
+        "low45To180HzEnergyPercent": 0.433,
+        "high3500To10000HzEnergyPercent": 4.523,
+        "first20msEnergyPercent": 0.0,
+        "energyAfter100msPercent": 97.188,
+        "effectiveEndMinus40DbSeconds": 2.32499,
+        "periodicityPeak90To1800Hz": 0.17001
+      }
+    },
+    {
+      "cue": "thu_charge",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 0.44,
+        "low45To180HzEnergyPercent": 0.002,
+        "high3500To10000HzEnergyPercent": 52.368,
+        "first20msEnergyPercent": 0.0,
+        "energyAfter100msPercent": 87.598,
+        "effectiveEndMinus40DbSeconds": 0.37379,
+        "periodicityPeak90To1800Hz": 0.14497
+      },
+      "after": {
+        "durationSeconds": 0.44,
+        "low45To180HzEnergyPercent": 0.13,
+        "high3500To10000HzEnergyPercent": 35.376,
+        "first20msEnergyPercent": 0.0,
+        "energyAfter100msPercent": 93.515,
+        "effectiveEndMinus40DbSeconds": 0.4076,
+        "periodicityPeak90To1800Hz": 0.17019
+      }
+    },
+    {
+      "cue": "thu_crack",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 0.44,
+        "low45To180HzEnergyPercent": 0.653,
+        "high3500To10000HzEnergyPercent": 30.684,
+        "first20msEnergyPercent": 95.324,
+        "energyAfter100msPercent": 0.0,
+        "effectiveEndMinus40DbSeconds": 0.08204,
+        "periodicityPeak90To1800Hz": 0.31325
+      },
+      "after": {
+        "durationSeconds": 0.44,
+        "low45To180HzEnergyPercent": 7.296,
+        "high3500To10000HzEnergyPercent": 8.256,
+        "first20msEnergyPercent": 62.962,
+        "energyAfter100msPercent": 0.297,
+        "effectiveEndMinus40DbSeconds": 0.1642,
+        "periodicityPeak90To1800Hz": 0.31576
+      }
+    },
+    {
+      "cue": "thu_network",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 1.1,
+        "low45To180HzEnergyPercent": 0.693,
+        "high3500To10000HzEnergyPercent": 25.524,
+        "first20msEnergyPercent": 81.462,
+        "energyAfter100msPercent": 15.166,
+        "effectiveEndMinus40DbSeconds": 0.54277,
+        "periodicityPeak90To1800Hz": 0.29633
+      },
+      "after": {
+        "durationSeconds": 1.1,
+        "low45To180HzEnergyPercent": 10.098,
+        "high3500To10000HzEnergyPercent": 10.549,
+        "first20msEnergyPercent": 52.489,
+        "energyAfter100msPercent": 11.302,
+        "effectiveEndMinus40DbSeconds": 0.59172,
+        "periodicityPeak90To1800Hz": 0.15676
+      }
+    }
+  ],
+  "outputs": [
+    {
+      "id": "war-15s",
+      "title": "破军战技 · 爆发增强版",
+      "wav": "demos/war-15s.wav",
+      "mp3": "demos/war-15s.mp3",
+      "master": {
+        "durationSeconds": 15.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.9269,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": 0.0,
+        "maxAdjacentSampleStep": 0.377716064453125,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 15.034535,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -4.2179,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": 0.0,
+        "maxAdjacentSampleStep": 0.374359130859375,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -24.09,
+        "truePeakDbtp": -4.17,
+        "durationDeltaFromMasterSeconds": 0.034535
+      },
+      "wavSha256": "53437af0baa3a698613481262523de867c07c117d358ac323ec71134af387bd9",
+      "mp3Sha256": "edb3ac9a368fc0f58da2a6cf5ca85f8fa257db2b036cfcf05086c35dceecb2a3",
+      "mp3Bytes": 361289,
+      "encoder": "mp3_mf",
+      "profession": "WAR",
+      "cues": "demos/war-15s.cues.json",
+      "markers": [
+        {
+          "start": 0,
+          "end": 4,
+          "title": "普攻"
+        },
+        {
+          "start": 4,
+          "end": 8,
+          "title": "代表技能"
+        },
+        {
+          "start": 8,
+          "end": 11,
+          "title": "暴击"
+        },
+        {
+          "start": 11,
+          "end": 15,
+          "title": "击杀"
+        }
+      ]
+    },
+    {
+      "id": "bow-15s",
+      "title": "逐风弓术 · 爆发增强版",
+      "wav": "demos/bow-15s.wav",
+      "mp3": "demos/bow-15s.mp3",
+      "master": {
+        "durationSeconds": 15.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -4.2455,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0008,
+        "maxAdjacentSampleStep": 0.4984130859375,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 15.034535,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.299,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0015,
+        "maxAdjacentSampleStep": 0.553680419921875,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -25.88,
+        "truePeakDbtp": -2.86,
+        "durationDeltaFromMasterSeconds": 0.034535
+      },
+      "wavSha256": "3089241d6e91e673828627c0dc2c11030eb79e051b665ca0bb00142471eb7596",
+      "mp3Sha256": "764acb3ff0ca4238cae192b2964fb95fdebf2c30636e04fec086759148d80404",
+      "mp3Bytes": 361289,
+      "encoder": "mp3_mf",
+      "profession": "BOW",
+      "cues": "demos/bow-15s.cues.json",
+      "markers": [
+        {
+          "start": 0,
+          "end": 4,
+          "title": "普攻"
+        },
+        {
+          "start": 4,
+          "end": 8,
+          "title": "代表技能"
+        },
+        {
+          "start": 8,
+          "end": 11,
+          "title": "暴击"
+        },
+        {
+          "start": 11,
+          "end": 15,
+          "title": "击杀"
+        }
+      ]
+    },
+    {
+      "id": "fir-15s",
+      "title": "烈焰秘术 · 爆发增强版",
+      "wav": "demos/fir-15s.wav",
+      "mp3": "demos/fir-15s.mp3",
+      "master": {
+        "durationSeconds": 15.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -4.4466,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0006,
+        "maxAdjacentSampleStep": 0.374176025390625,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 15.034535,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -4.5279,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0008,
+        "maxAdjacentSampleStep": 0.36480712890625,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -22.95,
+        "truePeakDbtp": -4.54,
+        "durationDeltaFromMasterSeconds": 0.034535
+      },
+      "wavSha256": "c2bd1814c846652f7cefecf57546bc1c3714941e0a4f60715541f5515dd683bb",
+      "mp3Sha256": "fd7ae11a07ca4a98a67d9d36ce1a03e3c19ca6fc9afd4fb575f0c33ba15eb622",
+      "mp3Bytes": 361289,
+      "encoder": "mp3_mf",
+      "profession": "FIR",
+      "cues": "demos/fir-15s.cues.json",
+      "markers": [
+        {
+          "start": 0,
+          "end": 4,
+          "title": "普攻"
+        },
+        {
+          "start": 4,
+          "end": 8,
+          "title": "代表技能"
+        },
+        {
+          "start": 8,
+          "end": 11,
+          "title": "暴击"
+        },
+        {
+          "start": 11,
+          "end": 15,
+          "title": "击杀"
+        }
+      ]
+    },
+    {
+      "id": "thu-15s",
+      "title": "雷霆秘术 · 爆发增强版",
+      "wav": "demos/thu-15s.wav",
+      "mp3": "demos/thu-15s.mp3",
+      "master": {
+        "durationSeconds": 15.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.9156,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": 0.0,
+        "maxAdjacentSampleStep": 0.45269775390625,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 15.034535,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.0586,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": 0.0,
+        "maxAdjacentSampleStep": 0.45355224609375,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -23.83,
+        "truePeakDbtp": -3.05,
+        "durationDeltaFromMasterSeconds": 0.034535
+      },
+      "wavSha256": "d319826686148cbd309eee8a0b57448da2842d7978be7a04755cb535bd5f19e8",
+      "mp3Sha256": "e8c2edcebc1f7ed4bf0fb1a39eef7646dec5a674ed0a2ec0a5d90103f85c5c0e",
+      "mp3Bytes": 361289,
+      "encoder": "mp3_mf",
+      "profession": "THU",
+      "cues": "demos/thu-15s.cues.json",
+      "markers": [
+        {
+          "start": 0,
+          "end": 4,
+          "title": "普攻"
+        },
+        {
+          "start": 4,
+          "end": 8,
+          "title": "代表技能"
+        },
+        {
+          "start": 8,
+          "end": 11,
+          "title": "暴击"
+        },
+        {
+          "start": 11,
+          "end": 15,
+          "title": "击杀"
+        }
+      ]
+    },
+    {
+      "id": "four-classes-v4",
+      "title": "剑与火 · 四职业爆发增强版",
+      "wav": "audition/four-classes-v4.wav",
+      "mp3": "audition/four-classes-v4.mp3",
+      "master": {
+        "durationSeconds": 66.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.9156,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0004,
+        "maxAdjacentSampleStep": 0.4984130859375,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 66.051678,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.9111,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0007,
+        "maxAdjacentSampleStep": 0.49169921875,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -23.91,
+        "truePeakDbtp": -3.81,
+        "durationDeltaFromMasterSeconds": 0.051678
+      },
+      "wavSha256": "3f8395b3d222046b72b130417786c0e12a22d4339dc6813649eee5ad5dd426c2",
+      "mp3Sha256": "4bf389075ac1dd2765c93e433b123a3b58ad7b6bd95a7a5e95bdecfc9ed89091",
+      "mp3Bytes": 1583873,
+      "encoder": "mp3_mf",
+      "markers": [
+        {
+          "id": "WAR",
+          "title": "破军战技",
+          "start": 0.0,
+          "end": 15.0,
+          "source": "demos/war-15s.wav"
+        },
+        {
+          "id": "BOW",
+          "title": "逐风弓术",
+          "start": 17.0,
+          "end": 32.0,
+          "source": "demos/bow-15s.wav"
+        },
+        {
+          "id": "FIR",
+          "title": "烈焰秘术",
+          "start": 34.0,
+          "end": 49.0,
+          "source": "demos/fir-15s.wav"
+        },
+        {
+          "id": "THU",
+          "title": "雷霆秘术",
+          "start": 51.0,
+          "end": 66.0,
+          "source": "demos/thu-15s.wav"
+        }
+      ]
+    },
+    {
+      "id": "spells-v4",
+      "title": "剑与火 · 火焰与雷霆爆发增强",
+      "wav": "audition/spells-v4.wav",
+      "mp3": "audition/spells-v4.mp3",
+      "master": {
+        "durationSeconds": 32.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.9156,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0003,
+        "maxAdjacentSampleStep": 0.45269775390625,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 32.040249,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.9235,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0005,
+        "maxAdjacentSampleStep": 0.457244873046875,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -23.11,
+        "truePeakDbtp": -3.73,
+        "durationDeltaFromMasterSeconds": 0.040249
+      },
+      "wavSha256": "fd92590aa7087d666db170daacdaa90e4d1166951f395a55bf8265acc62a5d1a",
+      "mp3Sha256": "6e7fdf17a806a72b0f584b1e57d5df3c5d9f0d9c5a119b7e11f858562793b37d",
+      "mp3Bytes": 768824,
+      "encoder": "mp3_mf",
+      "markers": [
+        {
+          "id": "FIR",
+          "title": "烈焰秘术",
+          "start": 0.0,
+          "end": 15.0,
+          "source": "demos/fir-15s.wav"
+        },
+        {
+          "id": "THU",
+          "title": "雷霆秘术",
+          "start": 17.0,
+          "end": 32.0,
+          "source": "demos/thu-15s.wav"
+        }
+      ]
+    },
+    {
+      "id": "spells-v3-v4",
+      "title": "剑与火 · 火雷V3与V4无损对照",
+      "wav": "audition/spells-v3-v4.wav",
+      "mp3": "audition/spells-v3-v4.mp3",
+      "master": {
+        "durationSeconds": 64.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8745,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0006,
+        "maxAdjacentSampleStep": 0.38751220703125,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 64.040249,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.9791,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0009,
+        "maxAdjacentSampleStep": 0.36767578125,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -24.24,
+        "truePeakDbtp": -3.98,
+        "durationDeltaFromMasterSeconds": 0.040249
+      },
+      "wavSha256": "4f3b1dfbea2097e74b63697f8539bf03a07c7c0c3ea2137aa8e8fcc6d0d70ca2",
+      "mp3Sha256": "e00c757e28aa1ec2b2ae1ba7f5be5915a5ad7694b99418b781d99a6f151d11c3",
+      "mp3Bytes": 1535672,
+      "encoder": "mp3_mf",
+      "markers": [
+        {
+          "profession": "FIR",
+          "version": "v3",
+          "start": 0.0,
+          "end": 15.0,
+          "targetLufs": -23.0,
+          "measuredPcmLufs": -22.99,
+          "linearGain": 0.998849369936505
+        },
+        {
+          "profession": "FIR",
+          "version": "v4",
+          "start": 16.0,
+          "end": 31.0,
+          "targetLufs": -23.0,
+          "measuredPcmLufs": -22.99,
+          "linearGain": 1.2808550945362784
+        },
+        {
+          "profession": "THU",
+          "version": "v3",
+          "start": 33.0,
+          "end": 48.0,
+          "targetLufs": -29.7,
+          "measuredPcmLufs": -29.7,
+          "linearGain": 0.9660508789898133
+        },
+        {
+          "profession": "THU",
+          "version": "v4",
+          "start": 49.0,
+          "end": 64.0,
+          "targetLufs": -29.7,
+          "measuredPcmLufs": -29.7,
+          "linearGain": 0.7269423992141196
+        }
+      ]
+    },
+    {
+      "id": "in-music-v4",
+      "title": "剑与火 · 爆发增强与既有音乐",
+      "wav": "audition/in-music-v4.wav",
+      "mp3": "audition/in-music-v4.mp3",
+      "master": {
+        "durationSeconds": 45.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -5.6572,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.1014,
+        "maxAdjacentSampleStep": 0.314178466796875,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 45.049229,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -5.4552,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.104,
+        "maxAdjacentSampleStep": 0.33245849609375,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -27.65,
+        "truePeakDbtp": -5.46,
+        "durationDeltaFromMasterSeconds": 0.049229
+      },
+      "wavSha256": "e086cd420eb370f9a0b3967e56de4ec006e4328408ae919cd2e24cfe55494a15",
+      "mp3Sha256": "5067d497cb5b9920249fd21d7532ed9b87a7ac2e65f9f90d91b1edc5f695a234",
+      "mp3Bytes": 1080572,
+      "encoder": "mp3_mf",
+      "markers": [
+        {
+          "start": 0,
+          "end": 15,
+          "title": "探索"
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "title": "四职业交战"
+        },
+        {
+          "start": 30,
+          "end": 45,
+          "title": "战后"
+        }
+      ],
+      "offlineMix": true,
+      "musicSource": "source-art/audio/direction-studies-v2/music/a-adaptive-demo/a-adaptive-demo.wav",
+      "musicLinearGain": 0.5011872336272722,
+      "battleLinearGain": 0.75,
+      "battleEvents": [
+        {
+          "profession": "WAR",
+          "cue": "war_swing",
+          "variation": 1,
+          "phase": "windup-release",
+          "startSeconds": 0.8,
+          "startSample": 35280,
+          "gain": 0.46799999999999997,
+          "durationSeconds": 0.22,
+          "pan": 0,
+          "globalFamilyGain": 1.3867558288718884,
+          "sourceDurationSeconds": 0.22,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "WAR",
+          "cue": "war_slash",
+          "variation": 1,
+          "phase": "contact",
+          "startSeconds": 0.92,
+          "startSample": 40572,
+          "gain": 0.9585,
+          "durationSeconds": 0.25,
+          "pan": 0,
+          "globalFamilyGain": 1.3867558288718884,
+          "sourceDurationSeconds": 0.25,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "BOW",
+          "cue": "bow_draw",
+          "variation": 2,
+          "phase": "windup",
+          "startSeconds": 4.0,
+          "startSample": 176400,
+          "gain": 0.3,
+          "durationSeconds": 0.45,
+          "pan": 0,
+          "globalFamilyGain": 1.494514042366458,
+          "sourceDurationSeconds": 0.62,
+          "releaseDeadlineSeconds": 4.45
+        },
+        {
+          "profession": "BOW",
+          "cue": "bow_release",
+          "variation": 2,
+          "phase": "release",
+          "startSeconds": 4.45,
+          "startSample": 196245,
+          "gain": 0.9,
+          "durationSeconds": 0.25,
+          "pan": 0,
+          "globalFamilyGain": 1.494514042366458,
+          "sourceDurationSeconds": 0.25,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "BOW",
+          "cue": "bow_pierce",
+          "variation": 2,
+          "phase": "contact",
+          "startSeconds": 4.69,
+          "startSample": 206829,
+          "gain": 1.01175,
+          "durationSeconds": 0.22,
+          "pan": 0,
+          "globalFamilyGain": 1.494514042366458,
+          "sourceDurationSeconds": 0.22,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "FIR",
+          "cue": "fir_charge",
+          "variation": 3,
+          "phase": "windup",
+          "startSeconds": 7.3,
+          "startSample": 321930,
+          "gain": 0.3,
+          "durationSeconds": 0.46,
+          "pan": 0,
+          "globalFamilyGain": 1.2808550945362784,
+          "sourceDurationSeconds": 0.64,
+          "releaseDeadlineSeconds": 7.76
+        },
+        {
+          "profession": "FIR",
+          "cue": "fir_burst",
+          "variation": 2,
+          "phase": "release",
+          "startSeconds": 7.76,
+          "startSample": 342216,
+          "gain": 0.09200000000000001,
+          "durationSeconds": 0.82,
+          "pan": 0,
+          "globalFamilyGain": 1.2808550945362784,
+          "sourceDurationSeconds": 0.82,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "FIR",
+          "cue": "fir_burst",
+          "variation": 3,
+          "phase": "contact",
+          "startSeconds": 8.02,
+          "startSample": 353682,
+          "gain": 0.9,
+          "durationSeconds": 0.82,
+          "pan": 0,
+          "globalFamilyGain": 1.2808550945362784,
+          "sourceDurationSeconds": 0.82,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "THU",
+          "cue": "thu_charge",
+          "variation": 1,
+          "phase": "windup",
+          "startSeconds": 10.6,
+          "startSample": 467460,
+          "gain": 0.33,
+          "durationSeconds": 0.38,
+          "pan": 0,
+          "globalFamilyGain": 1.3851601859244613,
+          "sourceDurationSeconds": 0.44,
+          "releaseDeadlineSeconds": 10.98
+        },
+        {
+          "profession": "THU",
+          "cue": "thu_crack",
+          "variation": 2,
+          "phase": "release",
+          "startSeconds": 10.98,
+          "startSample": 484218,
+          "gain": 0.12,
+          "durationSeconds": 0.44,
+          "pan": 0,
+          "globalFamilyGain": 1.3851601859244613,
+          "sourceDurationSeconds": 0.44,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "THU",
+          "cue": "thu_network",
+          "variation": 1,
+          "phase": "contact",
+          "startSeconds": 11.08,
+          "startSample": 488628,
+          "gain": 0.95,
+          "durationSeconds": 1.1,
+          "pan": 0,
+          "globalFamilyGain": 1.3851601859244613,
+          "sourceDurationSeconds": 1.1,
+          "releaseDeadlineSeconds": null
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "uniqueSourceClips": 42,
+    "all42SourceHashesUnique": true,
+    "physicalSourceBankUnchanged": true,
+    "noDecodedPreviewClipping": true,
+    "pcmComparisonPairsWithinPoint2Lufs": true
+  }
+}

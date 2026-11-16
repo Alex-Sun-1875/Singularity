@@ -3,6 +3,7 @@ import {GROWING_EQUIPMENT,growingStats} from '../data/GrowingEquipment';
 import {lifecycleGroup} from '../data/EquipmentLifecycle';
 import {itemForgingBonus} from '../../crafting/common/EquipmentForging';
 import {freshForgingBonus,type RandomForgingBonus} from '../../crafting/data/EquipmentForging';
+import {equippedGemBonus} from '../../gems/common/GemWorkshop';
 import type {Attribute} from '../../progression/common/Progression';
 import type {GameState} from '../../../core/GameSession';
 import type {DiceView} from '../../progression/common/SkillChecks';
@@ -11,7 +12,7 @@ export interface GearBonus {maxHp:number;armor:number;power:number}
 export interface EquipmentRoll {item:string;source:string;level:number;face:number|null;claimed:boolean}
 export type EquipmentRollBook=Record<string,EquipmentRoll>;
 export interface GearOutcome {name:string;bonus:GearBonus;upgrade:string|null;description:string}
-export interface EquipmentDiceView {item:string;face:number|null;outcome:GearOutcome|null;possibleUpgrade:string|null;upgradeOwned:boolean;bonus:GearBonus}
+export interface EquipmentDiceView {item:string;level:number;face:number|null;outcome:GearOutcome|null;possibleUpgrade:string|null;upgradeOwned:boolean;bonus:GearBonus}
 const EMPTY:GearBonus={maxHp:0,armor:0,power:0};
 export const GEAR_GRADES=['普通','精良','稀有','史诗','传奇','神器'];
 function word(seed:number,key:string){let h=seed>>>0;for(let i=0;i<key.length;i++)h=Math.imul(h^key.charCodeAt(i),16777619)>>>0;h^=h>>>16;h=Math.imul(h,0x7feb352d);h^=h>>>15;return(h^(h>>>16))>>>0;}
@@ -37,27 +38,35 @@ export function equipmentOutcome(seed:number,r:EquipmentRoll):GearOutcome|null {
 }
 export function bonusText(b:GearBonus&Partial<RandomForgingBonus>){return [b.maxHp?`最大生命 +${b.maxHp}`:'',b.armor?`护甲 +${b.armor}%`:'',b.power?`攻击 / 技能伤害 +${b.power}%`:'',b.criticalChance?`暴击率 +${b.criticalChance}%`:'',b.criticalDamage?`暴击伤害 +${b.criticalDamage}%`:'',b.strength?`力量 +${b.strength}`:'',b.dexterity?`敏捷 +${b.dexterity}`:'',b.intellect?`智力 +${b.intellect}`:'',b.vitality?`体质 +${b.vitality}`:''].filter(Boolean).join('\n');}
 export function itemGearBonus(s:GameState,id:string):GearBonus {const r=s.dice?.gear?.[id];return r?.claimed&&r.face!==null?equipmentOutcome(s.seed,r)!.bonus:EMPTY;}
-export function equippedGearBonus(s:GameState):RandomForgingBonus {const result=freshForgingBonus();for(const id of new Set(Object.values(s.equipment).filter((id):id is string=>typeof id==='string'))){const b=itemGearBonus(s,id),f=itemForgingBonus(s,id);result.maxHp+=b.maxHp;result.armor+=b.armor;result.power+=b.power;for(const key of Object.keys(result) as (keyof RandomForgingBonus)[])result[key]+=f[key];}const counts:Record<string,number>={};for(const id of new Set(Object.values(s.equipment).filter((id):id is string=>typeof id==='string'))){const set=EQUIPMENT[id]?.set;if(set)counts[set]=(counts[set]??0)+1;}if((counts.wind??0)>=2)result.criticalChance+=1;if((counts.ember??0)>=2)result.power+=1.5;if((counts.bell??0)>=2)result.power+=1.5;for(const key of Object.keys(result) as (keyof RandomForgingBonus)[])result[key]=Math.round(result[key]*10)/10;return result;}
+export function equippedGearBonus(s:GameState):RandomForgingBonus {
+ const result=freshForgingBonus(),keys=Object.keys(result) as (keyof RandomForgingBonus)[],equipped=new Set(Object.values(s.equipment).filter((id):id is string=>typeof id==='string'));
+ for(const id of equipped){const b=itemGearBonus(s,id),f=itemForgingBonus(s,id);result.maxHp+=b.maxHp;result.armor+=b.armor;result.power+=b.power;for(const key of keys)result[key]+=f[key];}
+ // Gem crystal units and item weights are resolved once by the gem domain.
+ const gems=equippedGemBonus(s);for(const key of keys)result[key]+=gems[key];
+ const counts:Record<string,number>={};for(const id of equipped){const set=EQUIPMENT[id]?.set;if(set)counts[set]=(counts[set]??0)+1;}
+ if((counts.wind??0)>=2)result.criticalChance+=1;if((counts.ember??0)>=2)result.power+=1.5;if((counts.bell??0)>=2)result.power+=1.5;
+ for(const key of keys)result[key]=Math.round(result[key]*1e6)/1e6;
+ return result;
+}
 export function equipmentAttributeBonus(s:GameState,attribute:Attribute,gear=equippedGearBonus(s)){let value=gear[attribute];for(const id of new Set(Object.values(s.equipment).filter((id):id is string=>typeof id==='string')))if(EQUIPMENT[id]?.growthAttribute===attribute)value+=growingStats(id,s.progression.level).attribute;return value;}
 export const effectiveAttribute=(s:GameState,attribute:Attribute,gear=equippedGearBonus(s))=>s.progression.attributes[attribute]+equipmentAttributeBonus(s,attribute,gear);
 export const combatCriticalChance=(s:GameState,gear=equippedGearBonus(s))=>Math.min(.3,.05+.0012*(effectiveAttribute(s,'dexterity',gear)-10)+gear.criticalChance/100);
 export const combatCriticalMultiplier=(s:GameState,gear=equippedGearBonus(s))=>Math.min(2.5,1.5+gear.criticalDamage/100);
 interface Host {state():GameState;grant(item:string,count:number,source:string):void;recalculate():void;changed():void;emit(type:string,text?:string,extra?:Record<string,unknown>):void}
-/** One optional, free roll on a genuinely owned item; no result can remove it. */
+/** First-acquisition acknowledgement. Old dice records remain valid save evidence. */
 export class EquipmentDice {
  constructor(private host:Host){}
  private get s(){return this.host.state();}
  hasPending():boolean {const gear=this.s.dice.gear;if(gear)for(const id in gear)if(Object.prototype.hasOwnProperty.call(gear,id)&&!gear[id].claimed)return true;return false;}
- enqueue(item:string,source:string,manual=false){if(!EQUIPMENT[item]||EQUIPMENT[item].kind==='spell'||!manual&&source.startsWith('gear-upgrade:'))return;this.s.dice.gear??={};this.s.dice.gear[item]??={item,source,level:this.s.progression.level,face:null,claimed:false};}
+ enqueue(item:string,source:string){if(!EQUIPMENT[item]||EQUIPMENT[item].kind==='spell'||source.startsWith('gear-upgrade:'))return;this.s.dice.gear??={};this.s.dice.gear[item]??={item,source,level:this.s.progression.level,face:null,claimed:false};}
  open(item?:string){if(this.s.dice.active)return false;const r=item?this.s.dice.gear?.[item]:Object.values(this.s.dice?.gear??{}).find(r=>!r.claimed&&!this.s.receipts[`gear-deferred:${r.item}`]);if(!r||r.claimed)return false;this.s.dice.active={id:'gear:'+r.item,area:this.s.area,sourceId:r.source,context:{mode:'normal',modifiers:[],helpDie:false,helpLabel:null}};this.host.changed();return true;}
- view():DiceView|null {const a=this.s.dice.active;if(!a?.id.startsWith('gear:'))return null;const r=this.s.dice.gear![a.id.slice(5)],d=EQUIPMENT[r.item],outcome=equipmentOutcome(this.s.seed,r),possibleUpgrade=equipmentUpgrade(this.s.seed,r);
-  return {id:a.id,title:d.name,prompt:'基础装备已经入手。掷一次锻造骰，可能追加永久属性，或额外发现更高品质的同部位装备。',skillLabel:'余火锻印',abilityLabel:'装备',dc:0,mode:'normal',modifiers:[],help:null,roll:r.face===null?null:{attempt:1,faces:[r.face],kept:r.face,keptIndex:0,bonus:0,assist:0,total:r.face,success:r.face>1,critical:null},attempt:r.face===null?0:1,inspiration:this.s.dice.inspiration,canReroll:false,canCancel:r.face===null,successText:'铸印与额外装备会在确认后结算。',failureText:'基础装备完整保留。',chance:5/6,gear:{item:r.item,face:r.face,outcome,possibleUpgrade,upgradeOwned:!!possibleUpgrade&&!!this.s.inventory[possibleUpgrade],bonus:outcome?.bonus??EMPTY}};
+ view():DiceView|null {const a=this.s.dice.active;if(!a?.id.startsWith('gear:'))return null;const r=this.s.dice.gear![a.id.slice(5)],d=EQUIPMENT[r.item];
+  return {id:a.id,title:d.name,prompt:d.description,skillLabel:'获得装备',abilityLabel:'装备',dc:0,mode:'normal',modifiers:[],help:null,roll:null,attempt:0,inspiration:this.s.dice.inspiration,canReroll:false,canCancel:false,successText:'装备已放入行囊。',failureText:'',chance:1,gear:{item:r.item,level:this.s.progression.level,face:null,outcome:null,possibleUpgrade:null,upgradeOwned:false,bonus:EMPTY}};
  }
- roll(expected:number){const a=this.s.dice.active,r=a?.id.startsWith('gear:')?this.s.dice.gear?.[a.id.slice(5)]:null;if(!r||r.claimed||r.face!==null||expected!==0)return;r.face=equipmentFace(this.s.seed,r);this.host.changed();this.host.emit('check_roll',undefined,{id:a!.id,attempt:1});}
- finish(skip=false){const a=this.s.dice.active,r=a?.id.startsWith('gear:')?this.s.dice.gear?.[a.id.slice(5)]:null;if(!r||r.claimed||!skip&&r.face===null||skip&&r.face!==null)return;
-  r.claimed=true;this.s.receipts['gear-refine:'+r.item]=true;const outcome=equipmentOutcome(this.s.seed,r);
-  if(outcome?.upgrade&&!this.s.inventory[outcome.upgrade])this.host.grant(outcome.upgrade,1,'gear-upgrade:'+r.item);
-  this.s.dice.active=null;this.host.recalculate();this.host.changed();this.host.emit('reward',outcome?`${EQUIPMENT[r.item].name} · ${outcome.name}${bonusText(outcome.bonus)?'：'+bonusText(outcome.bonus).replace(/\n/g,'，'):''}`:`收下${EQUIPMENT[r.item].name}，保留原装品质。`,{id:r.item});
+ finish(){const a=this.s.dice.active,r=a?.id.startsWith('gear:')?this.s.dice.gear?.[a.id.slice(5)]:null;if(!r||r.claimed)return;
+  // A pending result from an older build must not activate a free random bonus.
+  r.face=null;r.claimed=true;this.s.receipts['gear-refine:'+r.item]=true;
+  this.s.dice.active=null;this.host.recalculate();this.host.changed();
  }
 }
 const object=(v:unknown):v is Record<string,any>=>!!v&&typeof v==='object'&&!Array.isArray(v)&&Object.getPrototypeOf(v)===Object.prototype;

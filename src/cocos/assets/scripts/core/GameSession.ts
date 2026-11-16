@@ -2,6 +2,7 @@ import {authoredWaypoint,waypointUnlocked} from '../features/navigation/common/F
 import {navigationText as mapText} from '../features/navigation/locales';
 import {equipmentText as gearText} from '../features/equipment/locales';
 import {bossKind} from '../features/combat/common/BossAwareness';
+import {BossDirectory} from '../features/combat/common/BossDirectory';
 import type { AreaDef, EnemySpawn, ExitDef, GameEvent, InputFrame, InteractionDef, Point, WorldQuery, SkillProjectileMetadata,AttackFeedbackMetadata } from './Contracts';
 import { EQUIPMENT, MERCHANTS, RECIPES, canonicalItem, canonicalMerchant,equipmentPowerMultiplier,equipmentStackLimit, type EquipmentSlot,type ItemDef } from '../features/equipment/data/Equipment';
 import {SKILLS,freshDiceState,skillModifiers,rollMode,drawCheckRoll,checkChance,type DiceState,type DiceView,type CheckContext} from '../features/progression/common/SkillChecks';
@@ -10,38 +11,56 @@ import {EquipmentDice,itemGearBonus,equippedGearBonus,bonusText,effectiveAttribu
 import {equipmentChange} from '../features/equipment/common/EquipmentChange';
 import {EquipmentForging,freshForging,itemForgingView,syncRandomForging,type ForgingState} from '../features/crafting/common/EquipmentForging';
 import {forgingAffixText} from '../features/crafting/data/EquipmentForging';
+import {GemWorkshop,freshGems,itemGemBonus,equippedGemBonus,type GemState} from '../features/gems/common/GemWorkshop';
+import {gemCapacity} from '../features/gems/data/Gems';
+import {gemText} from '../features/gems/locales';
 import {ACTION_NAMES} from '../features/progression/common/SkillChecks';
 import {PureCombat,freshCombat,type CombatState} from '../features/combat/common/PureCombat';
 import {MeleeCombo,meleeCombo,MELEE_INPUT_BUFFER} from '../features/combat/common/MeleeCombo';
+import {COMBAT_TACTICS} from '../features/combat/common/CombatTactics';
+import {tacticsText} from '../features/combat/locales/TacticsText';
 import {freshProgression,allocatedSkillRank,skillPlanRemaining,unlockSkills,awardXp,baseMaxHp,cumulativeXp,progressionView,validateProgression,updateExperienceCurve,type ProgressionState,type Attribute,ATTRIBUTES} from '../features/progression/common/Progression';
 import {PURE_SKILLS,COMBAT_RULES,RETIRED_SPELL_TO_SKILL} from '../features/combat/data/PureSkills';
 import {CAMPAIGN_ENEMY_TEMPLATES,CAMPAIGN_LEVELS,MAIN_XP_EVENTS} from '../features/campaign/data/Campaign';
 import {CAMPAIGN_EVENTS,type CampaignEventDef} from '../features/campaign/data/CampaignEvents';
 import {campaignText} from '../features/campaign/locales';
+import {ChapterTwoEncounters,chapterTwoActionAvailability,chapterTwoEnemyRetired,chapterTwoBattleStopped} from '../features/campaign/common/ChapterTwoEncounters';
+import {chapterTwoAction} from '../features/campaign/data/ChapterTwoEncounters';
+import {encounterText} from '../features/campaign/locales/ChapterTwoEncounterText';
+import {CHAPTER_TWO_SIDE_QUEST_EVENTS,chapterTwoSideQuestEventVisible} from '../features/campaign/data/ChapterTwoSideQuests';
+import {sideQuestText} from '../features/campaign/locales/ChapterTwoSideQuestText';
+import {sideBossById} from '../features/campaign/data/SideBosses';
 import {worldText} from '../features/world/locales';
 import {campaignFighter,combatGroup,CAMPAIGN_FORMATION} from '../features/campaign/data/CampaignBattles';
 import {validateCurrentSnapshot,migrateRemovedOil} from '../features/persistence/common/CombatPersistence';
 import {CampaignLoot} from '../features/campaign/common/CampaignLoot';
+import {peacefulBossTarget,peacefulBossReceipt,peacefulBossRetired} from '../features/campaign/common/PeacefulBosses';
 import {EnemyCombat,enemyProfile,enemyHurtRadius,enemyHealthMultiplier,enemyDamageMultiplier,enemyGuardMultiplier,type EnemyMoveState,type EnemyHazardState,type EnemyProjectileMetadata} from '../features/combat/common/EnemyCombat';
 import {HUNT_ENCOUNTERS,HUNTING_GROUNDS,HUNT_LAYOUT_VERSION,locationEntryLevel,huntingBaseHp} from '../features/world/data/MonsterEcology';
 import {playerCombatAttributes,enemyCombatAttributes,rollContactHit} from '../features/combat/common/CombatAccuracy';
 import {RESOURCE_RULES,resourceProfile,synchronizeResource,migrateClassResource,type ResourceKind} from '../features/combat/common/ClassResource';
 import {SUPPLIES,SUPPLY_LOOT_POLICY,isSupplyId,type SupplyId} from '../features/equipment/data/Supplies';
-import {GROWING_EQUIPMENT,GROWING_BOSS_DROPS,growingStats,growingDescription,growingQuestVisible,growingJournal} from '../features/equipment/data/GrowingEquipment';
+import {GROWING_EQUIPMENT,growingStats,growingDescription,growingQuestVisible,growingJournal} from '../features/equipment/data/GrowingEquipment';
 import {GrowingEquipmentLoot,growingOwned} from '../features/equipment/common/GrowingEquipmentLoot';
 import type {EnemyDamageElement} from '../features/combat/data/EnemyCombat';
-import {ChapterJourney,initializeLifecycleJourney} from '../features/journey/common/ChapterJourney';
+import {ChapterJourney} from '../features/journey/common/ChapterJourney';
 import {CampaignDirector} from '../features/cinematics/common/CampaignDirector';
 import {EnemyHitResponse} from '../features/combat/common/EnemyHitResponse';
 import {playableArea,chapterForArea,PLAYABLE_CHAPTERS,JOURNEY_TASKS} from '../features/journey/data/ChapterJourney';
-import {COMBAT_LOADOUTS,prepareCombatLoadout,rememberCombatLoadout,activateCombatLoadout,assignedLoadout,migrateFourSkillKit,type CombatFamily} from '../features/progression/common/CombatLoadouts';
+import {COMBAT_LOADOUTS,prepareCombatLoadout,rememberCombatLoadout,activateCombatLoadout,migrateFourSkillKit,migrateFixedCombatKit,weaponCombatFamily,type CombatFamily} from '../features/progression/common/CombatLoadouts';
 import {huntingExperienceView,takeCombatExperience,ensureDailyExperience} from '../features/progression/common/HuntingExperience';
 import {huntingKillExperience} from '../features/progression/data/HuntingExperience';
-import {BossLoot} from '../features/equipment/common/BossLoot';
+import {BossLoot,bossRewardKind} from '../features/equipment/common/BossLoot';
 import {releasedEquipmentChapter} from '../features/equipment/data/EquipmentLifecycle';
 import {BUILD_PROFILE} from '../shared/BuildProfile';
 import {DevelopmentTools} from '../features/debug/common/DevelopmentTools';
 import {highlightedEquipment} from '../features/equipment/common/LootFeedback';
+import {PetSystem,freshPets,migratePets,type PetState} from '../features/pets/common/PetSystem';
+import {PetCombat} from '../features/pets/common/PetCombat';
+import {PetJourneys,validPetJourneyEnemy} from '../features/pets/common/PetJourneys';
+import {petAvailable,recordPetChapterEntry} from '../features/pets/common/PetAccess';
+import {petOutgoingDamage,petIncomingDamage,petMaxHealth,petResourceRecovery,restorePlayerHealth} from '../features/pets/common/PetBenefits';
+import {petBonuses} from '../features/pets/common/PetSystem';
 
 export const ENEMY_ARCHER_START_RANGE=14;
 export const ENEMY_ARCHER_SHOT_RANGE=18;
@@ -61,7 +80,9 @@ export interface FireZone extends Point { id:string; remaining:number; tick:numb
 export interface BarrelState extends Point { id:string; fuse:number; exploded:boolean }
 export interface EquipmentState { weapon:string; offhand:string|null; head:string|null; chest:string|null; hands:string|null; feet:string|null; ringLeft:string|null; ringRight:string|null; necklace:string|null; spells:[string|null,string|null] }
 export interface GameState {
+ pets:PetState;
  forging:ForgingState;
+ gems:GemState;
  dice:DiceState;
  version:3; progression:ProgressionState; combat:CombatState; seed:number; area:string; time:number; sequence:number; revision:number; status:'playing'|'dead'|'complete';
  player:PlayerState; enemies:EnemyState[]; encounters:Record<string,EnemyState[]>; projectiles:ProjectileState[]; fireZones:FireZone[]; barrels:BarrelState[];
@@ -90,6 +111,7 @@ export class GameSession {
  readonly developmentTools=new DevelopmentTools({state:()=>this.state,experience:(source,amount)=>this.gainExperience(source,amount),changed:()=>this.changed()});
  dirty=false;
  private areaDef:AreaDef|null=null;
+ private chapterTwoAnchor:{area:string;eventId:string;objectId:string}|undefined;
  // Presentation profiles configure travel speed without changing saved state.
  private movementSpeed=3.6;
  setMovementSpeed(metresPerSecond:number){if(Number.isFinite(metresPerSecond)&&metresPerSecond>0)this.movementSpeed=metresPerSecond;}
@@ -113,20 +135,29 @@ export class GameSession {
  private explosionDamage=new Map<string,number>();
  private nextSupplySweep=0;
  private readonly meleeChain=new MeleeCombo();
- private combatRules:PureCombat=new PureCombat({state:()=>this.state,visible:(a,b)=>this.visible(a,b),move:(p,d,r)=>this.move(p,d,r),id:p=>this.id(p),emit:(type,text,extra)=>this.emit(type,text,extra),damage:(e,value,cast,element,angle,critical)=>this.damageEnemy(e,value,cast,element==='relic'||element==='relicPhysical'||element==='secondary'||element==='burn'?element:['FIR','THU'].includes(element)?'spell':'pure',angle,{element,critical}),miss:(e,action,chance,roll)=>this.missEnemy(e,action,chance,roll),anchors:()=>this.enemyRules.anchors(),damageAnchor:(id,damage,cast)=>this.enemyRules.damageAnchor(id,damage,cast),changed:()=>this.changed()});
+ private rewardedEvadeAction='';
+ private tacticalCounterAction:{id:string;until:number}|undefined;
+ private combatRules:PureCombat=new PureCombat({state:()=>this.state,visible:(a,b)=>this.visible(a,b),move:(p,d,r)=>this.move(p,d,r),id:p=>this.id(p),emit:(type,text,extra)=>this.emit(type,text,extra),damage:(e,value,cast,element,angle,critical)=>this.damageEnemy(e,value,cast,element==='relic'||element==='relicPhysical'||element==='secondary'||element==='burn'?element:['FIR','THU'].includes(element)?'spell':'pure',angle,{element,critical}),miss:(e,action,chance,roll)=>this.missEnemy(e,action,chance,roll),anchors:()=>this.enemyRules.anchors(),damageAnchor:(id,damage,cast)=>this.enemyRules.damageAnchor(id,petOutgoingDamage(this.state,damage),cast),changed:()=>this.changed()});
  private lootRules=new CampaignLoot({state:()=>this.state,grant:(item,count,source,at)=>at?this.dropEquipment(item,source,at):this.grant(item,count,source),supply:(item,count,source,at)=>this.dropSupply(item,count,source,at),changed:()=>this.changed(),emit:(type,text,extra)=>this.emit(type,text,extra)});
  readonly bossLoot=new BossLoot({state:()=>this.state,now:()=>this.calendarNow(),grant:(item,source,at)=>this.dropEquipment(item,source,at),changed:()=>this.changed(),emit:(t,m,x)=>this.emit(t,m,x)});
  private growingLoot=new GrowingEquipmentLoot({state:()=>this.state,grant:(item,count,source,at)=>at?this.dropEquipment(item,source,at):this.grant(item,count,source),changed:()=>this.changed(),emit:(t,m,x)=>this.emit(t,m,x)});
  private equipmentDice=new EquipmentDice({state:()=>this.state,grant:(item,count,source)=>this.grant(item,count,source),recalculate:()=>this.recalculate(),changed:()=>this.changed(),emit:(t,m,x)=>this.emit(t,m,x)});
  readonly forging=new EquipmentForging({state:()=>this.state,availability:()=>this.forgingAvailability(),id:p=>this.id(p),changed:()=>this.changed(),recalculate:()=>this.recalculate(),emit:(t,m)=>this.emit(t,m)});
- readonly journey=new ChapterJourney({state:()=>this.state,grant:(id,source)=>this.grant(id,1,source),experience:(source,amount)=>{this.gainExperience(source,amount);},changed:()=>this.changed(),emit:(type,text,extra)=>this.emit(type,text,extra)});
+ readonly gems=new GemWorkshop({state:()=>this.state,availability:()=>this.forgingAvailability(),id:p=>this.id(p),changed:()=>this.changed(),recalculate:()=>this.recalculate(),emit:(t,m)=>this.emit(t,m)});
+ readonly pets=new PetSystem({state:()=>this.state,recalculate:()=>{this.petCombat.sync();this.recalculate();},availability:()=>this.preparationAvailability(),id:p=>this.id(p),changed:()=>this.changed(),emit:(t,m)=>this.emit(t,m)});
+ private petCombat=new PetCombat({state:()=>this.state,visible:(a,b)=>this.visible(a,b),echo:(target,value,pet)=>this.petEcho(target,value,pet),emit:(t,m,x)=>this.emit(t,m,x),changed:()=>this.changed()});
+ readonly petJourneys=new PetJourneys({state:()=>this.state,world:()=>this.world,safe:()=>this.safe(),spawn:spawns=>this.spawnPetTrial(spawns),changed:()=>this.changed(),emit:(t,m,x)=>this.emit(t,m,x),reward:source=>this.pets.recordProgress(source)});
+ readonly journey=new ChapterJourney({state:()=>this.state,grant:(id,source)=>this.grant(id,1,source),experience:(source,amount)=>{this.gainExperience(source,amount);this.gems.reward(source,10,2);},changed:()=>this.changed(),emit:(type,text,extra)=>this.emit(type,text,extra)});
  readonly campaign=new CampaignDirector({state:()=>this.state,spawnWave:enemies=>this.spawnCampaignWave(enemies),experience:(source,amount)=>{this.gainExperience(source,amount);},changed:()=>this.changed(),emit:(type,text,extra)=>this.emit(type,text,extra)});
+ readonly chapterTwo=new ChapterTwoEncounters({state:()=>this.state,withdraw:ids=>this.withdrawChapterTwoEnemies(ids),battleReady:()=>this.campaign.battleReady(),changed:()=>this.changed(),emit:(type,text)=>this.emit(type,text)});
  private enemyRules:EnemyCombat=new EnemyCombat({speed:e=>this.combatRules.enemySpeed(e),state:()=>this.state,id:prefix=>this.id(prefix),visible:(a,b)=>this.visible(a,b),move:(p,d,r)=>this.move(p,d,r),path:(a,b)=>this.world.path?.(a,b)??[],emit:(type,text,extra)=>this.emit(type,text,extra),hurt:(damage,source,heavy,element,ground,hitId)=>this.hurt(damage,source,heavy,element,ground,hitId),changed:()=>this.changed()});
  private hitResponse=new EnemyHitResponse({state:()=>this.state,move:(e,d,r)=>this.move(e,d,r),height:p=>this.world.height(p),shift:(e,d)=>this.enemyRules.shiftCaster(e,d),emit:(t,m,x)=>this.emit(t,m,x)});
+ petCombatView(){return this.petCombat.view();}
+ petSkillStatus(id:string){return this.petCombat.status(id);}
  enemyHitReaction(id:string){return this.hitResponse.view(id);}
   constructor(seed:number, private world:WorldQuery,private calendarNow:()=>number=Date.now) {
   const n=Number.isFinite(seed)?Math.floor(Math.abs(seed))%2147483646+1:73014;
-  this.state={forging:freshForging(),dice:freshDiceState(),version:3,progression:freshProgression(),combat:freshCombat(),seed:n,area:'S01',time:0,sequence:0,revision:0,status:'playing',player:{x:0,z:0,hp:120,maxHp:120,focus:100,maxFocus:100,resourceVersion:1,staminaPotions:2,manaPotions:2,healthPotions:3,focusPotions:2,gold:0,iron:0,runes:0,cores:0,angle:0,hurtTime:0,shield:0,movingTime:0},enemies:[],encounters:{},projectiles:[],fireZones:[],barrels:[],flags:{},inventory:{W01:1,W07:1,W11:1},provenance:{W01:'initial',W07:'initial',W11:'initial'},pending:{},equipment:{weapon:'W01',offhand:null,head:null,chest:null,hands:null,feet:null,ringLeft:null,ringRight:null,necklace:null,spells:[null,null]},dialogue:null,action:null,cooldowns:{},receipts:{initial:true,'lifecycle:v3':true,'waypoint:v1':true},recipes:[],merchantStock:Object.fromEntries(Object.entries(MERCHANTS).map(([id,m])=>[id,{...m.stock}])),discoveredMerchants:[],checkpoint:{area:'S01',x:0,z:0},dropRolls:{},movedDistance:0,effectCounters:{},enemyHazards:[],groundLoot:[]};
+  this.state={pets:freshPets(),gems:freshGems(),forging:freshForging(),dice:freshDiceState(),version:3,progression:freshProgression(),combat:freshCombat(),seed:n,area:'S01',time:0,sequence:0,revision:0,status:'playing',player:{x:0,z:0,hp:120,maxHp:120,focus:100,maxFocus:100,resourceVersion:1,staminaPotions:2,manaPotions:2,healthPotions:3,focusPotions:2,gold:0,iron:0,runes:0,cores:0,angle:0,hurtTime:0,shield:0,movingTime:0},enemies:[],encounters:{},projectiles:[],fireZones:[],barrels:[],flags:{},inventory:{W01:1,W07:1,W11:1},provenance:{W01:'initial',W07:'initial',W11:'initial'},pending:{},equipment:{weapon:'W01',offhand:null,head:null,chest:null,hands:null,feet:null,ringLeft:null,ringRight:null,necklace:null,spells:[null,null]},dialogue:null,action:null,cooldowns:{},receipts:{initial:true,'lifecycle:v3':true,'waypoint:v1':true},recipes:[],merchantStock:Object.fromEntries(Object.entries(MERCHANTS).map(([id,m])=>[id,{...m.stock}])),discoveredMerchants:[],checkpoint:{area:'S01',x:0,z:0},dropRolls:{},movedDistance:0,effectCounters:{},enemyHazards:[],groundLoot:[]};
   prepareCombatLoadout(this.state.combat,this.state.equipment.weapon,this.state.progression);
  }
  private changed(){this.state.revision++;this.dirty=true;}
@@ -143,7 +174,7 @@ export class GameSession {
   this.state.receipts[key]=token;this.changed();
  }
  private emit(type:string,text?:string,extra:Record<string,unknown>={}){this.events.push({type,text,...extra});}
- private drain(){const events=this.events;this.events=[];return events;}
+ private drain(){this.petCombat.observe(this.events);const events=this.events;this.events=[];return events;}
  private id(prefix:string){return `${prefix}:${++this.state.sequence}`;}
  private once(id:string,work:()=>void){if(this.state.receipts[id])return false;work();this.state.receipts[id]=true;this.changed();return true;}
  private gold(id:string,n:number){this.once(id,()=>{this.state.player.gold=Math.min(9999,this.state.player.gold+n);this.emit('reward',`金币 +${n}`,{id,value:n});});}
@@ -231,7 +262,8 @@ export class GameSession {
   this.areaDef=area;this.state.area=area.id;
   const p=entry??(same&&this.state.encounters[area.id]?this.state.player:area.spawn);
   this.state.player.x=clamp(p.x,-area.width/2+.35,area.width/2-.35);this.state.player.z=clamp(p.z,-area.depth/2+.35,area.depth/2-.35);
-  this.state.enemies=this.state.flags[`visited:${area.id}`]&&this.state.encounters[area.id]?clone(this.state.encounters[area.id]):area.enemies.map(e=>this.spawn(e));
+  this.state.enemies=(this.state.flags[`visited:${area.id}`]&&this.state.encounters[area.id]?clone(this.state.encounters[area.id]):area.enemies.map(e=>this.spawn(e))).filter(enemy=>!chapterTwoEnemyRetired(this.state,enemy.id));
+  this.chapterTwoAnchor=undefined;
   this.syncHuntingPacks();
   // Scenery may have changed since this encounter was saved. Repair only living
   // actors inside a collider; retain health, deaths, respawn clocks and rewards.
@@ -251,7 +283,7 @@ export class GameSession {
   if(!fastTravel&&chapterForArea(area.id)>=2&&unlockSkills(this.state.progression,true)){activateCombatLoadout(this.state.combat,this.state.progression);this.state.progression.ultimateGiftClaimed=true;this.state.combat.charge=0;this.emit('notice','全部技能已开放为1级，获得2技能点；请在安全检查点自由加点。');}
   if(!fastTravel&&area.checkpoint&&this.safe())this.setCheckpoint();
   if(!fastTravel)this.discoverWaypoint();
-  this.recalculate();this.changed();this.emit('area',area.name,{id:area.id});return this.drain();
+  recordPetChapterEntry(this.state);this.petJourneys.enter();this.petCombat.clearTransient();this.recalculate();this.changed();this.emit('area',area.name,{id:area.id});return this.drain();
  }
  private spawn(e:EnemySpawn):EnemyState {const def=CAMPAIGN_ENEMY_TEMPLATES[e.templateId??e.bossId??''],level=e.level??def?.level??1,base=huntingBaseHp(e)??def?.baseHp??def?.hp??e.hp??({raider:72,shield:105,archer:60,captain:360}[e.kind]),maxHp=campaignFighter(e)?.maxHp??Math.round(base*enemyHealthMultiplier(e)*(1+.14*(level-1))),movement=enemyProfile(e)?.movement,angle=movement?.stationary&&movement.facingPoint?aim(e,movement.facingPoint):0;const enemy:EnemyState={...e,level,hp:maxHp,maxHp,angle,phase:'idle',phaseTime:.35,attackCount:0,targetAngle:angle,attackKind:'swing',struck:false,markedUntil:0,lightningUntil:0,pushImmuneUntil:0,staggerProtectedUntil:0,halfAnnounced:false};
   // Keep the original timestamp on retry/restoration; only real new lives get a new one.
@@ -259,6 +291,24 @@ export class GameSession {
   return enemy;
  }
  private enemyDamage(e:EnemyState,base:number){const def=CAMPAIGN_ENEMY_TEMPLATES[e.templateId??e.bossId??''],reference=e.kind==='captain'?22:e.kind==='shield'?16:e.kind==='archer'?14:12;return (def?.baseDamage??def?.damage??reference)*(base/reference)*(1+.045*((e.level??1)-1))*enemyDamageMultiplier(e);}
+ private petEligibleTarget(enemy:EnemyState):boolean {
+  return !enemy.trainingDummy&&(!enemy.trainingEnemy||validPetJourneyEnemy(this.state,enemy));
+ }
+ private petEcho(enemy:EnemyState,damage:number,pet:string):boolean {
+  const s=this.state;if(!petAvailable(s)||s.player.hp<=0||s.status==='dead'||!s.enemies.includes(enemy)||enemy.hp<=0||!this.petEligibleTarget(enemy)||!Number.isFinite(damage)||damage<=0||!this.visible(s.player,enemy))return false;
+  const before=enemy.hp;enemy.hp=Math.max(0,enemy.hp-damage);this.recordCombat(enemy);
+  this.emit('hit',undefined,{id:enemy.id,value:damage,hpLost:before-enemy.hp,source:'pet',element:'pet',action:this.id('pet-echo'),petEligible:false,critical:false,lethal:enemy.hp<=0,at:{x:enemy.x,z:enemy.z},pet});this.changed();return true;
+ }
+ private spawnPetTrial(spawns:EnemySpawn[]):boolean {
+  const s=this.state,area=this.areaDef;if(!petAvailable(s)||!area||!this.safe()||!spawns.length||spawns.length>8||s.enemies.length+spawns.length>200||spawns.some(spawn=>s.enemies.some(enemy=>enemy.id===spawn.id)))return false;
+  const prepared:EnemySpawn[]=[];
+  for(const spawn of spawns){
+   const point=this.world.recoverPosition?.(spawn,.45)??spawn;
+   if(Math.abs(point.x)>area.width/2-1||Math.abs(point.z)>area.depth/2-1||dist(point,s.player)<2||!this.visible(s.player,point)||area.obstacles.some(o=>Math.abs(point.x-o.x)<o.width/2+.45&&Math.abs(point.z-o.z)<o.depth/2+.45)||area.buildings.some(o=>Math.abs(point.x-o.x)<o.width/2+.45&&Math.abs(point.z-o.z)<o.depth/2+.45))return false;
+   prepared.push({...spawn,x:point.x,z:point.z,trainingEnemy:true,trainingAttacks:true});
+  }
+  s.enemies.push(...prepared.map(spawn=>this.spawn(spawn)));this.changed();return true;
+ }
  private checkHelp(id:string):string|null {
   const s=this.state;if(['mira-motive','mira-terms'].includes(id)&&s.flags.saw_copy)return '已核对的求援抄件';
   if(['inn-lockbox','quarry-runes'].includes(id)&&s.discoveredMerchants.includes('lorn'))return '洛恩的工具指引';
@@ -274,15 +324,14 @@ export class GameSession {
   s.dice.active={id,area:s.area,sourceId,context:record?.context??this.checkContext(id)};this.cancelInput();this.changed();this.emit('check_open',def.title,{id});
  }
  diceView():DiceView|null {const s=this.state,a=s.dice.active;if(!a)return null;if(a.id.startsWith('gear:'))return this.equipmentDice.view();const d=SKILL_CHECKS[a.id],r=s.dice.records[a.id],roll=r?.rolls[r.rolls.length-1]??null;return {id:d.id,title:d.title,prompt:d.prompt,skillLabel:ACTION_NAMES[d.skill],abilityLabel:'行动',dc:d.dc,mode:a.context.mode,modifiers:a.context.modifiers.map((m,i)=>({...m,label:i?'经验准备':'行动准备'})),help:a.context.helpLabel?{label:a.context.helpLabel,enabled:a.context.helpDie}:null,roll,attempt:r?.rolls.length??0,inspiration:s.dice.inspiration,canReroll:!!roll&&!roll.success&&s.dice.inspiration>0&&(r?.rolls.length??0)<5,canCancel:!roll,successText:d.successText,failureText:d.failureText,chance:checkChance(d.dc,a.context)};}
- prepareEquipmentDice():boolean {return !this.state.dice.active&&!this.state.dialogue&&this.equipmentDice.hasPending()&&this.equipmentAvailability().available&&this.equipmentDice.open();}
- openEquipmentDice(item:string):boolean {if(!this.state.inventory[item]||this.state.dice.active||this.state.dialogue||!this.equipmentAvailability().available)return false;this.equipmentDice.enqueue(item,this.state.provenance[item],true);return this.equipmentDice.open(item);}
+ prepareEquipmentNotice():boolean {return !this.state.dice.active&&!this.state.dialogue&&this.equipmentDice.hasPending()&&this.equipmentAvailability().available&&this.equipmentDice.open();}
  toggleCheckHelp():GameEvent[]{const a=this.state.dice.active;if(a&&a.context.helpLabel&&!this.state.dice.records[a.id]?.rolls.length){a.context.helpDie=!a.context.helpDie;this.changed();}return this.drain();}
  rollCheck(reroll=false,expectedAttempt=0):GameEvent[]{const s=this.state,a=s.dice.active;if(!a||s.status==='dead')return [];const def=SKILL_CHECKS[a.id],old=s.dice.records[a.id],count=old?.rolls.length??0;
-  if(a.id.startsWith('gear:')){if(!reroll)this.equipmentDice.roll(expectedAttempt);return this.drain();}
+  if(a.id.startsWith('gear:'))return [];
   if(count!==expectedAttempt||old?.committed||(reroll?(!count||old!.rolls[count-1].success||s.dice.inspiration<1||count>=5):count>0))return [];
   if(reroll)s.dice.inspiration--;const record=old??{area:a.area,sourceId:a.sourceId,context:clone(a.context),rolls:[],committed:false};record.rolls.push(drawCheckRoll(s.seed,a.id,count+1,def.dc,record.context));s.dice.records[a.id]=record;this.changed();this.emit('check_roll',undefined,{id:a.id,attempt:count+1});return this.drain();
  }
- cancelCheck():GameEvent[]{const s=this.state,a=s.dice.active;if(a?.id.startsWith('gear:')){this.equipmentDice.finish(true);return this.drain();}if(a&&!s.dice.records[a.id]?.rolls.length){s.dice.active=null;this.changed();}return this.drain();}
+ cancelCheck():GameEvent[]{const s=this.state,a=s.dice.active;if(a?.id.startsWith('gear:')){this.equipmentDice.finish();return this.drain();}if(a&&!s.dice.records[a.id]?.rolls.length){s.dice.active=null;this.changed();}return this.drain();}
  finishCheck():GameEvent[]{const s=this.state,a=s.dice.active;if(!a)return [];if(a.id.startsWith('gear:')){this.equipmentDice.finish();return this.drain();}const r=s.dice.records[a.id],roll=r?.rolls[r.rolls.length-1];if(!r||r.committed||!roll)return [];r.committed=true;s.flags[`check:${a.id}:${roll.success?'passed':'failed'}`]=true;
   if(roll.success){
    if(a.id==='mira-motive')s.flags.saw_copy=true;
@@ -351,7 +400,7 @@ export class GameSession {
  }
  equipmentAvailability():{available:boolean;reason:string}{
   if(this.state.status==='dead')return {available:false,reason:'倒下后无法更换装备'};
-  if(this.state.dice.active)return {available:false,reason:'请先完成当前骰盘'};
+  if(this.state.dice.active)return {available:false,reason:this.state.dice.active.id.startsWith('gear:')?'请先确认获得装备':'请先完成当前骰盘'};
   if(this.combatEffectsPending()||this.state.enemies.some(e=>this.threateningEnemy(e)))return {available:false,reason:gearText('combat.blocked')};
   const engagement=this.state.combat.engagement;
   if(engagement)return {available:false,reason:gearText('combat.wait',{seconds:Math.max(.1,Math.ceil((this.disengagementDelay()-(engagement.quietSince===undefined?0:this.state.time-engagement.quietSince))*10)/10).toFixed(1)})};
@@ -372,7 +421,7 @@ export class GameSession {
  equipmentChange(item:string,slot?:string){return equipmentChange(this.state,item,slot,this.equipmentAvailability());}
  preparationAvailability():{available:boolean;reason:string}{
   if(this.state.status==='dead')return {available:false,reason:'倒下后无法整备'};
-  if(this.state.dice.active)return {available:false,reason:'请先完成当前骰盘'};
+  if(this.state.dice.active)return {available:false,reason:this.state.dice.active.id.startsWith('gear:')?'请先确认获得装备':'请先完成当前骰盘'};
   if(!this.safe())return {available:false,reason:'附近仍有敌人或火焰'};
   if(this.inCombat())return {available:false,reason:'战斗尚未结束，请先脱战再整备'};
   if(!this.checkpointNear())return {available:false,reason:'请到安全检查点整备'};
@@ -403,10 +452,14 @@ export class GameSession {
  claimJourneyWeapon(chapter:number,route:string,item:string){return this.state.status!=='dead'&&!this.state.dialogue&&!this.state.dice.active&&this.equipmentAvailability().available&&this.journey.claim(chapter,route,item);}
  setCounts():Record<string,number>{const counts:Record<string,number>={};for(const [key,id] of Object.entries(this.state.equipment)){if(key==='spells'||typeof id!=='string')continue;const set=EQUIPMENT[id]?.set;if(set)counts[set]=(counts[set]??0)+1;}return counts;}
  itemView(id:string):ItemDef {
-  const d=EQUIPMENT[id];if(!d)return d;const base=GROWING_EQUIPMENT[id]?{...d,maxHp:growingStats(id,this.state.progression.level).maxHp,description:growingDescription(d,this.state.progression.level)}:d,b=itemGearBonus(this.state,id),f=itemForgingView(this.state,id)!,extra=bonusText(b),improvement=f.affixes.map(forgingAffixText).join('；'),description=[base.description,`强化＋${f.rank} · 当前上限＋${f.cap} · 装备极限＋${f.maximum}`,`强化属性 ${f.affixes.length}／${f.capacity}${improvement?'：'+improvement:''}`,extra?'免费锻印：'+extra.replace(/\n/g,'；'):''].filter(Boolean).join('\n');
-  return {...base,name:base.name+(f.rank?` ＋${f.rank}`:''),maxHp:(base.maxHp??0)+b.maxHp+f.bonus.maxHp,armor:(base.armor??0)+b.armor+f.bonus.armor,description};
+  const d=EQUIPMENT[id];if(!d)return d;const base=GROWING_EQUIPMENT[id]?{...d,maxHp:growingStats(id,this.state.progression.level).maxHp,description:growingDescription(d,this.state.progression.level)}:d,b=itemGearBonus(this.state,id),f=itemForgingView(this.state,id)!,extra=bonusText(b),improvement=f.affixes.map(forgingAffixText).join('；'),description=[base.description,`强化＋${f.rank} · 当前上限＋${f.cap} · 装备极限＋${f.maximum}`,`强化属性 ${f.affixes.length}／${f.capacity}${improvement?'：'+improvement:''}`,extra?'历史铸印：'+extra.replace(/\n/g,'；'):''].filter(Boolean).join('\n');
+  const g=itemGemBonus(this.state,id),capacity=gemCapacity(d),count=this.state.gems?.items[id]?.sockets.slice(0,capacity).reduce((total,gem)=>total+Number(!!gem),0)??0;
+  return {...base,name:base.name+(f.rank?` ＋${f.rank}`:''),maxHp:(base.maxHp??0)+b.maxHp+f.bonus.maxHp+g.maxHp,armor:(base.armor??0)+b.armor+f.bonus.armor+g.armor,description:description+'\n'+(capacity?gemText('item.sockets',{count,capacity}):gemText('item.noSockets'))};
  }
  interactionVisible(o:InteractionDef){
+  if(o.action==='pet_journey')return this.petJourneys.visibility(o.id);
+  if(o.action==='campaign_event'&&o.eventId&&!chapterTwoSideQuestEventVisible(o.eventId,this.state))return false;
+  if(o.action==='growing_rematch'&&chapterTwoBattleStopped(this.state,this.state.area))return false;
   if(o.action==='journey_task')return this.journey.visible(o.eventId??'');
   return !o.eventId||growingQuestVisible(o.eventId,this.state.flags);
  }
@@ -414,6 +467,8 @@ export class GameSession {
   const d=CAMPAIGN_EVENTS[id],s=this.state,confirmLabel=d?.confirmLabel??campaignText('event.confirm');
   const status=(available:boolean,completed:boolean,reason:string)=>({available,completed,reason,confirmLabel});
   if(!d)return status(false,false,campaignText('event.unavailable'));
+  if(!s.progression.secondChapter&&CHAPTER_TWO_SIDE_QUEST_EVENTS.some(event=>event.id===id))return status(false,false,sideQuestText('require.chapterOpen'));
+  if(d.chapterTwoAction){const available=chapterTwoActionAvailability(s,d.chapterTwoAction);if(!requirementsOnly&&d.area!==s.area)return status(false,false,campaignText('event.unavailable'));if(!requirementsOnly&&available.available&&!this.safe())return status(false,false,campaignText('event.leaveCombat'));return {...available,confirmLabel:encounterText('choice.confirm')};}
   if(s.receipts[`campaign:${id}`])return status(false,true,d.completionText??d.choices?.find(c=>c.id===s.receipts[`campaign:choice:${id}`])?.text??campaignText('event.complete',{label:d.label}));
   if(!requirementsOnly&&d.area!==s.area)return status(false,false,campaignText('event.unavailable'));
   // Creator's loose spread transform treats Set as one array element; materialise it explicitly.
@@ -423,7 +478,7 @@ export class GameSession {
   if(d.requiresAny?.length&&!d.requiresAny.some(flag=>s.flags[flag]))reasons.push(campaignText('event.requiresAny',{requirements:describe(d.requiresAny).join(' / ')}));
   if(reasons.length)return status(false,false,reasons.join('\n'));
   if(requirementsOnly)return status(true,false,campaignText('event.ready'));
-  if(d.clearEncounter&&(!this.campaign.battleReady()||s.enemies.some(e=>e.hp>0&&!e.respawnSeconds)))return status(false,false,campaignText('event.clearEncounter'));
+  if(d.clearEncounter&&(!this.campaign.battleReady()||s.enemies.some(e=>e.hp>0&&!e.respawnSeconds&&!sideBossById(e.id))))return status(false,false,campaignText('event.clearEncounter'));
   if(!d.peacefulResolution&&!this.safe())return status(false,false,campaignText('event.leaveCombat'));
   return status(true,false,campaignText('event.ready'));
  }
@@ -434,6 +489,7 @@ export class GameSession {
   const status=(available:boolean,completed:boolean,reason:string,readOnly=false)=>({available,completed,reason,readOnly,confirmLabel:worldText('interaction.confirm')});
   const done=(reason=worldText('interaction.completed',{label:o.label}))=>status(false,true,reason,true);
   const locked=(reason:string)=>status(false,false,reason);
+  if(a==='pet_journey'){const access=this.petJourneys.availability(o.id);return status(access.available,access.completed,access.reason,access.completed);}
   if(a==='campaign_event')return {...this.campaignEventAvailability(o.eventId??''),readOnly:false};
   const flags:Record<string,string>={recover:'recovered',rescue_cart:'cart_rescued',captain_gate:'gate_raised',gate:'gate_raised',release_workers:'workers_released',disable_trap:'trap_disabled',finish:'chapter1_complete'};
   const results={recover:'interaction.recovered',rescue_cart:'interaction.recovered',captain_gate:'interaction.gateDone',gate:'interaction.gateDone',release_workers:'interaction.workersDone',disable_trap:'interaction.trapDone'} as const;
@@ -464,7 +520,7 @@ export class GameSession {
   }
   if(a==='growing_rematch'){
    const enemy=s.enemies.find(e=>e.id===o.eventId);
-   if(!enemy?.bossId||enemy.hp>0||!s.flags[`boss_defeated:${enemy.bossId}`]&&!s.receipts[`kill:${s.area}:${enemy.id}`])return locked(gearText('loot.rematchFirst'));
+   if(!enemy?.bossId||enemy.hp>0||peacefulBossRetired(s,enemy.id)||!s.flags[`boss_defeated:${enemy.bossId}`]&&!s.receipts[`kill:${s.area}:${enemy.id}`])return locked(gearText('loot.rematchFirst'));
    const seconds=this.bossLoot.view(enemy.bossId).remaining;
    if(seconds)return locked(gearText('loot.rematchWait',{time:`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`}));
   }
@@ -486,10 +542,18 @@ export class GameSession {
   if(a==='letter'&&s.flags.read_letter||a==='independent_clue'&&s.flags.independent_clue)return false;
   return !!o.actor||['offer','merchant','meeting','letter','independent_clue','recover','rescue_cart','release_workers','disable_trap','captain_gate','gate','finish'].includes(a);
  }
- private recalculate(){syncRandomForging(this.state);if(!this.areaDef){this.enemyRules.reset();for(const enemy of [...this.state.enemies,...Object.values(this.state.encounters).flat()])EnemyCombat.restore(enemy);}let bonus=0;for(const [key,id]of Object.entries(this.state.equipment))if(key!=='spells'&&typeof id==='string')bonus+=this.itemView(id)?.maxHp??0;if((this.setCounts().oath??0)>=2)bonus+=8;this.state.player.maxHp=baseMaxHp(this.state.progression)+bonus;this.state.player.hp=Math.min(this.state.player.hp,this.state.player.maxHp);this.state.player.shield=Math.min(this.state.player.shield,this.state.player.maxHp*.35);synchronizeResource(this.state);}
+ private recalculate(){
+  const s=this.state;syncRandomForging(s);
+  if(!this.areaDef){this.enemyRules.reset();for(const enemy of [...s.enemies,...Object.values(s.encounters).flat()])EnemyCombat.restore(enemy);}
+  let bonus=equippedGemBonus(s).maxHp;
+  const equipped=new Set(Object.values(s.equipment).filter((id):id is string=>typeof id==='string'));
+  for(const id of equipped){const d=EQUIPMENT[id];if(!d)continue;bonus+=(GROWING_EQUIPMENT[id]?growingStats(id,s.progression.level).maxHp:d.maxHp??0)+itemGearBonus(s,id).maxHp+itemForgingView(s,id)!.bonus.maxHp;}
+  if((this.setCounts().oath??0)>=2)bonus+=8;
+  s.player.maxHp=petMaxHealth(s,baseMaxHp(s.progression)+bonus);s.player.hp=Math.min(s.player.hp,s.player.maxHp);s.player.shield=Math.min(s.player.shield,s.player.maxHp*.35);synchronizeResource(s);
+ }
  combatSkillView(ids?:readonly string[]){return this.combatRules.view(ids);}
  skillAutoAimTarget(id:string){return this.combatRules.autoAimTarget(id);}
- progressionView(){const p=progressionView(this.state.progression),gear=equippedGearBonus(this.state),attributes={...p.attributes};for(const key of ATTRIBUTES)attributes[key]=effectiveAttribute(this.state,key,gear);p.baseSkillPower*=equipmentPowerMultiplier(this.state.equipment.weapon,p.level)*(1+gear.power/100);return {...p,movementSpeed:this.movementSpeed,attributes,baseAttributes:p.attributes,equipmentAttributes:Object.fromEntries(ATTRIBUTES.map(key=>[key,attributes[key]-p.attributes[key]])) as Record<Attribute,number>,...playerCombatAttributes(this.state),criticalChance:combatCriticalChance(this.state,gear)*100,criticalDamage:combatCriticalMultiplier(this.state,gear)*100};}
+ progressionView(){const p=progressionView(this.state.progression),gear=equippedGearBonus(this.state),attributes={...p.attributes};for(const key of ATTRIBUTES)attributes[key]=effectiveAttribute(this.state,key,gear);p.baseSkillPower*=equipmentPowerMultiplier(this.state.equipment.weapon,p.level)*(1+gear.power/100)*(1+petBonuses(this.state).damagePercent/100);return {...p,movementSpeed:this.movementSpeed,attributes,baseAttributes:p.attributes,equipmentAttributes:Object.fromEntries(ATTRIBUTES.map(key=>[key,attributes[key]-p.attributes[key]])) as Record<Attribute,number>,...playerCombatAttributes(this.state),criticalChance:combatCriticalChance(this.state,gear)*100,criticalDamage:combatCriticalMultiplier(this.state,gear)*100};}
  attributePlanToken(){const p=this.state.progression;return JSON.stringify([p.level,p.attributes,p.unspentPoints]);}
  applyAttributePlan(attributes:Record<Attribute,number>,token:string){const p=this.state.progression;if(token!==this.attributePlanToken()||!this.preparationAvailability().available||!attributes||Object.keys(attributes).length!==4||ATTRIBUTES.some(k=>!Number.isInteger(attributes[k])||attributes[k]<10||attributes[k]>80))return false;const spent=ATTRIBUTES.reduce((n,k)=>n+attributes[k]-10,0),remaining=3*(p.level-1)-spent;if(remaining<0)return false;p.attributes={...attributes};p.unspentPoints=remaining;this.recalculate();this.changed();return true;}
  skillPlanToken():string{return JSON.stringify([this.state.progression.learned,this.state.progression.skillPoints,this.state.progression.level,this.state.progression.secondChapter]);}
@@ -503,11 +567,8 @@ export class GameSession {
  /** Clear a previous skill configuration before respec or local effect comparison. */
  resetCombatTransient():void{this.cancelInput();this.state.action=null;this.combatRules.resetTransient();this.state.projectiles=this.state.projectiles.filter(q=>q.owner!=='player');}
  learnSkill(id:string):boolean{const p=this.state.progression,rank=p.learned[id];if(!rank||rank>=5)return false;return this.applySkillPlan({...p.learned,[id]:rank+1});}
- assignActiveSkill(slot:number,id:string|null):boolean{
-  if(!Number.isInteger(slot)||slot<0||slot>3||!this.preparationAvailability().available||id!==null&&(!PURE_SKILLS[id]||PURE_SKILLS[id].type!=='active'||!['COM',this.state.combat.family].includes(PURE_SKILLS[id].style)||!allocatedSkillRank(this.state.progression,id)))return false;
-  const c=this.state.combat;prepareCombatLoadout(c,this.state.equipment.weapon,this.state.progression);const saved=assignedLoadout(c)!,other=id===null?-1:saved.activeSlots.indexOf(id),previous=saved.activeSlots[slot];
-  if(other>=0&&other!==slot)saved.activeSlots[other]=previous;saved.activeSlots[slot]=id;activateCombatLoadout(c,this.state.progression);this.changed();return true;
- }
+ /** Compatibility guard for old menu actions. Skill allocation only changes rank. */
+ assignActiveSkill(_slot:number,_id:string|null):boolean{this.emit('notice','技能栏已固定，解锁后自动启用；可在技能页调整加点。');return false;}
  combatLoadoutChange(family:CombatFamily,preferredWeapon?:string){
   const s=this.state,access=this.equipmentAvailability(),preset=Object.prototype.hasOwnProperty.call(COMBAT_LOADOUTS,family)?COMBAT_LOADOUTS[family]:undefined;
   const valid=(id:string)=>!!preset&&s.inventory[id]>0&&!!s.provenance[id]&&EQUIPMENT[id]?.kind===EQUIPMENT[preset.weapon].kind&&s.progression.level>=(EQUIPMENT[id].requiredLevel??1);
@@ -516,16 +577,16 @@ export class GameSession {
   const token=JSON.stringify([family,weapon,s.equipment,s.progression.level,s.combat.family,s.combat.loadouts]);
   return {family,weapon,token,available:!!preset&&!!weapon&&access.available,reason:!preset?'职业不可用':!weapon?'尚未持有该职业可用等级的武器':access.reason,
    offhand:weapon&&EQUIPMENT[weapon].twoHanded?s.equipment.offhand:undefined,
-   activeSlots:s.combat.loadouts?.[family]?.activeSlots??preset?.activeSlots,ultimate:s.combat.loadouts?.[family]?.ultimate??preset?.ultimate};
+   activeSlots:preset?.activeSlots,ultimate:preset?.ultimate};
  }
  applyCombatLoadout(family:CombatFamily,preferredWeapon?:string,expectedToken?:string):boolean{
   const change=this.combatLoadoutChange(family,preferredWeapon);if(!change.available||!change.weapon||expectedToken!==undefined&&expectedToken!==change.token)return false;
   if(this.state.equipment.weapon!==change.weapon&&!this.equip(change.weapon))return false;
   this.resetCombatTransient();prepareCombatLoadout(this.state.combat,this.state.equipment.weapon,this.state.progression,family);synchronizeResource(this.state);this.changed();return true;
  }
- assignPassive(slot:number,id:string|null):boolean{if(!Number.isInteger(slot)||slot<0||slot>1||(slot===0?this.state.progression.level<6&&!this.state.progression.secondChapter:!this.state.progression.secondChapter)||!this.preparationAvailability().available||id!==null&&(!PURE_SKILLS[id]||PURE_SKILLS[id].type!=='passive'||!allocatedSkillRank(this.state.progression,id))||id!==null&&this.state.combat.passiveSlots.some((n,i)=>n===id&&i!==slot))return false;this.state.combat.passiveSlots[slot]=id;this.changed();return true;}
- assignUltimate(id:string|null):boolean{if(!this.preparationAvailability().available||id!==null&&(!PURE_SKILLS[id]||PURE_SKILLS[id].type!=='ultimate'||!['COM',this.state.combat.family].includes(PURE_SKILLS[id].style)||!allocatedSkillRank(this.state.progression,id)))return false;prepareCombatLoadout(this.state.combat,this.state.equipment.weapon,this.state.progression);assignedLoadout(this.state.combat)!.ultimate=id;activateCombatLoadout(this.state.combat,this.state.progression);this.changed();return true;}
- castSkill(id:string,target?:Point,angle?:number):GameEvent[]{if(id!=='COM_01'&&!this.state.combat.activeSlots.includes(id)&&this.state.combat.ultimate!==id)return [];this.meleeChain.reset();this.combatRules.cast(id,target,angle);return this.drain();}
+ assignPassive(_slot:number,_id:string|null):boolean{this.emit('notice','职业被动已固定，解锁后自动生效。');return false;}
+ assignUltimate(_id:string|null):boolean{this.emit('notice','终极技能使用固定末位，解锁后自动启用。');return false;}
+ castSkill(id:string,target?:Point,angle?:number):GameEvent[]{if(id!=='COM_01'&&id!=='COM_02'&&!this.state.combat.activeSlots.includes(id)&&this.state.combat.ultimate!==id)return [];this.meleeChain.reset();this.combatRules.cast(id,target,angle);return this.drain();}
  allocateAttribute(key:Attribute,count=1):boolean{const p=this.state.progression;if(!ATTRIBUTES.includes(key)||!Number.isInteger(count)||count<1||count>p.unspentPoints||p.attributes[key]+count>80||!this.preparationAvailability().available)return false;p.attributes[key]+=count;p.unspentPoints-=count;this.recalculate();this.changed();return true;}
  respecAttributes():boolean{if(!this.preparationAvailability().available)return false;const p=this.state.progression;for(const key of ATTRIBUTES)p.attributes[key]=10;p.unspentPoints=3*(p.level-1);this.recalculate();this.changed();return true;}
  raiseToMaxLevel():boolean{const remaining=cumulativeXp(40)-this.state.progression.totalXp;return remaining>0&&this.gainExperience('local-playtest-level40',remaining);}
@@ -551,9 +612,9 @@ export class GameSession {
   this.previous={...clean};this.state.encounters[this.state.area]=this.state.enemies;this.changed();return this.drain();
  }
  private step(dt:number,input:InputFrame,first:boolean,idleHunting:boolean){
-  const s=this.state,p=s.player;s.time+=dt;p.hurtTime=Math.max(0,p.hurtTime-dt);p.focus=Math.min(p.maxFocus,p.focus+(s.combat.engagement?RESOURCE_RULES.combatRegen:RESOURCE_RULES.restRegen)*dt);
+  const s=this.state,p=s.player;s.time+=dt;p.hurtTime=Math.max(0,p.hurtTime-dt);p.focus=Math.min(p.maxFocus,p.focus+petResourceRecovery(s,(s.combat.engagement?RESOURCE_RULES.combatRegen:RESOURCE_RULES.restRegen)*dt));
   for(const k of Object.keys(s.cooldowns))s.cooldowns[k]=Math.max(0,s.cooldowns[k]-dt);
-  this.pruneSupplies();this.respawnHunts();this.combatRules.step(dt);this.enemyRules.tick(dt);
+  this.petCombat.step(dt);this.petJourneys.step(dt);this.pruneSupplies();this.respawnHunts();this.combatRules.step(dt);this.enemyRules.tick(dt);
   const facingAction=s.action;
   if(facingAction&&facingAction.kind!=='bowAim')p.angle=facingAction.angle;
   else if(Number.isFinite(input.aim))p.angle=input.aim!;else if(Math.hypot(input.x,input.z)>.01)p.angle=Math.atan2(input.x,input.z);
@@ -567,17 +628,18 @@ export class GameSession {
   speed*=(1+Math.min((s.combat.buffs.stormWardUntil??0)>s.time?.3:.2,speedBonus+this.combatRules.speedMultiplier()-1))*this.enemyRules.playerMoveMultiplier();
   const moving=Math.hypot(input.x,input.z)>.01;p.movingTime=moving?p.movingTime+dt:0;
   if(a)speed*=a.skillId==='BOW_07'&&a.emitted&&a.elapsed<(a.releaseAt??0)+.2?0:a.skillId==='WAR_02'&&a.emitted&&a.elapsed<(a.releaseAt??0)?0:a.skillId==='COM_02'&&this.equipped('DE03')?1:a.kind==='dash'?0:a.kind==='bowAim'?.6:a.kind==='sword'&&a.elapsed>=(a.releaseAt??.12)&&a.elapsed<(a.releaseAt??.12)+.10?.35:.65;
-  const before={x:p.x,z:p.z};this.move(p,{x:input.x/norm*speed*dt,z:input.z/norm*speed*dt});s.movedDistance+=dist(before,p);this.combatRules.growingMove(dist(before,p),dt);
+  const before={x:p.x,z:p.z};this.move(p,{x:input.x/norm*speed*dt,z:input.z/norm*speed*dt});s.movedDistance+=dist(before,p);this.combatRules.growingMove(dist(before,p),dt);this.petCombat.moved(dist(before,p),dt);
   if(a)this.actionStep(a,dt,input.attack===true,input.aim);
   this.collectNearbyLoot();
   for(const e of s.enemies){const reeling=this.hitResponse.step(e,dt);if(e.hp>0&&!reeling)this.enemyStep(e,dt);}
-  this.projectilesStep(dt);this.environmentStep(dt);this.deaths(idleHunting);
+  this.projectilesStep(dt);this.environmentStep(dt);this.petCombat.observe(this.events);this.deaths(idleHunting);
  }
  private input(input:InputFrame){
   const s=this.state,a=s.action;
   if(input.dash&&!this.previous.dash){this.meleeChain.reset();if(a&&a.elapsed>=.3)s.action=null;if(!s.action){const angle=Math.hypot(input.x,input.z)>.01?Math.atan2(input.x,input.z):s.player.angle+Math.PI;this.combatRules.cast('COM_01',undefined,angle);}return;}
   if(a?.kind==='bowAim'){a.angle=s.player.angle;if(!input.attack){const held=a.elapsed;s.action={...a,kind:'bow',elapsed:0,duration:.3,charged:held>=.8,damage:held>=.8?30:18};this.captureRayFeedback(s.action,s.player,s.action.angle,BASIC_ATTACK.bow.rangeMetres,.45);}return;}
   if(a){if(a.kind==='sword'&&input.attack&&!this.previous.attack&&a.elapsed>=a.duration-MELEE_INPUT_BUFFER)this.meleeChain.buffer(s.time);else if(a.kind!=='sword')this.meleeChain.reset();return;}
+  if(input.healSkill&&!this.previous.healSkill){this.meleeChain.reset();this.combatRules.cast('COM_02');return;}
   if(input.ultimate&&!this.previous.ultimate){this.meleeChain.reset();const id=s.combat.ultimate;if(id)this.combatRules.cast(id,input.target,input.aim);return;}
   const slot=input.combatSlot??(input.skill&&!this.previous.skill?0:input.spell!==undefined&&input.spell!==this.previous.spell?input.spell+1:undefined);
   if(slot!==undefined&&slot<4&&(input.combatSlot===undefined||input.combatSlot!==this.previous.combatSlot)){this.meleeChain.reset();const id=s.combat.activeSlots[slot];if(id)this.combatRules.cast(id,input.target,input.aim);return;}
@@ -588,7 +650,7 @@ export class GameSession {
    const target=s.enemies.filter(e=>e.hp>0&&dist(s.player,e)<=BASIC_ATTACK.sword.rangeMetres+Math.max(.25,enemyHurtRadius(e)-.05)&&Math.abs(deltaAngle(aim(s.player,e),a.angle))<=BASIC_ATTACK.sword.angleDegrees*Math.PI/360&&this.visible(s.player,e)).sort((x,y)=>dist(s.player,x)-dist(s.player,y)||x.id.localeCompare(y.id))[0];
    this.rememberFeedback(a,target);
   }else if(kind==='staff')this.captureRayFeedback(a,s.player,a.angle,BASIC_ATTACK.staff.rangeMetres,.45);
-  this.emit('action',undefined,{kind,id:a.id,comboStage:a.comboStage});
+  this.emit('action',undefined,{kind,id:a.id,comboStage:a.comboStage,owner:'player',weapon:s.equipment.weapon,family:weaponCombatFamily(s.equipment.weapon,s.combat)});
  }
  private rememberFeedback(intent:AttackFeedbackMetadata,target:EnemyState|undefined){
   if(!target)return;intent.feedbackTargetId=target.id;intent.feedbackTarget={x:target.x,z:target.z};intent.feedbackReported=false;
@@ -609,7 +671,7 @@ export class GameSession {
  private actionStep(a:ActionState,dt:number,heldAttack=false,nextAim?:number){
   if(a.skillId){this.combatRules.action(a,dt);return;}const old=a.elapsed;a.elapsed+=dt;const s=this.state;
   if(a.kind==='dash'&&a.elapsed>.04&&old<.22){const active=Math.max(0,Math.min(a.elapsed,.22)-Math.max(old,.04));this.move(s.player,direction(a.angle,active/ .18*1.55));}
-  if(a.kind==='sword'){if(a.elapsed>=(a.releaseAt??.12)&&old<(a.releaseAt??.12))a.accuracy=playerCombatAttributes(s).accuracy;const release=a.releaseAt??.12,end=release+meleeCombo(a.comboStage).active;if(a.elapsed>=release&&old<end)this.arc(a,24,BASIC_ATTACK.sword.rangeMetres,BASIC_ATTACK.sword.angleDegrees,false);if(old<end&&a.elapsed+1e-8>=end)this.finishFeedback(a,a.hits,{action:a.id});}
+  if(a.kind==='sword'){if(a.elapsed>=(a.releaseAt??.12)&&old<(a.releaseAt??.12))a.accuracy=playerCombatAttributes(s).accuracy;const combo=meleeCombo(a.comboStage),release=a.releaseAt??.12,end=release+combo.active;if(a.elapsed>=release&&old<end)this.arc(a,24*combo.damageMultiplier,BASIC_ATTACK.sword.rangeMetres,BASIC_ATTACK.sword.angleDegrees,false);if(old<end&&a.elapsed+1e-8>=end)this.finishFeedback(a,a.hits,{action:a.id});}
   if(a.kind==='push'&&a.elapsed>=.10&&old<.16)this.arc(a,8,1.35,90,true);
   const release=a.kind==='staff'?.20:a.kind==='bow'?Math.max(0,.12-(a.charged?.12:0)):.25;
   if(!a.emitted&&a.kind!=='bowAim'&&a.kind!=='sword'&&a.kind!=='push'&&a.kind!=='dash'&&a.elapsed+1e-8>=release){
@@ -634,24 +696,36 @@ export class GameSession {
     this.emit('push',boss?'稳住':undefined,{id:e.id,value:length});
    }
   }
-  if(!push)for(const anchor of this.enemyRules.anchors())if(!a.hits.includes(anchor.id)&&dist(p,anchor)<=range+anchor.radius&&Math.abs(deltaAngle(aim(p,anchor),a.angle))<=degrees*Math.PI/360&&this.visible(p,anchor)){a.hits.push(anchor.id);this.enemyRules.damageAnchor(anchor.id,this.weaponDamage(base),a.id);}
+  if(!push)for(const anchor of this.enemyRules.anchors())if(!a.hits.includes(anchor.id)&&dist(p,anchor)<=range+anchor.radius&&Math.abs(deltaAngle(aim(p,anchor),a.angle))<=degrees*Math.PI/360&&this.visible(p,anchor)){a.hits.push(anchor.id);this.enemyRules.damageAnchor(anchor.id,petOutgoingDamage(this.state,this.weaponDamage(base)),a.id);}
  }
  private weaponDamage(base:number,_e?:EnemyState){const id=this.state.equipment.weapon;return base*(1+equippedGearBonus(this.state).power/100)*(GROWING_EQUIPMENT[id]||EQUIPMENT[id].power?equipmentPowerMultiplier(id,this.state.progression.level):1+(EQUIPMENT[id].level-1)*.08);}
  private projectile(a:ActionState,kind:ProjectileState['kind'],base:number,range:number,speed:number,pierce=1,weapon=this.state.equipment.weapon){
   const p=this.state.player,q:ProjectileState={id:this.id('projectile'),kind,x:p.x,z:p.z,accuracy:a.accuracy??playerCombatAttributes(this.state).accuracy,angle:a.angle,speed,remaining:range,damage:kind==='spell'?base:Math.round(this.weaponDamage(base)),owner:'player',weapon,hits:[],leg:'out',returning:false,charged:!!a.charged,pierce,age:0,feedbackActionId:a.id};
   if(a.feedbackTargetId&&a.feedbackTarget){q.feedbackTargetId=a.feedbackTargetId;q.feedbackTarget={...a.feedbackTarget};q.feedbackReported=false;}else this.captureRayFeedback(q,p,a.angle,range,.45);
-  this.state.projectiles.push(q);this.emit('projectile',undefined,{id:q.id,kind});
+  this.state.projectiles.push(q);this.emit('projectile',undefined,{id:q.id,kind,owner:q.owner,weapon:q.weapon,family:weaponCombatFamily(q.weapon,this.state.combat),action:a.id,charged:q.charged});
+ }
+ /** Presentation snapshots only; never change accuracy, damage or saved state. */
+ private combatAudioMetadata(action:string,source:string,element?:string){
+  const s=this.state,q=s.projectiles.find(p=>p.id===action||p.feedbackActionId===action),cast=s.combat.casts.find(c=>c.id===action||c.id===q?.castId);
+  if(['environment','burn','secondary','pet','relic'].includes(source))return {owner:source==='environment'?'environment':'player'};
+  const weapon=q?.weapon??cast?.weapon??s.equipment.weapon,style=cast?PURE_SKILLS[cast.skillId]?.style:undefined;
+  const family=style&&style!=='COM'?style:element==='FIR'||element==='fire'?'FIR':element==='THU'||element==='lightning'?'THU':weaponCombatFamily(weapon,s.combat);
+  return {owner:'player',weapon,family};
  }
  private damageEnemy(e:EnemyState,damage:number,action:string,source:string,angle:number,feedback?:{element:string;critical?:boolean;accuracy?:number}):boolean{
   if(e.hp<=0)return false;
   if(source==='main')return this.combatRules.basicHit(e,damage,action,angle,feedback?.accuracy);if(source==='secondary'){const used=this.secondaryCounts.get(action)??0;if(used>=2)return false;this.secondaryCounts.set(action,used+1);if(this.secondaryCounts.size>1000)this.secondaryCounts.delete(this.secondaryCounts.keys().next().value!);}
   const s=this.state;let value=damage;const passive=EQUIPMENT[s.equipment.weapon]?.passive;if(['main','pure','spell','skill','basic'].includes(source)){if(passive==='steady-strike')value*=1.04;if(passive==='recovery-strike'&&(e.phase==='recovery'||e.phase==='stagger'))value*=1.08;}if(['pure','spell','relic','relicPhysical','burn'].includes(source)){s.combat.buffs[`aggro:${e.id}`]=s.time+20;}
   if(source==='main'){let bonus=0;if(this.equipped('A02')&&dist(s.player,e)>5)bonus+=.06;if((this.setCounts().wind??0)>=4&&e.markedUntil>s.time)bonus+=.10;value*=1+Math.min(.4,bonus);}
-  const guard=enemyGuardMultiplier(e,angle,s.time);if(guard!==undefined){if(!['spell','environment','relic','burn'].includes(source)&&guard<1){value*=guard;this.emit('block','盾挡',{id:e.id,action,at:{x:e.x,z:e.z},angle});}}else if((e.kind==='shield'||e.kind==='captain')&&e.phase!=='stagger'&&e.phase!=='recovery'&&!['spell','environment','relic','burn'].includes(source)&&Math.abs(deltaAngle(angle+Math.PI,e.angle))<Math.PI/3){value*=.4;this.emit('block','盾挡',{id:e.id,action,at:{x:e.x,z:e.z},angle});}
-  const opening=enemyProfile(e)?.recoveryDamageMultiplier??1;
+  const audio=this.combatAudioMetadata(action,source,feedback?.element);
+  const guardedSource=!['environment','relic','burn'].includes(source),guard=enemyGuardMultiplier(e,angle,s.time),fallbackGuard=guard===undefined&&(e.kind==='shield'||e.kind==='captain')&&e.phase!=='stagger'&&e.phase!=='recovery'&&Math.abs(deltaAngle(angle+Math.PI,e.angle))<Math.PI/3?.4:1,guardFactor=guard??fallbackGuard;
+  if(guardedSource&&guardFactor<1){value*=source==='spell'?Math.max(COMBAT_TACTICS.magicGuardFloor,guardFactor):guardFactor;this.emit('block',tacticsText(source==='spell'?'magicGuard':'guard'),{id:e.id,action,at:{x:e.x,z:e.z},angle,source,...audio,material:'metal'});}
+  const profile=enemyProfile(e),opening=e.phase==='stagger'?(profile?.staggerDamageMultiplier??profile?.recoveryDamageMultiplier??1):(profile?.recoveryDamageMultiplier??1);
   if(e.phase==='recovery'||e.phase==='stagger')value*=opening;
-  const oldHp=e.hp;e.hp=Math.max(e.trainingDummy?1:0,e.hp-Math.round(value));if(oldHp>0&&e.hp<=0){this.combatRules.growingKill(action,source,e);if(['main','pure','spell','skill','basic'].includes(source)&&Object.values(s.equipment).some(id=>typeof id==='string'&&EQUIPMENT[id]?.passive==='hunt-renewal')&&!(s.cooldowns.lifecycleHeal>0)&&s.player.hp>0){const healed=(s.player.maxHp-s.player.hp)*.03;s.player.hp+=healed;s.cooldowns.lifecycleHeal=5;if(healed>0)this.emit('heal',gearText('loot.huntHeal',{amount:Math.round(healed)}),{value:healed});}}this.emit('hit',undefined,{id:e.id,value:Math.round(value),hpLost:oldHp-e.hp,element:feedback?.element??source,critical:feedback?.critical??false,lethal:e.hp<=0,skillId:s.combat.casts.find(c=>c.id===action)?.skillId,charged:s.projectiles.find(q=>q.id===action||q.feedbackActionId===action)?.charged??false,angle,source,action,comboStage:s.action?.id===action?s.action.comboStage:undefined,at:{x:e.x,z:e.z},opening:opening>1&&(e.phase==='recovery'||e.phase==='stagger')});
-  if(e.hp<oldHp){this.recordCombat(e);s.combat.buffs[`aggro:${e.id}`]=s.time+20;this.enemyRules.alertPack(e);this.hitResponse.hit(e,action,source,angle);}
+  const direct=['pure','spell','skill','basic'].includes(source);let counter=false;
+  if(direct){if((s.combat.buffs.tacticalCounterUntil??0)>s.time){delete s.combat.buffs.tacticalCounterUntil;this.tacticalCounterAction={id:action,until:s.time+4};}if(this.tacticalCounterAction?.id===action&&this.tacticalCounterAction.until>s.time){counter=true;value*=COMBAT_TACTICS.counterMultiplier;}}
+  const applied=source==='environment'?Math.round(value):petOutgoingDamage(s,Math.round(value),e);const oldHp=e.hp;e.hp=Math.max(e.trainingDummy?1:0,e.hp-applied);if(oldHp>0&&e.hp<=0){this.combatRules.growingKill(action,source,e);if(['main','pure','spell','skill','basic'].includes(source)&&Object.values(s.equipment).some(id=>typeof id==='string'&&EQUIPMENT[id]?.passive==='hunt-renewal')&&!(s.cooldowns.lifecycleHeal>0)&&s.player.hp>0){const healed=restorePlayerHealth(s,(s.player.maxHp-s.player.hp)*.03);s.cooldowns.lifecycleHeal=5;if(healed>0)this.emit('heal',gearText('loot.huntHeal',{amount:Math.round(healed)}),{value:healed});}}this.emit('hit',undefined,{id:e.id,value:applied,hpLost:oldHp-e.hp,...audio,material:guardedSource&&guardFactor<1||profile?.body==='machine'?'metal':'soft',element:feedback?.element??source,critical:feedback?.critical??false,lethal:e.hp<=0,petEligible:this.petEligibleTarget(e)&&['pure','spell','skill','basic'].includes(source)&&!s.combat.casts.some(c=>c.id===action&&['FIR_04','BOW_06'].includes(c.skillId)),skillId:s.combat.casts.find(c=>c.id===action)?.skillId,charged:s.projectiles.find(q=>q.id===action||q.feedbackActionId===action)?.charged??false,angle,source,action,comboStage:s.action?.id===action?s.action.comboStage:undefined,at:{x:e.x,z:e.z},opening:opening>1&&(e.phase==='recovery'||e.phase==='stagger')});
+  if(e.hp<oldHp){if(counter)this.emit('counter_hit',undefined,{id:e.id,at:{x:e.x,z:e.z},action,duration:.35});this.recordCombat(e);s.combat.buffs[`aggro:${e.id}`]=s.time+20;this.enemyRules.alertPack(e);this.hitResponse.hit(e,action,source,angle);}
   if(source==='main'||source==='skill'){
    const weapon=s.equipment.weapon;
    if(this.equipped('A09')&&s.flags.counter_ready&&EQUIPMENT[weapon].kind==='sword'){s.flags.counter_ready=false;this.poise(e,4);}
@@ -672,13 +746,13 @@ export class GameSession {
   const s=this.state,p=s.player;if(p.hp<=0||p.hurtTime>0)return false;
   this.recordCombat(s.enemies.find(e=>e.id===source));
   const a=s.action;
-  if(source!=='fire'&&!ground&&a?.kind==='dash'&&a.elapsed>=.06&&a.elapsed<=.20){this.emit('evade','闪避');this.combatRules.growingEvade();if((this.setCounts().oath??0)>=4&&!(s.cooldowns.oathProc>0))s.cooldowns.oathReady=4;if(this.equipped('A09')&&!(s.cooldowns.counter>0)){s.flags.counter_ready=true;s.combat.buffs.counterReadyUntil=s.time+4;s.cooldowns.counter=6;this.emit('counter_ready','老兵的回敬：下一次近战削韧 +4');}return false;}
+  if(source!=='fire'&&!ground&&a?.kind==='dash'&&a.elapsed>=.06&&a.elapsed<=.20){if(this.rewardedEvadeAction!==a.id){this.rewardedEvadeAction=a.id;const at={x:p.x,z:p.z};this.emit('evade',tacticsText('evade'),{id:'player',at,source,action:hitId??a.id,timing:true,duration:.35,petEligible:s.enemies.some(e=>e.id===source&&this.petEligibleTarget(e))});p.focus=Math.min(p.maxFocus,p.focus+COMBAT_TACTICS.counterResource);s.combat.buffs.tacticalCounterUntil=s.time+COMBAT_TACTICS.counterSeconds;this.emit('counter_ready',undefined,{id:'player',at,duration:COMBAT_TACTICS.counterSeconds,tactical:true});this.combatRules.growingEvade();if((this.setCounts().oath??0)>=4&&!(s.cooldowns.oathProc>0))s.cooldowns.oathReady=4;if(this.equipped('A09')&&!(s.cooldowns.counter>0)){s.flags.counter_ready=true;s.combat.buffs.counterReadyUntil=s.time+4;s.cooldowns.counter=6;this.emit('counter_ready','老兵的回敬：下一次近战削韧 +4');}this.changed();}return false;}
   const attacker=s.enemies.find(e=>e.id===source);
   if(!ground&&(attacker||accuracy!==undefined)){const key=hitId??`enemy:${s.area}:${source}:${attacker?.respawnCount??0}:${attacker?.attackCount??0}`,result=rollContactHit(s.seed,key,'player',accuracy??enemyCombatAttributes(attacker!).accuracy,playerCombatAttributes(s).evasion);if(!result.landed){this.emit('miss','闪避',{id:'player',action:key,source,reason:'evasion',chance:result.chance,roll:result.roll,at:{x:p.x,z:p.z}});this.changed();return false;}}
   let reduction=element==='physical'?this.combatRules.reduction(false):element==='fire'?this.combatRules.reduction(true):element==='lightning'&&this.equipped('J06')?-.05:0;if(!ground&&Object.values(s.equipment).some(id=>typeof id==='string'&&EQUIPMENT[id]?.passive==='oath-guard'))reduction+=.02;if(element==='physical'){for(const [slot,id]of Object.entries(s.equipment))if(slot!=='spells'&&typeof id==='string')reduction+=(this.itemView(id)?.armor??0)/100;if(this.equipped('A06')&&(s.cooldowns.dodgeDefense??0)>0&&!(s.cooldowns.leatherDefense>0)){reduction+=.1;s.cooldowns.leatherDefense=8;}}
-  reduction+=this.combatRules.consumeDirectWard(ground);let amount=Math.max(1,Math.round(damage*(1-Math.min(.4,reduction))));const absorbed=Math.min(p.shield,amount);p.shield-=absorbed;this.combatRules.absorbed(absorbed);amount-=absorbed;const oldHp=p.hp;if(source==='fire'||!this.combatRules.preventGrowingDeath(amount))p.hp=Math.max(0,p.hp-amount);else amount=Math.max(0,oldHp-1);p.hurtTime=.45;this.meleeChain.reset();
-  if(heavy&&a&&a.elapsed<(a.skillId?(a.releaseAt??0):a.kind.startsWith('spell:')?.25:a.kind==='sword'?(a.releaseAt??.12):.12)){if(a.kind.startsWith('spell:'))s.cooldowns.spellRetry=.4;s.action=null;}
-  this.combatRules.afterHurt(element==='fire'&&amount>0);this.emit('hurt',undefined,{value:amount,hpLost:oldHp-p.hp,absorbed,source,element});this.changed();return true;
+  reduction+=this.combatRules.consumeDirectWard(ground);let amount=this.petCombat.beforeHurt(petIncomingDamage(s,Math.max(1,Math.round(damage*(1-Math.min(.4,reduction))))),!!attacker&&this.petEligibleTarget(attacker));const absorbed=Math.min(p.shield,amount);p.shield-=absorbed;this.combatRules.absorbed(absorbed);amount-=absorbed;const oldHp=p.hp;if(source==='fire'||!this.combatRules.preventGrowingDeath(amount))p.hp=Math.max(0,p.hp-amount);else amount=Math.max(0,oldHp-1);p.hurtTime=.45;this.meleeChain.reset();
+  if(heavy&&a&&a.elapsed<(a.skillId?(a.releaseAt??0):a.kind.startsWith('spell:')?.25:a.kind==='sword'?(a.releaseAt??.12):.12)){if(a.kind.startsWith('spell:'))s.cooldowns.spellRetry=.4;s.action=null;this.emit('player_control',undefined,{source,duration:.45,petEligible:!!attacker&&this.petEligibleTarget(attacker)});}
+  this.combatRules.afterHurt(element==='fire'&&amount>0);this.emit('hurt',undefined,{value:amount,hpLost:oldHp-p.hp,absorbed,source,element,action:hitId??`${source}:${attacker?.attackCount??0}`,petEligible:!!attacker&&this.petEligibleTarget(attacker)});this.changed();return true;
  }
  private enemyStep(e:EnemyState,dt:number){
   if(e.trainingDummy&&!e.trainingAttacks){e.phaseTime=Math.max(0,e.phaseTime-dt);if(e.phaseTime===0&&(e.phase==='stagger'||e.phase==='recovery'))e.phase='idle';return;}
@@ -732,7 +806,7 @@ export class GameSession {
     const anchor=this.enemyRules.anchors().filter(h=>this.segmentHits(before,q,h,h.radius+.1)&&this.visible(before,h)).sort((a,b)=>dist(before,a)-dist(before,b)||a.id.localeCompare(b.id))[0];if(anchor&&(!targets.length||dist(before,anchor)<dist(before,targets[0]))){this.enemyRules.damageAnchor(anchor.id,q.damage,q.id);q.remaining=0;continue;}
     for(const e of targets){q.hits.push(e.id);const spell=q.kind==='spell',landed=this.damageEnemy(e,q.damage,q.id,spell?'spell':q.pierce>1?'skill':'main',q.angle,{element:spell?'spell':'basic',accuracy:q.accuracy});
      if(landed&&q.weapon==='T02')e.markedUntil=s.time+8;
-     if(landed&&q.weapon==='T03'&&e.markedUntil>s.time){this.damageEnemy(e,8,q.id,'secondary',q.angle);s.player.hp=Math.min(s.player.maxHp,s.player.hp+4);}
+     if(landed&&q.weapon==='T03'&&e.markedUntil>s.time){this.damageEnemy(e,8,q.id,'secondary',q.angle);restorePlayerHealth(s,4);}
      if(landed&&q.weapon==='W08'&&q.charged&&!(s.cooldowns.windSpeedLock>0)){s.cooldowns.wind_speed=2;s.cooldowns.windSpeedLock=4;}
      if(q.hits.length>=q.pierce){if(q.returning&&q.leg==='out'){q.leg='back';q.hits=[];q.remaining=12;}else q.remaining=0;break;}q.damage=Math.round(q.damage*.5);
     }
@@ -815,14 +889,19 @@ export class GameSession {
    if(e.trainingEnemy){this.changed();this.emit('defeat',undefined,{id:e.id});continue;}
    if(e.respawnSeconds){
     e.respawnAt=s.time+e.respawnSeconds;
-    if(this.lootRules.hunt(e)){this.lootRules.supplies(e);this.gainExperience(`hunt:${s.area}:${e.id}`,huntingKillExperience(e.level??1,s.progression.level,e.templateId?.includes('ALPHA')),true,idleHunting);this.journey.hunt();this.growingLoot.hunt();}
+    if(this.lootRules.hunt(e)){this.gems.recordHunt(`hunt:${s.area}:${e.id}:${(e.respawnCount??0)+1}`,e.level??1);this.pets.recordDefeat(e);this.lootRules.supplies(e);this.gainExperience(`hunt:${s.area}:${e.id}`,huntingKillExperience(e.level??1,s.progression.level,e.templateId?.includes('ALPHA')),true,idleHunting);this.journey.hunt();this.growingLoot.hunt();}
     this.changed();this.emit('defeat',undefined,{id:e.id});continue;
    }
    const growingLife=this.bossLoot.defeat(e);
-   if(e.bossId&&(e.respawnCount??0)>0){if(growingLife){this.lootRules.supplies(e);this.gainExperience(`growing-rematch:${e.bossId}`,3*huntingKillExperience(e.level??1,s.progression.level),true,idleHunting);}this.emit('defeat',undefined,{id:e.id});continue;}
-   this.once(`kill:${s.area}:${e.id}`,()=>{this.lootRules.enemy(e);this.lootRules.supplies(e);const level=e.level??1,template=CAMPAIGN_ENEMY_TEMPLATES[e.bossId??e.templateId??''];if(!campaignFighter(e)?.deferExperience)this.gainExperience(`enemy:${s.area}:${e.id}`,template?.firstClearExperience??(20+8*(level-1))*(e.bossId?(template?.mandatory?8:3):1));if(e.bossId)s.flags[`boss_defeated:${e.bossId}`]=true;if(e.bossId==='BOSS_R1'||!e.bossId&&e.kind==='captain'){s.flags.captain_defeated=true;this.awardInspiration('captain');this.emit('captain_defeated','灰披队长卸下盾牌；横杆已可抬起',{id:e.id});}else if(e.id.includes('warden'))this.rollLegend(`pass:${s.area}:${e.id}`,.25,e);this.emit('defeat',undefined,{id:e.id});});}
+   if(e.bossId&&(e.respawnCount??0)>0&&growingLife)this.pets.recordDefeat(e);
+   if(e.bossId&&(e.respawnCount??0)>0){if(growingLife){const chapter=Math.min(2,e.lootChapter??chapterForArea(s.area));this.gems.reward(`boss:${s.area}:${e.id}:${e.respawnCount??0}`,chapter*10,chapter*2);this.lootRules.supplies(e);this.gainExperience(`growing-rematch:${e.bossId}`,3*huntingKillExperience(e.level??1,s.progression.level),true,idleHunting);}this.emit('defeat',undefined,{id:e.id});continue;}
+   this.once(`kill:${s.area}:${e.id}`,()=>{this.lootRules.enemy(e);this.lootRules.supplies(e);const level=e.level??1,template=CAMPAIGN_ENEMY_TEMPLATES[e.bossId??e.templateId??''];if(!campaignFighter(e)?.deferExperience)this.gainExperience(`enemy:${s.area}:${e.id}`,template?.firstClearExperience??(20+8*(level-1))*(e.bossId?(template?.mandatory?8:3):1));if(e.bossId)s.flags[`boss_defeated:${e.bossId}`]=true;if(e.bossId==='BOSS_R1'||!e.bossId&&e.kind==='captain'){s.flags.captain_defeated=true;this.awardInspiration('captain');this.emit('captain_defeated','灰披队长卸下盾牌；横杆已可抬起',{id:e.id});}else if(!e.bossId&&e.id.includes('warden'))this.rollLegend(`pass:${s.area}:${e.id}`,.25,e);this.emit('defeat',undefined,{id:e.id});});
+   this.pets.recordDefeat(e);
+   if(growingLife){const chapter=Math.min(2,e.lootChapter??chapterForArea(s.area));this.gems.reward(`boss:${s.area}:${e.id}:${e.respawnCount??0}`,chapter*10,chapter*2);}
+  }
   for(const e of s.enemies)if(e.bossId&&e.hp<=0&&s.receipts[`kill:${s.area}:${e.id}`])this.journey.defeated(e);
   if(s.player.hp>0)this.campaign.tick();
+  this.chapterTwo.observeCombat();this.petJourneys.observeCombat();
   this.lootRules.encounter(s.enemies.slice().reverse().find(e=>e.diedAt===s.time));if(s.player.hp<=0&&s.status!=='dead'){s.status='dead';s.dialogue=null;s.action=null;this.changed();this.emit('death','返回最近检查点；已击败敌人与已消耗物品保留');}
  }
  interact(object:InteractionDef):GameEvent[]{
@@ -833,6 +912,7 @@ export class GameSession {
   if(access.completed||!access.available){this.emit(access.completed?'inspect':'notice',access.reason,{id:object.id});return this.drain();}
   if(!this.interactionVisible(object))return [];
   const a=object.action;
+  if(a==='pet_journey'){this.petJourneys.interact(object.id);return this.drain();}
   if(['offer','merchant','meeting','finish','checkpoint','recover','release_workers','disable_trap','cache'].includes(a)&&!this.safe()){this.emit('notice','附近仍有敌人或火焰');return this.drain();}
   if(a==='journey_board'){this.emit('journey_open');}
   else if(a==='hunting_guide'){this.emit('hunting_open');}
@@ -872,21 +952,43 @@ export class GameSession {
   this.syncProgression();return this.drain();
  }
  private growingRematch(id:string){
+  if(chapterTwoBattleStopped(this.state,this.state.area)){this.emit('notice',encounterText('event.oathDone'));return;}
   const s=this.state,index=s.enemies.findIndex(e=>e.id===id),enemy=s.enemies[index];
-  if(!enemy?.bossId||enemy.hp>0||!s.flags[`boss_defeated:${enemy.bossId}`]&&!s.receipts[`kill:${s.area}:${enemy.id}`]){this.emit('notice',gearText('loot.rematchFirst'));return;}
+  if(!enemy?.bossId||enemy.hp>0||peacefulBossRetired(s,enemy.id)||!s.flags[`boss_defeated:${enemy.bossId}`]&&!s.receipts[`kill:${s.area}:${enemy.id}`]){this.emit('notice',gearText('loot.rematchFirst'));return;}
   if(!this.safe()){this.emit('notice',gearText('loot.rematchSafe'));return;}
   if(!this.bossLoot.beginRematch(enemy.bossId)){const seconds=this.bossLoot.view(enemy.bossId).remaining;this.emit('notice',gearText('loot.rematchWait',{time:`${Math.floor(seconds/60)}:${String(seconds%60).padStart(2,'0')}`}));return;}
   const authored=this.areaDef?.enemies.find(e=>e.id===id);if(!authored)return;
   this.combatRules.resetTransient();this.enemyRules.reset();s.projectiles=[];s.fireZones=[];
   s.enemies[index]={...this.spawn({...authored,level:this.bossLoot.rematchLevel(authored),lootChapter:releasedEquipmentChapter(s.progression.level)}),respawnCount:(enemy.respawnCount??0)+1};
-  this.changed();this.emit('notice',gearText('loot.rematchStarted'));
+  this.changed();this.emit('notice',gearText(bossRewardKind(enemy)==='fixed'?'loot.mainRematchStarted':'loot.rematchStarted'));
+ }
+ private withdrawChapterTwoEnemies(ids:readonly string[]){
+  const s=this.state,removed=new Set(ids);if(!removed.size)return;
+  s.enemies=s.enemies.filter(enemy=>!removed.has(enemy.id));
+  // Finish the player's released actions before their saved target disappears.
+  // Untagged hostile shots cannot be attributed safely and are withdrawn too.
+  s.action=null;s.combat.casts=[];s.projectiles=s.projectiles.filter(q=>q.owner==='enemy'&&!!q.enemyId&&!removed.has(q.enemyId));
+  s.enemyHazards=s.enemyHazards.filter(hazard=>!removed.has(hazard.ownerId));
+  for(const id of removed)delete s.combat.statuses[id];
+  if(s.combat.engagement?.area===s.area){s.combat.engagement.enemyIds=s.combat.engagement.enemyIds.filter(id=>!removed.has(id));if(!s.combat.engagement.enemyIds.length)delete s.combat.engagement;}
+  s.encounters[s.area]=clone(s.enemies);this.enemyRules.reset();this.hitResponse.reset();this.meleeChain.reset();this.changed();
+ }
+ private beginChapterTwoAction(d:CampaignEventDef){
+  const action=d.chapterTwoAction&&chapterTwoAction(d.chapterTwoAction),source=this.areaDef?.objects.find(object=>object.action==='campaign_event'&&object.eventId===d.id);
+  if(!action||!source||d.area!==this.state.area||dist(this.state.player,source)>1.35||!this.visible(this.state.player,source)||!this.safe())return;
+  this.chapterTwoAnchor={area:this.state.area,eventId:d.id,objectId:source.id};this.cancelInput();
+  this.dialogue('chapter2:'+action.id,d.label,d.description,[['confirm',encounterText('choice.confirm')],['later',encounterText('choice.later')]]);this.changed();
  }
  private beginCampaignEvent(id:string){const d=CAMPAIGN_EVENTS[id],s=this.state;if(!d||d.area!==s.area)return;const status=this.campaignEventAvailability(id);if(!status.available){this.emit(status.completed?'inspect':'notice',status.reason,{id});return;}
+  if(d.chapterTwoAction){this.beginChapterTwoAction(d);return;}
   const itemOptions=(d.choiceItems??[]).filter(item=>!s.inventory[item]&&(!GROWING_EQUIPMENT[item]||!growingOwned(s,item)));if(d.choices?.length){this.dialogue(`campaign:${id}`,d.optional?d.label:'现场行动',d.description,[...d.choices.map(c=>[c.id,c.label] as [string,string]),['cancel:campaign',worldText('talk.later')]]);}else if(itemOptions.length){this.dialogue(`campaign:${id}`,'武备自选',d.description,[...itemOptions.map(item=>[`equipment:${item}`,EQUIPMENT[item]?.name??item] as [string,string]),['cancel:campaign',worldText('talk.later')]]);}else this.finishCampaignEvent(d);
  }
  private finishCampaignEvent(d:CampaignEventDef,choice?:string){const s=this.state,key=`campaign:${d.id}`;if(s.receipts[key])return;const choiceDef=d.choices?.find(c=>c.id===choice),chosenItem=choice?.startsWith('equipment:')?choice.slice(10):null;if(d.choices?.length&&!choiceDef||chosenItem&&!d.choiceItems?.includes(chosenItem))return;
   const shared=d.experienceEvent&&s.progression.xpReceipts[d.experienceEvent]!==undefined;for(const flag of [...d.sets??[],...choiceDef?.sets??[]])s.flags[flag]=true;
-  if(d.peacefulResolution)for(const e of s.enemies)if(e.hp>0&&!e.respawnSeconds){e.hp=0;e.phase='dead';this.once(`kill:${s.area}:${e.id}`,()=>{const level=e.level??1,template=CAMPAIGN_ENEMY_TEMPLATES[e.bossId??e.templateId??''];if(!campaignFighter(e)?.deferExperience)this.gainExperience(`enemy:${s.area}:${e.id}`,template?.firstClearExperience??(20+8*(level-1))*(e.bossId?3:1));this.lootRules.enemy(e);if(e.bossId)s.flags[`boss_defeated:${e.bossId}`]=true;});}s.encounters[s.area]=clone(s.enemies);this.lootRules.encounter();
+  if(d.peacefulResolution){const retired:EnemyState[]=[];for(const e of s.enemies)if(e.hp>0&&!e.respawnSeconds){
+   if(e.bossId){if(!peacefulBossTarget(d.id,s.area,e))continue;e.hp=0;e.phase='dead';e.combat=undefined;delete e.diedAt;s.receipts[peacefulBossReceipt(d.id,e.id)]=true;retired.push(e);continue;}
+   e.hp=0;e.phase='dead';this.once(`kill:${s.area}:${e.id}`,()=>{const level=e.level??1,template=CAMPAIGN_ENEMY_TEMPLATES[e.templateId??''];if(!campaignFighter(e)?.deferExperience)this.gainExperience(`enemy:${s.area}:${e.id}`,template?.firstClearExperience??(20+8*(level-1)));this.lootRules.enemy(e);});
+  }if(retired.length){this.withdrawChapterTwoEnemies(retired.map(e=>e.id));s.enemies.push(...retired);}}s.encounters[s.area]=clone(s.enemies);this.lootRules.encounter();
   if(!shared){if(d.gold)this.gold(key,d.gold);s.player.iron=Math.min(9999,s.player.iron+(d.iron??0));s.player.runes=Math.min(9999,s.player.runes+(d.runes??0));s.player.cores=Math.min(9999,s.player.cores+(d.cores??0));for(const item of d.items??[])this.grant(item,1,key);if(chosenItem)this.grant(chosenItem,1,key);else if(d.choiceItems?.length&&!d.choiceItems.some(item=>!s.inventory[item])){s.player.iron=Math.min(9999,s.player.iron+2);s.player.gold=Math.min(9999,s.player.gold+12);}if(d.experienceEvent)this.awardExperience(d.experienceEvent);if(d.experience)this.gainExperience(key,d.experience);}
   for(const recipe of d.recipes??[])if(RECIPES[recipe]&&!s.recipes.includes(recipe))s.recipes.push(recipe);s.receipts[key]=true;if(choice)s.receipts[`campaign:choice:${d.id}`]=choice;s.dialogue=null;this.syncProgression();if(d.id.startsWith('investigate-'))this.growingLoot.opportunity();this.campaign.task(d.id);if(s.flags.m8_complete){s.flags.complete=true;s.status='complete';this.emit('complete','终局行动已完成，世界进度已保存');}this.changed();this.emit('quest',choiceDef?.text??d.completionText??campaignText('event.complete',{label:d.label}),{id:d.id});
  }
@@ -906,6 +1008,12 @@ export class GameSession {
  }
  choose(id:string):GameEvent[]{
   const s=this.state,d=s.dialogue;if(!d||s.dice.active||!d.options.some(o=>o.id===id))return [];
+  if(d.id.startsWith('chapter2:')){
+   const action=d.id.slice(9),anchor=this.chapterTwoAnchor,event=anchor&&CAMPAIGN_EVENTS[anchor.eventId],source=anchor&&this.areaDef?.objects.find(object=>object.id===anchor.objectId&&object.eventId===anchor.eventId&&object.action==='campaign_event');
+   s.dialogue=null;this.chapterTwoAnchor=undefined;this.changed();if(id==='later')return this.drain();
+   if(id!=='confirm'||!anchor||anchor.area!==s.area||event?.chapterTwoAction!==action||!source||s.status==='dead'||dist(s.player,source)>1.35||!this.visible(s.player,source)||!this.safe()){this.emit('notice',encounterText('reason.unavailable'));return this.drain();}
+   const status=this.campaignEventAvailability(event.id);if(!status.available){this.emit('notice',status.reason);return this.drain();}this.chapterTwo.perform(action);return this.drain();
+  }
   if(d.id.startsWith('campaign:')){if(id==='cancel:campaign'){s.dialogue=null;this.changed();return this.drain();}const event=CAMPAIGN_EVENTS[d.id.slice(9)];if(event)this.finishCampaignEvent(event,id);return this.drain();}
   if(d.id==='offer'&&id.startsWith('check:')){this.beginCheck(id.slice(6),'t1-mira');return this.drain();}
   if(id==='shop'&&s.flags.accepted){const anchor=this.areaDef?.objects.find(o=>o.action==='offer'&&o.merchant==='mira');if(anchor&&dist(s.player,anchor)<=1.35&&this.visible(s.player,anchor)&&this.safe()){this.merchant='mira';this.merchantAnchor={x:anchor.x,z:anchor.z};if(!s.discoveredMerchants.includes('mira'))s.discoveredMerchants.push('mira');s.dialogue=null;this.emit('shop',MERCHANTS.mira.name,{id:'mira'});this.changed();return this.drain();}}
@@ -949,10 +1057,13 @@ export class GameSession {
    this.state.flags[`waypoint:${area.id}`]=true;this.changed();
   }
  }
- fastTravelAvailability(area:AreaDef):{available:boolean;reason:string} {
-  const s=this.state,point=authoredWaypoint(area)?.point;
+ fastTravelAvailability(area:AreaDef,bossKey?:string):{available:boolean;reason:string} {
+  const s=this.state,boss=bossKey?new BossDirectory({[area.id]:area}).find(this,bossKey):undefined;
+  // A previously defeated directory target can use its map's authored entrance
+  // even when that map has no ordinary waypoint. Map travel keeps its own unlock.
+  const waypoint=authoredWaypoint(area),point=bossKey?waypoint?.point??area.spawn:waypoint?.point;
   const blocked=(reason:string)=>({available:false,reason});
-  if(!point||!waypointUnlocked(s.flags,area))return blocked(mapText('map.notUnlocked'));
+  if(!point||(bossKey?!boss||!s.flags[`visited:${area.id}`]:!waypointUnlocked(s.flags,area)))return blocked(mapText('map.notUnlocked'));
   if(this.fastTravelOrigin)return blocked(mapText('map.busy'));
   if(s.status==='dead'||s.player.hp<=0)return blocked(mapText('map.dead'));
   if(s.dialogue||s.dice.active||s.action)return blocked(mapText('map.submitting'));
@@ -965,9 +1076,9 @@ export class GameSession {
   return {available:true,reason:mapText('map.direct')};
  }
  /** Transaction stays in memory until the scene has actually loaded. No healing, rewards or exit effects. */
- fastTravel(area:AreaDef):boolean {
-  if(!this.areaDef||!this.fastTravelAvailability(area).available)return false;
-  const s=this.state,point=authoredWaypoint(area)!.point;
+ fastTravel(area:AreaDef,bossKey?:string):boolean {
+  if(!this.areaDef||!this.fastTravelAvailability(area,bossKey).available)return false;
+  const s=this.state,point=authoredWaypoint(area)?.point??area.spawn;
   this.fastTravelOrigin={state:this.snapshot(),area:this.areaDef};
   s.encounters[s.area]=clone(s.enemies);this.enemyRules.reset();this.hitResponse.reset();this.meleeChain.reset();this.combatRules.resetTransient();
   s.area=area.id;s.player.x=point.x;s.player.z=point.z;s.enemies=clone(s.encounters[area.id]??[]);
@@ -1001,8 +1112,8 @@ export class GameSession {
   const health=kind==='health',stock=health?'healthPotions':profile.stock,value=health?'hp':'focus',max=health?p.maxHp:p.maxFocus;
   if(p[stock]<=0){this.emit('notice','药剂已用尽，返回安全检查点补充');return false;}
   if(p[value]>=max){this.emit('notice',`${health?'生命':profile.name}已满，无需使用药水`);return false;}
-  const restored=Math.min(health?Math.max(40,max*.4):max*RESOURCE_RULES.potionFraction,max-p[value]);p[value]+=restored;p[stock]--;s.cooldowns.consumable=RESOURCE_RULES.potionCooldown;
-  s.receipts[this.id('consumable')]=health?'health':profile.kind;this.changed();this.emit('consumable',`${health?'生命':profile.name} +${Math.ceil(restored)}`);return true;
+  const restored=health?restorePlayerHealth(s,Math.max(40,max*.4)):Math.min(max*RESOURCE_RULES.potionFraction,max-p[value]);if(!health)p[value]+=restored;p[stock]--;s.cooldowns.consumable=RESOURCE_RULES.potionCooldown;
+  s.receipts[this.id('consumable')]=health?'health':profile.kind;this.changed();this.emit('consumable',`${health?'生命':profile.name} +${Math.ceil(restored)}`,{health,value:restored});return true;
  }
  rest():boolean{if(this.state.status==='dead'||!!this.state.dice.active||!this.safe()||!this.checkpointNear())return false;const p=this.state.player;p.hp=p.maxHp;p.focus=p.maxFocus;for(const def of Object.values(SUPPLIES))p[def.stock]=def.capacity;this.state.cooldowns.consumable=0;this.setCheckpoint();this.changed();this.emit('rest','检查点休整：生命、职业资源、药水补满；技能消耗职业资源并自动恢复');return true;}
  retry():GameEvent[]{const s=this.state;if(s.status!=='dead')return [];this.meleeChain.reset();this.hitResponse.reset();s.encounters[s.area]=s.enemies.map(e=>e.hp<=0?clone(e):this.spawn({...e,hp:e.maxHp}));this.combatRules.resetTransient();delete s.combat.engagement;this.enemyRules.reset();s.status=s.flags.m8_complete?'complete':'playing';s.area=s.checkpoint.area;s.player.x=s.checkpoint.x;s.player.z=s.checkpoint.z;s.player.hp=s.player.maxHp;s.player.focus=s.player.maxFocus;for(const def of Object.values(SUPPLIES))s.player[def.stock]=def.capacity;s.cooldowns.consumable=0;s.player.hurtTime=0;s.player.shield=0;s.action=null;s.dialogue=null;s.projectiles=[];s.fireZones=[];s.enemies=clone(s.encounters[s.area]??[]);this.areaDef=null;this.previous={x:0,z:0};this.changed();this.emit('retry','已返回检查点；固定守军进度保留，野外怪群按狩猎周期补充',{to:s.area,entry:{x:s.player.x,z:s.player.z}});return this.drain();}
@@ -1012,11 +1123,11 @@ export class GameSession {
  snapshot():GameState{return JSON.parse(this.serializeSnapshot());}
  static restore(snapshot:unknown,world:WorldQuery,calendarNow:()=>number=Date.now):GameSession {
   validateSnapshot(snapshot);
-  const game=new GameSession(snapshot.seed-1,world,calendarNow);game.state=clone(snapshot);const s=game.state,oilMigrated=migrateRemovedOil(s),skillsMigrated=migrateFourSkillKit(s),journeyMigrated=initializeLifecycleJourney(s),curveMigrated=updateExperienceCurve(s.progression),resourcesMigrated=migrateClassResource(s),migrated=oilMigrated||resourcesMigrated||skillsMigrated||journeyMigrated||curveMigrated||!s.forging||s.forging.version===1||!s.groundLoot;s.groundLoot??=[];if(!s.forging)s.forging=freshForging();syncRandomForging(s);
+   const game=new GameSession(snapshot.seed-1,world,calendarNow);game.state=clone(snapshot);const s=game.state,oilMigrated=migrateRemovedOil(s),skillsMigrated=migrateFourSkillKit(s),fixedKitMigrated=migrateFixedCombatKit(s),curveMigrated=updateExperienceCurve(s.progression),resourcesMigrated=migrateClassResource(s),petsMigrated=migratePets(s),migrated=petsMigrated||oilMigrated||resourcesMigrated||skillsMigrated||fixedKitMigrated||curveMigrated||!s.pets||!s.forging||s.forging.version===1||!s.groundLoot;s.groundLoot??=[];s.pets??=freshPets();if(!s.forging)s.forging=freshForging();syncRandomForging(s);
   if(!s.receipts['waypoint:v1']){for(const [key,value]of Object.entries(s.flags))if(value&&key.startsWith('checkpoint:')&&s.flags['visited:'+key.slice(11)])s.flags['waypoint:'+key.slice(11)]=true;s.receipts['waypoint:v1']=true;game.dirty=true;}
   // Resume current-format durable state; in-flight input and effects never resume.
   s.dialogue=null;s.action=null;s.projectiles=[];s.fireZones=[];s.combat.casts=[];
-  game.combatRules.clearSkillCooldowns();s.player.hurtTime=0;
+  game.combatRules.clearSkillCooldowns();game.petCombat.clearTransient();game.petJourneys.enter();s.player.hurtTime=0;
   activateCombatLoadout(s.combat,s.progression);game.recalculate();game.dirty=game.dirty||migrated;return game;
  }
 }

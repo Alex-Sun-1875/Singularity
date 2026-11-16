@@ -1,0 +1,233 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-16",
+  "generatedAt": "2026-11-15T18:17:59.936312+00:00",
+  "status": "implemented_browser_verified_pending_platform_device",
+  "scope": "Unified Cocos adventure journal and embedded existing map, chapter previews and staged third-chapter pet access. Acceptance binds the immutable v4 compiled product; current concurrent audio-source work is recorded separately.",
+  "implemented": [
+    "Shared journal/map workspace and chapter/main/side/place directory",
+    "Story introductions, objective timeline, actual choices, seen dialogue and retained reward detail entries",
+    "Specific-target bidirectional map selection, explicit navigation and preserved fog",
+    "World/region/current-scene map, visible player marker, custom point and existing waypoint dispatch",
+    "Legacy task/map shortcuts and input/capture cleanup",
+    "Third and later chapters remain coming soon; no third-chapter story, map, rewards or pet release"
+  ],
+  "chapter3": {
+    "available": false,
+    "display": "敬请期待",
+    "plannedPetUnlockChapter": 3,
+    "petsCurrentlyReleased": false,
+    "requiresFutureRealChapterEntry": true,
+    "gateReport": "test-results/pets-chapter-gate/gate.json"
+  },
+  "checks": {
+    "fullTypecheck": {
+      "status": "passed",
+      "command": "npm run check",
+      "log": "test-results/adventure-journal-v4/typecheck.log"
+    },
+    "currentWorkspaceTypecheck": {
+      "status": "passed",
+      "log": "test-results/adventure-journal-v4/current-workspace-typecheck.log",
+      "scope": "Observed post-snapshot workspace including concurrent audio hooks; not a new browser/build acceptance."
+    },
+    "webBuild": {
+      "status": "passed",
+      "command": "npm start test",
+      "profile": "test",
+      "log": "test-results/adventure-journal-v4/web-build.log"
+    },
+    "existingRuleSuite": {
+      "status": "passed",
+      "passed": 155,
+      "failed": 0,
+      "profile": "test",
+      "log": "test-results/adventure-journal-v1/existing-tests.log",
+      "scope": "Recorded existing-suite run during this task, not a later concurrent audio or platform acceptance."
+    },
+    "readOnlyModel": {
+      "status": "passed",
+      "passed": 16,
+      "report": "test-results/adventure-journal-model/validation.json"
+    },
+    "mapFocused": {
+      "status": "passed",
+      "passed": 19,
+      "scope": "Engine-free VM ownership/lifecycle/data checks.",
+      "report": "test-results/adventure-journal-map/embedded-smoke.json"
+    },
+    "fullCocosBrowser": {
+      "status": "passed",
+      "report": "test-results/adventure-journal-v4/full-browser-validation.json",
+      "viewports": [
+        {
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "deviceScaleFactor": 3,
+          "browserTouchEnabled": true,
+          "checks": {
+            "browsingUnchanged": true,
+            "documentScrolled": true,
+            "mapSelectionPreserved": true,
+            "mapZoomRetained": true,
+            "chapter3StateUnchanged": true,
+            "chapter3ReadOnly": true,
+            "mMap": true,
+            "mClosed": true,
+            "noStaleJournal": true,
+            "localHasPlayer": true,
+            "worldReachable": true,
+            "worldHasKnownRegion": true,
+            "regionReachable": true,
+            "unknownNotInDirectory": true,
+            "allPetsClosed": true
+          },
+          "minimumNativeTouchTarget": 47.999999999999886,
+          "consoleErrors": 0,
+          "displayFixtureSpecificTargetAndEventMatched": true
+        },
+        {
+          "viewport": {
+            "width": 932,
+            "height": 430
+          },
+          "deviceScaleFactor": 3,
+          "browserTouchEnabled": true,
+          "checks": {
+            "browsingUnchanged": true,
+            "documentScrolled": true,
+            "mapSelectionPreserved": true,
+            "mapZoomRetained": true,
+            "chapter3StateUnchanged": true,
+            "chapter3ReadOnly": true,
+            "mMap": true,
+            "mClosed": true,
+            "noStaleJournal": true,
+            "localHasPlayer": true,
+            "worldReachable": true,
+            "worldHasKnownRegion": true,
+            "regionReachable": true,
+            "unknownNotInDirectory": true,
+            "allPetsClosed": true
+          },
+          "minimumNativeTouchTarget": 47.99999999999977,
+          "consoleErrors": 0,
+          "displayFixtureSpecificTargetAndEventMatched": true
+        }
+      ],
+      "displayFixtureScope": "Isolated chapter-two H04 GameSession display fixture for multiple rescue targets; no quest action executed, no release-policy override.",
+      "explicitCustomNavigation": {
+        "callbackCalls": 1,
+        "fieldTouchCreatedMarker": true,
+        "uiClosed": true,
+        "scope": "Fresh ordinary journey; explicit native Go to marker button invokes the existing HUD navigation callback. Callback spied to avoid walking and closes via the existing close action."
+      },
+      "headerTouchSmoke": [
+        {
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "physicalTouch": true,
+          "button": {
+            "action": "close",
+            "label": "",
+            "enabled": true,
+            "x": 808,
+            "y": 34,
+            "width": 48.000000000000114,
+            "height": 48.00000000000006
+          },
+          "uiClosed": true,
+          "noJournalNodes": true,
+          "playerDidNotMove": true
+        },
+        {
+          "viewport": {
+            "width": 932,
+            "height": 430
+          },
+          "physicalTouch": true,
+          "button": {
+            "action": "close",
+            "label": "",
+            "enabled": true,
+            "x": 896.0000000000001,
+            "y": 34,
+            "width": 48,
+            "height": 48
+          },
+          "uiClosed": true,
+          "noJournalNodes": true,
+          "playerDidNotMove": true
+        }
+      ],
+      "browserContextsClosed": true,
+      "ownedPreviewServerStopped": true
+    },
+    "captionRegression": {
+      "status": "passed",
+      "report": "test-results/adventure-journal-v4/targeted-card-validation.json",
+      "viewports": [
+        {
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "caption": "前往目标",
+          "touchSize": {
+            "width": 104.00000000000023,
+            "height": 48
+          },
+          "specificCallback": "journey-field-go:c2-quarry-witness",
+          "fixtureStateUnchanged": true
+        },
+        {
+          "viewport": {
+            "width": 932,
+            "height": 430
+          },
+          "caption": "前往目标",
+          "touchSize": {
+            "width": 103.99999999999989,
+            "height": 48.00000000000003
+          },
+          "specificCallback": "journey-field-go:c2-quarry-witness",
+          "fixtureStateUnchanged": true
+        }
+      ]
+    },
+    "sourceIntegrity": {
+      "report": "test-results/adventure-journal-v4/source-integrity.json",
+      "compiledModuleDiff": "test-results/adventure-journal-v4/compiled-module-diff.json",
+      "concurrentSourceReview": "test-results/adventure-journal-v4/concurrent-source-audit.json",
+      "wholeProjectUnchangedClaim": false,
+      "limitedManualReview": {
+        "status": "completed",
+        "recordedFilesByteIdentical": 7,
+        "recordedFilesTotal": 8,
+        "reviewedFile": "app/ChapterGame.ts",
+        "capturedSha256": "9659eddffca7a14acecc5d2e5a8393a9a61413e89ca0c85f605ccea4c7ef46a0",
+        "conclusion": "Limited manual review found no journal-interface semantic regression in open/click/N-M/navigation/travel/renderModal. Concurrent CombatAudio and MusicContext lifecycle, combat/boss/area BGM hooks are excluded from runtime acceptance. No whole-file or whole-project equivalence claim."
+      }
+    }
+  },
+  "preview": {
+    "path": "test-results/adventure-journal-v4/adventure-journal-preview.jpg",
+    "top": "test-results/adventure-journal-v4/journal-844.png",
+    "bottom": "test-results/adventure-journal-v4/target-caption-844.png",
+    "scope": "Deterministic resized montage of actual fixed-v4 Cocos screenshots; top ordinary fresh journey, bottom explicit chapter-two display fixture."
+  },
+  "historicalPetReports": [
+    "src/cocos/release/pets-v3-validation.json",
+    "src/cocos/release/pets-phoenix-validation.json"
+  ],
+  "pending": [
+    "TapTap platform and actual mobile-device acceptance",
+    "Natural third-chapter pet entry after third-chapter content is designed and actually released",
+    "Subsequent concurrent audio-source changes are outside this fixed-product journal acceptance"
+  ],
+  "packagedOrPublishedByThisTask": false
+}

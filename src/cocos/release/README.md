@@ -1,6 +1,16 @@
 # TapTap 小游戏发布配置
 
-**打包规范（2026-11-15）：** dev / test / release 已接入，`npm run pack:taptap`、`build:tap` 和脚本无参数均默认 test。开发加速用 `pack:taptap:dev`，默认技能无冷却、怪物经验 ×5、每日经验不限、Boss 传奇与神器分别保底，并隔离本机数据；只有明确要求正式包时才用 `pack:taptap:release`。三档共用持续递增的根版本，交付固定为 `src/out/<版本号>/SwordAndFire_<版本号>.zip`，档位写入编译配置和清单。release 自动汇总上一正式清单至当前输入的更新条目与资源差异，将 `RELEASE_NOTES.md`、源码清单和差异明细纳入 ZIP 并随包提供，校验通过后归档。实际上线后才登记发布基线，打包不会自动推进。详见[开发与打包规范](../../../docs/development/build-profiles.md)与[开发 skill](../../../.agents/skills/singularity-development/SKILL.md)。
+2026-11-15 **H07与自动剧情恢复**：H07再战入口的干岸落点修正已核验，4项地形及全量150项现有测试通过。左栏“自动／停止／继续”直接复用顶部自动任务，不再进入遇敌暂停的纯导航；线性调查省去重复确认／结果窗口，剧情结束继续自动。调查暂时不安全时等待战斗结束，战斗、躲避和恢复重置调查计时，保留分支选择和手动接管。类型、9项专项规则检查及实际Cocos触屏调查→剧情→继续任务、键盘接管、继续与停止通过，任务奖励仅结算一次。日常test Web已更新；未重打或上传TapTap包，真机待验。[验证记录](auto-story-validation.json)、[实际界面](../../../source-art/ui/task-automation-v1/runtime-iphone14.png)。
+
+2026-11-15 **已确认剧情字幕 v4 接入**：保留原宋体、姓名14／正文18／操作13、行高27和居中位置；“继续”与几何箭头按字形及文字阴影偏移成组对齐，切中英文重新布局，取消悬浮皇冠和椭圆。类型与日常 `concept-2d` Web 导出通过；844×390、932×430、1280×720实际 Cocos 场景中中文中线差0.5物理像素，英文1物理像素。真实触屏继续／跳过、语言设置和前后台恢复通过。全量测试149／150，另有H07第二章桥梁地形检查失败；本次字幕文件未改该地形。未重打或上传 TapTap 包，平台与真机待验。[实际画面](../../../source-art/ui/cinematic-dialogue-v4/runtime-iphone14.png)、[验证记录](cinematic-v4-validation.json)。
+
+2026-11-15 **平台差异检查与规范**：检查当前业务脚本、平台适配、Web 模板及构建入口，统一 `RuntimePlatform` 选择，修正窗口菜单／WASM 按 `tap` 猜平台、业务层直接读 URL、偏好与地图探索绕过 dev 存储隔离的问题。HTML 分包资源预览改用独立标记；小游戏缺少存储接口时不换后端。原 test／release 数据键保留。输入、音频和生命周期继续复用 Cocos 适配，差异表及规则已写入开发 skill 和两级 AGENTS。类型、150 项既有测试、48 项两平台三档位检查及 25 项常亮检查通过；未打包、上传或完成真机验收。[平台隔离规范](../../../docs/development/platform-adapters.md)、[验证记录](platform-adapters-validation.json)。
+
+2026-11-15 **TapTap／HTML 常亮分离**：公共 `ScreenAwake` 契约只管理前台／后台／销毁；小游戏使用 `TapScreenAwake`，网页使用独立 `HtmlScreenAwake` 与浏览器 Wake Lock。依据 Cocos 构建环境选择，HTML 平台服务不读取 `tap`，小游戏不访问浏览器常亮实现。类型、150 项现有测试及 25 项平台隔离／生命周期检查通过。Headless Chrome 已验证权限拒绝时安全降级；浏览器成功持锁与 TapTap 防熄屏仍待目标设备验收。仅改代码，未打包或上传。[验证记录](screen-awake-validation.json)、[平台边界](../../../docs/architecture/cocos-feature-modules.md#平台能力)。
+
+2026-11-15 **前台屏幕常亮**：使用官方 `tap.setKeepScreenOn`，启动与回到前台时开启，切后台或销毁游戏时释放；接口缺失、失败与异步完成顺序不阻断生命周期。类型、150 项现有测试及 10 项常亮／前后台专项检查通过。本次仅更新代码，未重打或上传 TapTap 包；真机超过系统自动锁屏时长的游玩、切后台与返回待验。[验证记录](screen-awake-validation.json)。
+
+**打包规范（2026-11-15）：** dev / test / release 已接入，`npm run pack:taptap`、`build:tap` 和脚本无参数均默认 test。开发加速用 `pack:taptap:dev`，技能采用正常冷却、怪物经验 ×5、每日经验不限、Boss 传奇与神器分别保底，并隔离本机数据；只有明确要求正式包时才用 `pack:taptap:release`。三档共用持续递增的根版本，交付固定为 `src/out/<版本号>/SwordAndFire_<版本号>.zip`，档位写入编译配置和清单。release 自动汇总上一正式清单至当前输入的更新条目与资源差异，将 `RELEASE_NOTES.md`、源码清单和差异明细纳入 ZIP 并随包提供，校验通过后归档。实际上线后才登记发布基线，打包不会自动推进。详见[开发与打包规范](../../../docs/development/build-profiles.md)与[开发 skill](../../../.agents/skills/singularity-development/SKILL.md)。
 
 2026-11-15 **dev 加速追加**：怪物经验由 2 倍提高到 5 倍，Boss 每次有效击杀分别结算传奇与神器，沿用职业／章节池、唯一装备重复补偿和复战间隔；test / release 正常概率不变。已完成类型、140 项既有检查及三档共 288 组击杀／拾取／存读档专项验证。本次仅更新代码，旧 0.3.42 dev 包仍为原 2 倍规则，尚未重打新包。[验证记录](dev-loot-validation.json)。
 

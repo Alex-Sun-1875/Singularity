@@ -10,8 +10,8 @@ export const UI_FRAME_GOLD={
 /** Shared skin geometry. Control measurements are logical screen units. */
 export const UI_FRAME_LAYOUT={skin:'unified-gold-panel-v13',panelSkin:'double-gold-frame-v6',panelMaterial:'double-gold-inset-v6',crestSkin:'double-gold-stag-v6',crestShadowSkin:'double-gold-stag-shadow-v11',crestWidth:118,crestHeight:72,crestOffset:12,crestShadowPadding:4,capsuleSkin:'menu-pill-frame-v5',cornerRadius:12,padding:12,hit:48,gap:8,closeInset:8,closeGlyph:14} as const;
 
-/** Shared top-left return artwork; callers preserve their existing navigation action. */
-export const UI_PANEL_BACK={skin:'rpg-return-arrow-v3',glyphLogical:20} as const;
+/** Approved two-mode header. Measurements are logical screen pixels. */
+export const UI_PANEL_HEADER={height:64,hit:48,inset:12,gap:8,glyph:20,stroke:1.8,feedback:32,fallbackCapsuleWidth:118,fallbackCapsuleHeight:64} as const;
 
 /** Measured slots from the approved 425×506 settings panel; input minima win. */
 export const UI_GOLD_PANEL_RULES={
@@ -41,21 +41,31 @@ export class UiChrome {
   {x:0,y:0,width,color:new Color(UI_FRAME_GOLD.light.r,UI_FRAME_GOLD.light.g,UI_FRAME_GOLD.light.b,238)},
   {x:-.08,y:.12,width:Math.max(.28,width*.42),color:new Color(UI_FRAME_GOLD.glint.r,UI_FRAME_GOLD.glint.g,UI_FRAME_GOLD.glint.b,185)},
  ];}
+ private static drawFrameCorners(g:Graphics,w:number,h:number,offsetX:number,offsetY:number,ornamentScale=1):void {
+  const corner=Math.min(29,w*.15,h*.28)*ornamentScale;
+  for(const sx of [-1,1])for(const sy of [-1,1]){
+   const x=sx*(w/2-7)+offsetX,y=sy*(h/2-7)+offsetY,k=corner/28;
+   const point=(t:number,d:number)=>({x:x-sx*t*k,y:y-sy*d*k});
+   const move=(t:number,d:number)=>{const p=point(t,d);g.moveTo(p.x,p.y);};
+   const curve=(a:number,b:number,c:number,d:number,e:number,f:number)=>{const p=point(a,b),q=point(c,d),r=point(e,f);g.bezierCurveTo(p.x,p.y,q.x,q.y,r.x,r.y);};
+   move(28,1);curve(13,2,3,10,1,28);g.stroke();
+   move(21,3);curve(8,1,6,16,15,14);curve(23,12,14,6,13,11);g.stroke();
+   move(5,19);curve(2,9,13,2,17,7);curve(20,12,10,15,11,9);g.stroke();
+  }
+ }
+ /** The original panel corner engraving, without its centered border vines. */
+ static cornerOrnaments(parent:Node,w:number,h:number,ornamentScale=1):Graphics {
+  const g=parent.addComponent(CompactGraphics);
+  for(const pass of this.passes(1.05)){g.lineWidth=pass.width;g.strokeColor=pass.color;this.drawFrameCorners(g,w,h,pass.x,pass.y,ornamentScale);}
+  return g;
+ }
  static frame(parent:Node,w:number,h:number):Graphics {
-  const g=parent.addComponent(CompactGraphics),corner=Math.min(29,w*.15,h*.28),stem=Math.min(18,w*.065);
+  const g=parent.addComponent(CompactGraphics),stem=Math.min(18,w*.065);
   // The SVG owns the two metal lips. Native engraving adds only curls/leaves,
   // so its color and density remain identical at every stretched panel size.
   for(const pass of this.passes(1.05)){
    g.lineWidth=pass.width;g.strokeColor=pass.color;
-   for(const sx of [-1,1])for(const sy of [-1,1]){
-    const x=sx*(w/2-7)+pass.x,y=sy*(h/2-7)+pass.y,k=corner/28;
-    const point=(t:number,d:number)=>({x:x-sx*t*k,y:y-sy*d*k});
-    const move=(t:number,d:number)=>{const p=point(t,d);g.moveTo(p.x,p.y);};
-    const curve=(a:number,b:number,c:number,d:number,e:number,f:number)=>{const p=point(a,b),q=point(c,d),r=point(e,f);g.bezierCurveTo(p.x,p.y,q.x,q.y,r.x,r.y);};
-    move(28,1);curve(13,2,3,10,1,28);g.stroke();
-    move(21,3);curve(8,1,6,16,15,14);curve(23,12,14,6,13,11);g.stroke();
-    move(5,19);curve(2,9,13,2,17,7);curve(20,12,10,15,11,9);g.stroke();
-   }
+   this.drawFrameCorners(g,w,h,pass.x,pass.y);
    // Centered vines stay on the border band rather than under panel text.
    for(const sy of [-1,1]){
     const y=sy*(h/2-4)+pass.y,x=pass.x;

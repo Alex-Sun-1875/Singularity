@@ -15,7 +15,7 @@ export interface AreaDef {
   checkpoint?: boolean;
   recommendedLevel?:number; campaignRegion?:string;
 }
-export interface InputFrame { x: number; z: number; aim?: number; target?:Point; attack?: boolean; dash?: boolean; push?: boolean; skill?: boolean; spell?: 0|1; combatSlot?:0|1|2|3; ultimate?:boolean }
+export interface InputFrame { x: number; z: number; aim?: number; target?:Point; attack?: boolean; dash?: boolean; push?: boolean; skill?: boolean; spell?: 0|1; combatSlot?:0|1|2|3; ultimate?:boolean; healSkill?:boolean }
 export interface WorldQuery {
   move(from: Point, delta: Point, radius: number): Point;
   visible(from: Point, to: Point): boolean;

@@ -9,6 +9,8 @@ import {installCampaignScenes} from '../../cinematics/data/CampaignScenes';
 import {installMonsterEcology} from './MonsterEcology';
 import {installGrowingSources,GROWING_SCENES} from '../../equipment/data/GrowingEquipment';
 import {installCampaignCombat} from '../../campaign/data/CampaignBattles';
+import {installSideBosses,placeSideBossRematches} from '../../campaign/data/SideBosses';
+import {installPetJourneys} from '../../pets/data/PetJourneys';
 
 // Local coordinates are metres: +X east and +Z north. Atlas coordinates are
 // composition references only; each scene has its own continuous walking space.
@@ -451,9 +453,12 @@ passage('U1-04','U1-05',p(70,0),p(-72,0),'u1-corridor-0405','穿过工作带去�
 installCampaign(AREAS);
 installMonsterEcology(AREAS);
 installCampaignCombat(AREAS);
+installSideBosses(AREAS);
 installGrowingSources(AREAS);
+placeSideBossRematches(AREAS);
 installJourney(AREAS);
 installCampaignScenes(AREAS);
+installPetJourneys(AREAS);
 // Prerequisites name their real source and location rather than internal flag IDs.
 for(const event of Object.values(CAMPAIGN_EVENTS))for(const flag of [...event.requires??[],...event.requiresAny??[]]){
  if(event.prerequisiteHints?.[flag])continue;

@@ -2,6 +2,7 @@ import type {EnemySpawn,Point} from '../../../core/Contracts';
 import type {GameState,EnemyState} from '../../../core/GameSession';
 import {CAMPAIGN_SCENES,campaignBattle,campaignScene} from '../data/CampaignScenes';
 import {CAMPAIGN_WAVE_INTERVAL} from '../../campaign/data/CampaignBattles';
+import {chapterTwoBattleStopped} from '../../campaign/common/ChapterTwoEncounters';
 import {campaignText as text} from '../../campaign/locales';
 
 interface Host {state():GameState;spawnWave(enemies:EnemySpawn[]):EnemyState[];experience(source:string,amount:number):void;changed():void;emit(type:string,text?:string,extra?:Record<string,unknown>):void}
@@ -22,7 +23,7 @@ export class CampaignDirector {
    if(d.trigger==='victory'){if(boss&&boss.hp<=0&&s.receipts[`kill:${s.area}:${boss.id}`])this.queue(d.id);}
    else if((!d.boss||boss&&boss.hp>0)&&(!d.at&&!boss||distance(s.player,boss??d.at!)<=(d.radius??999)))this.queue(d.id);
   }
-  const b=campaignBattle(s.area);if(!b||s.flags[`campaign:battle:${b.id}:complete`])return;
+  const b=campaignBattle(s.area);if(!b||chapterTwoBattleStopped(s,s.area)||s.flags[`campaign:battle:${b.id}:complete`])return;
   const fixed=s.enemies.filter(e=>!e.respawnSeconds);if(!fixed.length||fixed.some(e=>e.hp>0))return;
   // Preserve the original XP source IDs. Old in-progress waves that already
   // awarded an original kill cannot collect it twice after this content update.
@@ -37,6 +38,6 @@ export class CampaignDirector {
   const def=b.waves[wave],missing=def.enemies.filter(authored=>!s.enemies.some(e=>e.id===authored.id)),spawned=this.host.spawnWave(missing);if(spawned.length!==missing.length){s.receipts[readyKey]=s.time+.5;this.host.changed();return;}s.enemies.push(...spawned);
   s.receipts[`campaign:wave:${b.id}:${wave}`]=true;s.receipts[`campaign:wave-time:${b.id}:${wave}`]=s.time;this.host.changed();this.host.emit('campaign_battle',`${b.title} · ${def.label}`,{id:b.id,wave:wave+2,total:b.waves.length+1,enemies:def.enemies.map(e=>e.id)});
  }
- battleReady(){const b=campaignBattle(this.s.area);return !b||!!this.s.flags[`campaign:battle:${b.id}:complete`];}
- battleHint(){const b=campaignBattle(this.s.area);if(!b||this.s.flags[`campaign:battle:${b.id}:complete`])return '';const waves=b.waves.filter((_,i)=>this.s.receipts[`campaign:wave:${b.id}:${i}`]).length,alive=this.s.enemies.filter(e=>!e.respawnSeconds&&e.hp>0).length;return alive?text('battle.progress',{title:b.title,wave:waves+1,total:b.waves.length+1,alive}):text('battle.incoming',{title:b.title});}
+ battleReady(){const b=campaignBattle(this.s.area);return !b||chapterTwoBattleStopped(this.s,this.s.area)||!!this.s.flags[`campaign:battle:${b.id}:complete`];}
+ battleHint(){const b=campaignBattle(this.s.area);if(!b||chapterTwoBattleStopped(this.s,this.s.area)||this.s.flags[`campaign:battle:${b.id}:complete`])return '';const waves=b.waves.filter((_,i)=>this.s.receipts[`campaign:wave:${b.id}:${i}`]).length,alive=this.s.enemies.filter(e=>!e.respawnSeconds&&e.hp>0).length;return alive?text('battle.progress',{title:b.title,wave:waves+1,total:b.waves.length+1,alive}):text('battle.incoming',{title:b.title});}
 }

@@ -3,7 +3,7 @@ const fs=require('node:fs'),path=require('node:path'),{createHash}=require('node
 const names=['dev','test','release'];
 function profileFor(name='test'){
  if(!names.includes(name))throw new Error('Build profile must be dev, test or release.');
- const rules={noSkillCooldown:name==='dev',monsterExperienceMultiplier:name==='dev'?5:1,
+ const rules={noSkillCooldown:false,monsterExperienceMultiplier:name==='dev'?5:1,
   guaranteedBossHighTierLoot:name==='dev',developmentTools:name==='dev',unlimitedDailyExperience:name==='dev',storagePrefix:name==='dev'?'singularity.dev.':''};
  const digest=createHash('sha256').update(JSON.stringify(rules)).digest('hex').slice(0,12);
  return {schemaVersion:2,name,marker:`singularity-build-profile-v2-${name}-${digest}`,...rules};

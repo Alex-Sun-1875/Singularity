@@ -8,6 +8,7 @@ import {UiSkin} from '../../../shared/ui/UiSkin';
 import {FeedbackView as F} from '../../../shared/ui/FeedbackView';
 import type {FeedbackRole} from '../../../shared/ui/FeedbackPalette';
 import {applyRpgFont} from '../../../shared/ui/RpgFont';
+import {bindButtonFeedback} from '../../../shared/ui/ButtonFeedback';
 import {automationText as tr} from '../locales';
 
 export interface AutomationExperience {earned:number;cap:number;rate:number}
@@ -55,16 +56,14 @@ export class AutomationHud {
   const label=this.hud.text(parent,text,x,y,w,size*this.scale,C.ink,h);applyRpgFont(label);
   label.lineHeight=size*this.scale*1.25;label.enableWrapText=false;label.overflow=Label.Overflow.CLAMP;label.horizontalAlign=Label.HorizontalAlign.CENTER;label.cacheMode=Label.CacheMode.CHAR;return label;
  }
- private button(parent:Node,action:string,x:number,y:number,w:number,h:number,run:()=>void,faceHeight:number):Node {
+ private button(parent:Node,action:string,x:number,y:number,w:number,h:number,run:()=>void,faceHeight:number,visualParent?:Node):Node {
   const n=this.hud.node(action,parent,x,y,w,h),b=n.addComponent(Button);b.transition=Button.Transition.NONE;n.addComponent(BlockInputEvents);this.targets.push(n);
-  const fw=w-6*this.scale,fh=faceHeight-4*this.scale,face=this.hud.node('PressedFace',n,0,0,fw,fh),g=face.addComponent(CompactGraphics);
-  const paint=(down:boolean)=>{g.clear();if(down){g.fillColor=C.button;g.roundRect(-fw/2,-fh/2,fw,fh,Math.min(5*this.scale,fh/2));g.fill();}};
-  n.on(Node.EventType.TOUCH_START,()=>paint(true));n.on(Node.EventType.TOUCH_END,()=>paint(false));n.on(Node.EventType.TOUCH_CANCEL,()=>paint(false));
-  n.on(Node.EventType.MOUSE_ENTER,()=>paint(true));n.on(Node.EventType.MOUSE_LEAVE,()=>paint(false));n.on(Button.EventType.CLICK,run);return n;
- }
- private pauseMark(parent:Node,x:number,y:number){
-  const g=this.hud.node('ModePaused',parent,x,y,8*this.scale,7*this.scale).addComponent(CompactGraphics);F.ink(g,'state.paused','stroke');g.lineWidth=1.2*this.scale;
-  for(const dx of [-2,2]){g.moveTo(dx*this.scale,-3*this.scale);g.lineTo(dx*this.scale,3*this.scale);}g.stroke();
+  const fw=w-6*this.scale,fh=faceHeight-4*this.scale,face=this.hud.node('PressedFace',visualParent??n,0,0,fw,fh),g=face.addComponent(CompactGraphics);
+  // The compact header's visible capsule owns its wash. Its larger hit target
+  // stays separate, with text above and the original metal lip above the wash.
+  const border=visualParent?.getChildByName('SharedGoldFrame');if(border)face.setSiblingIndex(border.getSiblingIndex());
+  bindButtonFeedback(n,b,state=>{if(!g.isValid)return;g.clear();if(state!=='idle'){g.fillColor=C.button;g.roundRect(-fw/2,-fh/2,fw,fh,visualParent?fh/2:Math.min(5*this.scale,fh/2));g.fill();}});
+  n.on(Button.EventType.CLICK,run);return n;
  }
  private modeButton(parent:Node,choice:{label:string;action:string;icon:string;selected:boolean},x:number,width:number){
   const n=this.button(parent,choice.action,x,0,width,this.hit,()=>{this.setExpanded(false);this.hud.actions.click(choice.action);},this.hit);
@@ -72,7 +71,6 @@ export class AutomationHud {
   // Existing gold iconography stays symmetric above the two short labels.
   const icon=UiSkin.asset(n,choice.icon,20*this.scale,20*this.scale,false);icon.node.setPosition(0,9*this.scale);F.tint(icon,'state.ready');
   const text=this.label(n,choice.label,0,-12*this.scale,width,20*this.scale,13);F.tint(text,choice.selected?role:'text.normal');
-  if(choice.selected&&this.state.paused)this.pauseMark(n,21*this.scale,-12*this.scale);
  }
  private render(){
   const s=this.state,key=[this.root.active,this.opened,s.mode,s.paused,!!s.experience].join('|');if(key===this.stamp){this.updateStatus();return;}this.stamp=key;
@@ -80,8 +78,7 @@ export class AutomationHud {
   for(const n of [...this.root.children]){n.removeFromParent();n.destroy();}this.targets=[];this.statusLabel=null;this.experienceValue=null;
   const running=s.mode!=='manual',role:FeedbackRole=s.paused&&running?'state.paused':running?'state.running':'state.idle';
   const bar=this.hud.node('AutomationBar',this.root,0,0,this.width,this.visualHeight);UiSkin.panel(bar,this.width,this.visualHeight,C.inset,'capsule',false,this.scale/4);
-  const main=this.button(this.root,'automation',0,0,this.width,this.hit,()=>this.hud.actions.click('automation'),this.visualHeight);
-  if(running&&s.paused)this.pauseMark(main,-this.width/2+7*this.scale,0);
+  const main=this.button(this.root,'automation',0,0,this.width,this.hit,()=>this.hud.actions.click('automation'),this.visualHeight,bar);
   const idle=s.mode==='idle',showXp=!!s.experience;
   // Auto is centred on the entire fixed-width bar, independently of the caret.
   this.statusLabel=this.label(main,tr(idle?'mode.hunt':'mode.task'),showXp?-this.width/2+21*this.scale:0,0,showXp?30*this.scale:this.width-40*this.scale,this.visualHeight,13);

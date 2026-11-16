@@ -1,5 +1,7 @@
 # 高级装备掉落设计稿
 
+2026-11-16，获得装备通知与地面掉落通知按本稿统一样式，最新[实现及运行截图](../../../docs/design/equipment-notice-unified-v2.md)单独留档；本目录保留原设计与此前证据。
+
 2026-11-15，用户已确认v2并授权接入。紫色史诗、橙色传奇与神器的地面展示、24秒顶部提示及靠近自动拾取已接入Cocos。设计稿使用云端 OpenAI image_gen；原始输出、保护合成设计稿和实际运行截图分别保留。
 
 运行接入说明见 [`docs/design/high-quality-loot-feedback-v1.md`](../../../docs/design/high-quality-loot-feedback-v1.md)，实际验证见 [`test-results/loot-feedback-v1/`](../../../test-results/loot-feedback-v1/)。`prepare-runtime.py`从确认稿提取无文字暗金边框，并用确定性alpha合成准备柔光、光尘和贴地光晕；运行中的装备图片和文字读取真实装备数据，不使用设计稿里的静态文字。

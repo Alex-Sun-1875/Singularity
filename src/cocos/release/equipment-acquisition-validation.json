@@ -1,0 +1,57 @@
+{
+  "date": "2026-11-15",
+  "profile": "test",
+  "scope": "Equipment acquisition information only; random attributes remain in enhancement",
+  "checks": {
+    "typecheck": {
+      "command": "npm run check",
+      "passed": true
+    },
+    "existingDiceRegression": {
+      "command": "node --import tsx --test tests/dice.test.ts tests/dice-session.test.ts",
+      "passed": 20,
+      "failed": 0
+    },
+    "acquisitionAndEnhancementRules": {
+      "assertionsPassed": 15,
+      "cases": [
+        "Acquisition produces no dice face, bonus or extra equipment",
+        "Roll/reroll requests leave state unchanged",
+        "Repeated confirmation is idempotent",
+        "Enhancement produces persisted nonzero random affixes",
+        "Old unconfirmed six-point result is cleared on confirmation",
+        "Snapshots validate before and after acquisition and enhancement"
+      ]
+    },
+    "webBuild": {
+      "command": "npm start test",
+      "output": "src/cocos/build/concept-2d",
+      "passed": true
+    },
+    "browser": {
+      "viewports": [
+        "844x390",
+        "932x430",
+        "915x412",
+        "568x320",
+        "1280x720",
+        "390x844"
+      ],
+      "safeAreaFixture": "844x390, 44 logical pixels at each side, 21 at bottom",
+      "confirmAction": "dice:continue",
+      "minimumButtonHeightLogical": 48,
+      "modalReleased": true,
+      "runtimeErrors": 0,
+      "finalSmallScreenRecheck": true
+    }
+  },
+  "evidence": {
+    "browser": "test-results/equipment-acquisition-v2/browser-validation.json",
+    "preview": "source-art/ui/equipment-acquisition-v2/preview-iphone14.png"
+  },
+  "limits": [
+    "Browser and rule checks use isolated presentation/state fixtures, not real drop-source or economy acceptance",
+    "TapTap AppID and physical-device touch/safe areas remain unverified",
+    "No TapTap package, upload or public release performed"
+  ]
+}

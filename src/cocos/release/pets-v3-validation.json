@@ -1,0 +1,153 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-16",
+  "generatedAt": "2026-11-15T16:50:14.596Z",
+  "status": "implemented_closed_pending_platform_and_final_art",
+  "productionEnabled": false,
+  "allChaptersClosed": true,
+  "saveStateVersion": 2,
+  "roster": {
+    "ordinary": [
+      "赤狐",
+      "岩龟",
+      "白兔",
+      "花猫",
+      "猎犬"
+    ],
+    "rare": [
+      "苍狼",
+      "山虎",
+      "猎鹰",
+      "花鹿"
+    ],
+    "mythical": [
+      "狮鹫",
+      "白虎",
+      "巨龙"
+    ]
+  },
+  "implemented": [
+    "12 authored acquisition chains with scene observation, three-part mechanisms, real-time path escorts and isolated combat trials",
+    "8 own companion journal objectives and final story per species",
+    "8 shared permanent trait research tracks I-V, two freely configured slots",
+    "Automatic signature skills I-III, two mutually exclusive free branches and shared persistent cooldown",
+    "Ordinary and rare companions can ascend while retaining species and progress",
+    "No gameplay level cap; percentage benefits and later-companion catchup",
+    "Validated legacy paid-progress migration, pending duplicate-fee credits and compact repeat ledgers",
+    "Western native follow forms for all 12; escort rendering does not duplicate the active companion",
+    "Global release switch blocks entry, actions, rewards, benefits and world installation in every chapter"
+  ],
+  "checks": {
+    "coreTypecheck": "passed",
+    "fullTypecheck": "passed",
+    "existingTests": {
+      "passed": 155,
+      "failed": 0,
+      "log": "test-results/pets-v3/existing-tests.log"
+    },
+    "enabledRules": {
+      "passed": 21,
+      "corruptionsRejected": 9,
+      "scope": "Isolated in-memory enabled modules, flat synthetic world and economic fixtures; not natural economy or rendered combat acceptance",
+      "report": "test-results/pets-v3/rules-enabled.json"
+    },
+    "automaticCombatSkills": {
+      "passed": 22,
+      "failed": 0,
+      "scope": "Actual PetCombat source with GameSession fixtures and mocked visibility/echo host",
+      "report": "test-results/pets-v3/automatic-skills.json"
+    },
+    "worldGeometry": {
+      "objectiveAndSwitchPoints": 285,
+      "escortSegments": 102,
+      "trialUnits": 86,
+      "unreachableOrBlocked": 0,
+      "closedPetObjects": 0,
+      "report": "test-results/pets-v3/journey-geometry.json"
+    },
+    "crossPolicyPersistence": {
+      "status": "passed",
+      "phases": [
+        "enabled",
+        "closed",
+        "reenabled"
+      ],
+      "fullSnapshots": true,
+      "noHealing": true,
+      "forgedMaxHpPlusOneRejected": true,
+      "report": "test-results/pets-v3/persistence-cross-policy.json"
+    },
+    "uiStructure": {
+      "pages": 139,
+      "closedRoutes": 7,
+      "scope": "Actual view builders in temporary mocked HUD harness; includes 12 species, research, slots, signatures, ascension and quotes"
+    },
+    "nativeForms": {
+      "species": 12,
+      "scope": "Node/mesh dimensions and cleanup smoke plus reconstructed geometry preview; final art not accepted"
+    },
+    "browserClosed": {
+      "status": "passed",
+      "engine": "Cocos Creator 3.8.8 Web preview in desktop headless Chrome",
+      "viewports": [
+        "844x390",
+        "932x430"
+      ],
+      "devicePixelRatio": 1,
+      "petRoutesBlocked": 5,
+      "snapshotUnchanged": true,
+      "activePetView": null,
+      "petJourneyViews": 0,
+      "consoleErrors": 0,
+      "report": "test-results/pets-v3/browser-initial.json"
+    },
+    "browserIsolatedEnabled": {
+      "status": "passed",
+      "scope": "One compiled PET_POLICY response overridden only in isolated browser memory, source and production output remain closed; catalog screenshot only, not full acquisition/touch/combat playthrough",
+      "viewports": [
+        "844x390",
+        "932x430"
+      ],
+      "report": "test-results/pets-v3/browser-enabled.json"
+    },
+    "cocosWebBuild": {
+      "status": "passed",
+      "profile": "test",
+      "log": "test-results/pets-v3/final-web-build.log",
+      "versionBumped": false
+    }
+  },
+  "pending": [
+    "Final companion art and animation acceptance",
+    "Full enabled natural progression/economy and touch playthrough",
+    "Real TapTap AppID platform flow and Android target-device validation"
+  ],
+  "delivery": {
+    "tapTapPackageProduced": false,
+    "uploaded": false,
+    "published": false
+  },
+  "sourceSha256": {
+    "core/GameSession.ts": "87d4a37a9d507db68cb75ccbd5caa76fae9e3d0733cf924590e1dd50f92ca018",
+    "features/pets/data/Pets.ts": "443eb7ee95a22e1784117f52f1f4de221dc8f06d129af0a8e8ee56e08f2233df",
+    "features/pets/data/PetJourneys.ts": "538684b429d27af151aba01022b6ad583b8e5832261944d2f0ea2bebe49ef39a",
+    "features/pets/common/PetSystemV3.ts": "77dab179db2272520719b240feabdb91460be074bed92d5b6ec68dff42eeef58",
+    "features/pets/common/PetLegacy.ts": "ca40c5c822c6e880dadfcb39d0915e379063596dc8e8d8e7b1ff0c5ec8b52092",
+    "features/pets/common/PetJourneys.ts": "3ff917e2166fed9c6365b84b327a72c545be9e4c03332a9d8b538ea7f68302a4",
+    "features/pets/common/PetCombat.ts": "fecc28cec974bfb89d69f86efa6ee4fee97db4693efe518afa8178da8b3b0aa6",
+    "features/pets/common/PetBenefits.ts": "9467795e9d0dd60581b728a8f3d7eaa58fa716f48bc73f69b1a247f5b04cd7d5",
+    "features/pets/common/PetSkillEffects.ts": "d76b29f000b5c483f346d93d46b804d3c78673b5539ecd0896042e8ecbbdf05f",
+    "features/pets/runtime/PetPanel.ts": "25afe619ecdf66e7e700840c9834d253e521b3e8da3dadbf4e4da14ba35e4f07",
+    "features/pets/runtime/PetCompanion.ts": "f00c7c0f250fdf68129e2520811c6e05adca63010d3e5c52bc9987961ca1c2f4",
+    "features/persistence/common/CombatPersistence.ts": "1f516df93442e6c45de17ad9d4e0184a1544fd41df137a6e62b8109617b74211"
+  },
+  "presentationSupersededBy": {
+    "record": "pets-phoenix-validation.json",
+    "mythicalRoster": [
+      "凤凰",
+      "白虎",
+      "巨龙"
+    ],
+    "note": "The original roster, screenshot scopes and hashes above are retained as historical evidence. Phoenix replaces the Griffin presentation; internal saved keys and rules remain compatible."
+  }
+}

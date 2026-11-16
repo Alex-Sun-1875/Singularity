@@ -92,10 +92,10 @@ export class UiSkin {
  // panel-surface is a neutral 3.5% polish; the parent Graphics owns its semantic base fill.
  static asset(parent:Node,id:string,w:number,h:number,sliced=true,pixelScale?:number):Sprite{const sprite=this.sprite(parent,ROOT+id,w,h,Color.WHITE,sliced);if(pixelScale){sprite.node.getComponent(UITransform)!.setContentSize(w/pixelScale,h/pixelScale);sprite.node.setScale(pixelScale,pixelScale,1);}return sprite;}
  /** One component owns menu metal, material, shadow and optional crest. */
- static panel(parent:Node,w:number,h:number,fill=C.inset,shape:'panel'|'capsule'|'legacy'='panel',crest=false,pixelScale=1,borderSkin?:string):void {
+ static panel(parent:Node,w:number,h:number,fill=C.inset,shape:'panel'|'capsule'|'legacy'='panel',crest=false,pixelScale=1,borderSkin?:string,bakedSurface=false):void {
   if(shape!=='legacy'){
    const frame=parent.getComponent(DoubleGoldFrame)??parent.addComponent(DoubleGoldFrame);
-   frame.configure(w,h,{shape,fill,crest,pixelScale,borderSkin},id=>{const pending=this.frame(ROOT+id,0,parent);return this.readyFrame(ROOT+id,0,parent)??pending;});return;
+   frame.configure(w,h,{shape,fill,crest,pixelScale,borderSkin,bakedSurface},id=>{const pending=this.frame(ROOT+id,0,parent);return this.readyFrame(ROOT+id,0,parent)??pending;});return;
   }
   const body=new Node('PanelBody');body.layer=parent.layer;parent.addChild(body);body.addComponent(UITransform).setContentSize(w,h);
   const g=body.addComponent(CompactGraphics);g.fillColor=fill;g.roundRect(-w/2,-h/2,w,h,Math.min(UI_FRAME_LAYOUT.cornerRadius,w/2,h/2));g.fill();

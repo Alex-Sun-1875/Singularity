@@ -5,6 +5,7 @@ import {SaveStore,type KeyValueStore} from '../assets/scripts/features/persisten
 import {AREAS} from '../assets/scripts/features/world/data/WorldData';
 import {Navigation} from '../assets/scripts/features/navigation/runtime/Navigation';
 import {awardXp,cumulativeXp,baseMaxHp} from '../assets/scripts/features/progression/common/Progression';
+import {COMBAT_SKILLS} from '../assets/scripts/features/combat/data/PureSkills';
 import type {InputFrame,Point,WorldQuery} from '../assets/scripts/core/Contracts';
 const distance=(a:Point,b:Point)=>Math.hypot(a.x-b.x,a.z-b.z);
 type Build='staff'|'sword'|'bow'|'spell';
@@ -32,11 +33,29 @@ class Pilot {
      if(score>best){best=score;target=q;}}
     if(target)movement=this.vector(target);
    }
-   const needsStaff=(this.build==='staff'||this.build==='spell')&&!(this.combatActions.staff>0);
-   let attack=!closeCombat||!danger&&d<1.65;const preferred=this.build==='sword'?'WAR_01':this.build==='bow'?'BOW_01':this.build==='spell'?'FIR_01':'THU_01',slot=this.game.state.combat.activeSlots.indexOf(preferred);const id=slot>=0?this.game.state.combat.activeSlots[slot]:null;let combatSlot:0|1|2|3|undefined;if(id&&!needsStaff&&!this.game.state.action&&(!closeCombat||!danger&&d<2.4)){if(n%2===0)combatSlot=slot as 0|1|2|3;attack=false;}
-   if(this.build==='bow'){const a=this.game.state.action;attack=!a||a.kind==='bowAim'&&a.elapsed<.82;}
-
-   this.step({...movement,aim:angle,attack,combatSlot,target:{x:e.x,z:e.z}});
+   const state=this.game.state,needsStaff=(this.build==='staff'||this.build==='spell')&&!(this.combatActions.staff>0);
+   if(!state.action&&p.hp/p.maxHp<.45&&p.healthPotions>0&&!(state.cooldowns.consumable>0))this.game.useConsumable('health');
+   const views=this.game.combatSkillView(),ready=(id:string|null)=>id?views.find(v=>v.id===id)?.ready:false;
+   let attack=!closeCombat||!danger&&d<1.65,combatSlot:0|1|2|3|undefined,ultimate=false;
+   // Slot input is a press pulse. Between ready skills keep issuing normal
+   // attacks; holding a cooling/rejected slot must not suppress basic attacks.
+   if(!needsStaff&&!state.action&&n%2===0){
+    if(p.hp/p.maxHp<.65&&ready('COM_02')&&!(state.combat.buffs.healCount>0))this.game.castSkill('COM_02');
+    const support=state.combat.activeSlots[2],supportDef=support&&COMBAT_SKILLS[support];
+    if(!state.action&&supportDef&&!supportDef.offensive&&ready(support)&&p.shield<p.maxHp*.08&&d<6)combatSlot=2;
+    if(!state.action&&combatSlot===undefined&&(!closeCombat||!danger&&d<2.4)){
+     const nearby=state.enemies.filter(enemy=>enemy.hp>0&&distance(enemy,e)<3.5).length;
+     if(nearby>=3&&ready(state.combat.ultimate))ultimate=true;
+     else for(const slot of nearby>1?[3,0,1]:[0,1,3]){
+      const id=state.combat.activeSlots[slot],view=views.find(v=>v.id===id);
+      if(id&&COMBAT_SKILLS[id].offensive&&view?.ready&&d<=view.range+.3){combatSlot=slot as 0|1|2|3;break;}
+     }
+    }
+    if(combatSlot!==undefined||ultimate)attack=false;
+   }
+   if(this.build==='bow'&&combatSlot===undefined&&!ultimate){const a=state.action;attack=!a||a.kind==='bowAim'&&a.elapsed<.82;}
+   const dash=danger&&!state.action&&ready('COM_01')&&(movement.x!==0||movement.z!==0);
+   this.step({...movement,aim:angle,attack,combatSlot,ultimate,dash,target:{x:e.x,z:e.z}});
   }
   assert.equal(e.hp,0,`${this.current.id} failed to defeat ${JSON.stringify(e)} player${JSON.stringify(this.game.state.player)} action${JSON.stringify(this.game.state.action)} projectiles${JSON.stringify(this.game.state.projectiles)}`);
   this.combat=false;

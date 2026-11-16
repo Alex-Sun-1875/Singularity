@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-16",
+  "revision": "staff-back-contact-v1",
+  "status": "implemented-and-web-verified",
+  "change": "Sword-aligned diagonal staff carry and deterministic idle reference for back sockets",
+  "version": "0.3.50",
+  "profile": "test",
+  "previewUrl": "http://127.0.0.1:7469/?view=2d&player=3d",
+  "checks": {
+    "typecheck": "npm --prefix src/cocos run check: passed",
+    "cocosWebMobileBuild": "npm start test: passed",
+    "exportCalibrationIdempotent": true,
+    "variants": ["W11", "W12", "W13", "W14", "DR2-03", "DU1-04"],
+    "stateAndAngleChecks": 85,
+    "screenshots": 25,
+    "idleModelPositionToleranceMetres": 0.00001,
+    "idleAxisToleranceAgainstSwordLine": 0.000001,
+    "controls": ["W01", "L01", "W07"],
+    "freshStaffStart": "passed",
+    "retainedHeroAcrossMapRebuild": "passed",
+    "errors": []
+  },
+  "runtimeScope": "Actual Cocos HTML web-mobile mesh, materials, imported clips and presentation calls in an isolated GameSession; sampled idle/walk/run/cast/return poses. This is not TapTap device acceptance.",
+  "artReview": {
+    "actualEngineViewsReviewed": true,
+    "layout": "Diagonal shoulder-to-opposite-hip line shared with the sword",
+    "generation": "No generated images or model changes; deterministic screenshot crops/contact sheets only",
+    "userAcceptance": "pending",
+    "evidence": [
+      "source-art/weapons/3d-staff-carry-v1/runtime-before-after.jpg",
+      "source-art/weapons/3d-staff-carry-v1/diagonal-back-view.jpg",
+      "source-art/weapons/3d-staff-carry-v1/all-staves-review.jpg"
+    ]
+  },
+  "pending": ["TapTap platform and physical device verification", "User final art acceptance"],
+  "fullRuntimeReport": "src/cocos/test-results/staff-carry/diagonal/after.json"
+}

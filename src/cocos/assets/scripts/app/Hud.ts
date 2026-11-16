@@ -1,4 +1,5 @@
 import {viewportMetrics} from '../platform/ViewportMetrics';
+import {platformStorage} from '../platform/PlatformStorage';
 import {skillWeaponRequirement} from '../features/combat/common/SkillWeapons';
 import {BUILD_PROFILE} from '../shared/BuildProfile';
 import {CompactMask as Mask} from '../shared/ui/CompactMask';
@@ -9,9 +10,11 @@ import type {GameSession} from '../core/GameSession';
 import type {AutomationMode,NavigationTarget} from '../features/automation/common/Automation';
 import type {JourneyGuidance} from '../features/journey/common/JourneyGuide';
 import {QuestTracker,type QuestTrackerLine} from '../features/journey/runtime/QuestTracker';
+import {encounterText} from '../features/campaign/locales/ChapterTwoEncounterText';
 import {AREAS} from '../features/world/data/WorldData';
 import {EQUIPMENT,type ItemDef} from '../features/equipment/data/Equipment';
 import {MapPanel} from '../features/navigation/runtime/MapPanel';
+import {AdventureJournalPanel,type JournalOpenOptions} from '../features/journey/runtime/AdventureJournalPanel';
 import {UiSkin} from '../shared/ui/UiSkin';
 import {FeedbackView as F} from '../shared/ui/FeedbackView';
 import {navigationFeedback,playerHealthFeedbackRole,type FeedbackRole} from '../shared/ui/FeedbackPalette';
@@ -21,6 +24,7 @@ import type {HairstyleOption} from '../features/actors/runtime/Hairstyles';
 import {MiniMap,MINIMAP_RENDER_ORDER} from '../features/navigation/runtime/MiniMap';
 import {COMBAT_SKILLS} from '../features/combat/data/PureSkills';
 import {COMBAT_SKILL_ICONS} from '../features/combat/runtime/CombatSkillIcons';
+import {skillRoleLabel,skillRankFacts} from '../features/combat/runtime/CombatSkillDescription';
 import {assignedLoadout} from '../features/progression/common/CombatLoadouts';
 import {progressionView} from '../features/progression/common/Progression';
 import {MenuPanel,type MenuChoice,type MenuRow,type MenuPresentation} from '../shared/ui/MenuPanel';
@@ -34,10 +38,10 @@ import {SUPPLIES} from '../features/equipment/data/Supplies';
 import {resourceProfile,skillResourceText} from '../features/combat/common/ClassResource';
 
 export interface HudActions {click(action:string):void;touch(control:string,phase:'start'|'move'|'end'|'cancel',event:EventTouch):void;navigate(target:NavigationTarget):void;}
-const TITLES:Record<string,string>={attack:'攻击',dash:'闪避',combat0:'主动一',combat1:'主动二',combat2:'主动三',combat3:'主动四',ultimate:'终极',interact:'交互',map:'地图',inventory:'背包',bosses:'首领与精英',checks:'技能',settings:'设置',supplies:'药品',pause:'暂停','potion-health':'生命药','potion-resource':'资源药',rest:'补给'};
+const TITLES:Record<string,string>={attack:'攻击',dash:'闪避',combat0:'单体',combat1:'进阶',combat2:'自保',combat3:'群攻',ultimate:'终极',interact:'交互',map:'地图',inventory:'背包',bosses:'首领与精英',checks:'技能',settings:'设置',supplies:'补给',pause:'暂停','potion-health':'生命药','potion-resource':'资源药','skill-heal':'灵泉复苏',rest:'补给'};
 const POTION_ART:Record<string,string>=Object.fromEntries(Object.values(SUPPLIES).map(supply=>[supply.icon,supply.groundArt]));
 const COMBAT_ARC_SPAN=102*Math.PI/180,COMBAT_ARC_CENTER=Math.PI*.75;
-const KEYS:Record<string,string>={attack:'J',dash:'空格',combat0:'Q',combat1:'E',combat2:'R',combat3:'T',ultimate:'G',interact:'F',map:'M',inventory:'B',checks:'C',pause:'Esc','potion-health':'5','potion-resource':'6'};
+const KEYS:Record<string,string>={attack:'J',dash:'空格',combat0:'Q',combat1:'E',combat2:'R',combat3:'T',ultimate:'G',interact:'F',map:'M',inventory:'B',checks:'C',pause:'Esc','potion-health':'5','potion-resource':'6','skill-heal':'7'};
 
 export class Hud {
  trainingRange:TrainingRange|undefined;private trainingButton:Node|null=null;
@@ -47,7 +51,7 @@ export class Hud {
  setBossAwareness(notice:{entry:BossEntry;ready:boolean}|null,count:number){this.bossMessage=notice;const label=this.labels.get('bosses');if(label){label.string=count?String(count):'';label.node.parent!.active=count>0;}this.layoutTopMessages();}
  get uiUnit(){return this.touchMode?this.height/Math.max(1,viewportMetrics.windowSize.height/Math.max(1,viewportMetrics.devicePixelRatio)):1.25;}
  private equipmentPickupsAvailable=false;
- showEquipmentPickup(item:ItemDef,count=1){this.equipmentNotice.enqueue(item,count);this.layoutTopMessages();}
+ showEquipmentPickup(item:ItemDef,count=1,level?:number){this.equipmentNotice.enqueue(item,count,level);this.layoutTopMessages();}
  clearEquipmentPickups(){this.equipmentNotice.clear();this.layoutTopMessages();}
  dismissEquipmentDrop(id:string){this.equipmentNotice.dismissDrop(id);this.layoutTopMessages();}
  updateEquipmentPickups(dt:number,available:boolean,game?:GameSession){if(game)this.equipmentNotice.syncGroundLoot(game);this.equipmentPickupsAvailable=available;this.equipmentNotice.update(dt,available&&!this.portrait&&!this.automationExpanded&&!this.modal.children.length);this.layoutTopMessages();}
@@ -65,14 +69,14 @@ export class Hud {
  readonly modalDisposers=new Set<()=>void>();
  private miniMap:MiniMap|null=null;private portraitRing:Graphics|null=null;private lastExperience=-1;private lastExperienceLevel=-1;
  readonly mapTravel={busy:false,error:''};
- private mapPanel=new MapPanel(this);private pixelWidth=0;private pixelHeight=0;
+ private mapPanel=new MapPanel(this);private journalPanel:AdventureJournalPanel|undefined;private journalRequest:JournalOpenOptions|undefined;private pixelWidth=0;private pixelHeight=0;
  private pointerTargets=new Set<Node>();private cooldownLabels=new Map<string,Label>();private counts=new Map<string,Label>();
  private skillPointMark?:Node;
  private actionIcons=new Map<string,Sprite>();private cooldownShades=new Map<string,Node>();private iconPaths=new Map<string,string>();
  private actionDiameters=new Map<string,number>();private showSkillNames=false;
  private skillIconGroup='';private iconGroups=new Map<string,string>();
  private combatControls=new Map<string,Node>();private combatLayoutKey='';private dashControl:Node|null=null;
- private combatAnchor={x:0,y:0,unit:0,attackSize:0,bottom:0,joystickRight:0,gap:0};private supplyBelt:Node|null=null;
+ private combatAnchor={x:0,y:0,unit:0,attackSize:0,radius:0,bottom:0,joystickRight:0,gap:0};private combatTextScale=1;private supplyBelt:Node|null=null;
  private supplyBeltExpanded=false;
  private combatArcActions:string[]=[];private combatUtilityActions:string[]=[];
  private attackRangeY=0;private aimCancelGap=12;
@@ -86,7 +90,7 @@ export class Hud {
  root:Node;camera:Camera;modal:Node;labels=new Map<string,Label>();width:number=UI_DESIGN_SIZE.width;height:number=UI_DESIGN_SIZE.height;
  health:Sprite;focus:Sprite;joystick:Node;joystickRadius=68;cancel:Node;buttonLabels=new Map<string,Label>();
  constructor(scene:Node,readonly actions:HudActions){
-  try{this.showSkillNames=sys.localStorage.getItem('sword-fire-ui-skill-names')==='1';}catch{/* Cosmetic preferences cannot prevent boot. */}
+  try{this.showSkillNames=platformStorage.getItem('sword-fire-ui-skill-names')==='1';}catch{/* Cosmetic preferences cannot prevent boot. */}
   view.setDesignResolutionSize(UI_DESIGN_SIZE.width,UI_DESIGN_SIZE.height,ResolutionPolicy.FIXED_HEIGHT);
   this.root=new Node('Canvas');scene.addChild(this.root);this.root.layer=Layers.Enum.UI_2D;
   const canvas=this.root.addComponent(Canvas);this.camera=new Node('UICamera').addComponent(Camera);scene.addChild(this.camera.node);this.camera.node.setPosition(0,0,1000);this.camera.projection=Camera.ProjectionType.ORTHO;this.camera.orthoHeight=UI_DESIGN_SIZE.height/2;this.camera.clearFlags=Camera.ClearFlag.DEPTH_ONLY;this.camera.visibility=Layers.Enum.UI_2D;this.camera.priority=10;canvas.cameraComponent=this.camera;
@@ -94,7 +98,7 @@ export class Hud {
  }
  get skillNamesVisible():boolean{return this.showSkillNames;}
  get supplyBeltVisible():boolean{return this.supplyBeltExpanded;}
- toggleSupplyBelt():void{this.supplyBeltExpanded=!this.supplyBeltExpanded;if(this.supplyBelt)this.supplyBelt.active=this.supplyBeltExpanded;}
+ toggleSupplyBelt():void{this.supplyBeltExpanded=!this.supplyBeltExpanded;if(this.supplyBelt)this.supplyBelt.active=this.supplyBeltExpanded;if(!this.supplyBeltExpanded)this.hideSkillDescription();}
  get automationView(){return this.automationState;}
  settingsTab:'audio'|'controls'|'journey'='audio';
  get automationExpanded(){return !!this.automationHud?.expanded;}
@@ -108,26 +112,26 @@ export class Hud {
    if(!this.isSkillControl(action))continue;label.node.active=show&&!!this.actionIcons.get(action)?.node.active;
    const diameter=this.actionDiameters.get(action);if(diameter)this.layoutActionIcon(action,diameter);
   }
-  try{sys.localStorage.setItem('sword-fire-ui-skill-names',show?'1':'0');}catch{/* Keep the chosen presentation for this session. */}
+  try{platformStorage.setItem('sword-fire-ui-skill-names',show?'1':'0');}catch{/* Keep the chosen presentation for this session. */}
  }
- private isSkillControl(action:string):boolean{return action==='attack'||action==='dash'||action==='ultimate'||/^combat\d+$/.test(action);}
- isDescribableSkill(action:string):boolean{return action==='dash'||action==='ultimate'||/^combat\d+$/.test(action);}
- isControlReady(action:string):boolean{return !!this.buttonLabels.get(action)?.node.parent?.getComponent(Button)?.interactable;}
+ private isSkillControl(action:string):boolean{return action==='attack'||this.isDescribableSkill(action);}
+ isDescribableSkill(action:string):boolean{return action==='dash'||action==='ultimate'||action==='skill-heal'||/^combat\d+$/.test(action);}
+ isControlReady(action:string):boolean{const node=this.buttonLabels.get(action)?.node.parent,button=node?.getComponent(Button);return !!node?.activeInHierarchy&&!!button?.enabled&&button.interactable;}
  hideSkillDescription():void{if(this.skillDescription){this.skillDescription.removeFromParent();this.skillDescription.destroy();this.skillDescription=null;}}
  showSkillDescription(game:GameSession,action:string):void{
   this.hideSkillDescription();
   const combat=game.state.combat,loadout=assignedLoadout(combat),slot=Number(action.slice(6));
-  const equipped=action==='dash'?'COM_01':action==='ultimate'?combat.ultimate:combat.activeSlots[slot];
+  const equipped=action==='dash'?'COM_01':action==='skill-heal'?'COM_02':action==='ultimate'?combat.ultimate:combat.activeSlots[slot];
   const id=equipped??(action==='ultimate'?loadout?.ultimate:loadout?.activeSlots[slot]),def=COMBAT_SKILLS[id??''];
   const model=def?game.combatSkillView([def.id])[0]:undefined,rank=def?.ranks[Math.max(0,(model?.rank??1)-1)],resource=resourceProfile(game.state);
-  const kind=def?.type==='ultimate'?'终极技能':def?.type==='mobility'?'闪避技能':'主动技能';
+  const kind=def?skillRoleLabel(def):'固定技能位';
   const title=def?`${def.name} · ${model?.unlocked?`${model.rank}级`: '未解锁'}`:'空技能位';
   const facts=rank?`冷却 ${BUILD_PROFILE.noSkillCooldown?0:rank.cooldownSeconds}秒 · ${rank.castRangeMetres?`距离 ${rank.castRangeMetres}米 · `:''}${model?.resourceCost?`消耗 ${model.resourceCost}${resource.name}`:'无消耗'}`:'';
   const mechanic=def?skillResourceText(def.mechanic??def.effect??rank?.effect??''):'';
   const effect=rank?.effect&&rank.effect!==mechanic?skillResourceText(rank.effect):'';
   const upgrade=rank?.upgradeEffect?`本阶效果：${skillResourceText(rank.upgradeEffect)}`:'';
-  const body=def?[mechanic,effect,upgrade].filter(Boolean).join('\n'):'前往战斗技能页，将已解锁的技能装入这个位置。';
-  const status=!def?'尚未配置':!model?.unlocked?`角色 Lv.${model?.requiredLevel??def.unlockLevel} 解锁`:!equipped?'未配置到技能栏':!model.compatible?skillWeaponRequirement(def):!model.resourceEnough?`${resource.name}不足，需要 ${model.resourceCost}点`:model.cooldown>0?`剩余冷却 ${model.cooldown.toFixed(1)}秒`:!model.ready?'终极技能暂未就绪':'可施放';
+  const body=def?[kind,...(rank?skillRankFacts(def,rank):[]),mechanic,effect,upgrade].filter(Boolean).join('\n'):'职业技能固定排列，达到解锁条件后在原位启用。';
+  const status=!def?'尚未开放':!model?.unlocked?`角色 Lv.${model?.requiredLevel??def.unlockLevel} 解锁`:!equipped?'尚未开放':!model.compatible?skillWeaponRequirement(def):!model.resourceEnough?`${resource.name}不足，需要 ${model.resourceCost}点`:model.cooldown>0?`剩余冷却 ${model.cooldown.toFixed(1)}秒`:action==='skill-heal'&&game.state.player.hp>=game.state.player.maxHp?'生命已满':action==='skill-heal'&&(combat.buffs.healCount??0)>0?'恢复效果持续中':!model.ready?'技能暂未就绪':'可施放';
   const scale=this.touchMode?this.height/Math.max(1,viewportMetrics.windowSize.height/Math.max(1,viewportMetrics.devicePixelRatio)):1;
   const safe=sys.getSafeAreaRect(false),inset=8*scale,left=-this.width/2+Math.max(inset,safe.x),right=-this.width/2+Math.min(this.width-inset,safe.x+safe.width),bottom=-this.height/2+Math.max(inset,safe.y),top=-this.height/2+Math.min(this.height-inset,safe.y+safe.height);
   const padding=16*scale,font=13*scale,line=19*scale;
@@ -144,12 +148,12 @@ export class Hud {
   text('SkillDescriptionTitle',title,height/2-25*scale,16*scale,C.gold);
   text('SkillDescriptionFacts',facts||kind,height/2-51*scale,12*scale,C.ink);
   description.node.setPosition(0,height/2-72*scale-bodyHeight/2);
-  const state=text('SkillDescriptionStatus',status,-height/2+43*scale,12*scale,C.ink);F.tint(state,model?.ready&&!!equipped?'state.ready':'state.paused');
+  const state=text('SkillDescriptionStatus',status,-height/2+43*scale,12*scale,C.ink);F.tint(state,model?.ready&&!!equipped&&!(action==='skill-heal'&&(game.state.player.hp>=game.state.player.maxHp||(combat.buffs.healCount??0)>0))?'state.ready':'state.paused');
   text('SkillDescriptionHelp','松开关闭 · 查看后不会施放',-height/2+22*scale,11*scale,C.muted);
   // Stay near the outer edge and above the held button; tall cards move to its left to clear the finger.
-  const control=this.buttonLabels.get(action)!.node.parent!,bounds=control.getComponent(UITransform)!,controlTop=control.position.y+bounds.height/2;
+  const control=this.buttonLabels.get(action)!.node.parent!,bounds=control.getComponent(UITransform)!,controlPosition=this.root.getComponent(UITransform)!.convertToNodeSpaceAR(control.worldPosition),controlTop=controlPosition.y+bounds.height/2;
   let x=right-width/2,y=Math.min(top-height/2,controlTop+12*scale+height/2);
-  if(y-height/2<controlTop+8*scale)x=Math.max(left+width/2,control.position.x-bounds.width/2-12*scale-width/2);
+  if(y-height/2<controlTop+8*scale)x=Math.max(left+width/2,controlPosition.x-bounds.width/2-12*scale-width/2);
   panel.setPosition(x,Math.max(bottom+height/2,y));
  }
  private actionIconY(action:string,diameter:number):number{return action.startsWith('potion-')||this.isSkillControl(action)&&!this.showSkillNames?0:diameter*.14;}
@@ -191,7 +195,7 @@ export class Hud {
   // Same shadow, halo and bezel, precomposed into one shared sprite. Keep
   // the pressed transform and hit target, with two fewer translucent draws.
   const faceSize=skill?diameter*1.6:diameter;
-  const bezel=mapTool?UiSkin.sprite(face,'ui/boss-awareness/tool-face',diameter,diameter):UiSkin.asset(face,skill?'hud-skill-face-v19':'unified-gold-medallion-v13',faceSize,faceSize,false),order=bezelOrder??(skill?-30:undefined);if(order!==undefined)this.controlOrder(bezel,order);
+  const bezel=mapTool?UiSkin.sprite(face,'ui/boss-awareness/tool-face',diameter,diameter):UiSkin.asset(face,skill?'hud-skill-face-v19':'unified-gold-medallion-v13',faceSize,faceSize,false),order=bezelOrder??(skill&&parent===this.root?-30:undefined);if(order!==undefined)this.controlOrder(bezel,order);
   if(mapTool){const ring=UiSkin.asset(face,'unified-gold-ring-v16',diameter,diameter,false);if(order!==undefined)this.controlOrder(ring,order+1);}
   // The broad skill bezel includes its engraved scrollwork in the mipmapped skin.
   if(!skill&&!mapTool)UiChrome.circleOrnament(this.node('MetalScrollwork',face),diameter/2);
@@ -239,14 +243,17 @@ export class Hud {
   this.actionIcons.set(action,icon);this.iconPaths.set(action,this.isSkillControl(action)||action.startsWith('potion-')?'':iconPath);this.actionDiameters.set(action,diameter);
   if(this.isSkillControl(action)||action.startsWith('potion-'))this.setActionIcon(action,iconPath);
   const shade=this.isSkillControl(action)?UiSkin.sprite(icon.node.parent!,'ui/combat-relief/hud-circular/cooldown',iconSize,iconSize):UiSkin.asset(icon.node.parent!,'mask-cooldown',iconSize,iconSize,false);shade.node.name='CooldownShade';shade.node.setPosition(0,this.isSkillControl(action)?0:iconY);shade.fillType=Sprite.FillType.RADIAL;shade.fillCenter=new Vec2(.5,.5);shade.fillStart=.25;shade.fillRange=-1;shade.type=Sprite.Type.FILLED;shade.node.active=false;this.cooldownShades.set(action,shade.node);
-  if(this.isSkillControl(action)){this.controlOrder(icon,-10);this.controlOrder(shade,-5);}
+  // Root combat controls share global negative bands. Nested supply skills
+  // stay in their parent's normal draw order above the supply panel itself.
+  if(this.isSkillControl(action)&&parent===this.root){this.controlOrder(icon,-10);this.controlOrder(shade,-5);}
   const clip=n.getChildByName('ButtonFace')!.getChildByName('RoundButtonClip')!,disabled=this.node('DisabledShade',clip,0,0,diameter,diameter),fill=disabled.addComponent(CompactGraphics),radius=clip.getComponent(UITransform)!.width/2;
   // Same color and 64-sided ellipse as the former Mask+Sprite, in one native draw.
   F.ink(fill,'control.disabled','fill',158);
   for(let i=0;i<64;i++){const angle=i*2*Math.PI/64,x=Math.cos(angle)*radius,y=Math.sin(angle)*radius;if(i)fill.lineTo(x,y);else fill.moveTo(x,y);}fill.close();fill.fill();
-  if(this.isSkillControl(action))this.controlOrder(fill,-20);disabled.active=false;this.disabledShades.set(action,disabled);
-  const cd=this.text(n,'',0,iconY,diameter-8,this.touchMode?26:21,C.ink,diameter-12);cd.horizontalAlign=Label.HorizontalAlign.CENTER;cd.node.active=false;this.cooldownLabels.set(action,cd);
-  const count=this.text(n,'',diameter*.3,diameter*.29,36,this.touchMode?21:14,C.gold,28);count.horizontalAlign=Label.HorizontalAlign.CENTER;count.enableWrapText=false;count.enableOutline=true;count.outlineWidth=2;count.outlineColor=C.dark;this.counts.set(action,count);
+  if(this.isSkillControl(action)&&parent===this.root)this.controlOrder(fill,-20);disabled.active=false;this.disabledShades.set(action,disabled);
+  const textScale=this.touchMode&&parent===this.root&&this.isSkillControl(action)?this.combatTextScale:1;
+  const cd=this.text(n,'',0,iconY,diameter-8,this.touchMode?26*textScale:21,C.ink,diameter-12);cd.horizontalAlign=Label.HorizontalAlign.CENTER;cd.node.active=false;this.cooldownLabels.set(action,cd);
+  const count=this.text(n,'',diameter*.3,diameter*.29,36*textScale,this.touchMode?21*textScale:14,C.gold,28*textScale);count.horizontalAlign=Label.HorizontalAlign.CENTER;count.enableWrapText=false;count.enableOutline=true;count.outlineWidth=2;count.outlineColor=C.dark;this.counts.set(action,count);
   n.on(Node.EventType.MOUSE_ENTER,()=>{if(!this.touchMode&&this.labels.get('hint'))this.labels.get('hint')!.string=this.tooltips.get(action)??TITLES[action];});
   n.on(Node.EventType.MOUSE_LEAVE,()=>{if(!this.touchMode&&this.labels.get('hint'))this.labels.get('hint')!.string='WASD 移动   ·   Shift 慢行   ·   滚轮缩放';});this.layoutActionIcon(action,diameter);return n;
  }
@@ -255,7 +262,10 @@ export class Hud {
   const size=view.getVisibleSize();this.width=size.width;this.height=size.height;this.root.getComponent(UITransform)!.setContentSize(this.width,this.height);this.camera.orthoHeight=this.height/2;
   this.touchMode=sys.isMobile;this.pointerTargets.clear();this.cooldownLabels.clear();this.counts.clear();this.buttonLabels.clear();this.actionIcons.clear();this.actionDiameters.clear();this.cooldownShades.clear();this.disabledShades.clear();this.iconPaths.clear();this.iconGroups.clear();this.tooltips.clear();
   this.combatControls.clear();this.combatLayoutKey='';this.combatArcActions=[];this.combatUtilityActions=[];
-  const cssHeight=Math.max(1,viewportMetrics.windowSize.height/Math.max(1,viewportMetrics.devicePixelRatio)),pixelScale=this.height/cssHeight,touchMin=Math.max(80,48*pixelScale),unit=this.touchMode?touchMin:64,gap=this.touchMode?8*pixelScale:12;
+  // Enlarge only the seven phone combat controls. Map, quest, joystick and
+  // supply targets keep their existing baseline instead of inheriting this size.
+  const cssHeight=Math.max(1,viewportMetrics.windowSize.height/Math.max(1,viewportMetrics.devicePixelRatio)),pixelScale=this.height/cssHeight,touchMin=Math.max(80,48*pixelScale),unit=this.touchMode?Math.max(touchMin,56*pixelScale):64,gap=this.touchMode?8*pixelScale:12;
+  this.combatTextScale=this.touchMode?unit/touchMin:1;
   // Safe-area insets already reserve the hardware obstruction. Use a small
   // screen gutter only where it is larger; never add another gutter on top.
   const safe=sys.getSafeAreaRect(false),edge=this.touchMode?UI_HUD_INSETS.information*pixelScale:10,left=-this.width/2+Math.max(edge,safe.x),right=-this.width/2+Math.min(this.width-edge,safe.x+safe.width),top=-this.height/2+Math.min(this.height-edge,safe.y+safe.height),bottom=-this.height/2+Math.max(edge,safe.y);
@@ -285,7 +295,10 @@ export class Hud {
   // decorative extension points and never intercept map/world input.
   const toolHit=this.touchMode?touchMin:48,toolFace=this.touchMode?28*pixelScale:32,reserveFace=this.touchMode?18*pixelScale:20;
   const miniRight=Math.min(this.width/2-10,right+12),miniTop=Math.min(this.height/2-10,top+12);
-  const attackSize=unit*1.32,maxArcRadius=(unit+gap)/(2*Math.sin(COMBAT_ARC_SPAN/6)),arcStart=COMBAT_ARC_CENTER+COMBAT_ARC_SPAN/2,arcEnd=COMBAT_ARC_CENTER-COMBAT_ARC_SPAN/2;
+  const attackSize=unit*1.32,skillFace=unit-(this.touchMode?4*pixelScale:4),arcStart=COMBAT_ARC_CENTER+COMBAT_ARC_SPAN/2,arcEnd=COMBAT_ARC_CENTER-COMBAT_ARC_SPAN/2;
+  // The phone gap is measured between visible circular faces. Keep this same
+  // radius for screen-edge fitting and placement so the outer targets stay safe.
+  const maxArcRadius=Math.max((attackSize+unit)/2+gap,(unit+gap)/(2*Math.sin(COMBAT_ARC_SPAN/6)),this.touchMode?(attackSize+skillFace)/2+48*pixelScale:0);
   // Fit the actual arc/attack hit bounds to the bottom-right edge. A fan
   // centred at 135 degrees leaves equal, minimal attack margins on both axes.
   const ax=combatRight-Math.max(attackSize/2,unit/2+maxArcRadius*Math.max(0,Math.cos(arcEnd))),ay=combatBottom+Math.max(attackSize/2,unit/2+maxArcRadius*Math.max(0,-Math.sin(arcStart)));
@@ -329,29 +342,29 @@ export class Hud {
   for(const [x,y]of [[0,1],[0,-1],[1,0],[-1,0]]){jg.moveTo(x*joyRadius*.76,y*joyRadius*.76);jg.lineTo(x*joyRadius*.88,y*joyRadius*.88);jg.stroke();}this.joystick=this.node('Thumb',joy,0,0,knobRadius*2,knobRadius*2);const knob=this.joystick.addComponent(CompactGraphics);knob.fillColor=new Color(230,209,169,200);knob.circle(0,0,knobRadius);knob.fill();if(this.touchMode)this.pointerTargets.add(joy);
   // ChapterGame owns movement through Cocos input; node cancellation must not reset that finger.
   // One attack-centred circular fan, followed by a regular support grid.
-  // Keep native touch sizes while reducing the faces and unused panel padding.
-  this.combatAnchor={x:ax,y:ay,unit,attackSize,bottom:combatBottom,joystickRight:left+joySize+8,gap};
+  // Phone faces and touch targets grow together; the same fan geometry keeps
+  // regular gaps and fits its complete hit bounds to the safe screen edges.
+  this.combatAnchor={x:ax,y:ay,unit,attackSize,radius:maxArcRadius,bottom:combatBottom,joystickRight:left+joySize+8,gap};
   this.iconButton('attack',ax,ay,attackSize,attackSize);
-  const skillFace=unit-(this.touchMode?4*pixelScale:4);
   this.dashControl=this.iconButton('dash',ax,ay,unit,skillFace);
   for(const action of ['combat0','combat1','combat2','combat3','ultimate']){
    const n=this.iconButton(action,ax,ay,unit,skillFace,true,'');n.active=false;this.combatControls.set(action,n);
-   if(action!=='ultimate'){const index=this.text(n,String(Number(action.slice(6))+1),-skillFace*.32,skillFace*.32,24,this.touchMode?17:11,C.muted,24);index.node.name='SkillSlotIndex';index.horizontalAlign=Label.HorizontalAlign.CENTER;index.overflow=Label.Overflow.CLAMP;index.cacheMode=Label.CacheMode.CHAR;}
+   if(action!=='ultimate'){const index=this.text(n,String(Number(action.slice(6))+1),-skillFace*.32,skillFace*.32,24*this.combatTextScale,this.touchMode?17*this.combatTextScale:11,C.muted,24*this.combatTextScale);index.node.name='SkillSlotIndex';index.horizontalAlign=Label.HorizontalAlign.CENTER;index.overflow=Label.Overflow.CLAMP;index.cacheMode=Label.CacheMode.CHAR;}
   }
-  const supplySlots=['potion-health','potion-resource',null,null] as const;
+  const supplySlots=['potion-health','potion-resource','skill-heal',null] as const;
   const supplyHit=this.touchMode?touchMin:52,supplyFace=this.touchMode?Math.min(72,supplyHit):48,supplyStep=supplyHit+gap,padding=4*pixelScale;
   const supplies=this.supplyBelt=this.panel(this.root,0,bottom+supplyHit/2+padding,supplySlots.length*supplyHit+(supplySlots.length-1)*gap+2*padding,supplyHit+2*padding,new Color(19,15,11,226));supplies.name='SupplyBelt';this.pointerTargets.add(supplies);
   supplies.active=this.supplyBeltExpanded;
   supplySlots.forEach((action,index)=>{
    const slot=this.node('SupplySlot'+(index+1),supplies,(index-(supplySlots.length-1)/2)*supplyStep,0,supplyHit,supplyHit);
-   if(action)this.iconButton(action,0,0,supplyHit,supplyFace,true,action==='potion-health'?'potion-health':'potion-stamina',slot);
+   if(action)this.iconButton(action,0,0,supplyHit,supplyFace,true,action==='skill-heal'?'':action==='potion-health'?'potion-health':'potion-stamina',slot);
    else{
     UiSkin.asset(slot,'unified-gold-medallion-v13',supplyFace,supplyFace,false);
     UiChrome.circleOrnament(this.node('MetalScrollwork',slot),supplyFace/2);
    }
   });
   this.labels.set('toast',this.text(this.root,'',0,top-72,Math.max(240,Math.min(580,this.width-740)),this.touchMode?24:17,C.ink,70));this.labels.get('toast')!.horizontalAlign=Label.HorizontalAlign.CENTER;
-  this.equipmentNotice.mount(Math.min(320*(this.touchMode?pixelScale:1.25),this.labels.get('toast')!.node.getComponent(UITransform)!.width),this.touchMode?pixelScale:1.25);
+  this.equipmentNotice.mount(Math.min(300*(this.touchMode?pixelScale:1.25),this.labels.get('toast')!.node.getComponent(UITransform)!.width),this.touchMode?pixelScale:1.25);
   this.labels.set('compass',this.text(this.root,'',0,top-22,statsW,this.touchMode?21:14,C.gold,36));this.labels.get('compass')!.horizontalAlign=Label.HorizontalAlign.CENTER;
   this.labels.set('hint',this.text(this.root,this.touchMode?'':'WASD 移动 · Shift 慢行 · 滚轮缩放',0,bottom+132,Math.max(220,Math.min(480,this.width-600)),12,C.muted,24));this.labels.get('hint')!.horizontalAlign=Label.HorizontalAlign.CENTER;
   this.attackRangeY=bottom+220;
@@ -399,9 +412,9 @@ export class Hud {
   if(this.guidanceClock+1e-6>=.2){
    this.guidanceClock=0;const guide=this.guidance;this.setQuestLine('area',practice&&!guide?trainingText(practice.groupMode?'hudGroupArea':'hudArea',{count:practice.groupMode?practice.remainingMonsters:practice.targetCount,total:practice.targetCount,distance:practice.distance}):(AREAS[s.area]?.name??s.area)+(guide?.safe?'·安全区':''));
    this.setQuestLine('quest-distance',guide?guide.blocked?'受阻':guide.distance>=1000?`${(guide.distance/1000).toFixed(1)}km`:`${Math.ceil(guide.distance)}m`:'');
-   if(guide){const dx=guide.bearing.x-p.x,dz=guide.bearing.z-p.z,r=worldCamera.node.right,u=worldCamera.node.up,angle=Math.atan2(dx*r.x+dz*r.z,dx*u.x+dz*u.z),arrow=['↑','↗','→','↘','↓','↙','←','↖'][(Math.round(angle/(Math.PI/4))+8)%8];this.setQuestLine('objective',guide.blocked?'路线受阻':`${arrow} ${guide.instruction}`);this.setQuestLine('quest-route',guide.blocked?'打开旅程查看':guide.hops?`出口 ${Math.ceil(guide.distance)}m · ${AREAS[guide.nextArea??guide.destination.area].name}`:guide.distance>2?`${Math.ceil(guide.distance)}m · ${guide.detail}`:guide.detail);}
+   if(guide){const dx=guide.bearing.x-p.x,dz=guide.bearing.z-p.z,r=worldCamera.node.right,u=worldCamera.node.up,angle=Math.atan2(dx*r.x+dz*r.z,dx*u.x+dz*u.z),arrow=['↑','↗','→','↘','↓','↙','←','↖'][(Math.round(angle/(Math.PI/4))+8)%8];this.setQuestLine('objective',guide.blocked?'路线受阻':`${arrow} ${guide.instruction}`);this.setQuestLine('quest-route',guide.blocked?encounterText('ui.hudTaskBlocked'):guide.hops?`出口 ${Math.ceil(guide.distance)}m · ${AREAS[guide.nextArea??guide.destination.area].name}`:guide.distance>2?`${Math.ceil(guide.distance)}m · ${guide.detail}`:guide.detail);}
    else if(practice){this.setQuestLine('objective',trainingText(practice.groupMode?'hudGroupProgress':'hudDamage',{damage:practice.damage,hits:practice.hits,kills:practice.defeatedMonsters,total:practice.targetCount}));this.setQuestLine('quest-route',trainingText('hudDps',{dps:Math.round(practice.dps)}));}
-   else{this.setQuestLine('objective',game.objective());this.setQuestLine('quest-route','点击查看旅程');}
+   else{this.setQuestLine('objective',game.objective());this.setQuestLine('quest-route',encounterText('ui.hudTaskOpen'));}
   }
   this.labels.get('stats')!.string=`金币 ${p.gold}`;
   this.labels.get('weapon')!.string=weapon?.name??'';this.labels.get('toast')!.string=toast;F.tint(this.labels.get('toast')!,toastRole);const healthRole=playerHealthFeedbackRole(p.hp,p.maxHp);F.tint(this.labels.get('health')!,healthRole==='health.player'?'health.text':healthRole);F.tint(this.labels.get('stats')!,'reward.gold');
@@ -417,7 +430,7 @@ export class Hud {
    if(fraction>0){g.moveTo(0,-37);g.arc(0,0,37,-Math.PI/2,-Math.PI/2+Math.PI*2*fraction,true);g.stroke();}
   }
   if(this.skillPointMark)this.skillPointMark.active=game.state.progression.skillPoints>0;
-  const actions:Record<string,string>={combat0:combat.activeSlots[0],combat1:combat.activeSlots[1],combat2:combat.activeSlots[2],combat3:combat.activeSlots[3],ultimate:combat.ultimate,dash:'COM_01'};
+  const actions:Record<string,string>={combat0:combat.activeSlots[0],combat1:combat.activeSlots[1],combat2:combat.activeSlots[2],combat3:combat.activeSlots[3],ultimate:combat.ultimate,dash:'COM_01','skill-heal':'COM_02'};
   const loadout=assignedLoadout(combat),skillViews=game.combatSkillView(Object.entries(actions).map(([action,id])=>id??(action.startsWith('combat')?loadout?.activeSlots[Number(action.slice(6))]:action==='ultimate'?loadout?.ultimate:'')).filter(id=>!!id));
   const visible=['combat0','combat1','combat2','combat3','ultimate'];
   this.layoutCombatControls(visible);
@@ -435,18 +448,19 @@ export class Hud {
     if(action==='potion-resource')this.setActionIcon(action,resource.icon);
     this.tooltips.set(action,stock<=0?'补给已用尽 · 在安全检查点补满':full?`${health?'生命':resource.name}已满 · 无需使用药水`:health?'5 · 恢复40%生命（至少40点）· 共享5秒药水冷却':`6 · ${resource.potion} · 恢复45%${resource.name}上限 · 共享5秒药水冷却`);continue;
    }
-   if(action==='attack'){this.cooldownShades.get(action)!.active=false;this.setDisabledShade(action,false);this.counts.get(action)!.string='';label.node.active=false;continue;}
-   const ghost=(action.startsWith('combat')||action==='ultimate')&&!actions[action],id=actions[action]??(ghost?(action==='ultimate'?loadout?.ultimate:loadout?.activeSlots[Number(action.slice(6))]):null),def=COMBAT_SKILLS[id??''],v=skillViews.find(v=>v.id===id),rank=def?.ranks[Math.max(0,(v?.rank??1)-1)],remaining=ghost?0:v?.cooldown??0;
-   const blocked=ghost||!v?.unlocked||!v.compatible||!v.resourceEnough;
+   if(action==='attack'){const volleyReady=combat.family==='BOW'&&(combat.buffs.bowVolleyReadyUntil??0)>s.time;this.cooldownShades.get(action)!.active=false;this.setDisabledShade(action,false);this.counts.get(action)!.string=volleyReady?'连射':'';F.tint(this.counts.get(action)!,'state.ready');if(volleyReady)this.tooltips.set(action,'连射就绪 · 下一次成功弓普攻释放疾风连射');label.node.active=false;continue;}
+   const id=actions[action]??(action==='ultimate'?loadout?.ultimate:loadout?.activeSlots[Number(action.slice(6))]),def=COMBAT_SKILLS[id??''],v=skillViews.find(v=>v.id===id),ghost=(action.startsWith('combat')||action==='ultimate')&&!actions[action]||action==='skill-heal'&&!v?.unlocked,rank=def?.ranks[Math.max(0,(v?.rank??1)-1)],remaining=ghost?0:v?.cooldown??0;
+   const healBlocked=action==='skill-heal'&&(p.hp>=p.maxHp||(combat.buffs.healCount??0)>0||!!s.action||!!s.dialogue||!!s.dice.active);
+   const blocked=ghost||!v?.unlocked||!v.compatible||!v.resourceEnough||healBlocked;
    const name=this.buttonLabels.get(action)!;name.string=ghost?'':def?(this.touchMode?def.name.slice(0,2):def.name):'';name.node.active=!ghost&&this.showSkillNames;
    this.counts.get(action)!.string='';
    label.string=remaining>0?remaining.toFixed(1):'';label.node.active=remaining>0;
    const shade=this.cooldownShades.get(action)!;shade.active=remaining>0;const sprite=shade.getComponent(Sprite)!;
    if(sprite.spriteFrame)sprite.fillRange=-Math.min(1,remaining/Math.max(.1,rank?.cooldownSeconds??1));
-   const icon=this.actionIcons.get(action)!;icon.node.active=!ghost;name.node.parent!.getComponent(Button)!.interactable=!ghost&&!!v?.ready&&s.status!=='dead';
+   const icon=this.actionIcons.get(action)!;icon.node.active=!ghost;name.node.parent!.getComponent(Button)!.interactable=!blocked&&!!v?.ready&&s.status!=='dead';
    this.setDisabledShade(action,blocked);F.tint(icon,blocked?'text.disabled':s.action?.skillId===id?'state.running':'icon.normal');
    this.setActionIcon(action,ghost?'':COMBAT_SKILL_ICONS[id??'']??'');
-   const reason=!v?.unlocked?`角色Lv${v?.requiredLevel??1}解锁`:!v.compatible?def?skillWeaponRequirement(def):'需要装备对应武器':!v.resourceEnough?`${resource.name}不足，需${v.resourceCost}点；可普攻或使用药水`:remaining>0?'技能冷却中':`${v.resourceCost?`消耗${v.resourceCost}${resource.name} · `:''}${rank?.castRangeMetres??0}米 · ${this.skillAimMode==='auto'?'轻点锁定最近怪物，拖动手动瞄准':'手动瞄准，松开释放'}`;
+   const reason=!v?.unlocked?`角色Lv${v?.requiredLevel??1}解锁`:!v.compatible?def?skillWeaponRequirement(def):'需要装备对应武器':!v.resourceEnough?`${resource.name}不足，需${v.resourceCost}点；可普攻或使用药水`:remaining>0?'技能冷却中':action==='skill-heal'?p.hp>=p.maxHp?'生命已满':(combat.buffs.healCount??0)>0?'恢复效果持续中':`恢复生命 · 消耗${v.resourceCost}${resource.name}`:`${v.resourceCost?`消耗${v.resourceCost}${resource.name} · `:''}${rank?.castRangeMetres??0}米 · ${this.skillAimMode==='auto'?'轻点锁定最近怪物，拖动手动瞄准':'手动瞄准，松开释放'}`;
    this.tooltips.set(action,`${KEYS[action]} · ${def?.name??'空技能位'} · ${reason}`);
   }
  }
@@ -455,10 +469,10 @@ export class Hud {
   shade.active=visible;shade.parent!.active=visible;
  }
  private layoutCombatControls(visible:string[]):void {
-  const arc=['combat0','combat1','ultimate','combat3'],utilities=['dash','combat2'],key=utilities.join('|');if(key===this.combatLayoutKey)return;this.combatLayoutKey=key;
+  const arc=['combat0','combat1','combat3','ultimate'],utilities=['dash','combat2'],key=utilities.join('|');if(key===this.combatLayoutKey)return;this.combatLayoutKey=key;
   this.combatArcActions=arc;this.combatUtilityActions=utilities;
-  const {x,y,unit,attackSize,bottom,joystickRight,gap}=this.combatAnchor,step=unit+gap;
-  const angleStep=arc.length>1?COMBAT_ARC_SPAN/(arc.length-1):0,radius=Math.max((attackSize+unit)/2+gap,arc.length>1?step/(2*Math.sin(angleStep/2)):0);
+  const {x,y,unit,attackSize,radius,bottom,joystickRight,gap}=this.combatAnchor,step=unit+gap;
+  const angleStep=arc.length>1?COMBAT_ARC_SPAN/(arc.length-1):0;
   for(const [action,node]of this.combatControls)node.active=visible.includes(action);
   arc.forEach((action,i)=>{const angle=COMBAT_ARC_CENTER+(arc.length===1?0:COMBAT_ARC_SPAN/2-i*angleStep);this.combatControls.get(action)!.setPosition(x+Math.cos(angle)*radius,y+Math.sin(angle)*radius);});
   const arcLeft=arc.length?Math.min(...arc.map(action=>this.combatControls.get(action)!.position.x-unit/2)):x-attackSize/2;
@@ -489,12 +503,13 @@ export class Hud {
   this.automationHud?.update(this.automationState,visible);if(this.navigationButton)this.navigationButton.active=visible;
   const arrived=!!this.guidance&&!this.guidance.blocked&&!this.guidance.hops&&this.guidance.distance<=1.35;
   const navigationPaused=paused&&mode==='manual';
-  const feedback=navigationFeedback({navigating,paused:navigationPaused,arrived,blocked:!!this.guidance?.blocked});this.miniMap?.setNavigationFeedback(feedback.role);
+  const taskMode=mode==='quest',taskRunning=taskMode&&!paused,taskPaused=taskMode&&paused;
+  const feedback=navigationFeedback({navigating:navigating||taskRunning,paused:navigationPaused||taskPaused,arrived:!taskMode&&arrived,blocked:!!this.guidance?.blocked});this.miniMap?.setNavigationFeedback(feedback.role);
   // Resolve the final caption once: alternating navigation/training text dirties and uploads the label every frame.
   const practice=!!this.trainingRange&&!this.guidance;
-  if(this.automationLabel)this.automationLabel.string=practice?trainingText('toolbar'):navigating?'停止':navigationPaused?'继续':arrived?'抵达':'出发';
-  this.questTracker?.setFeedback(feedback.role);
-  if(this.navigationButton)this.navigationButton.getComponent(Button)!.interactable=practice||navigating||navigationPaused||!!this.guidance&&!this.guidance.blocked&&!arrived;
+  if(this.automationLabel)this.automationLabel.string=practice?trainingText('toolbar'):taskMode?paused?'继续':'停止':arrived?'抵达':'出发';
+  this.questTracker?.setFeedback(navigationFeedback({navigating:taskRunning,paused:taskPaused,arrived:!taskMode&&arrived,blocked:!!this.guidance?.blocked}).role);
+  this.questTracker?.setNavigationInteractable(practice||taskMode||!!this.guidance&&!this.guidance.blocked);
   this.layoutTopMessages();
  }
  setAimCancelVisible(visible:boolean):void {
@@ -510,7 +525,12 @@ export class Hud {
   this.bossNotice.layout(noticeTop,this.bossMessage,passiveVisible&&!this.portrait);
   const stacked=this.bossNotice.visible,top=stacked?noticeTop-this.bossNotice.height-8*u:base,compass=this.labels.get('compass'),toast=this.labels.get('toast');
   if(compass){compass.node.active=passiveVisible&&!(this.equipmentNotice.dropVisible&&this.equipmentPickupsAvailable);if(compass.node.position.y!==top-18)compass.node.setPosition(0,top-18);}
-  if(toast){const half=Math.max(35,this.equipmentNotice.hasNotice?this.equipmentNotice.height/2:0),y=stacked?top-(compass?.string?36+8*u:0)-half:top-(compass?.string?83:35);this.equipmentNotice.layout(0,y,this.equipmentPickupsAvailable&&passiveVisible&&!this.portrait);toast.node.active=passiveVisible&&!this.equipmentNotice.visible;if(toast.node.position.y!==y)toast.node.setPosition(0,y);}
+  if(toast){
+   const half=Math.max(35,this.equipmentNotice.hasNotice?this.equipmentNotice.height/2:0),y=stacked?top-(compass?.string?36+8*u:0)-half:top-(compass?.string?83:35);
+   const equipmentTop=compass?.string?top-36-8*u:stacked?top:noticeTop;
+   this.equipmentNotice.layout(0,equipmentTop-this.equipmentNotice.height/2,this.equipmentPickupsAvailable&&passiveVisible&&!this.portrait);
+   toast.node.active=passiveVisible&&!this.equipmentNotice.visible;if(toast.node.position.y!==y)toast.node.setPosition(0,y);
+  }
  }
  private setActionIcon(action:string,path:string){
   const group=this.isSkillControl(action)?this.skillIconGroup:'';
@@ -525,17 +545,21 @@ export class Hud {
   void UiSkin.hudSkillFrame(this.actionIconPath(action,path),icon.node,group).then(frame=>{if(icon.isValid&&this.iconPaths.get(action)===path&&this.iconGroups.get(action)===group){if(action.startsWith('potion-'))frame.packable=false;icon.spriteFrame=frame;}}).catch(()=>{});
  }
  isOverUI(screenPoint:Vec2):boolean {if(this.automationHud?.contains(screenPoint)||this.bossNotice.contains(screenPoint))return true;for(const node of this.pointerTargets)if(node.isValid&&node.activeInHierarchy&&node.getComponent(UITransform)?.hitTest(screenPoint))return true;return false;}
- clearModal(){for(const dispose of Array.from(this.modalDisposers))dispose();this.modalDisposers.clear();this.mapPanel.hide();for(const child of [...this.modal.children])child.destroy();this.modal.removeAllChildren();}
+ clearModal(){for(const dispose of Array.from(this.modalDisposers))dispose();this.modalDisposers.clear();this.journalPanel?.hide();this.mapPanel.hide();for(const child of [...this.modal.children])child.destroy();this.modal.removeAllChildren();}
  show(title:string,body:string,buttons:MenuChoice[],wide=false,presentation:MenuPresentation={}){
   new MenuPanel(this,{width:wide?1000:undefined,...presentation}).show(title,body,buttons);
  }
  showList(title:string,subtitle:string,rows:MenuRow[],footer:MenuChoice[],minimumHit=0,presentation:MenuPresentation={}){
   new MenuPanel(this,{placement:'right',...presentation},minimumHit).showList(title,subtitle,rows,footer);
  }
- atlas(game:GameSession,visited:Record<string,boolean>,selected?:string){this.mapPanel.show(game,visited,selected);}
+ requestJournal(request:JournalOpenOptions){this.journalRequest={...request};}
+ journal(game:GameSession,visited:Record<string,boolean>,options?:JournalOpenOptions){const request=options??this.journalRequest;this.journalRequest=undefined;this.journalPanel??=new AdventureJournalPanel(this,this.mapPanel);this.journalPanel.show(game,visited,request);}
+ journalAction(action:string){return this.journalPanel?.handle(action)??false;}
+ get journalMode(){return this.journalPanel?.currentMode??'journal';}
+ atlas(game:GameSession,visited:Record<string,boolean>,selected?:string){this.journal(game,visited,{mode:'map',...(selected?{entryId:'area:'+selected,area:selected}:{})});}
  atlasKey(code:number):boolean{return this.mapPanel.key(code);}
  // Button.onDisable restores the child target's scale; disable every nested button before destroying any faces.
  private deactivateControls(node:Node){for(const button of node.getComponentsInChildren(Button))button.enabled=false;node.active=false;}
- resize(){const pixels=viewportMetrics.windowSize;if(pixels.width!==this.pixelWidth||pixels.height!==this.pixelHeight){this.pixelWidth=pixels.width;this.pixelHeight=pixels.height;director.root?.resize(pixels.width,pixels.height);view.setDesignResolutionSize(UI_DESIGN_SIZE.width,UI_DESIGN_SIZE.height,ResolutionPolicy.FIXED_HEIGHT);}const s=view.getVisibleSize();if(Math.abs(s.width-this.width)<1&&Math.abs(s.height-this.height)<1){this.mapPanel.refreshLayout();return false;}const obsolete=this.root.children.filter(child=>child!==this.modal&&child.name!=='CampaignScene');for(const child of obsolete)this.deactivateControls(child);this.miniMap?.destroy();this.miniMap=null;for(const child of obsolete)child.destroy();this.labels.clear();this.build();return true;}
+ resize(){const pixels=viewportMetrics.windowSize;if(pixels.width!==this.pixelWidth||pixels.height!==this.pixelHeight){this.pixelWidth=pixels.width;this.pixelHeight=pixels.height;director.root?.resize(pixels.width,pixels.height);view.setDesignResolutionSize(UI_DESIGN_SIZE.width,UI_DESIGN_SIZE.height,ResolutionPolicy.FIXED_HEIGHT);}const s=view.getVisibleSize();if(Math.abs(s.width-this.width)<1&&Math.abs(s.height-this.height)<1){this.journalPanel?.refreshLayout();this.mapPanel.refreshLayout();return false;}const obsolete=this.root.children.filter(child=>child!==this.modal&&child.name!=='CampaignScene');for(const child of obsolete)this.deactivateControls(child);this.miniMap?.destroy();this.miniMap=null;for(const child of obsolete)child.destroy();this.labels.clear();this.build();return true;}
  destroy(){this.deactivateControls(this.root);this.miniMap?.destroy();this.clearModal();this.root.destroy();this.camera.node.destroy();}
 }

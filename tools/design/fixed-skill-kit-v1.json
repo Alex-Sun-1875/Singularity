@@ -1,0 +1,1160 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-16",
+  "reason": "固定职业战斗栏，取消技能替换；真正单体主力、普通群攻及群攻终极分工，终极12秒、闪避2秒，额外主动转为自动强化。",
+  "skills": {
+    "WAR_01": {
+      "maxTargets": 1,
+      "targetLimitScope": "perCastSingleTarget",
+      "damageRole": "single",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 3,
+          "maxDamagePerTargetS": 3.2,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "meleeFan",
+            "origin": "caster",
+            "radiusMetres": 3.0,
+            "angleDegrees": 110,
+            "totalTargetLimit": 1
+          },
+          "evolution": "近身单体连斩，仅一个目标；合计3.2S，2段，距离3米",
+          "upgradeEffect": "近身单体连斩，仅一个目标；合计3.2S，2段，距离3米",
+          "vfxDirection": "保留近身挥剑接触与连斩节奏；同一次施放只允许一个敌人承受全部段数，接触特效贴住这个目标，不生成远程飞刃。"
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 3,
+          "maxDamagePerTargetS": 3.65,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "meleeFan",
+            "origin": "caster",
+            "radiusMetres": 3.0,
+            "angleDegrees": 120,
+            "totalTargetLimit": 1
+          },
+          "evolution": "近身单体连斩，仅一个目标；合计3.65S，2段，距离3米",
+          "upgradeEffect": "近身单体连斩，仅一个目标；合计3.65S，2段，距离3米",
+          "vfxDirection": "保留近身挥剑接触与连斩节奏；同一次施放只允许一个敌人承受全部段数，接触特效贴住这个目标，不生成远程飞刃。"
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 2.9,
+          "maxDamagePerTargetS": 4.2,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "meleeFan",
+            "origin": "caster",
+            "radiusMetres": 3.175,
+            "angleDegrees": 130,
+            "totalTargetLimit": 1
+          },
+          "evolution": "近身单体连斩，仅一个目标；合计4.2S，3段，距离3.175米",
+          "upgradeEffect": "近身单体连斩，仅一个目标；合计4.2S，3段，距离3.175米",
+          "vfxDirection": "保留近身挥剑接触与连斩节奏；同一次施放只允许一个敌人承受全部段数，接触特效贴住这个目标，不生成远程飞刃。"
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 2.7,
+          "maxDamagePerTargetS": 4.85,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "meleeFan",
+            "origin": "caster",
+            "radiusMetres": 3.3,
+            "angleDegrees": 140,
+            "totalTargetLimit": 1
+          },
+          "evolution": "近身单体连斩，仅一个目标；合计4.85S，3段，距离3.3米",
+          "upgradeEffect": "近身单体连斩，仅一个目标；合计4.85S，3段，距离3.3米",
+          "vfxDirection": "保留近身挥剑接触与连斩节奏；同一次施放只允许一个敌人承受全部段数，接触特效贴住这个目标，不生成远程飞刃。"
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 2.5,
+          "maxDamagePerTargetS": 5.6,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "meleeFan",
+            "origin": "caster",
+            "radiusMetres": 3.45,
+            "angleDegrees": 150,
+            "totalTargetLimit": 1
+          },
+          "evolution": "近身单体连斩，仅一个目标；合计5.6S，3段，距离3.45米；末段命中强化下一次普攻20%",
+          "upgradeEffect": "近身单体连斩，仅一个目标；合计5.6S，3段，距离3.45米；末段命中强化下一次普攻20%",
+          "vfxDirection": "保留近身挥剑接触与连斩节奏；同一次施放只允许一个敌人承受全部段数，接触特效贴住这个目标，不生成远程飞刃。"
+        }
+      ],
+      "targetShape": "近身单体连斩",
+      "mechanic": "对面前首个有效敌人完成单体连斩；同次施放各段共享一个目标，目标离开或倒下后不换敌补伤。伤害只来自近身真实接触，普攻保持独立。升级增加单体总伤害、攻击距离和命中容错，不增加目标数。"
+    },
+    "WAR_05": {
+      "damageRole": "area",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 2.55
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 2.9
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 3.3
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 3.85
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 4.45
+        }
+      ]
+    },
+    "BOW_01": {
+      "maxTargets": 1,
+      "targetLimitScope": "perCastSingleTarget",
+      "damageRole": "single",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 3,
+          "maxDamagePerTargetS": 3.2,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "projectileCorridor",
+            "origin": "caster",
+            "lengthMetres": 12,
+            "widthMetres": 0.35,
+            "totalTargetLimit": 1
+          },
+          "evolution": "单体重箭，仅一个目标；合计3.2S，1段，距离12米",
+          "upgradeEffect": "单体重箭，仅一个目标；合计3.2S，1段，距离12米",
+          "vfxDirection": "唯一木杆金属箭头重箭沿释放直线飞行，首个有效敌人接触后结束；短风迹与穿刺闪只表示该次单体接触，不画后续贯穿或回射。"
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 3,
+          "maxDamagePerTargetS": 3.65,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "projectileCorridor",
+            "origin": "caster",
+            "lengthMetres": 13.5,
+            "widthMetres": 0.4,
+            "totalTargetLimit": 1
+          },
+          "evolution": "单体重箭，仅一个目标；合计3.65S，1段，距离13.5米",
+          "upgradeEffect": "单体重箭，仅一个目标；合计3.65S，1段，距离13.5米",
+          "vfxDirection": "唯一木杆金属箭头重箭沿释放直线飞行，首个有效敌人接触后结束；短风迹与穿刺闪只表示该次单体接触，不画后续贯穿或回射。"
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 2.9,
+          "maxDamagePerTargetS": 4.2,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "projectileCorridor",
+            "origin": "caster",
+            "lengthMetres": 15,
+            "widthMetres": 0.45,
+            "totalTargetLimit": 1
+          },
+          "evolution": "单体重箭，仅一个目标；合计4.2S，1段，距离15米",
+          "upgradeEffect": "单体重箭，仅一个目标；合计4.2S，1段，距离15米",
+          "vfxDirection": "唯一木杆金属箭头重箭沿释放直线飞行，首个有效敌人接触后结束；短风迹与穿刺闪只表示该次单体接触，不画后续贯穿或回射。"
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 2.7,
+          "maxDamagePerTargetS": 4.85,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "projectileCorridor",
+            "origin": "caster",
+            "lengthMetres": 16.5,
+            "widthMetres": 0.5,
+            "totalTargetLimit": 1
+          },
+          "evolution": "单体重箭，仅一个目标；合计4.85S，1段，距离16.5米",
+          "upgradeEffect": "单体重箭，仅一个目标；合计4.85S，1段，距离16.5米",
+          "vfxDirection": "唯一木杆金属箭头重箭沿释放直线飞行，首个有效敌人接触后结束；短风迹与穿刺闪只表示该次单体接触，不画后续贯穿或回射。"
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 2.5,
+          "maxDamagePerTargetS": 5.6,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "projectileCorridor",
+            "origin": "caster",
+            "lengthMetres": 18,
+            "widthMetres": 0.55,
+            "totalTargetLimit": 1
+          },
+          "evolution": "单体重箭，仅一个目标；合计5.6S，1段，距离18米",
+          "upgradeEffect": "单体重箭，仅一个目标；合计5.6S，1段，距离18米",
+          "vfxDirection": "唯一木杆金属箭头重箭沿释放直线飞行，首个有效敌人接触后结束；短风迹与穿刺闪只表示该次单体接触，不画后续贯穿或回射。"
+        }
+      ],
+      "maxTargetsPerProjectile": 1,
+      "targetShape": "直线单体重箭",
+      "mechanic": "沿释放时方向射出一支单体重箭；接触首个敌人后结束，不再贯穿或分裂。升级提高单体总伤害、射程和箭路宽度。命中可准备疾风连射强化，强化使用独立触发间隔。"
+    },
+    "BOW_05": {
+      "damageRole": "area",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 2.55
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 2.9
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 3.3
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 3.85
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 4.45
+        }
+      ]
+    },
+    "FIR_01": {
+      "maxTargets": 1,
+      "targetLimitScope": "perCastSingleTarget",
+      "damageRole": "single",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 3,
+          "maxDamagePerTargetS": 3.2,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "projectileWithImpactDisk",
+            "origin": "projectileImpact",
+            "radiusMetres": 0.45,
+            "totalTargetLimit": 1
+          },
+          "evolution": "单体火核，仅一个目标；合计3.2S，1段，距离12米",
+          "upgradeEffect": "单体火核，仅一个目标；合计3.2S，1段，距离12米",
+          "vfxDirection": "白金瞬核接触首个目标后局部爆燃；红橙火体、压力亮面和火屑仅围绕同一目标，不表现向邻敌扩散的伤害。"
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 3,
+          "maxDamagePerTargetS": 3.65,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "projectileWithImpactDisk",
+            "origin": "projectileImpact",
+            "radiusMetres": 0.6,
+            "totalTargetLimit": 1
+          },
+          "evolution": "单体火核，仅一个目标；合计3.65S，1段，距离13.5米",
+          "upgradeEffect": "单体火核，仅一个目标；合计3.65S，1段，距离13.5米",
+          "vfxDirection": "白金瞬核接触首个目标后局部爆燃；红橙火体、压力亮面和火屑仅围绕同一目标，不表现向邻敌扩散的伤害。"
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 2.9,
+          "maxDamagePerTargetS": 4.2,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "projectileWithImpactDisk",
+            "origin": "projectileImpact",
+            "radiusMetres": 0.75,
+            "totalTargetLimit": 1
+          },
+          "evolution": "单体火核，仅一个目标；合计4.2S，1段，距离15米；对燃烧目标的直接伤害提高5%",
+          "upgradeEffect": "单体火核，仅一个目标；合计4.2S，1段，距离15米；对燃烧目标的直接伤害提高5%",
+          "vfxDirection": "白金瞬核接触首个目标后局部爆燃；红橙火体、压力亮面和火屑仅围绕同一目标，不表现向邻敌扩散的伤害。"
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 2.7,
+          "maxDamagePerTargetS": 4.85,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "projectileWithImpactDisk",
+            "origin": "projectileImpact",
+            "radiusMetres": 0.9,
+            "totalTargetLimit": 1
+          },
+          "evolution": "单体火核，仅一个目标；合计4.85S，1段，距离16.5米；对燃烧目标的直接伤害提高5%",
+          "upgradeEffect": "单体火核，仅一个目标；合计4.85S，1段，距离16.5米；对燃烧目标的直接伤害提高5%",
+          "vfxDirection": "白金瞬核接触首个目标后局部爆燃；红橙火体、压力亮面和火屑仅围绕同一目标，不表现向邻敌扩散的伤害。"
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 2.5,
+          "maxDamagePerTargetS": 5.6,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "projectileWithImpactDisk",
+            "origin": "projectileImpact",
+            "radiusMetres": 1.1,
+            "totalTargetLimit": 1
+          },
+          "evolution": "单体火核，仅一个目标；合计5.6S，1段，距离18米；对燃烧目标的直接伤害提高10%",
+          "upgradeEffect": "单体火核，仅一个目标；合计5.6S，1段，距离18米；对燃烧目标的直接伤害提高10%",
+          "vfxDirection": "白金瞬核接触首个目标后局部爆燃；红橙火体、压力亮面和火屑仅围绕同一目标，不表现向邻敌扩散的伤害。"
+        }
+      ],
+      "targetShape": "单体火核与目标局部爆燃",
+      "mechanic": "射出紧凑火核，只对首个实际接触的敌人结算爆燃与燃烧，不向相邻敌人溅射。升级提高单体总伤害、射程和目标局部表现；局部火光范围不扩大伤害目标。对燃烧目标的强化保留。"
+    },
+    "FIR_05": {
+      "damageRole": "area",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 2.55
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 2.9
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 3.3
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 3.85
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 4.45
+        }
+      ]
+    },
+    "THU_01": {
+      "maxTargets": 1,
+      "targetLimitScope": "perCastSingleTarget",
+      "damageRole": "single",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 3,
+          "maxDamagePerTargetS": 3.2,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 14,
+            "widthMetres": 0.65,
+            "totalTargetLimit": 1
+          },
+          "evolution": "单体雷矛，仅一个目标；合计3.2S，1段，距离14米",
+          "upgradeEffect": "单体雷矛，仅一个目标；合计3.2S，1段，距离14米",
+          "vfxDirection": "保留直线雷矛主干与短侧枝，在路径上首个有效敌人的真实接触处爆闪；电弧尾迹不继续连接其他敌人。"
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 3,
+          "maxDamagePerTargetS": 3.65,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 15.5,
+            "widthMetres": 0.8,
+            "totalTargetLimit": 1
+          },
+          "evolution": "单体雷矛，仅一个目标；合计3.65S，1段，距离15.5米",
+          "upgradeEffect": "单体雷矛，仅一个目标；合计3.65S，1段，距离15.5米",
+          "vfxDirection": "保留直线雷矛主干与短侧枝，在路径上首个有效敌人的真实接触处爆闪；电弧尾迹不继续连接其他敌人。"
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 2.9,
+          "maxDamagePerTargetS": 4.2,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 17,
+            "widthMetres": 0.95,
+            "totalTargetLimit": 1
+          },
+          "evolution": "单体雷矛，仅一个目标；合计4.2S，1段，距离17米",
+          "upgradeEffect": "单体雷矛，仅一个目标；合计4.2S，1段，距离17米",
+          "vfxDirection": "保留直线雷矛主干与短侧枝，在路径上首个有效敌人的真实接触处爆闪；电弧尾迹不继续连接其他敌人。"
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 2.7,
+          "maxDamagePerTargetS": 4.85,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 18.5,
+            "widthMetres": 1.1,
+            "totalTargetLimit": 1
+          },
+          "evolution": "单体雷矛，仅一个目标；合计4.85S，1段，距离18.5米",
+          "upgradeEffect": "单体雷矛，仅一个目标；合计4.85S，1段，距离18.5米",
+          "vfxDirection": "保留直线雷矛主干与短侧枝，在路径上首个有效敌人的真实接触处爆闪；电弧尾迹不继续连接其他敌人。"
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 2.5,
+          "maxDamagePerTargetS": 5.6,
+          "targetLimit": 1,
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 20,
+            "widthMetres": 1.3,
+            "totalTargetLimit": 1
+          },
+          "evolution": "单体雷矛，仅一个目标；合计5.6S，1段，距离20米",
+          "upgradeEffect": "单体雷矛，仅一个目标；合计5.6S，1段，距离20米",
+          "vfxDirection": "保留直线雷矛主干与短侧枝，在路径上首个有效敌人的真实接触处爆闪；电弧尾迹不继续连接其他敌人。"
+        }
+      ],
+      "targetShape": "直线单体雷矛",
+      "mechanic": "沿释放时方向形成一道单体雷矛，只攻击路径上首个有效敌人，不再贯穿后续敌人。升级提高单体总伤害、射程和命中容错，不增加目标数。"
+    },
+    "THU_05": {
+      "damageRole": "area",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 2.55
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 2.9
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 3.3
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 3.85
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 4.45
+        }
+      ]
+    },
+    "WAR_02": {
+      "damageRole": "area",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 5,
+          "maxDamagePerTargetS": 1.2
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 5,
+          "maxDamagePerTargetS": 1.4
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 5,
+          "maxDamagePerTargetS": 1.65
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 5,
+          "maxDamagePerTargetS": 1.95
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 5,
+          "maxDamagePerTargetS": 2.3
+        }
+      ]
+    },
+    "WAR_03": {
+      "damageRole": "support",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 6
+        }
+      ]
+    },
+    "WAR_04": {
+      "damageRole": "area",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 8,
+          "maxDamagePerTargetS": 1.9
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 8,
+          "maxDamagePerTargetS": 2.15
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 7.5,
+          "maxDamagePerTargetS": 2.45
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 7,
+          "maxDamagePerTargetS": 2.85
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 7,
+          "maxDamagePerTargetS": 3.3
+        }
+      ]
+    },
+    "BOW_02": {
+      "damageRole": "area",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 6,
+          "maxDamagePerTargetS": 1.5
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 6,
+          "maxDamagePerTargetS": 1.75
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 5.75,
+          "maxDamagePerTargetS": 2.05
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 5.5,
+          "maxDamagePerTargetS": 2.4
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 5.25,
+          "maxDamagePerTargetS": 2.8
+        }
+      ]
+    },
+    "BOW_06": {
+      "maxTargets": null,
+      "damageRole": "control",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 6
+        }
+      ]
+    },
+    "BOW_07": {
+      "maxTargets": 1,
+      "targetLimitScope": "perCastSingleTarget",
+      "damageRole": "support",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 5,
+          "targetLimit": 1,
+          "evolution": "后撤2.5米，同时射出一支不穿透的单体撤离箭；伤害0.55S",
+          "upgradeEffect": "后撤2.5米，同时射出一支不穿透的单体撤离箭；伤害0.55S"
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 5,
+          "targetLimit": 1,
+          "evolution": "后撤2.5米，同时射出一支不穿透的单体撤离箭；伤害0.6S",
+          "upgradeEffect": "后撤2.5米，同时射出一支不穿透的单体撤离箭；伤害0.6S"
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 5,
+          "targetLimit": 1,
+          "evolution": "后撤2.5米，同时射出一支不穿透的单体撤离箭；伤害0.65S",
+          "upgradeEffect": "后撤2.5米，同时射出一支不穿透的单体撤离箭；伤害0.65S"
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 5,
+          "targetLimit": 1,
+          "evolution": "后撤2.5米，同时射出一支不穿透的单体撤离箭；伤害0.7S",
+          "upgradeEffect": "后撤2.5米，同时射出一支不穿透的单体撤离箭；伤害0.7S"
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 5,
+          "targetLimit": 1,
+          "evolution": "后撤2.5米，同时射出一支不穿透的单体撤离箭；伤害0.75S",
+          "upgradeEffect": "后撤2.5米，同时射出一支不穿透的单体撤离箭；伤害0.75S"
+        }
+      ]
+    },
+    "FIR_02": {
+      "damageRole": "area",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 7,
+          "maxDamagePerTargetS": 1.9
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 7,
+          "maxDamagePerTargetS": 2.15
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 6.5,
+          "maxDamagePerTargetS": 2.45
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 6,
+          "maxDamagePerTargetS": 2.85
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 6,
+          "maxDamagePerTargetS": 3.3
+        }
+      ]
+    },
+    "FIR_03": {
+      "damageRole": "support",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 6
+        }
+      ]
+    },
+    "FIR_04": {
+      "damageRole": "control",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 6
+        }
+      ]
+    },
+    "THU_02": {
+      "damageRole": "area",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 5,
+          "maxDamagePerTargetS": 1.3,
+          "damagePerSecondaryTargetS": 0.91,
+          "totalCastDamageBudgetS": 2.21
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 5,
+          "maxDamagePerTargetS": 1.5,
+          "damagePerSecondaryTargetS": 1.05,
+          "totalCastDamageBudgetS": 3.6
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 5,
+          "maxDamagePerTargetS": 1.75,
+          "damagePerSecondaryTargetS": 1.225,
+          "totalCastDamageBudgetS": 5.425
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 5,
+          "maxDamagePerTargetS": 2.05,
+          "damagePerSecondaryTargetS": 1.435,
+          "totalCastDamageBudgetS": 9.225
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 5,
+          "maxDamagePerTargetS": 2.4,
+          "damagePerSecondaryTargetS": 1.68,
+          "totalCastDamageBudgetS": 14.16
+        }
+      ]
+    },
+    "THU_04": {
+      "damageRole": "area",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 7,
+          "maxDamagePerTargetS": 1.4
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 7,
+          "maxDamagePerTargetS": 1.65
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 6.5,
+          "maxDamagePerTargetS": 1.95
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 6,
+          "maxDamagePerTargetS": 2.3
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 6,
+          "maxDamagePerTargetS": 2.7
+        }
+      ]
+    },
+    "THU_06": {
+      "damageRole": "support",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 6
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 6
+        }
+      ]
+    },
+    "COM_01": {
+      "damageRole": "support",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 2
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 2
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 2
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 2
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 2
+        }
+      ],
+      "mechanic": "固定独立闪避位；总动作0.34s，0.06–0.20s免直接近战/弹体，不免持续地面伤害。遇墙停，不移动敌人。 冷却2秒。"
+    },
+    "COM_02": {
+      "damageRole": "support",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 8
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 8
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 8
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 8
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 8
+        }
+      ],
+      "mechanic": "从补给栏第三格施放的通用恢复技能，不占固定战斗槽。消耗20点当前职业资源，8秒冷却；生命全满或恢复持续中不能重复施放。保留三次治疗、首跳强化与低生命应急成长。"
+    },
+    "BOW_03": {
+      "activation": "automatic",
+      "resourceCost": 0,
+      "maxTargets": 1,
+      "targetLimitScope": "perCastSingleTarget",
+      "damageRole": "support",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 6,
+          "maxDamagePerTargetS": 0.6,
+          "targetLimit": 1,
+          "upgradeEffects": {
+            "readySeconds": 5
+          },
+          "evolution": "穿云箭命中后5秒内，下次普攻对同一目标连射3箭，整组额外伤害合计0.6S；触发间隔6秒",
+          "upgradeEffect": "穿云箭命中后5秒内，下次普攻对同一目标连射3箭，整组额外伤害合计0.6S；触发间隔6秒"
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 6,
+          "maxDamagePerTargetS": 0.7,
+          "targetLimit": 1,
+          "upgradeEffects": {
+            "readySeconds": 5
+          },
+          "evolution": "穿云箭命中后5秒内，下次普攻对同一目标连射3箭，整组额外伤害合计0.7S；触发间隔6秒",
+          "upgradeEffect": "穿云箭命中后5秒内，下次普攻对同一目标连射3箭，整组额外伤害合计0.7S；触发间隔6秒"
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 6,
+          "maxDamagePerTargetS": 0.8,
+          "targetLimit": 1,
+          "upgradeEffects": {
+            "readySeconds": 5
+          },
+          "evolution": "穿云箭命中后5秒内，下次普攻对同一目标连射4箭，整组额外伤害合计0.8S；触发间隔6秒",
+          "upgradeEffect": "穿云箭命中后5秒内，下次普攻对同一目标连射4箭，整组额外伤害合计0.8S；触发间隔6秒"
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 6,
+          "maxDamagePerTargetS": 0.95,
+          "targetLimit": 1,
+          "upgradeEffects": {
+            "segmentSeconds": 0.09,
+            "readySeconds": 5
+          },
+          "evolution": "穿云箭命中后5秒内，下次普攻对同一目标连射4箭，整组额外伤害合计0.95S；触发间隔6秒",
+          "upgradeEffect": "穿云箭命中后5秒内，下次普攻对同一目标连射4箭，整组额外伤害合计0.95S；触发间隔6秒"
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 6,
+          "maxDamagePerTargetS": 1.1,
+          "targetLimit": 1,
+          "upgradeEffects": {
+            "segmentSeconds": 0.09,
+            "readySeconds": 5
+          },
+          "evolution": "穿云箭命中后5秒内，下次普攻对同一目标连射5箭，整组额外伤害合计1.1S；触发间隔6秒",
+          "upgradeEffect": "穿云箭命中后5秒内，下次普攻对同一目标连射5箭，整组额外伤害合计1.1S；触发间隔6秒"
+        }
+      ],
+      "mechanic": "强化技能，不占战斗按钮。穿云箭真实命中后，5秒内下一次弓系普攻释放疾风连射；3／4／5支箭共享单个目标和整组额外伤害预算，不能每箭重复完整总伤。触发间隔6秒，无额外资源消耗。"
+    },
+    "BOW_04": {
+      "activation": "automatic",
+      "resourceCost": 0,
+      "damageRole": "support",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 6,
+          "maxDamagePerTargetS": 0,
+          "evolution": "站稳首次弓术命中自动标记8秒，自己的直接技能伤害提高8%；触发间隔6秒",
+          "upgradeEffect": "站稳首次弓术命中自动标记8秒，自己的直接技能伤害提高8%；触发间隔6秒"
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 6,
+          "maxDamagePerTargetS": 0,
+          "evolution": "站稳首次弓术命中自动标记8秒，自己的直接技能伤害提高9%；触发间隔6秒",
+          "upgradeEffect": "站稳首次弓术命中自动标记8秒，自己的直接技能伤害提高9%；触发间隔6秒"
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 6,
+          "maxDamagePerTargetS": 0,
+          "evolution": "站稳首次弓术命中自动标记8秒，自己的直接技能伤害提高10%；触发间隔6秒",
+          "upgradeEffect": "站稳首次弓术命中自动标记8秒，自己的直接技能伤害提高10%；触发间隔6秒"
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 6,
+          "maxDamagePerTargetS": 0,
+          "evolution": "站稳首次弓术命中自动标记10秒，自己的直接技能伤害提高11%；触发间隔6秒",
+          "upgradeEffect": "站稳首次弓术命中自动标记10秒，自己的直接技能伤害提高11%；触发间隔6秒"
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 6,
+          "maxDamagePerTargetS": 0,
+          "evolution": "站稳首次弓术命中自动标记10秒，自己的直接技能伤害提高12%；触发间隔6秒，首次弓术命中该标记额外提高削韧20%",
+          "upgradeEffect": "站稳首次弓术命中自动标记10秒，自己的直接技能伤害提高12%；触发间隔6秒，首次弓术命中该标记额外提高削韧20%"
+        }
+      ],
+      "mechanic": "强化技能，不占战斗按钮。站稳后首次弓系技能真实命中时自动施加猎王印；按本技能等级决定持续时间、增伤与削韧强化，与鹰眼的标记共用同一个来源和触发间隔，不叠加两份标记。触发间隔6秒，无额外资源消耗。"
+    },
+    "THU_03": {
+      "activation": "automatic",
+      "resourceCost": 0,
+      "damageRole": "support",
+      "ranks": [
+        {
+          "rank": 1,
+          "cooldownSeconds": 6,
+          "evolution": "移动后雷系命中自动为三次普攻附雷；6秒内三次普攻附雷；触发间隔6秒",
+          "upgradeEffect": "移动后雷系命中自动为三次普攻附雷；6秒内三次普攻附雷；触发间隔6秒"
+        },
+        {
+          "rank": 2,
+          "cooldownSeconds": 6,
+          "evolution": "移动后雷系命中自动为三次普攻附雷；持续8秒，仍为三次；触发间隔6秒",
+          "upgradeEffect": "移动后雷系命中自动为三次普攻附雷；持续8秒，仍为三次；触发间隔6秒"
+        },
+        {
+          "rank": 3,
+          "cooldownSeconds": 6,
+          "evolution": "移动后雷系命中自动为三次普攻附雷；第三次附雷额外削韧4点；触发间隔6秒",
+          "upgradeEffect": "移动后雷系命中自动为三次普攻附雷；第三次附雷额外削韧4点；触发间隔6秒"
+        },
+        {
+          "rank": 4,
+          "cooldownSeconds": 6,
+          "evolution": "移动后雷系命中自动为三次普攻附雷；持续10秒，便于走位和普攻穿插；触发间隔6秒",
+          "upgradeEffect": "移动后雷系命中自动为三次普攻附雷；持续10秒，便于走位和普攻穿插；触发间隔6秒"
+        },
+        {
+          "rank": 5,
+          "cooldownSeconds": 6,
+          "evolution": "移动后雷系命中自动为三次普攻附雷；第三次普攻有效命中后，4秒内下一次贯雷长矛直接伤害提高15%，一次；触发间隔6秒",
+          "upgradeEffect": "移动后雷系命中自动为三次普攻附雷；第三次普攻有效命中后，4秒内下一次贯雷长矛直接伤害提高15%，一次；触发间隔6秒"
+        }
+      ],
+      "mechanic": "强化技能，不占战斗按钮。持续移动后下一次雷系技能真实命中时，自动为三次普攻附雷；按战印等级决定持续时间、附雷预算、第三击削韧及下一次雷矛强化，与奔雷共用一份三次附雷，不叠加成六次。触发间隔6秒，无额外资源消耗。"
+    },
+    "BOW_P1": {
+      "effect": "距离超过5米的弓术伤害提高；站稳0.4秒后首次弓术真实命中自动施加猎王印，统一触发间隔6秒。猎王印开放后按其等级决定标记持续和强化，未开放时使用鹰眼基础标记；同一目标不叠加两份标记。",
+      "mechanic": "距离超过5米的弓术伤害提高；站稳0.4秒后首次弓术真实命中自动施加猎王印，统一触发间隔6秒。猎王印开放后按其等级决定标记持续和强化，未开放时使用鹰眼基础标记；同一目标不叠加两份标记。",
+      "ranks": [
+        {
+          "rank": 1,
+          "evolution": "远距离弓术伤害+4%；站稳后真实命中自动触发猎王印，共用6秒间隔",
+          "upgradeEffect": "远距离弓术伤害+4%；站稳后真实命中自动触发猎王印，共用6秒间隔"
+        },
+        {
+          "rank": 2,
+          "evolution": "远距离弓术伤害+5%；站稳后真实命中自动触发猎王印，共用6秒间隔",
+          "upgradeEffect": "远距离弓术伤害+5%；站稳后真实命中自动触发猎王印，共用6秒间隔"
+        },
+        {
+          "rank": 3,
+          "evolution": "远距离弓术伤害+6%；站稳后真实命中自动触发猎王印，共用6秒间隔",
+          "upgradeEffect": "远距离弓术伤害+6%；站稳后真实命中自动触发猎王印，共用6秒间隔"
+        },
+        {
+          "rank": 4,
+          "evolution": "远距离弓术伤害+7%；站稳后真实命中自动触发猎王印，共用6秒间隔",
+          "upgradeEffect": "远距离弓术伤害+7%；站稳后真实命中自动触发猎王印，共用6秒间隔"
+        },
+        {
+          "rank": 5,
+          "evolution": "远距离弓术伤害+8%；站稳后真实命中自动触发猎王印，共用6秒间隔",
+          "upgradeEffect": "远距离弓术伤害+8%；站稳后真实命中自动触发猎王印，共用6秒间隔"
+        }
+      ]
+    },
+    "THU_P1": {
+      "effect": "连续移动1.5秒（高阶1.2秒）后强化下次直接雷技能，触发间隔6秒；成功命中后为三次普攻附雷。雷霆战印开放后按其等级决定附雷持续、伤害与第三击强化，二者只保留一份三次附雷，不叠加成六次；附雷不再次连锁或暴击。",
+      "mechanic": "连续移动1.5秒（高阶1.2秒）后强化下次直接雷技能，触发间隔6秒；成功命中后为三次普攻附雷。雷霆战印开放后按其等级决定附雷持续、伤害与第三击强化，二者只保留一份三次附雷，不叠加成六次；附雷不再次连锁或暴击。",
+      "ranks": [
+        {
+          "rank": 1,
+          "effect": "连续移动1.5秒后下次直接雷技能伤害+4%；真实命中后给予三次附雷，共用6秒间隔",
+          "evolution": "连续移动1.5秒后下次直接雷技能伤害+4%；真实命中后给予三次附雷，共用6秒间隔",
+          "upgradeEffect": "连续移动1.5秒后下次直接雷技能伤害+4%；真实命中后给予三次附雷，共用6秒间隔"
+        },
+        {
+          "rank": 2,
+          "effect": "连续移动1.5秒后下次直接雷技能伤害+5%；真实命中后给予三次附雷，共用6秒间隔",
+          "evolution": "连续移动1.5秒后下次直接雷技能伤害+5%；真实命中后给予三次附雷，共用6秒间隔",
+          "upgradeEffect": "连续移动1.5秒后下次直接雷技能伤害+5%；真实命中后给予三次附雷，共用6秒间隔"
+        },
+        {
+          "rank": 3,
+          "effect": "连续移动1.2秒后下次直接雷技能伤害+6%；真实命中后给予三次附雷，共用6秒间隔",
+          "evolution": "连续移动1.2秒后下次直接雷技能伤害+6%；真实命中后给予三次附雷，共用6秒间隔",
+          "upgradeEffect": "连续移动1.2秒后下次直接雷技能伤害+6%；真实命中后给予三次附雷，共用6秒间隔"
+        },
+        {
+          "rank": 4,
+          "effect": "连续移动1.2秒后下次直接雷技能伤害+7%；真实命中后给予三次附雷，共用6秒间隔",
+          "evolution": "连续移动1.2秒后下次直接雷技能伤害+7%；真实命中后给予三次附雷，共用6秒间隔",
+          "upgradeEffect": "连续移动1.2秒后下次直接雷技能伤害+7%；真实命中后给予三次附雷，共用6秒间隔"
+        },
+        {
+          "rank": 5,
+          "effect": "连续移动1.2秒后下次直接雷技能伤害+8%；真实命中后给予三次附雷，共用6秒间隔",
+          "evolution": "连续移动1.2秒后下次直接雷技能伤害+8%；真实命中后给予三次附雷，共用6秒间隔",
+          "upgradeEffect": "连续移动1.2秒后下次直接雷技能伤害+8%；真实命中后给予三次附雷，共用6秒间隔"
+        }
+      ]
+    },
+    "FIR_P2": {
+      "effect": "仅自身群攻火技能的直接伤害击败真实敌人时，向附近敌人传播燃烧；赤焰枪等单体技能不会向旁敌传播。传播不递归，触发间隔6秒，不触发资源回复。",
+      "ranks": [
+        {
+          "rank": 1,
+          "effect": "被自身群攻火技能直接伤害击败的真实敌人，向附近最多2敌施0.06S每秒燃烧3s，CD6s；不递归传播、不产生蓄能。 单体赤焰枪不触发传播。",
+          "evolution": "被自身群攻火技能直接伤害击败的真实敌人，向附近最多2敌施0.06S每秒燃烧3s，CD6s；不递归传播、不产生蓄能。 单体赤焰枪不触发传播。",
+          "upgradeEffect": "被自身群攻火技能直接伤害击败的真实敌人，向附近最多2敌施0.06S每秒燃烧3s，CD6s；不递归传播、不产生蓄能。 单体赤焰枪不触发传播。"
+        },
+        {
+          "rank": 2,
+          "effect": "被自身群攻火技能直接伤害击败的真实敌人，向附近最多2敌施0.07S每秒燃烧3s，CD6s；不递归传播、不产生蓄能。 单体赤焰枪不触发传播。",
+          "evolution": "被自身群攻火技能直接伤害击败的真实敌人，向附近最多2敌施0.07S每秒燃烧3s，CD6s；不递归传播、不产生蓄能。 单体赤焰枪不触发传播。",
+          "upgradeEffect": "被自身群攻火技能直接伤害击败的真实敌人，向附近最多2敌施0.07S每秒燃烧3s，CD6s；不递归传播、不产生蓄能。 单体赤焰枪不触发传播。"
+        },
+        {
+          "rank": 3,
+          "effect": "被自身群攻火技能直接伤害击败的真实敌人，向附近最多2敌施0.08S每秒燃烧3s，CD6s；不递归传播、不产生蓄能。 单体赤焰枪不触发传播。",
+          "evolution": "被自身群攻火技能直接伤害击败的真实敌人，向附近最多2敌施0.08S每秒燃烧3s，CD6s；不递归传播、不产生蓄能。 合法传播半径较基础增加1米 单体赤焰枪不触发传播。",
+          "upgradeEffect": "被自身群攻火技能直接伤害击败的真实敌人，向附近最多2敌施0.08S每秒燃烧3s，CD6s；不递归传播、不产生蓄能。 合法传播半径较基础增加1米 单体赤焰枪不触发传播。"
+        },
+        {
+          "rank": 4,
+          "effect": "被自身群攻火技能直接伤害击败的真实敌人，向附近最多2敌施0.09S每秒燃烧3s，CD6s；不递归传播、不产生蓄能。 单体赤焰枪不触发传播。",
+          "evolution": "被自身群攻火技能直接伤害击败的真实敌人，向附近最多2敌施0.09S每秒燃烧3s，CD6s；不递归传播、不产生蓄能。 合法传播半径较基础增加1米 单体赤焰枪不触发传播。",
+          "upgradeEffect": "被自身群攻火技能直接伤害击败的真实敌人，向附近最多2敌施0.09S每秒燃烧3s，CD6s；不递归传播、不产生蓄能。 合法传播半径较基础增加1米 单体赤焰枪不触发传播。"
+        },
+        {
+          "rank": 5,
+          "effect": "被自身群攻火技能直接伤害击败的真实敌人，向附近最多2敌施0.10S每秒燃烧3s，CD6s；不递归传播、不产生蓄能。 单体赤焰枪不触发传播。",
+          "evolution": "被自身群攻火技能直接伤害击败的真实敌人，向附近最多2敌施0.10S每秒燃烧3s，CD6s；不递归传播、不产生蓄能。 合法传播半径较基础增加1米 最多传播目标2→3；6秒触发间隔，不递归传播 单体赤焰枪不触发传播。",
+          "upgradeEffect": "被自身群攻火技能直接伤害击败的真实敌人，向附近最多2敌施0.10S每秒燃烧3s，CD6s；不递归传播、不产生蓄能。 合法传播半径较基础增加1米 最多传播目标2→3；6秒触发间隔，不递归传播 单体赤焰枪不触发传播。"
+        }
+      ]
+    }
+  },
+  "rules": {
+    "fixedSkillBars": true,
+    "singleTargetSkillIds": [
+      "WAR_01",
+      "BOW_01",
+      "FIR_01",
+      "THU_01"
+    ],
+    "automaticEnhancementSkillIds": [
+      "BOW_03",
+      "BOW_04",
+      "THU_03"
+    ],
+    "ultimateCooldownSeconds": 12,
+    "dodgeCooldownSeconds": 2,
+    "skillCooldownsAlwaysEnabled": true
+  },
+  "equipmentEffects": {
+    "L02": "穿云箭BOW_01对唯一目标的直接伤害提高10%，计入统一增伤上限；保持释放时的直线方向，只命中首个有效敌人，不贯穿、不回射、不增加弹体。",
+    "W10": "疾风连射首次命中时，对同一个敌人额外造成0.5S伤害；触发间隔8秒，不溅射邻敌，次级事件不再连锁。"
+  }
+}

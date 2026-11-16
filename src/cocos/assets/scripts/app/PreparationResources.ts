@@ -11,7 +11,7 @@ import {EQUIPMENT} from '../features/equipment/data/Equipment';
 
 const ROOT='ui/quiet-bronze/';
 const chrome=[...Object.values(PREPARATION_SKINS).map(s=>s.asset),D.frame.asset,
- ...[D.artwork.coin,D.artwork.campfire,D.artwork.footerRule,D.artwork.returnArrow,D.artwork.offhand],
+ ...[D.artwork.coin,D.artwork.campfire,D.artwork.footerRule,D.artwork.offhand],
  ...Object.values(D.artwork.familyPaintings),...Object.values(D.artwork.mainWeaponIcons),
  UI_FRAME_LAYOUT.panelSkin,UI_FRAME_LAYOUT.panelMaterial,UI_FRAME_LAYOUT.capsuleSkin,
  'menu-pill-inset-v5','rpg-skill-icon-frame-v6','rpg-skill-rank-on-v6','rpg-skill-rank-off-v6',

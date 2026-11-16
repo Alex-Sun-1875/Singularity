@@ -3,6 +3,7 @@ import type {CombatCast,CombatStatus} from './PureCombat';
 import type {Point} from '../../../core/Contracts';
 import {PURE_SKILLS} from '../data/PureSkills';
 import {ARTIFACT_WEAPONS} from '../../equipment/data/GrowingEquipment';
+import {restorePlayerHealth} from '../../pets/common/PetBenefits';
 
 export interface GrowingPulse {kind:'thunder'|'shadow';castId:string;targets:string[];from:Point;angle:number;power:number;until:number;area:string}
 interface Host {state():GameState;visible(a:Point,b:Point):boolean;damage(e:EnemyState,value:number,cast:string,element:string,angle:number):void;shield(amount:number,seconds:number):void;status(e:EnemyState):CombatStatus;emit(type:string,text?:string,extra?:Record<string,unknown>):void;changed():void}
@@ -56,8 +57,8 @@ export class GrowingEquipmentCombat {
  kill(action:string,source:string,enemy:EnemyState){
   const cast=this.c.casts.find(c=>c.id===action),wearing=source==='burn'?this.c.buffs[`dgBurnRing:${enemy.id}`]===1:cast?has(cast,'DG_L05'):this.equipped('DG_L05');
   if(!wearing||!['pure','spell','main','skill','basic','burn'].includes(source)||!this.ready('DG_L05')||this.s.player.hp<=0)return;
-  const amount=(this.s.player.maxHp-this.s.player.hp)*.12;if(amount<=0)return;
-  this.s.player.hp+=amount;this.c.cooldowns.DG_L05=5;this.host.emit('heal',`迟归者：生命 +${Math.round(amount)}`,{value:amount});this.event('DG_L05','heal',this.s.player);this.host.changed();
+  const amount=restorePlayerHealth(this.s,(this.s.player.maxHp-this.s.player.hp)*.12);if(amount<=0)return;
+  this.c.cooldowns.DG_L05=5;this.host.emit('heal',`迟归者：生命 +${Math.round(amount)}`,{value:amount});this.event('DG_L05','heal',this.s.player);this.host.changed();
  }
  preventDeath(damage:number){
   if(damage<this.s.player.hp||!this.equipped('DG_A02')||!this.ready('DG_A02'))return false;

@@ -1,0 +1,331 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-16",
+  "title": "剑与火 · 真实3D技能动态设计审阅",
+  "status": "design_candidate_pending_user_art_review",
+  "preview": {
+    "type": "independent Three.js WebGL 3D concept animation",
+    "url": "http://127.0.0.1:58265/source-art/skills/dynamic-redesign-3d-v1/preview.html",
+    "serverScope": "Loopback only; repository source-art and src/cocos asset subtrees",
+    "serveCommand": "node source-art/skills/dynamic-redesign-3d-v1/capture-preview.cjs --serve --port 58265",
+    "bundleCommand": "node source-art/skills/dynamic-redesign-3d-v1/bundle-node.cjs",
+    "runtimeIntegrated": false
+  },
+  "scope": {
+    "sourceSkillEntries": 33,
+    "classBasicAttacks": 4,
+    "totalPreviewEntries": 37,
+    "familyEntryCounts": {
+      "WAR": 8,
+      "BOW": 10,
+      "FIR": 8,
+      "THU": 9,
+      "COM": 2
+    },
+    "roleEntryCounts": {
+      "basic-attack": 4,
+      "manual-active": 17,
+      "manual-ultimate": 4,
+      "passive": 8,
+      "automatic-enhancement": 3,
+      "manual-mobility": 1
+    },
+    "inventory": "skill-inventory.json",
+    "motionDirection": "motion-direction.txt",
+    "previewTimingIsGameplayCooldown": false
+  },
+  "current3DAssets": {
+    "hero": "src/cocos/assets/resources/actors/raphael/raphael-polish.glb",
+    "heroManifest": "src/cocos/assets/resources/actors/raphael/manifest.json",
+    "locomotionRevision": "locomotion-v9",
+    "appearanceRevision": "hairstyles-v3-refined",
+    "hair": "src/cocos/assets/resources/actors/raphael/hair-curly.glb",
+    "comboSource": "src/cocos/assets/resources/actors/player-melee-combo/combos-native.glb",
+    "loadedNativeClipCount": 16,
+    "nativeClips": [
+      {
+        "name": "attack_bow",
+        "duration": 1.1666666269302368
+      },
+      {
+        "name": "attack_staff",
+        "duration": 1.4666666984558105
+      },
+      {
+        "name": "attack_sword",
+        "duration": 0.4333333373069763
+      },
+      {
+        "name": "death",
+        "duration": 3.133333444595337
+      },
+      {
+        "name": "dodge",
+        "duration": 1.4666666984558105
+      },
+      {
+        "name": "hit",
+        "duration": 0.3333333432674408
+      },
+      {
+        "name": "idle",
+        "duration": 2.5
+      },
+      {
+        "name": "idle_staff",
+        "duration": 2.5
+      },
+      {
+        "name": "interact",
+        "duration": 2
+      },
+      {
+        "name": "run",
+        "duration": 0.6666666865348816
+      },
+      {
+        "name": "run_staff",
+        "duration": 0.6666666865348816
+      },
+      {
+        "name": "spell",
+        "duration": 1.4666666984558105
+      },
+      {
+        "name": "walk",
+        "duration": 1.3333333730697632
+      },
+      {
+        "name": "walk_staff",
+        "duration": 1.3333333730697632
+      },
+      {
+        "name": "attack_sword_2",
+        "duration": 0.36666667461395264
+      },
+      {
+        "name": "attack_sword_3",
+        "duration": 0.5333333611488342
+      }
+    ],
+    "enemy": "src/cocos/assets/resources/actors/raider/raider.fbx",
+    "weapons": {
+      "WAR": "source-art/weapons/3d-design-v1/glb/W01.glb",
+      "BOW": "source-art/weapons/3d-design-v1/glb/W07.glb",
+      "FIR": "source-art/weapons/3d-design-v1/glb/W11.glb",
+      "THU": "source-art/weapons/3d-design-v1/glb/W11.glb"
+    },
+    "metadataSnapshot": "references/actor-metadata.js",
+    "loaderWarnings": []
+  },
+  "designDirections": {
+    "warrior": {
+      "visualCoverageScaleProposalApprox": 1.25,
+      "scope": "Wider close-range sword-path presentation only",
+      "collisionChanged": false,
+      "targetCountChanged": false,
+      "damageChanged": false
+    },
+    "fire": {
+      "meteorUltimateProposal": "FIR_02 焚星坠落",
+      "slotMigrationImplemented": false,
+      "appearance": "Continuous incandescent fire head and tapering tail, followed by low rolling impact flames"
+    },
+    "targetCircle": {
+      "style": "User-selected first-board translucent linework seal; double boundary rings, class-specific engraved band, connected interior pattern",
+      "classColorFamilies": {
+        "WAR": "银金",
+        "BOW": "青绿",
+        "FIR": "橙红",
+        "THU": "蓝紫"
+      },
+      "circleGeometryDoesNotReplaceNonCircularSkills": true
+    },
+    "lightning": "Coherent thick trunk, deliberate secondary branches and localized hit nodes",
+    "bow": "Physical arrows, calibrated native bow-draw morph and brief wind trails"
+  },
+  "generationRecords": [
+    {
+      "material": "fire",
+      "backend": "OpenAI cloud image_gen built-in tool",
+      "prompt": "references/new-fire/prompt.txt",
+      "provenance": "references/new-fire/atlas.json",
+      "asset": "references/new-fire/atlas.png",
+      "sha256": "5df738d2589a9c9f43377d97b4f382570a01f7756cb44b8b6fb181dd5bb3e596",
+      "generationStatus": "success",
+      "internalMaterialReview": "internal_static_rgba_review_complete_pending_user_acceptance",
+      "userArtAccepted": false,
+      "runtimeIntegrated": false
+    },
+    {
+      "material": "steel-ribbon",
+      "backend": "OpenAI cloud image_gen built-in tool",
+      "prompt": "references/new-steel/prompt.txt",
+      "provenance": "references/new-steel/provenance.json",
+      "asset": "references/new-steel/ribbon.png",
+      "sha256": "232791d869aa2d9c1460c6dc46a46afcabaa787bcba51f5eaa14c42fecf530cd",
+      "generationStatus": "success",
+      "internalMaterialReview": "internal material review completed on dark and light opaque backgrounds; pending user art acceptance",
+      "userArtAccepted": false,
+      "runtimeIntegrated": false
+    }
+  ],
+  "internalReview": {
+    "generationAndArtAcceptanceRecordedSeparately": true,
+    "native3DConfirmedAcrossAll37Entries": true,
+    "allCaptureModelWarningsEmpty": true,
+    "transparentMaterialsInspectedOnOpaqueBackgrounds": true,
+    "captureEnvironment": "Chromium WebGL2 through ANGLE/Vulkan SwiftShader software offscreen renderer",
+    "devicePerformanceAcceptance": false,
+    "captures": [
+      {
+        "family": "WAR",
+        "evidence": "src/.tmp/dynamic-design-3d/render-WAR/capture.json",
+        "sourceFrames": 514,
+        "durationSeconds": 21.4,
+        "size": [
+          760,
+          351
+        ],
+        "fps": 24,
+        "entries": 8,
+        "native3D": true,
+        "modelWarnings": [],
+        "captureMethod": "element-screenshot",
+        "manifestModifiedLocal": "2026-11-16T03:51:06"
+      },
+      {
+        "family": "BOW",
+        "evidence": "src/.tmp/dynamic-design-3d/render-BOW/capture.json",
+        "sourceFrames": 662,
+        "durationSeconds": 27.58,
+        "size": [
+          760,
+          351
+        ],
+        "fps": 24,
+        "entries": 10,
+        "native3D": true,
+        "modelWarnings": [],
+        "captureMethod": "element-screenshot",
+        "manifestModifiedLocal": "2026-11-16T03:51:53"
+      },
+      {
+        "family": "FIR",
+        "evidence": "src/.tmp/dynamic-design-3d/render-FIR/capture.json",
+        "sourceFrames": 541,
+        "durationSeconds": 22.52,
+        "size": [
+          760,
+          351
+        ],
+        "fps": 24,
+        "entries": 8,
+        "native3D": true,
+        "modelWarnings": [],
+        "captureMethod": "element-screenshot",
+        "manifestModifiedLocal": "2026-11-16T03:51:22"
+      },
+      {
+        "family": "THU",
+        "evidence": "src/.tmp/dynamic-design-3d/render-THU/capture.json",
+        "sourceFrames": 582,
+        "durationSeconds": 24.21,
+        "size": [
+          760,
+          351
+        ],
+        "fps": 24,
+        "entries": 9,
+        "native3D": true,
+        "modelWarnings": [],
+        "captureMethod": "rendered-canvas-png",
+        "manifestModifiedLocal": "2026-11-16T03:53:32"
+      },
+      {
+        "family": "COM",
+        "evidence": "src/.tmp/dynamic-design-3d/render-COM/capture.json",
+        "sourceFrames": 137,
+        "durationSeconds": 5.7,
+        "size": [
+          760,
+          351
+        ],
+        "fps": 24,
+        "entries": 2,
+        "native3D": true,
+        "modelWarnings": [],
+        "captureMethod": "rendered-canvas-png",
+        "manifestModifiedLocal": "2026-11-16T03:52:38"
+      }
+    ],
+    "overallArtAcceptance": "representative_internal_qa_complete_pending_user_review",
+    "latestCorrectionPass": {
+      "frozenBundleBytes": 2044440,
+      "frozenBundleSHA256": "09812e7c24a307af807c83f310d8811801da1cea8422ad9877ad35dc2f0bb745",
+      "changes": [
+        {
+          "area": "WAR blade path",
+          "description": "修正刀光上飘；刀光与真实武器世界空间轨迹的连接重新对齐。"
+        },
+        {
+          "area": "FIR meteor composition and impact",
+          "description": "调整陨体在镜头中的构图与体量，并加强主爆表现。"
+        },
+        {
+          "area": "Enemy hit reaction cues",
+          "description": "逐技能按实际命中时间提示播放受击；自保、闪避和治疗不再触发敌人假受击。"
+        }
+      ],
+      "allFamilyReelsRecaptured": true,
+      "capturedEntryCount": 37,
+      "finalVisualQA": {
+        "status": "required_visual_fixes_resolved_representative_transition_review_complete",
+        "reviewer": "dynamic_assets_audit",
+        "evidence": "qa-final.json",
+        "scope": "All 37 entries and capture completeness verified; representative class effect frames plus two six-frame WAR/FIR transition strips reviewed. This is not full-frame visual acceptance of every animation.",
+        "remainingUserReview": "Overall style, rhythm, density and the brief peak meteor occlusion of rear targets."
+      },
+      "userArtAcceptance": "pending_user_review"
+    }
+  },
+  "media": {
+    "overview": [
+      "media/00-four-class-overview.gif",
+      "media/00-four-class-overview.webp"
+    ],
+    "fullSkillReels": [
+      "media/war-all-skills.webp",
+      "media/bow-all-skills.webp",
+      "media/fir-all-skills.webp",
+      "media/thu-all-skills.webp",
+      "media/com-all-skills.webp"
+    ],
+    "index": "media/animation-index.json",
+    "captureSourceFrames": "src/.tmp/dynamic-design-3d/render-{FAMILY}/frame-%05d.png",
+    "encodingTimingEvidence": "media/{family}-animation.json",
+    "encodedAnimationsVerified": true,
+    "uniqueEntriesVerified": 37,
+    "overviewFrames": 132,
+    "overviewDurationMs": 6600,
+    "loopVerified": true,
+    "identicalHoldFramesMayBeMergedByWebP": true
+  },
+  "deliveryBoundaries": {
+    "productionCodeModified": false,
+    "productionAssetsReplaced": false,
+    "saveDataChanged": false,
+    "damageOrCollisionChanged": false,
+    "cocosRuntimeIntegrated": false,
+    "packageBuilt": false,
+    "versionIncremented": false,
+    "taptapOrDeviceAcceptance": false,
+    "userArtAccepted": false
+  },
+  "supersededPreview": {
+    "path": "source-art/skills/dynamic-redesign-v1",
+    "status": "superseded_2D_history_only",
+    "filesRetained": true,
+    "statusNotice": "../dynamic-redesign-v1/STATUS.txt"
+  }
+}

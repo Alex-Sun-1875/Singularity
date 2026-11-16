@@ -1,0 +1,108 @@
+{
+  "schemaVersion": 1,
+  "feature": "combat-tactics-v1",
+  "createdAt": "2026-11-15T16:13:08.456059+00:00",
+  "version": "0.3.50",
+  "profile": "test",
+  "build": "normal Web-mobile concept-2d; no TapTap package or upload requested",
+  "previewUrl": "http://127.0.0.1:7487/?view=2d&player=3d&progression=natural",
+  "checks": {
+    "typescript": "passed",
+    "coreTypescript": "passed",
+    "existingRegression": {
+      "passed": 150,
+      "total": 150
+    },
+    "controlledRules": {
+      "passed": 12,
+      "total": 12
+    },
+    "enemyExecution": {
+      "passed": 11,
+      "total": 11
+    },
+    "bossOutputCases": 96,
+    "liveGameSessionComparisonRuns": 6,
+    "browserCases": {
+      "passed": 11,
+      "total": 11,
+      "views": [
+        {
+          "name": "phone",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "cases": 4
+        },
+        {
+          "name": "large-phone",
+          "viewport": {
+            "width": 932,
+            "height": 430
+          },
+          "cases": 4
+        },
+        {
+          "name": "desktop",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "cases": 3
+        }
+      ],
+      "mergedReport": "browser/browser-review.json"
+    },
+    "renderPolicy": "passed",
+    "buildProfile": "normal test verified",
+    "sourceUnchangedSinceWebSnapshot": 270,
+    "fbxMetadataChangedByBuild": 0,
+    "crlfAwareDiffCheck": "passed"
+  },
+  "rules": {
+    "contentLevelHpOnly": true,
+    "bossHealthMultiplier": 5,
+    "mainBoss2BaseHp": 450,
+    "counter": {
+      "trigger": "actual direct contact avoided during 0.06–0.20s dash window; once per dash",
+      "resource": 6,
+      "readySeconds": 2.5,
+      "damageMultiplier": 1.2,
+      "oneActionMaximumSeconds": 4
+    },
+    "meleeMultipliers": [
+      0.85,
+      0.95,
+      1.2
+    ],
+    "finisherPoise": 15,
+    "bossRecoveryMultiplier": 1.25,
+    "bossStaggerMultiplier": 1.35,
+    "lootAndExperienceBudgetsUnchanged": true,
+    "oldSavedEnemyMigration": false
+  },
+  "evidence": {
+    "design": "docs/design/combat-tactics-v1.md",
+    "directory": "src/cocos/test-results/combat-tactics-v1",
+    "browser": "browser/browser-review.json",
+    "desktopBrowser": "browser-desktop-root/browser-review.json",
+    "rules": "rules.json",
+    "enemy": "enemy-tactics.json",
+    "output": [
+      "balance-rank1.json",
+      "balance-rank3.json"
+    ],
+    "comparison": "live-combat-comparison.json",
+    "snapshot": "build-snapshot.json"
+  },
+  "limits": [
+    "Flat-plane AI comparisons and stationary output ceilings are controlled observations, not a full natural campaign balance claim.",
+    "Browser feedback QA uses valid controlled-level sessions and assisted initial placement; actual input and combat outcomes are production paths.",
+    "Checkpoint potion capacity and economy were not retuned; no-potion comparisons cannot establish complete real-map difficulty.",
+    "TapTap App touch, physical device readability, performance and subjective feel remain unverified.",
+    "Old test-save encounters are not migrated; use a fresh journey for this durability revision.",
+    "The default concept-2d run uses flat enemies with a 3D player. Native 3D enemy material feedback was type-checked and reviewed against existing engine APIs, not visually accepted. Sound event mapping was checked; perceived sound level remains subjective and unverified."
+  ],
+  "presentationSupersededBy": "src/cocos/release/boss-no-ranges-validation.json"
+}

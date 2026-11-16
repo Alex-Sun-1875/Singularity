@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-16",
+  "version": "0.3.50",
+  "status": "implemented-web-verified-device-pending",
+  "component": "assets/scripts/shared/ui/GoldPanelHeader.ts",
+  "evidence": "source-art/ui/header-navigation-v1/runtime/review.json",
+  "checks": {
+    "fullTypeCheck": {
+      "command": "npm --prefix src/cocos run check",
+      "exitCode": 0
+    },
+    "coreTypeCheck": {
+      "command": "npm --prefix src/cocos run check:core",
+      "exitCode": 0
+    },
+    "diffWhitespaceCheck": "passed with core.whitespace=cr-at-eol for Windows line endings",
+    "webBuild": {
+      "command": "pwsh -NoProfile -File src/cocos/Run-Concept2D.ps1 -Profile test",
+      "exitCode": 0,
+      "profile": "test",
+      "versionIncremented": false,
+      "output": "src/cocos/build/concept-2d",
+      "loadedMain": "assets/main/index.c0368.js",
+      "renderPolicy": "passed",
+      "buildProfileVerification": "passed"
+    },
+    "browser": {
+      "engine": "Cocos 3.8.8 in Chromium, iPhone user agent and touch events",
+      "baseline": [
+        844,
+        390
+      ],
+      "largerViewport": [
+        956,
+        440
+      ],
+      "browserDeviceScale": 3,
+      "capsule": "injected rectangle and visual fixture; not native TapTap evidence",
+      "safeAreaFixtures": [
+        [
+          59,
+          0
+        ],
+        [
+          0,
+          59
+        ]
+      ],
+      "routeEvidence": "route-snapshots.json",
+      "javascriptErrors": 0,
+      "actualPointerChecks": [
+        "left return closes pause",
+        "right close closes settings and releases all prior modal nodes",
+        "gallery detail close returns to catalog",
+        "training header resumes the same training session; exit remains a distinct action"
+      ],
+      "metadataChecks": [
+        "back:true target inventory preserved",
+        "disabled header ignores click and backdrop has no dismiss button"
+      ],
+      "dynamicGeometry": "host rectangle invalidation switches close/back; larger viewport can switch back to close when the measured candidate clears the fixture"
+    },
+    "visual": "Static review of phone training back, settings close, journal back and 956 x 440 inventory; icons, title baselines and relevant adjacent header content checked."
+  },
+  "pending": [
+    "TapTap native capsule rectangle and hardware safe areas still require actual iOS/Android device acceptance",
+    "No TapTap package, upload, review submission or publication was requested or performed",
+    "All transaction and unsaved-change branches keep their existing handlers; this UI verification did not exhaustively replay every gameplay business flow"
+  ]
+}

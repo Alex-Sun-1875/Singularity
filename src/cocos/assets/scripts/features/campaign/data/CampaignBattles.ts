@@ -1,6 +1,7 @@
 import type {AreaDef,EnemySpawn,Point} from '../../../core/Contracts';
 import {CAMPAIGN_ENEMY_TEMPLATES} from './Campaign';
 import {campaignText} from '../locales';
+import {campaignWaveHealth} from '../../combat/data/EnemyBalance';
 export interface CampaignWave {label:string;enemies:EnemySpawn[];experience:{id:string;amount:number}[]}
 export interface CampaignBattle {id:string;area:string;title:string;waves:CampaignWave[]}
 interface CampaignFighter {templateId:string;previousTemplateId?:string;group:string;maxHp:number;damage:number;drops:boolean;deferExperience:boolean}
@@ -10,17 +11,14 @@ export const campaignFighter=(e:Pick<EnemySpawn,'id'|'templateId'>)=>{const tune
 export const combatGroup=(e:Pick<EnemySpawn,'id'|'templateId'|'packId'>)=>e.packId??campaignFighter(e)?.group;
 const fullHealth=(e:EnemySpawn)=>{const def=CAMPAIGN_ENEMY_TEMPLATES[e.templateId??''];return Math.round((def?.baseHp??def?.hp??e.hp??72)*(1+.14*((e.level??def?.level??1)-1)));};
 const unit=(id:string,templateId:string,x:number,z:number,level:number):EnemySpawn=>({id,kind:templateId.includes('SPITTER')?'archer':'raider',templateId,contentId:templateId,x,z,level});
-/** More bodies share the original two units' HP and XP budgets. Only those
- * original IDs roll equipment, currency and supplies; the new bodies cannot
- * advance loot pity or the forty-kill repeatable-hunting reward. */
+/** Each combatant owns a role-weighted HP budget. Only the original IDs roll
+ * equipment, currency and supplies, and their original XP budget is retained. */
 function swarm(label:string,originals:EnemySpawn[],count:number,filler:string|readonly string[],veteran?:string,previousFiller?:string):CampaignWave {
  const enemies=[...originals];
  const choices=typeof filler==='string'?[filler]:filler;
  for(let i=enemies.length;i<count;i++)enemies.push(unit(`${originals[0].id}-swarm-${i}`,choices[(i-originals.length)%choices.length],0,0,originals[0].level!));
- const health=originals.reduce((n,e)=>n+fullHealth(e),0),weights=enemies.map(e=>e.id===veteran?3:1),total=weights.reduce((n,w)=>n+w,0);
- let assigned=0;
  for(const [i,e]of enemies.entries()){
-  const maxHp=i===enemies.length-1?health-assigned:Math.floor(health*weights[i]/total);assigned+=maxHp;
+  const maxHp=campaignWaveHealth(fullHealth(e),e.level??1,e.kind,e.id===veteran,i>=originals.length);
   fighters.set(e.id,{templateId:e.templateId!,...(i>=originals.length&&previousFiller?{previousTemplateId:previousFiller}:{}),group:`battle:${originals[0].id}`,maxHp,damage:i<originals.length?1:.65,drops:i<originals.length,deferExperience:true});
  }
  return {label,enemies,experience:originals.map(e=>({id:e.id,amount:20+8*(e.level!-1)}))};

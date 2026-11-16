@@ -8,9 +8,11 @@ import type {SceneBuilder} from '../../world/runtime/SceneBuilder';
 import {damageFeedbackRole,type FeedbackRole} from '../../../shared/ui/FeedbackPalette';
 import {enemyDisplayName,bossKind} from '../common/BossAwareness';
 import {FeedbackView as F} from '../../../shared/ui/FeedbackView';
+import {combatText} from '../locales';
+import {tacticsText} from '../locales/TacticsText';
 
 type HealthBar={id:string;node:Node;fill:Node;lag:Node;skin:Graphics;drawnFraction:number;drawnLag:number;drawnOpaque:boolean;name:Label;opacity:UIOpacity;until:number;deathUntil:number;fraction:number;lagFraction:number;width:number;lastHp:number;point:Vec3};
-type TextKind='miss'|'damage'|'taken'|'heal'|'absorbed';
+type TextKind='miss'|'damage'|'taken'|'heal'|'absorbed'|'status';
 type CombatText={id:string;kind:TextKind;role:FeedbackRole;value:number;critical:boolean;lane:number;node:Node;label:Label;opacity:UIOpacity;start:number;until:number;point:Vec3};
 type FeedbackTarget=Pick<EnemyState,'id'|'x'|'z'>&Partial<Pick<EnemyState,'kind'|'bossId'>>;
 const PLAYER_ID='$player';
@@ -52,6 +54,7 @@ export class EnemyCombatFeedback {
  private playerHp:number|undefined;private playerMaxHp=0;
  private readonly lastHp=new Map<string,number>();
  private readonly seen=new Set<string>();
+ private readonly outcomeSeen=new Map<string,number>();
  private area='';private lastTime=-1;private disposed=false;
  private readonly projected=new Vec3();
  private readonly anchor=new Vec3();
@@ -154,11 +157,12 @@ export class EnemyCombatFeedback {
   if(kind==='miss')item.start=now;
   item.id=id;item.kind=kind;item.role=role;item.critical=critical;item.value+=Math.max(0,value);item.until=now+MISS_SECONDS;
   item.label.fontSize=critical?(sys.isMobile?30:27):(sys.isMobile?25:22);item.label.lineHeight=item.label.fontSize*1.2;
-  item.label.string=kind==='miss'?(caption??'MISS'):`${critical?'暴击 ':''}${kind==='heal'?'+':kind==='taken'?'-':kind==='absorbed'?'吸收 ':''}${Math.round(item.value)}`;
+  item.node.getComponent(UITransform)!.setContentSize(kind==='status'?260:170,46);item.label.node.getComponent(UITransform)!.setContentSize(kind==='status'?260:170,46);
+  item.label.string=kind==='miss'||kind==='status'?(caption??'MISS'):`${critical?combatText('feedback.critical')+' ':''}${kind==='heal'?'+':kind==='taken'?'-':kind==='absorbed'?combatText('feedback.absorbed')+' ':''}${Math.round(item.value)}`;
   F.combatText(item.label,role,critical);
   // A bounded numeric alphabet reuses native glyphs across simultaneous hits.
   // Long values/captions keep SHRINK, which CHAR does not support in 3.8.8.
-  const cached=kind==='miss'?item.label.string==='MISS'||item.label.string==='闪避':Math.round(item.value)<100000;
+  const cached=kind==='status'?false:kind==='miss'?item.label.string==='MISS'||item.label.string==='闪避':Math.round(item.value)<100000;
   item.label.overflow=cached?Label.Overflow.CLAMP:Label.Overflow.SHRINK;
   item.label.cacheMode=cached?Label.CacheMode.CHAR:Label.CacheMode.NONE;
   item.opacity.opacity=255;item.node.active=true;
@@ -173,7 +177,13 @@ export class EnemyCombatFeedback {
   if(this.disposed||!events.length)return;this.refreshViewport();const state=game.state;
   if(this.area&&this.area!==state.area)this.clear();this.area=state.area;
   const damage=new Map<string,number>();
+  const outcomes=new Map<string,{key:Parameters<typeof tacticsText>[0];role:FeedbackRole;priority:number;caption?:string}>();
   for(const event of events){
+   const status=event.type==='stagger'?{key:'stagger' as const,role:'status.control' as const,priority:6}:event.type==='guard_break'?{key:'guardBreak' as const,role:'state.ready' as const,priority:5}:event.type==='interrupt'?{key:'interrupt' as const,role:'status.control' as const,priority:4}:event.type==='counter_hit'?{key:'counter' as const,role:'state.ready' as const,priority:3}:event.type==='evade'&&event.timing===true?{key:'evade' as const,role:'state.success' as const,priority:2}:event.type==='counter_ready'&&event.tactical===true?{key:'counterReady' as const,role:'state.ready' as const,priority:1}:event.type==='block'?{key:'guard' as const,role:'impact.metal' as const,priority:0,caption:event.text}:undefined;
+   if(status&&event.id){
+    const id=event.id==='player'?PLAYER_ID:event.id,key=`${event.type}:${id}:${event.action??event.castId??event.skillId??''}`,last=this.outcomeSeen.get(key);
+    if(last===undefined||event.type!=='counter_hit'&&state.time-last>.5){this.outcomeSeen.set(key,state.time);const previous=outcomes.get(id);if(!previous||previous.priority<status.priority)outcomes.set(id,status);}
+   }
    if(event.type==='hit'&&event.id&&Number(event.hpLost)>0){
     const value=Number(event.hpLost);damage.set(event.id,(damage.get(event.id)??0)+value);
     this.showText(event.id,'damage',state.time,value,damageFeedbackRole(String(event.element)),event.critical===true);
@@ -190,8 +200,18 @@ export class EnemyCombatFeedback {
    const identity=String(event.action??event.castId??event.projectileId??state.time.toFixed(4));
    const key=`${event.id}:${identity}:${event.projectileId??''}:${event.segment??''}`;
    if(this.seen.has(key))continue;this.seen.add(key);if(this.seen.size>256)this.seen.delete(this.seen.values().next().value!);
-   this.showText(missId,'miss',state.time,0,missId===PLAYER_ID?'state.success':'damage.miss',false,missId===PLAYER_ID?'闪避':undefined);
+   this.showText(missId,'miss',state.time,0,missId===PLAYER_ID?'state.success':'damage.miss',false,missId===PLAYER_ID?combatText('feedback.evasion'):undefined);
   }
+  if(outcomes.get(PLAYER_ID)?.key==='evade'&&events.some(e=>e.type==='counter_ready'&&e.tactical===true))outcomes.get(PLAYER_ID)!.key='evadeReady';
+  // At most four short outcome captions; numbers retain the existing pool.
+  // One caption per target avoids stacking "interrupted / broken / staggered".
+  for(const [id,status]of Array.from(outcomes).sort((a,b)=>b[1].priority-a[1].priority).slice(0,4)){
+   const previous=this.texts.find(t=>t.id===id&&t.kind==='status'&&t.until>state.time);
+   if(previous){previous.id='';previous.node.active=false;}
+   else if(this.texts.filter(t=>t.kind==='status'&&t.id&&t.until>state.time).length>=4)continue;
+   this.showText(id,'status',state.time,0,status.role,false,status.caption??tacticsText(status.key));
+  }
+  if(this.outcomeSeen.size>128)for(const [key,time]of this.outcomeSeen)if(state.time-time>3)this.outcomeSeen.delete(key);
   for(const [id,value]of damage){const enemy=state.enemies.find(e=>e.id===id);if(enemy)this.showHealth(enemy,state.time,value,enemy.hp<=0);}
  }
 
@@ -233,7 +253,7 @@ export class EnemyCombatFeedback {
  }
 
  private hideTarget(id:string){for(const bar of this.bars)if(bar.id===id){bar.id='';if(isValid(bar.node,true))bar.node.active=false;}for(const text of this.texts)if(text.id===id&&text.kind==='miss'){text.id='';if(isValid(text.node,true))text.node.active=false;}}
- clear(){for(const bar of this.bars){bar.id='';if(isValid(bar.node,true))bar.node.active=false;}for(const item of this.texts){item.id='';if(isValid(item.node,true))item.node.active=false;}this.lastHp.clear();this.seen.clear();this.lastTime=-1;this.playerHp=undefined;}
+ clear(){for(const bar of this.bars){bar.id='';if(isValid(bar.node,true))bar.node.active=false;}for(const item of this.texts){item.id='';if(isValid(item.node,true))item.node.active=false;}this.lastHp.clear();this.seen.clear();this.outcomeSeen.clear();this.lastTime=-1;this.playerHp=undefined;}
  inspect(){return{alwaysVisible:true,barLimit:BAR_LIMIT,textLimit:TEXT_LIMIT,allocatedBars:this.bars.length,allocatedTexts:this.texts.length,bars:this.bars.filter(bar=>bar.id&&bar.node.activeInHierarchy).map(bar=>({id:bar.id,hp:bar.lastHp,fraction:bar.fraction,finishing:bar.deathUntil>this.lastTime,persistent:bar.lastHp>0,color:F.color('health.enemy').toHEX(),remaining:bar.deathUntil>this.lastTime?bar.deathUntil-this.lastTime:null,position:{x:bar.point.x,y:bar.point.y}})),texts:this.texts.filter(text=>text.id&&text.node.activeInHierarchy).map(text=>({id:text.id,kind:text.kind,role:text.role,value:text.value,critical:text.critical,text:text.label.string,color:text.label.color.toHEX()})),misses:this.texts.filter(text=>text.kind==='miss'&&text.id&&text.node.activeInHierarchy).map(text=>({id:text.id,text:text.label.string,remaining:text.until-this.lastTime,opacity:text.opacity.opacity,position:{x:text.point.x,y:text.point.y}}))};}
  destroy(){if(this.disposed)return;this.clear();this.disposed=true;if(isValid(this.root,true))this.root.destroy();this.fillFrame?.destroy();this.fillFrame=undefined;this.root=undefined;this.bars.length=0;this.texts.length=0;}
 }

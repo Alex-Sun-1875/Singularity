@@ -1,0 +1,130 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-16",
+  "timezone": "Asia/Shanghai",
+  "feature": "fixed-skill-kit-v1",
+  "source": "tools/design/fixed-skill-kit-v1.json",
+  "runtimeCombatVersion": 5,
+  "rules": {
+    "command": "npm --prefix src/cocos test",
+    "passed": 155,
+    "failed": 0,
+    "skillBehaviourAndMigrationCases": 14,
+    "existingPlaythroughCases": 7
+  },
+  "typecheck": {
+    "command": "npm --prefix src/cocos run check",
+    "passed": true
+  },
+  "exports": {
+    "engine": "Cocos Creator 3.8.8",
+    "test": {
+      "passed": true,
+      "entry": "http://127.0.0.1:7469/?view=2d&player=3d",
+      "noSkillCooldown": false,
+      "compiledProfileVerified": true
+    },
+    "dev": {
+      "passed": true,
+      "entry": "http://127.0.0.1:7470/?view=2d&player=3d",
+      "noSkillCooldown": false,
+      "monsterExperienceMultiplier": 5,
+      "storagePrefix": "singularity.dev.",
+      "compiledProfileVerified": true
+    },
+    "versionIncremented": false
+  },
+  "browser": {
+    "passed": true,
+    "fixture": "HTML test=max; isolated browser storage; not TapTap/device acceptance",
+    "combinations": [
+      "WAR/BOW/FIR/THU at 844x390 DPR3",
+      "WAR supplemental layout at 932x430 DPR3"
+    ],
+    "minimumTouchLogicalPixels": 48,
+    "minimumTouchGapLogicalPixels": 8.0,
+    "combatEdgeMarginLogicalPixels": 16,
+    "fixedSkillPage": {
+      "count": 7,
+      "buttons": 0,
+      "old": 0
+    },
+    "realCooldowns": {
+      "single": 0.8199999999999981,
+      "ultimate": 11.180000000000017,
+      "dash": 1.9
+    },
+    "healingTouchAndCooldown": {
+      "cooldown": 8,
+      "hp": 157.5,
+      "maxHp": 315,
+      "visible": true,
+      "menu": "",
+      "action": "pure:COM_02",
+      "ready": false,
+      "touches": [
+        {
+          "action": "skill-heal",
+          "phase": "start"
+        },
+        {
+          "action": "skill-heal",
+          "phase": "end"
+        },
+        {
+          "action": "skill-heal",
+          "phase": "start"
+        },
+        {
+          "action": "skill-heal",
+          "phase": "end"
+        }
+      ]
+    },
+    "healLongPressReleaseDoesNotCast": true,
+    "collapsedHealingInactive": true,
+    "lockedSlots": {
+      "slots": [
+        "WAR_01",
+        null,
+        null,
+        null
+      ],
+      "ultimate": null
+    },
+    "lockedSkillLongPress": true,
+    "longPressReleaseDoesNotCast": true,
+    "errors": [],
+    "evidence": "src/cocos/test-results/fixed-skill-kit-v1/browser-validation.json"
+  },
+  "battle": {
+    "passed": true,
+    "area": "S04",
+    "areaName": "血刃隘口",
+    "viewport": {
+      "width": 844,
+      "height": 390,
+      "dpr": 3
+    },
+    "fixture": "Isolated HTML test=max QA; level40 and owned weapons; placement near authored S04 enemies; no user save writes",
+    "visualGeometry": {
+      "playerBlocked": false,
+      "enemyBlocked": false,
+      "escapeRouteBlocked": false
+    },
+    "manualVisualReview": {
+      "reviewed": true,
+      "result": "pass",
+      "observation": "Actual S04 battle screenshot inspected: hero, authored raider, its active blade-swing anticipation/slash area and the open retreat corridor remain visible. The unchanged seven controls stay at the bottom-right edge and do not cover these gameplay objects or the checked movement path.",
+      "screenshot": "battle-844x390.png",
+      "thumbnail": "battle-844x390-preview.png",
+      "limits": "Tool-assisted level40/placement fixture. One actual nearby enemy attack and real shield-skill touch/release were observed; this does not replace TapTap target-device or every boss/formation acceptance."
+    },
+    "evidence": "src/cocos/test-results/fixed-skill-kit-v1/battle-validation.json"
+  },
+  "pending": [
+    "Real TapTap AppID platform and target-device acceptance",
+    "Android/iPhone hardware safe areas, touch and foreground/background recovery",
+    "Natural progression, sustained combat feel and balance across bosses and formations"
+  ]
+}

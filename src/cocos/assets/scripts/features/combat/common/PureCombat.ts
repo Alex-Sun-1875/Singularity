@@ -11,10 +11,13 @@ import {equippedGearBonus,effectiveAttribute,combatCriticalChance,combatCritical
 import type {RandomForgingBonus} from '../../crafting/data/EquipmentForging';
 import {growingStats} from '../../equipment/data/GrowingEquipment';
 import {GrowingEquipmentCombat,validateGrowingPulses,type GrowingPulse} from './GrowingEquipmentCombat';
+import {restorePlayerHealth} from '../../pets/common/PetBenefits';
 import {enemyProfile,enemyCanInterrupt,enemyHurtRadius} from './EnemyCombat';
 import {validateCombatLoadouts,weaponCombatFamily,type CombatFamily,type CombatLoadout} from '../../progression/common/CombatLoadouts';
 import {combatActionBeatCount,combatActionDuration,combatSegmentInterval} from './CombatActionTiming';
 import {BUILD_PROFILE} from '../../../shared/BuildProfile';
+import {COMBAT_TACTICS} from './CombatTactics';
+import {tacticsText} from '../locales/TacticsText';
 export {combatActionBeatCount,combatActionDuration,combatSegmentInterval} from './CombatActionTiming';
 
 export interface CombatSkillView {
@@ -34,7 +37,7 @@ export interface CombatStatus {hunterMarkUntil:number; hunterMarkBonus:number; b
 export interface CombatState {
  engagement?:{area:string;enemyIds:string[];quietSince?:number};
  family?:CombatFamily;staffFamily?:'FIR'|'THU';loadouts?:Partial<Record<CombatFamily,CombatLoadout>>;
- version:2|3|4; activeSlots:[string|null,string|null,string|null,string|null]; passiveSlots:[string|null,string|null]; ultimate:string|null;
+ version:2|3|4|5; activeSlots:[string|null,string|null,string|null,string|null]; passiveSlots:[string|null,string|null]; ultimate:string|null;
  charge:number; ultimateLock:number; cooldowns:Record<string,number>; buffs:Record<string,number>;
  statuses:Record<string,CombatStatus>; casts:CombatCast[];growingPending?:GrowingPulse[];
 }
@@ -56,7 +59,7 @@ const at=(p:Point):Point=>({x:p.x,z:p.z});
 const copy=<T>(v:T):T=>JSON.parse(JSON.stringify(v));
 function segmentDistance(a:Point,b:Point,p:Point){const x=b.x-a.x,z=b.z-a.z,l=x*x+z*z,t=l?clamp(((p.x-a.x)*x+(p.z-a.z)*z)/l,0,1):0;return Math.hypot(a.x+t*x-p.x,a.z+t*z-p.z);}
 function random(seed:number,id:string){let n=seed;for(let i=0;i<id.length;i++)n=(Math.imul(n,31)+id.charCodeAt(i))>>>0;return n/4294967296;}
-export function freshCombat():CombatState{return {version:4,activeSlots:['WAR_01',null,null,null],passiveSlots:[null,null],ultimate:null,charge:0,ultimateLock:0,cooldowns:{},buffs:{},statuses:{},casts:[]};}
+export function freshCombat():CombatState{return {version:5,activeSlots:['WAR_01',null,null,null],passiveSlots:[null,null],ultimate:null,charge:0,ultimateLock:0,cooldowns:{},buffs:{},statuses:{},casts:[]};}
 
 /** Geometry, damage and projectile contacts are authoritative here; the renderer only consumes their events. */
 export class PureCombat {
@@ -77,18 +80,18 @@ export class PureCombat {
  private secondary(c:CombatCast,id:string,e:EnemyState,damage:number,cd=0){if(c.procs.filter(k=>k.startsWith('secondary:')).length>=2||!this.proc(c,`secondary:${id}`,cd))return false;this.host.damage(e,damage,c.id,'secondary',c.angle);return true;}
  private addCharge(c:CombatCast,bonus=false){if(!bonus||PURE_SKILLS[c.skillId]?.type==='ultimate'||c.chargeBonus>=2)return;this.s.player.focus=Math.min(this.s.player.maxFocus,this.s.player.focus+2-c.chargeBonus);c.chargeBonus=2;}
  private shield(amount:number,duration:number){const b=this.c.buffs;b.shieldAmount=Math.min(this.s.player.maxHp*.35,Math.max(b.shieldAmount??0,amount));b.shieldUntil=this.s.time+duration;this.s.player.shield=b.shieldAmount;}
- private thunderWeapon(c:CombatCast,source:1|3){
-  const b=this.c.buffs,damage=c.power*(source===3?c.rank.maxDamagePerTargetS:this.upgrades.passive(c,'THU_P1').extraBasicS??.75)/3;
+ private thunderWeapon(c:CombatCast,source:1|3,enhancement=c.rank){
+  const b=this.c.buffs,damage=c.power*(source===3?enhancement.maxDamagePerTargetS:this.upgrades.passive(c,'THU_P1').extraBasicS??.75)/3;
   if((b.thunderUntil??0)>this.s.time&&(b.thunderCharges??0)>0&&(b.thunderDamage??0)>damage)return;
-  b.thunderUntil=this.s.time+(source===3?c.rank.upgradeEffects?.buffSeconds??6:6);b.thunderCharges=3;b.thunderDamage=damage;b.thunderSource=source;
-  b.thunderRank=source===3?c.rank.rank:PURE_SKILLS.THU_P1.ranks.find(r=>r.primaryValue===c.passives.THU_P1)?.rank??1;
+  b.thunderUntil=this.s.time+(source===3?enhancement.upgradeEffects?.buffSeconds??6:6);b.thunderCharges=3;b.thunderDamage=damage;b.thunderSource=source;
+  b.thunderRank=source===3?enhancement.rank:PURE_SKILLS.THU_P1.ranks.find(r=>r.primaryValue===c.passives.THU_P1)?.rank??1;
  }
  private event(type:CombatSkillEvent['type'],c:CombatCast,extra:Record<string,unknown>={}) {
  const d=PURE_SKILLS[c.skillId],g=c.rank.geometry;this.host.emit(type,undefined,{skillId:c.skillId,family:d.style,rank:c.rank.rank,castId:c.id,shape:g?.kind??'self',geometry:g?{...g,anglesDegrees:g.anglesDegrees?[...g.anglesDegrees]:undefined}:undefined,from:at(c.from),to:at(c.to),segment:c.nextSegment,angle:c.angle,angleDegrees:g?.angleDegrees??0,anglesDegrees:g?.anglesDegrees?[...g.anglesDegrees]:undefined,radius:g?.radiusMetres??0,width:g?.widthMetres??0,length:g?.lengthMetres??0,depth:g?.depthMetres??0,...extra});
  }
  private passiveEvent(id:string,c:CombatCast,to?:EnemyState,status='passive',from?:Point){const d=PURE_SKILLS[id],rank=d.ranks.find(r=>r.primaryValue===c.passives[id])?.rank??1;this.event('skill_status',c,{skillId:id,family:d.style,rank,from:at(from??c.from),to:at(to??this.s.player),targetId:to?.id,status,duration:.25});}
  compatible(id:string){const d=PURE_SKILLS[id];return !!d&&skillWeaponCompatible(d,this.s.equipment.weapon);}
- view(ids?:readonly string[]):CombatSkillView[]{const skills=ids?ids.map(id=>PURE_SKILLS[id]).filter((d):d is CombatSkillDef=>!!d):Object.values(PURE_SKILLS);return skills.map(d=>{const r=allocatedSkillRank(this.s.progression,d.id),rank=r?.rank??0,cd=BUILD_PROFILE.noSkillCooldown?0:this.c.cooldowns[d.id]??0;return {id:d.id,name:d.name,family:d.style,type:d.type,rank,requiredLevel:d.unlockLevel,nextRequiredLevel:null,cooldown:cd,resourceCost:d.resourceCost,resourceEnough:this.s.player.focus+1e-8>=d.resourceCost,ready:!!r&&cd<=0&&this.compatible(d.id)&&this.s.player.focus+1e-8>=d.resourceCost&& (BUILD_PROFILE.noSkillCooldown||d.type!=='ultimate'||this.c.ultimateLock<=0),compatible:this.compatible(d.id),assignedSlot:d.type==='passive'?this.c.passiveSlots.indexOf(d.id)<0?null:this.c.passiveSlots.indexOf(d.id):d.type==='ultimate'?this.c.ultimate===d.id?0:null:this.c.activeSlots.indexOf(d.id)<0?null:this.c.activeSlots.indexOf(d.id),description:skillResourceText(r?.evolution??r?.effect??d.mechanic??''),range:r?.castRangeMetres??d.ranks[0].castRangeMetres,shape:r?.geometry?.kind??'self',unlocked:!!r};});}
+ view(ids?:readonly string[]):CombatSkillView[]{const skills=ids?ids.map(id=>PURE_SKILLS[id]).filter((d):d is CombatSkillDef=>!!d):Object.values(PURE_SKILLS);return skills.map(d=>{const r=allocatedSkillRank(this.s.progression,d.id),rank=r?.rank??0,cd=BUILD_PROFILE.noSkillCooldown?0:this.c.cooldowns[d.id]??0;return {id:d.id,name:d.name,family:d.style,type:d.type,rank,requiredLevel:d.unlockLevel,nextRequiredLevel:null,cooldown:cd,resourceCost:d.resourceCost,resourceEnough:this.s.player.focus+1e-8>=d.resourceCost,ready:!!r&&cd<=0&&this.compatible(d.id)&&this.s.player.focus+1e-8>=d.resourceCost&& (BUILD_PROFILE.noSkillCooldown||d.type!=='ultimate'||this.c.ultimateLock<=0),compatible:this.compatible(d.id),assignedSlot:d.type==='passive'?this.c.passiveSlots.indexOf(d.id)<0?null:this.c.passiveSlots.indexOf(d.id):d.type==='ultimate'?this.c.ultimate===d.id?0:null:this.c.activeSlots.indexOf(d.id)<0?null:this.c.activeSlots.indexOf(d.id),description:skillResourceText(r?.evolution??r?.effect??d.mechanic??'')+(d.id==='COM_01'?'\n'+tacticsText('dodgeHelp'):''),range:r?.castRangeMetres??d.ranks[0].castRangeMetres,shape:r?.geometry?.kind??'self',unlocked:!!r};});}
  cooldownFor(d:CombatSkillDef,r:CombatSkillRank){if(BUILD_PROFILE.noSkillCooldown)return 0;const reduction=(this.equipped('J04')?.05:0)+(this.equipped('W16')&&['FIR','THU'].includes(d.style)&&d.type!=='ultimate'?.04:0)+(d.id==='COM_01'&&this.equipped('DR2-01')?.06:0);return r.cooldownSeconds*(1-Math.min(.2,reduction));}
  /** Resolve again during preview and on release so dead, occluded or distant
   * enemies cannot leave an automatic cast aimed at a stale ground point. */
@@ -114,6 +117,7 @@ export class PureCombat {
  const s=this.s,d=PURE_SKILLS[id],r=allocatedSkillRank(s.progression,id),p=s.player;
  const reject=(message:string)=>{this.host.emit('notice',message);return false;};
  if(!d||d.type==='passive'||!r||!s.progression.learned[id])return reject('技能尚未开放');
+ if(d.activation==='automatic')return reject('该技能为自动强化，无需装配或手动施放');
  if(s.status==='dead'||s.dialogue||s.dice.active||s.action)return false;
  if(!this.compatible(id))return reject(skillWeaponRequirement(d));
  if(!BUILD_PROFILE.noSkillCooldown&&(this.c.cooldowns[id]??0)>0)return reject('技能冷却中');
@@ -132,6 +136,7 @@ export class PureCombat {
  const attr=d.style==='WAR'?'strength':d.style==='BOW'?'dexterity':'intellect';
  const cast:CombatCast={id:this.host.id('cast'),skillId:id,rank:copy(r),from:at(p),to,angle:a,elapsed:0,released:false,nextSegment:0,targets:[],hits:[],breakHits:[],accuracy:playerCombatAttributes(s).accuracy,criticalMultiplier:combatCriticalMultiplier(s),criticalRoll:random(s.seed,`${s.sequence}:crit`),criticalChance:combatCriticalChance(s),critical:random(s.seed,`${s.sequence}:crit`)<combatCriticalChance(s),power:skillPower(s.progression)*equipmentPowerMultiplier(s.equipment.weapon,s.progression.level)*(1+equippedGearBonus(s).power/100),growthLevel:s.progression.level,attributeMultiplier:1+.008*(effectiveAttribute(s,attr)-10),damageBonus:0,chargeGranted:false,chargeBonus:0,procs:[],equipment:Object.values(s.equipment).filter((id):id is string=>typeof id==='string'),passives:Object.fromEntries(this.c.passiveSlots.filter((id):id is string=>!!id).map(id=>[id,this.passive(id)])),weapon:s.equipment.weapon};
  if(d.style==='THU'&&d.offensive&&p.movingTime>=(this.upgrades.passive(undefined,'THU_P1').movingSeconds??1.5)&&this.passive('THU_P1')&&this.ready('THU_P1')){cast.damageBonus+=this.passive('THU_P1')/100;this.c.cooldowns.THU_P1=6;cast.procs.push('passive-ready:THU_P1');}
+ if(d.style==='THU'&&d.offensive&&p.movingTime>=(this.upgrades.passive(undefined,'THU_P1').movingSeconds??1.5)&&allocatedSkillRank(s.progression,'THU_03')&&this.ready('THU_03'))cast.procs.push('enhancement-ready:THU_03');
  for(const [key,value]of [['nextDamage',.06],['breakNextDamage',.08],['interruptNextDamage',.10],['crossNextDamage',.08],['dashBowDamage',.08]] as [string,number][]){if((this.c.buffs[key]??0)>s.time&&(key!=='crossNextDamage'||id==='WAR_01')&&(key!=='dashBowDamage'||id==='BOW_01')){cast.damageBonus+=value;delete this.c.buffs[key];}}
  let windup=d.windupSeconds;if(d.style==='BOW'&&this.equipped('A10'))windup*=.92;if((d.style==='FIR'||d.style==='THU')&&this.equipped('DU2-02'))windup*=.96;
  if(id==='WAR_02')cast.rush={distance:distance(p,to),elapsed:0,duration:.18,stopped:false};
@@ -179,7 +184,6 @@ export class PureCombat {
  c.releaseTime=this.s.time;this.c.cooldowns[c.skillId]=this.cooldownFor(d,r);if(d.type==='ultimate')this.c.ultimateLock=BUILD_PROFILE.noSkillCooldown?0:d.sharedUltimateLockSeconds;this.event('skill_release',c,c.rush?{phase:'rush',duration:c.rush.duration}:{});
  if(c.rush){if(action?.id===c.id)action.releaseAt=(action.releaseAt??d.windupSeconds)+c.rush.duration;return;}
  if(r.shieldMaxHpPercent){this.shield(this.s.player.maxHp*r.shieldMaxHpPercent/100*(c.skillId==='WAR_03'&&this.equipped('W15',c)?1.12:1)*(1+(c.upgrades?.shieldPercent??0)/100),4);this.c.buffs.shieldSkill=c.skillId==='WAR_03'?1:2;this.c.buffs.shieldRank=r.rank;if(c.skillId==='WAR_03'){this.c.buffs.ironShield=this.s.time+4;this.c.buffs.ironAbsorbed=0;if(this.equipped('A13',c))this.c.buffs.ironDefense=this.s.time+3;}this.event('skill_status',c,{duration:4,status:'shield',value:this.s.player.shield});return;}
- if(c.procs.includes('passive-ready:THU_P1'))this.thunderWeapon(c,1);
  if(c.skillId==='THU_03'){this.thunderWeapon(c,3);c.nextSegment=r.authoredDamageHits;this.event('skill_status',c,{duration:r.upgradeEffects?.buffSeconds??6,status:'thunderWeapon'});return;}
  if(c.skillId==='THU_06'){this.c.buffs.stormWardUntil=this.s.time+(r.zoneDurationSeconds??3);this.c.buffs.stormWardSpeed=r.speedPercent??.2;this.c.buffs.stormWardReduction=r.reductionPercent??.35;this.event('skill_status',c,{duration:r.zoneDurationSeconds??3,status:'stormWard'});return;}
  if(c.skillId==='FIR_04'||c.skillId==='BOW_06'){
@@ -282,14 +286,14 @@ export class PureCombat {
    this.event('skill_segment',c,{from:edge.from.p,to:edge.to.p,sourceId:edge.from.id,targetId:edge.to.id,segment,phase:'network'});
   }
  }
- private anchorsHit(c:CombatCast,fraction:number,segment:number){const from=c.rank.geometry?.origin==='caster'?c.from:c.to;for(const anchor of this.host.anchors?.()??[]){const key=`anchor:${segment}:${anchor.id}`;if(c.procs.includes(key)||!this.inside(c,anchor,segment)||!this.host.visible(from,anchor))continue;c.procs.push(key);this.host.damageAnchor?.(anchor.id,c.power*c.rank.maxDamagePerTargetS*fraction*c.attributeMultiplier*(1+Math.min(.4,c.damageBonus))*(c.critical?(c.criticalMultiplier??1.5):1),c.id);}}
+ private anchorsHit(c:CombatCast,fraction:number,segment:number){const from=c.rank.geometry?.origin==='caster'?c.from:c.to;for(const anchor of this.host.anchors?.()??[]){const key=`anchor:${segment}:${anchor.id}`;if(c.procs.includes(key)||!this.inside(c,anchor,segment)||!this.host.visible(from,anchor))continue;if(PURE_SKILLS[c.skillId].damageRole==='single'){const victim='anchor:'+anchor.id;if(c.targets.length&&c.targets[0]!==victim)continue;if(!c.targets.length)c.targets.push(victim);}c.procs.push(key);this.host.damageAnchor?.(anchor.id,c.power*c.rank.maxDamagePerTargetS*fraction*c.attributeMultiplier*(1+Math.min(.4,c.damageBonus))*(c.critical?(c.criticalMultiplier??1.5):1),c.id);}}
  private segment(c:CombatCast,n:number){const id=c.skillId,r=c.rank,count=Math.max(1,r.authoredDamageHits);c.nextSegment=n;
  // Every close cut follows the caster's current ground anchor. A later return
  // swing cannot continue damaging the place the player has already left.
  if(r.geometry?.kind==='meleeFan'){c.from=at(this.s.player);c.to=at(c.from);}
  this.event('skill_segment',c,{duration:id==='FIR_05'&&n===0?.3:undefined,phase:r.geometry?.kind.startsWith('melee')?'strike':undefined});
- if(id==='BOW_01'||id==='BOW_02'||id==='BOW_03'||id==='BOW_07'||id==='FIR_01') {this.projectile(c,n,id==='BOW_03'?at(this.s.player):c.from,c.angle,1/count);return;}
- if(id==='BOW_05'){const fraction=[.2,.3,.5][n];for(const target of c.targets){const fixed=c.volleyPoints?.[target];if(fixed){const q=this.projectile(c,n,at(this.s.player),angleTo(c.from,fixed),fraction);q.remaining=distance(c.from,fixed)+.4;q.feedbackTargetId=target;q.feedbackTarget=at(fixed);q.feedbackReported=false;q.feedbackActionId=c.id;}}return;}
+ if(id==='BOW_01'||id==='BOW_02'||id==='BOW_03'||id==='BOW_07'||id==='FIR_01') {const q=this.projectile(c,n,id==='BOW_03'?at(this.s.player):c.from,c.angle,1/count);if(id==='BOW_03'&&c.procs.includes('automatic'))q.targetId=c.targets[0];return;}
+ if(id==='BOW_05'){const fraction=[.2,.3,.5][n];for(const target of c.targets){const fixed=c.volleyPoints?.[target];if(fixed){const q=this.projectile(c,n,at(this.s.player),angleTo(c.from,fixed),fraction);q.remaining=distance(c.from,fixed)+.4;q.targetId=target;q.feedbackTargetId=target;q.feedbackTarget=at(fixed);q.feedbackReported=false;q.feedbackActionId=c.id;}}return;}
  if(id==='FIR_05'&&n===0){c.waveProgress=0;return;}
  const fraction=id==='WAR_05'?[.2,.2,.6][n]:id==='FIR_02'&&count===2?(n===0?.75:.25):id==='WAR_04'&&count===2?(n===0?.7:.3):id==='FIR_05'?(n===0?.4:.15):1/count;
  let targets=this.targets(c,n);if(id==='THU_04'||id==='THU_05')targets=targets.filter(e=>c.targets.includes(e.id));if(id==='THU_01')targets=targets.slice(0,r.targetLimit??999);
@@ -312,8 +316,10 @@ export class PureCombat {
  private poise(e:EnemyState,value:number,skillId:string,c?:CombatCast){
  const boss=!!e.bossId||e.kind==='captain';
  const key=`poise:${e.id}`,protectedUntil=this.c.buffs[`poiseProtected:${e.id}`]??0;if(protectedUntil>this.s.time)return;this.c.buffs[key]=(this.c.buffs[key]??0)+value;this.host.emit('poise',undefined,{id:e.id,value,skillId:skillId});
- if(!boss){const breaks=['WAR_01','WAR_04','BOW_01','FIR_02','THU_01'].includes(skillId);if(breaks&&this.ready(`open:${e.id}`)){const interrupted=e.phase==='windup'&&enemyCanInterrupt(e),profile=enemyProfile(e),openSeconds=profile?.defense?.breakOpenSeconds??(e.kind==='shield'?2:0);if(e.combat&&openSeconds>0)e.combat.guardOpenUntil=this.s.time+openSeconds;if(enemyCanInterrupt(e)){e.phase='stagger';e.phaseTime=Math.max(openSeconds,.5);}this.c.cooldowns[`open:${e.id}`]=5;if(interrupted&&c&&this.equipped('DE01',c)&&this.proc(c,'DE01',8))this.c.buffs.interruptNextDamage=this.s.time+3;if(skillId==='WAR_01'&&e.kind==='shield'&&c&&this.equipped('DR4-03',c))this.c.buffs.crossBreak=this.s.time+3;}}
- else if(this.c.buffs[key]>=100&&(!['windup','active'].includes(e.phase)||enemyProfile(e)?.route==='profile'&&enemyCanInterrupt(e))){this.c.buffs[key]=0;e.phase='stagger';e.phaseTime=.8;this.c.buffs[`poiseProtected:${e.id}`]=this.s.time+8.8;this.host.emit('stagger','失衡',{id:e.id,value:.8});}
+ if(!boss){const breaks=['WAR_01','WAR_04','BOW_01','FIR_02','THU_01','BASIC_FINISH'].includes(skillId);if(breaks&&this.ready(`open:${e.id}`)){const canInterrupt=enemyCanInterrupt(e),interrupted=['windup','active'].includes(e.phase)&&canInterrupt,moveId=e.combat?.moveId,profile=enemyProfile(e),guardSeconds=profile?.defense?.breakOpenSeconds??(e.kind==='shield'?2:0),openSeconds=skillId==='BASIC_FINISH'?Math.min(guardSeconds,COMBAT_TACTICS.finisherOpenSeconds):guardSeconds;
+ if(canInterrupt){if(e.combat&&openSeconds>0){e.combat.guardOpenUntil=this.s.time+openSeconds;this.host.emit('guard_break',tacticsText('guardBreak'),{id:e.id,at:at(e),skillId,duration:openSeconds,until:e.combat.guardOpenUntil});}e.phase='stagger';e.phaseTime=Math.max(openSeconds,.5);if(interrupted)this.host.emit('interrupt',tacticsText('interrupt'),{id:e.id,at:at(e),skillId,moveId,duration:e.phaseTime});this.c.cooldowns[`open:${e.id}`]=5;}
+ if(interrupted&&c&&this.equipped('DE01',c)&&this.proc(c,'DE01',8))this.c.buffs.interruptNextDamage=this.s.time+3;if(skillId==='WAR_01'&&e.kind==='shield'&&c&&this.equipped('DR4-03',c))this.c.buffs.crossBreak=this.s.time+3;}}
+ else if(this.c.buffs[key]>=100&&(!['windup','active'].includes(e.phase)||enemyProfile(e)?.route==='profile'&&enemyCanInterrupt(e))){const moveId=e.combat?.moveId,interrupted=['windup','active'].includes(e.phase);this.c.buffs[key]=0;e.phase='stagger';e.phaseTime=.8;this.c.buffs[`poiseProtected:${e.id}`]=this.s.time+8.8;if(interrupted)this.host.emit('interrupt',tacticsText('interrupt'),{id:e.id,at:at(e),skillId,moveId,duration:.8,boss:true});this.host.emit('stagger',tacticsText('stagger'),{id:e.id,at:at(e),value:.8,duration:.8,boss:true});}
  }
  private mechanical(e:EnemyState){const profile=enemyProfile(e);return profile?profile.body==='machine':/R2|U2|钟|machine|mechan/i.test(e.templateId??e.contentId??'');}
  private contact(action:string,e:EnemyState,accuracy:number,c?:CombatCast){
@@ -321,22 +327,27 @@ export class PureCombat {
   const result=rollContactHit(this.s.seed,action,e.id,accuracy,enemyCombatAttributes(e).evasion);c?.procs.push(result.landed?hit:miss);
   if(!result.landed){if(this.host.miss)this.host.miss(e,action,result.chance,result.roll);else this.host.emit('miss','MISS',{id:e.id,action,reason:'accuracy',chance:result.chance,roll:result.roll,at:at(e)});return false;}return true;
  }
- private hit(c:CombatCast,e:EnemyState,fraction:number,segment:number,from=c.from,phase='connection',sourceId?:string){const key=`${segment}:${e.id}`;if(e.hp<=0||c.hits.includes(key))return;const intent=this.meleeFeedback.get(c.id);if(intent?.id===e.id)intent.reported=true;if(!this.contact(c.id,e,c.accuracy??playerCombatAttributes(this.s).accuracy,c))return;c.hits.push(key);const d=PURE_SKILLS[c.skillId],st=this.status(e),marked=st.hunterMarkUntil>this.s.time,burning=st.burnUntil>this.s.time;let bonus=c.damageBonus+this.growing.bonus(c)+this.upgrades.damage(c,e,segment);
- if(d.style==='WAR')bonus+=this.passive('WAR_P1',c)/100;if(d.style==='BOW'&&distance(c.from,e)>5)bonus+=this.passive('BOW_P1',c)/100;if(marked)bonus+=st.hunterMarkBonus/100;if(this.equipped('A02',c)&&distance(c.from,e)>5)bonus+=.06;if(marked&&this.equipped('J02',c))bonus+=.06;if(this.equipped('W16',c)&&(d.style==='FIR'||d.style==='THU'))bonus+=.05;if(this.equipped('W05',c)&&c.skillId==='WAR_04'&&segment===c.rank.authoredDamageHits-1)bonus+=.1;
+ private hit(c:CombatCast,e:EnemyState,fraction:number,segment:number,from=c.from,phase='connection',sourceId?:string){const key=`${segment}:${e.id}`;if(e.hp<=0||c.hits.includes(key))return;
+ const d=PURE_SKILLS[c.skillId];
+ // A single-target cast retains its first real contact across every beat. A
+ // killed or evading victim never lets the remaining beats spill to a neighbour.
+ if(d.damageRole==='single'){if(!c.targets.length)c.targets.push(e.id);if(c.targets[0]!==e.id)return;}
+ const intent=this.meleeFeedback.get(c.id);if(intent?.id===e.id)intent.reported=true;if(!this.contact(c.id,e,c.accuracy??playerCombatAttributes(this.s).accuracy,c))return;c.hits.push(key);const st=this.status(e),marked=st.hunterMarkUntil>this.s.time,burning=st.burnUntil>this.s.time;let bonus=c.damageBonus+this.growing.bonus(c)+this.upgrades.damage(c,e,segment);
+ if(d.style==='WAR')bonus+=this.passive('WAR_P1',c)/100;if(d.style==='BOW'&&distance(c.from,e)>5)bonus+=this.passive('BOW_P1',c)/100;if(marked)bonus+=st.hunterMarkBonus/100;if(this.equipped('A02',c)&&distance(c.from,e)>5)bonus+=.06;if(marked&&this.equipped('J02',c))bonus+=.06;if(this.equipped('W16',c)&&(d.style==='FIR'||d.style==='THU'))bonus+=.05;if(this.equipped('W05',c)&&c.skillId==='WAR_04'&&segment===c.rank.authoredDamageHits-1)bonus+=.1;if(this.equipped('L02',c)&&c.skillId==='BOW_01')bonus+=.1;
  if(d.style==='WAR'&&this.passive('WAR_P1',c)&&this.proc(c,'passive:WAR_P1'))this.passiveEvent('WAR_P1',c,e);if(d.style==='BOW'&&distance(c.from,e)>5&&this.passive('BOW_P1',c)&&this.proc(c,'passive:BOW_P1'))this.passiveEvent('BOW_P1',c,e);if(c.procs.includes('passive-ready:THU_P1')&&this.proc(c,'passive:THU_P1'))this.passiveEvent('THU_P1',c,e);
  if(marked&&d.type!=='ultimate'&&(d.style==='FIR'||d.style==='THU')&&this.equipped('DE08',c)&&this.proc(c,'DE08',10))bonus+=.08;
  const critical=c.critical||!!(c.upgrades?.stationary&&marked&&segment===0&&c.criticalRoll!==undefined&&c.criticalRoll<Math.min(.3,(c.criticalChance??.05)+(c.upgrades.markedCritical??0)/100));let damage=c.power*c.rank.maxDamagePerTargetS*fraction*c.attributeMultiplier*(1+Math.min(.4,bonus))*(critical?(c.criticalMultiplier??1.5):1);this.break(c,e,segment);const before=e.hp;this.host.damage(e,damage,c.id,d.style,distance(from,e)>.01?angleTo(from,e):c.angle,critical);if(d.style==='THU')this.event('skill_segment',c,{targetId:e.id,to:at(e),from:at(from),segment,phase,sourceId});this.event('skill_hit',c,{targetId:e.id,to:at(e),from:at(from),segment,value:Math.min(before,Math.round(damage)),critical});this.addCharge(c);this.upgrades.hit(c,e,segment);
  this.growing.hit(c,e);
- if(d.style==='BOW'&&c.skillId!=='BOW_06'&&this.passive('BOW_P1',c)&&c.upgrades?.stationary&&this.proc(c,'autoMark',8)){st.hunterMarkUntil=this.s.time+6;st.hunterMarkBonus=this.upgrades.passive(c,'BOW_P1').hunterMarkPercent??8;this.upgrades.mark(c,e);this.passiveEvent('BOW_P1',c,e,'hunterMark');}
+ this.automaticEnhancements(c,e);
  if((c.skillId==='FIR_01'||c.skillId==='FIR_02'&&this.equipped('W12',c)&&segment===0)&&e.hp>0)this.burn(e,c);
  if(d.style==='BOW'){if(this.passive('BOW_P2',c)&&this.ready('BOW_P2')){this.c.buffs.bowSpeed=this.passive('BOW_P2',c)/100;this.c.buffs.bowSpeedUntil=this.s.time+(this.upgrades.passive(c,'BOW_P2').speedSeconds??2);this.c.buffs.bowMovingBasic=this.upgrades.passive(c,'BOW_P2').movingBasicPercent??0;this.c.cooldowns.BOW_P2=5;this.passiveEvent('BOW_P2',c,undefined,'speed');}if((this.equipped('W08',c)||this.equipped('DE02',c))&&this.ready('bowEquipSpeed')){this.c.buffs.bowEquipSpeedUntil=this.s.time+2;this.c.cooldowns.bowEquipSpeed=this.equipped('W08',c)?4:5;}}
  if(d.style==='THU'&&this.passive('THU_P2',c)&&(new Set(c.hits.map(k=>k.slice(k.indexOf(':')+1))).size>=(this.upgrades.passive(c,'THU_P2').enemyThreshold??3)||this.upgrades.passive(c,'THU_P2').eliteSatisfies&&(!!e.bossId||e.kind==='captain'))&&this.proc(c,'THU_P2',10)){this.shield(this.s.player.maxHp*this.passive('THU_P2',c)/100,3);this.passiveEvent('THU_P2',c,undefined,'shield');}
- if(d.style==='FIR'&&e.hp<=0&&this.passive('FIR_P2',c)&&this.proc(c,'FIR_P2',6))for(const next of this.s.enemies.filter(n=>n.hp>0&&distance(n,e)<=(this.upgrades.passive(c,'FIR_P2').spreadRadius??3)&&this.host.visible(e,n)).sort((a,b)=>distance(a,e)-distance(b,e)||a.id.localeCompare(b.id)).slice(0,this.upgrades.passive(c,'FIR_P2').spreadTargets??2)){this.burn(next,c,this.passive('FIR_P2',c));this.passiveEvent('FIR_P2',c,next,'burn',e);}
+ if(d.style==='FIR'&&d.damageRole!=='single'&&e.hp<=0&&this.passive('FIR_P2',c)&&this.proc(c,'FIR_P2',6))for(const next of this.s.enemies.filter(n=>n.hp>0&&distance(n,e)<=(this.upgrades.passive(c,'FIR_P2').spreadRadius??3)&&this.host.visible(e,n)).sort((a,b)=>distance(a,e)-distance(b,e)||a.id.localeCompare(b.id)).slice(0,this.upgrades.passive(c,'FIR_P2').spreadTargets??2)){this.burn(next,c,this.passive('FIR_P2',c));this.passiveEvent('FIR_P2',c,next,'burn',e);}
  if(this.equipped('W02',c)&&d.style==='WAR'&&this.proc(c,'count:W02')){this.s.effectCounters.oath=(this.s.effectCounters.oath??0)+1;if(this.s.effectCounters.oath%3===0)this.secondary(c,'W02',e,4,2);}
  if(this.equipped('W04',c)&&c.skillId==='WAR_02'&&new Set(c.hits.map(k=>k.slice(k.indexOf(':')+1))).size>=2&&this.proc(c,'W04',8))this.c.buffs.crossNextDamage=this.s.time+4;
  if(this.equipped('W06',c)&&d.type==='active'&&marked&&this.proc(c,'W06',10))this.shield(8,3);
  if(this.equipped('W09',c)&&c.skillId==='BOW_01'&&this.proc(c,'W09',8)){const percent=e.bossId||e.kind==='captain'?.1:.25;if(st.slowUntil<=this.s.time||percent>=st.slowPercent){st.slowPercent=percent;st.slowUntil=Math.max(st.slowUntil,this.s.time+3);}}
- if(this.equipped('W10',c)&&c.skillId==='BOW_03'&&this.ready('secondary:W10')&&!c.procs.includes('secondary:W10')){this.secondary(c,'W10',e,c.power*.25,8);const next=this.s.enemies.filter(n=>n.hp>0&&n.id!==e.id&&distance(n,e)<=3&&this.host.visible(e,n)).sort((a,b)=>distance(a,e)-distance(b,e)||a.id.localeCompare(b.id))[0];if(next)this.host.damage(next,c.power*.25,c.id,'secondary',c.angle);}
+ if(this.equipped('W10',c)&&c.skillId==='BOW_03'&&this.ready('secondary:W10')&&!c.procs.includes('secondary:W10')){this.secondary(c,'W10',e,c.power*.5,8);}
  if(this.equipped('W14',c)&&c.skillId==='THU_01')this.secondary(c,'W14',e,c.power*.35,8);
  if(this.equipped('A08',c)&&d.style==='THU'&&marked&&this.proc(c,'A08',8)){const longest=Object.keys(this.c.cooldowns).filter(id=>PURE_SKILLS[id]&&PURE_SKILLS[id].type!=='ultimate').sort((a,b)=>this.c.cooldowns[b]-this.c.cooldowns[a])[0];if(longest)this.c.cooldowns[longest]=Math.max(0,this.c.cooldowns[longest]-.5);}
  if(this.equipped('A11',c)&&(d.style==='FIR'||d.style==='THU')&&this.proc(c,'count:A11')){const old=this.c.buffs.lastSpellId;const code=Object.keys(PURE_SKILLS).indexOf(c.skillId)+1;if(old&&old!==code&&this.ready('A11')){this.c.buffs.nextDamage=this.s.time+4;this.c.cooldowns.A11=6;}this.c.buffs.lastSpellId=code;}
@@ -352,8 +363,46 @@ export class PureCombat {
  if(this.equipped('L01',c)&&c.skillId==='WAR_01'&&st.lightningUntil>this.s.time&&c.procs.filter(k=>k.startsWith('legend:')).length<2){st.lightningUntil=0;c.procs.push(`legend:${e.id}`);this.secondary(c,`L01:${e.id}`,e,c.power*.3);}
  this.host.changed();
  }
- basicHit(e:EnemyState,base:number,action:string,angle:number,accuracy=playerCombatAttributes(this.s).accuracy):boolean{if(!this.contact(action,e,accuracy))return false;const key=`basic:${action}`,kind=EQUIPMENT[this.s.equipment.weapon]?.kind,attr=kind==='sword'?'strength':kind==='bow'?'dexterity':'intellect';let bonus=this.upgrades.basic(action);if((this.c.buffs.basicBonusUntil??0)>this.s.time){bonus+=.12;delete this.c.buffs.basicBonusUntil;}if((this.c.buffs.nextBasicUntil??0)>this.s.time){bonus+=.06;delete this.c.buffs.nextBasicUntil;}const critical=random(this.s.seed,`${action}:crit`)<combatCriticalChance(this.s);this.host.damage(e,base*(1+.008*(effectiveAttribute(this.s,attr)-10))*(1+Math.min(.4,bonus))*(critical?combatCriticalMultiplier(this.s):1),action,kind==='staff'?weaponCombatFamily(this.s.equipment.weapon,this.c):'basic',angle,critical);
- if(!this.s.receipts[key]){this.s.receipts[key]=true;if((this.c.buffs.thunderUntil??0)>this.s.time&&(this.c.buffs.thunderCharges??0)>0){this.c.buffs.thunderCharges--;if(this.c.buffs.thunderCharges===0&&this.c.buffs.thunderSource===3)this.upgrades.thunderThird(e);this.host.damage(e,this.c.buffs.thunderDamage,action,'secondary',angle);this.host.emit('skill_hit',undefined,{skillId:this.c.buffs.thunderSource===3?'THU_03':'THU_P1',family:'THU',rank:this.c.buffs.thunderRank,castId:action,shape:'selfBuff',from:at(e),to:at(e),targetId:e.id,segment:3-this.c.buffs.thunderCharges});}if(this.equipped('L01')&&kind==='sword'&&random(this.s.seed,`${action}:legend`)<.22)this.status(e).lightningUntil=this.s.time+7;}return true;
+ /** Enhancements have one shared source and trigger only after real contact. */
+ private automaticEnhancements(c:CombatCast,e:EnemyState){
+  const d=PURE_SKILLS[c.skillId],p=this.s.progression,time=this.s.time;
+  if(d.style==='BOW'&&c.skillId==='BOW_01'){
+   const r=allocatedSkillRank(p,'BOW_03');
+   if(r&&this.ready('BOW_03')&&this.proc(c,'enhancement:BOW_03')){
+    this.c.buffs.bowVolleyReadyUntil=time+5;this.c.buffs.bowVolleyRank=r.rank;
+    this.c.cooldowns.BOW_03=this.cooldownFor(PURE_SKILLS.BOW_03,r);
+    this.event('skill_status',c,{skillId:'BOW_03',rank:r.rank,status:'ready',duration:5});
+   }
+  }
+  if(d.style==='BOW'&&d.activation!=='automatic'&&c.skillId!=='BOW_06'&&c.upgrades?.stationary&&e.hp>0){
+   const r=allocatedSkillRank(p,'BOW_04'),key=r?'BOW_04':'autoMark';
+   if((r||this.passive('BOW_P1',c))&&this.ready(key)&&this.proc(c,'enhancement:BOW_04')){
+    const st=this.status(e),seconds=r?(r.upgradeEffects?.markSeconds??8):6;
+    st.hunterMarkUntil=time+seconds;st.hunterMarkBonus=r?.markedDirectSkillBonusPercent??this.upgrades.passive(c,'BOW_P1').hunterMarkPercent??8;e.markedUntil=st.hunterMarkUntil;
+    this.c.cooldowns[key]=r?this.cooldownFor(PURE_SKILLS.BOW_04,r):6;
+    this.upgrades.mark(r?{...c,skillId:'BOW_04',rank:r}:c,e);
+    this.event('skill_status',c,{skillId:r?'BOW_04':'BOW_P1',rank:r?.rank??1,status:'hunterMark',targetId:e.id,to:at(e),duration:seconds});
+   }
+  }
+  if(d.style==='THU'&&(c.procs.includes('enhancement-ready:THU_03')||c.procs.includes('passive-ready:THU_P1'))&&this.proc(c,'enhancement:thunderWeapon')){
+   const r=allocatedSkillRank(p,'THU_03');
+   if(r&&this.ready('THU_03')){
+    this.thunderWeapon(c,3,r);this.c.cooldowns.THU_03=this.cooldownFor(PURE_SKILLS.THU_03,r);
+    this.event('skill_status',c,{skillId:'THU_03',rank:r.rank,status:'thunderWeapon',duration:r.upgradeEffects?.buffSeconds??6});
+   }else if(!r){this.thunderWeapon(c,1);this.passiveEvent('THU_P1',c,undefined,'thunderWeapon');}
+  }
+ }
+ /** The follow-up uses the existing real projectile path and one damage budget. */
+ private automaticVolley(e:EnemyState,angle:number){
+  const s=this.s,b=this.c.buffs;if((b.bowVolleyReadyUntil??0)<=s.time)return;
+  b.bowVolleyReadyUntil=0;
+  const r=allocatedSkillRank(s.progression,'BOW_03');if(!r||e.hp<=0)return;
+  const equipment=Object.values(s.equipment).filter((id):id is string=>typeof id==='string'),id=this.host.id('autoVolley'),chance=combatCriticalChance(s),roll=random(s.seed,`${id}:crit`);
+  const c:CombatCast={id,skillId:'BOW_03',rank:copy(r),from:at(s.player),to:at(e),angle,elapsed:0,released:true,nextSegment:0,targets:[e.id],hits:[],breakHits:[],critical:roll<chance,criticalChance:chance,criticalRoll:roll,criticalMultiplier:combatCriticalMultiplier(s),accuracy:playerCombatAttributes(s).accuracy,power:skillPower(s.progression)*equipmentPowerMultiplier(s.equipment.weapon,s.progression.level)*(1+equippedGearBonus(s).power/100),attributeMultiplier:1+.008*(effectiveAttribute(s,'dexterity')-10),damageBonus:0,chargeGranted:false,chargeBonus:0,procs:['automatic'],equipment,passives:Object.fromEntries(this.c.passiveSlots.filter((v):v is string=>!!v).map(v=>[v,this.passive(v)])),weapon:s.equipment.weapon,growthLevel:s.progression.level,releaseTime:s.time};
+  this.upgrades.prepare(c);this.c.casts.push(c);this.event('skill_release',c,{phase:'automatic'});this.segment(c,0);c.nextSegment=1;
+ }
+ basicHit(e:EnemyState,base:number,action:string,angle:number,accuracy=playerCombatAttributes(this.s).accuracy):boolean{if(!this.contact(action,e,accuracy))return false;const key=`basic:${action}`,kind=EQUIPMENT[this.s.equipment.weapon]?.kind,attr=kind==='sword'?'strength':kind==='bow'?'dexterity':'intellect';let bonus=this.upgrades.basic(action);if((this.c.buffs.basicBonusUntil??0)>this.s.time){bonus+=.12;delete this.c.buffs.basicBonusUntil;}if((this.c.buffs.nextBasicUntil??0)>this.s.time){bonus+=.06;delete this.c.buffs.nextBasicUntil;}const critical=random(this.s.seed,`${action}:crit`)<combatCriticalChance(this.s);if(kind==='sword'&&this.s.action?.id===action&&this.s.action.comboStage===3)this.poise(e,COMBAT_TACTICS.finisherPoise,'BASIC_FINISH');this.host.damage(e,base*(1+.008*(effectiveAttribute(this.s,attr)-10))*(1+Math.min(.4,bonus))*(critical?combatCriticalMultiplier(this.s):1),action,kind==='staff'?weaponCombatFamily(this.s.equipment.weapon,this.c):'basic',angle,critical);
+ if(!this.s.receipts[key]){this.s.receipts[key]=true;if(kind==='bow')this.automaticVolley(e,angle);if((this.c.buffs.thunderUntil??0)>this.s.time&&(this.c.buffs.thunderCharges??0)>0){this.c.buffs.thunderCharges--;if(this.c.buffs.thunderCharges===0&&this.c.buffs.thunderSource===3)this.upgrades.thunderThird(e);this.host.damage(e,this.c.buffs.thunderDamage,action,'secondary',angle);this.host.emit('skill_hit',undefined,{skillId:this.c.buffs.thunderSource===3?'THU_03':'THU_P1',family:'THU',rank:this.c.buffs.thunderRank,castId:action,shape:'selfBuff',from:at(e),to:at(e),targetId:e.id,segment:3-this.c.buffs.thunderCharges});}if(this.equipped('L01')&&kind==='sword'&&random(this.s.seed,`${action}:legend`)<.22)this.status(e).lightningUntil=this.s.time+7;}return true;
  }
  /** Freeze only the next leg on an actual contact. The original arrow ID,
   * hit ledger and total victim cap survive each turn; nothing is spawned. */
@@ -375,18 +424,21 @@ export class PureCombat {
  const targets=this.s.enemies.filter(e=>e.hp>0&&!q.hits.includes(e.id)&&(q.skillId==='BOW_02'?(!q.chainOrigin||distance(e,q.chainOrigin)<=(c.rank.geometry?.radiusMetres??0)+.001):(!q.targetId||q.targetId===e.id))&&segmentDistance(before,q,e)<=(q.width??.3)/2+enemyHurtRadius(e)&&this.host.visible(before,e)).sort((a,b)=>distance(a,before)-distance(b,before)||a.id.localeCompare(b.id));
  const anchor=(this.host.anchors?.()??[]).filter(h=>!q.hits.includes(h.id)&&segmentDistance(before,q,h)<=(q.width??.3)/2+h.radius&&this.host.visible(before,h)).sort((a,b)=>distance(a,before)-distance(b,before)||a.id.localeCompare(b.id))[0];
  if(anchor&&(!targets.length||distance(before,anchor)<distance(before,targets[0]))){q.hits.push(anchor.id);this.host.damageAnchor?.(anchor.id,q.damage*c.attributeMultiplier*(1+Math.min(.4,c.damageBonus))*(c.critical?(c.criticalMultiplier??1.5):1),c.id);if(q.skillId==='FIR_01')this.impactFire(c,anchor,q.segment??0);q.remaining=0;return true;}
- for(const e of targets){q.hits.push(e.id);if(q.skillId==='FIR_01'){this.impactFire(c,e,q.segment??0);q.remaining=0;break;}const fraction=q.damage/(c.power*c.rank.maxDamagePerTargetS);let attenuation=1;if(q.skillId==='BOW_01')attenuation=Math.max(this.equipped('L02',c)?.7:.6,1-.2*(q.hits.length-1));if(q.skillId==='BOW_02'&&q.hits.length>1)attenuation=c.rank.followUpDamageFraction??.75;this.hit(c,e,fraction*attenuation,q.segment??0,before);
+ for(const e of targets){q.hits.push(e.id);if(q.skillId==='FIR_01'){this.impactFire(c,e,q.segment??0,e);q.remaining=0;break;}const fraction=q.damage/(c.power*c.rank.maxDamagePerTargetS);let attenuation=1;if(q.skillId==='BOW_01')attenuation=Math.max(this.equipped('L02',c)?.7:.6,1-.2*(q.hits.length-1));if(q.skillId==='BOW_02'&&q.hits.length>1)attenuation=c.rank.followUpDamageFraction??.75;this.hit(c,e,fraction*attenuation,q.segment??0,before);
  if(q.skillId==='BOW_02'){q.feedbackReported=true;if(!c.hits.includes(`${q.segment??0}:${e.id}`)||!this.redirectArrow(c,q,e))q.remaining=0;break;}
  if(q.hits.length>=q.pierce){q.remaining=0;break;}}
  if(q.remaining<=0&&q.skillId==='FIR_01'&&!q.hits.length)this.impactFire(c,q,q.segment??0);return true;
  }
- private impactFire(c:CombatCast,center:Point,segment:number){for(const e of this.s.enemies.filter(e=>e.hp>0&&distance(center,e)<=(c.rank.geometry?.radiusMetres??.45)+enemyHurtRadius(e)&&this.host.visible(center,e)).sort((a,b)=>distance(a,center)-distance(b,center)||a.id.localeCompare(b.id)))this.hit(c,e,1,segment,center);this.event('skill_segment',c,{from:at(center),to:at(center),phase:'impact'});}
+ private impactFire(c:CombatCast,center:Point,segment:number,direct?:EnemyState){
+  const targets=PURE_SKILLS[c.skillId].damageRole==='single'?(direct&&direct.hp>0?[direct]:[]):this.s.enemies.filter(e=>e.hp>0&&distance(center,e)<=(c.rank.geometry?.radiusMetres??.45)+enemyHurtRadius(e)&&this.host.visible(center,e)).sort((a,b)=>distance(a,center)-distance(b,center)||a.id.localeCompare(b.id));
+  for(const e of targets)this.hit(c,e,1,segment,center);this.event('skill_segment',c,{from:at(center),to:at(center),phase:'impact'});
+ }
  step(dt:number){const s=this.s,c=this.c,b=c.buffs;this.growing.step();this.upgrades.step(dt);this.c.ultimateLock=Math.max(0,this.c.ultimateLock-dt);this.zones();for(const key of Object.keys(c.cooldowns))c.cooldowns[key]=Math.max(0,c.cooldowns[key]-dt);
  if(s.flags.counter_ready&&(b.counterReadyUntil??0)<s.time)s.flags.counter_ready=false;
  if((b.shieldUntil??0)<=s.time){if((b.ironShield??0)>0&&this.equipped('DE07')&&(b.ironAbsorbed??0)>0)b.basicBonusUntil=s.time+4;delete b.ironShield;b.shieldAmount=0;s.player.shield=0;}else b.shieldAmount=s.player.shield;
- if((b.healCount??0)>0&&s.time+1e-8>=(b.healNext??0)){const first=b.healFirstFraction??1/3,fraction=b.healCount===3?first:(1-first)/2,emergency=b.healCount===1&&s.player.hp<s.player.maxHp*.5?s.player.maxHp*(b.healEmergency??0)/100:0,amount=b.healAmount*fraction+emergency;s.player.hp=Math.min(s.player.maxHp,s.player.hp+amount);b.healCount--;b.healNext+=1;this.host.emit('heal',undefined,{value:amount});this.host.emit('skill_status',undefined,{skillId:'COM_02',family:'COM',rank:b.healRank,castId:'heal',shape:'selfHeal',from:at(s.player),to:at(s.player),segment:3-b.healCount,duration:.35,status:'heal'});}
+ if((b.healCount??0)>0&&s.time+1e-8>=(b.healNext??0)){const first=b.healFirstFraction??1/3,fraction=b.healCount===3?first:(1-first)/2,emergency=b.healCount===1&&s.player.hp<s.player.maxHp*.5?s.player.maxHp*(b.healEmergency??0)/100:0,amount=restorePlayerHealth(s,b.healAmount*fraction+emergency);b.healCount--;b.healNext+=1;this.host.emit('heal',undefined,{value:amount});this.host.emit('skill_status',undefined,{skillId:'COM_02',family:'COM',rank:b.healRank,castId:'heal',shape:'selfHeal',from:at(s.player),to:at(s.player),segment:3-b.healCount,duration:.35,status:'heal'});}
  for(const e of s.enemies){const st=c.statuses[e.id];if(!st||e.hp<=0)continue;if(st.burnUntil>s.time&&s.time+1e-8>=st.burnNext){this.host.damage(e,st.burnDamage,'burn','burn',0);st.burnNext+=.5;}e.markedUntil=st.hunterMarkUntil;}
- for(const cast of c.casts){if((cast.rank.geometry?.kind==='meleeFan'||cast.rank.geometry?.kind==='meleeRushCross'||combatActionBeatCount(cast)>1)&&s.action?.id!==cast.id){cast.nextSegment=cast.rank.authoredDamageHits;continue;}if(!cast.released||cast.rush&&cast.rush.elapsed<cast.rush.duration||cast.skillId==='COM_01'||cast.skillId==='BOW_06'||cast.rank.authoredDamageHits===0||cast.skillId==='BOW_04'||cast.skillId==='THU_02')continue;const elapsed=s.time-(cast.releaseTime??s.time);if(cast.skillId==='FIR_05'&&(cast.waveProgress??1)<1){const progress=Math.min(1,elapsed/.3),depth=cast.rank.geometry?.depthMetres??1;for(const e of this.targets(cast)){const forward=(e.x-cast.to.x)*Math.sin(cast.angle)+(e.z-cast.to.z)*Math.cos(cast.angle);if((forward+depth/2)/depth<=progress)this.hit(cast,e,.4,0,cast.to);}cast.waveProgress=progress;}const count=cast.rank.authoredDamageHits,interval=combatSegmentInterval(cast.skillId,cast.rank);if(cast.nextSegment<count&&elapsed+1e-8>=cast.nextSegment*interval){this.segment(cast,cast.nextSegment);cast.nextSegment++;}}
+ for(const cast of c.casts){if(!cast.procs.includes('automatic')&&(cast.rank.geometry?.kind==='meleeFan'||cast.rank.geometry?.kind==='meleeRushCross'||combatActionBeatCount(cast)>1)&&s.action?.id!==cast.id){cast.nextSegment=cast.rank.authoredDamageHits;continue;}if(!cast.released||cast.rush&&cast.rush.elapsed<cast.rush.duration||cast.skillId==='COM_01'||cast.skillId==='BOW_06'||cast.rank.authoredDamageHits===0||cast.skillId==='BOW_04'||cast.skillId==='THU_02')continue;const elapsed=s.time-(cast.releaseTime??s.time);if(cast.skillId==='FIR_05'&&(cast.waveProgress??1)<1){const progress=Math.min(1,elapsed/.3),depth=cast.rank.geometry?.depthMetres??1;for(const e of this.targets(cast)){const forward=(e.x-cast.to.x)*Math.sin(cast.angle)+(e.z-cast.to.z)*Math.cos(cast.angle);if((forward+depth/2)/depth<=progress)this.hit(cast,e,.4,0,cast.to);}cast.waveProgress=progress;}const count=cast.rank.authoredDamageHits,interval=combatSegmentInterval(cast.skillId,cast.rank);if(cast.nextSegment<count&&elapsed+1e-8>=cast.nextSegment*interval){this.segment(cast,cast.nextSegment);cast.nextSegment++;}}
  c.casts=c.casts.filter(cast=>s.action?.id===cast.id||s.projectiles.some(q=>q.castId===cast.id)||(cast.zoneUntil??0)>s.time||cast.released&&cast.nextSegment<cast.rank.authoredDamageHits&&cast.skillId!=='BOW_04'&&cast.skillId!=='THU_02');
  for(const id of this.meleeFeedback.keys())if(!c.casts.some(cast=>cast.id===id))this.meleeFeedback.delete(id);
  }
@@ -403,15 +455,15 @@ export class PureCombat {
 // Restore clears these casts; damage, angles, timing and every other field must
 // still match the current authored rank, so this cannot authorize forged damage.
 const PRIOR_MELEE_REACH:Record<string,readonly number[]>={WAR_01:[2.4,2.4,2.54,2.64,2.76],WAR_05:[3.5,3.5,3.71,3.85,4.02]};
-function acceptedRankSnapshot(id:string,rank:CombatSkillRank,version=4){
+function acceptedRankSnapshot(id:string,rank:CombatSkillRank,version=5){
  const current=combatSkillCatalog(version)[id]?.ranks[rank.rank-1];if(!current)return false;
  if(JSON.stringify(rank)===JSON.stringify(current))return true;
  const old=PRIOR_MELEE_REACH[id]?.[rank.rank-1];if(old===undefined||rank.rangeMetres!==old||rank.castRangeMetres!==old||rank.geometry?.kind!=='meleeFan'||rank.geometry.radiusMetres!==old)return false;
  const normalized={...rank,rangeMetres:current.rangeMetres,castRangeMetres:current.castRangeMetres,geometry:{...rank.geometry,radiusMetres:current.geometry?.radiusMetres}};
  return JSON.stringify(normalized)===JSON.stringify(current);
 }
-export function validateCombat(value:unknown,progression:number|ProgressionState,gearPower:Record<string,number>={},gearStats:Record<string,Partial<RandomForgingBonus>>={}){const level=typeof progression==='number'?progression:progression.level;const c=value as CombatState,legacy=c?.version===2,catalog=combatSkillCatalog(c?.version),fail=()=>{throw new Error('无效的纯技能存档');};if(!c||![2,3,4].includes(c.version)||!Array.isArray(c.activeSlots)||c.activeSlots.length!==(c.version===3?3:4)||!Array.isArray(c.passiveSlots)||c.passiveSlots.length!==2||!Number.isFinite(c.charge)||c.charge<0||c.charge>100||!Number.isFinite(c.ultimateLock)||c.ultimateLock<0||c.ultimateLock>45)return fail();
- if(!validateCombatLoadouts(c,legacy))return fail();
+export function validateCombat(value:unknown,progression:number|ProgressionState,gearPower:Record<string,number>={},gearStats:Record<string,Partial<RandomForgingBonus>>={}){const level=typeof progression==='number'?progression:progression.level;const c=value as CombatState,legacy=c?.version===2,catalog=combatSkillCatalog(c?.version),fail=()=>{throw new Error('无效的纯技能存档');};if(!c||![2,3,4,5].includes(c.version)||!Array.isArray(c.activeSlots)||c.activeSlots.length!==(c.version===3?3:4)||!Array.isArray(c.passiveSlots)||c.passiveSlots.length!==2||!Number.isFinite(c.charge)||c.charge<0||c.charge>100||!Number.isFinite(c.ultimateLock)||c.ultimateLock<0||c.ultimateLock>45)return fail();
+ if(!validateCombatLoadouts(c,legacy,progression))return fail();
  if(c.engagement!==undefined){const e=c.engagement;if(!e||typeof e!=='object'||Array.isArray(e)||Object.keys(e).some(k=>!['area','enemyIds','quietSince'].includes(k))||typeof e.area!=='string'||e.area.length>100||!Array.isArray(e.enemyIds)||e.enemyIds.length>2000||e.enemyIds.some(id=>typeof id!=='string'||id.length>180)||new Set(e.enemyIds).size!==e.enemyIds.length||e.quietSince!==undefined&&(!Number.isFinite(e.quietSince)||e.quietSince<0||e.quietSince>1e10))return fail();}
  const check=(id:string|null,type:string)=>id===null||!!catalog[id]&&catalog[id].type===type&&(legacy||type==='passive'||catalog[id].style===c.family||type==='active'&&catalog[id].style==='COM')&&(typeof progression==='number'?level>=catalog[id].unlockLevel:!!progression.learned[id]&&(progression.secondChapter||level>=catalog[id].unlockLevel));if(c.activeSlots.some(id=>!check(id,'active'))||new Set(c.activeSlots.filter(Boolean)).size!==c.activeSlots.filter(Boolean).length||c.passiveSlots.some((id,i)=>!check(id,'passive')||id!==null&&(i===0?level<6:level<11)&&!(typeof progression!=='number'&&progression.secondChapter))||new Set(c.passiveSlots.filter(Boolean)).size!==c.passiveSlots.filter(Boolean).length||!check(c.ultimate,'ultimate'))return fail();
  for(const record of [c.cooldowns,c.buffs])if(!record||Object.entries(record).some(([k,v])=>k.length>180||!Number.isFinite(v)||v<0||v>1e10))return fail();if(!c.statuses||!Array.isArray(c.casts)||c.casts.length>200)return fail();

@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>剑与火 · 技能动态设计审阅</title>
+<style>
+:root{color-scheme:dark;--ink:#e8ddc8;--muted:#a89b86;--gold:#c8a86d;--line:#6f5938;--surface:#231c15;--accent:#e7d3ac;--soft:#c8a86d20;font-family:"Microsoft YaHei",sans-serif}
+*{box-sizing:border-box}body{margin:0;min-width:340px;background:radial-gradient(ellipse at 40% 0,#36291c 0,#17120e 57%,#100d0b 100%);color:var(--ink)}button,select,input{font:inherit}button,select{color:inherit}button{cursor:pointer}button:disabled{cursor:default;opacity:.5}button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:4px}button{border:1px solid #806744;background:linear-gradient(180deg,#30251b,#201912);border-radius:4px;transition:background .12s,border-color .12s}button:hover{background:#3b2f22;border-color:#c7aa75}svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.app{max-width:1740px;margin:auto;padding:27px 34px 28px}.masthead{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;margin-bottom:24px}.eyebrow{font-size:11px;letter-spacing:.2em;color:#b99a65;margin-bottom:8px}.masthead h1{font-family:"Songti SC","SimSun",serif;font-weight:600;font-size:29px;letter-spacing:.06em;margin:0 0 9px}.lead{font-size:13px;line-height:1.75;color:var(--muted);margin:0}.status-pill{font-size:11px;white-space:nowrap;margin-top:9px;letter-spacing:.08em;border:1px solid #715b39;background:#30231866;padding:8px 12px;color:#d5b67f}.status-pill:before{content:"";display:inline-block;width:5px;height:5px;border-radius:50%;background:#d1aa68;margin:0 8px 2px 0}
+.toolbar{display:flex;justify-content:space-between;align-items:end;gap:16px;border-bottom:1px solid #725c3b;margin-bottom:19px}.family-tabs{display:flex;gap:5px;flex-wrap:wrap}.family-tab{border:0;border-radius:0;background:none;box-shadow:none;padding:12px 21px 14px;min-height:48px;position:relative;font-family:"Songti SC","SimSun",serif;font-size:19px;color:#aa9b81}.family-tab:hover{background:#44332355;border:0;color:#ead5ad}.family-tab[aria-selected=true]{color:var(--accent);background:linear-gradient(0deg,var(--soft),transparent)}.family-tab[aria-selected=true]:after{content:"";position:absolute;bottom:-1px;left:13px;right:13px;height:2px;background:var(--accent)}.view-button{display:flex;align-items:center;gap:8px;padding:10px 14px;min-height:40px;margin-bottom:9px;font-size:12px}.view-button[aria-pressed=true]{background:#55412a;color:#ffe4ac;border-color:#ba985d}
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) 248px;gap:19px;align-items:start}.main{min-width:0}.stage-heading{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:1px 1px 11px}.stage-heading h2{font-family:"Songti SC","SimSun",serif;font-size:23px;font-weight:500;letter-spacing:.03em;margin:0}.role-tag{font-size:11px;color:var(--muted);border-left:1px solid #6b5637;padding-left:13px;margin-left:13px;vertical-align:middle;font-family:"Microsoft YaHei",sans-serif}.stage-actions{display:flex;gap:7px}.icon-button{width:35px;height:35px;display:grid;place-items:center;flex:none}.stage-wrap{position:relative;overflow:hidden;aspect-ratio:844/390;border:1px solid #9e7d46;box-shadow:0 0 0 3px #17110b,0 0 0 4px #5a462a,0 17px 42px #0006;background:#211c16}.stage-wrap:before,.stage-wrap:after{content:"";position:absolute;z-index:2;pointer-events:none;width:18px;height:18px;border-color:#d9b672;border-style:solid}.stage-wrap:before{top:6px;left:6px;border-width:1px 0 0 1px}.stage-wrap:after{right:6px;bottom:6px;border-width:0 1px 1px 0}canvas{display:block;width:100%;height:100%;background:#211c16}.loading{position:absolute;inset:0;display:grid;place-items:center;background:#221c15f5;color:#d7bc8c;font-size:14px;letter-spacing:.08em}.loading[hidden]{display:none}.stage-wrap:fullscreen{aspect-ratio:auto;border:none;padding:0;background:#100d09;display:flex;align-items:center;justify-content:center}.stage-wrap:fullscreen canvas{max-height:100vh;width:auto;max-width:100vw;height:auto;aspect-ratio:844/390}
+.controls{display:flex;gap:12px;align-items:center;margin-top:20px;padding:0 1px}.play-button{height:39px;min-width:83px;display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px}.time-value{font-family:Consolas,monospace;font-size:11px;color:#c5b48e;min-width:84px;white-space:nowrap}.timeline{accent-color:var(--accent);width:100%;height:25px;margin:0;cursor:pointer;min-width:45px}.speed-label{position:relative;display:flex;align-items:center;color:#b6a483;font-size:11px;gap:6px;white-space:nowrap}.speed-label select{height:35px;min-width:65px;padding:4px 6px;border:1px solid #756040;border-radius:3px;background:#282015;color:#deceb1}.timeline-phases{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;margin:14px 1px 0;gap:1px}.timeline-phases span{color:#8c806d;font-size:10px;border-top:2px solid #4a3b28;padding-top:6px;text-align:center;letter-spacing:.08em}.timeline-phases span.on{border-color:var(--accent);color:#d0ba93}.settings-row{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 1px 0;color:#a7987e;font-size:11px}.checkbox{display:flex;align-items:center;gap:8px;cursor:pointer}.checkbox input{accent-color:var(--accent);margin:0;width:14px;height:14px}.keyboard{font-size:10px;color:#847763}.keyboard kbd{font:10px Consolas,monospace;color:#b09d7b;border:1px solid #5f4d33;padding:2px 4px;border-radius:2px;margin:0 2px}
+.skill-panel{border:1px solid #695233;background:linear-gradient(135deg,#2a2118e6,#1e1812e6);min-width:0}.panel-heading{padding:16px 15px 13px;border-bottom:1px solid #5b472f;display:flex;justify-content:space-between;align-items:center}.panel-heading h2{font-family:"Songti SC","SimSun",serif;font-size:18px;font-weight:400;margin:0;color:#d8c299}.count{font-size:10px;letter-spacing:.08em;color:#948366}.skill-list{padding:7px;max-height:555px;overflow:auto;scrollbar-width:thin;scrollbar-color:#8c7043 #211b14}.skill-button{display:flex;width:100%;text-align:left;align-items:center;gap:10px;min-height:50px;margin:2px 0;border:1px solid transparent;border-radius:3px;background:none;padding:8px 10px}.skill-button:hover{background:#3b2f22;border-color:#78613f}.skill-button[aria-pressed=true]{background:linear-gradient(100deg,#755c343d,#33271b8f);border-color:#96754b}.skill-index{font:11px Georgia,serif;color:#9c835b;width:17px;text-align:center;flex:none}.skill-copy{min-width:0}.skill-name{font-size:13px;color:#d8c9ac;margin:0 0 3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.skill-button[aria-pressed=true] .skill-name{color:var(--accent)}.skill-role{color:#92816a;font-size:10px;line-height:1.4}.skill-button[aria-pressed=true] .skill-index{color:var(--accent)}.panel-foot{font-size:10px;color:#958365;line-height:1.8;margin:0;padding:12px 16px 15px;border-top:1px solid #51402b}.panel-foot strong{font-weight:400;color:#c2a875}.review-note{font-size:11px;line-height:1.9;color:#968872;margin:20px 0 0;border-top:1px solid #54412b;padding-top:15px}.review-note strong{color:#c6b18a;font-weight:400}.footer{margin-top:23px;display:flex;justify-content:space-between;gap:20px;font-size:10px;color:#756852;letter-spacing:.05em}.error{color:#e0b69f}
+.capture-mode{background:#211c16;min-width:0;overflow:hidden}.capture-mode .app{padding:0;margin:0;max-width:none}.capture-mode .masthead,.capture-mode .toolbar,.capture-mode .stage-heading,.capture-mode .skill-panel,.capture-mode .controls,.capture-mode .timeline-phases,.capture-mode .settings-row,.capture-mode .review-note,.capture-mode .footer{display:none}.capture-mode .workspace{display:block}.capture-mode .stage-wrap{position:absolute;inset:0;aspect-ratio:auto;border:0;box-shadow:none}.capture-mode .stage-wrap:before,.capture-mode .stage-wrap:after{display:none}.capture-mode canvas{width:100vw!important;height:100vh!important}
+@media(min-width:1700px){.workspace{grid-template-columns:minmax(0,1fr) 278px}.skill-list{max-height:625px}.skill-button{min-height:55px}}
+@media(max-width:1000px){.app{padding:22px 20px}.workspace{grid-template-columns:minmax(0,1fr) 215px;gap:15px}.family-tab{padding-left:16px;padding-right:16px}.masthead h1{font-size:26px}.skill-list{max-height:460px}.keyboard{display:none}.role-tag{display:none}.stage-heading h2{font-size:20px}}
+@media(max-width:750px){.app{padding:18px 14px}.masthead{margin-bottom:17px}.masthead h1{font-size:23px;letter-spacing:.03em}.lead{font-size:11px}.status-pill{font-size:9px;padding:6px 8px;margin-top:3px}.eyebrow{font-size:9px}.workspace{display:flex;flex-direction:column}.main,.skill-panel{width:100%}.skill-list{display:grid;grid-template-columns:1fr 1fr;max-height:none}.panel-heading{padding:12px 14px}.panel-foot{padding:10px 14px}.family-tab{font-size:16px;padding:10px 13px}.view-button{font-size:10px;padding:8px 10px;gap:6px}.toolbar{margin-bottom:17px}.controls{gap:8px;margin-top:16px}.play-button{min-width:68px}.time-value{font-size:10px;min-width:70px}.speed-label>span{display:none}.settings-row{padding-top:12px}.review-note{margin-top:14px;font-size:10px}.footer{font-size:9px;gap:10px}.stage-heading h2{font-size:20px}}
+@media(prefers-reduced-motion:reduce){button{transition:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="masthead"><div><div class="eyebrow">SWORD &amp; FIRE · MOTION STUDY</div><h1>技能动态设计审阅</h1><p class="lead">四职业整套表现 · 起手、释放、命中与消散</p></div><span class="status-pill">设计预览 · 尚未接入</span></header>
+<div class="toolbar"><div class="family-tabs" role="tablist" aria-label="选择职业"><button class="family-tab" role="tab" data-family="WAR" aria-selected="true">战士</button><button class="family-tab" role="tab" data-family="BOW" aria-selected="false">弓系</button><button class="family-tab" role="tab" data-family="FIR" aria-selected="false">火系</button><button class="family-tab" role="tab" data-family="THU" aria-selected="false">雷系</button></div><button id="compare" class="view-button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z"/></svg>四职业总览</button></div>
+<div class="workspace"><main class="main"><div class="stage-heading"><h2><span id="skill-title">正在准备预览</span><span id="role-title" class="role-tag"></span></h2><div class="stage-actions"><button id="restart" class="icon-button" aria-label="重新播放" title="重新播放 · R"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10a8 8 0 1 1 1 7M4 4v6h6"/></svg></button><button id="fullscreen" class="icon-button" aria-label="全屏预览" title="全屏 · F"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5"/></svg></button></div></div>
+<div class="stage-wrap" id="stage"><canvas id="preview-canvas" width="1266" height="585" aria-label="技能动态设计画面"></canvas><div id="loading" class="loading" role="status">正在准备动态设计素材…</div></div>
+<div class="controls"><button id="play" class="play-button" aria-label="暂停播放"><svg id="play-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14M16 5v14"/></svg><span id="play-label">暂停</span></button><input id="timeline" class="timeline" type="range" min="0" max="3" step="0.001" value="0" aria-label="动画时间轴"><span id="time" class="time-value">0.00 / 3.00s</span><label class="speed-label"><span>速度</span><select id="speed" aria-label="播放速度"><option value="0.25">0.25×</option><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="1.5">1.5×</option></select></label></div>
+<div class="timeline-phases" aria-hidden="true"><span>起手</span><span>释放</span><span>命中</span><span>消散</span></div>
+<div class="settings-row"><label class="checkbox"><input id="labels" type="checkbox" checked>显示分镜标注</label><span class="keyboard"><kbd>空格</kbd>播放 <kbd>←</kbd><kbd>→</kbd>逐帧 <kbd>R</kbd>重播 <kbd>F</kbd>全屏</span></div>
+<p class="review-note"><strong>审阅重点：</strong>战士扩大挥斩的视觉覆盖；法阵沿用首版连贯线稿与各系配色；陨石作为火系终极，雷电保持粗主干与清楚分支。<br>这些是独立的动态概念表现，角色、命中与范围只用于设计示意，尚未写入游戏判定、数值或实际技能动画。</p>
+</main><aside class="skill-panel"><div class="panel-heading"><h2 id="family-title">战士技能</h2><span class="count" id="skill-count"></span></div><div id="skill-list" class="skill-list" aria-label="选择技能"></div><p class="panel-foot">点击技能查看完整施放。<br><strong>拖动时间轴</strong>可检查关键帧，<strong>慢放</strong>可比较出手与命中节奏。</p></aside></div>
+<footer class="footer"><span>剑与火 · 2026.11 · 动态设计候选</span><span>原型展示，不代表运行接入或真机验收</span></footer>
+</div>
+<script src="effects.js"></script>
+<script>
+(() => {
+  'use strict';
+  const canvas = document.getElementById('preview-canvas'), ctx = canvas.getContext('2d');
+  const $ = id => document.getElementById(id);
+  const familyNames = {WAR:'战士',BOW:'弓系',FIR:'火系',THU:'雷系',COM:'通用'};
+  const familyColors = {WAR:'#e6d3ab',BOW:'#7bdeb4',FIR:'#f7a765',THU:'#a9b4ff',COM:'#f7da9d'};
+  const state = {family:'WAR',skill:null,time:0,playing:true,speed:1,compare:false,labels:true,last:performance.now()};
+  let api, dragging = false, raf = 0;
+  const duration = skill => Math.max(.1, Number(skill?.duration) || 3);
+  const familyOf = skill => String(skill?.family || 'COM').toUpperCase();
+  function roleLabel(skill) { return skill?.roleLabel || skill?.role || ''; }
+  function render() {
+    if (!api || !state.skill) return;
+    api.render(ctx,{time:state.time,skillId:state.skill.id,width:canvas.width,height:canvas.height,showLabels:state.labels,compare:state.compare});
+    const end=duration(state.skill);
+    $('timeline').max=end; $('timeline').value=Math.min(state.time,end);
+    $('time').textContent=`${Math.min(state.time,end).toFixed(2)} / ${end.toFixed(2)}s`;
+    const fraction=Math.min(.999,state.time/end);
+    document.querySelectorAll('.timeline-phases span').forEach((item,i)=>item.classList.toggle('on',Math.floor(fraction*4)===i));
+  }
+  function playState() {
+    $('play-label').textContent=state.playing?'暂停':'播放';
+    $('play').setAttribute('aria-label',state.playing?'暂停播放':'开始播放');
+    $('play-icon').innerHTML=state.playing?'<path d="M8 5v14M16 5v14"/>':'<path d="m8 4 12 8-12 8z"/>';
+  }
+  function updateTitle() {
+    $('skill-title').textContent=state.compare?'四职业动态总览':state.skill?.name || '';
+    $('role-title').textContent=state.compare?'同场景对照':roleLabel(state.skill);
+    $('compare').setAttribute('aria-pressed',String(state.compare));
+  }
+  function choose(skill,reset=true) {
+    if (!skill) return;
+    state.skill=skill;
+    const fam=familyOf(skill);
+    if (familyNames[fam] && fam!=='COM') state.family=fam;
+    if (reset) state.time=0;
+    document.documentElement.style.setProperty('--accent',familyColors[state.family] || familyColors.WAR);
+    document.documentElement.style.setProperty('--soft',(familyColors[state.family] || familyColors.WAR)+'20');
+    document.querySelectorAll('.family-tab').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.family===state.family)));
+    updateTitle(); buildList();render();
+  }
+  function buildList() {
+    const skills=api.skills.filter(s=>familyOf(s)===state.family || familyOf(s)==='COM');
+    $('family-title').textContent=(familyNames[state.family]||state.family)+'技能';
+    $('skill-count').textContent=String(skills.length).padStart(2,'0')+' 项';
+    const fragment=document.createDocumentFragment();
+    for (let i=0;i<skills.length;i++) {
+      const s=skills[i],b=document.createElement('button');b.className='skill-button';
+      b.setAttribute('aria-pressed',String(s.id===state.skill?.id));
+      const n=document.createElement('span');n.className='skill-index';n.textContent=String(i+1).padStart(2,'0');
+      const copy=document.createElement('span');copy.className='skill-copy';
+      const title=document.createElement('span');title.className='skill-name';title.style.display='block';title.textContent=s.name;
+      const role=document.createElement('span');role.className='skill-role';role.textContent=(familyOf(s)==='COM'?'通用 · ':'')+roleLabel(s);
+      copy.append(title,role);b.append(n,copy);b.addEventListener('click',()=>choose(s));fragment.append(b);
+    }
+    $('skill-list').replaceChildren(fragment);
+  }
+  document.querySelectorAll('.family-tab').forEach(b=>b.addEventListener('click',()=>{
+    if (!api) return;
+    state.family=b.dataset.family;
+    choose(api.skills.find(s=>familyOf(s)===state.family));
+  }));
+  $('play').addEventListener('click',()=>{state.playing=!state.playing;state.last=performance.now();playState();});
+  $('restart').addEventListener('click',()=>{state.time=0;render();});
+  $('speed').addEventListener('change',e=>state.speed=Number(e.target.value));
+  $('compare').addEventListener('click',()=>{state.compare=!state.compare;state.time=0;updateTitle();render();});
+  $('labels').addEventListener('change',e=>{state.labels=e.target.checked;render();});
+  $('timeline').addEventListener('pointerdown',()=>dragging=true);
+  const stopDrag=()=>{dragging=false;state.last=performance.now();};window.addEventListener('pointerup',stopDrag);window.addEventListener('pointercancel',stopDrag);
+  $('timeline').addEventListener('input',e=>{state.time=Number(e.target.value);render();});
+  $('fullscreen').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await $('stage').requestFullscreen();}catch{}});
+  window.addEventListener('keydown',e=>{
+    if (['INPUT','SELECT','TEXTAREA','BUTTON'].includes(document.activeElement?.tagName)) return;
+    if (e.code==='Space'){e.preventDefault();state.playing=!state.playing;playState();}
+    if (e.code==='ArrowLeft'||e.code==='ArrowRight'){e.preventDefault();state.playing=false;state.time=Math.min(duration(state.skill),Math.max(0,state.time+(e.code==='ArrowRight'?1:-1)/30));playState();render();}
+    if (e.code==='KeyR'){state.time=0;render();}
+    if (e.code==='KeyF')$('fullscreen').click();
+  });
+  window.addEventListener('blur',()=>state.last=performance.now());
+  function tick(now) {
+    const elapsed=Math.min(.08,(now-state.last)/1000);state.last=now;
+    if(state.playing&&!dragging&&state.skill){state.time+=elapsed*state.speed;if(state.time>duration(state.skill)+.35)state.time=0;render();}
+    raf=requestAnimationFrame(tick);
+  }
+  window.pausePreview=()=>{state.playing=false;playState();};
+  window.setPreviewCaptureSize=(width,height)=>{canvas.width=Math.max(1,Math.round(width));canvas.height=Math.max(1,Math.round(height));document.body.classList.add('capture-mode');render();};
+  window.renderAt=(skillId,time,compare=false)=>{
+    if (!api) throw new Error('Preview API is not ready');
+    const skill=api.skills.find(s=>s.id===skillId);
+    if(!skill)throw new Error('Unknown preview skill: '+skillId);
+    state.playing=false;state.compare=Boolean(compare);state.time=Math.max(0,Number(time)||0);
+    if(state.skill?.id!==skillId)choose(skill,false);else{updateTitle();render();}
+    playState();return {skillId:skill.id,time:state.time,duration:duration(skill),compare:state.compare,width:canvas.width,height:canvas.height};
+  };
+  async function init() {
+    for(let i=0;i<240&&!window.VfxPreview;i++)await new Promise(r=>setTimeout(r,50));
+    api=window.VfxPreview;
+    if(!api||!Array.isArray(api.skills)||typeof api.render!=='function')throw new Error('动态素材未能就绪，请稍后重新打开预览。');
+    if(api.ready)await api.ready;
+    if(!api.skills.length)throw new Error('当前没有可预览的技能。');
+    choose(api.skills.find(s=>familyOf(s)==='WAR')||api.skills[0]);
+    $('loading').hidden=true;document.body.dataset.ready='true';window.previewReady=true;
+    playState();raf=requestAnimationFrame(tick);
+  }
+  init().catch(error=>{$('loading').textContent=error.message;$('loading').classList.add('error');window.previewError=error.message;console.error(error);});
+})();
+</script>
+</body>
+</html>

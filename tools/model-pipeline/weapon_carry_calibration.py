@@ -16,11 +16,24 @@ def apply_sword_carry_calibration(actor,root):
  actor['swordCarryRevision']=data['revision'];actor['swordCarryReview']='source-art/weapons/3d-sword-carry-v2/README.md'
  return True
 
+def apply_staff_carry_calibration(actor,root):
+ path=Path(root)/'source-art/weapons/3d-staff-carry-v1/calibration.json'
+ if not path.exists():return False
+ data=json.loads(path.read_text(encoding='utf-8'));carry=actor['cocosBinding']['swordBackCarry']
+ assert carry['bone']==data['bone']
+ for id,placement in data['items'].items():
+  assert id in carry['items']
+  carry['items'][id]=deepcopy(placement)
+ carry['placements']['staff']=deepcopy(data['items']['W11'])
+ actor['staffCarryRevision']=data['revision'];actor['staffCarryReview']='source-art/weapons/3d-staff-carry-v1/README.md'
+ return True
+
 def apply_bow_carry_calibration(actor,root):
- # Existing exporters call this entry point; retain both reviewed calibrations.
+ # Existing exporters call this entry point; retain all weapon calibrations.
  sword_applied=apply_sword_carry_calibration(actor,root)
+ staff_applied=apply_staff_carry_calibration(actor,root)
  path=Path(root)/'source-art/weapons/3d-bow-carry-v2/calibration.json'
- if not path.exists():return sword_applied
+ if not path.exists():return sword_applied or staff_applied
  data=json.loads(path.read_text(encoding='utf-8'));carry=actor['cocosBinding']['swordBackCarry']
  assert carry['bone']==data['bone']
  carry['bowBone']=data['bowBone']

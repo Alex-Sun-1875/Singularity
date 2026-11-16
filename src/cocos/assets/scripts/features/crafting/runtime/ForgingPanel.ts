@@ -42,10 +42,10 @@ export function renderForging(hud:Hud,game:GameSession,menu:string):boolean {
  }
  if(menu.startsWith('forge-transfer:')){
   const q=game.forging.transfer(item,parts[2]),target=EQUIPMENT[q.to];
-  show('确认强化传承',`${balance}\n${q.allowed?'转出后来源装备的强化经验清零，物品与骰印保留。':q.reason}`,[
+  show('确认强化传承',`${balance}\n${q.allowed?'转出后来源装备的强化经验清零，装备与原生特效保留。':q.reason}`,[
    {label:'来源 · '+d.name,detail:`＋${q.source?.rank??0} → ＋0 · 转移 ${q.experience} 经验`,action:'forge-info',disabled:true,icon:equipmentIcon(d)},
    {label:'目标 · '+(target?.name??'请选择装备'),detail:`＋${q.target?.rank??0} → ＋${q.after} · 未生效经验 ${q.reserve}`,action:'forge-info',disabled:true,icon:target?equipmentIcon(target):undefined},
-   {label:`确认传承 · ${q.gold}金币`,detail:'保留超额经验；原生特效、免费骰印不转移。',action:`forge-inherit:${item}:${q.to}:${q.token}`,disabled:!q.allowed},
+   {label:`确认传承 · ${q.gold}金币`,detail:'保留超额经验；原生特效不转移。',action:`forge-inherit:${item}:${q.to}:${q.token}`,disabled:!q.allowed},
   ],[{label:'重新选择目标',action:`forge-targets:${item}`},{label:'取消传承',action:`forge-item:${item}`}]);return true;
  }
  return false;

@@ -1,0 +1,1877 @@
+{
+  "status": "passed",
+  "checkedAtUTC": "2026-11-15T19:05:14.358922+00:00",
+  "scope": "Independent read-only asset/provenance check of finalized v8 Web ResourceBundles export. Only this new report was written; no rebuild, runtime/source edits, historical record changes or playback was performed.",
+  "build": "src/cocos/build/concept-2d-audio",
+  "historicalBaseline": {
+    "file": "source-art/audio/runtime-integration-v1/aftermath-asset-check.json",
+    "sha256": "c9b7e62e01b4e3638efccef3fbbc74c2d7cf393d4028dd31a3b3e07935a8ba83",
+    "use": "Previously saved v7 and three-track music SHA256/UUID/import-duration records, not regenerated from v8."
+  },
+  "mappingMethod": "Declared logical path -> compact source-meta UUID -> bundle indexed import/native versions -> full UUID file. Check AudioClip name/extension/duration, exact source/native SHA256, source-master hash and PCM frame format. Scan every export bundle for old UUIDs and every native audio file for duplicate bytes.",
+  "summary": {
+    "combatMappingsVerified": 45,
+    "changedContacts": 18,
+    "bytePreservedFromV7": 27,
+    "combatNativeBytes": 2981376,
+    "historicalV7SourcesUnchanged": true,
+    "oldV7UuidExportOccurrences": 0,
+    "musicTracksVerifiedUnchanged": 3,
+    "musicNativeBytes": 3308310,
+    "buildWideNativeAudioFiles": 64,
+    "combatNativeCount": 45,
+    "allSourceNativeHashesAndPathMappingsPassed": true
+  },
+  "configFiles": {
+    "combat-audio": {
+      "file": "src/cocos/build/concept-2d-audio/assets/combat-audio/config.b3b5c.json",
+      "sha256": "ce9c3b3e4497144dc8f1a03d087701d9a60d12cc224fc0dd9f5b6e3ad22a4572"
+    },
+    "background-music": {
+      "file": "src/cocos/build/concept-2d-audio/assets/background-music/config.ce5ba.json",
+      "sha256": "cd174ec1cd059b38c463ea45d333fc4b089ef11d5dfa18e6da2eeac60ddfc0c5"
+    },
+    "resources": {
+      "file": "src/cocos/build/concept-2d-audio/assets/resources/config.73d90.json",
+      "sha256": "b1c79260d49d771a037a310aac75fd40bbe4c52858ccf51f1dcbde50d201ac15"
+    }
+  },
+  "releaseResourceRoutes": {
+    "combatAudioPack": [
+      {
+        "path": "audio/combat-v8",
+        "name": "combat-audio"
+      }
+    ],
+    "oldCombatV7Excluded": true
+  },
+  "mainResources": {
+    "combatOrNewMusicPathLeaks": [],
+    "remainingLegacyAudioPaths": [
+      "audio/impact-critical",
+      "audio/impact-fire",
+      "audio/arrow",
+      "audio/step",
+      "audio/spell",
+      "audio/sword",
+      "audio/impact-armor",
+      "audio/bells",
+      "audio/impact-flesh",
+      "audio/complete",
+      "audio/impact-heavy",
+      "audio/interact",
+      "audio/impact-kill",
+      "audio/impact-lightning",
+      "audio/dice",
+      "audio/hit"
+    ]
+  },
+  "thirdPartyNotices": [
+    {
+      "file": "src/cocos/build/concept-2d-audio/THIRD_PARTY_NOTICES.295dc.txt",
+      "sha256": "6ec46ade0a75d452c11207a35a05c2c3c11abd0c5259fd2911242fd1a8fd828c",
+      "containsStarNinjasSourceAndCC0": true
+    },
+    {
+      "file": "src/cocos/build/concept-2d-audio/THIRD_PARTY_NOTICES.txt",
+      "sha256": "af75cb61f4fbaf4582c11d7bfe4d632acd81f3ed7eb4f718a1bc6309df3bfedc",
+      "containsStarNinjasSourceAndCC0": true
+    }
+  ],
+  "licenseProvenance": {
+    "file": "source-art/audio/impact-wuxia-v8/license-provenance.json",
+    "license": "CC0-1.0",
+    "sourcePage": "https://opengameart.org/content/20-sword-sound-effects-attacks-and-clashes",
+    "evidenceManifest": "source-art/audio/impact-wuxia-v8/sources/starninjas/source-manifest.json",
+    "evidenceManifestSha256": "38612909448d041a7b8dd35d5f0742aa78dcf58ee56c1b9605435e4624e83d97",
+    "downloadedOriginalEvidence": [
+      {
+        "file": "source-art/audio/impact-wuxia-v8/sources/starninjas/oga-source-page.html",
+        "sha256": "729fd46172eda7a799f1921213347472d595bb0936a3604364ca971189a07ea0",
+        "matchesDownloadRecord": true
+      },
+      {
+        "file": "source-art/audio/impact-wuxia-v8/sources/starninjas/sword_-_starninjas_1.zip",
+        "sha256": "87a1fe1cfeee5f282fe06a7a9c25ab9ebf24b7674fe19171b7f2762dffb628c1",
+        "matchesDownloadRecord": true
+      },
+      {
+        "file": "source-art/audio/impact-wuxia-v8/sources/starninjas/sword_clash_-_starninjas_0.zip",
+        "sha256": "f363c80ea1627548d336370750651b0d2d092978148ecfb3642717c2efb54b6b",
+        "matchesDownloadRecord": true
+      }
+    ],
+    "originalExtractedFileCount": 20,
+    "allOriginalExtractedHashesVerified": true
+  },
+  "combatFiles": [
+    {
+      "resourcePath": "audio/combat-v8/bow/bow_armor_v1",
+      "bundlePath": "bow/bow_armor_v1",
+      "uuid": "c8c110c8-7948-52f2-a720-4d865e6e4042",
+      "compressedUuid": "c8wRDIeUhS8qcgTYZebkBC",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/bow/bow_armor_v1.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/bow_armor_v01.wav",
+      "sourceMasterSha256": "0742553479aa34b323f3edf9e696c724b452d50704de95b04cc23a6cc2523f3e",
+      "sourceSha256": "dd7b99d4341213b4f747f68e29dcc272f4f3099c1462352e63fece1c0a91aae5",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/c8/c8c110c8-7948-52f2-a720-4d865e6e4042.f6d5e.wav",
+      "nativeSha256": "dd7b99d4341213b4f747f68e29dcc272f4f3099c1462352e63fece1c0a91aae5",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/c8/c8c110c8-7948-52f2-a720-4d865e6e4042.e4b4e.json",
+      "importSha256": "238e797ea2bc8b172953ffdea74aa82929bd21db1f374d6285222c85ad2e4576",
+      "exportedAudioClipDurationSeconds": 0.3,
+      "bytes": 26504,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      },
+      "changedFromV7": true,
+      "v7Sha256": "7aff97f50f83ed02c042be3022197ccff9c740bd7044ab80dc2e966bc82428b1",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/c8/c8c110c8-7948-52f2-a720-4d865e6e4042.f6d5e.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.4.ogg",
+      "recordingSha256": "4c2c962f8703882b8a6f863c1f5a35c6ae518d0281755fac9a13e63a73b86fa5"
+    },
+    {
+      "resourcePath": "audio/combat-v8/bow/bow_armor_v2",
+      "bundlePath": "bow/bow_armor_v2",
+      "uuid": "e60d6c1d-e873-58c5-91e1-a090b48dfb25",
+      "compressedUuid": "e6DWwd6HNYxZHhoJC0jfsl",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/bow/bow_armor_v2.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/bow_armor_v02.wav",
+      "sourceMasterSha256": "6940bf47eb578f0e851876abd9f10ebd95c5152f6dc2fea3c9cfd33a346e09a6",
+      "sourceSha256": "bf5e2d2eaad81c07b5ca03ae76159ce6c5b4d857fdb686079e44d582480a2e38",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/e6/e60d6c1d-e873-58c5-91e1-a090b48dfb25.00ef1.wav",
+      "nativeSha256": "bf5e2d2eaad81c07b5ca03ae76159ce6c5b4d857fdb686079e44d582480a2e38",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/e6/e60d6c1d-e873-58c5-91e1-a090b48dfb25.14d99.json",
+      "importSha256": "a5b860ac8d57a3b67453ed75f685144772b77fd39467ae5fbda232782d9dae6c",
+      "exportedAudioClipDurationSeconds": 0.3,
+      "bytes": 26504,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      },
+      "changedFromV7": true,
+      "v7Sha256": "52b795ce6ba181e96eb8f9a2532eb8e2cede1f6cfaca1a3dcc569f2585982397",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/e6/e60d6c1d-e873-58c5-91e1-a090b48dfb25.00ef1.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.8.ogg",
+      "recordingSha256": "1466349e10779cfede4538657031bd87f3757d6cf5139cfad6552fa859007172"
+    },
+    {
+      "resourcePath": "audio/combat-v8/bow/bow_armor_v3",
+      "bundlePath": "bow/bow_armor_v3",
+      "uuid": "b5d34d52-053d-5960-abf5-4b17bb1226c1",
+      "compressedUuid": "b5001SBT1ZYKv1Sxe7EibB",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/bow/bow_armor_v3.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/bow_armor_v03.wav",
+      "sourceMasterSha256": "f143b75697447262a2c434b54271db11f4932861f16500af0237775cb82c2c5b",
+      "sourceSha256": "a8cceeebebb8c5a76fc14a7f294ab1c0734b7588202eae4eaf69e3c12d7bcb0e",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/b5/b5d34d52-053d-5960-abf5-4b17bb1226c1.5bec1.wav",
+      "nativeSha256": "a8cceeebebb8c5a76fc14a7f294ab1c0734b7588202eae4eaf69e3c12d7bcb0e",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/b5/b5d34d52-053d-5960-abf5-4b17bb1226c1.b51bb.json",
+      "importSha256": "f2e2de94a59c3d435ddafe2b0c35ae0e98e7cfe26b05b87178dd0be063ade9f7",
+      "exportedAudioClipDurationSeconds": 0.3,
+      "bytes": 26504,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      },
+      "changedFromV7": true,
+      "v7Sha256": "5f6280fb092e9bcbc67a31fa45e9712a7c40aca185211e3526fbb3906f255013",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/b5/b5d34d52-053d-5960-abf5-4b17bb1226c1.5bec1.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.3.ogg",
+      "recordingSha256": "6c588bc79b7e4fe202e3b65fa849954d684d2d2342f6ad04813540854c421663"
+    },
+    {
+      "resourcePath": "audio/combat-v8/bow/bow_draw_v1",
+      "bundlePath": "bow/bow_draw_v1",
+      "uuid": "fe130e72-4171-54e5-a887-79995b52d10c",
+      "compressedUuid": "feEw5yQXFU5aiHeZlbUtEM",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/bow/bow_draw_v1.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/bow_draw_v01.wav",
+      "sourceMasterSha256": "f3f9f39f3280b6770c8fc0ceb63bac987b89ccfb3cd12cdda1de530e9b2271af",
+      "sourceSha256": "f3f9f39f3280b6770c8fc0ceb63bac987b89ccfb3cd12cdda1de530e9b2271af",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/fe/fe130e72-4171-54e5-a887-79995b52d10c.04c23.wav",
+      "nativeSha256": "f3f9f39f3280b6770c8fc0ceb63bac987b89ccfb3cd12cdda1de530e9b2271af",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/fe/fe130e72-4171-54e5-a887-79995b52d10c.0f8e4.json",
+      "importSha256": "0cd73ea29bd75053378ba815a16908d6838f5d7b63333990508279e0b10217bc",
+      "exportedAudioClipDurationSeconds": 0.62,
+      "bytes": 54728,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 27342,
+        "durationSeconds": 0.62
+      },
+      "changedFromV7": false,
+      "v7Sha256": "f3f9f39f3280b6770c8fc0ceb63bac987b89ccfb3cd12cdda1de530e9b2271af",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/fe/fe130e72-4171-54e5-a887-79995b52d10c.04c23.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/bow/bow_draw_v2",
+      "bundlePath": "bow/bow_draw_v2",
+      "uuid": "8515a0c5-695d-548f-8f6c-e7b573ede2ab",
+      "compressedUuid": "85FaDFaV1Uj49s57Vz7eKr",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/bow/bow_draw_v2.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/bow_draw_v02.wav",
+      "sourceMasterSha256": "f78139db30a7314936ba6eae552558b1b55b387e32a4c6cac55c1a6a2b5f92f2",
+      "sourceSha256": "f78139db30a7314936ba6eae552558b1b55b387e32a4c6cac55c1a6a2b5f92f2",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/85/8515a0c5-695d-548f-8f6c-e7b573ede2ab.8aeea.wav",
+      "nativeSha256": "f78139db30a7314936ba6eae552558b1b55b387e32a4c6cac55c1a6a2b5f92f2",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/85/8515a0c5-695d-548f-8f6c-e7b573ede2ab.ddfbb.json",
+      "importSha256": "e4f01f8449318c2ffd15eb009cda59d970b159754772d1e6bc65fe28a7d5b8ed",
+      "exportedAudioClipDurationSeconds": 0.62,
+      "bytes": 54728,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 27342,
+        "durationSeconds": 0.62
+      },
+      "changedFromV7": false,
+      "v7Sha256": "f78139db30a7314936ba6eae552558b1b55b387e32a4c6cac55c1a6a2b5f92f2",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/85/8515a0c5-695d-548f-8f6c-e7b573ede2ab.8aeea.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/bow/bow_draw_v3",
+      "bundlePath": "bow/bow_draw_v3",
+      "uuid": "d537f98d-ac9b-53a5-9352-aa58f949ae1c",
+      "compressedUuid": "d5N/mNrJtTpZNSqlj5Sa4c",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/bow/bow_draw_v3.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/bow_draw_v03.wav",
+      "sourceMasterSha256": "8f7dd202af4d6ba1790aa2231907389126cc75974e962c1e42991bd453305085",
+      "sourceSha256": "8f7dd202af4d6ba1790aa2231907389126cc75974e962c1e42991bd453305085",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/d5/d537f98d-ac9b-53a5-9352-aa58f949ae1c.ec5b0.wav",
+      "nativeSha256": "8f7dd202af4d6ba1790aa2231907389126cc75974e962c1e42991bd453305085",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/d5/d537f98d-ac9b-53a5-9352-aa58f949ae1c.2e83a.json",
+      "importSha256": "ea1c39d0a5f846a4fb356ecad38edc14f3e839a471f30dffeeefa13bf6bd3bde",
+      "exportedAudioClipDurationSeconds": 0.62,
+      "bytes": 54728,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 27342,
+        "durationSeconds": 0.62
+      },
+      "changedFromV7": false,
+      "v7Sha256": "8f7dd202af4d6ba1790aa2231907389126cc75974e962c1e42991bd453305085",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/d5/d537f98d-ac9b-53a5-9352-aa58f949ae1c.ec5b0.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/bow/bow_heavy_v1",
+      "bundlePath": "bow/bow_heavy_v1",
+      "uuid": "98230cf8-6d58-56c4-b68d-a03bc0a3d40c",
+      "compressedUuid": "98Iwz4bVhWxLaNoDvAo9QM",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/bow/bow_heavy_v1.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/bow_heavy_v01.wav",
+      "sourceMasterSha256": "219e2e7ead2a2b0b14029130f6910d8ad6313d26db0fd9d9a33754a3f5a1e491",
+      "sourceSha256": "f7babdd9e04727f348cf444c4c06e453d34383710ab5b20d84e5d34da0a4e302",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/98/98230cf8-6d58-56c4-b68d-a03bc0a3d40c.440f5.wav",
+      "nativeSha256": "f7babdd9e04727f348cf444c4c06e453d34383710ab5b20d84e5d34da0a4e302",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/98/98230cf8-6d58-56c4-b68d-a03bc0a3d40c.64ff9.json",
+      "importSha256": "76d90e1b61871042a5fd54872c68efb018c5d2292dac47ad938d4b5f7df745f5",
+      "exportedAudioClipDurationSeconds": 0.42,
+      "bytes": 37088,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 18522,
+        "durationSeconds": 0.42
+      },
+      "changedFromV7": true,
+      "v7Sha256": "bdc246fdcf77296f38c471ee484352f99edfa75fba376f446c9c50821b25b155",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/98/98230cf8-6d58-56c4-b68d-a03bc0a3d40c.440f5.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.4.ogg",
+      "recordingSha256": "4c2c962f8703882b8a6f863c1f5a35c6ae518d0281755fac9a13e63a73b86fa5"
+    },
+    {
+      "resourcePath": "audio/combat-v8/bow/bow_heavy_v2",
+      "bundlePath": "bow/bow_heavy_v2",
+      "uuid": "a6e798eb-58bc-57b7-82f0-d437cbde0907",
+      "compressedUuid": "a655jrWLxXt4Lw1DfL3gkH",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/bow/bow_heavy_v2.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/bow_heavy_v02.wav",
+      "sourceMasterSha256": "507d4194e16bd3df808ed5b56c21330b797a3a30047e6271559590681787df4d",
+      "sourceSha256": "c77749856a6eed2b30c3652299a9030cb5738bca5b97cc8266d28b2eb6222b4f",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/a6/a6e798eb-58bc-57b7-82f0-d437cbde0907.cadaf.wav",
+      "nativeSha256": "c77749856a6eed2b30c3652299a9030cb5738bca5b97cc8266d28b2eb6222b4f",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/a6/a6e798eb-58bc-57b7-82f0-d437cbde0907.c499d.json",
+      "importSha256": "3ae41dc0adfe95dcad2a2b5edecb822229048174e58bbf637df987977e201322",
+      "exportedAudioClipDurationSeconds": 0.42,
+      "bytes": 37088,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 18522,
+        "durationSeconds": 0.42
+      },
+      "changedFromV7": true,
+      "v7Sha256": "020c493c6acaf2bd9f3a9bac01d5cc7fbdfec05bd9518bb2fa25bca32e295685",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/a6/a6e798eb-58bc-57b7-82f0-d437cbde0907.cadaf.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.8.ogg",
+      "recordingSha256": "1466349e10779cfede4538657031bd87f3757d6cf5139cfad6552fa859007172"
+    },
+    {
+      "resourcePath": "audio/combat-v8/bow/bow_heavy_v3",
+      "bundlePath": "bow/bow_heavy_v3",
+      "uuid": "edc13225-c3ec-5134-9e5c-daced3bad6c1",
+      "compressedUuid": "edwTIlw+xRNJ5c2s7TutbB",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/bow/bow_heavy_v3.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/bow_heavy_v03.wav",
+      "sourceMasterSha256": "8c892fe64c2a1655184e5dd6bfd21d293a27139efbe9373afc24131e48f7589d",
+      "sourceSha256": "927589c364b5b2312b22419201b886cbdc4a192028926724fda272a64ede7a41",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/ed/edc13225-c3ec-5134-9e5c-daced3bad6c1.7a261.wav",
+      "nativeSha256": "927589c364b5b2312b22419201b886cbdc4a192028926724fda272a64ede7a41",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/ed/edc13225-c3ec-5134-9e5c-daced3bad6c1.bbdd2.json",
+      "importSha256": "5fafd6c5357bf2d7d437ab2fce8dad4e28436998b844c2fd92217c29b8d95391",
+      "exportedAudioClipDurationSeconds": 0.42,
+      "bytes": 37088,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 18522,
+        "durationSeconds": 0.42
+      },
+      "changedFromV7": true,
+      "v7Sha256": "c6ed8f60d2a62e3457655b7bf19a225f639330a1dddcc0d364317b7bec62dc0f",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/ed/edc13225-c3ec-5134-9e5c-daced3bad6c1.7a261.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.5.ogg",
+      "recordingSha256": "09e36369f2556e6a234ce78ec797447518ef7671f8224fc64747a7fa66ea229a"
+    },
+    {
+      "resourcePath": "audio/combat-v8/bow/bow_pierce_v1",
+      "bundlePath": "bow/bow_pierce_v1",
+      "uuid": "d0529282-300d-5f85-bbae-b266349fc3d5",
+      "compressedUuid": "d0UpKCMA1fhbuusmY0n8PV",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/bow/bow_pierce_v1.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/bow_pierce_v01.wav",
+      "sourceMasterSha256": "b61e58ec83791c24411a63005ed566c1197a7761020e18c2ececa017928f8946",
+      "sourceSha256": "108173d86c42c23b2586a41b94dcec7e1f11e8fe0fc02fb11a700a1ec363cd59",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/d0/d0529282-300d-5f85-bbae-b266349fc3d5.54111.wav",
+      "nativeSha256": "108173d86c42c23b2586a41b94dcec7e1f11e8fe0fc02fb11a700a1ec363cd59",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/d0/d0529282-300d-5f85-bbae-b266349fc3d5.20d30.json",
+      "importSha256": "de7c3bcf374735573ecb8a8356cfa2ae73ee80575f32e949d527702d29b39b74",
+      "exportedAudioClipDurationSeconds": 0.3,
+      "bytes": 26504,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      },
+      "changedFromV7": true,
+      "v7Sha256": "e3534a9b7b3df3a91bb6a0428677975b82e201ba19e6cc9af7f601957ad48891",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/d0/d0529282-300d-5f85-bbae-b266349fc3d5.54111.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.5.ogg",
+      "recordingSha256": "09e36369f2556e6a234ce78ec797447518ef7671f8224fc64747a7fa66ea229a"
+    },
+    {
+      "resourcePath": "audio/combat-v8/bow/bow_pierce_v2",
+      "bundlePath": "bow/bow_pierce_v2",
+      "uuid": "3385ba2c-8f2b-5534-a40d-19e086689652",
+      "compressedUuid": "33hbosjytVNKQNGeCGaJZS",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/bow/bow_pierce_v2.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/bow_pierce_v02.wav",
+      "sourceMasterSha256": "463c737bdb1029f5193d80463e0fd8792481352a9c68fe0756e8aa8af45373dc",
+      "sourceSha256": "03fe1c39eb0463343b81a8f4b743020f2634fd8f598f08a15f7a9c8a45f38879",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/33/3385ba2c-8f2b-5534-a40d-19e086689652.f63a9.wav",
+      "nativeSha256": "03fe1c39eb0463343b81a8f4b743020f2634fd8f598f08a15f7a9c8a45f38879",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/33/3385ba2c-8f2b-5534-a40d-19e086689652.06110.json",
+      "importSha256": "f2c05a7c54440f6d1b9812d65ec3b783e286f509f4f5dd81cc2802d37b365460",
+      "exportedAudioClipDurationSeconds": 0.3,
+      "bytes": 26504,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      },
+      "changedFromV7": true,
+      "v7Sha256": "259cde173b218b6ed06b94d2806063af9438477f419f2834f4604064d9a25718",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/33/3385ba2c-8f2b-5534-a40d-19e086689652.f63a9.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.2.ogg",
+      "recordingSha256": "e09f222b70d53f2967514d076e2ae50c21526ac640fe4919965f964af043da1a"
+    },
+    {
+      "resourcePath": "audio/combat-v8/bow/bow_pierce_v3",
+      "bundlePath": "bow/bow_pierce_v3",
+      "uuid": "9c988697-6160-5090-8239-30081bcf9547",
+      "compressedUuid": "9cmIaXYWBQkII5MAgbz5VH",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/bow/bow_pierce_v3.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/bow_pierce_v03.wav",
+      "sourceMasterSha256": "ac76f1c6e3a41cd2415d3427809a80ae0befb2429bede6381727d8cbf41878ca",
+      "sourceSha256": "238b6b881170fcd45ba2985b7f40f05eef43c25f95f37dd8233a6e069c00bde2",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/9c/9c988697-6160-5090-8239-30081bcf9547.f91b8.wav",
+      "nativeSha256": "238b6b881170fcd45ba2985b7f40f05eef43c25f95f37dd8233a6e069c00bde2",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/9c/9c988697-6160-5090-8239-30081bcf9547.18c0a.json",
+      "importSha256": "cf70f6274bd90cd5ac44ca1647cd932302040849f02f9f7552e4569d73e5cbb2",
+      "exportedAudioClipDurationSeconds": 0.3,
+      "bytes": 26504,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      },
+      "changedFromV7": true,
+      "v7Sha256": "2b1c6e1d9aeeb4f134d38885f87bb1398f547a922b2f9832726ced797bde5c36",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/9c/9c988697-6160-5090-8239-30081bcf9547.f91b8.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.7.ogg",
+      "recordingSha256": "6763e519e7b31250a78f514d2b8b4f4e73a3bb105c980844ea687d698364b80c"
+    },
+    {
+      "resourcePath": "audio/combat-v8/bow/bow_release_v1",
+      "bundlePath": "bow/bow_release_v1",
+      "uuid": "953702cd-f111-5565-8216-4f4273e5ead5",
+      "compressedUuid": "95NwLN8RFVZYIWT0Jz5erV",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/bow/bow_release_v1.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/bow_release_v01.wav",
+      "sourceMasterSha256": "15a9618bc115b733b920bb4f495388601f174a346a18d58e61ebb16a5551ff8b",
+      "sourceSha256": "15a9618bc115b733b920bb4f495388601f174a346a18d58e61ebb16a5551ff8b",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/95/953702cd-f111-5565-8216-4f4273e5ead5.f27dd.wav",
+      "nativeSha256": "15a9618bc115b733b920bb4f495388601f174a346a18d58e61ebb16a5551ff8b",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/95/953702cd-f111-5565-8216-4f4273e5ead5.3cbc4.json",
+      "importSha256": "fce847c65e21684660e1ac66f95e9cd072e1973f88f0c06e78179538bcbda86f",
+      "exportedAudioClipDurationSeconds": 0.3,
+      "bytes": 26504,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      },
+      "changedFromV7": false,
+      "v7Sha256": "15a9618bc115b733b920bb4f495388601f174a346a18d58e61ebb16a5551ff8b",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/95/953702cd-f111-5565-8216-4f4273e5ead5.f27dd.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/bow/bow_release_v2",
+      "bundlePath": "bow/bow_release_v2",
+      "uuid": "d3bf9b5a-9760-5ceb-a89c-f6cb8eb36e62",
+      "compressedUuid": "d3v5tal2Bc66ic9suOs25i",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/bow/bow_release_v2.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/bow_release_v02.wav",
+      "sourceMasterSha256": "7d9265ed4b0f5bacf24a802f2ba86310b778e6fcc1c11eb0db10f3e7d255eba2",
+      "sourceSha256": "7d9265ed4b0f5bacf24a802f2ba86310b778e6fcc1c11eb0db10f3e7d255eba2",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/d3/d3bf9b5a-9760-5ceb-a89c-f6cb8eb36e62.b8b06.wav",
+      "nativeSha256": "7d9265ed4b0f5bacf24a802f2ba86310b778e6fcc1c11eb0db10f3e7d255eba2",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/d3/d3bf9b5a-9760-5ceb-a89c-f6cb8eb36e62.07f17.json",
+      "importSha256": "babdf9e853f9cda29484f9b6dcbc9067e3babe7857f10543af3955721121b635",
+      "exportedAudioClipDurationSeconds": 0.3,
+      "bytes": 26504,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      },
+      "changedFromV7": false,
+      "v7Sha256": "7d9265ed4b0f5bacf24a802f2ba86310b778e6fcc1c11eb0db10f3e7d255eba2",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/d3/d3bf9b5a-9760-5ceb-a89c-f6cb8eb36e62.b8b06.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/bow/bow_release_v3",
+      "bundlePath": "bow/bow_release_v3",
+      "uuid": "ab72faaf-2032-56b6-bfff-acd09ca8fcf1",
+      "compressedUuid": "abcvqvIDJWtr//rNCcqPzx",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/bow/bow_release_v3.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/bow_release_v03.wav",
+      "sourceMasterSha256": "a7cc5d0e036a283ac3d684eaa01ad5cac5296e6118df08b77f9189abd62b3b99",
+      "sourceSha256": "a7cc5d0e036a283ac3d684eaa01ad5cac5296e6118df08b77f9189abd62b3b99",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/ab/ab72faaf-2032-56b6-bfff-acd09ca8fcf1.8a237.wav",
+      "nativeSha256": "a7cc5d0e036a283ac3d684eaa01ad5cac5296e6118df08b77f9189abd62b3b99",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/ab/ab72faaf-2032-56b6-bfff-acd09ca8fcf1.ced53.json",
+      "importSha256": "435e76e1c50f015f17c03f46e5f21f6d402c71ebbd4dea934233283a4c3c13e2",
+      "exportedAudioClipDurationSeconds": 0.3,
+      "bytes": 26504,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      },
+      "changedFromV7": false,
+      "v7Sha256": "a7cc5d0e036a283ac3d684eaa01ad5cac5296e6118df08b77f9189abd62b3b99",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/ab/ab72faaf-2032-56b6-bfff-acd09ca8fcf1.8a237.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/fir/fir_burst_v1",
+      "bundlePath": "fir/fir_burst_v1",
+      "uuid": "0f8f53f4-dc14-5f6f-a869-ca9f86878e02",
+      "compressedUuid": "0fj1P03BRfb6hpyp+Gh44C",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/fir/fir_burst_v1.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/fir_burst_v01.wav",
+      "sourceMasterSha256": "cf459142bdf9ccde86405f7cf43337c4abf59ab5893fe3aecd83ce65aeb69182",
+      "sourceSha256": "cf459142bdf9ccde86405f7cf43337c4abf59ab5893fe3aecd83ce65aeb69182",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/0f/0f8f53f4-dc14-5f6f-a869-ca9f86878e02.f1543.wav",
+      "nativeSha256": "cf459142bdf9ccde86405f7cf43337c4abf59ab5893fe3aecd83ce65aeb69182",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/0f/0f8f53f4-dc14-5f6f-a869-ca9f86878e02.f9648.json",
+      "importSha256": "0c55551d56805a495505179350a271d8bd61cf235027694a5ccb6a92c1290b08",
+      "exportedAudioClipDurationSeconds": 1.05,
+      "bytes": 92654,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 46305,
+        "durationSeconds": 1.05
+      },
+      "changedFromV7": false,
+      "v7Sha256": "cf459142bdf9ccde86405f7cf43337c4abf59ab5893fe3aecd83ce65aeb69182",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/0f/0f8f53f4-dc14-5f6f-a869-ca9f86878e02.f1543.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/fir/fir_burst_v2",
+      "bundlePath": "fir/fir_burst_v2",
+      "uuid": "d171cb05-87b6-529e-892f-db63616e1c68",
+      "compressedUuid": "d1ccsFh7ZSnokv22Nhbhxo",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/fir/fir_burst_v2.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/fir_burst_v02.wav",
+      "sourceMasterSha256": "47f5137d72ba57c43c835b869e88600e3dce0c91da489c993e5a0ed629a2be83",
+      "sourceSha256": "47f5137d72ba57c43c835b869e88600e3dce0c91da489c993e5a0ed629a2be83",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/d1/d171cb05-87b6-529e-892f-db63616e1c68.4066a.wav",
+      "nativeSha256": "47f5137d72ba57c43c835b869e88600e3dce0c91da489c993e5a0ed629a2be83",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/d1/d171cb05-87b6-529e-892f-db63616e1c68.2f799.json",
+      "importSha256": "a0491be15c30c0c31291db35b3a83124be03d5bb584b32ec2a1b151a9b8379a6",
+      "exportedAudioClipDurationSeconds": 1.05,
+      "bytes": 92654,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 46305,
+        "durationSeconds": 1.05
+      },
+      "changedFromV7": false,
+      "v7Sha256": "47f5137d72ba57c43c835b869e88600e3dce0c91da489c993e5a0ed629a2be83",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/d1/d171cb05-87b6-529e-892f-db63616e1c68.4066a.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/fir/fir_burst_v3",
+      "bundlePath": "fir/fir_burst_v3",
+      "uuid": "01fe5264-5b19-5207-a9b9-b05ab4f78776",
+      "compressedUuid": "01/lJkWxlSB6m5sFq094d2",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/fir/fir_burst_v3.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/fir_burst_v03.wav",
+      "sourceMasterSha256": "121e955b4a396c8ae007a3643ef91c95ef0f8cb420fcc8c3acd107375a088193",
+      "sourceSha256": "121e955b4a396c8ae007a3643ef91c95ef0f8cb420fcc8c3acd107375a088193",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/01/01fe5264-5b19-5207-a9b9-b05ab4f78776.d1d8a.wav",
+      "nativeSha256": "121e955b4a396c8ae007a3643ef91c95ef0f8cb420fcc8c3acd107375a088193",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/01/01fe5264-5b19-5207-a9b9-b05ab4f78776.a390f.json",
+      "importSha256": "0c0d2a0416882f352d3dc485fb76edf2e381b985f63293a5e9fd385dc4a1f712",
+      "exportedAudioClipDurationSeconds": 1.05,
+      "bytes": 92654,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 46305,
+        "durationSeconds": 1.05
+      },
+      "changedFromV7": false,
+      "v7Sha256": "121e955b4a396c8ae007a3643ef91c95ef0f8cb420fcc8c3acd107375a088193",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/01/01fe5264-5b19-5207-a9b9-b05ab4f78776.d1d8a.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/fir/fir_charge_v1",
+      "bundlePath": "fir/fir_charge_v1",
+      "uuid": "1576c465-1ad5-5895-bad0-e027b4c80ff6",
+      "compressedUuid": "15dsRlGtVYlbrQ4Ce0yA/2",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/fir/fir_charge_v1.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/fir_charge_v01.wav",
+      "sourceMasterSha256": "985b2bebcfc55fbf299c08a7e6696c9fda59a103f0bcf875c7be50aa101bbed9",
+      "sourceSha256": "985b2bebcfc55fbf299c08a7e6696c9fda59a103f0bcf875c7be50aa101bbed9",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/15/1576c465-1ad5-5895-bad0-e027b4c80ff6.9ba4b.wav",
+      "nativeSha256": "985b2bebcfc55fbf299c08a7e6696c9fda59a103f0bcf875c7be50aa101bbed9",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/15/1576c465-1ad5-5895-bad0-e027b4c80ff6.de781.json",
+      "importSha256": "2018a21b87a1d9226e03c697b653cefb974c58dd1b07a8bd2b7ff3e4eaf6d94a",
+      "exportedAudioClipDurationSeconds": 0.72,
+      "bytes": 63548,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 31752,
+        "durationSeconds": 0.72
+      },
+      "changedFromV7": false,
+      "v7Sha256": "985b2bebcfc55fbf299c08a7e6696c9fda59a103f0bcf875c7be50aa101bbed9",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/15/1576c465-1ad5-5895-bad0-e027b4c80ff6.9ba4b.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/fir/fir_charge_v2",
+      "bundlePath": "fir/fir_charge_v2",
+      "uuid": "c1f685d7-ff78-5479-adef-0a58bc4ceb72",
+      "compressedUuid": "c19oXX/3hUea3vCli8TOty",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/fir/fir_charge_v2.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/fir_charge_v02.wav",
+      "sourceMasterSha256": "7ed7c620ea2788a1578ba97898c278a7542ed98f3bb9ced01585aecc6fbd6721",
+      "sourceSha256": "7ed7c620ea2788a1578ba97898c278a7542ed98f3bb9ced01585aecc6fbd6721",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/c1/c1f685d7-ff78-5479-adef-0a58bc4ceb72.163b5.wav",
+      "nativeSha256": "7ed7c620ea2788a1578ba97898c278a7542ed98f3bb9ced01585aecc6fbd6721",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/c1/c1f685d7-ff78-5479-adef-0a58bc4ceb72.143cf.json",
+      "importSha256": "d36eccaa556aae2c0a64af82550dc0e603721493b4fa61c494a05eadee2a9c58",
+      "exportedAudioClipDurationSeconds": 0.72,
+      "bytes": 63548,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 31752,
+        "durationSeconds": 0.72
+      },
+      "changedFromV7": false,
+      "v7Sha256": "7ed7c620ea2788a1578ba97898c278a7542ed98f3bb9ced01585aecc6fbd6721",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/c1/c1f685d7-ff78-5479-adef-0a58bc4ceb72.163b5.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/fir/fir_charge_v3",
+      "bundlePath": "fir/fir_charge_v3",
+      "uuid": "bdfa77db-1313-5231-b925-30275ab096e7",
+      "compressedUuid": "bd+nfbExNSMbklMCdasJbn",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/fir/fir_charge_v3.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/fir_charge_v03.wav",
+      "sourceMasterSha256": "48e5cf98c755f5e877157361be5a4995800d935a6f0a7d7c64bf94d6939ffd97",
+      "sourceSha256": "48e5cf98c755f5e877157361be5a4995800d935a6f0a7d7c64bf94d6939ffd97",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/bd/bdfa77db-1313-5231-b925-30275ab096e7.6e15c.wav",
+      "nativeSha256": "48e5cf98c755f5e877157361be5a4995800d935a6f0a7d7c64bf94d6939ffd97",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/bd/bdfa77db-1313-5231-b925-30275ab096e7.8e028.json",
+      "importSha256": "c89eb26b35dbd099d59820494f61dd299e42fa042c117513cfc4aa31063b58cb",
+      "exportedAudioClipDurationSeconds": 0.72,
+      "bytes": 63548,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 31752,
+        "durationSeconds": 0.72
+      },
+      "changedFromV7": false,
+      "v7Sha256": "48e5cf98c755f5e877157361be5a4995800d935a6f0a7d7c64bf94d6939ffd97",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/bd/bdfa77db-1313-5231-b925-30275ab096e7.6e15c.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/fir/fir_wall_v1",
+      "bundlePath": "fir/fir_wall_v1",
+      "uuid": "7737db1b-695d-5ee0-afec-3025f9da3da2",
+      "compressedUuid": "77N9sbaV1e4K/sMCX52j2i",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/fir/fir_wall_v1.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/fir_wall_v01.wav",
+      "sourceMasterSha256": "c66daab82180e2dce88b7c383d63c0d9a5ea8b5a061d1d4098204e681c06dd22",
+      "sourceSha256": "c66daab82180e2dce88b7c383d63c0d9a5ea8b5a061d1d4098204e681c06dd22",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/77/7737db1b-695d-5ee0-afec-3025f9da3da2.3ab7e.wav",
+      "nativeSha256": "c66daab82180e2dce88b7c383d63c0d9a5ea8b5a061d1d4098204e681c06dd22",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/77/7737db1b-695d-5ee0-afec-3025f9da3da2.d9d5d.json",
+      "importSha256": "2fa8383366a91e970c4fb71decb47cb5a0b23c312cbf104a4e1a2561ec3bad61",
+      "exportedAudioClipDurationSeconds": 3,
+      "bytes": 264644,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 132300,
+        "durationSeconds": 3.0
+      },
+      "changedFromV7": false,
+      "v7Sha256": "c66daab82180e2dce88b7c383d63c0d9a5ea8b5a061d1d4098204e681c06dd22",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/77/7737db1b-695d-5ee0-afec-3025f9da3da2.3ab7e.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/fir/fir_wall_v2",
+      "bundlePath": "fir/fir_wall_v2",
+      "uuid": "066a8342-cb3a-5185-a34a-d7ca535564c0",
+      "compressedUuid": "06aoNCyzpRhaNK18pTVWTA",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/fir/fir_wall_v2.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/fir_wall_v02.wav",
+      "sourceMasterSha256": "a5d80de59f42c5abfe019becf06e1555c6cfc540249f1fb211fa83b26b2a5ada",
+      "sourceSha256": "a5d80de59f42c5abfe019becf06e1555c6cfc540249f1fb211fa83b26b2a5ada",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/06/066a8342-cb3a-5185-a34a-d7ca535564c0.ced0c.wav",
+      "nativeSha256": "a5d80de59f42c5abfe019becf06e1555c6cfc540249f1fb211fa83b26b2a5ada",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/06/066a8342-cb3a-5185-a34a-d7ca535564c0.1e981.json",
+      "importSha256": "6b37c64e13803e7cd1900a7f69c798900a3bf59de967919db93fd0e875ffade5",
+      "exportedAudioClipDurationSeconds": 3,
+      "bytes": 264644,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 132300,
+        "durationSeconds": 3.0
+      },
+      "changedFromV7": false,
+      "v7Sha256": "a5d80de59f42c5abfe019becf06e1555c6cfc540249f1fb211fa83b26b2a5ada",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/06/066a8342-cb3a-5185-a34a-d7ca535564c0.ced0c.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/fir/fir_wall_v3",
+      "bundlePath": "fir/fir_wall_v3",
+      "uuid": "9301e08e-9830-55b3-8ff5-5a9dfa4ffa48",
+      "compressedUuid": "93AeCOmDBVs4/1Wp36T/pI",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/fir/fir_wall_v3.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/fir_wall_v03.wav",
+      "sourceMasterSha256": "4669b9d9642af5b9e3212eb333ac0f078bf68749e9abd8069bbda54855ef81d6",
+      "sourceSha256": "4669b9d9642af5b9e3212eb333ac0f078bf68749e9abd8069bbda54855ef81d6",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/93/9301e08e-9830-55b3-8ff5-5a9dfa4ffa48.dd193.wav",
+      "nativeSha256": "4669b9d9642af5b9e3212eb333ac0f078bf68749e9abd8069bbda54855ef81d6",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/93/9301e08e-9830-55b3-8ff5-5a9dfa4ffa48.8ddbb.json",
+      "importSha256": "682dc63839cefe3bc40c34711efb04bcfaaf2e9937ca5ba26824a730d0462266",
+      "exportedAudioClipDurationSeconds": 3,
+      "bytes": 264644,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 132300,
+        "durationSeconds": 3.0
+      },
+      "changedFromV7": false,
+      "v7Sha256": "4669b9d9642af5b9e3212eb333ac0f078bf68749e9abd8069bbda54855ef81d6",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/93/9301e08e-9830-55b3-8ff5-5a9dfa4ffa48.dd193.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/thu/thu_charge_v1",
+      "bundlePath": "thu/thu_charge_v1",
+      "uuid": "f00f4740-2f04-5594-a0b3-2b793d660c28",
+      "compressedUuid": "f0D0dALwRVlKCzK3k9Zgwo",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/thu/thu_charge_v1.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/thu_charge_v01.wav",
+      "sourceMasterSha256": "a887dbb9d4d42db5a55f5b363896406d14df681b6905576930ecb807d1978f56",
+      "sourceSha256": "a887dbb9d4d42db5a55f5b363896406d14df681b6905576930ecb807d1978f56",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/f0/f00f4740-2f04-5594-a0b3-2b793d660c28.a0bb2.wav",
+      "nativeSha256": "a887dbb9d4d42db5a55f5b363896406d14df681b6905576930ecb807d1978f56",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/f0/f00f4740-2f04-5594-a0b3-2b793d660c28.da2b3.json",
+      "importSha256": "b6bb737c00d2372a152720d3e7e8e60ec1fde8d2fb30efdffbe6a921e273cca6",
+      "exportedAudioClipDurationSeconds": 0.6,
+      "bytes": 52964,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 26460,
+        "durationSeconds": 0.6
+      },
+      "changedFromV7": false,
+      "v7Sha256": "a887dbb9d4d42db5a55f5b363896406d14df681b6905576930ecb807d1978f56",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/f0/f00f4740-2f04-5594-a0b3-2b793d660c28.a0bb2.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/thu/thu_charge_v2",
+      "bundlePath": "thu/thu_charge_v2",
+      "uuid": "64500594-2754-5227-9a27-99745e8ee4f1",
+      "compressedUuid": "64UAWUJ1RSJ5onmXRejuTx",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/thu/thu_charge_v2.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/thu_charge_v02.wav",
+      "sourceMasterSha256": "d06b26457afcfdfc293ad5b4979928b4add8ccf8f9aa7043e6d44bfe63008d05",
+      "sourceSha256": "d06b26457afcfdfc293ad5b4979928b4add8ccf8f9aa7043e6d44bfe63008d05",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/64/64500594-2754-5227-9a27-99745e8ee4f1.142a0.wav",
+      "nativeSha256": "d06b26457afcfdfc293ad5b4979928b4add8ccf8f9aa7043e6d44bfe63008d05",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/64/64500594-2754-5227-9a27-99745e8ee4f1.32f04.json",
+      "importSha256": "5a2f4513741010220728a94a3492dfe9db4151ad86c96b0f2f28363589008c0e",
+      "exportedAudioClipDurationSeconds": 0.6,
+      "bytes": 52964,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 26460,
+        "durationSeconds": 0.6
+      },
+      "changedFromV7": false,
+      "v7Sha256": "d06b26457afcfdfc293ad5b4979928b4add8ccf8f9aa7043e6d44bfe63008d05",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/64/64500594-2754-5227-9a27-99745e8ee4f1.142a0.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/thu/thu_charge_v3",
+      "bundlePath": "thu/thu_charge_v3",
+      "uuid": "6430d415-ba84-5845-b134-6b66527f113d",
+      "compressedUuid": "64MNQVuoRYRbE0a2ZSfxE9",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/thu/thu_charge_v3.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/thu_charge_v03.wav",
+      "sourceMasterSha256": "bae644cb6082c23faa0e4e45bd1bae9cc51a3e60c8dcbcf9315593ea9b65d711",
+      "sourceSha256": "bae644cb6082c23faa0e4e45bd1bae9cc51a3e60c8dcbcf9315593ea9b65d711",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/64/6430d415-ba84-5845-b134-6b66527f113d.b3eda.wav",
+      "nativeSha256": "bae644cb6082c23faa0e4e45bd1bae9cc51a3e60c8dcbcf9315593ea9b65d711",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/64/6430d415-ba84-5845-b134-6b66527f113d.7dc92.json",
+      "importSha256": "fc0dcd51b9445f55ce77a118556da38235c2b54ab67240df7a6b7c68622b5393",
+      "exportedAudioClipDurationSeconds": 0.6,
+      "bytes": 52964,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 26460,
+        "durationSeconds": 0.6
+      },
+      "changedFromV7": false,
+      "v7Sha256": "bae644cb6082c23faa0e4e45bd1bae9cc51a3e60c8dcbcf9315593ea9b65d711",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/64/6430d415-ba84-5845-b134-6b66527f113d.b3eda.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/thu/thu_crack_v1",
+      "bundlePath": "thu/thu_crack_v1",
+      "uuid": "cf9dd1a4-466c-5593-baf5-187e4e2ee84b",
+      "compressedUuid": "cfndGkRmxVk7r1GH5OLuhL",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/thu/thu_crack_v1.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/thu_crack_v01.wav",
+      "sourceMasterSha256": "48655129aa45861d9cdda7c9bafc2ba056a58a097bcbfbf0d51b98fc8de83718",
+      "sourceSha256": "48655129aa45861d9cdda7c9bafc2ba056a58a097bcbfbf0d51b98fc8de83718",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/cf/cf9dd1a4-466c-5593-baf5-187e4e2ee84b.a9107.wav",
+      "nativeSha256": "48655129aa45861d9cdda7c9bafc2ba056a58a097bcbfbf0d51b98fc8de83718",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/cf/cf9dd1a4-466c-5593-baf5-187e4e2ee84b.c4dd7.json",
+      "importSha256": "7da4dc8049bde229c2c0028e841b6dae73ce07feefdb4b069831b1416592fa79",
+      "exportedAudioClipDurationSeconds": 0.8,
+      "bytes": 70604,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 35280,
+        "durationSeconds": 0.8
+      },
+      "changedFromV7": false,
+      "v7Sha256": "48655129aa45861d9cdda7c9bafc2ba056a58a097bcbfbf0d51b98fc8de83718",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/cf/cf9dd1a4-466c-5593-baf5-187e4e2ee84b.a9107.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/thu/thu_crack_v2",
+      "bundlePath": "thu/thu_crack_v2",
+      "uuid": "7795d1a2-19a7-59f9-9fca-ec89f77fd3dd",
+      "compressedUuid": "77ldGiGadZ+Z/K7In3f9Pd",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/thu/thu_crack_v2.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/thu_crack_v02.wav",
+      "sourceMasterSha256": "a3922ef39f0dbf1810d450c1700f20414dc8196dbf1372cb1468c25dcea5bf98",
+      "sourceSha256": "a3922ef39f0dbf1810d450c1700f20414dc8196dbf1372cb1468c25dcea5bf98",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/77/7795d1a2-19a7-59f9-9fca-ec89f77fd3dd.b10c9.wav",
+      "nativeSha256": "a3922ef39f0dbf1810d450c1700f20414dc8196dbf1372cb1468c25dcea5bf98",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/77/7795d1a2-19a7-59f9-9fca-ec89f77fd3dd.50f6a.json",
+      "importSha256": "f0b3c111e710ca92fa6cbafcbf0271113f8289ca8431c8bb1221ec51b52e1724",
+      "exportedAudioClipDurationSeconds": 0.8,
+      "bytes": 70604,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 35280,
+        "durationSeconds": 0.8
+      },
+      "changedFromV7": false,
+      "v7Sha256": "a3922ef39f0dbf1810d450c1700f20414dc8196dbf1372cb1468c25dcea5bf98",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/77/7795d1a2-19a7-59f9-9fca-ec89f77fd3dd.b10c9.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/thu/thu_crack_v3",
+      "bundlePath": "thu/thu_crack_v3",
+      "uuid": "63f27887-dcb7-515d-830e-3aeff0c9289d",
+      "compressedUuid": "638niH3LdRXYMOOu/wySid",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/thu/thu_crack_v3.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/thu_crack_v03.wav",
+      "sourceMasterSha256": "3148c1306d4094e9f3f7613577b02b3851332bfcf9e43eacb21ae4057d4d7709",
+      "sourceSha256": "3148c1306d4094e9f3f7613577b02b3851332bfcf9e43eacb21ae4057d4d7709",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/63/63f27887-dcb7-515d-830e-3aeff0c9289d.27d32.wav",
+      "nativeSha256": "3148c1306d4094e9f3f7613577b02b3851332bfcf9e43eacb21ae4057d4d7709",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/63/63f27887-dcb7-515d-830e-3aeff0c9289d.c758f.json",
+      "importSha256": "7993ef8679bf5e1dc24be6663152ef5221c50c9506c71aee6fe815dbf638ab9c",
+      "exportedAudioClipDurationSeconds": 0.8,
+      "bytes": 70604,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 35280,
+        "durationSeconds": 0.8
+      },
+      "changedFromV7": false,
+      "v7Sha256": "3148c1306d4094e9f3f7613577b02b3851332bfcf9e43eacb21ae4057d4d7709",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/63/63f27887-dcb7-515d-830e-3aeff0c9289d.27d32.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/thu/thu_network_v1",
+      "bundlePath": "thu/thu_network_v1",
+      "uuid": "32b8164a-d3ee-5189-9a2d-0005da1457de",
+      "compressedUuid": "32uBZK0+5RiZotAAXaFFfe",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/thu/thu_network_v1.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/thu_network_v01.wav",
+      "sourceMasterSha256": "785f6f9b2fe330fbce8bfec48f4be93dd2493c8040252c3d34e4a30c775096fd",
+      "sourceSha256": "785f6f9b2fe330fbce8bfec48f4be93dd2493c8040252c3d34e4a30c775096fd",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/32/32b8164a-d3ee-5189-9a2d-0005da1457de.01a4c.wav",
+      "nativeSha256": "785f6f9b2fe330fbce8bfec48f4be93dd2493c8040252c3d34e4a30c775096fd",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/32/32b8164a-d3ee-5189-9a2d-0005da1457de.11bfc.json",
+      "importSha256": "4a695834792179e4e75d7ee864eaea1aa1c718fa7cfc1606b15207865a5f2f5a",
+      "exportedAudioClipDurationSeconds": 1.45,
+      "bytes": 127934,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 63945,
+        "durationSeconds": 1.45
+      },
+      "changedFromV7": false,
+      "v7Sha256": "785f6f9b2fe330fbce8bfec48f4be93dd2493c8040252c3d34e4a30c775096fd",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/32/32b8164a-d3ee-5189-9a2d-0005da1457de.01a4c.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/thu/thu_network_v2",
+      "bundlePath": "thu/thu_network_v2",
+      "uuid": "f9952902-727e-54e7-9cb4-20cacd07ca30",
+      "compressedUuid": "f9lSkCcn5U55y0IMrNB8ow",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/thu/thu_network_v2.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/thu_network_v02.wav",
+      "sourceMasterSha256": "f69688a07e6311453da7535781d1da3a19391cc88935cffc8c6c6fd9d0919969",
+      "sourceSha256": "f69688a07e6311453da7535781d1da3a19391cc88935cffc8c6c6fd9d0919969",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/f9/f9952902-727e-54e7-9cb4-20cacd07ca30.814bc.wav",
+      "nativeSha256": "f69688a07e6311453da7535781d1da3a19391cc88935cffc8c6c6fd9d0919969",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/f9/f9952902-727e-54e7-9cb4-20cacd07ca30.c5fe6.json",
+      "importSha256": "3af5426ff20287740156660ee45c08488a6ddc2e5f1469486b74dc7f63d8f098",
+      "exportedAudioClipDurationSeconds": 1.45,
+      "bytes": 127934,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 63945,
+        "durationSeconds": 1.45
+      },
+      "changedFromV7": false,
+      "v7Sha256": "f69688a07e6311453da7535781d1da3a19391cc88935cffc8c6c6fd9d0919969",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/f9/f9952902-727e-54e7-9cb4-20cacd07ca30.814bc.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/thu/thu_network_v3",
+      "bundlePath": "thu/thu_network_v3",
+      "uuid": "f109478f-aeb5-5b34-bbf7-70bea81c30b2",
+      "compressedUuid": "f1CUePrrVbNLv3cL6oHDCy",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/thu/thu_network_v3.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/thu_network_v03.wav",
+      "sourceMasterSha256": "57d91aecce2c0f07b2111a7d35dbb70e3c544ad73919aa83679ca54c0c9413fd",
+      "sourceSha256": "57d91aecce2c0f07b2111a7d35dbb70e3c544ad73919aa83679ca54c0c9413fd",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/f1/f109478f-aeb5-5b34-bbf7-70bea81c30b2.4492f.wav",
+      "nativeSha256": "57d91aecce2c0f07b2111a7d35dbb70e3c544ad73919aa83679ca54c0c9413fd",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/f1/f109478f-aeb5-5b34-bbf7-70bea81c30b2.98f05.json",
+      "importSha256": "58ab734c528d4fc830fef9c1a72d808c36889befeb0d537cafc28573b6ba49a3",
+      "exportedAudioClipDurationSeconds": 1.45,
+      "bytes": 127934,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 63945,
+        "durationSeconds": 1.45
+      },
+      "changedFromV7": false,
+      "v7Sha256": "57d91aecce2c0f07b2111a7d35dbb70e3c544ad73919aa83679ca54c0c9413fd",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/f1/f109478f-aeb5-5b34-bbf7-70bea81c30b2.4492f.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/war/war_armor_v1",
+      "bundlePath": "war/war_armor_v1",
+      "uuid": "d1d2ea66-0f3c-53bd-9cdf-f4200d2aebdc",
+      "compressedUuid": "d10upmDzxTvZzf9CANKuvc",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/war/war_armor_v1.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/war_armor_v01.wav",
+      "sourceMasterSha256": "8fd9be0d0ac1dadc607a85832d425c967206db982bd723aab79e898d1f61826d",
+      "sourceSha256": "a4af350d0b716e3bcd1ff9587aaa821b60c9444fd3c9040cd7906ff53ed79cfa",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/d1/d1d2ea66-0f3c-53bd-9cdf-f4200d2aebdc.aae48.wav",
+      "nativeSha256": "a4af350d0b716e3bcd1ff9587aaa821b60c9444fd3c9040cd7906ff53ed79cfa",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/d1/d1d2ea66-0f3c-53bd-9cdf-f4200d2aebdc.99dc6.json",
+      "importSha256": "ba1fd53c5afe018fe8eb2227d306aabcd5584d54f58f0febbf5ab617330193d1",
+      "exportedAudioClipDurationSeconds": 0.48,
+      "bytes": 42380,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 21168,
+        "durationSeconds": 0.48
+      },
+      "changedFromV7": true,
+      "v7Sha256": "0f4cce30cc6fb9d592bc9e3443145edb14b7679cc1769cdf084c87504af7f4d5",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/d1/d1d2ea66-0f3c-53bd-9cdf-f4200d2aebdc.aae48.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.4.ogg",
+      "recordingSha256": "4c2c962f8703882b8a6f863c1f5a35c6ae518d0281755fac9a13e63a73b86fa5"
+    },
+    {
+      "resourcePath": "audio/combat-v8/war/war_armor_v2",
+      "bundlePath": "war/war_armor_v2",
+      "uuid": "3471fa04-cfc5-5061-bba2-b4ed97f65300",
+      "compressedUuid": "34cfoEz8VQYbuitO2X9lMA",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/war/war_armor_v2.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/war_armor_v02.wav",
+      "sourceMasterSha256": "55c67b4b909fb4b4e826d9134aab454d0ee8d6780735edf23392c0790c79e600",
+      "sourceSha256": "faa4cd50c7d709e6ad09e84cab33aae41a98145b556bef576e8f000ca69b1b3e",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/34/3471fa04-cfc5-5061-bba2-b4ed97f65300.299d9.wav",
+      "nativeSha256": "faa4cd50c7d709e6ad09e84cab33aae41a98145b556bef576e8f000ca69b1b3e",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/34/3471fa04-cfc5-5061-bba2-b4ed97f65300.003c2.json",
+      "importSha256": "0c13326128b09da97760e3f52ff0a11ac025f4278bb1b1192d7b3d33842aed98",
+      "exportedAudioClipDurationSeconds": 0.48,
+      "bytes": 42380,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 21168,
+        "durationSeconds": 0.48
+      },
+      "changedFromV7": true,
+      "v7Sha256": "a49607d13b547903d94ea50090b95900ce2e76f1846222e6f7e5f49863423456",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/34/3471fa04-cfc5-5061-bba2-b4ed97f65300.299d9.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.8.ogg",
+      "recordingSha256": "1466349e10779cfede4538657031bd87f3757d6cf5139cfad6552fa859007172"
+    },
+    {
+      "resourcePath": "audio/combat-v8/war/war_armor_v3",
+      "bundlePath": "war/war_armor_v3",
+      "uuid": "8a80eb77-95b6-5aa8-aa77-792d84de790b",
+      "compressedUuid": "8agOt3lbZaqKp3eS2E3nkL",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/war/war_armor_v3.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/war_armor_v03.wav",
+      "sourceMasterSha256": "cc3d569d0f9a1522903c295cde214b54c7499b5d58a89cdeb62cb1282edad8f3",
+      "sourceSha256": "7a4064ada2c75b5c2e6b5cb2874c1e5852b1de15b5b824e3ae81f0ce3fbf00aa",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/8a/8a80eb77-95b6-5aa8-aa77-792d84de790b.dac59.wav",
+      "nativeSha256": "7a4064ada2c75b5c2e6b5cb2874c1e5852b1de15b5b824e3ae81f0ce3fbf00aa",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/8a/8a80eb77-95b6-5aa8-aa77-792d84de790b.4d4f9.json",
+      "importSha256": "8d2b2a2e459007a3efd69b2b712d25a7aa2770ee17360bfcdc792ce43c9a82cf",
+      "exportedAudioClipDurationSeconds": 0.48,
+      "bytes": 42380,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 21168,
+        "durationSeconds": 0.48
+      },
+      "changedFromV7": true,
+      "v7Sha256": "8bad15361a5f7d3301f8afebb97865f4cdfb408de436be24af63e84abdaa33eb",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/8a/8a80eb77-95b6-5aa8-aa77-792d84de790b.dac59.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.9.ogg",
+      "recordingSha256": "aabd55ad99a1d171b50d741923077488a1021460fab35adf4fb7f36def49adc0"
+    },
+    {
+      "resourcePath": "audio/combat-v8/war/war_finish_v1",
+      "bundlePath": "war/war_finish_v1",
+      "uuid": "954e033c-481c-517d-9127-a4ee7b7bf699",
+      "compressedUuid": "95TgM8SBxRfZEnpO57e/aZ",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/war/war_finish_v1.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/war_finish_v01.wav",
+      "sourceMasterSha256": "e4c1b5694b190d3062eb4a704829a211fee818d1b42e67f38efeecc253cf0a03",
+      "sourceSha256": "bb1a3cbe3cc1f7b8629fe0926b9095481145358aaf518a06c533a8bc11f6669d",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/95/954e033c-481c-517d-9127-a4ee7b7bf699.6e3ee.wav",
+      "nativeSha256": "bb1a3cbe3cc1f7b8629fe0926b9095481145358aaf518a06c533a8bc11f6669d",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/95/954e033c-481c-517d-9127-a4ee7b7bf699.03502.json",
+      "importSha256": "2a614925fd5dc5874106963b535ea8f45905bef3b00f91884617e0173226e4ee",
+      "exportedAudioClipDurationSeconds": 0.56,
+      "bytes": 49436,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 24696,
+        "durationSeconds": 0.56
+      },
+      "changedFromV7": true,
+      "v7Sha256": "0e341286198ca9755199aad8b376ddbde0588578efe18499fab16d00806c793d",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/95/954e033c-481c-517d-9127-a4ee7b7bf699.6e3ee.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.8.ogg",
+      "recordingSha256": "1466349e10779cfede4538657031bd87f3757d6cf5139cfad6552fa859007172"
+    },
+    {
+      "resourcePath": "audio/combat-v8/war/war_finish_v2",
+      "bundlePath": "war/war_finish_v2",
+      "uuid": "c8407dd8-f7c1-5122-9910-a454d91aaf83",
+      "compressedUuid": "c8QH3Y98FRIpkQpFTZGq+D",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/war/war_finish_v2.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/war_finish_v02.wav",
+      "sourceMasterSha256": "d4f336a4b1b1d3f98618e7344345a4a3f3a707ceab0ef7c4062d6d11b991f172",
+      "sourceSha256": "8a8da8b8982e8d7b5df32711147493572acc34cfe865963e018bc60ab5ee5503",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/c8/c8407dd8-f7c1-5122-9910-a454d91aaf83.4be0e.wav",
+      "nativeSha256": "8a8da8b8982e8d7b5df32711147493572acc34cfe865963e018bc60ab5ee5503",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/c8/c8407dd8-f7c1-5122-9910-a454d91aaf83.1772a.json",
+      "importSha256": "3de2e6404e2ade984f6f4552924f643c9dfd82bc5dafe67dbd68cf0c4ba9db5f",
+      "exportedAudioClipDurationSeconds": 0.56,
+      "bytes": 49436,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 24696,
+        "durationSeconds": 0.56
+      },
+      "changedFromV7": true,
+      "v7Sha256": "60c923435fa44b3920e27fa190e07c0770bddeb539728bb16e7909e67a9dca79",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/c8/c8407dd8-f7c1-5122-9910-a454d91aaf83.4be0e.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.4.ogg",
+      "recordingSha256": "4c2c962f8703882b8a6f863c1f5a35c6ae518d0281755fac9a13e63a73b86fa5"
+    },
+    {
+      "resourcePath": "audio/combat-v8/war/war_finish_v3",
+      "bundlePath": "war/war_finish_v3",
+      "uuid": "fe42515c-ceff-5127-9ab7-6c1693326304",
+      "compressedUuid": "feQlFczv9RJ5q3bBaTMmME",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/war/war_finish_v3.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/war_finish_v03.wav",
+      "sourceMasterSha256": "27037b557d1b01778a5224a40a7be321420d33f86394be36112e7f2fd6bb9aad",
+      "sourceSha256": "af2bc4f60cf1ad764be53edbb89360b9934f5c6bdf7f471eba1af4f8aaca32f3",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/fe/fe42515c-ceff-5127-9ab7-6c1693326304.3ef11.wav",
+      "nativeSha256": "af2bc4f60cf1ad764be53edbb89360b9934f5c6bdf7f471eba1af4f8aaca32f3",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/fe/fe42515c-ceff-5127-9ab7-6c1693326304.70242.json",
+      "importSha256": "b955bbac2ca4037d4d2d9d84d17c29bb68821b76d110846c24eb4cc602b1429b",
+      "exportedAudioClipDurationSeconds": 0.56,
+      "bytes": 49436,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 24696,
+        "durationSeconds": 0.56
+      },
+      "changedFromV7": true,
+      "v7Sha256": "6adf297f8cc844f9abf97659ea3feaa17de6b7d5af8d33cabbbfcaaefa11d3b9",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/fe/fe42515c-ceff-5127-9ab7-6c1693326304.3ef11.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.6.ogg",
+      "recordingSha256": "4c7643dbcd813eb614a56451652987d37ba587fac3309303aa0ab9a27d3a7e71"
+    },
+    {
+      "resourcePath": "audio/combat-v8/war/war_slash_v1",
+      "bundlePath": "war/war_slash_v1",
+      "uuid": "d86214ff-d667-5985-b996-b2d6a1f436f2",
+      "compressedUuid": "d8YhT/1mdZhbmWstah9Dby",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/war/war_slash_v1.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/war_slash_v01.wav",
+      "sourceMasterSha256": "d768371881d96c7f449cf1187a189ab7c60faf8887a9de61a7d0ef8852e1511f",
+      "sourceSha256": "64a03c6bf7a48ee5c5e39fdb4e05746e5a97789e6cbf4555a01bb9c7a0f05104",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/d8/d86214ff-d667-5985-b996-b2d6a1f436f2.9b1e3.wav",
+      "nativeSha256": "64a03c6bf7a48ee5c5e39fdb4e05746e5a97789e6cbf4555a01bb9c7a0f05104",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/d8/d86214ff-d667-5985-b996-b2d6a1f436f2.f9340.json",
+      "importSha256": "00c93ffcd8c426785ba6b42cf78302bbb1804bfa8ac787b3215fa70bd72345be",
+      "exportedAudioClipDurationSeconds": 0.4,
+      "bytes": 35324,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 17640,
+        "durationSeconds": 0.4
+      },
+      "changedFromV7": true,
+      "v7Sha256": "e475778b80a99234695d2f070c97295e642cdce9955b8a98e7cfc951c4afee0d",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/d8/d86214ff-d667-5985-b996-b2d6a1f436f2.9b1e3.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.8.ogg",
+      "recordingSha256": "1466349e10779cfede4538657031bd87f3757d6cf5139cfad6552fa859007172"
+    },
+    {
+      "resourcePath": "audio/combat-v8/war/war_slash_v2",
+      "bundlePath": "war/war_slash_v2",
+      "uuid": "4abd7636-6c7d-54f2-aba1-833d3e179397",
+      "compressedUuid": "4avXY2bH1U8quhgz0+F5OX",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/war/war_slash_v2.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/war_slash_v02.wav",
+      "sourceMasterSha256": "2619dfc11464a5f0bd98faefca455a5590e99d953818a02dda1984c26720ce80",
+      "sourceSha256": "d6ed05256f7e3db63dce560609d87b400792f93fb4da41fce367ca1be40ce3c3",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/4a/4abd7636-6c7d-54f2-aba1-833d3e179397.0ef60.wav",
+      "nativeSha256": "d6ed05256f7e3db63dce560609d87b400792f93fb4da41fce367ca1be40ce3c3",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/4a/4abd7636-6c7d-54f2-aba1-833d3e179397.73eef.json",
+      "importSha256": "612182a01581e168e57973f7eafb506860fe5f43136c8b32e1876ffee5137347",
+      "exportedAudioClipDurationSeconds": 0.4,
+      "bytes": 35324,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 17640,
+        "durationSeconds": 0.4
+      },
+      "changedFromV7": true,
+      "v7Sha256": "1b9868bde82b0fe2ff285b6dd4dd9fd523e36559f4020efa5f0fb54b6f82429a",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/4a/4abd7636-6c7d-54f2-aba1-833d3e179397.0ef60.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.4.ogg",
+      "recordingSha256": "4c2c962f8703882b8a6f863c1f5a35c6ae518d0281755fac9a13e63a73b86fa5"
+    },
+    {
+      "resourcePath": "audio/combat-v8/war/war_slash_v3",
+      "bundlePath": "war/war_slash_v3",
+      "uuid": "bddb182f-cbb9-5e30-b4d4-9d970e3cd9fe",
+      "compressedUuid": "bd2xgvy7leMLTUnZcOPNn+",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/war/war_slash_v3.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/war_slash_v03.wav",
+      "sourceMasterSha256": "968d0ef99e750ac187ae7932c358a4a95d242ecff3df9fc01412e560ec20551c",
+      "sourceSha256": "b3cca100dc705b0b031ae76d5b78eb36a69136c153ce5b9a573cb4e0b971a944",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/bd/bddb182f-cbb9-5e30-b4d4-9d970e3cd9fe.4c0f3.wav",
+      "nativeSha256": "b3cca100dc705b0b031ae76d5b78eb36a69136c153ce5b9a573cb4e0b971a944",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/bd/bddb182f-cbb9-5e30-b4d4-9d970e3cd9fe.d03e1.json",
+      "importSha256": "8d701253031324dbe96833c9f20923f8c4385da317e9bcc76c2c1a5e2bfe1f3c",
+      "exportedAudioClipDurationSeconds": 0.4,
+      "bytes": 35324,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 17640,
+        "durationSeconds": 0.4
+      },
+      "changedFromV7": true,
+      "v7Sha256": "7b2f55e920a7a35ae305e971812700281e940f5dae9ca5ef8272767d4d2e78eb",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/bd/bddb182f-cbb9-5e30-b4d4-9d970e3cd9fe.4c0f3.wav"
+      ],
+      "recording": "source-art/audio/impact-wuxia-v8/sources/starninjas/extracted/clashes/sword_clash.3.ogg",
+      "recordingSha256": "6c588bc79b7e4fe202e3b65fa849954d684d2d2342f6ad04813540854c421663"
+    },
+    {
+      "resourcePath": "audio/combat-v8/war/war_swing_v1",
+      "bundlePath": "war/war_swing_v1",
+      "uuid": "0cea783b-bcdf-5d46-8f7d-33727326c017",
+      "compressedUuid": "0c6ng7vN9dRo99M3JzJsAX",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/war/war_swing_v1.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/war_swing_v01.wav",
+      "sourceMasterSha256": "a65fd0a6f08dd13bde19f7cc47da7a6fcecec4c947ece6eb7a5697477fdbf4ce",
+      "sourceSha256": "a65fd0a6f08dd13bde19f7cc47da7a6fcecec4c947ece6eb7a5697477fdbf4ce",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/0c/0cea783b-bcdf-5d46-8f7d-33727326c017.6e1d5.wav",
+      "nativeSha256": "a65fd0a6f08dd13bde19f7cc47da7a6fcecec4c947ece6eb7a5697477fdbf4ce",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/0c/0cea783b-bcdf-5d46-8f7d-33727326c017.73b43.json",
+      "importSha256": "e685ab9a7fa0abb575386cacf1e22f29d536ed141189a4ebf2c893268b1fd1c6",
+      "exportedAudioClipDurationSeconds": 0.26,
+      "bytes": 22976,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 11466,
+        "durationSeconds": 0.26
+      },
+      "changedFromV7": false,
+      "v7Sha256": "a65fd0a6f08dd13bde19f7cc47da7a6fcecec4c947ece6eb7a5697477fdbf4ce",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/0c/0cea783b-bcdf-5d46-8f7d-33727326c017.6e1d5.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/war/war_swing_v2",
+      "bundlePath": "war/war_swing_v2",
+      "uuid": "7e52651c-d685-56be-af38-7f0d039fd34a",
+      "compressedUuid": "7eUmUc1oVWvq84fw0Dn9NK",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/war/war_swing_v2.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/war_swing_v02.wav",
+      "sourceMasterSha256": "84e7bd87a53abff103d5d59643a6db291db9722abf4de82e9e98aee9b2ea16bc",
+      "sourceSha256": "84e7bd87a53abff103d5d59643a6db291db9722abf4de82e9e98aee9b2ea16bc",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/7e/7e52651c-d685-56be-af38-7f0d039fd34a.21907.wav",
+      "nativeSha256": "84e7bd87a53abff103d5d59643a6db291db9722abf4de82e9e98aee9b2ea16bc",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/7e/7e52651c-d685-56be-af38-7f0d039fd34a.45770.json",
+      "importSha256": "d30f896018bbacf71a4c9d74ca4a074916db5a4c4580b5b9ecccc35265211ce6",
+      "exportedAudioClipDurationSeconds": 0.26,
+      "bytes": 22976,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 11466,
+        "durationSeconds": 0.26
+      },
+      "changedFromV7": false,
+      "v7Sha256": "84e7bd87a53abff103d5d59643a6db291db9722abf4de82e9e98aee9b2ea16bc",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/7e/7e52651c-d685-56be-af38-7f0d039fd34a.21907.wav"
+      ]
+    },
+    {
+      "resourcePath": "audio/combat-v8/war/war_swing_v3",
+      "bundlePath": "war/war_swing_v3",
+      "uuid": "e209b10b-72ed-55b9-9742-20b1487aceff",
+      "compressedUuid": "e2CbELcu1VuZdCILFIes7/",
+      "sourceFile": "src/cocos/assets/resources/audio/combat-v8/war/war_swing_v3.wav",
+      "sourceMaster": "source-art/audio/impact-wuxia-v8/clips/war_swing_v03.wav",
+      "sourceMasterSha256": "dbb6a638f1eae353be23455f15a33957ca8cf62ed5fa443a29272b38346df154",
+      "sourceSha256": "dbb6a638f1eae353be23455f15a33957ca8cf62ed5fa443a29272b38346df154",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/e2/e209b10b-72ed-55b9-9742-20b1487aceff.1bb09.wav",
+      "nativeSha256": "dbb6a638f1eae353be23455f15a33957ca8cf62ed5fa443a29272b38346df154",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/e2/e209b10b-72ed-55b9-9742-20b1487aceff.70247.json",
+      "importSha256": "7582957ea864da4cd98af19f208c8f82ba1a3640b9ff13c6ac0c10283dc0d9e2",
+      "exportedAudioClipDurationSeconds": 0.26,
+      "bytes": 22976,
+      "format": {
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 11466,
+        "durationSeconds": 0.26
+      },
+      "changedFromV7": false,
+      "v7Sha256": "dbb6a638f1eae353be23455f15a33957ca8cf62ed5fa443a29272b38346df154",
+      "mappingVerified": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/combat-audio/native/e2/e209b10b-72ed-55b9-9742-20b1487aceff.1bb09.wav"
+      ]
+    }
+  ],
+  "musicFiles": [
+    {
+      "resourcePath": "audio/music/embers-oaths-explore",
+      "bundlePath": "embers-oaths-explore",
+      "uuid": "6d6ef556-4589-4892-beb7-5c78f419b05b",
+      "compressedUuid": "6dbvVWRYlIkr63XHj0GbBb",
+      "sourceFile": "src/cocos/assets/resources/audio/music/embers-oaths-explore.mp3",
+      "sha256": "7997b09fba17f76bf00f4a69534cc5d8fe21ae75fc8e4663b9c6e521f4d6c5e0",
+      "matchesHistoricalBaseline": true,
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/background-music/native/6d/6d6ef556-4589-4892-beb7-5c78f419b05b.b5348.mp3",
+      "nativeSha256": "7997b09fba17f76bf00f4a69534cc5d8fe21ae75fc8e4663b9c6e521f4d6c5e0",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/background-music/import/6d/6d6ef556-4589-4892-beb7-5c78f419b05b.8d2f4.json",
+      "importSha256": "04a338e8e076e59573f02edb9409375e8aebd2775c36c0d3bb499254c0d5eab7",
+      "bytes": 1533807,
+      "exportedAudioClipDurationSeconds": 96.052245,
+      "sourceAndNativeByteIdentical": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/background-music/native/6d/6d6ef556-4589-4892-beb7-5c78f419b05b.b5348.mp3"
+      ]
+    },
+    {
+      "resourcePath": "audio/music/embers-oaths-combat",
+      "bundlePath": "embers-oaths-combat",
+      "uuid": "7f51905c-0236-4f17-a3ee-5eba32066574",
+      "compressedUuid": "7fUZBcAjZPF6PuXroyBmV0",
+      "sourceFile": "src/cocos/assets/resources/audio/music/embers-oaths-combat.mp3",
+      "sha256": "d4be274ee559cafee0d8526137d60ed6d37ab0f2429bf729fac3ea52361c6e0b",
+      "matchesHistoricalBaseline": true,
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/background-music/native/7f/7f51905c-0236-4f17-a3ee-5eba32066574.909b0.mp3",
+      "nativeSha256": "d4be274ee559cafee0d8526137d60ed6d37ab0f2429bf729fac3ea52361c6e0b",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/background-music/import/7f/7f51905c-0236-4f17-a3ee-5eba32066574.3a3a5.json",
+      "importSha256": "bb37833cdb0922a8d2974f44b13ef1e6429b5fbaa0a53f445cfb5a9330519c31",
+      "bytes": 1533807,
+      "exportedAudioClipDurationSeconds": 96.052245,
+      "sourceAndNativeByteIdentical": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/background-music/native/7f/7f51905c-0236-4f17-a3ee-5eba32066574.909b0.mp3"
+      ]
+    },
+    {
+      "resourcePath": "audio/music/embers-oaths-aftermath",
+      "bundlePath": "embers-oaths-aftermath",
+      "uuid": "b13ecfbb-d3df-4f8d-a274-24b37d375417",
+      "compressedUuid": "b1Ps+7099PjaJ0JLN9N1QX",
+      "sourceFile": "src/cocos/assets/resources/audio/music/embers-oaths-aftermath.mp3",
+      "sha256": "9379ca63d58862eedf5e7ab5ac029c4ef4cfec810652741b7a03ddd63ef57dc7",
+      "matchesHistoricalBaseline": true,
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/background-music/native/b1/b13ecfbb-d3df-4f8d-a274-24b37d375417.4574a.mp3",
+      "nativeSha256": "9379ca63d58862eedf5e7ab5ac029c4ef4cfec810652741b7a03ddd63ef57dc7",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/background-music/import/b1/b13ecfbb-d3df-4f8d-a274-24b37d375417.bc2e0.json",
+      "importSha256": "6a97843c7b6eb938636229830050b8a8909dd2cdfbc6bd13bf59fe4f4a5c1841",
+      "bytes": 240696,
+      "exportedAudioClipDurationSeconds": 15.046531,
+      "sourceAndNativeByteIdentical": true,
+      "onlyExportedNativeOccurrence": [
+        "src/cocos/build/concept-2d-audio/assets/background-music/native/b1/b13ecfbb-d3df-4f8d-a274-24b37d375417.4574a.mp3"
+      ]
+    }
+  ],
+  "historicalV7Files": [
+    {
+      "resourcePath": "audio/combat-v7/war/war_swing_v1",
+      "sourceSha256": "a65fd0a6f08dd13bde19f7cc47da7a6fcecec4c947ece6eb7a5697477fdbf4ce",
+      "historicalSha256Matches": true,
+      "uuid": "f6fe792e-81df-5ded-a25a-e534e8c15557",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/war/war_swing_v2",
+      "sourceSha256": "84e7bd87a53abff103d5d59643a6db291db9722abf4de82e9e98aee9b2ea16bc",
+      "historicalSha256Matches": true,
+      "uuid": "b84fadea-d1c2-504b-9801-888cf4dc6151",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/war/war_swing_v3",
+      "sourceSha256": "dbb6a638f1eae353be23455f15a33957ca8cf62ed5fa443a29272b38346df154",
+      "historicalSha256Matches": true,
+      "uuid": "315b98b7-e64c-5d01-8533-4505798fae16",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/war/war_slash_v1",
+      "sourceSha256": "e475778b80a99234695d2f070c97295e642cdce9955b8a98e7cfc951c4afee0d",
+      "historicalSha256Matches": true,
+      "uuid": "4f0e1689-3f0b-5d48-bc5d-ee58ed0f80ff",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/war/war_slash_v2",
+      "sourceSha256": "1b9868bde82b0fe2ff285b6dd4dd9fd523e36559f4020efa5f0fb54b6f82429a",
+      "historicalSha256Matches": true,
+      "uuid": "44d7366a-6e0f-5bdd-bc20-5808ca986de0",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/war/war_slash_v3",
+      "sourceSha256": "7b2f55e920a7a35ae305e971812700281e940f5dae9ca5ef8272767d4d2e78eb",
+      "historicalSha256Matches": true,
+      "uuid": "3050fc31-2b20-5953-832d-9b0055d6109b",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/war/war_armor_v1",
+      "sourceSha256": "0f4cce30cc6fb9d592bc9e3443145edb14b7679cc1769cdf084c87504af7f4d5",
+      "historicalSha256Matches": true,
+      "uuid": "8093870c-f381-5256-b422-5fba51caf41c",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/war/war_armor_v2",
+      "sourceSha256": "a49607d13b547903d94ea50090b95900ce2e76f1846222e6f7e5f49863423456",
+      "historicalSha256Matches": true,
+      "uuid": "707d7ca2-3c0a-5fed-bf6f-bfa0b88ad06c",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/war/war_armor_v3",
+      "sourceSha256": "8bad15361a5f7d3301f8afebb97865f4cdfb408de436be24af63e84abdaa33eb",
+      "historicalSha256Matches": true,
+      "uuid": "a74df1e7-54db-5667-91c7-3bea9e65d470",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/war/war_finish_v1",
+      "sourceSha256": "0e341286198ca9755199aad8b376ddbde0588578efe18499fab16d00806c793d",
+      "historicalSha256Matches": true,
+      "uuid": "c3b7ac47-933e-5bff-aa71-f3ead8e3a3c2",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/war/war_finish_v2",
+      "sourceSha256": "60c923435fa44b3920e27fa190e07c0770bddeb539728bb16e7909e67a9dca79",
+      "historicalSha256Matches": true,
+      "uuid": "4a8893e1-c46c-56ee-9a57-456a300d35ad",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/war/war_finish_v3",
+      "sourceSha256": "6adf297f8cc844f9abf97659ea3feaa17de6b7d5af8d33cabbbfcaaefa11d3b9",
+      "historicalSha256Matches": true,
+      "uuid": "38e8a9ac-d518-5576-ac47-cca8c7e4925e",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/bow/bow_draw_v1",
+      "sourceSha256": "f3f9f39f3280b6770c8fc0ceb63bac987b89ccfb3cd12cdda1de530e9b2271af",
+      "historicalSha256Matches": true,
+      "uuid": "817dca12-7813-5172-9691-eb8b953a4bf0",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/bow/bow_draw_v2",
+      "sourceSha256": "f78139db30a7314936ba6eae552558b1b55b387e32a4c6cac55c1a6a2b5f92f2",
+      "historicalSha256Matches": true,
+      "uuid": "93688c8f-d44f-5931-96cb-f1282ab89a0a",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/bow/bow_draw_v3",
+      "sourceSha256": "8f7dd202af4d6ba1790aa2231907389126cc75974e962c1e42991bd453305085",
+      "historicalSha256Matches": true,
+      "uuid": "278e84eb-78ba-5e56-afb7-25418c4ea2f2",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/bow/bow_release_v1",
+      "sourceSha256": "15a9618bc115b733b920bb4f495388601f174a346a18d58e61ebb16a5551ff8b",
+      "historicalSha256Matches": true,
+      "uuid": "16607ef6-22d6-53c8-9b1a-b79556316086",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/bow/bow_release_v2",
+      "sourceSha256": "7d9265ed4b0f5bacf24a802f2ba86310b778e6fcc1c11eb0db10f3e7d255eba2",
+      "historicalSha256Matches": true,
+      "uuid": "fe43bfa6-2609-5df1-9ed2-e691d9a09bb8",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/bow/bow_release_v3",
+      "sourceSha256": "a7cc5d0e036a283ac3d684eaa01ad5cac5296e6118df08b77f9189abd62b3b99",
+      "historicalSha256Matches": true,
+      "uuid": "e1e426d7-62f8-568c-866f-b37ab91609b1",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/bow/bow_pierce_v1",
+      "sourceSha256": "e3534a9b7b3df3a91bb6a0428677975b82e201ba19e6cc9af7f601957ad48891",
+      "historicalSha256Matches": true,
+      "uuid": "900b9afb-8403-5bc1-8942-07e2e7082fe2",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/bow/bow_pierce_v2",
+      "sourceSha256": "259cde173b218b6ed06b94d2806063af9438477f419f2834f4604064d9a25718",
+      "historicalSha256Matches": true,
+      "uuid": "bfb6061a-b11c-589e-a419-0df4f5bd05ac",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/bow/bow_pierce_v3",
+      "sourceSha256": "2b1c6e1d9aeeb4f134d38885f87bb1398f547a922b2f9832726ced797bde5c36",
+      "historicalSha256Matches": true,
+      "uuid": "4733837d-d23f-57aa-a374-8e5263a9a994",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/bow/bow_heavy_v1",
+      "sourceSha256": "bdc246fdcf77296f38c471ee484352f99edfa75fba376f446c9c50821b25b155",
+      "historicalSha256Matches": true,
+      "uuid": "28b535df-4b6c-5d3b-a707-9e5f4103d8e4",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/bow/bow_heavy_v2",
+      "sourceSha256": "020c493c6acaf2bd9f3a9bac01d5cc7fbdfec05bd9518bb2fa25bca32e295685",
+      "historicalSha256Matches": true,
+      "uuid": "aa211184-a657-5cce-ae68-ec054d69a889",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/bow/bow_heavy_v3",
+      "sourceSha256": "c6ed8f60d2a62e3457655b7bf19a225f639330a1dddcc0d364317b7bec62dc0f",
+      "historicalSha256Matches": true,
+      "uuid": "f22a91d8-7a2a-5ac3-9084-3e45e00be95d",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/bow/bow_armor_v1",
+      "sourceSha256": "7aff97f50f83ed02c042be3022197ccff9c740bd7044ab80dc2e966bc82428b1",
+      "historicalSha256Matches": true,
+      "uuid": "8d9e9e51-cdd3-58dc-80b0-33f26c1bc505",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/bow/bow_armor_v2",
+      "sourceSha256": "52b795ce6ba181e96eb8f9a2532eb8e2cede1f6cfaca1a3dcc569f2585982397",
+      "historicalSha256Matches": true,
+      "uuid": "ae7c6a9e-ffaa-51f7-a86f-1a13d473ac78",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/bow/bow_armor_v3",
+      "sourceSha256": "5f6280fb092e9bcbc67a31fa45e9712a7c40aca185211e3526fbb3906f255013",
+      "historicalSha256Matches": true,
+      "uuid": "958b597b-52ac-5fe4-a2ec-34898915b3c3",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/fir/fir_charge_v1",
+      "sourceSha256": "985b2bebcfc55fbf299c08a7e6696c9fda59a103f0bcf875c7be50aa101bbed9",
+      "historicalSha256Matches": true,
+      "uuid": "0bb33706-fb97-5043-8df9-80fbdb1012ea",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/fir/fir_charge_v2",
+      "sourceSha256": "7ed7c620ea2788a1578ba97898c278a7542ed98f3bb9ced01585aecc6fbd6721",
+      "historicalSha256Matches": true,
+      "uuid": "8d393f4e-981b-517f-b58f-d39d7d27d4d1",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/fir/fir_charge_v3",
+      "sourceSha256": "48e5cf98c755f5e877157361be5a4995800d935a6f0a7d7c64bf94d6939ffd97",
+      "historicalSha256Matches": true,
+      "uuid": "dac72f22-4101-5258-bea7-c026f42be6ef",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/fir/fir_burst_v1",
+      "sourceSha256": "cf459142bdf9ccde86405f7cf43337c4abf59ab5893fe3aecd83ce65aeb69182",
+      "historicalSha256Matches": true,
+      "uuid": "a3868471-5013-59e1-b789-db78fa422916",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/fir/fir_burst_v2",
+      "sourceSha256": "47f5137d72ba57c43c835b869e88600e3dce0c91da489c993e5a0ed629a2be83",
+      "historicalSha256Matches": true,
+      "uuid": "7526b88f-a068-5916-8f0b-e4f7265ecad9",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/fir/fir_burst_v3",
+      "sourceSha256": "121e955b4a396c8ae007a3643ef91c95ef0f8cb420fcc8c3acd107375a088193",
+      "historicalSha256Matches": true,
+      "uuid": "eadc7269-1a34-5d12-bf70-fa4b454086fb",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/fir/fir_wall_v1",
+      "sourceSha256": "c66daab82180e2dce88b7c383d63c0d9a5ea8b5a061d1d4098204e681c06dd22",
+      "historicalSha256Matches": true,
+      "uuid": "361d97b0-77ee-5906-a252-4b6dc6271345",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/fir/fir_wall_v2",
+      "sourceSha256": "a5d80de59f42c5abfe019becf06e1555c6cfc540249f1fb211fa83b26b2a5ada",
+      "historicalSha256Matches": true,
+      "uuid": "175bf1b4-31f2-51b6-8550-d82e38023fc3",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/fir/fir_wall_v3",
+      "sourceSha256": "4669b9d9642af5b9e3212eb333ac0f078bf68749e9abd8069bbda54855ef81d6",
+      "historicalSha256Matches": true,
+      "uuid": "d5805570-d98c-5f1f-86a6-2eaa1240a773",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/thu/thu_charge_v1",
+      "sourceSha256": "a887dbb9d4d42db5a55f5b363896406d14df681b6905576930ecb807d1978f56",
+      "historicalSha256Matches": true,
+      "uuid": "5173824a-afc4-57fb-ae58-43c2c3b3d885",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/thu/thu_charge_v2",
+      "sourceSha256": "d06b26457afcfdfc293ad5b4979928b4add8ccf8f9aa7043e6d44bfe63008d05",
+      "historicalSha256Matches": true,
+      "uuid": "6562f89b-7c9c-50a6-8b3a-59f7f8b628b7",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/thu/thu_charge_v3",
+      "sourceSha256": "bae644cb6082c23faa0e4e45bd1bae9cc51a3e60c8dcbcf9315593ea9b65d711",
+      "historicalSha256Matches": true,
+      "uuid": "c890c954-8b80-5e68-914f-f0c94c7d7aec",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/thu/thu_crack_v1",
+      "sourceSha256": "48655129aa45861d9cdda7c9bafc2ba056a58a097bcbfbf0d51b98fc8de83718",
+      "historicalSha256Matches": true,
+      "uuid": "bf747eac-2435-5a30-ba2f-d27c667c2495",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/thu/thu_crack_v2",
+      "sourceSha256": "a3922ef39f0dbf1810d450c1700f20414dc8196dbf1372cb1468c25dcea5bf98",
+      "historicalSha256Matches": true,
+      "uuid": "cd76c4bd-a560-5bec-9f10-32fee88f429d",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/thu/thu_crack_v3",
+      "sourceSha256": "3148c1306d4094e9f3f7613577b02b3851332bfcf9e43eacb21ae4057d4d7709",
+      "historicalSha256Matches": true,
+      "uuid": "ceebd377-30fe-54c6-801c-c2edbd198097",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/thu/thu_network_v1",
+      "sourceSha256": "785f6f9b2fe330fbce8bfec48f4be93dd2493c8040252c3d34e4a30c775096fd",
+      "historicalSha256Matches": true,
+      "uuid": "c636d228-8560-58cb-bb29-b724ef0c112e",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/thu/thu_network_v2",
+      "sourceSha256": "f69688a07e6311453da7535781d1da3a19391cc88935cffc8c6c6fd9d0919969",
+      "historicalSha256Matches": true,
+      "uuid": "55b21456-6fac-506c-ac46-a819c253164a",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    },
+    {
+      "resourcePath": "audio/combat-v7/thu/thu_network_v3",
+      "sourceSha256": "57d91aecce2c0f07b2111a7d35dbb70e3c544ad73919aa83679ca54c0c9413fd",
+      "historicalSha256Matches": true,
+      "uuid": "bc60ba72-db25-50f4-83a4-60cb1346375f",
+      "configOccurrences": [],
+      "exportedFilesWithOldUuid": []
+    }
+  ],
+  "failures": [],
+  "limits": [
+    "This checks asset routing, exact bytes and declared source license, not artistic or human listening acceptance.",
+    "Web export is not TapTap Android/device playback, memory, latency or interruption validation.",
+    "The 27 preserved sounds intentionally share bytes with retained v7 source files; only one native instance of each is exported. No v7 UUID/import/native file is shipped."
+  ]
+}

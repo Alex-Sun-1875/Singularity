@@ -1,10 +1,11 @@
 import {Asset,AssetManager,assetManager,resources as localResources} from 'cc';
-import {MINIGAME} from 'cc/env';
+import {isTapMinigame} from '../../platform/RuntimePlatform';
+import {htmlBundlePreview} from '../../platform/HtmlPreview';
 import {loadBundleWithDependencies} from './AssetBundles';
 import {RESOURCE_PACKS} from './ResourcePacks';
 
-/** The browser release preview exercises the same resource graph as TapTap. */
-export const isTapRelease=MINIGAME||(globalThis as any).__TAP_RELEASE__===true;
+/** Explicit HTML bundle preview shares the resource graph, never platform identity. */
+export const usesAssetBundles=isTapMinigame||htmlBundlePreview();
 type AssetType<T extends Asset>={new(...args:any[]):T};
 function loadAsset<T extends Asset>(bundle:AssetManager.Bundle,path:string,type:AssetType<T>,complete:(error:Error|null,asset:T)=>void):void {
  const cached=bundle.get(path,type);
@@ -18,12 +19,12 @@ function loadAsset<T extends Asset>(bundle:AssetManager.Bundle,path:string,type:
  * Ordinary editor/Web previews continue to use their existing resources bundle. */
 export const gameResources={
  get<T extends Asset>(path:string,type:AssetType<T>):T|null {
-  const route=isTapRelease&&RESOURCE_PACKS.find(pack=>path.startsWith(pack.prefix));
+  const route=usesAssetBundles&&RESOURCE_PACKS.find(pack=>path.startsWith(pack.prefix));
   const asset=route?assetManager.getBundle(route.bundle)?.get(path.slice(route.prefix.length),type):localResources.get(path,type);
   return asset?.isValid?asset:null;
  },
  load<T extends Asset>(path:string,type:AssetType<T>,complete:(error:Error|null,asset:T)=>void):void {
-  if(!isTapRelease){loadAsset(localResources,path,type,complete);return;}
+  if(!usesAssetBundles){loadAsset(localResources,path,type,complete);return;}
   const route=RESOURCE_PACKS.find(pack=>path.startsWith(pack.prefix));
   if(!route){loadAsset(localResources,path,type,complete);return;}
   void loadBundleWithDependencies(route.bundle).then(bundle=>{
@@ -31,7 +32,7 @@ export const gameResources={
   },error=>complete(error instanceof Error?error:new Error(String(error)),null));
  },
  release(path:string,type?:AssetType<Asset>):void {
-  const route=isTapRelease&&RESOURCE_PACKS.find(pack=>path.startsWith(pack.prefix));
+  const route=usesAssetBundles&&RESOURCE_PACKS.find(pack=>path.startsWith(pack.prefix));
   if(route)assetManager.getBundle(route.bundle)?.release(path.slice(route.prefix.length),type);
   else localResources.release(path,type);
  },

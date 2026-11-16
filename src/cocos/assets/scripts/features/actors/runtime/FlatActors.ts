@@ -3,7 +3,7 @@ import {Camera,Color,JsonAsset,Material,Mesh,MeshRenderer,Node,Quat,Rect,Size,Sp
 import type {GameSession} from '../../../core/GameSession';
 import type {SceneBuilder} from '../../world/runtime/SceneBuilder';
 import {EQUIPMENT} from '../../equipment/data/Equipment';
-import {ENEMY_COMBAT_PROFILES} from '../../combat/data/EnemyCombat';
+import {enemyProfile} from '../../combat/common/EnemyCombat';
 import {MONSTER_ACTORS} from '../../world/data/MonsterEcology';
 import {campaignBattle,type CampaignBeat} from '../../cinematics/data/CampaignScenes';
 import type {GameEvent} from '../../../core/Contracts';
@@ -12,6 +12,9 @@ import {FeedbackView as F} from '../../../shared/ui/FeedbackView';
 import {playerActionPose,samplePlayerAction,playerHurtProgress,updateWeaponReadiness,type PlayerActionSample,type PlayerPresentation,type WeaponReadiness} from './PlayerActionPresentation';
 import {playerHandOffset} from './PlayerHandAnchors';
 import {fieldNpcVisible} from '../../campaign/data/FieldQuests';
+import {chapterTwoEnemyRetired} from '../../campaign/common/ChapterTwoEncounters';
+import {peacefulBossRetired} from '../../campaign/common/PeacefulBosses';
+import {chapterTwoSideQuestNpcVisible} from '../../campaign/data/ChapterTwoSideQuests';
 
 type Origin=[number,number]|{x:number;y:number};
 type EquipmentAnchor={x:number;y:number;angle:number};
@@ -336,7 +339,7 @@ export class FlatActors {
   const enemies=game.state.enemies;
   if(this.frameEnemies.size!==enemies.length||enemies.some(enemy=>!this.frameEnemies.has(enemy.id)))this.frameEnemies.clear();
   for(const enemy of enemies)this.frameEnemies.set(enemy.id,enemy);
-  for(const actor of this.active.values())if(actor.id.startsWith('field-npc-'))actor.root.active=fieldNpcVisible(actor.id,game.state.flags);
+  for(const actor of this.active.values()){if(chapterTwoEnemyRetired(game.state,actor.id)||peacefulBossRetired(game.state,actor.id))actor.root.active=false;else if(actor.id.startsWith('field-npc-'))actor.root.active=fieldNpcVisible(actor.id,game.state.flags);else if(actor.id.startsWith('side-npc-'))actor.root.active=chapterTwoSideQuestNpcVisible(actor.id,game.state);}
   if(paused){this.impacts.clear();for(const actor of this.active.values())if(actor.id!=='player'&&!(this.frameEnemies.get(actor.id)?.hp<=0)){scale(actor.model,1,1,1);if(actor.sprite.eulerAngles.z!==0)actor.sprite.setRotationFromEuler(0,0,0);setActorTint(actor,1,1,1,1);}
    // Preserve sampled ordinals/progress as well as clocks. Re-sampling from
    // FPS here would jump a manually held bow pose backwards while paused.
@@ -388,7 +391,7 @@ export class FlatActors {
    const actor=this.active.get(enemy.id);if(!actor){if(!this.arriving.has(enemy.id)&&!this.arrivalFailure.has(enemy.id)){this.arriving.add(enemy.id);void this.create(enemy.id,enemyConcept(enemy),enemy.x,enemy.z).catch(error=>{this.arrivalFailure.add(enemy.id);console.error('[Campaign] Reinforcement could not load',error);}).finally(()=>this.arriving.delete(enemy.id));}continue;}
    const previous=actor.root.position,dx=enemy.x-previous.x,dz=enemy.z-previous.z;actor.speed=dx||dz?Math.hypot(dx,dz)/Math.max(.001,dt):0;actor.angle=enemy.angle;
    if(dx||dz)position(actor.root,enemy.x,this.world.height(enemy),enemy.z);
-   const attacking=['windup','active','recovery'].includes(enemy.phase),genericPose=ENEMY_COMBAT_PROFILES[enemy.templateId??enemy.bossId??enemy.contentId??'']?.attacks[enemy.combat?.moveId??'']?.pose;
+   const attacking=['windup','active','recovery'].includes(enemy.phase),genericPose=enemyProfile(enemy)?.attacks[enemy.combat?.moveId??'']?.pose;
    const stepPose=genericPose&&`${genericPose}_step${enemy.combat?.stepIndex??0}`,pose=stepPose&&actor.asset.manifest.actions[stepPose]?stepPose:genericPose;
    // Keep the completed move's pose during recovery after core clears moveId.
    if(pose)actor.enemyPose=pose;else if(!attacking)actor.enemyPose=undefined;
@@ -414,13 +417,14 @@ export class FlatActors {
     this.show(actor,authoredDeath?'death':'idle',0,authoredDeath?clamp(deathAge*(deathClip?.fps??8)/frames):0);
    }else if(!hold)this.show(actor,state,nominal?dt*Math.max(.1,Math.min(2,actor.speed/nominal)):dt,progress,false,variant);
    const pulse=impact&&age<.22?Math.sin(Math.min(1,age/.22)*Math.PI):0,side=Math.sign(Math.sin(impact?.angle??reaction?.angle??0)*this.camera.node.right.x+Math.cos(impact?.angle??reaction?.angle??0)*this.camera.node.right.z)||1;
-   const strength=(this.reducedMotion?.35:reaction?.resisted?.4:1)*(impact?.style.recoil??0)/.2;
+   const heavyContact=impact&&['heavy','critical','kill'].includes(impact.style.kind);
+   const strength=(this.reducedMotion?0:reaction?.resisted?(heavyContact?.65:.4):1)*(impact?.style.recoil??0)/.2;
    const lowBody=MONSTER_CONCEPTS.has(actor.modelId)||['mine-crawler','u1-2'].includes(actor.modelId);
    scale(actor.model,dead&&!authoredDeath?(lowBody?.9:.72):1+pulse*.09*strength,dead&&!authoredDeath?1-fall*(lowBody?.65:.32):1-pulse*.12*strength,1);
    const roll=dead?(authoredDeath?0:-(lowBody?12:78)*fall):-side*pulse*(impact?.style.kind==='armor'?3:10)*strength;
    if(Math.abs(actor.sprite.eulerAngles.z-roll)>.000001)actor.sprite.setRotationFromEuler(0,0,roll);
    const alpha=Math.round(255*game.corpseOpacity(enemy));
-   const flash=!this.reducedMotion&&impact?.style.kind!=='burn'&&age>=0&&age<.045,tint=F.color(impact?.style.role??'damage.physical');
+   const flash=!this.reducedMotion&&impact?.style.kind!=='burn'&&age>=0&&age<(heavyContact?.08:.055),tint=F.color(impact?.style.role??'damage.physical');
    setActorTint(actor,flash?tint.r/255*1.9:1,flash?tint.g/255*1.9:1,flash?tint.b/255*1.9:1,alpha/255);
    if(age>.3)this.impacts.delete(enemy.id);
    actor.root.active=alpha>0;

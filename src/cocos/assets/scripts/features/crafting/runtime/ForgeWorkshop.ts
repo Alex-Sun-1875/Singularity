@@ -14,14 +14,15 @@ import {UI_COLORS as C} from '../../../shared/ui/UiTheme';
 import {PreparationSkin as P} from '../../../shared/ui/PreparationSkin';
 import {PreparationControls as Controls} from '../../../shared/ui/PreparationControls';
 import {PREPARATION_DESIGN as D,preparationSkinAsset} from '../../../shared/ui/PreparationTheme';
+import {gemText} from '../../gems/locales';
 function art(ui:RpgPanel,parent:Node,id:string,x:number,y:number,w:number,h:number){const sprite=UiSkin.asset(parent,id,w*ui.scale,h*ui.scale,false);sprite.node.setPosition(x,y);return sprite;}
 export function workshopStatus(game:GameSession){const access=game.forgingAvailability();return access.available?(game.preparationAvailability().available?'安全检查点 · 可强化':'洛恩工坊 · 可强化'):access.reason.includes('请前往')?'前往检查点或洛恩工坊整备':access.reason;}
 /** Shared workshop navigation, with compact art inside independent mobile hit areas. */
-export function workshopHeader(ui:RpgPanel,id:string,active:'craft'|'enhance'|'transfer'){
+export function workshopHeader(ui:RpgPanel,id:string,active:'craft'|'enhance'|'transfer'|'gems'){
  const u=ui.scale,cy=ui.contentTop+ui.hit/u/2;art(ui,ui.panel,'rpg-anvil-v2',ui.x(43),ui.y(cy),34,23);ui.text(ui.panel,'洛恩的工坊',ui.x(178),ui.y(cy),198*u,30*u,C.ink,20*u);
- const tabs:[string,string,string][]=[['锻造','craft','craft'],['强化',`forge-item:${id}`,'enhance'],['传承',`forge-targets:${id}`,'transfer']];
- tabs.forEach(([label,action,key],i)=>{const n=ui.tab(ui.panel,label,ui.x(344+i*88),ui.y(cy),76*u,action);P.art(ui,n,'button-dark',0,0,76,32,true).node.setSiblingIndex(0);if(key===active)P.art(ui,n,'card-selected',0,0,77,33,true);n.children.filter(c=>c.getComponent(Label)).forEach(c=>c.getComponent(Label)!.color=key===active?F.color('state.selected'):C.ink);});
- P.rule(ui,ui.panel,ui.x(704),ui.y(cy),218);
+ const tabs:[string,string,string][]=[['锻造','craft','craft'],['强化',`forge-item:${id}`,'enhance'],[gemText('workshop.tab'),`gems:${id}`,'gems'],['传承',`forge-targets:${id}`,'transfer']];
+ tabs.forEach(([label,action,key],i)=>{const n=ui.tab(ui.panel,label,ui.x(328+i*88),ui.y(cy),76*u,action);P.art(ui,n,'button-dark',0,0,76,32,true).node.setSiblingIndex(0);if(key===active)P.art(ui,n,'card-selected',0,0,77,33,true);n.children.filter(c=>c.getComponent(Label)).forEach(c=>c.getComponent(Label)!.color=key===active?F.color('state.selected'):C.ink);});
+ P.rule(ui,ui.panel,ui.x(744),ui.y(cy),120);
 }
 function painted(ui:RpgPanel,parent:Node,item:ItemDef,size:number){const kind=['sword','bow','staff'].includes(item.kind)?item.kind:item.kind==='ring'?'ring':item.slot;return art(ui,parent,kind==='offhand'?D.artwork.offhand:preparationSkinAsset('item-'+kind),0,0,size,size);}
 function statArt(ui:RpgPanel,parent:Node,stat:ForgingStat,x:number,y:number,size=16){const path=['strength','dexterity','intellect','vitality'].includes(stat)?'rpg-attribute-'+stat:'rpg-stat-'+(stat==='power'||stat==='armor'?stat:'criticalChance')+'-v3';return art(ui,parent,path,x,y,size,size);}
@@ -38,7 +39,7 @@ export function renderForgeWorkshop(hud:Hud,game:GameSession,menu:string){
  const title=T(`${item.name} +${v.rank}`,482,a+21,144,29,16.5);title.enableWrapText=false;title.overflow=Label.Overflow.SHRINK;T(`${item.quality} · ${equipmentTypeName(item)}`,482,a+45,144,24,12.5,F.color(qualityFeedbackRole(item.quality)));
  P.rule(ui,ui.panel,ui.x(482),ui.y(a+64),126);P.badge(ui,ui.panel,`阶段 +${v.cap}`,ui.x(482),ui.y(a+83),102,'gold');
  const affix=ui.button(ui.panel,'',ui.x(482),ui.y(b-hu/2),138*u,'ForgeAffixDetails',true,false,ui.hit,()=>hud.actions.click('forge-pool:'+id),'catalog');P.art(ui,affix,'button-dark',0,0,138,34,true);ui.text(affix,`词条 ${v.affixes.length}/${v.capacity} ›`,0,0,126*u,25*u,C.gold,14*u).horizontalAlign=Label.HorizontalAlign.CENTER;
- const stamped=!!s.dice.gear?.[id]?.claimed;P.art(ui,ui.panel,'plaque',ui.x(404),ui.y(b-15),300,27);center(stamped?'锻印已封存':'余火锻印',337,b-15,140,22,11.5,C.muted);affix.setSiblingIndex(ui.panel.children.length-1);
+ P.art(ui,ui.panel,'plaque',ui.x(404),ui.y(b-15),300,27);center('装备强化',337,b-15,140,22,11.5,C.muted);affix.setSiblingIndex(ui.panel.children.length-1);
  if(pool){
   const candidates=q.next?.candidates??[],rows=[...Array.from({length:v.capacity},(_,i)=>v.affixes[i]?forgingAffixText(v.affixes[i]):`＋${[1,3,6][i]} 解锁随机属性`),'下一次随机候选',...candidates.map(c=>FORGING_STAT_NAMES[c.stat]+' '+(c.min===c.max?forgingValue(c.stat,c.min):forgingValue(c.stat,c.min)+'～'+forgingValue(c.stat,c.max)))],ch=40+rows.length*27,list=ui.scroll(right,0,0,246*u,h*u,ch*u);ui.text(list,`当前词条 ${v.affixes.length} / ${v.capacity}`,0,-15*u,236*u,28*u,C.gold,17*u);rows.forEach((text,i)=>ui.text(list,text,0,(-42-i*27)*u,236*u,26*u,C.ink,13*u));
  }else{

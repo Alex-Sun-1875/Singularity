@@ -1,0 +1,152 @@
+{
+  "date": "2026-11-15",
+  "scope": "Cocos business scripts, platform adapters, Web templates and build entry; source changes and documentation only",
+  "workspaceVersionAtValidation": "0.3.50",
+  "officialReferences": [
+    "https://developer.taptap.cn/minigameapidoc/dev/engine/Cocos-Laya-Egret/",
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/basic/subpackage/"
+  ],
+  "localOfficialDeclarations": {
+    "file": "src/cocos/extensions/taptap-minigame-tools/tap-minigame.d.ts",
+    "pluginVersion": "1.2.2",
+    "reusedAPIs": [
+      "getStorageSync",
+      "setStorageSync",
+      "removeStorageSync",
+      "getStorageInfoSync",
+      "getMenuButtonBoundingClientRect",
+      "getWindowInfo",
+      "onMenuButtonBoundingClientRectWeightChange",
+      "offMenuButtonBoundingClientRectWeightChange",
+      "loadSubpackage"
+    ]
+  },
+  "changes": [
+    "One runtime target selection independent of build profile and resource preview",
+    "WASM and viewport never inspect tap on HTML",
+    "HTML URL and history isolated from startup and feature rules",
+    "One storage namespace for saves, preferences, hairstyles, chart/index and diagnostics",
+    "Missing minigame storage fails without switching backend",
+    "Explicit bundle preview marker controls only resource routing",
+    "Platform difference table linked by development skill, root AGENTS, Cocos AGENTS and architecture guide"
+  ],
+  "preserved": [
+    "Normal-profile persisted keys and original data",
+    "Cocos input, audio, lifecycle and asset adapters",
+    "Existing JS navigation fallback",
+    "Guest test restriction and platform login gate",
+    "Gameplay build profiles and packaging defaults"
+  ],
+  "checks": {
+    "typecheck": {
+      "command": "npm run check",
+      "result": "passed"
+    },
+    "existingTests": {
+      "command": "npm test",
+      "passed": 150,
+      "failed": 0,
+      "skipped": 0
+    },
+    "twoPlatformsThreeProfilesProbe": {
+      "passed": 48,
+      "checks": [
+        "TapTap/dev: storage reads/writes/enumerates/deletes in selected backend and namespace",
+        "TapTap/dev: actual hairstyle persistence and HTML-only URL handling",
+        "TapTap/dev: actual map exploration flush preserves normal data and uses profile namespace",
+        "TapTap/dev: cached viewport and menu listeners access only selected platform",
+        "TapTap/dev: WASM uses package path or downloaded bytes without cross-platform fallback",
+        "TapTap/dev: platform login, updates and memory listeners stay isolated",
+        "TapTap/dev: ordinary resource route is independent of build profile",
+        "TapTap/test: storage reads/writes/enumerates/deletes in selected backend and namespace",
+        "TapTap/test: actual hairstyle persistence and HTML-only URL handling",
+        "TapTap/test: actual map exploration flush preserves normal data and uses profile namespace",
+        "TapTap/test: cached viewport and menu listeners access only selected platform",
+        "TapTap/test: WASM uses package path or downloaded bytes without cross-platform fallback",
+        "TapTap/test: platform login, updates and memory listeners stay isolated",
+        "TapTap/test: ordinary resource route is independent of build profile",
+        "TapTap/release: storage reads/writes/enumerates/deletes in selected backend and namespace",
+        "TapTap/release: actual hairstyle persistence and HTML-only URL handling",
+        "TapTap/release: actual map exploration flush preserves normal data and uses profile namespace",
+        "TapTap/release: cached viewport and menu listeners access only selected platform",
+        "TapTap/release: WASM uses package path or downloaded bytes without cross-platform fallback",
+        "TapTap/release: platform login, updates and memory listeners stay isolated",
+        "TapTap/release: ordinary resource route is independent of build profile",
+        "HTML/dev: storage reads/writes/enumerates/deletes in selected backend and namespace",
+        "HTML/dev: actual hairstyle persistence and HTML-only URL handling",
+        "HTML/dev: actual map exploration flush preserves normal data and uses profile namespace",
+        "HTML/dev: cached viewport and menu listeners access only selected platform",
+        "HTML/dev: WASM uses package path or downloaded bytes without cross-platform fallback",
+        "HTML/dev: platform login, updates and memory listeners stay isolated",
+        "HTML/dev: ordinary resource route is independent of build profile",
+        "HTML/test: storage reads/writes/enumerates/deletes in selected backend and namespace",
+        "HTML/test: actual hairstyle persistence and HTML-only URL handling",
+        "HTML/test: actual map exploration flush preserves normal data and uses profile namespace",
+        "HTML/test: cached viewport and menu listeners access only selected platform",
+        "HTML/test: WASM uses package path or downloaded bytes without cross-platform fallback",
+        "HTML/test: platform login, updates and memory listeners stay isolated",
+        "HTML/test: ordinary resource route is independent of build profile",
+        "HTML/release: storage reads/writes/enumerates/deletes in selected backend and namespace",
+        "HTML/release: actual hairstyle persistence and HTML-only URL handling",
+        "HTML/release: actual map exploration flush preserves normal data and uses profile namespace",
+        "HTML/release: cached viewport and menu listeners access only selected platform",
+        "HTML/release: WASM uses package path or downloaded bytes without cross-platform fallback",
+        "HTML/release: platform login, updates and memory listeners stay isolated",
+        "HTML/release: ordinary resource route is independent of build profile",
+        "HTML resource graph preview keeps HTML login/storage/platform identity",
+        "TapTap guest flag remains explicit and test-only",
+        "Release ignores guest bypass",
+        "Missing TapTap storage/WASM APIs report failure without reading browser backend",
+        "Mini HTML helper calls never read URL/history/preview globals",
+        "HTML URL options preserve local-host development restriction"
+      ]
+    },
+    "screenLifecycleProbe": {
+      "passed": 25,
+      "checks": [
+        "tap: startup-hide-show-dispose-and-idempotent-cleanup",
+        "tap: unsupported-host-and-browser-noop",
+        "tap: failure-retries-on-next-foreground",
+        "tap: synchronous-native-failure-nonblocking",
+        "tap: late-enable-completion-cannot-keep-background-awake",
+        "tap: late-disable-and-destroy-races-reconciled",
+        "tap: promise-only-host-supported-with-no-unhandled-rejection",
+        "tap: callback-and-promise-completion-deduplicated",
+        "html: foreground acquisition and no duplicate active lock",
+        "html: hide, show and idempotent disposal",
+        "html: document visibility independently releases and reacquires",
+        "html: hidden document cannot request lock",
+        "html: system revocation waits for interaction instead of looping",
+        "html: denied request is nonblocking and interaction can retry",
+        "html: unsupported host is nonblocking and never invokes API",
+        "html: insecure host is nonblocking and never invokes API",
+        "html: late acquisition in background is immediately released",
+        "html: disposal releases pending result and removes event listeners",
+        "html: foreground return retries rejected older in-flight request once",
+        "html: synchronous request failure is nonblocking",
+        "html: release rejection is handled",
+        "boundary: TapTap lifecycle never reads browser globals",
+        "boundary: HTML uses browser lock, preview login and local storage without reading tap",
+        "boundary: missing TapTap API does not fall back to HTML or bypass platform login",
+        "boundary: other targets keep lifecycle without touching platform globals"
+      ]
+    },
+    "probeBoundary": "Temporary Node probes execute real project modules with mocked Cocos target/profile/host APIs; these are not native platform acceptance.",
+    "buildScriptSyntax": {
+      "command": "node --check src/cocos/tools/build-taptap.cjs",
+      "result": "passed"
+    },
+    "skillValidation": {
+      "command": "python -X utf8 <skill-creator>/scripts/quick_validate.py .agents/skills/singularity-development",
+      "result": "passed"
+    }
+  },
+  "packaged": false,
+  "uploaded": false,
+  "pending": [
+    "Cocos Web export and actual browser journey after the source changes",
+    "Official TapTap conversion and platform/device login, storage, resource recovery and lifecycle",
+    "Physical idle-screen prevention in TapTap and a supported HTML browser with permission",
+    "Real device safe-area/menu changes, memory warning and sustained gameplay performance"
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "title": "窗口 Header 返回与关闭组件 · v1",
+  "date": "2026-11-16",
+  "status": "user-approved",
+  "scope": "仅设计稿与可复现的本地合成，不修改 Cocos 运行代码、不打包。",
+  "userSteering": "与 TapTap 原生胶囊重叠的全屏/顶部窗口使用左侧返回；不重叠的窗口使用右上关闭。",
+  "priorDesign": "旅途地图原稿采用细线直向左箭头；现有 rpg-return-arrow-v3 为弯曲回转箭头，与原稿不同。",
+  "construction": "Pillow 确定性排版、复用项目原始皮肤与设计截图；本轮未调用生成模型。",
+  "componentProposal": {
+    "name": "GoldPanelHeader",
+    "modes": [
+      "back-left",
+      "close-right"
+    ],
+    "shared": [
+      "标题",
+      "标题分隔线",
+      "图标绘制",
+      "触控尺寸",
+      "状态反馈",
+      "禁用状态"
+    ],
+    "pageOwns": [
+      "窗口位置",
+      "运行时安全区与胶囊区域",
+      "现有关闭/返回动作",
+      "未保存提示与不可关闭状态"
+    ],
+    "selection": "先验证候选右上关闭的完整48×48触区在安全区内，且与原生胶囊至少相隔8；符合则关闭，否则改用左侧返回并验证左侧完整触区。",
+    "recompute": "窗口尺寸、横屏方向、安全区或胶囊区域变化时重新布局；不通过机型名称或 tap 全局对象猜测。",
+    "singleEntry": "每个当前层级只提供一种入口；不同时显示左返回和右关闭，也不重复添加底部导航。",
+    "actionSemantics": "只调整入口外观与位置，保留页面既有关闭或返回目标；退出靶场属于退出玩法的业务动作，继续保留。",
+    "nativeControls": "胶囊继续由宿主提供，游戏不绘制可点击的仿制胶囊。"
+  },
+  "tokensLogical": {
+    "headerHeight": 64,
+    "touchWidth": 48,
+    "touchHeight": 48,
+    "iconBox": 20,
+    "iconStroke": 1.8,
+    "topInset": 8,
+    "sideInset": 12,
+    "adjacentTouchGap": 8,
+    "capsuleClearance": 8,
+    "titleFont": 20,
+    "titleSymmetricReserve": 68,
+    "feedbackVisibleFace": 32
+  },
+  "states": {
+    "idle": "裸图标；无常驻方形底板",
+    "hover": "浅暗金32×32圆角反馈面，图标提亮",
+    "pressed": "同位置加深反馈面，不移动或缩放布局",
+    "disabled": "降低图标明度并拒绝输入；隐藏/取消后清除状态"
+  },
+  "scopeExamples": {
+    "backWhenTopRightCollides": [
+      "全屏地图",
+      "全屏人物/装备/技能/锻造窗口",
+      "顶部与胶囊相交的侧栏或大窗口"
+    ],
+    "closeWhenClear": [
+      "居中的设置/帮助窗口",
+      "图例与普通提示窗口",
+      "详情浮层",
+      "右上触区避开胶囊的侧栏"
+    ],
+    "rule": "页面名称仅为示例；最终按实际窗口与触区位置选择，不按页面名称写死。"
+  },
+  "preview": {
+    "logicalViewport": [
+      844,
+      390
+    ],
+    "density": 3,
+    "fullScreen": "复用上一版地图原稿作为全屏使用示例，非本轮运行截图。",
+    "floating": "在地图原稿上合成地图图例浮窗，演示右上关闭。",
+    "headerDetails": "技能靶场相同标题分别展示返回、关闭两个模式；绿色虚线仅标注触区。",
+    "hardware": "示意胶囊、安全区与地图数据沿用原设计夹具，不是本轮 TapTap 真机测量。"
+  },
+  "geometryReview": {
+    "floatingCloseHit": [
+      514,
+      68,
+      48,
+      48
+    ],
+    "capsuleFixture": [
+      748,
+      10,
+      86,
+      30
+    ],
+    "floatingClear": true,
+    "hypotheticalFullScreenCloseHit": [
+      741,
+      8,
+      48,
+      48
+    ],
+    "fullScreenCandidateIntersectsCapsule": true,
+    "fullScreenUsesPriorMapLeftReturn": true
+  },
+  "sources": [
+    {
+      "path": "source-art/ui/map-redesign-v1/05-regional-iphone14.png",
+      "sha256": "52a37f728df98dcccdd33317e08d0cc717384557880f953fbdb8aefac1c1580c"
+    },
+    {
+      "path": "source-art/ui/map-redesign-v1/index.html",
+      "sha256": "2f27362fdbbd070d40d264cec63b4cd7cf6b60b93b54f10501d979ce80787567"
+    },
+    {
+      "path": "src/cocos/assets/resources/ui/quiet-bronze/double-gold-frame-v6.png",
+      "sha256": "dae40dd57cad585c0fb6bd38787b982484d7691aa4137907d27659f68fde14f7"
+    },
+    {
+      "path": "src/cocos/assets/resources/ui/quiet-bronze/double-gold-inset-v6.png",
+      "sha256": "9dac457e4b1cb53f9da476721839e0d85ac42fbcbe9ce6ca96e11345d4326d18"
+    },
+    {
+      "path": "src/cocos/assets/resources/ui/quiet-bronze/settings-title-rule-v11.png",
+      "sha256": "9f650b3d8d27bc829dfdf8c51263cc8ec16afe95d535d832383e4d64bb4d3b7f"
+    },
+    {
+      "path": "src/cocos/assets/resources/ui/quiet-bronze/settings-row-rule-v11.png",
+      "sha256": "1410c102c03d75dc8e9707662efd7ec40031998c2310843cd7ea66367200ce8c"
+    }
+  ],
+  "review": {
+    "generation": "所有PNG均由本地确定性合成完成。",
+    "visual": "静态视觉复核记录见 review.json；用户确认待完成。",
+    "runtime": "未接入。旋转、安全区、触控和各页面动作需要在接入后验收。"
+  },
+  "userApprovedDate": "2026-11-16",
+  "implementation": {
+    "status": "implemented-web-verified-device-pending",
+    "evidence": "runtime/review.json"
+  }
+}

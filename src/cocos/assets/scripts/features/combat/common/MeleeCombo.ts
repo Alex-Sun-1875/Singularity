@@ -1,8 +1,8 @@
 /** Shared rules/presentation timing. A complete chain keeps the former 3 x .44s budget. */
 export const MELEE_COMBO=[
- {stage:1,duration:.38,release:.12,active:.10,clip:'attack_sword',reverse:false,strength:1},
- {stage:2,duration:.38,release:.12,active:.10,clip:'attack_sword_2',reverse:true,strength:1.3},
- {stage:3,duration:.56,release:.22,active:.10,clip:'attack_sword_3',reverse:false,strength:1.9},
+ {stage:1,duration:.38,release:.12,active:.10,clip:'attack_sword',reverse:false,strength:1,damageMultiplier:.85},
+ {stage:2,duration:.38,release:.12,active:.10,clip:'attack_sword_2',reverse:true,strength:1.3,damageMultiplier:.95},
+ {stage:3,duration:.56,release:.22,active:.10,clip:'attack_sword_3',reverse:false,strength:1.9,damageMultiplier:1.2},
 ] as const;
 export const meleeCombo=(stage=1)=>MELEE_COMBO[Math.max(0,Math.min(2,Math.floor(stage)-1))];
 export const MELEE_CHAIN_GAP=.45,MELEE_INPUT_BUFFER=.12;

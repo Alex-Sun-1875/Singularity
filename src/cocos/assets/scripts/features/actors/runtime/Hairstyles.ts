@@ -1,4 +1,5 @@
-import {sys} from 'cc';
+import {platformStorage} from '../../../platform/PlatformStorage';
+import {htmlPreviewOption,rememberHtmlPreviewOption} from '../../../platform/HtmlPreview';
 
 export interface HairstyleDefinition {id:string;label:string;description:string;nodes:string[];geometryRoot?:string}
 export interface HairstyleOption {id:string;label:string;description:string;selected:boolean}
@@ -11,11 +12,9 @@ const KEY='sword-and-fire:player-hairstyle:v1';
 
 /** Cosmetic preference stays independent of journey progress and equipment. */
 export function readHairstyle():string {
- try{return (typeof location!=='undefined'&&new URLSearchParams(location.search).get('hair'))||sys.localStorage.getItem(KEY)||'curly';}catch{return 'curly';}
+ try{return htmlPreviewOption('hair')||platformStorage.getItem(KEY)||'curly';}catch{return 'curly';}
 }
 export function rememberHairstyle(id:string){
- try{sys.localStorage.setItem(KEY,id);}catch{/* Private browsing can disable storage. */}
- if(typeof location!=='undefined'&&typeof history!=='undefined'){
-  const url=new URL(location.href);url.searchParams.set('hair',id);history.replaceState(null,'',url);
- }
+ try{platformStorage.setItem(KEY,id);}catch{/* Cosmetic preferences cannot prevent play. */}
+ rememberHtmlPreviewOption('hair',id);
 }

@@ -8,7 +8,8 @@ import {UiSkin} from './UiSkin';
 import {UI_COLORS as C} from './UiTheme';
 import {FeedbackView as F} from './FeedbackView';
 import {applyRpgFont} from './RpgFont';
-import {UiChrome,UI_PANEL_BACK as BACK} from './UiChrome';
+import {UiChrome,UI_PANEL_HEADER as H} from './UiChrome';
+import {GoldPanelHeader} from './GoldPanelHeader';
 import {PreparationSkin as P} from './PreparationSkin';
 import {DoubleGoldFrame} from './DoubleGoldFrame';
 import {PREPARATION_DESIGN as D} from './PreparationTheme';
@@ -16,7 +17,7 @@ export type RpgTab='character'|'equipment'|'profession'|'allocation'|'skills'|'f
 export interface RpgFooterAction {label:string;action:string;enabled?:boolean;primary?:boolean;run?:()=>void;back?:boolean}
 let scrollbarFrame:SpriteFrame|undefined;
 export class RpgPanel {
- private readonly backButton:Node;private backAction:()=>void;
+ private readonly header:GoldPanelHeader;
  readonly panel:Node;readonly width:number;readonly height:number;readonly hit:number;readonly gap:number;readonly font:number;readonly minFont:number;readonly margin:number;readonly bodyTop:number;readonly bodyBottom:number;readonly footerY:number;readonly scale:number;readonly mobile=sys.isMobile;
  constructor(readonly hud:Hud,readonly game:GameSession,active:RpgTab,name:string,readonly expanded=false){
   hud.clearModal();const backdrop=hud.node('RpgBackdrop',hud.modal,0,0,hud.width,hud.height);backdrop.addComponent(BlockInputEvents);const dark=backdrop.addComponent(CompactGraphics);dark.fillColor=new Color(C.background.r,C.background.g,C.background.b,D.shell.backdropAlpha);dark.rect(-hud.width/2,-hud.height/2,hud.width,hud.height);dark.fill();
@@ -39,19 +40,19 @@ export class RpgPanel {
   if(this.expanded){const material=hud.node('PreparationMaterial',this.panel,0,0,this.width,this.height),g=material.addComponent(CompactGraphics);g.fillColor=C.background;g.rect(-this.width/2,-this.height/2,this.width,this.height);g.fill();P.art(this,material,'surface',0,0,D.canvas.width,this.height/this.scale);}
   // Small native scrolls stay inside the metal band and clear the existing controls.
   if(!this.expanded){const engraving=hud.node('RpgDialogInnerEngraving',shell,0,0,this.width-4*ratio,this.height-4*ratio),unit=.4*ratio;engraving.setScale(unit,unit,1);UiChrome.frame(engraving,(this.width-4*ratio)/unit,(this.height-4*ratio)/unit);}
-  const reference=this.referenceLayout,headerUnit=ratio,headerY=reference?this.y(D.header.referenceCenterY):this.height/2-this.gap-this.hit/2,visualY=reference?0:D.header.visualOffsetLogical*headerUnit,headerBottom=this.height/2-this.gap-this.hit;
+  const reference=this.referenceLayout,headerUnit=ratio,headerY=this.height/2-H.height/2*ratio,visualY=0,headerBottom=this.height/2-H.height*ratio;
   // Slim visible chrome; independent 48px targets still clear the first body row.
-  if(this.expanded)P.art(this,this.panel,'header',0,this.height/2-D.header.visibleHeightLogical/2*headerUnit,D.canvas.width,D.header.visibleHeightLogical*headerUnit/this.scale);
+  if(this.expanded)P.art(this,this.panel,'header',0,this.height/2-H.height/2*headerUnit,D.canvas.width,H.height*headerUnit/this.scale);
   const brand=this.expanded?P.art(this,this.panel,'logo',this.x(D.header.logoX),headerY+visualY,D.header.logoWidth,D.header.logoHeight):UiSkin.asset(this.panel,'rpg-logo-v2',66*this.scale,22*this.scale,false);if(!this.expanded)brand.node.setPosition(this.x(104),headerY+visualY);
   if(this.expanded){P.separator(this,this.panel,this.x(D.header.leftSeparatorX),headerY+visualY,D.header.separatorHeight);P.separator(this,this.panel,this.x(D.header.rightSeparatorX),headerY+visualY,D.header.separatorHeight);}
   const tabs:[RpgTab,string,string][]=[['character','人物','attributes'],['equipment','装备','inventory'],['profession','职业','profession'],['allocation','加点','allocation:attributes'],['skills','技能','checks'],['forge','锻造','forge']];
   tabs.forEach(([id,title,action],i)=>{const x=this.x((this.expanded?D.header.tabStart:184)+i*((this.expanded?D.header.tabWidth:68)+Math.max(D.header.tabMinimumGap,this.gap/this.scale))),w=(this.expanded?D.header.tabWidth:68)*this.scale,n=this.tab(this.panel,title,x,headerY,w,action,false,visualY);n.children.filter(c=>c.getComponent(Label)).forEach(c=>{const label=c.getComponent(Label)!;label.fontSize=(this.expanded?D.typography.navigation:16)*this.scale*this.textScale;label.lineHeight=label.fontSize*1.3;label.color=id===active?F.color(this.expanded?D.colorRoles.selected:'state.running'):this.expanded?F.color(D.colorRoles.ink):C.ink;});if(id===active){const rule=this.expanded?P.art(this,n,'active',0,visualY-(reference?D.header.underlineOffset*this.scale:12*ratio),D.header.underlineWidth,D.header.underlineHeight):UiSkin.asset(n,'rpg-active-rule-v4',68*this.scale,7.8*this.scale,false);if(!this.expanded)rule.node.setPosition(0,visualY-(reference?D.header.underlineOffset*this.scale:12*ratio));}});
   if(reference)for(const n of this.panel.children.filter(n=>tabs.some(t=>t[2]===n.name)))n.getComponent(UITransform)!.height=D.header.referenceHitHeight*this.scale;
-  this.backAction=()=>hud.actions.click('close');this.backButton=this.button(this.panel,'',-this.width/2+this.gap+this.hit/2,headerY,this.hit,'close',true,false,reference?D.header.referenceHitHeight*this.scale:this.hit,()=>this.backAction(),'catalog');
-  UiSkin.asset(this.backButton,BACK.skin,BACK.glyphLogical*ratio,BACK.glyphLogical*ratio,false).node.setPosition(0,visualY);
-  const coin=UiSkin.asset(this.panel,D.artwork.coin,D.header.coinSize*this.scale,D.header.coinSize*this.scale,false);coin.node.setPosition(this.x(D.header.coinX),headerY+visualY);const gold=this.text(this.panel,String(game.state.player.gold),this.x(D.header.goldX),headerY+visualY,D.header.goldWidth*this.scale,26*this.scale,C.ink,D.header.goldFont*this.scale);gold.enableWrapText=false;gold.overflow=Label.Overflow.SHRINK;
+  this.header=GoldPanelHeader.attach(this.panel,{width:this.width,unit:ratio,hit:this.hit,centerY:headerY,viewport:hud,action:'close'},()=>hud.actions.click('close'));
+  const coinX=Math.min(this.x(D.header.coinX),this.width/2-this.hit-20*ratio-(D.header.goldX-D.header.coinX+D.header.goldWidth/2)*this.scale);
+  const coin=UiSkin.asset(this.panel,D.artwork.coin,D.header.coinSize*this.scale,D.header.coinSize*this.scale,false);coin.node.setPosition(coinX,headerY+visualY);const gold=this.text(this.panel,String(game.state.player.gold),coinX+(D.header.goldX-D.header.coinX)*this.scale,headerY+visualY,D.header.goldWidth*this.scale,26*this.scale,C.ink,D.header.goldFont*this.scale);gold.enableWrapText=false;gold.overflow=Label.Overflow.SHRINK;
   this.footerY=-this.height/2+this.gap+this.hit/2;this.bodyTop=headerBottom-this.gap;this.bodyBottom=this.footerY+this.hit/2+this.gap;
-  this.divider(this.panel,this.height/2-D.header.visibleHeightLogical*headerUnit);this.divider(this.panel,this.bodyBottom-this.gap/2);
+  this.divider(this.panel,this.height/2-H.height*headerUnit);this.divider(this.panel,this.bodyBottom-this.gap/2);
  }
  get textScale(){return this.expanded?1:.92;}
  x(value:number){return -this.width/2+value*this.scale;}
@@ -70,9 +71,9 @@ export class RpgPanel {
  button(parent:Node,title:string,x:number,y:number,w:number,action:string,enabled=true,selected=false,h=this.hit,run?:()=>void,style?:'primary'|'footer'|'catalog'|'step'|'attribute'){
   const n=this.hud.node(action,parent,x,y,w,h),b=n.addComponent(Button);b.transition=Button.Transition.NONE;b.interactable=enabled;const vh=style==='step'?24*this.scale:style==='primary'||style==='footer'?Math.min(h,D.footer.buttonHeight*this.scale):h,vw=style==='step'?26*this.scale:w;
   if(style==='attribute'){const skin=UiSkin.asset(n,'rpg-attribute-plus-v4',25.6*this.scale,24.7*this.scale,false);if(!enabled)skin.color=F.color('text.disabled',220);}else if(style!=='catalog'){const skin=this.expanded?P.art(this,n,style==='primary'&&enabled?'button-gold':'button-dark',0,0,vw/this.scale,vh/this.scale,true):UiSkin.asset(n,style==='primary'&&enabled?'rpg-button-gold-v3':'rpg-button-dark-v3',vw,vh,true);if(!enabled)skin.color=new Color(255,255,255,185);}
+  if(selected&&style!=='primary'){const sw=Math.max(1,vw-4*this.scale),sh=Math.max(1,vh-4*this.scale);if(this.expanded)P.art(this,n,'card-selected',0,0,sw/this.scale,sh/this.scale,true);else UiSkin.asset(n,'rpg-selection-frame-v3',sw,sh,true);}
   const l=this.text(n,style==='attribute'?'':title,0,0,vw-8,vh-4,enabled?(style==='primary'?C.dark:C.ink):F.color('text.disabled'),style==='step'?21*this.scale:(this.expanded&&(style==='primary'||style==='footer')?D.typography.footer:15)*this.scale);l.horizontalAlign=Label.HorizontalAlign.CENTER;
   if(style==='footer'||style==='primary'){l.enableWrapText=false;l.overflow=Label.Overflow.SHRINK;}
-  if(selected&&style!=='primary'){if(this.expanded)P.art(this,n,'card-selected',0,0,w/this.scale+2,vh/this.scale+2,true);else UiSkin.asset(n,'rpg-selection-frame-v3',w+4*this.scale,vh+4*this.scale,true);}
   n.on(Button.EventType.CLICK,()=>{if(enabled){if(run)run();else this.hud.actions.click(action);}});return n;
  }
  rule(parent:Node,y:number,w:number){const g=this.hud.node('RpgRule',parent,0,y,w,2).addComponent(CompactGraphics);g.strokeColor=C.line;g.lineWidth=.65*this.scale;g.moveTo(-w/2,0);g.lineTo(-3*this.scale,0);g.moveTo(3*this.scale,0);g.lineTo(w/2,0);g.stroke();g.strokeColor=C.gold;const r=1.6*this.scale;g.moveTo(0,r);g.lineTo(r,0);g.lineTo(0,-r);g.lineTo(-r,0);g.close();g.stroke();}
@@ -93,7 +94,7 @@ export class RpgPanel {
  progress(parent:Node,x:number,y:number,w:number,h:number,value:number,max:number,health=false){const host=this.hud.node('RpgProgress',parent,x,y,w,h),g=host.addComponent(CompactGraphics);g.fillColor=C.dark;g.strokeColor=C.gold;g.lineWidth=.6*this.scale;g.roundRect(-w/2,-h/2,w,h,2*this.scale);g.fill();g.stroke();if(health){const s=UiSkin.asset(host,'bar-health-fill',w-2*this.scale,h-2*this.scale,false);F.bar(s,value,max,'health.player');}else{g.fillColor=C.gold;g.roundRect(-w/2+this.scale,-h/2+this.scale,Math.max(.1,(w-2*this.scale)*Math.min(1,value/Math.max(1,max))),h-2*this.scale,this.scale);g.fill();}return host;}
  footer(status:string,buttons:RpgFooterAction[],statusAction?:string){
   const back=buttons.find(b=>b.back)??buttons.find(b=>b.action==='close');
-  if(back){this.backButton.name=back.action;this.backButton.getComponent(Button)!.interactable=back.enabled!==false;this.backAction=back.run??(()=>this.hud.actions.click(back.action));}
+  if(back)this.header.setAction(back.action,back.run??(()=>this.hud.actions.click(back.action)),back.enabled!==false);
   buttons=buttons.filter(b=>!b.back&&b.action!=='close');
   const long=buttons.some(b=>b.primary&&b.label.length>=8),widths=buttons.map((b,i)=>buttons.length===3?(this.expanded?D.footer.widths[i]:long?[108,164,126][i]:[102,114,124][i])*this.scale:Math.min(140*this.scale,(this.width*.76-(buttons.length-1)*this.gap)/buttons.length)),gaps=buttons.length===3?(this.expanded?D.footer.gaps:long?[12,12]:[10,22]).map(n=>n*this.scale):buttons.slice(1).map(()=>this.gap),total=widths.reduce((a,b)=>a+b,0)+gaps.reduce((a,b)=>a+b,0);let x=this.width/2-(this.expanded?D.footer.rightInset:14)*this.scale-total;
   const visualOffset=0,fire=UiSkin.asset(this.panel,D.artwork.campfire,(this.expanded?D.footer.fire.width:38)*this.scale,(this.expanded?D.footer.fire.height:34)*this.scale,false);fire.node.setPosition(this.x(this.expanded?D.footer.fire.x:40),this.footerY+visualOffset);

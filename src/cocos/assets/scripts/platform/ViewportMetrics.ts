@@ -1,10 +1,12 @@
 import {game,Game,screen} from 'cc';
+import {readTapAPI} from './RuntimePlatform';
 
 type MenuRect=Readonly<{left:number;top:number;right:number;bottom:number;windowWidth:number;windowHeight:number}>;
 type Metrics=Readonly<{windowSize:Readonly<{width:number;height:number}>;devicePixelRatio:number;menuRect:MenuRect|null}>;
 let snapshot:Metrics|undefined;
 let owners=0;
-const invalidate=()=>{snapshot=undefined;};
+let revision=0;
+const invalidate=()=>{snapshot=undefined;revision++;};
 let releaseMenuChanges:(()=>void)|undefined;
 
 function read():Metrics{
@@ -15,7 +17,7 @@ function read():Metrics{
   let menuRect:MenuRect|null=null;
   // TapTap's installed official plugin declares this synchronous menu API.
   // Its rectangle and getWindowInfo dimensions use window logical pixels.
-  const tap=(globalThis as {tap?:{getMenuButtonBoundingClientRect?():{left:number;top:number;right:number;bottom:number};getWindowInfo?():{windowWidth:number;windowHeight:number}}}).tap;
+  const tap=readTapAPI<{getMenuButtonBoundingClientRect?():{left:number;top:number;right:number;bottom:number};getWindowInfo?():{windowWidth:number;windowHeight:number}}>();
   try{
    const menu=tap?.getMenuButtonBoundingClientRect?.(),window=tap?.getWindowInfo?.();
    if(menu&&window&&[menu.left,menu.top,menu.right,menu.bottom,window.windowWidth,window.windowHeight].every(Number.isFinite)&&menu.right>menu.left&&menu.bottom>menu.top&&window.windowWidth>0&&window.windowHeight>0)
@@ -27,6 +29,7 @@ function read():Metrics{
 }
 
 export const viewportMetrics={
+ get revision(){return revision;},
  get windowSize(){return read().windowSize;},
  get devicePixelRatio(){return read().devicePixelRatio;},
  get menuRect(){return read().menuRect;},
@@ -38,7 +41,7 @@ export function retainViewportMetrics():()=>void{
   invalidate();
   screen.on('window-resize',invalidate);
   game.on(Game.EVENT_SHOW,invalidate);
-  const tap=(globalThis as {tap?:{onMenuButtonBoundingClientRectWeightChange?(run:()=>void):void;offMenuButtonBoundingClientRectWeightChange?(run:()=>void):void}}).tap;
+  const tap=readTapAPI<{onMenuButtonBoundingClientRectWeightChange?(run:()=>void):void;offMenuButtonBoundingClientRectWeightChange?(run:()=>void):void}>();
   if(tap?.onMenuButtonBoundingClientRectWeightChange&&tap.offMenuButtonBoundingClientRectWeightChange){
    try{tap.onMenuButtonBoundingClientRectWeightChange(invalidate);releaseMenuChanges=()=>tap.offMenuButtonBoundingClientRectWeightChange!(invalidate);}catch{/* Optional on older hosts. */}
   }

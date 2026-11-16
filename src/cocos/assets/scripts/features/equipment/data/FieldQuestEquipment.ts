@@ -1,5 +1,6 @@
 import type {ItemDef} from './Equipment';
 import {lifecycleWeaponBase} from './EquipmentLifecycle';
+import {equipmentText} from '../locales';
 
 export const FIELD_QUEST_ITEMS:ItemDef[]=[
  {id:'SQ_LETTER_RING',name:'归信指环',kind:'ring',slot:'ringLeft',level:1,requiredLevel:6,chapter:1,quality:'史诗',growthMode:'fixed',maxHp:18,artSource:'J03',description:'最大生命 +18。老猎人终于收下了营地的回信。',source:'野外支线「未送达的归信」固定奖励'},
@@ -11,3 +12,4 @@ for(const [style,kind,family,art]of [['WAR','sword','单手剑','W03'],['BOW','b
  const power=Math.round(lifecycleWeaponBase(16)*1.1);
  FIELD_QUEST_ITEMS.push({id:'SQ_ARMS_'+style,name:'归还者的'+({WAR:'剑',BOW:'弓',FIR:'火杖',THU:'雷杖'}[style]),kind,slot:'weapon',weaponFamily:family,twoHanded:style!=='WAR',level:2,requiredLevel:16,chapter:2,quality:'史诗',growthMode:'fixed',power,artSource:art,description:`武器强度 ${power}。追回的军械终于交到了有名字的人手里。`,source:'野外支线「失窃的军械」四流派自选奖励'});
 }
+for(const item of FIELD_QUEST_ITEMS)item.source=equipmentText('loot.randomBossSource',{chapter:item.chapter??1});

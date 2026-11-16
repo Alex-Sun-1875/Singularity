@@ -13,7 +13,7 @@ export {availableRoute} from './AutomationRoute';
 
 export type AutomationMode='manual'|'quest'|'idle';
 export type AutomationPause='manual'|'menu'|'story'|'dialogue'|'dice'|'background'|'auth'|'portrait'|'failure'|'blocked';
-export interface NavigationTarget {area:string;point:Point;label:string;exitId?:string;objectId?:string;taskId?:string;bossKey?:string}
+export interface NavigationTarget {area:string;point:Point;label:string;exitId?:string;objectId?:string;taskId?:string;bossKey?:string;journey?:boolean;sideQuest?:boolean}
 export interface AutomationStep {input:InputFrame;travel?:ExitDef;pickup?:string;interact?:string;notice?:string}
 const distance=(a:Point,b:Point)=>Math.hypot(a.x-b.x,a.z-b.z);
 const still=():InputFrame=>({x:0,z:0});
@@ -111,9 +111,9 @@ export class Automation {
   if(now<this.objectiveAt&&this.guidance)return;
   this.objectiveAt=now+.8;this.questChapter??=chapterForArea(game.state.area);
   let guide=journeyGuidance(game,areas,world,this.questTaskId,'task',this.questChapter);
-  // A level gate does not destroy the task intent. Farm a reachable ground until
-  // the gate opens, then the next bounded objective scan switches back.
-  if(guide?.blocked&&availableRoute(game,areas,guide.destination.area)===null)guide=journeyGuidance(game,areas,world,undefined,'hunt',this.questChapter);
+  // Chapter one retains its level-preparation route. Chapter two keeps the
+  // selected adventure objective instead of silently switching to hunting.
+  if(this.questChapter===1&&guide?.blocked&&availableRoute(game,areas,guide.destination.area)===null)guide=journeyGuidance(game,areas,world,undefined,'hunt',this.questChapter);
   if(guide?.destination.taskId){this.questTaskId=guide.destination.taskId;this.questChapter=JOURNEY_TASKS.find(t=>t.id===this.questTaskId)?.chapter;}
   this.guidance=guide;
  }
@@ -182,6 +182,15 @@ export class Automation {
   if(s.dialogue||s.dice.active){this.pause(s.dialogue?'dialogue':'dice');return {input:still()};}
   if(this.area!==s.area){this.area=s.area;this.resetRoute();this.enemyId='';this.blocked.clear();this.scanAt=0;this.restPoint=null;this.restScanAt=0;this.objectiveAt=0;}
   if(this.destination){
+   // Journey navigation follows the current objective, including after combat
+   // or a scene change. Explicit map/object/boss destinations stay fixed.
+   if(this.destination.journey&&s.time>=this.objectiveAt){
+    this.objectiveAt=s.time+.8;
+    const guide=journeyGuidance(game,areas,world,this.destination.taskId);
+    if(!guide)return this.fail(tr('task.missing'));
+    if(guide.blocked)return this.fail(tr('pause.blocked'));
+    this.destination={...guide.destination,point:{...guide.destination.point}};
+   }
    if(s.enemies.some(e=>e.hp>0&&distance(p,e)<8&&this.visible(world,p,e))){this.pauseNavigation(tr('navigation.threat'));return {input:still(),notice:this.status};}
    const target=this.destination;this.status=tr('navigation.travel',{target:target.label});
    const step=this.travel(game,world,areas,target,dt);if(step)return step;
@@ -190,14 +199,24 @@ export class Automation {
   }
   if(!s.action&&p.hp/p.maxHp<=.45&&p.healthPotions>0&&!(s.cooldowns.consumable>0))game.useConsumable('health');
   if(this.mode==='idle'){this.huntArea||=s.area;if(this.huntArea!==s.area)return this.fail(tr('hunt.empty'),true);}
-  const evade=this.evade(game,world);if(evade)return evade;
-  const recovery=this.recover(game,world,areas,dt);if(recovery)return recovery;
+  const evade=this.evade(game,world);if(evade){this.interactionStarted=-1;return evade;}
+  const recovery=this.recover(game,world,areas,dt);if(recovery){this.interactionStarted=-1;return recovery;}
   if(this.mode==='quest')this.refreshObjective(game,world,areas);
   const guide=this.guidance,target=guide?.destination,local=this.mode==='idle'||target?.area===s.area;
   const task=JOURNEY_TASKS.find(t=>t.id===target?.taskId);
-  const scope:CombatScope=this.mode==='idle'?'hunt':!local?'travel':guide?.kind==='boss'||task?.goal==='clear'?'clear':guide?.kind==='hunt'||task?.goal==='hunt'?'hunt':'travel';
+  const scope:CombatScope=this.mode==='idle'?'hunt':!local?'travel':guide?.kind==='boss'||task?.goal==='clear'||task?.goal==='encounter'&&guide?.targetType==='enemy'?'clear':guide?.kind==='hunt'||task?.goal==='hunt'?'hunt':'travel';
+  // Arrive at an authored action, then hand the decision back to the player.
+  // Automatic travel must never choose a branch or operate the next puzzle node.
+  if((task?.goal==='encounter'||target?.sideQuest)&&local&&target?.objectId){
+   const object=areas[s.area]?.objects.find(o=>o.id===target.objectId);
+   if(!object)return this.fail(tr('task.failed'));
+   this.status=tr('task.travel',{target:object.label});
+   const step=this.travel(game,world,areas,{...target,point:object},dt);if(step)return step;
+   if(s.action)return {input:still()};
+   this.stop();return {input:still(),interact:object.id,notice:tr('task.interact')};
+  }
   const loot=this.collect(game,world,dt);if(loot)return loot;
-  const combat=this.fight(game,world,dt,scope);if(combat)return combat;
+  const combat=this.fight(game,world,dt,scope);if(combat){this.interactionStarted=-1;return combat;}
   if(this.mode==='idle')return this.waitForHunt(game,world,areas,dt);
   if(!guide||!target)return this.fail(tr('task.missing'));
   if(!local){this.status=tr('task.travel',{target:target.label});return this.travel(game,world,areas,target,dt)??{input:still()};}
@@ -206,6 +225,14 @@ export class Automation {
    const object=areas[s.area]?.objects.find(o=>o.action==='journey_task'&&o.eventId===task.id);
    if(!object)return this.fail(tr('task.failed'));
    this.status=tr('task.interact');const step=this.travel(game,world,areas,{...target,point:object},dt);if(step)return step;
+   const access=game.interactionAvailability(object);
+   if(!access.available){
+    this.interactionStarted=-1;
+    if(!game.journey.ready(task))return this.fail(access.reason);
+    // Combat/projectiles/telegraphs can make a reached observation temporarily
+    // unsafe. Keep the controller running instead of opening a blocking modal.
+    this.status=access.reason;return {input:still()};
+   }
    if(this.interactionStarted<0)this.interactionStarted=s.time;
    if(s.time-this.interactionStarted>8)return this.fail(tr('task.failed'));
    if(!s.action&&s.time>=this.interactAt){this.interactAt=s.time+.5;return {input:still(),interact:object.id};}
@@ -260,7 +287,9 @@ export class Automation {
    // every ordinary attack gap during continuous hunting.
    const equipped=s.combat.activeSlots.filter((id):id is string=>!!id);
    if(s.combat.ultimate)equipped.push(s.combat.ultimate);
+   if(s.progression.learned.COM_02)equipped.push('COM_02');
    const views=game.combatSkillView(equipped);
+   if(now>=this.nextSupportAt&&p.hp/p.maxHp<.65&&!(s.combat.buffs.healCount>0)&&views.find(v=>v.id==='COM_02')?.ready){frame.healSkill=true;this.nextSupportAt=now+1.5;return {input:frame};}
    if(now>=this.nextSupportAt)for(let slot=0;slot<4;slot++){
     const id=s.combat.activeSlots[slot],rank=id&&allocatedSkillRank(s.progression,id);
     if(!id||!rank||COMBAT_SKILLS[id]?.offensive||!views.find(v=>v.id===id)?.ready)continue;

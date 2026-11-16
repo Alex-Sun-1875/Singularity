@@ -1,4 +1,4 @@
-import {gameResources as resources,isTapRelease} from '../../../shared/assets/GameResources';
+import {gameResources as resources,usesAssetBundles} from '../../../shared/assets/GameResources';
 import {NATIVE_TEXTURE_REUSE} from '../../../shared/assets/NativeTextureReuse';
 import {Color,Material,MeshRenderer,Node,Texture2D,gfx} from 'cc';
 
@@ -31,7 +31,7 @@ export class NativeActorMaterials {
   * prefab-owned in releases and must not be uploaded a second time. */
  static async preload(manifest:NativeActorMaterialManifest){
   const paths=new Set((manifest.materials??[]).filter(record=>!record.parts?.includes('hair')).flatMap(record=>Object.values(record.maps).filter((path):path is string=>!!path).map(path=>'actors/'+path.replace(/\\/g,'/').replace(/^\.\.\//,'').replace(/\.[^/.]+$/,'')+'/texture')));
-  await Promise.all(Array.from(paths).filter(path=>!isTapRelease||!importedTexturePaths.has(path)).map(path=>new Promise<Texture2D>((resolve,reject)=>resources.load(path,Texture2D,(error,texture)=>error?reject(error):resolve(texture)))));
+  await Promise.all(Array.from(paths).filter(path=>!usesAssetBundles||!importedTexturePaths.has(path)).map(path=>new Promise<Texture2D>((resolve,reject)=>resources.load(path,Texture2D,(error,texture)=>error?reject(error):resolve(texture)))));
  }
  private materials = new Map<string,Promise<Material>>();
  private textures = new Map<string,Promise<Texture2D>>();
@@ -138,7 +138,7 @@ export class NativeActorMaterials {
   if(cached)return cached;
   // The prefab already uploaded these images. Reuse only build-time verified
   // pixel/sampler matches; a name match would hide intentional art overrides.
-  const match=isTapRelease&&imported?.isValid&&NATIVE_TEXTURE_REUSE[imported.uuid];
+  const match=usesAssetBundles&&imported?.isValid&&NATIVE_TEXTURE_REUSE[imported.uuid];
   if(match&&match.paths.includes(path)){
    imported.setAnisotropy(match.anisotropy);
    if(!this.ownedTextures.has(imported)){imported.addRef();this.ownedTextures.add(imported);}

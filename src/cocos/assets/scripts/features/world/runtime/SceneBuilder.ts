@@ -409,6 +409,23 @@ export class SceneBuilder implements WorldQuery {
  }
  private prop(o:any){
   const n=new Node(o.id);this.root.addChild(n);n.setPosition(o.x,this.height(o),o.z);this.propNodes.set(o.id,n);if(o.actor&&o.action!=='meeting')return;
+  if(o.action==='pet_journey'){
+   // Physical field objectives, not menu checkboxes. Availability and repaired
+   // states are supplied by PetJourneys; only current objectives stay visible.
+   const part=/:switch:([0-2])$/.exec(o.id);
+   if(part){
+    this.box('PetSupportBase',0,.12,0,.7,.24,.6,colors.wood,n);
+    this.box('PetSupportPost',0,.55,0,.14,.9,.14,colors.timber,n);
+    const index=Number(part[1]);
+    if(index===0){for(const side of [-1,1])this.shape('PetBrace','box',new Vec3(side*.22,.38,0),new Vec3(.12,.65,.15),colors.wood,n,new Vec3(0,0,side*30));}
+    else if(index===1){this.shape('PetDrive','cylinder',new Vec3(0,.79,0),new Vec3(.5,.11,.5),colors.darkStone,n,new Vec3(90,0,0));this.box('PetDriveLever',.22,.8,.1,.46,.07,.08,colors.timber,n);}
+    else{this.box('PetLatch',0,.85,0,.5,.12,.28,colors.darkStone,n);this.box('PetLatchHandle',0,.98,0,.1,.22,.1,colors.timber,n);}
+   }else{
+    this.asset('crate',0,0,0,{width:.7,height:.5,depth:.6},n);
+    this.asset('books',0,.51,0,{width:.48,height:.16,depth:.32},n);
+    this.asset('lantern',.48,0,.25,{height:.35},n);
+   }return;
+  }
   if(o.action==='checkpoint'){
    // The interact/spawn point is clear ground beside the hearth, never its fire.
    this.asset('firepit',1.65,0,.1,{width:1.3,height:.32,depth:1.3},n);

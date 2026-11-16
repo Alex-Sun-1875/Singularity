@@ -1,0 +1,448 @@
+{
+  "date": "2026-11-16",
+  "status": "passed-default-mobile-large-mobile-and-desktop-with-old-small-screen-limitation",
+  "entry": "http://127.0.0.1:7469/?view=2d&player=3d",
+  "build": "src/cocos/build/concept-2d",
+  "profile": "test",
+  "engine": "Cocos Creator 3.8.8",
+  "checks": {
+    "acquired": {
+      "visible": true,
+      "current": {
+        "item": "DU1-04",
+        "elapsed": 0.5,
+        "duration": 3
+      },
+      "pending": [],
+      "width": 300,
+      "height": 72,
+      "autoGap": 7.999999999999995,
+      "labels": [
+        {
+          "name": "NoticeQuality",
+          "text": "获得稀有装备",
+          "size": 11.5,
+          "centered": true
+        },
+        {
+          "name": "NoticeName",
+          "text": "冷焰短杖",
+          "size": 20,
+          "centered": true
+        },
+        {
+          "name": "NoticeHint",
+          "text": "已收入行囊",
+          "size": 11,
+          "centered": true
+        }
+      ],
+      "frameChildren": [
+        "SharedGoldFrame"
+      ],
+      "loaded": true
+    },
+    "dropped": {
+      "notice": {
+        "visible": true,
+        "current": {
+          "id": "loot:4",
+          "item": "DG_L01",
+          "elapsed": 0.5,
+          "duration": 24,
+          "available": true
+        },
+        "pending": [],
+        "width": 300,
+        "height": 72,
+        "autoGap": 7.999999999999995,
+        "labels": [
+          {
+            "name": "NoticeQuality",
+            "text": "传奇装备掉落",
+            "size": 11.5,
+            "centered": true
+          },
+          {
+            "name": "NoticeName",
+            "text": "最后一班岗",
+            "size": 20,
+            "centered": true
+          },
+          {
+            "name": "NoticeHint",
+            "text": "靠近自动拾取",
+            "size": 11,
+            "centered": true
+          }
+        ],
+        "frameChildren": [
+          "SharedGoldFrame"
+        ],
+        "loaded": true
+      },
+      "ground": [
+        {
+          "id": "loot:4",
+          "visible": true,
+          "available": true,
+          "art": "equipment:DG_L01",
+          "grounded": true,
+          "highlighted": true,
+          "auraReady": true,
+          "nameVisible": true,
+          "name": "传奇 · 最后一班岗",
+          "yaw": 4.356974240993559,
+          "groundVertices": [
+            {
+              "x": 2.6182436791833847,
+              "z": -1.5916348306765604,
+              "y": 0.9514965733799485
+            },
+            {
+              "x": 3.555745927948721,
+              "z": -1.9396140449407717,
+              "y": 1.0494156939069772
+            },
+            {
+              "x": 3.3817563208166153,
+              "z": -2.4083651693234396,
+              "y": 1.0310262330267805
+            },
+            {
+              "x": 2.444254072051279,
+              "z": -2.0603859550592283,
+              "y": 0.9336539972322604
+            },
+            {
+              "x": 2.25,
+              "z": -2.75,
+              "y": 0.9048628586354245
+            },
+            {
+              "x": 2.25,
+              "z": -1.25,
+              "y": 0.9048628586354245
+            },
+            {
+              "x": 3.75,
+              "z": -1.25,
+              "y": 1.0610572437312171
+            },
+            {
+              "x": 3.75,
+              "z": -2.75,
+              "y": 1.0610572437312171
+            }
+          ],
+          "position": {
+            "x": 3,
+            "y": 0.9760170924117204,
+            "z": -2
+          },
+          "size": {
+            "width": 1,
+            "height": 1
+          },
+          "artReady": true
+        }
+      ]
+    },
+    "lifecycle": {
+      "hiddenPaused": true,
+      "visibleAt23_9": true,
+      "expiresKeepingGround": true,
+      "pickup": {
+        "itemEvents": [
+          {
+            "id": "DG_L01",
+            "lootId": "loot:1"
+          }
+        ],
+        "owned": 1,
+        "ground": 0,
+        "notice": false,
+        "groundNodes": 0
+      }
+    },
+    "queueAndCapacity": {
+      "priority": true,
+      "collectedQueuedDropRemoved": true,
+      "capacity": {
+        "notice": {
+          "visible": true,
+          "current": {
+            "id": "loot:3",
+            "item": "DG_A01",
+            "elapsed": 0.2,
+            "duration": 24,
+            "available": false
+          },
+          "pending": [],
+          "width": 300,
+          "height": 72,
+          "autoGap": 7.999999999999995,
+          "labels": [
+            {
+              "name": "NoticeQuality",
+              "text": "神器装备掉落",
+              "size": 11.5,
+              "centered": true
+            },
+            {
+              "name": "NoticeName",
+              "text": "王庭的黄昏",
+              "size": 20,
+              "centered": true
+            },
+            {
+              "name": "NoticeHint",
+              "text": "携带已满 · 装备保留在原地",
+              "size": 11,
+              "centered": true
+            }
+          ],
+          "frameChildren": [
+            "SharedGoldFrame"
+          ],
+          "loaded": false
+        },
+        "groundRetained": true
+      }
+    },
+    "count": {
+      "visible": true,
+      "current": {
+        "item": "DU1-04",
+        "elapsed": 0.5,
+        "duration": 3
+      },
+      "pending": [],
+      "width": 300,
+      "height": 72,
+      "autoGap": 7.999999999999995,
+      "labels": [
+        {
+          "name": "NoticeQuality",
+          "text": "获得稀有装备",
+          "size": 11.5,
+          "centered": true
+        },
+        {
+          "name": "NoticeName",
+          "text": "冷焰短杖 ×2",
+          "size": 20,
+          "centered": true
+        },
+        {
+          "name": "NoticeHint",
+          "text": "已收入行囊",
+          "size": 11,
+          "centered": true
+        }
+      ],
+      "frameChildren": [
+        "SharedGoldFrame"
+      ],
+      "loaded": true
+    },
+    "largePhone": {
+      "viewport": [
+        932,
+        430
+      ],
+      "logical": [
+        932,
+        430
+      ],
+      "notice": {
+        "visible": true,
+        "current": {
+          "item": "DU1-04",
+          "elapsed": 0.5,
+          "duration": 3
+        },
+        "pending": [],
+        "width": 300,
+        "height": 72,
+        "autoGap": 8.000000000000009,
+        "labels": [
+          {
+            "name": "NoticeQuality",
+            "text": "获得稀有装备",
+            "size": 11.5,
+            "centered": true
+          },
+          {
+            "name": "NoticeName",
+            "text": "冷焰短杖 ×2",
+            "size": 20,
+            "centered": true
+          },
+          {
+            "name": "NoticeHint",
+            "text": "已收入行囊",
+            "size": 11,
+            "centered": true
+          }
+        ],
+        "frameChildren": [
+          "SharedGoldFrame"
+        ],
+        "loaded": false,
+        "loadedAtCapture": true
+      }
+    },
+    "shortPhone": {
+      "viewport": [
+        568,
+        320
+      ],
+      "logical": [
+        568,
+        320
+      ],
+      "notice": {
+        "visible": true,
+        "current": {
+          "item": "DU1-04",
+          "elapsed": 0.5,
+          "duration": 3
+        },
+        "pending": [],
+        "width": 239.11111111111111,
+        "height": 72,
+        "autoGap": 8,
+        "labels": [
+          {
+            "name": "NoticeQuality",
+            "text": "获得稀有装备",
+            "size": 11.5,
+            "centered": true
+          },
+          {
+            "name": "NoticeName",
+            "text": "冷焰短杖 ×2",
+            "size": 20,
+            "centered": true
+          },
+          {
+            "name": "NoticeHint",
+            "text": "已收入行囊",
+            "size": 11,
+            "centered": true
+          }
+        ],
+        "frameChildren": [
+          "SharedGoldFrame"
+        ],
+        "loaded": false,
+        "loadedAtCapture": true
+      },
+      "visualStatus": "Supplemental old small-screen compatibility: text remains readable and truncates, but the existing HUD and notice overlap the minimap; not accepted as a default layout."
+    },
+    "longName": {
+      "visible": true,
+      "current": {
+        "item": "DU1-04",
+        "elapsed": 0.5,
+        "duration": 3
+      },
+      "pending": [],
+      "width": 239.11111111111111,
+      "height": 72,
+      "autoGap": 8,
+      "labels": [
+        {
+          "name": "NoticeQuality",
+          "text": "获得稀有装备",
+          "size": 11.5,
+          "centered": true
+        },
+        {
+          "name": "NoticeName",
+          "text": "冷焰短杖·极…",
+          "size": 20,
+          "centered": true
+        },
+        {
+          "name": "NoticeHint",
+          "text": "已收入行囊",
+          "size": 11,
+          "centered": true
+        }
+      ],
+      "frameChildren": [
+        "SharedGoldFrame"
+      ],
+      "loaded": false
+    },
+    "desktop": {
+      "touch": false,
+      "visible": true,
+      "width": 375,
+      "height": 90,
+      "autoGap": 8,
+      "labels": [
+        "获得稀有装备",
+        "冷焰短杖",
+        "已收入行囊"
+      ]
+    },
+    "defaultPanel": [
+      {
+        "name": "MenuSheet",
+        "bakedSurface": false,
+        "children": [
+          "GoldFrameShadow",
+          "GoldFrameMaterial",
+          "SharedGoldFrame",
+          "GoldFrameCrestShadow",
+          "GoldFrameCrest",
+          "MenuTitle",
+          "GoldPanelHeader",
+          "SettingsRule:title",
+          "SettingsRule:tabs",
+          "settings-tab:audio",
+          "settings-tab:controls",
+          "settings-tab:journey",
+          "MenuScroll",
+          "SettingsRule:row",
+          "help",
+          "rest",
+          "SettingsRule:footer"
+        ]
+      }
+    ],
+    "noNoticeInputCapture": true
+  },
+  "verification": {
+    "typeCheck": "npm run check passed",
+    "webExport": "passed",
+    "pageErrors": [],
+    "consoleErrors": [],
+    "fixture": "Fresh isolated browser contexts. Production session grant/drop/pickup and HUD renderers; level 40 from existing raiseToMaxLevel for full-skill layout. Long-name case uses a presentation-only item-name override. No production save edited.",
+    "timer": "Existing updater driven at 23.9s and beyond 24s; no real-device clock claim.",
+    "resize": "Cocos show lifecycle refreshes cached metrics before HUD rebuild.",
+    "screenshots": "844x390 at device scale factor 3; current engine render buffer capped at 1688x780, browser capture 2532x1170."
+  },
+  "artReview": {
+    "newImagesGenerated": false,
+    "source": "source-art/ui/loot-alert-v1/legendary-v2.png",
+    "defaultAndLargeScreenVisualReview": "passed",
+    "userFinalArtApproval": "pending"
+  },
+  "sourceHashes": {
+    "src/cocos/assets/scripts/features/equipment/runtime/EquipmentPickupNotice.ts": "88466322480d94b53740a39dc893d37e2e6c730ab1b7e665a6beb6168b15062a",
+    "src/cocos/assets/scripts/app/Hud.ts": "d0cb7820bbb46ebbc2d0b55838685823714899d09fe3e77343bb3b9ed380e71b",
+    "src/cocos/assets/scripts/features/equipment/locales/zh-CN.ts": "d8b18732acf65c2295abce6516dc1dd3fb080df1ddcda7540a1bbb09e346a37b",
+    "src/cocos/assets/scripts/features/equipment/locales/en.ts": "bb7dd69998005f347ff3e76fa509cc6f54e0f72d9a952be2a015ad16fd801c79",
+    "src/cocos/assets/scripts/shared/ui/DoubleGoldFrame.ts": "0a76b85908a0ec64b9f6bc3ba90239241dc7fd43e65502fc4c0d511b32b05bd1",
+    "src/cocos/assets/scripts/shared/ui/UiSkin.ts": "b50ebf1774ae3f8979dd0e78077ce22367dab92645e0eeb9cec696ca536a8032"
+  },
+  "pending": [
+    "TapTap target Android device, native safe area and touch verification",
+    "568x320 supplemental viewport overlaps the existing crowded minimap/HUD; not a default-layout acceptance"
+  ],
+  "taptapPackageBuilt": false
+}

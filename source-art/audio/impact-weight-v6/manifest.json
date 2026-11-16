@@ -1,0 +1,3025 @@
+{
+  "schemaVersion": 6,
+  "date": "2026-11-16",
+  "userFeedback": "四职业仍太清脆，需要更沉重；弓箭手不需要很长的风声，保留雷霆滋滋及各自材质。",
+  "production": "Original deterministic material synthesis using installed NumPy/SciPy/FFmpeg; no recordings, AI model calls, downloads or new dependencies.",
+  "runtimeIntegration": "Offline audition only; game runtime and all older studies preserved.",
+  "listeningAcceptance": "Pending audition of heavier bodies and shorter bow air; frequency/energy metrics do not prove perceived weight or preference.",
+  "taptapDeviceAcceptance": "Not performed",
+  "designNotes": {
+    "physical": {
+      "userPreference": "2026-11-16: all professions should feel heavier and less bright; bow specifically must not have a long wind sound.",
+      "provenance": "Original deterministic NumPy/SciPy modelling with reused v5 material helpers; no recordings, AI, downloads, external samples or claimed listening approval.",
+      "sourceChanges": {
+        "weight": "Rebuilt finite 165-720Hz noise-excited compression and 180-700Hz wood/body layers become the main contact, rather than raising gain or lowering pitch on the old bright transient.",
+        "war": "The cutting edge has less energy and less high-frequency bandwidth; lower non-harmonic steel modes are damped behind the contact. No sine kick, hammer boom or chirp.",
+        "bow": "A firm string latch, low bow-limb resonance and weighted puncture replace bright snap-first balance. Shaft recoil stays separate from air.",
+        "bowAir": "V5 added 210ms wakes beginning 72-77ms after contact. Those wakes and the old longer release-air source are removed. New isolated packets last 50/60/65ms and are finished by 64/74/83ms, not merely hidden with EQ."
+      },
+      "bowAirWindowsSeconds": {
+        "bow_release": [
+          0.018,
+          0.083
+        ],
+        "bow_pierce": [
+          0.014,
+          0.064
+        ],
+        "bow_heavy": [
+          0.014,
+          0.074
+        ]
+      },
+      "tail": "Darker finite material tails remain below contact; bows have no additional late air layer.",
+      "mix": "Active-window RMS balances individual material layers. Final .64 cap is protection only, not a uniform peak/loudness target.",
+      "arrangement": "Keep the v5 schedule/gain and cut preparation at actual release; these are source-timbre changes.",
+      "acceptance": "Frequency/envelope measures describe the changes; human and target-device listening acceptance remain pending."
+    },
+    "elemental": {
+      "userPreference": "Less crisp and bright; more weight across professions while retaining accepted burst and longer material release.",
+      "provenance": "Original deterministic procedural models using existing NumPy/SciPy and previous project source code. No downloads, recorded samples or AI calls.",
+      "sourceChanges": {
+        "core": "Accepted source is separated into low-mid pressure, middle texture and high edge. Bright edge is strongly reduced while the low-mid component is retained.",
+        "newWeight": "New finite noise excitation drives a non-harmonic bank around 149/211/303/437/591Hz with individually short damping; an independent turbulent pressure packet adds dense mass.",
+        "fire": "Additional low-mid rolling packets and reduced spark/ember edge produce thicker combustion. Finite breaths remain distinct from a constant noise wall.",
+        "thunder": "A newly authored short shock body supports the main contact and subordinate network groups; no descending sine kick, sub-bass dependency or long rumble.",
+        "release": "v5 fire/electric release is handled separately from impact weight. Electrical sizzle remains dense and sustained, with less high-frequency edge and a darker middle band."
+      },
+      "spectralIntent": "Weight is concentrated in the phone-audible 140–600Hz range; energy below 60Hz is rejected. This is a source-layer rebalance and added pressure model, not just one low-pass across the final sound.",
+      "durations": {
+        "fir_charge": 0.72,
+        "fir_burst": 1.05,
+        "fir_wall": 3.0,
+        "thu_charge": 0.6,
+        "thu_crack": 0.8,
+        "thu_network": 1.45
+      },
+      "mix": "Peak cap .64, with no cue-by-cue loudness normalization. Audition comparison should match playback loudness.",
+      "acceptance": "Frequency and envelope measurements verify source changes; perceived heaviness and naturalness require user listening."
+    },
+    "performance": "V5 event gains and onsets are preserved; preparation ends at release, darker material bodies replace sharp layers, and bow air is kept short."
+  },
+  "presentationLevels": [
+    {
+      "profession": "WAR",
+      "presentationTargetLufs": -23.0,
+      "presentationLinearGain": 1.6962896022600824,
+      "measuredMasterLufs": -23.01
+    },
+    {
+      "profession": "BOW",
+      "presentationTargetLufs": -24.7,
+      "presentationLinearGain": 1.7803279088537292,
+      "measuredMasterLufs": -24.7
+    },
+    {
+      "profession": "FIR",
+      "presentationTargetLufs": -24.4,
+      "presentationLinearGain": 1.6807379257087371,
+      "measuredMasterLufs": -24.4
+    },
+    {
+      "profession": "THU",
+      "presentationTargetLufs": -25.4,
+      "presentationLinearGain": 1.3995873225726183,
+      "measuredMasterLufs": -25.4
+    }
+  ],
+  "comparison": {
+    "reference": "PCM WAV; MP3 is a convenience preview and can shift gated loudness.",
+    "processing": "Scalar gain only, no dynamics processor for matching.",
+    "baselineHashes": {
+      "source-art/audio/impact-tail-v5/demos/war-15s.wav": "6b43bdb0254cfcee42ef01016fb6ca97aaec879e252551382480b622a37ff300",
+      "source-art/audio/impact-tail-v5/demos/bow-15s.wav": "f94b952057c4776d80da883c263968400c11b0bbbffedf6f11250164d38d1403",
+      "source-art/audio/impact-tail-v5/demos/fir-15s.wav": "d9f026aacdd8cb7752de1eaa83acc8ad1d1836452f39bdb1057450c172d009a2",
+      "source-art/audio/impact-tail-v5/demos/thu-15s.wav": "8f4194df469cfbb2ec13a77a2a1528a8b3190ed8b13b630cf79e9c95bf522e75"
+    },
+    "pairs": [
+      {
+        "profession": "WAR",
+        "targetLufs": -23.8,
+        "beforeMeasuredLufs": -23.8,
+        "afterMeasuredLufs": -23.81
+      },
+      {
+        "profession": "BOW",
+        "targetLufs": -25.8,
+        "beforeMeasuredLufs": -25.79,
+        "afterMeasuredLufs": -25.81
+      },
+      {
+        "profession": "FIR",
+        "targetLufs": -24.4,
+        "beforeMeasuredLufs": -24.4,
+        "afterMeasuredLufs": -24.4
+      },
+      {
+        "profession": "THU",
+        "targetLufs": -25.4,
+        "beforeMeasuredLufs": -25.4,
+        "afterMeasuredLufs": -25.4
+      }
+    ]
+  },
+  "assets": [
+    {
+      "cue": "war_swing",
+      "variation": 1,
+      "path": "clips/war_swing_v01.wav",
+      "description": "Dense short blade displacement with a darker finite wake, no bright whistle.",
+      "sha256": "25313ea2481c22cfd4226fa0df36b07dffd22c67eec063b684afc2cbcf1c1b9e",
+      "metrics": {
+        "durationSeconds": 0.26,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -11.431,
+        "oversampledPeakDbfs": -11.36,
+        "rmsDbfs": -27.404,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1549.0,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 12.0555,
+        "energy350To650msPercent": 0.0,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 7,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0094,
+        "body140To700HzEnergyPercent": 23.4338,
+        "material700To2000HzEnergyPercent": 50.455,
+        "edge2000To8000HzEnergyPercent": 25.4525,
+        "late80To300ms1200To6000HzRms": 0.02371836597078894,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_swing",
+      "variation": 2,
+      "path": "clips/war_swing_v02.wav",
+      "description": "Dense short blade displacement with a darker finite wake, no bright whistle.",
+      "sha256": "45a8830a751a099ccf7622d01a3395c76f118aba09204d03acb66c8eafa0f8e0",
+      "metrics": {
+        "durationSeconds": 0.26,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -11.174,
+        "oversampledPeakDbfs": -11.156,
+        "rmsDbfs": -27.035,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1533.3,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 10.3143,
+        "energy350To650msPercent": 0.0,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 7,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0092,
+        "body140To700HzEnergyPercent": 20.0694,
+        "material700To2000HzEnergyPercent": 59.0553,
+        "edge2000To8000HzEnergyPercent": 20.5153,
+        "late80To300ms1200To6000HzRms": 0.021814736738710146,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_swing",
+      "variation": 3,
+      "path": "clips/war_swing_v03.wav",
+      "description": "Dense short blade displacement with a darker finite wake, no bright whistle.",
+      "sha256": "5938d46216eaf94cf6fa1621552da3e1c83e321945ba9a4e799ae7270dd744b2",
+      "metrics": {
+        "durationSeconds": 0.26,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -11.311,
+        "oversampledPeakDbfs": -11.126,
+        "rmsDbfs": -27.157,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1602.6,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 13.8506,
+        "energy350To650msPercent": 0.0,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 7,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0094,
+        "body140To700HzEnergyPercent": 25.5148,
+        "material700To2000HzEnergyPercent": 44.592,
+        "edge2000To8000HzEnergyPercent": 29.3011,
+        "late80To300ms1200To6000HzRms": 0.021627083037688344,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_slash",
+      "variation": 1,
+      "path": "clips/war_slash_v01.wav",
+      "description": "Damped weighted cutting contact with a small steel edge and dark steel aftermotion.",
+      "sha256": "3e6227d38cbcdba996b7fd3423ccf542e5cac10f9614879227c09c1e826111d1",
+      "metrics": {
+        "durationSeconds": 0.4,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -6.538,
+        "oversampledPeakDbfs": -6.517,
+        "rmsDbfs": -28.166,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 681.8,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 2.2241,
+        "energy350To650msPercent": 0.0002,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 6,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0568,
+        "body140To700HzEnergyPercent": 64.4377,
+        "material700To2000HzEnergyPercent": 30.1324,
+        "edge2000To8000HzEnergyPercent": 4.8242,
+        "late80To300ms1200To6000HzRms": 0.005550735719280244,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_slash",
+      "variation": 2,
+      "path": "clips/war_slash_v02.wav",
+      "description": "Damped weighted cutting contact with a small steel edge and dark steel aftermotion.",
+      "sha256": "e5762ac595d6ff608b0e359bad9f2fbcd3454dd6e2921aa1d54ea69e20d7c26c",
+      "metrics": {
+        "durationSeconds": 0.4,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.864,
+        "oversampledPeakDbfs": -5.809,
+        "rmsDbfs": -28.278,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 728.5,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 2.8232,
+        "energy350To650msPercent": 0.0007,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 6,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0161,
+        "body140To700HzEnergyPercent": 70.7382,
+        "material700To2000HzEnergyPercent": 24.5766,
+        "edge2000To8000HzEnergyPercent": 4.2809,
+        "late80To300ms1200To6000HzRms": 0.005556531251800539,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_slash",
+      "variation": 3,
+      "path": "clips/war_slash_v03.wav",
+      "description": "Damped weighted cutting contact with a small steel edge and dark steel aftermotion.",
+      "sha256": "39ccd29e858b075c72d5717d10e95fd33a992f569a09f165b346309861c5c1d3",
+      "metrics": {
+        "durationSeconds": 0.4,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.566,
+        "oversampledPeakDbfs": -5.551,
+        "rmsDbfs": -28.332,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 674.3,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 2.6057,
+        "energy350To650msPercent": 0.0004,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 6,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0218,
+        "body140To700HzEnergyPercent": 62.8985,
+        "material700To2000HzEnergyPercent": 30.4842,
+        "edge2000To8000HzEnergyPercent": 6.0,
+        "late80To300ms1200To6000HzRms": 0.005128128676802024,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_armor",
+      "variation": 1,
+      "path": "clips/war_armor_v01.wav",
+      "description": "Firm padded plate impact, low-mid material body and subordinate dark steel vibration.",
+      "sha256": "205e1d5b75e18f33e2f4ca382649017efca6f827e8986db2a9fa0db7d995147e",
+      "metrics": {
+        "durationSeconds": 0.48,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -7.749,
+        "oversampledPeakDbfs": -7.737,
+        "rmsDbfs": -29.105,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 648.4,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 3.6914,
+        "energy350To650msPercent": 0.0187,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 9,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.017,
+        "body140To700HzEnergyPercent": 64.4136,
+        "material700To2000HzEnergyPercent": 29.719,
+        "edge2000To8000HzEnergyPercent": 5.38,
+        "late80To300ms1200To6000HzRms": 0.005887696500067399,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_armor",
+      "variation": 2,
+      "path": "clips/war_armor_v02.wav",
+      "description": "Firm padded plate impact, low-mid material body and subordinate dark steel vibration.",
+      "sha256": "462e68411251acb0f9d0a9b9aff074912de1d1cb2ed8fe682cde86aefbaceac0",
+      "metrics": {
+        "durationSeconds": 0.48,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -7.892,
+        "oversampledPeakDbfs": -7.855,
+        "rmsDbfs": -28.657,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 777.3,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 2.9644,
+        "energy350To650msPercent": 0.0076,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 8,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0683,
+        "body140To700HzEnergyPercent": 55.5773,
+        "material700To2000HzEnergyPercent": 37.7967,
+        "edge2000To8000HzEnergyPercent": 6.0681,
+        "late80To300ms1200To6000HzRms": 0.006439178439354449,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_armor",
+      "variation": 3,
+      "path": "clips/war_armor_v03.wav",
+      "description": "Firm padded plate impact, low-mid material body and subordinate dark steel vibration.",
+      "sha256": "67e0c5b68ef8e27609bb36a44b03de24a54ce205fcab85f1a1d71bda7a702307",
+      "metrics": {
+        "durationSeconds": 0.48,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -6.123,
+        "oversampledPeakDbfs": -6.063,
+        "rmsDbfs": -28.043,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 706.5,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 3.1843,
+        "energy350To650msPercent": 0.0169,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 10,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0181,
+        "body140To700HzEnergyPercent": 63.1265,
+        "material700To2000HzEnergyPercent": 30.4752,
+        "edge2000To8000HzEnergyPercent": 5.907,
+        "late80To300ms1200To6000HzRms": 0.005434020312958677,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_finish",
+      "variation": 1,
+      "path": "clips/war_finish_v01.wav",
+      "description": "Heavier compressed cut/body, still a blade contact rather than a hammer or drum.",
+      "sha256": "71d4c7b7f1621ea0f5e64c314c111522a5561cc0c1069c368b59837b814cd65a",
+      "metrics": {
+        "durationSeconds": 0.56,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -6.275,
+        "oversampledPeakDbfs": -6.269,
+        "rmsDbfs": -27.61,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 576.5,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 2.2987,
+        "energy350To650msPercent": 0.0035,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 8,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0438,
+        "body140To700HzEnergyPercent": 61.0581,
+        "material700To2000HzEnergyPercent": 33.9255,
+        "edge2000To8000HzEnergyPercent": 3.4046,
+        "late80To300ms1200To6000HzRms": 0.0054782192875875825,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_finish",
+      "variation": 2,
+      "path": "clips/war_finish_v02.wav",
+      "description": "Heavier compressed cut/body, still a blade contact rather than a hammer or drum.",
+      "sha256": "4aa605d2cfacc0100d43e83e8718b25dc28b4473f1ee66154cc7a03b1913b262",
+      "metrics": {
+        "durationSeconds": 0.56,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -6.851,
+        "oversampledPeakDbfs": -6.835,
+        "rmsDbfs": -28.453,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 660.3,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 3.2795,
+        "energy350To650msPercent": 0.0035,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 8,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.021,
+        "body140To700HzEnergyPercent": 67.3833,
+        "material700To2000HzEnergyPercent": 28.6784,
+        "edge2000To8000HzEnergyPercent": 3.634,
+        "late80To300ms1200To6000HzRms": 0.007612762558197142,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_finish",
+      "variation": 3,
+      "path": "clips/war_finish_v03.wav",
+      "description": "Heavier compressed cut/body, still a blade contact rather than a hammer or drum.",
+      "sha256": "c8428edeac652ae5da1e7163ce7bc7baed7edc640cfb273aa55e16bac26bd9e5",
+      "metrics": {
+        "durationSeconds": 0.56,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -6.787,
+        "oversampledPeakDbfs": -6.781,
+        "rmsDbfs": -28.711,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 624.6,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 3.7585,
+        "energy350To650msPercent": 0.0029,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 8,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0602,
+        "body140To700HzEnergyPercent": 70.9259,
+        "material700To2000HzEnergyPercent": 24.1621,
+        "edge2000To8000HzEnergyPercent": 3.8855,
+        "late80To300ms1200To6000HzRms": 0.008130760748598037,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_draw",
+      "variation": 1,
+      "path": "clips/bow_draw_v01.wav",
+      "description": "Low wood/string tension friction with short irregular creaks, no long air sweep.",
+      "sha256": "64b6249c69fa13203d9ba078eebb2efc531b04ddb6deaa23f422514903ca6cc2",
+      "metrics": {
+        "durationSeconds": 0.62,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -19.909,
+        "oversampledPeakDbfs": -19.884,
+        "rmsDbfs": -34.433,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 759.5,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 55.4986,
+        "energy350To650msPercent": 41.1967,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 25,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0193,
+        "body140To700HzEnergyPercent": 55.0263,
+        "material700To2000HzEnergyPercent": 41.2107,
+        "edge2000To8000HzEnergyPercent": 3.136,
+        "late80To300ms1200To6000HzRms": 0.0082083814842423,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_draw",
+      "variation": 2,
+      "path": "clips/bow_draw_v02.wav",
+      "description": "Low wood/string tension friction with short irregular creaks, no long air sweep.",
+      "sha256": "e488c3b11d95769827168de8949360ab994f86f88a9be977ecb5dc9fb57a4145",
+      "metrics": {
+        "durationSeconds": 0.62,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -20.53,
+        "oversampledPeakDbfs": -20.5,
+        "rmsDbfs": -34.176,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 765.2,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 58.4358,
+        "energy350To650msPercent": 36.6384,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 25,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0907,
+        "body140To700HzEnergyPercent": 54.6841,
+        "material700To2000HzEnergyPercent": 40.6122,
+        "edge2000To8000HzEnergyPercent": 3.5178,
+        "late80To300ms1200To6000HzRms": 0.00857186832236531,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_draw",
+      "variation": 3,
+      "path": "clips/bow_draw_v03.wav",
+      "description": "Low wood/string tension friction with short irregular creaks, no long air sweep.",
+      "sha256": "fd8a467193ea42d50a397c6865cfd47a41ddcdbbe410df9dd669949c30d65972",
+      "metrics": {
+        "durationSeconds": 0.62,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -19.169,
+        "oversampledPeakDbfs": -19.163,
+        "rmsDbfs": -34.513,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 772.3,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 58.7496,
+        "energy350To650msPercent": 38.7754,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 25,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0824,
+        "body140To700HzEnergyPercent": 56.0138,
+        "material700To2000HzEnergyPercent": 39.0501,
+        "edge2000To8000HzEnergyPercent": 3.8234,
+        "late80To300ms1200To6000HzRms": 0.009101433677546377,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_release",
+      "variation": 1,
+      "path": "clips/bow_release_v01.wav",
+      "description": "Firm string latch and bow-limb recoil, with only 65ms of faint arrow air.",
+      "sha256": "4e05e8398145016cea0635a304b42a7ce1463f7cc4f7ef2e209e2df8de0aa30c",
+      "metrics": {
+        "durationSeconds": 0.3,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -7.548,
+        "oversampledPeakDbfs": -7.542,
+        "rmsDbfs": -28.113,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 568.1,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 0.6124,
+        "energy350To650msPercent": 0.0,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 3,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0542,
+        "body140To700HzEnergyPercent": 74.6714,
+        "material700To2000HzEnergyPercent": 22.3658,
+        "edge2000To8000HzEnergyPercent": 2.6015,
+        "late80To300ms1200To6000HzRms": 0.00023950562054729025,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_release",
+      "variation": 2,
+      "path": "clips/bow_release_v02.wav",
+      "description": "Firm string latch and bow-limb recoil, with only 65ms of faint arrow air.",
+      "sha256": "df6c12fd04aef48963511832115fb685b2f1d337a56fe914b0b8cba29b9efcaf",
+      "metrics": {
+        "durationSeconds": 0.3,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -6.386,
+        "oversampledPeakDbfs": -6.381,
+        "rmsDbfs": -27.877,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 531.0,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 0.745,
+        "energy350To650msPercent": 0.0,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 3,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0199,
+        "body140To700HzEnergyPercent": 80.0054,
+        "material700To2000HzEnergyPercent": 16.2559,
+        "edge2000To8000HzEnergyPercent": 3.0106,
+        "late80To300ms1200To6000HzRms": 0.0003825594660794224,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_release",
+      "variation": 3,
+      "path": "clips/bow_release_v03.wav",
+      "description": "Firm string latch and bow-limb recoil, with only 65ms of faint arrow air.",
+      "sha256": "e3e836c4e1133a64cf9f34aa29269061d3ebd56181edcca6d074333ee3152961",
+      "metrics": {
+        "durationSeconds": 0.3,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -8.025,
+        "oversampledPeakDbfs": -8.011,
+        "rmsDbfs": -27.439,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 497.0,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 0.8462,
+        "energy350To650msPercent": 0.0,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 4,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0118,
+        "body140To700HzEnergyPercent": 77.5222,
+        "material700To2000HzEnergyPercent": 18.6655,
+        "edge2000To8000HzEnergyPercent": 3.6067,
+        "late80To300ms1200To6000HzRms": 0.00023582700995388104,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_pierce",
+      "variation": 1,
+      "path": "clips/bow_pierce_v01.wav",
+      "description": "Weighted fibre puncture and short shaft recoil; only 50ms of subordinate air.",
+      "sha256": "71d3de43324d4a11699fa3d14cbdc9d72e99e6044a6311b5408edd2144d9931f",
+      "metrics": {
+        "durationSeconds": 0.3,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -9.694,
+        "oversampledPeakDbfs": -9.688,
+        "rmsDbfs": -28.688,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 602.8,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 1.0947,
+        "energy350To650msPercent": 0.0,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 4,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0333,
+        "body140To700HzEnergyPercent": 70.3714,
+        "material700To2000HzEnergyPercent": 25.2839,
+        "edge2000To8000HzEnergyPercent": 4.1569,
+        "late80To300ms1200To6000HzRms": 0.0020121523473175993,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_pierce",
+      "variation": 2,
+      "path": "clips/bow_pierce_v02.wav",
+      "description": "Weighted fibre puncture and short shaft recoil; only 50ms of subordinate air.",
+      "sha256": "1b102cfbd0b02310bdc7fe4e37b2038cf3a54e6b4772dcdd8945dae99979877d",
+      "metrics": {
+        "durationSeconds": 0.3,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -9.563,
+        "oversampledPeakDbfs": -9.557,
+        "rmsDbfs": -29.914,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 624.5,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 1.4323,
+        "energy350To650msPercent": 0.0,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 4,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0327,
+        "body140To700HzEnergyPercent": 64.5451,
+        "material700To2000HzEnergyPercent": 31.2455,
+        "edge2000To8000HzEnergyPercent": 3.8384,
+        "late80To300ms1200To6000HzRms": 0.0019153002195958881,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_pierce",
+      "variation": 3,
+      "path": "clips/bow_pierce_v03.wav",
+      "description": "Weighted fibre puncture and short shaft recoil; only 50ms of subordinate air.",
+      "sha256": "7d48ad6c2ef69c760f7a34e80b9266b0499f1b76b42ebf21e536ed53df447522",
+      "metrics": {
+        "durationSeconds": 0.3,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -10.96,
+        "oversampledPeakDbfs": -10.936,
+        "rmsDbfs": -28.928,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 493.5,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 1.0621,
+        "energy350To650msPercent": 0.0,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 4,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0127,
+        "body140To700HzEnergyPercent": 72.0982,
+        "material700To2000HzEnergyPercent": 23.1173,
+        "edge2000To8000HzEnergyPercent": 3.7439,
+        "late80To300ms1200To6000HzRms": 0.0019499029325064003,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_heavy",
+      "variation": 1,
+      "path": "clips/bow_heavy_v01.wav",
+      "description": "Thicker puncture/bow-wood body and dark shaft vibration, no extended swoosh.",
+      "sha256": "7e1c9a1cb772df2a5522542dbac51b84dd67268fb154e7d7dbee028c5e2a65db",
+      "metrics": {
+        "durationSeconds": 0.42,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -6.374,
+        "oversampledPeakDbfs": -6.368,
+        "rmsDbfs": -28.5,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 548.2,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 1.5891,
+        "energy350To650msPercent": 0.0003,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 5,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0082,
+        "body140To700HzEnergyPercent": 67.8363,
+        "material700To2000HzEnergyPercent": 28.1751,
+        "edge2000To8000HzEnergyPercent": 3.1095,
+        "late80To300ms1200To6000HzRms": 0.003032967738369324,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_heavy",
+      "variation": 2,
+      "path": "clips/bow_heavy_v02.wav",
+      "description": "Thicker puncture/bow-wood body and dark shaft vibration, no extended swoosh.",
+      "sha256": "d673c8c23f87a2d481fcb528bff6d1d3de8bffb790a05816b70d64ca6595d0df",
+      "metrics": {
+        "durationSeconds": 0.42,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -6.295,
+        "oversampledPeakDbfs": -6.29,
+        "rmsDbfs": -28.418,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 505.7,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 1.4575,
+        "energy350To650msPercent": 0.0002,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 5,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0218,
+        "body140To700HzEnergyPercent": 77.8878,
+        "material700To2000HzEnergyPercent": 17.9157,
+        "edge2000To8000HzEnergyPercent": 3.5321,
+        "late80To300ms1200To6000HzRms": 0.002579163195167736,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_heavy",
+      "variation": 3,
+      "path": "clips/bow_heavy_v03.wav",
+      "description": "Thicker puncture/bow-wood body and dark shaft vibration, no extended swoosh.",
+      "sha256": "ef6c54dfed33d56864fd768f2f2c7765db42cac475e496c775cb37d3e7de13da",
+      "metrics": {
+        "durationSeconds": 0.42,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -9.117,
+        "oversampledPeakDbfs": -9.076,
+        "rmsDbfs": -28.652,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 582.6,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 1.3584,
+        "energy350To650msPercent": 0.0002,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 5,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0961,
+        "body140To700HzEnergyPercent": 71.3908,
+        "material700To2000HzEnergyPercent": 23.967,
+        "edge2000To8000HzEnergyPercent": 3.737,
+        "late80To300ms1200To6000HzRms": 0.0030456287983627412,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "fir_charge",
+      "variation": 1,
+      "path": "clips/fir_charge_v01.wav",
+      "description": "Darker gathering combustion with modest damped pressure, without bright spark ticks.",
+      "sha256": "4eb73bb06186ad3ff22b153fc64999baa1f7fb98dcfc9afcf2f58011c9d29e22",
+      "metrics": {
+        "durationSeconds": 0.72,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -17.883,
+        "oversampledPeakDbfs": -17.876,
+        "rmsDbfs": -35.532,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 683.4,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 22.0942,
+        "energy350To650msPercent": 73.412,
+        "energy650To1000msPercent": 0.5985,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.149,
+        "body140To700HzEnergyPercent": 69.8223,
+        "material700To2000HzEnergyPercent": 25.4562,
+        "edge2000To8000HzEnergyPercent": 4.099,
+        "late80To300ms1200To6000HzRms": 0.005886214511079014,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "fir_charge",
+      "variation": 2,
+      "path": "clips/fir_charge_v02.wav",
+      "description": "Darker gathering combustion with modest damped pressure, without bright spark ticks.",
+      "sha256": "22e550bfbf4f988b33d3eee2e6dc5c9b005f955f4d002b3cde25bb36127839a5",
+      "metrics": {
+        "durationSeconds": 0.72,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -19.513,
+        "oversampledPeakDbfs": -19.493,
+        "rmsDbfs": -35.46,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 698.5,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 19.3058,
+        "energy350To650msPercent": 77.1895,
+        "energy650To1000msPercent": 0.8529,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0172,
+        "body140To700HzEnergyPercent": 69.1719,
+        "material700To2000HzEnergyPercent": 26.5031,
+        "edge2000To8000HzEnergyPercent": 3.783,
+        "late80To300ms1200To6000HzRms": 0.0061758010644924685,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "fir_charge",
+      "variation": 3,
+      "path": "clips/fir_charge_v03.wav",
+      "description": "Darker gathering combustion with modest damped pressure, without bright spark ticks.",
+      "sha256": "050d3860ab8c10df401ed829e91bf147abdf350c64939eb447beb9dbb56d0e51",
+      "metrics": {
+        "durationSeconds": 0.72,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -19.124,
+        "oversampledPeakDbfs": -19.118,
+        "rmsDbfs": -35.508,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 674.8,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 20.4157,
+        "energy350To650msPercent": 76.1678,
+        "energy650To1000msPercent": 0.6138,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0387,
+        "body140To700HzEnergyPercent": 68.739,
+        "material700To2000HzEnergyPercent": 26.6664,
+        "edge2000To8000HzEnergyPercent": 3.032,
+        "late80To300ms1200To6000HzRms": 0.006100652033026509,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "fir_burst",
+      "variation": 1,
+      "path": "clips/fir_burst_v01.wav",
+      "description": "A weightier low-mid ignition and finite pressure volume, thick rolling combustion and subdued embers.",
+      "sha256": "abe94e05faf49593b8bf2388f7e3afa12077497e534ea73e833b5eeed57486c2",
+      "metrics": {
+        "durationSeconds": 1.05,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -8.058,
+        "oversampledPeakDbfs": -8.052,
+        "rmsDbfs": -26.418,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 466.1,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 16.3885,
+        "energy350To650msPercent": 5.9348,
+        "energy650To1000msPercent": 1.0144,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.1429,
+        "body140To700HzEnergyPercent": 83.6518,
+        "material700To2000HzEnergyPercent": 13.9505,
+        "edge2000To8000HzEnergyPercent": 1.2901,
+        "late80To300ms1200To6000HzRms": 0.016446579817713223,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "fir_burst",
+      "variation": 2,
+      "path": "clips/fir_burst_v02.wav",
+      "description": "A weightier low-mid ignition and finite pressure volume, thick rolling combustion and subdued embers.",
+      "sha256": "e3949e1f03bd82a6480592582fe32adba8bf8f64389215e05f6af259a0a12da4",
+      "metrics": {
+        "durationSeconds": 1.05,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -4.727,
+        "oversampledPeakDbfs": -4.721,
+        "rmsDbfs": -27.362,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 497.2,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 21.1691,
+        "energy350To650msPercent": 5.4708,
+        "energy650To1000msPercent": 1.1823,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0933,
+        "body140To700HzEnergyPercent": 78.9024,
+        "material700To2000HzEnergyPercent": 15.8891,
+        "edge2000To8000HzEnergyPercent": 1.4502,
+        "late80To300ms1200To6000HzRms": 0.015390731226551147,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "fir_burst",
+      "variation": 3,
+      "path": "clips/fir_burst_v03.wav",
+      "description": "A weightier low-mid ignition and finite pressure volume, thick rolling combustion and subdued embers.",
+      "sha256": "23115206dbb5884761e83fe3c6968f26632ed49e068b873f91d2625006d9d695",
+      "metrics": {
+        "durationSeconds": 1.05,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -7.24,
+        "oversampledPeakDbfs": -7.214,
+        "rmsDbfs": -27.696,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 466.8,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 18.9884,
+        "energy350To650msPercent": 4.3433,
+        "energy650To1000msPercent": 0.7861,
+        "windows100To650msAboveRmsPoint003": 27,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.9423,
+        "body140To700HzEnergyPercent": 74.1797,
+        "material700To2000HzEnergyPercent": 16.2658,
+        "edge2000To8000HzEnergyPercent": 1.3893,
+        "late80To300ms1200To6000HzRms": 0.014125045225545682,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "fir_wall",
+      "variation": 1,
+      "path": "clips/fir_wall_v01.wav",
+      "description": "Intermittent darker flame tongues with modest low-mid pressure and a fading natural release.",
+      "sha256": "0060b0376a831bddf7cee337c32cf540573006ede160c9171467a331d8f4458d",
+      "metrics": {
+        "durationSeconds": 3.0,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -21.198,
+        "oversampledPeakDbfs": -21.169,
+        "rmsDbfs": -40.412,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 810.6,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 3.2817,
+        "energy350To650msPercent": 12.9154,
+        "energy650To1000msPercent": 7.3002,
+        "windows100To650msAboveRmsPoint003": 24,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.005,
+        "body140To700HzEnergyPercent": 56.7694,
+        "material700To2000HzEnergyPercent": 37.8176,
+        "edge2000To8000HzEnergyPercent": 4.6734,
+        "late80To300ms1200To6000HzRms": 0.0036582832078241373,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "fir_wall",
+      "variation": 2,
+      "path": "clips/fir_wall_v02.wav",
+      "description": "Intermittent darker flame tongues with modest low-mid pressure and a fading natural release.",
+      "sha256": "35760abeb6f168c89235ceb55815eec6f8b04db97e05d0ff285af9731bad15df",
+      "metrics": {
+        "durationSeconds": 3.0,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -22.426,
+        "oversampledPeakDbfs": -22.42,
+        "rmsDbfs": -40.418,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 812.3,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 3.6161,
+        "energy350To650msPercent": 10.5274,
+        "energy650To1000msPercent": 12.6539,
+        "windows100To650msAboveRmsPoint003": 22,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0211,
+        "body140To700HzEnergyPercent": 58.3961,
+        "material700To2000HzEnergyPercent": 36.276,
+        "edge2000To8000HzEnergyPercent": 4.6479,
+        "late80To300ms1200To6000HzRms": 0.0035328623859021014,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "fir_wall",
+      "variation": 3,
+      "path": "clips/fir_wall_v03.wav",
+      "description": "Intermittent darker flame tongues with modest low-mid pressure and a fading natural release.",
+      "sha256": "187699f4448ea5b3dae4be258b4c652eff8507e8d5fb39d7410b5ee1b6574696",
+      "metrics": {
+        "durationSeconds": 3.0,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -23.065,
+        "oversampledPeakDbfs": -23.051,
+        "rmsDbfs": -40.307,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 790.9,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 4.2138,
+        "energy350To650msPercent": 12.781,
+        "energy650To1000msPercent": 6.9941,
+        "windows100To650msAboveRmsPoint003": 21,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0417,
+        "body140To700HzEnergyPercent": 58.8948,
+        "material700To2000HzEnergyPercent": 36.0237,
+        "edge2000To8000HzEnergyPercent": 4.4805,
+        "late80To300ms1200To6000HzRms": 0.0038444639985774115,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "thu_charge",
+      "variation": 1,
+      "path": "clips/thu_charge_v01.wav",
+      "description": "Dark rough pre-discharge contacts and low-presence electrical sizzle; no laser or bright ticking.",
+      "sha256": "4c79963943c5fabcb7c50167c1aa8179ff37be69e5269ebf3477afd8f04bb617",
+      "metrics": {
+        "durationSeconds": 0.6,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -19.822,
+        "oversampledPeakDbfs": -19.811,
+        "rmsDbfs": -45.403,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 761.3,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 11.167,
+        "energy350To650msPercent": 88.4677,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 11,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.7307,
+        "body140To700HzEnergyPercent": 59.3106,
+        "material700To2000HzEnergyPercent": 25.7504,
+        "edge2000To8000HzEnergyPercent": 8.3462,
+        "late80To300ms1200To6000HzRms": 0.0024395611333038127,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "thu_charge",
+      "variation": 2,
+      "path": "clips/thu_charge_v02.wav",
+      "description": "Dark rough pre-discharge contacts and low-presence electrical sizzle; no laser or bright ticking.",
+      "sha256": "36c154295859008f6c171ef6ddf42fca4c35941c3ff55799759b473f341f3459",
+      "metrics": {
+        "durationSeconds": 0.6,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -25.473,
+        "oversampledPeakDbfs": -25.468,
+        "rmsDbfs": -46.454,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 879.6,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 16.5697,
+        "energy350To650msPercent": 82.7136,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 14,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.2325,
+        "body140To700HzEnergyPercent": 57.9941,
+        "material700To2000HzEnergyPercent": 30.6974,
+        "edge2000To8000HzEnergyPercent": 9.0784,
+        "late80To300ms1200To6000HzRms": 0.0024242206001247463,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "thu_charge",
+      "variation": 3,
+      "path": "clips/thu_charge_v03.wav",
+      "description": "Dark rough pre-discharge contacts and low-presence electrical sizzle; no laser or bright ticking.",
+      "sha256": "96c229f723e7254b3b85804a4b709818b1d479dfd630e48d040c2004d4611867",
+      "metrics": {
+        "durationSeconds": 0.6,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -23.957,
+        "oversampledPeakDbfs": -23.943,
+        "rmsDbfs": -45.705,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 808.5,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 10.8464,
+        "energy350To650msPercent": 88.7187,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 13,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.1379,
+        "body140To700HzEnergyPercent": 64.3853,
+        "material700To2000HzEnergyPercent": 24.9686,
+        "edge2000To8000HzEnergyPercent": 8.772,
+        "late80To300ms1200To6000HzRms": 0.002080389515657777,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "thu_crack",
+      "variation": 1,
+      "path": "clips/thu_crack_v01.wav",
+      "description": "A rounded electrical fracture, a heavier 140–600Hz short shock body and dark sustained electrical sizzle.",
+      "sha256": "bc814a73b2f40b9fa25de7db52d3db148fa207227b9fe7b25b1c35402929d386",
+      "metrics": {
+        "durationSeconds": 0.8,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -3.876,
+        "oversampledPeakDbfs": -3.866,
+        "rmsDbfs": -26.534,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 450.6,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 6.5452,
+        "energy350To650msPercent": 2.083,
+        "energy650To1000msPercent": 0.0735,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0193,
+        "body140To700HzEnergyPercent": 87.3618,
+        "material700To2000HzEnergyPercent": 9.2982,
+        "edge2000To8000HzEnergyPercent": 2.3903,
+        "late80To300ms1200To6000HzRms": 0.017589088656163526,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "thu_crack",
+      "variation": 2,
+      "path": "clips/thu_crack_v02.wav",
+      "description": "A rounded electrical fracture, a heavier 140–600Hz short shock body and dark sustained electrical sizzle.",
+      "sha256": "fe3faa4702eaf78fc98d2841fa181954973025e7632936421f785f108c17f937",
+      "metrics": {
+        "durationSeconds": 0.8,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -4.481,
+        "oversampledPeakDbfs": -4.476,
+        "rmsDbfs": -26.285,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 458.3,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 5.9235,
+        "energy350To650msPercent": 1.9708,
+        "energy650To1000msPercent": 0.1127,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0801,
+        "body140To700HzEnergyPercent": 86.981,
+        "material700To2000HzEnergyPercent": 9.4224,
+        "edge2000To8000HzEnergyPercent": 2.0778,
+        "late80To300ms1200To6000HzRms": 0.01723880525567646,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "thu_crack",
+      "variation": 3,
+      "path": "clips/thu_crack_v03.wav",
+      "description": "A rounded electrical fracture, a heavier 140–600Hz short shock body and dark sustained electrical sizzle.",
+      "sha256": "fdbd4e201158b4de969cdd80d6a1d6f03d68770fd0bd78a3e4b02b1d091aa53f",
+      "metrics": {
+        "durationSeconds": 0.8,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -3.876,
+        "oversampledPeakDbfs": -3.871,
+        "rmsDbfs": -26.79,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 500.8,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 6.8194,
+        "energy350To650msPercent": 2.338,
+        "energy650To1000msPercent": 0.0684,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0879,
+        "body140To700HzEnergyPercent": 84.3087,
+        "material700To2000HzEnergyPercent": 11.8488,
+        "edge2000To8000HzEnergyPercent": 2.5004,
+        "late80To300ms1200To6000HzRms": 0.01780013421416751,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "thu_network",
+      "variation": 1,
+      "path": "clips/thu_network_v01.wav",
+      "description": "A heavy first electrical shock with subordinate grouped impacts and successively weaker dark arc release.",
+      "sha256": "f559492ba7b4eed70c5118688d51613144470bca8470f9228c68c1f8b8adeab5",
+      "metrics": {
+        "durationSeconds": 1.45,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.089,
+        "oversampledPeakDbfs": -5.083,
+        "rmsDbfs": -28.107,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 409.5,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 18.7089,
+        "energy350To650msPercent": 5.8808,
+        "energy650To1000msPercent": 0.2442,
+        "windows100To650msAboveRmsPoint003": 27,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.1768,
+        "body140To700HzEnergyPercent": 86.7479,
+        "material700To2000HzEnergyPercent": 7.9939,
+        "edge2000To8000HzEnergyPercent": 2.1397,
+        "late80To300ms1200To6000HzRms": 0.0168202313430924,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "thu_network",
+      "variation": 2,
+      "path": "clips/thu_network_v02.wav",
+      "description": "A heavy first electrical shock with subordinate grouped impacts and successively weaker dark arc release.",
+      "sha256": "83e43f08982a650bde2739028ea6fdfda852ecd76b6fd05aa9f3bc000a7a574f",
+      "metrics": {
+        "durationSeconds": 1.45,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -7.034,
+        "oversampledPeakDbfs": -7.028,
+        "rmsDbfs": -28.191,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 438.4,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 16.5106,
+        "energy350To650msPercent": 6.4063,
+        "energy650To1000msPercent": 0.2536,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.3257,
+        "body140To700HzEnergyPercent": 84.333,
+        "material700To2000HzEnergyPercent": 9.8837,
+        "edge2000To8000HzEnergyPercent": 2.4502,
+        "late80To300ms1200To6000HzRms": 0.019576847594446875,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "thu_network",
+      "variation": 3,
+      "path": "clips/thu_network_v03.wav",
+      "description": "A heavy first electrical shock with subordinate grouped impacts and successively weaker dark arc release.",
+      "sha256": "bd9d8ac810babb13ecdfca32658082e41ad6acbc9287921283f450a6c4ad7a1a",
+      "metrics": {
+        "durationSeconds": 1.45,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.772,
+        "oversampledPeakDbfs": -5.767,
+        "rmsDbfs": -28.83,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 470.5,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 17.2685,
+        "energy350To650msPercent": 6.5814,
+        "energy650To1000msPercent": 0.3614,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.1949,
+        "body140To700HzEnergyPercent": 84.0793,
+        "material700To2000HzEnergyPercent": 10.2101,
+        "edge2000To8000HzEnergyPercent": 2.4219,
+        "late80To300ms1200To6000HzRms": 0.016737590406400063,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    }
+  ],
+  "objectiveChanges": [
+    {
+      "cue": "war_swing",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 0.3,
+        "low45To180HzEnergyPercent": 0.086,
+        "high3500To10000HzEnergyPercent": 25.582,
+        "first20msEnergyPercent": 0.19,
+        "energyAfter100msPercent": 19.44,
+        "effectiveEndMinus40DbSeconds": 0.28812,
+        "periodicityPeak90To1800Hz": 0.10037,
+        "tail": {
+          "energy100To350msPercent": 19.4404,
+          "energy350To650msPercent": 0.0,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 9,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0002,
+          "body140To700HzEnergyPercent": 8.2525,
+          "material700To2000HzEnergyPercent": 30.9849,
+          "edge2000To8000HzEnergyPercent": 59.6611,
+          "late80To300ms1200To6000HzRms": 0.031368885488034806,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "after": {
+        "durationSeconds": 0.26,
+        "low45To180HzEnergyPercent": 1.455,
+        "high3500To10000HzEnergyPercent": 5.779,
+        "first20msEnergyPercent": 0.753,
+        "energyAfter100msPercent": 12.055,
+        "effectiveEndMinus40DbSeconds": 0.24787,
+        "periodicityPeak90To1800Hz": 0.10951,
+        "tail": {
+          "energy100To350msPercent": 12.0555,
+          "energy350To650msPercent": 0.0,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 7,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0094,
+          "body140To700HzEnergyPercent": 23.4338,
+          "material700To2000HzEnergyPercent": 50.455,
+          "edge2000To8000HzEnergyPercent": 25.4525,
+          "late80To300ms1200To6000HzRms": 0.02371836597078894,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "first30msMaxAbsoluteDifference": 0.13736926951964495
+    },
+    {
+      "cue": "war_slash",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 0.42,
+        "low45To180HzEnergyPercent": 1.152,
+        "high3500To10000HzEnergyPercent": 28.761,
+        "first20msEnergyPercent": 80.352,
+        "energyAfter100msPercent": 3.299,
+        "effectiveEndMinus40DbSeconds": 0.25739,
+        "periodicityPeak90To1800Hz": 0.2742,
+        "tail": {
+          "energy100To350msPercent": 3.2982,
+          "energy350To650msPercent": 0.0005,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 6,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0164,
+          "body140To700HzEnergyPercent": 26.2032,
+          "material700To2000HzEnergyPercent": 30.8936,
+          "edge2000To8000HzEnergyPercent": 38.3426,
+          "late80To300ms1200To6000HzRms": 0.008657709366912023,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "after": {
+        "durationSeconds": 0.4,
+        "low45To180HzEnergyPercent": 1.824,
+        "high3500To10000HzEnergyPercent": 0.755,
+        "first20msEnergyPercent": 70.362,
+        "energyAfter100msPercent": 2.224,
+        "effectiveEndMinus40DbSeconds": 0.23707,
+        "periodicityPeak90To1800Hz": 0.23251,
+        "tail": {
+          "energy100To350msPercent": 2.2241,
+          "energy350To650msPercent": 0.0002,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 6,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0568,
+          "body140To700HzEnergyPercent": 64.4377,
+          "material700To2000HzEnergyPercent": 30.1324,
+          "edge2000To8000HzEnergyPercent": 4.8242,
+          "late80To300ms1200To6000HzRms": 0.005550735719280244,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "first30msMaxAbsoluteDifference": 0.9094192876068501
+    },
+    {
+      "cue": "war_armor",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 0.52,
+        "low45To180HzEnergyPercent": 0.149,
+        "high3500To10000HzEnergyPercent": 20.844,
+        "first20msEnergyPercent": 68.737,
+        "energyAfter100msPercent": 6.036,
+        "effectiveEndMinus40DbSeconds": 0.37531,
+        "periodicityPeak90To1800Hz": 0.38782,
+        "tail": {
+          "energy100To350msPercent": 5.9994,
+          "energy350To650msPercent": 0.0365,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 11,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0242,
+          "body140To700HzEnergyPercent": 28.4538,
+          "material700To2000HzEnergyPercent": 31.8548,
+          "edge2000To8000HzEnergyPercent": 36.9239,
+          "late80To300ms1200To6000HzRms": 0.009293535713087702,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "after": {
+        "durationSeconds": 0.48,
+        "low45To180HzEnergyPercent": 2.051,
+        "high3500To10000HzEnergyPercent": 1.43,
+        "first20msEnergyPercent": 56.395,
+        "energyAfter100msPercent": 3.71,
+        "effectiveEndMinus40DbSeconds": 0.35501,
+        "periodicityPeak90To1800Hz": 0.3088,
+        "tail": {
+          "energy100To350msPercent": 3.6914,
+          "energy350To650msPercent": 0.0187,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 9,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.017,
+          "body140To700HzEnergyPercent": 64.4136,
+          "material700To2000HzEnergyPercent": 29.719,
+          "edge2000To8000HzEnergyPercent": 5.38,
+          "late80To300ms1200To6000HzRms": 0.005887696500067399,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "first30msMaxAbsoluteDifference": 0.6714822821776498
+    },
+    {
+      "cue": "war_finish",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 0.6,
+        "low45To180HzEnergyPercent": 1.249,
+        "high3500To10000HzEnergyPercent": 25.682,
+        "first20msEnergyPercent": 71.239,
+        "energyAfter100msPercent": 5.543,
+        "effectiveEndMinus40DbSeconds": 0.32862,
+        "periodicityPeak90To1800Hz": 0.26097,
+        "tail": {
+          "energy100To350msPercent": 5.5304,
+          "energy350To650msPercent": 0.0128,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 9,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0702,
+          "body140To700HzEnergyPercent": 19.0766,
+          "material700To2000HzEnergyPercent": 36.5622,
+          "edge2000To8000HzEnergyPercent": 40.1652,
+          "late80To300ms1200To6000HzRms": 0.012161617773539624,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "after": {
+        "durationSeconds": 0.56,
+        "low45To180HzEnergyPercent": 3.599,
+        "high3500To10000HzEnergyPercent": 0.728,
+        "first20msEnergyPercent": 70.326,
+        "energyAfter100msPercent": 2.302,
+        "effectiveEndMinus40DbSeconds": 0.28202,
+        "periodicityPeak90To1800Hz": 0.17149,
+        "tail": {
+          "energy100To350msPercent": 2.2987,
+          "energy350To650msPercent": 0.0035,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 8,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0438,
+          "body140To700HzEnergyPercent": 61.0581,
+          "material700To2000HzEnergyPercent": 33.9255,
+          "edge2000To8000HzEnergyPercent": 3.4046,
+          "late80To300ms1200To6000HzRms": 0.0054782192875875825,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "first30msMaxAbsoluteDifference": 0.8205805919433848
+    },
+    {
+      "cue": "bow_draw",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 0.7,
+        "low45To180HzEnergyPercent": 2.695,
+        "high3500To10000HzEnergyPercent": 3.543,
+        "first20msEnergyPercent": 0.048,
+        "energyAfter100msPercent": 94.854,
+        "effectiveEndMinus40DbSeconds": 0.68828,
+        "periodicityPeak90To1800Hz": 0.17578,
+        "tail": {
+          "energy100To350msPercent": 64.8644,
+          "energy350To650msPercent": 29.9607,
+          "energy650To1000msPercent": 0.029,
+          "windows100To650msAboveRmsPoint003": 26,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.1722,
+          "body140To700HzEnergyPercent": 29.3765,
+          "material700To2000HzEnergyPercent": 50.7113,
+          "edge2000To8000HzEnergyPercent": 18.8667,
+          "late80To300ms1200To6000HzRms": 0.014869056750534767,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "after": {
+        "durationSeconds": 0.62,
+        "low45To180HzEnergyPercent": 2.422,
+        "high3500To10000HzEnergyPercent": 0.499,
+        "first20msEnergyPercent": 0.038,
+        "energyAfter100msPercent": 96.695,
+        "effectiveEndMinus40DbSeconds": 0.61515,
+        "periodicityPeak90To1800Hz": 0.23,
+        "tail": {
+          "energy100To350msPercent": 55.4986,
+          "energy350To650msPercent": 41.1967,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 25,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0193,
+          "body140To700HzEnergyPercent": 55.0263,
+          "material700To2000HzEnergyPercent": 41.2107,
+          "edge2000To8000HzEnergyPercent": 3.136,
+          "late80To300ms1200To6000HzRms": 0.0082083814842423,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "first30msMaxAbsoluteDifference": 0.015306144826470709
+    },
+    {
+      "cue": "bow_release",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 0.42,
+        "low45To180HzEnergyPercent": 2.234,
+        "high3500To10000HzEnergyPercent": 16.887,
+        "first20msEnergyPercent": 71.902,
+        "energyAfter100msPercent": 2.784,
+        "effectiveEndMinus40DbSeconds": 0.25553,
+        "periodicityPeak90To1800Hz": 0.25572,
+        "tail": {
+          "energy100To350msPercent": 2.7836,
+          "energy350To650msPercent": 0.0006,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 6,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.1196,
+          "body140To700HzEnergyPercent": 35.3957,
+          "material700To2000HzEnergyPercent": 32.9346,
+          "edge2000To8000HzEnergyPercent": 29.6433,
+          "late80To300ms1200To6000HzRms": 0.004798683545393054,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "after": {
+        "durationSeconds": 0.3,
+        "low45To180HzEnergyPercent": 1.272,
+        "high3500To10000HzEnergyPercent": 0.471,
+        "first20msEnergyPercent": 73.934,
+        "energyAfter100msPercent": 0.612,
+        "effectiveEndMinus40DbSeconds": 0.18823,
+        "periodicityPeak90To1800Hz": 0.29281,
+        "tail": {
+          "energy100To350msPercent": 0.6124,
+          "energy350To650msPercent": 0.0,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 3,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0542,
+          "body140To700HzEnergyPercent": 74.6714,
+          "material700To2000HzEnergyPercent": 22.3658,
+          "edge2000To8000HzEnergyPercent": 2.6015,
+          "late80To300ms1200To6000HzRms": 0.00023950562054729025,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "first30msMaxAbsoluteDifference": 0.9172212762266903
+    },
+    {
+      "cue": "bow_pierce",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 0.35,
+        "low45To180HzEnergyPercent": 0.624,
+        "high3500To10000HzEnergyPercent": 24.683,
+        "first20msEnergyPercent": 87.307,
+        "energyAfter100msPercent": 1.438,
+        "effectiveEndMinus40DbSeconds": 0.22522,
+        "periodicityPeak90To1800Hz": 0.39333,
+        "tail": {
+          "energy100To350msPercent": 1.4377,
+          "energy350To650msPercent": 0.0,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 4,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0329,
+          "body140To700HzEnergyPercent": 20.4084,
+          "material700To2000HzEnergyPercent": 35.3981,
+          "edge2000To8000HzEnergyPercent": 39.9496,
+          "late80To300ms1200To6000HzRms": 0.0035605752673117685,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "after": {
+        "durationSeconds": 0.3,
+        "low45To180HzEnergyPercent": 1.953,
+        "high3500To10000HzEnergyPercent": 0.581,
+        "first20msEnergyPercent": 66.203,
+        "energyAfter100msPercent": 1.095,
+        "effectiveEndMinus40DbSeconds": 0.21238,
+        "periodicityPeak90To1800Hz": 0.31969,
+        "tail": {
+          "energy100To350msPercent": 1.0947,
+          "energy350To650msPercent": 0.0,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 4,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0333,
+          "body140To700HzEnergyPercent": 70.3714,
+          "material700To2000HzEnergyPercent": 25.2839,
+          "edge2000To8000HzEnergyPercent": 4.1569,
+          "late80To300ms1200To6000HzRms": 0.0020121523473175993,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "first30msMaxAbsoluteDifference": 0.5123356721644559
+    },
+    {
+      "cue": "bow_heavy",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 0.52,
+        "low45To180HzEnergyPercent": 0.942,
+        "high3500To10000HzEnergyPercent": 20.79,
+        "first20msEnergyPercent": 73.827,
+        "energyAfter100msPercent": 2.977,
+        "effectiveEndMinus40DbSeconds": 0.29993,
+        "periodicityPeak90To1800Hz": 0.36766,
+        "tail": {
+          "energy100To350msPercent": 2.9705,
+          "energy350To650msPercent": 0.0066,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 7,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0422,
+          "body140To700HzEnergyPercent": 27.1651,
+          "material700To2000HzEnergyPercent": 37.1473,
+          "edge2000To8000HzEnergyPercent": 30.9438,
+          "late80To300ms1200To6000HzRms": 0.005492114021550044,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "after": {
+        "durationSeconds": 0.42,
+        "low45To180HzEnergyPercent": 2.722,
+        "high3500To10000HzEnergyPercent": 0.581,
+        "first20msEnergyPercent": 60.612,
+        "energyAfter100msPercent": 1.589,
+        "effectiveEndMinus40DbSeconds": 0.24095,
+        "periodicityPeak90To1800Hz": 0.22542,
+        "tail": {
+          "energy100To350msPercent": 1.5891,
+          "energy350To650msPercent": 0.0003,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 5,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0082,
+          "body140To700HzEnergyPercent": 67.8363,
+          "material700To2000HzEnergyPercent": 28.1751,
+          "edge2000To8000HzEnergyPercent": 3.1095,
+          "late80To300ms1200To6000HzRms": 0.003032967738369324,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "first30msMaxAbsoluteDifference": 0.6833890621697604
+    },
+    {
+      "cue": "fir_charge",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 0.72,
+        "low45To180HzEnergyPercent": 1.151,
+        "high3500To10000HzEnergyPercent": 4.301,
+        "first20msEnergyPercent": 0.0,
+        "energyAfter100msPercent": 94.202,
+        "effectiveEndMinus40DbSeconds": 0.69834,
+        "periodicityPeak90To1800Hz": 0.09969,
+        "tail": {
+          "energy100To350msPercent": 31.8813,
+          "energy350To650msPercent": 61.9579,
+          "energy650To1000msPercent": 0.363,
+          "windows100To650msAboveRmsPoint003": 28,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0106,
+          "body140To700HzEnergyPercent": 23.0825,
+          "material700To2000HzEnergyPercent": 53.9721,
+          "edge2000To8000HzEnergyPercent": 22.3561,
+          "late80To300ms1200To6000HzRms": 0.021366181977275054,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "after": {
+        "durationSeconds": 0.72,
+        "low45To180HzEnergyPercent": 4.5,
+        "high3500To10000HzEnergyPercent": 0.15,
+        "first20msEnergyPercent": 0.0,
+        "energyAfter100msPercent": 96.105,
+        "effectiveEndMinus40DbSeconds": 0.69878,
+        "periodicityPeak90To1800Hz": 0.13328,
+        "tail": {
+          "energy100To350msPercent": 22.0942,
+          "energy350To650msPercent": 73.412,
+          "energy650To1000msPercent": 0.5985,
+          "windows100To650msAboveRmsPoint003": 28,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.149,
+          "body140To700HzEnergyPercent": 69.8223,
+          "material700To2000HzEnergyPercent": 25.4562,
+          "edge2000To8000HzEnergyPercent": 4.099,
+          "late80To300ms1200To6000HzRms": 0.005886214511079014,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "first30msMaxAbsoluteDifference": 0.045708046713612345
+    },
+    {
+      "cue": "fir_burst",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 1.05,
+        "low45To180HzEnergyPercent": 7.127,
+        "high3500To10000HzEnergyPercent": 7.231,
+        "first20msEnergyPercent": 23.556,
+        "energyAfter100msPercent": 34.114,
+        "effectiveEndMinus40DbSeconds": 0.93485,
+        "periodicityPeak90To1800Hz": 0.13889,
+        "tail": {
+          "energy100To350msPercent": 24.1636,
+          "energy350To650msPercent": 8.3046,
+          "energy650To1000msPercent": 1.6462,
+          "windows100To650msAboveRmsPoint003": 28,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.3383,
+          "body140To700HzEnergyPercent": 40.9548,
+          "material700To2000HzEnergyPercent": 34.0369,
+          "edge2000To8000HzEnergyPercent": 19.7338,
+          "late80To300ms1200To6000HzRms": 0.04521715506902218,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "after": {
+        "durationSeconds": 1.05,
+        "low45To180HzEnergyPercent": 3.086,
+        "high3500To10000HzEnergyPercent": 0.104,
+        "first20msEnergyPercent": 26.72,
+        "energyAfter100msPercent": 23.338,
+        "effectiveEndMinus40DbSeconds": 0.88683,
+        "periodicityPeak90To1800Hz": 0.37986,
+        "tail": {
+          "energy100To350msPercent": 16.3885,
+          "energy350To650msPercent": 5.9348,
+          "energy650To1000msPercent": 1.0144,
+          "windows100To650msAboveRmsPoint003": 28,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.1429,
+          "body140To700HzEnergyPercent": 83.6518,
+          "material700To2000HzEnergyPercent": 13.9505,
+          "edge2000To8000HzEnergyPercent": 1.2901,
+          "late80To300ms1200To6000HzRms": 0.016446579817713223,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "first30msMaxAbsoluteDifference": 0.7649477884736324
+    },
+    {
+      "cue": "fir_wall",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 3.0,
+        "low45To180HzEnergyPercent": 0.368,
+        "high3500To10000HzEnergyPercent": 4.273,
+        "first20msEnergyPercent": 0.0,
+        "energyAfter100msPercent": 97.687,
+        "effectiveEndMinus40DbSeconds": 2.87556,
+        "periodicityPeak90To1800Hz": 0.17001,
+        "tail": {
+          "energy100To350msPercent": 5.5687,
+          "energy350To650msPercent": 16.2944,
+          "energy650To1000msPercent": 12.0326,
+          "windows100To650msAboveRmsPoint003": 25,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0062,
+          "body140To700HzEnergyPercent": 19.6459,
+          "material700To2000HzEnergyPercent": 55.8232,
+          "edge2000To8000HzEnergyPercent": 24.183,
+          "late80To300ms1200To6000HzRms": 0.013184047057701452,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "after": {
+        "durationSeconds": 3.0,
+        "low45To180HzEnergyPercent": 2.303,
+        "high3500To10000HzEnergyPercent": 0.174,
+        "first20msEnergyPercent": 0.0,
+        "energyAfter100msPercent": 90.589,
+        "effectiveEndMinus40DbSeconds": 2.87651,
+        "periodicityPeak90To1800Hz": 0.55344,
+        "tail": {
+          "energy100To350msPercent": 3.2817,
+          "energy350To650msPercent": 12.9154,
+          "energy650To1000msPercent": 7.3002,
+          "windows100To650msAboveRmsPoint003": 24,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.005,
+          "body140To700HzEnergyPercent": 56.7694,
+          "material700To2000HzEnergyPercent": 37.8176,
+          "edge2000To8000HzEnergyPercent": 4.6734,
+          "late80To300ms1200To6000HzRms": 0.0036582832078241373,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "first30msMaxAbsoluteDifference": 0.0702348037576131
+    },
+    {
+      "cue": "thu_charge",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 0.6,
+        "low45To180HzEnergyPercent": 0.099,
+        "high3500To10000HzEnergyPercent": 33.32,
+        "first20msEnergyPercent": 0.0,
+        "energyAfter100msPercent": 94.953,
+        "effectiveEndMinus40DbSeconds": 0.54712,
+        "periodicityPeak90To1800Hz": 0.17019,
+        "tail": {
+          "energy100To350msPercent": 52.6484,
+          "energy350To650msPercent": 42.3049,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 16,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0005,
+          "body140To700HzEnergyPercent": 4.1455,
+          "material700To2000HzEnergyPercent": 27.6788,
+          "edge2000To8000HzEnergyPercent": 64.5656,
+          "late80To300ms1200To6000HzRms": 0.007444332791446168,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "after": {
+        "durationSeconds": 0.6,
+        "low45To180HzEnergyPercent": 12.576,
+        "high3500To10000HzEnergyPercent": 1.331,
+        "first20msEnergyPercent": 0.0,
+        "energyAfter100msPercent": 99.635,
+        "effectiveEndMinus40DbSeconds": 0.54565,
+        "periodicityPeak90To1800Hz": 0.38111,
+        "tail": {
+          "energy100To350msPercent": 11.167,
+          "energy350To650msPercent": 88.4677,
+          "energy650To1000msPercent": 0.0,
+          "windows100To650msAboveRmsPoint003": 11,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.7307,
+          "body140To700HzEnergyPercent": 59.3106,
+          "material700To2000HzEnergyPercent": 25.7504,
+          "edge2000To8000HzEnergyPercent": 8.3462,
+          "late80To300ms1200To6000HzRms": 0.0024395611333038127,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "first30msMaxAbsoluteDifference": 0.0
+    },
+    {
+      "cue": "thu_crack",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 0.8,
+        "low45To180HzEnergyPercent": 5.374,
+        "high3500To10000HzEnergyPercent": 11.424,
+        "first20msEnergyPercent": 53.14,
+        "energyAfter100msPercent": 15.633,
+        "effectiveEndMinus40DbSeconds": 0.69229,
+        "periodicityPeak90To1800Hz": 0.25361,
+        "tail": {
+          "energy100To350msPercent": 11.2056,
+          "energy350To650msPercent": 4.2669,
+          "energy650To1000msPercent": 0.1606,
+          "windows100To650msAboveRmsPoint003": 28,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0109,
+          "body140To700HzEnergyPercent": 40.2399,
+          "material700To2000HzEnergyPercent": 32.5799,
+          "edge2000To8000HzEnergyPercent": 25.4809,
+          "late80To300ms1200To6000HzRms": 0.024927965300465746,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "after": {
+        "durationSeconds": 0.8,
+        "low45To180HzEnergyPercent": 6.81,
+        "high3500To10000HzEnergyPercent": 0.368,
+        "first20msEnergyPercent": 54.673,
+        "energyAfter100msPercent": 8.702,
+        "effectiveEndMinus40DbSeconds": 0.68696,
+        "periodicityPeak90To1800Hz": 0.40466,
+        "tail": {
+          "energy100To350msPercent": 6.5452,
+          "energy350To650msPercent": 2.083,
+          "energy650To1000msPercent": 0.0735,
+          "windows100To650msAboveRmsPoint003": 28,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0193,
+          "body140To700HzEnergyPercent": 87.3618,
+          "material700To2000HzEnergyPercent": 9.2982,
+          "edge2000To8000HzEnergyPercent": 2.3903,
+          "late80To300ms1200To6000HzRms": 0.017589088656163526,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "first30msMaxAbsoluteDifference": 0.6720506765791895
+    },
+    {
+      "cue": "thu_network",
+      "variation": 1,
+      "before": {
+        "durationSeconds": 1.45,
+        "low45To180HzEnergyPercent": 9.036,
+        "high3500To10000HzEnergyPercent": 12.63,
+        "first20msEnergyPercent": 46.368,
+        "energyAfter100msPercent": 21.535,
+        "effectiveEndMinus40DbSeconds": 1.02741,
+        "periodicityPeak90To1800Hz": 0.1431,
+        "tail": {
+          "energy100To350msPercent": 15.1611,
+          "energy350To650msPercent": 5.9191,
+          "energy650To1000msPercent": 0.4412,
+          "windows100To650msAboveRmsPoint003": 28,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.0395,
+          "body140To700HzEnergyPercent": 42.6149,
+          "material700To2000HzEnergyPercent": 33.3575,
+          "edge2000To8000HzEnergyPercent": 22.6745,
+          "late80To300ms1200To6000HzRms": 0.027196230923507658,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "after": {
+        "durationSeconds": 1.45,
+        "low45To180HzEnergyPercent": 18.437,
+        "high3500To10000HzEnergyPercent": 0.35,
+        "first20msEnergyPercent": 25.496,
+        "energyAfter100msPercent": 24.842,
+        "effectiveEndMinus40DbSeconds": 0.92406,
+        "periodicityPeak90To1800Hz": 0.42592,
+        "tail": {
+          "energy100To350msPercent": 18.7089,
+          "energy350To650msPercent": 5.8808,
+          "energy650To1000msPercent": 0.2442,
+          "windows100To650msAboveRmsPoint003": 27,
+          "windowsChecked": 28,
+          "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+        },
+        "weight": {
+          "below80HzEnergyPercent": 0.1768,
+          "body140To700HzEnergyPercent": 86.7479,
+          "material700To2000HzEnergyPercent": 7.9939,
+          "edge2000To8000HzEnergyPercent": 2.1397,
+          "late80To300ms1200To6000HzRms": 0.0168202313430924,
+          "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+        }
+      },
+      "first30msMaxAbsoluteDifference": 0.8093081819278662
+    }
+  ],
+  "outputs": [
+    {
+      "id": "war-15s",
+      "title": "破军战技 · 低沉重量版",
+      "wav": "demos/war-15s.wav",
+      "mp3": "demos/war-15s.mp3",
+      "master": {
+        "durationSeconds": 15.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.936,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": 0.0,
+        "maxAdjacentSampleStep": 0.142791748046875,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 15.034535,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -4.23,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": 0.0,
+        "maxAdjacentSampleStep": 0.141815185546875,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -23.26,
+        "truePeakDbtp": -4.23,
+        "durationDeltaFromMasterSeconds": 0.034535
+      },
+      "wavSha256": "97c8835c550fb3177f211a4c4767a8cbfe756cd78c7a2131b8eb6a073ef7c1eb",
+      "mp3Sha256": "6a55414ab4bf219311acc210d2d0c141f6a4bea1501ed3469dfb091dd32c4a8d",
+      "mp3Bytes": 361289,
+      "encoder": "mp3_mf",
+      "profession": "WAR",
+      "cues": "demos/war-15s.cues.json",
+      "markers": [
+        {
+          "start": 0,
+          "end": 4,
+          "title": "普攻"
+        },
+        {
+          "start": 4,
+          "end": 8,
+          "title": "代表技能"
+        },
+        {
+          "start": 8,
+          "end": 11,
+          "title": "暴击"
+        },
+        {
+          "start": 11,
+          "end": 15,
+          "title": "击杀"
+        }
+      ]
+    },
+    {
+      "id": "bow-15s",
+      "title": "逐风弓术 · 低沉重量版",
+      "wav": "demos/bow-15s.wav",
+      "mp3": "demos/bow-15s.mp3",
+      "master": {
+        "durationSeconds": 15.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.7487,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0009,
+        "maxAdjacentSampleStep": 0.131591796875,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 15.034535,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.7516,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0011,
+        "maxAdjacentSampleStep": 0.126678466796875,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -25.12,
+        "truePeakDbtp": -3.75,
+        "durationDeltaFromMasterSeconds": 0.034535
+      },
+      "wavSha256": "54430266ac939f21e10ddbc61984fa67559dbddf8c38e8c5d88b97308bf2dcb0",
+      "mp3Sha256": "f7b157d7730adbf83745258b9b2a7b8037be428ccacb84128fdf0ecf73bf1103",
+      "mp3Bytes": 361289,
+      "encoder": "mp3_mf",
+      "profession": "BOW",
+      "cues": "demos/bow-15s.cues.json",
+      "markers": [
+        {
+          "start": 0,
+          "end": 4,
+          "title": "普攻"
+        },
+        {
+          "start": 4,
+          "end": 8,
+          "title": "代表技能"
+        },
+        {
+          "start": 8,
+          "end": 11,
+          "title": "暴击"
+        },
+        {
+          "start": 11,
+          "end": 15,
+          "title": "击杀"
+        }
+      ]
+    },
+    {
+      "id": "fir-15s",
+      "title": "烈焰秘术 · 低沉重量版",
+      "wav": "demos/fir-15s.wav",
+      "mp3": "demos/fir-15s.mp3",
+      "master": {
+        "durationSeconds": 15.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8057,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0006,
+        "maxAdjacentSampleStep": 0.0528564453125,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 15.034535,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8903,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0007,
+        "maxAdjacentSampleStep": 0.0523681640625,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -24.54,
+        "truePeakDbtp": -3.89,
+        "durationDeltaFromMasterSeconds": 0.034535
+      },
+      "wavSha256": "f6ac63cf90ef2e0c7cc7eadf334fdaa36bcf6c5f3ecc8519dc8b3ac97524d4d2",
+      "mp3Sha256": "ace5f1a746caaea7cfef212ecc247e53a8743b6f464fcfbe322f2ab23b6ab62b",
+      "mp3Bytes": 361289,
+      "encoder": "mp3_mf",
+      "profession": "FIR",
+      "cues": "demos/fir-15s.cues.json",
+      "markers": [
+        {
+          "start": 0,
+          "end": 4,
+          "title": "普攻"
+        },
+        {
+          "start": 4,
+          "end": 8,
+          "title": "代表技能"
+        },
+        {
+          "start": 8,
+          "end": 11,
+          "title": "暴击"
+        },
+        {
+          "start": 11,
+          "end": 15,
+          "title": "击杀"
+        }
+      ]
+    },
+    {
+      "id": "thu-15s",
+      "title": "雷霆秘术 · 低沉重量版",
+      "wav": "demos/thu-15s.wav",
+      "mp3": "demos/thu-15s.mp3",
+      "master": {
+        "durationSeconds": 15.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8361,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": 0.0,
+        "maxAdjacentSampleStep": 0.056549072265625,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 15.034535,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8994,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": 0.0,
+        "maxAdjacentSampleStep": 0.054473876953125,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -25.22,
+        "truePeakDbtp": -3.9,
+        "durationDeltaFromMasterSeconds": 0.034535
+      },
+      "wavSha256": "0240e53fe24c05042c638db5ebb729e2cda5e28b8b69756f6ff527f9c23ddc1f",
+      "mp3Sha256": "f86c9aee767a830f82f0740ac3327225cafe59130db93828bb1bcb17ccf4b5b8",
+      "mp3Bytes": 361289,
+      "encoder": "mp3_mf",
+      "profession": "THU",
+      "cues": "demos/thu-15s.cues.json",
+      "markers": [
+        {
+          "start": 0,
+          "end": 4,
+          "title": "普攻"
+        },
+        {
+          "start": 4,
+          "end": 8,
+          "title": "代表技能"
+        },
+        {
+          "start": 8,
+          "end": 11,
+          "title": "暴击"
+        },
+        {
+          "start": 11,
+          "end": 15,
+          "title": "击杀"
+        }
+      ]
+    },
+    {
+      "id": "four-classes-v6",
+      "title": "剑与火 · 四职业低沉重量与短弓风",
+      "wav": "audition/four-classes-v6.wav",
+      "mp3": "audition/four-classes-v6.mp3",
+      "master": {
+        "durationSeconds": 66.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.7487,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0004,
+        "maxAdjacentSampleStep": 0.142791748046875,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 66.051678,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.7925,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0005,
+        "maxAdjacentSampleStep": 0.141815185546875,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -24.29,
+        "truePeakDbtp": -3.79,
+        "durationDeltaFromMasterSeconds": 0.051678
+      },
+      "wavSha256": "6f6e7b85389753b0c20416ffa23a3b47a56a663bec0a09b39e26fc662c5dccb2",
+      "mp3Sha256": "9917b62529dc8ba43da4bb3dd6395ffbfde00c0a60546b5286544ea5c206030e",
+      "mp3Bytes": 1583882,
+      "encoder": "mp3_mf",
+      "markers": [
+        {
+          "id": "WAR",
+          "title": "破军战技",
+          "start": 0.0,
+          "end": 15.0,
+          "source": "demos/war-15s.wav"
+        },
+        {
+          "id": "BOW",
+          "title": "逐风弓术",
+          "start": 17.0,
+          "end": 32.0,
+          "source": "demos/bow-15s.wav"
+        },
+        {
+          "id": "FIR",
+          "title": "烈焰秘术",
+          "start": 34.0,
+          "end": 49.0,
+          "source": "demos/fir-15s.wav"
+        },
+        {
+          "id": "THU",
+          "title": "雷霆秘术",
+          "start": 51.0,
+          "end": 66.0,
+          "source": "demos/thu-15s.wav"
+        }
+      ]
+    },
+    {
+      "id": "four-classes-v5-v6",
+      "title": "剑与火 · 四职业V5与V6无损对照",
+      "wav": "audition/four-classes-v5-v6.wav",
+      "mp3": "audition/four-classes-v5-v6.mp3",
+      "master": {
+        "durationSeconds": 130.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8057,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0004,
+        "maxAdjacentSampleStep": 0.49713134765625,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 130.051678,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.7925,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0006,
+        "maxAdjacentSampleStep": 0.4932861328125,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -24.63,
+        "truePeakDbtp": -3.73,
+        "durationDeltaFromMasterSeconds": 0.051678
+      },
+      "wavSha256": "0a53ec76168521ff4ca485f0ac59425271844d386a082ea7c93bb02c9fcfca6b",
+      "mp3Sha256": "e03dbd4338c63fb2c2bbd527aef712453e328596c646c2504fd5f9989a019ab7",
+      "mp3Bytes": 3117577,
+      "encoder": "mp3_mf",
+      "markers": [
+        {
+          "profession": "WAR",
+          "version": "v5",
+          "start": 0.0,
+          "end": 15.0,
+          "targetLufs": -23.8,
+          "measuredPcmLufs": -23.8,
+          "linearGain": 1.0
+        },
+        {
+          "profession": "WAR",
+          "version": "v6",
+          "start": 16.0,
+          "end": 31.0,
+          "targetLufs": -23.8,
+          "measuredPcmLufs": -23.81,
+          "linearGain": 1.54703450394792
+        },
+        {
+          "profession": "BOW",
+          "version": "v5",
+          "start": 33.0,
+          "end": 48.0,
+          "targetLufs": -25.8,
+          "measuredPcmLufs": -25.79,
+          "linearGain": 0.9783629547845953
+        },
+        {
+          "profession": "BOW",
+          "version": "v6",
+          "start": 49.0,
+          "end": 64.0,
+          "targetLufs": -25.8,
+          "measuredPcmLufs": -25.81,
+          "linearGain": 1.5523870099580823
+        },
+        {
+          "profession": "FIR",
+          "version": "v5",
+          "start": 66.0,
+          "end": 81.0,
+          "targetLufs": -24.4,
+          "measuredPcmLufs": -24.4,
+          "linearGain": 0.9215098887349579
+        },
+        {
+          "profession": "FIR",
+          "version": "v6",
+          "start": 82.0,
+          "end": 97.0,
+          "targetLufs": -24.4,
+          "measuredPcmLufs": -24.4,
+          "linearGain": 1.6807379257087371
+        },
+        {
+          "profession": "THU",
+          "version": "v5",
+          "start": 99.0,
+          "end": 114.0,
+          "targetLufs": -25.4,
+          "measuredPcmLufs": -25.4,
+          "linearGain": 0.9549925860214361
+        },
+        {
+          "profession": "THU",
+          "version": "v6",
+          "start": 115.0,
+          "end": 130.0,
+          "targetLufs": -25.4,
+          "measuredPcmLufs": -25.4,
+          "linearGain": 1.3995873225726183
+        }
+      ]
+    },
+    {
+      "id": "isolated-impacts-v6",
+      "title": "剑与火 · 四职业低沉单发",
+      "wav": "audition/isolated-impacts-v6.wav",
+      "mp3": "audition/isolated-impacts-v6.mp3",
+      "master": {
+        "durationSeconds": 16.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -5.9053,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": 0.0,
+        "maxAdjacentSampleStep": 0.11456298828125,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 16.053311,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -6.0557,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": 0.0,
+        "maxAdjacentSampleStep": 0.105499267578125,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -25.09,
+        "truePeakDbtp": -6.05,
+        "durationDeltaFromMasterSeconds": 0.053311
+      },
+      "wavSha256": "4bbc4d7cb2b1f67d1661876a896f8915b8ce5132a256618beb881dc82222434d",
+      "mp3Sha256": "1d419c2005ac14fa80fdcab8fb58c3bad88f215d056297196912abba203ae37f",
+      "mp3Bytes": 385706,
+      "encoder": "mp3_mf",
+      "markers": [
+        {
+          "profession": "WAR",
+          "cue": "war_finish",
+          "start": 0.35,
+          "end": 0.91,
+          "variation": 1,
+          "gain": 1.357031681808066
+        },
+        {
+          "profession": "BOW",
+          "cue": "bow_heavy",
+          "start": 4.35,
+          "end": 4.77,
+          "variation": 1,
+          "gain": 1.4242623270829835
+        },
+        {
+          "profession": "FIR",
+          "cue": "fir_burst",
+          "start": 8.35,
+          "end": 9.4,
+          "variation": 1,
+          "gain": 1.34459034056699
+        },
+        {
+          "profession": "THU",
+          "cue": "thu_crack",
+          "start": 12.35,
+          "end": 13.15,
+          "variation": 1,
+          "gain": 1.1196698580580946
+        }
+      ]
+    },
+    {
+      "id": "in-music-v6",
+      "title": "剑与火 · 低沉职业打击与既有音乐",
+      "wav": "audition/in-music-v6.wav",
+      "mp3": "audition/in-music-v6.mp3",
+      "master": {
+        "durationSeconds": 45.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -6.3447,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0988,
+        "maxAdjacentSampleStep": 0.077728271484375,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 45.049229,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -6.3838,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.1009,
+        "maxAdjacentSampleStep": 0.0772705078125,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -27.63,
+        "truePeakDbtp": -6.38,
+        "durationDeltaFromMasterSeconds": 0.049229
+      },
+      "wavSha256": "9200d171e94f191666de33d51a4d275b9f3f50795162adcac7fa0c96913d5038",
+      "mp3Sha256": "52b580496fadf617d0c2b5fbaeaf437fd9bf33ebce972a2be9d78a76b8c33c06",
+      "mp3Bytes": 1080578,
+      "encoder": "mp3_mf",
+      "markers": [
+        {
+          "start": 0,
+          "end": 15,
+          "title": "探索"
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "title": "四职业交战"
+        },
+        {
+          "start": 30,
+          "end": 45,
+          "title": "战后"
+        }
+      ],
+      "offlineMix": true,
+      "musicSource": "source-art/audio/direction-studies-v2/music/a-adaptive-demo/a-adaptive-demo.wav",
+      "musicLinearGain": 0.5011872336272722,
+      "battleLinearGain": 0.75,
+      "battleEvents": [
+        {
+          "profession": "WAR",
+          "cue": "war_swing",
+          "variation": 1,
+          "phase": "windup-release",
+          "startSeconds": 0.8,
+          "startSample": 35280,
+          "gain": 0.46799999999999997,
+          "durationSeconds": 0.26,
+          "pan": 0,
+          "globalFamilyGain": 1.6962896022600824,
+          "sourceDurationSeconds": 0.26,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "WAR",
+          "cue": "war_slash",
+          "variation": 1,
+          "phase": "contact",
+          "startSeconds": 0.92,
+          "startSample": 40572,
+          "gain": 0.9585,
+          "durationSeconds": 0.4,
+          "pan": 0,
+          "globalFamilyGain": 1.6962896022600824,
+          "sourceDurationSeconds": 0.4,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "BOW",
+          "cue": "bow_draw",
+          "variation": 2,
+          "phase": "windup",
+          "startSeconds": 4.0,
+          "startSample": 176400,
+          "gain": 0.3,
+          "durationSeconds": 0.45,
+          "pan": 0,
+          "globalFamilyGain": 1.7803279088537292,
+          "sourceDurationSeconds": 0.62,
+          "releaseDeadlineSeconds": 4.45
+        },
+        {
+          "profession": "BOW",
+          "cue": "bow_release",
+          "variation": 2,
+          "phase": "release",
+          "startSeconds": 4.45,
+          "startSample": 196245,
+          "gain": 0.9,
+          "durationSeconds": 0.3,
+          "pan": 0,
+          "globalFamilyGain": 1.7803279088537292,
+          "sourceDurationSeconds": 0.3,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "BOW",
+          "cue": "bow_pierce",
+          "variation": 2,
+          "phase": "contact",
+          "startSeconds": 4.69,
+          "startSample": 206829,
+          "gain": 1.01175,
+          "durationSeconds": 0.3,
+          "pan": 0,
+          "globalFamilyGain": 1.7803279088537292,
+          "sourceDurationSeconds": 0.3,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "FIR",
+          "cue": "fir_charge",
+          "variation": 3,
+          "phase": "windup",
+          "startSeconds": 7.3,
+          "startSample": 321930,
+          "gain": 0.3,
+          "durationSeconds": 0.46,
+          "pan": 0,
+          "globalFamilyGain": 1.6807379257087371,
+          "sourceDurationSeconds": 0.72,
+          "releaseDeadlineSeconds": 7.76
+        },
+        {
+          "profession": "FIR",
+          "cue": "fir_burst",
+          "variation": 2,
+          "phase": "release",
+          "startSeconds": 7.76,
+          "startSample": 342216,
+          "gain": 0.09200000000000001,
+          "durationSeconds": 1.05,
+          "pan": 0,
+          "globalFamilyGain": 1.6807379257087371,
+          "sourceDurationSeconds": 1.05,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "FIR",
+          "cue": "fir_burst",
+          "variation": 3,
+          "phase": "contact",
+          "startSeconds": 8.02,
+          "startSample": 353682,
+          "gain": 0.9,
+          "durationSeconds": 1.05,
+          "pan": 0,
+          "globalFamilyGain": 1.6807379257087371,
+          "sourceDurationSeconds": 1.05,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "THU",
+          "cue": "thu_charge",
+          "variation": 1,
+          "phase": "windup",
+          "startSeconds": 10.6,
+          "startSample": 467460,
+          "gain": 0.33,
+          "durationSeconds": 0.38,
+          "pan": 0,
+          "globalFamilyGain": 1.3995873225726183,
+          "sourceDurationSeconds": 0.6,
+          "releaseDeadlineSeconds": 10.98
+        },
+        {
+          "profession": "THU",
+          "cue": "thu_crack",
+          "variation": 2,
+          "phase": "release",
+          "startSeconds": 10.98,
+          "startSample": 484218,
+          "gain": 0.12,
+          "durationSeconds": 0.8,
+          "pan": 0,
+          "globalFamilyGain": 1.3995873225726183,
+          "sourceDurationSeconds": 0.8,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "THU",
+          "cue": "thu_network",
+          "variation": 1,
+          "phase": "contact",
+          "startSeconds": 11.08,
+          "startSample": 488628,
+          "gain": 0.95,
+          "durationSeconds": 1.45,
+          "pan": 0,
+          "globalFamilyGain": 1.3995873225726183,
+          "sourceDurationSeconds": 1.45,
+          "releaseDeadlineSeconds": null
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "uniqueSourceClips": 42,
+    "all42SourceHashesUnique": true,
+    "noDecodedPreviewClipping": true,
+    "pcmComparisonPairsWithinPoint2Lufs": true
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "scope": "Actual BackgroundMusic.ts transpiled with a deterministic Cocos AudioSource contract double; not Web/TapTap playback validation",
+  "syntax": "passed",
+  "cases": [
+    "lazy two-asset load; stable exploration and repeated gestures never restart or seek",
+    "sustained combat aligns incoming position once before play, then crossfades and pauses the outgoing source",
+    "four-second peaceful buffer and returning track realignment to outgoing progress",
+    "same-track toggle pauses decoding and resumes its position without transition seek",
+    "background and existing Cocos auto-resume preserve same-track phase without seek or repeated play",
+    "quiet menu/dialogue volume and boss combat-score reuse",
+    "idempotent disposal releases both clip references",
+    "failed assets do not poll; explicit retry recovers",
+    "load completion after disposal never acquires a leaked reference",
+    "duration-normalized phase mapping is one assignment; stable playback never seeks per frame",
+    "unknown incoming duration defers transition without zero-time seek, then aligns once when duration is known",
+    "not-yet-loaded player caches a single SEEK before PLAY, matching verified Cocos queue semantics"
+  ],
+  "caseCount": 12,
+  "result": "passed",
+  "phasePositioning": "One-time approximate currentTime request on effective mode transitions only; not sample-accurate transport",
+  "evidence": [
+    {
+      "case": "explore-to-combat",
+      "transition": {
+        "sequence": 2,
+        "from": "explore",
+        "to": "combat",
+        "phaseSeek": true,
+        "outgoingTime": 18.32500000000001,
+        "outgoingDuration": 96.04,
+        "incomingDuration": 96.04,
+        "targetTime": 18.32500000000001,
+        "reason": "phase-seek-requested"
+      }
+    },
+    {
+      "case": "combat-to-previously-paused-explore",
+      "transition": {
+        "sequence": 3,
+        "from": "combat",
+        "to": "explore",
+        "phaseSeek": true,
+        "outgoingTime": 24.125000000000092,
+        "outgoingDuration": 96.04,
+        "incomingDuration": 96.04,
+        "targetTime": 24.125000000000092,
+        "reason": "phase-seek-requested"
+      },
+      "previousPausedPosition": 19.82500000000003
+    },
+    {
+      "case": "different-decoded-duration-normalized-once",
+      "transition": {
+        "sequence": 2,
+        "from": "explore",
+        "to": "combat",
+        "phaseSeek": true,
+        "outgoingTime": 94.375,
+        "outgoingDuration": 96.04,
+        "incomingDuration": 96.05,
+        "targetTime": 94.38482663473552,
+        "reason": "phase-seek-requested"
+      }
+    },
+    {
+      "case": "player-not-yet-loaded",
+      "transition": {
+        "sequence": 2,
+        "from": "explore",
+        "to": "combat",
+        "phaseSeek": true,
+        "outgoingTime": 28.375,
+        "outgoingDuration": 96.04,
+        "incomingDuration": 96.04,
+        "targetTime": 28.375,
+        "reason": "phase-seek-requested"
+      },
+      "events": [
+        {
+          "op": "seek-request",
+          "value": 28.375
+        },
+        {
+          "op": "play-request"
+        },
+        {
+          "op": "seek-applied",
+          "value": 28.375
+        },
+        {
+          "op": "play-applied",
+          "value": 28.375
+        }
+      ]
+    }
+  ],
+  "deviceAcceptance": "Pending target-device seek latency, phase during crossfade, interruptions and real MP3 loop boundary"
+}

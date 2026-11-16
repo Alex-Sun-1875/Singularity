@@ -1,6 +1,6 @@
 import type {Point} from '../../../core/Contracts';
 import type {GameState,EnemyState} from '../../../core/GameSession';
-import {GROWING_EQUIPMENT,GROWING_BOSS_DROPS,GROWING_SCENES,GROWING_QUESTS} from '../data/GrowingEquipment';
+import {GROWING_EQUIPMENT,GROWING_SCENES,GROWING_QUESTS} from '../data/GrowingEquipment';
 import {validBossEquipmentSource} from './BossLoot';
 import {FIELD_DISCOVERIES} from '../../campaign/data/FieldQuests';
 import {fieldQuestText as text} from '../../campaign/locales/FieldQuestText';
@@ -50,15 +50,11 @@ export function validGrowingDropSource(s:GameState,id:string,source:string):bool
  if(!GROWING_EQUIPMENT[id])return false;
  if(source.startsWith('boss:v3:'))return validBossEquipmentSource(s,id,source);
  if(source.startsWith('campaign:')){
-  // Previously earned unique items retain their issued proof; new rewards use the authored tables.
-  const legacy:Record<string,string>={'campaign:dg-lamp-return':'DG_L03','campaign:dg-letter-return':'DG_L05','campaign:dg-dawn-return':'DG_A02'};
-  if(legacy[source]===id&&s.receipts[source]===true)return true;
   const q=GROWING_QUESTS.find(q=>`campaign:${q.id}`===source);return !!q&&[...q.items??[],...q.choiceItems??[]].includes(id)&&s.receipts[source]===true&&(q.requires??[]).every(f=>s.flags[f])&&(q.sets??[]).every(f=>s.flags[f]);
  }
  const result=s.dropRolls[source];if(!result||result.result!==id||s.receipts[`roll:${source}`]!==id)return false;
  const scene=GROWING_SCENES.find(d=>`growing:scene:${d.id}`===source&&d.item===id);
  if(scene)return result.roll===growingRandom(s.seed,source)&&result.roll/2147483647<scene.chance;
- for(const [boss,pool]of Object.entries(GROWING_BOSS_DROPS))for(const def of pool)if(`growing:boss:${boss}:${id}`===source&&def.item===id){const cycle=s.receipts[`growing-cycle:${source}`];return typeof cycle==='number'&&Number.isInteger(cycle)&&cycle>=0&&cycle<=1e7&&result.roll===growingRandom(s.seed,`${source}:${cycle}`)&&result.roll/2147483647<def.chance;}
  return false;
 }
 export function validateGrowingProgress(s:GameState){

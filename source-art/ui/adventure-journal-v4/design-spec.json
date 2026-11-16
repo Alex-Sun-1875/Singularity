@@ -1,0 +1,142 @@
+{
+  "date": "2026-11-16",
+  "status": "superseded_by_waypoint_spacing_feedback",
+  "runtimeImplementationChangedByThisTask": false,
+  "supersedes": "../adventure-journal-v3/",
+  "userDirection": "右侧传送点与整体更紧凑，返回固定左侧；仅更新设计稿，不改游戏运行实现。",
+  "styleAuthority": ".agents/skills/singularity-ui-design/references/visual-style.md",
+  "sharedSourceFiles": [
+    "src/cocos/assets/scripts/shared/ui/RpgPanel.ts",
+    "src/cocos/assets/scripts/shared/ui/PreparationTheme.ts",
+    "src/cocos/assets/scripts/shared/ui/GoldPanelHeader.ts",
+    "src/cocos/assets/scripts/shared/ui/UiChrome.ts",
+    "src/cocos/assets/scripts/shared/ui/FeedbackPalette.ts"
+  ],
+  "visualAlignment": {
+    "shell": "Original rounded double-gold frame and preparation surface/header textures; no new BG3 plaque/chrome.",
+    "navigation": "Pure text, 17px, 72x48 targets, 8px gap, state.selected text with original prep-active-v5 underline.",
+    "header": {
+      "height": 64,
+      "glyphBox": 20,
+      "touch": 48,
+      "previewMode": "Explicit left return on both pages, per current user instruction; same public back.svg / 20 glyph / 48 touch. No right close target."
+    },
+    "font": "Shared rpg-serif-v2.ttf",
+    "bodyFont": 14,
+    "minimumFont": 11,
+    "textRoles": {
+      "managementInk": "text.preparation",
+      "accent": "text.preparationAccent",
+      "selection": "state.selected",
+      "secondary": "text.secondary"
+    },
+    "buttons": "Existing prep-button-dark-v2 and prep-skill-selected-v5 original art; visible skin inside independent 48px targets."
+  },
+  "layout": {
+    "baselineLogical": [
+      844,
+      390
+    ],
+    "baselinePhysical": [
+      2532,
+      1170
+    ],
+    "supplementLogical": [
+      932,
+      430
+    ],
+    "shellLogical": {
+      "x": 39,
+      "y": 18,
+      "width": 766,
+      "height": 354
+    },
+    "taskColumns": [
+      228,
+      494
+    ],
+    "taskColumnGap": 16,
+    "mapColumns": [
+      96,
+      526,
+      100
+    ],
+    "mapColumnGap": 8,
+    "bodyPadding": {
+      "top": 8,
+      "bottom": 8,
+      "left": 14,
+      "right": 14
+    }
+  },
+  "taskPage": {
+    "layout": "Left hierarchical quest journal / right dark narrative text, independent scrolling. No parchment reading card.",
+    "selectedChapter": 2,
+    "selectedQuestId": "highland-hunt",
+    "selectedQuestTitle": "采坑中的两份证据",
+    "displayState": "Illustrative post-survey state with both rescue options still open. Not the user save.",
+    "sidebarWidth": 228,
+    "readingWidth": 494,
+    "columnGap": 16,
+    "filters": [
+      "隐藏已完成"
+    ],
+    "footerAction": "在地图查看",
+    "listRowPitch": 48,
+    "continuousGroup": true
+  },
+  "mapPage": {
+    "layout": "Legend on the left, large regional map in the center, separate waypoint list on the right. The task tree does not stay on this page.",
+    "legendWidth": 96,
+    "mapWidth": 526,
+    "waypointWidth": 100,
+    "columnGap": 8,
+    "region": "断岳高地",
+    "waypoints": [
+      "断岳山驿",
+      "岩炉镇",
+      "伤工棚街",
+      "破阵军械岸"
+    ],
+    "selectedWaypoint": "岩炉镇",
+    "markerPositions": "Schematic mockup positions for visual hierarchy, not runtime coordinates or fog-discovery evidence.",
+    "travelState": "Illustrative unlocked and safe travel state; real release must retain existing unlock, combat and landing checks.",
+    "listRowPitch": 48,
+    "visibleDestinations": 4,
+    "rowVisualSelectionHeight": 26,
+    "listFooterGap": 8,
+    "continuousGroup": true,
+    "removedRepetition": [
+      "Repeated per-row rune icons",
+      "Duplicate unlocked-status footer text"
+    ]
+  },
+  "futureContent": {
+    "chapter3": "敬请期待",
+    "newChapter3StoryOrMap": false,
+    "petReleaseChanged": false
+  },
+  "stateScope": "Quest, markers, map discovery and teleport availability are illustrative existing-content design states, not the player save or runtime acceptance.",
+  "deliverables": [
+    "tasks-2532x1170.png",
+    "map-2532x1170.png",
+    "tasks-2796x1290.png",
+    "map-2796x1290.png",
+    "overview-review.jpg"
+  ],
+  "source": [
+    "index.html",
+    "theme.css"
+  ],
+  "renderer": "render.cjs",
+  "renderReview": "design-review.json",
+  "userAcceptance": "pending",
+  "runtimeAcceptance": "not performed; design-only task",
+  "compactness": {
+    "touchTargets": "At least 48px; one list uses contiguous non-overlapping 48px partitions, not smaller independent buttons.",
+    "separateControls": "8px spacing retained between list and travel action, header control and first task row.",
+    "font": "Existing sizes retained, minimum 11px.",
+    "changes": "Narrower sidebars, less content padding, smaller visible selection/action skins and fewer repeated decorations."
+  },
+  "supersededBy": "../adventure-journal-v5/"
+}

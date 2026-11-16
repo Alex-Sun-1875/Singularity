@@ -1,0 +1,82 @@
+{
+  "date": "2026-11-16",
+  "task": "Integrate the accepted profession SFX and the Embers and Oaths theme into the Cocos game",
+  "implementation": "complete",
+  "selectedSources": {
+    "sfx": "impact-metal-v7; its fire/thunder sources are unchanged from impact-weight-v6",
+    "music": "Direction A, Embers and Oaths; authored into two 96-second loops"
+  },
+  "checks": [
+    {
+      "command": "npm --prefix src/cocos run check",
+      "result": "passed after the final source changes"
+    },
+    {
+      "command": "npm --prefix src/cocos run check:core",
+      "result": "passed"
+    },
+    {
+      "command": "npm --prefix src/cocos test",
+      "result": "155 passed; 0 failed; existing rules tests, no new test dependencies"
+    },
+    {
+      "command": "Build-Local.ps1 -Platform web-mobile -OutputName concept-2d-audio -Profile test -ResourceBundles",
+      "result": "passed; completed Cocos 3.8.8 export, rendering policy, gameplay profile and navigation WASM checks"
+    },
+    {
+      "command": "Independent final source review",
+      "result": "no blocking issue found in audio lifecycle, event identity, material selection, music transition or resource routing"
+    }
+  ],
+  "web": {
+    "url": "http://127.0.0.1:7476/",
+    "platform": "HTML resource-bundle preview, not TapTap platform identity",
+    "profile": "test, normal gameplay rules",
+    "assetReport": "web-asset-check.json",
+    "runtimeReport": "web-runtime-check.json",
+    "coreStatus": "passed",
+    "requiredChecksPassed": 12,
+    "requiredChecksTotal": 12,
+    "actualContactCues": [
+      "war_armor",
+      "bow_armor",
+      "fir_burst",
+      "thu_crack"
+    ],
+    "loadedCombatClips": 45,
+    "maximumObservedCombatVoices": 2,
+    "combatVoiceLimit": 6,
+    "legacyCombatOverlapCount": 0,
+    "finalConsoleAndNetworkErrors": 0,
+    "assetMappingChecksPassed": 47,
+    "optionalUnverified": [
+      "Web thunder-network ultimate scenario"
+    ],
+    "diagnosticBoundary": "Keyboard contacts use isolated controlled level/loadout/target fixtures; music context and lifecycle hooks are diagnostic overrides. AudioSource playback/time is observed; human listening and real OS events are not measured.",
+    "controllerProbeReports": [
+      "sfx-runtime-probe.json",
+      "music-controller-check.json"
+    ],
+    "controllerProbeBoundary": "Temporary semantics probes use engine mocks; actual Web playback is recorded separately."
+  },
+  "sourceAudioBytes": {
+    "sfx": 2981376,
+    "music": 3067614,
+    "combined": 6048990
+  },
+  "delivery": {
+    "version": "0.3.50",
+    "versionBumped": false,
+    "tapTapZipCreated": false,
+    "uploaded": false,
+    "published": false
+  },
+  "pending": [
+    "Final artistic audition of the actual game mix",
+    "TapTap AppID and target Android device playback",
+    "Real OS audio interruptions and foreground recovery",
+    "Target-device decode memory and loop gap; MP3 contains approximately 40ms extra encoded samples"
+  ],
+  "packageSizeBoundary": "The source audio byte total is not an uploaded package size, first-package size or playable-before-load size. No TapTap package or device acceptance is claimed.",
+  "revisionNote": "This file records the initial 45 SFX + two-loop integration. The subsequent three-stage revision is documented in README.md, music-aftermath-technical.json, aftermath-controller-check.json and aftermath-web-check.json."
+}

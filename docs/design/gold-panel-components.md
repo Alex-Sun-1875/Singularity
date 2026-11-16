@@ -8,7 +8,8 @@
 
 | 组件／配置 | 管理内容 | 页面管理内容 |
 | --- | --- | --- |
-| `GoldPanelShell` | 外框组合、标题、左上返回、页签、选中标记、淡出分割线、简短底部动作 | 安全区与面板位置、正文和列表、滚动区、业务动作、返回目标 |
+| `GoldPanelShell` | 外框组合、标题、公共Header入口、页签、选中标记、淡出分割线、简短底部动作 | 安全区与面板位置、正文和列表、滚动区、业务动作、返回目标 |
+| `GoldPanelHeader` | 20像素几何图标、48像素完整触区、胶囊避让、左返回／右关闭切换及交互状态 | Header的宽度与中线、视口、原有关闭／返回动作及禁用状态 |
 | `GoldPanelToggle` | 开关轨道、金属旋钮、开／关文字、状态更新 | 整行触控区、点击回调、设置持久化 |
 | `DoubleGoldFrame` | 双层暗金边、内衬、阴影、可选对称鹿首与贴形暗衬 | 内容节点 |
 | `GoldMenuButton` / `GoldMenuActions` | 切角按钮、主次状态、纵向操作组 | 确认／取消、交易、登录等业务规则 |
@@ -33,11 +34,15 @@
 | 自动操作控件 | 继续使用紧凑胶囊与状态布局；不加入标题栏或大型面板 |
 | 剧情字幕、掷骰舞台、加载主画面 | 保留各自已确认的专用呈现；普通错误或确认提示可走 `Hud.show` |
 
-2026-11-15起，二级页面和大弹窗的返回统一位于左上角，详见[布局规范](ui-layout-guidelines.md#二级页面与大弹窗的返回入口)。`GoldPanelShell.dismissAction`保持原动作，在左上绘制公共返回箭头；`MenuChoice.back: true`指定详情页的上一级，`MenuPanel`优先采用它并移除底部重复返回，未指定时沿用`close`。返回目标使用动作元数据，不通过中英文按钮文案猜测。确认流程可用`dismissOnBackdrop: false`保留“必须明确操作”的要求。
+2026-11-16按用户确认的[组件稿](../../source-art/ui/header-navigation-v1/00-navigation-proposal.png)，所有窗口使用同一个`GoldPanelHeader`。右上关闭的完整触区在安全区内且距TapTap原生胶囊至少8逻辑像素时显示右上叉号，否则显示Header左侧直向左箭头。平台几何来自`ViewportMetrics`，不按页面名字或全屏标记写死；HTML没有原生胶囊时显示右上关闭。窗口、Canvas、横屏方向、胶囊与前后台变化后重新判定，旧宿主缺胶囊接口时保守预留右上区域。详见[布局规范](ui-layout-guidelines.md#二级页面与大弹窗的返回入口)。
+
+`GoldPanelShell.dismissAction`和`RpgPanel.footer`保留既有动作；`MenuChoice.back: true`仍明确详情页的上一级，`MenuPanel`优先采用它并移除底部重复导航。`GoldPanelHeader.setAction`同步动作及禁用状态；禁用时背景点击也不能绕过。确认流程继续通过`dismissOnBackdrop: false`要求明确操作，退出靶场等业务动作保留。图标用Cocos原生`CompactGraphics`绘制，不再加载弯曲回转箭头，不增加依赖。
+
+专用窗口直接调用`GoldPanelHeader.attach(panel, {width, unit, hit, centerY, viewport: hud, action}, run)`。`centerY`使用当前父节点坐标中的Header中线，普通居中面板可取`height / 2 - 32 * unit`；FairyGUI页面同时传入其原点下的`centerX`／`centerY`。组件统一负责完整触区的屏幕坐标转换、两侧选择和图标反馈，页面不得自行强制某种模式。仅调整原有返回目标或可用状态时调用`setAction(action, run, enabled)`。
 
 ## 接入已有菜单
 
-常规列表继续调用 `hud.showList(...)`，正文加操作组继续调用 `hud.show(...)`。默认使用 `standard` 外壳，高度由实际内容与安全区约束决定。标题居中，左上返回独立内缩；普通列表自动使用同一组柔和行分隔线。
+常规列表继续调用 `hud.showList(...)`，正文加操作组继续调用 `hud.show(...)`。默认使用 `standard` 外壳，高度由实际内容与安全区约束决定。标题居中，两侧对称预留公共入口空间；普通列表自动使用同一组柔和行分隔线。
 
 普通说明文字在面板12逻辑像素基础内距上再内缩8像素，形成20像素左右留白；说明顶部增加8像素，避免贴着标题分割线。正文采用同一文字内缩。普通纵向操作组的可见间距为16像素；实际触控区仍至少48像素高、间隔8像素，通过在各自点击范围内微调按钮皮肤和文字位置收紧视觉节奏。主菜单保持自己的既有节奏，设置页继续使用已确认坐标。
 
@@ -60,7 +65,7 @@ const bodyTop = height / 2 - shell.metrics.bodyTop;
 shell.divider(panelNode, 'row', footerTop, width * 0.82);
 shell.footer([
   { label: '操作帮助', action: 'help' },
-  // 返回由上方 dismissAction 在左上角提供，底部只保留业务动作。
+  // dismissAction 交给公共 Header 自适应入口，底部只保留业务动作。
 ]);
 ```
 

@@ -14,8 +14,9 @@ type Cue={at:Point;until:number;duration:number;kind:'contact'|'support';targetI
 type Anchor={kind:string;node:Node;key?:string;touched:boolean};
 
 /** Native presentation adapter for resolved enemy moves. No target selection,
- * hit submission, geometry expansion, or independent movement simulation. */
+ * hit submission, range overlays, or independent movement simulation. */
 export class NativeEnemyVfx {
+ reducedMotion=false;
  private cues:Cue[]=[];private anchors:Anchor[]=[];private seen=new Set<string>();
  private paths=new Map<string,{points:Point[];time:number}>();
  private now=0;
@@ -94,10 +95,8 @@ export class NativeEnemyVfx {
  }
  update(game:GameSession){
   const s=game.state;this.now=s.time;
-  // Enemy aim rays and attack/charge/area outlines are intentionally hidden.
-  // Keep real projectiles, contact particles, fire and counterable objects.
   for(const e of s.enemies){
-   if(e.hp<=0||enemyProfile(e)?.id!=='ELITE_06')continue;
+   if(e.hp<=0||e.templateId!=='ELITE_06'&&enemyProfile(e)?.id!=='ELITE_06')continue;
    const c=e.combat;if(!c)continue;
    // This sheet has no separate raised-blade windup. A small blade glint
    // supplies anticipation; the released ground cut is the attack itself.
@@ -111,7 +110,7 @@ export class NativeEnemyVfx {
   }
   for(const anchor of this.anchors)anchor.touched=false;
   const hazards=(s.enemyHazards??[]).filter(h=>h.remaining>0&&!(h.maxHp>0&&h.hp<=0));
-  // Real fire remains visible, without schematic danger boundaries.
+  // Keep the real field material effects; never draw enemy hitbox boundaries.
   const fields=hazards.filter(h=>h.maxTicks>0).sort((a,b)=>Number(b.geometry.some(g=>enemyContains(g,s.player)))-Number(a.geometry.some(g=>enemyContains(g,s.player)))||dist(a,s.player)-dist(b,s.player));
   fields.forEach((h,i)=>this.hazard(h,i<3));for(const h of hazards)if(h.maxHp>0&&!fields.includes(h))this.anchor(h);
   for(const a of this.anchors)if(!a.touched){a.key=undefined;a.node.active=false;}
@@ -125,6 +124,7 @@ export class NativeEnemyVfx {
   if((s.combat.buffs.enemySlowUntil??0)>this.now)for(const side of [-1,1])this.stroke([local(s.player,s.player.angle,side*.16,-.1),local(s.player,s.player.angle,side*.16,.1)],LOCK,.018,120,.08);
   for(const [id,path]of this.paths)if(this.now-path.time>.3)this.paths.delete(id);
  }
+ inspect(){return{attackerLimit:0,geometryLimit:0,attackers:[],geometryCount:0,reducedMotion:this.reducedMotion};}
  clear(){this.cues=[];this.paths.clear();for(const a of this.anchors){a.node.active=false;a.key=undefined;}this.seen.clear();}
  destroy(){this.clear();for(const a of this.anchors)a.node.destroy();this.anchors=[];}
 }

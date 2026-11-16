@@ -1,0 +1,86 @@
+{
+  "status": "checked-dormant",
+  "verifiedOn": "2026-11-15",
+  "version": "0.3.50",
+  "profile": "test",
+  "designRevision": 2,
+  "petStateVersion": 1,
+  "productionEnabled": false,
+  "availability": "All chapters closed; a save, owner level, rank or build profile cannot enable pets.",
+  "entityName": "宠物／伙伴",
+  "cultivationMaterial": "灵蕴",
+  "terminology": ["天性", "特性", "共鸣", "蜕变"],
+  "ranks": ["普通", "珍兽", "神兽"],
+  "gameplayLevelCap": null,
+  "ownerLevelCap": false,
+  "rankLevelCaps": false,
+  "characterBonusFields": ["damagePercent", "maxHpPercent", "damageReductionPercent", "healingReceivedPercent", "resourceRegenPercent"],
+  "presentation": "Following native companion models only; the former fixed-amount automatic assist and assist bursts have been removed.",
+  "historicalValidation": "src/cocos/release/pets-validation.json",
+  "checks": {
+    "typescript": {"command": "npm run check", "status": "passed"},
+    "strictCoreTypescript": {"command": "npm --prefix src/cocos run check:core", "status": "passed"},
+    "existingTests": {"command": "npm test", "passed": 150, "failed": 0, "evidence": "test-results/pets-v2-existing-tests.log"},
+    "taptapConfiguration": {"command": "npm run check:tap", "status": "passed", "scope": "Configuration validation only; not platform or device acceptance."},
+    "enabledRules": {
+      "status": "passed",
+      "scenarios": 19,
+      "settledHuntCycles": 1015236,
+      "ownerLevel": 1,
+      "finalPetLevel": 374,
+      "ordinaryPetExceededLevel": 120,
+      "trainingOperations": 5001,
+      "trainingAuditRecords": 1,
+      "freeDeploymentOperations": 21005,
+      "deploymentProofRecords": 1,
+      "paidTransactionRecords": 16,
+      "corruptionRejections": 14,
+      "fullMaterialStorageBlocksExperience": false,
+      "scope": "Isolated Node in-memory enabled module, synthetic verified kill receipts and replenished gold fixtures; production source remained disabled. This does not establish natural economic balance.",
+      "evidence": "test-results/pets-v2/rules-enabled.json"
+    },
+    "enabledGameSessionIntegration": {
+      "status": "passed",
+      "passed": 14,
+      "failed": 0,
+      "scope": "Actual GameSession in an isolated enabled process with controlled fixtures; not a platform or enabled UI acceptance run.",
+      "coverage": ["low and high character-level relative damage and maximum health", "fractional small damage gains", "environment damage excluded", "independent mitigation after armor reduction", "health potion, COM02 and equipment healing", "natural class resource regeneration", "overheal and resurrection rejection", "real adoption and deployment receipts", "alive and dead maximum-health snapshot validation", "owner level 1 with pet level 120"],
+      "evidence": "src/cocos/test-results/pets-v2/integration-enabled.json"
+    },
+    "webBuild": {
+      "status": "passed",
+      "command": "npm start test",
+      "target": "concept-2d web-mobile test",
+      "version": "0.3.50",
+      "renderPolicyVerification": "passed",
+      "buildProfileVerification": "passed",
+      "compiledMarkersVerified": ["latest natural-resource-recovery copy", "petOutgoingDamage", "pet-deployment", "Math.log2"],
+      "productionEnabled": false,
+      "versionIncremented": false,
+      "evidence": "test-results/pets-v2-web-build.log"
+    },
+    "browserClosed": {
+      "status": "passed",
+      "scope": "Actual final v2 concept-2d test export with the production pet release switch false; no v1 screenshot reused.",
+      "closedRoutesBlocked": 4,
+      "petStateUnchanged": true,
+      "petCompanionNodes": 0,
+      "pauseMenuPetEntryVisible": false,
+      "legacyFlatAssistFieldsPresent": false,
+      "pageErrors": 0,
+      "consoleErrors": 0,
+      "viewports": [
+        {"width": 844, "height": 390, "density": 3, "status": "passed", "screenshot": "src/cocos/test-results/pets-v2/phone-closed-pause.png"},
+        {"width": 932, "height": 430, "density": 3, "status": "passed", "screenshot": "src/cocos/test-results/pets-v2/large-phone-closed-pause.png"}
+      ],
+      "evidence": "src/cocos/test-results/pets-v2/browser-closed.json"
+    }
+  },
+  "limitations": [
+    "Controlled rule and GameSession fixtures do not prove natural acquisition or cultivation pacing.",
+    "Enabled management pages require actual Cocos phone-layout, safe-area, long-text and touch acceptance before release.",
+    "Native procedural companion forms are preliminary representations; final art and animation remain unaccepted.",
+    "TapTap real-AppID, target-device, lifecycle, persistence, memory and performance acceptance remain pending."
+  ],
+  "delivery": {"newTestsAdded": false, "newDependenciesAdded": false, "taptapZipCreated": false, "versionIncremented": false, "uploaded": false, "submittedForReview": false, "published": false}
+}

@@ -1,15 +1,16 @@
 import {HeroBodyBatches} from './HeroBodyBatches';
 import {fieldNpcVisible} from '../../campaign/data/FieldQuests';
 import {gameResources as resources} from '../../../shared/assets/GameResources';
-import {Node,Prefab,JsonAsset,assetManager,instantiate,SkeletalAnimation,Animation,AnimationClip,SkinnedMeshRenderer,MeshRenderer,Vec3,Material,Color,Quat,Mat4,Mesh,primitives,utils} from 'cc';
+import {Node,Prefab,JsonAsset,assetManager,instantiate,SkeletalAnimation,Animation,AnimationClip,SkinnedMeshRenderer,MeshRenderer,Vec3,Vec4,Material,Color,Quat,Mat4,Mesh,primitives,utils} from 'cc';
 import type {GameSession,EnemyState,ActionState} from '../../../core/GameSession';
 import {meleeCombo} from '../../combat/common/MeleeCombo';
 import {combatSegmentInterval} from '../../combat/common/CombatActionTiming';
 import {EQUIPMENT} from '../../equipment/data/Equipment';
 import type {GameEvent} from '../../../core/Contracts';
-import {impactStyle,impactKey} from '../../combat/data/CombatImpact';
+import {impactStyle,impactKey,type ImpactStyle} from '../../combat/data/CombatImpact';
+import {enemyProfile} from '../../combat/common/EnemyCombat';
+import {FeedbackView as F} from '../../../shared/ui/FeedbackView';
 import {COMBAT_SKILLS} from '../../combat/data/PureSkills';
-import {ENEMY_COMBAT_PROFILES} from '../../combat/data/EnemyCombat';
 import {SceneBuilder} from '../../world/runtime/SceneBuilder';
 import {loadBundleWithDependencies} from '../../../shared/assets/AssetBundles';
 import {SurfaceMaterials} from '../../world/runtime/SurfaceMaterials';
@@ -21,6 +22,9 @@ import {HairstyleGeometry} from './HairstyleGeometry';
 import {actionReleaseAt,samplePlayerAction,playerHurtProgress,updateWeaponReadiness,type PlayerActionSample,type PlayerPresentation,type WeaponReadiness} from './PlayerActionPresentation';
 import {PlayerCombatLocomotion} from './PlayerCombatLocomotion';
 import {useBakedAnimation} from '../common/AnimationMode';
+import {chapterTwoEnemyRetired} from '../../campaign/common/ChapterTwoEncounters';
+import {peacefulBossRetired} from '../../campaign/common/PeacefulBosses';
+import {chapterTwoSideQuestNpcVisible} from '../../campaign/data/ChapterTwoSideQuests';
 type Motion={nominalSpeedMetresPerSecond?:number;holdFraction?:number;relaxFraction?:number;drawWeights?:number[];phaseSampling?:{gameplayFractions:number[];sourceFractions:number[]}};
 type SwordBackPlacement={position:number[];blade:number[];normal:number[];sheathLength?:number};
 type SwordBackTransform={position:Vec3;rotation:Quat;length:number};
@@ -28,6 +32,8 @@ type SwordCarryGrip={node:Node;handParent:Node;handPosition:Vec3;handRotation:Qu
 type ActorMetadata=NativeActorMaterialManifest&{appearanceRevision?:string;hairstyles?:HairstyleDefinition[];cocosBinding?:{bowEuler:number[];arrowEuler:number[];arrowPosition:number[];bowAimYawCorrectionDegrees?:number;bowDrawWeightByItem?:Record<string,{scale:number;offset:number}>;swordBackCarry?:{bone:string;bowBone?:string;placements:Record<string,SwordBackPlacement>;items?:Record<string,SwordBackPlacement>;hiltScale?:number;embeddedCases?:boolean;quiver?:{resource:string;placements:Record<string,SwordBackPlacement>}}};skinJointCount?:number;skeletonJointCount?:number;modelYaw?:number;libraryMotion?:{clips?:Record<string,Motion>};parts?:Record<string,{nodes:string[];defaultVisible:boolean}>;profile?:{weapon?:string}};
 const MELEE_TRANSITION_SECONDS=.06;
 type Actor={meleeBeat?:number;paused?:boolean;weaponStowed?:boolean;bowPose?:string;bowRenderers?:MeshRenderer[];root:Node;model:Node;animation:SkeletalAnimation|null;clips:Record<string,AnimationClip>;state:string;clock:number;id:string;actionId?:string;renderedWeaponId?:string;phase?:string;phaseDuration?:number;enemyPose?:string;weapons:Record<string,Node>;metadata:ActorMetadata;yaw?:number;speed?:number;hood?:boolean;bowHeldDraw?:number;stride:{walk:number;run:number};motion?:PlayerActionSample;swordCarry?:{socket:Node;grips:Record<string,SwordCarryGrip>;quiver?:{node:Node;items:Record<string,SwordBackTransform>}}};
+type NativeContact={start:number;style:ImpactStyle;angle:number};
+type NativeTint={material:Material;base:Color;flash:Color;emission?:Color|Vec4;emissionFlash:Color;flashing:boolean};
 const weaponFamily=(id:string):'bow'|'staff'|'sword'=>EQUIPMENT[id]?.kind==='bow'?'bow':EQUIPMENT[id]?.kind==='staff'?'staff':'sword';
 function pureActionPose(action:ActionState):string|undefined {
  const id=action.skillId??(action.kind.startsWith('pure:')?action.kind.slice(5):''),skill=COMBAT_SKILLS[id];if(!skill)return;
@@ -36,13 +42,47 @@ function pureActionPose(action:ActionState):string|undefined {
 }
 export class Actors {
  reducedMotion=false;
+ private enemyImpacts=new Map<string,NativeContact>();
+ private enemyTints=new Map<string,NativeTint[]>();
+ private enemyBaseScale=new Map<string,Vec3>();
  private contactHoldUntil=0;private nextContactHold=0;private heldClip='';private heldPose:number|undefined;
  onCombatEvents(events:readonly GameEvent[],time:number){
-  if(events.some(e=>['area','travel','retry'].includes(e.type))){this.contactHoldUntil=0;this.heldPose=undefined;return;}
-  if(this.reducedMotion||time<this.nextContactHold)return;
+  if(events.some(e=>['area','travel','retry'].includes(e.type))){this.contactHoldUntil=0;this.heldPose=undefined;this.resetEnemyContacts();return;}
   const blocked=new Set(events.filter(e=>e.type==='block').map(impactKey));
-  const holds=events.map(e=>{const style=impactStyle(e,blocked.has(impactKey(e)));if(!style)return 0;const melee=typeof e.comboStage==='number'||String(e.skillId??'').startsWith('WAR_');return melee?Math.min(style.hold,e.comboStage===3?.022:.012):style.hold;});
+  for(const e of events){if(!e.id||e.id==='player'||!this.active.has(e.id))continue;const style=impactStyle(e,blocked.has(impactKey(e)));if(!style||style.kind==='burn')continue;const previous=this.enemyImpacts.get(e.id);if(!previous||time-previous.start>.07||style.priority>previous.style.priority)this.enemyImpacts.set(e.id,{start:time,style,angle:Number(e.angle??0)});}
+  if(this.reducedMotion||time<this.nextContactHold)return;
+  const holds=events.map(e=>{const style=impactStyle(e,blocked.has(impactKey(e)));if(!style)return 0;const melee=typeof e.comboStage==='number'||String(e.skillId??'').startsWith('WAR_'),heavy=e.comboStage===3||['heavy','critical','kill'].includes(style.kind);return melee?Math.min(style.hold,heavy?.04:.018):style.hold;});
   const hold=Math.max(0,...holds);if(hold>0){this.contactHoldUntil=time+hold;this.nextContactHold=time+.1;this.heldPose=undefined;}
+ }
+ private enemyContact(actor:Actor,e:EnemyState,game:GameSession){
+  const impact=this.enemyImpacts.get(e.id),age=impact?game.state.time-impact.start:Infinity;
+  if(!impact&&!(this.enemyTints.get(e.id)?.some(t=>t.flashing)))return;
+  if(impact&&!this.enemyTints.has(e.id)){
+   // Cocos owns renderer material instances; never tint shared prefab assets.
+   const tints:NativeTint[]=[];
+   for(const renderer of actor.model.getComponentsInChildren(MeshRenderer))for(let i=0;i<renderer.sharedMaterials.length;i++){
+    const material=renderer.getMaterialInstance(i),base=material?.getProperty('mainColor');
+    if(material&&base instanceof Color){const emission=material.getProperty('emissive');tints.push({material,base:base.clone(),flash:base.clone(),emission:emission instanceof Color||emission instanceof Vec4?emission.clone():undefined,emissionFlash:new Color(),flashing:false});}
+   }
+   this.enemyTints.set(e.id,tints);this.enemyBaseScale.set(e.id,actor.model.scale.clone());
+  }
+  const heavy=impact&&['heavy','critical','kill'].includes(impact.style.kind),flash=!this.reducedMotion&&e.hp>0&&age<(heavy?.08:.06);
+  for(const tint of this.enemyTints.get(e.id)??[]){
+   if(flash){const color=F.color(impact!.style.role);tint.flash.set(Math.min(255,tint.base.r*.6+color.r*.6),Math.min(255,tint.base.g*.6+color.g*.6),Math.min(255,tint.base.b*.6+color.b*.6),tint.base.a);tint.emissionFlash.set(color.r*(heavy?.62:.48),color.g*(heavy?.62:.48),color.b*(heavy?.62:.48),255);}
+   if(flash||tint.flashing){tint.material.setProperty('mainColor',flash?tint.flash:tint.base);if(tint.emission)tint.material.setProperty('emissive',flash?tint.emissionFlash:tint.emission);}tint.flashing=flash;
+  }
+  const base=this.enemyBaseScale.get(e.id),pulse=!this.reducedMotion&&e.hp>0&&age<.18?Math.sin(age/.18*Math.PI):0;
+  if(base){const strength=(impact?.style.recoil??0)/.2*(game.enemyHitReaction(e.id)?.resisted?.65:1);actor.model.setScale(base.x*(1+pulse*.035*strength),base.y*(1-pulse*.04*strength),base.z);}
+  if(e.hp>0)actor.model.setRotationFromEuler(0,actor.metadata.modelYaw??0,pulse*(impact?.style.kind==='armor'?1:3));
+  if(age>.25)this.enemyImpacts.delete(e.id);
+ }
+ private resetEnemyContacts(){
+  for(const [id,tints]of this.enemyTints){
+   for(const t of tints){if(t.flashing&&t.material.isValid){t.material.setProperty('mainColor',t.base);if(t.emission)t.material.setProperty('emissive',t.emission);}t.flashing=false;}
+   const actor=this.active.get(id),base=this.enemyBaseScale.get(id);
+   if(actor?.model.isValid){if(base)actor.model.setScale(base);if(actor.state!=='death')actor.model.setRotationFromEuler(0,actor.metadata.modelYaw??0,0);}
+  }
+  this.enemyImpacts.clear();
  }
  private contactPose(actor:Actor,time:number){
   const clip=actor.clips[actor.state],anim=clip&&actor.animation?.getState(clip.name);
@@ -205,6 +245,11 @@ export class Actors {
  }
  private async attachSwordCarry(actor:Actor){
   const definition=actor.metadata.cocosBinding?.swordBackCarry;if(!definition)return;
+  // Real-time sample() writes into Cocos' deferred blend buffer. Build the
+  // shared back reference with baked sampling, which updates sockets now,
+  // even when the starting sword selected the real-time animation path.
+  const restoreRealtime=!actor.animation!.useBakedAnimation;
+  if(restoreRealtime){this.setAnimationMode(actor,true);this.play(actor,'idle',true);}
   const animation=actor.animation!,path=this.bonePath(animation.node,definition.bone),bone=path&&animation.node.getChildByPath(path);
   if(!path||!bone)throw new Error('Missing native sword back bone: '+definition.bone);
   const socket=animation.createSocket(path);if(!socket)throw new Error('Cannot create native sword back socket');
@@ -218,6 +263,7 @@ export class Actors {
   const idleClip=actor.clips.idle,idle=idleClip&&animation.getState(idleClip.name);
   if(idle){idle.time=1/idleClip.sample;idle.sample();idle.time=0;idle.sample();}
   const references=new Map([socket,bowSocket].map(node=>[node,{inverse:Mat4.invert(new Mat4(),node.worldMatrix),inverseRotation:Quat.invert(new Quat(),node.worldRotation)}])),grips:Record<string,SwordCarryGrip>={};
+  if(restoreRealtime){this.setAnimationMode(actor,false);this.play(actor,'idle',true);}
   let leather:Material|undefined,metal:Material|undefined,caseMesh:Mesh|undefined,bandMesh:Mesh|undefined;
   // The current hero's scabbards are already authored in the weapon prefabs.
   // Only older comparison models need the procedural leather/metal fallback.
@@ -351,7 +397,7 @@ export class Actors {
   const quiver=actor.swordCarry?.quiver;if(quiver){const placement=quiver.items[EQUIPMENT[id]?.artSource??id];quiver.node.active=kind==='bow'&&!!placement;if(placement){quiver.node.setPosition(placement.position);quiver.node.setRotation(placement.rotation);}}
   actor.renderedWeaponId=id;actor.weaponStowed=stowed;return kind;
  }
- update(game:GameSession,dt:number,moving:boolean,paused=false,moveAmount=1){for(const actor of this.active.values())if(actor.id.startsWith('field-npc-'))actor.root.active=fieldNpcVisible(actor.id,game.state.flags);this.combatLocomotion?.setPaused(paused);if(!paused)updateWeaponReadiness(this.carryReadiness,game,this.world);if(paused){this.contactHoldUntil=0;this.heldPose=undefined;const player=this.active.get('player'),id=game.state.equipment.weapon;if(player&&player.renderedWeaponId!==id){this.syncPlayerWeapon(player,id,!this.carryReadiness.ready&&game.state.player.hp>0);this.applyParts(player,game.state.equipment.head==='A02');const idle=weaponFamily(id)==='staff'&&this.carryReadiness.ready&&player.clips.idle_staff?'idle_staff':'idle';this.play(player,idle,true);const clip=player.clips[idle],animation=clip&&player.animation?.getState(clip.name);if(animation){animation.time=0;animation.sample();}player.actionId=undefined;this.drawBow(player,0,false);}for(const actor of this.active.values())if(!actor.paused){actor.animation?.pause();actor.paused=true;}return;}const p=game.state.player,a=game.state.action;const player=this.active.get('player');if(player){const dx=p.x-player.root.position.x,dz=p.z-player.root.position.z,speed=Math.min(8,Math.hypot(dx,dz)/Math.max(.001,dt)),travelling=speed>.08,heading=a?a.angle:travelling?Math.atan2(dx,dz):p.angle;player.speed=speed;const y=this.world.height(p);if(player.root.position.x!==p.x||player.root.position.y!==y||player.root.position.z!==p.z)player.root.setPosition(p.x,y,p.z);const angleDelta=Math.atan2(Math.sin(heading-(player.yaw??heading)),Math.cos(heading-(player.yaw??heading)));player.yaw=travelling&&!a?(player.yaw??heading)+angleDelta*(1-Math.exp(-dt*16)):heading;if(player.root.eulerAngles.y!==player.yaw*180/Math.PI)player.root.setRotationFromEuler(0,player.yaw*180/Math.PI,0);const hurtProgress=playerHurtProgress(p.hurtTime);let state=p.hp<=0?'death':hurtProgress!==undefined?'hit':a?.kind==='dash'?'dodge':a?.kind==='bowAim'?'attack_bow':a?(pureActionPose(a)??(a.kind.includes('spell')?'spell':a.kind.includes('bow')?'attack_bow':a.kind.includes('staff')?'attack_staff':a.kind==='push'?'interact':a.kind==='skill'?'attack_'+weaponFamily(game.state.equipment.weapon):'attack_sword')):travelling?(speed>(player.state.startsWith('run')?2:2.3)?'run':'walk'):'idle';if(weaponFamily(game.state.equipment.weapon)==='staff'&&player.clips.idle_staff){if(['idle','walk','run'].includes(state)&&this.carryReadiness.ready)state+='_staff';else if(state==='spell')state='attack_staff';}// Reuse the authored stride while an action moves the hero. The layer
+ update(game:GameSession,dt:number,moving:boolean,paused=false,moveAmount=1){if(paused)this.resetEnemyContacts();for(const actor of this.active.values()){if(chapterTwoEnemyRetired(game.state,actor.id)||peacefulBossRetired(game.state,actor.id))actor.root.active=false;else if(actor.id.startsWith('field-npc-'))actor.root.active=fieldNpcVisible(actor.id,game.state.flags);else if(actor.id.startsWith('side-npc-'))actor.root.active=chapterTwoSideQuestNpcVisible(actor.id,game.state);}this.combatLocomotion?.setPaused(paused);if(!paused)updateWeaponReadiness(this.carryReadiness,game,this.world);if(paused){this.contactHoldUntil=0;this.heldPose=undefined;const player=this.active.get('player'),id=game.state.equipment.weapon;if(player&&player.renderedWeaponId!==id){this.syncPlayerWeapon(player,id,!this.carryReadiness.ready&&game.state.player.hp>0);this.applyParts(player,game.state.equipment.head==='A02');const idle=weaponFamily(id)==='staff'&&this.carryReadiness.ready&&player.clips.idle_staff?'idle_staff':'idle';this.play(player,idle,true);const clip=player.clips[idle],animation=clip&&player.animation?.getState(clip.name);if(animation){animation.time=0;animation.sample();}player.actionId=undefined;this.drawBow(player,0,false);}for(const actor of this.active.values())if(!actor.paused){actor.animation?.pause();actor.paused=true;}return;}const p=game.state.player,a=game.state.action;const player=this.active.get('player');if(player){const dx=p.x-player.root.position.x,dz=p.z-player.root.position.z,speed=Math.min(8,Math.hypot(dx,dz)/Math.max(.001,dt)),travelling=speed>.08,heading=a?a.angle:travelling?Math.atan2(dx,dz):p.angle;player.speed=speed;const y=this.world.height(p);if(player.root.position.x!==p.x||player.root.position.y!==y||player.root.position.z!==p.z)player.root.setPosition(p.x,y,p.z);const angleDelta=Math.atan2(Math.sin(heading-(player.yaw??heading)),Math.cos(heading-(player.yaw??heading)));player.yaw=travelling&&!a?(player.yaw??heading)+angleDelta*(1-Math.exp(-dt*16)):heading;if(player.root.eulerAngles.y!==player.yaw*180/Math.PI)player.root.setRotationFromEuler(0,player.yaw*180/Math.PI,0);const hurtProgress=playerHurtProgress(p.hurtTime);let state=p.hp<=0?'death':hurtProgress!==undefined?'hit':a?.kind==='dash'?'dodge':a?.kind==='bowAim'?'attack_bow':a?(pureActionPose(a)??(a.kind.includes('spell')?'spell':a.kind.includes('bow')?'attack_bow':a.kind.includes('staff')?'attack_staff':a.kind==='push'?'interact':a.kind==='skill'?'attack_'+weaponFamily(game.state.equipment.weapon):'attack_sword')):travelling?(speed>(player.state.startsWith('run')?2:2.3)?'run':'walk'):'idle';if(weaponFamily(game.state.equipment.weapon)==='staff'&&player.clips.idle_staff){if(['idle','walk','run'].includes(state)&&this.carryReadiness.ready)state+='_staff';else if(state==='spell')state='attack_staff';}// Reuse the authored stride while an action moves the hero. The layer
    // survives action/beat changes, so consecutive attacks never reset the feet.
    const locomotion=this.combatLocomotion,previousState=player.state,previousClip=player.clips[previousState],previousAnim=previousClip&&player.animation?.getState(previousClip.name);
    const basePhase=(previousState.startsWith('walk')||previousState.startsWith('run'))&&previousAnim?previousAnim.time/previousClip.duration:undefined;
@@ -405,7 +451,7 @@ export class Actors {
   }
   for(const e of game.state.enemies){
    const actor=this.active.get(e.id);if(!actor){if(!this.silverPlayer&&!this.arriving.has(e.id)&&!this.arrivalFailure.has(e.id)){this.arriving.add(e.id);void this.create(e.id,e.kind==='captain'?'captain':e.kind==='archer'?'raider-archer':e.kind==='shield'?'raider-shield':'raider',e.x,e.z).catch(error=>{this.arrivalFailure.add(e.id);console.error('[Campaign] Reinforcement could not load',error);}).finally(()=>this.arriving.delete(e.id));}continue;}const speed=Math.min(6,Math.hypot(e.x-actor.root.position.x,e.z-actor.root.position.z)/Math.max(.001,dt));actor.speed=speed;actor.root.setPosition(e.x,this.world.height(e),e.z);const locked=['windup','active','recovery'].includes(e.phase),turn=Math.atan2(Math.sin(e.angle-(actor.yaw??e.angle)),Math.cos(e.angle-(actor.yaw??e.angle)));actor.yaw=locked?e.angle:(actor.yaw??e.angle)+turn*(1-Math.exp(-dt*12));actor.root.setRotationFromEuler(0,actor.yaw*180/Math.PI,0);
-   const attacking=['windup','active','recovery'].includes(e.phase),pose=ENEMY_COMBAT_PROFILES[e.templateId??e.bossId??e.contentId??'']?.attacks[e.combat?.moveId??'']?.pose;
+   const attacking=['windup','active','recovery'].includes(e.phase),pose=enemyProfile(e)?.attacks[e.combat?.moveId??'']?.pose;
    if(pose)actor.enemyPose=pose;else if(!attacking)actor.enemyPose=undefined;
    const requested=e.hp<=0?'death':e.phase==='stagger'||game.enemyHitReaction(e.id)?.flinch&&!attacking?'hit':attacking?(pose??actor.enemyPose??(e.kind==='archer'?'attack_bow':'attack_sword')):e.phase==='approach'&&speed>.08?(actor.clips.walk?'walk':'run'):'idle';
    // Missing cast/command clips use this actor's own idle, never a bow/sword substitution.
@@ -416,10 +462,11 @@ export class Actors {
    if(e.hp<=0){this.drawBow(actor,0,false);if(anim){anim.speed=0;anim.time=state==='death'?Math.min(Math.max(0,game.state.time-(e.diedAt??game.state.time)),Math.max(0,clip.duration-.001)):0;anim.sample();}if(state!=='death')actor.model.setRotationFromEuler(0,actor.metadata.modelYaw??0,78);}
    else if(anim&&attacking&&state!=='idle'){const progress=Math.max(0,Math.min(1,1-e.phaseTime/(actor.phaseDuration??1))),bow=state==='attack_bow';const hold=actor.metadata.libraryMotion?.clips?.attack_bow?.holdFraction??.65,active=bow?Math.min(1,hold+.12):.5;const fraction=e.phase==='windup'?progress*(bow?hold:.27):e.phase==='active'?(bow?hold:.27)+progress*(bow?active-hold:.23):(bow?active:.5)+progress*(bow?1-active:.5);anim.speed=0;anim.time=fraction*clip.duration;anim.sample();this.drawBow(actor,bow?this.bowWeight(actor):0,bow&&e.phase==='windup');}
    else {this.drawBow(actor,0,false);if(anim)anim.speed=state==='walk'?Math.max(.1,Math.min(2.5,speed/actor.stride.walk)):state==='run'?Math.max(.1,Math.min(1.8,speed/actor.stride.run)):1;}
+   this.enemyContact(actor,e,game);
   }
   for(const actor of this.active.values()){actor.clock+=dt;if(actor.paused){actor.animation?.resume();actor.paused=false;}}
  }
- destroy(){this.bodyBatches?.destroy();this.bodyBatches=undefined;this.disposed=true;this.hairRevision++;this.releaseHair(this.hairMaterials);this.hairMaterials=undefined;for(const owner of this.hairLoads)this.releaseHair(owner);this.hairLoads.clear();this.hairSources.clear();this.combatLocomotion?.destroy();this.combatLocomotion=undefined;for(const actor of this.active.values())if(actor.root.isValid)actor.root.destroy();for(const material of this.pbrMaterials.values())material.destroy();this.pbrMaterials.clear();for(const material of this.carryMaterials)material.destroy();for(const mesh of this.carryMeshes)mesh.destroy();this.carryMaterials=[];this.carryMeshes=[];this.nativeMaterials.destroy();this.weaponMaterials.destroy();this.active.clear();}
+ destroy(){this.resetEnemyContacts();this.enemyTints.clear();this.enemyBaseScale.clear();this.bodyBatches?.destroy();this.bodyBatches=undefined;this.disposed=true;this.hairRevision++;this.releaseHair(this.hairMaterials);this.hairMaterials=undefined;for(const owner of this.hairLoads)this.releaseHair(owner);this.hairLoads.clear();this.hairSources.clear();this.combatLocomotion?.destroy();this.combatLocomotion=undefined;for(const actor of this.active.values())if(actor.root.isValid)actor.root.destroy();for(const material of this.pbrMaterials.values())material.destroy();this.pbrMaterials.clear();for(const material of this.carryMaterials)material.destroy();for(const mesh of this.carryMeshes)mesh.destroy();this.carryMaterials=[];this.carryMeshes=[];this.nativeMaterials.destroy();this.weaponMaterials.destroy();this.active.clear();}
  playerPresentation():PlayerPresentation|undefined {
   const actor=this.active.get('player');if(!actor)return;
   const family=weaponFamily(actor.renderedWeaponId??'W01'),kind=weaponAttachmentKind(actor.renderedWeaponId??'W01')==='greatsword'&&actor.weapons.greatsword?'greatsword':family,emptyHandCast=actor.state==='spell'&&!actor.weapons.staff?.active;

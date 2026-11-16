@@ -221,6 +221,10 @@ export const RESOURCE_PACKS:readonly {prefix:string;bundle:string}[] = [
     "bundle": "skill-icons"
   },
   {
+    "prefix": "audio/combat-v9/",
+    "bundle": "combat-audio"
+  },
+  {
     "prefix": "ui/quiet-bronze/",
     "bundle": "panel-art"
   },

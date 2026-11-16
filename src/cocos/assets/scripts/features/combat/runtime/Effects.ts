@@ -8,6 +8,7 @@ import {SceneBuilder} from '../../world/runtime/SceneBuilder';
 import {VfxAssets,VfxKind,type VfxLineStyle,constant,vfxColor} from '../../../shared/assets/VfxAssets';
 import {NativeSkillVfx,type SkillPreview} from './NativeSkillVfx';
 import {NativeEnemyVfx} from './NativeEnemyVfx';
+import {FEEDBACK_PALETTE} from '../../../shared/ui/FeedbackPalette';
 import {MeleeBladeSurfaces} from '../../actors/runtime/MeleeBladeSurfaces';
 import {SkillFireSprites} from './SkillFireSprites';
 import {SkillMeteorBody} from './SkillMeteorBody';
@@ -48,7 +49,7 @@ export class Effects {
  private readonly fireDirection=new Vec3();
  private readonly lineCentre=new Vec3();
  private meleeContacts:{id:string;p:Point;angle:number;stage:number;start:number}[]=[];
- set reducedMotion(value:boolean){this.lowMotion=value;this.skills.reducedMotion=value;this.fireSprites.reducedMotion=value;}
+ set reducedMotion(value:boolean){this.lowMotion=value;this.skills.reducedMotion=value;this.fireSprites.reducedMotion=value;this.enemies.reducedMotion=value;}
  get reducedMotion(){return this.lowMotion;}
  private projectileOffsets=new Map<string,Vec3>();private projectileRanges=new Map<string,number>();private renderingProjectile:ProjectileState|undefined;
  private volleyWarmup:Promise<void>|null=null;private disposed=false;
@@ -174,7 +175,7 @@ export class Effects {
   // Configure before onLoad, avoiding a default-trail material/PSO that the
   // actual ribbon immediately replaces. Native geometry and styling stay equal.
   if(item.line.lineMaterial!==material)item.line.lineMaterial=material;
-  const warning=['#f39b99','#f38883','#f58d96','#d57963','#ffb365','#ffd09a'].includes(hex);
+  const warning=hex===FEEDBACK_PALETTE['telegraph.windup'].toLowerCase()||hex===FEEDBACK_PALETTE['telegraph.active'].toLowerCase()||['#f39b99','#f38883','#f58d96','#d57963','#ffb365','#ffd09a'].includes(hex);
   item.line.priority=warning?3:resolved==='glow'?0:resolved==='core'?2:1;
   item.node.active=true;
   // Line.onEnable rebinds Line.texture, which otherwise resets a pooled
@@ -304,12 +305,23 @@ export class Effects {
     this.burst(environment?'ember':spell?identity:'spark',p,.9,environment?4:spell?5:4,event.critical===true?1.15:.7,spell?color:undefined);
     // The shared contact cue owns the short bright impact; avoid double flashes.
    }else if(event.type==='block'){this.burst('spark',p,1,6,.7);}
-   else if(event.type==='hurt'){this.burst('dust',game.state.player,.8,7,.6,'#b68a79');this.burst('spark',game.state.player,.85,4,.7,'#daac87');}
+   else if(event.type==='hurt'){
+    const shieldOnly=!(Number(event.hpLost)>0)&&Number(event.absorbed)>0,color=FEEDBACK_PALETTE[shieldOnly?'damage.absorbed':'damage.taken'];
+    if(!shieldOnly)this.burst('dust',game.state.player,.15,this.lowMotion?2:5,.4,color);
+    this.burst('spark',game.state.player,.85,this.lowMotion?2:4,.5,color);
+   }
    else if(event.type==='explosion'){
     const scale=Number(event.radius??1.1)/1.1;this.burst('flame',p,.3,18,scale*1.15);this.burst('ember',p,.3,20,scale);this.burst('smoke',p,.4,9,scale);this.burst('dust',p,.1,10,scale);this.burst('flash',p,.5,1,scale*1.4);
-   }else if(event.type==='stagger'||event.type==='defeat'){this.burst('dust',p,.08,event.type==='defeat'?9:12,.85);}
+   }else if(event.type==='stagger'||event.type==='guard_break'||event.type==='interrupt'){
+    const color=FEEDBACK_PALETTE[event.type==='guard_break'?'state.ready':'status.control'];
+    this.burst('spark',p,.85,this.lowMotion?2:6,.55,color);
+    if(!this.lowMotion)this.burst('dust',p,.08,5,.55);
+   }else if(event.type==='defeat'){this.burst('dust',p,.08,9,.85);}
    else if(event.type==='mark'){this.burst('rune',p,.075,1,.8,colors.seal);}
-   else if(event.type==='evade'){this.burst('dust',p,.1,5,.65);}
+   else if(event.type==='evade'){
+    this.burst('dust',game.state.player,.1,this.lowMotion?2:5,.5);
+    if(event.timing===true)this.burst('spark',game.state.player,.65,this.lowMotion?2:5,.45,FEEDBACK_PALETTE['state.success']);
+   }
    else if(event.type==='counter_ready'){this.burst('rune',p,.07,1,.9,colors.prayer);}
   }
  }
@@ -320,7 +332,7 @@ export class Effects {
   if(this.area!==s.area||s.time<this.lastTime){this.clear();this.area=s.area;}
   this.lastTime=s.time;if(s.status==='dead'||s.dialogue||s.dice.active){this.clear(true);return;}
   this.lineIndex=0;for(const pool of this.linePools.values())pool.used=0;this.details=[];this.blades.begin();this.fireSprites.begin();this.meteor.begin();this.groundThunder.begin();this.thunderContacts.begin();this.thunderField.begin();for(const e of this.emitters)e.touched=false;for(const b of this.bodies)b.touched=false;
-  // Enemy combat effects retain their bodies/impacts without attack outlines.
+  // Enemy effects show real attacks and fields without range overlays.
   this.enemies.update(game);
   for(const enemy of s.enemies){
    if(enemy.hp<=0)continue;const nativeEnemy=this.enemies.handles(enemy);

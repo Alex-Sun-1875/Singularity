@@ -46,7 +46,7 @@ export const PREPARATION_DESIGN={
  frame:{asset:'double-gold-frame-rpg-v4',pixelScaleLogical:.5,clipInsetSource:14,clipRadiusSource:12},
  header:{visibleHeightLogical:40,referenceCenterY:16,referenceHitHeight:28,visualOffsetLogical:10,tabStart:200,tabWidth:72,tabMinimumGap:8,underlineOffset:13,underlineWidth:82,underlineHeight:7,logoX:104,logoWidth:70,logoHeight:19,leftSeparatorX:159,rightSeparatorX:782,separatorHeight:12,closeFont:21,coinX:704,coinSize:16,goldX:746,goldWidth:57,goldFont:16},
  footer:{widths:[122,130,122],gaps:[10,12],rightInset:12,buttonHeight:31.5,fire:{x:34,width:30,height:31},statusX:54,statusMinFont:12,statusMaxFont:14,returnArrowSize:16,returnArrowInset:20,returnTextOffset:11},
- artwork:{coin:'rpg-coin-v2',campfire:'rpg-campfire-v2',footerRule:'rpg-footer-rule-v4',returnArrow:'rpg-return-arrow-v3',offhand:'rpg-painted-offhand-v5',familyPaintings:{WAR:'rpg-profession-war-v1',BOW:'rpg-profession-bow-v1',FIR:'rpg-profession-fir-v1',THU:'rpg-profession-thu-v1'},mainWeaponIcons:{WAR:'rpg-family-war-v3',BOW:'prep-weapon-bow-v5',FIR:'rpg-family-fir-v3',THU:'rpg-family-thu-v3'}},
+ artwork:{coin:'rpg-coin-v2',campfire:'rpg-campfire-v2',footerRule:'rpg-footer-rule-v4',offhand:'rpg-painted-offhand-v5',familyPaintings:{WAR:'rpg-profession-war-v1',BOW:'rpg-profession-bow-v1',FIR:'rpg-profession-fir-v1',THU:'rpg-profession-thu-v1'},mainWeaponIcons:{WAR:'rpg-family-war-v3',BOW:'prep-weapon-bow-v5',FIR:'rpg-family-fir-v3',THU:'rpg-family-thu-v3'}},
  decoration:{ruleHeight:7,smokeWidth:200,smokeHeight:56},
  identity:{height:22,labelHeight:22,textInset:12},
  tab:{height:35,selectedHeight:42,labelHeight:30,textInset:12,referenceHitHeight:35},

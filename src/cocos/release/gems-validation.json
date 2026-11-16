@@ -1,0 +1,111 @@
+{
+  "generatedAt": "2026-11-15T12:50:58.657149+00:00",
+  "version": "0.3.50",
+  "profile": "test",
+  "implemented": [
+    "five sockets per equipment ID",
+    "verified free material sources",
+    "directed crystal exchange",
+    "deterministic opening and synthesis",
+    "lossless extraction and weighted cultivation transfer",
+    "old-save migration and ledger replay",
+    "cosmetic and purchase type contracts"
+  ],
+  "paymentEnabled": false,
+  "appearanceRuntimeEnabled": false,
+  "checks": {
+    "typescript": "passed",
+    "strictCoreTypescript": "passed",
+    "existingTests": {
+      "passed": 150,
+      "failed": 0
+    },
+    "controlledGemRules": {
+      "passed": 14,
+      "failed": 0
+    },
+    "feePreviewsWithMissingMaterials": "passed",
+    "tapConfiguration": "passed",
+    "webBuild": "concept-2d web-mobile test passed",
+    "browser": {
+      "ui-flow-review.json": [
+        {
+          "name": "phone",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "errors": []
+        },
+        {
+          "name": "large-phone",
+          "viewport": {
+            "width": 932,
+            "height": 430
+          },
+          "errors": []
+        },
+        {
+          "name": "desktop",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "errors": []
+        }
+      ],
+      "final-ui-review.json": [
+        {
+          "name": "phone",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "errors": []
+        },
+        {
+          "name": "large-phone",
+          "viewport": {
+            "width": 932,
+            "height": 430
+          },
+          "errors": []
+        },
+        {
+          "name": "desktop",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "errors": []
+        }
+      ]
+    }
+  },
+  "evidenceDirectory": "src/cocos/test-results/gems-v1",
+  "limitations": [
+    "controlled combat/progression fixtures do not establish natural balance",
+    "real TapTap payment and server account/ledger are not implemented",
+    "TapTap AppID runtime/device, lifecycle, storage and performance acceptance remain pending",
+    "local reward and action ledgers each have a 4096 record limit pending safe archival"
+  ],
+  "sourceSha256": {
+    "src/cocos/assets/scripts/app/ChapterGame.ts": "d49dd04d498e65d3c73d26bc53e9551b4bc75cde360bce0e83f3f8f57605283d",
+    "src/cocos/assets/scripts/app/Menus.ts": "c78585bdfde307eb54f8ccebdfc8f4651000c374c05983e23049dea5563eea97",
+    "src/cocos/assets/scripts/core/GameSession.ts": "d54d62fc1d3395c4026697f001b661c57387a9d50a93bf3b63c37834c885280c",
+    "src/cocos/assets/scripts/features/appearance/common/AppearanceContracts.ts": "2cf8710dde3ff6011b1f8e5093bab891f763dbbf0e7913ffe102af6dcd5c7ef6",
+    "src/cocos/assets/scripts/features/commerce/common/PurchaseContracts.ts": "e7c090c306c19e88188711d626036e6afceaeb52749d47f7d92fcf4f02c434a5",
+    "src/cocos/assets/scripts/features/crafting/runtime/ForgeWorkshop.ts": "186891fe563109ee6290a990daf6198b8d14846c91b7f58facd4f878c2c57772",
+    "src/cocos/assets/scripts/features/equipment/common/EquipmentDice.ts": "50aa4c31ec1d16b7ae5eb967825cfb076184e3e5bdb2d586741a6548f482c691",
+    "src/cocos/assets/scripts/features/equipment/runtime/EquipmentPanels.ts": "589a3990eadb10fd0069919162e652121eb39390d3ef1f29eee9439b8f076457",
+    "src/cocos/assets/scripts/features/gems/common/GemWorkshop.ts": "d60e88576f0f6ea3713bc19e8acb3f2c466c6c6e306b75618568ebd8036bc0b9",
+    "src/cocos/assets/scripts/features/gems/data/Gems.ts": "d908b9885361098fd3ac0adf28a3130337a942a64622fdb88d710256f567412a",
+    "src/cocos/assets/scripts/features/gems/locales/en.ts": "f7f364ad197ca12c1d241a001d2e5a0d6bfe5d26c67be5d0eea482f8ab11c840",
+    "src/cocos/assets/scripts/features/gems/locales/index.ts": "8b413fd7e73714b6a89b9f6101c085e7b947a79921f4c3fe83c6d4f1364fc789",
+    "src/cocos/assets/scripts/features/gems/locales/zh-CN.ts": "657df7b5fdecc3efe180fdef178bd22502b006131101d125ba779cb59f979ddc",
+    "src/cocos/assets/scripts/features/gems/runtime/GemPanel.ts": "8b27c4c93822918dee0fc37cb2b31cc5e891b78b2eadcb2f12181646bd622368",
+    "src/cocos/assets/scripts/features/persistence/common/CombatPersistence.ts": "94e7b235f428bf58146134322ac253d7f9a9473b23c07e32fb3524294439c1f3"
+  },
+  "supersededBy": "src/cocos/release/gems-quality-validation.json",
+  "scope": "Historical first five-socket implementation; current rules and checks are in the superseding report."
+}

@@ -1,0 +1,109 @@
+{
+  "date": "2026-11-15",
+  "scope": "Separate TapTap and HTML foreground screen-on adapters; source change only",
+  "workspaceVersionAtValidation": "0.3.50",
+  "officialReference": "https://developer.taptap.cn/minigameapidoc/dev/api/device/screen/tap.setKeepScreenOn/",
+  "installedPlugin": {
+    "version": "1.2.2",
+    "declaration": "src/cocos/extensions/taptap-minigame-tools/tap-minigame.d.ts",
+    "api": "tap.setKeepScreenOn({ keepScreenOn: boolean, success?, fail? })"
+  },
+  "behavior": {
+    "startup": "enable",
+    "foreground": "enable again",
+    "background": "release",
+    "destroy": "release and remove lifecycle listeners",
+    "profiles": [
+      "dev",
+      "test",
+      "release"
+    ],
+    "unsupportedOrFailed": "Nonblocking warning; retry on next foreground; HTML also retries on visibility or pointer interaction",
+    "webPreview": "Browser Screen Wake Lock in a secure, visible document; safe degradation when unavailable or denied"
+  },
+  "checks": {
+    "typecheck": {
+      "command": "npm run check",
+      "result": "passed"
+    },
+    "existingTests": {
+      "command": "npm test",
+      "passed": 150,
+      "failed": 0,
+      "skipped": 0
+    },
+    "temporaryLifecycleProbe": {
+      "passed": 25,
+      "checks": [
+        "tap: startup-hide-show-dispose-and-idempotent-cleanup",
+        "tap: unsupported-host-and-browser-noop",
+        "tap: failure-retries-on-next-foreground",
+        "tap: synchronous-native-failure-nonblocking",
+        "tap: late-enable-completion-cannot-keep-background-awake",
+        "tap: late-disable-and-destroy-races-reconciled",
+        "tap: promise-only-host-supported-with-no-unhandled-rejection",
+        "tap: callback-and-promise-completion-deduplicated",
+        "html: foreground acquisition and no duplicate active lock",
+        "html: hide, show and idempotent disposal",
+        "html: document visibility independently releases and reacquires",
+        "html: hidden document cannot request lock",
+        "html: system revocation waits for interaction instead of looping",
+        "html: denied request is nonblocking and interaction can retry",
+        "html: unsupported host is nonblocking and never invokes API",
+        "html: insecure host is nonblocking and never invokes API",
+        "html: late acquisition in background is immediately released",
+        "html: disposal releases pending result and removes event listeners",
+        "html: foreground return retries rejected older in-flight request once",
+        "html: synchronous request failure is nonblocking",
+        "html: release rejection is handled",
+        "boundary: TapTap lifecycle never reads browser globals",
+        "boundary: HTML uses browser lock, preview login and local storage without reading tap",
+        "boundary: missing TapTap API does not fall back to HTML or bypass platform login",
+        "boundary: other targets keep lifecycle without touching platform globals"
+      ]
+    },
+    "htmlBrowserProbe": {
+      "status": "ran",
+      "permission": "granted only in temporary headless test browser",
+      "browser": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/141.0.7390.37 Safari/537.36",
+      "secureContext": true,
+      "visibility": "visible",
+      "supported": true,
+      "acquired": false,
+      "releasedOnHide": true,
+      "reacquired": false,
+      "releasedOnDispose": true,
+      "requests": [
+        "screen",
+        "screen"
+      ],
+      "warnings": [
+        {
+          "message": "Could not acquire screen wake lock.",
+          "error": "NotAllowedError: Wake Lock permission request denied"
+        },
+        {
+          "message": "Could not acquire screen wake lock.",
+          "error": "NotAllowedError: Wake Lock permission request denied"
+        }
+      ],
+      "conclusion": "Permission-denied degradation verified in real browser engine; successful native acquisition and physical screen timeout not verified"
+    }
+  },
+  "packaged": false,
+  "uploaded": false,
+  "pendingDeviceAcceptance": [
+    "In TapTap, remain in foreground longer than system idle timeout; screen stays on in menus and gameplay.",
+    "Switch to background and verify normal system screen timeout resumes.",
+    "Return to foreground and repeat idle-timeout check; verify touch, audio and save recovery.",
+    "Exit game and verify normal system screen timeout resumes.",
+    "In a supported HTML browser with wake-lock permission and a secure context, verify successful lock, timeout prevention, hidden-page release and foreground recovery."
+  ],
+  "htmlOfficialReference": "https://www.w3.org/TR/screen-wake-lock/",
+  "platformSelection": {
+    "minigame": "TapScreenAwake; no DOM/navigator access",
+    "html": "HtmlScreenAwake; never reads tap global in PlatformServices",
+    "other": "no-op screen adapter; lifecycle preserved",
+    "profiles": "Independent of dev/test/release; no cross-platform fallback"
+  }
+}

@@ -12,6 +12,8 @@ export interface DoubleGoldFrameOptions {
  fill?:Color;
  /** Optional derived border; geometry and source corner widths stay shared. */
  borderSkin?:string;
+ /** Reference art already includes its surface and transparent silhouette. */
+ bakedSurface?:boolean;
 }
 type FrameLoader=(id:string)=>SpriteFrame|Promise<SpriteFrame>;
 
@@ -34,15 +36,18 @@ export class DoubleGoldFrame extends Component {
   this.node.getComponent(UITransform)!.setContentSize(width,height);const version=++this.version;this.loaded=false;this.loadError='';
   for(const node of this.owned){node.removeFromParent();node.destroy();}this.owned=[];
   const capsule=this.options.shape==='capsule',pixelScale=this.options.pixelScale??1,radius=capsule?height/2:26*pixelScale;
-  const shadow=this.part('GoldFrameShadow',width+12*pixelScale,height+12*pixelScale),g=shadow.addComponent(CompactGraphics);
-  for(const [spread,alpha]of [[6,14],[4,22],[2,36]]){g.fillColor=new Color(C.background.r,C.background.g,C.background.b,alpha);g.roundRect(-width/2-spread*pixelScale,-height/2-spread*pixelScale-2*pixelScale,width+2*spread*pixelScale,height+2*spread*pixelScale,radius+spread*pixelScale);g.fill();}
-  // Identical transform and lifetime: append the base after its shadow paths.
-  g.fillColor=this.options.fill??C.inset;g.roundRect(-width/2,-height/2,width,height,radius);g.fill();
+  if(!this.options.bakedSurface){
+   const shadow=this.part('GoldFrameShadow',width+12*pixelScale,height+12*pixelScale),g=shadow.addComponent(CompactGraphics);
+   for(const [spread,alpha]of [[6,14],[4,22],[2,36]]){g.fillColor=new Color(C.background.r,C.background.g,C.background.b,alpha);g.roundRect(-width/2-spread*pixelScale,-height/2-spread*pixelScale-2*pixelScale,width+2*spread*pixelScale,height+2*spread*pixelScale,radius+spread*pixelScale);g.fill();}
+   // Identical transform and lifetime: append the base after its shadow paths.
+   g.fillColor=this.options.fill??C.inset;g.roundRect(-width/2,-height/2,width,height,radius);g.fill();
+  }
   // Panel art uses native pixels. Capsule caps fit the loaded source height;
   // only the straight middle stretches, so the ends retain their proportions.
   const material=capsule?'menu-pill-inset-v5':UI_FRAME_LAYOUT.panelMaterial;
   const border=capsule?UI_FRAME_LAYOUT.capsuleSkin:this.options.borderSkin??UI_FRAME_LAYOUT.panelSkin;
-  const pending=[this.layer('GoldFrameMaterial',material,width,height,pixelScale,true,version,capsule),this.layer('SharedGoldFrame',border,width,height,pixelScale,true,version,capsule)];
+  const pending=this.options.bakedSurface?[]:[this.layer('GoldFrameMaterial',material,width,height,pixelScale,true,version,capsule)];
+  pending.push(this.layer('SharedGoldFrame',border,width,height,pixelScale,true,version,capsule));
   if(this.options.crest&&!capsule){
    const {crestWidth,crestHeight,crestOffset,crestShadowPadding}=UI_FRAME_LAYOUT;
    const backing=this.part('GoldFrameCrestShadow',(crestWidth+2*crestShadowPadding)*pixelScale,(crestHeight+2*crestShadowPadding)*pixelScale);backing.setPosition(0,height/2+crestOffset*pixelScale);

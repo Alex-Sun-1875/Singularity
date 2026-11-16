@@ -1,0 +1,84 @@
+{
+  "status": "superseded",
+  "historical": true,
+  "supersededBy": "docs/design/pet-system-v2.md",
+  "supersededReason": "The user removed all gameplay level caps and requested an original companion design with character-relative bonuses. The checks below apply only to the earlier v1 rules and browser export.",
+  "latestRevisionValidated": false,
+  "verifiedOn": "2026-11-15",
+  "version": "0.3.50",
+  "profile": "test",
+  "petStateVersion": 1,
+  "productionEnabled": false,
+  "availability": "All chapters closed; no chapter, build-profile, save or browser override.",
+  "ranks": ["普通", "珍兽", "神兽"],
+  "rankLevelCaps": {"普通": 20, "珍兽": 30, "神兽": 40},
+  "checks": {
+    "typescript": {"command": "npm run check", "status": "passed"},
+    "strictCoreTypescript": {"command": "npm --prefix src/cocos run check:core", "status": "passed"},
+    "existingTests": {"command": "npm test", "passed": 150, "failed": 0, "finalRulesRerun": true},
+    "taptapConfiguration": {"command": "npm run check:tap", "status": "passed", "version": "0.3.50", "scope": "Configuration validation only; not platform or device acceptance."},
+    "closedAndMigration": {
+      "status": "passed",
+      "rejectedMutationAttempts": 10,
+      "corruptPetStatesRejected": 6,
+      "legacyMigration": "Passed without mutating the supplied snapshot or granting pets/rewards.",
+      "evidence": "src/cocos/test-results/pets-v1/closed-and-migration.json"
+    },
+    "enabledRules": {
+      "status": "passed",
+      "scenarios": 23,
+      "settledHuntCycles": 11696,
+      "petTransactions": 25,
+      "corruptionRejections": 9,
+      "scope": "Isolated Node process with in-memory enabled module and synthetic verified kill fixtures; delivered source and preview remained disabled.",
+      "coverage": ["adoption", "quote token rejection", "safe checkpoint conditions", "verified first-clear and rematch rewards", "corpse and source deduplication", "owner and rank level caps", "rank promotions", "bond limits", "two learned skill slots", "six species evolution traits", "JSON roundtrip and save validation"],
+      "evidence": "test-results/pets-v1/rules-enabled.json"
+    },
+    "enabledCombat": {
+      "passed": 12,
+      "failed": 0,
+      "scope": "Isolated enabled module; simulation validation only.",
+      "coverage": ["attack and shared cooldown", "no acquisition of idle targets", "line of sight", "guard shield limits", "heal limits", "support awareness", "dialogue and death suspension", "reload cannot bypass cooldown"],
+      "evidence": "src/cocos/test-results/pets-v1/combat-enabled.json"
+    },
+    "oneShotRendererSmoke": {
+      "status": "reported passed",
+      "detailStates": 9,
+      "rankCaps": 3,
+      "closedRoutes": 4,
+      "persistedEvidence": null,
+      "scope": "One-shot renderer/route smoke reported by the implementing agent; not interactive enabled UI, touch or final-art acceptance."
+    },
+    "webBuild": {
+      "command": "npm start test",
+      "status": "passed",
+      "target": "concept-2d web-mobile test",
+      "compiledBundle": "mainindex.55543.js",
+      "finalUiCopyRankCapsAndEvolutionIdsVerified": true,
+      "versionIncremented": false,
+      "productionEnabled": false
+    },
+    "browserClosed": {
+      "status": "passed",
+      "scope": "Actual exported concept-2d test build with the production pet release switch false.",
+      "closedRoutesBlocked": 4,
+      "petStateUnchanged": true,
+      "petCompanionNodes": 0,
+      "pauseMenuPetEntryVisible": false,
+      "pageErrors": 0,
+      "consoleErrors": 0,
+      "viewports": [
+        {"width": 844, "height": 390, "density": 3, "status": "passed", "screenshot": "src/cocos/test-results/pets-v1/phone-closed-pause.png"},
+        {"width": 932, "height": 430, "density": 3, "status": "passed", "screenshot": "src/cocos/test-results/pets-v1/large-phone-closed-pause.png"}
+      ],
+      "evidence": "src/cocos/test-results/pets-v1/browser-closed.json"
+    }
+  },
+  "limitations": [
+    "The live browser build keeps pets closed. Enabled-rule fixtures do not establish normal growth balance, natural acquisition pacing or interactive enabled UI acceptance.",
+    "Enabled management pages still require actual Cocos phone-layout, safe-area, long-text and touch acceptance before release.",
+    "Native procedural pet forms and compact assist effects are preliminary representations; final creature art and animation remain unaccepted.",
+    "TapTap real-AppID, target-device, lifecycle, persistence, memory and performance acceptance remain pending."
+  ],
+  "delivery": {"newTestsAdded": false, "newDependenciesAdded": false, "taptapZipCreated": false, "versionIncremented": false, "uploaded": false, "submittedForReview": false, "published": false}
+}

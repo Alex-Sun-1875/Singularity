@@ -1,0 +1,477 @@
+{
+  "date": "2026-11-15",
+  "scope": "Approved cinematic dialogue v4 integrated into actual Cocos runtime; no TapTap ZIP or upload",
+  "workspaceVersion": "0.3.50",
+  "approvedDesign": "source-art/ui/cinematic-dialogue-v4/cinematic-dialogue-proposal-v4.png",
+  "changes": [
+    "Keep original bundled font, 14/18/13 sizes, centered speaker/caption, existing pagination and safe-area controls",
+    "Replace mismatched font chevron with Cocos geometry; align using bundled glyph ink bounds and Label shadow padding",
+    "Reflow continue group when locale changes",
+    "Remove floating crown and ellipse only; retain other authored cues"
+  ],
+  "validation": {
+    "typecheck": {
+      "command": "npm run check",
+      "result": "passed"
+    },
+    "webExport": {
+      "command": "npm run start:test",
+      "result": "passed",
+      "output": "src/cocos/build/concept-2d",
+      "profile": "test",
+      "mode": "actual WebGL 3D game and Cocos UI; HTML preview login"
+    },
+    "browserIntegration": {
+      "url": "http://127.0.0.1:7469/?view=2d&player=3d",
+      "checks": [
+        "Actual Cocos 3D scene at 844x390, 932x430 and 1280x720; original font sizes and centered captions; geometric arrow; crown geometry empty",
+        "Real touch on arrow advances the same continue button",
+        "Background hides presentation and foreground resumes same beat",
+        "Real language setting refreshes active controls in English and Chinese without resizing fonts",
+        "Real skip touch closes presentation and restores HUD"
+      ],
+      "captures": [
+        {
+          "name": "iphone14",
+          "scene": {
+            "id": "border-spear",
+            "beat": 0,
+            "page": 0,
+            "pages": 1,
+            "time": 0.7667999999523162,
+            "title": "冠与龙的残纹",
+            "phase": "playing",
+            "subtitles": {
+              "speaker": "拉斐尔",
+              "text": "矛尖上是王冠，下面却压着一片龙翼。新爪痕全都背向群山。",
+              "fontSize": 18,
+              "lineHeight": 27,
+              "subtitle": {
+                "x": 422,
+                "y": 323,
+                "width": 579.9999999999999
+              },
+              "controls": [
+                "跳过剧情",
+                "继续"
+              ],
+              "continueGeometry": {
+                "labelX": -12.875076923076923,
+                "arrowX": 30.640615384615387,
+                "arrowY": 2.0261538461538464,
+                "width": 11.076923076923077,
+                "height": 17.27856,
+                "gap": 14.76923076923077
+              },
+              "hit": 47.99999999999999,
+              "layout": {
+                "unit": 1.8461538461538463,
+                "hit": 88.61538461538461,
+                "controlWidth": 158.76923076923077,
+                "left": 40.61538461538462,
+                "right": 1517.5384615384617,
+                "top": 25.846153846153847,
+                "bottom": 675.6923076923077,
+                "captionWidth": 1070.7692307692307,
+                "captionX": 779.0769230769231,
+                "captionY": 596.3076923076924,
+                "speakerY": 505.8461538461539,
+                "skipX": 1438.1538461538462,
+                "skipY": 70.15384615384616,
+                "continueX": 1438.1538461538462,
+                "continueY": 631.3846153846155
+              }
+            }
+          },
+          "fontSizes": {
+            "caption": 18,
+            "speaker": 14,
+            "control": 13
+          },
+          "control": {
+            "label": {
+              "x": 772.0260000000001,
+              "y": 342.00000000000006
+            },
+            "arrow": {
+              "x": 795.597,
+              "y": 340.90250000000003
+            },
+            "fontCss": 13,
+            "arrowWidthCss": 6,
+            "arrowHeightCss": 9.359219999999999
+          },
+          "hud": {
+            "width": 1558.1538461538462,
+            "height": 720
+          },
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 3
+          },
+          "crownVertices": [
+            0
+          ],
+          "geometryArrow": true
+        },
+        {
+          "name": "iphone14-max",
+          "scene": {
+            "id": "border-spear",
+            "beat": 0,
+            "page": 0,
+            "pages": 1,
+            "time": 2.1714999999999995,
+            "title": "冠与龙的残纹",
+            "phase": "playing",
+            "subtitles": {
+              "speaker": "拉斐尔",
+              "text": "矛尖上是王冠，下面却压着一片龙翼。新爪痕全都背向群山。",
+              "fontSize": 18,
+              "lineHeight": 27,
+              "subtitle": {
+                "x": 422,
+                "y": 323,
+                "width": 579.9999999999999
+              },
+              "controls": [
+                "跳过剧情",
+                "继续"
+              ],
+              "continueGeometry": {
+                "labelX": -12.875076923076923,
+                "arrowX": 30.640615384615387,
+                "arrowY": 2.0261538461538464,
+                "width": 11.076923076923077,
+                "height": 17.27856,
+                "gap": 14.76923076923077
+              },
+              "hit": 47.99999999999999,
+              "layout": {
+                "unit": 1.8461538461538463,
+                "hit": 88.61538461538461,
+                "controlWidth": 158.76923076923077,
+                "left": 40.61538461538462,
+                "right": 1517.5384615384617,
+                "top": 25.846153846153847,
+                "bottom": 675.6923076923077,
+                "captionWidth": 1070.7692307692307,
+                "captionX": 779.0769230769231,
+                "captionY": 596.3076923076924,
+                "speakerY": 505.8461538461539,
+                "skipX": 1438.1538461538462,
+                "skipY": 70.15384615384616,
+                "continueX": 1438.1538461538462,
+                "continueY": 631.3846153846155
+              }
+            }
+          },
+          "fontSizes": {
+            "caption": 18,
+            "speaker": 14,
+            "control": 13
+          },
+          "control": {
+            "label": {
+              "x": 852.5216018957346,
+              "y": 377.0769230769231
+            },
+            "arrow": {
+              "x": 878.550241706161,
+              "y": 375.86685897435905
+            },
+            "fontCss": 14.333333333333334,
+            "arrowWidthCss": 6.625592417061611,
+            "arrowHeightCss": 10.319139999999999
+          },
+          "hud": {
+            "width": 1558.1538461538462,
+            "height": 720
+          },
+          "viewport": {
+            "width": 932,
+            "height": 430,
+            "dpr": 3
+          },
+          "crownVertices": [
+            0
+          ],
+          "geometryArrow": true
+        },
+        {
+          "name": "desktop",
+          "scene": {
+            "id": "border-spear",
+            "beat": 0,
+            "page": 0,
+            "pages": 1,
+            "time": 3.607766666690507,
+            "title": "冠与龙的残纹",
+            "phase": "playing",
+            "subtitles": {
+              "speaker": "拉斐尔",
+              "text": "矛尖上是王冠，下面却压着一片龙翼。新爪痕全都背向群山。",
+              "fontSize": 18,
+              "lineHeight": 27,
+              "subtitle": {
+                "x": 422,
+                "y": 323,
+                "width": 579.9999999999999
+              },
+              "controls": [
+                "跳过剧情",
+                "继续"
+              ],
+              "continueGeometry": {
+                "labelX": -12.875076923076923,
+                "arrowX": 30.640615384615387,
+                "arrowY": 2.0261538461538464,
+                "width": 11.076923076923077,
+                "height": 17.27856,
+                "gap": 14.76923076923077
+              },
+              "hit": 47.99999999999999,
+              "layout": {
+                "unit": 1.8461538461538463,
+                "hit": 88.61538461538461,
+                "controlWidth": 158.76923076923077,
+                "left": 40.61538461538462,
+                "right": 1517.5384615384617,
+                "top": 25.846153846153847,
+                "bottom": 675.6923076923077,
+                "captionWidth": 1070.7692307692307,
+                "captionX": 779.0769230769231,
+                "captionY": 596.3076923076924,
+                "speakerY": 505.8461538461539,
+                "skipX": 1438.1538461538462,
+                "skipY": 70.15384615384616,
+                "continueX": 1438.1538461538462,
+                "continueY": 631.3846153846155
+              }
+            }
+          },
+          "fontSizes": {
+            "caption": 18,
+            "speaker": 14,
+            "control": 13
+          },
+          "control": {
+            "label": {
+              "x": 1170.8451184834123,
+              "y": 631.3846153846155
+            },
+            "arrow": {
+              "x": 1206.592606635071,
+              "y": 629.3584615384616
+            },
+            "fontCss": 24,
+            "arrowWidthCss": 9.09952606635071,
+            "arrowHeightCss": 17.27856
+          },
+          "hud": {
+            "width": 1558.1538461538462,
+            "height": 720
+          },
+          "viewport": {
+            "width": 1280,
+            "height": 720,
+            "dpr": 3
+          },
+          "crownVertices": [
+            0
+          ],
+          "geometryArrow": true
+        },
+        {
+          "name": "english",
+          "scene": {
+            "id": "border-spear",
+            "beat": 1,
+            "page": 0,
+            "pages": 2,
+            "time": 0.7138000000119209,
+            "title": "Traces of Crown and Dragon",
+            "phase": "playing",
+            "subtitles": {
+              "speaker": "Mira's Hunting Notes",
+              "text": "The beasts aren't an invading vanguard. Someone has awakened\nsomething far older in the mountains. Go to Broken Wheel Mill next.",
+              "fontSize": 18,
+              "lineHeight": 27,
+              "subtitle": {
+                "x": 422,
+                "y": 323,
+                "width": 579.9999999999999
+              },
+              "controls": [
+                "Skip story",
+                "Continue"
+              ],
+              "continueGeometry": {
+                "labelX": -13.067076923076929,
+                "arrowX": 60.952615384615385,
+                "arrowY": 2.0861538461538465,
+                "width": 11.076923076923077,
+                "height": 14.86368,
+                "gap": 14.76923076923077
+              },
+              "hit": 47.99999999999999,
+              "layout": {
+                "unit": 1.8461538461538463,
+                "hit": 88.61538461538461,
+                "controlWidth": 158.76923076923077,
+                "left": 40.61538461538462,
+                "right": 1517.5384615384617,
+                "top": 25.846153846153847,
+                "bottom": 675.6923076923077,
+                "captionWidth": 1070.7692307692307,
+                "captionX": 779.0769230769231,
+                "captionY": 596.3076923076924,
+                "speakerY": 505.8461538461539,
+                "skipX": 1438.1538461538462,
+                "skipY": 70.15384615384616,
+                "continueX": 1438.1538461538462,
+                "continueY": 631.3846153846155
+              }
+            }
+          },
+          "fontSizes": {
+            "caption": 18,
+            "speaker": 14,
+            "control": 13
+          },
+          "control": {
+            "label": {
+              "x": 771.9219999999999,
+              "y": 342.00000000000006
+            },
+            "arrow": {
+              "x": 812.016,
+              "y": 340.87000000000006
+            },
+            "fontCss": 13,
+            "arrowWidthCss": 6,
+            "arrowHeightCss": 8.05116
+          },
+          "hud": {
+            "width": 1558.1538461538462,
+            "height": 720
+          },
+          "viewport": {
+            "width": 844,
+            "height": 390,
+            "dpr": 3
+          },
+          "crownVertices": [
+            0
+          ],
+          "geometryArrow": true
+        }
+      ],
+      "errors": [],
+      "status": "passed"
+    },
+    "actualScreenshotAlignment": {
+      "method": "Color-isolated visible glyph bounds from actual Cocos screenshots; 1.5 physical-pixel antialias tolerance",
+      "results": [
+        {
+          "capture": "iphone14",
+          "textInkBoundsPhysical": [
+            2278,
+            1005,
+            2352,
+            1040
+          ],
+          "arrowInkBoundsPhysical": [
+            2378,
+            1008,
+            2396,
+            1036
+          ],
+          "centerDifferencePhysicalPx": 0.5,
+          "centerDifferenceLogicalPx": 0.16666666666666666
+        },
+        {
+          "capture": "iphone14-max",
+          "textInkBoundsPhysical": [
+            2516,
+            1108,
+            2598,
+            1147
+          ],
+          "arrowInkBoundsPhysical": [
+            2625,
+            1111,
+            2646,
+            1143
+          ],
+          "centerDifferencePhysicalPx": 0.5,
+          "centerDifferenceLogicalPx": 0.16666666666666666
+        },
+        {
+          "capture": "desktop",
+          "textInkBoundsPhysical": [
+            3455,
+            1855,
+            3568,
+            1921
+          ],
+          "arrowInkBoundsPhysical": [
+            3606,
+            1861,
+            3634,
+            1914
+          ],
+          "centerDifferencePhysicalPx": 0.5,
+          "centerDifferenceLogicalPx": 0.16666666666666666
+        },
+        {
+          "capture": "english",
+          "textInkBoundsPhysical": [
+            2229,
+            1008,
+            2402,
+            1038
+          ],
+          "arrowInkBoundsPhysical": [
+            2427,
+            1010,
+            2445,
+            1034
+          ],
+          "centerDifferencePhysicalPx": 1.0,
+          "centerDifferenceLogicalPx": 0.3333333333333333
+        }
+      ]
+    },
+    "existingTests": {
+      "command": "npm test",
+      "passed": 149,
+      "failed": 1,
+      "total": 150,
+      "failure": "terrain water barriers preserve real walking approaches to every object, exit and return entry: H07/growing-rematch:SIDE_C2_BRIDGE is on dry land or an intact bridge",
+      "failureScope": "Chapter-two terrain/object data; neither production subtitle file imports or changes this terrain data"
+    },
+    "fixtureScope": "Fresh isolated browser context; existing GameSession and rebuild used to set up S02 border-spear. Continue/skip used real touch events; language used existing settings action. This is not a playthrough or native platform acceptance."
+  },
+  "persistentEvidence": {
+    "screenshot": "source-art/ui/cinematic-dialogue-v4/runtime-iphone14.png",
+    "continueDetail": "source-art/ui/cinematic-dialogue-v4/runtime-continue-detail.png"
+  },
+  "sourceSha256": {
+    "src/cocos/assets/scripts/features/cinematics/runtime/CinematicSubtitles.ts": "a7df67e82b9e685762feb30f96f11d0cfd35e2206e377190f7af04f428fd57d9",
+    "src/cocos/assets/scripts/features/cinematics/runtime/CinematicCues.ts": "b68808011077707acf3cb4ce6be62970bdfbbd1fe6ad22fe9007648001c940ae",
+    "src/cocos/assets/scripts/features/cinematics/common/CinematicLayout.ts": "b870f39509b9667db7dc7fbde69303c11b12f207673f2453b508198cee00374b",
+    "src/cocos/assets/resources/ui/quiet-bronze/rpg-serif-v2.ttf": "73e4bc99c6cc3e656844d9436f59b162e6a4608af8bcba15dafd92a8ca5908ab"
+  },
+  "packaged": false,
+  "uploaded": false,
+  "pending": [
+    "TapTap package rebuild, platform launch, real-device safe areas and physical touch acceptance"
+  ],
+  "followUp": {
+    "date": "2026-11-15",
+    "h07TerrainFailure": "resolved; all 150 current tests pass",
+    "validation": "auto-story-validation.json"
+  }
+}

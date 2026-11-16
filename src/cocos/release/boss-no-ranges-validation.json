@@ -1,0 +1,56 @@
+{
+  "schemaVersion": 1,
+  "feature": "boss-no-range-overlays",
+  "createdAt": "2026-11-15T16:19:21.325297+00:00",
+  "profile": "test",
+  "version": "0.3.50",
+  "changes": [
+    "Hide Boss and elite attack range contours, direction arrows and projectile aim guides.",
+    "Hide Boss-owned persistent-hazard boundary contours; retain actual hazard effects and attackable anchors.",
+    "Preserve ordinary enemy cues, real glint/slash/projectiles and combat rules."
+  ],
+  "checks": {
+    "typescript": "passed",
+    "webMobileBuild": "passed",
+    "renderPolicy": "passed",
+    "profileVerification": "normal test",
+    "fbxMetadataChanges": 0,
+    "browser": {
+      "passed": 7,
+      "total": 7,
+      "views": [
+        {
+          "name": "phone",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "cases": 2
+        },
+        {
+          "name": "large-phone",
+          "viewport": {
+            "width": 932,
+            "height": 430
+          },
+          "cases": 2
+        },
+        {
+          "name": "desktop",
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "cases": 3
+        }
+      ],
+      "runtimeErrors": 0,
+      "consoleErrors": 0
+    }
+  },
+  "preview": "http://127.0.0.1:7487/?view=2d&player=3d&progression=natural",
+  "evidence": "src/cocos/test-results/boss-no-ranges",
+  "sourceReview": "source-review.json",
+  "browserScope": "Isolated controlled-level fixtures and assisted initial positions; actual production frame loop, input and effect calls. No fake success events. No TapTap device acceptance claim.",
+  "supersedesPresentationOnly": "src/cocos/release/combat-tactics-validation.json"
+}

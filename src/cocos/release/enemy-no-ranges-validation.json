@@ -1,0 +1,77 @@
+{
+  "schemaVersion": 1,
+  "feature": "all-enemy-no-range-overlays",
+  "date": "2026-11-16",
+  "profile": "test",
+  "changes": [
+    "Remove ordinary enemy attack contours, direction arrows, ranged aim guides and persistent field boundaries; Boss/elite overlays remain removed.",
+    "Preserve real anticipation, release effects, projectiles, hazards, damage and combat timing.",
+    "Update Chinese and English help to observe attack animations and recovery."
+  ],
+  "checks": {
+    "typescript": "passed",
+    "webMobileBuild": "passed",
+    "renderPolicy": "passed",
+    "browser": {
+      "passed": true,
+      "cases": [
+        {
+          "id": "s04-melee-windup",
+          "passed": true,
+          "geometryCount": 1,
+          "rangeLineCount": 0
+        },
+        {
+          "id": "s04-melee-locked",
+          "passed": true,
+          "geometryCount": 1,
+          "rangeLineCount": 0
+        },
+        {
+          "id": "s04-melee-active",
+          "passed": true,
+          "geometryCount": 1,
+          "rangeLineCount": 0
+        },
+        {
+          "id": "s04-real-spit-projectile",
+          "passed": true,
+          "geometryCount": 0,
+          "rangeLineCount": 0
+        },
+        {
+          "id": "real-enemy-persistent-field",
+          "passed": true,
+          "geometryCount": 0,
+          "rangeLineCount": 0
+        }
+      ],
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "visualReview": "Ordinary enemy active frame inspected at 844x390/DPR3; no fan/rectangle lines. Real projectile and field emitters separately verified and reviewed."
+    },
+    "presentationFixture": {
+      "passed": true,
+      "scope": "Presentation-only controlled hazard object, never inserted into GameSession and never used as evidence of actual AI or damage"
+    },
+    "compiledProfileVerified": true
+  },
+  "sourceSha256": {
+    "assets/scripts/features/combat/runtime/NativeEnemyVfx.ts": "456417918468b0af48f0229492f9e7070736338fa45fb437b4b1d5b1529c8f72",
+    "assets/scripts/features/combat/runtime/Effects.ts": "644208d761b51f36735ad142ee918dfaa0220bcad31b7a429c01124b91feb279",
+    "assets/scripts/features/combat/locales/TacticsText.ts": "e591b3b2ae9fa5422de50338bb14fbc88dc73df01d29ad41cc916973019d1d56"
+  },
+  "evidence": "src/cocos/test-results/enemy-no-ranges/browser-review.json",
+  "scope": "Completed current test build snapshot src/cocos/temp/enemy-no-ranges-web-c25c1r6o served independently on7498; official compiled test profile verified. Isolated HTML test=max context. Controlled max level and placement near authored enemies; real ChapterGame combat loop, no injected hit/release/success events and no user save writes. Enemy host calls are observed without changing execution. TapTap and target-device acceptance pending.",
+  "preview": "http://127.0.0.1:7498/?view=2d&player=3d",
+  "pending": [
+    "TapTap target-device visual and touch acceptance"
+  ],
+  "verifiedPreviewSnapshot": {
+    "path": "F:\\workspace\\Singularity\\src\\cocos\\temp\\enemy-no-ranges-web-c25c1r6o",
+    "url": "http://127.0.0.1:7498/?view=2d&player=3d",
+    "compiledProfileVerified": true,
+    "containsRangeRemoval": true
+  },
+  "standardPreview": "http://127.0.0.1:7469/?view=2d&player=3d"
+}

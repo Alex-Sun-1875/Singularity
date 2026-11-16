@@ -2,9 +2,11 @@ import type {AreaDef,Point,WorldQuery} from '../../../core/Contracts';
 import type {EnemyState,GameSession} from '../../../core/GameSession';
 import type {NavigationTarget} from '../../automation/common/Automation';
 import {availableRoutes,enemyApproachPath} from '../../automation/common/AutomationRoute';
-import {chapterForArea,PLAYABLE_CHAPTERS,JOURNEY_TASKS} from '../data/ChapterJourney';
+import {chapterForArea,PLAYABLE_CHAPTERS,JOURNEY_TASKS,type JourneyTask} from '../data/ChapterJourney';
 import {HUNTING_GROUNDS,HUNT_ENCOUNTERS} from '../../world/data/MonsterEcology';
 import {journeyText as tr} from '../locales';
+import {chapterTwoEncounterView} from '../../campaign/common/ChapterTwoEncounters';
+import {CHAPTER_TWO_SIDE_QUEST_EVENTS,CHAPTER_TWO_SIDE_QUESTS} from '../../campaign/data/ChapterTwoSideQuests';
 
 export interface JourneyGuidance {
  destination:NavigationTarget;point:Point;bearing:Point;distance:number;hops:number;nextArea?:string;
@@ -50,6 +52,33 @@ export function journeyGuidance(game:GameSession,areas:Record<string,AreaDef>,wo
  // A blocked nearest enemy must not hide the rest of a reachable encounter.
  // Preserve the true blocked result when none of the living targets can be met.
  const reachableEnemy=(enemies:EnemyState[])=>enemies.find(e=>guidancePath(game,local,world,e).length)??enemies[0];
+ const encounterTarget=(current:JourneyTask)=>{
+  const view=chapterTwoEncounterView(s,current.encounterId??current.id),generic=areas[current.area]?.objects.find(o=>o.action==='journey_task'&&o.eventId===current.id);
+  if(view?.resolved)return {target:{area:current.area,point:generic??areas[current.area].spawn,label:current.name,objectId:generic?.id} as NavigationTarget,detail:tr('growth.encounterResolved')};
+  if(view&&'combatStarted'in view&&view.combatStarted===true){
+   const enemies=s.area===current.area?s.enemies.filter(e=>e.hp>0&&!e.respawnSeconds&&!e.trainingEnemy).sort((a,b)=>distance(a,p)-distance(b,p)):[],enemy=reachableEnemy(enemies);
+   return {target:{area:current.area,point:enemy??areas[current.area].spawn,label:current.name} as NavigationTarget,detail:tr(enemy?'growth.encounterBattle':'growth.encounterWave')};
+  }
+  const available=view?.routes.filter(route=>route.available)??[],interactions=available.filter(route=>route.method!=='battle'),choices=interactions.length?interactions:available;
+  // Pick a nearby interaction, never an answer inferred from the mechanism sequence.
+  // Explicit route selections continue through navigationGuidance unchanged.
+  const origin=s.area===current.area?p:areas[current.area].spawn;
+  const ranked=choices.slice().sort((a,b)=>distance(origin,a.point)-distance(origin,b.point));
+  const route=ranked.find(candidate=>candidate.area!==s.area||guidancePath(game,local,world,candidate.point).length)??ranked[0];
+  if(!route)return {target:{area:current.area,point:generic??areas[current.area].spawn,label:current.name} as NavigationTarget,detail:tr('growth.encounterUnavailable')};
+  const object=areas[route.area]?.objects.find(o=>o.eventId===route.eventId&&o.action==='campaign_event');
+  return {target:{area:route.area,point:object??route.point,label:route.label,objectId:object?.id} as NavigationTarget,detail:tr(current.encounterId==='oath-array'?'growth.mechanismRoute':'growth.encounter')};
+ };
+ const sideQuestTarget=()=>{
+  if(!s.progression.secondChapter)return;
+  for(const quest of CHAPTER_TWO_SIDE_QUESTS){
+   const id=quest.steps.find(step=>s.receipts['campaign:'+step]!==true),event=CHAPTER_TWO_SIDE_QUEST_EVENTS.find(def=>def.id===id);
+   if(!event||!game.campaignEventAvailability(event.id,true).available)continue;
+   const object=areas[event.area]?.objects.find(o=>o.action==='campaign_event'&&o.eventId===event.id);
+   if(!object)continue;
+   target={area:event.area,point:object,label:event.label,objectId:object.id,sideQuest:true};instruction=quest.name;detail=tr('growth.sideQuest',{quest:quest.name});return;
+  }
+ };
  const hunting=(preferredArea?:string)=>{
   kind='hunt';
   const grounds=Object.entries(HUNTING_GROUNDS).filter(([,def])=>def.level<=s.progression.level+1).map(([id,def])=>({id,def,route:routeTo(id)})).filter(v=>v.route!==null);
@@ -70,7 +99,8 @@ export function journeyGuidance(game:GameSession,areas:Record<string,AreaDef>,wo
  else if(task){
   const object=areas[task.area]?.objects.find(o=>o.action==='journey_task'&&o.eventId===task!.id);
   target={area:task.area,point:object??areas[task.area].spawn,label:task.name,objectId:task.goal==='observe'?object?.id:undefined};instruction=task.name;
-  if(s.area===task.area){
+  if(task.goal==='encounter'){const encounter=encounterTarget(task);target=encounter.target;detail=encounter.detail;}
+  else if(s.area===task.area){
    if(task.goal==='observe')detail='靠近金色标记 · 交互观察';
    else if(game.journey.ready(task))detail='目标达成 · 奖励自动结算';
    else {
@@ -81,18 +111,21 @@ export function journeyGuidance(game:GameSession,areas:Record<string,AreaDef>,wo
    }
   }else detail='前往'+areas[task.area].name;
  }else if(!s.receipts[`journey:boss:${chapter.id}`]){
-  if(s.progression.level<chapter.endLevel&&s.area!==chapter.arena){hunting();detail=tr('growth.boss',{level:chapter.endLevel,current:s.progression.level});}
+  if(chapter.id===1&&s.progression.level<chapter.endLevel&&s.area!==chapter.arena){hunting();detail=tr('growth.boss',{level:chapter.endLevel,current:s.progression.level});}
   else {kind='boss';const boss=s.area===chapter.arena?s.enemies.find(e=>e.hp>0&&e.bossId===chapter.boss):undefined;
-   target={area:chapter.arena,point:boss??areas[chapter.arena].enemies.find(e=>e.bossId===chapter.boss)??areas[chapter.arena].spawn,label:chapter.bossName};instruction='挑战'+chapter.bossName;detail='共同关底 · 胜利即可通关';}
+   target={area:chapter.arena,point:boss??areas[chapter.arena].enemies.find(e=>e.bossId===chapter.boss)??areas[chapter.arena].spawn,label:chapter.bossName};instruction='挑战'+chapter.bossName;detail=s.progression.level<chapter.endLevel?tr('growth.boss',{level:chapter.endLevel,current:s.progression.level}):'共同关底 · 胜利即可通关';}
  }else if(chapter.id===1&&s.progression.level>=11&&(!s.receipts['journey:boss:2']||game.journey.currentTask(2))){
-  task=game.journey.currentTask(2);const c=PLAYABLE_CHAPTERS[1],object=task&&areas[task.area].objects.find(o=>o.eventId===task!.id);target={area:task?.area??c.arena,point:object??areas[task?.area??c.arena].spawn,label:task?.name??c.bossName,objectId:task?.goal==='observe'?object?.id:undefined};instruction='第二章 · '+(task?.name??c.bossName);detail='前往高地继续旅程';
- }else hunting();
+  task=game.journey.currentTask(2);const c=PLAYABLE_CHAPTERS[1],object=task&&areas[task.area].objects.find(o=>o.eventId===task!.id);target={area:task?.area??c.arena,point:object??areas[task?.area??c.arena].spawn,label:task?.name??c.bossName,objectId:task?.goal==='observe'?object?.id:undefined};instruction='第二章 · '+(task?.name??c.bossName);detail='前往高地继续旅程';if(task?.goal==='encounter'){const encounter=encounterTarget(task);target=encounter.target;detail=encounter.detail;}
+ }else if(chapter.id===1)hunting();
+ else sideQuestTarget();
  if(!target)return null;
+ target.journey=true;
  if(task&&(selected||preference!=='hunt'))target.taskId=task.id;
  const route=routeTo(target.area),point=route?.[0]??target.point;
  const path=route===null?[]:guidancePath(game,local,world,point),blocked=route===null||!path.length;
  const bearing=path.find(q=>distance(q,p)>1.5)??point;
  if(route?.length)detail=`下一站 ${areas[route[0].to].name} · ${route.length}次过图`;
+ if(task&&kind==='task'&&(selected||preference!=='hunt')){const reward=game.journey.rewardView(task);detail+=' · '+tr('growth.taskReward',{experience:reward.experience,level:reward.afterLevel});}
  const targetId=(point as Point&{id?:string}).id,targetType:JourneyGuidance['targetType']=route?.length?'exit':targetId&&s.enemies.some(e=>e.id===targetId)?'enemy':targetId&&local.objects.some(o=>o.id===targetId)?'object':'position';
  const metres=path.slice(1).reduce((n,q,i)=>n+distance(q,path[i]),0)+(targetType==='enemy'&&path.length?distance(path[path.length-1],point):0);
  return {destination:target,point,bearing,distance:metres,hops:route?.length??0,nextArea:route?.[0]?.to,instruction,detail,safe:!local.enemies.length,blocked,kind,targetId,targetType};

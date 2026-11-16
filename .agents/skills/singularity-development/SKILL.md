@@ -11,6 +11,7 @@ description: "开发、修复和打包 Singularity（剑与火）的 Cocos / Tap
 
 - 当前主工程：`src/cocos/`，Cocos Creator 3.8.8 / TypeScript，TapTap 小游戏，Android 横屏优先。Maker / UrhoX / Lua 仅用于明确指定的历史工程维护。
 - 架构调整先读 `docs/architecture/cocos-feature-modules.md`；保持功能模块、公共状态和平台适配的现有边界。
+- 涉及平台能力、入口、存储或浏览器试玩时，读取 `docs/development/platform-adapters.md`；按其中的 TapTap／HTML 差异表检查已有适配，不把资源预览或玩法档位当成运行平台。
 - 打包、版本或发布任务必须读 `docs/development/build-profiles.md` 与 `src/cocos/release/README.md`，并检查当前脚本的真实参数。规范要求与脚本实现状态分别报告。
 - UI / HUD / 交互改动读取仓库 `.agents/skills/singularity-ui-design/SKILL.md`，按其中的设计规范执行。
 
@@ -23,12 +24,20 @@ description: "开发、修复和打包 Singularity（剑与火）的 Cocos / Tap
 - 性能优化保持既有手机帧率，不以新增限帧或降低帧率上限解决发热。
 - 浏览器验证、本地转换、TapTap 平台验证和目标真机验收分别记录；缺少平台证据时列出待验证项。
 
+## TapTap 与 HTML 隔离
+
+- 平台统一由 `platform/RuntimePlatform.ts` 的 Cocos 构建／运行标志选择。dev / test / release 与资源分包预览独立，不按 `tap`、`wx`、`window` 是否存在或 URL 参数猜平台。
+- 共用玩法和状态契约，差异留在 `platform/`；优先复用 Cocos 已适配的输入、音频、生命周期和资源加载。需要独立实现时使用共同接口与各平台适配，不在业务层直接调用 `tap.*` 或浏览器 DOM/BOM。
+- 浏览器 URL／history 只通过 `HtmlPreview` 用于 HTML；小游戏入口不读取。分包资源图预览使用专用标记，仅改变资源路由，不启用小游戏登录、存储、更新或 release 身份。
+- 主存档、偏好、地图迷雾和诊断统一经 `PlatformStorage`／`PlatformServices` 持久化，dev 的读取、写入、枚举、删除均带隔离前缀。平台能力缺失不得静默换后端、读取正常档位作回退或伪造存档／登录成功。
+- 验证覆盖错误平台接口不被访问，以及失败、后台、恢复和监听清理。HTML、官方转换和 TapTap 真机证据分别记录；具体差异及验收范围维护在 `docs/development/platform-adapters.md`。
+
 ## 打包选择
 
 | 用户意图 | 选择 | 玩法规则 |
 | --- | --- | --- |
 | 只说“打包”“测试包”“给我一个包”，未指定类型 | `test`，默认 | 正常冷却、正常经验、正常每日限额，无开发加速覆盖 |
-| 明确要求 dev / 开发加速包，或要求在本次包中用加速机制跑流程 | `dev` | 默认技能无冷却、怪物经验 ×5、取消每日经验获取限制、Boss 分别保底结算传奇与神器；当次指定的开关和倍率优先 |
+| 明确要求 dev / 开发加速包，或要求在本次包中用加速机制跑流程 | `dev` | 技能采用正常冷却、怪物经验 ×5、取消每日经验获取限制、Boss 分别保底结算传奇与神器；当次指定的开关和倍率优先 |
 | 明确要求 release / 正式发布包 | `release` | 正常游戏规则，关闭开发加速与游客绕过，附 release 更新日志 |
 
 “开发中”“方便测试”或旧脚本的默认值不构成 release 指令。一次 release 请求不改变后续未指定打包任务的 `test` 默认值。用户已明确指定 release 时直接执行所需工作，不重复索要确认；打包本身不等于授权上传、提审或公开发布。
@@ -39,9 +48,11 @@ dev 覆盖须集中配置、只对 dev 生效，并记录本次实际开关；�
 
 ## 当前入口与交付
 
+本地网页支持 `npm start dev` / `npm start test`，无参数默认 test，另提供 `npm run start:dev` / `npm run start:test`。test 默认7469、dev默认7470，分别使用 `concept-2d` / `concept-2d-dev` 输出；复用公共编译档位与 dev 存储隔离，源码／资源变化时重建、验证编译标记后复用缓存，不升版。`Run-Concept2D.ps1` 负责启动和端口身份检查，`Build-Local.ps1 -Profile dev|test` 负责导出与 dev 后恢复正常 test 配置；仍共用项目构建锁。网页登录继续标为 preview，不作为小游戏平台登录结论。
+
 `npm run pack:taptap`、`npm run build:tap` 和脚本无参数调用均默认 test。显式档位入口为 `npm run pack:taptap:dev`、`npm run pack:taptap:test`、`npm run pack:taptap:release`，统一 Node 脚本参数为 `--mode dev|test|release`，兼容入口接受 `-Profile dev|test|release`。只有明确要求正式发布包时才选择 release。旧 `-TestPackage` 作为 test 兼容别名保留；游客测试仍单独使用 `pack:taptap:guest`。`--check`（兼容 `-ValidateOnly`）只检查参数与配置，不升版、不导出。
 
-dev 覆盖来自生成的只读 `shared/BuildProfile.ts`，导出与转换核对实际编译标记，不能靠改包名转换档位。dev 在平台存储层使用 `singularity.dev.` 前缀隔离所有本机数据，打包结束或失败后恢复编辑器的正常 test 配置。无冷却保留动作与资源消耗；经验倍率只作用于怪物奖励，不放大任务经验；每日经验不限同时跳过共享限额、挂机子限额及其衰减。 Boss 每次有效击杀按当前职业与章节分别结算一件传奇和一件神器，未拥有优先；唯一装备已集齐或数量已满时沿用原重复补偿。保留真实击杀、复战间隔、拾取与来源凭证校验，不通过加载同一尸体重复领奖。test / release 保持正常概率与保底，并拒绝 dev 强制掉落凭证。规则变更会更新编译标记的配置摘要，旧包不能只改名或改报告冒充新规则。
+dev 覆盖来自生成的只读 `shared/BuildProfile.ts`，导出与转换核对实际编译标记，不能靠改包名转换档位。dev 在平台存储层使用 `singularity.dev.` 前缀隔离所有本机数据，打包结束或失败后恢复编辑器的正常 test 配置。技能冷却、动作与资源消耗沿用正常规则；经验倍率只作用于怪物奖励，不放大任务经验；每日经验不限同时跳过共享限额、挂机子限额及其衰减。 Boss 每次有效击杀按当前职业与章节分别结算一件传奇和一件神器，未拥有优先；唯一装备已集齐或数量已满时沿用原重复补偿。保留真实击杀、复战间隔、拾取与来源凭证校验，不通过加载同一尸体重复领奖。test / release 保持正常概率与保底，并拒绝 dev 强制掉落凭证。规则变更会更新编译标记的配置摘要，旧包不能只改名或改报告冒充新规则。
 
 dev 另提供按需点击的“DEV 快速验证”，入口在暂停与设置 → 旅途：补满生命／职业资源、补齐药水、金币与锻造材料补至 9999、等级＋5／升至40级、清除 Boss 再战等待，并可进入既有技能训练场。操作通过 `GameSession.developmentTools` 集中处理，test / release 禁止执行。新旅程不自动补给或升满级；死亡、剧情、装备凭证、消耗与真实再战仍沿用正常流程。验证时区分工具辅助与正常流程结论，工具验证不能用来宣称经济、成长节奏或 Boss 等待已经通过正常包验收。
 

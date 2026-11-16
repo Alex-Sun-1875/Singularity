@@ -9,6 +9,7 @@ import {RpgPanel} from '../../../shared/ui/RpgPanel';
 import {renderCharacterStats} from '../../equipment/runtime/EquipmentPanels';
 import {UiSkin} from '../../../shared/ui/UiSkin';
 import {COMBAT_SKILL_ICONS} from '../../combat/runtime/CombatSkillIcons';
+import {skillRoleLabel,skillRankFacts} from '../../combat/runtime/CombatSkillDescription';
 import {UI_COLORS as C} from '../../../shared/ui/UiTheme';
 import {FeedbackView as F} from '../../../shared/ui/FeedbackView';
 import {PreparationSkin as P} from '../../../shared/ui/PreparationSkin';
@@ -52,21 +53,21 @@ export function renderCombatPanel(hud:Hud,game:GameSession,tab:'skills'|'growth'
  P.art(ui,chooser,'button-dark',0,0,170,35,true);ui.text(chooser,NAMES[v.family]+'技能 ⌄',0,0,158*u,28*u,F.color('state.selected'),17*u).horizontalAlign=Label.HorizontalAlign.CENTER;
  const motif=UiSkin.asset(ui.panel,'rpg-profession-'+(v.family==='COM'?'war':v.family.toLowerCase())+'-v1',162*u,64*u,false);motif.node.setPosition(ui.x(99),ui.y(a+hu+gap+34));
  T(`可用技能点 ${game.state.progression.skillPoints}`,99,mainBottom-40,170,25,13.5,C.gold).horizontalAlign=Label.HorizontalAlign.CENTER;
- T('四个普通技能＋一个终极',99,mainBottom-12,170,28,11.5,C.muted).horizontalAlign=Label.HorizontalAlign.CENTER;
+ T('固定技能栏 · 解锁后原位启用',99,mainBottom-12,170,28,11.5,C.muted).horizontalAlign=Label.HorizontalAlign.CENTER;
  const skills=COMBAT_SKILL_LIST.filter(s=>s.style===v.family),models=game.combatSkillView();if(!skills.some(s=>s.id===v.selected))v.selected=skills[0].id;
  const row=hu+gap,list=ui.scroll(catalog,0,ui.y((a+mainBottom)/2)-ui.bodyY,316*u,(mainBottom-a)*u,skills.length*row*u);list.name='CombatSkillListContent';const scroll=list.parent!.parent!.getComponent(ScrollView)!;if(v.scroll)scroll.scrollToOffset(new Vec2(0,v.scroll),0);
  skills.forEach((skill,i)=>{
   const model=models.find(m=>m.id===skill.id)!,rank=game.state.progression.learned[skill.id]??0,n=ui.button(list,'',0,(-hu/2-i*row)*u,310*u,'CombatSkill:'+skill.id,true,false,ui.hit,()=>{v.selected=skill.id;v.scroll=scroll.getScrollOffset().y;renderCombatPanel(hud,game);},'catalog');
   Controls.rowBackground(ui,n,310,hu-4,v.selected===skill.id);
   skillIcon(ui,n,skill.id,40).setPosition(-123*u,0);const title=ui.text(n,skill.name,-14*u,7*u,154*u,24*u,model.unlocked?C.ink:C.muted,16.5*u);title.enableWrapText=false;title.overflow=Label.Overflow.SHRINK;
-  ui.text(n,skill.type==='passive'?'被动':skill.type==='ultimate'?'终极':skill.type==='mobility'?'闪避':'主动',-14*u,-15*u,154*u,18*u,C.muted,11.5*u);
+  ui.text(n,skillRoleLabel(skill),-14*u,-15*u,154*u,18*u,C.muted,11.5*u);
   const level=ui.text(n,model.unlocked?`${rank}级`:`Lv.${model.requiredLevel}`,112*u,0,72*u,26*u,C.gold,13*u);level.horizontalAlign=Label.HorizontalAlign.RIGHT;
  });
  const skill=COMBAT_SKILLS[v.selected],model=models.find(m=>m.id===skill.id)!,rank=game.state.progression.learned[skill.id]??0,current=skill.ranks[Math.max(0,rank-1)],next=skill.ranks[rank];
- skillIcon(ui,ui.panel,skill.id,43).setPosition(ui.x(568),ui.y(a+25));T(skill.name,710,a+15,212,30,21);T(model.unlocked?`${rank}级 / 5级 · ${skill.type==='passive'?'被动':skill.type==='ultimate'?'终极':skill.type==='mobility'?'独立闪避':'常规技能'}`:`Lv.${model.requiredLevel} 开放`,714,a+41,218,25,13,C.gold);P.rule(ui,ui.panel,ui.x(690),ui.y(a+57),274);
- const facts=skill.mechanic??skill.effect??current.effect??current.upgradeEffect??current.evolution??'',comparison=next?.upgradeEffect??next?.evolution??(rank>=5?'已达到最高等级':''),description=resourceCostText(skill)+'\n\n'+skillResourceText(facts+(comparison?'\n\n下一阶：'+comparison:'')),descriptionH=Math.max(48,description.split('\n').reduce((n,line)=>n+Math.max(1,Math.ceil(line.length/18)),0)*18+8),content=ui.scroll(detail,0,ui.y((a+66+mainBottom)/2)-ui.bodyY,284*u,(mainBottom-a-66)*u,descriptionH*u),label=ui.text(content,description,0,-descriptionH*u/2,274*u,descriptionH*u,C.ink,13*u);label.verticalAlign=Label.VerticalAlign.TOP;label.lineHeight=18*u;
- const equipped=game.state.combat,slots=[...equipped.activeSlots.map((id,i)=>({id,title:String(i+1),action:`combat-active:${i}:${skill.id}`,accept:skill.type==='active',enabled:model.unlocked})),{id:equipped.ultimate,title:'终',action:'combat-ultimate:'+skill.id,accept:skill.type==='ultimate',enabled:model.unlocked},...equipped.passiveSlots.map((id,i)=>({id,title:'被'+(i+1),action:`combat-passive:${i}:${skill.id}`,accept:skill.type==='passive',enabled:model.unlocked&&(i===0?p.level>=6||game.state.progression.secondChapter:game.state.progression.secondChapter)}))];
- P.rule(ui,ui.panel,0,ui.y(b-hu-gap/2),806);T('已装备配置',99,b-hu/2,170,26,15,C.gold).horizontalAlign=Label.HorizontalAlign.CENTER;
- slots.forEach((slot,i)=>{const x=212+i*(hu+gap+16),n=ui.button(ui.panel,'',ui.x(x),ui.y(b-hu/2),ui.hit,i<4?'CombatEquipSlot:'+i:i===4?'CombatEquipUltimate':'CombatEquipPassive:'+(i-5),safe&&(skill.type==='passive'||v.family==='COM'||v.family===family)&&slot.accept&&slot.enabled,false,ui.hit,()=>hud.actions.click(slot.action),'catalog');if(slot.id)skillIcon(ui,n,slot.id,42);else Controls.cardBackground(ui,n,42,42);P.badge(ui,n,slot.title,16*u,-17*u,slot.title.length>1?36:24,'gold',14);});
- ui.footer(safe?(v.family==='COM'?'通用技能可装入任意职业的普通槽':v.family===family?'安全检查点 · 四普通技能位，终极独立':'请先在职业选择中启用当前流派'):game.preparationAvailability().reason,[{label:'职业选择',action:'combat-loadout:'+(v.family==='COM'?family:v.family)},{label:'技能加点',action:'allocation-skill:'+skill.id,primary:true},{label:'返回旅途',action:'close'}]);
+ skillIcon(ui,ui.panel,skill.id,43).setPosition(ui.x(568),ui.y(a+25));T(skill.name,710,a+15,212,30,21);T(model.unlocked?`${rank}级 / 5级 · ${skillRoleLabel(skill)}`:`Lv.${model.requiredLevel} 开放`,714,a+41,218,25,13,C.gold);P.rule(ui,ui.panel,ui.x(690),ui.y(a+57),274);
+ const facts=skill.mechanic??skill.effect??current.effect??current.upgradeEffect??current.evolution??'',comparison=next?.upgradeEffect??next?.evolution??(rank>=5?'已达到最高等级':''),description=[...skillRankFacts(skill,current),...(skill.type==='passive'||skill.activation==='automatic'?[]:[`冷却 ${current.cooldownSeconds}秒`]),resourceCostText(skill),'',skillResourceText(facts+(comparison?'\n\n下一阶：'+comparison:''))].join('\n'),descriptionH=Math.max(48,description.split('\n').reduce((n,line)=>n+Math.max(1,Math.ceil(line.length/18)),0)*18+8),content=ui.scroll(detail,0,ui.y((a+66+mainBottom)/2)-ui.bodyY,284*u,(mainBottom-a-66)*u,descriptionH*u),label=ui.text(content,description,0,-descriptionH*u/2,274*u,descriptionH*u,C.ink,13*u);label.verticalAlign=Label.VerticalAlign.TOP;label.lineHeight=18*u;
+ const shownFamily=v.family==='COM'?family:v.family,preset=COMBAT_LOADOUTS[shownFamily],slots=[...preset.activeSlots.map((id,i)=>({id,title:['单','进','辅','群'][i]})),{id:preset.ultimate,title:'终'},{id:shownFamily+'_P1',title:'被1'},{id:shownFamily+'_P2',title:'被2'}];
+ P.rule(ui,ui.panel,0,ui.y(b-hu-gap/2),806);T('职业固定配置',99,b-hu/2,170,26,15,C.gold).horizontalAlign=Label.HorizontalAlign.CENTER;
+ slots.forEach((slot,i)=>{const x=212+i*(hu+gap+16),n=hud.node('CombatFixedSlot:'+i,ui.panel,ui.x(x),ui.y(b-hu/2),ui.hit,ui.hit),unlocked=models.find(m=>m.id===slot.id)?.unlocked;if(slot.id&&unlocked)skillIcon(ui,n,slot.id,42);else Controls.cardBackground(ui,n,42,42);P.badge(ui,n,slot.title,16*u,-17*u,slot.title.length>1?36:24,'gold',14);});
+ ui.footer(safe?'技能位置固定 · 强化自动触发 · 灵泉复苏在补给栏':game.preparationAvailability().reason,[{label:'职业选择',action:'combat-loadout:'+(v.family==='COM'?family:v.family)},{label:'技能加点',action:'allocation-skill:'+skill.id,primary:true},{label:'返回旅途',action:'close'}]);
 }

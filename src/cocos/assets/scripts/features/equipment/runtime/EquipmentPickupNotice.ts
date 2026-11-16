@@ -1,11 +1,12 @@
-import {CompactGraphics} from '../../../shared/ui/CompactGraphics';
-import {Graphics,Label,Node,Sprite,UIOpacity,UITransform,Vec2} from 'cc';
+import {Label,Node,Sprite,UIOpacity,UITransform} from 'cc';
 import type {ItemDef} from '../data/Equipment';
 import {qualityFeedbackRole} from '../../../shared/ui/FeedbackPalette';
 import {EquipmentArt} from './EquipmentArt';
+import {equipmentBasePresentation,equipmentTypeName} from './EquipmentPresentation';
 import {FeedbackView as F} from '../../../shared/ui/FeedbackView';
 import {applyRpgFont,fitRpgLine} from '../../../shared/ui/RpgFont';
 import {UiSkin} from '../../../shared/ui/UiSkin';
+import {UiChrome} from '../../../shared/ui/UiChrome';
 import type {Hud} from '../../../app/Hud';
 import type {GameSession} from '../../../core/GameSession';
 import {EQUIPMENT} from '../data/Equipment';
@@ -13,6 +14,7 @@ import {EQUIPMENT_DROP_NOTICE_SECONDS,equipmentDropPriority,highlightedEquipment
 import {equipmentText} from '../locales';
 
 type Pickup={item:ItemDef;count:number;elapsed:number;duration:number;priority:number;dropId?:string;available?:boolean};
+const NOTICE_HEIGHT=72;
 
 /** A single passive HUD lane. Acquisition events survive unrelated system toasts,
  * menus and layout rebuilds; only visible time counts toward dismissal. */
@@ -22,10 +24,10 @@ export class EquipmentPickupNotice {
  private announcedDrops=new Set<string>();
  private root:Node|null=null;
  private opacity:UIOpacity|null=null;
- private sheen:Graphics|null=null;
  private glow:Sprite|null=null;
  private width=0;
  private unit=1;
+ private level=1;
  private anchor={x:0,y:0};
  private animatedNotice:Pickup|null=null;private animatedRoot:Node|null=null;
  private animatedElapsed=-1;private animatedX=Infinity;private animatedY=Infinity;private animatedReduced=false;
@@ -33,12 +35,13 @@ export class EquipmentPickupNotice {
 
  mount(width:number,unit:number){
   this.width=width;this.unit=unit;
-  this.root=this.hud.node('EquipmentPickupNotice',this.hud.root,0,0,width,58*unit);
+  this.root=this.hud.node('EquipmentPickupNotice',this.hud.root,0,0,width,NOTICE_HEIGHT*unit);
   this.opacity=this.root.addComponent(UIOpacity);this.root.active=false;
   this.render();
  }
 
- enqueue(item:ItemDef,count=1){
+ enqueue(item:ItemDef,count=1,level=this.level){
+  if(this.level!==level){this.level=level;if(this.current)this.render();}
   const priority=equipmentDropPriority(item.quality);
   this.queue({item,count,elapsed:0,duration:priority>=2?5.4:priority===1?3.6:3,priority});
  }
@@ -46,6 +49,7 @@ export class EquipmentPickupNotice {
  /** Reconcile against the authoritative pile IDs, including reloads and travel.
   * A collected/removed pile cannot survive in the current slot or its queue. */
  syncGroundLoot(game:GameSession){
+  if(this.level!==game.state.progression.level){this.level=game.state.progression.level;if(this.current)this.render();}
   const drops=new Map(game.state.groundLoot.filter(d=>d.area===game.state.area).map(d=>[d.id,d]));
   this.pending=this.pending.filter(n=>!n.dropId||drops.has(n.dropId));
   if(this.current?.dropId&&!drops.has(this.current.dropId)){this.current=this.pending.shift()??null;this.render();}
@@ -78,7 +82,7 @@ export class EquipmentPickupNotice {
  get visible(){return !!this.root?.active;}
  get hasNotice(){return !!this.current;}
  get dropVisible(){return !!this.current?.dropId;}
- get height(){return (this.current?.dropId?64:58)*this.unit;}
+ get height(){return NOTICE_HEIGHT*this.unit;}
  inspect(){return {visible:this.visible,current:this.current?{id:this.current.dropId,item:this.current.item.id,elapsed:this.current.elapsed,duration:this.current.duration,available:this.current.available}:null,pending:this.pending.map(n=>({id:n.dropId,item:n.item.id,elapsed:n.elapsed}))};}
 
  layout(x:number,y:number,visible:boolean){
@@ -97,45 +101,49 @@ export class EquipmentPickupNotice {
  private render(){
   const root=this.root;if(!root)return;
   this.animatedNotice=null;
-  for(const child of [...root.children])child.destroy();root.removeAllChildren();this.sheen=null;this.glow=null;
+  for(const child of [...root.children])child.destroy();root.removeAllChildren();this.glow=null;
   const notice=this.current;if(!notice){root.active=false;return;}
-  const {item,priority}=notice,s=this.unit,w=this.width,role=qualityFeedbackRole(item.quality);
-  if(notice.dropId){this.renderDrop(root,notice);this.animate();return;}
-  // Reuse the approved paired metal lips and material rather than painting a
-  // second notification skin. The frame is decorative and never captures input.
-  const frame=this.hud.node('PickupFrame',root,0,0,w,58*s);UiSkin.panel(frame,w,58*s,F.color('text.outline',230),'capsule');
-  const iconX=-w/2+27*s;
-  this.glow=UiSkin.sprite(root,'ui/quiet-bronze/skill-soft-halo-v17',62*s,62*s,F.color(role,priority?255:120));this.glow.node.setPosition(iconX,0);this.glow.node.name='PickupQualityGlow';
-  const icon=this.hud.node('PickupEquipment',root,iconX,0,44*s,44*s),sprite=icon.addComponent(Sprite);sprite.sizeMode=Sprite.SizeMode.CUSTOM;sprite.trim=false;
-  void EquipmentArt.itemFrame(item,icon).then(frame=>{if(!icon.isValid)return;const scale=Math.min(44*s/frame.rect.width,44*s/frame.rect.height);icon.getComponent(UITransform)!.setContentSize(frame.rect.width*scale,frame.rect.height*scale);sprite.spriteFrame=frame;}).catch(error=>{if(icon.isValid)console.warn('[EquipmentPickup]',String(error));});
-  const textWidth=w-64*s,textX=-w/2+58*s+textWidth/2;
-  const badge=this.hud.text(root,`获得${item.quality}装备`,textX,15*s,textWidth,11.5*s,F.color(role,225),16*s);
-  badge.node.name='PickupQuality';badge.enableWrapText=false;
-  const name=this.hud.text(root,`${item.name}${notice.count>1?` ×${notice.count}`:''}`,textX,-4*s,textWidth,(priority?21:18.5)*s,F.color(role),29*s);
-  name.node.name='PickupName';name.enableWrapText=false;
-  name.enableOutline=true;name.outlineColor=F.color('text.outline',220);name.outlineWidth=.75*s;
-  if(priority){name.enableShadow=true;name.shadowColor=F.color(role,140);name.shadowBlur=4*s;name.shadowOffset=new Vec2(0,0);}
-  for(const label of [badge,name]){applyRpgFont(label);label.horizontalAlign=Label.HorizontalAlign.LEFT;label.lineHeight=label.fontSize*1.2;}
-  const rule=UiSkin.sprite(root,'ui/quiet-bronze/rpg-equipment-title-rule-v5',textWidth,10*s,F.color(role,priority?235:140));rule.node.name='PickupEngraving';rule.node.setPosition(textX,-23*s);
-  if(priority)this.sheen=this.hud.node('PickupSheen',root,0,0,w,50*s).addComponent(CompactGraphics);
-  this.animate();
- }
-
- private renderDrop(root:Node,notice:Pickup){
   const {item}=notice,s=this.unit,w=this.width,role=qualityFeedbackRole(item.quality);
-  root.getComponent(UITransform)!.setContentSize(w,64*s);
-  const frame=this.hud.node('DropFrame',root,0,0,w,64*s);
-  UiSkin.panel(frame,w,64*s,F.color('text.outline',230),'panel',false,s/2,'loot-drop-panel-v1');
-  const iconX=-w/2+35*s;
-  this.glow=UiSkin.sprite(root,'ui/quiet-bronze/skill-soft-halo-v17',70*s,62*s,F.color(role,150));this.glow.node.setPosition(iconX,0);
-  const icon=this.hud.node('DropEquipment',root,iconX,0,48*s,48*s),sprite=icon.addComponent(Sprite);sprite.sizeMode=Sprite.SizeMode.CUSTOM;sprite.trim=false;
-  void EquipmentArt.itemFrame(item,icon).then(frame=>{if(!icon.isValid)return;const scale=Math.min(48*s/frame.rect.width,48*s/frame.rect.height);icon.getComponent(UITransform)!.setContentSize(frame.rect.width*scale,frame.rect.height*scale);sprite.spriteFrame=frame;}).catch(error=>{if(icon.isValid)console.warn('[EquipmentDrop]',String(error));});
-  const width=w-84*s,x=-w/2+72*s+width/2;
-  const title=this.hud.text(root,equipmentText('loot.dropTitle',{quality:item.quality}),x,20*s,width,11.5*s,F.color(role),16*s);
-  const name=this.hud.text(root,fitRpgLine(item.name,width,20*s),x,0,width,20*s,F.color(role),27*s);
-  const hint=this.hud.text(root,fitRpgLine(equipmentText(notice.available?'loot.autoPickup':'loot.dropFull'),width,11*s),x,-20*s,width,11*s,F.color('text.normal'),16*s);
-  title.node.name='DropQuality';name.node.name='DropName';hint.node.name='DropHint';
+  // Both states share the accepted v2 cut-metal border and its brown material.
+  // Only the truthful status text differs; this lane never captures input.
+  root.getComponent(UITransform)!.setContentSize(w,NOTICE_HEIGHT*s);
+  const frame=this.hud.node('EquipmentNoticeFrame',root,0,0,w,NOTICE_HEIGHT*s);
+  UiSkin.panel(frame,w,NOTICE_HEIGHT*s,F.color('text.outline',230),'panel',false,s/2,'loot-drop-panel-v1',true);
+  const iconX=-w/2+50*s,iconSize=56*s;
+  this.glow=UiSkin.sprite(root,'ui/quiet-bronze/skill-soft-halo-v17',78*s,66*s,F.color(role,150));this.glow.node.setPosition(iconX,0);this.glow.node.name='NoticeQualityGlow';
+  if(item.quality==='传奇'||item.quality==='神器'){
+   // Keep the existing four-corner engraving behind the item silhouette.
+   const ornaments=this.hud.node('NoticeEquipmentOrnaments',root,iconX,0,72,68);
+   ornaments.setScale(s,s,1);UiChrome.cornerOrnaments(ornaments,72,68);
+  }
+  const icon=this.hud.node('NoticeEquipment',root,iconX,0,iconSize,iconSize),sprite=icon.addComponent(Sprite);sprite.sizeMode=Sprite.SizeMode.CUSTOM;sprite.trim=false;
+  void EquipmentArt.itemFrame(item,icon).then(frame=>{if(!icon.isValid)return;const scale=Math.min(iconSize/frame.rect.width,iconSize/frame.rect.height);icon.getComponent(UITransform)!.setContentSize(frame.rect.width*scale,frame.rect.height*scale);sprite.spriteFrame=frame;}).catch(error=>{if(icon.isValid)console.warn('[EquipmentNotice]',String(error));});
+  // The reference's three text rows share one left edge next to the artwork.
+  const textLeft=98*s,showStats=w/s>=290,statsLeft=w-88*s,width=showStats?statsLeft-textLeft-12*s:w-textLeft-18*s,x=-w/2+textLeft+width/2;
+  const titleText=equipmentText(notice.dropId?'loot.dropTitle':'loot.acquiredTitle',{quality:item.quality});
+  const countText=notice.count>1?` ×${notice.count}`:'';
+  const nameText=fitRpgLine(item.name,width-(countText?(.56*countText.length+.44)*20*s:0),20*s)+countText;
+  const hintText=equipmentText(notice.dropId?notice.available?'loot.autoPickup':'loot.noticeFull':'loot.acquired');
+  const title=this.hud.text(root,fitRpgLine(titleText,width,11.5*s),x,22*s,width,11.5*s,F.color(role),16*s);
+  const name=this.hud.text(root,nameText,x-4*s,0,width,20*s,F.color(role),27*s);
+  const hint=this.hud.text(root,fitRpgLine(hintText,width,11*s),x,-22*s,width,11*s,F.color('text.normal'),16*s);
+  title.node.name='NoticeQuality';name.node.name='NoticeName';hint.node.name='NoticeHint';
   for(const label of [title,name,hint]){applyRpgFont(label);label.horizontalAlign=Label.HorizontalAlign.LEFT;label.enableWrapText=false;label.overflow=Label.Overflow.CLAMP;label.enableOutline=true;label.outlineColor=F.color('text.outline',220);label.outlineWidth=.6*s;}
+  if(showStats){
+   const base=equipmentBasePresentation(item,this.level),bonuses=base.stats.filter(stat=>stat.label!=='等级要求'),stats=(bonuses.length?bonuses:base.stats).slice(0,2),statWidth=70*s,statX=-w/2+statsLeft;
+   const heading=this.hud.text(root,bonuses.length?equipmentText('loot.noticeAttributes'):equipmentTypeName(item),statX+statWidth/2,22*s,statWidth,9.5*s,F.color('text.secondary'),14*s);
+   heading.node.name='NoticeStatsHeading';heading.horizontalAlign=Label.HorizontalAlign.LEFT;heading.enableWrapText=false;heading.overflow=Label.Overflow.CLAMP;applyRpgFont(heading);
+   const compact:Record<string,string>={'基础攻击／技能威力':equipmentText('loot.noticePower'),'最大生命':equipmentText('loot.noticeHealth'),'等级要求':equipmentText('loot.noticeLevel')};
+   stats.forEach((stat,index)=>{
+    const y=(stats.length===1?0:4-index*22)*s,labelWidth=24*s,valueWidth=statWidth-labelWidth;
+    const caption=this.hud.text(root,compact[stat.label]??stat.label,statX+labelWidth/2,y,labelWidth,11*s,F.color('text.secondary'),16*s);
+    const value=this.hud.text(root,fitRpgLine(stat.value,valueWidth,11.5*s),statX+labelWidth+valueWidth/2,y,valueWidth,11.5*s,F.color('text.normal'),16*s);
+    caption.node.name='NoticeStatLabel'+index;value.node.name='NoticeStatValue'+index;
+    caption.horizontalAlign=Label.HorizontalAlign.LEFT;value.horizontalAlign=Label.HorizontalAlign.RIGHT;
+    for(const label of [caption,value]){applyRpgFont(label);label.enableWrapText=false;label.overflow=Label.Overflow.CLAMP;}
+   });
+  }
+  this.animate();
  }
 
  private animate(){
@@ -148,15 +156,5 @@ export class EquipmentPickupNotice {
   const p=root.position;if(p.x!==this.anchor.x||p.y!==this.anchor.y)root.setPosition(this.anchor.x,this.anchor.y);
   const scale=root.scale;if(scale.x!==1||scale.y!==1||scale.z!==1)root.setScale(1,1,1);
   if(this.glow)this.glow.color=F.color(qualityFeedbackRole(n.item.quality),n.priority?(reduced?210:Math.round(210+45*Math.max(0,1-n.elapsed))):120);
-  if(this.sheen){
-   this.sheen.node.active=!reduced&&n.elapsed<.85;
-   // A single light travels along the reused engraving, away from the text.
-   if(this.sheen.node.active){
-    this.sheen.clear();
-    const t=n.elapsed/.85,s=this.unit,w=this.width,x=-w/2+62*s+(w-94*s)*t,y=-23*s;
-    F.ink(this.sheen,'impact.core','stroke',Math.round(145*Math.sin(t*Math.PI)));this.sheen.lineWidth=.65*s;
-    this.sheen.moveTo(x,y);this.sheen.lineTo(x+23*s,y);this.sheen.stroke();
-   }
-  }
  }
 }

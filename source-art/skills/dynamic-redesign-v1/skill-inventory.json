@@ -1,0 +1,1531 @@
+{
+  "version": "dynamic-redesign-v1",
+  "date": "2026-11-16",
+  "status": "design-only-motion-preview",
+  "sources": [
+    "src/cocos/assets/scripts/features/combat/data/PureSkills.ts",
+    "docs/design/fixed-skill-kit-v1.md",
+    "tools/design/fixed-skill-kit-v1.json",
+    "source-art/skills/four-class-vfx-redesign-v1/design-notes-v5.txt"
+  ],
+  "sourceSkillCount": 33,
+  "basicAttackCount": 4,
+  "totalPreviewEntries": 37,
+  "classificationCounts": {
+    "manual-active": 17,
+    "manual-ultimate": 4,
+    "passive": 8,
+    "automatic-enhancement": 3,
+    "manual-mobility": 1
+  },
+  "familyPalette": {
+    "WAR": {
+      "name": "暖银白与淡金",
+      "base": "#EDE4CB",
+      "accent": "#E4D3B0"
+    },
+    "BOW": {
+      "name": "青绿",
+      "base": "#7BDEB4"
+    },
+    "FIR": {
+      "name": "橙红",
+      "base": "#F7A765",
+      "edge": "#C74421"
+    },
+    "THU": {
+      "name": "蓝紫",
+      "base": "#A9B4FF",
+      "core": "#EDEFFF"
+    },
+    "COM": {
+      "name": "通用暗金／生命金青",
+      "base": "#F7DA9D"
+    }
+  },
+  "globalConstraints": [
+    "不修改当前运行数据、冷却、伤害、判定或技能绑定。",
+    "火系陨石在本轮设计稿中是最终技能，普通槽2与火海对调仅为提案。",
+    "战士扩大视觉覆盖，保持近身、扇形或真实落刃盘各自几何；不变成远端飞刃。",
+    "玩家圆形落点/搜索圈使用用户指定首版火系的透地线稿法阵家族：双层外圈、圈间职业刻纹、连贯内部几何，各系配色。",
+    "火墙、远端扇雷、近战扇形、矩形箭阵与火海不能伪装为圆形伤害盘。",
+    "不恢复敌人的地面几何预警圈。",
+    "动态稿是演出提案，分镜/合成不代表Cocos动画、真实碰撞、平台或真机已验收。",
+    "被动与自动强化只表现真实触发，不新增按钮或独立手动释放。"
+  ],
+  "previewPhaseConvention": {
+    "units": "normalized visual storyboard progress, not new gameplay timings",
+    "anticipation": [
+      0,
+      0.2
+    ],
+    "release": [
+      0.2,
+      0.45
+    ],
+    "contactOrStateResponse": [
+      0.45,
+      0.65
+    ],
+    "dissipation": [
+      0.65,
+      1
+    ]
+  },
+  "previewOrderByFamily": {
+    "WAR": [
+      "BASIC_WAR",
+      "WAR_01",
+      "WAR_02",
+      "WAR_03",
+      "WAR_04",
+      "WAR_05",
+      "WAR_P1",
+      "WAR_P2"
+    ],
+    "BOW": [
+      "BASIC_BOW",
+      "BOW_01",
+      "BOW_02",
+      "BOW_07",
+      "BOW_06",
+      "BOW_05",
+      "BOW_03",
+      "BOW_04",
+      "BOW_P1",
+      "BOW_P2"
+    ],
+    "FIR": [
+      "BASIC_FIR",
+      "FIR_01",
+      "FIR_05",
+      "FIR_03",
+      "FIR_04",
+      "FIR_02",
+      "FIR_P1",
+      "FIR_P2"
+    ],
+    "THU": [
+      "BASIC_THU",
+      "THU_01",
+      "THU_02",
+      "THU_06",
+      "THU_04",
+      "THU_05",
+      "THU_03",
+      "THU_P1",
+      "THU_P2"
+    ],
+    "COM": [
+      "COM_01",
+      "COM_02"
+    ]
+  },
+  "skills": [
+    {
+      "id": "WAR_01",
+      "name": "断空斩",
+      "family": "WAR",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "slot1",
+      "proposedPreviewSlot": "slot1",
+      "proposalOnly": false,
+      "targetingMode": "direction",
+      "offensive": true,
+      "semantics": "对面前首个有效敌人完成单体连斩；同次施放各段共享一个目标，目标离开或倒下后不换敌补伤。伤害只来自近身真实接触，普攻保持独立。升级增加单体总伤害、攻击距离和命中容错，不增加目标数。",
+      "targetShapeSource": "近身单体连斩",
+      "geometryRank1": {
+        "kind": "meleeFan",
+        "origin": "caster",
+        "radiusMetres": 3.0,
+        "angleDegrees": 110,
+        "totalTargetLimit": 1
+      },
+      "geometryRank5": {
+        "kind": "meleeFan",
+        "origin": "caster",
+        "radiusMetres": 3.45,
+        "angleDegrees": 150,
+        "totalTargetLimit": 1
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.14,
+        "releaseCommitSeconds": 0.14,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 2,
+      "currentHitCountRank5": 3,
+      "motion": {
+        "anticipation": "剑锋低位蓄势，肩胯同向压住重心；刃缘暖银线先亮。",
+        "release": "身体带动更宽的近身弧形银白刃面，两段衔接，高阶末段更重；无远程飞刃。",
+        "contactOrStateResponse": "集中于同一敌人的金属撞击星和短甲片碎屑；宽刃光不表示可打多个目标。",
+        "dissipation": "主刃面迅速退亮，薄残痕沿已走过刀路收尽，不留常驻扇形边界。"
+      },
+      "warriorVisualRangeProposal": {
+        "visualReachScale": 1.25,
+        "preserveDirectionalGeometry": true,
+        "runtimeValuesChanged": false,
+        "note": "本轮动态设计提议扩大视觉攻击覆盖约25%；仅用于比较体量，最终真实攻击距离/角度与数值需后续实现阶段统一，不把特效范围当已生效判定。"
+      },
+      "proposedPreviewClassification": "manual-active"
+    },
+    {
+      "id": "WAR_02",
+      "name": "破军突袭",
+      "family": "WAR",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "slot2",
+      "proposedPreviewSlot": "slot2",
+      "proposalOnly": false,
+      "targetingMode": "direction",
+      "offensive": true,
+      "semantics": "自身沿地面突进0.18秒，碰撞提前停止；到达实际落点后十字斩，不移动敌人、不获得无敌。",
+      "targetShapeSource": "自身沿地面突进后十字斩",
+      "geometryRank1": {
+        "kind": "meleeRushCross",
+        "origin": "caster",
+        "radiusMetres": 0.8,
+        "lengthMetres": 1.6,
+        "widthMetres": 0.65,
+        "anglesDegrees": [
+          -45,
+          45
+        ]
+      },
+      "geometryRank5": {
+        "kind": "meleeRushCross",
+        "origin": "caster",
+        "radiusMetres": 1.04,
+        "lengthMetres": 2.08,
+        "widthMetres": 0.85,
+        "anglesDegrees": [
+          -45,
+          45
+        ]
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.12,
+        "releaseCommitSeconds": 0.12,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 1,
+      "currentHitCountRank5": 2,
+      "motion": {
+        "anticipation": "后脚蹬地，地面短压痕和前倾姿势传达突进。",
+        "release": "短促冲刺拖出贴身银金风切，抵达实际停点后两条宽刀路交错。",
+        "contactOrStateResponse": "交叉斩中心一记紧凑重击，火星向两侧短散；阻挡时停在真实位置。",
+        "dissipation": "冲刺尾痕先灭，交叉刀痕在接触后迅速淡去；无穿墙、无敌人位移。"
+      },
+      "warriorVisualRangeProposal": {
+        "visualReachScale": 1.25,
+        "preserveDirectionalGeometry": true,
+        "runtimeValuesChanged": false,
+        "note": "本轮动态设计提议扩大视觉攻击覆盖约25%；仅用于比较体量，最终真实攻击距离/角度与数值需后续实现阶段统一，不把特效范围当已生效判定。"
+      },
+      "proposedPreviewClassification": "manual-active"
+    },
+    {
+      "id": "WAR_03",
+      "name": "铁誓壁垒",
+      "family": "WAR",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "slot3-self",
+      "proposedPreviewSlot": "slot3-self",
+      "proposalOnly": false,
+      "targetingMode": "self",
+      "offensive": false,
+      "semantics": "4秒生命护盾。吸收有效攻击后，4秒内下一次断空斩破势提高；护盾不叠加，不能抵挡所有攻击。",
+      "targetShapeSource": "自身定向护盾，唯一战技自保",
+      "geometryRank1": {
+        "kind": "selfShield",
+        "origin": "caster"
+      },
+      "geometryRank5": {
+        "kind": "selfShield",
+        "origin": "caster"
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.15,
+        "releaseCommitSeconds": 0.15,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 0,
+      "currentHitCountRank5": 0,
+      "motion": {
+        "anticipation": "前臂与剑身收回护身，身体前方窄亮线汇聚。",
+        "release": "甲片状银金护盾沿身体前侧合拢，盾面刻纹与地面刃阵属同一视觉家族。",
+        "contactOrStateResponse": "实际受击点出现局部明亮切口和沿盾面扩开的短波纹；不整屏闪白。",
+        "dissipation": "未耗尽时自然退亮；破盾由受击处向两侧碎散，强化提示留在武器触点而非新增光环。"
+      },
+      "proposedPreviewClassification": "manual-active"
+    },
+    {
+      "id": "WAR_04",
+      "name": "裂地审判",
+      "family": "WAR",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "slot4",
+      "proposedPreviewSlot": "slot4",
+      "proposalOnly": false,
+      "targetingMode": "point",
+      "offensive": true,
+      "semantics": "召下巨刃审判指定区域的敌人。升级扩大落刃范围，并追加同落点余震；强化后命中可提高下一次铁誓壁垒的吸收量。",
+      "targetShapeSource": "指定地面圆形落刃",
+      "geometryRank1": {
+        "kind": "meleeImpactDisk",
+        "origin": "aimPoint",
+        "radiusMetres": 2.0
+      },
+      "geometryRank5": {
+        "kind": "meleeImpactDisk",
+        "origin": "aimPoint",
+        "radiusMetres": 2.6
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.41,
+        "releaseCommitSeconds": 0.41,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 1,
+      "currentHitCountRank5": 2,
+      "motion": {
+        "anticipation": "选点圆形银金双环法阵从外向内显现，圈间刃刻与内部几何线稿完整透地。",
+        "release": "上方一柄短暂实体化巨刃垂落至选点，落刃影与轨迹保持一致。",
+        "contactOrStateResponse": "接地形成低矮圆盘冲击和少量大块地裂；高阶同落点余震另起一拍。",
+        "dissipation": "刃体先碎成短金属线，法阵边界随后淡掉，地裂逐渐回收。"
+      },
+      "warriorVisualRangeProposal": {
+        "visualReachScale": 1.25,
+        "preserveDirectionalGeometry": true,
+        "runtimeValuesChanged": false,
+        "note": "本轮动态设计提议扩大视觉攻击覆盖约25%；仅用于比较体量，最终真实攻击距离/角度与数值需后续实现阶段统一，不把特效范围当已生效判定。"
+      },
+      "proposedPreviewClassification": "manual-active"
+    },
+    {
+      "id": "WAR_05",
+      "name": "破晓裁决",
+      "family": "WAR",
+      "sourceType": "ultimate",
+      "classification": "manual-ultimate",
+      "activation": "manual",
+      "currentSlot": "ultimate",
+      "proposedPreviewSlot": "ultimate",
+      "proposalOnly": false,
+      "targetingMode": "direction",
+      "offensive": true,
+      "semantics": "近身大扇形三段终结；末段以落地重斩收尾，合并裂地审判的破势职责。总伤害沿既定三段分配，不发射远程飞刃。",
+      "targetShapeSource": "前方大扇形三段终结",
+      "geometryRank1": {
+        "kind": "meleeFan",
+        "origin": "caster",
+        "radiusMetres": 4.375,
+        "angleDegrees": 120
+      },
+      "geometryRank5": {
+        "kind": "meleeFan",
+        "origin": "caster",
+        "radiusMetres": 5.025,
+        "angleDegrees": 160
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.49,
+        "releaseCommitSeconds": 0.49,
+        "recoverySeconds": 0.36
+      },
+      "currentHitCountRank1": 3,
+      "currentHitCountRank5": 3,
+      "motion": {
+        "anticipation": "重心下沉，剑刃宽银光沿长度依次积聚，前方仍能看清目标与退路。",
+        "release": "三段近身大扇形终结：横斩、反向压斩、落地重斩；每刀刀路不同而连贯。",
+        "contactOrStateResponse": "末刀最重，低位地裂沿前方展开，接触金星短而密；不抛出远端剑气。",
+        "dissipation": "三段历史刀痕依次灭去，最后只留极短贴地余光；保留扇形方向，不套圆形伤害圈。"
+      },
+      "warriorVisualRangeProposal": {
+        "visualReachScale": 1.25,
+        "preserveDirectionalGeometry": true,
+        "runtimeValuesChanged": false,
+        "note": "本轮动态设计提议扩大视觉攻击覆盖约25%；仅用于比较体量，最终真实攻击距离/角度与数值需后续实现阶段统一，不把特效范围当已生效判定。"
+      },
+      "proposedPreviewClassification": "manual-ultimate"
+    },
+    {
+      "id": "WAR_P1",
+      "name": "战艺精通",
+      "family": "WAR",
+      "sourceType": "passive",
+      "classification": "passive",
+      "activation": "passive",
+      "currentSlot": "passive-P1",
+      "proposedPreviewSlot": "passive-P1",
+      "proposalOnly": false,
+      "targetingMode": "self",
+      "offensive": false,
+      "semantics": "战技直接伤害+4/5/6/7/8%，计入增伤总上限。",
+      "targetShapeSource": null,
+      "geometryRank1": {
+        "kind": "passive-trigger",
+        "origin": "existing-status-or-hit"
+      },
+      "geometryRank5": {
+        "kind": "passive-trigger",
+        "origin": "existing-status-or-hit"
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0,
+        "releaseCommitSeconds": 0,
+        "recoverySeconds": 0
+      },
+      "currentHitCountRank1": 0,
+      "currentHitCountRank5": 0,
+      "motion": {
+        "anticipation": "满足交替战技等条件时，剑柄到刃缘有一条短银线响应。",
+        "release": "强化只附在既有战技刀路，不独立发射武器或额外法阵。",
+        "contactOrStateResponse": "真实接触点增加一层更紧凑的金属高光。",
+        "dissipation": "随该次接触迅速淡去，人物背后不生成剑冠。"
+      },
+      "presentationConstraint": "表现其真实触发/命中/状态响应，不新建手动技能或独立战斗按钮。",
+      "proposedPreviewClassification": "passive"
+    },
+    {
+      "id": "WAR_P2",
+      "name": "铁誓不屈",
+      "family": "WAR",
+      "sourceType": "passive",
+      "classification": "passive",
+      "activation": "passive",
+      "currentSlot": "passive-P2",
+      "proposedPreviewSlot": "passive-P2",
+      "proposalOnly": false,
+      "targetingMode": "self",
+      "offensive": false,
+      "semantics": "持有自身护盾时受到直接物理伤害-3/4/5/6/7%，计入减伤上限。",
+      "targetShapeSource": null,
+      "geometryRank1": {
+        "kind": "passive-trigger",
+        "origin": "existing-status-or-hit"
+      },
+      "geometryRank5": {
+        "kind": "passive-trigger",
+        "origin": "existing-status-or-hit"
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0,
+        "releaseCommitSeconds": 0,
+        "recoverySeconds": 0
+      },
+      "currentHitCountRank1": 0,
+      "currentHitCountRank5": 0,
+      "motion": {
+        "anticipation": "自身护盾存在时，仅盾边呈现细弱的稳定银金刻线。",
+        "release": "实际来袭使盾面局部线纹向接触点收聚。",
+        "contactOrStateResponse": "接触裂纹与短金属反光反馈防护；破盾触发只演示一次。",
+        "dissipation": "裂纹向外退亮，保留时间只对应已有被动状态，不画永久包围光环。"
+      },
+      "presentationConstraint": "表现其真实触发/命中/状态响应，不新建手动技能或独立战斗按钮。",
+      "proposedPreviewClassification": "passive"
+    },
+    {
+      "id": "BOW_01",
+      "name": "穿云箭",
+      "family": "BOW",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "slot1",
+      "proposedPreviewSlot": "slot1",
+      "proposalOnly": false,
+      "targetingMode": "direction",
+      "offensive": true,
+      "semantics": "沿释放时方向射出一支单体重箭；接触首个敌人后结束，不再贯穿或分裂。升级提高单体总伤害、射程和箭路宽度。命中可准备疾风连射强化，强化使用独立触发间隔。",
+      "targetShapeSource": "直线单体重箭",
+      "geometryRank1": {
+        "kind": "projectileCorridor",
+        "origin": "caster",
+        "lengthMetres": 12,
+        "widthMetres": 0.35,
+        "totalTargetLimit": 1
+      },
+      "geometryRank5": {
+        "kind": "projectileCorridor",
+        "origin": "caster",
+        "lengthMetres": 18,
+        "widthMetres": 0.55,
+        "totalTargetLimit": 1
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.19,
+        "releaseCommitSeconds": 0.19,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 1,
+      "currentHitCountRank5": 1,
+      "motion": {
+        "anticipation": "弓弦拉满，实体箭头与尾羽清楚，青绿风纹沿箭身压缩。",
+        "release": "一支重箭沿冻结直线射出，短风套包住箭杆后端，箭头始终可见。",
+        "contactOrStateResponse": "首个合法敌人处小穿刺闪、护甲粉尘与短风涡，不向邻敌溅射。",
+        "dissipation": "箭在接触结束，尾风从头到尾快速散开，不留下光束或回射。"
+      },
+      "proposedPreviewClassification": "manual-active"
+    },
+    {
+      "id": "BOW_02",
+      "name": "连穿箭",
+      "family": "BOW",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "slot2",
+      "proposedPreviewSlot": "slot2",
+      "proposalOnly": false,
+      "targetingMode": "direction",
+      "offensive": true,
+      "semantics": "射出一支连穿箭，命中后转向附近未命中的敌人。随等级最多连续命中2～6个敌人，首击附近的转向范围由3米扩大至7米，后续伤害为首击的75%～90%。同一敌人只命中一次；被闪避、墙体阻挡或附近没有目标时停止连穿。",
+      "targetShapeSource": "同一支箭首击后转向最近敌人连续贯穿",
+      "geometryRank1": {
+        "kind": "impactChainProjectile",
+        "origin": "primaryImpact",
+        "radiusMetres": 3,
+        "primaryProjectileCount": 1,
+        "childProjectileLimit": 0,
+        "totalTargetLimit": 2
+      },
+      "geometryRank5": {
+        "kind": "impactChainProjectile",
+        "origin": "primaryImpact",
+        "radiusMetres": 7,
+        "primaryProjectileCount": 1,
+        "childProjectileLimit": 0,
+        "totalTargetLimit": 6
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.3,
+        "releaseCommitSeconds": 0.3,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 1,
+      "currentHitCountRank5": 1,
+      "motion": {
+        "anticipation": "一支箭的青绿箭羽压亮，首射方向明确。",
+        "release": "同一支实体箭逐次命中后才折向下一敌人；各段飞行直线，转向发生在接触节点。",
+        "contactOrStateResponse": "每个新敌人的接触闪依次亮，旧命中点只剩极淡历史风痕。",
+        "dissipation": "箭到最后目标或失去合法路径即消失，旧路线不连接成常亮激光网。"
+      },
+      "proposedPreviewClassification": "manual-active"
+    },
+    {
+      "id": "BOW_03",
+      "name": "疾风连射",
+      "family": "BOW",
+      "sourceType": "active",
+      "classification": "automatic-enhancement",
+      "activation": "automatic",
+      "currentSlot": "automatic-no-button",
+      "proposedPreviewSlot": "automatic-no-button",
+      "proposalOnly": false,
+      "targetingMode": "direction",
+      "offensive": true,
+      "semantics": "强化技能，不占战斗按钮。穿云箭真实命中后，5秒内下一次弓系普攻释放疾风连射；3／4／5支箭共享单个目标和整组额外伤害预算，不能每箭重复完整总伤。触发间隔6秒，无额外资源消耗。",
+      "targetShapeSource": "远程同向连续实体箭",
+      "geometryRank1": {
+        "kind": "projectileCorridor",
+        "origin": "caster",
+        "lengthMetres": 12,
+        "widthMetres": 0.3
+      },
+      "geometryRank5": {
+        "kind": "projectileCorridor",
+        "origin": "caster",
+        "lengthMetres": 18,
+        "widthMetres": 0.4
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.14,
+        "releaseCommitSeconds": 0.14,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 3,
+      "currentHitCountRank5": 5,
+      "motion": {
+        "anticipation": "穿云箭真实命中后，弓弦短闪表示下一次普攻强化已准备。",
+        "release": "下一次普攻形成清楚分开的3／4／5次同向放箭节奏，箭仍是木杆金属头。",
+        "contactOrStateResponse": "各箭打同一目标，短穿刺闪按时间先后出现，不分裂到邻敌。",
+        "dissipation": "连射结束弓弦与短风痕退亮，不能把所有历史箭当同时存在的额外弹体。"
+      },
+      "presentationConstraint": "先演示触发条件，再演示强化进入既有普攻/命中；不演成额外手动大招。",
+      "proposedPreviewClassification": "automatic-enhancement"
+    },
+    {
+      "id": "BOW_04",
+      "name": "猎王印",
+      "family": "BOW",
+      "sourceType": "active",
+      "classification": "automatic-enhancement",
+      "activation": "automatic",
+      "currentSlot": "automatic-no-button",
+      "proposedPreviewSlot": "automatic-no-button",
+      "proposalOnly": false,
+      "targetingMode": "single",
+      "offensive": true,
+      "semantics": "强化技能，不占战斗按钮。站稳后首次弓系技能真实命中时自动施加猎王印；按本技能等级决定持续时间、增伤与削韧强化，与鹰眼的标记共用同一个来源和触发间隔，不叠加两份标记。触发间隔6秒，无额外资源消耗。",
+      "targetShapeSource": "远处单体弱点标记",
+      "geometryRank1": {
+        "kind": "singleTarget",
+        "origin": "selectedTarget"
+      },
+      "geometryRank5": {
+        "kind": "singleTarget",
+        "origin": "selectedTarget"
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.17,
+        "releaseCommitSeconds": 0.17,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 1,
+      "currentHitCountRank5": 1,
+      "motion": {
+        "anticipation": "站稳后的真实弓术命中触发一笔短青绿勾线。",
+        "release": "细小箭羽/准星刻痕在目标护甲弱点闭合成唯一标记，不围一圈巨大光环。",
+        "contactOrStateResponse": "后续合法命中在该弱点点亮一瞬，标记不重复叠画。",
+        "dissipation": "状态结束由中心收窄消失；与鹰眼共用同一个标记表现。"
+      },
+      "presentationConstraint": "先演示触发条件，再演示强化进入既有普攻/命中；不演成额外手动大招。",
+      "proposedPreviewClassification": "automatic-enhancement"
+    },
+    {
+      "id": "BOW_06",
+      "name": "缚足陷阱",
+      "family": "BOW",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "slot4",
+      "proposedPreviewSlot": "slot4",
+      "proposalOnly": false,
+      "targetingMode": "point",
+      "offensive": true,
+      "semantics": "布置地面陷阱，0.3秒后生效，最多保留8秒。同时只能存在一个，重放替换旧陷阱。敌人触发后普通敌人定身0.8秒并减速35%，首领仅减速10%；不停止已经发动的不可打断攻击。",
+      "targetShapeSource": "地面缚索陷阱",
+      "geometryRank1": {
+        "kind": "groundTrap",
+        "origin": "aimPoint",
+        "radiusMetres": 1.8
+      },
+      "geometryRank5": {
+        "kind": "groundTrap",
+        "origin": "aimPoint",
+        "radiusMetres": 1.8
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.18,
+        "releaseCommitSeconds": 0.18,
+        "recoverySeconds": 0.18
+      },
+      "currentHitCountRank1": 1,
+      "currentHitCountRank5": 1,
+      "motion": {
+        "anticipation": "落点青绿双圈与箭羽/束缚几何线稿低亮展开；布置过程可辨。",
+        "release": "缚索结纹沿地面闭合，经过既有起效间隔后进入待触发态。",
+        "contactOrStateResponse": "敌人触发时两条粗而短的束缚线贴住脚踝，线头打结而非高大植物缠身。",
+        "dissipation": "触发或到期后结纹松开散成短风线，旧陷阱被替换时同步退场。"
+      },
+      "proposedPreviewClassification": "manual-active"
+    },
+    {
+      "id": "BOW_07",
+      "name": "疾风撤射",
+      "family": "BOW",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "slot3-self",
+      "proposedPreviewSlot": "slot3-self",
+      "proposalOnly": false,
+      "targetingMode": "direction",
+      "offensive": true,
+      "semantics": "沿瞄准方向的反向撤出2.5米，同时射出一箭；碰墙提前停，不获得无敌、不移动敌人。伤害较低，主要用于拉开距离。",
+      "targetShapeSource": "远程同向连续实体箭",
+      "geometryRank1": {
+        "kind": "projectileCorridor",
+        "origin": "caster",
+        "lengthMetres": 12,
+        "widthMetres": 0.3
+      },
+      "geometryRank5": {
+        "kind": "projectileCorridor",
+        "origin": "caster",
+        "lengthMetres": 18,
+        "widthMetres": 0.4
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.14,
+        "releaseCommitSeconds": 0.14,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 1,
+      "currentHitCountRank5": 1,
+      "motion": {
+        "anticipation": "弓手前脚压地，弓保持朝向敌人，后撤方向清楚。",
+        "release": "身体沿瞄准反向短撤，同时仅射出一支实体箭；脚边两道贴地风切显示位移。",
+        "contactOrStateResponse": "箭只在一个目标处小穿刺闪；后撤遇墙提前停，不推走敌人。",
+        "dissipation": "脚边风切先退，箭接触后消失，无长驻拖尾或无敌罩。"
+      },
+      "sourceFieldCaveat": "targetShape旧文案包含连续实体箭；实际mechanic是反向撤出并只发一箭。",
+      "proposedPreviewClassification": "manual-active"
+    },
+    {
+      "id": "BOW_05",
+      "name": "万箭齐发",
+      "family": "BOW",
+      "sourceType": "ultimate",
+      "classification": "manual-ultimate",
+      "activation": "manual",
+      "currentSlot": "ultimate",
+      "proposedPreviewSlot": "ultimate",
+      "proposalOnly": false,
+      "targetingMode": "point",
+      "offensive": true,
+      "semantics": "释放时选区内可见可达敌人的位置只用于确定各枚箭的初始直线方向；起点与各条直线在释放时固定，后续不追踪。三拍伤害20%/30%/50%，箭数是释放时分配目标数×3；目标移动出箭路可躲开。实际箭碰到首个合法敌人或墙即结束，每敌每拍最多一次，不补射墙后、不按装饰箭数加伤。",
+      "targetShapeSource": "远处选区内的离散箭列",
+      "geometryRank1": {
+        "kind": "targetVolley",
+        "origin": "aimPoint",
+        "widthMetres": 5,
+        "depthMetres": 4
+      },
+      "geometryRank5": {
+        "kind": "targetVolley",
+        "origin": "aimPoint",
+        "widthMetres": 10,
+        "depthMetres": 6
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.56,
+        "releaseCommitSeconds": 0.56,
+        "recoverySeconds": 0.36
+      },
+      "currentHitCountRank1": 3,
+      "currentHitCountRank5": 3,
+      "motion": {
+        "anticipation": "弓身蓄力至青绿刻线连续，敌阵选区仅用于构图与确定方向，不伪装圆形攻击区。",
+        "release": "三拍不同密度的直线箭列从冻结施放起点出发，方向固定且各箭可辨。",
+        "contactOrStateResponse": "三拍20%/30%/50%的轻中重节奏仅作时间层次；末拍更有力而非装饰箭越多伤害越多。",
+        "dissipation": "每支箭遇首个目标或墙结束，残风依次灭去，不补追跑开的敌人。"
+      },
+      "proposedPreviewClassification": "manual-ultimate"
+    },
+    {
+      "id": "BOW_P1",
+      "name": "鹰眼",
+      "family": "BOW",
+      "sourceType": "passive",
+      "classification": "passive",
+      "activation": "passive",
+      "currentSlot": "passive-P1",
+      "proposedPreviewSlot": "passive-P1",
+      "proposalOnly": false,
+      "targetingMode": "self",
+      "offensive": false,
+      "semantics": "距离超过5米的弓术伤害提高；站稳0.4秒后首次弓术真实命中自动施加猎王印，统一触发间隔6秒。猎王印开放后按其等级决定标记持续和强化，未开放时使用鹰眼基础标记；同一目标不叠加两份标记。",
+      "targetShapeSource": null,
+      "geometryRank1": {
+        "kind": "passive-trigger",
+        "origin": "existing-status-or-hit"
+      },
+      "geometryRank5": {
+        "kind": "passive-trigger",
+        "origin": "existing-status-or-hit"
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0,
+        "releaseCommitSeconds": 0,
+        "recoverySeconds": 0
+      },
+      "currentHitCountRank1": 0,
+      "currentHitCountRank5": 0,
+      "motion": {
+        "anticipation": "站稳时眼/弓端短青绿聚焦，不常驻大鹰影。",
+        "release": "首次真实命中建立唯一猎王印；与BOW_04共用同一图案。",
+        "contactOrStateResponse": "弱点一瞬提亮，距离优势只增强箭接触质感。",
+        "dissipation": "标记退场与既有状态同步，不新造持续目标光环。"
+      },
+      "presentationConstraint": "表现其真实触发/命中/状态响应，不新建手动技能或独立战斗按钮。",
+      "proposedPreviewClassification": "passive"
+    },
+    {
+      "id": "BOW_P2",
+      "name": "逐风猎手",
+      "family": "BOW",
+      "sourceType": "passive",
+      "classification": "passive",
+      "activation": "passive",
+      "currentSlot": "passive-P2",
+      "proposedPreviewSlot": "passive-P2",
+      "proposalOnly": false,
+      "targetingMode": "self",
+      "offensive": false,
+      "semantics": "弓术命中后移动速度+3/4/5/6/7%，2s，CD5s；不增加闪避无敌窗。",
+      "targetShapeSource": null,
+      "geometryRank1": {
+        "kind": "passive-trigger",
+        "origin": "existing-status-or-hit"
+      },
+      "geometryRank5": {
+        "kind": "passive-trigger",
+        "origin": "existing-status-or-hit"
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0,
+        "releaseCommitSeconds": 0,
+        "recoverySeconds": 0
+      },
+      "currentHitCountRank1": 0,
+      "currentHitCountRank5": 0,
+      "motion": {
+        "anticipation": "弓术真实命中后，脚侧一缕短风压低贴地。",
+        "release": "移动起步时细短青绿风带向后卷，不增加瞬移残影。",
+        "contactOrStateResponse": "连续脚步接触地面只出现轻风擦痕，不触发额外箭或攻击。",
+        "dissipation": "速度状态结束平滑收尾，不延长闪避无敌表现。"
+      },
+      "presentationConstraint": "表现其真实触发/命中/状态响应，不新建手动技能或独立战斗按钮。",
+      "proposedPreviewClassification": "passive"
+    },
+    {
+      "id": "FIR_01",
+      "name": "赤焰枪",
+      "family": "FIR",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "slot1",
+      "proposedPreviewSlot": "slot1",
+      "proposalOnly": false,
+      "targetingMode": "point",
+      "offensive": true,
+      "semantics": "射出紧凑火核，只对首个实际接触的敌人结算爆燃与燃烧，不向相邻敌人溅射。升级提高单体总伤害、射程和目标局部表现；局部火光范围不扩大伤害目标。对燃烧目标的强化保留。",
+      "targetShapeSource": "单体火核与目标局部爆燃",
+      "geometryRank1": {
+        "kind": "projectileWithImpactDisk",
+        "origin": "projectileImpact",
+        "radiusMetres": 0.45,
+        "totalTargetLimit": 1
+      },
+      "geometryRank5": {
+        "kind": "projectileWithImpactDisk",
+        "origin": "projectileImpact",
+        "radiusMetres": 1.1,
+        "totalTargetLimit": 1
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.19,
+        "releaseCommitSeconds": 0.19,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 1,
+      "currentHitCountRank5": 1,
+      "motion": {
+        "anticipation": "手掌/杖端紧凑橙白热核蓄起，外层深红火壳先卷入。",
+        "release": "连续短彗星火头沿直线射出，圆头与后渐细焰尾完整，体积明显而非小光点。",
+        "contactOrStateResponse": "首个敌人身上局部厚重卷焰、紧凑热芯，低位燃烧贴目标，不波及邻敌。",
+        "dissipation": "局部爆燃迅速退亮，只剩对应既有燃烧的短焰，无黑烟和高火柱。"
+      },
+      "proposedPreviewClassification": "manual-active"
+    },
+    {
+      "id": "FIR_02",
+      "name": "焚星坠落",
+      "family": "FIR",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "slot2",
+      "proposedPreviewSlot": "ultimate",
+      "proposalOnly": true,
+      "targetingMode": "point",
+      "offensive": true,
+      "semantics": "在指定落点召下陨星，轰击圆形区域内的敌人。升级扩大爆炸范围，并追加一次次爆；强化后次爆命中燃烧中的敌人，可刷新已有燃烧。",
+      "targetShapeSource": "远处火核下坠后的球状爆燃",
+      "geometryRank1": {
+        "kind": "filledImpactDisk",
+        "origin": "aimPoint",
+        "radiusMetres": 2.8
+      },
+      "geometryRank5": {
+        "kind": "filledImpactDisk",
+        "origin": "aimPoint",
+        "radiusMetres": 4.5
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.41,
+        "releaseCommitSeconds": 0.41,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 1,
+      "currentHitCountRank5": 2,
+      "motion": {
+        "anticipation": "终极落点橙红双圈、圈间刻纹和连贯几何火纹先完整出现；外向内点亮，地面仍可见。",
+        "release": "一枚大而连续的炽亮圆头陨火斜落，长焰尾向后渐细，无裸岩与黑烟。",
+        "contactOrStateResponse": "落地一记厚重低卷火冠，主爆后高阶再一记短次爆；目标剪影在最亮芯外仍清楚。",
+        "dissipation": "热芯先退、火冠后卷、法阵最后熄灭，少量低位余烬不长留；这轮作为火系最终技能。"
+      },
+      "proposedPreviewClassification": "manual-ultimate"
+    },
+    {
+      "id": "FIR_03",
+      "name": "焰心护盾",
+      "family": "FIR",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "slot3-self",
+      "proposedPreviewSlot": "slot3-self",
+      "proposalOnly": false,
+      "targetingMode": "self",
+      "offensive": false,
+      "semantics": "保留15/18/21/24/27%最大生命护盾4s；自保例外，不判附近敌人伤害。",
+      "targetShapeSource": "自身短护盾",
+      "geometryRank1": {
+        "kind": "selfShield",
+        "origin": "caster"
+      },
+      "geometryRank5": {
+        "kind": "selfShield",
+        "origin": "caster"
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.17,
+        "releaseCommitSeconds": 0.17,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 0,
+      "currentHitCountRank5": 0,
+      "motion": {
+        "anticipation": "掌心短热核回流到胸前，橙红刻线贴近身体。",
+        "release": "火焰护盾以有空隙的卷焰壳包住身体前侧和两肩，不遮脸。",
+        "contactOrStateResponse": "来袭接触点局部火花外弹，护壳短暂收紧；不自动向附近敌人喷伤害。",
+        "dissipation": "护盾耗尽时壳纹裂开向下散火，持续结束则由外向内退亮。"
+      },
+      "proposedPreviewClassification": "manual-active"
+    },
+    {
+      "id": "FIR_04",
+      "name": "炎墙封路",
+      "family": "FIR",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "slot4",
+      "proposedPreviewSlot": "slot4",
+      "proposalOnly": false,
+      "targetingMode": "point",
+      "offensive": true,
+      "semantics": "可旋转的条带火域，持续4秒。区域内敌人移动减速35%，离开0.4秒后消退；首领减速10%。最多一道火墙，重放替换、不叠加减速；不生成实体墙，不改变地图通行。",
+      "targetShapeSource": "远处指定线段火域",
+      "geometryRank1": {
+        "kind": "placedStrip",
+        "origin": "aimPoint",
+        "lengthMetres": 4,
+        "widthMetres": 1.2
+      },
+      "geometryRank5": {
+        "kind": "placedStrip",
+        "origin": "aimPoint",
+        "lengthMetres": 9,
+        "widthMetres": 2
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.14,
+        "releaseCommitSeconds": 0.14,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 4,
+      "currentHitCountRank5": 4,
+      "motion": {
+        "anticipation": "指定条带两端低位火舌依次点燃，不用圆盘替代条带。",
+        "release": "沿真实可旋转线段迅速连成连续低火墙，厚重翻卷、深红外缘与暖芯分层。",
+        "contactOrStateResponse": "敌人穿越时脚边火舌贴近并短暂加亮，普通怪与Boss控制表现不过度夸张。",
+        "dissipation": "整条焰带逐段压低回收，不生成实体墙、不封死地图通行。"
+      },
+      "proposedPreviewClassification": "manual-active"
+    },
+    {
+      "id": "FIR_05",
+      "name": "焚天火海",
+      "family": "FIR",
+      "sourceType": "ultimate",
+      "classification": "manual-ultimate",
+      "activation": "manual",
+      "currentSlot": "ultimate",
+      "proposedPreviewSlot": "slot2",
+      "proposalOnly": true,
+      "targetingMode": "point",
+      "offensive": true,
+      "semantics": "在指定区域掀起火焰锋面，先造成40%的技能伤害，随后在三秒内留下四次余焰，每次造成15%的技能伤害。火海固定在落点，区域内的敌人均可受击；升级扩大范围并强化对燃烧目标的最后一击。",
+      "targetShapeSource": "远端宽矩形滚动火浪",
+      "geometryRank1": {
+        "kind": "filledWaveRectangle",
+        "origin": "aimPoint",
+        "widthMetres": 7,
+        "depthMetres": 4
+      },
+      "geometryRank5": {
+        "kind": "filledWaveRectangle",
+        "origin": "aimPoint",
+        "widthMetres": 12,
+        "depthMetres": 8
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.49,
+        "releaseCommitSeconds": 0.49,
+        "recoverySeconds": 0.36
+      },
+      "currentHitCountRank1": 5,
+      "currentHitCountRank5": 5,
+      "motion": {
+        "anticipation": "普通进阶火海的落点低位热浪先扫过矩形区域，保持比陨石终极轻。",
+        "release": "宽但低矮的滚动火焰锋面沿矩形内部推进，前沿密、后沿稀，非圆形爆炸。",
+        "contactOrStateResponse": "初始一记厚卷后分四拍余焰，四拍由地面内侧翻起，目标脚部仍能观察。",
+        "dissipation": "火浪逐步压低为稀疏余焰，最后回收热边，不留常驻矩形几何描边。"
+      },
+      "proposedPreviewClassification": "manual-active"
+    },
+    {
+      "id": "FIR_P1",
+      "name": "余烬掌握",
+      "family": "FIR",
+      "sourceType": "passive",
+      "classification": "passive",
+      "activation": "passive",
+      "currentSlot": "passive-P1",
+      "proposedPreviewSlot": "passive-P1",
+      "proposalOnly": false,
+      "targetingMode": "self",
+      "offensive": false,
+      "semantics": "自身施加的基础3s燃烧额外延长0.2/0.4/0.6/0.8/1.0s；与J01同类延长取最大，最后不超过4s。",
+      "targetShapeSource": null,
+      "geometryRank1": {
+        "kind": "passive-trigger",
+        "origin": "existing-status-or-hit"
+      },
+      "geometryRank5": {
+        "kind": "passive-trigger",
+        "origin": "existing-status-or-hit"
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0,
+        "releaseCommitSeconds": 0,
+        "recoverySeconds": 0
+      },
+      "currentHitCountRank1": 0,
+      "currentHitCountRank5": 0,
+      "motion": {
+        "anticipation": "真实施加燃烧时，敌人脚侧短焰先点着。",
+        "release": "低位燃烧由几缕短焰衔接成连续小焰层。",
+        "contactOrStateResponse": "后续自身火技能命中时局部余烬短亮，持续燃烧不反复冒充新爆炸。",
+        "dissipation": "按真实燃烧结束逐缕熄灭，不扩成遮人火柱。"
+      },
+      "presentationConstraint": "表现其真实触发/命中/状态响应，不新建手动技能或独立战斗按钮。",
+      "proposedPreviewClassification": "passive"
+    },
+    {
+      "id": "FIR_P2",
+      "name": "薪火余辉",
+      "family": "FIR",
+      "sourceType": "passive",
+      "classification": "passive",
+      "activation": "passive",
+      "currentSlot": "passive-P2",
+      "proposedPreviewSlot": "passive-P2",
+      "proposalOnly": false,
+      "targetingMode": "self",
+      "offensive": false,
+      "semantics": "仅自身群攻火技能的直接伤害击败真实敌人时，向附近敌人传播燃烧；赤焰枪等单体技能不会向旁敌传播。传播不递归，触发间隔6秒，不触发资源回复。",
+      "targetShapeSource": null,
+      "geometryRank1": {
+        "kind": "passive-trigger",
+        "origin": "existing-status-or-hit"
+      },
+      "geometryRank5": {
+        "kind": "passive-trigger",
+        "origin": "existing-status-or-hit"
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0,
+        "releaseCommitSeconds": 0,
+        "recoverySeconds": 0
+      },
+      "currentHitCountRank1": 0,
+      "currentHitCountRank5": 0,
+      "motion": {
+        "anticipation": "仅群攻火技能的直接击杀，死亡接触点出现短扁火舌。",
+        "release": "少量短火舌从该点分别抵达合法近敌，条数受当前规则限制，不递归蔓延。",
+        "contactOrStateResponse": "接续目标只出现低位燃烧点火，不演示完整赤焰枪爆燃或新陨石。",
+        "dissipation": "传播线立刻退场，接续燃烧沿自身状态结束。"
+      },
+      "presentationConstraint": "表现其真实触发/命中/状态响应，不新建手动技能或独立战斗按钮。",
+      "proposedPreviewClassification": "passive"
+    },
+    {
+      "id": "THU_01",
+      "name": "贯雷长矛",
+      "family": "THU",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "slot1",
+      "proposedPreviewSlot": "slot1",
+      "proposalOnly": false,
+      "targetingMode": "direction",
+      "offensive": true,
+      "semantics": "沿释放时方向形成一道单体雷矛，只攻击路径上首个有效敌人，不再贯穿后续敌人。升级提高单体总伤害、射程和命中容错，不增加目标数。",
+      "targetShapeSource": "直线单体雷矛",
+      "geometryRank1": {
+        "kind": "instantCorridor",
+        "origin": "caster",
+        "lengthMetres": 14,
+        "widthMetres": 0.65,
+        "totalTargetLimit": 1
+      },
+      "geometryRank5": {
+        "kind": "instantCorridor",
+        "origin": "caster",
+        "lengthMetres": 20,
+        "widthMetres": 1.3,
+        "totalTargetLimit": 1
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.15,
+        "releaseCommitSeconds": 0.15,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 1,
+      "currentHitCountRank5": 1,
+      "motion": {
+        "anticipation": "杖端一根有厚度的蓝紫电芯压缩，只有少量短支叉。",
+        "release": "一道粗壮连续电矛贯向释放路径上首个有效敌人，白亮芯、蓝紫外壳层次分明。",
+        "contactOrStateResponse": "首目标局部短促电团与甲面放电，不贯穿后排。",
+        "dissipation": "主干迅速断电后留一层短残光，无漫天细碎粒子。"
+      },
+      "proposedPreviewClassification": "manual-active"
+    },
+    {
+      "id": "THU_02",
+      "name": "连锁雷弧",
+      "family": "THU",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "slot2",
+      "proposedPreviewSlot": "slot2",
+      "proposalOnly": false,
+      "targetingMode": "single",
+      "offensive": true,
+      "semantics": "冻结首击中心的有限连锁雷弧，每敌每次施放一次。普通首目标受到0.3秒短促打断并获得重复控制保护；首领按破势规则结算，不连续眩晕整群敌人。",
+      "targetShapeSource": "首命中中心固定半径与固定总数量",
+      "geometryRank1": {
+        "kind": "boundedArcGraph",
+        "origin": "primaryImpact",
+        "radiusMetres": 3,
+        "totalTargetLimit": 2
+      },
+      "geometryRank5": {
+        "kind": "boundedArcGraph",
+        "origin": "primaryImpact",
+        "radiusMetres": 8,
+        "totalTargetLimit": 8
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.19,
+        "releaseCommitSeconds": 0.19,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 1,
+      "currentHitCountRank5": 1,
+      "motion": {
+        "anticipation": "首击目标附近蓝紫双环搜索纹低亮显示有限包络，纹路不承诺圈内全体命中。",
+        "release": "一条粗主干接入最近目标，随后按合法近邻连接形成横向连贯片状电网。",
+        "contactOrStateResponse": "主干最粗、次支次之、接点局部亮；每个目标一次短命中，不按电边重复伤害。",
+        "dissipation": "主干先收、次支随后熄灭；断路与遮挡处不画穿墙连接。"
+      },
+      "proposedPreviewClassification": "manual-active"
+    },
+    {
+      "id": "THU_03",
+      "name": "雷霆战印",
+      "family": "THU",
+      "sourceType": "active",
+      "classification": "automatic-enhancement",
+      "activation": "automatic",
+      "currentSlot": "automatic-no-button",
+      "proposedPreviewSlot": "automatic-no-button",
+      "proposalOnly": false,
+      "targetingMode": "self",
+      "offensive": false,
+      "semantics": "强化技能，不占战斗按钮。持续移动后下一次雷系技能真实命中时，自动为三次普攻附雷；按战印等级决定持续时间、附雷预算、第三击削韧及下一次雷矛强化，与奔雷共用一份三次附雷，不叠加成六次。触发间隔6秒，无额外资源消耗。",
+      "targetShapeSource": "自身三次基础攻击附雷",
+      "geometryRank1": {
+        "kind": "selfBuff",
+        "origin": "caster"
+      },
+      "geometryRank5": {
+        "kind": "selfBuff",
+        "origin": "caster"
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.15,
+        "releaseCommitSeconds": 0.15,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 3,
+      "currentHitCountRank5": 3,
+      "motion": {
+        "anticipation": "移动后的雷技能真实命中，使武器触点短电叉亮起，表示三次附雷准备。",
+        "release": "附雷只伴随接下来的三次普攻释放，不独立连续放电。",
+        "contactOrStateResponse": "各次命中接触点短蓝紫爆闪，第三次略重，不再次连锁。",
+        "dissipation": "每次消耗后触点亮度降低，第三次后完全退场；与奔雷共用同一份状态。"
+      },
+      "presentationConstraint": "先演示触发条件，再演示强化进入既有普攻/命中；不演成额外手动大招。",
+      "proposedPreviewClassification": "automatic-enhancement"
+    },
+    {
+      "id": "THU_04",
+      "name": "扇雷横扫",
+      "family": "THU",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "slot4",
+      "proposedPreviewSlot": "slot4",
+      "proposalOnly": false,
+      "targetingMode": "point",
+      "offensive": true,
+      "semantics": "向指定位置展开远端雷电扇面，对扇面内的敌人连续打击两次，每次造成一半技能伤害。升级扩大半径并将目标上限由3个提高至8个；确定目标后不会随敌人移动追踪。",
+      "targetShapeSource": "远处选点内的扇面分叉",
+      "geometryRank1": {
+        "kind": "boundedArcFan",
+        "origin": "aimPoint",
+        "radiusMetres": 4,
+        "angleDegrees": 70,
+        "totalTargetLimit": 3
+      },
+      "geometryRank5": {
+        "kind": "boundedArcFan",
+        "origin": "aimPoint",
+        "radiusMetres": 7,
+        "angleDegrees": 110,
+        "totalTargetLimit": 8
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.12,
+        "releaseCommitSeconds": 0.12,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 2,
+      "currentHitCountRank5": 2,
+      "motion": {
+        "anticipation": "远端选点出现少量蓝紫分叉起势，保持前方扇面的方向性。",
+        "release": "粗而连贯的雷干横向展开扇面，两拍扫过冻结区域；扇面边界不画成圆盘。",
+        "contactOrStateResponse": "多目标接点两次短亮，两拍之间短暂退亮形成明确节奏。",
+        "dissipation": "横向雷场由远端到近端依次断开，不化为碎丝雨或追踪新目标。"
+      },
+      "proposedPreviewClassification": "manual-active"
+    },
+    {
+      "id": "THU_06",
+      "name": "雷光护幕",
+      "family": "THU",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "slot3-self",
+      "proposedPreviewSlot": "slot3-self",
+      "proposalOnly": false,
+      "targetingMode": "self",
+      "offensive": false,
+      "semantics": "展开持续3秒的雷光护幕，提高移动速度，并减轻下一次直接命中的伤害。护幕不提供无敌，地面持续伤害仍会生效；可以与雷霆战印的普攻附雷同时使用。",
+      "targetShapeSource": "自身三次基础攻击附雷",
+      "geometryRank1": {
+        "kind": "selfBuff",
+        "origin": "caster"
+      },
+      "geometryRank5": {
+        "kind": "selfBuff",
+        "origin": "caster"
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.15,
+        "releaseCommitSeconds": 0.15,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 0,
+      "currentHitCountRank5": 0,
+      "motion": {
+        "anticipation": "身体两肩与武器间出现短而清晰的蓝紫弧线。",
+        "release": "几道有空隙的电弧护幕沿前侧展开，脚边速度电痕低而短，不是巨大电球。",
+        "contactOrStateResponse": "下一次直接命中处护幕集中亮一下并释放局部电叉，地面伤害不被演成全免。",
+        "dissipation": "减伤消耗后护幕局部退亮；移动状态结束后剩余短弧同步退场。"
+      },
+      "sourceFieldCaveat": "targetShape旧文案为三次附雷；实际护幕机制与selfBuff几何优先，不把护幕误画成战印。",
+      "proposedPreviewClassification": "manual-active"
+    },
+    {
+      "id": "THU_05",
+      "name": "万钧雷潮",
+      "family": "THU",
+      "sourceType": "ultimate",
+      "classification": "manual-ultimate",
+      "activation": "manual",
+      "currentSlot": "ultimate",
+      "proposedPreviewSlot": "ultimate",
+      "proposalOnly": false,
+      "targetingMode": "point",
+      "offensive": true,
+      "semantics": "释放时冻结中心，首拍冻结目标集合，三拍间隔0.25s，每敌每拍最多一次；三拍均分总倍率。每拍重验存活敌对、同场同层、固定范围与无遮挡连接，走出范围或被遮挡者本拍跳过；死亡者退出，不招募新目标补位，不把每条电边都算伤害。 已声明目标之间按最近合法可见距离构造连通骨架，并补充每个目标的两名最近邻形成局部闭环；施法者只接入网络一次，不从首目标向所有目标放射。额外电边只组织同一拍电网，不增加任何伤害次数或招募新目标。",
+      "targetShapeSource": "远端固定范围内的大型限额雷网",
+      "geometryRank1": {
+        "kind": "boundedPulseGraph",
+        "origin": "aimPoint",
+        "radiusMetres": 4,
+        "totalTargetLimit": 4
+      },
+      "geometryRank5": {
+        "kind": "boundedPulseGraph",
+        "origin": "aimPoint",
+        "radiusMetres": 9,
+        "totalTargetLimit": 12
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.41,
+        "releaseCommitSeconds": 0.41,
+        "recoverySeconds": 0.36
+      },
+      "currentHitCountRank1": 3,
+      "currentHitCountRank5": 3,
+      "motion": {
+        "anticipation": "远端蓝紫双环大法阵短时锁定选点，内部雷纹沿粗干汇合。",
+        "release": "一条粗入场雷干接入后，大片近邻连通雷网在固定区域展开，支干有主次。",
+        "contactOrStateResponse": "三拍间隔明确，每拍先粗干后接点同时抬亮；可见局部闭环，但不增加伤害次数。",
+        "dissipation": "每拍间退亮但不碎裂；最后一拍整网从外围向主干熄灭，不留下闪烁细屑。"
+      },
+      "proposedPreviewClassification": "manual-ultimate"
+    },
+    {
+      "id": "THU_P1",
+      "name": "奔雷",
+      "family": "THU",
+      "sourceType": "passive",
+      "classification": "passive",
+      "activation": "passive",
+      "currentSlot": "passive-P1",
+      "proposedPreviewSlot": "passive-P1",
+      "proposalOnly": false,
+      "targetingMode": "self",
+      "offensive": false,
+      "semantics": "连续移动1.5秒（高阶1.2秒）后强化下次直接雷技能，触发间隔6秒；成功命中后为三次普攻附雷。雷霆战印开放后按其等级决定附雷持续、伤害与第三击强化，二者只保留一份三次附雷，不叠加成六次；附雷不再次连锁或暴击。",
+      "targetShapeSource": null,
+      "geometryRank1": {
+        "kind": "passive-trigger",
+        "origin": "existing-status-or-hit"
+      },
+      "geometryRank5": {
+        "kind": "passive-trigger",
+        "origin": "existing-status-or-hit"
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0,
+        "releaseCommitSeconds": 0,
+        "recoverySeconds": 0
+      },
+      "currentHitCountRank1": 0,
+      "currentHitCountRank5": 0,
+      "motion": {
+        "anticipation": "连续移动满足条件时，武器电叉仅短暂聚拢。",
+        "release": "下一次雷技能真实命中后建立唯一三次附雷状态，和战印共用。",
+        "contactOrStateResponse": "增强同一次命中的粗电叉，不额外复制雷网或六次附雷。",
+        "dissipation": "随强化消耗与三次附雷结束退亮，不常驻全身电衣。"
+      },
+      "presentationConstraint": "表现其真实触发/命中/状态响应，不新建手动技能或独立战斗按钮。",
+      "proposedPreviewClassification": "passive"
+    },
+    {
+      "id": "THU_P2",
+      "name": "雷冠庇护",
+      "family": "THU",
+      "sourceType": "passive",
+      "classification": "passive",
+      "activation": "passive",
+      "currentSlot": "passive-P2",
+      "proposedPreviewSlot": "passive-P2",
+      "proposalOnly": false,
+      "targetingMode": "self",
+      "offensive": false,
+      "semantics": "一次雷技能命中至少3个不同真实敌人，获得4/5/6/7/8%最大生命护盾3s，CD10s。",
+      "targetShapeSource": null,
+      "geometryRank1": {
+        "kind": "passive-trigger",
+        "origin": "existing-status-or-hit"
+      },
+      "geometryRank5": {
+        "kind": "passive-trigger",
+        "origin": "existing-status-or-hit"
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0,
+        "releaseCommitSeconds": 0,
+        "recoverySeconds": 0
+      },
+      "currentHitCountRank1": 0,
+      "currentHitCountRank5": 0,
+      "motion": {
+        "anticipation": "一次技能满足不同真实敌人的门槛后，肩前两三道短雷痕同时聚亮。",
+        "release": "局部护盾沿肩前展开，不画完整圆冠或厚电球。",
+        "contactOrStateResponse": "真实受击点短促电纹回应，不把每条电边或每拍当新护盾触发。",
+        "dissipation": "护盾结束由受击处向两肩退亮，触发间隔内不重复刷新演出。"
+      },
+      "presentationConstraint": "表现其真实触发/命中/状态响应，不新建手动技能或独立战斗按钮。",
+      "proposedPreviewClassification": "passive"
+    },
+    {
+      "id": "COM_01",
+      "name": "疾影步",
+      "family": "COM",
+      "sourceType": "mobility",
+      "classification": "manual-mobility",
+      "activation": "manual",
+      "currentSlot": "independent-dodge",
+      "proposedPreviewSlot": "independent-dodge",
+      "proposalOnly": false,
+      "targetingMode": "self",
+      "offensive": false,
+      "semantics": "固定独立闪避位；总动作0.34s，0.06–0.20s免直接近战/弹体，不免持续地面伤害。遇墙停，不移动敌人。 冷却2秒。",
+      "targetShapeSource": "自身短距闪避",
+      "geometryRank1": {
+        "kind": "selfRelocation",
+        "origin": "self"
+      },
+      "geometryRank5": {
+        "kind": "selfRelocation",
+        "origin": "self"
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0,
+        "releaseCommitSeconds": 0,
+        "recoverySeconds": 0.25
+      },
+      "currentHitCountRank1": 0,
+      "currentHitCountRank5": 0,
+      "motion": {
+        "anticipation": "脚步压低与身体侧倾传达准备，通用技能不新增蓄力。",
+        "release": "短距位移以两道低透明身体残影和贴地尘/风线表达，遇墙停。",
+        "contactOrStateResponse": "不设计攻击命中爆点；精准闪避仅在既有成功反馈时短亮一次。",
+        "dissipation": "残影从旧位置向新位置依次灭去，不残留长光带；不演成全程无敌或免地面伤害。"
+      },
+      "proposedPreviewClassification": "manual-mobility"
+    },
+    {
+      "id": "COM_02",
+      "name": "灵泉复苏",
+      "family": "COM",
+      "sourceType": "active",
+      "classification": "manual-active",
+      "activation": "manual",
+      "currentSlot": "supply-slot3",
+      "proposedPreviewSlot": "supply-slot3",
+      "proposalOnly": false,
+      "targetingMode": "self",
+      "offensive": false,
+      "semantics": "从补给栏第三格施放的通用恢复技能，不占固定战斗槽。消耗20点当前职业资源，8秒冷却；生命全满或恢复持续中不能重复施放。保留三次治疗、首跳强化与低生命应急成长。",
+      "targetShapeSource": "自身分三拍治疗",
+      "geometryRank1": {
+        "kind": "selfHeal",
+        "origin": "self"
+      },
+      "geometryRank5": {
+        "kind": "selfHeal",
+        "origin": "self"
+      },
+      "currentTimingSeconds": {
+        "windupSeconds": 0.26,
+        "releaseCommitSeconds": 0.26,
+        "recoverySeconds": 0.2
+      },
+      "currentHitCountRank1": 0,
+      "currentHitCountRank5": 0,
+      "motion": {
+        "anticipation": "足下小型金青生命刻纹由内向外浮现，身体仍清楚。",
+        "release": "低位灵泉短弧向身体汇合，沿真实三拍治疗节奏抬亮。",
+        "contactOrStateResponse": "三次柔和生命脉冲只触及自身，不在周围敌人脚下产生攻击式法阵。",
+        "dissipation": "最后一拍最轻柔，线纹与灵泉短弧同时下沉淡掉，不持续冒治疗数字。"
+      },
+      "proposedPreviewClassification": "manual-active"
+    }
+  ],
+  "basicAttacks": [
+    {
+      "id": "BASIC_WAR",
+      "name": "战士普攻",
+      "family": "WAR",
+      "classification": "basic-attack",
+      "currentSlot": "independent-attack",
+      "geometry": "武器真实近身挥斩；不声明新数值或改成远程飞刃",
+      "motion": {
+        "anticipation": "肩胯压低，银白刃缘短亮",
+        "release": "更宽更远的近身扇形刃面，动作由轻横斩衔接重压斩",
+        "contactOrStateResponse": "接触点短金属星与紧凑尘屑",
+        "dissipation": "宽刃面迅速退亮，残痕不成为常驻边界"
+      },
+      "visualReachScaleProposal": 1.25
+    },
+    {
+      "id": "BASIC_BOW",
+      "name": "弓系普攻",
+      "family": "BOW",
+      "classification": "basic-attack",
+      "currentSlot": "independent-attack",
+      "geometry": "一支实体箭，沿释放方向与既有规则飞行",
+      "motion": {
+        "anticipation": "弓弦短拉，箭头/尾羽清楚",
+        "release": "实体箭与短中性风尾，青绿只作细弱职业强调",
+        "contactOrStateResponse": "小穿刺闪、短护甲粉尘",
+        "dissipation": "尾风快速断开，避免常亮光束"
+      }
+    },
+    {
+      "id": "BASIC_FIR",
+      "name": "火系普攻",
+      "family": "FIR",
+      "classification": "basic-attack",
+      "currentSlot": "independent-attack",
+      "geometry": "现有火弹路径与接触规则，未修改实际命中面积",
+      "motion": {
+        "anticipation": "手/杖端小热核点起",
+        "release": "小而有体积的连续圆火头和渐细短焰尾，橙红分层",
+        "contactOrStateResponse": "目标局部短卷焰，体量低于赤焰枪",
+        "dissipation": "火壳先退，热芯迅速熄灭，无黑烟"
+      }
+    },
+    {
+      "id": "BASIC_THU",
+      "name": "雷系普攻",
+      "family": "THU",
+      "classification": "basic-attack",
+      "currentSlot": "independent-attack",
+      "geometry": "现有基础攻击路径，附雷只来自合法已有强化",
+      "motion": {
+        "anticipation": "武器触点短蓝紫电叉",
+        "release": "一条紧凑清楚的连续电芯，明显小于贯雷长矛",
+        "contactOrStateResponse": "单个目标短放电，不凭装饰自动连锁",
+        "dissipation": "主芯断电后短残光熄灭，少量支叉不碎成粒子雨"
+      }
+    }
+  ]
+}

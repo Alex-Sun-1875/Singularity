@@ -1,0 +1,1544 @@
+{
+  "status": "passed",
+  "scope": "Read-only inspection of the completed Web ResourceBundles export. No rebuild, game code, audio source or other preview was changed.",
+  "build": "src/cocos/build/concept-2d-audio",
+  "configFiles": {
+    "combat-audio": "src/cocos/build/concept-2d-audio/assets/combat-audio/config.50e73.json",
+    "background-music": "src/cocos/build/concept-2d-audio/assets/background-music/config.9e90c.json",
+    "resources": "src/cocos/build/concept-2d-audio/assets/resources/config.73d90.json"
+  },
+  "mappingMethod": "Match declared path and cc.AudioClip type to compact source-meta UUID; resolve indexed native/import hashes, verify imported name/extension/duration and exact native bytes/SHA-256.",
+  "bundleAudio": {
+    "combat-audio": {
+      "wavCount": 45,
+      "actualNativeAudioBytes": 2981376,
+      "format": "WAV PCM16 mono 44100Hz",
+      "familyBytes": {
+        "WAR": 450348,
+        "BOW": 513984,
+        "FIR": 1262538,
+        "THU": 754506
+      }
+    },
+    "background-music": {
+      "mp3Count": 2,
+      "actualNativeAudioBytes": 3067614,
+      "format": "MP3 128kbps stereo 44100Hz",
+      "tracks": [
+        "embers-oaths-explore",
+        "embers-oaths-combat"
+      ]
+    }
+  },
+  "totalNewAudioBytes": 6048990,
+  "audioMappingsVerified": 47,
+  "allSourceAndNativeHashesMatch": true,
+  "allNewNativeAudioHashesAppearInExactlyOneBundle": true,
+  "oldDawnEmbers": {
+    "sourceRetained": "src/cocos/assets/resources/audio/music/dawn-embers.mp3",
+    "sha256": "0bf1c712e845a0b4375b53c657a18e1958888c1b9a2c128a883fd9dd3df380f3",
+    "uuid": "4233f28a-802d-4215-9837-fec89e0351c0",
+    "configOccurrences": [],
+    "nativeHashOccurrences": [],
+    "excludedFromBuild": true
+  },
+  "mainResources": {
+    "newCombatOrMusicMappings": [],
+    "newAudioHashDuplicates": [],
+    "remainingAudioPaths": [
+      "audio/impact-critical",
+      "audio/impact-fire",
+      "audio/arrow",
+      "audio/step",
+      "audio/spell",
+      "audio/sword",
+      "audio/impact-armor",
+      "audio/bells",
+      "audio/impact-flesh",
+      "audio/complete",
+      "audio/impact-heavy",
+      "audio/interact",
+      "audio/impact-kill",
+      "audio/impact-lightning",
+      "audio/dice",
+      "audio/hit"
+    ],
+    "remainingLegacyWavCount": 16,
+    "remainingLegacyWavBytes": 521516,
+    "remainingLegacyFormats": [
+      {
+        "sampleRate": 22050,
+        "channels": 1,
+        "bitDepth": 16
+      }
+    ],
+    "note": "The 16 pre-existing legacy/UI WAVs remain in resources. None is a duplicate UUID/path/hash of the 45 new combat cues or 2 music loops."
+  },
+  "buildWideNativeAudioFileCount": 63,
+  "newNativeAudioFileCount": 47,
+  "files": [
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/war/war_swing_v1",
+      "bundlePath": "war/war_swing_v1",
+      "uuid": "f6fe792e-81df-5ded-a25a-e534e8c15557",
+      "compressedUuid": "f6/nkugd9d7aJa5TTowVVX",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/f6/f6fe792e-81df-5ded-a25a-e534e8c15557.6e1d5.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/f6/f6fe792e-81df-5ded-a25a-e534e8c15557.73b43.json",
+      "bytes": 22976,
+      "sha256": "a65fd0a6f08dd13bde19f7cc47da7a6fcecec4c947ece6eb7a5697477fdbf4ce",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.26,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "war/war_swing_v1",
+          "uuidCompressed": "f6/nkugd9d7aJa5TTowVVX"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 11466,
+        "durationSeconds": 0.26
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/war/war_swing_v2",
+      "bundlePath": "war/war_swing_v2",
+      "uuid": "b84fadea-d1c2-504b-9801-888cf4dc6151",
+      "compressedUuid": "b8T63q0cJQS5gBiIz03GFR",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/b8/b84fadea-d1c2-504b-9801-888cf4dc6151.21907.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/b8/b84fadea-d1c2-504b-9801-888cf4dc6151.45770.json",
+      "bytes": 22976,
+      "sha256": "84e7bd87a53abff103d5d59643a6db291db9722abf4de82e9e98aee9b2ea16bc",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.26,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "war/war_swing_v2",
+          "uuidCompressed": "b8T63q0cJQS5gBiIz03GFR"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 11466,
+        "durationSeconds": 0.26
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/war/war_swing_v3",
+      "bundlePath": "war/war_swing_v3",
+      "uuid": "315b98b7-e64c-5d01-8533-4505798fae16",
+      "compressedUuid": "31W5i35kxdAYUzRQV5j64W",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/31/315b98b7-e64c-5d01-8533-4505798fae16.1bb09.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/31/315b98b7-e64c-5d01-8533-4505798fae16.70247.json",
+      "bytes": 22976,
+      "sha256": "dbb6a638f1eae353be23455f15a33957ca8cf62ed5fa443a29272b38346df154",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.26,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "war/war_swing_v3",
+          "uuidCompressed": "31W5i35kxdAYUzRQV5j64W"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 11466,
+        "durationSeconds": 0.26
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/war/war_slash_v1",
+      "bundlePath": "war/war_slash_v1",
+      "uuid": "4f0e1689-3f0b-5d48-bc5d-ee58ed0f80ff",
+      "compressedUuid": "4fDhaJPwtdSLxd7ljtD4D/",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/4f/4f0e1689-3f0b-5d48-bc5d-ee58ed0f80ff.a9f85.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/4f/4f0e1689-3f0b-5d48-bc5d-ee58ed0f80ff.f9340.json",
+      "bytes": 35324,
+      "sha256": "e475778b80a99234695d2f070c97295e642cdce9955b8a98e7cfc951c4afee0d",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.4,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "war/war_slash_v1",
+          "uuidCompressed": "4fDhaJPwtdSLxd7ljtD4D/"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 17640,
+        "durationSeconds": 0.4
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/war/war_slash_v2",
+      "bundlePath": "war/war_slash_v2",
+      "uuid": "44d7366a-6e0f-5bdd-bc20-5808ca986de0",
+      "compressedUuid": "441zZqbg9b3bwgWAjKmG3g",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/44/44d7366a-6e0f-5bdd-bc20-5808ca986de0.9e355.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/44/44d7366a-6e0f-5bdd-bc20-5808ca986de0.73eef.json",
+      "bytes": 35324,
+      "sha256": "1b9868bde82b0fe2ff285b6dd4dd9fd523e36559f4020efa5f0fb54b6f82429a",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.4,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "war/war_slash_v2",
+          "uuidCompressed": "441zZqbg9b3bwgWAjKmG3g"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 17640,
+        "durationSeconds": 0.4
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/war/war_slash_v3",
+      "bundlePath": "war/war_slash_v3",
+      "uuid": "3050fc31-2b20-5953-832d-9b0055d6109b",
+      "compressedUuid": "30UPwxKyBZU4MtmwBV1hCb",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/30/3050fc31-2b20-5953-832d-9b0055d6109b.fe42a.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/30/3050fc31-2b20-5953-832d-9b0055d6109b.d03e1.json",
+      "bytes": 35324,
+      "sha256": "7b2f55e920a7a35ae305e971812700281e940f5dae9ca5ef8272767d4d2e78eb",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.4,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "war/war_slash_v3",
+          "uuidCompressed": "30UPwxKyBZU4MtmwBV1hCb"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 17640,
+        "durationSeconds": 0.4
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/war/war_armor_v1",
+      "bundlePath": "war/war_armor_v1",
+      "uuid": "8093870c-f381-5256-b422-5fba51caf41c",
+      "compressedUuid": "80k4cM84FSVrQiX7pRyvQc",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/80/8093870c-f381-5256-b422-5fba51caf41c.56d15.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/80/8093870c-f381-5256-b422-5fba51caf41c.99dc6.json",
+      "bytes": 42380,
+      "sha256": "0f4cce30cc6fb9d592bc9e3443145edb14b7679cc1769cdf084c87504af7f4d5",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.48,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "war/war_armor_v1",
+          "uuidCompressed": "80k4cM84FSVrQiX7pRyvQc"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 21168,
+        "durationSeconds": 0.48
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/war/war_armor_v2",
+      "bundlePath": "war/war_armor_v2",
+      "uuid": "707d7ca2-3c0a-5fed-bf6f-bfa0b88ad06c",
+      "compressedUuid": "70fXyiPApf7b9vv6C4itBs",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/70/707d7ca2-3c0a-5fed-bf6f-bfa0b88ad06c.bd51b.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/70/707d7ca2-3c0a-5fed-bf6f-bfa0b88ad06c.003c2.json",
+      "bytes": 42380,
+      "sha256": "a49607d13b547903d94ea50090b95900ce2e76f1846222e6f7e5f49863423456",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.48,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "war/war_armor_v2",
+          "uuidCompressed": "70fXyiPApf7b9vv6C4itBs"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 21168,
+        "durationSeconds": 0.48
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/war/war_armor_v3",
+      "bundlePath": "war/war_armor_v3",
+      "uuid": "a74df1e7-54db-5667-91c7-3bea9e65d470",
+      "compressedUuid": "a7TfHnVNtWZ5HHO+qeZdRw",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/a7/a74df1e7-54db-5667-91c7-3bea9e65d470.4e99d.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/a7/a74df1e7-54db-5667-91c7-3bea9e65d470.4d4f9.json",
+      "bytes": 42380,
+      "sha256": "8bad15361a5f7d3301f8afebb97865f4cdfb408de436be24af63e84abdaa33eb",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.48,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "war/war_armor_v3",
+          "uuidCompressed": "a7TfHnVNtWZ5HHO+qeZdRw"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 21168,
+        "durationSeconds": 0.48
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/war/war_finish_v1",
+      "bundlePath": "war/war_finish_v1",
+      "uuid": "c3b7ac47-933e-5bff-aa71-f3ead8e3a3c2",
+      "compressedUuid": "c3t6xHkz5b/6px8+rY46PC",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/c3/c3b7ac47-933e-5bff-aa71-f3ead8e3a3c2.040a4.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/c3/c3b7ac47-933e-5bff-aa71-f3ead8e3a3c2.03502.json",
+      "bytes": 49436,
+      "sha256": "0e341286198ca9755199aad8b376ddbde0588578efe18499fab16d00806c793d",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.56,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "war/war_finish_v1",
+          "uuidCompressed": "c3t6xHkz5b/6px8+rY46PC"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 24696,
+        "durationSeconds": 0.56
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/war/war_finish_v2",
+      "bundlePath": "war/war_finish_v2",
+      "uuid": "4a8893e1-c46c-56ee-9a57-456a300d35ad",
+      "compressedUuid": "4aiJPhxGxW7ppXRWowDTWt",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/4a/4a8893e1-c46c-56ee-9a57-456a300d35ad.57e89.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/4a/4a8893e1-c46c-56ee-9a57-456a300d35ad.1772a.json",
+      "bytes": 49436,
+      "sha256": "60c923435fa44b3920e27fa190e07c0770bddeb539728bb16e7909e67a9dca79",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.56,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "war/war_finish_v2",
+          "uuidCompressed": "4aiJPhxGxW7ppXRWowDTWt"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 24696,
+        "durationSeconds": 0.56
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/war/war_finish_v3",
+      "bundlePath": "war/war_finish_v3",
+      "uuid": "38e8a9ac-d518-5576-ac47-cca8c7e4925e",
+      "compressedUuid": "386Kms1RhVdqxHzKjH5JJe",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/38/38e8a9ac-d518-5576-ac47-cca8c7e4925e.503d9.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/38/38e8a9ac-d518-5576-ac47-cca8c7e4925e.70242.json",
+      "bytes": 49436,
+      "sha256": "6adf297f8cc844f9abf97659ea3feaa17de6b7d5af8d33cabbbfcaaefa11d3b9",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.56,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "war/war_finish_v3",
+          "uuidCompressed": "386Kms1RhVdqxHzKjH5JJe"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 24696,
+        "durationSeconds": 0.56
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/bow/bow_draw_v1",
+      "bundlePath": "bow/bow_draw_v1",
+      "uuid": "817dca12-7813-5172-9691-eb8b953a4bf0",
+      "compressedUuid": "81fcoSeBNRcpaR64uVOkvw",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/81/817dca12-7813-5172-9691-eb8b953a4bf0.04c23.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/81/817dca12-7813-5172-9691-eb8b953a4bf0.0f8e4.json",
+      "bytes": 54728,
+      "sha256": "f3f9f39f3280b6770c8fc0ceb63bac987b89ccfb3cd12cdda1de530e9b2271af",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.62,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "bow/bow_draw_v1",
+          "uuidCompressed": "81fcoSeBNRcpaR64uVOkvw"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 27342,
+        "durationSeconds": 0.62
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/bow/bow_draw_v2",
+      "bundlePath": "bow/bow_draw_v2",
+      "uuid": "93688c8f-d44f-5931-96cb-f1282ab89a0a",
+      "compressedUuid": "93aIyP1E9ZMZbL8SgquJoK",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/93/93688c8f-d44f-5931-96cb-f1282ab89a0a.8aeea.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/93/93688c8f-d44f-5931-96cb-f1282ab89a0a.ddfbb.json",
+      "bytes": 54728,
+      "sha256": "f78139db30a7314936ba6eae552558b1b55b387e32a4c6cac55c1a6a2b5f92f2",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.62,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "bow/bow_draw_v2",
+          "uuidCompressed": "93aIyP1E9ZMZbL8SgquJoK"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 27342,
+        "durationSeconds": 0.62
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/bow/bow_draw_v3",
+      "bundlePath": "bow/bow_draw_v3",
+      "uuid": "278e84eb-78ba-5e56-afb7-25418c4ea2f2",
+      "compressedUuid": "27joTreLpeVq+3JUGMTqLy",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/27/278e84eb-78ba-5e56-afb7-25418c4ea2f2.ec5b0.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/27/278e84eb-78ba-5e56-afb7-25418c4ea2f2.2e83a.json",
+      "bytes": 54728,
+      "sha256": "8f7dd202af4d6ba1790aa2231907389126cc75974e962c1e42991bd453305085",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.62,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "bow/bow_draw_v3",
+          "uuidCompressed": "27joTreLpeVq+3JUGMTqLy"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 27342,
+        "durationSeconds": 0.62
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/bow/bow_release_v1",
+      "bundlePath": "bow/bow_release_v1",
+      "uuid": "16607ef6-22d6-53c8-9b1a-b79556316086",
+      "compressedUuid": "16YH72ItZTyJsat5VWMWCG",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/16/16607ef6-22d6-53c8-9b1a-b79556316086.f27dd.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/16/16607ef6-22d6-53c8-9b1a-b79556316086.3cbc4.json",
+      "bytes": 26504,
+      "sha256": "15a9618bc115b733b920bb4f495388601f174a346a18d58e61ebb16a5551ff8b",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.3,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "bow/bow_release_v1",
+          "uuidCompressed": "16YH72ItZTyJsat5VWMWCG"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/bow/bow_release_v2",
+      "bundlePath": "bow/bow_release_v2",
+      "uuid": "fe43bfa6-2609-5df1-9ed2-e691d9a09bb8",
+      "compressedUuid": "feQ7+mJgld8Z7S5pHZoJu4",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/fe/fe43bfa6-2609-5df1-9ed2-e691d9a09bb8.b8b06.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/fe/fe43bfa6-2609-5df1-9ed2-e691d9a09bb8.07f17.json",
+      "bytes": 26504,
+      "sha256": "7d9265ed4b0f5bacf24a802f2ba86310b778e6fcc1c11eb0db10f3e7d255eba2",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.3,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "bow/bow_release_v2",
+          "uuidCompressed": "feQ7+mJgld8Z7S5pHZoJu4"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/bow/bow_release_v3",
+      "bundlePath": "bow/bow_release_v3",
+      "uuid": "e1e426d7-62f8-568c-866f-b37ab91609b1",
+      "compressedUuid": "e15CbXYvhWjIZvs3q5Fgmx",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/e1/e1e426d7-62f8-568c-866f-b37ab91609b1.8a237.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/e1/e1e426d7-62f8-568c-866f-b37ab91609b1.ced53.json",
+      "bytes": 26504,
+      "sha256": "a7cc5d0e036a283ac3d684eaa01ad5cac5296e6118df08b77f9189abd62b3b99",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.3,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "bow/bow_release_v3",
+          "uuidCompressed": "e15CbXYvhWjIZvs3q5Fgmx"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/bow/bow_pierce_v1",
+      "bundlePath": "bow/bow_pierce_v1",
+      "uuid": "900b9afb-8403-5bc1-8942-07e2e7082fe2",
+      "compressedUuid": "90C5r7hANbwYlCB+LnCC/i",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/90/900b9afb-8403-5bc1-8942-07e2e7082fe2.fd5dd.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/90/900b9afb-8403-5bc1-8942-07e2e7082fe2.20d30.json",
+      "bytes": 26504,
+      "sha256": "e3534a9b7b3df3a91bb6a0428677975b82e201ba19e6cc9af7f601957ad48891",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.3,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "bow/bow_pierce_v1",
+          "uuidCompressed": "90C5r7hANbwYlCB+LnCC/i"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/bow/bow_pierce_v2",
+      "bundlePath": "bow/bow_pierce_v2",
+      "uuid": "bfb6061a-b11c-589e-a419-0df4f5bd05ac",
+      "compressedUuid": "bftgYasRxYnqQZDfT1vQWs",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/bf/bfb6061a-b11c-589e-a419-0df4f5bd05ac.aaaff.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/bf/bfb6061a-b11c-589e-a419-0df4f5bd05ac.06110.json",
+      "bytes": 26504,
+      "sha256": "259cde173b218b6ed06b94d2806063af9438477f419f2834f4604064d9a25718",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.3,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "bow/bow_pierce_v2",
+          "uuidCompressed": "bftgYasRxYnqQZDfT1vQWs"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/bow/bow_pierce_v3",
+      "bundlePath": "bow/bow_pierce_v3",
+      "uuid": "4733837d-d23f-57aa-a374-8e5263a9a994",
+      "compressedUuid": "47M4N90j9XqqN0jlJjqamU",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/47/4733837d-d23f-57aa-a374-8e5263a9a994.a0954.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/47/4733837d-d23f-57aa-a374-8e5263a9a994.18c0a.json",
+      "bytes": 26504,
+      "sha256": "2b1c6e1d9aeeb4f134d38885f87bb1398f547a922b2f9832726ced797bde5c36",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.3,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "bow/bow_pierce_v3",
+          "uuidCompressed": "47M4N90j9XqqN0jlJjqamU"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/bow/bow_heavy_v1",
+      "bundlePath": "bow/bow_heavy_v1",
+      "uuid": "28b535df-4b6c-5d3b-a707-9e5f4103d8e4",
+      "compressedUuid": "28tTXfS2xdO6cHnl9BA9jk",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/28/28b535df-4b6c-5d3b-a707-9e5f4103d8e4.7eac7.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/28/28b535df-4b6c-5d3b-a707-9e5f4103d8e4.64ff9.json",
+      "bytes": 37088,
+      "sha256": "bdc246fdcf77296f38c471ee484352f99edfa75fba376f446c9c50821b25b155",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.42,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "bow/bow_heavy_v1",
+          "uuidCompressed": "28tTXfS2xdO6cHnl9BA9jk"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 18522,
+        "durationSeconds": 0.42
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/bow/bow_heavy_v2",
+      "bundlePath": "bow/bow_heavy_v2",
+      "uuid": "aa211184-a657-5cce-ae68-ec054d69a889",
+      "compressedUuid": "aaIRGEpldczq5o7AVNaaiJ",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/aa/aa211184-a657-5cce-ae68-ec054d69a889.570dd.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/aa/aa211184-a657-5cce-ae68-ec054d69a889.c499d.json",
+      "bytes": 37088,
+      "sha256": "020c493c6acaf2bd9f3a9bac01d5cc7fbdfec05bd9518bb2fa25bca32e295685",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.42,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "bow/bow_heavy_v2",
+          "uuidCompressed": "aaIRGEpldczq5o7AVNaaiJ"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 18522,
+        "durationSeconds": 0.42
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/bow/bow_heavy_v3",
+      "bundlePath": "bow/bow_heavy_v3",
+      "uuid": "f22a91d8-7a2a-5ac3-9084-3e45e00be95d",
+      "compressedUuid": "f2KpHYeipaw5CEPkXgC+ld",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/f2/f22a91d8-7a2a-5ac3-9084-3e45e00be95d.f72d6.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/f2/f22a91d8-7a2a-5ac3-9084-3e45e00be95d.bbdd2.json",
+      "bytes": 37088,
+      "sha256": "c6ed8f60d2a62e3457655b7bf19a225f639330a1dddcc0d364317b7bec62dc0f",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.42,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "bow/bow_heavy_v3",
+          "uuidCompressed": "f2KpHYeipaw5CEPkXgC+ld"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 18522,
+        "durationSeconds": 0.42
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/bow/bow_armor_v1",
+      "bundlePath": "bow/bow_armor_v1",
+      "uuid": "8d9e9e51-cdd3-58dc-80b0-33f26c1bc505",
+      "compressedUuid": "8dnp5RzdNY3ICwM/JsG8UF",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/8d/8d9e9e51-cdd3-58dc-80b0-33f26c1bc505.3be58.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/8d/8d9e9e51-cdd3-58dc-80b0-33f26c1bc505.e4b4e.json",
+      "bytes": 26504,
+      "sha256": "7aff97f50f83ed02c042be3022197ccff9c740bd7044ab80dc2e966bc82428b1",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.3,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "bow/bow_armor_v1",
+          "uuidCompressed": "8dnp5RzdNY3ICwM/JsG8UF"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/bow/bow_armor_v2",
+      "bundlePath": "bow/bow_armor_v2",
+      "uuid": "ae7c6a9e-ffaa-51f7-a86f-1a13d473ac78",
+      "compressedUuid": "aefGqe/6pR96hvGhPUc6x4",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/ae/ae7c6a9e-ffaa-51f7-a86f-1a13d473ac78.bdf24.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/ae/ae7c6a9e-ffaa-51f7-a86f-1a13d473ac78.14d99.json",
+      "bytes": 26504,
+      "sha256": "52b795ce6ba181e96eb8f9a2532eb8e2cede1f6cfaca1a3dcc569f2585982397",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.3,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "bow/bow_armor_v2",
+          "uuidCompressed": "aefGqe/6pR96hvGhPUc6x4"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/bow/bow_armor_v3",
+      "bundlePath": "bow/bow_armor_v3",
+      "uuid": "958b597b-52ac-5fe4-a2ec-34898915b3c3",
+      "compressedUuid": "95i1l7Uqxf5KLsNImJFbPD",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/95/958b597b-52ac-5fe4-a2ec-34898915b3c3.616b8.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/95/958b597b-52ac-5fe4-a2ec-34898915b3c3.b51bb.json",
+      "bytes": 26504,
+      "sha256": "5f6280fb092e9bcbc67a31fa45e9712a7c40aca185211e3526fbb3906f255013",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.3,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "bow/bow_armor_v3",
+          "uuidCompressed": "95i1l7Uqxf5KLsNImJFbPD"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 13230,
+        "durationSeconds": 0.3
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/fir/fir_charge_v1",
+      "bundlePath": "fir/fir_charge_v1",
+      "uuid": "0bb33706-fb97-5043-8df9-80fbdb1012ea",
+      "compressedUuid": "0bszcG+5dQQ435gPvbEBLq",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/0b/0bb33706-fb97-5043-8df9-80fbdb1012ea.9ba4b.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/0b/0bb33706-fb97-5043-8df9-80fbdb1012ea.de781.json",
+      "bytes": 63548,
+      "sha256": "985b2bebcfc55fbf299c08a7e6696c9fda59a103f0bcf875c7be50aa101bbed9",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.72,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "fir/fir_charge_v1",
+          "uuidCompressed": "0bszcG+5dQQ435gPvbEBLq"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 31752,
+        "durationSeconds": 0.72
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/fir/fir_charge_v2",
+      "bundlePath": "fir/fir_charge_v2",
+      "uuid": "8d393f4e-981b-517f-b58f-d39d7d27d4d1",
+      "compressedUuid": "8dOT9OmBtRf7WP0519J9TR",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/8d/8d393f4e-981b-517f-b58f-d39d7d27d4d1.163b5.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/8d/8d393f4e-981b-517f-b58f-d39d7d27d4d1.143cf.json",
+      "bytes": 63548,
+      "sha256": "7ed7c620ea2788a1578ba97898c278a7542ed98f3bb9ced01585aecc6fbd6721",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.72,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "fir/fir_charge_v2",
+          "uuidCompressed": "8dOT9OmBtRf7WP0519J9TR"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 31752,
+        "durationSeconds": 0.72
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/fir/fir_charge_v3",
+      "bundlePath": "fir/fir_charge_v3",
+      "uuid": "dac72f22-4101-5258-bea7-c026f42be6ef",
+      "compressedUuid": "daxy8iQQFSWL6nwCb0K+bv",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/da/dac72f22-4101-5258-bea7-c026f42be6ef.6e15c.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/da/dac72f22-4101-5258-bea7-c026f42be6ef.8e028.json",
+      "bytes": 63548,
+      "sha256": "48e5cf98c755f5e877157361be5a4995800d935a6f0a7d7c64bf94d6939ffd97",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.72,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "fir/fir_charge_v3",
+          "uuidCompressed": "daxy8iQQFSWL6nwCb0K+bv"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 31752,
+        "durationSeconds": 0.72
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/fir/fir_burst_v1",
+      "bundlePath": "fir/fir_burst_v1",
+      "uuid": "a3868471-5013-59e1-b789-db78fa422916",
+      "compressedUuid": "a3hoRxUBNZ4beJ23j6QikW",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/a3/a3868471-5013-59e1-b789-db78fa422916.f1543.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/a3/a3868471-5013-59e1-b789-db78fa422916.f9648.json",
+      "bytes": 92654,
+      "sha256": "cf459142bdf9ccde86405f7cf43337c4abf59ab5893fe3aecd83ce65aeb69182",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 1.05,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "fir/fir_burst_v1",
+          "uuidCompressed": "a3hoRxUBNZ4beJ23j6QikW"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 46305,
+        "durationSeconds": 1.05
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/fir/fir_burst_v2",
+      "bundlePath": "fir/fir_burst_v2",
+      "uuid": "7526b88f-a068-5916-8f0b-e4f7265ecad9",
+      "compressedUuid": "75JriPoGhZFo8L5PcmXsrZ",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/75/7526b88f-a068-5916-8f0b-e4f7265ecad9.4066a.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/75/7526b88f-a068-5916-8f0b-e4f7265ecad9.2f799.json",
+      "bytes": 92654,
+      "sha256": "47f5137d72ba57c43c835b869e88600e3dce0c91da489c993e5a0ed629a2be83",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 1.05,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "fir/fir_burst_v2",
+          "uuidCompressed": "75JriPoGhZFo8L5PcmXsrZ"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 46305,
+        "durationSeconds": 1.05
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/fir/fir_burst_v3",
+      "bundlePath": "fir/fir_burst_v3",
+      "uuid": "eadc7269-1a34-5d12-bf70-fa4b454086fb",
+      "compressedUuid": "ea3HJpGjRdEr9w+ktFQIb7",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/ea/eadc7269-1a34-5d12-bf70-fa4b454086fb.d1d8a.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/ea/eadc7269-1a34-5d12-bf70-fa4b454086fb.a390f.json",
+      "bytes": 92654,
+      "sha256": "121e955b4a396c8ae007a3643ef91c95ef0f8cb420fcc8c3acd107375a088193",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 1.05,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "fir/fir_burst_v3",
+          "uuidCompressed": "ea3HJpGjRdEr9w+ktFQIb7"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 46305,
+        "durationSeconds": 1.05
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/fir/fir_wall_v1",
+      "bundlePath": "fir/fir_wall_v1",
+      "uuid": "361d97b0-77ee-5906-a252-4b6dc6271345",
+      "compressedUuid": "36HZewd+5ZBqJSS23GJxNF",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/36/361d97b0-77ee-5906-a252-4b6dc6271345.3ab7e.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/36/361d97b0-77ee-5906-a252-4b6dc6271345.d9d5d.json",
+      "bytes": 264644,
+      "sha256": "c66daab82180e2dce88b7c383d63c0d9a5ea8b5a061d1d4098204e681c06dd22",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 3,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "fir/fir_wall_v1",
+          "uuidCompressed": "36HZewd+5ZBqJSS23GJxNF"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 132300,
+        "durationSeconds": 3.0
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/fir/fir_wall_v2",
+      "bundlePath": "fir/fir_wall_v2",
+      "uuid": "175bf1b4-31f2-51b6-8550-d82e38023fc3",
+      "compressedUuid": "17W/G0MfJRtoVQ2C44Aj/D",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/17/175bf1b4-31f2-51b6-8550-d82e38023fc3.ced0c.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/17/175bf1b4-31f2-51b6-8550-d82e38023fc3.1e981.json",
+      "bytes": 264644,
+      "sha256": "a5d80de59f42c5abfe019becf06e1555c6cfc540249f1fb211fa83b26b2a5ada",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 3,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "fir/fir_wall_v2",
+          "uuidCompressed": "17W/G0MfJRtoVQ2C44Aj/D"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 132300,
+        "durationSeconds": 3.0
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/fir/fir_wall_v3",
+      "bundlePath": "fir/fir_wall_v3",
+      "uuid": "d5805570-d98c-5f1f-86a6-2eaa1240a773",
+      "compressedUuid": "d5gFVw2YxfH4amLqoSQKdz",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/d5/d5805570-d98c-5f1f-86a6-2eaa1240a773.dd193.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/d5/d5805570-d98c-5f1f-86a6-2eaa1240a773.8ddbb.json",
+      "bytes": 264644,
+      "sha256": "4669b9d9642af5b9e3212eb333ac0f078bf68749e9abd8069bbda54855ef81d6",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 3,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "fir/fir_wall_v3",
+          "uuidCompressed": "d5gFVw2YxfH4amLqoSQKdz"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 132300,
+        "durationSeconds": 3.0
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/thu/thu_charge_v1",
+      "bundlePath": "thu/thu_charge_v1",
+      "uuid": "5173824a-afc4-57fb-ae58-43c2c3b3d885",
+      "compressedUuid": "51c4JKr8RX+65YQ8LDs9iF",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/51/5173824a-afc4-57fb-ae58-43c2c3b3d885.a0bb2.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/51/5173824a-afc4-57fb-ae58-43c2c3b3d885.da2b3.json",
+      "bytes": 52964,
+      "sha256": "a887dbb9d4d42db5a55f5b363896406d14df681b6905576930ecb807d1978f56",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.6,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "thu/thu_charge_v1",
+          "uuidCompressed": "51c4JKr8RX+65YQ8LDs9iF"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 26460,
+        "durationSeconds": 0.6
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/thu/thu_charge_v2",
+      "bundlePath": "thu/thu_charge_v2",
+      "uuid": "6562f89b-7c9c-50a6-8b3a-59f7f8b628b7",
+      "compressedUuid": "65YvibfJxQpos6Wff4tii3",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/65/6562f89b-7c9c-50a6-8b3a-59f7f8b628b7.142a0.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/65/6562f89b-7c9c-50a6-8b3a-59f7f8b628b7.32f04.json",
+      "bytes": 52964,
+      "sha256": "d06b26457afcfdfc293ad5b4979928b4add8ccf8f9aa7043e6d44bfe63008d05",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.6,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "thu/thu_charge_v2",
+          "uuidCompressed": "65YvibfJxQpos6Wff4tii3"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 26460,
+        "durationSeconds": 0.6
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/thu/thu_charge_v3",
+      "bundlePath": "thu/thu_charge_v3",
+      "uuid": "c890c954-8b80-5e68-914f-f0c94c7d7aec",
+      "compressedUuid": "c8kMlUi4BeaJFP8MlMfXrs",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/c8/c890c954-8b80-5e68-914f-f0c94c7d7aec.b3eda.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/c8/c890c954-8b80-5e68-914f-f0c94c7d7aec.7dc92.json",
+      "bytes": 52964,
+      "sha256": "bae644cb6082c23faa0e4e45bd1bae9cc51a3e60c8dcbcf9315593ea9b65d711",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.6,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "thu/thu_charge_v3",
+          "uuidCompressed": "c8kMlUi4BeaJFP8MlMfXrs"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 26460,
+        "durationSeconds": 0.6
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/thu/thu_crack_v1",
+      "bundlePath": "thu/thu_crack_v1",
+      "uuid": "bf747eac-2435-5a30-ba2f-d27c667c2495",
+      "compressedUuid": "bfdH6sJDVaMLov0nxmfCSV",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/bf/bf747eac-2435-5a30-ba2f-d27c667c2495.a9107.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/bf/bf747eac-2435-5a30-ba2f-d27c667c2495.c4dd7.json",
+      "bytes": 70604,
+      "sha256": "48655129aa45861d9cdda7c9bafc2ba056a58a097bcbfbf0d51b98fc8de83718",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.8,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "thu/thu_crack_v1",
+          "uuidCompressed": "bfdH6sJDVaMLov0nxmfCSV"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 35280,
+        "durationSeconds": 0.8
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/thu/thu_crack_v2",
+      "bundlePath": "thu/thu_crack_v2",
+      "uuid": "cd76c4bd-a560-5bec-9f10-32fee88f429d",
+      "compressedUuid": "cddsS9pWBb7J8QMv7oj0Kd",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/cd/cd76c4bd-a560-5bec-9f10-32fee88f429d.b10c9.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/cd/cd76c4bd-a560-5bec-9f10-32fee88f429d.50f6a.json",
+      "bytes": 70604,
+      "sha256": "a3922ef39f0dbf1810d450c1700f20414dc8196dbf1372cb1468c25dcea5bf98",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.8,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "thu/thu_crack_v2",
+          "uuidCompressed": "cddsS9pWBb7J8QMv7oj0Kd"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 35280,
+        "durationSeconds": 0.8
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/thu/thu_crack_v3",
+      "bundlePath": "thu/thu_crack_v3",
+      "uuid": "ceebd377-30fe-54c6-801c-c2edbd198097",
+      "compressedUuid": "ce69N3MP5UxoAcwu29GYCX",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/ce/ceebd377-30fe-54c6-801c-c2edbd198097.27d32.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/ce/ceebd377-30fe-54c6-801c-c2edbd198097.c758f.json",
+      "bytes": 70604,
+      "sha256": "3148c1306d4094e9f3f7613577b02b3851332bfcf9e43eacb21ae4057d4d7709",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 0.8,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "thu/thu_crack_v3",
+          "uuidCompressed": "ce69N3MP5UxoAcwu29GYCX"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 35280,
+        "durationSeconds": 0.8
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/thu/thu_network_v1",
+      "bundlePath": "thu/thu_network_v1",
+      "uuid": "c636d228-8560-58cb-bb29-b724ef0c112e",
+      "compressedUuid": "c6NtIohWBYy7sptyTvDBEu",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/c6/c636d228-8560-58cb-bb29-b724ef0c112e.01a4c.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/c6/c636d228-8560-58cb-bb29-b724ef0c112e.11bfc.json",
+      "bytes": 127934,
+      "sha256": "785f6f9b2fe330fbce8bfec48f4be93dd2493c8040252c3d34e4a30c775096fd",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 1.45,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "thu/thu_network_v1",
+          "uuidCompressed": "c6NtIohWBYy7sptyTvDBEu"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 63945,
+        "durationSeconds": 1.45
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/thu/thu_network_v2",
+      "bundlePath": "thu/thu_network_v2",
+      "uuid": "55b21456-6fac-506c-ac46-a819c253164a",
+      "compressedUuid": "55shRWb6xQbKxGqBnCUxZK",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/55/55b21456-6fac-506c-ac46-a819c253164a.814bc.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/55/55b21456-6fac-506c-ac46-a819c253164a.c5fe6.json",
+      "bytes": 127934,
+      "sha256": "f69688a07e6311453da7535781d1da3a19391cc88935cffc8c6c6fd9d0919969",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 1.45,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "thu/thu_network_v2",
+          "uuidCompressed": "55shRWb6xQbKxGqBnCUxZK"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 63945,
+        "durationSeconds": 1.45
+      }
+    },
+    {
+      "kind": "combat-sfx",
+      "bundle": "combat-audio",
+      "resourcePath": "audio/combat-v7/thu/thu_network_v3",
+      "bundlePath": "thu/thu_network_v3",
+      "uuid": "bc60ba72-db25-50f4-83a4-60cb1346375f",
+      "compressedUuid": "bcYLpy2yVQ9IOkYMsTRjdf",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/native/bc/bc60ba72-db25-50f4-83a4-60cb1346375f.4492f.wav",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/combat-audio/import/bc/bc60ba72-db25-50f4-83a4-60cb1346375f.98f05.json",
+      "bytes": 127934,
+      "sha256": "57d91aecce2c0f07b2111a7d35dbb70e3c544ad73919aa83679ca54c0c9413fd",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 1.45,
+      "configAudioOccurrences": [
+        {
+          "bundle": "combat-audio",
+          "path": "thu/thu_network_v3",
+          "uuidCompressed": "bcYLpy2yVQ9IOkYMsTRjdf"
+        }
+      ],
+      "format": {
+        "container": "WAV",
+        "codec": "PCM signed 16-bit little-endian",
+        "sampleRate": 44100,
+        "channels": 1,
+        "bitDepth": 16,
+        "frames": 63945,
+        "durationSeconds": 1.45
+      }
+    },
+    {
+      "kind": "music-explore",
+      "bundle": "background-music",
+      "resourcePath": "audio/music/embers-oaths-explore",
+      "bundlePath": "embers-oaths-explore",
+      "uuid": "6d6ef556-4589-4892-beb7-5c78f419b05b",
+      "compressedUuid": "6dbvVWRYlIkr63XHj0GbBb",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/background-music/native/6d/6d6ef556-4589-4892-beb7-5c78f419b05b.b5348.mp3",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/background-music/import/6d/6d6ef556-4589-4892-beb7-5c78f419b05b.8d2f4.json",
+      "bytes": 1533807,
+      "sha256": "7997b09fba17f76bf00f4a69534cc5d8fe21ae75fc8e4663b9c6e521f4d6c5e0",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 96.052245,
+      "configAudioOccurrences": [
+        {
+          "bundle": "background-music",
+          "path": "embers-oaths-explore",
+          "uuidCompressed": "6dbvVWRYlIkr63XHj0GbBb"
+        }
+      ],
+      "format": {
+        "container": "MP3",
+        "codec": "MPEG Layer III",
+        "sampleRate": 44100,
+        "channels": 2,
+        "bitrateKbps": 128,
+        "containerDurationSeconds": 96.05,
+        "ffmpegStream": "Stream #0:0: Audio: mp3 (mp3float), 44100 Hz, stereo, fltp, 128 kb/s",
+        "decodeExitCode": 0
+      }
+    },
+    {
+      "kind": "music-combat",
+      "bundle": "background-music",
+      "resourcePath": "audio/music/embers-oaths-combat",
+      "bundlePath": "embers-oaths-combat",
+      "uuid": "7f51905c-0236-4f17-a3ee-5eba32066574",
+      "compressedUuid": "7fUZBcAjZPF6PuXroyBmV0",
+      "nativeFile": "src/cocos/build/concept-2d-audio/assets/background-music/native/7f/7f51905c-0236-4f17-a3ee-5eba32066574.909b0.mp3",
+      "importFile": "src/cocos/build/concept-2d-audio/assets/background-music/import/7f/7f51905c-0236-4f17-a3ee-5eba32066574.3a3a5.json",
+      "bytes": 1533807,
+      "sha256": "d4be274ee559cafee0d8526137d60ed6d37ab0f2429bf729fac3ea52361c6e0b",
+      "sourceHashMatches": true,
+      "pathUuidNativeImportMappingComplete": true,
+      "exportedAudioClipDurationSeconds": 96.052245,
+      "configAudioOccurrences": [
+        {
+          "bundle": "background-music",
+          "path": "embers-oaths-combat",
+          "uuidCompressed": "7fUZBcAjZPF6PuXroyBmV0"
+        }
+      ],
+      "format": {
+        "container": "MP3",
+        "codec": "MPEG Layer III",
+        "sampleRate": 44100,
+        "channels": 2,
+        "bitrateKbps": 128,
+        "containerDurationSeconds": 96.05,
+        "ffmpegStream": "Stream #0:0: Audio: mp3 (mp3float), 44100 Hz, stereo, fltp, 128 kb/s",
+        "decodeExitCode": 0
+      }
+    }
+  ],
+  "limits": [
+    "Verifies Web build assets and actual native formats/bytes, not TapTap package/first-package size, phone playback, mixing or loop/interruption behavior.",
+    "Historical source audio remains in the workspace; exported config and native hashes confirm exclusion."
+  ]
+}

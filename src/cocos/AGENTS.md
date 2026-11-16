@@ -10,6 +10,7 @@
 
 - 涉及平台能力、SDK 或不确定的 API 时，先查 [TapTap 小游戏官方文档](https://developer.taptap.cn/minigameapidoc/quick-start/document-guide/)、[Cocos 官方适配说明](https://developer.taptap.cn/minigameapidoc/dev/engine/Cocos-Laya-Egret/)和已安装插件的接口定义，核实参数、回调、基础库版本及支持范围；不得根据其他平台接口名称猜测 `tap.*` 能力。
 - 登录、存储、前后台生命周期等平台能力优先集中接入 `assets/scripts/platform/PlatformServices.ts`；新增能力使用官方 `tap.*` API 或已适配的 Cocos 接口，并处理失败、取消、中断及恢复。未接入或未验收的功能应明确登记，不能用空实现或模拟成功宣称已接入。
+- **TapTap 与 HTML 按 [平台隔离规范](../../docs/development/platform-adapters.md) 分开。** 统一使用 `RuntimePlatform` 选择运行平台，独立于 dev / test / release 和分包预览；浏览器全局仅进入 HTML 适配，`tap.*` 仅进入小游戏适配。存档、UI 偏好和地图探索均经 `PlatformStorage`／`PlatformServices` 应用档位前缀，平台缺失不换后端、不伪造成功。已有 Cocos 输入、音频、生命周期适配继续复用，分别记录两端及真机验收。
 - Cocos 插件的 `wechatgame` 构建是官方转换流程的中间步骤。最终目标为 TapTap 小游戏，业务实现应核对 TapTap 的能力与差异；不能仅凭微信或浏览器能运行就判定兼容。
 - 小游戏入口须显式设置发布场景与人物模式，不依赖 HTML 注入、`location` / `history` / URL 查询参数或其他浏览器 DOM/BOM。网页调试参数和本地试玩特例须与发布配置隔离；不得因调试环境改变正式游戏的存档或规则。
 - 资源访问优先复用 `GameResources.ts`、`AssetBundles.ts`、Cocos Asset Manager 及官方适配层。按 [TapTap 分包规范](https://developer.taptap.cn/minigameapidoc/dev/tutorial/basic/subpackage/)组织 `game.json` 的 `subPackages` 与按需加载，处理加载失败和重试；不绕过平台文件、网络及缓存约束。
@@ -19,7 +20,7 @@
 
 代码按功能组织于 `assets/scripts/features/<功能>/`，其中 `common/` 放不依赖引擎的规则与契约、`data/` 放内容、`runtime/` 放 Cocos 呈现、`locales/` 放该功能词条。`core/` 仅维护跨功能状态与会话编排，`app/` 组合功能，`shared/` 维护资源、输入、UI 和国际化公共能力，`platform/` 适配平台；保持已确认的 v5 角色身份与 v3 地理基线。目录、依赖和生成工具规则见[功能模块架构](../../docs/architecture/cocos-feature-modules.md)。
 
-所有剧情过场统一在 `features/cinematics/`，复用公共字幕、镜头、动效、播放与恢复流程，不在玩法类中另画对白框。对齐已确认的 v2 稿（无大黑框、底部渐变字幕、右上“跳过剧情”、右下“继续”），并在真实场景验收。新文案随功能维护语义键与词库；过场和剧情回看使用统一翻译，语言偏好通过现有平台存储保存，不依赖 DOM 或 URL。
+所有剧情过场统一在 `features/cinematics/`，复用公共字幕、镜头、动效、播放与恢复流程，不在玩法类中另画对白框。对齐已确认的 [v4 稿](../../source-art/ui/cinematic-dialogue-v4/cinematic-dialogue-proposal-v4.png)：保持原字号和居中排版、底部渐变字幕、右上“跳过剧情”、右下“继续”；箭头按实际字形中线以几何绘制，取消悬浮皇冠，并在真实场景验收。新文案随功能维护语义键与词库；过场和剧情回看使用统一翻译，语言偏好通过现有平台存储保存，不依赖 DOM 或 URL。
 
 dev 的“快速验证”仅在暂停和设置 → 旅途中按需开启，提供手动补给、有限材料、等级推进、清除 Boss 再战等待及既有训练场入口；test / release 拒绝执行。工具不在开局自动修改进度，不自动完成剧情或发放未验证来源的装备。
 
@@ -37,7 +38,7 @@ dev 的“快速验证”仅在暂停和设置 → 旅途中按需开启，提�
 
 ## 开发与测试约定
 
-- 打包先遵守[开发与打包规范](../../docs/development/build-profiles.md)：`test` 为默认正常测试包；明确要求开发加速时使用 `dev`，默认技能无冷却、怪物经验 ×5、每日经验不限、Boss 分别保底结算传奇与神器，仅对 dev 生效，存储使用独立前缀；只有明确要求 release／正式发布包时才制作 `release`，须关闭开发覆盖与游客绕过。release 自动从已登记的正式清单汇总更新日志、源码和资源差异，随包交付并在包体校验通过后归档于 `docs/releases/<版本>.md`；完成实际变更时追加 `release/changes.json`，只有真实上线后才登记 `release/published-release.json`。
+- 打包先遵守[开发与打包规范](../../docs/development/build-profiles.md)：`test` 为默认正常测试包；明确要求开发加速时使用 `dev`，技能采用正常冷却、怪物经验 ×5、每日经验不限、Boss 分别保底结算传奇与神器，仅对 dev 生效，存储使用独立前缀；只有明确要求 release／正式发布包时才制作 `release`，须关闭开发覆盖与游客绕过。release 自动从已登记的正式清单汇总更新日志、源码和资源差异，随包交付并在包体校验通过后归档于 `docs/releases/<版本>.md`；完成实际变更时追加 `release/changes.json`，只有真实上线后才登记 `release/published-release.json`。
 - dev / test / release 版本共用一直递增的序列，每次实际打包 patch +1、失败不回退、同次内部重试不重复递增。交付固定为 `src/out/<版本号>/SwordAndFire_<版本号>.zip`，不再自定义交付目录或增加后缀；档位进入编译配置与清单。`--check`（兼容 `-ValidateOnly`）不打包、不升版。
 
 - 性能优化保持既有帧率设置，不新增或降低手机帧率上限。用户于2026-11-11明确要求不能用限帧解决发热；优先减少计算、渲染提交、常驻资源和重复分配，并在相同帧率下对照验证。

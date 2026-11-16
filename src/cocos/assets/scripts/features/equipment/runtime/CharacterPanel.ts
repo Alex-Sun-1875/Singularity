@@ -12,7 +12,7 @@ import {EQUIPMENT,type EquipmentSlot,type ItemDef} from '../data/Equipment';
 import {getArea} from '../../world/data/WorldData';
 import {Hud} from '../../../app/Hud';
 import {UiSkin} from '../../../shared/ui/UiSkin';
-import {UI_PANEL_BACK} from '../../../shared/ui/UiChrome';
+import {GoldPanelHeader} from '../../../shared/ui/GoldPanelHeader';
 import {UI_COLORS as C} from '../../../shared/ui/UiTheme';
 import {EQUIPMENT_SLOT_NAMES,EQUIPMENT_SLOT_ICONS} from './EquipmentPresentation';
 import {CharacterPreview} from '../../actors/runtime/CharacterPreview';
@@ -55,7 +55,7 @@ class CharacterPanel {
   const headerY=this.height/2-this.hit/2-10;this.label(this.panel,'拉斐尔',-this.width/2+this.hit+115,headerY,190,this.mobile?32:25,C.gold,this.hit);
  const tabs:[CharacterTab,string,string][]=[['inventory','装备与背包','inventory'],['attributes','属性成长','attributes'],['skills','战斗技能','checks'],['catalog','装备图谱','equipment-catalog']];const tabW=this.mobile?156:126;
  tabs.forEach(([id,title,action],i)=>this.button(this.panel,title,-100+i*(tabW+Math.max(8,8*this.hud.height/390)),headerY,tabW,this.hit,'character:tab:'+id,()=>this.hud.actions.click(action),this.tab===id&&id!=='skills'));
-  const back=this.button(this.panel,'',-this.width/2+this.hit/2+12,headerY,this.hit,this.hit,'character:return',()=>{if(this.tab==='inventory')this.state.filter='all';this.hud.actions.click(this.tab==='inventory'?'inventory':'close');});UiSkin.asset(back,UI_PANEL_BACK.skin,UI_PANEL_BACK.glyphLogical*this.hud.uiUnit,UI_PANEL_BACK.glyphLogical*this.hud.uiUnit,false);
+  GoldPanelHeader.attach(this.panel,{width:this.width,unit:this.hud.uiUnit,hit:this.hit,centerY:headerY,viewport:this.hud,action:'character:return'},()=>{if(this.tab==='inventory')this.state.filter='all';this.hud.actions.click(this.tab==='inventory'?'inventory':'close');});
   this.rule(this.panel,this.height/2-this.hit-15,this.width-36);
   const bodyY=-8;const leftX=-this.width/2+16+this.leftW/2,middleX=-this.width/2+this.leftW+32+this.middleW/2,rightX=this.width/2-16-this.rightW/2;
   if(this.tab==='catalog'){
@@ -117,8 +117,7 @@ class CharacterPanel {
   if(!ids.length)this.label(content,'尚未获得此类物品',0,-58,w-40,this.font,C.muted,60).horizontalAlign=Label.HorizontalAlign.CENTER;
   this.paintDetail(top-filterH-gridH-25,detailH);
  const selected=EQUIPMENT[this.state.selected],isOwned=!!this.game.state.inventory[this.state.selected],equipped=worn.has(this.state.selected);
- const access=this.availability(),canChange=!equipped,actionW=(w-24-2*gap)/3,actionX=(i:number)=>-w/2+12+actionW/2+i*(actionW+gap);const equip=this.button(this.right,equipped?'已装备':!access.available?'暂时无法换装':'装备选中物品',actionX(2),-h/2+actionH/2+8,actionW,actionH,'inventory:equip',()=>{if(selected&&isOwned&&canChange&&access.available)this.hud.actions.click('equip:'+selected.id);});equip.getComponent(Button)!.interactable=!!selected&&isOwned&&canChange&&access.available;
- const refined=!!this.game.state.dice.gear?.[this.state.selected]?.claimed;const refine=this.button(this.right,refined?'已完成铸印':'摇骰锻印',actionX(1),-h/2+actionH/2+8,actionW,actionH,'inventory:refine',()=>{if(selected&&isOwned&&!refined&&access.available)this.hud.actions.click('equipment-dice:'+selected.id);});refine.getComponent(Button)!.interactable=!!selected&&isOwned&&!refined&&access.available;
+ const access=this.availability(),canChange=!equipped,actionW=(w-24-gap)/2,actionX=(i:number)=>-w/2+12+actionW/2+i*(actionW+gap);const equip=this.button(this.right,equipped?'已装备':!access.available?'暂时无法换装':'装备选中物品',actionX(1),-h/2+actionH/2+8,actionW,actionH,'inventory:equip',()=>{if(selected&&isOwned&&canChange&&access.available)this.hud.actions.click('equip:'+selected.id);});equip.getComponent(Button)!.interactable=!!selected&&isOwned&&canChange&&access.available;
  this.button(this.right,'养成',actionX(0),-h/2+actionH/2+8,actionW,actionH,'inventory:craft',()=>this.hud.actions.click(selected&&isOwned?'forge-item:'+selected.id:'forge'));
  }
  private availability(){return (this.game as GameSession&{equipmentAvailability?:()=>{available:boolean;reason:string}}).equipmentAvailability?.()??{available:true,reason:''};}
@@ -143,7 +142,7 @@ class CharacterPanel {
   this.rule(content,-66,w);this.label(content,'探索行动 · 准备加成',0,-100,w,this.font,C.muted,40).horizontalAlign=Label.HorizontalAlign.CENTER;
   this.label(content,`行动准备  +${skill.modifier}\n经验准备  +${skill.proficiency}`,0,-161,w,this.font,C.ink,96).horizontalAlign=Label.HorizontalAlign.CENTER;
   const detail=this.hud.panel(content,0,-316,w,this.mobile?214:180,C.button);this.label(detail,SKILL_TEXT[this.state.skill],0,0,w-20,this.font,C.ink,this.mobile?194:160);
-  this.label(content,'行动：掷骰 + 准备达到目标\n装备：一件装备一次免费铸印\n可能追加属性或获得升格装备',0,-486,w,this.font-2,C.muted,100).horizontalAlign=Label.HorizontalAlign.CENTER;
+  this.label(content,'行动：掷骰 + 准备达到目标\n装备：获得时查看说明与基础属性\n随机属性在装备强化中追加',0,-486,w,this.font-2,C.muted,100).horizontalAlign=Label.HorizontalAlign.CENTER;
  }
  private selectSkill(id:SkillId){
   this.state.skill=id;for(const child of this.summaryHost.children)child.destroy();this.summaryHost.removeAllChildren();this.skillSummary(this.summaryHost);

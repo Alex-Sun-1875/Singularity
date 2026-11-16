@@ -1,7 +1,8 @@
 import type {ItemDef} from './Equipment';
 import type {CampaignEventDef} from '../../campaign/data/CampaignEvents';
 import type {AreaDef} from '../../../core/Contracts';
-import {lifecycleWeaponBase} from './EquipmentLifecycle';
+import {lifecycleWeaponBase,mainBossChapter} from './EquipmentLifecycle';
+import {equipmentText} from '../locales';
 import {FIELD_QUEST_EVENTS} from '../../campaign/data/FieldQuests';
 
 export const GROWING_IDS=['DG_L01','DG_L02','DG_L03','DG_L04','DG_L05','DG_L06','DG_A01','DG_A02','DG_A03','DG_A04','DG_A05'] as const;
@@ -20,7 +21,7 @@ for(const [id,name,kind,family,art,attribute]of [
  ['DG_A04','王庭的余烬','staff','双手火杖','W12','intellect'],
  ['DG_A05','王庭的惊雷','staff','双手雷杖','W14','intellect'],
 ] as const)GROWING_ITEMS.push({id,name,kind,slot:'weapon',level:1,quality:'神器',weaponFamily:family,twoHanded:true,artSource:art,growthAttribute:attribute,description:'王庭重演：每4次有效主动战技在命中处留下延迟0.45秒的残影，最多2名原目标，各0.65倍技能威力，间隔5秒。',source:'任意Boss均有机会掉落，不受章节与武器掉落偏好限制'});
-for(const item of GROWING_ITEMS){item.growthMode='level';if(item.quality==='神器')item.source='任意Boss均有机会掉落，不受章节与武器掉落偏好限制。'+(item.slot==='weapon'?'第二章隐藏任务「第十三声钟响」四流派自选一件；既有独立发现场景保留。':'');}
+for(const item of GROWING_ITEMS){item.growthMode='level';if(item.quality==='神器')item.source=equipmentText('loot.artifactBossSource');else if(['DG_L01','DG_L02','DG_L04'].includes(item.id))item.source=equipmentText('loot.growingLegendBossSource');}
 export const ARTIFACT_WEAPONS=['DG_A01','DG_A03','DG_A04','DG_A05'] as const;
 export const artifactWeaponForStyle={WAR:'DG_A01',BOW:'DG_A03',FIR:'DG_A04',THU:'DG_A05'} as const;
 export const GROWING_EQUIPMENT:Record<string,ItemDef>=Object.fromEntries(GROWING_ITEMS.map(i=>[i.id,i]));
@@ -49,11 +50,6 @@ export const GROWING_SCENES:GrowingScene[]=[
  {id:'dawn-stone',area:'S03',label:'未写完的墓志',x:9,z:-30,flag:'dg:dawn-found',chance:.05},
  {id:'dawn-plinth',area:'S12',label:'空基座上的姓名残片',x:9,z:-30,flag:'dg:dawn-found',chance:.05},
 ];
-/** Historical thresholds validate already-issued V3 proofs. New rolls use BossLoot. */
-export const GROWING_BOSS_DROPS:Record<string,{item:string;chance:number}[]>={
- BOSS_R1:[{item:'DG_L01',chance:.08}],BOSS_R2:[{item:'DG_L01',chance:.08}],ELITE_02:[{item:'DG_L02',chance:.08}],
- ELITE_06:[{item:'DG_L04',chance:.08}],BOSS_R4:[{item:'DG_A01',chance:.005}],ELITE_07:[{item:'DG_A02',chance:.005}],
-};
 const quest=(id:string,area:string,label:string,description:string,requires:string[],flag:string,item?:string,clear=false):CampaignEventDef=>({id,area,label,description,requires,sets:[flag],optional:true,...(clear?{clearEncounter:true}:{}),...(item?{items:[item]}:{})});
 export const GROWING_QUESTS:CampaignEventDef[]=[
  ...FIELD_QUEST_EVENTS,
@@ -70,5 +66,5 @@ export function growingJournal(area:string,flags:Record<string,boolean>,receipts
 }
 export function installGrowingSources(areas:Record<string,AreaDef>){
  for(const s of GROWING_SCENES)areas[s.area].objects.push({id:`growing-scene:${s.id}`,eventId:s.id,action:'growing_scene',label:s.label,description:'仔细调查这处独立发现；抽取结果会保存，本旅程每件成长装备只能获得一次。',x:s.x,z:s.z,radius:1.35});
- for(const area of Object.values(areas))for(const e of area.enemies)if(e.bossId)area.objects.push({id:`growing-rematch:${e.bossId}`,eventId:e.id,action:'growing_rematch',label:'再战Boss · 随机战利品',description:'击败后10分钟可主动再战；任意Boss可掉落全部成长神器，其他武器按掉落偏好匹配。',x:area.spawn.x+3,z:area.spawn.z,radius:1.35});
+ for(const area of Object.values(areas))for(const e of area.enemies)if(e.bossId)area.objects.push({id:`growing-rematch:${e.bossId}`,eventId:e.id,action:'growing_rematch',label:equipmentText(mainBossChapter(e.bossId)?'loot.mainRematchLabel':'loot.randomRematchLabel'),description:equipmentText(mainBossChapter(e.bossId)?'loot.mainRematchSource':'loot.randomRematchSource'),x:area.spawn.x+3,z:area.spawn.z,radius:1.35});
 }

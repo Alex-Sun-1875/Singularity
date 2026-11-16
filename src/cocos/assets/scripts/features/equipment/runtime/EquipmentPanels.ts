@@ -21,6 +21,7 @@ import {preparationText as pt} from '../../progression/locales';
 import {PreparationSkin as P} from '../../../shared/ui/PreparationSkin';
 import {PreparationControls as Controls} from '../../../shared/ui/PreparationControls';
 import {PREPARATION_DESIGN as D,preparationSkinAsset} from '../../../shared/ui/PreparationTheme';
+import {gemText} from '../../gems/locales';
 type Filter='all'|'weapon'|'armor'|'jewelry';
 type View={selected:string;filter:Filter;scope:'current'|'all';scroll?:number;slot?:EquipmentSlot;equipmentNotice?:string;preparing?:string;draft?:Record<Attribute,number>;token?:string;notice?:string};
 const views=new WeakMap<GameSession,View>();
@@ -122,5 +123,5 @@ export function renderEquipmentPanel(hud:Hud,game:GameSession){
  else{P.rule(ui,ui.panel,ui.x(710),ui.y(reference?274:first+2*rowSpace+14),238);art('stat-source',603,295,19,17);L('来源：'+(item.source??'已记录'),723,295,213,14.5,C.ink,30);L(`当前上限＋${view.cap} · 装备极限＋${view.maximum}`,710,323,238,11.5,C.muted,21);}
  const access=game.equipmentAvailability(),blocked=change.block&&change.block!=='equipped',label=foreign?pt('profession.choose'):v.preparing?et('action.preparing'):change.available?(item.kind==='ring'?et(change.slot==='ringRight'?'action.rightRing':'action.leftRing'):et('action.equip')):et(change.block==='equipped'?'action.equipped':change.block==='level'?'action.level':change.block==='two-handed'?'action.offhand':'action.blocked');
  const status=v.preparing?et('notice.loading'):v.equipmentNotice||(!access.available?access.reason:foreign?pt('inventory.browse'):blocked?equipmentChangeReason(change):change.offhand?et('notice.twoHanded'):v.slot?et('slot.target',{slot:EQUIPMENT_SLOT_NAMES[v.slot]}):pt(all?'inventory.browse':'inventory.default'));
- ui.footer(status,[{label:'养成',action:'forge-item:'+item.id},{label,action:foreign?'profession-for:'+item.id:'inventory:equip',enabled:!v.preparing&&(foreign||change.available),primary:true,run:()=>hud.actions.click(foreign?'profession-for:'+item.id:'equip:'+item.id+(v.slot?':'+v.slot:''))},{label:pt('return'),action:'close'}]);
+ ui.footer(status,[{label:'养成',action:'forge-item:'+item.id},{label,action:foreign?'profession-for:'+item.id:'inventory:equip',enabled:!v.preparing&&(foreign||change.available),primary:true,run:()=>hud.actions.click(foreign?'profession-for:'+item.id:'equip:'+item.id+(v.slot?':'+v.slot:''))},{label:gemText('workshop.tab'),action:'gems:'+item.id},{back:true,label:pt('return'),action:'close'}]);
 }

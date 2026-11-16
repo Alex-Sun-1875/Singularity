@@ -6,7 +6,7 @@ import {UI_COLORS as C} from './UiTheme';
 import {UiSkin} from './UiSkin';
 import {FeedbackView as F} from './FeedbackView';
 import {EQUIPMENT} from '../../features/equipment/data/Equipment';
-import {qualityFeedbackRole} from './FeedbackPalette';
+import {qualityFeedbackRole,type FeedbackRole} from './FeedbackPalette';
 import {equipmentIcon} from '../../features/equipment/runtime/EquipmentPresentation';
 import {UI_FRAME_GOLD,UI_FRAME_LAYOUT,UI_GOLD_PANEL_CONTENT as CONTENT,UI_GOLD_PANEL_RULES,UI_SETTINGS_REFERENCE as R} from './UiChrome';
 import {applyRpgFont} from './RpgFont';
@@ -14,17 +14,19 @@ import {GoldMenuButton} from './GoldMenuButton';
 import {GoldMenuActions} from './GoldMenuActions';
 import {GoldPanelShell,type GoldPanelVariant} from './GoldPanelShell';
 import {GoldPanelToggle} from './GoldPanelToggle';
+import {bindButtonFeedback} from './ButtonFeedback';
 
-export interface MenuChoice {label:string;action:string;primary?:boolean;disabled?:boolean;/** Navigation to a parent page, rendered only at the top left. */back?:boolean}
-export interface MenuRow extends MenuChoice {detail:string;icon?:string;skin?:string;selected?:boolean;disabled?:boolean;value?:string;toggle?:boolean}
+export interface MenuChoice {label:string;action:string;primary?:boolean;disabled?:boolean;/** Parent navigation, rendered by the shared adaptive header. */back?:boolean}
+export interface MenuRow extends MenuChoice {detail:string;icon?:string;skin?:string;selected?:boolean;disabled?:boolean;value?:string;toggle?:boolean;/** Optional semantic tone for non-equipment content. */tone?:FeedbackRole}
 export interface MenuPresentation {
  placement?:'left'|'right'|'center';
  /** Width in the established 720-high Cocos design space. */
  width?:number;
  quiet?:boolean;
- /** Mandatory confirmation screens keep an explicit top-left cancel action. */
+ /** Mandatory confirmation screens keep an explicit header cancel action. */
  dismissOnBackdrop?:boolean;
  dismissAction?:string;
+ dismissDisabled?:boolean;
  tabs?:{label:string;action:string;selected:boolean}[];
  centeredTitle?:boolean;
  rightInset?:number;
@@ -79,16 +81,16 @@ export class MenuPanel {
  private settingsRule(parent:Node,kind:keyof typeof R.rules,y:number){
   this.shell.referenceDivider(parent,kind,y);
  }
- private surface(title:string,desiredHeight:number,dismiss?:string):{panel:Node;height:number}{
+ private surface(title:string,desiredHeight:number,dismiss?:string,disabled=false):{panel:Node;height:number}{
   this.hud.clearModal();const {hud}=this,height=Math.min(this.maxHeight,desiredHeight),shade=hud.node('MenuBackdrop',hud.modal,0,0,hud.width,hud.height),ink=shade.addComponent(CompactGraphics);
   ink.fillColor=new Color(C.background.r,C.background.g,C.background.b,this.options.quiet?0:96);ink.rect(-hud.width/2,-hud.height/2,hud.width,hud.height);ink.fill();
   shade.addComponent(BlockInputEvents);
   // Only dismiss screens which explicitly offer a way back. Dialogue, login,
   // new-game confirmation and mandatory recovery retain their own choices.
-  if(dismiss&&this.options.dismissOnBackdrop!==false){const b=shade.addComponent(Button);b.transition=Button.Transition.NONE;shade.on(Button.EventType.CLICK,()=>hud.actions.click(dismiss));}
+  if(dismiss&&!disabled&&this.options.dismissOnBackdrop!==false){const b=shade.addComponent(Button);b.transition=Button.Transition.NONE;shade.on(Button.EventType.CLICK,()=>hud.actions.click(dismiss));}
   const {left,right,bottom,top}=this.bounds,placement=this.options.placement??'center',inset=Math.min(this.options.rightInset??0,Math.max(0,this.options.keepCenterClear?right-this.width-this.pad:right-left-this.width)),x=placement==='left'?left+this.width/2:placement==='right'?right-this.width/2-inset:(left+right)/2;
   const panel=hud.node('MenuSheet',hud.modal,x,(top+bottom-this.crestReserve)/2,this.width,height);this.shell=panel.addComponent(GoldPanelShell);
-  this.shell.configure({title,width:this.width,height,hit:this.hit,unit:this.scale,mobile:this.mobile,variant:this.variant,crest:this.options.crest,centeredTitle:this.options.centeredTitle,dismissAction:dismiss,tabs:this.options.tabs},action=>hud.actions.click(action));
+  this.shell.configure({title,width:this.width,height,hit:this.hit,unit:this.scale,mobile:this.mobile,variant:this.variant,crest:this.options.crest,centeredTitle:this.options.centeredTitle,dismissAction:dismiss,dismissDisabled:disabled,tabs:this.options.tabs,viewport:hud},action=>hud.actions.click(action));
   return {panel,height};
  }
  private scroll(panel:Node,y:number,height:number,contentHeight:number):Node {
@@ -105,10 +107,10 @@ export class MenuPanel {
   }
   return content;
  }
- private face(node:Node,width:number,height:number,selected=false,disabled=false,quiet=false):Button {
-  const face=this.hud.node('MenuRowFace',node,0,0,width,height),g=face.addComponent(CompactGraphics),b=node.addComponent(Button);b.transition=Button.Transition.NONE;b.interactable=!disabled;
-  const draw=(pressed=false)=>{g.clear();if(pressed||!quiet){g.fillColor=pressed?C.hover:C.button;g.roundRect(-width/2,-height/2,width,height,3);g.fill();}if(selected&&!quiet){g.strokeColor=UI_FRAME_GOLD.metal;g.lineWidth=this.scale;g.roundRect(-width/2,-height/2,width,height,3);g.stroke();}};
-  draw();if(!disabled){node.on(Node.EventType.TOUCH_START,()=>draw(true));node.on(Node.EventType.TOUCH_END,()=>draw());node.on(Node.EventType.TOUCH_CANCEL,()=>draw());node.on(Node.EventType.MOUSE_ENTER,()=>draw(true));node.on(Node.EventType.MOUSE_LEAVE,()=>draw());}
+ private face(node:Node,width:number,height:number,selected=false,disabled=false,quiet=false,visualOffset=0):Button {
+  const inset=4*this.scale,w=Math.max(1,width-2*inset),h=Math.max(1,Math.min(height,this.referenceScale?R.rowHeight*this.referenceScale:height)-2*inset);
+  const face=this.hud.node('MenuRowFace',node,0,visualOffset,w,h),g=face.addComponent(CompactGraphics),b=node.addComponent(Button);b.transition=Button.Transition.NONE;b.interactable=!disabled;
+  bindButtonFeedback(node,b,state=>{if(!g.isValid)return;const active=state!=='idle';g.clear();if(active||!quiet){g.fillColor=active?C.hover:C.button;g.roundRect(-w/2,-h/2,w,h,Math.min(6*this.scale,h/2));g.fill();}if(selected&&!quiet){g.strokeColor=UI_FRAME_GOLD.metal;g.lineWidth=this.scale;g.roundRect(-w/2,-h/2,w,h,Math.min(6*this.scale,h/2));g.stroke();}});
   return b;
  }
  private choice(parent:Node,choice:MenuChoice,x:number,y:number,width:number,height=this.hit,primary=false,quiet=true,chrome=false){
@@ -129,9 +131,9 @@ export class MenuPanel {
  }
  private row(parent:Node,row:MenuRow,y:number,height:number,visualOffset=0){
   const r=this.referenceScale,width=this.width-2*this.pad,n=this.hud.node(row.action,parent,0,y,width,height),id=row.action.split(':')[1],item=EQUIPMENT[id],icon=row.skin??row.icon??(item?equipmentIcon(item):undefined),labelSize=r?Math.max(this.mobile?14*this.scale:0,R.rowSize*r):this.mobile?28:19,detailSize=r?Math.max(this.mobile?14*this.scale:0,20*r):this.mobile?26:16;
-  this.face(n,width,height,false,!!row.disabled,true);
+  this.face(n,width,height,false,!!row.disabled,true,visualOffset);
   const iconSpace=icon?(row.skin?26*this.scale:this.mobile?58:42):0,textWidth=this.rowTextWidth(row),textX=r?-this.width/2+R.labelX*r+textWidth/2:-width/2+16+iconSpace+textWidth/2,labelH=this.textHeight(row.label,textWidth,labelSize),detailH=this.textHeight(row.detail,textWidth,detailSize),total=labelH+(detailH?detailH+4:0);
-  const label=this.text(n,row.label,textX,total/2-labelH/2,textWidth,labelH,labelSize,row.disabled?F.color('text.disabled'):item?F.color(qualityFeedbackRole(item.quality)):C.ink);
+  const label=this.text(n,row.label,textX,total/2-labelH/2,textWidth,labelH,labelSize,row.disabled?F.color('text.disabled'):row.tone?F.color(row.tone):item?F.color(qualityFeedbackRole(item.quality)):C.ink);
   label.node.name='MenuRowTitle';
   if(row.detail)this.text(n,row.detail,textX,-total/2+detailH/2,textWidth,detailH,detailSize,F.color('text.disabled')).node.name='MenuRowDetail';
   if(icon){const size=r?R.iconSize*r:row.skin?21*this.scale:this.mobile?38:28,sprite=row.skin?UiSkin.asset(n,row.skin,size,size,false):UiSkin.sprite(n,'ui/icons/'+icon,size,size,row.disabled?F.color('text.disabled'):item?F.color(qualityFeedbackRole(item.quality)):C.gold);sprite.node.setPosition(r?-this.width/2+R.iconX*r:-width/2+16+size/2,0);}
@@ -142,13 +144,14 @@ export class MenuPanel {
  }
  private navigation(buttons:readonly MenuChoice[]){
   const back=buttons.find(b=>b.back)??buttons.find(b=>b.action==='close');
-  return {dismiss:this.options.dismissAction??back?.action,actions:buttons.filter(b=>!b.back&&b.action!=='close'&&b.action!==this.options.dismissAction)};
+  const dismiss=this.options.dismissAction??back?.action,disabled=this.options.dismissDisabled??buttons.find(b=>b.action===dismiss)?.disabled??false;
+  return {dismiss,disabled,actions:buttons.filter(b=>!b.back&&b.action!=='close'&&b.action!==this.options.dismissAction)};
  }
  show(title:string,body:string,buttons:MenuChoice[]){
-  const {dismiss,actions:choices}=this.navigation(buttons);
+  const {dismiss,disabled,actions:choices}=this.navigation(buttons);
   const width=this.width-2*this.pad,textWidth=width-2*CONTENT.textInset*this.scale,textHeight=this.textHeight(body,textWidth),introTop=CONTENT.introTop*this.scale,bodyHeight=body?introTop+textHeight+CONTENT.bodyBottom*this.scale:0,choiceGap=body&&choices.length?this.gap*1.5:0,heights=choices.map(b=>Math.max(this.hit,this.textHeight(b.label,width-16*this.scale,this.mobile?27:18)+16*this.scale));
   const choicesHeight=heights.reduce((s,h)=>s+h,0)+Math.max(0,choices.length-1)*this.gap,choiceViewHeight=Math.min(choicesHeight,this.maxHeight*.5),bodyViewHeight=Math.min(bodyHeight,this.maxHeight-this.header-this.pad-choiceGap-choiceViewHeight);
-  const {panel,height}=this.surface(title,this.header+bodyViewHeight+choiceGap+choiceViewHeight+this.pad,dismiss);
+  const {panel,height}=this.surface(title,this.header+bodyViewHeight+choiceGap+choiceViewHeight+this.pad,dismiss,disabled);
   // Keep the first action visible even when help or introduction text is long.
   if(body){const content=this.scroll(panel,height/2-this.header-bodyViewHeight/2,bodyViewHeight,bodyHeight);this.text(content,body,0,-introTop-textHeight/2,textWidth,textHeight).verticalAlign=Label.VerticalAlign.TOP;}
   if(choices.length){const content=this.scroll(panel,-height/2+this.pad+choiceViewHeight/2,choiceViewHeight,choicesHeight),actions=this.hud.node('MenuActions',content,0,-choicesHeight/2,width,choicesHeight).addComponent(GoldMenuActions);
@@ -157,13 +160,13 @@ export class MenuPanel {
  }
  showList(title:string,subtitle:string,rows:MenuRow[],footer:MenuChoice[]){
   if(this.referenceScale){this.showReferenceList(title,rows,footer);return;}
-  const {dismiss,actions}=this.navigation(footer),width=this.width-2*this.pad;
+  const {dismiss,disabled,actions}=this.navigation(footer),width=this.width-2*this.pad;
   const subtitleWidth=width-2*CONTENT.textInset*this.scale,subtitleTextHeight=this.textHeight(subtitle,subtitleWidth),introTop=CONTENT.introTop*this.scale,subtitleHeight=subtitle?introTop+subtitleTextHeight:0,heights=rows.map(r=>this.rowHeight(r)),empty=rows.length?0:this.textHeight('暂无可选内容',width)+this.gap;
   const contentHeight=subtitleHeight+(subtitle?this.gap:0)+heights.reduce((s,h)=>s+h,0)+Math.max(0,rows.length-1)*this.gap+empty;
   // A footer with more than two actions becomes a vertical group so targets
   // never become narrow strips on phone screens.
   const stack=actions.length>2,footerRows=stack?actions.length:actions.length?1:0,footerHeight=footerRows?(this.hit+this.gap)*footerRows:0;
-  const {panel,height}=this.surface(title,this.header+contentHeight+footerHeight+this.pad,dismiss),viewHeight=height-this.header-footerHeight-this.pad,content=this.scroll(panel,-height/2+this.pad+footerHeight+viewHeight/2,viewHeight,contentHeight);
+  const {panel,height}=this.surface(title,this.header+contentHeight+footerHeight+this.pad,dismiss,disabled),viewHeight=height-this.header-footerHeight-this.pad,content=this.scroll(panel,-height/2+this.pad+footerHeight+viewHeight/2,viewHeight,contentHeight);
   if(subtitle)this.text(content,subtitle,0,-introTop-subtitleTextHeight/2,subtitleWidth,subtitleTextHeight,this.font,F.color('text.disabled')).verticalAlign=Label.VerticalAlign.TOP;
   let y=subtitleHeight+(subtitle?this.gap:0);rows.forEach((r,i)=>{this.row(content,r,-y-heights[i]/2,heights[i]);y+=heights[i]+this.gap;if(i<rows.length-1)this.rule(content,-y+this.gap/2,width);});
   if(!rows.length)this.text(content,'暂无可选内容',0,-y-empty/2,width,empty,this.font,F.color('text.disabled'));
@@ -171,10 +174,10 @@ export class MenuPanel {
    actions.forEach((b,i)=>this.choice(panel,b,stack?0:(i-(actions.length-1)/2)*(actionWidth+this.gap),-height/2+this.pad+this.hit/2+(stack?(actions.length-1-i)*(this.hit+this.gap):0),actionWidth,this.hit,b.action==='close'&&b.label.startsWith('继续'),true,true));}
  }
  private showReferenceList(title:string,rows:MenuRow[],footer:MenuChoice[]){
-  const r=this.referenceScale,{dismiss,actions}=this.navigation(footer),referenceRows=rows.length===3&&rows.every(row=>row.toggle&&!row.detail),heights=rows.map(row=>Math.max(R.rowHeight*r,this.rowHeight(row))),centers:number[]=[];
+  const r=this.referenceScale,{dismiss,disabled,actions}=this.navigation(footer),referenceRows=rows.length===3&&rows.every(row=>row.toggle&&!row.detail),heights=rows.map(row=>Math.max(R.rowHeight*r,this.rowHeight(row))),centers:number[]=[];
   // Grouped switches use contiguous phone hit bands; visible rows retain the approved slots.
   rows.forEach((_,i)=>centers.push(Math.max((R.rowFirstY+i*R.rowStep)*r,i?centers[i-1]+heights[i-1]/2+(referenceRows?0:this.gap)+heights[i]/2:this.header+heights[i]/2)));
-  const last=rows.length?centers[centers.length-1]+heights[heights.length-1]/2:this.header,{panel,height}=this.surface(title,this.referenceHeight,dismiss);
+  const last=rows.length?centers[centers.length-1]+heights[heights.length-1]/2:this.header,{panel,height}=this.surface(title,this.referenceHeight,dismiss,disabled);
   const footerCenter=Math.min(R.footerY*r,height-this.pad-this.hit/2),bodyHeight=Math.max(this.hit,footerCenter-this.hit/2-this.gap-this.header),contentHeight=Math.max(bodyHeight,last-this.header),content=this.scroll(panel,height/2-this.header-bodyHeight/2,bodyHeight,contentHeight);
   rows.forEach((row,i)=>{this.row(content,row,-centers[i]+this.header,heights[i],referenceRows?centers[i]-(R.rowFirstY+i*R.rowStep)*r:0);if(i<rows.length-1)this.settingsRule(content,'row',referenceRows?this.header-(R.rowRuleFirstY+i*R.rowStep)*r:-((centers[i]+heights[i]/2+centers[i+1]-heights[i+1]/2)/2-this.header));});
   this.settingsRule(panel,'row',height/2-(referenceRows?(R.rowRuleFirstY+(rows.length-1)*R.rowStep)*r:Math.min(last+this.gap/2,footerCenter-this.hit/2-this.gap/2)));

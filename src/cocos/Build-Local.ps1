@@ -1,11 +1,13 @@
-param([ValidateSet('web-desktop','web-mobile','wechatgame')][string]$Platform='web-mobile',[string]$TapAppId='',[ValidatePattern('^[a-zA-Z0-9][a-zA-Z0-9_-]*$')][string]$OutputName='',[string]$EditorUserData='')
+param([ValidateSet('web-desktop','web-mobile','wechatgame')][string]$Platform='web-mobile',[string]$TapAppId='',[ValidatePattern('^[a-zA-Z0-9][a-zA-Z0-9_-]*$')][string]$OutputName='',[string]$EditorUserData='',[ValidateSet('dev','test')][string]$Profile='test',[switch]$ResourceBundles)
 $ErrorActionPreference='Stop'
+$Profile=$Profile.ToLowerInvariant()
 $project=$PSScriptRoot
+if($ResourceBundles -and $Platform -ne 'web-mobile'){throw 'ResourceBundles is the Web-mobile resource-graph validation mode.'}
 if([string]::IsNullOrWhiteSpace($OutputName)){$OutputName=$Platform}
 $editor='C:\ProgramData\cocos\editors\Creator\3.8.8\CocosCreator.exe'
 if(!(Test-Path -LiteralPath $editor)){throw 'Cocos Creator 3.8.8 is not installed at the configured path.'}
 if($Platform -eq 'wechatgame'){
- & (Join-Path $project 'Build-TapTap.ps1') -TapAppId $TapAppId -OutputName $OutputName -EditorUserData $EditorUserData
+ & (Join-Path $project 'Build-TapTap.ps1') -Profile $Profile -TapAppId $TapAppId -OutputName $OutputName -EditorUserData $EditorUserData
  if($LASTEXITCODE -ne 0){throw 'TapTap release build failed.'}
  return
 }
@@ -24,7 +26,7 @@ $lockOwnerBytes=[System.Text.Encoding]::ASCII.GetBytes([string]$PID)
 $localBuildLock.Write($lockOwnerBytes,0,$lockOwnerBytes.Length)
 $localBuildLock.Flush()
 try{
-$releaseJson=& node (Join-Path $project 'tools/taptap-config.cjs') --prepare --json --mode preview
+$releaseJson=& node (Join-Path $project 'tools/taptap-config.cjs') --prepare --json --mode preview --profile $Profile
 if($LASTEXITCODE -ne 0){throw 'Game release configuration validation failed.'}
 $release=$releaseJson|ConvertFrom-Json
 $temp=Join-Path $project 'temp'
@@ -33,6 +35,11 @@ New-Item -ItemType Directory -Force -Path $temp | Out-Null
 if($LASTEXITCODE -ne 0){throw 'Navigation WASM source verification failed.'}
 $config=@{platform=$Platform;name=$release.projectName;outputName=$OutputName;buildPath='project://build';debug=$false;useSplashScreen=$false;startScene='e0158e35-9bac-42ca-a8e1-16cdd7e71953';scenes=@(@{url='db://assets/FirstChapter.scene';uuid='e0158e35-9bac-42ca-a8e1-16cdd7e71953'});md5Cache=$true;mainBundleCompressionType='merge_dep';packages=@{}}
 $configPath=Join-Path $temp ('build-'+$OutputName+'.json')
+if($ResourceBundles){
+ & python (Join-Path $project 'tools/prepare-taptap.py') --platform web-mobile --output-name $OutputName --mode preview --profile $Profile
+ if($LASTEXITCODE -ne 0){throw 'Web resource bundle configuration failed.'}
+ $config=Get-Content -LiteralPath $configPath -Raw | ConvertFrom-Json -AsHashtable
+}
 $config | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath $configPath -Encoding utf8
 # A restored library can leave release.json describing different mesh bytes.
 & python (Join-Path $project 'tools/refresh-morph-build-cache.py') --project $project
@@ -67,10 +74,19 @@ for($attempt=1;$attempt -le 2;$attempt++){
 }
 & node (Join-Path $project 'tools/render-policy.cjs') --build (Join-Path $project ('build/'+$OutputName))
 if($LASTEXITCODE -ne 0){throw 'Generated rendering configuration violated the performance policy.'}
+& node (Join-Path $project 'tools/build-profile.cjs') --verify-build (Join-Path $project ('build/'+$OutputName)) --profile $Profile
+if($LASTEXITCODE -ne 0){throw 'Exported Web gameplay profile does not match the requested profile.'}
 & node (Join-Path $project 'tools/prepare-navigation-wasm.cjs') --build (Join-Path $project ('build/'+$OutputName))
 if($LASTEXITCODE -ne 0){throw 'Navigation WASM export failed.'}
 $entry=Join-Path $project ('build/'+$OutputName+'/index.html')
 if($Platform -ne 'wechatgame' -and !(Test-Path -LiteralPath $entry)){throw 'Cocos exited without producing the expected HTML build.'}
+if($ResourceBundles){
+ # This existing HTML-only flag selects the bundle graph, never TapTap identity.
+ $bundleHtml=Get-Content -LiteralPath $entry -Raw
+ $bundleBoot='<script>globalThis.__SINGULARITY_BUNDLE_PREVIEW__=true;</script>'
+ $bundleHtml=$bundleHtml.Replace('<head>',('<head>'+[Environment]::NewLine+'  '+$bundleBoot))
+ [System.IO.File]::WriteAllText($entry,$bundleHtml,[System.Text.UTF8Encoding]::new($false))
+}
 if($OutputName -eq 'concept-2d' -or $OutputName.StartsWith('concept-2d-')){
  # 绘制场景默认使用3D主角；显式view/player参数仍可用于对比。
  $html=Get-Content -LiteralPath $entry -Raw
@@ -83,4 +99,11 @@ $notices=Join-Path $project 'build-templates/web-desktop/THIRD_PARTY_NOTICES.txt
 if($LASTEXITCODE -ne 0){throw 'Web game icon export failed.'}
 if(Test-Path -LiteralPath $notices){Copy-Item -LiteralPath $notices -Destination (Join-Path $project ('build/'+$OutputName+'/THIRD_PARTY_NOTICES.txt')) -Force}
 Write-Output ('Built '+$Platform+' at '+(Join-Path $project ('build/'+$OutputName)))
-}finally{$localBuildLock.Dispose();Remove-Item -LiteralPath $localBuildLockPath}
+}finally{
+ try{
+  if($Profile -eq 'dev'){
+   & node (Join-Path $project 'tools/taptap-config.cjs') --prepare --json --mode preview --profile test | Out-Null
+   if($LASTEXITCODE -ne 0){throw 'Could not restore normal test gameplay configuration.'}
+  }
+ }finally{$localBuildLock.Dispose();Remove-Item -LiteralPath $localBuildLockPath}
+}

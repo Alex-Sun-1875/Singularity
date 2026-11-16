@@ -1,23 +1,27 @@
 import {CompactGraphics} from '../../../shared/ui/CompactGraphics';
 import {Color,EventTouch,Graphics,Label,Node,UITransform,ButtonComponent as Button,Sprite,sys} from 'cc';
 import type {DiceView} from '../../progression/common/SkillChecks';
-import {bonusText} from '../../equipment/common/EquipmentDice';
 import {EQUIPMENT} from '../../equipment/data/Equipment';
 import {EquipmentArt} from '../../equipment/runtime/EquipmentArt';
+import {equipmentIconFrame} from '../../equipment/runtime/EquipmentIconFrame';
 import {Hud} from '../../../app/Hud';
 import {UiSkin} from '../../../shared/ui/UiSkin';
-import {UiChrome} from '../../../shared/ui/UiChrome';
-import {equipmentTypeName} from '../../equipment/runtime/EquipmentPresentation';
+import {equipmentTypeName,equipmentBasePresentation} from '../../equipment/runtime/EquipmentPresentation';
+import {qualityFeedbackRole} from '../../../shared/ui/FeedbackPalette';
 import {applyRpgFont} from '../../../shared/ui/RpgFont';
 import {UI_COLORS as C} from '../../../shared/ui/UiTheme';
 import {FeedbackView as F} from '../../../shared/ui/FeedbackView';
 import {RpgPanel} from '../../../shared/ui/RpgPanel';
+import {GoldMenuButton} from '../../../shared/ui/GoldMenuButton';
+import {DoubleGoldFrame} from '../../../shared/ui/DoubleGoldFrame';
+import {bindButtonFeedback,type ButtonFeedback,type ButtonFeedbackState} from '../../../shared/ui/ButtonFeedback';
 
 const DURATION=1;
 const T={surface:C.panel,felt:new Color(21,15,10),edge:C.line,gold:C.gold,text:C.ink,muted:C.muted,quiet:F.color('text.disabled'),green:F.color('state.success'),red:F.color('state.failure'),ink:C.dark};
+const GEAR_NOTICE={width:480,inset:20,labelWidth:44,artSize:104,artGap:24,textGutter:6} as const;
 type Point={x:number;y:number;z:number};
 type Die={node:Node;graphics:Graphics;face:Label;marks:Label[];caption:Label;radius:number;index:number;cube:boolean;body?:Node;art?:Sprite};
-type Control={node:Node;visual:Node;graphics:Graphics;label:Label;enabled:boolean;primary:boolean;title:string;w:number;h:number;pressed:boolean;hover:boolean;selected:boolean};
+type Control={node:Node;visual:Node;graphics:Graphics;label:Label;enabled:boolean;primary:boolean;title:string;w:number;h:number;state:ButtonFeedbackState;feedback?:ButtonFeedback;selected:boolean};
 const PHI=(1+Math.sqrt(5))/2;
 const UNIT:Point[]=[[-1,PHI,0],[1,PHI,0],[-1,-PHI,0],[1,-PHI,0],[0,-1,PHI],[0,1,PHI],[0,-1,-PHI],[0,1,-PHI],[PHI,0,-1],[PHI,0,1],[-PHI,0,-1],[-PHI,0,1]].map(([x,y,z])=>{const l=Math.hypot(x,y,z);return{x:x/l,y:y/l,z:z/l};});
 const FACES=[[0,11,5],[0,5,1],[0,1,7],[0,7,10],[0,10,11],[1,5,9],[5,11,4],[11,10,2],[10,7,6],[7,1,8],[3,9,4],[3,4,2],[3,2,6],[3,6,8],[3,8,9],[4,9,5],[2,4,11],[6,2,10],[8,6,7],[9,8,1]];
@@ -37,7 +41,6 @@ export class DicePanel {
  private host:Node|null=null;private current:DiceView|null=null;
  private dice:Die[]=[];private controls:Control[]=[];
  private status:Label|null=null;private formula:Label|null=null;private outcome:Label|null=null;
- private rewardHost:Node|null=null;
  private elapsed=DURATION;private builtWidth=0;private builtHeight=0;
  constructor(private readonly hud:Hud){}
  get busy(){return this.elapsed<DURATION&&this.ownsModal();}
@@ -46,16 +49,20 @@ export class DicePanel {
   const newRoll=owned&&previous?.id===view.id&&!!view.roll&&(!previous.roll||previous.roll.attempt!==view.roll.attempt);
   this.elapsed=same&&this.elapsed<DURATION?this.elapsed:newRoll?0:DURATION;this.current=view;this.destroyOwned();this.hud.clearModal();
   this.builtWidth=this.hud.width;this.builtHeight=this.hud.height;
-  const narrow=this.hud.width<760,w=Math.max(48,Math.min(sys.isMobile?1440:1160,this.hud.width-(narrow?24:56))),h=Math.max(80,Math.min(648,this.hud.height-44));
+  const narrow=this.hud.width<760,unit=this.hud.uiUnit,safe=sys.getSafeAreaRect(false);
+  const w=view.gear?Math.max(48,Math.min(GEAR_NOTICE.width*unit,safe.width-32*unit)):Math.max(48,Math.min(sys.isMobile?1440:1160,this.hud.width-(narrow?24:56)));
+  const h=view.gear?Math.max(80,Math.min((narrow?500:344)*unit,this.equipmentNoticeCopy(view,w/unit).preferredHeight*unit,safe.height-32*unit)):Math.max(80,Math.min(648,this.hud.height-44));
   const host=this.hud.node('DiceModal',this.hud.modal,0,0,this.hud.width,this.hud.height);this.host=host;
-  const shade=this.hud.node('DiceShade',host,0,0,this.hud.width,this.hud.height),g=shade.addComponent(CompactGraphics);g.fillColor=new Color(12,8,5,238);g.rect(-this.hud.width/2,-this.hud.height/2,this.hud.width,this.hud.height);g.fill();
+  const shade=this.hud.node('DiceShade',host,0,0,this.hud.width,this.hud.height),g=shade.addComponent(CompactGraphics);g.fillColor=new Color(12,8,5,view.gear?170:238);g.rect(-this.hud.width/2,-this.hud.height/2,this.hud.width,this.hud.height);g.fill();
   for(const event of [Node.EventType.TOUCH_START,Node.EventType.TOUCH_MOVE,Node.EventType.TOUCH_END,Node.EventType.TOUCH_CANCEL])shade.on(event,(e:EventTouch)=>{e.propagationStopped=true;});
-  const panel=this.hud.panel(host,0,0,w,h,T.surface);panel.name='DiceFrame';const leather=panel.getChildByName('Skin:ui/quiet-bronze/leather-inset-v8')?.getComponent(Sprite);if(leather)leather.color=new Color(255,255,255,65);
+  const panel=view.gear?this.hud.node('DiceFrame',host,-this.hud.width/2+safe.x+safe.width/2,-this.hud.height/2+safe.y+safe.height/2,w,h):this.hud.panel(host,0,0,w,h,T.surface);panel.name='DiceFrame';
+  if(view.gear)UiSkin.panel(panel,w,h,T.surface,'panel',false,.5*unit);
+  const leather=panel.getChildByName('Skin:ui/quiet-bronze/leather-inset-v8')?.getComponent(Sprite);if(leather)leather.color=new Color(255,255,255,65);
+  if(view.gear){this.equipmentLayout(panel,w,h,view);panel.getComponent(DoubleGoldFrame)?.bringBorderToFront();return;}
   if(narrow){this.rotation(panel,w,h,view);this.refresh();return;}
-  this.landscape(panel,w,h,view);this.refresh();
+  this.landscape(panel,w,h,view);panel.getComponent(DoubleGoldFrame)?.bringBorderToFront();this.refresh();
  }
  private landscape(panel:Node,w:number,h:number,view:DiceView){
-  if(view.gear){this.equipmentLayout(panel,w,h,view);return;}
   const sy=h/648,y=(v:number)=>v*sy,pad=38,left=-w/2+pad,right=w/2-pad,split=left+(w-pad*2)*.6,stageW=split-left-28,detail=split+30,detailW=right-detail,center=left+stageW/2,font=sys.isMobile?1.5:1;
   this.label(panel,'旅 途 事 件  /  '+view.skillLabel,left,y(290),w-240,13*font,T.gold,26*sy);
   this.label(panel,`余烬 ${view.inspiration} / 4`,right-170,y(290),170,14*font,T.muted,26*sy,Label.HorizontalAlign.RIGHT);
@@ -69,41 +76,56 @@ export class DicePanel {
   this.formula=this.label(panel,'',left+10,y(-184),stageW-20,18*font,T.muted,38*sy,Label.HorizontalAlign.CENTER);
   this.line(panel,split,y(137),split,y(-202),alpha(T.edge,85));this.actionDetails(panel,detail,detailW,sy,view,font);this.footer(panel,w,sy,view);
  }
+ private equipmentNoticeCopy(view:DiceView,width:number){
+  const item=EQUIPMENT[view.gear!.item],base=equipmentBasePresentation(item,view.gear!.level),portrait=this.hud.width<this.hud.height;
+  const paragraphs:{name:string;title:string;value:string;size:number;color:Color;height:number}[]=[],bodyWidth=width-2*GEAR_NOTICE.inset-GEAR_NOTICE.labelWidth-GEAR_NOTICE.textGutter;
+  const add=(name:string,title:string,value:string,size:number,color:Color)=>{if(!value)return;const lines=value.split('\n').reduce((sum,line)=>sum+Math.max(1,Math.ceil(Array.from(line).reduce((n,char)=>n+(char.charCodeAt(0)<128?.54:1),0)/(bodyWidth/size))),0);paragraphs.push({name,title,value,size,color,height:lines*(size+5)});};
+  add('EquipmentLore','介绍',base.lore,13,T.muted);
+  add('OwnedEquipmentDescription','特效',base.description,13,T.text);
+  add('EquipmentSource','来源',base.source,13,T.muted);
+  const bodyTop=portrait?278:156,copyHeight=paragraphs.reduce((sum,p)=>sum+p.height,0)+Math.max(0,paragraphs.length-1)*8;
+  return {item,base,paragraphs,bodyTop,copyHeight,preferredHeight:bodyTop+copyHeight+76};
+ }
  private equipmentLayout(panel:Node,w:number,h:number,view:DiceView){
-  const sy=h/648,y=(v:number)=>v*sy,f=view.gear!,item=EQUIPMENT[f.item],font=sys.isMobile?1.45:1,left=-w/2+46,content=w-92,artCenter=-w*.225,right=w*.235,rightW=w*.4;
-  this.label(panel,'战 利 品  /  余 火 锻 印',left,y(286),content,13*font,T.gold,26*sy,Label.HorizontalAlign.CENTER);
-  this.label(panel,item.name,left,y(243),content,34*font,T.gold,52*sy,Label.HorizontalAlign.CENTER);
-  this.label(panel,'基础装备保底 · 每件一次免费机遇',left,y(199),content,16*font,T.muted,30*sy,Label.HorizontalAlign.CENTER);
-  this.line(panel,left,y(173),left+content,y(173),alpha(T.edge,130));
-  const halo=this.hud.node('EquipmentSpotlight',panel,artCenter,y(20),w*.46,300*sy),g=halo.addComponent(CompactGraphics);
-  for(let i=18;i>0;i--){g.fillColor=new Color(160,104,38,4);g.ellipse(0,2,(45+i*7)*Math.min(1,w/1160),(38+i*6)*sy);g.fill();}
-  g.strokeColor=alpha(T.gold,50);g.lineWidth=1;g.ellipse(0,-116*sy,143,21*sy);g.stroke();
-  const crest=this.hud.node('EngravedArtifactSetting',halo,0,0,290,290*sy);UiChrome.circleOrnament(crest,132,.8);
-  const art=this.hud.node('EquipmentHero:'+item.id,panel,artCenter,y(24),260,270*sy);EquipmentArt.paintedIcon(art,item,252,268*sy);
-  this.label(panel,'已 获 得',artCenter-w*.22,y(166),w*.44,13*font,T.muted,26*sy,Label.HorizontalAlign.CENTER);
-  this.label(panel,`${item.quality} · ${equipmentTypeName(item)}`,artCenter-w*.22,y(-130),w*.44,17*font,T.gold,32*sy,Label.HorizontalAlign.CENTER);
-  const descriptionW=w*.44,descriptionSize=Math.max(14*font,12*this.hud.height/390),descriptionH=Math.max(62*sy,(Math.ceil(item.description.length/(descriptionW/descriptionSize))+1)*descriptionSize*1.3),description=RpgPanel.scroll(this.hud,panel,artCenter,y(-173),descriptionW,62*sy,descriptionH,this.hud.height/390);
-  this.label(description,item.description,-descriptionW/2,-descriptionH/2,descriptionW,descriptionSize,T.muted,descriptionH,Label.HorizontalAlign.CENTER);
-  this.line(panel,w*.055,y(142),w*.055,y(-199),alpha(T.edge,90));
-  this.status=this.label(panel,'',right-rightW/2,y(142),rightW,23*font,T.gold,38*sy,Label.HorizontalAlign.CENTER);
-  const radius=(sys.isMobile?83:79)*sy,node=this.hud.node('D20-0',panel,right,y(26),radius*2.8,radius*2.8),graphics=node.addComponent(CompactGraphics),face=this.dieLabel(node,'DieFace-0',radius,48),marks=Array.from({length:5},(_,j)=>this.dieLabel(node,'Facet-0-'+j,radius,26)),caption=this.label(panel,'',right-rightW/2,y(-84),rightW,14*font,T.muted,28*sy,Label.HorizontalAlign.CENTER),die:Die={node,graphics,face,marks,caption,radius,index:0,cube:true};this.runeArt(die);this.dice.push(die);
-  this.formula=this.label(panel,'',right-rightW/2,y(-126),rightW,17*font,T.text,66*sy,Label.HorizontalAlign.CENTER);
-  if(!view.roll){
-   const upgrade=f.possibleUpgrade?`6 · 升格为更高品质的同部位装备`:'6 · 强效精铸，追加更多属性';
-   this.label(panel,upgrade,right-rightW/2,y(-179),rightW,13*font,T.gold,40*sy,Label.HorizontalAlign.CENTER);
-  }else if(f.outcome?.upgrade&&!f.upgradeOwned){
-   this.rewardHost=this.hud.node('UpgradeDrop',panel,right,y(-180),rightW,60*sy);const upgrade=EQUIPMENT[f.outcome.upgrade],icon=this.hud.node('UpgradeIcon',this.rewardHost,-rightW/2+32,0,58,58*sy);EquipmentArt.paintedIcon(icon,upgrade,56,56*sy);
-   this.label(this.rewardHost,'额外发现 · '+upgrade.quality,-rightW/2+74,14*sy,rightW-80,12*font,T.gold,24*sy);this.label(this.rewardHost,upgrade.name,-rightW/2+74,-12*sy,rightW-80,17*font,T.text,32*sy);
-  }else if(view.roll)this.label(panel,f.upgradeOwned&&f.outcome?.upgrade?'升格装备已拥有，铸印属性照常追加':'确认后，穿戴这件装备即可生效',right-rightW/2,y(-184),rightW,12*font,T.muted,30*sy,Label.HorizontalAlign.CENTER);
-  this.footer(panel,w,sy,view);
+  const u=this.hud.uiUnit,W=w/u,H=h/u,portrait=this.hud.width<this.hud.height,left=GEAR_NOTICE.inset,right=W-left,contentW=right-left,textRight=right-GEAR_NOTICE.textGutter,x=(v:number)=>(v-W/2)*u,y=(v:number)=>(H/2-v)*u;
+  const {item,base,paragraphs,bodyTop}=this.equipmentNoticeCopy(view,W),artSize=GEAR_NOTICE.artSize,bodyLeft=portrait?left:left+artSize+GEAR_NOTICE.artGap,bodyW=textRight-bodyLeft;
+  const text=(name:string,value:string,l:number,t:number,width:number,size=13,color=T.text,height=24,align=Label.HorizontalAlign.LEFT)=>{
+   const label=this.hud.text(panel,value,x(l+width/2),y(t),width*u,size*u,color,height*u);label.node.name=name;applyRpgFont(label);label.horizontalAlign=align;label.lineHeight=(size+5)*u;label.enableWrapText=true;label.overflow=Label.Overflow.CLAMP;return label;
+  };
+  text('EquipmentNoticeTitle','获得装备',left,22,textRight-left,12,T.gold,20);
+  const art=this.hud.node('EquipmentHero:'+item.id,panel,x(portrait?W/2:left+artSize/2),y(portrait?98:92),artSize*u,artSize*u),frame=equipmentIconFrame(art,artSize*u,artSize*u,{quality:item.quality,scale:u,ornamentScale:1.75});
+  EquipmentArt.rawIcon(frame.content,item,(artSize-6)*u,(artSize-6)*u,true);
+  text('OwnedEquipmentName',item.name,bodyLeft,portrait?176:56,bodyW,20,T.text,30);
+  text('OwnedEquipmentType',`${item.quality} · ${equipmentTypeName(item)} · ${base.stats[0].value}`,bodyLeft,portrait?202:82,bodyW,12,F.color(qualityFeedbackRole(item.quality)),22);
+  base.stats.slice(1).forEach((stat,i)=>{const top=(portrait?231:109)+i*22;
+   text('EquipmentBaseLabel:'+(i+1),stat.label,bodyLeft,top,bodyW*.74,12,T.muted,20);
+   text('EquipmentBaseValue:'+(i+1),stat.value,bodyLeft+bodyW*.76,top,bodyW*.24,14,T.text,22,Label.HorizontalAlign.RIGHT);
+  });
+  const source=paragraphs.find(p=>p.name==='EquipmentSource'),details=paragraphs.filter(p=>p!==source),detailH=details.reduce((sum,p)=>sum+p.height,0)+Math.max(0,details.length-1)*8;
+  const viewportH=Math.max(18,H-76-bodyTop-(source?source.height+8:0)),fullH=Math.max(viewportH,detailH);
+  const drawCopy=(parent:Node,paragraph:typeof paragraphs[number],top:number)=>{
+   const labelW=GEAR_NOTICE.labelWidth,gutter=GEAR_NOTICE.textGutter,lineH=(paragraph.size+5)*u,caption=this.hud.text(parent,paragraph.title+'：',(-contentW/2+labelW/2)*u,top-lineH/2,labelW*u,13*u,T.muted,lineH),copy=this.hud.text(parent,paragraph.value,(labelW-gutter)/2*u,top-paragraph.height*u/2,(contentW-labelW-gutter)*u,paragraph.size*u,paragraph.color,paragraph.height*u);
+   caption.node.name=paragraph.name+'Label';copy.node.name=paragraph.name;
+   for(const label of [caption,copy]){applyRpgFont(label);label.horizontalAlign=Label.HorizontalAlign.LEFT;label.lineHeight=lineH;label.overflow=Label.Overflow.CLAMP;}caption.enableWrapText=false;copy.enableWrapText=true;
+  };
+  if(details.length){const content=RpgPanel.scroll(this.hud,panel,0,y(bodyTop+viewportH/2),contentW*u,viewportH*u,fullH*u,u);
+   if(detailH>viewportH)content.parent!.parent!.getComponent(UITransform)!.height=Math.max(48*u,viewportH*u);
+   content.parent!.parent!.getChildByName('RpgScrollbar')?.setPosition((contentW/2-1)*u,0);
+   let top=0;for(const paragraph of details){drawCopy(content,paragraph,-top*u);top+=paragraph.height+8;}
+  }
+  // A shared caption column keeps every continuation after the colon aligned.
+  if(source)drawCopy(panel,source,y(H-76-source.height));
+  this.line(panel,x(left),y(H-64),x(right),y(H-64),alpha(T.edge,115));
+  const buttonW=Math.min(180,contentW),host=this.hud.node('dice:continue',panel,0,y(H-32),buttonW*u,48*u),button=host.addComponent(GoldMenuButton);
+  button.configure({label:'收下装备',width:buttonW*u,height:48*u,unit:u,visualHeight:36*u,fontSize:15*u,primary:true},()=>this.hud.actions.click('dice:continue'));
  }
  private footer(panel:Node,w:number,sy:number,view:DiceView){
   const left=-w/2+40,available=w-80,y=(v:number)=>v*sy,mobile=sys.isMobile,gap=Math.max(12,8*this.hud.height/390);
   this.line(panel,left,y(-222),left+available,y(-222),alpha(T.edge,135));
   const actions:{title:string;action:string;width:number;primary:boolean}[]=[];
-  if(view.canCancel)actions.push({title:view.gear?'直接收下原装':'暂且离开',action:'dice:cancel',width:available*.26,primary:false});
+  if(view.canCancel)actions.push({title:'暂且离开',action:'dice:cancel',width:available*.26,primary:false});
   if(view.roll&&view.canReroll)actions.push({title:`1 余烬重掷（余 ${view.inspiration}）`,action:'dice:reroll',width:available*.43,primary:false});
-  actions.push({title:view.roll?view.gear?'收下装备与铸印':'确认行动结果':view.gear?'摇骰，追加铸印':'掷骰，付诸行动',action:view.roll?'dice:continue':'dice:roll',width:available-actions.reduce((n,a)=>n+a.width,0)-gap*actions.length,primary:true});
+  actions.push({title:view.roll?'确认行动结果':'掷骰，付诸行动',action:view.roll?'dice:continue':'dice:roll',width:available-actions.reduce((n,a)=>n+a.width,0)-gap*actions.length,primary:true});
   let x=left;for(const a of actions){this.control(panel,a.title,x+a.width/2,y(-276),a.width,(mobile?94:72)*sy,a.action,a.primary);x+=a.width+gap;}
  }
  private actionDetails(panel:Node,left:number,w:number,sy:number,view:DiceView,font:number){
@@ -122,30 +144,29 @@ export class DicePanel {
  }
  private rotation(panel:Node,w:number,h:number,view:DiceView){
   const sy=h/648,left=-w/2+20,width=Math.max(8,w-40);
-  this.label(panel,view.gear?'装 备 锻 印':'旅 途 事 件',left,276*sy,width,14,T.gold,26*sy,Label.HorizontalAlign.CENTER);
+  this.label(panel,'旅 途 事 件',left,276*sy,width,14,T.gold,26*sy,Label.HorizontalAlign.CENTER);
   this.label(panel,view.title,left,223*sy,width,25,T.text,68*sy,Label.HorizontalAlign.CENTER);
   this.label(panel,'请旋转到横屏',left,148*sy,width,25,T.gold,42*sy,Label.HorizontalAlign.CENTER).node.name='RotateForDice';
   this.label(panel,'装备与已掷点数都会留在这里',left,104*sy,width,15,T.muted,46*sy,Label.HorizontalAlign.CENTER);
-  const count=view.gear?1:view.mode==='normal'?1:2,radius=Math.max(3,Math.min(90,width/(count*2.6)))*sy;
-  for(let i=0;i<count;i++){const x=(i-(count-1)/2)*width/count,node=this.hud.node(`D20-${i}`,panel,x,-5*sy,radius*2.8,radius*2.8),graphics=node.addComponent(CompactGraphics),face=this.dieLabel(node,`DieFace-${i}`,radius,view.gear?36:52),marks=Array.from({length:view.gear?5:19},(_,j)=>this.dieLabel(node,`Facet-${i}-${j+1}`,radius,20)),caption=this.label(panel,'',x-width/count/2,-100*sy,width/count,13,T.muted,26*sy,Label.HorizontalAlign.CENTER);this.dice.push({node,graphics,face,marks,caption,radius,index:i,cube:!!view.gear});}
+  const count=view.mode==='normal'?1:2,radius=Math.max(3,Math.min(90,width/(count*2.6)))*sy;
+  for(let i=0;i<count;i++){const x=(i-(count-1)/2)*width/count,node=this.hud.node(`D20-${i}`,panel,x,-5*sy,radius*2.8,radius*2.8),graphics=node.addComponent(CompactGraphics),face=this.dieLabel(node,`DieFace-${i}`,radius,52),marks=Array.from({length:19},(_,j)=>this.dieLabel(node,`Facet-${i}-${j+1}`,radius,20)),caption=this.label(panel,'',x-width/count/2,-100*sy,width/count,13,T.muted,26*sy,Label.HorizontalAlign.CENTER);this.dice.push({node,graphics,face,marks,caption,radius,index:i,cube:false});}
   this.status=this.label(panel,'',left,-151*sy,width,23,T.text,38*sy,Label.HorizontalAlign.CENTER);
   this.formula=this.label(panel,'',left,-196*sy,width,16,T.muted,55*sy,Label.HorizontalAlign.CENTER);
-  this.label(panel,view.gear?'横屏后可继续追加铸印或收下装备':`目标 ${view.dc}  ·  余烬 ${view.inspiration}`,left,-246*sy,width,16,T.gold,38*sy,Label.HorizontalAlign.CENTER);
-  if(view.canCancel)this.control(panel,view.gear?'直接收下原装':'暂且离开',0,-286*sy,Math.max(24,w-40),48*sy,'dice:cancel',false);
+  this.label(panel,`目标 ${view.dc}  ·  余烬 ${view.inspiration}`,left,-246*sy,width,16,T.gold,38*sy,Label.HorizontalAlign.CENTER);
+  if(view.canCancel)this.control(panel,'暂且离开',0,-286*sy,Math.max(24,w-40),48*sy,'dice:cancel',false);
  }
  update(dt:number){if(!this.current)return;if(!this.ownsModal()){this.current=null;this.host=null;this.dice=[];this.controls=[];this.elapsed=DURATION;return;}if(this.hud.width!==this.builtWidth||this.hud.height!==this.builtHeight){this.show(this.current);return;}if(!this.busy)return;this.elapsed=Math.min(DURATION,this.elapsed+Math.max(0,Number.isFinite(dt)?dt:0));this.refresh();}
  clear(){this.destroyOwned();this.current=null;this.elapsed=DURATION;}
  private ownsModal(){return !!this.host&&this.host.isValid&&this.host.parent===this.hud.modal;}
- private destroyOwned(){if(this.host?.isValid){if(this.host.parent===this.hud.modal&&this.hud.modal.children.every(n=>n===this.host))this.hud.clearModal();else this.host.destroy();}this.host=null;this.dice=[];this.controls=[];this.status=null;this.formula=null;this.outcome=null;this.rewardHost=null;}
+ private destroyOwned(){if(this.host?.isValid){if(this.host.parent===this.hud.modal&&this.hud.modal.children.every(n=>n===this.host))this.hud.clearModal();else this.host.destroy();}this.host=null;this.dice=[];this.controls=[];this.status=null;this.formula=null;this.outcome=null;}
  private refresh(){
-  const v=this.current;if(!v)return;const rolling=this.busy,r=v.roll,gear=v.gear,color=!r||rolling?T.gold:gear?T.gold:r.success?T.green:T.red;
-  if(this.status){this.status.string=rolling?gear?'余火淬炼中…':'骰子转动中…':gear?!r?'一次锻印，更多可能':gear.outcome!.name+' · 铸印揭晓':!r?'准备就绪，付诸行动':r.critical==='success'?'绝妙时机':r.critical==='failure'?'局势生变':r.success?'行动达成':'另寻转机';this.status.color=color;}
-  if(this.formula){this.formula.string=rolling?gear?'额外属性即将揭晓':'让骰子落定…':gear?!r?'1 · 原装保留    2—5 · 属性追加':bonusText(gear.bonus)||'保留原有品质与效果':r?`${r.kept} ${signed(r.bonus)}${r.assist?` ${signed(r.assist)} 线索`:''} = ${r.total} / ${v.dc}`:'一点意外，也可能改变旅途。';this.formula.color=r&&!rolling?color:T.muted;}
+  const v=this.current;if(!v||v.gear)return;const rolling=this.busy,r=v.roll,color=!r||rolling?T.gold:r.success?T.green:T.red;
+  if(this.status){this.status.string=rolling?'骰子转动中…':!r?'准备就绪，付诸行动':r.critical==='success'?'绝妙时机':r.critical==='failure'?'局势生变':r.success?'行动达成':'另寻转机';this.status.color=color;}
+  if(this.formula){this.formula.string=rolling?'让骰子落定…':r?`${r.kept} ${signed(r.bonus)}${r.assist?` ${signed(r.assist)} 线索`:''} = ${r.total} / ${v.dc}`:'一点意外，也可能改变旅途。';this.formula.color=r&&!rolling?color:T.muted;}
   if(this.outcome){this.outcome.string=rolling?'行动的结果即将揭晓。':r!.success?v.successText:v.failureText;this.outcome.color=rolling?T.muted:T.text;}
-  if(this.rewardHost)this.rewardHost.active=!rolling;
-  for(const die of this.dice){const kept=!!gear||!r||rolling||die.index===r.keptIndex,face=r?.faces[die.index]??(gear?6:20);die.face.string=String(rolling?1+(Math.floor(this.elapsed*29)+die.index*7)%(gear?6:20):face);
-   die.caption.string=rolling?'':gear?!r?'六面锻造骰 · 免费':`掷出 ${face} 点`:!r?'等待投掷':this.dice.length===1?'掷骰点数':kept?'采用此骰':'略过此骰';die.caption.color=kept?T.muted:T.quiet;this.drawDie(die,face,kept,rolling);}
-  for(const c of this.controls){c.label.string=rolling&&c.primary?'铸印揭晓中…':c.title;this.paintControl(c,c.enabled&&!rolling);}
+  for(const die of this.dice){const kept=!r||rolling||die.index===r.keptIndex,face=r?.faces[die.index]??20;die.face.string=String(rolling?1+(Math.floor(this.elapsed*29)+die.index*7)%20:face);
+   die.caption.string=rolling?'':!r?'等待投掷':this.dice.length===1?'掷骰点数':kept?'采用此骰':'略过此骰';die.caption.color=kept?T.muted:T.quiet;this.drawDie(die,face,kept,rolling);}
+  for(const c of this.controls){c.label.string=rolling&&c.primary?'结果揭晓中…':c.title;this.paintControl(c,c.enabled&&!rolling);}
  }
  private drawDie(die:Die,face:number,kept:boolean,rolling:boolean){
   if(die.art?.spriteFrame){this.drawRuneArt(die,rolling);return;}
@@ -192,13 +213,16 @@ export class DicePanel {
  private control(parent:Node,title:string,x:number,y:number,w:number,h:number,action:string,primary:boolean,selected=false):Control {
   const unit=this.hud.height/390,visualH=Math.min(h,(action==='dice:help'?48:32)*unit),node=this.hud.node(action,parent,x,y,w,h),visual=this.hud.node('ControlSurface',node,0,0,w,visualH);UiSkin.asset(visual,primary?'rpg-button-gold-v3':'rpg-button-dark-v3',w,visualH);const graphics=this.hud.node('ControlTone',visual,0,0,w,visualH).addComponent(CompactGraphics),button=node.addComponent(Button);button.transition=Button.Transition.NONE;
   const label=this.label(visual,title,-w/2+14,0,w-28,action.startsWith('dice:hold')?13:sys.isMobile?24:action==='dice:help'?15:20,T.text,visualH-4,Label.HorizontalAlign.CENTER);
-  const c:Control={node,visual,graphics,label,enabled:true,primary,title,w,h:visualH,pressed:false,hover:false,selected};this.controls.push(c);
+  const c:Control={node,visual,graphics,label,enabled:true,primary,title,w,h:visualH,state:'idle',selected};this.controls.push(c);
   node.on(Button.EventType.CLICK,()=>{if(c.enabled&&!this.busy)this.hud.actions.click(action);});
-  for(const [event,pressed]of [[Node.EventType.TOUCH_START,true],[Node.EventType.TOUCH_END,false],[Node.EventType.TOUCH_CANCEL,false]] as const)node.on(event,()=>{c.pressed=pressed;this.paintControl(c,c.enabled&&!this.busy);});
-  node.on(Node.EventType.MOUSE_ENTER,()=>{c.hover=true;this.paintControl(c,c.enabled&&!this.busy);});node.on(Node.EventType.MOUSE_LEAVE,()=>{c.hover=false;this.paintControl(c,c.enabled&&!this.busy);});return c;
+  c.feedback=bindButtonFeedback(node,button,state=>{c.state=state;this.paintControlFace(c,button.enabled&&button.interactable&&c.enabled&&!this.busy);});return c;
  }
  private paintControl(c:Control,enabled:boolean){
-  c.node.getComponent(Button)!.interactable=enabled;const g=c.graphics;g.clear();const {w,h}=c,pressed=enabled&&c.pressed,hover=enabled&&c.hover;
+  c.node.getComponent(Button)!.interactable=enabled;if(c.feedback)c.feedback.refresh();else this.paintControlFace(c,enabled);
+ }
+ private paintControlFace(c:Control,enabled:boolean){
+  if(!c.graphics.isValid||!c.label.isValid)return;
+  const g=c.graphics;g.clear();const {w,h}=c,pressed=enabled&&c.state==='pressed',hover=enabled&&c.state==='hover';
   g.fillColor=!enabled?new Color(0,0,0,130):pressed?new Color(0,0,0,90):hover?new Color(225,175,80,28):c.primary||c.selected?new Color(168,108,32,24):new Color(0,0,0,20);g.roundRect(-w/2+5,-h/2+5,w-10,h-10,3);g.fill();
   if(c.primary||c.selected){g.lineWidth=1;g.strokeColor=alpha(T.gold,enabled?195:55);g.roundRect(-w/2+4,-h/2+4,w-8,h-8,3);g.stroke();}
   c.label.color=enabled?c.primary?T.ink:T.text:T.quiet;

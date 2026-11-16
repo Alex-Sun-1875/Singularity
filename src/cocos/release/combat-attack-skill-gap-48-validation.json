@@ -1,0 +1,48 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-16",
+  "timezone": "Asia/Shanghai",
+  "feature": "combat-attack-skill-gap-48",
+  "source": "src/cocos/assets/scripts/app/Hud.ts",
+  "visibleAttackSkillGapLogical": 48,
+  "sharedRadiusLogicalAt844x390": 110.96,
+  "buttonSizingRetained": {
+    "skillFace": 52,
+    "skillTouch": 56,
+    "attackFaceAndTouch": 73.92
+  },
+  "typecheckPassed": true,
+  "layout": {
+    "passed": true,
+    "cases": 7,
+    "measuredGapMinimum": 47.99999999999983,
+    "measuredGapMaximum": 48.000000000000064,
+    "errors": [],
+    "evidence": "src/cocos/test-results/attack-skill-gap-48/layout-validation.json"
+  },
+  "battle": {
+    "passed": true,
+    "area": "S04",
+    "visualGeometry": {
+      "playerBlocked": false,
+      "enemyBlocked": false,
+      "escapeRouteBlocked": false
+    },
+    "evidence": "src/cocos/test-results/attack-skill-gap-48/battle-validation.json",
+    "fixture": "Isolated HTML test=max QA; level40 and owned weapons; placement near authored S04 enemies; no user save writes"
+  },
+  "exports": {
+    "test": {
+      "passed": true,
+      "compiledProfileVerified": true
+    },
+    "dev": {
+      "passed": true,
+      "status": "complete",
+      "compiledProfileVerified": true
+    }
+  },
+  "pending": [
+    "TapTap target-device and hardware-safe-area acceptance"
+  ]
+}

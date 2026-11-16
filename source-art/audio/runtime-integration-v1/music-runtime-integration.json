@@ -1,0 +1,73 @@
+{
+  "date": "2026-11-16",
+  "theme": "A / 余烬与誓言",
+  "controller": "src/cocos/assets/scripts/features/audio/runtime/BackgroundMusic.ts",
+  "controllerSha256": "baba9b73d149db487243c9d9fa0ecb66a91375ce4bc6ea23047bf7d38b37c4fe",
+  "publicApi": [
+    "start()",
+    "gesture()",
+    "toggle()",
+    "label",
+    "setSuspended(value)",
+    "update(dt,allowed,quiet,context?)",
+    "inspect()",
+    "dispose()",
+    "resetEncounter()"
+  ],
+  "context": {
+    "combat": "Actual engagement state supplied by app",
+    "boss": "Actual engaged living boss; reuses combat score",
+    "areaKind": "Accepted for app contract; current music is shared across areas",
+    "areaId": "Reset encounter eligibility on an actual area identity change",
+    "interrupted": "Loading, death and title reset encounter eligibility; mute/background do not count as a musical ending",
+    "settled": "True only after the existing engagement is removed; avoids resolving while retreat settlement is pending"
+  },
+  "playback": {
+    "sourceCount": 3,
+    "resourcePrefix": "audio/music/",
+    "normalVolume": 0.28,
+    "quietVolume": 0.13,
+    "combatEntrySeconds": 0.7,
+    "combatExitSeconds": 4,
+    "normalCrossfadeSeconds": 1.5,
+    "synchronisedMultiTrackRequired": false,
+    "inactiveSource": "paused after crossfade",
+    "mutedOrSuspendedOrNotAllowed": "All three sources pause immediately",
+    "areaRebuild": "controller source nodes persist outside scene rebuild",
+    "resume": "Cocos play resumes PAUSED; already PLAYING sources are never passed to play again",
+    "prefetch": "Combat begins loading after exploration; aftermath begins loading after combat. Missing aftermath falls back to exploration.",
+    "loadFailure": "explicit toggle retries; a successfully loaded companion track can continue",
+    "assetOwnership": "successful load addRef, dispose detaches clip/stops source/decRef exactly once",
+    "phaseAlignment": "Approximate normalized position alignment only for exploration/combat loop switches. The one-shot aftermath starts from zero and returns to the opening D-minor exploration theme.",
+    "returnToPausedTrack": "Re-align the incoming previously paused other track to the currently playing outgoing track once; do not reuse its stale earlier harmonic position.",
+    "sameTrackResume": "No seek on mute/background pause and resume of the same active track.",
+    "unknownDuration": "Continue outgoing track until incoming duration is known; do not queue a seek clamped to zero.",
+    "phaseSeekFrequency": "One setter call per actual mode transition, never a per-frame seek.",
+    "inspect": "active/available/pendingMode, transitionCount, phaseSeekCount and copied lastTransition record with from/to/outgoingTime/durations/targetTime/request reason.",
+    "aftermath": "A 15-second one-shot, no loop, starts from zero after qualified combat has been peaceful at least four seconds and the gameplay engagement is settled. Its last 1.5 seconds crossfade into exploration at the theme opening. Re-engagement interrupts it immediately.",
+    "reset": "Area change, loading, title, death or training reset disarms aftermath; it is a quiet release, not a kill/reward claim."
+  },
+  "preferenceKey": "sword-and-fire.music.v1",
+  "platform": "Only Cocos AudioSource plus existing GameResources and PlatformStorage-backed store; no browser audio APIs or direct tap calls",
+  "engineEvidence": {
+    "version": "3.8.8",
+    "source": "Cocos3.8.8 cocos/audio/audio-source.ts: currentTime setter lines480–489, _syncStates lines454–469, duration getter lines508–509; AudioClip.getDuration.",
+    "semantics": "play() restarts when PLAYING and resumes when PAUSED. currentTime clamps using clip duration; if the AudioPlayer is not loaded yet, SEEK is cached in _operationsBeforeLoading and processed before a subsequently queued PLAY.",
+    "endedEvent": "Installed Cocos 3.8.8 audio-source.ts EventType.ENDED is emitted on the AudioSource node by its AudioPlayer end listener; subscribed for the non-looping fallback and detached at dispose."
+  },
+  "checks": {
+    "generator": "Existing two 96-second loops retained byte-for-byte; new 15-second one-shot reuses the original journey aftermath score.",
+    "controllerContractDouble": "aftermath-controller-check.json: 12/12 passed on this source hash. music-controller-check.json is the historical two-loop controller.",
+    "typescriptProject": "Root final TypeScript check passed; final Web export succeeded.",
+    "actualWebPlayback": "aftermath-web-check.json: 10/10 passed; actual keyboard contact plus natural quietSince/settled transition, real source playback to 15.0077s without seek/acceleration, pause/resume and controlled interruption diagnostics; console/page/network/HTTP errors all zero.",
+    "TapTapDevicePlayback": "Pending; Web evidence does not replace device audio/seek/loop acceptance.",
+    "previousTwoTrackWebPlayback": "web-runtime-check.json: 12/12 required real-Cocos Web stages passed; diagnostic music context, lifecycle hooks and near-end seek are explicitly scoped. Optional ultimate VFX fixture branch remains unverified."
+  },
+  "knownLimits": [
+    "No standalone Boss track: engaged bosses use the combat arrangement.",
+    "Two premixes share a 32-bar harmonic grid. One-time approximate currentTime positioning prevents arbitrary stale-phase crossfades, but seek latency and subsequent drift are platform-dependent; perfect phase or seamless playback is not claimed.",
+    "MP3 Media Foundation decode includes approximately 40ms extra samples; platform loop gap and system interruption behavior require actual TapTap/device audition.",
+    "Title/menus use caller-supplied quiet mode; the app still gates authentication and user-input unlocking."
+  ],
+  "historicalAssets": "Original dawn-embers MP3 and lossless source master retained."
+}

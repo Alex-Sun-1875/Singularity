@@ -1,0 +1,2350 @@
+{
+  "schemaVersion": 7,
+  "date": "2026-11-16",
+  "userFeedback": "战士和弓箭手打击需要金属碰撞感；保留重量、短弓风，火雷沿用当前版本。",
+  "production": "Original deterministic modelling using installed NumPy/SciPy/FFmpeg; no recordings, AI calls, downloaded samples or new dependencies.",
+  "runtimeIntegration": "Offline audition only; no game runtime audio or former study files changed.",
+  "listeningAcceptance": "Pending judgement of blade/arrowhead metal identity and weight; numerical measures are not perceptual acceptance.",
+  "taptapDeviceAcceptance": "Not performed",
+  "designNotes": {
+    "war": {
+      "userPreference": "2026-11-16: sword and arrow impacts should have metal-collision identity; retain v6 weight and short bow air, without returning to sharp thin pings.",
+      "provenance": "Original deterministic NumPy/SciPy material modelling added to the v6 source. No recordings, downloads, AI calls, external samples or listening acceptance claimed.",
+      "body": "The existing thick v6 sword/body waveform is retained as the foundation, at its original gain before the common safety ceiling.",
+      "steelStructure": "A 1.3ms irregular mechanical excitation and a small trailing contact fold drive separate non-harmonic modes near 700/1100/1700/2400Hz. Modal decay is 36-64ms with shorter high-mode damping; the result is a contact clank rather than continuous high noise.",
+      "materialDifference": "Soft contact uses a light blade resonance and small scrape. Armor has more independent plate motion and a clearer short scrape. Finish sits between them. Swing remains unchanged with no manufactured hit.",
+      "spectralBalance": "New energy is concentrated in the 650-2600Hz material band while the accepted 180-700Hz body remains. Modes and exciter are changed, not the overall pitch or a global treble/gain control.",
+      "tail": "Steel response is finite, with no room reverb or long ringing bell; v6 dark aftermotion remains subordinate.",
+      "mix": "Local active-window RMS assigns contact-layer energy; a final .64 ceiling is protection only. Three variants alter excitation, contact spacing, modal damping and frequency jitter.",
+      "comparisonApi": "synth_contact(variation=1,material=\"soft\"|\"armor\",sample_rate=44100) maps to the same war_slash/war_armor sources used in demonstrations.",
+      "acceptance": "Spectrum and decay checks describe the source changes; human and device listening remain pending."
+    },
+    "bow": {
+      "userPreference": "Give warrior/bow impacts metal collision character while retaining the previously requested weight and short bow air.",
+      "provenance": "Original deterministic NumPy/SciPy material models using the accepted v6 bow source. No recordings, soundbanks, downloads, AI or playback.",
+      "unchangedPreparation": "bow_draw and bow_release directly reuse v6; no late air wake, guitar-like pluck or new pitched string is introduced.",
+      "arrowMetal": "A finite noise excitation drives localized non-harmonic 947/1361/1987/2719Hz tip modes. They damp in roughly 10–30ms and finish within 0.12s, with a small retouch rather than a long ringing plate.",
+      "body": "The v6 puncture, shaft recoil and weighted low-mid body are retained. Armor adds a small 251/443/719Hz contact support beneath the tip resonance.",
+      "materialPolicy": {
+        "synth_cue.bow_pierce": "Subtle arrowhead resonance; this does not assert that every target wears armor.",
+        "synth_cue.bow_heavy": "Firmer local contact and very short metal rebound, still below a full armored collision.",
+        "synth_contact.soft": "Ordinary weighted v6 puncture; no added armor clang.",
+        "synth_contact.armor": "A distinctly harder localized metal contact over the same puncture, for an armored target."
+      },
+      "contactDurationSeconds": {
+        "soft": 0.3,
+        "armor": 0.3
+      },
+      "air": "No new air source. Existing v6 release/pierce/heavy air ends by .083/.064/.074s.",
+      "exclusions": [
+        "long wind",
+        "glass bell",
+        "long ringing chime",
+        "guitar string",
+        "scaled-down warrior clang"
+      ],
+      "mix": "Source peak cap .64 is safety only; target material changes source layers rather than uniformly raising playback gain.",
+      "acceptance": "Finite samples and envelope/frequency measures are technical evidence; metal identity and preference need user audition."
+    },
+    "performance": "Same V6 event onsets/gains. One basic arrow is explicitly an armour demonstration; ordinary contacts have quieter metal identity.",
+    "elemental": "18 source clips and 2 complete solo demos/cue sets are byte-identical copies of V6."
+  },
+  "presentationLevels": [
+    {
+      "profession": "WAR",
+      "presentationTargetLufs": -23.6,
+      "presentationLinearGain": 1.4554590805819656,
+      "measuredMasterLufs": -23.59
+    },
+    {
+      "profession": "BOW",
+      "presentationTargetLufs": -25.1,
+      "presentationLinearGain": 1.5187979420318123,
+      "measuredMasterLufs": -25.11
+    },
+    {
+      "profession": "FIR",
+      "presentationTargetLufs": -24.4,
+      "presentationLinearGain": 1.6807379257087371,
+      "measuredMasterLufs": -24.4
+    },
+    {
+      "profession": "THU",
+      "presentationTargetLufs": -25.4,
+      "presentationLinearGain": 1.3995873225726183,
+      "measuredMasterLufs": -25.4
+    }
+  ],
+  "comparison": {
+    "reference": "PCM WAV; MP3 is a convenience preview.",
+    "processing": "Scalar gain only for matching.",
+    "baselineHashes": {
+      "source-art/audio/impact-weight-v6/demos/war-15s.wav": "97c8835c550fb3177f211a4c4767a8cbfe756cd78c7a2131b8eb6a073ef7c1eb",
+      "source-art/audio/impact-weight-v6/demos/bow-15s.wav": "54430266ac939f21e10ddbc61984fa67559dbddf8c38e8c5d88b97308bf2dcb0"
+    },
+    "pairs": [
+      {
+        "profession": "WAR",
+        "targetLufs": -23.6,
+        "beforeMeasuredLufs": -23.6,
+        "afterMeasuredLufs": -23.59
+      },
+      {
+        "profession": "BOW",
+        "targetLufs": -25.1,
+        "beforeMeasuredLufs": -25.1,
+        "afterMeasuredLufs": -25.11
+      }
+    ]
+  },
+  "assets": [
+    {
+      "cue": "war_swing",
+      "variation": 1,
+      "path": "clips/war_swing_v01.wav",
+      "description": "The weighted v6 blade-air movement is preserved; a swing does not invent a metal collision.",
+      "sha256": "25313ea2481c22cfd4226fa0df36b07dffd22c67eec063b684afc2cbcf1c1b9e",
+      "metrics": {
+        "durationSeconds": 0.26,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -11.431,
+        "oversampledPeakDbfs": -11.36,
+        "rmsDbfs": -27.404,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1549.0,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0094,
+        "body140To700HzEnergyPercent": 23.4338,
+        "material700To2000HzEnergyPercent": 50.455,
+        "edge2000To8000HzEnergyPercent": 25.4525,
+        "late80To300ms1200To6000HzRms": 0.02371836597078894,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_swing",
+      "variation": 2,
+      "path": "clips/war_swing_v02.wav",
+      "description": "The weighted v6 blade-air movement is preserved; a swing does not invent a metal collision.",
+      "sha256": "45a8830a751a099ccf7622d01a3395c76f118aba09204d03acb66c8eafa0f8e0",
+      "metrics": {
+        "durationSeconds": 0.26,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -11.174,
+        "oversampledPeakDbfs": -11.156,
+        "rmsDbfs": -27.035,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1533.3,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0092,
+        "body140To700HzEnergyPercent": 20.0694,
+        "material700To2000HzEnergyPercent": 59.0553,
+        "edge2000To8000HzEnergyPercent": 20.5153,
+        "late80To300ms1200To6000HzRms": 0.021814736738710146,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_swing",
+      "variation": 3,
+      "path": "clips/war_swing_v03.wav",
+      "description": "The weighted v6 blade-air movement is preserved; a swing does not invent a metal collision.",
+      "sha256": "5938d46216eaf94cf6fa1621552da3e1c83e321945ba9a4e799ae7270dd744b2",
+      "metrics": {
+        "durationSeconds": 0.26,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -11.311,
+        "oversampledPeakDbfs": -11.126,
+        "rmsDbfs": -27.157,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 1602.6,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0094,
+        "body140To700HzEnergyPercent": 25.5148,
+        "material700To2000HzEnergyPercent": 44.592,
+        "edge2000To8000HzEnergyPercent": 29.3011,
+        "late80To300ms1200To6000HzRms": 0.021627083037688344,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_slash",
+      "variation": 1,
+      "path": "clips/war_slash_v01.wav",
+      "description": "Weighted cutting body with a light, clearly shaped steel contact and a short scrape.",
+      "sha256": "8a127fd2c68a7f96bc7e38ab166f297ce598ba536e17d466b8d3278d17b3e7d3",
+      "metrics": {
+        "durationSeconds": 0.4,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.779,
+        "oversampledPeakDbfs": -5.77,
+        "rmsDbfs": -27.448,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 782.3,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0436,
+        "body140To700HzEnergyPercent": 55.1931,
+        "material700To2000HzEnergyPercent": 39.5574,
+        "edge2000To8000HzEnergyPercent": 4.7396,
+        "late80To300ms1200To6000HzRms": 0.005616215533129008,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_slash",
+      "variation": 2,
+      "path": "clips/war_slash_v02.wav",
+      "description": "Weighted cutting body with a light, clearly shaped steel contact and a short scrape.",
+      "sha256": "69061d3ca4ae09a05bd5798644871f852e4cdec9879d3acf7c0a3a04fab91298",
+      "metrics": {
+        "durationSeconds": 0.4,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.714,
+        "oversampledPeakDbfs": -5.686,
+        "rmsDbfs": -27.738,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 831.4,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0155,
+        "body140To700HzEnergyPercent": 63.1498,
+        "material700To2000HzEnergyPercent": 31.5513,
+        "edge2000To8000HzEnergyPercent": 4.9225,
+        "late80To300ms1200To6000HzRms": 0.005689389559684396,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_slash",
+      "variation": 3,
+      "path": "clips/war_slash_v03.wav",
+      "description": "Weighted cutting body with a light, clearly shaped steel contact and a short scrape.",
+      "sha256": "28ebacaab31ad600f3314bdf865652b40c2d7c56f0b0799ca41c31d549424dcb",
+      "metrics": {
+        "durationSeconds": 0.4,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -4.171,
+        "oversampledPeakDbfs": -4.154,
+        "rmsDbfs": -27.843,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 765.1,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0179,
+        "body140To700HzEnergyPercent": 54.6631,
+        "material700To2000HzEnergyPercent": 39.0848,
+        "edge2000To8000HzEnergyPercent": 5.677,
+        "late80To300ms1200To6000HzRms": 0.005236157099652987,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_armor",
+      "variation": 1,
+      "path": "clips/war_armor_v01.wav",
+      "description": "Firm blade-on-plate collision, audible inharmonic steel clank and a quickly damped scrape.",
+      "sha256": "6b99386f4d78f8a474532c3a61d1c72b2a4d12fa4c1d2628c8590714f5d00c59",
+      "metrics": {
+        "durationSeconds": 0.48,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -7.05,
+        "oversampledPeakDbfs": -7.039,
+        "rmsDbfs": -27.299,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 873.3,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0133,
+        "body140To700HzEnergyPercent": 43.1425,
+        "material700To2000HzEnergyPercent": 50.6921,
+        "edge2000To8000HzEnergyPercent": 5.8518,
+        "late80To300ms1200To6000HzRms": 0.0071518631128628316,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_armor",
+      "variation": 2,
+      "path": "clips/war_armor_v02.wav",
+      "description": "Firm blade-on-plate collision, audible inharmonic steel clank and a quickly damped scrape.",
+      "sha256": "b035392faeeb05a6354706d88084c305429265804ce6d6b76900eb99bda5679c",
+      "metrics": {
+        "durationSeconds": 0.48,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.673,
+        "oversampledPeakDbfs": -5.649,
+        "rmsDbfs": -26.469,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 995.3,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0359,
+        "body140To700HzEnergyPercent": 36.9289,
+        "material700To2000HzEnergyPercent": 54.9133,
+        "edge2000To8000HzEnergyPercent": 7.8462,
+        "late80To300ms1200To6000HzRms": 0.0072698589884590045,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_armor",
+      "variation": 3,
+      "path": "clips/war_armor_v03.wav",
+      "description": "Firm blade-on-plate collision, audible inharmonic steel clank and a quickly damped scrape.",
+      "sha256": "0de91c72f76fe891f31bb5e05de27e4f3e549563863a3b4ba1c50ae5413140a5",
+      "metrics": {
+        "durationSeconds": 0.48,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.498,
+        "oversampledPeakDbfs": -5.441,
+        "rmsDbfs": -26.304,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 898.5,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0155,
+        "body140To700HzEnergyPercent": 49.8789,
+        "material700To2000HzEnergyPercent": 42.4074,
+        "edge2000To8000HzEnergyPercent": 7.3941,
+        "late80To300ms1200To6000HzRms": 0.006699031461290941,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_finish",
+      "variation": 1,
+      "path": "clips/war_finish_v01.wav",
+      "description": "Firm weighted cut with a fuller short steel response, below a prolonged bell or hammer crash.",
+      "sha256": "f287ceb995c8014389c95d0d70f566c2c8e3b6d46ee5e387c1319ef1e2da0716",
+      "metrics": {
+        "durationSeconds": 0.56,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -4.465,
+        "oversampledPeakDbfs": -4.434,
+        "rmsDbfs": -26.946,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 688.2,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0388,
+        "body140To700HzEnergyPercent": 54.5731,
+        "material700To2000HzEnergyPercent": 40.8821,
+        "edge2000To8000HzEnergyPercent": 3.1773,
+        "late80To300ms1200To6000HzRms": 0.005264672194114388,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_finish",
+      "variation": 2,
+      "path": "clips/war_finish_v02.wav",
+      "description": "Firm weighted cut with a fuller short steel response, below a prolonged bell or hammer crash.",
+      "sha256": "ac62779e19d4d9497b567348ebbfdc9f5a36747aa5f26710ea04aa97e38d0eee",
+      "metrics": {
+        "durationSeconds": 0.56,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.249,
+        "oversampledPeakDbfs": -5.224,
+        "rmsDbfs": -27.335,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 781.4,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0154,
+        "body140To700HzEnergyPercent": 51.7226,
+        "material700To2000HzEnergyPercent": 44.0372,
+        "edge2000To8000HzEnergyPercent": 4.0054,
+        "late80To300ms1200To6000HzRms": 0.008210778794604535,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_finish",
+      "variation": 3,
+      "path": "clips/war_finish_v03.wav",
+      "description": "Firm weighted cut with a fuller short steel response, below a prolonged bell or hammer crash.",
+      "sha256": "52ec64037a7daeaf3f7c7680179eb0e3fc163d93885b2c2292569bfe6a046a07",
+      "metrics": {
+        "durationSeconds": 0.56,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -7.312,
+        "oversampledPeakDbfs": -7.265,
+        "rmsDbfs": -27.893,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 714.3,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0459,
+        "body140To700HzEnergyPercent": 56.66,
+        "material700To2000HzEnergyPercent": 38.2723,
+        "edge2000To8000HzEnergyPercent": 4.187,
+        "late80To300ms1200To6000HzRms": 0.008634154939370966,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_draw",
+      "variation": 1,
+      "path": "clips/bow_draw_v01.wav",
+      "description": "Retained low wood and string-tension friction; no new wind or musical string note.",
+      "sha256": "64b6249c69fa13203d9ba078eebb2efc531b04ddb6deaa23f422514903ca6cc2",
+      "metrics": {
+        "durationSeconds": 0.62,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -19.909,
+        "oversampledPeakDbfs": -19.884,
+        "rmsDbfs": -34.433,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 759.5,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0193,
+        "body140To700HzEnergyPercent": 55.0263,
+        "material700To2000HzEnergyPercent": 41.2107,
+        "edge2000To8000HzEnergyPercent": 3.136,
+        "late80To300ms1200To6000HzRms": 0.0082083814842423,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_draw",
+      "variation": 2,
+      "path": "clips/bow_draw_v02.wav",
+      "description": "Retained low wood and string-tension friction; no new wind or musical string note.",
+      "sha256": "e488c3b11d95769827168de8949360ab994f86f88a9be977ecb5dc9fb57a4145",
+      "metrics": {
+        "durationSeconds": 0.62,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -20.53,
+        "oversampledPeakDbfs": -20.5,
+        "rmsDbfs": -34.176,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 765.2,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0907,
+        "body140To700HzEnergyPercent": 54.6841,
+        "material700To2000HzEnergyPercent": 40.6122,
+        "edge2000To8000HzEnergyPercent": 3.5178,
+        "late80To300ms1200To6000HzRms": 0.00857186832236531,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_draw",
+      "variation": 3,
+      "path": "clips/bow_draw_v03.wav",
+      "description": "Retained low wood and string-tension friction; no new wind or musical string note.",
+      "sha256": "fd8a467193ea42d50a397c6865cfd47a41ddcdbbe410df9dd669949c30d65972",
+      "metrics": {
+        "durationSeconds": 0.62,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -19.169,
+        "oversampledPeakDbfs": -19.163,
+        "rmsDbfs": -34.513,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 772.3,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0824,
+        "body140To700HzEnergyPercent": 56.0138,
+        "material700To2000HzEnergyPercent": 39.0501,
+        "edge2000To8000HzEnergyPercent": 3.8234,
+        "late80To300ms1200To6000HzRms": 0.009101433677546377,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_release",
+      "variation": 1,
+      "path": "clips/bow_release_v01.wav",
+      "description": "Retained firm string latch and limb recoil, with only the existing short arrow air.",
+      "sha256": "4e05e8398145016cea0635a304b42a7ce1463f7cc4f7ef2e209e2df8de0aa30c",
+      "metrics": {
+        "durationSeconds": 0.3,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -7.548,
+        "oversampledPeakDbfs": -7.542,
+        "rmsDbfs": -28.113,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 568.1,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0542,
+        "body140To700HzEnergyPercent": 74.6714,
+        "material700To2000HzEnergyPercent": 22.3658,
+        "edge2000To8000HzEnergyPercent": 2.6015,
+        "late80To300ms1200To6000HzRms": 0.00023950562054729025,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_release",
+      "variation": 2,
+      "path": "clips/bow_release_v02.wav",
+      "description": "Retained firm string latch and limb recoil, with only the existing short arrow air.",
+      "sha256": "df6c12fd04aef48963511832115fb685b2f1d337a56fe914b0b8cba29b9efcaf",
+      "metrics": {
+        "durationSeconds": 0.3,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -6.386,
+        "oversampledPeakDbfs": -6.381,
+        "rmsDbfs": -27.877,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 531.0,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0199,
+        "body140To700HzEnergyPercent": 80.0054,
+        "material700To2000HzEnergyPercent": 16.2559,
+        "edge2000To8000HzEnergyPercent": 3.0106,
+        "late80To300ms1200To6000HzRms": 0.0003825594660794224,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_release",
+      "variation": 3,
+      "path": "clips/bow_release_v03.wav",
+      "description": "Retained firm string latch and limb recoil, with only the existing short arrow air.",
+      "sha256": "e3e836c4e1133a64cf9f34aa29269061d3ebd56181edcca6d074333ee3152961",
+      "metrics": {
+        "durationSeconds": 0.3,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -8.025,
+        "oversampledPeakDbfs": -8.011,
+        "rmsDbfs": -27.439,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 497.0,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0118,
+        "body140To700HzEnergyPercent": 77.5222,
+        "material700To2000HzEnergyPercent": 18.6655,
+        "edge2000To8000HzEnergyPercent": 3.6067,
+        "late80To300ms1200To6000HzRms": 0.00023582700995388104,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_pierce",
+      "variation": 1,
+      "path": "clips/bow_pierce_v01.wav",
+      "description": "Weighted puncture and short shaft recoil with a very small, damped metal-tip contact.",
+      "sha256": "e27fa25c0a02fe51b0f33bcff74d9046aa1384caaadd6e2b50ddbccecbbe9d6b",
+      "metrics": {
+        "durationSeconds": 0.3,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -9.216,
+        "oversampledPeakDbfs": -9.199,
+        "rmsDbfs": -28.672,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 604.4,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0365,
+        "body140To700HzEnergyPercent": 70.7028,
+        "material700To2000HzEnergyPercent": 24.9597,
+        "edge2000To8000HzEnergyPercent": 4.1423,
+        "late80To300ms1200To6000HzRms": 0.0020094091627486615,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_pierce",
+      "variation": 2,
+      "path": "clips/bow_pierce_v02.wav",
+      "description": "Weighted puncture and short shaft recoil with a very small, damped metal-tip contact.",
+      "sha256": "5e71de65d3bfc709c3431ef5fcfaeda20d59ed319bf18c03616437814791145e",
+      "metrics": {
+        "durationSeconds": 0.3,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -9.16,
+        "oversampledPeakDbfs": -9.154,
+        "rmsDbfs": -29.827,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 644.7,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0235,
+        "body140To700HzEnergyPercent": 62.9081,
+        "material700To2000HzEnergyPercent": 32.9119,
+        "edge2000To8000HzEnergyPercent": 3.849,
+        "late80To300ms1200To6000HzRms": 0.0019217037271212815,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_pierce",
+      "variation": 3,
+      "path": "clips/bow_pierce_v03.wav",
+      "description": "Weighted puncture and short shaft recoil with a very small, damped metal-tip contact.",
+      "sha256": "c725aca814865725c0f15f3e739c6f74e5d2c73fa70f1489b98190c4db26fdbc",
+      "metrics": {
+        "durationSeconds": 0.3,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -10.633,
+        "oversampledPeakDbfs": -10.604,
+        "rmsDbfs": -28.69,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 516.0,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0135,
+        "body140To700HzEnergyPercent": 68.4927,
+        "material700To2000HzEnergyPercent": 26.5185,
+        "edge2000To8000HzEnergyPercent": 4.0296,
+        "late80To300ms1200To6000HzRms": 0.0019756254654595454,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_heavy",
+      "variation": 1,
+      "path": "clips/bow_heavy_v01.wav",
+      "description": "A heavier weighted arrow contact with a firmer localized metal-tip clink and short metal rebound.",
+      "sha256": "b88303e4226ab4132c09d1587f831a46f5f3622dfb349bb948bc295d1ce4520a",
+      "metrics": {
+        "durationSeconds": 0.42,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.212,
+        "oversampledPeakDbfs": -5.178,
+        "rmsDbfs": -27.743,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 631.1,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0071,
+        "body140To700HzEnergyPercent": 56.8374,
+        "material700To2000HzEnergyPercent": 39.061,
+        "edge2000To8000HzEnergyPercent": 3.3561,
+        "late80To300ms1200To6000HzRms": 0.0031607006724199468,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_heavy",
+      "variation": 2,
+      "path": "clips/bow_heavy_v02.wav",
+      "description": "A heavier weighted arrow contact with a firmer localized metal-tip clink and short metal rebound.",
+      "sha256": "dd5dfaea7c3dad48c571e51cd228a54bb2e663c1c68ec4e9dcbad8d2e2d76569",
+      "metrics": {
+        "durationSeconds": 0.42,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.065,
+        "oversampledPeakDbfs": -5.04,
+        "rmsDbfs": -27.593,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 617.4,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0251,
+        "body140To700HzEnergyPercent": 64.9386,
+        "material700To2000HzEnergyPercent": 30.0055,
+        "edge2000To8000HzEnergyPercent": 4.4937,
+        "late80To300ms1200To6000HzRms": 0.002618225045333503,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_heavy",
+      "variation": 3,
+      "path": "clips/bow_heavy_v03.wav",
+      "description": "A heavier weighted arrow contact with a firmer localized metal-tip clink and short metal rebound.",
+      "sha256": "a320ed1798aff4453c6b8836da48260d64f065fddfb5069fdefbca96f08a9e75",
+      "metrics": {
+        "durationSeconds": 0.42,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -7.093,
+        "oversampledPeakDbfs": -7.058,
+        "rmsDbfs": -27.863,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 700.6,
+        "finite": true
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0954,
+        "body140To700HzEnergyPercent": 61.1697,
+        "material700To2000HzEnergyPercent": 34.3682,
+        "edge2000To8000HzEnergyPercent": 3.7254,
+        "late80To300ms1200To6000HzRms": 0.0031067744608928613,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "fir_charge",
+      "variation": 1,
+      "path": "clips/fir_charge_v01.wav",
+      "description": "Darker gathering combustion with modest damped pressure, without bright spark ticks.",
+      "sha256": "4eb73bb06186ad3ff22b153fc64999baa1f7fb98dcfc9afcf2f58011c9d29e22",
+      "metrics": {
+        "durationSeconds": 0.72,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -17.883,
+        "oversampledPeakDbfs": -17.876,
+        "rmsDbfs": -35.532,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 683.4,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 22.0942,
+        "energy350To650msPercent": 73.412,
+        "energy650To1000msPercent": 0.5985,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.149,
+        "body140To700HzEnergyPercent": 69.8223,
+        "material700To2000HzEnergyPercent": 25.4562,
+        "edge2000To8000HzEnergyPercent": 4.099,
+        "late80To300ms1200To6000HzRms": 0.005886214511079014,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/fir_charge_v01.wav"
+    },
+    {
+      "cue": "fir_charge",
+      "variation": 2,
+      "path": "clips/fir_charge_v02.wav",
+      "description": "Darker gathering combustion with modest damped pressure, without bright spark ticks.",
+      "sha256": "22e550bfbf4f988b33d3eee2e6dc5c9b005f955f4d002b3cde25bb36127839a5",
+      "metrics": {
+        "durationSeconds": 0.72,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -19.513,
+        "oversampledPeakDbfs": -19.493,
+        "rmsDbfs": -35.46,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 698.5,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 19.3058,
+        "energy350To650msPercent": 77.1895,
+        "energy650To1000msPercent": 0.8529,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0172,
+        "body140To700HzEnergyPercent": 69.1719,
+        "material700To2000HzEnergyPercent": 26.5031,
+        "edge2000To8000HzEnergyPercent": 3.783,
+        "late80To300ms1200To6000HzRms": 0.0061758010644924685,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/fir_charge_v02.wav"
+    },
+    {
+      "cue": "fir_charge",
+      "variation": 3,
+      "path": "clips/fir_charge_v03.wav",
+      "description": "Darker gathering combustion with modest damped pressure, without bright spark ticks.",
+      "sha256": "050d3860ab8c10df401ed829e91bf147abdf350c64939eb447beb9dbb56d0e51",
+      "metrics": {
+        "durationSeconds": 0.72,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -19.124,
+        "oversampledPeakDbfs": -19.118,
+        "rmsDbfs": -35.508,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 674.8,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 20.4157,
+        "energy350To650msPercent": 76.1678,
+        "energy650To1000msPercent": 0.6138,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0387,
+        "body140To700HzEnergyPercent": 68.739,
+        "material700To2000HzEnergyPercent": 26.6664,
+        "edge2000To8000HzEnergyPercent": 3.032,
+        "late80To300ms1200To6000HzRms": 0.006100652033026509,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/fir_charge_v03.wav"
+    },
+    {
+      "cue": "fir_burst",
+      "variation": 1,
+      "path": "clips/fir_burst_v01.wav",
+      "description": "A weightier low-mid ignition and finite pressure volume, thick rolling combustion and subdued embers.",
+      "sha256": "abe94e05faf49593b8bf2388f7e3afa12077497e534ea73e833b5eeed57486c2",
+      "metrics": {
+        "durationSeconds": 1.05,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -8.058,
+        "oversampledPeakDbfs": -8.052,
+        "rmsDbfs": -26.418,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 466.1,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 16.3885,
+        "energy350To650msPercent": 5.9348,
+        "energy650To1000msPercent": 1.0144,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.1429,
+        "body140To700HzEnergyPercent": 83.6518,
+        "material700To2000HzEnergyPercent": 13.9505,
+        "edge2000To8000HzEnergyPercent": 1.2901,
+        "late80To300ms1200To6000HzRms": 0.016446579817713223,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/fir_burst_v01.wav"
+    },
+    {
+      "cue": "fir_burst",
+      "variation": 2,
+      "path": "clips/fir_burst_v02.wav",
+      "description": "A weightier low-mid ignition and finite pressure volume, thick rolling combustion and subdued embers.",
+      "sha256": "e3949e1f03bd82a6480592582fe32adba8bf8f64389215e05f6af259a0a12da4",
+      "metrics": {
+        "durationSeconds": 1.05,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -4.727,
+        "oversampledPeakDbfs": -4.721,
+        "rmsDbfs": -27.362,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 497.2,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 21.1691,
+        "energy350To650msPercent": 5.4708,
+        "energy650To1000msPercent": 1.1823,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0933,
+        "body140To700HzEnergyPercent": 78.9024,
+        "material700To2000HzEnergyPercent": 15.8891,
+        "edge2000To8000HzEnergyPercent": 1.4502,
+        "late80To300ms1200To6000HzRms": 0.015390731226551147,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/fir_burst_v02.wav"
+    },
+    {
+      "cue": "fir_burst",
+      "variation": 3,
+      "path": "clips/fir_burst_v03.wav",
+      "description": "A weightier low-mid ignition and finite pressure volume, thick rolling combustion and subdued embers.",
+      "sha256": "23115206dbb5884761e83fe3c6968f26632ed49e068b873f91d2625006d9d695",
+      "metrics": {
+        "durationSeconds": 1.05,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -7.24,
+        "oversampledPeakDbfs": -7.214,
+        "rmsDbfs": -27.696,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 466.8,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 18.9884,
+        "energy350To650msPercent": 4.3433,
+        "energy650To1000msPercent": 0.7861,
+        "windows100To650msAboveRmsPoint003": 27,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.9423,
+        "body140To700HzEnergyPercent": 74.1797,
+        "material700To2000HzEnergyPercent": 16.2658,
+        "edge2000To8000HzEnergyPercent": 1.3893,
+        "late80To300ms1200To6000HzRms": 0.014125045225545682,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/fir_burst_v03.wav"
+    },
+    {
+      "cue": "fir_wall",
+      "variation": 1,
+      "path": "clips/fir_wall_v01.wav",
+      "description": "Intermittent darker flame tongues with modest low-mid pressure and a fading natural release.",
+      "sha256": "0060b0376a831bddf7cee337c32cf540573006ede160c9171467a331d8f4458d",
+      "metrics": {
+        "durationSeconds": 3.0,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -21.198,
+        "oversampledPeakDbfs": -21.169,
+        "rmsDbfs": -40.412,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 810.6,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 3.2817,
+        "energy350To650msPercent": 12.9154,
+        "energy650To1000msPercent": 7.3002,
+        "windows100To650msAboveRmsPoint003": 24,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.005,
+        "body140To700HzEnergyPercent": 56.7694,
+        "material700To2000HzEnergyPercent": 37.8176,
+        "edge2000To8000HzEnergyPercent": 4.6734,
+        "late80To300ms1200To6000HzRms": 0.0036582832078241373,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/fir_wall_v01.wav"
+    },
+    {
+      "cue": "fir_wall",
+      "variation": 2,
+      "path": "clips/fir_wall_v02.wav",
+      "description": "Intermittent darker flame tongues with modest low-mid pressure and a fading natural release.",
+      "sha256": "35760abeb6f168c89235ceb55815eec6f8b04db97e05d0ff285af9731bad15df",
+      "metrics": {
+        "durationSeconds": 3.0,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -22.426,
+        "oversampledPeakDbfs": -22.42,
+        "rmsDbfs": -40.418,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 812.3,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 3.6161,
+        "energy350To650msPercent": 10.5274,
+        "energy650To1000msPercent": 12.6539,
+        "windows100To650msAboveRmsPoint003": 22,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0211,
+        "body140To700HzEnergyPercent": 58.3961,
+        "material700To2000HzEnergyPercent": 36.276,
+        "edge2000To8000HzEnergyPercent": 4.6479,
+        "late80To300ms1200To6000HzRms": 0.0035328623859021014,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/fir_wall_v02.wav"
+    },
+    {
+      "cue": "fir_wall",
+      "variation": 3,
+      "path": "clips/fir_wall_v03.wav",
+      "description": "Intermittent darker flame tongues with modest low-mid pressure and a fading natural release.",
+      "sha256": "187699f4448ea5b3dae4be258b4c652eff8507e8d5fb39d7410b5ee1b6574696",
+      "metrics": {
+        "durationSeconds": 3.0,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -23.065,
+        "oversampledPeakDbfs": -23.051,
+        "rmsDbfs": -40.307,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 790.9,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 4.2138,
+        "energy350To650msPercent": 12.781,
+        "energy650To1000msPercent": 6.9941,
+        "windows100To650msAboveRmsPoint003": 21,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0417,
+        "body140To700HzEnergyPercent": 58.8948,
+        "material700To2000HzEnergyPercent": 36.0237,
+        "edge2000To8000HzEnergyPercent": 4.4805,
+        "late80To300ms1200To6000HzRms": 0.0038444639985774115,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/fir_wall_v03.wav"
+    },
+    {
+      "cue": "thu_charge",
+      "variation": 1,
+      "path": "clips/thu_charge_v01.wav",
+      "description": "Dark rough pre-discharge contacts and low-presence electrical sizzle; no laser or bright ticking.",
+      "sha256": "4c79963943c5fabcb7c50167c1aa8179ff37be69e5269ebf3477afd8f04bb617",
+      "metrics": {
+        "durationSeconds": 0.6,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -19.822,
+        "oversampledPeakDbfs": -19.811,
+        "rmsDbfs": -45.403,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 761.3,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 11.167,
+        "energy350To650msPercent": 88.4677,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 11,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.7307,
+        "body140To700HzEnergyPercent": 59.3106,
+        "material700To2000HzEnergyPercent": 25.7504,
+        "edge2000To8000HzEnergyPercent": 8.3462,
+        "late80To300ms1200To6000HzRms": 0.0024395611333038127,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/thu_charge_v01.wav"
+    },
+    {
+      "cue": "thu_charge",
+      "variation": 2,
+      "path": "clips/thu_charge_v02.wav",
+      "description": "Dark rough pre-discharge contacts and low-presence electrical sizzle; no laser or bright ticking.",
+      "sha256": "36c154295859008f6c171ef6ddf42fca4c35941c3ff55799759b473f341f3459",
+      "metrics": {
+        "durationSeconds": 0.6,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -25.473,
+        "oversampledPeakDbfs": -25.468,
+        "rmsDbfs": -46.454,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 879.6,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 16.5697,
+        "energy350To650msPercent": 82.7136,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 14,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.2325,
+        "body140To700HzEnergyPercent": 57.9941,
+        "material700To2000HzEnergyPercent": 30.6974,
+        "edge2000To8000HzEnergyPercent": 9.0784,
+        "late80To300ms1200To6000HzRms": 0.0024242206001247463,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/thu_charge_v02.wav"
+    },
+    {
+      "cue": "thu_charge",
+      "variation": 3,
+      "path": "clips/thu_charge_v03.wav",
+      "description": "Dark rough pre-discharge contacts and low-presence electrical sizzle; no laser or bright ticking.",
+      "sha256": "96c229f723e7254b3b85804a4b709818b1d479dfd630e48d040c2004d4611867",
+      "metrics": {
+        "durationSeconds": 0.6,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -23.957,
+        "oversampledPeakDbfs": -23.943,
+        "rmsDbfs": -45.705,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 808.5,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 10.8464,
+        "energy350To650msPercent": 88.7187,
+        "energy650To1000msPercent": 0.0,
+        "windows100To650msAboveRmsPoint003": 13,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.1379,
+        "body140To700HzEnergyPercent": 64.3853,
+        "material700To2000HzEnergyPercent": 24.9686,
+        "edge2000To8000HzEnergyPercent": 8.772,
+        "late80To300ms1200To6000HzRms": 0.002080389515657777,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/thu_charge_v03.wav"
+    },
+    {
+      "cue": "thu_crack",
+      "variation": 1,
+      "path": "clips/thu_crack_v01.wav",
+      "description": "A rounded electrical fracture, a heavier 140–600Hz short shock body and dark sustained electrical sizzle.",
+      "sha256": "bc814a73b2f40b9fa25de7db52d3db148fa207227b9fe7b25b1c35402929d386",
+      "metrics": {
+        "durationSeconds": 0.8,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -3.876,
+        "oversampledPeakDbfs": -3.866,
+        "rmsDbfs": -26.534,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 450.6,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 6.5452,
+        "energy350To650msPercent": 2.083,
+        "energy650To1000msPercent": 0.0735,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0193,
+        "body140To700HzEnergyPercent": 87.3618,
+        "material700To2000HzEnergyPercent": 9.2982,
+        "edge2000To8000HzEnergyPercent": 2.3903,
+        "late80To300ms1200To6000HzRms": 0.017589088656163526,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/thu_crack_v01.wav"
+    },
+    {
+      "cue": "thu_crack",
+      "variation": 2,
+      "path": "clips/thu_crack_v02.wav",
+      "description": "A rounded electrical fracture, a heavier 140–600Hz short shock body and dark sustained electrical sizzle.",
+      "sha256": "fe3faa4702eaf78fc98d2841fa181954973025e7632936421f785f108c17f937",
+      "metrics": {
+        "durationSeconds": 0.8,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -4.481,
+        "oversampledPeakDbfs": -4.476,
+        "rmsDbfs": -26.285,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 458.3,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 5.9235,
+        "energy350To650msPercent": 1.9708,
+        "energy650To1000msPercent": 0.1127,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0801,
+        "body140To700HzEnergyPercent": 86.981,
+        "material700To2000HzEnergyPercent": 9.4224,
+        "edge2000To8000HzEnergyPercent": 2.0778,
+        "late80To300ms1200To6000HzRms": 0.01723880525567646,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/thu_crack_v02.wav"
+    },
+    {
+      "cue": "thu_crack",
+      "variation": 3,
+      "path": "clips/thu_crack_v03.wav",
+      "description": "A rounded electrical fracture, a heavier 140–600Hz short shock body and dark sustained electrical sizzle.",
+      "sha256": "fdbd4e201158b4de969cdd80d6a1d6f03d68770fd0bd78a3e4b02b1d091aa53f",
+      "metrics": {
+        "durationSeconds": 0.8,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -3.876,
+        "oversampledPeakDbfs": -3.871,
+        "rmsDbfs": -26.79,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 500.8,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 6.8194,
+        "energy350To650msPercent": 2.338,
+        "energy650To1000msPercent": 0.0684,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.0879,
+        "body140To700HzEnergyPercent": 84.3087,
+        "material700To2000HzEnergyPercent": 11.8488,
+        "edge2000To8000HzEnergyPercent": 2.5004,
+        "late80To300ms1200To6000HzRms": 0.01780013421416751,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/thu_crack_v03.wav"
+    },
+    {
+      "cue": "thu_network",
+      "variation": 1,
+      "path": "clips/thu_network_v01.wav",
+      "description": "A heavy first electrical shock with subordinate grouped impacts and successively weaker dark arc release.",
+      "sha256": "f559492ba7b4eed70c5118688d51613144470bca8470f9228c68c1f8b8adeab5",
+      "metrics": {
+        "durationSeconds": 1.45,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.089,
+        "oversampledPeakDbfs": -5.083,
+        "rmsDbfs": -28.107,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 409.5,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 18.7089,
+        "energy350To650msPercent": 5.8808,
+        "energy650To1000msPercent": 0.2442,
+        "windows100To650msAboveRmsPoint003": 27,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.1768,
+        "body140To700HzEnergyPercent": 86.7479,
+        "material700To2000HzEnergyPercent": 7.9939,
+        "edge2000To8000HzEnergyPercent": 2.1397,
+        "late80To300ms1200To6000HzRms": 0.0168202313430924,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/thu_network_v01.wav"
+    },
+    {
+      "cue": "thu_network",
+      "variation": 2,
+      "path": "clips/thu_network_v02.wav",
+      "description": "A heavy first electrical shock with subordinate grouped impacts and successively weaker dark arc release.",
+      "sha256": "83e43f08982a650bde2739028ea6fdfda852ecd76b6fd05aa9f3bc000a7a574f",
+      "metrics": {
+        "durationSeconds": 1.45,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -7.034,
+        "oversampledPeakDbfs": -7.028,
+        "rmsDbfs": -28.191,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 438.4,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 16.5106,
+        "energy350To650msPercent": 6.4063,
+        "energy650To1000msPercent": 0.2536,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.3257,
+        "body140To700HzEnergyPercent": 84.333,
+        "material700To2000HzEnergyPercent": 9.8837,
+        "edge2000To8000HzEnergyPercent": 2.4502,
+        "late80To300ms1200To6000HzRms": 0.019576847594446875,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/thu_network_v02.wav"
+    },
+    {
+      "cue": "thu_network",
+      "variation": 3,
+      "path": "clips/thu_network_v03.wav",
+      "description": "A heavy first electrical shock with subordinate grouped impacts and successively weaker dark arc release.",
+      "sha256": "bd9d8ac810babb13ecdfca32658082e41ad6acbc9287921283f450a6c4ad7a1a",
+      "metrics": {
+        "durationSeconds": 1.45,
+        "sampleRate": 44100,
+        "channels": 1,
+        "peakDbfs": -5.772,
+        "oversampledPeakDbfs": -5.767,
+        "rmsDbfs": -28.83,
+        "clippingSamples": 0,
+        "spectralCentroidHz": 470.5,
+        "finite": true
+      },
+      "tail": {
+        "energy100To350msPercent": 17.2685,
+        "energy350To650msPercent": 6.5814,
+        "energy650To1000msPercent": 0.3614,
+        "windows100To650msAboveRmsPoint003": 28,
+        "windowsChecked": 28,
+        "note": "Window energy and threshold occupancy are technical descriptors, not listening acceptance."
+      },
+      "weight": {
+        "below80HzEnergyPercent": 0.1949,
+        "body140To700HzEnergyPercent": 84.0793,
+        "material700To2000HzEnergyPercent": 10.2101,
+        "edge2000To8000HzEnergyPercent": 2.4219,
+        "late80To300ms1200To6000HzRms": 0.016737590406400063,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "reusedFrom": "source-art/audio/impact-weight-v6/clips/thu_network_v03.wav"
+    }
+  ],
+  "objectiveChanges": [
+    {
+      "cue": "war_swing",
+      "before": {
+        "below80HzEnergyPercent": 0.0094,
+        "body140To700HzEnergyPercent": 23.4338,
+        "material700To2000HzEnergyPercent": 50.455,
+        "edge2000To8000HzEnergyPercent": 25.4525,
+        "late80To300ms1200To6000HzRms": 0.023718363442367954,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "after": {
+        "below80HzEnergyPercent": 0.0094,
+        "body140To700HzEnergyPercent": 23.4338,
+        "material700To2000HzEnergyPercent": 50.455,
+        "edge2000To8000HzEnergyPercent": 25.4525,
+        "late80To300ms1200To6000HzRms": 0.02371836597078894,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_slash",
+      "before": {
+        "below80HzEnergyPercent": 0.0568,
+        "body140To700HzEnergyPercent": 64.4377,
+        "material700To2000HzEnergyPercent": 30.1324,
+        "edge2000To8000HzEnergyPercent": 4.8242,
+        "late80To300ms1200To6000HzRms": 0.00555073501839104,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "after": {
+        "below80HzEnergyPercent": 0.0436,
+        "body140To700HzEnergyPercent": 55.1931,
+        "material700To2000HzEnergyPercent": 39.5574,
+        "edge2000To8000HzEnergyPercent": 4.7396,
+        "late80To300ms1200To6000HzRms": 0.005616215533129008,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_armor",
+      "before": {
+        "below80HzEnergyPercent": 0.017,
+        "body140To700HzEnergyPercent": 64.4136,
+        "material700To2000HzEnergyPercent": 29.719,
+        "edge2000To8000HzEnergyPercent": 5.38,
+        "late80To300ms1200To6000HzRms": 0.005887695774630351,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "after": {
+        "below80HzEnergyPercent": 0.0133,
+        "body140To700HzEnergyPercent": 43.1425,
+        "material700To2000HzEnergyPercent": 50.6921,
+        "edge2000To8000HzEnergyPercent": 5.8518,
+        "late80To300ms1200To6000HzRms": 0.0071518631128628316,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "war_finish",
+      "before": {
+        "below80HzEnergyPercent": 0.0438,
+        "body140To700HzEnergyPercent": 61.0581,
+        "material700To2000HzEnergyPercent": 33.9255,
+        "edge2000To8000HzEnergyPercent": 3.4046,
+        "late80To300ms1200To6000HzRms": 0.00547821867413635,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "after": {
+        "below80HzEnergyPercent": 0.0388,
+        "body140To700HzEnergyPercent": 54.5731,
+        "material700To2000HzEnergyPercent": 40.8821,
+        "edge2000To8000HzEnergyPercent": 3.1773,
+        "late80To300ms1200To6000HzRms": 0.005264672194114388,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_draw",
+      "before": {
+        "below80HzEnergyPercent": 0.0193,
+        "body140To700HzEnergyPercent": 55.0263,
+        "material700To2000HzEnergyPercent": 41.2107,
+        "edge2000To8000HzEnergyPercent": 3.136,
+        "late80To300ms1200To6000HzRms": 0.00820838006592683,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "after": {
+        "below80HzEnergyPercent": 0.0193,
+        "body140To700HzEnergyPercent": 55.0263,
+        "material700To2000HzEnergyPercent": 41.2107,
+        "edge2000To8000HzEnergyPercent": 3.136,
+        "late80To300ms1200To6000HzRms": 0.0082083814842423,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_release",
+      "before": {
+        "below80HzEnergyPercent": 0.0542,
+        "body140To700HzEnergyPercent": 74.6714,
+        "material700To2000HzEnergyPercent": 22.3658,
+        "edge2000To8000HzEnergyPercent": 2.6015,
+        "late80To300ms1200To6000HzRms": 0.00023950596460226194,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "after": {
+        "below80HzEnergyPercent": 0.0542,
+        "body140To700HzEnergyPercent": 74.6714,
+        "material700To2000HzEnergyPercent": 22.3658,
+        "edge2000To8000HzEnergyPercent": 2.6015,
+        "late80To300ms1200To6000HzRms": 0.00023950562054729025,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_pierce",
+      "before": {
+        "below80HzEnergyPercent": 0.0333,
+        "body140To700HzEnergyPercent": 70.3714,
+        "material700To2000HzEnergyPercent": 25.2839,
+        "edge2000To8000HzEnergyPercent": 4.1569,
+        "late80To300ms1200To6000HzRms": 0.002012152665870548,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "after": {
+        "below80HzEnergyPercent": 0.0365,
+        "body140To700HzEnergyPercent": 70.7028,
+        "material700To2000HzEnergyPercent": 24.9597,
+        "edge2000To8000HzEnergyPercent": 4.1423,
+        "late80To300ms1200To6000HzRms": 0.0020094091627486615,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    },
+    {
+      "cue": "bow_heavy",
+      "before": {
+        "below80HzEnergyPercent": 0.0082,
+        "body140To700HzEnergyPercent": 67.8363,
+        "material700To2000HzEnergyPercent": 28.1751,
+        "edge2000To8000HzEnergyPercent": 3.1095,
+        "late80To300ms1200To6000HzRms": 0.003032967877793256,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      },
+      "after": {
+        "below80HzEnergyPercent": 0.0071,
+        "body140To700HzEnergyPercent": 56.8374,
+        "material700To2000HzEnergyPercent": 39.061,
+        "edge2000To8000HzEnergyPercent": 3.3561,
+        "late80To300ms1200To6000HzRms": 0.0031607006724199468,
+        "note": "The late-band value contains all materials; it is not an isolated wind measurement or listening acceptance."
+      }
+    }
+  ],
+  "preservedElementalFiles": [
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/fir_charge_v01.wav",
+      "copy": "clips/fir_charge_v01.wav",
+      "sha256": "4eb73bb06186ad3ff22b153fc64999baa1f7fb98dcfc9afcf2f58011c9d29e22"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/fir_charge_v02.wav",
+      "copy": "clips/fir_charge_v02.wav",
+      "sha256": "22e550bfbf4f988b33d3eee2e6dc5c9b005f955f4d002b3cde25bb36127839a5"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/fir_charge_v03.wav",
+      "copy": "clips/fir_charge_v03.wav",
+      "sha256": "050d3860ab8c10df401ed829e91bf147abdf350c64939eb447beb9dbb56d0e51"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/fir_burst_v01.wav",
+      "copy": "clips/fir_burst_v01.wav",
+      "sha256": "abe94e05faf49593b8bf2388f7e3afa12077497e534ea73e833b5eeed57486c2"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/fir_burst_v02.wav",
+      "copy": "clips/fir_burst_v02.wav",
+      "sha256": "e3949e1f03bd82a6480592582fe32adba8bf8f64389215e05f6af259a0a12da4"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/fir_burst_v03.wav",
+      "copy": "clips/fir_burst_v03.wav",
+      "sha256": "23115206dbb5884761e83fe3c6968f26632ed49e068b873f91d2625006d9d695"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/fir_wall_v01.wav",
+      "copy": "clips/fir_wall_v01.wav",
+      "sha256": "0060b0376a831bddf7cee337c32cf540573006ede160c9171467a331d8f4458d"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/fir_wall_v02.wav",
+      "copy": "clips/fir_wall_v02.wav",
+      "sha256": "35760abeb6f168c89235ceb55815eec6f8b04db97e05d0ff285af9731bad15df"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/fir_wall_v03.wav",
+      "copy": "clips/fir_wall_v03.wav",
+      "sha256": "187699f4448ea5b3dae4be258b4c652eff8507e8d5fb39d7410b5ee1b6574696"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/thu_charge_v01.wav",
+      "copy": "clips/thu_charge_v01.wav",
+      "sha256": "4c79963943c5fabcb7c50167c1aa8179ff37be69e5269ebf3477afd8f04bb617"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/thu_charge_v02.wav",
+      "copy": "clips/thu_charge_v02.wav",
+      "sha256": "36c154295859008f6c171ef6ddf42fca4c35941c3ff55799759b473f341f3459"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/thu_charge_v03.wav",
+      "copy": "clips/thu_charge_v03.wav",
+      "sha256": "96c229f723e7254b3b85804a4b709818b1d479dfd630e48d040c2004d4611867"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/thu_crack_v01.wav",
+      "copy": "clips/thu_crack_v01.wav",
+      "sha256": "bc814a73b2f40b9fa25de7db52d3db148fa207227b9fe7b25b1c35402929d386"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/thu_crack_v02.wav",
+      "copy": "clips/thu_crack_v02.wav",
+      "sha256": "fe3faa4702eaf78fc98d2841fa181954973025e7632936421f785f108c17f937"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/thu_crack_v03.wav",
+      "copy": "clips/thu_crack_v03.wav",
+      "sha256": "fdbd4e201158b4de969cdd80d6a1d6f03d68770fd0bd78a3e4b02b1d091aa53f"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/thu_network_v01.wav",
+      "copy": "clips/thu_network_v01.wav",
+      "sha256": "f559492ba7b4eed70c5118688d51613144470bca8470f9228c68c1f8b8adeab5"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/thu_network_v02.wav",
+      "copy": "clips/thu_network_v02.wav",
+      "sha256": "83e43f08982a650bde2739028ea6fdfda852ecd76b6fd05aa9f3bc000a7a574f"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/clips/thu_network_v03.wav",
+      "copy": "clips/thu_network_v03.wav",
+      "sha256": "bd9d8ac810babb13ecdfca32658082e41ad6acbc9287921283f450a6c4ad7a1a"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/demos/fir-15s.wav",
+      "copy": "demos/fir-15s.wav",
+      "sha256": "f6ac63cf90ef2e0c7cc7eadf334fdaa36bcf6c5f3ecc8519dc8b3ac97524d4d2"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/demos/fir-15s.mp3",
+      "copy": "demos/fir-15s.mp3",
+      "sha256": "ace5f1a746caaea7cfef212ecc247e53a8743b6f464fcfbe322f2ab23b6ab62b"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/demos/fir-15s.cues.json",
+      "copy": "demos/fir-15s.cues.json",
+      "sha256": "93c1638d8d938973622dd41ce6dc6b4d38f30d3f248b53f9f6208d0a0a945cbe"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/demos/thu-15s.wav",
+      "copy": "demos/thu-15s.wav",
+      "sha256": "0240e53fe24c05042c638db5ebb729e2cda5e28b8b69756f6ff527f9c23ddc1f"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/demos/thu-15s.mp3",
+      "copy": "demos/thu-15s.mp3",
+      "sha256": "f86c9aee767a830f82f0740ac3327225cafe59130db93828bb1bcb17ccf4b5b8"
+    },
+    {
+      "source": "source-art/audio/impact-weight-v6/demos/thu-15s.cues.json",
+      "copy": "demos/thu-15s.cues.json",
+      "sha256": "a63ad815c54eb63df6dfee5503bdba58d70ad2d3e5a0bfa00dc272720336870a"
+    }
+  ],
+  "outputs": [
+    {
+      "id": "war-15s",
+      "title": "破军战技 · 金属接触版",
+      "wav": "demos/war-15s.wav",
+      "mp3": "demos/war-15s.mp3",
+      "master": {
+        "durationSeconds": 15.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8766,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": 0.0,
+        "maxAdjacentSampleStep": 0.11151123046875,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 15.034535,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8543,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": 0.0,
+        "maxAdjacentSampleStep": 0.110870361328125,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -23.92,
+        "truePeakDbtp": -3.85,
+        "durationDeltaFromMasterSeconds": 0.034535
+      },
+      "wavSha256": "93d95673ec7cb2542c42fdf5220b7f67c097b670022492a31d6e3c80c7d6bd0d",
+      "mp3Sha256": "6bea68fc8ece599529b199a2b3190d039965f6efee8e9ba3c86faf7b3e0c8cf2",
+      "mp3Bytes": 361289,
+      "encoder": "mp3_mf",
+      "profession": "WAR",
+      "cues": "demos/war-15s.cues.json",
+      "markers": [
+        {
+          "start": 0,
+          "end": 4,
+          "title": "普攻与接触材质"
+        },
+        {
+          "start": 4,
+          "end": 8,
+          "title": "代表技能"
+        },
+        {
+          "start": 8,
+          "end": 11,
+          "title": "暴击"
+        },
+        {
+          "start": 11,
+          "end": 15,
+          "title": "击杀"
+        }
+      ]
+    },
+    {
+      "id": "bow-15s",
+      "title": "逐风弓术 · 金属接触版",
+      "wav": "demos/bow-15s.wav",
+      "mp3": "demos/bow-15s.mp3",
+      "master": {
+        "durationSeconds": 15.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8982,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0008,
+        "maxAdjacentSampleStep": 0.112274169921875,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 15.034535,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -4.1539,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.001,
+        "maxAdjacentSampleStep": 0.102203369140625,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -25.53,
+        "truePeakDbtp": -4.15,
+        "durationDeltaFromMasterSeconds": 0.034535
+      },
+      "wavSha256": "9544470ca75f06e558cfed3059350481a32ef868053c11af649913151d016e45",
+      "mp3Sha256": "a862e41328d1d1f886466ccaa0c6faf08a3ec2f3cd5fa01d2fc4366c7f6803d4",
+      "mp3Bytes": 361289,
+      "encoder": "mp3_mf",
+      "profession": "BOW",
+      "cues": "demos/bow-15s.cues.json",
+      "markers": [
+        {
+          "start": 0,
+          "end": 4,
+          "title": "普攻与接触材质"
+        },
+        {
+          "start": 4,
+          "end": 8,
+          "title": "代表技能"
+        },
+        {
+          "start": 8,
+          "end": 11,
+          "title": "暴击"
+        },
+        {
+          "start": 11,
+          "end": 15,
+          "title": "击杀"
+        }
+      ]
+    },
+    {
+      "id": "fir-15s",
+      "title": "烈焰秘术 · 低沉重量版",
+      "wav": "demos/fir-15s.wav",
+      "mp3": "demos/fir-15s.mp3",
+      "master": {
+        "durationSeconds": 15.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8057,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0006,
+        "maxAdjacentSampleStep": 0.0528564453125,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 15.034535,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8903,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0007,
+        "maxAdjacentSampleStep": 0.0523681640625,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -24.54,
+        "truePeakDbtp": -3.89,
+        "durationDeltaFromMasterSeconds": 0.034535
+      },
+      "wavSha256": "f6ac63cf90ef2e0c7cc7eadf334fdaa36bcf6c5f3ecc8519dc8b3ac97524d4d2",
+      "mp3Sha256": "ace5f1a746caaea7cfef212ecc247e53a8743b6f464fcfbe322f2ab23b6ab62b",
+      "mp3Bytes": 361289,
+      "encoder": "mp3_mf",
+      "profession": "FIR",
+      "cues": "demos/fir-15s.cues.json",
+      "markers": [
+        {
+          "start": 0,
+          "end": 4,
+          "title": "普攻"
+        },
+        {
+          "start": 4,
+          "end": 8,
+          "title": "代表技能"
+        },
+        {
+          "start": 8,
+          "end": 11,
+          "title": "暴击"
+        },
+        {
+          "start": 11,
+          "end": 15,
+          "title": "击杀"
+        }
+      ],
+      "reusedFrom": "source-art/audio/impact-weight-v6/demos/fir-15s.wav"
+    },
+    {
+      "id": "thu-15s",
+      "title": "雷霆秘术 · 低沉重量版",
+      "wav": "demos/thu-15s.wav",
+      "mp3": "demos/thu-15s.mp3",
+      "master": {
+        "durationSeconds": 15.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8361,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": 0.0,
+        "maxAdjacentSampleStep": 0.056549072265625,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 15.034535,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8994,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": 0.0,
+        "maxAdjacentSampleStep": 0.054473876953125,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -25.22,
+        "truePeakDbtp": -3.9,
+        "durationDeltaFromMasterSeconds": 0.034535
+      },
+      "wavSha256": "0240e53fe24c05042c638db5ebb729e2cda5e28b8b69756f6ff527f9c23ddc1f",
+      "mp3Sha256": "f86c9aee767a830f82f0740ac3327225cafe59130db93828bb1bcb17ccf4b5b8",
+      "mp3Bytes": 361289,
+      "encoder": "mp3_mf",
+      "profession": "THU",
+      "cues": "demos/thu-15s.cues.json",
+      "markers": [
+        {
+          "start": 0,
+          "end": 4,
+          "title": "普攻"
+        },
+        {
+          "start": 4,
+          "end": 8,
+          "title": "代表技能"
+        },
+        {
+          "start": 8,
+          "end": 11,
+          "title": "暴击"
+        },
+        {
+          "start": 11,
+          "end": 15,
+          "title": "击杀"
+        }
+      ],
+      "reusedFrom": "source-art/audio/impact-weight-v6/demos/thu-15s.wav"
+    },
+    {
+      "id": "physical-v7",
+      "title": "剑与火 · 刀刃与箭头金属接触",
+      "wav": "audition/physical-v7.wav",
+      "mp3": "audition/physical-v7.mp3",
+      "master": {
+        "durationSeconds": 32.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8766,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0004,
+        "maxAdjacentSampleStep": 0.112274169921875,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 32.040249,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8543,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0004,
+        "maxAdjacentSampleStep": 0.113494873046875,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -24.59,
+        "truePeakDbtp": -3.85,
+        "durationDeltaFromMasterSeconds": 0.040249
+      },
+      "wavSha256": "7d06af24fd712a9551dd8047a6695ab56a911f9018ba0fafe78d994443dc38e9",
+      "mp3Sha256": "757c2426cdb0b4725a2ac47a594292cf3e8f31dd49fb9d87881284f452b64446",
+      "mp3Bytes": 768824,
+      "encoder": "mp3_mf",
+      "markers": [
+        {
+          "id": "WAR",
+          "title": "破军战技",
+          "start": 0.0,
+          "end": 15.0,
+          "source": "demos/war-15s.wav"
+        },
+        {
+          "id": "BOW",
+          "title": "逐风弓术",
+          "start": 17.0,
+          "end": 32.0,
+          "source": "demos/bow-15s.wav"
+        }
+      ]
+    },
+    {
+      "id": "four-classes-v7",
+      "title": "剑与火 · 四职业金属接触版",
+      "wav": "audition/four-classes-v7.wav",
+      "mp3": "audition/four-classes-v7.mp3",
+      "master": {
+        "durationSeconds": 66.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8061,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0004,
+        "maxAdjacentSampleStep": 0.112274169921875,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 66.051678,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.7925,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0004,
+        "maxAdjacentSampleStep": 0.113494873046875,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -24.55,
+        "truePeakDbtp": -3.79,
+        "durationDeltaFromMasterSeconds": 0.051678
+      },
+      "wavSha256": "b6205ee2a6ceccef36a1de404352a16cdf5c34548e560f6bc7eb87cb708e80fa",
+      "mp3Sha256": "b10ac1231efcf592416545f5da1bf6695fc4f2c042640c9907618b053354b9c4",
+      "mp3Bytes": 1583873,
+      "encoder": "mp3_mf",
+      "markers": [
+        {
+          "id": "WAR",
+          "title": "破军战技",
+          "start": 0.0,
+          "end": 15.0,
+          "source": "demos/war-15s.wav"
+        },
+        {
+          "id": "BOW",
+          "title": "逐风弓术",
+          "start": 17.0,
+          "end": 32.0,
+          "source": "demos/bow-15s.wav"
+        },
+        {
+          "id": "FIR",
+          "title": "烈焰秘术",
+          "start": 34.0,
+          "end": 49.0,
+          "source": "demos/fir-15s.wav"
+        },
+        {
+          "id": "THU",
+          "title": "雷霆秘术",
+          "start": 51.0,
+          "end": 66.0,
+          "source": "demos/thu-15s.wav"
+        }
+      ]
+    },
+    {
+      "id": "physical-v6-v7",
+      "title": "剑与火 · 战士弓术V6与V7对照",
+      "wav": "audition/physical-v6-v7.wav",
+      "mp3": "audition/physical-v6-v7.mp3",
+      "master": {
+        "durationSeconds": 64.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8766,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0004,
+        "maxAdjacentSampleStep": 0.133392333984375,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 64.040249,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -3.8965,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0004,
+        "maxAdjacentSampleStep": 0.13238525390625,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -24.57,
+        "truePeakDbtp": -3.89,
+        "durationDeltaFromMasterSeconds": 0.040249
+      },
+      "wavSha256": "b3ad2ea74e4128ea7f1d09a10bddcd8dae617f8aa046547729bacf816341998d",
+      "mp3Sha256": "ffe7167efbc2b0972a820cd5311ce7b65c3f87845362874f9a615159576ff403",
+      "mp3Bytes": 1535672,
+      "encoder": "mp3_mf",
+      "markers": [
+        {
+          "profession": "WAR",
+          "version": "v6",
+          "start": 0.0,
+          "end": 15.0,
+          "targetLufs": -23.6,
+          "measuredPcmLufs": -23.6,
+          "linearGain": 0.934329368257314
+        },
+        {
+          "profession": "WAR",
+          "version": "v7",
+          "start": 16.0,
+          "end": 31.0,
+          "targetLufs": -23.6,
+          "measuredPcmLufs": -23.59,
+          "linearGain": 1.4554590805819656
+        },
+        {
+          "profession": "BOW",
+          "version": "v6",
+          "start": 33.0,
+          "end": 48.0,
+          "targetLufs": -25.1,
+          "measuredPcmLufs": -25.1,
+          "linearGain": 0.9549925860214357
+        },
+        {
+          "profession": "BOW",
+          "version": "v7",
+          "start": 49.0,
+          "end": 64.0,
+          "targetLufs": -25.1,
+          "measuredPcmLufs": -25.11,
+          "linearGain": 1.5187979420318123
+        }
+      ]
+    },
+    {
+      "id": "material-contacts-v7",
+      "title": "剑与火 · 普通接触与撞甲",
+      "wav": "audition/material-contacts-v7.wav",
+      "mp3": "audition/material-contacts-v7.mp3",
+      "master": {
+        "durationSeconds": 16.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -7.4675,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": 0.0,
+        "maxAdjacentSampleStep": 0.079376220703125,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 16.053311,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -7.8811,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": 0.0,
+        "maxAdjacentSampleStep": 0.0765380859375,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -26.9,
+        "truePeakDbtp": -7.88,
+        "durationDeltaFromMasterSeconds": 0.053311
+      },
+      "wavSha256": "39f3b51482d3584740e1b1ec68233ccf7499b52c9df8d2bcbcad2ada109473cd",
+      "mp3Sha256": "977313a442d90670bdcd6a4819e17c05a3e921822b25343ec515cda9b7d11380",
+      "mp3Bytes": 385706,
+      "encoder": "mp3_mf",
+      "markers": [
+        {
+          "profession": "WAR",
+          "material": "soft",
+          "start": 0.35,
+          "end": 0.75,
+          "variation": 1,
+          "gain": 1.1643672644655725
+        },
+        {
+          "profession": "WAR",
+          "material": "armor",
+          "start": 4.35,
+          "end": 4.83,
+          "variation": 1,
+          "gain": 1.1643672644655725
+        },
+        {
+          "profession": "BOW",
+          "material": "soft",
+          "start": 8.35,
+          "end": 8.65,
+          "variation": 1,
+          "gain": 1.2150383536254499
+        },
+        {
+          "profession": "BOW",
+          "material": "armor",
+          "start": 12.35,
+          "end": 12.65,
+          "variation": 1,
+          "gain": 1.2150383536254499
+        }
+      ]
+    },
+    {
+      "id": "in-music-v7",
+      "title": "剑与火 · 金属接触与既有音乐",
+      "wav": "audition/in-music-v7.wav",
+      "mp3": "audition/in-music-v7.mp3",
+      "master": {
+        "durationSeconds": 45.0,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -6.3447,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.0994,
+        "maxAdjacentSampleStep": 0.06683349609375,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0
+      },
+      "preview": {
+        "durationSeconds": 45.049229,
+        "sampleRate": 44100,
+        "channels": 2,
+        "samplePeakDbfs": -6.3717,
+        "clippingSamples": 0,
+        "monoFoldDownRmsDeltaDb": -0.1013,
+        "maxAdjacentSampleStep": 0.067626953125,
+        "openingSamplePeak": 0.0,
+        "closingSamplePeak": 0.0,
+        "integratedLufs": -27.66,
+        "truePeakDbtp": -6.37,
+        "durationDeltaFromMasterSeconds": 0.049229
+      },
+      "wavSha256": "07272d0b80f62c12601c19c0f842ca9673729024f4f411afa4c57df4ba7c552b",
+      "mp3Sha256": "d20b7eebdfd7c0a507da7f9128dfbf0913f2018c23991debe95104ab1bef48da",
+      "mp3Bytes": 1080572,
+      "encoder": "mp3_mf",
+      "markers": [
+        {
+          "start": 0,
+          "end": 15,
+          "title": "探索"
+        },
+        {
+          "start": 15,
+          "end": 30,
+          "title": "四职业交战"
+        },
+        {
+          "start": 30,
+          "end": 45,
+          "title": "战后"
+        }
+      ],
+      "offlineMix": true,
+      "musicSource": "source-art/audio/direction-studies-v2/music/a-adaptive-demo/a-adaptive-demo.wav",
+      "musicLinearGain": 0.5011872336272722,
+      "battleLinearGain": 0.75,
+      "battleEvents": [
+        {
+          "profession": "WAR",
+          "cue": "war_swing",
+          "variation": 1,
+          "phase": "windup-release",
+          "startSeconds": 0.8,
+          "startSample": 35280,
+          "gain": 0.46799999999999997,
+          "durationSeconds": 0.26,
+          "pan": 0,
+          "globalFamilyGain": 1.4554590805819656,
+          "sourceDurationSeconds": 0.26,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "WAR",
+          "cue": "war_slash",
+          "variation": 1,
+          "phase": "contact",
+          "startSeconds": 0.92,
+          "startSample": 40572,
+          "gain": 0.9585,
+          "durationSeconds": 0.4,
+          "pan": 0,
+          "globalFamilyGain": 1.4554590805819656,
+          "sourceDurationSeconds": 0.4,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "BOW",
+          "cue": "bow_draw",
+          "variation": 2,
+          "phase": "windup",
+          "startSeconds": 4.0,
+          "startSample": 176400,
+          "gain": 0.3,
+          "durationSeconds": 0.45,
+          "pan": 0,
+          "globalFamilyGain": 1.5187979420318123,
+          "sourceDurationSeconds": 0.62,
+          "releaseDeadlineSeconds": 4.45
+        },
+        {
+          "profession": "BOW",
+          "cue": "bow_release",
+          "variation": 2,
+          "phase": "release",
+          "startSeconds": 4.45,
+          "startSample": 196245,
+          "gain": 0.9,
+          "durationSeconds": 0.3,
+          "pan": 0,
+          "globalFamilyGain": 1.5187979420318123,
+          "sourceDurationSeconds": 0.3,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "BOW",
+          "cue": "bow_pierce",
+          "variation": 2,
+          "phase": "contact",
+          "startSeconds": 4.69,
+          "startSample": 206829,
+          "gain": 1.01175,
+          "durationSeconds": 0.3,
+          "pan": 0,
+          "globalFamilyGain": 1.5187979420318123,
+          "sourceDurationSeconds": 0.3,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "FIR",
+          "cue": "fir_charge",
+          "variation": 3,
+          "phase": "windup",
+          "startSeconds": 7.3,
+          "startSample": 321930,
+          "gain": 0.3,
+          "durationSeconds": 0.46,
+          "pan": 0,
+          "globalFamilyGain": 1.6807379257087371,
+          "sourceDurationSeconds": 0.72,
+          "releaseDeadlineSeconds": 7.76
+        },
+        {
+          "profession": "FIR",
+          "cue": "fir_burst",
+          "variation": 2,
+          "phase": "release",
+          "startSeconds": 7.76,
+          "startSample": 342216,
+          "gain": 0.09200000000000001,
+          "durationSeconds": 1.05,
+          "pan": 0,
+          "globalFamilyGain": 1.6807379257087371,
+          "sourceDurationSeconds": 1.05,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "FIR",
+          "cue": "fir_burst",
+          "variation": 3,
+          "phase": "contact",
+          "startSeconds": 8.02,
+          "startSample": 353682,
+          "gain": 0.9,
+          "durationSeconds": 1.05,
+          "pan": 0,
+          "globalFamilyGain": 1.6807379257087371,
+          "sourceDurationSeconds": 1.05,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "THU",
+          "cue": "thu_charge",
+          "variation": 1,
+          "phase": "windup",
+          "startSeconds": 10.6,
+          "startSample": 467460,
+          "gain": 0.33,
+          "durationSeconds": 0.38,
+          "pan": 0,
+          "globalFamilyGain": 1.3995873225726183,
+          "sourceDurationSeconds": 0.6,
+          "releaseDeadlineSeconds": 10.98
+        },
+        {
+          "profession": "THU",
+          "cue": "thu_crack",
+          "variation": 2,
+          "phase": "release",
+          "startSeconds": 10.98,
+          "startSample": 484218,
+          "gain": 0.12,
+          "durationSeconds": 0.8,
+          "pan": 0,
+          "globalFamilyGain": 1.3995873225726183,
+          "sourceDurationSeconds": 0.8,
+          "releaseDeadlineSeconds": null
+        },
+        {
+          "profession": "THU",
+          "cue": "thu_network",
+          "variation": 1,
+          "phase": "contact",
+          "startSeconds": 11.08,
+          "startSample": 488628,
+          "gain": 0.95,
+          "durationSeconds": 1.45,
+          "pan": 0,
+          "globalFamilyGain": 1.3995873225726183,
+          "sourceDurationSeconds": 1.45,
+          "releaseDeadlineSeconds": null
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "uniqueLibraryClips": 42,
+    "all42LibraryHashesUnique": true,
+    "copiedElementalFileCount": 24,
+    "elementalCopiesByteIdentical": true,
+    "noNewPreviewClipping": true,
+    "pcmComparisonPairsWithinPoint2Lufs": true
+  }
+}

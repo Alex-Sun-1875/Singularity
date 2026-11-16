@@ -65,18 +65,7 @@ def pack_exclusions(pack):
     return sorted(excluded)
 
 
-def prepare(platform, output_name, mode='test', gameplay_profile='test'):
-    spec = spec_from_file_location('native_texture_reuse', PROJECT / 'tools/prepare-native-texture-reuse.py')
-    reuse = module_from_spec(spec)
-    spec.loader.exec_module(reuse)
-    reuse.prepare()
-    release = json.loads(subprocess.check_output(['node', str(PROJECT / 'tools/taptap-config.cjs'),
-                         '--prepare', '--json', '--mode', mode, '--profile', gameplay_profile], encoding='utf-8'))
-    profile = json.loads((PROJECT / 'release/taptap.json').read_text(encoding='utf-8'))
-    if 'surfaces' in profile['excludedResourceTrees']:
-        hero = json.loads((RESOURCE_ROOT / 'actors/raphael/manifest.json').read_text(encoding='utf-8'))
-        if hero.get('runtimeProfile') != 'native-kit-v1' or not hero.get('cocosBinding', {}).get('swordBackCarry', {}).get('embeddedCases'):
-            raise SystemExit('This hero requires the surface-materials bundle; restore it before packaging.')
+def prepare_resource_routes(profile):
     packs = list(profile['packs'])
     for collection in profile['collections']:
         for folder in sorted((RESOURCE_ROOT / collection['path']).iterdir()):
@@ -87,7 +76,6 @@ def prepare(platform, output_name, mode='test', gameplay_profile='test'):
     names = [pack['name'] for pack in packs]
     if len(names) != len(set(names)):
         raise SystemExit('Duplicate resource pack names')
-    excluded_assets = []
     for pack in packs:
         if not (RESOURCE_ROOT / pack['path']).is_dir():
             raise SystemExit('Missing resource directory: ' + pack['path'])
@@ -102,6 +90,25 @@ def prepare(platform, output_name, mode='test', gameplay_profile='test'):
     runtime_file = PROJECT / 'assets/scripts/shared/assets/ResourcePacks.ts'
     if not runtime_file.exists() or runtime_file.read_text(encoding='utf-8') != generated:
         runtime_file.write_text(generated, encoding='utf-8')
+
+    return packs
+
+
+def prepare(platform, output_name, mode='test', gameplay_profile='test'):
+    spec = spec_from_file_location('native_texture_reuse', PROJECT / 'tools/prepare-native-texture-reuse.py')
+    reuse = module_from_spec(spec)
+    spec.loader.exec_module(reuse)
+    reuse.prepare()
+    release = json.loads(subprocess.check_output(['node', str(PROJECT / 'tools/taptap-config.cjs'),
+                         '--prepare', '--json', '--mode', mode, '--profile', gameplay_profile], encoding='utf-8'))
+    profile = json.loads((PROJECT / 'release/taptap.json').read_text(encoding='utf-8'))
+    if 'surfaces' in profile['excludedResourceTrees']:
+        hero = json.loads((RESOURCE_ROOT / 'actors/raphael/manifest.json').read_text(encoding='utf-8'))
+        if hero.get('runtimeProfile') != 'native-kit-v1' or not hero.get('cocosBinding', {}).get('swordBackCarry', {}).get('embeddedCases'):
+            raise SystemExit('This hero requires the surface-materials bundle; restore it before packaging.')
+    packs = prepare_resource_routes(profile)
+    names = [pack['name'] for pack in packs]
+    excluded_assets = []
 
     def exclusion(path, glob=True):
         return {'range': 'exclude', 'type': 'url',
@@ -168,7 +175,13 @@ if __name__ == '__main__':
     parser.add_argument('--output-name', default='taptap-audit')
     parser.add_argument('--mode', choices=['audit', 'preview', 'dev', 'test', 'release'], default='test')
     parser.add_argument('--profile', choices=['dev', 'test', 'release'], default='test')
+    parser.add_argument('--routes-only', action='store_true', help='Regenerate only ResourcePacks from the release profile; no build or identity configuration changes.')
     args = parser.parse_args()
+    if args.routes_only:
+        profile = json.loads((PROJECT / 'release/taptap.json').read_text(encoding='utf-8'))
+        packs = prepare_resource_routes(profile)
+        print('Prepared resource routes for ' + str(len(packs)) + ' packs')
+        raise SystemExit(0)
     if not args.output_name.replace('-', '').replace('_', '').isalnum():
         parser.error('output-name must be a simple directory name')
     prepare(args.platform, args.output_name, args.mode, args.profile)

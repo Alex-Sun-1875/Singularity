@@ -1,0 +1,201 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-16",
+  "generatedAt": "2026-11-15T19:32:50.746705+00:00",
+  "status": "implemented_browser_verified_pending_taptap_device",
+  "design": "source-art/ui/adventure-journal-v6/design-spec.json",
+  "userApprovedDesign": true,
+  "scope": "Approved compact map/task Cocos implementation; normal test Web export, no package or publish. Thirteen scoped UI/integration/gate sources match the final export. No whole-project concurrent-change claim.",
+  "implemented": [
+    "Shared compact original-skin shell, text tabs and public left return",
+    "Dark task reader and independent chapter/task scrolling, hide completed, side/replay groups",
+    "Independent legend/map/waypoint columns",
+    "28px grouped waypoint rows, 22px selection, separately scrolling list",
+    "48px fixed-bottom travel with visible blocking/error reason",
+    "World/region/local modes, exact bidirectional task markers, custom points and explicit existing actions"
+  ],
+  "chapter3": {
+    "available": false,
+    "display": "敬请期待",
+    "petsCurrentlyReleased": false
+  },
+  "checks": {
+    "typecheck": {
+      "status": "passed",
+      "command": "npm run check",
+      "log": "test-results\\adventure-journal-v6-runtime\\typecheck-final.log"
+    },
+    "existingTests": {
+      "passed": 155,
+      "failed": 0,
+      "log": "test-results\\adventure-journal-v6-runtime\\existing-tests.log"
+    },
+    "webBuild": {
+      "status": "passed",
+      "profile": "test",
+      "command": "npm run build",
+      "log": "test-results\\adventure-journal-v6-runtime\\web-build.log"
+    },
+    "fullBrowserReport": "test-results\\adventure-journal-v6-runtime\\full-browser-validation.json",
+    "compactTouchReport": "test-results\\adventure-journal-v6-runtime\\compact-layout-validation.json",
+    "mapFocused": {
+      "passed": 11,
+      "scope": "Isolated VM, supplementary to actual Cocos browser",
+      "report": "test-results/adventure-journal-v6/map-focused.json"
+    },
+    "viewports": [
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "deviceScaleFactor": 3,
+        "browserTouch": true,
+        "checks": {
+          "browsingUnchanged": true,
+          "documentScrolled": true,
+          "mapZoomRetained": true,
+          "chapter3StateUnchanged": true,
+          "chapter3ReadOnly": true,
+          "mMap": true,
+          "mClosed": true,
+          "noStaleJournal": true,
+          "localHasPlayer": true,
+          "worldReachable": true,
+          "worldHasKnownRegion": true,
+          "regionReachable": true,
+          "unknownNotInDirectory": true,
+          "allPetsClosed": true
+        },
+        "specificMarkerAndAction": true,
+        "compact": {
+          "singleLeftReturn": true,
+          "compactRows": true,
+          "rowsDoNotOverlap": true,
+          "listClearsFixedAction": true,
+          "adjacentCentersSelectExact": true,
+          "boundarySelectsExact": true,
+          "footerFixedDuringScroll": true,
+          "listActuallyScrolled": true,
+          "swipeDidNotSelect": true,
+          "taskTreeAbsentInMap": true,
+          "fixedTravelDispatchesSelected": true
+        },
+        "minimumIndependentTarget": 47.99999999999977,
+        "consoleErrors": 0
+      },
+      {
+        "viewport": {
+          "width": 932,
+          "height": 430
+        },
+        "deviceScaleFactor": 3,
+        "browserTouch": true,
+        "checks": {
+          "browsingUnchanged": true,
+          "documentScrolled": true,
+          "mapZoomRetained": true,
+          "chapter3StateUnchanged": true,
+          "chapter3ReadOnly": true,
+          "mMap": true,
+          "mClosed": true,
+          "noStaleJournal": true,
+          "localHasPlayer": true,
+          "worldReachable": true,
+          "worldHasKnownRegion": true,
+          "regionReachable": true,
+          "unknownNotInDirectory": true,
+          "allPetsClosed": true
+        },
+        "specificMarkerAndAction": true,
+        "compact": {
+          "singleLeftReturn": true,
+          "compactRows": true,
+          "rowsDoNotOverlap": true,
+          "listClearsFixedAction": true,
+          "adjacentCentersSelectExact": true,
+          "boundarySelectsExact": true,
+          "footerFixedDuringScroll": true,
+          "listActuallyScrolled": true,
+          "swipeDidNotSelect": true,
+          "taskTreeAbsentInMap": true,
+          "fixedTravelDispatchesSelected": true
+        },
+        "minimumIndependentTarget": 52.92307692307679,
+        "consoleErrors": 0
+      }
+    ],
+    "headerTouchSmoke": [
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "physicalTouch": true,
+        "button": {
+          "action": "close",
+          "label": "",
+          "enabled": true,
+          "x": 74.99999999999993,
+          "y": 50,
+          "width": 47.99999999999997,
+          "height": 48
+        },
+        "uiClosed": true,
+        "noJournalNodes": true,
+        "playerDidNotMove": true
+      },
+      {
+        "viewport": {
+          "width": 932,
+          "height": 430
+        },
+        "physicalTouch": true,
+        "button": {
+          "action": "close",
+          "label": "",
+          "enabled": true,
+          "x": 83.41025641025635,
+          "y": 55.12820512820514,
+          "width": 52.92307692307684,
+          "height": 52.923076923076906
+        },
+        "uiClosed": true,
+        "noJournalNodes": true,
+        "playerDidNotMove": true
+      }
+    ],
+    "explicitNavigation": {
+      "scope": "Fresh ordinary journey; explicit native Go to marker button invokes the existing HUD navigation callback. Callback spied to avoid walking and closes via the existing close action.",
+      "calls": [
+        {
+          "area": "S01-T1",
+          "point": {
+            "x": 12.913408422411944,
+            "z": -4.471124183944332
+          },
+          "label": "自定标记"
+        }
+      ],
+      "uiClosed": true,
+      "menu": "",
+      "fieldTouchCreatedMarker": true
+    }
+  },
+  "fixtureScope": "Ordinary journey starts through existing Begin and opening-story Skip controls. Quarry multi-target and twelve-waypoint overflow states are isolated display fixtures, not natural progression, save, unlock, or real teleport-landing acceptance. Travel and navigation dispatch are spied without moving the ordinary session.",
+  "preview": "source-art/ui/adventure-journal-v6/runtime-preview.jpg",
+  "previewScope": "Deterministic resized montage of actual final normal-journey browser screenshots; map top, tasks bottom.",
+  "sourceSnapshot": "test-results\\adventure-journal-v6-runtime\\snapshot.json",
+  "servedBytes": "test-results\\adventure-journal-v6-runtime\\served-bytes.json",
+  "touchBoundary": "Only this approved waypoint list uses grouped 28px rows. Other independent controls retain at least48px. Browser touch checks do not claim device finger precision or hardware safe-area acceptance.",
+  "manualVisualReview": [
+    "Compared final original rounded double-gold frame with the approved v6",
+    "Checked final menu/tool/travel skins inside their hit targets without bottom clipping",
+    "Reviewed task title/body, selected row, left return and three-column map"
+  ],
+  "pending": [
+    "TapTap platform and actual target-device touch/safe-area/lifecycle acceptance"
+  ],
+  "packagedOrPublished": false,
+  "ownedPreviewServerStopped": true
+}

@@ -5,6 +5,7 @@ import {availableRoute} from '../../automation/common/AutomationRoute';
 import {playableArea} from '../../journey/data/ChapterJourney';
 import {bossKind,BOSS_NOTICE_RANGE} from './BossAwareness';
 import {CAMPAIGN_ENEMY_TEMPLATES} from '../../campaign/data/Campaign';
+import {peacefulBossRetired} from '../../campaign/common/PeacefulBosses';
 
 export const BOSS_LEVEL_WINDOW=5,BOSS_NOTICE_SECONDS=10;
 export type BossAvailability='unseen'|'alive'|'cooldown'|'ready'|'waiting';
@@ -34,6 +35,7 @@ export class BossDirectory {
  list(game:GameSession):BossEntry[]{
   const s=game.state;
   return this.roster.flatMap(({key,area,spawn})=>{
+   if(peacefulBossRetired(s,spawn.id))return [];
    const enemy=(s.area===area?s.enemies:s.encounters[area]??[]).find(e=>e.id===spawn.id),level=enemy?.level??spawn.level??1;
    // A visit, first sighting or suppressed hunting spawn is not a previous defeat.
    const cleared=s.receipts[`kill:${area}:${spawn.id}`]===true||(spawn.respawnSeconds?Number(s.receipts[`hunt-cycle:${area}:${spawn.id}`]??0)>0:!!spawn.bossId&&s.flags[`boss_defeated:${spawn.bossId}`]===true);

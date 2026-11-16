@@ -8,6 +8,7 @@ import {applyRpgFont,fitRpgLine} from '../../../shared/ui/RpgFont';
 import {UiSkin} from '../../../shared/ui/UiSkin';
 import {UI_COLORS as C} from '../../../shared/ui/UiTheme';
 import {UI_FRAME_GOLD} from '../../../shared/ui/UiChrome';
+import {bindButtonFeedback,type ButtonFeedback} from '../../../shared/ui/ButtonFeedback';
 
 export type QuestTrackerLine='area'|'objective'|'quest-route'|'quest-distance';
 interface QuestTrackerLayout {left:number;top:number;width:number;scale:number;hit:number;expanded:boolean}
@@ -23,6 +24,7 @@ export class QuestTracker {
  private readonly values:Record<QuestTrackerLine,string>={area:'',objective:'','quest-route':'','quest-distance':''};
  private readonly divider:Graphics;
  private role:FeedbackRole|null=null;
+ private readonly buttonFeedback:ButtonFeedback[]=[];
 
  constructor(private readonly hud:Hud,private readonly layout:QuestTrackerLayout){
   this.opened=layout.expanded;
@@ -77,6 +79,11 @@ export class QuestTracker {
   F.tint(this.actionLabel,role);
  }
 
+ setNavigationInteractable(enabled:boolean):void {
+  const button=this.navigationButton.getComponent(Button)!;if(button.interactable===enabled)return;
+  button.interactable=enabled;this.buttonFeedback.find(feedback=>feedback.node===this.navigationButton)?.refresh();
+ }
+
  private positionContent():void {
   const {width,scale,hit}=this.layout,height=this.height,pad=10*scale,gap=8*scale;
   const column=Math.max(52*scale,hit+4*scale),navX=width/2-column/2;
@@ -104,6 +111,7 @@ export class QuestTracker {
   const g=this.divider,dividerHeight=24*scale;
   g.node.setPosition(width/2-column,0);g.clear();g.strokeColor=UI_FRAME_GOLD.metal;g.lineWidth=.6*scale;
   g.moveTo(0,-dividerHeight/2);g.lineTo(0,dividerHeight/2);g.stroke();
+  for(const feedback of this.buttonFeedback)feedback.refresh();
  }
 
  private fitLine(key:QuestTrackerLine):void {
@@ -114,13 +122,15 @@ export class QuestTracker {
  private flatAction(name:string,click:()=>void):Node {
   const {scale}=this.layout,n=this.hud.node(name,this.root),button=n.addComponent(Button);
   button.transition=Button.Transition.NONE;n.addComponent(BlockInputEvents);n.on(Button.EventType.CLICK,click);
-  const face=this.hud.node('QuestPressedFace',n,0,0,0,0).addComponent(CompactGraphics);
-  const paint=(pressed:boolean)=>{
-   face.clear();if(!pressed||!button.interactable)return;
-   const {width,height}=n.getComponent(UITransform)!,h=Math.min(height,this.height-12*scale);
-   face.fillColor=C.button;face.roundRect(-width/2,-h/2,width,h,4*scale);face.fill();
-  };
-  n.on(Node.EventType.TOUCH_START,()=>paint(true));n.on(Node.EventType.TOUCH_END,()=>paint(false));n.on(Node.EventType.TOUCH_CANCEL,()=>paint(false));
-  n.on(Node.EventType.MOUSE_ENTER,()=>paint(true));n.on(Node.EventType.MOUSE_LEAVE,()=>paint(false));return n;
+  const face=this.hud.node('QuestPressedFace',this.root,0,0,1,1).addComponent(CompactGraphics);
+  const feedback=bindButtonFeedback(n,button,state=>{
+   if(!face.isValid)return;face.clear();
+   // Use the visual column, not its 48px input bounds, and keep the wash below
+   // the shared frame even when expanding rebuilds that frame's child nodes.
+   const border=this.root.getChildByName('SharedGoldFrame');if(border&&face.node.getSiblingIndex()>border.getSiblingIndex())face.node.setSiblingIndex(border.getSiblingIndex());
+   const {width,height}=n.getComponent(UITransform)!,column=Math.max(52*scale,this.layout.hit+4*scale),w=name==='journey-toggle-navigation'?Math.min(width,column-12*scale):width,h=Math.min(height,this.height-12*scale);
+   face.node.setPosition(n.position.x,n.position.y);face.node.getComponent(UITransform)!.setContentSize(w,h);
+   if(state==='idle')return;face.fillColor=C.button;face.roundRect(-w/2,-h/2,w,h,4*scale);face.fill();
+  });this.buttonFeedback.push(feedback);return n;
  }
 }

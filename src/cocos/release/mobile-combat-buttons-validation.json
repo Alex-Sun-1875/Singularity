@@ -1,0 +1,81 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-16",
+  "timezone": "Asia/Shanghai",
+  "feature": "mobile-combat-buttons-v1",
+  "source": "src/cocos/assets/scripts/app/Hud.ts",
+  "implementation": {
+    "scope": "Seven phone combat controls only; slot order and skill rules retained",
+    "ordinaryFaceLogical": 52,
+    "ordinaryHitLogical": 56,
+    "attackFaceAndHitLogical": 73.92,
+    "minimumGapLogical": 8,
+    "minimumRightBottomMarginLogical": 16,
+    "otherHudHitLogical": 48,
+    "combatCounterScale": 1.1666666666666667,
+    "desktopSizingRetained": true
+  },
+  "typecheck": {
+    "command": "npm --prefix src/cocos run check",
+    "passed": true
+  },
+  "layout": {
+    "passed": true,
+    "cases": 7,
+    "minimumMeasuredHit": 56,
+    "minimumMeasuredGap": 8.0,
+    "viewports": [
+      [
+        844,
+        390
+      ],
+      [
+        932,
+        430
+      ],
+      [
+        800,
+        360
+      ]
+    ],
+    "safeAreaFixture": {
+      "left": 47,
+      "right": 47,
+      "bottom": 21,
+      "top": 0
+    },
+    "errors": [],
+    "evidence": "src/cocos/test-results/mobile-combat-buttons-v1/layout-validation.json"
+  },
+  "battle": {
+    "passed": true,
+    "area": "S04",
+    "fixture": "Isolated HTML test=max QA; level40 and owned weapons; placement near authored S04 enemies; no user save writes",
+    "visualGeometry": {
+      "playerBlocked": false,
+      "enemyBlocked": false,
+      "escapeRouteBlocked": false
+    },
+    "evidence": "src/cocos/test-results/mobile-combat-buttons-v1/battle-validation.json",
+    "screenshot": "src/cocos/test-results/mobile-combat-buttons-v1/battle-844x390.png",
+    "comparison": "src/cocos/test-results/mobile-combat-buttons-v1/comparison-before-after.png"
+  },
+  "exports": {
+    "test": {
+      "passed": true,
+      "entry": "http://127.0.0.1:7469/?view=2d&player=3d",
+      "compiledProfileVerified": true
+    },
+    "dev": {
+      "passed": true,
+      "status": "complete",
+      "entry": "http://127.0.0.1:7470/?view=2d&player=3d",
+      "compiledProfileVerified": true
+    },
+    "versionIncremented": false
+  },
+  "pending": [
+    "TapTap target-device touch and hardware safe-area acceptance",
+    "Natural combat and the full set of boss/formation scenes"
+  ]
+}

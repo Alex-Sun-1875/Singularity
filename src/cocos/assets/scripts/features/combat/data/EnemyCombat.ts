@@ -1,6 +1,7 @@
 /** Prepared by tools/design/prepare-enemy-combat.py. Adapter tuning is explicitly separated from authored damage/timings. */
 import {MONSTER_COMBAT_PROFILES,installHuntProfiles} from '../../world/data/MonsterEcology';
 import {applyEarlyChapterBosses} from './EarlyChapterBosses';
+import {installSideBossCombat} from './SideBossCombat';
 export type EnemyDamageElement='physical'|'fire'|'lightning'|'arcane';
 export interface EnemyGeometry {
  kind:'fan'|'rectangle'|'circle'|'ring'|'line'|'none';origin:'caster'|'lockedTarget'|'arenaPoint';
@@ -23,7 +24,7 @@ export interface EnemyAttackDef {
  minRange:number;maxRange:number;steps:EnemyAttackStep[];recovery:number;interruptible:boolean;cooldown?:number;requiresLivingAllies?:boolean;
 }
 export interface EnemyCombatProfile {
- id:string;name:string;route:'legacy'|'profile';body:'human'|'machine'|'beast';hurtRadius?:number;solidBody?:boolean;recoveryDamageMultiplier?:number;movement:{speed:number;turnRate:number;preferredRange:number;awarenessRange:number;damagedAwarenessRange:number;stationary?:true;facingPoint?:{x:number;z:number}};
+ id:string;name:string;route:'legacy'|'profile';body:'human'|'machine'|'beast';hurtRadius?:number;solidBody?:boolean;recoveryDamageMultiplier?:number;staggerDamageMultiplier?:number;movement:{speed:number;turnRate:number;preferredRange:number;awarenessRange:number;damagedAwarenessRange:number;stationary?:true;facingPoint?:{x:number;z:number}};
  defense?:{guardArcDegrees:number;frontalDamageMultiplier:number;breakOpenSeconds:number};
  attackSlotCost:number;cycle:string[];attacks:Record<string,EnemyAttackDef>;
  halfHealth?:{threshold:number;once:boolean;queuedAttackId?:string;followUpAfter?:Record<string,string>};
@@ -3835,4 +3836,5 @@ export const ENEMY_COMBAT_PROFILES:Record<string,EnemyCombatProfile> = {
 };
 installHuntProfiles(ENEMY_COMBAT_PROFILES);
 applyEarlyChapterBosses(ENEMY_COMBAT_PROFILES);
+installSideBossCombat(ENEMY_COMBAT_PROFILES);
 for(const profile of Object.values(ENEMY_COMBAT_PROFILES))profile.policy.hitReactionMovesEnemy=!profile.movement.stationary&&!profile.solidBody;

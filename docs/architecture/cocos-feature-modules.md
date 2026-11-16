@@ -20,6 +20,7 @@ src/cocos/assets/scripts/
     journey/             章节任务与引导
     combat/              战斗规则、敌人行为与战斗反馈
     progression/         属性、技能成长与配置
+    pets/                伙伴成长、天性与特性、共鸣与蜕变、角色增益与管理界面
     equipment/           装备、掉落与行囊
     crafting/            锻造
     persistence/         存档及持久化校验
@@ -36,7 +37,18 @@ src/cocos/assets/scripts/
 
 功能内以 `common/` 保存不依赖 Cocos 的规则、类型及布局计算，以 `data/` 保存内容，以 `runtime/` 保存 Cocos 呈现与接入，以 `locales/` 保存该功能的词条。已有资源路径、场景 UUID、存档键、剧情 ID 和回执 ID 保持稳定。目录改动同时搬迁 `.meta`；生成工具必须同步修改输出路径。
 
+宠物系统按[当前v3规则](../design/pet-system-v3-acquisition.md)维护12位西方伙伴，等级不受角色或品阶限制，能力统一派生为角色百分比增益。`PetJourneys`负责已有地图上的真实相遇、机关、路径护送与无普通掉落的专属试炼；`PetSystemV3`负责共享研究、培养和来源重放，`PetSkillEffects`负责真实事件触发与冷却。`features/pets/common/PetAccess.ts`集中管理开放条件：发布开关`PET_POLICY.enabled`与第三章`available`同时满足，且玩家已成功进入真实开放的第三章或后续章节、取得结构化进入凭证后才可使用。第一、二章和第二章通关不解锁；解锁后返回旧章节仍可使用。当前第三章显示敬请期待，现可玩章节继续关闭宠物；世界交互物、入口、操作、收益、属性与技能遵循同一开放规则，构建档位或单独布尔存档不能自行启用。宠物状态并入公共存档，旧格式先校验后迁移并保留投入；Cocos跟随表现按需创建，当前原生简模尚不代表最终美术验收。
+
 参考 dsh 的功能归属与模块内词条，以及 slash 的共享国际化库、功能命名空间与公共逻辑分层。参考项目仅供结构比较；没有复制其产品业务代码，也没有引入 Cordis、React 或桌面架构。继续复用 Cocos、公共 UI 和现有平台资源层。
+
+## 平台能力
+
+平台接口保留在 `platform/`，玩法通过 `PlatformServices` 使用；存档与偏好共用 `PlatformStorage`。运行平台由 `RuntimePlatform` 统一选择，与 dev / test / release 及 `usesAssetBundles` 资源模式独立。HTML 不因 `tap` 全局对象切换接口，小游戏缺少平台能力时也不回退浏览器实现。完整差异表、入口与存储约束见 [TapTap 与 HTML 平台隔离规范](../development/platform-adapters.md)。
+
+常亮通过无引擎、无 DOM 的 `ScreenAwake` 契约统一前台／后台／销毁入口，具体实现分别维护：
+
+- `TapScreenAwake.ts` 只接入 [TapTap `setKeepScreenOn`](https://developer.taptap.cn/minigameapidoc/dev/api/device/screen/tap.setKeepScreenOn/)，处理官方回调与 Promise。
+- `HtmlScreenAwake.ts` 只接入 [浏览器 Screen Wake Lock](https://www.w3.org/TR/screen-wake-lock/)，仅在页面可见且处于安全上下文时请求；页面隐藏或退出时释放，回前台恢复，系统撤销后等待下次前台、可见性或用户交互再尝试，不轮询。浏览器支持、安全上下文、权限及系统策略限制单独记录，不能用 Web 检查替代 TapTap 真机验收。
 
 ## 剧情过场
 
@@ -50,7 +62,7 @@ src/cocos/assets/scripts/
 - `runtime/CinematicCamera.ts`：等距中景、取景与恢复；不会逐句重新拉近。
 - `runtime/CinematicCues.ts`：保留原有烽光、炉心、号令等提示，与字幕和镜头分离。
 
-统一对齐确认稿 `source-art/ui/campaign-dialogue-v1/cinematic-dialogue-proposal-v2.png`。844×390 逻辑参考下，正文 18、行高 27、说话人 14；正文中心参考为 `(422,323)`，说话人中心 y 为 274。独立控制触区至少 48×48，相邻区域至少间隔 8。安全区约束优先于图片中的固定边距。
+统一对齐确认稿 `source-art/ui/cinematic-dialogue-v4/cinematic-dialogue-proposal-v4.png`。844×390 逻辑参考下，正文 18、行高 27、说话人 14、操作文字 13；正文中心参考为 `(422,323)`，说话人中心 y 为 274。“继续”和几何箭头按字形中线成组布局，取消悬浮皇冠。独立控制触区至少 48×48，相邻区域至少间隔 8。安全区约束优先于图片中的固定边距。
 
 UI 取消实心上下黑条、常驻章名、句数、边框和大按钮。底部为 148 逻辑像素高的柔和黑色渐变；右上“跳过剧情”，右下“继续”。正文不缩字，长句按阅读宽度分页。点击空白不推进剧情。进入 180ms、换句 120ms、退出 160ms；减少动态时直接显隐并停止缓慢取景。
 

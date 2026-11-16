@@ -9,7 +9,7 @@ description: "设计、实现和验收 Singularity（剑与火）的 Cocos / Tap
 
 本技能维护 Singularity / 剑与火的游戏界面规范。先定位实际仓库，读取适用的 `AGENTS.md`；下文代码路径相对仓库根。若从用户技能目录链接加载，先解析到仓库内源文件，再按源文件目录解析参考文档的相对链接。其他项目不自动继承本项目的暗金皮肤、七按钮布局或玩法约定。
 
-进行 UI / HUD 新增、修改、适配或验收前，读取 [界面布局设计规范](references/ui-layout-guidelines.md)。该参考文件由原 `docs/design/ui-layout-guidelines.md` 完整迁入，是长期 UI 布局规范的唯一维护位置；原路径保留跳转入口。具体版本记录和通用前端技能不能替代已确认的项目规范。
+进行 UI / HUD 新增、修改、适配或验收前，读取[现行视觉风格与组件映射](references/visual-style.md)和[界面布局设计规范](references/ui-layout-guidelines.md)。视觉来源、皮肤与 token 映射只在前者维护；布局、安全区、触控和生命周期约束只在后者维护。原 `docs/design/ui-layout-guidelines.md` 保留跳转。具体版本记录和通用前端技能不能替代已确认的项目规范。
 
 迁移时原文引用的历史 `test-results/ui-frame-v6/integration.json` 已不在工作区，保留链接作为历史出处；证据不可用时不能据此报告本轮验收通过。
 
@@ -19,7 +19,7 @@ description: "设计、实现和验收 Singularity（剑与火）的 Cocos / Tap
 - 优先保护人物、目标、攻击预警、弹道、移动和交互。常驻 HUD 沿边缘紧凑布局，次要信息折叠或按需显示。透明面板、文字和不可见触控区也计入遮挡；以真实游戏状态判断。
 - 按实际安全区适配刘海、灵动岛、底部手势区及平台胶囊。手机独立触控目标至少 48 个逻辑像素，相邻目标至少间隔 8 个逻辑像素；可见图形与触控范围分别布局。不靠缩小热区、叠加留白或挤占主要游戏区域解决空间不足。
 - 保留已确认的七按钮布局、槽位身份、图标与实际施放配置的一致性，以及任务、药品、自动操作、主菜单和设置的交互。展开、关闭与生命周期恢复须处理隐藏热区、输入穿透及状态保留，详见参考规范。
-- 先检查当前场景、已验收设计稿和公共组件。颜色与状态复用 `FeedbackPalette` / `FeedbackView`；边框、菜单、内容面板和管理页分别复用 `DoubleGoldFrame` / `UiSkin`、`GoldMenuButton` / `GoldMenuActions`、`GoldPanelShell` / `GoldPanelToggle`、`PREPARATION_DESIGN` / `PREPARATION_SKINS` / `PreparationControls`，避免另建相似实现。
+- 先核对当前场景、用户已确认稿和共享组件的实际外观，按[视觉参考](references/visual-style.md)选择页头、字级、材质、按钮、边框和状态 token。外部游戏只借信息层级与交互；候选或被否定稿不能覆盖本项目的现行风格，也不能因已生成、已实现或运行检查通过而自动视为用户已确认。
 - 文案和反馈读取真实数据、公共语义与功能词库，不靠静态示意图写死业务状态。冷却、经验额度等玩法以当前成长规则及开发技能的构建档位为准；界面稿不重新定义数值。
 - 原稿素材的裁切、缩放、透明通道和确定性排版优先用本地工具；需要新图或生成式编辑时默认云端 OpenAI image_gen，按 `docs/assets/image-processing.md` 保存来源、提示词及验收状态。设计稿、生成结果与运行接入分开记录。
 

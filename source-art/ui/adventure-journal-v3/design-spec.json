@@ -1,0 +1,119 @@
+{
+  "date": "2026-11-16",
+  "status": "superseded_by_density_and_left_return_revision",
+  "runtimeImplementationChangedByThisTask": false,
+  "supersedes": "../adventure-journal-v2/",
+  "userDirection": "顶部与整体对齐当前游戏已确认设计；当前风格整理到项目skill。先审UI设计稿。",
+  "styleAuthority": ".agents/skills/singularity-ui-design/references/visual-style.md",
+  "sharedSourceFiles": [
+    "src/cocos/assets/scripts/shared/ui/RpgPanel.ts",
+    "src/cocos/assets/scripts/shared/ui/PreparationTheme.ts",
+    "src/cocos/assets/scripts/shared/ui/GoldPanelHeader.ts",
+    "src/cocos/assets/scripts/shared/ui/UiChrome.ts",
+    "src/cocos/assets/scripts/shared/ui/FeedbackPalette.ts"
+  ],
+  "visualAlignment": {
+    "shell": "Original rounded double-gold frame and preparation surface/header textures; no new BG3 plaque/chrome.",
+    "navigation": "Pure text, 17px, 72x48 targets, 8px gap, state.selected text with original prep-active-v5 underline.",
+    "header": {
+      "height": 64,
+      "glyphBox": 20,
+      "touch": 48,
+      "previewMode": "Unobstructed HTML-style right close; runtime must delegate capsule/safe-area choice to GoldPanelHeader."
+    },
+    "font": "Shared rpg-serif-v2.ttf",
+    "bodyFont": 14,
+    "minimumFont": 11,
+    "textRoles": {
+      "managementInk": "text.preparation",
+      "accent": "text.preparationAccent",
+      "selection": "state.selected",
+      "secondary": "text.secondary"
+    },
+    "buttons": "Existing prep-button-dark-v2 and prep-skill-selected-v5 original art; visible skin inside independent 48px targets."
+  },
+  "layout": {
+    "baselineLogical": [
+      844,
+      390
+    ],
+    "baselinePhysical": [
+      2532,
+      1170
+    ],
+    "supplementLogical": [
+      932,
+      430
+    ],
+    "shellLogical": {
+      "x": 39,
+      "y": 18,
+      "width": 766,
+      "height": 354
+    },
+    "taskColumns": [
+      244,
+      462
+    ],
+    "taskColumnGap": 24,
+    "mapColumns": [
+      104,
+      470,
+      132
+    ],
+    "mapColumnGap": 12
+  },
+  "taskPage": {
+    "layout": "Left hierarchical quest journal / right dark narrative text, independent scrolling. No parchment reading card.",
+    "selectedChapter": 2,
+    "selectedQuestId": "highland-hunt",
+    "selectedQuestTitle": "采坑中的两份证据",
+    "displayState": "Illustrative post-survey state with both rescue options still open. Not the user save.",
+    "sidebarWidth": 244,
+    "readingWidth": 462,
+    "columnGap": 24,
+    "filters": [
+      "隐藏已完成"
+    ],
+    "footerAction": "在地图查看"
+  },
+  "mapPage": {
+    "layout": "Legend on the left, large regional map in the center, separate waypoint list on the right. The task tree does not stay on this page.",
+    "legendWidth": 104,
+    "mapWidth": 470,
+    "waypointWidth": 132,
+    "columnGap": 12,
+    "region": "断岳高地",
+    "waypoints": [
+      "断岳山驿",
+      "岩炉镇",
+      "伤工棚街",
+      "破阵军械岸"
+    ],
+    "selectedWaypoint": "岩炉镇",
+    "markerPositions": "Schematic mockup positions for visual hierarchy, not runtime coordinates or fog-discovery evidence.",
+    "travelState": "Illustrative unlocked and safe travel state; real release must retain existing unlock, combat and landing checks."
+  },
+  "futureContent": {
+    "chapter3": "敬请期待",
+    "newChapter3StoryOrMap": false,
+    "petReleaseChanged": false
+  },
+  "stateScope": "Quest, markers, map discovery and teleport availability are illustrative existing-content design states, not the player save or runtime acceptance.",
+  "deliverables": [
+    "tasks-2532x1170.png",
+    "map-2532x1170.png",
+    "tasks-2796x1290.png",
+    "map-2796x1290.png",
+    "overview-review.jpg"
+  ],
+  "source": [
+    "index.html",
+    "theme.css"
+  ],
+  "renderer": "render.cjs",
+  "renderReview": "design-review.json",
+  "userAcceptance": "pending",
+  "runtimeAcceptance": "not performed; design-only task",
+  "supersededBy": "../adventure-journal-v4/"
+}

@@ -1,0 +1,156 @@
+{
+  "scope": "Current BackgroundMusic.ts transpiled with deterministic Cocos 3.8.8 play/pause/stop/ENDED/currentTime semantics; not browser/TapTap playback",
+  "source": "src/cocos/assets/scripts/features/audio/runtime/BackgroundMusic.ts",
+  "sourceSha256": "baba9b73d149db487243c9d9fa0ecb66a91375ce4bc6ea23047bf7d38b37c4fe",
+  "sourceUnchangedDuringProbe": true,
+  "result": "passed",
+  "caseCount": 12,
+  "cases": [
+    {
+      "name": "No combat never produces an aftermath; short combat below .7s is ignored",
+      "result": "passed",
+      "evidence": {
+        "aftermathCount": 0,
+        "afterPlayCount": 0
+      }
+    },
+    {
+      "name": "Qualified battle waits four peaceful seconds, then starts a non-looping aftermath at zero",
+      "result": "passed",
+      "evidence": {
+        "peacefulFor": 4,
+        "afterStart": {
+          "op": "play",
+          "value": 0
+        },
+        "transition": {
+          "sequence": 3,
+          "from": "combat",
+          "to": "aftermath",
+          "phaseSeek": false,
+          "targetTime": 0,
+          "reason": "aftermath-from-start"
+        }
+      }
+    },
+    {
+      "name": "Authoritative unsettled engagement holds combat even after the four-second timer",
+      "result": "passed",
+      "evidence": {
+        "aftermathCount": 1
+      }
+    },
+    {
+      "name": "Afterscore tail returns once to exploration at its opening; peaceful time does not replay it",
+      "result": "passed",
+      "evidence": {
+        "finishReason": "tail",
+        "transition": {
+          "sequence": 4,
+          "from": "aftermath",
+          "to": "explore",
+          "phaseSeek": false,
+          "targetTime": 0,
+          "reason": "theme-return"
+        },
+        "afterPlays": 1
+      }
+    },
+    {
+      "name": "Actual ENDED callback also recovers if the main loop missed the normal tail threshold",
+      "result": "passed",
+      "evidence": {
+        "finishReason": "ended"
+      }
+    },
+    {
+      "name": "A renewed fight interrupts aftermath immediately and retains at most two audible modes",
+      "result": "passed",
+      "evidence": {
+        "transition": {
+          "sequence": 4,
+          "from": "aftermath",
+          "to": "combat",
+          "phaseSeek": false,
+          "reason": "combat-resume"
+        },
+        "playingSources": 1
+      }
+    },
+    {
+      "name": "Muting an active aftermath pauses it and resumes the same position without stop/seek/restart",
+      "result": "passed",
+      "evidence": {
+        "pausedTime": 2.1999999999999984,
+        "resumedTime": 2.2999999999999985,
+        "newSeekCount": 0
+      }
+    },
+    {
+      "name": "Background and allowed=false pause all three; returning to the same after does not seek",
+      "result": "passed",
+      "evidence": {
+        "backgroundPauseTime": 2.3999999999999986,
+        "disallowedPauseTime": 2.4999999999999987,
+        "seekCountUnchanged": true
+      }
+    },
+    {
+      "name": "Fight ending while muted produces no delayed aftermath on unmute",
+      "result": "passed",
+      "evidence": {
+        "aftermathCount": 0
+      }
+    },
+    {
+      "name": "Area change, loading and death interruptions clear battle qualification without playing an ending",
+      "result": "passed",
+      "evidence": [
+        {
+          "reason": "area",
+          "aftermathCount": 0
+        },
+        {
+          "reason": "loading",
+          "aftermathCount": 0
+        },
+        {
+          "reason": "death",
+          "aftermathCount": 0
+        }
+      ]
+    },
+    {
+      "name": "Area reset cancels an already active aftermath rather than resuming it in a new area",
+      "result": "passed",
+      "evidence": {
+        "transition": {
+          "sequence": 4,
+          "to": "explore",
+          "phaseSeek": false,
+          "reason": "initial"
+        },
+        "afterTime": 0
+      }
+    },
+    {
+      "name": "Missing optional aftermath falls back without polling or delayed replay; explicit retry recovers",
+      "result": "passed",
+      "evidence": {
+        "failedLoadAttempts": 1,
+        "totalAfterLoads": 2
+      }
+    }
+  ],
+  "priorReviewFinding": {
+    "issue": "pauseAll originally omitted the new aftermath slot",
+    "status": "root fixed before this probe; all three modes now pause"
+  },
+  "maximumExpectedAudibleModes": 2,
+  "allFixtureReferencesReleased": true,
+  "limits": [
+    "No Cocos export/build performed",
+    "Mock semantics verify controller transitions and stop/restart/seek intent, not audio output or device latency",
+    "15.04s mocked decoded duration; authored aftermath is 15 seconds and MP3 adds padding"
+  ]
+}

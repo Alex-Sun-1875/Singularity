@@ -1,11 +1,13 @@
 {
   "name": "sword-and-fire",
-  "version": "0.3.49",
+  "version": "0.3.50",
   "private": true,
   "description": "剑与火：Cocos Creator 3.8.8 设定图2D第一章",
   "scripts": {
     "start:2d": "pwsh -NoProfile -File src/cocos/Run-Concept2D.ps1",
     "start": "pwsh -NoProfile -File src/cocos/Run-Concept2D.ps1",
+    "start:dev": "pwsh -NoProfile -File src/cocos/Run-Concept2D.ps1 -Profile dev",
+    "start:test": "pwsh -NoProfile -File src/cocos/Run-Concept2D.ps1 -Profile test",
     "start:3d": "pwsh -NoProfile -File src/cocos/Run-Local.ps1",
     "build": "pwsh -NoProfile -File src/cocos/Build-Local.ps1 -Platform web-mobile -OutputName concept-2d",
     "build:3d": "pwsh -NoProfile -File src/cocos/Build-Local.ps1",

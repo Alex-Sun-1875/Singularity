@@ -1,0 +1,244 @@
+{
+  "date": "2026-11-15",
+  "workspaceVersion": "0.3.50",
+  "scope": "H07 rematch reachability, task automation through observations/cinematics, and the left tracker automatic toggle",
+  "h07": {
+    "bankCorrectionAlreadyPresentAtTaskStart": true,
+    "entry": {
+      "id": "growing-rematch:SIDE_C2_BRIDGE",
+      "x": -3,
+      "z": -40,
+      "pathPoints": 2
+    },
+    "verification": "All four existing terrain checks, including dry 0.6m footprint and route reachability for every authored object, passed; original terrain barriers were retained."
+  },
+  "reproducedBeforeFix": {
+    "menu": "interaction:journey-task:border-traces",
+    "mode": "quest",
+    "pause": "menu",
+    "observed": false,
+    "queued": []
+  },
+  "fixes": [
+    "Left tracker dispatches the same auto:quest toggle used by the top automatic control; no manual navigation destination",
+    "Automatic quest activation synchronizes task tracking",
+    "Linear task observations bypass redundant confirmation and result windows; branches/dice/manual interactions retain their existing confirmation",
+    "Temporarily unsafe observations wait for combat/projectiles to clear without a modal; combat/evade/recovery reset stale interaction timing",
+    "Story completion retains quest mode and resumes its next objective",
+    "Tracker captions and state colors reflect automatic/stop/continue, and can start at a reached observation"
+  ],
+  "validation": {
+    "typecheck": {
+      "command": "npm run check",
+      "result": "passed"
+    },
+    "existingTests": {
+      "command": "npm test",
+      "passed": 150,
+      "failed": 0,
+      "skipped": 0
+    },
+    "terrainTests": {
+      "command": "tsx --test tests/terrain.test.ts",
+      "passed": 4,
+      "failed": 0
+    },
+    "temporaryRulesProbe": {
+      "passed": 9,
+      "checks": [
+        "H07 bridge rematch is on dry, reachable ground with original water/gorge barriers retained",
+        "Explicit map/object navigation still pauses near a live enemy",
+        "Task automation handles the same threat with real combat instead of navigation pause",
+        "Cinematic pause/resume preserves quest mode without a manual destination",
+        "Background interruption still requires explicit continue",
+        "Cinematic completion cannot resume an intentional manual pause",
+        "Dialogue choices remain pending instead of being automatically selected",
+        "Unsafe observation waits for enemy projectiles without modal, pause or stale timeout",
+        "Observation proceeds as soon as safety returns, even after a long combat interruption"
+      ],
+      "bridgeEntry": {
+        "id": "growing-rematch:SIDE_C2_BRIDGE",
+        "x": -3,
+        "z": -40,
+        "pathPoints": 2
+      },
+      "combat": {
+        "before": 22,
+        "after": 2
+      }
+    },
+    "actualCocosBrowser": {
+      "checks": [
+        "Actual left tracker touch starts task automation with no manual navigation destination and synchronizes the task guide",
+        "Real automatic movement reaches authored observation, awards it once and enters cinematic without confirmation/result modal",
+        "Actual continue touches finish story and automatically resume quest controller without duplicate quest XP",
+        "Real keyboard movement pauses task automation; left Continue resumes the same controller",
+        "Left Stop returns to manual mode and resets caption to Automatic"
+      ],
+      "errors": [],
+      "initial": {
+        "mode": "manual",
+        "tracking": "hunt",
+        "pause": null,
+        "active": false,
+        "destination": false,
+        "menu": "",
+        "label": "自动",
+        "button": {
+          "x": 139.47916666666666,
+          "y": 83.34895833333333
+        },
+        "scene": null,
+        "taskDone": false,
+        "questXp": 0,
+        "position": {
+          "x": -8,
+          "z": 20
+        }
+      },
+      "observation": {
+        "mode": "quest",
+        "tracking": "task",
+        "pause": "story",
+        "active": false,
+        "destination": false,
+        "menu": "",
+        "label": "停止",
+        "button": {
+          "x": 139.47916666666666,
+          "y": 83.34895833333333
+        },
+        "scene": {
+          "id": "border-spear",
+          "beat": 0,
+          "page": 0,
+          "pages": 1,
+          "time": 0.1,
+          "title": "冠与龙的残纹",
+          "phase": "entering",
+          "subtitles": {
+            "speaker": "拉斐尔",
+            "text": "矛尖上是王冠，下面却压着一片龙翼。新爪痕全都背向群山。",
+            "fontSize": 18,
+            "lineHeight": 27,
+            "subtitle": {
+              "x": 422,
+              "y": 323,
+              "width": 579.9999999999999
+            },
+            "controls": [
+              "跳过剧情",
+              "继续"
+            ],
+            "continueGeometry": {
+              "labelX": -12.875076923076923,
+              "arrowX": 30.640615384615387,
+              "arrowY": 2.0261538461538464,
+              "width": 11.076923076923077,
+              "height": 17.27856,
+              "gap": 14.76923076923077
+            },
+            "hit": 47.99999999999999,
+            "layout": {
+              "unit": 1.8461538461538463,
+              "hit": 88.61538461538461,
+              "controlWidth": 158.76923076923077,
+              "left": 40.61538461538462,
+              "right": 1517.5384615384617,
+              "top": 25.846153846153847,
+              "bottom": 675.6923076923077,
+              "captionWidth": 1070.7692307692307,
+              "captionX": 779.0769230769231,
+              "captionY": 596.3076923076924,
+              "speakerY": 505.8461538461539,
+              "skipX": 1438.1538461538462,
+              "skipY": 70.15384615384616,
+              "continueX": 1438.1538461538462,
+              "continueY": 631.3846153846155
+            }
+          }
+        },
+        "arrow": {
+          "x": 795.597,
+          "y": 340.90250000000003
+        },
+        "taskDone": true,
+        "questXp": 150,
+        "position": {
+          "x": -7.452239990234375,
+          "z": 24.621912002563477
+        }
+      },
+      "resumed": {
+        "mode": "quest",
+        "tracking": "task",
+        "pause": null,
+        "active": true,
+        "destination": false,
+        "menu": "",
+        "label": "停止",
+        "button": {
+          "x": 139.47916666666666,
+          "y": 83.34895833333333
+        },
+        "scene": null,
+        "taskDone": true,
+        "questXp": 150,
+        "position": {
+          "x": -5.536843776702881,
+          "z": 25.172651290893555
+        }
+      },
+      "final": {
+        "mode": "manual",
+        "tracking": "task",
+        "pause": null,
+        "active": false,
+        "destination": false,
+        "menu": "",
+        "label": "自动",
+        "button": {
+          "x": 139.47916666666666,
+          "y": 83.34895833333333
+        },
+        "scene": null,
+        "taskDone": true,
+        "questXp": 150,
+        "position": {
+          "x": -8.598878860473633,
+          "z": 24.91918182373047
+        }
+      },
+      "browserVisibilityCheck": {
+        "visible": "visible",
+        "background": false
+      },
+      "status": "passed",
+      "notes": [
+        "Headless Chromium kept the game document visible during the tab switch; no native background/foreground acceptance is claimed. Controller background pause/resume is checked separately."
+      ]
+    },
+    "webBuild": {
+      "command": "npm run start:test",
+      "profile": "test",
+      "result": "passed",
+      "output": "src/cocos/build/concept-2d"
+    }
+  },
+  "runtimeFixture": "Fresh isolated 844x390 browser at 3x density; set up real S02 scene four metres before authored observation, mark approach narration already viewed, and start from hunt tracking. Movement/quest reward/cinematic used real game logic; tracker, continue and stop used touch; manual interruption used keyboard. This is not a full chapter playthrough.",
+  "screenshot": "source-art/ui/task-automation-v1/runtime-iphone14.png",
+  "sourceSha256": {
+    "src/cocos/assets/scripts/app/ChapterGame.ts": "b09e549bc799dc2125e6f5ff0356848a88fda7920f1ba722efb1490137c9beab",
+    "src/cocos/assets/scripts/app/Hud.ts": "0932dda9b9f811c44515a7c5e3b78e82d03a51525904bc75fd1c8657a4d161b8",
+    "src/cocos/assets/scripts/features/automation/common/Automation.ts": "7daf0bd0c0c7523692eccd74e2df4e7873e5759f1ff65c0ac3e5938a20797e8f",
+    "src/cocos/assets/scripts/features/journey/runtime/QuestTracker.ts": "69adfa773de71e6e8622923e30d60d794ec809a7b703f092f841be7f6aaff30e",
+    "src/cocos/assets/scripts/features/journey/runtime/JourneyPanel.ts": "788e08bdd83239b092203813976bd4620628a14a2f068e69fb5478fc73f57ef6",
+    "src/cocos/assets/scripts/features/campaign/data/SideBosses.ts": "67f6d77f06fb8e438bd19a4078618261588ad9f302dec3a7b187c59c3b214420",
+    "src/cocos/assets/scripts/features/world/data/WorldData.ts": "682c25a9535184d778e18d63f0bb4c464f502102321300f8e96d4cfd8cc8c645"
+  },
+  "packaged": false,
+  "uploaded": false,
+  "pending": [
+    "TapTap rebuilt package and physical-device platform/touch/background verification"
+  ]
+}

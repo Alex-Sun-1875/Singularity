@@ -1,0 +1,55 @@
+{
+  "schemaVersion": 1,
+  "feature": "hud-hover-and-automation-state-display",
+  "createdAt": "2026-11-15T18:13:52.524512+00:00",
+  "version": "0.3.50",
+  "profile": "test",
+  "finalBehavior": {
+    "hoverStillChangesColor": true,
+    "hoverFill": "#221810 (original button feedback color)",
+    "capsuleRadius": "inner height / 2",
+    "metalBorderPreserved": true,
+    "pauseMarksInHeaderAndExpandedItems": 0,
+    "semanticStateColorsPreserved": true,
+    "chevronAndClickBehaviorPreserved": true
+  },
+  "checks": {
+    "typescript": "passed",
+    "standardWebBuild": "passed",
+    "renderPolicy": "passed",
+    "compiledModePausedReferences": 0,
+    "focusedBrowser": {
+      "passedViewports": 3,
+      "totalViewports": 3,
+      "sameBackgroundPixelPairs": 15,
+      "modePausedNodes": 0,
+      "pageErrors": 0,
+      "consoleErrors": 0
+    },
+    "earlierComponentBrowser": {
+      "groups": 6,
+      "states": 102,
+      "pageErrors": 0,
+      "applicationConsoleErrors": 0,
+      "rawChromeTouchCancelDiagnostics": 24,
+      "report": "src/cocos/test-results/hud-hover/after-final/browser-review.json"
+    }
+  },
+  "componentChanges": [
+    "Automation capsule and tracker highlight geometry/layering",
+    "Shared hover/press/drag/cancel/disable/hide feedback for MenuPanel, GoldPanelShell and DicePanel",
+    "Original transparent Boss/Rpg selection art kept inside control bounds below captions"
+  ],
+  "evidence": {
+    "focused": "src/cocos/test-results/automation-clean-hover/browser-review.json",
+    "pixelReview": "pixelReview in focused report",
+    "componentAudit": "src/cocos/test-results/hud-hover/component-audit.json",
+    "beforeAfter": "src/cocos/test-results/automation-clean-hover/header-hover-thumb.jpg"
+  },
+  "preview": "http://127.0.0.1:7487/?view=2d&player=3d&progression=natural",
+  "limits": [
+    "Earlier broad component checks and current focused follow-up retain separate build snapshots and raw browser diagnostics.",
+    "Hunt running/paused states use explicit controller display fixtures; no quest progress or rewards are fabricated.",
+    "TapTap device validation is not claimed by Web rendering and input checks."
+  ]
+}

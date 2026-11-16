@@ -1,0 +1,52 @@
+{
+  "date": "2026-11-16",
+  "requestedReference": "Screenshot red frame: journey-mixed, exploration -> combat -> aftermath",
+  "previousRuntime": "Two 96-second exploration/combat loops; returned directly to exploration after combat",
+  "currentRuntime": "Exploration -> combat -> a non-looping 15-second aftermath -> exploration; stages follow actual gameplay rather than a fixed 45-second demonstration",
+  "theme": "A / 余烬与誓言",
+  "aftermathAsset": "audio/music/embers-oaths-aftermath",
+  "assetSource": "Original journey score, beats 40-60 / seconds 30-45; no percussion, F -> G -> Am -> Dm -> Dm",
+  "existingAudio": "Both 96-second music loops and the accepted 45 profession SFX remain byte-identical",
+  "controller": {
+    "sources": 3,
+    "aftermathLoop": false,
+    "combatEntrySeconds": 0.7,
+    "peacefulMinimumSeconds": 4,
+    "settlement": "Also waits for the existing gameplay engagement to be removed; handles both cleared encounters and completed retreat",
+    "aftermathStart": "From zero once after qualified combat; never armed by silence, menus, mute or background alone",
+    "return": "Crossfade the final 1.5 seconds into the opening of the exploration theme",
+    "reengagement": "Immediately interrupts aftermath and resumes combat",
+    "reset": "Area change, loading, death, title or training reset disarms aftermath",
+    "pause": "All three Cocos sources pause for mute, background or unavailable authentication; same-stage resume preserves playback position",
+    "failure": "Unavailable aftermath returns to an available loop, with explicit retry; never blocks gameplay",
+    "maximumIntendedAudibleSources": 2
+  },
+  "resources": {
+    "musicBundle": "background-music",
+    "musicFiles": 3,
+    "musicBytes": 3308310,
+    "combatFiles": 45,
+    "combatBytes": 2981376,
+    "totalBytes": 6289686,
+    "packageBoundary": "Source/native audio totals only; not a TapTap first-package or uploaded-package size"
+  },
+  "verification": {
+    "typescript": "passed",
+    "controllerSemantics": "aftermath-controller-check.json: 12 passed; engine doubles, not device playback",
+    "webExport": "passed, Cocos 3.8.8 Web-mobile test ResourceBundles preview",
+    "webPlayback": "aftermath-web-check.json: 10/10 passed; real Cocos sources, actual keyboard contact and natural engagement settlement, with explicitly scoped fixture/lifecycle/state diagnostics",
+    "assetMapping": "aftermath-asset-check.json: 48/48 passed; source/native hashes and UUID/import mapping match, original loops/SFX unchanged, no duplicate audio",
+    "humanListening": "Pending final artistic audition of the actual game mix",
+    "targetDevice": "TapTap Android audio mix, OS interruptions, decoder memory and loop gaps remain unverified",
+    "webErrors": {
+      "console": 0,
+      "page": 0,
+      "network": 0,
+      "http": 0
+    },
+    "aftermathObservedTimeSeconds": 15.0077,
+    "naturalPlaybackBoundary": "No seek or acceleration for the full aftermath; mute/background hooks pause its progress. This is not human auditory acceptance or a real OS interruption."
+  },
+  "delivery": "Updated local preview on 7476; no version bump, TapTap ZIP, upload or publication",
+  "result": "implemented-and-web-verified"
+}

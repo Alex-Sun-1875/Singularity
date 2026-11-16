@@ -1,4 +1,5 @@
-import {Color,Graphics,sys} from 'cc';
+import {Color,Graphics} from 'cc';
+import {platformStorage} from '../../../platform/PlatformStorage';
 import type {AreaDef,Obstacle,Point} from '../../../core/Contracts';
 import type {GameSession} from '../../../core/GameSession';
 import {AREAS} from '../../world/data/WorldData';
@@ -44,7 +45,7 @@ export class LocalCartography {
  private static memory(game:GameSession):Memory{
   let memory=this.memories.get(game);if(memory)return memory;
   memory={cells:new Map(),lastArea:'',last:{x:Infinity,z:Infinity},lastWrite:0,dirty:false};
-  try{const data=JSON.parse(sys.localStorage.getItem('sword-fire-chart:'+game.state.seed)||'{}');
+  try{const data=JSON.parse(platformStorage.getItem('sword-fire-chart:'+game.state.seed)||'{}');
    for(const [id,values]of Object.entries(data))if(AREAS[id]&&Array.isArray(values)&&values.length<=10000){
     if(values.every(v=>typeof v==='number'&&Number.isInteger(v))){const a=AREAS[id],x0=Math.floor(-a.width/2/CELL),z0=Math.floor(-a.depth/2/CELL),nx=Math.ceil(a.width/2/CELL)-x0,nz=Math.ceil(a.depth/2/CELL)-z0,cells=new Set<string>();if(values.length!==Math.ceil(nx*nz/32))continue;for(let i=0;i<nx*nz;i++)if((values[Math.floor(i/32)]>>>(i%32))&1)cells.add((x0+i%nx)+','+(z0+Math.floor(i/nx)));memory.cells.set(id,cells);}
     else memory.cells.set(id,new Set(values.filter(v=>typeof v==='string'&&/^-?\d+,-?\d+$/.test(v))));
@@ -70,8 +71,8 @@ export class LocalCartography {
   if(!game)return;const memory=this.memory(game);if(!memory.dirty)return;
   try{
    const data:Record<string,number[]>={};for(const [id,cells]of memory.cells){const a=AREAS[id],x0=Math.floor(-a.width/2/CELL),z0=Math.floor(-a.depth/2/CELL),nx=Math.ceil(a.width/2/CELL)-x0,nz=Math.ceil(a.depth/2/CELL)-z0,words=new Array(Math.ceil(nx*nz/32)).fill(0);for(const key of cells){const[x,z]=key.split(',').map(Number),ix=x-x0,iz=z-z0;if(ix<0||ix>=nx||iz<0||iz>=nz)continue;const i=iz*nx+ix;words[Math.floor(i/32)]|=1<<(i%32);}data[id]=words;}
-   const key='sword-fire-chart:'+game.state.seed,old=JSON.parse(sys.localStorage.getItem('sword-fire-chart-index')||'[]'),index=Array.isArray(old)?old.filter(k=>typeof k==='string'&&/^sword-fire-chart:\d+$/.test(k)&&k!==key):[];
-   sys.localStorage.setItem(key,JSON.stringify(data));for(const stale of index.slice(0,-2))sys.localStorage.removeItem(stale);sys.localStorage.setItem('sword-fire-chart-index',JSON.stringify(index.slice(-2).concat(key)));memory.dirty=false;memory.lastWrite=Date.now();
+   const key='sword-fire-chart:'+game.state.seed,old=JSON.parse(platformStorage.getItem('sword-fire-chart-index')||'[]'),index=Array.isArray(old)?old.filter(k=>typeof k==='string'&&/^sword-fire-chart:\d+$/.test(k)&&k!==key):[];
+   platformStorage.setItem(key,JSON.stringify(data));for(const stale of index.slice(0,-2))platformStorage.removeItem(stale);platformStorage.setItem('sword-fire-chart-index',JSON.stringify(index.slice(-2).concat(key)));memory.dirty=false;memory.lastWrite=Date.now();
   }catch{/* Keep the in-memory chart when browser storage is unavailable. */}
  }
  static revealed(area:string,p:Point,game=this.current):boolean{

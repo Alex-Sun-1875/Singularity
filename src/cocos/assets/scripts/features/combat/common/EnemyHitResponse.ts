@@ -8,17 +8,23 @@ interface Host {state():GameState;move(enemy:EnemyState,delta:Point,radius:numbe
  * in-flight motion is discarded on travel/reload, never replayed for more damage. */
 export class EnemyHitResponse {
  private impacts=new Map<string,Impact>();
+ private basicProtection=new Map<string,{enemy:EnemyState;until:number}>();
  constructor(private host:Host){}
- reset(){this.impacts.clear();}
+ reset(){this.impacts.clear();this.basicProtection.clear();}
  hit(enemy:EnemyState,action:string,source:string,angle:number){
   if(!Number.isFinite(angle)||['burn','environment','secondary','relic','push'].includes(source))return;
   const s=this.host.state(),previous=this.impacts.get(enemy.id);if(previous?.enemy===enemy&&s.time<previous.start+.32)return;
   const cast=s.combat.casts.find(c=>c.id===action);
+  const basic=!cast,committed=enemy.phase==='active'||enemy.phase==='windup'&&enemy.combat?.locked===true;
   const profile=enemyProfile(enemy),boss=!!enemy.bossId||enemy.kind==='captain',fixed=profile?.movement.stationary||profile?.solidBody||profile?.policy.hitReactionMovesEnemy===false||cast?.skillId==='BOW_06'||cast?.skillId==='FIR_04'||cast?.skillId==='FIR_05'||(s.combat.buffs[`rootUntil:${enemy.id}`]??0)>s.time;
   const armored=enemy.kind==='shield'||profile?.body==='machine'||!!profile?.defense,braced=!enemyCanInterrupt(enemy)&&['windup','active'].includes(enemy.phase);
   const projectile=s.projectiles.find(q=>q.id===action),heavy=['WAR_01','WAR_04','WAR_05','BOW_01','FIR_02','FIR_05'].includes(cast?.skillId??'')||!!projectile?.charged;
   const base=heavy?.52:source==='spell'?.24:.32,scale=fixed?0:boss?.16:armored?.48:1;
-  const distance=base*scale*(braced?.25:1),flinch=!boss&&!fixed&&!braced&&enemy.phase!=='stagger';
+  const protection=this.basicProtection.get(enemy.id),protectedBasic=basic&&protection?.enemy===enemy&&protection.until>s.time;
+  // Ordinary contact has a short, bounded recoil. It cannot delay or displace a
+  // locked attack; authored skill interruption remains in PureCombat's poise rules.
+  const distance=basic&&(committed||protectedBasic)?0:base*scale*(braced?.25:1),flinch=!boss&&!fixed&&!braced&&!committed&&!protectedBasic&&enemy.phase!=='stagger';
+  if(basic&&flinch)this.basicProtection.set(enemy.id,{enemy,until:s.time+.65});
   const impact:Impact={enemy,start:s.time,duration:.16,distance,applied:0,angle,flinch,resisted:!!(fixed||boss||armored||braced)};
   this.impacts.set(enemy.id,impact);this.host.emit('enemy_recoil',undefined,{id:enemy.id,action,angle,distance,duration:impact.duration,resisted:impact.resisted,lethal:enemy.hp<=0,at:{x:enemy.x,z:enemy.z}});
  }

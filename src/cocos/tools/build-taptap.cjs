@@ -164,7 +164,7 @@ async function main(){
   await run('Check exported WASM',node,[tool('prepare-navigation-wasm.cjs'),'--build',build]);
   const notices=path.join(project,'build-templates/web-desktop/THIRD_PARTY_NOTICES.txt');if(fs.existsSync(notices))fs.copyFileSync(notices,path.join(build,'THIRD_PARTY_NOTICES.txt'));
   if(preview){
-   const index=path.join(build,'index.html');fs.writeFileSync(index,fs.readFileSync(index,'utf8').replace('<head>','<head><script>globalThis.__TAP_RELEASE__=true;</script>'));
+   const index=path.join(build,'index.html');fs.writeFileSync(index,fs.readFileSync(index,'utf8').replace('<head>','<head><script>globalThis.__SINGULARITY_BUNDLE_PREVIEW__=true;</script>'));
    await run('Copy preview branding',node,[tool('copy-branding.cjs'),build]);
   }else{
    const converted=path.join(project,'build',name+'-package'),conversion=[tool('convert-taptap.cjs'),'--source',build,'--target',converted,'--version',next,'--profile',options.profile];

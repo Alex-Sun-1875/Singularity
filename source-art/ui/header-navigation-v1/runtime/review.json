@@ -1,0 +1,151 @@
+{
+  "date": "2026-11-16",
+  "version": "0.3.50",
+  "status": "implemented-web-verified-device-pending",
+  "approvedDesign": "source-art/ui/header-navigation-v1/00-navigation-proposal.png",
+  "component": "shared/ui/GoldPanelHeader.ts",
+  "behavior": [
+    "One native Cocos Button per window; 20 logical pixel geometry icon and at least 48 x 48 hit area",
+    "Right close is selected only when its full target is inside the safe area and at least 8 logical pixels clear of the host capsule; otherwise use left return",
+    "Capsule, hardware safe area, Canvas and FairyGUI coordinates meet in the UI camera screen coordinate system",
+    "Existing back actions, close targets, mandatory confirmation rules and training exit action are retained",
+    "All existing generic shells and dedicated header renderers share the component; no new runtime dependency or production browser fixture"
+  ],
+  "integration": [
+    "GoldPanelShell / MenuPanel",
+    "RpgPanel and equipment / character / profession / allocation / skills / forge",
+    "CharacterPanel and equipment gallery detail",
+    "AdventureJournalPanel and MapPanel header",
+    "BossPanel",
+    "All content windows using Hud.show / Hud.showList"
+  ],
+  "verification": {
+    "fullTypeCheck": {
+      "command": "npm --prefix src/cocos run check",
+      "exitCode": 0
+    },
+    "coreTypeCheck": {
+      "command": "npm --prefix src/cocos run check:core",
+      "exitCode": 0
+    },
+    "diffWhitespaceCheck": "passed with core.whitespace=cr-at-eol for Windows line endings",
+    "webBuild": {
+      "command": "pwsh -NoProfile -File src/cocos/Run-Concept2D.ps1 -Profile test",
+      "exitCode": 0,
+      "profile": "test",
+      "versionIncremented": false,
+      "output": "src/cocos/build/concept-2d",
+      "loadedMain": "assets/main/index.c0368.js",
+      "renderPolicy": "passed",
+      "buildProfileVerification": "passed"
+    },
+    "browser": {
+      "engine": "Cocos 3.8.8 in Chromium, iPhone user agent and touch events",
+      "baseline": [
+        844,
+        390
+      ],
+      "largerViewport": [
+        956,
+        440
+      ],
+      "browserDeviceScale": 3,
+      "capsule": "injected rectangle and visual fixture; not native TapTap evidence",
+      "safeAreaFixtures": [
+        [
+          59,
+          0
+        ],
+        [
+          0,
+          59
+        ]
+      ],
+      "routeEvidence": "route-snapshots.json",
+      "javascriptErrors": 0,
+      "actualPointerChecks": [
+        "left return closes pause",
+        "right close closes settings and releases all prior modal nodes",
+        "gallery detail close returns to catalog",
+        "training header resumes the same training session; exit remains a distinct action"
+      ],
+      "metadataChecks": [
+        "back:true target inventory preserved",
+        "disabled header ignores click and backdrop has no dismiss button"
+      ],
+      "dynamicGeometry": "host rectangle invalidation switches close/back; larger viewport can switch back to close when the measured candidate clears the fixture"
+    },
+    "visual": "Static review of phone training back, settings close, journal back and 956 x 440 inventory; icons, title baselines and relevant adjacent header content checked."
+  },
+  "limitations": [
+    "TapTap native capsule rectangle and hardware safe areas still require actual iOS/Android device acceptance",
+    "No TapTap package, upload, review submission or publication was requested or performed",
+    "All transaction and unsaved-change branches keep their existing handlers; this UI verification did not exhaustively replay every gameplay business flow"
+  ],
+  "platformSources": [
+    "https://developer.taptap.cn/minigameapidoc/dev/api/base/system/tap.getWindowInfo/",
+    "https://developer.taptap.cn/minigameapidoc/dev/engine/Cocos-Laya-Egret/",
+    "src/cocos/extensions/taptap-minigame-tools/tap-minigame.d.ts"
+  ],
+  "sources": [
+    {
+      "path": "src/cocos/assets/scripts/shared/ui/GoldPanelHeader.ts",
+      "sha256": "91b9882483f859ca5bb1d43945a4e86ee5d2684d89f74bc1439dc892d75ec56c"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/ui/GoldPanelShell.ts",
+      "sha256": "e52ac143c26a1ea9f6611a27ae10171fd556c8bb7a2d8c2ca3d79b933131a58d"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/ui/MenuPanel.ts",
+      "sha256": "74a981b1ce38519fa39a8be0d692a0b900f5e5b9033bb2cd3e4e6fd664aef672"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/ui/RpgPanel.ts",
+      "sha256": "cf9ea1d7156e9eddd3f884ab663fad27b85066ee786f53e6ea9da1494e16dba7"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/ui/UiChrome.ts",
+      "sha256": "3991c8c1dc829c7777360603a195b6a21b219ced0d5d9f6cee8caaa084b8e289"
+    },
+    {
+      "path": "src/cocos/assets/scripts/platform/ViewportMetrics.ts",
+      "sha256": "dae00157fa7ee39b63febcf4b3ba51e2ca81add68ddcf07d6d59feb714666d89"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/navigation/runtime/MapPanel.ts",
+      "sha256": "9551cf536af6ac39d228d9771b5837e191b8534568d0de3639ea4bd80057ff05"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/journey/runtime/AdventureJournalPanel.ts",
+      "sha256": "18d40aff9dccb2235a69642aa7d859b510b44118058f8b3d939ebe925363d733"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/equipment/runtime/CharacterPanel.ts",
+      "sha256": "05690f1b9f8a30b47b5170ac61b4be25c0528189913e63d6413dc489fbcef9a9"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/equipment/runtime/EquipmentGallery.ts",
+      "sha256": "9bee98f49013362b7c1d599ae4a5b80690f916dab37e3051b709eee38d0ec1f5"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/combat/runtime/BossPanel.ts",
+      "sha256": "c72ec9d336e03a6802adfab7d54b364bfb52bd445a9b48205b26f602971f7a33"
+    },
+    {
+      "path": "src/cocos/assets/scripts/app/PreparationResources.ts",
+      "sha256": "44faf5f8e7e175a322d5fd6a8dfc40f1da642094b28c7596689d4836051f5734"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/ui/PreparationTheme.ts",
+      "sha256": "a3bc04b289fe0013cc869d10eddc3e06375fda8a9c30afd4d2ad5266a00635cd"
+    }
+  ],
+  "screenshots": [
+    "phone-training-back.png",
+    "phone-settings-close.png",
+    "phone-journal-back.png",
+    "large-phone-inventory.png",
+    "runtime-comparison.jpg"
+  ]
+}

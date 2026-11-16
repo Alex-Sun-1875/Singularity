@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "feature": "chapter-two-adventure-and-task-panel",
+  "version": "0.3.50",
+  "buildProfile": "test",
+  "platformVerified": "HTML web-mobile preview",
+  "createdAt": "2026-11-15T14:17:52.618755+00:00",
+  "gameplay": {
+    "taskCategories": [
+      "main",
+      "side"
+    ],
+    "chapterTwoMainTaskExperience": 53430,
+    "minimumEntryLevel": 11,
+    "fullMainRouteMinimumEndLevel": 20,
+    "newSideQuests": 3,
+    "newSideQuestSteps": 9,
+    "newSideQuestBossPrerequisite": false,
+    "newSideQuestsAllReachableAtLevel": 11,
+    "oldVersionMigrationAdded": false
+  },
+  "verification": {
+    "typecheck": "passed",
+    "coreTypecheck": "passed",
+    "existingRegressionTests": {
+      "passed": 150,
+      "failed": 0
+    },
+    "encounterAndSideQuestChecks": {
+      "passed": 12,
+      "failed": 0
+    },
+    "rematchSaveSpecialty": "passed",
+    "journeyGuidance": "passed",
+    "sideQuestSixChoicesAndRevisits": "passed",
+    "automaticTravelHandsBackConfirmation": "passed",
+    "browserViewports": [
+      {
+        "name": "phone",
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "pageErrors": 0,
+        "consoleErrors": 0
+      },
+      {
+        "name": "large-phone",
+        "viewport": {
+          "width": 932,
+          "height": 430
+        },
+        "pageErrors": 0,
+        "consoleErrors": 0
+      },
+      {
+        "name": "desktop",
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "pageErrors": 0,
+        "consoleErrors": 0
+      }
+    ],
+    "webBuild": "passed",
+    "mobileChoiceTouchTargets": {
+      "minimumHeightLogicalPixels": 48,
+      "minimumGapLogicalPixels": 8,
+      "confirmedDialogs": [
+        "two-choice confirmation",
+        "three-choice side-quest dialogue"
+      ],
+      "report": "src/cocos/test-results/chapter-two-adventure-v1/choice-hit-review.json"
+    }
+  },
+  "evidence": "src/cocos/test-results/chapter-two-adventure-v1/",
+  "scope": "Validated controlled gameplay fixtures and real production actions. Domain checks include actual nine-step cross-map travel at Lv11 before the chapter boss. Browser checks use pointer/touch, local automatic walking, selected safe staging coordinates, controlled scene entry and real save/reload; they do not measure natural play pacing.",
+  "pending": [
+    "TapTap target-device acceptance",
+    "natural combat difficulty and continuous human-play pacing",
+    "chapters 3-8 remain unavailable"
+  ],
+  "sourceHashes": {
+    "src/cocos/assets/scripts/app/ChapterGame.ts": "ae24a3e102d28a24568a14ea042f1019bef1e2cdba27b05f3febb0e5b782fb03",
+    "src/cocos/assets/scripts/app/ChapterGame.ts.meta": "3c349e854a7789fe54af5cbee60d9581643687fdc9aa4e17e96ba4dd8aad3451",
+    "src/cocos/assets/scripts/app/Hud.ts": "48fdc94a9ef9946d57265b5026be9d9a55e8da04ab2efb23af3586f41053f18e",
+    "src/cocos/assets/scripts/app/Hud.ts.meta": "4a94f02813901d7544173680a8dbafad76916792af8367bc841698838f4fd1ca",
+    "src/cocos/assets/scripts/app/Menus.ts": "98f206cd8dfd8b5a1ca53568501f0eff8cbe8af02ad4ebd5d6f5ee41782bce26",
+    "src/cocos/assets/scripts/app/Menus.ts.meta": "cb55a94047e078c89488d2a35dfba2bffc897bedb01cef9f708199d96aedf52b",
+    "src/cocos/assets/scripts/core/GameSession.ts": "4bdc59dec9747d068ad2713f6918e06766c9147312a43bbd9d8c6fb9cbfa4653",
+    "src/cocos/assets/scripts/core/GameSession.ts.meta": "1f8b3837f7f13ddbb9dafe7e50e67560561b7c031019c1987da070df14ee63a5",
+    "src/cocos/assets/scripts/features/actors/runtime/Actors.ts": "d0ce0fcff38a396af512da2bf739a389c944870768b4e2d97c439e5a46013dc8",
+    "src/cocos/assets/scripts/features/actors/runtime/Actors.ts.meta": "c74f4d8a78337f04919b1aa22076fec291bd3f457d5c5ecd93644f88f1a7ed2d",
+    "src/cocos/assets/scripts/features/actors/runtime/FlatActors.ts": "661b2aa535bb9c245377af01fe3478c89b2eb490843fc07dbc179f3c66b3f5a7",
+    "src/cocos/assets/scripts/features/actors/runtime/FlatActors.ts.meta": "fa538d767324fc8e515c919f4ca04d5aa74337cac6c62eec3087ee5c41af7d91",
+    "src/cocos/assets/scripts/features/automation/common/Automation.ts": "cf4836b981be686aa909b33dad62dfc9c56e89b0bf28a55bf70638227c32789b",
+    "src/cocos/assets/scripts/features/automation/common/Automation.ts.meta": "4b7fe513b36798c37a2f621904d0c64bb6158373ba60b5ac21a3684939cdda3b",
+    "src/cocos/assets/scripts/features/campaign/common/ChapterTwoEncounters.ts": "19109e514dfbdc2f2be9489d9ce83b6cf330e9e4376d23d375281ae3c91c8f3f",
+    "src/cocos/assets/scripts/features/campaign/common/ChapterTwoEncounters.ts.meta": "8c2ecf0e82f959d451a14709bf81d124f9f63d386fbb15052d9d5abca86cd791",
+    "src/cocos/assets/scripts/features/campaign/data/CampaignEvents.ts": "160f20eb3c8b5f459c67b38dbc5cd39f28902e0d9da3f32711e72ea625d4b7db",
+    "src/cocos/assets/scripts/features/campaign/data/CampaignEvents.ts.meta": "f5180078211fe20fef7a3984d3c5513c9b1b563c35d2e7ab821d30659669adac",
+    "src/cocos/assets/scripts/features/campaign/data/ChapterTwoEncounters.ts": "56554eccb196226cb596a5027c6c749a0d15ed984e3c255612f0486f8e0d94ae",
+    "src/cocos/assets/scripts/features/campaign/data/ChapterTwoEncounters.ts.meta": "12880f84ec202011628749510fc8be2e1746a06d42e02b04206891b3664e8763",
+    "src/cocos/assets/scripts/features/campaign/data/ChapterTwoSideQuests.ts": "e92f668ef1d0e8cc48a31266c44dcdb40191dfc8ce5a823209d52c180c0f8f51",
+    "src/cocos/assets/scripts/features/campaign/data/ChapterTwoSideQuests.ts.meta": "14c94e0535544cc804d36326af97543b87e7898635b4016250b5e5f6e871f722",
+    "src/cocos/assets/scripts/features/campaign/locales/ChapterTwoEncounterText.ts": "eaa6ed4de90d712ab43becb15f12bbd3cd2cd49daf0a509964c79efd8b6238b0",
+    "src/cocos/assets/scripts/features/campaign/locales/ChapterTwoEncounterText.ts.meta": "cca57a987f6eae26741e691985428dc0dc377e717d5a6122bc93c01c2377ae17",
+    "src/cocos/assets/scripts/features/campaign/locales/ChapterTwoSideQuestText.ts": "4addb59881b7053031e39642f58c0efef17c485e8b8900c9728cfcc0ba79480d",
+    "src/cocos/assets/scripts/features/campaign/locales/ChapterTwoSideQuestText.ts.meta": "d97dbe424b35e3342cfec2760d92d479c8d98d24f35eb0c1809fc8fbfc4d0a06",
+    "src/cocos/assets/scripts/features/cinematics/common/CampaignDirector.ts": "021f5f21c417d560867f5d9ea93bd1f3867b75706b83079e0bbbf6dbde18ceac",
+    "src/cocos/assets/scripts/features/cinematics/common/CampaignDirector.ts.meta": "c1298ac41af64e7ac98cd95b655aae00536c481d5f55942cc5e7e9ffc61c817d",
+    "src/cocos/assets/scripts/features/journey/common/ChapterJourney.ts": "bb8cdf20b37bc0203b3ad111c52b438574b6e0bac0a8d0b127a6f1b1e282105c",
+    "src/cocos/assets/scripts/features/journey/common/ChapterJourney.ts.meta": "245f16f6726db4648d665d0325cfba94ff7e83e91f8797dab45b6c186985ec37",
+    "src/cocos/assets/scripts/features/journey/common/JourneyGuide.ts": "fec27f466d221e5f07725dacac270bbcbd6117029208f91e951d8ae06f0d66a4",
+    "src/cocos/assets/scripts/features/journey/common/JourneyGuide.ts.meta": "4f62d4040a7471bfae1a991c4bf43d085868984753008b9c886f0e73579e6686",
+    "src/cocos/assets/scripts/features/journey/data/ChapterJourney.ts": "68059cb5b2a54604fb6bbeb160653c4fc93fc0c6840eb935a7be8f99de34763a",
+    "src/cocos/assets/scripts/features/journey/data/ChapterJourney.ts.meta": "aed8351a18430e0d6f43f68f66dcf03898b0f44cf0a76921b4041f615c06a76c",
+    "src/cocos/assets/scripts/features/journey/locales/index.ts": "abbb51cf280f3560d3e5627f376ab75bcd216ce7d373f270ed7f127f3f6c879d",
+    "src/cocos/assets/scripts/features/journey/locales/index.ts.meta": "61970cdc542413d95314dded2b24480341d276db0df0336e6d80f3d6d1116ffe",
+    "src/cocos/assets/scripts/features/journey/runtime/EncounterJourneyPanel.ts": "9ff567fb776d5910a39857e8c370c2a74318632612802f66d9195ee7cccd539a",
+    "src/cocos/assets/scripts/features/journey/runtime/EncounterJourneyPanel.ts.meta": "6de5ce54472d63a8278a2d0dce6996da8cabf3cd46cbcb6ab86f8629dcf713ad",
+    "src/cocos/assets/scripts/features/journey/runtime/JourneyPanel.ts": "bec13be59c343f2206f1d72565616e4776dc66dbb141a0127f94108f8d6fdc66",
+    "src/cocos/assets/scripts/features/journey/runtime/JourneyPanel.ts.meta": "adcc1d034837656d12545801185633968a5579e89efa9a3dfe4cbeaa5bc020e6",
+    "src/cocos/assets/scripts/features/journey/runtime/JourneyStartScreen.ts": "269c3033aab3b91227bf4d17d97ab998ff5687360413a5a6974bb0d4c3b2ae1e",
+    "src/cocos/assets/scripts/features/journey/runtime/JourneyStartScreen.ts.meta": "24d07c165fe974b8b852a0f0404ccfeb960f7fc0b55f056bb10b67b34a224fee",
+    "src/cocos/assets/scripts/features/journey/runtime/QuestTracker.ts": "5aaa01ed49ff630e28b5679b5a23df1ea7ae83ba69568cf5a74fe0c7cc00a869",
+    "src/cocos/assets/scripts/features/journey/runtime/QuestTracker.ts.meta": "e89fcc0e4a514871d595f353783c21de43d905f1649b296484efd8f3fba2d0cc",
+    "src/cocos/assets/scripts/features/journey/runtime/SideQuestPanel.ts": "f6365a3aeea90dad385b0f195c3589457357a80dc6a3f9449baa653d5bb5a327",
+    "src/cocos/assets/scripts/features/journey/runtime/SideQuestPanel.ts.meta": "a8fa060251ca95cb2219aae2319295fd496254168217cdd2adac3f54aa7c0194",
+    "src/cocos/assets/scripts/features/journey/runtime/TaskOverviewPanel.ts": "18943477ee8ab2e81dbc78c83a293b89354ccfffe601a7a3af15d2262d69e089",
+    "src/cocos/assets/scripts/features/journey/runtime/TaskOverviewPanel.ts.meta": "d966a1ba7526bf505eb43e2c58457267fa829a684bb0d0103fd6da9f154234a7",
+    "src/cocos/assets/scripts/features/journey/runtime/TaskPanelNavigation.ts": "3335bd6f47545646f7c0a664d47d11d557012064a09740244f20a2cc8cf7314f",
+    "src/cocos/assets/scripts/features/journey/runtime/TaskPanelNavigation.ts.meta": "8c1315ca238fb97b0614d892276369c583c1dcd8c83c94c9a00f4a2d9ae02c55",
+    "src/cocos/assets/scripts/features/journey/runtime/TaskPresence.ts": "d3448e26cbfbe671d3a36ccecff26cde136696447b8ba39e7b777b6107df24d0",
+    "src/cocos/assets/scripts/features/journey/runtime/TaskPresence.ts.meta": "c61e6f605d92cc55eff227d53bf2ae0003d9eaa18f851a0aa868c7ef46cd4bd4",
+    "src/cocos/assets/scripts/features/persistence/common/CombatPersistence.ts": "6cbc35e8cddbe149e086ae7bcadaaaee4d23ae540d42223542db4cdde1548266",
+    "src/cocos/assets/scripts/features/persistence/common/CombatPersistence.ts.meta": "d88c98c0795ac27cc003c53fa37087a2fd4ea643f97f041e1a7ff31f599c7c91"
+  }
+}

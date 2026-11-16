@@ -1,0 +1,146 @@
+{
+  "date": "2026-11-16",
+  "revision": "shared-left-edge-near-equipment-art",
+  "status": "passed-web-presentation",
+  "reference": [
+    "source-art/ui/loot-alert-v1/legendary-v2.png",
+    "source-art/ui/loot-alert-v1/epic-v2.png"
+  ],
+  "entry": "http://127.0.0.1:7469/?view=2d&player=3d",
+  "build": "src/cocos/build/concept-2d",
+  "profile": "test",
+  "checks": {
+    "acquired": {
+      "item": "DU1-04",
+      "width": 300,
+      "height": 72,
+      "iconRight": 78,
+      "labels": [
+        {
+          "text": "获得稀有装备",
+          "fontSize": 11.5,
+          "left": 84,
+          "leftAligned": true
+        },
+        {
+          "text": "冷焰短杖",
+          "fontSize": 20,
+          "left": 84,
+          "leftAligned": true
+        },
+        {
+          "text": "已收入行囊",
+          "fontSize": 11,
+          "left": 84,
+          "leftAligned": true
+        }
+      ],
+      "autoGap": 7.999999999999995,
+      "visible": true
+    },
+    "dropped": {
+      "item": "DG_L01",
+      "width": 300,
+      "height": 72,
+      "iconRight": 64,
+      "labels": [
+        {
+          "text": "传奇装备掉落",
+          "fontSize": 11.5,
+          "left": 84,
+          "leftAligned": true
+        },
+        {
+          "text": "最后一班岗",
+          "fontSize": 20,
+          "left": 84,
+          "leftAligned": true
+        },
+        {
+          "text": "靠近自动拾取",
+          "fontSize": 11,
+          "left": 84,
+          "leftAligned": true
+        }
+      ],
+      "autoGap": 7.999999999999995,
+      "visible": true
+    },
+    "epic": {
+      "item": "DR3-04",
+      "width": 300,
+      "height": 72,
+      "iconRight": 78,
+      "labels": [
+        {
+          "text": "史诗装备掉落",
+          "fontSize": 11.5,
+          "left": 84,
+          "leftAligned": true
+        },
+        {
+          "text": "雷潮指环",
+          "fontSize": 20,
+          "left": 84,
+          "leftAligned": true
+        },
+        {
+          "text": "靠近自动拾取",
+          "fontSize": 11,
+          "left": 84,
+          "leftAligned": true
+        }
+      ],
+      "autoGap": 7.999999999999995,
+      "visible": true
+    },
+    "largePhone": {
+      "item": "DR3-04",
+      "width": 300,
+      "height": 72,
+      "iconRight": 78,
+      "labels": [
+        {
+          "text": "史诗装备掉落",
+          "fontSize": 11.5,
+          "left": 83.99999999999999,
+          "leftAligned": true
+        },
+        {
+          "text": "雷潮指环",
+          "fontSize": 20,
+          "left": 83.99999999999999,
+          "leftAligned": true
+        },
+        {
+          "text": "靠近自动拾取",
+          "fontSize": 11,
+          "left": 83.99999999999999,
+          "leftAligned": true
+        }
+      ],
+      "autoGap": 8.000000000000009,
+      "visible": true
+    }
+  },
+  "verification": {
+    "typeCheck": "npm run check passed",
+    "webExport": "passed",
+    "runtimeErrors": [],
+    "scope": "Alignment correction only. Fresh isolated production Cocos scene with full-skill presentation fixture; grant/drop events use the existing session and HUD.",
+    "leftRail": "84 logical pixels from frame left, identical on quality/name/status",
+    "fontSizes": [
+      11.5,
+      20,
+      11
+    ],
+    "previousLifecycleRecord": "src/cocos/release/equipment-notice-unified-v2-validation.json"
+  },
+  "sourceHash": "4fc604344425f7e5b7ed7715a88ce61ce8464d268929a05c22a28b83a248d96c",
+  "userFinalArtApproval": "pending",
+  "pending": [
+    "TapTap target-device verification",
+    "Previously recorded 568x320 HUD crowding remains outside this alignment correction"
+  ],
+  "taptapPackageBuilt": false
+}

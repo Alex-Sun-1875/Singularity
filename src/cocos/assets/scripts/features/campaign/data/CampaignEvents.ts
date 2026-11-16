@@ -1,6 +1,9 @@
 import {CAMPAIGN_LEVEL_LIST} from './Campaign';
 import {campaignText} from '../locales';
 import {GROWING_QUESTS} from '../../equipment/data/GrowingEquipment';
+import {CHAPTER_TWO_ACTIONS,chapterTwoEventId,type ChapterTwoActionId} from './ChapterTwoEncounters';
+import {encounterText} from '../locales/ChapterTwoEncounterText';
+import {CHAPTER_TWO_SIDE_QUEST_EVENTS} from './ChapterTwoSideQuests';
 /** Physical actions and their persistent outcomes. Walking into a region never pays a quest. */
 export interface CampaignChoiceDef {id:string;label:string;text:string;sets:string[]}
 export interface CampaignEventDef {
@@ -10,6 +13,7 @@ export interface CampaignEventDef {
  items?:string[];recipes?:string[];experienceEvent?:string;experience?:number;
  choices?:CampaignChoiceDef[];peacefulResolution?:boolean;choiceItems?:string[];optional?:boolean;
  confirmLabel?:string;completionText?:string;prerequisiteHints?:Record<string,string>;
+ chapterTwoAction?:ChapterTwoActionId;
 }
 const event=(id:string,area:string,label:string,description:string,extra:Omit<CampaignEventDef,'id'|'area'|'label'|'description'>={}):CampaignEventDef=>({id,area,label,description,...extra});
 export const CAMPAIGN_EVENT_LIST:CampaignEventDef[]=[
@@ -25,7 +29,7 @@ export const CAMPAIGN_EVENT_LIST:CampaignEventDef[]=[
  event('h07-skill-archive','H07','查阅石柜中的永久技能档案','旧石柜保存的是军中练习记录。按自己的角色等级学习，档案只结算一次经验，不再补充任何战斗符咒。',{experience:450}),
  event('h08-lower-bridge','H08','接上近侧手柄，放下矿桥','清除固定桥头组后，把同侧的原手柄接回绞盘并放桥。桥后的军械岸没有矿井后门，放下后保留双向道路。',{requires:['m3_heat_test'],clearEncounter:true,sets:['m4_bridge_open']}),
  event('m4-bridge-reward','H09','打开桥后武备台','站在已放下的桥同岸，解开武备台的封扣；固定装备与工艺自选属于同一个主线奖包。',{requires:['m4_bridge_open'],sets:['m4_bridge_reward'],gold:180,iron:12,runes:4,items:['W03','A05'],choiceItems:['DR2-01','DR2-02','DR2-03','DR2-04'],experienceEvent:'M4_XP_1'}),
- event('u106-stop-array','U1-06','按第三剑朝向切断守誓阵','观察指向门内的第三柄剑，从侧面的控制位依次断开三段供能。停机与战斗结算同一个首领事件，证词另行记录。',{sets:['u106_array_stopped'],peacefulResolution:true}),
+ event('u106-stop-array','U1-06',encounterText('action.oath-read.label'),encounterText('action.oath-read.description'),{chapterTwoAction:'oath-read'}),
  event('u107-pressure','U1-07','先护住工位，再泄压停炉','沿检修侧路逐段放开泄压轮，工位后的退路始终保留。停机后巨像失去驱动，不要求用某个职业或稀有物品解锁。',{sets:['u107_furnace_stopped'],peacefulResolution:true}),
  event('m4-contact','U1-08','建立可中止的第一次接触','把手放在外侧的冷白接触台，听取核心的回应，再主动断开连接；不同意它的请求也能完成观察与记录。',{requires:['m4_bridge_reward'],sets:['m4_contact'],gold:80,iron:4,experienceEvent:'M4_XP_2'}),
  event('u108-exit-check','U1-08','实走迁行口并核验两端安全线','从接触台走到迁行口，核对两侧回退刻线。看过迁行和静眠原图后，最终行动才有可执行的安全方案。',{requires:['m5_archive'],sets:['core_exit_verified']}),
@@ -83,5 +87,5 @@ CAMPAIGN_EVENT_LIST.push(
  event('q6-weigh','B14','核对船体潮痕和装载重量','先将船体潮痕与灯坊校光后的影像分开，再复秤能够实际接触的货件；旧影像不替任何藏品持有人作决定。',{requires:['shadowship_calibrated'],sets:['q6_weighed']}),
  event('q6-settle','B09','比较退款原件与装载副页','将稳定校光、复秤和实际船体的记录与退款原件并列，明确归还与收藏的边界；保留完整藏品，账目按唯一收据结清。',{requires:['q6_weighed'],sets:['q6_complete'],gold:160,iron:6,experience:3293,choiceItems:['DR3-04','DU2-04','DR4-04']}),
 );
-CAMPAIGN_EVENT_LIST.push(...GROWING_QUESTS);
+CAMPAIGN_EVENT_LIST.push(...CHAPTER_TWO_ACTIONS.map(action=>event(chapterTwoEventId(action.id),action.area,encounterText(`action.${action.id}.label`),encounterText(`action.${action.id}.description`),{at:action.point,chapterTwoAction:action.id})),...CHAPTER_TWO_SIDE_QUEST_EVENTS,...GROWING_QUESTS);
 export const CAMPAIGN_EVENTS:Record<string,CampaignEventDef>=Object.fromEntries(CAMPAIGN_EVENT_LIST.map(def=>[def.id,def]));
