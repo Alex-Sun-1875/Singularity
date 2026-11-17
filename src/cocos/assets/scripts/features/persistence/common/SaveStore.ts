@@ -1,6 +1,8 @@
 import {GameSession,validateSnapshot,type GameState} from '../../../core/GameSession';
 import type {WorldQuery} from '../../../core/Contracts';
-import {SKILL_POINT_SAVE_PREFIX} from './DevelopmentSaveReset';
+
+/** New campaign rules use their own slots; historical saves are not migrated. */
+export const CAMPAIGN_SAVE_PREFIX='sword-fire.campaign90-v1';
 
 export interface KeyValueStore {getItem(key:string):string|null;setItem(key:string,value:string):void}
 export interface SaveResult {ok:boolean;error?:string;warning?:string}
@@ -17,7 +19,7 @@ export class SaveStore {
  private backupSequence=0;
  private pending:{text:string;slot:string;revision:number;stateRevision:number}|null=null;
  private lastWarning:string|undefined;
- constructor(private storage:KeyValueStore,private prefix=SKILL_POINT_SAVE_PREFIX){}
+ constructor(private storage:KeyValueStore,private prefix=CAMPAIGN_SAVE_PREFIX){}
  private key(slot:string){return `${this.prefix}.${slot}`;}
  private inspect():{snapshot:GameState|null;warning?:string}{
   let best:GameState|null=null,revision=0;const problems:string[]=[];

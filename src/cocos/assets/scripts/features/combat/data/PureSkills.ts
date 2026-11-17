@@ -42,7 +42,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
     "style": "WAR",
     "type": "active",
     "compatibleWeapons": "melee",
-    "targetShape": "近身单体连斩",
+    "targetShape": "前方单体半月连斩",
     "windupSeconds": 0.14,
     "releaseCommitSeconds": 0.14,
     "recoverySeconds": 0.2,
@@ -57,27 +57,27 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 1,
         "requiredCharacterLevel": 1,
-        "maxDamagePerTargetS": 3.2,
+        "maxDamagePerTargetS": 3.46,
         "authoredDamageHits": 2,
         "radiusMetres": 0,
-        "rangeMetres": 3.0,
+        "rangeMetres": 3.9,
         "cooldownSeconds": 3,
         "breakPower": 15,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "近身单体连斩，仅一个目标；合计3.2S，2段，距离3米",
+        "evolution": "近身单体月牙连斩，仅一个目标；合计3.46S，2段，距离3.9米",
         "visualTier": 1,
-        "castRangeMetres": 3.0,
+        "castRangeMetres": 3.9,
         "geometry": {
           "kind": "meleeFan",
           "origin": "caster",
-          "radiusMetres": 3.0,
+          "radiusMetres": 3.9,
           "angleDegrees": 110,
           "totalTargetLimit": 1
         },
         "targetLimit": 1,
         "vfxAnchor": "weaponContact",
-        "vfxDirection": "保留近身挥剑接触与连斩节奏；同一次施放只允许一个敌人承受全部段数，接触特效贴住这个目标，不生成远程飞刃。",
+        "vfxDirection": "两段宽幅半月剑气依次前推，尖端收束，银灰波身与细亮刃口区分；实际接触仍共享一个目标，不增加伤害段数。",
         "peakDurationSeconds": 0.08,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
@@ -88,32 +88,32 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "growth": "按原五级近战形态加强，保持既定段数与S/CD"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "近身单体连斩，仅一个目标；合计3.2S，2段，距离3米"
+        "upgradeEffect": "近身单体月牙连斩，仅一个目标；合计3.46S，2段，距离3.9米"
       },
       {
         "rank": 2,
         "requiredCharacterLevel": 1,
-        "maxDamagePerTargetS": 3.65,
+        "maxDamagePerTargetS": 3.94,
         "authoredDamageHits": 2,
         "radiusMetres": 0.0,
-        "rangeMetres": 3.0,
+        "rangeMetres": 3.9,
         "cooldownSeconds": 3,
         "breakPower": 15.8,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "近身单体连斩，仅一个目标；合计3.65S，2段，距离3米",
+        "evolution": "近身单体月牙连斩，仅一个目标；合计3.94S，2段，距离3.9米",
         "visualTier": 2,
-        "castRangeMetres": 3.0,
+        "castRangeMetres": 3.9,
         "geometry": {
           "kind": "meleeFan",
           "origin": "caster",
-          "radiusMetres": 3.0,
+          "radiusMetres": 3.9,
           "angleDegrees": 120,
           "totalTargetLimit": 1
         },
         "targetLimit": 1,
         "vfxAnchor": "weaponContact",
-        "vfxDirection": "保留近身挥剑接触与连斩节奏；同一次施放只允许一个敌人承受全部段数，接触特效贴住这个目标，不生成远程飞刃。",
+        "vfxDirection": "两段宽幅半月剑气依次前推，尖端收束，银灰波身与细亮刃口区分；实际接触仍共享一个目标，不增加伤害段数。",
         "peakDurationSeconds": 0.09,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
@@ -124,32 +124,32 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "growth": "按原五级近战形态加强，保持既定段数与S/CD"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "近身单体连斩，仅一个目标；合计3.65S，2段，距离3米"
+        "upgradeEffect": "近身单体月牙连斩，仅一个目标；合计3.94S，2段，距离3.9米"
       },
       {
         "rank": 3,
         "requiredCharacterLevel": 1,
-        "maxDamagePerTargetS": 4.2,
+        "maxDamagePerTargetS": 4.54,
         "authoredDamageHits": 3,
         "radiusMetres": 0.0,
-        "rangeMetres": 3.175,
+        "rangeMetres": 4.1,
         "cooldownSeconds": 2.9,
         "breakPower": 16.5,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "近身单体连斩，仅一个目标；合计4.2S，3段，距离3.175米",
+        "evolution": "近身单体月牙连斩，仅一个目标；合计4.54S，3段，距离4.1米",
         "visualTier": 3,
-        "castRangeMetres": 3.175,
+        "castRangeMetres": 4.1,
         "geometry": {
           "kind": "meleeFan",
           "origin": "caster",
-          "radiusMetres": 3.175,
+          "radiusMetres": 4.1,
           "angleDegrees": 130,
           "totalTargetLimit": 1
         },
         "targetLimit": 1,
         "vfxAnchor": "weaponContact",
-        "vfxDirection": "保留近身挥剑接触与连斩节奏；同一次施放只允许一个敌人承受全部段数，接触特效贴住这个目标，不生成远程飞刃。",
+        "vfxDirection": "两段宽幅半月剑气依次前推，尖端收束，银灰波身与细亮刃口区分；实际接触仍共享一个目标，不增加伤害段数。",
         "peakDurationSeconds": 0.1,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
@@ -160,32 +160,32 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "growth": "按原五级近战形态加强，保持既定段数与S/CD"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "近身单体连斩，仅一个目标；合计4.2S，3段，距离3.175米"
+        "upgradeEffect": "近身单体月牙连斩，仅一个目标；合计4.54S，3段，距离4.1米"
       },
       {
         "rank": 4,
         "requiredCharacterLevel": 1,
-        "maxDamagePerTargetS": 4.85,
+        "maxDamagePerTargetS": 5.24,
         "authoredDamageHits": 3,
         "radiusMetres": 0.0,
-        "rangeMetres": 3.3,
+        "rangeMetres": 4.3,
         "cooldownSeconds": 2.7,
         "breakPower": 17.2,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "近身单体连斩，仅一个目标；合计4.85S，3段，距离3.3米",
+        "evolution": "近身单体月牙连斩，仅一个目标；合计5.24S，3段，距离4.3米",
         "visualTier": 4,
-        "castRangeMetres": 3.3,
+        "castRangeMetres": 4.3,
         "geometry": {
           "kind": "meleeFan",
           "origin": "caster",
-          "radiusMetres": 3.3,
+          "radiusMetres": 4.3,
           "angleDegrees": 140,
           "totalTargetLimit": 1
         },
         "targetLimit": 1,
         "vfxAnchor": "weaponContact",
-        "vfxDirection": "保留近身挥剑接触与连斩节奏；同一次施放只允许一个敌人承受全部段数，接触特效贴住这个目标，不生成远程飞刃。",
+        "vfxDirection": "两段宽幅半月剑气依次前推，尖端收束，银灰波身与细亮刃口区分；实际接触仍共享一个目标，不增加伤害段数。",
         "peakDurationSeconds": 0.12,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
@@ -196,32 +196,32 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "growth": "按原五级近战形态加强，保持既定段数与S/CD"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "近身单体连斩，仅一个目标；合计4.85S，3段，距离3.3米"
+        "upgradeEffect": "近身单体月牙连斩，仅一个目标；合计5.24S，3段，距离4.3米"
       },
       {
         "rank": 5,
         "requiredCharacterLevel": 1,
-        "maxDamagePerTargetS": 5.6,
+        "maxDamagePerTargetS": 6.05,
         "authoredDamageHits": 3,
         "radiusMetres": 0.0,
-        "rangeMetres": 3.45,
+        "rangeMetres": 4.5,
         "cooldownSeconds": 2.5,
         "breakPower": 18.0,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "近身单体连斩，仅一个目标；合计5.6S，3段，距离3.45米；末段命中强化下一次普攻20%",
+        "evolution": "近身单体月牙连斩，仅一个目标；合计6.05S，3段，距离4.5米；末段命中强化下一次普攻20%",
         "visualTier": 5,
-        "castRangeMetres": 3.45,
+        "castRangeMetres": 4.5,
         "geometry": {
           "kind": "meleeFan",
           "origin": "caster",
-          "radiusMetres": 3.45,
+          "radiusMetres": 4.5,
           "angleDegrees": 150,
           "totalTargetLimit": 1
         },
         "targetLimit": 1,
         "vfxAnchor": "weaponContact",
-        "vfxDirection": "保留近身挥剑接触与连斩节奏；同一次施放只允许一个敌人承受全部段数，接触特效贴住这个目标，不生成远程飞刃。",
+        "vfxDirection": "两段宽幅半月剑气依次前推，尖端收束，银灰波身与细亮刃口区分；实际接触仍共享一个目标，不增加伤害段数。",
         "peakDurationSeconds": 0.14,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
@@ -234,7 +234,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "upgradeEffects": {
           "finisherBasicPercent": 20
         },
-        "upgradeEffect": "近身单体连斩，仅一个目标；合计5.6S，3段，距离3.45米；末段命中强化下一次普攻20%"
+        "upgradeEffect": "近身单体月牙连斩，仅一个目标；合计6.05S，3段，距离4.5米；末段命中强化下一次普攻20%"
       }
     ],
     "targetingMode": "direction",
@@ -249,7 +249,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
     "style": "WAR",
     "type": "active",
     "compatibleWeapons": "melee",
-    "targetShape": "自身沿地面突进后十字斩",
+    "targetShape": "沿地面突进后双月牙交叉斩",
     "windupSeconds": 0.12,
     "releaseCommitSeconds": 0.12,
     "recoverySeconds": 0.2,
@@ -266,21 +266,21 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "requiredCharacterLevel": 4,
         "maxDamagePerTargetS": 1.2,
         "authoredDamageHits": 1,
-        "radiusMetres": 0.8,
+        "radiusMetres": 1.44,
         "rangeMetres": 3.5,
         "cooldownSeconds": 5,
         "breakPower": 10,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "最远3.5米突进、落点交叉斩",
+        "evolution": "最远3.5米突进，落点2.88米长的双月牙交叉斩",
         "visualTier": 1,
         "castRangeMetres": 3.5,
         "geometry": {
           "kind": "meleeRushCross",
           "origin": "caster",
-          "radiusMetres": 0.8,
-          "lengthMetres": 1.6,
-          "widthMetres": 0.65,
+          "radiusMetres": 1.44,
+          "lengthMetres": 2.88,
+          "widthMetres": 0.878,
           "anglesDegrees": [
             -45,
             45
@@ -288,7 +288,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         },
         "targetLimit": null,
         "vfxAnchor": "weaponContact",
-        "vfxDirection": "自身沿地面突进0.18秒，碰撞提前停止；到达实际落点后十字斩，不移动敌人、不获得无敌。",
+        "vfxDirection": "保持真实突进路径，落点交叉范围扩大；两道银灰半月在屏幕投影以120度交错，刃口细亮、波身有明暗，不生成白色实心大片。",
         "peakDurationSeconds": 0.08,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
@@ -299,28 +299,28 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "growth": "按原五级近战形态加强，保持既定段数与S/CD"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "最远3.5米突进、落点交叉斩"
+        "upgradeEffect": "最远3.5米突进，落点2.88米长的双月牙交叉斩"
       },
       {
         "rank": 2,
         "requiredCharacterLevel": 4,
         "maxDamagePerTargetS": 1.4,
         "authoredDamageHits": 1,
-        "radiusMetres": 0.84,
+        "radiusMetres": 1.512,
         "rangeMetres": 3.5,
         "cooldownSeconds": 5,
         "breakPower": 10.5,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "交叉条带宽0.65→0.70米",
+        "evolution": "最远3.5米突进，落点3.024米长的双月牙交叉斩",
         "visualTier": 2,
         "castRangeMetres": 3.5,
         "geometry": {
           "kind": "meleeRushCross",
           "origin": "caster",
-          "radiusMetres": 0.84,
-          "lengthMetres": 1.68,
-          "widthMetres": 0.7,
+          "radiusMetres": 1.512,
+          "lengthMetres": 3.024,
+          "widthMetres": 0.945,
           "anglesDegrees": [
             -45,
             45
@@ -328,7 +328,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         },
         "targetLimit": null,
         "vfxAnchor": "weaponContact",
-        "vfxDirection": "自身沿地面突进0.18秒，碰撞提前停止；到达实际落点后十字斩，不移动敌人、不获得无敌。",
+        "vfxDirection": "保持真实突进路径，落点交叉范围扩大；两道银灰半月在屏幕投影以120度交错，刃口细亮、波身有明暗，不生成白色实心大片。",
         "peakDurationSeconds": 0.09,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
@@ -339,28 +339,28 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "growth": "按原五级近战形态加强，保持既定段数与S/CD"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "交叉条带宽0.65→0.70米"
+        "upgradeEffect": "最远3.5米突进，落点3.024米长的双月牙交叉斩"
       },
       {
         "rank": 3,
         "requiredCharacterLevel": 4,
         "maxDamagePerTargetS": 1.65,
         "authoredDamageHits": 2,
-        "radiusMetres": 0.9,
+        "radiusMetres": 1.62,
         "rangeMetres": 3.71,
         "cooldownSeconds": 5,
         "breakPower": 11.0,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "落点两段交叉斩，突进3.71米",
+        "evolution": "最远3.71米突进，落点3.24米长的双月牙交叉斩",
         "visualTier": 3,
         "castRangeMetres": 3.71,
         "geometry": {
           "kind": "meleeRushCross",
           "origin": "caster",
-          "radiusMetres": 0.9,
-          "lengthMetres": 1.8,
-          "widthMetres": 0.75,
+          "radiusMetres": 1.62,
+          "lengthMetres": 3.24,
+          "widthMetres": 1.013,
           "anglesDegrees": [
             -45,
             45
@@ -368,7 +368,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         },
         "targetLimit": null,
         "vfxAnchor": "weaponContact",
-        "vfxDirection": "自身沿地面突进0.18秒，碰撞提前停止；到达实际落点后十字斩，不移动敌人、不获得无敌。",
+        "vfxDirection": "保持真实突进路径，落点交叉范围扩大；两道银灰半月在屏幕投影以120度交错，刃口细亮、波身有明暗，不生成白色实心大片。",
         "peakDurationSeconds": 0.1,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
@@ -379,28 +379,28 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "growth": "按原五级近战形态加强，保持既定段数与S/CD"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "落点两段交叉斩，突进3.71米"
+        "upgradeEffect": "最远3.71米突进，落点3.24米长的双月牙交叉斩"
       },
       {
         "rank": 4,
         "requiredCharacterLevel": 4,
         "maxDamagePerTargetS": 1.95,
         "authoredDamageHits": 2,
-        "radiusMetres": 0.96,
+        "radiusMetres": 1.728,
         "rangeMetres": 3.85,
         "cooldownSeconds": 5,
         "breakPower": 11.5,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "突进3.85米、条带0.80米",
+        "evolution": "最远3.85米突进，落点3.456米长的双月牙交叉斩",
         "visualTier": 4,
         "castRangeMetres": 3.85,
         "geometry": {
           "kind": "meleeRushCross",
           "origin": "caster",
-          "radiusMetres": 0.96,
-          "lengthMetres": 1.92,
-          "widthMetres": 0.8,
+          "radiusMetres": 1.728,
+          "lengthMetres": 3.456,
+          "widthMetres": 1.08,
           "anglesDegrees": [
             -45,
             45
@@ -408,7 +408,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         },
         "targetLimit": null,
         "vfxAnchor": "weaponContact",
-        "vfxDirection": "自身沿地面突进0.18秒，碰撞提前停止；到达实际落点后十字斩，不移动敌人、不获得无敌。",
+        "vfxDirection": "保持真实突进路径，落点交叉范围扩大；两道银灰半月在屏幕投影以120度交错，刃口细亮、波身有明暗，不生成白色实心大片。",
         "peakDurationSeconds": 0.12,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
@@ -419,28 +419,28 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "growth": "按原五级近战形态加强，保持既定段数与S/CD"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "突进3.85米、条带0.80米"
+        "upgradeEffect": "最远3.85米突进，落点3.456米长的双月牙交叉斩"
       },
       {
         "rank": 5,
         "requiredCharacterLevel": 4,
         "maxDamagePerTargetS": 2.3,
         "authoredDamageHits": 2,
-        "radiusMetres": 1.04,
+        "radiusMetres": 1.872,
         "rangeMetres": 4.02,
         "cooldownSeconds": 5,
         "breakPower": 12.0,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "突进4.02米；命中后3秒内下一次断空斩削韧提高20%，一次",
+        "evolution": "最远4.02米突进，落点3.744米长的双月牙交叉斩；命中后3秒内下一次断空斩削韧提高20%，一次",
         "visualTier": 5,
         "castRangeMetres": 4.02,
         "geometry": {
           "kind": "meleeRushCross",
           "origin": "caster",
-          "radiusMetres": 1.04,
-          "lengthMetres": 2.08,
-          "widthMetres": 0.85,
+          "radiusMetres": 1.872,
+          "lengthMetres": 3.744,
+          "widthMetres": 1.147,
           "anglesDegrees": [
             -45,
             45
@@ -448,7 +448,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         },
         "targetLimit": null,
         "vfxAnchor": "weaponContact",
-        "vfxDirection": "自身沿地面突进0.18秒，碰撞提前停止；到达实际落点后十字斩，不移动敌人、不获得无敌。",
+        "vfxDirection": "保持真实突进路径，落点交叉范围扩大；两道银灰半月在屏幕投影以120度交错，刃口细亮、波身有明暗，不生成白色实心大片。",
         "peakDurationSeconds": 0.14,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
@@ -461,7 +461,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "upgradeEffects": {
           "nextSlashBreakPercent": 20
         },
-        "upgradeEffect": "突进4.02米；命中后3秒内下一次断空斩削韧提高20%，一次"
+        "upgradeEffect": "最远4.02米突进，落点3.744米长的双月牙交叉斩；命中后3秒内下一次断空斩削韧提高20%，一次"
       }
     ],
     "targetingMode": "direction",
@@ -479,7 +479,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
     "windupSeconds": 0.15,
     "releaseCommitSeconds": 0.15,
     "recoverySeconds": 0.2,
-    "resourceCost": 16,
+    "resourceCost": 24,
     "consumableCost": 0,
     "enemyForcedDisplacement": 0,
     "maxTargets": 1,
@@ -677,196 +677,206 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
   },
   {
     "id": "WAR_04",
-    "name": "裂地审判",
+    "name": "旋风斩",
     "style": "WAR",
     "type": "active",
     "compatibleWeapons": "melee",
-    "targetShape": "指定地面圆形落刃",
-    "windupSeconds": 0.41,
-    "releaseCommitSeconds": 0.41,
-    "recoverySeconds": 0.2,
+    "targetShape": "近身两圈回旋＋前向月牙甩斩",
+    "windupSeconds": 0.18,
+    "releaseCommitSeconds": 0.18,
+    "recoverySeconds": 0.36,
     "resourceCost": 16,
     "consumableCost": 0,
     "enemyForcedDisplacement": 0,
     "maxTargets": null,
     "ultimateCost": 0,
     "sharedUltimateLockSeconds": 0,
-    "mechanic": "召下巨刃审判指定区域的敌人。升级扩大落刃范围，并追加同落点余震；强化后命中可提高下一次铁誓壁垒的吸收量。",
+    "mechanic": "短蓄力后连续两圈回旋，以高低错开的银白月牙扫击周围敌人，最后向前甩出一道刀气。每段对每个敌人最多命中一次，总伤害按28%／28%／44%分配；保留原冷却、消耗与升级联动。",
     "ranks": [
       {
         "rank": 1,
         "requiredCharacterLevel": 10,
         "maxDamagePerTargetS": 1.9,
-        "authoredDamageHits": 1,
-        "radiusMetres": 2.0,
-        "rangeMetres": 4,
+        "authoredDamageHits": 3,
+        "radiusMetres": 2.15,
+        "rangeMetres": 2.15,
         "cooldownSeconds": 8,
         "breakPower": 25,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "4米内选点、半径2米落刃",
+        "evolution": "连续两圈回旋斩击周围2.15米内敌人，收尾向前甩出最远4.2米的月牙刀气；三段总伤害按28%／28%／44%分配",
         "visualTier": 1,
-        "castRangeMetres": 4,
+        "castRangeMetres": 2.15,
         "geometry": {
-          "kind": "meleeImpactDisk",
-          "origin": "aimPoint",
-          "radiusMetres": 2.0
+          "kind": "meleeWhirlwind",
+          "origin": "caster",
+          "radiusMetres": 2.15,
+          "lengthMetres": 4.21,
+          "angleDegrees": 126
         },
         "targetLimit": null,
-        "vfxAnchor": "nearGroundImpact",
-        "vfxDirection": "短距指定地面圆盘落刃，主击70%/余震30%沿原段数结算，无远程条带。",
+        "vfxAnchor": "caster",
+        "vfxDirection": "银白月牙随真实回旋动作高低交错，收尾前甩；真实接触触发亮痕，无范围法阵",
         "peakDurationSeconds": 0.08,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
-          "material": "近身实体银白刃缘与金色接触碎光",
-          "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
-          "contact": "仅在声明段的真实命中点爆发",
-          "fade": "接触后迅速退亮，不延长伤害窗",
-          "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          "material": "银白月牙亮刃、弯曲波身与柔和尾流",
+          "direction": "随真实旋转姿态扫过身周，收尾前甩与实际扫掠判定共用时间轴",
+          "contact": "每段只在真实接触点触发短促银白亮痕",
+          "fade": "回旋结束转入甩斩并自然消散，不延长伤害窗口",
+          "growth": "五级扩大回旋和甩斩范围，保留原冷却、总S与护盾联动"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "4米内选点、半径2米落刃"
+        "upgradeEffect": "连续两圈回旋斩击周围2.15米内敌人，收尾向前甩出最远4.2米的月牙刀气；三段总伤害按28%／28%／44%分配"
       },
       {
         "rank": 2,
         "requiredCharacterLevel": 10,
         "maxDamagePerTargetS": 2.15,
-        "authoredDamageHits": 1,
-        "radiusMetres": 2.1,
-        "rangeMetres": 4,
+        "authoredDamageHits": 3,
+        "radiusMetres": 2.25,
+        "rangeMetres": 2.25,
         "cooldownSeconds": 8,
         "breakPower": 26.2,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "半径2.1米",
+        "evolution": "连续两圈回旋斩击周围2.25米内敌人，收尾向前甩出最远4.4米的月牙刀气；三段总伤害按28%／28%／44%分配",
         "visualTier": 2,
-        "castRangeMetres": 4,
+        "castRangeMetres": 2.25,
         "geometry": {
-          "kind": "meleeImpactDisk",
-          "origin": "aimPoint",
-          "radiusMetres": 2.1
+          "kind": "meleeWhirlwind",
+          "origin": "caster",
+          "radiusMetres": 2.25,
+          "lengthMetres": 4.406,
+          "angleDegrees": 126
         },
         "targetLimit": null,
-        "vfxAnchor": "nearGroundImpact",
-        "vfxDirection": "短距指定地面圆盘落刃，主击70%/余震30%沿原段数结算，无远程条带。",
+        "vfxAnchor": "caster",
+        "vfxDirection": "银白月牙随真实回旋动作高低交错，收尾前甩；真实接触触发亮痕，无范围法阵",
         "peakDurationSeconds": 0.09,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
-          "material": "近身实体银白刃缘与金色接触碎光",
-          "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
-          "contact": "仅在声明段的真实命中点爆发",
-          "fade": "接触后迅速退亮，不延长伤害窗",
-          "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          "material": "银白月牙亮刃、弯曲波身与柔和尾流",
+          "direction": "随真实旋转姿态扫过身周，收尾前甩与实际扫掠判定共用时间轴",
+          "contact": "每段只在真实接触点触发短促银白亮痕",
+          "fade": "回旋结束转入甩斩并自然消散，不延长伤害窗口",
+          "growth": "五级扩大回旋和甩斩范围，保留原冷却、总S与护盾联动"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "半径2.1米"
+        "upgradeEffect": "连续两圈回旋斩击周围2.25米内敌人，收尾向前甩出最远4.4米的月牙刀气；三段总伤害按28%／28%／44%分配"
       },
       {
         "rank": 3,
         "requiredCharacterLevel": 10,
         "maxDamagePerTargetS": 2.45,
-        "authoredDamageHits": 2,
-        "radiusMetres": 2.24,
-        "rangeMetres": 4.24,
+        "authoredDamageHits": 3,
+        "radiusMetres": 2.4,
+        "rangeMetres": 2.4,
         "cooldownSeconds": 7.5,
         "breakPower": 27.5,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "同落点追加余震，总伤按70%／30%拆分",
+        "evolution": "连续两圈回旋斩击周围2.4米内敌人，收尾向前甩出最远4.7米的月牙刀气；三段总伤害按28%／28%／44%分配",
         "visualTier": 3,
-        "castRangeMetres": 4.24,
+        "castRangeMetres": 2.4,
         "geometry": {
-          "kind": "meleeImpactDisk",
-          "origin": "aimPoint",
-          "radiusMetres": 2.24
+          "kind": "meleeWhirlwind",
+          "origin": "caster",
+          "radiusMetres": 2.4,
+          "lengthMetres": 4.7,
+          "angleDegrees": 126
         },
         "targetLimit": null,
-        "vfxAnchor": "nearGroundImpact",
-        "vfxDirection": "短距指定地面圆盘落刃，主击70%/余震30%沿原段数结算，无远程条带。",
+        "vfxAnchor": "caster",
+        "vfxDirection": "银白月牙随真实回旋动作高低交错，收尾前甩；真实接触触发亮痕，无范围法阵",
         "peakDurationSeconds": 0.1,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
-          "material": "近身实体银白刃缘与金色接触碎光",
-          "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
-          "contact": "仅在声明段的真实命中点爆发",
-          "fade": "接触后迅速退亮，不延长伤害窗",
-          "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          "material": "银白月牙亮刃、弯曲波身与柔和尾流",
+          "direction": "随真实旋转姿态扫过身周，收尾前甩与实际扫掠判定共用时间轴",
+          "contact": "每段只在真实接触点触发短促银白亮痕",
+          "fade": "回旋结束转入甩斩并自然消散，不延长伤害窗口",
+          "growth": "五级扩大回旋和甩斩范围，保留原冷却、总S与护盾联动"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "同落点追加余震，总伤按70%／30%拆分"
+        "upgradeEffect": "连续两圈回旋斩击周围2.4米内敌人，收尾向前甩出最远4.7米的月牙刀气；三段总伤害按28%／28%／44%分配"
       },
       {
         "rank": 4,
         "requiredCharacterLevel": 10,
         "maxDamagePerTargetS": 2.85,
-        "authoredDamageHits": 2,
-        "radiusMetres": 2.4,
-        "rangeMetres": 4.4,
+        "authoredDamageHits": 3,
+        "radiusMetres": 2.55,
+        "rangeMetres": 2.55,
         "cooldownSeconds": 7,
         "breakPower": 28.7,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "半径2.4米、选点4.4米",
+        "evolution": "连续两圈回旋斩击周围2.55米内敌人，收尾向前甩出最远5.0米的月牙刀气；三段总伤害按28%／28%／44%分配",
         "visualTier": 4,
-        "castRangeMetres": 4.4,
+        "castRangeMetres": 2.55,
         "geometry": {
-          "kind": "meleeImpactDisk",
-          "origin": "aimPoint",
-          "radiusMetres": 2.4
+          "kind": "meleeWhirlwind",
+          "origin": "caster",
+          "radiusMetres": 2.55,
+          "lengthMetres": 4.993,
+          "angleDegrees": 126
         },
         "targetLimit": null,
-        "vfxAnchor": "nearGroundImpact",
-        "vfxDirection": "短距指定地面圆盘落刃，主击70%/余震30%沿原段数结算，无远程条带。",
+        "vfxAnchor": "caster",
+        "vfxDirection": "银白月牙随真实回旋动作高低交错，收尾前甩；真实接触触发亮痕，无范围法阵",
         "peakDurationSeconds": 0.12,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
-          "material": "近身实体银白刃缘与金色接触碎光",
-          "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
-          "contact": "仅在声明段的真实命中点爆发",
-          "fade": "接触后迅速退亮，不延长伤害窗",
-          "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          "material": "银白月牙亮刃、弯曲波身与柔和尾流",
+          "direction": "随真实旋转姿态扫过身周，收尾前甩与实际扫掠判定共用时间轴",
+          "contact": "每段只在真实接触点触发短促银白亮痕",
+          "fade": "回旋结束转入甩斩并自然消散，不延长伤害窗口",
+          "growth": "五级扩大回旋和甩斩范围，保留原冷却、总S与护盾联动"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "半径2.4米、选点4.4米"
+        "upgradeEffect": "连续两圈回旋斩击周围2.55米内敌人，收尾向前甩出最远5.0米的月牙刀气；三段总伤害按28%／28%／44%分配"
       },
       {
         "rank": 5,
         "requiredCharacterLevel": 10,
         "maxDamagePerTargetS": 3.3,
-        "authoredDamageHits": 2,
-        "radiusMetres": 2.6,
-        "rangeMetres": 4.6,
+        "authoredDamageHits": 3,
+        "radiusMetres": 2.75,
+        "rangeMetres": 2.75,
         "cooldownSeconds": 7,
         "breakPower": 30.0,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "半径2.6米；有效命中后4秒内下一次铁誓壁垒吸收量提高10%，一次",
+        "evolution": "连续两圈回旋斩击周围2.75米内敌人，收尾向前甩出最远5.4米的月牙刀气；三段总伤害按28%／28%／44%分配；有效命中后4秒内下一次铁誓壁垒吸收量提高10%，一次",
         "visualTier": 5,
-        "castRangeMetres": 4.6,
+        "castRangeMetres": 2.75,
         "geometry": {
-          "kind": "meleeImpactDisk",
-          "origin": "aimPoint",
-          "radiusMetres": 2.6
+          "kind": "meleeWhirlwind",
+          "origin": "caster",
+          "radiusMetres": 2.75,
+          "lengthMetres": 5.385,
+          "angleDegrees": 126
         },
         "targetLimit": null,
-        "vfxAnchor": "nearGroundImpact",
-        "vfxDirection": "短距指定地面圆盘落刃，主击70%/余震30%沿原段数结算，无远程条带。",
+        "vfxAnchor": "caster",
+        "vfxDirection": "银白月牙随真实回旋动作高低交错，收尾前甩；真实接触触发亮痕，无范围法阵",
         "peakDurationSeconds": 0.14,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
-          "material": "近身实体银白刃缘与金色接触碎光",
-          "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
-          "contact": "仅在声明段的真实命中点爆发",
-          "fade": "接触后迅速退亮，不延长伤害窗",
-          "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          "material": "银白月牙亮刃、弯曲波身与柔和尾流",
+          "direction": "随真实旋转姿态扫过身周，收尾前甩与实际扫掠判定共用时间轴",
+          "contact": "每段只在真实接触点触发短促银白亮痕",
+          "fade": "回旋结束转入甩斩并自然消散，不延长伤害窗口",
+          "growth": "五级扩大回旋和甩斩范围，保留原冷却、总S与护盾联动"
         },
         "upgradeEffects": {
           "nextShieldPercent": 10
         },
-        "upgradeEffect": "半径2.6米；有效命中后4秒内下一次铁誓壁垒吸收量提高10%，一次"
+        "upgradeEffect": "连续两圈回旋斩击周围2.75米内敌人，收尾向前甩出最远5.4米的月牙刀气；三段总伤害按28%／28%／44%分配；有效命中后4秒内下一次铁誓壁垒吸收量提高10%，一次"
       }
     ],
-    "targetingMode": "point",
+    "targetingMode": "self",
     "offensive": true,
     "unlockLevel": 10,
     "damageRole": "area"
@@ -877,7 +887,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
     "style": "WAR",
     "type": "ultimate",
     "compatibleWeapons": "melee",
-    "targetShape": "前方大扇形三段终结",
+    "targetShape": "前两斩扇形＋末段移动月牙刀气",
     "windupSeconds": 0.49,
     "releaseCommitSeconds": 0.49,
     "recoverySeconds": 0.36,
@@ -887,7 +897,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
     "maxTargets": null,
     "ultimateCost": 0,
     "sharedUltimateLockSeconds": 1.5,
-    "mechanic": "近身大扇形三段终结；末段以落地重斩收尾，合并裂地审判的破势职责。总伤害沿既定三段分配，不发射远程飞刃。",
+    "mechanic": "前两斩各占20%伤害，末段60%由移动月牙刀气分配；1级1道、2–3级2道、4–5级3道，各道对同一目标独立结算一次，判定跟随实际亮芯向前扫掠。",
     "ranks": [
       {
         "rank": 1,
@@ -895,14 +905,14 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "maxDamagePerTargetS": 2.55,
         "authoredDamageHits": 3,
         "radiusMetres": 0,
-        "rangeMetres": 4.375,
+        "rangeMetres": 10.732286628667287,
         "cooldownSeconds": 12,
         "breakPower": 40,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "前方120°三段近战终结",
+        "evolution": "前两斩近战，末段连续释放1道同形同高的移动月牙；每道对每个目标命中一次，共分配终结60%伤害",
         "visualTier": 1,
-        "castRangeMetres": 4.375,
+        "castRangeMetres": 10.732286628667287,
         "geometry": {
           "kind": "meleeFan",
           "origin": "caster",
@@ -910,19 +920,19 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "angleDegrees": 120
         },
         "targetLimit": null,
-        "vfxAnchor": "weaponContact",
-        "vfxDirection": "近身大扇形三段终结，伤害20%/20%/60%，无远程飞刃。",
+        "vfxAnchor": "capturedCastOrigin",
+        "vfxDirection": "前两斩沿现有近战扇面；末段刀气按同一释放时钟和月牙亮芯的形状向前扫掠，每道独立结算；尾流散气不参与伤害。",
         "peakDurationSeconds": 0.08,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
-          "material": "近身实体银白刃缘与金色接触碎光",
-          "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
-          "contact": "仅在声明段的真实命中点爆发",
-          "fade": "接触后迅速退亮，不延长伤害窗",
-          "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          "material": "已确认的银色流动月牙，固定轮廓、比例与高度",
+          "direction": "按同一推进曲线依次向前移动，判定跟随亮芯",
+          "contact": "每道对每个实际扫中目标结算一次；末段总伤害按道数均分",
+          "fade": "主波消散后仅保留无伤害尾流",
+          "growth": "1级1道、2–3级2道、4–5级3道；总伤害与冷却沿当前等级预算"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "前方120°三段近战终结"
+        "upgradeEffect": "前两斩近战，末段连续释放1道同形同高的移动月牙；每道对每个目标命中一次，共分配终结60%伤害"
       },
       {
         "rank": 2,
@@ -930,14 +940,14 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "maxDamagePerTargetS": 2.9,
         "authoredDamageHits": 3,
         "radiusMetres": 0.0,
-        "rangeMetres": 4.375,
+        "rangeMetres": 10.732286628667287,
         "cooldownSeconds": 12,
         "breakPower": 42.0,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "扇面130°",
+        "evolution": "前两斩近战，末段连续释放2道同形同高的移动月牙；每道对每个目标命中一次，共分配终结60%伤害",
         "visualTier": 2,
-        "castRangeMetres": 4.375,
+        "castRangeMetres": 10.732286628667287,
         "geometry": {
           "kind": "meleeFan",
           "origin": "caster",
@@ -945,19 +955,19 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "angleDegrees": 130
         },
         "targetLimit": null,
-        "vfxAnchor": "weaponContact",
-        "vfxDirection": "近身大扇形三段终结，伤害20%/20%/60%，无远程飞刃。",
+        "vfxAnchor": "capturedCastOrigin",
+        "vfxDirection": "前两斩沿现有近战扇面；末段刀气按同一释放时钟和月牙亮芯的形状向前扫掠，每道独立结算；尾流散气不参与伤害。",
         "peakDurationSeconds": 0.09,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
-          "material": "近身实体银白刃缘与金色接触碎光",
-          "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
-          "contact": "仅在声明段的真实命中点爆发",
-          "fade": "接触后迅速退亮，不延长伤害窗",
-          "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          "material": "已确认的银色流动月牙，固定轮廓、比例与高度",
+          "direction": "按同一推进曲线依次向前移动，判定跟随亮芯",
+          "contact": "每道对每个实际扫中目标结算一次；末段总伤害按道数均分",
+          "fade": "主波消散后仅保留无伤害尾流",
+          "growth": "1级1道、2–3级2道、4–5级3道；总伤害与冷却沿当前等级预算"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "扇面130°"
+        "upgradeEffect": "前两斩近战，末段连续释放2道同形同高的移动月牙；每道对每个目标命中一次，共分配终结60%伤害"
       },
       {
         "rank": 3,
@@ -965,14 +975,14 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "maxDamagePerTargetS": 3.3,
         "authoredDamageHits": 3,
         "radiusMetres": 0.0,
-        "rangeMetres": 4.6375,
+        "rangeMetres": 10.732286628667287,
         "cooldownSeconds": 12,
         "breakPower": 44.0,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "扇面140°；终结段削韧提高20%",
+        "evolution": "前两斩近战，末段连续释放2道同形同高的移动月牙；每道对每个目标命中一次，共分配终结60%伤害；终结削韧提高20%",
         "visualTier": 3,
-        "castRangeMetres": 4.6375,
+        "castRangeMetres": 10.732286628667287,
         "geometry": {
           "kind": "meleeFan",
           "origin": "caster",
@@ -980,21 +990,21 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "angleDegrees": 140
         },
         "targetLimit": null,
-        "vfxAnchor": "weaponContact",
-        "vfxDirection": "近身大扇形三段终结，伤害20%/20%/60%，无远程飞刃。",
+        "vfxAnchor": "capturedCastOrigin",
+        "vfxDirection": "前两斩沿现有近战扇面；末段刀气按同一释放时钟和月牙亮芯的形状向前扫掠，每道独立结算；尾流散气不参与伤害。",
         "peakDurationSeconds": 0.1,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
-          "material": "近身实体银白刃缘与金色接触碎光",
-          "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
-          "contact": "仅在声明段的真实命中点爆发",
-          "fade": "接触后迅速退亮，不延长伤害窗",
-          "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          "material": "已确认的银色流动月牙，固定轮廓、比例与高度",
+          "direction": "按同一推进曲线依次向前移动，判定跟随亮芯",
+          "contact": "每道对每个实际扫中目标结算一次；末段总伤害按道数均分",
+          "fade": "主波消散后仅保留无伤害尾流",
+          "growth": "1级1道、2–3级2道、4–5级3道；总伤害与冷却沿当前等级预算"
         },
         "upgradeEffects": {
           "finalBreakPercent": 20
         },
-        "upgradeEffect": "扇面140°；终结段削韧提高20%"
+        "upgradeEffect": "前两斩近战，末段连续释放2道同形同高的移动月牙；每道对每个目标命中一次，共分配终结60%伤害；终结削韧提高20%"
       },
       {
         "rank": 4,
@@ -1002,14 +1012,14 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "maxDamagePerTargetS": 3.85,
         "authoredDamageHits": 3,
         "radiusMetres": 0.0,
-        "rangeMetres": 4.8125,
+        "rangeMetres": 10.732286628667287,
         "cooldownSeconds": 12,
         "breakPower": 46.0,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "扇面150°、半径3.85米",
+        "evolution": "前两斩近战，末段连续释放3道同形同高的移动月牙；每道对每个目标命中一次，共分配终结60%伤害；终结削韧提高20%",
         "visualTier": 4,
-        "castRangeMetres": 4.8125,
+        "castRangeMetres": 10.732286628667287,
         "geometry": {
           "kind": "meleeFan",
           "origin": "caster",
@@ -1017,21 +1027,21 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "angleDegrees": 150
         },
         "targetLimit": null,
-        "vfxAnchor": "weaponContact",
-        "vfxDirection": "近身大扇形三段终结，伤害20%/20%/60%，无远程飞刃。",
+        "vfxAnchor": "capturedCastOrigin",
+        "vfxDirection": "前两斩沿现有近战扇面；末段刀气按同一释放时钟和月牙亮芯的形状向前扫掠，每道独立结算；尾流散气不参与伤害。",
         "peakDurationSeconds": 0.12,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
-          "material": "近身实体银白刃缘与金色接触碎光",
-          "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
-          "contact": "仅在声明段的真实命中点爆发",
-          "fade": "接触后迅速退亮，不延长伤害窗",
-          "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          "material": "已确认的银色流动月牙，固定轮廓、比例与高度",
+          "direction": "按同一推进曲线依次向前移动，判定跟随亮芯",
+          "contact": "每道对每个实际扫中目标结算一次；末段总伤害按道数均分",
+          "fade": "主波消散后仅保留无伤害尾流",
+          "growth": "1级1道、2–3级2道、4–5级3道；总伤害与冷却沿当前等级预算"
         },
         "upgradeEffects": {
           "finalBreakPercent": 20
         },
-        "upgradeEffect": "扇面150°、半径3.85米"
+        "upgradeEffect": "前两斩近战，末段连续释放3道同形同高的移动月牙；每道对每个目标命中一次，共分配终结60%伤害；终结削韧提高20%"
       },
       {
         "rank": 5,
@@ -1039,14 +1049,14 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "maxDamagePerTargetS": 4.45,
         "authoredDamageHits": 3,
         "radiusMetres": 0.0,
-        "rangeMetres": 5.025,
+        "rangeMetres": 10.732286628667287,
         "cooldownSeconds": 12,
         "breakPower": 48.0,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "扇面160°；起手时有自身护盾，终结段伤害提高10%",
+        "evolution": "前两斩近战，末段连续释放3道同形同高的移动月牙；每道对每个目标命中一次，共分配终结60%伤害；终结削韧提高20%；有护盾时终结伤害提高10%",
         "visualTier": 5,
-        "castRangeMetres": 5.025,
+        "castRangeMetres": 10.732286628667287,
         "geometry": {
           "kind": "meleeFan",
           "origin": "caster",
@@ -1054,22 +1064,22 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "angleDegrees": 160
         },
         "targetLimit": null,
-        "vfxAnchor": "weaponContact",
-        "vfxDirection": "近身大扇形三段终结，伤害20%/20%/60%，无远程飞刃。",
+        "vfxAnchor": "capturedCastOrigin",
+        "vfxDirection": "前两斩沿现有近战扇面；末段刀气按同一释放时钟和月牙亮芯的形状向前扫掠，每道独立结算；尾流散气不参与伤害。",
         "peakDurationSeconds": 0.14,
         "visualEvolutionDoesNotChangeHitBudget": true,
         "vfxLayers": {
-          "material": "近身实体银白刃缘与金色接触碎光",
-          "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
-          "contact": "仅在声明段的真实命中点爆发",
-          "fade": "接触后迅速退亮，不延长伤害窗",
-          "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+          "material": "已确认的银色流动月牙，固定轮廓、比例与高度",
+          "direction": "按同一推进曲线依次向前移动，判定跟随亮芯",
+          "contact": "每道对每个实际扫中目标结算一次；末段总伤害按道数均分",
+          "fade": "主波消散后仅保留无伤害尾流",
+          "growth": "1级1道、2–3级2道、4–5级3道；总伤害与冷却沿当前等级预算"
         },
         "upgradeEffects": {
           "finalBreakPercent": 20,
           "shieldFinisherPercent": 10
         },
-        "upgradeEffect": "扇面160°；起手时有自身护盾，终结段伤害提高10%"
+        "upgradeEffect": "前两斩近战，末段连续释放3道同形同高的移动月牙；每道对每个目标命中一次，共分配终结60%伤害；终结削韧提高20%；有护盾时终结伤害提高10%"
       }
     ],
     "targetingMode": "direction",
@@ -1414,7 +1424,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 1,
         "requiredCharacterLevel": 1,
-        "maxDamagePerTargetS": 3.2,
+        "maxDamagePerTargetS": 2.94,
         "authoredDamageHits": 1,
         "radiusMetres": 0,
         "rangeMetres": 12,
@@ -1422,7 +1432,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "breakPower": 15,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "单体重箭，仅一个目标；合计3.2S，1段，距离12米",
+        "evolution": "单体重箭，仅一个目标；合计2.94S，1段，距离12米",
         "visualTier": 1,
         "castRangeMetres": 12,
         "geometry": {
@@ -1445,12 +1455,12 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "单体重箭，仅一个目标；合计3.2S，1段，距离12米"
+        "upgradeEffect": "单体重箭，仅一个目标；合计2.94S，1段，距离12米"
       },
       {
         "rank": 2,
         "requiredCharacterLevel": 1,
-        "maxDamagePerTargetS": 3.65,
+        "maxDamagePerTargetS": 3.36,
         "authoredDamageHits": 1,
         "radiusMetres": 0,
         "rangeMetres": 13.5,
@@ -1458,7 +1468,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "breakPower": 15.8,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "单体重箭，仅一个目标；合计3.65S，1段，距离13.5米",
+        "evolution": "单体重箭，仅一个目标；合计3.36S，1段，距离13.5米",
         "visualTier": 2,
         "castRangeMetres": 13.5,
         "geometry": {
@@ -1481,12 +1491,12 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "单体重箭，仅一个目标；合计3.65S，1段，距离13.5米"
+        "upgradeEffect": "单体重箭，仅一个目标；合计3.36S，1段，距离13.5米"
       },
       {
         "rank": 3,
         "requiredCharacterLevel": 1,
-        "maxDamagePerTargetS": 4.2,
+        "maxDamagePerTargetS": 3.86,
         "authoredDamageHits": 1,
         "radiusMetres": 0,
         "rangeMetres": 15,
@@ -1494,7 +1504,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "breakPower": 16.5,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "单体重箭，仅一个目标；合计4.2S，1段，距离15米",
+        "evolution": "单体重箭，仅一个目标；合计3.86S，1段，距离15米",
         "visualTier": 3,
         "castRangeMetres": 15,
         "geometry": {
@@ -1517,12 +1527,12 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "单体重箭，仅一个目标；合计4.2S，1段，距离15米"
+        "upgradeEffect": "单体重箭，仅一个目标；合计3.86S，1段，距离15米"
       },
       {
         "rank": 4,
         "requiredCharacterLevel": 1,
-        "maxDamagePerTargetS": 4.85,
+        "maxDamagePerTargetS": 4.46,
         "authoredDamageHits": 1,
         "radiusMetres": 0,
         "rangeMetres": 16.5,
@@ -1530,7 +1540,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "breakPower": 17.2,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "单体重箭，仅一个目标；合计4.85S，1段，距离16.5米",
+        "evolution": "单体重箭，仅一个目标；合计4.46S，1段，距离16.5米",
         "visualTier": 4,
         "castRangeMetres": 16.5,
         "geometry": {
@@ -1553,12 +1563,12 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "单体重箭，仅一个目标；合计4.85S，1段，距离16.5米"
+        "upgradeEffect": "单体重箭，仅一个目标；合计4.46S，1段，距离16.5米"
       },
       {
         "rank": 5,
         "requiredCharacterLevel": 1,
-        "maxDamagePerTargetS": 5.6,
+        "maxDamagePerTargetS": 5.15,
         "authoredDamageHits": 1,
         "radiusMetres": 0,
         "rangeMetres": 18,
@@ -1566,7 +1576,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "breakPower": 18.0,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "单体重箭，仅一个目标；合计5.6S，1段，距离18米",
+        "evolution": "单体重箭，仅一个目标；合计5.15S，1段，距离18米",
         "visualTier": 5,
         "castRangeMetres": 18,
         "geometry": {
@@ -1589,7 +1599,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "单体重箭，仅一个目标；合计5.6S，1段，距离18米"
+        "upgradeEffect": "单体重箭，仅一个目标；合计5.15S，1段，距离18米"
       }
     ],
     "targetingMode": "direction",
@@ -3472,38 +3482,38 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
     "id": "FIR_02",
     "name": "焚星坠落",
     "style": "FIR",
-    "type": "active",
+    "type": "ultimate",
     "compatibleWeapons": "staff",
-    "targetShape": "远处火核下坠后的球状爆燃",
-    "windupSeconds": 0.41,
-    "releaseCommitSeconds": 0.41,
-    "recoverySeconds": 0.2,
-    "resourceCost": 18,
+    "targetShape": "落点圆形陨石范围",
+    "windupSeconds": 0.85,
+    "releaseCommitSeconds": 0.85,
+    "recoverySeconds": 0.32,
+    "resourceCost": 45,
     "consumableCost": 0,
     "enemyForcedDisplacement": 0,
     "maxTargets": null,
     "ultimateCost": 0,
-    "sharedUltimateLockSeconds": 0,
-    "mechanic": "在指定落点召下陨星，轰击圆形区域内的敌人。升级扩大爆炸范围，并追加一次次爆；强化后次爆命中燃烧中的敌人，可刷新已有燃烧。",
+    "sharedUltimateLockSeconds": 1.5,
+    "mechanic": "法阵预告落点，陨石从上方坠落造成范围伤害并点燃目标；爆燃后的地面余焰逐渐消散。",
     "ranks": [
       {
         "rank": 1,
-        "requiredCharacterLevel": 4,
-        "maxDamagePerTargetS": 1.9,
+        "requiredCharacterLevel": 11,
+        "maxDamagePerTargetS": 2.55,
         "authoredDamageHits": 1,
-        "radiusMetres": 2.8,
+        "radiusMetres": 3.8,
         "rangeMetres": 12,
-        "cooldownSeconds": 7,
+        "cooldownSeconds": 12,
         "breakPower": 20,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "选点火核、半径2.8米主爆",
+        "evolution": "终极陨石，主爆燃约1.2秒，残焰逐渐消散；每目标合计2.55S",
         "visualTier": 1,
-        "castRangeMetres": 12,
+        "castRangeMetres": 14,
         "geometry": {
           "kind": "filledImpactDisk",
           "origin": "aimPoint",
-          "radiusMetres": 2.8
+          "radiusMetres": 3.8
         },
         "targetLimit": null,
         "vfxAnchor": "aimPoint",
@@ -3518,26 +3528,26 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "选点火核、半径2.8米主爆"
+        "upgradeEffect": "扩大陨石范围并提高伤害。"
       },
       {
         "rank": 2,
-        "requiredCharacterLevel": 4,
-        "maxDamagePerTargetS": 2.15,
+        "requiredCharacterLevel": 11,
+        "maxDamagePerTargetS": 2.9,
         "authoredDamageHits": 1,
-        "radiusMetres": 3.2,
+        "radiusMetres": 4.2,
         "rangeMetres": 13.5,
-        "cooldownSeconds": 7,
+        "cooldownSeconds": 12,
         "breakPower": 21.0,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "半径3.2米",
+        "evolution": "终极陨石，主爆燃约1.2秒，残焰逐渐消散；每目标合计2.9S",
         "visualTier": 2,
-        "castRangeMetres": 13.5,
+        "castRangeMetres": 15,
         "geometry": {
           "kind": "filledImpactDisk",
           "origin": "aimPoint",
-          "radiusMetres": 3.2
+          "radiusMetres": 4.2
         },
         "targetLimit": null,
         "vfxAnchor": "aimPoint",
@@ -3552,26 +3562,26 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "半径3.2米"
+        "upgradeEffect": "扩大陨石范围并提高伤害。"
       },
       {
         "rank": 3,
-        "requiredCharacterLevel": 4,
-        "maxDamagePerTargetS": 2.45,
+        "requiredCharacterLevel": 11,
+        "maxDamagePerTargetS": 3.3,
         "authoredDamageHits": 2,
-        "radiusMetres": 3.6,
+        "radiusMetres": 4.6,
         "rangeMetres": 15,
-        "cooldownSeconds": 6.5,
+        "cooldownSeconds": 12,
         "breakPower": 22.0,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "半径3.6米；主爆75%＋0.30秒后次爆25%",
+        "evolution": "终极陨石，主爆燃约1.2秒，残焰逐渐消散；每目标合计3.3S",
         "visualTier": 3,
-        "castRangeMetres": 15,
+        "castRangeMetres": 16,
         "geometry": {
           "kind": "filledImpactDisk",
           "origin": "aimPoint",
-          "radiusMetres": 3.6
+          "radiusMetres": 4.6
         },
         "targetLimit": null,
         "vfxAnchor": "aimPoint",
@@ -3586,26 +3596,26 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "半径3.6米；主爆75%＋0.30秒后次爆25%"
+        "upgradeEffect": "扩大陨石范围并提高伤害。"
       },
       {
         "rank": 4,
-        "requiredCharacterLevel": 4,
-        "maxDamagePerTargetS": 2.85,
+        "requiredCharacterLevel": 11,
+        "maxDamagePerTargetS": 3.85,
         "authoredDamageHits": 2,
-        "radiusMetres": 4,
+        "radiusMetres": 5,
         "rangeMetres": 16.5,
-        "cooldownSeconds": 6,
+        "cooldownSeconds": 12,
         "breakPower": 23.0,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "半径4米、选点16.5米",
+        "evolution": "终极陨石，主爆燃约1.2秒，残焰逐渐消散；每目标合计3.85S",
         "visualTier": 4,
-        "castRangeMetres": 16.5,
+        "castRangeMetres": 17,
         "geometry": {
           "kind": "filledImpactDisk",
           "origin": "aimPoint",
-          "radiusMetres": 4
+          "radiusMetres": 5
         },
         "targetLimit": null,
         "vfxAnchor": "aimPoint",
@@ -3620,26 +3630,26 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "半径4米、选点16.5米"
+        "upgradeEffect": "扩大陨石范围并提高伤害。"
       },
       {
         "rank": 5,
-        "requiredCharacterLevel": 4,
-        "maxDamagePerTargetS": 3.3,
+        "requiredCharacterLevel": 11,
+        "maxDamagePerTargetS": 4.45,
         "authoredDamageHits": 2,
-        "radiusMetres": 4.5,
+        "radiusMetres": 5.5,
         "rangeMetres": 18,
-        "cooldownSeconds": 6,
+        "cooldownSeconds": 12,
         "breakPower": 24.0,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "半径4.5米；次爆命中已燃烧目标时刷新自身已有燃烧，持续上限照旧",
+        "evolution": "终极陨石，主爆燃约1.2秒，残焰逐渐消散；每目标合计4.45S",
         "visualTier": 5,
         "castRangeMetres": 18,
         "geometry": {
           "kind": "filledImpactDisk",
           "origin": "aimPoint",
-          "radiusMetres": 4.5
+          "radiusMetres": 5.5
         },
         "targetLimit": null,
         "vfxAnchor": "aimPoint",
@@ -3656,13 +3666,13 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "upgradeEffects": {
           "refreshBurn": 1
         },
-        "upgradeEffect": "半径4.5米；次爆命中已燃烧目标时刷新自身已有燃烧，持续上限照旧"
+        "upgradeEffect": "扩大陨石范围并提高伤害。"
       }
     ],
     "targetingMode": "point",
     "offensive": true,
     "counterplay": "远处火核与短压缩给出爆点提示；走出固定圆盘可避主爆，走离或用合法遮挡可避后续次爆。",
-    "unlockLevel": 4,
+    "unlockLevel": 11,
     "damageRole": "area"
   },
   {
@@ -3675,7 +3685,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
     "windupSeconds": 0.17,
     "releaseCommitSeconds": 0.17,
     "recoverySeconds": 0.2,
-    "resourceCost": 16,
+    "resourceCost": 24,
     "consumableCost": 0,
     "enemyForcedDisplacement": 0,
     "maxTargets": 1,
@@ -3863,40 +3873,40 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
   },
   {
     "id": "FIR_04",
-    "name": "炎墙封路",
+    "name": "烈焰喷流",
     "style": "FIR",
     "type": "active",
     "compatibleWeapons": "staff",
-    "targetShape": "远处指定线段火域",
-    "windupSeconds": 0.14,
-    "releaseCommitSeconds": 0.14,
-    "recoverySeconds": 0.2,
+    "targetShape": "前方一列地面喷焰",
+    "windupSeconds": 0.25,
+    "releaseCommitSeconds": 0.25,
+    "recoverySeconds": 0.24,
     "resourceCost": 18,
     "consumableCost": 0,
     "enemyForcedDisplacement": 0,
     "maxTargets": null,
     "ultimateCost": 0,
     "sharedUltimateLockSeconds": 0,
-    "mechanic": "可旋转的条带火域，持续4秒。区域内敌人移动减速35%，离开0.4秒后消退；首领减速10%。最多一道火墙，重放替换、不叠加减速；不生成实体墙，不改变地图通行。",
+    "mechanic": "五个小法阵沿前方排成一列，火焰竖直喷起并持续4秒；释放后方向与位置固定，以定向持续伤害为主。",
     "ranks": [
       {
         "rank": 1,
-        "requiredCharacterLevel": 10,
-        "maxDamagePerTargetS": 0.6,
+        "requiredCharacterLevel": 4,
+        "maxDamagePerTargetS": 2.3,
         "authoredDamageHits": 4,
         "radiusMetres": 0,
-        "rangeMetres": 12,
+        "rangeMetres": 7,
         "cooldownSeconds": 6,
         "breakPower": 6,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "4米火墙持续4秒，减速35%，四拍持续伤害；冷却12秒",
+        "evolution": "五点地面喷焰，持续4秒；每目标直接伤害合计2.0S",
         "visualTier": 1,
-        "castRangeMetres": 12,
+        "castRangeMetres": 7,
         "geometry": {
-          "kind": "placedStrip",
-          "origin": "aimPoint",
-          "lengthMetres": 4,
+          "kind": "instantCorridor",
+          "origin": "caster",
+          "lengthMetres": 7,
           "widthMetres": 1.2
         },
         "targetLimit": null,
@@ -3912,30 +3922,30 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "4米火墙持续4秒，减速35%，四拍持续伤害；冷却12秒",
+        "upgradeEffect": "提高喷焰伤害与覆盖宽度。",
         "zoneDurationSeconds": 4,
-        "slowPercent": 0.35,
-        "slowLingerSeconds": 0.4
+        "slowPercent": 0,
+        "slowLingerSeconds": 0
       },
       {
         "rank": 2,
-        "requiredCharacterLevel": 10,
-        "maxDamagePerTargetS": 0.8,
+        "requiredCharacterLevel": 4,
+        "maxDamagePerTargetS": 2.59,
         "authoredDamageHits": 4,
         "radiusMetres": 0,
-        "rangeMetres": 13.5,
+        "rangeMetres": 7.25,
         "cooldownSeconds": 6,
         "breakPower": 6.3,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "5米火墙持续4秒，减速35%，四拍持续伤害；冷却12秒",
+        "evolution": "五点地面喷焰，持续4秒；每目标直接伤害合计2.59S",
         "visualTier": 2,
-        "castRangeMetres": 13.5,
+        "castRangeMetres": 7.25,
         "geometry": {
-          "kind": "placedStrip",
-          "origin": "aimPoint",
-          "lengthMetres": 5,
-          "widthMetres": 1.35
+          "kind": "instantCorridor",
+          "origin": "caster",
+          "lengthMetres": 7.25,
+          "widthMetres": 1.3
         },
         "targetLimit": null,
         "vfxAnchor": "authoredGeometry",
@@ -3950,30 +3960,30 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "5米火墙持续4秒，减速35%，四拍持续伤害；冷却12秒",
+        "upgradeEffect": "提高喷焰伤害与覆盖宽度。",
         "zoneDurationSeconds": 4,
-        "slowPercent": 0.35,
-        "slowLingerSeconds": 0.4
+        "slowPercent": 0,
+        "slowLingerSeconds": 0
       },
       {
         "rank": 3,
-        "requiredCharacterLevel": 10,
-        "maxDamagePerTargetS": 1.05,
+        "requiredCharacterLevel": 4,
+        "maxDamagePerTargetS": 2.99,
         "authoredDamageHits": 4,
         "radiusMetres": 0,
-        "rangeMetres": 15,
+        "rangeMetres": 7.5,
         "cooldownSeconds": 6,
         "breakPower": 6.6,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "6米火墙持续4秒，减速35%，四拍持续伤害；冷却12秒",
+        "evolution": "五点地面喷焰，持续4秒；每目标直接伤害合计2.99S",
         "visualTier": 3,
-        "castRangeMetres": 15,
+        "castRangeMetres": 7.5,
         "geometry": {
-          "kind": "placedStrip",
-          "origin": "aimPoint",
-          "lengthMetres": 6,
-          "widthMetres": 1.5
+          "kind": "instantCorridor",
+          "origin": "caster",
+          "lengthMetres": 7.5,
+          "widthMetres": 1.4
         },
         "targetLimit": null,
         "vfxAnchor": "authoredGeometry",
@@ -3990,30 +4000,30 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "upgradeEffects": {
           "burningBonusPercent": 5
         },
-        "upgradeEffect": "6米火墙持续4秒，减速35%，四拍持续伤害；冷却12秒",
+        "upgradeEffect": "提高喷焰伤害与覆盖宽度。",
         "zoneDurationSeconds": 4,
-        "slowPercent": 0.35,
-        "slowLingerSeconds": 0.4
+        "slowPercent": 0,
+        "slowLingerSeconds": 0
       },
       {
         "rank": 4,
-        "requiredCharacterLevel": 10,
-        "maxDamagePerTargetS": 1.3,
+        "requiredCharacterLevel": 4,
+        "maxDamagePerTargetS": 3.45,
         "authoredDamageHits": 4,
         "radiusMetres": 0,
-        "rangeMetres": 16.5,
+        "rangeMetres": 7.75,
         "cooldownSeconds": 6,
         "breakPower": 6.9,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "7.5米火墙持续4秒，减速35%，四拍持续伤害；冷却12秒",
+        "evolution": "五点地面喷焰，持续4秒；每目标直接伤害合计3.0S",
         "visualTier": 4,
-        "castRangeMetres": 16.5,
+        "castRangeMetres": 7.75,
         "geometry": {
-          "kind": "placedStrip",
-          "origin": "aimPoint",
-          "lengthMetres": 7.5,
-          "widthMetres": 1.7
+          "kind": "instantCorridor",
+          "origin": "caster",
+          "lengthMetres": 7.75,
+          "widthMetres": 1.5
         },
         "targetLimit": null,
         "vfxAnchor": "authoredGeometry",
@@ -4030,30 +4040,30 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "upgradeEffects": {
           "burningBonusPercent": 5
         },
-        "upgradeEffect": "7.5米火墙持续4秒，减速35%，四拍持续伤害；冷却12秒",
+        "upgradeEffect": "提高喷焰伤害与覆盖宽度。",
         "zoneDurationSeconds": 4,
-        "slowPercent": 0.35,
-        "slowLingerSeconds": 0.4
+        "slowPercent": 0,
+        "slowLingerSeconds": 0
       },
       {
         "rank": 5,
-        "requiredCharacterLevel": 10,
-        "maxDamagePerTargetS": 1.6,
+        "requiredCharacterLevel": 4,
+        "maxDamagePerTargetS": 4.02,
         "authoredDamageHits": 4,
         "radiusMetres": 0,
-        "rangeMetres": 18,
+        "rangeMetres": 8,
         "cooldownSeconds": 6,
         "breakPower": 7.2,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "9米火墙持续4秒，减速35%，四拍持续伤害；冷却12秒",
+        "evolution": "五点地面喷焰，持续4秒；每目标直接伤害合计4.02S",
         "visualTier": 5,
-        "castRangeMetres": 18,
+        "castRangeMetres": 8,
         "geometry": {
-          "kind": "placedStrip",
-          "origin": "aimPoint",
-          "lengthMetres": 9,
-          "widthMetres": 2
+          "kind": "instantCorridor",
+          "origin": "caster",
+          "lengthMetres": 8,
+          "widthMetres": 1.6
         },
         "targetLimit": null,
         "vfxAnchor": "authoredGeometry",
@@ -4070,54 +4080,55 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "upgradeEffects": {
           "burningBonusPercent": 10
         },
-        "upgradeEffect": "9米火墙持续4秒，减速35%，四拍持续伤害；冷却12秒",
+        "upgradeEffect": "提高喷焰伤害与覆盖宽度。",
         "zoneDurationSeconds": 4,
-        "slowPercent": 0.35,
-        "slowLingerSeconds": 0.4
+        "slowPercent": 0,
+        "slowLingerSeconds": 0
       }
     ],
     "targetingMode": "point",
     "offensive": true,
-    "unlockLevel": 6,
-    "damageRole": "control"
+    "unlockLevel": 4,
+    "damageRole": "area",
+    "counterplay": "横向避开前方一列地面喷焰；释放后位置固定，不随施法者移动，不穿越地形。"
   },
   {
     "id": "FIR_05",
-    "name": "焚天火海",
+    "name": "焚焰火域",
     "style": "FIR",
-    "type": "ultimate",
+    "type": "active",
     "compatibleWeapons": "staff",
-    "targetShape": "远端宽矩形滚动火浪",
-    "windupSeconds": 0.49,
-    "releaseCommitSeconds": 0.49,
-    "recoverySeconds": 0.36,
-    "resourceCost": 45,
+    "targetShape": "具有纵深的矩形火域",
+    "windupSeconds": 0.4,
+    "releaseCommitSeconds": 0.4,
+    "recoverySeconds": 0.28,
+    "resourceCost": 18,
     "consumableCost": 0,
     "enemyForcedDisplacement": 0,
     "maxTargets": null,
     "ultimateCost": 0,
-    "sharedUltimateLockSeconds": 1.5,
-    "mechanic": "在指定区域掀起火焰锋面，先造成40%的技能伤害，随后在三秒内留下四次余焰，每次造成15%的技能伤害。火海固定在落点，区域内的敌人均可受击；升级扩大范围并强化对燃烧目标的最后一击。",
+    "sharedUltimateLockSeconds": 0,
+    "mechanic": "火浪在落点铺开固定火域，持续燃烧并减速；同一时间只保留一处火域。",
     "ranks": [
       {
         "rank": 1,
-        "requiredCharacterLevel": 11,
-        "maxDamagePerTargetS": 2.55,
+        "requiredCharacterLevel": 6,
+        "maxDamagePerTargetS": 2.18,
         "authoredDamageHits": 5,
         "radiusMetres": 0,
         "rangeMetres": 14,
-        "cooldownSeconds": 12,
+        "cooldownSeconds": 7,
         "breakPower": 35,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "7×4米火焰锋面＋四拍余焰",
+        "evolution": "焚焰火域，燃烧并减速4秒；每目标合计2.18S",
         "visualTier": 1,
         "castRangeMetres": 14,
         "geometry": {
           "kind": "filledWaveRectangle",
           "origin": "aimPoint",
-          "widthMetres": 7,
-          "depthMetres": 4
+          "widthMetres": 6,
+          "depthMetres": 3
         },
         "targetLimit": null,
         "vfxAnchor": "authoredRectangle",
@@ -4132,27 +4143,30 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "7×4米火焰锋面＋四拍余焰"
+        "upgradeEffect": "提高火域伤害与纵深。",
+        "zoneDurationSeconds": 4,
+        "slowPercent": 0.35,
+        "slowLingerSeconds": 0.4
       },
       {
         "rank": 2,
-        "requiredCharacterLevel": 11,
-        "maxDamagePerTargetS": 2.9,
+        "requiredCharacterLevel": 6,
+        "maxDamagePerTargetS": 2.47,
         "authoredDamageHits": 5,
         "radiusMetres": 0,
         "rangeMetres": 15,
-        "cooldownSeconds": 12,
+        "cooldownSeconds": 7,
         "breakPower": 36.8,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "选区8×5米",
+        "evolution": "焚焰火域，燃烧并减速4秒；每目标合计2.47S",
         "visualTier": 2,
         "castRangeMetres": 15,
         "geometry": {
           "kind": "filledWaveRectangle",
           "origin": "aimPoint",
-          "widthMetres": 8,
-          "depthMetres": 5
+          "widthMetres": 6.5,
+          "depthMetres": 3.25
         },
         "targetLimit": null,
         "vfxAnchor": "authoredRectangle",
@@ -4167,27 +4181,30 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "选区8×5米"
+        "upgradeEffect": "提高火域伤害与纵深。",
+        "zoneDurationSeconds": 4,
+        "slowPercent": 0.35,
+        "slowLingerSeconds": 0.4
       },
       {
         "rank": 3,
-        "requiredCharacterLevel": 11,
-        "maxDamagePerTargetS": 3.3,
+        "requiredCharacterLevel": 6,
+        "maxDamagePerTargetS": 2.82,
         "authoredDamageHits": 5,
         "radiusMetres": 0,
         "rangeMetres": 16,
-        "cooldownSeconds": 12,
+        "cooldownSeconds": 7,
         "breakPower": 38.5,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "选区9×6米",
+        "evolution": "焚焰火域，燃烧并减速4秒；每目标合计2.82S",
         "visualTier": 3,
         "castRangeMetres": 16,
         "geometry": {
           "kind": "filledWaveRectangle",
           "origin": "aimPoint",
-          "widthMetres": 9,
-          "depthMetres": 6
+          "widthMetres": 7,
+          "depthMetres": 3.5
         },
         "targetLimit": null,
         "vfxAnchor": "authoredRectangle",
@@ -4202,27 +4219,30 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "选区9×6米"
+        "upgradeEffect": "提高火域伤害与纵深。",
+        "zoneDurationSeconds": 4,
+        "slowPercent": 0.35,
+        "slowLingerSeconds": 0.4
       },
       {
         "rank": 4,
-        "requiredCharacterLevel": 11,
-        "maxDamagePerTargetS": 3.85,
+        "requiredCharacterLevel": 6,
+        "maxDamagePerTargetS": 3.28,
         "authoredDamageHits": 5,
         "radiusMetres": 0,
         "rangeMetres": 17,
-        "cooldownSeconds": 12,
+        "cooldownSeconds": 7,
         "breakPower": 40.2,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "选区10.5×7米",
+        "evolution": "焚焰火域，燃烧并减速4秒；每目标合计3.28S",
         "visualTier": 4,
         "castRangeMetres": 17,
         "geometry": {
           "kind": "filledWaveRectangle",
           "origin": "aimPoint",
-          "widthMetres": 10.5,
-          "depthMetres": 7
+          "widthMetres": 7.5,
+          "depthMetres": 3.75
         },
         "targetLimit": null,
         "vfxAnchor": "authoredRectangle",
@@ -4237,27 +4257,30 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "选区10.5×7米"
+        "upgradeEffect": "提高火域伤害与纵深。",
+        "zoneDurationSeconds": 4,
+        "slowPercent": 0.35,
+        "slowLingerSeconds": 0.4
       },
       {
         "rank": 5,
-        "requiredCharacterLevel": 11,
-        "maxDamagePerTargetS": 4.45,
+        "requiredCharacterLevel": 6,
+        "maxDamagePerTargetS": 3.79,
         "authoredDamageHits": 5,
         "radiusMetres": 0,
         "rangeMetres": 18,
-        "cooldownSeconds": 12,
+        "cooldownSeconds": 7,
         "breakPower": 42.0,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "选区12×8米；最后一拍对已燃烧目标强化10%",
+        "evolution": "焚焰火域，燃烧并减速4秒；每目标合计3.79S",
         "visualTier": 5,
         "castRangeMetres": 18,
         "geometry": {
           "kind": "filledWaveRectangle",
           "origin": "aimPoint",
-          "widthMetres": 12,
-          "depthMetres": 8
+          "widthMetres": 8,
+          "depthMetres": 4
         },
         "targetLimit": null,
         "vfxAnchor": "authoredRectangle",
@@ -4274,14 +4297,17 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "upgradeEffects": {
           "finalBurningPercent": 10
         },
-        "upgradeEffect": "选区12×8米；最后一拍对已燃烧目标强化10%"
+        "upgradeEffect": "提高火域伤害与纵深。",
+        "zoneDurationSeconds": 4,
+        "slowPercent": 0.35,
+        "slowLingerSeconds": 0.4
       }
     ],
     "targetingMode": "point",
     "offensive": true,
-    "counterplay": "横向火焰锋面方向可读；侧移离开矩形或尽快走出余焰，遮挡后区域不判伤。",
-    "unlockLevel": 11,
-    "damageRole": "area"
+    "counterplay": "离开固定火域可避持续伤害与减速；同一施法者的火域不叠加。",
+    "unlockLevel": 6,
+    "damageRole": "control"
   },
   {
     "id": "FIR_P1",
@@ -4626,7 +4652,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 1,
         "requiredCharacterLevel": 1,
-        "maxDamagePerTargetS": 3.2,
+        "maxDamagePerTargetS": 3.68,
         "authoredDamageHits": 1,
         "radiusMetres": 0,
         "rangeMetres": 14,
@@ -4634,7 +4660,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "breakPower": 18,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "单体雷矛，仅一个目标；合计3.2S，1段，距离14米",
+        "evolution": "单体雷矛，仅一个目标；合计3.68S，1段，距离14米",
         "visualTier": 1,
         "castRangeMetres": 14,
         "geometry": {
@@ -4657,12 +4683,12 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "单体雷矛，仅一个目标；合计3.2S，1段，距离14米"
+        "upgradeEffect": "单体雷矛，仅一个目标；合计3.68S，1段，距离14米"
       },
       {
         "rank": 2,
         "requiredCharacterLevel": 1,
-        "maxDamagePerTargetS": 3.65,
+        "maxDamagePerTargetS": 4.2,
         "authoredDamageHits": 1,
         "radiusMetres": 0,
         "rangeMetres": 15.5,
@@ -4670,7 +4696,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "breakPower": 18.9,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "单体雷矛，仅一个目标；合计3.65S，1段，距离15.5米",
+        "evolution": "单体雷矛，仅一个目标；合计4.2S，1段，距离15.5米",
         "visualTier": 2,
         "castRangeMetres": 15.5,
         "geometry": {
@@ -4693,12 +4719,12 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "单体雷矛，仅一个目标；合计3.65S，1段，距离15.5米"
+        "upgradeEffect": "单体雷矛，仅一个目标；合计4.2S，1段，距离15.5米"
       },
       {
         "rank": 3,
         "requiredCharacterLevel": 1,
-        "maxDamagePerTargetS": 4.2,
+        "maxDamagePerTargetS": 4.83,
         "authoredDamageHits": 1,
         "radiusMetres": 0,
         "rangeMetres": 17,
@@ -4706,7 +4732,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "breakPower": 19.8,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "单体雷矛，仅一个目标；合计4.2S，1段，距离17米",
+        "evolution": "单体雷矛，仅一个目标；合计4.83S，1段，距离17米",
         "visualTier": 3,
         "castRangeMetres": 17,
         "geometry": {
@@ -4729,12 +4755,12 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "单体雷矛，仅一个目标；合计4.2S，1段，距离17米"
+        "upgradeEffect": "单体雷矛，仅一个目标；合计4.83S，1段，距离17米"
       },
       {
         "rank": 4,
         "requiredCharacterLevel": 1,
-        "maxDamagePerTargetS": 4.85,
+        "maxDamagePerTargetS": 5.58,
         "authoredDamageHits": 1,
         "radiusMetres": 0,
         "rangeMetres": 18.5,
@@ -4742,7 +4768,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "breakPower": 20.7,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "单体雷矛，仅一个目标；合计4.85S，1段，距离18.5米",
+        "evolution": "单体雷矛，仅一个目标；合计5.58S，1段，距离18.5米",
         "visualTier": 4,
         "castRangeMetres": 18.5,
         "geometry": {
@@ -4765,12 +4791,12 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "单体雷矛，仅一个目标；合计4.85S，1段，距离18.5米"
+        "upgradeEffect": "单体雷矛，仅一个目标；合计5.58S，1段，距离18.5米"
       },
       {
         "rank": 5,
         "requiredCharacterLevel": 1,
-        "maxDamagePerTargetS": 5.6,
+        "maxDamagePerTargetS": 6.44,
         "authoredDamageHits": 1,
         "radiusMetres": 0,
         "rangeMetres": 20,
@@ -4778,7 +4804,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "breakPower": 21.6,
         "shieldMaxHpPercent": 0,
         "healMaxHpPercent": 0,
-        "evolution": "单体雷矛，仅一个目标；合计5.6S，1段，距离20米",
+        "evolution": "单体雷矛，仅一个目标；合计6.44S，1段，距离20米",
         "visualTier": 5,
         "castRangeMetres": 20,
         "geometry": {
@@ -4801,7 +4827,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "单体雷矛，仅一个目标；合计5.6S，1段，距离20米"
+        "upgradeEffect": "单体雷矛，仅一个目标；合计6.44S，1段，距离20米"
       }
     ],
     "targetingMode": "direction",
@@ -4831,7 +4857,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 1,
         "requiredCharacterLevel": 4,
-        "maxDamagePerTargetS": 1.3,
+        "maxDamagePerTargetS": 1.56,
         "authoredDamageHits": 1,
         "radiusMetres": 3,
         "rangeMetres": 12,
@@ -4851,8 +4877,8 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "targetLimit": 2,
         "chainTargetLimit": 2,
         "connectionRadiusMetres": 3,
-        "damagePerSecondaryTargetS": 0.91,
-        "totalCastDamageBudgetS": 2.21,
+        "damagePerSecondaryTargetS": 1.092,
+        "totalCastDamageBudgetS": 2.652,
         "vfxAnchor": "authoredGeometry",
         "vfxDirection": "保留combat-thu.png认可的横向电弧形，主干/有限侧枝与既定目标人数不变；各真实触点增加电芯短闪、细散电与短局部爆闪的层次，随等级更清楚后快速退亮，不新增选敌或把横弧堆成巨型光团。",
         "peakDurationSeconds": 0.08,
@@ -4871,7 +4897,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 2,
         "requiredCharacterLevel": 4,
-        "maxDamagePerTargetS": 1.5,
+        "maxDamagePerTargetS": 1.8,
         "authoredDamageHits": 1,
         "radiusMetres": 4,
         "rangeMetres": 13.5,
@@ -4891,8 +4917,8 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "targetLimit": 3,
         "chainTargetLimit": 3,
         "connectionRadiusMetres": 4,
-        "damagePerSecondaryTargetS": 1.05,
-        "totalCastDamageBudgetS": 3.6,
+        "damagePerSecondaryTargetS": 1.26,
+        "totalCastDamageBudgetS": 4.32,
         "vfxAnchor": "authoredGeometry",
         "vfxDirection": "保留combat-thu.png认可的横向电弧形，主干/有限侧枝与既定目标人数不变；各真实触点增加电芯短闪、细散电与短局部爆闪的层次，随等级更清楚后快速退亮，不新增选敌或把横弧堆成巨型光团。",
         "peakDurationSeconds": 0.09,
@@ -4911,7 +4937,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 3,
         "requiredCharacterLevel": 4,
-        "maxDamagePerTargetS": 1.75,
+        "maxDamagePerTargetS": 2.1,
         "authoredDamageHits": 1,
         "radiusMetres": 5,
         "rangeMetres": 15,
@@ -4931,8 +4957,8 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "targetLimit": 4,
         "chainTargetLimit": 4,
         "connectionRadiusMetres": 5,
-        "damagePerSecondaryTargetS": 1.225,
-        "totalCastDamageBudgetS": 5.425,
+        "damagePerSecondaryTargetS": 1.47,
+        "totalCastDamageBudgetS": 6.51,
         "vfxAnchor": "authoredGeometry",
         "vfxDirection": "保留combat-thu.png认可的横向电弧形，主干/有限侧枝与既定目标人数不变；各真实触点增加电芯短闪、细散电与短局部爆闪的层次，随等级更清楚后快速退亮，不新增选敌或把横弧堆成巨型光团。",
         "peakDurationSeconds": 0.1,
@@ -4951,7 +4977,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 4,
         "requiredCharacterLevel": 4,
-        "maxDamagePerTargetS": 2.05,
+        "maxDamagePerTargetS": 2.46,
         "authoredDamageHits": 1,
         "radiusMetres": 6.5,
         "rangeMetres": 16.5,
@@ -4971,8 +4997,8 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "targetLimit": 6,
         "chainTargetLimit": 6,
         "connectionRadiusMetres": 6.5,
-        "damagePerSecondaryTargetS": 1.435,
-        "totalCastDamageBudgetS": 9.225,
+        "damagePerSecondaryTargetS": 1.722,
+        "totalCastDamageBudgetS": 11.07,
         "vfxAnchor": "authoredGeometry",
         "vfxDirection": "保留combat-thu.png认可的横向电弧形，主干/有限侧枝与既定目标人数不变；各真实触点增加电芯短闪、细散电与短局部爆闪的层次，随等级更清楚后快速退亮，不新增选敌或把横弧堆成巨型光团。",
         "peakDurationSeconds": 0.12,
@@ -4991,7 +5017,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 5,
         "requiredCharacterLevel": 4,
-        "maxDamagePerTargetS": 2.4,
+        "maxDamagePerTargetS": 2.88,
         "authoredDamageHits": 1,
         "radiusMetres": 8,
         "rangeMetres": 18,
@@ -5011,8 +5037,8 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "targetLimit": 8,
         "chainTargetLimit": 8,
         "connectionRadiusMetres": 8,
-        "damagePerSecondaryTargetS": 1.68,
-        "totalCastDamageBudgetS": 14.16,
+        "damagePerSecondaryTargetS": 2.016,
+        "totalCastDamageBudgetS": 16.992,
         "vfxAnchor": "authoredGeometry",
         "vfxDirection": "保留combat-thu.png认可的横向电弧形，主干/有限侧枝与既定目标人数不变；各真实触点增加电芯短闪、细散电与短局部爆闪的层次，随等级更清楚后快速退亮，不新增选敌或把横弧堆成巨型光团。",
         "peakDurationSeconds": 0.14,
@@ -5054,7 +5080,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
       "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
       "missingTargetDamageRedistributed": false,
-      "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+      "connectionTopology": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
       "connectionDistanceOrdering": [
         "nearestLegalEdge",
         "stableEntityId"
@@ -5291,7 +5317,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 1,
         "requiredCharacterLevel": 10,
-        "maxDamagePerTargetS": 1.4,
+        "maxDamagePerTargetS": 1.75,
         "authoredDamageHits": 2,
         "radiusMetres": 4,
         "rangeMetres": 12,
@@ -5329,7 +5355,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 2,
         "requiredCharacterLevel": 10,
-        "maxDamagePerTargetS": 1.65,
+        "maxDamagePerTargetS": 2.06,
         "authoredDamageHits": 2,
         "radiusMetres": 4.5,
         "rangeMetres": 13.5,
@@ -5367,7 +5393,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 3,
         "requiredCharacterLevel": 10,
-        "maxDamagePerTargetS": 1.95,
+        "maxDamagePerTargetS": 2.44,
         "authoredDamageHits": 2,
         "radiusMetres": 5,
         "rangeMetres": 15,
@@ -5405,7 +5431,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 4,
         "requiredCharacterLevel": 10,
-        "maxDamagePerTargetS": 2.3,
+        "maxDamagePerTargetS": 2.88,
         "authoredDamageHits": 2,
         "radiusMetres": 6,
         "rangeMetres": 16.5,
@@ -5443,7 +5469,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 5,
         "requiredCharacterLevel": 10,
-        "maxDamagePerTargetS": 2.7,
+        "maxDamagePerTargetS": 3.38,
         "authoredDamageHits": 2,
         "radiusMetres": 7,
         "rangeMetres": 18,
@@ -5504,7 +5530,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
       "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
       "missingTargetDamageRedistributed": false,
-      "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+      "connectionTopology": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
       "connectionDistanceOrdering": [
         "nearestLegalEdge",
         "stableEntityId"
@@ -5528,7 +5554,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
     "windupSeconds": 0.15,
     "releaseCommitSeconds": 0.15,
     "recoverySeconds": 0.2,
-    "resourceCost": 12,
+    "resourceCost": 18,
     "consumableCost": 0,
     "enemyForcedDisplacement": 0,
     "maxTargets": 1,
@@ -5738,12 +5764,12 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
     "maxTargets": 12,
     "ultimateCost": 0,
     "sharedUltimateLockSeconds": 1.5,
-    "mechanic": "释放时冻结中心，首拍冻结目标集合，三拍间隔0.25s，每敌每拍最多一次；三拍均分总倍率。每拍重验存活敌对、同场同层、固定范围与无遮挡连接，走出范围或被遮挡者本拍跳过；死亡者退出，不招募新目标补位，不把每条电边都算伤害。 已声明目标之间按最近合法可见距离构造连通骨架，并补充每个目标的两名最近邻形成局部闭环；施法者只接入网络一次，不从首目标向所有目标放射。额外电边只组织同一拍电网，不增加任何伤害次数或招募新目标。",
+    "mechanic": "释放时冻结中心，首拍冻结目标集合，三拍间隔0.25s，每敌每拍最多一次；三拍均分总倍率。每拍重验存活敌对、同场同层、固定范围与无遮挡连接，走出范围或被遮挡者本拍跳过；死亡者退出，不招募新目标补位，不把每条电边都算伤害。 已声明目标之间按最近合法可见距离构造连通骨架，采用稀疏分叉而不补充装饰闭环；施法者只接入网络一次，不从首目标向所有目标放射。连接骨架只表现同一拍的真实命中，不增加任何伤害次数或招募新目标。",
     "ranks": [
       {
         "rank": 1,
         "requiredCharacterLevel": 11,
-        "maxDamagePerTargetS": 2.55,
+        "maxDamagePerTargetS": 2.81,
         "authoredDamageHits": 3,
         "radiusMetres": 4,
         "rangeMetres": 14,
@@ -5780,7 +5806,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 2,
         "requiredCharacterLevel": 11,
-        "maxDamagePerTargetS": 2.9,
+        "maxDamagePerTargetS": 3.19,
         "authoredDamageHits": 3,
         "radiusMetres": 5,
         "rangeMetres": 15,
@@ -5817,7 +5843,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 3,
         "requiredCharacterLevel": 11,
-        "maxDamagePerTargetS": 3.3,
+        "maxDamagePerTargetS": 3.63,
         "authoredDamageHits": 3,
         "radiusMetres": 6,
         "rangeMetres": 16,
@@ -5854,7 +5880,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 4,
         "requiredCharacterLevel": 11,
-        "maxDamagePerTargetS": 3.85,
+        "maxDamagePerTargetS": 4.24,
         "authoredDamageHits": 3,
         "radiusMetres": 7.5,
         "rangeMetres": 17,
@@ -5891,7 +5917,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       {
         "rank": 5,
         "requiredCharacterLevel": 11,
-        "maxDamagePerTargetS": 4.45,
+        "maxDamagePerTargetS": 4.9,
         "authoredDamageHits": 3,
         "radiusMetres": 9,
         "rangeMetres": 18,
@@ -5951,7 +5977,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
       "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
       "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
       "missingTargetDamageRedistributed": false,
-      "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+      "connectionTopology": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
       "connectionDistanceOrdering": [
         "nearestLegalEdge",
         "stableEntityId"
@@ -6497,13 +6523,13 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
     "windupSeconds": 0.26,
     "releaseCommitSeconds": 0.26,
     "recoverySeconds": 0.2,
-    "resourceCost": 20,
+    "resourceCost": 32,
     "consumableCost": 0,
     "enemyForcedDisplacement": 0,
     "maxTargets": 1,
     "ultimateCost": 0,
     "sharedUltimateLockSeconds": 0,
-    "mechanic": "从补给栏第三格施放的通用恢复技能，不占固定战斗槽。消耗20点当前职业资源，8秒冷却；生命全满或恢复持续中不能重复施放。保留三次治疗、首跳强化与低生命应急成长。",
+    "mechanic": "从补给栏第三格施放的通用恢复技能，不占固定战斗槽。消耗32点当前职业资源，8秒冷却；生命全满或恢复持续中不能重复施放。保留三次治疗、首跳强化与低生命应急成长。",
     "ranks": [
       {
         "rank": 1,
@@ -6515,8 +6541,8 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "cooldownSeconds": 8,
         "breakPower": 0,
         "shieldMaxHpPercent": 0,
-        "healMaxHpPercent": 24,
-        "evolution": "共回复24%最大生命，三次、每秒一次",
+        "healMaxHpPercent": 12,
+        "evolution": "共回复12%最大生命，三次、每秒一次",
         "visualTier": 1,
         "castRangeMetres": 0,
         "geometry": {
@@ -6536,7 +6562,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "共回复24%最大生命，三次、每秒一次"
+        "upgradeEffect": "共回复12%最大生命，三次、每秒一次"
       },
       {
         "rank": 2,
@@ -6548,8 +6574,8 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "cooldownSeconds": 8,
         "breakPower": 0.0,
         "shieldMaxHpPercent": 0,
-        "healMaxHpPercent": 27,
-        "evolution": "总回复27%",
+        "healMaxHpPercent": 13.5,
+        "evolution": "总回复13.5%",
         "visualTier": 2,
         "castRangeMetres": 0,
         "geometry": {
@@ -6569,7 +6595,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "fade": "峰值后快速退亮和透明，敌方预警始终清楚；装饰层不改变S/CD/目标上限/等级门槛。"
         },
         "upgradeEffects": {},
-        "upgradeEffect": "总回复27%"
+        "upgradeEffect": "总回复13.5%"
       },
       {
         "rank": 3,
@@ -6581,8 +6607,8 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "cooldownSeconds": 8,
         "breakPower": 0.0,
         "shieldMaxHpPercent": 0,
-        "healMaxHpPercent": 30,
-        "evolution": "总回复30%，分配改为50%／25%／25%，更快缓解危险",
+        "healMaxHpPercent": 15,
+        "evolution": "总回复15%，分配改为50%／25%／25%，更快缓解危险",
         "visualTier": 3,
         "castRangeMetres": 0.0,
         "geometry": {
@@ -6604,7 +6630,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "upgradeEffects": {
           "firstHealFraction": 0.5
         },
-        "upgradeEffect": "总回复30%，分配改为50%／25%／25%，更快缓解危险"
+        "upgradeEffect": "总回复15%，分配改为50%／25%／25%，更快缓解危险"
       },
       {
         "rank": 4,
@@ -6616,8 +6642,8 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "cooldownSeconds": 8,
         "breakPower": 0.0,
         "shieldMaxHpPercent": 0,
-        "healMaxHpPercent": 33,
-        "evolution": "总回复33%",
+        "healMaxHpPercent": 16.5,
+        "evolution": "总回复16.5%",
         "visualTier": 4,
         "castRangeMetres": 0.0,
         "geometry": {
@@ -6639,7 +6665,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "upgradeEffects": {
           "firstHealFraction": 0.5
         },
-        "upgradeEffect": "总回复33%"
+        "upgradeEffect": "总回复16.5%"
       },
       {
         "rank": 5,
@@ -6651,8 +6677,8 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
         "cooldownSeconds": 8,
         "breakPower": 0.0,
         "shieldMaxHpPercent": 0,
-        "healMaxHpPercent": 36,
-        "evolution": "总回复36%；最后一跳结算前生命不足50%，额外回复6%最大生命",
+        "healMaxHpPercent": 18,
+        "evolution": "总回复18%；最后一跳结算前生命不足50%，额外回复6%最大生命",
         "visualTier": 5,
         "castRangeMetres": 0.0,
         "geometry": {
@@ -6675,7 +6701,7 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
           "firstHealFraction": 0.5,
           "emergencyHealPercent": 6
         },
-        "upgradeEffect": "总回复36%；最后一跳结算前生命不足50%，额外回复6%最大生命"
+        "upgradeEffect": "总回复18%；最后一跳结算前生命不足50%，额外回复6%最大生命"
       }
     ],
     "targetingMode": "self",
@@ -6685,6 +6711,403 @@ export const COMBAT_SKILL_LIST:CombatSkillDef[] = [
   }
 ];
 export const COMBAT_SKILLS:Record<string,CombatSkillDef> = Object.fromEntries(COMBAT_SKILL_LIST.map(skill=>[skill.id,skill]));
+export const PRE_BALANCE_SKILL_RANK_PATCHES:Record<string,Partial<CombatSkillRank>[]> = {
+  "WAR_01": [
+    {
+      "maxDamagePerTargetS": 3.2,
+      "evolution": "近身单体月牙连斩，仅一个目标；合计3.2S，2段，距离3.9米",
+      "upgradeEffect": "近身单体月牙连斩，仅一个目标；合计3.2S，2段，距离3.9米"
+    },
+    {
+      "maxDamagePerTargetS": 3.65,
+      "evolution": "近身单体月牙连斩，仅一个目标；合计3.65S，2段，距离3.9米",
+      "upgradeEffect": "近身单体月牙连斩，仅一个目标；合计3.65S，2段，距离3.9米"
+    },
+    {
+      "maxDamagePerTargetS": 4.2,
+      "evolution": "近身单体月牙连斩，仅一个目标；合计4.2S，3段，距离4.1米",
+      "upgradeEffect": "近身单体月牙连斩，仅一个目标；合计4.2S，3段，距离4.1米"
+    },
+    {
+      "maxDamagePerTargetS": 4.85,
+      "evolution": "近身单体月牙连斩，仅一个目标；合计4.85S，3段，距离4.3米",
+      "upgradeEffect": "近身单体月牙连斩，仅一个目标；合计4.85S，3段，距离4.3米"
+    },
+    {
+      "maxDamagePerTargetS": 5.6,
+      "evolution": "近身单体月牙连斩，仅一个目标；合计5.6S，3段，距离4.5米；末段命中强化下一次普攻20%",
+      "upgradeEffect": "近身单体月牙连斩，仅一个目标；合计5.6S，3段，距离4.5米；末段命中强化下一次普攻20%"
+    }
+  ],
+  "BOW_01": [
+    {
+      "maxDamagePerTargetS": 3.2,
+      "evolution": "单体重箭，仅一个目标；合计3.2S，1段，距离12米",
+      "upgradeEffect": "单体重箭，仅一个目标；合计3.2S，1段，距离12米"
+    },
+    {
+      "maxDamagePerTargetS": 3.65,
+      "evolution": "单体重箭，仅一个目标；合计3.65S，1段，距离13.5米",
+      "upgradeEffect": "单体重箭，仅一个目标；合计3.65S，1段，距离13.5米"
+    },
+    {
+      "maxDamagePerTargetS": 4.2,
+      "evolution": "单体重箭，仅一个目标；合计4.2S，1段，距离15米",
+      "upgradeEffect": "单体重箭，仅一个目标；合计4.2S，1段，距离15米"
+    },
+    {
+      "maxDamagePerTargetS": 4.85,
+      "evolution": "单体重箭，仅一个目标；合计4.85S，1段，距离16.5米",
+      "upgradeEffect": "单体重箭，仅一个目标；合计4.85S，1段，距离16.5米"
+    },
+    {
+      "maxDamagePerTargetS": 5.6,
+      "evolution": "单体重箭，仅一个目标；合计5.6S，1段，距离18米",
+      "upgradeEffect": "单体重箭，仅一个目标；合计5.6S，1段，距离18米"
+    }
+  ],
+  "FIR_04": [
+    {
+      "maxDamagePerTargetS": 2.0
+    },
+    {
+      "maxDamagePerTargetS": 2.25,
+      "evolution": "五点地面喷焰，持续4秒；每目标直接伤害合计2.25S"
+    },
+    {
+      "maxDamagePerTargetS": 2.6,
+      "evolution": "五点地面喷焰，持续4秒；每目标直接伤害合计2.6S"
+    },
+    {
+      "maxDamagePerTargetS": 3.0
+    },
+    {
+      "maxDamagePerTargetS": 3.5,
+      "evolution": "五点地面喷焰，持续4秒；每目标直接伤害合计3.5S"
+    }
+  ],
+  "FIR_05": [
+    {
+      "maxDamagePerTargetS": 1.9,
+      "evolution": "焚焰火域，燃烧并减速4秒；每目标合计1.9S"
+    },
+    {
+      "maxDamagePerTargetS": 2.15,
+      "evolution": "焚焰火域，燃烧并减速4秒；每目标合计2.15S"
+    },
+    {
+      "maxDamagePerTargetS": 2.45,
+      "evolution": "焚焰火域，燃烧并减速4秒；每目标合计2.45S"
+    },
+    {
+      "maxDamagePerTargetS": 2.85,
+      "evolution": "焚焰火域，燃烧并减速4秒；每目标合计2.85S"
+    },
+    {
+      "maxDamagePerTargetS": 3.3,
+      "evolution": "焚焰火域，燃烧并减速4秒；每目标合计3.3S"
+    }
+  ],
+  "THU_01": [
+    {
+      "maxDamagePerTargetS": 3.2,
+      "evolution": "单体雷矛，仅一个目标；合计3.2S，1段，距离14米",
+      "upgradeEffect": "单体雷矛，仅一个目标；合计3.2S，1段，距离14米"
+    },
+    {
+      "maxDamagePerTargetS": 3.65,
+      "evolution": "单体雷矛，仅一个目标；合计3.65S，1段，距离15.5米",
+      "upgradeEffect": "单体雷矛，仅一个目标；合计3.65S，1段，距离15.5米"
+    },
+    {
+      "maxDamagePerTargetS": 4.2,
+      "evolution": "单体雷矛，仅一个目标；合计4.2S，1段，距离17米",
+      "upgradeEffect": "单体雷矛，仅一个目标；合计4.2S，1段，距离17米"
+    },
+    {
+      "maxDamagePerTargetS": 4.85,
+      "evolution": "单体雷矛，仅一个目标；合计4.85S，1段，距离18.5米",
+      "upgradeEffect": "单体雷矛，仅一个目标；合计4.85S，1段，距离18.5米"
+    },
+    {
+      "maxDamagePerTargetS": 5.6,
+      "evolution": "单体雷矛，仅一个目标；合计5.6S，1段，距离20米",
+      "upgradeEffect": "单体雷矛，仅一个目标；合计5.6S，1段，距离20米"
+    }
+  ],
+  "THU_02": [
+    {
+      "maxDamagePerTargetS": 1.3,
+      "damagePerSecondaryTargetS": 0.91,
+      "totalCastDamageBudgetS": 2.21
+    },
+    {
+      "maxDamagePerTargetS": 1.5,
+      "damagePerSecondaryTargetS": 1.05,
+      "totalCastDamageBudgetS": 3.6
+    },
+    {
+      "maxDamagePerTargetS": 1.75,
+      "damagePerSecondaryTargetS": 1.225,
+      "totalCastDamageBudgetS": 5.425
+    },
+    {
+      "maxDamagePerTargetS": 2.05,
+      "damagePerSecondaryTargetS": 1.435,
+      "totalCastDamageBudgetS": 9.225
+    },
+    {
+      "maxDamagePerTargetS": 2.4,
+      "damagePerSecondaryTargetS": 1.68,
+      "totalCastDamageBudgetS": 14.16
+    }
+  ],
+  "THU_04": [
+    {
+      "maxDamagePerTargetS": 1.4
+    },
+    {
+      "maxDamagePerTargetS": 1.65
+    },
+    {
+      "maxDamagePerTargetS": 1.95
+    },
+    {
+      "maxDamagePerTargetS": 2.3
+    },
+    {
+      "maxDamagePerTargetS": 2.7
+    }
+  ],
+  "THU_05": [
+    {
+      "maxDamagePerTargetS": 2.55
+    },
+    {
+      "maxDamagePerTargetS": 2.9
+    },
+    {
+      "maxDamagePerTargetS": 3.3
+    },
+    {
+      "maxDamagePerTargetS": 3.85
+    },
+    {
+      "maxDamagePerTargetS": 4.45
+    }
+  ],
+  "COM_02": [
+    {
+      "healMaxHpPercent": 24,
+      "evolution": "共回复24%最大生命，三次、每秒一次",
+      "upgradeEffect": "共回复24%最大生命，三次、每秒一次"
+    },
+    {
+      "healMaxHpPercent": 27,
+      "evolution": "总回复27%",
+      "upgradeEffect": "总回复27%"
+    },
+    {
+      "healMaxHpPercent": 30,
+      "evolution": "总回复30%，分配改为50%／25%／25%，更快缓解危险",
+      "upgradeEffect": "总回复30%，分配改为50%／25%／25%，更快缓解危险"
+    },
+    {
+      "healMaxHpPercent": 33,
+      "evolution": "总回复33%",
+      "upgradeEffect": "总回复33%"
+    },
+    {
+      "healMaxHpPercent": 36,
+      "evolution": "总回复36%；最后一跳结算前生命不足50%，额外回复6%最大生命",
+      "upgradeEffect": "总回复36%；最后一跳结算前生命不足50%，额外回复6%最大生命"
+    }
+  ]
+};
+export const PRE_MOVING_WARRIOR_ULTIMATE_RANKS:CombatSkillRank[] = [
+  {
+    "rank": 1,
+    "requiredCharacterLevel": 11,
+    "maxDamagePerTargetS": 2.55,
+    "authoredDamageHits": 3,
+    "radiusMetres": 0,
+    "rangeMetres": 4.375,
+    "cooldownSeconds": 12,
+    "breakPower": 40,
+    "shieldMaxHpPercent": 0,
+    "healMaxHpPercent": 0,
+    "evolution": "前方120°三段近战终结",
+    "visualTier": 1,
+    "castRangeMetres": 4.375,
+    "geometry": {
+      "kind": "meleeFan",
+      "origin": "caster",
+      "radiusMetres": 4.375,
+      "angleDegrees": 120
+    },
+    "targetLimit": null,
+    "vfxAnchor": "weaponContact",
+    "vfxDirection": "近身大扇形三段终结，伤害20%/20%/60%，无远程飞刃。",
+    "peakDurationSeconds": 0.08,
+    "visualEvolutionDoesNotChangeHitBudget": true,
+    "vfxLayers": {
+      "material": "近身实体银白刃缘与金色接触碎光",
+      "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+      "contact": "仅在声明段的真实命中点爆发",
+      "fade": "接触后迅速退亮，不延长伤害窗",
+      "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+    },
+    "upgradeEffects": {},
+    "upgradeEffect": "前方120°三段近战终结"
+  },
+  {
+    "rank": 2,
+    "requiredCharacterLevel": 11,
+    "maxDamagePerTargetS": 2.9,
+    "authoredDamageHits": 3,
+    "radiusMetres": 0.0,
+    "rangeMetres": 4.375,
+    "cooldownSeconds": 12,
+    "breakPower": 42.0,
+    "shieldMaxHpPercent": 0,
+    "healMaxHpPercent": 0,
+    "evolution": "扇面130°",
+    "visualTier": 2,
+    "castRangeMetres": 4.375,
+    "geometry": {
+      "kind": "meleeFan",
+      "origin": "caster",
+      "radiusMetres": 4.375,
+      "angleDegrees": 130
+    },
+    "targetLimit": null,
+    "vfxAnchor": "weaponContact",
+    "vfxDirection": "近身大扇形三段终结，伤害20%/20%/60%，无远程飞刃。",
+    "peakDurationSeconds": 0.09,
+    "visualEvolutionDoesNotChangeHitBudget": true,
+    "vfxLayers": {
+      "material": "近身实体银白刃缘与金色接触碎光",
+      "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+      "contact": "仅在声明段的真实命中点爆发",
+      "fade": "接触后迅速退亮，不延长伤害窗",
+      "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+    },
+    "upgradeEffects": {},
+    "upgradeEffect": "扇面130°"
+  },
+  {
+    "rank": 3,
+    "requiredCharacterLevel": 11,
+    "maxDamagePerTargetS": 3.3,
+    "authoredDamageHits": 3,
+    "radiusMetres": 0.0,
+    "rangeMetres": 4.6375,
+    "cooldownSeconds": 12,
+    "breakPower": 44.0,
+    "shieldMaxHpPercent": 0,
+    "healMaxHpPercent": 0,
+    "evolution": "扇面140°；终结段削韧提高20%",
+    "visualTier": 3,
+    "castRangeMetres": 4.6375,
+    "geometry": {
+      "kind": "meleeFan",
+      "origin": "caster",
+      "radiusMetres": 4.6375,
+      "angleDegrees": 140
+    },
+    "targetLimit": null,
+    "vfxAnchor": "weaponContact",
+    "vfxDirection": "近身大扇形三段终结，伤害20%/20%/60%，无远程飞刃。",
+    "peakDurationSeconds": 0.1,
+    "visualEvolutionDoesNotChangeHitBudget": true,
+    "vfxLayers": {
+      "material": "近身实体银白刃缘与金色接触碎光",
+      "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+      "contact": "仅在声明段的真实命中点爆发",
+      "fade": "接触后迅速退亮，不延长伤害窗",
+      "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+    },
+    "upgradeEffects": {
+      "finalBreakPercent": 20
+    },
+    "upgradeEffect": "扇面140°；终结段削韧提高20%"
+  },
+  {
+    "rank": 4,
+    "requiredCharacterLevel": 11,
+    "maxDamagePerTargetS": 3.85,
+    "authoredDamageHits": 3,
+    "radiusMetres": 0.0,
+    "rangeMetres": 4.8125,
+    "cooldownSeconds": 12,
+    "breakPower": 46.0,
+    "shieldMaxHpPercent": 0,
+    "healMaxHpPercent": 0,
+    "evolution": "扇面150°、半径3.85米",
+    "visualTier": 4,
+    "castRangeMetres": 4.8125,
+    "geometry": {
+      "kind": "meleeFan",
+      "origin": "caster",
+      "radiusMetres": 4.8125,
+      "angleDegrees": 150
+    },
+    "targetLimit": null,
+    "vfxAnchor": "weaponContact",
+    "vfxDirection": "近身大扇形三段终结，伤害20%/20%/60%，无远程飞刃。",
+    "peakDurationSeconds": 0.12,
+    "visualEvolutionDoesNotChangeHitBudget": true,
+    "vfxLayers": {
+      "material": "近身实体银白刃缘与金色接触碎光",
+      "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+      "contact": "仅在声明段的真实命中点爆发",
+      "fade": "接触后迅速退亮，不延长伤害窗",
+      "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+    },
+    "upgradeEffects": {
+      "finalBreakPercent": 20
+    },
+    "upgradeEffect": "扇面150°、半径3.85米"
+  },
+  {
+    "rank": 5,
+    "requiredCharacterLevel": 11,
+    "maxDamagePerTargetS": 4.45,
+    "authoredDamageHits": 3,
+    "radiusMetres": 0.0,
+    "rangeMetres": 5.025,
+    "cooldownSeconds": 12,
+    "breakPower": 48.0,
+    "shieldMaxHpPercent": 0,
+    "healMaxHpPercent": 0,
+    "evolution": "扇面160°；起手时有自身护盾，终结段伤害提高10%",
+    "visualTier": 5,
+    "castRangeMetres": 5.025,
+    "geometry": {
+      "kind": "meleeFan",
+      "origin": "caster",
+      "radiusMetres": 5.025,
+      "angleDegrees": 160
+    },
+    "targetLimit": null,
+    "vfxAnchor": "weaponContact",
+    "vfxDirection": "近身大扇形三段终结，伤害20%/20%/60%，无远程飞刃。",
+    "peakDurationSeconds": 0.14,
+    "visualEvolutionDoesNotChangeHitBudget": true,
+    "vfxLayers": {
+      "material": "近身实体银白刃缘与金色接触碎光",
+      "direction": "跟随武器与实际近战命中区，不生成飞行弹体或远端剑气",
+      "contact": "仅在声明段的真实命中点爆发",
+      "fade": "接触后迅速退亮，不延长伤害窗",
+      "growth": "按原五级近战形态加强，保持既定段数与S/CD"
+    },
+    "upgradeEffects": {
+      "finalBreakPercent": 20,
+      "shieldFinisherPercent": 10
+    },
+    "upgradeEffect": "扇面160°；起手时有自身护盾，终结段伤害提高10%"
+  }
+];
 export const PURE_SKILLS = COMBAT_SKILLS;
 // Frozen V2 definitions are read only by save validation, never by the playable skill catalog.
 const LEGACY_SKILL_OVERRIDES:Record<string,CombatSkillDef> = {
@@ -9999,7 +10422,7 @@ const LEGACY_SKILL_OVERRIDES:Record<string,CombatSkillDef> = {
     "maxTargets": 8,
     "ultimateCost": 0,
     "sharedUltimateLockSeconds": 0,
-    "mechanic": "数量含首目标。中心在首次命中瞬间冻结；候选必须同场同层、敌对存活、位于中心半径内并有合法无遮挡连接；按中心距离、稳定ID排序。主目标全伤，额外目标各70%；每cast每敌一次，不回跳、不补空位、不因主目标死亡移动中心。技能雷弧不是装备额外链。 已声明目标之间按最近合法可见距离构造连通骨架，并补充每个目标的两名最近邻形成局部闭环；施法者只接入网络一次，不从首目标向所有目标放射。额外电边只组织同一拍电网，不增加任何伤害次数或招募新目标。",
+    "mechanic": "数量含首目标。中心在首次命中瞬间冻结；候选必须同场同层、敌对存活、位于中心半径内并有合法无遮挡连接；按中心距离、稳定ID排序。主目标全伤，额外目标各70%；每cast每敌一次，不回跳、不补空位、不因主目标死亡移动中心。技能雷弧不是装备额外链。 已声明目标之间按最近合法可见距离构造连通骨架，采用稀疏分叉而不补充装饰闭环；施法者只接入网络一次，不从首目标向所有目标放射。连接骨架只表现同一拍的真实命中，不增加任何伤害次数或招募新目标。",
     "ranks": [
       {
         "rank": 1,
@@ -10222,7 +10645,7 @@ const LEGACY_SKILL_OVERRIDES:Record<string,CombatSkillDef> = {
       "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
       "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
       "missingTargetDamageRedistributed": false,
-      "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+      "connectionTopology": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
       "connectionDistanceOrdering": [
         "nearestLegalEdge",
         "stableEntityId"
@@ -10451,7 +10874,7 @@ const LEGACY_SKILL_OVERRIDES:Record<string,CombatSkillDef> = {
     "maxTargets": 8,
     "ultimateCost": 0,
     "sharedUltimateLockSeconds": 0,
-    "mechanic": "以远处选点为扇面起点、按施法朝向展开；固定几何内按稳定排序冻结目标集合，数量不足不回跳。两拍各50%，同一目标每拍一次；每拍重验存活敌对、同场同层、固定扇面与无遮挡连接，失效者本拍跳过且不补位。替代原自身电冲。 已声明目标之间按最近合法可见距离构造连通骨架，并补充每个目标的两名最近邻形成局部闭环；施法者只接入网络一次，不从首目标向所有目标放射。额外电边只组织同一拍电网，不增加任何伤害次数或招募新目标。",
+    "mechanic": "以远处选点为扇面起点、按施法朝向展开；固定几何内按稳定排序冻结目标集合，数量不足不回跳。两拍各50%，同一目标每拍一次；每拍重验存活敌对、同场同层、固定扇面与无遮挡连接，失效者本拍跳过且不补位。替代原自身电冲。 已声明目标之间按最近合法可见距离构造连通骨架，采用稀疏分叉而不补充装饰闭环；施法者只接入网络一次，不从首目标向所有目标放射。连接骨架只表现同一拍的真实命中，不增加任何伤害次数或招募新目标。",
     "ranks": [
       {
         "rank": 1,
@@ -10669,7 +11092,7 @@ const LEGACY_SKILL_OVERRIDES:Record<string,CombatSkillDef> = {
       "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
       "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
       "missingTargetDamageRedistributed": false,
-      "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+      "connectionTopology": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
       "connectionDistanceOrdering": [
         "nearestLegalEdge",
         "stableEntityId"
@@ -10698,7 +11121,7 @@ const LEGACY_SKILL_OVERRIDES:Record<string,CombatSkillDef> = {
     "maxTargets": 12,
     "ultimateCost": 100,
     "sharedUltimateLockSeconds": 45,
-    "mechanic": "释放时冻结中心，首拍冻结目标集合，三拍间隔0.25s，每敌每拍最多一次；三拍均分总倍率。每拍重验存活敌对、同场同层、固定范围与无遮挡连接，走出范围或被遮挡者本拍跳过；死亡者退出，不招募新目标补位，不把每条电边都算伤害。 已声明目标之间按最近合法可见距离构造连通骨架，并补充每个目标的两名最近邻形成局部闭环；施法者只接入网络一次，不从首目标向所有目标放射。额外电边只组织同一拍电网，不增加任何伤害次数或招募新目标。",
+    "mechanic": "释放时冻结中心，首拍冻结目标集合，三拍间隔0.25s，每敌每拍最多一次；三拍均分总倍率。每拍重验存活敌对、同场同层、固定范围与无遮挡连接，走出范围或被遮挡者本拍跳过；死亡者退出，不招募新目标补位，不把每条电边都算伤害。 已声明目标之间按最近合法可见距离构造连通骨架，采用稀疏分叉而不补充装饰闭环；施法者只接入网络一次，不从首目标向所有目标放射。连接骨架只表现同一拍的真实命中，不增加任何伤害次数或招募新目标。",
     "ranks": [
       {
         "rank": 1,
@@ -10911,7 +11334,7 @@ const LEGACY_SKILL_OVERRIDES:Record<string,CombatSkillDef> = {
       "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
       "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
       "missingTargetDamageRedistributed": false,
-      "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+      "connectionTopology": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
       "connectionDistanceOrdering": [
         "nearestLegalEdge",
         "stableEntityId"
@@ -15104,7 +15527,7 @@ const FOUR_SKILL_OVERRIDES:Record<string,CombatSkillDef> = {
       "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
       "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
       "missingTargetDamageRedistributed": false,
-      "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+      "connectionTopology": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
       "connectionDistanceOrdering": [
         "nearestLegalEdge",
         "stableEntityId"
@@ -15336,7 +15759,7 @@ const FOUR_SKILL_OVERRIDES:Record<string,CombatSkillDef> = {
     "maxTargets": 12,
     "ultimateCost": 0,
     "sharedUltimateLockSeconds": 1.5,
-    "mechanic": "释放时冻结中心，首拍冻结目标集合，三拍间隔0.25s，每敌每拍最多一次；三拍均分总倍率。每拍重验存活敌对、同场同层、固定范围与无遮挡连接，走出范围或被遮挡者本拍跳过；死亡者退出，不招募新目标补位，不把每条电边都算伤害。 已声明目标之间按最近合法可见距离构造连通骨架，并补充每个目标的两名最近邻形成局部闭环；施法者只接入网络一次，不从首目标向所有目标放射。额外电边只组织同一拍电网，不增加任何伤害次数或招募新目标。",
+    "mechanic": "释放时冻结中心，首拍冻结目标集合，三拍间隔0.25s，每敌每拍最多一次；三拍均分总倍率。每拍重验存活敌对、同场同层、固定范围与无遮挡连接，走出范围或被遮挡者本拍跳过；死亡者退出，不招募新目标补位，不把每条电边都算伤害。 已声明目标之间按最近合法可见距离构造连通骨架，采用稀疏分叉而不补充装饰闭环；施法者只接入网络一次，不从首目标向所有目标放射。连接骨架只表现同一拍的真实命中，不增加任何伤害次数或招募新目标。",
     "ranks": [
       {
         "rank": 1,
@@ -15549,7 +15972,7 @@ const FOUR_SKILL_OVERRIDES:Record<string,CombatSkillDef> = {
       "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
       "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
       "missingTargetDamageRedistributed": false,
-      "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+      "connectionTopology": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
       "connectionDistanceOrdering": [
         "nearestLegalEdge",
         "stableEntityId"
@@ -20279,7 +20702,7 @@ const RESTORED_SKILL_OVERRIDES:Record<string,CombatSkillDef> = {
       "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
       "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
       "missingTargetDamageRedistributed": false,
-      "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+      "connectionTopology": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
       "connectionDistanceOrdering": [
         "nearestLegalEdge",
         "stableEntityId"
@@ -20726,7 +21149,7 @@ const RESTORED_SKILL_OVERRIDES:Record<string,CombatSkillDef> = {
       "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
       "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
       "missingTargetDamageRedistributed": false,
-      "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+      "connectionTopology": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
       "connectionDistanceOrdering": [
         "nearestLegalEdge",
         "stableEntityId"
@@ -20958,7 +21381,7 @@ const RESTORED_SKILL_OVERRIDES:Record<string,CombatSkillDef> = {
     "maxTargets": 12,
     "ultimateCost": 0,
     "sharedUltimateLockSeconds": 1.5,
-    "mechanic": "释放时冻结中心，首拍冻结目标集合，三拍间隔0.25s，每敌每拍最多一次；三拍均分总倍率。每拍重验存活敌对、同场同层、固定范围与无遮挡连接，走出范围或被遮挡者本拍跳过；死亡者退出，不招募新目标补位，不把每条电边都算伤害。 已声明目标之间按最近合法可见距离构造连通骨架，并补充每个目标的两名最近邻形成局部闭环；施法者只接入网络一次，不从首目标向所有目标放射。额外电边只组织同一拍电网，不增加任何伤害次数或招募新目标。",
+    "mechanic": "释放时冻结中心，首拍冻结目标集合，三拍间隔0.25s，每敌每拍最多一次；三拍均分总倍率。每拍重验存活敌对、同场同层、固定范围与无遮挡连接，走出范围或被遮挡者本拍跳过；死亡者退出，不招募新目标补位，不把每条电边都算伤害。 已声明目标之间按最近合法可见距离构造连通骨架，采用稀疏分叉而不补充装饰闭环；施法者只接入网络一次，不从首目标向所有目标放射。连接骨架只表现同一拍的真实命中，不增加任何伤害次数或招募新目标。",
     "ranks": [
       {
         "rank": 1,
@@ -21171,7 +21594,7 @@ const RESTORED_SKILL_OVERRIDES:Record<string,CombatSkillDef> = {
       "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
       "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
       "missingTargetDamageRedistributed": false,
-      "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+      "connectionTopology": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
       "connectionDistanceOrdering": [
         "nearestLegalEdge",
         "stableEntityId"
@@ -21778,7 +22201,7 @@ export const RESTORED_COMBAT_SKILLS:Record<string,CombatSkillDef> = Object.fromE
 ].map(id=>[id,RESTORED_SKILL_OVERRIDES[id]??COMBAT_SKILLS[id]]));
 export function combatSkillCatalog(version=5):Record<string,CombatSkillDef>{return version===2?LEGACY_COMBAT_SKILLS:version===3?FOUR_SKILL_COMBAT_SKILLS:version===4?RESTORED_COMBAT_SKILLS:COMBAT_SKILLS;}
 export const PROGRESSION = {
-  "maxLevel": 40,
+  "maxLevel": 80,
   "startingAttributes": {
     "strength": 10,
     "dexterity": 10,
@@ -21786,9 +22209,10 @@ export const PROGRESSION = {
     "vitality": 10
   },
   "perLevel": {
-    "maxHp": 5,
-    "baseSkillPower": 1.5,
-    "freeAttributePoints": 3
+    "combatBudgetHp": 5,
+    "combatBudgetSkillPower": 1.05,
+    "freeAttributePoints": "等级2–20每级3点，21–80每级2点",
+    "skillPoints": "等级2–20每级1点，22–80每2级1点；进入第二章额外2点"
   },
   "attributeCap": 80,
   "attributes": {
@@ -21805,321 +22229,801 @@ export const PROGRESSION = {
       "level": 1,
       "xpToNext": 100,
       "cumulativeXp": 0,
+      "combatBudgetLevel": 1.0,
       "baseMaxHp": 120,
-      "baseSkillPowerS": 24.0,
-      "freeAttributePointsEarned": 0
+      "baseSkillPowerS": 18.0,
+      "freeAttributePointsEarned": 0,
+      "skillPointsWithChapterTwo": 0
     },
     {
       "level": 2,
-      "xpToNext": 140,
+      "xpToNext": 180,
       "cumulativeXp": 100,
+      "combatBudgetLevel": 2.0,
       "baseMaxHp": 125,
-      "baseSkillPowerS": 25.5,
-      "freeAttributePointsEarned": 3
+      "baseSkillPowerS": 19.05,
+      "freeAttributePointsEarned": 3,
+      "skillPointsWithChapterTwo": 1
     },
     {
       "level": 3,
-      "xpToNext": 190,
-      "cumulativeXp": 240,
+      "xpToNext": 310,
+      "cumulativeXp": 280,
+      "combatBudgetLevel": 3.0,
       "baseMaxHp": 130,
-      "baseSkillPowerS": 27.0,
-      "freeAttributePointsEarned": 6
+      "baseSkillPowerS": 20.1,
+      "freeAttributePointsEarned": 6,
+      "skillPointsWithChapterTwo": 2
     },
     {
       "level": 4,
-      "xpToNext": 250,
-      "cumulativeXp": 430,
+      "xpToNext": 490,
+      "cumulativeXp": 590,
+      "combatBudgetLevel": 4.0,
       "baseMaxHp": 135,
-      "baseSkillPowerS": 28.5,
-      "freeAttributePointsEarned": 9
+      "baseSkillPowerS": 21.15,
+      "freeAttributePointsEarned": 9,
+      "skillPointsWithChapterTwo": 3
     },
     {
       "level": 5,
-      "xpToNext": 320,
-      "cumulativeXp": 680,
+      "xpToNext": 720,
+      "cumulativeXp": 1080,
+      "combatBudgetLevel": 5.0,
       "baseMaxHp": 140,
-      "baseSkillPowerS": 30.0,
-      "freeAttributePointsEarned": 12
+      "baseSkillPowerS": 22.2,
+      "freeAttributePointsEarned": 12,
+      "skillPointsWithChapterTwo": 4
     },
     {
       "level": 6,
-      "xpToNext": 400,
-      "cumulativeXp": 1000,
+      "xpToNext": 1000,
+      "cumulativeXp": 1800,
+      "combatBudgetLevel": 6.0,
       "baseMaxHp": 145,
-      "baseSkillPowerS": 31.5,
-      "freeAttributePointsEarned": 15
+      "baseSkillPowerS": 23.25,
+      "freeAttributePointsEarned": 15,
+      "skillPointsWithChapterTwo": 5
     },
     {
       "level": 7,
-      "xpToNext": 490,
-      "cumulativeXp": 1400,
+      "xpToNext": 1330,
+      "cumulativeXp": 2800,
+      "combatBudgetLevel": 7.0,
       "baseMaxHp": 150,
-      "baseSkillPowerS": 33.0,
-      "freeAttributePointsEarned": 18
+      "baseSkillPowerS": 24.3,
+      "freeAttributePointsEarned": 18,
+      "skillPointsWithChapterTwo": 6
     },
     {
       "level": 8,
-      "xpToNext": 590,
-      "cumulativeXp": 1890,
+      "xpToNext": 1710,
+      "cumulativeXp": 4130,
+      "combatBudgetLevel": 8.0,
       "baseMaxHp": 155,
-      "baseSkillPowerS": 34.5,
-      "freeAttributePointsEarned": 21
+      "baseSkillPowerS": 25.35,
+      "freeAttributePointsEarned": 21,
+      "skillPointsWithChapterTwo": 7
     },
     {
       "level": 9,
-      "xpToNext": 700,
-      "cumulativeXp": 2480,
+      "xpToNext": 2140,
+      "cumulativeXp": 5840,
+      "combatBudgetLevel": 9.0,
       "baseMaxHp": 160,
-      "baseSkillPowerS": 36.0,
-      "freeAttributePointsEarned": 24
+      "baseSkillPowerS": 26.4,
+      "freeAttributePointsEarned": 24,
+      "skillPointsWithChapterTwo": 8
     },
     {
       "level": 10,
-      "xpToNext": 820,
-      "cumulativeXp": 3180,
+      "xpToNext": 2620,
+      "cumulativeXp": 7980,
+      "combatBudgetLevel": 10.0,
       "baseMaxHp": 165,
-      "baseSkillPowerS": 37.5,
-      "freeAttributePointsEarned": 27
+      "baseSkillPowerS": 27.45,
+      "freeAttributePointsEarned": 27,
+      "skillPointsWithChapterTwo": 9
     },
     {
       "level": 11,
-      "xpToNext": 950,
-      "cumulativeXp": 4000,
+      "xpToNext": 3150,
+      "cumulativeXp": 10600,
+      "combatBudgetLevel": 11.0,
       "baseMaxHp": 170,
-      "baseSkillPowerS": 39.0,
-      "freeAttributePointsEarned": 30
+      "baseSkillPowerS": 28.5,
+      "freeAttributePointsEarned": 30,
+      "skillPointsWithChapterTwo": 12
     },
     {
       "level": 12,
-      "xpToNext": 1090,
-      "cumulativeXp": 4950,
+      "xpToNext": 3730,
+      "cumulativeXp": 13750,
+      "combatBudgetLevel": 12.0,
       "baseMaxHp": 175,
-      "baseSkillPowerS": 40.5,
-      "freeAttributePointsEarned": 33
+      "baseSkillPowerS": 29.55,
+      "freeAttributePointsEarned": 33,
+      "skillPointsWithChapterTwo": 13
     },
     {
       "level": 13,
-      "xpToNext": 1240,
-      "cumulativeXp": 6040,
+      "xpToNext": 4360,
+      "cumulativeXp": 17480,
+      "combatBudgetLevel": 13.0,
       "baseMaxHp": 180,
-      "baseSkillPowerS": 42.0,
-      "freeAttributePointsEarned": 36
+      "baseSkillPowerS": 30.6,
+      "freeAttributePointsEarned": 36,
+      "skillPointsWithChapterTwo": 14
     },
     {
       "level": 14,
-      "xpToNext": 1400,
-      "cumulativeXp": 7280,
+      "xpToNext": 5040,
+      "cumulativeXp": 21840,
+      "combatBudgetLevel": 14.0,
       "baseMaxHp": 185,
-      "baseSkillPowerS": 43.5,
-      "freeAttributePointsEarned": 39
+      "baseSkillPowerS": 31.65,
+      "freeAttributePointsEarned": 39,
+      "skillPointsWithChapterTwo": 15
     },
     {
       "level": 15,
-      "xpToNext": 1570,
-      "cumulativeXp": 8680,
+      "xpToNext": 5770,
+      "cumulativeXp": 26880,
+      "combatBudgetLevel": 15.0,
       "baseMaxHp": 190,
-      "baseSkillPowerS": 45.0,
-      "freeAttributePointsEarned": 42
+      "baseSkillPowerS": 32.7,
+      "freeAttributePointsEarned": 42,
+      "skillPointsWithChapterTwo": 16
     },
     {
       "level": 16,
-      "xpToNext": 1750,
-      "cumulativeXp": 10250,
+      "xpToNext": 6550,
+      "cumulativeXp": 32650,
+      "combatBudgetLevel": 16.0,
       "baseMaxHp": 195,
-      "baseSkillPowerS": 46.5,
-      "freeAttributePointsEarned": 45
+      "baseSkillPowerS": 33.75,
+      "freeAttributePointsEarned": 45,
+      "skillPointsWithChapterTwo": 17
     },
     {
       "level": 17,
-      "xpToNext": 1940,
-      "cumulativeXp": 12000,
+      "xpToNext": 7380,
+      "cumulativeXp": 39200,
+      "combatBudgetLevel": 17.0,
       "baseMaxHp": 200,
-      "baseSkillPowerS": 48.0,
-      "freeAttributePointsEarned": 48
+      "baseSkillPowerS": 34.8,
+      "freeAttributePointsEarned": 48,
+      "skillPointsWithChapterTwo": 18
     },
     {
       "level": 18,
-      "xpToNext": 2140,
-      "cumulativeXp": 13940,
+      "xpToNext": 8260,
+      "cumulativeXp": 46580,
+      "combatBudgetLevel": 18.0,
       "baseMaxHp": 205,
-      "baseSkillPowerS": 49.5,
-      "freeAttributePointsEarned": 51
+      "baseSkillPowerS": 35.85,
+      "freeAttributePointsEarned": 51,
+      "skillPointsWithChapterTwo": 19
     },
     {
       "level": 19,
-      "xpToNext": 2350,
-      "cumulativeXp": 16080,
+      "xpToNext": 9190,
+      "cumulativeXp": 54840,
+      "combatBudgetLevel": 19.0,
       "baseMaxHp": 210,
-      "baseSkillPowerS": 51.0,
-      "freeAttributePointsEarned": 54
+      "baseSkillPowerS": 36.9,
+      "freeAttributePointsEarned": 54,
+      "skillPointsWithChapterTwo": 20
     },
     {
       "level": 20,
-      "xpToNext": 2570,
-      "cumulativeXp": 18430,
+      "xpToNext": 10170,
+      "cumulativeXp": 64030,
+      "combatBudgetLevel": 20.0,
       "baseMaxHp": 215,
-      "baseSkillPowerS": 52.5,
-      "freeAttributePointsEarned": 57
+      "baseSkillPowerS": 37.95,
+      "freeAttributePointsEarned": 57,
+      "skillPointsWithChapterTwo": 21
     },
     {
       "level": 21,
-      "xpToNext": 2800,
-      "cumulativeXp": 21000,
-      "baseMaxHp": 220,
-      "baseSkillPowerS": 54.0,
-      "freeAttributePointsEarned": 60
+      "xpToNext": 10320,
+      "cumulativeXp": 74200,
+      "combatBudgetLevel": 20.4,
+      "baseMaxHp": 217,
+      "baseSkillPowerS": 38.37,
+      "freeAttributePointsEarned": 59,
+      "skillPointsWithChapterTwo": 21
     },
     {
       "level": 22,
-      "xpToNext": 3040,
-      "cumulativeXp": 23800,
-      "baseMaxHp": 225,
-      "baseSkillPowerS": 55.5,
-      "freeAttributePointsEarned": 63
+      "xpToNext": 10470,
+      "cumulativeXp": 84520,
+      "combatBudgetLevel": 20.8,
+      "baseMaxHp": 219,
+      "baseSkillPowerS": 38.79,
+      "freeAttributePointsEarned": 61,
+      "skillPointsWithChapterTwo": 22
     },
     {
       "level": 23,
-      "xpToNext": 3290,
-      "cumulativeXp": 26840,
-      "baseMaxHp": 230,
-      "baseSkillPowerS": 57.0,
-      "freeAttributePointsEarned": 66
+      "xpToNext": 10620,
+      "cumulativeXp": 94990,
+      "combatBudgetLevel": 21.2,
+      "baseMaxHp": 221,
+      "baseSkillPowerS": 39.21,
+      "freeAttributePointsEarned": 63,
+      "skillPointsWithChapterTwo": 22
     },
     {
       "level": 24,
-      "xpToNext": 3550,
-      "cumulativeXp": 30130,
-      "baseMaxHp": 235,
-      "baseSkillPowerS": 58.5,
-      "freeAttributePointsEarned": 69
+      "xpToNext": 10770,
+      "cumulativeXp": 105610,
+      "combatBudgetLevel": 21.6,
+      "baseMaxHp": 223,
+      "baseSkillPowerS": 39.63,
+      "freeAttributePointsEarned": 65,
+      "skillPointsWithChapterTwo": 23
     },
     {
       "level": 25,
-      "xpToNext": 3820,
-      "cumulativeXp": 33680,
-      "baseMaxHp": 240,
-      "baseSkillPowerS": 60.0,
-      "freeAttributePointsEarned": 72
+      "xpToNext": 10920,
+      "cumulativeXp": 116380,
+      "combatBudgetLevel": 22.0,
+      "baseMaxHp": 225,
+      "baseSkillPowerS": 40.05,
+      "freeAttributePointsEarned": 67,
+      "skillPointsWithChapterTwo": 23
     },
     {
       "level": 26,
-      "xpToNext": 4100,
-      "cumulativeXp": 37500,
-      "baseMaxHp": 245,
-      "baseSkillPowerS": 61.5,
-      "freeAttributePointsEarned": 75
+      "xpToNext": 11070,
+      "cumulativeXp": 127300,
+      "combatBudgetLevel": 22.4,
+      "baseMaxHp": 227,
+      "baseSkillPowerS": 40.47,
+      "freeAttributePointsEarned": 69,
+      "skillPointsWithChapterTwo": 24
     },
     {
       "level": 27,
-      "xpToNext": 4390,
-      "cumulativeXp": 41600,
-      "baseMaxHp": 250,
-      "baseSkillPowerS": 63.0,
-      "freeAttributePointsEarned": 78
+      "xpToNext": 11220,
+      "cumulativeXp": 138370,
+      "combatBudgetLevel": 22.8,
+      "baseMaxHp": 229,
+      "baseSkillPowerS": 40.89,
+      "freeAttributePointsEarned": 71,
+      "skillPointsWithChapterTwo": 24
     },
     {
       "level": 28,
-      "xpToNext": 4690,
-      "cumulativeXp": 45990,
-      "baseMaxHp": 255,
-      "baseSkillPowerS": 64.5,
-      "freeAttributePointsEarned": 81
+      "xpToNext": 11370,
+      "cumulativeXp": 149590,
+      "combatBudgetLevel": 23.2,
+      "baseMaxHp": 231,
+      "baseSkillPowerS": 41.31,
+      "freeAttributePointsEarned": 73,
+      "skillPointsWithChapterTwo": 25
     },
     {
       "level": 29,
-      "xpToNext": 5000,
-      "cumulativeXp": 50680,
-      "baseMaxHp": 260,
-      "baseSkillPowerS": 66.0,
-      "freeAttributePointsEarned": 84
+      "xpToNext": 11520,
+      "cumulativeXp": 160960,
+      "combatBudgetLevel": 23.6,
+      "baseMaxHp": 233,
+      "baseSkillPowerS": 41.73,
+      "freeAttributePointsEarned": 75,
+      "skillPointsWithChapterTwo": 25
     },
     {
       "level": 30,
-      "xpToNext": 5320,
-      "cumulativeXp": 55680,
-      "baseMaxHp": 265,
-      "baseSkillPowerS": 67.5,
-      "freeAttributePointsEarned": 87
+      "xpToNext": 11670,
+      "cumulativeXp": 172480,
+      "combatBudgetLevel": 24.0,
+      "baseMaxHp": 235,
+      "baseSkillPowerS": 42.15,
+      "freeAttributePointsEarned": 77,
+      "skillPointsWithChapterTwo": 26
     },
     {
       "level": 31,
-      "xpToNext": 5650,
-      "cumulativeXp": 61000,
-      "baseMaxHp": 270,
-      "baseSkillPowerS": 69.0,
-      "freeAttributePointsEarned": 90
+      "xpToNext": 11820,
+      "cumulativeXp": 184150,
+      "combatBudgetLevel": 24.4,
+      "baseMaxHp": 237,
+      "baseSkillPowerS": 42.57,
+      "freeAttributePointsEarned": 79,
+      "skillPointsWithChapterTwo": 26
     },
     {
       "level": 32,
-      "xpToNext": 5990,
-      "cumulativeXp": 66650,
-      "baseMaxHp": 275,
-      "baseSkillPowerS": 70.5,
-      "freeAttributePointsEarned": 93
+      "xpToNext": 11970,
+      "cumulativeXp": 195970,
+      "combatBudgetLevel": 24.8,
+      "baseMaxHp": 239,
+      "baseSkillPowerS": 42.99,
+      "freeAttributePointsEarned": 81,
+      "skillPointsWithChapterTwo": 27
     },
     {
       "level": 33,
-      "xpToNext": 6340,
-      "cumulativeXp": 72640,
-      "baseMaxHp": 280,
-      "baseSkillPowerS": 72.0,
-      "freeAttributePointsEarned": 96
+      "xpToNext": 12120,
+      "cumulativeXp": 207940,
+      "combatBudgetLevel": 25.2,
+      "baseMaxHp": 241,
+      "baseSkillPowerS": 43.41,
+      "freeAttributePointsEarned": 83,
+      "skillPointsWithChapterTwo": 27
     },
     {
       "level": 34,
-      "xpToNext": 6700,
-      "cumulativeXp": 78980,
-      "baseMaxHp": 285,
-      "baseSkillPowerS": 73.5,
-      "freeAttributePointsEarned": 99
+      "xpToNext": 12270,
+      "cumulativeXp": 220060,
+      "combatBudgetLevel": 25.6,
+      "baseMaxHp": 243,
+      "baseSkillPowerS": 43.83,
+      "freeAttributePointsEarned": 85,
+      "skillPointsWithChapterTwo": 28
     },
     {
       "level": 35,
-      "xpToNext": 7070,
-      "cumulativeXp": 85680,
-      "baseMaxHp": 290,
-      "baseSkillPowerS": 75.0,
-      "freeAttributePointsEarned": 102
+      "xpToNext": 12420,
+      "cumulativeXp": 232330,
+      "combatBudgetLevel": 26.0,
+      "baseMaxHp": 245,
+      "baseSkillPowerS": 44.25,
+      "freeAttributePointsEarned": 87,
+      "skillPointsWithChapterTwo": 28
     },
     {
       "level": 36,
-      "xpToNext": 7450,
-      "cumulativeXp": 92750,
-      "baseMaxHp": 295,
-      "baseSkillPowerS": 76.5,
-      "freeAttributePointsEarned": 105
+      "xpToNext": 12570,
+      "cumulativeXp": 244750,
+      "combatBudgetLevel": 26.4,
+      "baseMaxHp": 247,
+      "baseSkillPowerS": 44.67,
+      "freeAttributePointsEarned": 89,
+      "skillPointsWithChapterTwo": 29
     },
     {
       "level": 37,
-      "xpToNext": 7840,
-      "cumulativeXp": 100200,
-      "baseMaxHp": 300,
-      "baseSkillPowerS": 78.0,
-      "freeAttributePointsEarned": 108
+      "xpToNext": 12720,
+      "cumulativeXp": 257320,
+      "combatBudgetLevel": 26.8,
+      "baseMaxHp": 249,
+      "baseSkillPowerS": 45.09,
+      "freeAttributePointsEarned": 91,
+      "skillPointsWithChapterTwo": 29
     },
     {
       "level": 38,
-      "xpToNext": 8240,
-      "cumulativeXp": 108040,
-      "baseMaxHp": 305,
-      "baseSkillPowerS": 79.5,
-      "freeAttributePointsEarned": 111
+      "xpToNext": 12870,
+      "cumulativeXp": 270040,
+      "combatBudgetLevel": 27.2,
+      "baseMaxHp": 251,
+      "baseSkillPowerS": 45.51,
+      "freeAttributePointsEarned": 93,
+      "skillPointsWithChapterTwo": 30
     },
     {
       "level": 39,
-      "xpToNext": 8650,
-      "cumulativeXp": 116280,
-      "baseMaxHp": 310,
-      "baseSkillPowerS": 81.0,
-      "freeAttributePointsEarned": 114
+      "xpToNext": 13020,
+      "cumulativeXp": 282910,
+      "combatBudgetLevel": 27.6,
+      "baseMaxHp": 253,
+      "baseSkillPowerS": 45.93,
+      "freeAttributePointsEarned": 95,
+      "skillPointsWithChapterTwo": 30
     },
     {
       "level": 40,
+      "xpToNext": 13170,
+      "cumulativeXp": 295930,
+      "combatBudgetLevel": 28.0,
+      "baseMaxHp": 255,
+      "baseSkillPowerS": 46.35,
+      "freeAttributePointsEarned": 97,
+      "skillPointsWithChapterTwo": 31
+    },
+    {
+      "level": 41,
+      "xpToNext": 13320,
+      "cumulativeXp": 309100,
+      "combatBudgetLevel": 28.4,
+      "baseMaxHp": 257,
+      "baseSkillPowerS": 46.77,
+      "freeAttributePointsEarned": 99,
+      "skillPointsWithChapterTwo": 31
+    },
+    {
+      "level": 42,
+      "xpToNext": 13470,
+      "cumulativeXp": 322420,
+      "combatBudgetLevel": 28.8,
+      "baseMaxHp": 259,
+      "baseSkillPowerS": 47.19,
+      "freeAttributePointsEarned": 101,
+      "skillPointsWithChapterTwo": 32
+    },
+    {
+      "level": 43,
+      "xpToNext": 13620,
+      "cumulativeXp": 335890,
+      "combatBudgetLevel": 29.2,
+      "baseMaxHp": 261,
+      "baseSkillPowerS": 47.61,
+      "freeAttributePointsEarned": 103,
+      "skillPointsWithChapterTwo": 32
+    },
+    {
+      "level": 44,
+      "xpToNext": 13770,
+      "cumulativeXp": 349510,
+      "combatBudgetLevel": 29.6,
+      "baseMaxHp": 263,
+      "baseSkillPowerS": 48.03,
+      "freeAttributePointsEarned": 105,
+      "skillPointsWithChapterTwo": 33
+    },
+    {
+      "level": 45,
+      "xpToNext": 13920,
+      "cumulativeXp": 363280,
+      "combatBudgetLevel": 30.0,
+      "baseMaxHp": 265,
+      "baseSkillPowerS": 48.45,
+      "freeAttributePointsEarned": 107,
+      "skillPointsWithChapterTwo": 33
+    },
+    {
+      "level": 46,
+      "xpToNext": 14070,
+      "cumulativeXp": 377200,
+      "combatBudgetLevel": 30.4,
+      "baseMaxHp": 267,
+      "baseSkillPowerS": 48.87,
+      "freeAttributePointsEarned": 109,
+      "skillPointsWithChapterTwo": 34
+    },
+    {
+      "level": 47,
+      "xpToNext": 14220,
+      "cumulativeXp": 391270,
+      "combatBudgetLevel": 30.8,
+      "baseMaxHp": 269,
+      "baseSkillPowerS": 49.29,
+      "freeAttributePointsEarned": 111,
+      "skillPointsWithChapterTwo": 34
+    },
+    {
+      "level": 48,
+      "xpToNext": 14370,
+      "cumulativeXp": 405490,
+      "combatBudgetLevel": 31.2,
+      "baseMaxHp": 271,
+      "baseSkillPowerS": 49.71,
+      "freeAttributePointsEarned": 113,
+      "skillPointsWithChapterTwo": 35
+    },
+    {
+      "level": 49,
+      "xpToNext": 14520,
+      "cumulativeXp": 419860,
+      "combatBudgetLevel": 31.6,
+      "baseMaxHp": 273,
+      "baseSkillPowerS": 50.13,
+      "freeAttributePointsEarned": 115,
+      "skillPointsWithChapterTwo": 35
+    },
+    {
+      "level": 50,
+      "xpToNext": 14670,
+      "cumulativeXp": 434380,
+      "combatBudgetLevel": 32.0,
+      "baseMaxHp": 275,
+      "baseSkillPowerS": 50.55,
+      "freeAttributePointsEarned": 117,
+      "skillPointsWithChapterTwo": 36
+    },
+    {
+      "level": 51,
+      "xpToNext": 14820,
+      "cumulativeXp": 449050,
+      "combatBudgetLevel": 32.3,
+      "baseMaxHp": 277,
+      "baseSkillPowerS": 50.865,
+      "freeAttributePointsEarned": 119,
+      "skillPointsWithChapterTwo": 36
+    },
+    {
+      "level": 52,
+      "xpToNext": 14970,
+      "cumulativeXp": 463870,
+      "combatBudgetLevel": 32.6,
+      "baseMaxHp": 278,
+      "baseSkillPowerS": 51.18,
+      "freeAttributePointsEarned": 121,
+      "skillPointsWithChapterTwo": 37
+    },
+    {
+      "level": 53,
+      "xpToNext": 15120,
+      "cumulativeXp": 478840,
+      "combatBudgetLevel": 32.9,
+      "baseMaxHp": 280,
+      "baseSkillPowerS": 51.495,
+      "freeAttributePointsEarned": 123,
+      "skillPointsWithChapterTwo": 37
+    },
+    {
+      "level": 54,
+      "xpToNext": 15270,
+      "cumulativeXp": 493960,
+      "combatBudgetLevel": 33.2,
+      "baseMaxHp": 281,
+      "baseSkillPowerS": 51.81,
+      "freeAttributePointsEarned": 125,
+      "skillPointsWithChapterTwo": 38
+    },
+    {
+      "level": 55,
+      "xpToNext": 15420,
+      "cumulativeXp": 509230,
+      "combatBudgetLevel": 33.5,
+      "baseMaxHp": 283,
+      "baseSkillPowerS": 52.125,
+      "freeAttributePointsEarned": 127,
+      "skillPointsWithChapterTwo": 38
+    },
+    {
+      "level": 56,
+      "xpToNext": 15570,
+      "cumulativeXp": 524650,
+      "combatBudgetLevel": 33.8,
+      "baseMaxHp": 284,
+      "baseSkillPowerS": 52.44,
+      "freeAttributePointsEarned": 129,
+      "skillPointsWithChapterTwo": 39
+    },
+    {
+      "level": 57,
+      "xpToNext": 15720,
+      "cumulativeXp": 540220,
+      "combatBudgetLevel": 34.1,
+      "baseMaxHp": 286,
+      "baseSkillPowerS": 52.755,
+      "freeAttributePointsEarned": 131,
+      "skillPointsWithChapterTwo": 39
+    },
+    {
+      "level": 58,
+      "xpToNext": 15870,
+      "cumulativeXp": 555940,
+      "combatBudgetLevel": 34.4,
+      "baseMaxHp": 287,
+      "baseSkillPowerS": 53.07,
+      "freeAttributePointsEarned": 133,
+      "skillPointsWithChapterTwo": 40
+    },
+    {
+      "level": 59,
+      "xpToNext": 16020,
+      "cumulativeXp": 571810,
+      "combatBudgetLevel": 34.7,
+      "baseMaxHp": 289,
+      "baseSkillPowerS": 53.385,
+      "freeAttributePointsEarned": 135,
+      "skillPointsWithChapterTwo": 40
+    },
+    {
+      "level": 60,
+      "xpToNext": 16170,
+      "cumulativeXp": 587830,
+      "combatBudgetLevel": 35.0,
+      "baseMaxHp": 290,
+      "baseSkillPowerS": 53.7,
+      "freeAttributePointsEarned": 137,
+      "skillPointsWithChapterTwo": 41
+    },
+    {
+      "level": 61,
+      "xpToNext": 16320,
+      "cumulativeXp": 604000,
+      "combatBudgetLevel": 35.3,
+      "baseMaxHp": 292,
+      "baseSkillPowerS": 54.015,
+      "freeAttributePointsEarned": 139,
+      "skillPointsWithChapterTwo": 41
+    },
+    {
+      "level": 62,
+      "xpToNext": 16470,
+      "cumulativeXp": 620320,
+      "combatBudgetLevel": 35.6,
+      "baseMaxHp": 293,
+      "baseSkillPowerS": 54.33,
+      "freeAttributePointsEarned": 141,
+      "skillPointsWithChapterTwo": 42
+    },
+    {
+      "level": 63,
+      "xpToNext": 16620,
+      "cumulativeXp": 636790,
+      "combatBudgetLevel": 35.9,
+      "baseMaxHp": 295,
+      "baseSkillPowerS": 54.645,
+      "freeAttributePointsEarned": 143,
+      "skillPointsWithChapterTwo": 42
+    },
+    {
+      "level": 64,
+      "xpToNext": 16770,
+      "cumulativeXp": 653410,
+      "combatBudgetLevel": 36.2,
+      "baseMaxHp": 296,
+      "baseSkillPowerS": 54.96,
+      "freeAttributePointsEarned": 145,
+      "skillPointsWithChapterTwo": 43
+    },
+    {
+      "level": 65,
+      "xpToNext": 16920,
+      "cumulativeXp": 670180,
+      "combatBudgetLevel": 36.5,
+      "baseMaxHp": 298,
+      "baseSkillPowerS": 55.275,
+      "freeAttributePointsEarned": 147,
+      "skillPointsWithChapterTwo": 43
+    },
+    {
+      "level": 66,
+      "xpToNext": 17070,
+      "cumulativeXp": 687100,
+      "combatBudgetLevel": 36.8,
+      "baseMaxHp": 299,
+      "baseSkillPowerS": 55.59,
+      "freeAttributePointsEarned": 149,
+      "skillPointsWithChapterTwo": 44
+    },
+    {
+      "level": 67,
+      "xpToNext": 17220,
+      "cumulativeXp": 704170,
+      "combatBudgetLevel": 37.1,
+      "baseMaxHp": 301,
+      "baseSkillPowerS": 55.905,
+      "freeAttributePointsEarned": 151,
+      "skillPointsWithChapterTwo": 44
+    },
+    {
+      "level": 68,
+      "xpToNext": 17370,
+      "cumulativeXp": 721390,
+      "combatBudgetLevel": 37.4,
+      "baseMaxHp": 302,
+      "baseSkillPowerS": 56.22,
+      "freeAttributePointsEarned": 153,
+      "skillPointsWithChapterTwo": 45
+    },
+    {
+      "level": 69,
+      "xpToNext": 17520,
+      "cumulativeXp": 738760,
+      "combatBudgetLevel": 37.7,
+      "baseMaxHp": 304,
+      "baseSkillPowerS": 56.535,
+      "freeAttributePointsEarned": 155,
+      "skillPointsWithChapterTwo": 45
+    },
+    {
+      "level": 70,
+      "xpToNext": 17670,
+      "cumulativeXp": 756280,
+      "combatBudgetLevel": 38.0,
+      "baseMaxHp": 305,
+      "baseSkillPowerS": 56.85,
+      "freeAttributePointsEarned": 157,
+      "skillPointsWithChapterTwo": 46
+    },
+    {
+      "level": 71,
+      "xpToNext": 17820,
+      "cumulativeXp": 773950,
+      "combatBudgetLevel": 38.2,
+      "baseMaxHp": 306,
+      "baseSkillPowerS": 57.06,
+      "freeAttributePointsEarned": 159,
+      "skillPointsWithChapterTwo": 46
+    },
+    {
+      "level": 72,
+      "xpToNext": 17970,
+      "cumulativeXp": 791770,
+      "combatBudgetLevel": 38.4,
+      "baseMaxHp": 307,
+      "baseSkillPowerS": 57.27,
+      "freeAttributePointsEarned": 161,
+      "skillPointsWithChapterTwo": 47
+    },
+    {
+      "level": 73,
+      "xpToNext": 18120,
+      "cumulativeXp": 809740,
+      "combatBudgetLevel": 38.6,
+      "baseMaxHp": 308,
+      "baseSkillPowerS": 57.48,
+      "freeAttributePointsEarned": 163,
+      "skillPointsWithChapterTwo": 47
+    },
+    {
+      "level": 74,
+      "xpToNext": 18270,
+      "cumulativeXp": 827860,
+      "combatBudgetLevel": 38.8,
+      "baseMaxHp": 309,
+      "baseSkillPowerS": 57.69,
+      "freeAttributePointsEarned": 165,
+      "skillPointsWithChapterTwo": 48
+    },
+    {
+      "level": 75,
+      "xpToNext": 18420,
+      "cumulativeXp": 846130,
+      "combatBudgetLevel": 39.0,
+      "baseMaxHp": 310,
+      "baseSkillPowerS": 57.9,
+      "freeAttributePointsEarned": 167,
+      "skillPointsWithChapterTwo": 48
+    },
+    {
+      "level": 76,
+      "xpToNext": 18570,
+      "cumulativeXp": 864550,
+      "combatBudgetLevel": 39.2,
+      "baseMaxHp": 311,
+      "baseSkillPowerS": 58.11,
+      "freeAttributePointsEarned": 169,
+      "skillPointsWithChapterTwo": 49
+    },
+    {
+      "level": 77,
+      "xpToNext": 18720,
+      "cumulativeXp": 883120,
+      "combatBudgetLevel": 39.4,
+      "baseMaxHp": 312,
+      "baseSkillPowerS": 58.32,
+      "freeAttributePointsEarned": 171,
+      "skillPointsWithChapterTwo": 49
+    },
+    {
+      "level": 78,
+      "xpToNext": 18870,
+      "cumulativeXp": 901840,
+      "combatBudgetLevel": 39.6,
+      "baseMaxHp": 313,
+      "baseSkillPowerS": 58.53,
+      "freeAttributePointsEarned": 173,
+      "skillPointsWithChapterTwo": 50
+    },
+    {
+      "level": 79,
+      "xpToNext": 19020,
+      "cumulativeXp": 920710,
+      "combatBudgetLevel": 39.8,
+      "baseMaxHp": 314,
+      "baseSkillPowerS": 58.74,
+      "freeAttributePointsEarned": 175,
+      "skillPointsWithChapterTwo": 50
+    },
+    {
+      "level": 80,
       "xpToNext": 0,
-      "cumulativeXp": 124930,
+      "cumulativeXp": 939730,
+      "combatBudgetLevel": 40.0,
       "baseMaxHp": 315,
-      "baseSkillPowerS": 82.5,
-      "freeAttributePointsEarned": 117
+      "baseSkillPowerS": 58.95,
+      "freeAttributePointsEarned": 177,
+      "skillPointsWithChapterTwo": 51
     }
   ],
   "skillRankGates": {
@@ -22182,7 +23086,41 @@ export const PROGRESSION = {
     "M6": 30,
     "M7": 39,
     "M8": 40
-  }
+  },
+  "combatBudgetAnchors": [
+    [
+      1,
+      1
+    ],
+    [
+      20,
+      20
+    ],
+    [
+      30,
+      24
+    ],
+    [
+      40,
+      28
+    ],
+    [
+      50,
+      32
+    ],
+    [
+      60,
+      35
+    ],
+    [
+      70,
+      38
+    ],
+    [
+      80,
+      40
+    ]
+  ]
 };
 export const COMBAT_STYLES = {
   "WAR": {
@@ -22207,7 +23145,8 @@ export const COMBAT_STYLES = {
     "shape": "火核投射、减速条带火墙、火羽护盾与终极陨星",
     "timing": "横置火墙→投射输出→护盾应急→陨星爆发",
     "silhouette": "volumetricFireburst",
-    "spectacle": "火墙贴地保留可读边界，陨星主爆后迅速退亮；敌方预警置顶，余焰不增加隐藏伤害。"
+    "spectacle": "火墙贴地保留可读边界，陨星主爆后迅速退亮；敌方预警置顶，余焰不增加隐藏伤害。",
+    "ultimate": "FIR_02"
   },
   "THU": {
     "name": "雷霆秘术",
@@ -22247,7 +23186,7 @@ export const EQUIPMENT_EFFECTS:Record<string,string> = {
   "W02": "每第三次战技直接命中追加4火伤，CD2s；不产生场景燃烧。",
   "W03": "破阵技能对普通盾卫削韧+4、Boss+2，每次施放一次，CD3s。",
   "W04": "破军交斩直接命中2敌后，下一断空剑气伤害+8%，4s内一次，CD8s。",
-  "W05": "裂地审判终结段伤害+10%，计入增伤上限；没有额外施放键。",
+  "W05": "旋风斩终结段伤害+10%，计入增伤上限；没有额外施放键。",
   "W06": "直接主动技能命中自己的猎王印目标时得8护盾3s，CD10s，每cast一次；不消费或刷新猎王印，不触发额外攻击。",
   "W07": "穿云箭对首个普通盾卫的削韧+4，每次施放一次。",
   "W08": "弓术直接命中后移动速度+8%，2s，CD4s。",
@@ -22313,7 +23252,7 @@ export const EQUIPMENT_EFFECTS:Record<string,string> = {
   "DE02": "弓术命中后移动速度+8%，2s，CD5s。",
   "DE03": "灵泉复苏治疗量相对+8%，其前摇/后摇移动倍率为1.0；不增加治疗段数。",
   "DE04": "疾影步后下次战技削韧+3，3s内一次，CD8s；Boss+1.5。",
-  "DE05": "裂地审判对机械敌额外削韧6，Boss+3，CD6s。",
+  "DE05": "旋风斩对机械敌额外削韧6，Boss+3，CD6s。",
   "DE06": "每第三次战技直接命中得4护盾3s，CD8s。",
   "DE07": "铁誓壁垒结束且曾吸收实际伤害，下一次基础攻击伤害+12%，4s内一次；取消和换装不触发。",
   "DE08": "非终极火/雷技能每次施放首次直接命中自己的猎王印目标时，该次命中伤害+8%，CD10s，计入统一增伤上限；只修正已有命中，不生成技能或额外载荷。"
@@ -22378,9 +23317,9 @@ export const COMBAT_RULES = {
     "THU_04",
     "THU_05"
   ],
-  "lightningNetworkConnections": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+  "lightningNetworkConnections": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
   "lightningNetworkEdgesDoNotAddDamage": true,
-  "localPlaytestMaxLevel": true,
+  "localPlaytestMaxLevel": false,
   "ultimateRequiresCharge": false,
   "playerProjectileSpeeds": {
     "basicArrow": 24,
@@ -22405,5 +23344,10 @@ export const COMBAT_RULES = {
   ],
   "ultimateCooldownSeconds": 12,
   "dodgeCooldownSeconds": 2,
-  "skillCooldownsAlwaysEnabled": true
+  "skillCooldownsAlwaysEnabled": true,
+  "fireKitRevision": 2,
+  "damageBalanceRevision": 1,
+  "maxLevelDevelopmentOnly": true,
+  "encounterBalanceRevision": 1,
+  "progressionRevision": 3
 };

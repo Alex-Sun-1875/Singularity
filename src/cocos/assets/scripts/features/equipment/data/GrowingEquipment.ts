@@ -4,6 +4,8 @@ import type {AreaDef} from '../../../core/Contracts';
 import {lifecycleWeaponBase,mainBossChapter} from './EquipmentLifecycle';
 import {equipmentText} from '../locales';
 import {FIELD_QUEST_EVENTS} from '../../campaign/data/FieldQuests';
+import {weaponPowerMultiplier,weaponPowerBonusPercent} from './WeaponPower';
+import {CAMPAIGN_MAX_LEVEL,combatBudgetLevel} from '../../progression/data/CampaignProgression';
 
 export const GROWING_IDS=['DG_L01','DG_L02','DG_L03','DG_L04','DG_L05','DG_L06','DG_A01','DG_A02','DG_A03','DG_A04','DG_A05'] as const;
 export const GROWING_ITEMS:ItemDef[]=[
@@ -26,17 +28,17 @@ export const ARTIFACT_WEAPONS=['DG_A01','DG_A03','DG_A04','DG_A05'] as const;
 export const artifactWeaponForStyle={WAR:'DG_A01',BOW:'DG_A03',FIR:'DG_A04',THU:'DG_A05'} as const;
 export const GROWING_EQUIPMENT:Record<string,ItemDef>=Object.fromEntries(GROWING_ITEMS.map(i=>[i.id,i]));
 export function growingStats(id:string,level:number){
- const item=GROWING_EQUIPMENT[id],l=Math.max(1,Math.min(40,level));
+ const item=GROWING_EQUIPMENT[id],l=Math.max(1,Math.min(CAMPAIGN_MAX_LEVEL,level)),budget=combatBudgetLevel(l);
  const artifact=item?.quality==='神器';
- const power=item?.slot==='weapon'?Math.max(Math.round((18+3*(l-1))*(artifact?1.08:1)),Math.round(lifecycleWeaponBase(l)*(artifact?1.25:1.18))):0;
- const attribute=item?.growthAttribute?1+Math.floor((l-1)/8):0;
- const maxHp=id==='DG_L05'?8+l:id==='DG_L06'?12+l:id==='DG_A02'?16+Math.floor(1.2*l):0;
- return {power,attribute,maxHp,multiplier:power?1+power/300:1};
+ const power=item?.slot==='weapon'?Math.max(Math.round((18+3*(budget-1))*(artifact?1.08:1)),Math.round(lifecycleWeaponBase(l)*(artifact?1.25:1.18))):0;
+ const attribute=item?.growthAttribute?1+Math.floor((budget-1)/8):0;
+ const maxHp=id==='DG_L05'?8+Math.floor(budget):id==='DG_L06'?12+Math.floor(budget):id==='DG_A02'?16+Math.floor(1.2*budget):0;
+ return {power,attribute,maxHp,multiplier:weaponPowerMultiplier(power)};
 }
 export function growingDescription(item:ItemDef,level:number){
  if(!GROWING_EQUIPMENT[item.id])return item.description;
  const s=growingStats(item.id,level),a={strength:'力量',dexterity:'敏捷',intellect:'智力'};
- return `全等级可用 · 当前按Lv${level}成长 · 本旅程唯一\n${s.power?`武器强度 ${s.power}；基础攻击/技能威力 +${(s.power/3).toFixed(1)}%；${a[item.growthAttribute!]} +${s.attribute}。`: `最大生命 +${s.maxHp}。`}\n${item.description}\n来源：${item.source}`;
+ return `全等级可用 · 当前按Lv${level}成长 · 本旅程唯一\n${s.power?`武器强度 ${s.power}；基础攻击/技能威力 +${weaponPowerBonusPercent(s.power).toFixed(1)}%；${a[item.growthAttribute!]} +${s.attribute}。`: `最大生命 +${s.maxHp}。`}\n${item.description}\n来源：${item.source}`;
 }
 export interface GrowingScene {id:string;area:string;label:string;x:number;z:number;item?:string;flag?:string;chance:number}
 export const GROWING_SCENES:GrowingScene[]=[

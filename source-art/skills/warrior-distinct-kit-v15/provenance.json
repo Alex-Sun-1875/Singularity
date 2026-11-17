@@ -1,0 +1,747 @@
+{
+  "status": "Differentiated warrior kit awaiting visual review; accepted silver material retained.",
+  "directionAccepted": false,
+  "latestDirection": "Different skills have distinct shapes. Basic short trails; two focused cuts; rush lines and impact cross; kite shield; ground fracture and chips; sweep-rise-cross finisher. Crossings only on rush and finisher.",
+  "source": "Native Cocos 3D actors and actual skill events. Existing silver textures reused. New code-native ground fissures, rock chips and shield edges; no image generation in this revision.",
+  "video": {
+    "frames": 593,
+    "fps": 30,
+    "seconds": 19.766666666666666
+  },
+  "gifs": [
+    {
+      "file": "basic_war.gif",
+      "frames": 30,
+      "milliseconds": 1970
+    },
+    {
+      "file": "ground-cleave-detail.gif",
+      "frames": 56,
+      "milliseconds": 3730
+    },
+    {
+      "file": "shockwave-detail.gif",
+      "frames": 72,
+      "milliseconds": 4800
+    },
+    {
+      "file": "skill-contrast.gif",
+      "frames": 54,
+      "milliseconds": 3600
+    },
+    {
+      "file": "war_01.gif",
+      "frames": 36,
+      "milliseconds": 2400
+    },
+    {
+      "file": "war_02.gif",
+      "frames": 27,
+      "milliseconds": 1800
+    },
+    {
+      "file": "war_03.gif",
+      "frames": 54,
+      "milliseconds": 3600
+    },
+    {
+      "file": "war_04.gif",
+      "frames": 28,
+      "milliseconds": 1870
+    },
+    {
+      "file": "war_05.gif",
+      "frames": 34,
+      "milliseconds": 2270
+    },
+    {
+      "file": "war_p1-focus.gif",
+      "frames": 22,
+      "milliseconds": 1470
+    },
+    {
+      "file": "war_p1.gif",
+      "frames": 34,
+      "milliseconds": 2270
+    },
+    {
+      "file": "war_p2-focus.gif",
+      "frames": 21,
+      "milliseconds": 1400
+    },
+    {
+      "file": "war_p2.gif",
+      "frames": 54,
+      "milliseconds": 3600
+    }
+  ],
+  "gameHash": "f30b76bbc67318f05940a90d9a65fcceed59c86083f6c9a502028fee7f73b2e5",
+  "shots": {
+    "BASIC_WAR": {
+      "name": "普攻三连",
+      "frames": 59,
+      "roles": [
+        "basic-trail"
+      ],
+      "events": [
+        {
+          "time": 0.4,
+          "type": "hit",
+          "id": "study-target-0",
+          "stage": 1,
+          "value": 25
+        },
+        {
+          "time": 0.4,
+          "type": "notice",
+          "reason": "威胁已解除，安全等待 5 秒后可换装"
+        },
+        {
+          "time": 0.8,
+          "type": "hit",
+          "id": "study-target-0",
+          "stage": 2,
+          "value": 28
+        },
+        {
+          "time": 0.8,
+          "type": "notice",
+          "reason": "威胁已解除，安全等待 5 秒后可换装"
+        },
+        {
+          "time": 1.2666666666666666,
+          "type": "hit",
+          "id": "study-target-0",
+          "stage": 3,
+          "value": 36
+        },
+        {
+          "time": 1.2666666666666666,
+          "type": "notice",
+          "reason": "威胁已解除，安全等待 5 秒后可换装"
+        }
+      ],
+      "clips": [
+        "idle",
+        "attack_sword",
+        "attack_sword_2",
+        "attack_sword_3"
+      ],
+      "reviewInputs": {
+        "refine-modules.cjs": "62a06b8f04e7922816be39c06f217da4ea382ddd6393647ac9fe1628620afc01",
+        "WarriorKitStudy.ts": "57e76abea475acc65e26bcedaf87d5faca9d45de8120a098b4d7e07426493c1c",
+        "blade.png": "8df49e281e79a84b2847e4b7f0623929fd546a834986ab5b2ceb0e59af9a5043",
+        "guard.png": "94963f33c6f2a79145b3714f65c0c2ac5ad4f49cbe7126c6e6b4c5c6403eae37",
+        "white.png": "803f3b73e9e4960c1b25d25b1dcb493de6cb51a001fbcc7f604e4dfe62c8c26e"
+      }
+    },
+    "WAR_01": {
+      "name": "断空斩",
+      "frames": 72,
+      "roles": [
+        "focused-cut"
+      ],
+      "events": [
+        {
+          "time": 0.3,
+          "type": "skill_cast",
+          "skill": "WAR_01",
+          "segment": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "skill_release",
+          "skill": "WAR_01",
+          "segment": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "skill_segment",
+          "skill": "WAR_01",
+          "segment": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "hit",
+          "skill": "WAR_01",
+          "id": "study-target-0",
+          "value": 164
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "skill_hit",
+          "skill": "WAR_01",
+          "target": "study-target-0",
+          "segment": 0,
+          "value": 164
+        },
+        {
+          "time": 0.6,
+          "type": "skill_segment",
+          "skill": "WAR_01",
+          "segment": 1
+        },
+        {
+          "time": 0.6,
+          "type": "hit",
+          "skill": "WAR_01",
+          "id": "study-target-0",
+          "value": 164
+        },
+        {
+          "time": 0.6,
+          "type": "skill_hit",
+          "skill": "WAR_01",
+          "target": "study-target-0",
+          "segment": 1,
+          "value": 164
+        },
+        {
+          "time": 0.8,
+          "type": "notice",
+          "reason": "威胁已解除，安全等待 5 秒后可换装"
+        }
+      ],
+      "clips": [
+        "idle",
+        "attack_sword",
+        "attack_sword_2"
+      ],
+      "reviewInputs": {
+        "refine-modules.cjs": "62a06b8f04e7922816be39c06f217da4ea382ddd6393647ac9fe1628620afc01",
+        "WarriorKitStudy.ts": "57e76abea475acc65e26bcedaf87d5faca9d45de8120a098b4d7e07426493c1c",
+        "blade.png": "8df49e281e79a84b2847e4b7f0623929fd546a834986ab5b2ceb0e59af9a5043",
+        "guard.png": "94963f33c6f2a79145b3714f65c0c2ac5ad4f49cbe7126c6e6b4c5c6403eae37",
+        "white.png": "803f3b73e9e4960c1b25d25b1dcb493de6cb51a001fbcc7f604e4dfe62c8c26e"
+      }
+    },
+    "WAR_02": {
+      "name": "破军突袭",
+      "frames": 54,
+      "roles": [
+        "rush-cross",
+        "rush-streak"
+      ],
+      "events": [
+        {
+          "time": 0.3,
+          "type": "skill_cast",
+          "skill": "WAR_02",
+          "segment": 0
+        },
+        {
+          "time": 0.4,
+          "type": "skill_release",
+          "skill": "WAR_02",
+          "segment": 0
+        },
+        {
+          "time": 0.5666666666666667,
+          "type": "skill_segment",
+          "skill": "WAR_02",
+          "segment": 0
+        },
+        {
+          "time": 0.5666666666666667,
+          "type": "hit",
+          "skill": "WAR_02",
+          "id": "study-target-0",
+          "value": 123
+        },
+        {
+          "time": 0.5666666666666667,
+          "type": "skill_hit",
+          "skill": "WAR_02",
+          "target": "study-target-0",
+          "segment": 0,
+          "value": 123
+        },
+        {
+          "time": 0.8,
+          "type": "notice",
+          "reason": "威胁已解除，安全等待 5 秒后可换装"
+        }
+      ],
+      "clips": [
+        "idle",
+        "attack_sword"
+      ],
+      "reviewInputs": {
+        "refine-modules.cjs": "62a06b8f04e7922816be39c06f217da4ea382ddd6393647ac9fe1628620afc01",
+        "WarriorKitStudy.ts": "57e76abea475acc65e26bcedaf87d5faca9d45de8120a098b4d7e07426493c1c",
+        "blade.png": "8df49e281e79a84b2847e4b7f0623929fd546a834986ab5b2ceb0e59af9a5043",
+        "guard.png": "94963f33c6f2a79145b3714f65c0c2ac5ad4f49cbe7126c6e6b4c5c6403eae37",
+        "white.png": "803f3b73e9e4960c1b25d25b1dcb493de6cb51a001fbcc7f604e4dfe62c8c26e"
+      }
+    },
+    "WAR_03": {
+      "name": "铁誓壁垒",
+      "frames": 108,
+      "roles": [
+        "shield-hit",
+        "shield-outline",
+        "shield-rib"
+      ],
+      "events": [
+        {
+          "time": 0.3,
+          "type": "skill_cast",
+          "skill": "WAR_03",
+          "segment": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "skill_release",
+          "skill": "WAR_03",
+          "segment": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "skill_status",
+          "skill": "WAR_03",
+          "segment": 0,
+          "value": 78.3,
+          "status": "shield"
+        },
+        {
+          "time": 2.6666666666666665,
+          "type": "skill_status",
+          "skill": "WAR_03",
+          "segment": 0,
+          "status": "shieldHit"
+        }
+      ],
+      "clips": [
+        "idle",
+        "spell",
+        "hit"
+      ],
+      "reviewInputs": {
+        "refine-modules.cjs": "62a06b8f04e7922816be39c06f217da4ea382ddd6393647ac9fe1628620afc01",
+        "WarriorKitStudy.ts": "57e76abea475acc65e26bcedaf87d5faca9d45de8120a098b4d7e07426493c1c",
+        "blade.png": "8df49e281e79a84b2847e4b7f0623929fd546a834986ab5b2ceb0e59af9a5043",
+        "guard.png": "94963f33c6f2a79145b3714f65c0c2ac5ad4f49cbe7126c6e6b4c5c6403eae37",
+        "white.png": "803f3b73e9e4960c1b25d25b1dcb493de6cb51a001fbcc7f604e4dfe62c8c26e"
+      }
+    },
+    "WAR_04": {
+      "name": "裂地审判",
+      "frames": 56,
+      "roles": [
+        "downstroke",
+        "earth-chip",
+        "ground-crack",
+        "ground-flash"
+      ],
+      "events": [
+        {
+          "time": 0.3,
+          "type": "skill_cast",
+          "skill": "WAR_04",
+          "segment": 0
+        },
+        {
+          "time": 0.7,
+          "type": "skill_release",
+          "skill": "WAR_04",
+          "segment": 0
+        },
+        {
+          "time": 0.7,
+          "type": "skill_segment",
+          "skill": "WAR_04",
+          "segment": 0
+        },
+        {
+          "time": 0.7,
+          "type": "hit",
+          "skill": "WAR_04",
+          "id": "study-target-0",
+          "value": 194
+        },
+        {
+          "time": 0.7,
+          "type": "skill_hit",
+          "skill": "WAR_04",
+          "target": "study-target-0",
+          "segment": 0,
+          "value": 194
+        },
+        {
+          "time": 0.7,
+          "type": "hit",
+          "skill": "WAR_04",
+          "id": "study-target-1",
+          "value": 194
+        },
+        {
+          "time": 0.7,
+          "type": "skill_hit",
+          "skill": "WAR_04",
+          "target": "study-target-1",
+          "segment": 0,
+          "value": 194
+        },
+        {
+          "time": 0.9,
+          "type": "notice",
+          "reason": "威胁已解除，安全等待 5 秒后可换装"
+        }
+      ],
+      "clips": [
+        "idle",
+        "attack_sword_3"
+      ],
+      "reviewInputs": {
+        "refine-modules.cjs": "62a06b8f04e7922816be39c06f217da4ea382ddd6393647ac9fe1628620afc01",
+        "WarriorKitStudy.ts": "57e76abea475acc65e26bcedaf87d5faca9d45de8120a098b4d7e07426493c1c",
+        "blade.png": "8df49e281e79a84b2847e4b7f0623929fd546a834986ab5b2ceb0e59af9a5043",
+        "guard.png": "94963f33c6f2a79145b3714f65c0c2ac5ad4f49cbe7126c6e6b4c5c6403eae37",
+        "white.png": "803f3b73e9e4960c1b25d25b1dcb493de6cb51a001fbcc7f604e4dfe62c8c26e"
+      }
+    },
+    "WAR_05": {
+      "name": "破晓裁决",
+      "frames": 68,
+      "roles": [
+        "earth-chip",
+        "finisher-cross",
+        "finisher-rise",
+        "finisher-sweep"
+      ],
+      "events": [
+        {
+          "time": 0.3,
+          "type": "skill_cast",
+          "skill": "WAR_05",
+          "segment": 0
+        },
+        {
+          "time": 0.7666666666666667,
+          "type": "skill_release",
+          "skill": "WAR_05",
+          "segment": 0
+        },
+        {
+          "time": 0.7666666666666667,
+          "type": "skill_segment",
+          "skill": "WAR_05",
+          "segment": 0
+        },
+        {
+          "time": 0.7666666666666667,
+          "type": "hit",
+          "skill": "WAR_05",
+          "id": "study-target-0",
+          "value": 52
+        },
+        {
+          "time": 0.7666666666666667,
+          "type": "skill_hit",
+          "skill": "WAR_05",
+          "target": "study-target-0",
+          "segment": 0,
+          "value": 52
+        },
+        {
+          "time": 0.7666666666666667,
+          "type": "hit",
+          "skill": "WAR_05",
+          "id": "study-target-1",
+          "value": 52
+        },
+        {
+          "time": 0.7666666666666667,
+          "type": "skill_hit",
+          "skill": "WAR_05",
+          "target": "study-target-1",
+          "segment": 0,
+          "value": 52
+        },
+        {
+          "time": 0.7666666666666667,
+          "type": "hit",
+          "skill": "WAR_05",
+          "id": "study-target-2",
+          "value": 52
+        },
+        {
+          "time": 0.7666666666666667,
+          "type": "skill_hit",
+          "skill": "WAR_05",
+          "target": "study-target-2",
+          "segment": 0,
+          "value": 52
+        },
+        {
+          "time": 0.9666666666666667,
+          "type": "skill_segment",
+          "skill": "WAR_05",
+          "segment": 1
+        },
+        {
+          "time": 0.9666666666666667,
+          "type": "hit",
+          "skill": "WAR_05",
+          "id": "study-target-0",
+          "value": 52
+        },
+        {
+          "time": 0.9666666666666667,
+          "type": "skill_hit",
+          "skill": "WAR_05",
+          "target": "study-target-0",
+          "segment": 1,
+          "value": 52
+        },
+        {
+          "time": 1.1333333333333333,
+          "type": "skill_segment",
+          "skill": "WAR_05",
+          "segment": 2
+        },
+        {
+          "time": 1.1333333333333333,
+          "type": "hit",
+          "skill": "WAR_05",
+          "id": "study-target-0",
+          "value": 157
+        },
+        {
+          "time": 1.1333333333333333,
+          "type": "skill_hit",
+          "skill": "WAR_05",
+          "target": "study-target-0",
+          "segment": 2,
+          "value": 157
+        },
+        {
+          "time": 1.5,
+          "type": "notice",
+          "reason": "威胁已解除，安全等待 5 秒后可换装"
+        }
+      ],
+      "clips": [
+        "idle",
+        "attack_sword",
+        "attack_sword_2",
+        "attack_sword_3"
+      ],
+      "reviewInputs": {
+        "refine-modules.cjs": "62a06b8f04e7922816be39c06f217da4ea382ddd6393647ac9fe1628620afc01",
+        "WarriorKitStudy.ts": "57e76abea475acc65e26bcedaf87d5faca9d45de8120a098b4d7e07426493c1c",
+        "blade.png": "8df49e281e79a84b2847e4b7f0623929fd546a834986ab5b2ceb0e59af9a5043",
+        "guard.png": "94963f33c6f2a79145b3714f65c0c2ac5ad4f49cbe7126c6e6b4c5c6403eae37",
+        "white.png": "803f3b73e9e4960c1b25d25b1dcb493de6cb51a001fbcc7f604e4dfe62c8c26e"
+      }
+    },
+    "WAR_P1": {
+      "name": "战艺精通",
+      "frames": 68,
+      "roles": [
+        "blade-glint",
+        "focused-cut"
+      ],
+      "events": [
+        {
+          "time": 0.3,
+          "type": "skill_cast",
+          "skill": "WAR_01",
+          "segment": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "skill_release",
+          "skill": "WAR_01",
+          "segment": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "skill_segment",
+          "skill": "WAR_01",
+          "segment": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "skill_status",
+          "skill": "WAR_P1",
+          "target": "study-target-0",
+          "segment": 0,
+          "status": "passive"
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "hit",
+          "skill": "WAR_01",
+          "id": "study-target-0",
+          "value": 170
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "skill_hit",
+          "skill": "WAR_01",
+          "target": "study-target-0",
+          "segment": 0,
+          "value": 170
+        },
+        {
+          "time": 0.6,
+          "type": "skill_segment",
+          "skill": "WAR_01",
+          "segment": 1
+        },
+        {
+          "time": 0.6,
+          "type": "hit",
+          "skill": "WAR_01",
+          "id": "study-target-0",
+          "value": 170
+        },
+        {
+          "time": 0.6,
+          "type": "skill_hit",
+          "skill": "WAR_01",
+          "target": "study-target-0",
+          "segment": 1,
+          "value": 170
+        },
+        {
+          "time": 0.8,
+          "type": "notice",
+          "reason": "威胁已解除，安全等待 5 秒后可换装"
+        }
+      ],
+      "clips": [
+        "idle",
+        "attack_sword",
+        "attack_sword_2"
+      ],
+      "reviewInputs": {
+        "refine-modules.cjs": "62a06b8f04e7922816be39c06f217da4ea382ddd6393647ac9fe1628620afc01",
+        "WarriorKitStudy.ts": "57e76abea475acc65e26bcedaf87d5faca9d45de8120a098b4d7e07426493c1c",
+        "blade.png": "8df49e281e79a84b2847e4b7f0623929fd546a834986ab5b2ceb0e59af9a5043",
+        "guard.png": "94963f33c6f2a79145b3714f65c0c2ac5ad4f49cbe7126c6e6b4c5c6403eae37",
+        "white.png": "803f3b73e9e4960c1b25d25b1dcb493de6cb51a001fbcc7f604e4dfe62c8c26e"
+      }
+    },
+    "WAR_P2": {
+      "name": "铁誓不屈",
+      "frames": 108,
+      "roles": [
+        "armour-pulse",
+        "shield-hit",
+        "shield-outline",
+        "shield-rib"
+      ],
+      "events": [
+        {
+          "time": 0.3,
+          "type": "skill_cast",
+          "skill": "WAR_03",
+          "segment": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "skill_release",
+          "skill": "WAR_03",
+          "segment": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "skill_status",
+          "skill": "WAR_03",
+          "segment": 0,
+          "value": 78.3,
+          "status": "shield"
+        },
+        {
+          "time": 2.6666666666666665,
+          "type": "skill_status",
+          "skill": "WAR_P2",
+          "segment": 0,
+          "status": "shield"
+        },
+        {
+          "time": 2.6666666666666665,
+          "type": "skill_status",
+          "skill": "WAR_03",
+          "segment": 0,
+          "status": "shieldHit"
+        }
+      ],
+      "clips": [
+        "idle",
+        "spell",
+        "hit"
+      ],
+      "reviewInputs": {
+        "refine-modules.cjs": "62a06b8f04e7922816be39c06f217da4ea382ddd6393647ac9fe1628620afc01",
+        "WarriorKitStudy.ts": "57e76abea475acc65e26bcedaf87d5faca9d45de8120a098b4d7e07426493c1c",
+        "blade.png": "8df49e281e79a84b2847e4b7f0623929fd546a834986ab5b2ceb0e59af9a5043",
+        "guard.png": "94963f33c6f2a79145b3714f65c0c2ac5ad4f49cbe7126c6e6b4c5c6403eae37",
+        "white.png": "803f3b73e9e4960c1b25d25b1dcb493de6cb51a001fbcc7f604e4dfe62c8c26e"
+      }
+    }
+  },
+  "opacityPolicy": {
+    "waveLayerPeak": 1,
+    "centralVertexOpacity": 1,
+    "coreTextureAlpha": 255,
+    "bodyGain": 1.8,
+    "state": "Opaque central body, with a soft outline, temporal entrance/exit and fading wake."
+  },
+  "geometryRevision": {
+    "baseMaterial": "warrior-reference120-v14",
+    "targetProjectedObtuseAngleDegrees": 120,
+    "crossAppliedTo": [
+      "WAR_02 impact",
+      "WAR_05 final beat"
+    ],
+    "groundFracture": {
+      "centre": {
+        "x": 6.7058801493068705,
+        "y": 1.321073293685913,
+        "z": -1.3770154300527726
+      },
+      "radius": 2,
+      "chunks": 5,
+      "maxGroundOffset": 0.07,
+      "maxDistance": 1.7645741494672345
+    },
+    "groundGeometry": "Visual fissure conforms to sampled terrain inside original impact disk. No collision, damage or terrain deformation changes."
+  },
+  "productionIntegration": false,
+  "platformPerformance": "TapTap device performance not assessed",
+  "files": {
+    "all-media.py": "382cb3d23a3d20b94d817a13a9d054e1393af364e833dd643474dd59ee3a0898",
+    "blade.png": "8df49e281e79a84b2847e4b7f0623929fd546a834986ab5b2ceb0e59af9a5043",
+    "capture.cjs": "0e062e544707deec9159d5f6f7e840e2d89494729c3a45a8f27d3019c5fbcca8",
+    "guard.png": "94963f33c6f2a79145b3714f65c0c2ac5ad4f49cbe7126c6e6b4c5c6403eae37",
+    "README.md": "e630cae4219da35067286522faf145425c020211e276343fe4f10b00730f6f19",
+    "refine-modules.cjs": "62a06b8f04e7922816be39c06f217da4ea382ddd6393647ac9fe1628620afc01",
+    "review-checks.json": "b72980e82ad57adf7f76ddf5666cd0730a1e27d1be6216fab533341902912dcb",
+    "review-fixture.js": "de3c2ac7a59116cfecdf6a490ad563ffb94b69c9089c30728f70b4dc9492a4fc",
+    "review-media.py": "9fe65d13b562948d1f65ce88d534861db3cbe3e67cf146d845d2efb9ac0b1d4b",
+    "showcase-focus.json": "66763a1cb72d0e99c90fc85b3d0a5b04aab2e6aa3532770000f6b9b21598fa80",
+    "showcase-focus.py": "80e820a0f67dcaea2187474ae0e43373a421028f0e4b1a1c625a2ad6fb716835",
+    "WarriorKitStudy.ts": "57e76abea475acc65e26bcedaf87d5faca9d45de8120a098b4d7e07426493c1c",
+    "white.png": "803f3b73e9e4960c1b25d25b1dcb493de6cb51a001fbcc7f604e4dfe62c8c26e",
+    "media\\all-skills-overview.jpg": "45bcbe8e280537f8033bb68a39e23b24cdb9a5eb99e78d6f6d31a5a10927999d",
+    "media\\basic_war.gif": "dab726dd84643c70188ededccd188c175b8f5fa18c2a707b8a9ceb1456526840",
+    "media\\ground-cleave-detail.gif": "9d3a7e008aaf40d569b387791276bcef922abaa8a6011c08a416c93073f040ff",
+    "media\\shockwave-detail.gif": "88f694d74a4cdfc1f58ad53dec59f4f8c9c190c9037d822131d8d336a02b5dd8",
+    "media\\shockwave-peak.jpg": "fe67e6822c941f55cb830513efd7a7ba133df36526943542a1604a9fe128d15d",
+    "media\\skill-contrast.gif": "1424a90edc12267531f2901bea959eda19cc11d416770cedd4e518cd5ae9c0de",
+    "media\\skill-contrast.jpg": "653891fac4b3eee85cfc7647ab88b746585797f507315b87c321eb587cdc6359",
+    "media\\warrior-all-skills.mp4": "d031acb96dfd899d5e42dc9d0651aaa0425472efcb0567faa8242619606ca9aa",
+    "media\\war_01.gif": "75499d99a97365f1451982c5db0d565beac4ae2030105c003477c2abc2c16b88",
+    "media\\war_02.gif": "e9e52334fd5d99e91787d8cf27566a3b53b2d5cc3a54dfe4f72d364ce90182e2",
+    "media\\war_03.gif": "d2368ee90b317eb4ee5a497d59158f86b9a650bb2c73038eef272196d3d082c7",
+    "media\\war_04.gif": "6c267589bf5e02a8e1c12c4d54328c642fc86f1ad2b5bf87a2108279e1171c88",
+    "media\\war_05.gif": "66a26ed317ad4eb902d63703d13babe91bfb42c39c62532acd14b579f01fd461",
+    "media\\war_p1-focus.gif": "2fdc96ab3e3f70fd08416718a108d946e908fcf548a3045cf62887a1d89f6370",
+    "media\\war_p1.gif": "d9797af685e8213927b19b0f88d239349fcfa8fc4776ece70b32089cff2f6ade",
+    "media\\war_p2-focus.gif": "56e44f1e0d25a1e64c2420ab174e29a1ad33067cf0733b89542e343ce13834de",
+    "media\\war_p2.gif": "31a0abeae9d98c525117166aae00c5d61aec8283e67007055b5fce3b5bbb36a4"
+  }
+}

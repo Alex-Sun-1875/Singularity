@@ -2,6 +2,8 @@
 import argparse
 import json
 import subprocess
+import sys
+import uuid
 from importlib.util import spec_from_file_location, module_from_spec
 from pathlib import Path
 
@@ -9,9 +11,17 @@ PROJECT = Path(__file__).resolve().parents[1]
 RESOURCE_ROOT = PROJECT / 'assets/resources'
 
 
-def write_json(path, data):
+def write_json(path, data, *, creator_prefab=False):
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\n', encoding='utf-8')
+    content = json.dumps(data, ensure_ascii=False, indent=2) + ('' if creator_prefab else '\n')
+    if creator_prefab:
+        # Creator serializes prefabs with LF and no final newline on all hosts.
+        raw = content.encode('utf-8')
+        if not path.exists() or path.read_bytes() != raw:
+            path.write_bytes(raw)
+        return
+    if not path.exists() or path.read_text(encoding='utf-8') != content:
+        path.write_text(content, encoding='utf-8')
 
 
 def referenced_actor_images(folder):
@@ -65,6 +75,112 @@ def pack_exclusions(pack):
     return sorted(excluded)
 
 
+def selective_packs(profile):
+    """Cocos prefab references collect existing UUIDs into small bundles.
+
+    Source artwork, importer UUIDs and authored resource paths remain intact.
+    These sibling bundle roots do not nest inside any existing Asset Bundle.
+    """
+    bundles, routes = [], {}
+    for group in profile.get('selectivePacks', []):
+        name = group['name']
+        if not name or any(c not in 'abcdefghijklmnopqrstuvwxyz0123456789-' for c in name):
+            raise SystemExit('Invalid selective bundle name: ' + name)
+        files = set()
+        for pattern in group.get('sources', []):
+            matches = {p for p in RESOURCE_ROOT.glob(pattern) if p.is_file() and p.suffix != '.meta'}
+            if not matches:
+                raise SystemExit('Empty selective resource pattern: ' + pattern)
+            files.update(matches)
+        if group.get('weaponVariants'):
+            manifest = RESOURCE_ROOT / 'actors/props-native/manifest.json'
+            files.add(manifest)
+            props = json.loads(manifest.read_text(encoding='utf-8'))['props']
+            for variant in group['weaponVariants']:
+                folder = RESOURCE_ROOT / 'actors/props-native' / variant
+                files.update(folder.glob('*.fbx'))
+                files.update(folder.glob('*.glb'))
+                for record in props[variant]['materials']:
+                    for relative in record['maps'].values():
+                        files.add((RESOURCE_ROOT / 'actors/raphael' / relative).resolve())
+        entries = set()
+        for file in sorted(files):
+            if not file.resolve().is_relative_to(RESOURCE_ROOT.resolve()) or not file.is_file():
+                raise SystemExit('Missing selective resource: ' + str(file))
+            meta = json.loads(file.with_name(file.name + '.meta').read_text(encoding='utf-8'))
+            stem = file.relative_to(RESOURCE_ROOT).with_suffix('').as_posix()
+            asset_routes = {}
+            if meta['importer'] in ('fbx', 'gltf'):
+                for sub in meta['subMetas'].values():
+                    if sub['importer'] == 'gltf-scene':
+                        asset_routes[stem + '/' + Path(sub['name']).stem] = sub['uuid']
+            else:
+                asset_routes[stem] = meta['uuid']
+                for sub in meta.get('subMetas', {}).values():
+                    if sub['importer'] in ('texture', 'sprite-frame'):
+                        asset_routes[stem + '/' + sub['name']] = sub['uuid']
+            if not asset_routes:
+                raise SystemExit('No loadable selective asset: ' + str(file))
+            for logical, asset_uuid in asset_routes.items():
+                if logical in routes:
+                    raise SystemExit('Overlapping selective resource: ' + logical)
+                routes[logical] = {'bundle': name, 'uuid': asset_uuid}
+                entries.add(asset_uuid)
+        for logical, target in group.get('aliases', {}).items():
+            matches = {key: value for key, value in routes.items()
+                       if value['bundle'] == name and (key == target or key.startswith(target + '/'))}
+            if not matches:
+                raise SystemExit('Missing selective alias target: ' + target)
+            for key, value in matches.items():
+                alias = logical + key[len(target):]
+                if alias in routes:
+                    raise SystemExit('Overlapping selective alias: ' + alias)
+                routes[alias] = dict(value)
+        folder = PROJECT / 'assets/bundle-groups' / name
+        for directory in [folder.parent, folder]:
+            meta = directory.with_name(directory.name + '.meta')
+            if not meta.exists():
+                write_json(meta, {'ver': '1.2.0', 'importer': 'directory', 'imported': True,
+                                 'uuid': str(uuid.uuid5(uuid.NAMESPACE_URL, 'singularity/' + directory.relative_to(PROJECT).as_posix())),
+                                 'files': [], 'subMetas': {}, 'userData': {}})
+        # Typed Asset references use Cocos' normal dependency collector. Bundle
+        # filters can only select assets within their root, not external UUIDs.
+        marker = folder / 'bundle.json'
+        write_json(marker, {'name': name, 'purpose': 'selective-resource-bundle'})
+        marker_meta = marker.with_name(marker.name + '.meta')
+        if not marker_meta.exists():
+            write_json(marker_meta, {'ver': '2.0.1', 'importer': 'json', 'imported': True,
+                                    'uuid': str(uuid.uuid5(uuid.NAMESPACE_URL, 'singularity/' + marker.relative_to(PROJECT).as_posix())),
+                                    'files': ['.json'], 'subMetas': {}, 'userData': {}})
+        script_uuid = json.loads((PROJECT / 'assets/scripts/shared/assets/BundleAssetReferences.ts.meta').read_text(encoding='utf-8'))['uuid'].replace('-', '')
+        alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+        script_id = script_uuid[:5] + ''.join(alphabet[int(script_uuid[i:i+3], 16) >> 6] +
+                                              alphabet[int(script_uuid[i:i+3], 16) & 63]
+                                              for i in range(5, 32, 3))
+        prefab = folder / 'assets.prefab'
+        write_json(prefab, [
+            # Creator normalizes both names to the prefab filename on import.
+            # Emit its stable form so exporting never mutates release inputs.
+            {'__type__': 'cc.Prefab', '_name': prefab.stem, '_objFlags': 0, '_native': '',
+             'data': {'__id__': 1}, 'persistent': False},
+            {'__type__': 'cc.Node', '_name': prefab.stem, '_objFlags': 0, '_parent': None, '_children': [],
+             '_active': True, '_components': [{'__id__': 2}], '_prefab': None,
+             '_lpos': {'__type__': 'cc.Vec3', 'x': 0, 'y': 0, 'z': 0},
+             '_lrot': {'__type__': 'cc.Quat', 'x': 0, 'y': 0, 'z': 0, 'w': 1},
+             '_lscale': {'__type__': 'cc.Vec3', 'x': 1, 'y': 1, 'z': 1}, '_layer': 1},
+            {'__type__': script_id, '_name': '', '_objFlags': 0, 'node': {'__id__': 1}, '_enabled': True,
+             '__prefab': None, 'assets': [{'__uuid__': asset_uuid} for asset_uuid in sorted(entries)]}],
+                   creator_prefab=True)
+        prefab_meta = prefab.with_name(prefab.name + '.meta')
+        if not prefab_meta.exists():
+            write_json(prefab_meta, {'ver': '1.1.50', 'importer': 'prefab', 'imported': True,
+                                    'uuid': str(uuid.uuid5(uuid.NAMESPACE_URL, 'singularity/' + prefab.relative_to(PROJECT).as_posix())),
+                                    'files': ['.json'], 'subMetas': {}, 'userData': {}})
+        bundles.append({'root': 'db://' + folder.relative_to(PROJECT).as_posix(), 'name': name,
+                        'priority': 11, 'output': True, 'isRemote': False})
+    return bundles, routes
+
+
 def prepare_resource_routes(profile):
     packs = list(profile['packs'])
     for collection in profile['collections']:
@@ -73,7 +189,8 @@ def prepare_resource_routes(profile):
                 packs.append({'path': folder.relative_to(RESOURCE_ROOT).as_posix(),
                               'name': collection['namePrefix'] + folder.name,
                               'referencedImagesOnly': collection.get('referencedImagesOnly', False)})
-    names = [pack['name'] for pack in packs]
+    groups, asset_routes = selective_packs(profile)
+    names = [pack['name'] for pack in packs] + [group['name'] for group in groups]
     if len(names) != len(set(names)):
         raise SystemExit('Duplicate resource pack names')
     for pack in packs:
@@ -86,7 +203,10 @@ def prepare_resource_routes(profile):
                     key=lambda p: (-len(p['prefix']), p['prefix']))
     generated = ('/** Generated by tools/prepare-taptap.py from release/taptap.json. */\n'
                  'export const RESOURCE_PACKS:readonly {prefix:string;bundle:string}[] = '
-                 + json.dumps(routes, ensure_ascii=False, indent=2) + ';\n')
+                 + json.dumps(routes, ensure_ascii=False, indent=2) + ';\n'
+                 + '/** Exact UUID routes for source-preserving selective bundles. */\n'
+                 + 'export const RESOURCE_ASSET_PACKS:Readonly<Record<string,{bundle:string;uuid:string}>> = '
+                 + json.dumps(asset_routes, ensure_ascii=False, indent=2) + ';\n')
     runtime_file = PROJECT / 'assets/scripts/shared/assets/ResourcePacks.ts'
     if not runtime_file.exists() or runtime_file.read_text(encoding='utf-8') != generated:
         runtime_file.write_text(generated, encoding='utf-8')
@@ -95,6 +215,7 @@ def prepare_resource_routes(profile):
 
 
 def prepare(platform, output_name, mode='test', gameplay_profile='test'):
+    subprocess.check_call([sys.executable, str(PROJECT / 'tools/prepare-startup-preview.py')])
     spec = spec_from_file_location('native_texture_reuse', PROJECT / 'tools/prepare-native-texture-reuse.py')
     reuse = module_from_spec(spec)
     spec.loader.exec_module(reuse)
@@ -135,6 +256,10 @@ def prepare(platform, output_name, mode='test', gameplay_profile='test'):
             bundle['bundleFilterConfig'] = [exclusion(pack['path'] + '/' + name, False)
                                             for name in excluded]
         bundles.append(bundle)
+    groups, _ = selective_packs(profile)
+    for group in groups:
+        group['compressionType'] = 'subpackage' if platform == 'wechatgame' else 'merge_dep'
+        bundles.append(group)
     # Existing 3D comparison NPC bundles are deliberately omitted from this
     # release. Their files and original .meta UUIDs remain untouched.
     for meta in sorted((RESOURCE_ROOT / 'actors').glob('*.meta')):

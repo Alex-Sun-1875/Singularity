@@ -1,0 +1,147 @@
+{
+  "version": "v33-r3-original-colour-with-applied-background",
+  "reference": "source-art\\skills\\fire-reference-alignment-v32\\assets\\approved-reference.png",
+  "referenceSha256": "bf699784420cce0084a523191ff6390ccf4ceceff11f04e35ae31133762fa5f6",
+  "instruction": "Latest user requires unquestionably regular circular geometry and original warm glowing-engraving quality; replaces R2 irregular hand curves.",
+  "script": "prepare-r3.py",
+  "method": "Deterministic supersampled circle/circular-arc redraw; all 4 boundary rings share centre; 8 equal-angle pairs of circular band arcs and 3 copies of one semicircle mother form at 120deg, uniformly offset concentric companions. No new rune or pointed ornament; no model.",
+  "shape": {
+    "size": [
+      1024,
+      1024
+    ],
+    "centre": [
+      511.5,
+      511.5
+    ],
+    "outerRadius": 460,
+    "visibleDiameterFraction": 0.8984375,
+    "boundaryCircleRadii": [
+      1,
+      0.9717,
+      0.755,
+      0.733
+    ],
+    "bandCount": 8,
+    "bandAngleDegrees": 45,
+    "innerMotherCount": 3,
+    "innerAngleDegrees": 120,
+    "companionGapPixels": 6.21
+  },
+  "colour": {
+    "core": [
+      255,
+      182,
+      96
+    ],
+    "body": [
+      255,
+      156,
+      58
+    ],
+    "halo": [
+      255,
+      118,
+      30
+    ],
+    "haloRadiiPixels": [
+      6.5,
+      9.0
+    ],
+    "haloWeights": [
+      0.2,
+      0.05
+    ],
+    "referenceBrightRGBQuantiles": {
+      "P50": [
+        218,
+        139,
+        73
+      ],
+      "P75": [
+        234,
+        155,
+        84
+      ],
+      "P90": [
+        246,
+        170,
+        95
+      ]
+    },
+    "note": "Colour-only original-orange-gold alignment; no lemon-yellow/white core. R3 geometry, high alpha, halo radii, ground height and radius unchanged."
+  },
+  "currentPreview": "seal-reference-vs-regular-r3-colour.jpg",
+  "editableVector": "meteor-seal-regular-r3.svg",
+  "output": {
+    "path": "src\\cocos\\assets\\resources\\vfx\\production\\fire-meteor-seal-v33.png",
+    "sha256": "a3ced75374a53f6f5df4fa0926567dcbec5676f7c361f0ff962dc40c4338e78a",
+    "pngBytes": 376826
+  },
+  "shader": {
+    "path": "src/cocos/assets/resources/vfx/production/fire-seal-v33.effect",
+    "gain": 1.0,
+    "note": "Root removed global 1.15 RGB gain in a lock-free window after initial R3 capture; final native validation pending."
+  },
+  "preservedHashes": {
+    "fire-ground-jets-v27.png": "37a8319026bf39a4862f1f9bedbfceb98a6a3119c16f3265f300756dd4c2e4c6",
+    "fire-jet-seal-v27.png": "febfe312082973eace56e8e5efea0b28f3e5464764a04900a924963f3ad19f86",
+    "fire-ground-v27.effect": "f213c7660ee31ba34f8900790e6256c65b7dce1a613cd570d82ea5bedf89c808",
+    "fire-flow-noise-v24.png": "ccee680793eb3e41ea3973f01fa9963c588b4f0d5cbafe483d24ccb0105c935d"
+  },
+  "metrics": {
+    "innerMedianAlpha": 0.13333333333333333,
+    "innerMeanAlpha": 0.16528449618701482,
+    "fractionInnerAlphaBelow002": 0.0
+  },
+  "scope": "Only meteor PNG, existing dedicated v33 shader and meteor path; gameplay circle/radius, camera-aligned UV and all v27 jets unchanged.",
+  "review": {
+    "local": "Unique R3 original-colour sample inspected beside the reference: warm orange-gold rather than lemon yellow, regular geometry retained. Alpha bytes verified identical to approved R3.",
+    "native": "Initial R3 filled-seal actual capture completed; latest user colour/pattern feedback requires R4, not accepted as final.",
+    "user": "pending R4 native review"
+  },
+  "glyphOnlyOutput": {
+    "path": "src\\cocos\\assets\\resources\\vfx\\production\\fire-meteor-seal-v33.png",
+    "sha256": "46475e8e03613db12556805e47f349f22e6a23841ba353978bd8e91c91a0ee97",
+    "pngBytes": 340877
+  },
+  "appliedBackground": "background-pending-provenance-r1.json",
+  "underlay": {
+    "colourRGBRange": {
+      "centre": [
+        255,
+        134,
+        38
+      ],
+      "band": [
+        255,
+        125,
+        32
+      ],
+      "outer": [
+        255,
+        120,
+        28
+      ]
+    },
+    "alpha": {
+      "centre": 0.14499979206147418,
+      "band": 0.1583188392088427,
+      "rangeBeforeOuterFade": [
+        0.123,
+        0.16
+      ]
+    },
+    "radius": 460,
+    "centre": [
+      511.5,
+      511.5
+    ],
+    "formula": "Full radial disk: .123 + .022*exp(-(r/.50)^2) + .034*exp(-((r-.84)/.14)^2), with smooth edge fade .94..1.0. Same front/back coverage, no hole."
+  },
+  "opaqueLineCoreRGBUnchangedByUnderlay": true,
+  "pendingReplacement": {
+    "provenance": "colour-r4-pending-provenance.json",
+    "sha256": "8afa3cccb849af9b8197392ca76e133f9e0eeca384b3abda967e143b89f1289a"
+  }
+}

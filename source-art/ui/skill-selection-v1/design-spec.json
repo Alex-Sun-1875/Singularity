@@ -1,0 +1,48 @@
+{
+  "date": "2026-11-17",
+  "status": "invalidated_with_rejected_direction",
+  "scope": "Skill list selection and content alignment; no runtime edits.",
+  "source": "User screenshot plus existing prep-skill-row-v5 and combat-relief assets.",
+  "diagnosis": [
+    "SkillBook.ts sizes the visible row to hu-4 but fixes the icon at 40.",
+    "The title and role use fixed vertical offsets; the secondary label can extend beyond a shortened row.",
+    "PreparationControls.rowBackground adds the bright gold skill-selected skin.",
+    "Gold in the shield icon communicates the defensive skill identity and is preserved."
+  ],
+  "candidateLogical": {
+    "visibleRowHeight": 52,
+    "hitHeight": 52,
+    "rowGap": 8,
+    "iconSize": 36,
+    "contentPaddingX": 12,
+    "titleSize": 16.5,
+    "roleSize": 11.5,
+    "titleLineHeight": 21,
+    "roleLineHeight": 16,
+    "labelGap": 1,
+    "levelColumnWidth": 48,
+    "selectionStroke": 1.5,
+    "selectionCornerLength": 11
+  },
+  "selection": {
+    "color": "#EDE4CB",
+    "shape": "Four short inset ivory corners over the existing normal row skin.",
+    "qualityOrSkillIdentity": "Unchanged; no whole-icon recoloring, no bright gold selection skin."
+  },
+  "states": {
+    "idle": "Original warm dark row, quiet bronze edge, warm ivory title.",
+    "selected": "Same geometry and typography; short ivory corners with a soft neutral inset.",
+    "locked": "Keep a readable muted title, the unlock-level column and the skill icon; still browsable."
+  },
+  "validation": {
+    "designGeneration": "complete",
+    "userReview": "pending",
+    "cocosRuntime": "not_started",
+    "tapTapDevice": "not_started"
+  },
+  "review": {
+    "date": "2026-11-17",
+    "reason": "用户否定象牙白角标方向的审美；派生稿不再作为后续基线。",
+    "supersededBy": "source-art/ui/selection-redesign-v2/"
+  }
+}

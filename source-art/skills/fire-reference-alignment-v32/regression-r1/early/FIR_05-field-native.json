@@ -1,0 +1,171 @@
+{
+  "frame": 43,
+  "time": 7.866666666666644,
+  "seed": 73015,
+  "sequence": 3,
+  "revision": 513,
+  "cameraHeight": 4.3,
+  "castAge": null,
+  "impactAge": null,
+  "ground": {
+    "capacity": 8,
+    "allocated": 0,
+    "active": [],
+    "cameraBound": true
+  },
+  "fire": {
+    "model": "distinct-fire-shapes-v30",
+    "capacity": 76,
+    "allocated": 5,
+    "sharedTextures": 3,
+    "field": {
+      "model": "connected-fire-field-v30",
+      "capacity": 4,
+      "allocated": 2,
+      "active": [
+        {
+          "key": "bed:cast:3",
+          "kind": "field",
+          "connectedSurfaces": 1,
+          "phase": 13,
+          "frameBlend": 0.5999999999995964,
+          "width": 6,
+          "depth": 3,
+          "height": 0.91,
+          "vertices": 575,
+          "position": {
+            "x": -0.012229454476658476,
+            "y": 0.02313168133569509,
+            "z": -4.01467534537199
+          }
+        }
+      ]
+    },
+    "impact": {
+      "model": "selected-single-impact-relief-v32",
+      "capacity": 8,
+      "allocated": 1,
+      "sharedMaterials": 1,
+      "cameraBound": true,
+      "active": []
+    },
+    "active": [
+      {
+        "key": "bed:cast:3",
+        "kind": "field",
+        "connectedSurfaces": 1,
+        "phase": 13,
+        "frameBlend": 0.5999999999995964,
+        "width": 6,
+        "depth": 3,
+        "height": 0.91,
+        "vertices": 575,
+        "position": {
+          "x": -0.012229454476658476,
+          "y": 0.02313168133569509,
+          "z": -4.01467534537199
+        }
+      }
+    ]
+  },
+  "meteor": {
+    "model": "reference-nose-anchored-comet-v32",
+    "capacity": 4,
+    "sharedRockMeshes": 1,
+    "sharedRockMaterials": 1,
+    "leadingSupport": {
+      "x": 0.213878,
+      "y": -0.5,
+      "z": 0.006679
+    },
+    "opaqueRockMeshes": 0,
+    "active": []
+  },
+  "shield": {
+    "visible": false,
+    "amount": 0,
+    "start": null,
+    "until": null,
+    "opacity": 0,
+    "patternOpacity": 0,
+    "broken": false,
+    "hitAt": null,
+    "position": {
+      "x": 0,
+      "y": 1,
+      "z": -8
+    },
+    "scale": {
+      "x": 1.88,
+      "y": 2.68,
+      "z": 1.88
+    },
+    "vertices": 625,
+    "triangles": 1152,
+    "passes": 2
+  },
+  "native": {
+    "cues": [
+      {
+        "kind": "field",
+        "skillId": "FIR_05",
+        "castId": "cast:3",
+        "eventType": "skill_zone",
+        "start": 7.19999999999998,
+        "age": 0.6666666666666643,
+        "duration": 4,
+        "target": {
+          "x": 0,
+          "z": -4
+        },
+        "from": {
+          "x": 0,
+          "z": -8
+        },
+        "to": {
+          "x": 0,
+          "z": -4
+        },
+        "geometry": {
+          "kind": "filledWaveRectangle",
+          "origin": "aimPoint",
+          "widthMetres": 6,
+          "depthMetres": 3,
+          "radiusMetres": 0,
+          "lengthMetres": 0,
+          "angleDegrees": 0
+        }
+      }
+    ],
+    "particles": {
+      "allocated": 11,
+      "active": 4
+    },
+    "linePool": 0,
+    "bodyPool": 0
+  },
+  "hits": 4,
+  "damage": 276,
+  "misses": 1,
+  "criticalHits": 0,
+  "cooldowns": {
+    "FIR_05": 6.333333333333336
+  },
+  "ultimateLock": 0,
+  "casts": [
+    {
+      "id": "cast:3",
+      "skillId": "FIR_05",
+      "elapsed": 0.6833333333333338,
+      "released": true,
+      "targets": [],
+      "hits": [
+        "0:training:target:0",
+        "0:training:target:1",
+        "0:training:target:2",
+        "0:training:target:4"
+      ]
+    }
+  ],
+  "projectiles": []
+}

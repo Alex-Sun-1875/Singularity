@@ -1,0 +1,416 @@
+{
+  "source": "Current Cocos battle scene and existing render modules",
+  "stage": "S04",
+  "view": "Native 3D",
+  "fps": 30,
+  "camera": "Identical oblique camera for both variants",
+  "gameHash": "e5a395cb3b787071a53dd6daed44ab8f2f4803e292b638ae96566b3d60a56f85",
+  "shots": [
+    {
+      "skill": "BASIC_WAR",
+      "frames": 59,
+      "seconds": 1.9666666666666666,
+      "geometry": {
+        "rangeMetres": 1.85,
+        "angleDegrees": 110
+      },
+      "hitEvents": [
+        {
+          "time": 0.4,
+          "type": "hit",
+          "id": "study-target-0",
+          "stage": 1,
+          "value": 25
+        },
+        {
+          "time": 0.8,
+          "type": "hit",
+          "id": "study-target-0",
+          "stage": 2,
+          "value": 28
+        },
+        {
+          "time": 1.2666666666666666,
+          "type": "hit",
+          "id": "study-target-0",
+          "stage": 3,
+          "value": 36
+        }
+      ],
+      "clips": [
+        "idle",
+        "attack_sword",
+        "attack_sword_2",
+        "attack_sword_3"
+      ],
+      "reviewInputs": {
+        "refine-modules.cjs": "0cc30629ebea10e165bbf9c6d2627ac1ec0d055f78fc412c43e1723bd26600ac",
+        "assets/fire-pyro-v7.png": "562d3b148f58db2e178deb4a609ae78c4b84af57013fff4998c5d303d632f5ae",
+        "assets/fire-low-rolls-v7.png": "cf57243b13dc8384ce649a023960d23484a53d583b53cb50c64046283de996df"
+      }
+    },
+    {
+      "skill": "THU_01",
+      "frames": 57,
+      "seconds": 1.9,
+      "geometry": {
+        "kind": "instantCorridor",
+        "origin": "caster",
+        "lengthMetres": 14,
+        "widthMetres": 0.65,
+        "totalTargetLimit": 1
+      },
+      "hitEvents": [
+        {
+          "time": 0.43333333333333335,
+          "type": "hit",
+          "skill": "THU_01",
+          "id": "study-target-0",
+          "value": 327
+        }
+      ],
+      "clips": [
+        "idle_staff",
+        "attack_staff"
+      ],
+      "reviewInputs": {
+        "refine-modules.cjs": "0cc30629ebea10e165bbf9c6d2627ac1ec0d055f78fc412c43e1723bd26600ac",
+        "assets/fire-pyro-v7.png": "562d3b148f58db2e178deb4a609ae78c4b84af57013fff4998c5d303d632f5ae",
+        "assets/fire-low-rolls-v7.png": "cf57243b13dc8384ce649a023960d23484a53d583b53cb50c64046283de996df"
+      }
+    },
+    {
+      "skill": "THU_02",
+      "frames": 57,
+      "seconds": 1.9,
+      "geometry": {
+        "kind": "boundedArcGraph",
+        "origin": "primaryImpact",
+        "radiusMetres": 3,
+        "totalTargetLimit": 2
+      },
+      "hitEvents": [
+        {
+          "time": 0.4666666666666667,
+          "type": "hit",
+          "skill": "THU_02",
+          "id": "study-target-0",
+          "value": 133
+        },
+        {
+          "time": 0.4666666666666667,
+          "type": "hit",
+          "skill": "THU_02",
+          "id": "study-target-2",
+          "value": 93
+        }
+      ],
+      "clips": [
+        "idle_staff",
+        "attack_staff"
+      ],
+      "reviewInputs": {
+        "refine-modules.cjs": "0cc30629ebea10e165bbf9c6d2627ac1ec0d055f78fc412c43e1723bd26600ac",
+        "assets/fire-pyro-v7.png": "562d3b148f58db2e178deb4a609ae78c4b84af57013fff4998c5d303d632f5ae",
+        "assets/fire-low-rolls-v7.png": "cf57243b13dc8384ce649a023960d23484a53d583b53cb50c64046283de996df"
+      }
+    },
+    {
+      "skill": "THU_05",
+      "frames": 77,
+      "seconds": 2.566666666666667,
+      "geometry": {
+        "kind": "boundedPulseGraph",
+        "origin": "aimPoint",
+        "radiusMetres": 4,
+        "totalTargetLimit": 4
+      },
+      "hitEvents": [
+        {
+          "time": 0.7,
+          "type": "hit",
+          "skill": "THU_05",
+          "id": "study-target-0",
+          "value": 87
+        },
+        {
+          "time": 0.7,
+          "type": "hit",
+          "skill": "THU_05",
+          "id": "study-target-2",
+          "value": 87
+        },
+        {
+          "time": 0.7,
+          "type": "hit",
+          "skill": "THU_05",
+          "id": "study-target-1",
+          "value": 87
+        },
+        {
+          "time": 0.9333333333333333,
+          "type": "hit",
+          "skill": "THU_05",
+          "id": "study-target-0",
+          "value": 87
+        },
+        {
+          "time": 0.9333333333333333,
+          "type": "hit",
+          "skill": "THU_05",
+          "id": "study-target-2",
+          "value": 87
+        },
+        {
+          "time": 0.9333333333333333,
+          "type": "hit",
+          "skill": "THU_05",
+          "id": "study-target-1",
+          "value": 87
+        },
+        {
+          "time": 1.2,
+          "type": "hit",
+          "skill": "THU_05",
+          "id": "study-target-0",
+          "value": 87
+        },
+        {
+          "time": 1.2,
+          "type": "hit",
+          "skill": "THU_05",
+          "id": "study-target-2",
+          "value": 87
+        },
+        {
+          "time": 1.2,
+          "type": "hit",
+          "skill": "THU_05",
+          "id": "study-target-1",
+          "value": 87
+        }
+      ],
+      "clips": [
+        "idle_staff",
+        "attack_staff"
+      ],
+      "reviewInputs": {
+        "refine-modules.cjs": "0cc30629ebea10e165bbf9c6d2627ac1ec0d055f78fc412c43e1723bd26600ac",
+        "assets/fire-pyro-v7.png": "562d3b148f58db2e178deb4a609ae78c4b84af57013fff4998c5d303d632f5ae",
+        "assets/fire-low-rolls-v7.png": "cf57243b13dc8384ce649a023960d23484a53d583b53cb50c64046283de996df"
+      }
+    },
+    {
+      "skill": "FIR_01",
+      "frames": 57,
+      "seconds": 1.9,
+      "geometry": {
+        "kind": "projectileWithImpactDisk",
+        "origin": "projectileImpact",
+        "radiusMetres": 0.45,
+        "totalTargetLimit": 1
+      },
+      "hitEvents": [
+        {
+          "time": 0.7,
+          "type": "hit",
+          "skill": "FIR_01",
+          "id": "study-target-0",
+          "value": 327
+        },
+        {
+          "time": 1.2,
+          "type": "hit",
+          "id": "study-target-0",
+          "value": 6
+        },
+        {
+          "time": 1.7,
+          "type": "hit",
+          "id": "study-target-0",
+          "value": 6
+        }
+      ],
+      "clips": [
+        "idle_staff",
+        "attack_staff"
+      ],
+      "reviewInputs": {
+        "refine-modules.cjs": "0cc30629ebea10e165bbf9c6d2627ac1ec0d055f78fc412c43e1723bd26600ac",
+        "assets/fire-pyro-v7.png": "562d3b148f58db2e178deb4a609ae78c4b84af57013fff4998c5d303d632f5ae",
+        "assets/fire-low-rolls-v7.png": "cf57243b13dc8384ce649a023960d23484a53d583b53cb50c64046283de996df"
+      }
+    },
+    {
+      "skill": "FIR_02",
+      "frames": 69,
+      "seconds": 2.3,
+      "geometry": {
+        "kind": "filledImpactDisk",
+        "origin": "aimPoint",
+        "radiusMetres": 2.8
+      },
+      "hitEvents": [
+        {
+          "time": 0.7,
+          "type": "hit",
+          "skill": "FIR_02",
+          "id": "study-target-0",
+          "value": 194
+        },
+        {
+          "time": 0.7,
+          "type": "hit",
+          "skill": "FIR_02",
+          "id": "study-target-2",
+          "value": 194
+        },
+        {
+          "time": 0.7,
+          "type": "hit",
+          "skill": "FIR_02",
+          "id": "study-target-1",
+          "value": 194
+        }
+      ],
+      "clips": [
+        "idle_staff",
+        "attack_staff"
+      ],
+      "reviewInputs": {
+        "refine-modules.cjs": "0cc30629ebea10e165bbf9c6d2627ac1ec0d055f78fc412c43e1723bd26600ac",
+        "assets/fire-pyro-v7.png": "562d3b148f58db2e178deb4a609ae78c4b84af57013fff4998c5d303d632f5ae",
+        "assets/fire-low-rolls-v7.png": "cf57243b13dc8384ce649a023960d23484a53d583b53cb50c64046283de996df"
+      }
+    },
+    {
+      "skill": "FIR_05",
+      "frames": 98,
+      "seconds": 3.2666666666666666,
+      "geometry": {
+        "kind": "filledWaveRectangle",
+        "origin": "aimPoint",
+        "widthMetres": 7,
+        "depthMetres": 4
+      },
+      "hitEvents": [
+        {
+          "time": 0.9333333333333333,
+          "type": "hit",
+          "skill": "FIR_05",
+          "id": "study-target-0",
+          "value": 104
+        },
+        {
+          "time": 1,
+          "type": "hit",
+          "skill": "FIR_05",
+          "id": "study-target-2",
+          "value": 104
+        },
+        {
+          "time": 1.0333333333333334,
+          "type": "hit",
+          "skill": "FIR_05",
+          "id": "study-target-1",
+          "value": 104
+        },
+        {
+          "time": 1.5333333333333334,
+          "type": "hit",
+          "skill": "FIR_05",
+          "id": "study-target-0",
+          "value": 39
+        },
+        {
+          "time": 1.5333333333333334,
+          "type": "hit",
+          "skill": "FIR_05",
+          "id": "study-target-2",
+          "value": 39
+        },
+        {
+          "time": 1.5333333333333334,
+          "type": "hit",
+          "skill": "FIR_05",
+          "id": "study-target-1",
+          "value": 39
+        },
+        {
+          "time": 2.2666666666666666,
+          "type": "hit",
+          "skill": "FIR_05",
+          "id": "study-target-0",
+          "value": 39
+        },
+        {
+          "time": 2.2666666666666666,
+          "type": "hit",
+          "skill": "FIR_05",
+          "id": "study-target-2",
+          "value": 39
+        },
+        {
+          "time": 2.2666666666666666,
+          "type": "hit",
+          "skill": "FIR_05",
+          "id": "study-target-1",
+          "value": 39
+        },
+        {
+          "time": 3.033333333333333,
+          "type": "hit",
+          "skill": "FIR_05",
+          "id": "study-target-0",
+          "value": 39
+        },
+        {
+          "time": 3.033333333333333,
+          "type": "hit",
+          "skill": "FIR_05",
+          "id": "study-target-2",
+          "value": 39
+        },
+        {
+          "time": 3.033333333333333,
+          "type": "hit",
+          "skill": "FIR_05",
+          "id": "study-target-1",
+          "value": 39
+        }
+      ],
+      "clips": [
+        "idle_staff",
+        "attack_staff"
+      ],
+      "reviewInputs": {
+        "refine-modules.cjs": "bb1c4dd6dc16bcb52bd93d970ec280375d9aa0e734b591ce1206a441fab25dff",
+        "assets/fire-pyro-v7.png": "562d3b148f58db2e178deb4a609ae78c4b84af57013fff4998c5d303d632f5ae",
+        "assets/fire-low-rolls-v7.png": "cf57243b13dc8384ce649a023960d23484a53d583b53cb50c64046283de996df"
+      }
+    }
+  ],
+  "reviewStatus": "Current implementation and candidate captured. Awaiting user art review.",
+  "deliveryState": "Design review variant served in memory by the local recorder",
+  "gameplayValidation": "Matched exact event logs, hit identities, damage, targets, geometry and cameras for every shot",
+  "artInputs": "Existing production atlases and their original source. Deterministic extraction.",
+  "meteorSealRule": "FIR_02 only, as defined in ../reference-seals-v3/usage.json",
+  "files": {
+    "capture.cjs": "b04485262532372d4b04485d03e60b2ad5de4556007a2419ea80623e99d1caec",
+    "media.py": "8c1e8475a2d9d3cce0b108deeeb85bf7bbb5f0a79830ae17b2b6303fc7161479",
+    "prepare-fire.py": "51be9d086ce10c990ee6d81c2fd0bb4dab9f7e8a94de673f259ddeaa406ebbba",
+    "README.md": "4274151b1b5c41d4c5bde5e2a8da367ab9eba5d30079f6e4661da72a8a9f4cc8",
+    "refine-modules.cjs": "bb1c4dd6dc16bcb52bd93d970ec280375d9aa0e734b591ce1206a441fab25dff",
+    "assets\\fire-extraction-comparison.jpg": "c473a2ff087778d2b820ac3edebabd4175a391d0edf9f31bf4880a24a419a4f4",
+    "assets\\fire-low-rolls-v7.png": "cf57243b13dc8384ce649a023960d23484a53d583b53cb50c64046283de996df",
+    "assets\\fire-pyro-v7.png": "562d3b148f58db2e178deb4a609ae78c4b84af57013fff4998c5d303d632f5ae",
+    "media\\basic_war-comparison.jpg": "0ffc8b3900bb98f28daa1382772a35d741af1668f43eff28ec76553d75f1f314",
+    "media\\comparison-overview.jpg": "10f7888cdcf89df66429eb45301eac4f6a46295e8b2f5794d16af20f93d91f37",
+    "media\\current-vs-refined.mp4": "ad941493c92a6574af203d35410402c21a8fbecfb7ae064cbcdcc2043ddec089",
+    "media\\fire-comparison.gif": "4e59572a47279f2b06f0865e607553e99967463f0be695776c321c55fd5c8036",
+    "media\\fir_02-comparison.jpg": "f35f98e3da71f342407455e6f177be73b08a5945bd8dec945e0ad0840076b637",
+    "media\\refined-full-size.mp4": "9fb0f2c42c43c801c15ed6ce9b82181e624c9f7f82bee30de773df49556d5e1f",
+    "media\\thunder-comparison.gif": "f4addafc085de1de207ffebb4341c39310a97d9d517997ae808f2db8e5297ff3",
+    "media\\thu_02-comparison.jpg": "24eadade42b877368f2c8d7960e4b991381b782d87b31a0d3cb7727f34a30259"
+  }
+}

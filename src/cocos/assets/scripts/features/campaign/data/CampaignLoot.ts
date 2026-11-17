@@ -1,10 +1,11 @@
 import {CAMPAIGN_EQUIPMENT,CAMPAIGN_LEVEL_LIST,CAMPAIGN_BOSSES} from './Campaign';
-import {ITEM_STACK_LIMIT} from '../../equipment/data/Equipment';
+import {ITEM_STACK_LIMIT,H03_EQUIPMENT_OPTIONS} from '../../equipment/data/Equipment';
 
 export interface WeightedEquipment {id:string;weight:number}
 export interface RegionLootDef {ordinaryGold:number;duplicateGold:number;outpostGold:number;eliteGold:number;ordinaryIron:number;outpostIron:number;eliteIron:number;equipmentChance:number;pityMisses:number}
 export const REGIONAL_LOOT_POOLS:Record<string,WeightedEquipment[]>={};
 for(const region of ['R1','R2','R3','R4','U1','U2'])REGIONAL_LOOT_POOLS[region]=CAMPAIGN_EQUIPMENT.filter(item=>item.id.startsWith(`D${region}-`)).map(item=>({id:item.id,weight:item.weight??0}));
+for(const id of H03_EQUIPMENT_OPTIONS)REGIONAL_LOOT_POOLS.R2.push({id,weight:10});
 export const REGION_LOOT:Record<string,RegionLootDef>=Object.fromEntries([
  ['R1',3,8,40,80],['R2',4,12,55,100],['R3',5,16,70,120],['R4',6,20,90,160],['U1',4,12,55,110],['U2',5,16,70,130],
 ].map(([id,ordinaryGold,duplicateGold,outpostGold,eliteGold])=>[id,{ordinaryGold:Number(ordinaryGold),duplicateGold:Number(duplicateGold),outpostGold:Number(outpostGold),eliteGold:Number(eliteGold),ordinaryIron:1,outpostIron:3,eliteIron:5,equipmentChance:.2,pityMisses:5}]));

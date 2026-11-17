@@ -1,0 +1,63 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-17",
+  "status": "design-only-not-runtime-configuration",
+  "goldCapacity": 9999999,
+  "gem": {
+    "externalSource": "shop-with-redemption-code-exception",
+    "standardUnits": 5,
+    "basePrice": 240,
+    "synthesisRatio": 3,
+    "firstSynthesisFee": 40,
+    "synthesisFeeRatio": 3,
+    "levels": [6, 16, 32, 48, 64],
+    "chapters": [1, 2, 4, 5, 7],
+    "effectScale": [1, 1.5, 2, 2.5, 3],
+    "standardBaseEffect": {"powerPercent": 0.4, "health": 4, "armorPoints": 0.25, "criticalChancePoints": 0.25, "criticalDamagePoints": 1.5},
+    "standardInlayFee": 5,
+    "extractFee": 0
+  },
+  "chapters": [
+    {"chapter": 1, "released": true, "finiteGold": 1800, "repeatGoldPerOrdinaryKill": 3},
+    {"chapter": 2, "released": true, "finiteGold": 3600, "repeatGoldPerOrdinaryKill": 4},
+    {"chapter": 3, "released": false, "finiteGold": 5400, "repeatGoldPerOrdinaryKill": 5},
+    {"chapter": 4, "released": false, "finiteGold": 7800, "repeatGoldPerOrdinaryKill": 6},
+    {"chapter": 5, "released": false, "finiteGold": 10800, "repeatGoldPerOrdinaryKill": 8},
+    {"chapter": 6, "released": false, "finiteGold": 14400, "repeatGoldPerOrdinaryKill": 10},
+    {"chapter": 7, "released": false, "finiteGold": 18600, "repeatGoldPerOrdinaryKill": 12},
+    {"chapter": 8, "released": false, "finiteGold": 24000, "repeatGoldPerOrdinaryKill": 15}
+  ],
+  "supplies": {"healthPrice": 12, "classResourcePrice": 12, "drillUnitPrice": 6},
+  "namedEquipmentPrices": {"J03": 180, "A13": 200, "W15": 420, "A10": 420, "J06": 560, "A07": 840},
+  "ordinaryEquipmentPriceBands": {
+    "chapter1": {"fine": [80, 160], "rare": [240, 420]},
+    "chapter2": {"fine": [160, 240], "rare": [360, 640]},
+    "chapter2OptionalEpic": [1000, 1400]
+  },
+  "repeatKillsPerMinuteSensitivity": [2, 4, 8],
+  "earlyScenario": {
+    "chapter1Equipment": 420,
+    "chapter1Supplies": 120,
+    "chapter1MainGemCounts": [1, 0, 0, 0, 0],
+    "chapter1ExplorationGemCounts": [3, 0, 0, 0, 0],
+    "chapter2Main": {"finalGemCounts": [2, 1, 0, 0, 0], "equipment": 560, "supplies": 120, "inlayOperations": 3, "openingAllowance": 70, "inheritanceAllowance": 10},
+    "chapter2Exploration": {"finalGemCounts": [4, 2, 0, 0, 0], "equipment": 800, "supplies": 180, "inlayOperations": 7, "openingAllowance": 140, "inheritanceAllowance": 10}
+  },
+  "endScenario": {
+    "standardSocketCount": 24,
+    "mainGemCounts": [12, 8, 4, 0, 0],
+    "explorationGemCounts": [0, 16, 6, 2, 0],
+    "optionalTopGemCounts": [0, 16, 6, 1, 1],
+    "mainWeaponId": "DG_L03",
+    "mainWeaponRank": 6,
+    "otherSlotReferenceId": "DG_L05",
+    "otherSlots": 7,
+    "otherSlotRank": 4,
+    "equipmentAllowance": 6000,
+    "supplyAllowance": 1800,
+    "stoneSynthesisAllowance": 1200,
+    "drillUnitsForEightThreeSocketItems": 120,
+    "openingFeeForEightThreeSocketItems": 120,
+    "inheritanceAllowance": 1000
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-17",
+  "profile": "test",
+  "typeChecks": {
+    "full": "passed",
+    "core": "passed"
+  },
+  "existingTests": {
+    "passed": 181,
+    "failed": 0,
+    "total": 181
+  },
+  "ruleProbe": "equipment-dismantling-rule-validation.json",
+  "browser": "equipment-dismantling-browser-validation.json",
+  "visualReview": {
+    "file": "temp/equipment-dismantling-review.jpg",
+    "result": "Reviewed actual inventory, dismantling list and confirmation at the checked viewports; shared skin and fixed actions retained."
+  },
+  "implementation": {
+    "scope": "Only extra copies; retain one of every equipment ID. Unique growing equipment cannot be dismantled.",
+    "yield": "Item required level (fallback item level) selects existing material tier; qualities ordinary/fine/rare/epic/legendary/artifact yield 1/2/3/4/6/8 stones per copy.",
+    "storage": "Optional bounded cumulative ledger and matching receipts in existing cultivation state; old saves without the ledger remain compatible.",
+    "dependencies": "Reused existing equipment counts, cultivation inventory, SaveStore, i18next and Cocos shared panels; no new dependency or platform API."
+  },
+  "build": {
+    "entry": "build/concept-2d",
+    "completed": "passed",
+    "versionBumped": false,
+    "tapTapPackageMade": false
+  },
+  "sourceSha256": {
+    "assets/scripts/features/crafting/common/CultivationRewards.ts": "27d0c3318b7c42f3f6e315412ba2b6f77e6c48bc29163e0612879c55ac2e621e",
+    "assets/scripts/core/GameSession.ts": "a814c1f58c99144be157952faa68ef61f0b0871781fcb25a01caced0c9e7bdfb",
+    "assets/scripts/app/ChapterGame.ts": "c90ab565f1f81c45fa34eb6176814a66a13fd908de1d1ba69541e63f3eef15de",
+    "assets/scripts/app/Menus.ts": "32e653467d09d160552dda9f88720474b0fce2a8e1dc1d36080c13ac835c5620",
+    "assets/scripts/features/equipment/runtime/EquipmentDismantlingPanel.ts": "16eee3efdf83ebac8f13fb39fbada01437ff40dfa9d3cba6bf109e27225bf3ec",
+    "assets/scripts/features/equipment/runtime/EquipmentPanels.ts": "ec1e201b4802a967a08ba2c0de2c93c2e5f7a8336de9b683026334e506af1cb4",
+    "assets/scripts/features/crafting/runtime/ForgingPanel.ts": "d9d55e00024850b8ecf8a14055073959281337ceda29ca87648bf1cf4bd028ce",
+    "assets/scripts/features/equipment/locales/zh-CN.ts": "5f71c4993850cfa5e1465607e59ede678e2c9c2cb301ec919e0bebadd52c1e10",
+    "assets/scripts/features/equipment/locales/en.ts": "36925118c550884e21010cd506a84d4f1021caaeb248f808329794ee54ba5026"
+  },
+  "pending": [
+    "TapTap App and physical-device UI, input and persistence verification."
+  ]
+}

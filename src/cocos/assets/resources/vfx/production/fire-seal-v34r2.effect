@@ -1,0 +1,53 @@
+CCEffect %{
+  techniques:
+  - passes:
+    - vert: meteor-reference-seal-v34r2-vs:vert
+      frag: meteor-reference-seal-v34r2-fs:frag
+      rasterizerState: { cullMode: none }
+      depthStencilState: { depthTest: true, depthWrite: false }
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: one
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: one
+          blendDstAlpha: one_minus_src_alpha
+      properties:
+        mainTexture: { value: white }
+        lightTexture: { value: black }
+        mainColor: { value: [1, 1, 1, 1] }
+}%
+CCProgram meteor-reference-seal-v34r2-vs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+  #include <builtin/uniforms/cc-local>
+  in vec3 a_position;
+  in vec2 a_texCoord;
+  out vec2 v_uv;
+  vec4 vert () {
+    v_uv = a_texCoord;
+    return cc_matViewProj * cc_matWorld * vec4(a_position, 1.0);
+  }
+}%
+CCProgram meteor-reference-seal-v34r2-fs %{
+  precision highp float;
+  in vec2 v_uv;
+  uniform sampler2D mainTexture;
+  uniform sampler2D lightTexture;
+  uniform MeteorReferenceSealParams {
+    vec4 mainColor;
+  };
+  vec4 frag () {
+    // Original reference RGB, not recoloured coverage channels. The second
+    // texture contains measured warm RGB light, with the reference's local
+    // bright/dark transitions and its diffuse engraving halos preserved.
+    vec4 ink = texture(mainTexture, v_uv);
+    vec4 light = texture(lightTexture, v_uv);
+    float fade = clamp(mainColor.a, 0.0, 1.0);
+    float coverage = ink.a * fade;
+    float alpha = coverage + light.a * 0.006 * fade * (1.0 - coverage);
+    vec3 premul = (ink.rgb * coverage + light.rgb * fade) * mainColor.rgb;
+    if (max(max(premul.r, premul.g), premul.b) < 0.001 && alpha < 0.001) discard;
+    return vec4(premul, alpha);
+  }
+}%

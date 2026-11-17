@@ -1,5 +1,8 @@
 import {registerMessages} from '../../../shared/i18n/Localization';
 const zh={
+ 'appearance.hidden':'头部外观 · 已隐藏','appearance.visible':'头部外观 · 已显示','appearance.headHint':'只改变外观，保留装备属性','appearance.hoodHint':'头罩遮住了发型，可在下方隐藏头部外观','appearance.hiddenSaved':'已隐藏头部装备外观','appearance.visibleSaved':'已显示头部装备外观','appearance.saveFailed':'外观偏好保存失败，请重试。',
+ 'automatic.allocated':'Lv{level} · 自动加点：属性 {attributes} 点 · 技能 {skills} 点',
+ 'level.reached':'升至 Lv{level} · 生命上限 +{health} · 属性点 +{attributes} · 技能点 +{skills}',
  'allocation.accuracy':'命中值','allocation.evasion':'闪避值','allocation.accuracyGrowth':'专注上限提升命中，敏捷提升闪避',
  'allocation.resourceMax':'{name}上限','allocation.resourceGrowth':'主属性每点＋2资源上限',
  'profession.ready':'已脱战 · 可随时切换职业','allocation.ready':'安全检查点 · 点击点数可免费重配','allocation.mainSkills':'当前职业技能','allocation.trapSummary':'陷阱触发后限制敌人行动；重放会替换旧陷阱。','allocation.retreatSummary':'向后撤离并射出一箭，用于拉开距离。','allocation.costShort':'下一级需要 {count} 点','allocation.bowChainSummary':'同一支箭连续转向，优先打击多个目标。','fact.chainTargets':'连穿目标','fact.targets':'命中目标','fact.radius':'范围半径','fact.range':'施放距离','fact.shield':'护盾比例','fact.angle':'扇面角度','fact.break':'削韧','fact.damage':'伤害倍率',
@@ -36,6 +39,9 @@ const zh={
  'return':'返回旅途','back':'返回','cancel':'取消','safe':'安全检查点 · 可整备',
 } as const;
 const en:Record<keyof typeof zh,string>={
+ 'appearance.hidden':'Headgear · Hidden','appearance.visible':'Headgear · Visible','appearance.headHint':'Appearance only. Equipment attributes are retained.','appearance.hoodHint':'The hood covers your hair. Hide headgear below to reveal it.','appearance.hiddenSaved':'Headgear appearance hidden.','appearance.visibleSaved':'Headgear appearance shown.','appearance.saveFailed':'Could not save the appearance preference. Please retry.',
+ 'automatic.allocated':'Lv{level} · Auto allocation: {attributes} attribute points · {skills} skill points',
+ 'level.reached':'Reached Lv{level} · Max HP +{health} · Attribute points +{attributes} · Skill points +{skills}',
  'allocation.accuracy':'Accuracy','allocation.evasion':'Evasion','allocation.accuracyGrowth':'Focus capacity boosts accuracy; Dexterity boosts evasion',
  'allocation.resourceMax':'Max {name}','allocation.resourceGrowth':'+2 capacity per primary attribute',
  'profession.ready':'Out of combat · Profession change available','allocation.ready':'Safe checkpoint · Tap points to respec','allocation.mainSkills':'Current profession skills','allocation.trapSummary':'A triggered trap restricts movement. Placing another replaces it.','allocation.retreatSummary':'Retreat while firing an arrow to create distance.','allocation.costShort':'Next rank: {count} points','allocation.bowChainSummary':'One arrow changes direction through multiple targets.','fact.chainTargets':'Chain targets','fact.targets':'Targets hit','fact.radius':'Radius','fact.range':'Cast range','fact.shield':'Shield','fact.angle':'Arc angle','fact.break':'Break power','fact.damage':'Damage multiplier',

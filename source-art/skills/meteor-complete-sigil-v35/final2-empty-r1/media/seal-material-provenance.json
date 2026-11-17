@@ -1,0 +1,178 @@
+{
+  "revision": "v35r2-concentric-bounded-midtone",
+  "source": "../cloud-complete-fire-sigil.png",
+  "sourceSha256": "5ac98e948709f17c50168949d7d30a67dab50aa5d80d128d03f0227222c88b06",
+  "sourceGeneration": "../cloud-generation.json",
+  "sourcePrompt": "../cloud-refinement-prompt.txt",
+  "basePreparationSha256": "6de7e41d1cbda256f87c7db97e0a75a6b3f5a8ef91c58889caefff501b71418e",
+  "geometry": {
+    "method": "Only three boundary annuli receive angularly tracked radial correction. Piecewise cubic Hermite inverse map has strictly increasing source knots and unit slope at every ring, retaining local stroke thickness.",
+    "targetCentre": [
+      511.5,
+      511.5
+    ],
+    "targetRadii": [
+      460.0,
+      444.57520833333183,
+      332.5334167175263
+    ],
+    "currentInnerFitCentre": [
+      509.36068599971924,
+      488.6650870301663
+    ],
+    "currentInnerFitAxes": [
+      336.44265164946137,
+      328.62418178559125
+    ],
+    "centralGeometryLockedThroughRadius": 284.5334167175263,
+    "targetRadialKnots": [
+      0.0,
+      284.5334167175263,
+      332.5334167175263,
+      380.5334167175263,
+      424.0,
+      444.57520833333183,
+      460.0,
+      485.0,
+      724.0
+    ],
+    "sourceKnotRanges": [
+      [
+        0.0,
+        0.0
+      ],
+      [
+        284.5334167175263,
+        284.5334167175263
+      ],
+      [
+        306.7257577064321,
+        353.8826842157571
+      ],
+      [
+        380.5334167175263,
+        380.5334167175263
+      ],
+      [
+        424.0,
+        424.0
+      ],
+      [
+        440.06709682805825,
+        449.66103845592414
+      ],
+      [
+        455.5260600481268,
+        463.778546307348
+      ],
+      [
+        485.0,
+        485.0
+      ],
+      [
+        724.0,
+        724.0
+      ]
+    ],
+    "minimumDerivative": 0.19351384427790744,
+    "maxCentralCoordinateDisplacementPx": 2.2737367544323206e-13,
+    "circleChecksEncoded": {
+      "outer": {
+        "medianAbsPx": 0.19999999999998863,
+        "p95AbsPx": 0.5,
+        "maxAbsPx": 0.75
+      },
+      "second": {
+        "medianAbsPx": 0.19999999999998863,
+        "p95AbsPx": 0.44999999999998863,
+        "maxAbsPx": 2.6499999999999773
+      },
+      "inner": {
+        "medianAbsPx": 0.19999999999998863,
+        "p95AbsPx": 0.5,
+        "maxAbsPx": 1.0
+      }
+    },
+    "scope": "No new design, no redraw of organic recurves; small radial attachment transitions near the inner boundary, central body unchanged. Ground circle/range/UV/lift untouched."
+  },
+  "brightness": {
+    "formula": "gain=1+.28*smooth((maxRGB-.015)/.10)*(1-smooth((maxRGB-.50)/.25)); near-zero alpha gated. Multiply all RGB energy channels equally. gain=1 exactly above maxRGB .75.",
+    "midGainMean": 1.2756141461208572,
+    "midGainP50": 1.28,
+    "maxGain": 1.28,
+    "hotMaxGainDeviation": 0.0,
+    "maxRGBRatioErrorAbove001Energy": 3.3306690738754696e-16,
+    "minimumLiftCurveDerivative": 0.05000762401397019,
+    "monotoneEnergyCurve": true,
+    "palette": "Original cloud red/orange/ember ratios, bright hot cores and along-line variation retained."
+  },
+  "resources": [
+    {
+      "name": "fire-meteor-seal-colour-v35r2.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "role": "Registered raw fire RGB plus full-resolution optical line coverage",
+      "sha256": "0bfdaca1f1f66748e6458ab36b9e8c52adeb8dbacd79c4a9877e89324be800a7",
+      "gpuBytes": 4194304
+    },
+    {
+      "name": "fire-meteor-seal-light-v35r2.png",
+      "size": [
+        512,
+        512
+      ],
+      "role": "Remaining warm RGB emission, A only0.006 weak absorption",
+      "sha256": "dd57b15edc4f3fbd0ce79627c105dae108b1329ab836de75fbd08d52d53284b8",
+      "gpuBytes": 1048576
+    }
+  ],
+  "effect": {
+    "name": "fire-seal-v35r2.effect",
+    "sha256": "ea3e09f4305e54957e38c6f0b7fc8ff75719a1a8c413d41e19c89590e35644fa",
+    "formula": "Unchanged: coverage=main.a*fade; alpha=coverage+light.a*.006*fade*(1-coverage); premul=main.rgb*coverage+light.rgb*fade; ONE/ONE_MINUS_SRC_ALPHA."
+  },
+  "totalGpuBytes": 5242880,
+  "preview": "seal-v35r2-concentric-midtone-final.jpg",
+  "previewDeclaration": "Side-by-side exact encoded shader computation on the same diagnostic dark green-grey grid. Not native Cocos/TapTap evidence.",
+  "review": {
+    "local": "Root viewed the unique side-by-side exact-material candidate and its circle/monotonicity/brightness measurements; approved final engineering publication, with native/user acceptance still separate.",
+    "production": "Published and frozen; root owns standard build/capture.",
+    "native": "Pending root build and actual Cocos capture; no user or TapTap acceptance claimed."
+  },
+  "publication": {
+    "productionUpdated": true,
+    "guard": "Acquired common build lock for this brief publication only; no build run.",
+    "rendererBeforeSha256": "fb3b4297611499683a25dd237c25368b28127f545883fa71ae02e9a77036bf4e",
+    "rendererAfterSha256": "012c3ff4f9144a136e6c806e566040a7548587cb88da0d835f38a05a48b06cb5",
+    "productionFiles": {
+      "fire-meteor-seal-colour-v35r2.png": "0bfdaca1f1f66748e6458ab36b9e8c52adeb8dbacd79c4a9877e89324be800a7",
+      "fire-meteor-seal-light-v35r2.png": "dd57b15edc4f3fbd0ce79627c105dae108b1329ab836de75fbd08d52d53284b8",
+      "fire-seal-v35r2.effect": "ea3e09f4305e54957e38c6f0b7fc8ff75719a1a8c413d41e19c89590e35644fa"
+    },
+    "slots": {
+      "0": "unchanged v27 jets",
+      "1": "unchanged v27 small seal",
+      "2": "fire-meteor-seal-colour-v35r2",
+      "3": "unchanged v24 noise",
+      "4": "fire-meteor-seal-light-v35r2"
+    },
+    "preserved": {
+      "fire-ground-jets-v27.png": "37a8319026bf39a4862f1f9bedbfceb98a6a3119c16f3265f300756dd4c2e4c6",
+      "fire-jet-seal-v27.png": "febfe312082973eace56e8e5efea0b28f3e5464764a04900a924963f3ad19f86",
+      "fire-ground-v27.effect": "f213c7660ee31ba34f8900790e6256c65b7dce1a613cd570d82ea5bedf89c808",
+      "fire-flow-noise-v24.png": "ccee680793eb3e41ea3973f01fa9963c588b4f0d5cbafe483d24ccb0105c935d",
+      "UnifiedShieldEffects.ts": "97683ffbea40a66f97c3045bf6a28bfc86bc3579326cbc28732e165970e84a6c"
+    },
+    "rendererScope": "Exactly three meteor resource strings; all other bytes including root opacity instrumentation remain unchanged.",
+    "ground": "Original centre/range/camera UV/+0.045 preserved"
+  },
+  "staticChecks": {
+    "frozenProductionHashes": "Main/light/effect exactly match reviewed r2 source files",
+    "meta": "Unique UUIDs, matching texture/image redirects, clamp-linear/no mip, alpha-colour correction disabled",
+    "renderer": "Only3 meteor resource names changed; root opacity instrumentation and ground footprint unchanged",
+    "generation": "Original cloud source SHA/prompt/generation records untouched",
+    "buildNative": "Root owns the standard final2 build/freeze and actual Cocos capture"
+  }
+}

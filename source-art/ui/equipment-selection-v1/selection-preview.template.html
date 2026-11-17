@@ -1,0 +1,175 @@
+<div id="equipment-selection-study">
+  <div class="viz-carousel viz-dotted-background" aria-label="装备选中态候选" data-previous-label="上一方案" data-next-label="下一方案">
+    <section data-variant="象牙白角标 · 推荐" aria-label="象牙白角标方案"><div class="es-mount" data-mode="corners"></div></section>
+    <section data-variant="细银框与顶标" aria-label="细银框与顶标方案" hidden><div class="es-mount" data-mode="outline"></div></section>
+  </div>
+  <template id="es-product-template">
+    <div class="es-product" aria-label="装备选中状态设计">
+      <div class="es-heading"><span class="es-brand">剑与火</span><span class="es-title">装备</span><span class="es-candidate">选中态 · 候选</span></div>
+      <div class="es-content">
+        <div class="es-worn">
+          <div class="es-smallheading">当前穿戴</div>
+          <div class="es-tile es-worn-tile"><img src="{{COMMON}}" alt="主手佣兵长剑"><span class="es-brackets" aria-hidden="true"><i></i><i></i><i></i><i></i></span></div>
+          <span class="es-slotname">主手</span>
+        </div>
+        <div class="es-bag">
+          <div class="es-smallheading">武器<span>2 件</span></div>
+          <div class="es-inventory" role="group" aria-label="选择要查看的装备">
+            <button class="es-item cursor-interaction" data-item="steel" type="button" aria-pressed="false" aria-label="查看桥上的最后一人，稀有，未穿戴">
+              <span class="es-tile" style="--es-quality:#83CDE6"><img src="{{STEEL}}" alt=""><span class="es-brackets" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="es-topmark" aria-hidden="true"></span></span>
+            </button>
+            <button class="es-item cursor-interaction" data-item="common" type="button" aria-pressed="true" aria-label="查看佣兵长剑，普通，已穿戴">
+              <span class="es-tile es-current"><img src="{{COMMON}}" alt=""><span class="es-brackets" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="es-topmark" aria-hidden="true"></span><span class="es-equipped">已穿戴</span></span>
+            </button>
+          </div>
+        </div>
+        <div class="es-detail" aria-live="polite">
+          <div class="es-inspect"><img src="{{INSPECT}}" alt="佣兵长剑的横向展示图"></div>
+          <div class="es-name">佣兵长剑</div>
+          <div class="es-detailmeta"><span class="es-detailquality">普通</span><span>·</span><span class="es-kind">单手剑</span></div>
+          <div class="es-rule"></div>
+          <div class="es-detailrow"><span>等级要求</span><span class="es-requirement">Lv1</span></div>
+          <div class="es-detailrow"><span>来源</span><span class="es-source">初始</span></div>
+        </div>
+      </div>
+      <div class="es-divider"></div>
+      <div class="es-states" aria-label="同一普通装备的四种状态">
+        <div class="es-example"><div class="es-tile"><img src="{{COMMON}}" alt="普通装备默认状态"><span class="es-brackets" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="es-topmark" aria-hidden="true"></span></div><span class="es-example-label">默认</span></div>
+        <div class="es-example"><div class="es-tile es-current"><img src="{{COMMON}}" alt="普通装备选中状态"><span class="es-brackets" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="es-topmark" aria-hidden="true"></span></div><span class="es-example-label">选中</span></div>
+        <div class="es-example"><div class="es-tile"><img src="{{COMMON}}" alt="普通装备已穿戴状态"><span class="es-brackets" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="es-topmark" aria-hidden="true"></span><span class="es-equipped">已穿戴</span></div><span class="es-example-label">已穿戴</span></div>
+        <div class="es-example"><div class="es-tile es-current"><img src="{{COMMON}}" alt="普通装备同时选中且已穿戴"><span class="es-brackets" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="es-topmark" aria-hidden="true"></span><span class="es-equipped">已穿戴</span></div><span class="es-example-label">选中 + 已穿戴</span></div>
+      </div>
+    </div>
+  </template>
+</div>
+<style>
+  #equipment-selection-study .es-mount { min-height:478px; padding:18px 12px; box-sizing:border-box; }
+  #equipment-selection-study .es-product { --es-focus:#EDE4CB; --es-quality:#AF9D85; --es-corner:10px; --es-base:#17110D; --es-text:#FFF0C9; color:var(--es-text); background:radial-gradient(ellipse at 30% 20%,#291B11 0,transparent 65%),linear-gradient(110deg,#17110D,#100C0A); border:1px solid #8C6941; border-radius:14px; box-shadow:inset 0 0 0 3px #130E0A,inset 0 0 0 4px #57432B,0 8px 28px #0003; padding:22px 24px 23px; font-family:SimSun,"Songti SC","Noto Serif SC",serif; box-sizing:border-box; }
+  #equipment-selection-study .es-product * { box-sizing:border-box; }
+  #equipment-selection-study .es-heading { display:flex; align-items:center; gap:22px; min-height:28px; padding-bottom:15px; border-bottom:1px solid #6F5235; }
+  #equipment-selection-study .es-brand { color:#D8B575; font-size:18px; letter-spacing:2px; }
+  #equipment-selection-study .es-title { font-size:20px; color:#75C5B9; }
+  #equipment-selection-study .es-candidate { margin-left:auto; color:#B9A58B; font-size:12px; white-space:nowrap; }
+  #equipment-selection-study .es-content { display:grid; grid-template-columns:72px minmax(180px,1fr) minmax(190px,1.06fr); gap:25px; padding-top:23px; }
+  #equipment-selection-study .es-smallheading { display:flex; justify-content:space-between; color:#C9B99E; font-size:13px; margin-bottom:14px; white-space:nowrap; }
+  #equipment-selection-study .es-smallheading>span { font-size:12px; color:#B7A186; }
+  #equipment-selection-study .es-inventory { display:grid; grid-template-columns:repeat(2,minmax(64px,1fr)); gap:14px; align-items:start; }
+  #equipment-selection-study .es-item { appearance:none; padding:0; margin:0; border:0; background:transparent; color:inherit; border-radius:9px; min-width:48px; min-height:48px; font:inherit; text-align:center; }
+  #equipment-selection-study .es-item:focus-visible { outline:2px solid #75C5B9; outline-offset:4px; }
+  #equipment-selection-study .es-tile { position:relative; isolation:isolate; display:block; width:100%; aspect-ratio:1 / 1.13; background:radial-gradient(ellipse at 45% 50%,#2B221C,#100D0A 78%); border:1px solid color-mix(in srgb,var(--es-quality) 60%,#2B2016); border-radius:9px; box-shadow:inset 0 0 0 2px #15100D,inset 0 0 0 3px #46352780; }
+  #equipment-selection-study .es-tile>img { display:block; width:100%; height:100%; object-fit:contain; border-radius:8px; position:absolute; inset:0; padding:3px; }
+  #equipment-selection-study .es-item:hover .es-tile { background:radial-gradient(ellipse at 45% 50%,#372A20,#18110C 78%); }
+  #equipment-selection-study .es-item:active .es-tile { filter:brightness(.85); }
+  #equipment-selection-study .es-brackets { position:absolute; inset:1px; pointer-events:none; opacity:0; transition:opacity 120ms ease; z-index:3; }
+  #equipment-selection-study .es-brackets>i { position:absolute; display:block; width:var(--es-corner); height:var(--es-corner); border:0 solid var(--es-focus); filter:drop-shadow(0 0 1px #000); }
+  #equipment-selection-study .es-brackets>i:nth-child(1) { left:0; top:0; border-top-width:1.5px; border-left-width:1.5px; border-top-left-radius:6px; }
+  #equipment-selection-study .es-brackets>i:nth-child(2) { right:0; top:0; border-top-width:1.5px; border-right-width:1.5px; border-top-right-radius:6px; }
+  #equipment-selection-study .es-brackets>i:nth-child(3) { left:0; bottom:0; border-bottom-width:1.5px; border-left-width:1.5px; border-bottom-left-radius:6px; }
+  #equipment-selection-study .es-brackets>i:nth-child(4) { right:0; bottom:0; border-bottom-width:1.5px; border-right-width:1.5px; border-bottom-right-radius:6px; }
+  #equipment-selection-study .es-current .es-brackets { opacity:1; }
+  #equipment-selection-study .es-current:after { content:""; position:absolute; inset:4px; border-radius:6px; background:#EDE4CB06; pointer-events:none; }
+  #equipment-selection-study .es-equipped { position:absolute; z-index:4; bottom:5px; left:50%; transform:translateX(-50%); white-space:nowrap; font-size:11px; line-height:17px; height:19px; padding:0 6px; color:#A4C2B0; background:#18302B; border:1px solid #507D70; border-radius:2px; }
+  #equipment-selection-study .es-slotname { display:block; text-align:center; font-size:13px; margin-top:8px; color:#CDBC9F; }
+  #equipment-selection-study .es-worn-tile { aspect-ratio:1; margin-top:1px; }
+  #equipment-selection-study .es-detail { min-width:0; padding-left:19px; border-left:1px solid #634A2B70; }
+  #equipment-selection-study .es-inspect { height:75px; position:relative; margin:-4px -9px 10px; }
+  #equipment-selection-study .es-inspect>img { width:100%; height:100%; object-fit:contain; }
+  #equipment-selection-study .es-name { font-size:21px; line-height:1.3; min-height:28px; }
+  #equipment-selection-study .es-detailmeta { display:flex; gap:7px; font-size:13px; margin-top:5px; color:#BDA98D; }
+  #equipment-selection-study .es-detailquality { color:var(--es-quality); }
+  #equipment-selection-study .es-rule { height:1px; background:linear-gradient(90deg,transparent,#80633F,transparent); margin:14px -3px 12px; }
+  #equipment-selection-study .es-detailrow { display:flex; justify-content:space-between; gap:14px; margin-top:8px; font-size:12px; color:#BBA88E; }
+  #equipment-selection-study .es-requirement,#equipment-selection-study .es-source { color:#EDE4CB; }
+  #equipment-selection-study .es-divider { height:1px; background:linear-gradient(90deg,transparent,#5C452E,transparent); margin:24px 0 20px; }
+  #equipment-selection-study .es-states { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px; }
+  #equipment-selection-study .es-example { display:flex; flex-direction:column; align-items:center; gap:10px; }
+  #equipment-selection-study .es-example>.es-tile { max-width:78px; aspect-ratio:1; }
+  #equipment-selection-study .es-example-label { color:#C8B69A; font-size:12px; white-space:nowrap; }
+  #equipment-selection-study .es-topmark { display:none; }
+  #equipment-selection-study [data-mode="outline"] .es-current .es-brackets { border:1px solid var(--es-focus); border-radius:7px; }
+  #equipment-selection-study [data-mode="outline"] .es-brackets>i { display:none; }
+  #equipment-selection-study [data-mode="outline"] .es-current .es-topmark { display:block; position:absolute; top:-3px; left:calc(50% - 3px); width:6px; height:6px; background:var(--es-focus); transform:rotate(45deg); box-shadow:0 0 0 2px #17110D; z-index:5; }
+  @media(max-width:620px) {
+    #equipment-selection-study .es-mount { min-height:630px; padding:12px 0; }
+    #equipment-selection-study .es-product { padding:20px 19px; }
+    #equipment-selection-study .es-content { grid-template-columns:64px 1fr; gap:22px; }
+    #equipment-selection-study .es-inventory { grid-template-columns:repeat(2,minmax(64px,100px)); }
+    #equipment-selection-study .es-detail { grid-column:1/-1; display:grid; grid-template-columns:100px 1fr; column-gap:18px; padding:10px 0 0; border-left:0; border-top:1px solid #634A2B70; }
+    #equipment-selection-study .es-inspect { grid-row:1/5; height:90px; margin:0; }
+    #equipment-selection-study .es-name { font-size:19px; }
+    #equipment-selection-study .es-rule { display:none; }
+    #equipment-selection-study .es-detailrow { margin-top:7px; }
+    #equipment-selection-study .es-example>.es-tile { max-width:70px; }
+    #equipment-selection-study .es-states { gap:12px; }
+    #equipment-selection-study .es-equipped { padding:0 3px; }
+  }
+  @media(max-width:390px) {
+    #equipment-selection-study .es-mount { min-height:738px; }
+    #equipment-selection-study .es-heading { gap:13px; }
+    #equipment-selection-study .es-brand { font-size:16px; }
+    #equipment-selection-study .es-candidate { font-size:11px; }
+    #equipment-selection-study .es-states { grid-template-columns:repeat(2,1fr); row-gap:18px; }
+    #equipment-selection-study .es-detail { grid-template-columns:84px 1fr; column-gap:10px; }
+  }
+  @media(prefers-reduced-motion:reduce) { #equipment-selection-study .es-brackets { transition:none; } }
+</style>
+<script>
+(() => {
+  const root = document.getElementById('equipment-selection-study');
+  const template = document.getElementById('es-product-template');
+  const palette = { '普通':'#AF9D85', '精良':'#7BDEB4', '稀有':'#83CDE6', '史诗':'#C4A5ED', '传奇':'#F5A45D', '神器':'#F5A45D' };
+  const saved = window.openai?.widgetState;
+  const controllers = [];
+  root.querySelectorAll('.es-mount').forEach((mount,index) => {
+    mount.appendChild(template.content.cloneNode(true));
+    const product = mount.querySelector('.es-product');
+    product.setAttribute('aria-label',mount.dataset.mode==='corners'?'象牙白角标选中态':'细银框与顶标选中态');
+    const state = { selected:saved?.privateContent?.[index]?.selected==='steel'?'steel':'common', quality:'普通', accent:'#EDE4CB', corner:10 };
+    const buttons = Array.from(product.querySelectorAll('.es-item'));
+    function render() {
+      const commonSelected = state.selected==='common';
+      product.style.setProperty('--es-focus',state.accent);
+      product.style.setProperty('--es-corner',state.corner+'px');
+      const activeQuality = commonSelected?state.quality:'稀有';
+      buttons.forEach(button => {
+        const current = button.dataset.item===state.selected;
+        button.setAttribute('aria-pressed',String(current));
+        button.querySelector('.es-tile').classList.toggle('es-current',current);
+        if(button.dataset.item==='common') button.querySelector('.es-tile').style.setProperty('--es-quality',palette[state.quality]);
+      });
+      product.querySelector('.es-name').textContent=commonSelected?'佣兵长剑':'桥上的最后一人';
+      product.querySelector('.es-detailquality').textContent=commonSelected&&state.quality!=='普通'?state.quality+'（品质示意）':activeQuality;
+      product.querySelector('.es-detailquality').style.color=palette[activeQuality];
+      product.querySelector('.es-kind').textContent=commonSelected?'单手剑':'单手锤';
+      product.querySelector('.es-requirement').textContent=commonSelected?'Lv1':'Lv3';
+      product.querySelector('.es-source').textContent=commonSelected?'初始':'武备台';
+      const detailArt=product.querySelector('.es-inspect img');
+      detailArt.src=commonSelected?'{{INSPECT}}':'{{STEEL}}';
+      detailArt.alt=commonSelected?'佣兵长剑的横向展示图':'桥上的最后一人的现有装备图';
+    }
+    buttons.forEach(button=>button.addEventListener('click',()=>{
+      state.selected=button.dataset.item;
+      render();
+      window.openai?.setWidgetState({modelContent:{selectedDesign:'象牙白角标候选',viewedItems:controllers.map(c=>c.state.selected)},privateContent:controllers.map(c=>({selected:c.state.selected}))}).catch(()=>{});
+    }));
+    controllers.push({state,render});
+    render();
+    if(globalThis.Tweak) {
+      const tweak=new Tweak({container:product,onChange:render});
+      tweak.addColorPicker(state,'accent',{label:'选中标记颜色',reference:'equipment.selection'});
+      if(mount.dataset.mode==='corners') tweak.addSlider(state,'corner',{label:'角标长度',min:7,max:16,step:1,unit:'px'});
+      tweak.addSelect(state,'quality',{label:'佣兵长剑品质叠加示意',options:Object.keys(palette)});
+    }
+  });
+  window.addEventListener('openai:set_globals',event=>{
+    const next=event.detail?.globals?.widgetState?.privateContent;
+    if(!Array.isArray(next))return;
+    controllers.forEach((controller,index)=>{
+      if(next[index]?.selected==='common'||next[index]?.selected==='steel') {
+        controller.state.selected=next[index].selected;
+        controller.render();
+      }
+    });
+  });
+})();
+</script>

@@ -1,0 +1,33 @@
+{
+  "compiledSha256": "55d1a655386903c9c3dca5de16a029608065838ef6c0a2f0a19d19831ca66cf9",
+  "rawCapture": "src\\.tmp\\fire-reference-alignment-v32\\contact-final-empty-r1",
+  "reviewWindowFrames": [
+    72,
+    109
+  ],
+  "reviewWindowImpactAges": [
+    1.1833333333333291,
+    2.416666666666658
+  ],
+  "nativeRearRoi": [
+    300,
+    560,
+    950,
+    900
+  ],
+  "visualFinding": "Rear-centre between the outer curling wings narrows after ~1.42s and forms a deep V-shaped missing region at frame82 (~1.5167s), remaining low/missing through the later fade.",
+  "criticalFrames": {
+    "narrowing": 79,
+    "firstFoldThresholdFrame": 82,
+    "establishedMissingRegion": 85
+  },
+  "sourceEvidence": {
+    "matchingHistoricalFireImpactEffectsSha256": "4e25763382da532883f9379321734cdeac52391b795c9bb8f27a270b1de34b3b",
+    "mapping": "screenY=dv*H*(1-.76*S*exp(-(du/.18)^2)*smooth(dv/.20)) + ripple*main",
+    "centralDerivativeAtDv015": "1-.76*S*1.6875",
+    "negativeDerivativeThresholdS": 0.7797270955165693,
+    "predictedImpactAgeSeconds": 1.514
+  },
+  "exclusionEvidence": "Same effect key remains active, vertices=884, radius=3.8 and clippedDirections=0. Global tail opacity begins at1.65s, later than the first fold threshold. This supports projected mesh folding over a pool clear or obstacle clipping.",
+  "artStatus": "v32 historical defect audit only; no v33 acceptance implied"
+}

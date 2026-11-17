@@ -95,7 +95,7 @@ export class FlatWorldLayers {
  }
  private unlit(source:Material,name:string){
   const cached=this.unlitMaterials.get(source);if(cached)return cached;
-  const blend=name==='Road'||name==='GrassCover',surface=mapArtSurface(this.style,name),texture=surface?this.surfaceTextures.get(surface.resource):source.getProperty('mainTexture')as Texture2D|undefined,m=this.material(texture,blend,blend),tint=source.getProperty('mainColor')as Color|undefined;
+  const blend=name==='Road'||name==='GrassCover',vertexColors=blend||name==='Ground'&&this.world.area.kind!=='interior',surface=mapArtSurface(this.style,name),texture=surface?this.surfaceTextures.get(surface.resource):source.getProperty('mainTexture')as Texture2D|undefined,m=this.material(texture,blend,vertexColors),tint=source.getProperty('mainColor')as Color|undefined;
   if(tint)m.setProperty('mainColor',tint);
   if(surface){
    // Keep the original collision mesh and metre-based UVs. Only its sampling

@@ -3,6 +3,8 @@ import type {Point} from '../../../core/Contracts';
 import {FEEDBACK_PALETTE as P} from '../../../shared/ui/FeedbackPalette';
 
 export interface MeleeVfxHost {
+ warriorSweep?(key:string,p:Point,angle:number,radius:number,span:number,stage:number,t:number,alpha:number):void;
+ warriorContact?(key:string,p:Point,angle:number,strength:number,t:number):void;
  at(p:Point,height?:number):Vec3;
  line(points:Vec3[],color:string,width?:number,alpha?:number,taper?:boolean,style?:import('../../../shared/assets/VfxAssets').VfxLineStyle):void;
  blade?(key:string,p:Point,height:number,angle:number,radius:number,span:number,width:number,alpha:number,progress:number,normal?:Vec3):void;
@@ -10,6 +12,7 @@ export interface MeleeVfxHost {
 const point=(p:Point,a:number,r:number):Point=>({x:p.x+Math.sin(a)*r,z:p.z+Math.cos(a)*r});
 /** All blade vertices remain within the supplied real radius. Thickness grows inward. */
 export function drawMeleeSweep(host:MeleeVfxHost,key:string,p:Point,angle:number,radius:number,span:number,stage:number,t:number,alpha:number){
+ if(host.warriorSweep){host.warriorSweep(key,p,angle,radius,span,stage,t,alpha);return;}
  if(!(radius>0&&span>0&&alpha>0))return;
  const reverse=stage===2,tilt=stage===3?.58:stage===2?-.16:.30;
  const normal=new Vec3(Math.cos(angle)*Math.sin(tilt),Math.cos(tilt),-Math.sin(angle)*Math.sin(tilt));
@@ -17,6 +20,7 @@ export function drawMeleeSweep(host:MeleeVfxHost,key:string,p:Point,angle:number
 }
 /** Small local contact rays, never another swept damage area. */
 export function drawMeleeContact(host:MeleeVfxHost,key:string,p:Point,angle:number,strength:number,t:number,reduced=false){
+ if(host.warriorContact){host.warriorContact(key,p,angle,strength,t);return;}
  const fade=Math.pow(Math.max(0,1-t),1.8),alpha=Math.round((reduced?110:245)*fade),reach=(.17+Math.min(2,strength)*.075)*(1-t*.4);
  if(alpha<=0)return;
  const center=host.at(p,.68);

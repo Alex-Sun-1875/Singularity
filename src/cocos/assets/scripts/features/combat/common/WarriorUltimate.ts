@@ -1,0 +1,440 @@
+/** Approved v38 contour, in local metres. Forward is +Z; the wave plane is Y/Z.
+ * Exported from the user-traced source-art profile by export-production.py.
+ * Every pulse uses these same points, height and scale throughout its lifetime.
+ */
+export type WarriorUltimatePoint = readonly [height: number, forward: number];
+
+export const WARRIOR_ULTIMATE_OUTER = [
+  [0.0, 0.0],
+  [-0.0035713, 0.0628658],
+  [-0.0070468, 0.1257326],
+  [-0.0104041, 0.1886005],
+  [-0.0136208, 0.2514695],
+  [-0.0166747, 0.3143398],
+  [-0.0195432, 0.3772112],
+  [-0.0222041, 0.4400839],
+  [-0.024635, 0.502958],
+  [-0.0268135, 0.5658334],
+  [-0.0287174, 0.6287103],
+  [-0.0303241, 0.6915887],
+  [-0.0316115, 0.7544686],
+  [-0.032557, 0.81735],
+  [-0.0331384, 0.8802331],
+  [-0.0333333, 0.9431179],
+  [-0.0332705, 1.0060398],
+  [-0.0330861, 1.0690262],
+  [-0.0327809, 1.132068],
+  [-0.0323559, 1.1951561],
+  [-0.0318119, 1.2582816],
+  [-0.0311498, 1.3214352],
+  [-0.0303704, 1.384608],
+  [-0.0294747, 1.4477909],
+  [-0.0284635, 1.5109748],
+  [-0.0273376, 1.5741507],
+  [-0.026098, 1.6373095],
+  [-0.0247455, 1.7004421],
+  [-0.023281, 1.7635394],
+  [-0.0217053, 1.8265925],
+  [-0.0200194, 1.8895922],
+  [-0.0182241, 1.9525294],
+  [-0.0163203, 2.0153952],
+  [-0.0143088, 2.0781804],
+  [-0.0121905, 2.1408759],
+  [-0.0099663, 2.2034728],
+  [-0.0076371, 2.2659619],
+  [-0.0052037, 2.3283342],
+  [-0.0026669, 2.3905806],
+  [-2.78e-05, 2.4526921],
+  [0.0040788, 2.5146423],
+  [0.010882, 2.5764224],
+  [0.0200878, 2.638051],
+  [0.0314024, 2.6995463],
+  [0.0445318, 2.7609269],
+  [0.0591822, 2.8222113],
+  [0.0750596, 2.8834178],
+  [0.0918701, 2.9445649],
+  [0.1093197, 3.005671],
+  [0.1271145, 3.0667547],
+  [0.1449607, 3.1278343],
+  [0.1625642, 3.1889283],
+  [0.1796312, 3.2500552],
+  [0.1958678, 3.3112333],
+  [0.2109799, 3.3724812],
+  [0.2248928, 3.4340349],
+  [0.2380487, 3.4963216],
+  [0.2506176, 3.5592064],
+  [0.2627538, 3.6225333],
+  [0.2746112, 3.686146],
+  [0.2863441, 3.7498885],
+  [0.2981066, 3.8136048],
+  [0.3100528, 3.8771385],
+  [0.3223369, 3.9403338],
+  [0.335113, 4.0030344],
+  [0.3485352, 4.0650842],
+  [0.3627576, 4.1263271],
+  [0.3779345, 4.1866071],
+  [0.3942199, 4.2457679],
+  [0.411768, 4.3036535],
+  [0.4307329, 4.3601078],
+  [0.4512687, 4.4149747],
+  [0.474965, 4.4688526],
+  [0.5033048, 4.5224769],
+  [0.5357739, 4.5756443],
+  [0.5718536, 4.6281496],
+  [0.6110254, 4.6797875],
+  [0.6527706, 4.7303527],
+  [0.6965705, 4.7796398],
+  [0.7419064, 4.8274436],
+  [0.7882598, 4.8735587],
+  [0.8351119, 4.9177799],
+  [0.881944, 4.9599018],
+  [0.9282376, 4.999719],
+  [0.9751142, 5.0378951],
+  [1.0239546, 5.0752189],
+  [1.0745594, 5.1116362],
+  [1.1267289, 5.1470927],
+  [1.1802635, 5.1815341],
+  [1.2349635, 5.2149064],
+  [1.2906293, 5.2471551],
+  [1.3470612, 5.278226],
+  [1.4040597, 5.308065],
+  [1.461425, 5.3366177],
+  [1.5189576, 5.3638298],
+  [1.5764578, 5.3896472],
+  [1.633726, 5.4140156],
+  [1.690971, 5.4374144],
+  [1.7488141, 5.4607078],
+  [1.8072223, 5.4837889],
+  [1.8661485, 5.5065309],
+  [1.9255457, 5.5288069],
+  [1.9853667, 5.5504903],
+  [2.0455644, 5.5714541],
+  [2.1060918, 5.5915716],
+  [2.1669018, 5.6107161],
+  [2.2279472, 5.6287607],
+  [2.289181, 5.6455786],
+  [2.3505561, 5.6610431],
+  [2.4120253, 5.6750274],
+  [2.4735416, 5.6874047],
+  [2.5350579, 5.6980481],
+  [2.5965272, 5.7068314],
+  [2.6580438, 5.7146275],
+  [2.7197227, 5.7222823],
+  [2.7815634, 5.7297459],
+  [2.8435654, 5.7369684],
+  [2.9057283, 5.7438998],
+  [2.9680515, 5.7504904],
+  [3.0305347, 5.7566902],
+  [3.0931772, 5.7624492],
+  [3.1559787, 5.7677176],
+  [3.2189387, 5.7724455],
+  [3.2820567, 5.7765829],
+  [3.3453322, 5.78008],
+  [3.4087648, 5.7828868],
+  [3.4723539, 5.7849535],
+  [3.5360991, 5.78623],
+  [3.6, 5.7866667],
+] as const satisfies readonly WarriorUltimatePoint[];
+
+export const WARRIOR_ULTIMATE_INNER = [
+  [0.0, 0.0],
+  [0.0129003, 0.0540959],
+  [0.0260152, 0.1081262],
+  [0.0393411, 0.1620912],
+  [0.0528745, 0.2159913],
+  [0.0666118, 0.2698267],
+  [0.0805495, 0.3235979],
+  [0.0946841, 0.3773051],
+  [0.1090119, 0.4309487],
+  [0.1235295, 0.484529],
+  [0.1382334, 0.5380464],
+  [0.1531198, 0.5915012],
+  [0.1681855, 0.6448936],
+  [0.1834267, 0.6982242],
+  [0.1988399, 0.7514931],
+  [0.2144216, 0.8047007],
+  [0.2301683, 0.8578474],
+  [0.2460763, 0.9109335],
+  [0.2621422, 0.9639593],
+  [0.2783624, 1.0169252],
+  [0.2947334, 1.0698314],
+  [0.3112516, 1.1226784],
+  [0.3279134, 1.1754664],
+  [0.3447154, 1.2281958],
+  [0.361654, 1.2808669],
+  [0.3787256, 1.3334801],
+  [0.3959267, 1.3860356],
+  [0.4132537, 1.4385339],
+  [0.4307032, 1.4909752],
+  [0.4482715, 1.5433599],
+  [0.466019, 1.595682],
+  [0.484084, 1.6479274],
+  [0.502459, 1.7000971],
+  [0.52113, 1.7521925],
+  [0.5400833, 1.8042153],
+  [0.5593052, 1.8561667],
+  [0.5787819, 1.9080484],
+  [0.5984997, 1.9598617],
+  [0.6184448, 2.0116083],
+  [0.6386034, 2.0632895],
+  [0.6589619, 2.1149068],
+  [0.6795064, 2.1664618],
+  [0.7002231, 2.2179559],
+  [0.7210984, 2.2693905],
+  [0.7421185, 2.3207673],
+  [0.7632696, 2.3720876],
+  [0.7845379, 2.4233529],
+  [0.8059098, 2.4745648],
+  [0.8273714, 2.5257246],
+  [0.848909, 2.576834],
+  [0.8705088, 2.6278943],
+  [0.8921571, 2.678907],
+  [0.9138402, 2.7298737],
+  [0.9355418, 2.7808042],
+  [0.9572266, 2.8318086],
+  [0.9789082, 2.8829],
+  [1.0006143, 2.934052],
+  [1.0223725, 2.9852381],
+  [1.0442105, 3.0364317],
+  [1.0661558, 3.0876064],
+  [1.088236, 3.1387358],
+  [1.1104789, 3.1897934],
+  [1.1329121, 3.2407526],
+  [1.1555631, 3.291587],
+  [1.1784597, 3.3422701],
+  [1.2016293, 3.3927755],
+  [1.2250998, 3.4430766],
+  [1.2488986, 3.4931471],
+  [1.2730535, 3.5429603],
+  [1.297592, 3.5924898],
+  [1.3225418, 3.6417092],
+  [1.3479305, 3.690592],
+  [1.3737858, 3.7391117],
+  [1.4001352, 3.7872417],
+  [1.4269757, 3.8351225],
+  [1.4542603, 3.8830362],
+  [1.4819858, 3.930954],
+  [1.5101502, 3.9788396],
+  [1.5387515, 4.0266568],
+  [1.5677878, 4.0743694],
+  [1.5972569, 4.1219411],
+  [1.6271569, 4.1693357],
+  [1.6574859, 4.2165169],
+  [1.6882417, 4.2634484],
+  [1.7194223, 4.3100941],
+  [1.7510258, 4.3564176],
+  [1.7830502, 4.4023827],
+  [1.8154935, 4.4479532],
+  [1.8483536, 4.4930928],
+  [1.8816285, 4.5377652],
+  [1.9153162, 4.5819343],
+  [1.9494148, 4.6255637],
+  [1.9839222, 4.6686173],
+  [2.0188365, 4.7110587],
+  [2.0541555, 4.7528518],
+  [2.0898773, 4.7939602],
+  [2.1260084, 4.834363],
+  [2.1628386, 4.8745547],
+  [2.200487, 4.9147177],
+  [2.2389194, 4.9547562],
+  [2.2781019, 4.9945745],
+  [2.3180004, 5.0340768],
+  [2.3585808, 5.0731673],
+  [2.3998091, 5.1117502],
+  [2.4416513, 5.1497298],
+  [2.4840734, 5.1870102],
+  [2.5270412, 5.2234956],
+  [2.5705207, 5.2590904],
+  [2.6144779, 5.2936986],
+  [2.6588788, 5.3272245],
+  [2.7036893, 5.3595724],
+  [2.7488753, 5.3906464],
+  [2.7944029, 5.4203508],
+  [2.8402426, 5.4486016],
+  [2.8866251, 5.4759738],
+  [2.933683, 5.5028039],
+  [2.9814009, 5.5290576],
+  [3.0297639, 5.5547005],
+  [3.0787567, 5.5796985],
+  [3.1283643, 5.6040173],
+  [3.1785715, 5.6276226],
+  [3.2293632, 5.6504801],
+  [3.2807243, 5.6725556],
+  [3.3326396, 5.6938148],
+  [3.385094, 5.7142234],
+  [3.4380724, 5.7337472],
+  [3.4915596, 5.7523518],
+  [3.5455405, 5.7700031],
+  [3.6, 5.7866667],
+] as const satisfies readonly WarriorUltimatePoint[];
+
+/** Shared visual/contact clock; damage budgets and actor clips are authored separately. */
+export const WARRIOR_ULTIMATE = {
+  outerSamples: WARRIOR_ULTIMATE_OUTER,
+  innerSamples: WARRIOR_ULTIMATE_INNER,
+  fixedScale: 1,
+  fixedGeometry: true,
+  fixedWorldHeight: true,
+  planeLift: 0.12,
+  pulseInterval: 0.22,
+  waveLife: 1.02,
+  visualDuration: 1.52,
+  launchDelay: 0.018,
+  appearSeconds: 0.025,
+  dissolveStart: 0.40,
+  dissolveDuration: 0.62,
+  alphaReference: 245,
+  silver: [0.79, 0.83, 0.86],
+  rankWaveCounts: [1, 2, 2, 3, 3],
+  mesh: {
+    depthSegments: 16,
+    bodyDepth: 0.66,
+    wakeDepth: 0.34,
+    wakeLength: 1.10,
+    wakeHeightAmplitude: 0.015,
+    wakeHeightFrequency: 23,
+    wakeSideAmplitude: 0.012,
+    wakeEnvelopeExponent: 1.2,
+    boundingRadius: 8,
+  },
+  travel: {
+    start: 0.15,
+    contactAdvance: 5.255349567118673,
+  },
+} as const;
+
+/** Pass the cast's captured skill rank, so later skill changes cannot alter a live cast. */
+export function warriorUltimateWaveCount(rank: number): 1 | 2 | 3 {
+  const index = Number.isFinite(rank) ? Math.max(0, Math.min(4, Math.floor(rank) - 1)) : 0;
+  return WARRIOR_ULTIMATE.rankWaveCounts[index];
+}
+
+const clamp = (value: number): number => Math.max(0, Math.min(1, value));
+const smooth = (value: number): number => { const q = clamp(value); return q * q * (3 - 2 * q); };
+
+/** Constant forward speed through the entire fade. Preserve the authored
+ * advance at the end of the damaging crest without a slow drifting phase. */
+export function warriorUltimateDistance(age: number): number {
+  const travel = WARRIOR_ULTIMATE.travel;
+  return travel.start + travel.contactAdvance
+    * Math.max(0, Math.min(WARRIOR_ULTIMATE.waveLife, age)) / WARRIOR_ULTIMATE_CONTACT.endAge;
+}
+
+/** Inverse of the shader's smoothstep(0, 1, x), evaluated only for fixed thresholds. */
+const inverseSmooth = (value: number): number => {
+  let lo = 0, hi = 1;
+  for (let i = 0; i < 48; i++) {
+    const mid = (lo + hi) * 0.5;
+    if (smooth(mid) < value) lo = mid; else hi = mid;
+  }
+  return (lo + hi) * 0.5;
+};
+
+/** The damaging bright crest, excluding the trailing air mesh and its late dissolve.
+ * Ages are local to one pulse. The renderer skips alpha below .02, and the shader's
+ * frontLife reaches zero at smooth((age - .40) / .62) = .88.
+ */
+export const WARRIOR_ULTIMATE_CONTACT = {
+  startAge: WARRIOR_ULTIMATE.appearSeconds * inverseSmooth(0.02),
+  endAge: WARRIOR_ULTIMATE.dissolveStart + WARRIOR_ULTIMATE.dissolveDuration * inverseSmooth(0.88),
+  halfWidth: 0.22,
+  bodyHeight: 1.8,
+  coreDepth: 0.15,
+  forwardPadding: 0.08,
+  minU: 0.014,
+  maxU: 0.973,
+} as const;
+
+// Repeated enemies normally share hurt radii and local ground-height intervals. Keep the
+// immutable projections bounded without walking 128 contour segments per hit.
+const contactSpanCache = new Map<string, readonly [minForward: number, maxForward: number]>();
+const contactSpanCacheLimit = 32;
+
+/** Project the authored bright crest through a standing body's [baseHeight, bodyHeight]
+ * vertical extent. Coordinates are relative to the moving wave node, not its tip.
+ * Both heights are relative to the captured launch ground; bodyHeight is the upper bound.
+ * UV end caps are excluded; no v > bodyDepth trailing-air vertices take part.
+ * An empty vertical intersection returns [Infinity, -Infinity].
+ */
+export function warriorUltimateContactSpan(
+  bodyHeight: number = WARRIOR_ULTIMATE_CONTACT.bodyHeight,
+  baseHeight = 0,
+): readonly [minForward: number, maxForward: number] {
+  let minForward = Infinity, maxForward = -Infinity;
+  if (!Number.isFinite(bodyHeight) || !Number.isFinite(baseHeight) || bodyHeight < baseHeight) return [minForward, maxForward];
+  const cacheKey = `${baseHeight}:${bodyHeight}`;
+  const cached = contactSpanCache.get(cacheKey);
+  if (cached) return cached;
+  const contact = WARRIOR_ULTIMATE_CONTACT;
+  const depth = contact.coreDepth / WARRIOR_ULTIMATE.mesh.bodyDepth;
+  const segments = WARRIOR_ULTIMATE_OUTER.length - 1;
+  for (let i = 0; i < segments; i++) {
+    let lo = Math.max(0, contact.minU * segments - i);
+    let hi = Math.min(1, contact.maxU * segments - i);
+    if (lo > hi) continue;
+    const outer = WARRIOR_ULTIMATE_OUTER[i], inner = WARRIOR_ULTIMATE_INNER[i];
+    const nextOuter = WARRIOR_ULTIMATE_OUTER[i + 1], nextInner = WARRIOR_ULTIMATE_INNER[i + 1];
+    const height = WARRIOR_ULTIMATE.planeLift + outer[0] + (inner[0] - outer[0]) * depth;
+    const nextHeight = WARRIOR_ULTIMATE.planeLift + nextOuter[0] + (nextInner[0] - nextOuter[0]) * depth;
+    const forward = outer[1] + (inner[1] - outer[1]) * depth;
+    const nextForward = nextOuter[1] + (nextInner[1] - nextOuter[1]) * depth;
+    const deltaHeight = nextHeight - height;
+    if (Math.abs(deltaHeight) < 1e-12) {
+      if (height < baseHeight || height > bodyHeight) continue;
+    } else {
+      const floor = (baseHeight - height) / deltaHeight, ceiling = (bodyHeight - height) / deltaHeight;
+      lo = Math.max(lo, Math.min(floor, ceiling));
+      hi = Math.min(hi, Math.max(floor, ceiling));
+      if (lo > hi) continue;
+    }
+    const a = forward + (nextForward - forward) * lo;
+    const b = forward + (nextForward - forward) * hi;
+    minForward = Math.min(minForward, a, b);
+    maxForward = Math.max(maxForward, a, b);
+  }
+  const span = Object.freeze([minForward, maxForward] as const);
+  if (contactSpanCache.size >= contactSpanCacheLimit) {
+    const oldest = contactSpanCache.keys().next().value;
+    if (oldest !== undefined) contactSpanCache.delete(oldest);
+  }
+  contactSpanCache.set(cacheKey, span);
+  return span;
+}
+
+/** Furthest authored damaging crest from the cast origin; enemy radii are excluded. */
+export function warriorUltimateContactRange(
+  bodyHeight: number = WARRIOR_ULTIMATE_CONTACT.bodyHeight,
+  baseHeight = 0,
+): number {
+  const span = warriorUltimateContactSpan(bodyHeight, baseHeight);
+  if (span[0] > span[1]) return 0;
+  return warriorUltimateDistance(WARRIOR_ULTIMATE_CONTACT.endAge)
+    + span[1] + WARRIOR_ULTIMATE_CONTACT.forwardPadding;
+}
+
+/** Sweep only this frame's visible crest interval. Caller deduplicates per
+ * (cast, waveIndex, target); later pulses remain independent damaging waves.
+ * local is the target relative to the captured launch point in the cast axes.
+ * heightOffset is target ground minus captured launch ground, without moving the mesh.
+ */
+export function warriorUltimateTouches(
+  local: {forward: number; side: number},
+  previousAge: number,
+  age: number,
+  hurtRadius: number,
+  heightOffset = 0,
+): boolean {
+  if (![local.forward, local.side, previousAge, age, hurtRadius, heightOffset].every(Number.isFinite)) return false;
+  const contact = WARRIOR_ULTIMATE_CONTACT;
+  if (age < contact.startAge || previousAge > age || previousAge >= contact.endAge) return false;
+  const lo = Math.max(previousAge, contact.startAge), hi = Math.min(age, contact.endAge);
+  if (hi < lo) return false;
+  const radius = Math.max(0, hurtRadius);
+  const sideGap = Math.max(0, Math.abs(local.side) - contact.halfWidth);
+  if (sideGap > radius) return false;
+  const span = warriorUltimateContactSpan(contact.bodyHeight + radius + heightOffset, heightOffset - radius);
+  if (span[0] > span[1]) return false;
+  const padding = contact.forwardPadding + Math.sqrt(Math.max(0, radius * radius - sideGap * sideGap));
+  return local.forward >= warriorUltimateDistance(lo) + span[0] - padding
+    && local.forward <= warriorUltimateDistance(hi) + span[1] + padding;
+}

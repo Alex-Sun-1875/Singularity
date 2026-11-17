@@ -1,0 +1,512 @@
+{
+  "date": "2026-11-17",
+  "version": "0.3.57",
+  "profile": "test",
+  "login": "platform",
+  "uploaded": false,
+  "platformVerified": false,
+  "scope": "Reduce complete startup subpackage footprint from the verified 0.3.56 normal-rule test package. Preserve real render/physics readiness and 60fps cap.",
+  "changes": [
+    "Four hairstyle textures and four matching portraits are independently routed by the actual persisted hairstyle; hair material records explicitly skip body-map prewarming.",
+    "Small startup portrait and boss HUD controls join the curated boot UI; spare portraits, dice and boss panel artwork remain on demand. Avoid portrait directory dependencies pulling all four hairstyle portraits.",
+    "The temporary TapTap loading screen uses a deterministic 1280x720 JPEG preview (376835 bytes) instead of the preserved 3094815-byte PNG. Ordinary HTML still uses the original. Character/world textures and models are unchanged.",
+    "Root audio assets have explicit small-package ownership and resources exclusions; all exact aliases and routed UUIDs are checked against final exported configs."
+  ],
+  "resourceAccounting": {
+    "oldVersion": "0.3.56",
+    "newVersion": "0.3.57",
+    "area": "S01-T1",
+    "frameRate": 60,
+    "method": "Sum complete declared native subpackage files used by browser resource-graph startup, including transitive dependencies, engine packages and raw initial payload. Same fresh normal-rule test starting area and default hairstyle. Not actual platform traffic, compressed CDN bytes, memory or device timing.",
+    "before": {
+      "initialBytes": 6989812,
+      "bundles": [
+        {
+          "name": "__ccWasmAssetSubpkg__",
+          "bytes": 503066
+        },
+        {
+          "name": "__ccWasmChunkSubpkg__",
+          "bytes": 93014
+        },
+        {
+          "name": "actor-raphael",
+          "bytes": 6150506
+        },
+        {
+          "name": "boot-skill-icons",
+          "bytes": 769446
+        },
+        {
+          "name": "boot-ui",
+          "bytes": 4065109
+        },
+        {
+          "name": "boot-vfx",
+          "bytes": 1474809
+        },
+        {
+          "name": "cast-mira",
+          "bytes": 1873011
+        },
+        {
+          "name": "environment",
+          "bytes": 15860
+        },
+        {
+          "name": "hero-appearance",
+          "bytes": 6809457
+        },
+        {
+          "name": "hero-hairstyles",
+          "bytes": 5646932
+        },
+        {
+          "name": "hero-melee-combo",
+          "bytes": 222651
+        },
+        {
+          "name": "native-materials",
+          "bytes": 3689470
+        },
+        {
+          "name": "painted-interiors",
+          "bytes": 3911943
+        },
+        {
+          "name": "resources",
+          "bytes": 6039740
+        },
+        {
+          "name": "starter-weapons",
+          "bytes": 1597237
+        },
+        {
+          "name": "warrior-audio",
+          "bytes": 70797
+        },
+        {
+          "name": "warrior-vfx",
+          "bytes": 441936
+        },
+        {
+          "name": "waystones",
+          "bytes": 197185
+        }
+      ],
+      "totalBytes": 50561981
+    },
+    "after": {
+      "initialBytes": 6994432,
+      "bundles": [
+        {
+          "name": "__ccWasmAssetSubpkg__",
+          "bytes": 503066
+        },
+        {
+          "name": "__ccWasmChunkSubpkg__",
+          "bytes": 93014
+        },
+        {
+          "name": "actor-raphael",
+          "bytes": 6150506
+        },
+        {
+          "name": "boot-loading",
+          "bytes": 378633
+        },
+        {
+          "name": "boot-skill-icons",
+          "bytes": 769446
+        },
+        {
+          "name": "boot-sounds",
+          "bytes": 434357
+        },
+        {
+          "name": "boot-ui",
+          "bytes": 2249613
+        },
+        {
+          "name": "boot-vfx",
+          "bytes": 1474809
+        },
+        {
+          "name": "cast-mira",
+          "bytes": 1873011
+        },
+        {
+          "name": "environment",
+          "bytes": 15860
+        },
+        {
+          "name": "hair-map-curly",
+          "bytes": 1350709
+        },
+        {
+          "name": "hero-appearance",
+          "bytes": 6809457
+        },
+        {
+          "name": "hero-melee-combo",
+          "bytes": 222651
+        },
+        {
+          "name": "native-materials",
+          "bytes": 3689470
+        },
+        {
+          "name": "painted-interiors",
+          "bytes": 3911943
+        },
+        {
+          "name": "portrait-hair-curly",
+          "bytes": 378161
+        },
+        {
+          "name": "resources",
+          "bytes": 147030
+        },
+        {
+          "name": "starter-weapons",
+          "bytes": 1597237
+        },
+        {
+          "name": "warrior-audio",
+          "bytes": 70797
+        },
+        {
+          "name": "warrior-vfx",
+          "bytes": 441936
+        },
+        {
+          "name": "waystones",
+          "bytes": 197185
+        }
+      ],
+      "totalBytes": 39753323
+    },
+    "savedHairstyleRuns": [
+      {
+        "hair": "vergil",
+        "initialBytes": 6994432,
+        "bundles": [
+          {
+            "name": "__ccWasmAssetSubpkg__",
+            "bytes": 503066
+          },
+          {
+            "name": "__ccWasmChunkSubpkg__",
+            "bytes": 93014
+          },
+          {
+            "name": "actor-raphael",
+            "bytes": 6150506
+          },
+          {
+            "name": "boot-loading",
+            "bytes": 378633
+          },
+          {
+            "name": "boot-skill-icons",
+            "bytes": 769446
+          },
+          {
+            "name": "boot-sounds",
+            "bytes": 434357
+          },
+          {
+            "name": "boot-ui",
+            "bytes": 2249613
+          },
+          {
+            "name": "boot-vfx",
+            "bytes": 1474809
+          },
+          {
+            "name": "cast-mira",
+            "bytes": 1873011
+          },
+          {
+            "name": "environment",
+            "bytes": 15860
+          },
+          {
+            "name": "hair-map-vergil",
+            "bytes": 1554020
+          },
+          {
+            "name": "hero-appearance",
+            "bytes": 6809457
+          },
+          {
+            "name": "hero-melee-combo",
+            "bytes": 222651
+          },
+          {
+            "name": "native-materials",
+            "bytes": 3689470
+          },
+          {
+            "name": "painted-interiors",
+            "bytes": 3911943
+          },
+          {
+            "name": "portrait-hair-vergil",
+            "bytes": 352339
+          },
+          {
+            "name": "resources",
+            "bytes": 147030
+          },
+          {
+            "name": "starter-weapons",
+            "bytes": 1597237
+          },
+          {
+            "name": "warrior-audio",
+            "bytes": 70797
+          },
+          {
+            "name": "warrior-vfx",
+            "bytes": 441936
+          },
+          {
+            "name": "waystones",
+            "bytes": 197185
+          }
+        ],
+        "totalBytes": 39930812
+      },
+      {
+        "hair": "dante",
+        "initialBytes": 6994432,
+        "bundles": [
+          {
+            "name": "__ccWasmAssetSubpkg__",
+            "bytes": 503066
+          },
+          {
+            "name": "__ccWasmChunkSubpkg__",
+            "bytes": 93014
+          },
+          {
+            "name": "actor-raphael",
+            "bytes": 6150506
+          },
+          {
+            "name": "boot-loading",
+            "bytes": 378633
+          },
+          {
+            "name": "boot-skill-icons",
+            "bytes": 769446
+          },
+          {
+            "name": "boot-sounds",
+            "bytes": 434357
+          },
+          {
+            "name": "boot-ui",
+            "bytes": 2249613
+          },
+          {
+            "name": "boot-vfx",
+            "bytes": 1474809
+          },
+          {
+            "name": "cast-mira",
+            "bytes": 1873011
+          },
+          {
+            "name": "environment",
+            "bytes": 15860
+          },
+          {
+            "name": "hair-map-dante",
+            "bytes": 1221852
+          },
+          {
+            "name": "hero-appearance",
+            "bytes": 6809457
+          },
+          {
+            "name": "hero-melee-combo",
+            "bytes": 222651
+          },
+          {
+            "name": "native-materials",
+            "bytes": 3689470
+          },
+          {
+            "name": "painted-interiors",
+            "bytes": 3911943
+          },
+          {
+            "name": "portrait-hair-dante",
+            "bytes": 357003
+          },
+          {
+            "name": "resources",
+            "bytes": 147030
+          },
+          {
+            "name": "starter-weapons",
+            "bytes": 1597237
+          },
+          {
+            "name": "warrior-audio",
+            "bytes": 70797
+          },
+          {
+            "name": "warrior-vfx",
+            "bytes": 441936
+          },
+          {
+            "name": "waystones",
+            "bytes": 197185
+          }
+        ],
+        "totalBytes": 39603308
+      }
+    ],
+    "initialPayload": {
+      "before": {
+        "files": 27,
+        "rawBytes": 6989812,
+        "zipBytes": 1732559,
+        "zipMiB": 1.65,
+        "budgetMiB": 20,
+        "withinLocalBudget": true,
+        "sha256": "ba856c36c200d0db9a9fc5d1afe2b92d05806d422324aae10bcd1d1dcfbdb37d",
+        "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+      },
+      "after": {
+        "files": 27,
+        "rawBytes": 6994432,
+        "zipBytes": 1734103,
+        "zipMiB": 1.65,
+        "budgetMiB": 20,
+        "withinLocalBudget": true,
+        "sha256": "37f46691bee5d2e5375b7242e07409021731c734ef1aab6001f19820f10a04ed",
+        "note": "Offline ZIP of files outside declared subPackages; platform-delivered first package is not measured."
+      }
+    },
+    "completeUploadZip": {
+      "before": {
+        "files": 2549,
+        "rawBytes": 272255763,
+        "uploadZipBytes": 251108791,
+        "uploadZipSha256": "b275fbcf9cda1c25816d9f6311fb50fbfc922d821d5dfb8a3b2c7c920cdab618",
+        "uploadZipMiB": 239.48,
+        "uploadZipMB": 251.11,
+        "consoleObservedLimitBytes": 300000000,
+        "withinConsoleObservedLimit": true
+      },
+      "after": {
+        "files": 2623,
+        "rawBytes": 272955476,
+        "uploadZipBytes": 251824002,
+        "uploadZipSha256": "220d07da90cba1730a4bf7bc7986eb8621b2b6ffb85a3445eaea20aa895c3c20",
+        "uploadZipMiB": 240.16,
+        "uploadZipMB": 251.82,
+        "consoleObservedLimitBytes": 300000000,
+        "withinConsoleObservedLimit": true
+      }
+    },
+    "savedBytes": 10808658,
+    "reductionPercent": 21.37704612483439
+  },
+  "validation": {
+    "types": "passed",
+    "coreTypes": "passed",
+    "existingRules": {
+      "passed": 181,
+      "failed": 0
+    },
+    "browser": {
+      "passed": true,
+      "errors": [],
+      "profile": "test",
+      "exportedVersion": "0.3.56 before package version allocation",
+      "viewport": [
+        844,
+        390
+      ],
+      "pixelRatio": 3,
+      "dynamicAtlas": false,
+      "runs": [
+        {
+          "hair": "curly",
+          "savedHair": null,
+          "frameRate": 60,
+          "area": "S01-T1"
+        },
+        {
+          "hair": "vergil",
+          "savedHair": "vergil",
+          "frameRate": 60,
+          "area": "S01-T1"
+        },
+        {
+          "hair": "dante",
+          "savedHair": "dante",
+          "frameRate": 60,
+          "area": "S01-T1"
+        }
+      ],
+      "coverage": [
+        "Fresh default startup",
+        "Fresh saved vergil and dante hairstyles",
+        "Title settings/close and Begin",
+        "Attributes/equipment/checks/forge",
+        "All four hairstyle geometry/material switches",
+        "Another weapon W07",
+        "Travel and scene rebuild"
+      ]
+    },
+    "nativeConversion": {
+      "converter": "1.2.2",
+      "localChecksPassed": true,
+      "selectiveRoutes": 211,
+      "sourceScriptsUnchangedDuringExport": true,
+      "crcCheckedByPackager": true
+    },
+    "previewVisualReview": "Actual resource-graph loading, title and settings screenshots inspected locally; preview frame is visible at 1280x720, no page errors. TapTap device review pending.",
+    "loadingPreview": {
+      "passed": true,
+      "image": {
+        "width": 1280,
+        "height": 720,
+        "visible": true
+      },
+      "errors": [],
+      "method": "Actor requests held only to inspect transient loading artwork, then released; not a timing test"
+    }
+  },
+  "package": {
+    "path": "src/out/0.3.57/SwordAndFire_0.3.57.zip",
+    "bytes": 251824002,
+    "sha256": "220d07da90cba1730a4bf7bc7986eb8621b2b6ffb85a3445eaea20aa895c3c20"
+  },
+  "limitations": [
+    "Resource totals are raw complete-file footprints of observed startup bundles and their dependencies, not TapTap compressed CDN/network bytes, RAM or actual first-launch timing.",
+    "The full upload ZIP retains later-game assets and the original loading background.",
+    "No new TapTap upload/device test was performed. Compare the same device, network, saved hairstyle and cache state before claiming startup seconds."
+  ],
+  "evidence": [
+    "src/out/0.3.57/report.json",
+    "src/out/0.3.57/logs/build.json",
+    "src/out/0.3.57/logs/tests.log",
+    "src/out/0.3.57/logs/source-before.json",
+    "src/out/0.3.57/logs/source-after.json",
+    "temp/taptap-startup-v3/bundled-browser.json",
+    "temp/taptap-startup-v3/pack-sizes.json",
+    "source-art/ui/loading-taptap-preview-v1/provenance.json",
+    "src/out/0.3.57/logs/startup-resource-browser.json",
+    "src/out/0.3.57/logs/startup-resource-sizes.json",
+    "src/out/0.3.57/logs/startup-loading-preview.json",
+    "src/out/0.3.57/logs/startup-loading-review.jpg",
+    "src/out/0.3.57/logs/startup-settings-review.jpg"
+  ]
+}

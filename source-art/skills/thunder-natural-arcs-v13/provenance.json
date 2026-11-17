@@ -1,0 +1,70 @@
+{
+  "date": "2026-11-17",
+  "request": "收小手部发射雷电的大弯，每次施法形状变化。",
+  "implementation": "复用现有雷电材质和网格；施法ID驱动小幅折线与单条短分叉，未生成或替换贴图。",
+  "validation": {
+    "typeCheck": "passed",
+    "existingTests": {
+      "passed": 157,
+      "failed": 0
+    },
+    "webBuildProfile": "test",
+    "actualNativeCocosCapture": {
+      "cases": [
+        "NETWORK_R5",
+        "THU_01_A",
+        "THU_01_B",
+        "THU_02_A",
+        "THU_02_B"
+      ],
+      "framesPerCase": 48,
+      "pageErrors": [],
+      "mainBundleSha256": "3f1449017d4979b1b7a643bda6d5e57bcc570963a2be8c9086030bf97c3614f6"
+    },
+    "geometryProbe": {
+      "cases": [
+        {
+          "length": 1,
+          "beforeTrunk": 0.16546642472434964,
+          "afterTrunk": 0.03574364464228628,
+          "beforeAll": 0.45263265682455034,
+          "afterAll": 0.16021833100403368
+        },
+        {
+          "length": 3,
+          "beforeTrunk": 0.24556671513005268,
+          "afterTrunk": 0.07586703093340087,
+          "beforeAll": 0.9593136476451188,
+          "afterAll": 0.3381361034762941
+        },
+        {
+          "length": 6,
+          "beforeTrunk": 0.5447120093551672,
+          "afterTrunk": 0.1326793303638248,
+          "beforeAll": 2.352636,
+          "afterAll": 0.309804433298587
+        },
+        {
+          "length": 12,
+          "beforeTrunk": 1.0763192100910068,
+          "afterTrunk": 0.17823955838023978,
+          "beforeAll": 4.705272,
+          "afterAll": 0.30803530433917325
+        }
+      ],
+      "uniqueCastShapes": 100,
+      "checked": 100,
+      "stableWithinSameFrame": true,
+      "handAndTargetAnchors": true,
+      "corridorBounded": true
+    },
+    "agentVisualReview": "通过：手部连接连续、无原固定大回弯、两次形状不同，多人连锁保持清楚。",
+    "userArtAcceptance": "待用户验收",
+    "taptapDevice": "未验证"
+  },
+  "sourceSha256": {
+    "src/cocos/assets/scripts/features/combat/runtime/SkillEnergyStrokes.ts": "04fa5adb8f82dd56553fc2b7e90164538a6a6f13210535bff017f50373640789",
+    "src/cocos/assets/scripts/features/combat/runtime/ThunderArcField.ts": "bb5ccc30256a6ef7a6f3ca1daf3e150e7bc21422f8b7ac7b084212ca910bf97e"
+  },
+  "mediaSha256": "1872eed9c9e8568118cd9ae7dbf40f48287c256c2734cb34322231ea32e91d03"
+}

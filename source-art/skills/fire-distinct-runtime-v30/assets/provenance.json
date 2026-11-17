@@ -1,0 +1,82 @@
+{
+  "method": "Deterministic approved-design light matte extraction and forward texture transport. No new generation, no local inference.",
+  "reference": "source-art\\skills\\fire-distinct-shapes-design-v29\\fire-distinct-shapes-v29.png",
+  "referenceSha256": "9b663827f1c27ff48300c7a21ff72bb1f6a95bb20f33b54ad316c11d5da7a7c8",
+  "sourceRegions": {
+    "lance": [
+      334,
+      174,
+      571,
+      244
+    ],
+    "field": [
+      1090,
+      488,
+      1338,
+      651
+    ]
+  },
+  "subjectProtection": "Both crops inspected: no soldiers/player body inside selected region; lance cropped before fingertips, field is the unobstructed right area.",
+  "sourceBackground": "Neutral-channel regression from unlit floor cancels stone joints and floor grain before optical-alpha solving; retain source filament green/red relation and correlated warm blue, with G<=.86R and B<=.42R. Gaussian estimate is archived only as a background diagnostic.",
+  "animation": "16 phases. Inner detail moves toward lance head or +U field flow. Two forward samples with zero-weight resets, unequal .43 phase offset. Lance silhouette/head pinned; field U periodic.",
+  "outputs": [
+    {
+      "name": "fire-lance-v30",
+      "cell": [
+        256,
+        96
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "frameCount": 16,
+      "mode": "head +X",
+      "anchorUV": [
+        0.966796875,
+        0.5875463900134952
+      ],
+      "straightAlpha": true,
+      "pngBytes": 351986,
+      "rgbaMemoryBytes": 1572864,
+      "meanOccupiedAlpha": 0.3317466323122913,
+      "sha256": "62d623160d1f1cf7d6fef796e2d4fdc35c378d41f2f6f87b4a50e56546f70b4a"
+    },
+    {
+      "name": "fire-field-flow-v30",
+      "cell": [
+        256,
+        128
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "frameCount": 16,
+      "mode": "surface / periodic U",
+      "anchorUV": [
+        0.5,
+        0.5
+      ],
+      "straightAlpha": true,
+      "pngBytes": 903722,
+      "rgbaMemoryBytes": 2097152,
+      "meanOccupiedAlpha": 0.346878346358818,
+      "sha256": "079128588d39dbf318d4b8754232f803d3e36a082127300ddfb452c032c23e47"
+    }
+  ],
+  "productionUpdated": true,
+  "nativeAcceptance": "pending native Cocos capture and user review",
+  "taptapDevice": "pending",
+  "artStatus": "Local source crops and three representative phase swatches visually reviewed: distinct narrow lance and connected low surface, no characters/floor-grid seams. Native motion and user acceptance remain pending.",
+  "nativeReviewV30": {
+    "status": "Local Web actual-canvas review passed",
+    "evidence": [
+      "../final-r1/verification.json",
+      "../final-empty-r1/verification.json",
+      "../final4-single-r1/verification.json"
+    ],
+    "userRuntimeArtReview": "pending feedback",
+    "taptapDevice": "pending"
+  }
+}

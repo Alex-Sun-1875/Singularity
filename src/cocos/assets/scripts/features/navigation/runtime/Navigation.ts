@@ -38,6 +38,7 @@ export class Navigation {
  dispose(){Navigation.backend?.release(this);}
  private cache=new Map<string,Point[]>();
  private gridEdges?:Uint16Array;
+ private narrowGridEdges?:Uint16Array;
  private obstacleIndex?:{count:number;columns:number;minX:number;minZ:number;buckets:Map<number,Obstacle[]>;large:Obstacle[]};
  constructor(readonly width:number,readonly depth:number,readonly obstacles:Obstacle[],private readonly indexCollisions=false){}
  blocked(p:Point,r=.42){return this.blockedAt(p.x,p.z,r);}
@@ -78,27 +79,33 @@ export class Navigation {
  }
  path(a:Point,b:Point):Point[]{
   if(this.visible(a,b,.32))return [{...a},{...b}];
-  const step=1;
-  const connector=(p:Point):Point|undefined=>{const accelerated=Navigation.backend?.connector?.(this,p);if(accelerated!==undefined&&accelerated!==null)return accelerated[0];const candidates:Point[]=[];for(let x=-3;x<=3;x++)for(let z=-3;z<=3;z++)candidates.push({x:(Math.round(p.x/step)+x)*step,z:(Math.round(p.z/step)+z)*step});return candidates.sort((u,v)=>Math.hypot(u.x-p.x,u.z-p.z)-Math.hypot(v.x-p.x,v.z-p.z)).find(v=>!this.blocked(v)&&this.visible(p,v,.32));};
+  const normal=this.gridPath(a,b,1,.42);if(normal.length)return normal;
+  // The character radius is .32m. A coarse 1m grid with .42m padding can
+  // reject real door/corner clearances. Retry the same A* only on failure,
+  // retaining the physical collider radius and caching its edges separately.
+  return this.gridPath(a,b,.5,.32);
+ }
+ private gridPath(a:Point,b:Point,step:number,radius:number):Point[]{
+  const connector=(p:Point):Point|undefined=>{const accelerated=step===1?Navigation.backend?.connector?.(this,p):undefined;if(accelerated!==undefined&&accelerated!==null)return accelerated[0];const candidates:Point[]=[];for(let x=-3;x<=3;x++)for(let z=-3;z<=3;z++)candidates.push({x:(Math.round(p.x/step)+x)*step,z:(Math.round(p.z/step)+z)*step});return candidates.sort((u,v)=>Math.hypot(u.x-p.x,u.z-p.z)-Math.hypot(v.x-p.x,v.z-p.z)).find(v=>!this.blocked(v,radius)&&this.visible(p,v,.32));};
   const startPoint=connector(a),endPoint=connector(b);if(!startPoint||!endPoint)return [];
   // The public route cache keeps its original coordinate keys. Search nodes
   // use numeric cells instead of allocating a string for every grid edge.
-  const cachekey=`${startPoint.x},${startPoint.z}>${endPoint.x},${endPoint.z}`;
-  const cached=this.cache.get(cachekey);if(cached){if(!cached.length)return [];if(this.visible(a,cached[0],.42)&&this.visible(cached[cached.length-1],b,.42))return [{...a},...cached,{...b}];}
-  const points=this.searchGrid(startPoint,endPoint);
+  const cachekey=`${step}:${startPoint.x},${startPoint.z}>${endPoint.x},${endPoint.z}`;
+  const cached=this.cache.get(cachekey);if(cached){if(!cached.length)return [];if(this.visible(a,cached[0],.32)&&this.visible(cached[cached.length-1],b,.32))return [{...a},...cached,{...b}];}
+  const points=this.searchGrid(startPoint,endPoint,step,radius);
   if(this.cache.size>=200)this.cache.delete(this.cache.keys().next().value!);
   if(!points.length){this.cache.set(cachekey,[]);return [];}
   const route:Point[]=[{...a},...points,{...b}];
-  const simplified=Navigation.backend?.simplify?.(this,route)??this.simplify(route);
+  const simplified=(step===1?Navigation.backend?.simplify?.(this,route):undefined)??this.simplify(route,radius);
   this.cache.set(cachekey,route.slice(1,-1));return simplified;
  }
- private simplify(route:Point[]):Point[]{
-  const simplified=[route[0]];let i=0;while(i<route.length-1){let next=i+1;for(let j=i+2;j<route.length;j++){if(!this.visible(route[i],route[j],.42))break;next=j;}simplified.push(route[next]);i=next;}return simplified;
+ private simplify(route:Point[],radius:number):Point[]{
+  const simplified=[route[0]];let i=0;while(i<route.length-1){let next=i+1;for(let j=i+2;j<route.length;j++){if(!this.visible(route[i],route[j],radius))break;next=j;}simplified.push(route[next]);i=next;}return simplified;
  }
- private searchGrid(startPoint:Point,endPoint:Point):Point[]{
-  const accelerated=Navigation.backend?.search(this,startPoint,endPoint);if(accelerated!==undefined&&accelerated!==null)return accelerated;
-  const step=1,halfWidth=Math.floor(this.width/2),halfDepth=Math.floor(this.depth/2),columns=halfWidth*2+1;
-  const key=(p:Point)=>(p.z+halfDepth)*columns+p.x+halfWidth,start=key(startPoint),end=key(endPoint);
+ private searchGrid(startPoint:Point,endPoint:Point,step:number,radius:number):Point[]{
+  const accelerated=step===1?Navigation.backend?.search(this,startPoint,endPoint):undefined;if(accelerated!==undefined&&accelerated!==null)return accelerated;
+  const halfWidth=Math.floor(this.width/2/step),halfDepth=Math.floor(this.depth/2/step),columns=halfWidth*2+1;
+  const key=(p:Point)=>(p.z/step+halfDepth)*columns+p.x/step+halfWidth,start=key(startPoint),end=key(endPoint);
   // Keep coordinates and f-scores on each frontier node. Decoding string keys
   // and recomputing hypot for every frontier comparison caused second-long
   // guidance updates on Android, even though the searched grid was unchanged.
@@ -106,18 +113,18 @@ export class Navigation {
   const open=new NavigationFrontier(),nodes=new Map<number,SearchNode>([[start,first]]);open.push(first);let found:SearchNode|undefined;
   // Collider footprints are immutable for this scene. Cache the eight directed
   // grid edges lazily (known + passable bits), using only two bytes per cell.
-  const edges=this.gridEdges??=new Uint16Array(columns*(halfDepth*2+1));
+  const cells=columns*(halfDepth*2+1),edges=step===1?this.gridEdges??=new Uint16Array(cells):this.narrowGridEdges??=new Uint16Array(cells);
   // Scratch coordinates never escape: only newly discovered search nodes copy them.
   const next:Point={x:0,z:0};
-  for(let iterations=0;open.data.length&&iterations<20000;iterations++){
+  for(let iterations=0;open.data.length&&iterations<(step===1?20000:cells);iterations++){
    const current=open.pop();if(current.key===end){found=current;break;}current.closed=true;
-   const cell=(current.z+halfDepth)*columns+current.x+halfWidth;
+   const cell=current.key;
    for(let direction=0;direction<NEIGHBOURS.length;direction++){
     const [dx,dz,cost]=NEIGHBOURS[direction];
     next.x=current.x+dx*step;next.z=current.z+dz*step;const k=key(next);let node=nodes.get(k);
     if(node?.closed)continue;
     const known=1<<(direction+8),passable=1<<direction;let mask=edges[cell];
-    if(!(mask&known)){if(!this.blocked(next)&&this.visible(current,next,.42))mask|=passable;mask|=known;edges[cell]=mask;}
+    if(!(mask&known)){if(!this.blocked(next,radius)&&this.visible(current,next,radius))mask|=passable;mask|=known;edges[cell]=mask;}
     if(!(mask&passable))continue;
     const nextCost=current.cost+cost*step;if(nextCost>=(node?.cost??Infinity))continue;
     if(!node){node={...next,key:k,cost:nextCost,score:0,closed:false,index:-1,order:nodes.size};nodes.set(k,node);}

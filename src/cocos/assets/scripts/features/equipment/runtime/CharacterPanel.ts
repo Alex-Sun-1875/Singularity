@@ -1,3 +1,4 @@
+import {COMBAT_BALANCE} from '../../combat/data/CombatBalance';
 import {viewportMetrics} from '../../../platform/ViewportMetrics';
 import {resourceProfile} from '../../combat/common/ClassResource';
 import {CompactMask as Mask} from '../../../shared/ui/CompactMask';
@@ -13,14 +14,18 @@ import {getArea} from '../../world/data/WorldData';
 import {Hud} from '../../../app/Hud';
 import {UiSkin} from '../../../shared/ui/UiSkin';
 import {GoldPanelHeader} from '../../../shared/ui/GoldPanelHeader';
+import {ButtonSurface} from '../../../shared/ui/ButtonSurface';
 import {UI_COLORS as C} from '../../../shared/ui/UiTheme';
 import {EQUIPMENT_SLOT_NAMES,EQUIPMENT_SLOT_ICONS} from './EquipmentPresentation';
 import {CharacterPreview} from '../../actors/runtime/CharacterPreview';
+import {headgearHidden,headgearVisible} from '../../actors/runtime/Hairstyles';
+import {preparationText as pt} from '../../progression/locales';
 import {FlatCharacterPreview} from '../../actors/runtime/FlatCharacterPreview';
 import {EquipmentArt} from './EquipmentArt';
 import {COMBAT_RULES} from '../../combat/data/PureSkills';
 import {applyRpgFont} from '../../../shared/ui/RpgFont';
 import {renderEquipmentGallery} from './EquipmentGallery';
+import {PREPARATION_DESIGN as D} from '../../../shared/ui/PreparationTheme';
 
 export type CharacterTab='inventory'|'attributes'|'skills'|'catalog';
 type Filter='all'|'weapon'|'armor'|'jewelry'|'hairstyle';
@@ -29,8 +34,9 @@ const states=new WeakMap<GameSession,ViewState>();
 const SKILL_TEXT:Record<SkillId,string>={insight:'读懂人物的言外之意，判断其动机与隐瞒。',persuasion:'比对抄件、证词与记录，找出可以被现场验证的矛盾。',investigation:'仔细寻找文字、机关与遗物留下的线索。',sleight:'用灵巧的双手处理锁具、诱片和精密装置。',athletics:'凭借力量与身体控制，应对攀爬、推移和障碍。'};
 
 /** Paper doll, inspectable inventory and actual game statistics. UI state never grants an item. */
-export function renderCharacterPanel(hud:Hud,game:GameSession,tab:CharacterTab='inventory'){
+export function renderCharacterPanel(hud:Hud,game:GameSession,tab:CharacterTab='inventory',appearance=false){
  const state=states.get(game)??{selected:game.state.equipment.weapon,filter:'all' as Filter,skill:'insight' as SkillId};states.set(game,state);
+ if(appearance)state.filter='hairstyle';
  new CharacterPanel(hud,game,tab,state).show();
 }
 
@@ -69,15 +75,15 @@ class CharacterPanel {
  }
  private summary(host:Node){
   if(this.tab==='skills'){this.skillSummary(host);return;}
- const p=this.game.state.player,progress=this.game.progressionView(),eq=this.game.state.equipment,armor=Object.entries(eq).reduce((n,[slot,id])=>n+(slot!=='spells'&&typeof id==='string'?(this.game.itemView(id)?.armor??0):0),0),content=this.scroll(host,0,0,this.leftW-24,this.bodyH-24,this.mobile?1120:820);
-  let y=-24;this.label(content,'自由探险者',0,y,this.leftW-40,this.font+2,C.gold,40).horizontalAlign=Label.HorizontalAlign.CENTER;y-=46;
+ const p=this.game.state.player,progress=this.game.progressionView(),eq=this.game.state.equipment,armor=Object.entries(eq).reduce((n,[slot,id])=>n+(slot!=='spells'&&typeof id==='string'?(this.game.itemView(id)?.armor??0):0),0),contentW=this.leftW-24,textW=contentW-2*D.contentInsets.text,ruleW=contentW-2*D.contentInsets.rule,content=this.scroll(host,0,0,contentW,this.bodyH-24,this.mobile?1120:820);
+  let y=-24;this.label(content,'自由探险者',0,y,textW,this.font+2,C.gold,40).horizontalAlign=Label.HorizontalAlign.CENTER;y-=46;
   const emblem=this.hud.node('CharacterEmblem',content,0,y-22,58,58);const g=emblem.addComponent(CompactGraphics);g.strokeColor=C.gold;g.lineWidth=2;g.circle(0,0,24);g.stroke();for(let i=0;i<8;i++){const a=i*Math.PI/4;g.moveTo(Math.cos(a)*27,Math.sin(a)*27);g.lineTo(Math.cos(a)*33,Math.sin(a)*33);}g.stroke();UiSkin.sprite(emblem,'ui/icons/attack',30,30,C.gold);y-=78;
- const rows:[string,string][]=[['角色等级',`Lv${progress.level} / ${progress.maxLevel}`],['生命',`${Math.ceil(p.hp)} / ${p.maxHp}`],['技能威力',progress.baseSkillPower.toFixed(1)],['命中值',progress.accuracy.toFixed(1)],['闪避值',progress.evasion.toFixed(1)],[resourceProfile(this.game.state).name,`${Math.floor(p.focus)} / ${p.maxFocus}`],['装备护甲',`${Math.min(40,armor)}%`],['余烬',`${this.game.state.dice.inspiration} / 4`]];
-  for(const [name,value]of rows){if(this.mobile){this.label(content,name,0,y,this.leftW-42,this.font-2,C.muted,36).horizontalAlign=Label.HorizontalAlign.CENTER;this.label(content,value,0,y-34,this.leftW-36,this.font+2,C.ink,42).horizontalAlign=Label.HorizontalAlign.CENTER;y-=78;}else{this.label(content,name,-this.leftW*.2,y,this.leftW*.44,this.font,C.muted,40);this.label(content,value,this.leftW*.21,y,this.leftW*.42,this.font,C.ink,40).horizontalAlign=Label.HorizontalAlign.RIGHT;y-=44;}}
-  this.rule(content,y+8,this.leftW-46);y-=26;this.label(content,'装备效果',0,y,this.leftW-40,this.font,C.gold,40).horizontalAlign=Label.HorizontalAlign.CENTER;y-=48;
+ const rows:[string,string][]=[['角色等级',`Lv${progress.level} / ${progress.maxLevel}`],['生命',`${Math.ceil(p.hp)} / ${p.maxHp}`],['技能威力',progress.baseSkillPower.toFixed(1)],['命中值',progress.accuracy.toFixed(1)],['闪避值',progress.evasion.toFixed(1)],[resourceProfile(this.game.state).name,`${Math.floor(p.focus)} / ${p.maxFocus}`],['装备护甲',`${Math.min(COMBAT_BALANCE.equipmentReductionCap*100,armor)}%`],['余烬',`${this.game.state.dice.inspiration} / 4`]];
+  for(const [name,value]of rows){if(this.mobile){this.label(content,name,0,y,textW,this.font-2,C.muted,36).horizontalAlign=Label.HorizontalAlign.CENTER;this.label(content,value,0,y-34,textW,this.font+2,C.ink,42).horizontalAlign=Label.HorizontalAlign.CENTER;y-=78;}else{this.label(content,name,-textW/4,y,textW/2,this.font,C.muted,40);this.label(content,value,textW/4,y,textW/2,this.font,C.ink,40).horizontalAlign=Label.HorizontalAlign.RIGHT;y-=44;}}
+  this.rule(content,y+8,ruleW);y-=26;this.label(content,'装备效果',0,y,textW,this.font,C.gold,40).horizontalAlign=Label.HorizontalAlign.CENTER;y-=48;
  const sets=this.game.setCounts(),names:Record<string,string>={oath:'誓卫',wind:'逐风',seeker:'寻宝客',ember:'灰烬',bell:'沉钟',seal:'缄印'};const active=Object.entries(sets).map(([id,count])=>`${names[id]??id}  ${count}件`),setHeight=Math.max(60,active.length*this.font*1.34+12);
- this.label(content,active.join('\n')||'尚未激活套装',0,y-setHeight/2,this.leftW-40,this.font,C.muted,setHeight);y-=setHeight+24;
- this.label(content,`金币  ${p.gold}\n废铁  ${p.iron}\n符纹  ${p.runes}\n锻造芯  ${p.cores}`,0,y-65,this.leftW-40,this.font,C.ink,160);
+ this.label(content,active.join('\n')||'尚未激活套装',0,y-setHeight/2,textW,this.font,C.muted,setHeight);y-=setHeight+24;
+ this.label(content,`金币  ${p.gold}\n废铁  ${p.iron}\n符纹  ${p.runes}\n锻造芯  ${p.cores}`,0,y-65,textW,this.font,C.ink,160);
  }
  private paperDoll(host:Node){
   const well=this.hud.node('PortraitWell',host,0,0,this.middleW,this.bodyH),back=well.addComponent(CompactGraphics);back.fillColor=C.dark;back.roundRect(-this.middleW/2,-this.bodyH/2,this.middleW,this.bodyH,3);back.fill();
@@ -98,9 +104,11 @@ class CharacterPanel {
  private hairstyles(){
   const w=this.rightW,h=this.bodyH,rowH=this.hit+this.font+20,footer=this.hit+14,viewH=h-96-footer;
   this.label(this.right,'发型款式',0,h/2-24,w-28,this.font+3,C.gold,42).horizontalAlign=Label.HorizontalAlign.CENTER;
-  this.label(this.right,this.game.state.equipment.head==='A02'?'头罩会遮住发型，摘下后显示所选款式':'选择即生效 · 拖动人物可查看侧面',0,h/2-60,w-28,this.font-2,C.muted,32).horizontalAlign=Label.HorizontalAlign.CENTER;
-  const content=this.scroll(this.right,0,-(96-footer)/2,w-20,viewH,this.hud.hairstyles.length*rowH+8);
-  this.hud.hairstyles.forEach((style,i)=>{const y=-i*rowH-this.hit/2-4;this.button(content,style.label+(style.selected?' · 已使用':''),0,y,w-44,this.hit,'character:hairstyle:'+style.id,()=>this.hud.actions.click('hairstyle:'+style.id),style.selected);this.label(content,style.description,0,y-this.hit/2-this.font*.65-7,w-48,this.font-2,C.muted,this.font+12).horizontalAlign=Label.HorizontalAlign.CENTER;});
+  this.label(this.right,headgearVisible(this.game.state.equipment.head)?pt('appearance.hoodHint'):'选择即生效 · 拖动人物可查看侧面',0,h/2-60,w-28,this.font-2,C.muted,32).horizontalAlign=Label.HorizontalAlign.CENTER;
+  const content=this.scroll(this.right,0,-(96-footer)/2,w-20,viewH,(this.hud.hairstyles.length+1)*rowH+8),toggleY=-this.hit/2-4;
+  this.button(content,pt(headgearHidden()?'appearance.hidden':'appearance.visible'),0,toggleY,w-44,this.hit,'character:headgear',()=>this.hud.actions.click('appearance:headgear-toggle'),headgearHidden());
+  this.label(content,pt('appearance.headHint'),0,toggleY-this.hit/2-this.font*.65-7,w-48,this.font-2,C.muted,this.font+12).horizontalAlign=Label.HorizontalAlign.CENTER;
+  this.hud.hairstyles.forEach((style,i)=>{const y=-(i+1)*rowH-this.hit/2-4;this.button(content,style.label+(style.selected?' · 已使用':''),0,y,w-44,this.hit,'character:hairstyle:'+style.id,()=>this.hud.actions.click('hairstyle:'+style.id),style.selected);this.label(content,style.description,0,y-this.hit/2-this.font*.65-7,w-48,this.font-2,C.muted,this.font+12).horizontalAlign=Label.HorizontalAlign.CENTER;});
  }
  private inventory(){
  const w=this.rightW,h=this.bodyH,top=h/2-12,filterH=this.hit,gap=Math.max(8,8*this.hud.height/390),filterW=(w-24-3*gap)/4,filterNames:[Filter,string][]=[['all','全部'],['weapon','武器'],['armor','防具'],['jewelry','首饰']];
@@ -109,7 +117,7 @@ class CharacterPanel {
   const detailH=this.mobile?128:144,actionH=this.hit,gridH=h-filterH-detailH-actionH-38,cols=this.mobile?Math.max(1,Math.min(8,Math.floor((w-30+gap)/(this.hit+gap)))):7,cell=(w-30-gap*(cols-1))/cols,rows=Math.max(4,Math.ceil(ids.length/cols)),content=this.scroll(this.right,0,top-filterH-gap-gridH/2,w-20,gridH,rows*(cell+gap)+12);
   const worn=new Set(Object.entries(this.game.state.equipment).filter(([k,v])=>k!=='spells'&&v).map(([,v])=>v));
   for(let i=0;i<rows*cols;i++){const id=ids[i],item=id?EQUIPMENT[id]:null,x=-w/2+15+cell/2+(i%cols)*(cell+gap),y=-cell/2-Math.floor(i/cols)*(cell+gap)-4;const n=this.hud.node(id?'inventory:item:'+id:'inventory:empty:'+i,content,x,y,cell,cell),frame=equipmentIconFrame(n,cell,cell,{quality:item?.quality,selected:!!id&&id===this.state.selected});
- if(!item)continue;EquipmentArt.rawIcon(frame.content,item,cell*.90,cell*.90);const button=n.addComponent(Button);button.transition=Button.Transition.SCALE;button.zoomScale=.95;n.on(Button.EventType.CLICK,()=>{this.state.selected=id;this.paintRight();});
+ if(!item)continue;EquipmentArt.rawIcon(frame.content,item,cell*.90,cell*.90);const button=n.addComponent(Button);button.transition=Button.Transition.NONE;ButtonSurface.attach(n,{parent:frame.host,after:frame.content,width:cell-6,height:cell-6,radius:Math.max(1,cell*.12-2),overlay:true});n.on(Button.EventType.CLICK,()=>{this.state.selected=id;this.paintRight();});
    if(worn.has(id))this.label(n,'◆',-cell/2+12,cell/2-12,22,this.mobile?22:14,C.green,24).horizontalAlign=Label.HorizontalAlign.CENTER;
    if(this.game.state.inventory[id]>1){const count=this.label(n,'×'+this.game.state.inventory[id],cell/2-23,-cell/2+13,42,this.mobile?20:14,C.ink,26);count.horizontalAlign=Label.HorizontalAlign.RIGHT;count.enableWrapText=false;count.enableOutline=true;count.outlineColor=C.dark;count.outlineWidth=2;}
    n.on(Node.EventType.MOUSE_ENTER,()=>{if(!this.mobile)this.showHover(item);});n.on(Node.EventType.MOUSE_LEAVE,()=>{this.hover?.destroy();this.hover=null;});
@@ -118,12 +126,12 @@ class CharacterPanel {
   this.paintDetail(top-filterH-gridH-25,detailH);
  const selected=EQUIPMENT[this.state.selected],isOwned=!!this.game.state.inventory[this.state.selected],equipped=worn.has(this.state.selected);
  const access=this.availability(),canChange=!equipped,actionW=(w-24-gap)/2,actionX=(i:number)=>-w/2+12+actionW/2+i*(actionW+gap);const equip=this.button(this.right,equipped?'已装备':!access.available?'暂时无法换装':'装备选中物品',actionX(1),-h/2+actionH/2+8,actionW,actionH,'inventory:equip',()=>{if(selected&&isOwned&&canChange&&access.available)this.hud.actions.click('equip:'+selected.id);});equip.getComponent(Button)!.interactable=!!selected&&isOwned&&canChange&&access.available;
- this.button(this.right,'养成',actionX(0),-h/2+actionH/2+8,actionW,actionH,'inventory:craft',()=>this.hud.actions.click(selected&&isOwned?'forge-item:'+selected.id:'forge'));
+ this.button(this.right,'养成',actionX(0),-h/2+actionH/2+8,actionW,actionH,'inventory:cultivation',()=>this.hud.actions.click(selected&&isOwned?'forge-item:'+selected.id:'forge'));
  }
  private availability(){return (this.game as GameSession&{equipmentAvailability?:()=>{available:boolean;reason:string}}).equipmentAvailability?.()??{available:true,reason:''};}
  private showHover(item:ItemDef){
   this.hover?.destroy();const w=Math.min(370,this.rightW-20),h=180,x=this.right.position.x-this.rightW/2-w/2-10;const tooltip=this.hud.panel(this.panel,x,20,w,h,C.button);this.hover=tooltip;tooltip.name='ItemHoverTooltip';
-  this.label(tooltip,item.name,0,h/2-28,w-30,this.font+2,F.color(qualityFeedbackRole(item.quality)),38);this.label(tooltip,item.quality,0,h/2-62,w-30,this.font-2,C.muted,28);this.rule(tooltip,h/2-80,w-26);this.label(tooltip,this.game.itemView(item.id).description,0,-40,w-30,this.font,C.ink,88);
+  const textW=w-2*D.contentInsets.text;this.label(tooltip,item.name,0,h/2-28,textW,this.font+2,F.color(qualityFeedbackRole(item.quality)),38);this.label(tooltip,item.quality,0,h/2-62,textW,this.font-2,C.muted,28);this.rule(tooltip,h/2-80,w-2*D.contentInsets.rule);this.label(tooltip,this.game.itemView(item.id).description,0,-40,textW,this.font,C.ink,88);
  }
  private paintDetail(y:number,height:number){
   this.detail?.destroy();this.detail=this.hud.node('ItemDetail',this.right,0,y-height/2+12,this.rightW-28,height);const d=this.game.itemView(this.state.selected),w=this.rightW-40;if(!d){this.label(this.detail,'选择物品或装备部位查看详情',0,0,w,this.font,C.muted,height);return;}

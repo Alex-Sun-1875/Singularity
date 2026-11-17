@@ -1,0 +1,25 @@
+{
+  "date": "2026-11-17",
+  "releaseVersion": "0.3.60",
+  "problem": "Creator import normalized generated bundle reference prefab names, persistent=false, LF serialization and absence of final newline, changing strict release input hashes.",
+  "implementation": "Generator now emits the observed Creator 3.8.8 canonical prefab bytes; semantic asset UUIDs and bundle membership remain unchanged.",
+  "verification": {
+    "selectivePrefabCount": 16,
+    "preparationIdempotent": true,
+    "referencePrefabHashMatchesCreator": true,
+    "strictReleaseSourceSnapshot": "passed",
+    "existingTests": {
+      "passed": 181,
+      "failed": 0
+    },
+    "typeChecks": "passed",
+    "officialConversion": "passed",
+    "packageAudit": "passed",
+    "zipBytes": 252398662,
+    "zipSha256": "8bf2f8c8e5d78cfb5ee7bdbab133cace36cb7834fe217ed1ae84d43644173c9f"
+  },
+  "evidence": "../out/0.3.60/logs/",
+  "failedVersionPreserved": "0.3.59",
+  "gameplayChanged": false,
+  "platformDeviceVerified": false
+}

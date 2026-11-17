@@ -1,0 +1,92 @@
+{
+  "generation": {
+    "tool": "OpenAI image_gen built-in cloud tool",
+    "status": "completed",
+    "localModelInference": false,
+    "prompt": "prompt.txt",
+    "original": "fire-wave-cloud-original.png",
+    "originalSize": [
+      1983,
+      793
+    ],
+    "originalSha256": "618c4259aa6980e363fec2994e34544faa495ca1167f4fe84c4744b5997fdc3a"
+  },
+  "processing": "Deterministic Pillow/NumPy engineering only. Preserve full orange-gold body and broad folds; smooth alpha remap of original body to .79..88; premultiplied aspect-preserving resize, 128px same-source U overlap, soft upper/lower fringe and exact matching U edge pixels.",
+  "output": {
+    "name": "fire-meteor-roll-v31",
+    "path": "src\\cocos\\assets\\resources\\vfx\\production\\fire-meteor-roll-v31.png",
+    "size": [
+      1024,
+      512
+    ],
+    "singleTexture": true,
+    "straightRGBA": true,
+    "sha256": "7957d48cd276cf77ff8d1415918fba4370826d7ab093fb4ee7db23d07ee0840b",
+    "pngBytes": 789865,
+    "rgbaMemoryBytes": 2097152
+  },
+  "uv": {
+    "rootV": 0.9375,
+    "rootPixelY": 480,
+    "usableU": [
+      0,
+      1
+    ],
+    "repeatU": true,
+    "repeatV": false,
+    "paddedTopV": 0.109375,
+    "mainBodyV": [
+      0.35,
+      0.915
+    ],
+    "tipSilhouetteV": [
+      0.1,
+      0.55
+    ],
+    "lowerSoftFringeV": [
+      0.9,
+      1.0
+    ],
+    "instruction": "Use fract(U) before sampling; clamp V. Root/foot at V=.9375 stays pinned while inner folds transport upward; retain the authored uneven lower soft silhouette."
+  },
+  "metrics": {
+    "alphaMean": 0.49748161166322014,
+    "fractionAlphaAbove035": 0.6343879699707031,
+    "fractionAlphaAbove065": 0.6002788543701172,
+    "fractionAlphaAbove095": 0.0,
+    "bodyAlphaQuantiles": [
+      0.7764705882352941,
+      0.7803921568627451,
+      0.8313725490196079
+    ],
+    "occupiedWarmFraction": 0.9999971228237758,
+    "occupiedBrightGoldFraction": 0.25298435103851674,
+    "occupiedRGBQuantiles255": [
+      [
+        208.0,
+        92.0,
+        14.0
+      ],
+      [
+        234.0,
+        122.0,
+        31.0
+      ],
+      [
+        251.0,
+        166.0,
+        72.0
+      ]
+    ],
+    "oppositeUEdgeMaxPixelDifference": 0
+  },
+  "productionUpdated": true,
+  "review": {
+    "generation": "successful",
+    "localMaterial": "Original source and processed dark/mid-background material preview inspected: wide connected orange-gold body, broad rolling crests, no high-frequency body deletion; U repeat visually continuous. This is a material review only.",
+    "nativeCocos": "after7 normal/empty actual test Web captures reviewed. Filled centre, materially denser/brighter orange-gold volume and softened radial boundary; former hard cylindrical side cuts no longer a blocking issue. Broad overlapping flame sheets remain perceptible at the front. Local native candidate; not pixel-identical to concept and not user art acceptance.",
+    "userRuntimeAcceptance": "pending",
+    "taptapDevice": "pending",
+    "nativeEvidence": "../after7-empty-r1/verification.json"
+  }
+}

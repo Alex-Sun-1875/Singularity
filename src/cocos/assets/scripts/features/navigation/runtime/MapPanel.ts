@@ -18,6 +18,7 @@ import {GoldPanelHeader} from '../../../shared/ui/GoldPanelHeader';
 import {applyRpgFont,fitRpgLine} from '../../../shared/ui/RpgFont';
 import {PREPARATION_SKINS} from '../../../shared/ui/PreparationTheme';
 import {FeedbackView as F} from '../../../shared/ui/FeedbackView';
+import {ButtonSurface} from '../../../shared/ui/ButtonSurface';
 
 const LAYERS=[
  {id:'surface',name:'铁誓边境',image:'stonebridge',match:(id:string)=>/^S\d\d$/.test(id)},
@@ -232,6 +233,7 @@ export class MapPanel {
   points.forEach((point,i)=>{const selected=point.id===this.waypoint,row=this.hud.node('map:waypoint:'+point.id,content,0,-i*rowH-rowH/2,w,rowH);
    if(selected)UiSkin.asset(row,PREPARATION_SKINS['skill-selected'].asset,w,22*u,true);
    const button=row.addComponent(Button);button.transition=Button.Transition.NONE;button.interactable=!this.hud.mapTravel.busy;
+   ButtonSurface.attach(row,{width:w-6*u,height:22*u,radius:3*u,overlay:true,after:row.children[0]});
    const label=this.hud.text(row,fitRpgLine(point.name,w-20*u,13*u),0,0,w-20*u,13*u,selected?GOLD:C.muted,rowH);label.fontFamily='SimSun';applyRpgFont(label);
    row.on(Button.EventType.CLICK,()=>{if(scroll.isScrolling()||scroll.isAutoScrolling()||this.hud.mapTravel.busy)return;this.listOffset=scroll.getScrollOffset().y;this.selectWaypoint(point.id);});
   });
@@ -306,7 +308,8 @@ export class MapPanel {
   const x=this.fieldW/2+poi.point.x*this.mapScale,y=this.fieldH/2-poi.point.z*this.mapScale,size=sys.isMobile?Math.max(84,this.controlH):48,color=F.color(poi.kind==='exit'?'map.exit':poi.kind==='player'?'map.player':poi.kind==='npc'||poi.kind==='checkpoint'?'map.ally':'map.task');
   const marker=UI.place(parent,new GComponent(),'map:place:'+poi.id,x,y,size,size);marker.setPivot(.5,.5,true);marker.opaque=true;const icon=UI.place(marker,new GGraph(),'MarkerIcon',size/2-7,size/2-7,14,14);icon.touchable=false;
   if(poi.kind==='exit'){icon.name='ExitRuneIcon';icon.node.name=icon.name;icon.setPosition(size/2-15,size/2-15);icon.setSize(30,30);this.exitRune(icon,poi.locked);}
-  else if(poi.kind==='npc'||poi.kind==='merchant')icon.drawEllipse(1,C.dark,color);else icon.drawRegularPolygon(1.5,poi.kind==='player'?C.ink:color,poi.kind==='player'?CYAN:C.dark,4,0);
+  else if(poi.kind==='merchant'){icon.visible=false;this.legendGlyph(marker,'merchant',size/2-12,size/2-12,24,color);}
+  else if(poi.kind==='npc')icon.drawEllipse(1,C.dark,color);else icon.drawRegularPolygon(1.5,poi.kind==='player'?C.ink:color,poi.kind==='player'?CYAN:C.dark,4,0);
   if(poi.id===this.selectedPoi){const ring=UI.place(marker,new GGraph(),'SelectedRing',size/2-12,size/2-12,24,24);ring.drawEllipse(1,color,Color.TRANSPARENT);ring.touchable=false;}
   if(custom)this.text(marker,'⚑',size/2-12,size/2-18,24,32,this.font,GOLD,true);
   if(poi.kind==='exit'){
@@ -414,8 +417,9 @@ export class MapPanel {
   const scroll=host.addComponent(ScrollView);scroll.content=content;scroll.horizontal=false;scroll.vertical=true;scroll.cancelInnerEvents=true;scroll.inertia=true;scroll.elastic=false;
   for(const [i,point]of points.entries()){
    const selected=point.id===this.waypoint,row=this.hud.node('map:waypoint:'+point.id,content,0,-i*(rowH+gap)-rowH/2,cw,rowH);
-   UiSkin.asset(row,selected?'rpg-selection-frame-v3':'prep-button-dark-v2',cw,rowH,true);
-   const button=row.addComponent(Button);button.transition=Button.Transition.SCALE;button.zoomScale=.98;button.interactable=!this.hud.mapTravel.busy;
+   const skin=UiSkin.asset(row,selected?'rpg-selection-frame-v3':'prep-button-dark-v2',cw,rowH,true);
+   const button=row.addComponent(Button);button.transition=Button.Transition.NONE;button.interactable=!this.hud.mapTravel.busy;
+   ButtonSurface.attach(row,{width:cw-8*u,height:rowH-8*u,radius:3*u,overlay:true,after:skin.node});
    const rune=this.hud.text(row,'◎',-cw/2+18*u,0,24*u,24*u,F.color('quality.epic'),rowH);rune.horizontalAlign=Label.HorizontalAlign.CENTER;
    this.hud.text(row,point.name,16*u,10*u,cw-58*u,15*u,selected?GOLD:C.ink,24*u);
    this.hud.text(row,LAYERS[this.layerFor(point.id)].name+(point.area===this.current?' · '+T('map.current'):''),16*u,-12*u,cw-58*u,11*u,C.muted,20*u);

@@ -1,0 +1,56 @@
+{
+  "date": "2026-11-17",
+  "design": "掌心短促聚电、白亮细芯与蓝紫外缘的短电矢、真实命中后0.14秒内局部电花消散；每发形状有细微变化。",
+  "implementation": "现有图集与Cocos原生网格，无新生成贴图；使用既有普攻规则。",
+  "validation": {
+    "typecheck": "passed",
+    "existingCombatSkillInputTests": 66,
+    "webBuild": "test",
+    "renderer": "Player3DActors in 2D painted scene",
+    "cases": {
+      "BASIC_THU": {
+        "shots": 2,
+        "hits": 2,
+        "contactPresent": true,
+        "maxChargePalmErrorMetres": 0.0,
+        "maxNativeBeams": 5,
+        "maxNativeBatches": 2,
+        "cleanAtEnd": true
+      },
+      "BASIC_THU_REDUCED": {
+        "shots": 2,
+        "hits": 2,
+        "contactPresent": true,
+        "maxChargePalmErrorMetres": 0.0,
+        "maxNativeBeams": 3,
+        "maxNativeBatches": 2,
+        "cleanAtEnd": true
+      },
+      "MISS_THU": {
+        "shots": 2,
+        "hits": 0,
+        "contactPresent": false,
+        "maxChargePalmErrorMetres": 0.0,
+        "maxNativeBeams": 5,
+        "maxNativeBatches": 2,
+        "cleanAtEnd": true
+      }
+    },
+    "regressionSkill": "THU_01 passed",
+    "pageErrors": [],
+    "agentVisualReview": "通过：已查看最终掌心释放、飞行、命中及连续施法阶段；掌心电丝与实际掌心对齐，电矢体量轻、无长回弯，真实命中后清除。",
+    "userArtAcceptance": "待用户验收",
+    "taptapDevice": "未验证"
+  },
+  "mainBundleSha256": "8b7321da00eb576adf5ea23adb360714f5d25339207c9ddb3e18b7f264bd819c",
+  "sourceSha256": {
+    "src/cocos/assets/scripts/features/combat/runtime/SkillEnergyStrokes.ts": "3accd929b94e12e96bc7a175942ce3d8ecdcf5856ff047365fac26e6d217a8c9",
+    "src/cocos/assets/scripts/features/combat/runtime/Effects.ts": "43752cc061875db13e72f43cb95b31ba1d89ae006aa63ca7c2a6110942721059",
+    "src/cocos/assets/scripts/features/combat/runtime/SpellCastEffects.ts": "4fbef69f0dd42a73f2a844bddc70dbafb37d1c42b07f5297a753d0e8c155fa3e"
+  },
+  "mediaSha256": {
+    "thunder-basic-stages.jpg": "6749227d0eb7f96e09743184447e7a8e1c464dc3c954d3243f99193e13268e2a",
+    "thunder-basic.gif": "81a49ad25f186133cc80d0f9fee6c53971ed5ec7bf96c35655e63f1fdd1741d9",
+    "thunder-basic.mp4": "7167e857e751dc99450b428da50813a458959fe916caaae19a7edb7f78a2c20a"
+  }
+}

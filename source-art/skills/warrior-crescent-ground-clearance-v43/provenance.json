@@ -1,0 +1,107 @@
+{
+  "status": "production floor-clipped moon tip fixed; root visual review completed; TapTap device verification pending",
+  "productionIntegration": true,
+  "generation": "native Cocos recording; no image generation or rendering overrides",
+  "cause": "The tilted WAR_01 crescent extends below the floor and gets depth-occluded before its alpha taper reaches the tip.",
+  "change": "Raise only the focused-cut presentation as required by the existing outer/inner mesh edges and terrain, with allowance for current shader drift; preserve moon mesh, material, angle, XZ footprint and real gameplay events.",
+  "scene": "S01-T1 third-cup inn; disposable fresh browser context, no persistent user storage edits",
+  "cameraAndClockMatched": true,
+  "before": {
+    "gameHash": "068d3bf3bc8a19c26bc46ce6c0a5a895a8f9f1add0876c5e926372d7b2d2efbf",
+    "setup": {
+      "area": "S01-T1",
+      "skill": "WAR_01",
+      "rank": 1,
+      "player": [
+        0,
+        0,
+        -7
+      ],
+      "angle": 2.9355346029916
+    },
+    "minimumClearance": -0.11940301675917708,
+    "clippedFrames": 19,
+    "events": [
+      {
+        "type": "skill_cast",
+        "segment": 0,
+        "time": 10.300000000000015
+      },
+      {
+        "type": "skill_release",
+        "segment": 0,
+        "time": 10.450000000000022
+      },
+      {
+        "type": "skill_segment",
+        "segment": 0,
+        "time": 10.450000000000022
+      },
+      {
+        "type": "skill_segment",
+        "segment": 1,
+        "time": 10.616666666666697
+      }
+    ],
+    "errors": []
+  },
+  "after": {
+    "gameHash": "8d3ab20bcda3058ff88b3c1ff5bff0f18fbb92609a9812bc38e4f90f38ea9ff7",
+    "setup": {
+      "area": "S01-T1",
+      "skill": "WAR_01",
+      "rank": 1,
+      "player": [
+        0,
+        0,
+        -7
+      ],
+      "angle": 2.9355346029916
+    },
+    "minimumClearance": 0.13241211601488845,
+    "clippedFrames": 0,
+    "events": [
+      {
+        "type": "skill_cast",
+        "segment": 0,
+        "time": 10.300000000000015
+      },
+      {
+        "type": "skill_release",
+        "segment": 0,
+        "time": 10.450000000000022
+      },
+      {
+        "type": "skill_segment",
+        "segment": 0,
+        "time": 10.450000000000022
+      },
+      {
+        "type": "skill_segment",
+        "segment": 1,
+        "time": 10.616666666666697
+      }
+    ],
+    "errors": []
+  },
+  "validation": {
+    "typeCheck": "passed",
+    "normalTestWebBuild": "passed Cocos 3.8.8 legacy forward",
+    "sameSkillEventsAndTiming": true,
+    "sameDamageRules": "runtime presentation only",
+    "reviewedFrames": [
+      "before/020.jpg",
+      "after/020.jpg"
+    ],
+    "reviewedArtifact": "floor-clearance-comparison.jpg",
+    "finding": "The former sharp floor cut at the lower tip is gone; the continuous moon outline now ends in its original soft point. The crossing direction, thickness and flowing silver remain.",
+    "taptapDevice": "not verified",
+    "approvedUltimateMotionUnchanged": true
+  },
+  "sources": {
+    "src/cocos/assets/scripts/features/combat/runtime/WarriorSkillEffects.ts": "408b0bef4a88aed896095e57ee0e2913a938d2bf6840b9f2437a936c1360373e",
+    "src/cocos/assets/resources/vfx/production/warrior-pressure-wave-v2.effect": "a078cf90cb5cb3765aaabc4b7e8464680723f7654ba2b175f4be912b7d155693",
+    "src/cocos/assets/scripts/features/combat/common/WarriorUltimate.ts": "7ac5472c29215ac7adeb6597fc8a07466c15c24dc72f77b16c2429f1fc54b6b2",
+    "src/cocos/assets/scripts/features/combat/runtime/UnifiedShieldEffects.ts": "97683ffbea40a66f97c3045bf6a28bfc86bc3579326cbc28732e165970e84a6c"
+  }
+}

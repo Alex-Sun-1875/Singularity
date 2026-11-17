@@ -9,3 +9,7 @@
 采用云端 OpenAI image_gen 生成图画、本地 Pillow 精确排字和导出。原图、提示词、字体与验收记录在仓库 `source-art/branding/taptap-v1/`。这些是宣传插画，不是游戏实机截图。素材已完成助手视觉检查，尚未上传或通过平台审核。
 
 官方规格：[小游戏宣传物料](https://developer.taptap.cn/minigameapidoc/quick-start/guide/game-publish/material/)、[图标规范](https://developer.taptap.cn/docs/store/release/publish/material/)。
+
+2026-11-17：`icon-512.png` 已上传至当前游戏素材库（image-926830），选入 V-20261110 待提审草稿并观察到自动保存；后台页眉图标已同步。未提交审核或发布，手机启动页同步尚待重新进入验证；封面与其他宣传材料仍未上传。此次未修改代码或重打包。
+
+2026-11-18后续状态：横版宣传图 image-926958、方形宣传图 image-926957 与正式图标均已选入 V-20261110 草稿，随0.3.60 release包体、九张截图和四职业视频一起保存；游戏版本未提审或发布。详见仓库 `promotion/records/taptap-upload-progress.json`。

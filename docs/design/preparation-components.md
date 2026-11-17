@@ -59,6 +59,9 @@ Controls.attributeRow(ui, {
 - 低层 `PreparationSkin.art`、`caption`、`badge` 以及 `Controls.icon` 保留已有Cocos位置参数，宽、高和字号按原稿单位传入；新页面优先使用高层组合组件。
 - 当前值、草稿值、是否可用与动作均来自页面。公共组件不推断职业、不修改点数，也不写入存档。
 - 组合组件继续创建原生Node、Button、Label、Sprite与既有裁切节点，随所属`RpgPanel`统一销毁；没有新增运行依赖。
+- 公共Header下的正文边界统一读取`RpgPanel.contentTop/contentBottom`；`column`背景不向上补到旧原稿顶线。宽桌面保留原稿字级与控件尺寸，原稿正文坐标通过`referenceY`映射到当前正文范围，避免64逻辑像素Header被分栏、人物图或首排内容覆盖。底部动作继续由`RpgPanel.footer`固定布局。
+
+2026-11-17正文边界修复通过类型检查与正常test的`concept-2d`构建；1920×1080桌面连续切换六个管理页签，844×390与932×430／3倍密度检查加点、技能和培养，均未发现正文覆盖Header。实际触摸滚动后Header保持固定，关闭后无残留模态节点；截图与测量见`test-results/rpg-header-content-boundary-v1/review.json`。使用隔离浏览器会话并禁用保存回调，TapTap真机与真实安全区仍待单独验收。
 
 ## 后续调整
 

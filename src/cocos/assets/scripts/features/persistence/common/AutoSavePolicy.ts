@@ -1,6 +1,6 @@
 import type {GameEvent} from '../../../core/Contracts';
 
-const IMMEDIATE=new Set(['item','quest','journey_complete','complete','travel','retry','death','rest','captain_defeated','check_roll','check_result','loot_roll']);
+const IMMEDIATE=new Set(['item','quest','journey_complete','complete','travel','retry','death','rest','captain_defeated','check_roll','check_result','loot_roll','level_up','auto_allocate']);
 const PROGRESS=new Set(['experience','reward','defeat','loot_drop']);
 
 /** Bounded periodic saves plus a non-sliding deadline for continuous rewards.

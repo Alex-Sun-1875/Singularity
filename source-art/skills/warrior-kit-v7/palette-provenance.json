@@ -1,0 +1,390 @@
+{
+  "status": "Four colour candidates awaiting user choice; cyan treatment rejected",
+  "basis": "User-selected warrior-impact-v6 blade forms",
+  "method": "Advance native simulation once per frame, then swap only cached blade/guard textures and render all four palettes at dt=0.",
+  "verified": "Same native skeleton, actor pose, targets and camera. Untouched background pixels match exactly between all four PNG peak captures.",
+  "gameHash": "f30b76bbc67318f05940a90d9a65fcceed59c86083f6c9a502028fee7f73b2e5",
+  "palettes": {
+    "A": {
+      "name": "银白钢刃",
+      "detail": "银灰刀面 / 深灰蓝暗边",
+      "colours": [
+        [
+          9,
+          15,
+          26
+        ],
+        [
+          34,
+          45,
+          58
+        ],
+        [
+          113,
+          123,
+          134
+        ],
+        [
+          177,
+          190,
+          202
+        ],
+        [
+          231,
+          241,
+          247
+        ],
+        [
+          255,
+          255,
+          255
+        ]
+      ],
+      "edge": [
+        4,
+        14,
+        32
+      ],
+      "halo": [
+        148,
+        171,
+        191
+      ]
+    },
+    "B": {
+      "name": "赤金钢刃",
+      "detail": "赤金主刃 / 暗红刀背",
+      "colours": [
+        [
+          27,
+          7,
+          12
+        ],
+        [
+          72,
+          13,
+          24
+        ],
+        [
+          148,
+          31,
+          43
+        ],
+        [
+          226,
+          74,
+          52
+        ],
+        [
+          255,
+          187,
+          104
+        ],
+        [
+          255,
+          243,
+          212
+        ]
+      ],
+      "edge": [
+        48,
+        6,
+        14
+      ],
+      "halo": [
+        205,
+        66,
+        42
+      ]
+    },
+    "C": {
+      "name": "暖金钢刃",
+      "detail": "金色刀面 / 深棕暗边",
+      "colours": [
+        [
+          25,
+          17,
+          12
+        ],
+        [
+          60,
+          38,
+          19
+        ],
+        [
+          114,
+          78,
+          31
+        ],
+        [
+          192,
+          145,
+          67
+        ],
+        [
+          248,
+          224,
+          160
+        ],
+        [
+          255,
+          253,
+          230
+        ]
+      ],
+      "edge": [
+        35,
+        20,
+        8
+      ],
+      "halo": [
+        185,
+        139,
+        61
+      ]
+    },
+    "D": {
+      "name": "银紫钢刃",
+      "detail": "银紫主刃 / 深紫暗边",
+      "colours": [
+        [
+          18,
+          10,
+          38
+        ],
+        [
+          38,
+          22,
+          76
+        ],
+        [
+          87,
+          54,
+          136
+        ],
+        [
+          155,
+          104,
+          216
+        ],
+        [
+          222,
+          192,
+          252
+        ],
+        [
+          253,
+          244,
+          255
+        ]
+      ],
+      "edge": [
+        20,
+        8,
+        43
+      ],
+      "halo": [
+        133,
+        91,
+        202
+      ]
+    }
+  },
+  "shots": {
+    "WAR_01": {
+      "frames": 72,
+      "overlapFrames": [
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26
+      ],
+      "events": [
+        {
+          "time": 0.3,
+          "type": "skill_cast",
+          "skill": "WAR_01",
+          "segment": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "skill_release",
+          "skill": "WAR_01",
+          "segment": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "skill_segment",
+          "skill": "WAR_01",
+          "segment": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "hit",
+          "skill": "WAR_01",
+          "id": "study-target-0",
+          "value": 164
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "skill_hit",
+          "skill": "WAR_01",
+          "target": "study-target-0",
+          "segment": 0,
+          "value": 164
+        },
+        {
+          "time": 0.6,
+          "type": "skill_segment",
+          "skill": "WAR_01",
+          "segment": 1
+        },
+        {
+          "time": 0.6,
+          "type": "hit",
+          "skill": "WAR_01",
+          "id": "study-target-0",
+          "value": 164
+        },
+        {
+          "time": 0.6,
+          "type": "skill_hit",
+          "skill": "WAR_01",
+          "target": "study-target-0",
+          "segment": 1,
+          "value": 164
+        },
+        {
+          "time": 0.8,
+          "type": "notice",
+          "reason": "威胁已解除，安全等待 5 秒后可换装"
+        }
+      ]
+    },
+    "WAR_03": {
+      "frames": 108,
+      "overlapFrames": [],
+      "events": [
+        {
+          "time": 0.3,
+          "type": "skill_cast",
+          "skill": "WAR_03",
+          "segment": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "skill_release",
+          "skill": "WAR_03",
+          "segment": 0
+        },
+        {
+          "time": 0.43333333333333335,
+          "type": "skill_status",
+          "skill": "WAR_03",
+          "segment": 0,
+          "value": 78.3,
+          "status": "shield"
+        },
+        {
+          "time": 2.6666666666666665,
+          "type": "skill_status",
+          "skill": "WAR_03",
+          "segment": 0,
+          "status": "shieldHit"
+        }
+      ]
+    }
+  },
+  "media": [
+    {
+      "file": "palette-comparison.mp4",
+      "frames": 180,
+      "fps": 30,
+      "seconds": 6.0
+    },
+    {
+      "file": "palette-A.gif",
+      "frames": 36,
+      "milliseconds": 2400
+    },
+    {
+      "file": "palette-B.gif",
+      "frames": 36,
+      "milliseconds": 2400
+    },
+    {
+      "file": "palette-C.gif",
+      "frames": 36,
+      "milliseconds": 2400
+    },
+    {
+      "file": "palette-comparison.gif",
+      "frames": 36,
+      "milliseconds": 2400
+    },
+    {
+      "file": "palette-D.gif",
+      "frames": 36,
+      "milliseconds": 2400
+    },
+    {
+      "file": "palette-guard.gif",
+      "frames": 54,
+      "milliseconds": 3600
+    }
+  ],
+  "productionIntegration": false,
+  "artReview": "Pending user selection",
+  "files": {
+    "blade-warm.png": "a483d525228514e4a0285d7872f32216a62cf428c1ea7414ae578e7601764a38",
+    "blade.png": "cee05e4e64c950e77e43affcd004ffd18fa103079d100c36674c4dac71239ddb",
+    "capture-palettes.cjs": "0e836e6abd719e183e37b484ba4f743a005be9b2e36bd48efb4a45bcb1b1aeb6",
+    "capture.cjs": "f9a53392525eedae30b6d981b82778df2d89c6cc0964c00a939c976367f3b48d",
+    "form-reference.png": "9d4738d2e7db933920cf5be0b448a024b0446e09833fca7e7a7a62bf83b5352f",
+    "grade-variants.py": "3d624f04b32823b065ba06e998e2fec4dcc54528f5836ce0994fa467bbbc00c8",
+    "grade.py": "00f4968a2059ce982e6203701ae96239a5f19fb85fd86ba27d504da2e251dd8c",
+    "guard-prompt.txt": "e3b60c0fdedda20d81f24126255c66f9e485e8ebc3f5aa15954eb718803e4600",
+    "guard-warm.png": "024a25a5fb35ae15114b1f595c0c544cbb10b0b24c9672ca6cf665c99b80474a",
+    "guard.png": "32a3219e5ddb6c8359db0f10e3ea45ce812ce00fcff60621ad1dfcf74240d531",
+    "palette-candidates.json": "5c9e52a9d21ef0686dfd65f84af2799e3b3f568ca0b2a0269806a8439c072392",
+    "palette-media.py": "f9be793d63cca38c0be29a1eedfcdae183f9597176f84921d73ca3b838815d59",
+    "palette.json": "d3d853953218c2b6bbd8fc23e5170a431c4963b36d37aed7590b0d906f396ebd",
+    "README.md": "cf57bc6bb5a573f004a5ebbe0fc8806ec56c0500b2ec4567b208e5afe7eb4b4e",
+    "refine-modules.cjs": "c02a6707df0c210df5a6bb0a967b050634a561979f0fa084285786e967f77c48",
+    "review-fixture.js": "de3c2ac7a59116cfecdf6a490ad563ffb94b69c9089c30728f70b4dc9492a4fc",
+    "WarriorKitStudy.ts": "5a10c15848e5bd8ac18d4a751e4a2c9445b654250f96ae1879d12167468b67bd",
+    "media\\A-war_01.jpg": "7f6627824c5909f34a6aa8d8dda29f50210ee9f770342c1a7eca1dec1dbf2844",
+    "media\\A-war_03.jpg": "e46560277854c35c215b73235490fb26139b7209120af2b17bf3cc9f4ba7f235",
+    "media\\B-war_01.jpg": "aeab89114a7af75a61d45052fb38d95ace0839f6136d0a567df85282424ccd0b",
+    "media\\B-war_03.jpg": "5cce0d7084e16fabfbd1127f98162e868dae95d95b73b8eed1603fc9aec68a8a",
+    "media\\C-war_01.jpg": "0f6a7ffeae778ac89a862f0306a22ecc7c0654f56b17b5a94f7030008a0c0745",
+    "media\\C-war_03.jpg": "14f335d485df4c13b9a62e8af7b462c873bb1074eddfcbe08827bff5948ca826",
+    "media\\D-war_01.jpg": "7af6ca0384f4712185aa2b0ab899cdc966f9f8d35899bf637047ffd88ac2ac17",
+    "media\\D-war_03.jpg": "633c18676f401809f284a29a0d0b40fe2f3447fe4e50a3a0539890b6bc516436",
+    "media\\palette-A.gif": "7e396e42a375c4eb11b56e29b0020fcaebc024847cbd89e7bf9a381f432a9e22",
+    "media\\palette-attack.jpg": "2010678550bbab16332dd2b0f8e01f7907434c620061c1afa47bcd75c892ae21",
+    "media\\palette-B.gif": "59e8bd056d8dea41a1de7f563e1c8ecfd58ecd4f6fce0097065c125df5347fee",
+    "media\\palette-C.gif": "985fbff9efe79f003efd24653c9a978ae9cfa523a5f396197d7e4b488a0a47c0",
+    "media\\palette-comparison.gif": "563fd2171b95677a888097f509c46d22598be80cdc326c72c776cc6e57399499",
+    "media\\palette-comparison.mp4": "0c3d56fbc3895d6556e28e904ad6a8aad4badc231d8b98e75f25ab46e0bee3ab",
+    "media\\palette-D.gif": "ae9eb69e86d2a142381089556cdef94e767b5ff158d22700aa29b67656ba9dc1",
+    "media\\palette-guard.gif": "2470410a3d5dd448ae28ee98f080cdaac778023673d6d635556f5cb14d0a1b44",
+    "media\\palette-guard.jpg": "eb7f9bda9d37071298477114dc7a6b1899ed6449edb97d618d11faa5d848ca75",
+    "variants\\A\\blade.png": "90aa80f2486dd7780ed3ea33663e5a5001eb6f106152bb67451ee1b746f8115a",
+    "variants\\A\\guard.png": "6c2297a5aaf3885d9233461636c7b40af6f09a6928eaf6f06b8d3d04c493561d",
+    "variants\\B\\blade.png": "28dec342c8c868f83b8d0cf6a0cc0ff5da0c00ea08a848baac83a8273fd6d60d",
+    "variants\\B\\guard.png": "9c9d8e20e344bcf991c4631f50f357482327056fb1d2a3af25ff5ff51ffdbe94",
+    "variants\\C\\blade.png": "2bef2a4b3c5f36d49e632959a837b6beea1f1b96daf72c52475638e29ffe8f2d",
+    "variants\\C\\guard.png": "13bed93b0eef3d79e4dd86ccd9f1eaa9ee3e7d51e8c4f3750c82b3803042d0a7",
+    "variants\\D\\blade.png": "e81f667df89cd96e12345259bc8495622dd22d0df4544a93d195daf2e6cb3f02",
+    "variants\\D\\guard.png": "67ac3a884686694cd8164baf7062381d696db7257459de647cf97d3a1e54a3ae"
+  }
+}

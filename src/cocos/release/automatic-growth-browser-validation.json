@@ -1,0 +1,92 @@
+{
+  "scope": "Real rendered 844x390 normal test HTML scene: production XP events, menu-delayed native particles, auto allocation through ChapterGame, sound routing, and verified platform-backed local storage in an isolated browser context; controlled XP and acknowledged cinematic fixture, not natural leveling speed or TapTap device validation",
+  "fixture": {
+    "before": {
+      "level": 1,
+      "maxHp": 120,
+      "attributes": {
+        "strength": 10,
+        "dexterity": 10,
+        "intellect": 10,
+        "vitality": 10
+      }
+    },
+    "levelEvents": [
+      {
+        "type": "level_up",
+        "text": "升至 Lv7 · 生命上限 +30 · 属性点 +18 · 技能点 +6",
+        "fromLevel": 1,
+        "level": 7,
+        "levels": 6,
+        "maxHp": 150,
+        "attributePoints": 18,
+        "skillPoints": 6,
+        "at": {
+          "x": 0,
+          "z": -7
+        }
+      }
+    ],
+    "pendingArea": "S01-T1",
+    "mode": "quest",
+    "pause": "menu"
+  },
+  "paused": {
+    "pending": "S01-T1",
+    "played": 0,
+    "points": 18
+  },
+  "after": {
+    "level": 7,
+    "maxHp": 174,
+    "hp": 150,
+    "attributes": {
+      "strength": 10,
+      "dexterity": 22,
+      "intellect": 10,
+      "vitality": 16
+    },
+    "unspent": 0,
+    "skillPoints": 0,
+    "mainSkillRank": 4,
+    "mode": "quest",
+    "pause": null,
+    "toast": "Lv7 · 自动加点：属性 18 点 · 技能 6 点",
+    "vfx": [
+      {
+        "kind": "levelRing",
+        "at": 0.016799999952316284,
+        "count": 1
+      },
+      {
+        "kind": "levelUp",
+        "at": 0.016799999952316284,
+        "count": 18
+      }
+    ],
+    "sounds": [
+      "complete"
+    ],
+    "emitters": [
+      {
+        "kind": "levelRing",
+        "active": true,
+        "capacity": 2
+      },
+      {
+        "kind": "levelUp",
+        "active": true,
+        "capacity": 18
+      }
+    ],
+    "savedLevel": 7,
+    "savedAttributes": {
+      "strength": 10,
+      "dexterity": 22,
+      "intellect": 10,
+      "vitality": 16
+    }
+  },
+  "pageErrors": [],
+  "screenshot": "src/cocos/temp/automatic-growth-runtime.png"
+}

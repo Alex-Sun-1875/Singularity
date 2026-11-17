@@ -1,0 +1,119 @@
+{
+  "revision": "v34r2-direct-reference-rgb",
+  "source": "source-art\\skills\\fire-reference-alignment-v32\\assets\\approved-reference.png",
+  "sourceSha256": "bf699784420cce0084a523191ff6390ccf4ceceff11f04e35ae31133762fa5f6",
+  "sourceCrop": [
+    216,
+    821,
+    578,
+    981
+  ],
+  "deprojection": {
+    "centre": [
+      395.48,
+      901.09
+    ],
+    "radii": [
+      164.29,
+      61.93
+    ],
+    "targetCentre": [
+      511.5,
+      511.5
+    ],
+    "targetRadius": 460.0,
+    "orientation": "image top=far side, bottom=near side; no V flip/rotation"
+  },
+  "method": "Single affine source-pixel correction. Neutral stone fitted from neighbouring unlit original pixels; actual RGB excess split into measured smooth light and residual engraving. No manual paths, fixed foreground palette, top-hat-only peak removal or uniform full-disk colour.",
+  "floorFitRedGreenVsBlue": [
+    [
+      0.9944914569548808,
+      0.11092933970016149
+    ],
+    [
+      1.0205142821111388,
+      0.027936538404779613
+    ]
+  ],
+  "occlusion": "Entire meteor-covered rear-centre silhouette removed (source x348..463,y<881), including cool-channel substrate detail. Only rear outer band r>.80 locally uses 180-degree corresponding visible original front-band donor. Hidden interior linework is not invented; RGB light there is smoothly normalized-interpolated from surrounding valid original light samples. Diagnostic alone overlays original meteor for same-camera comparison.",
+  "resources": [
+    {
+      "name": "fire-meteor-seal-colour-v34r2.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "role": "RGB=per-pixel background-decontaminated original foreground; A=optical engraving coverage; straight RGBA",
+      "sha256": "101963c8e93edb064d4bdf114645698daf9f9b401964c2403fe8b673a5caefc1",
+      "gpuBytes": 4194304
+    },
+    {
+      "name": "fire-meteor-seal-light-v34r2.png",
+      "size": [
+        512,
+        512
+      ],
+      "role": "RGB=reference-coloured additive diffuse/near-stroke energy, not fixed palette; A=light support for 0.006 weak absorption, not direct output opacity",
+      "sha256": "6398432f7fb9666c6977006615fc6128f5dcd6079ec12c3d413dc18a9222bd59",
+      "gpuBytes": 1048576
+    }
+  ],
+  "totalGpuBytes": 5242880,
+  "formula": "glyph=main.a*fade; light=lightTexture.rgb*fade; alpha=glyph+lightTexture.a*.006*fade*(1-glyph); premul=main.rgb*glyph+light; out=premul+ground*(1-alpha). ONE/ONE_MINUS_SRC_ALPHA. No gain or colour-space conversion.",
+  "preview": "seal-v34r2-reference-reprojection-cleared-final.jpg",
+  "previewDeclaration": "Exact encoded-PNG material formula; same-ellipse reprojection onto estimated source stone + original meteor as diagnostic only. Not native Cocos / TapTap evidence.",
+  "metrics": {
+    "mainCoverageP50P90P99": [
+      0.03529411926865578,
+      0.3019607961177826,
+      0.48627451062202454
+    ],
+    "lightRMeanInside": 0.21383999288082123,
+    "sourceRoundtripMeanAbsoluteErrorNonOccluded": 0.004764969115700778
+  },
+  "review": {
+    "local": "Unique same-ellipse reference reprojection and exact material on dark green-grey ground inspected. Whole meteor silhouette and its substrate detail removed; hidden diffuse light interpolated from valid surrounding original RGB; unknown inner engraving not invented.",
+    "production": "Published with dedicated two-sampler effect and meteor-only resource/material wiring.",
+    "native": "Root viewed the final actual original/v33/v34 prewarning comparison: original visible scroll paths, thickness and local bright/dark RGB transitions are retained rather than a fixed-colour redraw; native camera perspective remains unchanged. This is a local implementation candidate, not a user art acceptance or an exact-CG-pixel claim.",
+    "user": "Previous v34 uniform-palette proposal rejected; this replacement is pending review",
+    "generation": "None; deterministic Pillow/NumPy from approved reference"
+  },
+  "publication": {
+    "productionUpdated": true,
+    "guard": "Caller acquired common build lock for this brief publication only; no build run.",
+    "rendererBeforeSha256": "314389c8b85889ba4e43b8a6f20d64abdeb171c67bc04dcc54ebee9781212c5a",
+    "rendererAfterSha256": "177f744723d3506741eac64a74ef0dc73c5a975db0907b0cd8499a63155426d7",
+    "productionFiles": {
+      "fire-meteor-seal-colour-v34r2.png": "101963c8e93edb064d4bdf114645698daf9f9b401964c2403fe8b673a5caefc1",
+      "fire-meteor-seal-light-v34r2.png": "6398432f7fb9666c6977006615fc6128f5dcd6079ec12c3d413dc18a9222bd59",
+      "fire-seal-v34r2.effect": "3b4bbd738220dc48bd76c4fd334ca7825feed832a945d399b46580e8c306ff00"
+    },
+    "slots": {
+      "0": "unchanged v27 jets",
+      "1": "unchanged v27 small seal",
+      "2": "fire-meteor-seal-colour-v34r2",
+      "3": "unchanged v24 repeating noise",
+      "4": "fire-meteor-seal-light-v34r2"
+    },
+    "preserved": {
+      "fire-ground-jets-v27.png": "37a8319026bf39a4862f1f9bedbfceb98a6a3119c16f3265f300756dd4c2e4c6",
+      "fire-jet-seal-v27.png": "febfe312082973eace56e8e5efea0b28f3e5464764a04900a924963f3ad19f86",
+      "fire-ground-v27.effect": "f213c7660ee31ba34f8900790e6256c65b7dce1a613cd570d82ea5bedf89c808",
+      "fire-flow-noise-v24.png": "ccee680793eb3e41ea3973f01fa9963c588b4f0d5cbafe483d24ccb0105c935d",
+      "UnifiedShieldEffects.ts": "97683ffbea40a66f97c3045bf6a28bfc86bc3579326cbc28732e165970e84a6c"
+    },
+    "circle": "Original centre/radius/camera-aligned ground UV/+0.045 lift unchanged"
+  },
+  "staticChecks": {
+    "productionHashes": "match frozen source-art PNG/effect",
+    "meta": "unique UUID and matching image/texture redirects; clamp-linear/no mips; alpha-colour correction disabled",
+    "meteorWiring": "dedicated effect + colour slot2 + light slot4; v27 slots and properties unchanged",
+    "ground": "centre/range/camera-aligned UV/lift preserved",
+    "typecheckBuildNative": "Root owns standard checks/build/capture; not claimed by asset preparation"
+  },
+  "nativeEvidence": [
+    "final-empty-r1/early/FIR_02-seal-colour-three-way.jpg",
+    "final-empty-r1/early/FIR_02-seal-preview-crop.jpg"
+  ],
+  "compiledSha256": "8e4fb722c097d51044db53879b740ba7da6aa3320fd806ca863c52f6d23d8dd7"
+}

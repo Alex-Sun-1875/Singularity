@@ -1,0 +1,100 @@
+{
+  "status": "Native implementation captured; not a post-composited shield preview",
+  "cases": {
+    "war-active": {
+      "frames": 165,
+      "nativeSkinnedActor": true,
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "visibleFrames": 120,
+      "firstAmount": 78.3,
+      "endsInvisible": true,
+      "actualAbsorptionRipple": true,
+      "earlyBreakObserved": false,
+      "activeSource": "WAR_03",
+      "gameHash": "fea05da98c39dcf8e2b0f0a155cb7b346893ff6da47f7e213f43a51899575c96"
+    },
+    "bow-state-fixture": {
+      "frames": 165,
+      "nativeSkinnedActor": true,
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "visibleFrames": 119,
+      "firstAmount": 65.25,
+      "endsInvisible": true,
+      "actualAbsorptionRipple": true,
+      "earlyBreakObserved": false,
+      "activeSource": "STATE_ONLY",
+      "gameHash": "fea05da98c39dcf8e2b0f0a155cb7b346893ff6da47f7e213f43a51899575c96"
+    },
+    "fire-active": {
+      "frames": 165,
+      "nativeSkinnedActor": true,
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "visibleFrames": 120,
+      "firstAmount": 65.25,
+      "endsInvisible": true,
+      "actualAbsorptionRipple": true,
+      "earlyBreakObserved": false,
+      "activeSource": "FIR_03",
+      "gameHash": "fea05da98c39dcf8e2b0f0a155cb7b346893ff6da47f7e213f43a51899575c96"
+    },
+    "thunder-state-fixture": {
+      "frames": 165,
+      "nativeSkinnedActor": true,
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "visibleFrames": 119,
+      "firstAmount": 65.25,
+      "endsInvisible": true,
+      "actualAbsorptionRipple": true,
+      "earlyBreakObserved": false,
+      "activeSource": "STATE_ONLY",
+      "gameHash": "fea05da98c39dcf8e2b0f0a155cb7b346893ff6da47f7e213f43a51899575c96"
+    },
+    "fire-break": {
+      "frames": 165,
+      "nativeSkinnedActor": true,
+      "runtimeErrors": [],
+      "consoleErrors": [],
+      "visibleFrames": 49,
+      "firstAmount": 65.25,
+      "endsInvisible": true,
+      "actualAbsorptionRipple": true,
+      "earlyBreakObserved": true,
+      "activeSource": "FIR_03",
+      "gameHash": "fea05da98c39dcf8e2b0f0a155cb7b346893ff6da47f7e213f43a51899575c96"
+    }
+  },
+  "lifecycle": {
+    "pauseDoesNotReplayFormation": true,
+    "followsPlayerMovement": true,
+    "clearHidesShield": true
+  },
+  "checks": {
+    "typeCheck": "npm --prefix src/cocos run check passed",
+    "existingShieldRules": "2 existing shield-related chapter rule tests passed",
+    "cocosBuild": "Build-Local.ps1 web-mobile concept-2d test passed"
+  },
+  "sourceHashes": {
+    "assets/scripts/features/combat/runtime/UnifiedShieldEffects.ts": "fc3a64f9e80d6263649591bce1ba31bcc25941a0c33baa8a8143b0860c721475",
+    "assets/scripts/features/combat/runtime/Effects.ts": "31269f461351257fb72aa8cbcb528310a100b555fefc2e09ff8bed84400f7df4",
+    "assets/scripts/features/combat/runtime/NativeSkillVfx.ts": "eaf024cf03e324bf4b351cdbe8812902b6f7907d2a938828a065b65524615ee5",
+    "assets/resources/vfx/production/shield-unified-v1.effect": "d84ee47819dea40fec0be09e9121b708508373fc340a1d69fcc2c4ed69c1640f",
+    "assets/resources/vfx/production/shield-unified-motifs-v1.png": "33c340dda04ecdabd1f98d654229b6676febecb089457ab9a687a4c8a3474dc0"
+  },
+  "taptapDeviceValidation": "Pending; no App/device performance or platform acceptance claimed",
+  "packaging": "No TapTap package or version increment requested/performed",
+  "artApproval": "User approved design; current native output supplied for review",
+  "unified-shields-runtime": {
+    "frames": 165,
+    "seconds": 5.5,
+    "fps": 30
+  },
+  "shield-break-runtime": {
+    "frames": 120,
+    "seconds": 4.0,
+    "fps": 30
+  }
+}

@@ -18,6 +18,8 @@ const NAMES:Record<CombatStyle,string>={WAR:'破军',BOW:'逐风',FIR:'烈焰',T
 /** Available only in an isolated training session or the local test=max profile. */
 export class SkillEffectDebug {
  private family:CombatStyle='FIR';private selected='FIR_01';private notice=tr('skillNotice');
+ private resourcesReady=true;
+ preparationFailed(){this.resourcesReady=false;this.notice=tr('skillLoadFailed');}
  handle(action:string,game:GameSession):boolean {
   const command=action.slice('debug:'.length),s=game.state,p=s.progression;
   if(command.startsWith('rank:')){
@@ -47,7 +49,7 @@ export class SkillEffectDebug {
   // burn, shield or buff may survive and be mistaken for the new level.
   game.resetCombatTransient();s.combat.cooldowns={};s.cooldowns.dash=0;s.combat.charge=0;s.combat.ultimateLock=0;
   p.skillPoints=totalSkillPoints(p)-Object.values(p.learned).reduce((n,rank)=>n+skillRankSpent(rank),0);
-  s.revision++;game.dirty=true;return true;
+  s.revision++;game.dirty=true;this.resourcesReady=true;return true;
  }
  render(hud:Hud,game:GameSession,training=false){
   const ui=new RpgPanel(hud,game,'skills','SkillEffectDebug'),gap=ui.gap,usable=ui.width-2*ui.margin,edge=-ui.width/2+ui.margin;
@@ -72,6 +74,6 @@ export class SkillEffectDebug {
   for(let level=1;level<=5;level++)ui.button(detail,`${level}级`,-rightW/2+gap+rankW/2+(level-1)*(rankW+gap),rankY,rankW,'debug:rank:'+level,true,rank===level);
   const textTop=rankY-ui.hit/2-gap,textBottom=-h/2+gap,textH=Math.max(ui.font*2,textTop-textBottom),facts=[skillRoleLabel(skill),...skillRankFacts(skill,data),data.upgradeEffect??data.evolution??skill.effect??'',skill.activation==='automatic'?'满足技能说明中的条件后自动触发，不可手动装槽或施放。':skill.type==='passive'?'使用当前职业固定被动，在正常战斗中观察效果。':skill.id==='COM_02'?'展开补给栏，使用第三格治疗技能。':skill.type==='mobility'?'使用闪避按钮查看效果。':'关闭调试页，使用当前职业固定技能按钮。','切换等级会清除上一轮技能、弹体与增益。'].join('\n\n'),contentHeight=Math.max(textH,Math.ceil(facts.length/Math.max(1,(rightW-4*gap)/ui.font))*(ui.font*1.4)+ui.font*6),scroll=ui.scroll(detail,0,(textTop+textBottom)/2,rightW-2*gap,textH,contentHeight);
   ui.text(scroll,facts,0,-contentHeight/2,rightW-4*gap,contentHeight,C.ink,ui.font-2).verticalAlign=Label.VerticalAlign.TOP;
-  ui.footer(this.notice,[training?{label:'靶场设置',action:'training:settings'}:{label:'全部同级',action:'debug:all-rank'},{label:'本系同级',action:'debug:family-rank'},training?{label:'重置本轮',action:'training:reset'}:{label:'补满状态',action:'debug:refill'},{label:'继续试放',action:'close',primary:true}]);
+  ui.footer(this.notice,[training?{label:'靶场设置',action:'training:settings'}:{label:'全部同级',action:'debug:all-rank'},{label:'本系同级',action:'debug:family-rank'},training?{label:'重置本轮',action:'training:reset'}:{label:'补满状态',action:'debug:refill'},this.resourcesReady?{label:'继续试放',action:'close',primary:true}:{label:tr('retrySkills'),action:'debug:loadout',primary:true}]);
  }
 }

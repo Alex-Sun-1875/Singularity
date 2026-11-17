@@ -1,0 +1,110 @@
+{
+  "reference": "source-art/skills/fire-distinct-shapes-design-v29/fire-distinct-shapes-v29.png",
+  "referenceSha256": "9b663827f1c27ff48300c7a21ff72bb1f6a95bb20f33b54ad316c11d5da7a7c8",
+  "method": "deterministic original-fire matte, contour exclusion, coordinate rotation and forward detail transport; no generation",
+  "crop": [
+    349,
+    697,
+    651,
+    880
+  ],
+  "sourceNose": [
+    21.0,
+    171.0
+  ],
+  "rotationDegrees": 146.36141114796064,
+  "cell": [
+    512,
+    192
+  ],
+  "grid": [
+    4,
+    4
+  ],
+  "frames": 16,
+  "nosePixel": [
+    487.4100278551532,
+    53.29442896935933
+  ],
+  "noseUV": [
+    0.9519727106545961,
+    0.27757515088207985
+  ],
+  "orientation": "+X points from tail toward leading nose",
+  "excluded": [
+    "ground sigil",
+    "caster hand",
+    "neutral terrain",
+    "most dark rock interior"
+  ],
+  "output": "src/cocos/assets/resources/vfx/production/fire-meteor-reference-tail-v32.png",
+  "sha256": "330d6cc839d4f028f6281399bad90b665f4e09195175375f188cb87b70827e6e",
+  "bytes": 1461609,
+  "review": {
+    "materialSample": "visually inspected: original wrapped head and long tail retained; hand/sigil excluded; native pending",
+    "nativeCocos": "Final contact-final actual Cocos test Web recording reviewed. Projected descent 47.598 degrees; source whole burst retained; real same-frame meteor/blast contact recorded, progress .999999, nose-to-target error 1.54215e-5m. See contact-final-r1 and contact-final-empty-r1. User art and device acceptance remain pending.",
+    "userArtAcceptance": "pending"
+  },
+  "originalAttachmentSha256": "220f417320d583cf55bf77965bb603b82c32c5f2be0b42a70bbb033a521ec9a2",
+  "runtime": {
+    "landingNoseHeight": ".045 above height(target)",
+    "flightVector": [
+      -4.42,
+      -8,
+      3.06
+    ],
+    "sizeRule": "1.05 + rank*.11 unchanged",
+    "rockSupportSource": [
+      0.213878,
+      -0.5,
+      0.006679
+    ],
+    "rockGeometry": "existing shared mesh, nose-rebased and per-face normals; same triangle count",
+    "rockLocalScalePerSize": [
+      0.46,
+      0.82,
+      0.44
+    ],
+    "rockRoll": "only local long axis, .18rad/s; no roll in reduced-motion mode",
+    "runtimeTailUV": [
+      0.9519727106545961,
+      0.27757515088207985
+    ],
+    "otherSkillsChanged": false,
+    "rockMaterial": {
+      "mainColor": [
+        155,
+        132,
+        111,
+        255
+      ],
+      "albedoScale": [
+        0.72,
+        0.76,
+        0.8
+      ],
+      "emissiveScale": [
+        0.03,
+        0.02,
+        0.01
+      ]
+    },
+    "cometCardLocalZ": "height*.55 toward camera; root/nose world point and orthographic screen projection unchanged",
+    "rank1ActualRockScale": [
+      0.58,
+      1.044,
+      0.5568
+    ],
+    "rank5ActualRockScale": [
+      0.8,
+      1.4400000000000002,
+      0.768
+    ],
+    "intrinsicTailAngleCorrectionDegrees": -9.391739408467398,
+    "tailCorrectionMeasurement": "Alpha-weighted tail centroid within first half of frame0 is (176.8066,104.6685), relative to source nose (487.4100,53.2944). Correct its 9.3917 degree intrinsic offset so envelope and rock follow the same projected descent axis.",
+    "projectedDescentAngle": "Approximately 47.6 degrees at the existing orthographic camera lookAt(-15,-19.35,-18), matching the reference 45-50 degree diagonal.",
+    "contactPresentationHoldSeconds": 0.045
+  },
+  "referencePixelMatch": "User clipboard attachment and canonical v29 PNG have identical RGB pixels, including meteor crop; PNG container SHA differs.",
+  "referenceRgbSha256": "401f556068eeeaadf7d8d8ba7478ef64bf12db2f9fb8f13f11e1f9ac87fe2256"
+}

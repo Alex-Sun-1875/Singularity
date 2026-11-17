@@ -1,0 +1,856 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-17",
+  "reason": "八章各约10级，正常1级起步、仅dev自动80级；前20级节奏不变，后期用章节战斗预算控制装备及敌人增长。",
+  "rules": {
+    "progressionRevision": 3,
+    "maxLevelDevelopmentOnly": true,
+    "localPlaytestMaxLevel": false
+  },
+  "progression": {
+    "maxLevel": 80,
+    "perLevel": {
+      "combatBudgetHp": 5,
+      "combatBudgetSkillPower": 1.05,
+      "freeAttributePoints": "等级2–20每级3点，21–80每级2点",
+      "skillPoints": "等级2–20每级1点，22–80每2级1点；进入第二章额外2点"
+    },
+    "combatBudgetAnchors": [
+      [
+        1,
+        1
+      ],
+      [
+        20,
+        20
+      ],
+      [
+        30,
+        24
+      ],
+      [
+        40,
+        28
+      ],
+      [
+        50,
+        32
+      ],
+      [
+        60,
+        35
+      ],
+      [
+        70,
+        38
+      ],
+      [
+        80,
+        40
+      ]
+    ],
+    "xpTable": [
+      {
+        "level": 1,
+        "xpToNext": 100,
+        "cumulativeXp": 0,
+        "combatBudgetLevel": 1.0,
+        "baseMaxHp": 120,
+        "baseSkillPowerS": 18.0,
+        "freeAttributePointsEarned": 0,
+        "skillPointsWithChapterTwo": 0
+      },
+      {
+        "level": 2,
+        "xpToNext": 180,
+        "cumulativeXp": 100,
+        "combatBudgetLevel": 2.0,
+        "baseMaxHp": 125,
+        "baseSkillPowerS": 19.05,
+        "freeAttributePointsEarned": 3,
+        "skillPointsWithChapterTwo": 1
+      },
+      {
+        "level": 3,
+        "xpToNext": 310,
+        "cumulativeXp": 280,
+        "combatBudgetLevel": 3.0,
+        "baseMaxHp": 130,
+        "baseSkillPowerS": 20.1,
+        "freeAttributePointsEarned": 6,
+        "skillPointsWithChapterTwo": 2
+      },
+      {
+        "level": 4,
+        "xpToNext": 490,
+        "cumulativeXp": 590,
+        "combatBudgetLevel": 4.0,
+        "baseMaxHp": 135,
+        "baseSkillPowerS": 21.15,
+        "freeAttributePointsEarned": 9,
+        "skillPointsWithChapterTwo": 3
+      },
+      {
+        "level": 5,
+        "xpToNext": 720,
+        "cumulativeXp": 1080,
+        "combatBudgetLevel": 5.0,
+        "baseMaxHp": 140,
+        "baseSkillPowerS": 22.2,
+        "freeAttributePointsEarned": 12,
+        "skillPointsWithChapterTwo": 4
+      },
+      {
+        "level": 6,
+        "xpToNext": 1000,
+        "cumulativeXp": 1800,
+        "combatBudgetLevel": 6.0,
+        "baseMaxHp": 145,
+        "baseSkillPowerS": 23.25,
+        "freeAttributePointsEarned": 15,
+        "skillPointsWithChapterTwo": 5
+      },
+      {
+        "level": 7,
+        "xpToNext": 1330,
+        "cumulativeXp": 2800,
+        "combatBudgetLevel": 7.0,
+        "baseMaxHp": 150,
+        "baseSkillPowerS": 24.3,
+        "freeAttributePointsEarned": 18,
+        "skillPointsWithChapterTwo": 6
+      },
+      {
+        "level": 8,
+        "xpToNext": 1710,
+        "cumulativeXp": 4130,
+        "combatBudgetLevel": 8.0,
+        "baseMaxHp": 155,
+        "baseSkillPowerS": 25.35,
+        "freeAttributePointsEarned": 21,
+        "skillPointsWithChapterTwo": 7
+      },
+      {
+        "level": 9,
+        "xpToNext": 2140,
+        "cumulativeXp": 5840,
+        "combatBudgetLevel": 9.0,
+        "baseMaxHp": 160,
+        "baseSkillPowerS": 26.4,
+        "freeAttributePointsEarned": 24,
+        "skillPointsWithChapterTwo": 8
+      },
+      {
+        "level": 10,
+        "xpToNext": 2620,
+        "cumulativeXp": 7980,
+        "combatBudgetLevel": 10.0,
+        "baseMaxHp": 165,
+        "baseSkillPowerS": 27.45,
+        "freeAttributePointsEarned": 27,
+        "skillPointsWithChapterTwo": 9
+      },
+      {
+        "level": 11,
+        "xpToNext": 3150,
+        "cumulativeXp": 10600,
+        "combatBudgetLevel": 11.0,
+        "baseMaxHp": 170,
+        "baseSkillPowerS": 28.5,
+        "freeAttributePointsEarned": 30,
+        "skillPointsWithChapterTwo": 12
+      },
+      {
+        "level": 12,
+        "xpToNext": 3730,
+        "cumulativeXp": 13750,
+        "combatBudgetLevel": 12.0,
+        "baseMaxHp": 175,
+        "baseSkillPowerS": 29.55,
+        "freeAttributePointsEarned": 33,
+        "skillPointsWithChapterTwo": 13
+      },
+      {
+        "level": 13,
+        "xpToNext": 4360,
+        "cumulativeXp": 17480,
+        "combatBudgetLevel": 13.0,
+        "baseMaxHp": 180,
+        "baseSkillPowerS": 30.6,
+        "freeAttributePointsEarned": 36,
+        "skillPointsWithChapterTwo": 14
+      },
+      {
+        "level": 14,
+        "xpToNext": 5040,
+        "cumulativeXp": 21840,
+        "combatBudgetLevel": 14.0,
+        "baseMaxHp": 185,
+        "baseSkillPowerS": 31.65,
+        "freeAttributePointsEarned": 39,
+        "skillPointsWithChapterTwo": 15
+      },
+      {
+        "level": 15,
+        "xpToNext": 5770,
+        "cumulativeXp": 26880,
+        "combatBudgetLevel": 15.0,
+        "baseMaxHp": 190,
+        "baseSkillPowerS": 32.7,
+        "freeAttributePointsEarned": 42,
+        "skillPointsWithChapterTwo": 16
+      },
+      {
+        "level": 16,
+        "xpToNext": 6550,
+        "cumulativeXp": 32650,
+        "combatBudgetLevel": 16.0,
+        "baseMaxHp": 195,
+        "baseSkillPowerS": 33.75,
+        "freeAttributePointsEarned": 45,
+        "skillPointsWithChapterTwo": 17
+      },
+      {
+        "level": 17,
+        "xpToNext": 7380,
+        "cumulativeXp": 39200,
+        "combatBudgetLevel": 17.0,
+        "baseMaxHp": 200,
+        "baseSkillPowerS": 34.8,
+        "freeAttributePointsEarned": 48,
+        "skillPointsWithChapterTwo": 18
+      },
+      {
+        "level": 18,
+        "xpToNext": 8260,
+        "cumulativeXp": 46580,
+        "combatBudgetLevel": 18.0,
+        "baseMaxHp": 205,
+        "baseSkillPowerS": 35.85,
+        "freeAttributePointsEarned": 51,
+        "skillPointsWithChapterTwo": 19
+      },
+      {
+        "level": 19,
+        "xpToNext": 9190,
+        "cumulativeXp": 54840,
+        "combatBudgetLevel": 19.0,
+        "baseMaxHp": 210,
+        "baseSkillPowerS": 36.9,
+        "freeAttributePointsEarned": 54,
+        "skillPointsWithChapterTwo": 20
+      },
+      {
+        "level": 20,
+        "xpToNext": 10170,
+        "cumulativeXp": 64030,
+        "combatBudgetLevel": 20.0,
+        "baseMaxHp": 215,
+        "baseSkillPowerS": 37.95,
+        "freeAttributePointsEarned": 57,
+        "skillPointsWithChapterTwo": 21
+      },
+      {
+        "level": 21,
+        "xpToNext": 10320,
+        "cumulativeXp": 74200,
+        "combatBudgetLevel": 20.4,
+        "baseMaxHp": 217,
+        "baseSkillPowerS": 38.37,
+        "freeAttributePointsEarned": 59,
+        "skillPointsWithChapterTwo": 21
+      },
+      {
+        "level": 22,
+        "xpToNext": 10470,
+        "cumulativeXp": 84520,
+        "combatBudgetLevel": 20.8,
+        "baseMaxHp": 219,
+        "baseSkillPowerS": 38.79,
+        "freeAttributePointsEarned": 61,
+        "skillPointsWithChapterTwo": 22
+      },
+      {
+        "level": 23,
+        "xpToNext": 10620,
+        "cumulativeXp": 94990,
+        "combatBudgetLevel": 21.2,
+        "baseMaxHp": 221,
+        "baseSkillPowerS": 39.21,
+        "freeAttributePointsEarned": 63,
+        "skillPointsWithChapterTwo": 22
+      },
+      {
+        "level": 24,
+        "xpToNext": 10770,
+        "cumulativeXp": 105610,
+        "combatBudgetLevel": 21.6,
+        "baseMaxHp": 223,
+        "baseSkillPowerS": 39.63,
+        "freeAttributePointsEarned": 65,
+        "skillPointsWithChapterTwo": 23
+      },
+      {
+        "level": 25,
+        "xpToNext": 10920,
+        "cumulativeXp": 116380,
+        "combatBudgetLevel": 22.0,
+        "baseMaxHp": 225,
+        "baseSkillPowerS": 40.05,
+        "freeAttributePointsEarned": 67,
+        "skillPointsWithChapterTwo": 23
+      },
+      {
+        "level": 26,
+        "xpToNext": 11070,
+        "cumulativeXp": 127300,
+        "combatBudgetLevel": 22.4,
+        "baseMaxHp": 227,
+        "baseSkillPowerS": 40.47,
+        "freeAttributePointsEarned": 69,
+        "skillPointsWithChapterTwo": 24
+      },
+      {
+        "level": 27,
+        "xpToNext": 11220,
+        "cumulativeXp": 138370,
+        "combatBudgetLevel": 22.8,
+        "baseMaxHp": 229,
+        "baseSkillPowerS": 40.89,
+        "freeAttributePointsEarned": 71,
+        "skillPointsWithChapterTwo": 24
+      },
+      {
+        "level": 28,
+        "xpToNext": 11370,
+        "cumulativeXp": 149590,
+        "combatBudgetLevel": 23.2,
+        "baseMaxHp": 231,
+        "baseSkillPowerS": 41.31,
+        "freeAttributePointsEarned": 73,
+        "skillPointsWithChapterTwo": 25
+      },
+      {
+        "level": 29,
+        "xpToNext": 11520,
+        "cumulativeXp": 160960,
+        "combatBudgetLevel": 23.6,
+        "baseMaxHp": 233,
+        "baseSkillPowerS": 41.73,
+        "freeAttributePointsEarned": 75,
+        "skillPointsWithChapterTwo": 25
+      },
+      {
+        "level": 30,
+        "xpToNext": 11670,
+        "cumulativeXp": 172480,
+        "combatBudgetLevel": 24.0,
+        "baseMaxHp": 235,
+        "baseSkillPowerS": 42.15,
+        "freeAttributePointsEarned": 77,
+        "skillPointsWithChapterTwo": 26
+      },
+      {
+        "level": 31,
+        "xpToNext": 11820,
+        "cumulativeXp": 184150,
+        "combatBudgetLevel": 24.4,
+        "baseMaxHp": 237,
+        "baseSkillPowerS": 42.57,
+        "freeAttributePointsEarned": 79,
+        "skillPointsWithChapterTwo": 26
+      },
+      {
+        "level": 32,
+        "xpToNext": 11970,
+        "cumulativeXp": 195970,
+        "combatBudgetLevel": 24.8,
+        "baseMaxHp": 239,
+        "baseSkillPowerS": 42.99,
+        "freeAttributePointsEarned": 81,
+        "skillPointsWithChapterTwo": 27
+      },
+      {
+        "level": 33,
+        "xpToNext": 12120,
+        "cumulativeXp": 207940,
+        "combatBudgetLevel": 25.2,
+        "baseMaxHp": 241,
+        "baseSkillPowerS": 43.41,
+        "freeAttributePointsEarned": 83,
+        "skillPointsWithChapterTwo": 27
+      },
+      {
+        "level": 34,
+        "xpToNext": 12270,
+        "cumulativeXp": 220060,
+        "combatBudgetLevel": 25.6,
+        "baseMaxHp": 243,
+        "baseSkillPowerS": 43.83,
+        "freeAttributePointsEarned": 85,
+        "skillPointsWithChapterTwo": 28
+      },
+      {
+        "level": 35,
+        "xpToNext": 12420,
+        "cumulativeXp": 232330,
+        "combatBudgetLevel": 26.0,
+        "baseMaxHp": 245,
+        "baseSkillPowerS": 44.25,
+        "freeAttributePointsEarned": 87,
+        "skillPointsWithChapterTwo": 28
+      },
+      {
+        "level": 36,
+        "xpToNext": 12570,
+        "cumulativeXp": 244750,
+        "combatBudgetLevel": 26.4,
+        "baseMaxHp": 247,
+        "baseSkillPowerS": 44.67,
+        "freeAttributePointsEarned": 89,
+        "skillPointsWithChapterTwo": 29
+      },
+      {
+        "level": 37,
+        "xpToNext": 12720,
+        "cumulativeXp": 257320,
+        "combatBudgetLevel": 26.8,
+        "baseMaxHp": 249,
+        "baseSkillPowerS": 45.09,
+        "freeAttributePointsEarned": 91,
+        "skillPointsWithChapterTwo": 29
+      },
+      {
+        "level": 38,
+        "xpToNext": 12870,
+        "cumulativeXp": 270040,
+        "combatBudgetLevel": 27.2,
+        "baseMaxHp": 251,
+        "baseSkillPowerS": 45.51,
+        "freeAttributePointsEarned": 93,
+        "skillPointsWithChapterTwo": 30
+      },
+      {
+        "level": 39,
+        "xpToNext": 13020,
+        "cumulativeXp": 282910,
+        "combatBudgetLevel": 27.6,
+        "baseMaxHp": 253,
+        "baseSkillPowerS": 45.93,
+        "freeAttributePointsEarned": 95,
+        "skillPointsWithChapterTwo": 30
+      },
+      {
+        "level": 40,
+        "xpToNext": 13170,
+        "cumulativeXp": 295930,
+        "combatBudgetLevel": 28.0,
+        "baseMaxHp": 255,
+        "baseSkillPowerS": 46.35,
+        "freeAttributePointsEarned": 97,
+        "skillPointsWithChapterTwo": 31
+      },
+      {
+        "level": 41,
+        "xpToNext": 13320,
+        "cumulativeXp": 309100,
+        "combatBudgetLevel": 28.4,
+        "baseMaxHp": 257,
+        "baseSkillPowerS": 46.77,
+        "freeAttributePointsEarned": 99,
+        "skillPointsWithChapterTwo": 31
+      },
+      {
+        "level": 42,
+        "xpToNext": 13470,
+        "cumulativeXp": 322420,
+        "combatBudgetLevel": 28.8,
+        "baseMaxHp": 259,
+        "baseSkillPowerS": 47.19,
+        "freeAttributePointsEarned": 101,
+        "skillPointsWithChapterTwo": 32
+      },
+      {
+        "level": 43,
+        "xpToNext": 13620,
+        "cumulativeXp": 335890,
+        "combatBudgetLevel": 29.2,
+        "baseMaxHp": 261,
+        "baseSkillPowerS": 47.61,
+        "freeAttributePointsEarned": 103,
+        "skillPointsWithChapterTwo": 32
+      },
+      {
+        "level": 44,
+        "xpToNext": 13770,
+        "cumulativeXp": 349510,
+        "combatBudgetLevel": 29.6,
+        "baseMaxHp": 263,
+        "baseSkillPowerS": 48.03,
+        "freeAttributePointsEarned": 105,
+        "skillPointsWithChapterTwo": 33
+      },
+      {
+        "level": 45,
+        "xpToNext": 13920,
+        "cumulativeXp": 363280,
+        "combatBudgetLevel": 30.0,
+        "baseMaxHp": 265,
+        "baseSkillPowerS": 48.45,
+        "freeAttributePointsEarned": 107,
+        "skillPointsWithChapterTwo": 33
+      },
+      {
+        "level": 46,
+        "xpToNext": 14070,
+        "cumulativeXp": 377200,
+        "combatBudgetLevel": 30.4,
+        "baseMaxHp": 267,
+        "baseSkillPowerS": 48.87,
+        "freeAttributePointsEarned": 109,
+        "skillPointsWithChapterTwo": 34
+      },
+      {
+        "level": 47,
+        "xpToNext": 14220,
+        "cumulativeXp": 391270,
+        "combatBudgetLevel": 30.8,
+        "baseMaxHp": 269,
+        "baseSkillPowerS": 49.29,
+        "freeAttributePointsEarned": 111,
+        "skillPointsWithChapterTwo": 34
+      },
+      {
+        "level": 48,
+        "xpToNext": 14370,
+        "cumulativeXp": 405490,
+        "combatBudgetLevel": 31.2,
+        "baseMaxHp": 271,
+        "baseSkillPowerS": 49.71,
+        "freeAttributePointsEarned": 113,
+        "skillPointsWithChapterTwo": 35
+      },
+      {
+        "level": 49,
+        "xpToNext": 14520,
+        "cumulativeXp": 419860,
+        "combatBudgetLevel": 31.6,
+        "baseMaxHp": 273,
+        "baseSkillPowerS": 50.13,
+        "freeAttributePointsEarned": 115,
+        "skillPointsWithChapterTwo": 35
+      },
+      {
+        "level": 50,
+        "xpToNext": 14670,
+        "cumulativeXp": 434380,
+        "combatBudgetLevel": 32.0,
+        "baseMaxHp": 275,
+        "baseSkillPowerS": 50.55,
+        "freeAttributePointsEarned": 117,
+        "skillPointsWithChapterTwo": 36
+      },
+      {
+        "level": 51,
+        "xpToNext": 14820,
+        "cumulativeXp": 449050,
+        "combatBudgetLevel": 32.3,
+        "baseMaxHp": 277,
+        "baseSkillPowerS": 50.865,
+        "freeAttributePointsEarned": 119,
+        "skillPointsWithChapterTwo": 36
+      },
+      {
+        "level": 52,
+        "xpToNext": 14970,
+        "cumulativeXp": 463870,
+        "combatBudgetLevel": 32.6,
+        "baseMaxHp": 278,
+        "baseSkillPowerS": 51.18,
+        "freeAttributePointsEarned": 121,
+        "skillPointsWithChapterTwo": 37
+      },
+      {
+        "level": 53,
+        "xpToNext": 15120,
+        "cumulativeXp": 478840,
+        "combatBudgetLevel": 32.9,
+        "baseMaxHp": 280,
+        "baseSkillPowerS": 51.495,
+        "freeAttributePointsEarned": 123,
+        "skillPointsWithChapterTwo": 37
+      },
+      {
+        "level": 54,
+        "xpToNext": 15270,
+        "cumulativeXp": 493960,
+        "combatBudgetLevel": 33.2,
+        "baseMaxHp": 281,
+        "baseSkillPowerS": 51.81,
+        "freeAttributePointsEarned": 125,
+        "skillPointsWithChapterTwo": 38
+      },
+      {
+        "level": 55,
+        "xpToNext": 15420,
+        "cumulativeXp": 509230,
+        "combatBudgetLevel": 33.5,
+        "baseMaxHp": 283,
+        "baseSkillPowerS": 52.125,
+        "freeAttributePointsEarned": 127,
+        "skillPointsWithChapterTwo": 38
+      },
+      {
+        "level": 56,
+        "xpToNext": 15570,
+        "cumulativeXp": 524650,
+        "combatBudgetLevel": 33.8,
+        "baseMaxHp": 284,
+        "baseSkillPowerS": 52.44,
+        "freeAttributePointsEarned": 129,
+        "skillPointsWithChapterTwo": 39
+      },
+      {
+        "level": 57,
+        "xpToNext": 15720,
+        "cumulativeXp": 540220,
+        "combatBudgetLevel": 34.1,
+        "baseMaxHp": 286,
+        "baseSkillPowerS": 52.755,
+        "freeAttributePointsEarned": 131,
+        "skillPointsWithChapterTwo": 39
+      },
+      {
+        "level": 58,
+        "xpToNext": 15870,
+        "cumulativeXp": 555940,
+        "combatBudgetLevel": 34.4,
+        "baseMaxHp": 287,
+        "baseSkillPowerS": 53.07,
+        "freeAttributePointsEarned": 133,
+        "skillPointsWithChapterTwo": 40
+      },
+      {
+        "level": 59,
+        "xpToNext": 16020,
+        "cumulativeXp": 571810,
+        "combatBudgetLevel": 34.7,
+        "baseMaxHp": 289,
+        "baseSkillPowerS": 53.385,
+        "freeAttributePointsEarned": 135,
+        "skillPointsWithChapterTwo": 40
+      },
+      {
+        "level": 60,
+        "xpToNext": 16170,
+        "cumulativeXp": 587830,
+        "combatBudgetLevel": 35.0,
+        "baseMaxHp": 290,
+        "baseSkillPowerS": 53.7,
+        "freeAttributePointsEarned": 137,
+        "skillPointsWithChapterTwo": 41
+      },
+      {
+        "level": 61,
+        "xpToNext": 16320,
+        "cumulativeXp": 604000,
+        "combatBudgetLevel": 35.3,
+        "baseMaxHp": 292,
+        "baseSkillPowerS": 54.015,
+        "freeAttributePointsEarned": 139,
+        "skillPointsWithChapterTwo": 41
+      },
+      {
+        "level": 62,
+        "xpToNext": 16470,
+        "cumulativeXp": 620320,
+        "combatBudgetLevel": 35.6,
+        "baseMaxHp": 293,
+        "baseSkillPowerS": 54.33,
+        "freeAttributePointsEarned": 141,
+        "skillPointsWithChapterTwo": 42
+      },
+      {
+        "level": 63,
+        "xpToNext": 16620,
+        "cumulativeXp": 636790,
+        "combatBudgetLevel": 35.9,
+        "baseMaxHp": 295,
+        "baseSkillPowerS": 54.645,
+        "freeAttributePointsEarned": 143,
+        "skillPointsWithChapterTwo": 42
+      },
+      {
+        "level": 64,
+        "xpToNext": 16770,
+        "cumulativeXp": 653410,
+        "combatBudgetLevel": 36.2,
+        "baseMaxHp": 296,
+        "baseSkillPowerS": 54.96,
+        "freeAttributePointsEarned": 145,
+        "skillPointsWithChapterTwo": 43
+      },
+      {
+        "level": 65,
+        "xpToNext": 16920,
+        "cumulativeXp": 670180,
+        "combatBudgetLevel": 36.5,
+        "baseMaxHp": 298,
+        "baseSkillPowerS": 55.275,
+        "freeAttributePointsEarned": 147,
+        "skillPointsWithChapterTwo": 43
+      },
+      {
+        "level": 66,
+        "xpToNext": 17070,
+        "cumulativeXp": 687100,
+        "combatBudgetLevel": 36.8,
+        "baseMaxHp": 299,
+        "baseSkillPowerS": 55.59,
+        "freeAttributePointsEarned": 149,
+        "skillPointsWithChapterTwo": 44
+      },
+      {
+        "level": 67,
+        "xpToNext": 17220,
+        "cumulativeXp": 704170,
+        "combatBudgetLevel": 37.1,
+        "baseMaxHp": 301,
+        "baseSkillPowerS": 55.905,
+        "freeAttributePointsEarned": 151,
+        "skillPointsWithChapterTwo": 44
+      },
+      {
+        "level": 68,
+        "xpToNext": 17370,
+        "cumulativeXp": 721390,
+        "combatBudgetLevel": 37.4,
+        "baseMaxHp": 302,
+        "baseSkillPowerS": 56.22,
+        "freeAttributePointsEarned": 153,
+        "skillPointsWithChapterTwo": 45
+      },
+      {
+        "level": 69,
+        "xpToNext": 17520,
+        "cumulativeXp": 738760,
+        "combatBudgetLevel": 37.7,
+        "baseMaxHp": 304,
+        "baseSkillPowerS": 56.535,
+        "freeAttributePointsEarned": 155,
+        "skillPointsWithChapterTwo": 45
+      },
+      {
+        "level": 70,
+        "xpToNext": 17670,
+        "cumulativeXp": 756280,
+        "combatBudgetLevel": 38.0,
+        "baseMaxHp": 305,
+        "baseSkillPowerS": 56.85,
+        "freeAttributePointsEarned": 157,
+        "skillPointsWithChapterTwo": 46
+      },
+      {
+        "level": 71,
+        "xpToNext": 17820,
+        "cumulativeXp": 773950,
+        "combatBudgetLevel": 38.2,
+        "baseMaxHp": 306,
+        "baseSkillPowerS": 57.06,
+        "freeAttributePointsEarned": 159,
+        "skillPointsWithChapterTwo": 46
+      },
+      {
+        "level": 72,
+        "xpToNext": 17970,
+        "cumulativeXp": 791770,
+        "combatBudgetLevel": 38.4,
+        "baseMaxHp": 307,
+        "baseSkillPowerS": 57.27,
+        "freeAttributePointsEarned": 161,
+        "skillPointsWithChapterTwo": 47
+      },
+      {
+        "level": 73,
+        "xpToNext": 18120,
+        "cumulativeXp": 809740,
+        "combatBudgetLevel": 38.6,
+        "baseMaxHp": 308,
+        "baseSkillPowerS": 57.48,
+        "freeAttributePointsEarned": 163,
+        "skillPointsWithChapterTwo": 47
+      },
+      {
+        "level": 74,
+        "xpToNext": 18270,
+        "cumulativeXp": 827860,
+        "combatBudgetLevel": 38.8,
+        "baseMaxHp": 309,
+        "baseSkillPowerS": 57.69,
+        "freeAttributePointsEarned": 165,
+        "skillPointsWithChapterTwo": 48
+      },
+      {
+        "level": 75,
+        "xpToNext": 18420,
+        "cumulativeXp": 846130,
+        "combatBudgetLevel": 39.0,
+        "baseMaxHp": 310,
+        "baseSkillPowerS": 57.9,
+        "freeAttributePointsEarned": 167,
+        "skillPointsWithChapterTwo": 48
+      },
+      {
+        "level": 76,
+        "xpToNext": 18570,
+        "cumulativeXp": 864550,
+        "combatBudgetLevel": 39.2,
+        "baseMaxHp": 311,
+        "baseSkillPowerS": 58.11,
+        "freeAttributePointsEarned": 169,
+        "skillPointsWithChapterTwo": 49
+      },
+      {
+        "level": 77,
+        "xpToNext": 18720,
+        "cumulativeXp": 883120,
+        "combatBudgetLevel": 39.4,
+        "baseMaxHp": 312,
+        "baseSkillPowerS": 58.32,
+        "freeAttributePointsEarned": 171,
+        "skillPointsWithChapterTwo": 49
+      },
+      {
+        "level": 78,
+        "xpToNext": 18870,
+        "cumulativeXp": 901840,
+        "combatBudgetLevel": 39.6,
+        "baseMaxHp": 313,
+        "baseSkillPowerS": 58.53,
+        "freeAttributePointsEarned": 173,
+        "skillPointsWithChapterTwo": 50
+      },
+      {
+        "level": 79,
+        "xpToNext": 19020,
+        "cumulativeXp": 920710,
+        "combatBudgetLevel": 39.8,
+        "baseMaxHp": 314,
+        "baseSkillPowerS": 58.74,
+        "freeAttributePointsEarned": 175,
+        "skillPointsWithChapterTwo": 50
+      },
+      {
+        "level": 80,
+        "xpToNext": 0,
+        "cumulativeXp": 939730,
+        "combatBudgetLevel": 40.0,
+        "baseMaxHp": 315,
+        "baseSkillPowerS": 58.95,
+        "freeAttributePointsEarned": 177,
+        "skillPointsWithChapterTwo": 51
+      }
+    ]
+  },
+  "skills": {}
+}

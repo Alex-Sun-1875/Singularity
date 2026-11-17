@@ -28,7 +28,7 @@
 - 详细规则见[开发与打包规范](docs/development/build-profiles.md)。`npm run pack:taptap`、`build:tap` 和脚本无参数均默认 test；显式使用 `pack:taptap:dev` / `pack:taptap:release` 或 `-Profile` 选择档位。三档共用根版本序列，每次实际打包 patch +1，失败不回退、内部重试不重复递增；交付固定为 `src/out/<版本号>/SwordAndFire_<版本号>.zip`，档位单独记录到编译配置与清单。打包不自动授权上传、提审或公开发布。
 - 已完成的实际变更追加到 `src/cocos/release/changes.json`。release 自动汇总上一已发布清单未包含的更新条目与源码／资源差异；真实上线后才登记 `release/published-release.json`，打包不会推进正式发布基线。
 
-dev 的“快速验证”仅在暂停和设置 → 旅途中按需开启，提供手动补给、有限材料、等级推进、清除 Boss 再战等待及既有训练场入口；test / release 拒绝执行。工具不在开局自动修改进度，不自动完成剧情或发放未验证来源的装备。
+2026-11-17 用户确认：自动升到80级仅限 dev 档位，test / release 新旅程按正常1级流程；默认HTML入口与 `test=max` 参数不能给正常档位加速，80级方案使用新规则存档，不迁移旧成长存档。dev 的“快速验证”仍仅在暂停和设置 → 旅途中按需开启，提供手动补给、有限材料、等级推进、清除 Boss 再战等待及既有训练场入口；test / release 拒绝执行。不自动完成剧情或发放未验证来源的装备。
 
 ## 项目 Agent Skills
 

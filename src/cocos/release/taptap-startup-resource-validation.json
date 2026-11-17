@@ -1,0 +1,362 @@
+{
+  "date": "2026-11-17",
+  "version": "0.3.56",
+  "profile": "test",
+  "status": "Source, resource-graph preview and native upload-test package verified; new TapTap device timing pending",
+  "package": {
+    "path": "src/out/0.3.56/SwordAndFire_0.3.56.zip",
+    "bytes": 251108791,
+    "sha256": "b275fbcf9cda1c25816d9f6311fb50fbfc922d821d5dfb8a3b2c7c920cdab618",
+    "uploaded": false,
+    "platformLogin": true,
+    "guest": false,
+    "normalRules": true
+  },
+  "suppliedDeviceLog": {
+    "source": "SvgyKTbPk2wC2YzDinbfWYpaQsFfyDbR.device_125_logs.zip",
+    "sha256": "586b87207e4c31a5cd5ba9c73ac473e2dde8514da52921dac7d443f7d283a088",
+    "device": {
+      "brand": "OPPO",
+      "model": "PHJ110",
+      "resolution": "1548x688"
+    },
+    "platformVersionInLog": "TapTap 2.96.16 / Android 13 / SDKVersion 3.4.7",
+    "observations": [
+      "2026/11/17 18:04:03  [log]   [CC Subpackage] wasm assets loaded",
+      "2026/11/17 18:04:03  [log]   [CC Subpackage] wasm chunks loaded",
+      "2026/11/17 18:04:17  [log]   LoadScene db://assets/FirstChapter.scene: 33 ms",
+      "2026/11/17 18:04:18  [warn]   Module already defined: cocos-js/assets/game.js",
+      "2026/11/17 18:04:35  [log]   [Chapter] Cocos first chapter initialized S01-T1"
+    ],
+    "limitations": [
+      "Single device log; timestamps are whole seconds.",
+      "WASM package-loaded messages do not measure WASM compilation or prove it is the bottleneck.",
+      "The 9.77-second console average is not this one device's full Chapter-ready duration.",
+      "Uploaded 0.3.54 predates source optimizations from this conversation."
+    ]
+  },
+  "changes": [
+    "Six selective startup bundles use Cocos prefab Asset references, original importer UUIDs and native Bundle/UUID loading. No source art relocation or image-quality/FPS reduction.",
+    "Fresh W01 opening no longer requests complete native-weapons, combat-vfx, panel-art, skill-icons, equipment-art or combat-audio bundles. Other weapons and management pages keep their existing on-demand paths.",
+    "Native bundle mode no longer prewarms all management art. Main-menu music and adjacent-map downloads wait for Begin/Continue; optional navigation WASM starts after the initial ready frame.",
+    "Existing Three tangent implementation is retained via static core imports compatible with Creator 3.8. Browser chunk drops from 796184 to 454733 bytes; native chunk drops to 752732 bytes. The complete initial payload is not claimed smaller: new route/feature code offsets this saving.",
+    "Startup console markers record app-start, base-bundle-ready, scene-assets-ready, actors-and-map-ready, combat-ready and interactive. They start at the component, not process launch. No platform completion event is reported early."
+  ],
+  "resourceAccounting": {
+    "oldVersion": "0.3.54",
+    "newVersion": "0.3.56",
+    "method": "Sum complete declared subpackage file bytes, not individual HTTP requests. Old graph inferred by routing the same fresh W01 opening requests through the old directory packs, including dependencies. Not platform-delivered bytes, TapTap network traffic, or timing.",
+    "before": {
+      "initialBytes": 6952292,
+      "bundles": [
+        {
+          "name": "__ccWasmAssetSubpkg__",
+          "bytes": 503066
+        },
+        {
+          "name": "__ccWasmChunkSubpkg__",
+          "bytes": 93014
+        },
+        {
+          "name": "actor-raphael",
+          "bytes": 6150506
+        },
+        {
+          "name": "cast-mira",
+          "bytes": 1873011
+        },
+        {
+          "name": "combat-audio",
+          "bytes": 2991288
+        },
+        {
+          "name": "combat-vfx",
+          "bytes": 31789645
+        },
+        {
+          "name": "environment",
+          "bytes": 15860
+        },
+        {
+          "name": "equipment-art",
+          "bytes": 18613064
+        },
+        {
+          "name": "hero-appearance",
+          "bytes": 6809457
+        },
+        {
+          "name": "hero-hairstyles",
+          "bytes": 5646932
+        },
+        {
+          "name": "hero-melee-combo",
+          "bytes": 222651
+        },
+        {
+          "name": "native-materials",
+          "bytes": 3689470
+        },
+        {
+          "name": "native-weapons",
+          "bytes": 35133489
+        },
+        {
+          "name": "painted-interiors",
+          "bytes": 3911943
+        },
+        {
+          "name": "panel-art",
+          "bytes": 20103549
+        },
+        {
+          "name": "resources",
+          "bytes": 6131057
+        },
+        {
+          "name": "skill-icons",
+          "bytes": 12517066
+        },
+        {
+          "name": "waystones",
+          "bytes": 197185
+        }
+      ],
+      "totalBytes": 163344545
+    },
+    "after": {
+      "initialBytes": 6989812,
+      "bundles": [
+        {
+          "name": "boot-skill-icons",
+          "bytes": 769446
+        },
+        {
+          "name": "boot-ui",
+          "bytes": 4065109
+        },
+        {
+          "name": "boot-vfx",
+          "bytes": 1474809
+        },
+        {
+          "name": "starter-weapons",
+          "bytes": 1597237
+        },
+        {
+          "name": "warrior-audio",
+          "bytes": 70797
+        },
+        {
+          "name": "warrior-vfx",
+          "bytes": 441936
+        },
+        {
+          "name": "actor-raphael",
+          "bytes": 6150506
+        },
+        {
+          "name": "cast-mira",
+          "bytes": 1873011
+        },
+        {
+          "name": "environment",
+          "bytes": 15860
+        },
+        {
+          "name": "hero-appearance",
+          "bytes": 6809457
+        },
+        {
+          "name": "hero-hairstyles",
+          "bytes": 5646932
+        },
+        {
+          "name": "hero-melee-combo",
+          "bytes": 222651
+        },
+        {
+          "name": "native-materials",
+          "bytes": 3689470
+        },
+        {
+          "name": "painted-interiors",
+          "bytes": 3911943
+        },
+        {
+          "name": "waystones",
+          "bytes": 197185
+        },
+        {
+          "name": "resources",
+          "bytes": 6039740
+        },
+        {
+          "name": "__ccWasmAssetSubpkg__",
+          "bytes": 503066
+        },
+        {
+          "name": "__ccWasmChunkSubpkg__",
+          "bytes": 93014
+        }
+      ],
+      "totalBytes": 50561981
+    },
+    "reductionPercent": 69.04580988609078,
+    "initialPayload": {
+      "oldRawBytes": 6952292,
+      "newRawBytes": 6989812,
+      "oldOfflineZipBytes": 1712392,
+      "newOfflineZipBytes": 1732559
+    },
+    "notes": [
+      "163.34MB → 50.56MB is the complete-file footprint for a fresh W01 opening, including generated engine packages and initial payload. The old set is reconstructed using the same opening requests and old directory routes.",
+      "This is not measured platform traffic, APK memory, first-install download size or an actual device timing improvement.",
+      "The complete upload ZIP remains 251.11MB because later-game content remains available on demand.",
+      "The old package was dev and the new package is normal-rule test. Only the same W01 resource request set is compared; no cross-profile gameplay/FPS timing comparison is made."
+    ]
+  },
+  "checks": {
+    "types": "npm run check and native pipeline TypeScript/core checks passed",
+    "rules": {
+      "passed": 181,
+      "failed": 0
+    },
+    "nativeConversion": "Official converter 1.2.2 passed",
+    "zip": "CRC, identity, version, source-script snapshot, build profile, dependency graph and configured budgets passed",
+    "selectiveRoutes": {
+      "checkedRoutes": 220,
+      "bundles": {
+        "boot-ui": 117,
+        "boot-skill-icons": 8,
+        "warrior-audio": 3,
+        "boot-vfx": 35,
+        "warrior-vfx": 10,
+        "starter-weapons": 47
+      }
+    },
+    "web": {
+      "passed": true,
+      "runs": [
+        {
+          "bundleMode": true,
+          "frameRate": 60,
+          "area": "S01-T1",
+          "menu": "title",
+          "bundles": [
+            "internal",
+            "resources",
+            "main",
+            "boot-ui",
+            "boot-skill-icons",
+            "warrior-audio",
+            "actor-raphael",
+            "environment",
+            "boot-vfx",
+            "hero-melee-combo",
+            "hero-appearance",
+            "native-materials",
+            "starter-weapons",
+            "painted-interiors",
+            "cast-mira",
+            "hero-hairstyles",
+            "waystones",
+            "warrior-vfx"
+          ],
+          "wallReadyMs": 4316,
+          "pages": [
+            "attributes",
+            "equipment",
+            "checks",
+            "forge"
+          ],
+          "otherWeaponReady": true,
+          "travelReady": true
+        },
+        {
+          "bundleMode": true,
+          "frameRate": 60,
+          "area": "S01-T1",
+          "menu": "title",
+          "bundles": [
+            "internal",
+            "resources",
+            "main",
+            "boot-ui",
+            "boot-skill-icons",
+            "warrior-audio",
+            "actor-raphael",
+            "environment",
+            "boot-vfx",
+            "hero-melee-combo",
+            "hero-appearance",
+            "native-materials",
+            "starter-weapons",
+            "painted-interiors",
+            "cast-mira",
+            "hero-hairstyles",
+            "waystones",
+            "warrior-vfx"
+          ],
+          "wallReadyMs": 2469
+        }
+      ],
+      "errors": [],
+      "note": "844x390, DPR3, dynamic atlas disabled to use native-style atlas routes. HTML platform login and cached local transport are not TapTap acceptance evidence."
+    }
+  },
+  "pending": [
+    "Upload the new test ZIP and rerun the same TapTap device/startup report. No upload was authorized or performed.",
+    "Compare the same phone, network, saved state and cache condition; inspect the new Startup markers together with LoadScene and WASM messages.",
+    "The supplied log shows a ~14s gap after WASM package loading and ~18s after LoadScene before Chapter ready. It does not isolate code parsing, compilation, login or transfer time. Do not promise a specific replacement for the reported 9.77s average."
+  ],
+  "sources": [
+    {
+      "path": "src/cocos/assets/scripts/app/ChapterGame.ts",
+      "sha256": "e07097caaec37b60004a4a251f0f85fc1c37418b03b9a90e0caea678e5463849"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/assets/GameResources.ts",
+      "sha256": "e25eeb069415142453c706ffa318545769e74032304b35a2d0501b989758187c"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/assets/BundleAssetReferences.ts",
+      "sha256": "9dc1765edaf028b1ab3103156396191dd147f6610f4d90cbac1b0d18d2ae6099"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/actors/runtime/MeshTangents.ts",
+      "sha256": "8e4a6d34ddadebaedcedeeabed85247531370e73d8a5f9d2d252d1d070895354"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/assets/ResourcePacks.ts",
+      "sha256": "7909021590b5f17e9769d7641dba78eb6ad477579fb80effd83e348b3fb46187"
+    },
+    {
+      "path": "src/cocos/tools/prepare-taptap.py",
+      "sha256": "6c937d76dc777862b421396b4c65dc8a95be766c9cf86b726540a292641cc3e9"
+    },
+    {
+      "path": "src/cocos/tools/report-taptap.py",
+      "sha256": "0b7e3ecc94fa3a25828fdd2cd5939fb5af831a31e13e0b1668c462f2f97a19c4"
+    },
+    {
+      "path": "src/cocos/release/taptap.json",
+      "sha256": "1a559874aee3656a7097f9b978f2b1072f4e941d8aec87bfd5687d1bdaca7d88"
+    }
+  ],
+  "evidence": [
+    "src/out/0.3.56/report.json",
+    "src/out/0.3.56/logs/build.json",
+    "src/out/0.3.56/logs/tests.log",
+    "src/out/0.3.56/logs/source-before.json",
+    "src/out/0.3.56/logs/source-after.json",
+    "temp/taptap-startup-v2/bundled-browser.json",
+    "temp/taptap-startup-v2/pack-sizes.json",
+    "temp/taptap-startup-v2/device-log-analysis.json"
+  ],
+  "references": [
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/basic/subpackage/",
+    "https://developer.taptap.cn/minigameapidoc/dev/tutorial/performance/launch/launch-guide/",
+    "https://docs.cocos.com/creator/3.8/manual/en/asset/bundle.html"
+  ]
+}

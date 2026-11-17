@@ -1,7 +1,16 @@
+import {validateEconomyRewards} from '../../economy/common/EconomyRewards';
+import {validateShopReceipts} from '../../trading/common/Trading';
+import {GOLD_CAPACITY} from '../../economy/data/Economy';
+import {validateGoldWallet} from '../../economy/common/GoldWallet';
+import {validateCampaignStages} from '../../journey/data/CampaignStages';
+import {validateCampaignExperienceReceipts} from '../../progression/data/CampaignExperience';
+import {BUILD_PROFILE} from '../../../shared/BuildProfile';
+import {validChapterTaskEquipmentSource,validateChapterTaskEquipment} from '../../equipment/common/BossLoot';
+import {CAMPAIGN_MAX_LEVEL} from '../../progression/data/CampaignProgression';
 import {playerCombatAttributes,validateContactSnapshots} from '../../combat/common/CombatAccuracy';
 import {resourceMaximum} from '../../combat/common/ClassResource';
 import type {GameState} from '../../../core/GameSession';
-import {EQUIPMENT,MERCHANTS,RECIPES,equipmentStackLimit,ITEM_STACK_LIMIT} from '../../equipment/data/Equipment';
+import {EQUIPMENT,MERCHANTS,merchantTradeProof,equipmentStackLimit,ITEM_STACK_LIMIT} from '../../equipment/data/Equipment';
 import {SUPPLIES,isSupplyId,SUPPLY_LOOT_POLICY,supplyDrop} from '../../equipment/data/Supplies';
 import {PURE_SKILLS,LEGACY_COMBAT_SKILLS,combatSkillCatalog} from '../../combat/data/PureSkills';
 import {validateProgression,baseMaxHp,allocatedSkillRank} from '../../progression/common/Progression';
@@ -19,6 +28,7 @@ import {validateEnemyCombat,validateEnemyHazards,validateEnemyProjectile} from '
 import {validateForging,itemForgingBonus} from '../../crafting/common/EquipmentForging';
 import {validateHuntingExperience} from '../../progression/common/HuntingExperience';
 import {validateGems,itemGemBonus,equippedGemBonus} from '../../gems/common/GemWorkshop';
+import {validateRedemptions,validRedemptionEquipmentSource} from '../../redemption/common/RedemptionLedger';
 import {validateChapterTwoEncounters} from '../../campaign/common/ChapterTwoEncounters';
 import {validatePets,petSnapshotMaxHealth} from '../../pets/common/PetSystem';
 import {petMaxHealth} from '../../pets/common/PetBenefits';
@@ -41,18 +51,20 @@ export function migrateRemovedOil(s:GameState):boolean {
 /** Validate only the current save format, including complete gameplay records. */
 export function validateCurrentSnapshot(value:unknown):asserts value is GameState {
  const fail=()=>{throw new Error('无效的四系技能存档');};if(!record(value))return fail();const s=value as unknown as GameState;
- const keys=['version','progression','combat','dice','seed','area','time','sequence','revision','status','player','enemies','encounters','projectiles','fireZones','barrels','flags','enemyHazards','inventory','provenance','pending','equipment','dialogue','action','cooldowns','receipts','recipes','merchantStock','discoveredMerchants','checkpoint','dropRolls','movedDistance','effectCounters'];
- if(Object.keys(s).some(k=>!keys.includes(k)&&k!=='forging'&&k!=='groundLoot'&&k!=='gems'&&k!=='pets')||keys.some(k=>!(k in s))||s.version!==3||!integer(s.seed,1,2147483646)||!area(s.area)||!number(s.time)||!integer(s.sequence)||!integer(s.revision)||!['playing','dead','complete'].includes(s.status))return fail();
+ const keys=['version','progression','combat','dice','seed','area','time','sequence','revision','status','player','enemies','encounters','projectiles','fireZones','barrels','flags','enemyHazards','inventory','provenance','pending','equipment','dialogue','action','cooldowns','receipts','merchantStock','discoveredMerchants','checkpoint','dropRolls','movedDistance','effectCounters'];
+ if(Object.keys(s).some(k=>!keys.includes(k)&&k!=='forging'&&k!=='groundLoot'&&k!=='gems'&&k!=='pets'&&k!=='redemption')||keys.some(k=>!(k in s))||s.version!==3||!integer(s.seed,1,2147483646)||!area(s.area)||!number(s.time)||!integer(s.sequence)||!integer(s.revision)||!['playing','dead','complete'].includes(s.status))return fail();
  const legacy=s.combat?.version===2,skills=combatSkillCatalog(s.combat?.version);validateProgression(s.progression,s.combat?.version);validateDiceSnapshot(s.dice,s.seed,s.flags,s.receipts,s.area);validateForging(s);validateGems(s);validatePets(s);
  const gearStats=Object.fromEntries(Object.keys(s.inventory).map(id=>{const bonus=itemForgingBonus(s,id),gems=itemGemBonus(s,id);for(const key of Object.keys(bonus) as (keyof typeof bonus)[])bonus[key]+=gems[key];return [id,bonus] as const;}));
  validateCombat(s.combat,s.progression,Object.fromEntries(Object.keys(s.inventory).map(id=>[id,itemGearBonus(s,id).power+gearStats[id].power])),gearStats);
  const engagement=s.combat.engagement;if(engagement&&(!area(engagement.area)||engagement.quietSince!==undefined&&engagement.quietSince>s.time))return fail();
  const p=s.player;if(!point(p)||!number(p.hp)||!integer(p.maxHp,120)||p.hp>p.maxHp||!number(p.focus,0,p.maxFocus)||!(p.resourceVersion===undefined?p.maxFocus===100:p.resourceVersion===1&&integer(p.maxFocus,100,2000)&&integer(p.staminaPotions,0,SUPPLIES.SUPPLY_STAMINA.capacity)&&integer(p.manaPotions,0,SUPPLIES.SUPPLY_MANA.capacity))||'oil' in p&&!integer(p.oil,0,ITEM_STACK_LIMIT)||!integer(p.healthPotions,0,SUPPLIES.SUPPLY_HEALTH.capacity)||!integer(p.focusPotions,0,SUPPLIES.SUPPLY_FOCUS.capacity)||!number(p.angle,-1e6,1e6)||!number(p.hurtTime,0,1)||!number(p.shield,0,p.maxHp*.35+.001)||!number(p.movingTime))return fail();
  if(p.resourceVersion===undefined&&('resourceVersion' in p||'staminaPotions' in p||'manaPotions' in p))return fail();
- for(const field of ['gold','iron','runes','cores'] as const)if(!integer(p[field],0,9999))return fail();
+ if(!integer(p.gold,0,GOLD_CAPACITY))return fail();validateGoldWallet(s);
+ for(const field of ['iron','runes','cores'] as const)if(!integer(p[field],0,9999))return fail();
  if(Object.keys(p).some(k=>!['x','z','hp','maxHp','focus','maxFocus','resourceVersion','staminaPotions','manaPotions','oil','healthPotions','focusPotions','gold','iron','runes','cores','angle','hurtTime','shield','movingTime'].includes(k)))return fail();
  for(const field of ['flags','receipts','inventory','provenance','pending','encounters','merchantStock','dropRolls','effectCounters','cooldowns'] as const)if(!record(s[field]))return fail();
  if(Object.values(s.flags).some(v=>typeof v!=='boolean')||Object.values(s.receipts).some(v=>!(typeof v==='boolean'||typeof v==='string'&&v.length<300||number(v))))return fail();
+ validateRedemptions(s);validateEconomyRewards(s);validateShopReceipts(s);
  validateHuntingExperience(s.receipts);
  validateChapterTwoEncounters(s);
  validatePeacefulBosses(s);
@@ -85,15 +97,16 @@ export function validateCurrentSnapshot(value:unknown):asserts value is GameStat
  }
  for(const [id,n]of Object.entries(s.inventory)){if(!EQUIPMENT[id]||!integer(n,1,equipmentStackLimit(id))||typeof s.provenance[id]!=='string')return fail();const source=s.provenance[id];if(['W01','W07','W11'].includes(id)){if(source!=='initial')return fail();}else {if(!s.receipts[`grant:${source}:${id}`])return fail();let valid=false;
  if(GROWING_EQUIPMENT[id])valid=validGrowingSource(s,id,source);
+ else if(source.startsWith('redeem:'))valid=validRedemptionEquipmentSource(s,id,source);
  else if(source.startsWith('boss:v3:'))valid=validBossEquipmentSource(s,id,source);
+  else if(source.startsWith('journey:equipment:'))valid=validChapterTaskEquipmentSource(s,id,source);
   else if(source.startsWith('boss:fixed:'))valid=validMainBossEquipmentSource(s,id,source);
  else if(source.startsWith('gear-upgrade:'))valid=validEquipmentUpgrade(s,id,source);
  else if(id==='W02')valid=source==='reward_ch01_gate_sword'&&!!s.flags.gate_raised&&!!s.flags.captain_defeated&&!!s.receipts.obj_ch01_04;
  else if(id==='W08')valid=source==='design_reward_ch01_oath_sword'&&!!s.receipts[source];
  else if(source===`design_find_${id.toLowerCase()}`)valid=!!s.receipts[source];
  else if(source.startsWith('legend:'))valid=id.startsWith('L')&&s.dropRolls[source.slice(7)]?.result===id&&(/^cache:.+:legend$/.test(source.slice(7))||/^pass:[^:]+:.*warden/.test(source.slice(7)));
- else if(source.startsWith('trade:')){const m=source.slice(6);valid=!!MERCHANTS[m]?.stock[id]&&s.merchantStock[m]?.[id]===0&&Object.values(s.receipts).includes(`${m}:${id}:${MERCHANTS[m].prices[id]}`);}
- else if(source.startsWith('craft:')){const recipe=source.slice(6);valid=RECIPES[recipe]?.item===id&&s.recipes.includes(recipe)&&Object.values(s.receipts).includes(recipe);}
+ else if(source.startsWith('trade:')){const m=source.slice(6);valid=!!MERCHANTS[m]?.stock[id]&&s.merchantStock[m]?.[id]===0&&merchantTradeProof(s.receipts,m,id);}
  else if(source.startsWith('campaign:')){const event=CAMPAIGN_EVENTS[source.slice(9)];valid=!!s.receipts[source]&&!!event&&[...event.items??[],...event.choiceItems??[]].includes(id);}
  else if(source.startsWith('regional:'))valid=s.dropRolls[source]?.result===id&&s.receipts[`roll:${source}`]===id;
  else if(/^V_E\d\d$/.test(source))valid=Object.values(ELITE_LOOT).some(e=>e.eventId===source&&e.item===id)&&!!s.receipts[`event:${source}`];
@@ -104,15 +117,17 @@ export function validateCurrentSnapshot(value:unknown):asserts value is GameStat
  validateGrowingProgress(s);
  validateEquipmentOwnership(s);
  if(p.resourceVersion===1&&(legacy||p.maxFocus!==resourceMaximum(s)||s.combat.charge!==0))return fail();
- validateJourneyProgress(s);
+ validateJourneyProgress(s);validateCampaignStages(s);validateChapterTaskEquipment(s);
+ const mainProof:Record<string,boolean>={M1_XP_1:!!s.flags.recovered&&!!s.flags.read_letter,M2_XP_1:!!s.flags.workers_departed||!!s.flags.workers_returned,M2_XP_2:!!s.flags.captain_defeated&&!!s.flags.gate_raised,M3_XP_1:!!s.flags.m3_heat_test,M4_XP_1:!!s.flags.m4_bridge_reward,M4_XP_2:!!s.flags.m4_contact};
+ validateCampaignExperienceReceipts(s.progression.xpReceipts,s.receipts,entry=>entry.source in mainProof?mainProof[entry.source]:true,BUILD_PROFILE.monsterExperienceMultiplier);
  let bonus=equipped.reduce((n,id)=>n+(GROWING_EQUIPMENT[id]?growingStats(id,s.progression.level).maxHp:EQUIPMENT[id].maxHp??0)+itemGearBonus(s,id).maxHp+itemForgingBonus(s,id).maxHp,0)+equippedGemBonus(s).maxHp;if(equipped.filter(id=>EQUIPMENT[id].set==='oath').length>=2)bonus+=8;
  // A closed-content save stores base HP. Restoring either policy recalculates
  // the exact current maximum and clamps HP without healing.
- const baseHp=baseMaxHp(s.progression)+bonus;if(p.maxHp!==baseHp&&p.maxHp!==petMaxHealth(s,baseHp)&&p.maxHp!==petSnapshotMaxHealth(s,baseHp))return fail();
- if(!strings(s.recipes)||new Set(s.recipes).size!==s.recipes.length||s.recipes.some(id=>!RECIPES[id])||!strings(s.discoveredMerchants)||s.discoveredMerchants.some(id=>!MERCHANTS[id])||!point(s.checkpoint)||!area(s.checkpoint.area))return fail();
- if(Object.keys(s.merchantStock).length!==Object.keys(MERCHANTS).length)return fail();for(const [id,merchant]of Object.entries(MERCHANTS)){const stock=s.merchantStock[id];if(!record(stock)||Object.keys(stock).length!==Object.keys(merchant.stock).length||Object.keys(merchant.stock).some(key=>!integer(stock[key],0,merchant.stock[key])))return fail();}
+ const baseHp=baseMaxHp(s.progression)+bonus,previousHp=baseHp-equippedGemBonus(s).maxHp+equippedGemBonus(s,true).maxHp;if(![baseHp,previousHp].some(hp=>p.maxHp===hp||p.maxHp===petMaxHealth(s,hp)||p.maxHp===petSnapshotMaxHealth(s,hp)))return fail();
+ if(!strings(s.discoveredMerchants)||s.discoveredMerchants.some(id=>!MERCHANTS[id])||!point(s.checkpoint)||!area(s.checkpoint.area))return fail();
+ if(Object.keys(s.merchantStock).some(id=>!MERCHANTS[id]))return fail();for(const [id,merchant]of Object.entries(MERCHANTS)){const stock=s.merchantStock[id];if(stock===undefined&&['supplies','jeweler'].includes(id)&&!s.discoveredMerchants.includes(id))continue;if(!record(stock)||Object.keys(stock).some(key=>merchant.stock[key]===undefined||!integer(stock[key],0,merchant.stock[key])))return fail();}
  for(const r of [s.cooldowns,s.effectCounters])if(Object.values(r).some(v=>!number(v)))return fail();
- const enemy=(e:any)=>point(e)&&typeof e.id==='string'&&e.id.length<200&&['raider','shield','archer','captain'].includes(e.kind)&&integer(e.maxHp,1,100000)&&number(e.hp,0,e.maxHp)&&integer(e.level,1,40)&&['idle','approach','windup','active','recovery','stagger','dead'].includes(e.phase)&&number(e.phaseTime,-.1,30)&&number(e.angle,-1e6,1e6)&&number(e.targetAngle,-1e6,1e6)&&integer(e.attackCount)&&typeof e.struck==='boolean'&&typeof e.halfAnnounced==='boolean'&&(e.respawnSeconds===undefined||number(e.respawnSeconds,20,120))&&(e.respawnAt===undefined||number(e.respawnAt))&&(e.respawnCount===undefined||integer(e.respawnCount,0,10000000))&&(e.spawnedAt===undefined||number(e.spawnedAt,0,9999999399))&&(e.diedAt===undefined||e.hp===0&&e.phase==='dead'&&number(e.diedAt,0,s.time))&&['markedUntil','lightningUntil','pushImmuneUntil','staggerProtectedUntil'].every(k=>number(e[k]));
+ const enemy=(e:any)=>point(e)&&typeof e.id==='string'&&e.id.length<200&&['raider','shield','archer','captain'].includes(e.kind)&&integer(e.maxHp,1,100000)&&number(e.hp,0,e.maxHp)&&integer(e.level,1,CAMPAIGN_MAX_LEVEL)&&['idle','approach','windup','active','recovery','stagger','dead'].includes(e.phase)&&number(e.phaseTime,-.1,30)&&number(e.angle,-1e6,1e6)&&number(e.targetAngle,-1e6,1e6)&&integer(e.attackCount)&&typeof e.struck==='boolean'&&typeof e.halfAnnounced==='boolean'&&(e.respawnSeconds===undefined||number(e.respawnSeconds,20,120))&&(e.respawnAt===undefined||number(e.respawnAt))&&(e.respawnCount===undefined||integer(e.respawnCount,0,10000000))&&(e.spawnedAt===undefined||number(e.spawnedAt,0,9999999399))&&(e.diedAt===undefined||e.hp===0&&e.phase==='dead'&&number(e.diedAt,0,s.time))&&['markedUntil','lightningUntil','pushImmuneUntil','staggerProtectedUntil'].every(k=>number(e[k]));
  if(!Array.isArray(s.enemies)||s.enemies.length>200||!s.enemies.every(enemy)||Object.entries(s.encounters).some(([id,list])=>!area(id)||!Array.isArray(list)||list.length>200||!list.every(enemy)||new Set(list.map(e=>e.id)).size!==list.length)||s.encounters[s.area]&&JSON.stringify(s.enemies)!==JSON.stringify(s.encounters[s.area]))return fail();
  validatePetJourneys(s);validatePetAccess(s);
  for(const e of [...s.enemies,...Object.values(s.encounters).flat()]){if(e.lootChapter!==undefined&&(!integer(e.lootChapter,1,2)||!e.bossId||!(e.respawnCount!>0)))return fail();if(e.packId!==undefined&&(typeof e.packId!=='string'||e.packId.length>150||!e.respawnSeconds||!e.id.startsWith(`${e.packId}-`)))return fail();validateEnemyCombat(e,s.time);}validateEnemyHazards(s.enemyHazards,s.enemies);

@@ -1,0 +1,124 @@
+{
+  "date": "2026-11-17",
+  "status": "implemented-and-browser-visually-reviewed",
+  "profile": "test, normal gameplay rules, no package/version increment",
+  "previewUrl": "http://127.0.0.1:7473/?view=2d&player=3d",
+  "build": {
+    "command": "pwsh -NoProfile -File src/cocos/Build-Local.ps1 -Platform web-mobile -OutputName map-material-review -Profile test",
+    "result": "passed, Cocos 3.8.8 web-mobile; render policy and compiled test profile verified",
+    "output": "src/cocos/build/map-material-review",
+    "entrySha256": "c239c0602ffe504eea2d4f7c4c7a46f3e7f40856cf0e1ee1f967407f3f91bc59"
+  },
+  "checks": {
+    "typescript": "npm run check passed",
+    "worldAndTerrain": "15 existing tests passed; node --import tsx --test tests/world.test.ts tests/terrain.test.ts",
+    "tapConfig": "npm run check:tap passed",
+    "legacyBundleExclusions": "existing prepare-taptap.py pack_exclusions verified 9 legacy surfaces plus muted foliage excluded; active v2 retained",
+    "mapInputHashes": "26 material implementation inputs unchanged through final build/review; see implementation-inputs.json"
+  },
+  "runtime": {
+    "screenshots": 20,
+    "pageErrors": 0,
+    "requestFailures": 0,
+    "matchingCameras": 20,
+    "matchingPlayerCoordinates": 20,
+    "versionedSurfaceTextures": [
+      "flat2d/terrain-v1/bedrock-v2",
+      "flat2d/terrain-v1/cobble-v2",
+      "flat2d/terrain-v1/earth-v2",
+      "flat2d/terrain-v1/flagstone-v2",
+      "flat2d/terrain-v1/forest-v2",
+      "flat2d/terrain-v1/meadow-v2",
+      "flat2d/terrain-v1/water-v2",
+      "flat2d/terrain-v1/wet-earth-v2",
+      "flat2d/terrain-v1/wood-v2"
+    ],
+    "versionedTextureCheck": true,
+    "groundVertexColorApplicableCaptures": 16,
+    "groundVertexColorApplicableMeshes": 1262,
+    "groundVertexColorCheck": true,
+    "groundVertexColorExclusions": [
+      {
+        "file": "S01-T2-1688x780.png",
+        "reason": "Interior deliberately retains its original unmodulated Ground; no vertex colors required."
+      },
+      {
+        "file": "S01-T1-1688x780.png",
+        "reason": "Independent whole-map inn painting unchanged; no terrain-v2 surfaces."
+      },
+      {
+        "file": "S01-T2-844x390.png",
+        "reason": "Interior deliberately retains its original unmodulated Ground; no vertex colors required."
+      },
+      {
+        "file": "S01-T1-844x390.png",
+        "reason": "Independent whole-map inn painting unchanged; no terrain-v2 surfaces."
+      }
+    ],
+    "drawCallDeltaRange": [
+      -1,
+      0
+    ],
+    "drawCallsNoIncrease": true,
+    "triangleDeltaRange": [
+      -284,
+      12
+    ],
+    "renderCounterCaveat": "Whole-frame snapshots include animated fire/particles/HUD at different elapsed times; triangle deltas do not compare static terrain topology, and browser counters do not establish target-device performance."
+  },
+  "artReview": {
+    "direction": "User requested brighter overall, distinctly green grass, startup valley palette alignment",
+    "reviewedArtifacts": [
+      "before-after.jpg",
+      "runtime-overview.jpg",
+      "startup-style-alignment.jpg",
+      "materials-preview.jpg",
+      "tiling/"
+    ],
+    "findings": [
+      "Meadow grass no longer has the old yellow-brown diagonal tuft rhythm; bright green and warm pale paving retain distinct surfaces and readable actors.",
+      "Foliage is visibly greener; forest earth, marsh mud, natural rock, paving, timber and water retain different surface identities.",
+      "Road fades remain continuous in representative views; original character/camera framing and terrain silhouettes are preserved.",
+      "Static macro vertex colors are subtle and consistent across ground chunks; no extra ground render layers.",
+      "Some fixed stone and timber motifs remain recognizable in large flat tiling; not a claim of infinite non-repeating terrain."
+    ]
+  },
+  "coverage": {
+    "areas": [
+      "S01",
+      "S03",
+      "S05",
+      "S06",
+      "S08",
+      "S12",
+      "S01-T2",
+      "U1-04",
+      "U2-01",
+      "S01-T1"
+    ],
+    "viewports": [
+      [
+        1688,
+        780
+      ],
+      [
+        844,
+        390
+      ]
+    ],
+    "purpose": "isolated visual fixtures, not a chapter playthrough; unchanged independent inn as control"
+  },
+  "notVerified": [
+    "TapTap AppID platform run and compressed texture fallback",
+    "Physical Android/iPhone display, memory and performance"
+  ],
+  "notPerformed": [
+    "TapTap package, upload, submission or public release"
+  ],
+  "sourceAndPrompts": "generation.json",
+  "pixelProcessing": [
+    "processed.json",
+    "processed-foliage.json",
+    "palette-review.json"
+  ]
+}

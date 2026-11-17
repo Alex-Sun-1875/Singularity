@@ -15,26 +15,26 @@ export const HUD_SKILL_ATLAS_ICONS:Readonly<Record<string,readonly string[]>>={
   "rpg-com-01",
   "rpg-bow-01",
   "rpg-bow-02",
-  "rpg-bow-06-painted-v5",
   "rpg-bow-07-painted-v5",
+  "rpg-bow-06-painted-v5",
   "rpg-bow-05"
  ],
  "FIR": [
   "staff",
   "rpg-com-01",
   "rpg-fir-01",
-  "rpg-fir-02",
-  "rpg-fir-03",
   "rpg-fir-04",
-  "rpg-fir-05"
+  "rpg-fir-03",
+  "rpg-fir-05",
+  "rpg-fir-02"
  ],
  "THU": [
   "staff",
   "rpg-com-01",
   "rpg-thu-01",
   "rpg-thu-02",
-  "rpg-thu-04",
   "rpg-thu-06",
+  "rpg-thu-04",
   "rpg-thu-05"
  ]
 };

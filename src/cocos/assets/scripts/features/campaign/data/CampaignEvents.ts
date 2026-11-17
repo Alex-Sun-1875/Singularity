@@ -1,19 +1,25 @@
+import {H03_EQUIPMENT_OPTIONS} from '../../equipment/data/Equipment';
 import {CAMPAIGN_LEVEL_LIST} from './Campaign';
 import {campaignText} from '../locales';
 import {GROWING_QUESTS} from '../../equipment/data/GrowingEquipment';
 import {CHAPTER_TWO_ACTIONS,chapterTwoEventId,type ChapterTwoActionId} from './ChapterTwoEncounters';
 import {encounterText} from '../locales/ChapterTwoEncounterText';
 import {CHAPTER_TWO_SIDE_QUEST_EVENTS} from './ChapterTwoSideQuests';
+import {EARLY_MAIN_EVENTS,EARLY_EXPLORATION_EVENTS} from './EarlyChapterContent';
 /** Physical actions and their persistent outcomes. Walking into a region never pays a quest. */
-export interface CampaignChoiceDef {id:string;label:string;text:string;sets:string[]}
+export interface CampaignChoiceDef {id:string;label:string;text:string;sets:string[];retry?:boolean}
 export interface CampaignEventDef {
  id:string;area:string;label:string;description:string;requires?:string[];requiresAny?:string[];
  at?:{x:number;z:number};actor?:string;actorModel?:string;
  clearEncounter?:boolean;sets?:string[];gold?:number;iron?:number;runes?:number;cores?:number;
- items?:string[];recipes?:string[];experienceEvent?:string;experience?:number;
+ items?:string[];experienceEvent?:string;experience?:number;
  choices?:CampaignChoiceDef[];peacefulResolution?:boolean;choiceItems?:string[];optional?:boolean;
  confirmLabel?:string;completionText?:string;prerequisiteHints?:Record<string,string>;
+ /** Short actionable reminder for the compact quest HUD; full prose stays in the journal. */
+ objectiveHint?:string;
  chapterTwoAction?:ChapterTwoActionId;
+ /** Exact, content-owned proof requirements for reversible early-chapter actions. */
+ requiresReceipts?:Record<string,string|number|boolean>;defeatIds?:string[];
 }
 const event=(id:string,area:string,label:string,description:string,extra:Omit<CampaignEventDef,'id'|'area'|'label'|'description'>={}):CampaignEventDef=>({id,area,label,description,...extra});
 export const CAMPAIGN_EVENT_LIST:CampaignEventDef[]=[
@@ -24,7 +30,7 @@ export const CAMPAIGN_EVENT_LIST:CampaignEventDef[]=[
  event('b14-return-contract','B14','核对返还凭据，解除打捞封锁','核对归帆镇鉴定过的绳结货号，再将合法返还凭据交给封锁者；同一首领事件不因和平处理少领固定装备。',{requires:['campaign-clue-B03'],peacefulResolution:true,sets:['b14_salvage_released']}),
  event('f17-release','F17','从检修面解除典狱长扣押','先沿检修侧路核实出口，再当面出示当前征掘令的权限限制，解除这处超出原令的扣押。',{requires:['current_order_verified','f07_exit_verified'],peacefulResolution:true,sets:['f17_detention_lifted']}),
  event('h03-evacuate','H03','疏散工位，插入固定卡销','先让工匠离开镜架的转动面，再从地面的控制台插入固定卡销；不用指定同伴或消耗材料。',{sets:['h03_workers_safe'],peacefulResolution:true}),
- event('m3-heat-test','H03','转开散热叶片，完成回退试验','在停稳的镜架旁实际转动散热叶片，读取升温与回落的两组刻线。试验可以安全中止，工艺图纸来自完成后的记录。',{requires:['h03_workers_safe','workers_released','gate_raised'],sets:['m3_heat_test'],gold:180,iron:10,runes:8,recipes:['C01','C03','C04','C05','C06','C07','C08'],experienceEvent:'M3_XP_1',clearEncounter:true}),
+ event('m3-heat-test','H03','转开散热叶片，完成回退试验','在停稳的镜架旁实际转动散热叶片，读取升温与回落的两组刻线。试验可以安全中止；完成后从工匠整理的现有武备中自选一件，其余款式可在高地战利品中寻找。',{requires:['h03_workers_safe','workers_released','gate_raised'],sets:['m3_heat_test'],gold:180,iron:10,runes:8,choiceItems:[...H03_EQUIPMENT_OPTIONS],experienceEvent:'M3_XP_1',clearEncounter:true}),
  event('h05-stop-hoist','H05','停下采掘机，打开井架安全锁','把采掘机停在标定的地面安全位，再打开上方机械锁。井下的人不能隔墙操作，未开井仍可从山路返回。',{clearEncounter:true,sets:['e05_open'],iron:3,gold:30}),
  event('h07-skill-archive','H07','查阅石柜中的永久技能档案','旧石柜保存的是军中练习记录。按自己的角色等级学习，档案只结算一次经验，不再补充任何战斗符咒。',{experience:450}),
  event('h08-lower-bridge','H08','接上近侧手柄，放下矿桥','清除固定桥头组后，把同侧的原手柄接回绞盘并放桥。桥后的军械岸没有矿井后门，放下后保留双向道路。',{requires:['m3_heat_test'],clearEncounter:true,sets:['m4_bridge_open']}),
@@ -42,15 +48,15 @@ export const CAMPAIGN_EVENT_LIST:CampaignEventDef[]=[
   {id:'study','label':'保存余烬铜芯的外观','text':'完整记录铜芯的构造，获得焚星技能外观；不把非人生命当作战利品。',sets:['cosmetic_cinder_star']},
  ]}),
  event('u203-pressure','U2-03','分区泄压，停下镇守并打开深闸','从内侧安全控制面按刻线释放三段压力，再打开通向前厅的深闸。停机与击败镇守共享首领收据；主线试验始终可重试。',{requires:['m4_contact'],sets:['m5_pressure','u2_deep_gate_open'],peacefulResolution:true,gold:100,iron:6,experienceEvent:'M5_XP_1'}),
- event('u204-recipe','U2-04','查阅守库人的静思银环图纸','退出协议压在配方下方。读图只学习制作方法，戒指仍需在安全检查点消耗对应材料制作，不能无限领取。',{recipes:['C10'],gold:40}),
+ event('u204-recipe','U2-04','查阅养护记录，领取静思银环','退出协议压在养护记录下方。核对守库人的装备养护方法后，领取其保管的静思银环与一次记录整理的酬金。',{gold:40,items:['J04']}),
  event('u205-skill-archive','U2-05','阅读钟纹下的永久技能档案','将钟纹与练习图逐行对照，保存一次档案经验；旧符咒的库存来源已经退役，阅读不会补出消耗品。',{experience:900}),
  event('u206-angle-one','U2-06','从正面读取封炉原刻','站在正面的干石阶上，记录第一层凿痕与日期。当前征用者的侧室不会封住主线原刻。',{sets:['archive_angle_one']}),
  event('u206-angle-two','U2-06','从侧光角度复核被覆写的原刻','绕到侧面干路，让擦过石面的光线显出第二层凿痕；这与正面的读法共同组成可复核的证据。',{sets:['archive_angle_two']}),
- event('m5-archive','U2-06','比较两角度原刻与现代拓本','同时核对两种角度的原刻和瑟维恩的现代拓本，明确封炉决定与当前征用的不同责任。护腕只按唯一收据补领。',{requires:['m5_pressure','archive_angle_one','archive_angle_two'],sets:['m5_archive'],gold:140,iron:8,runes:4,items:['A11'],recipes:['C09','C10'],choiceItems:['DR3-01','DR3-02','DR3-03','DR3-04','DU2-01','DU2-02','DU2-03','DU2-04'],experienceEvent:'M5_XP_2'}),
+ event('m5-archive','U2-06','比较两角度原刻与现代拓本','同时核对两种角度的原刻和瑟维恩的现代拓本，明确封炉决定与当前征用的不同责任。护腕与战靴只按唯一收据领取。',{requires:['m5_pressure','archive_angle_one','archive_angle_two'],sets:['m5_archive'],gold:140,iron:8,runes:4,items:['A11','A16'],choiceItems:['DR3-01','DR3-02','DR3-03','DR3-04','DU2-01','DU2-02','DU2-03','DU2-04'],experienceEvent:'M5_XP_2'}),
  event('u207-stop-mirrors','U2-07','沿侧廊解除镜阵，取迁行与静眠原图','沿两条相通侧廊找到镜阵的安全断开面，关闭供能再取出原图。停机与战斗是同一事件，主线图不以杀死守秘者为条件。',{sets:['u207_mirrors_stopped','core_plans_known'],peacefulResolution:true}),
  event('u209-open-service','U2-09','从地宫内侧打开堡外检修门','解除检修道内侧的旧门扣并走向干壕，出口只到外城地面，不会绕过外弩台、决战庭和军械库。',{clearEncounter:true,sets:['e08_open'],iron:4}),
- event('f04-safety','F04','解除危险工位，固定备用镜组','先解开危险工位，再让备用镜组回到可锁定的位置。侧入或局部交涉完成同一现场处置，不会把已获救的凯尔重新囚禁。',{requires:['m6_verified','m3_heat_test','m5_pressure'],sets:['m7_prepared','f04_workers_safe'],peacefulResolution:true,gold:160,iron:8,runes:4,cores:2,recipes:['C02'],experienceEvent:'M7_XP_1'}),
- event('f07-safety','F07','实走接应出口并核验撤离道路','沿旧仓后的坡道实走出口，再确认接应人能从同一条路离开。拒绝付钱仍可使用已经核验的主线出口。',{requires:['m6_verified','m3_heat_test','m5_pressure'],sets:['m7_prepared','f07_exit_verified'],clearEncounter:true,gold:160,iron:8,runes:4,cores:2,recipes:['C02'],experienceEvent:'M7_XP_1'}),
+ event('f04-safety','F04','解除危险工位，固定备用镜组','先解开危险工位，再让备用镜组回到可锁定的位置。侧入或局部交涉完成同一现场处置，不会把已获救的凯尔重新囚禁；备用武备中的陨星与另一条准备路线共享一次领取。',{requires:['m6_verified','m3_heat_test','m5_pressure'],sets:['m7_prepared','f04_workers_safe'],peacefulResolution:true,gold:160,iron:8,runes:4,cores:2,items:['W05'],experienceEvent:'M7_XP_1'}),
+ event('f07-safety','F07','实走接应出口并核验撤离道路','沿旧仓后的坡道实走出口，再确认接应人能从同一条路离开。拒绝付钱仍可使用已经核验的主线出口；接应武备中的陨星与另一条准备路线共享一次领取。',{requires:['m6_verified','m3_heat_test','m5_pressure'],sets:['m7_prepared','f07_exit_verified'],clearEncounter:true,gold:160,iron:8,runes:4,cores:2,items:['W05'],experienceEvent:'M7_XP_1'}),
  event('f06-original','F06','取正本，对照当前征掘令','通过文书院的侧道读取征掘令正本，比较签字与权限；未公开过副本也能取得证据，不替任何人默认同意。',{sets:['current_order_verified']}),
  event('f09-disarm','F09','亲手拔下西弩台的固定销','清除本台守军后，从同侧地面拔下固定销并卸开弩机。拆掉的弩台永不复活，先拆东台或西台都可。',{requires:['m7_prepared'],clearEncounter:true,sets:['west_tower_down']}),
  event('f10-disarm','F10','亲手拔下东弩台的固定销','清除本台守军后拆下东侧弩机，实际卸销与西弩台分别记账。只限制最终战场入口，外城的返回道路保持开放。',{requires:['m7_prepared'],clearEncounter:true,sets:['east_tower_down']}),
@@ -87,5 +93,5 @@ CAMPAIGN_EVENT_LIST.push(
  event('q6-weigh','B14','核对船体潮痕和装载重量','先将船体潮痕与灯坊校光后的影像分开，再复秤能够实际接触的货件；旧影像不替任何藏品持有人作决定。',{requires:['shadowship_calibrated'],sets:['q6_weighed']}),
  event('q6-settle','B09','比较退款原件与装载副页','将稳定校光、复秤和实际船体的记录与退款原件并列，明确归还与收藏的边界；保留完整藏品，账目按唯一收据结清。',{requires:['q6_weighed'],sets:['q6_complete'],gold:160,iron:6,experience:3293,choiceItems:['DR3-04','DU2-04','DR4-04']}),
 );
-CAMPAIGN_EVENT_LIST.push(...CHAPTER_TWO_ACTIONS.map(action=>event(chapterTwoEventId(action.id),action.area,encounterText(`action.${action.id}.label`),encounterText(`action.${action.id}.description`),{at:action.point,chapterTwoAction:action.id})),...CHAPTER_TWO_SIDE_QUEST_EVENTS,...GROWING_QUESTS);
+CAMPAIGN_EVENT_LIST.push(...CHAPTER_TWO_ACTIONS.map(action=>event(chapterTwoEventId(action.id),action.area,encounterText(`action.${action.id}.label`),encounterText(`action.${action.id}.description`),{at:action.point,chapterTwoAction:action.id})),...CHAPTER_TWO_SIDE_QUEST_EVENTS,...GROWING_QUESTS,...EARLY_MAIN_EVENTS,...EARLY_EXPLORATION_EVENTS);
 export const CAMPAIGN_EVENTS:Record<string,CampaignEventDef>=Object.fromEntries(CAMPAIGN_EVENT_LIST.map(def=>[def.id,def]));

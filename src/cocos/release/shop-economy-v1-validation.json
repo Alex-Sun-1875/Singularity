@@ -1,0 +1,176 @@
+{
+  "date": "2026-11-17",
+  "version": "0.3.54",
+  "profile": "test",
+  "status": "Implemented; rule, normal-test HTML export and touch UI validated. TapTap and physical device pending.",
+  "packageProduced": false,
+  "uploaded": false,
+  "taptapRuntimeVerified": false,
+  "physicalDeviceVerified": false,
+  "implementation": [
+    "Two new service NPCs in S01: Brann supplies/equipment and Lina gems. Merchant directory in pause/settings/navigation, category tabs and live in-world navigation. Existing Lorn and Severin stock expanded.",
+    "Inventory-style gem trading uses shared RpgPanel, four-column card grid, EquipmentIconFrame and shared GemIcon. Tier/material filters, owned quantity, selected-item details, effective-stat reference, 1/5/10 quantity and atomic quoted purchase.",
+    "Gold capacity 9999999 plus pending overflow. Actual finite source budgets 1800/3600 installed only for released chapters; repeat ordinary hunting pays 3/4 separately. Gems normally purchased; monster/task rewards retain upgrade/drill materials without new gems/shards.",
+    "Prices 240/760/2400/7560/23760, same total as 3-to-1 synthesis including fees. Merchant stock requires level and actual playable chapter. Codes preserve their independent gem exception, existing four codes and configurable equipment/currency/supplies/material bundles."
+  ],
+  "reuse": "Existing Cocos native UI, storage, item definitions and gem transaction/replay system. No new runtime dependency, test framework or generated art.",
+  "checks": {
+    "coreTypes": "passed",
+    "fullTypes": "passed",
+    "existingTests": {
+      "passed": 181,
+      "failed": 0,
+      "log": "../../.tmp/shop-economy-tests-final.log"
+    },
+    "ruleProbe": {
+      "checks": [
+        "Gem purchase uses live prices, quantity, level/chapter gates, source replay and stale-token rejection",
+        "Forged gem balance and remote purchase after restore rejected",
+        "Potion bulk purchase, unique equipment stock and trade ownership survive restore",
+        "Tier II direct buy and 3-to-1 synthesis share 760 gold total; removing purchase proof rejected",
+        "All four existing redemption codes retain high-tier gem gifts independent of merchant chapter gates",
+        "Fixture-only configured gift grants currency, equipment, supplies, drills and tier-V upgrade stones atomically, restores and rejects tampering/repeat claims",
+        "Wallet exceeds former 9999 cap, retains overflow and collects only free capacity",
+        "Native ordinary-death and quest settlements grant upgrade stones/drills with no new gems or shards",
+        "Installed real-source gold catalogs sum to 1800 and 3600 without invented future sources"
+      ],
+      "evidence": "../test-results/shop-economy-v1/rules.json"
+    },
+    "designArithmetic": "Runtime consistency checks passed; not natural-play pacing evidence.",
+    "metadata": "All 10 new economy/trading/GemIcon/GemPreview TypeScript files have metadata; release change IDs unique.",
+    "diffWhitespace": "Passed with CR-at-EOL handled as repository line endings."
+  },
+  "web": {
+    "engine": "Cocos Creator 3.8.8; concept-2d test HTML",
+    "preview": {
+      "fingerprint": "41A531FDB7AEF1F66DEF19D6884A884E98A0CBC52BEB3AEEE155692AD1BB6DB8",
+      "buildDirectory": "F:\\workspace\\Singularity\\src\\cocos\\build\\concept-2d",
+      "profile": "test",
+      "schemaVersion": 1
+    },
+    "host": "Headless desktop Chrome with iPhone UA, mobile/touch emulation, DPR 3. cc.sys.isMobile asserted true. Isolated storage per case.",
+    "viewports": [
+      [
+        844,
+        390
+      ],
+      [
+        932,
+        430
+      ]
+    ],
+    "nativeTouch": [
+      "Merchant directory to live Lina approach/interaction",
+      "Level-one shop locked at Lv6; tier-II locked by chapter",
+      "Tier/material filters and another gem selection",
+      "Quantity five; deduct1200 from UI fixture5000; 25 power:1 units received and restored with gold3800",
+      "Gem cultivation/source navigation and no obsolete free-gem notice"
+    ],
+    "geometry": [
+      {
+        "viewport": [
+          844,
+          390
+        ],
+        "safeAreaFixture": {
+          "left": 44,
+          "right": 44,
+          "bottom": 21
+        },
+        "minGridWidth": 72.06161137440756,
+        "minGridHeight": 70.34123222748813,
+        "columnGap": 8.0,
+        "errors": []
+      },
+      {
+        "viewport": [
+          932,
+          430
+        ],
+        "safeAreaFixture": {
+          "left": 44,
+          "right": 44,
+          "bottom": 21
+        },
+        "minGridWidth": 76.59999999999997,
+        "minGridHeight": 74.43076923076923,
+        "columnGap": 8.0,
+        "errors": []
+      }
+    ],
+    "visualReview": "Inspected final 844 purchase and 932 constrained-safe-area screenshots: crystal icons visible, names below icons, owned count and tiers, shared border, filters, detail scroll and fixed purchase actions.",
+    "evidence": "../test-results/shop-economy-v1/web.json",
+    "fixtureLimit": "UI level16/gold5000 and safe-area insets are explicit fixtures, not normal pacing or actual device/platform evidence."
+  },
+  "normalPlay": {
+    "scope": "Real level-one GameSession/Pilot movement, production Automation combat, twelve v2 main stages, five preserved journey receipts, physical investigations and rescues, at least six native hunting kills and boss; only actual checkpoints/consumables, native task/Boss/loot equipment and one merchant-bought/inlaid tier-I gem. No fixture currency, experience, injected healing or equipment grants.",
+    "firstMerchantGem": {
+      "level": 7,
+      "price": 240,
+      "inlayCost": 5,
+      "goldAfter": 1077
+    },
+    "beforeBoss": {
+      "level": 10,
+      "gold": 1727
+    },
+    "firstChapterComplete": {
+      "level": 11,
+      "gold": 2209
+    },
+    "evidence": "../test-results/campaign-pacing-natural-first-chapter.json",
+    "limit": "Includes extra hunting/backtracking; does not establish every route minimum or full chapter-two spending cadence."
+  },
+  "pending": [
+    "TapTap AppID runtime/device touch, actual capsule/safe area and foreground/background storage/resource loading.",
+    "Full natural chapter-two spending route and four-profession long-term gem balance.",
+    "Chapters3–8 remain unreleased; their budgets/prices are planned arithmetic only.",
+    "New NPCs reuse generic mine-worker visuals with service colors. Dedicated NPC art and user art acceptance are separate."
+  ],
+  "hashes": [
+    {
+      "path": "assets/scripts/features/trading/runtime/GemShopPanel.ts",
+      "sha256": "4b1a524ac260756e2bf83cd685fd5ed5f12a083b942cdd5351e2127faa30df74"
+    },
+    {
+      "path": "assets/scripts/features/trading/runtime/ShopPanel.ts",
+      "sha256": "bfbe0e673ba704dd090f91db57a8298f339565afb6c41a5ca65c5454de8242e9"
+    },
+    {
+      "path": "assets/scripts/features/trading/common/Trading.ts",
+      "sha256": "43b2c7f2753c261ab5e86219b84636f398181d1047e523745c4663fb04b39fe5"
+    },
+    {
+      "path": "assets/scripts/features/economy/data/Economy.ts",
+      "sha256": "abc0a74de91398791d48c817b843e0ab7a08beb31461d8e8f4716f5068945252"
+    },
+    {
+      "path": "assets/scripts/features/economy/common/EconomyRewards.ts",
+      "sha256": "6e29dfa294fd3f64fae380d2be3298e3e4b29b9ec2c6343aee264d2bcf1aed6f"
+    },
+    {
+      "path": "assets/scripts/features/gems/data/Gems.ts",
+      "sha256": "1d3fd524558a0cfe027f36a37dbf1e73743dcba973729f867150f510ac6c69cd"
+    },
+    {
+      "path": "assets/scripts/features/gems/common/GemWorkshop.ts",
+      "sha256": "c641d3f46fb8e332ebe9cf229cba15e7f0d636e42aa32db8949f1c3e0f8f5a5e"
+    },
+    {
+      "path": "assets/scripts/features/redemption/common/RedemptionLedger.ts",
+      "sha256": "e75f9122177a978306bf84c49589a2c4afd5684fc8687d066b00abbac3721654"
+    },
+    {
+      "path": "test-results/shop-economy-v1/web.json",
+      "sha256": "163c077258a524424f166b59c0f6c7510504d31110f534054daaf390f47199de"
+    },
+    {
+      "path": "test-results/shop-economy-v1/rules.json",
+      "sha256": "06d46431e3c8fd31ab718cacaf89abb360b9b13b7bf687ee096866b43c858970"
+    },
+    {
+      "path": "test-results/campaign-pacing-natural-first-chapter.json",
+      "sha256": "8044f8eae8f4f033946548dc5c0c818dd541d1d16d967ca90edf7a599cc84de0"
+    }
+  ]
+}

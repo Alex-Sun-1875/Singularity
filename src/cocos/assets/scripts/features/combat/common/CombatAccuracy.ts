@@ -2,6 +2,7 @@ import type {GameState,EnemyState} from '../../../core/GameSession';
 import {effectiveAttribute,equipmentRandomWord} from '../../equipment/common/EquipmentDice';
 import type {Attribute} from '../../progression/common/Progression';
 import {RESOURCE_RULES,resourceMaximum} from './ClassResource';
+import {combatBudgetLevel} from '../../progression/data/CampaignProgression';
 
 /** Ratings are percentage points; contact geometry is always checked first. */
 export const ACCURACY_RULES={baseAccuracy:100,perFocusCapacity:.25,baseEvasion:5,perDexterity:.2,maxEvasion:25,minHitChance:.6,maxHitChance:1} as const;
@@ -16,7 +17,7 @@ export function playerCombatAttributes(s:GameState,attributes:Record<Attribute,n
  };
 }
 export function enemyCombatAttributes(e:Pick<EnemyState,'kind'|'level'|'bossId'>){
- const level=Math.max(0,(e.level??1)-1);
+ const level=Math.max(0,combatBudgetLevel(e.level??1)-1);
  return {accuracy:100+level*.1+(e.bossId?2:0),evasion:ENEMY_EVASION[e.kind]+level*.05+(e.bossId?2:0)};
 }
 export const contactHitChance=(accuracy:number,evasion:number)=>Math.max(ACCURACY_RULES.minHitChance,Math.min(ACCURACY_RULES.maxHitChance,(accuracy-evasion)/100));

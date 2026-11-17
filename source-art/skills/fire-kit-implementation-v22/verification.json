@@ -1,0 +1,135 @@
+{
+  "status": "New fire kit implemented and recorded from the compiled native Cocos game",
+  "cases": {
+    "FIR_01": {
+      "frames": 135,
+      "directContacts": 1,
+      "lastDirectContact": 0.7,
+      "errors": [],
+      "consoleErrors": [],
+      "geometry": {
+        "kind": "projectileWithImpactDisk",
+        "origin": "projectileImpact",
+        "radiusMetres": 0.45,
+        "totalTargetLimit": 1
+      },
+      "clearedAtEnd": true,
+      "gameHash": "971cf46143b6849f7ed9144309480b2385750ff5b19722e260f1a18511586555"
+    },
+    "FIR_04": {
+      "frames": 210,
+      "directContacts": 12,
+      "lastDirectContact": 3.533333333333333,
+      "errors": [],
+      "consoleErrors": [],
+      "geometry": {
+        "kind": "instantCorridor",
+        "origin": "caster",
+        "lengthMetres": 7,
+        "widthMetres": 1.2
+      },
+      "clearedAtEnd": true,
+      "gameHash": "971cf46143b6849f7ed9144309480b2385750ff5b19722e260f1a18511586555"
+    },
+    "FIR_05": {
+      "frames": 216,
+      "directContacts": 14,
+      "lastDirectContact": 3.6666666666666665,
+      "errors": [],
+      "consoleErrors": [],
+      "geometry": {
+        "kind": "filledWaveRectangle",
+        "origin": "aimPoint",
+        "widthMetres": 6,
+        "depthMetres": 3
+      },
+      "clearedAtEnd": true,
+      "gameHash": "971cf46143b6849f7ed9144309480b2385750ff5b19722e260f1a18511586555"
+    },
+    "FIR_03": {
+      "frames": 162,
+      "directContacts": 0,
+      "lastDirectContact": null,
+      "errors": [],
+      "consoleErrors": [],
+      "geometry": {
+        "kind": "selfShield",
+        "origin": "caster"
+      },
+      "clearedAtEnd": true,
+      "gameHash": "971cf46143b6849f7ed9144309480b2385750ff5b19722e260f1a18511586555"
+    },
+    "FIR_02": {
+      "frames": 195,
+      "directContacts": 3,
+      "lastDirectContact": 1.1333333333333333,
+      "errors": [],
+      "consoleErrors": [],
+      "geometry": {
+        "kind": "filledImpactDisk",
+        "origin": "aimPoint",
+        "radiusMetres": 3.8
+      },
+      "clearedAtEnd": true,
+      "gameHash": "971cf46143b6849f7ed9144309480b2385750ff5b19722e260f1a18511586555"
+    }
+  },
+  "fiveGroundEmitters": true,
+  "excludedOutsideCorridorAndFieldTarget": true,
+  "fieldSlowObserved": true,
+  "meteorLastVisibleSecondsAfterRelease": 4.433333333333334,
+  "pauseResumeCoreUnchanged": true,
+  "rulesChecks": "155 existing checks passed; 62 related checks passed; 10 existing navigation checks passed after the automatic aim update",
+  "typeCheck": "passed",
+  "cocosWebBuild": "passed",
+  "legacyPolicy": "No new fire-specific old-save migration or frozen catalog; current rules installed directly as requested",
+  "taptapDeviceValidation": "pending",
+  "sourceHashes": {
+    "assets/scripts/features/combat/runtime/NativeSkillVfx.ts": "aef889b2f332ee0f0c392567dcc3f9e16eac5eab7fe70c5bd6832b3e15ebcb18",
+    "assets/scripts/features/combat/runtime/SkillFireSprites.ts": "d1194a102018778899f19022c8276527f8afbdd57e2689250bbb3af521048b4f",
+    "assets/scripts/features/combat/runtime/FireGroundEffects.ts": "e5534a0197dda8a6cf5a52f6dcaa8217f809cff2237ccea033b6fe27a957f7c0",
+    "assets/scripts/features/combat/runtime/Effects.ts": "2f7f649336e6fe8b04a17883470821a09bb188087ab11c6fa0c76b1dd8323a88",
+    "assets/scripts/features/combat/common/PureCombat.ts": "c9e9c4092aaa374b8f7b8bac75e8c16109763572cf7666891f9c413a3e3a194f",
+    "assets/scripts/features/progression/common/CombatLoadouts.ts": "03e324b0684222cc511c70d4131c0f0312a9bc31dd19a0794fb1d810aec07ead",
+    "assets/scripts/features/combat/data/PureSkills.ts": "a8481650c4e7db988364adfd85a687f21b3e27227197adb05960decd2acd1ea5",
+    "assets/scripts/features/automation/common/Automation.ts": "40dfcd33d4e821dc4e4c334da68c6e7a2a46eeb55d7eb6464fbf9b6a8c8e2137",
+    "assets/scripts/features/progression/runtime/PreparationPanels.ts": "683df46c436c4ab0b3ec2e01aa6f271c122caf89d8b95049c4d41539b0ac955b"
+  },
+  "textures": {
+    "fire-ground-jets-v22": {
+      "sourceSha256": "214e7b196bda107c7760972977041511d72e66fbcd5ed82917b390528807f8c2",
+      "bundledPath": "resources\\native\\56\\568dfc82-9a9d-4c76-a42d-85478187e1cd.f61ad.png",
+      "sameRgba": true
+    },
+    "fire-jet-seal-v22": {
+      "sourceSha256": "bcdd072d5726442b05bb7ef423ddf7da0ce82ea24e4b9fd11033fe8157099129",
+      "bundledPath": "resources\\native\\67\\6721c0be-ba24-422f-85a7-d016025b16f5.11d1a.png",
+      "sameRgba": true
+    },
+    "fire-meteor-seal-v22": {
+      "sourceSha256": "036d59168ae63d899e1cab0f2752f4c97d5dffaad0c85dc867dd22f9aaed3c03",
+      "bundledPath": "resources\\native\\3b\\3ba68587-fc55-43bb-8c3d-cdf701b3427f.76058.png",
+      "sameRgba": true
+    },
+    "fire-pyro-v7": {
+      "sourceSha256": "b781d5007aa16a40414ce95bb19942d3b12322657c3b8e379a9e97b08d018768",
+      "bundledPath": "resources\\native\\ca\\ca2d1f9f-1ed4-4649-a70b-bc8be2c4c756.6213f.png",
+      "sameRgba": true
+    },
+    "fire-low-rolls-v7": {
+      "sourceSha256": "52c385d486c7b4487fe042d7e2edf44139b0ccf554b9099b238340dbb5519714",
+      "bundledPath": "resources\\native\\0b\\0bb3fd96-2509-4d5e-bcf4-8a03252571c6.c494d.png",
+      "sameRgba": true
+    },
+    "fire-bolt-v9": {
+      "sourceSha256": "77a20dd8b07cb7b3799349be47c4c02061f4ac378136e6bd7d5b1355e64957d4",
+      "bundledPath": "resources\\native\\9e\\9ee88469-12db-4458-bc2e-b0ead27cd60f.aeeb8.png",
+      "sameRgba": true
+    }
+  },
+  "video": {
+    "frames": 918,
+    "fps": 30,
+    "seconds": 30.6
+  }
+}

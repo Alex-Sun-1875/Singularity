@@ -1,0 +1,39 @@
+CCEffect %{
+  techniques:
+  - passes:
+    - vert: fire-seal-vs:vert
+      frag: fire-seal-fs:frag
+      rasterizerState: { cullMode: none }
+      depthStencilState: { depthTest: true, depthWrite: false }
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: one
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: one
+          blendDstAlpha: one_minus_src_alpha
+      properties:
+        mainTexture: { value: white }
+        mainColor: { value: [1, 1, 1, 1] }
+}%
+CCProgram fire-seal-vs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+  #include <builtin/uniforms/cc-local>
+  in vec3 a_position;
+  in vec2 a_texCoord;
+  out vec2 v_uv;
+  vec4 vert () { v_uv = a_texCoord; return cc_matViewProj * cc_matWorld * vec4(a_position, 1.0); }
+}%
+CCProgram fire-seal-fs %{
+  precision highp float;
+  in vec2 v_uv;
+  uniform sampler2D mainTexture;
+  uniform FireSealParams { vec4 mainColor; };
+  vec4 frag () {
+    vec4 ink = texture(mainTexture, v_uv);
+    float alpha = ink.a * mainColor.a;
+    if (alpha < 0.002) discard;
+    return vec4(ink.rgb * mainColor.rgb * alpha, alpha);
+  }
+}%

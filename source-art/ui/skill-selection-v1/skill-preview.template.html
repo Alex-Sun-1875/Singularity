@@ -1,0 +1,144 @@
+<div id="skill-selection-study" class="viz-dotted-background">
+  <div class="ss-stage">
+    <div class="ss-panel" aria-label="技能列表选中态设计">
+      <div class="ss-header"><span class="ss-brand">剑与火</span><span class="ss-title">技能</span><span class="ss-candidate">列表状态 · 候选</span></div>
+      <div class="ss-body">
+        <div class="ss-catalog">
+          <div class="ss-category">破军技能</div>
+          <div class="ss-list" role="group" aria-label="选择查看的技能">
+            <button class="ss-row ss-selected cursor-interaction" data-skill="0" type="button" aria-pressed="true" aria-label="断空斩，1级，单体">
+              <span class="ss-skin" aria-hidden="true"></span><span class="ss-selection" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <span class="ss-icon"><img src="{{ICON1}}" alt=""><img class="ss-iconframe" src="{{FRAME}}" alt=""></span>
+              <span class="ss-copy"><span class="ss-name">断空斩</span><span class="ss-role">单体</span></span><span class="ss-level">1级</span>
+            </button>
+            <button class="ss-row cursor-interaction" data-skill="1" type="button" aria-pressed="false" aria-label="破军突袭，1级，群攻">
+              <span class="ss-skin" aria-hidden="true"></span><span class="ss-selection" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <span class="ss-icon"><img src="{{ICON2}}" alt=""><img class="ss-iconframe" src="{{FRAME}}" alt=""></span>
+              <span class="ss-copy"><span class="ss-name">破军突袭</span><span class="ss-role">群攻</span></span><span class="ss-level">1级</span>
+            </button>
+            <button class="ss-row cursor-interaction" data-skill="2" type="button" aria-pressed="false" aria-label="铁誓壁垒，1级，辅助">
+              <span class="ss-skin" aria-hidden="true"></span><span class="ss-selection" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <span class="ss-icon"><img src="{{ICON3}}" alt=""><img class="ss-iconframe" src="{{FRAME}}" alt=""></span>
+              <span class="ss-copy"><span class="ss-name">铁誓壁垒</span><span class="ss-role">辅助</span></span><span class="ss-level">1级</span>
+            </button>
+            <button class="ss-row ss-locked cursor-interaction" data-skill="3" type="button" aria-pressed="false" aria-label="旋风斩，10级解锁，群攻，查看详情">
+              <span class="ss-skin" aria-hidden="true"></span><span class="ss-selection" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+              <span class="ss-icon"><img src="{{ICON4}}" alt=""><img class="ss-iconframe" src="{{FRAME}}" alt=""></span>
+              <span class="ss-copy"><span class="ss-name">旋风斩</span><span class="ss-role">群攻 · 未解锁</span></span><span class="ss-level">Lv.10</span>
+            </button>
+          </div>
+        </div>
+        <div class="ss-detail" aria-live="polite">
+          <div class="ss-detailhead"><span class="ss-detailicon ss-icon"><img class="ss-detailimage" src="{{ICON1}}" alt="断空斩图标"><img class="ss-iconframe" src="{{FRAME}}" alt=""></span><div><div class="ss-detailname">断空斩</div><div class="ss-detailmeta">1级 / 5级 · 单体</div></div></div>
+          <div class="ss-rule"></div>
+          <div class="ss-facts"><div>单敌直接伤害合计 346% 技能威力</div><div>全 2 段命中同一个敌人</div><div>冷却 3秒</div><div>消耗 6体力 · 自动恢复</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<style>
+  #skill-selection-study .ss-stage { padding:16px 12px; }
+  #skill-selection-study .ss-panel { --ss-focus:#EDE4CB; --ss-corner:11px; --ss-row:52px; color:#FFF0C9; font-family:SimSun,"Songti SC","Noto Serif SC",serif; padding:22px 24px 25px; background:radial-gradient(ellipse at 22% 15%,#2A1C12,transparent 70%),linear-gradient(110deg,#17110D,#100C0A); border:1px solid #8C6941; border-radius:14px; box-shadow:inset 0 0 0 3px #130E0A,inset 0 0 0 4px #57432B,0 8px 28px #0003; }
+  #skill-selection-study .ss-panel * { box-sizing:border-box; }
+  #skill-selection-study .ss-header { display:flex; gap:22px; align-items:center; padding-bottom:15px; border-bottom:1px solid #6F5235; }
+  #skill-selection-study .ss-brand { font-size:18px; letter-spacing:2px; color:#D8B575; }
+  #skill-selection-study .ss-title { font-size:20px; color:#75C5B9; }
+  #skill-selection-study .ss-candidate { font-size:12px; color:#B9A58B; margin-left:auto; white-space:nowrap; }
+  #skill-selection-study .ss-body { display:grid; grid-template-columns:minmax(270px,1.28fr) minmax(180px,1fr); gap:26px; padding-top:23px; }
+  #skill-selection-study .ss-category { font-size:14px; line-height:20px; color:#75C5B9; margin:0 0 13px 12px; }
+  #skill-selection-study .ss-list { display:grid; gap:8px; }
+  #skill-selection-study .ss-row { position:relative; appearance:none; isolation:isolate; display:grid; grid-template-columns:36px minmax(0,1fr) 48px; gap:10px; align-items:center; min-height:var(--ss-row); width:100%; padding:7px 12px; border:0; background:transparent; color:inherit; font:inherit; border-radius:8px; text-align:left; }
+  #skill-selection-study .ss-row:focus-visible { outline:2px solid #75C5B9; outline-offset:2px; }
+  #skill-selection-study .ss-skin { position:absolute; inset:0; z-index:-2; pointer-events:none; border:10px solid transparent; border-image:url('{{ROW}}') 20 24 20 24 fill stretch; opacity:.9; }
+  #skill-selection-study .ss-row:after { content:""; position:absolute; inset:4px; z-index:-1; pointer-events:none; border-radius:5px; background:transparent; transition:background 120ms ease; }
+  #skill-selection-study .ss-row:hover:after { background:#EDE4CB0A; }
+  #skill-selection-study .ss-row.ss-selected:after { background:#EDE4CB0C; }
+  #skill-selection-study .ss-row:active:after { background:#EDE4CB06; }
+  #skill-selection-study .ss-icon { display:block; position:relative; width:36px; height:36px; flex:none; }
+  #skill-selection-study .ss-icon>img { position:absolute; inset:1.5px; width:calc(100% - 3px); height:calc(100% - 3px); border-radius:3px; object-fit:contain; }
+  #skill-selection-study .ss-icon>img.ss-iconframe { inset:0; width:100%; height:100%; border-radius:0; }
+  #skill-selection-study .ss-copy { display:flex; min-width:0; flex-direction:column; gap:1px; }
+  #skill-selection-study .ss-name { font-size:16.5px; line-height:21px; color:#FFF0C9; white-space:nowrap; text-overflow:ellipsis; overflow:hidden; }
+  #skill-selection-study .ss-role { font-size:11.5px; line-height:16px; color:#B9A68A; white-space:nowrap; }
+  #skill-selection-study .ss-level { font-size:13px; line-height:20px; color:#C7B699; text-align:right; white-space:nowrap; }
+  #skill-selection-study .ss-selected .ss-level { color:#EDE4CB; }
+  #skill-selection-study .ss-locked .ss-name { color:#B9A68A; }
+  #skill-selection-study .ss-locked .ss-icon { filter:saturate(.55); opacity:.8; }
+  #skill-selection-study .ss-locked .ss-level { color:#B6A082; }
+  #skill-selection-study .ss-selection { position:absolute; inset:3px; opacity:0; pointer-events:none; transition:opacity 120ms ease; }
+  #skill-selection-study .ss-selected .ss-selection { opacity:1; }
+  #skill-selection-study .ss-selection>i { position:absolute; width:var(--ss-corner); height:var(--ss-corner); border:0 solid var(--ss-focus); filter:drop-shadow(0 0 1px #090705); }
+  #skill-selection-study .ss-selection>i:nth-child(1) { top:0;left:0;border-top-width:1.5px;border-left-width:1.5px;border-top-left-radius:5px; }
+  #skill-selection-study .ss-selection>i:nth-child(2) { top:0;right:0;border-top-width:1.5px;border-right-width:1.5px;border-top-right-radius:5px; }
+  #skill-selection-study .ss-selection>i:nth-child(3) { bottom:0;left:0;border-bottom-width:1.5px;border-left-width:1.5px;border-bottom-left-radius:5px; }
+  #skill-selection-study .ss-selection>i:nth-child(4) { bottom:0;right:0;border-bottom-width:1.5px;border-right-width:1.5px;border-bottom-right-radius:5px; }
+  #skill-selection-study .ss-detail { border-left:1px solid #634A2B70; padding:33px 0 0 22px; min-width:0; }
+  #skill-selection-study .ss-detailhead { display:flex; gap:12px; align-items:center; }
+  #skill-selection-study .ss-detailicon { width:40px; height:40px; }
+  #skill-selection-study .ss-detailname { font-size:21px; line-height:27px; white-space:nowrap; }
+  #skill-selection-study .ss-detailmeta { font-size:12px; line-height:18px; color:#C0AC8D; margin-top:4px; }
+  #skill-selection-study .ss-rule { height:1px; margin:18px -3px 15px; background:linear-gradient(90deg,transparent,#80633F,transparent); }
+  #skill-selection-study .ss-facts { font-size:13px; line-height:21px; color:#EDE4CB; }
+  #skill-selection-study .ss-facts>div+div { margin-top:5px; }
+  @media(max-width:620px) {
+    #skill-selection-study .ss-stage { padding:12px 0; }
+    #skill-selection-study .ss-panel { padding:21px 19px 24px; }
+    #skill-selection-study .ss-body { grid-template-columns:1fr; gap:22px; }
+    #skill-selection-study .ss-detail { border-left:0; border-top:1px solid #634A2B70; padding:20px 12px 0; }
+    #skill-selection-study .ss-detailhead { gap:14px; }
+    #skill-selection-study .ss-category { margin-left:12px; }
+  }
+  @media(max-width:390px) {
+    #skill-selection-study .ss-header { gap:13px; }
+    #skill-selection-study .ss-brand { font-size:16px; }
+    #skill-selection-study .ss-candidate { font-size:11px; }
+    #skill-selection-study .ss-row { padding-left:10px; padding-right:10px; gap:8px; grid-template-columns:36px minmax(0,1fr) 42px; }
+  }
+  @media(prefers-reduced-motion:reduce) { #skill-selection-study .ss-selection,#skill-selection-study .ss-row:after { transition:none; } }
+</style>
+<script>
+(() => {
+  const root=document.getElementById('skill-selection-study');
+  const product=root.querySelector('.ss-panel');
+  const rows=Array.from(root.querySelectorAll('.ss-row'));
+  const skills=[
+    {name:'断空斩',role:'单体',rank:'1级 / 5级',facts:['单敌直接伤害合计 346% 技能威力','全 2 段命中同一个敌人','冷却 3秒','消耗 6体力 · 自动恢复']},
+    {name:'破军突袭',role:'群攻',rank:'1级 / 5级',facts:['当前已解锁']},
+    {name:'铁誓壁垒',role:'辅助',rank:'1级 / 5级',facts:['当前已解锁']},
+    {name:'旋风斩',role:'群攻',rank:'Lv.10 开放',facts:['尚未解锁']}
+  ];
+  const saved=window.openai?.widgetState?.modelContent?.selectedSkill;
+  const savedIndex=skills.findIndex(skill=>skill.name===saved);
+  const state={selected:savedIndex<0?0:savedIndex,accent:'#EDE4CB',corner:11,rowHeight:52};
+  function render(){
+    product.style.setProperty('--ss-focus',state.accent);
+    product.style.setProperty('--ss-corner',state.corner+'px');
+    product.style.setProperty('--ss-row',state.rowHeight+'px');
+    rows.forEach((row,index)=>{row.classList.toggle('ss-selected',index===state.selected);row.setAttribute('aria-pressed',String(index===state.selected));});
+    const skill=skills[state.selected];
+    root.querySelector('.ss-detailname').textContent=skill.name;
+    root.querySelector('.ss-detailmeta').textContent=skill.rank+' · '+skill.role;
+    const icon=root.querySelector('.ss-detailimage');
+    icon.src=rows[state.selected].querySelector('.ss-icon img').src;icon.alt=skill.name+'图标';
+    const facts=root.querySelector('.ss-facts');facts.replaceChildren();
+    skill.facts.forEach(value=>{const line=document.createElement('div');line.textContent=value;facts.appendChild(line);});
+  }
+  rows.forEach((row,index)=>row.addEventListener('click',()=>{
+    state.selected=index;render();
+    window.openai?.setWidgetState({modelContent:{selectedSkill:skills[index].name,design:'象牙白角标技能行'},privateContent:null}).catch(()=>{});
+  }));
+  window.addEventListener('openai:set_globals',event=>{
+    const name=event.detail?.globals?.widgetState?.modelContent?.selectedSkill;
+    const index=skills.findIndex(skill=>skill.name===name);
+    if(index>=0){state.selected=index;render();}
+  });
+  render();
+  if(globalThis.Tweak){
+    const tweak=new Tweak({container:product,onChange:render});
+    tweak.addSlider(state,'rowHeight',{label:'技能行高度',min:52,max:60,step:1,unit:'px'});
+    tweak.addSlider(state,'corner',{label:'选中角标长度',min:8,max:15,step:1,unit:'px'});
+    tweak.addColorPicker(state,'accent',{label:'选中角标颜色',reference:'equipment.selection'});
+  }
+})();
+</script>

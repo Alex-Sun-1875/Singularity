@@ -1,0 +1,20 @@
+{
+  "reason": "Original art was replaced, but HUD loads a separate static atlas whose WAR_04 tile still contained the old ground-impact icon.",
+  "recipe": "Existing build-hud-render-assets.py circle_alpha and lossless 1:1 atlas packing",
+  "slot": 5,
+  "rect": [
+    256,
+    256,
+    512,
+    512
+  ],
+  "sourceSha256": "0a588ffcaf82dfe2f3813f8e58248362480a8176b069d77dc2f92d44bf79d019",
+  "circularSha256": "1b5d41420844dc3186e3514c713b9763aeff958c8d28ac62548369655ebc4dd5",
+  "atlasSha256": "889121005ddbb47d23115cb3deab059e9a1797d2f3c9c367a2f06e754d4ded44",
+  "otherAtlasTilesUnchanged": true,
+  "shieldTileUnchanged": true,
+  "metadataUnchanged": true,
+  "runtimeVisualReview": "Actual compiled HUD binds WAR_04 to the correct atlas tile; the decoded runtime texture matches reference pixels at every opaque pixel and matches alpha everywhere.",
+  "runtimeTexturePixelsMatch": true,
+  "preview": "http://127.0.0.1:7469/?view=2d&player=3d"
+}

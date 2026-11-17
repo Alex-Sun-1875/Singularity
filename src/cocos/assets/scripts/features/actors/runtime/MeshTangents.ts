@@ -1,4 +1,7 @@
-import {BufferGeometry,Float32BufferAttribute} from 'three';
+// Creator 3.8 does not expand Three's ./src/* package export. Static source
+// imports keep its maintained tangent implementation without bundling renderers.
+import {BufferGeometry} from '../../../../../node_modules/three/src/core/BufferGeometry.js';
+import {Float32BufferAttribute} from '../../../../../node_modules/three/src/core/BufferAttribute.js';
 
 type Geometry={positions:number[];normals?:number[];uvs?:number[];indices?:number[];tangents?:number[]};
 

@@ -8,6 +8,7 @@ import {CAMPAIGN_BOSSES,CAMPAIGN_LEVEL_LIST} from '../assets/scripts/features/ca
 import {CAMPAIGN_EVENTS} from '../assets/scripts/features/campaign/data/CampaignEvents';
 import {awardXp,cumulativeXp} from '../assets/scripts/features/progression/common/Progression';
 import {CAMPAIGN_ROADS} from '../assets/scripts/features/world/data/CampaignGeography';
+import {EARLY_CONTENT_PACKS,earlyEnemyActive,earlyPendingSpawns} from '../assets/scripts/features/campaign/data/EarlyChapterContent';
 
 const expectedRoads = `01-02 01-03 01-04 01-20 02-18 02-19 03-04 03-19 04-07 04-08 05-19 05-06 05-07 06-14 06-15 07-08 07-13 07-14 07-17 08-09 08-11 09-10 09-20 10-11 11-12 11-17 12-13 12-16 13-14 13-16 13-17 14-15 15-16`.split(' ').map(edge => edge.split('-').map(id => `S${id}`).sort().join('|')).sort();
 const edge = (a: string, b: string) => [a, b].sort().join('|');
@@ -80,7 +81,7 @@ test('permanent equipment sources remain finite and do not duplicate merchant st
   assert.ok(!caches.some(cache=>cache.item?.startsWith('T')));
   assert.ok(getArea('S07').objects.some(object=>object.eventId==='s07-skill-archive'));
   assert.ok(!objects().some(object => object.action === 'cache' && ['A10','A13','J03','W02','T03'].includes(object.item!)));
-  assert.deepEqual(objects().filter(object => object.merchant).map(object => [object.area,object.merchant]).sort(), [['S01-T1','mira'],['S01-T3','lorn'],['S05','nightqi'],['H02','severin'],['B03','elise']].sort());
+  assert.deepEqual(objects().filter(object => object.merchant).map(object => [object.area,object.merchant]).sort(), [['S01','jeweler'],['S01','supplies'],['S01-T1','mira'],['S01-T3','lorn'],['S05','nightqi'],['H02','severin'],['B03','elise']].sort());
 });
 
 // Test real navigation: a 0.6m radius walker must reach every interactive point,
@@ -152,7 +153,17 @@ test('rendered movement navigation can approach actual content and every return 
 
 test('encounters leave safe entrances, NPC positions and checkpoints and keep the captain solo', () => {
   for (const area of Object.values(AREAS)) {
-    assert.ok(area.enemies.filter(enemy=>!enemy.respawnSeconds).length <= 8 && area.enemies.length <= 29, `${area.id} keeps the fixed encounter budget plus bounded hunting packs`);
+    const ordinary=area.enemies.filter(enemy=>earlyEnemyActive(enemy.id,{}));
+    assert.ok(ordinary.filter(enemy=>!enemy.respawnSeconds).length <= 8 && ordinary.length <= 29, `${area.id} keeps the original fixed encounter and hunting budgets before any optional trigger`);
+    const latent=area.enemies.filter(enemy=>!earlyEnemyActive(enemy.id,{}));
+    assert.ok(latent.every(enemy=>EARLY_CONTENT_PACKS.some(pack=>pack.area===area.id&&pack.enemies.some(def=>def.id===enemy.id))),`${area.id} only adds declared, dormant optional packs`);
+    const triggers=Object.fromEntries(EARLY_CONTENT_PACKS.filter(pack=>pack.area===area.id).flatMap(pack=>pack.requires.map(key=>[key,true])));
+    let present=ordinary.map(enemy=>({...enemy,hp:1}));
+    for(let pass=0;pass<4;pass++){
+      const spawned=earlyPendingSpawns(area,triggers,{},present);
+      present.push(...spawned.map(enemy=>({...enemy,hp:1})));
+      assert.ok(present.filter(enemy=>!enemy.respawnSeconds&&enemy.hp>0).length<=8,`${area.id} defers latent squads above the simultaneous fixed-combat budget`);
+    }
     const safePoints = [...area.exits, ...area.objects.filter(object => object.actor || object.action === 'checkpoint')];
     for (const enemy of area.enemies) {
       assert.ok(distance(enemy, area.spawn) >= 12, `${area.id}/${enemy.id} does not attack the checkpoint`);

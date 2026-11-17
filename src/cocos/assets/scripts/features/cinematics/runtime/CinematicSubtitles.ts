@@ -9,6 +9,7 @@ import {currentLocale} from '../../../shared/i18n/Localization';
 import {UI_COLORS as C} from '../../../shared/ui/UiTheme';
 import {cinematicText} from '../locales';
 import {cinematicLayout,CINEMATIC_STYLE as S} from '../common/CinematicLayout';
+import {bindButtonFeedback} from '../../../shared/ui/ButtonFeedback';
 
 /** Subtitle-only overlay; independent from the game's framed menus and HUD. */
 export class CinematicSubtitles {
@@ -50,8 +51,7 @@ export class CinematicSubtitles {
    this.layoutContinue();
   }
   const tint=(pressed:boolean)=>{text.color=pressed?F.color('state.ready'):chevron?C.gold:F.color('text.normal');if(chevron)this.drawContinueArrow(text.color);};
-  n.on(Node.EventType.TOUCH_START,()=>tint(true));n.on(Node.EventType.TOUCH_CANCEL,()=>tint(false));n.on(Node.EventType.TOUCH_END,()=>tint(false));
-  n.on(Node.EventType.MOUSE_ENTER,()=>tint(true));n.on(Node.EventType.MOUSE_LEAVE,()=>tint(false));
+  bindButtonFeedback(n,button,state=>tint(state!=='idle'));
   n.on(Button.EventType.CLICK,()=>this.hud.actions.click(action));this.controls.push(text);
  }
  private layoutContinue(){

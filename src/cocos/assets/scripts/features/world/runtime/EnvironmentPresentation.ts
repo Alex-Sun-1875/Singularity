@@ -2,14 +2,17 @@ import {Color,Node,PointLight,Vec3,ParticleSystem} from 'cc';
 import type {GameSession} from '../../../core/GameSession';
 import type {SceneBuilder} from './SceneBuilder';
 import {VfxAssets,constant} from '../../../shared/assets/VfxAssets';
+import {EarlyChapterPresentation} from '../../campaign/runtime/EarlyChapterPresentation';
 
 export type PracticalSource={node:Node;kind:'lantern'|'candlestick'|'firepit';height:number};
 
 /** Native environmental light/particles only; never changes navigation or state. */
 export class EnvironmentPresentation {
  private root:Node;
+ private early:EarlyChapterPresentation;
  private sources:PracticalSource[]=[];private existing:PointLight[]=[];private pools:{node:Node;light:PointLight;flame:Node;system:ParticleSystem;source:PracticalSource}[]=[];private lightTime=-100;private lightPosition={x:Infinity,z:Infinity};
  constructor(private readonly world:SceneBuilder,sources:PracticalSource[]){
+  this.early=new EarlyChapterPresentation(world);
   this.root=new Node('EnvironmentalPresentation');world.root.addChild(this.root);
   this.existing=world.root.getComponentsInChildren(PointLight);const budget=Math.max(0,6-this.existing.length);
   this.sources=sources.filter(source=>!this.existing.some(light=>Vec3.distance(light.node.worldPosition,source.node.worldPosition)<2.2));
@@ -39,6 +42,7 @@ export class EnvironmentPresentation {
  update(game:GameSession):void {
   // Character heading belongs to MiniMap; combat ranges belong to Effects.
   this.nearbyLights(game);
+  this.early.update(game);
  }
- destroy():void {this.root.destroy();}
+ destroy():void {this.early.destroy();this.root.destroy();}
 }

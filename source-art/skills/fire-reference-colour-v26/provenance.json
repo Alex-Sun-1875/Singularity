@@ -1,0 +1,48 @@
+{
+  "method": "deterministic original foreground/background colour separation + conditional colour/opacity distribution mapping, no generation",
+  "reference": "../fire-selected-reference-v18/user-selected-effect.jpg",
+  "referenceSha256": "52b78fa21809693c830796ed479eb42acb545258f19286c0ff80f1d4acc20b36",
+  "seal": "Original per-pixel RGB and physically valid alpha, not a flat recolour. No added blur or glow. Original visible rings and curves retained, including light passing in front of the source staff area. Hidden ground strokes are not invented. Native core RGB residual is compensated by 1.016/1.052/1.095, measured against the selected reference.",
+  "flame": "v24 continuous atlas flow and silhouette preserved. Red-dominant reference foreground colours provide green/red quantiles and conditional blue/red values. Opacity quantiles restore transparent haze versus bright cores; the shader no longer uniformly dims the cores.",
+  "palette": {
+    "low": [
+      0.9999999999999999,
+      0.44428745295748784,
+      0.060644930714622146
+    ],
+    "mid": [
+      1.0,
+      0.5721755368814193,
+      0.23047807026630324
+    ],
+    "high": [
+      1.0,
+      0.7450980392156863,
+      0.3686274509803922
+    ]
+  },
+  "foregroundRoundTrip": {
+    "opaqueReferencePixelCount": 593,
+    "maximumChannelError255": 1.4155343563970746e-14
+  },
+  "displayColour": "Custom transparent pass consumes these artist display colours directly, without an additional SRGBToLinear or display transfer. Final native result is separately checked.",
+  "outputs": {
+    "fire-ground-jets-v26": "bbfc0b54476f5af08e75d7f81b8e05cb8bfb52ae7393f3a720e9c373062572f3",
+    "fire-jet-seal-v26": "5682e9f0e23361a1bc1a57f717d17ccc0a9099e0dd7f42b29f09da67bf2a2748"
+  },
+  "artAcceptance": "Final normal-range native comparison inspected; user acceptance pending",
+  "taptapDevice": "pending",
+  "brightFilamentReferenceMedianRGB": [
+    255,
+    228,
+    110.5
+  ],
+  "nativeRingCoreMedianRGB": [
+    252.5,
+    205.0,
+    119.0
+  ],
+  "nativeColourReview": "colour-review.json",
+  "userFeedback": "Central bright line read as lightning; flame shape and seal colour were not accepted. Superseded by v27 reference wisps and filled translucent centre.",
+  "supersededBy": "../fire-reference-wisps-v27/README.md"
+}

@@ -22,6 +22,10 @@ src/cocos/assets/scripts/
     progression/         属性、技能成长与配置
     pets/                伙伴成长、天性与特性、共鸣与蜕变、角色增益与管理界面
     equipment/           装备、掉落与行囊
+    redemption/          兑换码、自选礼包与领取来源账本
+    economy/             章节金币预算、实际来源分配与溢出钱包
+    trading/             商人服务、商品报价、现场购买与格子货架
+    gems/                宝石来源重放、孔位、合成与培养界面
     crafting/            锻造
     persistence/         存档及持久化校验
     actors/              2D/3D 人物呈现

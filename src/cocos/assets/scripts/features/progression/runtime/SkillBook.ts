@@ -15,6 +15,7 @@ import {FeedbackView as F} from '../../../shared/ui/FeedbackView';
 import {PreparationSkin as P} from '../../../shared/ui/PreparationSkin';
 import {PreparationControls as Controls} from '../../../shared/ui/PreparationControls';
 import {FrameCache} from '../../../shared/assets/FrameCache';
+import {PREPARATION_DESIGN as D} from '../../../shared/ui/PreparationTheme';
 
 type View={family:CombatStyle;selected:string;activeFamily?:CombatStyle;draft?:Record<string,number>;token?:string;notice?:string;scroll?:number};
 const views=new WeakMap<GameSession,View>();
@@ -58,10 +59,12 @@ export function renderCombatPanel(hud:Hud,game:GameSession,tab:'skills'|'growth'
  const row=hu+gap,list=ui.scroll(catalog,0,ui.y((a+mainBottom)/2)-ui.bodyY,316*u,(mainBottom-a)*u,skills.length*row*u);list.name='CombatSkillListContent';const scroll=list.parent!.parent!.getComponent(ScrollView)!;if(v.scroll)scroll.scrollToOffset(new Vec2(0,v.scroll),0);
  skills.forEach((skill,i)=>{
   const model=models.find(m=>m.id===skill.id)!,rank=game.state.progression.learned[skill.id]??0,n=ui.button(list,'',0,(-hu/2-i*row)*u,310*u,'CombatSkill:'+skill.id,true,false,ui.hit,()=>{v.selected=skill.id;v.scroll=scroll.getScrollOffset().y;renderCombatPanel(hud,game);},'catalog');
-  Controls.rowBackground(ui,n,310,hu-4,v.selected===skill.id);
-  skillIcon(ui,n,skill.id,40).setPosition(-123*u,0);const title=ui.text(n,skill.name,-14*u,7*u,154*u,24*u,model.unlocked?C.ink:C.muted,16.5*u);title.enableWrapText=false;title.overflow=Label.Overflow.SHRINK;
-  ui.text(n,skillRoleLabel(skill),-14*u,-15*u,154*u,18*u,C.muted,11.5*u);
-  const level=ui.text(n,model.unlocked?`${rank}级`:`Lv.${model.requiredLevel}`,112*u,0,72*u,26*u,C.gold,13*u);level.horizontalAlign=Label.HorizontalAlign.RIGHT;
+  const style=D.combatSkillRow,frameHeight=hu-style.frameInset*2;
+  Controls.rowBackground(ui,n,style.width,frameHeight,v.selected===skill.id);
+  skillIcon(ui,n,skill.id,Math.min(style.iconSize,frameHeight-6)).setPosition(style.iconX*u,0);
+  const title=ui.text(n,skill.name,style.nameX*u,style.titleY*u,style.nameWidth*u,style.titleHeight*u,model.unlocked?C.ink:C.muted,style.titleFont*u);title.enableWrapText=false;title.overflow=Label.Overflow.SHRINK;
+  ui.text(n,skillRoleLabel(skill),style.nameX*u,style.roleY*u,style.nameWidth*u,style.roleHeight*u,C.muted,style.roleFont*u);
+  const level=ui.text(n,model.unlocked?`${rank}级`:`Lv.${model.requiredLevel}`,style.levelX*u,0,style.levelWidth*u,style.levelHeight*u,model.unlocked?F.color('text.normal'):C.muted,style.levelFont*u);level.horizontalAlign=Label.HorizontalAlign.RIGHT;
  });
  const skill=COMBAT_SKILLS[v.selected],model=models.find(m=>m.id===skill.id)!,rank=game.state.progression.learned[skill.id]??0,current=skill.ranks[Math.max(0,rank-1)],next=skill.ranks[rank];
  skillIcon(ui,ui.panel,skill.id,43).setPosition(ui.x(568),ui.y(a+25));T(skill.name,710,a+15,212,30,21);T(model.unlocked?`${rank}级 / 5级 · ${skillRoleLabel(skill)}`:`Lv.${model.requiredLevel} 开放`,714,a+41,218,25,13,C.gold);P.rule(ui,ui.panel,ui.x(690),ui.y(a+57),274);

@@ -1,4 +1,4 @@
-import {_decorator,ButtonComponent as Button,Component,EventTouch,Node,UITransform} from 'cc';
+import {_decorator,ButtonComponent as Button,Component,EventTouch,Game,game,Node,ScrollView,UITransform} from 'cc';
 
 const {ccclass}=_decorator;
 export type ButtonFeedbackState='idle'|'hover'|'pressed';
@@ -13,6 +13,7 @@ export class ButtonFeedback extends Component {
  private touching=false;
  private state:ButtonFeedbackState='idle';
  private listening=false;
+ private scrolls:Node[]=[];
 
  configure(button:Button,paint:(state:ButtonFeedbackState)=>void):this {
   this.button=button;this.paint=paint;
@@ -24,6 +25,11 @@ export class ButtonFeedback extends Component {
    this.node.on(Node.EventType.TOUCH_MOVE,this.move,this);
    this.node.on(Node.EventType.TOUCH_END,this.end,this);
    this.node.on(Node.EventType.TOUCH_CANCEL,this.reset,this);
+   game.on(Game.EVENT_HIDE,this.cancel,this);
+  }
+  for(const node of this.scrolls)node.targetOff(this);this.scrolls=[];
+  for(let parent=this.node.parent;parent;parent=parent.parent)if(parent.getComponent(ScrollView)){
+   parent.on(ScrollView.EventType.SCROLLING,this.cancel,this);this.scrolls.push(parent);
   }
   this.reset();return this;
  }
@@ -56,9 +62,10 @@ export class ButtonFeedback extends Component {
   this.apply();
  }
  private end():void {this.touching=false;this.pressed=false;this.apply();}
+ private cancel():void {if(this.state!=='idle'||this.hovered||this.pressed||this.touching)this.reset();}
  update():void {if(!this.available())this.reset();}
  onDisable():void {if(this.state!=='idle'||this.hovered||this.pressed||this.touching)this.reset();}
- onDestroy():void {this.node.targetOff(this);this.paint=null;this.button=null;}
+ onDestroy():void {this.node.targetOff(this);for(const node of this.scrolls)if(node.isValid)node.targetOff(this);game.targetOff(this);this.paint=null;this.button=null;}
 }
 
 export function bindButtonFeedback(node:Node,button:Button,paint:(state:ButtonFeedbackState)=>void):ButtonFeedback {

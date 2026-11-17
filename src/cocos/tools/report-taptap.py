@@ -11,6 +11,37 @@ from pathlib import Path, PurePosixPath
 PROJECT = Path(__file__).resolve().parents[1]
 
 
+def verify_selective_routes(game, packages):
+    """Every generated logical route must resolve in its real exported bundle."""
+    text = (PROJECT / 'assets/scripts/shared/assets/ResourcePacks.ts').read_text(encoding='utf-8')
+    match = re.search(r'RESOURCE_ASSET_PACKS:[^=]+?=\s*(\{.*\});', text, re.S)
+    routes = json.loads(match.group(1)) if match else {}
+    roots = {p['name']: game / p['root'] for p in packages}
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/'
+    exported = {}
+    counts = {}
+    for logical, route in routes.items():
+        name, asset_uuid = route['bundle'], route['uuid']
+        if name not in exported:
+            if name not in roots:
+                raise SystemExit('Selective subpackage missing: ' + name)
+            config = next(roots[name].glob('config*.json'), None)
+            if not config:
+                raise SystemExit('Selective bundle config missing: ' + name)
+            exported[name] = set(json.loads(config.read_text(encoding='utf-8'))['uuids'])
+        base, separator, sub = asset_uuid.partition('@')
+        value = base.replace('-', '')
+        compact = value[:2] + ''.join(alphabet[int(value[i:i+3], 16) >> 6] +
+                                      alphabet[int(value[i:i+3], 16) & 63]
+                                      for i in range(2, 32, 3))
+        if separator:
+            compact += '@' + sub
+        if asset_uuid not in exported[name] and compact not in exported[name]:
+            raise SystemExit('Selective asset was not exported: ' + name + '/' + logical)
+        counts[name] = counts.get(name, 0) + 1
+    return {'checkedRoutes': len(routes), 'bundles': counts}
+
+
 def inspect_wasm(game, packages, enabled, all_files):
     """Check the Cocos transport split; never infer platform function splitting."""
     pack_names = {'__ccWasmAssetSubpkg__', '__ccWasmChunkSubpkg__'}
@@ -151,6 +182,7 @@ def measure(root, output, browser_report=None):
         main_files = [p for p in main_files if p not in members]
         report_packs.append({'name': pack['name'], 'root': str(relative), 'files': len(files),
                              'rawBytes': sum(p.stat().st_size for p in files)})
+    selective_validation = verify_selective_routes(game, packages)
     first_zip = output / 'checks/initial.zip'
     first_zip.parent.mkdir(parents=True, exist_ok=True)
     with zipfile.ZipFile(first_zip, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as archive:
@@ -173,7 +205,7 @@ def measure(root, output, browser_report=None):
         pack['deflatedContentBytes'] = sum(size for name, size in compressed_files.items() if name.startswith(prefix))
     with upload_zip.open('rb') as stream:
         upload_hash = hashlib.file_digest(stream, 'sha256').hexdigest()
-    expected_packs = {p['name'] for p in plan['packs']}
+    expected_packs = {p['name'] for p in plan['packs']} | {p['name'] for p in plan['profile'].get('selectivePacks', [])}
     actual_packs = {p['name'] for p in report_packs}
     # Cocos also emits built-in resources, WASM packs and tiny wrappers for
     # disabled comparison bundles. Keep them visible in the accounting.
@@ -181,7 +213,7 @@ def measure(root, output, browser_report=None):
     allowed_extra |= {p['name'] for p in plan['bundles'] if not p.get('output', True)}
     if expected_packs - actual_packs or actual_packs - expected_packs - allowed_extra:
         raise SystemExit('Resource split not applied: missing=' + str(expected_packs-actual_packs)
-                         + ', unexpected=' + str(actual_packs-expected_packs))
+                         + ', unexpected=' + str(actual_packs-expected_packs-allowed_extra))
     # Validate Cocos' generated dependency graph, rather than hand-coding cross-package require paths.
     manifests = {}
     for filename in list((game / 'assets').glob('*/config*.json')) + list((game / 'subpackages').glob('*/config*.json')):
@@ -231,6 +263,7 @@ def measure(root, output, browser_report=None):
                   'excludedAssets': plan.get('excludedAssets', []),
                   'note': 'Source files are preserved. These build filters are not measured ZIP savings; Cocos still includes required dependencies.'},
               'wasm': wasm,
+              'selectiveAssetValidation': selective_validation,
               'limitations': ['No upload or TapTap real-device validation.',
                              'Platform acceptance of the full upload ZIP size is unverified.',
                              'Initial payload excludes on-demand packs required before gameplay.',

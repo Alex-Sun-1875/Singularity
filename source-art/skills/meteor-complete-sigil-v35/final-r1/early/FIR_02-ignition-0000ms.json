@@ -1,0 +1,330 @@
+{
+  "frame": 37,
+  "time": 1.4666666666666663,
+  "seed": 73015,
+  "sequence": 1,
+  "revision": 117,
+  "cameraHeight": 4.3,
+  "cameraGroundVerticalFactor": 0.636767285752247,
+  "castAge": 0.8499999999999994,
+  "impactAge": 0.016666666666666607,
+  "ground": {
+    "capacity": 8,
+    "allocated": 1,
+    "active": [
+      {
+        "key": "meteor-seal:cast:1",
+        "kind": "meteorSeal",
+        "opacity": 0.9,
+        "emitters": 1,
+        "triangles": 72,
+        "vertices": 49,
+        "frames": []
+      }
+    ],
+    "cameraBound": true
+  },
+  "fire": {
+    "model": "distinct-fire-shapes-v30",
+    "capacity": 76,
+    "allocated": 3,
+    "sharedTextures": 3,
+    "field": {
+      "model": "connected-fire-field-v30",
+      "capacity": 4,
+      "allocated": 0,
+      "active": []
+    },
+    "impact": {
+      "model": "fixed-support-radial-ignition-v34",
+      "capacity": 8,
+      "allocated": 1,
+      "sharedMaterials": 1,
+      "cameraBound": true,
+      "active": [
+        {
+          "key": "impact:cast:1:0",
+          "kind": "meteor",
+          "radius": 3.8,
+          "progress": 0.0203703703703703,
+          "phase": 0.0203703703703703,
+          "frameBlend": 0.19999999999998863,
+          "atlasFrame": 3,
+          "time": 1.4666666666666663,
+          "age": 0.016666666666666607,
+          "footprintRadius": 3.8,
+          "supportWidth": 8.36,
+          "supportDepth": 6.475699373660799,
+          "geometryScale": 1,
+          "ignitionProgress": 0,
+          "frontRadius": 0.45599999999999996,
+          "layers": 1,
+          "lobes": 1,
+          "cards": 1,
+          "peakHeight": 2.5248839988062386,
+          "width": 10.58083113140222,
+          "height": 2.4798839988062387,
+          "position": {
+            "x": 0,
+            "y": 0.045,
+            "z": -4
+          },
+          "vertices": 884,
+          "triangles": 1650,
+          "maxHeight": 2.4798839988062387,
+          "clippedDirections": 0
+        }
+      ]
+    },
+    "active": [
+      {
+        "key": "cast:cast:1:flame",
+        "kind": "wake",
+        "phase": 19,
+        "frameBlend": 0.3888888888889781,
+        "textureId": 0,
+        "region": 0,
+        "width": 0.47577600000000003,
+        "height": 0.7374528,
+        "viewBias": 0,
+        "position": {
+          "x": 0.16670225832725688,
+          "y": 1.5508315496216916,
+          "z": -7.235322254546509
+        }
+      },
+      {
+        "key": "meteor:cast:1",
+        "kind": "reference-comet",
+        "phase": 10,
+        "frameBlend": 0.19999999999998863,
+        "textureId": 2,
+        "region": 0,
+        "width": 5.5888800000000005,
+        "height": 2.0958300000000003,
+        "viewBias": 1.1527065000000003,
+        "position": {
+          "x": 0.000007071997348360171,
+          "y": 0.04501279999520065,
+          "z": -4.000004895998164
+        }
+      },
+      {
+        "key": "impact:cast:1:0",
+        "kind": "meteor",
+        "radius": 3.8,
+        "progress": 0.0203703703703703,
+        "phase": 0.0203703703703703,
+        "frameBlend": 0.19999999999998863,
+        "atlasFrame": 3,
+        "time": 1.4666666666666663,
+        "age": 0.016666666666666607,
+        "footprintRadius": 3.8,
+        "supportWidth": 8.36,
+        "supportDepth": 6.475699373660799,
+        "geometryScale": 1,
+        "ignitionProgress": 0,
+        "frontRadius": 0.45599999999999996,
+        "layers": 1,
+        "lobes": 1,
+        "cards": 1,
+        "peakHeight": 2.5248839988062386,
+        "width": 10.58083113140222,
+        "height": 2.4798839988062387,
+        "position": {
+          "x": 0,
+          "y": 0.045,
+          "z": -4
+        },
+        "vertices": 884,
+        "triangles": 1650,
+        "maxHeight": 2.4798839988062387,
+        "clippedDirections": 0
+      }
+    ]
+  },
+  "meteor": {
+    "model": "reference-nose-anchored-comet-v32",
+    "capacity": 4,
+    "sharedRockMeshes": 1,
+    "sharedRockMaterials": 1,
+    "leadingSupport": {
+      "x": 0.213878,
+      "y": -0.5,
+      "z": 0.006679
+    },
+    "opaqueRockMeshes": 1,
+    "active": [
+      {
+        "key": "meteor:cast:1",
+        "rockVisible": true,
+        "progress": 0.999999,
+        "size": 1.1600000000000001,
+        "rockScale": {
+          "x": 0.5336000000000001,
+          "y": 0.9512,
+          "z": 0.5104000000000001
+        },
+        "target": {
+          "x": 0,
+          "y": 0.045,
+          "z": -4
+        },
+        "nose": {
+          "x": 0.000007071997348360171,
+          "y": 0.04501279999520065,
+          "z": -4.000004895998164
+        },
+        "bodyCentre": {
+          "x": 0.14413014220380352,
+          "y": 0.5033371783496086,
+          "z": -4.091650245810315
+        },
+        "direction": {
+          "x": -0.45857926337390725,
+          "y": -0.8300077165138593,
+          "z": 0.3174779515665512
+        },
+        "position": {
+          "x": 0.000007071997348360171,
+          "y": 0.04501279999520065,
+          "z": -4.000004895998164
+        },
+        "screen": {
+          "nose": {
+            "x": 773.7415303902059,
+            "y": 294.63494210452757
+          },
+          "target": {
+            "x": 773.740263241481,
+            "y": 294.6335544944963
+          },
+          "projectedDescentAngleDegrees": 47.59804902434527
+        }
+      }
+    ]
+  },
+  "shield": {
+    "visible": false,
+    "amount": 0,
+    "start": null,
+    "until": null,
+    "opacity": 0,
+    "patternOpacity": 0,
+    "broken": false,
+    "hitAt": null,
+    "position": {
+      "x": 0,
+      "y": 1,
+      "z": -8
+    },
+    "scale": {
+      "x": 1.88,
+      "y": 2.68,
+      "z": 1.88
+    },
+    "vertices": 625,
+    "triangles": 1152,
+    "passes": 2
+  },
+  "native": {
+    "cues": [
+      {
+        "kind": "drop",
+        "skillId": "FIR_02",
+        "castId": "cast:1",
+        "eventType": "skill_cast",
+        "start": 0.6166666666666669,
+        "age": 0.8499999999999994,
+        "duration": 0.85,
+        "target": {
+          "x": 0,
+          "z": -4
+        },
+        "from": {
+          "x": 0,
+          "z": -8
+        },
+        "to": {
+          "x": 0,
+          "z": -4
+        },
+        "geometry": {
+          "kind": "filledImpactDisk",
+          "origin": "aimPoint",
+          "radiusMetres": 3.8,
+          "widthMetres": 0,
+          "lengthMetres": 0,
+          "depthMetres": 0,
+          "angleDegrees": 0
+        }
+      },
+      {
+        "kind": "blast",
+        "skillId": "FIR_02",
+        "castId": "cast:1",
+        "eventType": "skill_segment",
+        "start": 1.4499999999999997,
+        "age": 0.016666666666666607,
+        "duration": 4.55,
+        "target": {
+          "x": 0,
+          "z": -4
+        },
+        "from": {
+          "x": 0,
+          "z": -8
+        },
+        "to": {
+          "x": 0,
+          "z": -4
+        },
+        "geometry": {
+          "kind": "filledImpactDisk",
+          "origin": "aimPoint",
+          "radiusMetres": 3.8,
+          "widthMetres": 0,
+          "lengthMetres": 0,
+          "depthMetres": 0,
+          "angleDegrees": 0
+        }
+      }
+    ],
+    "particles": {
+      "allocated": 11,
+      "active": 11
+    },
+    "linePool": 0,
+    "bodyPool": 0
+  },
+  "hits": 4,
+  "damage": 812,
+  "misses": 1,
+  "criticalHits": 0,
+  "cooldowns": {
+    "FIR_02": 11.983333333333333,
+    "open:training:target:0": 4.983333333333333,
+    "open:training:target:1": 4.983333333333333,
+    "open:training:target:2": 4.983333333333333,
+    "open:training:target:4": 4.983333333333333
+  },
+  "ultimateLock": 1.4833333333333334,
+  "casts": [
+    {
+      "id": "cast:1",
+      "skillId": "FIR_02",
+      "elapsed": 0.8666666666666677,
+      "released": true,
+      "targets": [],
+      "hits": [
+        "0:training:target:0",
+        "0:training:target:1",
+        "0:training:target:2",
+        "0:training:target:4"
+      ]
+    }
+  ],
+  "projectiles": [],
+  "requestedImpactAge": 0,
+  "samplingQualification": "Nearest actual exported30fps frame; requested ages can share a frame. No interpolation or retiming."
+}

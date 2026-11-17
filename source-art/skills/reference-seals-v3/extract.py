@@ -51,15 +51,35 @@ def extract():
         colour = base[None,None,:]*(1-brightness[:,:,None])+hot[None,None,:]*brightness[:,:,None]
         rgba = np.dstack((colour,alpha*255)).astype(np.uint8)
         cropped = Image.fromarray(rgba)
+        cropped.save(HERE/'assets'/f'{key}-plane.png')
         src = [(x-x0,y-y0) for x,y in style['cardinals']]
         dest = [(512,512-EXTENT),(512+EXTENT,512),(512,512+EXTENT),(512-EXTENT,512)]
         transform = mapping(src,dest)
         texture = cropped.transform((SIZE,SIZE),Image.Transform.PERSPECTIVE,transform,Image.Resampling.BICUBIC)
+        yy,xx=np.indices((SIZE,SIZE))
+        radial=np.sqrt((xx-512)**2+(yy-512)**2)/EXTENT
+        perimeter=np.clip((1.065-radial)/.025,0,1)
+        texture.putalpha(Image.fromarray(np.uint8(np.asarray(texture.getchannel('A'),dtype=np.float32)*perimeter)))
         # Warp straight RGBA in premultiplied space through Pillow, preserving fine points.
         texture.save(HERE/'assets'/f'{key}.png')
         glow = texture.filter(ImageFilter.GaussianBlur(4.2))
         glow.save(HERE/'assets'/f'{key}-glow.png')
         crop.save(HERE/'assets'/f'{key}-source.png')
+        ground = np.asarray(crop,dtype=np.float32).copy()
+        unknown = np.asarray(Image.fromarray((alpha>.025).astype(np.uint8)*255).filter(ImageFilter.MaxFilter(5)))>0
+        known = ~unknown
+        for _ in range(24):
+            total = np.zeros_like(ground)
+            count = np.zeros_like(alpha)
+            for dy,dx in [(-1,0),(1,0),(0,-1),(0,1),(-1,-1),(-1,1),(1,-1),(1,1)]:
+                shifted = np.roll(known,(dy,dx),(0,1))
+                total += np.roll(ground,(dy,dx),(0,1))*shifted[:,:,None]
+                count += shifted
+            fill = ~known & (count>0)
+            ground[fill] = total[fill]/count[fill,None]
+            known[fill] = True
+            if known.all():break
+        Image.fromarray(np.clip(ground,0,255).astype(np.uint8)).save(HERE/'assets'/f'{key}-ground.png')
     data = {'sourceSHA256':hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
             'method':'Class-channel extraction, inverse perspective and alpha separation. Original drawing retained.',
             'reference':'../four-class-vfx-redesign-v1/02-first-style-class-colors-v5.png',

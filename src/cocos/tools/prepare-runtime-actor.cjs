@@ -70,6 +70,8 @@ function pack(g,bin,replacements=new Map()){
  // Keep used material names stable for NativeActorMaterials' manifest matching.
  manifest.triangles=main.meshes.reduce((n,m)=>n+m.primitives.reduce((n,p)=>n+g.accessors[p.indices].count/3,0),0);
  manifest.runtimeGeometry={revision:'runtime-actor-v2',baseTriangles:manifest.triangles,selectedHairstyleOnly:true,sourceTriangles:g.meshes.reduce((n,m)=>n+m.primitives.reduce((n,p)=>n+g.accessors[p.indices].count/3,0),0)};
+ // Hair is mounted by selection, not part of the eager body-texture warmup.
+ for(const record of manifest.materials??[])if(Object.values(record.maps??{}).some(p=>p.includes('/hairstyles-v3/')))record.parts=[...new Set([...(record.parts??[]),'hair'])];
  manifest.fbx=path.relative(folder,path.join(archive,'legacy/raphael.fbx')).replaceAll('\\','/');
  const mainOutput=pack(main,bin);outputs.set(file,mainOutput);
  const verified=unpack(mainOutput);let unchanged=0;

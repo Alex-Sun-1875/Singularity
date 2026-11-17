@@ -1,0 +1,1455 @@
+{
+  "started": "2026-11-17T13:01:53.390Z",
+  "url": "http://127.0.0.1:7476/",
+  "status": "passed",
+  "scope": "Narrow real Cocos playback check for level-only replacement; not device/listening acceptance",
+  "stages": [
+    {
+      "name": "real-begin-and-three-audio-assets",
+      "diagnostic": "",
+      "started": "2026-11-17T13:01:53.805Z",
+      "data": {
+        "identity": {
+          "failure": "",
+          "isHtml": true,
+          "isTap": false,
+          "profile": "test",
+          "devHook": false
+        },
+        "button": {
+          "x": 640,
+          "y": 282.7667057444314
+        },
+        "music": {
+          "enabled": true,
+          "failed": false,
+          "requested": true,
+          "suspended": false,
+          "disposed": false,
+          "allowed": true,
+          "desired": "explore",
+          "active": "explore",
+          "available": "explore",
+          "transitionCount": 1,
+          "phaseSeekCount": 0,
+          "lastTransition": {
+            "sequence": 1,
+            "to": "explore",
+            "phaseSeek": false,
+            "reason": "initial"
+          },
+          "engagedFor": 0,
+          "peacefulFor": 0,
+          "battleQualified": false,
+          "contextArea": "S01-T1",
+          "aftermathCount": 0,
+          "aftermathCompleted": 0,
+          "sourceCount": 3,
+          "playingSourceCount": 1,
+          "tracks": [
+            {
+              "mode": "explore",
+              "path": "audio/music/embers-story-light-explore",
+              "loaded": true,
+              "loading": false,
+              "failed": false,
+              "requestedPlayback": true,
+              "playing": true,
+              "volume": 0.04605066667556763,
+              "currentTime": 0.247599999904633,
+              "duration": 80.065306,
+              "loop": true
+            },
+            {
+              "mode": "combat",
+              "path": "audio/music/embers-story-light-combat",
+              "loaded": true,
+              "loading": false,
+              "failed": false,
+              "requestedPlayback": false,
+              "playing": false,
+              "volume": 0,
+              "currentTime": 0,
+              "duration": 80.065306,
+              "loop": true
+            },
+            {
+              "mode": "aftermath",
+              "path": "audio/music/embers-oaths-aftermath",
+              "loaded": true,
+              "loading": false,
+              "failed": false,
+              "requestedPlayback": false,
+              "playing": false,
+              "volume": 0,
+              "currentTime": 0,
+              "duration": 15.046531,
+              "loop": false
+            }
+          ]
+        }
+      },
+      "result": "passed",
+      "finished": "2026-11-17T13:01:59.064Z"
+    },
+    {
+      "name": "actual-keyj-engagement-enters-combat",
+      "diagnostic": "Controlled target only; real keyboard input, damage, GameSession engagement and app-derived music context.",
+      "started": "2026-11-17T13:01:59.065Z",
+      "data": {
+        "fixture": {
+          "target": {
+            "id": "aftermath-web-target",
+            "kind": "shield",
+            "x": 0,
+            "z": -5.7,
+            "level": 1,
+            "hp": 100000,
+            "maxHp": 100000,
+            "angle": 3.141592653589793,
+            "phase": "recovery",
+            "phaseTime": 999,
+            "attackCount": 0,
+            "targetAngle": 3.141592653589793,
+            "attackKind": "swing",
+            "struck": false,
+            "markedUntil": 0,
+            "lightningUntil": 0,
+            "pushImmuneUntil": 0,
+            "staggerProtectedUntil": 0,
+            "halfAnnounced": false,
+            "trainingDummy": true,
+            "trainingAttacks": true
+          },
+          "player": {
+            "x": 0,
+            "z": -7
+          },
+          "note": "Recovery-held training dummy is non-attacking but remains a genuine threat for the normal engagement rules."
+        },
+        "music": {
+          "enabled": true,
+          "failed": false,
+          "requested": true,
+          "suspended": false,
+          "disposed": false,
+          "allowed": true,
+          "desired": "combat",
+          "active": "combat",
+          "available": "combat",
+          "transitionCount": 2,
+          "phaseSeekCount": 1,
+          "lastTransition": {
+            "sequence": 2,
+            "from": "explore",
+            "to": "combat",
+            "phaseSeek": true,
+            "outgoingTime": 0.9701999999284743,
+            "outgoingDuration": 80.065306,
+            "incomingDuration": 80.065306,
+            "targetTime": 0.9701999999284744,
+            "reason": "phase-seek-requested"
+          },
+          "engagedFor": 0.7,
+          "peacefulFor": 0,
+          "battleQualified": true,
+          "contextArea": "S01-T1",
+          "aftermathCount": 0,
+          "aftermathCompleted": 0,
+          "sourceCount": 3,
+          "playingSourceCount": 2,
+          "tracks": [
+            {
+              "mode": "explore",
+              "path": "audio/music/embers-story-light-explore",
+              "loaded": true,
+              "loading": false,
+              "failed": false,
+              "requestedPlayback": true,
+              "playing": true,
+              "volume": 0.16516266668001808,
+              "currentTime": 1.0297999999523162,
+              "duration": 80.065306,
+              "loop": true
+            },
+            {
+              "mode": "combat",
+              "path": "audio/music/embers-story-light-combat",
+              "loaded": true,
+              "loading": false,
+              "failed": false,
+              "requestedPlayback": true,
+              "playing": true,
+              "volume": 0.013029333324432376,
+              "currentTime": 1.0278999999761576,
+              "duration": 80.065306,
+              "loop": true
+            },
+            {
+              "mode": "aftermath",
+              "path": "audio/music/embers-oaths-aftermath",
+              "loaded": true,
+              "loading": false,
+              "failed": false,
+              "requestedPlayback": false,
+              "playing": false,
+              "volume": 0,
+              "currentTime": 0,
+              "duration": 15.046531,
+              "loop": false
+            }
+          ]
+        },
+        "events": [
+          {
+            "stage": "actual-keyj-engagement-enters-combat",
+            "at": 5371.600000023842,
+            "type": "hit",
+            "id": "aftermath-web-target",
+            "action": "action:1",
+            "hpLost": 20,
+            "engagement": {
+              "area": "S01-T1",
+              "enemyIds": [
+                "aftermath-web-target"
+              ]
+            }
+          },
+          {
+            "stage": "actual-keyj-engagement-enters-combat",
+            "at": 5371.600000023842,
+            "type": "enemy_recoil",
+            "id": "aftermath-web-target",
+            "action": "action:1",
+            "engagement": {
+              "area": "S01-T1",
+              "enemyIds": [
+                "aftermath-web-target"
+              ]
+            }
+          }
+        ]
+      },
+      "result": "passed",
+      "finished": "2026-11-17T13:01:59.846Z"
+    },
+    {
+      "name": "combat-mute-and-resume-current-clip",
+      "diagnostic": "Existing actual music mute/resume check. The unchanged 15s aftermath was fully exercised previously and is hash-verified here.",
+      "started": "2026-11-17T13:01:59.846Z",
+      "data": {
+        "before": {
+          "enabled": true,
+          "failed": false,
+          "requested": true,
+          "suspended": false,
+          "disposed": false,
+          "allowed": true,
+          "desired": "combat",
+          "active": "combat",
+          "available": "combat",
+          "transitionCount": 2,
+          "phaseSeekCount": 1,
+          "lastTransition": {
+            "sequence": 2,
+            "from": "explore",
+            "to": "combat",
+            "phaseSeek": true,
+            "outgoingTime": 0.9701999999284743,
+            "outgoingDuration": 80.065306,
+            "incomingDuration": 80.065306,
+            "targetTime": 0.9701999999284744,
+            "reason": "phase-seek-requested"
+          },
+          "engagedFor": 0.7,
+          "peacefulFor": 0,
+          "battleQualified": true,
+          "contextArea": "S01-T1",
+          "aftermathCount": 0,
+          "aftermathCompleted": 0,
+          "sourceCount": 3,
+          "playingSourceCount": 2,
+          "tracks": [
+            {
+              "mode": "explore",
+              "path": "audio/music/embers-story-light-explore",
+              "loaded": true,
+              "loading": false,
+              "failed": false,
+              "requestedPlayback": true,
+              "playing": true,
+              "volume": 0.16516266668001808,
+              "currentTime": 1.0340999999046323,
+              "duration": 80.065306,
+              "loop": true
+            },
+            {
+              "mode": "combat",
+              "path": "audio/music/embers-story-light-combat",
+              "loaded": true,
+              "loading": false,
+              "failed": false,
+              "requestedPlayback": true,
+              "playing": true,
+              "volume": 0.013029333324432376,
+              "currentTime": 1.0321999999284737,
+              "duration": 80.065306,
+              "loop": true
+            },
+            {
+              "mode": "aftermath",
+              "path": "audio/music/embers-oaths-aftermath",
+              "loaded": true,
+              "loading": false,
+              "failed": false,
+              "requestedPlayback": false,
+              "playing": false,
+              "volume": 0,
+              "currentTime": 0,
+              "duration": 15.046531,
+              "loop": false
+            }
+          ]
+        },
+        "muted": {
+          "enabled": false,
+          "failed": false,
+          "requested": true,
+          "suspended": false,
+          "disposed": false,
+          "allowed": true,
+          "desired": "combat",
+          "active": "combat",
+          "available": "combat",
+          "transitionCount": 2,
+          "phaseSeekCount": 1,
+          "lastTransition": {
+            "sequence": 2,
+            "from": "explore",
+            "to": "combat",
+            "phaseSeek": true,
+            "outgoingTime": 0.9701999999284743,
+            "outgoingDuration": 80.065306,
+            "incomingDuration": 80.065306,
+            "targetTime": 0.9701999999284744,
+            "reason": "phase-seek-requested"
+          },
+          "engagedFor": 0.7,
+          "peacefulFor": 0,
+          "battleQualified": true,
+          "contextArea": "S01-T1",
+          "aftermathCount": 0,
+          "aftermathCompleted": 0,
+          "sourceCount": 3,
+          "playingSourceCount": 0,
+          "tracks": [
+            {
+              "mode": "explore",
+              "path": "audio/music/embers-story-light-explore",
+              "loaded": true,
+              "loading": false,
+              "failed": false,
+              "requestedPlayback": false,
+              "playing": false,
+              "volume": 0,
+              "currentTime": 1.0350999999046326,
+              "duration": 80.065306,
+              "loop": true
+            },
+            {
+              "mode": "combat",
+              "path": "audio/music/embers-story-light-combat",
+              "loaded": true,
+              "loading": false,
+              "failed": false,
+              "requestedPlayback": false,
+              "playing": false,
+              "volume": 0,
+              "currentTime": 1.033299999952316,
+              "duration": 80.065306,
+              "loop": true
+            },
+            {
+              "mode": "aftermath",
+              "path": "audio/music/embers-oaths-aftermath",
+              "loaded": true,
+              "loading": false,
+              "failed": false,
+              "requestedPlayback": false,
+              "playing": false,
+              "volume": 0,
+              "currentTime": 0,
+              "duration": 15.046531,
+              "loop": false
+            }
+          ]
+        },
+        "after": {
+          "enabled": true,
+          "failed": false,
+          "requested": true,
+          "suspended": false,
+          "disposed": false,
+          "allowed": true,
+          "desired": "combat",
+          "active": "combat",
+          "available": "combat",
+          "transitionCount": 2,
+          "phaseSeekCount": 1,
+          "lastTransition": {
+            "sequence": 2,
+            "from": "explore",
+            "to": "combat",
+            "phaseSeek": true,
+            "outgoingTime": 0.9701999999284743,
+            "outgoingDuration": 80.065306,
+            "incomingDuration": 80.065306,
+            "targetTime": 0.9701999999284744,
+            "reason": "phase-seek-requested"
+          },
+          "engagedFor": 0.7,
+          "peacefulFor": 0,
+          "battleQualified": true,
+          "contextArea": "S01-T1",
+          "aftermathCount": 0,
+          "aftermathCompleted": 0,
+          "sourceCount": 3,
+          "playingSourceCount": 1,
+          "tracks": [
+            {
+              "mode": "explore",
+              "path": "audio/music/embers-story-light-explore",
+              "loaded": true,
+              "loading": false,
+              "failed": false,
+              "requestedPlayback": false,
+              "playing": false,
+              "volume": 0,
+              "currentTime": 1.0350999999046326,
+              "duration": 80.065306,
+              "loop": true
+            },
+            {
+              "mode": "combat",
+              "path": "audio/music/embers-story-light-combat",
+              "loaded": true,
+              "loading": false,
+              "failed": false,
+              "requestedPlayback": true,
+              "playing": true,
+              "volume": 0,
+              "currentTime": 1.0352999999523158,
+              "duration": 80.065306,
+              "loop": true
+            },
+            {
+              "mode": "aftermath",
+              "path": "audio/music/embers-oaths-aftermath",
+              "loaded": true,
+              "loading": false,
+              "failed": false,
+              "requestedPlayback": false,
+              "playing": false,
+              "volume": 0,
+              "currentTime": 0,
+              "duration": 15.046531,
+              "loop": false
+            }
+          ]
+        }
+      },
+      "result": "passed",
+      "finished": "2026-11-17T13:02:00.075Z"
+    }
+  ],
+  "console": [],
+  "pageErrors": [],
+  "networkFailures": [],
+  "httpErrors": [],
+  "audioRequests": [
+    "http://127.0.0.1:7476/assets/background-music/config.87189.json",
+    "http://127.0.0.1:7476/assets/background-music/index.87189.js",
+    "http://127.0.0.1:7476/assets/background-music/import/45/4526e857-41fe-447f-a538-50525d18f8b2.30e11.json",
+    "http://127.0.0.1:7476/assets/background-music/native/45/4526e857-41fe-447f-a538-50525d18f8b2.cec74.mp3",
+    "http://127.0.0.1:7476/assets/background-music/import/a8/a80b5f5d-8ddd-4f42-8151-2eb556c0ad06.8a10d.json",
+    "http://127.0.0.1:7476/assets/background-music/native/a8/a80b5f5d-8ddd-4f42-8151-2eb556c0ad06.63e14.mp3",
+    "http://127.0.0.1:7476/assets/background-music/import/b1/b13ecfbb-d3df-4f8d-a274-24b37d375417.bc2e0.json",
+    "http://127.0.0.1:7476/assets/background-music/native/b1/b13ecfbb-d3df-4f8d-a274-24b37d375417.4574a.mp3"
+  ],
+  "limitations": [
+    "Controlled stationary target and real J input establish music release playback, not normal progression.",
+    "The byte-identical aftermath is loaded but its full unchanged timeline is not repeated.",
+    "Audio level separation is established by score/fixed-gain checks, not browser auditory judgement."
+  ],
+  "final": {
+    "music": {
+      "enabled": true,
+      "failed": false,
+      "requested": true,
+      "suspended": false,
+      "disposed": false,
+      "allowed": true,
+      "desired": "combat",
+      "active": "combat",
+      "available": "combat",
+      "transitionCount": 2,
+      "phaseSeekCount": 1,
+      "lastTransition": {
+        "sequence": 2,
+        "from": "explore",
+        "to": "combat",
+        "phaseSeek": true,
+        "outgoingTime": 0.9701999999284743,
+        "outgoingDuration": 80.065306,
+        "incomingDuration": 80.065306,
+        "targetTime": 0.9701999999284744,
+        "reason": "phase-seek-requested"
+      },
+      "engagedFor": 0.7,
+      "peacefulFor": 0,
+      "battleQualified": true,
+      "contextArea": "S01-T1",
+      "aftermathCount": 0,
+      "aftermathCompleted": 0,
+      "sourceCount": 3,
+      "playingSourceCount": 1,
+      "tracks": [
+        {
+          "mode": "explore",
+          "path": "audio/music/embers-story-light-explore",
+          "loaded": true,
+          "loading": false,
+          "failed": false,
+          "requestedPlayback": false,
+          "playing": false,
+          "volume": 0,
+          "currentTime": 1.0350999999046326,
+          "duration": 80.065306,
+          "loop": true
+        },
+        {
+          "mode": "combat",
+          "path": "audio/music/embers-story-light-combat",
+          "loaded": true,
+          "loading": false,
+          "failed": false,
+          "requestedPlayback": true,
+          "playing": true,
+          "volume": 0,
+          "currentTime": 1.036899999976158,
+          "duration": 80.065306,
+          "loop": true
+        },
+        {
+          "mode": "aftermath",
+          "path": "audio/music/embers-oaths-aftermath",
+          "loaded": true,
+          "loading": false,
+          "failed": false,
+          "requestedPlayback": false,
+          "playing": false,
+          "volume": 0,
+          "currentTime": 0,
+          "duration": 15.046531,
+          "loop": false
+        }
+      ]
+    },
+    "starts": [
+      {
+        "stage": "boot",
+        "mode": "explore",
+        "at": 4998.5,
+        "currentTime": 0.00019999992847452575,
+        "loop": true,
+        "count": 0
+      },
+      {
+        "stage": "actual-keyj-engagement-enters-combat",
+        "mode": "combat",
+        "at": 5970.399999976158,
+        "currentTime": 0.9702999999523164,
+        "loop": true,
+        "count": 0
+      },
+      {
+        "stage": "combat-mute-and-resume-current-clip",
+        "mode": "combat",
+        "at": 6256.700000047684,
+        "currentTime": 1.033399999976158,
+        "loop": true,
+        "count": 0
+      }
+    ],
+    "events": [
+      {
+        "stage": "boot",
+        "at": 4797,
+        "type": "campaign_scene",
+        "id": "border-arrival",
+        "engagement": null
+      },
+      {
+        "stage": "actual-keyj-engagement-enters-combat",
+        "at": 5262.200000047684,
+        "type": "action",
+        "id": "action:1",
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      },
+      {
+        "stage": "actual-keyj-engagement-enters-combat",
+        "at": 5371.600000023842,
+        "type": "hit",
+        "id": "aftermath-web-target",
+        "action": "action:1",
+        "hpLost": 20,
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      },
+      {
+        "stage": "actual-keyj-engagement-enters-combat",
+        "at": 5371.600000023842,
+        "type": "enemy_recoil",
+        "id": "aftermath-web-target",
+        "action": "action:1",
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      }
+    ],
+    "history": [
+      {
+        "at": 4859,
+        "stage": "boot",
+        "desired": "explore",
+        "count": 0,
+        "completed": 0,
+        "qualified": false,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": null
+      },
+      {
+        "at": 4928.700000047684,
+        "stage": "boot",
+        "desired": "explore",
+        "count": 0,
+        "completed": 0,
+        "qualified": false,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": null
+      },
+      {
+        "at": 4995.399999976158,
+        "stage": "boot",
+        "desired": "explore",
+        "count": 0,
+        "completed": 0,
+        "qualified": false,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": null
+      },
+      {
+        "at": 5068,
+        "stage": "boot",
+        "active": "explore",
+        "desired": "explore",
+        "count": 0,
+        "completed": 0,
+        "qualified": false,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0.0696999999284742,
+            "playing": true,
+            "volume": 0.013029333346684775,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": null
+      },
+      {
+        "at": 5140,
+        "stage": "boot",
+        "active": "explore",
+        "desired": "explore",
+        "count": 0,
+        "completed": 0,
+        "qualified": false,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0.14159999990463312,
+            "playing": true,
+            "volume": 0.026432000004450482,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": null
+      },
+      {
+        "at": 5209.700000047684,
+        "stage": "boot",
+        "active": "explore",
+        "desired": "explore",
+        "count": 0,
+        "completed": 0,
+        "qualified": false,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0.211399999976158,
+            "playing": true,
+            "volume": 0.039442666680018106,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": null
+      },
+      {
+        "at": 5274.300000071526,
+        "stage": "actual-keyj-engagement-enters-combat",
+        "active": "explore",
+        "desired": "explore",
+        "count": 0,
+        "completed": 0,
+        "qualified": false,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0.2759999999999998,
+            "playing": true,
+            "volume": 0.04933600001335144,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      },
+      {
+        "at": 5370.300000071526,
+        "stage": "actual-keyj-engagement-enters-combat",
+        "active": "explore",
+        "desired": "explore",
+        "count": 0,
+        "completed": 0,
+        "qualified": false,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0.3719999999999999,
+            "playing": true,
+            "volume": 0.06647200000445048,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      },
+      {
+        "at": 5418.399999976158,
+        "stage": "actual-keyj-engagement-enters-combat",
+        "active": "explore",
+        "desired": "explore",
+        "count": 0,
+        "completed": 0,
+        "qualified": false,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0.4200999999046324,
+            "playing": true,
+            "volume": 0.0756373333422343,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      },
+      {
+        "at": 5491.800000071526,
+        "stage": "actual-keyj-engagement-enters-combat",
+        "active": "explore",
+        "desired": "explore",
+        "count": 0,
+        "completed": 0,
+        "qualified": false,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0.49350000000000005,
+            "playing": true,
+            "volume": 0.09206400000890097,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      },
+      {
+        "at": 5559.5,
+        "stage": "actual-keyj-engagement-enters-combat",
+        "active": "explore",
+        "desired": "explore",
+        "count": 0,
+        "completed": 0,
+        "qualified": false,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0.5610999999046324,
+            "playing": true,
+            "volume": 0.10197600001335146,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      },
+      {
+        "at": 5632.800000071526,
+        "stage": "actual-keyj-engagement-enters-combat",
+        "active": "explore",
+        "desired": "explore",
+        "count": 0,
+        "completed": 0,
+        "qualified": false,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0.6345000000000001,
+            "playing": true,
+            "volume": 0.11836533333778383,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      },
+      {
+        "at": 5698.800000071526,
+        "stage": "actual-keyj-engagement-enters-combat",
+        "active": "explore",
+        "desired": "explore",
+        "count": 0,
+        "completed": 0,
+        "qualified": false,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0.7004999999999999,
+            "playing": true,
+            "volume": 0.12846400000890099,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      },
+      {
+        "at": 5774.5,
+        "stage": "actual-keyj-engagement-enters-combat",
+        "active": "explore",
+        "desired": "explore",
+        "count": 0,
+        "completed": 0,
+        "qualified": false,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0.7761999999284743,
+            "playing": true,
+            "volume": 0.14494666666666667,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      },
+      {
+        "at": 5839.300000071526,
+        "stage": "actual-keyj-engagement-enters-combat",
+        "active": "explore",
+        "desired": "explore",
+        "count": 0,
+        "completed": 0,
+        "qualified": false,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0.8410000000000002,
+            "playing": true,
+            "volume": 0.15498933334668477,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      },
+      {
+        "at": 5917.200000047684,
+        "stage": "actual-keyj-engagement-enters-combat",
+        "active": "explore",
+        "desired": "explore",
+        "count": 0,
+        "completed": 0,
+        "qualified": false,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0.9188999999761585,
+            "playing": true,
+            "volume": 0.17156533333778382,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      },
+      {
+        "at": 5979.600000023842,
+        "stage": "actual-keyj-engagement-enters-combat",
+        "active": "combat",
+        "desired": "combat",
+        "count": 0,
+        "completed": 0,
+        "qualified": true,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 0.9812999999523164,
+            "playing": true,
+            "volume": 0.17494400000890095,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 0.9793999999761579,
+            "playing": true,
+            "volume": 0.0032479999955495205,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      },
+      {
+        "at": 6057.300000071526,
+        "stage": "combat-mute-and-resume-current-clip",
+        "active": "combat",
+        "desired": "combat",
+        "count": 0,
+        "completed": 0,
+        "qualified": true,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 1.0350999999046326,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 1.033299999952316,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      },
+      {
+        "at": 6118.100000023842,
+        "stage": "combat-mute-and-resume-current-clip",
+        "active": "combat",
+        "desired": "combat",
+        "count": 0,
+        "completed": 0,
+        "qualified": true,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 1.0350999999046326,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 1.033299999952316,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      },
+      {
+        "at": 6196.300000071526,
+        "stage": "combat-mute-and-resume-current-clip",
+        "active": "combat",
+        "desired": "combat",
+        "count": 0,
+        "completed": 0,
+        "qualified": true,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 1.0350999999046326,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 1.033299999952316,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      },
+      {
+        "at": 6255.700000047684,
+        "stage": "combat-mute-and-resume-current-clip",
+        "active": "combat",
+        "desired": "combat",
+        "count": 0,
+        "completed": 0,
+        "qualified": true,
+        "peacefulFor": 0,
+        "tracks": [
+          {
+            "mode": "explore",
+            "time": 1.0350999999046326,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "combat",
+            "time": 1.033299999952316,
+            "playing": false,
+            "volume": 0,
+            "loop": true
+          },
+          {
+            "mode": "aftermath",
+            "time": 0,
+            "playing": false,
+            "volume": 0,
+            "loop": false
+          }
+        ],
+        "engagement": {
+          "area": "S01-T1",
+          "enemyIds": [
+            "aftermath-web-target"
+          ]
+        }
+      }
+    ],
+    "bundles": [
+      "actor-raphael",
+      "background-music",
+      "cast-mira",
+      "cast-raider-shield",
+      "combat-audio",
+      "combat-vfx",
+      "environment",
+      "equipment-art",
+      "hero-appearance",
+      "hero-hairstyles",
+      "hero-melee-combo",
+      "internal",
+      "main",
+      "native-materials",
+      "native-weapons",
+      "painted-interiors",
+      "painted-terrain",
+      "panel-art",
+      "resources",
+      "skill-icons",
+      "waystones"
+    ]
+  },
+  "summary": {
+    "passed": 3,
+    "total": 3,
+    "console": 0,
+    "pageErrors": 0,
+    "networkFailures": 0,
+    "httpErrors": 0,
+    "afterCount": 0,
+    "completed": 0
+  },
+  "finished": "2026-11-17T13:02:00.080Z"
+}

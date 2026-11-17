@@ -1,6 +1,8 @@
 import {fieldCinematicZh} from './FieldQuestCinematics';
+import {earlyCinematicZh} from './EarlyChapterCinematics';
 export const zh = {
   ...fieldCinematicZh,
+  ...earlyCinematicZh,
   "ui.continue": "继续",
   "ui.skip": "跳过剧情",
   "ui.language": "剧情语言",

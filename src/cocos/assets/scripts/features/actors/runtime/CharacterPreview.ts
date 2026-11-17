@@ -1,5 +1,6 @@
 import {Asset,AnimationClip,Camera,Color,EventTouch,instantiate,Material,MeshRenderer,Node,PointLight,RenderTexture,SkeletalAnimation,SkinnedMeshRenderer,Sprite,SpriteFrame,UITransform,Vec3,Texture2D} from 'cc';
 import {selectEquipmentWeaponVariants,weaponAttachmentKind} from './WeaponMaterials';
+import {headgearVisible} from './Hairstyles';
 
 /** Cocos native RenderTexture: a real copy of the equipped actor, isolated from the world camera. */
 export class CharacterPreview {
@@ -11,7 +12,7 @@ export class CharacterPreview {
   this.model=instantiate(source);this.stage.addChild(this.model);this.model.setPosition(0,0,0);this.model.setRotationFromEuler(0,this.yaw,0);
   const layer=1<<19,setLayer=(node:Node)=>{node.layer=layer;for(const child of node.children)setLayer(child);};setLayer(this.model);
   const kind=equipment?weaponAttachmentKind(equipment.weapon):null;
-   const dress=(node:Node)=>{if(kind&&node.name.startsWith('Held_'))node.active=node.name==='Held_'+kind;if(node.name.includes('_native_hood_'))node.active=equipment?.head==='A02';if(node.name.includes('_native_hair_'))node.active=node.active&&equipment?.head!=='A02';if(node.parent?.name==='attach_arrow_r Socket')node.active=false;for(const child of node.children)dress(child);};dress(this.model);if(equipment)selectEquipmentWeaponVariants(this.model,equipment.weapon);
+   const dress=(node:Node)=>{if(kind&&node.name.startsWith('Held_'))node.active=node.name==='Held_'+kind;if(node.name.includes('_native_hood_'))node.active=headgearVisible(equipment?.head);if(node.name.includes('_native_hair_'))node.active=node.active&&!headgearVisible(equipment?.head);if(node.parent?.name==='attach_arrow_r Socket')node.active=false;for(const child of node.children)dress(child);};dress(this.model);if(equipment)selectEquipmentWeaponVariants(this.model,equipment.weapon);
   for(const renderer of this.model.getComponentsInChildren(MeshRenderer)){renderer.shadowCastingMode=0;renderer.receiveShadow=0;
    if(renderer.mesh)this.retain(renderer.mesh);if(renderer instanceof SkinnedMeshRenderer&&renderer.skeleton)this.retain(renderer.skeleton);
    for(const material of renderer.sharedMaterials)if(material){this.retain(material);for(const key of ['mainTexture','normalMap','pbrMap','emissiveMap']){const texture=material.getProperty(key);if(texture instanceof Texture2D)this.retain(texture);}}

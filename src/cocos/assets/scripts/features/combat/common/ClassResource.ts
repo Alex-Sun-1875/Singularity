@@ -3,9 +3,10 @@ import {effectiveAttribute} from '../../equipment/common/EquipmentDice';
 import type {Attribute} from '../../progression/common/Progression';
 import type {CombatFamily} from '../../progression/common/CombatLoadouts';
 import type {CombatSkillDef} from '../data/PureSkills';
+import {COMBAT_BALANCE} from '../data/CombatBalance';
 
 export type ResourceKind='stamina'|'focus'|'mana';
-export const RESOURCE_RULES={base:100,perAttribute:2,combatRegen:8,restRegen:20,potionFraction:.45,potionCooldown:5} as const;
+export const RESOURCE_RULES={base:100,perAttribute:2,combatRegen:COMBAT_BALANCE.combatResourceRegen,restRegen:COMBAT_BALANCE.restResourceRegen,potionFraction:.45,potionCooldown:COMBAT_BALANCE.potionCooldown} as const;
 const PROFILES={
  WAR:{kind:'stamina',name:'体力',attribute:'strength',potion:'体力药水',stock:'staminaPotions',icon:'potion-stamina',feedback:'resource.stamina'},
  BOW:{kind:'focus',name:'专注',attribute:'dexterity',potion:'专注药水',stock:'focusPotions',icon:'potion-focus',feedback:'resource.focus'},

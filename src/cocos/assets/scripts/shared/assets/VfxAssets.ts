@@ -1,13 +1,16 @@
+import {FIRE_PALETTE} from './FirePalette';
 import {gameResources as resources} from './GameResources';
 import {ManagedLine} from './ManagedLine';
 import {Node,Material,Mesh,MeshRenderer,Texture2D,ParticleSystem,Burst,CurveRange,GradientRange,Color,Vec3,Vec4,Director,director,assetManager,js,gfx} from 'cc';
 
-export type VfxKind='flame'|'ember'|'smoke'|'spark'|'dust'|'arcane'|'seal'|'prayer'|'charge'|'arrowWake'|'slash'|'rune'|'scorch'|'flash'|'fireCore'|'fireRoll'|'fireGlow'|'impactScorch'|'heal';
+export type VfxKind='flame'|'ember'|'smoke'|'spark'|'dust'|'arcane'|'seal'|'prayer'|'charge'|'arrowWake'|'slash'|'rune'|'scorch'|'flash'|'fireCore'|'fireRoll'|'fireGlow'|'impactScorch'|'heal'|'levelUp'|'levelRing';
 export type VfxLineStyle='core'|'glow'|'solid';
 type Profile={texture:string;rate:number;capacity:number;life:[number,number];size:[number,number];speed:[number,number];color:string;end:string;alpha:number;radius:number;shape:number;render?:number;gravity?:number;grow?:boolean;blend?:boolean;spin?:boolean;fast?:boolean;tintGain?:number;alphaGain?:number};
 const profiles:Record<VfxKind,Profile>={
- flame:{texture:'flame_02',rate:19,capacity:28,life:[.36,.7],size:[.34,.64],speed:[.55,1.25],color:'#ffcc76',end:'#b24e25',alpha:.75,radius:.72,shape:2,render:3,grow:false},
- ember:{texture:'spark_01',rate:7,capacity:14,life:[.45,.95],size:[.025,.055],speed:[1,2.1],color:'#ffd893',end:'#c74d22',alpha:.85,radius:.6,shape:2,gravity:.12},
+ levelUp:{texture:'star_01',rate:0,capacity:18,life:[.8,1.35],size:[.07,.13],speed:[.65,1.15],color:'#f7dfa0',end:'#b6955d',alpha:.8,radius:.55,shape:2},
+ levelRing:{texture:'circle_03',rate:0,capacity:2,life:[.9,1.1],size:[1.8,1.8],speed:[0,0],color:'#f7dfa0',end:'#b6955d',alpha:.55,radius:0,shape:3,render:2,grow:true},
+ flame:{texture:'flame_02',rate:19,capacity:28,life:[.36,.7],size:[.34,.64],speed:[.55,1.25],color:FIRE_PALETTE.body,end:FIRE_PALETTE.shadow,alpha:.75,radius:.72,shape:2,render:3,grow:false},
+ ember:{texture:'spark_01',rate:7,capacity:14,life:[.45,.95],size:[.025,.055],speed:[1,2.1],color:FIRE_PALETTE.highlight,end:FIRE_PALETTE.low,alpha:.85,radius:.6,shape:2,gravity:.12},
  smoke:{texture:'smoke_04',rate:4,capacity:12,life:[.65,1.2],size:[.45,.78],speed:[.35,.65],color:'#81796d',end:'#b1aaa1',alpha:.2,radius:.65,shape:2,grow:true,blend:true,spin:true},
  spark:{texture:'spark_01',rate:0,capacity:24,life:[.16,.38],size:[.035,.085],speed:[1.7,3.7],color:'#ffe3a7',end:'#d77c38',alpha:1,radius:.025,shape:3,render:1,gravity:.65},
  dust:{texture:'dirt_01',rate:0,capacity:18,life:[.28,.6],size:[.16,.34],speed:[.4,1.2],color:'#b4a083',end:'#8f8778',alpha:.4,radius:.16,shape:4,grow:true,blend:true,spin:true},
@@ -21,7 +24,7 @@ const profiles:Record<VfxKind,Profile>={
  scorch:{texture:'scorch_01',rate:0,capacity:2,life:[3.7,4],size:[2.2,2.2],speed:[0,0],color:'#392b23',end:'#51463a',alpha:.4,radius:0,shape:3,render:2,blend:true},
  flash:{texture:'light_01',rate:0,capacity:4,life:[.12,.2],size:[.35,.55],speed:[0,0],color:'#ffe7b2',end:'#dd915a',alpha:.8,radius:0,shape:3},
  // Production coloured RGBA uses white tint; CC0 masks remain for ash/old props.
- fireCore:{texture:'light_01',rate:15,capacity:6,life:[.12,.22],size:[.3,.55],speed:[0,.12],color:'#fff2b0',end:'#ff6a22',alpha:.95,radius:.06,shape:3,fast:true},
+ fireCore:{texture:'light_01',rate:15,capacity:6,life:[.12,.22],size:[.3,.55],speed:[0,.12],color:FIRE_PALETTE.core,end:FIRE_PALETTE.body,alpha:.95,radius:.06,shape:3,fast:true},
  fireRoll:{texture:'fire-tongues-v1',rate:24,capacity:12,life:[.16,.32],size:[.55,.90],speed:[.08,.30],color:'#ffffff',end:'#ffffff',alpha:.86,radius:.06,shape:2,grow:true,blend:true,fast:true},
  fireGlow:{texture:'fire-tongues-v1',rate:4,capacity:6,life:[.12,.25],size:[.85,1.15],speed:[.1,.3],color:'#ffffff',end:'#ffffff',alpha:.26,radius:.07,shape:2,fast:true,tintGain:.8,alphaGain:.8},
  impactScorch:{texture:'scorch_01',rate:0,capacity:2,life:[.65,.9],size:[2.2,2.2],speed:[0,0],color:'#4c2419',end:'#53392b',alpha:.26,radius:0,shape:3,render:2,blend:true},

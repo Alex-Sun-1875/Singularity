@@ -1,0 +1,90 @@
+{
+  "date": "2026-11-17",
+  "change": "equipment-acquisition-no-confirmation",
+  "profile": "test",
+  "typeChecks": {
+    "full": "passed",
+    "core": "passed"
+  },
+  "existingTests": {
+    "passed": 180,
+    "failed": 1,
+    "total": 181,
+    "failure": "chapter.rules.test.ts:133 — single idle boss selected combatSlot 3 instead of undefined; automation skill-selection logic was not changed in this task"
+  },
+  "ruleProbe": {
+    "passed": true,
+    "cases": [
+      "real chest acquisitions are recorded at ownership",
+      "queued, deferred and active notices retired on current-format restore",
+      "inventory, provenance, forging and player unchanged",
+      "verified SaveStore round trip",
+      "real uncommitted exploration check retained",
+      "claimed historical rolls and bonuses retained",
+      "repeated cleanup is inert"
+    ]
+  },
+  "browser": {
+    "fixture": "Isolated browser contexts; real grant and automation stop commands; controlled acquisition backlog, not a natural playthrough.",
+    "cases": [
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "result": {
+          "area": "S01-T1",
+          "items": [
+            "A01",
+            "A02",
+            "A06",
+            "A14"
+          ],
+          "allRecorded": true,
+          "mode": "manual",
+          "active": null,
+          "visibleNoticeNodes": []
+        },
+        "screenshot": "F:\\workspace\\Singularity\\src\\cocos\\temp\\equipment-no-confirm-844x390.png",
+        "errors": []
+      },
+      {
+        "viewport": {
+          "width": 932,
+          "height": 430
+        },
+        "result": {
+          "area": "S01-T1",
+          "items": [
+            "A01",
+            "A02",
+            "A06",
+            "A14"
+          ],
+          "allRecorded": true,
+          "mode": "manual",
+          "active": null,
+          "visibleNoticeNodes": []
+        },
+        "screenshot": "F:\\workspace\\Singularity\\src\\cocos\\temp\\equipment-no-confirm-932x430.png",
+        "errors": []
+      }
+    ]
+  },
+  "build": {
+    "entry": "src\\cocos\\build\\concept-2d\\assets\\main\\index.4b491.js",
+    "sha256": "88df3f1acbf8d137b825d8c3958e9e6fb73d05c8147a8a98f1c2f0901b536001",
+    "officialBuildCompleted": "2026-11-17 17:43:59 Asia/Shanghai",
+    "sourceMarkersVerified": true,
+    "note": "Shared project build completed through Build-Local.ps1 while this task waited for the build lock; reused and verified the resulting normal test preview."
+  },
+  "sourceSha256": {
+    "assets/scripts/features/equipment/common/EquipmentDice.ts": "4d47ef0649d975dfc29ea95da4b6de3899de5f55e05733825c3e599eaf9c1724",
+    "assets/scripts/core/GameSession.ts": "2a893198b2495f6481432f22806d25c441935f2b1e8d2c5333742d3c7b9b9e19",
+    "assets/scripts/app/ChapterGame.ts": "1a2245ff79c89de3339600c0adfa5e305c58212e813e99f9e30694a2611e08aa",
+    "assets/scripts/app/Menus.ts": "571e15d162a0e73b795f2fc7746dfc2a6fbc9604bc665316c418be3579dd1f0c"
+  },
+  "pending": [
+    "TapTap App and physical-device validation; no new TapTap package was made"
+  ]
+}

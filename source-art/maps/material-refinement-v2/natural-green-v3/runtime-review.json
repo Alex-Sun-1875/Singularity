@@ -1,0 +1,84 @@
+{
+  "date": "2026-11-17",
+  "status": "implemented-and-browser-visually-reviewed",
+  "previewUrl": "http://127.0.0.1:7473/?view=2d&player=3d",
+  "build": {
+    "output": "src/cocos/build/map-material-review",
+    "profile": "normal test",
+    "result": "Cocos 3.8.8 web-mobile build, render policy and test profile passed",
+    "entrySha256": "87e43a3055ea91d23903ca0f479ea28048fd2ee22bfc26eb962611237bb03bfb"
+  },
+  "scope": "only meadow image color adjustment; original sampler metadata and 9 other v2 images verified unchanged; no runtime code or gameplay changes",
+  "checks": {
+    "screenshots": 6,
+    "pageErrors": 0,
+    "requestFailures": 0,
+    "matchingCameras": 6,
+    "matchingPlayerCoordinates": 6,
+    "allCapturesLoadMeadowV2": true,
+    "drawCallDeltas": [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "groundVertexColorMeshes": 486,
+    "groundRgbaAndAlphaOne": true,
+    "grassPixelComparison": {
+      "region": "S01 desktop x1010:1300 y320:480, fixed previous-frame green mask G>1.12R and G>1.35B",
+      "pixels": 44055,
+      "before": {
+        "meanRgb": [
+          118.8004,
+          170.1785,
+          58.7465
+        ],
+        "meanRec709ByteLuma": 151.2101,
+        "meanHsvSaturation": 0.656863
+      },
+      "after": {
+        "meanRgb": [
+          126.6108,
+          167.2686,
+          79.113
+        ],
+        "meanRec709ByteLuma": 152.2599,
+        "meanHsvSaturation": 0.529291
+      },
+      "lumaChangePercent": 0.6943,
+      "hsvSaturationChangePercent": -19.4214
+    },
+    "scope": "browser visual fixtures, not a playthrough or physical-device performance claim"
+  },
+  "screenGrassPixelComparison": {
+    "region": "S01 desktop x1010:1300 y320:480, fixed previous-frame green mask G>1.12R and G>1.35B",
+    "pixels": 44055,
+    "before": {
+      "meanRgb": [
+        118.8004,
+        170.1785,
+        58.7465
+      ],
+      "meanRec709ByteLuma": 151.2101,
+      "meanHsvSaturation": 0.656863
+    },
+    "after": {
+      "meanRgb": [
+        126.6108,
+        167.2686,
+        79.113
+      ],
+      "meanRec709ByteLuma": 152.2599,
+      "meanHsvSaturation": 0.529291
+    },
+    "lumaChangePercent": 0.6943,
+    "hsvSaturationChangePercent": -19.4214
+  },
+  "artReview": "Reduced fluorescent yellow-green intensity, retained bright natural green and leaf detail; S01/S03/S05 reviewed at 1688x780 and 844x390",
+  "processing": "processing.json",
+  "sourceGeneration": "../generation.json, unchanged; deterministic local Pillow/numpy recolor only",
+  "comparison": "before-after.jpg",
+  "notVerified": "TapTap platform and physical-device rendering; browser visual review only"
+}

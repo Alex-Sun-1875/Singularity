@@ -9,6 +9,7 @@ import {Node,Graphics,Label,Sprite,SpriteFrame,UITransform,Canvas,Camera,Layers,
 import type {GameSession} from '../core/GameSession';
 import type {AutomationMode,NavigationTarget} from '../features/automation/common/Automation';
 import type {JourneyGuidance} from '../features/journey/common/JourneyGuide';
+import {journeyText} from '../features/journey/locales';
 import {QuestTracker,type QuestTrackerLine} from '../features/journey/runtime/QuestTracker';
 import {encounterText} from '../features/campaign/locales/ChapterTwoEncounterText';
 import {AREAS} from '../features/world/data/WorldData';
@@ -410,9 +411,10 @@ export class Hud {
   // Expanded training trackers need the final area caption only, without dirtying it with the campaign area first.
   this.guidanceClock+=director.getDeltaTime();
   if(this.guidanceClock+1e-6>=.2){
-   this.guidanceClock=0;const guide=this.guidance;this.setQuestLine('area',practice&&!guide?trainingText(practice.groupMode?'hudGroupArea':'hudArea',{count:practice.groupMode?practice.remainingMonsters:practice.targetCount,total:practice.targetCount,distance:practice.distance}):(AREAS[s.area]?.name??s.area)+(guide?.safe?'·安全区':''));
-   this.setQuestLine('quest-distance',guide?guide.blocked?'受阻':guide.distance>=1000?`${(guide.distance/1000).toFixed(1)}km`:`${Math.ceil(guide.distance)}m`:'');
-   if(guide){const dx=guide.bearing.x-p.x,dz=guide.bearing.z-p.z,r=worldCamera.node.right,u=worldCamera.node.up,angle=Math.atan2(dx*r.x+dz*r.z,dx*u.x+dz*u.z),arrow=['↑','↗','→','↘','↓','↙','←','↖'][(Math.round(angle/(Math.PI/4))+8)%8];this.setQuestLine('objective',guide.blocked?'路线受阻':`${arrow} ${guide.instruction}`);this.setQuestLine('quest-route',guide.blocked?encounterText('ui.hudTaskBlocked'):guide.hops?`出口 ${Math.ceil(guide.distance)}m · ${AREAS[guide.nextArea??guide.destination.area].name}`:guide.distance>2?`${Math.ceil(guide.distance)}m · ${guide.detail}`:guide.detail);}
+   this.guidanceClock=0;const guide=this.guidance;this.setQuestLine('area',practice&&!guide?trainingText(practice.groupMode?'hudGroupArea':'hudArea',{count:practice.groupMode?practice.remainingMonsters:practice.targetCount,total:practice.targetCount,distance:practice.distance}):(guide?.blocked&&guide.progress?`${guide.blockage?.summary??journeyText('detail.blocked')} · `:'')+(guide?.hops?`→${AREAS[guide.nextArea??guide.destination.area].name}`:AREAS[s.area]?.name??s.area)+(guide?.safe?'·安全区':'')+(guide?.progress?` · ${Math.ceil(guide.distance)}m`:''));
+   this.setQuestLine('quest-progress',guide?.progress??(guide?.blocked?guide.blockage?.summary??journeyText('detail.blocked'):''));
+   this.setQuestLine('quest-distance',guide?guide.blocked?guide.blockage?.summary??journeyText('status.blocked'):guide.distance>=1000?`${(guide.distance/1000).toFixed(1)}km`:`${Math.ceil(guide.distance)}m`:'');
+   if(guide){const dx=guide.bearing.x-p.x,dz=guide.bearing.z-p.z,r=worldCamera.node.right,u=worldCamera.node.up,angle=Math.atan2(dx*r.x+dz*r.z,dx*u.x+dz*u.z),arrow=['↑','↗','→','↘','↓','↙','←','↖'][(Math.round(angle/(Math.PI/4))+8)%8];this.setQuestLine('objective',guide.blocked?guide.instruction:`${arrow} ${guide.instruction}`);this.setQuestLine('quest-route',guide.blocked?guide.blockage?.reason??encounterText('ui.hudTaskBlocked'):guide.reminder??(guide.hops?`出口 ${Math.ceil(guide.distance)}m · ${AREAS[guide.nextArea??guide.destination.area].name}`:guide.distance>2?`${Math.ceil(guide.distance)}m · ${guide.detail}`:guide.detail));}
    else if(practice){this.setQuestLine('objective',trainingText(practice.groupMode?'hudGroupProgress':'hudDamage',{damage:practice.damage,hits:practice.hits,kills:practice.defeatedMonsters,total:practice.targetCount}));this.setQuestLine('quest-route',trainingText('hudDps',{dps:Math.round(practice.dps)}));}
    else{this.setQuestLine('objective',game.objective());this.setQuestLine('quest-route',encounterText('ui.hudTaskOpen'));}
   }
@@ -507,9 +509,9 @@ export class Hud {
   const feedback=navigationFeedback({navigating:navigating||taskRunning,paused:navigationPaused||taskPaused,arrived:!taskMode&&arrived,blocked:!!this.guidance?.blocked});this.miniMap?.setNavigationFeedback(feedback.role);
   // Resolve the final caption once: alternating navigation/training text dirties and uploads the label every frame.
   const practice=!!this.trainingRange&&!this.guidance;
-  if(this.automationLabel)this.automationLabel.string=practice?trainingText('toolbar'):taskMode?paused?'继续':'停止':arrived?'抵达':'出发';
+  if(this.automationLabel)this.automationLabel.string=practice?trainingText('toolbar'):this.guidance?.blocked&&(!taskMode||paused)?journeyText('block.inspect'):taskMode?paused?'继续':'停止':arrived?'抵达':'出发';
   this.questTracker?.setFeedback(navigationFeedback({navigating:taskRunning,paused:taskPaused,arrived:!taskMode&&arrived,blocked:!!this.guidance?.blocked}).role);
-  this.questTracker?.setNavigationInteractable(practice||taskMode||!!this.guidance&&!this.guidance.blocked);
+  this.questTracker?.setNavigationInteractable(practice||taskMode||!!this.guidance);
   this.layoutTopMessages();
  }
  setAimCancelVisible(visible:boolean):void {

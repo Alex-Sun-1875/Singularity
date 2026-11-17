@@ -1,0 +1,155 @@
+{
+  "revision": "v35-cloud-complete-fire-sigil-final",
+  "source": "cloud-complete-fire-sigil.png",
+  "sourceSha256": "5ac98e948709f17c50168949d7d30a67dab50aa5d80d128d03f0227222c88b06",
+  "generation": {
+    "generation": {
+      "tool": "OpenAI image_gen built-in cloud tool",
+      "localInference": false,
+      "referenceImages": [
+        "seal-v35-material-front.png",
+        "../../meteor-ignition-glow-v34/seal/reference-r2/source-seal-large-r2.png"
+      ],
+      "prompt": "cloud-refinement-prompt.txt",
+      "sourceOutput": "C:/Users/Alexa/.codex/generated_images/01a1e2d7-b274-75b3-98c2-b1f3412e6f61/exec-8c9810f4-4498-433a-b572-22d1d2ea10c4.png"
+    },
+    "result": {
+      "file": "cloud-complete-fire-sigil.png",
+      "size": [
+        1254,
+        1254
+      ],
+      "sha256": "5ac98e948709f17c50168949d7d30a67dab50aa5d80d128d03f0227222c88b06",
+      "alphaRange": [
+        0,
+        253
+      ],
+      "fractionFullyTransparent": 0.13954198240272278
+    },
+    "review": {
+      "root": "Generated result visually inspected: complete rear, crisp flowing original-type asymmetrical paths, fire red/orange bodies with bright local cores. Needs deterministic circle registration, material separation and native validation.",
+      "native": "pending",
+      "user": "pending"
+    }
+  },
+  "prompt": "cloud-refinement-prompt.txt",
+  "preparationScript": "prepare-cloud.py",
+  "registration": {
+    "method": "Single symmetric ellipse-to-circle affine from 360 outermost hot-ridge samples; no local warp, path edit or engraving rotation.",
+    "sourceCentre": [
+      618.15542022747,
+      618.939633041498
+    ],
+    "sourceAxes": [
+      565.5077299838711,
+      555.3457717934224
+    ],
+    "sourceSymmetricMatrix": [
+      [
+        565.283332478943,
+        -1.4933063392699633
+      ],
+      [
+        -1.4933063392699608,
+        555.5701692983507
+      ]
+    ],
+    "targetCentre": [
+      511.5,
+      511.5
+    ],
+    "targetRadius": 460.0,
+    "visibleDiameterFraction": 0.8984375,
+    "orientation": "Image top=far, bottom=near. Existing ground UV/range/lift retained."
+  },
+  "cleanup": {
+    "alphaPurity": "Only source alpha .002..009 softened to remove near-zero transparent-edge red specks.",
+    "outerFeather": "Radial 1.045..1.112; complete hot rim at r1 remains untouched."
+  },
+  "split": {
+    "principle": "Registered original energy E=RGB*A. Main RGB retains raw artist colour; A=registered alpha*f, f<=.94 from original hot cores/coherent red ridges. Light RGB=E*(1-f), without fixed palette or gain.",
+    "sharpness": "Coherent hot cores retain94% in 1024 main; weak red ridges use relative source colour-energy contrast. The clear original is not blurred/sharpened or redrawn.",
+    "colour": "Original cloud vermilion/ember-red body, orange transition and local bright cores preserved; no return to yellow-gold palette."
+  },
+  "resources": [
+    {
+      "name": "fire-meteor-seal-colour-v35.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "role": "RGB=registered raw artist colour; A=engraving optical coverage, mostly original clear-core energy",
+      "sha256": "3aef3fb43bff3ed5f71df5fd60aef281b8f346985ebaa1cfd5d72687174106a0",
+      "gpuBytes": 4194304
+    },
+    {
+      "name": "fire-meteor-seal-light-v35.png",
+      "size": [
+        512,
+        512
+      ],
+      "role": "RGB=remaining original premultiplied fire energy; A=only 0.006 weak absorption support, not direct output opacity",
+      "sha256": "8dba6117b82b6a1ec41923c1df784497927738a52165023ecd73ba60cc694064",
+      "gpuBytes": 1048576
+    }
+  ],
+  "totalGpuBytes": 5242880,
+  "formula": "coverage=colour.a*fade; alpha=coverage+light.a*.006*fade*(1-coverage); premul=colour.rgb*coverage+light.rgb*fade; blend ONE/ONE_MINUS_SRC_ALPHA. No fixed recolouring, no global gain.",
+  "metrics": {
+    "energyMeanAbsoluteQuantisationError": 0.00619233595611917,
+    "hotCoreMainEnergyFractionMean": 0.9178022812966061,
+    "hotCorePixels": 120470,
+    "quietDiscMeanOutputAlpha": 0.012656434208528487,
+    "outputEnergyChannelSums": [
+      324681.6418299211,
+      83872.0734025726,
+      15461.242030015275
+    ],
+    "sourceRegisteredEnergyChannelSums": [
+      319076.4883785601,
+      83624.24440058833,
+      15345.510555677201
+    ]
+  },
+  "preview": "seal-v35-cloud-material-final.jpg",
+  "previewDeclaration": "Exact encoded two-texture production formula on diagnostic dark green-grey ground. This is a shader/material computation, not native Cocos/TapTap capture.",
+  "review": {
+    "cloudResult": "Root visually inspected source: complete, clear, original-type asymmetric long recurves and fire red/orange material. Generation success and art review recorded separately in cloud-generation.json.",
+    "local": "Root and asset agent viewed the unique cloud material computation: full rear, clear RGB line cores, red/orange/ember variation and transmitted dark ground. Approved to enter native build/capture; user acceptance not asserted.",
+    "production": "Published and frozen; root owns standard build/capture.",
+    "native": "Pending root build and actual Cocos capture; no user or TapTap acceptance claimed."
+  },
+  "publication": {
+    "productionUpdated": true,
+    "guard": "Acquired common build lock for this brief publication only; no build run.",
+    "rendererBeforeSha256": "fc5b81a794fd5072ecdbe17356b2ee57974fa53ab8ef3660856f4b9865236dc3",
+    "rendererAfterSha256": "fb3b4297611499683a25dd237c25368b28127f545883fa71ae02e9a77036bf4e",
+    "productionFiles": {
+      "fire-meteor-seal-colour-v35.png": "3aef3fb43bff3ed5f71df5fd60aef281b8f346985ebaa1cfd5d72687174106a0",
+      "fire-meteor-seal-light-v35.png": "8dba6117b82b6a1ec41923c1df784497927738a52165023ecd73ba60cc694064",
+      "fire-seal-v35.effect": "b20c630b716c631eb9d5ce426d888815243ef58d60bf0f28d2f431cf71f5924a"
+    },
+    "slots": {
+      "0": "unchanged v27 jets",
+      "1": "unchanged v27 small seal",
+      "2": "fire-meteor-seal-colour-v35",
+      "3": "unchanged v24 noise",
+      "4": "fire-meteor-seal-light-v35"
+    },
+    "preserved": {
+      "fire-ground-jets-v27.png": "37a8319026bf39a4862f1f9bedbfceb98a6a3119c16f3265f300756dd4c2e4c6",
+      "fire-jet-seal-v27.png": "febfe312082973eace56e8e5efea0b28f3e5464764a04900a924963f3ad19f86",
+      "fire-ground-v27.effect": "f213c7660ee31ba34f8900790e6256c65b7dce1a613cd570d82ea5bedf89c808",
+      "fire-flow-noise-v24.png": "ccee680793eb3e41ea3973f01fa9963c588b4f0d5cbafe483d24ccb0105c935d",
+      "UnifiedShieldEffects.ts": "97683ffbea40a66f97c3045bf6a28bfc86bc3579326cbc28732e165970e84a6c"
+    },
+    "rendererScope": "Exactly three meteor resource strings; all other bytes including root opacity instrumentation remain unchanged.",
+    "ground": "Original centre/range/camera UV/+0.045 preserved"
+  },
+  "staticChecks": {
+    "productionSHA": "PNG/effect exactly match frozen source-art files",
+    "meta": "unique UUIDs and matching image/texture redirects; clamp-linear/no mip; RGBA alpha-colour correction disabled",
+    "renderer": "Exactly three meteor resource strings changed; opacity instrumentation, material slots and ground footprint preserved",
+    "native": "Root standard test build and actual Cocos/TapTap evidence remain separate"
+  }
+}

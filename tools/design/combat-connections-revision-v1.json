@@ -20,7 +20,7 @@
       "THU_04",
       "THU_05"
     ],
-    "lightningNetworkConnections": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+    "lightningNetworkConnections": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
     "lightningNetworkEdgesDoNotAddDamage": true
   },
   "skills": {
@@ -189,7 +189,7 @@
         "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
         "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
         "missingTargetDamageRedistributed": false,
-        "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+        "connectionTopology": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
         "connectionDistanceOrdering": [
           "nearestLegalEdge",
           "stableEntityId"
@@ -200,7 +200,7 @@
         "blockedEdges": "omit; do not connect through walls",
         "edgeSelectionRevalidatedPerPulse": true
       },
-      "mechanic": "数量含首目标。中心在首次命中瞬间冻结；候选必须同场同层、敌对存活、位于中心半径内并有合法无遮挡连接；按中心距离、稳定ID排序。主目标全伤，额外目标各70%；每cast每敌一次，不回跳、不补空位、不因主目标死亡移动中心。技能雷弧不是装备额外链。 已声明目标之间按最近合法可见距离构造连通骨架，并补充每个目标的两名最近邻形成局部闭环；施法者只接入网络一次，不从首目标向所有目标放射。额外电边只组织同一拍电网，不增加任何伤害次数或招募新目标。"
+      "mechanic": "数量含首目标。中心在首次命中瞬间冻结；候选必须同场同层、敌对存活、位于中心半径内并有合法无遮挡连接；按中心距离、稳定ID排序。主目标全伤，额外目标各70%；每cast每敌一次，不回跳、不补空位、不因主目标死亡移动中心。技能雷弧不是装备额外链。 已声明目标之间按最近合法可见距离构造连通骨架，采用稀疏分叉而不补充装饰闭环；施法者只接入网络一次，不从首目标向所有目标放射。连接骨架只表现同一拍的真实命中，不增加任何伤害次数或招募新目标。"
     },
     "THU_04": {
       "graphPolicy": {
@@ -226,7 +226,7 @@
         "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
         "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
         "missingTargetDamageRedistributed": false,
-        "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+        "connectionTopology": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
         "connectionDistanceOrdering": [
           "nearestLegalEdge",
           "stableEntityId"
@@ -237,7 +237,7 @@
         "blockedEdges": "omit; do not connect through walls",
         "edgeSelectionRevalidatedPerPulse": true
       },
-      "mechanic": "以远处选点为扇面起点、按施法朝向展开；固定几何内按稳定排序冻结目标集合，数量不足不回跳。两拍各50%，同一目标每拍一次；每拍重验存活敌对、同场同层、固定扇面与无遮挡连接，失效者本拍跳过且不补位。替代原自身电冲。 已声明目标之间按最近合法可见距离构造连通骨架，并补充每个目标的两名最近邻形成局部闭环；施法者只接入网络一次，不从首目标向所有目标放射。额外电边只组织同一拍电网，不增加任何伤害次数或招募新目标。"
+      "mechanic": "以远处选点为扇面起点、按施法朝向展开；固定几何内按稳定排序冻结目标集合，数量不足不回跳。两拍各50%，同一目标每拍一次；每拍重验存活敌对、同场同层、固定扇面与无遮挡连接，失效者本拍跳过且不补位。替代原自身电冲。 已声明目标之间按最近合法可见距离构造连通骨架，采用稀疏分叉而不补充装饰闭环；施法者只接入网络一次，不从首目标向所有目标放射。连接骨架只表现同一拍的真实命中，不增加任何伤害次数或招募新目标。"
     },
     "THU_05": {
       "graphPolicy": {
@@ -263,7 +263,7 @@
         "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
         "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
         "missingTargetDamageRedistributed": false,
-        "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+        "connectionTopology": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
         "connectionDistanceOrdering": [
           "nearestLegalEdge",
           "stableEntityId"
@@ -274,7 +274,7 @@
         "blockedEdges": "omit; do not connect through walls",
         "edgeSelectionRevalidatedPerPulse": true
       },
-      "mechanic": "释放时冻结中心，首拍冻结目标集合，三拍间隔0.25s，每敌每拍最多一次；三拍均分总倍率。每拍重验存活敌对、同场同层、固定范围与无遮挡连接，走出范围或被遮挡者本拍跳过；死亡者退出，不招募新目标补位，不把每条电边都算伤害。 已声明目标之间按最近合法可见距离构造连通骨架，并补充每个目标的两名最近邻形成局部闭环；施法者只接入网络一次，不从首目标向所有目标放射。额外电边只组织同一拍电网，不增加任何伤害次数或招募新目标。"
+      "mechanic": "释放时冻结中心，首拍冻结目标集合，三拍间隔0.25s，每敌每拍最多一次；三拍均分总倍率。每拍重验存活敌对、同场同层、固定范围与无遮挡连接，走出范围或被遮挡者本拍跳过；死亡者退出，不招募新目标补位，不把每条电边都算伤害。 已声明目标之间按最近合法可见距离构造连通骨架，采用稀疏分叉而不补充装饰闭环；施法者只接入网络一次，不从首目标向所有目标放射。连接骨架只表现同一拍的真实命中，不增加任何伤害次数或招募新目标。"
     }
   }
 }

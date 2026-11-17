@@ -1,0 +1,54 @@
+{
+  "method": "Deterministic Pillow/NumPy recolour and registration of existing authored v7 rolling fire. No generated imagery or local model.",
+  "userCorrection": "Unify orange-gold translucency and forward motion, not identical clumped upright silhouettes.",
+  "source": "src\\cocos\\assets\\resources\\vfx\\production\\fire-pyro-v7.png",
+  "sourceSha256": "b781d5007aa16a40414ce95bb19942d3b12322657c3b8e379a9e97b08d018768",
+  "sourceShape": "v7 full fire lifecycle; existing 6..11 rolling waves are spatially repeated for the periodic field; the blast retains authored 0..15 progression.",
+  "paletteReference": "fire-ground-jets-v27.png; measured orange-gold G/R .426.. .761 and B/R .036.. .339, no white or grey core.",
+  "fieldLoop": "16 phases, two broad existing waves each advance 6->11; smooth zero-weight phase resets; no ping-pong. Repeat U within the frame before atlas mapping. Opposite U edge pixels are identical.",
+  "shaderContract": "Straight RGBA; interpolate frames in premultiplied space, then same accepted RGB*1.10 / alpha*.90 source-over as v27.",
+  "outputs": [
+    {
+      "name": "fire-field-roll-v28",
+      "cell": [
+        256,
+        128
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "frameCount": 16,
+      "footUV": [
+        0.5,
+        0.9375
+      ],
+      "straightAlpha": true,
+      "pngBytes": 373225,
+      "rgbaMemoryBytes": 2097152,
+      "sha256": "3328726bf78c4ce5039ad55fa0a4c312065fd97e791cae743f655c755e65f2b9"
+    },
+    {
+      "name": "fire-blast-roll-v28",
+      "cell": [
+        256,
+        160
+      ],
+      "grid": [
+        4,
+        4
+      ],
+      "frameCount": 16,
+      "footUV": [
+        0.5,
+        0.9375
+      ],
+      "straightAlpha": true,
+      "pngBytes": 230761,
+      "rgbaMemoryBytes": 2621440,
+      "sha256": "92c0c28b555ad8bbba9b20b35229cf7b2490ab07d9bee13452366f1fb3a27621"
+    }
+  ],
+  "productionUpdated": false,
+  "verification": "Local texture swatch and loop checked only; native Cocos and user acceptance pending; TapTap/device pending."
+}

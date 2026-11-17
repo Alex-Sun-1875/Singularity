@@ -3,7 +3,7 @@ import {gameResources} from '../../../shared/assets/GameResources';
 import type {KeyValueStore} from '../../persistence/common/SaveStore';
 
 const PREFERENCE='sword-and-fire.music.v1';
-const TRACKS={explore:'audio/music/embers-oaths-explore',combat:'audio/music/embers-oaths-combat',aftermath:'audio/music/embers-oaths-aftermath'} as const;
+const TRACKS={explore:'audio/music/embers-story-light-explore',combat:'audio/music/embers-story-light-combat',aftermath:'audio/music/embers-oaths-aftermath'} as const;
 const MODES=['explore','combat','aftermath'] as const;
 const COMBAT_ENTRY_SECONDS=.7;
 const COMBAT_EXIT_SECONDS=4;
@@ -164,7 +164,7 @@ export class BackgroundMusic {
     slot.level=Math.abs(difference)<=fadeStep?target:slot.level+Math.sign(difference)*fadeStep;
     this.submitVolume(slot,slot.level);
    }
-   // An inaudible source is paused instead of silently decoding another 96s loop.
+   // An inaudible source is paused instead of silently decoding another loop.
    if(target===0&&slot.level===0)this.pause(slot);
   }
  }

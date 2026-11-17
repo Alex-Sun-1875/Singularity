@@ -19,7 +19,7 @@ export function buildTrainingFloor(world:SceneBuilder){
 
 export function renderTrainingRange(hud:Hud,range:TrainingRange){
  const formations:TargetFormation[]=['horde','single','cluster','line'];
- hud.showList(tr('title'),'',[
+ hud.showList(tr('title'),range.returnNotice??'',[
   {label:tr('skills'),detail:tr('skillsSummary'),action:'skill-effect-debug'},
   {label:tr(range.groupMode?'newWave':'reset'),detail:tr(range.groupMode?'newWaveDetail':'resetDetail'),action:'training:reset'},
   ...formations.map(id=>({label:tr('formation.'+id),detail:id==='horde'?tr('groupDetail'):'',value:range.formation===id?tr('selected'):undefined,action:'training:formation:'+id,selected:range.formation===id})),

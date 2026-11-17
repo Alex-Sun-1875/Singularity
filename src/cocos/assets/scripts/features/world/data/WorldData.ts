@@ -1,3 +1,6 @@
+import {installEconomyRewards} from '../../economy/common/EconomyRewards';
+import {installEarlyChapterContent} from '../../campaign/data/EarlyChapterContent';
+import {installCampaignExperience} from '../../progression/data/CampaignExperience';
 import type { AreaDef, Building, EnemySpawn, InteractionDef, Obstacle, Point } from '../../../core/Contracts';
 import {installJourney} from '../../journey/data/ChapterJourney';
 import {installCampaign} from './CampaignWorld';
@@ -74,6 +77,8 @@ export const AREAS: Record<string, AreaDef> = {
     building('镇拘留所', 'gate', 0,52,20,10,7,'S01-T5'),
     building('广场回返亭', 'house', 0,-52,14,10,5,'S01-T6',180),
   ], [
+    object('s01-supplies','布兰 · 杂货与补给','merchant',-20,-20,'布兰把旅店的药剂和护具摆在路边。公共货架向每位旅人开放，不要求接下任何契约。',{actor:'shop-npc-supplies',actorModel:'mine-worker',merchant:'supplies'}),
+    object('s01-jeweler','琳娜 · 宝石与镶嵌','merchant',-20,18,'琳娜逐颗标明宝石属性和金币价格。购入的宝石可无损拆卸，培养不因换装丢失。',{actor:'shop-npc-jeweler',actorModel:'mine-worker',merchant:'jeweler'}),
     object('s01-cp','石桥镇整备处','checkpoint',0,-12,'长凳与清水旁可以安全整理装备；已领取的物资不会因休整补回。'),
     evidence('s01-streets','镇内街路牌',-8,0,'旅店连渡口街，行会后巷通拘留所；广场上有人等着安全回返者。'),
     evidence('s01-memorial','第七远征阵亡碑',5,9,'碑上称所有人已经阵亡，石缝却卡着近年更换灯油的收据；这不是完整真相。'),
@@ -115,7 +120,7 @@ export const AREAS: Record<string, AreaDef> = {
     building('猎人营屋','house',-31,-27,20,14,6),building('晾皮棚','tent',-31,27,16,14,5),
     building('岩脊巡林亭','tower',33,28,12,12,10),
   ],[
-    object('s05-nightqi','夜祈：猎径与弓具','merchant',-31,-16,'夜祈先看你的鞋底，再指向伏击地。她售出的路线曾被转卖，实际见到她即可访问独立的猎商库存。',{actor:'nightqi',merchant:'nightqi'}),
+    object('s05-nightqi','夜祈 · 猎装与狩猎委托','merchant',-31,-16,'夜祈先看你的鞋底，再指向伏击地。她售出的路线曾被转卖，实际见到她即可访问独立的猎商库存。',{actor:'nightqi',merchant:'nightqi'}),
     cache('find-a06','白桦树根宝囊','A06',34,-27,'游猎者皮甲缝在干燥的树根囊里，皮革留着旧猎径的弯折；此处只保存这一件装备。'),
     evidence('s05-prints','避开营地的铁靴印',17,8,'铁靴印在猎屋外突然转向，不是普通猎人跟踪兽群；可以沿南侧小径去看。'),
     evidence('s05-keeper','修过的猎径标记',-15,25,'三角刻痕指向可步行的岩脊绕路。夜祈给的是观察方法，不是每条路必有战斗的保证。'),
@@ -277,7 +282,7 @@ export const AREAS: Record<string, AreaDef> = {
   ],[],[obstacle('rock',44,-25,10,20,7),obstacle('rock',-43,1,8,14,5)]),
 
   'S01-T1': townRoom('S01-T1','第三杯旅店','公共厅后是客房与厨房，两道侧门实际连着镇内街巷。',36,32,'ews',[
-    object('t1-mira','弥菈：一份遗库委托','offer',-5,0,'弥菈把试光样片移到背光处：“拿回遗物匣，先谈清分成。”她衣内另有一份近日求援信抄件。',{actor:'mira',merchant:'mira'}),
+    object('t1-mira','弥菈 · 契约与探险装备','offer',-5,0,'弥菈把试光样片移到背光处：“拿回遗物匣，先谈清分成。”她衣内另有一份近日求援信抄件。',{actor:'mira',merchant:'mira'}),
     object('t1-lockbox','拆械 · 遗落的铜簧匣','dice_check',4,-5,'无人认领的铜簧匣；沿旧痕拆解锁舌，失败不影响委托。',{check:'inn-lockbox'}),
     evidence('t1-thirdcup','倒扣的第三只杯子',-8,3,'杯底留着旧磨痕。问起给谁，弥菈说是一个欠她钱的人，却没有说出名字。'),
     evidence('t1-sample','只含零散星点的试光样片',-2,4,'样片在背光下才有星点，无法显示完整路线；原信与完整星片仍在隘口的遗物匣里。'),
@@ -293,7 +298,7 @@ export const AREAS: Record<string, AreaDef> = {
   [obstacle('wall',-13,5,8,.5,3.2),obstacle('wall',0,5,10,.5,3.2),obstacle('wall',13,5,8,.5,3.2)]),
 
   'S01-T3': townRoom('S01-T3','铁匠街与洛恩工坊','锻造间与测绘小室分开，南面的工作院留着试装空间。',40,32,'ens',[
-    object('t3-lorn','洛恩：失踪的测绘学徒','merchant',-11,9,'洛恩认得三短一长的维修锤痕，谈起凯尔时把盾放下。工坊提供阵线之锚的唯一付费来源。',{actor:'lorn',merchant:'lorn'}),
+    object('t3-lorn','洛恩 · 装备与培养','merchant',-11,9,'洛恩认得三短一长的维修锤痕，谈起凯尔时把盾放下。工坊提供阵线之锚的唯一付费来源。',{actor:'lorn',merchant:'lorn'}),
     cache('find-j08','可跳过的整备教学：归乡信物','J08',-5,-5,'洛恩把归乡信物放在教学台上。拿取不要求击打次数，跳过讲解也保留唯一领取记录。'),
     evidence('t3-measure','凯尔未完成的通路图',11,9,'图上每一段退路都有测距，空白指向石场和地下旧居；凯尔想画人人都能走的地图。'),
     evidence('t3-transfer','阵线之锚送修单',11,-7,'旧军需箱中的靴子已经送到此处，价签三十二币；旧箱不会再复制一双。'),
@@ -458,6 +463,7 @@ installGrowingSources(AREAS);
 placeSideBossRematches(AREAS);
 installJourney(AREAS);
 installCampaignScenes(AREAS);
+installEarlyChapterContent(AREAS);
 installPetJourneys(AREAS);
 // Prerequisites name their real source and location rather than internal flag IDs.
 for(const event of Object.values(CAMPAIGN_EVENTS))for(const flag of [...event.requires??[],...event.requiresAny??[]]){
@@ -472,6 +478,9 @@ for(const event of Object.values(CAMPAIGN_EVENTS))for(const flag of [...event.re
  if(hint)(event.prerequisiteHints??={})[flag]=hint;
 }
 
+
+installCampaignExperience(AREAS);
+installEconomyRewards(AREAS);
 
 export function getArea(id: string): AreaDef {
   const found = AREAS[id];

@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "change": "Only cello-prefixed middle/low layers lowered 3dB at the exact V5 per-loop master gains.",
+  "typecheck": "npm run check: passed",
+  "build": "Normal test Web/mobile resource-bundle build: passed; no package/version bump.",
+  "scoreBalance": [
+    {
+      "mode": "explore",
+      "loweredCelloNotes": 220,
+      "allOtherNoteDataUnchanged": true,
+      "fixedMasterGain": 0.81846478813479
+    },
+    {
+      "mode": "combat",
+      "loweredCelloNotes": 284,
+      "allOtherNoteDataUnchanged": true,
+      "fixedMasterGain": 0.8203515443298184
+    }
+  ],
+  "decodedTracks": 3,
+  "nativeMappings": {
+    "musicMappings": 3,
+    "unchangedReleaseSfxMappings": 12,
+    "musicBytes": 3441808,
+    "historicalMusicPreserved": true,
+    "originalAftermathBytePreserved": true,
+    "oldMusicExcluded": 11
+  },
+  "playback": {
+    "passed": 3,
+    "total": 3,
+    "console": 0,
+    "pageErrors": 0,
+    "networkFailures": 0,
+    "httpErrors": 0,
+    "afterCount": 0,
+    "completed": 0
+  },
+  "preserved": "All prior music and 12 current release whooshes including metadata protected by SHA256; original aftermath is byte-identical.",
+  "priorControllerEvidence": "Unchanged controller and complete aftermath timeline already exercised in source-art/audio/embers-story-v5/web-check.json; this run verifies new clips, actual combat entry and mute/resume.",
+  "limits": [
+    "User listening acceptance pending.",
+    "TapTap Android device listening/interruptions pending; Web evidence does not substitute."
+  ],
+  "delivery": "Preview and Web assets updated; no upload, publication or ZIP requested."
+}

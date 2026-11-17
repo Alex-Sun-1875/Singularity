@@ -1,0 +1,309 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-16",
+  "reason": "用户明确要求完整接入火系重构：陨石终极、合并火域、一列地面喷焰。沿用现有角色分工的伤害预算，不把两个旧技能的伤害相加。",
+  "skills": {
+    "FIR_02": {
+      "type": "ultimate",
+      "unlockLevel": 11,
+      "resourceCost": 45,
+      "ultimateCost": 0,
+      "sharedUltimateLockSeconds": 1.5,
+      "windupSeconds": 0.85,
+      "releaseCommitSeconds": 0.85,
+      "recoverySeconds": 0.32,
+      "mechanic": "法阵预告落点，陨石从上方坠落造成范围伤害并点燃目标；爆燃后的地面余焰逐渐消散。",
+      "targetShape": "落点圆形陨石范围",
+      "ranks": [
+        {
+          "rank": 1,
+          "requiredCharacterLevel": 11,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 2.55,
+          "radiusMetres": 3.8,
+          "castRangeMetres": 14,
+          "geometry": {
+            "kind": "filledImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 3.8
+          },
+          "evolution": "终极陨石，主爆燃约1.2秒，残焰逐渐消散；每目标合计2.55S",
+          "upgradeEffect": "扩大陨石范围并提高伤害。"
+        },
+        {
+          "rank": 2,
+          "requiredCharacterLevel": 11,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 2.9,
+          "radiusMetres": 4.2,
+          "castRangeMetres": 15,
+          "geometry": {
+            "kind": "filledImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 4.2
+          },
+          "evolution": "终极陨石，主爆燃约1.2秒，残焰逐渐消散；每目标合计2.9S",
+          "upgradeEffect": "扩大陨石范围并提高伤害。"
+        },
+        {
+          "rank": 3,
+          "requiredCharacterLevel": 11,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 3.3,
+          "radiusMetres": 4.6,
+          "castRangeMetres": 16,
+          "geometry": {
+            "kind": "filledImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 4.6
+          },
+          "evolution": "终极陨石，主爆燃约1.2秒，残焰逐渐消散；每目标合计3.3S",
+          "upgradeEffect": "扩大陨石范围并提高伤害。"
+        },
+        {
+          "rank": 4,
+          "requiredCharacterLevel": 11,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 3.85,
+          "radiusMetres": 5,
+          "castRangeMetres": 17,
+          "geometry": {
+            "kind": "filledImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 5
+          },
+          "evolution": "终极陨石，主爆燃约1.2秒，残焰逐渐消散；每目标合计3.85S",
+          "upgradeEffect": "扩大陨石范围并提高伤害。"
+        },
+        {
+          "rank": 5,
+          "requiredCharacterLevel": 11,
+          "cooldownSeconds": 12,
+          "maxDamagePerTargetS": 4.45,
+          "radiusMetres": 5.5,
+          "castRangeMetres": 18,
+          "geometry": {
+            "kind": "filledImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 5.5
+          },
+          "evolution": "终极陨石，主爆燃约1.2秒，残焰逐渐消散；每目标合计4.45S",
+          "upgradeEffect": "扩大陨石范围并提高伤害。"
+        }
+      ]
+    },
+    "FIR_04": {
+      "name": "烈焰喷流",
+      "unlockLevel": 4,
+      "windupSeconds": 0.25,
+      "releaseCommitSeconds": 0.25,
+      "recoverySeconds": 0.24,
+      "mechanic": "五个小法阵沿前方排成一列，火焰竖直喷起并持续4秒；释放后方向与位置固定，以定向持续伤害为主。",
+      "targetShape": "前方一列地面喷焰",
+      "ranks": [
+        {
+          "rank": 1,
+          "slowPercent": 0,
+          "slowLingerSeconds": 0,
+          "zoneDurationSeconds": 4,
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "evolution": "五点地面喷焰，持续4秒；每目标直接伤害合计2.0S",
+          "upgradeEffect": "提高喷焰伤害与覆盖宽度。",
+          "maxDamagePerTargetS": 2.0,
+          "requiredCharacterLevel": 4,
+          "castRangeMetres": 7,
+          "rangeMetres": 7
+        },
+        {
+          "rank": 2,
+          "slowPercent": 0,
+          "slowLingerSeconds": 0,
+          "zoneDurationSeconds": 4,
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7.25,
+            "widthMetres": 1.3
+          },
+          "evolution": "五点地面喷焰，持续4秒；每目标直接伤害合计2.25S",
+          "upgradeEffect": "提高喷焰伤害与覆盖宽度。",
+          "maxDamagePerTargetS": 2.25,
+          "requiredCharacterLevel": 4,
+          "castRangeMetres": 7.25,
+          "rangeMetres": 7.25
+        },
+        {
+          "rank": 3,
+          "slowPercent": 0,
+          "slowLingerSeconds": 0,
+          "zoneDurationSeconds": 4,
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7.5,
+            "widthMetres": 1.4
+          },
+          "evolution": "五点地面喷焰，持续4秒；每目标直接伤害合计2.6S",
+          "upgradeEffect": "提高喷焰伤害与覆盖宽度。",
+          "maxDamagePerTargetS": 2.6,
+          "requiredCharacterLevel": 4,
+          "castRangeMetres": 7.5,
+          "rangeMetres": 7.5
+        },
+        {
+          "rank": 4,
+          "slowPercent": 0,
+          "slowLingerSeconds": 0,
+          "zoneDurationSeconds": 4,
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7.75,
+            "widthMetres": 1.5
+          },
+          "evolution": "五点地面喷焰，持续4秒；每目标直接伤害合计3.0S",
+          "upgradeEffect": "提高喷焰伤害与覆盖宽度。",
+          "maxDamagePerTargetS": 3.0,
+          "requiredCharacterLevel": 4,
+          "castRangeMetres": 7.75,
+          "rangeMetres": 7.75
+        },
+        {
+          "rank": 5,
+          "slowPercent": 0,
+          "slowLingerSeconds": 0,
+          "zoneDurationSeconds": 4,
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 8,
+            "widthMetres": 1.6
+          },
+          "evolution": "五点地面喷焰，持续4秒；每目标直接伤害合计3.5S",
+          "upgradeEffect": "提高喷焰伤害与覆盖宽度。",
+          "maxDamagePerTargetS": 3.5,
+          "requiredCharacterLevel": 4,
+          "castRangeMetres": 8,
+          "rangeMetres": 8
+        }
+      ],
+      "damageRole": "area",
+      "counterplay": "横向避开前方一列地面喷焰；释放后位置固定，不随施法者移动，不穿越地形。"
+    },
+    "FIR_05": {
+      "name": "焚焰火域",
+      "type": "active",
+      "unlockLevel": 6,
+      "resourceCost": 18,
+      "ultimateCost": 0,
+      "sharedUltimateLockSeconds": 0,
+      "windupSeconds": 0.4,
+      "releaseCommitSeconds": 0.4,
+      "recoverySeconds": 0.28,
+      "mechanic": "火浪在落点铺开固定火域，持续燃烧并减速；同一时间只保留一处火域。",
+      "targetShape": "具有纵深的矩形火域",
+      "ranks": [
+        {
+          "rank": 1,
+          "requiredCharacterLevel": 6,
+          "cooldownSeconds": 7,
+          "maxDamagePerTargetS": 1.9,
+          "zoneDurationSeconds": 4,
+          "slowPercent": 0.35,
+          "slowLingerSeconds": 0.4,
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "evolution": "焚焰火域，燃烧并减速4秒；每目标合计1.9S",
+          "upgradeEffect": "提高火域伤害与纵深。"
+        },
+        {
+          "rank": 2,
+          "requiredCharacterLevel": 6,
+          "cooldownSeconds": 7,
+          "maxDamagePerTargetS": 2.15,
+          "zoneDurationSeconds": 4,
+          "slowPercent": 0.35,
+          "slowLingerSeconds": 0.4,
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6.5,
+            "depthMetres": 3.25
+          },
+          "evolution": "焚焰火域，燃烧并减速4秒；每目标合计2.15S",
+          "upgradeEffect": "提高火域伤害与纵深。"
+        },
+        {
+          "rank": 3,
+          "requiredCharacterLevel": 6,
+          "cooldownSeconds": 7,
+          "maxDamagePerTargetS": 2.45,
+          "zoneDurationSeconds": 4,
+          "slowPercent": 0.35,
+          "slowLingerSeconds": 0.4,
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 7,
+            "depthMetres": 3.5
+          },
+          "evolution": "焚焰火域，燃烧并减速4秒；每目标合计2.45S",
+          "upgradeEffect": "提高火域伤害与纵深。"
+        },
+        {
+          "rank": 4,
+          "requiredCharacterLevel": 6,
+          "cooldownSeconds": 7,
+          "maxDamagePerTargetS": 2.85,
+          "zoneDurationSeconds": 4,
+          "slowPercent": 0.35,
+          "slowLingerSeconds": 0.4,
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 7.5,
+            "depthMetres": 3.75
+          },
+          "evolution": "焚焰火域，燃烧并减速4秒；每目标合计2.85S",
+          "upgradeEffect": "提高火域伤害与纵深。"
+        },
+        {
+          "rank": 5,
+          "requiredCharacterLevel": 6,
+          "cooldownSeconds": 7,
+          "maxDamagePerTargetS": 3.3,
+          "zoneDurationSeconds": 4,
+          "slowPercent": 0.35,
+          "slowLingerSeconds": 0.4,
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 8,
+            "depthMetres": 4
+          },
+          "evolution": "焚焰火域，燃烧并减速4秒；每目标合计3.3S",
+          "upgradeEffect": "提高火域伤害与纵深。"
+        }
+      ],
+      "damageRole": "control",
+      "counterplay": "离开固定火域可避持续伤害与减速；同一施法者的火域不叠加。"
+    }
+  },
+  "styles": {
+    "FIR": {
+      "ultimate": "FIR_02"
+    }
+  },
+  "rules": {
+    "fireKitRevision": 2
+  }
+}

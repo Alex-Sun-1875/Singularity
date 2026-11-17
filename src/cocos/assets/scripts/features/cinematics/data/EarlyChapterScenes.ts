@@ -1,0 +1,20 @@
+import {beat,type CampaignScene} from '../common/CinematicTypes';
+export const EARLY_CHAPTER_SCENES:CampaignScene[]=[
+ {id:'early-warning',chapter:1,area:'S02',trigger:'task',task:'c1-warning',title:'early.warning.title',beats:[beat('early.nightqi','early.warning.1',5),beat('early.raphael','early.warning.2',5)]},
+ {id:'early-table',chapter:1,area:'U1-04',trigger:'task',task:'c1-table-truth',title:'early.table.title',beats:[beat('early.raphael','early.table.1',5),beat('early.mira','early.table.2',5),beat('early.evelyn','early.table.3',5),beat('early.raphael','early.table.4',5)]},
+ {id:'early-return',chapter:1,area:'S01-T6',trigger:'task',task:'c1-town-return',title:'early.return.title',beats:[beat('early.evelyn','early.return.1',5),beat('early.raphael','early.return.2',5)]},
+ {id:'early-oath',chapter:1,area:'U1-04',trigger:'task',task:'c1-renewed-oath',title:'early.oath.title',beats:[beat('early.mira','early.oath.1',6),beat('early.evelyn','early.oath.2',5),beat('early.raphael','early.oath.3',5),beat('early.mira','early.oath.4',5)]},
+ {id:'early-front',chapter:2,area:'H01',trigger:'task',task:'c2-front-voices',title:'early.front.title',beats:[beat('early.tarek','early.front.1',5),beat('early.bren','early.front.2',5),beat('early.raphael','early.front.3',5)]},
+ {id:'early-order',chapter:2,area:'H02',trigger:'task',task:'c2-order-road',title:'early.order.title',beats:[beat('early.tarek','early.order.1',5),beat('early.raphael','early.order.2',5)]},
+ {id:'early-post',chapter:2,area:'H07',trigger:'task',task:'c2-post-settle',title:'early.post.title',beats:[beat('early.ryn','early.post.1',5),beat('early.raphael','early.post.2',5)]},
+ {id:'early-contact',chapter:2,area:'U1-08',trigger:'task',task:'c2-contact-failsafe',title:'early.contact.title',beats:[beat('early.core','early.contact.1',5,{cue:'quiet'}),beat('early.raphael','early.contact.2',5),beat('early.core','early.contact.3',5)]},
+ {id:'early-inn',chapter:2,area:'H01',trigger:'task',task:'c2-inn-return',title:'early.inn.title',beats:[beat('early.ida','early.inn.1',5),beat('early.bren','early.inn.2',5),beat('early.tarek','early.inn.3',5),beat('early.raphael','early.inn.4',5)]},
+ {id:'early-lantern',chapter:1,area:'S06',trigger:'task',task:'side-lantern-settle',title:'early.lantern.title',beats:[beat('early.eina','early.lantern.1',5),beat('early.orin','early.lantern.2',5)]},
+ {id:'early-water',chapter:1,area:'S01-T6',trigger:'task',task:'side-water-settle',title:'early.water.title',beats:[beat('early.raphael','early.water.1',5),beat('early.evelyn','early.water.2',5)]},
+ {id:'early-valley',chapter:1,area:'S05',trigger:'task',task:'side-valley-settle',title:'early.valley.title',beats:[beat('early.nightqi','early.valley.1',5),beat('early.raphael','early.valley.2',5)]},
+ {id:'early-repairs',chapter:2,area:'H01',trigger:'task',task:'side-repairs-settle',title:'early.repairs.title',beats:[beat('early.ida','early.repairs.1',5),beat('early.bren','early.repairs.2',5)]},
+ {id:'early-ledger',chapter:2,area:'H01',trigger:'task',task:'side-ledger-settle',title:'early.ledger.title',beats:[beat('early.tarek','early.ledger.1',5),beat('early.raphael','early.ledger.2',5)]},
+ {id:'early-forge',chapter:2,area:'H01',trigger:'task',task:'side-forge-bench-test',title:'early.forge.title',beats:[beat('early.ida','early.forge.1',5),beat('early.ida','early.forge.2',5)]},
+ {id:'early-orders',chapter:2,area:'U1-07',trigger:'task',task:'side-orders-isolate-test',title:'early.orders.title',beats:[beat('early.luen','early.orders.1',5),beat('early.raphael','early.orders.2',5)]},
+ {id:'early-bridge',chapter:2,area:'H07',trigger:'task',task:'side-bridge-return-check',title:'early.bridge.title',beats:[beat('early.ryn','early.bridge.1',5),beat('early.raphael','early.bridge.2',5)]},
+];

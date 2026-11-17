@@ -1,0 +1,60 @@
+{
+  "date": "2026-11-17",
+  "feature": "主菜单、继续游戏与确认重开",
+  "version": "0.3.52",
+  "profile": "test",
+  "platform": "HTML concept-2d，正常玩法规则",
+  "implementation": {
+    "reuse": [
+      "SaveStore.startFresh 双槽备份与写后校验",
+      "PlatformServices / PlatformStorage 档位隔离",
+      "GoldMenuActions / GoldMenuButton 现有暗金组件",
+      "GameSession 新旅程与 seed 隔离的 LocalCartography"
+    ],
+    "newDependencies": [],
+    "saveDeletionScope": "替换当前玩法档位的活跃旅程，保留备份、历史存档和偏好；不调用全量 clear"
+  },
+  "checks": {
+    "typecheck": "npm run check 通过",
+    "existingSaveChecks": "node --import tsx --test tests/storage.save.test.ts：10/10 通过",
+    "build": "npm start test：concept-2d Cocos 构建、render policy、test 档位标记校验通过",
+    "browserFlow": [
+      "First launch and settings do not create a save; Escape keeps title",
+      "Pause returns to title and keeps normal level-1 journey",
+      "Cancelling restart preserves journey progress",
+      "Reload offers Continue and settings Journey contains direct Main menu",
+      "Backup failure stays on confirmation with reason and intact old slots",
+      "Confirmed restart creates a distinct saved level-1 journey and replays opening",
+      "Reload restores new journey rather than old backup",
+      "Saved death and dialogue do not hide title, settings or restart confirmation",
+      "Corrupt saves remain unchanged until restart; confirmed restart recovers playable level-1 journey"
+    ],
+    "layoutAndLifecycle": [
+      "Synthetic 44px horizontal / 20px bottom safe-area stress keeps menu centered and clear",
+      "Pending dice keeps its unrolled state through title/settings; Continue restores it",
+      "Foreground recovery preserves title or gameplay without reopening menus",
+      "Restart retains visual and control preferences",
+      "844x390 @3: four targets >=48px with >=8px gaps and inside viewport",
+      "932x430 @3: four targets >=48px with >=8px gaps and inside viewport",
+      "956x440 @3: four targets >=48px with >=8px gaps and inside viewport"
+    ],
+    "pageErrors": [],
+    "visualReview": "实际截图确认主菜单、确认页、备份失败提示、坏档提示、大屏及合成安全区压力状态；坏档提示已避开按钮"
+  },
+  "evidence": "test-results/main-menu-restart-v1/",
+  "sourceSha256": {
+    "assets/scripts/app/ChapterGame.ts": "bc836f7e44877379178765ae3023563a5a531ee6abde59fbc5ef83053ad3a50a",
+    "assets/scripts/app/Menus.ts": "ace8299f537f466e6c12b2c0d64f537365defb1abcdcb88b1e33da62841c3e6b",
+    "assets/scripts/features/journey/runtime/JourneyStartScreen.ts": "396f920e502834c04d2ea05eaa129223e58dd010636225a71b493fff05b7778d",
+    "assets/scripts/features/journey/locales/StartMenuText.ts": "2ab9e871e54062ea4e1c7e0648ef66c2383f24d4278c08fb4a32eeceb393414d"
+  },
+  "pending": [
+    "TapTap 真实 AppID 下的平台与真机触控、安全区、存读档及前后台验收",
+    "未制作本轮 TapTap 安装/上传包；既有 ZIP 不包含本轮修改"
+  ],
+  "notes": [
+    "浏览器检查使用隔离的临时用户环境，未清除用户现有存档",
+    "安全区压力为合成夹具，不代表 TapTap 真机证据",
+    "dev 与 release 沿用相同源码入口及既有档位规则，本轮只导出正常 test 网页"
+  ]
+}

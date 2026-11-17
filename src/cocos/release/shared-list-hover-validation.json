@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-17",
+  "timezone": "Asia/Shanghai",
+  "feature": "shared-list-hover-surface",
+  "implementation": {
+    "surface": "assets/scripts/shared/ui/ButtonSurface.ts",
+    "inputState": "assets/scripts/shared/ui/ButtonFeedback.ts",
+    "nativeButtonRetainsInputAndClick": true,
+    "multilineRowsUseMeasuredHeight": true,
+    "artworkFeedbackUsesExplicitInsetBounds": true,
+    "selectionAndQualityRemainIndependent": true
+  },
+  "checks": {
+    "typescript": "passed: npm run check",
+    "webExport": "passed: Build-Local.ps1 -Platform web-mobile -OutputName concept-2d -Profile test",
+    "compiledProfile": "test; normal gameplay; no version increment",
+    "viewports": ["1440x900 desktop", "844x390 mobile at 3x", "932x430 mobile at 3x"],
+    "browserChecks": 44,
+    "screenshots": 30,
+    "pageErrors": [],
+    "pages": ["settings journey", "settings controls", "settings audio", "pause list", "skills", "equipment grid", "cultivation equipment list", "adventure journal directory", "compact map waypoints"],
+    "interaction": ["native mouse hover", "pressed", "drag out", "disable and re-enable", "hide and show", "mouse wheel scroll cancellation", "background cancellation", "real mobile touch navigation", "real mobile toggle and touch-release cleanup"],
+    "geometry": "The settings title and description both fit inside the full-row feedback; visible feedback does not enlarge native input bounds.",
+    "supplemental": {
+      "equipmentGallery": "passed: native card hover with initial inventory; normal artwork loaded",
+      "bossDirectory": "passed: native row hover using a disposable matching-level/previous-defeat visibility fixture; does not prove natural progression",
+      "pageErrors": []
+    },
+    "evidence": ["src/cocos/test-results/shared-hover-v1/validation.json", "src/cocos/test-results/shared-hover-v1/supplemental.json"],
+    "storageScope": "New disposable browser contexts; existing user browser sessions and saves were not accessed."
+  },
+  "pending": ["TapTap target-device acceptance"]
+}

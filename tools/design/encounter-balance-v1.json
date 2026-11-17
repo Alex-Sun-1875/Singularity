@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-17",
+  "reason": "同等级装备与怪物耐久、暴击和恢复资源一起校准；治疗/护盾消耗需要与进攻取舍。正常test/release不自动升40级，dev单独快速成长。",
+  "skills": {
+    "COM_02": {
+      "resourceCost": 32,
+      "mechanic": "从补给栏第三格施放的通用恢复技能，不占固定战斗槽。消耗32点当前职业资源，8秒冷却；生命全满或恢复持续中不能重复施放。保留三次治疗、首跳强化与低生命应急成长。",
+      "ranks": [
+        {
+          "rank": 1,
+          "healMaxHpPercent": 12,
+          "evolution": "共回复12%最大生命，三次、每秒一次",
+          "upgradeEffect": "共回复12%最大生命，三次、每秒一次"
+        },
+        {
+          "rank": 2,
+          "healMaxHpPercent": 13.5,
+          "evolution": "总回复13.5%",
+          "upgradeEffect": "总回复13.5%"
+        },
+        {
+          "rank": 3,
+          "healMaxHpPercent": 15,
+          "evolution": "总回复15%，分配改为50%／25%／25%，更快缓解危险",
+          "upgradeEffect": "总回复15%，分配改为50%／25%／25%，更快缓解危险"
+        },
+        {
+          "rank": 4,
+          "healMaxHpPercent": 16.5,
+          "evolution": "总回复16.5%",
+          "upgradeEffect": "总回复16.5%"
+        },
+        {
+          "rank": 5,
+          "healMaxHpPercent": 18,
+          "evolution": "总回复18%；最后一跳结算前生命不足50%，额外回复6%最大生命",
+          "upgradeEffect": "总回复18%；最后一跳结算前生命不足50%，额外回复6%最大生命"
+        }
+      ]
+    },
+    "WAR_03": {
+      "resourceCost": 24
+    },
+    "FIR_03": {
+      "resourceCost": 24
+    },
+    "THU_06": {
+      "resourceCost": 18
+    }
+  },
+  "rules": {
+    "localPlaytestMaxLevel": false,
+    "maxLevelDevelopmentOnly": true,
+    "encounterBalanceRevision": 1
+  }
+}

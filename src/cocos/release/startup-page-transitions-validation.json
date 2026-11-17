@@ -1,0 +1,355 @@
+{
+  "date": "2026-11-17",
+  "version": "0.3.54",
+  "profile": "test",
+  "status": "Source, HTML export and page-loading review validated",
+  "packageProduced": false,
+  "uploaded": false,
+  "taptapRuntimeVerified": false,
+  "physicalDeviceVerified": false,
+  "implementation": [
+    "Start likely page textures alongside initial scene loading. Use Cocos loadAny priority -1 for optional equipment textures; retain normal priority for shared chrome and the character page. Do not await optional page prewarm in world readiness, and do not repeat its inventory/catalog scan during map travel.",
+    "Split management-page art by usage, share in-flight texture requests, and retain each visited skill family with an explicit Node owner. Prepare only the current seven-skill family initially, rather than the full 33-skill catalog.",
+    "Overlap independent VFX shader variants, shield preparation, equipment effects, damage glyphs and combat audio. Keep the final rendered-frame/physics readiness gate and the existing frame-rate setting.",
+    "Keep the previous complete page during asynchronous preparation and place a transparent native BlockInputEvents guard above it. Show a compact shared gold-panel status only after 150ms; fast cache hits have no artificial delay. Release the guard on completion, failure, cancellation, authentication interruption and disposal; rebuild it on resize. Exclude it from title-menu HUD concealment."
+  ],
+  "method": {
+    "engine": "Cocos Creator 3.8.8",
+    "host": "Windows desktop Chrome, headless, same 844x390 viewport, DPR 3, touch emulation; HTML painted-world/native-hero mode",
+    "samples": 3,
+    "baseline": "Retained pre-change concept-2d-audio export; inspected original page-prewarm and sequential shader code. World/economy work was also changing in the shared worktree, so these are local workflow samples, not an isolated whole-repository benchmark.",
+    "final": "Fresh normal-rule concept-2d export at 127.0.0.1:7469, with final source. A new browser context per sample; one browser process per phase. No disk/OS/shader cache purge. First process sample includes more shader compilation than later contexts.",
+    "pageTiming": "open() through asynchronous preparation and one completed render frame; normal level-one isolated session. Attributes, equipment, skills, forge, equipment, skills in that order.",
+    "travelTiming": "Session enter and full scene rebuild into S01 and back to S01-T1; used as functional evidence. No map-transition speedup claimed.",
+    "limitations": [
+      "Local server has no mobile download/decompression cost.",
+      "Small sample and non-identical unrelated world/economy changes; timing gains are illustrative local observations.",
+      "No physical Android device was attached to ADB. TapTap installation, subpackage caching and device startup/resume remain unverified."
+    ]
+  },
+  "measurements": {
+    "startupMs": {
+      "before": [
+        4222,
+        2326,
+        2375
+      ],
+      "after": [
+        3720,
+        2016,
+        1928
+      ],
+      "medianBefore": 2375,
+      "medianAfter": 2016
+    },
+    "startupPlusSixPageOpensMs": {
+      "before": [
+        4742.5,
+        2852.7,
+        2893.1
+      ],
+      "after": [
+        4291,
+        2593.1,
+        2476.2
+      ],
+      "medianBefore": 2893.1,
+      "medianAfter": 2593.1
+    },
+    "pageMedians": [
+      {
+        "menu": "attributes",
+        "visit": 0,
+        "msBefore": 80.8,
+        "msAfter": 80.3
+      },
+      {
+        "menu": "equipment",
+        "visit": 1,
+        "msBefore": 76.6,
+        "msAfter": 107.1
+      },
+      {
+        "menu": "checks",
+        "visit": 2,
+        "msBefore": 108.4,
+        "msAfter": 127.7
+      },
+      {
+        "menu": "forge",
+        "visit": 3,
+        "msBefore": 159.3,
+        "msAfter": 151.7
+      },
+      {
+        "menu": "equipment",
+        "visit": 4,
+        "msBefore": 54.8,
+        "msAfter": 55.1
+      },
+      {
+        "menu": "checks",
+        "visit": 5,
+        "msBefore": 37.3,
+        "msAfter": 35.6
+      }
+    ],
+    "resourcesAtReady": [
+      {
+        "commonTextures": 66,
+        "commonTextureBytes": 9594476,
+        "workshopReady": false,
+        "skillIcons": 7,
+        "skillReady": true,
+        "ownedEquipmentIcons": 3
+      },
+      {
+        "commonTextures": 71,
+        "commonTextureBytes": 9870312,
+        "workshopReady": false,
+        "skillIcons": 7,
+        "skillReady": true,
+        "ownedEquipmentIcons": 3
+      },
+      {
+        "commonTextures": 70,
+        "commonTextureBytes": 9812456,
+        "workshopReady": false,
+        "skillIcons": 7,
+        "skillReady": true,
+        "ownedEquipmentIcons": 3
+      }
+    ],
+    "initialSkillIcons": {
+      "before": 33,
+      "after": 7
+    },
+    "tradeoff": "First equipment and skill-page opens are about 20–31ms slower in these samples because optional art is no longer a global startup gate. The median complete startup-plus-six-page workflow is faster. Repeat opens are approximately 36–55ms, broadly similar to the retained build; no universal page-speedup percentage is claimed."
+  },
+  "validation": {
+    "typeCheck": "npm run check passed",
+    "tapConfiguration": "npm run check:tap passed; configuration only, not TapTap runtime validation",
+    "build": "npm run start:test passed; normal-rule HTML concept-2d export, frame-rate/render policy verified",
+    "frameRate": [
+      {
+        "viewport": {
+          "width": 844,
+          "height": 390
+        },
+        "frameRate": 60
+      },
+      {
+        "viewport": {
+          "width": 932,
+          "height": 430
+        },
+        "frameRate": 60
+      },
+      {
+        "viewport": {
+          "width": 1280,
+          "height": 720
+        },
+        "frameRate": 60
+      }
+    ],
+    "pageReview": {
+      "views": [
+        {
+          "viewport": {
+            "width": 844,
+            "height": 390
+          },
+          "checks": [
+            "Visited skill families reuse frame ownership",
+            "Real touch cannot activate stale page controls",
+            "Cancelled loads cannot replace the new page",
+            "Load failure releases the input guard",
+            "Resize rebuilds and releases the input guard",
+            "Foreground retains the current menu"
+          ],
+          "resources": {
+            "commonTextures": 41,
+            "commonTextureBytes": 7645772,
+            "workshopReady": false,
+            "skillIcons": 7,
+            "skillReady": true,
+            "ownedEquipmentIcons": 3
+          },
+          "frameRate": 60,
+          "after": {
+            "commonTextures": 119,
+            "commonTextureBytes": 16692152,
+            "workshopReady": true,
+            "skillIcons": 16,
+            "skillReady": true,
+            "ownedEquipmentIcons": 3
+          }
+        },
+        {
+          "viewport": {
+            "width": 932,
+            "height": 430
+          },
+          "checks": [
+            "Visited skill families reuse frame ownership",
+            "Real touch cannot activate stale page controls",
+            "Cancelled loads cannot replace the new page",
+            "Load failure releases the input guard",
+            "Resize rebuilds and releases the input guard",
+            "Foreground retains the current menu"
+          ],
+          "resources": {
+            "commonTextures": 83,
+            "commonTextureBytes": 11462920,
+            "workshopReady": false,
+            "skillIcons": 7,
+            "skillReady": true,
+            "ownedEquipmentIcons": 3
+          },
+          "frameRate": 60,
+          "after": {
+            "commonTextures": 119,
+            "commonTextureBytes": 16692152,
+            "workshopReady": true,
+            "skillIcons": 16,
+            "skillReady": true,
+            "ownedEquipmentIcons": 3
+          }
+        },
+        {
+          "viewport": {
+            "width": 1280,
+            "height": 720
+          },
+          "checks": [
+            "Visited skill families reuse frame ownership",
+            "Real touch cannot activate stale page controls",
+            "Cancelled loads cannot replace the new page",
+            "Load failure releases the input guard",
+            "Resize rebuilds and releases the input guard",
+            "Foreground retains the current menu"
+          ],
+          "resources": {
+            "commonTextures": 34,
+            "commonTextureBytes": 6613580,
+            "workshopReady": false,
+            "skillIcons": 7,
+            "skillReady": true,
+            "ownedEquipmentIcons": 3
+          },
+          "frameRate": 60,
+          "after": {
+            "commonTextures": 119,
+            "commonTextureBytes": 16692152,
+            "workshopReady": true,
+            "skillIcons": 16,
+            "skillReady": true,
+            "ownedEquipmentIcons": 3
+          }
+        }
+      ],
+      "errors": [],
+      "passed": true
+    },
+    "travel": [
+      [
+        {
+          "id": "S01",
+          "ms": 452.2999999523163,
+          "failure": ""
+        },
+        {
+          "id": "S01-T1",
+          "ms": 117.10000002384186,
+          "failure": ""
+        }
+      ],
+      [
+        {
+          "id": "S01",
+          "ms": 430.1999999284744,
+          "failure": ""
+        },
+        {
+          "id": "S01-T1",
+          "ms": 114.70000004768372,
+          "failure": ""
+        }
+      ],
+      [
+        {
+          "id": "S01",
+          "ms": 402.7999999523163,
+          "failure": ""
+        },
+        {
+          "id": "S01-T1",
+          "ms": 109.29999995231628,
+          "failure": ""
+        }
+      ]
+    ],
+    "rules": {
+      "command": "npm test",
+      "tests": 181,
+      "passed": 171,
+      "failed": 10,
+      "log": "temp/loading-transition/rules.log",
+      "failedTests": [
+        "not ok 7 - cultivation opens by character level, retains early gems and replays separate socket and gem gates",
+        "not ok 20 - reject then independent discovery permits progress without contract gold",
+        "not ok 21 - contract advance is a single payment and copy changes later knowledge",
+        "not ok 27 - merchant stock is atomic and rest does not restock",
+        "not ok 33 - walking away from a merchant cannot submit a remote purchase",
+        "not ok 42 - Mira shop is reachable through her real offer dialogue after accepting",
+        "not ok 52 - A13 reduces physical damage during iron shield and enemies never force player displacement",
+        "not ok 66 - a real locked chest grants reward once on success and repeated clicks cannot duplicate it",
+        "not ok 120 - three real merchant anchors admit safe discovered trade without remote purchases",
+        "not ok 175 - permanent equipment sources remain finite and do not duplicate merchant stock"
+      ],
+      "scope": "These rule suites do not reference/import any of the six changed Cocos presentation/loading modules. Failures remain in the concurrently modified growth, merchants, rewards, shield rules and world-source expectations. They were not hidden or modified as part of this performance task."
+    }
+  },
+  "officialReferences": [
+    "https://docs.cocos.com/creator/3.8/manual/en/asset/downloader-parser.html",
+    "https://docs.cocos.com/creator/3.8/api/en/class/AssetManager",
+    "https://docs.cocos.com/creator/3.8/manual/en/asset/release-manager.html",
+    "https://developer.taptap.cn/minigameapidoc/dev/engine/Cocos-Laya-Egret/"
+  ],
+  "sources": [
+    {
+      "path": "src/cocos/assets/scripts/app/ChapterGame.ts",
+      "sha256": "fd3ceba409a9744ccc332746c9793e510ae4d5270d4fd369ff1be4f0bcac667e"
+    },
+    {
+      "path": "src/cocos/assets/scripts/app/PreparationResources.ts",
+      "sha256": "061aa350cf681ef25726b38dc7b90fb3240d54b2d02ce0aa3becfe20645111d6"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/combat/runtime/Effects.ts",
+      "sha256": "5caca45ce4aa878da3db5873fe9a0382637354f226fa4ad8c61dcb214f50e9a7"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/loading/runtime/LoadingScreen.ts",
+      "sha256": "3ccd8c78ec4c115798114bf1d24bb159b2b356a7f8947759a2333cc01deac1d3"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/journey/runtime/JourneyStartScreen.ts",
+      "sha256": "7370fd14b6afbc3fa3a64ded264e047d5a5b4b7b7303ffccce75dc4f1789c12a"
+    },
+    {
+      "path": "src/cocos/assets/scripts/shared/assets/GameResources.ts",
+      "sha256": "ba34c937b6251e0053b2a36bc7d7ea3412c5dc34251a7cb957d0f4740f85b459"
+    }
+  ],
+  "evidence": [
+    "temp/loading-transition/before.json",
+    "temp/loading-transition/final-priority.json",
+    "temp/loading-transition/review.json",
+    "temp/loading-transition/rules.log",
+    "temp/loading-transition/*-page-wait.png",
+    "temp/loading-transition/844-*.png",
+    "src/cocos/temp/build-concept-2d-out.log"
+  ]
+}

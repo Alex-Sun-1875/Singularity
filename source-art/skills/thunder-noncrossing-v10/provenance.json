@@ -1,0 +1,456 @@
+{
+  "scope": "Isolated design preview: nearest eligible next target, maximum degree two including caster entry, no crossing, no extra closure links, no MISS relay",
+  "renderSource": "Native Cocos session, real casts, damage and graph events",
+  "productionState": "No production code changed",
+  "compiledGameHash": "e5a395cb3b787071a53dd6daed44ab8f2f4803e292b638ae96566b3d60a56f85",
+  "recommendationStatus": "Diagnostic only; reject universal degree-two traversal because it loses valid targets",
+  "recommendedDirection": "Differentiate sequential chain from sparse branching pulse network; visual layout must not reduce the valid hit set; redesign timing and impact hierarchy",
+  "artAcceptance": "Pending user review",
+  "platformValidation": "Local Cocos Web rendering only; no TapTap device claim",
+  "nativeFrameCounts": {
+    "NETWORK_R1": 66,
+    "NETWORK_R5": 66,
+    "CHAIN_R5": 66
+  },
+  "cases": {
+    "NETWORK_R1": {
+      "case": "NETWORK_R1",
+      "rank": 1,
+      "monsterCount": 12,
+      "targetLimit": 4,
+      "radiusMetres": 4,
+      "connectionRadiusMetres": 4,
+      "selected": [
+        "study-target-0",
+        "study-target-1",
+        "study-target-2",
+        "study-target-8"
+      ],
+      "damaged": [
+        "study-target-0",
+        "study-target-1",
+        "study-target-2",
+        "study-target-8"
+      ],
+      "missed": [],
+      "notReachedWithoutCrossing": [],
+      "firstBeatEntries": [
+        {
+          "type": "skill_segment",
+          "skillId": "THU_05",
+          "family": "THU",
+          "rank": 1,
+          "castId": "cast:101",
+          "shape": "boundedPulseGraph",
+          "geometry": {
+            "kind": "boundedPulseGraph",
+            "origin": "aimPoint",
+            "radiusMetres": 4,
+            "totalTargetLimit": 4
+          },
+          "from": {
+            "x": 5.063935297506007,
+            "z": -5.089994271383889
+          },
+          "to": {
+            "x": 5.063935297506007,
+            "z": -5.089994271383889
+          },
+          "segment": 0,
+          "angle": 2.9355346029916,
+          "angleDegrees": 0,
+          "radius": 4,
+          "width": 0,
+          "length": 0,
+          "depth": 0,
+          "targetId": "study-target-0",
+          "phase": "connection"
+        }
+      ],
+      "missedRelayNodes": [],
+      "firstBeatDamageEdges": [
+        {
+          "segment": 0,
+          "source": "study-target-0",
+          "target": "study-target-2",
+          "from": {
+            "x": 5.063935297506007,
+            "z": -5.089994271383889
+          },
+          "to": {
+            "x": 3.7637670383797746,
+            "z": -6.689857546154786
+          }
+        },
+        {
+          "segment": 0,
+          "source": "study-target-2",
+          "target": "study-target-1",
+          "from": {
+            "x": 3.7637670383797746,
+            "z": -6.689857546154786
+          },
+          "to": {
+            "x": 6.896071205385245,
+            "z": -6.035128132304936
+          }
+        },
+        {
+          "segment": 0,
+          "source": "study-target-1",
+          "target": "study-target-8",
+          "from": {
+            "x": 6.896071205385245,
+            "z": -6.035128132304936
+          },
+          "to": {
+            "x": 6.616836483923388,
+            "z": -3.232981103626726
+          }
+        }
+      ],
+      "firstBeatVisualLoopEdges": [],
+      "firstBeatCrossings": [],
+      "visibleCurveCrossings": [],
+      "maxConnectionsPerTargetIncludingEntry": 2,
+      "launchMidpointVisiblePixels": 290,
+      "nearestChoiceCount": 10,
+      "connectionViolations": [],
+      "decorativeEndsNearUnselected": [],
+      "renderEndpointShiftMetres": 0.0,
+      "maxRenderedChains": 3
+    },
+    "NETWORK_R5": {
+      "case": "NETWORK_R5",
+      "rank": 5,
+      "monsterCount": 12,
+      "targetLimit": 12,
+      "radiusMetres": 9,
+      "connectionRadiusMetres": 9,
+      "selected": [
+        "study-target-0",
+        "study-target-1",
+        "study-target-10",
+        "study-target-11",
+        "study-target-2",
+        "study-target-3",
+        "study-target-4",
+        "study-target-5",
+        "study-target-6",
+        "study-target-7",
+        "study-target-8",
+        "study-target-9"
+      ],
+      "damaged": [
+        "study-target-0",
+        "study-target-1",
+        "study-target-10",
+        "study-target-2",
+        "study-target-4",
+        "study-target-5",
+        "study-target-6",
+        "study-target-8"
+      ],
+      "missed": [
+        "study-target-3"
+      ],
+      "notReachedWithoutCrossing": [
+        "study-target-11",
+        "study-target-7",
+        "study-target-9"
+      ],
+      "firstBeatEntries": [
+        {
+          "type": "skill_segment",
+          "skillId": "THU_05",
+          "family": "THU",
+          "rank": 5,
+          "castId": "cast:101",
+          "shape": "boundedPulseGraph",
+          "geometry": {
+            "kind": "boundedPulseGraph",
+            "origin": "aimPoint",
+            "radiusMetres": 9,
+            "totalTargetLimit": 12
+          },
+          "from": {
+            "x": 5.063935297506007,
+            "z": -5.089994271383889
+          },
+          "to": {
+            "x": 5.063935297506007,
+            "z": -5.089994271383889
+          },
+          "segment": 0,
+          "angle": 2.9355346029916,
+          "angleDegrees": 0,
+          "radius": 9,
+          "width": 0,
+          "length": 0,
+          "depth": 0,
+          "targetId": "study-target-0",
+          "phase": "connection"
+        }
+      ],
+      "missedRelayNodes": [],
+      "firstBeatDamageEdges": [
+        {
+          "segment": 0,
+          "source": "study-target-0",
+          "target": "study-target-2",
+          "from": {
+            "x": 5.063935297506007,
+            "z": -5.089994271383889
+          },
+          "to": {
+            "x": 3.7637670383797746,
+            "z": -6.689857546154786
+          }
+        },
+        {
+          "segment": 0,
+          "source": "study-target-2",
+          "target": "study-target-4",
+          "from": {
+            "x": 3.7637670383797746,
+            "z": -6.689857546154786
+          },
+          "to": {
+            "x": 4.5396336830336885,
+            "z": -7.95793914830564
+          }
+        },
+        {
+          "segment": 0,
+          "source": "study-target-4",
+          "target": "study-target-6",
+          "from": {
+            "x": 4.5396336830336885,
+            "z": -7.95793914830564
+          },
+          "to": {
+            "x": 5.861886770635513,
+            "z": -8.907489974921805
+          }
+        },
+        {
+          "segment": 0,
+          "source": "study-target-6",
+          "target": "study-target-5",
+          "from": {
+            "x": 5.861886770635513,
+            "z": -8.907489974921805
+          },
+          "to": {
+            "x": 8.211114895889615,
+            "z": -8.416442914534418
+          }
+        },
+        {
+          "segment": 0,
+          "source": "study-target-5",
+          "target": "study-target-1",
+          "from": {
+            "x": 8.211114895889615,
+            "z": -8.416442914534418
+          },
+          "to": {
+            "x": 6.896071205385245,
+            "z": -6.035128132304936
+          }
+        },
+        {
+          "segment": 0,
+          "source": "study-target-1",
+          "target": "study-target-10",
+          "from": {
+            "x": 6.896071205385245,
+            "z": -6.035128132304936
+          },
+          "to": {
+            "x": 8.196239464511478,
+            "z": -4.435264857534038
+          }
+        },
+        {
+          "segment": 0,
+          "source": "study-target-10",
+          "target": "study-target-8",
+          "from": {
+            "x": 8.196239464511478,
+            "z": -4.435264857534038
+          },
+          "to": {
+            "x": 6.616836483923388,
+            "z": -3.232981103626726
+          }
+        }
+      ],
+      "firstBeatVisualLoopEdges": [],
+      "firstBeatCrossings": [],
+      "visibleCurveCrossings": [],
+      "maxConnectionsPerTargetIncludingEntry": 2,
+      "launchMidpointVisiblePixels": 299,
+      "nearestChoiceCount": 19,
+      "connectionViolations": [],
+      "decorativeEndsNearUnselected": [],
+      "renderEndpointShiftMetres": 0.0,
+      "maxRenderedChains": 7
+    },
+    "CHAIN_R5": {
+      "case": "CHAIN_R5",
+      "rank": 5,
+      "monsterCount": 12,
+      "targetLimit": 8,
+      "radiusMetres": 8,
+      "connectionRadiusMetres": 8,
+      "selected": [
+        "study-target-0",
+        "study-target-1",
+        "study-target-11",
+        "study-target-2",
+        "study-target-3",
+        "study-target-4",
+        "study-target-8",
+        "study-target-9"
+      ],
+      "damaged": [
+        "study-target-0",
+        "study-target-1",
+        "study-target-2",
+        "study-target-4",
+        "study-target-8"
+      ],
+      "missed": [
+        "study-target-3"
+      ],
+      "notReachedWithoutCrossing": [
+        "study-target-11",
+        "study-target-9"
+      ],
+      "firstBeatEntries": [
+        {
+          "type": "skill_segment",
+          "skillId": "THU_02",
+          "family": "THU",
+          "rank": 5,
+          "castId": "cast:101",
+          "shape": "boundedArcGraph",
+          "geometry": {
+            "kind": "boundedArcGraph",
+            "origin": "primaryImpact",
+            "radiusMetres": 8,
+            "totalTargetLimit": 8
+          },
+          "from": {
+            "x": 4,
+            "z": 0
+          },
+          "to": {
+            "x": 5.063935297506007,
+            "z": -5.089994271383889
+          },
+          "segment": 0,
+          "angle": 2.9355346029916,
+          "angleDegrees": 0,
+          "radius": 8,
+          "width": 0,
+          "length": 0,
+          "depth": 0,
+          "targetId": "study-target-0",
+          "phase": "connection"
+        }
+      ],
+      "missedRelayNodes": [],
+      "firstBeatDamageEdges": [
+        {
+          "segment": 0,
+          "source": "study-target-0",
+          "target": "study-target-2",
+          "from": {
+            "x": 5.063935297506007,
+            "z": -5.089994271383889
+          },
+          "to": {
+            "x": 3.7637670383797746,
+            "z": -6.689857546154786
+          }
+        },
+        {
+          "segment": 0,
+          "source": "study-target-2",
+          "target": "study-target-4",
+          "from": {
+            "x": 3.7637670383797746,
+            "z": -6.689857546154786
+          },
+          "to": {
+            "x": 4.5396336830336885,
+            "z": -7.95793914830564
+          }
+        },
+        {
+          "segment": 0,
+          "source": "study-target-4",
+          "target": "study-target-1",
+          "from": {
+            "x": 4.5396336830336885,
+            "z": -7.95793914830564
+          },
+          "to": {
+            "x": 6.896071205385245,
+            "z": -6.035128132304936
+          }
+        },
+        {
+          "segment": 0,
+          "source": "study-target-1",
+          "target": "study-target-8",
+          "from": {
+            "x": 6.896071205385245,
+            "z": -6.035128132304936
+          },
+          "to": {
+            "x": 6.616836483923388,
+            "z": -3.232981103626726
+          }
+        }
+      ],
+      "firstBeatVisualLoopEdges": [],
+      "firstBeatCrossings": [],
+      "visibleCurveCrossings": [],
+      "maxConnectionsPerTargetIncludingEntry": 2,
+      "launchMidpointVisiblePixels": 303,
+      "nearestChoiceCount": 6,
+      "connectionViolations": [],
+      "decorativeEndsNearUnselected": [],
+      "renderEndpointShiftMetres": 0.0,
+      "maxRenderedChains": 4
+    }
+  },
+  "captureLogs": {
+    "NETWORK_R1": "f63a872f9e01dc87ae0f333bba31912a9aa9f12fd6439dad0d6dcfd7bd84abfa",
+    "NETWORK_R5": "cd217b9382e4586497456d4997d88e9de9361c2858a63e0ab414cdfc42e5d561",
+    "CHAIN_R5": "1551d03bfceaf82df321df138e0c32944b8d2b4ca97a6d742b2b42ccf7cdcca1"
+  },
+  "files": {
+    "approved-thunder-strip.png": "fe4d452ed2cc6572338bafde3ae88d806087d61c79361621dfe4b63d36e917c6",
+    "beam-batches.ts": "8caa2d9de784abdcde4935bcb404a892086f165bd9c774731eb0d6af5f3c865c",
+    "capture.cjs": "45b4c9e76d734b4351a6aa42c68e399e129199c281a11a73fdbca0bfc1d8fee3",
+    "crowd-fixture.js": "4af5a2eaa0ac79081ef70825d76c3f4cdb059ffdab5f28f6d71b5dc7cee310f5",
+    "nearest-chain.ts": "c1fa472be2ab3ed54c99028098c938fed209113fe24bf27d1e0b432faa55c928",
+    "README.md": "cf97c4997728d54f70f73eb321e6e396214d0f073b9f54a5b9af987f13762848",
+    "reference-profile.json": "e5ad60f6027c321b50bcc2f14a18e977e77c9d48cfded8af2f2b317f15d16634",
+    "refine-modules.cjs": "e7a6206b61d50811ca2d22e5dfac21f849d187f57e8d5bfca0534137d01d6c78",
+    "review.py": "530bf5f53d5f171c76b9f08a0a5b99869699247e9817bee2e14b710a73615b36",
+    "media\\chain_r5-connections.jpg": "5259f43cbb808e88d8121596f5dfbe326cc1643fe229f47c971e6901ad5da8c4",
+    "media\\chain_r5-numbered.jpg": "f619e13e8b0d96df266276751abd5aeb65d58d21fc532b9e86ac7f243e13f217",
+    "media\\crowd-comparison.jpg": "d014308557bdfddc267a9e1aaccecad1b48436239673fc5956085954e68a698f",
+    "media\\crowd-preview.gif": "e19804fa945d5d10434af28187681331e4af9bf0c731ff9cc678804c2420390d",
+    "media\\crowd-review.mp4": "45fa3a1706707326c7e4acef32c11b480e1fda960406376921eec0695415ad73",
+    "media\\network_r1-connections.jpg": "8b2ec71570db34327fe5739b04d3a577df0e321697aae8a12d338e2a17218373",
+    "media\\network_r1-numbered.jpg": "20b0299a2d2b10e5feeda881a42a3cfab5b6d1008e8c2aeccab725eaa60fc8dd",
+    "media\\network_r5-connections.jpg": "2050555ef15b2a46444f3cfeb9f5dda7637524ea264b883b6511104fb664b33a",
+    "media\\network_r5-numbered.jpg": "3434ce7b777f70a232cc12b8eb52134478ab7c7073099d6901158a48681d13fe"
+  }
+}

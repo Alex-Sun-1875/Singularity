@@ -1,0 +1,45 @@
+CCEffect %{
+  techniques:
+  - passes:
+    - vert: meteor-seal-v33-vs:vert
+      frag: meteor-seal-v33-fs:frag
+      rasterizerState: { cullMode: none }
+      depthStencilState: { depthTest: true, depthWrite: false }
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: one
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: one
+          blendDstAlpha: one_minus_src_alpha
+      properties:
+        mainTexture: { value: white }
+        mainColor: { value: [1, 1, 1, 1] }
+}%
+CCProgram meteor-seal-v33-vs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+  #include <builtin/uniforms/cc-local>
+  in vec3 a_position;
+  in vec2 a_texCoord;
+  out vec2 v_uv;
+  vec4 vert () {
+    v_uv = a_texCoord;
+    return cc_matViewProj * cc_matWorld * vec4(a_position, 1.0);
+  }
+}%
+CCProgram meteor-seal-v33-fs %{
+  precision highp float;
+  in vec2 v_uv;
+  uniform sampler2D mainTexture;
+  uniform MeteorSealParams { vec4 mainColor; };
+  vec4 frag () {
+    vec4 ink = texture(mainTexture, v_uv);
+    float alpha = ink.a * mainColor.a;
+    if (alpha < 0.002) discard;
+    // The reference orange-gold engraving, its soft halo and the translucent
+    // whole-disc wash are authored together. Preserve their display colours:
+    // a global gain clipped red first and pushed the bright strokes yellow.
+    return vec4(ink.rgb * mainColor.rgb * alpha, alpha);
+  }
+}%

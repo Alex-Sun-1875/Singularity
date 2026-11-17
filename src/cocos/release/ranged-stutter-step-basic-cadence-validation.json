@@ -1,0 +1,61 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-17",
+  "timezone": "Asia/Shanghai",
+  "feature": "ranged-stutter-step-basic-attack-cadence",
+  "implementation": {
+    "basicAttackMinimumStartIntervalSeconds": 0.5,
+    "staffActionSeconds": 0.5,
+    "bowManualChargeRetained": true,
+    "automaticBowUsesTapShots": true,
+    "safeOrdinaryRangedSingleSkillRequiresBasicReleases": 2,
+    "exceptions": ["boss or captain", "imminent attack", "low health", "outside basic range", "area damage"]
+  },
+  "checks": {
+    "typescript": "passed",
+    "existingAutomationRule": "passed",
+    "continuousBasicInput10Seconds": {
+      "swordStarts": 20,
+      "staffProjectiles": 20,
+      "bowTapProjectiles": 20,
+      "minimumStartIntervalsSeconds": {"sword": 0.5, "staff": 0.5, "bow": 0.51},
+      "scope": "one-off GameSession rule fixture at 0.01-second input cadence; no new test files",
+      "rapidClickCancellationAndWeaponSwitchBypass": false,
+      "earliestSwordComboBufferRetained": true
+    },
+    "aim": {
+      "retreatWithoutExplicitAimPreservesShotAngle": true,
+      "explicitTurnWhileRetreatingUpdatesShotAngle": true,
+      "realAutomationEvadePreservesShotAngle": true,
+      "nativePlayerPoseRootAndProjectileAgree": true
+    },
+    "normalTestWebExport": "passed",
+    "compiledBrowser": {
+      "url": "http://127.0.0.1:7469/?view=2d&player=3d",
+      "viewport": "844x390 at 3x",
+      "compiledMinimumIntervalSeconds": 0.5,
+      "errors": [],
+      "automaticLevelOneTarget10Seconds": {
+        "BOW": {"basicProjectiles": 16, "singleSkills": 3, "basicsBeforeFirstSkill": 2, "chargedBasics": 0},
+        "FIR": {"basicProjectiles": 17, "singleSkills": 3, "basicsBeforeFirstSkill": 2},
+        "THU": {"basicProjectiles": 17, "singleSkills": 3, "basicsBeforeFirstSkill": 2}
+      },
+      "scope": "isolated nonattacking target and deterministic path/visibility; 0.04-second decisions; no save writes",
+      "localEvidence": "temp/attack-facing/report.json"
+    },
+    "latestFullRegression": {
+      "passed": 178,
+      "failed": 1,
+      "total": 179,
+      "failure": "natural first chapter: c1-warning interaction fixture is blocked by a real enemy formation",
+      "localEvidence": "temp/attack-cadence-full.log",
+      "remainingFailureRecheck": {
+        "currentSource": "passed: 1/1, 7.58 seconds",
+        "sameWorkspaceWithOnlyThisChangeRevertedInMemory": "passed: 1/1, 8.02 seconds",
+        "scope": "filtered natural-first-chapter run after concurrent scenario/test updates; source files and tests were not rewritten for the comparison",
+        "fullSuiteRerunAfterRecheck": false
+      }
+    }
+  },
+  "pending": ["TapTap target-device acceptance"]
+}

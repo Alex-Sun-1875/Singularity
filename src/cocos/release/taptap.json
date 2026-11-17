@@ -22,13 +22,13 @@
       "path": "audio/music",
       "name": "background-music",
       "includeFiles": [
-        "embers-oaths-explore.mp3",
-        "embers-oaths-combat.mp3",
+        "embers-story-light-explore.mp3",
+        "embers-story-light-combat.mp3",
         "embers-oaths-aftermath.mp3"
       ]
     },
     {
-      "path": "audio/combat-v9",
+      "path": "audio/combat-v12",
       "name": "combat-audio"
     },
     {
@@ -75,7 +75,19 @@
     },
     {
       "path": "flat2d/terrain-v1",
-      "name": "painted-terrain"
+      "name": "painted-terrain",
+      "excludeFiles": [
+        "bedrock.png",
+        "cobble.png",
+        "earth.png",
+        "flagstone.png",
+        "forest.png",
+        "meadow.png",
+        "water.png",
+        "wet-earth.png",
+        "wood.png",
+        "world-props-muted.png"
+      ]
     },
     {
       "path": "flat2d/waypoints-v1",
@@ -120,6 +132,22 @@
     {
       "path": "actors/props-native",
       "name": "native-weapons"
+    },
+    {
+      "path": "ui/loading",
+      "name": "loading-art"
+    },
+    {
+      "path": "portraits",
+      "name": "portrait-art"
+    },
+    {
+      "path": "ui/dice",
+      "name": "dice-art"
+    },
+    {
+      "path": "ui/boss-awareness",
+      "name": "boss-art"
     }
   ],
   "collections": [
@@ -133,6 +161,9 @@
     }
   ],
   "excludedResourceTrees": [
+    "audio/combat-v11",
+    "audio/combat-v10",
+    "audio/combat-v9",
     "audio/combat-v8",
     "audio/combat-v7",
     "actors",
@@ -140,11 +171,170 @@
     "surfaces"
   ],
   "excludedResourceFiles": [
+    "audio/sword.wav",
+    "audio/arrow.wav",
+    "audio/impact-flesh.wav",
+    "audio/impact-heavy.wav",
+    "audio/impact-critical.wav",
+    "audio/impact-armor.wav",
+    "audio/impact-fire.wav",
+    "audio/impact-lightning.wav",
+    "audio/impact-kill.wav",
     "flat2d/hero-head-appearance-v5.png",
     "flat2d/hero-head-design-reference.png",
     "flat2d/hero-head-face-v3.png",
     "flat2d/hero-head-soft-geralt-v3.png",
-    "flat2d/hero-reference.png"
+    "flat2d/hero-reference.png",
+    "audio/step.wav",
+    "audio/hit.wav",
+    "audio/spell.wav",
+    "audio/interact.wav",
+    "audio/complete.wav",
+    "audio/dice.wav",
+    "audio/bells.wav"
   ],
-  "note": "Only the current painted world and native 3D hero ship in this profile. Historical art and models remain in the source project. No account credentials belong in this file."
+  "note": "Only the current painted world and native 3D hero ship in this profile. Historical art and models remain in the source project. No account credentials belong in this file.",
+  "selectivePacks": [
+    {
+      "name": "boot-ui",
+      "sources": [
+        "ui/quiet-bronze/hud-panel-atlas-v1.png",
+        "ui/quiet-bronze/gold-frame-panel-atlas-v1.png",
+        "ui/quiet-bronze/rpg-serif-v2.ttf",
+        "ui/quiet-bronze/unified-gold-ring-v16.png",
+        "ui/quiet-bronze/hud-skill-face-v19.png",
+        "ui/quiet-bronze/unified-gold-medallion-v13.png",
+        "equipment/supplies-v2/health-bottle.png",
+        "ui/quiet-bronze/mask-cooldown.png",
+        "equipment/supplies-v2/stamina-bottle.png",
+        "ui/quiet-bronze/settings-footer-rule-v11.png",
+        "ui/quiet-bronze/button-normal.png",
+        "ui/quiet-bronze/button-hover.png",
+        "ui/quiet-bronze/button-pressed.png",
+        "ui/quiet-bronze/button-disabled.png",
+        "ui/quiet-bronze/start-menu-title-v8.png",
+        "ui/quiet-bronze/start-menu-subtitle-v8.png",
+        "ui/quiet-bronze/start-menu-rule-v8.png",
+        "ui/quiet-bronze/start-menu-primary-v8.png",
+        "ui/quiet-bronze/start-menu-secondary-v8.png",
+        "ui/quiet-bronze/gold-frame-capsule-atlas-v1.png",
+        "ui/quiet-bronze/double-gold-*.png",
+        "ui/quiet-bronze/menu-*.png",
+        "portraits/native-raphael.png",
+        "ui/boss-awareness/boss-entry.png",
+        "ui/boss-awareness/tool-face.png"
+      ]
+    },
+    {
+      "name": "boot-skill-icons",
+      "sources": [
+        "ui/combat-relief/hud-circular/attack.png",
+        "ui/combat-relief/hud-circular/cooldown.png",
+        "ui/combat-relief/hud-circular/dash.png",
+        "ui/combat-relief/hud-circular/atlases/war.png"
+      ]
+    },
+    {
+      "name": "warrior-audio",
+      "sources": [
+        "audio/combat-v12/war/*.wav"
+      ]
+    },
+    {
+      "name": "boot-vfx",
+      "sources": [
+        "vfx/kenney/*.png",
+        "vfx/production/fire-tongues-v1.png",
+        "vfx/production/ribbon-white-v1.png",
+        "vfx/production/ribbon-soft-v1.png",
+        "vfx/production/shield-unified-*",
+        "vfx/production/melee-material-v3/*.png"
+      ]
+    },
+    {
+      "name": "warrior-vfx",
+      "sources": [
+        "vfx/production/warrior-*.png",
+        "vfx/production/warrior-*.effect"
+      ]
+    },
+    {
+      "name": "starter-weapons",
+      "weaponVariants": [
+        "design-w01",
+        "design-stowed-w01",
+        "arrow",
+        "design-quiver"
+      ]
+    },
+    {
+      "name": "hair-map-curly",
+      "sources": [
+        "actors/hairstyles-v3/textures/redesigned-curly-color.png"
+      ]
+    },
+    {
+      "name": "portrait-hair-curly",
+      "sources": [
+        "portraits/raphael-hair-curly-v1.png"
+      ]
+    },
+    {
+      "name": "hair-map-dante",
+      "sources": [
+        "actors/hairstyles-v3/textures/redesigned-dante-color.png"
+      ]
+    },
+    {
+      "name": "portrait-hair-dante",
+      "sources": [
+        "portraits/raphael-hair-dante-v1.png"
+      ]
+    },
+    {
+      "name": "hair-map-nero",
+      "sources": [
+        "actors/hairstyles-v3/textures/redesigned-nero-color.png"
+      ]
+    },
+    {
+      "name": "portrait-hair-nero",
+      "sources": [
+        "portraits/raphael-hair-nero-v1.png"
+      ]
+    },
+    {
+      "name": "hair-map-vergil",
+      "sources": [
+        "actors/hairstyles-v3/textures/redesigned-vergil-color.png"
+      ]
+    },
+    {
+      "name": "portrait-hair-vergil",
+      "sources": [
+        "portraits/raphael-hair-vergil-v1.png"
+      ]
+    },
+    {
+      "name": "boot-loading",
+      "sources": [
+        "ui/loading/stonebridge-valley-preview.jpg"
+      ],
+      "aliases": {
+        "ui/loading/stonebridge-valley": "ui/loading/stonebridge-valley-preview"
+      }
+    },
+    {
+      "name": "boot-sounds",
+      "sources": [
+        "audio/step.wav",
+        "audio/hit.wav",
+        "audio/spell.wav",
+        "audio/interact.wav",
+        "audio/complete.wav",
+        "audio/dice.wav",
+        "audio/bells.wav"
+      ]
+    }
+  ]
 }

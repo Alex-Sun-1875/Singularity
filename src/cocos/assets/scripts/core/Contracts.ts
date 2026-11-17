@@ -22,8 +22,9 @@ export interface WorldQuery {
   height(point: Point): number;
   path?(from: Point, to: Point): Point[];
   /** Repair an actor embedded in scenery when entering/restoring a scene.
-   * Return the original point when clear, or undefined if no safe repair exists. */
-  recoverPosition?(point: Point, radius: number): Point | undefined;
+    * Return the original point when clear, or undefined if no safe repair exists.
+    * When supplied, area must match the geometry currently loaded by the query. */
+  recoverPosition?(point: Point, radius: number, area?: string): Point | undefined;
   /** Optional presentation check for placing visible reinforcement squads.
    * Collision, line of sight and damage continue to use their world queries. */
   inView?(point: Point): boolean;
@@ -35,6 +36,8 @@ export interface CombatSkillEvent extends GameEvent {
  from:Point; to?:Point; sourceId?:string; targetId?:string; segment:number; duration?:number;
  radius?:number; width?:number; length?:number; depth?:number; angle?:number; angleDegrees?:number;anglesDegrees?:number[];
  geometry?:import('../features/combat/data/PureSkills').SkillGeometry; projectileId?:string; child?:boolean;
+ /** Authoritative final-stage wave clock and independent damage contact identity. */
+ startedAt?:number; waveIndex?:number; waveAge?:number; waveOrigin?:Point;
 }
 /** Presentation intent only: these fields never filter collisions or choose hits. */
 export interface AttackFeedbackMetadata {

@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-17",
+  "userReference": "reference.png",
+  "direction": "Round domed magical gemstones, selective internal crystalline reflections, thin antique metal bezel; red, green, blue, white and purple; shared silhouette and metal.",
+  "generation": {
+    "provider": "OpenAI image_gen built-in",
+    "original": "ruby-original.png",
+    "prompt": "Image1 is a STYLE REFERENCE ONLY, not an edit target. Create ONE original fantasy RPG inventory gem icon inspired by its restrained circular domed jewels. One deep ruby-red magical stone, almost perfectly round, straight-on front view, softly convex glossy cabochon surface. A thin aged dark-bronze and oxidized-silver bezel follows the circular edge, a few very small elegant clasp details at top and bottom. The colored stone occupies at least85percent of the object's diameter; metal remains delicate. Rich dark-red depth inside, some subtle angular crystalline structures UNDER the smooth glass surface, a brighter translucent ruby core, dark quiet lower facets, one localized warm-white reflection at upper-left. Painterly high-quality western fantasy item art, tactile and dignified, not modern jewelry product photography. The silhouette is round and regular, no long points, no star outline. Crucially avoid dense kaleidoscope diamond facets and uniform glitter: broad quiet surfaces, deep interior and selective highlights like the reference. No text, letters, symbols, watermark, pedestal, shadow card, colored background, external aura or extra items. Actual transparent alpha background. Entire single jewel centered in a square canvas with about14percent clear margin all sides, consistent top-left lighting. Ruby body should remain true deep red; bezel dark antique metal so deterministic gemstone-only recoloring can preserve its metal. This is a production icon for44to64px display; keep small metal details readable and restrained.",
+    "record": "generation.json",
+    "referenceUsage": "Style reference only; original ruby generated."
+  },
+  "localProcessing": {
+    "pipeline": "build_icons.py",
+    "record": "processing.json",
+    "operations": "Crop, downsample, alpha cleanup and masked interior recoloring with Pillow/NumPy. Original metal outside the interior mask retained.",
+    "sameAlphaAllColors": true,
+    "unchangedExteriorPixels": 31266
+  },
+  "productionAssets": [
+    {
+      "id": "power",
+      "path": "src/cocos/assets/resources/equipment/gem-orbs-v5/power.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 73349,
+      "sha256": "6090da9b5d3131eb15e8ba40e8841e63dbc6d84f8496656f16301d56070d48db"
+    },
+    {
+      "id": "maxHp",
+      "path": "src/cocos/assets/resources/equipment/gem-orbs-v5/maxHp.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 72662,
+      "sha256": "dce38cec4efd8e0aab36be89cccc0d10a29edb632cfe61b5a34812da32e03672"
+    },
+    {
+      "id": "armor",
+      "path": "src/cocos/assets/resources/equipment/gem-orbs-v5/armor.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 72530,
+      "sha256": "09bd030bc50cab33f316cc62c871d82d6c08484d55b6d3f1c1308f2f49bf1a66"
+    },
+    {
+      "id": "criticalChance",
+      "path": "src/cocos/assets/resources/equipment/gem-orbs-v5/criticalChance.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 60746,
+      "sha256": "1eba81fc0ae4bcac979a3648300127669e62c4d71699ff73238444879ccc4509"
+    },
+    {
+      "id": "criticalDamage",
+      "path": "src/cocos/assets/resources/equipment/gem-orbs-v5/criticalDamage.png",
+      "size": [
+        256,
+        256
+      ],
+      "bytes": 73875,
+      "sha256": "a1119be4d7b10e35c3bb485ffe44795db708e8760e34c895ab94862fa9b12b08"
+    }
+  ],
+  "pngTotalBytes": 353162,
+  "decodedRgbaBytes": 1310720,
+  "visualReview": {
+    "reviewer": "Codex",
+    "status": "Reviewed contact sheet and actual Cocos phone screenshots. Five colors remain distinguishable with matching circular outlines; thin metal border stays restrained.",
+    "preview": "preview.jpg",
+    "screenshots": [
+      "src/cocos/test-results/gem-orbs-v5/orbs-all-844.png",
+      "src/cocos/test-results/gem-orbs-v5/orbs-redemption-844.png"
+    ],
+    "userAccepted": false,
+    "userAcceptanceNote": "Awaiting user visual feedback; generation success is recorded separately from review."
+  },
+  "runtimeValidation": {
+    "typeScript": "npm run check passed",
+    "normalTestWebBuild": "npm run start:test passed; Cocos builder completed 2026-11-17 22:51:05 local.",
+    "phone": "844x390 logical, DPR3; isolated normal-test browser storage.",
+    "checks": [
+      "Native merchant navigation and standalone shop",
+      "Category/sort and touch scrolling",
+      "Five-item purchase, coin deduction and save/restore",
+      "Gem bank and five-color redemption artwork load",
+      "Safe-area fixture and touch-target layout",
+      "Supply merchant potion and unique-equipment purchase, restore and duplicate rejection",
+      "No browser page errors"
+    ],
+    "fixtureScope": "Actual normal test concept-2d Cocos build. Isolated browser storage. Initial level-one state and native merchant navigation; later level/currency are explicitly UI fixtures, not natural-economy evidence. Later level16,5000gold and supply-merchant position are UI fixtures. Redemption draft was inspected without claiming a code.",
+    "report": "src/cocos/test-results/gem-orbs-v5/web.json",
+    "physicalTapTapDeviceVerified": false
+  },
+  "rulesChangedThisArtRevision": false,
+  "packageProducedByThisArtTask": false
+}

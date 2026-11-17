@@ -18,7 +18,7 @@ import {bindButtonFeedback,type ButtonFeedback,type ButtonFeedbackState} from '.
 
 const DURATION=1;
 const T={surface:C.panel,felt:new Color(21,15,10),edge:C.line,gold:C.gold,text:C.ink,muted:C.muted,quiet:F.color('text.disabled'),green:F.color('state.success'),red:F.color('state.failure'),ink:C.dark};
-const GEAR_NOTICE={width:480,inset:20,labelWidth:44,artSize:104,artGap:24,textGutter:6} as const;
+const GEAR_NOTICE={width:480,inset:26,ruleInset:12,artInset:20,labelWidth:44,artSize:104,artGap:24,textGutter:6} as const;
 type Point={x:number;y:number;z:number};
 type Die={node:Node;graphics:Graphics;face:Label;marks:Label[];caption:Label;radius:number;index:number;cube:boolean;body?:Node;art?:Sprite};
 type Control={node:Node;visual:Node;graphics:Graphics;label:Label;enabled:boolean;primary:boolean;title:string;w:number;h:number;state:ButtonFeedbackState;feedback?:ButtonFeedback;selected:boolean};
@@ -67,7 +67,7 @@ export class DicePanel {
   this.label(panel,'旅 途 事 件  /  '+view.skillLabel,left,y(290),w-240,13*font,T.gold,26*sy);
   this.label(panel,`余烬 ${view.inspiration} / 4`,right-170,y(290),170,14*font,T.muted,26*sy,Label.HorizontalAlign.RIGHT);
   this.label(panel,view.title,left,y(246),w-76,32*font,T.gold,50*sy);
-  this.label(panel,view.prompt,left,y(196),w-76,17*font,T.text,55*sy);this.line(panel,left,y(160),right,y(160),alpha(T.edge,130));
+  this.label(panel,view.prompt,left+8,y(196),w-2*(pad+8),17*font,T.text,55*sy);this.line(panel,-w/2+26,y(160),w/2-26,y(160),alpha(T.edge,130));
   const tray=this.hud.node('LeatherDiceTray',panel,center,y(-27),stageW,356*sy);this.tray(tray,stageW,356*sy);
   this.status=this.label(panel,'',left+12,y(127),stageW-24,23*font,T.gold,36*sy,Label.HorizontalAlign.CENTER);
   this.label(panel,view.mode==='advantage'?'线索充分 · 两骰择高':view.mode==='disadvantage'?'局势不利 · 两骰取低':'掷骰点数 + 行动准备达到目标',left+12,y(92),stageW-24,14*font,T.muted,28*sy,Label.HorizontalAlign.CENTER);
@@ -77,7 +77,7 @@ export class DicePanel {
   this.line(panel,split,y(137),split,y(-202),alpha(T.edge,85));this.actionDetails(panel,detail,detailW,sy,view,font);this.footer(panel,w,sy,view);
  }
  private equipmentNoticeCopy(view:DiceView,width:number){
-  const item=EQUIPMENT[view.gear!.item],base=equipmentBasePresentation(item,view.gear!.level),portrait=this.hud.width<this.hud.height;
+  const item=EQUIPMENT[view.gear!.item],base=equipmentBasePresentation(item,view.gear!.level,view.gear!.acquisitionSource),portrait=this.hud.width<this.hud.height;
   const paragraphs:{name:string;title:string;value:string;size:number;color:Color;height:number}[]=[],bodyWidth=width-2*GEAR_NOTICE.inset-GEAR_NOTICE.labelWidth-GEAR_NOTICE.textGutter;
   const add=(name:string,title:string,value:string,size:number,color:Color)=>{if(!value)return;const lines=value.split('\n').reduce((sum,line)=>sum+Math.max(1,Math.ceil(Array.from(line).reduce((n,char)=>n+(char.charCodeAt(0)<128?.54:1),0)/(bodyWidth/size))),0);paragraphs.push({name,title,value,size,color,height:lines*(size+5)});};
   add('EquipmentLore','介绍',base.lore,13,T.muted);
@@ -87,13 +87,13 @@ export class DicePanel {
   return {item,base,paragraphs,bodyTop,copyHeight,preferredHeight:bodyTop+copyHeight+76};
  }
  private equipmentLayout(panel:Node,w:number,h:number,view:DiceView){
-  const u=this.hud.uiUnit,W=w/u,H=h/u,portrait=this.hud.width<this.hud.height,left=GEAR_NOTICE.inset,right=W-left,contentW=right-left,textRight=right-GEAR_NOTICE.textGutter,x=(v:number)=>(v-W/2)*u,y=(v:number)=>(H/2-v)*u;
+  const u=this.hud.uiUnit,W=w/u,H=h/u,portrait=this.hud.width<this.hud.height,left=GEAR_NOTICE.inset,right=W-left,contentW=right-left,textRight=right,x=(v:number)=>(v-W/2)*u,y=(v:number)=>(H/2-v)*u;
   const {item,base,paragraphs,bodyTop}=this.equipmentNoticeCopy(view,W),artSize=GEAR_NOTICE.artSize,bodyLeft=portrait?left:left+artSize+GEAR_NOTICE.artGap,bodyW=textRight-bodyLeft;
   const text=(name:string,value:string,l:number,t:number,width:number,size=13,color=T.text,height=24,align=Label.HorizontalAlign.LEFT)=>{
    const label=this.hud.text(panel,value,x(l+width/2),y(t),width*u,size*u,color,height*u);label.node.name=name;applyRpgFont(label);label.horizontalAlign=align;label.lineHeight=(size+5)*u;label.enableWrapText=true;label.overflow=Label.Overflow.CLAMP;return label;
   };
   text('EquipmentNoticeTitle','获得装备',left,22,textRight-left,12,T.gold,20);
-  const art=this.hud.node('EquipmentHero:'+item.id,panel,x(portrait?W/2:left+artSize/2),y(portrait?98:92),artSize*u,artSize*u),frame=equipmentIconFrame(art,artSize*u,artSize*u,{quality:item.quality,scale:u,ornamentScale:1.75});
+  const art=this.hud.node('EquipmentHero:'+item.id,panel,x(portrait?W/2:GEAR_NOTICE.artInset+artSize/2),y(portrait?98:92),artSize*u,artSize*u),frame=equipmentIconFrame(art,artSize*u,artSize*u,{quality:item.quality,scale:u,ornamentScale:1.75});
   EquipmentArt.rawIcon(frame.content,item,(artSize-6)*u,(artSize-6)*u,true);
   text('OwnedEquipmentName',item.name,bodyLeft,portrait?176:56,bodyW,20,T.text,30);
   text('OwnedEquipmentType',`${item.quality} · ${equipmentTypeName(item)} · ${base.stats[0].value}`,bodyLeft,portrait?202:82,bodyW,12,F.color(qualityFeedbackRole(item.quality)),22);
@@ -104,7 +104,7 @@ export class DicePanel {
   const source=paragraphs.find(p=>p.name==='EquipmentSource'),details=paragraphs.filter(p=>p!==source),detailH=details.reduce((sum,p)=>sum+p.height,0)+Math.max(0,details.length-1)*8;
   const viewportH=Math.max(18,H-76-bodyTop-(source?source.height+8:0)),fullH=Math.max(viewportH,detailH);
   const drawCopy=(parent:Node,paragraph:typeof paragraphs[number],top:number)=>{
-   const labelW=GEAR_NOTICE.labelWidth,gutter=GEAR_NOTICE.textGutter,lineH=(paragraph.size+5)*u,caption=this.hud.text(parent,paragraph.title+'：',(-contentW/2+labelW/2)*u,top-lineH/2,labelW*u,13*u,T.muted,lineH),copy=this.hud.text(parent,paragraph.value,(labelW-gutter)/2*u,top-paragraph.height*u/2,(contentW-labelW-gutter)*u,paragraph.size*u,paragraph.color,paragraph.height*u);
+   const labelW=GEAR_NOTICE.labelWidth,gutter=GEAR_NOTICE.textGutter,lineH=(paragraph.size+5)*u,caption=this.hud.text(parent,paragraph.title+'：',(-contentW/2+labelW/2)*u,top-lineH/2,labelW*u,13*u,T.muted,lineH),copy=this.hud.text(parent,paragraph.value,(labelW+gutter)/2*u,top-paragraph.height*u/2,(contentW-labelW-gutter)*u,paragraph.size*u,paragraph.color,paragraph.height*u);
    caption.node.name=paragraph.name+'Label';copy.node.name=paragraph.name;
    for(const label of [caption,copy]){applyRpgFont(label);label.horizontalAlign=Label.HorizontalAlign.LEFT;label.lineHeight=lineH;label.overflow=Label.Overflow.CLAMP;}caption.enableWrapText=false;copy.enableWrapText=true;
   };
@@ -115,13 +115,13 @@ export class DicePanel {
   }
   // A shared caption column keeps every continuation after the colon aligned.
   if(source)drawCopy(panel,source,y(H-76-source.height));
-  this.line(panel,x(left),y(H-64),x(right),y(H-64),alpha(T.edge,115));
+  this.line(panel,x(GEAR_NOTICE.ruleInset),y(H-64),x(W-GEAR_NOTICE.ruleInset),y(H-64),alpha(T.edge,115));
   const buttonW=Math.min(180,contentW),host=this.hud.node('dice:continue',panel,0,y(H-32),buttonW*u,48*u),button=host.addComponent(GoldMenuButton);
   button.configure({label:'收下装备',width:buttonW*u,height:48*u,unit:u,visualHeight:36*u,fontSize:15*u,primary:true},()=>this.hud.actions.click('dice:continue'));
  }
  private footer(panel:Node,w:number,sy:number,view:DiceView){
   const left=-w/2+40,available=w-80,y=(v:number)=>v*sy,mobile=sys.isMobile,gap=Math.max(12,8*this.hud.height/390);
-  this.line(panel,left,y(-222),left+available,y(-222),alpha(T.edge,135));
+  this.line(panel,-w/2+26,y(-222),w/2-26,y(-222),alpha(T.edge,135));
   const actions:{title:string;action:string;width:number;primary:boolean}[]=[];
   if(view.canCancel)actions.push({title:'暂且离开',action:'dice:cancel',width:available*.26,primary:false});
   if(view.roll&&view.canReroll)actions.push({title:`1 余烬重掷（余 ${view.inspiration}）`,action:'dice:reroll',width:available*.43,primary:false});

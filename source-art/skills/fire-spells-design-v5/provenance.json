@@ -1,0 +1,36 @@
+{
+  "backend": "OpenAI image_gen built-in cloud tool",
+  "generated": [
+    {
+      "raw": "raw/fire-lifecycle.png",
+      "layout": "4x4 RGBA, 384x256 cells",
+      "purpose": "ignition, peak, collapse, low flames, embers"
+    },
+    {
+      "raw": "raw/fire-lance.png",
+      "layout": "2x2 RGBA; repacked to existing 4x1 bolt atlas",
+      "purpose": "coherent pointed fire lance"
+    }
+  ],
+  "references": [
+    "src/cocos/assets/resources/vfx/production/fire-pyro-v7.png",
+    "src/cocos/assets/resources/vfx/production/fire-bolt-v9.png",
+    "src/.tmp/current-vfx-refinement-v4/final/refined/FIR_02/027.jpg"
+  ],
+  "promptSummary": [
+    "Preserve current Cocos 3D visual language and exact 4x4 atlas/foot anchors. Sixteen coherent frames: ignition 0-3, curled luminous flame peak 4-7, settling fire 8-10, low residual tongues and sparse embers 11-15. Warm amber cores, orange-red folded fire. Transparent RGBA. No characters, circles, rocks, text, mushroom smoke, dotted debris, hard floor edge.",
+    "Four phases of one long pointed fire lance, 2x2 RGBA. Hot pointed tip at right, continuous curled orange-red tail at left. Refine current projectile rather than replace the gameplay. Consistent head position, proportions and lighting. Transparent background, no labels or circles."
+  ],
+  "promptRecord": "Summaries of the two tool prompts; full verbatim calls remain in this conversation.",
+  "deterministicProcessing": "Pillow and NumPy; alpha cleanup, resizing, crop feather, repacking only. No local model inference.",
+  "generationStatus": "Both calls completed successfully",
+  "artAcceptance": "Candidate pending user review",
+  "productIntegration": false,
+  "sha256": {
+    "raw\\fire-lance.png": "c041ef93f4ef001ab4c781b82f07f2d36bf0f19371b70a7d5fcff6f14c7476e8",
+    "raw\\fire-lifecycle.png": "0a0f0920110606eda89535ba1d5d6b080f5c2e85d380a7a85f558633241acfd6",
+    "assets\\fire-bolt-v9.png": "77a20dd8b07cb7b3799349be47c4c02061f4ac378136e6bd7d5b1355e64957d4",
+    "assets\\fire-low-rolls-v7.png": "52c385d486c7b4487fe042d7e2edf44139b0ccf554b9099b238340dbb5519714",
+    "assets\\fire-pyro-v7.png": "b781d5007aa16a40414ce95bb19942d3b12322657c3b8e379a9e97b08d018768"
+  }
+}

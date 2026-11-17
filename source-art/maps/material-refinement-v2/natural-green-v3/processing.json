@@ -1,0 +1,63 @@
+{
+  "method": "luma-preserving chroma 0.80 on meadow only, Y=0.2126R+0.7152G+0.0722B; no generation or new detail",
+  "beforeSha256": "715f75195cca56ca4a977a2e1546947b8055396703354be43b5f27ad100c7e42",
+  "beforeMeanRgb": [
+    100.961,
+    144.968,
+    59.982
+  ],
+  "afterMeanRgb": [
+    106.673,
+    141.864,
+    73.896
+  ],
+  "beforeMeanLuma": 129.476,
+  "afterMeanLuma": 129.4749,
+  "lumaMeanAbsoluteDifference": 0.2329,
+  "wrap": {
+    "applied": true,
+    "bandPixelsPerSide": 6,
+    "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+    "skipThresholdMeanAbsoluteRgb": 1.5,
+    "before": {
+      "horizontal": {
+        "meanAbsoluteRgb": 9.886719,
+        "p95AbsoluteRgb": 28.0,
+        "maximumAbsoluteRgb": 51
+      },
+      "vertical": {
+        "meanAbsoluteRgb": 9.552083,
+        "p95AbsoluteRgb": 24.0,
+        "maximumAbsoluteRgb": 50
+      }
+    },
+    "after": {
+      "horizontal": {
+        "meanAbsoluteRgb": 0.0,
+        "p95AbsoluteRgb": 0.0,
+        "maximumAbsoluteRgb": 0
+      },
+      "vertical": {
+        "meanAbsoluteRgb": 0.0,
+        "p95AbsoluteRgb": 0.0,
+        "maximumAbsoluteRgb": 0
+      }
+    },
+    "changedPixelFraction": 0.037193,
+    "maximumChangeOutsideBand": 0,
+    "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+  },
+  "scope": "meadow texture only; existing sampling, other surfaces, foliage, geometry and gameplay unchanged",
+  "runtime": {
+    "file": "src/cocos/assets/resources/flat2d/terrain-v1/meadow-v2.png",
+    "dimensions": [
+      512,
+      512
+    ],
+    "mode": "RGB",
+    "sha256": "215cd662b796a6d9176f62ec51cc3ee712ab143564a8a7f9806d0996fc22ecc6",
+    "bytes": 539450
+  },
+  "otherMaterialHashesUnchanged": true,
+  "meadowImportMetadataUnchanged": true
+}

@@ -15,6 +15,7 @@ import {fieldNpcVisible} from '../../campaign/data/FieldQuests';
 import {chapterTwoEnemyRetired} from '../../campaign/common/ChapterTwoEncounters';
 import {peacefulBossRetired} from '../../campaign/common/PeacefulBosses';
 import {chapterTwoSideQuestNpcVisible} from '../../campaign/data/ChapterTwoSideQuests';
+import {earlyNpcVisible} from '../../campaign/common/EarlyChapterState';
 
 type Origin=[number,number]|{x:number;y:number};
 type EquipmentAnchor={x:number;y:number;angle:number};
@@ -247,7 +248,7 @@ export class FlatActors {
   const material=new Material();material.name='FlatConcept:'+id;
   material.initialize({effectName:'builtin-unlit',technique:1,defines:{USE_TEXTURE:true,USE_ALPHA_TEST:!!asset.manifest.alphaThreshold},states:{rasterizerState:{cullMode:gfx.CullMode.NONE},depthStencilState:{depthTest:true,depthWrite:false}}});
   if(!material.passes.length){root.destroy();material.destroy();throw new Error('Flat actor requires the bundled builtin-unlit transparent technique');}
-  material.setProperty('mainColor',Color.WHITE);
+  material.setProperty('mainColor',id==='shop-npc-jeweler'?new Color(210,225,245):id==='shop-npc-supplies'?new Color(245,220,190):Color.WHITE);
   // Some generated cutouts retain 1–5/255 alpha in otherwise empty pixels.
   // The native shader discards that noise without changing source image bytes.
   if(asset.manifest.alphaThreshold)material.setProperty('alphaThreshold',asset.manifest.alphaThreshold);
@@ -268,7 +269,7 @@ export class FlatActors {
  async build(game:GameSession,onProgress?:(completed:number,total:number)=>void){
   const s=game.state,requests=this.omitPlayer?[]:[this.create('player','raphael',s.player.x,s.player.z)];
   const scheduled=new Set<string>(['player']);
-  for(const object of this.world.area.objects){if(!object.actor)continue;const id=object.actor.toLowerCase();if(scheduled.has(id))continue;scheduled.add(id);requests.push(this.create(id,object.actorModel??id,object.x+(object.action==='meeting'?2.3:0),object.z).then(actor=>{if(actor&&id.startsWith('field-npc-'))actor.root.active=fieldNpcVisible(id,s.flags);return actor;}));}
+  for(const object of this.world.area.objects){if(!object.actor)continue;const id=object.actor.toLowerCase();if(scheduled.has(id))continue;scheduled.add(id);requests.push(this.create(id,object.actorModel??id,object.x+(object.action==='meeting'?2.3:0),object.z).then(actor=>{if(actor&&id.startsWith('field-npc-'))actor.root.active=fieldNpcVisible(id,s.flags);else if(actor&&id.startsWith('early-npc-'))actor.root.active=earlyNpcVisible(id,s);return actor;}));}
   if(this.world.area.id==='U1-04')for(const[id,x,z]of[['mira',-3,3],['kael',3,3]]as const)if(!scheduled.has(id)){scheduled.add(id);requests.push(this.create(id,id,x,z));}
   for(const enemy of s.enemies)requests.push(this.create(enemy.id,enemyConcept(enemy),enemy.x,enemy.z));
   for(const wave of campaignBattle(s.area)?.waves??[])for(const enemy of wave.enemies)requests.push(this.load(enemyConcept(enemy)).then(()=>undefined));
@@ -339,7 +340,7 @@ export class FlatActors {
   const enemies=game.state.enemies;
   if(this.frameEnemies.size!==enemies.length||enemies.some(enemy=>!this.frameEnemies.has(enemy.id)))this.frameEnemies.clear();
   for(const enemy of enemies)this.frameEnemies.set(enemy.id,enemy);
-  for(const actor of this.active.values()){if(chapterTwoEnemyRetired(game.state,actor.id)||peacefulBossRetired(game.state,actor.id))actor.root.active=false;else if(actor.id.startsWith('field-npc-'))actor.root.active=fieldNpcVisible(actor.id,game.state.flags);else if(actor.id.startsWith('side-npc-'))actor.root.active=chapterTwoSideQuestNpcVisible(actor.id,game.state);}
+  for(const actor of this.active.values()){if(chapterTwoEnemyRetired(game.state,actor.id)||peacefulBossRetired(game.state,actor.id))actor.root.active=false;else if(actor.id.startsWith('field-npc-'))actor.root.active=fieldNpcVisible(actor.id,game.state.flags);else if(actor.id.startsWith('side-npc-'))actor.root.active=chapterTwoSideQuestNpcVisible(actor.id,game.state);else if(actor.id.startsWith('early-npc-'))actor.root.active=earlyNpcVisible(actor.id,game.state);}
   if(paused){this.impacts.clear();for(const actor of this.active.values())if(actor.id!=='player'&&!(this.frameEnemies.get(actor.id)?.hp<=0)){scale(actor.model,1,1,1);if(actor.sprite.eulerAngles.z!==0)actor.sprite.setRotationFromEuler(0,0,0);setActorTint(actor,1,1,1,1);}
    // Preserve sampled ordinals/progress as well as clocks. Re-sampling from
    // FPS here would jump a manually held bow pose backwards while paused.
@@ -359,7 +360,9 @@ export class FlatActors {
   if(player){
    this.updateCombatReady(game);
    const dx=p.x-player.root.position.x,dz=p.z-player.root.position.z,speed=Math.hypot(dx,dz)/Math.max(.001,dt);player.speed=speed;
-   player.angle=action&&action.kind!=='bowAim'?action.angle:moving&&speed>.08?Math.atan2(dx,dz):p.angle;
+   // A moving draw keeps its aim just like the native hero and the released
+   // arrow. The stride must not turn the upper body toward a retreat step.
+   player.angle=action?action.angle:moving&&speed>.08?Math.atan2(dx,dz):p.angle;
    position(player.root,p.x,this.world.height(p),p.z);
    const weapon=weaponFamily(game.state.equipment.weapon);
    const hurtProgress=playerHurtProgress(p.hurtTime),flinch=p.hp>0&&hurtProgress!==undefined;

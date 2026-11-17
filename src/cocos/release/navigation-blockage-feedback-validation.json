@@ -1,0 +1,254 @@
+{
+  "date": "2026-11-17",
+  "profile": "test",
+  "change": "navigation-blockage-explicit-reasons",
+  "typeChecks": {
+    "full": "passed",
+    "core": "passed"
+  },
+  "existingTests": {
+    "passed": 181,
+    "failed": 0,
+    "log": "temp/navigation-blockage-test-final.log"
+  },
+  "ruleProbe": {
+    "passed": true,
+    "script": "temp/navigation-blockage-probe.ts",
+    "coverage": [
+      "actual level, current level and blocking route segment",
+      "unrelated exits excluded",
+      "open detours take priority",
+      "directed disconnected graph",
+      "flag-only portal fixture using authored unlock side and label",
+      "explicit local locked exit",
+      "unreleased destination",
+      "physical path failure distinguished from conditions",
+      "enemy approach and stalled movement",
+      "main event prerequisite reason retained when no alternative is actionable"
+    ],
+    "note": "The portal fixture removes its authored level override solely to exercise the flag-gated branch; production exitRequirement remains authoritative."
+  },
+  "browser": {
+    "fixture": "Isolated normal-test browser contexts. Authored routes and actual Cocos navigation; controlled level/target fixtures, not a natural playthrough.",
+    "cases": [
+      {
+        "sample": {
+          "name": "level",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          }
+        },
+        "before": {
+          "code": "level",
+          "summary": "需Lv10",
+          "reason": "灰披军营 → 裂隘关：需要 Lv10，当前 Lv8；任务与狩猎均可升级",
+          "hint": "先完成已开放的任务、探索或狩猎，达到所需等级后再前往。",
+          "objective": "挑战灰披队长",
+          "progress": "需Lv10",
+          "button": "原因",
+          "interactable": true,
+          "point": {
+            "x": 139.47916666666663,
+            "y": 90.45833333333337
+          }
+        },
+        "details": {
+          "menu": "navigation-blocked",
+          "title": "挑战灰披队长",
+          "body": "灰披军营 → 裂隘关：需要 Lv10，当前 Lv8；任务与狩猎均可升级\n先完成已开放的任务、探索或狩猎，达到所需等级后再前往。",
+          "pause": "blocked",
+          "labels": [
+            "拉斐尔·Lv8·0/1710",
+            "生命 120 / 155",
+            "体力 100 / 100",
+            "金币 0",
+            "✓",
+            "第三杯旅店·安全区",
+            "挑战灰披队长",
+            "灰披军营 → 裂隘关：需要 Lv10，…",
+            "需Lv10",
+            "N",
+            "E",
+            "S",
+            "W",
+            "21",
+            "",
+            "",
+            "",
+            "1",
+            "",
+            "2",
+            "",
+            "3",
+            "",
+            "4",
+            "",
+            "WASD 移动 · Shift 慢行 · 滚轮缩放",
+            "",
+            "挑战灰披队长",
+            "目的地：裂隘关\n\n原因：灰披军营 → 裂隘关：需要 Lv10，当前 Lv8；任务与狩猎均可升级\n\n下一步：先完成已开放的任务、探索或狩猎，达到所需等级后再前往。",
+            "查看任务"
+          ]
+        },
+        "screenshot": "F:\\workspace\\Singularity\\src\\cocos\\temp\\navigation-blockage-level-844x390.png",
+        "errors": []
+      },
+      {
+        "sample": {
+          "name": "path",
+          "viewport": {
+            "width": 844,
+            "height": 390
+          }
+        },
+        "before": {
+          "code": "path",
+          "summary": "寻路失败",
+          "reason": "从当前位置到“调查受阻地点”未找到可行走路线。",
+          "hint": "请先手动移动到开阔处，再重试；仍失败时在地图检查其他入口。",
+          "objective": "调查受阻地点",
+          "progress": "寻路失败",
+          "button": "原因",
+          "interactable": true,
+          "point": {
+            "x": 139.47916666666663,
+            "y": 90.45833333333337
+          }
+        },
+        "details": {
+          "menu": "navigation-blocked",
+          "title": "调查受阻地点",
+          "body": "从当前位置到“调查受阻地点”未找到可行走路线。\n请先手动移动到开阔处，再重试；仍失败时在地图检查其他入口。",
+          "pause": "blocked",
+          "labels": [
+            "拉斐尔·Lv8·0/1710",
+            "生命 120 / 155",
+            "体力 100 / 100",
+            "金币 0",
+            "✓",
+            "第三杯旅店·安全区",
+            "调查受阻地点",
+            "从当前位置到“调查受阻地点”未找…",
+            "寻路失败",
+            "N",
+            "E",
+            "S",
+            "W",
+            "21",
+            "",
+            "",
+            "",
+            "1",
+            "",
+            "2",
+            "",
+            "3",
+            "",
+            "4",
+            "",
+            "WASD 移动 · Shift 慢行 · 滚轮缩放",
+            "",
+            "调查受阻地点",
+            "目的地：第三杯旅店\n\n原因：从当前位置到“调查受阻地点”未找到可行走路线。\n\n下一步：请先手动移动到开阔处，再重试；仍失败时在地图检查其他入口。",
+            "查看任务"
+          ]
+        },
+        "screenshot": "F:\\workspace\\Singularity\\src\\cocos\\temp\\navigation-blockage-path-844x390.png",
+        "errors": []
+      },
+      {
+        "sample": {
+          "name": "gate",
+          "viewport": {
+            "width": 932,
+            "height": 430
+          }
+        },
+        "before": {
+          "code": "prerequisite",
+          "summary": "通路未开",
+          "reason": "峭壁洞窟 → 鸣岩洞厅：从另一侧解除门闩或放下梯子",
+          "hint": "先前往鸣岩洞厅，使用“前往峭壁洞窟”开启通路，再返回此处。",
+          "objective": "开启峭壁通路",
+          "progress": "击败0/6",
+          "button": "原因",
+          "interactable": true,
+          "point": {
+            "x": 153.78472222222217,
+            "y": 99.73611111111114
+          }
+        },
+        "details": {
+          "menu": "navigation-blocked",
+          "title": "开启峭壁通路",
+          "body": "峭壁洞窟 → 鸣岩洞厅：从另一侧解除门闩或放下梯子\n先前往鸣岩洞厅，使用“前往峭壁洞窟”开启通路，再返回此处。",
+          "pause": "blocked",
+          "labels": [
+            "拉斐尔·Lv8·0/1710",
+            "生命 120 / 155",
+            "体力 100 / 100",
+            "金币 0",
+            "✓",
+            "通路未开 · 第三杯旅店·安全区 · 0m",
+            "开启峭壁通路",
+            "峭壁洞窟 → 鸣岩洞厅：从另一侧…",
+            "击败0/6",
+            "原因",
+            "N",
+            "E",
+            "S",
+            "W",
+            "21",
+            "",
+            "",
+            "",
+            "1",
+            "",
+            "2",
+            "",
+            "3",
+            "",
+            "4",
+            "",
+            "",
+            "",
+            "WASD 移动 · Shift 慢行 · 滚轮缩放",
+            "",
+            "自动",
+            "开启峭壁通路",
+            "目的地：峭壁洞窟\n\n原因：峭壁洞窟 → 鸣岩洞厅：从另一侧解除门闩或放下梯子\n\n下一步：先前往鸣岩洞厅，使用“前往峭壁洞窟”开启通路，再返回此处。",
+            "查看任务"
+          ]
+        },
+        "screenshot": "F:\\workspace\\Singularity\\src\\cocos\\temp\\navigation-blockage-gate-932x430.png",
+        "errors": []
+      }
+    ]
+  },
+  "visualReview": {
+    "passed": true,
+    "notes": "Retained objective name and goal count; reason/state uses existing tracker rows. Full reason and next step are readable in the shared modal; touch opens and closes the explanation without resuming blocked automation.",
+    "reviewImage": "temp/navigation-blockage-review.jpg"
+  },
+  "build": {
+    "directory": "build/concept-2d",
+    "entry": "src\\cocos\\build\\concept-2d\\assets\\main\\index.919d3.js",
+    "sha256": "28cdabf9f8a9f7816f12c2f7b244efb250c7e9eb3f4e4b85ebcdb92219eaf5a4",
+    "officialBuild": "Build-Local.ps1 -Platform web-mobile -OutputName concept-2d -Profile test",
+    "log": "temp/navigation-blockage-build-final.log"
+  },
+  "sourceSha256": {
+    "assets/scripts/features/automation/common/AutomationRoute.ts": "70391224805a7aea262d74db6ebb706b9827c5852201fa298f165df64849aa86",
+    "assets/scripts/features/automation/common/Automation.ts": "54c7e9aaa50e64739e32612b06b032e22d81238d03d658a0cadc8935c4425902",
+    "assets/scripts/features/journey/common/JourneyGuide.ts": "0b11c5caa8ad80957be9e64916531b0f9f1fb487412ba1b3a0d274063e0541a2",
+    "assets/scripts/features/journey/common/ObjectiveTarget.ts": "e580c321ac5a498f64a1eede2b72fad49db5f1784ffe8ba330bdee84ee7d3974",
+    "assets/scripts/features/journey/locales/index.ts": "336fdaa06d81aacf28e0d67efda9eaee02d937644fd401e33e60a51297a54d8e",
+    "assets/scripts/features/journey/runtime/TaskPresence.ts": "dfe6dd1f71313b66a1c3da462f7e6a122034a0f399d75db7b5b910f0de62e4c5",
+    "assets/scripts/app/Hud.ts": "90870b52cf2d1d77bb8e6b3147ee7198f09c87fd1bfb65b7c0bb727f7d5a0325",
+    "assets/scripts/app/ChapterGame.ts": "cf6be0f23a10062ae19b191f0b5f45152b82660d61bb384a326e8894ee958fe5"
+  },
+  "pending": [
+    "TapTap App / physical-device verification; this task did not create or upload a TapTap package"
+  ]
+}

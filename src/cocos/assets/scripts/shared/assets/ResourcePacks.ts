@@ -217,12 +217,16 @@ export const RESOURCE_PACKS:readonly {prefix:string;bundle:string}[] = [
     "bundle": "painted-terrain"
   },
   {
-    "prefix": "ui/combat-relief/",
-    "bundle": "skill-icons"
+    "prefix": "ui/boss-awareness/",
+    "bundle": "boss-art"
   },
   {
-    "prefix": "audio/combat-v9/",
+    "prefix": "audio/combat-v12/",
     "bundle": "combat-audio"
+  },
+  {
+    "prefix": "ui/combat-relief/",
+    "bundle": "skill-icons"
   },
   {
     "prefix": "ui/quiet-bronze/",
@@ -249,8 +253,20 @@ export const RESOURCE_PACKS:readonly {prefix:string;bundle:string}[] = [
     "bundle": "painted-interiors"
   },
   {
+    "prefix": "ui/loading/",
+    "bundle": "loading-art"
+  },
+  {
     "prefix": "equipment/",
     "bundle": "equipment-art"
+  },
+  {
+    "prefix": "portraits/",
+    "bundle": "portrait-art"
+  },
+  {
+    "prefix": "ui/dice/",
+    "bundle": "dice-art"
   },
   {
     "prefix": "atlas/",
@@ -261,3 +277,850 @@ export const RESOURCE_PACKS:readonly {prefix:string;bundle:string}[] = [
     "bundle": "combat-vfx"
   }
 ];
+/** Exact UUID routes for source-preserving selective bundles. */
+export const RESOURCE_ASSET_PACKS:Readonly<Record<string,{bundle:string;uuid:string}>> = {
+  "equipment/supplies-v2/health-bottle": {
+    "bundle": "boot-ui",
+    "uuid": "1a60df93-dccb-5def-8aad-48215c51b004"
+  },
+  "equipment/supplies-v2/health-bottle/texture": {
+    "bundle": "boot-ui",
+    "uuid": "1a60df93-dccb-5def-8aad-48215c51b004@6c48a"
+  },
+  "equipment/supplies-v2/stamina-bottle": {
+    "bundle": "boot-ui",
+    "uuid": "e5cfcc6c-469a-5db2-ac96-e3163a5adcf2"
+  },
+  "equipment/supplies-v2/stamina-bottle/texture": {
+    "bundle": "boot-ui",
+    "uuid": "e5cfcc6c-469a-5db2-ac96-e3163a5adcf2@6c48a"
+  },
+  "portraits/native-raphael": {
+    "bundle": "boot-ui",
+    "uuid": "37e1906c-8245-47bd-9f65-8a55cd67afb4"
+  },
+  "portraits/native-raphael/texture": {
+    "bundle": "boot-ui",
+    "uuid": "37e1906c-8245-47bd-9f65-8a55cd67afb4@6c48a"
+  },
+  "ui/boss-awareness/boss-entry": {
+    "bundle": "boot-ui",
+    "uuid": "46c4fc62-0e66-5e7c-91e1-09f4928c757b"
+  },
+  "ui/boss-awareness/boss-entry/texture": {
+    "bundle": "boot-ui",
+    "uuid": "46c4fc62-0e66-5e7c-91e1-09f4928c757b@6c48a"
+  },
+  "ui/boss-awareness/tool-face": {
+    "bundle": "boot-ui",
+    "uuid": "73dd0435-60be-514f-9818-ac3da4557143"
+  },
+  "ui/boss-awareness/tool-face/texture": {
+    "bundle": "boot-ui",
+    "uuid": "73dd0435-60be-514f-9818-ac3da4557143@6c48a"
+  },
+  "ui/quiet-bronze/button-disabled": {
+    "bundle": "boot-ui",
+    "uuid": "e1716823-7bed-4072-9b17-e57093967d03"
+  },
+  "ui/quiet-bronze/button-disabled/texture": {
+    "bundle": "boot-ui",
+    "uuid": "e1716823-7bed-4072-9b17-e57093967d03@6c48a"
+  },
+  "ui/quiet-bronze/button-hover": {
+    "bundle": "boot-ui",
+    "uuid": "e19b3e49-3ad1-49a3-9d9c-31e2b5fd2f6b"
+  },
+  "ui/quiet-bronze/button-hover/texture": {
+    "bundle": "boot-ui",
+    "uuid": "e19b3e49-3ad1-49a3-9d9c-31e2b5fd2f6b@6c48a"
+  },
+  "ui/quiet-bronze/button-normal": {
+    "bundle": "boot-ui",
+    "uuid": "52b17147-ad5f-404e-a78d-cde787a02ccf"
+  },
+  "ui/quiet-bronze/button-normal/texture": {
+    "bundle": "boot-ui",
+    "uuid": "52b17147-ad5f-404e-a78d-cde787a02ccf@6c48a"
+  },
+  "ui/quiet-bronze/button-pressed": {
+    "bundle": "boot-ui",
+    "uuid": "15c107f2-68ab-447a-819a-f97f83b603f9"
+  },
+  "ui/quiet-bronze/button-pressed/texture": {
+    "bundle": "boot-ui",
+    "uuid": "15c107f2-68ab-447a-819a-f97f83b603f9@6c48a"
+  },
+  "ui/quiet-bronze/double-gold-divider-v6": {
+    "bundle": "boot-ui",
+    "uuid": "c131132a-46cf-426a-a772-14db77c9f9f1"
+  },
+  "ui/quiet-bronze/double-gold-divider-v6/texture": {
+    "bundle": "boot-ui",
+    "uuid": "c131132a-46cf-426a-a772-14db77c9f9f1@6c48a"
+  },
+  "ui/quiet-bronze/double-gold-frame-rpg-v4": {
+    "bundle": "boot-ui",
+    "uuid": "ae1f309a-ce5b-4a16-90eb-3a70eb0a122d"
+  },
+  "ui/quiet-bronze/double-gold-frame-rpg-v4/texture": {
+    "bundle": "boot-ui",
+    "uuid": "ae1f309a-ce5b-4a16-90eb-3a70eb0a122d@6c48a"
+  },
+  "ui/quiet-bronze/double-gold-frame-v6": {
+    "bundle": "boot-ui",
+    "uuid": "9d7fa2d5-1a02-451a-ae76-ddc12f8b9d7b"
+  },
+  "ui/quiet-bronze/double-gold-frame-v6/texture": {
+    "bundle": "boot-ui",
+    "uuid": "9d7fa2d5-1a02-451a-ae76-ddc12f8b9d7b@6c48a"
+  },
+  "ui/quiet-bronze/double-gold-inset-v6": {
+    "bundle": "boot-ui",
+    "uuid": "f1a2579f-1ce1-4a8f-bbe8-fc69baf9308b"
+  },
+  "ui/quiet-bronze/double-gold-inset-v6/texture": {
+    "bundle": "boot-ui",
+    "uuid": "f1a2579f-1ce1-4a8f-bbe8-fc69baf9308b@6c48a"
+  },
+  "ui/quiet-bronze/double-gold-stag-shadow-v11": {
+    "bundle": "boot-ui",
+    "uuid": "6397ece2-34bb-449c-be7e-3c1cce7f33d8"
+  },
+  "ui/quiet-bronze/double-gold-stag-shadow-v11/texture": {
+    "bundle": "boot-ui",
+    "uuid": "6397ece2-34bb-449c-be7e-3c1cce7f33d8@6c48a"
+  },
+  "ui/quiet-bronze/double-gold-stag-v6": {
+    "bundle": "boot-ui",
+    "uuid": "f1ee9138-28b1-4c71-ac48-55637fd96117"
+  },
+  "ui/quiet-bronze/double-gold-stag-v6/texture": {
+    "bundle": "boot-ui",
+    "uuid": "f1ee9138-28b1-4c71-ac48-55637fd96117@6c48a"
+  },
+  "ui/quiet-bronze/double-gold-tab-rule-v6": {
+    "bundle": "boot-ui",
+    "uuid": "63e4b75e-6889-4dd4-bc24-47aca36c4c4f"
+  },
+  "ui/quiet-bronze/double-gold-tab-rule-v6/texture": {
+    "bundle": "boot-ui",
+    "uuid": "63e4b75e-6889-4dd4-bc24-47aca36c4c4f@6c48a"
+  },
+  "ui/quiet-bronze/double-gold-toggle-thumb-v6": {
+    "bundle": "boot-ui",
+    "uuid": "e739bb4a-24a7-4b68-bd63-be0460a48b67"
+  },
+  "ui/quiet-bronze/double-gold-toggle-thumb-v6/texture": {
+    "bundle": "boot-ui",
+    "uuid": "e739bb4a-24a7-4b68-bd63-be0460a48b67@6c48a"
+  },
+  "ui/quiet-bronze/double-gold-toggle-track-v6": {
+    "bundle": "boot-ui",
+    "uuid": "09e7e79b-3e53-41e4-bc24-affcddce1e16"
+  },
+  "ui/quiet-bronze/double-gold-toggle-track-v6/texture": {
+    "bundle": "boot-ui",
+    "uuid": "09e7e79b-3e53-41e4-bc24-affcddce1e16@6c48a"
+  },
+  "ui/quiet-bronze/gold-frame-capsule-atlas-v1": {
+    "bundle": "boot-ui",
+    "uuid": "6af547b0-2eb0-59a1-a8ec-a16460b70eb0"
+  },
+  "ui/quiet-bronze/gold-frame-capsule-atlas-v1/texture": {
+    "bundle": "boot-ui",
+    "uuid": "6af547b0-2eb0-59a1-a8ec-a16460b70eb0@6c48a"
+  },
+  "ui/quiet-bronze/gold-frame-panel-atlas-v1": {
+    "bundle": "boot-ui",
+    "uuid": "1a802fe7-9289-5ec3-902b-2dc41b45e6f6"
+  },
+  "ui/quiet-bronze/gold-frame-panel-atlas-v1/texture": {
+    "bundle": "boot-ui",
+    "uuid": "1a802fe7-9289-5ec3-902b-2dc41b45e6f6@6c48a"
+  },
+  "ui/quiet-bronze/hud-panel-atlas-v1": {
+    "bundle": "boot-ui",
+    "uuid": "39cc0b07-f47b-5165-9f4e-80caf52f3ee4"
+  },
+  "ui/quiet-bronze/hud-panel-atlas-v1/texture": {
+    "bundle": "boot-ui",
+    "uuid": "39cc0b07-f47b-5165-9f4e-80caf52f3ee4@6c48a"
+  },
+  "ui/quiet-bronze/hud-skill-face-v19": {
+    "bundle": "boot-ui",
+    "uuid": "61b55950-3a96-5fdf-8a60-948749025b2c"
+  },
+  "ui/quiet-bronze/hud-skill-face-v19/texture": {
+    "bundle": "boot-ui",
+    "uuid": "61b55950-3a96-5fdf-8a60-948749025b2c@6c48a"
+  },
+  "ui/quiet-bronze/mask-cooldown": {
+    "bundle": "boot-ui",
+    "uuid": "614ad0f4-5c9d-46c5-b708-4a3c56396887"
+  },
+  "ui/quiet-bronze/mask-cooldown/texture": {
+    "bundle": "boot-ui",
+    "uuid": "614ad0f4-5c9d-46c5-b708-4a3c56396887@6c48a"
+  },
+  "ui/quiet-bronze/menu-motion-v5": {
+    "bundle": "boot-ui",
+    "uuid": "d326aa7c-a278-48bf-b1b4-d93a7abe7325"
+  },
+  "ui/quiet-bronze/menu-motion-v5/texture": {
+    "bundle": "boot-ui",
+    "uuid": "d326aa7c-a278-48bf-b1b4-d93a7abe7325@6c48a"
+  },
+  "ui/quiet-bronze/menu-music-v5": {
+    "bundle": "boot-ui",
+    "uuid": "4ea07746-24d3-4e51-8dc2-78e191d0d031"
+  },
+  "ui/quiet-bronze/menu-music-v5/texture": {
+    "bundle": "boot-ui",
+    "uuid": "4ea07746-24d3-4e51-8dc2-78e191d0d031@6c48a"
+  },
+  "ui/quiet-bronze/menu-panel-frame-v5": {
+    "bundle": "boot-ui",
+    "uuid": "c68fa0da-e08b-421e-8c1c-d89fb9e28ad4"
+  },
+  "ui/quiet-bronze/menu-panel-frame-v5/texture": {
+    "bundle": "boot-ui",
+    "uuid": "c68fa0da-e08b-421e-8c1c-d89fb9e28ad4@6c48a"
+  },
+  "ui/quiet-bronze/menu-panel-inset-v5": {
+    "bundle": "boot-ui",
+    "uuid": "541d84a3-8616-4836-ad71-fbcd344c9823"
+  },
+  "ui/quiet-bronze/menu-panel-inset-v5/texture": {
+    "bundle": "boot-ui",
+    "uuid": "541d84a3-8616-4836-ad71-fbcd344c9823@6c48a"
+  },
+  "ui/quiet-bronze/menu-pill-frame-v5": {
+    "bundle": "boot-ui",
+    "uuid": "d7919ea7-9d2a-4f4f-bfc2-1b7fa5801132"
+  },
+  "ui/quiet-bronze/menu-pill-frame-v5/texture": {
+    "bundle": "boot-ui",
+    "uuid": "d7919ea7-9d2a-4f4f-bfc2-1b7fa5801132@6c48a"
+  },
+  "ui/quiet-bronze/menu-pill-inset-v5": {
+    "bundle": "boot-ui",
+    "uuid": "38258757-df4e-46ff-8593-08a8a11fad2b"
+  },
+  "ui/quiet-bronze/menu-pill-inset-v5/texture": {
+    "bundle": "boot-ui",
+    "uuid": "38258757-df4e-46ff-8593-08a8a11fad2b@6c48a"
+  },
+  "ui/quiet-bronze/menu-settings-crest-v5": {
+    "bundle": "boot-ui",
+    "uuid": "3621a9a8-a88a-4778-9210-eaa09ae834bf"
+  },
+  "ui/quiet-bronze/menu-settings-crest-v5/texture": {
+    "bundle": "boot-ui",
+    "uuid": "3621a9a8-a88a-4778-9210-eaa09ae834bf@6c48a"
+  },
+  "ui/quiet-bronze/menu-skillnames-v5": {
+    "bundle": "boot-ui",
+    "uuid": "544b9a24-0dc4-4c8e-99b0-4c6c01101860"
+  },
+  "ui/quiet-bronze/menu-skillnames-v5/texture": {
+    "bundle": "boot-ui",
+    "uuid": "544b9a24-0dc4-4c8e-99b0-4c6c01101860@6c48a"
+  },
+  "ui/quiet-bronze/menu-toggle-thumb-v5": {
+    "bundle": "boot-ui",
+    "uuid": "84fef1a4-b271-447e-b7d2-7010e73ceab8"
+  },
+  "ui/quiet-bronze/menu-toggle-thumb-v5/texture": {
+    "bundle": "boot-ui",
+    "uuid": "84fef1a4-b271-447e-b7d2-7010e73ceab8@6c48a"
+  },
+  "ui/quiet-bronze/rpg-serif-v2": {
+    "bundle": "boot-ui",
+    "uuid": "22fecbb9-14c7-4d62-b2ff-2d68f043e654"
+  },
+  "ui/quiet-bronze/settings-footer-rule-v11": {
+    "bundle": "boot-ui",
+    "uuid": "53d9b4ad-24f7-4ba5-8b8f-474d9bc13845"
+  },
+  "ui/quiet-bronze/settings-footer-rule-v11/texture": {
+    "bundle": "boot-ui",
+    "uuid": "53d9b4ad-24f7-4ba5-8b8f-474d9bc13845@6c48a"
+  },
+  "ui/quiet-bronze/start-menu-primary-v8": {
+    "bundle": "boot-ui",
+    "uuid": "0746f11c-262b-4f1f-80e9-e3cbe62956bf"
+  },
+  "ui/quiet-bronze/start-menu-primary-v8/texture": {
+    "bundle": "boot-ui",
+    "uuid": "0746f11c-262b-4f1f-80e9-e3cbe62956bf@6c48a"
+  },
+  "ui/quiet-bronze/start-menu-rule-v8": {
+    "bundle": "boot-ui",
+    "uuid": "ee7981e5-866a-47da-9bc7-49c927dbd4f5"
+  },
+  "ui/quiet-bronze/start-menu-rule-v8/texture": {
+    "bundle": "boot-ui",
+    "uuid": "ee7981e5-866a-47da-9bc7-49c927dbd4f5@6c48a"
+  },
+  "ui/quiet-bronze/start-menu-secondary-v8": {
+    "bundle": "boot-ui",
+    "uuid": "3cd2a621-6bd7-4bec-8eac-df4a435e1dba"
+  },
+  "ui/quiet-bronze/start-menu-secondary-v8/texture": {
+    "bundle": "boot-ui",
+    "uuid": "3cd2a621-6bd7-4bec-8eac-df4a435e1dba@6c48a"
+  },
+  "ui/quiet-bronze/start-menu-subtitle-v8": {
+    "bundle": "boot-ui",
+    "uuid": "872a7d97-288f-409b-9423-4d5f22e339ef"
+  },
+  "ui/quiet-bronze/start-menu-subtitle-v8/texture": {
+    "bundle": "boot-ui",
+    "uuid": "872a7d97-288f-409b-9423-4d5f22e339ef@6c48a"
+  },
+  "ui/quiet-bronze/start-menu-title-v8": {
+    "bundle": "boot-ui",
+    "uuid": "49a6ca73-5104-4b95-b6fb-b74c878e8f18"
+  },
+  "ui/quiet-bronze/start-menu-title-v8/texture": {
+    "bundle": "boot-ui",
+    "uuid": "49a6ca73-5104-4b95-b6fb-b74c878e8f18@6c48a"
+  },
+  "ui/quiet-bronze/unified-gold-medallion-v13": {
+    "bundle": "boot-ui",
+    "uuid": "c2a4b088-8913-4c42-b007-59bc596e7f78"
+  },
+  "ui/quiet-bronze/unified-gold-medallion-v13/texture": {
+    "bundle": "boot-ui",
+    "uuid": "c2a4b088-8913-4c42-b007-59bc596e7f78@6c48a"
+  },
+  "ui/quiet-bronze/unified-gold-ring-v16": {
+    "bundle": "boot-ui",
+    "uuid": "be07a1b2-c7ac-4355-9485-7df5b2c04010"
+  },
+  "ui/quiet-bronze/unified-gold-ring-v16/texture": {
+    "bundle": "boot-ui",
+    "uuid": "be07a1b2-c7ac-4355-9485-7df5b2c04010@6c48a"
+  },
+  "ui/combat-relief/hud-circular/atlases/war": {
+    "bundle": "boot-skill-icons",
+    "uuid": "953bf1a8-21e8-50a3-a7a0-becfa57c6479"
+  },
+  "ui/combat-relief/hud-circular/atlases/war/texture": {
+    "bundle": "boot-skill-icons",
+    "uuid": "953bf1a8-21e8-50a3-a7a0-becfa57c6479@6c48a"
+  },
+  "ui/combat-relief/hud-circular/attack": {
+    "bundle": "boot-skill-icons",
+    "uuid": "9ffe2277-d2a5-56c4-be39-02d9d235f08a"
+  },
+  "ui/combat-relief/hud-circular/attack/texture": {
+    "bundle": "boot-skill-icons",
+    "uuid": "9ffe2277-d2a5-56c4-be39-02d9d235f08a@6c48a"
+  },
+  "ui/combat-relief/hud-circular/cooldown": {
+    "bundle": "boot-skill-icons",
+    "uuid": "f786c8a6-6ec8-51ef-8cfd-1545becd33bd"
+  },
+  "ui/combat-relief/hud-circular/cooldown/texture": {
+    "bundle": "boot-skill-icons",
+    "uuid": "f786c8a6-6ec8-51ef-8cfd-1545becd33bd@6c48a"
+  },
+  "ui/combat-relief/hud-circular/dash": {
+    "bundle": "boot-skill-icons",
+    "uuid": "2c9d6488-db16-52d1-a91d-b8164d20e9c7"
+  },
+  "ui/combat-relief/hud-circular/dash/texture": {
+    "bundle": "boot-skill-icons",
+    "uuid": "2c9d6488-db16-52d1-a91d-b8164d20e9c7@6c48a"
+  },
+  "audio/combat-v12/war/war_swing_v1": {
+    "bundle": "warrior-audio",
+    "uuid": "8689da4d-8439-50b6-aa57-94bf16f81b2e"
+  },
+  "audio/combat-v12/war/war_swing_v2": {
+    "bundle": "warrior-audio",
+    "uuid": "1b21f9ee-68e9-598c-bb5d-c7d7fc780c40"
+  },
+  "audio/combat-v12/war/war_swing_v3": {
+    "bundle": "warrior-audio",
+    "uuid": "6260035a-a466-5900-a7e4-8bb330d75f3d"
+  },
+  "vfx/kenney/circle_03": {
+    "bundle": "boot-vfx",
+    "uuid": "004fdda5-7312-4250-93c4-728a01ff2cc9"
+  },
+  "vfx/kenney/circle_03/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "004fdda5-7312-4250-93c4-728a01ff2cc9@6c48a"
+  },
+  "vfx/kenney/dirt_01": {
+    "bundle": "boot-vfx",
+    "uuid": "5f543218-6a8f-4ade-aa7b-54bf4f80f6fd"
+  },
+  "vfx/kenney/dirt_01/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "5f543218-6a8f-4ade-aa7b-54bf4f80f6fd@6c48a"
+  },
+  "vfx/kenney/flame_02": {
+    "bundle": "boot-vfx",
+    "uuid": "fa4dc073-8aa5-465f-ac22-aad377ba6b55"
+  },
+  "vfx/kenney/flame_02/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "fa4dc073-8aa5-465f-ac22-aad377ba6b55@6c48a"
+  },
+  "vfx/kenney/light_01": {
+    "bundle": "boot-vfx",
+    "uuid": "debe5623-0790-4ea8-a198-2aa8fa94f54a"
+  },
+  "vfx/kenney/light_01/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "debe5623-0790-4ea8-a198-2aa8fa94f54a@6c48a"
+  },
+  "vfx/kenney/magic_01": {
+    "bundle": "boot-vfx",
+    "uuid": "b9a5d626-8f22-41f3-bfe1-5b79fe301d1f"
+  },
+  "vfx/kenney/magic_01/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "b9a5d626-8f22-41f3-bfe1-5b79fe301d1f@6c48a"
+  },
+  "vfx/kenney/magic_03": {
+    "bundle": "boot-vfx",
+    "uuid": "56e715e4-1ec7-4577-862e-39c4f6aa4be2"
+  },
+  "vfx/kenney/magic_03/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "56e715e4-1ec7-4577-862e-39c4f6aa4be2@6c48a"
+  },
+  "vfx/kenney/scorch_01": {
+    "bundle": "boot-vfx",
+    "uuid": "e86cb324-513e-40b7-a8b7-f5eaa0a05efc"
+  },
+  "vfx/kenney/scorch_01/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "e86cb324-513e-40b7-a8b7-f5eaa0a05efc@6c48a"
+  },
+  "vfx/kenney/slash_02": {
+    "bundle": "boot-vfx",
+    "uuid": "6210873f-33f0-4d02-b250-dd4a0f76c58f"
+  },
+  "vfx/kenney/slash_02/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "6210873f-33f0-4d02-b250-dd4a0f76c58f@6c48a"
+  },
+  "vfx/kenney/smoke_04": {
+    "bundle": "boot-vfx",
+    "uuid": "62b6190a-3dd6-498f-a4cd-080bd91d46e9"
+  },
+  "vfx/kenney/smoke_04/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "62b6190a-3dd6-498f-a4cd-080bd91d46e9@6c48a"
+  },
+  "vfx/kenney/spark_01": {
+    "bundle": "boot-vfx",
+    "uuid": "63e506cf-b515-407a-aff6-d8d11b028466"
+  },
+  "vfx/kenney/spark_01/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "63e506cf-b515-407a-aff6-d8d11b028466@6c48a"
+  },
+  "vfx/kenney/star_01": {
+    "bundle": "boot-vfx",
+    "uuid": "37b2750f-805b-4602-86d3-2a6edccd7e91"
+  },
+  "vfx/kenney/star_01/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "37b2750f-805b-4602-86d3-2a6edccd7e91@6c48a"
+  },
+  "vfx/kenney/trace_01": {
+    "bundle": "boot-vfx",
+    "uuid": "1f23fbf4-f05e-4f06-8fad-3f186703ce93"
+  },
+  "vfx/kenney/trace_01/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "1f23fbf4-f05e-4f06-8fad-3f186703ce93@6c48a"
+  },
+  "vfx/production/fire-tongues-v1": {
+    "bundle": "boot-vfx",
+    "uuid": "5d291640-d3dc-43b4-88f5-9008486e5299"
+  },
+  "vfx/production/fire-tongues-v1/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "5d291640-d3dc-43b4-88f5-9008486e5299@6c48a"
+  },
+  "vfx/production/melee-material-v3/steel-ribbon": {
+    "bundle": "boot-vfx",
+    "uuid": "d7016133-14ed-4cae-ac83-a402bcb89081"
+  },
+  "vfx/production/melee-material-v3/steel-ribbon/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "d7016133-14ed-4cae-ac83-a402bcb89081@6c48a"
+  },
+  "vfx/production/ribbon-soft-v1": {
+    "bundle": "boot-vfx",
+    "uuid": "1d22af5b-962d-4841-ac11-229e47793c66"
+  },
+  "vfx/production/ribbon-soft-v1/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "1d22af5b-962d-4841-ac11-229e47793c66@6c48a"
+  },
+  "vfx/production/ribbon-white-v1": {
+    "bundle": "boot-vfx",
+    "uuid": "67f967f0-4c96-4eed-ab9b-e9304c2a3bcc"
+  },
+  "vfx/production/ribbon-white-v1/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "67f967f0-4c96-4eed-ab9b-e9304c2a3bcc@6c48a"
+  },
+  "vfx/production/shield-unified-motifs-v1": {
+    "bundle": "boot-vfx",
+    "uuid": "326544e2-feba-4089-a2b7-4d6bffe2859a"
+  },
+  "vfx/production/shield-unified-motifs-v1/texture": {
+    "bundle": "boot-vfx",
+    "uuid": "326544e2-feba-4089-a2b7-4d6bffe2859a@6c48a"
+  },
+  "vfx/production/shield-unified-v1": {
+    "bundle": "boot-vfx",
+    "uuid": "9037ca3c-0e38-4540-af5b-2e864b11767c"
+  },
+  "vfx/production/warrior-flow-v1": {
+    "bundle": "warrior-vfx",
+    "uuid": "efe6a602-059f-458d-888e-7860397736e2"
+  },
+  "vfx/production/warrior-flow-v1/texture": {
+    "bundle": "warrior-vfx",
+    "uuid": "efe6a602-059f-458d-888e-7860397736e2@6c48a"
+  },
+  "vfx/production/warrior-pressure-wave-v2": {
+    "bundle": "warrior-vfx",
+    "uuid": "8068c47e-2aff-40e1-bfab-55004e71603c"
+  },
+  "vfx/production/warrior-silver-wave-v1": {
+    "bundle": "warrior-vfx",
+    "uuid": "00a298ec-93ff-4ee2-a5c6-0b74980c73c0"
+  },
+  "vfx/production/warrior-silver-wave-v1/texture": {
+    "bundle": "warrior-vfx",
+    "uuid": "00a298ec-93ff-4ee2-a5c6-0b74980c73c0@6c48a"
+  },
+  "vfx/production/warrior-ultimate-flow-v38": {
+    "bundle": "warrior-vfx",
+    "uuid": "e61389b7-e7c8-4863-9ec8-f7b597b28e81"
+  },
+  "vfx/production/warrior-ultimate-flow-v38/texture": {
+    "bundle": "warrior-vfx",
+    "uuid": "e61389b7-e7c8-4863-9ec8-f7b597b28e81@6c48a"
+  },
+  "vfx/production/warrior-ultimate-v38": {
+    "bundle": "warrior-vfx",
+    "uuid": "c8ad752e-9373-4299-8edc-2a047adbe741"
+  },
+  "vfx/production/warrior-white-v1": {
+    "bundle": "warrior-vfx",
+    "uuid": "354e477f-64f2-44f2-8212-9e5a0b1d30b6"
+  },
+  "vfx/production/warrior-white-v1/texture": {
+    "bundle": "warrior-vfx",
+    "uuid": "354e477f-64f2-44f2-8212-9e5a0b1d30b6@6c48a"
+  },
+  "actors/props-native/arrow/arrow/arrow": {
+    "bundle": "starter-weapons",
+    "uuid": "c4fdd745-d63a-4aa4-9f36-f5bff492b040@0d683"
+  },
+  "actors/props-native/design-quiver/design-quiver/design-quiver": {
+    "bundle": "starter-weapons",
+    "uuid": "3886f762-115a-4371-a712-7141ae9322df@a74d2"
+  },
+  "actors/props-native/design-stowed-w01/design-stowed-w01/design-stowed-w01": {
+    "bundle": "starter-weapons",
+    "uuid": "4c1f0f5f-c768-4483-801d-b6a25421b03d@0afa0"
+  },
+  "actors/props-native/design-w01/design-w01/design-w01": {
+    "bundle": "starter-weapons",
+    "uuid": "84dd9496-3667-4f23-a019-4db35d02a8f6@55118"
+  },
+  "actors/props-native/manifest": {
+    "bundle": "starter-weapons",
+    "uuid": "ab003421-6598-46d2-a2b0-12f55e3b7f0d"
+  },
+  "actors/props-native/textures/arrow_albedo": {
+    "bundle": "starter-weapons",
+    "uuid": "43fdfb47-d70e-45cf-864b-bb51858d68ad"
+  },
+  "actors/props-native/textures/arrow_albedo/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "43fdfb47-d70e-45cf-864b-bb51858d68ad@6c48a"
+  },
+  "actors/props-native/textures/arrow_normal": {
+    "bundle": "starter-weapons",
+    "uuid": "d682a650-09d9-4f51-a299-d6e55013af30"
+  },
+  "actors/props-native/textures/arrow_normal/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "d682a650-09d9-4f51-a299-d6e55013af30@6c48a"
+  },
+  "actors/props-native/textures/arrow_orm": {
+    "bundle": "starter-weapons",
+    "uuid": "40ef78e3-9951-4535-b6f2-9a03ea103924"
+  },
+  "actors/props-native/textures/arrow_orm/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "40ef78e3-9951-4535-b6f2-9a03ea103924@6c48a"
+  },
+  "actors/props-native/textures/design-edge-bronze-albedo": {
+    "bundle": "starter-weapons",
+    "uuid": "1f534ee6-9b90-433a-b8ec-9096f55166c8"
+  },
+  "actors/props-native/textures/design-edge-bronze-albedo/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "1f534ee6-9b90-433a-b8ec-9096f55166c8@6c48a"
+  },
+  "actors/props-native/textures/design-edge-bronze-normal": {
+    "bundle": "starter-weapons",
+    "uuid": "e1bb3825-8a2f-4bab-97a2-d2ac645b0209"
+  },
+  "actors/props-native/textures/design-edge-bronze-normal/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "e1bb3825-8a2f-4bab-97a2-d2ac645b0209@6c48a"
+  },
+  "actors/props-native/textures/design-edge-bronze-orm": {
+    "bundle": "starter-weapons",
+    "uuid": "cd935bdd-349b-4fd5-a042-c75cbd898ea4"
+  },
+  "actors/props-native/textures/design-edge-bronze-orm/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "cd935bdd-349b-4fd5-a042-c75cbd898ea4@6c48a"
+  },
+  "actors/props-native/textures/design-edge-leather-albedo": {
+    "bundle": "starter-weapons",
+    "uuid": "2d8fc6cc-09a7-49c3-bd09-01b62f3ea125"
+  },
+  "actors/props-native/textures/design-edge-leather-albedo/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "2d8fc6cc-09a7-49c3-bd09-01b62f3ea125@6c48a"
+  },
+  "actors/props-native/textures/design-edge-leather-normal": {
+    "bundle": "starter-weapons",
+    "uuid": "53757315-df55-4505-9705-cbb69ea1e06c"
+  },
+  "actors/props-native/textures/design-edge-leather-normal/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "53757315-df55-4505-9705-cbb69ea1e06c@6c48a"
+  },
+  "actors/props-native/textures/design-edge-leather-orm": {
+    "bundle": "starter-weapons",
+    "uuid": "1b2b070c-7b0e-4376-b03a-d6731b5d4327"
+  },
+  "actors/props-native/textures/design-edge-leather-orm/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "1b2b070c-7b0e-4376-b03a-d6731b5d4327@6c48a"
+  },
+  "actors/props-native/textures/design-edge-steel-albedo": {
+    "bundle": "starter-weapons",
+    "uuid": "d92b633a-3071-467f-8e4c-294cb40fcec1"
+  },
+  "actors/props-native/textures/design-edge-steel-albedo/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "d92b633a-3071-467f-8e4c-294cb40fcec1@6c48a"
+  },
+  "actors/props-native/textures/design-edge-steel-normal": {
+    "bundle": "starter-weapons",
+    "uuid": "1ab02d2f-9845-4d40-a84c-becb9b2d9024"
+  },
+  "actors/props-native/textures/design-edge-steel-normal/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "1ab02d2f-9845-4d40-a84c-becb9b2d9024@6c48a"
+  },
+  "actors/props-native/textures/design-edge-steel-orm": {
+    "bundle": "starter-weapons",
+    "uuid": "1531a2c6-3cd1-43d5-aa56-18a84a56f566"
+  },
+  "actors/props-native/textures/design-edge-steel-orm/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "1531a2c6-3cd1-43d5-aa56-18a84a56f566@6c48a"
+  },
+  "actors/props-native/textures/design-edge-string-albedo": {
+    "bundle": "starter-weapons",
+    "uuid": "5b793f5e-e09e-42e8-9999-bca57ebf962b"
+  },
+  "actors/props-native/textures/design-edge-string-albedo/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "5b793f5e-e09e-42e8-9999-bca57ebf962b@6c48a"
+  },
+  "actors/props-native/textures/design-edge-string-normal": {
+    "bundle": "starter-weapons",
+    "uuid": "8cab6da7-3fca-4209-856e-0a05ad2c0b11"
+  },
+  "actors/props-native/textures/design-edge-string-normal/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "8cab6da7-3fca-4209-856e-0a05ad2c0b11@6c48a"
+  },
+  "actors/props-native/textures/design-edge-string-orm": {
+    "bundle": "starter-weapons",
+    "uuid": "109b00bc-4ed2-430a-8c55-d4fcba5490eb"
+  },
+  "actors/props-native/textures/design-edge-string-orm/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "109b00bc-4ed2-430a-8c55-d4fcba5490eb@6c48a"
+  },
+  "actors/props-native/textures/design-edge-wood-albedo": {
+    "bundle": "starter-weapons",
+    "uuid": "cca013de-6d4e-4528-8fe9-24a671114680"
+  },
+  "actors/props-native/textures/design-edge-wood-albedo/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "cca013de-6d4e-4528-8fe9-24a671114680@6c48a"
+  },
+  "actors/props-native/textures/design-edge-wood-normal": {
+    "bundle": "starter-weapons",
+    "uuid": "7c3e4c16-4110-42d3-879b-5b9abd31c60c"
+  },
+  "actors/props-native/textures/design-edge-wood-normal/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "7c3e4c16-4110-42d3-879b-5b9abd31c60c@6c48a"
+  },
+  "actors/props-native/textures/design-edge-wood-orm": {
+    "bundle": "starter-weapons",
+    "uuid": "ab2d02a8-4e06-49f3-885e-41f5054e1b54"
+  },
+  "actors/props-native/textures/design-edge-wood-orm/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "ab2d02a8-4e06-49f3-885e-41f5054e1b54@6c48a"
+  },
+  "actors/props-native/textures/design-w01-albedo": {
+    "bundle": "starter-weapons",
+    "uuid": "68635849-5d6c-479c-915b-20fd6ca9f44d"
+  },
+  "actors/props-native/textures/design-w01-albedo/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "68635849-5d6c-479c-915b-20fd6ca9f44d@6c48a"
+  },
+  "actors/props-native/textures/design-w01-normal": {
+    "bundle": "starter-weapons",
+    "uuid": "2bcada88-01e6-465a-930c-158ba32e90e3"
+  },
+  "actors/props-native/textures/design-w01-normal/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "2bcada88-01e6-465a-930c-158ba32e90e3@6c48a"
+  },
+  "actors/props-native/textures/design-w01-orm": {
+    "bundle": "starter-weapons",
+    "uuid": "cf341461-b8b4-4698-bd45-062da47da92a"
+  },
+  "actors/props-native/textures/design-w01-orm/texture": {
+    "bundle": "starter-weapons",
+    "uuid": "cf341461-b8b4-4698-bd45-062da47da92a@6c48a"
+  },
+  "actors/hairstyles-v3/textures/redesigned-curly-color": {
+    "bundle": "hair-map-curly",
+    "uuid": "108c2204-8821-431a-8bc6-8abeb8306d04"
+  },
+  "actors/hairstyles-v3/textures/redesigned-curly-color/texture": {
+    "bundle": "hair-map-curly",
+    "uuid": "108c2204-8821-431a-8bc6-8abeb8306d04@6c48a"
+  },
+  "portraits/raphael-hair-curly-v1": {
+    "bundle": "portrait-hair-curly",
+    "uuid": "691df9c7-fc8f-43f7-a1a6-04ca7b28222a"
+  },
+  "portraits/raphael-hair-curly-v1/texture": {
+    "bundle": "portrait-hair-curly",
+    "uuid": "691df9c7-fc8f-43f7-a1a6-04ca7b28222a@6c48a"
+  },
+  "actors/hairstyles-v3/textures/redesigned-dante-color": {
+    "bundle": "hair-map-dante",
+    "uuid": "89068ee0-c291-4484-9cb9-c6d99b419e0f"
+  },
+  "actors/hairstyles-v3/textures/redesigned-dante-color/texture": {
+    "bundle": "hair-map-dante",
+    "uuid": "89068ee0-c291-4484-9cb9-c6d99b419e0f@6c48a"
+  },
+  "portraits/raphael-hair-dante-v1": {
+    "bundle": "portrait-hair-dante",
+    "uuid": "32ab3bea-0466-47a6-a9ad-06d9dc786858"
+  },
+  "portraits/raphael-hair-dante-v1/texture": {
+    "bundle": "portrait-hair-dante",
+    "uuid": "32ab3bea-0466-47a6-a9ad-06d9dc786858@6c48a"
+  },
+  "actors/hairstyles-v3/textures/redesigned-nero-color": {
+    "bundle": "hair-map-nero",
+    "uuid": "1863c17d-0cb2-485f-8e2f-ef61a46f3977"
+  },
+  "actors/hairstyles-v3/textures/redesigned-nero-color/texture": {
+    "bundle": "hair-map-nero",
+    "uuid": "1863c17d-0cb2-485f-8e2f-ef61a46f3977@6c48a"
+  },
+  "portraits/raphael-hair-nero-v1": {
+    "bundle": "portrait-hair-nero",
+    "uuid": "cfe591c5-3866-4a93-97e2-734fd582f60b"
+  },
+  "portraits/raphael-hair-nero-v1/texture": {
+    "bundle": "portrait-hair-nero",
+    "uuid": "cfe591c5-3866-4a93-97e2-734fd582f60b@6c48a"
+  },
+  "actors/hairstyles-v3/textures/redesigned-vergil-color": {
+    "bundle": "hair-map-vergil",
+    "uuid": "89280119-b760-44cc-91a9-988614a1d089"
+  },
+  "actors/hairstyles-v3/textures/redesigned-vergil-color/texture": {
+    "bundle": "hair-map-vergil",
+    "uuid": "89280119-b760-44cc-91a9-988614a1d089@6c48a"
+  },
+  "portraits/raphael-hair-vergil-v1": {
+    "bundle": "portrait-hair-vergil",
+    "uuid": "8af5a69e-7874-418e-9899-1e854d407c4d"
+  },
+  "portraits/raphael-hair-vergil-v1/texture": {
+    "bundle": "portrait-hair-vergil",
+    "uuid": "8af5a69e-7874-418e-9899-1e854d407c4d@6c48a"
+  },
+  "ui/loading/stonebridge-valley-preview": {
+    "bundle": "boot-loading",
+    "uuid": "10f5ea5f-d634-5f48-8345-89a024a59f67"
+  },
+  "ui/loading/stonebridge-valley-preview/texture": {
+    "bundle": "boot-loading",
+    "uuid": "10f5ea5f-d634-5f48-8345-89a024a59f67@6c48a"
+  },
+  "ui/loading/stonebridge-valley": {
+    "bundle": "boot-loading",
+    "uuid": "10f5ea5f-d634-5f48-8345-89a024a59f67"
+  },
+  "ui/loading/stonebridge-valley/texture": {
+    "bundle": "boot-loading",
+    "uuid": "10f5ea5f-d634-5f48-8345-89a024a59f67@6c48a"
+  },
+  "audio/bells": {
+    "bundle": "boot-sounds",
+    "uuid": "4a55f8fe-b4ef-413a-9f6d-68cd56868c9d"
+  },
+  "audio/complete": {
+    "bundle": "boot-sounds",
+    "uuid": "8b4d5646-be18-4349-a11a-cde8a2b8d9b2"
+  },
+  "audio/dice": {
+    "bundle": "boot-sounds",
+    "uuid": "d5e3914c-3f23-48e6-8727-0c2c8cf1a439"
+  },
+  "audio/hit": {
+    "bundle": "boot-sounds",
+    "uuid": "dcaacf8b-a2e4-4271-8404-2b2c954ede72"
+  },
+  "audio/interact": {
+    "bundle": "boot-sounds",
+    "uuid": "a9a72a6d-2fb4-451e-967e-ef5adebf98af"
+  },
+  "audio/spell": {
+    "bundle": "boot-sounds",
+    "uuid": "2fecf55c-46e0-441a-a8ec-617d2cb23f0c"
+  },
+  "audio/step": {
+    "bundle": "boot-sounds",
+    "uuid": "2b31e224-8bed-40e5-9ee9-3ba4ceca5f38"
+  }
+};

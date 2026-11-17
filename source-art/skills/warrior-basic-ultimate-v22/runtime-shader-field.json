@@ -1,0 +1,7 @@
+{
+  "uuid": "8068c47e-2aff-40e1-bfab-55004e71603c",
+  "name": "../resources/vfx/production/warrior-pressure-wave-v2",
+  "sourceSha256": "71f49188c1fc54575e84da1453d1999eb16faa82f2b7e10b793434301362749a",
+  "crest": "float crest = exp(-pow((depth - 0.142) / (0.068 + n.b * 0.024), 2.0));",
+  "density": "float density = crest * 0.78 * frontLife + body * (0.16 + 0.12 * strands) * frontLife\\n    + wake * (0.12 + 0.10 * art) * tailLife;"
+}

@@ -1,3 +1,4 @@
+import {CAMPAIGN_MAX_LEVEL,combatBudgetLevel} from '../../progression/data/CampaignProgression';
 import type {EnemySpawn,InteractionDef,Point,WorldQuery} from '../../../core/Contracts';
 import type {EnemyState,GameState} from '../../../core/GameSession';
 import {petSpecies,type PetSpeciesId,type PetSkillId} from '../data/Pets';
@@ -8,7 +9,7 @@ import {petJourneyText as t} from '../locales/PetJourneyText';
 type Category='exploration'|'rescue'|'combat'|'mechanism';
 interface Completion {v:1;pet:PetSpeciesId|null;at:number}
 interface Escort {v:1;x:number;z:number;next:number;metres:number;start:number}
-interface Wave {v:1;level:number;at:number}
+interface Wave {v:2;level:number;at:number}
 interface Host {state():GameState;world():WorldQuery;safe():boolean;spawn(enemies:EnemySpawn[]):boolean;changed():void;emit(type:string,text?:string,extra?:Record<string,unknown>):void;reward(source:string):void}
 export interface PetJourneyStepView {id:string;objectId:string;species:PetSpeciesId;kind:PetJourneyStep['kind'];label:string;description:string;area:string;point:Point;completed:boolean;active:boolean;phase:PetJourneyStep['phase'];manuals:PetSkillId[];trial?:PetTrialKind}
 export interface PetJourneyView {species:PetSpeciesId;title:string;complete:boolean;owned:boolean;steps:PetJourneyStepView[];current?:PetJourneyStepView}
@@ -30,7 +31,7 @@ const completed=(s:GameState,step:PetJourneyStep)=>{if(!completion(s,step))retur
 const beforeDone=(s:GameState,step:PetJourneyStep)=>petJourney(step.species)!.steps.slice(0,step.index).every(previous=>completed(s,previous));
 const category=(step:PetJourneyStep):Category=>step.kind==='combat'?'combat':step.kind==='mechanism'?'mechanism':step.kind==='escort'?'rescue':'exploration';
 const enemyFor=(s:GameState,step:PetJourneyStep,index:number)=>(s.area===step.area?s.enemies:s.encounters[step.area]??[]).find(enemy=>enemy.id===petTrialEnemyId(step,index));
-const defeated=(s:GameState,step:PetJourneyStep,index:number)=>{const proof=parse<{v:1;at:number}>(s.receipts[defeatedKey(step,index)]),wave=parse<Wave>(s.receipts[waveKey(step)]);return object(wave)&&wave.v===1&&number(wave.at,0,s.time)&&object(proof)&&keys(proof,['v','at'])&&proof.v===1&&number(proof.at,wave.at,s.time);};
+const defeated=(s:GameState,step:PetJourneyStep,index:number)=>{const proof=parse<{v:1;at:number}>(s.receipts[defeatedKey(step,index)]),wave=parse<Wave>(s.receipts[waveKey(step)]);return object(wave)&&wave.v===2&&number(wave.at,0,s.time)&&object(proof)&&keys(proof,['v','at'])&&proof.v===1&&number(proof.at,wave.at,s.time);};
 const trialDone=(s:GameState,step:PetJourneyStep)=>petTrialKinds(step).every((_,index)=>defeated(s,step,index));
 const acquisitionDone=(s:GameState,species:string)=>{const def=petJourney(species);return !!def&&def.steps.slice(0,def.acquisitionEnd+1).every(step=>completed(s,step));};
 
@@ -55,7 +56,7 @@ export function validPetJourneyEnemy(s:GameState,enemy:EnemyState):boolean {
  const step=PET_JOURNEY_STEPS.find(step=>step.kind==='combat'&&petTrialKinds(step).some((_,index)=>enemy.id===petTrialEnemyId(step,index)));if(!step)return false;
  const wave=parse<Wave>(s.receipts[waveKey(step)]),index=petTrialKinds(step).findIndex((_,index)=>enemy.id===petTrialEnemyId(step,index));
  const locations=[...(s.enemies.includes(enemy)?[s.area]:[]),...Object.entries(s.encounters).filter(([,enemies])=>enemies.includes(enemy)).map(([area])=>area)];
- return !!wave&&wave.v===1&&integer(wave.level,1,40)&&number(wave.at,0,s.time)&&beforeDone(s,step)&&(locations.length?locations.every(area=>area===step.area):s.area===step.area)&&enemy.trainingEnemy===true&&enemy.trainingAttacks===true&&!enemy.trainingDummy&&!enemy.bossId&&!enemy.packId&&!enemy.respawnSeconds&&enemy.kind===petTrialKinds(step)[index]&&enemy.level===wave.level&&enemy.maxHp===Math.round(petTrialBaseHp(enemy.kind)*(1+.14*(wave.level-1)));
+ return !!wave&&wave.v===2&&integer(wave.level,1,CAMPAIGN_MAX_LEVEL)&&number(wave.at,0,s.time)&&beforeDone(s,step)&&(locations.length?locations.every(area=>area===step.area):s.area===step.area)&&enemy.trainingEnemy===true&&enemy.trainingAttacks===true&&!enemy.trainingDummy&&!enemy.bossId&&!enemy.packId&&!enemy.respawnSeconds&&enemy.kind===petTrialKinds(step)[index]&&enemy.level===wave.level&&enemy.maxHp===Math.round(petTrialBaseHp(enemy.kind)*(1+.14*(combatBudgetLevel(wave.level)-1)));
 }
 
 export class PetJourneys {
@@ -116,10 +117,10 @@ export class PetJourneys {
    s.receipts[escortKey(step)]=JSON.stringify({v:1,x:step.point.x,z:step.point.z,next:0,metres:0,start:s.time} satisfies Escort);this.host.changed();this.notify(t('escortStart'));return true;
   }
   if(trialDone(s,step))return this.finish(step);
-  const existing=parse<Wave>(s.receipts[waveKey(step)]),wave:Wave=existing??{v:1,level:Math.max(1,Math.min(40,s.progression.level)),at:s.time};
+  const existing=parse<Wave>(s.receipts[waveKey(step)]),wave:Wave=existing??{v:2,level:Math.max(1,Math.min(CAMPAIGN_MAX_LEVEL,s.progression.level)),at:s.time};
   const other=PET_JOURNEY_STEPS.some(other=>other.kind==='combat'&&other.id!==step.id&&s.receipts[waveKey(other)]&&!completed(s,other)&&!trialDone(s,other));if(other){this.notify(t('trialBusy'));return false;}
   if(!existing)s.receipts[waveKey(step)]=JSON.stringify(wave);
-  const spawns=petTrialSpawns(step,wave.level).filter((_,index)=>!s.receipts[defeatedKey(step,index)]&&!enemyFor(s,step,index));
+  const spawns=petTrialSpawns(step,wave.level).map(e=>({...e,hp:Math.round(petTrialBaseHp(e.kind)*(1+.14*(combatBudgetLevel(wave.level)-1)))})).filter((_,index)=>!s.receipts[defeatedKey(step,index)]&&!enemyFor(s,step,index));
   if(!spawns.length||!this.host.spawn(spawns)){if(!existing)delete s.receipts[waveKey(step)];this.notify(t('trialFailed'));return false;}
   delete s.receipts[suspendedKey(step)];this.host.changed();this.notify(t('trialStart'));return true;
  }
@@ -175,7 +176,7 @@ export function validatePetJourneys(s:GameState):void {
    if(proof&&(!e||e.next!==3||e.metres<3||!step.route[2]||distance(e,step.route[2])>.7)||e?.next===3&&!proof)fail();
   }
   if(step.kind==='combat'){
-   const rawWave=s.receipts[waveKey(step)],wave=parse<Wave>(rawWave);if(rawWave!==undefined&&(!object(wave)||!keys(wave,['v','level','at'])||wave.v!==1||!integer(wave.level,1,40)||!number(wave.at,previousTime,s.time)))fail();
+   const rawWave=s.receipts[waveKey(step)],wave=parse<Wave>(rawWave);if(rawWave!==undefined&&(!object(wave)||!keys(wave,['v','level','at'])||wave.v!==2||!integer(wave.level,1,CAMPAIGN_MAX_LEVEL)||!number(wave.at,previousTime,s.time)))fail();
    const rawSuspended=s.receipts[suspendedKey(step)],suspended=parse<{v:1;at:number}>(rawSuspended);if(rawSuspended!==undefined&&(!wave||!object(suspended)||!keys(suspended,['v','at'])||suspended.v!==1||!number(suspended.at,wave.at,s.time)))fail();
    petTrialKinds(step).forEach((_,index)=>{const killed=s.receipts[defeatedKey(step,index)],enemy=enemyFor(s,step,index);if(killed!==undefined&&(!defeated(s,step,index)||!wave)||enemy&&!validPetJourneyEnemy(s,enemy)||killed&&enemy&&(enemy.hp!==0||enemy.phase!=='dead'||enemy.diedAt===undefined)||petAvailable(s)&&wave&&!killed&&!enemy&&!suspended)fail();});
    if(proof&&(!wave||!trialDone(s,step)))fail();

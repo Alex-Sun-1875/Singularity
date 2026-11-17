@@ -2694,7 +2694,7 @@
         "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
         "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
         "missingTargetDamageRedistributed": false,
-        "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+        "connectionTopology": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
         "connectionDistanceOrdering": [
           "nearestLegalEdge",
           "stableEntityId"
@@ -3093,7 +3093,7 @@
       "maxTargets": 12,
       "ultimateCost": 100,
       "sharedUltimateLockSeconds": 1.5,
-      "mechanic": "释放时冻结中心，首拍冻结目标集合，三拍间隔0.25s，每敌每拍最多一次；三拍均分总倍率。每拍重验存活敌对、同场同层、固定范围与无遮挡连接，走出范围或被遮挡者本拍跳过；死亡者退出，不招募新目标补位，不把每条电边都算伤害。 已声明目标之间按最近合法可见距离构造连通骨架，并补充每个目标的两名最近邻形成局部闭环；施法者只接入网络一次，不从首目标向所有目标放射。额外电边只组织同一拍电网，不增加任何伤害次数或招募新目标。",
+      "mechanic": "释放时冻结中心，首拍冻结目标集合，三拍间隔0.25s，每敌每拍最多一次；三拍均分总倍率。每拍重验存活敌对、同场同层、固定范围与无遮挡连接，走出范围或被遮挡者本拍跳过；死亡者退出，不招募新目标补位，不把每条电边都算伤害。 已声明目标之间按最近合法可见距离构造连通骨架，采用稀疏分叉而不补充装饰闭环；施法者只接入网络一次，不从首目标向所有目标放射。连接骨架只表现同一拍的真实命中，不增加任何伤害次数或招募新目标。",
       "ranks": [
         {
           "rank": 1,
@@ -3306,7 +3306,7 @@
         "perPulseFilter": "hostile,alive,sameScene,sameConnectedLayer,insideFrozenGeometry,unoccludedLegalConnection",
         "invalidTargetPulsePolicy": "skip this pulse without replacement; dead targets exit",
         "missingTargetDamageRedistributed": false,
-        "connectionTopology": "nearestVisibleSpanningTreePlusTwoNearestNeighbourLoops",
+        "connectionTopology": "nearestVisibleSparseTreePreferChainNoDecorativeLoops",
         "connectionDistanceOrdering": [
           "nearestLegalEdge",
           "stableEntityId"

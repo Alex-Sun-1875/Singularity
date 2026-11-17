@@ -1,0 +1,207 @@
+{
+  "status": "isolated upright-hook motion proposal; not integrated; user art acceptance pending",
+  "productionIntegration": false,
+  "generatedFrames": false,
+  "basis": "Current compiled game native actor, three clips and session clock. The v33 swoosh is stood upright in the world-up/cast-forward plane, with the short point above and both the lowest outer belly and fine tail tip near terrain. Existing air density, deterministic flow texture and detached forward motion remain.",
+  "revisionScope": "wave-plane orientation, upper/lower contour relationship and lowered fine tail; native actor clips, shield and gameplay damage rules unchanged",
+  "designDirection": "short point toward the sky, curved lower belly and fine tail near terrain, upright forward flight",
+  "profileParameters": "swoosh-profile.json",
+  "shaderSource": "swoosh.frag",
+  "flowTexture": "swoosh-flow.png",
+  "flowGeneration": "reused deterministic flow texture from local build-flow.py; no image generation",
+  "sourceAssets": {
+    "swoosh-profile.json": "81d0f8a4a8a7f4aae0d5c019d118112b62144d9e1028e4b218aba47d9f2170c6",
+    "swoosh.frag": "39482c75c95bfd29a30991b40eebbd238ac1b1041683e97c683d6d0f206d40e6",
+    "build-flow.py": "cf29762af4a7a15921d725727cce4cfa3b37e2322647e4ea8ab1dc1d3f83104b",
+    "swoosh-flow.png": "bf5d2cf233d7620114bd6106fcdb26f1ac1526c1c64b618a4816dd58f50ce344",
+    "swoosh-flow.rgba": "4cfbccbae74095fc5f2a26473084b21732e85ce295843835f1fc606047bd89dd"
+  },
+  "currentBaseline": {
+    "reusedFrom": "v32 current recordings for training and field",
+    "reason": "same immutable compiled game, actor/camera setup, viewport and deterministic clock; original true frames reused without repainting, synthesizing or altering game content",
+    "sameCompiledGameVerified": true
+  },
+  "lowerBellyGroundConformance": true,
+  "fineTailGroundConformance": true,
+  "nativeClipTracksModified": false,
+  "presentationContactHold": "disabled for proposal WAR_05 to preserve continuous native motion sampling",
+  "damageRulesModified": false,
+  "travelTailAddsDamage": false,
+  "previousComparison": "v33 flat proposal and v34 upright proposal, same scene/frame/camera",
+  "validation": {
+    "training": {
+      "gameHash": "b9e6445ed222c0bb685c1d594fa7a92bd2521c4fca56499b278cb21e516ef53c",
+      "frames": 90,
+      "nativeClips": [
+        "idle",
+        "attack_sword",
+        "attack_sword_2",
+        "attack_sword_3"
+      ],
+      "sameBeforeAfterHits": true,
+      "samePreviousProposalHits": true,
+      "skillHits": 5,
+      "redesignedWaveActiveFrames": 31,
+      "wavePlaneUpright": true,
+      "maximumAbsoluteNormalY": 0,
+      "maximumAbsoluteNormalDotForward": 0,
+      "bothHookTerminalsPointed": true,
+      "maximumMeasuredTipWidthMetres": 1.7737661745315278e-37,
+      "minimumFrontToTailSpan": 3.4002763628959656,
+      "minimumFormedHeadSectionWidth": 1.550221056494416,
+      "minimumVertexTerrainClearance": 0.11999999731779099,
+      "maximumVertexTerrainClearance": 2.5975894927978516,
+      "maximumBellyTerrainClearance": 0.11999999731779099,
+      "minimumTailTerrainClearance": 0.11999999731779099,
+      "maximumTailTerrainClearance": 0.11999999731779099,
+      "minimumFormedTipHeight": 2.5975894927978516,
+      "minimumFormedTipAboveTail": 2.4775894954800606,
+      "uprightAirMaterialActive": true,
+      "fineTailPointsBehindHead": true,
+      "travelMonotonic": true,
+      "travelAlongCastDirection": true,
+      "firstActiveDistance": 0.2522414046639445,
+      "lastActiveDistance": 5.55,
+      "postActionTravelBeforeAge085": 1.117647058823585,
+      "thirdShape": "upright traveling hook; short tip toward the sky, lower curved belly and fine tail near the ground",
+      "maxLayers": 10,
+      "noMidActionIdle": true
+    },
+    "field": {
+      "gameHash": "b9e6445ed222c0bb685c1d594fa7a92bd2521c4fca56499b278cb21e516ef53c",
+      "frames": 90,
+      "nativeClips": [
+        "idle",
+        "attack_sword",
+        "attack_sword_2",
+        "attack_sword_3"
+      ],
+      "sameBeforeAfterHits": true,
+      "samePreviousProposalHits": true,
+      "skillHits": 5,
+      "redesignedWaveActiveFrames": 31,
+      "wavePlaneUpright": true,
+      "maximumAbsoluteNormalY": 0,
+      "maximumAbsoluteNormalDotForward": 0,
+      "bothHookTerminalsPointed": true,
+      "maximumMeasuredTipWidthMetres": 1.7737661745315278e-37,
+      "minimumFrontToTailSpan": 3.4002763628959656,
+      "minimumFormedHeadSectionWidth": 1.5378750551792195,
+      "minimumVertexTerrainClearance": 0.11999999194891009,
+      "maximumVertexTerrainClearance": 2.597589556255409,
+      "maximumBellyTerrainClearance": 0.11999999983115628,
+      "minimumTailTerrainClearance": 0.11999999715056764,
+      "maximumTailTerrainClearance": 0.12000000325396365,
+      "minimumFormedTipHeight": 2.5975893241701673,
+      "minimumFormedTipAboveTail": 2.477589324856285,
+      "uprightAirMaterialActive": true,
+      "fineTailPointsBehindHead": true,
+      "travelMonotonic": true,
+      "travelAlongCastDirection": true,
+      "firstActiveDistance": 0.2522414046639445,
+      "lastActiveDistance": 5.55,
+      "postActionTravelBeforeAge085": 1.117647058823585,
+      "thirdShape": "upright traveling hook; short tip toward the sky, lower curved belly and fine tail near the ground",
+      "maxLayers": 10,
+      "noMidActionIdle": true
+    }
+  },
+  "media": {
+    "current-vs-proposal.mp4": {
+      "frames": 90,
+      "fps": "30/1",
+      "seconds": 3,
+      "size": [
+        1600,
+        478
+      ]
+    },
+    "previous-vs-upright.mp4": {
+      "frames": 180,
+      "fps": "30/1",
+      "seconds": 6,
+      "size": [
+        1600,
+        478
+      ]
+    },
+    "ultimate-motion-study.mp4": {
+      "frames": 180,
+      "fps": "30/1",
+      "seconds": 6,
+      "size": [
+        1280,
+        710
+      ]
+    },
+    "ultimate-slow.mp4": {
+      "frames": 55,
+      "fps": "15/1",
+      "seconds": 3.6666666666666665,
+      "size": [
+        1280,
+        710
+      ]
+    },
+    "ultimate-motion-study.gif": {
+      "frames": 90,
+      "milliseconds": 3000
+    },
+    "wave-detail-slow.gif": {
+      "frames": 46,
+      "milliseconds": 3070,
+      "crop": [
+        320,
+        0,
+        1180,
+        570
+      ],
+      "speed": 0.5
+    }
+  },
+  "taptapDevice": "not verified",
+  "files": {
+    "media\\combined-peak.jpg": "0aaffc55e53c76c2d82ddf1008a3697925e1768219c766e1db00eca7b33e75a0",
+    "media\\current-vs-proposal.mp4": "a7021db4757df12d95d7daced0ef314f6f329f81cd572632d0d2c7348b69afb4",
+    "media\\motion-stages.jpg": "f4f13a6f2324c189d019c8d60740a1d4fa5f3578260a623b5a027ef349046c08",
+    "media\\previous-vs-upright.mp4": "6aef81b838e00db67744387ffdc911475401de643265fc62baa1fb8462775c67",
+    "media\\ultimate-motion-study.gif": "72a6f3b1880def057b229da9bfb0b239df37b3a7c6e3335fd5ebb2b3dbba4056",
+    "media\\ultimate-motion-study.mp4": "4fd305072af67196c27c883b8229b800d89ce4381199af178479b9366902843a",
+    "media\\ultimate-slow.mp4": "00328190b1f633eb1ba7e4dfa8118211fe9c33e51a22352a8756edcd62af2e6a",
+    "media\\wave-detail-slow.gif": "6f0838d0cdeaf60c7c49de654a7cd5039d1c8544fedee836fb65f31ec62ec880",
+    "media\\wave-travel-stages.jpg": "9d09b4420e07990c7da81de2d5a5efca9c1846c132d3aee788f4cede6d5215c0"
+  },
+  "sourceFilesUnchanged": {
+    "src/cocos/assets/scripts/features/combat/runtime/WarriorSkillEffects.ts": "71dec30b4435a2557e33b3155335e15509a28c7ac075dcfa3bb1aad69cc4495a",
+    "src/cocos/assets/scripts/features/actors/runtime/Actors.ts": "1a7ead62f20889e6a747ac027110bfd80a2463a0b03f1e72e9a8fe212a23d976",
+    "src/cocos/assets/resources/vfx/production/warrior-pressure-wave-v2.effect": "a078cf90cb5cb3765aaabc4b7e8464680723f7654ba2b175f4be912b7d155693"
+  },
+  "latestUserDirection": "Short forward point faces the sky. Curved lower belly stays near the ground. Rear tail also stays near the ground and must not curl upward. Entire wave travels forward.",
+  "artReview": {
+    "reviewedFrames": [
+      "training/proposal/043.jpg",
+      "training/proposal/049.jpg",
+      "field/proposal/043.jpg"
+    ],
+    "finding": "The front short point is upright and rises toward the sky; the belly faces the ground. After the latest tail correction, the fine rear tail is low and points back toward the actor feet without the previous upward curl. Actual training frame and regenerated side-elevation diagram were independently reviewed and agree. The unchanged forward-motion records and 043-to-049 frames retain forward travel after actor recovery.",
+    "userAcceptance": "pending"
+  },
+  "directionDiagram": {
+    "file": "shape-direction.png",
+    "meaning": "side elevation of the actual mirrored upright curves; flat low rear tail, curved lower belly, skyward short point. Silhouette only, not animated shading.",
+    "sha256": "93ffcb0548f77cbb4a105b4bd6e404d424bfb43d2f872398ffa1a75bfc61de22"
+  },
+  "previewFiles": {
+    "preview.js": "160ec54b270a5c063391e5b9553628de06600ee13458665e2461377b305a4059",
+    "capture.cjs": "5c9f19d184690d8b8d9bde12df7842ce4427488864c904ea78e9605b982b74c9",
+    "review-fixture.js": "d85c7bb89d991a1b9e20323c530139d3d3e9b56fd1e5ba6aa3fe2d8971b8ce75",
+    "media.py": "125b9f497444da022cfdd68621240819ebcdc681cf67950251c86277f43e56ed",
+    "README.md": "d4314217715fd3a49571a2a3871a38dc4b80eef540143fe89773b505c34f7ef6",
+    "swoosh-profile.json": "81d0f8a4a8a7f4aae0d5c019d118112b62144d9e1028e4b218aba47d9f2170c6",
+    "swoosh.frag": "39482c75c95bfd29a30991b40eebbd238ac1b1041683e97c683d6d0f206d40e6",
+    "build-flow.py": "cf29762af4a7a15921d725727cce4cfa3b37e2322647e4ea8ab1dc1d3f83104b",
+    "build-shape-diagram.py": "9e77b8f0349a52600fcadc6e1424b593231343a955045d488f326257cb37a875",
+    "swoosh-flow.png": "bf5d2cf233d7620114bd6106fcdb26f1ac1526c1c64b618a4816dd58f50ce344",
+    "swoosh-flow.rgba": "4cfbccbae74095fc5f2a26473084b21732e85ce295843835f1fc606047bd89dd"
+  }
+}

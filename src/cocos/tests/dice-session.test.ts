@@ -1,3 +1,4 @@
+import {economyReward} from '../assets/scripts/features/economy/common/EconomyRewards';
 import test from 'node:test';import assert from 'node:assert/strict';
 import {GameSession,validateSnapshot} from '../assets/scripts/core/GameSession';
 import {getArea} from '../assets/scripts/features/world/data/WorldData';
@@ -27,7 +28,7 @@ test('old formats and incomplete current saves are rejected without migration',(
 });
 test('a real locked chest grants reward once on success and repeated clicks cannot duplicate it',()=>{
  let seed=1;while(!drawCheckRoll(seed+1,'inn-lockbox',1,13,{mode:'normal',modifiers:skillModifiers('sleight'),helpDie:false,helpLabel:null}).success)seed++;
- const g=game(seed) as any,o=getArea('S01-T1').objects.find(o=>o.id==='t1-lockbox');assert.ok(o,'the check must exist as an actual inn interaction');g.enter(getArea('S01-T1'),o);g.interact(o);g.rollCheck();g.finishCheck();assert.equal(g.state.player.gold,12);assert.equal(g.state.player.iron,2);g.interact(o);g.finishCheck();assert.equal(g.state.player.gold,12);validateSnapshot(g.snapshot());
+ const g=game(seed) as any,o=getArea('S01-T1').objects.find(o=>o.id==='t1-lockbox');assert.ok(o,'the check must exist as an actual inn interaction');g.enter(getArea('S01-T1'),o);g.interact(o);g.rollCheck();g.finishCheck();assert.equal(g.state.player.gold,economyReward('dice:inn-lockbox')!.gold);assert.equal(g.state.player.iron,2);g.interact(o);g.finishCheck();assert.equal(g.state.player.gold,economyReward('dice:inn-lockbox')!.gold);validateSnapshot(g.snapshot());
 });
 test('rest never replenishes inspiration and tampered natural results are rejected',()=>{
  const g=game() as any;openMira(g);assert.equal(typeof g.rollCheck,'function');g.rollCheck();const saved=g.snapshot();saved.dice.records['mira-motive'].rolls[0].kept=20;assert.throws(()=>validateSnapshot(saved));g.finishCheck();g.choose('leave');const before=g.state.dice.inspiration;g.rest();assert.equal(g.state.dice.inspiration,before);

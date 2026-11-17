@@ -1,0 +1,142 @@
+{
+  "frame": 18,
+  "time": 0.8333333333333343,
+  "seed": 73015,
+  "sequence": 2,
+  "revision": 71,
+  "cameraHeight": 4.3,
+  "castAge": null,
+  "impactAge": null,
+  "ground": {
+    "capacity": 8,
+    "allocated": 0,
+    "active": [],
+    "cameraBound": true
+  },
+  "fire": {
+    "model": "distinct-fire-shapes-v30",
+    "capacity": 76,
+    "allocated": 2,
+    "sharedTextures": 3,
+    "field": {
+      "model": "connected-fire-field-v30",
+      "capacity": 4,
+      "allocated": 0,
+      "active": []
+    },
+    "impact": {
+      "model": "selected-single-impact-relief-v32",
+      "capacity": 8,
+      "allocated": 0,
+      "sharedMaterials": 0,
+      "cameraBound": true,
+      "active": []
+    },
+    "active": [
+      {
+        "key": "cast:cast:1:flame",
+        "kind": "wake",
+        "phase": 21,
+        "frameBlend": 0.6111111111111072,
+        "textureId": 0,
+        "region": 0,
+        "width": 0.4032,
+        "height": 0.6249600000000001,
+        "viewBias": 0,
+        "position": {
+          "x": 0.17529621549054086,
+          "y": 1.5398018646440859,
+          "z": -7.303544283860537
+        }
+      },
+      {
+        "key": "flame:skillProjectile:2",
+        "kind": "lance",
+        "phase": 4,
+        "frameBlend": 2.1316282072803006e-14,
+        "textureId": 1,
+        "region": 0,
+        "width": 0.7279464789995829,
+        "height": 0.4991632998854283,
+        "viewBias": 0,
+        "position": {
+          "x": 0.11642426739515513,
+          "y": 1.3439962953034121,
+          "z": -6.264835871866806
+        }
+      }
+    ]
+  },
+  "meteor": {
+    "model": "reference-nose-anchored-comet-v32",
+    "capacity": 4,
+    "sharedRockMeshes": 1,
+    "sharedRockMaterials": 1,
+    "leadingSupport": {
+      "x": 0.213878,
+      "y": -0.5,
+      "z": 0.006679
+    },
+    "opaqueRockMeshes": 0,
+    "active": []
+  },
+  "shield": {
+    "visible": false,
+    "amount": 0,
+    "start": null,
+    "until": null,
+    "opacity": 0,
+    "patternOpacity": 0,
+    "broken": false,
+    "hitAt": null,
+    "position": {
+      "x": 0,
+      "y": 1,
+      "z": -8
+    },
+    "scale": {
+      "x": 1.88,
+      "y": 2.68,
+      "z": 1.88
+    },
+    "vertices": 625,
+    "triangles": 1152,
+    "passes": 2
+  },
+  "native": {
+    "cues": [],
+    "particles": {
+      "allocated": 1,
+      "active": 1
+    },
+    "linePool": 0,
+    "bodyPool": 0
+  },
+  "hits": 0,
+  "damage": 0,
+  "misses": 0,
+  "criticalHits": 0,
+  "cooldowns": {
+    "FIR_01": 2.966666666666667
+  },
+  "ultimateLock": 0,
+  "casts": [
+    {
+      "id": "cast:1",
+      "skillId": "FIR_01",
+      "elapsed": 0.2333333333333333,
+      "released": true,
+      "targets": [],
+      "hits": []
+    }
+  ],
+  "projectiles": [
+    {
+      "id": "skillProjectile:2",
+      "skillId": "FIR_01",
+      "x": 0,
+      "z": -6.799999999999999,
+      "age": 0.05
+    }
+  ]
+}

@@ -14,10 +14,18 @@ import {FlatWorldLayers} from './FlatWorldLayers';
 import {INN_OPENING,ScenePlacement} from '../data/SceneDressing';
 import {EnvironmentPresentation,type PracticalSource} from './EnvironmentPresentation';
 import {planExitSigils,type PortalMount,type PortalPlacementReport} from '../../portals/runtime/PortalPlacement';
+import {isEarlyStateProp} from '../../campaign/common/EarlyChapterState';
 
 const colors={grass:'#73916f',forest:'#426c56',dirt:'#947b63',stone:'#a4b1ba',darkStone:'#596b79',wood:'#64503c',timber:'#414c55',roof:'#9ba8b5',teal:'#315e68',brass:'#c9ae7b',water:'#3c7285',cave:'#536779',linen:'#d8d8ca'};
 const rgb=(s:string)=>new Color().fromHEX(s);
 const noise=(a:number,b:number)=>{const n=Math.sin(a*127.1+b*311.7)*43758.5453;return n-Math.floor(n);};
+// Smooth, deterministic value noise for static painted color variation only.
+// World-metre coordinates give shared vertices the same color across chunks.
+const paintedField=(x:number,z:number)=>{
+ const ix=Math.floor(x),iz=Math.floor(z),fx=x-ix,fz=z-iz,sx=fx*fx*(3-2*fx),sz=fz*fz*(3-2*fz);
+ const a=noise(ix,iz),b=noise(ix+1,iz),c=noise(ix,iz+1),d=noise(ix+1,iz+1);
+ return (a+(b-a)*sx)*(1-sz)+(c+(d-c)*sx)*sz;
+};
 /** Presentation metadata only. Physics and navigation retain their original nodes. */
 export type FlatEnvironmentObject={node:Node;key:string;kind:'asset'|'building'|'structure';dimensions?:Vec3;centered?:boolean;decorative?:boolean;terrainRole?:'verge'|'ground-cluster'|'framing'};
 export type FlatEnvironmentPatch={node:Node;kind:'water'|'bridge'|'paving'|'rug';color:string};
@@ -99,7 +107,7 @@ export class SceneBuilder implements WorldQuery {
   // Painted source surfaces can render briefly during async preparation. They
   // need neither lighting nor instancing of their unique procedural meshes.
   let m:Material;
-  if(this.painted){m=new Material();m.name=name;m.initialize({effectName:'builtin-unlit',technique:blended?1:0,defines:{USE_VERTEX_COLOR:blended},states});m.setProperty('mainColor',tint);m.setProperty('tilingOffset',new Vec4(1,1,0,0));}
+  if(this.painted){m=new Material();m.name=name;m.initialize({effectName:'builtin-unlit',technique:blended?1:0,defines:{USE_VERTEX_COLOR:blended||ground&&this.area.kind!=='interior'},states});m.setProperty('mainColor',tint);m.setProperty('tilingOffset',new Vec4(1,1,0,0));}
   else{m=SurfaceMaterials.create(name,surface,tint,1,undefined,false,states,cover);if(ground)m.setProperty('normalStrength',this.area.kind==='interior'?.45:.35);}
   this.materials.set(key,m);return m;
  }
@@ -133,6 +141,17 @@ export class SceneBuilder implements WorldQuery {
  box(name:string,x:number,y:number,z:number,w:number,h:number,d:number,color:string,parent=this.root){return this.shape(name,'box',new Vec3(x,y,z),new Vec3(w,h,d),color,parent);}
  obstacle(o:Obstacle){const n=new Node('Collision:'+o.kind);this.root.addChild(n);n.setPosition(o.x,this.height(o)+o.height/2,o.z);const c=n.addComponent(BoxCollider);c.size=new Vec3(o.width,o.height,o.depth);c.setGroup(o.kind==='water'||o.kind==='gorge'?4:2);c.setMask(8);this.colliders.push(c);this.physicsDirty=true;this.movementNavigation=null;this.visibilityFrame=-1;}
  private surface(name:string,positions:number[],indices:number[],uvs:number[],color:string,vertexColors?:number[],groundCollision=true){
+  if(this.painted&&this.area.kind!=='interior'&&(name==='Ground'||name==='Road'||name==='GrassCover')){
+   // Baked art modulation, not dynamic lighting: broad 11–23m patches break
+   // up texture repetition without extra surfaces, samples or frame work.
+   // Apply the same field to road/verge RGB while preserving their fade alpha.
+   const existing=vertexColors;vertexColors=[];
+   for(let i=0;i<positions.length/3;i++){
+    const x=positions[i*3],z=positions[i*3+2],base=.968+.032*(.64*paintedField(x/23,z/23)+.36*paintedField((x*.8+z*.6)/11+17,(z*.8-x*.6)/11-9));
+    const warmth=.008*(2*paintedField((x*.94-z*.34)/17+53,(z*.94+x*.34)/17-31)-1),j=i*4;
+    vertexColors.push((existing?.[j]??1)*(base+warmth),(existing?.[j+1]??1)*base,(existing?.[j+2]??1)*(base-warmth),existing?.[j+3]??1);
+   }
+  }
   const geometry={positions,indices,uvs,...(vertexColors?{colors:vertexColors}:{})};
   // Painted surfaces use an unlit effect. Avoid four extra height samples per
   // vertex and tangent generation for attributes that shader never reads.
@@ -409,6 +428,9 @@ export class SceneBuilder implements WorldQuery {
  }
  private prop(o:any){
   const n=new Node(o.id);this.root.addChild(n);n.setPosition(o.x,this.height(o),o.z);this.propNodes.set(o.id,n);if(o.actor&&o.action!=='meeting')return;
+  // Reversible workstation props are supplied by their saved-state presenter,
+  // so they do not inherit the generic paper-on-stool placeholder underneath.
+  if(o.action==='campaign_event'&&isEarlyStateProp(o.eventId))return;
   if(o.action==='pet_journey'){
    // Physical field objectives, not menu checkboxes. Availability and repaired
    // states are supplied by PetJourneys; only current objectives stay visible.

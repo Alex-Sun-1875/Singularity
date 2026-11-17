@@ -1,0 +1,145 @@
+{
+  "schemaVersion": 1,
+  "reason": "接入用户确认的v17旋风斩，替换WAR_04裂地审判；保留技能ID、解锁、消耗、冷却、总伤害、破势与五级护盾联动。",
+  "skills": {
+    "WAR_04": {
+      "name": "旋风斩",
+      "targetShape": "近身两圈回旋＋前向月牙甩斩",
+      "targetingMode": "self",
+      "windupSeconds": 0.18,
+      "releaseCommitSeconds": 0.18,
+      "recoverySeconds": 0.36,
+      "mechanic": "短蓄力后连续两圈回旋，以高低错开的银白月牙扫击周围敌人，最后向前甩出一道刀气。每段对每个敌人最多命中一次，总伤害按28%／28%／44%分配；保留原冷却、消耗与升级联动。",
+      "ranks": [
+        {
+          "rank": 1,
+          "authoredDamageHits": 3,
+          "radiusMetres": 2.15,
+          "rangeMetres": 2.15,
+          "castRangeMetres": 2.15,
+          "geometry": {
+            "kind": "meleeWhirlwind",
+            "origin": "caster",
+            "radiusMetres": 2.15,
+            "lengthMetres": 4.21,
+            "angleDegrees": 126
+          },
+          "vfxAnchor": "caster",
+          "vfxDirection": "银白月牙随真实回旋动作高低交错，收尾前甩；真实接触触发亮痕，无范围法阵",
+          "evolution": "连续两圈回旋斩击周围2.15米内敌人，收尾向前甩出最远4.2米的月牙刀气；三段总伤害按28%／28%／44%分配",
+          "upgradeEffect": "连续两圈回旋斩击周围2.15米内敌人，收尾向前甩出最远4.2米的月牙刀气；三段总伤害按28%／28%／44%分配",
+          "vfxLayers": {
+            "material": "银白月牙亮刃、弯曲波身与柔和尾流",
+            "direction": "随真实旋转姿态扫过身周，收尾前甩与实际扫掠判定共用时间轴",
+            "contact": "每段只在真实接触点触发短促银白亮痕",
+            "fade": "回旋结束转入甩斩并自然消散，不延长伤害窗口",
+            "growth": "五级扩大回旋和甩斩范围，保留原冷却、总S与护盾联动"
+          }
+        },
+        {
+          "rank": 2,
+          "authoredDamageHits": 3,
+          "radiusMetres": 2.25,
+          "rangeMetres": 2.25,
+          "castRangeMetres": 2.25,
+          "geometry": {
+            "kind": "meleeWhirlwind",
+            "origin": "caster",
+            "radiusMetres": 2.25,
+            "lengthMetres": 4.406,
+            "angleDegrees": 126
+          },
+          "vfxAnchor": "caster",
+          "vfxDirection": "银白月牙随真实回旋动作高低交错，收尾前甩；真实接触触发亮痕，无范围法阵",
+          "evolution": "连续两圈回旋斩击周围2.25米内敌人，收尾向前甩出最远4.4米的月牙刀气；三段总伤害按28%／28%／44%分配",
+          "upgradeEffect": "连续两圈回旋斩击周围2.25米内敌人，收尾向前甩出最远4.4米的月牙刀气；三段总伤害按28%／28%／44%分配",
+          "vfxLayers": {
+            "material": "银白月牙亮刃、弯曲波身与柔和尾流",
+            "direction": "随真实旋转姿态扫过身周，收尾前甩与实际扫掠判定共用时间轴",
+            "contact": "每段只在真实接触点触发短促银白亮痕",
+            "fade": "回旋结束转入甩斩并自然消散，不延长伤害窗口",
+            "growth": "五级扩大回旋和甩斩范围，保留原冷却、总S与护盾联动"
+          }
+        },
+        {
+          "rank": 3,
+          "authoredDamageHits": 3,
+          "radiusMetres": 2.4,
+          "rangeMetres": 2.4,
+          "castRangeMetres": 2.4,
+          "geometry": {
+            "kind": "meleeWhirlwind",
+            "origin": "caster",
+            "radiusMetres": 2.4,
+            "lengthMetres": 4.7,
+            "angleDegrees": 126
+          },
+          "vfxAnchor": "caster",
+          "vfxDirection": "银白月牙随真实回旋动作高低交错，收尾前甩；真实接触触发亮痕，无范围法阵",
+          "evolution": "连续两圈回旋斩击周围2.4米内敌人，收尾向前甩出最远4.7米的月牙刀气；三段总伤害按28%／28%／44%分配",
+          "upgradeEffect": "连续两圈回旋斩击周围2.4米内敌人，收尾向前甩出最远4.7米的月牙刀气；三段总伤害按28%／28%／44%分配",
+          "vfxLayers": {
+            "material": "银白月牙亮刃、弯曲波身与柔和尾流",
+            "direction": "随真实旋转姿态扫过身周，收尾前甩与实际扫掠判定共用时间轴",
+            "contact": "每段只在真实接触点触发短促银白亮痕",
+            "fade": "回旋结束转入甩斩并自然消散，不延长伤害窗口",
+            "growth": "五级扩大回旋和甩斩范围，保留原冷却、总S与护盾联动"
+          }
+        },
+        {
+          "rank": 4,
+          "authoredDamageHits": 3,
+          "radiusMetres": 2.55,
+          "rangeMetres": 2.55,
+          "castRangeMetres": 2.55,
+          "geometry": {
+            "kind": "meleeWhirlwind",
+            "origin": "caster",
+            "radiusMetres": 2.55,
+            "lengthMetres": 4.993,
+            "angleDegrees": 126
+          },
+          "vfxAnchor": "caster",
+          "vfxDirection": "银白月牙随真实回旋动作高低交错，收尾前甩；真实接触触发亮痕，无范围法阵",
+          "evolution": "连续两圈回旋斩击周围2.55米内敌人，收尾向前甩出最远5.0米的月牙刀气；三段总伤害按28%／28%／44%分配",
+          "upgradeEffect": "连续两圈回旋斩击周围2.55米内敌人，收尾向前甩出最远5.0米的月牙刀气；三段总伤害按28%／28%／44%分配",
+          "vfxLayers": {
+            "material": "银白月牙亮刃、弯曲波身与柔和尾流",
+            "direction": "随真实旋转姿态扫过身周，收尾前甩与实际扫掠判定共用时间轴",
+            "contact": "每段只在真实接触点触发短促银白亮痕",
+            "fade": "回旋结束转入甩斩并自然消散，不延长伤害窗口",
+            "growth": "五级扩大回旋和甩斩范围，保留原冷却、总S与护盾联动"
+          }
+        },
+        {
+          "rank": 5,
+          "authoredDamageHits": 3,
+          "radiusMetres": 2.75,
+          "rangeMetres": 2.75,
+          "castRangeMetres": 2.75,
+          "geometry": {
+            "kind": "meleeWhirlwind",
+            "origin": "caster",
+            "radiusMetres": 2.75,
+            "lengthMetres": 5.385,
+            "angleDegrees": 126
+          },
+          "vfxAnchor": "caster",
+          "vfxDirection": "银白月牙随真实回旋动作高低交错，收尾前甩；真实接触触发亮痕，无范围法阵",
+          "evolution": "连续两圈回旋斩击周围2.75米内敌人，收尾向前甩出最远5.4米的月牙刀气；三段总伤害按28%／28%／44%分配；有效命中后4秒内下一次铁誓壁垒吸收量提高10%，一次",
+          "upgradeEffect": "连续两圈回旋斩击周围2.75米内敌人，收尾向前甩出最远5.4米的月牙刀气；三段总伤害按28%／28%／44%分配；有效命中后4秒内下一次铁誓壁垒吸收量提高10%，一次",
+          "vfxLayers": {
+            "material": "银白月牙亮刃、弯曲波身与柔和尾流",
+            "direction": "随真实旋转姿态扫过身周，收尾前甩与实际扫掠判定共用时间轴",
+            "contact": "每段只在真实接触点触发短促银白亮痕",
+            "fade": "回旋结束转入甩斩并自然消散，不延长伤害窗口",
+            "growth": "五级扩大回旋和甩斩范围，保留原冷却、总S与护盾联动"
+          }
+        }
+      ]
+    }
+  },
+  "equipmentTextReplacements": {
+    "裂地审判": "旋风斩"
+  }
+}

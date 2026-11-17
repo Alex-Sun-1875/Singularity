@@ -27,10 +27,10 @@ const direction=(angle:number,length:number):Point=>({x:Math.sin(angle)*length,z
 const delta=(a:number,b:number)=>Math.atan2(Math.sin(a-b),Math.cos(a-b));
 const clamp=(v:number,a:number,b:number)=>Math.max(a,Math.min(b,v));
 const clone=<T>(v:T):T=>JSON.parse(JSON.stringify(v));
-const ordinaryPackMember=(e:Pick<EnemyState,'packId'|'templateId'>)=>!!e.packId&&!e.templateId?.includes('ALPHA');
 export {enemyHealthMultiplier} from '../data/EnemyBalance';
-export const enemyDamageMultiplier=(e:Pick<EnemyState,'id'|'packId'|'templateId'>)=>campaignFighter(e)?.damage??(ordinaryPackMember(e)?.75:1);
-const scale=(e:EnemyState,base:number)=>base*(1+.045*((e.level??1)-1))*enemyDamageMultiplier(e);
+export {enemyDamageMultiplier} from '../data/EnemyBalance';
+import {enemyDamageMultiplier} from '../data/EnemyBalance';
+const scale=(e:EnemyState,base:number)=>base*enemyDamageMultiplier(e);
 /** Named bosses own their tactics while templateId continues to select their existing art. */
 export const enemyProfile=(e:Pick<EnemyState,'templateId'|'bossId'|'contentId'>)=>e.bossId&&ENEMY_COMBAT_PROFILES[e.bossId]||ENEMY_COMBAT_PROFILES[e.templateId??e.contentId??''];
 export const enemyHurtRadius=(e:Point&Partial<Pick<EnemyState,'templateId'|'bossId'|'contentId'>>)=>enemyProfile(e)?.hurtRadius??.3;

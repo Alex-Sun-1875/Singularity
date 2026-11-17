@@ -1,0 +1,2019 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-17",
+  "status": "implemented; fixed-target simulation and existing rules/type checks passed; moving encounters and TapTap device balance pending",
+  "scope": "Level 40, equal 39 offensive attributes, starter weapons, no armour/forging/pets, stationary invulnerable dummies, fixed combat regeneration, no potions or infinite resources. Entry = all rank 1; developed = legal <=41 points; ceiling = every profession skill rank 5 (mathematical bound, not a legal build). WAR at 1.4m, ranged at 5.5m. Targets and between-action player positions are anchored; rush movement still runs during its action. Bow uses short tap basics. Movement-ready thunder is a conditional ceiling, not evidence of real movement execution. Not a moving-enemy or device acceptance.",
+  "run": {
+    "command": "npx tsx tools/combat-balance.ts [output.json]",
+    "workingDirectory": "src/cocos",
+    "secondsPerRun": 60,
+    "seedsPerCase": 12,
+    "dt": 0.02,
+    "casesPerRevision": 432,
+    "randomSeeds": [
+      73014,
+      80933,
+      88852,
+      96771,
+      104690,
+      112609,
+      120528,
+      128447,
+      136366,
+      144285,
+      152204,
+      160123
+    ]
+  },
+  "comparison": {
+    "developedSingleSpreadBeforePercent": 21.43,
+    "developedSingleSpreadAfterPercent": 5.11,
+    "developedBurst6SpreadAfterPercent": 6.04,
+    "entrySingleSpreadAfterPercent": 9.5,
+    "interpretation": "Melee retains a close-cluster advantage; fire benefits from sustained zone occupancy; thunder retains line/chain coverage; no claim that every formation must have identical damage."
+  },
+  "adjustments": {
+    "WAR_01": {
+      "ranks": [
+        {
+          "rank": 1,
+          "maxDamagePerTargetS": 3.46,
+          "evolution": "近身单体月牙连斩，仅一个目标；合计3.46S，2段，距离3.9米",
+          "upgradeEffect": "近身单体月牙连斩，仅一个目标；合计3.46S，2段，距离3.9米"
+        },
+        {
+          "rank": 2,
+          "maxDamagePerTargetS": 3.94,
+          "evolution": "近身单体月牙连斩，仅一个目标；合计3.94S，2段，距离3.9米",
+          "upgradeEffect": "近身单体月牙连斩，仅一个目标；合计3.94S，2段，距离3.9米"
+        },
+        {
+          "rank": 3,
+          "maxDamagePerTargetS": 4.54,
+          "evolution": "近身单体月牙连斩，仅一个目标；合计4.54S，3段，距离4.1米",
+          "upgradeEffect": "近身单体月牙连斩，仅一个目标；合计4.54S，3段，距离4.1米"
+        },
+        {
+          "rank": 4,
+          "maxDamagePerTargetS": 5.24,
+          "evolution": "近身单体月牙连斩，仅一个目标；合计5.24S，3段，距离4.3米",
+          "upgradeEffect": "近身单体月牙连斩，仅一个目标；合计5.24S，3段，距离4.3米"
+        },
+        {
+          "rank": 5,
+          "maxDamagePerTargetS": 6.05,
+          "evolution": "近身单体月牙连斩，仅一个目标；合计6.05S，3段，距离4.5米；末段命中强化下一次普攻20%",
+          "upgradeEffect": "近身单体月牙连斩，仅一个目标；合计6.05S，3段，距离4.5米；末段命中强化下一次普攻20%"
+        }
+      ]
+    },
+    "BOW_01": {
+      "ranks": [
+        {
+          "rank": 1,
+          "maxDamagePerTargetS": 2.94,
+          "evolution": "单体重箭，仅一个目标；合计2.94S，1段，距离12米",
+          "upgradeEffect": "单体重箭，仅一个目标；合计2.94S，1段，距离12米"
+        },
+        {
+          "rank": 2,
+          "maxDamagePerTargetS": 3.36,
+          "evolution": "单体重箭，仅一个目标；合计3.36S，1段，距离13.5米",
+          "upgradeEffect": "单体重箭，仅一个目标；合计3.36S，1段，距离13.5米"
+        },
+        {
+          "rank": 3,
+          "maxDamagePerTargetS": 3.86,
+          "evolution": "单体重箭，仅一个目标；合计3.86S，1段，距离15米",
+          "upgradeEffect": "单体重箭，仅一个目标；合计3.86S，1段，距离15米"
+        },
+        {
+          "rank": 4,
+          "maxDamagePerTargetS": 4.46,
+          "evolution": "单体重箭，仅一个目标；合计4.46S，1段，距离16.5米",
+          "upgradeEffect": "单体重箭，仅一个目标；合计4.46S，1段，距离16.5米"
+        },
+        {
+          "rank": 5,
+          "maxDamagePerTargetS": 5.15,
+          "evolution": "单体重箭，仅一个目标；合计5.15S，1段，距离18米",
+          "upgradeEffect": "单体重箭，仅一个目标；合计5.15S，1段，距离18米"
+        }
+      ]
+    },
+    "FIR_04": {
+      "ranks": [
+        {
+          "rank": 1,
+          "maxDamagePerTargetS": 2.3
+        },
+        {
+          "rank": 2,
+          "maxDamagePerTargetS": 2.59,
+          "evolution": "五点地面喷焰，持续4秒；每目标直接伤害合计2.59S"
+        },
+        {
+          "rank": 3,
+          "maxDamagePerTargetS": 2.99,
+          "evolution": "五点地面喷焰，持续4秒；每目标直接伤害合计2.99S"
+        },
+        {
+          "rank": 4,
+          "maxDamagePerTargetS": 3.45
+        },
+        {
+          "rank": 5,
+          "maxDamagePerTargetS": 4.02,
+          "evolution": "五点地面喷焰，持续4秒；每目标直接伤害合计4.02S"
+        }
+      ]
+    },
+    "FIR_05": {
+      "ranks": [
+        {
+          "rank": 1,
+          "maxDamagePerTargetS": 2.18,
+          "evolution": "焚焰火域，燃烧并减速4秒；每目标合计2.18S"
+        },
+        {
+          "rank": 2,
+          "maxDamagePerTargetS": 2.47,
+          "evolution": "焚焰火域，燃烧并减速4秒；每目标合计2.47S"
+        },
+        {
+          "rank": 3,
+          "maxDamagePerTargetS": 2.82,
+          "evolution": "焚焰火域，燃烧并减速4秒；每目标合计2.82S"
+        },
+        {
+          "rank": 4,
+          "maxDamagePerTargetS": 3.28,
+          "evolution": "焚焰火域，燃烧并减速4秒；每目标合计3.28S"
+        },
+        {
+          "rank": 5,
+          "maxDamagePerTargetS": 3.79,
+          "evolution": "焚焰火域，燃烧并减速4秒；每目标合计3.79S"
+        }
+      ]
+    },
+    "THU_01": {
+      "ranks": [
+        {
+          "rank": 1,
+          "maxDamagePerTargetS": 3.68,
+          "evolution": "单体雷矛，仅一个目标；合计3.68S，1段，距离14米",
+          "upgradeEffect": "单体雷矛，仅一个目标；合计3.68S，1段，距离14米"
+        },
+        {
+          "rank": 2,
+          "maxDamagePerTargetS": 4.2,
+          "evolution": "单体雷矛，仅一个目标；合计4.2S，1段，距离15.5米",
+          "upgradeEffect": "单体雷矛，仅一个目标；合计4.2S，1段，距离15.5米"
+        },
+        {
+          "rank": 3,
+          "maxDamagePerTargetS": 4.83,
+          "evolution": "单体雷矛，仅一个目标；合计4.83S，1段，距离17米",
+          "upgradeEffect": "单体雷矛，仅一个目标；合计4.83S，1段，距离17米"
+        },
+        {
+          "rank": 4,
+          "maxDamagePerTargetS": 5.58,
+          "evolution": "单体雷矛，仅一个目标；合计5.58S，1段，距离18.5米",
+          "upgradeEffect": "单体雷矛，仅一个目标；合计5.58S，1段，距离18.5米"
+        },
+        {
+          "rank": 5,
+          "maxDamagePerTargetS": 6.44,
+          "evolution": "单体雷矛，仅一个目标；合计6.44S，1段，距离20米",
+          "upgradeEffect": "单体雷矛，仅一个目标；合计6.44S，1段，距离20米"
+        }
+      ]
+    },
+    "THU_02": {
+      "ranks": [
+        {
+          "rank": 1,
+          "maxDamagePerTargetS": 1.56,
+          "damagePerSecondaryTargetS": 1.092,
+          "totalCastDamageBudgetS": 2.652,
+          "evolution": "固定首击包络，2敌、半径3米；普通首目标短促打断",
+          "upgradeEffect": "固定首击包络，2敌、半径3米；普通首目标短促打断"
+        },
+        {
+          "rank": 2,
+          "maxDamagePerTargetS": 1.8,
+          "damagePerSecondaryTargetS": 1.26,
+          "totalCastDamageBudgetS": 4.32,
+          "evolution": "3敌、半径4米；普通首目标短促打断",
+          "upgradeEffect": "3敌、半径4米；普通首目标短促打断"
+        },
+        {
+          "rank": 3,
+          "maxDamagePerTargetS": 2.1,
+          "damagePerSecondaryTargetS": 1.47,
+          "totalCastDamageBudgetS": 6.51,
+          "evolution": "4敌、半径5米；普通首目标短促打断",
+          "upgradeEffect": "4敌、半径5米；普通首目标短促打断"
+        },
+        {
+          "rank": 4,
+          "maxDamagePerTargetS": 2.46,
+          "damagePerSecondaryTargetS": 1.722,
+          "totalCastDamageBudgetS": 11.07,
+          "evolution": "6敌、半径6.5米；普通首目标短促打断",
+          "upgradeEffect": "6敌、半径6.5米；普通首目标短促打断"
+        },
+        {
+          "rank": 5,
+          "maxDamagePerTargetS": 2.88,
+          "damagePerSecondaryTargetS": 2.016,
+          "totalCastDamageBudgetS": 16.992,
+          "evolution": "8敌、半径8米，完整近邻雷网；普通首目标短促打断",
+          "upgradeEffect": "8敌、半径8米，完整近邻雷网；普通首目标短促打断"
+        }
+      ]
+    },
+    "THU_04": {
+      "ranks": [
+        {
+          "rank": 1,
+          "maxDamagePerTargetS": 1.75
+        },
+        {
+          "rank": 2,
+          "maxDamagePerTargetS": 2.06
+        },
+        {
+          "rank": 3,
+          "maxDamagePerTargetS": 2.44
+        },
+        {
+          "rank": 4,
+          "maxDamagePerTargetS": 2.88
+        },
+        {
+          "rank": 5,
+          "maxDamagePerTargetS": 3.38
+        }
+      ]
+    },
+    "THU_05": {
+      "ranks": [
+        {
+          "rank": 1,
+          "maxDamagePerTargetS": 2.81
+        },
+        {
+          "rank": 2,
+          "maxDamagePerTargetS": 3.19
+        },
+        {
+          "rank": 3,
+          "maxDamagePerTargetS": 3.63
+        },
+        {
+          "rank": 4,
+          "maxDamagePerTargetS": 4.24
+        },
+        {
+          "rank": 5,
+          "maxDamagePerTargetS": 4.9
+        }
+      ]
+    }
+  },
+  "verification": {
+    "typecheck": "npm run check: passed",
+    "existingTests": "npm test: 157 passed",
+    "oldInFlightRankSnapshots": {
+      "acceptedExactPreviousPayloads": 40,
+      "rejectedForgedDamagePayloads": 40,
+      "restoredProgressionPreserved": true,
+      "castsAndProjectilesDiscardedOnRestore": true
+    },
+    "cocosHtmlBuild": "Normal test web-mobile build and browser startup passed; no version increment",
+    "taptapDevice": "not run",
+    "compiledRuntime": {
+      "balanceRevision": 1,
+      "rows": [
+        {
+          "id": "WAR_01",
+          "rank": 5,
+          "multiplier": 6.05,
+          "accepted": [
+            {
+              "type": "skill_cast",
+              "skillId": "WAR_01",
+              "family": "WAR",
+              "rank": 5,
+              "castId": "cast:1",
+              "shape": "meleeFan",
+              "geometry": {
+                "kind": "meleeFan",
+                "origin": "caster",
+                "radiusMetres": 4.5,
+                "angleDegrees": 150,
+                "totalTargetLimit": 1
+              },
+              "from": {
+                "x": 0,
+                "z": -8
+              },
+              "to": {
+                "x": 0,
+                "z": -6.6
+              },
+              "segment": 0,
+              "angle": 0,
+              "angleDegrees": 150,
+              "radius": 4.5,
+              "width": 0,
+              "length": 0,
+              "depth": 0,
+              "duration": 0.14
+            }
+          ],
+          "hits": 3,
+          "damage": 960
+        },
+        {
+          "id": "BOW_01",
+          "rank": 5,
+          "multiplier": 5.15,
+          "accepted": [
+            {
+              "type": "skill_cast",
+              "skillId": "BOW_01",
+              "family": "BOW",
+              "rank": 5,
+              "castId": "cast:1",
+              "shape": "projectileCorridor",
+              "geometry": {
+                "kind": "projectileCorridor",
+                "origin": "caster",
+                "lengthMetres": 18,
+                "widthMetres": 0.55,
+                "totalTargetLimit": 1
+              },
+              "from": {
+                "x": 0,
+                "z": -8
+              },
+              "to": {
+                "x": 0,
+                "z": -6.6
+              },
+              "segment": 0,
+              "angle": 0,
+              "angleDegrees": 0,
+              "radius": 0,
+              "width": 0.55,
+              "length": 18,
+              "depth": 0,
+              "duration": 0.19
+            }
+          ],
+          "hits": 1,
+          "damage": 785
+        },
+        {
+          "id": "FIR_04",
+          "rank": 5,
+          "multiplier": 4.02,
+          "accepted": [
+            {
+              "type": "skill_cast",
+              "skillId": "FIR_04",
+              "family": "FIR",
+              "rank": 5,
+              "castId": "cast:1",
+              "shape": "instantCorridor",
+              "geometry": {
+                "kind": "instantCorridor",
+                "origin": "caster",
+                "lengthMetres": 8,
+                "widthMetres": 1.6
+              },
+              "from": {
+                "x": 0,
+                "z": -8
+              },
+              "to": {
+                "x": 0,
+                "z": -6.6
+              },
+              "segment": 0,
+              "angle": 0,
+              "angleDegrees": 0,
+              "radius": 0,
+              "width": 1.6,
+              "length": 8,
+              "depth": 0,
+              "duration": 0.25
+            }
+          ],
+          "hits": 4,
+          "damage": 612
+        },
+        {
+          "id": "FIR_05",
+          "rank": 5,
+          "multiplier": 3.79,
+          "accepted": [
+            {
+              "type": "skill_cast",
+              "skillId": "FIR_05",
+              "family": "FIR",
+              "rank": 5,
+              "castId": "cast:1",
+              "shape": "filledWaveRectangle",
+              "geometry": {
+                "kind": "filledWaveRectangle",
+                "origin": "aimPoint",
+                "widthMetres": 8,
+                "depthMetres": 4
+              },
+              "from": {
+                "x": 0,
+                "z": -8
+              },
+              "to": {
+                "x": 0,
+                "z": -6.6
+              },
+              "segment": 0,
+              "angle": 0,
+              "angleDegrees": 0,
+              "radius": 0,
+              "width": 8,
+              "length": 0,
+              "depth": 4,
+              "duration": 0.4
+            }
+          ],
+          "hits": 5,
+          "damage": 579
+        },
+        {
+          "id": "THU_01",
+          "rank": 5,
+          "multiplier": 6.44,
+          "accepted": [
+            {
+              "type": "skill_cast",
+              "skillId": "THU_01",
+              "family": "THU",
+              "rank": 5,
+              "castId": "cast:1",
+              "shape": "instantCorridor",
+              "geometry": {
+                "kind": "instantCorridor",
+                "origin": "caster",
+                "lengthMetres": 20,
+                "widthMetres": 1.3,
+                "totalTargetLimit": 1
+              },
+              "from": {
+                "x": 0,
+                "z": -8
+              },
+              "to": {
+                "x": 0,
+                "z": -6.6
+              },
+              "segment": 0,
+              "angle": 0,
+              "angleDegrees": 0,
+              "radius": 0,
+              "width": 1.3,
+              "length": 20,
+              "depth": 0,
+              "duration": 0.15
+            }
+          ],
+          "hits": 1,
+          "damage": 982
+        },
+        {
+          "id": "THU_02",
+          "rank": 5,
+          "multiplier": 2.88,
+          "accepted": [
+            {
+              "type": "skill_cast",
+              "skillId": "THU_02",
+              "family": "THU",
+              "rank": 5,
+              "castId": "cast:1",
+              "shape": "boundedArcGraph",
+              "geometry": {
+                "kind": "boundedArcGraph",
+                "origin": "primaryImpact",
+                "radiusMetres": 8,
+                "totalTargetLimit": 8
+              },
+              "from": {
+                "x": 0,
+                "z": -8
+              },
+              "to": {
+                "x": 0,
+                "z": -6.6
+              },
+              "segment": 0,
+              "angle": 0,
+              "angleDegrees": 0,
+              "radius": 8,
+              "width": 0,
+              "length": 0,
+              "depth": 0,
+              "duration": 0.19
+            }
+          ],
+          "hits": 1,
+          "damage": 439
+        },
+        {
+          "id": "THU_04",
+          "rank": 5,
+          "multiplier": 3.38,
+          "accepted": [
+            {
+              "type": "skill_cast",
+              "skillId": "THU_04",
+              "family": "THU",
+              "rank": 5,
+              "castId": "cast:1",
+              "shape": "boundedArcFan",
+              "geometry": {
+                "kind": "boundedArcFan",
+                "origin": "aimPoint",
+                "radiusMetres": 7,
+                "angleDegrees": 110,
+                "totalTargetLimit": 8
+              },
+              "from": {
+                "x": 0,
+                "z": -8
+              },
+              "to": {
+                "x": 0,
+                "z": -6.6
+              },
+              "segment": 0,
+              "angle": 0,
+              "angleDegrees": 110,
+              "radius": 7,
+              "width": 0,
+              "length": 0,
+              "depth": 0,
+              "duration": 0.12
+            }
+          ],
+          "hits": 2,
+          "damage": 516
+        },
+        {
+          "id": "THU_05",
+          "rank": 5,
+          "multiplier": 4.9,
+          "accepted": [
+            {
+              "type": "skill_cast",
+              "skillId": "THU_05",
+              "family": "THU",
+              "rank": 5,
+              "castId": "cast:1",
+              "shape": "boundedPulseGraph",
+              "geometry": {
+                "kind": "boundedPulseGraph",
+                "origin": "aimPoint",
+                "radiusMetres": 9,
+                "totalTargetLimit": 12
+              },
+              "from": {
+                "x": 0,
+                "z": -8
+              },
+              "to": {
+                "x": 0,
+                "z": -6.6
+              },
+              "segment": 0,
+              "angle": 0,
+              "angleDegrees": 0,
+              "radius": 9,
+              "width": 0,
+              "length": 0,
+              "depth": 0,
+              "duration": 0.41
+            }
+          ],
+          "hits": 3,
+          "damage": 747
+        }
+      ],
+      "errors": []
+    },
+    "analyzerTypecheck": "standalone strict TypeScript check passed"
+  },
+  "rows": [
+    {
+      "build": "entry",
+      "formation": "single",
+      "family": "WAR",
+      "pointsSpent": 0,
+      "dpsBefore": 194.93,
+      "dpsAfter": 202.72,
+      "burst6Before": 1349.08,
+      "burst6After": 1400.08,
+      "minimumResource": 36.28,
+      "damageBySourceBefore": {
+        "WAR_01": 5677,
+        "WAR_05": 1361.25,
+        "WAR_02": 1396.5,
+        "WAR_04": 1417,
+        "pure": 1844.33
+      },
+      "damageBySourceAfter": {
+        "WAR_01": 6144.33,
+        "WAR_05": 1361.25,
+        "WAR_02": 1396.5,
+        "WAR_04": 1417,
+        "pure": 1844.33
+      },
+      "casts": {
+        "WAR_01": 18,
+        "WAR_05": 5,
+        "WAR_02": 11,
+        "WAR_04": 7
+      }
+    },
+    {
+      "build": "entry",
+      "formation": "single",
+      "family": "BOW",
+      "pointsSpent": 0,
+      "dpsBefore": 226.75,
+      "dpsAfter": 217.21,
+      "burst6Before": 1472,
+      "burst6After": 1413.58,
+      "minimumResource": 28.6,
+      "damageBySourceBefore": {
+        "BOW_01": 7177.08,
+        "BOW_05": 1518.83,
+        "BOW_02": 1616.92,
+        "BOW_06": 376.67,
+        "pure": 2206.42,
+        "BOW_03": 709.25
+      },
+      "damageBySourceAfter": {
+        "BOW_01": 6604.42,
+        "BOW_05": 1518.83,
+        "BOW_02": 1616.92,
+        "BOW_06": 376.67,
+        "pure": 2206.42,
+        "BOW_03": 709.25
+      },
+      "casts": {
+        "BOW_01": 19,
+        "BOW_05": 5,
+        "BOW_02": 9,
+        "BOW_06": 9,
+        "BOW_03": 10
+      }
+    },
+    {
+      "build": "entry",
+      "formation": "single",
+      "family": "FIR",
+      "pointsSpent": 0,
+      "dpsBefore": 192.43,
+      "dpsAfter": 199.72,
+      "burst6Before": 1418.17,
+      "burst6After": 1474.92,
+      "minimumResource": 3.88,
+      "damageBySourceBefore": {
+        "FIR_01": 5539.33,
+        "burn": 574,
+        "FIR_02": 1306.08,
+        "FIR_04": 1728.17,
+        "spell": 1064.17,
+        "FIR_05": 1333.92
+      },
+      "damageBySourceAfter": {
+        "FIR_01": 5539.33,
+        "burn": 574,
+        "FIR_02": 1306.08,
+        "FIR_04": 1970.33,
+        "spell": 1064.17,
+        "FIR_05": 1529.58
+      },
+      "casts": {
+        "FIR_01": 17,
+        "FIR_02": 5,
+        "FIR_04": 9,
+        "FIR_05": 7
+      }
+    },
+    {
+      "build": "entry",
+      "formation": "single",
+      "family": "THU",
+      "pointsSpent": 0,
+      "dpsBefore": 192.06,
+      "dpsAfter": 218.69,
+      "burst6Before": 1340.5,
+      "burst6After": 1529.5,
+      "minimumResource": 18.12,
+      "damageBySourceBefore": {
+        "THU_01": 6020.5,
+        "THU_05": 1301.5,
+        "THU_02": 1314.5,
+        "THU_04": 1136.83,
+        "spell": 1091.67,
+        "secondary": 658.33
+      },
+      "damageBySourceAfter": {
+        "THU_01": 6927.75,
+        "THU_05": 1437.25,
+        "THU_02": 1583.08,
+        "THU_04": 1423.17,
+        "spell": 1091.67,
+        "secondary": 658.33
+      },
+      "casts": {
+        "THU_01": 18,
+        "THU_05": 5,
+        "THU_02": 10,
+        "THU_04": 8
+      }
+    },
+    {
+      "build": "entry",
+      "formation": "cluster",
+      "family": "WAR",
+      "pointsSpent": 0,
+      "dpsBefore": 459.45,
+      "dpsAfter": 467.24,
+      "burst6Before": 3470.33,
+      "burst6After": 3521.33,
+      "minimumResource": 36.28,
+      "damageBySourceBefore": {
+        "WAR_01": 5677,
+        "WAR_05": 6716.25,
+        "WAR_02": 4147,
+        "WAR_04": 5379,
+        "pure": 5647.58
+      },
+      "damageBySourceAfter": {
+        "WAR_01": 6144.33,
+        "WAR_05": 6716.25,
+        "WAR_02": 4147,
+        "WAR_04": 5379,
+        "pure": 5647.58
+      },
+      "casts": {
+        "WAR_01": 18,
+        "WAR_05": 5,
+        "WAR_02": 11,
+        "WAR_04": 7
+      }
+    },
+    {
+      "build": "entry",
+      "formation": "cluster",
+      "family": "BOW",
+      "pointsSpent": 0,
+      "dpsBefore": 359.82,
+      "dpsAfter": 350.36,
+      "burst6Before": 2878.25,
+      "burst6After": 2819.83,
+      "minimumResource": 28.6,
+      "damageBySourceBefore": {
+        "BOW_01": 7116.42,
+        "BOW_05": 7073.17,
+        "BOW_02": 2706,
+        "BOW_06": 1768.67,
+        "pure": 2204.58,
+        "BOW_03": 720.25
+      },
+      "damageBySourceAfter": {
+        "BOW_01": 6548.75,
+        "BOW_05": 7073.17,
+        "BOW_02": 2706,
+        "BOW_06": 1768.67,
+        "pure": 2204.58,
+        "BOW_03": 720.25
+      },
+      "casts": {
+        "BOW_01": 19,
+        "BOW_05": 5,
+        "BOW_02": 9,
+        "BOW_06": 9,
+        "BOW_03": 10
+      }
+    },
+    {
+      "build": "entry",
+      "formation": "cluster",
+      "family": "FIR",
+      "pointsSpent": 0,
+      "dpsBefore": 426.24,
+      "dpsAfter": 454.58,
+      "burst6Before": 3637.17,
+      "burst6After": 3861.58,
+      "minimumResource": 3.88,
+      "damageBySourceBefore": {
+        "FIR_01": 5539.33,
+        "burn": 574,
+        "FIR_02": 6573.58,
+        "FIR_04": 5137.83,
+        "FIR_05": 6685.67,
+        "spell": 1064.17
+      },
+      "damageBySourceAfter": {
+        "FIR_01": 5539.33,
+        "burn": 574,
+        "FIR_02": 6573.58,
+        "FIR_04": 5857.67,
+        "FIR_05": 7666.33,
+        "spell": 1064.17
+      },
+      "casts": {
+        "FIR_01": 17,
+        "FIR_02": 5,
+        "FIR_04": 9,
+        "FIR_05": 7
+      }
+    },
+    {
+      "build": "entry",
+      "formation": "cluster",
+      "family": "THU",
+      "pointsSpent": 0,
+      "dpsBefore": 308.61,
+      "dpsAfter": 354.55,
+      "burst6Before": 2482.42,
+      "burst6After": 2838.5,
+      "minimumResource": 18.12,
+      "damageBySourceBefore": {
+        "THU_01": 6020.5,
+        "THU_05": 5098.5,
+        "THU_02": 2231.25,
+        "THU_04": 3416.33,
+        "spell": 1091.67,
+        "secondary": 658.33
+      },
+      "damageBySourceAfter": {
+        "THU_01": 6927.75,
+        "THU_05": 5630.25,
+        "THU_02": 2688.17,
+        "THU_04": 4277,
+        "spell": 1091.67,
+        "secondary": 658.33
+      },
+      "casts": {
+        "THU_01": 18,
+        "THU_05": 5,
+        "THU_02": 10,
+        "THU_04": 8
+      }
+    },
+    {
+      "build": "entry",
+      "formation": "line",
+      "family": "WAR",
+      "pointsSpent": 0,
+      "dpsBefore": 228.52,
+      "dpsAfter": 236.31,
+      "burst6Before": 1722.08,
+      "burst6After": 1773.08,
+      "minimumResource": 36.28,
+      "damageBySourceBefore": {
+        "WAR_01": 5677,
+        "WAR_05": 2767.5,
+        "WAR_02": 1396.5,
+        "WAR_04": 2026,
+        "pure": 1844.33
+      },
+      "damageBySourceAfter": {
+        "WAR_01": 6144.33,
+        "WAR_05": 2767.5,
+        "WAR_02": 1396.5,
+        "WAR_04": 2026,
+        "pure": 1844.33
+      },
+      "casts": {
+        "WAR_01": 18,
+        "WAR_05": 5,
+        "WAR_02": 11,
+        "WAR_04": 7
+      }
+    },
+    {
+      "build": "entry",
+      "formation": "line",
+      "family": "BOW",
+      "pointsSpent": 0,
+      "dpsBefore": 273.29,
+      "dpsAfter": 263.79,
+      "burst6Before": 1930.75,
+      "burst6After": 1872.33,
+      "minimumResource": 28.6,
+      "damageBySourceBefore": {
+        "BOW_01": 7146.75,
+        "BOW_05": 2912.5,
+        "BOW_02": 2706,
+        "BOW_06": 712,
+        "pure": 2208.25,
+        "BOW_03": 712
+      },
+      "damageBySourceAfter": {
+        "BOW_01": 6576.58,
+        "BOW_05": 2912.5,
+        "BOW_02": 2706,
+        "BOW_06": 712,
+        "pure": 2208.25,
+        "BOW_03": 712
+      },
+      "casts": {
+        "BOW_01": 19,
+        "BOW_05": 5,
+        "BOW_02": 9,
+        "BOW_06": 9,
+        "BOW_03": 10
+      }
+    },
+    {
+      "build": "entry",
+      "formation": "line",
+      "family": "FIR",
+      "pointsSpent": 0,
+      "dpsBefore": 235.6,
+      "dpsAfter": 242.9,
+      "burst6Before": 1936.25,
+      "burst6After": 1993,
+      "minimumResource": 3.88,
+      "damageBySourceBefore": {
+        "FIR_01": 5539.33,
+        "burn": 574,
+        "FIR_02": 3896.67,
+        "FIR_04": 1728.17,
+        "spell": 1064.17,
+        "FIR_05": 1333.92
+      },
+      "damageBySourceAfter": {
+        "FIR_01": 5539.33,
+        "burn": 574,
+        "FIR_02": 3896.67,
+        "FIR_04": 1970.33,
+        "spell": 1064.17,
+        "FIR_05": 1529.58
+      },
+      "casts": {
+        "FIR_01": 17,
+        "FIR_02": 5,
+        "FIR_04": 9,
+        "FIR_05": 7
+      }
+    },
+    {
+      "build": "entry",
+      "formation": "line",
+      "family": "THU",
+      "pointsSpent": 0,
+      "dpsBefore": 287.54,
+      "dpsAfter": 331.27,
+      "burst6Before": 2270.42,
+      "burst6After": 2609.75,
+      "minimumResource": 18.12,
+      "damageBySourceBefore": {
+        "THU_01": 6020.5,
+        "THU_05": 3840,
+        "THU_02": 2231.25,
+        "THU_04": 3410.5,
+        "spell": 1091.67,
+        "secondary": 658.33
+      },
+      "damageBySourceAfter": {
+        "THU_01": 6927.75,
+        "THU_05": 4240.5,
+        "THU_02": 2688.17,
+        "THU_04": 4269.5,
+        "spell": 1091.67,
+        "secondary": 658.33
+      },
+      "casts": {
+        "THU_01": 18,
+        "THU_05": 5,
+        "THU_02": 10,
+        "THU_04": 8
+      }
+    },
+    {
+      "build": "developed",
+      "formation": "single",
+      "family": "WAR",
+      "pointsSpent": 38,
+      "dpsBefore": 358.87,
+      "dpsAfter": 377.01,
+      "burst6Before": 2283.5,
+      "burst6After": 2377.25,
+      "minimumResource": 20.84,
+      "damageBySourceBefore": {
+        "WAR_01": 13374.75,
+        "WAR_05": 2485.67,
+        "WAR_02": 2186.17,
+        "WAR_04": 1954.33,
+        "pure": 1531.08
+      },
+      "damageBySourceAfter": {
+        "WAR_01": 14463.5,
+        "WAR_05": 2485.67,
+        "WAR_02": 2186.17,
+        "WAR_04": 1954.33,
+        "pure": 1531.08
+      },
+      "casts": {
+        "WAR_01": 21,
+        "WAR_05": 5,
+        "WAR_02": 11,
+        "WAR_04": 7
+      }
+    },
+    {
+      "build": "developed",
+      "formation": "single",
+      "family": "BOW",
+      "pointsSpent": 40,
+      "dpsBefore": 382.54,
+      "dpsAfter": 363.15,
+      "burst6Before": 2426,
+      "burst6After": 2317.58,
+      "minimumResource": 16.84,
+      "damageBySourceBefore": {
+        "BOW_01": 14494.42,
+        "BOW_05": 2720.83,
+        "BOW_02": 2541,
+        "BOW_06": 441,
+        "pure": 2131.25,
+        "BOW_03": 623.75
+      },
+      "damageBySourceAfter": {
+        "BOW_01": 13331.33,
+        "BOW_05": 2720.83,
+        "BOW_02": 2541,
+        "BOW_06": 441,
+        "pure": 2131.25,
+        "BOW_03": 623.75
+      },
+      "casts": {
+        "BOW_01": 21,
+        "BOW_05": 5,
+        "BOW_02": 10,
+        "BOW_06": 9,
+        "BOW_03": 7
+      }
+    },
+    {
+      "build": "developed",
+      "formation": "single",
+      "family": "FIR",
+      "pointsSpent": 38,
+      "dpsBefore": 347.66,
+      "dpsAfter": 358.68,
+      "burst6Before": 2350.17,
+      "burst6After": 2433.67,
+      "minimumResource": 6.88,
+      "damageBySourceBefore": {
+        "FIR_01": 12844.5,
+        "burn": 639.5,
+        "FIR_02": 1912.67,
+        "FIR_04": 2522.25,
+        "spell": 1062.5,
+        "FIR_05": 1878.08
+      },
+      "damageBySourceAfter": {
+        "FIR_01": 12844.5,
+        "burn": 639.5,
+        "FIR_02": 1912.67,
+        "FIR_04": 2900.5,
+        "spell": 1062.5,
+        "FIR_05": 2161.25
+      },
+      "casts": {
+        "FIR_01": 20,
+        "FIR_02": 4,
+        "FIR_04": 9,
+        "FIR_05": 7
+      }
+    },
+    {
+      "build": "developed",
+      "formation": "single",
+      "family": "THU",
+      "pointsSpent": 39,
+      "dpsBefore": 315.02,
+      "dpsAfter": 360.14,
+      "burst6Before": 2152.83,
+      "burst6After": 2457.5,
+      "minimumResource": 6.28,
+      "damageBySourceBefore": {
+        "THU_01": 11324.08,
+        "THU_05": 2258.25,
+        "THU_02": 1865.08,
+        "THU_04": 1601.33,
+        "spell": 1076.67,
+        "secondary": 775.75
+      },
+      "damageBySourceAfter": {
+        "THU_01": 13030.33,
+        "THU_05": 2485.75,
+        "THU_02": 2235,
+        "THU_04": 2004.67,
+        "spell": 1076.67,
+        "secondary": 775.75
+      },
+      "casts": {
+        "THU_01": 20,
+        "THU_05": 5,
+        "THU_02": 10,
+        "THU_04": 8
+      }
+    },
+    {
+      "build": "developed",
+      "formation": "cluster",
+      "family": "WAR",
+      "pointsSpent": 38,
+      "dpsBefore": 743.77,
+      "dpsAfter": 761.94,
+      "burst6Before": 5700.83,
+      "burst6After": 5794.58,
+      "minimumResource": 20.84,
+      "damageBySourceBefore": {
+        "WAR_01": 13386,
+        "WAR_05": 12406.67,
+        "WAR_02": 6486.33,
+        "WAR_04": 7698.92,
+        "pure": 4648
+      },
+      "damageBySourceAfter": {
+        "WAR_01": 14476.25,
+        "WAR_05": 12406.67,
+        "WAR_02": 6486.33,
+        "WAR_04": 7698.92,
+        "pure": 4648
+      },
+      "casts": {
+        "WAR_01": 21,
+        "WAR_05": 5,
+        "WAR_02": 11,
+        "WAR_04": 7
+      }
+    },
+    {
+      "build": "developed",
+      "formation": "cluster",
+      "family": "BOW",
+      "pointsSpent": 40,
+      "dpsBefore": 659.63,
+      "dpsAfter": 640.43,
+      "burst6Before": 5158.33,
+      "burst6After": 5052.08,
+      "minimumResource": 16.84,
+      "damageBySourceBefore": {
+        "BOW_01": 14356.92,
+        "BOW_05": 12701.67,
+        "BOW_02": 7692.25,
+        "BOW_06": 2088,
+        "pure": 2134.92,
+        "BOW_03": 604.25
+      },
+      "damageBySourceAfter": {
+        "BOW_01": 13204.67,
+        "BOW_05": 12701.67,
+        "BOW_02": 7692.25,
+        "BOW_06": 2088,
+        "pure": 2134.92,
+        "BOW_03": 604.25
+      },
+      "casts": {
+        "BOW_01": 21,
+        "BOW_05": 5,
+        "BOW_02": 10,
+        "BOW_06": 9,
+        "BOW_03": 7
+      }
+    },
+    {
+      "build": "developed",
+      "formation": "cluster",
+      "family": "FIR",
+      "pointsSpent": 38,
+      "dpsBefore": 662.44,
+      "dpsAfter": 703.03,
+      "burst6Before": 5693.17,
+      "burst6After": 6008.08,
+      "minimumResource": 6.88,
+      "damageBySourceBefore": {
+        "FIR_01": 12844.5,
+        "burn": 639.5,
+        "FIR_02": 9296.67,
+        "FIR_04": 6944.25,
+        "FIR_05": 8959,
+        "spell": 1062.5
+      },
+      "damageBySourceAfter": {
+        "FIR_01": 12844.5,
+        "burn": 639.5,
+        "FIR_02": 9296.67,
+        "FIR_04": 7992.5,
+        "FIR_05": 10346.25,
+        "spell": 1062.5
+      },
+      "casts": {
+        "FIR_01": 20,
+        "FIR_02": 4,
+        "FIR_04": 9,
+        "FIR_05": 7
+      }
+    },
+    {
+      "build": "developed",
+      "formation": "cluster",
+      "family": "THU",
+      "pointsSpent": 39,
+      "dpsBefore": 581.56,
+      "dpsAfter": 667.58,
+      "burst6Before": 4669.83,
+      "burst6After": 5316,
+      "minimumResource": 6.28,
+      "damageBySourceBefore": {
+        "THU_01": 11324.08,
+        "THU_05": 11245.75,
+        "THU_02": 5742.67,
+        "THU_04": 4721.33,
+        "spell": 1076.67,
+        "secondary": 783
+      },
+      "damageBySourceAfter": {
+        "THU_01": 13030.33,
+        "THU_05": 12378.25,
+        "THU_02": 6876,
+        "THU_04": 5910.67,
+        "spell": 1076.67,
+        "secondary": 783
+      },
+      "casts": {
+        "THU_01": 20,
+        "THU_05": 5,
+        "THU_02": 10,
+        "THU_04": 8
+      }
+    },
+    {
+      "build": "developed",
+      "formation": "line",
+      "family": "WAR",
+      "pointsSpent": 38,
+      "dpsBefore": 416.74,
+      "dpsAfter": 434.9,
+      "burst6Before": 2950.42,
+      "burst6After": 3044.17,
+      "minimumResource": 20.84,
+      "damageBySourceBefore": {
+        "WAR_01": 13382.25,
+        "WAR_05": 5058,
+        "WAR_02": 2186.17,
+        "WAR_04": 2846.83,
+        "pure": 1531.08
+      },
+      "damageBySourceAfter": {
+        "WAR_01": 14472,
+        "WAR_05": 5058,
+        "WAR_02": 2186.17,
+        "WAR_04": 2846.83,
+        "pure": 1531.08
+      },
+      "casts": {
+        "WAR_01": 21,
+        "WAR_05": 5,
+        "WAR_02": 11,
+        "WAR_04": 7
+      }
+    },
+    {
+      "build": "developed",
+      "formation": "line",
+      "family": "BOW",
+      "pointsSpent": 40,
+      "dpsBefore": 486.68,
+      "dpsAfter": 467.44,
+      "burst6Before": 3348.25,
+      "burst6After": 3242,
+      "minimumResource": 16.84,
+      "damageBySourceBefore": {
+        "BOW_01": 14384.42,
+        "BOW_05": 5283.67,
+        "BOW_02": 5910,
+        "BOW_06": 860.25,
+        "pure": 2138.58,
+        "BOW_03": 623.75
+      },
+      "damageBySourceAfter": {
+        "BOW_01": 13230,
+        "BOW_05": 5283.67,
+        "BOW_02": 5910,
+        "BOW_06": 860.25,
+        "pure": 2138.58,
+        "BOW_03": 623.75
+      },
+      "casts": {
+        "BOW_01": 21,
+        "BOW_05": 5,
+        "BOW_02": 10,
+        "BOW_06": 9,
+        "BOW_03": 7
+      }
+    },
+    {
+      "build": "developed",
+      "formation": "line",
+      "family": "FIR",
+      "pointsSpent": 38,
+      "dpsBefore": 466.19,
+      "dpsAfter": 486,
+      "burst6Before": 3683.67,
+      "burst6After": 3833.5,
+      "minimumResource": 6.88,
+      "damageBySourceBefore": {
+        "FIR_01": 12844.5,
+        "burn": 639.5,
+        "FIR_02": 5604.67,
+        "FIR_04": 4868,
+        "FIR_05": 2952.42,
+        "spell": 1062.5
+      },
+      "damageBySourceAfter": {
+        "FIR_01": 12844.5,
+        "burn": 639.5,
+        "FIR_02": 5604.67,
+        "FIR_04": 5601.67,
+        "FIR_05": 3406.92,
+        "spell": 1062.5
+      },
+      "casts": {
+        "FIR_01": 20,
+        "FIR_02": 4,
+        "FIR_04": 9,
+        "FIR_05": 7
+      }
+    },
+    {
+      "build": "developed",
+      "formation": "line",
+      "family": "THU",
+      "pointsSpent": 39,
+      "dpsBefore": 559.34,
+      "dpsAfter": 640.96,
+      "burst6Before": 4589.17,
+      "burst6After": 5222.75,
+      "minimumResource": 6.28,
+      "damageBySourceBefore": {
+        "THU_01": 11324.08,
+        "THU_05": 11245.75,
+        "THU_02": 4434.08,
+        "THU_04": 4696.67,
+        "spell": 1076.67,
+        "secondary": 783
+      },
+      "damageBySourceAfter": {
+        "THU_01": 13030.33,
+        "THU_05": 12378.25,
+        "THU_02": 5309.75,
+        "THU_04": 5879.67,
+        "spell": 1076.67,
+        "secondary": 783
+      },
+      "casts": {
+        "THU_01": 20,
+        "THU_05": 5,
+        "THU_02": 10,
+        "THU_04": 8
+      }
+    },
+    {
+      "build": "ceiling",
+      "formation": "single",
+      "family": "WAR",
+      "pointsSpent": 70,
+      "dpsBefore": 409.29,
+      "dpsAfter": 428.42,
+      "burst6Before": 2597.08,
+      "burst6After": 2693.83,
+      "minimumResource": 22.6,
+      "damageBySourceBefore": {
+        "WAR_01": 14198.5,
+        "WAR_05": 2676.5,
+        "WAR_02": 2964,
+        "WAR_04": 3223.5,
+        "pure": 1495.17
+      },
+      "damageBySourceAfter": {
+        "WAR_01": 15346.08,
+        "WAR_05": 2676.5,
+        "WAR_02": 2964,
+        "WAR_04": 3223.5,
+        "pure": 1495.17
+      },
+      "casts": {
+        "WAR_01": 21,
+        "WAR_05": 5,
+        "WAR_02": 10,
+        "WAR_04": 8
+      }
+    },
+    {
+      "build": "ceiling",
+      "formation": "single",
+      "family": "BOW",
+      "pointsSpent": 90,
+      "dpsBefore": 438.09,
+      "dpsAfter": 417.18,
+      "burst6Before": 2713.83,
+      "burst6After": 2597.5,
+      "minimumResource": 9,
+      "damageBySourceBefore": {
+        "BOW_01": 15554.58,
+        "BOW_05": 2839,
+        "BOW_02": 4130.33,
+        "BOW_06": 531,
+        "pure": 2090,
+        "BOW_03": 1140.67
+      },
+      "damageBySourceAfter": {
+        "BOW_01": 14299.92,
+        "BOW_05": 2839,
+        "BOW_02": 4130.33,
+        "BOW_06": 531,
+        "pure": 2090,
+        "BOW_03": 1140.67
+      },
+      "casts": {
+        "BOW_01": 21,
+        "BOW_05": 5,
+        "BOW_02": 11,
+        "BOW_06": 9,
+        "BOW_03": 8
+      }
+    },
+    {
+      "build": "ceiling",
+      "formation": "single",
+      "family": "FIR",
+      "pointsSpent": 70,
+      "dpsBefore": 387.71,
+      "dpsAfter": 403.57,
+      "burst6Before": 2624.83,
+      "burst6After": 2744.67,
+      "minimumResource": 6.88,
+      "damageBySourceBefore": {
+        "FIR_01": 13257.42,
+        "burn": 642.5,
+        "FIR_02": 1977.25,
+        "FIR_04": 3685.25,
+        "spell": 1062.5,
+        "FIR_05": 2637.42
+      },
+      "damageBySourceAfter": {
+        "FIR_01": 13257.42,
+        "burn": 642.5,
+        "FIR_02": 1977.25,
+        "FIR_04": 4236.25,
+        "spell": 1062.5,
+        "FIR_05": 3038.17
+      },
+      "casts": {
+        "FIR_01": 20,
+        "FIR_02": 4,
+        "FIR_04": 9,
+        "FIR_05": 7
+      }
+    },
+    {
+      "build": "ceiling",
+      "formation": "single",
+      "family": "THU",
+      "pointsSpent": 80,
+      "dpsBefore": 353.44,
+      "dpsAfter": 405.02,
+      "burst6Before": 2353.92,
+      "burst6After": 2694.75,
+      "minimumResource": 2.76,
+      "damageBySourceBefore": {
+        "THU_01": 11813.42,
+        "THU_05": 2396.25,
+        "THU_02": 2262.83,
+        "THU_04": 2453.33,
+        "spell": 1065.83,
+        "secondary": 1215
+      },
+      "damageBySourceAfter": {
+        "THU_01": 13588.33,
+        "THU_05": 2634.5,
+        "THU_02": 2717.58,
+        "THU_04": 3079.67,
+        "spell": 1065.83,
+        "secondary": 1215
+      },
+      "casts": {
+        "THU_01": 20,
+        "THU_05": 5,
+        "THU_02": 9,
+        "THU_04": 9
+      }
+    },
+    {
+      "build": "ceiling",
+      "formation": "cluster",
+      "family": "WAR",
+      "pointsSpent": 70,
+      "dpsBefore": 955.33,
+      "dpsAfter": 974.59,
+      "burst6Before": 7128.42,
+      "burst6After": 7225.17,
+      "minimumResource": 22.6,
+      "damageBySourceBefore": {
+        "WAR_01": 14280.67,
+        "WAR_05": 13382.67,
+        "WAR_02": 8568,
+        "WAR_04": 16532,
+        "pure": 4556.75
+      },
+      "damageBySourceAfter": {
+        "WAR_01": 15436.25,
+        "WAR_05": 13382.67,
+        "WAR_02": 8568,
+        "WAR_04": 16532,
+        "pure": 4556.75
+      },
+      "casts": {
+        "WAR_01": 21,
+        "WAR_05": 5,
+        "WAR_02": 10,
+        "WAR_04": 8
+      }
+    },
+    {
+      "build": "ceiling",
+      "formation": "cluster",
+      "family": "BOW",
+      "pointsSpent": 90,
+      "dpsBefore": 855.14,
+      "dpsAfter": 834.11,
+      "burst6Before": 6069.83,
+      "burst6After": 5958.17,
+      "minimumResource": 9,
+      "damageBySourceBefore": {
+        "BOW_01": 15640.08,
+        "BOW_05": 13125.08,
+        "BOW_02": 16976.5,
+        "BOW_06": 2345,
+        "pure": 2091.83,
+        "BOW_03": 1129.83
+      },
+      "damageBySourceAfter": {
+        "BOW_01": 14378.42,
+        "BOW_05": 13125.08,
+        "BOW_02": 16976.5,
+        "BOW_06": 2345,
+        "pure": 2091.83,
+        "BOW_03": 1129.83
+      },
+      "casts": {
+        "BOW_01": 21,
+        "BOW_05": 5,
+        "BOW_02": 11,
+        "BOW_06": 9,
+        "BOW_03": 8
+      }
+    },
+    {
+      "build": "ceiling",
+      "formation": "cluster",
+      "family": "FIR",
+      "pointsSpent": 70,
+      "dpsBefore": 768.98,
+      "dpsAfter": 824.15,
+      "burst6Before": 6487,
+      "burst6After": 6914.83,
+      "minimumResource": 6.88,
+      "damageBySourceBefore": {
+        "FIR_01": 13257.42,
+        "burn": 642.5,
+        "FIR_02": 9361.25,
+        "FIR_04": 9645,
+        "FIR_05": 12170.33,
+        "spell": 1062.5
+      },
+      "damageBySourceAfter": {
+        "FIR_01": 13257.42,
+        "burn": 642.5,
+        "FIR_02": 9361.25,
+        "FIR_04": 11070.25,
+        "FIR_05": 14055.25,
+        "spell": 1062.5
+      },
+      "casts": {
+        "FIR_01": 20,
+        "FIR_02": 4,
+        "FIR_04": 9,
+        "FIR_05": 7
+      }
+    },
+    {
+      "build": "ceiling",
+      "formation": "cluster",
+      "family": "THU",
+      "pointsSpent": 80,
+      "dpsBefore": 689.53,
+      "dpsAfter": 797.38,
+      "burst6Before": 5328.25,
+      "burst6After": 6112.83,
+      "minimumResource": 2.76,
+      "damageBySourceBefore": {
+        "THU_01": 11813.42,
+        "THU_05": 11481.5,
+        "THU_02": 8650.83,
+        "THU_04": 7145,
+        "spell": 1065.83,
+        "secondary": 1215
+      },
+      "damageBySourceAfter": {
+        "THU_01": 13588.33,
+        "THU_05": 12623.25,
+        "THU_02": 10381.42,
+        "THU_04": 8969,
+        "spell": 1065.83,
+        "secondary": 1215
+      },
+      "casts": {
+        "THU_01": 20,
+        "THU_05": 5,
+        "THU_02": 9,
+        "THU_04": 9
+      }
+    },
+    {
+      "build": "ceiling",
+      "formation": "line",
+      "family": "WAR",
+      "pointsSpent": 70,
+      "dpsBefore": 505.46,
+      "dpsAfter": 524.69,
+      "burst6Before": 3544.17,
+      "burst6After": 3640.92,
+      "minimumResource": 22.6,
+      "damageBySourceBefore": {
+        "WAR_01": 14266.67,
+        "WAR_05": 5399.33,
+        "WAR_02": 2964,
+        "WAR_04": 6202.33,
+        "pure": 1495.17
+      },
+      "damageBySourceAfter": {
+        "WAR_01": 15420.75,
+        "WAR_05": 5399.33,
+        "WAR_02": 2964,
+        "WAR_04": 6202.33,
+        "pure": 1495.17
+      },
+      "casts": {
+        "WAR_01": 21,
+        "WAR_05": 5,
+        "WAR_02": 10,
+        "WAR_04": 8
+      }
+    },
+    {
+      "build": "ceiling",
+      "formation": "line",
+      "family": "BOW",
+      "pointsSpent": 90,
+      "dpsBefore": 648.32,
+      "dpsAfter": 627.52,
+      "burst6Before": 4179.58,
+      "burst6After": 4065.58,
+      "minimumResource": 9,
+      "damageBySourceBefore": {
+        "BOW_01": 15469.08,
+        "BOW_05": 5338.25,
+        "BOW_02": 13851.67,
+        "BOW_06": 999.58,
+        "pure": 2089.08,
+        "BOW_03": 1151.5
+      },
+      "damageBySourceAfter": {
+        "BOW_01": 14221.42,
+        "BOW_05": 5338.25,
+        "BOW_02": 13851.67,
+        "BOW_06": 999.58,
+        "pure": 2089.08,
+        "BOW_03": 1151.5
+      },
+      "casts": {
+        "BOW_01": 21,
+        "BOW_05": 5,
+        "BOW_02": 11,
+        "BOW_06": 9,
+        "BOW_03": 8
+      }
+    },
+    {
+      "build": "ceiling",
+      "formation": "line",
+      "family": "FIR",
+      "pointsSpent": 70,
+      "dpsBefore": 542.29,
+      "dpsAfter": 572.16,
+      "burst6Before": 4247.58,
+      "burst6After": 4475.92,
+      "minimumResource": 6.88,
+      "damageBySourceBefore": {
+        "FIR_01": 13257.42,
+        "burn": 642.5,
+        "FIR_02": 5669.25,
+        "FIR_04": 6846.67,
+        "FIR_05": 5058.92,
+        "spell": 1062.5
+      },
+      "damageBySourceAfter": {
+        "FIR_01": 13257.42,
+        "burn": 642.5,
+        "FIR_02": 5669.25,
+        "FIR_04": 7861.5,
+        "FIR_05": 5836.67,
+        "spell": 1062.5
+      },
+      "casts": {
+        "FIR_01": 20,
+        "FIR_02": 4,
+        "FIR_04": 9,
+        "FIR_05": 7
+      }
+    },
+    {
+      "build": "ceiling",
+      "formation": "line",
+      "family": "THU",
+      "pointsSpent": 80,
+      "dpsBefore": 735.2,
+      "dpsAfter": 854.72,
+      "burst6Before": 5636.58,
+      "burst6After": 6499.83,
+      "minimumResource": 2.76,
+      "damageBySourceBefore": {
+        "THU_01": 11813.42,
+        "THU_05": 11481.5,
+        "THU_02": 8650.83,
+        "THU_04": 9885.67,
+        "spell": 1065.83,
+        "secondary": 1215
+      },
+      "damageBySourceAfter": {
+        "THU_01": 13588.33,
+        "THU_05": 12623.25,
+        "THU_02": 10381.42,
+        "THU_04": 12409.33,
+        "spell": 1065.83,
+        "secondary": 1215
+      },
+      "casts": {
+        "THU_01": 20,
+        "THU_05": 5,
+        "THU_02": 9,
+        "THU_04": 9
+      }
+    }
+  ],
+  "thunderConditions": {
+    "mainComparison": "Fixture supplies movingTime=2 before casting, so movement-dependent buffs can activate on actual contact. This is a conditional ceiling; the fixture does not execute the required real movement.",
+    "stationarySensitivity": "No movingTime override; movement preparation never activates.",
+    "stationaryResults": [
+      {
+        "build": "entry",
+        "formation": "single",
+        "family": "THU",
+        "dps": 205.49,
+        "burst6": 1441.42,
+        "spent": 0,
+        "minimumResource": 18.12,
+        "damageBySource": {
+          "THU_01": 6794.33,
+          "THU_05": 1437.25,
+          "THU_02": 1583.08,
+          "THU_04": 1423.17,
+          "spell": 1091.67
+        },
+        "casts": {
+          "THU_01": 18,
+          "THU_05": 5,
+          "THU_02": 10,
+          "THU_04": 8
+        }
+      },
+      {
+        "build": "entry",
+        "formation": "cluster",
+        "family": "THU",
+        "dps": 341.36,
+        "burst6": 2750.42,
+        "spent": 0,
+        "minimumResource": 18.12,
+        "damageBySource": {
+          "THU_01": 6794.33,
+          "THU_05": 5630.25,
+          "THU_02": 2688.17,
+          "THU_04": 4277,
+          "spell": 1091.67
+        },
+        "casts": {
+          "THU_01": 18,
+          "THU_05": 5,
+          "THU_02": 10,
+          "THU_04": 8
+        }
+      },
+      {
+        "build": "entry",
+        "formation": "line",
+        "family": "THU",
+        "dps": 318.07,
+        "burst6": 2521.67,
+        "spent": 0,
+        "minimumResource": 18.12,
+        "damageBySource": {
+          "THU_01": 6794.33,
+          "THU_05": 4240.5,
+          "THU_02": 2688.17,
+          "THU_04": 4269.5,
+          "spell": 1091.67
+        },
+        "casts": {
+          "THU_01": 18,
+          "THU_05": 5,
+          "THU_02": 10,
+          "THU_04": 8
+        }
+      },
+      {
+        "build": "developed",
+        "formation": "single",
+        "family": "THU",
+        "dps": 342.64,
+        "burst6": 2331,
+        "spent": 39,
+        "minimumResource": 6.28,
+        "damageBySource": {
+          "THU_01": 12853.58,
+          "THU_05": 2448.5,
+          "THU_02": 2174.83,
+          "THU_04": 2004.67,
+          "spell": 1076.67
+        },
+        "casts": {
+          "THU_01": 20,
+          "THU_05": 5,
+          "THU_02": 10,
+          "THU_04": 8
+        }
+      },
+      {
+        "build": "developed",
+        "formation": "cluster",
+        "family": "THU",
+        "dps": 645.42,
+        "burst6": 5189.5,
+        "spent": 39,
+        "minimumResource": 6.28,
+        "damageBySource": {
+          "THU_01": 12853.58,
+          "THU_05": 12201,
+          "THU_02": 6683.42,
+          "THU_04": 5910.67,
+          "spell": 1076.67
+        },
+        "casts": {
+          "THU_01": 20,
+          "THU_05": 5,
+          "THU_02": 10,
+          "THU_04": 8
+        }
+      },
+      {
+        "build": "developed",
+        "formation": "line",
+        "family": "THU",
+        "dps": 619.55,
+        "burst6": 5096.25,
+        "spent": 39,
+        "minimumResource": 6.28,
+        "damageBySource": {
+          "THU_01": 12853.58,
+          "THU_05": 12201,
+          "THU_02": 5161.92,
+          "THU_04": 5879.67,
+          "spell": 1076.67
+        },
+        "casts": {
+          "THU_01": 20,
+          "THU_05": 5,
+          "THU_02": 10,
+          "THU_04": 8
+        }
+      },
+      {
+        "build": "ceiling",
+        "formation": "single",
+        "family": "THU",
+        "dps": 365.75,
+        "burst6": 2514.25,
+        "spent": 80,
+        "minimumResource": 2.76,
+        "damageBySource": {
+          "THU_01": 12607.92,
+          "THU_05": 2593.75,
+          "THU_02": 2624.42,
+          "THU_04": 3053,
+          "spell": 1065.83
+        },
+        "casts": {
+          "THU_01": 20,
+          "THU_05": 5,
+          "THU_02": 9,
+          "THU_04": 9
+        }
+      },
+      {
+        "build": "ceiling",
+        "formation": "cluster",
+        "family": "THU",
+        "dps": 750.31,
+        "burst6": 5932.33,
+        "spent": 80,
+        "minimumResource": 2.76,
+        "damageBySource": {
+          "THU_01": 12607.92,
+          "THU_05": 12429.25,
+          "THU_02": 10028.67,
+          "THU_04": 8886.67,
+          "spell": 1065.83
+        },
+        "casts": {
+          "THU_01": 20,
+          "THU_05": 5,
+          "THU_02": 9,
+          "THU_04": 9
+        }
+      },
+      {
+        "build": "ceiling",
+        "formation": "line",
+        "family": "THU",
+        "dps": 807.16,
+        "burst6": 6319.33,
+        "spent": 80,
+        "minimumResource": 2.76,
+        "damageBySource": {
+          "THU_01": 12607.92,
+          "THU_05": 12429.25,
+          "THU_02": 10028.67,
+          "THU_04": 12298,
+          "spell": 1065.83
+        },
+        "casts": {
+          "THU_01": 20,
+          "THU_05": 5,
+          "THU_02": 9,
+          "THU_04": 9
+        }
+      }
+    ],
+    "developedSingleSpreadWithStationaryThunderPercent": 10.03
+  },
+  "reproduction": [
+    "python tools/design/export-combat-runtime.py --skills-only (repository root)",
+    "npx tsx tools/combat-balance.ts test-results/combat-balance.json (src/cocos)",
+    "npx tsx tools/combat-balance.ts test-results/combat-balance-stationary.json --stationary-thunder (src/cocos)"
+  ],
+  "inputHashes": {
+    "tools/design/class-damage-balance-v1.json": "05b759fabf65f18b6fa5908e894bf102da2802354dcf587f003d76da9ae7be3b",
+    "src/cocos/assets/scripts/features/combat/data/PureSkills.ts": "1ae29c70a26cc27945400c7389cf238ded6adab991ff6d377b3ad47cabb3d40b",
+    "src/cocos/assets/scripts/features/combat/common/PureCombat.ts": "e26401ba0d891bfb85102adfc47efbf2f7a040c8cf38233bdfdac6a394c2509f",
+    "src/cocos/tools/combat-balance.ts": "ba7c158d2cec19274a26ed7f4841a44f7443d9895aef2bfc5b1fcbea7e49ab59"
+  }
+}

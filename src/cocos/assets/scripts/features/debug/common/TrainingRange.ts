@@ -1,3 +1,4 @@
+import {CAMPAIGN_MAX_LEVEL,attributePointBudget} from '../../progression/data/CampaignProgression';
 import type {AreaDef,GameEvent,Point,WorldQuery} from '../../../core/Contracts';
 import {GameSession} from '../../../core/GameSession';
 import {synchronizeResource} from '../../combat/common/ClassResource';
@@ -9,13 +10,14 @@ export type TargetFormation='single'|'cluster'|'line'|'horde';
 export const TRAINING_MONSTER_COUNTS=[5,10,20] as const;
 const START:Point={x:0,z:-8};
 /** Kept outside the campaign atlas and persistence: entering is a session swap. */
-export const TRAINING_AREA:AreaDef={id:'TRAINING',name:'技能靶场',subtitle:'独立试放 · 临时角色',kind:'interior',palette:'stone',width:48,depth:48,spawn:START,atlas:{x:0,z:0},checkpoint:true,exits:[],objects:[],buildings:[],obstacles:[],enemies:Array.from({length:5},(_,i)=>({id:`training:target:${i}`,kind:'raider',trainingDummy:true,level:40,hp:1000000,x:0,z:0}))};
+export const TRAINING_AREA:AreaDef={id:'TRAINING',name:'技能靶场',subtitle:'独立试放 · 临时角色',kind:'interior',palette:'stone',width:48,depth:48,spawn:START,atlas:{x:0,z:0},checkpoint:true,exits:[],objects:[],buildings:[],obstacles:[],enemies:Array.from({length:5},(_,i)=>({id:`training:target:${i}`,kind:'raider',trainingDummy:true,level:CAMPAIGN_MAX_LEVEL,hp:1000000,x:0,z:0}))};
 
-const GROUP_AREAS:Record<number,AreaDef>=Object.fromEntries(TRAINING_MONSTER_COUNTS.map(count=>[count,{...TRAINING_AREA,enemies:Array.from({length:count},(_,i)=>({id:`training:monster:${i}`,kind:(["raider","raider","shield","raider","archer"] as const)[i%5],trainingEnemy:true,level:40,x:0,z:0}))}]));
+const GROUP_AREAS:Record<number,AreaDef>=Object.fromEntries(TRAINING_MONSTER_COUNTS.map(count=>[count,{...TRAINING_AREA,enemies:Array.from({length:count},(_,i)=>({id:`training:monster:${i}`,kind:(["raider","raider","shield","raider","archer"] as const)[i%5],trainingEnemy:true,level:CAMPAIGN_MAX_LEVEL,x:0,z:0}))}]));
 
 /** Only practice sessions own dummies. Damage, accuracy, projectiles, statuses
  * and displacement still run through GameSession / PureCombat unchanged. */
 export class TrainingRange {
+ returnNotice?:string;
  monsterCount:number=10;
  get groupMode(){return this.formation==='horde';}
  get area():AreaDef{return this.groupMode?GROUP_AREAS[this.monsterCount]??GROUP_AREAS[10]:TRAINING_AREA;}
@@ -27,9 +29,10 @@ export class TrainingRange {
  readonly framingPoints:Point[]=[];
  constructor(world:WorldQuery){
   const game=this.session=new GameSession(73014,world),s=game.state,p=s.progression;
-  p.totalXp=cumulativeXp(40);p.xpReceipts['training']=p.totalXp;p.level=40;p.ultimateGiftClaimed=true;
+  p.totalXp=cumulativeXp(CAMPAIGN_MAX_LEVEL);p.xpReceipts['training']=p.totalXp;p.level=CAMPAIGN_MAX_LEVEL;p.ultimateGiftClaimed=true;
   // A stable, legal attribute budget makes rank comparisons reproducible.
-  p.attributes={strength:39,dexterity:39,intellect:39,vitality:40};p.unspentPoints=0;
+  const budget=attributePointBudget(p.level),each=Math.floor(budget/4);
+  p.attributes={strength:10+each,dexterity:10+each,intellect:10+each,vitality:10+budget-3*each};p.unspentPoints=0;
   unlockSkills(p,true);
   for(const skill of COMBAT_SKILL_LIST)p.learned[skill.id]=1;
   p.skillPoints=totalSkillPoints(p)-Object.values(p.learned).reduce((n,r)=>n+skillRankSpent(r),0);

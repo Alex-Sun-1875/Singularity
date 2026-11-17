@@ -20,7 +20,7 @@ async function run(){
   await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
   const browser=await chromium.launch({headless:true,args:['--enable-webgl','--enable-unsafe-swiftshader','--use-angle=swiftshader','--mute-audio']});
   try{
-    const page=await browser.newPage({viewport:{width:1280,height:624},deviceScaleFactor:1});
+    const page=await browser.newPage({viewport:{width:960,height:470},deviceScaleFactor:1});
     const errors=[];page.on('pageerror',e=>{errors.push(e.message);console.error(e.message);});
     await page.goto('http://127.0.0.1:'+server.address().port+'/?view=3d&player=3d&test=max',{waitUntil:'load'});
     await page.waitForFunction(()=>globalThis.System,undefined,{timeout:45000});
@@ -37,49 +37,24 @@ async function run(){
       await installMotionStudy('current');
       const cc=motionStudy.cc,app=motionStudy.app;
       const {COMBAT_SKILLS}=await System.import('chunks:///_virtual/PureSkills.ts');
-      const materials={};
-      for(const family of ['WAR','BOW','FIR','THU']){
-        const image=new Image();image.src='/review/'+family+'.png';await image.decode();
-        const texture=new cc.Texture2D();texture.image=new cc.ImageAsset(image);
-        const material=new cc.Material();material.initialize({effectName:'builtin-unlit',technique:1,defines:{USE_TEXTURE:true},states:{rasterizerState:{cullMode:cc.gfx.CullMode.NONE},depthStencilState:{depthTest:true,depthWrite:false},blendState:{targets:[{blend:true,blendSrc:cc.gfx.BlendFactor.SRC_ALPHA,blendDst:cc.gfx.BlendFactor.ONE_MINUS_SRC_ALPHA,blendSrcAlpha:cc.gfx.BlendFactor.ONE,blendDstAlpha:cc.gfx.BlendFactor.ONE_MINUS_SRC_ALPHA}]}}});
-        material.setProperty('mainTexture',texture);materials[family]=material;
-      }
-      const seal=new cc.Node('SuppliedReferenceGroundSeal');seal.layer=app.effects.root.layer;app.effects.root.addChild(seal);
-      const renderer=seal.addComponent(cc.MeshRenderer);renderer.shadowCastingMode=0;renderer.receiveShadow=0;
-      let family='FIR',start=0,duration=1.45,mesh;
-      const original=app.effects.update.bind(app.effects);
-      app.effects.update=game=>{
-        original(game);
-        const age=game.state.time-start;
-        const fadeIn=Math.min(1,Math.max(0,age/.30));
-        const fadeOut=age<duration?1:Math.pow(Math.max(0,1-(age-duration)/.24),1.4);
-        const pulse=.92+.08*Math.sin(Math.max(0,age-.3)*Math.PI*3);
-        const alpha=fadeIn*fadeOut*pulse;
-        seal.active=alpha>.001;
-        materials[family].setProperty('mainColor',new cc.Vec4(1.04,1.04,1.04,alpha));
-      };
+      const duration=1.45;
       window.configureReferenceSeal=(info,id)=>{
-        family=id.slice(0,3);
+        const family=id.slice(0,3);
+        if(id!=='FIR_02')return {enabled:false,family,reason:'Ornate seal applies to meteor only'};
         const def=COMBAT_SKILLS[id];def.windupSeconds=duration;def.releaseCommitSeconds=duration;
         const g=def.ranks[0].geometry,r=g.radiusMetres;
         if(!(r>0))throw Error('No circular area geometry for '+id);
         const center=info.targets[0],camera=app.camera,right=camera.node.right.clone();right.y=0;right.normalize();
         const far=camera.node.up.clone();far.y=0;far.normalize();
-        const positions=[],uvs=[],normals=[],indices=[],n=20;
         const half=r/(460/512);
-        for(let j=0;j<=n;j++)for(let i=0;i<=n;i++){
-          const x=(i/n*2-1)*half,z=(1-j/n*2)*half;
-          const point={x:center.x+right.x*x+far.x*z,z:center.z+right.z*x+far.z*z};
-          positions.push(point.x,app.world.height(point)+.052,point.z);normals.push(0,1,0);uvs.push(i/n,1-j/n);
-        }
-        for(let j=0;j<n;j++)for(let i=0;i<n;i++){const a=j*(n+1)+i,b=a+1,c=a+n+1;indices.push(a,c,b,b,c,c+1);}
-        renderer.mesh=null;mesh?.destroy();mesh=cc.utils.createMesh({positions,uvs,normals,indices});renderer.mesh=mesh;
-        renderer.setSharedMaterial(materials[family],0);
-        start=app.session.state.time+.30;
-        seal.active=false;
+        const projection=[[-1,1],[1,1],[1,-1],[-1,-1]].map(([u,v])=>{
+          const p={x:center.x+right.x*u*half+far.x*v*half,z:center.z+right.z*u*half+far.z*v*half};
+          const pixel=camera.worldToScreen(new cc.Vec3(p.x,app.world.height(p)+.052,p.z));
+          return [pixel.x,cc.game.canvas.height-pixel.y];
+        });
         // Frame the current fire card against the actual camera after equipment pool recreation.
         for(const pool of [app.effects.fireSprites,app.effects.blades])pool.camera=camera;
-        return {center,radius:r,windup:duration,texture:family+'.png'};
+        return {enabled:true,center,radius:r,windup:duration,texture:family+'.png',projection,viewport:[cc.game.canvas.width,cc.game.canvas.height]};
       };
     });
     const definitions=[
@@ -88,18 +63,23 @@ async function run(){
       {id:'FIR_02',family:'FIR',centre:2.75,height:4.30,targets:[[4.7,.10],[5.85,-.85],[5.3,1.35]],seconds:3.3},
       {id:'THU_05',family:'THU',centre:3.3,height:4.10,targets:[[4.9,.05],[6.4,-1.15],[5.65,1.4],[7.35,.42]],seconds:3.3},
     ];
-    for(const def of definitions){
+    for(const def of (process.argv.includes('--probe')?definitions.slice(0,1):definitions)){
       const dir=path.join(cache,def.family);fs.mkdirSync(dir,{recursive:true});
       const info=await page.evaluate(d=>motionStudy.select(d),def);
       const seal=await page.evaluate(({info,id})=>configureReferenceSeal(info,id),{info,id:def.id});
       console.log('Loaded reference seal',def.family,seal);
+      fs.writeFileSync(path.join(dir,'projection.json'),JSON.stringify(seal,null,2));
+      if(process.argv.includes('--projection-only')){
+        continue;
+      }
       for(let i=0;i<99;i++){
         const jpg=await page.evaluate(()=>motionStudy.next(true));
         fs.writeFileSync(path.join(dir,String(i).padStart(3,'0')+'.jpg'),Buffer.from(jpg,'base64'));
+        if(i===38&&process.argv.includes('--probe'))break;
       }
       const report=await page.evaluate(()=>motionStudy.report());
       if(errors.length)throw Error(errors[0]);
-      if(!report.events.some(e=>e.type==='skill_release'))throw Error('Missing release '+def.id);
+      if(!process.argv.includes('--probe')&&!report.events.some(e=>e.type==='skill_release'))throw Error('Missing release '+def.id);
       fs.writeFileSync(path.join(dir,'capture.json'),JSON.stringify({info,seal,...report,errors},null,2));
       console.log('Captured reference',def.family,report.frames,report.clips);
     }

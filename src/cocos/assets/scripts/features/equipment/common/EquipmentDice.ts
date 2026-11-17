@@ -7,12 +7,14 @@ import {equippedGemBonus} from '../../gems/common/GemWorkshop';
 import type {Attribute} from '../../progression/common/Progression';
 import type {GameState} from '../../../core/GameSession';
 import type {DiceView} from '../../progression/common/SkillChecks';
+import {CAMPAIGN_MAX_LEVEL} from '../../progression/data/CampaignProgression';
+import {redemptionEquipmentSourceLabel} from '../../redemption/common/RedemptionLedger';
 
 export interface GearBonus {maxHp:number;armor:number;power:number}
 export interface EquipmentRoll {item:string;source:string;level:number;face:number|null;claimed:boolean}
 export type EquipmentRollBook=Record<string,EquipmentRoll>;
 export interface GearOutcome {name:string;bonus:GearBonus;upgrade:string|null;description:string}
-export interface EquipmentDiceView {item:string;level:number;face:number|null;outcome:GearOutcome|null;possibleUpgrade:string|null;upgradeOwned:boolean;bonus:GearBonus}
+export interface EquipmentDiceView {item:string;level:number;face:number|null;outcome:GearOutcome|null;possibleUpgrade:string|null;upgradeOwned:boolean;bonus:GearBonus;acquisitionSource?:string}
 const EMPTY:GearBonus={maxHp:0,armor:0,power:0};
 export const GEAR_GRADES=['普通','精良','稀有','史诗','传奇','神器'];
 function word(seed:number,key:string){let h=seed>>>0;for(let i=0;i<key.length;i++)h=Math.imul(h^key.charCodeAt(i),16777619)>>>0;h^=h>>>16;h=Math.imul(h,0x7feb352d);h^=h>>>15;return(h^(h>>>16))>>>0;}
@@ -53,15 +55,27 @@ export const effectiveAttribute=(s:GameState,attribute:Attribute,gear=equippedGe
 export const combatCriticalChance=(s:GameState,gear=equippedGearBonus(s))=>Math.min(.3,.05+.0012*(effectiveAttribute(s,'dexterity',gear)-10)+gear.criticalChance/100);
 export const combatCriticalMultiplier=(s:GameState,gear=equippedGearBonus(s))=>Math.min(2.5,1.5+gear.criticalDamage/100);
 interface Host {state():GameState;grant(item:string,count:number,source:string):void;recalculate():void;changed():void;emit(type:string,text?:string,extra?:Record<string,unknown>):void}
-/** First-acquisition acknowledgement. Old dice records remain valid save evidence. */
+/** First-acquisition ledger. Old dice records remain valid save evidence. */
 export class EquipmentDice {
  constructor(private host:Host){}
  private get s(){return this.host.state();}
- hasPending():boolean {const gear=this.s.dice.gear;if(gear)for(const id in gear)if(Object.prototype.hasOwnProperty.call(gear,id)&&!gear[id].claimed)return true;return false;}
- enqueue(item:string,source:string){if(!EQUIPMENT[item]||EQUIPMENT[item].kind==='spell'||source.startsWith('gear-upgrade:'))return;this.s.dice.gear??={};this.s.dice.gear[item]??={item,source,level:this.s.progression.level,face:null,claimed:false};}
- open(item?:string){if(this.s.dice.active)return false;const r=item?this.s.dice.gear?.[item]:Object.values(this.s.dice?.gear??{}).find(r=>!r.claimed&&!this.s.receipts[`gear-deferred:${r.item}`]);if(!r||r.claimed)return false;this.s.dice.active={id:'gear:'+r.item,area:this.s.area,sourceId:r.source,context:{mode:'normal',modifiers:[],helpDie:false,helpLabel:null}};this.host.changed();return true;}
+ enqueue(item:string,source:string){
+  if(!EQUIPMENT[item]||EQUIPMENT[item].kind==='spell'||source.startsWith('gear-upgrade:'))return;
+  this.s.dice.gear??={};if(this.s.dice.gear[item])return;
+  this.s.dice.gear[item]={item,source,level:this.s.progression.level,face:null,claimed:true};
+  this.s.receipts['gear-refine:'+item]=true;
+ }
+ /** Pending notices already own their equipment. Retire only their acknowledgement. */
+ settlePending(){
+  let changed=false;
+  for(const r of Object.values(this.s.dice.gear??{}))if(!r.claimed){
+   r.face=null;r.claimed=true;this.s.receipts['gear-refine:'+r.item]=true;changed=true;
+  }
+  if(this.s.dice.active?.id.startsWith('gear:')){this.s.dice.active=null;changed=true;}
+  if(changed)this.host.changed();
+ }
  view():DiceView|null {const a=this.s.dice.active;if(!a?.id.startsWith('gear:'))return null;const r=this.s.dice.gear![a.id.slice(5)],d=EQUIPMENT[r.item];
-  return {id:a.id,title:d.name,prompt:d.description,skillLabel:'获得装备',abilityLabel:'装备',dc:0,mode:'normal',modifiers:[],help:null,roll:null,attempt:0,inspiration:this.s.dice.inspiration,canReroll:false,canCancel:false,successText:'装备已放入行囊。',failureText:'',chance:1,gear:{item:r.item,level:this.s.progression.level,face:null,outcome:null,possibleUpgrade:null,upgradeOwned:false,bonus:EMPTY}};
+  return {id:a.id,title:d.name,prompt:d.description,skillLabel:'获得装备',abilityLabel:'装备',dc:0,mode:'normal',modifiers:[],help:null,roll:null,attempt:0,inspiration:this.s.dice.inspiration,canReroll:false,canCancel:false,successText:'装备已放入行囊。',failureText:'',chance:1,gear:{item:r.item,level:this.s.progression.level,face:null,outcome:null,possibleUpgrade:null,upgradeOwned:false,bonus:EMPTY,acquisitionSource:redemptionEquipmentSourceLabel(this.s,r.item)}};
  }
  finish(){const a=this.s.dice.active,r=a?.id.startsWith('gear:')?this.s.dice.gear?.[a.id.slice(5)]:null;if(!r||r.claimed)return;
   // A pending result from an older build must not activate a free random bonus.
@@ -73,7 +87,7 @@ const object=(v:unknown):v is Record<string,any>=>!!v&&typeof v==='object'&&!Arr
 export function validateEquipmentDice(value:unknown,seed:number,receipts:Record<string,unknown>,active:any,area?:string){
  const fail=():never=>{throw new Error('无效的装备锻印存档');};
  if(!object(value)||Object.keys(value).length>Object.keys(EQUIPMENT).length)return fail();
- for(const [id,r]of Object.entries(value)){if(!EQUIPMENT[id]||!object(r)||Object.keys(r).sort().join()!=='claimed,face,item,level,source'||r.item!==id||typeof r.source!=='string'||r.source.length>200||!Number.isInteger(r.level)||r.level<1||r.level>40||typeof r.claimed!=='boolean'||r.face!==null&&r.face!==equipmentFace(seed,r as EquipmentRoll)||r.claimed!==(receipts['gear-refine:'+id]===true)||r.source!=='initial'&&receipts[`grant:${r.source}:${id}`]!==true)fail();}
+ for(const [id,r]of Object.entries(value)){if(!EQUIPMENT[id]||!object(r)||Object.keys(r).sort().join()!=='claimed,face,item,level,source'||r.item!==id||typeof r.source!=='string'||r.source.length>200||!Number.isInteger(r.level)||r.level<1||r.level>CAMPAIGN_MAX_LEVEL||typeof r.claimed!=='boolean'||r.face!==null&&r.face!==equipmentFace(seed,r as EquipmentRoll)||r.claimed!==(receipts['gear-refine:'+id]===true)||r.source!=='initial'&&receipts[`grant:${r.source}:${id}`]!==true)fail();}
  for(const key of Object.keys(receipts))if(key.startsWith('gear-refine:')&&(!value[key.slice(12)]?.claimed||receipts[key]!==true))fail();
  if(active?.id?.startsWith('gear:')){const r=value[active.id.slice(5)];if(!r||r.claimed||area&&active.area!==area||active.sourceId!==r.source||JSON.stringify(active.context)!==JSON.stringify({mode:'normal',modifiers:[],helpDie:false,helpLabel:null})||Object.keys(active).sort().join()!=='area,context,id,sourceId')fail();}
 }

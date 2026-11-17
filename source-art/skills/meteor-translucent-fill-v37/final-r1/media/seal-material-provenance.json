@@ -1,0 +1,135 @@
+{
+  "revision": "v37-translucent-orange-inner-fill",
+  "generation": "None. Deterministic processing only; original cloud source and v36 colour mapping unchanged.",
+  "sources": {
+    "source-art\\skills\\meteor-flame-colour-v36\\assets\\fire-meteor-seal-colour-v36.png": "4e9c31d792c80e47f361d14ac80c59a4f230b16d26521b1215fcdda75725d8f4",
+    "source-art\\skills\\meteor-flame-colour-v36\\assets\\fire-meteor-seal-light-v36.png": "966add4ee3bc099394f9798efa0dbccae9d869209c06adcaba133e9a3069a3ab",
+    "src\\cocos\\assets\\resources\\vfx\\production\\fire-meteor-burst-v32.png": "02f9fdfb05378c5d12097b2bf08746dc938f26fd04d428a650bb14ee95792154",
+    "source-art\\skills\\meteor-ignition-glow-v34\\final-empty-r1\\media\\impact-0650ms.jpg": "ac9d485ff060e9c6a0d3d46173aac7544a3366a61851fd1864593d590f3ef116",
+    "source-art\\skills\\meteor-ignition-glow-v34\\final-empty-r1\\media\\impact-4600ms.jpg": "a7888af6c6d9113af51ac03ed6e97e2df6e6557b0db7e67f210d680cac239dc0"
+  },
+  "transparency": {
+    "mainAlphaScale": 0.8,
+    "existingLightRGBScale": 0.8,
+    "existingLightAbsorptionSupportScale": 0.8,
+    "mainRGB": "Byte-identical to accepted v36; same line colour ratios and geometry.",
+    "drawOpacity": "Existing runtime .9 and cue/lifetime unchanged."
+  },
+  "innerFill": {
+    "radius1024": 332.5334167175263,
+    "edgeFeatherPixels": 22,
+    "colourRGBNormalised": [
+      1.0,
+      0.3916631218603144,
+      0.061259093585861846
+    ],
+    "reference": "Mean of already-confirmed v36 native pure-fire low/mid emitted chroma, no new palette analysis.",
+    "strength": "0.18 * broadField(.78..1.18) * innerMask * (1-.65*scaledMainCoverage). Nonzero continuous whole-disc base, strongest cores protected from clipping.",
+    "field": "Existing burst-v32 frame2 luminance, resized512 and Gaussian38px; only broad intensity variation, no new engraving or discrete flames.",
+    "lightAbsorption": "Fill adds .12 mask support to light A; old shader multiplies support by only .006. Fill is additive light with very low ground absorption, not an opaque disc.",
+    "centralFillRedMinMeanMax": [
+      0.08707956946182728,
+      0.1877579880475281,
+      0.21240000000000003
+    ]
+  },
+  "resources": [
+    {
+      "name": "fire-meteor-seal-colour-v37.png",
+      "size": [
+        1024,
+        1024
+      ],
+      "role": "v36 RGB unchanged, main engraving alpha×.80",
+      "sha256": "4a98c8d3654bb3f261510fa8f48d790507c49ed65c369ee5dc119c1e2930683d",
+      "gpuBytes": 4194304
+    },
+    {
+      "name": "fire-meteor-seal-light-v37.png",
+      "size": [
+        512,
+        512
+      ],
+      "role": "v36 light RGB×.80 + continuous faint orange inner fill; low absorption support",
+      "sha256": "446a124c61e937aaa2a139171b82ba5c2739aac8a2e68d71f653cd39bb36fcf8",
+      "gpuBytes": 1048576
+    }
+  ],
+  "effect": {
+    "reuse": "fire-seal-v35r2.effect",
+    "sha256": "ea3e09f4305e54957e38c6f0b7fc8ff75719a1a8c413d41e19c89590e35644fa",
+    "changed": false
+  },
+  "totalGpuBytes": 5242880,
+  "preview": "seal-v37-translucent-fill-final.jpg",
+  "projection": {
+    "nativeGroundEllipseCentre": [
+      594.7683846031651,
+      817.0373835848492
+    ],
+    "radii": [
+      565.3500290157183,
+      360.64807072905467
+    ],
+    "factor": 0.6379199650116718,
+    "sealOpacity": 0.9,
+    "sourceTextureCentre": [
+      511.5,
+      511.5
+    ],
+    "sourceTextureRadius": 460.0,
+    "composite": "I_flame+(sealPremul-background*sealAlpha)*(1-estimatedFlameAlpha); same actual pure-flame frame in both panels. Not new native screenshot."
+  },
+  "previewDeclaration": "Both warning and same-actual-fire-phase panels use the existing camera ellipse and exact two-texture shader formula. Computational candidate only; not new native Cocos evidence.",
+  "review": {
+    "local": "Root and asset agent viewed the one warning/overlaid-fire material calculation: continuous faint orange central fill, visible grid/ground, lighter but clear existing engraving, same design. Approved engineering publication only.",
+    "production": "Published and frozen; root owns standard build and actual capture.",
+    "native": "Pending actual Cocos same-phase capture; material computation not user/device acceptance."
+  },
+  "publication": {
+    "productionUpdated": true,
+    "guard": "Common build lock owned for brief publication; no build run.",
+    "rendererBeforeSha256": "f99bd86c781f6a15d1811d27b93cbcf5c9d49fb2a76d83dc5671f0eb38e26941",
+    "rendererAfterSha256": "5d6b6a2b2a387ea4b971211a13ad4eaab10ce57f960ec78e89efb30f86404790",
+    "rendererDiff": "Exactly two meteor texture paths; effect/lifecycle/opacity/geometry unchanged.",
+    "productionFiles": {
+      "fire-meteor-seal-colour-v37.png": "4a98c8d3654bb3f261510fa8f48d790507c49ed65c369ee5dc119c1e2930683d",
+      "fire-meteor-seal-light-v37.png": "446a124c61e937aaa2a139171b82ba5c2739aac8a2e68d71f653cd39bb36fcf8"
+    },
+    "pixelAssertions": {
+      "fire-meteor-seal-colour-v37.png": {
+        "mainRGBByteIdentical": true,
+        "alphaScale080ByteExact": true,
+        "sizeUnchanged": true
+      },
+      "fire-meteor-seal-light-v37.png": {
+        "outsideInnerDiscAllChannelsScale080Exact": true,
+        "innerFillWithinRadius332533": true,
+        "sizeUnchanged": true
+      }
+    },
+    "preserved": {
+      "src\\cocos\\assets\\resources\\vfx\\production\\fire-ground-jets-v27.png": "37a8319026bf39a4862f1f9bedbfceb98a6a3119c16f3265f300756dd4c2e4c6",
+      "src\\cocos\\assets\\resources\\vfx\\production\\fire-jet-seal-v27.png": "febfe312082973eace56e8e5efea0b28f3e5464764a04900a924963f3ad19f86",
+      "src\\cocos\\assets\\resources\\vfx\\production\\fire-ground-v27.effect": "f213c7660ee31ba34f8900790e6256c65b7dce1a613cd570d82ea5bedf89c808",
+      "src\\cocos\\assets\\resources\\vfx\\production\\fire-flow-noise-v24.png": "ccee680793eb3e41ea3973f01fa9963c588b4f0d5cbafe483d24ccb0105c935d",
+      "src\\cocos\\assets\\resources\\vfx\\production\\fire-seal-v35r2.effect": "ea3e09f4305e54957e38c6f0b7fc8ff75719a1a8c413d41e19c89590e35644fa",
+      "src\\cocos\\assets\\scripts\\features\\combat\\runtime\\UnifiedShieldEffects.ts": "97683ffbea40a66f97c3045bf6a28bfc86bc3579326cbc28732e165970e84a6c",
+      "src\\cocos\\assets\\scripts\\features\\combat\\runtime\\FireImpactEffects.ts": "2ec43c66c5cc0cfaf73cd0e56ec87c0b853762a9a598a9dfc7c075a420db5738",
+      "src\\cocos\\assets\\scripts\\features\\combat\\runtime\\NativeSkillVfx.ts": "19672b3c3f9e0971f2c7cd554eb97e21fb2e490596f2593fbd821402193b6bef"
+    },
+    "slots": {
+      "2": "fire-meteor-seal-colour-v37",
+      "4": "fire-meteor-seal-light-v37",
+      "0/1/3": "unchanged jets/small-seal/noise"
+    }
+  },
+  "staticChecks": {
+    "productionHashes": "Match reviewed source assets",
+    "textureData": "Main RGB byte-identical and alpha scale080 exact; outside inner disc light all channels scale080 exact; only inner-radius fill added",
+    "meta": "Unique UUIDs and matching image/texture redirects; same dimensions/filtering and alpha importer flags",
+    "renderer": "Reverse replacing exactly2 texture names recovers root baseline SHA; all other bytes and old effect unchanged",
+    "preserved": "Native lifecycle/opacity/impact/shield/v27/range/UV unchanged",
+    "status": "Provenance frozen before atomic ready; root standard build/native capture remains separate"
+  }
+}

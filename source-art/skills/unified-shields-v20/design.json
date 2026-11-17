@@ -1,0 +1,41 @@
+{
+  "status": "Design candidate, pending user art review; no production integration",
+  "request": "整体护盾重新设计；统一效果，仅花纹和颜色不同",
+  "sharedGeometry": {
+    "shape": "One translucent full-body ellipsoidal energy shell for every profession",
+    "heightRelativeToActor": 1.28,
+    "screenWidthRelativeToActorHeight": 1.12,
+    "frontSurfaceOpacity": 0.055,
+    "rearSurfaceOpacity": 0.035,
+    "rim": "Common softly layered narrow rim with restrained bloom",
+    "pattern": "Large, sparse, thicker readable motifs curved along the shell; common placement and weight",
+    "groundDecal": false
+  },
+  "sharedMotion": {
+    "formationSeconds": 0.32,
+    "formation": "Shell resolves upward from the feet and motifs connect behind the same reveal front",
+    "sustain": "Subtle common breathing and slow energy flow; no profession-specific extra emitters",
+    "breathingPeriodSeconds": 1.6,
+    "hitRippleSeconds": 0.22,
+    "hit": "One local impact ripple on the actual contact side, then immediately return to the resting brightness",
+    "naturalFadeSeconds": 0.48,
+    "naturalFade": "Pattern brightness recedes, then rim and thin membrane dissolve in place",
+    "breakFadeSeconds": 0.28,
+    "break": "Common brief shell breakup and fade; no offensive blast",
+    "duration": "Read the real shield lifetime. Preview examples are illustrative and do not change gameplay."
+  },
+  "variants": {
+    "WAR": {"name":"战士", "color":"#E2C792", "pattern":"Paired blade points and angular guard curls"},
+    "BOW": {"name":"弓系", "color":"#72D8B8", "pattern":"Sweeping wind curves and subtle arrow-like tips"},
+    "FIR": {"name":"火系", "color":"#FF9746", "pattern":"Broad rising flame curls"},
+    "THU": {"name":"雷系", "color":"#9698FF", "pattern":"Coarse linked angular lightning glyphs"}
+  },
+  "invariants": [
+    "Identical shell silhouette, dimensions, surface transparency, rim width, bloom, motif placement, motion and response across variants",
+    "The only per-profession differences are motif line shape and hue",
+    "Existing accepted profession motifs supply the decorative vocabulary; no ground skill circle is added",
+    "Visual themes do not add shield skills or change damage reduction, shield amount, duration or cooldown"
+  ],
+  "previewLimits": "Composited design animation over existing native 3D game footage. It is not an engine material, depth test, moving character attachment, real impact detection, or a production implementation.",
+  "productIntegration": false
+}

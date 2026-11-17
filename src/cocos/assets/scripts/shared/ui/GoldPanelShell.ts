@@ -3,11 +3,11 @@ import {_decorator,BlockInputEvents,ButtonComponent as Button,Color,Component,Gr
 import {DoubleGoldFrame} from './DoubleGoldFrame';
 import {FeedbackView as F} from './FeedbackView';
 import {applyRpgFont} from './RpgFont';
-import {UI_FRAME_LAYOUT as L,UI_GOLD_PANEL_RULES as RULES,UI_SETTINGS_REFERENCE as R,UI_PANEL_HEADER as H} from './UiChrome';
+import {UI_FRAME_LAYOUT as L,UI_GOLD_PANEL_CONTENT as CONTENT,UI_GOLD_PANEL_RULES as RULES,UI_SETTINGS_REFERENCE as R,UI_PANEL_HEADER as H} from './UiChrome';
 import {GoldPanelHeader,type GoldPanelHeaderOptions} from './GoldPanelHeader';
 import {UiSkin} from './UiSkin';
 import {UI_COLORS as C} from './UiTheme';
-import {bindButtonFeedback} from './ButtonFeedback';
+import {ButtonSurface} from './ButtonSurface';
 
 const {ccclass,requireComponent}=_decorator;
 export type GoldPanelVariant='standard'|'settings';
@@ -64,7 +64,7 @@ export class GoldPanelShell extends Component {
    this.owned.push(header.node);
   }
   if(r){this.referenceDivider(this.node,'title',o.height/2-R.rules.title.y*r);this.referenceDivider(this.node,'tabs',o.height/2-R.rules.tabs.y*r);}
-  else this.divider(this.node,'title',o.height/2-(o.titleRuleY??m.bodyTop-m.gap/2),Math.min(o.width-2*m.padding,o.width*RULES.title.width/R.width));
+  else this.divider(this.node,'title',o.height/2-(o.titleRuleY??m.bodyTop-m.gap/2),o.width-2*CONTENT.ruleInset*o.unit);
   if(o.tabs?.length){const tabs=o.tabs,w=(o.width-2*m.padding-(tabs.length-1)*m.gap)/tabs.length;
    tabs.forEach((tab,i)=>{
     const x=(i-(tabs.length-1)/2)*(w+m.gap),visualX=r?-o.width/2+(R.tabsFirstX+i*R.tabsStep)*r:x,n=this.action(this.node,tab.label,tab.action,x,o.height/2-m.tabsY,w,o.hit,r?R.tabsSize*r:o.mobile?27:18,!!tab.disabled,{x:visualX-x,y:r?m.tabsY-R.tabsTextY*r:0}),label=n.getComponentInChildren(Label)!;
@@ -105,8 +105,8 @@ export class GoldPanelShell extends Component {
  }
  private action(parent:Node,label:string,action:string,x:number,y:number,w:number,h:number,size:number,disabled=false,visual:{x?:number;y?:number;width?:number;height?:number}={}):Node {
   const unit=this.options.unit,inset=4*unit,vw=Math.min(w-2*inset,visual.width??w-2*inset),vh=Math.min(h-2*inset,visual.height??Math.max(size*1.4+4*unit,28*unit)),vx=visual.x??0,vy=visual.y??0;
-  const n=this.part(action,parent,x,y,w,h),face=this.part('GoldPanelActionFace',n,vx,vy,Math.max(1,vw),Math.max(1,vh)),g=face.addComponent(CompactGraphics),b=n.addComponent(Button);b.transition=Button.Transition.NONE;b.interactable=!disabled;
-  bindButtonFeedback(n,b,state=>{if(!g.isValid)return;g.clear();if(state!=='idle'){g.fillColor=C.hover;g.roundRect(-vw/2,-vh/2,vw,vh,Math.min(6*unit,vh/2));g.fill();}});
+  const n=this.part(action,parent,x,y,w,h),b=n.addComponent(Button);b.transition=Button.Transition.NONE;b.interactable=!disabled;
+  ButtonSurface.attach(n,{width:vw,height:vh,x:vx,y:vy,radius:6*unit,name:'GoldPanelActionFace'});
   const text=this.caption(n,'Text',label,0,0,w-16,h,size);text.horizontalAlign=Label.HorizontalAlign.CENTER;if(disabled)F.tint(text,'text.disabled');
   n.on(Button.EventType.CLICK,()=>{if(b.interactable)this.activate(action);});return n;
  }

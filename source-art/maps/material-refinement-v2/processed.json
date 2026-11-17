@@ -1,0 +1,575 @@
+{
+  "status": "processed; tiling and actual scene visual review recorded separately",
+  "tools": "existing Pillow/numpy and prepare_map_terrain.py metadata/wrap helpers",
+  "runtimePolicy": "512 RGB; Repeat; linear mip; anisotropy 4; existing compression preset",
+  "materials": [
+    {
+      "key": "meadow",
+      "raw": {
+        "file": "source-art/maps/material-refinement-v2/raw/meadow.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "46eda4ac11309eabe89af5afe7f0eda485f3946f2f2e30a33e9c82f98474f208",
+        "bytes": 3183112
+      },
+      "runtime": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/meadow-v2.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "215cd662b796a6d9176f62ec51cc3ee712ab143564a8a7f9806d0996fc22ecc6",
+        "bytes": 539450
+      },
+      "meanRgbTarget": [
+        101,
+        145,
+        60
+      ],
+      "contrast": 1.03,
+      "broadIlluminationRemoval": 0.45,
+      "wrap": {
+        "applied": true,
+        "bandPixelsPerSide": 6,
+        "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+        "skipThresholdMeanAbsoluteRgb": 1.5,
+        "before": {
+          "horizontal": {
+            "meanAbsoluteRgb": 9.783854,
+            "p95AbsoluteRgb": 27.0,
+            "maximumAbsoluteRgb": 52
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 9.446615,
+            "p95AbsoluteRgb": 24.0,
+            "maximumAbsoluteRgb": 50
+          }
+        },
+        "after": {
+          "horizontal": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          }
+        },
+        "changedPixelFraction": 0.037506,
+        "maximumChangeOutsideBand": 0,
+        "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+      },
+      "lumaPreservingChroma": 0.8
+    },
+    {
+      "key": "earth",
+      "raw": {
+        "file": "source-art/maps/material-refinement-v2/raw/earth.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "c8267494f90cfdf592762ea9f6fde6aa9348890c7b78133507e2ab9097d8ac96",
+        "bytes": 2809113
+      },
+      "runtime": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/earth-v2.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "2b8a5d22b06f581507f80079ec37b3044d7d6a44d1efcd022dae05eb5fb6c84d",
+        "bytes": 404139
+      },
+      "meanRgbTarget": [
+        145,
+        130,
+        102
+      ],
+      "contrast": 0.96,
+      "broadIlluminationRemoval": 0.45,
+      "wrap": {
+        "applied": true,
+        "bandPixelsPerSide": 6,
+        "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+        "skipThresholdMeanAbsoluteRgb": 1.5,
+        "before": {
+          "horizontal": {
+            "meanAbsoluteRgb": 5.649089,
+            "p95AbsoluteRgb": 14.0,
+            "maximumAbsoluteRgb": 23
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 5.102865,
+            "p95AbsoluteRgb": 13.0,
+            "maximumAbsoluteRgb": 26
+          }
+        },
+        "after": {
+          "horizontal": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          }
+        },
+        "changedPixelFraction": 0.032917,
+        "maximumChangeOutsideBand": 0,
+        "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+      }
+    },
+    {
+      "key": "forest",
+      "raw": {
+        "file": "source-art/maps/material-refinement-v2/raw/forest.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "1d2c2916d9b4aa3361828dbf59d75e63756162f20186e7b82f753ee2911089b4",
+        "bytes": 2975658
+      },
+      "runtime": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/forest-v2.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "4a40ceae708a38e4c90a2b152effa22f3ae821e809230ec5f06308cf9f8013df",
+        "bytes": 478562
+      },
+      "meanRgbTarget": [
+        116,
+        123,
+        76
+      ],
+      "contrast": 0.98,
+      "broadIlluminationRemoval": 0.45,
+      "wrap": {
+        "applied": true,
+        "bandPixelsPerSide": 6,
+        "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+        "skipThresholdMeanAbsoluteRgb": 1.5,
+        "before": {
+          "horizontal": {
+            "meanAbsoluteRgb": 7.809245,
+            "p95AbsoluteRgb": 21.0,
+            "maximumAbsoluteRgb": 47
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 7.600911,
+            "p95AbsoluteRgb": 21.0,
+            "maximumAbsoluteRgb": 62
+          }
+        },
+        "after": {
+          "horizontal": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          }
+        },
+        "changedPixelFraction": 0.036709,
+        "maximumChangeOutsideBand": 0,
+        "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+      }
+    },
+    {
+      "key": "wet-earth",
+      "raw": {
+        "file": "source-art/maps/material-refinement-v2/raw/wet-earth.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "6e2020a134488195fcbff9ab38818296ea024043ba50c0b098343ec0c77e0abc",
+        "bytes": 2593536
+      },
+      "runtime": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/wet-earth-v2.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "5b57d6c6081425317ce7ed09b87862ef3efe3cdce446efe12c08b3b1c1920b40",
+        "bytes": 393820
+      },
+      "meanRgbTarget": [
+        108,
+        122,
+        80
+      ],
+      "contrast": 0.96,
+      "broadIlluminationRemoval": 0.45,
+      "wrap": {
+        "applied": true,
+        "bandPixelsPerSide": 6,
+        "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+        "skipThresholdMeanAbsoluteRgb": 1.5,
+        "before": {
+          "horizontal": {
+            "meanAbsoluteRgb": 4.396484,
+            "p95AbsoluteRgb": 11.0,
+            "maximumAbsoluteRgb": 25
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 4.848307,
+            "p95AbsoluteRgb": 13.0,
+            "maximumAbsoluteRgb": 28
+          }
+        },
+        "after": {
+          "horizontal": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          }
+        },
+        "changedPixelFraction": 0.033424,
+        "maximumChangeOutsideBand": 0,
+        "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+      }
+    },
+    {
+      "key": "bedrock",
+      "raw": {
+        "file": "source-art/maps/material-refinement-v2/raw/bedrock.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "7657e539f00adda575b13da59798a51569fa73715086c005ef4763d46a02f3b3",
+        "bytes": 3009329
+      },
+      "runtime": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/bedrock-v2.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "ef5d23c32241a5421fafc0e1bf866e4bc4ad6bb55041676d760e11c84fb69f63",
+        "bytes": 432824
+      },
+      "meanRgbTarget": [
+        145,
+        148,
+        136
+      ],
+      "contrast": 0.95,
+      "broadIlluminationRemoval": 0.45,
+      "wrap": {
+        "applied": true,
+        "bandPixelsPerSide": 6,
+        "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+        "skipThresholdMeanAbsoluteRgb": 1.5,
+        "before": {
+          "horizontal": {
+            "meanAbsoluteRgb": 7.634766,
+            "p95AbsoluteRgb": 19.0,
+            "maximumAbsoluteRgb": 42
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 7.807292,
+            "p95AbsoluteRgb": 20.0,
+            "maximumAbsoluteRgb": 48
+          }
+        },
+        "after": {
+          "horizontal": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          }
+        },
+        "changedPixelFraction": 0.035076,
+        "maximumChangeOutsideBand": 0,
+        "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+      }
+    },
+    {
+      "key": "cobble",
+      "raw": {
+        "file": "source-art/maps/material-refinement-v2/raw/cobble.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "5a89092265e2ae56eda8b5ca4061a8d0f1561200627b0d326e7d7b82fd3740cf",
+        "bytes": 3091693
+      },
+      "runtime": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/cobble-v2.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "ba4117456c0f28910b198ee65ca5820a4eabca1141888104b712ac1db7dc5e1d",
+        "bytes": 480752
+      },
+      "meanRgbTarget": [
+        151,
+        150,
+        136
+      ],
+      "contrast": 0.94,
+      "broadIlluminationRemoval": 0.45,
+      "wrap": {
+        "applied": true,
+        "bandPixelsPerSide": 6,
+        "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+        "skipThresholdMeanAbsoluteRgb": 1.5,
+        "before": {
+          "horizontal": {
+            "meanAbsoluteRgb": 9.334635,
+            "p95AbsoluteRgb": 25.0,
+            "maximumAbsoluteRgb": 62
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 11.98763,
+            "p95AbsoluteRgb": 33.0,
+            "maximumAbsoluteRgb": 63
+          }
+        },
+        "after": {
+          "horizontal": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          }
+        },
+        "changedPixelFraction": 0.036701,
+        "maximumChangeOutsideBand": 0,
+        "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+      }
+    },
+    {
+      "key": "flagstone",
+      "raw": {
+        "file": "source-art/maps/material-refinement-v2/raw/flagstone.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "07c39a4dfe9224c09c6db8929148e8e564aa9925c7ca948046fdbed044cf2c44",
+        "bytes": 2735166
+      },
+      "runtime": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/flagstone-v2.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "2ff33b8958d782ba38bfeafe38e49de6238f88cc27ea2ac6651572941facc1a5",
+        "bytes": 401520
+      },
+      "meanRgbTarget": [
+        146,
+        148,
+        137
+      ],
+      "contrast": 0.96,
+      "broadIlluminationRemoval": 0.45,
+      "wrap": {
+        "applied": true,
+        "bandPixelsPerSide": 6,
+        "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+        "skipThresholdMeanAbsoluteRgb": 1.5,
+        "before": {
+          "horizontal": {
+            "meanAbsoluteRgb": 6.682943,
+            "p95AbsoluteRgb": 19.0,
+            "maximumAbsoluteRgb": 40
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 23.705078,
+            "p95AbsoluteRgb": 52.0,
+            "maximumAbsoluteRgb": 80
+          }
+        },
+        "after": {
+          "horizontal": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          }
+        },
+        "changedPixelFraction": 0.035667,
+        "maximumChangeOutsideBand": 0,
+        "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+      }
+    },
+    {
+      "key": "wood",
+      "raw": {
+        "file": "source-art/maps/material-refinement-v2/raw/wood.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "97c7fc4673dda6c61c7e9211b790c4187c331b0c757e69ca0eb17bcf7b836c93",
+        "bytes": 2323931
+      },
+      "runtime": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/wood-v2.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "200dc80c7d9e51bd699194463e6f5f4f60226a7243c730dc4c01138840228c5f",
+        "bytes": 341126
+      },
+      "meanRgbTarget": [
+        136,
+        116,
+        83
+      ],
+      "contrast": 0.98,
+      "broadIlluminationRemoval": 0.45,
+      "wrap": {
+        "applied": true,
+        "bandPixelsPerSide": 6,
+        "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+        "skipThresholdMeanAbsoluteRgb": 1.5,
+        "before": {
+          "horizontal": {
+            "meanAbsoluteRgb": 6.419922,
+            "p95AbsoluteRgb": 16.0,
+            "maximumAbsoluteRgb": 29
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 3.866536,
+            "p95AbsoluteRgb": 10.0,
+            "maximumAbsoluteRgb": 19
+          }
+        },
+        "after": {
+          "horizontal": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          }
+        },
+        "changedPixelFraction": 0.034409,
+        "maximumChangeOutsideBand": 0,
+        "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+      }
+    },
+    {
+      "key": "water",
+      "raw": {
+        "file": "source-art/maps/material-refinement-v2/raw/water.png",
+        "dimensions": [
+          1254,
+          1254
+        ],
+        "mode": "RGB",
+        "sha256": "fc21ea01d69ad5a733a48b1741ae503b7e3e92a3e5f550c5bc9381a5e432be0f",
+        "bytes": 1574595
+      },
+      "runtime": {
+        "file": "src/cocos/assets/resources/flat2d/terrain-v1/water-v2.png",
+        "dimensions": [
+          512,
+          512
+        ],
+        "mode": "RGB",
+        "sha256": "570e152e0d96b86f13673c1101b5715610ad89b7a8c9907182633d8c0003987d",
+        "bytes": 242921
+      },
+      "meanRgbTarget": [
+        61,
+        134,
+        145
+      ],
+      "contrast": 0.92,
+      "broadIlluminationRemoval": 0.45,
+      "wrap": {
+        "applied": true,
+        "bandPixelsPerSide": 6,
+        "method": "opposing mirrored edge mix, weight 1 at border tapering to 0 at sixth pixel",
+        "skipThresholdMeanAbsoluteRgb": 1.5,
+        "before": {
+          "horizontal": {
+            "meanAbsoluteRgb": 2.059245,
+            "p95AbsoluteRgb": 5.25,
+            "maximumAbsoluteRgb": 11
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 2.539714,
+            "p95AbsoluteRgb": 7.0,
+            "maximumAbsoluteRgb": 16
+          }
+        },
+        "after": {
+          "horizontal": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          },
+          "vertical": {
+            "meanAbsoluteRgb": 0.0,
+            "p95AbsoluteRgb": 0.0,
+            "maximumAbsoluteRgb": 0
+          }
+        },
+        "changedPixelFraction": 0.027561,
+        "maximumChangeOutsideBand": 0,
+        "artMeaning": "edge pixel continuity only; shape continuity and repetition require visual review"
+      }
+    }
+  ]
+}

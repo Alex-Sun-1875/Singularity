@@ -1,0 +1,32 @@
+{
+  "date": "2026-11-17",
+  "status": "implemented",
+  "designApproval": "用户明确选择灰蓝，并要求装备和技能的选中状态均按该方案修改。",
+  "palette": "slate-blue",
+  "sharedImplementation": [
+    "FeedbackPalette.selection.surface/edge/highlight",
+    "PreparationTheme selection-row/selection-inlay skins and combatSkillRow layout",
+    "PreparationControls.rowBackground",
+    "EquipmentIconFrame"
+  ],
+  "behavior": [
+    "灰蓝选中内衬和细内边取代亮金双框与额外金色选中线。",
+    "品质色与已穿戴徽记独立，主手槽不再无条件选中；显式槽位筛选仍标识当前槽位。",
+    "佣兵长剑缩略图及详情烟色中性化，其他装备和技能图标身份保留。",
+    "技能图标、名称、类型与等级在行框内对齐；保留原行中心距、触控尺寸和选择逻辑。"
+  ],
+  "validation": {
+    "typescript": "npm run check passed",
+    "webBuild": "Cocos concept-2d test export passed",
+    "normalProfileMarker": "singularity-build-profile-v2-test-f6e5cdff201d",
+    "normalProfileAudit": "Passed on the final shared concept-2d output after concurrent build completion; no development overrides.",
+    "browserViewports": ["1920x1080", "844x390 at 3x", "932x430 at 3x"],
+    "browserUi": "All three passed: actual item target changes, unchanged equipped weapon, unique skill selection, close/reopen preservation, and row content containment.",
+    "fixture": "Fresh isolated browser contexts; W03 supplied in memory for selection checks; save callback disabled; opening story skipped through the normal action and allowed to finish.",
+    "evidence": "test-results/selection-slate-blue-v1/browser-review.json",
+    "visualEvidence": "test-results/selection-slate-blue-v1/runtime-overview.jpg",
+    "tapTapDevice": "not_validated"
+  },
+  "generation": "No new image generation during integration; deterministic Pillow assets from approved material and common palette.",
+  "releaseChangeId": "20261117-slate-blue-equipment-skill-selection-v1"
+}

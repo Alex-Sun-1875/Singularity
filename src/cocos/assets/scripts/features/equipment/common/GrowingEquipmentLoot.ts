@@ -6,6 +6,7 @@ import {FIELD_DISCOVERIES} from '../../campaign/data/FieldQuests';
 import {fieldQuestText as text} from '../../campaign/locales/FieldQuestText';
 import {chapterForArea} from '../../journey/data/ChapterJourney';
 import {equipmentRandomWord} from './EquipmentDice';
+import {validRedemptionEquipmentSource} from '../../redemption/common/RedemptionLedger';
 
 interface Host {state():GameState;grant(item:string,count:number,source:string,at?:Point):void;changed():void;emit(type:string,text?:string,extra?:Record<string,unknown>):void}
 export function growingRandom(seed:number,key:string){let n=seed;for(let i=0;i<key.length;i++)n=(n*131+key.charCodeAt(i))%2147483647;return ((n+1)*48271)%2147483647;}
@@ -48,6 +49,7 @@ export function validGrowingSource(s:GameState,id:string,source:string):boolean 
 }
 export function validGrowingDropSource(s:GameState,id:string,source:string):boolean {
  if(!GROWING_EQUIPMENT[id])return false;
+ if(source.startsWith('redeem:'))return validRedemptionEquipmentSource(s,id,source);
  if(source.startsWith('boss:v3:'))return validBossEquipmentSource(s,id,source);
  if(source.startsWith('campaign:')){
   const q=GROWING_QUESTS.find(q=>`campaign:${q.id}`===source);return !!q&&[...q.items??[],...q.choiceItems??[]].includes(id)&&s.receipts[source]===true&&(q.requires??[]).every(f=>s.flags[f])&&(q.sets??[]).every(f=>s.flags[f]);

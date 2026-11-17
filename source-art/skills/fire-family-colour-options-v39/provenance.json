@@ -1,0 +1,474 @@
+{
+  "status": "design-options-awaiting-user-choice",
+  "runtimeModified": false,
+  "method": "deterministic masked RGB colour grading of existing native captures",
+  "newGenerativeImages": false,
+  "referenceSha256": "1ce0639f9c2636774a7b93c8a6b8c7ed89ccedbd8b1aace018085496276735d0",
+  "referenceCrop": [
+    430,
+    1410,
+    940,
+    1760
+  ],
+  "profiles": [
+    {
+      "id": "A",
+      "name": "熔金炽橙",
+      "note": "浓橙火身 · 明黄亮芯",
+      "recommend": true,
+      "stops": [
+        "#A72808",
+        "#E84B06",
+        "#FF7A0B",
+        "#FFBB29",
+        "#FFF18C"
+      ],
+      "gain": 1.18,
+      "gamma": 1.02
+    },
+    {
+      "id": "B",
+      "name": "赤焰熔芯",
+      "note": "赤红外焰 · 明暗反差更强",
+      "recommend": false,
+      "stops": [
+        "#721707",
+        "#C93207",
+        "#F45507",
+        "#FF9F1A",
+        "#FFE778"
+      ],
+      "gain": 1.18,
+      "gamma": 1.06
+    },
+    {
+      "id": "C",
+      "name": "琥珀金焰",
+      "note": "琥珀橙底 · 金黄亮纹",
+      "recommend": false,
+      "stops": [
+        "#9B3D07",
+        "#D95C06",
+        "#F98A0B",
+        "#FFC544",
+        "#FFF7A1"
+      ],
+      "gain": 1.14,
+      "gamma": 0.99
+    }
+  ],
+  "sources": [
+    {
+      "id": "FIR_02",
+      "name": "陨星天坠",
+      "detail": "地火与法阵",
+      "path": "source-art/skills/meteor-translucent-fill-v37/final-empty-r1/media/impact-0250ms.jpg",
+      "crop": [
+        0,
+        390,
+        1140,
+        1190
+      ],
+      "sha256": "5e6036df9b8da76783fa11d87fea54daef59fd2502b01c74e936ae7c648ed5b5"
+    },
+    {
+      "id": "FIR_05",
+      "name": "焚焰火域",
+      "detail": "连续火面",
+      "path": "src/.tmp/fire-field-density-v38/after-stable/empty/045.png",
+      "crop": [
+        133,
+        222,
+        575,
+        613
+      ],
+      "sha256": "21e7a6489a56311f0f99520be19370c44bb66c079c2b981db442d13cbce32cfc"
+    },
+    {
+      "id": "FIR_01",
+      "name": "赤焰枪",
+      "detail": "集中亮芯与细焰",
+      "path": "source-art/skills/fire-reference-alignment-v32/regression-r1/media/FIR_01-projectile-native.jpg",
+      "crop": [
+        895,
+        645,
+        1090,
+        728
+      ],
+      "sha256": "cbdd0bde7661a95fbaa806e4efe9f9c8a6c8af7aee1577a3807dd57507ecef8a"
+    },
+    {
+      "id": "FIR_04",
+      "name": "烈焰喷流",
+      "detail": "喷焰与符纹",
+      "path": "src/.tmp/fire-distinct-runtime-v30/final-r1/FIR_04/045.jpg",
+      "crop": [
+        985,
+        570,
+        1185,
+        790
+      ],
+      "protect": [
+        [
+          1097,
+          570
+        ],
+        [
+          1185,
+          570
+        ],
+        [
+          1185,
+          760
+        ],
+        [
+          1143,
+          767
+        ],
+        [
+          1124,
+          725
+        ],
+        [
+          1115,
+          688
+        ],
+        [
+          1118,
+          650
+        ],
+        [
+          1100,
+          620
+        ]
+      ],
+      "sha256": "c360d3cd48d54cefc5b7f8abc1711c0014fd517f27ce9b9c15bcfa63a0a18236"
+    },
+    {
+      "id": "FIR_03",
+      "name": "焰心护盾",
+      "detail": "护罩边缘与纹样",
+      "path": "src/.tmp/fire-distinct-runtime-v30/final-r1/FIR_03/045.jpg",
+      "crop": [
+        980,
+        390,
+        1325,
+        865
+      ],
+      "protect": [
+        [
+          1138,
+          490
+        ],
+        [
+          1172,
+          495
+        ],
+        [
+          1201,
+          534
+        ],
+        [
+          1216,
+          580
+        ],
+        [
+          1200,
+          650
+        ],
+        [
+          1195,
+          719
+        ],
+        [
+          1191,
+          799
+        ],
+        [
+          1159,
+          822
+        ],
+        [
+          1117,
+          802
+        ],
+        [
+          1114,
+          757
+        ],
+        [
+          1138,
+          681
+        ],
+        [
+          1126,
+          623
+        ],
+        [
+          1100,
+          595
+        ],
+        [
+          1054,
+          566
+        ],
+        [
+          1040,
+          470
+        ],
+        [
+          1054,
+          468
+        ],
+        [
+          1085,
+          533
+        ],
+        [
+          1095,
+          535
+        ],
+        [
+          1126,
+          540
+        ]
+      ],
+      "sha256": "1fac3ebbebe91fdc2328c3691fc9f97a7a7260436f61a4752c5169180f9ded51"
+    }
+  ],
+  "processing": {
+    "shapeDensityTiming": "same source frame and crop in each option",
+    "sharedColourContract": "discard old skill hues; use one luminance-ranked ramp and normalized emission across all five effects",
+    "floorGrid": "warm-colour mask excludes the cool floor/grid",
+    "shieldPlayer": "dark character pixels protected inside source-coordinate polygons; bright foreground flame still graded",
+    "hudIcons": "existing originals, not recoloured",
+    "runtimeValidation": "not performed: candidates only"
+  },
+  "pixelChecks": [
+    {
+      "option": "A",
+      "skill": "FIR_02",
+      "zeroMaskPixelsUnchanged": true,
+      "maskedPixels": 659924,
+      "emissionNormalization": 0.9466019417475728,
+      "sourceHueDiscarded": true,
+      "sharedRampKnots": [
+        0,
+        0.2,
+        0.9,
+        0.985,
+        1
+      ]
+    },
+    {
+      "option": "B",
+      "skill": "FIR_02",
+      "zeroMaskPixelsUnchanged": true,
+      "maskedPixels": 659924,
+      "emissionNormalization": 0.9466019417475728,
+      "sourceHueDiscarded": true,
+      "sharedRampKnots": [
+        0,
+        0.2,
+        0.9,
+        0.985,
+        1
+      ]
+    },
+    {
+      "option": "C",
+      "skill": "FIR_02",
+      "zeroMaskPixelsUnchanged": true,
+      "maskedPixels": 659924,
+      "emissionNormalization": 0.9466019417475728,
+      "sourceHueDiscarded": true,
+      "sharedRampKnots": [
+        0,
+        0.2,
+        0.9,
+        0.985,
+        1
+      ]
+    },
+    {
+      "option": "A",
+      "skill": "FIR_05",
+      "zeroMaskPixelsUnchanged": true,
+      "maskedPixels": 58578,
+      "emissionNormalization": 1.2420382165605095,
+      "sourceHueDiscarded": true,
+      "sharedRampKnots": [
+        0,
+        0.2,
+        0.9,
+        0.985,
+        1
+      ]
+    },
+    {
+      "option": "B",
+      "skill": "FIR_05",
+      "zeroMaskPixelsUnchanged": true,
+      "maskedPixels": 58578,
+      "emissionNormalization": 1.2420382165605095,
+      "sourceHueDiscarded": true,
+      "sharedRampKnots": [
+        0,
+        0.2,
+        0.9,
+        0.985,
+        1
+      ]
+    },
+    {
+      "option": "C",
+      "skill": "FIR_05",
+      "zeroMaskPixelsUnchanged": true,
+      "maskedPixels": 58578,
+      "emissionNormalization": 1.2420382165605095,
+      "sourceHueDiscarded": true,
+      "sharedRampKnots": [
+        0,
+        0.2,
+        0.9,
+        0.985,
+        1
+      ]
+    },
+    {
+      "option": "A",
+      "skill": "FIR_01",
+      "zeroMaskPixelsUnchanged": true,
+      "maskedPixels": 4963,
+      "emissionNormalization": 1.059782608695652,
+      "sourceHueDiscarded": true,
+      "sharedRampKnots": [
+        0,
+        0.2,
+        0.9,
+        0.985,
+        1
+      ]
+    },
+    {
+      "option": "B",
+      "skill": "FIR_01",
+      "zeroMaskPixelsUnchanged": true,
+      "maskedPixels": 4963,
+      "emissionNormalization": 1.059782608695652,
+      "sourceHueDiscarded": true,
+      "sharedRampKnots": [
+        0,
+        0.2,
+        0.9,
+        0.985,
+        1
+      ]
+    },
+    {
+      "option": "C",
+      "skill": "FIR_01",
+      "zeroMaskPixelsUnchanged": true,
+      "maskedPixels": 4963,
+      "emissionNormalization": 1.059782608695652,
+      "sourceHueDiscarded": true,
+      "sharedRampKnots": [
+        0,
+        0.2,
+        0.9,
+        0.985,
+        1
+      ]
+    },
+    {
+      "option": "A",
+      "skill": "FIR_04",
+      "zeroMaskPixelsUnchanged": true,
+      "maskedPixels": 24286,
+      "emissionNormalization": 0.9069767441860465,
+      "sourceHueDiscarded": true,
+      "sharedRampKnots": [
+        0,
+        0.2,
+        0.9,
+        0.985,
+        1
+      ]
+    },
+    {
+      "option": "B",
+      "skill": "FIR_04",
+      "zeroMaskPixelsUnchanged": true,
+      "maskedPixels": 24286,
+      "emissionNormalization": 0.9069767441860465,
+      "sourceHueDiscarded": true,
+      "sharedRampKnots": [
+        0,
+        0.2,
+        0.9,
+        0.985,
+        1
+      ]
+    },
+    {
+      "option": "C",
+      "skill": "FIR_04",
+      "zeroMaskPixelsUnchanged": true,
+      "maskedPixels": 24286,
+      "emissionNormalization": 0.9069767441860465,
+      "sourceHueDiscarded": true,
+      "sharedRampKnots": [
+        0,
+        0.2,
+        0.9,
+        0.985,
+        1
+      ]
+    },
+    {
+      "option": "A",
+      "skill": "FIR_03",
+      "zeroMaskPixelsUnchanged": true,
+      "maskedPixels": 27419,
+      "emissionNormalization": 2.0,
+      "sourceHueDiscarded": true,
+      "sharedRampKnots": [
+        0,
+        0.2,
+        0.9,
+        0.985,
+        1
+      ]
+    },
+    {
+      "option": "B",
+      "skill": "FIR_03",
+      "zeroMaskPixelsUnchanged": true,
+      "maskedPixels": 27419,
+      "emissionNormalization": 2.0,
+      "sourceHueDiscarded": true,
+      "sharedRampKnots": [
+        0,
+        0.2,
+        0.9,
+        0.985,
+        1
+      ]
+    },
+    {
+      "option": "C",
+      "skill": "FIR_03",
+      "zeroMaskPixelsUnchanged": true,
+      "maskedPixels": 27419,
+      "emissionNormalization": 2.0,
+      "sourceHueDiscarded": true,
+      "sharedRampKnots": [
+        0,
+        0.2,
+        0.9,
+        0.985,
+        1
+      ]
+    }
+  ]
+}

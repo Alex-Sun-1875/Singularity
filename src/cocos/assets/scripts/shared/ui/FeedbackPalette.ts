@@ -2,8 +2,9 @@
 const P={ivory:'#EDE4CB',muted:'#AF9D85',red:'#F18E9F',enemy:'#C4332F',loss:'#DE9352',green:'#7BDEB4',cyan:'#83CDE6',amber:'#F0B666',gold:'#F7DA9D',fire:'#F7A765',lightning:'#A9B4FF',purple:'#C4A5ED',orange:'#F5A45D',dark:'#150F10'} as const;
 export const FEEDBACK_PALETTE={
  'text.normal':P.ivory,'text.preparation':'#FFF0C9','text.preparationAccent':'#F2CB82','text.secondary':P.muted,'text.disabled':P.muted,'text.outline':P.dark,'icon.normal':'#FFFFFF',
- 'control.disabled':'#120D0A',
+ 'control.disabled':'#120D0A','control.hover':'#DAAE65','control.pressed':'#120D0A',
  'state.selected':'#75C5B9','state.idle':P.ivory,'state.running':P.cyan,'state.paused':P.amber,'state.ready':P.gold,'state.success':P.green,'state.failure':P.red,'state.blocked':P.muted,
+ 'selection.surface':'#1A232E','selection.edge':'#71899D','selection.highlight':'#9BA9B3',
  'impact.core':'#FFF5DC','impact.metal':'#E4D3B0',
  'aim.range':'#E4D3B0','aim.edge':P.ivory,'aim.gold':'#C2AA79','aim.shadow':'#241C11','aim.highlight':'#FFF5DC',
  'resource.stamina':P.amber,'resource.focus':P.green,'resource.mana':P.cyan,

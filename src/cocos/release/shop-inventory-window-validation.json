@@ -1,0 +1,156 @@
+{
+  "date": "2026-11-17",
+  "version": "0.3.56",
+  "profile": "test",
+  "status": "Dedicated merchant inventory implemented and HTML touch/mouse verified. TapTap device pending.",
+  "reference": {
+    "source": "User attachment codex-clipboard-ba5beab3-0023-4792-bbe2-46b3d2393f58.png",
+    "use": "Red-box item inventory structure: own window, top filters, connected item grid and empty slots. Project fonts, material, shared metal border and input remain in use; no reference-game assets imported."
+  },
+  "changes": [
+    "TradeWindow owns a separate merchant header, wallet, backdrop and close target. No MenuPanel list or RpgPanel instance renders shop goods; shared RpgPanel.scroll is used only as a native scroll primitive.",
+    "ShopInventoryPanel renders equipment, supplies, gems and drill materials in one four-column inventory. Visible empty slots, owned counters, tiers and selected item share continuous grid lines. Top category/tier filters and price ordering replace the left directory and six management navigation tabs.",
+    "Selected item details scroll separately. Quantity1/5/10 and quoted confirmation remain fixed. Equipment keeps unique stock and quantity1. Prices, gem sources, code exception and persistence rules were not changed by this UI task.",
+    "Preload only the current merchant equipment and supply pictures through existing resource helpers. Frame ownership follows page preparation and root cleanup."
+  ],
+  "checks": {
+    "fullTypeScript": "passed",
+    "coreTypeScript": "passed",
+    "htmlBuild": "passed normal test concept-2d",
+    "metadata": "All added TypeScript files have Cocos metadata; old GemShopPanel source/meta removed; release IDs unique.",
+    "browserEvidence": "../test-results/shop-inventory-window-v1/web.json",
+    "cases": [
+      {
+        "viewport": [
+          844,
+          390
+        ],
+        "dpr": 3,
+        "engineMobile": true,
+        "standalone": {
+          "window": true,
+          "oldRpg": false,
+          "oldList": false,
+          "navigation": []
+        },
+        "minGridHit": [
+          76.5,
+          76.49999999999997
+        ],
+        "horizontalGap": 8.0,
+        "safeAreaFixture": {
+          "left": 44,
+          "right": 44,
+          "bottom": 21
+        },
+        "errors": []
+      },
+      {
+        "viewport": [
+          932,
+          430
+        ],
+        "dpr": 3,
+        "engineMobile": true,
+        "standalone": {
+          "window": true,
+          "oldRpg": false,
+          "oldList": false,
+          "navigation": []
+        },
+        "minGridHit": [
+          77,
+          77.00000000000001
+        ],
+        "horizontalGap": 8.000000000000028,
+        "safeAreaFixture": {
+          "left": 44,
+          "right": 44,
+          "bottom": 21
+        },
+        "errors": []
+      },
+      {
+        "viewport": [
+          1280,
+          720
+        ],
+        "dpr": 1,
+        "engineMobile": false,
+        "standalone": {
+          "window": true,
+          "oldRpg": false,
+          "oldList": false,
+          "navigation": []
+        },
+        "minGridHit": [
+          87.33333333333326,
+          87.33333333333326
+        ],
+        "horizontalGap": 8.0,
+        "safeAreaFixture": {
+          "left": 44,
+          "right": 44,
+          "bottom": 21
+        },
+        "errors": []
+      }
+    ],
+    "operations": [
+      "Native service directory navigation to live jeweler, level-one locked goods",
+      "Top category/tier filters; ascending/descending price order",
+      "Phone native touch drag scroll and inspection of last tier-II gem without purchase",
+      "Select stat and quantity five; spend1200, receive25 crystal units, save/restore matching balances",
+      "Open cultivation and source details, return to live Brann fixture",
+      "Buy five health supplies and one unique equipment; verify restore and duplicate refusal",
+      "Close removes the trade window and its input overlay"
+    ],
+    "visualReview": [
+      "844x390 purchase: visible merchant name, filtered goods, connected empty slots, selected quantity and fixed confirmation.",
+      "932x430 constrained safe area: all window content and target bounds within simulated44 side and21 bottom insets.",
+      "1280x720 desktop: three visible grid rows, readable item/preview detail and all trade controls."
+    ]
+  },
+  "fixtures": "Isolated browser storage. Level16/gold5000 and Brann position are explicit UI fixtures. Lina service navigation is native. This is not natural progression/balance evidence or physical-device/platform verification.",
+  "packageProducedByThisUiTask": false,
+  "uploadedByThisUiTask": false,
+  "taptapRuntimeVerified": false,
+  "physicalDeviceVerified": false,
+  "pending": [
+    "TapTap actual hardware safe area/capsule, device touch and lifecycle/resource validation."
+  ],
+  "hashes": [
+    {
+      "path": "assets/scripts/features/trading/runtime/TradeWindow.ts",
+      "sha256": "e04de073f2d64a060e1045495da95c5dc2204161f0ebae3a34fb505c3b7454fb"
+    },
+    {
+      "path": "assets/scripts/features/trading/runtime/ShopInventoryPanel.ts",
+      "sha256": "f13112731fa3c561d1d4c9b2f8e0a33fb1cf0f23a7a4c5a4d5557cd14863a51d"
+    },
+    {
+      "path": "assets/scripts/features/trading/runtime/ShopPanel.ts",
+      "sha256": "675f54c1a7d582cc7cb2b487b889b516c4400bea36a6830d8cda2a741e87c8b0"
+    },
+    {
+      "path": "assets/scripts/features/trading/locales/TradingText.ts",
+      "sha256": "ee723e18b7fdedc059533acd2e17506c2804770e2a6796dd2a9f8573efef995b"
+    },
+    {
+      "path": "assets/scripts/features/gems/runtime/GemIcon.ts",
+      "sha256": "d68c37901625af4d4e59819bf55961105d5b9b3f54d39ee29553c82b17e9fed8"
+    },
+    {
+      "path": "assets/scripts/app/PreparationResources.ts",
+      "sha256": "90a7d29be9e17570fec2021c5620697fdccf188973f18ec691b6eea974d17022"
+    },
+    {
+      "path": "assets/scripts/app/ChapterGame.ts",
+      "sha256": "e07097caaec37b60004a4a251f0f85fc1c37418b03b9a90e0caea678e5463849"
+    },
+    {
+      "path": "test-results/shop-inventory-window-v1/web.json",
+      "sha256": "4293ca5f086c089b0fefbb8d49a9b1102531e26f42852e49588556542992080b"
+    }
+  ]
+}

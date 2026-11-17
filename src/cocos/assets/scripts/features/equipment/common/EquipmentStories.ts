@@ -24,6 +24,7 @@ const SHARED_LEGEND_SOURCE:Record<string,EquipmentMessageKey>={
 export function equipmentStory(item:ItemDef):{lore:string;source:string}{
  const stage=/^LC([1-8])_([TB])_/.exec(item.lifecycleGroup??''),story=NAMED_STORIES[item.id]??(stage?STAGE_STORIES[stage[1]+stage[2]]:undefined);
  const lore=story?text(story):'';
+ if(item.acquisitionSource)return {lore,source:item.acquisitionSource};
  if(item.id==='DG_A01')return {lore,source:text('source.royalDusk')};
  if(item.id.startsWith('DG_A'))return {lore,source:text('source.artifactPool')};
  const legend=SHARED_LEGEND_SOURCE[item.id];if(legend)return {lore,source:text(legend)};

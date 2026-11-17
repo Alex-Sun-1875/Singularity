@@ -1,0 +1,6163 @@
+{
+  "compiledSha256": "e378918c3118df36a6cc10ca6e93e5ecec6d817f001a2e85f7824860c51f1d54",
+  "sourceHashes": {
+    "SkillFireSprites.ts": "7e0c39c949709ae1527eeac00a1448d2e83796ce78512b504d88faf674df8b84",
+    "FireImpactEffects.ts": "2ec43c66c5cc0cfaf73cd0e56ec87c0b853762a9a598a9dfc7c075a420db5738",
+    "FireFieldEffects.ts": "39239a5a91e5d7bded3dca922d6f8c6e52347e888e2c406427a6cd1d36c57f58",
+    "SkillMeteorBody.ts": "307fa79e034c9abf845d7e76dcb0e6037719d13aa1ef8bd1d01002757d6d21d3",
+    "FireGroundEffects.ts": "fb3b4297611499683a25dd237c25368b28127f545883fa71ae02e9a77036bf4e",
+    "NativeSkillVfx.ts": "19672b3c3f9e0971f2c7cd554eb97e21fb2e490596f2593fbd821402193b6bef",
+    "Effects.ts": "e4e96c70aa1f85b96f5ceeee154a37a48bba521a8ec79a804c8862c40a9ed7e8",
+    "core/GameSession.ts": "b93b7f9c7a82111d966339c4a0e11dbbe6cf057ad75152fac025cd377711648b",
+    "core/Contracts.ts": "3bea461ec1434a1ffd550e5e3b1e43622ce237968117938319b4f2be0381a082",
+    "features/combat/data/PureSkills.ts": "b48d35461df7bba0a64ba9feab12978755417856932a9ceb283b6aa5121333ee",
+    "features/combat/common/PureCombat.ts": "1aeca9fd35403e7ed83f479d77cfa524a8d725e212b11321c28a53a2a034c681",
+    "features/combat/common/CombatAccuracy.ts": "ebbe49f99c4ec854e22c08065f4cd5dffdb675ea24e355806dd41e357ddc9654",
+    "features/equipment/common/EquipmentDice.ts": "0237853dbe68fe9bf5dcbeec83d42f42d0e2098644edc9b64ef18958d43d2037",
+    "features/debug/common/TrainingRange.ts": "ccd8e6ed1347e3fb245cbdee7ee33bb76ac71515da8878ccaf386e18f4aac2a3",
+    "features/progression/data/CampaignProgression.ts": "eddf253554596dc5ab502ef7bed5fddaa8ec30142ec6a7854d24eaf5be0bbb90",
+    "features/progression/data/CampaignExperience.ts": "38956d9d3cec796ddc37153a3bb1ed90253b2c229c6e837ee87f18ad833130b0",
+    "features/progression/common/Progression.ts": "ceb92c33d22a5fa62f0aa134cc4c0f3d15cd37dae0e6ac6b4520e17882061c3b",
+    "shared/BuildProfile.ts": "cb8ce6f59e8c1a11ede9eeac81ba559073adee79671c0582d46d9da9a90f8a07"
+  },
+  "buildProvenance": {
+    "sourceBuild": "src/cocos/build/concept-2d",
+    "servedBuild": "src/.tmp/meteor-v35-frozen-build-e378918c3118-1794901854001780200",
+    "snapshotPath": "src/.tmp/meteor-v35-frozen-build-e378918c3118-1794901854001780200",
+    "mode": "frozen-build-snapshot",
+    "sourceBuildLockPresentAtCaptureStart": false,
+    "sourceHashSampling": "Current workspace files at recorder launch; compiled snapshot provenance is the root copy proof plus served main/resource hashes.",
+    "snapshotProofIndex": "source-art/skills/meteor-complete-sigil-v35/final-r1/served-build-snapshot.json",
+    "snapshotProofIndexSha256": "4bb6a7295987129b67f524d2dca231414156872b0fa7fbbe8e14e3d476b59931",
+    "copyManifest": "src/.tmp/meteor-v35-frozen-build-e378918c3118-1794901854001780200.json",
+    "copyManifestSha256": "c4df3ece5032343205dfc534ea58695739c3d2905b00fddc4d08fe1c3e45ed83"
+  },
+  "actualCompiledBuildProfile": {
+    "servedMain": "src/.tmp/meteor-v35-frozen-build-e378918c3118-1794901854001780200/assets/main/index.27434.js",
+    "compiledSha256": "e378918c3118df36a6cc10ca6e93e5ecec6d817f001a2e85f7824860c51f1d54",
+    "compiledLiteral": "{schemaVersion:2,name:\"test\",marker:\"singularity-build-profile-v2-test-8aaeb3cc750c\",noSkillCooldown:!1,monsterExperienceMultiplier:1,guaranteedBossHighTierLoot:!1,developmentTools:!1,unlimitedDailyExperience:!0,storagePrefix:\"\"}",
+    "actualProfile": {
+      "schemaVersion": 2,
+      "name": "test",
+      "marker": "singularity-build-profile-v2-test-8aaeb3cc750c",
+      "noSkillCooldown": false,
+      "monsterExperienceMultiplier": 1,
+      "guaranteedBossHighTierLoot": false,
+      "developmentTools": false,
+      "unlimitedDailyExperience": true,
+      "storagePrefix": ""
+    },
+    "qualification": "Read from the frozen served bundle. This task checks training-range VFX and actual casts, not campaign growth/balance acceptance. Concurrent profile flags are recorded as compiled and are never changed to force normal-rule claims."
+  },
+  "artSourceEvidence": {
+    "declaration": "Cloud-generated design source, calculated material samples and actual native captures are separate evidence categories.",
+    "files": [
+      {
+        "path": "source-art/skills/meteor-complete-sigil-v35/seal/cloud-complete-fire-sigil.png",
+        "sha256": "5ac98e948709f17c50168949d7d30a67dab50aa5d80d128d03f0227222c88b06",
+        "bytes": 1901923,
+        "kind": "cloud-generated-source-not-native"
+      },
+      {
+        "path": "source-art/skills/meteor-complete-sigil-v35/seal/cloud-generation.json",
+        "sha256": "22310ae456ae4cd4c3423729d3f8fcfd9e5db9538bf389e88f2eb9d6d2625a1f",
+        "bytes": 1048,
+        "kind": "cloud-generation-provenance"
+      },
+      {
+        "path": "source-art/skills/meteor-complete-sigil-v35/seal/cloud-refinement-prompt.txt",
+        "sha256": "5983b53c8ef4ed96bde8d6a0ddf9d5c038ff78dc17b64f7be95c1fde2f4be8e6",
+        "bytes": 2306,
+        "kind": "cloud-generation-prompt"
+      },
+      {
+        "path": "source-art/skills/meteor-complete-sigil-v35/seal/provenance.json",
+        "sha256": "568c8f7aaa9f4c2cced6530ab86b633c02db2401aa757342d8f84d8c7a11517b",
+        "bytes": 7394,
+        "kind": "engineering-material-provenance"
+      }
+    ],
+    "generationTool": "OpenAI image_gen built-in cloud tool",
+    "localInference": false
+  },
+  "stableBuildDuringCapture": true,
+  "shaderAssetEvidence": "shader-asset-evidence.json",
+  "emptyGround": false,
+  "nativeCanvas": [
+    2560,
+    1272
+  ],
+  "frames": 270,
+  "seconds": 9,
+  "fps": 30,
+  "defaultCameraAndCompleteHUDInNativeVideo": true,
+  "journeyStart": {
+    "level": 1,
+    "totalXp": 0,
+    "area": "S01-T1",
+    "seed": 1753068835,
+    "sequence": 0,
+    "temporaryMax": false,
+    "freshBrowserContext": true,
+    "menu": "title"
+  },
+  "journeyRestoration": {
+    "sessionRestored": true,
+    "level": 1,
+    "progressionUnchanged": true,
+    "equipmentUnchanged": true,
+    "trainingRangeAbsent": true
+  },
+  "temporaryRangeCharacterLevel": 80,
+  "runtimeRangeMaxLevel": 80,
+  "progressionContractEvidence": null,
+  "actualResults": {
+    "casts": 1,
+    "releases": 1,
+    "hits": 4,
+    "damage": 812,
+    "positiveHitEvents": 4,
+    "hitEventDamage": 812.0,
+    "misses": 1,
+    "criticalHits": 0,
+    "maxCooldown": 11.983333333333333,
+    "peakActiveFireRecords": 3,
+    "peakReportedImpactHeight": 2.4798839988062387,
+    "peakReportedImpactVertices": 884,
+    "peakReportedFrontRadius": 3.8,
+    "peakReportedLayers": 1,
+    "peakReportedLayerHeight": 2.5248839988062386,
+    "clearedAtEnd": true
+  },
+  "gameplayComparison": {
+    "baselineDirectory": "source-art\\skills\\meteor-ignition-glow-v34\\final-r1",
+    "baselineArtStatus": "v34-before-complete-sigil-and-lifecycle-refinement",
+    "baselineCompiledSha256": "8e4fb722c097d51044db53879b740ba7da6aa3320fd806ca863c52f6d23d8dd7",
+    "sameIndependentSkillSequence": true,
+    "numbersEqual": true,
+    "before": {
+      "casts": 1,
+      "releases": 1,
+      "hits": 4,
+      "damage": 812,
+      "positiveHitEvents": 4,
+      "misses": 1,
+      "criticalHits": 0,
+      "maxCooldown": 11.983333333333333
+    },
+    "after": {
+      "casts": 1,
+      "releases": 1,
+      "hits": 4,
+      "damage": 812,
+      "positiveHitEvents": 4,
+      "misses": 1,
+      "criticalHits": 0,
+      "maxCooldown": 11.983333333333333
+    },
+    "beforeCharacterLevel": 80,
+    "afterCharacterLevel": 80,
+    "sameCharacterLevel": true,
+    "sourceHashDifferences": {
+      "FireGroundEffects.ts": {
+        "before": "177f744723d3506741eac64a74ef0dc73c5a975db0907b0cd8499a63155426d7",
+        "after": "fb3b4297611499683a25dd237c25368b28127f545883fa71ae02e9a77036bf4e"
+      },
+      "NativeSkillVfx.ts": {
+        "before": "63ca88b6d8ac645a24caff74e1a27426093d3411cccc44554b6dea953d09eab5",
+        "after": "19672b3c3f9e0971f2c7cd554eb97e21fb2e490596f2593fbd821402193b6bef"
+      },
+      "core/GameSession.ts": {
+        "before": "162f3498fafc731ad8283a08e0399e71cb602daffe986956c59e6355a922ce62",
+        "after": "b93b7f9c7a82111d966339c4a0e11dbbe6cf057ad75152fac025cd377711648b"
+      },
+      "features/combat/common/PureCombat.ts": {
+        "before": "86e2114a103217bc3295287d3462189cc66e3c7112ccb087ec714f63492e5d40",
+        "after": "1aeca9fd35403e7ed83f479d77cfa524a8d725e212b11321c28a53a2a034c681"
+      },
+      "features/progression/data/CampaignProgression.ts": {
+        "before": "c07134128f12b7cee61ad0b68a667bfe776cd5e42de89dc6006e58b9c2429307",
+        "after": "eddf253554596dc5ab502ef7bed5fddaa8ec30142ec6a7854d24eaf5be0bbb90"
+      },
+      "features/progression/data/CampaignExperience.ts": {
+        "before": "2325020f94e9a1af05d1347a78ff791ea91eccfa6260152f811cd11bdd952533",
+        "after": "38956d9d3cec796ddc37153a3bb1ed90253b2c229c6e837ee87f18ad833130b0"
+      },
+      "shared/BuildProfile.ts": {
+        "before": "e7eb54c5e7dcd69823d02899f2f35b43080f78378e4b48ec65544703e8880768",
+        "after": "cb8ce6f59e8c1a11ede9eeac81ba559073adee79671c0582d46d9da9a90f8a07"
+      }
+    },
+    "sameLevelDifferenceReviewRequired": false,
+    "qualification": "Same isolated training level and equal recorded event totals.",
+    "sourceHashQualification": "Workspace source hashes sampled at launch are not claimed to prove a compiled rules diff by themselves. The served frozen main/resources and root build/copy provenance identify the actual recording payload."
+  },
+  "trajectoryTiming": {
+    "castTime": 0.6166666666666669,
+    "impactTime": 1.4499999999999997,
+    "resolvedWindup": 0.8333333333333328,
+    "firstActiveMeteorTime": 0.9333333333333346,
+    "lastActiveMeteorTime": 1.4333333333333331,
+    "observedActiveFallSeconds": 0.49999999999999856,
+    "firstActiveMeteorFrame": 21,
+    "lastActiveMeteorFrame": 36
+  },
+  "targetAlignment": {
+    "eventTarget": {
+      "x": 0,
+      "z": -4
+    },
+    "eventAndDropBlastCueTargetsEqual": true,
+    "castIds": [
+      "cast:1"
+    ],
+    "meteorBodyTargetsEqual": true,
+    "meteorLandingHeights": [
+      0.045
+    ],
+    "actualCameraProjectedDescentAnglesDegrees": {
+      "min": 47.598049025955206,
+      "max": 47.598049025955234
+    },
+    "realRockContactRecorded": true,
+    "contactSamples": [
+      {
+        "key": "meteor:cast:1",
+        "rockVisible": true,
+        "progress": 0.999999,
+        "size": 1.1600000000000001,
+        "rockScale": {
+          "x": 0.5336000000000001,
+          "y": 0.9512,
+          "z": 0.5104000000000001
+        },
+        "target": {
+          "x": 0,
+          "y": 0.045,
+          "z": -4
+        },
+        "nose": {
+          "x": 7.071997348360171e-06,
+          "y": 0.04501279999520065,
+          "z": -4.000004895998164
+        },
+        "bodyCentre": {
+          "x": 0.14413014220380352,
+          "y": 0.5033371783496086,
+          "z": -4.091650245810315
+        },
+        "direction": {
+          "x": -0.45857926337390725,
+          "y": -0.8300077165138593,
+          "z": 0.3174779515665512
+        },
+        "position": {
+          "x": 7.071997348360171e-06,
+          "y": 0.04501279999520065,
+          "z": -4.000004895998164
+        },
+        "screen": {
+          "nose": {
+            "x": 773.7415303902059,
+            "y": 294.63494210452757
+          },
+          "target": {
+            "x": 773.740263241481,
+            "y": 294.6335544944963
+          },
+          "projectedDescentAngleDegrees": 47.59804902434527
+        }
+      }
+    ],
+    "maxNoseContactErrorMetres": 1.5421537590525688e-05,
+    "contactFrames": [
+      {
+        "frame": 37,
+        "impactAge": 0.016666666666666607,
+        "meteor": {
+          "model": "reference-nose-anchored-comet-v32",
+          "capacity": 4,
+          "sharedRockMeshes": 1,
+          "sharedRockMaterials": 1,
+          "leadingSupport": {
+            "x": 0.213878,
+            "y": -0.5,
+            "z": 0.006679
+          },
+          "opaqueRockMeshes": 1,
+          "active": [
+            {
+              "key": "meteor:cast:1",
+              "rockVisible": true,
+              "progress": 0.999999,
+              "size": 1.1600000000000001,
+              "rockScale": {
+                "x": 0.5336000000000001,
+                "y": 0.9512,
+                "z": 0.5104000000000001
+              },
+              "target": {
+                "x": 0,
+                "y": 0.045,
+                "z": -4
+              },
+              "nose": {
+                "x": 7.071997348360171e-06,
+                "y": 0.04501279999520065,
+                "z": -4.000004895998164
+              },
+              "bodyCentre": {
+                "x": 0.14413014220380352,
+                "y": 0.5033371783496086,
+                "z": -4.091650245810315
+              },
+              "direction": {
+                "x": -0.45857926337390725,
+                "y": -0.8300077165138593,
+                "z": 0.3174779515665512
+              },
+              "position": {
+                "x": 7.071997348360171e-06,
+                "y": 0.04501279999520065,
+                "z": -4.000004895998164
+              },
+              "screen": {
+                "nose": {
+                  "x": 773.7415303902059,
+                  "y": 294.63494210452757
+                },
+                "target": {
+                  "x": 773.740263241481,
+                  "y": 294.6335544944963
+                },
+                "projectedDescentAngleDegrees": 47.59804902434527
+              }
+            }
+          ]
+        },
+        "blastCues": [
+          {
+            "kind": "blast",
+            "skillId": "FIR_02",
+            "castId": "cast:1",
+            "eventType": "skill_segment",
+            "start": 1.4499999999999997,
+            "age": 0.016666666666666607,
+            "duration": 4.55,
+            "target": {
+              "x": 0,
+              "z": -4
+            },
+            "from": {
+              "x": 0,
+              "z": -8
+            },
+            "to": {
+              "x": 0,
+              "z": -4
+            },
+            "geometry": {
+              "kind": "filledImpactDisk",
+              "origin": "aimPoint",
+              "radiusMetres": 3.8,
+              "widthMetres": 0,
+              "lengthMetres": 0,
+              "depthMetres": 0,
+              "angleDegrees": 0
+            }
+          }
+        ]
+      }
+    ],
+    "qualification": "This checks actual event/cue anchors. Native stage images must still establish visible rock, flame and seal alignment."
+  },
+  "representativeStages": [
+    {
+      "slug": "cast-0200ms",
+      "title": "施法 0.20s · 真实状态",
+      "kind": "cast-timing",
+      "frame": 17,
+      "nativeTime": 0.8000000000000008,
+      "castAge": 0.1833333333333339,
+      "impactAge": -0.6499999999999989,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 0,
+        "active": []
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "fixed-support-radial-ignition-v34",
+        "capacity": 8,
+        "allocated": 0,
+        "sharedMaterials": 0,
+        "cameraBound": true,
+        "active": []
+      },
+      "requestedCastAge": 0.2
+    },
+    {
+      "slug": "cast-0600ms",
+      "title": "施法 0.60s · 真实状态",
+      "kind": "cast-timing",
+      "frame": 29,
+      "nativeTime": 1.2000000000000006,
+      "castAge": 0.5833333333333337,
+      "impactAge": -0.2499999999999991,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": [
+          {
+            "key": "meteor:cast:1",
+            "rockVisible": true,
+            "progress": 0.5151515151515158,
+            "size": 1.1600000000000001,
+            "rockScale": {
+              "x": 0.5336000000000001,
+              "y": 0.9512,
+              "z": 0.5104000000000001
+            },
+            "target": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "nose": {
+              "x": 2.8054214876033026,
+              "y": 5.122685950413217,
+              "z": -5.942214876033056
+            },
+            "bodyCentre": {
+              "x": 2.9462978492246545,
+              "y": 5.58111604186284,
+              "z": -6.038273541918553
+            },
+            "direction": {
+              "x": -0.45857926337390725,
+              "y": -0.8300077165138593,
+              "z": 0.3174779515665512
+            },
+            "position": {
+              "x": 2.8054214876033026,
+              "y": 5.122685950413217,
+              "z": -5.942214876033056
+            },
+            "screen": {
+              "nose": {
+                "x": 1275.9198005356452,
+                "y": 844.7152816279952
+              },
+              "target": {
+                "x": 773.2490435473412,
+                "y": 294.2582033368814
+              },
+              "projectedDescentAngleDegrees": 47.59804902595523
+            }
+          }
+        ]
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "fixed-support-radial-ignition-v34",
+        "capacity": 8,
+        "allocated": 0,
+        "sharedMaterials": 0,
+        "cameraBound": true,
+        "active": []
+      },
+      "requestedCastAge": 0.6
+    },
+    {
+      "slug": "fall-20",
+      "title": "下落进度 20%",
+      "kind": "fall",
+      "frame": 24,
+      "nativeTime": 1.0333333333333345,
+      "castAge": 0.41666666666666763,
+      "impactAge": -0.4166666666666652,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": [
+          {
+            "key": "meteor:cast:1",
+            "rockVisible": true,
+            "progress": 0.21212121212121388,
+            "size": 1.1600000000000001,
+            "rockScale": {
+              "x": 0.5336000000000001,
+              "y": 0.9512,
+              "z": 0.5104000000000001
+            },
+            "target": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "nose": {
+              "x": 3.9256418732782317,
+              "y": 7.150234159779605,
+              "z": -6.717752066115699
+            },
+            "bodyCentre": {
+              "x": 4.064578918831894,
+              "y": 7.608655833847041,
+              "z": -6.816633972549131
+            },
+            "direction": {
+              "x": -0.45857926337390725,
+              "y": -0.8300077165138593,
+              "z": 0.3174779515665512
+            },
+            "position": {
+              "x": 3.9256418732782317,
+              "y": 7.150234159779605,
+              "z": -6.717752066115699
+            },
+            "screen": {
+              "nose": {
+                "x": 1476.6390264163917,
+                "y": 1064.515851084516
+              },
+              "target": {
+                "x": 773.2490435473412,
+                "y": 294.2582033368814
+              },
+              "projectedDescentAngleDegrees": 47.598049025955206
+            }
+          }
+        ]
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "fixed-support-radial-ignition-v34",
+        "capacity": 8,
+        "allocated": 0,
+        "sharedMaterials": 0,
+        "cameraBound": true,
+        "active": []
+      },
+      "requestedFallProgress": 0.2,
+      "selectionBasis": "Actual meteor.inspect progress"
+    },
+    {
+      "slug": "fall-60",
+      "title": "下落进度 60%",
+      "kind": "fall",
+      "frame": 30,
+      "nativeTime": 1.2333333333333338,
+      "castAge": 0.6166666666666669,
+      "impactAge": -0.2166666666666659,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": [
+          {
+            "key": "meteor:cast:1",
+            "rockVisible": true,
+            "progress": 0.5757575757575761,
+            "size": 1.1600000000000001,
+            "rockScale": {
+              "x": 0.5336000000000001,
+              "y": 0.9512,
+              "z": 0.5104000000000001
+            },
+            "target": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "nose": {
+              "x": 2.5229311294765826,
+              "y": 4.611391184573,
+              "z": -5.7466446280991725
+            },
+            "bodyCentre": {
+              "x": 2.664203750830066,
+              "y": 5.069816082079946,
+              "z": -5.842144497751137
+            },
+            "direction": {
+              "x": -0.45857926337390725,
+              "y": -0.8300077165138593,
+              "z": 0.3174779515665512
+            },
+            "position": {
+              "x": 2.5229311294765826,
+              "y": 4.611391184573,
+              "z": -5.7466446280991725
+            },
+            "screen": {
+              "nose": {
+                "x": 1225.3036479222399,
+                "y": 789.2873119389595
+              },
+              "target": {
+                "x": 773.2490435473412,
+                "y": 294.2582033368814
+              },
+              "projectedDescentAngleDegrees": 47.59804902595521
+            }
+          }
+        ]
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "fixed-support-radial-ignition-v34",
+        "capacity": 8,
+        "allocated": 0,
+        "sharedMaterials": 0,
+        "cameraBound": true,
+        "active": []
+      },
+      "requestedFallProgress": 0.6,
+      "selectionBasis": "Actual meteor.inspect progress"
+    },
+    {
+      "slug": "pre-impact",
+      "title": "着陆前 · 最后真实可见帧",
+      "kind": "pre-impact",
+      "frame": 36,
+      "nativeTime": 1.4333333333333331,
+      "castAge": 0.8166666666666662,
+      "impactAge": -0.016666666666666607,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": [
+          {
+            "key": "meteor:cast:1",
+            "rockVisible": true,
+            "progress": 0.9393939393939384,
+            "size": 1.1600000000000001,
+            "rockScale": {
+              "x": 0.5336000000000001,
+              "y": 0.9512,
+              "z": 0.5104000000000001
+            },
+            "target": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "nose": {
+              "x": 0.4188650137741112,
+              "y": 0.8031267217630972,
+              "z": -4.289983471074384
+            },
+            "bodyCentre": {
+              "x": 0.5625727688429589,
+              "y": 1.2614723311184997,
+              "z": -4.3821732146447925
+            },
+            "direction": {
+              "x": -0.45857926337390725,
+              "y": -0.8300077165138593,
+              "z": 0.3174779515665512
+            },
+            "position": {
+              "x": 0.4188650137741112,
+              "y": 0.8031267217630972,
+              "z": -4.289983471074384
+            },
+            "screen": {
+              "nose": {
+                "x": 848.3005801810128,
+                "y": 376.44450322062545
+              },
+              "target": {
+                "x": 773.2490435473412,
+                "y": 294.2582033368814
+              },
+              "projectedDescentAngleDegrees": 47.59804902595523
+            }
+          }
+        ]
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "fixed-support-radial-ignition-v34",
+        "capacity": 8,
+        "allocated": 0,
+        "sharedMaterials": 0,
+        "cameraBound": true,
+        "active": []
+      }
+    },
+    {
+      "slug": "impact-0000ms",
+      "title": "0.02s · 岩尖触地 · 实际首次冲击帧",
+      "kind": "impact",
+      "frame": 37,
+      "nativeTime": 1.4666666666666663,
+      "castAge": 0.8499999999999994,
+      "impactAge": 0.016666666666666607,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": [
+          {
+            "key": "meteor:cast:1",
+            "rockVisible": true,
+            "progress": 0.999999,
+            "size": 1.1600000000000001,
+            "rockScale": {
+              "x": 0.5336000000000001,
+              "y": 0.9512,
+              "z": 0.5104000000000001
+            },
+            "target": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "nose": {
+              "x": 7.071997348360171e-06,
+              "y": 0.04501279999520065,
+              "z": -4.000004895998164
+            },
+            "bodyCentre": {
+              "x": 0.14413014220380352,
+              "y": 0.5033371783496086,
+              "z": -4.091650245810315
+            },
+            "direction": {
+              "x": -0.45857926337390725,
+              "y": -0.8300077165138593,
+              "z": 0.3174779515665512
+            },
+            "position": {
+              "x": 7.071997348360171e-06,
+              "y": 0.04501279999520065,
+              "z": -4.000004895998164
+            },
+            "screen": {
+              "nose": {
+                "x": 773.7415303902059,
+                "y": 294.63494210452757
+              },
+              "target": {
+                "x": 773.740263241481,
+                "y": 294.6335544944963
+              },
+              "projectedDescentAngleDegrees": 47.59804902434527
+            }
+          }
+        ]
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "fixed-support-radial-ignition-v34",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.0203703703703703,
+            "phase": 0.0203703703703703,
+            "frameBlend": 0.19999999999998863,
+            "atlasFrame": 3,
+            "time": 1.4666666666666663,
+            "age": 0.016666666666666607,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0,
+            "frontRadius": 0.45599999999999996,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "requestedImpactAge": 0
+    },
+    {
+      "slug": "impact-0050ms",
+      "title": "0.05s · 冲击开始",
+      "kind": "impact",
+      "frame": 38,
+      "nativeTime": 1.4999999999999996,
+      "castAge": 0.8833333333333326,
+      "impactAge": 0.04999999999999982,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": []
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "fixed-support-radial-ignition-v34",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.0611111111111109,
+            "phase": 0.0611111111111109,
+            "frameBlend": 0.9999999999999858,
+            "atlasFrame": 3,
+            "time": 1.4999999999999996,
+            "age": 0.04999999999999982,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0.1153846153846147,
+            "frontRadius": 1.0177381497806182,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "requestedImpactAge": 0.05
+    },
+    {
+      "slug": "impact-0250ms",
+      "title": "0.25s · 火浪前锋外扩",
+      "kind": "impact",
+      "frame": 44,
+      "nativeTime": 1.6999999999999988,
+      "castAge": 1.083333333333332,
+      "impactAge": 0.2499999999999991,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": []
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "fixed-support-radial-ignition-v34",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.23390654884171846,
+            "phase": 0.23390654884171846,
+            "frameBlend": 0.7999999999999687,
+            "atlasFrame": 8,
+            "time": 1.6999999999999988,
+            "age": 0.2499999999999991,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0.8846153846153813,
+            "frontRadius": 3.668934578386087,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "requestedImpactAge": 0.25
+    },
+    {
+      "slug": "impact-0650ms",
+      "title": "0.65s · 立体翻卷",
+      "kind": "impact",
+      "frame": 56,
+      "nativeTime": 2.0999999999999974,
+      "castAge": 1.4833333333333305,
+      "impactAge": 0.6499999999999977,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": []
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "fixed-support-radial-ignition-v34",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.30032433080811416,
+            "phase": 0.30032433080811416,
+            "frameBlend": 0.39999999999993463,
+            "atlasFrame": 2,
+            "time": 2.0999999999999974,
+            "age": 0.6499999999999977,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "requestedImpactAge": 0.65
+    },
+    {
+      "slug": "impact-1250ms",
+      "title": "1.25s · 爆燃后收势",
+      "kind": "impact",
+      "frame": 74,
+      "nativeTime": 2.6999999999999953,
+      "castAge": 2.0833333333333286,
+      "impactAge": 1.2499999999999956,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": []
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "fixed-support-radial-ignition-v34",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.35877420915308367,
+            "phase": 0.35877420915308367,
+            "frameBlend": 0.7999999999998835,
+            "atlasFrame": 0,
+            "time": 2.6999999999999953,
+            "age": 1.2499999999999956,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.4467541149400844,
+            "width": 10.557678261549025,
+            "height": 2.4017541149400845,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4017541149400845,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "requestedImpactAge": 1.25
+    },
+    {
+      "slug": "impact-1650ms",
+      "title": "1.65s · 收势向余火过渡",
+      "kind": "impact",
+      "frame": 86,
+      "nativeTime": 3.099999999999994,
+      "castAge": 2.483333333333327,
+      "impactAge": 1.6499999999999941,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": []
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "fixed-support-radial-ignition-v34",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.68,
+            "phase": 0.68,
+            "frameBlend": 0.39999999999984936,
+            "atlasFrame": 10,
+            "time": 3.099999999999994,
+            "age": 1.6499999999999941,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 0.24661658526879993,
+            "width": 9.905707194326077,
+            "height": 0.20161658526879994,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 0.20161658526879994,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "requestedImpactAge": 1.65
+    },
+    {
+      "slug": "impact-4600ms",
+      "title": "4.62s · 退火结束",
+      "kind": "impact",
+      "frame": 175,
+      "nativeTime": 6.06666666666665,
+      "castAge": 5.449999999999983,
+      "impactAge": 4.616666666666651,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": []
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "fixed-support-radial-ignition-v34",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": []
+      },
+      "requestedImpactAge": 4.6
+    }
+  ],
+  "coolingContinuityEvidence": {
+    "requiredImpactAges": [
+      1.2,
+      1.4,
+      1.6,
+      1.8,
+      2.2,
+      2.8,
+      3.5
+    ],
+    "representativeStages": [
+      {
+        "slug": "cooling-1200ms",
+        "frame": 73,
+        "requestedImpactAge": 1.2,
+        "actualImpactAge": 1.2166666666666623,
+        "impactInspect": {
+          "model": "fixed-support-radial-ignition-v34",
+          "capacity": 8,
+          "allocated": 1,
+          "sharedMaterials": 1,
+          "cameraBound": true,
+          "active": [
+            {
+              "key": "impact:cast:1:0",
+              "kind": "meteor",
+              "radius": 3.8,
+              "progress": 0.34870210417913916,
+              "phase": 0.34870210417913916,
+              "frameBlend": 0.9999999999998863,
+              "atlasFrame": 15,
+              "time": 2.666666666666662,
+              "age": 1.2166666666666623,
+              "footprintRadius": 3.8,
+              "supportWidth": 8.36,
+              "supportDepth": 6.475699373660799,
+              "geometryScale": 1,
+              "ignitionProgress": 1,
+              "frontRadius": 3.8,
+              "layers": 1,
+              "lobes": 1,
+              "cards": 1,
+              "peakHeight": 2.5157399086944996,
+              "width": 10.578121386385565,
+              "height": 2.4707399086944997,
+              "position": {
+                "x": 0,
+                "y": 0.045,
+                "z": -4
+              },
+              "vertices": 884,
+              "triangles": 1650,
+              "maxHeight": 2.4707399086944997,
+              "clippedDirections": 0
+            }
+          ]
+        }
+      },
+      {
+        "slug": "cooling-1400ms",
+        "frame": 79,
+        "requestedImpactAge": 1.4,
+        "actualImpactAge": 1.4166666666666616,
+        "impactInspect": {
+          "model": "fixed-support-radial-ignition-v34",
+          "capacity": 8,
+          "allocated": 1,
+          "sharedMaterials": 1,
+          "cameraBound": true,
+          "active": [
+            {
+              "key": "impact:cast:1:0",
+              "kind": "meteor",
+              "radius": 3.8,
+              "progress": 0.5044479421655171,
+              "phase": 0.5044479421655171,
+              "frameBlend": 0.7999999999998693,
+              "atlasFrame": 4,
+              "time": 2.8666666666666614,
+              "age": 1.4166666666666616,
+              "footprintRadius": 3.8,
+              "supportWidth": 8.36,
+              "supportDepth": 6.475699373660799,
+              "geometryScale": 1,
+              "ignitionProgress": 1,
+              "frontRadius": 3.8,
+              "layers": 1,
+              "lobes": 1,
+              "cards": 1,
+              "peakHeight": 1.449006560975128,
+              "width": 10.262010482560958,
+              "height": 1.404006560975128,
+              "position": {
+                "x": 0,
+                "y": 0.045,
+                "z": -4
+              },
+              "vertices": 884,
+              "triangles": 1650,
+              "maxHeight": 1.404006560975128,
+              "clippedDirections": 0
+            }
+          ]
+        }
+      },
+      {
+        "slug": "cooling-1600ms",
+        "frame": 85,
+        "requestedImpactAge": 1.6,
+        "actualImpactAge": 1.616666666666661,
+        "impactInspect": {
+          "model": "fixed-support-radial-ignition-v34",
+          "capacity": 8,
+          "allocated": 1,
+          "sharedMaterials": 1,
+          "cameraBound": true,
+          "active": [
+            {
+              "key": "impact:cast:1:0",
+              "kind": "meteor",
+              "radius": 3.8,
+              "progress": 0.6747949524631269,
+              "phase": 0.6747949524631269,
+              "frameBlend": 0.5999999999998522,
+              "atlasFrame": 9,
+              "time": 3.0666666666666607,
+              "age": 1.616666666666661,
+              "footprintRadius": 3.8,
+              "supportWidth": 8.36,
+              "supportDepth": 6.475699373660799,
+              "geometryScale": 1,
+              "ignitionProgress": 1,
+              "frontRadius": 3.8,
+              "layers": 1,
+              "lobes": 1,
+              "cards": 1,
+              "peakHeight": 0.2822669619070038,
+              "width": 9.916271328682054,
+              "height": 0.2372669619070038,
+              "position": {
+                "x": 0,
+                "y": 0.045,
+                "z": -4
+              },
+              "vertices": 884,
+              "triangles": 1650,
+              "maxHeight": 0.2372669619070038,
+              "clippedDirections": 0
+            }
+          ]
+        }
+      },
+      {
+        "slug": "cooling-1800ms",
+        "frame": 91,
+        "requestedImpactAge": 1.8,
+        "actualImpactAge": 1.8166666666666602,
+        "impactInspect": {
+          "model": "fixed-support-radial-ignition-v34",
+          "capacity": 8,
+          "allocated": 1,
+          "sharedMaterials": 1,
+          "cameraBound": true,
+          "active": [
+            {
+              "key": "impact:cast:1:0",
+              "kind": "meteor",
+              "radius": 3.8,
+              "progress": 0.6983908045977005,
+              "phase": 0.6983908045977005,
+              "frameBlend": 0.39999999999983515,
+              "atlasFrame": 14,
+              "time": 3.26666666666666,
+              "age": 1.8166666666666602,
+              "footprintRadius": 3.8,
+              "supportWidth": 8.36,
+              "supportDepth": 6.475699373660799,
+              "geometryScale": 1,
+              "ignitionProgress": 1,
+              "frontRadius": 3.8,
+              "layers": 1,
+              "lobes": 1,
+              "cards": 1,
+              "peakHeight": 0.24555990179141424,
+              "width": 9.905701752772554,
+              "height": 0.20055990179141425,
+              "position": {
+                "x": 0,
+                "y": 0.045,
+                "z": -4
+              },
+              "vertices": 884,
+              "triangles": 1650,
+              "maxHeight": 0.20055990179141425,
+              "clippedDirections": 0
+            }
+          ]
+        }
+      },
+      {
+        "slug": "cooling-2200ms",
+        "frame": 103,
+        "requestedImpactAge": 2.2,
+        "actualImpactAge": 2.216666666666659,
+        "impactInspect": {
+          "model": "fixed-support-radial-ignition-v34",
+          "capacity": 8,
+          "allocated": 1,
+          "sharedMaterials": 1,
+          "cameraBound": true,
+          "active": [
+            {
+              "key": "impact:cast:1:0",
+              "kind": "meteor",
+              "radius": 3.8,
+              "progress": 0.7425287356321831,
+              "phase": 0.7425287356321831,
+              "frameBlend": 0.999999999999801,
+              "atlasFrame": 7,
+              "time": 3.6666666666666585,
+              "age": 2.216666666666659,
+              "footprintRadius": 3.8,
+              "supportWidth": 8.36,
+              "supportDepth": 6.475699373660799,
+              "geometryScale": 1,
+              "ignitionProgress": 1,
+              "frontRadius": 3.8,
+              "layers": 1,
+              "lobes": 1,
+              "cards": 1,
+              "peakHeight": 0.23556931735375047,
+              "width": 9.905650304726773,
+              "height": 0.1905693173537505,
+              "position": {
+                "x": 0,
+                "y": 0.045,
+                "z": -4
+              },
+              "vertices": 884,
+              "triangles": 1650,
+              "maxHeight": 0.1905693173537505,
+              "clippedDirections": 0
+            }
+          ]
+        }
+      },
+      {
+        "slug": "cooling-2800ms",
+        "frame": 121,
+        "requestedImpactAge": 2.8,
+        "actualImpactAge": 2.816666666666657,
+        "impactInspect": {
+          "model": "fixed-support-radial-ignition-v34",
+          "capacity": 8,
+          "allocated": 1,
+          "sharedMaterials": 1,
+          "cameraBound": true,
+          "active": [
+            {
+              "key": "impact:cast:1:0",
+              "kind": "meteor",
+              "radius": 3.8,
+              "progress": 0.808735632183907,
+              "phase": 0.808735632183907,
+              "frameBlend": 0.3999999999997641,
+              "atlasFrame": 6,
+              "time": 4.266666666666657,
+              "age": 2.816666666666657,
+              "footprintRadius": 3.8,
+              "supportWidth": 8.36,
+              "supportDepth": 6.475699373660799,
+              "geometryScale": 1,
+              "ignitionProgress": 1,
+              "frontRadius": 3.8,
+              "layers": 1,
+              "lobes": 1,
+              "cards": 1,
+              "peakHeight": 0.20721618421360843,
+              "width": 9.905504295922087,
+              "height": 0.16221618421360845,
+              "position": {
+                "x": 0,
+                "y": 0.045,
+                "z": -4
+              },
+              "vertices": 884,
+              "triangles": 1650,
+              "maxHeight": 0.16221618421360845,
+              "clippedDirections": 0
+            }
+          ]
+        }
+      },
+      {
+        "slug": "cooling-3500ms",
+        "frame": 142,
+        "requestedImpactAge": 3.5,
+        "actualImpactAge": 3.5166666666666546,
+        "impactInspect": {
+          "model": "fixed-support-radial-ignition-v34",
+          "capacity": 8,
+          "allocated": 1,
+          "sharedMaterials": 1,
+          "cameraBound": true,
+          "active": [
+            {
+              "key": "impact:cast:1:0",
+              "kind": "meteor",
+              "radius": 3.8,
+              "progress": 0.8859770114942516,
+              "phase": 0.8859770114942516,
+              "frameBlend": 0.19999999999970441,
+              "atlasFrame": 7,
+              "time": 4.966666666666654,
+              "age": 3.5166666666666546,
+              "footprintRadius": 3.8,
+              "supportWidth": 8.36,
+              "supportDepth": 6.475699373660799,
+              "geometryScale": 1,
+              "ignitionProgress": 1,
+              "frontRadius": 3.8,
+              "layers": 1,
+              "lobes": 1,
+              "cards": 1,
+              "peakHeight": 0.16793130265889247,
+              "width": 9.905301992403473,
+              "height": 0.12293130265889247,
+              "position": {
+                "x": 0,
+                "y": 0.045,
+                "z": -4
+              },
+              "vertices": 884,
+              "triangles": 1650,
+              "maxHeight": 0.12293130265889247,
+              "clippedDirections": 0
+            }
+          ]
+        }
+      }
+    ],
+    "fullWindowFrameRange": [
+      73,
+      108
+    ],
+    "fullWindowFrames": 36,
+    "allWindowNativeFramesRetained": true,
+    "rearNativeRoi": [
+      448,
+      720,
+      1098,
+      1060
+    ],
+    "qualification": "Review the actual native images and every transition. Active pool records, mesh counts and eventual clearing do not prove an unbroken visible fire surface."
+  },
+  "ignitionPropagationEvidence": {
+    "requestedImpactAges": [
+      0,
+      0.033,
+      0.066,
+      0.1,
+      0.15,
+      0.2,
+      0.3,
+      0.45,
+      0.65
+    ],
+    "requestedStages": [
+      {
+        "slug": "ignition-0000ms",
+        "requestedImpactAge": 0,
+        "frame": 37,
+        "actualImpactAge": 0.016666666666666607,
+        "nativeTime": 1.4666666666666663,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.0203703703703703,
+            "phase": 0.0203703703703703,
+            "frameBlend": 0.19999999999998863,
+            "atlasFrame": 3,
+            "time": 1.4666666666666663,
+            "age": 0.016666666666666607,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0,
+            "frontRadius": 0.45599999999999996,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "slug": "ignition-0033ms",
+        "requestedImpactAge": 0.033,
+        "frame": 37,
+        "actualImpactAge": 0.016666666666666607,
+        "nativeTime": 1.4666666666666663,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.0203703703703703,
+            "phase": 0.0203703703703703,
+            "frameBlend": 0.19999999999998863,
+            "atlasFrame": 3,
+            "time": 1.4666666666666663,
+            "age": 0.016666666666666607,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0,
+            "frontRadius": 0.45599999999999996,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "slug": "ignition-0066ms",
+        "requestedImpactAge": 0.066,
+        "frame": 38,
+        "actualImpactAge": 0.04999999999999982,
+        "nativeTime": 1.4999999999999996,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.0611111111111109,
+            "phase": 0.0611111111111109,
+            "frameBlend": 0.9999999999999858,
+            "atlasFrame": 3,
+            "time": 1.4999999999999996,
+            "age": 0.04999999999999982,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0.1153846153846147,
+            "frontRadius": 1.0177381497806182,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "slug": "ignition-0100ms",
+        "requestedImpactAge": 0.1,
+        "frame": 40,
+        "actualImpactAge": 0.11666666666666625,
+        "nativeTime": 1.566666666666666,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.1425925925925921,
+            "phase": 0.1425925925925921,
+            "frameBlend": 0.5999999999999801,
+            "atlasFrame": 5,
+            "time": 1.566666666666666,
+            "age": 0.11666666666666625,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0.3717948717948702,
+            "frontRadius": 2.134983718015919,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "slug": "ignition-0150ms",
+        "requestedImpactAge": 0.15,
+        "frame": 41,
+        "actualImpactAge": 0.14999999999999947,
+        "nativeTime": 1.5999999999999992,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.18333333333333268,
+            "phase": 0.18333333333333268,
+            "frameBlend": 0.39999999999997726,
+            "atlasFrame": 6,
+            "time": 1.5999999999999992,
+            "age": 0.14999999999999947,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0.49999999999999795,
+            "frontRadius": 2.6177174618560852,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "slug": "ignition-0200ms",
+        "requestedImpactAge": 0.2,
+        "frame": 43,
+        "actualImpactAge": 0.2166666666666659,
+        "nativeTime": 1.6666666666666656,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.2239199796489158,
+            "phase": 0.2239199796489158,
+            "frameBlend": 0.9999999999999716,
+            "atlasFrame": 7,
+            "time": 1.6666666666666656,
+            "age": 0.2166666666666659,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0.7564102564102535,
+            "frontRadius": 3.3979734211724426,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "slug": "ignition-0300ms",
+        "requestedImpactAge": 0.3,
+        "frame": 46,
+        "actualImpactAge": 0.31666666666666554,
+        "nativeTime": 1.7666666666666653,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.26767920211014706,
+            "phase": 0.26767920211014706,
+            "frameBlend": 0.39999999999996305,
+            "atlasFrame": 10,
+            "time": 1.7666666666666653,
+            "age": 0.31666666666666554,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "slug": "ignition-0450ms",
+        "requestedImpactAge": 0.45,
+        "frame": 50,
+        "actualImpactAge": 0.4499999999999984,
+        "nativeTime": 1.8999999999999981,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.33968147963402623,
+            "phase": 0.33968147963402623,
+            "frameBlend": 0.5999999999999517,
+            "atlasFrame": 13,
+            "time": 1.8999999999999981,
+            "age": 0.4499999999999984,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "slug": "ignition-0650ms",
+        "requestedImpactAge": 0.65,
+        "frame": 56,
+        "actualImpactAge": 0.6499999999999977,
+        "nativeTime": 2.0999999999999974,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.30032433080811416,
+            "phase": 0.30032433080811416,
+            "frameBlend": 0.39999999999993463,
+            "atlasFrame": 2,
+            "time": 2.0999999999999974,
+            "age": 0.6499999999999977,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      }
+    ],
+    "actualConsecutiveFrames": [
+      {
+        "frame": 37,
+        "actualImpactAge": 0.016666666666666607,
+        "nativeTime": 1.4666666666666663,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.0203703703703703,
+            "phase": 0.0203703703703703,
+            "frameBlend": 0.19999999999998863,
+            "atlasFrame": 3,
+            "time": 1.4666666666666663,
+            "age": 0.016666666666666607,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0,
+            "frontRadius": 0.45599999999999996,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 38,
+        "actualImpactAge": 0.04999999999999982,
+        "nativeTime": 1.4999999999999996,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.0611111111111109,
+            "phase": 0.0611111111111109,
+            "frameBlend": 0.9999999999999858,
+            "atlasFrame": 3,
+            "time": 1.4999999999999996,
+            "age": 0.04999999999999982,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0.1153846153846147,
+            "frontRadius": 1.0177381497806182,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 39,
+        "actualImpactAge": 0.08333333333333304,
+        "nativeTime": 1.5333333333333328,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.10185185185185149,
+            "phase": 0.10185185185185149,
+            "frameBlend": 0.799999999999983,
+            "atlasFrame": 4,
+            "time": 1.5333333333333328,
+            "age": 0.08333333333333304,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0.24358974358974242,
+            "frontRadius": 1.6001028240957835,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 40,
+        "actualImpactAge": 0.11666666666666625,
+        "nativeTime": 1.566666666666666,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.1425925925925921,
+            "phase": 0.1425925925925921,
+            "frameBlend": 0.5999999999999801,
+            "atlasFrame": 5,
+            "time": 1.566666666666666,
+            "age": 0.11666666666666625,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0.3717948717948702,
+            "frontRadius": 2.134983718015919,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 41,
+        "actualImpactAge": 0.14999999999999947,
+        "nativeTime": 1.5999999999999992,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.18333333333333268,
+            "phase": 0.18333333333333268,
+            "frameBlend": 0.39999999999997726,
+            "atlasFrame": 6,
+            "time": 1.5999999999999992,
+            "age": 0.14999999999999947,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0.49999999999999795,
+            "frontRadius": 2.6177174618560852,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 42,
+        "actualImpactAge": 0.18333333333333268,
+        "nativeTime": 1.6333333333333324,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.22003272474509294,
+            "phase": 0.22003272474509294,
+            "frameBlend": 0.19999999999997442,
+            "atlasFrame": 7,
+            "time": 1.6333333333333324,
+            "age": 0.18333333333333268,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0.6282051282051258,
+            "frontRadius": 3.0419089636549463,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 43,
+        "actualImpactAge": 0.2166666666666659,
+        "nativeTime": 1.6666666666666656,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.2239199796489158,
+            "phase": 0.2239199796489158,
+            "frameBlend": 0.9999999999999716,
+            "atlasFrame": 7,
+            "time": 1.6666666666666656,
+            "age": 0.2166666666666659,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0.7564102564102535,
+            "frontRadius": 3.3979734211724426,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 44,
+        "actualImpactAge": 0.2499999999999991,
+        "nativeTime": 1.6999999999999988,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.23390654884171846,
+            "phase": 0.23390654884171846,
+            "frameBlend": 0.7999999999999687,
+            "atlasFrame": 8,
+            "time": 1.6999999999999988,
+            "age": 0.2499999999999991,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 0.8846153846153813,
+            "frontRadius": 3.668934578386087,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 45,
+        "actualImpactAge": 0.2833333333333323,
+        "nativeTime": 1.733333333333332,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.2489951958487023,
+            "phase": 0.2489951958487023,
+            "frameBlend": 0.5999999999999659,
+            "atlasFrame": 9,
+            "time": 1.733333333333332,
+            "age": 0.2833333333333323,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 46,
+        "actualImpactAge": 0.31666666666666554,
+        "nativeTime": 1.7666666666666653,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.26767920211014706,
+            "phase": 0.26767920211014706,
+            "frameBlend": 0.39999999999996305,
+            "atlasFrame": 10,
+            "time": 1.7666666666666653,
+            "age": 0.31666666666666554,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 47,
+        "actualImpactAge": 0.34999999999999876,
+        "nativeTime": 1.7999999999999985,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.28809282452854246,
+            "phase": 0.28809282452854246,
+            "frameBlend": 0.1999999999999602,
+            "atlasFrame": 11,
+            "time": 1.7999999999999985,
+            "age": 0.34999999999999876,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 48,
+        "actualImpactAge": 0.38333333333333197,
+        "nativeTime": 1.8333333333333317,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.3081976044034709,
+            "phase": 0.3081976044034709,
+            "frameBlend": 0.9999999999999574,
+            "atlasFrame": 11,
+            "time": 1.8333333333333317,
+            "age": 0.38333333333333197,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 49,
+        "actualImpactAge": 0.4166666666666652,
+        "nativeTime": 1.866666666666665,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.32598592336049326,
+            "phase": 0.32598592336049326,
+            "frameBlend": 0.7999999999999545,
+            "atlasFrame": 12,
+            "time": 1.866666666666665,
+            "age": 0.4166666666666652,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 50,
+        "actualImpactAge": 0.4499999999999984,
+        "nativeTime": 1.8999999999999981,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.33968147963402623,
+            "phase": 0.33968147963402623,
+            "frameBlend": 0.5999999999999517,
+            "atlasFrame": 13,
+            "time": 1.8999999999999981,
+            "age": 0.4499999999999984,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 51,
+        "actualImpactAge": 0.4833333333333316,
+        "nativeTime": 1.9333333333333313,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.3479166655907629,
+            "phase": 0.3479166655907629,
+            "frameBlend": 0.39999999999994884,
+            "atlasFrame": 14,
+            "time": 1.9333333333333313,
+            "age": 0.4833333333333316,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 52,
+        "actualImpactAge": 0.5166666666666648,
+        "nativeTime": 1.9666666666666646,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.34986913397067254,
+            "phase": 0.34986913397067254,
+            "frameBlend": 0.199999999999946,
+            "atlasFrame": 15,
+            "time": 1.9666666666666646,
+            "age": 0.5166666666666648,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 53,
+        "actualImpactAge": 0.549999999999998,
+        "nativeTime": 1.9999999999999978,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.34534391564604516,
+            "phase": 0.34534391564604516,
+            "frameBlend": 0.9999999999999432,
+            "atlasFrame": 15,
+            "time": 1.9999999999999978,
+            "age": 0.549999999999998,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 54,
+        "actualImpactAge": 0.5833333333333313,
+        "nativeTime": 2.033333333333331,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.3347928888027344,
+            "phase": 0.3347928888027344,
+            "frameBlend": 0.7999999999999403,
+            "atlasFrame": 0,
+            "time": 2.033333333333331,
+            "age": 0.5833333333333313,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 55,
+        "actualImpactAge": 0.6166666666666645,
+        "nativeTime": 2.066666666666664,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.3192696553946839,
+            "phase": 0.3192696553946839,
+            "frameBlend": 0.5999999999999375,
+            "atlasFrame": 1,
+            "time": 2.066666666666664,
+            "age": 0.6166666666666645,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      },
+      {
+        "frame": 56,
+        "actualImpactAge": 0.6499999999999977,
+        "nativeTime": 2.0999999999999974,
+        "model": "fixed-support-radial-ignition-v34",
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.30032433080811416,
+            "phase": 0.30032433080811416,
+            "frameBlend": 0.39999999999993463,
+            "atlasFrame": 2,
+            "time": 2.0999999999999974,
+            "age": 0.6499999999999977,
+            "footprintRadius": 3.8,
+            "supportWidth": 8.36,
+            "supportDepth": 6.475699373660799,
+            "geometryScale": 1,
+            "ignitionProgress": 1,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ],
+        "worldBoundsWidthIsNotSupport": [
+          {
+            "key": "impact:cast:1:0",
+            "width": 10.58083113140222,
+            "height": 2.4798839988062387,
+            "vertices": 884
+          }
+        ]
+      }
+    ],
+    "actualFrameRange": [
+      37,
+      56
+    ],
+    "actualFrameCount": 20,
+    "requestedAgesSharingAnActualFrame": {
+      "37": [
+        0,
+        0.033
+      ]
+    },
+    "missingInspectFields": [],
+    "reportedDiagnostics": {
+      "footprintRadius": {
+        "minimum": 3.8,
+        "maximum": 3.8,
+        "span": 0.0,
+        "constantWithin1e-6": true,
+        "nondecreasingWithin1e-6": true
+      },
+      "supportWidth": {
+        "minimum": 8.36,
+        "maximum": 8.36,
+        "span": 0.0,
+        "constantWithin1e-6": true,
+        "nondecreasingWithin1e-6": true
+      },
+      "supportDepth": {
+        "minimum": 6.475699373660799,
+        "maximum": 6.475699373660799,
+        "span": 0.0,
+        "constantWithin1e-6": true,
+        "nondecreasingWithin1e-6": true
+      },
+      "geometryScale": {
+        "minimum": 1,
+        "maximum": 1,
+        "span": 0,
+        "constantWithin1e-6": true,
+        "nondecreasingWithin1e-6": true
+      },
+      "frontRadius": {
+        "minimum": 0.45599999999999996,
+        "maximum": 3.8,
+        "span": 3.344,
+        "constantWithin1e-6": false,
+        "nondecreasingWithin1e-6": true
+      },
+      "ignitionProgress": {
+        "minimum": 0,
+        "maximum": 1,
+        "span": 1,
+        "constantWithin1e-6": false,
+        "nondecreasingWithin1e-6": true
+      }
+    },
+    "samplingQualification": "Nearest real exported 30fps frame. Requested ages may share a frame; actual ages remain authoritative. No interpolated frames or timing changes.",
+    "geometryQualification": "Explicit supportWidth/supportDepth/footprintRadius describe the fixed carrier; width is a world-bounds measurement and is not substituted for support. Inspector constants alone do not prove visible ignition propagation or art acceptance."
+  },
+  "persistentSealEvidence": {
+    "requestedImpactAges": [
+      0.25,
+      0.65,
+      1.2,
+      1.6,
+      2.2,
+      2.8,
+      3.5,
+      4.3,
+      4.62
+    ],
+    "representativeStages": [
+      {
+        "slug": "seal-held-0250ms",
+        "requestedImpactAge": 0.25,
+        "frame": 44,
+        "nativeTime": 1.6999999999999988,
+        "actualImpactAge": 0.2499999999999991,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "slug": "seal-held-0650ms",
+        "requestedImpactAge": 0.65,
+        "frame": 56,
+        "nativeTime": 2.0999999999999974,
+        "actualImpactAge": 0.6499999999999977,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "slug": "seal-held-1200ms",
+        "requestedImpactAge": 1.2,
+        "frame": 73,
+        "nativeTime": 2.666666666666662,
+        "actualImpactAge": 1.2166666666666623,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "slug": "seal-held-1600ms",
+        "requestedImpactAge": 1.6,
+        "frame": 85,
+        "nativeTime": 3.0666666666666607,
+        "actualImpactAge": 1.616666666666661,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "slug": "seal-held-2200ms",
+        "requestedImpactAge": 2.2,
+        "frame": 103,
+        "nativeTime": 3.6666666666666585,
+        "actualImpactAge": 2.216666666666659,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "slug": "seal-held-2800ms",
+        "requestedImpactAge": 2.8,
+        "frame": 121,
+        "nativeTime": 4.266666666666657,
+        "actualImpactAge": 2.816666666666657,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "slug": "seal-held-3500ms",
+        "requestedImpactAge": 3.5,
+        "frame": 142,
+        "nativeTime": 4.966666666666654,
+        "actualImpactAge": 3.5166666666666546,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.828253866666674,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.828253866666674
+        ]
+      },
+      {
+        "slug": "seal-held-4300ms",
+        "requestedImpactAge": 4.3,
+        "frame": 166,
+        "nativeTime": 5.7666666666666515,
+        "actualImpactAge": 4.316666666666652,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.08237226666667612,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.08237226666667612
+        ]
+      },
+      {
+        "slug": "seal-held-4620ms",
+        "requestedImpactAge": 4.62,
+        "frame": 175,
+        "nativeTime": 6.06666666666665,
+        "actualImpactAge": 4.616666666666651,
+        "meteorSeals": [],
+        "present": false,
+        "reportedOpacities": []
+      }
+    ],
+    "actualConsecutiveFrames": [
+      {
+        "frame": 37,
+        "nativeTime": 1.4666666666666663,
+        "actualImpactAge": 0.016666666666666607,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 38,
+        "nativeTime": 1.4999999999999996,
+        "actualImpactAge": 0.04999999999999982,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 39,
+        "nativeTime": 1.5333333333333328,
+        "actualImpactAge": 0.08333333333333304,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 40,
+        "nativeTime": 1.566666666666666,
+        "actualImpactAge": 0.11666666666666625,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 41,
+        "nativeTime": 1.5999999999999992,
+        "actualImpactAge": 0.14999999999999947,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 42,
+        "nativeTime": 1.6333333333333324,
+        "actualImpactAge": 0.18333333333333268,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 43,
+        "nativeTime": 1.6666666666666656,
+        "actualImpactAge": 0.2166666666666659,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 44,
+        "nativeTime": 1.6999999999999988,
+        "actualImpactAge": 0.2499999999999991,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 45,
+        "nativeTime": 1.733333333333332,
+        "actualImpactAge": 0.2833333333333323,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 46,
+        "nativeTime": 1.7666666666666653,
+        "actualImpactAge": 0.31666666666666554,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 47,
+        "nativeTime": 1.7999999999999985,
+        "actualImpactAge": 0.34999999999999876,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 48,
+        "nativeTime": 1.8333333333333317,
+        "actualImpactAge": 0.38333333333333197,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 49,
+        "nativeTime": 1.866666666666665,
+        "actualImpactAge": 0.4166666666666652,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 50,
+        "nativeTime": 1.8999999999999981,
+        "actualImpactAge": 0.4499999999999984,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 51,
+        "nativeTime": 1.9333333333333313,
+        "actualImpactAge": 0.4833333333333316,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 52,
+        "nativeTime": 1.9666666666666646,
+        "actualImpactAge": 0.5166666666666648,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 53,
+        "nativeTime": 1.9999999999999978,
+        "actualImpactAge": 0.549999999999998,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 54,
+        "nativeTime": 2.033333333333331,
+        "actualImpactAge": 0.5833333333333313,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 55,
+        "nativeTime": 2.066666666666664,
+        "actualImpactAge": 0.6166666666666645,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 56,
+        "nativeTime": 2.0999999999999974,
+        "actualImpactAge": 0.6499999999999977,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 57,
+        "nativeTime": 2.1333333333333306,
+        "actualImpactAge": 0.6833333333333309,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 58,
+        "nativeTime": 2.166666666666664,
+        "actualImpactAge": 0.7166666666666641,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 59,
+        "nativeTime": 2.199999999999997,
+        "actualImpactAge": 0.7499999999999973,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 60,
+        "nativeTime": 2.2333333333333303,
+        "actualImpactAge": 0.7833333333333306,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 61,
+        "nativeTime": 2.2666666666666635,
+        "actualImpactAge": 0.8166666666666638,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 62,
+        "nativeTime": 2.2999999999999967,
+        "actualImpactAge": 0.849999999999997,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 63,
+        "nativeTime": 2.33333333333333,
+        "actualImpactAge": 0.8833333333333302,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 64,
+        "nativeTime": 2.366666666666663,
+        "actualImpactAge": 0.9166666666666634,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 65,
+        "nativeTime": 2.3999999999999964,
+        "actualImpactAge": 0.9499999999999966,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 66,
+        "nativeTime": 2.4333333333333296,
+        "actualImpactAge": 0.9833333333333298,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 67,
+        "nativeTime": 2.466666666666663,
+        "actualImpactAge": 1.016666666666663,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 68,
+        "nativeTime": 2.499999999999996,
+        "actualImpactAge": 1.0499999999999963,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 69,
+        "nativeTime": 2.533333333333329,
+        "actualImpactAge": 1.0833333333333295,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 70,
+        "nativeTime": 2.5666666666666624,
+        "actualImpactAge": 1.1166666666666627,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 71,
+        "nativeTime": 2.5999999999999956,
+        "actualImpactAge": 1.149999999999996,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 72,
+        "nativeTime": 2.633333333333329,
+        "actualImpactAge": 1.1833333333333291,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 73,
+        "nativeTime": 2.666666666666662,
+        "actualImpactAge": 1.2166666666666623,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 74,
+        "nativeTime": 2.6999999999999953,
+        "actualImpactAge": 1.2499999999999956,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 75,
+        "nativeTime": 2.7333333333333285,
+        "actualImpactAge": 1.2833333333333288,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 76,
+        "nativeTime": 2.7666666666666617,
+        "actualImpactAge": 1.316666666666662,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 77,
+        "nativeTime": 2.799999999999995,
+        "actualImpactAge": 1.3499999999999952,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 78,
+        "nativeTime": 2.833333333333328,
+        "actualImpactAge": 1.3833333333333284,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 79,
+        "nativeTime": 2.8666666666666614,
+        "actualImpactAge": 1.4166666666666616,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 80,
+        "nativeTime": 2.8999999999999946,
+        "actualImpactAge": 1.4499999999999948,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 81,
+        "nativeTime": 2.933333333333328,
+        "actualImpactAge": 1.483333333333328,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 82,
+        "nativeTime": 2.966666666666661,
+        "actualImpactAge": 1.5166666666666613,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 83,
+        "nativeTime": 2.9999999999999942,
+        "actualImpactAge": 1.5499999999999945,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 84,
+        "nativeTime": 3.0333333333333274,
+        "actualImpactAge": 1.5833333333333277,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 85,
+        "nativeTime": 3.0666666666666607,
+        "actualImpactAge": 1.616666666666661,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 86,
+        "nativeTime": 3.099999999999994,
+        "actualImpactAge": 1.6499999999999941,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 87,
+        "nativeTime": 3.133333333333327,
+        "actualImpactAge": 1.6833333333333274,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 88,
+        "nativeTime": 3.1666666666666603,
+        "actualImpactAge": 1.7166666666666606,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 89,
+        "nativeTime": 3.1999999999999935,
+        "actualImpactAge": 1.7499999999999938,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 90,
+        "nativeTime": 3.2333333333333267,
+        "actualImpactAge": 1.783333333333327,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 91,
+        "nativeTime": 3.26666666666666,
+        "actualImpactAge": 1.8166666666666602,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 92,
+        "nativeTime": 3.299999999999993,
+        "actualImpactAge": 1.8499999999999934,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 93,
+        "nativeTime": 3.3333333333333264,
+        "actualImpactAge": 1.8833333333333266,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 94,
+        "nativeTime": 3.3666666666666596,
+        "actualImpactAge": 1.9166666666666599,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 95,
+        "nativeTime": 3.399999999999993,
+        "actualImpactAge": 1.949999999999993,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 96,
+        "nativeTime": 3.433333333333326,
+        "actualImpactAge": 1.9833333333333263,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 97,
+        "nativeTime": 3.4666666666666592,
+        "actualImpactAge": 2.0166666666666595,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 98,
+        "nativeTime": 3.4999999999999925,
+        "actualImpactAge": 2.0499999999999927,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 99,
+        "nativeTime": 3.5333333333333257,
+        "actualImpactAge": 2.083333333333326,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 100,
+        "nativeTime": 3.566666666666659,
+        "actualImpactAge": 2.116666666666659,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 101,
+        "nativeTime": 3.599999999999992,
+        "actualImpactAge": 2.1499999999999924,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 102,
+        "nativeTime": 3.6333333333333253,
+        "actualImpactAge": 2.1833333333333256,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 103,
+        "nativeTime": 3.6666666666666585,
+        "actualImpactAge": 2.216666666666659,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 104,
+        "nativeTime": 3.6999999999999917,
+        "actualImpactAge": 2.249999999999992,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 105,
+        "nativeTime": 3.733333333333325,
+        "actualImpactAge": 2.283333333333325,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 106,
+        "nativeTime": 3.766666666666658,
+        "actualImpactAge": 2.3166666666666584,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 107,
+        "nativeTime": 3.7999999999999914,
+        "actualImpactAge": 2.3499999999999917,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 108,
+        "nativeTime": 3.8333333333333246,
+        "actualImpactAge": 2.383333333333325,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 109,
+        "nativeTime": 3.866666666666658,
+        "actualImpactAge": 2.416666666666658,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 110,
+        "nativeTime": 3.899999999999991,
+        "actualImpactAge": 2.4499999999999913,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 111,
+        "nativeTime": 3.9333333333333242,
+        "actualImpactAge": 2.4833333333333245,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 112,
+        "nativeTime": 3.9666666666666575,
+        "actualImpactAge": 2.5166666666666577,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 113,
+        "nativeTime": 3.9999999999999907,
+        "actualImpactAge": 2.549999999999991,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 114,
+        "nativeTime": 4.033333333333324,
+        "actualImpactAge": 2.5833333333333246,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 115,
+        "nativeTime": 4.0666666666666575,
+        "actualImpactAge": 2.616666666666658,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 116,
+        "nativeTime": 4.099999999999991,
+        "actualImpactAge": 2.649999999999991,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 117,
+        "nativeTime": 4.133333333333324,
+        "actualImpactAge": 2.6833333333333242,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 118,
+        "nativeTime": 4.166666666666657,
+        "actualImpactAge": 2.7166666666666575,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 119,
+        "nativeTime": 4.19999999999999,
+        "actualImpactAge": 2.7499999999999907,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 120,
+        "nativeTime": 4.233333333333324,
+        "actualImpactAge": 2.783333333333324,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 121,
+        "nativeTime": 4.266666666666657,
+        "actualImpactAge": 2.816666666666657,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 122,
+        "nativeTime": 4.29999999999999,
+        "actualImpactAge": 2.8499999999999903,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 123,
+        "nativeTime": 4.333333333333323,
+        "actualImpactAge": 2.8833333333333235,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 124,
+        "nativeTime": 4.3666666666666565,
+        "actualImpactAge": 2.9166666666666567,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 125,
+        "nativeTime": 4.39999999999999,
+        "actualImpactAge": 2.94999999999999,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 126,
+        "nativeTime": 4.433333333333323,
+        "actualImpactAge": 2.983333333333323,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 127,
+        "nativeTime": 4.466666666666656,
+        "actualImpactAge": 3.0166666666666564,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 128,
+        "nativeTime": 4.499999999999989,
+        "actualImpactAge": 3.0499999999999896,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 129,
+        "nativeTime": 4.533333333333323,
+        "actualImpactAge": 3.083333333333323,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 130,
+        "nativeTime": 4.566666666666656,
+        "actualImpactAge": 3.116666666666656,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 131,
+        "nativeTime": 4.599999999999989,
+        "actualImpactAge": 3.1499999999999893,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 132,
+        "nativeTime": 4.633333333333322,
+        "actualImpactAge": 3.1833333333333225,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 133,
+        "nativeTime": 4.666666666666655,
+        "actualImpactAge": 3.2166666666666557,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 134,
+        "nativeTime": 4.699999999999989,
+        "actualImpactAge": 3.249999999999989,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 135,
+        "nativeTime": 4.733333333333322,
+        "actualImpactAge": 3.283333333333322,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.9,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.9
+        ]
+      },
+      {
+        "frame": 136,
+        "nativeTime": 4.766666666666655,
+        "actualImpactAge": 3.3166666666666553,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.8995242666666673,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.8995242666666673
+        ]
+      },
+      {
+        "frame": 137,
+        "nativeTime": 4.799999999999988,
+        "actualImpactAge": 3.3499999999999885,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.8957952000000019,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.8957952000000019
+        ]
+      },
+      {
+        "frame": 138,
+        "nativeTime": 4.8333333333333215,
+        "actualImpactAge": 3.3833333333333218,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.8885333333333364,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.8885333333333364
+        ]
+      },
+      {
+        "frame": 139,
+        "nativeTime": 4.866666666666655,
+        "actualImpactAge": 3.416666666666655,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.8779434666666709,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.8779434666666709
+        ]
+      },
+      {
+        "frame": 140,
+        "nativeTime": 4.899999999999988,
+        "actualImpactAge": 3.449999999999988,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.8642304000000053,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.8642304000000053
+        ]
+      },
+      {
+        "frame": 141,
+        "nativeTime": 4.933333333333321,
+        "actualImpactAge": 3.4833333333333214,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.8475989333333397,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.8475989333333397
+        ]
+      },
+      {
+        "frame": 142,
+        "nativeTime": 4.966666666666654,
+        "actualImpactAge": 3.5166666666666546,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.828253866666674,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.828253866666674
+        ]
+      },
+      {
+        "frame": 143,
+        "nativeTime": 4.999999999999988,
+        "actualImpactAge": 3.549999999999988,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.8064000000000083,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.8064000000000083
+        ]
+      },
+      {
+        "frame": 144,
+        "nativeTime": 5.033333333333321,
+        "actualImpactAge": 3.583333333333321,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.7822421333333425,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.7822421333333425
+        ]
+      },
+      {
+        "frame": 145,
+        "nativeTime": 5.066666666666654,
+        "actualImpactAge": 3.6166666666666543,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.7559850666666768,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.7559850666666768
+        ]
+      },
+      {
+        "frame": 146,
+        "nativeTime": 5.099999999999987,
+        "actualImpactAge": 3.6499999999999875,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.7278336000000107,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.7278336000000107
+        ]
+      },
+      {
+        "frame": 147,
+        "nativeTime": 5.13333333333332,
+        "actualImpactAge": 3.6833333333333207,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.6979925333333448,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.6979925333333448
+        ]
+      },
+      {
+        "frame": 148,
+        "nativeTime": 5.166666666666654,
+        "actualImpactAge": 3.716666666666654,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.6666666666666787,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.6666666666666787
+        ]
+      },
+      {
+        "frame": 149,
+        "nativeTime": 5.199999999999987,
+        "actualImpactAge": 3.749999999999987,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.6340608000000127,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.6340608000000127
+        ]
+      },
+      {
+        "frame": 150,
+        "nativeTime": 5.23333333333332,
+        "actualImpactAge": 3.7833333333333203,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.6003797333333466,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.6003797333333466
+        ]
+      },
+      {
+        "frame": 151,
+        "nativeTime": 5.266666666666653,
+        "actualImpactAge": 3.8166666666666536,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.5658282666666802,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.5658282666666802
+        ]
+      },
+      {
+        "frame": 152,
+        "nativeTime": 5.2999999999999865,
+        "actualImpactAge": 3.8499999999999868,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.5306112000000139,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.5306112000000139
+        ]
+      },
+      {
+        "frame": 153,
+        "nativeTime": 5.33333333333332,
+        "actualImpactAge": 3.88333333333332,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.49493333333334755,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.49493333333334755
+        ]
+      },
+      {
+        "frame": 154,
+        "nativeTime": 5.366666666666653,
+        "actualImpactAge": 3.916666666666653,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.4589994666666811,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.4589994666666811
+        ]
+      },
+      {
+        "frame": 155,
+        "nativeTime": 5.399999999999986,
+        "actualImpactAge": 3.9499999999999864,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.4230144000000145,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.4230144000000145
+        ]
+      },
+      {
+        "frame": 156,
+        "nativeTime": 5.433333333333319,
+        "actualImpactAge": 3.9833333333333196,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.38718293333334775,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.38718293333334775
+        ]
+      },
+      {
+        "frame": 157,
+        "nativeTime": 5.466666666666653,
+        "actualImpactAge": 4.016666666666653,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.35170986666668047,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.35170986666668047
+        ]
+      },
+      {
+        "frame": 158,
+        "nativeTime": 5.499999999999986,
+        "actualImpactAge": 4.0499999999999865,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.3168000000000139,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.3168000000000139
+        ]
+      },
+      {
+        "frame": 159,
+        "nativeTime": 5.533333333333319,
+        "actualImpactAge": 4.08333333333332,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.2826581333333469,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.2826581333333469
+        ]
+      },
+      {
+        "frame": 160,
+        "nativeTime": 5.566666666666652,
+        "actualImpactAge": 4.116666666666653,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.24948906666668005,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.24948906666668005
+        ]
+      },
+      {
+        "frame": 161,
+        "nativeTime": 5.599999999999985,
+        "actualImpactAge": 4.149999999999986,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.2174976000000129,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.2174976000000129
+        ]
+      },
+      {
+        "frame": 162,
+        "nativeTime": 5.633333333333319,
+        "actualImpactAge": 4.183333333333319,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.18688853333334562,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.18688853333334562
+        ]
+      },
+      {
+        "frame": 163,
+        "nativeTime": 5.666666666666652,
+        "actualImpactAge": 4.216666666666653,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.1578666666666785,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.1578666666666785
+        ]
+      },
+      {
+        "frame": 164,
+        "nativeTime": 5.699999999999985,
+        "actualImpactAge": 4.249999999999986,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.13063680000001096,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.13063680000001096
+        ]
+      },
+      {
+        "frame": 165,
+        "nativeTime": 5.733333333333318,
+        "actualImpactAge": 4.283333333333319,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.10540373333334362,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.10540373333334362
+        ]
+      },
+      {
+        "frame": 166,
+        "nativeTime": 5.7666666666666515,
+        "actualImpactAge": 4.316666666666652,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.08237226666667612,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.08237226666667612
+        ]
+      },
+      {
+        "frame": 167,
+        "nativeTime": 5.799999999999985,
+        "actualImpactAge": 4.349999999999985,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.0617472000000084,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.0617472000000084
+        ]
+      },
+      {
+        "frame": 168,
+        "nativeTime": 5.833333333333318,
+        "actualImpactAge": 4.383333333333319,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.04373333333334056,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.04373333333334056
+        ]
+      },
+      {
+        "frame": 169,
+        "nativeTime": 5.866666666666651,
+        "actualImpactAge": 4.416666666666652,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.028535466666672695,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.028535466666672695
+        ]
+      },
+      {
+        "frame": 170,
+        "nativeTime": 5.899999999999984,
+        "actualImpactAge": 4.449999999999985,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.01635840000000477,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.01635840000000477
+        ]
+      },
+      {
+        "frame": 171,
+        "nativeTime": 5.933333333333318,
+        "actualImpactAge": 4.483333333333318,
+        "meteorSeals": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "opacity": 0.007406933333336574,
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "present": true,
+        "reportedOpacities": [
+          0.007406933333336574
+        ]
+      },
+      {
+        "frame": 172,
+        "nativeTime": 5.966666666666651,
+        "actualImpactAge": 4.5166666666666515,
+        "meteorSeals": [],
+        "present": false,
+        "reportedOpacities": []
+      },
+      {
+        "frame": 173,
+        "nativeTime": 5.999999999999984,
+        "actualImpactAge": 4.549999999999985,
+        "meteorSeals": [],
+        "present": false,
+        "reportedOpacities": []
+      },
+      {
+        "frame": 174,
+        "nativeTime": 6.033333333333317,
+        "actualImpactAge": 4.583333333333318,
+        "meteorSeals": [],
+        "present": false,
+        "reportedOpacities": []
+      },
+      {
+        "frame": 175,
+        "nativeTime": 6.06666666666665,
+        "actualImpactAge": 4.616666666666651,
+        "meteorSeals": [],
+        "present": false,
+        "reportedOpacities": []
+      }
+    ],
+    "missingOpacityFrames": [],
+    "reportedPresentThrough4p3": true,
+    "reportedClearedAt4p62": true,
+    "reportedOpacityNonincreasing": true,
+    "qualification": "Ground meteorSeal records and their actual opacity are checked independently of fire/impact records. Native images still establish visible carving clarity, rear completeness and gradual fading; inspector alpha alone is not art acceptance."
+  },
+  "runtimeErrors": [],
+  "consoleErrors": [],
+  "lifecycle": {
+    "pauseResume": 1,
+    "familySwitches": [
+      "THU",
+      "WAR",
+      "FIR"
+    ]
+  },
+  "artStatus": "intermediate-before-seal-circle-colour-r2",
+  "artStatusNote": "User requested stricter concentric-circle registration and a lighter middle red/orange tone after this actual capture. Preserve this recording as before evidence; no final media encoded.",
+  "taptapDeviceValidation": "Pending; browser capture is not device acceptance.",
+  "mediaEncoded": false
+}

@@ -1,0 +1,3561 @@
+{
+  "started": "2026-11-17T10:24:39.393Z",
+  "url": "http://127.0.0.1:7476/",
+  "status": "failed",
+  "scope": "Narrow actual Cocos Web/HTML test-build playback probe in isolated browser storage; not TapTap/device or human listening acceptance",
+  "stages": [
+    {
+      "name": "real-boot-begin-and-opening-story-settled",
+      "diagnostic": "",
+      "started": "2026-11-17T10:24:39.745Z",
+      "data": {
+        "identity": {
+          "failure": "",
+          "isHtml": true,
+          "isTap": false,
+          "profile": "test",
+          "devHook": false
+        },
+        "button": {
+          "x": 640,
+          "y": 282.7667057444314
+        },
+        "realMouseGesture": true,
+        "openingObserved": true,
+        "openingSkip": "Actual app skip action only if opening was active; no Music.ts override"
+      },
+      "result": "passed",
+      "finished": "2026-11-17T10:24:44.658Z"
+    },
+    {
+      "name": "preload-only-all-four-families-and-12-v12-clips",
+      "diagnostic": "Only audio assets are loaded for FIR/THU; their class, spells and VFX are not exercised.",
+      "started": "2026-11-17T10:24:44.659Z",
+      "data": {
+        "audio": {
+          "version": "release-only-v12",
+          "contactAudio": false,
+          "family": "WAR",
+          "loadedClips": 12,
+          "loadingFamilies": [],
+          "failedPaths": [],
+          "activeVoices": [],
+          "voiceLimit": 6,
+          "maximumVoices": 0,
+          "played": 0,
+          "dropped": 0,
+          "suspended": false,
+          "actualFailedPathCount": 0,
+          "actualLoadingFamilyCount": 0,
+          "loadedResourcePaths": [
+            "audio/combat-v12/bow/bow_release_v1",
+            "audio/combat-v12/bow/bow_release_v2",
+            "audio/combat-v12/bow/bow_release_v3",
+            "audio/combat-v12/fir/fir_release_v1",
+            "audio/combat-v12/fir/fir_release_v2",
+            "audio/combat-v12/fir/fir_release_v3",
+            "audio/combat-v12/thu/thu_release_v1",
+            "audio/combat-v12/thu/thu_release_v2",
+            "audio/combat-v12/thu/thu_release_v3",
+            "audio/combat-v12/war/war_swing_v1",
+            "audio/combat-v12/war/war_swing_v2",
+            "audio/combat-v12/war/war_swing_v3"
+          ],
+          "sourceCount": 6,
+          "actualPlayingVoices": [],
+          "inspectCollectionCountsAgree": true
+        },
+        "magicPreloadOnly": true
+      },
+      "result": "passed",
+      "finished": "2026-11-17T10:24:44.737Z"
+    },
+    {
+      "name": "release-only-keyj-WAR-soft",
+      "diagnostic": "Real J input, release and contact in a controlled fixture. Sound only at release, no contact/outcome sound.",
+      "started": "2026-11-17T10:24:44.738Z",
+      "data": {
+        "setup": {
+          "family": "WAR",
+          "material": "soft",
+          "target": true,
+          "weapon": "W01",
+          "area": "S01-T1",
+          "level": 80,
+          "player": {
+            "x": 0,
+            "z": -7,
+            "hp": 315,
+            "focus": 100
+          },
+          "dummy": {
+            "id": "fusion-web-target:WAR:soft:0",
+            "kind": "shield",
+            "x": 0,
+            "z": -5.7,
+            "level": 1,
+            "hp": 100000,
+            "maxHp": 100000,
+            "angle": 3.141592653589793,
+            "phase": "recovery",
+            "phaseTime": 998.9658000000715,
+            "attackCount": 0,
+            "targetAngle": 3.141592653589793,
+            "attackKind": "swing",
+            "struck": false,
+            "markedUntil": 0,
+            "lightningUntil": 0,
+            "pushImmuneUntil": 0,
+            "staggerProtectedUntil": 0,
+            "halfAnnounced": false,
+            "trainingDummy": true,
+            "trainingAttacks": false,
+            "spawnedAt": 0.2871000000238419
+          },
+          "rollEvidence": {
+            "attack": "action:1",
+            "projectile": null,
+            "rating": 100,
+            "evasion": 1,
+            "rolls": [
+              {
+                "landed": true,
+                "chance": 0.99,
+                "roll": 0.6035146629437804
+              }
+            ]
+          },
+          "fixtureOnly": true,
+          "note": "Shield idle/front gives the real fallback metal guard; recovery-held shield gives a real unguarded soft hit. No hit/material event is injected."
+        },
+        "keyJPressCount": 1,
+        "expectedRelease": "war_swing",
+        "expectedVolume": 0.62,
+        "trace": {
+          "events": [
+            {
+              "stage": "release-only-keyj-WAR-soft",
+              "at": 5031.5,
+              "type": "action",
+              "id": "action:1",
+              "kind": "sword",
+              "family": "WAR",
+              "owner": "player",
+              "comboStage": 1
+            },
+            {
+              "stage": "release-only-keyj-WAR-soft",
+              "at": 5149.899999976158,
+              "type": "hit",
+              "id": "fusion-web-target:WAR:soft:0",
+              "action": "action:1",
+              "family": "WAR",
+              "material": "soft",
+              "owner": "player",
+              "source": "pure",
+              "hpLost": 20,
+              "critical": false,
+              "lethal": false,
+              "charged": false,
+              "comboStage": 1
+            },
+            {
+              "stage": "release-only-keyj-WAR-soft",
+              "at": 5149.899999976158,
+              "type": "enemy_recoil",
+              "id": "fusion-web-target:WAR:soft:0",
+              "action": "action:1",
+              "lethal": false
+            },
+            {
+              "stage": "release-only-keyj-WAR-soft",
+              "at": 5149.899999976158,
+              "type": "notice"
+            }
+          ],
+          "plays": [
+            {
+              "stage": "release-only-keyj-WAR-soft",
+              "at": 5031.700000047684,
+              "clip": "war_swing_v1",
+              "resourcePath": "audio/combat-v12/war/war_swing_v1",
+              "node": "CombatAudioVoice0",
+              "parent": "CombatAudio",
+              "volume": 0.62,
+              "currentTime": 0,
+              "origin": "logical-combat-request",
+              "observations": [
+                {
+                  "delayMs": 35,
+                  "playing": true,
+                  "currentTime": 0.03119999992847422,
+                  "clip": "war_swing_v1",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v1"
+                },
+                {
+                  "delayMs": 80,
+                  "playing": true,
+                  "currentTime": 0.09009999990463236,
+                  "clip": "war_swing_v1",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v1"
+                },
+                {
+                  "delayMs": 140,
+                  "playing": true,
+                  "currentTime": 0.1405999999046328,
+                  "clip": "war_swing_v1",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v1"
+                },
+                {
+                  "delayMs": 220,
+                  "playing": true,
+                  "currentTime": 0.2181999999284745,
+                  "clip": "war_swing_v1",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v1"
+                }
+              ]
+            },
+            {
+              "stage": "release-only-keyj-WAR-soft",
+              "at": 5037.600000023842,
+              "clip": "war_swing_v1",
+              "resourcePath": "audio/combat-v12/war/war_swing_v1",
+              "node": "CombatAudioVoice0",
+              "parent": "CombatAudio",
+              "volume": 0.62,
+              "currentTime": 0,
+              "origin": "engine-queue-or-other-audio",
+              "observations": [
+                {
+                  "delayMs": 35,
+                  "playing": true,
+                  "currentTime": 0.05319999992847446,
+                  "clip": "war_swing_v1",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v1"
+                },
+                {
+                  "delayMs": 80,
+                  "playing": true,
+                  "currentTime": 0.09009999990463236,
+                  "clip": "war_swing_v1",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v1"
+                },
+                {
+                  "delayMs": 140,
+                  "playing": true,
+                  "currentTime": 0.1405999999046328,
+                  "clip": "war_swing_v1",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v1"
+                },
+                {
+                  "delayMs": 220,
+                  "playing": true,
+                  "currentTime": 0.22799999999999976,
+                  "clip": "war_swing_v1",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v1"
+                }
+              ]
+            }
+          ],
+          "logical": [
+            {
+              "stage": "release-only-keyj-WAR-soft",
+              "at": 5031.700000047684,
+              "cue": "war_swing",
+              "key": "release:action:1",
+              "clip": "war_swing_v1",
+              "resourcePath": "audio/combat-v12/war/war_swing_v1",
+              "node": "CombatAudioVoice0",
+              "volume": 0.62,
+              "logicalCount": 1
+            }
+          ],
+          "oneShots": [],
+          "starts": [
+            {
+              "stage": "release-only-keyj-WAR-soft",
+              "at": 5037.700000047684,
+              "key": "release:action:1",
+              "clip": "war_swing_v1",
+              "resourcePath": "audio/combat-v12/war/war_swing_v1",
+              "playing": true,
+              "currentTime": 0
+            }
+          ],
+          "audio": {
+            "version": "release-only-v12",
+            "contactAudio": false,
+            "family": "WAR",
+            "loadedClips": 12,
+            "loadingFamilies": [],
+            "failedPaths": [],
+            "activeVoices": [],
+            "voiceLimit": 6,
+            "maximumVoices": 1,
+            "played": 1,
+            "dropped": 0,
+            "suspended": false,
+            "actualFailedPathCount": 0,
+            "actualLoadingFamilyCount": 0,
+            "loadedResourcePaths": [
+              "audio/combat-v12/bow/bow_release_v1",
+              "audio/combat-v12/bow/bow_release_v2",
+              "audio/combat-v12/bow/bow_release_v3",
+              "audio/combat-v12/fir/fir_release_v1",
+              "audio/combat-v12/fir/fir_release_v2",
+              "audio/combat-v12/fir/fir_release_v3",
+              "audio/combat-v12/thu/thu_release_v1",
+              "audio/combat-v12/thu/thu_release_v2",
+              "audio/combat-v12/thu/thu_release_v3",
+              "audio/combat-v12/war/war_swing_v1",
+              "audio/combat-v12/war/war_swing_v2",
+              "audio/combat-v12/war/war_swing_v3"
+            ],
+            "sourceCount": 6,
+            "actualPlayingVoices": [],
+            "inspectCollectionCountsAgree": true
+          },
+          "action": null
+        }
+      },
+      "result": "passed",
+      "finished": "2026-11-17T10:24:45.321Z"
+    },
+    {
+      "name": "release-only-keyj-WAR-metal",
+      "diagnostic": "Real J input, release and contact in a controlled fixture. Sound only at release, no contact/outcome sound.",
+      "started": "2026-11-17T10:24:45.322Z",
+      "data": {
+        "setup": {
+          "family": "WAR",
+          "material": "metal",
+          "target": true,
+          "weapon": "W01",
+          "area": "S01-T1",
+          "level": 80,
+          "player": {
+            "x": 0,
+            "z": -7,
+            "hp": 315,
+            "focus": 100
+          },
+          "dummy": {
+            "id": "fusion-web-target:WAR:metal:0",
+            "kind": "shield",
+            "x": 0,
+            "z": -5.7,
+            "level": 1,
+            "hp": 100000,
+            "maxHp": 100000,
+            "angle": 3.141592653589793,
+            "phase": "idle",
+            "phaseTime": 0,
+            "attackCount": 0,
+            "targetAngle": 3.141592653589793,
+            "attackKind": "swing",
+            "struck": false,
+            "markedUntil": 0,
+            "lightningUntil": 0,
+            "pushImmuneUntil": 0,
+            "staggerProtectedUntil": 0,
+            "halfAnnounced": false,
+            "trainingDummy": true,
+            "trainingAttacks": false,
+            "spawnedAt": 0.8706999999284741
+          },
+          "rollEvidence": {
+            "attack": "action:2",
+            "projectile": null,
+            "rating": 100,
+            "evasion": 1,
+            "rolls": [
+              {
+                "landed": true,
+                "chance": 0.99,
+                "roll": 0.8079145068768412
+              }
+            ]
+          },
+          "fixtureOnly": true,
+          "note": "Shield idle/front gives the real fallback metal guard; recovery-held shield gives a real unguarded soft hit. No hit/material event is injected."
+        },
+        "keyJPressCount": 1,
+        "expectedRelease": "war_swing",
+        "expectedVolume": 0.62,
+        "trace": {
+          "events": [
+            {
+              "stage": "release-only-keyj-WAR-metal",
+              "at": 5614.399999976158,
+              "type": "action",
+              "id": "action:2",
+              "kind": "sword",
+              "family": "WAR",
+              "owner": "player",
+              "comboStage": 1
+            },
+            {
+              "stage": "release-only-keyj-WAR-metal",
+              "at": 5731.299999952316,
+              "type": "block",
+              "id": "fusion-web-target:WAR:metal:0",
+              "action": "action:2",
+              "family": "WAR",
+              "material": "metal",
+              "owner": "player",
+              "source": "pure"
+            },
+            {
+              "stage": "release-only-keyj-WAR-metal",
+              "at": 5731.399999976158,
+              "type": "hit",
+              "id": "fusion-web-target:WAR:metal:0",
+              "action": "action:2",
+              "family": "WAR",
+              "material": "metal",
+              "owner": "player",
+              "source": "pure",
+              "hpLost": 8,
+              "critical": false,
+              "lethal": false,
+              "charged": false,
+              "comboStage": 1
+            },
+            {
+              "stage": "release-only-keyj-WAR-metal",
+              "at": 5731.399999976158,
+              "type": "enemy_recoil",
+              "id": "fusion-web-target:WAR:metal:0",
+              "action": "action:2",
+              "lethal": false
+            },
+            {
+              "stage": "release-only-keyj-WAR-metal",
+              "at": 5731.399999976158,
+              "type": "notice"
+            }
+          ],
+          "plays": [
+            {
+              "stage": "release-only-keyj-WAR-metal",
+              "at": 5614.5,
+              "clip": "war_swing_v2",
+              "resourcePath": "audio/combat-v12/war/war_swing_v2",
+              "node": "CombatAudioVoice0",
+              "parent": "CombatAudio",
+              "volume": 0.62,
+              "currentTime": 0,
+              "origin": "logical-combat-request",
+              "observations": [
+                {
+                  "delayMs": 35,
+                  "playing": true,
+                  "currentTime": 0.033600000023842114,
+                  "clip": "war_swing_v2",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v2"
+                },
+                {
+                  "delayMs": 80,
+                  "playing": true,
+                  "currentTime": 0.07899999999999974,
+                  "clip": "war_swing_v2",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v2"
+                },
+                {
+                  "delayMs": 140,
+                  "playing": true,
+                  "currentTime": 0.14079999995231685,
+                  "clip": "war_swing_v2",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v2"
+                },
+                {
+                  "delayMs": 220,
+                  "playing": true,
+                  "currentTime": 0.23510000002384235,
+                  "clip": "war_swing_v2",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v2"
+                }
+              ]
+            },
+            {
+              "stage": "release-only-keyj-WAR-metal",
+              "at": 5616.100000023842,
+              "clip": "war_swing_v2",
+              "resourcePath": "audio/combat-v12/war/war_swing_v2",
+              "node": "CombatAudioVoice0",
+              "parent": "CombatAudio",
+              "volume": 0.62,
+              "currentTime": 0,
+              "origin": "engine-queue-or-other-audio",
+              "observations": [
+                {
+                  "delayMs": 35,
+                  "playing": true,
+                  "currentTime": 0.039399999976158284,
+                  "clip": "war_swing_v2",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v2"
+                },
+                {
+                  "delayMs": 80,
+                  "playing": true,
+                  "currentTime": 0.08349999999999991,
+                  "clip": "war_swing_v2",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v2"
+                },
+                {
+                  "delayMs": 140,
+                  "playing": true,
+                  "currentTime": 0.14079999995231685,
+                  "clip": "war_swing_v2",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v2"
+                },
+                {
+                  "delayMs": 220,
+                  "playing": true,
+                  "currentTime": 0.23510000002384235,
+                  "clip": "war_swing_v2",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v2"
+                }
+              ]
+            }
+          ],
+          "logical": [
+            {
+              "stage": "release-only-keyj-WAR-metal",
+              "at": 5614.600000023842,
+              "cue": "war_swing",
+              "key": "release:action:2",
+              "clip": "war_swing_v2",
+              "resourcePath": "audio/combat-v12/war/war_swing_v2",
+              "node": "CombatAudioVoice0",
+              "volume": 0.62,
+              "logicalCount": 2
+            }
+          ],
+          "oneShots": [],
+          "starts": [
+            {
+              "stage": "release-only-keyj-WAR-metal",
+              "at": 5616.100000023842,
+              "key": "release:action:2",
+              "clip": "war_swing_v2",
+              "resourcePath": "audio/combat-v12/war/war_swing_v2",
+              "playing": true,
+              "currentTime": 0
+            }
+          ],
+          "audio": {
+            "version": "release-only-v12",
+            "contactAudio": false,
+            "family": "WAR",
+            "loadedClips": 12,
+            "loadingFamilies": [],
+            "failedPaths": [],
+            "activeVoices": [],
+            "voiceLimit": 6,
+            "maximumVoices": 1,
+            "played": 2,
+            "dropped": 0,
+            "suspended": false,
+            "actualFailedPathCount": 0,
+            "actualLoadingFamilyCount": 0,
+            "loadedResourcePaths": [
+              "audio/combat-v12/bow/bow_release_v1",
+              "audio/combat-v12/bow/bow_release_v2",
+              "audio/combat-v12/bow/bow_release_v3",
+              "audio/combat-v12/fir/fir_release_v1",
+              "audio/combat-v12/fir/fir_release_v2",
+              "audio/combat-v12/fir/fir_release_v3",
+              "audio/combat-v12/thu/thu_release_v1",
+              "audio/combat-v12/thu/thu_release_v2",
+              "audio/combat-v12/thu/thu_release_v3",
+              "audio/combat-v12/war/war_swing_v1",
+              "audio/combat-v12/war/war_swing_v2",
+              "audio/combat-v12/war/war_swing_v3"
+            ],
+            "sourceCount": 6,
+            "actualPlayingVoices": [],
+            "inspectCollectionCountsAgree": true
+          },
+          "action": null
+        }
+      },
+      "result": "passed",
+      "finished": "2026-11-17T10:24:45.881Z"
+    },
+    {
+      "name": "release-only-keyj-BOW-soft",
+      "diagnostic": "Real J input, release and contact in a controlled fixture. Sound only at release, no contact/outcome sound.",
+      "started": "2026-11-17T10:24:45.882Z",
+      "data": {
+        "setup": {
+          "family": "BOW",
+          "material": "soft",
+          "target": true,
+          "weapon": "W07",
+          "area": "S01-T1",
+          "level": 80,
+          "player": {
+            "x": 0,
+            "z": -7,
+            "hp": 315,
+            "focus": 100
+          },
+          "dummy": {
+            "id": "fusion-web-target:BOW:soft:0",
+            "kind": "shield",
+            "x": 0,
+            "z": -5.7,
+            "level": 1,
+            "hp": 100000,
+            "maxHp": 100000,
+            "angle": 3.141592653589793,
+            "phase": "recovery",
+            "phaseTime": 998.8860000000001,
+            "attackCount": 0,
+            "targetAngle": 3.141592653589793,
+            "attackKind": "swing",
+            "struck": false,
+            "markedUntil": 0,
+            "lightningUntil": 0,
+            "pushImmuneUntil": 0,
+            "staggerProtectedUntil": 0,
+            "halfAnnounced": false,
+            "trainingDummy": true,
+            "trainingAttacks": false,
+            "spawnedAt": 1.4204999999999994
+          },
+          "rollEvidence": {
+            "attack": "action:3",
+            "projectile": "projectile:4",
+            "rating": 100,
+            "evasion": 1,
+            "rolls": [
+              {
+                "landed": true,
+                "chance": 0.99,
+                "roll": 0.3339097013231367
+              },
+              {
+                "landed": true,
+                "chance": 0.99,
+                "roll": 0.4274786552414298
+              }
+            ]
+          },
+          "fixtureOnly": true,
+          "note": "Shield idle/front gives the real fallback metal guard; recovery-held shield gives a real unguarded soft hit. No hit/material event is injected."
+        },
+        "keyJPressCount": 1,
+        "expectedRelease": "bow_release",
+        "expectedVolume": 0.64,
+        "trace": {
+          "events": [
+            {
+              "stage": "release-only-keyj-BOW-soft",
+              "at": 6614.299999952316,
+              "type": "action",
+              "id": "action:3",
+              "kind": "bowAim",
+              "family": "BOW",
+              "owner": "player"
+            },
+            {
+              "stage": "release-only-keyj-BOW-soft",
+              "at": 6964.899999976158,
+              "type": "projectile",
+              "id": "projectile:4",
+              "action": "action:3",
+              "kind": "arrow",
+              "family": "BOW",
+              "owner": "player",
+              "charged": false
+            },
+            {
+              "stage": "release-only-keyj-BOW-soft",
+              "at": 6998,
+              "type": "hit",
+              "id": "fusion-web-target:BOW:soft:0",
+              "action": "projectile:4",
+              "family": "BOW",
+              "material": "soft",
+              "owner": "player",
+              "source": "pure",
+              "hpLost": 18,
+              "critical": false,
+              "lethal": false,
+              "charged": false
+            },
+            {
+              "stage": "release-only-keyj-BOW-soft",
+              "at": 6998,
+              "type": "enemy_recoil",
+              "id": "fusion-web-target:BOW:soft:0",
+              "action": "projectile:4",
+              "lethal": false
+            },
+            {
+              "stage": "release-only-keyj-BOW-soft",
+              "at": 6998,
+              "type": "notice"
+            }
+          ],
+          "plays": [
+            {
+              "stage": "release-only-keyj-BOW-soft",
+              "at": 6964.899999976158,
+              "clip": "bow_release_v1",
+              "resourcePath": "audio/combat-v12/bow/bow_release_v1",
+              "node": "CombatAudioVoice0",
+              "parent": "CombatAudio",
+              "volume": 0.64,
+              "currentTime": 0,
+              "origin": "logical-combat-request",
+              "observations": [
+                {
+                  "delayMs": 35,
+                  "playing": true,
+                  "currentTime": 0.03930000007152579,
+                  "clip": "bow_release_v1",
+                  "resourcePath": "audio/combat-v12/bow/bow_release_v1"
+                },
+                {
+                  "delayMs": 80,
+                  "playing": true,
+                  "currentTime": 0.07989999997615804,
+                  "clip": "bow_release_v1",
+                  "resourcePath": "audio/combat-v12/bow/bow_release_v1"
+                },
+                {
+                  "delayMs": 140,
+                  "playing": true,
+                  "currentTime": 0.14239999997615804,
+                  "clip": "bow_release_v1",
+                  "resourcePath": "audio/combat-v12/bow/bow_release_v1"
+                },
+                {
+                  "delayMs": 220,
+                  "playing": true,
+                  "currentTime": 0.21850000000000058,
+                  "clip": "bow_release_v1",
+                  "resourcePath": "audio/combat-v12/bow/bow_release_v1"
+                }
+              ]
+            },
+            {
+              "stage": "release-only-keyj-BOW-soft",
+              "at": 6969.299999952316,
+              "clip": "bow_release_v1",
+              "resourcePath": "audio/combat-v12/bow/bow_release_v1",
+              "node": "CombatAudioVoice0",
+              "parent": "CombatAudio",
+              "volume": 0.64,
+              "currentTime": 0,
+              "origin": "engine-queue-or-other-audio",
+              "observations": [
+                {
+                  "delayMs": 35,
+                  "playing": true,
+                  "currentTime": 0.03930000007152579,
+                  "clip": "bow_release_v1",
+                  "resourcePath": "audio/combat-v12/bow/bow_release_v1"
+                },
+                {
+                  "delayMs": 80,
+                  "playing": true,
+                  "currentTime": 0.09700000000000042,
+                  "clip": "bow_release_v1",
+                  "resourcePath": "audio/combat-v12/bow/bow_release_v1"
+                },
+                {
+                  "delayMs": 140,
+                  "playing": true,
+                  "currentTime": 0.14239999997615804,
+                  "clip": "bow_release_v1",
+                  "resourcePath": "audio/combat-v12/bow/bow_release_v1"
+                },
+                {
+                  "delayMs": 220,
+                  "playing": false,
+                  "currentTime": 0
+                }
+              ]
+            }
+          ],
+          "logical": [
+            {
+              "stage": "release-only-keyj-BOW-soft",
+              "at": 6964.899999976158,
+              "cue": "bow_release",
+              "key": "release:projectile:4",
+              "clip": "bow_release_v1",
+              "resourcePath": "audio/combat-v12/bow/bow_release_v1",
+              "node": "CombatAudioVoice0",
+              "volume": 0.64,
+              "logicalCount": 3
+            }
+          ],
+          "oneShots": [],
+          "starts": [
+            {
+              "stage": "release-only-keyj-BOW-soft",
+              "at": 6969.399999976158,
+              "key": "release:projectile:4",
+              "clip": "bow_release_v1",
+              "resourcePath": "audio/combat-v12/bow/bow_release_v1",
+              "playing": true,
+              "currentTime": 0
+            }
+          ],
+          "audio": {
+            "version": "release-only-v12",
+            "contactAudio": false,
+            "family": "BOW",
+            "loadedClips": 12,
+            "loadingFamilies": [],
+            "failedPaths": [],
+            "activeVoices": [],
+            "voiceLimit": 6,
+            "maximumVoices": 1,
+            "played": 3,
+            "dropped": 0,
+            "suspended": false,
+            "actualFailedPathCount": 0,
+            "actualLoadingFamilyCount": 0,
+            "loadedResourcePaths": [
+              "audio/combat-v12/bow/bow_release_v1",
+              "audio/combat-v12/bow/bow_release_v2",
+              "audio/combat-v12/bow/bow_release_v3",
+              "audio/combat-v12/fir/fir_release_v1",
+              "audio/combat-v12/fir/fir_release_v2",
+              "audio/combat-v12/fir/fir_release_v3",
+              "audio/combat-v12/thu/thu_release_v1",
+              "audio/combat-v12/thu/thu_release_v2",
+              "audio/combat-v12/thu/thu_release_v3",
+              "audio/combat-v12/war/war_swing_v1",
+              "audio/combat-v12/war/war_swing_v2",
+              "audio/combat-v12/war/war_swing_v3"
+            ],
+            "sourceCount": 6,
+            "actualPlayingVoices": [],
+            "inspectCollectionCountsAgree": true
+          },
+          "action": null
+        }
+      },
+      "result": "passed",
+      "finished": "2026-11-17T10:24:47.159Z"
+    },
+    {
+      "name": "release-only-keyj-BOW-metal",
+      "diagnostic": "Real J input, release and contact in a controlled fixture. Sound only at release, no contact/outcome sound.",
+      "started": "2026-11-17T10:24:47.160Z",
+      "data": {
+        "setup": {
+          "family": "BOW",
+          "material": "metal",
+          "target": true,
+          "weapon": "W07",
+          "area": "S01-T1",
+          "level": 80,
+          "player": {
+            "x": 0,
+            "z": -7,
+            "hp": 315,
+            "focus": 100
+          },
+          "dummy": {
+            "id": "fusion-web-target:BOW:metal:0",
+            "kind": "shield",
+            "x": 0,
+            "z": -5.7,
+            "level": 1,
+            "hp": 100000,
+            "maxHp": 100000,
+            "angle": 3.141592653589793,
+            "phase": "idle",
+            "phaseTime": 0,
+            "attackCount": 0,
+            "targetAngle": 3.141592653589793,
+            "attackKind": "swing",
+            "struck": false,
+            "markedUntil": 0,
+            "lightningUntil": 0,
+            "pushImmuneUntil": 0,
+            "staggerProtectedUntil": 0,
+            "halfAnnounced": false,
+            "trainingDummy": true,
+            "trainingAttacks": false,
+            "spawnedAt": 2.328299999952315
+          },
+          "rollEvidence": {
+            "attack": "action:5",
+            "projectile": "projectile:6",
+            "rating": 100,
+            "evasion": 1,
+            "rolls": [
+              {
+                "landed": true,
+                "chance": 0.99,
+                "roll": 0.11079995217733085
+              },
+              {
+                "landed": true,
+                "chance": 0.99,
+                "roll": 0.9499706239439547
+              }
+            ]
+          },
+          "fixtureOnly": true,
+          "note": "Shield idle/front gives the real fallback metal guard; recovery-held shield gives a real unguarded soft hit. No hit/material event is injected."
+        },
+        "keyJPressCount": 1,
+        "expectedRelease": "bow_release",
+        "expectedVolume": 0.64,
+        "trace": {
+          "events": [
+            {
+              "stage": "release-only-keyj-BOW-metal",
+              "at": 7447.700000047684,
+              "type": "action",
+              "id": "action:5",
+              "kind": "bowAim",
+              "family": "BOW",
+              "owner": "player"
+            },
+            {
+              "stage": "release-only-keyj-BOW-metal",
+              "at": 7797.799999952316,
+              "type": "projectile",
+              "id": "projectile:6",
+              "action": "action:5",
+              "kind": "arrow",
+              "family": "BOW",
+              "owner": "player",
+              "charged": false
+            },
+            {
+              "stage": "release-only-keyj-BOW-metal",
+              "at": 7831.200000047684,
+              "type": "block",
+              "id": "fusion-web-target:BOW:metal:0",
+              "action": "projectile:6",
+              "family": "BOW",
+              "material": "metal",
+              "owner": "player",
+              "source": "pure"
+            },
+            {
+              "stage": "release-only-keyj-BOW-metal",
+              "at": 7831.200000047684,
+              "type": "hit",
+              "id": "fusion-web-target:BOW:metal:0",
+              "action": "projectile:6",
+              "family": "BOW",
+              "material": "metal",
+              "owner": "player",
+              "source": "pure",
+              "hpLost": 7,
+              "critical": false,
+              "lethal": false,
+              "charged": false
+            },
+            {
+              "stage": "release-only-keyj-BOW-metal",
+              "at": 7831.200000047684,
+              "type": "enemy_recoil",
+              "id": "fusion-web-target:BOW:metal:0",
+              "action": "projectile:6",
+              "lethal": false
+            },
+            {
+              "stage": "release-only-keyj-BOW-metal",
+              "at": 7831.200000047684,
+              "type": "notice"
+            }
+          ],
+          "plays": [
+            {
+              "stage": "release-only-keyj-BOW-metal",
+              "at": 7797.799999952316,
+              "clip": "bow_release_v2",
+              "resourcePath": "audio/combat-v12/bow/bow_release_v2",
+              "node": "CombatAudioVoice0",
+              "parent": "CombatAudio",
+              "volume": 0.64,
+              "currentTime": 0,
+              "origin": "logical-combat-request",
+              "observations": [
+                {
+                  "delayMs": 35,
+                  "playing": true,
+                  "currentTime": 0.03460000002384156,
+                  "clip": "bow_release_v2",
+                  "resourcePath": "audio/combat-v12/bow/bow_release_v2"
+                },
+                {
+                  "delayMs": 80,
+                  "playing": true,
+                  "currentTime": 0.07979999995231601,
+                  "clip": "bow_release_v2",
+                  "resourcePath": "audio/combat-v12/bow/bow_release_v2"
+                },
+                {
+                  "delayMs": 140,
+                  "playing": true,
+                  "currentTime": 0.14169999992847426,
+                  "clip": "bow_release_v2",
+                  "resourcePath": "audio/combat-v12/bow/bow_release_v2"
+                },
+                {
+                  "delayMs": 220,
+                  "playing": false,
+                  "currentTime": 0
+                }
+              ]
+            },
+            {
+              "stage": "release-only-keyj-BOW-metal",
+              "at": 7799.600000023842,
+              "clip": "bow_release_v2",
+              "resourcePath": "audio/combat-v12/bow/bow_release_v2",
+              "node": "CombatAudioVoice0",
+              "parent": "CombatAudio",
+              "volume": 0.64,
+              "currentTime": 0,
+              "origin": "engine-queue-or-other-audio",
+              "observations": [
+                {
+                  "delayMs": 35,
+                  "playing": true,
+                  "currentTime": 0.03519999992847378,
+                  "clip": "bow_release_v2",
+                  "resourcePath": "audio/combat-v12/bow/bow_release_v2"
+                },
+                {
+                  "delayMs": 80,
+                  "playing": true,
+                  "currentTime": 0.0829999999999993,
+                  "clip": "bow_release_v2",
+                  "resourcePath": "audio/combat-v12/bow/bow_release_v2"
+                },
+                {
+                  "delayMs": 140,
+                  "playing": true,
+                  "currentTime": 0.1417999999523163,
+                  "clip": "bow_release_v2",
+                  "resourcePath": "audio/combat-v12/bow/bow_release_v2"
+                },
+                {
+                  "delayMs": 220,
+                  "playing": false,
+                  "currentTime": 0
+                }
+              ]
+            }
+          ],
+          "logical": [
+            {
+              "stage": "release-only-keyj-BOW-metal",
+              "at": 7797.899999976158,
+              "cue": "bow_release",
+              "key": "release:projectile:6",
+              "clip": "bow_release_v2",
+              "resourcePath": "audio/combat-v12/bow/bow_release_v2",
+              "node": "CombatAudioVoice0",
+              "volume": 0.64,
+              "logicalCount": 4
+            }
+          ],
+          "oneShots": [],
+          "starts": [
+            {
+              "stage": "release-only-keyj-BOW-metal",
+              "at": 7799.600000023842,
+              "key": "release:projectile:6",
+              "clip": "bow_release_v2",
+              "resourcePath": "audio/combat-v12/bow/bow_release_v2",
+              "playing": true,
+              "currentTime": 0
+            }
+          ],
+          "audio": {
+            "version": "release-only-v12",
+            "contactAudio": false,
+            "family": "BOW",
+            "loadedClips": 12,
+            "loadingFamilies": [],
+            "failedPaths": [],
+            "activeVoices": [],
+            "voiceLimit": 6,
+            "maximumVoices": 1,
+            "played": 4,
+            "dropped": 0,
+            "suspended": false,
+            "actualFailedPathCount": 0,
+            "actualLoadingFamilyCount": 0,
+            "loadedResourcePaths": [
+              "audio/combat-v12/bow/bow_release_v1",
+              "audio/combat-v12/bow/bow_release_v2",
+              "audio/combat-v12/bow/bow_release_v3",
+              "audio/combat-v12/fir/fir_release_v1",
+              "audio/combat-v12/fir/fir_release_v2",
+              "audio/combat-v12/fir/fir_release_v3",
+              "audio/combat-v12/thu/thu_release_v1",
+              "audio/combat-v12/thu/thu_release_v2",
+              "audio/combat-v12/thu/thu_release_v3",
+              "audio/combat-v12/war/war_swing_v1",
+              "audio/combat-v12/war/war_swing_v2",
+              "audio/combat-v12/war/war_swing_v3"
+            ],
+            "sourceCount": 6,
+            "actualPlayingVoices": [],
+            "inspectCollectionCountsAgree": true
+          },
+          "action": null
+        }
+      },
+      "result": "passed",
+      "finished": "2026-11-17T10:24:47.976Z"
+    },
+    {
+      "name": "release-only-keyj-FIR-soft",
+      "diagnostic": "Real J input, release and contact in a controlled fixture. Sound only at release, no contact/outcome sound.",
+      "started": "2026-11-17T10:24:47.977Z",
+      "data": {
+        "setup": {
+          "family": "FIR",
+          "material": "soft",
+          "target": true,
+          "weapon": "W11",
+          "area": "S01-T1",
+          "level": 80,
+          "player": {
+            "x": 0,
+            "z": -7,
+            "hp": 315,
+            "focus": 100
+          },
+          "dummy": {
+            "id": "fusion-web-target:FIR:soft:0",
+            "kind": "shield",
+            "x": 0,
+            "z": -5.7,
+            "level": 1,
+            "hp": 100000,
+            "maxHp": 100000,
+            "angle": 3.141592653589793,
+            "phase": "recovery",
+            "phaseTime": 998.9852999999523,
+            "attackCount": 0,
+            "targetAngle": 3.141592653589793,
+            "attackKind": "swing",
+            "struck": false,
+            "markedUntil": 0,
+            "lightningUntil": 0,
+            "pushImmuneUntil": 0,
+            "staggerProtectedUntil": 0,
+            "halfAnnounced": false,
+            "trainingDummy": true,
+            "trainingAttacks": false,
+            "spawnedAt": 3.1451000000238403
+          },
+          "rollEvidence": {
+            "attack": "action:7",
+            "projectile": null,
+            "rating": 100,
+            "evasion": 1,
+            "rolls": [
+              {
+                "landed": true,
+                "chance": 0.99,
+                "roll": 0.6323269815184176
+              }
+            ]
+          },
+          "fixtureOnly": true,
+          "note": "Shield idle/front gives the real fallback metal guard; recovery-held shield gives a real unguarded soft hit. No hit/material event is injected."
+        },
+        "keyJPressCount": 1,
+        "expectedRelease": "fir_release",
+        "expectedVolume": 0.4,
+        "trace": {
+          "events": [
+            {
+              "stage": "release-only-keyj-FIR-soft",
+              "at": 8481.100000023842,
+              "type": "action",
+              "id": "action:7",
+              "kind": "staff",
+              "family": "FIR",
+              "owner": "player"
+            },
+            {
+              "stage": "release-only-keyj-FIR-soft",
+              "at": 8681.200000047684,
+              "type": "projectile",
+              "id": "projectile:8",
+              "action": "action:7",
+              "kind": "staff",
+              "family": "FIR",
+              "owner": "player",
+              "charged": false
+            },
+            {
+              "stage": "release-only-keyj-FIR-soft",
+              "at": 8714.600000023842,
+              "type": "hit",
+              "id": "fusion-web-target:FIR:soft:0",
+              "action": "projectile:8",
+              "family": "FIR",
+              "material": "soft",
+              "owner": "player",
+              "source": "spell",
+              "hpLost": 16,
+              "critical": false,
+              "lethal": false,
+              "charged": false
+            },
+            {
+              "stage": "release-only-keyj-FIR-soft",
+              "at": 8714.600000023842,
+              "type": "enemy_recoil",
+              "id": "fusion-web-target:FIR:soft:0",
+              "action": "projectile:8",
+              "lethal": false
+            },
+            {
+              "stage": "release-only-keyj-FIR-soft",
+              "at": 8714.600000023842,
+              "type": "notice"
+            }
+          ],
+          "plays": [
+            {
+              "stage": "release-only-keyj-FIR-soft",
+              "at": 8681.299999952316,
+              "clip": "fir_release_v1",
+              "resourcePath": "audio/combat-v12/fir/fir_release_v1",
+              "node": "CombatAudioVoice0",
+              "parent": "CombatAudio",
+              "volume": 0.4,
+              "currentTime": 0,
+              "origin": "logical-combat-request",
+              "observations": [
+                {
+                  "delayMs": 35,
+                  "playing": true,
+                  "currentTime": 0.05920000004768333,
+                  "clip": "fir_release_v1",
+                  "resourcePath": "audio/combat-v12/fir/fir_release_v1"
+                },
+                {
+                  "delayMs": 80,
+                  "playing": true,
+                  "currentTime": 0.08310000002384221,
+                  "clip": "fir_release_v1",
+                  "resourcePath": "audio/combat-v12/fir/fir_release_v1"
+                },
+                {
+                  "delayMs": 140,
+                  "playing": true,
+                  "currentTime": 0.15050000000000097,
+                  "clip": "fir_release_v1",
+                  "resourcePath": "audio/combat-v12/fir/fir_release_v1"
+                },
+                {
+                  "delayMs": 220,
+                  "playing": true,
+                  "currentTime": 0.22460000002384284,
+                  "clip": "fir_release_v1",
+                  "resourcePath": "audio/combat-v12/fir/fir_release_v1"
+                }
+              ]
+            },
+            {
+              "stage": "release-only-keyj-FIR-soft",
+              "at": 8682.899999976158,
+              "clip": "fir_release_v1",
+              "resourcePath": "audio/combat-v12/fir/fir_release_v1",
+              "node": "CombatAudioVoice0",
+              "parent": "CombatAudio",
+              "volume": 0.4,
+              "currentTime": 0,
+              "origin": "engine-queue-or-other-audio",
+              "observations": [
+                {
+                  "delayMs": 35,
+                  "playing": true,
+                  "currentTime": 0.05920000004768333,
+                  "clip": "fir_release_v1",
+                  "resourcePath": "audio/combat-v12/fir/fir_release_v1"
+                },
+                {
+                  "delayMs": 80,
+                  "playing": true,
+                  "currentTime": 0.08310000002384221,
+                  "clip": "fir_release_v1",
+                  "resourcePath": "audio/combat-v12/fir/fir_release_v1"
+                },
+                {
+                  "delayMs": 140,
+                  "playing": true,
+                  "currentTime": 0.150600000023843,
+                  "clip": "fir_release_v1",
+                  "resourcePath": "audio/combat-v12/fir/fir_release_v1"
+                },
+                {
+                  "delayMs": 220,
+                  "playing": true,
+                  "currentTime": 0.22460000002384284,
+                  "clip": "fir_release_v1",
+                  "resourcePath": "audio/combat-v12/fir/fir_release_v1"
+                }
+              ]
+            }
+          ],
+          "logical": [
+            {
+              "stage": "release-only-keyj-FIR-soft",
+              "at": 8681.299999952316,
+              "cue": "fir_release",
+              "key": "release:projectile:8",
+              "clip": "fir_release_v1",
+              "resourcePath": "audio/combat-v12/fir/fir_release_v1",
+              "node": "CombatAudioVoice0",
+              "volume": 0.4,
+              "logicalCount": 5
+            }
+          ],
+          "oneShots": [],
+          "starts": [
+            {
+              "stage": "release-only-keyj-FIR-soft",
+              "at": 8682.899999976158,
+              "key": "release:projectile:8",
+              "clip": "fir_release_v1",
+              "resourcePath": "audio/combat-v12/fir/fir_release_v1",
+              "playing": true,
+              "currentTime": 0
+            }
+          ],
+          "audio": {
+            "version": "release-only-v12",
+            "contactAudio": false,
+            "family": "FIR",
+            "loadedClips": 12,
+            "loadingFamilies": [],
+            "failedPaths": [],
+            "activeVoices": [],
+            "voiceLimit": 6,
+            "maximumVoices": 1,
+            "played": 5,
+            "dropped": 0,
+            "suspended": false,
+            "actualFailedPathCount": 0,
+            "actualLoadingFamilyCount": 0,
+            "loadedResourcePaths": [
+              "audio/combat-v12/bow/bow_release_v1",
+              "audio/combat-v12/bow/bow_release_v2",
+              "audio/combat-v12/bow/bow_release_v3",
+              "audio/combat-v12/fir/fir_release_v1",
+              "audio/combat-v12/fir/fir_release_v2",
+              "audio/combat-v12/fir/fir_release_v3",
+              "audio/combat-v12/thu/thu_release_v1",
+              "audio/combat-v12/thu/thu_release_v2",
+              "audio/combat-v12/thu/thu_release_v3",
+              "audio/combat-v12/war/war_swing_v1",
+              "audio/combat-v12/war/war_swing_v2",
+              "audio/combat-v12/war/war_swing_v3"
+            ],
+            "sourceCount": 6,
+            "actualPlayingVoices": [],
+            "inspectCollectionCountsAgree": true
+          },
+          "action": null
+        }
+      },
+      "result": "passed",
+      "finished": "2026-11-17T10:24:48.896Z"
+    },
+    {
+      "name": "release-only-keyj-THU-soft",
+      "diagnostic": "Real J input, release and contact in a controlled fixture. Sound only at release, no contact/outcome sound.",
+      "started": "2026-11-17T10:24:48.897Z",
+      "data": {
+        "setup": {
+          "family": "THU",
+          "material": "soft",
+          "target": true,
+          "weapon": "W11",
+          "area": "S01-T1",
+          "level": 80,
+          "player": {
+            "x": 0,
+            "z": -7,
+            "hp": 315,
+            "focus": 100
+          },
+          "dummy": {
+            "id": "fusion-web-target:THU:soft:0",
+            "kind": "shield",
+            "x": 0,
+            "z": -5.7,
+            "level": 1,
+            "hp": 100000,
+            "maxHp": 100000,
+            "angle": 3.141592653589793,
+            "phase": "recovery",
+            "phaseTime": 998.9683999999762,
+            "attackCount": 0,
+            "targetAngle": 3.141592653589793,
+            "attackKind": "swing",
+            "struck": false,
+            "markedUntil": 0,
+            "lightningUntil": 0,
+            "pushImmuneUntil": 0,
+            "staggerProtectedUntil": 0,
+            "halfAnnounced": false,
+            "trainingDummy": true,
+            "trainingAttacks": false,
+            "spawnedAt": 3.82660000002384
+          },
+          "rollEvidence": {
+            "attack": "action:9",
+            "projectile": null,
+            "rating": 100,
+            "evasion": 1,
+            "rolls": [
+              {
+                "landed": true,
+                "chance": 0.99,
+                "roll": 0.3487539389170706
+              }
+            ]
+          },
+          "fixtureOnly": true,
+          "note": "Shield idle/front gives the real fallback metal guard; recovery-held shield gives a real unguarded soft hit. No hit/material event is injected."
+        },
+        "keyJPressCount": 1,
+        "expectedRelease": "thu_release",
+        "expectedVolume": 0.4,
+        "trace": {
+          "events": [
+            {
+              "stage": "release-only-keyj-THU-soft",
+              "at": 9231.100000023842,
+              "type": "action",
+              "id": "action:9",
+              "kind": "staff",
+              "family": "THU",
+              "owner": "player"
+            },
+            {
+              "stage": "release-only-keyj-THU-soft",
+              "at": 9431.100000023842,
+              "type": "projectile",
+              "id": "projectile:10",
+              "action": "action:9",
+              "kind": "staff",
+              "family": "THU",
+              "owner": "player",
+              "charged": false
+            },
+            {
+              "stage": "release-only-keyj-THU-soft",
+              "at": 9465,
+              "type": "hit",
+              "id": "fusion-web-target:THU:soft:0",
+              "action": "projectile:10",
+              "family": "THU",
+              "material": "soft",
+              "owner": "player",
+              "source": "spell",
+              "hpLost": 16,
+              "critical": false,
+              "lethal": false,
+              "charged": false
+            },
+            {
+              "stage": "release-only-keyj-THU-soft",
+              "at": 9465,
+              "type": "enemy_recoil",
+              "id": "fusion-web-target:THU:soft:0",
+              "action": "projectile:10",
+              "lethal": false
+            },
+            {
+              "stage": "release-only-keyj-THU-soft",
+              "at": 9465,
+              "type": "notice"
+            }
+          ],
+          "plays": [
+            {
+              "stage": "release-only-keyj-THU-soft",
+              "at": 9431.100000023842,
+              "clip": "thu_release_v1",
+              "resourcePath": "audio/combat-v12/thu/thu_release_v1",
+              "node": "CombatAudioVoice0",
+              "parent": "CombatAudio",
+              "volume": 0.4,
+              "currentTime": 0,
+              "origin": "logical-combat-request",
+              "observations": [
+                {
+                  "delayMs": 35,
+                  "playing": true,
+                  "currentTime": 0.03449999999999953,
+                  "clip": "thu_release_v1",
+                  "resourcePath": "audio/combat-v12/thu/thu_release_v1"
+                },
+                {
+                  "delayMs": 80,
+                  "playing": true,
+                  "currentTime": 0.08230000007152505,
+                  "clip": "thu_release_v1",
+                  "resourcePath": "audio/combat-v12/thu/thu_release_v1"
+                },
+                {
+                  "delayMs": 140,
+                  "playing": true,
+                  "currentTime": 0.14860000002384055,
+                  "clip": "thu_release_v1",
+                  "resourcePath": "audio/combat-v12/thu/thu_release_v1"
+                },
+                {
+                  "delayMs": 220,
+                  "playing": true,
+                  "currentTime": 0.2297000000476821,
+                  "clip": "thu_release_v1",
+                  "resourcePath": "audio/combat-v12/thu/thu_release_v1"
+                }
+              ]
+            },
+            {
+              "stage": "release-only-keyj-THU-soft",
+              "at": 9433.799999952316,
+              "clip": "thu_release_v1",
+              "resourcePath": "audio/combat-v12/thu/thu_release_v1",
+              "node": "CombatAudioVoice0",
+              "parent": "CombatAudio",
+              "volume": 0.4,
+              "currentTime": 0,
+              "origin": "engine-queue-or-other-audio",
+              "observations": [
+                {
+                  "delayMs": 35,
+                  "playing": true,
+                  "currentTime": 0.034999999999998366,
+                  "clip": "thu_release_v1",
+                  "resourcePath": "audio/combat-v12/thu/thu_release_v1"
+                },
+                {
+                  "delayMs": 80,
+                  "playing": true,
+                  "currentTime": 0.08239999997615755,
+                  "clip": "thu_release_v1",
+                  "resourcePath": "audio/combat-v12/thu/thu_release_v1"
+                },
+                {
+                  "delayMs": 140,
+                  "playing": true,
+                  "currentTime": 0.14870000004768258,
+                  "clip": "thu_release_v1",
+                  "resourcePath": "audio/combat-v12/thu/thu_release_v1"
+                },
+                {
+                  "delayMs": 220,
+                  "playing": true,
+                  "currentTime": 0.2297000000476821,
+                  "clip": "thu_release_v1",
+                  "resourcePath": "audio/combat-v12/thu/thu_release_v1"
+                }
+              ]
+            }
+          ],
+          "logical": [
+            {
+              "stage": "release-only-keyj-THU-soft",
+              "at": 9431.200000047684,
+              "cue": "thu_release",
+              "key": "release:projectile:10",
+              "clip": "thu_release_v1",
+              "resourcePath": "audio/combat-v12/thu/thu_release_v1",
+              "node": "CombatAudioVoice0",
+              "volume": 0.4,
+              "logicalCount": 6
+            }
+          ],
+          "oneShots": [],
+          "starts": [
+            {
+              "stage": "release-only-keyj-THU-soft",
+              "at": 9433.899999976158,
+              "key": "release:projectile:10",
+              "clip": "thu_release_v1",
+              "resourcePath": "audio/combat-v12/thu/thu_release_v1",
+              "playing": true,
+              "currentTime": 0
+            }
+          ],
+          "audio": {
+            "version": "release-only-v12",
+            "contactAudio": false,
+            "family": "THU",
+            "loadedClips": 12,
+            "loadingFamilies": [],
+            "failedPaths": [],
+            "activeVoices": [],
+            "voiceLimit": 6,
+            "maximumVoices": 1,
+            "played": 6,
+            "dropped": 0,
+            "suspended": false,
+            "actualFailedPathCount": 0,
+            "actualLoadingFamilyCount": 0,
+            "loadedResourcePaths": [
+              "audio/combat-v12/bow/bow_release_v1",
+              "audio/combat-v12/bow/bow_release_v2",
+              "audio/combat-v12/bow/bow_release_v3",
+              "audio/combat-v12/fir/fir_release_v1",
+              "audio/combat-v12/fir/fir_release_v2",
+              "audio/combat-v12/fir/fir_release_v3",
+              "audio/combat-v12/thu/thu_release_v1",
+              "audio/combat-v12/thu/thu_release_v2",
+              "audio/combat-v12/thu/thu_release_v3",
+              "audio/combat-v12/war/war_swing_v1",
+              "audio/combat-v12/war/war_swing_v2",
+              "audio/combat-v12/war/war_swing_v3"
+            ],
+            "sourceCount": 6,
+            "actualPlayingVoices": [],
+            "inspectCollectionCountsAgree": true
+          },
+          "action": null
+        }
+      },
+      "result": "passed",
+      "finished": "2026-11-17T10:24:49.620Z"
+    },
+    {
+      "name": "one-empty-war-swing-has-no-contact",
+      "diagnostic": "Only an empty controlled scene and real KeyJ; no artificial hit event.",
+      "started": "2026-11-17T10:24:49.621Z",
+      "data": {
+        "setup": {
+          "family": "WAR",
+          "material": "soft",
+          "target": false,
+          "weapon": "W01",
+          "area": "S01-T1",
+          "level": 80,
+          "player": {
+            "x": 0,
+            "z": -7,
+            "hp": 315,
+            "focus": 100
+          },
+          "dummy": null,
+          "rollEvidence": null,
+          "fixtureOnly": true,
+          "note": "Shield idle/front gives the real fallback metal guard; recovery-held shield gives a real unguarded soft hit. No hit/material event is injected."
+        },
+        "keyJPressCount": 1,
+        "trace": {
+          "events": [
+            {
+              "stage": "one-empty-war-swing-has-no-contact",
+              "at": 9964.299999952316,
+              "type": "action",
+              "id": "action:11",
+              "kind": "sword",
+              "family": "WAR",
+              "owner": "player",
+              "comboStage": 1
+            }
+          ],
+          "plays": [
+            {
+              "stage": "one-empty-war-swing-has-no-contact",
+              "at": 9964.299999952316,
+              "clip": "war_swing_v3",
+              "resourcePath": "audio/combat-v12/war/war_swing_v3",
+              "node": "CombatAudioVoice0",
+              "parent": "CombatAudio",
+              "volume": 0.62,
+              "currentTime": 0,
+              "origin": "logical-combat-request",
+              "observations": [
+                {
+                  "delayMs": 35,
+                  "playing": true,
+                  "currentTime": 0.03669999992847295,
+                  "clip": "war_swing_v3",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v3"
+                },
+                {
+                  "delayMs": 80,
+                  "playing": true,
+                  "currentTime": 0.08339999997615699,
+                  "clip": "war_swing_v3",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v3"
+                },
+                {
+                  "delayMs": 140,
+                  "playing": true,
+                  "currentTime": 0.14660000002384166,
+                  "clip": "war_swing_v3",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v3"
+                },
+                {
+                  "delayMs": 220,
+                  "playing": true,
+                  "currentTime": 0.22279999995231492,
+                  "clip": "war_swing_v3",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v3"
+                }
+              ]
+            },
+            {
+              "stage": "one-empty-war-swing-has-no-contact",
+              "at": 9965.600000023842,
+              "clip": "war_swing_v3",
+              "resourcePath": "audio/combat-v12/war/war_swing_v3",
+              "node": "CombatAudioVoice0",
+              "parent": "CombatAudio",
+              "volume": 0.62,
+              "currentTime": 0,
+              "origin": "engine-queue-or-other-audio",
+              "observations": [
+                {
+                  "delayMs": 35,
+                  "playing": true,
+                  "currentTime": 0.03679999995231498,
+                  "clip": "war_swing_v3",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v3"
+                },
+                {
+                  "delayMs": 80,
+                  "playing": true,
+                  "currentTime": 0.08339999997615699,
+                  "clip": "war_swing_v3",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v3"
+                },
+                {
+                  "delayMs": 140,
+                  "playing": true,
+                  "currentTime": 0.14660000002384166,
+                  "clip": "war_swing_v3",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v3"
+                },
+                {
+                  "delayMs": 220,
+                  "playing": true,
+                  "currentTime": 0.22279999995231492,
+                  "clip": "war_swing_v3",
+                  "resourcePath": "audio/combat-v12/war/war_swing_v3"
+                }
+              ]
+            }
+          ],
+          "logical": [
+            {
+              "stage": "one-empty-war-swing-has-no-contact",
+              "at": 9964.299999952316,
+              "cue": "war_swing",
+              "key": "release:action:11",
+              "clip": "war_swing_v3",
+              "resourcePath": "audio/combat-v12/war/war_swing_v3",
+              "node": "CombatAudioVoice0",
+              "volume": 0.62,
+              "logicalCount": 7
+            }
+          ],
+          "oneShots": [],
+          "starts": [
+            {
+              "stage": "one-empty-war-swing-has-no-contact",
+              "at": 9965.600000023842,
+              "key": "release:action:11",
+              "clip": "war_swing_v3",
+              "resourcePath": "audio/combat-v12/war/war_swing_v3",
+              "playing": true,
+              "currentTime": 0
+            }
+          ],
+          "audio": {
+            "version": "release-only-v12",
+            "contactAudio": false,
+            "family": "WAR",
+            "loadedClips": 12,
+            "loadingFamilies": [],
+            "failedPaths": [],
+            "activeVoices": [],
+            "voiceLimit": 6,
+            "maximumVoices": 1,
+            "played": 7,
+            "dropped": 0,
+            "suspended": false,
+            "actualFailedPathCount": 0,
+            "actualLoadingFamilyCount": 0,
+            "loadedResourcePaths": [
+              "audio/combat-v12/bow/bow_release_v1",
+              "audio/combat-v12/bow/bow_release_v2",
+              "audio/combat-v12/bow/bow_release_v3",
+              "audio/combat-v12/fir/fir_release_v1",
+              "audio/combat-v12/fir/fir_release_v2",
+              "audio/combat-v12/fir/fir_release_v3",
+              "audio/combat-v12/thu/thu_release_v1",
+              "audio/combat-v12/thu/thu_release_v2",
+              "audio/combat-v12/thu/thu_release_v3",
+              "audio/combat-v12/war/war_swing_v1",
+              "audio/combat-v12/war/war_swing_v2",
+              "audio/combat-v12/war/war_swing_v3"
+            ],
+            "sourceCount": 6,
+            "actualPlayingVoices": [],
+            "inspectCollectionCountsAgree": true
+          },
+          "action": null
+        }
+      },
+      "result": "passed",
+      "finished": "2026-11-17T10:24:50.387Z"
+    },
+    {
+      "name": "bow-aim-escape-cancel-is-silent",
+      "diagnostic": "Real J hold then Escape; fixture has no target. No change to the music controller.",
+      "started": "2026-11-17T10:24:50.388Z",
+      "data": {
+        "setup": {
+          "family": "BOW",
+          "material": "soft",
+          "target": false,
+          "weapon": "W07",
+          "area": "S01-T1",
+          "level": 80,
+          "player": {
+            "x": 0,
+            "z": -7,
+            "hp": 315,
+            "focus": 100
+          },
+          "dummy": null,
+          "rollEvidence": null,
+          "fixtureOnly": true,
+          "note": "Shield idle/front gives the real fallback metal guard; recovery-held shield gives a real unguarded soft hit. No hit/material event is injected."
+        },
+        "keyJPressCount": 1,
+        "trace": {
+          "events": [
+            {
+              "stage": "bow-aim-escape-cancel-is-silent",
+              "at": 10680.899999976158,
+              "type": "action",
+              "id": "action:12",
+              "kind": "bowAim",
+              "family": "BOW",
+              "owner": "player"
+            }
+          ],
+          "plays": [],
+          "logical": [],
+          "oneShots": [],
+          "starts": [],
+          "audio": {
+            "version": "release-only-v12",
+            "contactAudio": false,
+            "family": "BOW",
+            "loadedClips": 12,
+            "loadingFamilies": [],
+            "failedPaths": [],
+            "activeVoices": [],
+            "voiceLimit": 6,
+            "maximumVoices": 1,
+            "played": 7,
+            "dropped": 0,
+            "suspended": false,
+            "actualFailedPathCount": 0,
+            "actualLoadingFamilyCount": 0,
+            "loadedResourcePaths": [
+              "audio/combat-v12/bow/bow_release_v1",
+              "audio/combat-v12/bow/bow_release_v2",
+              "audio/combat-v12/bow/bow_release_v3",
+              "audio/combat-v12/fir/fir_release_v1",
+              "audio/combat-v12/fir/fir_release_v2",
+              "audio/combat-v12/fir/fir_release_v3",
+              "audio/combat-v12/thu/thu_release_v1",
+              "audio/combat-v12/thu/thu_release_v2",
+              "audio/combat-v12/thu/thu_release_v3",
+              "audio/combat-v12/war/war_swing_v1",
+              "audio/combat-v12/war/war_swing_v2",
+              "audio/combat-v12/war/war_swing_v3"
+            ],
+            "sourceCount": 6,
+            "actualPlayingVoices": [],
+            "inspectCollectionCountsAgree": true
+          },
+          "action": null
+        }
+      },
+      "result": "passed",
+      "finished": "2026-11-17T10:24:50.647Z"
+    },
+    {
+      "name": "contact-and-outcome-dispatch-remains-silent",
+      "diagnostic": "Injected presentation events only, not proof of combat rules. Real ordinary contacts are exercised in the six previous stages.",
+      "started": "2026-11-17T10:24:50.648Z",
+      "data": {
+        "data": {
+          "eventTypes": [
+            "hit",
+            "hit",
+            "hit",
+            "hit",
+            "block",
+            "guard_break",
+            "interrupt",
+            "stagger",
+            "counter_hit",
+            "hurt",
+            "hurt"
+          ],
+          "before": {
+            "allocated": 1,
+            "limit": 12,
+            "active": [],
+            "hits": 6,
+            "sounds": 0,
+            "maximumKickPixels": 0.3638886784891368,
+            "reducedMotion": false
+          },
+          "after": {
+            "allocated": 2,
+            "limit": 12,
+            "active": [
+              {
+                "id": "fusion-web-target:WAR:soft:0",
+                "kind": "stagger",
+                "age": 0,
+                "radius": 20
+              },
+              {
+                "id": "player",
+                "kind": "hurt",
+                "age": 0,
+                "radius": 10
+              }
+            ],
+            "hits": 8,
+            "sounds": 0,
+            "maximumKickPixels": 0.3638886784891368,
+            "reducedMotion": false
+          },
+          "injectedFeedbackDiagnostic": true
+        },
+        "trace": {
+          "events": [
+            {
+              "stage": "contact-and-outcome-dispatch-remains-silent",
+              "at": 11152,
+              "type": "hit",
+              "id": "fusion-web-target:WAR:soft:0",
+              "action": "release-only-silent-diagnostic",
+              "family": "WAR",
+              "owner": "player",
+              "source": "basic",
+              "hpLost": 1
+            },
+            {
+              "stage": "contact-and-outcome-dispatch-remains-silent",
+              "at": 11152,
+              "type": "hit",
+              "id": "fusion-web-target:WAR:soft:0",
+              "action": "release-only-silent-diagnostic",
+              "family": "BOW",
+              "owner": "player",
+              "source": "basic",
+              "hpLost": 1
+            },
+            {
+              "stage": "contact-and-outcome-dispatch-remains-silent",
+              "at": 11152,
+              "type": "hit",
+              "id": "fusion-web-target:WAR:soft:0",
+              "action": "release-only-silent-diagnostic",
+              "family": "FIR",
+              "owner": "player",
+              "source": "basic",
+              "hpLost": 1
+            },
+            {
+              "stage": "contact-and-outcome-dispatch-remains-silent",
+              "at": 11152,
+              "type": "hit",
+              "id": "fusion-web-target:WAR:soft:0",
+              "action": "release-only-silent-diagnostic",
+              "family": "THU",
+              "owner": "player",
+              "source": "basic",
+              "hpLost": 1
+            },
+            {
+              "stage": "contact-and-outcome-dispatch-remains-silent",
+              "at": 11152,
+              "type": "block",
+              "id": "fusion-web-target:WAR:soft:0",
+              "action": "release-only-silent-diagnostic",
+              "owner": "player",
+              "hpLost": 1
+            },
+            {
+              "stage": "contact-and-outcome-dispatch-remains-silent",
+              "at": 11152,
+              "type": "guard_break",
+              "id": "fusion-web-target:WAR:soft:0",
+              "action": "release-only-silent-diagnostic",
+              "owner": "player",
+              "hpLost": 1
+            },
+            {
+              "stage": "contact-and-outcome-dispatch-remains-silent",
+              "at": 11152,
+              "type": "interrupt",
+              "id": "fusion-web-target:WAR:soft:0",
+              "action": "release-only-silent-diagnostic",
+              "owner": "player",
+              "hpLost": 1
+            },
+            {
+              "stage": "contact-and-outcome-dispatch-remains-silent",
+              "at": 11152,
+              "type": "stagger",
+              "id": "fusion-web-target:WAR:soft:0",
+              "action": "release-only-silent-diagnostic",
+              "owner": "player",
+              "hpLost": 1
+            },
+            {
+              "stage": "contact-and-outcome-dispatch-remains-silent",
+              "at": 11152,
+              "type": "counter_hit",
+              "id": "fusion-web-target:WAR:soft:0",
+              "action": "release-only-silent-diagnostic",
+              "owner": "player",
+              "hpLost": 1
+            },
+            {
+              "stage": "contact-and-outcome-dispatch-remains-silent",
+              "at": 11152,
+              "type": "hurt",
+              "hpLost": 1
+            },
+            {
+              "stage": "contact-and-outcome-dispatch-remains-silent",
+              "at": 11152,
+              "type": "hurt",
+              "hpLost": 0
+            }
+          ],
+          "plays": [],
+          "logical": [],
+          "oneShots": [],
+          "starts": [],
+          "audio": {
+            "version": "release-only-v12",
+            "contactAudio": false,
+            "family": "WAR",
+            "loadedClips": 12,
+            "loadingFamilies": [],
+            "failedPaths": [],
+            "activeVoices": [],
+            "voiceLimit": 6,
+            "maximumVoices": 1,
+            "played": 7,
+            "dropped": 0,
+            "suspended": false,
+            "actualFailedPathCount": 0,
+            "actualLoadingFamilyCount": 0,
+            "loadedResourcePaths": [
+              "audio/combat-v12/bow/bow_release_v1",
+              "audio/combat-v12/bow/bow_release_v2",
+              "audio/combat-v12/bow/bow_release_v3",
+              "audio/combat-v12/fir/fir_release_v1",
+              "audio/combat-v12/fir/fir_release_v2",
+              "audio/combat-v12/fir/fir_release_v3",
+              "audio/combat-v12/thu/thu_release_v1",
+              "audio/combat-v12/thu/thu_release_v2",
+              "audio/combat-v12/thu/thu_release_v3",
+              "audio/combat-v12/war/war_swing_v1",
+              "audio/combat-v12/war/war_swing_v2",
+              "audio/combat-v12/war/war_swing_v3"
+            ],
+            "sourceCount": 6,
+            "actualPlayingVoices": [],
+            "inspectCollectionCountsAgree": true
+          },
+          "action": null
+        }
+      },
+      "result": "passed",
+      "finished": "2026-11-17T10:24:51.121Z"
+    }
+  ],
+  "console": [
+    {
+      "type": "error",
+      "text": "Failed to load resource: net::ERR_NO_BUFFER_SPACE"
+    }
+  ],
+  "pageErrors": [],
+  "requestFailures": [
+    {
+      "url": "http://127.0.0.1:7476/assets/panel-art/import/37/3769d389-85d6-4e32-a674-5e4fa41b7847.a2533.json",
+      "failure": "net::ERR_NO_BUFFER_SPACE"
+    }
+  ],
+  "httpErrors": [],
+  "audioRequests": [
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/config.73974.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/index.73974.js",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/import/62/6260035a-a466-5900-a7e4-8bb330d75f3d.70247.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/import/1b/1b21f9ee-68e9-598c-bb5d-c7d7fc780c40.45770.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/import/86/8689da4d-8439-50b6-aa57-94bf16f81b2e.73b43.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/native/62/6260035a-a466-5900-a7e4-8bb330d75f3d.1bb09.wav",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/native/1b/1b21f9ee-68e9-598c-bb5d-c7d7fc780c40.21907.wav",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/native/86/8689da4d-8439-50b6-aa57-94bf16f81b2e.6e1d5.wav",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/import/17/170babbe-87f6-5763-9a53-de1a001bbb60.31c1d.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/import/78/78527ecd-e8ec-5bc5-9f85-82eca9ee9357.df002.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/import/dc/dc9d745a-ff24-5ebe-91c0-b75e99d0b27f.0031e.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/import/48/483ecb65-5766-5ca3-9a62-68bada64d33a.a89fe.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/import/d0/d0c67468-79a2-5f0b-8ecc-37d6a48ba15d.f8144.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/import/34/344861e5-888d-5ae4-a10b-ae4aa189a616.d14af.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/import/1c/1c04f27a-0ca2-5994-a553-0377917f04a6.76547.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/import/68/6892dd22-1fd1-5d6d-ac28-d9b66e78db52.6e240.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/import/5f/5f550e89-107f-5f6c-b807-8e179469fd25.ea2e3.json",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/native/17/170babbe-87f6-5763-9a53-de1a001bbb60.d4dde.wav",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/native/78/78527ecd-e8ec-5bc5-9f85-82eca9ee9357.b6025.wav",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/native/48/483ecb65-5766-5ca3-9a62-68bada64d33a.3f028.wav",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/native/dc/dc9d745a-ff24-5ebe-91c0-b75e99d0b27f.7928a.wav",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/native/d0/d0c67468-79a2-5f0b-8ecc-37d6a48ba15d.e7685.wav",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/native/68/6892dd22-1fd1-5d6d-ac28-d9b66e78db52.7bca0.wav",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/native/1c/1c04f27a-0ca2-5994-a553-0377917f04a6.7825b.wav",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/native/34/344861e5-888d-5ae4-a10b-ae4aa189a616.b02f0.wav",
+      "method": "GET"
+    },
+    {
+      "url": "http://127.0.0.1:7476/assets/combat-audio/native/5f/5f550e89-107f-5f6c-b807-8e179469fd25.87794.wav",
+      "method": "GET"
+    }
+  ],
+  "limitations": [
+    "Six controlled targets use actual GameSession KeyJ actions across all four families; WAR/BOW cover soft and metal. Each case sends J once.",
+    "Loadout, level, empty nearby scene, non-attacking target and target ID are controlled fixtures, not ordinary progression or enemy-art acceptance.",
+    "Target IDs are selected with the existing deterministic contact-roll helper for the next normal attack/projectile; accuracy and damage functions are not overridden.",
+    "FIR/THU basic releases are exercised after normal presentation preloading. No skill/boss/music progression acceptance is claimed.",
+    "AudioSource requests, STARTED events and actual playing/currentTime observations are evidence of engine playback intent/state, not human auditory approval.",
+    "Cocos may invoke play again when dispatching a queued operation; logical CombatAudio requests are counted separately from source-level invocations."
+  ],
+  "final": {
+    "audio": {
+      "version": "release-only-v12",
+      "contactAudio": false,
+      "family": "WAR",
+      "loadedClips": 12,
+      "loadingFamilies": [],
+      "failedPaths": [],
+      "activeVoices": [],
+      "voiceLimit": 6,
+      "maximumVoices": 1,
+      "played": 7,
+      "dropped": 0,
+      "suspended": false,
+      "actualFailedPathCount": 0,
+      "actualLoadingFamilyCount": 0,
+      "loadedResourcePaths": [
+        "audio/combat-v12/bow/bow_release_v1",
+        "audio/combat-v12/bow/bow_release_v2",
+        "audio/combat-v12/bow/bow_release_v3",
+        "audio/combat-v12/fir/fir_release_v1",
+        "audio/combat-v12/fir/fir_release_v2",
+        "audio/combat-v12/fir/fir_release_v3",
+        "audio/combat-v12/thu/thu_release_v1",
+        "audio/combat-v12/thu/thu_release_v2",
+        "audio/combat-v12/thu/thu_release_v3",
+        "audio/combat-v12/war/war_swing_v1",
+        "audio/combat-v12/war/war_swing_v2",
+        "audio/combat-v12/war/war_swing_v3"
+      ],
+      "sourceCount": 6,
+      "actualPlayingVoices": [],
+      "inspectCollectionCountsAgree": true
+    },
+    "bundles": [
+      "actor-raphael",
+      "background-music",
+      "cast-mira",
+      "cast-raider-shield",
+      "combat-audio",
+      "combat-vfx",
+      "environment",
+      "equipment-art",
+      "hero-appearance",
+      "hero-hairstyles",
+      "hero-melee-combo",
+      "internal",
+      "main",
+      "native-materials",
+      "native-weapons",
+      "painted-interiors",
+      "painted-terrain",
+      "panel-art",
+      "resources",
+      "skill-icons",
+      "waystones"
+    ],
+    "logicalCombatPlays": [
+      {
+        "stage": "release-only-keyj-WAR-soft",
+        "at": 5031.700000047684,
+        "cue": "war_swing",
+        "key": "release:action:1",
+        "clip": "war_swing_v1",
+        "resourcePath": "audio/combat-v12/war/war_swing_v1",
+        "node": "CombatAudioVoice0",
+        "volume": 0.62,
+        "logicalCount": 1
+      },
+      {
+        "stage": "release-only-keyj-WAR-metal",
+        "at": 5614.600000023842,
+        "cue": "war_swing",
+        "key": "release:action:2",
+        "clip": "war_swing_v2",
+        "resourcePath": "audio/combat-v12/war/war_swing_v2",
+        "node": "CombatAudioVoice0",
+        "volume": 0.62,
+        "logicalCount": 2
+      },
+      {
+        "stage": "release-only-keyj-BOW-soft",
+        "at": 6964.899999976158,
+        "cue": "bow_release",
+        "key": "release:projectile:4",
+        "clip": "bow_release_v1",
+        "resourcePath": "audio/combat-v12/bow/bow_release_v1",
+        "node": "CombatAudioVoice0",
+        "volume": 0.64,
+        "logicalCount": 3
+      },
+      {
+        "stage": "release-only-keyj-BOW-metal",
+        "at": 7797.899999976158,
+        "cue": "bow_release",
+        "key": "release:projectile:6",
+        "clip": "bow_release_v2",
+        "resourcePath": "audio/combat-v12/bow/bow_release_v2",
+        "node": "CombatAudioVoice0",
+        "volume": 0.64,
+        "logicalCount": 4
+      },
+      {
+        "stage": "release-only-keyj-FIR-soft",
+        "at": 8681.299999952316,
+        "cue": "fir_release",
+        "key": "release:projectile:8",
+        "clip": "fir_release_v1",
+        "resourcePath": "audio/combat-v12/fir/fir_release_v1",
+        "node": "CombatAudioVoice0",
+        "volume": 0.4,
+        "logicalCount": 5
+      },
+      {
+        "stage": "release-only-keyj-THU-soft",
+        "at": 9431.200000047684,
+        "cue": "thu_release",
+        "key": "release:projectile:10",
+        "clip": "thu_release_v1",
+        "resourcePath": "audio/combat-v12/thu/thu_release_v1",
+        "node": "CombatAudioVoice0",
+        "volume": 0.4,
+        "logicalCount": 6
+      },
+      {
+        "stage": "one-empty-war-swing-has-no-contact",
+        "at": 9964.299999952316,
+        "cue": "war_swing",
+        "key": "release:action:11",
+        "clip": "war_swing_v3",
+        "resourcePath": "audio/combat-v12/war/war_swing_v3",
+        "node": "CombatAudioVoice0",
+        "volume": 0.62,
+        "logicalCount": 7
+      }
+    ],
+    "sourcePlayInvocations": [
+      {
+        "stage": "boot",
+        "at": 4670.700000047684,
+        "clip": "embers-oaths-explore",
+        "node": "Exploration",
+        "parent": "BackgroundMusic",
+        "volume": 0,
+        "currentTime": 0,
+        "origin": "engine-queue-or-other-audio",
+        "observations": [
+          {
+            "delayMs": 35,
+            "playing": true,
+            "currentTime": 0.03860000002384201,
+            "clip": "embers-oaths-explore"
+          },
+          {
+            "delayMs": 80,
+            "playing": true,
+            "currentTime": 0.08189999997615871,
+            "clip": "embers-oaths-explore"
+          },
+          {
+            "delayMs": 140,
+            "playing": true,
+            "currentTime": 0.1447000000476839,
+            "clip": "embers-oaths-explore"
+          },
+          {
+            "delayMs": 220,
+            "playing": true,
+            "currentTime": 0.2277000000476841,
+            "clip": "embers-oaths-explore"
+          }
+        ]
+      },
+      {
+        "stage": "boot",
+        "at": 4671.100000023842,
+        "clip": "embers-oaths-explore",
+        "node": "Exploration",
+        "parent": "BackgroundMusic",
+        "volume": 0,
+        "currentTime": 0,
+        "origin": "engine-queue-or-other-audio",
+        "observations": [
+          {
+            "delayMs": 35,
+            "playing": true,
+            "currentTime": 0.038700000047684036,
+            "clip": "embers-oaths-explore"
+          },
+          {
+            "delayMs": 80,
+            "playing": true,
+            "currentTime": 0.08189999997615871,
+            "clip": "embers-oaths-explore"
+          },
+          {
+            "delayMs": 140,
+            "playing": true,
+            "currentTime": 0.1447000000476839,
+            "clip": "embers-oaths-explore"
+          },
+          {
+            "delayMs": 220,
+            "playing": true,
+            "currentTime": 0.22780000007152612,
+            "clip": "embers-oaths-explore"
+          }
+        ]
+      },
+      {
+        "stage": "release-only-keyj-WAR-soft",
+        "at": 5031.700000047684,
+        "clip": "war_swing_v1",
+        "resourcePath": "audio/combat-v12/war/war_swing_v1",
+        "node": "CombatAudioVoice0",
+        "parent": "CombatAudio",
+        "volume": 0.62,
+        "currentTime": 0,
+        "origin": "logical-combat-request",
+        "observations": [
+          {
+            "delayMs": 35,
+            "playing": true,
+            "currentTime": 0.03119999992847422,
+            "clip": "war_swing_v1",
+            "resourcePath": "audio/combat-v12/war/war_swing_v1"
+          },
+          {
+            "delayMs": 80,
+            "playing": true,
+            "currentTime": 0.09009999990463236,
+            "clip": "war_swing_v1",
+            "resourcePath": "audio/combat-v12/war/war_swing_v1"
+          },
+          {
+            "delayMs": 140,
+            "playing": true,
+            "currentTime": 0.1405999999046328,
+            "clip": "war_swing_v1",
+            "resourcePath": "audio/combat-v12/war/war_swing_v1"
+          },
+          {
+            "delayMs": 220,
+            "playing": true,
+            "currentTime": 0.2181999999284745,
+            "clip": "war_swing_v1",
+            "resourcePath": "audio/combat-v12/war/war_swing_v1"
+          }
+        ]
+      },
+      {
+        "stage": "release-only-keyj-WAR-soft",
+        "at": 5037.600000023842,
+        "clip": "war_swing_v1",
+        "resourcePath": "audio/combat-v12/war/war_swing_v1",
+        "node": "CombatAudioVoice0",
+        "parent": "CombatAudio",
+        "volume": 0.62,
+        "currentTime": 0,
+        "origin": "engine-queue-or-other-audio",
+        "observations": [
+          {
+            "delayMs": 35,
+            "playing": true,
+            "currentTime": 0.05319999992847446,
+            "clip": "war_swing_v1",
+            "resourcePath": "audio/combat-v12/war/war_swing_v1"
+          },
+          {
+            "delayMs": 80,
+            "playing": true,
+            "currentTime": 0.09009999990463236,
+            "clip": "war_swing_v1",
+            "resourcePath": "audio/combat-v12/war/war_swing_v1"
+          },
+          {
+            "delayMs": 140,
+            "playing": true,
+            "currentTime": 0.1405999999046328,
+            "clip": "war_swing_v1",
+            "resourcePath": "audio/combat-v12/war/war_swing_v1"
+          },
+          {
+            "delayMs": 220,
+            "playing": true,
+            "currentTime": 0.22799999999999976,
+            "clip": "war_swing_v1",
+            "resourcePath": "audio/combat-v12/war/war_swing_v1"
+          }
+        ]
+      },
+      {
+        "stage": "release-only-keyj-WAR-metal",
+        "at": 5614.5,
+        "clip": "war_swing_v2",
+        "resourcePath": "audio/combat-v12/war/war_swing_v2",
+        "node": "CombatAudioVoice0",
+        "parent": "CombatAudio",
+        "volume": 0.62,
+        "currentTime": 0,
+        "origin": "logical-combat-request",
+        "observations": [
+          {
+            "delayMs": 35,
+            "playing": true,
+            "currentTime": 0.033600000023842114,
+            "clip": "war_swing_v2",
+            "resourcePath": "audio/combat-v12/war/war_swing_v2"
+          },
+          {
+            "delayMs": 80,
+            "playing": true,
+            "currentTime": 0.07899999999999974,
+            "clip": "war_swing_v2",
+            "resourcePath": "audio/combat-v12/war/war_swing_v2"
+          },
+          {
+            "delayMs": 140,
+            "playing": true,
+            "currentTime": 0.14079999995231685,
+            "clip": "war_swing_v2",
+            "resourcePath": "audio/combat-v12/war/war_swing_v2"
+          },
+          {
+            "delayMs": 220,
+            "playing": true,
+            "currentTime": 0.23510000002384235,
+            "clip": "war_swing_v2",
+            "resourcePath": "audio/combat-v12/war/war_swing_v2"
+          }
+        ]
+      },
+      {
+        "stage": "release-only-keyj-WAR-metal",
+        "at": 5616.100000023842,
+        "clip": "war_swing_v2",
+        "resourcePath": "audio/combat-v12/war/war_swing_v2",
+        "node": "CombatAudioVoice0",
+        "parent": "CombatAudio",
+        "volume": 0.62,
+        "currentTime": 0,
+        "origin": "engine-queue-or-other-audio",
+        "observations": [
+          {
+            "delayMs": 35,
+            "playing": true,
+            "currentTime": 0.039399999976158284,
+            "clip": "war_swing_v2",
+            "resourcePath": "audio/combat-v12/war/war_swing_v2"
+          },
+          {
+            "delayMs": 80,
+            "playing": true,
+            "currentTime": 0.08349999999999991,
+            "clip": "war_swing_v2",
+            "resourcePath": "audio/combat-v12/war/war_swing_v2"
+          },
+          {
+            "delayMs": 140,
+            "playing": true,
+            "currentTime": 0.14079999995231685,
+            "clip": "war_swing_v2",
+            "resourcePath": "audio/combat-v12/war/war_swing_v2"
+          },
+          {
+            "delayMs": 220,
+            "playing": true,
+            "currentTime": 0.23510000002384235,
+            "clip": "war_swing_v2",
+            "resourcePath": "audio/combat-v12/war/war_swing_v2"
+          }
+        ]
+      },
+      {
+        "stage": "release-only-keyj-BOW-soft",
+        "at": 6964.899999976158,
+        "clip": "bow_release_v1",
+        "resourcePath": "audio/combat-v12/bow/bow_release_v1",
+        "node": "CombatAudioVoice0",
+        "parent": "CombatAudio",
+        "volume": 0.64,
+        "currentTime": 0,
+        "origin": "logical-combat-request",
+        "observations": [
+          {
+            "delayMs": 35,
+            "playing": true,
+            "currentTime": 0.03930000007152579,
+            "clip": "bow_release_v1",
+            "resourcePath": "audio/combat-v12/bow/bow_release_v1"
+          },
+          {
+            "delayMs": 80,
+            "playing": true,
+            "currentTime": 0.07989999997615804,
+            "clip": "bow_release_v1",
+            "resourcePath": "audio/combat-v12/bow/bow_release_v1"
+          },
+          {
+            "delayMs": 140,
+            "playing": true,
+            "currentTime": 0.14239999997615804,
+            "clip": "bow_release_v1",
+            "resourcePath": "audio/combat-v12/bow/bow_release_v1"
+          },
+          {
+            "delayMs": 220,
+            "playing": true,
+            "currentTime": 0.21850000000000058,
+            "clip": "bow_release_v1",
+            "resourcePath": "audio/combat-v12/bow/bow_release_v1"
+          }
+        ]
+      },
+      {
+        "stage": "release-only-keyj-BOW-soft",
+        "at": 6969.299999952316,
+        "clip": "bow_release_v1",
+        "resourcePath": "audio/combat-v12/bow/bow_release_v1",
+        "node": "CombatAudioVoice0",
+        "parent": "CombatAudio",
+        "volume": 0.64,
+        "currentTime": 0,
+        "origin": "engine-queue-or-other-audio",
+        "observations": [
+          {
+            "delayMs": 35,
+            "playing": true,
+            "currentTime": 0.03930000007152579,
+            "clip": "bow_release_v1",
+            "resourcePath": "audio/combat-v12/bow/bow_release_v1"
+          },
+          {
+            "delayMs": 80,
+            "playing": true,
+            "currentTime": 0.09700000000000042,
+            "clip": "bow_release_v1",
+            "resourcePath": "audio/combat-v12/bow/bow_release_v1"
+          },
+          {
+            "delayMs": 140,
+            "playing": true,
+            "currentTime": 0.14239999997615804,
+            "clip": "bow_release_v1",
+            "resourcePath": "audio/combat-v12/bow/bow_release_v1"
+          },
+          {
+            "delayMs": 220,
+            "playing": false,
+            "currentTime": 0
+          }
+        ]
+      },
+      {
+        "stage": "release-only-keyj-BOW-metal",
+        "at": 7797.799999952316,
+        "clip": "bow_release_v2",
+        "resourcePath": "audio/combat-v12/bow/bow_release_v2",
+        "node": "CombatAudioVoice0",
+        "parent": "CombatAudio",
+        "volume": 0.64,
+        "currentTime": 0,
+        "origin": "logical-combat-request",
+        "observations": [
+          {
+            "delayMs": 35,
+            "playing": true,
+            "currentTime": 0.03460000002384156,
+            "clip": "bow_release_v2",
+            "resourcePath": "audio/combat-v12/bow/bow_release_v2"
+          },
+          {
+            "delayMs": 80,
+            "playing": true,
+            "currentTime": 0.07979999995231601,
+            "clip": "bow_release_v2",
+            "resourcePath": "audio/combat-v12/bow/bow_release_v2"
+          },
+          {
+            "delayMs": 140,
+            "playing": true,
+            "currentTime": 0.14169999992847426,
+            "clip": "bow_release_v2",
+            "resourcePath": "audio/combat-v12/bow/bow_release_v2"
+          },
+          {
+            "delayMs": 220,
+            "playing": false,
+            "currentTime": 0
+          }
+        ]
+      },
+      {
+        "stage": "release-only-keyj-BOW-metal",
+        "at": 7799.600000023842,
+        "clip": "bow_release_v2",
+        "resourcePath": "audio/combat-v12/bow/bow_release_v2",
+        "node": "CombatAudioVoice0",
+        "parent": "CombatAudio",
+        "volume": 0.64,
+        "currentTime": 0,
+        "origin": "engine-queue-or-other-audio",
+        "observations": [
+          {
+            "delayMs": 35,
+            "playing": true,
+            "currentTime": 0.03519999992847378,
+            "clip": "bow_release_v2",
+            "resourcePath": "audio/combat-v12/bow/bow_release_v2"
+          },
+          {
+            "delayMs": 80,
+            "playing": true,
+            "currentTime": 0.0829999999999993,
+            "clip": "bow_release_v2",
+            "resourcePath": "audio/combat-v12/bow/bow_release_v2"
+          },
+          {
+            "delayMs": 140,
+            "playing": true,
+            "currentTime": 0.1417999999523163,
+            "clip": "bow_release_v2",
+            "resourcePath": "audio/combat-v12/bow/bow_release_v2"
+          },
+          {
+            "delayMs": 220,
+            "playing": false,
+            "currentTime": 0
+          }
+        ]
+      },
+      {
+        "stage": "release-only-keyj-FIR-soft",
+        "at": 8681.299999952316,
+        "clip": "fir_release_v1",
+        "resourcePath": "audio/combat-v12/fir/fir_release_v1",
+        "node": "CombatAudioVoice0",
+        "parent": "CombatAudio",
+        "volume": 0.4,
+        "currentTime": 0,
+        "origin": "logical-combat-request",
+        "observations": [
+          {
+            "delayMs": 35,
+            "playing": true,
+            "currentTime": 0.05920000004768333,
+            "clip": "fir_release_v1",
+            "resourcePath": "audio/combat-v12/fir/fir_release_v1"
+          },
+          {
+            "delayMs": 80,
+            "playing": true,
+            "currentTime": 0.08310000002384221,
+            "clip": "fir_release_v1",
+            "resourcePath": "audio/combat-v12/fir/fir_release_v1"
+          },
+          {
+            "delayMs": 140,
+            "playing": true,
+            "currentTime": 0.15050000000000097,
+            "clip": "fir_release_v1",
+            "resourcePath": "audio/combat-v12/fir/fir_release_v1"
+          },
+          {
+            "delayMs": 220,
+            "playing": true,
+            "currentTime": 0.22460000002384284,
+            "clip": "fir_release_v1",
+            "resourcePath": "audio/combat-v12/fir/fir_release_v1"
+          }
+        ]
+      },
+      {
+        "stage": "release-only-keyj-FIR-soft",
+        "at": 8682.899999976158,
+        "clip": "fir_release_v1",
+        "resourcePath": "audio/combat-v12/fir/fir_release_v1",
+        "node": "CombatAudioVoice0",
+        "parent": "CombatAudio",
+        "volume": 0.4,
+        "currentTime": 0,
+        "origin": "engine-queue-or-other-audio",
+        "observations": [
+          {
+            "delayMs": 35,
+            "playing": true,
+            "currentTime": 0.05920000004768333,
+            "clip": "fir_release_v1",
+            "resourcePath": "audio/combat-v12/fir/fir_release_v1"
+          },
+          {
+            "delayMs": 80,
+            "playing": true,
+            "currentTime": 0.08310000002384221,
+            "clip": "fir_release_v1",
+            "resourcePath": "audio/combat-v12/fir/fir_release_v1"
+          },
+          {
+            "delayMs": 140,
+            "playing": true,
+            "currentTime": 0.150600000023843,
+            "clip": "fir_release_v1",
+            "resourcePath": "audio/combat-v12/fir/fir_release_v1"
+          },
+          {
+            "delayMs": 220,
+            "playing": true,
+            "currentTime": 0.22460000002384284,
+            "clip": "fir_release_v1",
+            "resourcePath": "audio/combat-v12/fir/fir_release_v1"
+          }
+        ]
+      },
+      {
+        "stage": "release-only-keyj-THU-soft",
+        "at": 9431.100000023842,
+        "clip": "thu_release_v1",
+        "resourcePath": "audio/combat-v12/thu/thu_release_v1",
+        "node": "CombatAudioVoice0",
+        "parent": "CombatAudio",
+        "volume": 0.4,
+        "currentTime": 0,
+        "origin": "logical-combat-request",
+        "observations": [
+          {
+            "delayMs": 35,
+            "playing": true,
+            "currentTime": 0.03449999999999953,
+            "clip": "thu_release_v1",
+            "resourcePath": "audio/combat-v12/thu/thu_release_v1"
+          },
+          {
+            "delayMs": 80,
+            "playing": true,
+            "currentTime": 0.08230000007152505,
+            "clip": "thu_release_v1",
+            "resourcePath": "audio/combat-v12/thu/thu_release_v1"
+          },
+          {
+            "delayMs": 140,
+            "playing": true,
+            "currentTime": 0.14860000002384055,
+            "clip": "thu_release_v1",
+            "resourcePath": "audio/combat-v12/thu/thu_release_v1"
+          },
+          {
+            "delayMs": 220,
+            "playing": true,
+            "currentTime": 0.2297000000476821,
+            "clip": "thu_release_v1",
+            "resourcePath": "audio/combat-v12/thu/thu_release_v1"
+          }
+        ]
+      },
+      {
+        "stage": "release-only-keyj-THU-soft",
+        "at": 9433.799999952316,
+        "clip": "thu_release_v1",
+        "resourcePath": "audio/combat-v12/thu/thu_release_v1",
+        "node": "CombatAudioVoice0",
+        "parent": "CombatAudio",
+        "volume": 0.4,
+        "currentTime": 0,
+        "origin": "engine-queue-or-other-audio",
+        "observations": [
+          {
+            "delayMs": 35,
+            "playing": true,
+            "currentTime": 0.034999999999998366,
+            "clip": "thu_release_v1",
+            "resourcePath": "audio/combat-v12/thu/thu_release_v1"
+          },
+          {
+            "delayMs": 80,
+            "playing": true,
+            "currentTime": 0.08239999997615755,
+            "clip": "thu_release_v1",
+            "resourcePath": "audio/combat-v12/thu/thu_release_v1"
+          },
+          {
+            "delayMs": 140,
+            "playing": true,
+            "currentTime": 0.14870000004768258,
+            "clip": "thu_release_v1",
+            "resourcePath": "audio/combat-v12/thu/thu_release_v1"
+          },
+          {
+            "delayMs": 220,
+            "playing": true,
+            "currentTime": 0.2297000000476821,
+            "clip": "thu_release_v1",
+            "resourcePath": "audio/combat-v12/thu/thu_release_v1"
+          }
+        ]
+      },
+      {
+        "stage": "one-empty-war-swing-has-no-contact",
+        "at": 9964.299999952316,
+        "clip": "war_swing_v3",
+        "resourcePath": "audio/combat-v12/war/war_swing_v3",
+        "node": "CombatAudioVoice0",
+        "parent": "CombatAudio",
+        "volume": 0.62,
+        "currentTime": 0,
+        "origin": "logical-combat-request",
+        "observations": [
+          {
+            "delayMs": 35,
+            "playing": true,
+            "currentTime": 0.03669999992847295,
+            "clip": "war_swing_v3",
+            "resourcePath": "audio/combat-v12/war/war_swing_v3"
+          },
+          {
+            "delayMs": 80,
+            "playing": true,
+            "currentTime": 0.08339999997615699,
+            "clip": "war_swing_v3",
+            "resourcePath": "audio/combat-v12/war/war_swing_v3"
+          },
+          {
+            "delayMs": 140,
+            "playing": true,
+            "currentTime": 0.14660000002384166,
+            "clip": "war_swing_v3",
+            "resourcePath": "audio/combat-v12/war/war_swing_v3"
+          },
+          {
+            "delayMs": 220,
+            "playing": true,
+            "currentTime": 0.22279999995231492,
+            "clip": "war_swing_v3",
+            "resourcePath": "audio/combat-v12/war/war_swing_v3"
+          }
+        ]
+      },
+      {
+        "stage": "one-empty-war-swing-has-no-contact",
+        "at": 9965.600000023842,
+        "clip": "war_swing_v3",
+        "resourcePath": "audio/combat-v12/war/war_swing_v3",
+        "node": "CombatAudioVoice0",
+        "parent": "CombatAudio",
+        "volume": 0.62,
+        "currentTime": 0,
+        "origin": "engine-queue-or-other-audio",
+        "observations": [
+          {
+            "delayMs": 35,
+            "playing": true,
+            "currentTime": 0.03679999995231498,
+            "clip": "war_swing_v3",
+            "resourcePath": "audio/combat-v12/war/war_swing_v3"
+          },
+          {
+            "delayMs": 80,
+            "playing": true,
+            "currentTime": 0.08339999997615699,
+            "clip": "war_swing_v3",
+            "resourcePath": "audio/combat-v12/war/war_swing_v3"
+          },
+          {
+            "delayMs": 140,
+            "playing": true,
+            "currentTime": 0.14660000002384166,
+            "clip": "war_swing_v3",
+            "resourcePath": "audio/combat-v12/war/war_swing_v3"
+          },
+          {
+            "delayMs": 220,
+            "playing": true,
+            "currentTime": 0.22279999995231492,
+            "clip": "war_swing_v3",
+            "resourcePath": "audio/combat-v12/war/war_swing_v3"
+          }
+        ]
+      }
+    ],
+    "sourceStartedEvents": [
+      {
+        "stage": "release-only-keyj-WAR-soft",
+        "at": 5037.700000047684,
+        "key": "release:action:1",
+        "clip": "war_swing_v1",
+        "resourcePath": "audio/combat-v12/war/war_swing_v1",
+        "playing": true,
+        "currentTime": 0
+      },
+      {
+        "stage": "release-only-keyj-WAR-metal",
+        "at": 5616.100000023842,
+        "key": "release:action:2",
+        "clip": "war_swing_v2",
+        "resourcePath": "audio/combat-v12/war/war_swing_v2",
+        "playing": true,
+        "currentTime": 0
+      },
+      {
+        "stage": "release-only-keyj-BOW-soft",
+        "at": 6969.399999976158,
+        "key": "release:projectile:4",
+        "clip": "bow_release_v1",
+        "resourcePath": "audio/combat-v12/bow/bow_release_v1",
+        "playing": true,
+        "currentTime": 0
+      },
+      {
+        "stage": "release-only-keyj-BOW-metal",
+        "at": 7799.600000023842,
+        "key": "release:projectile:6",
+        "clip": "bow_release_v2",
+        "resourcePath": "audio/combat-v12/bow/bow_release_v2",
+        "playing": true,
+        "currentTime": 0
+      },
+      {
+        "stage": "release-only-keyj-FIR-soft",
+        "at": 8682.899999976158,
+        "key": "release:projectile:8",
+        "clip": "fir_release_v1",
+        "resourcePath": "audio/combat-v12/fir/fir_release_v1",
+        "playing": true,
+        "currentTime": 0
+      },
+      {
+        "stage": "release-only-keyj-THU-soft",
+        "at": 9433.899999976158,
+        "key": "release:projectile:10",
+        "clip": "thu_release_v1",
+        "resourcePath": "audio/combat-v12/thu/thu_release_v1",
+        "playing": true,
+        "currentTime": 0
+      },
+      {
+        "stage": "one-empty-war-swing-has-no-contact",
+        "at": 9965.600000023842,
+        "key": "release:action:11",
+        "clip": "war_swing_v3",
+        "resourcePath": "audio/combat-v12/war/war_swing_v3",
+        "playing": true,
+        "currentTime": 0
+      }
+    ],
+    "legacyOneShots": [
+      {
+        "stage": "release-only-keyj-WAR-soft",
+        "at": 4998.399999976158,
+        "clip": "complete",
+        "node": "ChapterGame",
+        "volume": 0.35
+      }
+    ],
+    "events": [
+      {
+        "stage": "boot",
+        "at": 4519.600000023842,
+        "type": "campaign_scene",
+        "id": "border-arrival"
+      },
+      {
+        "stage": "release-only-keyj-WAR-soft",
+        "at": 4998.200000047684,
+        "type": "notice"
+      },
+      {
+        "stage": "release-only-keyj-WAR-soft",
+        "at": 4998.200000047684,
+        "type": "experience",
+        "id": "local-playtest-level80"
+      },
+      {
+        "stage": "release-only-keyj-WAR-soft",
+        "at": 4998.200000047684,
+        "type": "level_up"
+      },
+      {
+        "stage": "release-only-keyj-WAR-soft",
+        "at": 5031.5,
+        "type": "action",
+        "id": "action:1",
+        "kind": "sword",
+        "family": "WAR",
+        "owner": "player",
+        "comboStage": 1
+      },
+      {
+        "stage": "release-only-keyj-WAR-soft",
+        "at": 5149.899999976158,
+        "type": "hit",
+        "id": "fusion-web-target:WAR:soft:0",
+        "action": "action:1",
+        "family": "WAR",
+        "material": "soft",
+        "owner": "player",
+        "source": "pure",
+        "hpLost": 20,
+        "critical": false,
+        "lethal": false,
+        "charged": false,
+        "comboStage": 1
+      },
+      {
+        "stage": "release-only-keyj-WAR-soft",
+        "at": 5149.899999976158,
+        "type": "enemy_recoil",
+        "id": "fusion-web-target:WAR:soft:0",
+        "action": "action:1",
+        "lethal": false
+      },
+      {
+        "stage": "release-only-keyj-WAR-soft",
+        "at": 5149.899999976158,
+        "type": "notice"
+      },
+      {
+        "stage": "release-only-keyj-WAR-metal",
+        "at": 5614.399999976158,
+        "type": "action",
+        "id": "action:2",
+        "kind": "sword",
+        "family": "WAR",
+        "owner": "player",
+        "comboStage": 1
+      },
+      {
+        "stage": "release-only-keyj-WAR-metal",
+        "at": 5731.299999952316,
+        "type": "block",
+        "id": "fusion-web-target:WAR:metal:0",
+        "action": "action:2",
+        "family": "WAR",
+        "material": "metal",
+        "owner": "player",
+        "source": "pure"
+      },
+      {
+        "stage": "release-only-keyj-WAR-metal",
+        "at": 5731.399999976158,
+        "type": "hit",
+        "id": "fusion-web-target:WAR:metal:0",
+        "action": "action:2",
+        "family": "WAR",
+        "material": "metal",
+        "owner": "player",
+        "source": "pure",
+        "hpLost": 8,
+        "critical": false,
+        "lethal": false,
+        "charged": false,
+        "comboStage": 1
+      },
+      {
+        "stage": "release-only-keyj-WAR-metal",
+        "at": 5731.399999976158,
+        "type": "enemy_recoil",
+        "id": "fusion-web-target:WAR:metal:0",
+        "action": "action:2",
+        "lethal": false
+      },
+      {
+        "stage": "release-only-keyj-WAR-metal",
+        "at": 5731.399999976158,
+        "type": "notice"
+      },
+      {
+        "stage": "release-only-keyj-BOW-soft",
+        "at": 6231,
+        "type": "equip",
+        "id": "W07"
+      },
+      {
+        "stage": "release-only-keyj-BOW-soft",
+        "at": 6614.299999952316,
+        "type": "action",
+        "id": "action:3",
+        "kind": "bowAim",
+        "family": "BOW",
+        "owner": "player"
+      },
+      {
+        "stage": "release-only-keyj-BOW-soft",
+        "at": 6964.899999976158,
+        "type": "projectile",
+        "id": "projectile:4",
+        "action": "action:3",
+        "kind": "arrow",
+        "family": "BOW",
+        "owner": "player",
+        "charged": false
+      },
+      {
+        "stage": "release-only-keyj-BOW-soft",
+        "at": 6998,
+        "type": "hit",
+        "id": "fusion-web-target:BOW:soft:0",
+        "action": "projectile:4",
+        "family": "BOW",
+        "material": "soft",
+        "owner": "player",
+        "source": "pure",
+        "hpLost": 18,
+        "critical": false,
+        "lethal": false,
+        "charged": false
+      },
+      {
+        "stage": "release-only-keyj-BOW-soft",
+        "at": 6998,
+        "type": "enemy_recoil",
+        "id": "fusion-web-target:BOW:soft:0",
+        "action": "projectile:4",
+        "lethal": false
+      },
+      {
+        "stage": "release-only-keyj-BOW-soft",
+        "at": 6998,
+        "type": "notice"
+      },
+      {
+        "stage": "release-only-keyj-BOW-metal",
+        "at": 7447.700000047684,
+        "type": "action",
+        "id": "action:5",
+        "kind": "bowAim",
+        "family": "BOW",
+        "owner": "player"
+      },
+      {
+        "stage": "release-only-keyj-BOW-metal",
+        "at": 7797.799999952316,
+        "type": "projectile",
+        "id": "projectile:6",
+        "action": "action:5",
+        "kind": "arrow",
+        "family": "BOW",
+        "owner": "player",
+        "charged": false
+      },
+      {
+        "stage": "release-only-keyj-BOW-metal",
+        "at": 7831.200000047684,
+        "type": "block",
+        "id": "fusion-web-target:BOW:metal:0",
+        "action": "projectile:6",
+        "family": "BOW",
+        "material": "metal",
+        "owner": "player",
+        "source": "pure"
+      },
+      {
+        "stage": "release-only-keyj-BOW-metal",
+        "at": 7831.200000047684,
+        "type": "hit",
+        "id": "fusion-web-target:BOW:metal:0",
+        "action": "projectile:6",
+        "family": "BOW",
+        "material": "metal",
+        "owner": "player",
+        "source": "pure",
+        "hpLost": 7,
+        "critical": false,
+        "lethal": false,
+        "charged": false
+      },
+      {
+        "stage": "release-only-keyj-BOW-metal",
+        "at": 7831.200000047684,
+        "type": "enemy_recoil",
+        "id": "fusion-web-target:BOW:metal:0",
+        "action": "projectile:6",
+        "lethal": false
+      },
+      {
+        "stage": "release-only-keyj-BOW-metal",
+        "at": 7831.200000047684,
+        "type": "notice"
+      },
+      {
+        "stage": "release-only-keyj-FIR-soft",
+        "at": 8464.399999976158,
+        "type": "equip",
+        "id": "W11"
+      },
+      {
+        "stage": "release-only-keyj-FIR-soft",
+        "at": 8481.100000023842,
+        "type": "action",
+        "id": "action:7",
+        "kind": "staff",
+        "family": "FIR",
+        "owner": "player"
+      },
+      {
+        "stage": "release-only-keyj-FIR-soft",
+        "at": 8681.200000047684,
+        "type": "projectile",
+        "id": "projectile:8",
+        "action": "action:7",
+        "kind": "staff",
+        "family": "FIR",
+        "owner": "player",
+        "charged": false
+      },
+      {
+        "stage": "release-only-keyj-FIR-soft",
+        "at": 8714.600000023842,
+        "type": "hit",
+        "id": "fusion-web-target:FIR:soft:0",
+        "action": "projectile:8",
+        "family": "FIR",
+        "material": "soft",
+        "owner": "player",
+        "source": "spell",
+        "hpLost": 16,
+        "critical": false,
+        "lethal": false,
+        "charged": false
+      },
+      {
+        "stage": "release-only-keyj-FIR-soft",
+        "at": 8714.600000023842,
+        "type": "enemy_recoil",
+        "id": "fusion-web-target:FIR:soft:0",
+        "action": "projectile:8",
+        "lethal": false
+      },
+      {
+        "stage": "release-only-keyj-FIR-soft",
+        "at": 8714.600000023842,
+        "type": "notice"
+      },
+      {
+        "stage": "release-only-keyj-THU-soft",
+        "at": 9231.100000023842,
+        "type": "action",
+        "id": "action:9",
+        "kind": "staff",
+        "family": "THU",
+        "owner": "player"
+      },
+      {
+        "stage": "release-only-keyj-THU-soft",
+        "at": 9431.100000023842,
+        "type": "projectile",
+        "id": "projectile:10",
+        "action": "action:9",
+        "kind": "staff",
+        "family": "THU",
+        "owner": "player",
+        "charged": false
+      },
+      {
+        "stage": "release-only-keyj-THU-soft",
+        "at": 9465,
+        "type": "hit",
+        "id": "fusion-web-target:THU:soft:0",
+        "action": "projectile:10",
+        "family": "THU",
+        "material": "soft",
+        "owner": "player",
+        "source": "spell",
+        "hpLost": 16,
+        "critical": false,
+        "lethal": false,
+        "charged": false
+      },
+      {
+        "stage": "release-only-keyj-THU-soft",
+        "at": 9465,
+        "type": "enemy_recoil",
+        "id": "fusion-web-target:THU:soft:0",
+        "action": "projectile:10",
+        "lethal": false
+      },
+      {
+        "stage": "release-only-keyj-THU-soft",
+        "at": 9465,
+        "type": "notice"
+      },
+      {
+        "stage": "one-empty-war-swing-has-no-contact",
+        "at": 9931.799999952316,
+        "type": "equip",
+        "id": "W01"
+      },
+      {
+        "stage": "one-empty-war-swing-has-no-contact",
+        "at": 9964.299999952316,
+        "type": "action",
+        "id": "action:11",
+        "kind": "sword",
+        "family": "WAR",
+        "owner": "player",
+        "comboStage": 1
+      },
+      {
+        "stage": "bow-aim-escape-cancel-is-silent",
+        "at": 10647.600000023842,
+        "type": "equip",
+        "id": "W07"
+      },
+      {
+        "stage": "bow-aim-escape-cancel-is-silent",
+        "at": 10680.899999976158,
+        "type": "action",
+        "id": "action:12",
+        "kind": "bowAim",
+        "family": "BOW",
+        "owner": "player"
+      },
+      {
+        "stage": "contact-and-outcome-dispatch-remains-silent",
+        "at": 10934.399999976158,
+        "type": "equip",
+        "id": "W01"
+      },
+      {
+        "stage": "contact-and-outcome-dispatch-remains-silent",
+        "at": 11152,
+        "type": "hit",
+        "id": "fusion-web-target:WAR:soft:0",
+        "action": "release-only-silent-diagnostic",
+        "family": "WAR",
+        "owner": "player",
+        "source": "basic",
+        "hpLost": 1
+      },
+      {
+        "stage": "contact-and-outcome-dispatch-remains-silent",
+        "at": 11152,
+        "type": "hit",
+        "id": "fusion-web-target:WAR:soft:0",
+        "action": "release-only-silent-diagnostic",
+        "family": "BOW",
+        "owner": "player",
+        "source": "basic",
+        "hpLost": 1
+      },
+      {
+        "stage": "contact-and-outcome-dispatch-remains-silent",
+        "at": 11152,
+        "type": "hit",
+        "id": "fusion-web-target:WAR:soft:0",
+        "action": "release-only-silent-diagnostic",
+        "family": "FIR",
+        "owner": "player",
+        "source": "basic",
+        "hpLost": 1
+      },
+      {
+        "stage": "contact-and-outcome-dispatch-remains-silent",
+        "at": 11152,
+        "type": "hit",
+        "id": "fusion-web-target:WAR:soft:0",
+        "action": "release-only-silent-diagnostic",
+        "family": "THU",
+        "owner": "player",
+        "source": "basic",
+        "hpLost": 1
+      },
+      {
+        "stage": "contact-and-outcome-dispatch-remains-silent",
+        "at": 11152,
+        "type": "block",
+        "id": "fusion-web-target:WAR:soft:0",
+        "action": "release-only-silent-diagnostic",
+        "owner": "player",
+        "hpLost": 1
+      },
+      {
+        "stage": "contact-and-outcome-dispatch-remains-silent",
+        "at": 11152,
+        "type": "guard_break",
+        "id": "fusion-web-target:WAR:soft:0",
+        "action": "release-only-silent-diagnostic",
+        "owner": "player",
+        "hpLost": 1
+      },
+      {
+        "stage": "contact-and-outcome-dispatch-remains-silent",
+        "at": 11152,
+        "type": "interrupt",
+        "id": "fusion-web-target:WAR:soft:0",
+        "action": "release-only-silent-diagnostic",
+        "owner": "player",
+        "hpLost": 1
+      },
+      {
+        "stage": "contact-and-outcome-dispatch-remains-silent",
+        "at": 11152,
+        "type": "stagger",
+        "id": "fusion-web-target:WAR:soft:0",
+        "action": "release-only-silent-diagnostic",
+        "owner": "player",
+        "hpLost": 1
+      },
+      {
+        "stage": "contact-and-outcome-dispatch-remains-silent",
+        "at": 11152,
+        "type": "counter_hit",
+        "id": "fusion-web-target:WAR:soft:0",
+        "action": "release-only-silent-diagnostic",
+        "owner": "player",
+        "hpLost": 1
+      },
+      {
+        "stage": "contact-and-outcome-dispatch-remains-silent",
+        "at": 11152,
+        "type": "hurt",
+        "hpLost": 1
+      },
+      {
+        "stage": "contact-and-outcome-dispatch-remains-silent",
+        "at": 11152,
+        "type": "hurt",
+        "hpLost": 0
+      }
+    ]
+  },
+  "summary": {
+    "stages": 11,
+    "passed": 11,
+    "consoleWarningsOrErrors": 1,
+    "pageErrors": 0,
+    "networkFailures": 1,
+    "httpErrors": 0
+  },
+  "finished": "2026-11-17T10:24:51.134Z"
+}

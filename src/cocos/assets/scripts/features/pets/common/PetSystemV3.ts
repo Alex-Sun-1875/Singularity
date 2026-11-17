@@ -1,3 +1,4 @@
+import {GOLD_CAPACITY} from '../../economy/data/Economy';
 import type {GameState,EnemyState} from '../../../core/GameSession';
 import {playableArea} from '../../journey/data/ChapterJourney';
 import {PET_POLICY,PET_SPECIES,PET_SKILLS,PET_QUALITIES,PET_PROMOTIONS,PET_RESEARCH_COSTS,PET_RESEARCH_VALUES,petSpecies,petSkill,petSignatureGrowth,type PetSpeciesId,type PetRole,type PetSkillId,type PetQuality,type PetBranch} from '../data/Pets';
@@ -146,7 +147,7 @@ function cost(s:GameState,g:PetState,action:PetAction,historical?:{level:number;
  }else if(action.kind==='research'){
   const rank=researchRank(s,g,action.skill);if(!rank)reject('请先通过实际探索、救助或试炼发现这本手册。');if(rank>=5)reject('本手册已研究至V阶，伙伴等级仍可继续成长。');const next=PET_RESEARCH_COSTS[rank+1];q.gold=next.gold;q.essence=next.essence;q.description=`${petSkill(action.skill)!.name}研究至${rank+1}阶，所有伙伴共享研究成果。`;
  }else if(action.kind==='claim'){
-  const gold=Math.min(g.pending.gold,Math.max(0,9999-s.player.gold)),essence=Math.min(g.pending.essence,PET_POLICY.maxEssence-g.essence);if(!gold&&!essence)reject(g.pending.gold||g.pending.essence?'请先腾出金币或灵蕴容量。':'没有待领取的旧版投入返还。');q.gold=-gold;q.essence=-essence;q.description=`领取旧版重复投入返还：金币${gold}，灵蕴${essence}。`;
+  const gold=Math.min(g.pending.gold,Math.max(0,GOLD_CAPACITY-s.player.gold)),essence=Math.min(g.pending.essence,PET_POLICY.maxEssence-g.essence);if(!gold&&!essence)reject(g.pending.gold||g.pending.essence?'请先腾出金币或灵蕴容量。':'没有待领取的旧版投入返还。');q.gold=-gold;q.essence=-essence;q.description=`领取旧版重复投入返还：金币${gold}，灵蕴${essence}。`;
  }else if(pet){
   switch(action.kind){
    case 'deploy':if(g.active===pet.id)reject('伙伴已经出战。');q.description=`让${name}出战，仅这一位伙伴提供战力。`;break;

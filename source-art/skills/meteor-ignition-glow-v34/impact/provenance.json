@@ -1,0 +1,62 @@
+{
+  "version": "meteor-local-ignition-v34",
+  "status": "implemented; native and user visual acceptance pending",
+  "request": "Remove the transparent enlargement of the complete meteor impact. Keep the final registered carrier fixed and ignite its connected fire locally from the existing impact centre.",
+  "source": {
+    "texture": "src/cocos/assets/resources/vfx/production/fire-meteor-burst-v32.png",
+    "sha256": "02f9fdfb05378c5d12097b2bf08746dc938f26fd04d428a650bb14ee95792154",
+    "provenance": "source-art/skills/fire-reference-alignment-v32/assets/burst-provenance.json",
+    "layout": "4x4 atlas, 16 frames; original selected v29 connected impact relief",
+    "newImageGeneration": false,
+    "newTextureFiles": false
+  },
+  "implementation": {
+    "runtime": "src/cocos/assets/scripts/features/combat/runtime/FireImpactEffects.ts",
+    "effect": "src/cocos/assets/resources/vfx/production/fire-impact-v34.effect",
+    "effectUuid": "8730e517-48e3-5b2c-b76a-45cd85844b0b",
+    "effectSha256": "29426018d207a6af372655405ddc23ea00a2e77b46f96064c16ae40788bddc8d",
+    "carrier": "One bounded registered relief mesh per impact; existing 884 vertices and 1650 triangles. Width is always 2.20 times the real radius, full UV support is present from contact, and no global introduction scale or global opacity warmup is applied.",
+    "ignitionDistance": "Stable world-horizontal support distance measured on the full-size steady relief, divided by the existing real radius. Per-vertex colour B carries the existing event age and A carries this stable distance. Fixed range boundary and wall clipping are retained in colour R.",
+    "core": "Support distance <=0.12R is already lit at contact. The actual flame pixels supply the luminous core; no circular overlay is added.",
+    "front": "After a 0.020s seed interval, the reveal frontier moves from 0.12R to R over 0.260s with ease 1-(1-q)^1.5. A fixed UV-based irregularity offsets local support by at most 0.030R away from the seed.",
+    "localBurn": "Each point reaches its existing density over 0.022s after arrival. A short local 0.012-0.065s fresh-burn modulation adds density/gain, then returns to the same steady premultiplied atlas appearance. Already lit points do not extinguish or replay the propagation.",
+    "mainAndTail": "Existing age clock, 1.20s main interval, 1.20-1.65s positive non-folding settle, and existing duration (normally 4.55s) with monotonically declining tail opacity are retained.",
+    "pool": "Existing LIMIT8, one dynamic mesh and one shared material; global shared uniform remains texture-flow time only. No per-cast shared-uniform overwrite.",
+    "contact": "The separate small-radius contact geometry and sampler branch are retained without changes.",
+    "inspection": [
+      "footprintRadius",
+      "supportWidth",
+      "supportDepth",
+      "frontRadius",
+      "ignitionProgress",
+      "geometryScale=1"
+    ],
+    "inspectionCaveat": "peakHeight describes the complete carrier geometry, including unrevealed parts. Visible flame height and absence of gaps must be checked in actual early and settling frames. supportDepth is the fixed projected carrier support, not a promise that later relief settling leaves every terrain vertex unchanged.",
+    "settledShaderCost": "Root added a coherent branch after age0.36s: every support point has finished its 22ms ignition and 65ms fresh edge by then, so the sustained burn/tail skip the unchanged early arrival sine/power math. No visual or gameplay timing change."
+  },
+  "verification": {
+    "productionState": "frozen for the parent agent's unified type check/build/native capture",
+    "buildByThisAgent": false,
+    "nativeAcceptance": "Local implementation candidate: root viewed actual20 consecutive early frames F37–56 (.0167–.65s). The centre ignites first and outer authored flame features appear at stable positions, rather than moving outward by scaling the whole image. Fixed reported support8.36m x6.475699m, geometryScale1, frontier.456m to3.8m are implementation evidence; image review is the visible propagation check. Root also viewed actual1.6s decay without the former deep-V gap; full consecutive tail evidence retained separately.",
+    "userAcceptance": "pending",
+    "requestedCaptureAgesSeconds": [
+      0,
+      0.033,
+      0.066,
+      0.1,
+      0.15,
+      0.2,
+      0.3,
+      0.45,
+      0.65,
+      1.2,
+      1.65,
+      2.4
+    ],
+    "nativeEvidence": [
+      "final-empty-r1/early/ignition-every-frame.jpg",
+      "final-empty-r1/early/ignition-inspect-series.json",
+      "final-empty-r1/early/FIR_02-cooling-1600ms.jpg"
+    ]
+  }
+}

@@ -1,0 +1,646 @@
+{
+  "recorderRevision": 5,
+  "stage": "after",
+  "rank": 1,
+  "emptyGround": true,
+  "singleTarget": false,
+  "gameHash": "da792cbe4d64231d941cb9a0d9aa6fa1708f24ed6a48d2761150e8ce87b4277a",
+  "sourceHashes": {
+    "SkillFireSprites.ts": "7e0c39c949709ae1527eeac00a1448d2e83796ce78512b504d88faf674df8b84",
+    "FireImpactEffects.ts": "c34a1b1872da4db27c2135032d25eb4d1b093f586cf7667e123736f812ee7fe8",
+    "FireFieldEffects.ts": "39239a5a91e5d7bded3dca922d6f8c6e52347e888e2c406427a6cd1d36c57f58",
+    "SkillMeteorBody.ts": "307fa79e034c9abf845d7e76dcb0e6037719d13aa1ef8bd1d01002757d6d21d3",
+    "FireGroundEffects.ts": "327ba2ce113074ab0050d00f743683f44925ef5fe037652ae2c0f7f966be2c63",
+    "NativeSkillVfx.ts": "7ecb09b2031d00dc1fb9bb9942f6c9dfed7cfc43caaf8b2e863d5d4db22feae6",
+    "Effects.ts": "079b34ada50b46e21753a2853385e147560a9d9947854fc018f93865cd2d0f5a",
+    "core/GameSession.ts": "bf6dd1c0132b5e07c64d5dd8bb8e80421f00a54727f771e83a9a2fc8728a6076",
+    "core/Contracts.ts": "a3a9ecb9804f6004aae8a47f99cb8a95d578fbe2114de7e623a9fe4f11863d56",
+    "features/combat/data/PureSkills.ts": "b0ac6a1fd04fea5779b33db2e03dbc7ce4036228c1c75945e1fd8668eee196ed",
+    "features/combat/common/PureCombat.ts": "1f3e7b44c869c2d71b22d6642f507163180a2d2e41e2369828c1db5b29831500",
+    "features/combat/common/CombatAccuracy.ts": "ebbe49f99c4ec854e22c08065f4cd5dffdb675ea24e355806dd41e357ddc9654",
+    "features/equipment/common/EquipmentDice.ts": "0237853dbe68fe9bf5dcbeec83d42f42d0e2098644edc9b64ef18958d43d2037",
+    "features/debug/common/TrainingRange.ts": "ccd8e6ed1347e3fb245cbdee7ee33bb76ac71515da8878ccaf386e18f4aac2a3",
+    "features/progression/data/CampaignProgression.ts": "c07134128f12b7cee61ad0b68a667bfe776cd5e42de89dc6006e58b9c2429307",
+    "features/progression/data/CampaignExperience.ts": "be22b42a6a8e7e4c46a3e7405467ae170913884135b0a3f2b940d83004cdc13a",
+    "features/progression/common/Progression.ts": "ceb92c33d22a5fa62f0aa134cc4c0f3d15cd37dae0e6ac6b4520e17882061c3b",
+    "shared/BuildProfile.ts": "e7eb54c5e7dcd69823d02899f2f35b43080f78378e4b48ec65544703e8880768"
+  },
+  "buildProvenance": {
+    "sourceBuild": "src/cocos/build/concept-2d",
+    "servedBuild": "src/.tmp/meteor-v33-frozen-build-da792cbe4d64-1794896953840890100",
+    "snapshotPath": "src/.tmp/meteor-v33-frozen-build-da792cbe4d64-1794896953840890100",
+    "mode": "frozen-build-snapshot",
+    "sourceBuildLockPresentAtCaptureStart": true,
+    "sourceHashSampling": "Current workspace files at recorder launch; compiled snapshot provenance is the root copy proof plus served main/resource hashes."
+  },
+  "stableBuild": true,
+  "journeyStart": {
+    "level": 1,
+    "totalXp": 0,
+    "area": "S01-T1",
+    "seed": 1748164038,
+    "sequence": 0,
+    "temporaryMax": false,
+    "freshBrowserContext": true,
+    "menu": "title"
+  },
+  "journeyRestoration": {
+    "sessionRestored": true,
+    "level": 1,
+    "progressionUnchanged": true,
+    "equipmentUnchanged": true,
+    "trainingRangeAbsent": true
+  },
+  "info": {
+    "area": "TRAINING",
+    "rangeCharacterLevel": 80,
+    "rangeMaxLevel": 80,
+    "rangeSessionIsSeparate": true,
+    "formation": "single",
+    "distance": 12,
+    "emptyGround": true,
+    "singleTarget": false,
+    "aimDistance": 4,
+    "emptyAimAngle": -0.5235987755982988,
+    "enemies": [
+      {
+        "id": "training:target:0",
+        "x": 0,
+        "z": 4
+      }
+    ],
+    "unlimitedResource": true,
+    "ranks": {
+      "WAR_01": 1,
+      "WAR_02": 1,
+      "WAR_03": 1,
+      "WAR_04": 1,
+      "WAR_05": 1,
+      "WAR_P1": 1,
+      "WAR_P2": 1,
+      "BOW_01": 1,
+      "BOW_02": 1,
+      "BOW_03": 1,
+      "BOW_04": 1,
+      "BOW_06": 1,
+      "BOW_07": 1,
+      "BOW_05": 1,
+      "BOW_P1": 1,
+      "BOW_P2": 1,
+      "FIR_01": 1,
+      "FIR_02": 1,
+      "FIR_03": 1,
+      "FIR_04": 1,
+      "FIR_05": 1,
+      "FIR_P1": 1,
+      "FIR_P2": 1,
+      "THU_01": 1,
+      "THU_02": 1,
+      "THU_03": 1,
+      "THU_04": 1,
+      "THU_06": 1,
+      "THU_05": 1,
+      "THU_P1": 1,
+      "THU_P2": 1,
+      "COM_01": 1,
+      "COM_02": 1
+    },
+    "activeSlots": [
+      "FIR_01",
+      "FIR_04",
+      "FIR_03",
+      "FIR_05"
+    ],
+    "ultimate": "FIR_02",
+    "viewport": [
+      2560,
+      1272
+    ],
+    "cameraHeight": 4.3,
+    "cameraGroundVerticalFactor": 0.636767285752247,
+    "player": {
+      "id": "player",
+      "profile": "native-kit-v1",
+      "expectedSkinJoints": 65,
+      "expectedSkeletonSizes": [
+        65,
+        67
+      ],
+      "clips": [
+        "walk_staff",
+        "attack_bow",
+        "attack_staff",
+        "attack_sword",
+        "death",
+        "dodge",
+        "hit",
+        "idle",
+        "idle_staff",
+        "interact",
+        "run",
+        "run_staff",
+        "spell",
+        "walk",
+        "attack_sword_2",
+        "attack_sword_3"
+      ],
+      "state": "idle_staff",
+      "speed": 0,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": -8
+      },
+      "weaponCarry": "ready",
+      "combatReady": true,
+      "combatLocomotion": {
+        "weight": 0,
+        "gait": "walk",
+        "phase": 0,
+        "heading": 0,
+        "backward": false,
+        "stationary": {
+          "weight": 0,
+          "lead": "left",
+          "advance": 0,
+          "lift": 0,
+          "load": 0,
+          "offset": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        "staffBrace": 0
+      },
+      "skeletons": [
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67
+      ]
+    },
+    "gameplaySnapshot": {
+      "seed": 73015,
+      "sequence": 0,
+      "equipment": {
+        "weapon": "W11",
+        "offhand": null,
+        "head": null,
+        "chest": null,
+        "hands": null,
+        "feet": null,
+        "ringLeft": null,
+        "ringRight": null,
+        "necklace": null,
+        "spells": [
+          null,
+          null
+        ]
+      },
+      "progression": {
+        "version": 3,
+        "xpCurve": 3,
+        "level": 80,
+        "totalXp": 939730,
+        "attributes": {
+          "strength": 54,
+          "dexterity": 54,
+          "intellect": 54,
+          "vitality": 55
+        },
+        "unspentPoints": 0,
+        "learned": {
+          "WAR_01": 1,
+          "WAR_02": 1,
+          "WAR_03": 1,
+          "WAR_04": 1,
+          "WAR_05": 1,
+          "WAR_P1": 1,
+          "WAR_P2": 1,
+          "BOW_01": 1,
+          "BOW_02": 1,
+          "BOW_03": 1,
+          "BOW_04": 1,
+          "BOW_06": 1,
+          "BOW_07": 1,
+          "BOW_05": 1,
+          "BOW_P1": 1,
+          "BOW_P2": 1,
+          "FIR_01": 1,
+          "FIR_02": 1,
+          "FIR_03": 1,
+          "FIR_04": 1,
+          "FIR_05": 1,
+          "FIR_P1": 1,
+          "FIR_P2": 1,
+          "THU_01": 1,
+          "THU_02": 1,
+          "THU_03": 1,
+          "THU_04": 1,
+          "THU_06": 1,
+          "THU_05": 1,
+          "THU_P1": 1,
+          "THU_P2": 1,
+          "COM_01": 1,
+          "COM_02": 1
+        },
+        "xpReceipts": {
+          "training": 939730
+        },
+        "ultimateGiftClaimed": true,
+        "skillPoints": 51,
+        "secondChapter": true
+      },
+      "combat": {
+        "version": 5,
+        "activeSlots": [
+          "FIR_01",
+          "FIR_04",
+          "FIR_03",
+          "FIR_05"
+        ],
+        "passiveSlots": [
+          "FIR_P1",
+          "FIR_P2"
+        ],
+        "ultimate": "FIR_02",
+        "charge": 0,
+        "ultimateLock": 0,
+        "cooldowns": {},
+        "buffs": {},
+        "statuses": {},
+        "casts": [],
+        "loadouts": {
+          "WAR": {
+            "activeSlots": [
+              "WAR_01",
+              "WAR_02",
+              "WAR_03",
+              "WAR_04"
+            ],
+            "ultimate": "WAR_05"
+          },
+          "BOW": {
+            "activeSlots": [
+              "BOW_01",
+              "BOW_02",
+              "BOW_07",
+              "BOW_06"
+            ],
+            "ultimate": "BOW_05"
+          },
+          "FIR": {
+            "activeSlots": [
+              "FIR_01",
+              "FIR_04",
+              "FIR_03",
+              "FIR_05"
+            ],
+            "ultimate": "FIR_02"
+          },
+          "THU": {
+            "activeSlots": [
+              "THU_01",
+              "THU_02",
+              "THU_06",
+              "THU_04"
+            ],
+            "ultimate": "THU_05"
+          }
+        },
+        "family": "FIR",
+        "staffFamily": "FIR",
+        "growingPending": []
+      },
+      "player": {
+        "x": 0,
+        "z": -8,
+        "hp": 495,
+        "maxHp": 495,
+        "focus": 188,
+        "maxFocus": 188,
+        "resourceVersion": 1,
+        "staminaPotions": 2,
+        "manaPotions": 2,
+        "healthPotions": 3,
+        "focusPotions": 2,
+        "gold": 0,
+        "iron": 0,
+        "runes": 0,
+        "cores": 0,
+        "angle": 0,
+        "hurtTime": 0,
+        "shield": 0,
+        "movingTime": 0
+      }
+    },
+    "cameraBound": true,
+    "loadoutFlow": "Formal click training:enter, then debug:rank / debug:family-rank / debug:loadout with prepareSkillDebugEffects"
+  },
+  "errors": [],
+  "consoleErrors": [],
+  "lifecycle": [],
+  "switches": [],
+  "cache": "src\\.tmp\\meteor-density-seal-v33\\after-empty-r1",
+  "shots": [
+    {
+      "id": "FIR_02",
+      "name": "陨石终极",
+      "ultimate": true,
+      "seconds": 9,
+      "start": {
+        "time": 0.19999999999999998,
+        "seed": 73015,
+        "sequence": 0,
+        "revision": 36,
+        "cameraHeight": 4.3,
+        "castAge": null,
+        "impactAge": null,
+        "ground": {
+          "capacity": 8,
+          "allocated": 0,
+          "active": [],
+          "cameraBound": true
+        },
+        "fire": {
+          "model": "distinct-fire-shapes-v30",
+          "capacity": 76,
+          "allocated": 0,
+          "sharedTextures": 3,
+          "field": {
+            "model": "connected-fire-field-v30",
+            "capacity": 4,
+            "allocated": 0,
+            "active": []
+          },
+          "impact": {
+            "model": "continuous-single-impact-relief-v33",
+            "capacity": 8,
+            "allocated": 0,
+            "sharedMaterials": 0,
+            "cameraBound": true,
+            "active": []
+          },
+          "active": []
+        },
+        "meteor": {
+          "model": "reference-nose-anchored-comet-v32",
+          "capacity": 4,
+          "sharedRockMeshes": 1,
+          "sharedRockMaterials": 1,
+          "leadingSupport": {
+            "x": 0.213878,
+            "y": -0.5,
+            "z": 0.006679
+          },
+          "opaqueRockMeshes": 0,
+          "active": []
+        },
+        "shield": {
+          "visible": false,
+          "amount": 0,
+          "start": null,
+          "until": null,
+          "opacity": 0,
+          "patternOpacity": 0,
+          "broken": false,
+          "hitAt": null,
+          "position": {
+            "x": 0,
+            "y": 1,
+            "z": -8
+          },
+          "scale": {
+            "x": 1.88,
+            "y": 2.68,
+            "z": 1.88
+          },
+          "vertices": 625,
+          "triangles": 1152,
+          "passes": 2
+        },
+        "native": {
+          "cues": [],
+          "particles": {
+            "allocated": 0,
+            "active": 0
+          },
+          "linePool": 0,
+          "bodyPool": 0
+        },
+        "hits": 0,
+        "damage": 0,
+        "misses": 0,
+        "criticalHits": 0,
+        "cooldowns": {},
+        "ultimateLock": 0,
+        "casts": [],
+        "projectiles": []
+      },
+      "frames": 270,
+      "events": [
+        {
+          "time": 0.6166666666666669,
+          "type": "skill_cast",
+          "skillId": "FIR_02",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:1",
+          "shape": "filledImpactDisk",
+          "geometry": {
+            "kind": "filledImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 3.8
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": -1.9999999999999998,
+            "z": -4.535898384862245
+          },
+          "segment": 0,
+          "angle": -0.5235987755982987,
+          "angleDegrees": 0,
+          "radius": 3.8,
+          "width": 0,
+          "length": 0,
+          "depth": 0,
+          "duration": 0.85
+        },
+        {
+          "time": 1.4499999999999997,
+          "type": "skill_release",
+          "skillId": "FIR_02",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:1",
+          "shape": "filledImpactDisk",
+          "geometry": {
+            "kind": "filledImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 3.8
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": -1.9999999999999998,
+            "z": -4.535898384862245
+          },
+          "segment": 0,
+          "angle": -0.5235987755982987,
+          "angleDegrees": 0,
+          "radius": 3.8,
+          "width": 0,
+          "length": 0,
+          "depth": 0
+        },
+        {
+          "time": 1.4499999999999997,
+          "type": "skill_segment",
+          "skillId": "FIR_02",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:1",
+          "shape": "filledImpactDisk",
+          "geometry": {
+            "kind": "filledImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 3.8
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": -1.9999999999999998,
+            "z": -4.535898384862245
+          },
+          "segment": 0,
+          "angle": -0.5235987755982987,
+          "angleDegrees": 0,
+          "radius": 3.8,
+          "width": 0,
+          "length": 0,
+          "depth": 0
+        }
+      ],
+      "summary": {
+        "hits": 0,
+        "damage": 0,
+        "misses": 0,
+        "criticalHits": 0,
+        "last": {
+          "frame": 269,
+          "time": 9.200000000000037,
+          "seed": 73015,
+          "sequence": 1,
+          "revision": 577,
+          "cameraHeight": 4.3,
+          "castAge": null,
+          "impactAge": null,
+          "ground": {
+            "capacity": 8,
+            "allocated": 1,
+            "active": [],
+            "cameraBound": true
+          },
+          "fire": {
+            "model": "distinct-fire-shapes-v30",
+            "capacity": 76,
+            "allocated": 3,
+            "sharedTextures": 3,
+            "field": {
+              "model": "connected-fire-field-v30",
+              "capacity": 4,
+              "allocated": 0,
+              "active": []
+            },
+            "impact": {
+              "model": "continuous-single-impact-relief-v33",
+              "capacity": 8,
+              "allocated": 1,
+              "sharedMaterials": 1,
+              "cameraBound": true,
+              "active": []
+            },
+            "active": []
+          },
+          "meteor": {
+            "model": "reference-nose-anchored-comet-v32",
+            "capacity": 4,
+            "sharedRockMeshes": 1,
+            "sharedRockMaterials": 1,
+            "leadingSupport": {
+              "x": 0.213878,
+              "y": -0.5,
+              "z": 0.006679
+            },
+            "opaqueRockMeshes": 1,
+            "active": []
+          },
+          "shield": {
+            "visible": false,
+            "amount": 0,
+            "start": null,
+            "until": null,
+            "opacity": 0,
+            "patternOpacity": 0,
+            "broken": false,
+            "hitAt": null,
+            "position": {
+              "x": 0,
+              "y": 1,
+              "z": -8
+            },
+            "scale": {
+              "x": 1.88,
+              "y": 2.68,
+              "z": 1.88
+            },
+            "vertices": 625,
+            "triangles": 1152,
+            "passes": 2
+          },
+          "native": {
+            "cues": [],
+            "particles": {
+              "allocated": 3,
+              "active": 0
+            },
+            "linePool": 0,
+            "bodyPool": 0
+          },
+          "hits": 0,
+          "damage": 0,
+          "misses": 0,
+          "criticalHits": 0,
+          "cooldowns": {
+            "FIR_02": 4.249999999999815
+          },
+          "ultimateLock": 0,
+          "casts": [],
+          "projectiles": []
+        },
+        "peakFire": 3,
+        "peakGround": 1
+      }
+    }
+  ]
+}

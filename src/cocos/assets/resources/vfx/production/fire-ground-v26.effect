@@ -1,0 +1,112 @@
+CCEffect %{
+  techniques:
+  - name: transparent
+    passes:
+    - vert: fire-ground-vs:vert
+      frag: fire-ground-fs:frag
+      rasterizerState: { cullMode: none }
+      depthStencilState:
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: one
+          blendDstAlpha: one_minus_src_alpha
+      properties:
+        mainTexture: { value: white }
+        noiseTexture: { value: grey }
+        mainColor: { value: [1, 1, 1, 1] }
+        surfaceState: { value: [0, 0, 1, 0] }
+}%
+
+CCProgram fire-ground-vs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+  #include <builtin/uniforms/cc-local>
+  in vec3 a_position;
+  in vec2 a_texCoord;
+  in vec4 a_color;
+  out vec2 v_uv;
+  out vec4 v_frame;
+  out vec3 v_world;
+  vec4 vert () {
+    v_uv = a_texCoord;
+    v_frame = a_color;
+    vec4 world = cc_matWorld * vec4(a_position, 1.0);
+    v_world = world.xyz;
+    return cc_matViewProj * world;
+  }
+}%
+
+CCProgram fire-ground-fs %{
+  precision highp float;
+  in vec2 v_uv;
+  in vec4 v_frame;
+  in vec3 v_world;
+  uniform sampler2D mainTexture;
+  uniform sampler2D noiseTexture;
+  uniform FireGroundParams {
+    vec4 mainColor;
+    vec4 surfaceState;
+  };
+  vec2 frameUV (float index, vec2 uv) {
+    float i = floor(index * 15.0 + 0.5);
+    return (vec2(mod(i, 4.0), floor(i / 4.0)) + clamp(uv, vec2(0.003), vec2(0.997))) / 4.0;
+  }
+  vec4 frag () {
+    vec3 color;
+    float alpha;
+    if (surfaceState.x > 0.5) {
+      vec4 glyph = texture(mainTexture, v_uv);
+      float radius = length((v_uv - 0.5) * 2.0);
+      float disk = 1.0 - smoothstep(0.85, 0.905, radius);
+      float flow = texture(noiseTexture, v_uv * 2.2 + vec2(surfaceState.y * 0.09, -surfaceState.y * 0.16)).r;
+      // Original measured flame mid/high colours, with a light translucent
+      // floor wash rather than the previous dense red-brown inner disk.
+      float fillAlpha = disk * (0.10 + 0.09 * flow);
+      vec3 fill = mix(vec3(1.0, 0.56947, 0.22745), vec3(1.0, 0.74242, 0.36843), (1.0 - radius) * 0.7 + flow * 0.3);
+      alpha = glyph.a + fillAlpha * (1.0 - glyph.a);
+      // Small per-channel residual measured on the actual native front ring,
+      // after its reference-derived matte passes through mesh resampling.
+      color = (glyph.rgb * vec3(1.016, 1.052, 1.095) * glyph.a + fill * fillAlpha * (1.0 - glyph.a)) / max(alpha, 0.0001);
+    } else {
+      float phase = dot(v_world.xz, vec2(0.13, 0.17));
+      vec3 n = (texture(noiseTexture, v_uv * vec2(1.8, 3.1) + vec2(phase, surfaceState.y * 0.75)).rgb
+        + texture(noiseTexture, v_uv * vec2(2.7, 4.6) + vec2(-phase, surfaceState.y * 1.15)).rgb) * 0.5;
+      float pin = sin(clamp((0.917 - v_uv.y) / 0.917, 0.0, 1.0) * 3.141593);
+      vec2 uv = v_uv + (n.rg * 2.0 - 1.0) * vec2(0.025, 0.035) * pin * surfaceState.z;
+      vec4 a = texture(mainTexture, frameUV(v_frame.r, uv));
+      vec4 b = texture(mainTexture, frameUV(v_frame.g, uv));
+      float blend = clamp(v_frame.b, 0.0, 1.0);
+      alpha = mix(a.a, b.a, blend);
+      color = mix(a.rgb * a.a, b.rgb * b.a, blend) / max(alpha, 0.0001);
+      float rise = fract(surfaceState.y * 0.60 + phase);
+      float rise2 = fract(rise + 0.5);
+      float weight = 1.0 - abs(rise * 2.0 - 1.0);
+      vec4 d = texture(mainTexture, frameUV(0.0, uv + vec2(0.0, rise * 0.80)));
+      vec4 e = texture(mainTexture, frameUV(0.0, uv + vec2(0.0, rise2 * 0.80)));
+      float detailAlpha = d.a * weight + e.a * (1.0 - weight);
+      vec3 detail = (d.rgb * d.a * weight + e.rgb * e.a * (1.0 - weight)) / max(detailAlpha, 0.0001);
+      color = mix(color, detail, 0.40 * detailAlpha);
+      // Keep reference-bright filament cores luminous. The old blanket fade
+      // made every core as translucent as the haze, turning gold into mustard.
+      alpha *= 1.0 - 0.12 * (1.0 - detailAlpha) * (1.0 - alpha);
+      alpha *= mix(0.9 + 0.1 * n.b, 1.0, alpha);
+      // The selected original's brightest flame filaments have median display
+      // RGB 255 / 228 / 110.5. Preserve their luminous thin lines while the
+      // surrounding low-heat haze keeps its reference-derived transparency.
+      float filament = smoothstep(0.70, 0.88, color.g / max(color.r, 0.001)) * smoothstep(0.15, 0.45, alpha);
+      color = mix(color, vec3(1.0, 0.894118, 0.433333), filament * 0.75);
+      alpha = mix(alpha, max(alpha, 0.99), filament);
+      color *= 0.94 + 0.14 * n.b;
+    }
+    alpha *= mainColor.a * v_frame.a;
+    if (alpha < 0.002) discard;
+    // These textures are reference display-colour mattes, composed directly
+    // by this unlit transparent pass; do not square their green/blue channels.
+    return vec4(color * mainColor.rgb, alpha);
+  }
+}%

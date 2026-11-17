@@ -8,7 +8,9 @@ import {FeedbackView as F} from './FeedbackView';
 /** Original approved design components, with changing text always drawn by Cocos. */
 export class PreparationSkin {
  static art(ui:RpgPanel,parent:Node,id:string,x:number,y:number,w:number,h:number,sliced=false){
-  const s=UiSkin.asset(parent,preparationSkinAsset(id),w*ui.scale,h*ui.scale,sliced,ui.scale*D.canvas.width/D.canvas.sourceWidth);s.node.setPosition(x,y);return s;
+  const s=UiSkin.asset(parent,preparationSkinAsset(id),w*ui.scale,h*ui.scale,sliced,ui.scale*D.canvas.width/D.canvas.sourceWidth);s.node.setPosition(x,y);
+  if(x===0&&y===0&&['side-tab','side-tab-selected','card','selection-row','skill-row','point-counter','step','scope-active','chip','button-dark','button-gold'].includes(id))ui.feedback(parent,w*ui.scale,h*ui.scale,0,s.node);
+  return s;
  }
  static rule(ui:RpgPanel,parent:Node,x:number,y:number,w:number){return this.art(ui,parent,'rule',x,y,w,D.decoration.ruleHeight);}
  static separator(ui:RpgPanel,parent:Node,x:number,y:number,h:number){const n=ui.hud.node('PreparationSeparator',parent,x,y,h*ui.scale,ui.scale);UiSkin.rule(n,h*ui.scale,ui.scale);n.setRotationFromEuler(0,0,90);return n;}

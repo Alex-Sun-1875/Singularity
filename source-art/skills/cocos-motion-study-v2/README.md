@@ -1,5 +1,7 @@
 # 剑与火 · 四职业技能动效对照
 
+本版范围圈造型已被用户否定。当前设计审稿使用 [原稿法阵动画](../reference-seals-v3/README.md)。
+
 这组审稿录像取自当前 Cocos 工程的 S04 全 3D 战斗场景。主角、敌人、武器、动作、材质、弹道和命中反馈均由游戏渲染。录制使用横屏近景和固定训练靶，隐藏 HUD。所有技能为一级。调整参数和特效模块只加载到录制会话，接入主工程前仍需确认美术方向与战斗手感。
 
 [战士三连 GIF](media/warrior-combo.gif) · [四职业同场对照](media/four-classes-comparison.mp4) · [调整稿单画面](media/four-classes-full-size.mp4) · [四职业范围圈设计稿](media/range-rings.jpg)

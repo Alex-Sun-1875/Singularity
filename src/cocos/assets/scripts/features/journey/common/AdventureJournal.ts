@@ -1,3 +1,4 @@
+import {CAMPAIGN_STAGES,campaignStageDone,campaignStageActions,campaignStageActionDone,nextCampaignStage,type CampaignStage} from '../data/CampaignStages';
 import type {AreaDef,Point} from '../../../core/Contracts';
 import type {GameSession} from '../../../core/GameSession';
 import {AREAS} from '../../world/data/WorldData';
@@ -12,6 +13,8 @@ import {authoredWaypoint,waypointUnlocked} from '../../navigation/common/FastTra
 import {CAMPAIGN_SCENES} from '../../cinematics/data/CampaignScenes';
 import {cinematicText} from '../../cinematics/locales';
 import {adventureJournalText as text} from '../locales/AdventureJournalText';
+import {pacingText,pacingRewardText,pacingQuestRewardText} from '../locales/PacingText';
+import {questRewardView} from './QuestRewardView';
 
 export type JournalEntryKind='chapter'|'main'|'side'|'area'|'replay';
 export type JournalStatus='active'|'available'|'completed'|'locked'|'upcoming';
@@ -83,7 +86,7 @@ function mainEntry(context:Context,task:JourneyTask):JournalEntry {
  const object=area?.objects.find(object=>object.action==='journey_task'&&object.eventId===task.id),view=chapterTwoEncounterView(game.state,task.encounterId??task.id);
  const base=target(context,result,result.id+':site',task.area,task.name,object??area?.spawn,{objectId:object?.id});
  result.sections.push(section('current','section.current',done?text('reward.received'):!unlocked?text('gate.chapter'):!current?text('gate.previous'):taskGoal(context,task)));
- result.sections.push(section('reward','section.reward',text('reward.task',{experience:task.experience,gold:task.gold,iron:task.iron})+'\n'+text(done?'reward.received':'reward.once')));
+ result.sections.push(section('reward','section.reward',pacingRewardText(game.journey.rewardView(task))+'\n'+text(done?'reward.received':'reward.once')));
  if(current&&!done&&unlocked)result.actions.push({id:result.id+':go',label:text('action.go'),action:`journey-go:${task.id}`,disabled:!context.routes.has(task.area),reason:context.routes.has(task.area)?'':text('gate.route'),primary:true});
  if(view){
   const known=view.clues.filter(clue=>clue.known);
@@ -114,7 +117,7 @@ function sideEntry(context:Context,quest:typeof SIDE_QUESTS[number]):JournalEntr
  const status:JournalStatus=done?'completed':!unlocked?'locked':started?'active':'available';
  const result=entry(`side:${quest.id}`,'side',quest.chapter,quest.name,status,definitions[0]?.description??'');
  result.sections.push(section('current','section.current',done?text('reward.received'):!unlocked?text('gate.chapter'):next?next.label:text('record.pending')));
- result.sections.push(section('reward','section.reward',quest.reward));
+ result.sections.push(section('reward','section.reward',pacingQuestRewardText(questRewardView(definitions,s))+'\n'+pacingText('stepRewards')));
  const response=chapterTwoSideQuestResponse(s,quest.id),outcome=chapterTwoSideQuestOutcome(s,quest.id);
  if(response)result.sections.push(section('response','section.response',response));
  if(outcome)result.sections.push(section('outcome','section.outcome',outcome));
@@ -123,7 +126,8 @@ function sideEntry(context:Context,quest:typeof SIDE_QUESTS[number]):JournalEntr
   const site=(completed||current&&unlocked)?eventTarget(context,result,event):null;
   if(site){site.status=completed?'completed':'active';site.current=current&&unlocked;}
   addTarget(result,site);
-  result.updates.push({id:event.id,title:event.label,text:completed?choice?.text??availability.reason:current?(!unlocked?text('gate.chapter'):availability.reason):text('record.later'),status:completed?'completed':current&&unlocked?'current':'locked',...(choice&&(event.choices?.length??0)>1?{choice:text('record.choice',{choice:choice.label})}:{}),targetIds:site?[site.id]:[]});
+  const stepReward=pacingQuestRewardText(questRewardView([event],s));
+  result.updates.push({id:event.id,title:event.label,text:(completed?choice?.text??availability.reason:current?(!unlocked?text('gate.chapter'):availability.reason):text('record.later'))+'\n'+stepReward,status:completed?'completed':current&&unlocked?'current':'locked',...(choice&&(event.choices?.length??0)>1?{choice:text('record.choice',{choice:choice.label})}:{}),targetIds:site?[site.id]:[]});
   if(!current||done||!unlocked)continue;
   if(availability.available)result.actions.push({id:result.id+':go',label:text('action.go'),action:`journey-field-go:${event.id}`,disabled:!context.routes.has(event.area),reason:context.routes.has(event.area)?'':text('gate.route'),primary:true});
   else addPrerequisites(context,result,event.id);
@@ -132,25 +136,48 @@ function sideEntry(context:Context,quest:typeof SIDE_QUESTS[number]):JournalEntr
  mapAction(result);
  return result;
 }
-function chapterEntry(context:Context,chapter:typeof JOURNEY_CHAPTERS[number],children:JournalEntry[]):JournalEntry {
- const display=journeyChapterDisplay(chapter),unlocked=chapterUnlocked(context.game,chapter.id),won=!!context.game.state.receipts[journeyBossKey(chapter.id)],tasks=JOURNEY_TASKS.filter(task=>task.chapter===chapter.id),done=tasks.filter(task=>context.game.journey.taskDone(task)).length,status:JournalStatus=!chapter.available?'upcoming':won&&done===tasks.length?'completed':unlocked?'active':'locked';
- const result=entry(`chapter:${chapter.id}`,'chapter',chapter.id,display.title,status,display.story);
- if(!chapter.available)return result;
- const current=children.find(child=>child.chapter===chapter.id&&child.kind==='main'&&child.status==='active');
- result.sections.push(section('progress','section.progress',text('progress.chapter',{done,total:tasks.length,boss:text(won?'boss.complete':'boss.pending')})+'\n'+text('boss.rule')));
- result.sections.push(section('current','section.current',!unlocked?text('gate.chapter'):current?.title??(!won?text('boss.goal',{boss:chapter.bossName}):text('empty.current'))));
- result.sections.push(section('reward','section.reward',text('boss.reward')));
- for(const task of tasks){const child=children.find(child=>child.id===`main:${task.id}`)!;result.updates.push({id:child.id,title:child.title,text:child.statusText,status:child.status==='completed'?'completed':child.status==='active'?'current':'locked',targetIds:child.targets.map(target=>target.id)});}
- const bossAt=AREAS[chapter.arena]?.enemies.find(enemy=>enemy.bossId===chapter.boss),bossTarget=target(context,result,result.id+':boss',chapter.arena,chapter.bossName,bossAt??AREAS[chapter.arena]?.spawn);
- result.updates.push({id:result.id+':boss',title:text('boss.goal',{boss:chapter.bossName}),text:text(won?'boss.complete':'boss.pending'),status:won?'completed':unlocked?'current':'locked',targetIds:bossTarget?[bossTarget.id]:[]});
- const relevant=children.filter(child=>child.chapter===chapter.id&&(child.kind==='main'||child.kind==='side'));
- relevant.sort((a,b)=>Number(b.status==='active')-Number(a.status==='active'));
- for(const child of relevant)for(const site of child.targets)addTarget(result,site);
- addTarget(result,bossTarget);
- if(current)result.actions.push(...current.actions.filter(action=>action.primary));
- result.actions.push({id:result.id+':main-rewards',label:text('action.mainRewards'),action:`journey-main-boss-rewards:${chapter.id}`},{id:result.id+':loot-sources',label:text('action.lootSources'),action:`journey-loot:${chapter.id}`});
+function stageEntry(context:Context,stage:CampaignStage):JournalEntry {
+ const game=context.game,s=game.state,done=campaignStageDone(s,stage),current=nextCampaignStage(s)?.id===stage.id,unlocked=chapterUnlocked(game,stage.chapter);
+ const result=entry('stage:'+stage.id,'main',stage.chapter,stage.name,done?'completed':current&&unlocked?'active':'locked',stage.story);
+ const actions=campaignStageActions(s,stage),next=actions.find(value=>!campaignStageActionDone(s,value));
+ result.sections.push(section('current','section.current',done?text('reward.received'):!unlocked?text('gate.chapter'):current?stage.story:text('gate.previous')));
+ result.sections.push(section('reward','section.reward',text('reward.stage',{experience:stage.experience,tier:stage.chapter})+'\n'+text('reward.once')));
+ for(let i=0;i<actions.length;i++){
+  const action=actions[i],completed=campaignStageActionDone(s,action),active=current&&next===action,area=AREAS[action.area];
+  const event=action.eventId?CAMPAIGN_EVENTS[action.eventId]:undefined,task=action.taskId?JOURNEY_TASKS.find(task=>task.id===action.taskId):undefined;
+  const object=area?.objects.find(object=>event?object.eventId===event.id&&object.action==='campaign_event':task?object.action==='journey_task'&&object.eventId===task.id:object.action===action.action);
+  const enemy=action.bossId?area?.enemies.find(enemy=>enemy.bossId===action.bossId):undefined;
+  const label=event?.label??task?.name??object?.label??(action.kind==='exit'?text('goal.leave'):stage.name);
+  const site=(completed||active&&unlocked)?target(context,result,result.id+':action:'+i,action.area,label,object??enemy??area?.spawn,{objectId:object?.id,eventId:event?.id}):null;
+  if(site){site.current=active;site.status=completed?'completed':'active';addTarget(result,site);}
+  const availability=event?game.campaignEventAvailability(event.id,true):undefined,choice=event?.choices?.find(choice=>choice.id===s.receipts['campaign:choice:'+event.id]);
+  result.updates.push({id:result.id+':'+i,title:label,text:completed?choice?.text??event?.completionText??text('reward.received'):active?availability?.reason??stage.story:text('record.later'),status:completed?'completed':active?'current':'locked',targetIds:site?[site.id]:[],...(choice&&event&&event.choices!.length>1?{choice:text('record.choice',{choice:choice.label})}:{})});
+  if(active&&event&&!availability?.available)addPrerequisites(context,result,event.id);
+  if(active&&task?.goal==='encounter'){
+   const encounter=mainEntry(context,task);
+   result.sections.push(...encounter.sections.filter(section=>section.id!=='current'&&section.id!=='reward'));
+   result.updates.push(...encounter.updates);
+   result.actions.push(...encounter.actions.filter(action=>!action.primary&&action.action!=='journal:mode:map'));
+   for(const site of encounter.targets)addTarget(result,{...site,entryId:result.id});
+  }
+ }
+ if(current&&!done&&unlocked)result.actions.unshift({id:result.id+':go',label:text('action.go'),action:'journey-go',primary:true});
  mapAction(result);return result;
 }
+function chapterEntry(context:Context,chapter:typeof JOURNEY_CHAPTERS[number],children:JournalEntry[]):JournalEntry {
+ const display=journeyChapterDisplay(chapter),unlocked=chapterUnlocked(context.game,chapter.id),won=!!context.game.state.receipts[journeyBossKey(chapter.id)],stages=CAMPAIGN_STAGES.filter(stage=>stage.chapter===chapter.id),done=stages.filter(stage=>campaignStageDone(context.game.state,stage)).length,status:JournalStatus=!chapter.available?'upcoming':won&&done===stages.length?'completed':unlocked?'active':'locked';
+ const result=entry(`chapter:${chapter.id}`,'chapter',chapter.id,display.title,status,display.story);if(!chapter.available)return result;
+ const current=children.find(child=>child.chapter===chapter.id&&child.kind==='main'&&child.status==='active');
+ result.sections.push(section('progress','section.progress',text('progress.chapter',{done,total:stages.length,boss:text(won?'boss.complete':'boss.pending')})+'\n'+text('boss.rule')));
+ result.sections.push(section('current','section.current',!unlocked?text('gate.chapter'):current?.title??text('empty.current')));
+ result.sections.push(section('reward','section.reward',pacingText('gearSummary')));
+ for(const stage of stages){const child=children.find(child=>child.id==='stage:'+stage.id)!;result.updates.push({id:child.id,title:child.title,text:child.statusText,status:child.status==='completed'?'completed':child.status==='active'?'current':'locked',targetIds:child.targets.map(target=>target.id)});}
+ const relevant=children.filter(child=>child.chapter===chapter.id&&(child.kind==='main'||child.kind==='side'));relevant.sort((a,b)=>Number(b.status==='active')-Number(a.status==='active'));for(const child of relevant)for(const site of child.targets)addTarget(result,site);
+ if(current)result.actions.push(...current.actions.filter(action=>action.primary));
+ result.actions.push({id:result.id+':growth',label:pacingText('entry'),action:`journey-growth:${chapter.id}`},{id:result.id+':main-rewards',label:text('action.mainRewards'),action:`journey-main-boss-rewards:${chapter.id}`},{id:result.id+':loot-sources',label:text('action.lootSources'),action:`journey-loot:${chapter.id}`});
+ mapAction(result);return result;
+}
+
 function areaEntry(context:Context,area:AreaDef,stories:JournalEntry[]):JournalEntry {
  const current=context.game.state.area===area.id,result=entry(`area:${area.id}`,'area',chapterForArea(area.id),area.name,current?'active':'available',area.subtitle),waypoint=authoredWaypoint(area),unlocked=waypointUnlocked(context.game.state.flags,area);
  result.waypoint=unlocked;addTarget(result,target(context,result,result.id+':site',area.id,area.name,waypoint?.point??area.spawn));
@@ -166,7 +193,7 @@ function areaEntry(context:Context,area:AreaDef,stories:JournalEntry[]):JournalE
 /** Read-only presentation snapshots. No selection, navigation, rewards or
  * progress writes live here; explicit action strings use existing controllers. */
 export function journalEntries(game:GameSession):JournalEntry[] {
- const c=context(game),stories:JournalEntry[]=JOURNEY_TASKS.filter(task=>liveChapter(task.chapter)).map(task=>mainEntry(c,task));
+ const c=context(game),stories:JournalEntry[]=CAMPAIGN_STAGES.filter(stage=>liveChapter(stage.chapter)).map(stage=>stageEntry(c,stage));
  for(const quest of SIDE_QUESTS){if(!liveChapter(quest.chapter))continue;const item=sideEntry(c,quest);if(item)stories.push(item);}
  for(const scene of CAMPAIGN_SCENES){
   if(!liveChapter(scene.chapter)||game.state.receipts[`campaign:seen:${scene.id}`]!==true)continue;
@@ -193,12 +220,12 @@ function areaPreview(game:GameSession,id:string,entries:JournalEntry[]):JournalE
  * previews never join the ordinary directory and never unlock a waypoint. */
 export function journalAreaPreview(game:GameSession,id:string):JournalEntry|null {return areaPreview(game,id,journalEntries(game));}
 export function journalEntry(game:GameSession,id:string):JournalEntry|null {
- const entries=journalEntries(game);return entries.find(entry=>entry.id===id)??(id.startsWith('area:')?areaPreview(game,id.slice(5),entries):null);
+ const entries=journalEntries(game),legacy=id.startsWith('main:')?CAMPAIGN_STAGES.find(stage=>stage.actions.some(action=>action.taskId===id.slice(5))):undefined;return entries.find(entry=>entry.id===(legacy?'stage:'+legacy.id:id))??(id.startsWith('area:')?areaPreview(game,id.slice(5),entries):null);
 }
 export function defaultJournalEntry(game:GameSession):string {
- const chapter=chapterForArea(game.state.area),current=chapterUnlocked(game,chapter)?game.journey.currentTask(chapter):undefined;
- return current?`main:${current.id}`:`chapter:${chapter}`;
+ const current=nextCampaignStage(game.state);return current&&(current.chapter===1||game.state.progression.secondChapter)?'stage:'+current.id:'chapter:'+chapterForArea(game.state.area);
 }
+
 /** Selected chapter markers retain the child entry ID for map -> log linking.
  * Global markers show current stories, never hidden discoveries or future maps. */
 export function journalMarkers(game:GameSession,entryId?:string,area?:string):JournalTarget[] {

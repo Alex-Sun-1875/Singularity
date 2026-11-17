@@ -24,22 +24,24 @@ export interface MapArtProfile {
 }
 
 export const MAP_ART_TEXTURE_ROOT='flat2d/terrain-v1/';
-const surface=(key:MapArtTexture,tileMetres:number,tint='#FFFFFF'):MapArtSurface=>({key,resource:MAP_ART_TEXTURE_ROOT+key,tileMetres,tint});
+// Versioned siblings retain the original art for comparison. The existing map
+// resource scope and terrain bundle continue to own the same nine textures.
+const surface=(key:MapArtTexture,tileMetres:number,tint='#FFFFFF'):MapArtSurface=>({key,resource:MAP_ART_TEXTURE_ROOT+key+'-v2',tileMetres,tint});
 export const MAP_ART_SURFACES:Readonly<Record<MapArtTexture,MapArtSurface>>={
- cobble:surface('cobble',2.6),
- earth:surface('earth',4),
- meadow:surface('meadow',4.5),
- forest:surface('forest',4),
- 'wet-earth':surface('wet-earth',4),
- bedrock:surface('bedrock',4.8),
- flagstone:surface('flagstone',3.2),
+ cobble:surface('cobble',2.2),
+ earth:surface('earth',5.6),
+ meadow:surface('meadow',5.6),
+ forest:surface('forest',5.8),
+ 'wet-earth':surface('wet-earth',5.4),
+ bedrock:surface('bedrock',5.8),
+ flagstone:surface('flagstone',2.8),
  wood:surface('wood',2.8),
- water:surface('water',4),
+ water:surface('water',6.5),
 };
 const s=MAP_ART_SURFACES;
-const profile=(family:MapArtFamily,ground:MapArtSurface,road:MapArtSurface,stone='#E8E5DD',foliage='#D5D2BB'):MapArtProfile=>({
+const profile=(family:MapArtFamily,ground:MapArtSurface,road:MapArtSurface,stone='#FCF7E7',foliage='#EDFFE0'):MapArtProfile=>({
  family,ground,road,grass:s.meadow,paving:s.flagstone,wood:s.wood,water:s.water,
- propTints:{stone,foliage,timber:'#F1E9DB'},
+ propTints:{stone,foliage,timber:'#FFF4DE'},
 });
 
 /** Each family retains its material identity. A quarry is bedrock with a worn
@@ -47,13 +49,13 @@ const profile=(family:MapArtFamily,ground:MapArtSurface,road:MapArtSurface,stone
 export const MAP_ART_PROFILES:Readonly<Record<MapArtFamily,MapArtProfile>>={
  'town-stone':profile('town-stone',s.meadow,s.cobble),
  'meadow-earth':profile('meadow-earth',s.meadow,s.earth),
- 'birch-forest':profile('birch-forest',s.forest,s.earth,'#E4E2D8','#D1D0B7'),
- 'reed-marsh':profile('reed-marsh',s['wet-earth'],s.earth,'#DCE2D9','#C7CCAE'),
- 'mountain-quarry':profile('mountain-quarry',s.bedrock,s.earth,'#E8E6E0','#D0CCB4'),
- 'oath-ruin':profile('oath-ruin',s.flagstone,s.cobble,'#E9E8E1','#CBD0B5'),
- 'warm-interior':profile('warm-interior',s.wood,s.wood,'#E8E5DF','#D6D4BD'),
- 'inhabited-undercity':profile('inhabited-undercity',s.bedrock,s.flagstone,'#D7DDD9','#BFC8B5'),
- 'drowned-crypt':profile('drowned-crypt',s.flagstone,s.flagstone,'#CCD6D2','#BECBB6'),
+ 'birch-forest':profile('birch-forest',s.forest,s.earth,'#F7F2E1','#E5FFD6'),
+ 'reed-marsh':profile('reed-marsh',s['wet-earth'],s.earth,'#E9F4E1','#DBF2BB'),
+ 'mountain-quarry':profile('mountain-quarry',s.bedrock,s.earth,'#FAF7EA','#E8F6CE'),
+ 'oath-ruin':profile('oath-ruin',s.flagstone,s.cobble,'#FCF8EE','#E4F4CE'),
+ 'warm-interior':profile('warm-interior',s.wood,s.wood,'#F8F1DE','#EFF9D3'),
+ 'inhabited-undercity':profile('inhabited-undercity',s.bedrock,s.flagstone,'#E8EFE3','#DCEBD0'),
+ 'drowned-crypt':profile('drowned-crypt',s.flagstone,s.flagstone,'#E0EBE4','#D7EACC'),
 };
 
 // Stable IDs follow the 97-location art catalog. A narrative family describes

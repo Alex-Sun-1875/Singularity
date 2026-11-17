@@ -8,6 +8,9 @@ import {UI_COLORS as C} from '../../../shared/ui/UiTheme';
 import {UI_START_MENU as R} from '../../../shared/ui/UiChrome';
 import {applyRpgFont} from '../../../shared/ui/RpgFont';
 import {GoldMenuActions} from '../../../shared/ui/GoldMenuActions';
+import {startMenuText as text} from '../locales/StartMenuText';
+
+export interface JourneyStartState {canContinue:boolean;recoveryRequired:boolean;fromTitle?:boolean;restartError?:string;}
 
 const {ccclass}=_decorator;
 
@@ -18,7 +21,7 @@ export class JourneyStartScreen extends Component {
  private hud:Hud;
  private hidden=new Map<Node,boolean>();
  private released=false;
- configure(hud:Hud,loading:boolean,failure:string,guestTest:boolean){
+ configure(hud:Hud,loading:boolean,failure:string,guestTest:boolean,state:JourneyStartState){
   this.hud=hud;hud.modalDisposers.add(this.release);
   const u=sys.isMobile?hud.touchTargetSize/R.hit:1.5,safe=sys.getSafeAreaRect(false),pad=12*u;
   const left=-hud.width/2+Math.max(pad,safe.x),right=-hud.width/2+Math.min(hud.width-pad,safe.x+safe.width),bottom=-hud.height/2+Math.max(pad,safe.y),x=(left+right)/2;
@@ -29,11 +32,16 @@ export class JourneyStartScreen extends Component {
   const title=this.text('StartTitle','剑与火',x,titleY,R.titleWidth*art,R.titleHeight*art,90*art,C.gold),subtitle=this.text('StartSubtitle','破晓之战',x,subtitleY,R.subtitleWidth*art,R.subtitleHeight*art,44*art,C.gold);
   UiSkin.asset(hud.node('StartWordmark',this.node,x,titleY,R.titleWidth*art,R.titleHeight*art),R.title,R.titleWidth*art,R.titleHeight*art,false,art);
   UiSkin.asset(hud.node('StartSubtitleArt',this.node,x,subtitleY,R.subtitleWidth*art,R.subtitleHeight*art),R.subtitle,R.subtitleWidth*art,R.subtitleHeight*art,false,art);
-  UiSkin.asset(hud.node('StartTitleRule',this.node,x,hud.height/2-R.ruleY*vertical,R.ruleWidth*art,R.ruleHeight*art),R.rule,R.ruleWidth*art,R.ruleHeight*art,false,art);
+  if(!state.recoveryRequired)UiSkin.asset(hud.node('StartTitleRule',this.node,x,hud.height/2-R.ruleY*vertical,R.ruleWidth*art,R.ruleHeight*art),R.rule,R.ruleWidth*art,R.ruleHeight*art,false,art);
   const footerY=Math.max(bottom+12*u,hud.height/2-R.footerY*vertical),lastMinimum=footerY+R.footerClearance*u+hit/2,first=Math.min(R.buttonFirstY*vertical,hud.height/2-lastMinimum-3*step);
-  const entries=[{action:'begin',label:loading?'正在准备…':failure?'重新载入':'继续旅途'},{action:'new',label:'新建旅程'},{action:'settings',label:'设置'},{action:'training:enter',label:trainingText('title')}];
+  if(state.recoveryRequired)this.text('StartSaveStatus',text(state.canContinue?'recovery':'restartRequired'),x,hud.height/2-R.ruleY*vertical,Math.max(width,560*art),20*u,11*u,C.muted);
+  const entries=[
+   {action:'begin',label:loading?text('loading'):failure?text('reload'):state.canContinue?text('continue'):state.recoveryRequired?text('unavailable'):text('start'),disabled:!state.canContinue&&state.recoveryRequired},
+   {action:'new',label:text('restart'),disabled:!state.canContinue&&!state.recoveryRequired},
+   {action:'settings',label:text('settings')},{action:'training:enter',label:trainingText('title')},
+  ];
   const actions=hud.node('MenuActions',this.node,x,hud.height/2-first-1.5*step,width,4*hit+3*(step-hit)).addComponent(GoldMenuActions);
-  actions.configure(entries.map((entry,i)=>({...entry,primary:i===0,disabled:loading})),{width,height:hit,gap:step-hit,unit:u,visualHeight:visualH,pixelScale:art,fontSize:Math.max(14*u,R.labelSize*art)},action=>hud.actions.click(action));
+  actions.configure(entries.map((entry,i)=>({...entry,primary:i===0,disabled:loading||entry.disabled})),{width,height:hit,gap:step-hit,unit:u,visualHeight:visualH,pixelScale:art,fontSize:Math.max(14*u,R.labelSize*art)},action=>hud.actions.click(action));
   this.text('StartVersion',`v${BUILD_INFO.version}${guestTest?' · 游客测试 · 仅本机存档':''}`,x,footerY,Math.max(width,hud.width-48*u),24*u,guestTest?11*u:12*u,C.muted);
   void Promise.all([actions.ready,...[R.title,R.subtitle,R.rule].map(id=>UiSkin.frame('ui/quiet-bronze/'+id,0,this.node))]).then(()=>{if(this.isValid&&!this.released){title.node.active=false;subtitle.node.active=false;this.loaded=actions.loaded;}}).catch(()=>{console.warn('Title menu chrome unavailable; wordmark text retained.');});
   this.conceal();
@@ -43,7 +51,7 @@ export class JourneyStartScreen extends Component {
  }
  private conceal(){
   for(const child of this.hud.root.children){
-   if(child===this.hud.modal||child.name==='JourneyLoading'||child.name==='CampaignScene')continue;
+   if(child===this.hud.modal||child.name==='JourneyLoading'||child.name==='PreparingPage'||child.name==='CampaignScene')continue;
    if(!this.hidden.has(child))this.hidden.set(child,child.active);
    child.active=false;
   }
@@ -53,8 +61,8 @@ export class JourneyStartScreen extends Component {
  onDestroy(){this.release();}
 }
 
-export function showJourneyStart(hud:Hud,loading:boolean,failure:string,guestTest:boolean){
+export function showJourneyStart(hud:Hud,loading:boolean,failure:string,guestTest:boolean,state:JourneyStartState){
  hud.clearModal();hud.modal.setSiblingIndex(hud.root.children.length-1);
  const root=hud.node('JourneyStartScreen',hud.modal,0,0,hud.width,hud.height);
- root.addComponent(JourneyStartScreen).configure(hud,loading,failure,guestTest);
+ root.addComponent(JourneyStartScreen).configure(hud,loading,failure,guestTest,state);
 }

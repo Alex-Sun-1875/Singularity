@@ -1,0 +1,157 @@
+{
+  "frame": 17,
+  "time": 0.8000000000000008,
+  "seed": 73015,
+  "sequence": 1,
+  "revision": 69,
+  "cameraHeight": 4.3,
+  "cameraGroundVerticalFactor": 0.636767285752247,
+  "castAge": 0.1833333333333339,
+  "impactAge": null,
+  "ground": {
+    "capacity": 8,
+    "allocated": 1,
+    "active": [
+      {
+        "key": "meteor-seal:cast:1",
+        "kind": "meteorSeal",
+        "emitters": 1,
+        "triangles": 72,
+        "vertices": 49,
+        "frames": []
+      }
+    ],
+    "cameraBound": true
+  },
+  "fire": {
+    "model": "distinct-fire-shapes-v30",
+    "capacity": 76,
+    "allocated": 1,
+    "sharedTextures": 3,
+    "field": {
+      "model": "connected-fire-field-v30",
+      "capacity": 4,
+      "allocated": 0,
+      "active": []
+    },
+    "impact": {
+      "model": "fixed-support-radial-ignition-v34",
+      "capacity": 8,
+      "allocated": 0,
+      "sharedMaterials": 0,
+      "cameraBound": true,
+      "active": []
+    },
+    "active": [
+      {
+        "key": "cast:cast:1:flame",
+        "kind": "wake",
+        "phase": 2,
+        "frameBlend": 0.5206594748626117,
+        "textureId": 0,
+        "region": 0,
+        "width": 0.23006286805435955,
+        "height": 0.3565974454842573,
+        "viewBias": 0,
+        "position": {
+          "x": 0.21513423770171336,
+          "y": 1.2871744778169019,
+          "z": -7.311017393799066
+        }
+      }
+    ]
+  },
+  "meteor": {
+    "model": "reference-nose-anchored-comet-v32",
+    "capacity": 4,
+    "sharedRockMeshes": 1,
+    "sharedRockMaterials": 1,
+    "leadingSupport": {
+      "x": 0.213878,
+      "y": -0.5,
+      "z": 0.006679
+    },
+    "opaqueRockMeshes": 0,
+    "active": []
+  },
+  "shield": {
+    "visible": false,
+    "amount": 0,
+    "start": null,
+    "until": null,
+    "opacity": 0,
+    "patternOpacity": 0,
+    "broken": false,
+    "hitAt": null,
+    "position": {
+      "x": 0,
+      "y": 1,
+      "z": -8
+    },
+    "scale": {
+      "x": 1.88,
+      "y": 2.68,
+      "z": 1.88
+    },
+    "vertices": 625,
+    "triangles": 1152,
+    "passes": 2
+  },
+  "native": {
+    "cues": [
+      {
+        "kind": "drop",
+        "skillId": "FIR_02",
+        "castId": "cast:1",
+        "eventType": "skill_cast",
+        "start": 0.6166666666666669,
+        "age": 0.1833333333333339,
+        "duration": 0.85,
+        "target": {
+          "x": 0,
+          "z": -4
+        },
+        "from": {
+          "x": 0,
+          "z": -8
+        },
+        "to": {
+          "x": 0,
+          "z": -4
+        },
+        "geometry": {
+          "kind": "filledImpactDisk",
+          "origin": "aimPoint",
+          "radiusMetres": 3.8,
+          "widthMetres": 0,
+          "lengthMetres": 0,
+          "depthMetres": 0,
+          "angleDegrees": 0
+        }
+      }
+    ],
+    "particles": {
+      "allocated": 0,
+      "active": 0
+    },
+    "linePool": 0,
+    "bodyPool": 0
+  },
+  "hits": 0,
+  "damage": 0,
+  "misses": 0,
+  "criticalHits": 0,
+  "cooldowns": {},
+  "ultimateLock": 0,
+  "casts": [
+    {
+      "id": "cast:1",
+      "skillId": "FIR_02",
+      "elapsed": 0.19999999999999998,
+      "released": false,
+      "targets": [],
+      "hits": []
+    }
+  ],
+  "projectiles": []
+}

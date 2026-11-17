@@ -1,0 +1,47 @@
+{
+  "backend": "OpenAI image_gen built-in cloud editing tool",
+  "userSelectedBaseline": "raw/user-selected.jpg",
+  "prompt": "prompt.txt",
+  "rawResult": "raw/double-height.png",
+  "requestedHeightMultiplier": 2,
+  "baselineAcceptedByUser": true,
+  "newArtAcceptance": "Pending user review",
+  "productIntegration": false,
+  "processing": "The cloud draft overshot the requested height. Deterministic vertical resampling calibrates it to the selected source, anchored at each emission baseline. The middle two scales are interpolated because enemy sprites obscure their source tips. Original ground-circle footprints and pixels outside the flame masks are retained. Crop and comparison layout use Pillow.",
+  "heightCalibrationScales": [
+    0.8322147651006712,
+    0.7972027972027972,
+    0.7568206441445878,
+    0.7164384910863784,
+    0.676056338028169
+  ],
+  "outsideMaskPixelsIdentical": true,
+  "brightTipSamples": [
+    {
+      "center": [
+        497,
+        424
+      ],
+      "sourceBrightTipHeightPixels": 62,
+      "candidateBrightTipHeightPixels": 124,
+      "ratio": 2.0
+    },
+    {
+      "center": [
+        598,
+        366
+      ],
+      "sourceBrightTipHeightPixels": 57,
+      "candidateBrightTipHeightPixels": 114,
+      "ratio": 2.0
+    }
+  ],
+  "sha256": {
+    "raw\\user-selected.jpg": "0d2b375cc4a74b9835a5b83e890753bd19918f69056ff1f79627b12fdd91638c",
+    "raw\\double-height.png": "ce43a752bfd5bb00d194ca711c90d0687bc3ece84fbb8dbb08e83af8b3577b42",
+    "prompt.txt": "51b742b4364d480793840dc5c807a641b5e7810cea9c6236b1e99a78a1b3f2a9"
+  },
+  "supersededBy": "../fire-selected-height75-v16/README.md",
+  "currentDelivery": false,
+  "previousOutputValidationInvalidated": true
+}

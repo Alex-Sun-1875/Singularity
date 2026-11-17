@@ -7,7 +7,7 @@ import type {Vec3} from 'cc';
 type Clip={frames?:number;frameIndices?:number[];phaseStarts?:number[]};
 export type PlayerActionPhase='prepare'|'raise'|'aim'|'rush'|'release'|'rearm'|'channel'|'recover'|'settle'|'dodge';
 export type PlayerActionSample={phase:PlayerActionPhase;ordinal:number;progress:number;beat:number;beats:number;releaseAt:number;lift:number;settle:boolean;rushRun:boolean};
-export type PlayerPresentation={actionId?:string;phase?:PlayerActionPhase;beat:number;facing:number;hand:Vec3;pose:string;ordinal:number};
+export type PlayerPresentation={actionId?:string;phase?:PlayerActionPhase;beat:number;facing:number;hand:Vec3;castHand?:Vec3;pose:string;ordinal:number};
 const clamp=(n:number)=>Math.max(0,Math.min(1,n));
 
 /** Reach the authored recoil promptly, then play its recovery before returning

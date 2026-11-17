@@ -1,0 +1,4477 @@
+{
+  "schemaVersion": 1,
+  "versionStatus": "implemented and verified for released chapters; future chapter budgets and isolated design simulation verified; future playable content and TapTap devices are not claimed",
+  "date": "2026-11-17",
+  "assembledUtc": "2026-11-17T05:09:07.594419+00:00",
+  "userGoal": {
+    "original": "还要调整一下怪物的血量啊，现在的技能伤害和装备这些结合起来，现在打怪不穿装备这些都能够一路推过去，没有什么难度，帮我深度优化一下，技能伤害，暴击，还有各种其他因素，一起结合起来设计并实现一下",
+    "expandedScope": "统筹八章等级、终局40级、装备及培养收益、技能与怪物伤害，并区分当前已开放内容和后六章设计预算。"
+  },
+  "interpretation": {
+    "successConditions": [
+      "正常同章装备具有可见的击杀效率和生存容错收益",
+      "裸装硬顶群怪与Boss应有失败风险，熟练操作仍可以弥补部分装备不足",
+      "四职业在单体、群攻、远近与机动条件下保留特性",
+      "怪物预算固定于内容等级及类型，不随玩家装备动态追平",
+      "真实任务/固定首清应覆盖已开放章节主线等级目标，额外狩猎与支线为增益",
+      "后六章只交付成长与装备/怪物预算设计，不宣称未实现地图、任务或Boss已可玩"
+    ],
+    "causesFound": [
+      "旧普通猎群Lv>5血量系数仅0.8且伤害再打0.75折扣，裸装技能一轮内可结束多数普通敌人",
+      "旧章节史诗武器仅提高约8%/20%技能威力，装备差距不足",
+      "普通Web预览默认满级曾使早期内容严重失真；当前正常test使用自然等级",
+      "旧低位种子逐字符线性随机数在连续cast ID上产生偏斜；现复用已有混合哈希并保留可重现结果",
+      "持续按住战士普攻在无受击/闪避时挤掉自动技能决策窗；生产控制器在合法收尾时松键",
+      "怪物移动、近战站位及持续区域覆盖导致理想靶场DPS不能直接替代实际TTK"
+    ]
+  },
+  "campaign": {
+    "maximumLevel": 40,
+    "releasedChapters": [
+      1,
+      2
+    ],
+    "futureChapters": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "chapterAvailability": [
+      {
+        "chapter": 1,
+        "available": true
+      },
+      {
+        "chapter": 2,
+        "available": true
+      },
+      {
+        "chapter": 3,
+        "available": false
+      },
+      {
+        "chapter": 4,
+        "available": false
+      },
+      {
+        "chapter": 5,
+        "available": false
+      },
+      {
+        "chapter": 6,
+        "available": false
+      },
+      {
+        "chapter": 7,
+        "available": false
+      },
+      {
+        "chapter": 8,
+        "available": false
+      }
+    ],
+    "phases": [
+      {
+        "chapter": 1,
+        "level": 1,
+        "endLevel": 10,
+        "enhance": 3,
+        "recommendedBossLevel": 10,
+        "bossContentLevel": 10,
+        "bossDurabilityMultiplier": 14,
+        "released": true,
+        "experience": {
+          "entryTotalXp": 0,
+          "beforeBossTotalXp": 7980,
+          "exitLevel": 11,
+          "exitTotalXp": 10600,
+          "requiredStoryAndFixedXp": 10600,
+          "mandatoryStory": {
+            "status": "resolve-existing-source-receipts",
+            "sourceIds": [
+              "journey:task:border-traces",
+              "journey:task:border-mill",
+              "journey:task:border-hunt",
+              "journey:task:border-camp",
+              "journey:task:border-watch",
+              "M1_XP_1",
+              "M2_XP_1",
+              "M2_XP_2"
+            ]
+          },
+          "fixedFirstClear": {
+            "status": "resolve-existing-source-receipts",
+            "sourceIds": [
+              "enemy:S07:s07-lane-raider",
+              "enemy:S07:s07-lane-shield",
+              "enemy:S07:s07-mill-archer",
+              "enemy:S07:campaign-mill-hound-a",
+              "enemy:S07:campaign-mill-hound-b",
+              "enemy:S09:s09-tax-shield",
+              "enemy:S09:s09-back-archer",
+              "enemy:S09:s09-tax-raider",
+              "enemy:S09:s09-back-raider",
+              "enemy:U1-03:campaign-U1-03-U1-4-1",
+              "enemy:U1-03:u103-prospector-raider",
+              "enemy:U1-03:campaign-U1-03-U1-2-3",
+              "enemy:S10:s10-captain"
+            ]
+          },
+          "optional": {
+            "requiredXp": 0,
+            "policy": "side quests and extra first clears are additive"
+          },
+          "repeatCombat": {
+            "requiredXp": 0,
+            "policy": "daily-limited hunting and re-fights are not needed for the mandatory level target"
+          }
+        },
+        "ttk": {
+          "reference": "same-chapter normal equipment, legal skill points, active combat",
+          "normalSeconds": [
+            3,
+            6
+          ],
+          "eliteSeconds": [
+            10,
+            18
+          ],
+          "bossSeconds": [
+            45,
+            70
+          ],
+          "bareTimeRatio": [
+            1.5,
+            2.5
+          ],
+          "developedTimeRatio": [
+            0.65,
+            0.85
+          ],
+          "status": "requires-real-encounter-evidence"
+        },
+        "health": {
+          "entryOrdinary": 80,
+          "endOrdinary": 451,
+          "endLight": 384,
+          "endHeavy": 564,
+          "endElite": 1354,
+          "mainBossContentLevel": 10,
+          "mainBoss": 6318
+        }
+      },
+      {
+        "chapter": 2,
+        "level": 11,
+        "endLevel": 20,
+        "enhance": 6,
+        "recommendedBossLevel": 20,
+        "bossContentLevel": 18,
+        "bossDurabilityMultiplier": 16,
+        "released": true,
+        "experience": {
+          "entryTotalXp": 10600,
+          "beforeBossTotalXp": 64030,
+          "exitLevel": 21,
+          "exitTotalXp": 74200,
+          "requiredStoryAndFixedXp": 63600,
+          "mandatoryStory": {
+            "status": "resolve-existing-source-receipts",
+            "sourceIds": [
+              "journey:task:highland-front",
+              "journey:task:highland-workers",
+              "journey:task:highland-hunt",
+              "journey:task:highland-ridge",
+              "journey:task:highland-oath",
+              "M3_XP_1",
+              "M4_XP_1",
+              "M4_XP_2"
+            ]
+          },
+          "fixedFirstClear": {
+            "status": "resolve-existing-source-receipts",
+            "sourceIds": [
+              "enemy:H03:campaign-H03-U1-1-1",
+              "enemy:H03:campaign-H03-R2-1-2",
+              "enemy:H03:campaign-workshop-crawler",
+              "enemy:H03:campaign-workshop-spitter",
+              "enemy:H03:campaign-workshop-hound-a",
+              "enemy:H03:campaign-workshop-hound-b",
+              "enemy:H08:campaign-H08-BOSS_R2-1",
+              "enemy:H08:campaign-H08-R2-2-2",
+              "enemy:H08:campaign-H08-R2-2-3"
+            ]
+          },
+          "optional": {
+            "requiredXp": 0,
+            "policy": "side quests and extra first clears are additive"
+          },
+          "repeatCombat": {
+            "requiredXp": 0,
+            "policy": "daily-limited hunting and re-fights are not needed for the mandatory level target"
+          }
+        },
+        "ttk": {
+          "reference": "same-chapter normal equipment, legal skill points, active combat",
+          "normalSeconds": [
+            3,
+            6
+          ],
+          "eliteSeconds": [
+            10,
+            18
+          ],
+          "bossSeconds": [
+            60,
+            90
+          ],
+          "bareTimeRatio": [
+            1.5,
+            2.5
+          ],
+          "developedTimeRatio": [
+            0.65,
+            0.85
+          ],
+          "status": "requires-real-encounter-evidence"
+        },
+        "health": {
+          "entryOrdinary": 505,
+          "endOrdinary": 1101,
+          "endLight": 936,
+          "endHeavy": 1377,
+          "endElite": 3304,
+          "mainBossContentLevel": 18,
+          "mainBoss": 15220
+        }
+      },
+      {
+        "chapter": 3,
+        "level": 21,
+        "endLevel": 24,
+        "enhance": 8,
+        "recommendedBossLevel": 24,
+        "bossContentLevel": 24,
+        "bossDurabilityMultiplier": 17,
+        "released": false,
+        "experience": {
+          "entryTotalXp": 74200,
+          "beforeBossTotalXp": 111090,
+          "exitLevel": 25,
+          "exitTotalXp": 125680,
+          "requiredStoryAndFixedXp": 51480,
+          "mandatoryStory": {
+            "status": "unallocated-planning",
+            "sourceIds": []
+          },
+          "fixedFirstClear": {
+            "status": "unallocated-planning",
+            "sourceIds": []
+          },
+          "optional": {
+            "requiredXp": 0,
+            "policy": "side quests and extra first clears are additive"
+          },
+          "repeatCombat": {
+            "requiredXp": 0,
+            "policy": "daily-limited hunting and re-fights are not needed for the mandatory level target"
+          }
+        },
+        "ttk": {
+          "reference": "same-chapter normal equipment, legal skill points, active combat",
+          "normalSeconds": [
+            3,
+            6
+          ],
+          "eliteSeconds": [
+            10,
+            18
+          ],
+          "bossSeconds": [
+            60,
+            90
+          ],
+          "bareTimeRatio": [
+            1.5,
+            2.5
+          ],
+          "developedTimeRatio": [
+            0.65,
+            0.85
+          ],
+          "status": "future-content-target-only"
+        },
+        "health": {
+          "entryOrdinary": 1180,
+          "endOrdinary": 1431,
+          "endLight": 1217,
+          "endHeavy": 1789,
+          "endElite": 4294,
+          "mainBossContentLevel": 24,
+          "mainBoss": 24331
+        }
+      },
+      {
+        "chapter": 4,
+        "level": 25,
+        "endLevel": 28,
+        "enhance": 10,
+        "recommendedBossLevel": 28,
+        "bossContentLevel": 28,
+        "bossDurabilityMultiplier": 18,
+        "released": false,
+        "experience": {
+          "entryTotalXp": 125680,
+          "beforeBossTotalXp": 177030,
+          "exitLevel": 29,
+          "exitTotalXp": 196840,
+          "requiredStoryAndFixedXp": 71160,
+          "mandatoryStory": {
+            "status": "unallocated-planning",
+            "sourceIds": []
+          },
+          "fixedFirstClear": {
+            "status": "unallocated-planning",
+            "sourceIds": []
+          },
+          "optional": {
+            "requiredXp": 0,
+            "policy": "side quests and extra first clears are additive"
+          },
+          "repeatCombat": {
+            "requiredXp": 0,
+            "policy": "daily-limited hunting and re-fights are not needed for the mandatory level target"
+          }
+        },
+        "ttk": {
+          "reference": "same-chapter normal equipment, legal skill points, active combat",
+          "normalSeconds": [
+            3,
+            6
+          ],
+          "eliteSeconds": [
+            10,
+            18
+          ],
+          "bossSeconds": [
+            60,
+            90
+          ],
+          "bareTimeRatio": [
+            1.5,
+            2.5
+          ],
+          "developedTimeRatio": [
+            0.65,
+            0.85
+          ],
+          "status": "future-content-target-only"
+        },
+        "health": {
+          "entryOrdinary": 1520,
+          "endOrdinary": 1801,
+          "endLight": 1531,
+          "endHeavy": 2252,
+          "endElite": 5404,
+          "mainBossContentLevel": 28,
+          "mainBoss": 32423
+        }
+      },
+      {
+        "chapter": 5,
+        "level": 29,
+        "endLevel": 32,
+        "enhance": 10,
+        "recommendedBossLevel": 32,
+        "bossContentLevel": 32,
+        "bossDurabilityMultiplier": 18.5,
+        "released": false,
+        "experience": {
+          "entryTotalXp": 196840,
+          "beforeBossTotalXp": 265050,
+          "exitLevel": 33,
+          "exitTotalXp": 290880,
+          "requiredStoryAndFixedXp": 94040,
+          "mandatoryStory": {
+            "status": "unallocated-planning",
+            "sourceIds": []
+          },
+          "fixedFirstClear": {
+            "status": "unallocated-planning",
+            "sourceIds": []
+          },
+          "optional": {
+            "requiredXp": 0,
+            "policy": "side quests and extra first clears are additive"
+          },
+          "repeatCombat": {
+            "requiredXp": 0,
+            "policy": "daily-limited hunting and re-fights are not needed for the mandatory level target"
+          }
+        },
+        "ttk": {
+          "reference": "same-chapter normal equipment, legal skill points, active combat",
+          "normalSeconds": [
+            3,
+            6
+          ],
+          "eliteSeconds": [
+            10,
+            18
+          ],
+          "bossSeconds": [
+            60,
+            90
+          ],
+          "bareTimeRatio": [
+            1.5,
+            2.5
+          ],
+          "developedTimeRatio": [
+            0.65,
+            0.85
+          ],
+          "status": "future-content-target-only"
+        },
+        "health": {
+          "entryOrdinary": 1900,
+          "endOrdinary": 2211,
+          "endLight": 1880,
+          "endHeavy": 2764,
+          "endElite": 6634,
+          "mainBossContentLevel": 32,
+          "mainBoss": 40908
+        }
+      },
+      {
+        "chapter": 6,
+        "level": 33,
+        "endLevel": 35,
+        "enhance": 12,
+        "recommendedBossLevel": 35,
+        "bossContentLevel": 35,
+        "bossDurabilityMultiplier": 19,
+        "released": false,
+        "experience": {
+          "entryTotalXp": 290880,
+          "beforeBossTotalXp": 347480,
+          "exitLevel": 36,
+          "exitTotalXp": 378350,
+          "requiredStoryAndFixedXp": 87470,
+          "mandatoryStory": {
+            "status": "unallocated-planning",
+            "sourceIds": []
+          },
+          "fixedFirstClear": {
+            "status": "unallocated-planning",
+            "sourceIds": []
+          },
+          "optional": {
+            "requiredXp": 0,
+            "policy": "side quests and extra first clears are additive"
+          },
+          "repeatCombat": {
+            "requiredXp": 0,
+            "policy": "daily-limited hunting and re-fights are not needed for the mandatory level target"
+          }
+        },
+        "ttk": {
+          "reference": "same-chapter normal equipment, legal skill points, active combat",
+          "normalSeconds": [
+            3,
+            6
+          ],
+          "eliteSeconds": [
+            10,
+            18
+          ],
+          "bossSeconds": [
+            60,
+            90
+          ],
+          "bareTimeRatio": [
+            1.5,
+            2.5
+          ],
+          "developedTimeRatio": [
+            0.65,
+            0.85
+          ],
+          "status": "future-content-target-only"
+        },
+        "health": {
+          "entryOrdinary": 2320,
+          "endOrdinary": 2545,
+          "endLight": 2163,
+          "endHeavy": 3181,
+          "endElite": 7635,
+          "mainBossContentLevel": 35,
+          "mainBoss": 48355
+        }
+      },
+      {
+        "chapter": 7,
+        "level": 36,
+        "endLevel": 38,
+        "enhance": 12,
+        "recommendedBossLevel": 38,
+        "bossContentLevel": 38,
+        "bossDurabilityMultiplier": 19.5,
+        "released": false,
+        "experience": {
+          "entryTotalXp": 378350,
+          "beforeBossTotalXp": 445480,
+          "exitLevel": 39,
+          "exitTotalXp": 481840,
+          "requiredStoryAndFixedXp": 103490,
+          "mandatoryStory": {
+            "status": "unallocated-planning",
+            "sourceIds": []
+          },
+          "fixedFirstClear": {
+            "status": "unallocated-planning",
+            "sourceIds": []
+          },
+          "optional": {
+            "requiredXp": 0,
+            "policy": "side quests and extra first clears are additive"
+          },
+          "repeatCombat": {
+            "requiredXp": 0,
+            "policy": "daily-limited hunting and re-fights are not needed for the mandatory level target"
+          }
+        },
+        "ttk": {
+          "reference": "same-chapter normal equipment, legal skill points, active combat",
+          "normalSeconds": [
+            3,
+            6
+          ],
+          "eliteSeconds": [
+            10,
+            18
+          ],
+          "bossSeconds": [
+            60,
+            90
+          ],
+          "bareTimeRatio": [
+            1.5,
+            2.5
+          ],
+          "developedTimeRatio": [
+            0.65,
+            0.85
+          ],
+          "status": "future-content-target-only"
+        },
+        "health": {
+          "entryOrdinary": 2661,
+          "endOrdinary": 2901,
+          "endLight": 2466,
+          "endHeavy": 3627,
+          "endElite": 8704,
+          "mainBossContentLevel": 38,
+          "mainBoss": 56574
+        }
+      },
+      {
+        "chapter": 8,
+        "level": 39,
+        "endLevel": 40,
+        "enhance": 15,
+        "recommendedBossLevel": 40,
+        "bossContentLevel": 40,
+        "bossDurabilityMultiplier": 20,
+        "released": false,
+        "experience": {
+          "entryTotalXp": 481840,
+          "beforeBossTotalXp": 520130,
+          "exitLevel": 40,
+          "exitTotalXp": 520130,
+          "requiredStoryAndFixedXp": 38290,
+          "mandatoryStory": {
+            "status": "unallocated-planning",
+            "sourceIds": []
+          },
+          "fixedFirstClear": {
+            "status": "unallocated-planning",
+            "sourceIds": []
+          },
+          "optional": {
+            "requiredXp": 0,
+            "policy": "side quests and extra first clears are additive"
+          },
+          "repeatCombat": {
+            "requiredXp": 0,
+            "policy": "daily-limited hunting and re-fights are not needed for the mandatory level target"
+          }
+        },
+        "ttk": {
+          "reference": "same-chapter normal equipment, legal skill points, active combat",
+          "normalSeconds": [
+            3,
+            6
+          ],
+          "eliteSeconds": [
+            10,
+            18
+          ],
+          "bossSeconds": [
+            60,
+            90
+          ],
+          "bareTimeRatio": [
+            1.5,
+            2.5
+          ],
+          "developedTimeRatio": [
+            0.65,
+            0.85
+          ],
+          "status": "future-content-target-only"
+        },
+        "health": {
+          "entryOrdinary": 3025,
+          "endOrdinary": 3151,
+          "endLight": 2679,
+          "endHeavy": 3939,
+          "endElite": 9454,
+          "mainBossContentLevel": 40,
+          "mainBoss": 63025
+        }
+      }
+    ],
+    "experienceFormula": "xpToNext(L) = L >= 40 ? 0 : 100 + 55*(L-1) + 25*(L-1)^2; cumulativeXp(L) sums all prior levels",
+    "attributeBudget": {
+      "perLevel": 3,
+      "totalAt40": 117,
+      "baseAttributeMin": 10,
+      "baseAttributeMax": 80,
+      "equipmentAttributesMayExceedBaseCap": true
+    },
+    "skillBudget": {
+      "maximumRank": 5,
+      "rankSpendFormula": "rank*(rank-1)/2",
+      "totalFormula": "characterLevel-1 + (secondChapter ? 2 : 0)",
+      "totalAt40": 41,
+      "rank5Cost": 10,
+      "fourRank5SkillsCost": 40,
+      "allProfessionSkillsRank5IsNotLegal": true
+    },
+    "futureXpAllocation": "第3–8章保留总经验预算，mandatory/fixed source明确unallocated；不得把规划数当作已经存在的任务奖励。"
+  },
+  "authoredExperienceCoverage": {
+    "method": "以RELEASED_CHAPTER_XP_SOURCES逐项解析JOURNEY_TASKS、MAIN_XP_EVENTS、AREAS静态首清及CAMPAIGN_BATTLES.waves.experience。波次原始怪的经验在完成波次后按原enemy receipt结算一次，不再重复加直接击杀经验。",
+    "source": "src/cocos/assets/scripts/features/progression/data/CampaignProgression.ts",
+    "chapters": [
+      {
+        "chapter": 1,
+        "coverage": {
+          "chapter": 1,
+          "storyXp": 9180,
+          "fixedFirstClearXp": 1432,
+          "authoredXp": 10612,
+          "requiredXp": 10600,
+          "shortfallXp": 0,
+          "optionalXpRequired": 0,
+          "repeatCombatXpRequired": 0,
+          "covered": true
+        },
+        "story": [
+          {
+            "id": "journey:task:border-traces",
+            "xp": 400,
+            "found": true,
+            "paidBy": "journey-task-completion"
+          },
+          {
+            "id": "journey:task:border-mill",
+            "xp": 1000,
+            "found": true,
+            "paidBy": "journey-task-completion"
+          },
+          {
+            "id": "journey:task:border-hunt",
+            "xp": 1200,
+            "found": true,
+            "paidBy": "journey-task-completion"
+          },
+          {
+            "id": "journey:task:border-camp",
+            "xp": 1500,
+            "found": true,
+            "paidBy": "journey-task-completion"
+          },
+          {
+            "id": "journey:task:border-watch",
+            "xp": 1900,
+            "found": true,
+            "paidBy": "journey-task-completion"
+          },
+          {
+            "id": "M1_XP_1",
+            "xp": 430,
+            "found": true,
+            "paidBy": "main-story-event"
+          },
+          {
+            "id": "M2_XP_1",
+            "xp": 1460,
+            "found": true,
+            "paidBy": "main-story-event"
+          },
+          {
+            "id": "M2_XP_2",
+            "xp": 1290,
+            "found": true,
+            "paidBy": "main-story-event"
+          }
+        ],
+        "fixed": [
+          {
+            "id": "enemy:S07:s07-lane-raider",
+            "xp": 44,
+            "found": true,
+            "paidBy": "fixed-enemy-first-clear"
+          },
+          {
+            "id": "enemy:S07:s07-lane-shield",
+            "xp": 44,
+            "found": true,
+            "paidBy": "fixed-enemy-first-clear"
+          },
+          {
+            "id": "enemy:S07:s07-mill-archer",
+            "xp": 44,
+            "found": true,
+            "paidBy": "fixed-enemy-first-clear"
+          },
+          {
+            "id": "enemy:S07:campaign-mill-hound-a",
+            "xp": 44,
+            "found": true,
+            "paidBy": "native-wave-completion-single-receipt"
+          },
+          {
+            "id": "enemy:S07:campaign-mill-hound-b",
+            "xp": 44,
+            "found": true,
+            "paidBy": "native-wave-completion-single-receipt"
+          },
+          {
+            "id": "enemy:S09:s09-tax-shield",
+            "xp": 68,
+            "found": true,
+            "paidBy": "fixed-enemy-first-clear"
+          },
+          {
+            "id": "enemy:S09:s09-back-archer",
+            "xp": 68,
+            "found": true,
+            "paidBy": "fixed-enemy-first-clear"
+          },
+          {
+            "id": "enemy:S09:s09-tax-raider",
+            "xp": 68,
+            "found": true,
+            "paidBy": "fixed-enemy-first-clear"
+          },
+          {
+            "id": "enemy:S09:s09-back-raider",
+            "xp": 68,
+            "found": true,
+            "paidBy": "fixed-enemy-first-clear"
+          },
+          {
+            "id": "enemy:U1-03:campaign-U1-03-U1-4-1",
+            "xp": 68,
+            "found": true,
+            "paidBy": "fixed-enemy-first-clear"
+          },
+          {
+            "id": "enemy:U1-03:u103-prospector-raider",
+            "xp": 68,
+            "found": true,
+            "paidBy": "fixed-enemy-first-clear"
+          },
+          {
+            "id": "enemy:U1-03:campaign-U1-03-U1-2-3",
+            "xp": 68,
+            "found": true,
+            "paidBy": "fixed-enemy-first-clear"
+          },
+          {
+            "id": "enemy:S10:s10-captain",
+            "xp": 736,
+            "found": true,
+            "paidBy": "fixed-enemy-first-clear"
+          }
+        ],
+        "allSourcesResolved": true
+      },
+      {
+        "chapter": 2,
+        "coverage": {
+          "chapter": 2,
+          "storyXp": 68680,
+          "fixedFirstClearXp": 2192,
+          "authoredXp": 70872,
+          "requiredXp": 63600,
+          "shortfallXp": 0,
+          "optionalXpRequired": 0,
+          "repeatCombatXpRequired": 0,
+          "covered": true
+        },
+        "story": [
+          {
+            "id": "journey:task:highland-front",
+            "xp": 600,
+            "found": true,
+            "paidBy": "journey-task-completion"
+          },
+          {
+            "id": "journey:task:highland-workers",
+            "xp": 6280,
+            "found": true,
+            "paidBy": "journey-task-completion"
+          },
+          {
+            "id": "journey:task:highland-hunt",
+            "xp": 9900,
+            "found": true,
+            "paidBy": "journey-task-completion"
+          },
+          {
+            "id": "journey:task:highland-ridge",
+            "xp": 14600,
+            "found": true,
+            "paidBy": "journey-task-completion"
+          },
+          {
+            "id": "journey:task:highland-oath",
+            "xp": 22050,
+            "found": true,
+            "paidBy": "journey-task-completion"
+          },
+          {
+            "id": "M3_XP_1",
+            "xp": 4100,
+            "found": true,
+            "paidBy": "main-story-event"
+          },
+          {
+            "id": "M4_XP_1",
+            "xp": 6660,
+            "found": true,
+            "paidBy": "main-story-event"
+          },
+          {
+            "id": "M4_XP_2",
+            "xp": 4490,
+            "found": true,
+            "paidBy": "main-story-event"
+          }
+        ],
+        "fixed": [
+          {
+            "id": "enemy:H03:campaign-H03-U1-1-1",
+            "xp": 116,
+            "found": true,
+            "paidBy": "fixed-enemy-first-clear"
+          },
+          {
+            "id": "enemy:H03:campaign-H03-R2-1-2",
+            "xp": 116,
+            "found": true,
+            "paidBy": "fixed-enemy-first-clear"
+          },
+          {
+            "id": "enemy:H03:campaign-workshop-crawler",
+            "xp": 100,
+            "found": true,
+            "paidBy": "native-wave-completion-single-receipt"
+          },
+          {
+            "id": "enemy:H03:campaign-workshop-spitter",
+            "xp": 100,
+            "found": true,
+            "paidBy": "native-wave-completion-single-receipt"
+          },
+          {
+            "id": "enemy:H03:campaign-workshop-hound-a",
+            "xp": 100,
+            "found": true,
+            "paidBy": "native-wave-completion-single-receipt"
+          },
+          {
+            "id": "enemy:H03:campaign-workshop-hound-b",
+            "xp": 100,
+            "found": true,
+            "paidBy": "native-wave-completion-single-receipt"
+          },
+          {
+            "id": "enemy:H08:campaign-H08-BOSS_R2-1",
+            "xp": 1248,
+            "found": true,
+            "paidBy": "fixed-enemy-first-clear"
+          },
+          {
+            "id": "enemy:H08:campaign-H08-R2-2-2",
+            "xp": 156,
+            "found": true,
+            "paidBy": "fixed-enemy-first-clear"
+          },
+          {
+            "id": "enemy:H08:campaign-H08-R2-2-3",
+            "xp": 156,
+            "found": true,
+            "paidBy": "fixed-enemy-first-clear"
+          }
+        ],
+        "allSourcesResolved": true
+      }
+    ],
+    "chapter1BeforeBossGuaranteedFloor": {
+      "authoredXp": 8586,
+      "requiredXpForLevel10": 7980,
+      "excludedAfterBossSources": [
+        "M2_XP_2",
+        "enemy:S10:s10-captain"
+      ],
+      "covered": true
+    },
+    "coverageDoesNotProvePhysicalRoute": "静态经验总额覆盖与实际走图、配方材料、战斗存活分别验收。第2章此处为源码来源覆盖，不伪称已完成整章自然路径实录。"
+  },
+  "formulas": {
+    "skillPower": {
+      "formula": "18 + 1.05*(characterLevel-1)",
+      "source": "src/cocos/assets/scripts/features/combat/data/CombatBalance.ts"
+    },
+    "directSkillDamage": {
+      "formula": "skillPower * weaponMultiplier * (1 + equippedGearPowerPercent/100) * maxDamagePerTargetS * segmentFraction * (1 + 0.008*(effectiveMainAttribute-10)) * (1 + min(0.4, conditionalDamageBonus)) * criticalMultiplierIfCritical",
+      "mainAttribute": "WAR strength; BOW dexterity; FIR/THU intellect",
+      "budgetInvariant": "maxDamagePerTargetS是同一次施放对一个敌人的全部直接伤害合计；分段不能再乘一次总倍率；空目标名额不折算成Boss附伤。",
+      "nonDirectEffects": "燃烧、自动连射、附雷、成长装备触发分别走原生产结算与触发上限；未另造模拟伤害公式。",
+      "skills": [
+        {
+          "id": "WAR_01",
+          "name": "断空斩",
+          "role": "single",
+          "type": "active",
+          "cost": 6,
+          "totalDirectSByRank": [
+            3.46,
+            3.94,
+            4.54,
+            5.24,
+            6.05
+          ],
+          "cooldownSecondsByRank": [
+            3,
+            3,
+            2.9,
+            2.7,
+            2.5
+          ],
+          "authoredHitsByRank": [
+            2,
+            2,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "id": "WAR_02",
+          "name": "破军突袭",
+          "role": "area",
+          "type": "active",
+          "cost": 12,
+          "totalDirectSByRank": [
+            1.2,
+            1.4,
+            1.65,
+            1.95,
+            2.3
+          ],
+          "cooldownSecondsByRank": [
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "authoredHitsByRank": [
+            1,
+            1,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "id": "WAR_04",
+          "name": "旋风斩",
+          "role": "area",
+          "type": "active",
+          "cost": 16,
+          "totalDirectSByRank": [
+            1.9,
+            2.15,
+            2.45,
+            2.85,
+            3.3
+          ],
+          "cooldownSecondsByRank": [
+            8,
+            8,
+            7.5,
+            7,
+            7
+          ],
+          "authoredHitsByRank": [
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "id": "WAR_05",
+          "name": "破晓裁决",
+          "role": "area",
+          "type": "ultimate",
+          "cost": 45,
+          "totalDirectSByRank": [
+            2.55,
+            2.9,
+            3.3,
+            3.85,
+            4.45
+          ],
+          "cooldownSecondsByRank": [
+            12,
+            12,
+            12,
+            12,
+            12
+          ],
+          "authoredHitsByRank": [
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "id": "BOW_01",
+          "name": "穿云箭",
+          "role": "single",
+          "type": "active",
+          "cost": 6,
+          "totalDirectSByRank": [
+            2.94,
+            3.36,
+            3.86,
+            4.46,
+            5.15
+          ],
+          "cooldownSecondsByRank": [
+            3,
+            3,
+            2.9,
+            2.7,
+            2.5
+          ],
+          "authoredHitsByRank": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "BOW_02",
+          "name": "连穿箭",
+          "role": "area",
+          "type": "active",
+          "cost": 12,
+          "totalDirectSByRank": [
+            1.5,
+            1.75,
+            2.05,
+            2.4,
+            2.8
+          ],
+          "cooldownSecondsByRank": [
+            6,
+            6,
+            5.75,
+            5.5,
+            5.25
+          ],
+          "authoredHitsByRank": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "BOW_05",
+          "name": "万箭齐发",
+          "role": "area",
+          "type": "ultimate",
+          "cost": 45,
+          "totalDirectSByRank": [
+            2.55,
+            2.9,
+            3.3,
+            3.85,
+            4.45
+          ],
+          "cooldownSecondsByRank": [
+            12,
+            12,
+            12,
+            12,
+            12
+          ],
+          "authoredHitsByRank": [
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        },
+        {
+          "id": "FIR_01",
+          "name": "赤焰枪",
+          "role": "single",
+          "type": "active",
+          "cost": 6,
+          "totalDirectSByRank": [
+            3.2,
+            3.65,
+            4.2,
+            4.85,
+            5.6
+          ],
+          "cooldownSecondsByRank": [
+            3,
+            3,
+            2.9,
+            2.7,
+            2.5
+          ],
+          "authoredHitsByRank": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "FIR_02",
+          "name": "焚星坠落",
+          "role": "area",
+          "type": "ultimate",
+          "cost": 45,
+          "totalDirectSByRank": [
+            2.55,
+            2.9,
+            3.3,
+            3.85,
+            4.45
+          ],
+          "cooldownSecondsByRank": [
+            12,
+            12,
+            12,
+            12,
+            12
+          ],
+          "authoredHitsByRank": [
+            1,
+            1,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "id": "FIR_04",
+          "name": "烈焰喷流",
+          "role": "area",
+          "type": "active",
+          "cost": 18,
+          "totalDirectSByRank": [
+            2.3,
+            2.59,
+            2.99,
+            3.45,
+            4.02
+          ],
+          "cooldownSecondsByRank": [
+            6,
+            6,
+            6,
+            6,
+            6
+          ],
+          "authoredHitsByRank": [
+            4,
+            4,
+            4,
+            4,
+            4
+          ]
+        },
+        {
+          "id": "FIR_05",
+          "name": "焚焰火域",
+          "role": "control",
+          "type": "active",
+          "cost": 18,
+          "totalDirectSByRank": [
+            2.18,
+            2.47,
+            2.82,
+            3.28,
+            3.79
+          ],
+          "cooldownSecondsByRank": [
+            7,
+            7,
+            7,
+            7,
+            7
+          ],
+          "authoredHitsByRank": [
+            5,
+            5,
+            5,
+            5,
+            5
+          ]
+        },
+        {
+          "id": "THU_01",
+          "name": "贯雷长矛",
+          "role": "single",
+          "type": "active",
+          "cost": 6,
+          "totalDirectSByRank": [
+            3.68,
+            4.2,
+            4.83,
+            5.58,
+            6.44
+          ],
+          "cooldownSecondsByRank": [
+            3,
+            3,
+            2.9,
+            2.7,
+            2.5
+          ],
+          "authoredHitsByRank": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "THU_02",
+          "name": "连锁雷弧",
+          "role": "area",
+          "type": "active",
+          "cost": 14,
+          "totalDirectSByRank": [
+            1.56,
+            1.8,
+            2.1,
+            2.46,
+            2.88
+          ],
+          "cooldownSecondsByRank": [
+            5,
+            5,
+            5,
+            5,
+            5
+          ],
+          "authoredHitsByRank": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ]
+        },
+        {
+          "id": "THU_04",
+          "name": "扇雷横扫",
+          "role": "area",
+          "type": "active",
+          "cost": 16,
+          "totalDirectSByRank": [
+            1.75,
+            2.06,
+            2.44,
+            2.88,
+            3.38
+          ],
+          "cooldownSecondsByRank": [
+            7,
+            7,
+            6.5,
+            6,
+            6
+          ],
+          "authoredHitsByRank": [
+            2,
+            2,
+            2,
+            2,
+            2
+          ]
+        },
+        {
+          "id": "THU_05",
+          "name": "万钧雷潮",
+          "role": "area",
+          "type": "ultimate",
+          "cost": 45,
+          "totalDirectSByRank": [
+            2.81,
+            3.19,
+            3.63,
+            4.24,
+            4.9
+          ],
+          "cooldownSecondsByRank": [
+            12,
+            12,
+            12,
+            12,
+            12
+          ],
+          "authoredHitsByRank": [
+            3,
+            3,
+            3,
+            3,
+            3
+          ]
+        }
+      ],
+      "source": "src/cocos/assets/scripts/features/combat/common/PureCombat.ts"
+    },
+    "weapon": {
+      "formula": "M(P) = 1 + max(0,P)/(100 + max(0,P)/3)",
+      "asymptoticMultiplier": 4,
+      "legacyTierStrength": [
+        10,
+        18,
+        30,
+        45,
+        63
+      ],
+      "legacyQualityFactor": {
+        "普通": 0.85,
+        "精良": 0.9,
+        "稀有": 1,
+        "史诗": 1.1,
+        "传奇": 1.18,
+        "神器": 1.25
+      },
+      "legacyRule": "未显式power的旧武器按固定tier/quality派生；W01/W07/W11为0强度初始武器；基础攻击、技能与说明共用此曲线。",
+      "chapterEpicStrength": {
+        "chapter1": 24,
+        "chapter2": 60
+      },
+      "growingBaseAnchors": [
+        [
+          20,
+          63.55932203389831
+        ],
+        [
+          24,
+          100
+        ],
+        [
+          28,
+          135
+        ],
+        [
+          32,
+          180
+        ],
+        [
+          35,
+          238
+        ],
+        [
+          38,
+          310
+        ],
+        [
+          40,
+          400
+        ]
+      ],
+      "level40Example": {
+        "chapter8Epic": 391,
+        "artifact": 500
+      },
+      "source": "src/cocos/assets/scripts/features/equipment/data/WeaponPower.ts"
+    },
+    "critical": {
+      "chance": "min(0.30, 0.05 + 0.0012*(effectiveDexterity-10) + gearCriticalChancePercent/100)",
+      "multiplier": "min(2.5, 1.5 + gearCriticalDamagePercent/100)",
+      "random": "equipmentRandomWord(seed, combat:<action-key>)/2^32；命中使用独立contact-hit键；同一施放的多段保留同一暴击结果。",
+      "source": "src/cocos/assets/scripts/features/equipment/common/EquipmentDice.ts"
+    },
+    "accuracy": {
+      "chance": "clamp((accuracy-evasion)/100, 0.60, 1.00)",
+      "bowAccuracy": "100 + max(0, permanentFocusCapacity-100)*0.25",
+      "playerEvasion": "min(25, 5 + max(0,effectiveDexterity-10)*0.2)",
+      "geometricContactRequiredFirst": true,
+      "source": "src/cocos/assets/scripts/features/combat/common/CombatAccuracy.ts"
+    },
+    "enemyHealth": {
+      "ordinary": "80 + 30*(contentLevel-1) + 1.25*(contentLevel-1)^2, rounded after archetype multiplier",
+      "multipliers": {
+        "light": 0.85,
+        "heavy": 1.25,
+        "eliteOrAlpha": 3,
+        "chapter1MainBoss": 14,
+        "chapter2MainBoss": 16,
+        "futureMainBoss": "per CAMPAIGN_PHASES: 17/18/18.5/19/19.5/20",
+        "beastBoss": 12,
+        "waveVeteran": 1.2
+      },
+      "sideBossMinimum": "SIDE_C2_ uses max(12*ordinaryHP, 11000 + 300*max(0,contentLevel-12))",
+      "fixedToContentNotPlayerGear": true,
+      "exception": "显式练习靶及无模板的自定义HP按原作者预算；剧情wave由生产campaignFighter解析，不能再次乘等级。",
+      "savedEnemyRefresh": "保留已损血比例；hp=0保持死亡；不会借刷新回满血或复活。",
+      "source": "src/cocos/assets/scripts/features/combat/data/EnemyBalance.ts"
+    },
+    "enemyDamage": {
+      "formula": "authoredMoveBaseDamage * (14 + 0.75*(contentLevel-1))/12 * (nonEliteBoss ? 1.15 : 1)",
+      "moveTimingAndGeometry": "真实前摇、锁定、危险区、攻击次数、护盾、阶段与可中断规则继续由EnemyCombat执行。",
+      "source": "src/cocos/assets/scripts/features/combat/common/EnemyCombat.ts"
+    },
+    "incomingDamage": {
+      "equipmentArmor": "A = clamp(armorPercent/100,0,0.55) * (physical ? 1 : 0.5)",
+      "temporaryProtection": "S = clamp(statusReduction,-0.25,0.5)",
+      "ward": "W = clamp(directWard,0,0.5)",
+      "totalReduction": "min(0.70, 1 - (1-A)*(1-S)*(1-W))",
+      "mitigatedHit": "max(1, round(rawDamage*(1-totalReduction)))，再按真实护盾吸收和生命扣除处理。",
+      "reason": "装备护甲与临时保护分乘，元素攻击保留半额护甲收益，避免堆减伤直接归零。",
+      "source": "src/cocos/assets/scripts/features/combat/data/CombatBalance.ts"
+    },
+    "healthAndResource": {
+      "baseHealth": "120 + 5*(level-1) + 4*(baseVitality-10), then real equipment and benefits",
+      "resourceCapacity": "100 + 2*max(0,effectiveClassAttribute-10)",
+      "combatResourcePerSecond": 4,
+      "restResourcePerSecond": 16,
+      "capacityChange": "保留原充盈比例，换装不能免费补满资源。",
+      "source": "src/cocos/assets/scripts/features/combat/common/ClassResource.ts"
+    },
+    "supplies": {
+      "healthPotion": "max(30, maxHp*0.30), clamped by actual missing health",
+      "resourcePotion": "45% resource capacity, clamped by missing resource",
+      "sharedCooldownSeconds": 8,
+      "carryingCapacity": 99,
+      "checkpointFloor": {
+        "health": 3,
+        "eachClassResource": 2
+      },
+      "stockRule": "检查点与死亡只补至旅行底线，已收集的更多存量保留；99是携带上限，不是每次休整补满99。",
+      "restRule": "仅真实安全检查点休整恢复生命/职业资源，不允许原地无限回血。",
+      "source": "src/cocos/assets/scripts/features/equipment/data/Supplies.ts"
+    },
+    "forgingAndGems": {
+      "currentReleasedForgingStage": [
+        3,
+        6
+      ],
+      "plannedPhaseEnhance": [
+        3,
+        6,
+        8,
+        10,
+        10,
+        12,
+        12,
+        15
+      ],
+      "qualityEnhanceCap": {
+        "普通": 3,
+        "精良": 5,
+        "稀有": 8,
+        "史诗": 10,
+        "传奇": 12,
+        "神器": 15
+      },
+      "actualCap": "min(releasedPhaseStage, itemQualityCap or explicit override)",
+      "gemTierLevels": [
+        1,
+        10,
+        20,
+        30,
+        40
+      ],
+      "gemSocketCapacity": {
+        "普通": 0,
+        "精良": 0,
+        "稀有": 2,
+        "史诗": 3,
+        "传奇": 4,
+        "神器": 5
+      },
+      "gemUnits": "one-hand weapon4 + offhand1 = two-hand5; duplicate item ID cultivation is counted once",
+      "gemTierScale": [
+        1,
+        1.5,
+        2.25,
+        3.375,
+        5.0625
+      ],
+      "baseGemPerFiveUnits": {
+        "powerPercent": 0.2,
+        "health": 2,
+        "armorPercent": 0.1,
+        "criticalChancePercent": 0.05,
+        "criticalDamagePercent": 0.5
+      },
+      "offensiveLimits": "武器强度递减；暴率30%/暴伤250%/减伤70%封顶；宝石自身按有限品质孔数、V阶与单位预算增长，未臆造额外宝石softcap。",
+      "source": "src/cocos/assets/scripts/features/gems/data/Gems.ts"
+    },
+    "firstBossWeaponMilestone": {
+      "items": [
+        "LC1_T_E_BOW",
+        "LC1_T_E_FIR",
+        "LC1_T_E_THU",
+        "LC1_T_E_WAR"
+      ],
+      "previousPower": 31,
+      "currentPower": 48,
+      "ordinaryCraftPower": 30,
+      "multiplier": 1.4137931034482758,
+      "improvementOverOrdinaryCraftPercent": 11.083743842364523,
+      "sourceAndSaveProof": "existing group IDs, item IDs, required levels and first-Boss reward proofs retained",
+      "validation": "existing ordinary-crafting regression additionally checks first-Boss multiplier > 1.10 * craft multiplier"
+    }
+  },
+  "measuredEncounters": {
+    "scope": "Real GameSession spawn, damage, critical, accuracy, resource, enemy AI and production Automation evade/fight commands. Same legal level/attribute/skill allocation for each gear comparison. No manual health/resource reset during combat; finite native potions. Flat unobstructed arena isolates encounter stats; enemy templates, authored levels, pack spacing and grouping preserved. Gear ownership and initial forging/gem money/materials are fixtures, not natural acquisition/economy proof. Developed uses a growth artifact plus production forging; gems only when explicitly requested. Exposure is idle without attacks, skills, evasions, healing or potions. Attack disables walking, dodge input and automatic evasion, retaining normal production skill/support choices and finite potions; authored rush/retreat skill displacement still runs. Dummy mode uses one declared immovable 100,000,000 HP practice target, forced combat regeneration and finite resource potions; it proves output only, never future content or boss difficulty. Optional dummy release rotation releases the sword attack button at a beat boundary to allow the production controller its normal skill decision. Lifecycle equipment policy grants declared future ownership fixtures; production level requirements, forging stage and gem-tier caps are still authoritative. Lifecycle-full additionally replaces future head/feet and equips an eligible WAR single-hand offhand; two-handed weapons never gain an offhand. When plannedPhaseCaps is true, only this isolated CLI process marks shared phase budget records released so the existing production forgingStage can simulate future +8/+10/+12/+15. Source files, JOURNEY_CHAPTERS.available and running browsers are untouched. Planned caps are unimplemented-phase design simulation, never actually available cultivation or map evidence. Content above level 20 can be unpublished; this is not campaign reachability/device acceptance.",
+    "sourceSnapshotStartedUtc": "2026-11-17T05:03:19.7247744Z",
+    "sourceSnapshotCompletedUtc": "2026-11-17T05:09:07.594466+00:00",
+    "normalizedInputHashes": [
+      {
+        "path": "src/cocos/assets/scripts/core/GameSession.ts",
+        "rawSha256AtRunStart": "9126c6b2b2c3306591bff23a8a621700fbf587a5708f8b0001cd81923276b43b",
+        "normalizedSha256": "9126c6b2b2c3306591bff23a8a621700fbf587a5708f8b0001cd81923276b43b"
+      },
+      {
+        "path": "src/cocos/assets/scripts/features/combat/common/PureCombat.ts",
+        "rawSha256AtRunStart": "2103b508aff6c3793da627d22db9497a24ac58c4e595f68283351aa9f1fa760b",
+        "normalizedSha256": "2103b508aff6c3793da627d22db9497a24ac58c4e595f68283351aa9f1fa760b"
+      },
+      {
+        "path": "src/cocos/assets/scripts/features/automation/common/Automation.ts",
+        "rawSha256AtRunStart": "4c4b542e146b8485ddee8132b4077e5d9d7e93ec45d1bb5fca4f08940f158b15",
+        "normalizedSha256": "4c4b542e146b8485ddee8132b4077e5d9d7e93ec45d1bb5fca4f08940f158b15"
+      },
+      {
+        "path": "src/cocos/assets/scripts/features/combat/data/CombatBalance.ts",
+        "rawSha256AtRunStart": "5b1fd5bf4599a37c31c7e8d2ed3d28c014d5905fce062a1b86cccd21dbc8d74e",
+        "normalizedSha256": "5b1fd5bf4599a37c31c7e8d2ed3d28c014d5905fce062a1b86cccd21dbc8d74e"
+      },
+      {
+        "path": "src/cocos/assets/scripts/features/combat/data/EnemyBalance.ts",
+        "rawSha256AtRunStart": "1246c076ec2dcabbc9fd873d09790dc51bc3b475c726e884d155d95fbbc1205e",
+        "normalizedSha256": "1246c076ec2dcabbc9fd873d09790dc51bc3b475c726e884d155d95fbbc1205e"
+      },
+      {
+        "path": "src/cocos/assets/scripts/features/combat/data/PureSkills.ts",
+        "rawSha256AtRunStart": "1dffa6a87d4279cc6f070dbd87d3f7561557c3fe8e41922bcd426933ad8450bc",
+        "normalizedSha256": "1dffa6a87d4279cc6f070dbd87d3f7561557c3fe8e41922bcd426933ad8450bc"
+      },
+      {
+        "path": "src/cocos/assets/scripts/features/progression/common/Progression.ts",
+        "rawSha256AtRunStart": "9204b28fdf5093d16e5896834566812bb292a33c7f36f1982cd25aff3d78f9fe",
+        "normalizedSha256": "9204b28fdf5093d16e5896834566812bb292a33c7f36f1982cd25aff3d78f9fe"
+      },
+      {
+        "path": "src/cocos/assets/scripts/features/progression/data/CampaignProgression.ts",
+        "rawSha256AtRunStart": "409f78612dae3e5ff48d5d52b2e88a9022fba31b8394b43cf1b631ea8d9cdc64",
+        "normalizedSha256": "409f78612dae3e5ff48d5d52b2e88a9022fba31b8394b43cf1b631ea8d9cdc64"
+      },
+      {
+        "path": "src/cocos/assets/scripts/features/journey/data/ChapterJourney.ts",
+        "rawSha256AtRunStart": "88aa81d2c09adb12ebf072f7037e1e2d18ba758b7e805c170d1715b3277a2b1b",
+        "normalizedSha256": "eccadd52791d0756e69e4bcf3839e4e74b955352a4c9547e1b7cabd5c90e26d9"
+      },
+      {
+        "path": "src/cocos/assets/scripts/features/equipment/data/Equipment.ts",
+        "rawSha256AtRunStart": "4ab0f9549a74b7fe7d53ace4cb7855fde364297d08713a6246cc5dc8e5456863",
+        "normalizedSha256": "4ab0f9549a74b7fe7d53ace4cb7855fde364297d08713a6246cc5dc8e5456863"
+      },
+      {
+        "path": "src/cocos/assets/scripts/features/equipment/data/EquipmentLifecycle.ts",
+        "rawSha256AtRunStart": "65776fcd82351bddf15fc2f4b89bd09d1c7613b07484716302e5ecabceafe138",
+        "normalizedSha256": "65776fcd82351bddf15fc2f4b89bd09d1c7613b07484716302e5ecabceafe138"
+      },
+      {
+        "path": "src/cocos/assets/scripts/features/equipment/data/WeaponPower.ts",
+        "rawSha256AtRunStart": "fa7bbd50333c64f2cf43e59a769ddb985b03df6baf82cbf2eaa9ddcbe4764db0",
+        "normalizedSha256": "fa7bbd50333c64f2cf43e59a769ddb985b03df6baf82cbf2eaa9ddcbe4764db0"
+      },
+      {
+        "path": "src/cocos/assets/scripts/features/equipment/data/GrowingEquipment.ts",
+        "rawSha256AtRunStart": "4cb9d23f0623ca1d7a18513bd8157467f316312243ff6918d7a7397281983d08",
+        "normalizedSha256": "2e6a56c0f7216637d5f1e3e74b3fa894d96b64efc26bcd1d2b07f34c1cbab037"
+      },
+      {
+        "path": "src/cocos/assets/scripts/features/equipment/data/Supplies.ts",
+        "rawSha256AtRunStart": "e5cb73b5028e8e04b66d66578f52107973aaf1259c24929cd9feb543af7716df",
+        "normalizedSha256": "891f7d231f84efe227b5aabff356f509cdaa8e8a74f21d3b5a3bb4172aa6a530"
+      },
+      {
+        "path": "src/cocos/assets/scripts/features/equipment/common/EquipmentDice.ts",
+        "rawSha256AtRunStart": "f07a1f63cb9f2ab035f0351f9ccc9eb4592a5420957909f3bfc657aaa343e5f1",
+        "normalizedSha256": "428aad6d6cfd3db61edbcaa11dde8c5bed5fd1dc35a12c6efeff93eebbba09d4"
+      },
+      {
+        "path": "src/cocos/assets/scripts/features/crafting/common/EquipmentForging.ts",
+        "rawSha256AtRunStart": "bcdea39808f9cf746891972592ebcf1c011dd3c75394520115cb3a0a2b56921d",
+        "normalizedSha256": "bcdea39808f9cf746891972592ebcf1c011dd3c75394520115cb3a0a2b56921d"
+      },
+      {
+        "path": "src/cocos/assets/scripts/features/gems/data/Gems.ts",
+        "rawSha256AtRunStart": "c80565a8020361742d6e83a9ce26c0195a2bb996c5fbdebf4ffd386b690b7039",
+        "normalizedSha256": "c80565a8020361742d6e83a9ce26c0195a2bb996c5fbdebf4ffd386b690b7039"
+      },
+      {
+        "path": "src/cocos/tools/encounter-balance.ts",
+        "rawSha256AtRunStart": "2929e4afa1b5d950c31ccbee137d9a00fd02e48990a36772e64c8254fa1e5a1a",
+        "normalizedSha256": "2929e4afa1b5d950c31ccbee137d9a00fd02e48990a36772e64c8254fa1e5a1a"
+      }
+    ],
+    "profiles": "同等级采用合法主属性/体质预算及合法技能优先级；bare仅初始武器；normal为同章未强化固定装备；developed为成长神器及真实+3/+6随机强化，当前敌人矩阵不镶宝石。",
+    "modeDefinitions": {
+      "fight": "生产Automation选择、真实移动/闪避、正常技能和有限药；近点安全路线不是无敌或强行清除威胁。",
+      "exposure": "不攻击、不移动、不闪避、不治疗、不用药，测实际站桩承伤。",
+      "attack": "关闭输入walking/dash和主动evade，保留原施技、有限药与技能自身rush/retreat，不强行固定玩家坐标。"
+    },
+    "rosterRule": "选最高已作者化且不超过人物等级的对应内容；Lv11/16 Boss是重复挑战旧章Lv10 Boss，不应套用同章首胜60–90秒目标。真实enemy ID/level/group保留。",
+    "matrix": {
+      "current": {
+        "file": "src/cocos/test-results/encounter-complete.json",
+        "runs": 1440,
+        "levels": [
+          1,
+          6,
+          10,
+          11,
+          16,
+          20
+        ],
+        "families": [
+          "WAR",
+          "BOW",
+          "FIR",
+          "THU"
+        ],
+        "seedsPerCase": 3,
+        "secondsLimit": 150,
+        "modes": [
+          "fight",
+          "exposure"
+        ],
+        "outcomes": {
+          "fight": {
+            "victory": 713,
+            "dead": 7
+          },
+          "exposure": {
+            "dead": 720
+          }
+        }
+      },
+      "attack": {
+        "file": "src/cocos/test-results/encounter-complete-attack.json",
+        "runs": 216,
+        "levels": [
+          10,
+          16,
+          20
+        ],
+        "roles": [
+          "pack",
+          "boss"
+        ],
+        "seedsPerCase": 3,
+        "outcomes": {
+          "victory": 127,
+          "dead": 89
+        }
+      }
+    },
+    "normalEquipmentRepresentativeMatrix": [
+      {
+        "playerLevel": 1,
+        "role": "normal",
+        "contentArea": "S02",
+        "contentEnemyLevel": 1,
+        "enemyCount": 1,
+        "enemyTotalHp": 80,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 0.72,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 1.36,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 1.4,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 0.68,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      },
+      {
+        "playerLevel": 1,
+        "role": "pack",
+        "contentArea": "S02",
+        "contentEnemyLevel": 1,
+        "enemyCount": 8,
+        "enemyTotalHp": 604,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 9.27,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 78.1
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 29.8,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 19.93,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 20.09,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 92.8
+          }
+        }
+      },
+      {
+        "playerLevel": 6,
+        "role": "normal",
+        "contentArea": "U1-01",
+        "contentEnemyLevel": 6,
+        "enemyCount": 1,
+        "enemyTotalHp": 222,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 1.92,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 3.84,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 3.2,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 3.59,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      },
+      {
+        "playerLevel": 6,
+        "role": "pack",
+        "contentArea": "U1-01",
+        "contentEnemyLevel": 6,
+        "enemyCount": 8,
+        "enemyTotalHp": 1776,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 13.52,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 82.7
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 33.73,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 15.85,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 25.32,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      },
+      {
+        "playerLevel": 10,
+        "role": "normal",
+        "contentArea": "S17",
+        "contentEnemyLevel": 9,
+        "enemyCount": 1,
+        "enemyTotalHp": 400,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 3.12,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 3.92,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 3.96,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 3.13,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      },
+      {
+        "playerLevel": 10,
+        "role": "pack",
+        "contentArea": "S17",
+        "contentEnemyLevel": 9,
+        "enemyCount": 8,
+        "enemyTotalHp": 3820,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 30.36,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 68.9
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 52.53,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 33.96,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 37.79,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      },
+      {
+        "playerLevel": 10,
+        "role": "elite",
+        "contentArea": "S17",
+        "contentEnemyLevel": 9,
+        "enemyCount": 1,
+        "enemyTotalHp": 1200,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 9.84,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 84.0
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 11.8,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 12.36,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 10.89,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      },
+      {
+        "playerLevel": 10,
+        "role": "boss",
+        "contentArea": "S10",
+        "contentEnemyLevel": 10,
+        "enemyCount": 1,
+        "enemyTotalHp": 6318,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 61.48,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 58.0
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 77.91,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 66.71,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 68.45,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      },
+      {
+        "playerLevel": 11,
+        "role": "normal",
+        "contentArea": "H03",
+        "contentEnemyLevel": 11,
+        "enemyCount": 1,
+        "enemyTotalHp": 505,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 4.04,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 97.4
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 4.12,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 4.12,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 3.29,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      },
+      {
+        "playerLevel": 11,
+        "role": "pack",
+        "contentArea": "H03",
+        "contentEnemyLevel": 11,
+        "enemyCount": 8,
+        "enemyTotalHp": 3888,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 23.24,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 68.7
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 32.12,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 27.88,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 93.3
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 29.77,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 83.2
+          }
+        }
+      },
+      {
+        "playerLevel": 11,
+        "role": "elite",
+        "contentArea": "S17",
+        "contentEnemyLevel": 9,
+        "enemyCount": 1,
+        "enemyTotalHp": 1200,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 8.97,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 81.0
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 10.77,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 8.97,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 8.59,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      },
+      {
+        "playerLevel": 11,
+        "role": "boss",
+        "contentArea": "S10",
+        "contentEnemyLevel": 10,
+        "enemyCount": 1,
+        "enemyTotalHp": 6318,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 53.15,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 52.7
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 55.16,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 53.84,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 53.49,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      },
+      {
+        "playerLevel": 16,
+        "role": "normal",
+        "contentArea": "H10",
+        "contentEnemyLevel": 16,
+        "enemyCount": 1,
+        "enemyTotalHp": 1014,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 3.52,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 3.6,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 3.08,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 3.64,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      },
+      {
+        "playerLevel": 16,
+        "role": "pack",
+        "contentArea": "H10",
+        "contentEnemyLevel": 16,
+        "enemyCount": 8,
+        "enemyTotalHp": 6855,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 24.52,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 70.6
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 28.77,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 21.75,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 96.1
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 27.57,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      },
+      {
+        "playerLevel": 16,
+        "role": "elite",
+        "contentArea": "U1-06",
+        "contentEnemyLevel": 16,
+        "enemyCount": 1,
+        "enemyTotalHp": 2434,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 12.51,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 64.7
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 12.12,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 91.3
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 12.45,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 87.0
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 14.37,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 83.6
+          }
+        }
+      },
+      {
+        "playerLevel": 16,
+        "role": "boss",
+        "contentArea": "S10",
+        "contentEnemyLevel": 10,
+        "enemyCount": 1,
+        "enemyTotalHp": 6318,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 35.61,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 67.8
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 31.68,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 35.72,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 32.89,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      },
+      {
+        "playerLevel": 20,
+        "role": "normal",
+        "contentArea": "H17",
+        "contentEnemyLevel": 19,
+        "enemyCount": 1,
+        "enemyTotalHp": 1281,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 3.52,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 4.12,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 5.99,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 3.84,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      },
+      {
+        "playerLevel": 20,
+        "role": "pack",
+        "contentArea": "H17",
+        "contentEnemyLevel": 19,
+        "enemyCount": 8,
+        "enemyTotalHp": 10198,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 34.45,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 66.9
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 37.08,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 97.9
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 27.2,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 94.3
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 35.12,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 79.3
+          }
+        }
+      },
+      {
+        "playerLevel": 20,
+        "role": "elite",
+        "contentArea": "H17",
+        "contentEnemyLevel": 19,
+        "enemyCount": 1,
+        "enemyTotalHp": 3075,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 12.67,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 73.9
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 14.55,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 13.69,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 14.49,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      },
+      {
+        "playerLevel": 20,
+        "role": "boss",
+        "contentArea": "H08",
+        "contentEnemyLevel": 18,
+        "enemyCount": 1,
+        "enemyTotalHp": 15220,
+        "families": {
+          "WAR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 67.73,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 61.6
+          },
+          "BOW": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 81.17,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "FIR": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 67.88,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "THU": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 67.93,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      }
+    ],
+    "currentFightFailures": [
+      {
+        "level": 10,
+        "family": "WAR",
+        "gear": "bare",
+        "role": "boss",
+        "seed": 73014,
+        "sourceArea": "S10",
+        "enemyHp": 6318,
+        "seconds": 70.1,
+        "remainingEnemyHp": 262,
+        "healthPotions": 3,
+        "resourcePotions": 2
+      },
+      {
+        "level": 10,
+        "family": "WAR",
+        "gear": "bare",
+        "role": "boss",
+        "seed": 80933,
+        "sourceArea": "S10",
+        "enemyHp": 6318,
+        "seconds": 49.84,
+        "remainingEnemyHp": 2729,
+        "healthPotions": 3,
+        "resourcePotions": 1
+      },
+      {
+        "level": 10,
+        "family": "WAR",
+        "gear": "bare",
+        "role": "boss",
+        "seed": 88852,
+        "sourceArea": "S10",
+        "enemyHp": 6318,
+        "seconds": 67.84,
+        "remainingEnemyHp": 561,
+        "healthPotions": 3,
+        "resourcePotions": 2
+      },
+      {
+        "level": 11,
+        "family": "WAR",
+        "gear": "bare",
+        "role": "boss",
+        "seed": 73014,
+        "sourceArea": "S10",
+        "enemyHp": 6318,
+        "seconds": 56.86,
+        "remainingEnemyHp": 715,
+        "healthPotions": 3,
+        "resourcePotions": 2
+      },
+      {
+        "level": 11,
+        "family": "WAR",
+        "gear": "bare",
+        "role": "boss",
+        "seed": 80933,
+        "sourceArea": "S10",
+        "enemyHp": 6318,
+        "seconds": 44.68,
+        "remainingEnemyHp": 1988,
+        "healthPotions": 3,
+        "resourcePotions": 1
+      },
+      {
+        "level": 20,
+        "family": "WAR",
+        "gear": "bare",
+        "role": "pack",
+        "seed": 88852,
+        "sourceArea": "H17",
+        "enemyHp": 10198,
+        "seconds": 50.32,
+        "remainingEnemyHp": 365,
+        "healthPotions": 3,
+        "resourcePotions": 1
+      },
+      {
+        "level": 20,
+        "family": "WAR",
+        "gear": "bare",
+        "role": "boss",
+        "seed": 73014,
+        "sourceArea": "H08",
+        "enemyHp": 15220,
+        "seconds": 76.92,
+        "remainingEnemyHp": 3114,
+        "healthPotions": 3,
+        "resourcePotions": 2
+      }
+    ],
+    "beforeAfter": {
+      "beforeFile": "src/cocos/test-results/encounter-before-quick.json",
+      "beforeRuns": 240,
+      "beforeFamilies": [
+        "WAR",
+        "FIR"
+      ],
+      "beforeSeedsPerCase": 1,
+      "comparisonCaution": "before为1个种子，current为3个种子；是同样夹具政策下的实现前后代表证据，不冒充大样本控制实验。失败耗时不能当作击杀时间。",
+      "representatives": [
+        {
+          "playerLevel": 1,
+          "role": "normal",
+          "gear": "bare",
+          "family": "WAR",
+          "before": {
+            "samples": 1,
+            "victories": 1,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 0.16,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "current": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 0.72,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        },
+        {
+          "playerLevel": 1,
+          "role": "normal",
+          "gear": "bare",
+          "family": "FIR",
+          "before": {
+            "samples": 1,
+            "victories": 1,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 0.28,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "current": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 1.4,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        },
+        {
+          "playerLevel": 6,
+          "role": "normal",
+          "gear": "bare",
+          "family": "WAR",
+          "before": {
+            "samples": 1,
+            "victories": 1,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 0.52,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "current": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 2.79,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        },
+        {
+          "playerLevel": 6,
+          "role": "normal",
+          "gear": "bare",
+          "family": "FIR",
+          "before": {
+            "samples": 1,
+            "victories": 1,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 0.64,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "current": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 3.59,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        },
+        {
+          "playerLevel": 10,
+          "role": "boss",
+          "gear": "bare",
+          "family": "WAR",
+          "before": {
+            "samples": 1,
+            "victories": 1,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 38.24,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "current": {
+            "samples": 3,
+            "victories": 0,
+            "deaths": 3,
+            "timeouts": 0,
+            "meanVictorySeconds": null,
+            "meanDeathSeconds": 62.59,
+            "meanRemainingHpPercent": 0
+          }
+        },
+        {
+          "playerLevel": 10,
+          "role": "boss",
+          "gear": "bare",
+          "family": "FIR",
+          "before": {
+            "samples": 1,
+            "victories": 1,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 51.64,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "current": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 81.68,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        },
+        {
+          "playerLevel": 10,
+          "role": "boss",
+          "gear": "normal",
+          "family": "WAR",
+          "before": {
+            "samples": 1,
+            "victories": 1,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 36.64,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "current": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 61.48,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 58.0
+          }
+        },
+        {
+          "playerLevel": 10,
+          "role": "boss",
+          "gear": "normal",
+          "family": "FIR",
+          "before": {
+            "samples": 1,
+            "victories": 1,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 48.08,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "current": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 66.71,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        },
+        {
+          "playerLevel": 20,
+          "role": "normal",
+          "gear": "normal",
+          "family": "WAR",
+          "before": {
+            "samples": 1,
+            "victories": 1,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 1.4,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "current": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 3.52,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        },
+        {
+          "playerLevel": 20,
+          "role": "normal",
+          "gear": "normal",
+          "family": "FIR",
+          "before": {
+            "samples": 1,
+            "victories": 1,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 1.56,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "current": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 5.99,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        },
+        {
+          "playerLevel": 20,
+          "role": "pack",
+          "gear": "normal",
+          "family": "WAR",
+          "before": {
+            "samples": 1,
+            "victories": 1,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 15.76,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 95.1
+          },
+          "current": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 34.45,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 66.9
+          }
+        },
+        {
+          "playerLevel": 20,
+          "role": "pack",
+          "gear": "normal",
+          "family": "FIR",
+          "before": {
+            "samples": 1,
+            "victories": 1,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 15.36,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "current": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 27.2,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 94.3
+          }
+        },
+        {
+          "playerLevel": 20,
+          "role": "boss",
+          "gear": "normal",
+          "family": "WAR",
+          "before": {
+            "samples": 1,
+            "victories": 1,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 32.08,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 93.3
+          },
+          "current": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 67.73,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 61.6
+          }
+        },
+        {
+          "playerLevel": 20,
+          "role": "boss",
+          "gear": "normal",
+          "family": "FIR",
+          "before": {
+            "samples": 1,
+            "victories": 1,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 35.36,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          },
+          "current": {
+            "samples": 3,
+            "victories": 3,
+            "deaths": 0,
+            "timeouts": 0,
+            "meanVictorySeconds": 67.88,
+            "meanDeathSeconds": null,
+            "meanRemainingHpPercent": 100
+          }
+        }
+      ]
+    },
+    "iterationHistory": [
+      {
+        "file": "src/cocos/test-results/encounter-final.json",
+        "status": "superseded for hostile encounters by encounter-complete; 早期近点撤退策略尚未优化，旧77秒pack不作为当前最终结果"
+      },
+      {
+        "file": "src/cocos/test-results/encounter-final-attack.json",
+        "status": "earlier stationary-attack snapshot, preserved for traceability"
+      }
+    ],
+    "sourceStableDuringCapture": true,
+    "latestBehaviorForMeasuredGear": "Verified unchanged; post-capture P48 first-Boss item does not intersect any measured player equipment. Separate current rule tests and compiled P48 check passed."
+  },
+  "futureEquipmentAndDesignSimulation": {
+    "currentlyReleasedContent": {
+      "chapters": [
+        1,
+        2
+      ],
+      "forgingCapAtLateCharacterLevels": 6,
+      "mapUnlockByLevel": false
+    },
+    "oldLateSnapshot": "late-output-final保留了旧的四部位替换夹具，头脚尚为旧物；只用于追踪，不用于证明新增全槽。",
+    "fullSlotFixture": {
+      "file": "src/cocos/test-results/late-output-full-slots.json",
+      "runs": 72,
+      "levels": [
+        24,
+        32,
+        40
+      ],
+      "seedsPerCase": 3,
+      "durationSeconds": 60,
+      "hostileEnemyMechanics": false,
+      "currentActualForgingCap": 6,
+      "futureOwnershipInjected": true,
+      "slotPolicy": "从同章且requiredLevel<=人物等级选择最新部位；普通阶段武器用史诗；WAR单手可带当章盾；成长双手神器、弓、杖不带副手；同章传奇手/项链作为该阶段可穿款式。",
+      "noClaimOfRewardAvailability": true
+    },
+    "plannedCapsFixture": {
+      "file": "src/cocos/test-results/late-output-planned-caps.json",
+      "runs": 72,
+      "option": "--planned-phase-caps",
+      "processOnlyMutation": "仅隔离CLI进程临时将共享CAMPAIGN_PHASES预算released置true，让生产forgingStage读取规划stage；JOURNEY_CHAPTERS.available、源文件和运行网页均未改变。",
+      "actualStagesMeasured": {
+        "24": 8,
+        "32": 10,
+        "40": 15
+      },
+      "qualityCapStillApplies": true,
+      "futureMapsStillUnavailable": true,
+      "finitePreparationBudget": {
+        "gold": 100000,
+        "iron": 9999,
+        "drills": 500,
+        "eachGemStatCrystalUnits": 500
+      },
+      "notActuallyAvailableCultivation": true
+    },
+    "dpsTables": [
+      {
+        "level": 24,
+        "stationaryBareDps": {
+          "WAR": 224.95,
+          "BOW": 191.35,
+          "FIR": 196.67,
+          "THU": 173.27
+        },
+        "legacyFutureSlotsCap6Dps": {
+          "WAR": {
+            "normal": 380.53,
+            "developed": 473.13
+          },
+          "BOW": {
+            "normal": 323.79,
+            "developed": 420.32
+          },
+          "FIR": {
+            "normal": 336.08,
+            "developed": 447.51
+          },
+          "THU": {
+            "normal": 297.3,
+            "developed": 377.47
+          }
+        },
+        "fullFutureSlotsCap6Dps": {
+          "WAR": {
+            "normal": 386.69,
+            "developed": 500.4
+          },
+          "BOW": {
+            "normal": 328.99,
+            "developed": 435.14
+          },
+          "FIR": {
+            "normal": 336.08,
+            "developed": 439.67
+          },
+          "THU": {
+            "normal": 302.08,
+            "developed": 420.36
+          }
+        },
+        "plannedCapsDps": {
+          "WAR": {
+            "normal": 386.69,
+            "developed": 508.07
+          },
+          "BOW": {
+            "normal": 328.99,
+            "developed": 452.4
+          },
+          "FIR": {
+            "normal": 336.08,
+            "developed": 476.95
+          },
+          "THU": {
+            "normal": 302.08,
+            "developed": 421.78
+          }
+        }
+      },
+      {
+        "level": 32,
+        "stationaryBareDps": {
+          "WAR": 292.46,
+          "BOW": 261.89,
+          "FIR": 262.24,
+          "THU": 215.4
+        },
+        "legacyFutureSlotsCap6Dps": {
+          "WAR": {
+            "normal": 612.26,
+            "developed": 752.88
+          },
+          "BOW": {
+            "normal": 549.03,
+            "developed": 700.33
+          },
+          "FIR": {
+            "normal": 557.09,
+            "developed": 727.32
+          },
+          "THU": {
+            "normal": 458.36,
+            "developed": 596.98
+          }
+        },
+        "fullFutureSlotsCap6Dps": {
+          "WAR": {
+            "normal": 621.43,
+            "developed": 815.13
+          },
+          "BOW": {
+            "normal": 562.97,
+            "developed": 753.15
+          },
+          "FIR": {
+            "normal": 557.09,
+            "developed": 711.18
+          },
+          "THU": {
+            "normal": 465.35,
+            "developed": 655.05
+          }
+        },
+        "plannedCapsDps": {
+          "WAR": {
+            "normal": 621.43,
+            "developed": 859.72
+          },
+          "BOW": {
+            "normal": 562.97,
+            "developed": 749.56
+          },
+          "FIR": {
+            "normal": 557.09,
+            "developed": 811.61
+          },
+          "THU": {
+            "normal": 465.35,
+            "developed": 668.91
+          }
+        }
+      },
+      {
+        "level": 40,
+        "stationaryBareDps": {
+          "WAR": 365.29,
+          "BOW": 329.43,
+          "FIR": 332.27,
+          "THU": 268.23
+        },
+        "legacyFutureSlotsCap6Dps": {
+          "WAR": {
+            "normal": 985.2,
+            "developed": 1231.82
+          },
+          "BOW": {
+            "normal": 888.36,
+            "developed": 1158.45
+          },
+          "FIR": {
+            "normal": 912.52,
+            "developed": 1171.34
+          },
+          "THU": {
+            "normal": 734.94,
+            "developed": 972.77
+          }
+        },
+        "fullFutureSlotsCap6Dps": {
+          "WAR": {
+            "normal": 1000.22,
+            "developed": 1320.71
+          },
+          "BOW": {
+            "normal": 902.52,
+            "developed": 1269.25
+          },
+          "FIR": {
+            "normal": 912.52,
+            "developed": 1173.9
+          },
+          "THU": {
+            "normal": 744.97,
+            "developed": 1068.46
+          }
+        },
+        "plannedCapsDps": {
+          "WAR": {
+            "normal": 1000.22,
+            "developed": 1380.84
+          },
+          "BOW": {
+            "normal": 902.52,
+            "developed": 1319.23
+          },
+          "FIR": {
+            "normal": 912.52,
+            "developed": 1331.54
+          },
+          "THU": {
+            "normal": 744.97,
+            "developed": 1103.36
+          }
+        }
+      }
+    ],
+    "plannedPreparationAndActualRanksExamples": [
+      {
+        "level": 24,
+        "family": "WAR",
+        "equipment": {
+          "weapon": "DG_A01",
+          "offhand": null,
+          "head": "LC3_B_E3",
+          "chest": "LC3_T_E1",
+          "hands": "LC3_T_L2",
+          "feet": "LC3_B_E4",
+          "ringLeft": "LC3_T_E2",
+          "ringRight": null,
+          "necklace": "LC3_B_L1",
+          "spells": [
+            null,
+            null
+          ]
+        },
+        "weaponStrength": 125,
+        "forgingStage": 8,
+        "actualRanks": {
+          "DG_A01": 8,
+          "LC3_B_E3": 8,
+          "LC3_T_E1": 8,
+          "LC3_T_L2": 8,
+          "LC3_B_E4": 8,
+          "LC3_T_E2": 8,
+          "LC3_B_L1": 8
+        },
+        "gemTierCap": 3,
+        "gearBonuses": {
+          "maxHp": 106,
+          "armor": 1.125,
+          "power": 11.15,
+          "criticalChance": 0.7875,
+          "criticalDamage": 16.375,
+          "strength": 11,
+          "dexterity": 3,
+          "intellect": 17,
+          "vitality": 10
+        },
+        "criticalChancePercent": 6.1475,
+        "criticalDamagePercent": 166.375,
+        "finitePreparation": {
+          "goldBudget": 100000,
+          "goldSpent": 5377,
+          "goldReserve": 84649,
+          "walletRemaining": 9974,
+          "ironBudget": 9999,
+          "ironSpent": 138,
+          "drillsSpent": 205,
+          "crystalUnitsSpent": 125
+        }
+      },
+      {
+        "level": 24,
+        "family": "BOW",
+        "equipment": {
+          "weapon": "DG_A03",
+          "offhand": null,
+          "head": "LC3_B_E3",
+          "chest": "LC3_T_E1",
+          "hands": "LC3_T_L2",
+          "feet": "LC3_B_E4",
+          "ringLeft": "LC3_T_E2",
+          "ringRight": null,
+          "necklace": "LC3_B_L1",
+          "spells": [
+            null,
+            null
+          ]
+        },
+        "weaponStrength": 125,
+        "forgingStage": 8,
+        "actualRanks": {
+          "DG_A03": 8,
+          "LC3_B_E3": 8,
+          "LC3_T_E1": 8,
+          "LC3_T_L2": 8,
+          "LC3_B_E4": 8,
+          "LC3_T_E2": 8,
+          "LC3_B_L1": 8
+        },
+        "gemTierCap": 3,
+        "gearBonuses": {
+          "maxHp": 94,
+          "armor": 1.125,
+          "power": 4.65,
+          "criticalChance": 1.7875,
+          "criticalDamage": 30.475,
+          "strength": 7,
+          "dexterity": 7,
+          "intellect": 17,
+          "vitality": 7
+        },
+        "criticalChancePercent": 13.5075,
+        "criticalDamagePercent": 180.475,
+        "finitePreparation": {
+          "goldBudget": 100000,
+          "goldSpent": 5377,
+          "goldReserve": 84649,
+          "walletRemaining": 9974,
+          "ironBudget": 9999,
+          "ironSpent": 138,
+          "drillsSpent": 205,
+          "crystalUnitsSpent": 125
+        }
+      },
+      {
+        "level": 24,
+        "family": "FIR",
+        "equipment": {
+          "weapon": "DG_A04",
+          "offhand": null,
+          "head": "LC3_B_E3",
+          "chest": "LC3_T_E1",
+          "hands": "LC3_T_L2",
+          "feet": "LC3_B_E4",
+          "ringLeft": "LC3_T_E2",
+          "ringRight": null,
+          "necklace": "LC3_B_L1",
+          "spells": [
+            null,
+            null
+          ]
+        },
+        "weaponStrength": 125,
+        "forgingStage": 8,
+        "actualRanks": {
+          "DG_A04": 8,
+          "LC3_B_E3": 8,
+          "LC3_T_E1": 8,
+          "LC3_T_L2": 8,
+          "LC3_B_E4": 8,
+          "LC3_T_E2": 8,
+          "LC3_B_L1": 8
+        },
+        "gemTierCap": 3,
+        "gearBonuses": {
+          "maxHp": 94,
+          "armor": 1.125,
+          "power": 12.95,
+          "criticalChance": 0.7875,
+          "criticalDamage": 22.375,
+          "strength": 7,
+          "dexterity": 3,
+          "intellect": 19,
+          "vitality": 7
+        },
+        "criticalChancePercent": 6.1475,
+        "criticalDamagePercent": 172.375,
+        "finitePreparation": {
+          "goldBudget": 100000,
+          "goldSpent": 5377,
+          "goldReserve": 84649,
+          "walletRemaining": 9974,
+          "ironBudget": 9999,
+          "ironSpent": 138,
+          "drillsSpent": 205,
+          "crystalUnitsSpent": 125
+        }
+      },
+      {
+        "level": 24,
+        "family": "THU",
+        "equipment": {
+          "weapon": "DG_A05",
+          "offhand": null,
+          "head": "LC3_B_E3",
+          "chest": "LC3_T_E1",
+          "hands": "LC3_T_L2",
+          "feet": "LC3_B_E4",
+          "ringLeft": "LC3_T_E2",
+          "ringRight": null,
+          "necklace": "LC3_B_L1",
+          "spells": [
+            null,
+            null
+          ]
+        },
+        "weaponStrength": 125,
+        "forgingStage": 8,
+        "actualRanks": {
+          "DG_A05": 8,
+          "LC3_B_E3": 8,
+          "LC3_T_E1": 8,
+          "LC3_T_L2": 8,
+          "LC3_B_E4": 8,
+          "LC3_T_E2": 8,
+          "LC3_B_L1": 8
+        },
+        "gemTierCap": 3,
+        "gearBonuses": {
+          "maxHp": 94,
+          "armor": 1.125,
+          "power": 4.65,
+          "criticalChance": 3.6875,
+          "criticalDamage": 31.375,
+          "strength": 7,
+          "dexterity": 3,
+          "intellect": 20,
+          "vitality": 7
+        },
+        "criticalChancePercent": 9.0475,
+        "criticalDamagePercent": 181.375,
+        "finitePreparation": {
+          "goldBudget": 100000,
+          "goldSpent": 5377,
+          "goldReserve": 84649,
+          "walletRemaining": 9974,
+          "ironBudget": 9999,
+          "ironSpent": 138,
+          "drillsSpent": 205,
+          "crystalUnitsSpent": 125
+        }
+      },
+      {
+        "level": 32,
+        "family": "WAR",
+        "equipment": {
+          "weapon": "DG_A01",
+          "offhand": null,
+          "head": "LC5_B_E3",
+          "chest": "LC5_T_E1",
+          "hands": "LC5_T_L2",
+          "feet": "LC5_B_E4",
+          "ringLeft": "LC5_T_E2",
+          "ringRight": null,
+          "necklace": "LC5_B_L1",
+          "spells": [
+            null,
+            null
+          ]
+        },
+        "weaponStrength": 225,
+        "forgingStage": 10,
+        "actualRanks": {
+          "DG_A01": 10,
+          "LC5_B_E3": 10,
+          "LC5_T_E1": 10,
+          "LC5_T_L2": 10,
+          "LC5_B_E4": 10,
+          "LC5_T_E2": 10,
+          "LC5_B_L1": 10
+        },
+        "gemTierCap": 4,
+        "gearBonuses": {
+          "maxHp": 190,
+          "armor": 3.6375,
+          "power": 12.725,
+          "criticalChance": 1.18125,
+          "criticalDamage": 11.8125,
+          "strength": 12,
+          "dexterity": 0,
+          "intellect": 13,
+          "vitality": 20
+        },
+        "criticalChancePercent": 6.18125,
+        "criticalDamagePercent": 161.8125,
+        "finitePreparation": {
+          "goldBudget": 100000,
+          "goldSpent": 11363,
+          "goldReserve": 78663,
+          "walletRemaining": 9974,
+          "ironBudget": 9999,
+          "ironSpent": 234,
+          "drillsSpent": 205,
+          "crystalUnitsSpent": 125
+        }
+      },
+      {
+        "level": 32,
+        "family": "BOW",
+        "equipment": {
+          "weapon": "DG_A03",
+          "offhand": null,
+          "head": "LC5_B_E3",
+          "chest": "LC5_T_E1",
+          "hands": "LC5_T_L2",
+          "feet": "LC5_B_E4",
+          "ringLeft": "LC5_T_E2",
+          "ringRight": null,
+          "necklace": "LC5_B_L1",
+          "spells": [
+            null,
+            null
+          ]
+        },
+        "weaponStrength": 225,
+        "forgingStage": 10,
+        "actualRanks": {
+          "DG_A03": 10,
+          "LC5_B_E3": 10,
+          "LC5_T_E1": 10,
+          "LC5_T_L2": 10,
+          "LC5_B_E4": 10,
+          "LC5_T_E2": 10,
+          "LC5_B_L1": 10
+        },
+        "gemTierCap": 4,
+        "gearBonuses": {
+          "maxHp": 174,
+          "armor": 3.6375,
+          "power": 6.225,
+          "criticalChance": 3.78125,
+          "criticalDamage": 25.9125,
+          "strength": 6,
+          "dexterity": 4,
+          "intellect": 13,
+          "vitality": 16
+        },
+        "criticalChancePercent": 17.181250000000002,
+        "criticalDamagePercent": 175.9125,
+        "finitePreparation": {
+          "goldBudget": 100000,
+          "goldSpent": 11363,
+          "goldReserve": 78663,
+          "walletRemaining": 9974,
+          "ironBudget": 9999,
+          "ironSpent": 234,
+          "drillsSpent": 205,
+          "crystalUnitsSpent": 125
+        }
+      },
+      {
+        "level": 32,
+        "family": "FIR",
+        "equipment": {
+          "weapon": "DG_A04",
+          "offhand": null,
+          "head": "LC5_B_E3",
+          "chest": "LC5_T_E1",
+          "hands": "LC5_T_L2",
+          "feet": "LC5_B_E4",
+          "ringLeft": "LC5_T_E2",
+          "ringRight": null,
+          "necklace": "LC5_B_L1",
+          "spells": [
+            null,
+            null
+          ]
+        },
+        "weaponStrength": 225,
+        "forgingStage": 10,
+        "actualRanks": {
+          "DG_A04": 10,
+          "LC5_B_E3": 10,
+          "LC5_T_E1": 10,
+          "LC5_T_L2": 10,
+          "LC5_B_E4": 10,
+          "LC5_T_E2": 10,
+          "LC5_B_L1": 10
+        },
+        "gemTierCap": 4,
+        "gearBonuses": {
+          "maxHp": 174,
+          "armor": 3.6375,
+          "power": 14.525,
+          "criticalChance": 1.18125,
+          "criticalDamage": 17.8125,
+          "strength": 6,
+          "dexterity": 0,
+          "intellect": 18,
+          "vitality": 16
+        },
+        "criticalChancePercent": 6.18125,
+        "criticalDamagePercent": 167.8125,
+        "finitePreparation": {
+          "goldBudget": 100000,
+          "goldSpent": 11363,
+          "goldReserve": 78663,
+          "walletRemaining": 9974,
+          "ironBudget": 9999,
+          "ironSpent": 234,
+          "drillsSpent": 205,
+          "crystalUnitsSpent": 125
+        }
+      },
+      {
+        "level": 32,
+        "family": "THU",
+        "equipment": {
+          "weapon": "DG_A05",
+          "offhand": null,
+          "head": "LC5_B_E3",
+          "chest": "LC5_T_E1",
+          "hands": "LC5_T_L2",
+          "feet": "LC5_B_E4",
+          "ringLeft": "LC5_T_E2",
+          "ringRight": null,
+          "necklace": "LC5_B_L1",
+          "spells": [
+            null,
+            null
+          ]
+        },
+        "weaponStrength": 225,
+        "forgingStage": 10,
+        "actualRanks": {
+          "DG_A05": 10,
+          "LC5_B_E3": 10,
+          "LC5_T_E1": 10,
+          "LC5_T_L2": 10,
+          "LC5_B_E4": 10,
+          "LC5_T_E2": 10,
+          "LC5_B_L1": 10
+        },
+        "gemTierCap": 4,
+        "gearBonuses": {
+          "maxHp": 174,
+          "armor": 3.6375,
+          "power": 6.225,
+          "criticalChance": 4.08125,
+          "criticalDamage": 32.6125,
+          "strength": 6,
+          "dexterity": 0,
+          "intellect": 18,
+          "vitality": 16
+        },
+        "criticalChancePercent": 9.08125,
+        "criticalDamagePercent": 182.6125,
+        "finitePreparation": {
+          "goldBudget": 100000,
+          "goldSpent": 11363,
+          "goldReserve": 78663,
+          "walletRemaining": 9974,
+          "ironBudget": 9999,
+          "ironSpent": 234,
+          "drillsSpent": 205,
+          "crystalUnitsSpent": 125
+        }
+      },
+      {
+        "level": 40,
+        "family": "WAR",
+        "equipment": {
+          "weapon": "DG_A01",
+          "offhand": null,
+          "head": "LC8_B_E3",
+          "chest": "LC8_T_E1",
+          "hands": "LC8_T_L2",
+          "feet": "LC8_B_E4",
+          "ringLeft": "LC8_T_E2",
+          "ringRight": null,
+          "necklace": "LC8_B_L1",
+          "spells": [
+            null,
+            null
+          ]
+        },
+        "weaponStrength": 500,
+        "forgingStage": 15,
+        "actualRanks": {
+          "DG_A01": 15,
+          "LC8_B_E3": 10,
+          "LC8_T_E1": 10,
+          "LC8_T_L2": 12,
+          "LC8_B_E4": 10,
+          "LC8_T_E2": 10,
+          "LC8_B_L1": 12
+        },
+        "gemTierCap": 5,
+        "gearBonuses": {
+          "maxHp": 251,
+          "armor": 2.80625,
+          "power": 15.0875,
+          "criticalChance": 1.771875,
+          "criticalDamage": 28.61875,
+          "strength": 10,
+          "dexterity": 13,
+          "intellect": 2,
+          "vitality": 39
+        },
+        "criticalChancePercent": 8.331875000000002,
+        "criticalDamagePercent": 178.61875,
+        "finitePreparation": {
+          "goldBudget": 100000,
+          "goldSpent": 27520,
+          "goldReserve": 62506,
+          "walletRemaining": 9974,
+          "ironBudget": 9999,
+          "ironSpent": 363,
+          "drillsSpent": 205,
+          "crystalUnitsSpent": 125
+        }
+      },
+      {
+        "level": 40,
+        "family": "BOW",
+        "equipment": {
+          "weapon": "DG_A03",
+          "offhand": null,
+          "head": "LC8_B_E3",
+          "chest": "LC8_T_E1",
+          "hands": "LC8_T_L2",
+          "feet": "LC8_B_E4",
+          "ringLeft": "LC8_T_E2",
+          "ringRight": null,
+          "necklace": "LC8_B_L1",
+          "spells": [
+            null,
+            null
+          ]
+        },
+        "weaponStrength": 500,
+        "forgingStage": 15,
+        "actualRanks": {
+          "DG_A03": 15,
+          "LC8_B_E3": 10,
+          "LC8_T_E1": 10,
+          "LC8_T_L2": 12,
+          "LC8_B_E4": 10,
+          "LC8_T_E2": 10,
+          "LC8_B_L1": 12
+        },
+        "gemTierCap": 5,
+        "gearBonuses": {
+          "maxHp": 207,
+          "armor": 2.80625,
+          "power": 8.5875,
+          "criticalChance": 5.271875,
+          "criticalDamage": 58.31875,
+          "strength": 2,
+          "dexterity": 19,
+          "intellect": 2,
+          "vitality": 28
+        },
+        "criticalChancePercent": 21.551875,
+        "criticalDamagePercent": 208.31875000000002,
+        "finitePreparation": {
+          "goldBudget": 100000,
+          "goldSpent": 27520,
+          "goldReserve": 62506,
+          "walletRemaining": 9974,
+          "ironBudget": 9999,
+          "ironSpent": 363,
+          "drillsSpent": 205,
+          "crystalUnitsSpent": 125
+        }
+      },
+      {
+        "level": 40,
+        "family": "FIR",
+        "equipment": {
+          "weapon": "DG_A04",
+          "offhand": null,
+          "head": "LC8_B_E3",
+          "chest": "LC8_T_E1",
+          "hands": "LC8_T_L2",
+          "feet": "LC8_B_E4",
+          "ringLeft": "LC8_T_E2",
+          "ringRight": null,
+          "necklace": "LC8_B_L1",
+          "spells": [
+            null,
+            null
+          ]
+        },
+        "weaponStrength": 500,
+        "forgingStage": 15,
+        "actualRanks": {
+          "DG_A04": 15,
+          "LC8_B_E3": 10,
+          "LC8_T_E1": 10,
+          "LC8_T_L2": 12,
+          "LC8_B_E4": 10,
+          "LC8_T_E2": 10,
+          "LC8_B_L1": 12
+        },
+        "gemTierCap": 5,
+        "gearBonuses": {
+          "maxHp": 207,
+          "armor": 2.80625,
+          "power": 18.4875,
+          "criticalChance": 1.771875,
+          "criticalDamage": 43.41875,
+          "strength": 2,
+          "dexterity": 13,
+          "intellect": 10,
+          "vitality": 28
+        },
+        "criticalChancePercent": 8.331875000000002,
+        "criticalDamagePercent": 193.41875,
+        "finitePreparation": {
+          "goldBudget": 100000,
+          "goldSpent": 27520,
+          "goldReserve": 62506,
+          "walletRemaining": 9974,
+          "ironBudget": 9999,
+          "ironSpent": 363,
+          "drillsSpent": 205,
+          "crystalUnitsSpent": 125
+        }
+      },
+      {
+        "level": 40,
+        "family": "THU",
+        "equipment": {
+          "weapon": "DG_A05",
+          "offhand": null,
+          "head": "LC8_B_E3",
+          "chest": "LC8_T_E1",
+          "hands": "LC8_T_L2",
+          "feet": "LC8_B_E4",
+          "ringLeft": "LC8_T_E2",
+          "ringRight": null,
+          "necklace": "LC8_B_L1",
+          "spells": [
+            null,
+            null
+          ]
+        },
+        "weaponStrength": 500,
+        "forgingStage": 15,
+        "actualRanks": {
+          "DG_A05": 15,
+          "LC8_B_E3": 10,
+          "LC8_T_E1": 10,
+          "LC8_T_L2": 12,
+          "LC8_B_E4": 10,
+          "LC8_T_E2": 10,
+          "LC8_B_L1": 12
+        },
+        "gemTierCap": 5,
+        "gearBonuses": {
+          "maxHp": 207,
+          "armor": 2.80625,
+          "power": 8.5875,
+          "criticalChance": 6.471875,
+          "criticalDamage": 59.71875,
+          "strength": 2,
+          "dexterity": 13,
+          "intellect": 8,
+          "vitality": 28
+        },
+        "criticalChancePercent": 13.031874999999998,
+        "criticalDamagePercent": 209.71875,
+        "finitePreparation": {
+          "goldBudget": 100000,
+          "goldSpent": 27520,
+          "goldReserve": 62506,
+          "walletRemaining": 9974,
+          "ironBudget": 9999,
+          "ironSpent": 363,
+          "drillsSpent": 205,
+          "crystalUnitsSpent": 125
+        }
+      }
+    ],
+    "idealBossProjection": [
+      {
+        "chapter": 3,
+        "level": 24,
+        "plannedBossHp": 24331,
+        "normalEquipmentIdealBossSeconds": {
+          "WAR": 62.92,
+          "BOW": 73.96,
+          "FIR": 72.4,
+          "THU": 80.54
+        },
+        "plannedDevelopedIdealBossSeconds": {
+          "WAR": 47.89,
+          "BOW": 53.78,
+          "FIR": 51.01,
+          "THU": 57.69
+        },
+        "status": "HP divided by stationary practice DPS only; future boss moves, guard, travel and downtime are unimplemented and not measured"
+      },
+      {
+        "chapter": 5,
+        "level": 32,
+        "plannedBossHp": 40908,
+        "normalEquipmentIdealBossSeconds": {
+          "WAR": 65.83,
+          "BOW": 72.66,
+          "FIR": 73.43,
+          "THU": 87.91
+        },
+        "plannedDevelopedIdealBossSeconds": {
+          "WAR": 47.58,
+          "BOW": 54.58,
+          "FIR": 50.4,
+          "THU": 61.16
+        },
+        "status": "HP divided by stationary practice DPS only; future boss moves, guard, travel and downtime are unimplemented and not measured"
+      },
+      {
+        "chapter": 8,
+        "level": 40,
+        "plannedBossHp": 63025,
+        "normalEquipmentIdealBossSeconds": {
+          "WAR": 63.01,
+          "BOW": 69.83,
+          "FIR": 69.07,
+          "THU": 84.6
+        },
+        "plannedDevelopedIdealBossSeconds": {
+          "WAR": 45.64,
+          "BOW": 47.77,
+          "FIR": 47.33,
+          "THU": 57.12
+        },
+        "status": "HP divided by stationary practice DPS only; future boss moves, guard, travel and downtime are unimplemented and not measured"
+      }
+    ],
+    "projectionCaution": "理想Boss时间只是规划HP/静态设计靶DPS；真实移动、护甲、前摇、阶段、目标离开持续区域和停手会改变实战，不通过修改测量条件使数字达标。"
+  },
+  "naturalProgressionProof": {
+    "status": "passed root final natural path and crafting check; subsequent browser smoke remains separate",
+    "test": "src/cocos/tests/playthrough.rules.test.ts",
+    "testName": "natural first chapter reaches its boss and next chapter through actual tasks and first clears without fixture experience",
+    "artifact": "src/cocos/test-results/natural-first-chapter-balance.json",
+    "artifactSha256": "60435f03fd7aa65a8a151745611d27410636ef5431d004d71e55db139a92d0bf",
+    "scope": "Real level-one GameSession/Pilot movement, production Automation combat, five journey tasks, story, at least six native hunting kills and boss; only actual checkpoints/consumables, paid crafting and owned equipment. No fixture experience, injected healing or equipment grants.",
+    "observedMilestones": [
+      {
+        "step": "border-traces",
+        "level": 3,
+        "xp": 432,
+        "simulationSeconds": 66.15,
+        "weapon": "W11",
+        "iron": 13,
+        "runes": 0
+      },
+      {
+        "step": "checkpoint-preparation",
+        "level": 3,
+        "xp": 518,
+        "simulationSeconds": 159.55,
+        "weapon": "W11",
+        "iron": 25,
+        "runes": 0
+      },
+      {
+        "step": "checkpoint-preparation",
+        "level": 4,
+        "xp": 986,
+        "simulationSeconds": 230.3,
+        "weapon": "W11",
+        "iron": 30,
+        "runes": 0
+      },
+      {
+        "step": "border-mill",
+        "level": 6,
+        "xp": 2342,
+        "simulationSeconds": 365.25,
+        "weapon": "W11",
+        "iron": 78,
+        "runes": 0
+      },
+      {
+        "step": "checkpoint-preparation",
+        "level": 6,
+        "xp": 2410,
+        "simulationSeconds": 448.3,
+        "weapon": "W13",
+        "iron": 93,
+        "runes": 0
+      },
+      {
+        "step": "border-hunt",
+        "level": 7,
+        "xp": 3947,
+        "simulationSeconds": 567.05,
+        "weapon": "W13",
+        "iron": 132,
+        "runes": 0
+      },
+      {
+        "step": "border-camp",
+        "level": 9,
+        "xp": 5855,
+        "simulationSeconds": 696.25,
+        "weapon": "W13",
+        "iron": 181,
+        "runes": 0
+      },
+      {
+        "step": "checkpoint-preparation",
+        "level": 9,
+        "xp": 5919,
+        "simulationSeconds": 801.2,
+        "weapon": "W13",
+        "iron": 193,
+        "runes": 0
+      },
+      {
+        "step": "border-watch",
+        "level": 10,
+        "xp": 8254,
+        "simulationSeconds": 1077.0,
+        "weapon": "W13",
+        "iron": 259,
+        "runes": 0
+      },
+      {
+        "step": "checkpoint-preparation",
+        "level": 10,
+        "xp": 9884,
+        "simulationSeconds": 1416.35,
+        "weapon": "W13",
+        "iron": 294,
+        "runes": 0
+      },
+      {
+        "step": "before-S10",
+        "level": 10,
+        "xp": 9884,
+        "simulationSeconds": 1416.35,
+        "weapon": "W13",
+        "iron": 294,
+        "runes": 0
+      },
+      {
+        "step": "chapter-complete",
+        "level": 11,
+        "xp": 11956,
+        "simulationSeconds": 1741.9,
+        "weapon": "W13",
+        "iron": 338,
+        "runes": 0
+      }
+    ],
+    "beforeBoss": {
+      "level": 10,
+      "xp": 9884
+    },
+    "chapterComplete": {
+      "level": 11,
+      "xp": 11956,
+      "simulationMinutes": 29.03
+    },
+    "noFixtureExperience": true,
+    "actualRecipe": {
+      "id": "C04",
+      "result": "W13",
+      "recipeOwned": true,
+      "itemOwned": true,
+      "equippedWeapon": "W13",
+      "ironCost": 6,
+      "runeCost": 0,
+      "rootReportedPaidIronBeforeAfter": [
+        99,
+        93
+      ],
+      "policy": "通过实际配方入口与自然获得材料制作；没有给装备、经验或战斗中回血夹具。"
+    },
+    "chapter2NaturalRoute": "此文档只证明第2章真实XP source覆盖；未额外宣称已实录第二章完整自然路线。"
+  },
+  "validation": {
+    "rootLatestReported": {
+      "npmTest": {
+        "status": "passed",
+        "tests": 164,
+        "includes": [
+          "natural first chapter",
+          "prior task XP补差",
+          "resource/checkpoint supplies",
+          "armor",
+          "crafting path"
+        ]
+      },
+      "npmCheck": "passed",
+      "priorInFlightSnapshots": {
+        "acceptedExactOldRanks": 45,
+        "rejectedForgedMultipliers": 45
+      },
+      "cocosTestWebBuild": "passed",
+      "cocosDevWebBuild": "passed and shared profile automatically restored to test",
+      "provenance": {
+        "testsLog": "src/cocos/test-results/encounter-accepted-tests.log",
+        "sourceTypecheck": "npm run check and strict TypeScript checks of both measurement tools passed after the final P48 milestone adjustment",
+        "compiledTestLog": "src/cocos/temp/build-concept-2d-out.log",
+        "normalAndDevelopmentBrowserArtifact": "src/cocos/test-results/normal-development-start.json",
+        "priorSnapshotValidation": "45 exact previous rank/power snapshots accepted; 45 forged multipliers rejected via ignored check-balance-saves.ts",
+        "compiledDevelopmentLog": "src/cocos/temp/build-concept-2d-dev-out.log"
+      }
+    },
+    "measurementToolStrictTypecheck": {
+      "status": "passed",
+      "command": "npx tsc --noEmit --strict --target ES2020 --module CommonJS --moduleResolution node --esModuleInterop --skipLibCheck tools/encounter-balance.ts"
+    },
+    "browserNewJourneyProfiles": {
+      "status": "passed",
+      "artifact": "src/cocos/test-results/normal-development-start.json",
+      "rows": [
+        {
+          "port": 7469,
+          "query": "",
+          "profile": "test",
+          "marker": "singularity-build-profile-v2-test-f6e5cdff201d",
+          "storagePrefix": "",
+          "before": 1,
+          "newJourney": 1,
+          "temporaryMax": false,
+          "attributes": {
+            "strength": 10,
+            "dexterity": 10,
+            "intellect": 10,
+            "vitality": 10
+          },
+          "unspent": 0,
+          "inventory": [
+            "W01",
+            "W07",
+            "W11"
+          ],
+          "errors": []
+        },
+        {
+          "port": 7469,
+          "query": "&test=max",
+          "profile": "test",
+          "marker": "singularity-build-profile-v2-test-f6e5cdff201d",
+          "storagePrefix": "",
+          "before": 1,
+          "newJourney": 1,
+          "temporaryMax": false,
+          "attributes": {
+            "strength": 10,
+            "dexterity": 10,
+            "intellect": 10,
+            "vitality": 10
+          },
+          "unspent": 0,
+          "inventory": [
+            "W01",
+            "W07",
+            "W11"
+          ],
+          "errors": []
+        },
+        {
+          "port": 7470,
+          "query": "",
+          "profile": "dev",
+          "marker": "singularity-build-profile-v2-dev-6453bb2b350a",
+          "storagePrefix": "singularity.dev.",
+          "before": 40,
+          "newJourney": 40,
+          "temporaryMax": false,
+          "attributes": {
+            "strength": 10,
+            "dexterity": 10,
+            "intellect": 10,
+            "vitality": 10
+          },
+          "unspent": 117,
+          "inventory": [
+            "W01",
+            "W07",
+            "W11"
+          ],
+          "errors": []
+        }
+      ]
+    },
+    "taptapPlatformAndPhysicalDevice": {
+      "status": "not_verified_in_this_task",
+      "noClaimBasedOnHtmlOrOfflineResults": true
+    },
+    "compiledRuntime": {
+      "status": "passed",
+      "artifact": "src/cocos/test-results/combat-balance-web.json",
+      "scope": "正常test Cocos编译产物中的8项调整技能，真实命中与伤害，无页面错误；保留上一轮balanceRevision=1标记不代表只运行旧24+1.5技能威力。当前源码18+1.05且编译伤害已单独检查。",
+      "rows": [
+        {
+          "skill": "WAR_01",
+          "rank": 5,
+          "directMultiplier": 6.05,
+          "actualHits": 3,
+          "actualDamage": 456
+        },
+        {
+          "skill": "BOW_01",
+          "rank": 5,
+          "directMultiplier": 5.15,
+          "actualHits": 1,
+          "actualDamage": 374
+        },
+        {
+          "skill": "FIR_04",
+          "rank": 5,
+          "directMultiplier": 4.02,
+          "actualHits": 4,
+          "actualDamage": 292
+        },
+        {
+          "skill": "FIR_05",
+          "rank": 5,
+          "directMultiplier": 3.79,
+          "actualHits": 5,
+          "actualDamage": 274
+        },
+        {
+          "skill": "THU_01",
+          "rank": 5,
+          "directMultiplier": 6.44,
+          "actualHits": 1,
+          "actualDamage": 468
+        },
+        {
+          "skill": "THU_02",
+          "rank": 5,
+          "directMultiplier": 2.88,
+          "actualHits": 1,
+          "actualDamage": 209
+        },
+        {
+          "skill": "THU_04",
+          "rank": 5,
+          "directMultiplier": 3.38,
+          "actualHits": 2,
+          "actualDamage": 246
+        },
+        {
+          "skill": "THU_05",
+          "rank": 5,
+          "directMultiplier": 4.9,
+          "actualHits": 3,
+          "actualDamage": 357
+        }
+      ],
+      "errors": [],
+      "encounterRevision": 1,
+      "firstBossWeaponPower": 48
+    },
+    "finalArtifactHashes": {
+      "src/cocos/test-results/encounter-accepted-tests.log": "b62301c792c6e2ae5f5a7560ff36bcf34db0c228cfd2087a260af92cf94093a8",
+      "src/cocos/test-results/normal-development-start.json": "646f6346d7c29944c73686d0d34c94810e7697b0d73ee36b8e8c1ba410c8ca85",
+      "src/cocos/test-results/natural-first-chapter-balance.json": "60435f03fd7aa65a8a151745611d27410636ef5431d004d71e55db139a92d0bf",
+      "src/cocos/test-results/combat-balance-web.json": "0a4d2b4404e65cd56b3b0e9281d916664c60fe5e59420f919fb5cdda529609ce",
+      "src/cocos/release/changes.json": "8c6f8a7eb7a1007262dfaa74d21834ae8620845bed82da3792dad238ea5f3fa1"
+    },
+    "completedRequirementAudit": {
+      "normalLevelOneAndDevOnlyForty": "browser: normal default and test=max both level 1, dev level 40, isolated dev storage; existing saves not downgraded",
+      "enemyDurabilityAndDamage": "fixed content-level budgets, current real enemies, profile/generic attacks, wounded/dead save migration; latest real encounter matrix",
+      "equipmentSkillCriticalDefenseEconomy": "unified skill and weapon growth, stable critical rolls, armor multipliers, bounded recovery, limited checkpoint supply; 164 rule checks and compiled runtime",
+      "normalProgressionAndAcquisition": "real first chapter level 1 -> 10 before Boss -> 11 after story, real C04 craft and finite native resources",
+      "wholeCampaignPlanning": "shared 8-chapter level/XP/equipment/HP/TTK budgets, max level 40, complete future slots and isolated future cap simulation; only chapters 1 and 2 released",
+      "classBalanceAndCombatFlow": "all four professions measured in normal, bare and developed states; latest near-safe evasion preserves skill geometry and real hits",
+      "currentPlatformScope": "Cocos HTML test build and actual test/dev startup verified; no upload/package requested, no TapTap device claim"
+    },
+    "postMatrixMilestoneAdjustment": {
+      "change": "Only first-Boss LC1_T_E weapon power changed from 31 to 48 after matrix capture; no enemy, skill, crit, recovery or AI change",
+      "checkedRowCount": 1800,
+      "intersectsMeasuredPlayerEquipment": false,
+      "currentSourceSha256": "688bc07658ec534dc8e206b0be1c5eb31c230788a60bc5f5519e9685e4cb2242",
+      "interpretation": "The recorded combat matrices use identical equipment stats. Natural-route and rule tests rerun on current code; compiled test export refreshed."
+    },
+    "finalSharedProfile": "test (restored automatically after dev export)"
+  },
+  "limitations": [
+    "当前仅开放前两章；后六章的地理、实际任务奖励、敌阵/Boss动作和可达装备来源不由这些数字自动完成。",
+    "开放平地夹具保留真实敌人AI/技能/触碰/护盾/资源，但不代替实际地图障碍、安全区、触控和完整自然路线。",
+    "雷系站立靶未人为授予移动准备buff，实战移动触发另有收益；不能把该条件下的较低DPS直接归为职业缺陷。",
+    "移动怪物与真实安全撤退会影响近战命中、弓箭弹道、火域停留和多目标覆盖；同倍率并不代表所有阵型同TTK。",
+    "3个固定种子的短窗口存在暴击/未命中与施放ID序列差异；提高强化后单个均值小幅波动不代表直接属性下降。",
+    "熟练移动、读招和有限补给仍可使部分裸装挑战成功；证据证明裸装承压与装备效率/容错差距，不主张强制裸装永远无法过关。",
+    "所有权、强化启动资金和宝石库存是明确的设计夹具；其培养开销已记录，但不证明经济产出或获得时间已经验收。",
+    "原始before working tree含未提交修改，当前仓库不能仅凭该summary自动重建全部历史资源；本地raw报告和before-source快照保留作追踪。",
+    "游戏时间约29分钟的自然流程不是29分钟真实手机操作/能耗验收。"
+  ],
+  "reproduction": {
+    "cwd": "src/cocos",
+    "commands": {
+      "currentEncounters": "npx tsx tools/encounter-balance.ts --output test-results/encounter-complete.json --levels 1,6,10,11,16,20 --families WAR,BOW,FIR,THU --seeds 3 --seconds 150 --mode both",
+      "currentAttack": "npx tsx tools/encounter-balance.ts --output test-results/encounter-complete-attack.json --levels 10,16,20 --families WAR,BOW,FIR,THU --seeds 3 --seconds 150 --mode attack --roles pack,boss",
+      "fullFutureSlotsCap6": "npx tsx tools/encounter-balance.ts --output test-results/late-output-full-slots.json --levels 24,32,40 --families WAR,BOW,FIR,THU --gear normal,developed --seeds 3 --seconds 60 --mode fight --roles normal --target dummy --equipment-policy lifecycle-full --gems balanced",
+      "plannedFutureCaps": "npx tsx tools/encounter-balance.ts --output test-results/late-output-planned-caps.json --levels 24,32,40 --families WAR,BOW,FIR,THU --gear normal,developed --seeds 3 --seconds 60 --mode fight --roles normal --target dummy --equipment-policy lifecycle-full --gems balanced --planned-phase-caps --preparation-gold 100000 --preparation-iron 9999"
+    },
+    "requiredProfile": "test normal rules; tool rejects dev acceleration",
+    "rawEvidenceMayBeGitIgnored": true,
+    "rawArtifacts": [
+      {
+        "path": "src/cocos/test-results/encounter-before-quick.json",
+        "sha256": "cefe73b5c175827e165cde06260dd84a567f63b47e35209b54f637736b69ee92"
+      },
+      {
+        "path": "src/cocos/test-results/encounter-complete.json",
+        "sha256": "c0828222ea1cf2dd4d5f00a2100c330ac241a00676eea470467d4b43857920fe"
+      },
+      {
+        "path": "src/cocos/test-results/encounter-complete-attack.json",
+        "sha256": "1bbcd7334e5eab11d477dbf9a8259d8353ebbe49abedcfb6990febdfae7e6ae8"
+      },
+      {
+        "path": "src/cocos/test-results/encounter-final.json",
+        "sha256": "c77efe3c27054a40606b138740077072bf7a447247d02fbe04104872af70e637"
+      },
+      {
+        "path": "src/cocos/test-results/encounter-final-attack.json",
+        "sha256": "85ce738c050de419ea790312ce8858a914d6cd684c82da59a26884cea121ad0c"
+      },
+      {
+        "path": "src/cocos/test-results/late-output-final.json",
+        "sha256": "f3428b0d4ecf232f06a6458848581e73d56e0db0e8d3ce1a5ee79dced37830e8"
+      },
+      {
+        "path": "src/cocos/test-results/late-output-full-slots.json",
+        "sha256": "57aa751a8ef5524efce0978ffe0fff1db14b7ace58986c5154bbcebb1564b091"
+      },
+      {
+        "path": "src/cocos/test-results/late-output-planned-caps.json",
+        "sha256": "376fc204a375eb5e3bf0654864635f79ff344ea46d119413639eb8252f68b769"
+      },
+      {
+        "path": "src/cocos/test-results/natural-first-chapter-balance.json",
+        "sha256": "60435f03fd7aa65a8a151745611d27410636ef5431d004d71e55db139a92d0bf"
+      },
+      {
+        "path": "src/cocos/test-results/encounter-complete-inputs.json",
+        "sha256": "fe5e30fa2089348bf1ca5f34c6b90e421e760c5ae576a6b4f329e7341414bad2"
+      },
+      {
+        "path": "src/cocos/test-results/normal-development-start.json",
+        "sha256": "646f6346d7c29944c73686d0d34c94810e7697b0d73ee36b8e8c1ba410c8ca85"
+      },
+      {
+        "path": "src/cocos/test-results/combat-balance-web.json",
+        "sha256": "fb09b02c6c45a19a196495953b5f0a0a65aa6e1b343196d490a32c871131ab0d"
+      }
+    ]
+  },
+  "rootFinalFollowups": []
+}

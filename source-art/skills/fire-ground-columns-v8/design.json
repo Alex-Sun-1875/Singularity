@@ -1,0 +1,28 @@
+{
+  "status": "Design candidate; not implemented in production",
+  "userCorrection": "应该是地上喷火，排成一列",
+  "preservedDesigns": {
+    "meteor": "../fire-kit-revision-v7/design.json#/meteor",
+    "mergedField": "../fire-kit-revision-v7/design.json#/mergedField"
+  },
+  "newSkill": {
+    "id": "FIR_04",
+    "name": "烈焰喷流",
+    "form": "ground column row",
+    "handAttackStream": false,
+    "columnCount": 5,
+    "direction": "forward along the chosen cast direction",
+    "firstColumnDistanceMetres": 1.35,
+    "columnSpacingMetres": 1.25,
+    "columnHeightMetres": 2.45,
+    "overallLengthMetres": 7,
+    "intendedRowWidthMetres": 1.2,
+    "eachRootFollowsTerrainHeight": true,
+    "startIntervalSeconds": 0.08,
+    "perColumnTimelineSeconds": {"rise": 0.11, "holdUntil": 0.82, "fallDuration": 0.43, "embersEnd": 1.92},
+    "castWindupSeconds": 0.25,
+    "casterRecoverySeconds": 0.45,
+    "damageBudget": "The row shares one cast budget. Damage, collision, interruptions and per-target limits remain pending.",
+    "animationCarrier": "Existing native cast and normal recovery. Zero damage carrier for preview only."
+  }
+}

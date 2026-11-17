@@ -1,7 +1,9 @@
 import type {CinematicMessageKey} from './zh-CN';
 import {fieldCinematicEn} from './FieldQuestCinematics';
+import {earlyCinematicEn} from './EarlyChapterCinematics';
 export const en:Record<CinematicMessageKey,string> = {
   ...fieldCinematicEn,
+  ...earlyCinematicEn,
   "ui.continue": "Continue",
   "ui.skip": "Skip story",
   "ui.language": "Story language",

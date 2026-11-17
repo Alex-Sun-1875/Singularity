@@ -1,3 +1,4 @@
+import {CAMPAIGN_MAX_LEVEL} from '../../progression/data/CampaignProgression';
 import type {GameState} from '../../../core/GameSession';
 import {BUILD_PROFILE} from '../../../shared/BuildProfile';
 import {SUPPLIES} from '../../equipment/data/Supplies';
@@ -36,12 +37,12 @@ export class DevelopmentTools {
     message='生命、体力、专注与法力药水已补齐。';break;
    }
    case 'materials':
-    if((['gold','iron','runes','cores'] as const).every(key=>p[key]===9999))return this.result(false,'金币与锻造材料已达调试上限。');
-    for(const key of ['gold','iron','runes','cores'] as const)p[key]=9999;
+    if((['gold','iron','runes','cores'] as const).every(key=>p[key]>=9999))return this.result(false,'金币与锻造材料已达调试上限。');
+    for(const key of ['gold','iron','runes','cores'] as const)p[key]=Math.max(p[key],9999);
     message='金币、铁、符文与核心已各补至 9999。';break;
-   case 'level5':case 'level40':{
-    const target=action==='level40'?40:Math.min(40,s.progression.level+5),amount=cumulativeXp(target)-s.progression.totalXp;
-    if(amount<=0)return this.result(false,'已达到当前 40 级上限。');
+   case 'level5':case 'levelMax':case 'level40':{
+    const target=action==='level5'?Math.min(CAMPAIGN_MAX_LEVEL,s.progression.level+5):CAMPAIGN_MAX_LEVEL,amount=cumulativeXp(target)-s.progression.totalXp;
+    if(amount<=0)return this.result(false,`已达到当前 ${CAMPAIGN_MAX_LEVEL} 级上限。`);
     const ok=this.host.experience(`dev:level:${target}`,amount);
     return this.result(ok,ok?`已提升至 ${s.progression.level} 级，按正常规则获得技能与属性点。`:'本次等级调整未生效。');
    }

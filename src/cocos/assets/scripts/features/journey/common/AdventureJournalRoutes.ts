@@ -1,3 +1,4 @@
+import {CAMPAIGN_STAGES} from '../data/CampaignStages';
 import {FIELD_QUESTS} from '../../campaign/data/FieldQuests';
 import {CHAPTER_TWO_SIDE_QUESTS} from '../../campaign/data/ChapterTwoSideQuests';
 
@@ -13,8 +14,8 @@ export function adventureJournalRoute(route:string,currentChapter=1):AdventureJo
  if(route==='campaign-log')return {mode:'journal',filter:'completed'};
  const parts=route.split(':'),id=parts[1];if(!id)return;
  if(parts[0]==='journey-chapter'&&/^[1-8]$/.test(id))return {mode:'journal',entryId:`chapter:${id}`};
- if(parts[0]==='journey-task')return {mode:'journal',entryId:`main:${id}`};
- if(parts[0]==='journey-encounter-route'||parts[0]==='journey-encounter-clues')return {mode:'journal',entryId:`main:${id}`};
+ if(parts[0]==='journey-task'){const stage=CAMPAIGN_STAGES.find(stage=>stage.actions.some(action=>action.taskId===id));return {mode:'journal',entryId:stage?'stage:'+stage.id:`main:${id}`};}
+ if(parts[0]==='journey-encounter-route'||parts[0]==='journey-encounter-clues'){const stage=CAMPAIGN_STAGES.find(stage=>stage.actions.some(action=>action.taskId===id));return {mode:'journal',entryId:stage?'stage:'+stage.id:`main:${id}`};}
  if(parts[0]==='journey-side-task')return {mode:'journal',entryId:`side:${id}`};
  if(parts[0]==='journey-field-task'){
   const quest=[...FIELD_QUESTS,...CHAPTER_TWO_SIDE_QUESTS].find(quest=>quest.steps.some(step=>step===id));

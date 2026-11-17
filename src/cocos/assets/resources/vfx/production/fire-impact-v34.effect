@@ -1,0 +1,88 @@
+CCEffect %{
+  techniques:
+  - name: transparent
+    passes:
+    - vert: ignited-impact-v34-vs:vert
+      frag: ignited-impact-v34-fs:frag
+      rasterizerState: { cullMode: none }
+      depthStencilState:
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: one
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: one
+          blendDstAlpha: one_minus_src_alpha
+      properties:
+        burstTexture: { value: white }
+        contactTexture: { value: white }
+        flowState: { value: [0, 1, 0, 0] }
+}%
+
+CCProgram ignited-impact-v34-vs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+  #include <builtin/uniforms/cc-local>
+  in vec3 a_position;
+  in vec2 a_texCoord;
+  in vec4 a_color;
+  out vec2 v_uv;
+  out vec4 v_surface;
+  vec4 vert () {
+    v_uv = a_texCoord;
+    v_surface = a_color;
+    return cc_matViewProj * cc_matWorld * vec4(a_position, 1.0);
+  }
+}%
+
+CCProgram ignited-impact-v34-fs %{
+  precision highp float;
+  in vec2 v_uv;
+  in vec4 v_surface;
+  uniform sampler2D burstTexture;
+  uniform sampler2D contactTexture;
+  uniform IgnitedImpactParams { vec4 flowState; };
+  vec2 atlasUV(float index, vec2 uv) {
+    return (vec2(mod(index,4.0),floor(index/4.0))+clamp(uv,vec2(0.002),vec2(0.998)))/4.0;
+  }
+  vec4 premultiply(vec4 c) { return vec4(c.rgb*c.a,c.a); }
+  vec4 frag () {
+    if(v_surface.g>3.5) {
+      // Carrier and UVs are already their final size at contact. Each support
+      // point lights once, then retains its density until the existing tail.
+      // The irregular edge only reveals authored flame pixels, never a ring.
+      float ignition = 1.0, fresh = 0.0;
+      // All points are fully lit and their brief fresh edge has expired by
+      // .36s. Skip the reveal trigonometry throughout the sustained burn/tail.
+      if(v_surface.b<0.36) {
+        float distance = max(0.0, v_surface.a);
+        float irregular = sin(v_uv.x*34.3+sin(v_uv.y*13.0)*2.0)*sin(v_uv.y*29.7-v_uv.x*11.4);
+        float support = max(0.0, distance + irregular*0.030*smoothstep(0.12,0.30,distance));
+        float travel = clamp((support-0.12)/0.88,0.0,1.0);
+        float arrival = support<=0.12 ? -0.030 : 0.020+0.260*(1.0-pow(1.0-travel,1.0/1.5));
+        float localAge = v_surface.b-arrival;
+        ignition = smoothstep(0.0,0.022,localAge);
+        fresh = smoothstep(0.0,0.012,localAge)*(1.0-smoothstep(0.018,0.065,localAge));
+      }
+      float fade = v_surface.r*ignition;
+      if(fade<0.002) discard;
+      float clock=flowState.x*24.0;
+      float frame=mod(floor(clock),16.0),next=mod(frame+1.0,16.0);
+      vec4 flame=mix(premultiply(texture(burstTexture,atlasUV(frame,v_uv))),premultiply(texture(burstTexture,atlasUV(next,v_uv))),fract(clock));
+      float denseAlpha=1.0-pow(max(0.0,1.0-flame.a),1.35+0.20*fresh);
+      vec3 denseColour=flame.rgb/max(flame.a,0.0001)*denseAlpha;
+      if(denseAlpha*fade<0.002) discard;
+      return vec4(denseColour*(1.10+0.12*fresh)*fade,denseAlpha*fade);
+    }
+    // Preserve the independently selected fire-lance contact fan unchanged.
+    vec2 anchor=vec2(0.138990646117,0.369657187871);
+    float tip=smoothstep(0.09,0.42,distance(v_uv,anchor));
+    vec2 drift=vec2(cos(v_uv.x*8.0-flowState.x*9.0)*0.004,sin(v_uv.x*8.0-flowState.x*11.0)*0.012)*tip;
+    vec4 fan=texture(contactTexture,clamp(v_uv+drift,vec2(0.002),vec2(0.998)));
+    float fade=v_surface.r;
+    if(fan.a*fade<0.002) discard;
+    return vec4(fan.rgb*fan.a*1.18*fade,fan.a*0.94*fade);
+  }
+}%

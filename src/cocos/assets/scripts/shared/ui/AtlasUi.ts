@@ -66,7 +66,7 @@ export class AtlasUi {
   const skin=background.node.children.find(node=>node.name.startsWith('Skin:'))!.getComponent(Sprite)!;
   const mark=this.image(item,'Selected','indicator-selected',10,(h-26)/2,12,26,Color.WHITE);mark.visible=active;
   const controller=item.getController('button');
-  const refresh=()=>{if(item.isDisposed)return;const state=controller.selectedPage,selected=active||item.selected;mark.visible=selected;wash.visible=selected;skin.spriteFrame=this.frames.get('ui/quiet-bronze/button-'+(state.includes('disabled')?'disabled':state==='down'||state==='selectedOver'?'pressed':state==='over'?'hover':'normal'))!;};
+  const refresh=()=>{if(item.isDisposed)return;const state=controller.selectedPage,selected=active||item.selected;mark.visible=selected;wash.visible=selected;skin.spriteFrame=this.frames.get('ui/quiet-bronze/button-'+(state.includes('disabled')?'disabled':state==='down'?'pressed':state==='over'||state==='selectedOver'?'hover':'normal'))!;};
   controller.onChanged(refresh);refresh();void Promise.resolve().then(refresh);
   const label=item.getTextField();label.font='Microsoft YaHei';label.autoSize=AutoSizeType.Shrink;label.setPosition(active?28:14,0);label.setSize(w-(active?42:28),h);label.fontSize=size;label.color=ATLAS_COLORS.ink;label.singleLine=true;item.title=title;
   item.onClick(run);return item;

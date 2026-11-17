@@ -11,7 +11,7 @@ import {applyRpgFont} from '../../../shared/ui/RpgFont';
 import {bindButtonFeedback} from '../../../shared/ui/ButtonFeedback';
 import {automationText as tr} from '../locales';
 
-export interface AutomationExperience {earned:number;cap:number;rate:number}
+export interface AutomationExperience {earned:number;cap:number;rate:number;capped?:boolean}
 export interface AutomationHudState {mode:AutomationMode;navigating:boolean;paused:boolean;status:string;experience?:AutomationExperience}
 
 /** A fixed-width HUD flyout. Opening it never pauses or changes automation. */
@@ -102,7 +102,7 @@ export class AutomationHud {
  private updateStatus(){
   // Quota/status changes never replace a button during an ongoing press.
   if(!this.root.active||!this.experienceValue?.isValid)return;
-  const d=this.state.experience,full=!!d&&d.cap>0&&d.earned>=d.cap;
-  this.experienceValue.string=d?d.cap<0?tr('daily.unlimited'):d.cap===0?tr('daily.maxLevel'):tr('daily.header',{earned:d.earned,cap:d.cap}):tr('daily.loading');F.tint(this.experienceValue,full?'state.paused':'text.secondary');
+  const d=this.state.experience,full=!!d&&(d.capped??(d.cap>0&&d.earned>=d.cap));
+  this.experienceValue.string=d?d.cap<0?tr('daily.unlimited'):full?tr('daily.capped'):d.cap===0?tr('daily.maxLevel'):tr('daily.header',{earned:d.earned,cap:d.cap}):tr('daily.loading');F.tint(this.experienceValue,full?'state.paused':'text.secondary');
  }
 }

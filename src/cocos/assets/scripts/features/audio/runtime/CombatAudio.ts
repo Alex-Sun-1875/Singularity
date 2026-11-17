@@ -5,15 +5,13 @@ import {gameResources} from '../../../shared/assets/GameResources';
 import {EQUIPMENT} from '../../equipment/data/Equipment';
 import {COMBAT_SKILLS} from '../../combat/data/PureSkills';
 import {weaponCombatFamily} from '../../progression/common/CombatLoadouts';
-import {COMBAT_AUDIO_CUES,audioFamily,combatAudioPath,contactAudioRequest,eventAudioFamily,preparationCue,
+import {COMBAT_AUDIO_CUES,RELEASE_AUDIO,audioFamily,combatAudioPath,eventAudioFamily,
  type AudioFamily,type CombatAudioCue,type CombatAudioRequest} from '../common/CombatAudioCues';
 
 type Voice={source:AudioSource;until:number;key:string;priority:number};
-type TimedFamily={family:AudioFamily;until:number};
-type HitSegment={segment:number;until:number};
 
 /** Six stoppable Cocos sources; shared engine adaptation owns platform playback.
- * Actual contacts are delivered only by the visible representative-hit callback.
+ * Only actual swings/releases play; hits, armor and outcomes remain silent.
  * Loading never replays a missed action after its clip finally arrives. */
 export class CombatAudio {
  private readonly root:Node;
@@ -23,21 +21,15 @@ export class CombatAudio {
  private readonly requested=new Set<AudioFamily>();
  private readonly failures=new Set<string>();
  private readonly lastVariant=new Map<CombatAudioCue,number>();
- private readonly remembered=new Map<string,TimedFamily>();
- private readonly segments=new Map<string,HitSegment>();
  private readonly heard=new Map<string,number>();
- private prep:{id:string;voice:Voice}|undefined;
- private game:GameSession|undefined;
  private family:AudioFamily|undefined;
  private clock=0;
- private nextImpact=0;
  private nextRelease=0;
  private suspended=false;
  private active=true;
  private disposed=false;
  private played=0;
  private dropped=0;
- private impactCount=0;
  private maximumVoices=0;
 
  constructor(parent:Node){
@@ -82,23 +74,15 @@ export class CombatAudio {
   this.loads.set(family,result);return result;
  }
 
- private remember(id:unknown,family:AudioFamily):void {
-  if(typeof id==='string'&&id){this.remembered.set(id,{family,until:this.clock+18});if(this.remembered.size>160)this.remembered.delete(this.remembered.keys().next().value!);}
- }
  private currentFamily(game:GameSession):AudioFamily{return weaponCombatFamily(game.state.equipment.weapon,game.state.combat);}
  private resolveFamily(event:GameEvent,game:GameSession):AudioFamily {
-  const old=this.remembered.get(String(event.action??event.castId??event.id));
   const weapon=typeof event.weapon==='string'?EQUIPMENT[event.weapon]?.kind:undefined;
   const fromWeapon=weapon==='sword'?'WAR':weapon==='bow'?'BOW':undefined;
-  return eventAudioFamily(event,fromWeapon??old?.family??this.currentFamily(game));
+  return eventAudioFamily(event,fromWeapon??this.currentFamily(game));
  }
  private stop(voice:Voice):void {
   voice.source.stop();voice.source.clip=null;voice.until=0;voice.key='';voice.priority=0;
-  if(this.prep?.voice===voice)this.prep=undefined;
  }
- private stopPreparation():void {if(this.prep)this.stop(this.prep.voice);}
- /** Input cancellation stops only windup, preserving genuine released tails. */
- cancelPreparation():void {this.stopPreparation();}
  private play(request:CombatAudioRequest,key:string):Voice|undefined {
   if(this.disposed||this.suspended||!this.active)return;
   let variation=(this.lastVariant.get(request.cue)??0)%3+1;
@@ -123,91 +107,42 @@ export class CombatAudio {
   this.maximumVoices=Math.max(this.maximumVoices,this.voices.filter(v=>v.until>this.clock).length);
   return voice;
  }
- private preparation(id:string,family:AudioFamily,duration?:number):void {
-  this.stopPreparation();const cue=preparationCue(family);if(!cue)return;
-  const voice=this.play({cue,volume:family==='BOW' ? .22 : .20,priority:0,limit:duration},'prepare:'+id);
-  if(voice)this.prep={id,voice};
- }
  private once(key:string,request:CombatAudioRequest,seconds=.12):boolean {
   if((this.heard.get(key)??0)>this.clock)return false;
   const voice=this.play(request,key);if(!voice)return false;
   this.heard.set(key,this.clock+seconds);return true;
  }
- private launch(family:AudioFamily,key:string):void {
+ private launch(family:AudioFamily,key:string,utility=false):void {
   if(this.clock<this.nextRelease)return;
-  const cue:CombatAudioCue=family==='WAR'?'war_swing':family==='BOW'?'bow_release':family==='FIR'?'fir_charge':'thu_charge';
-  const elemental=family==='FIR'||family==='THU';
-  if(this.once('release:'+key,{cue,volume:family==='WAR' ? .31 : family==='BOW' ? .46 : .18,priority:1,limit:elemental ? .15 : undefined},5))this.nextRelease=this.clock+.075;
+  const {cue,volume}=RELEASE_AUDIO[family];
+  if(this.once('release:'+key,{cue,volume:volume*(utility ? .7 : 1),priority:1},5))this.nextRelease=this.clock+.075;
  }
 
  onEvents(events:readonly GameEvent[],game:GameSession):void {
-  this.game=game;
   const family=this.currentFamily(game);
-  if(family!==this.family){this.family=family;this.stopPreparation();void this.prepare(family);}
+  if(family!==this.family){this.family=family;void this.prepare(family);}
   if(events.some(e=>['area','travel','retry','death'].includes(e.type))){this.clear();return;}
   if(this.disposed||this.suspended||!this.active||game.state.player.hp<=0)return;
   for(const event of events){
    const kind=String(event.kind??''),castId=String(event.castId??''),id=String(event.id??''),skillId=String(event.skillId??'');
    const eventFamily=this.resolveFamily(event,game);
-   if(event.type==='skill_hit'){
-    const target=String(event.targetId??'');
-    this.segments.set(castId+':'+target,{segment:Number(event.segment)||0,until:this.clock+1});
-    continue;
-   }
    if(event.type==='action'){
-    this.remember(id,eventFamily);
     if(kind==='sword')this.launch('WAR',id);
-    else if(kind==='bowAim')this.preparation(id,'BOW');
-    else if(kind==='staff')this.preparation(id,eventFamily,.22);
    }else if(event.type==='projectile'&&!event.skillId){
-    const projectile=game.state.projectiles.find(q=>q.id===id);
     const launchedFamily=audioFamily(event.family)??(kind==='arrow'?'BOW':eventFamily);
-    this.remember(id,launchedFamily);this.remember(event.action??projectile?.feedbackActionId,launchedFamily);
-    this.stopPreparation();this.launch(launchedFamily,id);
+    this.launch(launchedFamily,id);
    }else if(event.type==='skill_cast'){
-    this.remember(castId,eventFamily);void this.prepare(eventFamily);
-    if(!skillId.startsWith('COM_'))this.preparation(castId,eventFamily,Number(event.duration)||undefined);
+    void this.prepare(eventFamily);
    }else if(event.type==='skill_release'){
-    this.remember(castId,eventFamily);this.stopPreparation();
     const def=COMBAT_SKILLS[skillId];
     if(!def||skillId.startsWith('COM_'))continue;
-    if(eventFamily==='FIR'&&skillId!=='FIR_04'||eventFamily==='THU')this.launch(eventFamily,castId+':0');
-    else if(!def.offensive){
-     const cue=preparationCue(eventFamily)??'war_swing';
-     this.once('utility:'+castId,{cue,volume:.19,priority:1,limit:.18},5);
-    }
+    if(eventFamily==='FIR'||eventFamily==='THU'||!def.offensive)this.launch(eventFamily,castId+':0',!def.offensive);
    }else if(event.type==='skill_segment'){
-    this.remember(event.projectileId,eventFamily);
     const phase=String(event.phase??''),segment=Number(event.segment)||0;
     if(skillId.startsWith('COM_')||event.child===true||phase==='network'||phase==='redirect'||phase==='impact'||skillId==='BOW_06')continue;
     if(eventFamily==='WAR'||eventFamily==='BOW')this.launch(eventFamily,castId+':'+segment);
-   }else if(event.type==='skill_zone'&&skillId==='FIR_04'){
-    this.once('wall:'+castId,{cue:'fir_wall',volume:.19,priority:0,limit:Math.min(3,Number(event.duration)||3)},6);
-   }else if(event.type==='skill_end'){
-    for(const voice of this.voices)if(voice.key==='wall:'+castId)this.stop(voice);
    }
   }
-  this.cancelStalePreparation();
- }
-
- /** Only call for the visible representative chosen by CombatImpactFeedback.
-  * No hit is synthesized for an empty swing, expired arrow or a burn tick. */
- impact(event:GameEvent,game:GameSession,blocked=false):boolean {
-  if(this.disposed||game.state.player.hp<=0||game.state.status==='dead')return false;
-  const family=this.resolveFamily(event,game),request=contactAudioRequest(event,family,blocked);
-  if(!request||this.clock<this.nextImpact||this.suspended||!this.active)return false;
-  void this.prepare(family);
-  const action=String(event.action??event.castId??''),segment=this.segments.get(action+':'+String(event.id))?.segment??0;
-  const network=request.cue==='thu_network';
-  const key='impact:'+family+':'+action+':'+(network?'network':segment);
-  if(this.once(key,request,network?6:1.5)){
-   this.nextImpact=this.clock+.075;this.impactCount++;return true;
-  }
-  return false;
- }
-
- private cancelStalePreparation():void {
-  if(this.prep&&this.game?.state.action?.id!==this.prep.id)this.stopPreparation();
  }
  update(dt:number,active:boolean):void {
   if(this.disposed)return;
@@ -215,18 +150,14 @@ export class CombatAudio {
   if(!active||this.suspended){if(this.active||this.voices.some(v=>v.until>0))this.clear();this.active=active;return;}
   this.active=true;
   for(const voice of this.voices)if(voice.until>0&&voice.until<=this.clock)this.stop(voice);
-  this.cancelStalePreparation();
   for(const [key,value]of this.heard)if(value<=this.clock)this.heard.delete(key);
-  for(const [key,value]of this.remembered)if(value.until<=this.clock)this.remembered.delete(key);
-  for(const [key,value]of this.segments)if(value.until<=this.clock)this.segments.delete(key);
  }
  setSuspended(value:boolean):void {this.suspended=value;if(value)this.clear();}
  clear():void {
   for(const voice of this.voices)this.stop(voice);
-  this.prep=undefined;this.heard.clear();this.remembered.clear();this.segments.clear();
-  this.nextImpact=this.clock;this.nextRelease=this.clock;
+  this.heard.clear();this.nextRelease=this.clock;
  }
- inspect(){return {version:'fusion-v9',family:this.family,loadedClips:this.clips.size,loadingFamilies:Array.from(this.loads.keys()),failedPaths:Array.from(this.failures),activeVoices:this.voices.filter(v=>v.until>this.clock).map(v=>({key:v.key,remaining:v.until-this.clock,priority:v.priority})),voiceLimit:6,maximumVoices:this.maximumVoices,played:this.played,dropped:this.dropped,impacts:this.impactCount,preparing:this.prep?.id,suspended:this.suspended};}
+ inspect(){return {version:'release-only-v12',contactAudio:false,family:this.family,loadedClips:this.clips.size,loadingFamilies:Array.from(this.loads.keys()),failedPaths:Array.from(this.failures),activeVoices:this.voices.filter(v=>v.until>this.clock).map(v=>({key:v.key,remaining:v.until-this.clock,priority:v.priority})),voiceLimit:6,maximumVoices:this.maximumVoices,played:this.played,dropped:this.dropped,suspended:this.suspended};}
  dispose():void {
   if(this.disposed)return;this.clear();this.disposed=true;
   for(const clip of this.clips.values())clip.decRef();this.clips.clear();this.root.destroy();

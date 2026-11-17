@@ -35,7 +35,7 @@ const LANDMARKS:Record<string,string[]>={
  'U1-08':['天火接触台','迁行口隔离房','静眠回退亭'],'U1-09':['悬链机台','绞盘井底房','平台控制室'],
  'U1-10':['见日出口门','采光长廊屋','撤离回退亭'],
  'U2-02':['退水干渠房','镜眼警戒室','分层泵管亭'],'U2-03':['深闸镇守台','内侧泄压室','前厅回退房'],
- 'U2-04':['守库人居所','退出协议室','静思图纸房'],'U2-05':['沉钟下殿','钟纹侧室','旧堂干阶亭'],
+ 'U2-04':['守库人居所','退出协议室','装备养护室'],'U2-05':['沉钟下殿','钟纹侧室','旧堂干阶亭'],
  'U2-06':['正面原刻廊','侧光拓本室','征用侧档房'],'U2-07':['禁域镜阵厅','迁行图藏室','静眠图侧廊'],
  'U2-08':['无名囚室旧址','旧封门值房','责任记录室'],'U2-09':['堡外检修机房','内侧旧门室','干壕退路亭'],
 };
@@ -133,7 +133,7 @@ export function installCampaign(areas:Record<string,AreaDef>):void {
  // Their dedicated character images are still pending. A named in-world
  // workstation keeps their account and interaction usable without loading an
  // absent actor or borrowing another person's character identity.
- areas.H02.objects.push({id:'h02-severin',label:'瑟维恩研究台：沉钟之泪',action:'merchant',merchant:'severin',description:'瑟维恩的研究台上保留现代拓本与货单，可以在现场核对研究商货。沉钟之泪只有一件，不会因回访补货。',x:38,z:17,radius:2.5});
+ areas.H02.objects.push({id:'h02-severin',label:'瑟维恩 · 宝石与法术饰品',action:'merchant',merchant:'severin',actor:'shop-npc-severin',actorModel:'mine-worker',description:'瑟维恩的研究台上保留现代拓本与货单，可以在现场核对研究商货。沉钟之泪只有一件，不会因回访补货。',x:38,z:17,radius:2.5});
  areas.B03.objects.push({id:'b03-elise',label:'艾莉丝鉴定台：灰烬礼袍',action:'merchant',merchant:'elise',description:'艾莉丝的鉴定台上摊开完好的旧绳货号与封签。灰烬司祭礼袍只有一件，完成现场鉴定不要求购买。',x:38,z:17,radius:2.5});
  // The expanded source budget needs a real clear firing floor in every boss scene.
  for(const boss of CAMPAIGN_BOSSES){

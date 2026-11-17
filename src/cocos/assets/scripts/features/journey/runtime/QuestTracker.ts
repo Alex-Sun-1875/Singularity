@@ -10,7 +10,7 @@ import {UI_COLORS as C} from '../../../shared/ui/UiTheme';
 import {UI_FRAME_GOLD} from '../../../shared/ui/UiChrome';
 import {bindButtonFeedback,type ButtonFeedback} from '../../../shared/ui/ButtonFeedback';
 
-export type QuestTrackerLine='area'|'objective'|'quest-route'|'quest-distance';
+export type QuestTrackerLine='area'|'objective'|'quest-route'|'quest-distance'|'quest-progress';
 interface QuestTrackerLayout {left:number;top:number;width:number;scale:number;hit:number;expanded:boolean}
 
 /** Display-only disclosure: it never opens a menu or changes navigation. */
@@ -21,7 +21,7 @@ export class QuestTracker {
  readonly actionLabel:Label;
  private opened:boolean;
  private readonly lines:Record<QuestTrackerLine,Label>;
- private readonly values:Record<QuestTrackerLine,string>={area:'',objective:'','quest-route':'','quest-distance':''};
+ private readonly values:Record<QuestTrackerLine,string>={area:'',objective:'','quest-route':'','quest-distance':'','quest-progress':''};
  private readonly divider:Graphics;
  private role:FeedbackRole|null=null;
  private readonly buttonFeedback:ButtonFeedback[]=[];
@@ -39,7 +39,7 @@ export class QuestTracker {
    applyRpgFont(label);label.enableWrapText=false;label.overflow=Label.Overflow.CLAMP;
    hud.labels.set(key,label);return label;
   };
-  this.lines={area:line('area'),objective:line('objective'),'quest-route':line('quest-route'),'quest-distance':line('quest-distance')};
+  this.lines={area:line('area'),objective:line('objective'),'quest-route':line('quest-route'),'quest-distance':line('quest-distance'),'quest-progress':line('quest-progress')};
   // Digits, m/km and the blocked caption form a small, fixed-size alphabet.
   this.lines['quest-distance'].cacheMode=Label.CacheMode.CHAR;
   this.divider=hud.node('QuestActionDivider',this.root,0,0,1,24*layout.scale).addComponent(CompactGraphics);
@@ -66,8 +66,8 @@ export class QuestTracker {
   value=value.replace(/\n/g,' · ');
   if(this.values[key]===value)return;
   this.values[key]=value;
-  // Only the distance can change the collapsed title's available width.
-  if(key==='quest-distance')this.positionContent();else this.fitLine(key);
+  // Reserve a separate column so ellipsizing a long name never hides its goal.
+  if(key==='quest-distance'||key==='quest-progress')this.positionContent();else this.fitLine(key);
  }
 
  setFeedback(role:FeedbackRole):void {
@@ -76,6 +76,7 @@ export class QuestTracker {
   F.tint(this.lines.area,idle?'map.task':role);
   F.tint(this.lines.objective,idle?'text.normal':role);
   for(const key of ['quest-route','quest-distance']as const)F.tint(this.lines[key],idle?'text.secondary':role);
+  F.tint(this.lines['quest-progress'],idle?'text.normal':role);
   F.tint(this.actionLabel,role);
  }
 
@@ -97,8 +98,10 @@ export class QuestTracker {
    transform.setAnchorPoint(.5,Math.max(.5,1-height/(2*transform.height)));
   }
   this.actionLabel.node.getComponent(UITransform)!.setContentSize(column-12*scale,22*scale);
-  const distanceWidth=this.values['quest-distance']?Math.max(22*scale,Math.min(32*scale,this.values['quest-distance'].length*9.5*.56*scale)):0;
-  const titleWidth=this.opened||!distanceWidth?textWidth:textWidth-distanceWidth-4*scale;
+  const progress=this.values['quest-progress'],statusKey=progress?'quest-progress':'quest-distance';
+  const statusSize=progress?11:9.5,status=this.values[statusKey];
+  const statusWidth=status?Array.from(status).reduce((width,c)=>width+(c.charCodeAt(0)<128?.56:1),0)*statusSize*scale+2*scale:0;
+  const titleWidth=statusWidth&&(!this.opened||progress)?textWidth-statusWidth-4*scale:textWidth;
   const place=(key:QuestTrackerLine,x:number,y:number,w:number,size:number,h:number,active=true)=>{
    const label=this.lines[key];label.fontSize=size*scale;label.lineHeight=label.fontSize*1.2;
    label.node.setPosition(x,y*scale);label.node.getComponent(UITransform)!.setContentSize(w,h*scale);label.node.active=active;
@@ -107,7 +110,8 @@ export class QuestTracker {
   place('area',0,15.33,textWidth,9.5,13,this.opened);
   place('objective',-(textWidth-titleWidth)/2,0,titleWidth,this.opened?12.5:11,18);
   place('quest-route',0,-15.33,textWidth,9.5,13,this.opened);
-  place('quest-distance',textWidth/2-distanceWidth/2,0,distanceWidth,9.5,14,!this.opened&&!!distanceWidth);
+  place('quest-distance',textWidth/2-statusWidth/2,0,statusWidth,9.5,14,!this.opened&&!progress&&!!statusWidth);
+  place('quest-progress',textWidth/2-statusWidth/2,0,statusWidth,11,18,!!progress);
   const g=this.divider,dividerHeight=24*scale;
   g.node.setPosition(width/2-column,0);g.clear();g.strokeColor=UI_FRAME_GOLD.metal;g.lineWidth=.6*scale;
   g.moveTo(0,-dividerHeight/2);g.lineTo(0,dividerHeight/2);g.stroke();

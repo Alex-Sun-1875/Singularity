@@ -1,0 +1,173 @@
+CCEffect %{
+  techniques:
+  - name: transparent
+    passes:
+    - vert: fire-impact-volume-vs:vert
+      frag: fire-impact-volume-fs:frag
+      rasterizerState: { cullMode: none }
+      depthStencilState:
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: one
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: one
+          blendDstAlpha: one_minus_src_alpha
+      properties:
+        mainTexture: { value: white }
+        rollTexture: { value: white }
+        wispTexture: { value: white }
+        contactTexture: { value: white }
+        noiseTexture: { value: grey }
+        flowState: { value: [0, 1, 0, 0] }
+}%
+
+CCProgram fire-impact-volume-vs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+  #include <builtin/uniforms/cc-local>
+  in vec3 a_position;
+  in vec2 a_texCoord;
+  in vec4 a_color;
+  out vec2 v_uv;
+  out vec4 v_surface;
+  vec4 vert () {
+    v_uv = a_texCoord;
+    v_surface = a_color;
+    return cc_matViewProj * cc_matWorld * vec4(a_position, 1.0);
+  }
+}%
+
+CCProgram fire-impact-volume-fs %{
+  precision highp float;
+  in vec2 v_uv;
+  in vec4 v_surface;
+  uniform sampler2D mainTexture;
+  uniform sampler2D rollTexture;
+  uniform sampler2D wispTexture;
+  uniform sampler2D contactTexture;
+  uniform sampler2D noiseTexture;
+  uniform FireImpactParams { vec4 flowState; };
+
+  vec4 premultiply(vec4 c) { return vec4(c.rgb * c.a, c.a); }
+  vec2 atlasUV(float index, vec2 uv) {
+    return (vec2(mod(index, 4.0), floor(index / 4.0)) + clamp(uv, vec2(0.003), vec2(0.997))) / 4.0;
+  }
+  vec4 fieldFrame(vec2 uv) {
+    float clock = flowState.x * 18.0;
+    float frame = mod(floor(clock), 16.0), next = mod(frame + 1.0, 16.0);
+    vec4 a = texture(mainTexture, atlasUV(frame, vec2(fract(uv.x), uv.y)));
+    vec4 b = texture(mainTexture, atlasUV(next, vec2(fract(uv.x), uv.y)));
+    return mix(premultiply(a), premultiply(b), fract(clock));
+  }
+  vec4 radialFire(vec2 uv, float phase) {
+    vec2 p = uv - 0.5;
+    vec2 direction = p / max(length(p), 0.025);
+    vec2 noise = texture(noiseTexture, uv * 2.8 + vec2(flowState.x * 0.047, -flowState.x * 0.061)).rg - 0.5;
+    // Lay one irregular field over disk XY, transporting it outward without
+    // wrapping the image around a polar ring or introducing a spiral seam.
+    vec2 from = uv - direction * phase * 0.12 + noise * 0.014;
+    return fieldFrame(vec2(from.x * 2.0, from.y));
+  }
+  vec4 curlingFire(vec2 uv, float phase) {
+    // Geometry V follows the centre-to-tip curve, while its U crosses the
+    // ribbon. Sample only the clean lance's flowing body, excluding its tip.
+    float along = clamp(1.0 - uv.y / 0.9375, 0.0, 1.0);
+    vec2 from = vec2(mix(0.03, 0.86, along), uv.x);
+    float clock = flowState.x * 18.0 + v_surface.b * 16.0;
+    float frame = mod(floor(clock), 16.0), next = mod(frame + 1.0, 16.0);
+    vec4 a = texture(wispTexture, atlasUV(frame, from));
+    vec4 b = texture(wispTexture, atlasUV(next, from));
+    return mix(premultiply(a), premultiply(b), fract(clock));
+  }
+  vec4 volumeFire(vec2 uv, float phase) {
+    vec2 n = texture(noiseTexture, vec2(uv.x * 1.3 - flowState.x * 0.09, uv.y * 1.8 - flowState.x * 0.16) + v_surface.b).rg - 0.5;
+    // U crosses each fire patch; V follows its ground root to the rolling tip.
+    // Keep the authored uneven flame crest instead of painting fire sideways
+    // across a smooth cap. Combustion rises while the shared root stays put.
+    float mobile = 1.0 - smoothstep(0.80, 0.9375, uv.y);
+    float transport = phase * 0.22 * mobile;
+    vec2 from = vec2(fract(uv.x + n.x * 0.025 * mobile), clamp(uv.y + transport + n.y * 0.012 * mobile, 0.002, 0.998));
+    return premultiply(texture(rollTexture, from));
+  }
+  vec4 frag () {
+    if (v_surface.g > 4.5) {
+      vec2 n = texture(noiseTexture, v_uv * 2.1 + vec2(-flowState.x * 0.06, flowState.x * 0.04)).rg - 0.5;
+      vec2 p = v_uv - 0.5;
+      vec2 turned = vec2(p.x * 0.309017 - p.y * 0.951057, p.x * 0.951057 + p.y * 0.309017) + 0.5;
+      vec2 uv = vec2(fract(v_uv.x * 1.7 - flowState.x * 0.13 + n.x * 0.09), 0.35 + v_uv.y * 0.48 + n.y * 0.07);
+      vec2 secondUV = vec2(fract(turned.x * 1.6 + flowState.x * 0.09 + n.y * 0.07), clamp(0.35 + turned.y * 0.48 + n.x * 0.06, 0.05, 0.96));
+      vec4 body = mix(texture(rollTexture, uv), texture(rollTexture, secondUV), 0.45);
+      float radius = length((v_uv - 0.5) * 2.0);
+      float fade = v_surface.r * (1.0 - smoothstep(0.66, 0.98, radius + n.x * 0.08));
+      if (body.a * fade < 0.003) discard;
+      return vec4(body.rgb * body.a * 1.27 * fade, body.a * 0.94 * fade);
+    }
+    if (v_surface.g > 3.5) {
+      float clock = flowState.x * 1.10 + v_surface.b;
+      float phase = fract(clock), next = fract(clock + 0.5);
+      float blend = sin(phase * 3.14159265); blend *= blend;
+      vec4 flame = mix(volumeFire(v_uv, next), volumeFire(v_uv, phase), blend);
+      // Fade in fragment space, including the base: a single edge polygon
+      // must never expose the rectangular carrier beneath a rolling flame.
+      float across = v_uv.x - v_surface.b * 0.55;
+      float rise = clamp(1.0 - v_uv.y / 0.9375, 0.0, 1.0);
+      float fringe = texture(noiseTexture, vec2(across * 4.1 - flowState.x * 0.08, rise * 2.5 + v_surface.b)).r - 0.5;
+      float left = 0.025 + 0.025 * sin(rise * 7.0 + v_surface.b * 6.28318);
+      float right = 0.975 + 0.020 * sin(rise * 6.0 + v_surface.b * 5.0);
+      float sides = smoothstep(left, left + 0.22, across) * (1.0 - smoothstep(right - 0.22, right, across));
+      float root = smoothstep(0.015, 0.18, rise + fringe * 0.07);
+      float boundary = 1.0 - smoothstep(0.72, 0.995, v_surface.a);
+      float fade = v_surface.r * sides * root * boundary;
+      if (flame.a * fade < 0.003) discard;
+      float hot = smoothstep(0.45, 0.78, flame.g / max(flame.a, 0.0001));
+      return vec4(flame.rgb * (1.28 + 0.15 * hot) * fade, flame.a * 0.94 * fade);
+    }
+    // The independently extracted approved contact fan owns its small star
+    // nucleus and outward curling silhouette. Keep its exact UV root still;
+    // only the far filaments carry a small forward travelling displacement.
+    if (v_surface.g > 1.5 && v_surface.g < 2.5) {
+      vec2 anchor = vec2(0.138990646117, 0.369657187871);
+      float tip = smoothstep(0.09, 0.42, distance(v_uv, anchor));
+      vec2 drift = vec2(cos(v_uv.x * 8.0 - flowState.x * 9.0) * 0.004, sin(v_uv.x * 8.0 - flowState.x * 11.0) * 0.012) * tip;
+      vec4 fan = texture(contactTexture, clamp(v_uv + drift, vec2(0.002), vec2(0.998)));
+      float fade = v_surface.r;
+      if (fan.a * fade < 0.002) discard;
+      return vec4(fan.rgb * fan.a * 1.18 * fade, fan.a * 0.94 * fade);
+    }
+    if (v_surface.g > 2.5) {
+      vec2 anchor = vec2(0.138990646117, 0.369657187871);
+      float tip = smoothstep(0.09, 0.42, distance(v_uv, anchor));
+      vec2 drift = vec2(cos(v_uv.x * 8.0 - flowState.x * 7.0) * 0.004, sin(v_uv.x * 8.0 - flowState.x * 9.0) * 0.010) * tip;
+      vec4 core = texture(contactTexture, clamp(v_uv + drift, vec2(0.002), vec2(0.998)));
+      float fade = v_surface.r;
+      if (core.a * fade < 0.002) discard;
+      return vec4(core.rgb * core.a * 1.10 * fade, core.a * 0.90 * fade);
+    }
+    float clock = flowState.x * (v_surface.g > 0.5 ? 0.57 : 0.26) + v_surface.b;
+    float a = fract(clock), b = fract(clock + 0.5);
+    float blend = sin(a * 3.14159265); blend *= blend;
+    vec4 first;
+    vec4 second;
+    if (v_surface.g > 0.5) {
+      first = curlingFire(v_uv, a);
+      second = first;
+    } else {
+      first = radialFire(v_uv, a);
+      second = radialFire(v_uv, b);
+    }
+    vec4 result = mix(second, first, blend);
+    float fade = v_surface.r;
+    if (v_surface.g < 0.5) {
+      float r = length((v_uv - 0.5) * 2.0);
+      fade *= 1.0 - smoothstep(0.82, 1.0, r);
+      fade *= mix(0.55, 1.0, smoothstep(0.12, 0.70, result.a));
+    }
+    if (result.a * fade < 0.002) discard;
+    // The approved display-colour matte stays orange-gold. Premultiplied
+    // source-over keeps terrain visible and never adds a white electric core.
+    return vec4(result.rgb * 1.10 * fade, result.a * 0.90 * fade);
+  }
+}%

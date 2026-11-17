@@ -1,0 +1,51 @@
+{
+  "revision": "release-only-v12",
+  "implementation": "integrated-and-web-verified",
+  "typeCheck": "passed",
+  "existingRulesTests": {
+    "passed": 181,
+    "failed": 0
+  },
+  "testWebExport": "passed",
+  "actualWeb": {
+    "stages": 11,
+    "passed": 11,
+    "consoleWarningsOrErrors": 0,
+    "pageErrors": 0,
+    "networkFailures": 0,
+    "httpErrors": 0
+  },
+  "realInputScope": "One real J per six controlled contacts: four families, plus WAR/BOW soft and metal. Only one release sound per action, zero contact or generic combat sounds. Empty swing and bow aim/cancel also checked.",
+  "diagnosticScope": "Injected feedback events verify silent hurt, absorption, armor, break, interrupt, stagger, counter and elemental contacts while visual feedback remains. Not normal progression or combat-rule acceptance.",
+  "previousAttempts": [
+    {
+      "file": "web-check-first-attempt.json",
+      "result": "All 11 stages passed; one unrelated panel-art request hit browser ERR_NO_BUFFER_SPACE."
+    },
+    {
+      "file": "web-check-second-attempt.json",
+      "result": "10/11 stages; THU release played correctly but target evaded. Corrected the reused fixture to check the real staff-projectile roll as well as the action roll; no game rule was changed."
+    }
+  ],
+  "assetMapping": {
+    "combatMappingsVerified": 12,
+    "contactClips": 0,
+    "releaseClips": 12,
+    "bytePreservedSwings": 3,
+    "combatNativeBytes": 302172,
+    "oldSourceUuidsExcluded": 225,
+    "musicTracksVerified": 3,
+    "uniqueNativeCopyPerCombatClip": true
+  },
+  "volumes": {
+    "WAR": 0.62,
+    "BOW": 0.64,
+    "FIR": 0.4,
+    "THU": 0.4
+  },
+  "maximumVoices": 1,
+  "artisticAcceptance": "Pending user listening of release-only balance",
+  "targetDevice": "TapTap Android speaker listening and actual OS interruption recovery pending",
+  "delivery": "No version bump, TapTap ZIP, upload or publication",
+  "preview": "http://127.0.0.1:7476/"
+}

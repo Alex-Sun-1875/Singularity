@@ -1,0 +1,42 @@
+{
+  "reviewedAtUtc": "2026-11-17T08:28:37.078667+00:00",
+  "kind": "Root visual inspection of actual Cocos native frames, separate from calculated asset preview",
+  "compiledSha256": "068d3bf3bc8a19c26bc46ce6c0a5a895a8f9f1add0876c5e926372d7b2d2efbf",
+  "images": [
+    {
+      "path": "source-art/skills/meteor-flame-colour-v36/final-empty-r1/early/FIR_02-seal-preview.jpg",
+      "sha256": "1f7afdd445ba053976c2c5eaa4b1d2f6d283c0ea94f0203d9ab2a7c480298a2b"
+    },
+    {
+      "path": "source-art/skills/meteor-flame-colour-v36/final-empty-r1/early/FIR_02-seal-held-0650ms.jpg",
+      "sha256": "3a3f44a529a2a7b2112e072e53be17740439d6cec659fc9f95a91ec9ef3b1425"
+    },
+    {
+      "path": "source-art/skills/meteor-flame-colour-v36/final-empty-r1/early/FIR_02-seal-held-2800ms.jpg",
+      "sha256": "08d28fcc006614504c1953bf7863bb756e087b86855b1d2da560903f1a819e62"
+    },
+    {
+      "path": "source-art/skills/meteor-flame-colour-v36/final-empty-r1/early/FIR_02-seal-held-3500ms.jpg",
+      "sha256": "bf5d29d46385076d1a24ee3947920cb830c8e1efc24cb8cda099bee5bb67eda8"
+    },
+    {
+      "path": "source-art/skills/meteor-flame-colour-v36/final-empty-r1/media/sigil-flame-v35-vs-v36-native.jpg",
+      "sha256": "156eec2fd323996c1e66bbd1021f020d0c93313c74f17d19556f50d8df59db16"
+    },
+    {
+      "path": "source-art/skills/meteor-flame-colour-v36/final-r1/early/FIR_02-seal-held-0650ms.jpg",
+      "sha256": "904268538f0f7fc72e98289b778e05397d3509b38ede230ff2cff960d53ca8ba"
+    }
+  ],
+  "findings": [
+    "Prewarning seal now uses the same orange family as the actual ground flame; the previous vermilion red halo is removed.",
+    "The actual .65s same-frame line cores, halos and central fire are visually coordinated; hot cores remain warmer/brighter without flattening the pattern to a single colour.",
+    "Actual 2.8s and 3.5s frames retain the full regular circle and engraving with local light/dark transitions; ground fire can overlap the independent seal.",
+    "Actual v35/v36 .65/2.8/3.5s before/after board confirms matching orange colour through the sequence. Normal-target .65s frame also visually inspected; same matching colour with actual actors/HUD present."
+  ],
+  "scopePreserved": "Only two textures G/B and two resource names changed; existing alpha/R, circle/UV, impact/comet, range and hold/fade timing retained. Exact records in assets/provenance.json, publish-ready.json and root-build-review.json.",
+  "verdict": "Local colour candidate approved to encode actual normal/empty native clips. This is not a claim of original concept pixel identity.",
+  "userArtAcceptance": "Pending user review",
+  "tapTapDevice": "Not run this round; display/performance acceptance pending",
+  "newImageGenerationThisRound": false
+}

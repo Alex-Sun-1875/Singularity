@@ -1,52 +1,48 @@
 import type {GameSession} from '../../../core/GameSession';
 import {Label} from 'cc';
-import {EQUIPMENT,RECIPES} from '../../equipment/data/Equipment';
+import {EQUIPMENT} from '../../equipment/data/Equipment';
+import {equipmentText as et} from '../../equipment/locales';
 import {forgingSlot} from '../data/EquipmentForging';
 import {Hud} from '../../../app/Hud';
 import {equipmentIcon} from '../../equipment/runtime/EquipmentPresentation';
-import {renderForgeWorkshop,workshopHeader,workshopStatus} from './ForgeWorkshop';
+import {renderForgeWorkshop,workshopHeader,workshopStatus,workshopConfirm} from './ForgeWorkshop';
 import {RpgPanel,type RpgFooterAction} from '../../../shared/ui/RpgPanel';
 import {UI_COLORS as C} from '../../../shared/ui/UiTheme';
 import {PreparationSkin as P} from '../../../shared/ui/PreparationSkin';
-import {PreparationControls as Controls} from '../../../shared/ui/PreparationControls';
+import {PREPARATION_DESIGN as D} from '../../../shared/ui/PreparationTheme';
+import {materialName,materialStock,materialBalance,MATERIAL_TIER_LEVELS,MATERIAL_RANK_TIERS} from '../common/CultivationRewards';
 
 /** Workshop services share the approved shell and guarded cost previews. */
 export function renderForging(hud:Hud,game:GameSession,menu:string):boolean {
- if(menu!=='craft'&&!menu.startsWith('craft-preview:')&&menu!=='forge'&&!menu.startsWith('forge-'))return false;
- if(menu==='forge'||/^forge-(item|result|pool):/.test(menu)){renderForgeWorkshop(hud,game,menu);return true;}
- const s=game.state,p=s.player,access=game.forgingAvailability(),parts=menu.split(':'),item=parts[1],d=EQUIPMENT[item],balance=`金币 ${p.gold} · 废铁 ${p.iron} · 符纹 ${p.runes} · 锻造芯 ${p.cores}`,footer=[{label:'装备养成',action:'forge'},{label:'锻造配方',action:'craft'},{back:true,label:'返回背包',action:'inventory'}];
+ if(menu!=='forge'&&!menu.startsWith('forge-'))return false;
+ if(menu==='forge'||/^forge-(item|result|pool|cost):/.test(menu)){renderForgeWorkshop(hud,game,menu);return true;}
+ const s=game.state,p=s.player,parts=menu.split(':'),item=parts[1],d=EQUIPMENT[item],balance=`金币 ${p.gold} · 废铁 ${p.iron} · 符纹 ${p.runes} · 锻造芯 ${p.cores}`,footer=[{label:'装备培养',action:'forge'},{back:true,label:'返回背包',action:'inventory'}];
  const show=(title:string,subtitle:string,rows:Parameters<Hud['showList']>[2],buttons:RpgFooterAction[]=footer)=>{
-  const ui=new RpgPanel(hud,game,'forge','ForgeServices',true),u=ui.scale,craft=menu.startsWith('craft'),top=ui.bodyTop-ui.hit-ui.gap,h=top-ui.bodyBottom;
-  const intro=ui.surface(ui.panel,ui.x(146),(top+ui.bodyBottom)/2,276*u,h,C.background),body=ui.surface(ui.panel,ui.x(564),(top+ui.bodyBottom)/2,544*u,h,C.background);intro.name='ForgeServiceSummary';body.name='ForgeServiceRows';
-  ui.text(intro,title,0,h/2-18*u,250*u,32*u,C.ink,18*u);P.rule(ui,intro,0,h/2-38*u,246);const summary=ui.text(intro,subtitle,0,-18*u,248*u,h-62*u,C.muted,13*u);summary.verticalAlign=Label.VerticalAlign.TOP;
-  const heights=rows.map(r=>Math.max(ui.hit,(28+Math.ceil((r.detail?.length??0)/34)*18)*u)),content=ui.scroll(body,0,0,524*u,h,heights.reduce((n,r)=>n+r+ui.gap,0));let y=0;
-  rows.forEach((row,i)=>{const height=heights[i],node=ui.button(content,'',0,y-height/2,516*u,row.action,!row.disabled,false,height,undefined,'catalog');Controls.rowBackground(ui,node,516,height/u-3);const title=ui.text(node,row.label,0,height/2-14*u,486*u,24*u,row.disabled?C.gold:C.ink,15*u);title.horizontalAlign=Label.HorizontalAlign.LEFT;if(row.detail){const detail=ui.text(node,row.detail,0,-12*u,486*u,Math.max(22*u,height-28*u),C.muted,12.5*u);detail.verticalAlign=Label.VerticalAlign.TOP;}y-=height+ui.gap;});
-  ui.footer(workshopStatus(game),buttons);workshopHeader(ui,item||s.equipment.weapon,craft?'craft':'transfer');
+  const ui=new RpgPanel(hud,game,'forge','ForgeServices',true),u=ui.scale,top=ui.bodyTop-ui.hit-ui.gap,h=top-ui.bodyBottom;
+  const body=ui.surface(ui.panel,ui.x(422),(top+ui.bodyBottom)/2,828*u,h,C.background);body.name='ForgeServiceRows';
+  const width=(828-2*D.contentInsets.text)*u,summaryHeight=subtitle.split('\n').reduce((n,line)=>n+Math.max(1,Math.ceil(line.length/55)),0)*19*u,heights=rows.map(r=>Math.max(ui.hit,(30+(r.detail??'').split('\n').reduce((n,line)=>n+Math.max(1,Math.ceil(line.length/55)),0)*19)*u)),introHeight=58*u+summaryHeight,content=ui.scroll(body,0,0,804*u,h,introHeight+heights.reduce((n,r)=>n+r+ui.gap,0));
+  ui.text(content,title,0,-18*u,width,32*u,C.ink,18*u);P.rule(ui,content,0,-36*u,804-2*D.contentInsets.rule);const summary=ui.text(content,subtitle,0,-(48*u+summaryHeight/2),width,summaryHeight,C.muted,13*u);summary.verticalAlign=Label.VerticalAlign.TOP;let y=-introHeight;
+  rows.forEach((row,i)=>{const height=heights[i],node=ui.button(content,'',0,y-height/2,796*u,row.action,!row.disabled,false,height,undefined,'catalog');ui.feedback(node,796*u,height);const name=ui.text(node,row.label+(row.disabled?'':' ›'),0,height/2-15*u,width,26*u,row.disabled?C.gold:C.ink,15*u);name.horizontalAlign=Label.HorizontalAlign.LEFT;if(row.detail){const detail=ui.text(node,row.detail,0,-13*u,width,Math.max(22*u,height-30*u),C.muted,12.5*u);detail.verticalAlign=Label.VerticalAlign.TOP;}P.rule(ui,content,0,y-height-3*u,804-2*D.contentInsets.rule);y-=height+ui.gap;});
+  ui.footer(workshopStatus(game),buttons);buttons.filter(b=>b.primary).forEach(b=>workshopConfirm(ui,b.action,b.enabled!==false));workshopHeader(ui,item||s.equipment.weapon,menu==='forge-materials'?'enhance':'transfer');
  };
- if(menu==='craft'){
-  const recipes=s.recipes.filter(id=>RECIPES[id]&&EQUIPMENT[RECIPES[id].item]);
-  show('洛恩的锻造手艺',`${balance}\n${access.available?'首件教学免金币工费；图纸与材料仍需备齐。':access.reason}`,recipes.length?recipes.map(id=>{const q=game.forging.craft(id),item=EQUIPMENT[q.item!];return {label:item.name,detail:`${s.inventory[item.id]?'已经拥有':q.teaching?'教学工费 0 金币':`工费 ${q.gold} 金币`} · 铁 ${q.iron} / 符纹 ${q.runes} / 芯 ${q.cores}`,action:`craft-preview:${id}`,icon:equipmentIcon(item)};}):[{label:'尚未学习锻造图纸',detail:'任务与探索可以获得图纸，学会后永久保留。',action:'forge-info',disabled:true}]);return true;
- }
- if(menu.startsWith('craft-preview:')){
-  const q=game.forging.craft(item),result=EQUIPMENT[q.item!];if(!result){show('锻造图纸','这张图纸暂不可用。',[]);return true;}
-  show('锻造 · '+result.name,`${balance}\n${q.allowed?'确认后一次扣除费用并获得装备。':q.reason}`,[
-   {label:'成品与强化极限',detail:`${result.quality} · 装备极限＋${result.maxEnhance} · 每旅程唯一`,action:'forge-info',disabled:true,icon:equipmentIcon(result)},
-   {label:q.teaching?'确认锻造 · 免工费':'确认锻造',detail:`金币 ${q.gold} · 铁 ${q.iron} · 符纹 ${q.runes} · 锻造芯 ${q.cores}`,action:`craft-submit:${item}:${q.token}`,disabled:!q.allowed},
-   {label:'查看装备效果',detail:result.description,action:'forge-info',disabled:true},
-  ]);return true;
+ if(menu==='forge-materials'){
+  const rows=[1,2,3,4,5].map(tier=>{const q=game.cultivation.synthesis(tier),uses=MATERIAL_RANK_TIERS.flatMap((value,i)=>value===tier?['＋'+(i+1)]:[]).join('／');return {label:`${materialName(tier)} · 拥有 ${materialStock(s,tier)}`,detail:`用于强化 ${uses}\n`+(tier===5?'最高阶强化材料':`Lv${MATERIAL_TIER_LEVELS[tier]}合成下阶 · 3 → 1 · ${q.gold}金币${q.allowed?'':'\n'+q.reason}`),action:tier===5?'forge-info':`forge-stone-synthesize:${tier}:${q.token}`,disabled:tier===5||!q.allowed};});
+  rows.push({label:et('dismantle.title'),detail:et('dismantle.source'),action:'dismantle:'+s.equipment.weapon,disabled:false});
+  rows.push({label:'强化石来源',detail:'真实击杀后自动收集：普通怪约3杀1石，精英每杀1石，Boss每杀3石。任务完成也有培养奖励。',action:'forge-info',disabled:true});
+  show('分级强化材料',`强化石 ${materialBalance(s)}\n每次强化消耗对应阶材料。\n3枚低阶石合成1枚高阶石，合成随角色等级开放。`,rows,[{back:true,label:'返回强化',action:'forge'},{label:et('dismantle.action'),action:'dismantle:'+s.equipment.weapon},{label:'宝石材料',action:`gem-stock:${s.equipment.weapon}`}]);return true;
  }
  if(!d||!s.inventory[item]){show('装备养成','尚未拥有这件装备。',[]);return true;}
  if(menu.startsWith('forge-targets:')){
   const ids=Object.keys(s.inventory).filter(id=>id!==item&&s.inventory[id]>0&&EQUIPMENT[id]&&forgingSlot(d)===forgingSlot(EQUIPMENT[id]));
-  show('选择传承目标',`来源：${game.itemView(item).name}\n${ids.length?'原装备与独有特效保留；强化经验转移，不复制。':'尚无其他同部位装备，可以先继续探索。'}`,ids.map(id=>{const q=game.forging.transfer(item,id);return {label:EQUIPMENT[id].name,detail:`传承后＋${q.after} · 费用 ${q.gold} 金币${q.reserve?` · 保留经验 ${q.reserve}`:''}`,action:`forge-transfer:${item}:${id}`,icon:equipmentIcon(EQUIPMENT[id])};}),[{back:true,label:'返回来源装备',action:`forge-item:${item}`},{label:'装备列表',action:'forge'}]);return true;
+  show('选择传承目标',`来源：${game.itemView(item).name}\n${ids.length?'传给未培养的同部位装备，强化等级不变；原装备与特效保留。':'尚无其他同部位装备，可以先继续探索。'}`,ids.map(id=>{const q=game.forging.transfer(item,id);return {label:EQUIPMENT[id].name,detail:q.allowed?`传承后＋${q.after} · 费用 ${q.gold} 金币`:q.reason,action:`forge-transfer:${item}:${id}`,icon:equipmentIcon(EQUIPMENT[id]),disabled:!q.allowed};}),[{back:true,label:'返回来源装备',action:`forge-item:${item}`},{label:'装备列表',action:'forge'}]);return true;
  }
  if(menu.startsWith('forge-transfer:')){
   const q=game.forging.transfer(item,parts[2]),target=EQUIPMENT[q.to];
-  show('确认强化传承',`${balance}\n${q.allowed?'转出后来源装备的强化经验清零，装备与原生特效保留。':q.reason}`,[
-   {label:'来源 · '+d.name,detail:`＋${q.source?.rank??0} → ＋0 · 转移 ${q.experience} 经验`,action:'forge-info',disabled:true,icon:equipmentIcon(d)},
-   {label:'目标 · '+(target?.name??'请选择装备'),detail:`＋${q.target?.rank??0} → ＋${q.after} · 未生效经验 ${q.reserve}`,action:'forge-info',disabled:true,icon:target?equipmentIcon(target):undefined},
-   {label:`确认传承 · ${q.gold}金币`,detail:'保留超额经验；原生特效不转移。',action:`forge-inherit:${item}:${q.to}:${q.token}`,disabled:!q.allowed},
-  ],[{label:'重新选择目标',action:`forge-targets:${item}`},{label:'取消传承',action:`forge-item:${item}`}]);return true;
+  show('确认强化传承',`${balance}\n${q.allowed?'来源强化等级归零，目标获得同等强化等级；装备与原生特效保留。':q.reason}`,[
+   {label:'来源 · '+d.name,detail:`＋${q.source?.rank??0} → ＋0 · 保留装备与随机记录`,action:'forge-info',disabled:true,icon:equipmentIcon(d)},
+   {label:'目标 · '+(target?.name??'请选择装备'),detail:`＋${q.target?.rank??0} → ＋${q.after} · 按目标装备生成既定词条`,action:'forge-info',disabled:true,icon:target?equipmentIcon(target):undefined},
+   {label:'传承条件',detail:'目标须未培养且上限足够；强化不叠加。',action:'forge-info',disabled:true},
+  ],[{back:true,label:'取消传承',action:`forge-item:${item}`},{label:'重新选择目标',action:`forge-targets:${item}`},{label:`确认传承 · ${q.gold}金币`,action:`forge-inherit:${item}:${q.to}:${q.token}`,enabled:q.allowed,primary:true}]);return true;
  }
  return false;
 }

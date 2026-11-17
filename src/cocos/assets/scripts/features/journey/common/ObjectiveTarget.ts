@@ -6,7 +6,7 @@ import {JOURNEY_TASKS} from '../data/ChapterJourney';
 import type {JourneyGuidance} from './JourneyGuide';
 import {journeyText as text} from '../locales';
 
-export interface ObjectiveTarget {id:string;point:Point;name:string;action:string;distance:number;type:JourneyGuidance['targetType'];blocked:boolean;kind:JourneyGuidance['kind'];level?:number}
+export interface ObjectiveTarget {id:string;point:Point;name:string;action:string;distance:number;type:JourneyGuidance['targetType'];blocked:boolean;blockage?:JourneyGuidance['blockage'];kind:JourneyGuidance['kind'];level?:number}
 /** Resolve the selected, still-current objective without navigation queries or rule changes. */
 export function objectiveTarget(game:GameSession,guide:JourneyGuidance|null):ObjectiveTarget|null {
  const s=game.state;if(!guide||s.status==='dead'||s.player.hp<=0)return null;
@@ -24,5 +24,5 @@ export function objectiveTarget(game:GameSession,guide:JourneyGuidance|null):Obj
   const object=AREAS[s.area]?.objects.find(o=>o.id===guide.targetId);if(!object||!game.interactionVisible(object))return null;point=object;name=object.label;action=object.action==='journey_task'?text('action.investigate'):text('action.interact');
  }
  const metres=guide.targetType==='enemy'||guide.blocked?Math.hypot(point.x-s.player.x,point.z-s.player.z):guide.distance;
- return {id:guide.targetId??`objective:${s.area}:${guide.kind}`,point,name,action,distance:metres,type:guide.targetType,blocked:guide.blocked,kind:guide.kind,level};
+ return {id:guide.targetId??`objective:${s.area}:${guide.kind}`,point,name,action,distance:metres,type:guide.targetType,blocked:guide.blocked,blockage:guide.blockage,kind:guide.kind,level};
 }

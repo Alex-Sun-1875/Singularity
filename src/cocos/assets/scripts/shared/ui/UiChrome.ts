@@ -20,8 +20,8 @@ export const UI_GOLD_PANEL_RULES={
  vertical:{skin:'settings-footer-rule-v11',width:8,height:36},
 } as const;
 
-/** Logical screen insets and visible action rhythm for content-sized menus. */
-export const UI_GOLD_PANEL_CONTENT={textInset:8,introTop:8,bodyBottom:8,actionVisualGap:16} as const;
+/** Text sits inside the content padding; rules use their own panel-edge inset. */
+export const UI_GOLD_PANEL_CONTENT={textInset:16,ruleInset:12,iconGap:10,accessoryGap:8,introTop:8,bodyBottom:8,actionVisualGap:16} as const;
 
 /** Settings owns reference positions; other panels share the same rule skins. */
 export const UI_SETTINGS_REFERENCE={width:425,height:506,titleX:-3,titleY:39.5,titleSize:34,closeOffset:49,closeSize:26,tabsY:104,tabsTextY:99,tabsFirstX:92,tabsStep:124.5,tabsSize:26,tabRuleOffset:25,tabActiveXOffset:2,rowFirstY:185,rowStep:75,rowHeight:60,rowRuleFirstY:223,rowSize:26,iconX:59,iconSize:36,labelX:90,toggleWidth:96,toggleHeight:42,toggleRight:36,toggleStateSize:26,toggleTextX:15,footerY:446.25,footerFirstX:122.5,footerStep:188.5,footerSize:24,bottom:35,mobileWidth:272,crestReserve:52,

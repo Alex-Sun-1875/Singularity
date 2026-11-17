@@ -90,7 +90,9 @@ export class ThunderGroundAura {
   const seed=keySeed(key),angle=phase*9+(seed%997)/997*360;
   item.root.setWorldRotation(Quat.fromEuler(this.rotation,-90,angle,0));
   const grow=.86+.14*Math.sin(Math.PI*Math.min(1,phase*1.5));
-  item.mist.node.setPosition(0,0,0);item.mist.node.setScale(radius*2*grow,radius*1.88*grow,1);
+  // Mist floats just above the residual filaments: a flat translucent patch
+  // at terrain + .045 was mostly clipped away by small ground undulations.
+  item.mist.node.setPosition(0,0,.10);item.mist.node.setScale(radius*2*grow,radius*1.88*grow,1);
   item.residual.node.setPosition(0,0,.008);item.residual.node.setScale(radius*1.88,radius*1.72,1);
   const texturePhase=(Math.floor(phase*12)+seed%4)%4;
   if(item.texturePhase!==texturePhase){item.texturePhase=texturePhase;item.residual.material.setProperty('mainTexture',ThunderGroundAura.textures[1+texturePhase]);}

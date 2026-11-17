@@ -1,0 +1,94 @@
+{
+  "scope": "Controlled rule fixtures plus actual ChapterGame map-travel method; not a natural playthrough or TapTap device claim",
+  "checked": [
+    "quest mode upgrades existing bag without physical pickup, keeps all four professions and converges without downgrades",
+    "both ring slots considered, strongest existing ring retained, no duplicate ring or swap loop",
+    "unproven and over-level equipment rejected; later level eligibility rechecked",
+    "ordinary retreat delay respected; after disengagement quest auto equips; manual takeover rejects asynchronous commit",
+    "idle also scans bag, paused automation cannot commit equipment",
+    "a renewed enemy invalidates settling and resumes combat instead of freezing for gear",
+    "forging and level-eligible gems participate through shared bonus rules; recommendation leaves state and materials unchanged",
+    "actual map travel: cross-map and same-map retain queue and destination, manual/background/auth pauses retained, failed load restores origin",
+    "ordinary exit and scene refresh preserve active task and deferred queue"
+  ],
+  "equipment": [
+    {
+      "family": "WAR",
+      "swaps": 3,
+      "weapon": "DG_A01",
+      "ring": "DG_L05",
+      "necklace": "DG_A02"
+    },
+    {
+      "family": "BOW",
+      "swaps": 3,
+      "weapon": "DG_A03",
+      "ring": "DG_L05",
+      "necklace": "DG_A02"
+    },
+    {
+      "family": "FIR",
+      "swaps": 3,
+      "weapon": "DG_A04",
+      "ring": "DG_L05",
+      "necklace": "DG_A02"
+    },
+    {
+      "family": "THU",
+      "swaps": 3,
+      "weapon": "DG_A05",
+      "ring": "DG_L05",
+      "necklace": "DG_A02"
+    }
+  ],
+  "travelResults": [
+    {
+      "scenario": "success",
+      "ok": true,
+      "mode": "quest",
+      "pause": null,
+      "area": "S04",
+      "rebuilds": 1
+    },
+    {
+      "scenario": "same-map",
+      "ok": true,
+      "mode": "quest",
+      "pause": null,
+      "area": "S01",
+      "rebuilds": 1
+    },
+    {
+      "scenario": "manual",
+      "ok": true,
+      "mode": "quest",
+      "pause": "manual",
+      "area": "S04",
+      "rebuilds": 1
+    },
+    {
+      "scenario": "background",
+      "ok": true,
+      "mode": "quest",
+      "pause": "background",
+      "area": "S04",
+      "rebuilds": 1
+    },
+    {
+      "scenario": "auth",
+      "ok": true,
+      "mode": "quest",
+      "pause": "auth",
+      "area": "S04",
+      "rebuilds": 1
+    },
+    {
+      "scenario": "failure",
+      "ok": false,
+      "mode": "quest",
+      "pause": "menu",
+      "area": "S01",
+      "rebuilds": 2
+    }
+  ]
+}

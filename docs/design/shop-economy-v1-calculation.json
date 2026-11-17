@@ -1,0 +1,553 @@
+{
+  "status": "deterministic-design-arithmetic-only-not-natural-play-validation",
+  "runtimeConsistency": "prices, capacity, gem effects and chapter policy match the implementation; future chapters remain unavailable",
+  "date": "2026-11-17",
+  "inputs": [
+    {
+      "path": "docs/design/shop-economy-v1.json",
+      "sha256": "535f48ce462e4f54f186088e1b2c4e0c4a635eb00f6ccafa1983396e4a7e6f4f"
+    },
+    {
+      "path": "tools/design/shop-economy-v1.cjs",
+      "sha256": "ef842c0a9e5f2d9e9939bca518a06520c883898ea6c23d821d78a97d6dcef5eb"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/economy/data/Economy.ts",
+      "sha256": "abc0a74de91398791d48c817b843e0ab7a08beb31461d8e8f4716f5068945252"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/equipment/data/Equipment.ts",
+      "sha256": "f9425557d4341f2bc43757f6d7c52b70e151cf75225304fe44554009d7c0e3b6"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/crafting/data/EquipmentForging.ts",
+      "sha256": "2747c91433759b897ee60d6e285dddbfcad3ad6c7f91802445b0bd6902b6a8ed"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/equipment/data/CampaignEquipmentGrowth.ts",
+      "sha256": "71bf638229485837fd785d705726cd6e38dd71ff1ddf0e59eb803c778ee0e7ca"
+    },
+    {
+      "path": "src/cocos/assets/scripts/features/gems/data/Gems.ts",
+      "sha256": "312379ea0c02222c3259a447785ccbd0d82b72ee1668b26d7eb1a1b62ac98d28"
+    }
+  ],
+  "gems": [
+    {
+      "tier": 1,
+      "level": 6,
+      "chapter": 1,
+      "price": 240,
+      "lowerTierSynthesisFee": null,
+      "baseGemCount": 1,
+      "totalSynthesisFees": 0
+    },
+    {
+      "tier": 2,
+      "level": 16,
+      "chapter": 2,
+      "price": 760,
+      "lowerTierSynthesisFee": 40,
+      "baseGemCount": 3,
+      "totalSynthesisFees": 40
+    },
+    {
+      "tier": 3,
+      "level": 32,
+      "chapter": 4,
+      "price": 2400,
+      "lowerTierSynthesisFee": 120,
+      "baseGemCount": 9,
+      "totalSynthesisFees": 240
+    },
+    {
+      "tier": 4,
+      "level": 48,
+      "chapter": 5,
+      "price": 7560,
+      "lowerTierSynthesisFee": 360,
+      "baseGemCount": 27,
+      "totalSynthesisFees": 1080
+    },
+    {
+      "tier": 5,
+      "level": 64,
+      "chapter": 7,
+      "price": 23760,
+      "lowerTierSynthesisFee": 1080,
+      "baseGemCount": 81,
+      "totalSynthesisFees": 4320
+    }
+  ],
+  "chapters": [
+    {
+      "chapter": 1,
+      "released": true,
+      "finiteGold": 1800,
+      "repeatGoldPerOrdinaryKill": 3,
+      "main": 720,
+      "boss": 180,
+      "fixedCombat": 300,
+      "exploration": 600,
+      "mandatory": 1200
+    },
+    {
+      "chapter": 2,
+      "released": true,
+      "finiteGold": 3600,
+      "repeatGoldPerOrdinaryKill": 4,
+      "main": 1440,
+      "boss": 360,
+      "fixedCombat": 600,
+      "exploration": 1200,
+      "mandatory": 2400
+    },
+    {
+      "chapter": 3,
+      "released": false,
+      "finiteGold": 5400,
+      "repeatGoldPerOrdinaryKill": 5,
+      "main": 2160,
+      "boss": 540,
+      "fixedCombat": 900,
+      "exploration": 1800,
+      "mandatory": 3600
+    },
+    {
+      "chapter": 4,
+      "released": false,
+      "finiteGold": 7800,
+      "repeatGoldPerOrdinaryKill": 6,
+      "main": 3120,
+      "boss": 780,
+      "fixedCombat": 1300,
+      "exploration": 2600,
+      "mandatory": 5200
+    },
+    {
+      "chapter": 5,
+      "released": false,
+      "finiteGold": 10800,
+      "repeatGoldPerOrdinaryKill": 8,
+      "main": 4320,
+      "boss": 1080,
+      "fixedCombat": 1800,
+      "exploration": 3600,
+      "mandatory": 7200
+    },
+    {
+      "chapter": 6,
+      "released": false,
+      "finiteGold": 14400,
+      "repeatGoldPerOrdinaryKill": 10,
+      "main": 5760,
+      "boss": 1440,
+      "fixedCombat": 2400,
+      "exploration": 4800,
+      "mandatory": 9600
+    },
+    {
+      "chapter": 7,
+      "released": false,
+      "finiteGold": 18600,
+      "repeatGoldPerOrdinaryKill": 12,
+      "main": 7440,
+      "boss": 1860,
+      "fixedCombat": 3100,
+      "exploration": 6200,
+      "mandatory": 12400
+    },
+    {
+      "chapter": 8,
+      "released": false,
+      "finiteGold": 24000,
+      "repeatGoldPerOrdinaryKill": 15,
+      "main": 9600,
+      "boss": 2400,
+      "fixedCombat": 4000,
+      "exploration": 8000,
+      "mandatory": 16000
+    }
+  ],
+  "finiteGoldTotal": 86400,
+  "mandatoryGoldTotal": 57600,
+  "earlyScenarios": [
+    {
+      "chapter": 1,
+      "route": "main",
+      "income": 1200,
+      "openingBalance": 0,
+      "availableGold": 1200,
+      "costs": {
+        "equipment": 420,
+        "forging": 156,
+        "supplies": 120,
+        "gems": 240,
+        "inlay": 5
+      },
+      "totalSpent": 941,
+      "closingBalance": 259,
+      "finalGemCounts": [
+        1,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "chapter": 2,
+      "route": "main",
+      "income": 2400,
+      "openingBalance": 259,
+      "availableGold": 2659,
+      "costs": {
+        "equipment": 560,
+        "forging": 537,
+        "supplies": 120,
+        "gems": 1000,
+        "inlay": 15,
+        "opening": 70,
+        "inheritance": 10
+      },
+      "totalSpent": 2312,
+      "closingBalance": 347,
+      "finalGemCounts": [
+        2,
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "chapter": 1,
+      "route": "exploration",
+      "income": 1800,
+      "openingBalance": 0,
+      "availableGold": 1800,
+      "costs": {
+        "equipment": 420,
+        "forging": 156,
+        "supplies": 120,
+        "gems": 720,
+        "inlay": 15
+      },
+      "totalSpent": 1431,
+      "closingBalance": 369,
+      "finalGemCounts": [
+        3,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "chapter": 2,
+      "route": "exploration",
+      "income": 3600,
+      "openingBalance": 369,
+      "availableGold": 3969,
+      "costs": {
+        "equipment": 800,
+        "forging": 537,
+        "supplies": 180,
+        "gems": 1760,
+        "inlay": 35,
+        "opening": 140,
+        "inheritance": 10
+      },
+      "totalSpent": 3462,
+      "closingBalance": 507,
+      "finalGemCounts": [
+        4,
+        2,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "endScenarios": [
+    {
+      "route": "main",
+      "income": 57600,
+      "gemCounts": [
+        12,
+        8,
+        4,
+        0,
+        0
+      ],
+      "costs": {
+        "forging": 15365,
+        "equipment": 6000,
+        "supplies": 1800,
+        "stoneSynthesis": 1200,
+        "opening": 840,
+        "inlay": 120,
+        "inheritance": 1000,
+        "gems": 18560
+      },
+      "totalSpent": 44885,
+      "closingBalance": 12715
+    },
+    {
+      "route": "exploration",
+      "income": 86400,
+      "gemCounts": [
+        0,
+        16,
+        6,
+        2,
+        0
+      ],
+      "costs": {
+        "forging": 15365,
+        "equipment": 6000,
+        "supplies": 1800,
+        "stoneSynthesis": 1200,
+        "opening": 840,
+        "inlay": 120,
+        "inheritance": 1000,
+        "gems": 41680
+      },
+      "totalSpent": 68005,
+      "closingBalance": 18395
+    },
+    {
+      "route": "optionalTopGem",
+      "income": 86400,
+      "gemCounts": [
+        0,
+        16,
+        6,
+        1,
+        1
+      ],
+      "costs": {
+        "forging": 15365,
+        "equipment": 6000,
+        "supplies": 1800,
+        "stoneSynthesis": 1200,
+        "opening": 840,
+        "inlay": 120,
+        "inheritance": 1000,
+        "gems": 57880
+      },
+      "totalSpent": 84205,
+      "closingBalance": 2195
+    }
+  ],
+  "repeatGoldSensitivity": [
+    {
+      "chapter": 1,
+      "released": true,
+      "goldPerKill": 3,
+      "cases": [
+        {
+          "killsPerMinute": 2,
+          "grossGoldPerMinute": 6,
+          "tier1Minutes": 40
+        },
+        {
+          "killsPerMinute": 4,
+          "grossGoldPerMinute": 12,
+          "tier1Minutes": 20
+        },
+        {
+          "killsPerMinute": 8,
+          "grossGoldPerMinute": 24,
+          "tier1Minutes": 10
+        }
+      ]
+    },
+    {
+      "chapter": 2,
+      "released": true,
+      "goldPerKill": 4,
+      "cases": [
+        {
+          "killsPerMinute": 2,
+          "grossGoldPerMinute": 8,
+          "tier1Minutes": 30
+        },
+        {
+          "killsPerMinute": 4,
+          "grossGoldPerMinute": 16,
+          "tier1Minutes": 15
+        },
+        {
+          "killsPerMinute": 8,
+          "grossGoldPerMinute": 32,
+          "tier1Minutes": 7.5
+        }
+      ]
+    },
+    {
+      "chapter": 3,
+      "released": false,
+      "goldPerKill": 5,
+      "cases": [
+        {
+          "killsPerMinute": 2,
+          "grossGoldPerMinute": 10,
+          "tier1Minutes": 24
+        },
+        {
+          "killsPerMinute": 4,
+          "grossGoldPerMinute": 20,
+          "tier1Minutes": 12
+        },
+        {
+          "killsPerMinute": 8,
+          "grossGoldPerMinute": 40,
+          "tier1Minutes": 6
+        }
+      ]
+    },
+    {
+      "chapter": 4,
+      "released": false,
+      "goldPerKill": 6,
+      "cases": [
+        {
+          "killsPerMinute": 2,
+          "grossGoldPerMinute": 12,
+          "tier1Minutes": 20
+        },
+        {
+          "killsPerMinute": 4,
+          "grossGoldPerMinute": 24,
+          "tier1Minutes": 10
+        },
+        {
+          "killsPerMinute": 8,
+          "grossGoldPerMinute": 48,
+          "tier1Minutes": 5
+        }
+      ]
+    },
+    {
+      "chapter": 5,
+      "released": false,
+      "goldPerKill": 8,
+      "cases": [
+        {
+          "killsPerMinute": 2,
+          "grossGoldPerMinute": 16,
+          "tier1Minutes": 15
+        },
+        {
+          "killsPerMinute": 4,
+          "grossGoldPerMinute": 32,
+          "tier1Minutes": 7.5
+        },
+        {
+          "killsPerMinute": 8,
+          "grossGoldPerMinute": 64,
+          "tier1Minutes": 3.75
+        }
+      ]
+    },
+    {
+      "chapter": 6,
+      "released": false,
+      "goldPerKill": 10,
+      "cases": [
+        {
+          "killsPerMinute": 2,
+          "grossGoldPerMinute": 20,
+          "tier1Minutes": 12
+        },
+        {
+          "killsPerMinute": 4,
+          "grossGoldPerMinute": 40,
+          "tier1Minutes": 6
+        },
+        {
+          "killsPerMinute": 8,
+          "grossGoldPerMinute": 80,
+          "tier1Minutes": 3
+        }
+      ]
+    },
+    {
+      "chapter": 7,
+      "released": false,
+      "goldPerKill": 12,
+      "cases": [
+        {
+          "killsPerMinute": 2,
+          "grossGoldPerMinute": 24,
+          "tier1Minutes": 10
+        },
+        {
+          "killsPerMinute": 4,
+          "grossGoldPerMinute": 48,
+          "tier1Minutes": 5
+        },
+        {
+          "killsPerMinute": 8,
+          "grossGoldPerMinute": 96,
+          "tier1Minutes": 2.5
+        }
+      ]
+    },
+    {
+      "chapter": 8,
+      "released": false,
+      "goldPerKill": 15,
+      "cases": [
+        {
+          "killsPerMinute": 2,
+          "grossGoldPerMinute": 30,
+          "tier1Minutes": 8
+        },
+        {
+          "killsPerMinute": 4,
+          "grossGoldPerMinute": 60,
+          "tier1Minutes": 4
+        },
+        {
+          "killsPerMinute": 8,
+          "grossGoldPerMinute": 120,
+          "tier1Minutes": 2
+        }
+      ]
+    }
+  ],
+  "wholeBodyGemOnly": [
+    {
+      "standardSockets": 16,
+      "pricesByTier": [
+        3840,
+        12160,
+        38400,
+        120960,
+        380160
+      ]
+    },
+    {
+      "standardSockets": 24,
+      "pricesByTier": [
+        5760,
+        18240,
+        57600,
+        181440,
+        570240
+      ]
+    },
+    {
+      "standardSockets": 40,
+      "pricesByTier": [
+        9600,
+        30400,
+        96000,
+        302400,
+        950400
+      ]
+    }
+  ]
+}

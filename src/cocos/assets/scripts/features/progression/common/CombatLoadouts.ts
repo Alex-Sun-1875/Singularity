@@ -11,7 +11,7 @@ export interface CombatLoadout {activeSlots:CombatSlots;ultimate:string|null;}
 export const COMBAT_LOADOUTS:Record<CombatFamily,{name:string;weapon:string;activeSlots:CombatSlots;ultimate:string}>={
  WAR:{name:'破军战技',weapon:'W01',activeSlots:['WAR_01','WAR_02','WAR_03','WAR_04'],ultimate:'WAR_05'},
  BOW:{name:'逐风弓术',weapon:'W07',activeSlots:['BOW_01','BOW_02','BOW_07','BOW_06'],ultimate:'BOW_05'},
- FIR:{name:'烈焰秘术',weapon:'W11',activeSlots:['FIR_01','FIR_02','FIR_03','FIR_04'],ultimate:'FIR_05'},
+ FIR:{name:'烈焰秘术',weapon:'W11',activeSlots:['FIR_01','FIR_04','FIR_03','FIR_05'],ultimate:'FIR_02'},
  THU:{name:'雷霆秘术',weapon:'W11',activeSlots:['THU_01','THU_02','THU_06','THU_04'],ultimate:'THU_05'},
 };
 /** V4 defaults belong to the frozen restored catalog, before roles became fixed. */
@@ -75,9 +75,10 @@ export function validateCombatLoadouts(combat:CombatState,legacy=combat.version=
   if(Object.keys(combat.loadouts).length!==families.length||families.some(family=>{
    const saved=combat.loadouts![family],kit=COMBAT_LOADOUTS[family];return !saved||Object.keys(saved).length!==2||!Array.isArray(saved.activeSlots)||saved.activeSlots.length!==4||saved.activeSlots.some((id,i)=>id!==kit.activeSlots[i])||saved.ultimate!==kit.ultimate;
   }))return false;
+  const unlocked=(id:string)=>!!catalog[id]&&(typeof progress==='number'?progress>=(catalog[id].unlockLevel):!!progress&&(progress.level>=catalog[id].unlockLevel||progress.secondChapter));
   const kit=COMBAT_LOADOUTS[combat.family],expected=progress===undefined?undefined:{
-   activeSlots:kit.activeSlots.map(id=>id&&skillUnlocked(id,progress)?id:null),
-   ultimate:skillUnlocked(kit.ultimate,progress)?kit.ultimate:null,passiveSlots:fixedPassiveSlots(combat.family,progress),
+   activeSlots:kit.activeSlots.map(id=>id&&unlocked(id)?id:null),
+   ultimate:unlocked(kit.ultimate)?kit.ultimate:null,passiveSlots:fixedPassiveSlots(combat.family,progress),
   };
   if(combat.activeSlots.some((id,i)=>expected?id!==expected.activeSlots[i]:id!==null&&id!==kit.activeSlots[i])||expected&&combat.ultimate!==expected.ultimate||combat.ultimate!==null&&combat.ultimate!==kit.ultimate||combat.passiveSlots.some((id,i)=>expected?id!==expected.passiveSlots[i]:id!==null&&id!==`${combat.family}_P${i+1}`))return false;
  }

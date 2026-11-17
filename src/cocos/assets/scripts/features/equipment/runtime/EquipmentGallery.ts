@@ -9,6 +9,7 @@ import type {Hud} from '../../../app/Hud';
 import {UiSkin} from '../../../shared/ui/UiSkin';
 import {GoldPanelHeader} from '../../../shared/ui/GoldPanelHeader';
 import {UI_COLORS as C} from '../../../shared/ui/UiTheme';
+import {ButtonSurface} from '../../../shared/ui/ButtonSurface';
 
 type Selection={family:EquipmentFamily;selected:Partial<Record<EquipmentFamily,string>>};
 const selections=new WeakMap<GameSession,Selection>();
@@ -93,7 +94,8 @@ class Gallery {
  private card(parent:Node,id:string,art:EquipmentArtDef,x:number,y:number,w:number,h:number,selected:boolean):void{
   const card=this.hud.node('gallery:design:'+id,parent,x,y,w,h),g=card.addComponent(CompactGraphics),color=COLORS[art.grade-1]??C.gold;
   g.fillColor=selected?C.button:C.dark;g.roundRect(-w/2,-h/2,w,h,4);g.fill();g.strokeColor=selected?C.goldLight:color;g.lineWidth=selected?3:1;g.roundRect(-w/2+2,-h/2+2,w-4,h-4,4);g.stroke();
-  const button=card.addComponent(Button);button.transition=Button.Transition.COLOR;button.target=card;button.normalColor=Color.WHITE;button.hoverColor=C.goldLight;button.pressedColor=C.gold;button.duration=.1;
+  const button=card.addComponent(Button);button.transition=Button.Transition.NONE;
+  ButtonSurface.attach(card,{width:w-8,height:h-8,radius:3,overlay:true});
   card.on(Button.EventType.CLICK,()=>{this.state.selected[this.state.family]=id;this.paint();});
   const line=this.font*1.25,artH=Math.max(this.hit,h-line*3-18),image=this.hud.node('GalleryArtwork',card,0,h/2-line-6-artH/2,w-20,artH);
   this.center(card,GRADES[art.grade-1]??String(art.grade),h/2-line/2-3,w-16,line,this.font,color);

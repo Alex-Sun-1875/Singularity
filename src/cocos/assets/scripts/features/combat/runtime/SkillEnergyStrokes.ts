@@ -1,12 +1,15 @@
-import type {Vec3} from 'cc';
+import {Vec3} from 'cc';
 import type {CombatSkillEvent,Point} from '../../../core/Contracts';
 import type {SkillVfxHost} from './NativeSkillVfx';
 import type {VfxLineStyle} from '../../../shared/assets/VfxAssets';
+import type {ThunderArcField} from './ThunderArcField';
 
 /** User reference: white-hot filaments, saturated periwinkle-blue body and
  * blue corona. The ground palette remains the separately authored residual. */
 export const THUNDER_COLORS={body:'#4d6dff',core:'#e8edff',halo:'#233de8',flare:'#f3f6ff',ground:'#292e70',residual:'#4e5dcf'} as const;
 export const isThunderColor=(value:string)=>Object.values(THUNDER_COLORS).some(color=>color===value.toLowerCase());
+/** Reuse the approved chain-arrow palette for every player bow projectile. */
+export const ARROW_COLORS={body:'#a9d7ad',core:'#f1efdf',halo:'#89c9ac',contact:'#b8dfb7',flash:'#e8f0cc'} as const;
 const BLUE=THUNDER_COLORS.body,CORE=THUNDER_COLORS.core,HALO=THUNDER_COLORS.halo;
 const HEIGHT=1.05;
 const clamp=(value:number,low:number,high:number)=>Math.max(low,Math.min(high,value));
@@ -28,10 +31,10 @@ export function drawLightning(host:SkillVfxHost,event:CombatSkillEvent,alpha:num
  const bound=(p:Point)=>{if(!corridor||length<.001)return p;const x=p.x-from.x,z=p.z-from.z,f=clamp((x*dx+z*dz)/length,0,length),side=clamp((x*dz-z*dx)/length,-halfWidth*.78,halfWidth*.78);return{x:from.x+dx/length*f+dz/length*side,z:from.z+dz/length*f-dx/length*side};};
  const brightness=clamp(Math.round(alpha),0,255);if(!brightness)return;
  const sourceOffset=sourceAnchor?.clone().subtract(host.at(from,HEIGHT));
- const seed=hash(`${event.castId}:${event.segment}:${event.sourceId??''}:${event.targetId??''}:${pulse}`)%100003;
- const phase=Math.floor(time*28),motion=time*28-phase,tremble=noise(seed+phase)*.055*(1-motion)+noise(seed+phase+1)*.055*motion;
+ const seed=hash(`${event.castId}:${event.segment}:${event.sourceId??''}:${event.targetId??''}`)%100003;
+ const phase=Math.floor(time*18),motion=time*18-phase,tremble=noise(seed+phase)*.045*(1-motion)+noise(seed+phase+1)*.045*motion;
  if(length<.04){
-  const centre=host.at(to,HEIGHT),reach=.28+rank*.026,rays=6+Math.floor(rank/2),points:Vec3[]=[centre];
+  const centre=host.at(to,HEIGHT),reach=.28+rank*.026,rays=6,points:Vec3[]=[centre];
   host.thunderContact?.(`${event.castId}:${event.targetId??'contact'}`,centre,rank,brightness,time);
   // One native path for all crooked radial sparks, leaving the Line budget
   // available for every real network edge and the enemy's danger telegraphs.
@@ -39,70 +42,112 @@ export function drawLightning(host:SkillVfxHost,event:CombatSkillEvent,alpha:num
    const a=i/rays*Math.PI*2+noise(seed+i*17)*.35,r=reach*(.65+.35*Math.abs(noise(seed+i*29)));
    for(let j=1;j<=2;j++){const t=j/2,angle=a+noise(seed+i*31+j*7)*.3;points.push(host.at({x:to.x+Math.cos(angle)*r*t,z:to.z+Math.sin(angle)*r*t},HEIGHT+noise(seed+i*47+j*3)*r*.4));}points.push(centre);
   }
-  host.line(points,CORE,.014+rank*.001,Math.round(brightness*.85),false,'core');
+  host.line(points,CORE,.023+rank*.0018,Math.round(brightness*.85),false,'core');
   detail(host,points,HALO,.13,brightness*.42,'glow');return;
  }
  if(sourceAnchor&&!network)host.thunderContact?.(`${event.castId}:entry`,sourceAnchor,rank,brightness*.95,time);
  const perpendicular={x:dz/length,z:-dx/length},forward={x:dx/length,z:dz/length};
  // Creator's public Line owns a fixed100-point buffer.
- const count=Math.round(clamp(Math.ceil(length/.16),12,94)),spread=clamp(.11+length*.032,.18,.48),points:Vec3[]=[],worldPoints:Point[]=[];
+ // Each resolved edge has a cast-specific shape in a narrow corridor. Keep
+ // the hand exit calm, with short irregular kinks instead of a scaled curve.
+ const count=Math.round(clamp(Math.ceil(length/.11),16,88)),spread=Math.min(length*.16,.055+length*.022,network?.28:.24),points:Vec3[]=[],worldPoints:Point[]=[];
+ const frequency=1.65+noise(seed+83)*.35;
  for(let i=0;i<=count;i++){
-  const t=i===0?0:i===count?1:(i+noise(seed+i*61)*.25)/count,base=mix(from,to,t),envelope=i===0||i===count?0:Math.pow(Math.max(0,Math.sin(Math.PI*t)),.3);
-  const side=envelope*(field(seed,t*length*1.1)*spread+field(seed+172,t*length*3.6)*.095+noise(seed+i*43+7)*.038+tremble*.3);
+  const t=i===0?0:i===count?1:(i+noise(seed+i*61)*.25)/count,base=mix(from,to,t),envelope=i===0||i===count?0:Math.pow(Math.max(0,Math.sin(Math.PI*t)),.65)*(network?1:Math.min(1,t*8));
+  const side=envelope*((field(seed,t*length*frequency)*.72+field(seed+11,t*length*frequency*2.1)*.28)*spread+field(seed+172,t*length*3.6+time*.85)*.018+noise(seed+i*43+7)*.012+tremble*.12);
   const p=bound({x:base.x+perpendicular.x*side,z:base.z+perpendicular.z*side});worldPoints.push(p);
-  const point=host.at(p,HEIGHT+(i===0||i===count?0:noise(seed+i*11)*.095*envelope));
+  const point=host.at(p,HEIGHT+(i===0||i===count?0:noise(seed+i*11)*.035*envelope));
   if(sourceOffset)point.add(sourceOffset.clone().multiplyScalar(1-t));points.push(point);
  }
- host.line(points,BLUE,(network?.064:.082)+rank*.0034,Math.round(brightness*.94),true,'solid');
- host.line(points,CORE,.024+rank*.0018,Math.round(brightness*.96),true,'core');
- detail(host,points,HALO,.43+rank*.025,brightness*.62,'glow');
- // A long launch is a bundle of three irregular filaments; every network edge
- // also carries its own thinner parallel filament, meeting the same endpoints.
- const filaments=network?1:2;
- for(let strand=0;strand<filaments;strand++){
-  const sign=strand%2?-1:1,path=points.map((p,i)=>{const t=i/count,envelope=Math.pow(Math.max(0,Math.sin(Math.PI*t)),.4),offset=envelope*sign*(network?.075:.16+strand*.06)*(.15+Math.abs(field(seed+331+strand*17,t*length*1.7))*1.85);return p.clone().add(host.at(bound({x:worldPoints[i].x+perpendicular.x*offset,z:worldPoints[i].z+perpendicular.z*offset}),HEIGHT).subtract(host.at(worldPoints[i],HEIGHT)));});
-  detail(host,path,CORE,.013+rank*.001,brightness*(network?.66:.83),'core');
+ if(host.thunderBeam){
+  host.thunderBeam(event.castId+':'+event.segment,points,(network?.29:.50)+rank*.010,brightness,network?'chain':'launch');
+ }else{
+  host.line(points,'#b8ceff',(network?.126:.172)+rank*.0046,Math.round(brightness*.72),true,'glow');
+  host.line(points,CORE,.078+rank*.003,Math.round(brightness*.96),true,'core');
  }
- const forks=network?(length>3.3&&rank>=3?2:1):Math.min(4,2+Math.floor(rank/2));
+ // One short free fork can leave the main path, with a fresh position,
+ // direction and reach for every cast. It never becomes a second long loop.
+ const forks=length>.8?1:0;
  for(let i=0;i<forks;i++){
-  const index=Math.round(count*(.2+(i+.35)/(forks+.7)*.61)),base=worldPoints[index],sign=noise(seed+i*23)>0?1:-1,reach=Math.min(network?.26+rank*.042:.42+rank*.07,length*.24),branch:Vec3[]=[points[index]];
-  for(let j=1;j<=6;j++){
-   const t=j/6,jitter=noise(seed+i*101+j*17)*.065*Math.sin(Math.PI*t),q={x:base.x+forward.x*reach*t*.53+perpendicular.x*(reach*t*sign+jitter),z:base.z+forward.z*reach*t*.53+perpendicular.z*(reach*t*sign+jitter)},point=host.at(bound(q),HEIGHT+noise(seed+i*73+j*3)*.065);
+  const index=Math.round(count*(.28+(noise(seed+211)*.5+.5)*.42)),base=worldPoints[index],sign=noise(seed+307)>0?1:-1;
+  const reach=Math.min(length*.16,(network?.30:.38)+rank*.018)*(.7+.3*Math.abs(noise(seed+419))),branch:Vec3[]=[points[index]];
+  for(let j=1;j<=7;j++){
+   const t=j/7,jitter=noise(seed+j*17)*reach*.14*Math.sin(Math.PI*t),q={x:base.x+forward.x*reach*t*.65+perpendicular.x*(reach*t*sign+jitter),z:base.z+forward.z*reach*t*.65+perpendicular.z*(reach*t*sign+jitter)},point=host.at(bound(q),HEIGHT+noise(seed+j*3)*.035*t);
    if(sourceOffset)point.add(sourceOffset.clone().multiplyScalar(1-index/count));branch.push(point);
   }
-  detail(host,branch,CORE,.012+rank*.0007,brightness*(network?.65:.82),'core');
-  detail(host,branch,HALO,.12,brightness*.30,'glow');
+  if(host.thunderBeam)host.thunderBeam(event.castId+':'+event.segment,branch,network?.16:.18,brightness*.65,network?'chainDetail':'launchDetail');
+  else detail(host,branch,CORE,.021+rank*.0014,brightness*(network?.55:.65),'core');
+ }
+
+}
+
+/** A compact flying discharge follows the real basic projectile. Its entire
+ * wake stays behind the head and inside the distance already travelled. */
+export function drawThunderDart(thunder:ThunderArcField,key:string,head:Vec3,direction:Vec3,travelled:number,time:number,reduced=false):void {
+ const length=Math.min(.78,Math.max(0,travelled));if(length<.002)return;
+ const forward=direction.clone().normalize(),side=new Vec3(forward.z,0,-forward.x).normalize(),seed=hash(key)%100003;
+ const points:Vec3[]=[],steps=12;
+ for(let i=0;i<=steps;i++){
+  const t=i/steps,envelope=Math.sin(Math.PI*t),sway=(field(seed,t*5)*.036+(reduced?0:field(seed+71,t*8+time*5)*.009))*envelope;
+  points.push(head.clone().add(forward.clone().multiplyScalar(-length*(1-t))).add(side.clone().multiplyScalar(sway)).add(new Vec3(0,noise(seed+i*13)*.015*envelope,0)));
+ }
+ // Share one native batch with the other basic darts and their short contacts.
+ thunder.addBeam('basic-thunder',points,.18,245,'accent');
+ if(length<.12||reduced)return;
+ const start=points[4],sign=noise(seed+157)>0?1:-1,reach=Math.min(.19,length*.28),fork:Vec3[]=[start];
+ for(let i=1;i<=5;i++){
+  const t=i/5;fork.push(start.clone().add(forward.clone().multiplyScalar(-reach*t*.65)).add(side.clone().multiplyScalar(sign*reach*t+noise(seed+i*29)*reach*.16*Math.sin(Math.PI*t))));
+ }
+ thunder.addBeam('basic-thunder',fork,.065,150,'accent');
+ // Two fine filaments converge at the visible tip; no spherical light body.
+ const filament:Vec3[]=[];
+ for(let i=0;i<=6;i++){
+  const t=i/6;filament.push(head.clone().add(forward.clone().multiplyScalar(-Math.min(length,.30)*(1-t))).add(side.clone().multiplyScalar(-sign*.075*Math.sin(Math.PI*t))));
+ }
+ thunder.addBeam('basic-thunder',filament,.075,190,'accent');
+}
+
+/** A real basic hit cracks into a few local sparks and fades within .14s. */
+export function drawThunderDartContact(thunder:ThunderArcField,key:string,center:Vec3,age:number,reduced=false):void {
+ const progress=clamp(age/.14,0,1),alpha=Math.round(240*Math.pow(1-progress,1.7));if(age<0||alpha<=0)return;
+ const seed=hash(key)%100003,count=reduced?3:5;
+ for(let i=0;i<count;i++){
+  const angle=i/count*Math.PI*2+noise(seed+i*31)*.3,reach=(.15+.12*progress)*(.8+.2*Math.abs(noise(seed+i*47))),path:Vec3[]=[center];
+  for(let j=1;j<=4;j++){
+   const t=j/4,a=angle+noise(seed+i*71+j*11)*.28;
+   path.push(center.clone().add(new Vec3(Math.cos(a)*reach*t,noise(seed+i*37+j*7)*reach*.45*t,Math.sin(a)*reach*t)));
+  }
+  thunder.addBeam('basic-thunder',path,.10*(1-progress*.55),alpha,'accent');
  }
 }
 
-/** Newest first. Reclip the supplied travelled path by arc length, so a split
- * arrow can show its bend without drawing an untravelled route to the target. */
-export function drawArrowWake(host:SkillVfxHost,points:readonly Point[],color:string,split:boolean,rank:number,visualPoints?:readonly Vec3[],opacity=1):void {
+/** Newest first. Clip the actual rendered path, including the interpolated
+ * final sample, so curved wakes never extend into an untravelled route. */
+export function drawArrowWake(host:SkillVfxHost,points:readonly Point[],color:string,split:boolean,rank:number,visualPoints?:readonly Vec3[],opacity=1,chaining=false):void {
  if(points.length<2||opacity<=0)return;
- // A child's whole already-flown curve establishes the split fan. Its head
- // still has a short bright wake; the faint path survives contact for .24s.
+ const flown=points.map((p,i)=>visualPoints?.[i]?.clone()??host.at(p,1.05));
  if(split){
-  const flown=points.map((p,i)=>visualPoints?.[i]?.clone()??host.at(p,1.05));
-  host.line(flown,'#c6ddb0',.026,Math.round(115*opacity),true,'solid');
-  detail(host,flown,'#d3eab0',.14,48*opacity,'glow');
+  host.line(flown,color,.026,Math.round(115*opacity),true,'solid');
+  detail(host,flown,ARROW_COLORS.halo,.14,48*opacity,'glow');
  }
- const limit=split?1.25:.70,path:Point[]=[{...points[0]}];let travelled=0;
- for(let i=1;i<points.length;i++){
-  const previous=points[i-1],next=points[i],length=Math.hypot(next.x-previous.x,next.z-previous.z);
+ const limit=chaining?2.35:split?1.25:.88,native:Vec3[]=[flown[0]];let travelled=0;
+ for(let i=1;i<flown.length;i++){
+  const previous=flown[i-1],next=flown[i],length=Vec3.distance(previous,next);
   if(length<.00001)continue;
-  if(travelled+length>=limit){path.push(mix(previous,next,(limit-travelled)/length));break;}
-  path.push({...next});travelled+=length;
+  if(travelled+length>=limit){native.push(Vec3.lerp(new Vec3(),previous,next,(limit-travelled)/length));break;}
+  native.push(next);travelled+=length;
  }
- if(path.length<2)return;
- const native=path.map((p,i)=>visualPoints?.[i]?.clone()??host.at(p,1.05)),alpha=(split?225:190)*opacity;
- host.line(native,split?'#d8efb4':color,split?.044:.032,Math.round(alpha),true,'solid');
- host.line(native,split?'#f5f8de':'#f1efdf',split?.018:.012,Math.round(alpha*.82),true,'core');
+ if(native.length<2)return;
+ const alpha=(chaining?215:split?225:190)*opacity;
+ host.line(native,ARROW_COLORS.halo,chaining?.13:.10,Math.round((chaining?42:32)*opacity),true,'glow');
+ host.line(native,color,chaining?.052:split?.044:.037,Math.round(alpha),true,'core');
+ host.line(native,ARROW_COLORS.core,chaining?.017:split?.018:.014,Math.round(alpha*.82),true,'core');
 }
 
 /** One small physical puncture, called once by the authoritative contact event. */
-export function drawArrowContact(host:SkillVfxHost,point:Point,angle:number,rank:number):void {
+export function drawArrowContact(host:SkillVfxHost,point:Point,angle:number,rank:number,chaining=false):void {
  const tier=rankOf(rank);
- host.burst('spark',point,.78,3+Math.floor(tier/2),.34+tier*.018,'#e5d8ab',-angle);
- host.burst('flash',point,.78,1,.34+tier*.017,'#e8f0cc');
+ host.burst('spark',point,.78,3+Math.floor(tier/2)+(chaining?1:0),(.34+tier*.018)*(chaining?1.12:1),ARROW_COLORS.contact,-angle);
+ host.burst('flash',point,.78,1,(.34+tier*.017)*(chaining?1.25:1),ARROW_COLORS.flash);
  host.burst('dust',point,.61,2+Math.floor(tier/3),.25+tier*.008,'#b9ae8e');
 }

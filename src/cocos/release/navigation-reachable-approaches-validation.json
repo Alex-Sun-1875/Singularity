@@ -1,0 +1,131 @@
+{
+  "date": "2026-11-17",
+  "profile": "test",
+  "change": "navigation-reachable-interaction-approaches",
+  "rootCause": "U1-04/u104-dinner is an interaction anchor inside the runtime dining-table collider; walking to the anchor centre is impossible. Guidance and automation now choose a visible reachable standing position within the actual interaction radius.",
+  "implementation": [
+    "Shared manual/automatic interaction reach and sight checks",
+    "Collision-safe interaction approach paths and precise final arrival",
+    "Existing A* coarse route retained; .5m/.32m-radius retry only after failure, with independent edge and route caches",
+    "Player restoration through existing scene safe-position recovery; map identity guard and synchronized capsule"
+  ],
+  "typeChecks": {
+    "full": "passed",
+    "core": "passed"
+  },
+  "existingTests": {
+    "passed": 181,
+    "failed": 0,
+    "log": "temp/navigation-repair-tests-after.log"
+  },
+  "ruleProbe": {
+    "passed": true,
+    "results": [
+      {
+        "backend": "TypeScript",
+        "dinnerInteraction": "passed",
+        "narrowDoor": "passed",
+        "solidWall": "passed",
+        "rangeAndSight": "passed"
+      },
+      {
+        "backend": "wasm + shared narrow fallback",
+        "dinnerInteraction": "passed",
+        "narrowDoor": "passed",
+        "solidWall": "passed",
+        "rangeAndSight": "passed"
+      }
+    ],
+    "entryRecovery": "passed",
+    "levelGate": "preserved"
+  },
+  "browser": {
+    "profile": "test",
+    "fixture": "Isolated HTML contexts with real final Cocos scene geometry and movement; controlled save positions, not a natural playthrough.",
+    "geometry": {
+      "areas": 97,
+      "objects": 526,
+      "exits": 182,
+      "entries": 320,
+      "segments": 1281,
+      "solidAnchors": [
+        {
+          "id": "U1-04",
+          "object": "u104-dinner",
+          "endpoint": {
+            "x": -9.39294633602671,
+            "z": 4.9073034048480775
+          }
+        }
+      ],
+      "failures": []
+    },
+    "dinner": {
+      "guideBlocked": false,
+      "frames": 78,
+      "arrived": true,
+      "dialogue": "meeting",
+      "player": {
+        "x": -9.382718086242676,
+        "z": 4.88889217376709
+      },
+      "tableCentreBlocked": true,
+      "trail": [
+        {
+          "x": -0.12141072750091553,
+          "z": -11.781460762023926
+        },
+        {
+          "x": -2.5496251583099365,
+          "z": -7.410676002502441
+        },
+        {
+          "x": -4.97783899307251,
+          "z": -3.039891242980957
+        },
+        {
+          "x": -7.406055927276611,
+          "z": 1.3308947086334229
+        }
+      ]
+    },
+    "recovery": {
+      "recovered": true,
+      "player": {
+        "x": -9.25,
+        "z": 7.299038105676658
+      },
+      "capsule": {
+        "x": -9.25,
+        "z": 7.299038105676658
+      },
+      "healthPreserved": true
+    },
+    "errors": []
+  },
+  "visualReview": {
+    "status": "reviewed",
+    "image": "temp/navigation-repair-dinner-844x390.png",
+    "thumbnail": "temp/navigation-repair-dinner-review.jpg",
+    "notes": "Actual dinner dialogue opens after collision-safe movement at 844x390 / device scale 3. Existing dialogue is readable; no UI layout or artwork changes."
+  },
+  "build": {
+    "mode": "official Cocos web-mobile export",
+    "directory": "build/concept-2d",
+    "entry": "build/concept-2d/assets/main/index.37bb0.js",
+    "sha256": "14fa923b7467c26d76a6ec86e0c42d869c2572c22cfcf6c61a1ec27138001dc8",
+    "log": "temp/navigation-repair-build.log"
+  },
+  "sourceSha256": {
+    "assets/scripts/features/navigation/common/InteractionApproach.ts": "8e4acb91a9ee70aa04d3e2019f02b84622c0fc352d6d97597b4947a52de56267",
+    "assets/scripts/features/navigation/runtime/Navigation.ts": "cac51e8441b48e70e39789b04e85ab363cf37b6e1fc1a5aa65b5f7de98c6b17e",
+    "assets/scripts/features/automation/common/Automation.ts": "dd635f7cc936e3ac4bc37bf48a6b3f6654080cc406c9a1bdb9cd1481074939f0",
+    "assets/scripts/features/journey/common/JourneyGuide.ts": "ddfc78cb493b8e35c839fe6ede4fd6b403691e1b52fb0f4419f26944b93f4a19",
+    "assets/scripts/core/GameSession.ts": "f61763d11bf314476456364837d96ac5ff0f09f101075707c9f9c142733e883c",
+    "assets/scripts/core/Contracts.ts": "2e5ffad35fa6683ffe230d73c51ba40ca0dc046103051e3be1b1e2a9a1ade644",
+    "assets/scripts/app/ChapterGame.ts": "46219236f56135652baa49afb0cff07d64e205cec9b57bdd324a4a47a8b61a41"
+  },
+  "pending": [
+    "TapTap App and physical-device verification; no TapTap package produced or uploaded."
+  ]
+}

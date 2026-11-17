@@ -1,5 +1,6 @@
 import type {CampaignEventDef} from './CampaignEvents';
 import {fieldQuestText as text} from '../locales/FieldQuestText';
+import {EARLY_SIDE_EVENTS,EARLY_SIDE_QUESTS,EARLY_EXISTING_SIDE_EVENTS} from './EarlyChapterContent';
 
 type Extra=Partial<CampaignEventDef>;
 const step=(id:string,area:string,key:Parameters<typeof text>[0],requires:string[],flag:string,extra:Extra={}):CampaignEventDef=>({
@@ -37,14 +38,17 @@ export const FIELD_QUEST_EVENTS:CampaignEventDef[]=[
  step('field-bell-return','H17','bell.return',['field:bell-tune'],'field:bell-complete',{...npc('milo',-12,-24),gold:350,iron:14,runes:4,cores:1,experience:1200}),
  step('field-letter-camp','S06','letter.epilogue',['dg:letter-complete'],'field:letter-revisited',{...npc('orin-camp',-12,-24)}),
  step('field-lamp-inn','H01','lamp.epilogue',['dg:lamp-complete'],'field:lamp-revisited',{...npc('bren-inn',-12,-24)}),
+ ...EARLY_SIDE_EVENTS,
+ ...EARLY_EXISTING_SIDE_EVENTS.filter(event=>event.id.startsWith('field-')),
 ];
 export const FIELD_QUESTS=[
- {id:'letter',chapter:1,name:text('quest.letter'),steps:['dg-letter-escort','dg-letter-recipient','dg-letter-return'],reward:text('letter.reward')},
- {id:'hunt',chapter:1,name:text('quest.hunt'),steps:['field-hunt-start','field-hunt-tracks','field-hunt-choice','field-hunt-return'],reward:text('hunt.reward')},
- {id:'dawn',chapter:1,name:text('quest.dawn'),hidden:'dg:dawn-found',steps:['dg-dawn-name','field-dawn-record','dg-dawn-return'],reward:text('dawn.reward')},
- {id:'lamp',chapter:2,name:text('quest.lamp'),steps:['dg-lamp-rescue','dg-lamp-steady','dg-lamp-return'],reward:text('lamp.reward')},
- {id:'arms',chapter:2,name:text('quest.arms'),steps:['field-arms-start','field-arms-tracks','field-arms-choice','field-arms-return'],reward:text('arms.reward')},
- {id:'bell',chapter:2,name:text('quest.bell'),hidden:'field:bell-found',steps:['field-bell-start','field-bell-fork','field-bell-tune','field-bell-return'],reward:text('bell.reward')},
+ {id:'letter',chapter:1,name:text('quest.letter'),steps:['dg-letter-escort','field-letter-safe-route','dg-letter-recipient','field-letter-family-plan','dg-letter-return'],reward:text('letter.reward')},
+ {id:'hunt',chapter:1,name:text('quest.hunt'),steps:['field-hunt-start','field-hunt-tracks','field-hunt-waterline','field-hunt-choice','field-hunt-return','field-hunt-watch-post'],reward:text('hunt.reward')},
+ {id:'dawn',chapter:1,name:text('quest.dawn'),hidden:'dg:dawn-found',steps:['dg-dawn-name','field-dawn-record','field-dawn-rubbing','dg-dawn-return','field-dawn-bread'],reward:text('dawn.reward')},
+ {id:'lamp',chapter:2,name:text('quest.lamp'),steps:['dg-lamp-rescue','dg-lamp-steady','field-lamp-fallback','dg-lamp-return','field-lamp-spare'],reward:text('lamp.reward')},
+ {id:'arms',chapter:2,name:text('quest.arms'),steps:['field-arms-start','field-arms-tracks','field-arms-original-tag','field-arms-choice','field-arms-return','field-arms-public-copy'],reward:text('arms.reward')},
+ {id:'bell',chapter:2,name:text('quest.bell'),hidden:'field:bell-found',steps:['field-bell-start','field-bell-fork','field-bell-counterweight','field-bell-tune','field-bell-return','field-bell-record'],reward:text('bell.reward')},
+ ...EARLY_SIDE_QUESTS,
 ] as const;
 export const FIELD_DISCOVERIES=[{chapter:1,flag:'dg:dawn-found',name:text('quest.dawn')},{chapter:2,flag:'field:bell-found',name:text('quest.bell')}] as const;
 const NPC_FLAGS:Record<string,{flag:string;present:boolean}>={

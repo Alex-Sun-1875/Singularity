@@ -1,0 +1,180 @@
+{
+  "frame": 121,
+  "time": 4.266666666666657,
+  "seed": 73015,
+  "sequence": 1,
+  "revision": 281,
+  "cameraHeight": 4.3,
+  "cameraGroundVerticalFactor": 0.636767285752247,
+  "castAge": null,
+  "impactAge": 2.816666666666657,
+  "ground": {
+    "capacity": 8,
+    "allocated": 1,
+    "active": [],
+    "cameraBound": true
+  },
+  "fire": {
+    "model": "distinct-fire-shapes-v30",
+    "capacity": 76,
+    "allocated": 3,
+    "sharedTextures": 3,
+    "field": {
+      "model": "connected-fire-field-v30",
+      "capacity": 4,
+      "allocated": 0,
+      "active": []
+    },
+    "impact": {
+      "model": "continuous-single-impact-relief-v33",
+      "capacity": 8,
+      "allocated": 1,
+      "sharedMaterials": 1,
+      "cameraBound": true,
+      "active": [
+        {
+          "key": "impact:cast:1:0",
+          "kind": "meteor",
+          "radius": 3.8,
+          "progress": 0.808735632183907,
+          "phase": 0.808735632183907,
+          "frameBlend": 0.3999999999997641,
+          "atlasFrame": 6,
+          "time": 4.266666666666657,
+          "age": 2.816666666666657,
+          "frontRadius": 3.8,
+          "layers": 1,
+          "lobes": 1,
+          "cards": 1,
+          "peakHeight": 0.20721618421360843,
+          "width": 9.90550429592209,
+          "height": 0.16221618421360845,
+          "position": {
+            "x": -1.9999999999999998,
+            "y": 0.045,
+            "z": -4.535898384862245
+          },
+          "vertices": 884,
+          "triangles": 1650,
+          "maxHeight": 0.16221618421360845,
+          "clippedDirections": 0
+        }
+      ]
+    },
+    "active": [
+      {
+        "key": "impact:cast:1:0",
+        "kind": "meteor",
+        "radius": 3.8,
+        "progress": 0.808735632183907,
+        "phase": 0.808735632183907,
+        "frameBlend": 0.3999999999997641,
+        "atlasFrame": 6,
+        "time": 4.266666666666657,
+        "age": 2.816666666666657,
+        "frontRadius": 3.8,
+        "layers": 1,
+        "lobes": 1,
+        "cards": 1,
+        "peakHeight": 0.20721618421360843,
+        "width": 9.90550429592209,
+        "height": 0.16221618421360845,
+        "position": {
+          "x": -1.9999999999999998,
+          "y": 0.045,
+          "z": -4.535898384862245
+        },
+        "vertices": 884,
+        "triangles": 1650,
+        "maxHeight": 0.16221618421360845,
+        "clippedDirections": 0
+      }
+    ]
+  },
+  "meteor": {
+    "model": "reference-nose-anchored-comet-v32",
+    "capacity": 4,
+    "sharedRockMeshes": 1,
+    "sharedRockMaterials": 1,
+    "leadingSupport": {
+      "x": 0.213878,
+      "y": -0.5,
+      "z": 0.006679
+    },
+    "opaqueRockMeshes": 1,
+    "active": []
+  },
+  "shield": {
+    "visible": false,
+    "amount": 0,
+    "start": null,
+    "until": null,
+    "opacity": 0,
+    "patternOpacity": 0,
+    "broken": false,
+    "hitAt": null,
+    "position": {
+      "x": 0,
+      "y": 1,
+      "z": -8
+    },
+    "scale": {
+      "x": 1.88,
+      "y": 2.68,
+      "z": 1.88
+    },
+    "vertices": 625,
+    "triangles": 1152,
+    "passes": 2
+  },
+  "native": {
+    "cues": [
+      {
+        "kind": "blast",
+        "skillId": "FIR_02",
+        "castId": "cast:1",
+        "eventType": "skill_segment",
+        "start": 1.4499999999999997,
+        "age": 2.816666666666657,
+        "duration": 4.55,
+        "target": {
+          "x": -1.9999999999999998,
+          "z": -4.535898384862245
+        },
+        "from": {
+          "x": 0,
+          "z": -8
+        },
+        "to": {
+          "x": -1.9999999999999998,
+          "z": -4.535898384862245
+        },
+        "geometry": {
+          "kind": "filledImpactDisk",
+          "origin": "aimPoint",
+          "radiusMetres": 3.8,
+          "widthMetres": 0,
+          "lengthMetres": 0,
+          "depthMetres": 0,
+          "angleDegrees": 0
+        }
+      }
+    ],
+    "particles": {
+      "allocated": 3,
+      "active": 0
+    },
+    "linePool": 0,
+    "bodyPool": 0
+  },
+  "hits": 0,
+  "damage": 0,
+  "misses": 0,
+  "criticalHits": 0,
+  "cooldowns": {
+    "FIR_02": 9.183333333333193
+  },
+  "ultimateLock": 0,
+  "casts": [],
+  "projectiles": []
+}

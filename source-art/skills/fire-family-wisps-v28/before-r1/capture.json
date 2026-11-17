@@ -1,0 +1,3896 @@
+{
+  "stage": "before",
+  "rank": 1,
+  "gameHash": "9baf516082eff97efa2745e1a6899130ab18b21fa539a6bbe43327bde56098f7",
+  "sourceHashes": {
+    "SkillFireSprites.ts": "d1194a102018778899f19022c8276527f8afbdd57e2689250bbb3af521048b4f",
+    "SkillMeteorBody.ts": "bf572f80379e98fba9f3f400905305846dd05bcc493afe0eaa65a11ca71ddf76",
+    "FireGroundEffects.ts": "86d74e085cd6b45a96db3c7b68489c12436910ce934f8087e222b5b8ce3b1ab4",
+    "NativeSkillVfx.ts": "a6515413cea717261b0912c9134d9b8962b64abad7d60888cee117c8c1773c2c",
+    "Effects.ts": "c940fa9a51c88cc5fbca23727f3c3aa8fac070333b661da7d2b2be44935eb52e"
+  },
+  "stableBuild": true,
+  "info": {
+    "area": "TRAINING",
+    "formation": "cluster",
+    "distance": 4,
+    "unlimitedResource": true,
+    "ranks": {
+      "WAR_01": 1,
+      "WAR_02": 1,
+      "WAR_03": 1,
+      "WAR_04": 1,
+      "WAR_05": 1,
+      "WAR_P1": 1,
+      "WAR_P2": 1,
+      "BOW_01": 1,
+      "BOW_02": 1,
+      "BOW_03": 1,
+      "BOW_04": 1,
+      "BOW_06": 1,
+      "BOW_07": 1,
+      "BOW_05": 1,
+      "BOW_P1": 1,
+      "BOW_P2": 1,
+      "FIR_01": 1,
+      "FIR_02": 1,
+      "FIR_03": 1,
+      "FIR_04": 1,
+      "FIR_05": 1,
+      "FIR_P1": 1,
+      "FIR_P2": 1,
+      "THU_01": 1,
+      "THU_02": 1,
+      "THU_03": 1,
+      "THU_04": 1,
+      "THU_06": 1,
+      "THU_05": 1,
+      "THU_P1": 1,
+      "THU_P2": 1,
+      "COM_01": 1,
+      "COM_02": 1
+    },
+    "activeSlots": [
+      "FIR_01",
+      "FIR_04",
+      "FIR_03",
+      "FIR_05"
+    ],
+    "ultimate": "FIR_02",
+    "viewport": [
+      2560,
+      1272
+    ],
+    "cameraHeight": 4.3,
+    "player": {
+      "id": "player",
+      "profile": "native-kit-v1",
+      "expectedSkinJoints": 65,
+      "expectedSkeletonSizes": [
+        65,
+        67
+      ],
+      "clips": [
+        "walk_staff",
+        "attack_bow",
+        "attack_staff",
+        "attack_sword",
+        "death",
+        "dodge",
+        "hit",
+        "idle",
+        "idle_staff",
+        "interact",
+        "run",
+        "run_staff",
+        "spell",
+        "walk",
+        "attack_sword_2",
+        "attack_sword_3"
+      ],
+      "state": "idle_staff",
+      "speed": 0,
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": -8
+      },
+      "weaponCarry": "ready",
+      "combatReady": true,
+      "combatLocomotion": {
+        "weight": 0,
+        "gait": "walk",
+        "phase": 0,
+        "heading": 0,
+        "backward": false,
+        "stationary": {
+          "weight": 0,
+          "lead": "left",
+          "advance": 0,
+          "lift": 0,
+          "load": 0,
+          "offset": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+          }
+        },
+        "staffBrace": 0
+      },
+      "skeletons": [
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67,
+        67
+      ]
+    },
+    "cameraBound": true,
+    "loadoutFlow": "ChapterGame.click debug:rank / debug:family-rank / debug:loadout with prepareSkillDebugEffects"
+  },
+  "errors": [],
+  "consoleErrors": [],
+  "cache": "src\\.tmp\\fire-family-wisps-v28\\before-r1",
+  "shots": [
+    {
+      "id": "FIR_01",
+      "name": "赤焰枪",
+      "slot": 0,
+      "seconds": 6,
+      "start": {
+        "time": 0.19999999999999998,
+        "cameraHeight": 4.3,
+        "ground": {
+          "capacity": 8,
+          "allocated": 0,
+          "active": [],
+          "cameraBound": true
+        },
+        "fire": {
+          "model": "pyro-keyframes-v7",
+          "capacity": 64,
+          "allocated": 0,
+          "active": []
+        },
+        "meteor": {
+          "model": "incandescent-comet-v10",
+          "capacity": 4,
+          "opaqueRockMeshes": 0,
+          "active": []
+        },
+        "shield": {
+          "visible": false,
+          "amount": 0,
+          "start": null,
+          "until": null,
+          "opacity": 0,
+          "patternOpacity": 0,
+          "broken": false,
+          "hitAt": null,
+          "position": {
+            "x": 0,
+            "y": 1,
+            "z": -8
+          },
+          "scale": {
+            "x": 1.88,
+            "y": 2.68,
+            "z": 1.88
+          },
+          "vertices": 625,
+          "triangles": 1152,
+          "passes": 2
+        },
+        "native": {
+          "cues": [],
+          "particles": {
+            "allocated": 0,
+            "active": 0
+          },
+          "linePool": 0,
+          "bodyPool": 0
+        },
+        "hits": 0,
+        "damage": 0,
+        "misses": 0,
+        "criticalHits": 0,
+        "cooldowns": {},
+        "ultimateLock": 0,
+        "casts": [],
+        "projectiles": []
+      },
+      "frames": 180,
+      "events": [
+        {
+          "time": 0.6166666666666669,
+          "type": "skill_cast",
+          "skillId": "FIR_01",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:1",
+          "shape": "projectileWithImpactDisk",
+          "geometry": {
+            "kind": "projectileWithImpactDisk",
+            "origin": "projectileImpact",
+            "radiusMetres": 0.45,
+            "totalTargetLimit": 1
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0.45,
+          "width": 0,
+          "length": 0,
+          "depth": 0,
+          "duration": 0.19
+        },
+        {
+          "time": 0.8000000000000008,
+          "type": "skill_release",
+          "skillId": "FIR_01",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:1",
+          "shape": "projectileWithImpactDisk",
+          "geometry": {
+            "kind": "projectileWithImpactDisk",
+            "origin": "projectileImpact",
+            "radiusMetres": 0.45,
+            "totalTargetLimit": 1
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0.45,
+          "width": 0,
+          "length": 0,
+          "depth": 0
+        },
+        {
+          "time": 0.8000000000000008,
+          "type": "skill_segment",
+          "skillId": "FIR_01",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:1",
+          "shape": "projectileWithImpactDisk",
+          "geometry": {
+            "kind": "projectileWithImpactDisk",
+            "origin": "projectileImpact",
+            "radiusMetres": 0.45,
+            "totalTargetLimit": 1
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0.45,
+          "width": 0,
+          "length": 0,
+          "depth": 0
+        },
+        {
+          "time": 0.8000000000000008,
+          "type": "skill_segment",
+          "skillId": "FIR_01",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:1",
+          "shape": "projectileWithImpactDisk",
+          "geometry": {
+            "kind": "projectileWithImpactDisk",
+            "origin": "projectileImpact",
+            "radiusMetres": 0.45,
+            "totalTargetLimit": 1
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": 4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0.45,
+          "width": 0,
+          "length": 0,
+          "depth": 0,
+          "projectileId": "skillProjectile:2",
+          "child": false
+        },
+        {
+          "time": 0.9333333333333346,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 488,
+          "hpLost": 488,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_01",
+          "charged": false,
+          "angle": 0,
+          "source": "spell",
+          "action": "cast:1",
+          "at": {
+            "x": 0,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 0.9333333333333346,
+          "type": "skill_hit",
+          "skillId": "FIR_01",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:1",
+          "shape": "projectileWithImpactDisk",
+          "geometry": {
+            "kind": "projectileWithImpactDisk",
+            "origin": "projectileImpact",
+            "radiusMetres": 0.45,
+            "totalTargetLimit": 1
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0.45,
+          "width": 0,
+          "length": 0,
+          "depth": 0,
+          "targetId": "training:target:0",
+          "value": 488,
+          "critical": true
+        },
+        {
+          "time": 0.9333333333333346,
+          "type": "skill_status",
+          "skillId": "FIR_01",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:1",
+          "shape": "projectileWithImpactDisk",
+          "geometry": {
+            "kind": "projectileWithImpactDisk",
+            "origin": "projectileImpact",
+            "radiusMetres": 0.45,
+            "totalTargetLimit": 1
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 1,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0.45,
+          "width": 0,
+          "length": 0,
+          "depth": 0,
+          "targetId": "training:target:0",
+          "duration": 3.2,
+          "status": "burn"
+        },
+        {
+          "time": 0.9333333333333346,
+          "type": "skill_status",
+          "skillId": "FIR_P1",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:1",
+          "shape": "projectileWithImpactDisk",
+          "geometry": {
+            "kind": "projectileWithImpactDisk",
+            "origin": "projectileImpact",
+            "radiusMetres": 0.45,
+            "totalTargetLimit": 1
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 1,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0.45,
+          "width": 0,
+          "length": 0,
+          "depth": 0,
+          "targetId": "training:target:0",
+          "status": "burn",
+          "duration": 0.25
+        },
+        {
+          "time": 0.9333333333333346,
+          "type": "skill_segment",
+          "skillId": "FIR_01",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:1",
+          "shape": "projectileWithImpactDisk",
+          "geometry": {
+            "kind": "projectileWithImpactDisk",
+            "origin": "projectileImpact",
+            "radiusMetres": 0.45,
+            "totalTargetLimit": 1
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 1,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0.45,
+          "width": 0,
+          "length": 0,
+          "depth": 0,
+          "phase": "impact"
+        },
+        {
+          "time": 1.4333333333333331,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 6,
+          "hpLost": 6,
+          "owner": "player",
+          "material": "soft",
+          "element": "burn",
+          "critical": false,
+          "lethal": false,
+          "petEligible": false,
+          "charged": false,
+          "angle": 0,
+          "source": "burn",
+          "action": "burn",
+          "at": {
+            "x": 0,
+            "z": -3.7600000000000002
+          },
+          "opening": false
+        },
+        {
+          "time": 1.9333333333333313,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 6,
+          "hpLost": 6,
+          "owner": "player",
+          "material": "soft",
+          "element": "burn",
+          "critical": false,
+          "lethal": false,
+          "petEligible": false,
+          "charged": false,
+          "angle": 0,
+          "source": "burn",
+          "action": "burn",
+          "at": {
+            "x": 0,
+            "z": -3.7600000000000002
+          },
+          "opening": false
+        },
+        {
+          "time": 2.4333333333333296,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 6,
+          "hpLost": 6,
+          "owner": "player",
+          "material": "soft",
+          "element": "burn",
+          "critical": false,
+          "lethal": false,
+          "petEligible": false,
+          "charged": false,
+          "angle": 0,
+          "source": "burn",
+          "action": "burn",
+          "at": {
+            "x": 0,
+            "z": -3.7600000000000002
+          },
+          "opening": false
+        },
+        {
+          "time": 2.933333333333328,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 6,
+          "hpLost": 6,
+          "owner": "player",
+          "material": "soft",
+          "element": "burn",
+          "critical": false,
+          "lethal": false,
+          "petEligible": false,
+          "charged": false,
+          "angle": 0,
+          "source": "burn",
+          "action": "burn",
+          "at": {
+            "x": 0,
+            "z": -3.7600000000000002
+          },
+          "opening": false
+        },
+        {
+          "time": 3.433333333333326,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 6,
+          "hpLost": 6,
+          "owner": "player",
+          "material": "soft",
+          "element": "burn",
+          "critical": false,
+          "lethal": false,
+          "petEligible": false,
+          "charged": false,
+          "angle": 0,
+          "source": "burn",
+          "action": "burn",
+          "at": {
+            "x": 0,
+            "z": -3.7600000000000002
+          },
+          "opening": false
+        },
+        {
+          "time": 3.9333333333333242,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 6,
+          "hpLost": 6,
+          "owner": "player",
+          "material": "soft",
+          "element": "burn",
+          "critical": false,
+          "lethal": false,
+          "petEligible": false,
+          "charged": false,
+          "angle": 0,
+          "source": "burn",
+          "action": "burn",
+          "at": {
+            "x": 0,
+            "z": -3.7600000000000002
+          },
+          "opening": false
+        }
+      ],
+      "summary": {
+        "hits": 7,
+        "damage": 524,
+        "misses": 0,
+        "criticalHits": 1,
+        "last": {
+          "frame": 179,
+          "time": 6.199999999999983,
+          "cameraHeight": 4.3,
+          "ground": {
+            "capacity": 8,
+            "allocated": 0,
+            "active": [],
+            "cameraBound": true
+          },
+          "fire": {
+            "model": "pyro-keyframes-v7",
+            "capacity": 64,
+            "allocated": 12,
+            "active": []
+          },
+          "meteor": {
+            "model": "incandescent-comet-v10",
+            "capacity": 4,
+            "opaqueRockMeshes": 0,
+            "active": []
+          },
+          "shield": {
+            "visible": false,
+            "amount": 0,
+            "start": null,
+            "until": null,
+            "opacity": 0,
+            "patternOpacity": 0,
+            "broken": false,
+            "hitAt": null,
+            "position": {
+              "x": 0,
+              "y": 1,
+              "z": -8
+            },
+            "scale": {
+              "x": 1.88,
+              "y": 2.68,
+              "z": 1.88
+            },
+            "vertices": 625,
+            "triangles": 1152,
+            "passes": 2
+          },
+          "native": {
+            "cues": [],
+            "particles": {
+              "allocated": 10,
+              "active": 0
+            },
+            "linePool": 1,
+            "bodyPool": 0
+          },
+          "hits": 7,
+          "damage": 524,
+          "misses": 0,
+          "criticalHits": 1,
+          "cooldowns": {
+            "FIR_01": 0
+          },
+          "ultimateLock": 0,
+          "casts": [],
+          "projectiles": []
+        },
+        "peakFire": 12,
+        "peakGround": 0
+      }
+    },
+    {
+      "id": "FIR_05",
+      "name": "焚焰火域",
+      "slot": 3,
+      "seconds": 8,
+      "start": {
+        "time": 6.399999999999983,
+        "cameraHeight": 4.3,
+        "ground": {
+          "capacity": 8,
+          "allocated": 0,
+          "active": [],
+          "cameraBound": true
+        },
+        "fire": {
+          "model": "pyro-keyframes-v7",
+          "capacity": 64,
+          "allocated": 12,
+          "active": []
+        },
+        "meteor": {
+          "model": "incandescent-comet-v10",
+          "capacity": 4,
+          "opaqueRockMeshes": 0,
+          "active": []
+        },
+        "shield": {
+          "visible": false,
+          "amount": 0,
+          "start": null,
+          "until": null,
+          "opacity": 0,
+          "patternOpacity": 0,
+          "broken": false,
+          "hitAt": null,
+          "position": {
+            "x": 0,
+            "y": 1,
+            "z": -8
+          },
+          "scale": {
+            "x": 1.88,
+            "y": 2.68,
+            "z": 1.88
+          },
+          "vertices": 625,
+          "triangles": 1152,
+          "passes": 2
+        },
+        "native": {
+          "cues": [],
+          "particles": {
+            "allocated": 10,
+            "active": 0
+          },
+          "linePool": 1,
+          "bodyPool": 0
+        },
+        "hits": 0,
+        "damage": 0,
+        "misses": 0,
+        "criticalHits": 0,
+        "cooldowns": {},
+        "ultimateLock": 0,
+        "casts": [],
+        "projectiles": []
+      },
+      "frames": 240,
+      "events": [
+        {
+          "time": 6.816666666666648,
+          "type": "skill_cast",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "duration": 0.4
+        },
+        {
+          "time": 7.19999999999998,
+          "type": "skill_release",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3
+        },
+        {
+          "time": 7.19999999999998,
+          "type": "skill_zone",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "duration": 4
+        },
+        {
+          "time": 7.19999999999998,
+          "type": "skill_segment",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "duration": 0.3
+        },
+        {
+          "time": 7.366666666666646,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 116,
+          "hpLost": 116,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": 0,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": 0,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 7.366666666666646,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:0",
+          "value": 116,
+          "critical": true
+        },
+        {
+          "time": 7.366666666666646,
+          "type": "hit",
+          "id": "training:target:1",
+          "value": 116,
+          "hpLost": 116,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": -1.5707963267948966,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": -1.4,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 7.366666666666646,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": -1.4,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:1",
+          "value": 116,
+          "critical": true
+        },
+        {
+          "time": 7.366666666666646,
+          "type": "hit",
+          "id": "training:target:2",
+          "value": 116,
+          "hpLost": 116,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": 1.5707963267948966,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": 1.4,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 7.366666666666646,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 1.4,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:2",
+          "value": 116,
+          "critical": true
+        },
+        {
+          "time": 7.516666666666645,
+          "type": "miss",
+          "text": "MISS",
+          "id": "training:target:3",
+          "action": "cast:3",
+          "reason": "accuracy",
+          "chance": 0.9505,
+          "roll": 0.9923214805312455,
+          "at": {
+            "x": -0.7,
+            "z": -2.5
+          }
+        },
+        {
+          "time": 7.516666666666645,
+          "type": "hit",
+          "id": "training:target:4",
+          "value": 116,
+          "hpLost": 116,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": 0.4366271598135413,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "opening": false
+        },
+        {
+          "time": 7.516666666666645,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:4",
+          "value": 116,
+          "critical": true
+        },
+        {
+          "time": 7.949999999999977,
+          "type": "skill_segment",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 1,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3
+        },
+        {
+          "time": 7.949999999999977,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 43,
+          "hpLost": 43,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": 0,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": 0,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 7.949999999999977,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 1,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:0",
+          "value": 43,
+          "critical": true
+        },
+        {
+          "time": 7.949999999999977,
+          "type": "hit",
+          "id": "training:target:1",
+          "value": 43,
+          "hpLost": 43,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": -1.5707963267948966,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": -1.4,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 7.949999999999977,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": -1.4,
+            "z": -4
+          },
+          "segment": 1,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:1",
+          "value": 43,
+          "critical": true
+        },
+        {
+          "time": 7.949999999999977,
+          "type": "hit",
+          "id": "training:target:2",
+          "value": 43,
+          "hpLost": 43,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": 1.5707963267948966,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": 1.4,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 7.949999999999977,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 1.4,
+            "z": -4
+          },
+          "segment": 1,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:2",
+          "value": 43,
+          "critical": true
+        },
+        {
+          "time": 7.949999999999977,
+          "type": "hit",
+          "id": "training:target:4",
+          "value": 43,
+          "hpLost": 43,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": 0.4366271598135413,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "opening": false
+        },
+        {
+          "time": 7.949999999999977,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "segment": 1,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:4",
+          "value": 43,
+          "critical": true
+        },
+        {
+          "time": 8.700000000000012,
+          "type": "skill_segment",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 2,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3
+        },
+        {
+          "time": 8.700000000000012,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 43,
+          "hpLost": 43,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": 0,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": 0,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 8.700000000000012,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 2,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:0",
+          "value": 43,
+          "critical": true
+        },
+        {
+          "time": 8.700000000000012,
+          "type": "hit",
+          "id": "training:target:1",
+          "value": 43,
+          "hpLost": 43,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": -1.5707963267948966,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": -1.4,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 8.700000000000012,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": -1.4,
+            "z": -4
+          },
+          "segment": 2,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:1",
+          "value": 43,
+          "critical": true
+        },
+        {
+          "time": 8.700000000000012,
+          "type": "hit",
+          "id": "training:target:2",
+          "value": 43,
+          "hpLost": 43,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": 1.5707963267948966,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": 1.4,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 8.700000000000012,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 1.4,
+            "z": -4
+          },
+          "segment": 2,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:2",
+          "value": 43,
+          "critical": true
+        },
+        {
+          "time": 8.700000000000012,
+          "type": "hit",
+          "id": "training:target:4",
+          "value": 43,
+          "hpLost": 43,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": 0.4366271598135413,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "opening": false
+        },
+        {
+          "time": 8.700000000000012,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "segment": 2,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:4",
+          "value": 43,
+          "critical": true
+        },
+        {
+          "time": 9.450000000000049,
+          "type": "skill_segment",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 3,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3
+        },
+        {
+          "time": 9.450000000000049,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 43,
+          "hpLost": 43,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": 0,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": 0,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 9.450000000000049,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 3,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:0",
+          "value": 43,
+          "critical": true
+        },
+        {
+          "time": 9.450000000000049,
+          "type": "hit",
+          "id": "training:target:1",
+          "value": 43,
+          "hpLost": 43,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": -1.5707963267948966,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": -1.4,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 9.450000000000049,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": -1.4,
+            "z": -4
+          },
+          "segment": 3,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:1",
+          "value": 43,
+          "critical": true
+        },
+        {
+          "time": 9.450000000000049,
+          "type": "hit",
+          "id": "training:target:2",
+          "value": 43,
+          "hpLost": 43,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": 1.5707963267948966,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": 1.4,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 9.450000000000049,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 1.4,
+            "z": -4
+          },
+          "segment": 3,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:2",
+          "value": 43,
+          "critical": true
+        },
+        {
+          "time": 9.450000000000049,
+          "type": "hit",
+          "id": "training:target:4",
+          "value": 43,
+          "hpLost": 43,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": 0.4366271598135413,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "opening": false
+        },
+        {
+          "time": 9.450000000000049,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "segment": 3,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:4",
+          "value": 43,
+          "critical": true
+        },
+        {
+          "time": 10.200000000000086,
+          "type": "skill_segment",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 4,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3
+        },
+        {
+          "time": 10.200000000000086,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 43,
+          "hpLost": 43,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": 0,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": 0,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 10.200000000000086,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 4,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:0",
+          "value": 43,
+          "critical": true
+        },
+        {
+          "time": 10.200000000000086,
+          "type": "hit",
+          "id": "training:target:1",
+          "value": 43,
+          "hpLost": 43,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": -1.5707963267948966,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": -1.4,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 10.200000000000086,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": -1.4,
+            "z": -4
+          },
+          "segment": 4,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:1",
+          "value": 43,
+          "critical": true
+        },
+        {
+          "time": 10.200000000000086,
+          "type": "hit",
+          "id": "training:target:2",
+          "value": 43,
+          "hpLost": 43,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": 1.5707963267948966,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": 1.4,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 10.200000000000086,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 1.4,
+            "z": -4
+          },
+          "segment": 4,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:2",
+          "value": 43,
+          "critical": true
+        },
+        {
+          "time": 10.200000000000086,
+          "type": "hit",
+          "id": "training:target:4",
+          "value": 43,
+          "hpLost": 43,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_05",
+          "charged": false,
+          "angle": 0.4366271598135413,
+          "source": "spell",
+          "action": "cast:3",
+          "at": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "opening": false
+        },
+        {
+          "time": 10.200000000000086,
+          "type": "skill_hit",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "segment": 4,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3,
+          "targetId": "training:target:4",
+          "value": 43,
+          "critical": true
+        },
+        {
+          "time": 11.200000000000136,
+          "type": "skill_end",
+          "skillId": "FIR_05",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:3",
+          "shape": "filledWaveRectangle",
+          "geometry": {
+            "kind": "filledWaveRectangle",
+            "origin": "aimPoint",
+            "widthMetres": 6,
+            "depthMetres": 3
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 5,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 6,
+          "length": 0,
+          "depth": 3
+        }
+      ],
+      "summary": {
+        "hits": 20,
+        "damage": 1152,
+        "misses": 1,
+        "criticalHits": 20,
+        "last": {
+          "frame": 239,
+          "time": 14.400000000000295,
+          "cameraHeight": 4.3,
+          "ground": {
+            "capacity": 8,
+            "allocated": 0,
+            "active": [],
+            "cameraBound": true
+          },
+          "fire": {
+            "model": "pyro-keyframes-v7",
+            "capacity": 64,
+            "allocated": 30,
+            "active": []
+          },
+          "meteor": {
+            "model": "incandescent-comet-v10",
+            "capacity": 4,
+            "opaqueRockMeshes": 0,
+            "active": []
+          },
+          "shield": {
+            "visible": false,
+            "amount": 0,
+            "start": null,
+            "until": null,
+            "opacity": 0,
+            "patternOpacity": 0,
+            "broken": false,
+            "hitAt": null,
+            "position": {
+              "x": 0,
+              "y": 1,
+              "z": -8
+            },
+            "scale": {
+              "x": 1.88,
+              "y": 2.68,
+              "z": 1.88
+            },
+            "vertices": 625,
+            "triangles": 1152,
+            "passes": 2
+          },
+          "native": {
+            "cues": [],
+            "particles": {
+              "allocated": 15,
+              "active": 0
+            },
+            "linePool": 1,
+            "bodyPool": 0
+          },
+          "hits": 20,
+          "damage": 1152,
+          "misses": 1,
+          "criticalHits": 20,
+          "cooldowns": {
+            "FIR_05": 0
+          },
+          "ultimateLock": 0,
+          "casts": [],
+          "projectiles": []
+        },
+        "peakFire": 30,
+        "peakGround": 0
+      }
+    },
+    {
+      "id": "FIR_02",
+      "name": "陨星天坠",
+      "ultimate": true,
+      "seconds": 9,
+      "start": {
+        "time": 14.600000000000305,
+        "cameraHeight": 4.3,
+        "ground": {
+          "capacity": 8,
+          "allocated": 0,
+          "active": [],
+          "cameraBound": true
+        },
+        "fire": {
+          "model": "pyro-keyframes-v7",
+          "capacity": 64,
+          "allocated": 30,
+          "active": []
+        },
+        "meteor": {
+          "model": "incandescent-comet-v10",
+          "capacity": 4,
+          "opaqueRockMeshes": 0,
+          "active": []
+        },
+        "shield": {
+          "visible": false,
+          "amount": 0,
+          "start": null,
+          "until": null,
+          "opacity": 0,
+          "patternOpacity": 0,
+          "broken": false,
+          "hitAt": null,
+          "position": {
+            "x": 0,
+            "y": 1,
+            "z": -8
+          },
+          "scale": {
+            "x": 1.88,
+            "y": 2.68,
+            "z": 1.88
+          },
+          "vertices": 625,
+          "triangles": 1152,
+          "passes": 2
+        },
+        "native": {
+          "cues": [],
+          "particles": {
+            "allocated": 15,
+            "active": 0
+          },
+          "linePool": 1,
+          "bodyPool": 0
+        },
+        "hits": 0,
+        "damage": 0,
+        "misses": 0,
+        "criticalHits": 0,
+        "cooldowns": {},
+        "ultimateLock": 0,
+        "casts": [],
+        "projectiles": []
+      },
+      "frames": 270,
+      "events": [
+        {
+          "time": 15.016666666666993,
+          "type": "skill_cast",
+          "skillId": "FIR_02",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:4",
+          "shape": "filledImpactDisk",
+          "geometry": {
+            "kind": "filledImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 3.8
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 3.8,
+          "width": 0,
+          "length": 0,
+          "depth": 0,
+          "duration": 0.85
+        },
+        {
+          "time": 15.850000000000367,
+          "type": "skill_release",
+          "skillId": "FIR_02",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:4",
+          "shape": "filledImpactDisk",
+          "geometry": {
+            "kind": "filledImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 3.8
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 3.8,
+          "width": 0,
+          "length": 0,
+          "depth": 0
+        },
+        {
+          "time": 15.850000000000367,
+          "type": "skill_segment",
+          "skillId": "FIR_02",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:4",
+          "shape": "filledImpactDisk",
+          "geometry": {
+            "kind": "filledImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 3.8
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 3.8,
+          "width": 0,
+          "length": 0,
+          "depth": 0
+        },
+        {
+          "time": 15.850000000000367,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 389,
+          "hpLost": 389,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_02",
+          "charged": false,
+          "angle": 0,
+          "source": "spell",
+          "action": "cast:4",
+          "at": {
+            "x": 0,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 15.850000000000367,
+          "type": "skill_hit",
+          "skillId": "FIR_02",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:4",
+          "shape": "filledImpactDisk",
+          "geometry": {
+            "kind": "filledImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 3.8
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 3.8,
+          "width": 0,
+          "length": 0,
+          "depth": 0,
+          "targetId": "training:target:0",
+          "value": 389,
+          "critical": true
+        },
+        {
+          "time": 15.850000000000367,
+          "type": "hit",
+          "id": "training:target:1",
+          "value": 389,
+          "hpLost": 389,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_02",
+          "charged": false,
+          "angle": -1.5707963267948966,
+          "source": "spell",
+          "action": "cast:4",
+          "at": {
+            "x": -1.4,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 15.850000000000367,
+          "type": "skill_hit",
+          "skillId": "FIR_02",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:4",
+          "shape": "filledImpactDisk",
+          "geometry": {
+            "kind": "filledImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 3.8
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": -1.4,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 3.8,
+          "width": 0,
+          "length": 0,
+          "depth": 0,
+          "targetId": "training:target:1",
+          "value": 389,
+          "critical": true
+        },
+        {
+          "time": 15.850000000000367,
+          "type": "hit",
+          "id": "training:target:2",
+          "value": 389,
+          "hpLost": 389,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_02",
+          "charged": false,
+          "angle": 1.5707963267948966,
+          "source": "spell",
+          "action": "cast:4",
+          "at": {
+            "x": 1.4,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 15.850000000000367,
+          "type": "skill_hit",
+          "skillId": "FIR_02",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:4",
+          "shape": "filledImpactDisk",
+          "geometry": {
+            "kind": "filledImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 3.8
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 1.4,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 3.8,
+          "width": 0,
+          "length": 0,
+          "depth": 0,
+          "targetId": "training:target:2",
+          "value": 389,
+          "critical": true
+        },
+        {
+          "time": 15.850000000000367,
+          "type": "hit",
+          "id": "training:target:3",
+          "value": 389,
+          "hpLost": 389,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_02",
+          "charged": false,
+          "angle": -0.4366271598135413,
+          "source": "spell",
+          "action": "cast:4",
+          "at": {
+            "x": -0.7,
+            "z": -2.5
+          },
+          "opening": false
+        },
+        {
+          "time": 15.850000000000367,
+          "type": "skill_hit",
+          "skillId": "FIR_02",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:4",
+          "shape": "filledImpactDisk",
+          "geometry": {
+            "kind": "filledImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 3.8
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": -0.7,
+            "z": -2.5
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 3.8,
+          "width": 0,
+          "length": 0,
+          "depth": 0,
+          "targetId": "training:target:3",
+          "value": 389,
+          "critical": true
+        },
+        {
+          "time": 15.850000000000367,
+          "type": "hit",
+          "id": "training:target:4",
+          "value": 389,
+          "hpLost": 389,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_02",
+          "charged": false,
+          "angle": 0.4366271598135413,
+          "source": "spell",
+          "action": "cast:4",
+          "at": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "opening": false
+        },
+        {
+          "time": 15.850000000000367,
+          "type": "skill_hit",
+          "skillId": "FIR_02",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:4",
+          "shape": "filledImpactDisk",
+          "geometry": {
+            "kind": "filledImpactDisk",
+            "origin": "aimPoint",
+            "radiusMetres": 3.8
+          },
+          "from": {
+            "x": 0,
+            "z": -4
+          },
+          "to": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 3.8,
+          "width": 0,
+          "length": 0,
+          "depth": 0,
+          "targetId": "training:target:4",
+          "value": 389,
+          "critical": true
+        }
+      ],
+      "summary": {
+        "hits": 5,
+        "damage": 1945,
+        "misses": 0,
+        "criticalHits": 5,
+        "last": {
+          "frame": 269,
+          "time": 23.59999999999994,
+          "cameraHeight": 4.3,
+          "ground": {
+            "capacity": 8,
+            "allocated": 1,
+            "active": [],
+            "cameraBound": true
+          },
+          "fire": {
+            "model": "pyro-keyframes-v7",
+            "capacity": 64,
+            "allocated": 30,
+            "active": []
+          },
+          "meteor": {
+            "model": "incandescent-comet-v10",
+            "capacity": 4,
+            "opaqueRockMeshes": 0,
+            "active": []
+          },
+          "shield": {
+            "visible": false,
+            "amount": 0,
+            "start": null,
+            "until": null,
+            "opacity": 0,
+            "patternOpacity": 0,
+            "broken": false,
+            "hitAt": null,
+            "position": {
+              "x": 0,
+              "y": 1,
+              "z": -8
+            },
+            "scale": {
+              "x": 1.88,
+              "y": 2.68,
+              "z": 1.88
+            },
+            "vertices": 625,
+            "triangles": 1152,
+            "passes": 2
+          },
+          "native": {
+            "cues": [],
+            "particles": {
+              "allocated": 17,
+              "active": 0
+            },
+            "linePool": 1,
+            "bodyPool": 0
+          },
+          "hits": 5,
+          "damage": 1945,
+          "misses": 0,
+          "criticalHits": 5,
+          "cooldowns": {
+            "FIR_02": 4.249999999999815,
+            "open:training:target:0": 0,
+            "open:training:target:1": 0,
+            "open:training:target:2": 0,
+            "open:training:target:3": 0,
+            "open:training:target:4": 0
+          },
+          "ultimateLock": 0,
+          "casts": [],
+          "projectiles": []
+        },
+        "peakFire": 16,
+        "peakGround": 1
+      }
+    },
+    {
+      "id": "FIR_04",
+      "name": "烈焰喷流",
+      "slot": 1,
+      "seconds": 8,
+      "start": {
+        "time": 23.79999999999993,
+        "cameraHeight": 4.3,
+        "ground": {
+          "capacity": 8,
+          "allocated": 1,
+          "active": [],
+          "cameraBound": true
+        },
+        "fire": {
+          "model": "pyro-keyframes-v7",
+          "capacity": 64,
+          "allocated": 30,
+          "active": []
+        },
+        "meteor": {
+          "model": "incandescent-comet-v10",
+          "capacity": 4,
+          "opaqueRockMeshes": 0,
+          "active": []
+        },
+        "shield": {
+          "visible": false,
+          "amount": 0,
+          "start": null,
+          "until": null,
+          "opacity": 0,
+          "patternOpacity": 0,
+          "broken": false,
+          "hitAt": null,
+          "position": {
+            "x": 0,
+            "y": 1,
+            "z": -8
+          },
+          "scale": {
+            "x": 1.88,
+            "y": 2.68,
+            "z": 1.88
+          },
+          "vertices": 625,
+          "triangles": 1152,
+          "passes": 2
+        },
+        "native": {
+          "cues": [],
+          "particles": {
+            "allocated": 17,
+            "active": 0
+          },
+          "linePool": 1,
+          "bodyPool": 0
+        },
+        "hits": 0,
+        "damage": 0,
+        "misses": 0,
+        "criticalHits": 0,
+        "cooldowns": {},
+        "ultimateLock": 0,
+        "casts": [],
+        "projectiles": []
+      },
+      "frames": 240,
+      "events": [
+        {
+          "time": 24.216666666666573,
+          "type": "skill_cast",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0,
+          "duration": 0.25
+        },
+        {
+          "time": 24.449999999999893,
+          "type": "skill_release",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0
+        },
+        {
+          "time": 24.449999999999893,
+          "type": "skill_zone",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0,
+          "duration": 4
+        },
+        {
+          "time": 24.449999999999893,
+          "type": "skill_segment",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0
+        },
+        {
+          "time": 24.449999999999893,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 76,
+          "hpLost": 76,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_04",
+          "charged": false,
+          "angle": 0,
+          "source": "spell",
+          "action": "cast:5",
+          "at": {
+            "x": 0,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 24.449999999999893,
+          "type": "skill_hit",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0,
+          "targetId": "training:target:0",
+          "value": 76,
+          "critical": true
+        },
+        {
+          "time": 24.449999999999893,
+          "type": "hit",
+          "id": "training:target:3",
+          "value": 76,
+          "hpLost": 76,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_04",
+          "charged": false,
+          "angle": -0.12659212727997207,
+          "source": "spell",
+          "action": "cast:5",
+          "at": {
+            "x": -0.7,
+            "z": -2.5
+          },
+          "opening": false
+        },
+        {
+          "time": 24.449999999999893,
+          "type": "skill_hit",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": -0.7,
+            "z": -2.5
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0,
+          "targetId": "training:target:3",
+          "value": 76,
+          "critical": true
+        },
+        {
+          "time": 24.449999999999893,
+          "type": "hit",
+          "id": "training:target:4",
+          "value": 76,
+          "hpLost": 76,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_04",
+          "charged": false,
+          "angle": 0.12659212727997207,
+          "source": "spell",
+          "action": "cast:5",
+          "at": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "opening": false
+        },
+        {
+          "time": 24.449999999999893,
+          "type": "skill_hit",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "segment": 0,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0,
+          "targetId": "training:target:4",
+          "value": 76,
+          "critical": true
+        },
+        {
+          "time": 25.449999999999836,
+          "type": "skill_segment",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 1,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0
+        },
+        {
+          "time": 25.449999999999836,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 76,
+          "hpLost": 76,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_04",
+          "charged": false,
+          "angle": 0,
+          "source": "spell",
+          "action": "cast:5",
+          "at": {
+            "x": 0,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 25.449999999999836,
+          "type": "skill_hit",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 1,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0,
+          "targetId": "training:target:0",
+          "value": 76,
+          "critical": true
+        },
+        {
+          "time": 25.449999999999836,
+          "type": "hit",
+          "id": "training:target:3",
+          "value": 76,
+          "hpLost": 76,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_04",
+          "charged": false,
+          "angle": -0.12659212727997207,
+          "source": "spell",
+          "action": "cast:5",
+          "at": {
+            "x": -0.7,
+            "z": -2.5
+          },
+          "opening": false
+        },
+        {
+          "time": 25.449999999999836,
+          "type": "skill_hit",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": -0.7,
+            "z": -2.5
+          },
+          "segment": 1,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0,
+          "targetId": "training:target:3",
+          "value": 76,
+          "critical": true
+        },
+        {
+          "time": 25.449999999999836,
+          "type": "hit",
+          "id": "training:target:4",
+          "value": 76,
+          "hpLost": 76,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_04",
+          "charged": false,
+          "angle": 0.12659212727997207,
+          "source": "spell",
+          "action": "cast:5",
+          "at": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "opening": false
+        },
+        {
+          "time": 25.449999999999836,
+          "type": "skill_hit",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "segment": 1,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0,
+          "targetId": "training:target:4",
+          "value": 76,
+          "critical": true
+        },
+        {
+          "time": 26.44999999999978,
+          "type": "skill_segment",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 2,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0
+        },
+        {
+          "time": 26.44999999999978,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 76,
+          "hpLost": 76,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_04",
+          "charged": false,
+          "angle": 0,
+          "source": "spell",
+          "action": "cast:5",
+          "at": {
+            "x": 0,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 26.44999999999978,
+          "type": "skill_hit",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 2,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0,
+          "targetId": "training:target:0",
+          "value": 76,
+          "critical": true
+        },
+        {
+          "time": 26.44999999999978,
+          "type": "hit",
+          "id": "training:target:3",
+          "value": 76,
+          "hpLost": 76,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_04",
+          "charged": false,
+          "angle": -0.12659212727997207,
+          "source": "spell",
+          "action": "cast:5",
+          "at": {
+            "x": -0.7,
+            "z": -2.5
+          },
+          "opening": false
+        },
+        {
+          "time": 26.44999999999978,
+          "type": "skill_hit",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": -0.7,
+            "z": -2.5
+          },
+          "segment": 2,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0,
+          "targetId": "training:target:3",
+          "value": 76,
+          "critical": true
+        },
+        {
+          "time": 26.44999999999978,
+          "type": "hit",
+          "id": "training:target:4",
+          "value": 76,
+          "hpLost": 76,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_04",
+          "charged": false,
+          "angle": 0.12659212727997207,
+          "source": "spell",
+          "action": "cast:5",
+          "at": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "opening": false
+        },
+        {
+          "time": 26.44999999999978,
+          "type": "skill_hit",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "segment": 2,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0,
+          "targetId": "training:target:4",
+          "value": 76,
+          "critical": true
+        },
+        {
+          "time": 27.449999999999722,
+          "type": "skill_segment",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 3,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0
+        },
+        {
+          "time": 27.449999999999722,
+          "type": "hit",
+          "id": "training:target:0",
+          "value": 76,
+          "hpLost": 76,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_04",
+          "charged": false,
+          "angle": 0,
+          "source": "spell",
+          "action": "cast:5",
+          "at": {
+            "x": 0,
+            "z": -4
+          },
+          "opening": false
+        },
+        {
+          "time": 27.449999999999722,
+          "type": "skill_hit",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 3,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0,
+          "targetId": "training:target:0",
+          "value": 76,
+          "critical": true
+        },
+        {
+          "time": 27.449999999999722,
+          "type": "hit",
+          "id": "training:target:3",
+          "value": 76,
+          "hpLost": 76,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_04",
+          "charged": false,
+          "angle": -0.12659212727997207,
+          "source": "spell",
+          "action": "cast:5",
+          "at": {
+            "x": -0.7,
+            "z": -2.5
+          },
+          "opening": false
+        },
+        {
+          "time": 27.449999999999722,
+          "type": "skill_hit",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": -0.7,
+            "z": -2.5
+          },
+          "segment": 3,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0,
+          "targetId": "training:target:3",
+          "value": 76,
+          "critical": true
+        },
+        {
+          "time": 27.449999999999722,
+          "type": "hit",
+          "id": "training:target:4",
+          "value": 76,
+          "hpLost": 76,
+          "owner": "player",
+          "weapon": "W11",
+          "family": "FIR",
+          "material": "soft",
+          "element": "FIR",
+          "critical": true,
+          "lethal": false,
+          "petEligible": false,
+          "skillId": "FIR_04",
+          "charged": false,
+          "angle": 0.12659212727997207,
+          "source": "spell",
+          "action": "cast:5",
+          "at": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "opening": false
+        },
+        {
+          "time": 27.449999999999722,
+          "type": "skill_hit",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0.7,
+            "z": -2.5
+          },
+          "segment": 3,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0,
+          "targetId": "training:target:4",
+          "value": 76,
+          "critical": true
+        },
+        {
+          "time": 28.46666666666633,
+          "type": "skill_end",
+          "skillId": "FIR_04",
+          "family": "FIR",
+          "rank": 1,
+          "castId": "cast:5",
+          "shape": "instantCorridor",
+          "geometry": {
+            "kind": "instantCorridor",
+            "origin": "caster",
+            "lengthMetres": 7,
+            "widthMetres": 1.2
+          },
+          "from": {
+            "x": 0,
+            "z": -8
+          },
+          "to": {
+            "x": 0,
+            "z": -4
+          },
+          "segment": 4,
+          "angle": 0,
+          "angleDegrees": 0,
+          "radius": 0,
+          "width": 1.2,
+          "length": 7,
+          "depth": 0
+        }
+      ],
+      "summary": {
+        "hits": 12,
+        "damage": 912,
+        "misses": 0,
+        "criticalHits": 12,
+        "last": {
+          "frame": 239,
+          "time": 31.799999999999475,
+          "cameraHeight": 4.3,
+          "ground": {
+            "capacity": 8,
+            "allocated": 3,
+            "active": [],
+            "cameraBound": true
+          },
+          "fire": {
+            "model": "pyro-keyframes-v7",
+            "capacity": 64,
+            "allocated": 30,
+            "active": []
+          },
+          "meteor": {
+            "model": "incandescent-comet-v10",
+            "capacity": 4,
+            "opaqueRockMeshes": 0,
+            "active": []
+          },
+          "shield": {
+            "visible": false,
+            "amount": 0,
+            "start": null,
+            "until": null,
+            "opacity": 0,
+            "patternOpacity": 0,
+            "broken": false,
+            "hitAt": null,
+            "position": {
+              "x": 0,
+              "y": 1,
+              "z": -8
+            },
+            "scale": {
+              "x": 1.88,
+              "y": 2.68,
+              "z": 1.88
+            },
+            "vertices": 625,
+            "triangles": 1152,
+            "passes": 2
+          },
+          "native": {
+            "cues": [],
+            "particles": {
+              "allocated": 17,
+              "active": 0
+            },
+            "linePool": 1,
+            "bodyPool": 0
+          },
+          "hits": 12,
+          "damage": 912,
+          "misses": 0,
+          "criticalHits": 12,
+          "cooldowns": {
+            "FIR_04": 0
+          },
+          "ultimateLock": 0,
+          "casts": [],
+          "projectiles": []
+        },
+        "peakFire": 2,
+        "peakGround": 2
+      }
+    }
+  ]
+}

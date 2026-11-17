@@ -1,3 +1,4 @@
+import {WarriorSkillEffects} from './WarriorSkillEffects';
 import {Camera,Node,Material,MeshRenderer,ParticleSystem,Burst,Vec3,Quat,GradientRange,CurveRange,director,Director} from 'cc';
 import {ManagedLine as Line} from '../../../shared/assets/ManagedLine';
 import {BASIC_ATTACK,type GameSession,type ProjectileState} from '../../../core/GameSession';
@@ -15,15 +16,18 @@ import {SkillMeteorBody} from './SkillMeteorBody';
 import {ThunderGroundAura} from './ThunderGroundAura';
 import {ThunderContactLights} from './ThunderContactLights';
 import {ThunderArcField} from './ThunderArcField';
-import {THUNDER_COLORS,isThunderColor} from './SkillEnergyStrokes';
+import {THUNDER_COLORS,isThunderColor,ARROW_COLORS,drawThunderDart,drawThunderDartContact} from './SkillEnergyStrokes';
 import {actionReleaseAt,type PlayerPresentation} from '../../actors/runtime/PlayerActionPresentation';
 import {COMBAT_SKILLS} from '../data/PureSkills';
 import {weaponCombatFamily} from '../../progression/common/CombatLoadouts';
 import {SkillAimIndicators} from './SkillAimIndicators';
+import {drawSpellCast} from './SpellCastEffects';
+import {UnifiedShieldEffects} from './UnifiedShieldEffects';
+import {FireGroundEffects} from './FireGroundEffects';
 
 type Emitter={kind:VfxKind;node:Node;system:ParticleSystem;life:number;until:number;key?:string;touched:boolean};
-type Body={kind:string;node:Node;key?:string;touched:boolean};
-type Path={points:Vec3[];time:number;weapon:string;family?:string};
+type Body={kind:string;node:Node;key?:string;touched:boolean;playerArrow?:boolean};
+type Path={points:Vec3[];time:number;weapon:string;family?:string;playerArrow?:boolean};
 type RibbonItem={node:Node;line:Line;width?:number;taper?:boolean;color?:string};
 type RibbonPool={items:RibbonItem[];used:number};
 export interface AttackRangePreview {rangeMetres:number;angle:number;valid:boolean;angleDegrees?:number;target?:Point;}
@@ -38,26 +42,39 @@ export class Effects {
  private emitters:Emitter[]=[];private loops=new Map<string,Emitter>();private lines:RibbonItem[]=[];private lineIndex=0;
  private readonly linePools=new Map<Material,RibbonPool>();
  private bodies:Body[]=[];private paths=new Map<string,Path>();private actionCues=new Set<string>();private fireCues=new Set<string>();private phases=new Map<string,string>();
- private now=0;private lastTime=-1;private area='';private root:Node;private skills:NativeSkillVfx;private enemies:NativeEnemyVfx;private blades:MeleeBladeSurfaces;private fireSprites:SkillFireSprites;private meteor:SkillMeteorBody;private groundThunder:ThunderGroundAura;private thunderContacts:ThunderContactLights;private thunderField:ThunderArcField;
+ private now=0;private lastTime=-1;private area='';private root:Node;private skills:NativeSkillVfx;private warrior:WarriorSkillEffects;private enemies:NativeEnemyVfx;private blades:MeleeBladeSurfaces;private fireSprites:SkillFireSprites;private meteor:SkillMeteorBody;private groundThunder:ThunderGroundAura;private thunderContacts:ThunderContactLights;private thunderField:ThunderArcField;
  private details:{points:Vec3[];color:string;width:number;alpha:number;style?:VfxLineStyle}[]=[];
  private playerSource?:()=>PlayerPresentation|undefined;
+ private handCast?:{key:string;actionId:string;family:'FIR'|'THU';palm:boolean};
+ private syncSpellHand(){
+  const cast=this.handCast,source=this.playerSource?.();
+  if(this.disposed||!cast||source?.actionId!==cast.actionId)return;
+  const hand=(cast.palm?source.castHand:undefined)??source.hand;
+  if(cast.family==='FIR')this.fireSprites.followCharge(cast.key,hand);
+  else this.thunderField.followHand(cast.key,hand);
+ }
  private aimIndicators?:SkillAimIndicators;
  private meleeHost:MeleeVfxHost;private lowMotion=false;
  private basicTrails:{id:string;p:Point;angle:number;stage:number;start:number}[]=[];
  private fireContacts:{id:string;p:Point;start:number}[]=[];
+ private thunderBasicContacts:{id:string;p:Point;start:number}[]=[];
  private fireFamily=false;
+ private thunderFamily=false;
+ private levelUpPendingArea='';
+ private fireGround:FireGroundEffects;
+ private shields:UnifiedShieldEffects;
  private readonly fireDirection=new Vec3();
  private readonly lineCentre=new Vec3();
  private meleeContacts:{id:string;p:Point;angle:number;stage:number;start:number}[]=[];
- set reducedMotion(value:boolean){this.lowMotion=value;this.skills.reducedMotion=value;this.fireSprites.reducedMotion=value;this.enemies.reducedMotion=value;}
+ set reducedMotion(value:boolean){this.lowMotion=value;this.skills.reducedMotion=value;this.fireSprites.reducedMotion=value;this.enemies.reducedMotion=value;this.shields.reducedMotion=value;this.fireGround.reducedMotion=value;}
  get reducedMotion(){return this.lowMotion;}
  private projectileOffsets=new Map<string,Vec3>();private projectileRanges=new Map<string,number>();private renderingProjectile:ProjectileState|undefined;
  private volleyWarmup:Promise<void>|null=null;private disposed=false;
  setPlayerPresentationSource(source:()=>PlayerPresentation|undefined){this.playerSource=source;}
- constructor(readonly world:SceneBuilder,private readonly flatCamera?:Camera,private readonly nativePlayer=false){this.root=new Node('CombatVFX');world.root.addChild(this.root);this.area=world.area.id;this.blades=new MeleeBladeSurfaces(this.root,flatCamera);this.groundThunder=new ThunderGroundAura(this.root,p=>world.height(p));this.thunderContacts=new ThunderContactLights(this.root,flatCamera);this.thunderField=new ThunderArcField(this.root,(p,h)=>this.at(p,h));this.fireSprites=new SkillFireSprites(this.root,flatCamera,p=>world.height(p),(a,b)=>world.visible(a,b)&&Math.abs(world.height(a)-world.height(b))<1.2);this.meteor=new SkillMeteorBody(p=>world.height(p),this.fireSprites);const host={meteor:(key:string,p:Point,rank:number,progress:number,time:number)=>this.meteor.draw(key,p,rank,progress,time),thunderField:(key:string,points:readonly Point[],rank:number,alpha:number,pulse:number)=>this.thunderField.draw(key,points,rank,alpha,pulse),thunderContact:(key:string,center:Vec3,rank:number,alpha:number,time:number)=>this.thunderContacts.draw(key,center,rank,alpha,time),visible:(a:Point,b:Point)=>world.visible(a,b)&&Math.abs(world.height(a)-world.height(b))<1.2,thunderGround:(key:string,p:Point,radius:number,alpha:number,phase:number)=>this.groundThunder.draw(key,p,radius,alpha,phase),at:(p:Point,h?:number)=>this.at(p,h),line:(p:Vec3[],c:string,w?:number,a?:number,t?:boolean,style?:VfxLineStyle)=>this.line(p,c,w,a,t,style),detailLine:(points:Vec3[],color:string,width=.02,alpha=140,style?:VfxLineStyle)=>{if(this.details.length<160)this.details.push({points,color,width,alpha,style});},burst:(k:VfxKind,p:Point,h:number,n:number,s?:number,c?:string,a?:number)=>this.burst(k,p,h,n,s,c,a),loop:(key:string,k:VfxKind,p:Point,h:number,s?:number,c?:string)=>this.loop(key,k,p,h,s,c),body:(p:ProjectileState)=>this.body(p),projectileAt:(p:ProjectileState,h:number)=>this.projectileAt(p,h),playerHand:()=>this.playerSource?.()?.hand,blade:(key:string,p:Point,height:number,angle:number,radius:number,span:number,width:number,alpha:number,progress:number,normal?:Vec3)=>this.blades.draw(key,this.playerAt(p,height),angle,radius,span,width,alpha,progress,normal),slash:(key:string,start:Vec3,end:Vec3,width:number,alpha:number,progress:number)=>this.blades.drawSlash(key,start,end,width,alpha,progress),fireProjectile:(key:string,p:Point,height:number,angle:number,size:number,time:number)=>{const q=this.renderingProjectile===p?this.projectileAt(this.renderingProjectile,height):this.at(p,height);this.fireDirection.set(Math.sin(angle),0,Math.cos(angle));this.fireSprites.drawProjectile(key,q,this.fireDirection,size,time);},firePlume:(key:string,p:Point,height:number,size:number,time:number,alpha:number)=>this.fireSprites.drawPlume(key,this.at(p,height),size,time,alpha),fireSprite:(key:string,p:Point,height:number,width:number,tall:number,phase:number,alpha:number)=>this.fireSprites.draw(key,this.renderingProjectile===p?this.projectileAt(this.renderingProjectile,height):this.at(p,height),width,tall,phase,Math.round(alpha*255)),fireRibbon:(key:string,p:Point,width:number,depth:number,angle:number,time:number,alpha:number,origin?:Point)=>this.fireSprites.drawRibbon(key,this.at(p,.03),width,depth,angle,time,Math.round(alpha*255),origin),fireVolume:(key:string,p:Point,radius:number,rank:number,progress:number,alpha:number)=>this.fireSprites.drawVolume(key,this.at(p,.03),radius,rank,progress,Math.round(alpha*255))};this.meleeHost=host;this.skills=new NativeSkillVfx(host);this.enemies=new NativeEnemyVfx(host,world,this.root,flatCamera);}
- static preload(){return Promise.all([VfxAssets.preload(),MeleeBladeSurfaces.preload()]);}
+ constructor(readonly world:SceneBuilder,private readonly flatCamera?:Camera,private readonly nativePlayer=false,private readonly battleCamera:Camera|undefined=flatCamera){this.root=new Node('CombatVFX');world.root.addChild(this.root);this.area=world.area.id;this.warrior=new WarriorSkillEffects(this.root,battleCamera,(x,z)=>world.height({x,z}));this.fireGround=new FireGroundEffects(this.root,battleCamera,p=>world.height(p),(a,b)=>world.visible(a,b)&&Math.abs(world.height(a)-world.height(b))<1.2);this.shields=new UnifiedShieldEffects(this.root,p=>this.playerAt(p,UnifiedShieldEffects.centerHeight),nativePlayer?undefined:flatCamera);this.blades=new MeleeBladeSurfaces(this.root,flatCamera);this.groundThunder=new ThunderGroundAura(this.root,p=>world.height(p));this.thunderContacts=new ThunderContactLights(this.root,flatCamera);this.thunderField=new ThunderArcField(this.root,(p,h)=>this.at(p,h));this.fireSprites=new SkillFireSprites(this.root,battleCamera,p=>world.height(p),(a,b)=>world.visible(a,b)&&Math.abs(world.height(a)-world.height(b))<1.2);this.meteor=new SkillMeteorBody(p=>world.height(p),this.fireSprites,this.root);const host={warriorUltimate:(key:string,p:Point,a:number,rank:number,elapsed:number)=>this.warrior.ultimate(key,this.playerAt(p,0),a,rank,elapsed),warriorSweep:(key:string,p:Point,a:number,r:number,span:number,stage:number,t:number,alpha:number)=>this.warrior.draw(key+':stage:'+stage,this.playerAt(p,1.02),a,r,span,.2,alpha,t),warriorContact:(key:string,p:Point,a:number,strength:number,t:number)=>this.warrior.contact(key,this.playerAt(p,.85),a,strength,t),warriorCross:(key:string,p:Point,a:number,length:number,t:number,alpha:number)=>this.warrior.cross(key,this.playerAt(p,1.02),a,length,t,alpha),warriorPulse:(key:string,p:Point,a:number,t:number,alpha:number,iron=false)=>this.warrior.pulse(key,this.playerAt(p,1.02),a,t,alpha,iron,this.playerSource?.()?.hand),groundJets:(key:string,p:Point,angle:number,length:number,width:number,age:number,alpha:number,emitting:boolean,cooling:number)=>this.fireGround.drawJets(key,p,angle,length,width,age,alpha,emitting,cooling),meteorSeal:(key:string,p:Point,radius:number,alpha:number)=>this.fireGround.drawMeteorSeal(key,p,radius,alpha),thunderBeam:(key:string,points:readonly Vec3[],width:number,alpha:number,role?:'launch'|'chain'|'launchDetail'|'chainDetail'|'accent')=>this.thunderField.addBeam(key,points,width,alpha,role),meteor:(key:string,p:Point,rank:number,progress:number,time:number)=>this.meteor.draw(key,p,rank,progress,time),thunderField:(key:string,points:readonly Point[],rank:number,alpha:number,pulse:number)=>this.thunderField.draw(key,points,rank,alpha,pulse),thunderContact:(key:string,center:Vec3,rank:number,alpha:number,time:number)=>this.thunderContacts.draw(key,center,rank,alpha,time),visible:(a:Point,b:Point)=>world.visible(a,b)&&Math.abs(world.height(a)-world.height(b))<1.2,thunderGround:(key:string,p:Point,radius:number,alpha:number,phase:number)=>this.groundThunder.draw(key,p,radius,alpha,phase),at:(p:Point,h?:number)=>this.at(p,h),line:(p:Vec3[],c:string,w?:number,a?:number,t?:boolean,style?:VfxLineStyle)=>this.line(p,c,w,a,t,style),detailLine:(points:Vec3[],color:string,width=.02,alpha=140,style?:VfxLineStyle)=>{if(this.details.length<160)this.details.push({points,color,width,alpha,style});},burst:(k:VfxKind,p:Point,h:number,n:number,s?:number,c?:string,a?:number)=>this.burst(k,p,h,n,s,c,a),loop:(key:string,k:VfxKind,p:Point,h:number,s?:number,c?:string)=>this.loop(key,k,p,h,s,c),body:(p:ProjectileState)=>this.body(p),projectileAt:(p:ProjectileState,h:number)=>this.projectileAt(p,h),playerHand:()=>this.playerSource?.()?.hand,playerCastHand:()=>{const source=this.playerSource?.();return source?.castHand??source?.hand;},blade:(key:string,p:Point,height:number,angle:number,radius:number,span:number,width:number,alpha:number,progress:number,normal?:Vec3)=>this.blades.draw(key,this.playerAt(p,height),angle,radius,span,width,alpha,progress,normal),slash:(key:string,start:Vec3,end:Vec3,width:number,alpha:number,progress:number)=>this.blades.drawSlash(key,start,end,width,alpha,progress),fireProjectile:(key:string,p:Point,height:number,angle:number,size:number,time:number)=>{const q=this.renderingProjectile===p?this.projectileAt(this.renderingProjectile,height):this.at(p,height);this.fireDirection.set(Math.sin(angle),0,Math.cos(angle));const projectile=this.renderingProjectile===p?this.renderingProjectile:undefined;const correction=projectile?this.projectileOffsets.get(projectile.id):undefined,range=projectile?this.projectileRanges.get(projectile.id):undefined;if(correction&&range&&projectile!.age*projectile!.speed<range)this.fireDirection.subtract(correction.clone().multiplyScalar(1/range));this.fireSprites.drawProjectile(key,q,this.fireDirection,size,time,255,projectile?projectile.age*projectile.speed:Infinity,this.playerSource?.()?.castHand??this.playerSource?.()?.hand);},firePlume:(key:string,p:Point,height:number,size:number,time:number,alpha:number)=>this.fireSprites.drawPlume(key,this.at(p,height),size,time,alpha),fireSprite:(key:string,p:Point,height:number,width:number,tall:number,phase:number,alpha:number)=>this.fireSprites.draw(key,this.renderingProjectile===p?this.projectileAt(this.renderingProjectile,height):this.at(p,height),width,tall,phase,Math.round(alpha*255)),fireRibbon:(key:string,p:Point,width:number,depth:number,angle:number,time:number,alpha:number,origin?:Point,cooling?:number)=>this.fireSprites.drawRibbon(key,this.at(p,.03),width,depth,angle,time,Math.round(alpha*255),origin,cooling),fireVolume:(key:string,p:Point,radius:number,rank:number,progress:number,alpha:number,angle?:number,age?:number,duration?:number)=>this.fireSprites.drawVolume(key,radius<1.1?this.at(p,.85):new Vec3(p.x,this.world.height(p)+.045,p.z),radius,rank,progress,Math.round(alpha*255),this.now,angle,age,duration)};this.meleeHost=host;this.skills=new NativeSkillVfx(host);this.enemies=new NativeEnemyVfx(host,world,this.root,flatCamera);director.on(Director.EVENT_BEFORE_DRAW,this.syncSpellHand,this);}
+ static preload(){return Promise.all([VfxAssets.preload(),MeleeBladeSurfaces.preload(),UnifiedShieldEffects.preload()]);}
  private preparedFamily='';
- async prepareShaders(point:Point,game?:GameSession){await VfxAssets.prepareShaders(this.world.root,this.at(point,.9),this.world.mesh('cylinder'));if(game)await this.prepareEquipment(game);}
+ async prepareShaders(point:Point,game?:GameSession){await Promise.all([VfxAssets.prepareShaders(this.world.root,this.at(point,.9),this.world.mesh('cylinder')),this.shields.prepare(this.playerAt(point,UnifiedShieldEffects.centerHeight)),game?this.prepareEquipment(game):Promise.resolve()]);}
  /** Create bounded native pools while the loading/equipment UI is still up.
   * Reusing them removes first-volley component/material allocation spikes.
   * Counts, particle profiles, paths and gameplay are identical at emission.
@@ -66,14 +83,14 @@ export class Effects {
   if(this.disposed)return;
   const s=game.state,count=s.enemies.filter(e=>e.hp>0).length,family=weaponCombatFamily(s.equipment.weapon,s.combat);
   if(this.preparedFamily!==family){
-   this.clear();this.blades.destroy();this.fireSprites.destroy();this.meteor.destroy();this.groundThunder.destroy();
-   this.blades=new MeleeBladeSurfaces(this.root,this.flatCamera);this.fireSprites=new SkillFireSprites(this.root,this.flatCamera,p=>this.world.height(p),(a,b)=>this.world.visible(a,b)&&Math.abs(this.world.height(a)-this.world.height(b))<1.2);this.meteor=new SkillMeteorBody(p=>this.world.height(p),this.fireSprites);this.groundThunder=new ThunderGroundAura(this.root,p=>this.world.height(p));
+   this.clear();this.warrior.destroy();this.warrior=new WarriorSkillEffects(this.root,this.battleCamera,(x,z)=>this.world.height({x,z}));this.fireGround.destroy();this.blades.destroy();this.fireSprites.destroy();this.meteor.destroy();this.groundThunder.destroy();
+   this.fireGround=new FireGroundEffects(this.root,this.battleCamera,p=>this.world.height(p),(a,b)=>this.world.visible(a,b)&&Math.abs(this.world.height(a)-this.world.height(b))<1.2);this.fireGround.reducedMotion=this.lowMotion;this.blades=new MeleeBladeSurfaces(this.root,this.flatCamera);this.fireSprites=new SkillFireSprites(this.root,this.battleCamera,p=>this.world.height(p),(a,b)=>this.world.visible(a,b)&&Math.abs(this.world.height(a)-this.world.height(b))<1.2);this.meteor=new SkillMeteorBody(p=>this.world.height(p),this.fireSprites,this.root);this.groundThunder=new ThunderGroundAura(this.root,p=>this.world.height(p));
    this.fireSprites.reducedMotion=this.lowMotion;this.preparedFamily=family;this.volleyWarmup=undefined;
    // Native enemy fire uses the shared particle masks, not these player-only
    // sequences. Release only after their old renderers/materials are detached.
-   if(family!=='FIR')SkillFireSprites.dispose();if(family!=='THU')ThunderGroundAura.dispose();
+   if(family!=='WAR')WarriorSkillEffects.disposeAssets();if(family!=='FIR'){SkillFireSprites.dispose();SkillMeteorBody.dispose();FireGroundEffects.dispose();}if(family!=='THU')ThunderGroundAura.dispose();
   }
-  if(family==='FIR')await SkillFireSprites.preload();else if(family==='THU')await ThunderGroundAura.preload();else if(family==='WAR')await MeleeBladeSurfaces.preload();
+  if(family==='FIR')await Promise.all([SkillFireSprites.preload(),SkillMeteorBody.preload(),FireGroundEffects.preload()]);else if(family==='THU')await Promise.all([ThunderGroundAura.preload(),ThunderArcField.preload()]);else if(family==='WAR'){await Promise.all([MeleeBladeSurfaces.preload(),WarriorSkillEffects.preload()]);this.warrior.prepare();}
   if(this.disposed||family!=='BOW'||count<4)return;
   await (this.volleyWarmup??(this.volleyWarmup=this.warmVolleyPools(s.player,Math.min(24,Math.max(12,count+4)))));
  }
@@ -105,7 +122,7 @@ export class Effects {
   }
  }
  /** Release shared masks only after all Effects instances are destroyed. */
- static dispose(){VfxAssets.dispose();SkillFireSprites.dispose();MeleeBladeSurfaces.disposeAssets();ThunderGroundAura.dispose();}
+ static dispose(){FireGroundEffects.dispose();UnifiedShieldEffects.dispose();VfxAssets.dispose();SkillFireSprites.dispose();SkillMeteorBody.dispose();MeleeBladeSurfaces.disposeAssets();WarriorSkillEffects.disposeAssets();ThunderGroundAura.dispose();ThunderArcField.dispose();}
  private at(p:Point,height=0){
   const base=new Vec3(p.x,this.world.height(p),p.z);
   // 2D人物的身高沿相机up展开，手部特效采用相同坐标，避免被世界Y投影压低。
@@ -114,22 +131,27 @@ export class Effects {
  }
  private playerAt(p:Point,height:number):Vec3{return this.nativePlayer?new Vec3(p.x,this.world.height(p)+height,p.z):this.at(p,height);}
  private projectileAt(p:ProjectileState,height:number):Vec3 {
-  const base=p.owner==='player'?this.playerAt(p,height):this.at(p,height),straightShot=!!this.flatCamera&&p.kind==='arrow'||p.owner==='player'&&p.kind==='staff'&&!p.skillId&&this.fireFamily;
+  const base=p.owner==='player'?this.playerAt(p,height):this.at(p,height),straightShot=!!this.flatCamera&&p.kind==='arrow'||p.owner==='player'&&(p.skillId==='FIR_01'||p.kind==='staff'&&!p.skillId&&(this.fireFamily||this.thunderFamily));
   if(p.owner!=='player'||p.child||p.returning||!straightShot&&p.age>=.14)return base;
   let offset=this.projectileOffsets.get(p.id);
   if(!offset&&p.age<=.08){
    const source=this.playerSource?.();
    if(source&&(!p.castId||source.actionId===p.castId)){
     const origin=p.from??{x:p.x-Math.sin(p.angle)*p.speed*p.age,z:p.z-Math.cos(p.angle)*p.speed*p.age};
-    offset=source.hand.clone();
+    const palm=p.skillId&&/^(FIR|THU)_/.test(p.skillId)||p.kind==='staff'&&!p.skillId&&this.thunderFamily;
+    offset=(palm?source.castHand??source.hand:source.hand).clone();
     // All airborne effects use their visible head as the hand anchor.
 
     offset.subtract(this.playerAt(origin,height));this.projectileOffsets.set(p.id,offset);
-    if(straightShot)this.projectileRanges.set(p.id,Math.max(.01,p.remaining+p.speed*p.age));
+    if(straightShot){
+     const full=p.remaining+p.speed*p.age,target=p.skillId==='FIR_01'?p.feedbackTarget:undefined;
+     const aim=target?(target.x-origin.x)*Math.sin(p.angle)+(target.z-origin.z)*Math.cos(p.angle):full;
+     this.projectileRanges.set(p.id,Math.max(.35,Math.min(full,aim)));
+    }
    }
   }
   if(offset){
-   // Arrows and basic fire bolts fly freely from the fixed release socket to
+   // Arrows and elemental bolts fly from the fixed release socket to
    // the authoritative ray endpoint, without the old .14s hand easing.
    const t=Math.max(0,Math.min(1,straightShot?p.age*p.speed/(this.projectileRanges.get(p.id)??1):p.age/.14));
    base.add(Vec3.multiplyScalar(new Vec3(),offset,straightShot?1-t:1-t*t*(3-2*t)));
@@ -199,7 +221,7 @@ export class Effects {
  }
  private local(p:Point,angle:number,side:number,forward:number,height=.055){const q={x:p.x+Math.cos(angle)*side+Math.sin(angle)*forward,z:p.z-Math.sin(angle)*side+Math.cos(angle)*forward};return this.at(q,height);}
  private createArrowBody():Body {
-   const node=new Node('Projectile:arrow');this.root.addChild(node);const body:Body={kind:'arrow',node,touched:false};this.bodies.push(body);
+   const node=new Node('Projectile:arrow');this.root.addChild(node);const body:Body={kind:'arrow',node,touched:false,playerArrow:false};this.bodies.push(body);
    // The same opaque shaft/head/feather meshes share native instanced passes.
    // Creator 3.8.8's world-transform shader retains inverse-scale normals.
    const part=(name:string,mesh:string,x:number,y:number,z:number,sx:number,sy:number,sz:number,color:string,rx=0)=>{const n=new Node(name);node.addChild(n);n.setPosition(x,y,z);n.setScale(sx,sy,sz);n.setRotationFromEuler(rx,0,0);const r=n.addComponent(MeshRenderer);r.mesh=this.world.mesh(mesh);r.setSharedMaterial(VfxAssets.solid(color,true),0);};
@@ -210,9 +232,15 @@ export class Effects {
   let body=this.bodies.find(b=>b.key===p.id);
   if(!body){body=this.bodies.find(b=>b.kind==='arrow'&&!b.key);if(!body&&this.bodies.length<64)body=this.createArrowBody();if(!body)return;body.key=p.id;}
   body.touched=true;body.node.active=true;const height=1.05;
-  // Thicken only player skill arrows for phone readability; shaft length,
-  // current position, frozen flight path and gameplay collider stay unchanged.
-  const arrowWidth=p.owner==='player'&&p.skillId?.startsWith('BOW_')?1.35:1;body.node.setScale(arrowWidth,arrowWidth,1);
+  // Player and enemy shots reuse this pool; restore the right shared materials
+  // whenever ownership changes, keeping enemy crossbow bolts in steel.
+  const playerArrow=p.owner==='player'&&p.kind==='arrow';
+  if(body.playerArrow!==playerArrow){
+   const palette=playerArrow?[ARROW_COLORS.halo,ARROW_COLORS.flash,ARROW_COLORS.body]:['#bcc5cd','#dbe3e9','#dcd0af'];
+   body.node.children.forEach((part,i)=>part.getComponent(MeshRenderer)?.setSharedMaterial(VfxAssets.solid(palette[i],true),0));body.playerArrow=playerArrow;
+  }
+  // Slightly strengthen the existing player arrow silhouette for phone readability.
+  const arrowWidth=p.owner==='player'?(p.skillId?.startsWith('BOW_')?1.42:1.06):1;body.node.setScale(arrowWidth,arrowWidth,1);
   const position=this.projectileAt(p,height);body.node.setPosition(position);
   if(this.flatCamera){
    // Point the existing +Z arrow mesh along its rendered flight, including
@@ -227,6 +255,13 @@ export class Effects {
   if(this.skills.projectile(p,this.now))return;
   const height=1.05;
   if(p.kind==='arrow'||p.kind==='crossbow')this.body(p);
+  if(p.owner==='player'&&p.kind==='staff'&&!p.skillId&&this.thunderFamily){
+   const center=this.projectileAt(p,height),direction=new Vec3(Math.sin(p.angle),0,Math.cos(p.angle));
+   const offset=this.projectileOffsets.get(p.id),range=this.projectileRanges.get(p.id);
+   if(offset&&range)direction.subtract(offset.clone().multiplyScalar(1/range));
+   drawThunderDart(this.thunderField,p.id,center,direction,p.age*p.speed*direction.length(),this.now,this.lowMotion);
+   return;
+  }
   if(p.owner==='player'&&p.kind==='staff'&&this.fireFamily){
    const center=this.projectileAt(p,1.05);this.fireDirection.set(Math.sin(p.angle),0,Math.cos(p.angle));
    const offset=this.projectileOffsets.get(p.id),range=this.projectileRanges.get(p.id);
@@ -237,28 +272,39 @@ export class Effects {
    return;
   }
   const spell=p.kind==='spell',staff=p.kind==='staff',kind:VfxKind=spell?(p.weapon==='T02'?'seal':p.weapon==='T03'?'prayer':'arcane'):staff?'charge':'arrowWake';
-  const color=p.owner==='enemy'?colors.danger:spell?(p.weapon==='T02'?colors.seal:p.weapon==='T03'?colors.prayer:colors.arcane):staff?'#c8d4cd':p.charged?'#e8ddb2':colors.steel;
-  this.loop('projectile:'+p.id,kind,p,height,staff?.55:p.charged?1.2:1,color);
-  let path=this.paths.get(p.id);if(!path){path={points:[],time:this.now,weapon:p.weapon};this.paths.set(p.id,path);}path.time=this.now;path.points.unshift(this.projectileAt(p,height));path.points.length=Math.min(path.points.length,spell?9:p.charged?8:5);
+  const playerArrow=p.owner==='player'&&p.kind==='arrow',color=p.owner==='enemy'?colors.danger:playerArrow?ARROW_COLORS.body:spell?(p.weapon==='T02'?colors.seal:p.weapon==='T03'?colors.prayer:colors.arcane):staff?'#c8d4cd':p.charged?'#e8ddb2':colors.steel;
+  this.loop('projectile:'+p.id,kind,p,height,staff?.55:p.charged?1.2:p.owner==='player'&&p.kind==='arrow'?.74:1,color);
+  let path=this.paths.get(p.id);if(!path){path={points:[],time:this.now,weapon:p.weapon,playerArrow};this.paths.set(p.id,path);}path.time=this.now;path.points.unshift(this.projectileAt(p,height));path.points.length=Math.min(path.points.length,spell?9:p.charged?8:5);
+  if(playerArrow){
+   this.line(path.points,ARROW_COLORS.halo,.10,32,true,'glow');
+   this.line(path.points,ARROW_COLORS.body,p.charged?.038:.025,185,true,'core');
+   this.line(path.points,ARROW_COLORS.core,.012,155,true,'core');return;
+  }
   this.line(path.points,color,spell?.065:staff?.022:p.charged?.035:.017,p.owner==='enemy'?190:staff?120:160);
   if(spell)this.loop('projectileCore:'+p.id,'charge',p,height,.65,color);
  }
  private playerAction(game:GameSession){
   const s=game.state,a=s.action,p=s.player;if(!a)return;
   const def=COMBAT_SKILLS[a.skillId??''],release=actionReleaseAt(a),binding=this.playerSource?.(),motion=binding?.actionId===a.id?binding:undefined;
-  const family=def?.style??(a.kind==='staff'&&this.fireFamily?'FIR':undefined),color=family==='WAR'?colors.steel:family==='FIR'?'#ffb85b':family==='THU'?THUNDER_COLORS.body:family==='BOW'||a.kind==='bow'||a.kind==='bowAim'?'#dce9c2':family==='COM'?'#ecdfb3':a.kind==='staff'?'#c8d4cd':colors.arcane;
+  const family=def?.style??(a.kind==='staff'?weaponCombatFamily(s.equipment.weapon,s.combat):undefined),color=family==='WAR'?colors.steel:family==='FIR'?'#ffb85b':family==='THU'?THUNDER_COLORS.body:family==='BOW'||a.kind==='bow'||a.kind==='bowAim'?ARROW_COLORS.body:family==='COM'?'#ecdfb3':a.kind==='staff'?'#c8d4cd':colors.arcane;
+  const elemental=family==='FIR'||family==='THU',releaseAge=a.elapsed-release;
+  if(elemental&&((!a.emitted&&releaseAge<0)||(a.emitted&&releaseAge>=0&&releaseAge<.12))){
+   const palm=!!def||family==='THU'&&a.kind==='staff',hand=(palm?motion?.castHand:undefined)??motion?.hand??this.playerAt(p,1.1);
+   this.handCast={key:'cast:'+a.id,actionId:a.id,family,palm};
+   drawSpellCast(this.fireSprites,this.thunderField,'cast:'+a.id,family,hand,a.angle,a.elapsed/Math.max(.001,release),a.emitted?releaseAge:-1,def?.type==='ultimate',this.reducedMotion,!def);
+  }
   const inWindup=motion?['prepare','raise','aim','rearm','channel'].includes(motion.phase??''):a.kind==='bowAim'||!a.emitted&&a.elapsed<release;
-  if(inWindup&&(!!def||a.kind==='staff'||a.kind==='bowAim'||a.kind==='bow'||a.kind.startsWith('spell:'))){
-   const kind:VfxKind=family==='FIR'?'fireCore':'charge',charged=a.kind==='bowAim'&&a.elapsed>=.8;
-   const loop=this.loop('player:charge:'+a.id,kind,p,1.10,family==='WAR'?.30:family==='FIR'?.24:charged?.85:.47,color);
+  if(!elemental&&inWindup&&(!!def||a.kind==='staff'||a.kind==='bowAim'||a.kind==='bow'||a.kind.startsWith('spell:'))){
+   const charged=a.kind==='bowAim'&&a.elapsed>=.8;
+   const loop=this.loop('player:charge:'+a.id,'charge',p,1.10,family==='WAR'?.30:charged?.85:.47,color);
    if(loop&&motion)loop.node.setWorldPosition(motion.hand);
   }
   const released=motion?motion.phase==='release'||motion.phase==='channel':a.elapsed>=release&&(a.kind==='sword'||a.emitted),beat=motion?.beat??0;
   const handCue=`hand:${a.id}:${beat}`;
   if(released&&!this.actionCues.has(handCue)){
    this.actionCues.add(handCue);
-   if(a.kind!=='sword'&&a.kind!=='dash'&&a.kind!=='push'){
-    const flash=this.burst(family==='FIR'?'ember':'flash',p,1.10,family==='FIR'?3:1,family==='WAR'?.25:.32,color);
+   if(!elemental&&a.kind!=='sword'&&a.kind!=='dash'&&a.kind!=='push'){
+    const flash=this.burst('flash',p,1.10,1,family==='WAR'?.25:.32,color);
     if(flash&&motion)flash.node.setWorldPosition(motion.hand);
    }
   }
@@ -276,9 +322,13 @@ export class Effects {
  }
 
  onEvents(events:readonly GameEvent[],game:GameSession):void{
-  this.now=game.state.time;
+  this.now=game.state.time;this.shields.onEvents(events,game);
   const skillContacts=new Set(events.filter(e=>e.type==='skill_hit').map(e=>`${e.castId}:${e.targetId}`));
   for(const event of events){
+   if(event.type==='level_up'){
+    this.levelUpPendingArea=game.state.area;
+    continue;
+   }
    if(event.type==='campaign_battle'&&Array.isArray(event.enemies)){for(const id of event.enemies){const enemy=game.state.enemies.find(e=>e.id===id);if(enemy){this.burst('dust',enemy,.1,12,1.2);this.burst('flash',enemy,.2,1,.55,'#efb16d');}}continue;}
    if(this.skills.event(event,this.now))continue;
    if(this.enemies.event(event,game))continue;
@@ -293,7 +343,7 @@ export class Effects {
    }
    if(event.type==='area'){this.clear();this.area=game.state.area;continue;}
    if(event.type==='hit'&&Number(event.hpLost)>0){
-    if(Number(event.comboStage)>0){this.meleeContacts.push({id:String(event.action)+':'+event.id,p:{...p},angle:Number(event.angle)||0,stage:Number(event.comboStage),start:this.now});if(this.meleeContacts.length>12)this.meleeContacts.shift();}
+    if(Number(event.comboStage)>0){this.meleeContacts.push({id:String(event.action)+':'+event.id,p:{...p},angle:Number(event.angle)||0,stage:Number(event.comboStage),start:this.now});if(this.meleeContacts.length>12)this.meleeContacts.shift();continue;}
     // Generic damage still drives HUD/audio; the skill event owns its contact.
     if(skillContacts.has(`${event.action}:${event.id}`))continue;
     if(event.action==='burn'){this.burst('ember',p,.18,2,.28);continue;}
@@ -301,8 +351,11 @@ export class Effects {
      this.fireContacts.push({id:String(event.action)+':'+event.id,p:{...p},start:this.now});if(this.fireContacts.length>12)this.fireContacts.shift();
      this.burst('ember',p,.65,5,.30);this.burst('fireCore',p,.65,1,.50);continue;
     }
+    if(event.family==='THU'&&event.element==='THU'&&!event.skillId){
+     this.thunderBasicContacts.push({id:String(event.action)+':'+event.id,p:{...p},start:this.now});if(this.thunderBasicContacts.length>12)this.thunderBasicContacts.shift();continue;
+    }
     const spell=event.source==='spell',environment=event.source==='environment',weapon=this.paths.get(String(event.action))?.weapon??game.state.action?.kind.slice(6),identity:VfxKind=weapon==='T02'?'seal':weapon==='T03'?'prayer':'arcane',color=weapon==='T02'?colors.seal:weapon==='T03'?colors.prayer:colors.arcane;
-    this.burst(environment?'ember':spell?identity:'spark',p,.9,environment?4:spell?5:4,event.critical===true?1.15:.7,spell?color:undefined);
+    this.burst(environment?'ember':spell?identity:'spark',p,.9,environment?4:spell?5:4,event.critical===true?1.15:.7,spell?color:this.paths.get(String(event.action))?.playerArrow?ARROW_COLORS.contact:undefined);
     // The shared contact cue owns the short bright impact; avoid double flashes.
    }else if(event.type==='block'){this.burst('spark',p,1,6,.7);}
    else if(event.type==='hurt'){
@@ -328,10 +381,12 @@ export class Effects {
  /** Alias for callers that consume the authoritative event batch. */
  consume(events:readonly GameEvent[],game:GameSession){this.onEvents(events,game);}
  update(game:GameSession,preview?:SkillPreview,range?:AttackRangePreview){
-  const s=game.state;this.now=s.time;this.fireFamily=weaponCombatFamily(s.equipment.weapon,s.combat)==='FIR';
-  if(this.area!==s.area||s.time<this.lastTime){this.clear();this.area=s.area;}
+  this.handCast=undefined;
+  const s=game.state,family=weaponCombatFamily(s.equipment.weapon,s.combat);this.now=s.time;this.fireFamily=family==='FIR';this.thunderFamily=family==='THU';
+  if(this.area!==s.area||s.time<this.lastTime){const levelUpPending=this.levelUpPendingArea===s.area&&s.time>=this.lastTime;this.clear();this.area=s.area;if(levelUpPending)this.levelUpPendingArea=s.area;}
   this.lastTime=s.time;if(s.status==='dead'||s.dialogue||s.dice.active){this.clear(true);return;}
-  this.lineIndex=0;for(const pool of this.linePools.values())pool.used=0;this.details=[];this.blades.begin();this.fireSprites.begin();this.meteor.begin();this.groundThunder.begin();this.thunderContacts.begin();this.thunderField.begin();for(const e of this.emitters)e.touched=false;for(const b of this.bodies)b.touched=false;
+  this.lineIndex=0;for(const pool of this.linePools.values())pool.used=0;this.details=[];this.fireGround.begin();this.blades.begin();this.warrior.begin(this.now);this.warrior.reducedMotion=this.lowMotion;this.fireSprites.begin();this.meteor.begin();this.groundThunder.begin();this.thunderContacts.begin();this.thunderField.begin();for(const e of this.emitters)e.touched=false;for(const b of this.bodies)b.touched=false;
+  if(this.levelUpPendingArea===s.area){this.levelUpPendingArea='';this.burst('levelRing',s.player,.06,1,this.lowMotion?.7:1);this.burst('levelUp',s.player,.25,this.lowMotion?4:18);}
   // Enemy effects show real attacks and fields without range overlays.
   this.enemies.update(game);
   for(const enemy of s.enemies){
@@ -355,23 +410,30 @@ export class Effects {
   }
   for(const id of this.fireCues)if(!s.fireZones.some(fire=>fire.id===id))this.fireCues.delete(id);
   for(const barrel of s.barrels)if(!barrel.exploded&&barrel.fuse>=0)this.loop('fuse:'+barrel.id,'ember',barrel,.86,.22);
-  this.playerAction(game);this.skills.update(game);
+  this.playerAction(game);this.warriorAction(game);this.skills.update(game);this.shields.update(game);
   this.fireContacts=this.fireContacts.filter(q=>this.now-q.start<.32);
-  for(const q of this.fireContacts)this.fireSprites.drawVolume('basic-hit:'+q.id,this.at(q.p,.32),.48,1,(this.now-q.start)/.32,235);
+  for(const q of this.fireContacts)this.fireSprites.drawVolume('basic-hit:'+q.id,this.at(q.p,.9),.48,1,(this.now-q.start)/.32,235,this.now);
+  this.thunderBasicContacts=this.thunderBasicContacts.filter(q=>this.now-q.start<.14);
+  for(const q of this.thunderBasicContacts)drawThunderDartContact(this.thunderField,q.id,this.at(q.p,.95),this.now-q.start,this.lowMotion);
   this.basicTrails=this.basicTrails.filter(q=>this.now-q.start<.42);
-  for(const q of this.basicTrails){const age=this.now-q.start,alpha=age<.20?Math.round(255*(1-.58*smooth(age/.20))):this.lowMotion?0:Math.round(255*.42*(1-smooth((age-.20)/.22)));
-   drawMeleeSweep(this.meleeHost,'basic:'+q.id,q.p,q.angle,BASIC_ATTACK.sword.rangeMetres,BASIC_ATTACK.sword.angleDegrees*Math.PI/180,q.stage,Math.min(1,age/.18),alpha);
+  for(const q of this.basicTrails){const age=this.now-q.start,duration=q.stage===3?.42:.34;if(age>=duration)continue;
+   drawMeleeSweep(this.meleeHost,'basic:'+q.id,q.p,q.angle,BASIC_ATTACK.sword.rangeMetres,BASIC_ATTACK.sword.angleDegrees*Math.PI/180,q.stage,age/duration,245);
   }
   this.meleeContacts=this.meleeContacts.filter(q=>this.now-q.start<.18);
   for(const q of this.meleeContacts)drawMeleeContact(this.meleeHost,q.id,q.p,q.angle,meleeCombo(q.stage).strength,(this.now-q.start)/.18,this.lowMotion);
-  this.blades.end();this.fireSprites.end();this.meteor.end();this.groundThunder.end();this.thunderContacts.end();this.thunderField.end();for(const d of this.details)this.line(d.points,d.color,d.width,d.alpha,false,d.style);this.details=[];
+  this.fireGround.end();this.blades.end();this.warrior.end();this.fireSprites.end();this.meteor.end();this.groundThunder.end();this.thunderContacts.end();this.thunderField.end();for(const d of this.details)this.line(d.points,d.color,d.width,d.alpha,false,d.style);this.details=[];
   for(const e of this.emitters){if(e.key&&!e.touched){this.loops.delete(e.key);e.key=undefined;e.system.stopEmitting();e.until=this.now+e.life+.08;}if(!e.key&&e.until<=this.now&&e.node.active){e.system.stop();e.node.active=false;}}
   for(const b of this.bodies)if(!b.touched){b.key=undefined;b.node.active=false;}
   for(const [id,path]of this.paths)if(this.now-path.time>.35)this.paths.delete(id);
   for(const pool of this.linePools.values())for(let i=pool.used;i<pool.items.length;i++)pool.items[i].node.active=false;
  }
+ private warriorAction(game:GameSession){
+  const a=game.state.action;if(!a)return;const cast=game.state.combat.casts.find(c=>c.id===a.id);if(!cast)return;
+  if(a.skillId==='WAR_04')this.warrior.whirlwind('whirlwind:'+a.id,this.playerAt(game.state.player,0),a.angle,a.elapsed,actionReleaseAt(a),cast.rank.geometry?.radiusMetres??2.15);
+  else if(a.skillId==='WAR_02'&&cast.rush&&cast.rush.elapsed<cast.rush.duration&&a.emitted)this.warrior.rush('rush:'+a.id,this.playerAt(cast.from,.18),this.playerAt(game.state.player,.18),a.angle,cast.rush.elapsed/cast.rush.duration);
+ }
  clearAim(){this.aimIndicators?.clear();}
  /** Menus stop native simulation; retain cue history so resuming an action cannot replay its burst. */
- clear(preserveCues=false){this.aimIndicators?.clear();this.fireContacts=[];this.basicTrails=[];this.meleeContacts=[];this.blades.clear();this.fireSprites.clear();this.meteor.clear();this.groundThunder.clear();this.thunderContacts.clear();this.thunderField.clear();this.skills.clear(preserveCues);this.enemies.clear();this.details=[];for(const e of this.emitters){e.system.stop();e.node.active=false;e.key=undefined;e.until=0;}for(const l of this.lines)l.node.active=false;for(const pool of this.linePools.values())pool.used=0;for(const b of this.bodies){b.node.active=false;b.key=undefined;}this.loops.clear();this.paths.clear();this.projectileOffsets.clear();this.projectileRanges.clear();this.renderingProjectile=undefined;if(!preserveCues){this.phases.clear();this.actionCues.clear();this.fireCues.clear();}this.lineIndex=0;}
- destroy(){this.disposed=true;this.clear();this.aimIndicators?.destroy();this.enemies.destroy();this.blades.destroy();this.fireSprites.destroy();this.meteor.destroy();this.groundThunder.destroy();this.thunderContacts.destroy();this.thunderField.destroy();this.root.destroy();this.emitters=[];this.lines=[];this.linePools.clear();this.bodies=[];}
+ clear(preserveCues=false){if(!preserveCues)this.levelUpPendingArea='';this.handCast=undefined;this.aimIndicators?.clear();this.fireContacts=[];this.thunderBasicContacts=[];this.basicTrails=[];this.meleeContacts=[];this.blades.clear();this.warrior.clear(preserveCues);this.fireSprites.clear();this.meteor.clear();this.groundThunder.clear();this.thunderContacts.clear();this.thunderField.clear();this.skills.clear(preserveCues);this.shields.clear(preserveCues);this.fireGround.clear();this.enemies.clear();this.details=[];for(const e of this.emitters){e.system.stop();e.node.active=false;e.key=undefined;e.until=0;}for(const l of this.lines)l.node.active=false;for(const pool of this.linePools.values())pool.used=0;for(const b of this.bodies){b.node.active=false;b.key=undefined;}this.loops.clear();this.paths.clear();this.projectileOffsets.clear();this.projectileRanges.clear();this.renderingProjectile=undefined;if(!preserveCues){this.phases.clear();this.actionCues.clear();this.fireCues.clear();}this.lineIndex=0;}
+ destroy(){director.off(Director.EVENT_BEFORE_DRAW,this.syncSpellHand,this);this.disposed=true;this.clear();this.shields.destroy();this.fireGround.destroy();this.aimIndicators?.destroy();this.enemies.destroy();this.blades.destroy();this.warrior.destroy();this.fireSprites.destroy();this.meteor.destroy();this.groundThunder.destroy();this.thunderContacts.destroy();this.thunderField.destroy();this.root.destroy();this.emitters=[];this.lines=[];this.linePools.clear();this.bodies=[];}
 }

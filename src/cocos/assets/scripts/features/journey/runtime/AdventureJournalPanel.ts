@@ -7,7 +7,7 @@ import {viewportMetrics} from '../../../platform/ViewportMetrics';
 import {AtlasUi as UI} from '../../../shared/ui/AtlasUi';
 import {CompactGraphics} from '../../../shared/ui/CompactGraphics';
 import {CompactMask as Mask} from '../../../shared/ui/CompactMask';
-import {bindButtonFeedback} from '../../../shared/ui/ButtonFeedback';
+import {ButtonSurface} from '../../../shared/ui/ButtonSurface';
 import {FeedbackView as F} from '../../../shared/ui/FeedbackView';
 import {applyRpgFont,fitRpgLine} from '../../../shared/ui/RpgFont';
 import {RpgPanel} from '../../../shared/ui/RpgPanel';
@@ -198,10 +198,10 @@ export class AdventureJournalPanel {
   return;
  }
  private renderPaper(entry?:JournalEntry):void {
-  const right=this.right!,l=this.layout!,u=this.unit,w=right.width-6*u,sheet=UI.place(right,new GComponent(),'JournalDarkReader',0,0,right.width,l.bodyH);
+  const right=this.right!,l=this.layout!,u=this.unit,textInset=12*u,ruleInset=2*u,w=right.width-2*textInset,ruleW=right.width-2*ruleInset,sheet=UI.place(right,new GComponent(),'JournalDarkReader',0,0,right.width,l.bodyH);
   const mapAction=(action:string)=>action==='journal:mode:map'||action.startsWith('journey-map:'),primary=entry?.actions.find(action=>action.primary&&!mapAction(action.action));
   const canMap=!!entry?.targets.length&&entry.status!=='upcoming',title=entry?.title??T('title'),titleH=Math.max(26*u,Math.ceil(this.textWidth(title,20*u)/w)*26*u);
-  this.label(sheet.node,title,0,2*u,w,titleH,20*u,F.color(D.colorRoles.accent)).lineHeight=26*u;UI.image(sheet,'ReaderTitleRule','prep-rule-v5',0,titleH+5*u,w,5*u,Color.WHITE);
+  this.label(sheet.node,title,textInset,2*u,w,titleH,20*u,F.color(D.colorRoles.accent)).lineHeight=26*u;UI.image(sheet,'ReaderTitleRule','prep-rule-v5',ruleInset,titleH+5*u,ruleW,5*u,Color.WHITE);
   const top=titleH+16*u,viewH=Math.max(this.hit,l.bodyH-top-this.hit-8*u),blocks:DocumentBlock[]=[];
   const addText=(kind:DocumentBlock['kind'],value:string,size:number,gap=8)=>{if(value)blocks.push({kind,text:value,font:size,height:this.textHeight(value,w,size*u)+gap*u});};
   const addAction=(action:JournalAction)=>{blocks.push({kind:'button',text:action.label,height:this.hit+8*u,action:action.action,disabled:action.disabled});if(action.reason)addText('text',action.reason,11,8);};
@@ -211,7 +211,7 @@ export class AdventureJournalPanel {
    if(entry.updates.length){addText('heading',T('timeline'),14,7);for(const update of entry.updates){const status=T(update.status==='completed'?'doneStep':update.status==='current'?'currentStep':'lockedStep');blocks.push({kind:'update',text:status+' · '+update.title,height:this.textHeight(status+' · '+update.title,w-16*u,13*u)+5*u,current:update.status==='current'});addText('text',update.text,13,6);if(update.choice)addText('text',T('choice')+'：'+update.choice,13,6);const target=entry.targets.find(target=>update.targetIds.includes(target.id));if(target)blocks.push({kind:'button',text:T('viewSite'),height:this.hit+8*u,action:'journal:target:'+encodeURIComponent(target.id)});}}
    const other=entry.actions.filter(action=>action!==primary&&!mapAction(action.action));if(other.length){addText('heading',T('actions'),14,7);other.forEach(addAction);}
   }else addText('text',T('emptyEntry'),14);
-  const contentH=blocks.reduce((sum,block)=>sum+block.height,0)+8*u,content=RpgPanel.scroll(this.hud,sheet.node,w/2,-top-viewH/2,w,viewH,contentH,u),scroll=content.parent!.parent!.getComponent(ScrollView)!;
+  const contentH=blocks.reduce((sum,block)=>sum+block.height,0)+8*u,content=RpgPanel.scroll(this.hud,sheet.node,textInset+w/2,-top-viewH/2,w,viewH,contentH,u),scroll=content.parent!.parent!.getComponent(ScrollView)!;
   content.parent!.parent!.name='JournalDocumentScroll';const key='paper:'+this.selected;this.paperScroll={scroll,key};let y=0;
   for(const block of blocks){const x=-w/2;
    if(block.kind==='button')this.button(content,block.text,x,y,Math.min(w,Math.max(122*u,this.textWidth(block.text,14*u)+24*u)),block.action!,false,!block.disabled,false,14*u);
@@ -219,10 +219,10 @@ export class AdventureJournalPanel {
    else if(block.kind!=='space')this.label(content,block.text,x,y,w,block.height-2*u,(block.font??14)*u,block.kind==='heading'?F.color(D.colorRoles.accent):F.color(D.colorRoles.ink));y+=block.height;
   }
   scroll.scrollToOffset(new Vec2(0,Math.min(Math.max(0,contentH-viewH),this.offsets.get(key)??0)),0);
-  const footerY=l.bodyH-this.hit;UI.image(sheet,'ReaderFooterRule','prep-shell-rule-v5',0,footerY-3*u,w,5*u,Color.WHITE);
+  const footerY=l.bodyH-this.hit;UI.image(sheet,'ReaderFooterRule','prep-shell-rule-v5',ruleInset,footerY-3*u,ruleW,5*u,Color.WHITE);
   const notice=entry?.actions.some(action=>action.action.startsWith('map-travel:'))?(this.hud.mapTravel.error||(this.hud.mapTravel.busy?T('travelBusy'):'')):'';
-  const status=this.label(sheet.node,notice||entry?.statusText||'',0,footerY,Math.max(1,w-(canMap?138*u:0)),this.hit,11*u,notice?F.color(this.hud.mapTravel.error?'state.failure':'state.paused'):F.color('text.secondary'));status.verticalAlign=Label.VerticalAlign.CENTER;
-  if(canMap)this.button(sheet.node,T('viewMap'),w-122*u,footerY,122*u,'journal:mode:map',false,true,false,14*u);
+  const status=this.label(sheet.node,notice||entry?.statusText||'',textInset,footerY,Math.max(1,w-(canMap?138*u:0)),this.hit,11*u,notice?F.color(this.hud.mapTravel.error?'state.failure':'state.paused'):F.color('text.secondary'));status.verticalAlign=Label.VerticalAlign.CENTER;
+  if(canMap)this.button(sheet.node,T('viewMap'),textInset+w-122*u,footerY,122*u,'journal:mode:map',false,true,false,14*u);
  }
  private textWidth(value:string,size:number):number {return Array.from(value).reduce((sum,char)=>sum+(char.charCodeAt(0)<128?.58:1),0)*size;}
  private textHeight(value:string,width:number,size:number):number {
@@ -237,9 +237,8 @@ export class AdventureJournalPanel {
  private button(parent:Node,title:string,x:number,y:number,w:number,action:string,selected=false,enabled=true,quiet=false,font=14*this.unit,h=this.hit):Node {
   enabled=enabled&&(!this.hud.mapTravel.busy||action==='close'||action.startsWith('journal:')&&action!=='journal:walk-mark');
   const node=this.hud.node(action,parent,x+w/2,-y-h/2,w,h),button=node.addComponent(Button);button.transition=Button.Transition.NONE;button.interactable=enabled;
-  if(!quiet){const art=UiSkin.asset(node,'prep-button-dark-v2',w,28*this.unit,true);if(!enabled)art.color=new Color(255,255,255,145);}
-  const fw=Math.max(1,w-8*this.unit),fh=quiet?28*this.unit:20*this.unit,face=this.hud.node('JournalButtonFeedback',node,0,0,fw,fh),g=face.addComponent(CompactGraphics);
-  bindButtonFeedback(node,button,state=>{if(!g.isValid)return;g.clear();if(state==='idle'||!enabled)return;g.fillColor=new Color(C.hover.r,C.hover.g,C.hover.b,state==='pressed'?200:135);g.roundRect(-fw/2,-fh/2,fw,fh,4*this.unit);g.fill();});
+  let artwork:Node|undefined;if(!quiet){const art=UiSkin.asset(node,'prep-button-dark-v2',w,28*this.unit,true);if(!enabled)art.color=new Color(255,255,255,145);artwork=art.node;}
+  ButtonSurface.attach(node,{width:Math.max(1,w-8*this.unit),height:quiet?h-8*this.unit:20*this.unit,radius:4*this.unit,overlay:true,after:artwork,name:'JournalButtonFeedback'});
   const text=this.label(node,title,-w/2+8*this.unit,-h/2,w-16*this.unit,h,font,!enabled?F.color('text.disabled'):selected?F.color(D.colorRoles.accent):F.color(D.colorRoles.ink));text.horizontalAlign=Label.HorizontalAlign.CENTER;text.verticalAlign=Label.VerticalAlign.CENTER;text.enableWrapText=false;text.overflow=Label.Overflow.CLAMP;
   node.on(Button.EventType.CLICK,()=>{if(enabled)this.later(action);});return node;
  }

@@ -1,0 +1,111 @@
+CCEffect %{
+  techniques:
+  - name: transparent
+    passes:
+    - vert: fire-ground-vs:vert
+      frag: fire-ground-fs:frag
+      rasterizerState: { cullMode: none }
+      depthStencilState:
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: one
+          blendDstAlpha: one_minus_src_alpha
+      properties:
+        mainTexture: { value: white }
+        noiseTexture: { value: grey }
+        mainColor: { value: [1, 1, 1, 1] }
+        surfaceState: { value: [0, 0, 1, 0] }
+}%
+
+CCProgram fire-ground-vs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+  #include <builtin/uniforms/cc-local>
+  in vec3 a_position;
+  in vec2 a_texCoord;
+  in vec4 a_color;
+  out vec2 v_uv;
+  out vec4 v_frame;
+  out vec3 v_world;
+  vec4 vert () {
+    v_uv = a_texCoord;
+    v_frame = a_color;
+    vec4 world = cc_matWorld * vec4(a_position, 1.0);
+    v_world = world.xyz;
+    return cc_matViewProj * world;
+  }
+}%
+
+CCProgram fire-ground-fs %{
+  precision highp float;
+  #include <legacy/output-standard>
+  in vec2 v_uv;
+  in vec4 v_frame;
+  in vec3 v_world;
+  uniform sampler2D mainTexture;
+  uniform sampler2D noiseTexture;
+  uniform FireGroundParams {
+    vec4 mainColor;
+    vec4 surfaceState;
+  };
+  vec2 frameUV (float index, vec2 uv) {
+    float i = floor(index * 15.0 + 0.5);
+    return (vec2(mod(i, 4.0), floor(i / 4.0)) + clamp(uv, vec2(0.003), vec2(0.997))) / 4.0;
+  }
+  vec4 frag () {
+    vec3 linearColor;
+    float alpha;
+    if (surfaceState.x > 0.5) {
+      vec4 glyph = texture(mainTexture, v_uv);
+      vec2 diskUV = (v_uv - 0.5) * 2.0;
+      float radius = length(diskUV);
+      float disk = 1.0 - smoothstep(0.85, 0.905, radius);
+      float flow = texture(noiseTexture, v_uv * 2.2 + vec2(surfaceState.y * 0.09, -surfaceState.y * 0.16)).r;
+      // The translucent fire-coloured floor covers the whole circle, including
+      // its front half; brighter reference strokes remain legible above it.
+      float fillAlpha = disk * (0.28 + 0.13 * flow);
+      vec3 fill = SRGBToLinear(mix(vec3(1.0, 0.41, 0.045), vec3(1.0, 0.65, 0.16), (1.0 - radius) * 0.7 + flow * 0.3));
+      alpha = glyph.a + fillAlpha * (1.0 - glyph.a);
+      linearColor = (SRGBToLinear(glyph.rgb) * glyph.a + fill * fillAlpha * (1.0 - glyph.a)) / max(alpha, 0.0001);
+    } else {
+      float phase = dot(v_world.xz, vec2(0.13, 0.17));
+      vec3 n = (texture(noiseTexture, v_uv * vec2(1.8, 3.1) + vec2(phase, surfaceState.y * 0.75)).rgb
+        + texture(noiseTexture, v_uv * vec2(2.7, 4.6) + vec2(-phase, surfaceState.y * 1.15)).rgb) * 0.5;
+      float pin = sin(clamp((0.917 - v_uv.y) / 0.917, 0.0, 1.0) * 3.141593);
+      vec2 uv = v_uv + (n.rg * 2.0 - 1.0) * vec2(0.025, 0.035) * pin * surfaceState.z;
+      vec4 a = texture(mainTexture, frameUV(v_frame.r, uv));
+      vec4 b = texture(mainTexture, frameUV(v_frame.g, uv));
+      float blend = clamp(v_frame.b, 0.0, 1.0);
+      alpha = mix(a.a, b.a, blend);
+      // Interpolate premultiplied linear light, retaining soft alpha edges
+      // without dark seams or the dim pulse of two overlapping quads.
+      vec3 light = mix(SRGBToLinear(a.rgb) * a.a, SRGBToLinear(b.rgb) * b.a, blend);
+      linearColor = light / max(alpha, 0.0001);
+      // Advect detail from this same reference layer upward. Two overlapping
+      // phases crossfade at their resets, so the loop never jumps or goes out.
+      float rise = fract(surfaceState.y * 0.60 + phase);
+      float rise2 = fract(rise + 0.5);
+      float weight = 1.0 - abs(rise * 2.0 - 1.0);
+      vec4 d = texture(mainTexture, frameUV(0.0, uv + vec2(0.0, rise * 0.80)));
+      vec4 e = texture(mainTexture, frameUV(0.0, uv + vec2(0.0, rise2 * 0.80)));
+      float detailAlpha = d.a * weight + e.a * (1.0 - weight);
+      vec3 detail = (SRGBToLinear(d.rgb) * d.a * weight + SRGBToLinear(e.rgb) * e.a * (1.0 - weight)) / max(detailAlpha, 0.0001);
+      linearColor = mix(linearColor, detail, 0.40 * detailAlpha);
+      alpha *= 0.72 + 0.28 * detailAlpha;
+      alpha *= 0.82 + 0.18 * n.b;
+      linearColor *= 0.94 + 0.14 * n.b;
+    }
+    alpha *= mainColor.a * v_frame.a;
+    if (alpha < 0.002) discard;
+    vec4 result = vec4(linearColor * mainColor.rgb, alpha);
+    // Legacy forward already applies the display transfer after this surface.
+    // Keeping texture data linear here prevents orange being lifted to yellow.
+    if (surfaceState.w > 0.001) return mix(result, CCFragOutput(result), clamp(surfaceState.w, 0.0, 1.0));
+    return result;
+  }
+}%

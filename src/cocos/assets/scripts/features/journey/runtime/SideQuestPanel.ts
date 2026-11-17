@@ -10,9 +10,13 @@ import {availableRoutes} from '../../automation/common/AutomationRoute';
 import {encounterText as text} from '../../campaign/locales/ChapterTwoEncounterText';
 import {taskPanelTabs} from './TaskPanelNavigation';
 import {taskPanelText} from '../locales/TaskPanelText';
+import {questRewardView} from '../common/QuestRewardView';
+import {pacingQuestRewardText} from '../locales/PacingText';
 
 export const SIDE_QUESTS=[...FIELD_QUESTS,...CHAPTER_TWO_SIDE_QUESTS];
 export const SIDE_QUEST_EVENTS=[...FIELD_QUEST_EVENTS,...CHAPTER_TWO_SIDE_QUEST_EVENTS];
+export const sideEventRewardText=(event:CampaignEventDef)=>pacingQuestRewardText(questRewardView([event]));
+export const sideQuestRewardText=(quest:{steps:readonly string[]})=>pacingQuestRewardText(questRewardView(quest.steps.map(id=>SIDE_QUEST_EVENTS.find(event=>event.id===id)).filter((event):event is CampaignEventDef=>!!event)));
 export const sideStepBoss=(id:string)=>sideBossById(chapterTwoSideQuestRequiredBoss(id)??'');
 export function sideBattleHint(game:GameSession,id:string){
  const boss=sideStepBoss(id);if(!boss)return '';
@@ -31,13 +35,13 @@ export function renderSideQuestPanel(hud:Hud,game:GameSession,menu:string):boole
  if(menu==='journey-tasks:side'){
   hud.showList(text('ui.taskPanel'),text('ui.sideHelp'),SIDE_QUESTS.map(q=>{
    const hidden='hidden'in q?q.hidden:undefined,known=!hidden||s.flags[hidden],count=q.steps.filter(id=>!!s.receipts['campaign:'+id]).length,next=q.steps.find(id=>!s.receipts['campaign:'+id]),event=SIDE_QUEST_EVENTS.find(e=>e.id===next),status=event?sideEventStatus(game,event):undefined;
-   return {label:known?text('ui.sideName',{chapter:q.chapter,name:q.name}):fieldText('ui.undiscovered'),detail:!known?fieldText('ui.explore'):text('ui.stepProgress',{count,total:q.steps.length})+' · '+text(next?'ui.taskInProgress':'ui.finished')+'\n'+(event?getArea(event.area).name+' · '+event.label+'\n'+status!.reason+'\n':'')+text('boss.taskMaterials',{reward:q.reward}),disabled:!known,action:'journey-side-task:'+q.id};
+   return {label:known?text('ui.sideName',{chapter:q.chapter,name:q.name}):fieldText('ui.undiscovered'),detail:!known?fieldText('ui.explore'):text('ui.stepProgress',{count,total:q.steps.length})+' · '+text(next?'ui.taskInProgress':'ui.finished')+'\n'+(event?getArea(event.area).name+' · '+event.label+'\n'+status!.reason+'\n':'')+text('boss.taskMaterials',{reward:sideQuestRewardText(q)}),disabled:!known,action:'journey-side-task:'+q.id};
   }),[{back:true,label:text('ui.returnJourney'),action:'close'},{label:taskPanelText('hunt'),action:'hunting'},{label:taskPanelText('campaignLog'),action:'campaign-log'}],hud.touchTargetSize,{placement:'center',tabs:taskPanelTabs('side')});return true;
  }
  if(parts[0]!=='journey-side-task')return false;
  const quest=SIDE_QUESTS.find(q=>q.id===parts[1]);if(!quest||'hidden'in quest&&!s.flags[quest.hidden])return true;
- const rows=quest.steps.map((id,index)=>{const event=SIDE_QUEST_EVENTS.find(e=>e.id===id)!,status=sideEventStatus(game,event),choice=event.choices?.find(c=>c.id===s.receipts['campaign:choice:'+id]),battle=sideBattleHint(game,id);return {label:`${index+1} · ${event.label}`,detail:getArea(event.area).name+' · '+(status.completed?text('ui.actionCompleted'):status.reason)+(battle?'\n'+battle:'')+(choice?'\n'+text('ui.recordedChoice',{choice:choice.label}):''),action:'journey-field-task:'+id+':tasks'};});
+ const rows=quest.steps.map((id,index)=>{const event=SIDE_QUEST_EVENTS.find(e=>e.id===id)!,status=sideEventStatus(game,event),choice=event.choices?.find(c=>c.id===s.receipts['campaign:choice:'+id]),battle=sideBattleHint(game,id);return {label:`${index+1} · ${event.label}`,detail:getArea(event.area).name+' · '+(status.completed?text('ui.actionCompleted'):status.reason)+'\n'+sideEventRewardText(event)+(battle?'\n'+battle:'')+(choice?'\n'+text('ui.recordedChoice',{choice:choice.label}):''),action:'journey-field-task:'+id+':tasks'};});
  const context=chapterTwoSideQuestResponse(s,quest.id),outcome=chapterTwoSideQuestOutcome(s,quest.id),locked=quest.chapter===2&&!s.progression.secondChapter;
  const boss=sideBossForQuest(quest.id);
- hud.showList(quest.name,text(locked?'ui.chapterLevelGate':'ui.sideSteps')+'\n'+text('boss.taskMaterials',{reward:quest.reward})+(boss?'\n'+text('boss.rewardSplit'):'')+(context?'\n'+context:'')+(outcome?'\n'+text('ui.outcome')+'：'+outcome:''),rows,[{back:true,label:text('ui.backSide'),action:'journey-tasks:side'}],0,{placement:'center'});return true;
+ hud.showList(quest.name,text(locked?'ui.chapterLevelGate':'ui.sideSteps')+'\n'+text('boss.taskMaterials',{reward:sideQuestRewardText(quest)})+(boss?'\n'+text('boss.rewardSplit'):'')+(context?'\n'+context:'')+(outcome?'\n'+text('ui.outcome')+'：'+outcome:''),rows,[{back:true,label:text('ui.backSide'),action:'journey-tasks:side'}],0,{placement:'center'});return true;
 }

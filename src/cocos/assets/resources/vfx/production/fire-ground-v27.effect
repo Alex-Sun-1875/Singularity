@@ -1,0 +1,96 @@
+CCEffect %{
+  techniques:
+  - name: transparent
+    passes:
+    - vert: fire-ground-vs:vert
+      frag: fire-ground-fs:frag
+      rasterizerState: { cullMode: none }
+      depthStencilState:
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: one
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: one
+          blendDstAlpha: one_minus_src_alpha
+      properties:
+        mainTexture: { value: white }
+        noiseTexture: { value: grey }
+        mainColor: { value: [1, 1, 1, 1] }
+        surfaceState: { value: [0, 0, 1, 0] }
+}%
+
+CCProgram fire-ground-vs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+  #include <builtin/uniforms/cc-local>
+  in vec3 a_position;
+  in vec2 a_texCoord;
+  in vec4 a_color;
+  out vec2 v_uv;
+  out vec4 v_frame;
+  out vec3 v_world;
+  vec4 vert () {
+    v_uv = a_texCoord;
+    v_frame = a_color;
+    vec4 world = cc_matWorld * vec4(a_position, 1.0);
+    v_world = world.xyz;
+    return cc_matViewProj * world;
+  }
+}%
+
+CCProgram fire-ground-fs %{
+  precision highp float;
+  in vec2 v_uv;
+  in vec4 v_frame;
+  in vec3 v_world;
+  uniform sampler2D mainTexture;
+  uniform sampler2D noiseTexture;
+  uniform FireGroundParams {
+    vec4 mainColor;
+    vec4 surfaceState;
+  };
+  vec2 frameUV (float index, vec2 uv) {
+    float i = floor(index * 31.0 + 0.5);
+    return (vec2(mod(i, 8.0), floor(i / 8.0)) + clamp(uv, vec2(0.003), vec2(0.997))) / vec2(8.0, 4.0);
+  }
+  vec4 frag () {
+    vec3 color;
+    float alpha;
+    if (surfaceState.x > 0.5) {
+      vec4 glyph = texture(mainTexture, v_uv);
+      float radius = length((v_uv - 0.5) * 2.0);
+      float disk = 1.0 - smoothstep(0.85, 0.905, radius);
+      float flow = texture(noiseTexture, v_uv * 2.2 + vec2(surfaceState.y * 0.09, -surfaceState.y * 0.16)).r;
+      // Approved shared amber low/body colours, with a light translucent
+      // floor wash rather than the previous dense red-brown inner disk.
+      float fillAlpha = disk * (0.18 + 0.06 * flow);
+      vec3 fill = mix(vec3(0.85098039, 0.36078431, 0.02352941), vec3(0.97647059, 0.54117647, 0.04313725), (1.0-radius)*0.7+flow*0.3);
+      alpha = glyph.a + fillAlpha * (1.0 - glyph.a);
+      // The recoloured glyph and the fill use the same palette; no legacy
+      // per-channel yellow correction is applied after recolouring.
+      color = (glyph.rgb*glyph.a + fill*fillAlpha*(1.0-glyph.a))/max(alpha, 0.0001);
+    } else {
+      // Original-reference moving wisps are authored in an 8 x 4 flipbook.
+      // Preserve their thin lines: no serpentine UV warp or hot-core override.
+      vec4 a = texture(mainTexture, frameUV(v_frame.r, v_uv));
+      vec4 b = texture(mainTexture, frameUV(v_frame.g, v_uv));
+      float blend = clamp(v_frame.b, 0.0, 1.0);
+      alpha = mix(a.a, b.a, blend);
+      color = mix(a.rgb * a.a, b.rgb * b.a, blend) / max(alpha, 0.0001);
+    }
+    float fade = mainColor.a * v_frame.a;
+    if (alpha * fade < 0.002) discard;
+    // These textures are reference display-colour mattes, composed directly
+    // by this unlit transparent pass; do not square their green/blue channels.
+    if (surfaceState.x < 0.5) {
+      // A gentle light lift keeps the original fine wisps readable while
+      // preserving continuous translucent volume, without an additive flare.
+      return vec4(color * mainColor.rgb * alpha * 1.10 * fade, alpha * 0.90 * fade);
+    }
+    // Premultiplied circle compositing retains its previous normal-alpha look.
+    return vec4(color * mainColor.rgb * alpha * fade, alpha * fade);
+  }
+}%

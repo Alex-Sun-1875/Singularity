@@ -1,0 +1,115 @@
+{
+  "version": "v34-coverage-and-light-separated",
+  "reference": "source-art\\skills\\fire-reference-alignment-v32\\assets\\approved-reference.png",
+  "referenceSha256": "bf699784420cce0084a523191ff6390ccf4ceceff11f04e35ae31133762fa5f6",
+  "geometry": {
+    "source": "source-art\\skills\\meteor-density-seal-v33\\seal\\prepare-colour-r4-pending.py",
+    "sourceSha256": "a59e5f1c04547e50d5800fde16393279afe89e51960707ba0d17540715fed9ac",
+    "prefixSha256": "de7ef0b515308b60dc35f236b8b08d380fa5a9df3c9cb3bc1efa224136e4ad34",
+    "unchanged": "Exact R4 construction prefix reused read-only; same concentric rings, band scrolls, inner long recurves, width, centre, 460/512 footprint and UV. No R3 trefoil."
+  },
+  "asset": {
+    "name": "fire-meteor-seal-v34",
+    "size": [
+      1024,
+      1024
+    ],
+    "dataMask": true,
+    "channels": {
+      "R": "engraved-line coverage",
+      "G": "warm bright-core coverage",
+      "B": "6/16/34px stroke-local halo energy weight",
+      "A": "complete circular disk light weight; NOT final output opacity"
+    },
+    "sha256": "9df26829fef093c870a225e8d19d4f968a7766ba1ad6003ca634880bc3fc9828",
+    "pngBytes": 535705,
+    "rgbaMemoryBytes": 4194304
+  },
+  "material": {
+    "blend": "ONE / ONE_MINUS_SRC_ALPHA",
+    "body": [
+      0.9254901960784314,
+      0.5803921568627451,
+      0.2549019607843137
+    ],
+    "core": [
+      0.9764705882352941,
+      0.6823529411764706,
+      0.3803921568627451
+    ],
+    "discRadiance": [
+      0.38,
+      0.18,
+      0.04
+    ],
+    "haloRadiance": [
+      0.56,
+      0.27,
+      0.06
+    ],
+    "glyphCoverageBoost": 1.06,
+    "maxGlyphCoverage": 0.98,
+    "maxDiscAbsorption": 0.025,
+    "formula": "glyph=min(.98,R*fade*1.06); colour=mix(body,core,clamp(G/max(R,.0001))); light=(discRadiance*A+haloRadiance*B)*fade*(1-glyph); outputRGB=colour*glyph+light; outputAlpha=glyph+A*fade*.025*(1-glyph).",
+    "meaning": "Disc and halo radiance add warm light with very low ground absorption. Their light is suppressed under solid lines. No global colour gain, gamma transform, extra texture, real-time light or extra draw."
+  },
+  "simulation": {
+    "fade": 0.9,
+    "backgroundRGB": [
+      40,
+      49,
+      44
+    ],
+    "quietDiskRGBMedian255": [
+      127.6,
+      90.0,
+      52.5
+    ],
+    "quietDiskAbsorptionMedian": 0.019411764705882354,
+    "lineRGBP90_255": [
+      245.1,
+      170.6,
+      95.0
+    ],
+    "note": "CPU reconstruction of the exact shader math on a diagnostic grid, not native Cocos or a pixel-equivalence claim for the CG reference."
+  },
+  "preview": "seal-v34-shader-material-preview.jpg",
+  "productionUpdated": true,
+  "review": {
+    "local": "Root and asset agent inspected the unique exact-shader preview: brighter warm complete disk, visible stroke-local halo, transmitted terrain and retained warm ink. Raw data mask is not a colour preview.",
+    "native": "Pending root standard build and actual Cocos capture; no claim of user or TapTap acceptance.",
+    "user": "Rejected: user said original has light/dark variation, this proposal appeared one colour and changed the pattern. Retained as failed evidence; do not present as final."
+  },
+  "publication": {
+    "guard": "Caller acquired common taptap-build.lock for the brief publication window; no Cocos build was run.",
+    "preloadChanges": "Exactly meteor texture and meteor effect resource names; remaining FireGroundEffects bytes unchanged.",
+    "rendererBeforeSha256": "327ba2ce113074ab0050d00f743683f44925ef5fe037652ae2c0f7f966be2c63",
+    "rendererAfterSha256": "314389c8b85889ba4e43b8a6f20d64abdeb171c67bc04dcc54ebee9781212c5a",
+    "productionMaskSha256": "9df26829fef093c870a225e8d19d4f968a7766ba1ad6003ca634880bc3fc9828",
+    "productionEffectSha256": "3a9dbc632797fa03218fe5ee7d2e22994a4bdf060b4d289e8d2f0f02c34ec9a6",
+    "preservedV27": {
+      "fire-ground-jets-v27.png": "37a8319026bf39a4862f1f9bedbfceb98a6a3119c16f3265f300756dd4c2e4c6",
+      "fire-jet-seal-v27.png": "febfe312082973eace56e8e5efea0b28f3e5464764a04900a924963f3ad19f86",
+      "fire-ground-v27.effect": "f213c7660ee31ba34f8900790e6256c65b7dce1a613cd570d82ea5bedf89c808",
+      "fire-flow-noise-v24.png": "ccee680793eb3e41ea3973f01fa9963c588b4f0d5cbafe483d24ccb0105c935d"
+    }
+  },
+  "staticChecks": {
+    "pngRGBA1024": true,
+    "productionMaskMatchesFrozen": true,
+    "effectMatchesReviewed": true,
+    "metaReferencesAgree": true,
+    "dataChannelsNotBleedRepaired": true,
+    "imageEffectUUIDDistinct": true,
+    "onlyTwoMeteorPathsChanged": true,
+    "v27Preserved": true,
+    "quadGeometryCircleUVPreserved": true,
+    "outerHaloKeptWhereDiscZero": true,
+    "glowDiscardUsesRadiance": true,
+    "shaderDiscMatchesCPU": true,
+    "shaderHaloMatchesCPU": true,
+    "shaderInkMatchesCPU": true,
+    "scope": "Read-only PNG/meta/hash/property and resource-branch checks; TypeScript and native shader compilation remain for root standard build."
+  },
+  "replacementCandidate": "reference-r2/provenance.json"
+}

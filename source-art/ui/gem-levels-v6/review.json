@@ -1,0 +1,114 @@
+{
+  "date": "2026-11-17",
+  "request": "Use 一级宝石、二级宝石、三级宝石 etc., rather than color names; research DZS scripture/rune colors.",
+  "research": "research.json",
+  "researchBoundary": "Two historical screenshots confirm green second-tier and blue third-tier 真言 titles. The full DZS table was not verified. Project ordering below preserves the user's prior request to exclude white.",
+  "presentation": [
+    {
+      "tier": 1,
+      "name": "一级宝石",
+      "path": "equipment/gem-orbs-v5/maxHp"
+    },
+    {
+      "tier": 2,
+      "name": "二级宝石",
+      "path": "equipment/gem-orbs-v5/armor"
+    },
+    {
+      "tier": 3,
+      "name": "三级宝石",
+      "path": "equipment/gem-orbs-v5/criticalDamage"
+    },
+    {
+      "tier": 4,
+      "name": "四级宝石",
+      "path": "equipment/gem-orbs-v5/criticalChance"
+    },
+    {
+      "tier": 5,
+      "name": "五级宝石",
+      "path": "equipment/gem-orbs-v5/power"
+    }
+  ],
+  "colorsByLevel": [
+    "green",
+    "blue",
+    "purple",
+    "gold",
+    "red"
+  ],
+  "attributePresentation": "Damage, health, armor, critical chance and critical damage are separate effect labels. Same-level attributes share a color and level name.",
+  "artSource": "source-art/ui/gem-orbs-v5/review.json",
+  "newImageGeneration": false,
+  "additionalRuntimeImages": 0,
+  "runtimeAssets": [
+    {
+      "file": "src/cocos/assets/resources/equipment/gem-orbs-v5/maxHp.png",
+      "bytes": 72662,
+      "sha256": "dce38cec4efd8e0aab36be89cccc0d10a29edb632cfe61b5a34812da32e03672"
+    },
+    {
+      "file": "src/cocos/assets/resources/equipment/gem-orbs-v5/armor.png",
+      "bytes": 72530,
+      "sha256": "09bd030bc50cab33f316cc62c871d82d6c08484d55b6d3f1c1308f2f49bf1a66"
+    },
+    {
+      "file": "src/cocos/assets/resources/equipment/gem-orbs-v5/criticalDamage.png",
+      "bytes": 73875,
+      "sha256": "a1119be4d7b10e35c3bb485ffe44795db708e8760e34c895ab94862fa9b12b08"
+    },
+    {
+      "file": "src/cocos/assets/resources/equipment/gem-orbs-v5/criticalChance.png",
+      "bytes": 73074,
+      "sha256": "aa162138cbacc6dbf5d33a17a60bbd8279a44bb537f0d1269dfe715ef241ad07"
+    },
+    {
+      "file": "src/cocos/assets/resources/equipment/gem-orbs-v5/power.png",
+      "bytes": 73349,
+      "sha256": "6090da9b5d3131eb15e8ba40e8841e63dbc6d84f8496656f16301d56070d48db"
+    }
+  ],
+  "validation": {
+    "typeScript": "npm run check passed",
+    "rules": "npm test passed: 181 tests, zero failures",
+    "normalTestWeb": "npm run start:test passed; normal test marker, dev features off.",
+    "viewports": [
+      {
+        "width": 844,
+        "height": 390,
+        "dpr": 3
+      },
+      {
+        "width": 932,
+        "height": 430,
+        "dpr": 3
+      },
+      {
+        "width": 1280,
+        "height": 720,
+        "dpr": 2
+      }
+    ],
+    "existingBrowserFlow": "Actual native merchant navigation, 10 gem-card frame identities, categories/sort/touch-scroll, purchase and restore, inventory, same-level redemption artwork, supply/gear purchase, duplicate rejection, safe area and close passed; no page errors.",
+    "fittedSocketVisual": "All five level names and colors rendered together in the actual gem workshop; 844 phone and 1280 desktop screenshots inspected.",
+    "report": "src/cocos/test-results/gem-levels-v6/web.json",
+    "fixtureScope": "Actual normal test concept-2d Cocos build. Isolated browser storage. Initial level-one state and native merchant navigation; later level/currency are explicitly UI fixtures, not natural-economy evidence. Level16/5000gold and supply-merchant position are UI fixtures; level80 plus a five-socket DG_A01 item were injected only in isolated browser state for presentation review. These are not natural progression, economy or reward-source evidence. No redemption code was claimed.",
+    "physicalTapTapDeviceVerified": false
+  },
+  "visualReview": {
+    "reviewer": "Codex",
+    "status": "Reviewed 844 shop, five fitted socket levels and redemption; 932 shop and 1280 workshop. Names, level colors and separate effect text are readable.",
+    "screenshots": [
+      "src/cocos/test-results/gem-levels-v6/orbs-all-844.png",
+      "src/cocos/test-results/gem-levels-v6/five-level-sockets-844.png",
+      "src/cocos/test-results/gem-levels-v6/orbs-redemption-844.png",
+      "src/cocos/test-results/gem-levels-v6/orbs-all-932.png",
+      "src/cocos/test-results/gem-levels-v6/five-level-sockets-1280.png"
+    ],
+    "userAccepted": false
+  },
+  "savedStatIdsUnchanged": true,
+  "economyAndRulesUnchanged": true,
+  "saveMigrationRequired": false,
+  "packageProducedByThisTask": false
+}

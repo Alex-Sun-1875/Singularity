@@ -12,6 +12,8 @@
 
 本轮`source-art/ui/adventure-journal-v2/`的顶部和整体风格已被用户否定，不能作为新页面的视觉基线；后续稿仍须对齐下列现行来源，未确认方向不能先写成新的审美规则。
 
+2026-11-17 用户已确认装备与技能条目的选中态采用 [`selection-colors-v1`](../../../../source-art/ui/selection-colors-v1/README.md) 中的**灰蓝**方案：保留原材质和细铜边，叠加灰蓝内衬与克制的内边，不用亮金双框或白色四角。品质、已穿戴与当前查看分别表达；技能图标原色保留。已否定的 `equipment-selection-v1` 象牙白角标及其 `skill-selection-v1` 派生稿只留历史。接入使用 `FeedbackPalette` 的 `selection.*` 角色与 `PREPARATION_SKINS.selection-row/selection-inlay`；页签文字等既有 `state.selected` 语义不随此条改色。设计确认、实际运行及 TapTap 真机验收分别记录。
+
 ## 可核查的现行来源
 
 | 来源 | 用于核对什么 | 状态边界 |
@@ -20,6 +22,7 @@
 | [rpg-shared-v6/README](../../../../source-art/ui/rpg-shared-v6/README.md)、[运行总览](../../../../source-art/ui/rpg-shared-v6/runtime-overview.jpg)、[实现记录](../../../../source-art/ui/rpg-shared-v6/implementation-result.json) | 将上一版外观归入公共配置和组合组件，保持原有配色与布局 | 这是复用入口，不是另一套新美术。 |
 | [header-navigation-v1/design](../../../../source-art/ui/header-navigation-v1/design.json)、[确认记录](../../../../source-art/ui/header-navigation-v1/review.json) | 同一 Header 的细线直向左箭头／细线关闭、标题、分隔线与状态反馈 | 已有用户确认；平台胶囊与真机安全区验收仍单独登记。 |
 | [设置原图](../../../../source-art/ui/double-gold-frame-v6/reference-design.png)、[settings-alignment-v11/provenance](../../../../source-art/ui/settings-alignment-v11/provenance.json)、[分隔线来源](../../../../source-art/ui/settings-alignment-v11/rules-provenance.json) | 设置页原稿比例、淡出金线、鹿首透明轮廓及贴形暗衬 | v11保存提取件与溯源，不是另一张新增确认的整页稿；不将鹿首、比例或全部装饰套到其他页面，保留来源文件中的待验收状态。 |
+| [工坊原稿](../../../../source-art/ui/forge-alignment-v7/references/approved-forge.png)、[提取资源](../../../../source-art/ui/forge-alignment-v7/runtime-assets.json)、[既有运行对照](../../../../source-art/ui/forge-alignment-v7/review/forge-runtime.jpg) | 装备培养页签、三栏构图、房间与武器石台、等级与词条预览、独立金币／废铁费用图块和金色确认板 | 2026-11-17 用户再次明确沿用此前设计，并随后要求去掉制作装备以减少复杂度。仅保留强化／镶嵌／传承，原稿“锻造”制作页签不恢复。新等级、材料与费用填入既有信息层级；不得以数值调整为由改成另一套卡片。固定强化威力文案已退役，使用真实随机属性。公共Header、灰蓝选中态与手机触区采用其后确认的规则，重接运行与目标设备验收单独记录。 |
 
 ## 应保留的视觉语言
 
@@ -40,9 +43,11 @@
 | 姓名牌、侧栏、行卡和点数盒 | [PreparationControls](../../../../src/cocos/assets/scripts/shared/ui/PreparationControls.ts)、[PreparationSkin](../../../../src/cocos/assets/scripts/shared/ui/PreparationSkin.ts) | `identity`、`side-tab`、`side-tab-selected`、`attribute-row`、`skill-row`、`skill-selected`、`point-counter`等原稿皮肤；不重画近似版本。 |
 | 共用金属框与内衬 | [DoubleGoldFrame](../../../../src/cocos/assets/scripts/shared/ui/DoubleGoldFrame.ts)、[UiSkin](../../../../src/cocos/assets/scripts/shared/ui/UiSkin.ts)、[UiChrome](../../../../src/cocos/assets/scripts/shared/ui/UiChrome.ts) | `UI_FRAME_LAYOUT`、`UI_FRAME_GOLD`；`double-gold-frame-v6`、管理页`double-gold-frame-rpg-v4`及对应内衬／切片。不能拉粗边框或把特定页面鹿首作为通用页头。 |
 | 普通内容框、设置与开关 | [GoldPanelShell](../../../../src/cocos/assets/scripts/shared/ui/GoldPanelShell.ts)、[GoldPanelToggle](../../../../src/cocos/assets/scripts/shared/ui/GoldPanelToggle.ts) | `UI_GOLD_PANEL_RULES`、设置专属`UI_SETTINGS_REFERENCE`；`settings-title-rule-v11`、`settings-row-rule-v11`、`settings-footer-rule-v11`。 |
+| 列表与按钮交互反馈 | [ButtonSurface](../../../../src/cocos/assets/scripts/shared/ui/ButtonSurface.ts)、[ButtonFeedback](../../../../src/cocos/assets/scripts/shared/ui/ButtonFeedback.ts) | 普通行沿实际标题／说明高度设置可见底板；有原稿皮肤的控件使用内衬叠色，边框、品质、灰蓝选中态及文字独立保留。状态机处理悬停、按下、拖出回入、滚动取消、禁用、隐藏与后台清理，原生Button继续管理点击和触区。 |
 | 返回／关闭 | [GoldPanelHeader](../../../../src/cocos/assets/scripts/shared/ui/GoldPanelHeader.ts)、[UiChrome](../../../../src/cocos/assets/scripts/shared/ui/UiChrome.ts) | `UI_PANEL_HEADER`的高度、图标、线宽与反馈面。根据完整触区与真实安全区／胶囊关系选择左返回或右关闭，只留一个入口；切换样式不改变原路由。 |
 | 菜单动作 | [GoldMenuButton](../../../../src/cocos/assets/scripts/shared/ui/GoldMenuButton.ts)、[GoldMenuActions](../../../../src/cocos/assets/scripts/shared/ui/GoldMenuActions.ts) | `UI_MENU_BUTTON`；`start-menu-primary-v8`／`start-menu-secondary-v8`。管理页则从`PREPARATION_SKINS.button-dark/button-gold`等对应原稿部位取材，不混成另一套按钮。 |
 | 文字、强调与业务状态色 | [UiTheme](../../../../src/cocos/assets/scripts/shared/ui/UiTheme.ts)、[FeedbackPalette](../../../../src/cocos/assets/scripts/shared/ui/FeedbackPalette.ts)、[FeedbackView](../../../../src/cocos/assets/scripts/shared/ui/FeedbackView.ts) | `UI_COLORS`、`PREPARATION_DESIGN.colorRoles`与`text.*`／`state.*`等语义角色；不在页面另存RGB。 |
+| 战斗技能图标 | `CombatSkillIcons`、[HudSkillAtlas](../../../../src/cocos/assets/scripts/shared/ui/HudSkillAtlas.ts)、[UiSkin](../../../../src/cocos/assets/scripts/shared/ui/UiSkin.ts) | 技能书读取单张图，HUD 常用技能读取 `hud-circular/atlases/` 合并图集。更换图标须用现有 `src/cocos/tools/build-hud-render-assets.py` 同步圆形 alpha 和图集后构建，并核对实际按钮；单图预览不能代替 HUD 验收。 |
 
 ## 本轮地图／任务设计稿补充
 
@@ -56,3 +61,17 @@
 ## 使用时的最小核对
 
 先选一个最接近本次页面的已确认部位，对照其字体、标题／页签、材质、按钮和边框；从上表复用对应字段。新稿中仍需决定的布局或插画标候选，不把外部参考的整体装饰复制进来。接入后在实际游戏核对同一部位；来源、设计稿、生成结果、运行接入和用户确认分别记录。
+
+2026-11-17 商店物品栏按用户红框参考独立实现：由 `features/trading/runtime/TradeWindow.ts` 与 `ShopInventoryPanel.ts` 负责商人页头、顶部分类／排序、连续物品格及空槽、详情和购买动作。商品页不使用任务列表承载，也不带人物／装备等六个管理页导航；商人服务目录仍负责找人导航。复用公共字体、暗金边框、关闭、按钮反馈和滚动原语，外部参考仅取物品栏结构。
+
+2026-11-17 用户否定独立商店物品栏首版的审美。该版及同轮五色同形宝石试验只保留历史，不能因其类型／触控检查通过作为视觉基线。后续五种轮廓与轻量商店修订的原图、提示词及运行记录位于 `source-art/ui/merchant-inventory-polish-v2/`；原始生成、Codex画面检查和用户确认分开记录。
+
+2026-11-17 用户进一步否定不规则尖角／三角晶体，要求钻石、红宝石、绿宝石等常规珠宝，或考虑斗战神经文方向。本轮按当前西方奇幻风格先采用规则珠宝：白钻圆切、红宝石椭圆、祖母绿方切、蓝宝石圆切、紫水晶枕形；名词与效果分开显示。尖角版保留历史，不能再作为美术基线。新稿生成、Codex运行检查与用户确认仍分开记录，见 `source-art/ui/gem-classic-v3/`。
+
+2026-11-17 用户最终明确选择：统一使用钻石，不同颜色即可。本指令覆盖此前不规则轮廓与红宝石／祖母绿混合珠宝方案；五种属性使用同一规则钻石切工，以红、绿、蓝、白、紫区分，名称与效果独立。切工原图为已有云端生成白钻，本地仅做确定性改色；记录见 `source-art/ui/diamond-colors-v4/`。
+
+2026-11-17 用户新参考指定宝石表现：圆润凸面、薄金属包边、内部晶体折射与局部高光。保持五色分类与统一轮廓，包边本色固定，只改变内部宝石颜色；本轮覆盖此前高密度裸钻切面表现。原图、用户参考、生成提示词、遮罩及实装记录见 `source-art/ui/gem-orbs-v5/`；样张、运行检查和用户确认分别记录。
+
+2026-11-17 用户要求移除白色并加入金色：当前宝石配色为红、绿、蓝、金、紫，继续共用圆润晶体轮廓和固定金属包边；金色替换原白色的暴击率宝石，其他风格和玩法保持。
+
+2026-11-17 用户纠正宝石命名：使用“一级宝石”至“五级宝石”，颜色表示等级，属性另列。结合此前去白色要求，当前按绿／蓝／紫／金／红映射一至五级；同一级五种属性共色。此条覆盖此前按属性命名红钻石等的表现。斗战神历史真言资料仅核实了二阶绿名、三阶蓝名，不将项目适配顺序宣称为原作完整规则；研究和运行记录见 `source-art/ui/gem-levels-v6/`。

@@ -44,7 +44,7 @@ export class TaskPresence {
   if(this.skin!==role){this.skin=role;const g=this.mark!;g.clear();F.ink(g,role,'fill');F.ink(g,'text.outline','stroke');g.lineWidth=2;
    g.moveTo(-8,-10);g.lineTo(-8,10);g.lineTo(9,10);g.lineTo(4,3);g.lineTo(-8,3);g.close();g.fill();g.stroke();F.tint(this.title!,role);
   }
-  const prefix=target.kind==='hunt'?text('marker.hunt'):target.type==='exit'?text('marker.travel'):text('marker.task'),title=fitRpgLine(`${prefix} · ${target.name}`,274,this.title!.fontSize),detail=`${target.blocked?text('detail.blocked'):target.action}${target.level?` · Lv${target.level}`:''} · ${text('detail.distance',{distance:Math.ceil(target.distance)})}`;
+  const prefix=target.kind==='hunt'?text('marker.hunt'):target.type==='exit'?text('marker.travel'):text('marker.task'),title=fitRpgLine(`${prefix} · ${target.name}`,274,this.title!.fontSize),detail=`${target.blocked?target.blockage?.summary??text('detail.blocked'):target.action}${target.level?` · Lv${target.level}`:''} · ${text('detail.distance',{distance:Math.ceil(target.distance)})}`;
   if(this.title!.string!==title)this.title!.string=title;if(this.detail!.string!==detail)this.detail!.string=detail;
   this.root!.setPosition(x,y);this.root!.active=true;this.visible=true;
  }

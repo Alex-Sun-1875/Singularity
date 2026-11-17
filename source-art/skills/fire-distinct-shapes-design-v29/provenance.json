@@ -1,0 +1,33 @@
+{
+  "version": 29,
+  "type": "static-concept-design-board",
+  "generation": {
+    "tool": "OpenAI image_gen built-in cloud tool",
+    "localModelInference": false,
+    "status": "completed"
+  },
+  "references": [
+    {
+      "file": "current-3d-scene-reference.jpg",
+      "role": "current 3D character identity, camera and scale",
+      "source": "src/.tmp/fire-family-wisps-v28/after-r1/FIR_01/000.jpg"
+    },
+    {
+      "file": "approved-flame-style-reference.jpg",
+      "role": "approved orange-gold translucent material style only, not spell silhouette",
+      "source": "source-art/skills/fire-selected-reference-v18/user-selected-effect.jpg"
+    }
+  ],
+  "prompt": "prompt.txt",
+  "output": "fire-distinct-shapes-v29.png",
+  "artReview": {
+    "status": "Approved by user: 可以，就按照这个设计来做吧",
+    "agentReview": "Three distinct silhouettes visible: focused lance, connected low fire field, single radial meteor impact. No repeating vent/cone piles. Static generated proposal, no motion validation."
+  },
+  "production": {
+    "implementedFromThisDesign": true,
+    "buildAfterDesignRequest": true,
+    "status": "Implemented in v30; local Web capture checked, user runtime feedback and TapTap device verification pending",
+    "implementation": "../fire-distinct-runtime-v30/README.md"
+  }
+}

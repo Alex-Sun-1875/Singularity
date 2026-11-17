@@ -1,0 +1,55 @@
+{
+  "status": "Design candidate; no production integration",
+  "confirmedNewSkillDirection": "烈焰喷流：定向持续输出",
+  "meteor": {
+    "id": "FIR_02",
+    "name": "焚星坠落",
+    "role": "ultimate",
+    "previewRadiusMetres": {"previous": 2.8, "candidate": 3.8},
+    "diameterMetres": {"previous": 5.6, "candidate": 7.6},
+    "radiusIncreasePercent": 35.7,
+    "areaIncreasePercent": 84.2,
+    "candidateRankRadiiMetres": [3.8, 4.2, 4.6, 5.0, 5.5],
+    "windupSeconds": 0.85,
+    "highFireUntilSecondsAfterHit": 1.2,
+    "settlingUntilSecondsAfterHit": 1.65,
+    "totalVisualSecondsAfterHit": 4.55,
+    "circle": "Only this skill uses the approved orange-red double engraved circle. Footprint and circle enlarge together.",
+    "perTargetDamage": "Unchanged for this review. A wider area can include additional targets; production balance remains pending."
+  },
+  "mergedField": {
+    "id": "FIR_05",
+    "name": "焚焰火域",
+    "replaces": ["炎墙封路", "焚天火海"],
+    "role": "active / ground control",
+    "proposal": "One advancing flame front opens into a single fixed rectangular burning field; continuous damage and slowing while inside.",
+    "previewWidthMetres": 6,
+    "previewDepthMetres": 3,
+    "activeSeconds": 4,
+    "visualCooldownSeconds": 1.8,
+    "slowProposal": {"normalEnemies": 0.35, "bosses": 0.10},
+    "damageBudget": "One new combined budget, not a sum of both old skills. Final damage and cooldown require later balance work.",
+    "placement": "Placed at aim point; does not physically block navigation. Keep at most one field; replacement does not stack.",
+    "previewLimit": "Uses the existing FIR_05 spread and damage events as an animation carrier. The proposed slow and complete combined skill rules are not implemented."
+  },
+  "newJet": {
+    "id": "FIR_04",
+    "name": "烈焰喷流",
+    "role": "active / directional sustained damage",
+    "proposal": "Gather at the real casting hand; continuously feed a dense three-dimensional fire column forward; close the source and retract on release.",
+    "previewLengthMetres": 7,
+    "intendedEffectiveWidthMetres": 1.8,
+    "windupSeconds": 0.25,
+    "channelVisualSeconds": 1.45,
+    "aiming": "Choose direction on cast; preview holds it steady. No automatic target-to-target tracking or ground magic circle.",
+    "gameplayIntent": "Good against enemies aligned in front; requires a brief stationary cast. Damage stops if the channel is interrupted. Cannot penetrate terrain.",
+    "previewLimit": "Existing FIR_04 cast acts as a zero-damage animation carrier. The new channel, repeated damage, collision and interruption rules are proposed only. Existing native spell pose is held through the channel and then recovered."
+  },
+  "kit": [
+    {"name": "赤焰枪", "role": "single target projectile"},
+    {"name": "烈焰喷流", "role": "directional sustained attack"},
+    {"name": "焚焰火域", "role": "placed damage and slow"},
+    {"name": "焰心护盾", "role": "self protection"},
+    {"name": "焚星坠落", "role": "large area ultimate"}
+  ]
+}

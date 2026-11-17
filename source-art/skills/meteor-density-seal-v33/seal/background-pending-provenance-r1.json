@@ -1,0 +1,60 @@
+{
+  "status": "Applied by root after prior build finished; newer R4 replacement is pending, do not reapply this intermediate.",
+  "source": {
+    "path": "src\\cocos\\assets\\resources\\vfx\\production\\fire-meteor-seal-v33.png",
+    "sha256": "46475e8e03613db12556805e47f349f22e6a23841ba353978bd8e91c91a0ee97",
+    "geometryAndLineColours": "Approved R3 original-orange-gold line PNG retained as the unchanged top overlay; no geometry/path/palette edits."
+  },
+  "output": {
+    "pendingFile": "fire-meteor-seal-v33-background-pending-r1.png",
+    "sha256": "a3ced75374a53f6f5df4fa0926567dcbec5676f7c361f0ff962dc40c4338e78a",
+    "size": [
+      1024,
+      1024
+    ],
+    "pngBytes": 376826
+  },
+  "underlay": {
+    "colourRGBRange": {
+      "centre": [
+        255,
+        134,
+        38
+      ],
+      "band": [
+        255,
+        125,
+        32
+      ],
+      "outer": [
+        255,
+        120,
+        28
+      ]
+    },
+    "alpha": {
+      "centre": 0.14499979206147418,
+      "band": 0.1583188392088427,
+      "rangeBeforeOuterFade": [
+        0.123,
+        0.16
+      ]
+    },
+    "radius": 460,
+    "centre": [
+      511.5,
+      511.5
+    ],
+    "formula": "Full radial disk: .123 + .022*exp(-(r/.50)^2) + .034*exp(-((r-.84)/.14)^2), with smooth edge fade .94..1.0. Same front/back coverage, no hole."
+  },
+  "compositing": "Warm optical underlay beneath unchanged engraved line image; no baked grey ground, no opaque board, no new shader. The displayed test grid is only in the sample image.",
+  "sourceProductionHashStillUnchanged": true,
+  "opaqueCoreMaximumRGBChangeFromUnderCompositing": 0,
+  "preview": "seal-background-proposal-r1.jpg",
+  "review": {
+    "local": "Unique sample inspected: complete warm amber optical disk, readable grid through front/back, no baked floor and no opaque board; approved regular line top layer retained.",
+    "native": "Actual R3 filled-seal capture reviewed; user colour/glyph feedback requires R4.",
+    "user": "pending"
+  },
+  "appliedProductionSha256": "a3ced75374a53f6f5df4fa0926567dcbec5676f7c361f0ff962dc40c4338e78a"
+}

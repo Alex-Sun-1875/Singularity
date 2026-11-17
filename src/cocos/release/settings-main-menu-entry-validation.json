@@ -1,0 +1,26 @@
+{
+  "date": "2026-11-17",
+  "feature": "设置固定底部主菜单入口",
+  "profile": "test",
+  "location": "游戏内右上角齿轮→设置固定底部→返回主菜单",
+  "reuse": "现有设置 footer、主菜单路由与存档；没有新增常驻HUD按钮",
+  "validation": {
+    "typecheck": "npm run check 通过",
+    "export": "复用同工程成功完成的最新 concept-2d 共享构建，并在实际产物中验证本轮入口",
+    "touch": [
+      "844x390 audio: real touch gear -> fixed Main menu footer -> Continue, >=48px target and >=8px gap; journey retained",
+      "844x390 controls: real touch gear -> fixed Main menu footer -> Continue, >=48px target and >=8px gap; journey retained",
+      "844x390 journey: real touch gear -> fixed Main menu footer -> Continue, >=48px target and >=8px gap; journey retained",
+      "932x430 audio: real touch gear -> fixed Main menu footer -> Continue, >=48px target and >=8px gap; journey retained",
+      "932x430 controls: real touch gear -> fixed Main menu footer -> Continue, >=48px target and >=8px gap; journey retained",
+      "932x430 journey: real touch gear -> fixed Main menu footer -> Continue, >=48px target and >=8px gap; journey retained"
+    ],
+    "visual": "已查看844×390@3实际音画页截图，入口位于设置固定底部且文字完整",
+    "pageErrors": []
+  },
+  "evidence": "test-results/settings-main-menu-entry-v2/",
+  "sourceSha256": "29601164a29c28c2b8218860ed2436d7767c2b9646c3cc1fea0a5f061501d3db",
+  "pending": [
+    "TapTap 平台与真机验收；本轮没有制作新的上传ZIP"
+  ]
+}

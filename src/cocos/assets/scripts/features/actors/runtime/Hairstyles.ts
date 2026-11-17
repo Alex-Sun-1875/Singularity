@@ -9,6 +9,18 @@ export const HAIRSTYLE_PORTRAITS:Readonly<Record<string,string>>={
  nero:'portraits/raphael-hair-nero-v1',vergil:'portraits/raphael-hair-vergil-v1',
 };
 const KEY='sword-and-fire:player-hairstyle:v1';
+const HEADGEAR_KEY='sword-and-fire:hide-headgear:v1';
+let hiddenHeadgear:boolean|undefined;
+
+/** Cosmetic visibility is a platform preference, independent of equipment and saves. */
+export function headgearHidden():boolean {
+ if(hiddenHeadgear===undefined){try{hiddenHeadgear=platformStorage.getItem(HEADGEAR_KEY)==='1';}catch{return false;}}
+ return hiddenHeadgear;
+}
+export function headgearVisible(head:string|null|undefined):boolean{return head==='A02'&&!headgearHidden();}
+export function rememberHeadgearHidden(hidden:boolean):boolean {
+ try{platformStorage.setItem(HEADGEAR_KEY,hidden?'1':'0');hiddenHeadgear=hidden;return true;}catch{return false;}
+}
 
 /** Cosmetic preference stays independent of journey progress and equipment. */
 export function readHairstyle():string {

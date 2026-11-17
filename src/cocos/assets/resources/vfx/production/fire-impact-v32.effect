@@ -1,0 +1,69 @@
+CCEffect %{
+  techniques:
+  - name: transparent
+    passes:
+    - vert: selected-impact-v32-vs:vert
+      frag: selected-impact-v32-fs:frag
+      rasterizerState: { cullMode: none }
+      depthStencilState:
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: one
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: one
+          blendDstAlpha: one_minus_src_alpha
+      properties:
+        burstTexture: { value: white }
+        contactTexture: { value: white }
+        flowState: { value: [0, 1, 0, 0] }
+}%
+
+CCProgram selected-impact-v32-vs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+  #include <builtin/uniforms/cc-local>
+  in vec3 a_position;
+  in vec2 a_texCoord;
+  in vec4 a_color;
+  out vec2 v_uv;
+  out vec4 v_surface;
+  vec4 vert () {
+    v_uv = a_texCoord;
+    v_surface = a_color;
+    return cc_matViewProj * cc_matWorld * vec4(a_position, 1.0);
+  }
+}%
+
+CCProgram selected-impact-v32-fs %{
+  precision highp float;
+  in vec2 v_uv;
+  in vec4 v_surface;
+  uniform sampler2D burstTexture;
+  uniform sampler2D contactTexture;
+  uniform SelectedImpactParams { vec4 flowState; };
+  vec2 atlasUV(float index, vec2 uv) {
+    return (vec2(mod(index,4.0),floor(index/4.0))+clamp(uv,vec2(0.002),vec2(0.998)))/4.0;
+  }
+  vec4 premultiply(vec4 c) { return vec4(c.rgb*c.a,c.a); }
+  vec4 frag () {
+    if(v_surface.g>3.5) {
+      float clock=flowState.x*24.0;
+      float frame=mod(floor(clock),16.0),next=mod(frame+1.0,16.0);
+      vec4 flame=mix(premultiply(texture(burstTexture,atlasUV(frame,v_uv))),premultiply(texture(burstTexture,atlasUV(next,v_uv))),fract(clock));
+      float fade=v_surface.r*(1.0-smoothstep(0.91,1.10,v_surface.a));
+      if(flame.a*fade<0.002) discard;
+      return vec4(flame.rgb*1.10*fade,flame.a*fade);
+    }
+    // Preserve the independently selected fire-lance contact fan unchanged.
+    vec2 anchor=vec2(0.138990646117,0.369657187871);
+    float tip=smoothstep(0.09,0.42,distance(v_uv,anchor));
+    vec2 drift=vec2(cos(v_uv.x*8.0-flowState.x*9.0)*0.004,sin(v_uv.x*8.0-flowState.x*11.0)*0.012)*tip;
+    vec4 fan=texture(contactTexture,clamp(v_uv+drift,vec2(0.002),vec2(0.998)));
+    float fade=v_surface.r;
+    if(fan.a*fade<0.002) discard;
+    return vec4(fan.rgb*fan.a*1.18*fade,fan.a*0.94*fade);
+  }
+}%

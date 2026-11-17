@@ -1,0 +1,1545 @@
+{
+  "compiledSha256": "da792cbe4d64231d941cb9a0d9aa6fa1708f24ed6a48d2761150e8ce87b4277a",
+  "sourceHashes": {
+    "SkillFireSprites.ts": "7e0c39c949709ae1527eeac00a1448d2e83796ce78512b504d88faf674df8b84",
+    "FireImpactEffects.ts": "c34a1b1872da4db27c2135032d25eb4d1b093f586cf7667e123736f812ee7fe8",
+    "FireFieldEffects.ts": "39239a5a91e5d7bded3dca922d6f8c6e52347e888e2c406427a6cd1d36c57f58",
+    "SkillMeteorBody.ts": "307fa79e034c9abf845d7e76dcb0e6037719d13aa1ef8bd1d01002757d6d21d3",
+    "FireGroundEffects.ts": "327ba2ce113074ab0050d00f743683f44925ef5fe037652ae2c0f7f966be2c63",
+    "NativeSkillVfx.ts": "7ecb09b2031d00dc1fb9bb9942f6c9dfed7cfc43caaf8b2e863d5d4db22feae6",
+    "Effects.ts": "079b34ada50b46e21753a2853385e147560a9d9947854fc018f93865cd2d0f5a",
+    "core/GameSession.ts": "bf6dd1c0132b5e07c64d5dd8bb8e80421f00a54727f771e83a9a2fc8728a6076",
+    "core/Contracts.ts": "a3a9ecb9804f6004aae8a47f99cb8a95d578fbe2114de7e623a9fe4f11863d56",
+    "features/combat/data/PureSkills.ts": "b0ac6a1fd04fea5779b33db2e03dbc7ce4036228c1c75945e1fd8668eee196ed",
+    "features/combat/common/PureCombat.ts": "1f3e7b44c869c2d71b22d6642f507163180a2d2e41e2369828c1db5b29831500",
+    "features/combat/common/CombatAccuracy.ts": "ebbe49f99c4ec854e22c08065f4cd5dffdb675ea24e355806dd41e357ddc9654",
+    "features/equipment/common/EquipmentDice.ts": "0237853dbe68fe9bf5dcbeec83d42f42d0e2098644edc9b64ef18958d43d2037",
+    "features/debug/common/TrainingRange.ts": "ccd8e6ed1347e3fb245cbdee7ee33bb76ac71515da8878ccaf386e18f4aac2a3",
+    "features/progression/data/CampaignProgression.ts": "c07134128f12b7cee61ad0b68a667bfe776cd5e42de89dc6006e58b9c2429307",
+    "features/progression/data/CampaignExperience.ts": "be22b42a6a8e7e4c46a3e7405467ae170913884135b0a3f2b940d83004cdc13a",
+    "features/progression/common/Progression.ts": "ceb92c33d22a5fa62f0aa134cc4c0f3d15cd37dae0e6ac6b4520e17882061c3b",
+    "shared/BuildProfile.ts": "e7eb54c5e7dcd69823d02899f2f35b43080f78378e4b48ec65544703e8880768"
+  },
+  "buildProvenance": {
+    "sourceBuild": "src/cocos/build/concept-2d",
+    "servedBuild": "src/.tmp/meteor-v33-frozen-build-da792cbe4d64-1794896953840890100",
+    "snapshotPath": "src/.tmp/meteor-v33-frozen-build-da792cbe4d64-1794896953840890100",
+    "mode": "frozen-build-snapshot",
+    "sourceBuildLockPresentAtCaptureStart": true,
+    "sourceHashSampling": "Current workspace files at recorder launch; compiled snapshot provenance is the root copy proof plus served main/resource hashes."
+  },
+  "stableBuildDuringCapture": true,
+  "shaderAssetEvidence": "shader-asset-evidence.json",
+  "emptyGround": false,
+  "nativeCanvas": [
+    2560,
+    1272
+  ],
+  "frames": 270,
+  "seconds": 9,
+  "fps": 30,
+  "defaultCameraAndCompleteHUDInNativeVideo": true,
+  "journeyStart": {
+    "level": 1,
+    "totalXp": 0,
+    "area": "S01-T1",
+    "seed": 1748164045,
+    "sequence": 0,
+    "temporaryMax": false,
+    "freshBrowserContext": true,
+    "menu": "title"
+  },
+  "journeyRestoration": {
+    "sessionRestored": true,
+    "level": 1,
+    "progressionUnchanged": true,
+    "equipmentUnchanged": true,
+    "trainingRangeAbsent": true
+  },
+  "temporaryRangeCharacterLevel": 80,
+  "runtimeRangeMaxLevel": 80,
+  "progressionContractEvidence": null,
+  "actualResults": {
+    "casts": 1,
+    "releases": 1,
+    "hits": 4,
+    "damage": 812,
+    "positiveHitEvents": 4,
+    "hitEventDamage": 812.0,
+    "misses": 1,
+    "criticalHits": 0,
+    "maxCooldown": 11.983333333333333,
+    "peakActiveFireRecords": 3,
+    "peakReportedImpactHeight": 2.4798839988062387,
+    "peakReportedImpactVertices": 884,
+    "peakReportedFrontRadius": 3.8,
+    "peakReportedLayers": 1,
+    "peakReportedLayerHeight": 2.5248839988062386,
+    "clearedAtEnd": true
+  },
+  "gameplayComparison": {
+    "baselineDirectory": "source-art\\skills\\fire-reference-alignment-v32\\contact-final-r1",
+    "baselineArtStatus": "v32-user-requested-further-seal-shell-density-and-continuity-refinement",
+    "baselineCompiledSha256": "55d1a655386903c9c3dca5de16a029608065838ef6c0a2f0a19d19831ca66cf9",
+    "sameIndependentSkillSequence": true,
+    "numbersEqual": true,
+    "before": {
+      "casts": 1,
+      "releases": 1,
+      "hits": 4,
+      "damage": 812,
+      "positiveHitEvents": 4,
+      "misses": 1,
+      "criticalHits": 0,
+      "maxCooldown": 11.983333333333333
+    },
+    "after": {
+      "casts": 1,
+      "releases": 1,
+      "hits": 4,
+      "damage": 812,
+      "positiveHitEvents": 4,
+      "misses": 1,
+      "criticalHits": 0,
+      "maxCooldown": 11.983333333333333
+    },
+    "beforeCharacterLevel": 80,
+    "afterCharacterLevel": 80,
+    "sameCharacterLevel": true,
+    "qualification": "Same isolated training level; compare actual event totals."
+  },
+  "trajectoryTiming": {
+    "castTime": 0.6166666666666669,
+    "impactTime": 1.4499999999999997,
+    "resolvedWindup": 0.8333333333333328,
+    "firstActiveMeteorTime": 0.9333333333333346,
+    "lastActiveMeteorTime": 1.4333333333333331,
+    "observedActiveFallSeconds": 0.49999999999999856,
+    "firstActiveMeteorFrame": 21,
+    "lastActiveMeteorFrame": 36
+  },
+  "targetAlignment": {
+    "eventTarget": {
+      "x": 0,
+      "z": -4
+    },
+    "eventAndDropBlastCueTargetsEqual": true,
+    "castIds": [
+      "cast:1"
+    ],
+    "meteorBodyTargetsEqual": true,
+    "meteorLandingHeights": [
+      0.045
+    ],
+    "actualCameraProjectedDescentAnglesDegrees": {
+      "min": 47.598049025955206,
+      "max": 47.598049025955234
+    },
+    "realRockContactRecorded": true,
+    "contactSamples": [
+      {
+        "key": "meteor:cast:1",
+        "rockVisible": true,
+        "progress": 0.999999,
+        "size": 1.1600000000000001,
+        "rockScale": {
+          "x": 0.5336000000000001,
+          "y": 0.9512,
+          "z": 0.5104000000000001
+        },
+        "target": {
+          "x": 0,
+          "y": 0.045,
+          "z": -4
+        },
+        "nose": {
+          "x": 7.071997348360171e-06,
+          "y": 0.04501279999520065,
+          "z": -4.000004895998164
+        },
+        "bodyCentre": {
+          "x": 0.14413014220380352,
+          "y": 0.5033371783496086,
+          "z": -4.091650245810315
+        },
+        "direction": {
+          "x": -0.45857926337390725,
+          "y": -0.8300077165138593,
+          "z": 0.3174779515665512
+        },
+        "position": {
+          "x": 7.071997348360171e-06,
+          "y": 0.04501279999520065,
+          "z": -4.000004895998164
+        },
+        "screen": {
+          "nose": {
+            "x": 773.7415303902059,
+            "y": 294.63494210452757
+          },
+          "target": {
+            "x": 773.740263241481,
+            "y": 294.6335544944963
+          },
+          "projectedDescentAngleDegrees": 47.59804902434527
+        }
+      }
+    ],
+    "maxNoseContactErrorMetres": 1.5421537590525688e-05,
+    "contactFrames": [
+      {
+        "frame": 37,
+        "impactAge": 0.016666666666666607,
+        "meteor": {
+          "model": "reference-nose-anchored-comet-v32",
+          "capacity": 4,
+          "sharedRockMeshes": 1,
+          "sharedRockMaterials": 1,
+          "leadingSupport": {
+            "x": 0.213878,
+            "y": -0.5,
+            "z": 0.006679
+          },
+          "opaqueRockMeshes": 1,
+          "active": [
+            {
+              "key": "meteor:cast:1",
+              "rockVisible": true,
+              "progress": 0.999999,
+              "size": 1.1600000000000001,
+              "rockScale": {
+                "x": 0.5336000000000001,
+                "y": 0.9512,
+                "z": 0.5104000000000001
+              },
+              "target": {
+                "x": 0,
+                "y": 0.045,
+                "z": -4
+              },
+              "nose": {
+                "x": 7.071997348360171e-06,
+                "y": 0.04501279999520065,
+                "z": -4.000004895998164
+              },
+              "bodyCentre": {
+                "x": 0.14413014220380352,
+                "y": 0.5033371783496086,
+                "z": -4.091650245810315
+              },
+              "direction": {
+                "x": -0.45857926337390725,
+                "y": -0.8300077165138593,
+                "z": 0.3174779515665512
+              },
+              "position": {
+                "x": 7.071997348360171e-06,
+                "y": 0.04501279999520065,
+                "z": -4.000004895998164
+              },
+              "screen": {
+                "nose": {
+                  "x": 773.7415303902059,
+                  "y": 294.63494210452757
+                },
+                "target": {
+                  "x": 773.740263241481,
+                  "y": 294.6335544944963
+                },
+                "projectedDescentAngleDegrees": 47.59804902434527
+              }
+            }
+          ]
+        },
+        "blastCues": [
+          {
+            "kind": "blast",
+            "skillId": "FIR_02",
+            "castId": "cast:1",
+            "eventType": "skill_segment",
+            "start": 1.4499999999999997,
+            "age": 0.016666666666666607,
+            "duration": 4.55,
+            "target": {
+              "x": 0,
+              "z": -4
+            },
+            "from": {
+              "x": 0,
+              "z": -8
+            },
+            "to": {
+              "x": 0,
+              "z": -4
+            },
+            "geometry": {
+              "kind": "filledImpactDisk",
+              "origin": "aimPoint",
+              "radiusMetres": 3.8,
+              "widthMetres": 0,
+              "lengthMetres": 0,
+              "depthMetres": 0,
+              "angleDegrees": 0
+            }
+          }
+        ]
+      }
+    ],
+    "qualification": "This checks actual event/cue anchors. Native stage images must still establish visible rock, flame and seal alignment."
+  },
+  "representativeStages": [
+    {
+      "slug": "cast-0200ms",
+      "title": "施法 0.20s · 真实状态",
+      "kind": "cast-timing",
+      "frame": 17,
+      "nativeTime": 0.8000000000000008,
+      "castAge": 0.1833333333333339,
+      "impactAge": -0.6499999999999989,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 0,
+        "active": []
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "continuous-single-impact-relief-v33",
+        "capacity": 8,
+        "allocated": 0,
+        "sharedMaterials": 0,
+        "cameraBound": true,
+        "active": []
+      },
+      "requestedCastAge": 0.2
+    },
+    {
+      "slug": "cast-0600ms",
+      "title": "施法 0.60s · 真实状态",
+      "kind": "cast-timing",
+      "frame": 29,
+      "nativeTime": 1.2000000000000006,
+      "castAge": 0.5833333333333337,
+      "impactAge": -0.2499999999999991,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": [
+          {
+            "key": "meteor:cast:1",
+            "rockVisible": true,
+            "progress": 0.5151515151515158,
+            "size": 1.1600000000000001,
+            "rockScale": {
+              "x": 0.5336000000000001,
+              "y": 0.9512,
+              "z": 0.5104000000000001
+            },
+            "target": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "nose": {
+              "x": 2.8054214876033026,
+              "y": 5.122685950413217,
+              "z": -5.942214876033056
+            },
+            "bodyCentre": {
+              "x": 2.9462978492246545,
+              "y": 5.58111604186284,
+              "z": -6.038273541918553
+            },
+            "direction": {
+              "x": -0.45857926337390725,
+              "y": -0.8300077165138593,
+              "z": 0.3174779515665512
+            },
+            "position": {
+              "x": 2.8054214876033026,
+              "y": 5.122685950413217,
+              "z": -5.942214876033056
+            },
+            "screen": {
+              "nose": {
+                "x": 1275.9198005356452,
+                "y": 844.7152816279952
+              },
+              "target": {
+                "x": 773.2490435473412,
+                "y": 294.2582033368814
+              },
+              "projectedDescentAngleDegrees": 47.59804902595523
+            }
+          }
+        ]
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "continuous-single-impact-relief-v33",
+        "capacity": 8,
+        "allocated": 0,
+        "sharedMaterials": 0,
+        "cameraBound": true,
+        "active": []
+      },
+      "requestedCastAge": 0.6
+    },
+    {
+      "slug": "fall-20",
+      "title": "下落进度 20%",
+      "kind": "fall",
+      "frame": 24,
+      "nativeTime": 1.0333333333333345,
+      "castAge": 0.41666666666666763,
+      "impactAge": -0.4166666666666652,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": [
+          {
+            "key": "meteor:cast:1",
+            "rockVisible": true,
+            "progress": 0.21212121212121388,
+            "size": 1.1600000000000001,
+            "rockScale": {
+              "x": 0.5336000000000001,
+              "y": 0.9512,
+              "z": 0.5104000000000001
+            },
+            "target": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "nose": {
+              "x": 3.9256418732782317,
+              "y": 7.150234159779605,
+              "z": -6.717752066115699
+            },
+            "bodyCentre": {
+              "x": 4.064578918831894,
+              "y": 7.608655833847041,
+              "z": -6.816633972549131
+            },
+            "direction": {
+              "x": -0.45857926337390725,
+              "y": -0.8300077165138593,
+              "z": 0.3174779515665512
+            },
+            "position": {
+              "x": 3.9256418732782317,
+              "y": 7.150234159779605,
+              "z": -6.717752066115699
+            },
+            "screen": {
+              "nose": {
+                "x": 1476.6390264163917,
+                "y": 1064.515851084516
+              },
+              "target": {
+                "x": 773.2490435473412,
+                "y": 294.2582033368814
+              },
+              "projectedDescentAngleDegrees": 47.598049025955206
+            }
+          }
+        ]
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "continuous-single-impact-relief-v33",
+        "capacity": 8,
+        "allocated": 0,
+        "sharedMaterials": 0,
+        "cameraBound": true,
+        "active": []
+      },
+      "requestedFallProgress": 0.2,
+      "selectionBasis": "Actual meteor.inspect progress"
+    },
+    {
+      "slug": "fall-60",
+      "title": "下落进度 60%",
+      "kind": "fall",
+      "frame": 30,
+      "nativeTime": 1.2333333333333338,
+      "castAge": 0.6166666666666669,
+      "impactAge": -0.2166666666666659,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": [
+          {
+            "key": "meteor:cast:1",
+            "rockVisible": true,
+            "progress": 0.5757575757575761,
+            "size": 1.1600000000000001,
+            "rockScale": {
+              "x": 0.5336000000000001,
+              "y": 0.9512,
+              "z": 0.5104000000000001
+            },
+            "target": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "nose": {
+              "x": 2.5229311294765826,
+              "y": 4.611391184573,
+              "z": -5.7466446280991725
+            },
+            "bodyCentre": {
+              "x": 2.664203750830066,
+              "y": 5.069816082079946,
+              "z": -5.842144497751137
+            },
+            "direction": {
+              "x": -0.45857926337390725,
+              "y": -0.8300077165138593,
+              "z": 0.3174779515665512
+            },
+            "position": {
+              "x": 2.5229311294765826,
+              "y": 4.611391184573,
+              "z": -5.7466446280991725
+            },
+            "screen": {
+              "nose": {
+                "x": 1225.3036479222399,
+                "y": 789.2873119389595
+              },
+              "target": {
+                "x": 773.2490435473412,
+                "y": 294.2582033368814
+              },
+              "projectedDescentAngleDegrees": 47.59804902595521
+            }
+          }
+        ]
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "continuous-single-impact-relief-v33",
+        "capacity": 8,
+        "allocated": 0,
+        "sharedMaterials": 0,
+        "cameraBound": true,
+        "active": []
+      },
+      "requestedFallProgress": 0.6,
+      "selectionBasis": "Actual meteor.inspect progress"
+    },
+    {
+      "slug": "pre-impact",
+      "title": "着陆前 · 最后真实可见帧",
+      "kind": "pre-impact",
+      "frame": 36,
+      "nativeTime": 1.4333333333333331,
+      "castAge": 0.8166666666666662,
+      "impactAge": -0.016666666666666607,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": [
+          {
+            "key": "meteor:cast:1",
+            "rockVisible": true,
+            "progress": 0.9393939393939384,
+            "size": 1.1600000000000001,
+            "rockScale": {
+              "x": 0.5336000000000001,
+              "y": 0.9512,
+              "z": 0.5104000000000001
+            },
+            "target": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "nose": {
+              "x": 0.4188650137741112,
+              "y": 0.8031267217630972,
+              "z": -4.289983471074384
+            },
+            "bodyCentre": {
+              "x": 0.5625727688429589,
+              "y": 1.2614723311184997,
+              "z": -4.3821732146447925
+            },
+            "direction": {
+              "x": -0.45857926337390725,
+              "y": -0.8300077165138593,
+              "z": 0.3174779515665512
+            },
+            "position": {
+              "x": 0.4188650137741112,
+              "y": 0.8031267217630972,
+              "z": -4.289983471074384
+            },
+            "screen": {
+              "nose": {
+                "x": 848.3005801810128,
+                "y": 376.44450322062545
+              },
+              "target": {
+                "x": 773.2490435473412,
+                "y": 294.2582033368814
+              },
+              "projectedDescentAngleDegrees": 47.59804902595523
+            }
+          }
+        ]
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "continuous-single-impact-relief-v33",
+        "capacity": 8,
+        "allocated": 0,
+        "sharedMaterials": 0,
+        "cameraBound": true,
+        "active": []
+      }
+    },
+    {
+      "slug": "impact-0000ms",
+      "title": "0.02s · 岩尖触地 · 实际首次冲击帧",
+      "kind": "impact",
+      "frame": 37,
+      "nativeTime": 1.4666666666666663,
+      "castAge": 0.8499999999999994,
+      "impactAge": 0.016666666666666607,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": [
+          {
+            "key": "meteor:cast:1",
+            "rockVisible": true,
+            "progress": 0.999999,
+            "size": 1.1600000000000001,
+            "rockScale": {
+              "x": 0.5336000000000001,
+              "y": 0.9512,
+              "z": 0.5104000000000001
+            },
+            "target": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "nose": {
+              "x": 7.071997348360171e-06,
+              "y": 0.04501279999520065,
+              "z": -4.000004895998164
+            },
+            "bodyCentre": {
+              "x": 0.14413014220380352,
+              "y": 0.5033371783496086,
+              "z": -4.091650245810315
+            },
+            "direction": {
+              "x": -0.45857926337390725,
+              "y": -0.8300077165138593,
+              "z": 0.3174779515665512
+            },
+            "position": {
+              "x": 7.071997348360171e-06,
+              "y": 0.04501279999520065,
+              "z": -4.000004895998164
+            },
+            "screen": {
+              "nose": {
+                "x": 773.7415303902059,
+                "y": 294.63494210452757
+              },
+              "target": {
+                "x": 773.740263241481,
+                "y": 294.6335544944963
+              },
+              "projectedDescentAngleDegrees": 47.59804902434527
+            }
+          }
+        ]
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "continuous-single-impact-relief-v33",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.0203703703703703,
+            "phase": 0.0203703703703703,
+            "frameBlend": 0.19999999999998863,
+            "atlasFrame": 3,
+            "time": 1.4666666666666663,
+            "age": 0.016666666666666607,
+            "frontRadius": 0.7575606599030651,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 0.22869511102268314,
+            "width": 2.1046013706562032,
+            "height": 0.18369511102268316,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 0.18369511102268316,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "requestedImpactAge": 0
+    },
+    {
+      "slug": "impact-0050ms",
+      "title": "0.05s · 冲击开始",
+      "kind": "impact",
+      "frame": 38,
+      "nativeTime": 1.4999999999999996,
+      "castAge": 0.8833333333333326,
+      "impactAge": 0.04999999999999982,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": []
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [
+          {
+            "key": "meteor-seal:cast:1",
+            "kind": "meteorSeal",
+            "emitters": 1,
+            "triangles": 72,
+            "vertices": 49,
+            "frames": []
+          }
+        ],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "continuous-single-impact-relief-v33",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.0611111111111109,
+            "phase": 0.0611111111111109,
+            "frameBlend": 0.9999999999999858,
+            "atlasFrame": 3,
+            "time": 1.4999999999999996,
+            "age": 0.04999999999999982,
+            "frontRadius": 1.654380004882808,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 1.2849419994031126,
+            "width": 4.588610237897228,
+            "height": 1.2399419994031127,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 1.2399419994031127,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "requestedImpactAge": 0.05
+    },
+    {
+      "slug": "impact-0250ms",
+      "title": "0.25s · 火浪前锋外扩",
+      "kind": "impact",
+      "frame": 44,
+      "nativeTime": 1.6999999999999988,
+      "castAge": 1.083333333333332,
+      "impactAge": 0.2499999999999991,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": []
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "continuous-single-impact-relief-v33",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.23390654884171846,
+            "phase": 0.23390654884171846,
+            "frameBlend": 0.7999999999999687,
+            "atlasFrame": 8,
+            "time": 1.6999999999999988,
+            "age": 0.2499999999999991,
+            "frontRadius": 3.7626099853515607,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.482124333670825,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "requestedImpactAge": 0.25
+    },
+    {
+      "slug": "impact-0650ms",
+      "title": "0.65s · 立体翻卷",
+      "kind": "impact",
+      "frame": 56,
+      "nativeTime": 2.0999999999999974,
+      "castAge": 1.4833333333333305,
+      "impactAge": 0.6499999999999977,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": []
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "continuous-single-impact-relief-v33",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.30032433080811416,
+            "phase": 0.30032433080811416,
+            "frameBlend": 0.39999999999993463,
+            "atlasFrame": 2,
+            "time": 2.0999999999999974,
+            "age": 0.6499999999999977,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.5248839988062386,
+            "width": 10.633341637287625,
+            "height": 2.4798839988062387,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4798839988062387,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "requestedImpactAge": 0.65
+    },
+    {
+      "slug": "impact-1250ms",
+      "title": "1.25s · 爆燃后收势",
+      "kind": "impact",
+      "frame": 74,
+      "nativeTime": 2.6999999999999953,
+      "castAge": 2.0833333333333286,
+      "impactAge": 1.2499999999999956,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": []
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "continuous-single-impact-relief-v33",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.35877420915308367,
+            "phase": 0.35877420915308367,
+            "frameBlend": 0.7999999999998835,
+            "atlasFrame": 0,
+            "time": 2.6999999999999953,
+            "age": 1.2499999999999956,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 2.4467541149400844,
+            "width": 10.507953254441096,
+            "height": 2.4017541149400845,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 2.4017541149400845,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "requestedImpactAge": 1.25
+    },
+    {
+      "slug": "impact-1650ms",
+      "title": "1.65s · 收势向余火过渡",
+      "kind": "impact",
+      "frame": 86,
+      "nativeTime": 3.099999999999994,
+      "castAge": 2.483333333333327,
+      "impactAge": 1.6499999999999941,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": []
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "continuous-single-impact-relief-v33",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.68,
+            "phase": 0.68,
+            "frameBlend": 0.39999999999984936,
+            "atlasFrame": 10,
+            "time": 3.099999999999994,
+            "age": 1.6499999999999941,
+            "frontRadius": 3.8,
+            "layers": 1,
+            "lobes": 1,
+            "cards": 1,
+            "peakHeight": 0.24661658526879993,
+            "width": 9.905707194326077,
+            "height": 0.20161658526879994,
+            "position": {
+              "x": 0,
+              "y": 0.045,
+              "z": -4
+            },
+            "vertices": 884,
+            "triangles": 1650,
+            "maxHeight": 0.20161658526879994,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "requestedImpactAge": 1.65
+    },
+    {
+      "slug": "impact-4600ms",
+      "title": "4.62s · 退火结束",
+      "kind": "impact",
+      "frame": 175,
+      "nativeTime": 6.06666666666665,
+      "castAge": 5.449999999999983,
+      "impactAge": 4.616666666666651,
+      "meteorInspect": {
+        "model": "reference-nose-anchored-comet-v32",
+        "capacity": 4,
+        "sharedRockMeshes": 1,
+        "sharedRockMaterials": 1,
+        "leadingSupport": {
+          "x": 0.213878,
+          "y": -0.5,
+          "z": 0.006679
+        },
+        "opaqueRockMeshes": 1,
+        "active": []
+      },
+      "groundInspect": {
+        "capacity": 8,
+        "allocated": 1,
+        "active": [],
+        "cameraBound": true
+      },
+      "impactInspect": {
+        "model": "continuous-single-impact-relief-v33",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": []
+      },
+      "requestedImpactAge": 4.6
+    }
+  ],
+  "coolingContinuityEvidence": {
+    "requiredImpactAges": [
+      1.2,
+      1.4,
+      1.6,
+      1.8,
+      2.2,
+      2.8,
+      3.5
+    ],
+    "representativeStages": [
+      {
+        "slug": "cooling-1200ms",
+        "frame": 73,
+        "requestedImpactAge": 1.2,
+        "actualImpactAge": 1.2166666666666623,
+        "impactInspect": {
+          "model": "continuous-single-impact-relief-v33",
+          "capacity": 8,
+          "allocated": 1,
+          "sharedMaterials": 1,
+          "cameraBound": true,
+          "active": [
+            {
+              "key": "impact:cast:1:0",
+              "kind": "meteor",
+              "radius": 3.8,
+              "progress": 0.34870210417913916,
+              "phase": 0.34870210417913916,
+              "frameBlend": 0.9999999999998863,
+              "atlasFrame": 15,
+              "time": 2.666666666666662,
+              "age": 1.2166666666666623,
+              "frontRadius": 3.8,
+              "layers": 1,
+              "lobes": 1,
+              "cards": 1,
+              "peakHeight": 2.5157399086944996,
+              "width": 10.529748379960026,
+              "height": 2.4707399086944997,
+              "position": {
+                "x": 0,
+                "y": 0.045,
+                "z": -4
+              },
+              "vertices": 884,
+              "triangles": 1650,
+              "maxHeight": 2.4707399086944997,
+              "clippedDirections": 0
+            }
+          ]
+        }
+      },
+      {
+        "slug": "cooling-1400ms",
+        "frame": 79,
+        "requestedImpactAge": 1.4,
+        "actualImpactAge": 1.4166666666666616,
+        "impactInspect": {
+          "model": "continuous-single-impact-relief-v33",
+          "capacity": 8,
+          "allocated": 1,
+          "sharedMaterials": 1,
+          "cameraBound": true,
+          "active": [
+            {
+              "key": "impact:cast:1:0",
+              "kind": "meteor",
+              "radius": 3.8,
+              "progress": 0.5044479421655171,
+              "phase": 0.5044479421655171,
+              "frameBlend": 0.7999999999998693,
+              "atlasFrame": 4,
+              "time": 2.8666666666666614,
+              "age": 1.4166666666666616,
+              "frontRadius": 3.8,
+              "layers": 1,
+              "lobes": 1,
+              "cards": 1,
+              "peakHeight": 1.449006560975128,
+              "width": 10.235708279782687,
+              "height": 1.404006560975128,
+              "position": {
+                "x": 0,
+                "y": 0.045,
+                "z": -4
+              },
+              "vertices": 884,
+              "triangles": 1650,
+              "maxHeight": 1.404006560975128,
+              "clippedDirections": 0
+            }
+          ]
+        }
+      },
+      {
+        "slug": "cooling-1600ms",
+        "frame": 85,
+        "requestedImpactAge": 1.6,
+        "actualImpactAge": 1.616666666666661,
+        "impactInspect": {
+          "model": "continuous-single-impact-relief-v33",
+          "capacity": 8,
+          "allocated": 1,
+          "sharedMaterials": 1,
+          "cameraBound": true,
+          "active": [
+            {
+              "key": "impact:cast:1:0",
+              "kind": "meteor",
+              "radius": 3.8,
+              "progress": 0.6747949524631269,
+              "phase": 0.6747949524631269,
+              "frameBlend": 0.5999999999998522,
+              "atlasFrame": 9,
+              "time": 3.0666666666666607,
+              "age": 1.616666666666661,
+              "frontRadius": 3.8,
+              "layers": 1,
+              "lobes": 1,
+              "cards": 1,
+              "peakHeight": 0.2822669619070038,
+              "width": 9.91601371452644,
+              "height": 0.2372669619070038,
+              "position": {
+                "x": 0,
+                "y": 0.045,
+                "z": -4
+              },
+              "vertices": 884,
+              "triangles": 1650,
+              "maxHeight": 0.2372669619070038,
+              "clippedDirections": 0
+            }
+          ]
+        }
+      },
+      {
+        "slug": "cooling-1800ms",
+        "frame": 91,
+        "requestedImpactAge": 1.8,
+        "actualImpactAge": 1.8166666666666602,
+        "impactInspect": {
+          "model": "continuous-single-impact-relief-v33",
+          "capacity": 8,
+          "allocated": 1,
+          "sharedMaterials": 1,
+          "cameraBound": true,
+          "active": [
+            {
+              "key": "impact:cast:1:0",
+              "kind": "meteor",
+              "radius": 3.8,
+              "progress": 0.6983908045977005,
+              "phase": 0.6983908045977005,
+              "frameBlend": 0.39999999999983515,
+              "atlasFrame": 14,
+              "time": 3.26666666666666,
+              "age": 1.8166666666666602,
+              "frontRadius": 3.8,
+              "layers": 1,
+              "lobes": 1,
+              "cards": 1,
+              "peakHeight": 0.24555990179141424,
+              "width": 9.905701752772554,
+              "height": 0.20055990179141425,
+              "position": {
+                "x": 0,
+                "y": 0.045,
+                "z": -4
+              },
+              "vertices": 884,
+              "triangles": 1650,
+              "maxHeight": 0.20055990179141425,
+              "clippedDirections": 0
+            }
+          ]
+        }
+      },
+      {
+        "slug": "cooling-2200ms",
+        "frame": 103,
+        "requestedImpactAge": 2.2,
+        "actualImpactAge": 2.216666666666659,
+        "impactInspect": {
+          "model": "continuous-single-impact-relief-v33",
+          "capacity": 8,
+          "allocated": 1,
+          "sharedMaterials": 1,
+          "cameraBound": true,
+          "active": [
+            {
+              "key": "impact:cast:1:0",
+              "kind": "meteor",
+              "radius": 3.8,
+              "progress": 0.7425287356321831,
+              "phase": 0.7425287356321831,
+              "frameBlend": 0.999999999999801,
+              "atlasFrame": 7,
+              "time": 3.6666666666666585,
+              "age": 2.216666666666659,
+              "frontRadius": 3.8,
+              "layers": 1,
+              "lobes": 1,
+              "cards": 1,
+              "peakHeight": 0.23556931735375047,
+              "width": 9.905650304726773,
+              "height": 0.1905693173537505,
+              "position": {
+                "x": 0,
+                "y": 0.045,
+                "z": -4
+              },
+              "vertices": 884,
+              "triangles": 1650,
+              "maxHeight": 0.1905693173537505,
+              "clippedDirections": 0
+            }
+          ]
+        }
+      },
+      {
+        "slug": "cooling-2800ms",
+        "frame": 121,
+        "requestedImpactAge": 2.8,
+        "actualImpactAge": 2.816666666666657,
+        "impactInspect": {
+          "model": "continuous-single-impact-relief-v33",
+          "capacity": 8,
+          "allocated": 1,
+          "sharedMaterials": 1,
+          "cameraBound": true,
+          "active": [
+            {
+              "key": "impact:cast:1:0",
+              "kind": "meteor",
+              "radius": 3.8,
+              "progress": 0.808735632183907,
+              "phase": 0.808735632183907,
+              "frameBlend": 0.3999999999997641,
+              "atlasFrame": 6,
+              "time": 4.266666666666657,
+              "age": 2.816666666666657,
+              "frontRadius": 3.8,
+              "layers": 1,
+              "lobes": 1,
+              "cards": 1,
+              "peakHeight": 0.20721618421360843,
+              "width": 9.905504295922087,
+              "height": 0.16221618421360845,
+              "position": {
+                "x": 0,
+                "y": 0.045,
+                "z": -4
+              },
+              "vertices": 884,
+              "triangles": 1650,
+              "maxHeight": 0.16221618421360845,
+              "clippedDirections": 0
+            }
+          ]
+        }
+      },
+      {
+        "slug": "cooling-3500ms",
+        "frame": 142,
+        "requestedImpactAge": 3.5,
+        "actualImpactAge": 3.5166666666666546,
+        "impactInspect": {
+          "model": "continuous-single-impact-relief-v33",
+          "capacity": 8,
+          "allocated": 1,
+          "sharedMaterials": 1,
+          "cameraBound": true,
+          "active": [
+            {
+              "key": "impact:cast:1:0",
+              "kind": "meteor",
+              "radius": 3.8,
+              "progress": 0.8859770114942516,
+              "phase": 0.8859770114942516,
+              "frameBlend": 0.19999999999970441,
+              "atlasFrame": 7,
+              "time": 4.966666666666654,
+              "age": 3.5166666666666546,
+              "frontRadius": 3.8,
+              "layers": 1,
+              "lobes": 1,
+              "cards": 1,
+              "peakHeight": 0.16793130265889247,
+              "width": 9.905301992403473,
+              "height": 0.12293130265889247,
+              "position": {
+                "x": 0,
+                "y": 0.045,
+                "z": -4
+              },
+              "vertices": 884,
+              "triangles": 1650,
+              "maxHeight": 0.12293130265889247,
+              "clippedDirections": 0
+            }
+          ]
+        }
+      }
+    ],
+    "fullWindowFrameRange": [
+      73,
+      108
+    ],
+    "fullWindowFrames": 36,
+    "allWindowNativeFramesRetained": true,
+    "rearNativeRoi": [
+      448,
+      720,
+      1098,
+      1060
+    ],
+    "qualification": "Review the actual native images and every transition. Active pool records, mesh counts and eventual clearing do not prove an unbroken visible fire surface."
+  },
+  "runtimeErrors": [],
+  "consoleErrors": [],
+  "lifecycle": {
+    "pauseResume": 1,
+    "familySwitches": [
+      "THU",
+      "WAR",
+      "FIR"
+    ]
+  },
+  "artStatus": "intermediate-seal-colour-pattern-review",
+  "artStatusNote": "Review the brighter correct seal, dense translucent shell, slightly denser ground fire and every cooling stage from 1.2 through 3.5 seconds. End-clear and mesh counts do not establish continuity or art acceptance.",
+  "taptapDeviceValidation": "Pending; browser capture is not device acceptance.",
+  "mediaEncoded": false,
+  "nativeArtReview": "native-art-review.json",
+  "preservedRootSnapshotProof": "served-build-snapshot.json",
+  "preservedRootSnapshotProofSha256": "b7820b083c25f40d9012b6a8447bfbbb74f07c056d54ea8744f6dfca348f1299"
+}

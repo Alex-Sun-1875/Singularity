@@ -1,0 +1,66 @@
+CCEffect %{
+  techniques:
+  - passes:
+    - vert: meteor-ignition-seal-v34-vs:vert
+      frag: meteor-ignition-seal-v34-fs:frag
+      rasterizerState: { cullMode: none }
+      depthStencilState: { depthTest: true, depthWrite: false }
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: one
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: one
+          blendDstAlpha: one_minus_src_alpha
+      properties:
+        mainTexture: { value: white }
+        mainColor: { value: [1, 1, 1, 1] }
+        inkBody: { value: [0.925490196, 0.580392157, 0.254901961, 1.06] }
+        inkCore: { value: [0.976470588, 0.682352941, 0.380392157, 0.98] }
+        discLight: { value: [0.38, 0.18, 0.04, 0.025] }
+        haloLight: { value: [0.56, 0.27, 0.06, 1] }
+}%
+CCProgram meteor-ignition-seal-v34-vs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+  #include <builtin/uniforms/cc-local>
+  in vec3 a_position;
+  in vec2 a_texCoord;
+  out vec2 v_uv;
+  vec4 vert () {
+    v_uv = a_texCoord;
+    return cc_matViewProj * cc_matWorld * vec4(a_position, 1.0);
+  }
+}%
+CCProgram meteor-ignition-seal-v34-fs %{
+  precision highp float;
+  in vec2 v_uv;
+  uniform sampler2D mainTexture;
+  uniform MeteorIgnitionSealParams {
+    vec4 mainColor;
+    vec4 inkBody;
+    vec4 inkCore;
+    vec4 discLight;
+    vec4 haloLight;
+  };
+  vec4 frag () {
+    // Raw RGBA data, not a colour picture: R line coverage, G gold core,
+    // B stroke-local light weight, A whole-disc light weight (not opacity).
+    vec4 weights = texture(mainTexture, v_uv);
+    float fade = clamp(mainColor.a, 0.0, 1.0);
+    float core = clamp(weights.g / max(weights.r, 0.0001), 0.0, 1.0);
+    vec3 ink = mix(inkBody.rgb, inkCore.rgb, core);
+    float glyph = min(inkCore.a, weights.r * fade * inkBody.a);
+    // Bright disk/halo light is independent of dark-ground absorption. Keep
+    // it behind solid ink so the orange-gold core is not clipped to yellow.
+    vec3 light = (discLight.rgb * weights.a + haloLight.rgb * weights.b)
+      * fade * (1.0 - glyph);
+    float absorption = weights.a * fade * discLight.a;
+    float alpha = glyph + absorption * (1.0 - glyph);
+    vec3 premul = (ink * glyph + light) * mainColor.rgb;
+    // Zero-alpha halo pixels still carry additive light and must not be
+    // discarded by an opacity-only threshold.
+    if (max(max(premul.r, premul.g), premul.b) < 0.001 && alpha < 0.001) discard;
+    return vec4(premul, alpha);
+  }
+}%

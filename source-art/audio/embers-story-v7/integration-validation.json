@@ -1,0 +1,152 @@
+{
+  "status": "passed",
+  "change": "Cello layers a further -2dB relative to V6, cumulative -5dB relative to V5; same fixed V5 master gains, other score data unchanged.",
+  "typecheck": {
+    "command": "npm run check",
+    "status": "passed",
+    "checkedAtUTC": "2026-11-17T13:06:51.714558+00:00",
+    "scope": "Current workspace after concurrent non-audio edits; no unrelated files modified by this task."
+  },
+  "build": "Normal test Web/mobile resource-bundle build passed; no version bump or ZIP.",
+  "scoreBalance": {
+    "status": "passed",
+    "comparisons": [
+      {
+        "mode": "explore",
+        "loweredCelloNotes": 220,
+        "allOtherNoteDataUnchanged": true,
+        "fixedMasterGain": 0.81846478813479
+      },
+      {
+        "mode": "combat",
+        "loweredCelloNotes": 284,
+        "allOtherNoteDataUnchanged": true,
+        "fixedMasterGain": 0.8203515443298184
+      }
+    ],
+    "previousVersionComparison": [
+      {
+        "mode": "explore",
+        "loweredCelloNotes": 220,
+        "relativeToV6Db": -2,
+        "otherNoteDataUnchanged": true
+      },
+      {
+        "mode": "combat",
+        "loweredCelloNotes": 284,
+        "relativeToV6Db": -2,
+        "otherNoteDataUnchanged": true
+      }
+    ]
+  },
+  "encodedAudio": {
+    "status": "passed",
+    "tracks": [
+      {
+        "mode": "explore",
+        "decodedSeconds": 80.05331065759637,
+        "peak": 0.3417772054672241,
+        "monoFoldDownDb": -0.19722649455070496,
+        "finite": true,
+        "sha256": "705821648c9e800d2f6498250a6006f7d19874ef0cf791d88031837135680e0b"
+      },
+      {
+        "mode": "combat",
+        "decodedSeconds": 80.05331065759637,
+        "peak": 0.49300187826156616,
+        "monoFoldDownDb": -0.17476199567317963,
+        "finite": true,
+        "sha256": "241d8c0128f4ed17430fcc67c1d78ae253fa454ba27220a0d9f1e9b37b406a65"
+      },
+      {
+        "mode": "aftermath",
+        "decodedSeconds": 15.03453514739229,
+        "peak": 0.24428576231002808,
+        "monoFoldDownDb": -0.07747118920087814,
+        "finite": true,
+        "sha256": "9379ca63d58862eedf5e7ab5ac029c4ef4cfec810652741b7a03ddd63ef57dc7"
+      }
+    ],
+    "fixedV5MasterGains": true,
+    "protectedHistoricalMusicAndReleaseSfx": true
+  },
+  "assetMapping": {
+    "musicMappings": 3,
+    "unchangedReleaseSfxMappings": 12,
+    "musicBytes": 3441790,
+    "historicalMusicPreserved": true,
+    "originalAftermathBytePreserved": true,
+    "oldMusicExcluded": 13
+  },
+  "playback": {
+    "passed": 3,
+    "total": 3,
+    "console": 0,
+    "pageErrors": 0,
+    "networkFailures": 0,
+    "httpErrors": 0,
+    "afterCount": 0,
+    "completed": 0
+  },
+  "preserved": "Prior runtime music plus metadata and 12 current whooshes protected by SHA256; original aftermath byte-identical.",
+  "limits": [
+    "TapTap Android device listening and actual interruptions pending.",
+    "Unchanged full aftermath controller timeline was previously verified; not rerun for this gain-only edit."
+  ],
+  "userListeningAcceptance": {
+    "date": "2026-11-17",
+    "reply": "可以",
+    "status": "accepted-current-v7-balance"
+  },
+  "previousTypecheck": {
+    "command": "npm run check",
+    "status": "failed",
+    "unrelatedError": "GemWorkshop.ts(138,112): TS2345 reason.shopOnly is absent from the gemText key union. No gems files modified for this audio task."
+  },
+  "defaultIntegration": {
+    "status": "passed",
+    "url": "http://127.0.0.1:7469/?view=2d&player=3d",
+    "buildDirectory": "src/cocos/build/concept-2d",
+    "profile": "test",
+    "sourcePaths": [
+      "audio/music/embers-story-light-explore",
+      "audio/music/embers-story-light-combat",
+      "audio/music/embers-oaths-aftermath"
+    ],
+    "musicMappings": {
+      "status": "passed",
+      "url": "http://127.0.0.1:7469/?view=2d&player=3d",
+      "tracks": [
+        {
+          "mode": "explore",
+          "runtimePath": "audio/music/embers-story-light-explore",
+          "bundle": "resources",
+          "sha256": "705821648c9e800d2f6498250a6006f7d19874ef0cf791d88031837135680e0b"
+        },
+        {
+          "mode": "combat",
+          "runtimePath": "audio/music/embers-story-light-combat",
+          "bundle": "resources",
+          "sha256": "241d8c0128f4ed17430fcc67c1d78ae253fa454ba27220a0d9f1e9b37b406a65"
+        },
+        {
+          "mode": "aftermath",
+          "runtimePath": "audio/music/embers-oaths-aftermath",
+          "bundle": "resources",
+          "sha256": "9379ca63d58862eedf5e7ab5ac029c4ef4cfec810652741b7a03ddd63ef57dc7"
+        }
+      ]
+    },
+    "playback": {
+      "passed": 3,
+      "total": 3,
+      "console": 0,
+      "pageErrors": 0,
+      "networkFailures": 0,
+      "httpErrors": 0,
+      "afterCount": 0,
+      "completed": 0
+    },
+    "note": "Approved V7 audio is active in source, TapTap pack includeFiles and rebuilt default HTML preview; no package, upload or device acceptance implied."
+  }
+}

@@ -2,6 +2,7 @@ import type {GameState} from '../../../core/GameSession';
 import type {CampaignEventDef} from './CampaignEvents';
 import {SIDE_BOSSES,SIDE_BOSS_FORGE,SIDE_BOSS_ORDERS,SIDE_BOSS_BRIDGE} from './SideBosses';
 import {sideQuestText as text,type ChapterTwoSideQuestMessageKey} from '../locales/ChapterTwoSideQuestText';
+import {EARLY_EXISTING_SIDE_EVENTS} from './EarlyChapterContent';
 
 type StepText=`${'forge'|'orders'|'bridge'}.${'request'|'inspect'|'boss'|'settle'}`;
 const event=(id:string,area:string,key:StepText,requires:string[],sets:string[],extra:Partial<CampaignEventDef>={}):CampaignEventDef=>({id,area,label:text((key+'.title') as ChapterTwoSideQuestMessageKey),description:text((key+'.body') as ChapterTwoSideQuestMessageKey),requires,sets,optional:true,choices:extra.choices??[{id:'continue',label:text(key.endsWith('inspect')?'action.inspect':key.endsWith('boss')?'action.evidence':'action.continue'),text:text((key+'.done') as ChapterTwoSideQuestMessageKey),sets:[]}],...extra});
@@ -32,14 +33,15 @@ export const CHAPTER_TWO_SIDE_QUEST_EVENTS:CampaignEventDef[]=[
   {id:'people-first',label:text('bridge.people.label'),text:text('bridge.people.done'),sets:['chapter2-side:bridge:people-first']},
   {id:'scheduled-freight',label:text('bridge.freight.label'),text:text('bridge.freight.done'),sets:['chapter2-side:bridge:scheduled-freight']},
  ]}),
+ ...EARLY_EXISTING_SIDE_EVENTS.filter(event=>event.id.startsWith('side-')),
 ];
 export const CHAPTER_TWO_SIDE_QUESTS=[
- {id:'side-forge',chapter:2,name:text('forge.name'),reward:text('forge.reward'),steps:['side-forge-request','side-forge-inspect','side-forge-boss','side-forge-settle']},
- {id:'side-orders',chapter:2,name:text('orders.name'),reward:text('orders.reward'),steps:['side-orders-request','side-orders-inspect','side-orders-boss','side-orders-settle']},
- {id:'side-bridge',chapter:2,name:text('bridge.name'),reward:text('bridge.reward'),steps:['side-bridge-request','side-bridge-inspect','side-bridge-boss','side-bridge-settle']},
+ {id:'side-forge',chapter:2,name:text('forge.name'),reward:text('forge.reward'),steps:['side-forge-request','side-forge-inspect','side-forge-boss','side-forge-settle','side-forge-bench-test']},
+ {id:'side-orders',chapter:2,name:text('orders.name'),reward:text('orders.reward'),steps:['side-orders-request','side-orders-inspect','side-orders-boss','side-orders-settle','side-orders-isolate-test']},
+ {id:'side-bridge',chapter:2,name:text('bridge.name'),reward:text('bridge.reward'),steps:['side-bridge-request','side-bridge-inspect','side-bridge-boss','side-bridge-settle','side-bridge-return-check']},
 ] as const;
 /** Completed campaign dialogue already persists the exact selected outcome. */
-export function chapterTwoSideQuestOutcome(s:Pick<GameState,'receipts'>,id:string):string {const quest=CHAPTER_TWO_SIDE_QUESTS.find(q=>q.id===id);if(!quest)return '';const last=quest.steps[quest.steps.length-1];if(s.receipts['campaign:'+last]!==true)return '';const selected=s.receipts['campaign:choice:'+last];return CHAPTER_TWO_SIDE_QUEST_EVENTS.find(e=>e.id===last)?.choices?.find(c=>c.id===selected)?.text??'';}
+export function chapterTwoSideQuestOutcome(s:Pick<GameState,'receipts'>,id:string):string {const quest=CHAPTER_TWO_SIDE_QUESTS.find(q=>q.id===id);if(!quest)return '';for(const step of [...quest.steps].reverse()){if(s.receipts['campaign:'+step]!==true)continue;const selected=s.receipts['campaign:choice:'+step],result=CHAPTER_TWO_SIDE_QUEST_EVENTS.find(e=>e.id===step)?.choices?.find(c=>c.id===selected&&!c.retry);if(result)return result.text;}return '';}
 /** Side quests follow chapter access and their own steps, independently of the boss. */
 export function chapterTwoSideQuestEventVisible(id:string,s:Pick<GameState,'progression'|'flags'>):boolean {const event=CHAPTER_TWO_SIDE_QUEST_EVENTS.find(e=>e.id===id);if(!event)return true;if(!s.progression.secondChapter||event.requires?.some(flag=>!flag.startsWith('boss_defeated:')&&!s.flags[flag]))return false;return id.endsWith('-settle')||!(event.sets??[]).every(flag=>s.flags[flag]);}
 /** Evidence stays inspectable while the world boss is alive; navigation can target that boss first. */

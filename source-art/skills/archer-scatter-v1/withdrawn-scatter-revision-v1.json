@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-11-17",
+  "reason": "按用户要求移除缚足陷阱，原槽位改为攻击技能裂风散射；保留技能ID、已投入等级、点数及职业配置。",
+  "skills": {
+    "BOW_06": {
+      "name": "裂风散射",
+      "activation": "manual",
+      "damageRole": "area",
+      "targetingMode": "direction",
+      "targetShape": "前方扇形实体箭",
+      "maxTargets": 9,
+      "targetLimitScope": "perCastUniqueTarget",
+      "windupSeconds": 0.28,
+      "releaseCommitSeconds": 0.28,
+      "recoverySeconds": 0.22,
+      "resourceCost": 14,
+      "mechanic": "向释放时的瞄准方向同时射出5／7／9支扇形箭，箭路固定，不追踪、不连锁。每支箭碰到首个敌人或墙后停止；同一敌人每次施放最多承受一次伤害，贴脸多箭不重复叠伤。保留真实命中、护甲、视线与碰撞规则；不再布置地面陷阱，不附加定身或减速。",
+      "visual": "银色实体箭头与青绿尾迹组成一次清晰扇形齐射；拉弓、释放、飞行与命中各自对应真实事件，无预绘未来箭路或地面法阵。",
+      "ranks": [
+        {"rank":1,"maxDamagePerTargetS":1.8,"authoredDamageHits":1,"cooldownSeconds":6,"breakPower":6,"castRangeMetres":9,"rangeMetres":9,"radiusMetres":0,"targetLimit":5,"zoneDurationSeconds":0,"armSeconds":0,"rootSeconds":0,"slowPercent":0,"slowLingerSeconds":0,"geometry":{"kind":"projectileFan","origin":"caster","lengthMetres":9,"widthMetres":0.3,"angleDegrees":52,"primaryProjectileCount":5,"totalTargetLimit":5},"evolution":"5箭前方52°散射，9米，每敌一次1.8S伤害","upgradeEffect":"5支实体箭；单敌180%技能威力；9米射程"},
+        {"rank":2,"maxDamagePerTargetS":2.1,"authoredDamageHits":1,"cooldownSeconds":6,"breakPower":7,"castRangeMetres":9.5,"rangeMetres":9.5,"radiusMetres":0,"targetLimit":5,"zoneDurationSeconds":0,"armSeconds":0,"rootSeconds":0,"slowPercent":0,"slowLingerSeconds":0,"geometry":{"kind":"projectileFan","origin":"caster","lengthMetres":9.5,"widthMetres":0.32,"angleDegrees":52,"primaryProjectileCount":5,"totalTargetLimit":5},"evolution":"5箭前方52°散射，9.5米，每敌一次2.1S伤害","upgradeEffect":"单敌210%技能威力；9.5米射程；箭路略宽"},
+        {"rank":3,"maxDamagePerTargetS":2.45,"authoredDamageHits":1,"cooldownSeconds":5.75,"breakPower":8,"castRangeMetres":10,"rangeMetres":10,"radiusMetres":0,"targetLimit":7,"zoneDurationSeconds":0,"armSeconds":0,"rootSeconds":0,"slowPercent":0,"slowLingerSeconds":0,"geometry":{"kind":"projectileFan","origin":"caster","lengthMetres":10,"widthMetres":0.34,"angleDegrees":60,"primaryProjectileCount":7,"totalTargetLimit":7},"evolution":"7箭前方60°散射，10米，每敌一次2.45S伤害","upgradeEffect":"增至7支实体箭；单敌245%技能威力；60°散射；冷却5.75秒"},
+        {"rank":4,"maxDamagePerTargetS":2.85,"authoredDamageHits":1,"cooldownSeconds":5.5,"breakPower":9,"castRangeMetres":10.5,"rangeMetres":10.5,"radiusMetres":0,"targetLimit":7,"zoneDurationSeconds":0,"armSeconds":0,"rootSeconds":0,"slowPercent":0,"slowLingerSeconds":0,"geometry":{"kind":"projectileFan","origin":"caster","lengthMetres":10.5,"widthMetres":0.36,"angleDegrees":60,"primaryProjectileCount":7,"totalTargetLimit":7},"evolution":"7箭前方60°散射，10.5米，每敌一次2.85S伤害","upgradeEffect":"单敌285%技能威力；10.5米射程；冷却5.5秒"},
+        {"rank":5,"maxDamagePerTargetS":3.3,"authoredDamageHits":1,"cooldownSeconds":5.25,"breakPower":10,"castRangeMetres":11,"rangeMetres":11,"radiusMetres":0,"targetLimit":9,"zoneDurationSeconds":0,"armSeconds":0,"rootSeconds":0,"slowPercent":0,"slowLingerSeconds":0,"geometry":{"kind":"projectileFan","origin":"caster","lengthMetres":11,"widthMetres":0.38,"angleDegrees":68,"primaryProjectileCount":9,"totalTargetLimit":9},"evolution":"9箭前方68°散射，11米，每敌一次3.3S伤害","upgradeEffect":"增至9支实体箭；单敌330%技能威力；68°散射；冷却5.25秒"}
+      ]
+    }
+  }
+}

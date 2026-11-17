@@ -1,6 +1,7 @@
 import type {Point} from '../../../core/Contracts';
 import type {EnemyState,GameState} from '../../../core/GameSession';
 import {enemyCanInterrupt,enemyHurtRadius,enemyProfile} from './EnemyCombat';
+import {WHIRLWIND} from './WhirlwindSkill';
 
 type Impact={enemy:EnemyState;start:number;duration:number;distance:number;applied:number;angle:number;flinch:boolean;resisted:boolean};
 interface Host {state():GameState;move(enemy:EnemyState,delta:Point,radius:number):void;shift(enemy:EnemyState,delta:Point):void;height(point:Point):number;emit(type:string,text?:string,extra?:Record<string,unknown>):void}
@@ -23,7 +24,9 @@ export class EnemyHitResponse {
   const protection=this.basicProtection.get(enemy.id),protectedBasic=basic&&protection?.enemy===enemy&&protection.until>s.time;
   // Ordinary contact has a short, bounded recoil. It cannot delay or displace a
   // locked attack; authored skill interruption remains in PureCombat's poise rules.
-  const distance=basic&&(committed||protectedBasic)?0:base*scale*(braced?.25:1),flinch=!boss&&!fixed&&!braced&&!committed&&!protectedBasic&&enemy.phase!=='stagger';
+  const holdingSpin=cast?.rank.geometry?.kind==='meleeWhirlwind'&&s.time-(cast.releaseTime??s.time)<WHIRLWIND.spinSeconds;
+  const holdingSlash=cast?.skillId==='WAR_01'&&cast.nextSegment<cast.rank.authoredDamageHits-1;
+  const distance=holdingSpin||holdingSlash||basic&&(committed||protectedBasic)?0:base*scale*(braced?.25:1),flinch=!boss&&!fixed&&!braced&&!committed&&!protectedBasic&&enemy.phase!=='stagger';
   if(basic&&flinch)this.basicProtection.set(enemy.id,{enemy,until:s.time+.65});
   const impact:Impact={enemy,start:s.time,duration:.16,distance,applied:0,angle,flinch,resisted:!!(fixed||boss||armored||braced)};
   this.impacts.set(enemy.id,impact);this.host.emit('enemy_recoil',undefined,{id:enemy.id,action,angle,distance,duration:impact.duration,resisted:impact.resisted,lethal:enemy.hp<=0,at:{x:enemy.x,z:enemy.z}});

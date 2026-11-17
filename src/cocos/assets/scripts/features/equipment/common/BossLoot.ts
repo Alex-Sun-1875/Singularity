@@ -1,3 +1,4 @@
+import {creditGold} from '../../economy/common/GoldWallet';
 import {equipmentText as tr} from '../locales';
 import type {GameState,EnemyState} from '../../../core/GameSession';
 import type {Point} from '../../../core/Contracts';
@@ -6,7 +7,7 @@ import {artifactWeaponForStyle} from '../data/GrowingEquipment';
 import {lifecycleBattlePool,lifecycleGroup,LIFECYCLE_GROUPS,releasedEquipmentChapter,mainBossChapter,type LootStyle} from '../data/EquipmentLifecycle';
 export {mainBossChapter} from '../data/EquipmentLifecycle';
 import {FIELD_QUEST_ITEMS} from '../data/FieldQuestEquipment';
-import {chapterForArea,PLAYABLE_CHAPTERS} from '../../journey/data/ChapterJourney';
+import {chapterForArea,PLAYABLE_CHAPTERS,JOURNEY_TASKS,journeyTaskKey} from '../../journey/data/ChapterJourney';
 import {equipmentRandomWord} from './EquipmentDice';
 import {BUILD_PROFILE} from '../../../shared/BuildProfile';
 
@@ -27,7 +28,18 @@ const recordTier=(m:Meta,n:number)=>m[0]===7?3:m[0]===8||guaranteed()?2:bossDrop
 const nowSeconds=(s:GameState,now:number)=>Math.max(Number(s.receipts[CLOCK]??0),Math.max(0,Math.min(9999999399,Math.floor((Number.isFinite(now)?now:0)/1000))));
 export function bossRewardKind(enemyOrBossId:string|{bossId?:string}|undefined):'fixed'|'random'|null {const id=typeof enemyOrBossId==='string'?enemyOrBossId:enemyOrBossId?.bossId;return !id?null:mainBossChapter(id)?'fixed':'random';}
 export const mainBossEquipmentSource=(chapter:number,group:string)=>`boss:fixed:${chapter}:${group}`;
-export function mainBossEquipment(chapter:number,style:LootStyle){return LIFECYCLE_GROUPS.filter(g=>g.chapter===chapter&&g.route==='task').map(g=>({group:g.id,item:g.items.find(id=>id.endsWith('_'+style))??g.items[0]}));}
+export function mainBossEquipment(chapter:number,style:LootStyle){return LIFECYCLE_GROUPS.filter(g=>g.chapter===chapter&&g.route==='task'&&g.rewardStage!=='midChapter').map(g=>({group:g.id,item:g.items.find(id=>id.endsWith('_'+style))??g.items[0]}));}
+export const chapterTaskEquipmentSource=(task:string,group:string)=>`journey:equipment:${task}:${group}`;
+export function chapterTaskEquipment(task:string,style:LootStyle){return LIFECYCLE_GROUPS.filter(g=>g.rewardStage==='midChapter'&&g.rewardTask===task).map(g=>({group:g.id,item:g.items.find(id=>id.endsWith('_'+style))??g.items[0]}));}
+export function validChapterTaskEquipmentSource(s:GameState,id:string,source:string):boolean {
+ try{const match=/^journey:equipment:([a-z-]+):(LC[12]_T_[EL])$/.exec(source);if(!match||s.receipts[source]!==id||s.receipts[journeyTaskKey(match[1])]!==true)return false;
+  const meta=JSON.parse(String(s.receipts[source+':meta']));return Array.isArray(meta)&&meta.length===2&&meta[0]===1&&styles.includes(meta[1])&&chapterTaskEquipment(match[1],meta[1]).some(r=>r.group===match[2]&&r.item===id);
+ }catch{return false;}
+}
+export function validateChapterTaskEquipment(s:GameState){
+ for(const key of Object.keys(s.receipts))if(key.startsWith('journey:equipment:')){const source=key.endsWith(':meta')?key.slice(0,-5):key,item=s.receipts[source];if(typeof item!=='string'||!validChapterTaskEquipmentSource(s,item,source)||!s.inventory[item])throw new Error('无效的章节任务装备来源');}
+ for(const task of JOURNEY_TASKS)if(s.receipts[journeyTaskKey(task.id)]===true)for(const reward of chapterTaskEquipment(task.id,'WAR'))if(typeof s.receipts[chapterTaskEquipmentSource(task.id,reward.group)]!=='string')throw new Error('缺失的章节任务装备');
+}
 export function mainBossEquipmentView(s:GameState,chapter:number){
  const bossId=PLAYABLE_CHAPTERS.find(c=>c.id===chapter)?.boss,view=bossLootView(s,0),rewards=mainBossEquipment(chapter,view.style).map(reward=>{const source=mainBossEquipmentSource(chapter,reward.group),awarded=typeof s.receipts[source]==='string',item=awarded?String(s.receipts[source]):reward.item;return {group:reward.group,item,awarded,owned:!!s.inventory[item],onGround:s.groundLoot.some(d=>d.source===source&&d.item===item)};});
  return {bossId,style:view.style,rewards,awarded:rewards.length>0&&rewards.every(r=>r.awarded)};
@@ -47,7 +59,9 @@ function matchesStyle(id:string,style:LootStyle){const item=EQUIPMENT[id];return
 export function bossRandomPool(chapter:number,tier:number,style:LootStyle):string[]{
  if(tier===3)return [...ARTIFACT_POOL];if(tier!==1&&tier!==2)return [];
  const quality=tier===1?'史诗':'传奇',field=FIELD_QUEST_ITEMS.filter(d=>d.chapter===chapter&&d.quality===quality&&matchesStyle(d.id,style)).map(d=>d.id),growing=tier===2?(GROWING_LEGEND_POOL[chapter]??[]).filter(id=>matchesStyle(id,style)):[];
- return [...new Set([...lifecycleBattlePool(chapter,quality,style),...field,...growing])];
+ // Creator's loose spread transform concatenates a Set as one object. Convert
+ // the deduplicated candidates explicitly so exported builds keep string IDs.
+ return Array.from(new Set([...lifecycleBattlePool(chapter,quality,style),...field,...growing]));
 }
 const pool=(meta:Meta,tier:number)=>meta[0]===7&&tier===3?[artifactWeaponForStyle[meta[3]],'DG_A02']:bossRandomPool(meta[2],tier,meta[3]);
 function initialIndex(seed:number,key:string,meta:Meta,tier:number,candidates:string[]){
@@ -78,7 +92,7 @@ export class BossLoot {
   let result='none';if(candidates.length){const start=initialIndex(s.seed,key,meta,tier,candidates);let item=candidates[start];for(let i=0;i<candidates.length;i++){const id=candidates[(start+i)%candidates.length];if(!owned(s,id)){item=id;break;}}
    if(owned(s,item)){const stackable=candidates.find(id=>!atCapacity(s,id));if(stackable)item=stackable;}
    result=atCapacity(s,item)?`duplicate:${item}`:item;
-   if(result===item)this.host.grant(item,key,e);else {s.player.gold=Math.min(9999,s.player.gold+12+meta[2]*4);s.player.iron=Math.min(9999,s.player.iron+2);}
+   if(result===item)this.host.grant(item,key,e);else {creditGold(s,12+meta[2]*4);s.player.iron=Math.min(9999,s.player.iron+2);}
   }
   s.dropRolls[key]={roll:n,result};s.receipts[`roll:${key}`]=result;s.receipts[`${key}:meta`]=JSON.stringify(meta);s.receipts[`${key}:life`]=cycle;
   s.receipts[EPIC]=tier>=1?0:meta[4]+1;s.receipts[LEGEND]=tier>=2?0:meta[5]+1;s.receipts[DRAWS]=meta[6];
@@ -88,8 +102,8 @@ export class BossLoot {
   if(!e.bossId||e.hp>0||e.phase!=='dead'||e.diedAt===undefined||e.respawnSeconds||e.trainingEnemy)return false;
   const s=this.s,cycle=e.respawnCount??0,key=baseKey(s.area,e.id);
   if(Number(s.receipts[`${key}:life`]??-1)>=cycle)return false;
-  const chapter=e.lootChapter??chapterForArea(s.area),gold=8+Math.min(2,chapter)*4;
-  s.player.gold=Math.min(9999,s.player.gold+gold);s.player.iron=Math.min(9999,s.player.iron+2);
+  const chapter=e.lootChapter??chapterForArea(s.area),gold=cycle>0?8+Math.min(2,chapter)*4:0;
+  creditGold(s,gold);s.player.iron=Math.min(9999,s.player.iron+2);
   this.host.emit('reward',tr('loot.bossResources',{gold}),{id:key,gold,iron:2});
   const main=mainBossChapter(e.bossId);
   if(main){if(cycle===0&&PLAYABLE_CHAPTERS.find(c=>c.id===main)?.arena===s.area)for(const reward of mainBossEquipment(main,this.view().style)){const source=mainBossEquipmentSource(main,reward.group);if(s.receipts[source]!==undefined)continue;s.receipts[source]=reward.item;s.receipts[source+':meta']=JSON.stringify([1,this.view().style,e.id]);this.host.grant(reward.item,source,e);}s.receipts[`${key}:life`]=cycle;if(guaranteed()){this.draw(e,chapter,8);this.draw(e,chapter,7);}

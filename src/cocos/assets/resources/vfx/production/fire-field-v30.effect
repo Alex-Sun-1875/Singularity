@@ -1,0 +1,54 @@
+CCEffect %{
+  techniques:
+  - passes:
+    - vert: fire-field-vs:vert
+      frag: fire-field-fs:frag
+      rasterizerState: { cullMode: none }
+      depthStencilState: { depthTest: true, depthWrite: false }
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: one
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: one
+          blendDstAlpha: one_minus_src_alpha
+      properties:
+        mainTexture: { value: white }
+        mainColor: { value: [1, 1, 1, 1] }
+        frameState: { value: [0, 1, 0, 0] }
+}%
+CCProgram fire-field-vs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+  #include <builtin/uniforms/cc-local>
+  in vec3 a_position;
+  in vec2 a_texCoord;
+  in vec4 a_color;
+  out vec2 v_uv;
+  out vec4 v_surface;
+  vec4 vert () { v_uv = a_texCoord; v_surface = a_color; return cc_matViewProj * cc_matWorld * vec4(a_position, 1.0); }
+}%
+CCProgram fire-field-fs %{
+  precision highp float;
+  in vec2 v_uv;
+  in vec4 v_surface;
+  uniform sampler2D mainTexture;
+  uniform FireFieldParams { vec4 mainColor; vec4 frameState; };
+  vec2 frameUV (float index) {
+    vec2 uv = vec2(fract(v_uv.x * 2.4), v_uv.y);
+    return (vec2(mod(index, 4.0), floor(index / 4.0)) + clamp(uv, vec2(0.003), vec2(0.997))) / 4.0;
+  }
+  vec4 frag () {
+    vec4 a = texture(mainTexture, frameUV(frameState.x));
+    vec4 b = texture(mainTexture, frameUV(frameState.y));
+    float edge = min(min(v_uv.x, 1.0-v_uv.x), min(v_uv.y, 1.0-v_uv.y));
+    float mask = smoothstep(0.0, 0.065, edge);
+    float density = mix(a.a, b.a, frameState.z);
+    float fine = mix(0.55, 1.0, smoothstep(0.12, 0.70, density));
+    float fade = mainColor.a * v_surface.g * v_surface.a * mask * fine;
+    float alpha = mix(a.a, b.a, frameState.z) * fade;
+    if (alpha < 0.002) discard;
+    vec3 premul = mix(a.rgb*a.a, b.rgb*b.a, frameState.z) * fade * mainColor.rgb;
+    return vec4(premul * 1.10, alpha * 0.90);
+  }
+}%

@@ -1,5 +1,5 @@
 import {CompactGraphics} from '../../../shared/ui/CompactGraphics';
-import {Color,EventTouch,Graphics,Label,Node,Sprite,Tween,UITransform,sys,tween} from 'cc';
+import {BlockInputEvents,Color,EventTouch,Graphics,Label,Node,Sprite,Tween,UITransform,sys,tween} from 'cc';
 import type {Hud} from '../../../app/Hud';
 import {UiSkin} from '../../../shared/ui/UiSkin';
 import {UI_COLORS as C} from '../../../shared/ui/UiTheme';
@@ -14,6 +14,7 @@ const TIPS=[
 
 /** Original artwork; the caller supplies real asset/actor loading progress. */
 export class LoadingScreen {
+ private pageRoot:Node|null=null;private pageVisible=false;private pageMessage=false;
  private root:Node|null=null;private background:Sprite|null=null;private percentage:Label|null=null;private message:Label|null=null;private tip:Label|null=null;
  private fill:Graphics|null=null;private spinner:Node|null=null;private visible=false;private progress=0;private status='正在准备旅途';private width=0;private height=0;private generation=0;private artworkPending=false;
  constructor(private readonly hud:Hud){}
@@ -24,9 +25,23 @@ export class LoadingScreen {
   if(this.root){this.root.active=true;this.root.setSiblingIndex(this.hud.root.children.length-1);}if(resume&&this.spinner)tween(this.spinner).by(2.8,{angle:-360}).repeatForever().start();this.loadArtwork();this.refresh();
  }
  /** Call after Hud.resize(); rebuilds safely if Hud replaced its root children. */
- update(_dt=0):void {if(this.visible){if(!this.root?.isValid||this.root.parent!==this.hud.root||this.width!==this.hud.width||this.height!==this.hud.height)this.build();this.root?.setSiblingIndex(this.hud.root.children.length-1);}}
+ update(_dt=0):void {if(this.visible){if(!this.root?.isValid||this.root.parent!==this.hud.root||this.width!==this.hud.width||this.height!==this.hud.height)this.build();this.root?.setSiblingIndex(this.hud.root.children.length-1);}if(this.pageVisible)this.coverPage();}
+ /** Keep the complete previous page visible while blocking its stale controls. */
+ coverPage(message=false):void {
+  this.pageVisible=true;this.pageMessage=this.pageMessage||message;
+  const size=this.pageRoot?.getComponent(UITransform);
+  if(!this.pageRoot?.isValid||this.pageRoot.parent!==this.hud.root||size?.width!==this.hud.width||size?.height!==this.hud.height){
+   this.pageRoot?.destroy();this.pageRoot=this.hud.node('PreparingPage',this.hud.root,0,0,this.hud.width,this.hud.height);this.pageRoot.addComponent(BlockInputEvents);
+  }
+  this.pageRoot.setSiblingIndex(this.hud.root.children.length-1);
+  if(this.pageMessage&&!this.pageRoot.getChildByName('PageLoadingStatus')){
+   const u=this.hud.touchTargetSize/48,status=this.hud.node('PageLoadingStatus',this.pageRoot,0,0,250*u,64*u);UiSkin.panel(status,250*u,64*u);
+   this.hud.text(status,'正在准备页面…',0,0,224*u,16*u,INK,48*u).horizontalAlign=Label.HorizontalAlign.CENTER;
+  }
+ }
+ uncoverPage():void {this.pageVisible=false;this.pageMessage=false;this.pageRoot?.destroy();this.pageRoot=null;}
  hide():void {this.visible=false;this.generation++;this.artworkPending=false;if(this.background)this.background.spriteFrame=null;if(this.root)UiSkin.releaseOwner(this.root);if(this.root?.isValid)this.root.active=false;if(this.spinner)Tween.stopAllByTarget(this.spinner);}
- destroy():void {this.visible=false;this.generation++;if(this.spinner)Tween.stopAllByTarget(this.spinner);if(this.root?.isValid)this.root.destroy();this.root=null;}
+ destroy():void {this.uncoverPage();this.visible=false;this.generation++;if(this.spinner)Tween.stopAllByTarget(this.spinner);if(this.root?.isValid)this.root.destroy();this.root=null;}
  private build():void {
   if(this.spinner)Tween.stopAllByTarget(this.spinner);if(this.root?.isValid)this.root.destroy();
   const hud=this.hud,w=hud.width,h=hud.height,mobile=sys.isMobile,portrait=w<h;this.width=w;this.height=h;

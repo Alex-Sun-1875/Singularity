@@ -12,6 +12,10 @@ export const SUPPLIES:Record<SupplyId,SupplyDef>={
  SUPPLY_MANA:{name:'法力药水',stock:'manaPotions',capacity:ITEM_STACK_LIMIT,icon:'potion-mana',groundArt:'equipment/supplies-v2/mana-bottle',groundSize:GROUND_BOTTLE_SIZE,feedback:'resource.mana'},
 };
 export const isSupplyId=(id:string):id is SupplyId=>Object.prototype.hasOwnProperty.call(SUPPLIES,id);
+/** Checkpoints refill a small travel allowance, never the 99-item carrying cap.
+ * Existing collected stock is retained; neither rest nor death removes potions.
+ */
+export const CHECKPOINT_SUPPLIES:Record<SupplyDef['stock'],number>={healthPotions:3,focusPotions:2,staminaPotions:2,manaPotions:2};
 export const SUPPLY_LOOT_POLICY={chance:.35,healthWeight:.55,guaranteedPackSlot:7,lifetimeSeconds:120,maxPilesPerArea:24,maxPiles:96} as const;
 export const supplySource=(area:string,enemy:string,cycle:number)=>`supply:${area}:${enemy}:${cycle}`;
 function random(seed:number,key:string){let n=seed;for(let i=0;i<key.length;i++)n=(n*131+key.charCodeAt(i))%2147483647;return ((n+1)*48271)%2147483647;}

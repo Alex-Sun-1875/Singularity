@@ -7,10 +7,11 @@ import {CAMPAIGN_EVENTS} from '../../campaign/data/CampaignEvents';
 import {campaignPrerequisiteTargets} from '../../campaign/common/CampaignNavigation';
 import {chapterTwoEncounterView,chapterTwoChoiceHint} from '../../campaign/common/ChapterTwoEncounters';
 import {encounterText as text} from '../../campaign/locales/ChapterTwoEncounterText';
+import {pacingRewardText} from '../locales/PacingText';
 
 type EncounterView=NonNullable<ReturnType<typeof chapterTwoEncounterView>>;
 function rewardSummary(game:GameSession,task:JourneyTask){
- const reward=game.journey.rewardView(task),base=text('ui.reward',{experience:reward.experience,gold:task.gold,iron:task.iron});
+ const reward=game.journey.rewardView(task),base=pacingRewardText(reward);
  return base+'\n'+(reward.done?text('ui.rewardClaimed'):text('ui.rewardLevel',{level:reward.afterLevel,current:reward.level}));
 }
 function clueRows(view:EncounterView,action:string):MenuRow[]{

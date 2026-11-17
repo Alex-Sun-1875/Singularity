@@ -1,0 +1,77 @@
+{
+  "status": "implemented; actual Cocos Web desktop and phone checks passed; user visual acceptance and TapTap device validation remain separate",
+  "compiledSha256": "28478eec1d9b2a7444a6029bdae10d2eac41112f4f85e5912e44fe14d81c2648",
+  "servedSnapshot": "F:\\workspace\\Singularity\\src\\.tmp\\forge-ui-v1-frozen-build-28478eec1d9b-1794908004839071500",
+  "snapshotMainAndCopyManifestStillMatch": true,
+  "normalProfile": "test; real initial level1 journey; no gameplay grants or max shortcut",
+  "sourceChanges": [
+    "src/cocos/assets/scripts/app/PreparationResources.ts",
+    "src/cocos/assets/scripts/features/crafting/runtime/ForgeWorkshop.ts"
+  ],
+  "startupWorkshopArtAdded": false,
+  "workshopEntrySkins": 20,
+  "allDirectWorkshopAssetsAndMetaExist": true,
+  "native": {
+    "desktop": {
+      "report": "native-qa/desktop.json",
+      "pass": true,
+      "viewport": {
+        "width": 1280,
+        "height": 636
+      },
+      "dpr": 1,
+      "delayedNativeRequests": 14,
+      "titleArtGapLogical": 14.786729857819864,
+      "titleQualityGapLogical": 2.4644549763033083
+    },
+    "phone": {
+      "report": "native-qa-phone-r3/iphone14.json",
+      "pass": true,
+      "viewport": {
+        "width": 844,
+        "height": 390
+      },
+      "dpr": 3,
+      "delayedNativeRequests": 14,
+      "cancelCompletionDidNotReopen": true,
+      "realTouchScrollUsed": true,
+      "titleArtGapLogical": 10.892307692307725,
+      "titleQualityGapLogical": 1.8153846153846018
+    }
+  },
+  "checks": [
+    "cache disabled; actual workshop native image requests held",
+    "no partial workshop while skin loads pending",
+    "first complete render has all23 instantiated workshop decorative SpriteFrames",
+    "gold selected tab and black label synchronize",
+    "real owned W11 square frame stays left of name and quality",
+    "actual UI mouse/touch changes gems/transfer/forge and closes/reopens",
+    "level, inventory and equipment unchanged",
+    "app remained enabled and game unpaused",
+    "zero page and console errors in qualified runs"
+  ],
+  "longTitleFixture": "Only the selected Label string was temporarily changed for two-line layout stress; production item data was not changed.",
+  "supersededHarnessAttempts": [
+    {
+      "report": "native-qa/iphone14.json",
+      "reason": "Harness initially tapped the third row without scrolling it into the true viewport."
+    },
+    {
+      "report": "native-qa-phone-r2/iphone14.json",
+      "reason": "Harness used recursive getBoundingBoxToWorld for viewport; this includes Content children and overstated clip height. Fixed only in QA to transform the viewport own contentSize."
+    }
+  ],
+  "lineEndingProof": "line-ending-equivalence.json",
+  "buildTimeSourceHashesRetained": true,
+  "serverAndBrowserProcesses": "All capture finally blocks closed their server/context/browser; each Node session returned exit0 for the qualified final run.",
+  "limitations": [
+    "Browser touch emulation does not replace TapTap native device/safe-area validation.",
+    "User visual acceptance remains pending."
+  ],
+  "subsequentVisualFinding": {
+    "finding": "Root inspection of the qualified phone square image found that its upper rim was clipped by ForgeRoom and its lower edge entered the stone-anvil area. The existing rectangle checks covered only name/quality separation, so the v1 pass is limited to those checks and cold-load/lifecycle evidence.",
+    "productionCorrection": "Non-sword size is now bounded by actual room height minus anvil height and 8-unit top/bottom gaps; full-size desktop136 keeps its previous anchor.",
+    "supersededPortraitLayoutBy": "source-art/ui/forge-item-portrait-fit-v2/",
+    "coldLoadEvidenceRemainsApplicable": "PreparationResources source is unchanged; cold-load/tab/cancel checks are not repeated."
+  }
+}

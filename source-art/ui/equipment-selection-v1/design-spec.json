@@ -1,0 +1,52 @@
+{
+  "status": "rejected_by_user",
+  "date": "2026-11-17",
+  "scope": "Equipment selection state only; no runtime or game-rule changes.",
+  "recommended": "ivory-corner-brackets",
+  "colors": {
+    "selectionCandidate": "#EDE4CB",
+    "equippedText": "#A4C2B0",
+    "equippedSurface": "#18302B",
+    "qualityExisting": {
+      "普通": "#AF9D85",
+      "稀有": "#83CDE6",
+      "史诗": "#C4A5ED",
+      "传奇": "#F5A45D"
+    }
+  },
+  "geometryLogical": {
+    "selectionStroke": 1.5,
+    "cornerLength": 10,
+    "inset": 1.5,
+    "qualityStroke": 0.75
+  },
+  "rules": [
+    "Selection adds four ivory corner brackets and a very subtle neutral inset.",
+    "Selection never adds a gold skin, changes quality color, scales art, or loops a glow.",
+    "Worn sockets show quiet base frames; selection in the bag does not light the worn socket.",
+    "An explicit socket filter uses the same selection geometry only while that socket is active.",
+    "Equipped remains a compact text badge independent of selection.",
+    "Common weapon art uses deterministic smoke neutralization; weapon silhouette is preserved.",
+    "Rarity previews are labeled demonstrations, not new item definitions.",
+    "Default UI touch requirements remain 48 logical pixels and 8-pixel separation.",
+    "On implementation, centralize semantics in FeedbackPalette and EquipmentIconFrame; do not redefine the global selected token."
+  ],
+  "sourceAssets": [
+    "src\\cocos\\assets\\resources\\ui\\quiet-bronze\\prep-item-sword-v2.png",
+    "src\\cocos\\assets\\resources\\ui\\quiet-bronze\\prep-item-steel-sword-v5.png",
+    "src\\cocos\\assets\\resources\\ui\\quiet-bronze\\prep-inspect-sword-v2.png",
+    "src\\cocos\\assets\\resources\\ui\\quiet-bronze\\prep-socket-v5.png"
+  ],
+  "method": "Pillow/NumPy deterministic composition. No generative edits or new model assets.",
+  "validation": {
+    "generation": "complete",
+    "artReview": "pending_user",
+    "runtimeIntegration": "not_started",
+    "tapTapDevice": "not_started"
+  },
+  "review": {
+    "date": "2026-11-17",
+    "reason": "用户否定象牙白角标方向的审美；派生稿不再作为后续基线。",
+    "supersededBy": "source-art/ui/selection-redesign-v2/"
+  }
+}

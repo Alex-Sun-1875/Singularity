@@ -1,0 +1,1116 @@
+{
+  "status": "production moving-wave damage integrated and verified; root visual review completed; TapTap device verification pending",
+  "productionIntegration": true,
+  "generatedFrames": false,
+  "gameHash": "2eecf7c4e193051d8e1b02754850a923a1b6151a0f62e6025837995902a786e7",
+  "build": "src/cocos/build/concept-2d",
+  "profile": "normal test",
+  "captureBasis": "Only latest production bundle, its native WarriorSkillEffects and real combat clock. Disposable in-memory level-80 actor; no production dev bypass or persistent user context.",
+  "injectedScripts": [
+    "review-fixture.js"
+  ],
+  "previewInjected": false,
+  "customEffectsInjected": false,
+  "rankWaveCounts": [
+    1,
+    2,
+    2,
+    3,
+    3
+  ],
+  "fiveActualRanksCovered": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "representativeMediaRanks": [
+    1,
+    3,
+    5
+  ],
+  "eachWaveDealsRealDamage": true,
+  "totalFinalSegmentBudgetIncreased": false,
+  "oldInstantFinalFanRemoved": true,
+  "damageExplanation": "First two melee strikes retain .2/.2 damage. The final .6 budget is divided by the captured 1/2/2/3/3 pulse count; each pulse can damage each enemy once when its swept visible crest arrives. The old instant third fan is replaced.",
+  "primaryMedia": "media/three-wave-detail-slow.gif",
+  "validation": {
+    "training/rank1": {
+      "skillRank": 1,
+      "waveCount": 1,
+      "skillHitCount": 2,
+      "hitSegments": [
+        2
+      ],
+      "sameFixedGeometryAtAllRanksAndAges": true,
+      "worldTipHeightRange": [
+        3.7200000286102295,
+        3.7200000286102295
+      ],
+      "worldTailHeightRange": [
+        0.11999999731779099,
+        0.11999999731779099
+      ],
+      "releaseIntervalsSeconds": [],
+      "perWave": [
+        {
+          "waveIndex": 0,
+          "firstFrame": 35,
+          "lastFrame": 65,
+          "firstDistance": 0.2044131179190278,
+          "lastDistance": 5.882777777777968,
+          "postActionTravelBeforeAge085": 1.8452380952381868
+        }
+      ],
+      "nativeClips": [
+        "idle",
+        "attack_sword",
+        "attack_sword_2",
+        "attack_sword_3"
+      ],
+      "noMidActionIdle": true,
+      "naturalExpiryClean": true,
+      "pauseMenu": "training-range",
+      "pauseClockAndTransformsHeld": true,
+      "samePositionRestored": true,
+      "continuedAfterResume": true,
+      "enginePauseHeld": true,
+      "explicitClearClean": true,
+      "maximumLayers": 6,
+      "movingHits": {
+        "perPulsePerEnemyOnce": true,
+        "realKnockbackRetained": true,
+        "remoteHPUnchangedBeforeArrival": true,
+        "sideAndBehindUnharmed": true,
+        "finalBudgetFraction": 0.6,
+        "damageFractionPerWave": 0.6,
+        "pathTargets": [
+          {
+            "target": "training:target:0",
+            "role": "7m path",
+            "initialExpectedFirstAge": 0.07839693565428868,
+            "actualWaveAges": [
+              0.08200000000000497
+            ],
+            "actualHitTimes": [
+              11.53333333333341
+            ],
+            "actualContactPositions": [
+              {
+                "x": 11.432220592796549,
+                "z": -5.351915365324466
+              }
+            ],
+            "perHitExpectedAges": [
+              0.07839693565428868
+            ],
+            "hpLost": 112,
+            "skillHitValues": [
+              112
+            ]
+          },
+          {
+            "target": "training:target:1",
+            "role": "9m path",
+            "initialExpectedFirstAge": 0.2938566610074824,
+            "actualWaveAges": [
+              0.2986666666666824
+            ],
+            "actualHitTimes": [
+              11.750000000000087
+            ],
+            "actualContactPositions": [
+              {
+                "x": 11.841426476452705,
+                "z": -7.309605469702884
+              }
+            ],
+            "perHitExpectedAges": [
+              0.2938566610074824
+            ],
+            "hpLost": 112,
+            "skillHitValues": [
+              112
+            ]
+          }
+        ],
+        "coarseRenderStepCompared": 0.2,
+        "nativeLogicalSubsteps": 0.02,
+        "coarseAndFineHitSetsAndValuesMatch": true,
+        "pauseHPNoDecrease": true,
+        "fieldPauseHPStrictlyFrozen": false,
+        "trainingAutoRefillObserved": true,
+        "noDamageAfterExplicitClearAndAdvance": true,
+        "contactSettings": {
+          "startAge": 0.0021009424848310145,
+          "endAge": 0.8859656891547372,
+          "halfWidth": 0.22,
+          "bodyHeight": 1.8,
+          "coreDepth": 0.15,
+          "forwardPadding": 0.08,
+          "minU": 0.014,
+          "maxU": 0.973
+        },
+        "contactSpan": [
+          0.10907257650909091,
+          5.246937061548615
+        ],
+        "defaultContactRange": 10.732286628667287
+      }
+    },
+    "training/rank2": {
+      "skillRank": 2,
+      "waveCount": 2,
+      "skillHitCount": 4,
+      "hitSegments": [
+        2
+      ],
+      "sameFixedGeometryAtAllRanksAndAges": true,
+      "worldTipHeightRange": [
+        3.7200000286102295,
+        3.7200000286102295
+      ],
+      "worldTailHeightRange": [
+        0.11999999731779099,
+        0.11999999731779099
+      ],
+      "releaseIntervalsSeconds": [
+        0.21999999999999886
+      ],
+      "perWave": [
+        {
+          "waveIndex": 0,
+          "firstFrame": 35,
+          "lastFrame": 65,
+          "firstDistance": 0.2044131179190278,
+          "lastDistance": 5.882777777777968,
+          "postActionTravelBeforeAge085": 1.8452380952381868
+        },
+        {
+          "waveIndex": 1,
+          "firstFrame": 42,
+          "lastFrame": 71,
+          "firstDistance": 0.33023123507611096,
+          "lastDistance": 5.80896825396848,
+          "postActionTravelBeforeAge085": 2.917537397754275
+        }
+      ],
+      "nativeClips": [
+        "idle",
+        "attack_sword",
+        "attack_sword_2",
+        "attack_sword_3"
+      ],
+      "noMidActionIdle": true,
+      "naturalExpiryClean": true,
+      "pauseMenu": "training-range",
+      "pauseClockAndTransformsHeld": true,
+      "samePositionRestored": true,
+      "continuedAfterResume": true,
+      "enginePauseHeld": true,
+      "explicitClearClean": true,
+      "maximumLayers": 8,
+      "movingHits": {
+        "perPulsePerEnemyOnce": true,
+        "realKnockbackRetained": true,
+        "remoteHPUnchangedBeforeArrival": true,
+        "sideAndBehindUnharmed": true,
+        "finalBudgetFraction": 0.6,
+        "damageFractionPerWave": 0.3,
+        "pathTargets": [
+          {
+            "target": "training:target:0",
+            "role": "7m path",
+            "initialExpectedFirstAge": 0.07839693565428868,
+            "actualWaveAges": [
+              0.08200000000000497,
+              0.11200000000001742
+            ],
+            "actualHitTimes": [
+              11.53333333333341,
+              11.783333333333424
+            ],
+            "actualContactPositions": [
+              {
+                "x": 11.432220592796549,
+                "z": -5.351915365324466
+              },
+              {
+                "x": 11.538614122547148,
+                "z": -5.860914792462855
+              }
+            ],
+            "perHitExpectedAges": [
+              0.07839693565428868,
+              0.10208095075395726
+            ],
+            "hpLost": 128,
+            "skillHitValues": [
+              64,
+              64
+            ]
+          },
+          {
+            "target": "training:target:1",
+            "role": "9m path",
+            "initialExpectedFirstAge": 0.2938566610074824,
+            "actualWaveAges": [
+              0.2986666666666824,
+              0.44533333333336733
+            ],
+            "actualHitTimes": [
+              11.750000000000087,
+              12.116666666666774
+            ],
+            "actualContactPositions": [
+              {
+                "x": 11.841426476452705,
+                "z": -7.309605469702884
+              },
+              {
+                "x": 11.947820006203305,
+                "z": -7.818604896841273
+              }
+            ],
+            "perHitExpectedAges": [
+              0.2938566610074824,
+              0.4347598868139378
+            ],
+            "hpLost": 128,
+            "skillHitValues": [
+              64,
+              64
+            ]
+          }
+        ],
+        "coarseRenderStepCompared": 0.2,
+        "nativeLogicalSubsteps": 0.02,
+        "coarseAndFineHitSetsAndValuesMatch": true,
+        "pauseHPNoDecrease": true,
+        "fieldPauseHPStrictlyFrozen": false,
+        "trainingAutoRefillObserved": true,
+        "noDamageAfterExplicitClearAndAdvance": true,
+        "contactSettings": {
+          "startAge": 0.0021009424848310145,
+          "endAge": 0.8859656891547372,
+          "halfWidth": 0.22,
+          "bodyHeight": 1.8,
+          "coreDepth": 0.15,
+          "forwardPadding": 0.08,
+          "minU": 0.014,
+          "maxU": 0.973
+        },
+        "contactSpan": [
+          0.10907257650909091,
+          5.246937061548615
+        ],
+        "defaultContactRange": 10.732286628667287
+      }
+    },
+    "training/rank3": {
+      "skillRank": 3,
+      "waveCount": 2,
+      "skillHitCount": 4,
+      "hitSegments": [
+        2
+      ],
+      "sameFixedGeometryAtAllRanksAndAges": true,
+      "worldTipHeightRange": [
+        3.7200000286102295,
+        3.7200000286102295
+      ],
+      "worldTailHeightRange": [
+        0.11999999731779099,
+        0.11999999731779099
+      ],
+      "releaseIntervalsSeconds": [
+        0.21999999999999886
+      ],
+      "perWave": [
+        {
+          "waveIndex": 0,
+          "firstFrame": 35,
+          "lastFrame": 65,
+          "firstDistance": 0.2044131179190278,
+          "lastDistance": 5.882777777777968,
+          "postActionTravelBeforeAge085": 1.8452380952381868
+        },
+        {
+          "waveIndex": 1,
+          "firstFrame": 42,
+          "lastFrame": 71,
+          "firstDistance": 0.33023123507611096,
+          "lastDistance": 5.80896825396848,
+          "postActionTravelBeforeAge085": 2.917537397754275
+        }
+      ],
+      "nativeClips": [
+        "idle",
+        "attack_sword",
+        "attack_sword_2",
+        "attack_sword_3"
+      ],
+      "noMidActionIdle": true,
+      "naturalExpiryClean": true,
+      "pauseMenu": "training-range",
+      "pauseClockAndTransformsHeld": true,
+      "samePositionRestored": true,
+      "continuedAfterResume": true,
+      "enginePauseHeld": true,
+      "explicitClearClean": true,
+      "maximumLayers": 8,
+      "movingHits": {
+        "perPulsePerEnemyOnce": true,
+        "realKnockbackRetained": true,
+        "remoteHPUnchangedBeforeArrival": true,
+        "sideAndBehindUnharmed": true,
+        "finalBudgetFraction": 0.6,
+        "damageFractionPerWave": 0.3,
+        "pathTargets": [
+          {
+            "target": "training:target:0",
+            "role": "7m path",
+            "initialExpectedFirstAge": 0.07839693565428868,
+            "actualWaveAges": [
+              0.08200000000000497,
+              0.11200000000001742
+            ],
+            "actualHitTimes": [
+              11.53333333333341,
+              11.783333333333424
+            ],
+            "actualContactPositions": [
+              {
+                "x": 11.432220592796549,
+                "z": -5.351915365324466
+              },
+              {
+                "x": 11.538614122547148,
+                "z": -5.860914792462855
+              }
+            ],
+            "perHitExpectedAges": [
+              0.07839693565428868,
+              0.10208095075395726
+            ],
+            "hpLost": 144,
+            "skillHitValues": [
+              72,
+              72
+            ]
+          },
+          {
+            "target": "training:target:1",
+            "role": "9m path",
+            "initialExpectedFirstAge": 0.2938566610074824,
+            "actualWaveAges": [
+              0.2986666666666824,
+              0.44533333333336733
+            ],
+            "actualHitTimes": [
+              11.750000000000087,
+              12.116666666666774
+            ],
+            "actualContactPositions": [
+              {
+                "x": 11.841426476452705,
+                "z": -7.309605469702884
+              },
+              {
+                "x": 11.947820006203305,
+                "z": -7.818604896841273
+              }
+            ],
+            "perHitExpectedAges": [
+              0.2938566610074824,
+              0.4347598868139378
+            ],
+            "hpLost": 144,
+            "skillHitValues": [
+              72,
+              72
+            ]
+          }
+        ],
+        "coarseRenderStepCompared": 0.2,
+        "nativeLogicalSubsteps": 0.02,
+        "coarseAndFineHitSetsAndValuesMatch": true,
+        "pauseHPNoDecrease": true,
+        "fieldPauseHPStrictlyFrozen": false,
+        "trainingAutoRefillObserved": true,
+        "noDamageAfterExplicitClearAndAdvance": true,
+        "contactSettings": {
+          "startAge": 0.0021009424848310145,
+          "endAge": 0.8859656891547372,
+          "halfWidth": 0.22,
+          "bodyHeight": 1.8,
+          "coreDepth": 0.15,
+          "forwardPadding": 0.08,
+          "minU": 0.014,
+          "maxU": 0.973
+        },
+        "contactSpan": [
+          0.10907257650909091,
+          5.246937061548615
+        ],
+        "defaultContactRange": 10.732286628667287
+      }
+    },
+    "training/rank4": {
+      "skillRank": 4,
+      "waveCount": 3,
+      "skillHitCount": 6,
+      "hitSegments": [
+        2
+      ],
+      "sameFixedGeometryAtAllRanksAndAges": true,
+      "worldTipHeightRange": [
+        3.7200000286102295,
+        3.7200000286102295
+      ],
+      "worldTailHeightRange": [
+        0.11999999731779099,
+        0.11999999731779099
+      ],
+      "releaseIntervalsSeconds": [
+        0.21999999999999886,
+        0.22000000000000064
+      ],
+      "perWave": [
+        {
+          "waveIndex": 0,
+          "firstFrame": 35,
+          "lastFrame": 65,
+          "firstDistance": 0.2044131179190278,
+          "lastDistance": 5.882777777777968,
+          "postActionTravelBeforeAge085": 1.8452380952381868
+        },
+        {
+          "waveIndex": 1,
+          "firstFrame": 42,
+          "lastFrame": 71,
+          "firstDistance": 0.33023123507611096,
+          "lastDistance": 5.80896825396848,
+          "postActionTravelBeforeAge085": 2.917537397754275
+        },
+        {
+          "waveIndex": 2,
+          "firstFrame": 48,
+          "lastFrame": 78,
+          "firstDistance": 0.16783845958450688,
+          "lastDistance": 5.858174603174873,
+          "postActionTravelBeforeAge085": 5.075256778510969
+        }
+      ],
+      "nativeClips": [
+        "idle",
+        "attack_sword",
+        "attack_sword_2",
+        "attack_sword_3"
+      ],
+      "noMidActionIdle": true,
+      "naturalExpiryClean": true,
+      "pauseMenu": "training-range",
+      "pauseClockAndTransformsHeld": true,
+      "samePositionRestored": true,
+      "continuedAfterResume": true,
+      "enginePauseHeld": true,
+      "explicitClearClean": true,
+      "maximumLayers": 9,
+      "movingHits": {
+        "perPulsePerEnemyOnce": true,
+        "realKnockbackRetained": true,
+        "remoteHPUnchangedBeforeArrival": true,
+        "sideAndBehindUnharmed": true,
+        "finalBudgetFraction": 0.6,
+        "damageFractionPerWave": 0.19999999999999998,
+        "pathTargets": [
+          {
+            "target": "training:target:0",
+            "role": "7m path",
+            "initialExpectedFirstAge": 0.07839693565428868,
+            "actualWaveAges": [
+              0.08200000000000497,
+              0.11200000000001742,
+              0.10866666666669483
+            ],
+            "actualHitTimes": [
+              11.53333333333341,
+              11.783333333333424,
+              12.0000000000001
+            ],
+            "actualContactPositions": [
+              {
+                "x": 11.432220592796549,
+                "z": -5.351915365324466
+              },
+              {
+                "x": 11.538614122547148,
+                "z": -5.860914792462855
+              },
+              {
+                "x": 11.538614122547148,
+                "z": -5.860914792462855
+              }
+            ],
+            "perHitExpectedAges": [
+              0.07839693565428868,
+              0.10208095075395726,
+              0.10208095075395726
+            ],
+            "hpLost": 168,
+            "skillHitValues": [
+              56,
+              56,
+              56
+            ]
+          },
+          {
+            "target": "training:target:1",
+            "role": "9m path",
+            "initialExpectedFirstAge": 0.2938566610074824,
+            "actualWaveAges": [
+              0.2986666666666824,
+              0.44533333333336733,
+              0.5920000000000523
+            ],
+            "actualHitTimes": [
+              11.750000000000087,
+              12.116666666666774,
+              12.483333333333457
+            ],
+            "actualContactPositions": [
+              {
+                "x": 11.841426476452705,
+                "z": -7.309605469702884
+              },
+              {
+                "x": 11.947820006203305,
+                "z": -7.818604896841273
+              },
+              {
+                "x": 12.054213535953904,
+                "z": -8.327604323979662
+              }
+            ],
+            "perHitExpectedAges": [
+              0.2938566610074824,
+              0.4347598868139378,
+              0.575663112620393
+            ],
+            "hpLost": 168,
+            "skillHitValues": [
+              56,
+              56,
+              56
+            ]
+          }
+        ],
+        "coarseRenderStepCompared": 0.2,
+        "nativeLogicalSubsteps": 0.02,
+        "coarseAndFineHitSetsAndValuesMatch": true,
+        "pauseHPNoDecrease": true,
+        "fieldPauseHPStrictlyFrozen": false,
+        "trainingAutoRefillObserved": true,
+        "noDamageAfterExplicitClearAndAdvance": true,
+        "contactSettings": {
+          "startAge": 0.0021009424848310145,
+          "endAge": 0.8859656891547372,
+          "halfWidth": 0.22,
+          "bodyHeight": 1.8,
+          "coreDepth": 0.15,
+          "forwardPadding": 0.08,
+          "minU": 0.014,
+          "maxU": 0.973
+        },
+        "contactSpan": [
+          0.10907257650909091,
+          5.246937061548615
+        ],
+        "defaultContactRange": 10.732286628667287
+      }
+    },
+    "training/rank5": {
+      "skillRank": 5,
+      "waveCount": 3,
+      "skillHitCount": 6,
+      "hitSegments": [
+        2
+      ],
+      "sameFixedGeometryAtAllRanksAndAges": true,
+      "worldTipHeightRange": [
+        3.7200000286102295,
+        3.7200000286102295
+      ],
+      "worldTailHeightRange": [
+        0.11999999731779099,
+        0.11999999731779099
+      ],
+      "releaseIntervalsSeconds": [
+        0.21999999999999886,
+        0.22000000000000064
+      ],
+      "perWave": [
+        {
+          "waveIndex": 0,
+          "firstFrame": 35,
+          "lastFrame": 65,
+          "firstDistance": 0.2044131179190278,
+          "lastDistance": 5.882777777777968,
+          "postActionTravelBeforeAge085": 1.8452380952381868
+        },
+        {
+          "waveIndex": 1,
+          "firstFrame": 42,
+          "lastFrame": 71,
+          "firstDistance": 0.33023123507611096,
+          "lastDistance": 5.80896825396848,
+          "postActionTravelBeforeAge085": 2.917537397754275
+        },
+        {
+          "waveIndex": 2,
+          "firstFrame": 48,
+          "lastFrame": 78,
+          "firstDistance": 0.16783845958450688,
+          "lastDistance": 5.858174603174873,
+          "postActionTravelBeforeAge085": 5.075256778510969
+        }
+      ],
+      "nativeClips": [
+        "idle",
+        "attack_sword",
+        "attack_sword_2",
+        "attack_sword_3"
+      ],
+      "noMidActionIdle": true,
+      "naturalExpiryClean": true,
+      "pauseMenu": "training-range",
+      "pauseClockAndTransformsHeld": true,
+      "samePositionRestored": true,
+      "continuedAfterResume": true,
+      "enginePauseHeld": true,
+      "explicitClearClean": true,
+      "maximumLayers": 9,
+      "movingHits": {
+        "perPulsePerEnemyOnce": true,
+        "realKnockbackRetained": true,
+        "remoteHPUnchangedBeforeArrival": true,
+        "sideAndBehindUnharmed": true,
+        "finalBudgetFraction": 0.6,
+        "damageFractionPerWave": 0.19999999999999998,
+        "pathTargets": [
+          {
+            "target": "training:target:0",
+            "role": "7m path",
+            "initialExpectedFirstAge": 0.07839693565428868,
+            "actualWaveAges": [
+              0.08200000000000497,
+              0.11200000000001742,
+              0.10866666666669483
+            ],
+            "actualHitTimes": [
+              11.53333333333341,
+              11.783333333333424,
+              12.0000000000001
+            ],
+            "actualContactPositions": [
+              {
+                "x": 11.432220592796549,
+                "z": -5.351915365324466
+              },
+              {
+                "x": 11.538614122547148,
+                "z": -5.860914792462855
+              },
+              {
+                "x": 11.538614122547148,
+                "z": -5.860914792462855
+              }
+            ],
+            "perHitExpectedAges": [
+              0.07839693565428868,
+              0.10208095075395726,
+              0.10208095075395726
+            ],
+            "hpLost": 195,
+            "skillHitValues": [
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "target": "training:target:1",
+            "role": "9m path",
+            "initialExpectedFirstAge": 0.2938566610074824,
+            "actualWaveAges": [
+              0.2986666666666824,
+              0.44533333333336733,
+              0.5920000000000523
+            ],
+            "actualHitTimes": [
+              11.750000000000087,
+              12.116666666666774,
+              12.483333333333457
+            ],
+            "actualContactPositions": [
+              {
+                "x": 11.841426476452705,
+                "z": -7.309605469702884
+              },
+              {
+                "x": 11.947820006203305,
+                "z": -7.818604896841273
+              },
+              {
+                "x": 12.054213535953904,
+                "z": -8.327604323979662
+              }
+            ],
+            "perHitExpectedAges": [
+              0.2938566610074824,
+              0.4347598868139378,
+              0.575663112620393
+            ],
+            "hpLost": 195,
+            "skillHitValues": [
+              65,
+              65,
+              65
+            ]
+          }
+        ],
+        "coarseRenderStepCompared": 0.2,
+        "nativeLogicalSubsteps": 0.02,
+        "coarseAndFineHitSetsAndValuesMatch": true,
+        "pauseHPNoDecrease": true,
+        "fieldPauseHPStrictlyFrozen": false,
+        "trainingAutoRefillObserved": true,
+        "noDamageAfterExplicitClearAndAdvance": true,
+        "contactSettings": {
+          "startAge": 0.0021009424848310145,
+          "endAge": 0.8859656891547372,
+          "halfWidth": 0.22,
+          "bodyHeight": 1.8,
+          "coreDepth": 0.15,
+          "forwardPadding": 0.08,
+          "minU": 0.014,
+          "maxU": 0.973
+        },
+        "contactSpan": [
+          0.10907257650909091,
+          5.246937061548615
+        ],
+        "defaultContactRange": 10.732286628667287
+      }
+    },
+    "field/rank5": {
+      "skillRank": 5,
+      "waveCount": 3,
+      "skillHitCount": 6,
+      "hitSegments": [
+        2
+      ],
+      "sameFixedGeometryAtAllRanksAndAges": true,
+      "worldTipHeightRange": [
+        4.9614726056199965,
+        4.9614726056199965
+      ],
+      "worldTailHeightRange": [
+        1.3614725743275582,
+        1.3614725743275582
+      ],
+      "releaseIntervalsSeconds": [
+        0.21999999999999886,
+        0.22000000000000064
+      ],
+      "perWave": [
+        {
+          "waveIndex": 0,
+          "firstFrame": 35,
+          "lastFrame": 65,
+          "firstDistance": 0.20441311791902797,
+          "lastDistance": 5.882777777777968,
+          "postActionTravelBeforeAge085": 1.8452380952381868
+        },
+        {
+          "waveIndex": 1,
+          "firstFrame": 42,
+          "lastFrame": 71,
+          "firstDistance": 0.33023123507611096,
+          "lastDistance": 5.80896825396848,
+          "postActionTravelBeforeAge085": 2.9175373977542747
+        },
+        {
+          "waveIndex": 2,
+          "firstFrame": 48,
+          "lastFrame": 78,
+          "firstDistance": 0.16783845958450672,
+          "lastDistance": 5.858174603174873,
+          "postActionTravelBeforeAge085": 5.075256778510969
+        }
+      ],
+      "nativeClips": [
+        "idle",
+        "attack_sword",
+        "attack_sword_2",
+        "attack_sword_3"
+      ],
+      "noMidActionIdle": true,
+      "naturalExpiryClean": true,
+      "pauseMenu": "pause",
+      "pauseClockAndTransformsHeld": true,
+      "samePositionRestored": true,
+      "continuedAfterResume": true,
+      "enginePauseHeld": true,
+      "explicitClearClean": true,
+      "maximumLayers": 9,
+      "movingHits": {
+        "perPulsePerEnemyOnce": true,
+        "realKnockbackRetained": true,
+        "remoteHPUnchangedBeforeArrival": true,
+        "sideAndBehindUnharmed": true,
+        "finalBudgetFraction": 0.6,
+        "damageFractionPerWave": 0.19999999999999998,
+        "pathTargets": [
+          {
+            "target": "study-target-0",
+            "role": "7m path",
+            "initialExpectedFirstAge": 0.07496545180929362,
+            "actualWaveAges": [
+              0.08200000000000497,
+              0.11200000000001742,
+              0.10866666666669483
+            ],
+            "actualHitTimes": [
+              11.53333333333341,
+              11.783333333333424,
+              12.0000000000001
+            ],
+            "actualContactPositions": [
+              {
+                "x": 7.432220592796549,
+                "z": -4.851915365324466
+              },
+              {
+                "x": 7.53861412254715,
+                "z": -5.360914792462855
+              },
+              {
+                "x": 7.53861412254715,
+                "z": -5.360914792462855
+              }
+            ],
+            "perHitExpectedAges": [
+              0.07496545180929362,
+              0.09844046236093468,
+              0.09844046236093468
+            ],
+            "hpLost": 195,
+            "skillHitValues": [
+              65,
+              65,
+              65
+            ]
+          },
+          {
+            "target": "study-target-1",
+            "role": "9m path",
+            "initialExpectedFirstAge": 0.26835251464155274,
+            "actualWaveAges": [
+              0.2820000000000149,
+              0.41200000000003234,
+              0.5586666666667173
+            ],
+            "actualHitTimes": [
+              11.73333333333342,
+              12.083333333333439,
+              12.450000000000122
+            ],
+            "actualContactPositions": [
+              {
+                "x": 7.841426476452705,
+                "z": -6.809605469702884
+              },
+              {
+                "x": 7.947820006203306,
+                "z": -7.318604896841273
+              },
+              {
+                "x": 8.054213535953906,
+                "z": -7.827604323979662
+              }
+            ],
+            "perHitExpectedAges": [
+              0.26835251464155274,
+              0.40789546372247026,
+              0.5474371741803787
+            ],
+            "hpLost": 195,
+            "skillHitValues": [
+              65,
+              65,
+              65
+            ]
+          }
+        ],
+        "coarseRenderStepCompared": 0.2,
+        "nativeLogicalSubsteps": 0.02,
+        "coarseAndFineHitSetsAndValuesMatch": true,
+        "pauseHPNoDecrease": true,
+        "fieldPauseHPStrictlyFrozen": true,
+        "trainingAutoRefillObserved": false,
+        "noDamageAfterExplicitClearAndAdvance": true,
+        "contactSettings": {
+          "startAge": 0.0021009424848310145,
+          "endAge": 0.8859656891547372,
+          "halfWidth": 0.22,
+          "bodyHeight": 1.8,
+          "coreDepth": 0.15,
+          "forwardPadding": 0.08,
+          "minU": 0.014,
+          "maxU": 0.973
+        },
+        "contactSpan": [
+          0.10907257650909091,
+          5.246937061548615
+        ],
+        "defaultContactRange": 10.732286628667287
+      }
+    }
+  },
+  "lifecycleLimitation": "Field uses real pause/close; training uses its normal training-range paused branch. Actual leaveTrainingRange transition is separately recorded and verified clean.",
+  "hudImages": {
+    "training": "src/.tmp/warrior-ultimate-moving-hits-v40/training/rank5/normal-hud.jpg",
+    "field": "src/.tmp/warrior-ultimate-moving-hits-v40/field/rank5/normal-hud.jpg"
+  },
+  "coarseStepCaveat": "GameSession.advance(.2) uses native logical steps <= .02; it is not an un-subdivided .2-second PureCombat sweep test",
+  "exitTransitionEvidence": "src/.tmp/warrior-ultimate-moving-hits-v40/training/exit-transition.json",
+  "taptapDevice": "not verified",
+  "media": {
+    "wave-count-comparison.mp4": {
+      "frames": 108,
+      "fps": "30/1",
+      "seconds": 3.6,
+      "size": [
+        1800,
+        544
+      ]
+    },
+    "wave-count-1.mp4": {
+      "frames": 108,
+      "fps": "30/1",
+      "seconds": 3.6,
+      "size": [
+        1280,
+        744
+      ]
+    },
+    "wave-count-2.mp4": {
+      "frames": 108,
+      "fps": "30/1",
+      "seconds": 3.6,
+      "size": [
+        1280,
+        744
+      ]
+    },
+    "wave-count-3.mp4": {
+      "frames": 108,
+      "fps": "30/1",
+      "seconds": 3.6,
+      "size": [
+        1280,
+        744
+      ]
+    },
+    "three-waves-field.mp4": {
+      "frames": 108,
+      "fps": "30/1",
+      "seconds": 3.6,
+      "size": [
+        1280,
+        744
+      ]
+    },
+    "three-waves-slow.mp4": {
+      "frames": 58,
+      "fps": "15/1",
+      "seconds": 3.8666666666666667,
+      "size": [
+        1280,
+        744
+      ]
+    },
+    "wave-count-comparison.gif": {
+      "frames": 108,
+      "milliseconds": 3600
+    },
+    "three-wave-detail-slow.gif": {
+      "frames": 58,
+      "milliseconds": 3870
+    },
+    "single-wave-crescent.gif": {
+      "frames": 43,
+      "milliseconds": 2870
+    }
+  },
+  "sourceFiles": {
+    "capture.cjs": "aed4712a2717f331263b81367461816a6a9bcb471a8ff09003fc1a0bf5e8d88b",
+    "review-fixture.js": "d78c2ff37a958a5fd0f1d0bce0aefadc377cc4459ecdd7ddbaba0f877deeea8a",
+    "media.py": "2f093202fa67b6bcfcd1c534f98d2e37b50062bb5f730c0c5c2a8e89b5b7bd3a"
+  },
+  "files": {
+    "media\\normal-hud-field.jpg": "166aff7d3b83bdd5c1ff3ecd2f1ef7a951917cac9715c65208c54c8038ede809",
+    "media\\normal-hud-training.jpg": "813d224ca6ff0085b8d947a7a9eb00a15e8218410f6df58b234567c7f2a83803",
+    "media\\representative-054.jpg": "b32a7b4fe409ab3eaf35d915a15ff911fe3a93a981e60147eddc2541d294f10d",
+    "media\\single-wave-crescent.gif": "6ba3f7ecf994c8c6810d4081fe8b7e3011343233ab96c9aef5704f1dfac882f7",
+    "media\\three-wave-detail-slow.gif": "e23e23d68a67945043e2975733d5b92a5cc11d75750703ddab990b6d67ba5c05",
+    "media\\three-wave-stages.jpg": "3f998a04172b73378658c93a8b0ffa4ac2faf1b313d9a2a9472f0f5bba769cb8",
+    "media\\three-waves-field.mp4": "e39ca6837e6ce5e6db1c9a1bdcb9d0cd185d44ff89a7a6d8d28f8edee79eac59",
+    "media\\three-waves-slow.mp4": "7d3025c771afbf92ddd131944cce48f10ae6edb92236e5ebd5708a578b5c7be7",
+    "media\\wave-count-1.mp4": "b417b132bfe16acb273989b0e712a25bae0afcf3badc6500a091e7023663aea4",
+    "media\\wave-count-2.mp4": "02521ce440cb278bdc86f7d25fc5300c1c66d47b586458464bc0e2f65517366a",
+    "media\\wave-count-3.mp4": "f8b6d574c000a4038db25561ced5619ac8f9ef9e7823bc1954cbca50fd26d7d3",
+    "media\\wave-count-comparison.gif": "822a4bc9293f70b4f631c52f6199ab3bd9a1981da4a9ac2e19f0dee5a77af285",
+    "media\\wave-count-comparison.mp4": "03b3a7aae696b92ebae3d8a407d9e037cd1a2695baef1309b25857e496671241",
+    "media\\wave-count-overview.jpg": "373e057b668ec0580e440c34810a67012f0dca6d843cc8a011131a892feb9d44"
+  },
+  "artReview": {
+    "reviewer": "root visual inspection",
+    "reviewedArtifacts": [
+      "media/representative-054.jpg",
+      "media/three-wave-stages.jpg"
+    ],
+    "reviewedCaptureFrames": [
+      "training/rank5/054.jpg"
+    ],
+    "finding": "The approved same-shape and same-height silver crescents are retained. Six stages show independent waves advancing through the 7m and 9m targets, with actual cumulative HP loss increasing on arrival from 0 to 65/130/195 per target at rank5, while side and rear controls remain at zero. The earlier representative frame shows near-target damage 195 and far-target damage 65, matching staggered arrival rather than stationary area damage. Core events, real hit HP losses and current-position sweep metrics corroborate the visual review.",
+    "userFeedback": "integrated playback delivered; awaiting user play feedback",
+    "taptapDevice": "not verified"
+  },
+  "rootValidation": {
+    "typeCheck": "npm --prefix src/cocos run check passed",
+    "rules": "179/179 tests passed",
+    "rulesLog": "src/.tmp/warrior-v40-tests-final.log",
+    "build": "normal test web-mobile concept-2d; Cocos 3.8.8 legacy forward policy passed",
+    "buildLog": "src/cocos/temp/build-concept-2d-out.log",
+    "onlyPlayableDefinitionChanged": "WAR_05; all other 32 definitions identical to pre-v40 snapshot",
+    "damageBudget": "first cuts .2/.2; final .6 divided by count",
+    "shieldHashUnchanged": "97683ffbea40a66f97c3045bf6a28bfc86bc3579326cbc28732e165970e84a6c"
+  },
+  "rootProductionSources": {
+    "src/cocos/assets/scripts/features/combat/common/PureCombat.ts": "86e2114a103217bc3295287d3462189cc66e3c7112ccb087ec714f63492e5d40",
+    "src/cocos/assets/scripts/features/combat/common/WarriorUltimate.ts": "6ccb0fba3a8c2ecce99dc022e80e92d742dc59dd2b9d7c9d515ed7fc0098a315",
+    "src/cocos/assets/scripts/core/GameSession.ts": "162f3498fafc731ad8283a08e0399e71cb602daffe986956c59e6355a922ce62",
+    "src/cocos/assets/scripts/core/Contracts.ts": "3bea461ec1434a1ffd550e5e3b1e43622ce237968117938319b4f2be0381a082",
+    "src/cocos/assets/scripts/features/combat/runtime/NativeSkillVfx.ts": "63ca88b6d8ac645a24caff74e1a27426093d3411cccc44554b6dea953d09eab5",
+    "src/cocos/assets/scripts/features/combat/runtime/WarriorSkillEffects.ts": "511c9860e221ec28ae20123841de22ada3a0791201e5c868bda7fc875c982a43",
+    "src/cocos/assets/scripts/features/combat/data/PureSkills.ts": "b48d35461df7bba0a64ba9feab12978755417856932a9ceb283b6aa5121333ee",
+    "src/cocos/assets/scripts/features/automation/common/Automation.ts": "871eefee406c53895d859e874716b7eb5c9fa1cd97b0c14e225bba97e6bf44e9",
+    "tools/design/warrior-ultimate-moving-hits-v1.json": "5dcfc64fcfb0f2c23cd4b34fcdfe01bf65fd73cec6e5d7e7e61a7aea32e84423",
+    "tools/design/export-combat-runtime.py": "2398af225d7133cb485ca0a730f03b48f16ef2e51776090c0eb11a2f018236de",
+    "src/cocos/tests/warrior-ultimate.rules.test.ts": "90929fa8ae0dc359cc32884d559ac2f5464ebc294f193720ba26f716fd6c5265"
+  }
+}

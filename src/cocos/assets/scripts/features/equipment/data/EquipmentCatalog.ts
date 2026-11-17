@@ -44,7 +44,7 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "quality": "稀有",
     "description": "破军交斩直接命中2敌后，下一断空剑气伤害+8%，4s内一次，CD8s。",
     "weaponFamily": "单手斧",
-    "source": "C01 / M3学图",
+    "source": "H03 · 完成回退试验后武备自选；第二章高地普通敌与据点战利品（随机）",
     "set": "seeker"
   },
   {
@@ -54,9 +54,9 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "slot": "weapon",
     "level": 5,
     "quality": "史诗",
-    "description": "裂地审判终结段伤害+10%，计入增伤上限；没有额外施放键。",
+    "description": "旋风斩终结段伤害+10%，计入增伤上限；没有额外施放键。",
     "weaponFamily": "双手重剑",
-    "source": "C02 / M7准备段学图",
+    "source": "F04 或 F07 · 完成安全准备后领取，两条路线共一次",
     "twoHanded": true
   },
   {
@@ -104,7 +104,7 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "quality": "稀有",
     "description": "穿云箭命中施加牵制：移速-25%/3s，CD8s；Boss仅移速-10%，不改变出招时序；这是箭术减速，不施加冰系寒缓。",
     "weaponFamily": "双手弓",
-    "source": "C03 / M3学图",
+    "source": "H03 · 完成回退试验后武备自选；第二章高地普通敌与据点战利品（随机）",
     "twoHanded": true
   },
   {
@@ -114,7 +114,7 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "slot": "weapon",
     "level": 4,
     "quality": "史诗",
-    "description": "疾风连射首个命中追加一次0.25S雷伤，可跳最近1敌；CD8s，次级事件不再连锁。",
+    "description": "疾风连射首次命中时，对同一个敌人额外造成0.5S伤害；触发间隔8秒，不溅射邻敌，次级事件不再连锁。",
     "weaponFamily": "双手弓",
     "source": "M6 / B10宝匣",
     "twoHanded": true
@@ -152,7 +152,7 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "quality": "稀有",
     "description": "贯雷长矛首个实际命中若为自己的猎王印目标，额外削韧4，CD4s，Boss额外2，每cast一次；不增加目标或电弧。",
     "weaponFamily": "双手长杖",
-    "source": "C04 / M3学图",
+    "source": "H03 · 完成回退试验后武备自选；第二章高地普通敌与据点战利品（随机）",
     "twoHanded": true,
     "set": "bell"
   },
@@ -188,7 +188,7 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "quality": "精良",
     "description": "火焰、雷霆两系法术直接伤害+5%，非终极冷却缩短4%，受统一上限约束。",
     "weaponFamily": "副手法器",
-    "source": "C05 / M3学图",
+    "source": "H03 · 完成回退试验后武备自选；第二章高地普通敌与据点战利品（随机）",
     "set": "seal"
   },
   {
@@ -240,7 +240,7 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "quality": "稀有",
     "description": "自己受到寒缓持续时间-20%，不是免疫。",
     "weaponFamily": "头",
-    "source": "C06 / M3学图",
+    "source": "H03 · 完成回退试验后武备自选；第二章高地普通敌与据点战利品（随机）",
     "set": "bell",
     "armor": 2
   },
@@ -293,7 +293,7 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "quality": "稀有",
     "description": "雷系直接命中自己的猎王印目标后，当前剩余时间最长的非终极技能冷却-0.5s，CD8s，每cast一次；不消费猎王印。",
     "weaponFamily": "身",
-    "source": "C07 / M3学图",
+    "source": "H03 · 完成回退试验后武备自选；第二章高地普通敌与据点战利品（随机）",
     "set": "bell",
     "armor": 6
   },
@@ -345,7 +345,7 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "quality": "精良",
     "description": "打开新宝箱后显示附近4m已可达线索轮廓3s，不自动领取。",
     "weaponFamily": "手",
-    "source": "C08 / M3学图",
+    "source": "H03 · 完成回退试验后武备自选；第二章高地普通敌与据点战利品（随机）",
     "set": "seeker",
     "armor": 1
   },
@@ -397,7 +397,7 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "quality": "精良",
     "description": "疾影步距离+8%，沿途仍检查墙、门与坑边。",
     "weaponFamily": "靴",
-    "source": "C09 / M5学图",
+    "source": "U2-06 · 核对封炉原刻与现代拓本后领取",
     "set": "seeker",
     "armor": 1
   },
@@ -432,7 +432,7 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "slot": "ringLeft",
     "level": 2,
     "quality": "精良",
-    "description": "直接主动命中自己的hunterMark目标，终极蓄能额外+2，CD3s，同cast一次；不消费印记。",
+    "description": "直接主动命中自己的hunterMark目标，回复2点当前职业资源，CD3s，同cast一次；不消费印记。",
     "weaponFamily": "戒",
     "source": "弥菈首幕专售28币",
     "set": "seeker"
@@ -446,7 +446,7 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "quality": "稀有",
     "description": "非终极技能冷却缩短5%，受20%装备冷却缩减上限约束。",
     "weaponFamily": "戒",
-    "source": "C10 / M5保底，U2-04可提前学图",
+    "source": "U2-04 · 查阅守库人的养护记录后领取",
     "set": "seal"
   },
   {
@@ -542,7 +542,7 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "slot": "ringLeft",
     "level": 3,
     "quality": "稀有",
-    "description": "命中超过5m目标，终极蓄能额外+2，CD4s，同次施放一次。",
+    "description": "命中超过5m目标，回复2点当前职业资源，CD4s，同次施放一次。",
     "weaponFamily": "戒",
     "source": "当地装备池"
   },
@@ -625,7 +625,7 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "slot": "weapon",
     "level": 3,
     "quality": "稀有",
-    "description": "战技直接命中自己的燃烧目标，终极蓄能额外+2，CD3s。",
+    "description": "战技直接命中自己的燃烧目标，回复2点当前职业资源，CD3s。",
     "weaponFamily": "单手剑",
     "source": "当地装备池"
   },
@@ -766,7 +766,7 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "slot": "necklace",
     "level": 3,
     "quality": "史诗",
-    "description": "直接技能命中自己的猎王印目标，终极蓄能额外+2，CD4s，同次施放一次，仍受每cast蓄能奖励上限。",
+    "description": "直接技能命中自己的猎王印目标，回复2点当前职业资源，CD4s，同次施放一次，每次施放最多回复2点职业资源。",
     "weaponFamily": "项链",
     "source": "当地装备池"
   },
@@ -836,7 +836,7 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "slot": "weapon",
     "level": 3,
     "quality": "史诗",
-    "description": "裂地审判对机械敌额外削韧6，Boss+3，CD6s。",
+    "description": "旋风斩对机械敌额外削韧6，Boss+3，CD6s。",
     "weaponFamily": "单手锤",
     "source": "对应可选首领固定奖"
   },
@@ -891,7 +891,7 @@ export const EQUIPMENT_CATALOG:ItemDef[] = [
     "slot": "weapon",
     "level": 3,
     "quality": "传奇",
-    "description": "仅穿云箭BOW_01第二个及以后目标的穿透伤害下限由60%提高到70%，每敌每cast一次，受统一上限；不回射、不改变方向、不增加弹体，不作用于分裂箭。",
+    "description": "穿云箭BOW_01对唯一目标的直接伤害提高10%，计入统一增伤上限；保持释放时的直线方向，只命中首个有效敌人，不贯穿、不回射、不增加弹体。",
     "weaponFamily": "双手弓",
     "source": "S08旧隐匣18% / 原隘口监守25%传奇池；结果写档",
     "twoHanded": true

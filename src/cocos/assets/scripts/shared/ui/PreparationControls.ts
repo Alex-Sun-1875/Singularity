@@ -29,7 +29,7 @@ export class PreparationControls {
   P.art(ui,parent,'card',0,0,width,height,true);if(selected)P.art(ui,parent,'card-selected',0,0,width+D.card.selectedExtraWidth,height+D.card.selectedExtraHeight,true);
  }
  static rowBackground(ui:RpgPanel,parent:Node,width:number,height:number,selected=false){
-  P.art(ui,parent,'skill-row',0,0,width,height,true);if(selected)P.art(ui,parent,'skill-selected',0,0,width+D.row.selectedExtraWidth,height+D.row.selectedExtraHeight,true);
+  return P.art(ui,parent,selected?'selection-row':'skill-row',0,0,width,height,true);
  }
  static icon(ui:RpgPanel,parent:Node,path:string|undefined,x:number,y:number,size:number,name?:string){
   if(!path)return;const image=UiSkin.sprite(parent,path,size*ui.scale,size*ui.scale);if(name)image.node.name=name;image.node.setPosition(x,y);return image;
@@ -38,9 +38,9 @@ export class PreparationControls {
   const u=ui.scale,s=D.professionCard,w=options.width,h=options.height,n=ui.button(ui.panel,'',ui.x(options.x),ui.y(options.y),w*u,options.action,options.enabled!==false,false,h*u,options.run,'catalog');
   this.cardBackground(ui,n,w,h,options.selected);
   const painting=UiSkin.asset(n,options.image,(w-s.artInset)*u,h*s.artHeight*u,false);painting.node.setPosition(0,h*s.artY*u);
-  const title=ui.text(n,options.title,0,h*s.titleY*u,(w-s.titleInset)*u,s.titleHeight*u,options.selected?F.color(D.colorRoles.selected):C.ink,s.titleFont*u);title.horizontalAlign=Label.HorizontalAlign.CENTER;
-  P.rule(ui,n,0,h*s.ruleY*u,w-s.ruleInset);
-  const detail=ui.text(n,options.description,0,h*s.descriptionY*u,(w-s.descriptionInset)*u,s.descriptionHeight*u,C.ink,s.descriptionFont*u);detail.horizontalAlign=Label.HorizontalAlign.CENTER;
+  const title=ui.text(n,options.title,0,h*s.titleY*u,(w-2*D.contentInsets.text)*u,s.titleHeight*u,options.selected?F.color(D.colorRoles.selected):C.ink,s.titleFont*u);title.horizontalAlign=Label.HorizontalAlign.CENTER;
+  P.rule(ui,n,0,h*s.ruleY*u,w-2*D.contentInsets.rule);
+  const detail=ui.text(n,options.description,0,h*s.descriptionY*u,(w-2*D.contentInsets.text)*u,s.descriptionHeight*u,C.ink,s.descriptionFont*u);detail.horizontalAlign=Label.HorizontalAlign.CENTER;
   if(options.badge)P.badge(ui,n,options.badge.label,(w/2-s.badgeRight)*u,(h/2-s.badgeTop)*u,s.badgeWidth,options.badge.tone);return n;
  }
  static attributeRow(ui:RpgPanel,options:{y:number;height:number;label:string;icon:string;before:number;after:number;decrease:PreparationAction;increase:PreparationAction;centerX?:number}){

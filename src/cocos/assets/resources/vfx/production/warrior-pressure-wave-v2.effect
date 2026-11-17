@@ -1,0 +1,88 @@
+CCEffect %{
+  techniques:
+  - name: transparent
+    passes:
+    - vert: pressure-wave-vs:vert
+      frag: pressure-wave-fs:frag
+      rasterizerState: { cullMode: none }
+      depthStencilState:
+        depthTest: true
+        depthWrite: false
+      blendState:
+        targets:
+        - blend: true
+          blendSrc: src_alpha
+          blendDst: one_minus_src_alpha
+          blendSrcAlpha: one
+          blendDstAlpha: one_minus_src_alpha
+      properties:
+        mainTexture: { value: white }
+        flowTexture: { value: grey }
+        mainColor: { value: [0.80, 0.82, 0.84, 1] }
+        flowState: { value: [0, 0, 1, 0] }
+}%
+
+CCProgram pressure-wave-vs %{
+  precision highp float;
+  #include <builtin/uniforms/cc-global>
+  #include <builtin/uniforms/cc-local>
+  in vec3 a_position;
+  in vec2 a_texCoord;
+  out vec2 v_uv;
+  uniform PressureParams {
+    vec4 mainColor;
+    vec4 flowState;
+  };
+  vec4 vert () {
+    v_uv = a_texCoord;
+    vec3 p = a_position;
+    float rear = a_texCoord.y * a_texCoord.y;
+    // Only the trailing air stretches and drifts; the collision-facing crest
+    // stays on its authored radius. No bevel, surface normal or specular light.
+    p.xz *= 1.0 - rear * flowState.y * 0.12;
+    p.y += sin(a_texCoord.x * 10.0 - flowState.x * 3.0) * rear * 0.018 * flowState.z;
+    return cc_matViewProj * cc_matWorld * vec4(p, 1.0);
+  }
+}%
+
+CCProgram pressure-wave-fs %{
+  precision highp float;
+  #include <legacy/output-standard>
+  in vec2 v_uv;
+  uniform sampler2D mainTexture;
+  uniform sampler2D flowTexture;
+  uniform PressureParams {
+    vec4 mainColor;
+    vec4 flowState;
+  };
+  vec4 frag () {
+    float u = v_uv.x;
+    float v = v_uv.y;
+    float clock = flowState.x * flowState.z;
+    vec3 n = texture(flowTexture, vec2(u * 2.4 + clock * 0.08, v * 1.8 - clock * 0.62)).rgb;
+    vec3 m = texture(flowTexture, vec2(u * 4.1 - clock * 0.055, v * 2.7 - clock * 0.91)).rgb;
+    float flow = n.r * 0.55 + m.g * 0.45;
+    float cap = smoothstep(0.0, 0.07, u) * (1.0 - smoothstep(0.88, 1.0, u));
+    float depth = v + (flow - 0.5) * 0.075;
+    float crest = exp(-pow((depth - 0.142) / (0.068 + n.b * 0.024), 2.0));
+    float body = exp(-pow((depth - 0.23) / 0.22, 2.0));
+    float strands = smoothstep(0.25, 0.73, flow);
+    float wake = exp(-v * 2.8) * strands;
+    // Reuse the approved wave art for broken, feathered detail. It modulates
+    // density rather than cutting a second rigid silhouette out of the moon.
+    vec2 artUV = vec2((u * 0.96 + 2.02) / 4.0, (0.12 + v * 0.78) / 3.0);
+    float art = texture(mainTexture, artUV).a;
+    float end = clamp(flowState.y, 0.0, 1.0);
+    float frontLife = 1.0 - smoothstep(0.18, 0.78, end);
+    float tailLife = 1.0 - smoothstep(0.54, 1.0, end);
+    float density = crest * 0.78 * frontLife + body * (0.16 + 0.12 * strands) * frontLife
+      + wake * (0.12 + 0.10 * art) * tailLife;
+    float erosion = smoothstep(end * 1.05 - 0.13, end * 1.05 + 0.10, flow + v * 0.13);
+    density *= erosion * cap * smoothstep(0.0, 0.035, v) * (1.0 - smoothstep(0.77, 1.0, v));
+    float alpha = clamp(density * mainColor.a, 0.0, 0.82);
+    if (alpha < 0.002) discard;
+    // Flat luminous silver follows air density; no transverse metal shading.
+    vec3 silver = mainColor.rgb * (0.88 + 0.12 * art);
+    return CCFragOutput(vec4(SRGBToLinear(silver), alpha));
+  }
+}%

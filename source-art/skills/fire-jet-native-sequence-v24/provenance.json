@@ -1,0 +1,52 @@
+{
+  "backend": "built-in cloud image_gen extraction + deterministic Pillow/NumPy",
+  "reference": "../fire-selected-reference-v18/user-selected-effect.jpg",
+  "generationStatus": "layers extracted",
+  "artAcceptance": "original design selected; extraction and native implementation not yet accepted",
+  "unusedCandidate": "generated-sheet-01.png and prepare-candidate.py are not used by the production renderer",
+  "flameLayer": "reference-flame-layer-01.png",
+  "sigilLayer": "reference-seal-layer-01.png",
+  "frameProcessing": "16 continuous periodic flow-field samples from the same approved flame layer, fixed root and outline, premultiplied resampling. Native shader blends neighbouring frames and advects flame details upward. No JPEG chroma matte, gamma bake or opacity powers.",
+  "sealProcessing": "Luminous reference strokes include their near-white cores; original round curls and teardrop preserved, no diamonds or redrawn petals. Native shader adds a soft orange-gold translucent disk inside the outer ring, requested by the user, animated with the same flow clock.",
+  "cell": [
+    256,
+    384
+  ],
+  "grid": [
+    4,
+    4
+  ],
+  "footPixel": [
+    128,
+    352
+  ],
+  "sourceCrop": [
+    100,
+    70,
+    910,
+    1455
+  ],
+  "sourceHashes": {
+    "reference-flame-layer-01.png": "3206d1a9a808e1f9bf358a37f13858eea48008bcaf15260087032bac9a91d496",
+    "reference-seal-layer-01.png": "038abd1163ec0c56050bcb6e1b3f2106b0b24bd955bc3966ca4f6c88fa13ac52"
+  },
+  "assets": {
+    "fire-ground-jets-v24": "42d38124a23610c6b05095feb79a287b732dfa5c385629fa3f5aebac0e0b09e6",
+    "fire-jet-seal-v24": "803aea3cba23054dc37d48cfb91b3991f9003b386624a75d7e0b069687e9f18e",
+    "fire-flow-noise-v24": "ccee680793eb3e41ea3973f01fa9963c588b4f0d5cbafe483d24ccb0105c935d"
+  },
+  "localArtReview": {
+    "status": "normal training-range Web capture inspected",
+    "checks": [
+      "orange-gold hue",
+      "complete translucent inner disk including front half",
+      "clean rounded reference strokes",
+      "upright flowing flame detail",
+      "gradual cooling and disappearance"
+    ],
+    "userAcceptance": "pending",
+    "taptapDeviceAcceptance": "pending"
+  },
+  "sealFeedback": "Rejected by user: motif differed from selected original. Corrected by v25 original-pixel extraction and near-side UV orientation.",
+  "sealSupersededBy": "../fire-seal-original-pixels-v25/README.md"
+}

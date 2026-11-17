@@ -1,0 +1,374 @@
+{
+  "compiledSha256": "7e4fee244f9ae3e1b21d2ba8413c8f80690e5b097d7824f9d84cdcd9f9c872e6",
+  "sourceHashes": {
+    "SkillFireSprites.ts": "3904240e1bd9df790d5a877eba99c91083d6b51c8a140a1b138e5a7eed817e40",
+    "FireImpactEffects.ts": "b8920078f4d93456aeaf507fbfea6adfa9409494fa140aab8401cf33b50138d6",
+    "FireFieldEffects.ts": "39239a5a91e5d7bded3dca922d6f8c6e52347e888e2c406427a6cd1d36c57f58",
+    "SkillMeteorBody.ts": "fc95779e8564cf2cb091dd3b8e0e5d085ee3fb9bde2a949facdeebd7f09fd0f1",
+    "FireGroundEffects.ts": "4911a2d747842f7a4f703e36f76d34713bad09c078eaf64800a507d320b45d61",
+    "NativeSkillVfx.ts": "d61abdefdcc0663bb98930d852abd7f7ef753c7191a360bbccd61ac50186d2e8",
+    "Effects.ts": "f910180405651beef6eb01a831dbde5eae68396e20aef76162514f916b3e5c08"
+  },
+  "stableBuildDuringCapture": true,
+  "emptyGround": false,
+  "nativeCanvas": [
+    2560,
+    1272
+  ],
+  "frames": 270,
+  "seconds": 9,
+  "fps": 30,
+  "defaultCameraAndCompleteHUDInNativeVideo": true,
+  "actualResults": {
+    "casts": 1,
+    "releases": 1,
+    "hits": 4,
+    "damage": 740,
+    "positiveHitEvents": 4,
+    "hitEventDamage": 740.0,
+    "misses": 1,
+    "criticalHits": 0,
+    "maxCooldown": 11.983333333333333,
+    "peakActiveFireRecords": 4,
+    "peakReportedImpactHeight": 1.6334939909741593,
+    "peakReportedImpactVertices": 2072,
+    "peakReportedFrontRadius": 3.8,
+    "peakReportedLayers": 2,
+    "peakReportedLayerHeight": 1.6566256723098542,
+    "clearedAtEnd": true
+  },
+  "gameplayComparison": {
+    "baselineStage": "before",
+    "sameIndependentSkillSequence": true,
+    "numbersEqual": false,
+    "beforeCompiledSha256": "d89e6496f0b9b8c19d167391cb2a825cf874264e28f34647795dc94026f52832",
+    "before": {
+      "casts": 1,
+      "releases": 1,
+      "hits": 4,
+      "damage": 1556,
+      "positiveHitEvents": 4,
+      "misses": 1,
+      "criticalHits": 4,
+      "maxCooldown": 11.983333333333333
+    },
+    "after": {
+      "casts": 1,
+      "releases": 1,
+      "hits": 4,
+      "damage": 740,
+      "positiveHitEvents": 4,
+      "misses": 1,
+      "criticalHits": 0,
+      "maxCooldown": 11.983333333333333
+    }
+  },
+  "representativeStages": [
+    {
+      "title": "冲击开始",
+      "requestedImpactAge": 0.05,
+      "frame": 38,
+      "actualImpactAge": 0.04999999999999982,
+      "cueImpactAge": 0.04999999999999982,
+      "impactInspect": {
+        "model": "open-radial-volume-fire-v31",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.0611111111111109,
+            "phase": 0.0611111111111109,
+            "frameBlend": 0.9648882429441258,
+            "time": 1.4999999999999996,
+            "age": 0.04999999999999982,
+            "frontRadius": 1.654380004882808,
+            "layers": 2,
+            "lobes": 19,
+            "peakHeight": 0.868136970779384,
+            "width": 3.279562892628763,
+            "height": 0.8450052894436889,
+            "position": {
+              "x": -0.012229454476658476,
+              "y": 0.02313168133569509,
+              "z": -4.01467534537199
+            },
+            "vertices": 2072,
+            "triangles": 3312,
+            "maxHeight": 0.8450052894436889,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "otherFireInspect": {
+        "model": "distinct-fire-shapes-v30",
+        "capacity": 76,
+        "allocated": 4,
+        "sharedTextures": 2,
+        "field": {
+          "model": "connected-fire-field-v30",
+          "capacity": 4,
+          "allocated": 0,
+          "active": []
+        }
+      }
+    },
+    {
+      "title": "火浪前锋外扩",
+      "requestedImpactAge": 0.25,
+      "frame": 44,
+      "actualImpactAge": 0.2499999999999991,
+      "cueImpactAge": 0.2499999999999991,
+      "impactInspect": {
+        "model": "open-radial-volume-fire-v31",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.23390654884171846,
+            "phase": 0.23390654884171846,
+            "frameBlend": 0.8812212555057245,
+            "time": 1.6999999999999988,
+            "age": 0.2499999999999991,
+            "frontRadius": 3.7626099853515607,
+            "layers": 2,
+            "lobes": 19,
+            "peakHeight": 1.6529033649352591,
+            "width": 7.4588160223004785,
+            "height": 1.6297716835995641,
+            "position": {
+              "x": -0.012229454476658476,
+              "y": 0.02313168133569509,
+              "z": -4.01467534537199
+            },
+            "vertices": 2072,
+            "triangles": 3312,
+            "maxHeight": 1.6297716835995641,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "otherFireInspect": {
+        "model": "distinct-fire-shapes-v30",
+        "capacity": 76,
+        "allocated": 4,
+        "sharedTextures": 2,
+        "field": {
+          "model": "connected-fire-field-v30",
+          "capacity": 4,
+          "allocated": 0,
+          "active": []
+        }
+      }
+    },
+    {
+      "title": "立体翻卷",
+      "requestedImpactAge": 0.65,
+      "frame": 56,
+      "actualImpactAge": 0.6499999999999977,
+      "cueImpactAge": 0.6499999999999977,
+      "impactInspect": {
+        "model": "open-radial-volume-fire-v31",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.30032433080811416,
+            "phase": 0.30032433080811416,
+            "frameBlend": 0.6060035549610291,
+            "time": 2.0999999999999974,
+            "age": 0.6499999999999977,
+            "frontRadius": 3.8,
+            "layers": 2,
+            "lobes": 19,
+            "peakHeight": 1.6368376364322132,
+            "width": 7.532936178633336,
+            "height": 1.6137059550965183,
+            "position": {
+              "x": -0.012229454476658476,
+              "y": 0.02313168133569509,
+              "z": -4.01467534537199
+            },
+            "vertices": 2072,
+            "triangles": 3312,
+            "maxHeight": 1.6137059550965183,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "otherFireInspect": {
+        "model": "distinct-fire-shapes-v30",
+        "capacity": 76,
+        "allocated": 4,
+        "sharedTextures": 2,
+        "field": {
+          "model": "connected-fire-field-v30",
+          "capacity": 4,
+          "allocated": 0,
+          "active": []
+        }
+      }
+    },
+    {
+      "title": "爆燃后收势",
+      "requestedImpactAge": 1.25,
+      "frame": 74,
+      "actualImpactAge": 1.2499999999999956,
+      "cueImpactAge": 1.2499999999999956,
+      "impactInspect": {
+        "model": "open-radial-volume-fire-v31",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.35877420915308367,
+            "phase": 0.35877420915308367,
+            "frameBlend": 0.15317334709360003,
+            "time": 2.6999999999999953,
+            "age": 1.2499999999999956,
+            "frontRadius": 3.8,
+            "layers": 2,
+            "lobes": 19,
+            "peakHeight": 1.5697643878553271,
+            "width": 7.532936178633336,
+            "height": 1.5466327065196321,
+            "position": {
+              "x": -0.012229454476658476,
+              "y": 0.02313168133569509,
+              "z": -4.01467534537199
+            },
+            "vertices": 2072,
+            "triangles": 3312,
+            "maxHeight": 1.5466327065196321,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "otherFireInspect": {
+        "model": "distinct-fire-shapes-v30",
+        "capacity": 76,
+        "allocated": 4,
+        "sharedTextures": 2,
+        "field": {
+          "model": "connected-fire-field-v30",
+          "capacity": 4,
+          "allocated": 0,
+          "active": []
+        }
+      }
+    },
+    {
+      "title": "收势向余火过渡",
+      "requestedImpactAge": 1.65,
+      "frame": 86,
+      "actualImpactAge": 1.6499999999999941,
+      "cueImpactAge": 1.6499999999999941,
+      "impactInspect": {
+        "model": "open-radial-volume-fire-v31",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": [
+          {
+            "key": "impact:cast:1:0",
+            "kind": "meteor",
+            "radius": 3.8,
+            "progress": 0.68,
+            "phase": 0.68,
+            "frameBlend": 0.005674127631043777,
+            "time": 3.099999999999994,
+            "age": 1.6499999999999941,
+            "frontRadius": 3.8,
+            "layers": 2,
+            "lobes": 19,
+            "peakHeight": 0.5113294654615793,
+            "width": 7.532936178633336,
+            "height": 0.4881977841258842,
+            "position": {
+              "x": -0.012229454476658476,
+              "y": 0.02313168133569509,
+              "z": -4.01467534537199
+            },
+            "vertices": 2072,
+            "triangles": 3312,
+            "maxHeight": 0.4881977841258842,
+            "clippedDirections": 0
+          }
+        ]
+      },
+      "otherFireInspect": {
+        "model": "distinct-fire-shapes-v30",
+        "capacity": 76,
+        "allocated": 4,
+        "sharedTextures": 2,
+        "field": {
+          "model": "connected-fire-field-v30",
+          "capacity": 4,
+          "allocated": 0,
+          "active": []
+        }
+      }
+    },
+    {
+      "title": "退火结束",
+      "requestedImpactAge": 4.6,
+      "frame": 175,
+      "actualImpactAge": 4.616666666666651,
+      "cueImpactAge": null,
+      "impactInspect": {
+        "model": "open-radial-volume-fire-v31",
+        "capacity": 8,
+        "allocated": 1,
+        "sharedMaterials": 1,
+        "cameraBound": true,
+        "active": []
+      },
+      "otherFireInspect": {
+        "model": "distinct-fire-shapes-v30",
+        "capacity": 76,
+        "allocated": 4,
+        "sharedTextures": 2,
+        "field": {
+          "model": "connected-fire-field-v30",
+          "capacity": 4,
+          "allocated": 0,
+          "active": []
+        }
+      }
+    }
+  ],
+  "runtimeErrors": [],
+  "consoleErrors": [],
+  "lifecycle": {
+    "pauseResume": 1,
+    "familySwitches": [
+      "THU",
+      "WAR",
+      "FIR"
+    ]
+  },
+  "artStatus": "Failed local native shape review: rigid umbrella/petal caps; not final media.",
+  "taptapDeviceValidation": "Pending; browser capture is not device acceptance.",
+  "mediaEncoded": false,
+  "nativeArtReview": "../after2-empty-r1/native-art-review.json"
+}
